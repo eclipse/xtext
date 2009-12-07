@@ -10,17 +10,16 @@ package org.eclipse.xtext.resource.impl;
 import static com.google.common.collect.Iterables.*;
 
 import java.io.IOException;
-import java.util.Collection;
 import java.util.Collections;
 import java.util.Iterator;
-import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
+import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature.Setting;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.linking.impl.ImportedNamesAdapter;
@@ -34,7 +33,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
+import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -48,7 +47,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 
 	private final IQualifiedNameProvider nameProvider;
 
-	private Set<IReferenceDescription> referenceDescriptions;
+	private List<IReferenceDescription> referenceDescriptions;
 
 	public DefaultResourceDescription(Resource resource, IQualifiedNameProvider nameProvider) {
 		this.resource = resource;
@@ -114,13 +113,28 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 		return nameProvider;
 	}
 
+	@SuppressWarnings("unchecked")
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
 		if (referenceDescriptions == null) {
-			this.referenceDescriptions = Sets.newHashSet();
-			Map<EObject, Collection<Setting>> referencer = EcoreUtil.CrossReferencer.find(this.resource.getContents());
-			for (Entry<EObject, Collection<Setting>> entry : referencer.entrySet()) {
-				for (Setting setting : entry.getValue()) {
-					referenceDescriptions.add(new DefaultReferenceDescription(setting));
+			this.referenceDescriptions = Lists.newArrayList();
+			TreeIterator<EObject> contents = EcoreUtil.getAllProperContents(this.resource, true);
+			while (contents.hasNext()) {
+				EObject eObject = contents.next();
+				EList<EReference> references = eObject.eClass().getEAllReferences();
+				for (EReference eReference : references) {
+					if (!eReference.isContainment()) {
+						Object val = eObject.eGet(eReference);
+						if (val!=null) {
+							if (eReference.isMany()) {
+								List<EObject> list = (List<EObject>) val;
+								for(int i = 0;i<list.size();i++) {
+									referenceDescriptions.add(new DefaultReferenceDescription(eObject,list.get(i),eReference,i));
+								}
+							} else {
+								referenceDescriptions.add(new DefaultReferenceDescription(eObject,(EObject) val,eReference,-1));
+							}
+						}
+					}
 				}
 			}
 		}
