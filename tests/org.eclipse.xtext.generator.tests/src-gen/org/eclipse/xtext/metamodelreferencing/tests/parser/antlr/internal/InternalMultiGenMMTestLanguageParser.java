@@ -79,12 +79,12 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:73:2: iv_ruleFoo= ruleFoo EOF
             {
              currentNode = createCompositeNode(grammarAccess.getFooRule(), currentNode); 
-            pushFollow(FOLLOW_ruleFoo_in_entryRuleFoo73);
+            pushFollow(FollowSets000.FOLLOW_ruleFoo_in_entryRuleFoo73);
             iv_ruleFoo=ruleFoo();
             _fsp--;
 
              current =iv_ruleFoo; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFoo83); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFoo83); 
 
             }
 
@@ -126,7 +126,7 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:88:3: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFoo125); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleFoo125); 
 
             			createLeafNode(grammarAccess.getFooAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
             		
@@ -173,7 +173,7 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getFooAccess().getNameRefsNameRefParserRuleCall_1_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleNameRef_in_ruleFoo151);
+            	    pushFollow(FollowSets000.FOLLOW_ruleNameRef_in_ruleFoo151);
             	    lv_nameRefs_1_0=ruleNameRef();
             	    _fsp--;
 
@@ -241,12 +241,12 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:142:2: iv_ruleNameRef= ruleNameRef EOF
             {
              currentNode = createCompositeNode(grammarAccess.getNameRefRule(), currentNode); 
-            pushFollow(FOLLOW_ruleNameRef_in_entryRuleNameRef185);
+            pushFollow(FollowSets000.FOLLOW_ruleNameRef_in_entryRuleNameRef185);
             iv_ruleNameRef=ruleNameRef();
             _fsp--;
 
              current =iv_ruleNameRef; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNameRef195); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNameRef195); 
 
             }
 
@@ -283,7 +283,7 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMultiGenMMTestLanguage.g:157:3: lv_name_0_0= RULE_STRING
             {
             lv_name_0_0=(Token)input.LT(1);
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleNameRef236); 
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleNameRef236); 
 
             			createLeafNode(grammarAccess.getNameRefAccess().getNameSTRINGTerminalRuleCall_0(), "name"); 
             		
@@ -330,12 +330,16 @@ public class InternalMultiGenMMTestLanguageParser extends AbstractInternalAntlrP
 
  
 
-    public static final BitSet FOLLOW_ruleFoo_in_entryRuleFoo73 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFoo83 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFoo125 = new BitSet(new long[]{0x0000000000000022L});
-    public static final BitSet FOLLOW_ruleNameRef_in_ruleFoo151 = new BitSet(new long[]{0x0000000000000022L});
-    public static final BitSet FOLLOW_ruleNameRef_in_entryRuleNameRef185 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNameRef195 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleNameRef236 = new BitSet(new long[]{0x0000000000000002L});
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_ruleFoo_in_entryRuleFoo73 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleFoo83 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleFoo125 = new BitSet(new long[]{0x0000000000000022L});
+        public static final BitSet FOLLOW_ruleNameRef_in_ruleFoo151 = new BitSet(new long[]{0x0000000000000022L});
+        public static final BitSet FOLLOW_ruleNameRef_in_entryRuleNameRef185 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleNameRef195 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_ruleNameRef236 = new BitSet(new long[]{0x0000000000000002L});
+    }
+
 
 }

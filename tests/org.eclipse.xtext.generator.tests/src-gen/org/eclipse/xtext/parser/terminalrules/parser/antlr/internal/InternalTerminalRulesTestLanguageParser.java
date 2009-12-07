@@ -79,12 +79,12 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:73:2: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
-            pushFollow(FOLLOW_ruleModel_in_entryRuleModel73);
+            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel73);
             iv_ruleModel=ruleModel();
             _fsp--;
 
              current =iv_ruleModel; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleModel83); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel83); 
 
             }
 
@@ -176,7 +176,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:88:3: lv_idValue_0_0= RULE_ID
                     {
                     lv_idValue_0_0=(Token)input.LT(1);
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel125); 
+                    match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleModel125); 
 
                     			createLeafNode(grammarAccess.getModelAccess().getIdValueIDTerminalRuleCall_0_0(), "idValue"); 
                     		
@@ -215,7 +215,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:113:3: lv_intValue_1_0= RULE_INT
                     {
                     lv_intValue_1_0=(Token)input.LT(1);
-                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleModel153); 
+                    match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleModel153); 
 
                     			createLeafNode(grammarAccess.getModelAccess().getIntValueINTTerminalRuleCall_1_0(), "intValue"); 
                     		
@@ -254,7 +254,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:138:3: lv_stringValue_2_0= RULE_STRING
                     {
                     lv_stringValue_2_0=(Token)input.LT(1);
-                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleModel181); 
+                    match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleModel181); 
 
                     			createLeafNode(grammarAccess.getModelAccess().getStringValueSTRINGTerminalRuleCall_2_0(), "stringValue"); 
                     		
@@ -293,7 +293,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:163:3: lv_mlCommentValue_3_0= RULE_ML_COMMENT
                     {
                     lv_mlCommentValue_3_0=(Token)input.LT(1);
-                    match(input,RULE_ML_COMMENT,FOLLOW_RULE_ML_COMMENT_in_ruleModel209); 
+                    match(input,RULE_ML_COMMENT,FollowSets000.FOLLOW_RULE_ML_COMMENT_in_ruleModel209); 
 
                     			createLeafNode(grammarAccess.getModelAccess().getMlCommentValueML_COMMENTTerminalRuleCall_3_0(), "mlCommentValue"); 
                     		
@@ -332,7 +332,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:188:3: lv_slCommentValue_4_0= RULE_SL_COMMENT
                     {
                     lv_slCommentValue_4_0=(Token)input.LT(1);
-                    match(input,RULE_SL_COMMENT,FOLLOW_RULE_SL_COMMENT_in_ruleModel237); 
+                    match(input,RULE_SL_COMMENT,FollowSets000.FOLLOW_RULE_SL_COMMENT_in_ruleModel237); 
 
                     			createLeafNode(grammarAccess.getModelAccess().getSlCommentValueSL_COMMENTTerminalRuleCall_4_0(), "slCommentValue"); 
                     		
@@ -371,7 +371,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:213:3: lv_wsValue_5_0= RULE_WS
                     {
                     lv_wsValue_5_0=(Token)input.LT(1);
-                    match(input,RULE_WS,FOLLOW_RULE_WS_in_ruleModel265); 
+                    match(input,RULE_WS,FollowSets000.FOLLOW_RULE_WS_in_ruleModel265); 
 
                     			createLeafNode(grammarAccess.getModelAccess().getWsValueWSTerminalRuleCall_5_0(), "wsValue"); 
                     		
@@ -410,7 +410,7 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/terminalrules/parser/antlr/internal/InternalTerminalRulesTestLanguage.g:238:3: lv_anyValue_6_0= RULE_ANY_OTHER
                     {
                     lv_anyValue_6_0=(Token)input.LT(1);
-                    match(input,RULE_ANY_OTHER,FOLLOW_RULE_ANY_OTHER_in_ruleModel293); 
+                    match(input,RULE_ANY_OTHER,FollowSets000.FOLLOW_RULE_ANY_OTHER_in_ruleModel293); 
 
                     			createLeafNode(grammarAccess.getModelAccess().getAnyValueANY_OTHERTerminalRuleCall_6_0(), "anyValue"); 
                     		
@@ -463,14 +463,18 @@ public class InternalTerminalRulesTestLanguageParser extends AbstractInternalAnt
 
  
 
-    public static final BitSet FOLLOW_ruleModel_in_entryRuleModel73 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleModel83 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleModel125 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleModel153 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleModel181 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ML_COMMENT_in_ruleModel209 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_SL_COMMENT_in_ruleModel237 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_WS_in_ruleModel265 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ANY_OTHER_in_ruleModel293 = new BitSet(new long[]{0x0000000000000002L});
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel73 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleModel83 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleModel125 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleModel153 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_ruleModel181 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ML_COMMENT_in_ruleModel209 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_SL_COMMENT_in_ruleModel237 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_WS_in_ruleModel265 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ANY_OTHER_in_ruleModel293 = new BitSet(new long[]{0x0000000000000002L});
+    }
+
 
 }

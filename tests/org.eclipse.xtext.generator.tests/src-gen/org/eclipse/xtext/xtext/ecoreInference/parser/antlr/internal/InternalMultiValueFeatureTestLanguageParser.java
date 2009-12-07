@@ -79,12 +79,12 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:73:2: iv_ruleStart= ruleStart EOF
             {
              currentNode = createCompositeNode(grammarAccess.getStartRule(), currentNode); 
-            pushFollow(FOLLOW_ruleStart_in_entryRuleStart73);
+            pushFollow(FollowSets000.FOLLOW_ruleStart_in_entryRuleStart73);
             iv_ruleStart=ruleStart();
             _fsp--;
 
              current =iv_ruleStart; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleStart83); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleStart83); 
 
             }
 
@@ -134,7 +134,7 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalMultiValueFeatureTestLanguage.g:88:3: lv_featureA_0_0= RULE_ID
             	    {
             	    lv_featureA_0_0=(Token)input.LT(1);
-            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleStart124); 
+            	    match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleStart124); 
 
             	    			createLeafNode(grammarAccess.getStartAccess().getFeatureAIDTerminalRuleCall_0(), "featureA"); 
             	    		
@@ -191,8 +191,12 @@ public class InternalMultiValueFeatureTestLanguageParser extends AbstractInterna
 
  
 
-    public static final BitSet FOLLOW_ruleStart_in_entryRuleStart73 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleStart83 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleStart124 = new BitSet(new long[]{0x0000000000000012L});
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_ruleStart_in_entryRuleStart73 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleStart83 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleStart124 = new BitSet(new long[]{0x0000000000000012L});
+    }
+
 
 }

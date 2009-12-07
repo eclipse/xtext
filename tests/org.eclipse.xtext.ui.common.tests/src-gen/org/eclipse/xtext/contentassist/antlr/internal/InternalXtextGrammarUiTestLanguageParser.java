@@ -69,12 +69,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:61:1: ruleGrammar EOF
             {
              before(grammarAccess.getGrammarRule()); 
-            pushFollow(FOLLOW_ruleGrammar_in_entryRuleGrammar60);
+            pushFollow(FollowSets000.FOLLOW_ruleGrammar_in_entryRuleGrammar60);
             ruleGrammar();
             _fsp--;
 
              after(grammarAccess.getGrammarRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleGrammar67); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleGrammar67); 
 
             }
 
@@ -107,7 +107,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:75:1: ( rule__Grammar__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:75:2: rule__Grammar__Group__0
             {
-            pushFollow(FOLLOW_rule__Grammar__Group__0_in_ruleGrammar94);
+            pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__0_in_ruleGrammar94);
             rule__Grammar__Group__0();
             _fsp--;
 
@@ -144,12 +144,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:88:1: ruleGrammarID EOF
             {
              before(grammarAccess.getGrammarIDRule()); 
-            pushFollow(FOLLOW_ruleGrammarID_in_entryRuleGrammarID120);
+            pushFollow(FollowSets000.FOLLOW_ruleGrammarID_in_entryRuleGrammarID120);
             ruleGrammarID();
             _fsp--;
 
              after(grammarAccess.getGrammarIDRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleGrammarID127); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleGrammarID127); 
 
             }
 
@@ -182,7 +182,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:102:1: ( rule__GrammarID__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:102:2: rule__GrammarID__Group__0
             {
-            pushFollow(FOLLOW_rule__GrammarID__Group__0_in_ruleGrammarID154);
+            pushFollow(FollowSets000.FOLLOW_rule__GrammarID__Group__0_in_ruleGrammarID154);
             rule__GrammarID__Group__0();
             _fsp--;
 
@@ -219,12 +219,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:115:1: ruleAbstractRule EOF
             {
              before(grammarAccess.getAbstractRuleRule()); 
-            pushFollow(FOLLOW_ruleAbstractRule_in_entryRuleAbstractRule180);
+            pushFollow(FollowSets000.FOLLOW_ruleAbstractRule_in_entryRuleAbstractRule180);
             ruleAbstractRule();
             _fsp--;
 
              after(grammarAccess.getAbstractRuleRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAbstractRule187); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstractRule187); 
 
             }
 
@@ -257,7 +257,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:129:1: ( rule__AbstractRule__Alternatives )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:129:2: rule__AbstractRule__Alternatives
             {
-            pushFollow(FOLLOW_rule__AbstractRule__Alternatives_in_ruleAbstractRule214);
+            pushFollow(FollowSets000.FOLLOW_rule__AbstractRule__Alternatives_in_ruleAbstractRule214);
             rule__AbstractRule__Alternatives();
             _fsp--;
 
@@ -294,12 +294,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:142:1: ruleAbstractMetamodelDeclaration EOF
             {
              before(grammarAccess.getAbstractMetamodelDeclarationRule()); 
-            pushFollow(FOLLOW_ruleAbstractMetamodelDeclaration_in_entryRuleAbstractMetamodelDeclaration240);
+            pushFollow(FollowSets000.FOLLOW_ruleAbstractMetamodelDeclaration_in_entryRuleAbstractMetamodelDeclaration240);
             ruleAbstractMetamodelDeclaration();
             _fsp--;
 
              after(grammarAccess.getAbstractMetamodelDeclarationRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAbstractMetamodelDeclaration247); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstractMetamodelDeclaration247); 
 
             }
 
@@ -332,7 +332,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:156:1: ( rule__AbstractMetamodelDeclaration__Alternatives )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:156:2: rule__AbstractMetamodelDeclaration__Alternatives
             {
-            pushFollow(FOLLOW_rule__AbstractMetamodelDeclaration__Alternatives_in_ruleAbstractMetamodelDeclaration274);
+            pushFollow(FollowSets000.FOLLOW_rule__AbstractMetamodelDeclaration__Alternatives_in_ruleAbstractMetamodelDeclaration274);
             rule__AbstractMetamodelDeclaration__Alternatives();
             _fsp--;
 
@@ -369,12 +369,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:169:1: ruleGeneratedMetamodel EOF
             {
              before(grammarAccess.getGeneratedMetamodelRule()); 
-            pushFollow(FOLLOW_ruleGeneratedMetamodel_in_entryRuleGeneratedMetamodel300);
+            pushFollow(FollowSets000.FOLLOW_ruleGeneratedMetamodel_in_entryRuleGeneratedMetamodel300);
             ruleGeneratedMetamodel();
             _fsp--;
 
              after(grammarAccess.getGeneratedMetamodelRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleGeneratedMetamodel307); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleGeneratedMetamodel307); 
 
             }
 
@@ -407,7 +407,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:183:1: ( rule__GeneratedMetamodel__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:183:2: rule__GeneratedMetamodel__Group__0
             {
-            pushFollow(FOLLOW_rule__GeneratedMetamodel__Group__0_in_ruleGeneratedMetamodel334);
+            pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group__0_in_ruleGeneratedMetamodel334);
             rule__GeneratedMetamodel__Group__0();
             _fsp--;
 
@@ -444,12 +444,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:196:1: ruleReferencedMetamodel EOF
             {
              before(grammarAccess.getReferencedMetamodelRule()); 
-            pushFollow(FOLLOW_ruleReferencedMetamodel_in_entryRuleReferencedMetamodel360);
+            pushFollow(FollowSets000.FOLLOW_ruleReferencedMetamodel_in_entryRuleReferencedMetamodel360);
             ruleReferencedMetamodel();
             _fsp--;
 
              after(grammarAccess.getReferencedMetamodelRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleReferencedMetamodel367); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleReferencedMetamodel367); 
 
             }
 
@@ -482,7 +482,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:210:1: ( rule__ReferencedMetamodel__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:210:2: rule__ReferencedMetamodel__Group__0
             {
-            pushFollow(FOLLOW_rule__ReferencedMetamodel__Group__0_in_ruleReferencedMetamodel394);
+            pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group__0_in_ruleReferencedMetamodel394);
             rule__ReferencedMetamodel__Group__0();
             _fsp--;
 
@@ -519,12 +519,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:223:1: ruleParserRule EOF
             {
              before(grammarAccess.getParserRuleRule()); 
-            pushFollow(FOLLOW_ruleParserRule_in_entryRuleParserRule420);
+            pushFollow(FollowSets000.FOLLOW_ruleParserRule_in_entryRuleParserRule420);
             ruleParserRule();
             _fsp--;
 
              after(grammarAccess.getParserRuleRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleParserRule427); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParserRule427); 
 
             }
 
@@ -557,7 +557,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:237:1: ( rule__ParserRule__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:237:2: rule__ParserRule__Group__0
             {
-            pushFollow(FOLLOW_rule__ParserRule__Group__0_in_ruleParserRule454);
+            pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__0_in_ruleParserRule454);
             rule__ParserRule__Group__0();
             _fsp--;
 
@@ -594,12 +594,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:250:1: ruleTypeRef EOF
             {
              before(grammarAccess.getTypeRefRule()); 
-            pushFollow(FOLLOW_ruleTypeRef_in_entryRuleTypeRef480);
+            pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_entryRuleTypeRef480);
             ruleTypeRef();
             _fsp--;
 
              after(grammarAccess.getTypeRefRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTypeRef487); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypeRef487); 
 
             }
 
@@ -632,7 +632,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:264:1: ( rule__TypeRef__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:264:2: rule__TypeRef__Group__0
             {
-            pushFollow(FOLLOW_rule__TypeRef__Group__0_in_ruleTypeRef514);
+            pushFollow(FollowSets000.FOLLOW_rule__TypeRef__Group__0_in_ruleTypeRef514);
             rule__TypeRef__Group__0();
             _fsp--;
 
@@ -669,12 +669,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:277:1: ruleAlternatives EOF
             {
              before(grammarAccess.getAlternativesRule()); 
-            pushFollow(FOLLOW_ruleAlternatives_in_entryRuleAlternatives540);
+            pushFollow(FollowSets000.FOLLOW_ruleAlternatives_in_entryRuleAlternatives540);
             ruleAlternatives();
             _fsp--;
 
              after(grammarAccess.getAlternativesRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAlternatives547); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAlternatives547); 
 
             }
 
@@ -707,7 +707,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:291:1: ( rule__Alternatives__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:291:2: rule__Alternatives__Group__0
             {
-            pushFollow(FOLLOW_rule__Alternatives__Group__0_in_ruleAlternatives574);
+            pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group__0_in_ruleAlternatives574);
             rule__Alternatives__Group__0();
             _fsp--;
 
@@ -744,12 +744,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:304:1: ruleGroup EOF
             {
              before(grammarAccess.getGroupRule()); 
-            pushFollow(FOLLOW_ruleGroup_in_entryRuleGroup600);
+            pushFollow(FollowSets000.FOLLOW_ruleGroup_in_entryRuleGroup600);
             ruleGroup();
             _fsp--;
 
              after(grammarAccess.getGroupRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleGroup607); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleGroup607); 
 
             }
 
@@ -782,7 +782,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:318:1: ( rule__Group__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:318:2: rule__Group__Group__0
             {
-            pushFollow(FOLLOW_rule__Group__Group__0_in_ruleGroup634);
+            pushFollow(FollowSets000.FOLLOW_rule__Group__Group__0_in_ruleGroup634);
             rule__Group__Group__0();
             _fsp--;
 
@@ -819,12 +819,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:331:1: ruleAbstractToken EOF
             {
              before(grammarAccess.getAbstractTokenRule()); 
-            pushFollow(FOLLOW_ruleAbstractToken_in_entryRuleAbstractToken660);
+            pushFollow(FollowSets000.FOLLOW_ruleAbstractToken_in_entryRuleAbstractToken660);
             ruleAbstractToken();
             _fsp--;
 
              after(grammarAccess.getAbstractTokenRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAbstractToken667); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstractToken667); 
 
             }
 
@@ -857,7 +857,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:345:1: ( rule__AbstractToken__Alternatives )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:345:2: rule__AbstractToken__Alternatives
             {
-            pushFollow(FOLLOW_rule__AbstractToken__Alternatives_in_ruleAbstractToken694);
+            pushFollow(FollowSets000.FOLLOW_rule__AbstractToken__Alternatives_in_ruleAbstractToken694);
             rule__AbstractToken__Alternatives();
             _fsp--;
 
@@ -894,12 +894,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:358:1: ruleAbstractTokenWithCardinality EOF
             {
              before(grammarAccess.getAbstractTokenWithCardinalityRule()); 
-            pushFollow(FOLLOW_ruleAbstractTokenWithCardinality_in_entryRuleAbstractTokenWithCardinality720);
+            pushFollow(FollowSets000.FOLLOW_ruleAbstractTokenWithCardinality_in_entryRuleAbstractTokenWithCardinality720);
             ruleAbstractTokenWithCardinality();
             _fsp--;
 
              after(grammarAccess.getAbstractTokenWithCardinalityRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAbstractTokenWithCardinality727); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstractTokenWithCardinality727); 
 
             }
 
@@ -932,7 +932,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:372:1: ( rule__AbstractTokenWithCardinality__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:372:2: rule__AbstractTokenWithCardinality__Group__0
             {
-            pushFollow(FOLLOW_rule__AbstractTokenWithCardinality__Group__0_in_ruleAbstractTokenWithCardinality754);
+            pushFollow(FollowSets000.FOLLOW_rule__AbstractTokenWithCardinality__Group__0_in_ruleAbstractTokenWithCardinality754);
             rule__AbstractTokenWithCardinality__Group__0();
             _fsp--;
 
@@ -969,12 +969,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:385:1: ruleAction EOF
             {
              before(grammarAccess.getActionRule()); 
-            pushFollow(FOLLOW_ruleAction_in_entryRuleAction780);
+            pushFollow(FollowSets000.FOLLOW_ruleAction_in_entryRuleAction780);
             ruleAction();
             _fsp--;
 
              after(grammarAccess.getActionRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAction787); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAction787); 
 
             }
 
@@ -1007,7 +1007,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:399:1: ( rule__Action__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:399:2: rule__Action__Group__0
             {
-            pushFollow(FOLLOW_rule__Action__Group__0_in_ruleAction814);
+            pushFollow(FollowSets000.FOLLOW_rule__Action__Group__0_in_ruleAction814);
             rule__Action__Group__0();
             _fsp--;
 
@@ -1044,12 +1044,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:412:1: ruleAbstractTerminal EOF
             {
              before(grammarAccess.getAbstractTerminalRule()); 
-            pushFollow(FOLLOW_ruleAbstractTerminal_in_entryRuleAbstractTerminal840);
+            pushFollow(FollowSets000.FOLLOW_ruleAbstractTerminal_in_entryRuleAbstractTerminal840);
             ruleAbstractTerminal();
             _fsp--;
 
              after(grammarAccess.getAbstractTerminalRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAbstractTerminal847); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstractTerminal847); 
 
             }
 
@@ -1082,7 +1082,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:426:1: ( rule__AbstractTerminal__Alternatives )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:426:2: rule__AbstractTerminal__Alternatives
             {
-            pushFollow(FOLLOW_rule__AbstractTerminal__Alternatives_in_ruleAbstractTerminal874);
+            pushFollow(FollowSets000.FOLLOW_rule__AbstractTerminal__Alternatives_in_ruleAbstractTerminal874);
             rule__AbstractTerminal__Alternatives();
             _fsp--;
 
@@ -1119,12 +1119,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:439:1: ruleKeyword EOF
             {
              before(grammarAccess.getKeywordRule()); 
-            pushFollow(FOLLOW_ruleKeyword_in_entryRuleKeyword900);
+            pushFollow(FollowSets000.FOLLOW_ruleKeyword_in_entryRuleKeyword900);
             ruleKeyword();
             _fsp--;
 
              after(grammarAccess.getKeywordRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleKeyword907); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleKeyword907); 
 
             }
 
@@ -1157,7 +1157,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:453:1: ( rule__Keyword__ValueAssignment )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:453:2: rule__Keyword__ValueAssignment
             {
-            pushFollow(FOLLOW_rule__Keyword__ValueAssignment_in_ruleKeyword934);
+            pushFollow(FollowSets000.FOLLOW_rule__Keyword__ValueAssignment_in_ruleKeyword934);
             rule__Keyword__ValueAssignment();
             _fsp--;
 
@@ -1194,12 +1194,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:466:1: ruleRuleCall EOF
             {
              before(grammarAccess.getRuleCallRule()); 
-            pushFollow(FOLLOW_ruleRuleCall_in_entryRuleRuleCall960);
+            pushFollow(FollowSets000.FOLLOW_ruleRuleCall_in_entryRuleRuleCall960);
             ruleRuleCall();
             _fsp--;
 
              after(grammarAccess.getRuleCallRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRuleCall967); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRuleCall967); 
 
             }
 
@@ -1232,7 +1232,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:480:1: ( rule__RuleCall__RuleAssignment )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:480:2: rule__RuleCall__RuleAssignment
             {
-            pushFollow(FOLLOW_rule__RuleCall__RuleAssignment_in_ruleRuleCall994);
+            pushFollow(FollowSets000.FOLLOW_rule__RuleCall__RuleAssignment_in_ruleRuleCall994);
             rule__RuleCall__RuleAssignment();
             _fsp--;
 
@@ -1269,12 +1269,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:493:1: ruleAssignment EOF
             {
              before(grammarAccess.getAssignmentRule()); 
-            pushFollow(FOLLOW_ruleAssignment_in_entryRuleAssignment1020);
+            pushFollow(FollowSets000.FOLLOW_ruleAssignment_in_entryRuleAssignment1020);
             ruleAssignment();
             _fsp--;
 
              after(grammarAccess.getAssignmentRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAssignment1027); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAssignment1027); 
 
             }
 
@@ -1307,7 +1307,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:507:1: ( rule__Assignment__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:507:2: rule__Assignment__Group__0
             {
-            pushFollow(FOLLOW_rule__Assignment__Group__0_in_ruleAssignment1054);
+            pushFollow(FollowSets000.FOLLOW_rule__Assignment__Group__0_in_ruleAssignment1054);
             rule__Assignment__Group__0();
             _fsp--;
 
@@ -1344,12 +1344,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:520:1: ruleAssignableTerminal EOF
             {
              before(grammarAccess.getAssignableTerminalRule()); 
-            pushFollow(FOLLOW_ruleAssignableTerminal_in_entryRuleAssignableTerminal1080);
+            pushFollow(FollowSets000.FOLLOW_ruleAssignableTerminal_in_entryRuleAssignableTerminal1080);
             ruleAssignableTerminal();
             _fsp--;
 
              after(grammarAccess.getAssignableTerminalRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAssignableTerminal1087); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAssignableTerminal1087); 
 
             }
 
@@ -1382,7 +1382,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:534:1: ( rule__AssignableTerminal__Alternatives )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:534:2: rule__AssignableTerminal__Alternatives
             {
-            pushFollow(FOLLOW_rule__AssignableTerminal__Alternatives_in_ruleAssignableTerminal1114);
+            pushFollow(FollowSets000.FOLLOW_rule__AssignableTerminal__Alternatives_in_ruleAssignableTerminal1114);
             rule__AssignableTerminal__Alternatives();
             _fsp--;
 
@@ -1419,12 +1419,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:547:1: ruleParenthesizedAssignableElement EOF
             {
              before(grammarAccess.getParenthesizedAssignableElementRule()); 
-            pushFollow(FOLLOW_ruleParenthesizedAssignableElement_in_entryRuleParenthesizedAssignableElement1140);
+            pushFollow(FollowSets000.FOLLOW_ruleParenthesizedAssignableElement_in_entryRuleParenthesizedAssignableElement1140);
             ruleParenthesizedAssignableElement();
             _fsp--;
 
              after(grammarAccess.getParenthesizedAssignableElementRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleParenthesizedAssignableElement1147); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParenthesizedAssignableElement1147); 
 
             }
 
@@ -1457,7 +1457,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:561:1: ( rule__ParenthesizedAssignableElement__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:561:2: rule__ParenthesizedAssignableElement__Group__0
             {
-            pushFollow(FOLLOW_rule__ParenthesizedAssignableElement__Group__0_in_ruleParenthesizedAssignableElement1174);
+            pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedAssignableElement__Group__0_in_ruleParenthesizedAssignableElement1174);
             rule__ParenthesizedAssignableElement__Group__0();
             _fsp--;
 
@@ -1494,12 +1494,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:574:1: ruleAssignableAlternatives EOF
             {
              before(grammarAccess.getAssignableAlternativesRule()); 
-            pushFollow(FOLLOW_ruleAssignableAlternatives_in_entryRuleAssignableAlternatives1200);
+            pushFollow(FollowSets000.FOLLOW_ruleAssignableAlternatives_in_entryRuleAssignableAlternatives1200);
             ruleAssignableAlternatives();
             _fsp--;
 
              after(grammarAccess.getAssignableAlternativesRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAssignableAlternatives1207); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAssignableAlternatives1207); 
 
             }
 
@@ -1532,7 +1532,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:588:1: ( rule__AssignableAlternatives__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:588:2: rule__AssignableAlternatives__Group__0
             {
-            pushFollow(FOLLOW_rule__AssignableAlternatives__Group__0_in_ruleAssignableAlternatives1234);
+            pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group__0_in_ruleAssignableAlternatives1234);
             rule__AssignableAlternatives__Group__0();
             _fsp--;
 
@@ -1569,12 +1569,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:601:1: ruleCrossReference EOF
             {
              before(grammarAccess.getCrossReferenceRule()); 
-            pushFollow(FOLLOW_ruleCrossReference_in_entryRuleCrossReference1260);
+            pushFollow(FollowSets000.FOLLOW_ruleCrossReference_in_entryRuleCrossReference1260);
             ruleCrossReference();
             _fsp--;
 
              after(grammarAccess.getCrossReferenceRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleCrossReference1267); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCrossReference1267); 
 
             }
 
@@ -1607,7 +1607,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:615:1: ( rule__CrossReference__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:615:2: rule__CrossReference__Group__0
             {
-            pushFollow(FOLLOW_rule__CrossReference__Group__0_in_ruleCrossReference1294);
+            pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group__0_in_ruleCrossReference1294);
             rule__CrossReference__Group__0();
             _fsp--;
 
@@ -1644,12 +1644,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:628:1: ruleCrossReferenceableTerminal EOF
             {
              before(grammarAccess.getCrossReferenceableTerminalRule()); 
-            pushFollow(FOLLOW_ruleCrossReferenceableTerminal_in_entryRuleCrossReferenceableTerminal1320);
+            pushFollow(FollowSets000.FOLLOW_ruleCrossReferenceableTerminal_in_entryRuleCrossReferenceableTerminal1320);
             ruleCrossReferenceableTerminal();
             _fsp--;
 
              after(grammarAccess.getCrossReferenceableTerminalRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleCrossReferenceableTerminal1327); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCrossReferenceableTerminal1327); 
 
             }
 
@@ -1682,7 +1682,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:642:1: ( rule__CrossReferenceableTerminal__Alternatives )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:642:2: rule__CrossReferenceableTerminal__Alternatives
             {
-            pushFollow(FOLLOW_rule__CrossReferenceableTerminal__Alternatives_in_ruleCrossReferenceableTerminal1354);
+            pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableTerminal__Alternatives_in_ruleCrossReferenceableTerminal1354);
             rule__CrossReferenceableTerminal__Alternatives();
             _fsp--;
 
@@ -1719,12 +1719,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:655:1: ruleParenthesizedCrossReferenceableElement EOF
             {
              before(grammarAccess.getParenthesizedCrossReferenceableElementRule()); 
-            pushFollow(FOLLOW_ruleParenthesizedCrossReferenceableElement_in_entryRuleParenthesizedCrossReferenceableElement1380);
+            pushFollow(FollowSets000.FOLLOW_ruleParenthesizedCrossReferenceableElement_in_entryRuleParenthesizedCrossReferenceableElement1380);
             ruleParenthesizedCrossReferenceableElement();
             _fsp--;
 
              after(grammarAccess.getParenthesizedCrossReferenceableElementRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleParenthesizedCrossReferenceableElement1387); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParenthesizedCrossReferenceableElement1387); 
 
             }
 
@@ -1757,7 +1757,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:669:1: ( rule__ParenthesizedCrossReferenceableElement__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:669:2: rule__ParenthesizedCrossReferenceableElement__Group__0
             {
-            pushFollow(FOLLOW_rule__ParenthesizedCrossReferenceableElement__Group__0_in_ruleParenthesizedCrossReferenceableElement1414);
+            pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedCrossReferenceableElement__Group__0_in_ruleParenthesizedCrossReferenceableElement1414);
             rule__ParenthesizedCrossReferenceableElement__Group__0();
             _fsp--;
 
@@ -1794,12 +1794,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:682:1: ruleCrossReferenceableAlternatives EOF
             {
              before(grammarAccess.getCrossReferenceableAlternativesRule()); 
-            pushFollow(FOLLOW_ruleCrossReferenceableAlternatives_in_entryRuleCrossReferenceableAlternatives1440);
+            pushFollow(FollowSets000.FOLLOW_ruleCrossReferenceableAlternatives_in_entryRuleCrossReferenceableAlternatives1440);
             ruleCrossReferenceableAlternatives();
             _fsp--;
 
              after(grammarAccess.getCrossReferenceableAlternativesRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleCrossReferenceableAlternatives1447); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCrossReferenceableAlternatives1447); 
 
             }
 
@@ -1832,7 +1832,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:696:1: ( rule__CrossReferenceableAlternatives__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:696:2: rule__CrossReferenceableAlternatives__Group__0
             {
-            pushFollow(FOLLOW_rule__CrossReferenceableAlternatives__Group__0_in_ruleCrossReferenceableAlternatives1474);
+            pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableAlternatives__Group__0_in_ruleCrossReferenceableAlternatives1474);
             rule__CrossReferenceableAlternatives__Group__0();
             _fsp--;
 
@@ -1869,12 +1869,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:709:1: ruleParenthesizedElement EOF
             {
              before(grammarAccess.getParenthesizedElementRule()); 
-            pushFollow(FOLLOW_ruleParenthesizedElement_in_entryRuleParenthesizedElement1500);
+            pushFollow(FollowSets000.FOLLOW_ruleParenthesizedElement_in_entryRuleParenthesizedElement1500);
             ruleParenthesizedElement();
             _fsp--;
 
              after(grammarAccess.getParenthesizedElementRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleParenthesizedElement1507); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParenthesizedElement1507); 
 
             }
 
@@ -1907,7 +1907,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:723:1: ( rule__ParenthesizedElement__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:723:2: rule__ParenthesizedElement__Group__0
             {
-            pushFollow(FOLLOW_rule__ParenthesizedElement__Group__0_in_ruleParenthesizedElement1534);
+            pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedElement__Group__0_in_ruleParenthesizedElement1534);
             rule__ParenthesizedElement__Group__0();
             _fsp--;
 
@@ -1944,12 +1944,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:736:1: ruleTerminalRule EOF
             {
              before(grammarAccess.getTerminalRuleRule()); 
-            pushFollow(FOLLOW_ruleTerminalRule_in_entryRuleTerminalRule1560);
+            pushFollow(FollowSets000.FOLLOW_ruleTerminalRule_in_entryRuleTerminalRule1560);
             ruleTerminalRule();
             _fsp--;
 
              after(grammarAccess.getTerminalRuleRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTerminalRule1567); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTerminalRule1567); 
 
             }
 
@@ -1982,7 +1982,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:750:1: ( rule__TerminalRule__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:750:2: rule__TerminalRule__Group__0
             {
-            pushFollow(FOLLOW_rule__TerminalRule__Group__0_in_ruleTerminalRule1594);
+            pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__0_in_ruleTerminalRule1594);
             rule__TerminalRule__Group__0();
             _fsp--;
 
@@ -2019,12 +2019,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:763:1: ruleTerminalAlternatives EOF
             {
              before(grammarAccess.getTerminalAlternativesRule()); 
-            pushFollow(FOLLOW_ruleTerminalAlternatives_in_entryRuleTerminalAlternatives1620);
+            pushFollow(FollowSets000.FOLLOW_ruleTerminalAlternatives_in_entryRuleTerminalAlternatives1620);
             ruleTerminalAlternatives();
             _fsp--;
 
              after(grammarAccess.getTerminalAlternativesRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTerminalAlternatives1627); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTerminalAlternatives1627); 
 
             }
 
@@ -2057,7 +2057,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:777:1: ( rule__TerminalAlternatives__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:777:2: rule__TerminalAlternatives__Group__0
             {
-            pushFollow(FOLLOW_rule__TerminalAlternatives__Group__0_in_ruleTerminalAlternatives1654);
+            pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group__0_in_ruleTerminalAlternatives1654);
             rule__TerminalAlternatives__Group__0();
             _fsp--;
 
@@ -2094,12 +2094,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:790:1: ruleTerminalGroup EOF
             {
              before(grammarAccess.getTerminalGroupRule()); 
-            pushFollow(FOLLOW_ruleTerminalGroup_in_entryRuleTerminalGroup1680);
+            pushFollow(FollowSets000.FOLLOW_ruleTerminalGroup_in_entryRuleTerminalGroup1680);
             ruleTerminalGroup();
             _fsp--;
 
              after(grammarAccess.getTerminalGroupRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTerminalGroup1687); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTerminalGroup1687); 
 
             }
 
@@ -2132,7 +2132,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:804:1: ( rule__TerminalGroup__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:804:2: rule__TerminalGroup__Group__0
             {
-            pushFollow(FOLLOW_rule__TerminalGroup__Group__0_in_ruleTerminalGroup1714);
+            pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__Group__0_in_ruleTerminalGroup1714);
             rule__TerminalGroup__Group__0();
             _fsp--;
 
@@ -2169,12 +2169,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:817:1: ruleTerminalToken EOF
             {
              before(grammarAccess.getTerminalTokenRule()); 
-            pushFollow(FOLLOW_ruleTerminalToken_in_entryRuleTerminalToken1740);
+            pushFollow(FollowSets000.FOLLOW_ruleTerminalToken_in_entryRuleTerminalToken1740);
             ruleTerminalToken();
             _fsp--;
 
              after(grammarAccess.getTerminalTokenRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTerminalToken1747); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTerminalToken1747); 
 
             }
 
@@ -2207,7 +2207,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:831:1: ( rule__TerminalToken__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:831:2: rule__TerminalToken__Group__0
             {
-            pushFollow(FOLLOW_rule__TerminalToken__Group__0_in_ruleTerminalToken1774);
+            pushFollow(FollowSets000.FOLLOW_rule__TerminalToken__Group__0_in_ruleTerminalToken1774);
             rule__TerminalToken__Group__0();
             _fsp--;
 
@@ -2244,12 +2244,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:844:1: ruleTerminalTokenElement EOF
             {
              before(grammarAccess.getTerminalTokenElementRule()); 
-            pushFollow(FOLLOW_ruleTerminalTokenElement_in_entryRuleTerminalTokenElement1800);
+            pushFollow(FollowSets000.FOLLOW_ruleTerminalTokenElement_in_entryRuleTerminalTokenElement1800);
             ruleTerminalTokenElement();
             _fsp--;
 
              after(grammarAccess.getTerminalTokenElementRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTerminalTokenElement1807); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTerminalTokenElement1807); 
 
             }
 
@@ -2282,7 +2282,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:858:1: ( rule__TerminalTokenElement__Alternatives )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:858:2: rule__TerminalTokenElement__Alternatives
             {
-            pushFollow(FOLLOW_rule__TerminalTokenElement__Alternatives_in_ruleTerminalTokenElement1834);
+            pushFollow(FollowSets000.FOLLOW_rule__TerminalTokenElement__Alternatives_in_ruleTerminalTokenElement1834);
             rule__TerminalTokenElement__Alternatives();
             _fsp--;
 
@@ -2319,12 +2319,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:871:1: ruleParenthesizedTerminalElement EOF
             {
              before(grammarAccess.getParenthesizedTerminalElementRule()); 
-            pushFollow(FOLLOW_ruleParenthesizedTerminalElement_in_entryRuleParenthesizedTerminalElement1860);
+            pushFollow(FollowSets000.FOLLOW_ruleParenthesizedTerminalElement_in_entryRuleParenthesizedTerminalElement1860);
             ruleParenthesizedTerminalElement();
             _fsp--;
 
              after(grammarAccess.getParenthesizedTerminalElementRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleParenthesizedTerminalElement1867); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParenthesizedTerminalElement1867); 
 
             }
 
@@ -2357,7 +2357,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:885:1: ( rule__ParenthesizedTerminalElement__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:885:2: rule__ParenthesizedTerminalElement__Group__0
             {
-            pushFollow(FOLLOW_rule__ParenthesizedTerminalElement__Group__0_in_ruleParenthesizedTerminalElement1894);
+            pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedTerminalElement__Group__0_in_ruleParenthesizedTerminalElement1894);
             rule__ParenthesizedTerminalElement__Group__0();
             _fsp--;
 
@@ -2394,12 +2394,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:898:1: ruleAbstractNegatedToken EOF
             {
              before(grammarAccess.getAbstractNegatedTokenRule()); 
-            pushFollow(FOLLOW_ruleAbstractNegatedToken_in_entryRuleAbstractNegatedToken1920);
+            pushFollow(FollowSets000.FOLLOW_ruleAbstractNegatedToken_in_entryRuleAbstractNegatedToken1920);
             ruleAbstractNegatedToken();
             _fsp--;
 
              after(grammarAccess.getAbstractNegatedTokenRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAbstractNegatedToken1927); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstractNegatedToken1927); 
 
             }
 
@@ -2432,7 +2432,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:912:1: ( rule__AbstractNegatedToken__Alternatives )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:912:2: rule__AbstractNegatedToken__Alternatives
             {
-            pushFollow(FOLLOW_rule__AbstractNegatedToken__Alternatives_in_ruleAbstractNegatedToken1954);
+            pushFollow(FollowSets000.FOLLOW_rule__AbstractNegatedToken__Alternatives_in_ruleAbstractNegatedToken1954);
             rule__AbstractNegatedToken__Alternatives();
             _fsp--;
 
@@ -2469,12 +2469,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:925:1: ruleNegatedToken EOF
             {
              before(grammarAccess.getNegatedTokenRule()); 
-            pushFollow(FOLLOW_ruleNegatedToken_in_entryRuleNegatedToken1980);
+            pushFollow(FollowSets000.FOLLOW_ruleNegatedToken_in_entryRuleNegatedToken1980);
             ruleNegatedToken();
             _fsp--;
 
              after(grammarAccess.getNegatedTokenRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNegatedToken1987); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNegatedToken1987); 
 
             }
 
@@ -2507,7 +2507,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:939:1: ( rule__NegatedToken__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:939:2: rule__NegatedToken__Group__0
             {
-            pushFollow(FOLLOW_rule__NegatedToken__Group__0_in_ruleNegatedToken2014);
+            pushFollow(FollowSets000.FOLLOW_rule__NegatedToken__Group__0_in_ruleNegatedToken2014);
             rule__NegatedToken__Group__0();
             _fsp--;
 
@@ -2544,12 +2544,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:952:1: ruleUntilToken EOF
             {
              before(grammarAccess.getUntilTokenRule()); 
-            pushFollow(FOLLOW_ruleUntilToken_in_entryRuleUntilToken2040);
+            pushFollow(FollowSets000.FOLLOW_ruleUntilToken_in_entryRuleUntilToken2040);
             ruleUntilToken();
             _fsp--;
 
              after(grammarAccess.getUntilTokenRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleUntilToken2047); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUntilToken2047); 
 
             }
 
@@ -2582,7 +2582,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:966:1: ( rule__UntilToken__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:966:2: rule__UntilToken__Group__0
             {
-            pushFollow(FOLLOW_rule__UntilToken__Group__0_in_ruleUntilToken2074);
+            pushFollow(FollowSets000.FOLLOW_rule__UntilToken__Group__0_in_ruleUntilToken2074);
             rule__UntilToken__Group__0();
             _fsp--;
 
@@ -2619,12 +2619,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:979:1: ruleWildcard EOF
             {
              before(grammarAccess.getWildcardRule()); 
-            pushFollow(FOLLOW_ruleWildcard_in_entryRuleWildcard2100);
+            pushFollow(FollowSets000.FOLLOW_ruleWildcard_in_entryRuleWildcard2100);
             ruleWildcard();
             _fsp--;
 
              after(grammarAccess.getWildcardRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleWildcard2107); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleWildcard2107); 
 
             }
 
@@ -2657,7 +2657,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:993:1: ( rule__Wildcard__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:993:2: rule__Wildcard__Group__0
             {
-            pushFollow(FOLLOW_rule__Wildcard__Group__0_in_ruleWildcard2134);
+            pushFollow(FollowSets000.FOLLOW_rule__Wildcard__Group__0_in_ruleWildcard2134);
             rule__Wildcard__Group__0();
             _fsp--;
 
@@ -2694,12 +2694,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1006:1: ruleCharacterRange EOF
             {
              before(grammarAccess.getCharacterRangeRule()); 
-            pushFollow(FOLLOW_ruleCharacterRange_in_entryRuleCharacterRange2160);
+            pushFollow(FollowSets000.FOLLOW_ruleCharacterRange_in_entryRuleCharacterRange2160);
             ruleCharacterRange();
             _fsp--;
 
              after(grammarAccess.getCharacterRangeRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleCharacterRange2167); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCharacterRange2167); 
 
             }
 
@@ -2732,7 +2732,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1020:1: ( rule__CharacterRange__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1020:2: rule__CharacterRange__Group__0
             {
-            pushFollow(FOLLOW_rule__CharacterRange__Group__0_in_ruleCharacterRange2194);
+            pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group__0_in_ruleCharacterRange2194);
             rule__CharacterRange__Group__0();
             _fsp--;
 
@@ -2769,12 +2769,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1033:1: ruleEnumRule EOF
             {
              before(grammarAccess.getEnumRuleRule()); 
-            pushFollow(FOLLOW_ruleEnumRule_in_entryRuleEnumRule2220);
+            pushFollow(FollowSets000.FOLLOW_ruleEnumRule_in_entryRuleEnumRule2220);
             ruleEnumRule();
             _fsp--;
 
              after(grammarAccess.getEnumRuleRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEnumRule2227); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEnumRule2227); 
 
             }
 
@@ -2807,7 +2807,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1047:1: ( rule__EnumRule__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1047:2: rule__EnumRule__Group__0
             {
-            pushFollow(FOLLOW_rule__EnumRule__Group__0_in_ruleEnumRule2254);
+            pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__0_in_ruleEnumRule2254);
             rule__EnumRule__Group__0();
             _fsp--;
 
@@ -2844,12 +2844,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1060:1: ruleEnumLiterals EOF
             {
              before(grammarAccess.getEnumLiteralsRule()); 
-            pushFollow(FOLLOW_ruleEnumLiterals_in_entryRuleEnumLiterals2280);
+            pushFollow(FollowSets000.FOLLOW_ruleEnumLiterals_in_entryRuleEnumLiterals2280);
             ruleEnumLiterals();
             _fsp--;
 
              after(grammarAccess.getEnumLiteralsRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEnumLiterals2287); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEnumLiterals2287); 
 
             }
 
@@ -2882,7 +2882,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1074:1: ( rule__EnumLiterals__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1074:2: rule__EnumLiterals__Group__0
             {
-            pushFollow(FOLLOW_rule__EnumLiterals__Group__0_in_ruleEnumLiterals2314);
+            pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group__0_in_ruleEnumLiterals2314);
             rule__EnumLiterals__Group__0();
             _fsp--;
 
@@ -2919,12 +2919,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1087:1: ruleEnumLiteralDeclaration EOF
             {
              before(grammarAccess.getEnumLiteralDeclarationRule()); 
-            pushFollow(FOLLOW_ruleEnumLiteralDeclaration_in_entryRuleEnumLiteralDeclaration2340);
+            pushFollow(FollowSets000.FOLLOW_ruleEnumLiteralDeclaration_in_entryRuleEnumLiteralDeclaration2340);
             ruleEnumLiteralDeclaration();
             _fsp--;
 
              after(grammarAccess.getEnumLiteralDeclarationRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEnumLiteralDeclaration2347); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEnumLiteralDeclaration2347); 
 
             }
 
@@ -2957,7 +2957,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1101:1: ( rule__EnumLiteralDeclaration__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1101:2: rule__EnumLiteralDeclaration__Group__0
             {
-            pushFollow(FOLLOW_rule__EnumLiteralDeclaration__Group__0_in_ruleEnumLiteralDeclaration2374);
+            pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__Group__0_in_ruleEnumLiteralDeclaration2374);
             rule__EnumLiteralDeclaration__Group__0();
             _fsp--;
 
@@ -3026,7 +3026,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1119:1: ruleParserRule
                     {
                      before(grammarAccess.getAbstractRuleAccess().getParserRuleParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleParserRule_in_rule__AbstractRule__Alternatives2410);
+                    pushFollow(FollowSets000.FOLLOW_ruleParserRule_in_rule__AbstractRule__Alternatives2410);
                     ruleParserRule();
                     _fsp--;
 
@@ -3044,7 +3044,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1125:1: ruleTerminalRule
                     {
                      before(grammarAccess.getAbstractRuleAccess().getTerminalRuleParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleTerminalRule_in_rule__AbstractRule__Alternatives2427);
+                    pushFollow(FollowSets000.FOLLOW_ruleTerminalRule_in_rule__AbstractRule__Alternatives2427);
                     ruleTerminalRule();
                     _fsp--;
 
@@ -3062,7 +3062,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1131:1: ruleEnumRule
                     {
                      before(grammarAccess.getAbstractRuleAccess().getEnumRuleParserRuleCall_2()); 
-                    pushFollow(FOLLOW_ruleEnumRule_in_rule__AbstractRule__Alternatives2444);
+                    pushFollow(FollowSets000.FOLLOW_ruleEnumRule_in_rule__AbstractRule__Alternatives2444);
                     ruleEnumRule();
                     _fsp--;
 
@@ -3121,7 +3121,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1147:1: ruleGeneratedMetamodel
                     {
                      before(grammarAccess.getAbstractMetamodelDeclarationAccess().getGeneratedMetamodelParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleGeneratedMetamodel_in_rule__AbstractMetamodelDeclaration__Alternatives2476);
+                    pushFollow(FollowSets000.FOLLOW_ruleGeneratedMetamodel_in_rule__AbstractMetamodelDeclaration__Alternatives2476);
                     ruleGeneratedMetamodel();
                     _fsp--;
 
@@ -3139,7 +3139,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1153:1: ruleReferencedMetamodel
                     {
                      before(grammarAccess.getAbstractMetamodelDeclarationAccess().getReferencedMetamodelParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleReferencedMetamodel_in_rule__AbstractMetamodelDeclaration__Alternatives2493);
+                    pushFollow(FollowSets000.FOLLOW_ruleReferencedMetamodel_in_rule__AbstractMetamodelDeclaration__Alternatives2493);
                     ruleReferencedMetamodel();
                     _fsp--;
 
@@ -3198,7 +3198,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1169:1: ruleAbstractTokenWithCardinality
                     {
                      before(grammarAccess.getAbstractTokenAccess().getAbstractTokenWithCardinalityParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleAbstractTokenWithCardinality_in_rule__AbstractToken__Alternatives2525);
+                    pushFollow(FollowSets000.FOLLOW_ruleAbstractTokenWithCardinality_in_rule__AbstractToken__Alternatives2525);
                     ruleAbstractTokenWithCardinality();
                     _fsp--;
 
@@ -3216,7 +3216,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1175:1: ruleAction
                     {
                      before(grammarAccess.getAbstractTokenAccess().getActionParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleAction_in_rule__AbstractToken__Alternatives2542);
+                    pushFollow(FollowSets000.FOLLOW_ruleAction_in_rule__AbstractToken__Alternatives2542);
                     ruleAction();
                     _fsp--;
 
@@ -3288,7 +3288,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1191:1: ruleAssignment
                     {
                      before(grammarAccess.getAbstractTokenWithCardinalityAccess().getAssignmentParserRuleCall_0_0()); 
-                    pushFollow(FOLLOW_ruleAssignment_in_rule__AbstractTokenWithCardinality__Alternatives_02574);
+                    pushFollow(FollowSets000.FOLLOW_ruleAssignment_in_rule__AbstractTokenWithCardinality__Alternatives_02574);
                     ruleAssignment();
                     _fsp--;
 
@@ -3306,7 +3306,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1197:1: ruleAbstractTerminal
                     {
                      before(grammarAccess.getAbstractTokenWithCardinalityAccess().getAbstractTerminalParserRuleCall_0_1()); 
-                    pushFollow(FOLLOW_ruleAbstractTerminal_in_rule__AbstractTokenWithCardinality__Alternatives_02591);
+                    pushFollow(FollowSets000.FOLLOW_ruleAbstractTerminal_in_rule__AbstractTokenWithCardinality__Alternatives_02591);
                     ruleAbstractTerminal();
                     _fsp--;
 
@@ -3374,7 +3374,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1213:1: '?'
                     {
                      before(grammarAccess.getAbstractTokenWithCardinalityAccess().getCardinalityQuestionMarkKeyword_1_0_0()); 
-                    match(input,11,FOLLOW_11_in_rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_02624); 
+                    match(input,11,FollowSets000.FOLLOW_11_in_rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_02624); 
                      after(grammarAccess.getAbstractTokenWithCardinalityAccess().getCardinalityQuestionMarkKeyword_1_0_0()); 
 
                     }
@@ -3389,7 +3389,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1221:1: '*'
                     {
                      before(grammarAccess.getAbstractTokenWithCardinalityAccess().getCardinalityAsteriskKeyword_1_0_1()); 
-                    match(input,12,FOLLOW_12_in_rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_02644); 
+                    match(input,12,FollowSets000.FOLLOW_12_in_rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_02644); 
                      after(grammarAccess.getAbstractTokenWithCardinalityAccess().getCardinalityAsteriskKeyword_1_0_1()); 
 
                     }
@@ -3404,7 +3404,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1229:1: '+'
                     {
                      before(grammarAccess.getAbstractTokenWithCardinalityAccess().getCardinalityPlusSignKeyword_1_0_2()); 
-                    match(input,13,FOLLOW_13_in_rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_02664); 
+                    match(input,13,FollowSets000.FOLLOW_13_in_rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_02664); 
                      after(grammarAccess.getAbstractTokenWithCardinalityAccess().getCardinalityPlusSignKeyword_1_0_2()); 
 
                     }
@@ -3460,7 +3460,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1247:1: '='
                     {
                      before(grammarAccess.getActionAccess().getOperatorEqualsSignKeyword_2_2_0_0()); 
-                    match(input,14,FOLLOW_14_in_rule__Action__OperatorAlternatives_2_2_02699); 
+                    match(input,14,FollowSets000.FOLLOW_14_in_rule__Action__OperatorAlternatives_2_2_02699); 
                      after(grammarAccess.getActionAccess().getOperatorEqualsSignKeyword_2_2_0_0()); 
 
                     }
@@ -3475,7 +3475,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1255:1: '+='
                     {
                      before(grammarAccess.getActionAccess().getOperatorPlusSignEqualsSignKeyword_2_2_0_1()); 
-                    match(input,15,FOLLOW_15_in_rule__Action__OperatorAlternatives_2_2_02719); 
+                    match(input,15,FollowSets000.FOLLOW_15_in_rule__Action__OperatorAlternatives_2_2_02719); 
                      after(grammarAccess.getActionAccess().getOperatorPlusSignEqualsSignKeyword_2_2_0_1()); 
 
                     }
@@ -3540,7 +3540,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1273:1: ruleKeyword
                     {
                      before(grammarAccess.getAbstractTerminalAccess().getKeywordParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleKeyword_in_rule__AbstractTerminal__Alternatives2753);
+                    pushFollow(FollowSets000.FOLLOW_ruleKeyword_in_rule__AbstractTerminal__Alternatives2753);
                     ruleKeyword();
                     _fsp--;
 
@@ -3558,7 +3558,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1279:1: ruleRuleCall
                     {
                      before(grammarAccess.getAbstractTerminalAccess().getRuleCallParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleRuleCall_in_rule__AbstractTerminal__Alternatives2770);
+                    pushFollow(FollowSets000.FOLLOW_ruleRuleCall_in_rule__AbstractTerminal__Alternatives2770);
                     ruleRuleCall();
                     _fsp--;
 
@@ -3576,7 +3576,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1285:1: ruleParenthesizedElement
                     {
                      before(grammarAccess.getAbstractTerminalAccess().getParenthesizedElementParserRuleCall_2()); 
-                    pushFollow(FOLLOW_ruleParenthesizedElement_in_rule__AbstractTerminal__Alternatives2787);
+                    pushFollow(FollowSets000.FOLLOW_ruleParenthesizedElement_in_rule__AbstractTerminal__Alternatives2787);
                     ruleParenthesizedElement();
                     _fsp--;
 
@@ -3644,7 +3644,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1301:1: '+='
                     {
                      before(grammarAccess.getAssignmentAccess().getOperatorPlusSignEqualsSignKeyword_1_0_0()); 
-                    match(input,15,FOLLOW_15_in_rule__Assignment__OperatorAlternatives_1_02820); 
+                    match(input,15,FollowSets000.FOLLOW_15_in_rule__Assignment__OperatorAlternatives_1_02820); 
                      after(grammarAccess.getAssignmentAccess().getOperatorPlusSignEqualsSignKeyword_1_0_0()); 
 
                     }
@@ -3659,7 +3659,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1309:1: '='
                     {
                      before(grammarAccess.getAssignmentAccess().getOperatorEqualsSignKeyword_1_0_1()); 
-                    match(input,14,FOLLOW_14_in_rule__Assignment__OperatorAlternatives_1_02840); 
+                    match(input,14,FollowSets000.FOLLOW_14_in_rule__Assignment__OperatorAlternatives_1_02840); 
                      after(grammarAccess.getAssignmentAccess().getOperatorEqualsSignKeyword_1_0_1()); 
 
                     }
@@ -3674,7 +3674,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1317:1: '?='
                     {
                      before(grammarAccess.getAssignmentAccess().getOperatorQuestionMarkEqualsSignKeyword_1_0_2()); 
-                    match(input,16,FOLLOW_16_in_rule__Assignment__OperatorAlternatives_1_02860); 
+                    match(input,16,FollowSets000.FOLLOW_16_in_rule__Assignment__OperatorAlternatives_1_02860); 
                      after(grammarAccess.getAssignmentAccess().getOperatorQuestionMarkEqualsSignKeyword_1_0_2()); 
 
                     }
@@ -3744,7 +3744,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1335:1: ruleKeyword
                     {
                      before(grammarAccess.getAssignableTerminalAccess().getKeywordParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleKeyword_in_rule__AssignableTerminal__Alternatives2894);
+                    pushFollow(FollowSets000.FOLLOW_ruleKeyword_in_rule__AssignableTerminal__Alternatives2894);
                     ruleKeyword();
                     _fsp--;
 
@@ -3762,7 +3762,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1341:1: ruleRuleCall
                     {
                      before(grammarAccess.getAssignableTerminalAccess().getRuleCallParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleRuleCall_in_rule__AssignableTerminal__Alternatives2911);
+                    pushFollow(FollowSets000.FOLLOW_ruleRuleCall_in_rule__AssignableTerminal__Alternatives2911);
                     ruleRuleCall();
                     _fsp--;
 
@@ -3780,7 +3780,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1347:1: ruleParenthesizedAssignableElement
                     {
                      before(grammarAccess.getAssignableTerminalAccess().getParenthesizedAssignableElementParserRuleCall_2()); 
-                    pushFollow(FOLLOW_ruleParenthesizedAssignableElement_in_rule__AssignableTerminal__Alternatives2928);
+                    pushFollow(FollowSets000.FOLLOW_ruleParenthesizedAssignableElement_in_rule__AssignableTerminal__Alternatives2928);
                     ruleParenthesizedAssignableElement();
                     _fsp--;
 
@@ -3798,7 +3798,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1353:1: ruleCrossReference
                     {
                      before(grammarAccess.getAssignableTerminalAccess().getCrossReferenceParserRuleCall_3()); 
-                    pushFollow(FOLLOW_ruleCrossReference_in_rule__AssignableTerminal__Alternatives2945);
+                    pushFollow(FollowSets000.FOLLOW_ruleCrossReference_in_rule__AssignableTerminal__Alternatives2945);
                     ruleCrossReference();
                     _fsp--;
 
@@ -3866,7 +3866,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1369:1: ruleKeyword
                     {
                      before(grammarAccess.getCrossReferenceableTerminalAccess().getKeywordParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleKeyword_in_rule__CrossReferenceableTerminal__Alternatives2977);
+                    pushFollow(FollowSets000.FOLLOW_ruleKeyword_in_rule__CrossReferenceableTerminal__Alternatives2977);
                     ruleKeyword();
                     _fsp--;
 
@@ -3884,7 +3884,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1375:1: ruleRuleCall
                     {
                      before(grammarAccess.getCrossReferenceableTerminalAccess().getRuleCallParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleRuleCall_in_rule__CrossReferenceableTerminal__Alternatives2994);
+                    pushFollow(FollowSets000.FOLLOW_ruleRuleCall_in_rule__CrossReferenceableTerminal__Alternatives2994);
                     ruleRuleCall();
                     _fsp--;
 
@@ -3902,7 +3902,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1381:1: ruleParenthesizedCrossReferenceableElement
                     {
                      before(grammarAccess.getCrossReferenceableTerminalAccess().getParenthesizedCrossReferenceableElementParserRuleCall_2()); 
-                    pushFollow(FOLLOW_ruleParenthesizedCrossReferenceableElement_in_rule__CrossReferenceableTerminal__Alternatives3011);
+                    pushFollow(FollowSets000.FOLLOW_ruleParenthesizedCrossReferenceableElement_in_rule__CrossReferenceableTerminal__Alternatives3011);
                     ruleParenthesizedCrossReferenceableElement();
                     _fsp--;
 
@@ -3970,7 +3970,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1397:1: '?'
                     {
                      before(grammarAccess.getTerminalTokenAccess().getCardinalityQuestionMarkKeyword_1_0_0()); 
-                    match(input,11,FOLLOW_11_in_rule__TerminalToken__CardinalityAlternatives_1_03044); 
+                    match(input,11,FollowSets000.FOLLOW_11_in_rule__TerminalToken__CardinalityAlternatives_1_03044); 
                      after(grammarAccess.getTerminalTokenAccess().getCardinalityQuestionMarkKeyword_1_0_0()); 
 
                     }
@@ -3985,7 +3985,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1405:1: '*'
                     {
                      before(grammarAccess.getTerminalTokenAccess().getCardinalityAsteriskKeyword_1_0_1()); 
-                    match(input,12,FOLLOW_12_in_rule__TerminalToken__CardinalityAlternatives_1_03064); 
+                    match(input,12,FollowSets000.FOLLOW_12_in_rule__TerminalToken__CardinalityAlternatives_1_03064); 
                      after(grammarAccess.getTerminalTokenAccess().getCardinalityAsteriskKeyword_1_0_1()); 
 
                     }
@@ -4000,7 +4000,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1413:1: '+'
                     {
                      before(grammarAccess.getTerminalTokenAccess().getCardinalityPlusSignKeyword_1_0_2()); 
-                    match(input,13,FOLLOW_13_in_rule__TerminalToken__CardinalityAlternatives_1_03084); 
+                    match(input,13,FollowSets000.FOLLOW_13_in_rule__TerminalToken__CardinalityAlternatives_1_03084); 
                      after(grammarAccess.getTerminalTokenAccess().getCardinalityPlusSignKeyword_1_0_2()); 
 
                     }
@@ -4076,7 +4076,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1431:1: ruleCharacterRange
                     {
                      before(grammarAccess.getTerminalTokenElementAccess().getCharacterRangeParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleCharacterRange_in_rule__TerminalTokenElement__Alternatives3118);
+                    pushFollow(FollowSets000.FOLLOW_ruleCharacterRange_in_rule__TerminalTokenElement__Alternatives3118);
                     ruleCharacterRange();
                     _fsp--;
 
@@ -4094,7 +4094,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1437:1: ruleRuleCall
                     {
                      before(grammarAccess.getTerminalTokenElementAccess().getRuleCallParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleRuleCall_in_rule__TerminalTokenElement__Alternatives3135);
+                    pushFollow(FollowSets000.FOLLOW_ruleRuleCall_in_rule__TerminalTokenElement__Alternatives3135);
                     ruleRuleCall();
                     _fsp--;
 
@@ -4112,7 +4112,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1443:1: ruleParenthesizedTerminalElement
                     {
                      before(grammarAccess.getTerminalTokenElementAccess().getParenthesizedTerminalElementParserRuleCall_2()); 
-                    pushFollow(FOLLOW_ruleParenthesizedTerminalElement_in_rule__TerminalTokenElement__Alternatives3152);
+                    pushFollow(FollowSets000.FOLLOW_ruleParenthesizedTerminalElement_in_rule__TerminalTokenElement__Alternatives3152);
                     ruleParenthesizedTerminalElement();
                     _fsp--;
 
@@ -4130,7 +4130,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1449:1: ruleAbstractNegatedToken
                     {
                      before(grammarAccess.getTerminalTokenElementAccess().getAbstractNegatedTokenParserRuleCall_3()); 
-                    pushFollow(FOLLOW_ruleAbstractNegatedToken_in_rule__TerminalTokenElement__Alternatives3169);
+                    pushFollow(FollowSets000.FOLLOW_ruleAbstractNegatedToken_in_rule__TerminalTokenElement__Alternatives3169);
                     ruleAbstractNegatedToken();
                     _fsp--;
 
@@ -4148,7 +4148,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1455:1: ruleWildcard
                     {
                      before(grammarAccess.getTerminalTokenElementAccess().getWildcardParserRuleCall_4()); 
-                    pushFollow(FOLLOW_ruleWildcard_in_rule__TerminalTokenElement__Alternatives3186);
+                    pushFollow(FollowSets000.FOLLOW_ruleWildcard_in_rule__TerminalTokenElement__Alternatives3186);
                     ruleWildcard();
                     _fsp--;
 
@@ -4207,7 +4207,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1471:1: ruleNegatedToken
                     {
                      before(grammarAccess.getAbstractNegatedTokenAccess().getNegatedTokenParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleNegatedToken_in_rule__AbstractNegatedToken__Alternatives3218);
+                    pushFollow(FollowSets000.FOLLOW_ruleNegatedToken_in_rule__AbstractNegatedToken__Alternatives3218);
                     ruleNegatedToken();
                     _fsp--;
 
@@ -4225,7 +4225,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1477:1: ruleUntilToken
                     {
                      before(grammarAccess.getAbstractNegatedTokenAccess().getUntilTokenParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleUntilToken_in_rule__AbstractNegatedToken__Alternatives3235);
+                    pushFollow(FollowSets000.FOLLOW_ruleUntilToken_in_rule__AbstractNegatedToken__Alternatives3235);
                     ruleUntilToken();
                     _fsp--;
 
@@ -4267,12 +4267,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1495:1: 'grammar'
             {
              before(grammarAccess.getGrammarAccess().getGrammarKeyword_0()); 
-            match(input,17,FOLLOW_17_in_rule__Grammar__Group__03270); 
+            match(input,17,FollowSets000.FOLLOW_17_in_rule__Grammar__Group__03270); 
              after(grammarAccess.getGrammarAccess().getGrammarKeyword_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__Grammar__Group__1_in_rule__Grammar__Group__03280);
+            pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__1_in_rule__Grammar__Group__03280);
             rule__Grammar__Group__1();
             _fsp--;
 
@@ -4311,7 +4311,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1516:1: ( rule__Grammar__NameAssignment_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1516:2: rule__Grammar__NameAssignment_1
             {
-            pushFollow(FOLLOW_rule__Grammar__NameAssignment_1_in_rule__Grammar__Group__13308);
+            pushFollow(FollowSets000.FOLLOW_rule__Grammar__NameAssignment_1_in_rule__Grammar__Group__13308);
             rule__Grammar__NameAssignment_1();
             _fsp--;
 
@@ -4322,7 +4322,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__Grammar__Group__2_in_rule__Grammar__Group__13317);
+            pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__2_in_rule__Grammar__Group__13317);
             rule__Grammar__Group__2();
             _fsp--;
 
@@ -4369,7 +4369,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1534:2: rule__Grammar__Group_2__0
                     {
-                    pushFollow(FOLLOW_rule__Grammar__Group_2__0_in_rule__Grammar__Group__23345);
+                    pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2__0_in_rule__Grammar__Group__23345);
                     rule__Grammar__Group_2__0();
                     _fsp--;
 
@@ -4383,7 +4383,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__Grammar__Group__3_in_rule__Grammar__Group__23355);
+            pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__3_in_rule__Grammar__Group__23355);
             rule__Grammar__Group__3();
             _fsp--;
 
@@ -4430,7 +4430,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1552:2: rule__Grammar__Group_3__0
                     {
-                    pushFollow(FOLLOW_rule__Grammar__Group_3__0_in_rule__Grammar__Group__33383);
+                    pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3__0_in_rule__Grammar__Group__33383);
                     rule__Grammar__Group_3__0();
                     _fsp--;
 
@@ -4444,7 +4444,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__Grammar__Group__4_in_rule__Grammar__Group__33393);
+            pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__4_in_rule__Grammar__Group__33393);
             rule__Grammar__Group__4();
             _fsp--;
 
@@ -4495,7 +4495,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	case 1 :
             	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1570:2: rule__Grammar__MetamodelDeclarationsAssignment_4
             	    {
-            	    pushFollow(FOLLOW_rule__Grammar__MetamodelDeclarationsAssignment_4_in_rule__Grammar__Group__43421);
+            	    pushFollow(FollowSets000.FOLLOW_rule__Grammar__MetamodelDeclarationsAssignment_4_in_rule__Grammar__Group__43421);
             	    rule__Grammar__MetamodelDeclarationsAssignment_4();
             	    _fsp--;
 
@@ -4512,7 +4512,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__Grammar__Group__5_in_rule__Grammar__Group__43431);
+            pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group__5_in_rule__Grammar__Group__43431);
             rule__Grammar__Group__5();
             _fsp--;
 
@@ -4554,7 +4554,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1589:1: ( rule__Grammar__RulesAssignment_5 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1589:2: rule__Grammar__RulesAssignment_5
             {
-            pushFollow(FOLLOW_rule__Grammar__RulesAssignment_5_in_rule__Grammar__Group__53461);
+            pushFollow(FollowSets000.FOLLOW_rule__Grammar__RulesAssignment_5_in_rule__Grammar__Group__53461);
             rule__Grammar__RulesAssignment_5();
             _fsp--;
 
@@ -4584,7 +4584,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	case 1 :
             	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1594:2: rule__Grammar__RulesAssignment_5
             	    {
-            	    pushFollow(FOLLOW_rule__Grammar__RulesAssignment_5_in_rule__Grammar__Group__53473);
+            	    pushFollow(FollowSets000.FOLLOW_rule__Grammar__RulesAssignment_5_in_rule__Grammar__Group__53473);
             	    rule__Grammar__RulesAssignment_5();
             	    _fsp--;
 
@@ -4636,12 +4636,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1623:1: 'with'
             {
              before(grammarAccess.getGrammarAccess().getWithKeyword_2_0()); 
-            match(input,18,FOLLOW_18_in_rule__Grammar__Group_2__03523); 
+            match(input,18,FollowSets000.FOLLOW_18_in_rule__Grammar__Group_2__03523); 
              after(grammarAccess.getGrammarAccess().getWithKeyword_2_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__Grammar__Group_2__1_in_rule__Grammar__Group_2__03533);
+            pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2__1_in_rule__Grammar__Group_2__03533);
             rule__Grammar__Group_2__1();
             _fsp--;
 
@@ -4680,7 +4680,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1644:1: ( rule__Grammar__UsedGrammarsAssignment_2_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1644:2: rule__Grammar__UsedGrammarsAssignment_2_1
             {
-            pushFollow(FOLLOW_rule__Grammar__UsedGrammarsAssignment_2_1_in_rule__Grammar__Group_2__13561);
+            pushFollow(FollowSets000.FOLLOW_rule__Grammar__UsedGrammarsAssignment_2_1_in_rule__Grammar__Group_2__13561);
             rule__Grammar__UsedGrammarsAssignment_2_1();
             _fsp--;
 
@@ -4691,7 +4691,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__Grammar__Group_2__2_in_rule__Grammar__Group_2__13570);
+            pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2__2_in_rule__Grammar__Group_2__13570);
             rule__Grammar__Group_2__2();
             _fsp--;
 
@@ -4742,7 +4742,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	case 1 :
             	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1662:2: rule__Grammar__Group_2_2__0
             	    {
-            	    pushFollow(FOLLOW_rule__Grammar__Group_2_2__0_in_rule__Grammar__Group_2__23598);
+            	    pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2_2__0_in_rule__Grammar__Group_2__23598);
             	    rule__Grammar__Group_2_2__0();
             	    _fsp--;
 
@@ -4791,12 +4791,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1684:1: ','
             {
              before(grammarAccess.getGrammarAccess().getCommaKeyword_2_2_0()); 
-            match(input,19,FOLLOW_19_in_rule__Grammar__Group_2_2__03640); 
+            match(input,19,FollowSets000.FOLLOW_19_in_rule__Grammar__Group_2_2__03640); 
              after(grammarAccess.getGrammarAccess().getCommaKeyword_2_2_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__Grammar__Group_2_2__1_in_rule__Grammar__Group_2_2__03650);
+            pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_2_2__1_in_rule__Grammar__Group_2_2__03650);
             rule__Grammar__Group_2_2__1();
             _fsp--;
 
@@ -4835,7 +4835,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1705:1: ( rule__Grammar__UsedGrammarsAssignment_2_2_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1705:2: rule__Grammar__UsedGrammarsAssignment_2_2_1
             {
-            pushFollow(FOLLOW_rule__Grammar__UsedGrammarsAssignment_2_2_1_in_rule__Grammar__Group_2_2__13678);
+            pushFollow(FollowSets000.FOLLOW_rule__Grammar__UsedGrammarsAssignment_2_2_1_in_rule__Grammar__Group_2_2__13678);
             rule__Grammar__UsedGrammarsAssignment_2_2_1();
             _fsp--;
 
@@ -4881,7 +4881,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1726:1: ( rule__Grammar__DefinesHiddenTokensAssignment_3_0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1726:2: rule__Grammar__DefinesHiddenTokensAssignment_3_0
             {
-            pushFollow(FOLLOW_rule__Grammar__DefinesHiddenTokensAssignment_3_0_in_rule__Grammar__Group_3__03716);
+            pushFollow(FollowSets000.FOLLOW_rule__Grammar__DefinesHiddenTokensAssignment_3_0_in_rule__Grammar__Group_3__03716);
             rule__Grammar__DefinesHiddenTokensAssignment_3_0();
             _fsp--;
 
@@ -4892,7 +4892,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__Grammar__Group_3__1_in_rule__Grammar__Group_3__03725);
+            pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3__1_in_rule__Grammar__Group_3__03725);
             rule__Grammar__Group_3__1();
             _fsp--;
 
@@ -4928,12 +4928,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1743:1: '('
             {
              before(grammarAccess.getGrammarAccess().getLeftParenthesisKeyword_3_1()); 
-            match(input,20,FOLLOW_20_in_rule__Grammar__Group_3__13754); 
+            match(input,20,FollowSets000.FOLLOW_20_in_rule__Grammar__Group_3__13754); 
              after(grammarAccess.getGrammarAccess().getLeftParenthesisKeyword_3_1()); 
 
             }
 
-            pushFollow(FOLLOW_rule__Grammar__Group_3__2_in_rule__Grammar__Group_3__13764);
+            pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3__2_in_rule__Grammar__Group_3__13764);
             rule__Grammar__Group_3__2();
             _fsp--;
 
@@ -4980,7 +4980,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1764:2: rule__Grammar__Group_3_2__0
                     {
-                    pushFollow(FOLLOW_rule__Grammar__Group_3_2__0_in_rule__Grammar__Group_3__23792);
+                    pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3_2__0_in_rule__Grammar__Group_3__23792);
                     rule__Grammar__Group_3_2__0();
                     _fsp--;
 
@@ -4994,7 +4994,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__Grammar__Group_3__3_in_rule__Grammar__Group_3__23802);
+            pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3__3_in_rule__Grammar__Group_3__23802);
             rule__Grammar__Group_3__3();
             _fsp--;
 
@@ -5030,7 +5030,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1781:1: ')'
             {
              before(grammarAccess.getGrammarAccess().getRightParenthesisKeyword_3_3()); 
-            match(input,21,FOLLOW_21_in_rule__Grammar__Group_3__33831); 
+            match(input,21,FollowSets000.FOLLOW_21_in_rule__Grammar__Group_3__33831); 
              after(grammarAccess.getGrammarAccess().getRightParenthesisKeyword_3_3()); 
 
             }
@@ -5070,7 +5070,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1809:1: ( rule__Grammar__HiddenTokensAssignment_3_2_0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1809:2: rule__Grammar__HiddenTokensAssignment_3_2_0
             {
-            pushFollow(FOLLOW_rule__Grammar__HiddenTokensAssignment_3_2_0_in_rule__Grammar__Group_3_2__03874);
+            pushFollow(FollowSets000.FOLLOW_rule__Grammar__HiddenTokensAssignment_3_2_0_in_rule__Grammar__Group_3_2__03874);
             rule__Grammar__HiddenTokensAssignment_3_2_0();
             _fsp--;
 
@@ -5081,7 +5081,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__Grammar__Group_3_2__1_in_rule__Grammar__Group_3_2__03883);
+            pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3_2__1_in_rule__Grammar__Group_3_2__03883);
             rule__Grammar__Group_3_2__1();
             _fsp--;
 
@@ -5132,7 +5132,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	case 1 :
             	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1827:2: rule__Grammar__Group_3_2_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__Grammar__Group_3_2_1__0_in_rule__Grammar__Group_3_2__13911);
+            	    pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3_2_1__0_in_rule__Grammar__Group_3_2__13911);
             	    rule__Grammar__Group_3_2_1__0();
             	    _fsp--;
 
@@ -5181,12 +5181,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1847:1: ','
             {
              before(grammarAccess.getGrammarAccess().getCommaKeyword_3_2_1_0()); 
-            match(input,19,FOLLOW_19_in_rule__Grammar__Group_3_2_1__03951); 
+            match(input,19,FollowSets000.FOLLOW_19_in_rule__Grammar__Group_3_2_1__03951); 
              after(grammarAccess.getGrammarAccess().getCommaKeyword_3_2_1_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__Grammar__Group_3_2_1__1_in_rule__Grammar__Group_3_2_1__03961);
+            pushFollow(FollowSets000.FOLLOW_rule__Grammar__Group_3_2_1__1_in_rule__Grammar__Group_3_2_1__03961);
             rule__Grammar__Group_3_2_1__1();
             _fsp--;
 
@@ -5225,7 +5225,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1868:1: ( rule__Grammar__HiddenTokensAssignment_3_2_1_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1868:2: rule__Grammar__HiddenTokensAssignment_3_2_1_1
             {
-            pushFollow(FOLLOW_rule__Grammar__HiddenTokensAssignment_3_2_1_1_in_rule__Grammar__Group_3_2_1__13989);
+            pushFollow(FollowSets000.FOLLOW_rule__Grammar__HiddenTokensAssignment_3_2_1_1_in_rule__Grammar__Group_3_2_1__13989);
             rule__Grammar__HiddenTokensAssignment_3_2_1_1();
             _fsp--;
 
@@ -5268,12 +5268,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1888:1: RULE_ID
             {
              before(grammarAccess.getGrammarIDAccess().getIDTerminalRuleCall_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__GrammarID__Group__04027); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__GrammarID__Group__04027); 
              after(grammarAccess.getGrammarIDAccess().getIDTerminalRuleCall_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__GrammarID__Group__1_in_rule__GrammarID__Group__04035);
+            pushFollow(FollowSets000.FOLLOW_rule__GrammarID__Group__1_in_rule__GrammarID__Group__04035);
             rule__GrammarID__Group__1();
             _fsp--;
 
@@ -5324,7 +5324,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	case 1 :
             	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1907:2: rule__GrammarID__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__GrammarID__Group_1__0_in_rule__GrammarID__Group__14063);
+            	    pushFollow(FollowSets000.FOLLOW_rule__GrammarID__Group_1__0_in_rule__GrammarID__Group__14063);
             	    rule__GrammarID__Group_1__0();
             	    _fsp--;
 
@@ -5373,12 +5373,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1927:1: '.'
             {
              before(grammarAccess.getGrammarIDAccess().getFullStopKeyword_1_0()); 
-            match(input,22,FOLLOW_22_in_rule__GrammarID__Group_1__04103); 
+            match(input,22,FollowSets000.FOLLOW_22_in_rule__GrammarID__Group_1__04103); 
              after(grammarAccess.getGrammarIDAccess().getFullStopKeyword_1_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__GrammarID__Group_1__1_in_rule__GrammarID__Group_1__04113);
+            pushFollow(FollowSets000.FOLLOW_rule__GrammarID__Group_1__1_in_rule__GrammarID__Group_1__04113);
             rule__GrammarID__Group_1__1();
             _fsp--;
 
@@ -5414,7 +5414,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1947:1: RULE_ID
             {
              before(grammarAccess.getGrammarIDAccess().getIDTerminalRuleCall_1_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__GrammarID__Group_1__14141); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__GrammarID__Group_1__14141); 
              after(grammarAccess.getGrammarIDAccess().getIDTerminalRuleCall_1_1()); 
 
             }
@@ -5451,12 +5451,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1968:1: 'generate'
             {
              before(grammarAccess.getGeneratedMetamodelAccess().getGenerateKeyword_0()); 
-            match(input,23,FOLLOW_23_in_rule__GeneratedMetamodel__Group__04179); 
+            match(input,23,FollowSets000.FOLLOW_23_in_rule__GeneratedMetamodel__Group__04179); 
              after(grammarAccess.getGeneratedMetamodelAccess().getGenerateKeyword_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__GeneratedMetamodel__Group__1_in_rule__GeneratedMetamodel__Group__04189);
+            pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group__1_in_rule__GeneratedMetamodel__Group__04189);
             rule__GeneratedMetamodel__Group__1();
             _fsp--;
 
@@ -5495,7 +5495,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1989:1: ( rule__GeneratedMetamodel__NameAssignment_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:1989:2: rule__GeneratedMetamodel__NameAssignment_1
             {
-            pushFollow(FOLLOW_rule__GeneratedMetamodel__NameAssignment_1_in_rule__GeneratedMetamodel__Group__14217);
+            pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__NameAssignment_1_in_rule__GeneratedMetamodel__Group__14217);
             rule__GeneratedMetamodel__NameAssignment_1();
             _fsp--;
 
@@ -5506,7 +5506,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__GeneratedMetamodel__Group__2_in_rule__GeneratedMetamodel__Group__14226);
+            pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group__2_in_rule__GeneratedMetamodel__Group__14226);
             rule__GeneratedMetamodel__Group__2();
             _fsp--;
 
@@ -5545,7 +5545,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2007:1: ( rule__GeneratedMetamodel__EPackageAssignment_2 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2007:2: rule__GeneratedMetamodel__EPackageAssignment_2
             {
-            pushFollow(FOLLOW_rule__GeneratedMetamodel__EPackageAssignment_2_in_rule__GeneratedMetamodel__Group__24254);
+            pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__EPackageAssignment_2_in_rule__GeneratedMetamodel__Group__24254);
             rule__GeneratedMetamodel__EPackageAssignment_2();
             _fsp--;
 
@@ -5556,7 +5556,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__GeneratedMetamodel__Group__3_in_rule__GeneratedMetamodel__Group__24263);
+            pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group__3_in_rule__GeneratedMetamodel__Group__24263);
             rule__GeneratedMetamodel__Group__3();
             _fsp--;
 
@@ -5603,7 +5603,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2025:2: rule__GeneratedMetamodel__Group_3__0
                     {
-                    pushFollow(FOLLOW_rule__GeneratedMetamodel__Group_3__0_in_rule__GeneratedMetamodel__Group__34291);
+                    pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group_3__0_in_rule__GeneratedMetamodel__Group__34291);
                     rule__GeneratedMetamodel__Group_3__0();
                     _fsp--;
 
@@ -5649,12 +5649,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2049:1: 'as'
             {
              before(grammarAccess.getGeneratedMetamodelAccess().getAsKeyword_3_0()); 
-            match(input,24,FOLLOW_24_in_rule__GeneratedMetamodel__Group_3__04335); 
+            match(input,24,FollowSets000.FOLLOW_24_in_rule__GeneratedMetamodel__Group_3__04335); 
              after(grammarAccess.getGeneratedMetamodelAccess().getAsKeyword_3_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__GeneratedMetamodel__Group_3__1_in_rule__GeneratedMetamodel__Group_3__04345);
+            pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__Group_3__1_in_rule__GeneratedMetamodel__Group_3__04345);
             rule__GeneratedMetamodel__Group_3__1();
             _fsp--;
 
@@ -5693,7 +5693,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2070:1: ( rule__GeneratedMetamodel__AliasAssignment_3_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2070:2: rule__GeneratedMetamodel__AliasAssignment_3_1
             {
-            pushFollow(FOLLOW_rule__GeneratedMetamodel__AliasAssignment_3_1_in_rule__GeneratedMetamodel__Group_3__14373);
+            pushFollow(FollowSets000.FOLLOW_rule__GeneratedMetamodel__AliasAssignment_3_1_in_rule__GeneratedMetamodel__Group_3__14373);
             rule__GeneratedMetamodel__AliasAssignment_3_1();
             _fsp--;
 
@@ -5736,12 +5736,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2090:1: 'import'
             {
              before(grammarAccess.getReferencedMetamodelAccess().getImportKeyword_0()); 
-            match(input,25,FOLLOW_25_in_rule__ReferencedMetamodel__Group__04412); 
+            match(input,25,FollowSets000.FOLLOW_25_in_rule__ReferencedMetamodel__Group__04412); 
              after(grammarAccess.getReferencedMetamodelAccess().getImportKeyword_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__ReferencedMetamodel__Group__1_in_rule__ReferencedMetamodel__Group__04422);
+            pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group__1_in_rule__ReferencedMetamodel__Group__04422);
             rule__ReferencedMetamodel__Group__1();
             _fsp--;
 
@@ -5780,7 +5780,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2111:1: ( rule__ReferencedMetamodel__EPackageAssignment_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2111:2: rule__ReferencedMetamodel__EPackageAssignment_1
             {
-            pushFollow(FOLLOW_rule__ReferencedMetamodel__EPackageAssignment_1_in_rule__ReferencedMetamodel__Group__14450);
+            pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__EPackageAssignment_1_in_rule__ReferencedMetamodel__Group__14450);
             rule__ReferencedMetamodel__EPackageAssignment_1();
             _fsp--;
 
@@ -5791,7 +5791,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__ReferencedMetamodel__Group__2_in_rule__ReferencedMetamodel__Group__14459);
+            pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group__2_in_rule__ReferencedMetamodel__Group__14459);
             rule__ReferencedMetamodel__Group__2();
             _fsp--;
 
@@ -5838,7 +5838,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2129:2: rule__ReferencedMetamodel__Group_2__0
                     {
-                    pushFollow(FOLLOW_rule__ReferencedMetamodel__Group_2__0_in_rule__ReferencedMetamodel__Group__24487);
+                    pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group_2__0_in_rule__ReferencedMetamodel__Group__24487);
                     rule__ReferencedMetamodel__Group_2__0();
                     _fsp--;
 
@@ -5884,12 +5884,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2151:1: 'as'
             {
              before(grammarAccess.getReferencedMetamodelAccess().getAsKeyword_2_0()); 
-            match(input,24,FOLLOW_24_in_rule__ReferencedMetamodel__Group_2__04529); 
+            match(input,24,FollowSets000.FOLLOW_24_in_rule__ReferencedMetamodel__Group_2__04529); 
              after(grammarAccess.getReferencedMetamodelAccess().getAsKeyword_2_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__ReferencedMetamodel__Group_2__1_in_rule__ReferencedMetamodel__Group_2__04539);
+            pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group_2__1_in_rule__ReferencedMetamodel__Group_2__04539);
             rule__ReferencedMetamodel__Group_2__1();
             _fsp--;
 
@@ -5928,7 +5928,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2172:1: ( rule__ReferencedMetamodel__AliasAssignment_2_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2172:2: rule__ReferencedMetamodel__AliasAssignment_2_1
             {
-            pushFollow(FOLLOW_rule__ReferencedMetamodel__AliasAssignment_2_1_in_rule__ReferencedMetamodel__Group_2__14567);
+            pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__AliasAssignment_2_1_in_rule__ReferencedMetamodel__Group_2__14567);
             rule__ReferencedMetamodel__AliasAssignment_2_1();
             _fsp--;
 
@@ -5974,7 +5974,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2193:1: ( rule__ParserRule__NameAssignment_0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2193:2: rule__ParserRule__NameAssignment_0
             {
-            pushFollow(FOLLOW_rule__ParserRule__NameAssignment_0_in_rule__ParserRule__Group__04605);
+            pushFollow(FollowSets000.FOLLOW_rule__ParserRule__NameAssignment_0_in_rule__ParserRule__Group__04605);
             rule__ParserRule__NameAssignment_0();
             _fsp--;
 
@@ -5985,7 +5985,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__ParserRule__Group__1_in_rule__ParserRule__Group__04614);
+            pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__1_in_rule__ParserRule__Group__04614);
             rule__ParserRule__Group__1();
             _fsp--;
 
@@ -6032,7 +6032,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2211:2: rule__ParserRule__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__ParserRule__Group_1__0_in_rule__ParserRule__Group__14642);
+                    pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_1__0_in_rule__ParserRule__Group__14642);
                     rule__ParserRule__Group_1__0();
                     _fsp--;
 
@@ -6046,7 +6046,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__ParserRule__Group__2_in_rule__ParserRule__Group__14652);
+            pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__2_in_rule__ParserRule__Group__14652);
             rule__ParserRule__Group__2();
             _fsp--;
 
@@ -6093,7 +6093,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2229:2: rule__ParserRule__Group_2__0
                     {
-                    pushFollow(FOLLOW_rule__ParserRule__Group_2__0_in_rule__ParserRule__Group__24680);
+                    pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2__0_in_rule__ParserRule__Group__24680);
                     rule__ParserRule__Group_2__0();
                     _fsp--;
 
@@ -6107,7 +6107,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__ParserRule__Group__3_in_rule__ParserRule__Group__24690);
+            pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__3_in_rule__ParserRule__Group__24690);
             rule__ParserRule__Group__3();
             _fsp--;
 
@@ -6143,12 +6143,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2246:1: ':'
             {
              before(grammarAccess.getParserRuleAccess().getColonKeyword_3()); 
-            match(input,26,FOLLOW_26_in_rule__ParserRule__Group__34719); 
+            match(input,26,FollowSets000.FOLLOW_26_in_rule__ParserRule__Group__34719); 
              after(grammarAccess.getParserRuleAccess().getColonKeyword_3()); 
 
             }
 
-            pushFollow(FOLLOW_rule__ParserRule__Group__4_in_rule__ParserRule__Group__34729);
+            pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__4_in_rule__ParserRule__Group__34729);
             rule__ParserRule__Group__4();
             _fsp--;
 
@@ -6187,7 +6187,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2267:1: ( rule__ParserRule__AlternativesAssignment_4 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2267:2: rule__ParserRule__AlternativesAssignment_4
             {
-            pushFollow(FOLLOW_rule__ParserRule__AlternativesAssignment_4_in_rule__ParserRule__Group__44757);
+            pushFollow(FollowSets000.FOLLOW_rule__ParserRule__AlternativesAssignment_4_in_rule__ParserRule__Group__44757);
             rule__ParserRule__AlternativesAssignment_4();
             _fsp--;
 
@@ -6198,7 +6198,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__ParserRule__Group__5_in_rule__ParserRule__Group__44766);
+            pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group__5_in_rule__ParserRule__Group__44766);
             rule__ParserRule__Group__5();
             _fsp--;
 
@@ -6234,7 +6234,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2284:1: ';'
             {
              before(grammarAccess.getParserRuleAccess().getSemicolonKeyword_5()); 
-            match(input,27,FOLLOW_27_in_rule__ParserRule__Group__54795); 
+            match(input,27,FollowSets000.FOLLOW_27_in_rule__ParserRule__Group__54795); 
              after(grammarAccess.getParserRuleAccess().getSemicolonKeyword_5()); 
 
             }
@@ -6271,12 +6271,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2315:1: 'returns'
             {
              before(grammarAccess.getParserRuleAccess().getReturnsKeyword_1_0()); 
-            match(input,28,FOLLOW_28_in_rule__ParserRule__Group_1__04843); 
+            match(input,28,FollowSets000.FOLLOW_28_in_rule__ParserRule__Group_1__04843); 
              after(grammarAccess.getParserRuleAccess().getReturnsKeyword_1_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__ParserRule__Group_1__1_in_rule__ParserRule__Group_1__04853);
+            pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_1__1_in_rule__ParserRule__Group_1__04853);
             rule__ParserRule__Group_1__1();
             _fsp--;
 
@@ -6315,7 +6315,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2336:1: ( rule__ParserRule__TypeAssignment_1_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2336:2: rule__ParserRule__TypeAssignment_1_1
             {
-            pushFollow(FOLLOW_rule__ParserRule__TypeAssignment_1_1_in_rule__ParserRule__Group_1__14881);
+            pushFollow(FollowSets000.FOLLOW_rule__ParserRule__TypeAssignment_1_1_in_rule__ParserRule__Group_1__14881);
             rule__ParserRule__TypeAssignment_1_1();
             _fsp--;
 
@@ -6361,7 +6361,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2357:1: ( rule__ParserRule__DefinesHiddenTokensAssignment_2_0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2357:2: rule__ParserRule__DefinesHiddenTokensAssignment_2_0
             {
-            pushFollow(FOLLOW_rule__ParserRule__DefinesHiddenTokensAssignment_2_0_in_rule__ParserRule__Group_2__04919);
+            pushFollow(FollowSets000.FOLLOW_rule__ParserRule__DefinesHiddenTokensAssignment_2_0_in_rule__ParserRule__Group_2__04919);
             rule__ParserRule__DefinesHiddenTokensAssignment_2_0();
             _fsp--;
 
@@ -6372,7 +6372,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__ParserRule__Group_2__1_in_rule__ParserRule__Group_2__04928);
+            pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2__1_in_rule__ParserRule__Group_2__04928);
             rule__ParserRule__Group_2__1();
             _fsp--;
 
@@ -6408,12 +6408,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2374:1: '('
             {
              before(grammarAccess.getParserRuleAccess().getLeftParenthesisKeyword_2_1()); 
-            match(input,20,FOLLOW_20_in_rule__ParserRule__Group_2__14957); 
+            match(input,20,FollowSets000.FOLLOW_20_in_rule__ParserRule__Group_2__14957); 
              after(grammarAccess.getParserRuleAccess().getLeftParenthesisKeyword_2_1()); 
 
             }
 
-            pushFollow(FOLLOW_rule__ParserRule__Group_2__2_in_rule__ParserRule__Group_2__14967);
+            pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2__2_in_rule__ParserRule__Group_2__14967);
             rule__ParserRule__Group_2__2();
             _fsp--;
 
@@ -6460,7 +6460,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2395:2: rule__ParserRule__Group_2_2__0
                     {
-                    pushFollow(FOLLOW_rule__ParserRule__Group_2_2__0_in_rule__ParserRule__Group_2__24995);
+                    pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2_2__0_in_rule__ParserRule__Group_2__24995);
                     rule__ParserRule__Group_2_2__0();
                     _fsp--;
 
@@ -6474,7 +6474,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__ParserRule__Group_2__3_in_rule__ParserRule__Group_2__25005);
+            pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2__3_in_rule__ParserRule__Group_2__25005);
             rule__ParserRule__Group_2__3();
             _fsp--;
 
@@ -6510,7 +6510,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2412:1: ')'
             {
              before(grammarAccess.getParserRuleAccess().getRightParenthesisKeyword_2_3()); 
-            match(input,21,FOLLOW_21_in_rule__ParserRule__Group_2__35034); 
+            match(input,21,FollowSets000.FOLLOW_21_in_rule__ParserRule__Group_2__35034); 
              after(grammarAccess.getParserRuleAccess().getRightParenthesisKeyword_2_3()); 
 
             }
@@ -6550,7 +6550,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2440:1: ( rule__ParserRule__HiddenTokensAssignment_2_2_0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2440:2: rule__ParserRule__HiddenTokensAssignment_2_2_0
             {
-            pushFollow(FOLLOW_rule__ParserRule__HiddenTokensAssignment_2_2_0_in_rule__ParserRule__Group_2_2__05077);
+            pushFollow(FollowSets000.FOLLOW_rule__ParserRule__HiddenTokensAssignment_2_2_0_in_rule__ParserRule__Group_2_2__05077);
             rule__ParserRule__HiddenTokensAssignment_2_2_0();
             _fsp--;
 
@@ -6561,7 +6561,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__ParserRule__Group_2_2__1_in_rule__ParserRule__Group_2_2__05086);
+            pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2_2__1_in_rule__ParserRule__Group_2_2__05086);
             rule__ParserRule__Group_2_2__1();
             _fsp--;
 
@@ -6612,7 +6612,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	case 1 :
             	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2458:2: rule__ParserRule__Group_2_2_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__ParserRule__Group_2_2_1__0_in_rule__ParserRule__Group_2_2__15114);
+            	    pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2_2_1__0_in_rule__ParserRule__Group_2_2__15114);
             	    rule__ParserRule__Group_2_2_1__0();
             	    _fsp--;
 
@@ -6661,12 +6661,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2478:1: ','
             {
              before(grammarAccess.getParserRuleAccess().getCommaKeyword_2_2_1_0()); 
-            match(input,19,FOLLOW_19_in_rule__ParserRule__Group_2_2_1__05154); 
+            match(input,19,FollowSets000.FOLLOW_19_in_rule__ParserRule__Group_2_2_1__05154); 
              after(grammarAccess.getParserRuleAccess().getCommaKeyword_2_2_1_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__ParserRule__Group_2_2_1__1_in_rule__ParserRule__Group_2_2_1__05164);
+            pushFollow(FollowSets000.FOLLOW_rule__ParserRule__Group_2_2_1__1_in_rule__ParserRule__Group_2_2_1__05164);
             rule__ParserRule__Group_2_2_1__1();
             _fsp--;
 
@@ -6705,7 +6705,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2499:1: ( rule__ParserRule__HiddenTokensAssignment_2_2_1_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2499:2: rule__ParserRule__HiddenTokensAssignment_2_2_1_1
             {
-            pushFollow(FOLLOW_rule__ParserRule__HiddenTokensAssignment_2_2_1_1_in_rule__ParserRule__Group_2_2_1__15192);
+            pushFollow(FollowSets000.FOLLOW_rule__ParserRule__HiddenTokensAssignment_2_2_1_1_in_rule__ParserRule__Group_2_2_1__15192);
             rule__ParserRule__HiddenTokensAssignment_2_2_1_1();
             _fsp--;
 
@@ -6763,7 +6763,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2520:2: rule__TypeRef__Group_0__0
                     {
-                    pushFollow(FOLLOW_rule__TypeRef__Group_0__0_in_rule__TypeRef__Group__05230);
+                    pushFollow(FollowSets000.FOLLOW_rule__TypeRef__Group_0__0_in_rule__TypeRef__Group__05230);
                     rule__TypeRef__Group_0__0();
                     _fsp--;
 
@@ -6777,7 +6777,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__TypeRef__Group__1_in_rule__TypeRef__Group__05240);
+            pushFollow(FollowSets000.FOLLOW_rule__TypeRef__Group__1_in_rule__TypeRef__Group__05240);
             rule__TypeRef__Group__1();
             _fsp--;
 
@@ -6816,7 +6816,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2538:1: ( rule__TypeRef__ClassifierAssignment_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2538:2: rule__TypeRef__ClassifierAssignment_1
             {
-            pushFollow(FOLLOW_rule__TypeRef__ClassifierAssignment_1_in_rule__TypeRef__Group__15268);
+            pushFollow(FollowSets000.FOLLOW_rule__TypeRef__ClassifierAssignment_1_in_rule__TypeRef__Group__15268);
             rule__TypeRef__ClassifierAssignment_1();
             _fsp--;
 
@@ -6862,7 +6862,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2559:1: ( rule__TypeRef__MetamodelAssignment_0_0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2559:2: rule__TypeRef__MetamodelAssignment_0_0
             {
-            pushFollow(FOLLOW_rule__TypeRef__MetamodelAssignment_0_0_in_rule__TypeRef__Group_0__05306);
+            pushFollow(FollowSets000.FOLLOW_rule__TypeRef__MetamodelAssignment_0_0_in_rule__TypeRef__Group_0__05306);
             rule__TypeRef__MetamodelAssignment_0_0();
             _fsp--;
 
@@ -6873,7 +6873,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__TypeRef__Group_0__1_in_rule__TypeRef__Group_0__05315);
+            pushFollow(FollowSets000.FOLLOW_rule__TypeRef__Group_0__1_in_rule__TypeRef__Group_0__05315);
             rule__TypeRef__Group_0__1();
             _fsp--;
 
@@ -6909,7 +6909,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2576:1: '::'
             {
              before(grammarAccess.getTypeRefAccess().getColonColonKeyword_0_1()); 
-            match(input,29,FOLLOW_29_in_rule__TypeRef__Group_0__15344); 
+            match(input,29,FollowSets000.FOLLOW_29_in_rule__TypeRef__Group_0__15344); 
              after(grammarAccess.getTypeRefAccess().getColonColonKeyword_0_1()); 
 
             }
@@ -6946,7 +6946,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2599:1: ruleGroup
             {
              before(grammarAccess.getAlternativesAccess().getGroupParserRuleCall_0()); 
-            pushFollow(FOLLOW_ruleGroup_in_rule__Alternatives__Group__05383);
+            pushFollow(FollowSets000.FOLLOW_ruleGroup_in_rule__Alternatives__Group__05383);
             ruleGroup();
             _fsp--;
 
@@ -6954,7 +6954,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__Alternatives__Group__1_in_rule__Alternatives__Group__05391);
+            pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group__1_in_rule__Alternatives__Group__05391);
             rule__Alternatives__Group__1();
             _fsp--;
 
@@ -7001,7 +7001,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2618:2: rule__Alternatives__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__Alternatives__Group_1__0_in_rule__Alternatives__Group__15419);
+                    pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group_1__0_in_rule__Alternatives__Group__15419);
                     rule__Alternatives__Group_1__0();
                     _fsp--;
 
@@ -7056,7 +7056,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__Alternatives__Group_1__1_in_rule__Alternatives__Group_1__05468);
+            pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group_1__1_in_rule__Alternatives__Group_1__05468);
             rule__Alternatives__Group_1__1();
             _fsp--;
 
@@ -7098,7 +7098,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2660:1: ( rule__Alternatives__Group_1_1__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2660:2: rule__Alternatives__Group_1_1__0
             {
-            pushFollow(FOLLOW_rule__Alternatives__Group_1_1__0_in_rule__Alternatives__Group_1__15498);
+            pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group_1_1__0_in_rule__Alternatives__Group_1__15498);
             rule__Alternatives__Group_1_1__0();
             _fsp--;
 
@@ -7128,7 +7128,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	case 1 :
             	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2665:2: rule__Alternatives__Group_1_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__Alternatives__Group_1_1__0_in_rule__Alternatives__Group_1__15510);
+            	    pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group_1_1__0_in_rule__Alternatives__Group_1__15510);
             	    rule__Alternatives__Group_1_1__0();
             	    _fsp--;
 
@@ -7180,12 +7180,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2686:1: '|'
             {
              before(grammarAccess.getAlternativesAccess().getVerticalLineKeyword_1_1_0()); 
-            match(input,30,FOLLOW_30_in_rule__Alternatives__Group_1_1__05552); 
+            match(input,30,FollowSets000.FOLLOW_30_in_rule__Alternatives__Group_1_1__05552); 
              after(grammarAccess.getAlternativesAccess().getVerticalLineKeyword_1_1_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__Alternatives__Group_1_1__1_in_rule__Alternatives__Group_1_1__05562);
+            pushFollow(FollowSets000.FOLLOW_rule__Alternatives__Group_1_1__1_in_rule__Alternatives__Group_1_1__05562);
             rule__Alternatives__Group_1_1__1();
             _fsp--;
 
@@ -7224,7 +7224,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2707:1: ( rule__Alternatives__GroupsAssignment_1_1_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2707:2: rule__Alternatives__GroupsAssignment_1_1_1
             {
-            pushFollow(FOLLOW_rule__Alternatives__GroupsAssignment_1_1_1_in_rule__Alternatives__Group_1_1__15590);
+            pushFollow(FollowSets000.FOLLOW_rule__Alternatives__GroupsAssignment_1_1_1_in_rule__Alternatives__Group_1_1__15590);
             rule__Alternatives__GroupsAssignment_1_1_1();
             _fsp--;
 
@@ -7267,7 +7267,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2727:1: ruleAbstractToken
             {
              before(grammarAccess.getGroupAccess().getAbstractTokenParserRuleCall_0()); 
-            pushFollow(FOLLOW_ruleAbstractToken_in_rule__Group__Group__05628);
+            pushFollow(FollowSets000.FOLLOW_ruleAbstractToken_in_rule__Group__Group__05628);
             ruleAbstractToken();
             _fsp--;
 
@@ -7275,7 +7275,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__Group__Group__1_in_rule__Group__Group__05636);
+            pushFollow(FollowSets000.FOLLOW_rule__Group__Group__1_in_rule__Group__Group__05636);
             rule__Group__Group__1();
             _fsp--;
 
@@ -7322,7 +7322,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2746:2: rule__Group__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__Group__Group_1__0_in_rule__Group__Group__15664);
+                    pushFollow(FollowSets000.FOLLOW_rule__Group__Group_1__0_in_rule__Group__Group__15664);
                     rule__Group__Group_1__0();
                     _fsp--;
 
@@ -7377,7 +7377,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__Group__Group_1__1_in_rule__Group__Group_1__05713);
+            pushFollow(FollowSets000.FOLLOW_rule__Group__Group_1__1_in_rule__Group__Group_1__05713);
             rule__Group__Group_1__1();
             _fsp--;
 
@@ -7419,7 +7419,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2788:1: ( rule__Group__TokensAssignment_1_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2788:2: rule__Group__TokensAssignment_1_1
             {
-            pushFollow(FOLLOW_rule__Group__TokensAssignment_1_1_in_rule__Group__Group_1__15743);
+            pushFollow(FollowSets000.FOLLOW_rule__Group__TokensAssignment_1_1_in_rule__Group__Group_1__15743);
             rule__Group__TokensAssignment_1_1();
             _fsp--;
 
@@ -7449,7 +7449,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	case 1 :
             	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2793:2: rule__Group__TokensAssignment_1_1
             	    {
-            	    pushFollow(FOLLOW_rule__Group__TokensAssignment_1_1_in_rule__Group__Group_1__15755);
+            	    pushFollow(FollowSets000.FOLLOW_rule__Group__TokensAssignment_1_1_in_rule__Group__Group_1__15755);
             	    rule__Group__TokensAssignment_1_1();
             	    _fsp--;
 
@@ -7504,7 +7504,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2815:1: ( rule__AbstractTokenWithCardinality__Alternatives_0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2815:2: rule__AbstractTokenWithCardinality__Alternatives_0
             {
-            pushFollow(FOLLOW_rule__AbstractTokenWithCardinality__Alternatives_0_in_rule__AbstractTokenWithCardinality__Group__05796);
+            pushFollow(FollowSets000.FOLLOW_rule__AbstractTokenWithCardinality__Alternatives_0_in_rule__AbstractTokenWithCardinality__Group__05796);
             rule__AbstractTokenWithCardinality__Alternatives_0();
             _fsp--;
 
@@ -7515,7 +7515,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__AbstractTokenWithCardinality__Group__1_in_rule__AbstractTokenWithCardinality__Group__05805);
+            pushFollow(FollowSets000.FOLLOW_rule__AbstractTokenWithCardinality__Group__1_in_rule__AbstractTokenWithCardinality__Group__05805);
             rule__AbstractTokenWithCardinality__Group__1();
             _fsp--;
 
@@ -7562,7 +7562,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2833:2: rule__AbstractTokenWithCardinality__CardinalityAssignment_1
                     {
-                    pushFollow(FOLLOW_rule__AbstractTokenWithCardinality__CardinalityAssignment_1_in_rule__AbstractTokenWithCardinality__Group__15833);
+                    pushFollow(FollowSets000.FOLLOW_rule__AbstractTokenWithCardinality__CardinalityAssignment_1_in_rule__AbstractTokenWithCardinality__Group__15833);
                     rule__AbstractTokenWithCardinality__CardinalityAssignment_1();
                     _fsp--;
 
@@ -7608,12 +7608,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2853:1: '{'
             {
              before(grammarAccess.getActionAccess().getLeftCurlyBracketKeyword_0()); 
-            match(input,31,FOLLOW_31_in_rule__Action__Group__05873); 
+            match(input,31,FollowSets000.FOLLOW_31_in_rule__Action__Group__05873); 
              after(grammarAccess.getActionAccess().getLeftCurlyBracketKeyword_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__Action__Group__1_in_rule__Action__Group__05883);
+            pushFollow(FollowSets000.FOLLOW_rule__Action__Group__1_in_rule__Action__Group__05883);
             rule__Action__Group__1();
             _fsp--;
 
@@ -7652,7 +7652,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2874:1: ( rule__Action__TypeAssignment_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2874:2: rule__Action__TypeAssignment_1
             {
-            pushFollow(FOLLOW_rule__Action__TypeAssignment_1_in_rule__Action__Group__15911);
+            pushFollow(FollowSets000.FOLLOW_rule__Action__TypeAssignment_1_in_rule__Action__Group__15911);
             rule__Action__TypeAssignment_1();
             _fsp--;
 
@@ -7663,7 +7663,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__Action__Group__2_in_rule__Action__Group__15920);
+            pushFollow(FollowSets000.FOLLOW_rule__Action__Group__2_in_rule__Action__Group__15920);
             rule__Action__Group__2();
             _fsp--;
 
@@ -7710,7 +7710,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2892:2: rule__Action__Group_2__0
                     {
-                    pushFollow(FOLLOW_rule__Action__Group_2__0_in_rule__Action__Group__25948);
+                    pushFollow(FollowSets000.FOLLOW_rule__Action__Group_2__0_in_rule__Action__Group__25948);
                     rule__Action__Group_2__0();
                     _fsp--;
 
@@ -7724,7 +7724,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__Action__Group__3_in_rule__Action__Group__25958);
+            pushFollow(FollowSets000.FOLLOW_rule__Action__Group__3_in_rule__Action__Group__25958);
             rule__Action__Group__3();
             _fsp--;
 
@@ -7760,7 +7760,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2909:1: '}'
             {
              before(grammarAccess.getActionAccess().getRightCurlyBracketKeyword_3()); 
-            match(input,32,FOLLOW_32_in_rule__Action__Group__35987); 
+            match(input,32,FollowSets000.FOLLOW_32_in_rule__Action__Group__35987); 
              after(grammarAccess.getActionAccess().getRightCurlyBracketKeyword_3()); 
 
             }
@@ -7797,12 +7797,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2936:1: '.'
             {
              before(grammarAccess.getActionAccess().getFullStopKeyword_2_0()); 
-            match(input,22,FOLLOW_22_in_rule__Action__Group_2__06031); 
+            match(input,22,FollowSets000.FOLLOW_22_in_rule__Action__Group_2__06031); 
              after(grammarAccess.getActionAccess().getFullStopKeyword_2_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__Action__Group_2__1_in_rule__Action__Group_2__06041);
+            pushFollow(FollowSets000.FOLLOW_rule__Action__Group_2__1_in_rule__Action__Group_2__06041);
             rule__Action__Group_2__1();
             _fsp--;
 
@@ -7841,7 +7841,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2957:1: ( rule__Action__FeatureAssignment_2_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2957:2: rule__Action__FeatureAssignment_2_1
             {
-            pushFollow(FOLLOW_rule__Action__FeatureAssignment_2_1_in_rule__Action__Group_2__16069);
+            pushFollow(FollowSets000.FOLLOW_rule__Action__FeatureAssignment_2_1_in_rule__Action__Group_2__16069);
             rule__Action__FeatureAssignment_2_1();
             _fsp--;
 
@@ -7852,7 +7852,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__Action__Group_2__2_in_rule__Action__Group_2__16078);
+            pushFollow(FollowSets000.FOLLOW_rule__Action__Group_2__2_in_rule__Action__Group_2__16078);
             rule__Action__Group_2__2();
             _fsp--;
 
@@ -7891,7 +7891,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2975:1: ( rule__Action__OperatorAssignment_2_2 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2975:2: rule__Action__OperatorAssignment_2_2
             {
-            pushFollow(FOLLOW_rule__Action__OperatorAssignment_2_2_in_rule__Action__Group_2__26106);
+            pushFollow(FollowSets000.FOLLOW_rule__Action__OperatorAssignment_2_2_in_rule__Action__Group_2__26106);
             rule__Action__OperatorAssignment_2_2();
             _fsp--;
 
@@ -7902,7 +7902,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__Action__Group_2__3_in_rule__Action__Group_2__26115);
+            pushFollow(FollowSets000.FOLLOW_rule__Action__Group_2__3_in_rule__Action__Group_2__26115);
             rule__Action__Group_2__3();
             _fsp--;
 
@@ -7938,7 +7938,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:2992:1: 'current'
             {
              before(grammarAccess.getActionAccess().getCurrentKeyword_2_3()); 
-            match(input,33,FOLLOW_33_in_rule__Action__Group_2__36144); 
+            match(input,33,FollowSets000.FOLLOW_33_in_rule__Action__Group_2__36144); 
              after(grammarAccess.getActionAccess().getCurrentKeyword_2_3()); 
 
             }
@@ -7978,7 +7978,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3020:1: ( rule__Assignment__FeatureAssignment_0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3020:2: rule__Assignment__FeatureAssignment_0
             {
-            pushFollow(FOLLOW_rule__Assignment__FeatureAssignment_0_in_rule__Assignment__Group__06187);
+            pushFollow(FollowSets000.FOLLOW_rule__Assignment__FeatureAssignment_0_in_rule__Assignment__Group__06187);
             rule__Assignment__FeatureAssignment_0();
             _fsp--;
 
@@ -7989,7 +7989,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__Assignment__Group__1_in_rule__Assignment__Group__06196);
+            pushFollow(FollowSets000.FOLLOW_rule__Assignment__Group__1_in_rule__Assignment__Group__06196);
             rule__Assignment__Group__1();
             _fsp--;
 
@@ -8028,7 +8028,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3038:1: ( rule__Assignment__OperatorAssignment_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3038:2: rule__Assignment__OperatorAssignment_1
             {
-            pushFollow(FOLLOW_rule__Assignment__OperatorAssignment_1_in_rule__Assignment__Group__16224);
+            pushFollow(FollowSets000.FOLLOW_rule__Assignment__OperatorAssignment_1_in_rule__Assignment__Group__16224);
             rule__Assignment__OperatorAssignment_1();
             _fsp--;
 
@@ -8039,7 +8039,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__Assignment__Group__2_in_rule__Assignment__Group__16233);
+            pushFollow(FollowSets000.FOLLOW_rule__Assignment__Group__2_in_rule__Assignment__Group__16233);
             rule__Assignment__Group__2();
             _fsp--;
 
@@ -8078,7 +8078,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3056:1: ( rule__Assignment__TerminalAssignment_2 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3056:2: rule__Assignment__TerminalAssignment_2
             {
-            pushFollow(FOLLOW_rule__Assignment__TerminalAssignment_2_in_rule__Assignment__Group__26261);
+            pushFollow(FollowSets000.FOLLOW_rule__Assignment__TerminalAssignment_2_in_rule__Assignment__Group__26261);
             rule__Assignment__TerminalAssignment_2();
             _fsp--;
 
@@ -8121,12 +8121,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3078:1: '('
             {
              before(grammarAccess.getParenthesizedAssignableElementAccess().getLeftParenthesisKeyword_0()); 
-            match(input,20,FOLLOW_20_in_rule__ParenthesizedAssignableElement__Group__06302); 
+            match(input,20,FollowSets000.FOLLOW_20_in_rule__ParenthesizedAssignableElement__Group__06302); 
              after(grammarAccess.getParenthesizedAssignableElementAccess().getLeftParenthesisKeyword_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__ParenthesizedAssignableElement__Group__1_in_rule__ParenthesizedAssignableElement__Group__06312);
+            pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedAssignableElement__Group__1_in_rule__ParenthesizedAssignableElement__Group__06312);
             rule__ParenthesizedAssignableElement__Group__1();
             _fsp--;
 
@@ -8162,7 +8162,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3098:1: ruleAssignableAlternatives
             {
              before(grammarAccess.getParenthesizedAssignableElementAccess().getAssignableAlternativesParserRuleCall_1()); 
-            pushFollow(FOLLOW_ruleAssignableAlternatives_in_rule__ParenthesizedAssignableElement__Group__16340);
+            pushFollow(FollowSets000.FOLLOW_ruleAssignableAlternatives_in_rule__ParenthesizedAssignableElement__Group__16340);
             ruleAssignableAlternatives();
             _fsp--;
 
@@ -8170,7 +8170,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__ParenthesizedAssignableElement__Group__2_in_rule__ParenthesizedAssignableElement__Group__16348);
+            pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedAssignableElement__Group__2_in_rule__ParenthesizedAssignableElement__Group__16348);
             rule__ParenthesizedAssignableElement__Group__2();
             _fsp--;
 
@@ -8206,7 +8206,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3116:1: ')'
             {
              before(grammarAccess.getParenthesizedAssignableElementAccess().getRightParenthesisKeyword_2()); 
-            match(input,21,FOLLOW_21_in_rule__ParenthesizedAssignableElement__Group__26377); 
+            match(input,21,FollowSets000.FOLLOW_21_in_rule__ParenthesizedAssignableElement__Group__26377); 
              after(grammarAccess.getParenthesizedAssignableElementAccess().getRightParenthesisKeyword_2()); 
 
             }
@@ -8243,7 +8243,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3141:1: ruleAssignableTerminal
             {
              before(grammarAccess.getAssignableAlternativesAccess().getAssignableTerminalParserRuleCall_0()); 
-            pushFollow(FOLLOW_ruleAssignableTerminal_in_rule__AssignableAlternatives__Group__06418);
+            pushFollow(FollowSets000.FOLLOW_ruleAssignableTerminal_in_rule__AssignableAlternatives__Group__06418);
             ruleAssignableTerminal();
             _fsp--;
 
@@ -8251,7 +8251,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__AssignableAlternatives__Group__1_in_rule__AssignableAlternatives__Group__06426);
+            pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group__1_in_rule__AssignableAlternatives__Group__06426);
             rule__AssignableAlternatives__Group__1();
             _fsp--;
 
@@ -8298,7 +8298,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3160:2: rule__AssignableAlternatives__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__AssignableAlternatives__Group_1__0_in_rule__AssignableAlternatives__Group__16454);
+                    pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group_1__0_in_rule__AssignableAlternatives__Group__16454);
                     rule__AssignableAlternatives__Group_1__0();
                     _fsp--;
 
@@ -8353,7 +8353,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__AssignableAlternatives__Group_1__1_in_rule__AssignableAlternatives__Group_1__06503);
+            pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group_1__1_in_rule__AssignableAlternatives__Group_1__06503);
             rule__AssignableAlternatives__Group_1__1();
             _fsp--;
 
@@ -8395,7 +8395,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3202:1: ( rule__AssignableAlternatives__Group_1_1__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3202:2: rule__AssignableAlternatives__Group_1_1__0
             {
-            pushFollow(FOLLOW_rule__AssignableAlternatives__Group_1_1__0_in_rule__AssignableAlternatives__Group_1__16533);
+            pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group_1_1__0_in_rule__AssignableAlternatives__Group_1__16533);
             rule__AssignableAlternatives__Group_1_1__0();
             _fsp--;
 
@@ -8425,7 +8425,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	case 1 :
             	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3207:2: rule__AssignableAlternatives__Group_1_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__AssignableAlternatives__Group_1_1__0_in_rule__AssignableAlternatives__Group_1__16545);
+            	    pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group_1_1__0_in_rule__AssignableAlternatives__Group_1__16545);
             	    rule__AssignableAlternatives__Group_1_1__0();
             	    _fsp--;
 
@@ -8477,12 +8477,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3228:1: '|'
             {
              before(grammarAccess.getAssignableAlternativesAccess().getVerticalLineKeyword_1_1_0()); 
-            match(input,30,FOLLOW_30_in_rule__AssignableAlternatives__Group_1_1__06587); 
+            match(input,30,FollowSets000.FOLLOW_30_in_rule__AssignableAlternatives__Group_1_1__06587); 
              after(grammarAccess.getAssignableAlternativesAccess().getVerticalLineKeyword_1_1_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__AssignableAlternatives__Group_1_1__1_in_rule__AssignableAlternatives__Group_1_1__06597);
+            pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__Group_1_1__1_in_rule__AssignableAlternatives__Group_1_1__06597);
             rule__AssignableAlternatives__Group_1_1__1();
             _fsp--;
 
@@ -8521,7 +8521,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3249:1: ( rule__AssignableAlternatives__GroupsAssignment_1_1_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3249:2: rule__AssignableAlternatives__GroupsAssignment_1_1_1
             {
-            pushFollow(FOLLOW_rule__AssignableAlternatives__GroupsAssignment_1_1_1_in_rule__AssignableAlternatives__Group_1_1__16625);
+            pushFollow(FollowSets000.FOLLOW_rule__AssignableAlternatives__GroupsAssignment_1_1_1_in_rule__AssignableAlternatives__Group_1_1__16625);
             rule__AssignableAlternatives__GroupsAssignment_1_1_1();
             _fsp--;
 
@@ -8564,12 +8564,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3269:1: '['
             {
              before(grammarAccess.getCrossReferenceAccess().getLeftSquareBracketKeyword_0()); 
-            match(input,34,FOLLOW_34_in_rule__CrossReference__Group__06664); 
+            match(input,34,FollowSets000.FOLLOW_34_in_rule__CrossReference__Group__06664); 
              after(grammarAccess.getCrossReferenceAccess().getLeftSquareBracketKeyword_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__CrossReference__Group__1_in_rule__CrossReference__Group__06674);
+            pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group__1_in_rule__CrossReference__Group__06674);
             rule__CrossReference__Group__1();
             _fsp--;
 
@@ -8608,7 +8608,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3290:1: ( rule__CrossReference__TypeAssignment_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3290:2: rule__CrossReference__TypeAssignment_1
             {
-            pushFollow(FOLLOW_rule__CrossReference__TypeAssignment_1_in_rule__CrossReference__Group__16702);
+            pushFollow(FollowSets000.FOLLOW_rule__CrossReference__TypeAssignment_1_in_rule__CrossReference__Group__16702);
             rule__CrossReference__TypeAssignment_1();
             _fsp--;
 
@@ -8619,7 +8619,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__CrossReference__Group__2_in_rule__CrossReference__Group__16711);
+            pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group__2_in_rule__CrossReference__Group__16711);
             rule__CrossReference__Group__2();
             _fsp--;
 
@@ -8666,7 +8666,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3308:2: rule__CrossReference__Group_2__0
                     {
-                    pushFollow(FOLLOW_rule__CrossReference__Group_2__0_in_rule__CrossReference__Group__26739);
+                    pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group_2__0_in_rule__CrossReference__Group__26739);
                     rule__CrossReference__Group_2__0();
                     _fsp--;
 
@@ -8680,7 +8680,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__CrossReference__Group__3_in_rule__CrossReference__Group__26749);
+            pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group__3_in_rule__CrossReference__Group__26749);
             rule__CrossReference__Group__3();
             _fsp--;
 
@@ -8716,7 +8716,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3325:1: ']'
             {
              before(grammarAccess.getCrossReferenceAccess().getRightSquareBracketKeyword_3()); 
-            match(input,35,FOLLOW_35_in_rule__CrossReference__Group__36778); 
+            match(input,35,FollowSets000.FOLLOW_35_in_rule__CrossReference__Group__36778); 
              after(grammarAccess.getCrossReferenceAccess().getRightSquareBracketKeyword_3()); 
 
             }
@@ -8753,12 +8753,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3352:1: '|'
             {
              before(grammarAccess.getCrossReferenceAccess().getVerticalLineKeyword_2_0()); 
-            match(input,30,FOLLOW_30_in_rule__CrossReference__Group_2__06822); 
+            match(input,30,FollowSets000.FOLLOW_30_in_rule__CrossReference__Group_2__06822); 
              after(grammarAccess.getCrossReferenceAccess().getVerticalLineKeyword_2_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__CrossReference__Group_2__1_in_rule__CrossReference__Group_2__06832);
+            pushFollow(FollowSets000.FOLLOW_rule__CrossReference__Group_2__1_in_rule__CrossReference__Group_2__06832);
             rule__CrossReference__Group_2__1();
             _fsp--;
 
@@ -8797,7 +8797,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3373:1: ( rule__CrossReference__TerminalAssignment_2_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3373:2: rule__CrossReference__TerminalAssignment_2_1
             {
-            pushFollow(FOLLOW_rule__CrossReference__TerminalAssignment_2_1_in_rule__CrossReference__Group_2__16860);
+            pushFollow(FollowSets000.FOLLOW_rule__CrossReference__TerminalAssignment_2_1_in_rule__CrossReference__Group_2__16860);
             rule__CrossReference__TerminalAssignment_2_1();
             _fsp--;
 
@@ -8840,12 +8840,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3393:1: '('
             {
              before(grammarAccess.getParenthesizedCrossReferenceableElementAccess().getLeftParenthesisKeyword_0()); 
-            match(input,20,FOLLOW_20_in_rule__ParenthesizedCrossReferenceableElement__Group__06899); 
+            match(input,20,FollowSets000.FOLLOW_20_in_rule__ParenthesizedCrossReferenceableElement__Group__06899); 
              after(grammarAccess.getParenthesizedCrossReferenceableElementAccess().getLeftParenthesisKeyword_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__ParenthesizedCrossReferenceableElement__Group__1_in_rule__ParenthesizedCrossReferenceableElement__Group__06909);
+            pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedCrossReferenceableElement__Group__1_in_rule__ParenthesizedCrossReferenceableElement__Group__06909);
             rule__ParenthesizedCrossReferenceableElement__Group__1();
             _fsp--;
 
@@ -8881,7 +8881,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3413:1: ruleCrossReferenceableAlternatives
             {
              before(grammarAccess.getParenthesizedCrossReferenceableElementAccess().getCrossReferenceableAlternativesParserRuleCall_1()); 
-            pushFollow(FOLLOW_ruleCrossReferenceableAlternatives_in_rule__ParenthesizedCrossReferenceableElement__Group__16937);
+            pushFollow(FollowSets000.FOLLOW_ruleCrossReferenceableAlternatives_in_rule__ParenthesizedCrossReferenceableElement__Group__16937);
             ruleCrossReferenceableAlternatives();
             _fsp--;
 
@@ -8889,7 +8889,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__ParenthesizedCrossReferenceableElement__Group__2_in_rule__ParenthesizedCrossReferenceableElement__Group__16945);
+            pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedCrossReferenceableElement__Group__2_in_rule__ParenthesizedCrossReferenceableElement__Group__16945);
             rule__ParenthesizedCrossReferenceableElement__Group__2();
             _fsp--;
 
@@ -8925,7 +8925,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3431:1: ')'
             {
              before(grammarAccess.getParenthesizedCrossReferenceableElementAccess().getRightParenthesisKeyword_2()); 
-            match(input,21,FOLLOW_21_in_rule__ParenthesizedCrossReferenceableElement__Group__26974); 
+            match(input,21,FollowSets000.FOLLOW_21_in_rule__ParenthesizedCrossReferenceableElement__Group__26974); 
              after(grammarAccess.getParenthesizedCrossReferenceableElementAccess().getRightParenthesisKeyword_2()); 
 
             }
@@ -8962,7 +8962,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3456:1: ruleCrossReferenceableTerminal
             {
              before(grammarAccess.getCrossReferenceableAlternativesAccess().getCrossReferenceableTerminalParserRuleCall_0()); 
-            pushFollow(FOLLOW_ruleCrossReferenceableTerminal_in_rule__CrossReferenceableAlternatives__Group__07015);
+            pushFollow(FollowSets000.FOLLOW_ruleCrossReferenceableTerminal_in_rule__CrossReferenceableAlternatives__Group__07015);
             ruleCrossReferenceableTerminal();
             _fsp--;
 
@@ -8970,7 +8970,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__CrossReferenceableAlternatives__Group__1_in_rule__CrossReferenceableAlternatives__Group__07023);
+            pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableAlternatives__Group__1_in_rule__CrossReferenceableAlternatives__Group__07023);
             rule__CrossReferenceableAlternatives__Group__1();
             _fsp--;
 
@@ -9017,7 +9017,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3475:2: rule__CrossReferenceableAlternatives__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__CrossReferenceableAlternatives__Group_1__0_in_rule__CrossReferenceableAlternatives__Group__17051);
+                    pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableAlternatives__Group_1__0_in_rule__CrossReferenceableAlternatives__Group__17051);
                     rule__CrossReferenceableAlternatives__Group_1__0();
                     _fsp--;
 
@@ -9072,7 +9072,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__CrossReferenceableAlternatives__Group_1__1_in_rule__CrossReferenceableAlternatives__Group_1__07100);
+            pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableAlternatives__Group_1__1_in_rule__CrossReferenceableAlternatives__Group_1__07100);
             rule__CrossReferenceableAlternatives__Group_1__1();
             _fsp--;
 
@@ -9114,7 +9114,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3517:1: ( rule__CrossReferenceableAlternatives__Group_1_1__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3517:2: rule__CrossReferenceableAlternatives__Group_1_1__0
             {
-            pushFollow(FOLLOW_rule__CrossReferenceableAlternatives__Group_1_1__0_in_rule__CrossReferenceableAlternatives__Group_1__17130);
+            pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableAlternatives__Group_1_1__0_in_rule__CrossReferenceableAlternatives__Group_1__17130);
             rule__CrossReferenceableAlternatives__Group_1_1__0();
             _fsp--;
 
@@ -9144,7 +9144,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	case 1 :
             	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3522:2: rule__CrossReferenceableAlternatives__Group_1_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__CrossReferenceableAlternatives__Group_1_1__0_in_rule__CrossReferenceableAlternatives__Group_1__17142);
+            	    pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableAlternatives__Group_1_1__0_in_rule__CrossReferenceableAlternatives__Group_1__17142);
             	    rule__CrossReferenceableAlternatives__Group_1_1__0();
             	    _fsp--;
 
@@ -9196,12 +9196,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3543:1: '|'
             {
              before(grammarAccess.getCrossReferenceableAlternativesAccess().getVerticalLineKeyword_1_1_0()); 
-            match(input,30,FOLLOW_30_in_rule__CrossReferenceableAlternatives__Group_1_1__07184); 
+            match(input,30,FollowSets000.FOLLOW_30_in_rule__CrossReferenceableAlternatives__Group_1_1__07184); 
              after(grammarAccess.getCrossReferenceableAlternativesAccess().getVerticalLineKeyword_1_1_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__CrossReferenceableAlternatives__Group_1_1__1_in_rule__CrossReferenceableAlternatives__Group_1_1__07194);
+            pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableAlternatives__Group_1_1__1_in_rule__CrossReferenceableAlternatives__Group_1_1__07194);
             rule__CrossReferenceableAlternatives__Group_1_1__1();
             _fsp--;
 
@@ -9240,7 +9240,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3564:1: ( rule__CrossReferenceableAlternatives__GroupsAssignment_1_1_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3564:2: rule__CrossReferenceableAlternatives__GroupsAssignment_1_1_1
             {
-            pushFollow(FOLLOW_rule__CrossReferenceableAlternatives__GroupsAssignment_1_1_1_in_rule__CrossReferenceableAlternatives__Group_1_1__17222);
+            pushFollow(FollowSets000.FOLLOW_rule__CrossReferenceableAlternatives__GroupsAssignment_1_1_1_in_rule__CrossReferenceableAlternatives__Group_1_1__17222);
             rule__CrossReferenceableAlternatives__GroupsAssignment_1_1_1();
             _fsp--;
 
@@ -9283,12 +9283,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3584:1: '('
             {
              before(grammarAccess.getParenthesizedElementAccess().getLeftParenthesisKeyword_0()); 
-            match(input,20,FOLLOW_20_in_rule__ParenthesizedElement__Group__07261); 
+            match(input,20,FollowSets000.FOLLOW_20_in_rule__ParenthesizedElement__Group__07261); 
              after(grammarAccess.getParenthesizedElementAccess().getLeftParenthesisKeyword_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__ParenthesizedElement__Group__1_in_rule__ParenthesizedElement__Group__07271);
+            pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedElement__Group__1_in_rule__ParenthesizedElement__Group__07271);
             rule__ParenthesizedElement__Group__1();
             _fsp--;
 
@@ -9324,7 +9324,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3604:1: ruleAlternatives
             {
              before(grammarAccess.getParenthesizedElementAccess().getAlternativesParserRuleCall_1()); 
-            pushFollow(FOLLOW_ruleAlternatives_in_rule__ParenthesizedElement__Group__17299);
+            pushFollow(FollowSets000.FOLLOW_ruleAlternatives_in_rule__ParenthesizedElement__Group__17299);
             ruleAlternatives();
             _fsp--;
 
@@ -9332,7 +9332,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__ParenthesizedElement__Group__2_in_rule__ParenthesizedElement__Group__17307);
+            pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedElement__Group__2_in_rule__ParenthesizedElement__Group__17307);
             rule__ParenthesizedElement__Group__2();
             _fsp--;
 
@@ -9368,7 +9368,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3622:1: ')'
             {
              before(grammarAccess.getParenthesizedElementAccess().getRightParenthesisKeyword_2()); 
-            match(input,21,FOLLOW_21_in_rule__ParenthesizedElement__Group__27336); 
+            match(input,21,FollowSets000.FOLLOW_21_in_rule__ParenthesizedElement__Group__27336); 
              after(grammarAccess.getParenthesizedElementAccess().getRightParenthesisKeyword_2()); 
 
             }
@@ -9405,12 +9405,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3647:1: 'terminal'
             {
              before(grammarAccess.getTerminalRuleAccess().getTerminalKeyword_0()); 
-            match(input,36,FOLLOW_36_in_rule__TerminalRule__Group__07378); 
+            match(input,36,FollowSets000.FOLLOW_36_in_rule__TerminalRule__Group__07378); 
              after(grammarAccess.getTerminalRuleAccess().getTerminalKeyword_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__TerminalRule__Group__1_in_rule__TerminalRule__Group__07388);
+            pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__1_in_rule__TerminalRule__Group__07388);
             rule__TerminalRule__Group__1();
             _fsp--;
 
@@ -9449,7 +9449,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3668:1: ( rule__TerminalRule__NameAssignment_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3668:2: rule__TerminalRule__NameAssignment_1
             {
-            pushFollow(FOLLOW_rule__TerminalRule__NameAssignment_1_in_rule__TerminalRule__Group__17416);
+            pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__NameAssignment_1_in_rule__TerminalRule__Group__17416);
             rule__TerminalRule__NameAssignment_1();
             _fsp--;
 
@@ -9460,7 +9460,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__TerminalRule__Group__2_in_rule__TerminalRule__Group__17425);
+            pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__2_in_rule__TerminalRule__Group__17425);
             rule__TerminalRule__Group__2();
             _fsp--;
 
@@ -9507,7 +9507,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3686:2: rule__TerminalRule__Group_2__0
                     {
-                    pushFollow(FOLLOW_rule__TerminalRule__Group_2__0_in_rule__TerminalRule__Group__27453);
+                    pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group_2__0_in_rule__TerminalRule__Group__27453);
                     rule__TerminalRule__Group_2__0();
                     _fsp--;
 
@@ -9521,7 +9521,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__TerminalRule__Group__3_in_rule__TerminalRule__Group__27463);
+            pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__3_in_rule__TerminalRule__Group__27463);
             rule__TerminalRule__Group__3();
             _fsp--;
 
@@ -9557,12 +9557,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3703:1: ':'
             {
              before(grammarAccess.getTerminalRuleAccess().getColonKeyword_3()); 
-            match(input,26,FOLLOW_26_in_rule__TerminalRule__Group__37492); 
+            match(input,26,FollowSets000.FOLLOW_26_in_rule__TerminalRule__Group__37492); 
              after(grammarAccess.getTerminalRuleAccess().getColonKeyword_3()); 
 
             }
 
-            pushFollow(FOLLOW_rule__TerminalRule__Group__4_in_rule__TerminalRule__Group__37502);
+            pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__4_in_rule__TerminalRule__Group__37502);
             rule__TerminalRule__Group__4();
             _fsp--;
 
@@ -9601,7 +9601,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3724:1: ( rule__TerminalRule__AlternativesAssignment_4 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3724:2: rule__TerminalRule__AlternativesAssignment_4
             {
-            pushFollow(FOLLOW_rule__TerminalRule__AlternativesAssignment_4_in_rule__TerminalRule__Group__47530);
+            pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__AlternativesAssignment_4_in_rule__TerminalRule__Group__47530);
             rule__TerminalRule__AlternativesAssignment_4();
             _fsp--;
 
@@ -9612,7 +9612,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__TerminalRule__Group__5_in_rule__TerminalRule__Group__47539);
+            pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group__5_in_rule__TerminalRule__Group__47539);
             rule__TerminalRule__Group__5();
             _fsp--;
 
@@ -9648,7 +9648,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3741:1: ';'
             {
              before(grammarAccess.getTerminalRuleAccess().getSemicolonKeyword_5()); 
-            match(input,27,FOLLOW_27_in_rule__TerminalRule__Group__57568); 
+            match(input,27,FollowSets000.FOLLOW_27_in_rule__TerminalRule__Group__57568); 
              after(grammarAccess.getTerminalRuleAccess().getSemicolonKeyword_5()); 
 
             }
@@ -9685,12 +9685,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3772:1: 'returns'
             {
              before(grammarAccess.getTerminalRuleAccess().getReturnsKeyword_2_0()); 
-            match(input,28,FOLLOW_28_in_rule__TerminalRule__Group_2__07616); 
+            match(input,28,FollowSets000.FOLLOW_28_in_rule__TerminalRule__Group_2__07616); 
              after(grammarAccess.getTerminalRuleAccess().getReturnsKeyword_2_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__TerminalRule__Group_2__1_in_rule__TerminalRule__Group_2__07626);
+            pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__Group_2__1_in_rule__TerminalRule__Group_2__07626);
             rule__TerminalRule__Group_2__1();
             _fsp--;
 
@@ -9729,7 +9729,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3793:1: ( rule__TerminalRule__TypeAssignment_2_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3793:2: rule__TerminalRule__TypeAssignment_2_1
             {
-            pushFollow(FOLLOW_rule__TerminalRule__TypeAssignment_2_1_in_rule__TerminalRule__Group_2__17654);
+            pushFollow(FollowSets000.FOLLOW_rule__TerminalRule__TypeAssignment_2_1_in_rule__TerminalRule__Group_2__17654);
             rule__TerminalRule__TypeAssignment_2_1();
             _fsp--;
 
@@ -9772,7 +9772,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3813:1: ruleTerminalGroup
             {
              before(grammarAccess.getTerminalAlternativesAccess().getTerminalGroupParserRuleCall_0()); 
-            pushFollow(FOLLOW_ruleTerminalGroup_in_rule__TerminalAlternatives__Group__07692);
+            pushFollow(FollowSets000.FOLLOW_ruleTerminalGroup_in_rule__TerminalAlternatives__Group__07692);
             ruleTerminalGroup();
             _fsp--;
 
@@ -9780,7 +9780,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__TerminalAlternatives__Group__1_in_rule__TerminalAlternatives__Group__07700);
+            pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group__1_in_rule__TerminalAlternatives__Group__07700);
             rule__TerminalAlternatives__Group__1();
             _fsp--;
 
@@ -9827,7 +9827,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3832:2: rule__TerminalAlternatives__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__TerminalAlternatives__Group_1__0_in_rule__TerminalAlternatives__Group__17728);
+                    pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group_1__0_in_rule__TerminalAlternatives__Group__17728);
                     rule__TerminalAlternatives__Group_1__0();
                     _fsp--;
 
@@ -9882,7 +9882,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__TerminalAlternatives__Group_1__1_in_rule__TerminalAlternatives__Group_1__07777);
+            pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group_1__1_in_rule__TerminalAlternatives__Group_1__07777);
             rule__TerminalAlternatives__Group_1__1();
             _fsp--;
 
@@ -9924,7 +9924,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3874:1: ( rule__TerminalAlternatives__Group_1_1__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3874:2: rule__TerminalAlternatives__Group_1_1__0
             {
-            pushFollow(FOLLOW_rule__TerminalAlternatives__Group_1_1__0_in_rule__TerminalAlternatives__Group_1__17807);
+            pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group_1_1__0_in_rule__TerminalAlternatives__Group_1__17807);
             rule__TerminalAlternatives__Group_1_1__0();
             _fsp--;
 
@@ -9954,7 +9954,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	case 1 :
             	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3879:2: rule__TerminalAlternatives__Group_1_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__TerminalAlternatives__Group_1_1__0_in_rule__TerminalAlternatives__Group_1__17819);
+            	    pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group_1_1__0_in_rule__TerminalAlternatives__Group_1__17819);
             	    rule__TerminalAlternatives__Group_1_1__0();
             	    _fsp--;
 
@@ -10006,12 +10006,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3900:1: '|'
             {
              before(grammarAccess.getTerminalAlternativesAccess().getVerticalLineKeyword_1_1_0()); 
-            match(input,30,FOLLOW_30_in_rule__TerminalAlternatives__Group_1_1__07861); 
+            match(input,30,FollowSets000.FOLLOW_30_in_rule__TerminalAlternatives__Group_1_1__07861); 
              after(grammarAccess.getTerminalAlternativesAccess().getVerticalLineKeyword_1_1_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__TerminalAlternatives__Group_1_1__1_in_rule__TerminalAlternatives__Group_1_1__07871);
+            pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__Group_1_1__1_in_rule__TerminalAlternatives__Group_1_1__07871);
             rule__TerminalAlternatives__Group_1_1__1();
             _fsp--;
 
@@ -10050,7 +10050,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3921:1: ( rule__TerminalAlternatives__GroupsAssignment_1_1_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3921:2: rule__TerminalAlternatives__GroupsAssignment_1_1_1
             {
-            pushFollow(FOLLOW_rule__TerminalAlternatives__GroupsAssignment_1_1_1_in_rule__TerminalAlternatives__Group_1_1__17899);
+            pushFollow(FollowSets000.FOLLOW_rule__TerminalAlternatives__GroupsAssignment_1_1_1_in_rule__TerminalAlternatives__Group_1_1__17899);
             rule__TerminalAlternatives__GroupsAssignment_1_1_1();
             _fsp--;
 
@@ -10093,7 +10093,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3941:1: ruleTerminalToken
             {
              before(grammarAccess.getTerminalGroupAccess().getTerminalTokenParserRuleCall_0()); 
-            pushFollow(FOLLOW_ruleTerminalToken_in_rule__TerminalGroup__Group__07937);
+            pushFollow(FollowSets000.FOLLOW_ruleTerminalToken_in_rule__TerminalGroup__Group__07937);
             ruleTerminalToken();
             _fsp--;
 
@@ -10101,7 +10101,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__TerminalGroup__Group__1_in_rule__TerminalGroup__Group__07945);
+            pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__Group__1_in_rule__TerminalGroup__Group__07945);
             rule__TerminalGroup__Group__1();
             _fsp--;
 
@@ -10148,7 +10148,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:3960:2: rule__TerminalGroup__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__TerminalGroup__Group_1__0_in_rule__TerminalGroup__Group__17973);
+                    pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__Group_1__0_in_rule__TerminalGroup__Group__17973);
                     rule__TerminalGroup__Group_1__0();
                     _fsp--;
 
@@ -10203,7 +10203,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__TerminalGroup__Group_1__1_in_rule__TerminalGroup__Group_1__08022);
+            pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__Group_1__1_in_rule__TerminalGroup__Group_1__08022);
             rule__TerminalGroup__Group_1__1();
             _fsp--;
 
@@ -10245,7 +10245,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4002:1: ( rule__TerminalGroup__TokensAssignment_1_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4002:2: rule__TerminalGroup__TokensAssignment_1_1
             {
-            pushFollow(FOLLOW_rule__TerminalGroup__TokensAssignment_1_1_in_rule__TerminalGroup__Group_1__18052);
+            pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__TokensAssignment_1_1_in_rule__TerminalGroup__Group_1__18052);
             rule__TerminalGroup__TokensAssignment_1_1();
             _fsp--;
 
@@ -10275,7 +10275,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	case 1 :
             	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4007:2: rule__TerminalGroup__TokensAssignment_1_1
             	    {
-            	    pushFollow(FOLLOW_rule__TerminalGroup__TokensAssignment_1_1_in_rule__TerminalGroup__Group_1__18064);
+            	    pushFollow(FollowSets000.FOLLOW_rule__TerminalGroup__TokensAssignment_1_1_in_rule__TerminalGroup__Group_1__18064);
             	    rule__TerminalGroup__TokensAssignment_1_1();
             	    _fsp--;
 
@@ -10327,7 +10327,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4028:1: ruleTerminalTokenElement
             {
              before(grammarAccess.getTerminalTokenAccess().getTerminalTokenElementParserRuleCall_0()); 
-            pushFollow(FOLLOW_ruleTerminalTokenElement_in_rule__TerminalToken__Group__08105);
+            pushFollow(FollowSets000.FOLLOW_ruleTerminalTokenElement_in_rule__TerminalToken__Group__08105);
             ruleTerminalTokenElement();
             _fsp--;
 
@@ -10335,7 +10335,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__TerminalToken__Group__1_in_rule__TerminalToken__Group__08113);
+            pushFollow(FollowSets000.FOLLOW_rule__TerminalToken__Group__1_in_rule__TerminalToken__Group__08113);
             rule__TerminalToken__Group__1();
             _fsp--;
 
@@ -10382,7 +10382,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4047:2: rule__TerminalToken__CardinalityAssignment_1
                     {
-                    pushFollow(FOLLOW_rule__TerminalToken__CardinalityAssignment_1_in_rule__TerminalToken__Group__18141);
+                    pushFollow(FollowSets000.FOLLOW_rule__TerminalToken__CardinalityAssignment_1_in_rule__TerminalToken__Group__18141);
                     rule__TerminalToken__CardinalityAssignment_1();
                     _fsp--;
 
@@ -10428,12 +10428,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4067:1: '('
             {
              before(grammarAccess.getParenthesizedTerminalElementAccess().getLeftParenthesisKeyword_0()); 
-            match(input,20,FOLLOW_20_in_rule__ParenthesizedTerminalElement__Group__08181); 
+            match(input,20,FollowSets000.FOLLOW_20_in_rule__ParenthesizedTerminalElement__Group__08181); 
              after(grammarAccess.getParenthesizedTerminalElementAccess().getLeftParenthesisKeyword_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__ParenthesizedTerminalElement__Group__1_in_rule__ParenthesizedTerminalElement__Group__08191);
+            pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedTerminalElement__Group__1_in_rule__ParenthesizedTerminalElement__Group__08191);
             rule__ParenthesizedTerminalElement__Group__1();
             _fsp--;
 
@@ -10469,7 +10469,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4087:1: ruleTerminalAlternatives
             {
              before(grammarAccess.getParenthesizedTerminalElementAccess().getTerminalAlternativesParserRuleCall_1()); 
-            pushFollow(FOLLOW_ruleTerminalAlternatives_in_rule__ParenthesizedTerminalElement__Group__18219);
+            pushFollow(FollowSets000.FOLLOW_ruleTerminalAlternatives_in_rule__ParenthesizedTerminalElement__Group__18219);
             ruleTerminalAlternatives();
             _fsp--;
 
@@ -10477,7 +10477,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__ParenthesizedTerminalElement__Group__2_in_rule__ParenthesizedTerminalElement__Group__18227);
+            pushFollow(FollowSets000.FOLLOW_rule__ParenthesizedTerminalElement__Group__2_in_rule__ParenthesizedTerminalElement__Group__18227);
             rule__ParenthesizedTerminalElement__Group__2();
             _fsp--;
 
@@ -10513,7 +10513,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4105:1: ')'
             {
              before(grammarAccess.getParenthesizedTerminalElementAccess().getRightParenthesisKeyword_2()); 
-            match(input,21,FOLLOW_21_in_rule__ParenthesizedTerminalElement__Group__28256); 
+            match(input,21,FollowSets000.FOLLOW_21_in_rule__ParenthesizedTerminalElement__Group__28256); 
              after(grammarAccess.getParenthesizedTerminalElementAccess().getRightParenthesisKeyword_2()); 
 
             }
@@ -10550,12 +10550,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4130:1: '!'
             {
              before(grammarAccess.getNegatedTokenAccess().getExclamationMarkKeyword_0()); 
-            match(input,37,FOLLOW_37_in_rule__NegatedToken__Group__08298); 
+            match(input,37,FollowSets000.FOLLOW_37_in_rule__NegatedToken__Group__08298); 
              after(grammarAccess.getNegatedTokenAccess().getExclamationMarkKeyword_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__NegatedToken__Group__1_in_rule__NegatedToken__Group__08308);
+            pushFollow(FollowSets000.FOLLOW_rule__NegatedToken__Group__1_in_rule__NegatedToken__Group__08308);
             rule__NegatedToken__Group__1();
             _fsp--;
 
@@ -10594,7 +10594,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4151:1: ( rule__NegatedToken__TerminalAssignment_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4151:2: rule__NegatedToken__TerminalAssignment_1
             {
-            pushFollow(FOLLOW_rule__NegatedToken__TerminalAssignment_1_in_rule__NegatedToken__Group__18336);
+            pushFollow(FollowSets000.FOLLOW_rule__NegatedToken__TerminalAssignment_1_in_rule__NegatedToken__Group__18336);
             rule__NegatedToken__TerminalAssignment_1();
             _fsp--;
 
@@ -10637,12 +10637,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4171:1: '->'
             {
              before(grammarAccess.getUntilTokenAccess().getHyphenMinusGreaterThanSignKeyword_0()); 
-            match(input,38,FOLLOW_38_in_rule__UntilToken__Group__08375); 
+            match(input,38,FollowSets000.FOLLOW_38_in_rule__UntilToken__Group__08375); 
              after(grammarAccess.getUntilTokenAccess().getHyphenMinusGreaterThanSignKeyword_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__UntilToken__Group__1_in_rule__UntilToken__Group__08385);
+            pushFollow(FollowSets000.FOLLOW_rule__UntilToken__Group__1_in_rule__UntilToken__Group__08385);
             rule__UntilToken__Group__1();
             _fsp--;
 
@@ -10681,7 +10681,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4192:1: ( rule__UntilToken__TerminalAssignment_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4192:2: rule__UntilToken__TerminalAssignment_1
             {
-            pushFollow(FOLLOW_rule__UntilToken__TerminalAssignment_1_in_rule__UntilToken__Group__18413);
+            pushFollow(FollowSets000.FOLLOW_rule__UntilToken__TerminalAssignment_1_in_rule__UntilToken__Group__18413);
             rule__UntilToken__TerminalAssignment_1();
             _fsp--;
 
@@ -10733,7 +10733,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__Wildcard__Group__1_in_rule__Wildcard__Group__08461);
+            pushFollow(FollowSets000.FOLLOW_rule__Wildcard__Group__1_in_rule__Wildcard__Group__08461);
             rule__Wildcard__Group__1();
             _fsp--;
 
@@ -10769,7 +10769,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4232:1: '.'
             {
              before(grammarAccess.getWildcardAccess().getFullStopKeyword_1()); 
-            match(input,22,FOLLOW_22_in_rule__Wildcard__Group__18490); 
+            match(input,22,FollowSets000.FOLLOW_22_in_rule__Wildcard__Group__18490); 
              after(grammarAccess.getWildcardAccess().getFullStopKeyword_1()); 
 
             }
@@ -10806,7 +10806,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4255:1: ruleKeyword
             {
              before(grammarAccess.getCharacterRangeAccess().getKeywordParserRuleCall_0()); 
-            pushFollow(FOLLOW_ruleKeyword_in_rule__CharacterRange__Group__08529);
+            pushFollow(FollowSets000.FOLLOW_ruleKeyword_in_rule__CharacterRange__Group__08529);
             ruleKeyword();
             _fsp--;
 
@@ -10814,7 +10814,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__CharacterRange__Group__1_in_rule__CharacterRange__Group__08537);
+            pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group__1_in_rule__CharacterRange__Group__08537);
             rule__CharacterRange__Group__1();
             _fsp--;
 
@@ -10861,7 +10861,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4274:2: rule__CharacterRange__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__CharacterRange__Group_1__0_in_rule__CharacterRange__Group__18565);
+                    pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group_1__0_in_rule__CharacterRange__Group__18565);
                     rule__CharacterRange__Group_1__0();
                     _fsp--;
 
@@ -10916,7 +10916,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__CharacterRange__Group_1__1_in_rule__CharacterRange__Group_1__08614);
+            pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group_1__1_in_rule__CharacterRange__Group_1__08614);
             rule__CharacterRange__Group_1__1();
             _fsp--;
 
@@ -10952,12 +10952,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4314:1: '..'
             {
              before(grammarAccess.getCharacterRangeAccess().getFullStopFullStopKeyword_1_1()); 
-            match(input,39,FOLLOW_39_in_rule__CharacterRange__Group_1__18643); 
+            match(input,39,FollowSets000.FOLLOW_39_in_rule__CharacterRange__Group_1__18643); 
              after(grammarAccess.getCharacterRangeAccess().getFullStopFullStopKeyword_1_1()); 
 
             }
 
-            pushFollow(FOLLOW_rule__CharacterRange__Group_1__2_in_rule__CharacterRange__Group_1__18653);
+            pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__Group_1__2_in_rule__CharacterRange__Group_1__18653);
             rule__CharacterRange__Group_1__2();
             _fsp--;
 
@@ -10996,7 +10996,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4335:1: ( rule__CharacterRange__RightAssignment_1_2 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4335:2: rule__CharacterRange__RightAssignment_1_2
             {
-            pushFollow(FOLLOW_rule__CharacterRange__RightAssignment_1_2_in_rule__CharacterRange__Group_1__28681);
+            pushFollow(FollowSets000.FOLLOW_rule__CharacterRange__RightAssignment_1_2_in_rule__CharacterRange__Group_1__28681);
             rule__CharacterRange__RightAssignment_1_2();
             _fsp--;
 
@@ -11039,12 +11039,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4357:1: 'enum'
             {
              before(grammarAccess.getEnumRuleAccess().getEnumKeyword_0()); 
-            match(input,40,FOLLOW_40_in_rule__EnumRule__Group__08722); 
+            match(input,40,FollowSets000.FOLLOW_40_in_rule__EnumRule__Group__08722); 
              after(grammarAccess.getEnumRuleAccess().getEnumKeyword_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EnumRule__Group__1_in_rule__EnumRule__Group__08732);
+            pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__1_in_rule__EnumRule__Group__08732);
             rule__EnumRule__Group__1();
             _fsp--;
 
@@ -11083,7 +11083,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4378:1: ( rule__EnumRule__NameAssignment_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4378:2: rule__EnumRule__NameAssignment_1
             {
-            pushFollow(FOLLOW_rule__EnumRule__NameAssignment_1_in_rule__EnumRule__Group__18760);
+            pushFollow(FollowSets000.FOLLOW_rule__EnumRule__NameAssignment_1_in_rule__EnumRule__Group__18760);
             rule__EnumRule__NameAssignment_1();
             _fsp--;
 
@@ -11094,7 +11094,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__EnumRule__Group__2_in_rule__EnumRule__Group__18769);
+            pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__2_in_rule__EnumRule__Group__18769);
             rule__EnumRule__Group__2();
             _fsp--;
 
@@ -11141,7 +11141,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4396:2: rule__EnumRule__Group_2__0
                     {
-                    pushFollow(FOLLOW_rule__EnumRule__Group_2__0_in_rule__EnumRule__Group__28797);
+                    pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group_2__0_in_rule__EnumRule__Group__28797);
                     rule__EnumRule__Group_2__0();
                     _fsp--;
 
@@ -11155,7 +11155,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__EnumRule__Group__3_in_rule__EnumRule__Group__28807);
+            pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__3_in_rule__EnumRule__Group__28807);
             rule__EnumRule__Group__3();
             _fsp--;
 
@@ -11191,12 +11191,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4413:1: ':'
             {
              before(grammarAccess.getEnumRuleAccess().getColonKeyword_3()); 
-            match(input,26,FOLLOW_26_in_rule__EnumRule__Group__38836); 
+            match(input,26,FollowSets000.FOLLOW_26_in_rule__EnumRule__Group__38836); 
              after(grammarAccess.getEnumRuleAccess().getColonKeyword_3()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EnumRule__Group__4_in_rule__EnumRule__Group__38846);
+            pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__4_in_rule__EnumRule__Group__38846);
             rule__EnumRule__Group__4();
             _fsp--;
 
@@ -11235,7 +11235,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4434:1: ( rule__EnumRule__AlternativesAssignment_4 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4434:2: rule__EnumRule__AlternativesAssignment_4
             {
-            pushFollow(FOLLOW_rule__EnumRule__AlternativesAssignment_4_in_rule__EnumRule__Group__48874);
+            pushFollow(FollowSets000.FOLLOW_rule__EnumRule__AlternativesAssignment_4_in_rule__EnumRule__Group__48874);
             rule__EnumRule__AlternativesAssignment_4();
             _fsp--;
 
@@ -11246,7 +11246,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__EnumRule__Group__5_in_rule__EnumRule__Group__48883);
+            pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group__5_in_rule__EnumRule__Group__48883);
             rule__EnumRule__Group__5();
             _fsp--;
 
@@ -11282,7 +11282,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4451:1: ';'
             {
              before(grammarAccess.getEnumRuleAccess().getSemicolonKeyword_5()); 
-            match(input,27,FOLLOW_27_in_rule__EnumRule__Group__58912); 
+            match(input,27,FollowSets000.FOLLOW_27_in_rule__EnumRule__Group__58912); 
              after(grammarAccess.getEnumRuleAccess().getSemicolonKeyword_5()); 
 
             }
@@ -11319,12 +11319,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4482:1: 'returns'
             {
              before(grammarAccess.getEnumRuleAccess().getReturnsKeyword_2_0()); 
-            match(input,28,FOLLOW_28_in_rule__EnumRule__Group_2__08960); 
+            match(input,28,FollowSets000.FOLLOW_28_in_rule__EnumRule__Group_2__08960); 
              after(grammarAccess.getEnumRuleAccess().getReturnsKeyword_2_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EnumRule__Group_2__1_in_rule__EnumRule__Group_2__08970);
+            pushFollow(FollowSets000.FOLLOW_rule__EnumRule__Group_2__1_in_rule__EnumRule__Group_2__08970);
             rule__EnumRule__Group_2__1();
             _fsp--;
 
@@ -11363,7 +11363,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4503:1: ( rule__EnumRule__TypeAssignment_2_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4503:2: rule__EnumRule__TypeAssignment_2_1
             {
-            pushFollow(FOLLOW_rule__EnumRule__TypeAssignment_2_1_in_rule__EnumRule__Group_2__18998);
+            pushFollow(FollowSets000.FOLLOW_rule__EnumRule__TypeAssignment_2_1_in_rule__EnumRule__Group_2__18998);
             rule__EnumRule__TypeAssignment_2_1();
             _fsp--;
 
@@ -11406,7 +11406,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4523:1: ruleEnumLiteralDeclaration
             {
              before(grammarAccess.getEnumLiteralsAccess().getEnumLiteralDeclarationParserRuleCall_0()); 
-            pushFollow(FOLLOW_ruleEnumLiteralDeclaration_in_rule__EnumLiterals__Group__09036);
+            pushFollow(FollowSets000.FOLLOW_ruleEnumLiteralDeclaration_in_rule__EnumLiterals__Group__09036);
             ruleEnumLiteralDeclaration();
             _fsp--;
 
@@ -11414,7 +11414,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__EnumLiterals__Group__1_in_rule__EnumLiterals__Group__09044);
+            pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group__1_in_rule__EnumLiterals__Group__09044);
             rule__EnumLiterals__Group__1();
             _fsp--;
 
@@ -11461,7 +11461,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4542:2: rule__EnumLiterals__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__EnumLiterals__Group_1__0_in_rule__EnumLiterals__Group__19072);
+                    pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group_1__0_in_rule__EnumLiterals__Group__19072);
                     rule__EnumLiterals__Group_1__0();
                     _fsp--;
 
@@ -11516,7 +11516,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__EnumLiterals__Group_1__1_in_rule__EnumLiterals__Group_1__09121);
+            pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group_1__1_in_rule__EnumLiterals__Group_1__09121);
             rule__EnumLiterals__Group_1__1();
             _fsp--;
 
@@ -11558,7 +11558,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4584:1: ( rule__EnumLiterals__Group_1_1__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4584:2: rule__EnumLiterals__Group_1_1__0
             {
-            pushFollow(FOLLOW_rule__EnumLiterals__Group_1_1__0_in_rule__EnumLiterals__Group_1__19151);
+            pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group_1_1__0_in_rule__EnumLiterals__Group_1__19151);
             rule__EnumLiterals__Group_1_1__0();
             _fsp--;
 
@@ -11588,7 +11588,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             	case 1 :
             	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4589:2: rule__EnumLiterals__Group_1_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__EnumLiterals__Group_1_1__0_in_rule__EnumLiterals__Group_1__19163);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group_1_1__0_in_rule__EnumLiterals__Group_1__19163);
             	    rule__EnumLiterals__Group_1_1__0();
             	    _fsp--;
 
@@ -11640,12 +11640,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4610:1: '|'
             {
              before(grammarAccess.getEnumLiteralsAccess().getVerticalLineKeyword_1_1_0()); 
-            match(input,30,FOLLOW_30_in_rule__EnumLiterals__Group_1_1__09205); 
+            match(input,30,FollowSets000.FOLLOW_30_in_rule__EnumLiterals__Group_1_1__09205); 
              after(grammarAccess.getEnumLiteralsAccess().getVerticalLineKeyword_1_1_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EnumLiterals__Group_1_1__1_in_rule__EnumLiterals__Group_1_1__09215);
+            pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__Group_1_1__1_in_rule__EnumLiterals__Group_1_1__09215);
             rule__EnumLiterals__Group_1_1__1();
             _fsp--;
 
@@ -11684,7 +11684,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4631:1: ( rule__EnumLiterals__GroupsAssignment_1_1_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4631:2: rule__EnumLiterals__GroupsAssignment_1_1_1
             {
-            pushFollow(FOLLOW_rule__EnumLiterals__GroupsAssignment_1_1_1_in_rule__EnumLiterals__Group_1_1__19243);
+            pushFollow(FollowSets000.FOLLOW_rule__EnumLiterals__GroupsAssignment_1_1_1_in_rule__EnumLiterals__Group_1_1__19243);
             rule__EnumLiterals__GroupsAssignment_1_1_1();
             _fsp--;
 
@@ -11730,7 +11730,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4652:1: ( rule__EnumLiteralDeclaration__EnumLiteralAssignment_0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4652:2: rule__EnumLiteralDeclaration__EnumLiteralAssignment_0
             {
-            pushFollow(FOLLOW_rule__EnumLiteralDeclaration__EnumLiteralAssignment_0_in_rule__EnumLiteralDeclaration__Group__09281);
+            pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__EnumLiteralAssignment_0_in_rule__EnumLiteralDeclaration__Group__09281);
             rule__EnumLiteralDeclaration__EnumLiteralAssignment_0();
             _fsp--;
 
@@ -11741,7 +11741,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
             }
 
-            pushFollow(FOLLOW_rule__EnumLiteralDeclaration__Group__1_in_rule__EnumLiteralDeclaration__Group__09290);
+            pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__Group__1_in_rule__EnumLiteralDeclaration__Group__09290);
             rule__EnumLiteralDeclaration__Group__1();
             _fsp--;
 
@@ -11788,7 +11788,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4670:2: rule__EnumLiteralDeclaration__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__EnumLiteralDeclaration__Group_1__0_in_rule__EnumLiteralDeclaration__Group__19318);
+                    pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__Group_1__0_in_rule__EnumLiteralDeclaration__Group__19318);
                     rule__EnumLiteralDeclaration__Group_1__0();
                     _fsp--;
 
@@ -11834,12 +11834,12 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4690:1: '='
             {
              before(grammarAccess.getEnumLiteralDeclarationAccess().getEqualsSignKeyword_1_0()); 
-            match(input,14,FOLLOW_14_in_rule__EnumLiteralDeclaration__Group_1__09358); 
+            match(input,14,FollowSets000.FOLLOW_14_in_rule__EnumLiteralDeclaration__Group_1__09358); 
              after(grammarAccess.getEnumLiteralDeclarationAccess().getEqualsSignKeyword_1_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EnumLiteralDeclaration__Group_1__1_in_rule__EnumLiteralDeclaration__Group_1__09368);
+            pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__Group_1__1_in_rule__EnumLiteralDeclaration__Group_1__09368);
             rule__EnumLiteralDeclaration__Group_1__1();
             _fsp--;
 
@@ -11878,7 +11878,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4711:1: ( rule__EnumLiteralDeclaration__LiteralAssignment_1_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4711:2: rule__EnumLiteralDeclaration__LiteralAssignment_1_1
             {
-            pushFollow(FOLLOW_rule__EnumLiteralDeclaration__LiteralAssignment_1_1_in_rule__EnumLiteralDeclaration__Group_1__19396);
+            pushFollow(FollowSets000.FOLLOW_rule__EnumLiteralDeclaration__LiteralAssignment_1_1_in_rule__EnumLiteralDeclaration__Group_1__19396);
             rule__EnumLiteralDeclaration__LiteralAssignment_1_1();
             _fsp--;
 
@@ -11921,7 +11921,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4731:1: ruleGrammarID
             {
              before(grammarAccess.getGrammarAccess().getNameGrammarIDParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleGrammarID_in_rule__Grammar__NameAssignment_19434);
+            pushFollow(FollowSets000.FOLLOW_ruleGrammarID_in_rule__Grammar__NameAssignment_19434);
             ruleGrammarID();
             _fsp--;
 
@@ -11965,7 +11965,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4748:1: ruleGrammarID
             {
              before(grammarAccess.getGrammarAccess().getUsedGrammarsGrammarGrammarIDParserRuleCall_2_1_0_1()); 
-            pushFollow(FOLLOW_ruleGrammarID_in_rule__Grammar__UsedGrammarsAssignment_2_19469);
+            pushFollow(FollowSets000.FOLLOW_ruleGrammarID_in_rule__Grammar__UsedGrammarsAssignment_2_19469);
             ruleGrammarID();
             _fsp--;
 
@@ -12013,7 +12013,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4767:1: ruleGrammarID
             {
              before(grammarAccess.getGrammarAccess().getUsedGrammarsGrammarGrammarIDParserRuleCall_2_2_1_0_1()); 
-            pushFollow(FOLLOW_ruleGrammarID_in_rule__Grammar__UsedGrammarsAssignment_2_2_19508);
+            pushFollow(FollowSets000.FOLLOW_ruleGrammarID_in_rule__Grammar__UsedGrammarsAssignment_2_2_19508);
             ruleGrammarID();
             _fsp--;
 
@@ -12061,7 +12061,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4786:1: 'hidden'
             {
              before(grammarAccess.getGrammarAccess().getDefinesHiddenTokensHiddenKeyword_3_0_0()); 
-            match(input,41,FOLLOW_41_in_rule__Grammar__DefinesHiddenTokensAssignment_3_09548); 
+            match(input,41,FollowSets000.FOLLOW_41_in_rule__Grammar__DefinesHiddenTokensAssignment_3_09548); 
              after(grammarAccess.getGrammarAccess().getDefinesHiddenTokensHiddenKeyword_3_0_0()); 
 
             }
@@ -12106,7 +12106,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4809:1: RULE_ID
             {
              before(grammarAccess.getGrammarAccess().getHiddenTokensAbstractRuleIDTerminalRuleCall_3_2_0_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Grammar__HiddenTokensAssignment_3_2_09591); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Grammar__HiddenTokensAssignment_3_2_09591); 
              after(grammarAccess.getGrammarAccess().getHiddenTokensAbstractRuleIDTerminalRuleCall_3_2_0_0_1()); 
 
             }
@@ -12151,7 +12151,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4828:1: RULE_ID
             {
              before(grammarAccess.getGrammarAccess().getHiddenTokensAbstractRuleIDTerminalRuleCall_3_2_1_1_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Grammar__HiddenTokensAssignment_3_2_1_19630); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Grammar__HiddenTokensAssignment_3_2_1_19630); 
              after(grammarAccess.getGrammarAccess().getHiddenTokensAbstractRuleIDTerminalRuleCall_3_2_1_1_0_1()); 
 
             }
@@ -12192,7 +12192,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4845:1: ruleAbstractMetamodelDeclaration
             {
              before(grammarAccess.getGrammarAccess().getMetamodelDeclarationsAbstractMetamodelDeclarationParserRuleCall_4_0()); 
-            pushFollow(FOLLOW_ruleAbstractMetamodelDeclaration_in_rule__Grammar__MetamodelDeclarationsAssignment_49665);
+            pushFollow(FollowSets000.FOLLOW_ruleAbstractMetamodelDeclaration_in_rule__Grammar__MetamodelDeclarationsAssignment_49665);
             ruleAbstractMetamodelDeclaration();
             _fsp--;
 
@@ -12232,7 +12232,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4860:1: ruleAbstractRule
             {
              before(grammarAccess.getGrammarAccess().getRulesAbstractRuleParserRuleCall_5_0()); 
-            pushFollow(FOLLOW_ruleAbstractRule_in_rule__Grammar__RulesAssignment_59696);
+            pushFollow(FollowSets000.FOLLOW_ruleAbstractRule_in_rule__Grammar__RulesAssignment_59696);
             ruleAbstractRule();
             _fsp--;
 
@@ -12272,7 +12272,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4875:1: RULE_ID
             {
              before(grammarAccess.getGeneratedMetamodelAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__GeneratedMetamodel__NameAssignment_19727); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__GeneratedMetamodel__NameAssignment_19727); 
              after(grammarAccess.getGeneratedMetamodelAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -12313,7 +12313,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4892:1: RULE_STRING
             {
              before(grammarAccess.getGeneratedMetamodelAccess().getEPackageEPackageSTRINGTerminalRuleCall_2_0_1()); 
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__GeneratedMetamodel__EPackageAssignment_29762); 
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__GeneratedMetamodel__EPackageAssignment_29762); 
              after(grammarAccess.getGeneratedMetamodelAccess().getEPackageEPackageSTRINGTerminalRuleCall_2_0_1()); 
 
             }
@@ -12354,7 +12354,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4909:1: RULE_ID
             {
              before(grammarAccess.getGeneratedMetamodelAccess().getAliasIDTerminalRuleCall_3_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__GeneratedMetamodel__AliasAssignment_3_19797); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__GeneratedMetamodel__AliasAssignment_3_19797); 
              after(grammarAccess.getGeneratedMetamodelAccess().getAliasIDTerminalRuleCall_3_1_0()); 
 
             }
@@ -12395,7 +12395,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4926:1: RULE_STRING
             {
              before(grammarAccess.getReferencedMetamodelAccess().getEPackageEPackageSTRINGTerminalRuleCall_1_0_1()); 
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__ReferencedMetamodel__EPackageAssignment_19832); 
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__ReferencedMetamodel__EPackageAssignment_19832); 
              after(grammarAccess.getReferencedMetamodelAccess().getEPackageEPackageSTRINGTerminalRuleCall_1_0_1()); 
 
             }
@@ -12436,7 +12436,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4943:1: RULE_ID
             {
              before(grammarAccess.getReferencedMetamodelAccess().getAliasIDTerminalRuleCall_2_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__ReferencedMetamodel__AliasAssignment_2_19867); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ReferencedMetamodel__AliasAssignment_2_19867); 
              after(grammarAccess.getReferencedMetamodelAccess().getAliasIDTerminalRuleCall_2_1_0()); 
 
             }
@@ -12473,7 +12473,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4958:1: RULE_ID
             {
              before(grammarAccess.getParserRuleAccess().getNameIDTerminalRuleCall_0_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__ParserRule__NameAssignment_09898); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ParserRule__NameAssignment_09898); 
              after(grammarAccess.getParserRuleAccess().getNameIDTerminalRuleCall_0_0()); 
 
             }
@@ -12510,7 +12510,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4973:1: ruleTypeRef
             {
              before(grammarAccess.getParserRuleAccess().getTypeTypeRefParserRuleCall_1_1_0()); 
-            pushFollow(FOLLOW_ruleTypeRef_in_rule__ParserRule__TypeAssignment_1_19929);
+            pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__ParserRule__TypeAssignment_1_19929);
             ruleTypeRef();
             _fsp--;
 
@@ -12554,7 +12554,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:4990:1: 'hidden'
             {
              before(grammarAccess.getParserRuleAccess().getDefinesHiddenTokensHiddenKeyword_2_0_0()); 
-            match(input,41,FOLLOW_41_in_rule__ParserRule__DefinesHiddenTokensAssignment_2_09965); 
+            match(input,41,FollowSets000.FOLLOW_41_in_rule__ParserRule__DefinesHiddenTokensAssignment_2_09965); 
              after(grammarAccess.getParserRuleAccess().getDefinesHiddenTokensHiddenKeyword_2_0_0()); 
 
             }
@@ -12599,7 +12599,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5013:1: RULE_ID
             {
              before(grammarAccess.getParserRuleAccess().getHiddenTokensAbstractRuleIDTerminalRuleCall_2_2_0_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__ParserRule__HiddenTokensAssignment_2_2_010008); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ParserRule__HiddenTokensAssignment_2_2_010008); 
              after(grammarAccess.getParserRuleAccess().getHiddenTokensAbstractRuleIDTerminalRuleCall_2_2_0_0_1()); 
 
             }
@@ -12644,7 +12644,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5032:1: RULE_ID
             {
              before(grammarAccess.getParserRuleAccess().getHiddenTokensAbstractRuleIDTerminalRuleCall_2_2_1_1_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__ParserRule__HiddenTokensAssignment_2_2_1_110047); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ParserRule__HiddenTokensAssignment_2_2_1_110047); 
              after(grammarAccess.getParserRuleAccess().getHiddenTokensAbstractRuleIDTerminalRuleCall_2_2_1_1_0_1()); 
 
             }
@@ -12685,7 +12685,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5049:1: ruleAlternatives
             {
              before(grammarAccess.getParserRuleAccess().getAlternativesAlternativesParserRuleCall_4_0()); 
-            pushFollow(FOLLOW_ruleAlternatives_in_rule__ParserRule__AlternativesAssignment_410082);
+            pushFollow(FollowSets000.FOLLOW_ruleAlternatives_in_rule__ParserRule__AlternativesAssignment_410082);
             ruleAlternatives();
             _fsp--;
 
@@ -12729,7 +12729,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5066:1: RULE_ID
             {
              before(grammarAccess.getTypeRefAccess().getMetamodelAbstractMetamodelDeclarationIDTerminalRuleCall_0_0_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__TypeRef__MetamodelAssignment_0_010117); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__TypeRef__MetamodelAssignment_0_010117); 
              after(grammarAccess.getTypeRefAccess().getMetamodelAbstractMetamodelDeclarationIDTerminalRuleCall_0_0_0_1()); 
 
             }
@@ -12774,7 +12774,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5085:1: RULE_ID
             {
              before(grammarAccess.getTypeRefAccess().getClassifierEClassifierIDTerminalRuleCall_1_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__TypeRef__ClassifierAssignment_110156); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__TypeRef__ClassifierAssignment_110156); 
              after(grammarAccess.getTypeRefAccess().getClassifierEClassifierIDTerminalRuleCall_1_0_1()); 
 
             }
@@ -12815,7 +12815,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5102:1: ruleGroup
             {
              before(grammarAccess.getAlternativesAccess().getGroupsGroupParserRuleCall_1_1_1_0()); 
-            pushFollow(FOLLOW_ruleGroup_in_rule__Alternatives__GroupsAssignment_1_1_110191);
+            pushFollow(FollowSets000.FOLLOW_ruleGroup_in_rule__Alternatives__GroupsAssignment_1_1_110191);
             ruleGroup();
             _fsp--;
 
@@ -12855,7 +12855,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5117:1: ruleAbstractToken
             {
              before(grammarAccess.getGroupAccess().getTokensAbstractTokenParserRuleCall_1_1_0()); 
-            pushFollow(FOLLOW_ruleAbstractToken_in_rule__Group__TokensAssignment_1_110222);
+            pushFollow(FollowSets000.FOLLOW_ruleAbstractToken_in_rule__Group__TokensAssignment_1_110222);
             ruleAbstractToken();
             _fsp--;
 
@@ -12898,7 +12898,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5133:1: ( rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5133:2: rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0
             {
-            pushFollow(FOLLOW_rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0_in_rule__AbstractTokenWithCardinality__CardinalityAssignment_110253);
+            pushFollow(FollowSets000.FOLLOW_rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0_in_rule__AbstractTokenWithCardinality__CardinalityAssignment_110253);
             rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0();
             _fsp--;
 
@@ -12941,7 +12941,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5148:1: ruleTypeRef
             {
              before(grammarAccess.getActionAccess().getTypeTypeRefParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleTypeRef_in_rule__Action__TypeAssignment_110286);
+            pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__Action__TypeAssignment_110286);
             ruleTypeRef();
             _fsp--;
 
@@ -12981,7 +12981,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5163:1: RULE_ID
             {
              before(grammarAccess.getActionAccess().getFeatureIDTerminalRuleCall_2_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Action__FeatureAssignment_2_110317); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Action__FeatureAssignment_2_110317); 
              after(grammarAccess.getActionAccess().getFeatureIDTerminalRuleCall_2_1_0()); 
 
             }
@@ -13021,7 +13021,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5179:1: ( rule__Action__OperatorAlternatives_2_2_0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5179:2: rule__Action__OperatorAlternatives_2_2_0
             {
-            pushFollow(FOLLOW_rule__Action__OperatorAlternatives_2_2_0_in_rule__Action__OperatorAssignment_2_210348);
+            pushFollow(FollowSets000.FOLLOW_rule__Action__OperatorAlternatives_2_2_0_in_rule__Action__OperatorAssignment_2_210348);
             rule__Action__OperatorAlternatives_2_2_0();
             _fsp--;
 
@@ -13064,7 +13064,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5194:1: RULE_STRING
             {
              before(grammarAccess.getKeywordAccess().getValueSTRINGTerminalRuleCall_0()); 
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Keyword__ValueAssignment10381); 
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Keyword__ValueAssignment10381); 
              after(grammarAccess.getKeywordAccess().getValueSTRINGTerminalRuleCall_0()); 
 
             }
@@ -13105,7 +13105,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5211:1: RULE_ID
             {
              before(grammarAccess.getRuleCallAccess().getRuleAbstractRuleIDTerminalRuleCall_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__RuleCall__RuleAssignment10416); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__RuleCall__RuleAssignment10416); 
              after(grammarAccess.getRuleCallAccess().getRuleAbstractRuleIDTerminalRuleCall_0_1()); 
 
             }
@@ -13146,7 +13146,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5228:1: RULE_ID
             {
              before(grammarAccess.getAssignmentAccess().getFeatureIDTerminalRuleCall_0_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Assignment__FeatureAssignment_010451); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Assignment__FeatureAssignment_010451); 
              after(grammarAccess.getAssignmentAccess().getFeatureIDTerminalRuleCall_0_0()); 
 
             }
@@ -13186,7 +13186,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5244:1: ( rule__Assignment__OperatorAlternatives_1_0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5244:2: rule__Assignment__OperatorAlternatives_1_0
             {
-            pushFollow(FOLLOW_rule__Assignment__OperatorAlternatives_1_0_in_rule__Assignment__OperatorAssignment_110482);
+            pushFollow(FollowSets000.FOLLOW_rule__Assignment__OperatorAlternatives_1_0_in_rule__Assignment__OperatorAssignment_110482);
             rule__Assignment__OperatorAlternatives_1_0();
             _fsp--;
 
@@ -13229,7 +13229,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5259:1: ruleAssignableTerminal
             {
              before(grammarAccess.getAssignmentAccess().getTerminalAssignableTerminalParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleAssignableTerminal_in_rule__Assignment__TerminalAssignment_210515);
+            pushFollow(FollowSets000.FOLLOW_ruleAssignableTerminal_in_rule__Assignment__TerminalAssignment_210515);
             ruleAssignableTerminal();
             _fsp--;
 
@@ -13269,7 +13269,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5274:1: ruleAssignableTerminal
             {
              before(grammarAccess.getAssignableAlternativesAccess().getGroupsAssignableTerminalParserRuleCall_1_1_1_0()); 
-            pushFollow(FOLLOW_ruleAssignableTerminal_in_rule__AssignableAlternatives__GroupsAssignment_1_1_110546);
+            pushFollow(FollowSets000.FOLLOW_ruleAssignableTerminal_in_rule__AssignableAlternatives__GroupsAssignment_1_1_110546);
             ruleAssignableTerminal();
             _fsp--;
 
@@ -13309,7 +13309,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5289:1: ruleTypeRef
             {
              before(grammarAccess.getCrossReferenceAccess().getTypeTypeRefParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleTypeRef_in_rule__CrossReference__TypeAssignment_110577);
+            pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__CrossReference__TypeAssignment_110577);
             ruleTypeRef();
             _fsp--;
 
@@ -13349,7 +13349,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5304:1: ruleCrossReferenceableTerminal
             {
              before(grammarAccess.getCrossReferenceAccess().getTerminalCrossReferenceableTerminalParserRuleCall_2_1_0()); 
-            pushFollow(FOLLOW_ruleCrossReferenceableTerminal_in_rule__CrossReference__TerminalAssignment_2_110608);
+            pushFollow(FollowSets000.FOLLOW_ruleCrossReferenceableTerminal_in_rule__CrossReference__TerminalAssignment_2_110608);
             ruleCrossReferenceableTerminal();
             _fsp--;
 
@@ -13389,7 +13389,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5319:1: ruleCrossReferenceableTerminal
             {
              before(grammarAccess.getCrossReferenceableAlternativesAccess().getGroupsCrossReferenceableTerminalParserRuleCall_1_1_1_0()); 
-            pushFollow(FOLLOW_ruleCrossReferenceableTerminal_in_rule__CrossReferenceableAlternatives__GroupsAssignment_1_1_110639);
+            pushFollow(FollowSets000.FOLLOW_ruleCrossReferenceableTerminal_in_rule__CrossReferenceableAlternatives__GroupsAssignment_1_1_110639);
             ruleCrossReferenceableTerminal();
             _fsp--;
 
@@ -13429,7 +13429,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5334:1: RULE_ID
             {
              before(grammarAccess.getTerminalRuleAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__TerminalRule__NameAssignment_110670); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__TerminalRule__NameAssignment_110670); 
              after(grammarAccess.getTerminalRuleAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -13466,7 +13466,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5349:1: ruleTypeRef
             {
              before(grammarAccess.getTerminalRuleAccess().getTypeTypeRefParserRuleCall_2_1_0()); 
-            pushFollow(FOLLOW_ruleTypeRef_in_rule__TerminalRule__TypeAssignment_2_110701);
+            pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__TerminalRule__TypeAssignment_2_110701);
             ruleTypeRef();
             _fsp--;
 
@@ -13506,7 +13506,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5364:1: ruleTerminalAlternatives
             {
              before(grammarAccess.getTerminalRuleAccess().getAlternativesTerminalAlternativesParserRuleCall_4_0()); 
-            pushFollow(FOLLOW_ruleTerminalAlternatives_in_rule__TerminalRule__AlternativesAssignment_410732);
+            pushFollow(FollowSets000.FOLLOW_ruleTerminalAlternatives_in_rule__TerminalRule__AlternativesAssignment_410732);
             ruleTerminalAlternatives();
             _fsp--;
 
@@ -13546,7 +13546,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5379:1: ruleTerminalGroup
             {
              before(grammarAccess.getTerminalAlternativesAccess().getGroupsTerminalGroupParserRuleCall_1_1_1_0()); 
-            pushFollow(FOLLOW_ruleTerminalGroup_in_rule__TerminalAlternatives__GroupsAssignment_1_1_110763);
+            pushFollow(FollowSets000.FOLLOW_ruleTerminalGroup_in_rule__TerminalAlternatives__GroupsAssignment_1_1_110763);
             ruleTerminalGroup();
             _fsp--;
 
@@ -13586,7 +13586,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5394:1: ruleTerminalToken
             {
              before(grammarAccess.getTerminalGroupAccess().getTokensTerminalTokenParserRuleCall_1_1_0()); 
-            pushFollow(FOLLOW_ruleTerminalToken_in_rule__TerminalGroup__TokensAssignment_1_110794);
+            pushFollow(FollowSets000.FOLLOW_ruleTerminalToken_in_rule__TerminalGroup__TokensAssignment_1_110794);
             ruleTerminalToken();
             _fsp--;
 
@@ -13629,7 +13629,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5410:1: ( rule__TerminalToken__CardinalityAlternatives_1_0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5410:2: rule__TerminalToken__CardinalityAlternatives_1_0
             {
-            pushFollow(FOLLOW_rule__TerminalToken__CardinalityAlternatives_1_0_in_rule__TerminalToken__CardinalityAssignment_110825);
+            pushFollow(FollowSets000.FOLLOW_rule__TerminalToken__CardinalityAlternatives_1_0_in_rule__TerminalToken__CardinalityAssignment_110825);
             rule__TerminalToken__CardinalityAlternatives_1_0();
             _fsp--;
 
@@ -13672,7 +13672,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5425:1: ruleTerminalTokenElement
             {
              before(grammarAccess.getNegatedTokenAccess().getTerminalTerminalTokenElementParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleTerminalTokenElement_in_rule__NegatedToken__TerminalAssignment_110858);
+            pushFollow(FollowSets000.FOLLOW_ruleTerminalTokenElement_in_rule__NegatedToken__TerminalAssignment_110858);
             ruleTerminalTokenElement();
             _fsp--;
 
@@ -13712,7 +13712,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5440:1: ruleTerminalTokenElement
             {
              before(grammarAccess.getUntilTokenAccess().getTerminalTerminalTokenElementParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleTerminalTokenElement_in_rule__UntilToken__TerminalAssignment_110889);
+            pushFollow(FollowSets000.FOLLOW_ruleTerminalTokenElement_in_rule__UntilToken__TerminalAssignment_110889);
             ruleTerminalTokenElement();
             _fsp--;
 
@@ -13752,7 +13752,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5455:1: ruleKeyword
             {
              before(grammarAccess.getCharacterRangeAccess().getRightKeywordParserRuleCall_1_2_0()); 
-            pushFollow(FOLLOW_ruleKeyword_in_rule__CharacterRange__RightAssignment_1_210920);
+            pushFollow(FollowSets000.FOLLOW_ruleKeyword_in_rule__CharacterRange__RightAssignment_1_210920);
             ruleKeyword();
             _fsp--;
 
@@ -13792,7 +13792,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5470:1: RULE_ID
             {
              before(grammarAccess.getEnumRuleAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__EnumRule__NameAssignment_110951); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EnumRule__NameAssignment_110951); 
              after(grammarAccess.getEnumRuleAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -13829,7 +13829,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5485:1: ruleTypeRef
             {
              before(grammarAccess.getEnumRuleAccess().getTypeTypeRefParserRuleCall_2_1_0()); 
-            pushFollow(FOLLOW_ruleTypeRef_in_rule__EnumRule__TypeAssignment_2_110982);
+            pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__EnumRule__TypeAssignment_2_110982);
             ruleTypeRef();
             _fsp--;
 
@@ -13869,7 +13869,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5500:1: ruleEnumLiterals
             {
              before(grammarAccess.getEnumRuleAccess().getAlternativesEnumLiteralsParserRuleCall_4_0()); 
-            pushFollow(FOLLOW_ruleEnumLiterals_in_rule__EnumRule__AlternativesAssignment_411013);
+            pushFollow(FollowSets000.FOLLOW_ruleEnumLiterals_in_rule__EnumRule__AlternativesAssignment_411013);
             ruleEnumLiterals();
             _fsp--;
 
@@ -13909,7 +13909,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5515:1: ruleEnumLiteralDeclaration
             {
              before(grammarAccess.getEnumLiteralsAccess().getGroupsEnumLiteralDeclarationParserRuleCall_1_1_1_0()); 
-            pushFollow(FOLLOW_ruleEnumLiteralDeclaration_in_rule__EnumLiterals__GroupsAssignment_1_1_111044);
+            pushFollow(FollowSets000.FOLLOW_ruleEnumLiteralDeclaration_in_rule__EnumLiterals__GroupsAssignment_1_1_111044);
             ruleEnumLiteralDeclaration();
             _fsp--;
 
@@ -13953,7 +13953,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5532:1: RULE_ID
             {
              before(grammarAccess.getEnumLiteralDeclarationAccess().getEnumLiteralEEnumLiteralIDTerminalRuleCall_0_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__EnumLiteralDeclaration__EnumLiteralAssignment_011079); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EnumLiteralDeclaration__EnumLiteralAssignment_011079); 
              after(grammarAccess.getEnumLiteralDeclarationAccess().getEnumLiteralEEnumLiteralIDTerminalRuleCall_0_0_1()); 
 
             }
@@ -13994,7 +13994,7 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g:5549:1: ruleKeyword
             {
              before(grammarAccess.getEnumLiteralDeclarationAccess().getLiteralKeywordParserRuleCall_1_1_0()); 
-            pushFollow(FOLLOW_ruleKeyword_in_rule__EnumLiteralDeclaration__LiteralAssignment_1_111114);
+            pushFollow(FollowSets000.FOLLOW_ruleKeyword_in_rule__EnumLiteralDeclaration__LiteralAssignment_1_111114);
             ruleKeyword();
             _fsp--;
 
@@ -14022,461 +14022,465 @@ public class InternalXtextGrammarUiTestLanguageParser extends AbstractInternalCo
 
  
 
-    public static final BitSet FOLLOW_ruleGrammar_in_entryRuleGrammar60 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleGrammar67 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Grammar__Group__0_in_ruleGrammar94 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGrammarID_in_entryRuleGrammarID120 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleGrammarID127 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__GrammarID__Group__0_in_ruleGrammarID154 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAbstractRule_in_entryRuleAbstractRule180 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAbstractRule187 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AbstractRule__Alternatives_in_ruleAbstractRule214 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAbstractMetamodelDeclaration_in_entryRuleAbstractMetamodelDeclaration240 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAbstractMetamodelDeclaration247 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AbstractMetamodelDeclaration__Alternatives_in_ruleAbstractMetamodelDeclaration274 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGeneratedMetamodel_in_entryRuleGeneratedMetamodel300 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleGeneratedMetamodel307 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__GeneratedMetamodel__Group__0_in_ruleGeneratedMetamodel334 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleReferencedMetamodel_in_entryRuleReferencedMetamodel360 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleReferencedMetamodel367 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__0_in_ruleReferencedMetamodel394 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParserRule_in_entryRuleParserRule420 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleParserRule427 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ParserRule__Group__0_in_ruleParserRule454 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeRef_in_entryRuleTypeRef480 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTypeRef487 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TypeRef__Group__0_in_ruleTypeRef514 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAlternatives_in_entryRuleAlternatives540 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAlternatives547 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Alternatives__Group__0_in_ruleAlternatives574 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGroup_in_entryRuleGroup600 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleGroup607 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Group__Group__0_in_ruleGroup634 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAbstractToken_in_entryRuleAbstractToken660 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAbstractToken667 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AbstractToken__Alternatives_in_ruleAbstractToken694 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAbstractTokenWithCardinality_in_entryRuleAbstractTokenWithCardinality720 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAbstractTokenWithCardinality727 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AbstractTokenWithCardinality__Group__0_in_ruleAbstractTokenWithCardinality754 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAction_in_entryRuleAction780 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAction787 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Action__Group__0_in_ruleAction814 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAbstractTerminal_in_entryRuleAbstractTerminal840 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAbstractTerminal847 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AbstractTerminal__Alternatives_in_ruleAbstractTerminal874 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleKeyword_in_entryRuleKeyword900 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleKeyword907 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Keyword__ValueAssignment_in_ruleKeyword934 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRuleCall_in_entryRuleRuleCall960 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRuleCall967 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__RuleCall__RuleAssignment_in_ruleRuleCall994 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAssignment_in_entryRuleAssignment1020 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAssignment1027 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Assignment__Group__0_in_ruleAssignment1054 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAssignableTerminal_in_entryRuleAssignableTerminal1080 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAssignableTerminal1087 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AssignableTerminal__Alternatives_in_ruleAssignableTerminal1114 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParenthesizedAssignableElement_in_entryRuleParenthesizedAssignableElement1140 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleParenthesizedAssignableElement1147 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ParenthesizedAssignableElement__Group__0_in_ruleParenthesizedAssignableElement1174 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAssignableAlternatives_in_entryRuleAssignableAlternatives1200 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAssignableAlternatives1207 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AssignableAlternatives__Group__0_in_ruleAssignableAlternatives1234 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCrossReference_in_entryRuleCrossReference1260 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleCrossReference1267 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CrossReference__Group__0_in_ruleCrossReference1294 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCrossReferenceableTerminal_in_entryRuleCrossReferenceableTerminal1320 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleCrossReferenceableTerminal1327 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CrossReferenceableTerminal__Alternatives_in_ruleCrossReferenceableTerminal1354 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParenthesizedCrossReferenceableElement_in_entryRuleParenthesizedCrossReferenceableElement1380 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleParenthesizedCrossReferenceableElement1387 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ParenthesizedCrossReferenceableElement__Group__0_in_ruleParenthesizedCrossReferenceableElement1414 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCrossReferenceableAlternatives_in_entryRuleCrossReferenceableAlternatives1440 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleCrossReferenceableAlternatives1447 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CrossReferenceableAlternatives__Group__0_in_ruleCrossReferenceableAlternatives1474 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParenthesizedElement_in_entryRuleParenthesizedElement1500 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleParenthesizedElement1507 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ParenthesizedElement__Group__0_in_ruleParenthesizedElement1534 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTerminalRule_in_entryRuleTerminalRule1560 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTerminalRule1567 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TerminalRule__Group__0_in_ruleTerminalRule1594 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTerminalAlternatives_in_entryRuleTerminalAlternatives1620 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTerminalAlternatives1627 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TerminalAlternatives__Group__0_in_ruleTerminalAlternatives1654 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTerminalGroup_in_entryRuleTerminalGroup1680 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTerminalGroup1687 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TerminalGroup__Group__0_in_ruleTerminalGroup1714 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTerminalToken_in_entryRuleTerminalToken1740 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTerminalToken1747 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TerminalToken__Group__0_in_ruleTerminalToken1774 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTerminalTokenElement_in_entryRuleTerminalTokenElement1800 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTerminalTokenElement1807 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TerminalTokenElement__Alternatives_in_ruleTerminalTokenElement1834 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParenthesizedTerminalElement_in_entryRuleParenthesizedTerminalElement1860 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleParenthesizedTerminalElement1867 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ParenthesizedTerminalElement__Group__0_in_ruleParenthesizedTerminalElement1894 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAbstractNegatedToken_in_entryRuleAbstractNegatedToken1920 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAbstractNegatedToken1927 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AbstractNegatedToken__Alternatives_in_ruleAbstractNegatedToken1954 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNegatedToken_in_entryRuleNegatedToken1980 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNegatedToken1987 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NegatedToken__Group__0_in_ruleNegatedToken2014 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUntilToken_in_entryRuleUntilToken2040 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleUntilToken2047 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UntilToken__Group__0_in_ruleUntilToken2074 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleWildcard_in_entryRuleWildcard2100 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleWildcard2107 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Wildcard__Group__0_in_ruleWildcard2134 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCharacterRange_in_entryRuleCharacterRange2160 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleCharacterRange2167 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CharacterRange__Group__0_in_ruleCharacterRange2194 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEnumRule_in_entryRuleEnumRule2220 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEnumRule2227 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumRule__Group__0_in_ruleEnumRule2254 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEnumLiterals_in_entryRuleEnumLiterals2280 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEnumLiterals2287 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumLiterals__Group__0_in_ruleEnumLiterals2314 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEnumLiteralDeclaration_in_entryRuleEnumLiteralDeclaration2340 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEnumLiteralDeclaration2347 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumLiteralDeclaration__Group__0_in_ruleEnumLiteralDeclaration2374 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParserRule_in_rule__AbstractRule__Alternatives2410 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTerminalRule_in_rule__AbstractRule__Alternatives2427 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEnumRule_in_rule__AbstractRule__Alternatives2444 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGeneratedMetamodel_in_rule__AbstractMetamodelDeclaration__Alternatives2476 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleReferencedMetamodel_in_rule__AbstractMetamodelDeclaration__Alternatives2493 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAbstractTokenWithCardinality_in_rule__AbstractToken__Alternatives2525 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAction_in_rule__AbstractToken__Alternatives2542 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAssignment_in_rule__AbstractTokenWithCardinality__Alternatives_02574 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAbstractTerminal_in_rule__AbstractTokenWithCardinality__Alternatives_02591 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_02624 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_02644 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_02664 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__Action__OperatorAlternatives_2_2_02699 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_rule__Action__OperatorAlternatives_2_2_02719 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleKeyword_in_rule__AbstractTerminal__Alternatives2753 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRuleCall_in_rule__AbstractTerminal__Alternatives2770 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParenthesizedElement_in_rule__AbstractTerminal__Alternatives2787 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_rule__Assignment__OperatorAlternatives_1_02820 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__Assignment__OperatorAlternatives_1_02840 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_rule__Assignment__OperatorAlternatives_1_02860 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleKeyword_in_rule__AssignableTerminal__Alternatives2894 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRuleCall_in_rule__AssignableTerminal__Alternatives2911 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParenthesizedAssignableElement_in_rule__AssignableTerminal__Alternatives2928 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCrossReference_in_rule__AssignableTerminal__Alternatives2945 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleKeyword_in_rule__CrossReferenceableTerminal__Alternatives2977 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRuleCall_in_rule__CrossReferenceableTerminal__Alternatives2994 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParenthesizedCrossReferenceableElement_in_rule__CrossReferenceableTerminal__Alternatives3011 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_rule__TerminalToken__CardinalityAlternatives_1_03044 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_rule__TerminalToken__CardinalityAlternatives_1_03064 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__TerminalToken__CardinalityAlternatives_1_03084 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCharacterRange_in_rule__TerminalTokenElement__Alternatives3118 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleRuleCall_in_rule__TerminalTokenElement__Alternatives3135 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParenthesizedTerminalElement_in_rule__TerminalTokenElement__Alternatives3152 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAbstractNegatedToken_in_rule__TerminalTokenElement__Alternatives3169 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleWildcard_in_rule__TerminalTokenElement__Alternatives3186 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleNegatedToken_in_rule__AbstractNegatedToken__Alternatives3218 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUntilToken_in_rule__AbstractNegatedToken__Alternatives3235 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_rule__Grammar__Group__03270 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Grammar__Group__1_in_rule__Grammar__Group__03280 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Grammar__NameAssignment_1_in_rule__Grammar__Group__13308 = new BitSet(new long[]{0x0000031002840010L});
-    public static final BitSet FOLLOW_rule__Grammar__Group__2_in_rule__Grammar__Group__13317 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Grammar__Group_2__0_in_rule__Grammar__Group__23345 = new BitSet(new long[]{0x0000031002800010L});
-    public static final BitSet FOLLOW_rule__Grammar__Group__3_in_rule__Grammar__Group__23355 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Grammar__Group_3__0_in_rule__Grammar__Group__33383 = new BitSet(new long[]{0x0000011002800010L});
-    public static final BitSet FOLLOW_rule__Grammar__Group__4_in_rule__Grammar__Group__33393 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Grammar__MetamodelDeclarationsAssignment_4_in_rule__Grammar__Group__43421 = new BitSet(new long[]{0x0000011002800010L});
-    public static final BitSet FOLLOW_rule__Grammar__Group__5_in_rule__Grammar__Group__43431 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Grammar__RulesAssignment_5_in_rule__Grammar__Group__53461 = new BitSet(new long[]{0x0000011000000012L});
-    public static final BitSet FOLLOW_rule__Grammar__RulesAssignment_5_in_rule__Grammar__Group__53473 = new BitSet(new long[]{0x0000011000000012L});
-    public static final BitSet FOLLOW_18_in_rule__Grammar__Group_2__03523 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Grammar__Group_2__1_in_rule__Grammar__Group_2__03533 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Grammar__UsedGrammarsAssignment_2_1_in_rule__Grammar__Group_2__13561 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_rule__Grammar__Group_2__2_in_rule__Grammar__Group_2__13570 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Grammar__Group_2_2__0_in_rule__Grammar__Group_2__23598 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_19_in_rule__Grammar__Group_2_2__03640 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Grammar__Group_2_2__1_in_rule__Grammar__Group_2_2__03650 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Grammar__UsedGrammarsAssignment_2_2_1_in_rule__Grammar__Group_2_2__13678 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Grammar__DefinesHiddenTokensAssignment_3_0_in_rule__Grammar__Group_3__03716 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_rule__Grammar__Group_3__1_in_rule__Grammar__Group_3__03725 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_rule__Grammar__Group_3__13754 = new BitSet(new long[]{0x0000000000200010L});
-    public static final BitSet FOLLOW_rule__Grammar__Group_3__2_in_rule__Grammar__Group_3__13764 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Grammar__Group_3_2__0_in_rule__Grammar__Group_3__23792 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_rule__Grammar__Group_3__3_in_rule__Grammar__Group_3__23802 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_rule__Grammar__Group_3__33831 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Grammar__HiddenTokensAssignment_3_2_0_in_rule__Grammar__Group_3_2__03874 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_rule__Grammar__Group_3_2__1_in_rule__Grammar__Group_3_2__03883 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Grammar__Group_3_2_1__0_in_rule__Grammar__Group_3_2__13911 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_19_in_rule__Grammar__Group_3_2_1__03951 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Grammar__Group_3_2_1__1_in_rule__Grammar__Group_3_2_1__03961 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Grammar__HiddenTokensAssignment_3_2_1_1_in_rule__Grammar__Group_3_2_1__13989 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__GrammarID__Group__04027 = new BitSet(new long[]{0x0000000000400002L});
-    public static final BitSet FOLLOW_rule__GrammarID__Group__1_in_rule__GrammarID__Group__04035 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__GrammarID__Group_1__0_in_rule__GrammarID__Group__14063 = new BitSet(new long[]{0x0000000000400002L});
-    public static final BitSet FOLLOW_22_in_rule__GrammarID__Group_1__04103 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__GrammarID__Group_1__1_in_rule__GrammarID__Group_1__04113 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__GrammarID__Group_1__14141 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_rule__GeneratedMetamodel__Group__04179 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__GeneratedMetamodel__Group__1_in_rule__GeneratedMetamodel__Group__04189 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__GeneratedMetamodel__NameAssignment_1_in_rule__GeneratedMetamodel__Group__14217 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__GeneratedMetamodel__Group__2_in_rule__GeneratedMetamodel__Group__14226 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__GeneratedMetamodel__EPackageAssignment_2_in_rule__GeneratedMetamodel__Group__24254 = new BitSet(new long[]{0x0000000001000002L});
-    public static final BitSet FOLLOW_rule__GeneratedMetamodel__Group__3_in_rule__GeneratedMetamodel__Group__24263 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__GeneratedMetamodel__Group_3__0_in_rule__GeneratedMetamodel__Group__34291 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_24_in_rule__GeneratedMetamodel__Group_3__04335 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__GeneratedMetamodel__Group_3__1_in_rule__GeneratedMetamodel__Group_3__04345 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__GeneratedMetamodel__AliasAssignment_3_1_in_rule__GeneratedMetamodel__Group_3__14373 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_25_in_rule__ReferencedMetamodel__Group__04412 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__1_in_rule__ReferencedMetamodel__Group__04422 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ReferencedMetamodel__EPackageAssignment_1_in_rule__ReferencedMetamodel__Group__14450 = new BitSet(new long[]{0x0000000001000002L});
-    public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__2_in_rule__ReferencedMetamodel__Group__14459 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group_2__0_in_rule__ReferencedMetamodel__Group__24487 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_24_in_rule__ReferencedMetamodel__Group_2__04529 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group_2__1_in_rule__ReferencedMetamodel__Group_2__04539 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ReferencedMetamodel__AliasAssignment_2_1_in_rule__ReferencedMetamodel__Group_2__14567 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ParserRule__NameAssignment_0_in_rule__ParserRule__Group__04605 = new BitSet(new long[]{0x0000020014000000L});
-    public static final BitSet FOLLOW_rule__ParserRule__Group__1_in_rule__ParserRule__Group__04614 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ParserRule__Group_1__0_in_rule__ParserRule__Group__14642 = new BitSet(new long[]{0x0000020004000000L});
-    public static final BitSet FOLLOW_rule__ParserRule__Group__2_in_rule__ParserRule__Group__14652 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ParserRule__Group_2__0_in_rule__ParserRule__Group__24680 = new BitSet(new long[]{0x0000000004000000L});
-    public static final BitSet FOLLOW_rule__ParserRule__Group__3_in_rule__ParserRule__Group__24690 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_rule__ParserRule__Group__34719 = new BitSet(new long[]{0x0000000080100030L});
-    public static final BitSet FOLLOW_rule__ParserRule__Group__4_in_rule__ParserRule__Group__34729 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ParserRule__AlternativesAssignment_4_in_rule__ParserRule__Group__44757 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_rule__ParserRule__Group__5_in_rule__ParserRule__Group__44766 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_rule__ParserRule__Group__54795 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_rule__ParserRule__Group_1__04843 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__ParserRule__Group_1__1_in_rule__ParserRule__Group_1__04853 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ParserRule__TypeAssignment_1_1_in_rule__ParserRule__Group_1__14881 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ParserRule__DefinesHiddenTokensAssignment_2_0_in_rule__ParserRule__Group_2__04919 = new BitSet(new long[]{0x0000000000100000L});
-    public static final BitSet FOLLOW_rule__ParserRule__Group_2__1_in_rule__ParserRule__Group_2__04928 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_rule__ParserRule__Group_2__14957 = new BitSet(new long[]{0x0000000000200010L});
-    public static final BitSet FOLLOW_rule__ParserRule__Group_2__2_in_rule__ParserRule__Group_2__14967 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ParserRule__Group_2_2__0_in_rule__ParserRule__Group_2__24995 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_rule__ParserRule__Group_2__3_in_rule__ParserRule__Group_2__25005 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_rule__ParserRule__Group_2__35034 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ParserRule__HiddenTokensAssignment_2_2_0_in_rule__ParserRule__Group_2_2__05077 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_rule__ParserRule__Group_2_2__1_in_rule__ParserRule__Group_2_2__05086 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ParserRule__Group_2_2_1__0_in_rule__ParserRule__Group_2_2__15114 = new BitSet(new long[]{0x0000000000080002L});
-    public static final BitSet FOLLOW_19_in_rule__ParserRule__Group_2_2_1__05154 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__ParserRule__Group_2_2_1__1_in_rule__ParserRule__Group_2_2_1__05164 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ParserRule__HiddenTokensAssignment_2_2_1_1_in_rule__ParserRule__Group_2_2_1__15192 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TypeRef__Group_0__0_in_rule__TypeRef__Group__05230 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__TypeRef__Group__1_in_rule__TypeRef__Group__05240 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TypeRef__ClassifierAssignment_1_in_rule__TypeRef__Group__15268 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TypeRef__MetamodelAssignment_0_0_in_rule__TypeRef__Group_0__05306 = new BitSet(new long[]{0x0000000020000000L});
-    public static final BitSet FOLLOW_rule__TypeRef__Group_0__1_in_rule__TypeRef__Group_0__05315 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_29_in_rule__TypeRef__Group_0__15344 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGroup_in_rule__Alternatives__Group__05383 = new BitSet(new long[]{0x0000000040000002L});
-    public static final BitSet FOLLOW_rule__Alternatives__Group__1_in_rule__Alternatives__Group__05391 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Alternatives__Group_1__0_in_rule__Alternatives__Group__15419 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Alternatives__Group_1__1_in_rule__Alternatives__Group_1__05468 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Alternatives__Group_1_1__0_in_rule__Alternatives__Group_1__15498 = new BitSet(new long[]{0x0000000040000002L});
-    public static final BitSet FOLLOW_rule__Alternatives__Group_1_1__0_in_rule__Alternatives__Group_1__15510 = new BitSet(new long[]{0x0000000040000002L});
-    public static final BitSet FOLLOW_30_in_rule__Alternatives__Group_1_1__05552 = new BitSet(new long[]{0x0000000080100030L});
-    public static final BitSet FOLLOW_rule__Alternatives__Group_1_1__1_in_rule__Alternatives__Group_1_1__05562 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Alternatives__GroupsAssignment_1_1_1_in_rule__Alternatives__Group_1_1__15590 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAbstractToken_in_rule__Group__Group__05628 = new BitSet(new long[]{0x0000000080100032L});
-    public static final BitSet FOLLOW_rule__Group__Group__1_in_rule__Group__Group__05636 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Group__Group_1__0_in_rule__Group__Group__15664 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Group__Group_1__1_in_rule__Group__Group_1__05713 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Group__TokensAssignment_1_1_in_rule__Group__Group_1__15743 = new BitSet(new long[]{0x0000000080100032L});
-    public static final BitSet FOLLOW_rule__Group__TokensAssignment_1_1_in_rule__Group__Group_1__15755 = new BitSet(new long[]{0x0000000080100032L});
-    public static final BitSet FOLLOW_rule__AbstractTokenWithCardinality__Alternatives_0_in_rule__AbstractTokenWithCardinality__Group__05796 = new BitSet(new long[]{0x0000000000003802L});
-    public static final BitSet FOLLOW_rule__AbstractTokenWithCardinality__Group__1_in_rule__AbstractTokenWithCardinality__Group__05805 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AbstractTokenWithCardinality__CardinalityAssignment_1_in_rule__AbstractTokenWithCardinality__Group__15833 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_rule__Action__Group__05873 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Action__Group__1_in_rule__Action__Group__05883 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Action__TypeAssignment_1_in_rule__Action__Group__15911 = new BitSet(new long[]{0x0000000100400000L});
-    public static final BitSet FOLLOW_rule__Action__Group__2_in_rule__Action__Group__15920 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Action__Group_2__0_in_rule__Action__Group__25948 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_rule__Action__Group__3_in_rule__Action__Group__25958 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_32_in_rule__Action__Group__35987 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_rule__Action__Group_2__06031 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Action__Group_2__1_in_rule__Action__Group_2__06041 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Action__FeatureAssignment_2_1_in_rule__Action__Group_2__16069 = new BitSet(new long[]{0x000000000000C000L});
-    public static final BitSet FOLLOW_rule__Action__Group_2__2_in_rule__Action__Group_2__16078 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Action__OperatorAssignment_2_2_in_rule__Action__Group_2__26106 = new BitSet(new long[]{0x0000000200000000L});
-    public static final BitSet FOLLOW_rule__Action__Group_2__3_in_rule__Action__Group_2__26115 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_33_in_rule__Action__Group_2__36144 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Assignment__FeatureAssignment_0_in_rule__Assignment__Group__06187 = new BitSet(new long[]{0x000000000001C000L});
-    public static final BitSet FOLLOW_rule__Assignment__Group__1_in_rule__Assignment__Group__06196 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Assignment__OperatorAssignment_1_in_rule__Assignment__Group__16224 = new BitSet(new long[]{0x0000000400100030L});
-    public static final BitSet FOLLOW_rule__Assignment__Group__2_in_rule__Assignment__Group__16233 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Assignment__TerminalAssignment_2_in_rule__Assignment__Group__26261 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_rule__ParenthesizedAssignableElement__Group__06302 = new BitSet(new long[]{0x0000000400100030L});
-    public static final BitSet FOLLOW_rule__ParenthesizedAssignableElement__Group__1_in_rule__ParenthesizedAssignableElement__Group__06312 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAssignableAlternatives_in_rule__ParenthesizedAssignableElement__Group__16340 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_rule__ParenthesizedAssignableElement__Group__2_in_rule__ParenthesizedAssignableElement__Group__16348 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_rule__ParenthesizedAssignableElement__Group__26377 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAssignableTerminal_in_rule__AssignableAlternatives__Group__06418 = new BitSet(new long[]{0x0000000040000002L});
-    public static final BitSet FOLLOW_rule__AssignableAlternatives__Group__1_in_rule__AssignableAlternatives__Group__06426 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AssignableAlternatives__Group_1__0_in_rule__AssignableAlternatives__Group__16454 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AssignableAlternatives__Group_1__1_in_rule__AssignableAlternatives__Group_1__06503 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AssignableAlternatives__Group_1_1__0_in_rule__AssignableAlternatives__Group_1__16533 = new BitSet(new long[]{0x0000000040000002L});
-    public static final BitSet FOLLOW_rule__AssignableAlternatives__Group_1_1__0_in_rule__AssignableAlternatives__Group_1__16545 = new BitSet(new long[]{0x0000000040000002L});
-    public static final BitSet FOLLOW_30_in_rule__AssignableAlternatives__Group_1_1__06587 = new BitSet(new long[]{0x0000000400100030L});
-    public static final BitSet FOLLOW_rule__AssignableAlternatives__Group_1_1__1_in_rule__AssignableAlternatives__Group_1_1__06597 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AssignableAlternatives__GroupsAssignment_1_1_1_in_rule__AssignableAlternatives__Group_1_1__16625 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_rule__CrossReference__Group__06664 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__CrossReference__Group__1_in_rule__CrossReference__Group__06674 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CrossReference__TypeAssignment_1_in_rule__CrossReference__Group__16702 = new BitSet(new long[]{0x0000000840000000L});
-    public static final BitSet FOLLOW_rule__CrossReference__Group__2_in_rule__CrossReference__Group__16711 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CrossReference__Group_2__0_in_rule__CrossReference__Group__26739 = new BitSet(new long[]{0x0000000800000000L});
-    public static final BitSet FOLLOW_rule__CrossReference__Group__3_in_rule__CrossReference__Group__26749 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_35_in_rule__CrossReference__Group__36778 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_30_in_rule__CrossReference__Group_2__06822 = new BitSet(new long[]{0x0000000000100030L});
-    public static final BitSet FOLLOW_rule__CrossReference__Group_2__1_in_rule__CrossReference__Group_2__06832 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CrossReference__TerminalAssignment_2_1_in_rule__CrossReference__Group_2__16860 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_rule__ParenthesizedCrossReferenceableElement__Group__06899 = new BitSet(new long[]{0x0000000000100030L});
-    public static final BitSet FOLLOW_rule__ParenthesizedCrossReferenceableElement__Group__1_in_rule__ParenthesizedCrossReferenceableElement__Group__06909 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCrossReferenceableAlternatives_in_rule__ParenthesizedCrossReferenceableElement__Group__16937 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_rule__ParenthesizedCrossReferenceableElement__Group__2_in_rule__ParenthesizedCrossReferenceableElement__Group__16945 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_rule__ParenthesizedCrossReferenceableElement__Group__26974 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCrossReferenceableTerminal_in_rule__CrossReferenceableAlternatives__Group__07015 = new BitSet(new long[]{0x0000000040000002L});
-    public static final BitSet FOLLOW_rule__CrossReferenceableAlternatives__Group__1_in_rule__CrossReferenceableAlternatives__Group__07023 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CrossReferenceableAlternatives__Group_1__0_in_rule__CrossReferenceableAlternatives__Group__17051 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CrossReferenceableAlternatives__Group_1__1_in_rule__CrossReferenceableAlternatives__Group_1__07100 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CrossReferenceableAlternatives__Group_1_1__0_in_rule__CrossReferenceableAlternatives__Group_1__17130 = new BitSet(new long[]{0x0000000040000002L});
-    public static final BitSet FOLLOW_rule__CrossReferenceableAlternatives__Group_1_1__0_in_rule__CrossReferenceableAlternatives__Group_1__17142 = new BitSet(new long[]{0x0000000040000002L});
-    public static final BitSet FOLLOW_30_in_rule__CrossReferenceableAlternatives__Group_1_1__07184 = new BitSet(new long[]{0x0000000000100030L});
-    public static final BitSet FOLLOW_rule__CrossReferenceableAlternatives__Group_1_1__1_in_rule__CrossReferenceableAlternatives__Group_1_1__07194 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CrossReferenceableAlternatives__GroupsAssignment_1_1_1_in_rule__CrossReferenceableAlternatives__Group_1_1__17222 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_rule__ParenthesizedElement__Group__07261 = new BitSet(new long[]{0x0000000080100030L});
-    public static final BitSet FOLLOW_rule__ParenthesizedElement__Group__1_in_rule__ParenthesizedElement__Group__07271 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAlternatives_in_rule__ParenthesizedElement__Group__17299 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_rule__ParenthesizedElement__Group__2_in_rule__ParenthesizedElement__Group__17307 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_rule__ParenthesizedElement__Group__27336 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_rule__TerminalRule__Group__07378 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__TerminalRule__Group__1_in_rule__TerminalRule__Group__07388 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TerminalRule__NameAssignment_1_in_rule__TerminalRule__Group__17416 = new BitSet(new long[]{0x0000000014000000L});
-    public static final BitSet FOLLOW_rule__TerminalRule__Group__2_in_rule__TerminalRule__Group__17425 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TerminalRule__Group_2__0_in_rule__TerminalRule__Group__27453 = new BitSet(new long[]{0x0000000004000000L});
-    public static final BitSet FOLLOW_rule__TerminalRule__Group__3_in_rule__TerminalRule__Group__27463 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_rule__TerminalRule__Group__37492 = new BitSet(new long[]{0x0000006000500030L});
-    public static final BitSet FOLLOW_rule__TerminalRule__Group__4_in_rule__TerminalRule__Group__37502 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TerminalRule__AlternativesAssignment_4_in_rule__TerminalRule__Group__47530 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_rule__TerminalRule__Group__5_in_rule__TerminalRule__Group__47539 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_rule__TerminalRule__Group__57568 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_rule__TerminalRule__Group_2__07616 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__TerminalRule__Group_2__1_in_rule__TerminalRule__Group_2__07626 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TerminalRule__TypeAssignment_2_1_in_rule__TerminalRule__Group_2__17654 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTerminalGroup_in_rule__TerminalAlternatives__Group__07692 = new BitSet(new long[]{0x0000000040000002L});
-    public static final BitSet FOLLOW_rule__TerminalAlternatives__Group__1_in_rule__TerminalAlternatives__Group__07700 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TerminalAlternatives__Group_1__0_in_rule__TerminalAlternatives__Group__17728 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TerminalAlternatives__Group_1__1_in_rule__TerminalAlternatives__Group_1__07777 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TerminalAlternatives__Group_1_1__0_in_rule__TerminalAlternatives__Group_1__17807 = new BitSet(new long[]{0x0000000040000002L});
-    public static final BitSet FOLLOW_rule__TerminalAlternatives__Group_1_1__0_in_rule__TerminalAlternatives__Group_1__17819 = new BitSet(new long[]{0x0000000040000002L});
-    public static final BitSet FOLLOW_30_in_rule__TerminalAlternatives__Group_1_1__07861 = new BitSet(new long[]{0x0000006000500030L});
-    public static final BitSet FOLLOW_rule__TerminalAlternatives__Group_1_1__1_in_rule__TerminalAlternatives__Group_1_1__07871 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TerminalAlternatives__GroupsAssignment_1_1_1_in_rule__TerminalAlternatives__Group_1_1__17899 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTerminalToken_in_rule__TerminalGroup__Group__07937 = new BitSet(new long[]{0x0000006000500032L});
-    public static final BitSet FOLLOW_rule__TerminalGroup__Group__1_in_rule__TerminalGroup__Group__07945 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TerminalGroup__Group_1__0_in_rule__TerminalGroup__Group__17973 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TerminalGroup__Group_1__1_in_rule__TerminalGroup__Group_1__08022 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TerminalGroup__TokensAssignment_1_1_in_rule__TerminalGroup__Group_1__18052 = new BitSet(new long[]{0x0000006000500032L});
-    public static final BitSet FOLLOW_rule__TerminalGroup__TokensAssignment_1_1_in_rule__TerminalGroup__Group_1__18064 = new BitSet(new long[]{0x0000006000500032L});
-    public static final BitSet FOLLOW_ruleTerminalTokenElement_in_rule__TerminalToken__Group__08105 = new BitSet(new long[]{0x0000000000003802L});
-    public static final BitSet FOLLOW_rule__TerminalToken__Group__1_in_rule__TerminalToken__Group__08113 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TerminalToken__CardinalityAssignment_1_in_rule__TerminalToken__Group__18141 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_rule__ParenthesizedTerminalElement__Group__08181 = new BitSet(new long[]{0x0000006000500030L});
-    public static final BitSet FOLLOW_rule__ParenthesizedTerminalElement__Group__1_in_rule__ParenthesizedTerminalElement__Group__08191 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTerminalAlternatives_in_rule__ParenthesizedTerminalElement__Group__18219 = new BitSet(new long[]{0x0000000000200000L});
-    public static final BitSet FOLLOW_rule__ParenthesizedTerminalElement__Group__2_in_rule__ParenthesizedTerminalElement__Group__18227 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_rule__ParenthesizedTerminalElement__Group__28256 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_37_in_rule__NegatedToken__Group__08298 = new BitSet(new long[]{0x0000006000500030L});
-    public static final BitSet FOLLOW_rule__NegatedToken__Group__1_in_rule__NegatedToken__Group__08308 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__NegatedToken__TerminalAssignment_1_in_rule__NegatedToken__Group__18336 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_38_in_rule__UntilToken__Group__08375 = new BitSet(new long[]{0x0000006000500030L});
-    public static final BitSet FOLLOW_rule__UntilToken__Group__1_in_rule__UntilToken__Group__08385 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__UntilToken__TerminalAssignment_1_in_rule__UntilToken__Group__18413 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Wildcard__Group__1_in_rule__Wildcard__Group__08461 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_rule__Wildcard__Group__18490 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleKeyword_in_rule__CharacterRange__Group__08529 = new BitSet(new long[]{0x0000008000000002L});
-    public static final BitSet FOLLOW_rule__CharacterRange__Group__1_in_rule__CharacterRange__Group__08537 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CharacterRange__Group_1__0_in_rule__CharacterRange__Group__18565 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CharacterRange__Group_1__1_in_rule__CharacterRange__Group_1__08614 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_39_in_rule__CharacterRange__Group_1__18643 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__CharacterRange__Group_1__2_in_rule__CharacterRange__Group_1__18653 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__CharacterRange__RightAssignment_1_2_in_rule__CharacterRange__Group_1__28681 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_40_in_rule__EnumRule__Group__08722 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__EnumRule__Group__1_in_rule__EnumRule__Group__08732 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumRule__NameAssignment_1_in_rule__EnumRule__Group__18760 = new BitSet(new long[]{0x0000000014000000L});
-    public static final BitSet FOLLOW_rule__EnumRule__Group__2_in_rule__EnumRule__Group__18769 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumRule__Group_2__0_in_rule__EnumRule__Group__28797 = new BitSet(new long[]{0x0000000004000000L});
-    public static final BitSet FOLLOW_rule__EnumRule__Group__3_in_rule__EnumRule__Group__28807 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_rule__EnumRule__Group__38836 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__EnumRule__Group__4_in_rule__EnumRule__Group__38846 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumRule__AlternativesAssignment_4_in_rule__EnumRule__Group__48874 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_rule__EnumRule__Group__5_in_rule__EnumRule__Group__48883 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_rule__EnumRule__Group__58912 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_rule__EnumRule__Group_2__08960 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__EnumRule__Group_2__1_in_rule__EnumRule__Group_2__08970 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumRule__TypeAssignment_2_1_in_rule__EnumRule__Group_2__18998 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEnumLiteralDeclaration_in_rule__EnumLiterals__Group__09036 = new BitSet(new long[]{0x0000000040000002L});
-    public static final BitSet FOLLOW_rule__EnumLiterals__Group__1_in_rule__EnumLiterals__Group__09044 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumLiterals__Group_1__0_in_rule__EnumLiterals__Group__19072 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumLiterals__Group_1__1_in_rule__EnumLiterals__Group_1__09121 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumLiterals__Group_1_1__0_in_rule__EnumLiterals__Group_1__19151 = new BitSet(new long[]{0x0000000040000002L});
-    public static final BitSet FOLLOW_rule__EnumLiterals__Group_1_1__0_in_rule__EnumLiterals__Group_1__19163 = new BitSet(new long[]{0x0000000040000002L});
-    public static final BitSet FOLLOW_30_in_rule__EnumLiterals__Group_1_1__09205 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__EnumLiterals__Group_1_1__1_in_rule__EnumLiterals__Group_1_1__09215 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumLiterals__GroupsAssignment_1_1_1_in_rule__EnumLiterals__Group_1_1__19243 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumLiteralDeclaration__EnumLiteralAssignment_0_in_rule__EnumLiteralDeclaration__Group__09281 = new BitSet(new long[]{0x0000000000004002L});
-    public static final BitSet FOLLOW_rule__EnumLiteralDeclaration__Group__1_in_rule__EnumLiteralDeclaration__Group__09290 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumLiteralDeclaration__Group_1__0_in_rule__EnumLiteralDeclaration__Group__19318 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__EnumLiteralDeclaration__Group_1__09358 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__EnumLiteralDeclaration__Group_1__1_in_rule__EnumLiteralDeclaration__Group_1__09368 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EnumLiteralDeclaration__LiteralAssignment_1_1_in_rule__EnumLiteralDeclaration__Group_1__19396 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGrammarID_in_rule__Grammar__NameAssignment_19434 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGrammarID_in_rule__Grammar__UsedGrammarsAssignment_2_19469 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGrammarID_in_rule__Grammar__UsedGrammarsAssignment_2_2_19508 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_41_in_rule__Grammar__DefinesHiddenTokensAssignment_3_09548 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Grammar__HiddenTokensAssignment_3_2_09591 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Grammar__HiddenTokensAssignment_3_2_1_19630 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAbstractMetamodelDeclaration_in_rule__Grammar__MetamodelDeclarationsAssignment_49665 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAbstractRule_in_rule__Grammar__RulesAssignment_59696 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__GeneratedMetamodel__NameAssignment_19727 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__GeneratedMetamodel__EPackageAssignment_29762 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__GeneratedMetamodel__AliasAssignment_3_19797 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__ReferencedMetamodel__EPackageAssignment_19832 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__ReferencedMetamodel__AliasAssignment_2_19867 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__ParserRule__NameAssignment_09898 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeRef_in_rule__ParserRule__TypeAssignment_1_19929 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_41_in_rule__ParserRule__DefinesHiddenTokensAssignment_2_09965 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__ParserRule__HiddenTokensAssignment_2_2_010008 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__ParserRule__HiddenTokensAssignment_2_2_1_110047 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAlternatives_in_rule__ParserRule__AlternativesAssignment_410082 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__TypeRef__MetamodelAssignment_0_010117 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__TypeRef__ClassifierAssignment_110156 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGroup_in_rule__Alternatives__GroupsAssignment_1_1_110191 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAbstractToken_in_rule__Group__TokensAssignment_1_110222 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0_in_rule__AbstractTokenWithCardinality__CardinalityAssignment_110253 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeRef_in_rule__Action__TypeAssignment_110286 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Action__FeatureAssignment_2_110317 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Action__OperatorAlternatives_2_2_0_in_rule__Action__OperatorAssignment_2_210348 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__Keyword__ValueAssignment10381 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__RuleCall__RuleAssignment10416 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Assignment__FeatureAssignment_010451 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Assignment__OperatorAlternatives_1_0_in_rule__Assignment__OperatorAssignment_110482 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAssignableTerminal_in_rule__Assignment__TerminalAssignment_210515 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAssignableTerminal_in_rule__AssignableAlternatives__GroupsAssignment_1_1_110546 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeRef_in_rule__CrossReference__TypeAssignment_110577 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCrossReferenceableTerminal_in_rule__CrossReference__TerminalAssignment_2_110608 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleCrossReferenceableTerminal_in_rule__CrossReferenceableAlternatives__GroupsAssignment_1_1_110639 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__TerminalRule__NameAssignment_110670 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeRef_in_rule__TerminalRule__TypeAssignment_2_110701 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTerminalAlternatives_in_rule__TerminalRule__AlternativesAssignment_410732 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTerminalGroup_in_rule__TerminalAlternatives__GroupsAssignment_1_1_110763 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTerminalToken_in_rule__TerminalGroup__TokensAssignment_1_110794 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TerminalToken__CardinalityAlternatives_1_0_in_rule__TerminalToken__CardinalityAssignment_110825 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTerminalTokenElement_in_rule__NegatedToken__TerminalAssignment_110858 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTerminalTokenElement_in_rule__UntilToken__TerminalAssignment_110889 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleKeyword_in_rule__CharacterRange__RightAssignment_1_210920 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__EnumRule__NameAssignment_110951 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTypeRef_in_rule__EnumRule__TypeAssignment_2_110982 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEnumLiterals_in_rule__EnumRule__AlternativesAssignment_411013 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEnumLiteralDeclaration_in_rule__EnumLiterals__GroupsAssignment_1_1_111044 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__EnumLiteralDeclaration__EnumLiteralAssignment_011079 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleKeyword_in_rule__EnumLiteralDeclaration__LiteralAssignment_1_111114 = new BitSet(new long[]{0x0000000000000002L});
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_ruleGrammar_in_entryRuleGrammar60 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleGrammar67 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Grammar__Group__0_in_ruleGrammar94 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleGrammarID_in_entryRuleGrammarID120 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleGrammarID127 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__GrammarID__Group__0_in_ruleGrammarID154 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAbstractRule_in_entryRuleAbstractRule180 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAbstractRule187 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__AbstractRule__Alternatives_in_ruleAbstractRule214 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAbstractMetamodelDeclaration_in_entryRuleAbstractMetamodelDeclaration240 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAbstractMetamodelDeclaration247 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__AbstractMetamodelDeclaration__Alternatives_in_ruleAbstractMetamodelDeclaration274 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleGeneratedMetamodel_in_entryRuleGeneratedMetamodel300 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleGeneratedMetamodel307 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__GeneratedMetamodel__Group__0_in_ruleGeneratedMetamodel334 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleReferencedMetamodel_in_entryRuleReferencedMetamodel360 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleReferencedMetamodel367 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__0_in_ruleReferencedMetamodel394 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleParserRule_in_entryRuleParserRule420 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleParserRule427 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ParserRule__Group__0_in_ruleParserRule454 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeRef_in_entryRuleTypeRef480 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTypeRef487 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TypeRef__Group__0_in_ruleTypeRef514 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAlternatives_in_entryRuleAlternatives540 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAlternatives547 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Alternatives__Group__0_in_ruleAlternatives574 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleGroup_in_entryRuleGroup600 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleGroup607 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Group__Group__0_in_ruleGroup634 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAbstractToken_in_entryRuleAbstractToken660 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAbstractToken667 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__AbstractToken__Alternatives_in_ruleAbstractToken694 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAbstractTokenWithCardinality_in_entryRuleAbstractTokenWithCardinality720 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAbstractTokenWithCardinality727 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__AbstractTokenWithCardinality__Group__0_in_ruleAbstractTokenWithCardinality754 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAction_in_entryRuleAction780 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAction787 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Action__Group__0_in_ruleAction814 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAbstractTerminal_in_entryRuleAbstractTerminal840 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAbstractTerminal847 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__AbstractTerminal__Alternatives_in_ruleAbstractTerminal874 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleKeyword_in_entryRuleKeyword900 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleKeyword907 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Keyword__ValueAssignment_in_ruleKeyword934 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleRuleCall_in_entryRuleRuleCall960 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleRuleCall967 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__RuleCall__RuleAssignment_in_ruleRuleCall994 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAssignment_in_entryRuleAssignment1020 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAssignment1027 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Assignment__Group__0_in_ruleAssignment1054 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAssignableTerminal_in_entryRuleAssignableTerminal1080 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAssignableTerminal1087 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__AssignableTerminal__Alternatives_in_ruleAssignableTerminal1114 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleParenthesizedAssignableElement_in_entryRuleParenthesizedAssignableElement1140 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleParenthesizedAssignableElement1147 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ParenthesizedAssignableElement__Group__0_in_ruleParenthesizedAssignableElement1174 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAssignableAlternatives_in_entryRuleAssignableAlternatives1200 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAssignableAlternatives1207 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__AssignableAlternatives__Group__0_in_ruleAssignableAlternatives1234 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCrossReference_in_entryRuleCrossReference1260 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleCrossReference1267 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__CrossReference__Group__0_in_ruleCrossReference1294 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCrossReferenceableTerminal_in_entryRuleCrossReferenceableTerminal1320 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleCrossReferenceableTerminal1327 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__CrossReferenceableTerminal__Alternatives_in_ruleCrossReferenceableTerminal1354 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleParenthesizedCrossReferenceableElement_in_entryRuleParenthesizedCrossReferenceableElement1380 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleParenthesizedCrossReferenceableElement1387 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ParenthesizedCrossReferenceableElement__Group__0_in_ruleParenthesizedCrossReferenceableElement1414 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCrossReferenceableAlternatives_in_entryRuleCrossReferenceableAlternatives1440 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleCrossReferenceableAlternatives1447 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__CrossReferenceableAlternatives__Group__0_in_ruleCrossReferenceableAlternatives1474 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleParenthesizedElement_in_entryRuleParenthesizedElement1500 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleParenthesizedElement1507 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ParenthesizedElement__Group__0_in_ruleParenthesizedElement1534 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTerminalRule_in_entryRuleTerminalRule1560 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTerminalRule1567 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TerminalRule__Group__0_in_ruleTerminalRule1594 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTerminalAlternatives_in_entryRuleTerminalAlternatives1620 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTerminalAlternatives1627 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TerminalAlternatives__Group__0_in_ruleTerminalAlternatives1654 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTerminalGroup_in_entryRuleTerminalGroup1680 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTerminalGroup1687 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TerminalGroup__Group__0_in_ruleTerminalGroup1714 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTerminalToken_in_entryRuleTerminalToken1740 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTerminalToken1747 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TerminalToken__Group__0_in_ruleTerminalToken1774 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTerminalTokenElement_in_entryRuleTerminalTokenElement1800 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTerminalTokenElement1807 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TerminalTokenElement__Alternatives_in_ruleTerminalTokenElement1834 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleParenthesizedTerminalElement_in_entryRuleParenthesizedTerminalElement1860 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleParenthesizedTerminalElement1867 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ParenthesizedTerminalElement__Group__0_in_ruleParenthesizedTerminalElement1894 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAbstractNegatedToken_in_entryRuleAbstractNegatedToken1920 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAbstractNegatedToken1927 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__AbstractNegatedToken__Alternatives_in_ruleAbstractNegatedToken1954 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNegatedToken_in_entryRuleNegatedToken1980 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleNegatedToken1987 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__NegatedToken__Group__0_in_ruleNegatedToken2014 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUntilToken_in_entryRuleUntilToken2040 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleUntilToken2047 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__UntilToken__Group__0_in_ruleUntilToken2074 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleWildcard_in_entryRuleWildcard2100 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleWildcard2107 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Wildcard__Group__0_in_ruleWildcard2134 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCharacterRange_in_entryRuleCharacterRange2160 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleCharacterRange2167 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__CharacterRange__Group__0_in_ruleCharacterRange2194 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEnumRule_in_entryRuleEnumRule2220 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEnumRule2227 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EnumRule__Group__0_in_ruleEnumRule2254 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEnumLiterals_in_entryRuleEnumLiterals2280 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEnumLiterals2287 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EnumLiterals__Group__0_in_ruleEnumLiterals2314 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEnumLiteralDeclaration_in_entryRuleEnumLiteralDeclaration2340 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEnumLiteralDeclaration2347 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EnumLiteralDeclaration__Group__0_in_ruleEnumLiteralDeclaration2374 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleParserRule_in_rule__AbstractRule__Alternatives2410 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTerminalRule_in_rule__AbstractRule__Alternatives2427 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEnumRule_in_rule__AbstractRule__Alternatives2444 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleGeneratedMetamodel_in_rule__AbstractMetamodelDeclaration__Alternatives2476 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleReferencedMetamodel_in_rule__AbstractMetamodelDeclaration__Alternatives2493 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAbstractTokenWithCardinality_in_rule__AbstractToken__Alternatives2525 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAction_in_rule__AbstractToken__Alternatives2542 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAssignment_in_rule__AbstractTokenWithCardinality__Alternatives_02574 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAbstractTerminal_in_rule__AbstractTokenWithCardinality__Alternatives_02591 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_02624 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_02644 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_02664 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_rule__Action__OperatorAlternatives_2_2_02699 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_15_in_rule__Action__OperatorAlternatives_2_2_02719 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleKeyword_in_rule__AbstractTerminal__Alternatives2753 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleRuleCall_in_rule__AbstractTerminal__Alternatives2770 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleParenthesizedElement_in_rule__AbstractTerminal__Alternatives2787 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_15_in_rule__Assignment__OperatorAlternatives_1_02820 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_rule__Assignment__OperatorAlternatives_1_02840 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_16_in_rule__Assignment__OperatorAlternatives_1_02860 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleKeyword_in_rule__AssignableTerminal__Alternatives2894 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleRuleCall_in_rule__AssignableTerminal__Alternatives2911 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleParenthesizedAssignableElement_in_rule__AssignableTerminal__Alternatives2928 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCrossReference_in_rule__AssignableTerminal__Alternatives2945 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleKeyword_in_rule__CrossReferenceableTerminal__Alternatives2977 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleRuleCall_in_rule__CrossReferenceableTerminal__Alternatives2994 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleParenthesizedCrossReferenceableElement_in_rule__CrossReferenceableTerminal__Alternatives3011 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_rule__TerminalToken__CardinalityAlternatives_1_03044 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_rule__TerminalToken__CardinalityAlternatives_1_03064 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_rule__TerminalToken__CardinalityAlternatives_1_03084 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCharacterRange_in_rule__TerminalTokenElement__Alternatives3118 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleRuleCall_in_rule__TerminalTokenElement__Alternatives3135 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleParenthesizedTerminalElement_in_rule__TerminalTokenElement__Alternatives3152 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAbstractNegatedToken_in_rule__TerminalTokenElement__Alternatives3169 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleWildcard_in_rule__TerminalTokenElement__Alternatives3186 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleNegatedToken_in_rule__AbstractNegatedToken__Alternatives3218 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUntilToken_in_rule__AbstractNegatedToken__Alternatives3235 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_17_in_rule__Grammar__Group__03270 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__Grammar__Group__1_in_rule__Grammar__Group__03280 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Grammar__NameAssignment_1_in_rule__Grammar__Group__13308 = new BitSet(new long[]{0x0000031002840010L});
+        public static final BitSet FOLLOW_rule__Grammar__Group__2_in_rule__Grammar__Group__13317 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Grammar__Group_2__0_in_rule__Grammar__Group__23345 = new BitSet(new long[]{0x0000031002800010L});
+        public static final BitSet FOLLOW_rule__Grammar__Group__3_in_rule__Grammar__Group__23355 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Grammar__Group_3__0_in_rule__Grammar__Group__33383 = new BitSet(new long[]{0x0000011002800010L});
+        public static final BitSet FOLLOW_rule__Grammar__Group__4_in_rule__Grammar__Group__33393 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Grammar__MetamodelDeclarationsAssignment_4_in_rule__Grammar__Group__43421 = new BitSet(new long[]{0x0000011002800010L});
+        public static final BitSet FOLLOW_rule__Grammar__Group__5_in_rule__Grammar__Group__43431 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Grammar__RulesAssignment_5_in_rule__Grammar__Group__53461 = new BitSet(new long[]{0x0000011000000012L});
+        public static final BitSet FOLLOW_rule__Grammar__RulesAssignment_5_in_rule__Grammar__Group__53473 = new BitSet(new long[]{0x0000011000000012L});
+        public static final BitSet FOLLOW_18_in_rule__Grammar__Group_2__03523 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__Grammar__Group_2__1_in_rule__Grammar__Group_2__03533 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Grammar__UsedGrammarsAssignment_2_1_in_rule__Grammar__Group_2__13561 = new BitSet(new long[]{0x0000000000080002L});
+        public static final BitSet FOLLOW_rule__Grammar__Group_2__2_in_rule__Grammar__Group_2__13570 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Grammar__Group_2_2__0_in_rule__Grammar__Group_2__23598 = new BitSet(new long[]{0x0000000000080002L});
+        public static final BitSet FOLLOW_19_in_rule__Grammar__Group_2_2__03640 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__Grammar__Group_2_2__1_in_rule__Grammar__Group_2_2__03650 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Grammar__UsedGrammarsAssignment_2_2_1_in_rule__Grammar__Group_2_2__13678 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Grammar__DefinesHiddenTokensAssignment_3_0_in_rule__Grammar__Group_3__03716 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_rule__Grammar__Group_3__1_in_rule__Grammar__Group_3__03725 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_20_in_rule__Grammar__Group_3__13754 = new BitSet(new long[]{0x0000000000200010L});
+        public static final BitSet FOLLOW_rule__Grammar__Group_3__2_in_rule__Grammar__Group_3__13764 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Grammar__Group_3_2__0_in_rule__Grammar__Group_3__23792 = new BitSet(new long[]{0x0000000000200000L});
+        public static final BitSet FOLLOW_rule__Grammar__Group_3__3_in_rule__Grammar__Group_3__23802 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_21_in_rule__Grammar__Group_3__33831 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Grammar__HiddenTokensAssignment_3_2_0_in_rule__Grammar__Group_3_2__03874 = new BitSet(new long[]{0x0000000000080002L});
+        public static final BitSet FOLLOW_rule__Grammar__Group_3_2__1_in_rule__Grammar__Group_3_2__03883 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Grammar__Group_3_2_1__0_in_rule__Grammar__Group_3_2__13911 = new BitSet(new long[]{0x0000000000080002L});
+        public static final BitSet FOLLOW_19_in_rule__Grammar__Group_3_2_1__03951 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__Grammar__Group_3_2_1__1_in_rule__Grammar__Group_3_2_1__03961 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Grammar__HiddenTokensAssignment_3_2_1_1_in_rule__Grammar__Group_3_2_1__13989 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__GrammarID__Group__04027 = new BitSet(new long[]{0x0000000000400002L});
+        public static final BitSet FOLLOW_rule__GrammarID__Group__1_in_rule__GrammarID__Group__04035 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__GrammarID__Group_1__0_in_rule__GrammarID__Group__14063 = new BitSet(new long[]{0x0000000000400002L});
+        public static final BitSet FOLLOW_22_in_rule__GrammarID__Group_1__04103 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__GrammarID__Group_1__1_in_rule__GrammarID__Group_1__04113 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__GrammarID__Group_1__14141 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_23_in_rule__GeneratedMetamodel__Group__04179 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__GeneratedMetamodel__Group__1_in_rule__GeneratedMetamodel__Group__04189 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__GeneratedMetamodel__NameAssignment_1_in_rule__GeneratedMetamodel__Group__14217 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__GeneratedMetamodel__Group__2_in_rule__GeneratedMetamodel__Group__14226 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__GeneratedMetamodel__EPackageAssignment_2_in_rule__GeneratedMetamodel__Group__24254 = new BitSet(new long[]{0x0000000001000002L});
+        public static final BitSet FOLLOW_rule__GeneratedMetamodel__Group__3_in_rule__GeneratedMetamodel__Group__24263 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__GeneratedMetamodel__Group_3__0_in_rule__GeneratedMetamodel__Group__34291 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_24_in_rule__GeneratedMetamodel__Group_3__04335 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__GeneratedMetamodel__Group_3__1_in_rule__GeneratedMetamodel__Group_3__04345 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__GeneratedMetamodel__AliasAssignment_3_1_in_rule__GeneratedMetamodel__Group_3__14373 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_25_in_rule__ReferencedMetamodel__Group__04412 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__1_in_rule__ReferencedMetamodel__Group__04422 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ReferencedMetamodel__EPackageAssignment_1_in_rule__ReferencedMetamodel__Group__14450 = new BitSet(new long[]{0x0000000001000002L});
+        public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__2_in_rule__ReferencedMetamodel__Group__14459 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group_2__0_in_rule__ReferencedMetamodel__Group__24487 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_24_in_rule__ReferencedMetamodel__Group_2__04529 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group_2__1_in_rule__ReferencedMetamodel__Group_2__04539 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ReferencedMetamodel__AliasAssignment_2_1_in_rule__ReferencedMetamodel__Group_2__14567 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ParserRule__NameAssignment_0_in_rule__ParserRule__Group__04605 = new BitSet(new long[]{0x0000020014000000L});
+        public static final BitSet FOLLOW_rule__ParserRule__Group__1_in_rule__ParserRule__Group__04614 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ParserRule__Group_1__0_in_rule__ParserRule__Group__14642 = new BitSet(new long[]{0x0000020004000000L});
+        public static final BitSet FOLLOW_rule__ParserRule__Group__2_in_rule__ParserRule__Group__14652 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ParserRule__Group_2__0_in_rule__ParserRule__Group__24680 = new BitSet(new long[]{0x0000000004000000L});
+        public static final BitSet FOLLOW_rule__ParserRule__Group__3_in_rule__ParserRule__Group__24690 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_26_in_rule__ParserRule__Group__34719 = new BitSet(new long[]{0x0000000080100030L});
+        public static final BitSet FOLLOW_rule__ParserRule__Group__4_in_rule__ParserRule__Group__34729 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ParserRule__AlternativesAssignment_4_in_rule__ParserRule__Group__44757 = new BitSet(new long[]{0x0000000008000000L});
+        public static final BitSet FOLLOW_rule__ParserRule__Group__5_in_rule__ParserRule__Group__44766 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_27_in_rule__ParserRule__Group__54795 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_28_in_rule__ParserRule__Group_1__04843 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__ParserRule__Group_1__1_in_rule__ParserRule__Group_1__04853 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ParserRule__TypeAssignment_1_1_in_rule__ParserRule__Group_1__14881 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ParserRule__DefinesHiddenTokensAssignment_2_0_in_rule__ParserRule__Group_2__04919 = new BitSet(new long[]{0x0000000000100000L});
+        public static final BitSet FOLLOW_rule__ParserRule__Group_2__1_in_rule__ParserRule__Group_2__04928 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_20_in_rule__ParserRule__Group_2__14957 = new BitSet(new long[]{0x0000000000200010L});
+        public static final BitSet FOLLOW_rule__ParserRule__Group_2__2_in_rule__ParserRule__Group_2__14967 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ParserRule__Group_2_2__0_in_rule__ParserRule__Group_2__24995 = new BitSet(new long[]{0x0000000000200000L});
+        public static final BitSet FOLLOW_rule__ParserRule__Group_2__3_in_rule__ParserRule__Group_2__25005 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_21_in_rule__ParserRule__Group_2__35034 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ParserRule__HiddenTokensAssignment_2_2_0_in_rule__ParserRule__Group_2_2__05077 = new BitSet(new long[]{0x0000000000080002L});
+        public static final BitSet FOLLOW_rule__ParserRule__Group_2_2__1_in_rule__ParserRule__Group_2_2__05086 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ParserRule__Group_2_2_1__0_in_rule__ParserRule__Group_2_2__15114 = new BitSet(new long[]{0x0000000000080002L});
+        public static final BitSet FOLLOW_19_in_rule__ParserRule__Group_2_2_1__05154 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__ParserRule__Group_2_2_1__1_in_rule__ParserRule__Group_2_2_1__05164 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ParserRule__HiddenTokensAssignment_2_2_1_1_in_rule__ParserRule__Group_2_2_1__15192 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TypeRef__Group_0__0_in_rule__TypeRef__Group__05230 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__TypeRef__Group__1_in_rule__TypeRef__Group__05240 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TypeRef__ClassifierAssignment_1_in_rule__TypeRef__Group__15268 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TypeRef__MetamodelAssignment_0_0_in_rule__TypeRef__Group_0__05306 = new BitSet(new long[]{0x0000000020000000L});
+        public static final BitSet FOLLOW_rule__TypeRef__Group_0__1_in_rule__TypeRef__Group_0__05315 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_29_in_rule__TypeRef__Group_0__15344 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleGroup_in_rule__Alternatives__Group__05383 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_rule__Alternatives__Group__1_in_rule__Alternatives__Group__05391 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Alternatives__Group_1__0_in_rule__Alternatives__Group__15419 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Alternatives__Group_1__1_in_rule__Alternatives__Group_1__05468 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Alternatives__Group_1_1__0_in_rule__Alternatives__Group_1__15498 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_rule__Alternatives__Group_1_1__0_in_rule__Alternatives__Group_1__15510 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_30_in_rule__Alternatives__Group_1_1__05552 = new BitSet(new long[]{0x0000000080100030L});
+        public static final BitSet FOLLOW_rule__Alternatives__Group_1_1__1_in_rule__Alternatives__Group_1_1__05562 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Alternatives__GroupsAssignment_1_1_1_in_rule__Alternatives__Group_1_1__15590 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAbstractToken_in_rule__Group__Group__05628 = new BitSet(new long[]{0x0000000080100032L});
+        public static final BitSet FOLLOW_rule__Group__Group__1_in_rule__Group__Group__05636 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Group__Group_1__0_in_rule__Group__Group__15664 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Group__Group_1__1_in_rule__Group__Group_1__05713 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Group__TokensAssignment_1_1_in_rule__Group__Group_1__15743 = new BitSet(new long[]{0x0000000080100032L});
+        public static final BitSet FOLLOW_rule__Group__TokensAssignment_1_1_in_rule__Group__Group_1__15755 = new BitSet(new long[]{0x0000000080100032L});
+        public static final BitSet FOLLOW_rule__AbstractTokenWithCardinality__Alternatives_0_in_rule__AbstractTokenWithCardinality__Group__05796 = new BitSet(new long[]{0x0000000000003802L});
+        public static final BitSet FOLLOW_rule__AbstractTokenWithCardinality__Group__1_in_rule__AbstractTokenWithCardinality__Group__05805 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__AbstractTokenWithCardinality__CardinalityAssignment_1_in_rule__AbstractTokenWithCardinality__Group__15833 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_31_in_rule__Action__Group__05873 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__Action__Group__1_in_rule__Action__Group__05883 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Action__TypeAssignment_1_in_rule__Action__Group__15911 = new BitSet(new long[]{0x0000000100400000L});
+        public static final BitSet FOLLOW_rule__Action__Group__2_in_rule__Action__Group__15920 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Action__Group_2__0_in_rule__Action__Group__25948 = new BitSet(new long[]{0x0000000100000000L});
+        public static final BitSet FOLLOW_rule__Action__Group__3_in_rule__Action__Group__25958 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_32_in_rule__Action__Group__35987 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_22_in_rule__Action__Group_2__06031 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__Action__Group_2__1_in_rule__Action__Group_2__06041 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Action__FeatureAssignment_2_1_in_rule__Action__Group_2__16069 = new BitSet(new long[]{0x000000000000C000L});
+        public static final BitSet FOLLOW_rule__Action__Group_2__2_in_rule__Action__Group_2__16078 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Action__OperatorAssignment_2_2_in_rule__Action__Group_2__26106 = new BitSet(new long[]{0x0000000200000000L});
+        public static final BitSet FOLLOW_rule__Action__Group_2__3_in_rule__Action__Group_2__26115 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_33_in_rule__Action__Group_2__36144 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Assignment__FeatureAssignment_0_in_rule__Assignment__Group__06187 = new BitSet(new long[]{0x000000000001C000L});
+        public static final BitSet FOLLOW_rule__Assignment__Group__1_in_rule__Assignment__Group__06196 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Assignment__OperatorAssignment_1_in_rule__Assignment__Group__16224 = new BitSet(new long[]{0x0000000400100030L});
+        public static final BitSet FOLLOW_rule__Assignment__Group__2_in_rule__Assignment__Group__16233 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Assignment__TerminalAssignment_2_in_rule__Assignment__Group__26261 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_20_in_rule__ParenthesizedAssignableElement__Group__06302 = new BitSet(new long[]{0x0000000400100030L});
+        public static final BitSet FOLLOW_rule__ParenthesizedAssignableElement__Group__1_in_rule__ParenthesizedAssignableElement__Group__06312 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAssignableAlternatives_in_rule__ParenthesizedAssignableElement__Group__16340 = new BitSet(new long[]{0x0000000000200000L});
+        public static final BitSet FOLLOW_rule__ParenthesizedAssignableElement__Group__2_in_rule__ParenthesizedAssignableElement__Group__16348 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_21_in_rule__ParenthesizedAssignableElement__Group__26377 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAssignableTerminal_in_rule__AssignableAlternatives__Group__06418 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_rule__AssignableAlternatives__Group__1_in_rule__AssignableAlternatives__Group__06426 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__AssignableAlternatives__Group_1__0_in_rule__AssignableAlternatives__Group__16454 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__AssignableAlternatives__Group_1__1_in_rule__AssignableAlternatives__Group_1__06503 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__AssignableAlternatives__Group_1_1__0_in_rule__AssignableAlternatives__Group_1__16533 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_rule__AssignableAlternatives__Group_1_1__0_in_rule__AssignableAlternatives__Group_1__16545 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_30_in_rule__AssignableAlternatives__Group_1_1__06587 = new BitSet(new long[]{0x0000000400100030L});
+        public static final BitSet FOLLOW_rule__AssignableAlternatives__Group_1_1__1_in_rule__AssignableAlternatives__Group_1_1__06597 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__AssignableAlternatives__GroupsAssignment_1_1_1_in_rule__AssignableAlternatives__Group_1_1__16625 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_34_in_rule__CrossReference__Group__06664 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__CrossReference__Group__1_in_rule__CrossReference__Group__06674 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__CrossReference__TypeAssignment_1_in_rule__CrossReference__Group__16702 = new BitSet(new long[]{0x0000000840000000L});
+        public static final BitSet FOLLOW_rule__CrossReference__Group__2_in_rule__CrossReference__Group__16711 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__CrossReference__Group_2__0_in_rule__CrossReference__Group__26739 = new BitSet(new long[]{0x0000000800000000L});
+        public static final BitSet FOLLOW_rule__CrossReference__Group__3_in_rule__CrossReference__Group__26749 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_35_in_rule__CrossReference__Group__36778 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_30_in_rule__CrossReference__Group_2__06822 = new BitSet(new long[]{0x0000000000100030L});
+        public static final BitSet FOLLOW_rule__CrossReference__Group_2__1_in_rule__CrossReference__Group_2__06832 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__CrossReference__TerminalAssignment_2_1_in_rule__CrossReference__Group_2__16860 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_20_in_rule__ParenthesizedCrossReferenceableElement__Group__06899 = new BitSet(new long[]{0x0000000000100030L});
+        public static final BitSet FOLLOW_rule__ParenthesizedCrossReferenceableElement__Group__1_in_rule__ParenthesizedCrossReferenceableElement__Group__06909 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCrossReferenceableAlternatives_in_rule__ParenthesizedCrossReferenceableElement__Group__16937 = new BitSet(new long[]{0x0000000000200000L});
+        public static final BitSet FOLLOW_rule__ParenthesizedCrossReferenceableElement__Group__2_in_rule__ParenthesizedCrossReferenceableElement__Group__16945 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_21_in_rule__ParenthesizedCrossReferenceableElement__Group__26974 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCrossReferenceableTerminal_in_rule__CrossReferenceableAlternatives__Group__07015 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_rule__CrossReferenceableAlternatives__Group__1_in_rule__CrossReferenceableAlternatives__Group__07023 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__CrossReferenceableAlternatives__Group_1__0_in_rule__CrossReferenceableAlternatives__Group__17051 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__CrossReferenceableAlternatives__Group_1__1_in_rule__CrossReferenceableAlternatives__Group_1__07100 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__CrossReferenceableAlternatives__Group_1_1__0_in_rule__CrossReferenceableAlternatives__Group_1__17130 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_rule__CrossReferenceableAlternatives__Group_1_1__0_in_rule__CrossReferenceableAlternatives__Group_1__17142 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_30_in_rule__CrossReferenceableAlternatives__Group_1_1__07184 = new BitSet(new long[]{0x0000000000100030L});
+        public static final BitSet FOLLOW_rule__CrossReferenceableAlternatives__Group_1_1__1_in_rule__CrossReferenceableAlternatives__Group_1_1__07194 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__CrossReferenceableAlternatives__GroupsAssignment_1_1_1_in_rule__CrossReferenceableAlternatives__Group_1_1__17222 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_20_in_rule__ParenthesizedElement__Group__07261 = new BitSet(new long[]{0x0000000080100030L});
+        public static final BitSet FOLLOW_rule__ParenthesizedElement__Group__1_in_rule__ParenthesizedElement__Group__07271 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAlternatives_in_rule__ParenthesizedElement__Group__17299 = new BitSet(new long[]{0x0000000000200000L});
+        public static final BitSet FOLLOW_rule__ParenthesizedElement__Group__2_in_rule__ParenthesizedElement__Group__17307 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_21_in_rule__ParenthesizedElement__Group__27336 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_36_in_rule__TerminalRule__Group__07378 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__TerminalRule__Group__1_in_rule__TerminalRule__Group__07388 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TerminalRule__NameAssignment_1_in_rule__TerminalRule__Group__17416 = new BitSet(new long[]{0x0000000014000000L});
+        public static final BitSet FOLLOW_rule__TerminalRule__Group__2_in_rule__TerminalRule__Group__17425 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TerminalRule__Group_2__0_in_rule__TerminalRule__Group__27453 = new BitSet(new long[]{0x0000000004000000L});
+        public static final BitSet FOLLOW_rule__TerminalRule__Group__3_in_rule__TerminalRule__Group__27463 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_26_in_rule__TerminalRule__Group__37492 = new BitSet(new long[]{0x0000006000500030L});
+        public static final BitSet FOLLOW_rule__TerminalRule__Group__4_in_rule__TerminalRule__Group__37502 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TerminalRule__AlternativesAssignment_4_in_rule__TerminalRule__Group__47530 = new BitSet(new long[]{0x0000000008000000L});
+        public static final BitSet FOLLOW_rule__TerminalRule__Group__5_in_rule__TerminalRule__Group__47539 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_27_in_rule__TerminalRule__Group__57568 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_28_in_rule__TerminalRule__Group_2__07616 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__TerminalRule__Group_2__1_in_rule__TerminalRule__Group_2__07626 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TerminalRule__TypeAssignment_2_1_in_rule__TerminalRule__Group_2__17654 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTerminalGroup_in_rule__TerminalAlternatives__Group__07692 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_rule__TerminalAlternatives__Group__1_in_rule__TerminalAlternatives__Group__07700 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TerminalAlternatives__Group_1__0_in_rule__TerminalAlternatives__Group__17728 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TerminalAlternatives__Group_1__1_in_rule__TerminalAlternatives__Group_1__07777 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TerminalAlternatives__Group_1_1__0_in_rule__TerminalAlternatives__Group_1__17807 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_rule__TerminalAlternatives__Group_1_1__0_in_rule__TerminalAlternatives__Group_1__17819 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_30_in_rule__TerminalAlternatives__Group_1_1__07861 = new BitSet(new long[]{0x0000006000500030L});
+        public static final BitSet FOLLOW_rule__TerminalAlternatives__Group_1_1__1_in_rule__TerminalAlternatives__Group_1_1__07871 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TerminalAlternatives__GroupsAssignment_1_1_1_in_rule__TerminalAlternatives__Group_1_1__17899 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTerminalToken_in_rule__TerminalGroup__Group__07937 = new BitSet(new long[]{0x0000006000500032L});
+        public static final BitSet FOLLOW_rule__TerminalGroup__Group__1_in_rule__TerminalGroup__Group__07945 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TerminalGroup__Group_1__0_in_rule__TerminalGroup__Group__17973 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TerminalGroup__Group_1__1_in_rule__TerminalGroup__Group_1__08022 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TerminalGroup__TokensAssignment_1_1_in_rule__TerminalGroup__Group_1__18052 = new BitSet(new long[]{0x0000006000500032L});
+        public static final BitSet FOLLOW_rule__TerminalGroup__TokensAssignment_1_1_in_rule__TerminalGroup__Group_1__18064 = new BitSet(new long[]{0x0000006000500032L});
+        public static final BitSet FOLLOW_ruleTerminalTokenElement_in_rule__TerminalToken__Group__08105 = new BitSet(new long[]{0x0000000000003802L});
+        public static final BitSet FOLLOW_rule__TerminalToken__Group__1_in_rule__TerminalToken__Group__08113 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TerminalToken__CardinalityAssignment_1_in_rule__TerminalToken__Group__18141 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_20_in_rule__ParenthesizedTerminalElement__Group__08181 = new BitSet(new long[]{0x0000006000500030L});
+        public static final BitSet FOLLOW_rule__ParenthesizedTerminalElement__Group__1_in_rule__ParenthesizedTerminalElement__Group__08191 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTerminalAlternatives_in_rule__ParenthesizedTerminalElement__Group__18219 = new BitSet(new long[]{0x0000000000200000L});
+        public static final BitSet FOLLOW_rule__ParenthesizedTerminalElement__Group__2_in_rule__ParenthesizedTerminalElement__Group__18227 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_21_in_rule__ParenthesizedTerminalElement__Group__28256 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_37_in_rule__NegatedToken__Group__08298 = new BitSet(new long[]{0x0000006000500030L});
+        public static final BitSet FOLLOW_rule__NegatedToken__Group__1_in_rule__NegatedToken__Group__08308 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__NegatedToken__TerminalAssignment_1_in_rule__NegatedToken__Group__18336 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_38_in_rule__UntilToken__Group__08375 = new BitSet(new long[]{0x0000006000500030L});
+        public static final BitSet FOLLOW_rule__UntilToken__Group__1_in_rule__UntilToken__Group__08385 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__UntilToken__TerminalAssignment_1_in_rule__UntilToken__Group__18413 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Wildcard__Group__1_in_rule__Wildcard__Group__08461 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_22_in_rule__Wildcard__Group__18490 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleKeyword_in_rule__CharacterRange__Group__08529 = new BitSet(new long[]{0x0000008000000002L});
+        public static final BitSet FOLLOW_rule__CharacterRange__Group__1_in_rule__CharacterRange__Group__08537 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__CharacterRange__Group_1__0_in_rule__CharacterRange__Group__18565 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__CharacterRange__Group_1__1_in_rule__CharacterRange__Group_1__08614 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_39_in_rule__CharacterRange__Group_1__18643 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__CharacterRange__Group_1__2_in_rule__CharacterRange__Group_1__18653 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__CharacterRange__RightAssignment_1_2_in_rule__CharacterRange__Group_1__28681 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_40_in_rule__EnumRule__Group__08722 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__EnumRule__Group__1_in_rule__EnumRule__Group__08732 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EnumRule__NameAssignment_1_in_rule__EnumRule__Group__18760 = new BitSet(new long[]{0x0000000014000000L});
+        public static final BitSet FOLLOW_rule__EnumRule__Group__2_in_rule__EnumRule__Group__18769 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EnumRule__Group_2__0_in_rule__EnumRule__Group__28797 = new BitSet(new long[]{0x0000000004000000L});
+        public static final BitSet FOLLOW_rule__EnumRule__Group__3_in_rule__EnumRule__Group__28807 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_26_in_rule__EnumRule__Group__38836 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__EnumRule__Group__4_in_rule__EnumRule__Group__38846 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EnumRule__AlternativesAssignment_4_in_rule__EnumRule__Group__48874 = new BitSet(new long[]{0x0000000008000000L});
+        public static final BitSet FOLLOW_rule__EnumRule__Group__5_in_rule__EnumRule__Group__48883 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_27_in_rule__EnumRule__Group__58912 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_28_in_rule__EnumRule__Group_2__08960 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__EnumRule__Group_2__1_in_rule__EnumRule__Group_2__08970 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EnumRule__TypeAssignment_2_1_in_rule__EnumRule__Group_2__18998 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEnumLiteralDeclaration_in_rule__EnumLiterals__Group__09036 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_rule__EnumLiterals__Group__1_in_rule__EnumLiterals__Group__09044 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EnumLiterals__Group_1__0_in_rule__EnumLiterals__Group__19072 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EnumLiterals__Group_1__1_in_rule__EnumLiterals__Group_1__09121 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EnumLiterals__Group_1_1__0_in_rule__EnumLiterals__Group_1__19151 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_rule__EnumLiterals__Group_1_1__0_in_rule__EnumLiterals__Group_1__19163 = new BitSet(new long[]{0x0000000040000002L});
+        public static final BitSet FOLLOW_30_in_rule__EnumLiterals__Group_1_1__09205 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__EnumLiterals__Group_1_1__1_in_rule__EnumLiterals__Group_1_1__09215 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EnumLiterals__GroupsAssignment_1_1_1_in_rule__EnumLiterals__Group_1_1__19243 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EnumLiteralDeclaration__EnumLiteralAssignment_0_in_rule__EnumLiteralDeclaration__Group__09281 = new BitSet(new long[]{0x0000000000004002L});
+        public static final BitSet FOLLOW_rule__EnumLiteralDeclaration__Group__1_in_rule__EnumLiteralDeclaration__Group__09290 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EnumLiteralDeclaration__Group_1__0_in_rule__EnumLiteralDeclaration__Group__19318 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_rule__EnumLiteralDeclaration__Group_1__09358 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__EnumLiteralDeclaration__Group_1__1_in_rule__EnumLiteralDeclaration__Group_1__09368 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EnumLiteralDeclaration__LiteralAssignment_1_1_in_rule__EnumLiteralDeclaration__Group_1__19396 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleGrammarID_in_rule__Grammar__NameAssignment_19434 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleGrammarID_in_rule__Grammar__UsedGrammarsAssignment_2_19469 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleGrammarID_in_rule__Grammar__UsedGrammarsAssignment_2_2_19508 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_41_in_rule__Grammar__DefinesHiddenTokensAssignment_3_09548 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Grammar__HiddenTokensAssignment_3_2_09591 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Grammar__HiddenTokensAssignment_3_2_1_19630 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAbstractMetamodelDeclaration_in_rule__Grammar__MetamodelDeclarationsAssignment_49665 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAbstractRule_in_rule__Grammar__RulesAssignment_59696 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__GeneratedMetamodel__NameAssignment_19727 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__GeneratedMetamodel__EPackageAssignment_29762 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__GeneratedMetamodel__AliasAssignment_3_19797 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__ReferencedMetamodel__EPackageAssignment_19832 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__ReferencedMetamodel__AliasAssignment_2_19867 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__ParserRule__NameAssignment_09898 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeRef_in_rule__ParserRule__TypeAssignment_1_19929 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_41_in_rule__ParserRule__DefinesHiddenTokensAssignment_2_09965 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__ParserRule__HiddenTokensAssignment_2_2_010008 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__ParserRule__HiddenTokensAssignment_2_2_1_110047 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAlternatives_in_rule__ParserRule__AlternativesAssignment_410082 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__TypeRef__MetamodelAssignment_0_010117 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__TypeRef__ClassifierAssignment_110156 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleGroup_in_rule__Alternatives__GroupsAssignment_1_1_110191 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAbstractToken_in_rule__Group__TokensAssignment_1_110222 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__AbstractTokenWithCardinality__CardinalityAlternatives_1_0_in_rule__AbstractTokenWithCardinality__CardinalityAssignment_110253 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeRef_in_rule__Action__TypeAssignment_110286 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Action__FeatureAssignment_2_110317 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Action__OperatorAlternatives_2_2_0_in_rule__Action__OperatorAssignment_2_210348 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__Keyword__ValueAssignment10381 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__RuleCall__RuleAssignment10416 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Assignment__FeatureAssignment_010451 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Assignment__OperatorAlternatives_1_0_in_rule__Assignment__OperatorAssignment_110482 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAssignableTerminal_in_rule__Assignment__TerminalAssignment_210515 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAssignableTerminal_in_rule__AssignableAlternatives__GroupsAssignment_1_1_110546 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeRef_in_rule__CrossReference__TypeAssignment_110577 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCrossReferenceableTerminal_in_rule__CrossReference__TerminalAssignment_2_110608 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCrossReferenceableTerminal_in_rule__CrossReferenceableAlternatives__GroupsAssignment_1_1_110639 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__TerminalRule__NameAssignment_110670 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeRef_in_rule__TerminalRule__TypeAssignment_2_110701 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTerminalAlternatives_in_rule__TerminalRule__AlternativesAssignment_410732 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTerminalGroup_in_rule__TerminalAlternatives__GroupsAssignment_1_1_110763 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTerminalToken_in_rule__TerminalGroup__TokensAssignment_1_110794 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TerminalToken__CardinalityAlternatives_1_0_in_rule__TerminalToken__CardinalityAssignment_110825 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTerminalTokenElement_in_rule__NegatedToken__TerminalAssignment_110858 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTerminalTokenElement_in_rule__UntilToken__TerminalAssignment_110889 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleKeyword_in_rule__CharacterRange__RightAssignment_1_210920 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EnumRule__NameAssignment_110951 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeRef_in_rule__EnumRule__TypeAssignment_2_110982 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEnumLiterals_in_rule__EnumRule__AlternativesAssignment_411013 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEnumLiteralDeclaration_in_rule__EnumLiterals__GroupsAssignment_1_1_111044 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EnumLiteralDeclaration__EnumLiteralAssignment_011079 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleKeyword_in_rule__EnumLiteralDeclaration__LiteralAssignment_1_111114 = new BitSet(new long[]{0x0000000000000002L});
+    }
+
 
 }

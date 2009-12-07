@@ -69,12 +69,12 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:61:1: ruleModel EOF
             {
              before(grammarAccess.getModelRule()); 
-            pushFollow(FOLLOW_ruleModel_in_entryRuleModel60);
+            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel60);
             ruleModel();
             _fsp--;
 
              after(grammarAccess.getModelRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleModel67); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel67); 
 
             }
 
@@ -119,7 +119,7 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
             	case 1 :
             	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:75:2: rule__Model__ElementsAssignment
             	    {
-            	    pushFollow(FOLLOW_rule__Model__ElementsAssignment_in_ruleModel94);
+            	    pushFollow(FollowSets000.FOLLOW_rule__Model__ElementsAssignment_in_ruleModel94);
             	    rule__Model__ElementsAssignment();
             	    _fsp--;
 
@@ -162,12 +162,12 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:88:1: ruleClass EOF
             {
              before(grammarAccess.getClassRule()); 
-            pushFollow(FOLLOW_ruleClass_in_entryRuleClass121);
+            pushFollow(FollowSets000.FOLLOW_ruleClass_in_entryRuleClass121);
             ruleClass();
             _fsp--;
 
              after(grammarAccess.getClassRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleClass128); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleClass128); 
 
             }
 
@@ -200,7 +200,7 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:102:1: ( rule__Class__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:102:2: rule__Class__Group__0
             {
-            pushFollow(FOLLOW_rule__Class__Group__0_in_ruleClass155);
+            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__0_in_ruleClass155);
             rule__Class__Group__0();
             _fsp--;
 
@@ -258,7 +258,7 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:123:2: rule__Class__Group_0__0
                     {
-                    pushFollow(FOLLOW_rule__Class__Group_0__0_in_rule__Class__Group__0193);
+                    pushFollow(FollowSets000.FOLLOW_rule__Class__Group_0__0_in_rule__Class__Group__0193);
                     rule__Class__Group_0__0();
                     _fsp--;
 
@@ -272,7 +272,7 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
             }
 
-            pushFollow(FOLLOW_rule__Class__Group__1_in_rule__Class__Group__0203);
+            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__1_in_rule__Class__Group__0203);
             rule__Class__Group__1();
             _fsp--;
 
@@ -311,7 +311,7 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:141:1: ( rule__Class__NameAssignment_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:141:2: rule__Class__NameAssignment_1
             {
-            pushFollow(FOLLOW_rule__Class__NameAssignment_1_in_rule__Class__Group__1231);
+            pushFollow(FollowSets000.FOLLOW_rule__Class__NameAssignment_1_in_rule__Class__Group__1231);
             rule__Class__NameAssignment_1();
             _fsp--;
 
@@ -322,7 +322,7 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
             }
 
-            pushFollow(FOLLOW_rule__Class__Group__2_in_rule__Class__Group__1240);
+            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__2_in_rule__Class__Group__1240);
             rule__Class__Group__2();
             _fsp--;
 
@@ -358,12 +358,12 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:158:1: '{'
             {
              before(grammarAccess.getClassAccess().getLeftCurlyBracketKeyword_2()); 
-            match(input,11,FOLLOW_11_in_rule__Class__Group__2269); 
+            match(input,11,FollowSets000.FOLLOW_11_in_rule__Class__Group__2269); 
              after(grammarAccess.getClassAccess().getLeftCurlyBracketKeyword_2()); 
 
             }
 
-            pushFollow(FOLLOW_rule__Class__Group__3_in_rule__Class__Group__2279);
+            pushFollow(FollowSets000.FOLLOW_rule__Class__Group__3_in_rule__Class__Group__2279);
             rule__Class__Group__3();
             _fsp--;
 
@@ -399,7 +399,7 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:178:1: '}'
             {
              before(grammarAccess.getClassAccess().getRightCurlyBracketKeyword_3()); 
-            match(input,12,FOLLOW_12_in_rule__Class__Group__3308); 
+            match(input,12,FollowSets000.FOLLOW_12_in_rule__Class__Group__3308); 
              after(grammarAccess.getClassAccess().getRightCurlyBracketKeyword_3()); 
 
             }
@@ -439,7 +439,7 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:206:1: ( rule__Class__SuperClassAssignment_0_0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:206:2: rule__Class__SuperClassAssignment_0_0
             {
-            pushFollow(FOLLOW_rule__Class__SuperClassAssignment_0_0_in_rule__Class__Group_0__0351);
+            pushFollow(FollowSets000.FOLLOW_rule__Class__SuperClassAssignment_0_0_in_rule__Class__Group_0__0351);
             rule__Class__SuperClassAssignment_0_0();
             _fsp--;
 
@@ -450,7 +450,7 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
             }
 
-            pushFollow(FOLLOW_rule__Class__Group_0__1_in_rule__Class__Group_0__0360);
+            pushFollow(FollowSets000.FOLLOW_rule__Class__Group_0__1_in_rule__Class__Group_0__0360);
             rule__Class__Group_0__1();
             _fsp--;
 
@@ -486,7 +486,7 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:223:1: '<-'
             {
              before(grammarAccess.getClassAccess().getLessThanSignHyphenMinusKeyword_0_1()); 
-            match(input,13,FOLLOW_13_in_rule__Class__Group_0__1389); 
+            match(input,13,FollowSets000.FOLLOW_13_in_rule__Class__Group_0__1389); 
              after(grammarAccess.getClassAccess().getLessThanSignHyphenMinusKeyword_0_1()); 
 
             }
@@ -523,7 +523,7 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:246:1: ruleClass
             {
              before(grammarAccess.getModelAccess().getElementsClassParserRuleCall_0()); 
-            pushFollow(FOLLOW_ruleClass_in_rule__Model__ElementsAssignment428);
+            pushFollow(FollowSets000.FOLLOW_ruleClass_in_rule__Model__ElementsAssignment428);
             ruleClass();
             _fsp--;
 
@@ -567,7 +567,7 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:263:1: RULE_ID
             {
              before(grammarAccess.getClassAccess().getSuperClassClassIDTerminalRuleCall_0_0_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Class__SuperClassAssignment_0_0463); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Class__SuperClassAssignment_0_0463); 
              after(grammarAccess.getClassAccess().getSuperClassClassIDTerminalRuleCall_0_0_0_1()); 
 
             }
@@ -608,7 +608,7 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalCrossReferenceProposalTestLanguage.g:280:1: RULE_ID
             {
              before(grammarAccess.getClassAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Class__NameAssignment_1498); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Class__NameAssignment_1498); 
              after(grammarAccess.getClassAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -633,24 +633,28 @@ public class InternalCrossReferenceProposalTestLanguageParser extends AbstractIn
 
  
 
-    public static final BitSet FOLLOW_ruleModel_in_entryRuleModel60 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleModel67 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__ElementsAssignment_in_ruleModel94 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_ruleClass_in_entryRuleClass121 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleClass128 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Class__Group__0_in_ruleClass155 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Class__Group_0__0_in_rule__Class__Group__0193 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Class__Group__1_in_rule__Class__Group__0203 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Class__NameAssignment_1_in_rule__Class__Group__1231 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_rule__Class__Group__2_in_rule__Class__Group__1240 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_rule__Class__Group__2269 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_rule__Class__Group__3_in_rule__Class__Group__2279 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_rule__Class__Group__3308 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Class__SuperClassAssignment_0_0_in_rule__Class__Group_0__0351 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_rule__Class__Group_0__1_in_rule__Class__Group_0__0360 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__Class__Group_0__1389 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleClass_in_rule__Model__ElementsAssignment428 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Class__SuperClassAssignment_0_0463 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Class__NameAssignment_1498 = new BitSet(new long[]{0x0000000000000002L});
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel60 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleModel67 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Model__ElementsAssignment_in_ruleModel94 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_ruleClass_in_entryRuleClass121 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleClass128 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Class__Group__0_in_ruleClass155 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Class__Group_0__0_in_rule__Class__Group__0193 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__Class__Group__1_in_rule__Class__Group__0203 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Class__NameAssignment_1_in_rule__Class__Group__1231 = new BitSet(new long[]{0x0000000000000800L});
+        public static final BitSet FOLLOW_rule__Class__Group__2_in_rule__Class__Group__1240 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_rule__Class__Group__2269 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_rule__Class__Group__3_in_rule__Class__Group__2279 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_rule__Class__Group__3308 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Class__SuperClassAssignment_0_0_in_rule__Class__Group_0__0351 = new BitSet(new long[]{0x0000000000002000L});
+        public static final BitSet FOLLOW_rule__Class__Group_0__1_in_rule__Class__Group_0__0360 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_rule__Class__Group_0__1389 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleClass_in_rule__Model__ElementsAssignment428 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Class__SuperClassAssignment_0_0463 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Class__NameAssignment_1498 = new BitSet(new long[]{0x0000000000000002L});
+    }
+
 
 }

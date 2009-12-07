@@ -69,12 +69,12 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:61:1: ruleModel EOF
             {
              before(grammarAccess.getModelRule()); 
-            pushFollow(FOLLOW_ruleModel_in_entryRuleModel60);
+            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel60);
             ruleModel();
             _fsp--;
 
              after(grammarAccess.getModelRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleModel67); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel67); 
 
             }
 
@@ -107,7 +107,7 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:75:1: ( rule__Model__Alternatives )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:75:2: rule__Model__Alternatives
             {
-            pushFollow(FOLLOW_rule__Model__Alternatives_in_ruleModel94);
+            pushFollow(FollowSets000.FOLLOW_rule__Model__Alternatives_in_ruleModel94);
             rule__Model__Alternatives();
             _fsp--;
 
@@ -204,7 +204,7 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:94:1: ( rule__Model__FirstAssignment_0 )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:94:2: rule__Model__FirstAssignment_0
                     {
-                    pushFollow(FOLLOW_rule__Model__FirstAssignment_0_in_rule__Model__Alternatives130);
+                    pushFollow(FollowSets000.FOLLOW_rule__Model__FirstAssignment_0_in_rule__Model__Alternatives130);
                     rule__Model__FirstAssignment_0();
                     _fsp--;
 
@@ -228,7 +228,7 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:100:1: ( rule__Model__SecondAssignment_1 )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:100:2: rule__Model__SecondAssignment_1
                     {
-                    pushFollow(FOLLOW_rule__Model__SecondAssignment_1_in_rule__Model__Alternatives148);
+                    pushFollow(FollowSets000.FOLLOW_rule__Model__SecondAssignment_1_in_rule__Model__Alternatives148);
                     rule__Model__SecondAssignment_1();
                     _fsp--;
 
@@ -252,7 +252,7 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:106:1: ( rule__Model__ThirdAssignment_2 )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:106:2: rule__Model__ThirdAssignment_2
                     {
-                    pushFollow(FOLLOW_rule__Model__ThirdAssignment_2_in_rule__Model__Alternatives166);
+                    pushFollow(FollowSets000.FOLLOW_rule__Model__ThirdAssignment_2_in_rule__Model__Alternatives166);
                     rule__Model__ThirdAssignment_2();
                     _fsp--;
 
@@ -276,7 +276,7 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:112:1: ( rule__Model__ForthAssignment_3 )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:112:2: rule__Model__ForthAssignment_3
                     {
-                    pushFollow(FOLLOW_rule__Model__ForthAssignment_3_in_rule__Model__Alternatives184);
+                    pushFollow(FollowSets000.FOLLOW_rule__Model__ForthAssignment_3_in_rule__Model__Alternatives184);
                     rule__Model__ForthAssignment_3();
                     _fsp--;
 
@@ -300,7 +300,7 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:118:1: ( rule__Model__FifthAssignment_4 )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:118:2: rule__Model__FifthAssignment_4
                     {
-                    pushFollow(FOLLOW_rule__Model__FifthAssignment_4_in_rule__Model__Alternatives202);
+                    pushFollow(FollowSets000.FOLLOW_rule__Model__FifthAssignment_4_in_rule__Model__Alternatives202);
                     rule__Model__FifthAssignment_4();
                     _fsp--;
 
@@ -324,7 +324,7 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:124:1: ( rule__Model__SixthAssignment_5 )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:124:2: rule__Model__SixthAssignment_5
                     {
-                    pushFollow(FOLLOW_rule__Model__SixthAssignment_5_in_rule__Model__Alternatives220);
+                    pushFollow(FollowSets000.FOLLOW_rule__Model__SixthAssignment_5_in_rule__Model__Alternatives220);
                     rule__Model__SixthAssignment_5();
                     _fsp--;
 
@@ -348,7 +348,7 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:130:1: ( rule__Model__SeventhAssignment_6 )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:130:2: rule__Model__SeventhAssignment_6
                     {
-                    pushFollow(FOLLOW_rule__Model__SeventhAssignment_6_in_rule__Model__Alternatives238);
+                    pushFollow(FollowSets000.FOLLOW_rule__Model__SeventhAssignment_6_in_rule__Model__Alternatives238);
                     rule__Model__SeventhAssignment_6();
                     _fsp--;
 
@@ -372,7 +372,7 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:136:1: ( rule__Model__EighthAssignment_7 )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:136:2: rule__Model__EighthAssignment_7
                     {
-                    pushFollow(FOLLOW_rule__Model__EighthAssignment_7_in_rule__Model__Alternatives256);
+                    pushFollow(FollowSets000.FOLLOW_rule__Model__EighthAssignment_7_in_rule__Model__Alternatives256);
                     rule__Model__EighthAssignment_7();
                     _fsp--;
 
@@ -421,7 +421,7 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:155:1: 'foo\\\\bar'
             {
              before(grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0()); 
-            match(input,11,FOLLOW_11_in_rule__Model__FirstAssignment_0296); 
+            match(input,11,FollowSets000.FOLLOW_11_in_rule__Model__FirstAssignment_0296); 
              after(grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0()); 
 
             }
@@ -466,7 +466,7 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:178:1: 'foo\\\\'
             {
              before(grammarAccess.getModelAccess().getSecondFooKeyword_1_0()); 
-            match(input,12,FOLLOW_12_in_rule__Model__SecondAssignment_1340); 
+            match(input,12,FollowSets000.FOLLOW_12_in_rule__Model__SecondAssignment_1340); 
              after(grammarAccess.getModelAccess().getSecondFooKeyword_1_0()); 
 
             }
@@ -511,7 +511,7 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:201:1: '\\\\bar'
             {
              before(grammarAccess.getModelAccess().getThirdBarKeyword_2_0()); 
-            match(input,13,FOLLOW_13_in_rule__Model__ThirdAssignment_2384); 
+            match(input,13,FollowSets000.FOLLOW_13_in_rule__Model__ThirdAssignment_2384); 
              after(grammarAccess.getModelAccess().getThirdBarKeyword_2_0()); 
 
             }
@@ -556,7 +556,7 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:224:1: '\\\\'
             {
              before(grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0()); 
-            match(input,14,FOLLOW_14_in_rule__Model__ForthAssignment_3428); 
+            match(input,14,FollowSets000.FOLLOW_14_in_rule__Model__ForthAssignment_3428); 
              after(grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0()); 
 
             }
@@ -601,7 +601,7 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:247:1: '\"a\"'
             {
              before(grammarAccess.getModelAccess().getFifthAKeyword_4_0()); 
-            match(input,15,FOLLOW_15_in_rule__Model__FifthAssignment_4472); 
+            match(input,15,FollowSets000.FOLLOW_15_in_rule__Model__FifthAssignment_4472); 
              after(grammarAccess.getModelAccess().getFifthAKeyword_4_0()); 
 
             }
@@ -646,7 +646,7 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:270:1: '\\'b\\''
             {
              before(grammarAccess.getModelAccess().getSixthBKeyword_5_0()); 
-            match(input,16,FOLLOW_16_in_rule__Model__SixthAssignment_5516); 
+            match(input,16,FollowSets000.FOLLOW_16_in_rule__Model__SixthAssignment_5516); 
              after(grammarAccess.getModelAccess().getSixthBKeyword_5_0()); 
 
             }
@@ -691,7 +691,7 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:293:1: '\\'c\\''
             {
              before(grammarAccess.getModelAccess().getSeventhCKeyword_6_0()); 
-            match(input,17,FOLLOW_17_in_rule__Model__SeventhAssignment_6560); 
+            match(input,17,FollowSets000.FOLLOW_17_in_rule__Model__SeventhAssignment_6560); 
              after(grammarAccess.getModelAccess().getSeventhCKeyword_6_0()); 
 
             }
@@ -736,7 +736,7 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g:316:1: '\"d\"'
             {
              before(grammarAccess.getModelAccess().getEighthDKeyword_7_0()); 
-            match(input,18,FOLLOW_18_in_rule__Model__EighthAssignment_7604); 
+            match(input,18,FollowSets000.FOLLOW_18_in_rule__Model__EighthAssignment_7604); 
              after(grammarAccess.getModelAccess().getEighthDKeyword_7_0()); 
 
             }
@@ -765,24 +765,28 @@ public class InternalKeywordsUiTestLanguageParser extends AbstractInternalConten
 
  
 
-    public static final BitSet FOLLOW_ruleModel_in_entryRuleModel60 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleModel67 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__Alternatives_in_ruleModel94 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__FirstAssignment_0_in_rule__Model__Alternatives130 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__SecondAssignment_1_in_rule__Model__Alternatives148 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__ThirdAssignment_2_in_rule__Model__Alternatives166 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__ForthAssignment_3_in_rule__Model__Alternatives184 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__FifthAssignment_4_in_rule__Model__Alternatives202 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__SixthAssignment_5_in_rule__Model__Alternatives220 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__SeventhAssignment_6_in_rule__Model__Alternatives238 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__EighthAssignment_7_in_rule__Model__Alternatives256 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_rule__Model__FirstAssignment_0296 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_rule__Model__SecondAssignment_1340 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__Model__ThirdAssignment_2384 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__Model__ForthAssignment_3428 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_rule__Model__FifthAssignment_4472 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_rule__Model__SixthAssignment_5516 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_rule__Model__SeventhAssignment_6560 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_rule__Model__EighthAssignment_7604 = new BitSet(new long[]{0x0000000000000002L});
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel60 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleModel67 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Model__Alternatives_in_ruleModel94 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Model__FirstAssignment_0_in_rule__Model__Alternatives130 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Model__SecondAssignment_1_in_rule__Model__Alternatives148 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Model__ThirdAssignment_2_in_rule__Model__Alternatives166 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Model__ForthAssignment_3_in_rule__Model__Alternatives184 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Model__FifthAssignment_4_in_rule__Model__Alternatives202 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Model__SixthAssignment_5_in_rule__Model__Alternatives220 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Model__SeventhAssignment_6_in_rule__Model__Alternatives238 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Model__EighthAssignment_7_in_rule__Model__Alternatives256 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_rule__Model__FirstAssignment_0296 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_rule__Model__SecondAssignment_1340 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_rule__Model__ThirdAssignment_2384 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_rule__Model__ForthAssignment_3428 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_15_in_rule__Model__FifthAssignment_4472 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_16_in_rule__Model__SixthAssignment_5516 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_17_in_rule__Model__SeventhAssignment_6560 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_18_in_rule__Model__EighthAssignment_7604 = new BitSet(new long[]{0x0000000000000002L});
+    }
+
 
 }

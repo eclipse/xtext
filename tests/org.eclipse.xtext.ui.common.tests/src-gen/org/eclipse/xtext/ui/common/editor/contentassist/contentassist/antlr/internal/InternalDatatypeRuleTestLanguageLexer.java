@@ -696,262 +696,52 @@ public class InternalDatatypeRuleTestLanguageLexer extends Lexer {
         int LA12_0 = input.LA(1);
 
         if ( (LA12_0=='T') ) {
-            int LA12_1 = input.LA(2);
-
-            if ( (LA12_1=='y') ) {
-                int LA12_16 = input.LA(3);
-
-                if ( (LA12_16=='p') ) {
-                    int LA12_29 = input.LA(4);
-
-                    if ( (LA12_29=='e') ) {
-                        switch ( input.LA(5) ) {
-                        case 's':
-                            {
-                            int LA12_35 = input.LA(6);
-
-                            if ( ((LA12_35>='0' && LA12_35<='9')||(LA12_35>='A' && LA12_35<='Z')||LA12_35=='_'||(LA12_35>='a' && LA12_35<='z')) ) {
-                                alt12=9;
-                            }
-                            else {
-                                alt12=1;}
-                            }
-                            break;
-                        case '0':
-                        case '1':
-                        case '2':
-                        case '3':
-                        case '4':
-                        case '5':
-                        case '6':
-                        case '7':
-                        case '8':
-                        case '9':
-                        case 'A':
-                        case 'B':
-                        case 'C':
-                        case 'D':
-                        case 'E':
-                        case 'F':
-                        case 'G':
-                        case 'H':
-                        case 'I':
-                        case 'J':
-                        case 'K':
-                        case 'L':
-                        case 'M':
-                        case 'N':
-                        case 'O':
-                        case 'P':
-                        case 'Q':
-                        case 'R':
-                        case 'S':
-                        case 'T':
-                        case 'U':
-                        case 'V':
-                        case 'W':
-                        case 'X':
-                        case 'Y':
-                        case 'Z':
-                        case '_':
-                        case 'a':
-                        case 'b':
-                        case 'c':
-                        case 'd':
-                        case 'e':
-                        case 'f':
-                        case 'g':
-                        case 'h':
-                        case 'i':
-                        case 'j':
-                        case 'k':
-                        case 'l':
-                        case 'm':
-                        case 'n':
-                        case 'o':
-                        case 'p':
-                        case 'q':
-                        case 'r':
-                        case 't':
-                        case 'u':
-                        case 'v':
-                        case 'w':
-                        case 'x':
-                        case 'y':
-                        case 'z':
-                            {
-                            alt12=9;
-                            }
-                            break;
-                        default:
-                            alt12=2;}
-
-                    }
-                    else {
-                        alt12=9;}
-                }
-                else {
-                    alt12=9;}
-            }
-            else {
-                alt12=9;}
+            alt12 = mTokensHelper001();
         }
         else if ( (LA12_0==';') ) {
-            alt12=3;
+            alt12 = mTokensHelper002();
         }
         else if ( (LA12_0=='C') ) {
-            int LA12_3 = input.LA(2);
-
-            if ( (LA12_3=='o') ) {
-                int LA12_19 = input.LA(3);
-
-                if ( (LA12_19=='m') ) {
-                    int LA12_30 = input.LA(4);
-
-                    if ( (LA12_30=='p') ) {
-                        int LA12_33 = input.LA(5);
-
-                        if ( (LA12_33=='o') ) {
-                            int LA12_37 = input.LA(6);
-
-                            if ( (LA12_37=='s') ) {
-                                int LA12_40 = input.LA(7);
-
-                                if ( (LA12_40=='i') ) {
-                                    int LA12_41 = input.LA(8);
-
-                                    if ( (LA12_41=='t') ) {
-                                        int LA12_42 = input.LA(9);
-
-                                        if ( (LA12_42=='e') ) {
-                                            int LA12_43 = input.LA(10);
-
-                                            if ( ((LA12_43>='0' && LA12_43<='9')||(LA12_43>='A' && LA12_43<='Z')||LA12_43=='_'||(LA12_43>='a' && LA12_43<='z')) ) {
-                                                alt12=9;
-                                            }
-                                            else {
-                                                alt12=4;}
-                                        }
-                                        else {
-                                            alt12=9;}
-                                    }
-                                    else {
-                                        alt12=9;}
-                                }
-                                else {
-                                    alt12=9;}
-                            }
-                            else {
-                                alt12=9;}
-                        }
-                        else {
-                            alt12=9;}
-                    }
-                    else {
-                        alt12=9;}
-                }
-                else {
-                    alt12=9;}
-            }
-            else {
-                alt12=9;}
+            alt12 = mTokensHelper003();
         }
         else if ( (LA12_0=='b') ) {
-            int LA12_4 = input.LA(2);
-
-            if ( (LA12_4=='a') ) {
-                int LA12_20 = input.LA(3);
-
-                if ( (LA12_20=='s') ) {
-                    int LA12_31 = input.LA(4);
-
-                    if ( (LA12_31=='e') ) {
-                        int LA12_34 = input.LA(5);
-
-                        if ( ((LA12_34>='0' && LA12_34<='9')||(LA12_34>='A' && LA12_34<='Z')||LA12_34=='_'||(LA12_34>='a' && LA12_34<='z')) ) {
-                            alt12=9;
-                        }
-                        else {
-                            alt12=5;}
-                    }
-                    else {
-                        alt12=9;}
-                }
-                else {
-                    alt12=9;}
-            }
-            else {
-                alt12=9;}
+            alt12 = mTokensHelper004();
         }
         else if ( (LA12_0=='<') ) {
-            alt12=6;
+            alt12 = mTokensHelper005();
         }
         else if ( (LA12_0=='>') ) {
-            alt12=7;
+            alt12 = mTokensHelper006();
         }
         else if ( (LA12_0==',') ) {
-            alt12=8;
+            alt12 = mTokensHelper007();
         }
         else if ( (LA12_0=='^') ) {
-            int LA12_8 = input.LA(2);
-
-            if ( ((LA12_8>='A' && LA12_8<='Z')||LA12_8=='_'||(LA12_8>='a' && LA12_8<='z')) ) {
-                alt12=9;
-            }
-            else {
-                alt12=15;}
+            alt12 = mTokensHelper008();
         }
         else if ( ((LA12_0>='A' && LA12_0<='B')||(LA12_0>='D' && LA12_0<='S')||(LA12_0>='U' && LA12_0<='Z')||LA12_0=='_'||LA12_0=='a'||(LA12_0>='c' && LA12_0<='z')) ) {
-            alt12=9;
+            alt12 = mTokensHelper009();
         }
         else if ( ((LA12_0>='0' && LA12_0<='9')) ) {
-            alt12=10;
+            alt12 = mTokensHelper010();
         }
         else if ( (LA12_0=='\"') ) {
-            int LA12_11 = input.LA(2);
-
-            if ( ((LA12_11>='\u0000' && LA12_11<='\uFFFE')) ) {
-                alt12=11;
-            }
-            else {
-                alt12=15;}
+            alt12 = mTokensHelper011();
         }
         else if ( (LA12_0=='\'') ) {
-            int LA12_12 = input.LA(2);
-
-            if ( ((LA12_12>='\u0000' && LA12_12<='\uFFFE')) ) {
-                alt12=11;
-            }
-            else {
-                alt12=15;}
+            alt12 = mTokensHelper012();
         }
         else if ( (LA12_0=='/') ) {
-            switch ( input.LA(2) ) {
-            case '*':
-                {
-                alt12=12;
-                }
-                break;
-            case '/':
-                {
-                alt12=13;
-                }
-                break;
-            default:
-                alt12=15;}
-
+            alt12 = mTokensHelper013();
         }
         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {
-            alt12=14;
+            alt12 = mTokensHelper014();
         }
         else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='+')||(LA12_0>='-' && LA12_0<='.')||LA12_0==':'||LA12_0=='='||(LA12_0>='?' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||(LA12_0>='{' && LA12_0<='\uFFFE')) ) {
-            alt12=15;
+            alt12 = mTokensHelper015();
         }
         else {
-            NoViableAltException nvae =
-                new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
-
-            throw nvae;
+            alt12 = mTokensHelper016();
         }
         switch (alt12) {
             case 1 :
@@ -1063,6 +853,276 @@ public class InternalDatatypeRuleTestLanguageLexer extends Lexer {
         }
 
     }
+    private int mTokensHelper001() throws RecognitionException {
+        int LA12_1 = input.LA(2);
+
+        if ( (LA12_1=='y') ) {
+            int LA12_16 = input.LA(3);
+
+            if ( (LA12_16=='p') ) {
+                int LA12_29 = input.LA(4);
+
+                if ( (LA12_29=='e') ) {
+                    switch ( input.LA(5) ) {
+                    case 's':
+                        {
+                        int LA12_35 = input.LA(6);
+
+                        if ( ((LA12_35>='0' && LA12_35<='9')||(LA12_35>='A' && LA12_35<='Z')||LA12_35=='_'||(LA12_35>='a' && LA12_35<='z')) ) {
+                            return 9;
+                        }
+                        else {
+                            return 1;}
+                        }
+                    case '0':
+                    case '1':
+                    case '2':
+                    case '3':
+                    case '4':
+                    case '5':
+                    case '6':
+                    case '7':
+                    case '8':
+                    case '9':
+                    case 'A':
+                    case 'B':
+                    case 'C':
+                    case 'D':
+                    case 'E':
+                    case 'F':
+                    case 'G':
+                    case 'H':
+                    case 'I':
+                    case 'J':
+                    case 'K':
+                    case 'L':
+                    case 'M':
+                    case 'N':
+                    case 'O':
+                    case 'P':
+                    case 'Q':
+                    case 'R':
+                    case 'S':
+                    case 'T':
+                    case 'U':
+                    case 'V':
+                    case 'W':
+                    case 'X':
+                    case 'Y':
+                    case 'Z':
+                    case '_':
+                    case 'a':
+                    case 'b':
+                    case 'c':
+                    case 'd':
+                    case 'e':
+                    case 'f':
+                    case 'g':
+                    case 'h':
+                    case 'i':
+                    case 'j':
+                    case 'k':
+                    case 'l':
+                    case 'm':
+                    case 'n':
+                    case 'o':
+                    case 'p':
+                    case 'q':
+                    case 'r':
+                    case 't':
+                    case 'u':
+                    case 'v':
+                    case 'w':
+                    case 'x':
+                    case 'y':
+                    case 'z':
+                        {
+                        return 9;
+                        }
+                    default:
+                        return 2;}
+
+                }
+                else {
+                    return 9;}
+            }
+            else {
+                return 9;}
+        }
+        else {
+            return 9;}
+    }
+
+    private int mTokensHelper002() throws RecognitionException {
+        return 3;
+    }
+
+    private int mTokensHelper003() throws RecognitionException {
+        int LA12_3 = input.LA(2);
+
+        if ( (LA12_3=='o') ) {
+            int LA12_19 = input.LA(3);
+
+            if ( (LA12_19=='m') ) {
+                int LA12_30 = input.LA(4);
+
+                if ( (LA12_30=='p') ) {
+                    int LA12_33 = input.LA(5);
+
+                    if ( (LA12_33=='o') ) {
+                        int LA12_37 = input.LA(6);
+
+                        if ( (LA12_37=='s') ) {
+                            int LA12_40 = input.LA(7);
+
+                            if ( (LA12_40=='i') ) {
+                                int LA12_41 = input.LA(8);
+
+                                if ( (LA12_41=='t') ) {
+                                    int LA12_42 = input.LA(9);
+
+                                    if ( (LA12_42=='e') ) {
+                                        int LA12_43 = input.LA(10);
+
+                                        if ( ((LA12_43>='0' && LA12_43<='9')||(LA12_43>='A' && LA12_43<='Z')||LA12_43=='_'||(LA12_43>='a' && LA12_43<='z')) ) {
+                                            return 9;
+                                        }
+                                        else {
+                                            return 4;}
+                                    }
+                                    else {
+                                        return 9;}
+                                }
+                                else {
+                                    return 9;}
+                            }
+                            else {
+                                return 9;}
+                        }
+                        else {
+                            return 9;}
+                    }
+                    else {
+                        return 9;}
+                }
+                else {
+                    return 9;}
+            }
+            else {
+                return 9;}
+        }
+        else {
+            return 9;}
+    }
+
+    private int mTokensHelper004() throws RecognitionException {
+        int LA12_4 = input.LA(2);
+
+        if ( (LA12_4=='a') ) {
+            int LA12_20 = input.LA(3);
+
+            if ( (LA12_20=='s') ) {
+                int LA12_31 = input.LA(4);
+
+                if ( (LA12_31=='e') ) {
+                    int LA12_34 = input.LA(5);
+
+                    if ( ((LA12_34>='0' && LA12_34<='9')||(LA12_34>='A' && LA12_34<='Z')||LA12_34=='_'||(LA12_34>='a' && LA12_34<='z')) ) {
+                        return 9;
+                    }
+                    else {
+                        return 5;}
+                }
+                else {
+                    return 9;}
+            }
+            else {
+                return 9;}
+        }
+        else {
+            return 9;}
+    }
+
+    private int mTokensHelper005() throws RecognitionException {
+        return 6;
+    }
+
+    private int mTokensHelper006() throws RecognitionException {
+        return 7;
+    }
+
+    private int mTokensHelper007() throws RecognitionException {
+        return 8;
+    }
+
+    private int mTokensHelper008() throws RecognitionException {
+        int LA12_8 = input.LA(2);
+
+        if ( ((LA12_8>='A' && LA12_8<='Z')||LA12_8=='_'||(LA12_8>='a' && LA12_8<='z')) ) {
+            return 9;
+        }
+        else {
+            return 15;}
+    }
+
+    private int mTokensHelper009() throws RecognitionException {
+        return 9;
+    }
+
+    private int mTokensHelper010() throws RecognitionException {
+        return 10;
+    }
+
+    private int mTokensHelper011() throws RecognitionException {
+        int LA12_11 = input.LA(2);
+
+        if ( ((LA12_11>='\u0000' && LA12_11<='\uFFFE')) ) {
+            return 11;
+        }
+        else {
+            return 15;}
+    }
+
+    private int mTokensHelper012() throws RecognitionException {
+        int LA12_12 = input.LA(2);
+
+        if ( ((LA12_12>='\u0000' && LA12_12<='\uFFFE')) ) {
+            return 11;
+        }
+        else {
+            return 15;}
+    }
+
+    private int mTokensHelper013() throws RecognitionException {
+        switch ( input.LA(2) ) {
+        case '*':
+            {
+            return 12;
+            }
+        case '/':
+            {
+            return 13;
+            }
+        default:
+            return 15;}
+
+    }
+
+    private int mTokensHelper014() throws RecognitionException {
+        return 14;
+    }
+
+    private int mTokensHelper015() throws RecognitionException {
+        return 15;
+    }
+
+    private int mTokensHelper016() throws RecognitionException {
+        NoViableAltException nvae =
+            new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
+
+        throw nvae;
+    }
+
 
 
  

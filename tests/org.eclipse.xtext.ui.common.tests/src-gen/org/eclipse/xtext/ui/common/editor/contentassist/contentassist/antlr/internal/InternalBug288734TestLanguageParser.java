@@ -69,12 +69,12 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:61:1: ruleModel EOF
             {
              before(grammarAccess.getModelRule()); 
-            pushFollow(FOLLOW_ruleModel_in_entryRuleModel60);
+            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel60);
             ruleModel();
             _fsp--;
 
              after(grammarAccess.getModelRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleModel67); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel67); 
 
             }
 
@@ -107,7 +107,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:75:1: ( rule__Model__ConstantsAssignment )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:75:2: rule__Model__ConstantsAssignment
             {
-            pushFollow(FOLLOW_rule__Model__ConstantsAssignment_in_ruleModel94);
+            pushFollow(FollowSets000.FOLLOW_rule__Model__ConstantsAssignment_in_ruleModel94);
             rule__Model__ConstantsAssignment();
             _fsp--;
 
@@ -144,12 +144,12 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:88:1: ruleTConstant EOF
             {
              before(grammarAccess.getTConstantRule()); 
-            pushFollow(FOLLOW_ruleTConstant_in_entryRuleTConstant120);
+            pushFollow(FollowSets000.FOLLOW_ruleTConstant_in_entryRuleTConstant120);
             ruleTConstant();
             _fsp--;
 
              after(grammarAccess.getTConstantRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTConstant127); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTConstant127); 
 
             }
 
@@ -182,7 +182,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:102:1: ( rule__TConstant__Alternatives )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:102:2: rule__TConstant__Alternatives
             {
-            pushFollow(FOLLOW_rule__TConstant__Alternatives_in_ruleTConstant154);
+            pushFollow(FollowSets000.FOLLOW_rule__TConstant__Alternatives_in_ruleTConstant154);
             rule__TConstant__Alternatives();
             _fsp--;
 
@@ -219,12 +219,12 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:115:1: ruleTStringConstant EOF
             {
              before(grammarAccess.getTStringConstantRule()); 
-            pushFollow(FOLLOW_ruleTStringConstant_in_entryRuleTStringConstant180);
+            pushFollow(FollowSets000.FOLLOW_ruleTStringConstant_in_entryRuleTStringConstant180);
             ruleTStringConstant();
             _fsp--;
 
              after(grammarAccess.getTStringConstantRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTStringConstant187); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTStringConstant187); 
 
             }
 
@@ -257,7 +257,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:129:1: ( rule__TStringConstant__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:129:2: rule__TStringConstant__Group__0
             {
-            pushFollow(FOLLOW_rule__TStringConstant__Group__0_in_ruleTStringConstant214);
+            pushFollow(FollowSets000.FOLLOW_rule__TStringConstant__Group__0_in_ruleTStringConstant214);
             rule__TStringConstant__Group__0();
             _fsp--;
 
@@ -294,12 +294,12 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:142:1: ruleTIntegerConstant EOF
             {
              before(grammarAccess.getTIntegerConstantRule()); 
-            pushFollow(FOLLOW_ruleTIntegerConstant_in_entryRuleTIntegerConstant240);
+            pushFollow(FollowSets000.FOLLOW_ruleTIntegerConstant_in_entryRuleTIntegerConstant240);
             ruleTIntegerConstant();
             _fsp--;
 
              after(grammarAccess.getTIntegerConstantRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTIntegerConstant247); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTIntegerConstant247); 
 
             }
 
@@ -332,7 +332,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:156:1: ( rule__TIntegerConstant__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:156:2: rule__TIntegerConstant__Group__0
             {
-            pushFollow(FOLLOW_rule__TIntegerConstant__Group__0_in_ruleTIntegerConstant274);
+            pushFollow(FollowSets000.FOLLOW_rule__TIntegerConstant__Group__0_in_ruleTIntegerConstant274);
             rule__TIntegerConstant__Group__0();
             _fsp--;
 
@@ -369,12 +369,12 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:169:1: ruleTBooleanConstant EOF
             {
              before(grammarAccess.getTBooleanConstantRule()); 
-            pushFollow(FOLLOW_ruleTBooleanConstant_in_entryRuleTBooleanConstant300);
+            pushFollow(FollowSets000.FOLLOW_ruleTBooleanConstant_in_entryRuleTBooleanConstant300);
             ruleTBooleanConstant();
             _fsp--;
 
              after(grammarAccess.getTBooleanConstantRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTBooleanConstant307); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTBooleanConstant307); 
 
             }
 
@@ -407,7 +407,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:183:1: ( rule__TBooleanConstant__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:183:2: rule__TBooleanConstant__Group__0
             {
-            pushFollow(FOLLOW_rule__TBooleanConstant__Group__0_in_ruleTBooleanConstant334);
+            pushFollow(FollowSets000.FOLLOW_rule__TBooleanConstant__Group__0_in_ruleTBooleanConstant334);
             rule__TBooleanConstant__Group__0();
             _fsp--;
 
@@ -444,12 +444,12 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:196:1: ruleTAnnotation EOF
             {
              before(grammarAccess.getTAnnotationRule()); 
-            pushFollow(FOLLOW_ruleTAnnotation_in_entryRuleTAnnotation360);
+            pushFollow(FollowSets000.FOLLOW_ruleTAnnotation_in_entryRuleTAnnotation360);
             ruleTAnnotation();
             _fsp--;
 
              after(grammarAccess.getTAnnotationRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTAnnotation367); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTAnnotation367); 
 
             }
 
@@ -482,7 +482,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:210:1: ( rule__TAnnotation__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:210:2: rule__TAnnotation__Group__0
             {
-            pushFollow(FOLLOW_rule__TAnnotation__Group__0_in_ruleTAnnotation394);
+            pushFollow(FollowSets000.FOLLOW_rule__TAnnotation__Group__0_in_ruleTAnnotation394);
             rule__TAnnotation__Group__0();
             _fsp--;
 
@@ -529,7 +529,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:228:1: ruleTStringConstant
                     {
                      before(grammarAccess.getTConstantAccess().getTStringConstantParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleTStringConstant_in_rule__TConstant__Alternatives430);
+                    pushFollow(FollowSets000.FOLLOW_ruleTStringConstant_in_rule__TConstant__Alternatives430);
                     ruleTStringConstant();
                     _fsp--;
 
@@ -547,7 +547,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:234:1: ruleTIntegerConstant
                     {
                      before(grammarAccess.getTConstantAccess().getTIntegerConstantParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleTIntegerConstant_in_rule__TConstant__Alternatives447);
+                    pushFollow(FollowSets000.FOLLOW_ruleTIntegerConstant_in_rule__TConstant__Alternatives447);
                     ruleTIntegerConstant();
                     _fsp--;
 
@@ -565,7 +565,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:240:1: ruleTBooleanConstant
                     {
                      before(grammarAccess.getTConstantAccess().getTBooleanConstantParserRuleCall_2()); 
-                    pushFollow(FOLLOW_ruleTBooleanConstant_in_rule__TConstant__Alternatives464);
+                    pushFollow(FollowSets000.FOLLOW_ruleTBooleanConstant_in_rule__TConstant__Alternatives464);
                     ruleTBooleanConstant();
                     _fsp--;
 
@@ -622,7 +622,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             	case 1 :
             	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:259:2: rule__TStringConstant__AnnotationsAssignment_0
             	    {
-            	    pushFollow(FOLLOW_rule__TStringConstant__AnnotationsAssignment_0_in_rule__TStringConstant__Group__0498);
+            	    pushFollow(FollowSets000.FOLLOW_rule__TStringConstant__AnnotationsAssignment_0_in_rule__TStringConstant__Group__0498);
             	    rule__TStringConstant__AnnotationsAssignment_0();
             	    _fsp--;
 
@@ -639,7 +639,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
 
             }
 
-            pushFollow(FOLLOW_rule__TStringConstant__Group__1_in_rule__TStringConstant__Group__0508);
+            pushFollow(FollowSets000.FOLLOW_rule__TStringConstant__Group__1_in_rule__TStringConstant__Group__0508);
             rule__TStringConstant__Group__1();
             _fsp--;
 
@@ -675,12 +675,12 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:276:1: 'constant'
             {
              before(grammarAccess.getTStringConstantAccess().getConstantKeyword_1()); 
-            match(input,11,FOLLOW_11_in_rule__TStringConstant__Group__1537); 
+            match(input,11,FollowSets000.FOLLOW_11_in_rule__TStringConstant__Group__1537); 
              after(grammarAccess.getTStringConstantAccess().getConstantKeyword_1()); 
 
             }
 
-            pushFollow(FOLLOW_rule__TStringConstant__Group__2_in_rule__TStringConstant__Group__1547);
+            pushFollow(FollowSets000.FOLLOW_rule__TStringConstant__Group__2_in_rule__TStringConstant__Group__1547);
             rule__TStringConstant__Group__2();
             _fsp--;
 
@@ -716,12 +716,12 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:296:1: 'string'
             {
              before(grammarAccess.getTStringConstantAccess().getStringKeyword_2()); 
-            match(input,12,FOLLOW_12_in_rule__TStringConstant__Group__2576); 
+            match(input,12,FollowSets000.FOLLOW_12_in_rule__TStringConstant__Group__2576); 
              after(grammarAccess.getTStringConstantAccess().getStringKeyword_2()); 
 
             }
 
-            pushFollow(FOLLOW_rule__TStringConstant__Group__3_in_rule__TStringConstant__Group__2586);
+            pushFollow(FollowSets000.FOLLOW_rule__TStringConstant__Group__3_in_rule__TStringConstant__Group__2586);
             rule__TStringConstant__Group__3();
             _fsp--;
 
@@ -760,7 +760,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:317:1: ( rule__TStringConstant__NameAssignment_3 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:317:2: rule__TStringConstant__NameAssignment_3
             {
-            pushFollow(FOLLOW_rule__TStringConstant__NameAssignment_3_in_rule__TStringConstant__Group__3614);
+            pushFollow(FollowSets000.FOLLOW_rule__TStringConstant__NameAssignment_3_in_rule__TStringConstant__Group__3614);
             rule__TStringConstant__NameAssignment_3();
             _fsp--;
 
@@ -818,7 +818,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             	case 1 :
             	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:342:2: rule__TIntegerConstant__AnnotationsAssignment_0
             	    {
-            	    pushFollow(FOLLOW_rule__TIntegerConstant__AnnotationsAssignment_0_in_rule__TIntegerConstant__Group__0656);
+            	    pushFollow(FollowSets000.FOLLOW_rule__TIntegerConstant__AnnotationsAssignment_0_in_rule__TIntegerConstant__Group__0656);
             	    rule__TIntegerConstant__AnnotationsAssignment_0();
             	    _fsp--;
 
@@ -835,7 +835,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
 
             }
 
-            pushFollow(FOLLOW_rule__TIntegerConstant__Group__1_in_rule__TIntegerConstant__Group__0666);
+            pushFollow(FollowSets000.FOLLOW_rule__TIntegerConstant__Group__1_in_rule__TIntegerConstant__Group__0666);
             rule__TIntegerConstant__Group__1();
             _fsp--;
 
@@ -871,12 +871,12 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:359:1: 'constant'
             {
              before(grammarAccess.getTIntegerConstantAccess().getConstantKeyword_1()); 
-            match(input,11,FOLLOW_11_in_rule__TIntegerConstant__Group__1695); 
+            match(input,11,FollowSets000.FOLLOW_11_in_rule__TIntegerConstant__Group__1695); 
              after(grammarAccess.getTIntegerConstantAccess().getConstantKeyword_1()); 
 
             }
 
-            pushFollow(FOLLOW_rule__TIntegerConstant__Group__2_in_rule__TIntegerConstant__Group__1705);
+            pushFollow(FollowSets000.FOLLOW_rule__TIntegerConstant__Group__2_in_rule__TIntegerConstant__Group__1705);
             rule__TIntegerConstant__Group__2();
             _fsp--;
 
@@ -912,12 +912,12 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:379:1: 'integer'
             {
              before(grammarAccess.getTIntegerConstantAccess().getIntegerKeyword_2()); 
-            match(input,13,FOLLOW_13_in_rule__TIntegerConstant__Group__2734); 
+            match(input,13,FollowSets000.FOLLOW_13_in_rule__TIntegerConstant__Group__2734); 
              after(grammarAccess.getTIntegerConstantAccess().getIntegerKeyword_2()); 
 
             }
 
-            pushFollow(FOLLOW_rule__TIntegerConstant__Group__3_in_rule__TIntegerConstant__Group__2744);
+            pushFollow(FollowSets000.FOLLOW_rule__TIntegerConstant__Group__3_in_rule__TIntegerConstant__Group__2744);
             rule__TIntegerConstant__Group__3();
             _fsp--;
 
@@ -956,7 +956,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:400:1: ( rule__TIntegerConstant__NameAssignment_3 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:400:2: rule__TIntegerConstant__NameAssignment_3
             {
-            pushFollow(FOLLOW_rule__TIntegerConstant__NameAssignment_3_in_rule__TIntegerConstant__Group__3772);
+            pushFollow(FollowSets000.FOLLOW_rule__TIntegerConstant__NameAssignment_3_in_rule__TIntegerConstant__Group__3772);
             rule__TIntegerConstant__NameAssignment_3();
             _fsp--;
 
@@ -1014,7 +1014,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             	case 1 :
             	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:425:2: rule__TBooleanConstant__AnnotationsAssignment_0
             	    {
-            	    pushFollow(FOLLOW_rule__TBooleanConstant__AnnotationsAssignment_0_in_rule__TBooleanConstant__Group__0814);
+            	    pushFollow(FollowSets000.FOLLOW_rule__TBooleanConstant__AnnotationsAssignment_0_in_rule__TBooleanConstant__Group__0814);
             	    rule__TBooleanConstant__AnnotationsAssignment_0();
             	    _fsp--;
 
@@ -1031,7 +1031,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
 
             }
 
-            pushFollow(FOLLOW_rule__TBooleanConstant__Group__1_in_rule__TBooleanConstant__Group__0824);
+            pushFollow(FollowSets000.FOLLOW_rule__TBooleanConstant__Group__1_in_rule__TBooleanConstant__Group__0824);
             rule__TBooleanConstant__Group__1();
             _fsp--;
 
@@ -1067,12 +1067,12 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:442:1: 'constant'
             {
              before(grammarAccess.getTBooleanConstantAccess().getConstantKeyword_1()); 
-            match(input,11,FOLLOW_11_in_rule__TBooleanConstant__Group__1853); 
+            match(input,11,FollowSets000.FOLLOW_11_in_rule__TBooleanConstant__Group__1853); 
              after(grammarAccess.getTBooleanConstantAccess().getConstantKeyword_1()); 
 
             }
 
-            pushFollow(FOLLOW_rule__TBooleanConstant__Group__2_in_rule__TBooleanConstant__Group__1863);
+            pushFollow(FollowSets000.FOLLOW_rule__TBooleanConstant__Group__2_in_rule__TBooleanConstant__Group__1863);
             rule__TBooleanConstant__Group__2();
             _fsp--;
 
@@ -1108,12 +1108,12 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:462:1: 'boolean'
             {
              before(grammarAccess.getTBooleanConstantAccess().getBooleanKeyword_2()); 
-            match(input,14,FOLLOW_14_in_rule__TBooleanConstant__Group__2892); 
+            match(input,14,FollowSets000.FOLLOW_14_in_rule__TBooleanConstant__Group__2892); 
              after(grammarAccess.getTBooleanConstantAccess().getBooleanKeyword_2()); 
 
             }
 
-            pushFollow(FOLLOW_rule__TBooleanConstant__Group__3_in_rule__TBooleanConstant__Group__2902);
+            pushFollow(FollowSets000.FOLLOW_rule__TBooleanConstant__Group__3_in_rule__TBooleanConstant__Group__2902);
             rule__TBooleanConstant__Group__3();
             _fsp--;
 
@@ -1152,7 +1152,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:483:1: ( rule__TBooleanConstant__NameAssignment_3 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:483:2: rule__TBooleanConstant__NameAssignment_3
             {
-            pushFollow(FOLLOW_rule__TBooleanConstant__NameAssignment_3_in_rule__TBooleanConstant__Group__3930);
+            pushFollow(FollowSets000.FOLLOW_rule__TBooleanConstant__NameAssignment_3_in_rule__TBooleanConstant__Group__3930);
             rule__TBooleanConstant__NameAssignment_3();
             _fsp--;
 
@@ -1195,12 +1195,12 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:507:1: '@desc'
             {
              before(grammarAccess.getTAnnotationAccess().getDescKeyword_0()); 
-            match(input,15,FOLLOW_15_in_rule__TAnnotation__Group__0973); 
+            match(input,15,FollowSets000.FOLLOW_15_in_rule__TAnnotation__Group__0973); 
              after(grammarAccess.getTAnnotationAccess().getDescKeyword_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__TAnnotation__Group__1_in_rule__TAnnotation__Group__0983);
+            pushFollow(FollowSets000.FOLLOW_rule__TAnnotation__Group__1_in_rule__TAnnotation__Group__0983);
             rule__TAnnotation__Group__1();
             _fsp--;
 
@@ -1239,7 +1239,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:528:1: ( rule__TAnnotation__DescriptionAssignment_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:528:2: rule__TAnnotation__DescriptionAssignment_1
             {
-            pushFollow(FOLLOW_rule__TAnnotation__DescriptionAssignment_1_in_rule__TAnnotation__Group__11011);
+            pushFollow(FollowSets000.FOLLOW_rule__TAnnotation__DescriptionAssignment_1_in_rule__TAnnotation__Group__11011);
             rule__TAnnotation__DescriptionAssignment_1();
             _fsp--;
 
@@ -1282,7 +1282,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:548:1: ruleTConstant
             {
              before(grammarAccess.getModelAccess().getConstantsTConstantParserRuleCall_0()); 
-            pushFollow(FOLLOW_ruleTConstant_in_rule__Model__ConstantsAssignment1049);
+            pushFollow(FollowSets000.FOLLOW_ruleTConstant_in_rule__Model__ConstantsAssignment1049);
             ruleTConstant();
             _fsp--;
 
@@ -1322,7 +1322,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:563:1: ruleTAnnotation
             {
              before(grammarAccess.getTStringConstantAccess().getAnnotationsTAnnotationParserRuleCall_0_0()); 
-            pushFollow(FOLLOW_ruleTAnnotation_in_rule__TStringConstant__AnnotationsAssignment_01080);
+            pushFollow(FollowSets000.FOLLOW_ruleTAnnotation_in_rule__TStringConstant__AnnotationsAssignment_01080);
             ruleTAnnotation();
             _fsp--;
 
@@ -1362,7 +1362,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:578:1: RULE_ID
             {
              before(grammarAccess.getTStringConstantAccess().getNameIDTerminalRuleCall_3_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__TStringConstant__NameAssignment_31111); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__TStringConstant__NameAssignment_31111); 
              after(grammarAccess.getTStringConstantAccess().getNameIDTerminalRuleCall_3_0()); 
 
             }
@@ -1399,7 +1399,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:593:1: ruleTAnnotation
             {
              before(grammarAccess.getTIntegerConstantAccess().getAnnotationsTAnnotationParserRuleCall_0_0()); 
-            pushFollow(FOLLOW_ruleTAnnotation_in_rule__TIntegerConstant__AnnotationsAssignment_01142);
+            pushFollow(FollowSets000.FOLLOW_ruleTAnnotation_in_rule__TIntegerConstant__AnnotationsAssignment_01142);
             ruleTAnnotation();
             _fsp--;
 
@@ -1439,7 +1439,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:608:1: RULE_ID
             {
              before(grammarAccess.getTIntegerConstantAccess().getNameIDTerminalRuleCall_3_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__TIntegerConstant__NameAssignment_31173); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__TIntegerConstant__NameAssignment_31173); 
              after(grammarAccess.getTIntegerConstantAccess().getNameIDTerminalRuleCall_3_0()); 
 
             }
@@ -1476,7 +1476,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:623:1: ruleTAnnotation
             {
              before(grammarAccess.getTBooleanConstantAccess().getAnnotationsTAnnotationParserRuleCall_0_0()); 
-            pushFollow(FOLLOW_ruleTAnnotation_in_rule__TBooleanConstant__AnnotationsAssignment_01204);
+            pushFollow(FollowSets000.FOLLOW_ruleTAnnotation_in_rule__TBooleanConstant__AnnotationsAssignment_01204);
             ruleTAnnotation();
             _fsp--;
 
@@ -1516,7 +1516,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:638:1: RULE_ID
             {
              before(grammarAccess.getTBooleanConstantAccess().getNameIDTerminalRuleCall_3_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__TBooleanConstant__NameAssignment_31235); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__TBooleanConstant__NameAssignment_31235); 
              after(grammarAccess.getTBooleanConstantAccess().getNameIDTerminalRuleCall_3_0()); 
 
             }
@@ -1553,7 +1553,7 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288734TestLanguage.g:653:1: RULE_STRING
             {
              before(grammarAccess.getTAnnotationAccess().getDescriptionSTRINGTerminalRuleCall_1_0()); 
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__TAnnotation__DescriptionAssignment_11266); 
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__TAnnotation__DescriptionAssignment_11266); 
              after(grammarAccess.getTAnnotationAccess().getDescriptionSTRINGTerminalRuleCall_1_0()); 
 
             }
@@ -1634,58 +1634,62 @@ public class InternalBug288734TestLanguageParser extends AbstractInternalContent
     }
  
 
-    public static final BitSet FOLLOW_ruleModel_in_entryRuleModel60 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleModel67 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__ConstantsAssignment_in_ruleModel94 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTConstant_in_entryRuleTConstant120 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTConstant127 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TConstant__Alternatives_in_ruleTConstant154 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTStringConstant_in_entryRuleTStringConstant180 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTStringConstant187 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TStringConstant__Group__0_in_ruleTStringConstant214 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTIntegerConstant_in_entryRuleTIntegerConstant240 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTIntegerConstant247 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TIntegerConstant__Group__0_in_ruleTIntegerConstant274 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTBooleanConstant_in_entryRuleTBooleanConstant300 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTBooleanConstant307 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TBooleanConstant__Group__0_in_ruleTBooleanConstant334 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTAnnotation_in_entryRuleTAnnotation360 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTAnnotation367 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TAnnotation__Group__0_in_ruleTAnnotation394 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTStringConstant_in_rule__TConstant__Alternatives430 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTIntegerConstant_in_rule__TConstant__Alternatives447 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTBooleanConstant_in_rule__TConstant__Alternatives464 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TStringConstant__AnnotationsAssignment_0_in_rule__TStringConstant__Group__0498 = new BitSet(new long[]{0x0000000000008800L});
-    public static final BitSet FOLLOW_rule__TStringConstant__Group__1_in_rule__TStringConstant__Group__0508 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_rule__TStringConstant__Group__1537 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_rule__TStringConstant__Group__2_in_rule__TStringConstant__Group__1547 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_rule__TStringConstant__Group__2576 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__TStringConstant__Group__3_in_rule__TStringConstant__Group__2586 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TStringConstant__NameAssignment_3_in_rule__TStringConstant__Group__3614 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TIntegerConstant__AnnotationsAssignment_0_in_rule__TIntegerConstant__Group__0656 = new BitSet(new long[]{0x0000000000008800L});
-    public static final BitSet FOLLOW_rule__TIntegerConstant__Group__1_in_rule__TIntegerConstant__Group__0666 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_rule__TIntegerConstant__Group__1695 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_rule__TIntegerConstant__Group__2_in_rule__TIntegerConstant__Group__1705 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__TIntegerConstant__Group__2734 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__TIntegerConstant__Group__3_in_rule__TIntegerConstant__Group__2744 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TIntegerConstant__NameAssignment_3_in_rule__TIntegerConstant__Group__3772 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TBooleanConstant__AnnotationsAssignment_0_in_rule__TBooleanConstant__Group__0814 = new BitSet(new long[]{0x0000000000008800L});
-    public static final BitSet FOLLOW_rule__TBooleanConstant__Group__1_in_rule__TBooleanConstant__Group__0824 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_rule__TBooleanConstant__Group__1853 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_rule__TBooleanConstant__Group__2_in_rule__TBooleanConstant__Group__1863 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__TBooleanConstant__Group__2892 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__TBooleanConstant__Group__3_in_rule__TBooleanConstant__Group__2902 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TBooleanConstant__NameAssignment_3_in_rule__TBooleanConstant__Group__3930 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_rule__TAnnotation__Group__0973 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__TAnnotation__Group__1_in_rule__TAnnotation__Group__0983 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__TAnnotation__DescriptionAssignment_1_in_rule__TAnnotation__Group__11011 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTConstant_in_rule__Model__ConstantsAssignment1049 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTAnnotation_in_rule__TStringConstant__AnnotationsAssignment_01080 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__TStringConstant__NameAssignment_31111 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTAnnotation_in_rule__TIntegerConstant__AnnotationsAssignment_01142 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__TIntegerConstant__NameAssignment_31173 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTAnnotation_in_rule__TBooleanConstant__AnnotationsAssignment_01204 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__TBooleanConstant__NameAssignment_31235 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__TAnnotation__DescriptionAssignment_11266 = new BitSet(new long[]{0x0000000000000002L});
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel60 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleModel67 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Model__ConstantsAssignment_in_ruleModel94 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTConstant_in_entryRuleTConstant120 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTConstant127 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TConstant__Alternatives_in_ruleTConstant154 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTStringConstant_in_entryRuleTStringConstant180 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTStringConstant187 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TStringConstant__Group__0_in_ruleTStringConstant214 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTIntegerConstant_in_entryRuleTIntegerConstant240 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTIntegerConstant247 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TIntegerConstant__Group__0_in_ruleTIntegerConstant274 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTBooleanConstant_in_entryRuleTBooleanConstant300 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTBooleanConstant307 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TBooleanConstant__Group__0_in_ruleTBooleanConstant334 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTAnnotation_in_entryRuleTAnnotation360 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTAnnotation367 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TAnnotation__Group__0_in_ruleTAnnotation394 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTStringConstant_in_rule__TConstant__Alternatives430 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTIntegerConstant_in_rule__TConstant__Alternatives447 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTBooleanConstant_in_rule__TConstant__Alternatives464 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TStringConstant__AnnotationsAssignment_0_in_rule__TStringConstant__Group__0498 = new BitSet(new long[]{0x0000000000008800L});
+        public static final BitSet FOLLOW_rule__TStringConstant__Group__1_in_rule__TStringConstant__Group__0508 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_rule__TStringConstant__Group__1537 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_rule__TStringConstant__Group__2_in_rule__TStringConstant__Group__1547 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_rule__TStringConstant__Group__2576 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__TStringConstant__Group__3_in_rule__TStringConstant__Group__2586 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TStringConstant__NameAssignment_3_in_rule__TStringConstant__Group__3614 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TIntegerConstant__AnnotationsAssignment_0_in_rule__TIntegerConstant__Group__0656 = new BitSet(new long[]{0x0000000000008800L});
+        public static final BitSet FOLLOW_rule__TIntegerConstant__Group__1_in_rule__TIntegerConstant__Group__0666 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_rule__TIntegerConstant__Group__1695 = new BitSet(new long[]{0x0000000000002000L});
+        public static final BitSet FOLLOW_rule__TIntegerConstant__Group__2_in_rule__TIntegerConstant__Group__1705 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_rule__TIntegerConstant__Group__2734 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__TIntegerConstant__Group__3_in_rule__TIntegerConstant__Group__2744 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TIntegerConstant__NameAssignment_3_in_rule__TIntegerConstant__Group__3772 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TBooleanConstant__AnnotationsAssignment_0_in_rule__TBooleanConstant__Group__0814 = new BitSet(new long[]{0x0000000000008800L});
+        public static final BitSet FOLLOW_rule__TBooleanConstant__Group__1_in_rule__TBooleanConstant__Group__0824 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_rule__TBooleanConstant__Group__1853 = new BitSet(new long[]{0x0000000000004000L});
+        public static final BitSet FOLLOW_rule__TBooleanConstant__Group__2_in_rule__TBooleanConstant__Group__1863 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_rule__TBooleanConstant__Group__2892 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__TBooleanConstant__Group__3_in_rule__TBooleanConstant__Group__2902 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TBooleanConstant__NameAssignment_3_in_rule__TBooleanConstant__Group__3930 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_15_in_rule__TAnnotation__Group__0973 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__TAnnotation__Group__1_in_rule__TAnnotation__Group__0983 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TAnnotation__DescriptionAssignment_1_in_rule__TAnnotation__Group__11011 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTConstant_in_rule__Model__ConstantsAssignment1049 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTAnnotation_in_rule__TStringConstant__AnnotationsAssignment_01080 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__TStringConstant__NameAssignment_31111 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTAnnotation_in_rule__TIntegerConstant__AnnotationsAssignment_01142 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__TIntegerConstant__NameAssignment_31173 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTAnnotation_in_rule__TBooleanConstant__AnnotationsAssignment_01204 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__TBooleanConstant__NameAssignment_31235 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__TAnnotation__DescriptionAssignment_11266 = new BitSet(new long[]{0x0000000000000002L});
+    }
+
 
 }

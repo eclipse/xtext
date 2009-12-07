@@ -69,12 +69,12 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:61:1: ruleModel EOF
             {
              before(grammarAccess.getModelRule()); 
-            pushFollow(FOLLOW_ruleModel_in_entryRuleModel60);
+            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel60);
             ruleModel();
             _fsp--;
 
              after(grammarAccess.getModelRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleModel67); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel67); 
 
             }
 
@@ -107,7 +107,7 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:75:1: ( rule__Model__Alternatives )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:75:2: rule__Model__Alternatives
             {
-            pushFollow(FOLLOW_rule__Model__Alternatives_in_ruleModel94);
+            pushFollow(FollowSets000.FOLLOW_rule__Model__Alternatives_in_ruleModel94);
             rule__Model__Alternatives();
             _fsp--;
 
@@ -153,7 +153,7 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:95:1: ( rule__ExistingEnum__Alternatives )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:95:2: rule__ExistingEnum__Alternatives
             {
-            pushFollow(FOLLOW_rule__ExistingEnum__Alternatives_in_ruleExistingEnum131);
+            pushFollow(FollowSets000.FOLLOW_rule__ExistingEnum__Alternatives_in_ruleExistingEnum131);
             rule__ExistingEnum__Alternatives();
             _fsp--;
 
@@ -199,7 +199,7 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:114:1: ( rule__GeneratedEnum__Alternatives )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:114:2: rule__GeneratedEnum__Alternatives
             {
-            pushFollow(FOLLOW_rule__GeneratedEnum__Alternatives_in_ruleGeneratedEnum167);
+            pushFollow(FollowSets000.FOLLOW_rule__GeneratedEnum__Alternatives_in_ruleGeneratedEnum167);
             rule__GeneratedEnum__Alternatives();
             _fsp--;
 
@@ -262,7 +262,7 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:132:1: ( rule__Model__Group_0__0 )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:132:2: rule__Model__Group_0__0
                     {
-                    pushFollow(FOLLOW_rule__Model__Group_0__0_in_rule__Model__Alternatives202);
+                    pushFollow(FollowSets000.FOLLOW_rule__Model__Group_0__0_in_rule__Model__Alternatives202);
                     rule__Model__Group_0__0();
                     _fsp--;
 
@@ -286,7 +286,7 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:138:1: ( rule__Model__Group_1__0 )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:138:2: rule__Model__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__Model__Group_1__0_in_rule__Model__Alternatives220);
+                    pushFollow(FollowSets000.FOLLOW_rule__Model__Group_1__0_in_rule__Model__Alternatives220);
                     rule__Model__Group_1__0();
                     _fsp--;
 
@@ -360,7 +360,7 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:154:1: ( 'SameName' )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:154:3: 'SameName'
                     {
-                    match(input,11,FOLLOW_11_in_rule__ExistingEnum__Alternatives254); 
+                    match(input,11,FollowSets000.FOLLOW_11_in_rule__ExistingEnum__Alternatives254); 
 
                     }
 
@@ -381,7 +381,7 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:161:1: ( 'overridden' )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:161:3: 'overridden'
                     {
-                    match(input,12,FOLLOW_12_in_rule__ExistingEnum__Alternatives275); 
+                    match(input,12,FollowSets000.FOLLOW_12_in_rule__ExistingEnum__Alternatives275); 
 
                     }
 
@@ -402,7 +402,7 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:168:1: ( 'DifferentLiteral' )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:168:3: 'DifferentLiteral'
                     {
-                    match(input,13,FOLLOW_13_in_rule__ExistingEnum__Alternatives296); 
+                    match(input,13,FollowSets000.FOLLOW_13_in_rule__ExistingEnum__Alternatives296); 
 
                     }
 
@@ -464,7 +464,7 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:185:1: ( 'SameName' )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:185:3: 'SameName'
                     {
-                    match(input,11,FOLLOW_11_in_rule__GeneratedEnum__Alternatives332); 
+                    match(input,11,FollowSets000.FOLLOW_11_in_rule__GeneratedEnum__Alternatives332); 
 
                     }
 
@@ -485,7 +485,7 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:192:1: ( 'DifferentLiteral' )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:192:3: 'DifferentLiteral'
                     {
-                    match(input,13,FOLLOW_13_in_rule__GeneratedEnum__Alternatives353); 
+                    match(input,13,FollowSets000.FOLLOW_13_in_rule__GeneratedEnum__Alternatives353); 
 
                     }
 
@@ -527,12 +527,12 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:210:1: 'existing'
             {
              before(grammarAccess.getModelAccess().getExistingKeyword_0_0()); 
-            match(input,14,FOLLOW_14_in_rule__Model__Group_0__0391); 
+            match(input,14,FollowSets000.FOLLOW_14_in_rule__Model__Group_0__0391); 
              after(grammarAccess.getModelAccess().getExistingKeyword_0_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__Model__Group_0__1_in_rule__Model__Group_0__0401);
+            pushFollow(FollowSets000.FOLLOW_rule__Model__Group_0__1_in_rule__Model__Group_0__0401);
             rule__Model__Group_0__1();
             _fsp--;
 
@@ -571,7 +571,7 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:231:1: ( rule__Model__ExistingAssignment_0_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:231:2: rule__Model__ExistingAssignment_0_1
             {
-            pushFollow(FOLLOW_rule__Model__ExistingAssignment_0_1_in_rule__Model__Group_0__1429);
+            pushFollow(FollowSets000.FOLLOW_rule__Model__ExistingAssignment_0_1_in_rule__Model__Group_0__1429);
             rule__Model__ExistingAssignment_0_1();
             _fsp--;
 
@@ -582,7 +582,7 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
             }
 
-            pushFollow(FOLLOW_rule__Model__Group_0__2_in_rule__Model__Group_0__1438);
+            pushFollow(FollowSets000.FOLLOW_rule__Model__Group_0__2_in_rule__Model__Group_0__1438);
             rule__Model__Group_0__2();
             _fsp--;
 
@@ -629,7 +629,7 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:249:2: rule__Model__Group_0_2__0
                     {
-                    pushFollow(FOLLOW_rule__Model__Group_0_2__0_in_rule__Model__Group_0__2466);
+                    pushFollow(FollowSets000.FOLLOW_rule__Model__Group_0_2__0_in_rule__Model__Group_0__2466);
                     rule__Model__Group_0_2__0();
                     _fsp--;
 
@@ -675,12 +675,12 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:271:1: 'generated'
             {
              before(grammarAccess.getModelAccess().getGeneratedKeyword_0_2_0()); 
-            match(input,15,FOLLOW_15_in_rule__Model__Group_0_2__0508); 
+            match(input,15,FollowSets000.FOLLOW_15_in_rule__Model__Group_0_2__0508); 
              after(grammarAccess.getModelAccess().getGeneratedKeyword_0_2_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__Model__Group_0_2__1_in_rule__Model__Group_0_2__0518);
+            pushFollow(FollowSets000.FOLLOW_rule__Model__Group_0_2__1_in_rule__Model__Group_0_2__0518);
             rule__Model__Group_0_2__1();
             _fsp--;
 
@@ -719,7 +719,7 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:292:1: ( rule__Model__GeneratedAssignment_0_2_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:292:2: rule__Model__GeneratedAssignment_0_2_1
             {
-            pushFollow(FOLLOW_rule__Model__GeneratedAssignment_0_2_1_in_rule__Model__Group_0_2__1546);
+            pushFollow(FollowSets000.FOLLOW_rule__Model__GeneratedAssignment_0_2_1_in_rule__Model__Group_0_2__1546);
             rule__Model__GeneratedAssignment_0_2_1();
             _fsp--;
 
@@ -762,12 +762,12 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:312:1: 'generated'
             {
              before(grammarAccess.getModelAccess().getGeneratedKeyword_1_0()); 
-            match(input,15,FOLLOW_15_in_rule__Model__Group_1__0585); 
+            match(input,15,FollowSets000.FOLLOW_15_in_rule__Model__Group_1__0585); 
              after(grammarAccess.getModelAccess().getGeneratedKeyword_1_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__Model__Group_1__1_in_rule__Model__Group_1__0595);
+            pushFollow(FollowSets000.FOLLOW_rule__Model__Group_1__1_in_rule__Model__Group_1__0595);
             rule__Model__Group_1__1();
             _fsp--;
 
@@ -806,7 +806,7 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:333:1: ( rule__Model__GeneratedAssignment_1_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:333:2: rule__Model__GeneratedAssignment_1_1
             {
-            pushFollow(FOLLOW_rule__Model__GeneratedAssignment_1_1_in_rule__Model__Group_1__1623);
+            pushFollow(FollowSets000.FOLLOW_rule__Model__GeneratedAssignment_1_1_in_rule__Model__Group_1__1623);
             rule__Model__GeneratedAssignment_1_1();
             _fsp--;
 
@@ -849,7 +849,7 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:353:1: ruleExistingEnum
             {
              before(grammarAccess.getModelAccess().getExistingExistingEnumEnumRuleCall_0_1_0()); 
-            pushFollow(FOLLOW_ruleExistingEnum_in_rule__Model__ExistingAssignment_0_1661);
+            pushFollow(FollowSets000.FOLLOW_ruleExistingEnum_in_rule__Model__ExistingAssignment_0_1661);
             ruleExistingEnum();
             _fsp--;
 
@@ -889,7 +889,7 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:368:1: ruleGeneratedEnum
             {
              before(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_0_2_1_0()); 
-            pushFollow(FOLLOW_ruleGeneratedEnum_in_rule__Model__GeneratedAssignment_0_2_1692);
+            pushFollow(FollowSets000.FOLLOW_ruleGeneratedEnum_in_rule__Model__GeneratedAssignment_0_2_1692);
             ruleGeneratedEnum();
             _fsp--;
 
@@ -929,7 +929,7 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g:383:1: ruleGeneratedEnum
             {
              before(grammarAccess.getModelAccess().getGeneratedGeneratedEnumEnumRuleCall_1_1_0()); 
-            pushFollow(FOLLOW_ruleGeneratedEnum_in_rule__Model__GeneratedAssignment_1_1723);
+            pushFollow(FollowSets000.FOLLOW_ruleGeneratedEnum_in_rule__Model__GeneratedAssignment_1_1723);
             ruleGeneratedEnum();
             _fsp--;
 
@@ -957,31 +957,35 @@ public class InternalEnumRulesUiTestLanguageParser extends AbstractInternalConte
 
  
 
-    public static final BitSet FOLLOW_ruleModel_in_entryRuleModel60 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleModel67 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__Alternatives_in_ruleModel94 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ExistingEnum__Alternatives_in_ruleExistingEnum131 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__GeneratedEnum__Alternatives_in_ruleGeneratedEnum167 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__Group_0__0_in_rule__Model__Alternatives202 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__Group_1__0_in_rule__Model__Alternatives220 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_rule__ExistingEnum__Alternatives254 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_rule__ExistingEnum__Alternatives275 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__ExistingEnum__Alternatives296 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_rule__GeneratedEnum__Alternatives332 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__GeneratedEnum__Alternatives353 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__Model__Group_0__0391 = new BitSet(new long[]{0x0000000000003800L});
-    public static final BitSet FOLLOW_rule__Model__Group_0__1_in_rule__Model__Group_0__0401 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__ExistingAssignment_0_1_in_rule__Model__Group_0__1429 = new BitSet(new long[]{0x0000000000008002L});
-    public static final BitSet FOLLOW_rule__Model__Group_0__2_in_rule__Model__Group_0__1438 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__Group_0_2__0_in_rule__Model__Group_0__2466 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_rule__Model__Group_0_2__0508 = new BitSet(new long[]{0x0000000000002800L});
-    public static final BitSet FOLLOW_rule__Model__Group_0_2__1_in_rule__Model__Group_0_2__0518 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__GeneratedAssignment_0_2_1_in_rule__Model__Group_0_2__1546 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_rule__Model__Group_1__0585 = new BitSet(new long[]{0x0000000000002800L});
-    public static final BitSet FOLLOW_rule__Model__Group_1__1_in_rule__Model__Group_1__0595 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__GeneratedAssignment_1_1_in_rule__Model__Group_1__1623 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleExistingEnum_in_rule__Model__ExistingAssignment_0_1661 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGeneratedEnum_in_rule__Model__GeneratedAssignment_0_2_1692 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGeneratedEnum_in_rule__Model__GeneratedAssignment_1_1723 = new BitSet(new long[]{0x0000000000000002L});
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel60 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleModel67 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Model__Alternatives_in_ruleModel94 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ExistingEnum__Alternatives_in_ruleExistingEnum131 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__GeneratedEnum__Alternatives_in_ruleGeneratedEnum167 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Model__Group_0__0_in_rule__Model__Alternatives202 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Model__Group_1__0_in_rule__Model__Alternatives220 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_rule__ExistingEnum__Alternatives254 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_rule__ExistingEnum__Alternatives275 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_rule__ExistingEnum__Alternatives296 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_rule__GeneratedEnum__Alternatives332 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_rule__GeneratedEnum__Alternatives353 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_rule__Model__Group_0__0391 = new BitSet(new long[]{0x0000000000003800L});
+        public static final BitSet FOLLOW_rule__Model__Group_0__1_in_rule__Model__Group_0__0401 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Model__ExistingAssignment_0_1_in_rule__Model__Group_0__1429 = new BitSet(new long[]{0x0000000000008002L});
+        public static final BitSet FOLLOW_rule__Model__Group_0__2_in_rule__Model__Group_0__1438 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Model__Group_0_2__0_in_rule__Model__Group_0__2466 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_15_in_rule__Model__Group_0_2__0508 = new BitSet(new long[]{0x0000000000002800L});
+        public static final BitSet FOLLOW_rule__Model__Group_0_2__1_in_rule__Model__Group_0_2__0518 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Model__GeneratedAssignment_0_2_1_in_rule__Model__Group_0_2__1546 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_15_in_rule__Model__Group_1__0585 = new BitSet(new long[]{0x0000000000002800L});
+        public static final BitSet FOLLOW_rule__Model__Group_1__1_in_rule__Model__Group_1__0595 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Model__GeneratedAssignment_1_1_in_rule__Model__Group_1__1623 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExistingEnum_in_rule__Model__ExistingAssignment_0_1661 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleGeneratedEnum_in_rule__Model__GeneratedAssignment_0_2_1692 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleGeneratedEnum_in_rule__Model__GeneratedAssignment_1_1723 = new BitSet(new long[]{0x0000000000000002L});
+    }
+
 
 }

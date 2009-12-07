@@ -79,12 +79,12 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:73:2: iv_ruleFoo= ruleFoo EOF
             {
              currentNode = createCompositeNode(grammarAccess.getFooRule(), currentNode); 
-            pushFollow(FOLLOW_ruleFoo_in_entryRuleFoo73);
+            pushFollow(FollowSets000.FOLLOW_ruleFoo_in_entryRuleFoo73);
             iv_ruleFoo=ruleFoo();
             _fsp--;
 
              current =iv_ruleFoo; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFoo83); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFoo83); 
 
             }
 
@@ -126,7 +126,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:88:3: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFoo125); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleFoo125); 
 
             			createLeafNode(grammarAccess.getFooAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
             		
@@ -173,7 +173,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getFooAccess().getNameRefsNameRefParserRuleCall_1_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleNameRef_in_ruleFoo151);
+            	    pushFollow(FollowSets000.FOLLOW_ruleNameRef_in_ruleFoo151);
             	    lv_nameRefs_1_0=ruleNameRef();
             	    _fsp--;
 
@@ -241,12 +241,12 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/metamodelreferencing/tests/parser/antlr/internal/InternalMetamodelRefTestLanguage.g:142:2: iv_ruleNameRef= ruleNameRef EOF
             {
              currentNode = createCompositeNode(grammarAccess.getNameRefRule(), currentNode); 
-            pushFollow(FOLLOW_ruleNameRef_in_entryRuleNameRef185);
+            pushFollow(FollowSets000.FOLLOW_ruleNameRef_in_entryRuleNameRef185);
             iv_ruleNameRef=ruleNameRef();
             _fsp--;
 
              current =iv_ruleNameRef; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleNameRef195); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleNameRef195); 
 
             }
 
@@ -286,7 +286,7 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleNameRef237); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleNameRef237); 
 
             		createLeafNode(grammarAccess.getNameRefAccess().getRuleParserRuleCrossReference_0(), "rule"); 
             	
@@ -317,12 +317,16 @@ public class InternalMetamodelRefTestLanguageParser extends AbstractInternalAntl
 
  
 
-    public static final BitSet FOLLOW_ruleFoo_in_entryRuleFoo73 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFoo83 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFoo125 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_ruleNameRef_in_ruleFoo151 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_ruleNameRef_in_entryRuleNameRef185 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleNameRef195 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleNameRef237 = new BitSet(new long[]{0x0000000000000002L});
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_ruleFoo_in_entryRuleFoo73 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleFoo83 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleFoo125 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_ruleNameRef_in_ruleFoo151 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_ruleNameRef_in_entryRuleNameRef185 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleNameRef195 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleNameRef237 = new BitSet(new long[]{0x0000000000000002L});
+    }
+
 
 }

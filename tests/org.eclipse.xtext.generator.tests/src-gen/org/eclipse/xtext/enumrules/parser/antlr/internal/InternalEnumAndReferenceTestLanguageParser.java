@@ -80,12 +80,12 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:74:2: iv_ruleEntityWithEnumAndReference= ruleEntityWithEnumAndReference EOF
             {
              currentNode = createCompositeNode(grammarAccess.getEntityWithEnumAndReferenceRule(), currentNode); 
-            pushFollow(FOLLOW_ruleEntityWithEnumAndReference_in_entryRuleEntityWithEnumAndReference73);
+            pushFollow(FollowSets000.FOLLOW_ruleEntityWithEnumAndReference_in_entryRuleEntityWithEnumAndReference73);
             iv_ruleEntityWithEnumAndReference=ruleEntityWithEnumAndReference();
             _fsp--;
 
              current =iv_ruleEntityWithEnumAndReference; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEntityWithEnumAndReference83); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEntityWithEnumAndReference83); 
 
             }
 
@@ -129,7 +129,7 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
              
             	        currentNode=createCompositeNode(grammarAccess.getEntityWithEnumAndReferenceAccess().getTypeKindOfKeywordEnumRuleCall_0_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleKindOfKeyword_in_ruleEntityWithEnumAndReference129);
+            pushFollow(FollowSets000.FOLLOW_ruleKindOfKeyword_in_ruleEntityWithEnumAndReference129);
             lv_type_0_0=ruleKindOfKeyword();
             _fsp--;
 
@@ -163,7 +163,7 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:113:3: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEntityWithEnumAndReference146); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEntityWithEnumAndReference146); 
 
             			createLeafNode(grammarAccess.getEntityWithEnumAndReferenceAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             		
@@ -189,7 +189,7 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
 
             }
 
-            match(input,11,FOLLOW_11_in_ruleEntityWithEnumAndReference161); 
+            match(input,11,FollowSets000.FOLLOW_11_in_ruleEntityWithEnumAndReference161); 
 
                     createLeafNode(grammarAccess.getEntityWithEnumAndReferenceAccess().getReferenceKeyword_2(), null); 
                 
@@ -205,7 +205,7 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEntityWithEnumAndReference179); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEntityWithEnumAndReference179); 
 
             		createLeafNode(grammarAccess.getEntityWithEnumAndReferenceAccess().getRefEntityWithEnumAndReferenceCrossReference_3_0(), "ref"); 
             	
@@ -270,7 +270,7 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:165:2: ( 'kindOfKeyword' )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:165:4: 'kindOfKeyword'
                     {
-                    match(input,12,FOLLOW_12_in_ruleKindOfKeyword226); 
+                    match(input,12,FollowSets000.FOLLOW_12_in_ruleKindOfKeyword226); 
 
                             current = grammarAccess.getKindOfKeywordAccess().getKindOfKeywordEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getKindOfKeywordAccess().getKindOfKeywordEnumLiteralDeclaration_0(), null); 
@@ -287,7 +287,7 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:171:6: ( 'anotherEnumLiteral' )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumAndReferenceTestLanguage.g:171:8: 'anotherEnumLiteral'
                     {
-                    match(input,13,FOLLOW_13_in_ruleKindOfKeyword241); 
+                    match(input,13,FollowSets000.FOLLOW_13_in_ruleKindOfKeyword241); 
 
                             current = grammarAccess.getKindOfKeywordAccess().getAnotherEnumLiteralEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
                             createLeafNode(grammarAccess.getKindOfKeywordAccess().getAnotherEnumLiteralEnumLiteralDeclaration_1(), null); 
@@ -322,13 +322,17 @@ public class InternalEnumAndReferenceTestLanguageParser extends AbstractInternal
 
  
 
-    public static final BitSet FOLLOW_ruleEntityWithEnumAndReference_in_entryRuleEntityWithEnumAndReference73 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEntityWithEnumAndReference83 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleKindOfKeyword_in_ruleEntityWithEnumAndReference129 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleEntityWithEnumAndReference146 = new BitSet(new long[]{0x0000000000000800L});
-    public static final BitSet FOLLOW_11_in_ruleEntityWithEnumAndReference161 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleEntityWithEnumAndReference179 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_ruleKindOfKeyword226 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_ruleKindOfKeyword241 = new BitSet(new long[]{0x0000000000000002L});
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_ruleEntityWithEnumAndReference_in_entryRuleEntityWithEnumAndReference73 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEntityWithEnumAndReference83 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleKindOfKeyword_in_ruleEntityWithEnumAndReference129 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleEntityWithEnumAndReference146 = new BitSet(new long[]{0x0000000000000800L});
+        public static final BitSet FOLLOW_11_in_ruleEntityWithEnumAndReference161 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleEntityWithEnumAndReference179 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_ruleKindOfKeyword226 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_ruleKindOfKeyword241 = new BitSet(new long[]{0x0000000000000002L});
+    }
+
 
 }
