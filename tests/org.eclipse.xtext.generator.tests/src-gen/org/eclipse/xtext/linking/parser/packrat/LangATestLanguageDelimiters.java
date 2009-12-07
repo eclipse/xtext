@@ -23,7 +23,9 @@ public final class LangATestLanguageDelimiters {
 
 	public static final ISequenceMatcher ruleCall$13$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
+	public static final ICharacterClass keyword$33$Delimiter = ICharacterClass.Factory.nullClass();
+
 	public static final ISequenceMatcher ruleCall$19$Delimiter = new SetBasedKeywordMatcher(
-		"import", "type", "extends");
+		"import", "type", "extends", "implements");
 
 }

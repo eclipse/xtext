@@ -272,11 +272,13 @@ protected class Import_UriAssignment_1 extends AssignmentToken  {
 /************ begin Rule Type ****************
  *
  * Type:
- *   "type" name=ID ("extends" extends=[Type])?;
+ *   "type" name=ID ("extends" extends=[Type])? ("implements" implements+=[Type] (","
+ *   implements+=[Type])*)?;
  *
  **/
 
-// "type" name=ID ("extends" extends=[Type])?
+// "type" name=ID ("extends" extends=[Type])? ("implements" implements+=[Type] (","
+// implements+=[Type])*)?
 protected class Type_Group extends GroupToken {
 	
 	public Type_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -291,8 +293,9 @@ protected class Type_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Type_Group_2(parent, this, 0, inst);
-			case 1: return new Type_NameAssignment_1(parent, this, 1, inst);
+			case 0: return new Type_Group_3(parent, this, 0, inst);
+			case 1: return new Type_Group_2(parent, this, 1, inst);
+			case 2: return new Type_NameAssignment_1(parent, this, 2, inst);
 			default: return null;
 		}	
 	}	
@@ -439,6 +442,173 @@ protected class Type_ExtendsAssignment_2_1 extends AssignmentToken  {
 	}
 
 }
+
+
+// ("implements" implements+=[Type] ("," implements+=[Type])*)?
+protected class Type_Group_3 extends GroupToken {
+	
+	public Type_Group_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getTypeAccess().getGroup_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Type_Group_3_2(parent, this, 0, inst);
+			case 1: return new Type_ImplementsAssignment_3_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "implements"
+protected class Type_ImplementsKeyword_3_0 extends KeywordToken  {
+	
+	public Type_ImplementsKeyword_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getTypeAccess().getImplementsKeyword_3_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Type_Group_2(parent, this, 0, inst);
+			case 1: return new Type_NameAssignment_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// implements+=[Type]
+protected class Type_ImplementsAssignment_3_1 extends AssignmentToken  {
+	
+	public Type_ImplementsAssignment_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTypeAccess().getImplementsAssignment_3_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Type_ImplementsKeyword_3_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("implements",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("implements");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getTypeAccess().getImplementsTypeCrossReference_3_1_0().getType().getClassifier())) {
+				type = AssignmentType.CR;
+				element = grammarAccess.getTypeAccess().getImplementsTypeCrossReference_3_1_0(); 
+				return obj;
+			}
+		}
+		return null;
+	}
+
+}
+
+// ("," implements+=[Type])*
+protected class Type_Group_3_2 extends GroupToken {
+	
+	public Type_Group_3_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getTypeAccess().getGroup_3_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Type_ImplementsAssignment_3_2_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// ","
+protected class Type_CommaKeyword_3_2_0 extends KeywordToken  {
+	
+	public Type_CommaKeyword_3_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getTypeAccess().getCommaKeyword_3_2_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Type_Group_3_2(parent, this, 0, inst);
+			case 1: return new Type_ImplementsAssignment_3_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// implements+=[Type]
+protected class Type_ImplementsAssignment_3_2_1 extends AssignmentToken  {
+	
+	public Type_ImplementsAssignment_3_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTypeAccess().getImplementsAssignment_3_2_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Type_CommaKeyword_3_2_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("implements",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("implements");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getTypeAccess().getImplementsTypeCrossReference_3_2_1_0().getType().getClassifier())) {
+				type = AssignmentType.CR;
+				element = grammarAccess.getTypeAccess().getImplementsTypeCrossReference_3_2_1_0(); 
+				return obj;
+			}
+		}
+		return null;
+	}
+
+}
+
 
 
 

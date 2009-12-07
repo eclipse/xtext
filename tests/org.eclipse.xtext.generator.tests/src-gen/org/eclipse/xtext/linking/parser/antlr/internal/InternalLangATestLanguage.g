@@ -247,7 +247,43 @@ ruleType returns [EObject current=null]
 	}
 
 )
-))?);
+))?(	'implements' 
+    {
+        createLeafNode(grammarAccess.getTypeAccess().getImplementsKeyword_3_0(), null); 
+    }
+(
+(
+		{
+			if ($current==null) {
+	            $current = factory.create(grammarAccess.getTypeRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+        }
+	RULE_ID
+	{
+		createLeafNode(grammarAccess.getTypeAccess().getImplementsTypeCrossReference_3_1_0(), "implements"); 
+	}
+
+)
+)(	',' 
+    {
+        createLeafNode(grammarAccess.getTypeAccess().getCommaKeyword_3_2_0(), null); 
+    }
+(
+(
+		{
+			if ($current==null) {
+	            $current = factory.create(grammarAccess.getTypeRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+        }
+	RULE_ID
+	{
+		createLeafNode(grammarAccess.getTypeAccess().getImplementsTypeCrossReference_3_2_1_0(), "implements"); 
+	}
+
+)
+))*)?);
 
 
 

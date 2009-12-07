@@ -48,6 +48,28 @@
             </terminal>
           </tokens>
         </tokens>
+        <tokens xsi:type="xtext:Group" cardinality="?">
+          <tokens xsi:type="xtext:Keyword" value="implements"/>
+          <tokens xsi:type="xtext:Assignment" feature="implements" operator="+=">
+            <terminal xsi:type="xtext:CrossReference">
+              <type metamodel="/0/@metamodelDeclarations.0">
+                <classifier xsi:type="ecore:EClass" href="http://eclipse.org/xtext/langATestLanguage#//Type"/>
+              </type>
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+            </terminal>
+          </tokens>
+          <tokens xsi:type="xtext:Group" cardinality="*">
+            <tokens xsi:type="xtext:Keyword" value=","/>
+            <tokens xsi:type="xtext:Assignment" feature="implements" operator="+=">
+              <terminal xsi:type="xtext:CrossReference">
+                <type metamodel="/0/@metamodelDeclarations.0">
+                  <classifier xsi:type="ecore:EClass" href="http://eclipse.org/xtext/langATestLanguage#//Type"/>
+                </type>
+                <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+              </terminal>
+            </tokens>
+          </tokens>
+        </tokens>
       </alternatives>
     </rules>
   </xtext:Grammar>

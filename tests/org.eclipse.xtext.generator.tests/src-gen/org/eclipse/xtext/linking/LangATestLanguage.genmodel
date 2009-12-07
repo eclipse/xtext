@@ -19,6 +19,7 @@
     <genClasses ecoreClass="LangATestLanguage.ecore#//Type">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute LangATestLanguage.ecore#//Type/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LangATestLanguage.ecore#//Type/extends"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference LangATestLanguage.ecore#//Type/implements"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

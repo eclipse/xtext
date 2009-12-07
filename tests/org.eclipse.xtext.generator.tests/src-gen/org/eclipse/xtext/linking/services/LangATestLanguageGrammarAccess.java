@@ -80,12 +80,24 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		private final Assignment cExtendsAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
 		private final CrossReference cExtendsTypeCrossReference_2_1_0 = (CrossReference)cExtendsAssignment_2_1.eContents().get(0);
 		private final RuleCall cExtendsTypeIDTerminalRuleCall_2_1_0_1 = (RuleCall)cExtendsTypeCrossReference_2_1_0.eContents().get(1);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cImplementsKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cImplementsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final CrossReference cImplementsTypeCrossReference_3_1_0 = (CrossReference)cImplementsAssignment_3_1.eContents().get(0);
+		private final RuleCall cImplementsTypeIDTerminalRuleCall_3_1_0_1 = (RuleCall)cImplementsTypeCrossReference_3_1_0.eContents().get(1);
+		private final Group cGroup_3_2 = (Group)cGroup_3.eContents().get(2);
+		private final Keyword cCommaKeyword_3_2_0 = (Keyword)cGroup_3_2.eContents().get(0);
+		private final Assignment cImplementsAssignment_3_2_1 = (Assignment)cGroup_3_2.eContents().get(1);
+		private final CrossReference cImplementsTypeCrossReference_3_2_1_0 = (CrossReference)cImplementsAssignment_3_2_1.eContents().get(0);
+		private final RuleCall cImplementsTypeIDTerminalRuleCall_3_2_1_0_1 = (RuleCall)cImplementsTypeCrossReference_3_2_1_0.eContents().get(1);
 		
 		//Type:
-		//  "type" name=ID ("extends" extends=[Type])?;
+		//  "type" name=ID ("extends" extends=[Type])? ("implements" implements+=[Type] (","
+		//  implements+=[Type])*)?;
 		public ParserRule getRule() { return rule; }
 
-		//"type" name=ID ("extends" extends=[Type])?
+		//"type" name=ID ("extends" extends=[Type])? ("implements" implements+=[Type] (","
+		//implements+=[Type])*)?
 		public Group getGroup() { return cGroup; }
 
 		//"type"
@@ -111,6 +123,36 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 
 		//ID
 		public RuleCall getExtendsTypeIDTerminalRuleCall_2_1_0_1() { return cExtendsTypeIDTerminalRuleCall_2_1_0_1; }
+
+		//("implements" implements+=[Type] ("," implements+=[Type])*)?
+		public Group getGroup_3() { return cGroup_3; }
+
+		//"implements"
+		public Keyword getImplementsKeyword_3_0() { return cImplementsKeyword_3_0; }
+
+		//implements+=[Type]
+		public Assignment getImplementsAssignment_3_1() { return cImplementsAssignment_3_1; }
+
+		//[Type]
+		public CrossReference getImplementsTypeCrossReference_3_1_0() { return cImplementsTypeCrossReference_3_1_0; }
+
+		//ID
+		public RuleCall getImplementsTypeIDTerminalRuleCall_3_1_0_1() { return cImplementsTypeIDTerminalRuleCall_3_1_0_1; }
+
+		//("," implements+=[Type])*
+		public Group getGroup_3_2() { return cGroup_3_2; }
+
+		//","
+		public Keyword getCommaKeyword_3_2_0() { return cCommaKeyword_3_2_0; }
+
+		//implements+=[Type]
+		public Assignment getImplementsAssignment_3_2_1() { return cImplementsAssignment_3_2_1; }
+
+		//[Type]
+		public CrossReference getImplementsTypeCrossReference_3_2_1_0() { return cImplementsTypeCrossReference_3_2_1_0; }
+
+		//ID
+		public RuleCall getImplementsTypeIDTerminalRuleCall_3_2_1_0_1() { return cImplementsTypeIDTerminalRuleCall_3_2_1_0_1; }
 	}
 	
 	
@@ -160,7 +202,8 @@ public class LangATestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	}
 
 	//Type:
-	//  "type" name=ID ("extends" extends=[Type])?;
+	//  "type" name=ID ("extends" extends=[Type])? ("implements" implements+=[Type] (","
+	//  implements+=[Type])*)?;
 	public TypeElements getTypeAccess() {
 		return (pType != null) ? pType : (pType = new TypeElements());
 	}

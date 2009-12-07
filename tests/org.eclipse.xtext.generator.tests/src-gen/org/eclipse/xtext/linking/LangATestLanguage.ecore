@@ -15,5 +15,7 @@
   <eClassifiers xsi:type="ecore:EClass" name="Type">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="extends" eType="#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="implements" unique="false"
+        upperBound="-1" eType="#//Type"/>
   </eClassifiers>
 </ecore:EPackage>

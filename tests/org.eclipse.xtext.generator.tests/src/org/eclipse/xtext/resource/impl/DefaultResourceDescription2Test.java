@@ -9,7 +9,7 @@ import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
 
-public class DefaultImportedNamesProviderTest extends AbstractXtextTests {
+public class DefaultResourceDescription2Test extends AbstractXtextTests {
 
 	@Override
 	protected void setUp() throws Exception {
