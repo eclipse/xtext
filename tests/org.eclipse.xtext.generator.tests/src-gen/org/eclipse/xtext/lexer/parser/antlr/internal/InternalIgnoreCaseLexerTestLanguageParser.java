@@ -78,12 +78,12 @@ public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalIgnoreCaseLexerTestLanguage.g:67:2: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
-            pushFollow(FOLLOW_ruleModel_in_entryRuleModel66);
+            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel66);
             iv_ruleModel=ruleModel();
             _fsp--;
 
              current =iv_ruleModel; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleModel76); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel76); 
 
             }
 
@@ -116,7 +116,7 @@ public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalIgnoreCaseLexerTestLanguage.g:80:1: ( KEYWORD_2 ( KEYWORD_1 )? ( (lv_value_2_0= KEYWORD_2 ) ) )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalIgnoreCaseLexerTestLanguage.g:81:2: KEYWORD_2 ( KEYWORD_1 )? ( (lv_value_2_0= KEYWORD_2 ) )
             {
-            match(input,KEYWORD_2,FOLLOW_KEYWORD_2_in_ruleModel112); 
+            match(input,KEYWORD_2,FollowSets000.FOLLOW_KEYWORD_2_in_ruleModel112); 
 
                     createLeafNode(grammarAccess.getModelAccess().getCaseKeyword_0(), null); 
                 
@@ -131,7 +131,7 @@ public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalA
                 case 1 :
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalIgnoreCaseLexerTestLanguage.g:86:2: KEYWORD_1
                     {
-                    match(input,KEYWORD_1,FOLLOW_KEYWORD_1_in_ruleModel124); 
+                    match(input,KEYWORD_1,FollowSets000.FOLLOW_KEYWORD_1_in_ruleModel124); 
 
                             createLeafNode(grammarAccess.getModelAccess().getFooKeyword_1(), null); 
                         
@@ -148,7 +148,7 @@ public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalIgnoreCaseLexerTestLanguage.g:92:3: lv_value_2_0= KEYWORD_2
             {
             lv_value_2_0=(Token)input.LT(1);
-            match(input,KEYWORD_2,FOLLOW_KEYWORD_2_in_ruleModel145); 
+            match(input,KEYWORD_2,FollowSets000.FOLLOW_KEYWORD_2_in_ruleModel145); 
 
                     createLeafNode(grammarAccess.getModelAccess().getValueCaSeKeyword_2_0(), "value"); 
                 
@@ -194,10 +194,14 @@ public class InternalIgnoreCaseLexerTestLanguageParser extends AbstractInternalA
 
  
 
-    public static final BitSet FOLLOW_ruleModel_in_entryRuleModel66 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleModel76 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_2_in_ruleModel112 = new BitSet(new long[]{0x0000000000000030L});
-    public static final BitSet FOLLOW_KEYWORD_1_in_ruleModel124 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_KEYWORD_2_in_ruleModel145 = new BitSet(new long[]{0x0000000000000002L});
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel66 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleModel76 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_KEYWORD_2_in_ruleModel112 = new BitSet(new long[]{0x0000000000000030L});
+        public static final BitSet FOLLOW_KEYWORD_1_in_ruleModel124 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_KEYWORD_2_in_ruleModel145 = new BitSet(new long[]{0x0000000000000002L});
+    }
+
 
 }

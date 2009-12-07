@@ -79,12 +79,12 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalActionTestLanguage.g:73:2: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
-            pushFollow(FOLLOW_ruleModel_in_entryRuleModel73);
+            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel73);
             iv_ruleModel=ruleModel();
             _fsp--;
 
              current =iv_ruleModel; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleModel83); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel83); 
 
             }
 
@@ -123,7 +123,7 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
              
                     currentNode=createCompositeNode(grammarAccess.getModelAccess().getChildParserRuleCall_0(), currentNode); 
                 
-            pushFollow(FOLLOW_ruleChild_in_ruleModel130);
+            pushFollow(FollowSets000.FOLLOW_ruleChild_in_ruleModel130);
             this_Child_0=ruleChild();
             _fsp--;
 
@@ -172,7 +172,7 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
                      
                     	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getRightChildParserRuleCall_1_1_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleChild_in_ruleModel160);
+                    pushFollow(FollowSets000.FOLLOW_ruleChild_in_ruleModel160);
                     lv_right_2_0=ruleChild();
                     _fsp--;
 
@@ -240,12 +240,12 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalActionTestLanguage.g:143:2: iv_ruleChild= ruleChild EOF
             {
              currentNode = createCompositeNode(grammarAccess.getChildRule(), currentNode); 
-            pushFollow(FOLLOW_ruleChild_in_entryRuleChild195);
+            pushFollow(FollowSets000.FOLLOW_ruleChild_in_entryRuleChild195);
             iv_ruleChild=ruleChild();
             _fsp--;
 
              current =iv_ruleChild; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleChild205); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleChild205); 
 
             }
 
@@ -282,7 +282,7 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalActionTestLanguage.g:158:3: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleChild246); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleChild246); 
 
             			createLeafNode(grammarAccess.getChildAccess().getNameIDTerminalRuleCall_0(), "name"); 
             		
@@ -329,12 +329,16 @@ public class InternalActionTestLanguageParser extends AbstractInternalAntlrParse
 
  
 
-    public static final BitSet FOLLOW_ruleModel_in_entryRuleModel73 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleModel83 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChild_in_ruleModel130 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_ruleChild_in_ruleModel160 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleChild_in_entryRuleChild195 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleChild205 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleChild246 = new BitSet(new long[]{0x0000000000000002L});
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel73 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleModel83 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleChild_in_ruleModel130 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_ruleChild_in_ruleModel160 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleChild_in_entryRuleChild195 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleChild205 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleChild246 = new BitSet(new long[]{0x0000000000000002L});
+    }
+
 
 }

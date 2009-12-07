@@ -79,12 +79,12 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:73:2: iv_ruleRoot= ruleRoot EOF
             {
              currentNode = createCompositeNode(grammarAccess.getRootRule(), currentNode); 
-            pushFollow(FOLLOW_ruleRoot_in_entryRuleRoot73);
+            pushFollow(FollowSets000.FOLLOW_ruleRoot_in_entryRuleRoot73);
             iv_ruleRoot=ruleRoot();
             _fsp--;
 
              current =iv_ruleRoot; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleRoot83); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleRoot83); 
 
             }
 
@@ -140,7 +140,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                      
                             currentNode=createCompositeNode(grammarAccess.getRootAccess().getOpParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleOp_in_ruleRoot130);
+                    pushFollow(FollowSets000.FOLLOW_ruleOp_in_ruleRoot130);
                     this_Op_0=ruleOp();
                     _fsp--;
 
@@ -157,7 +157,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                      
                             currentNode=createCompositeNode(grammarAccess.getRootAccess().getTrickyGParserRuleCall_1(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleTrickyG_in_ruleRoot157);
+                    pushFollow(FollowSets000.FOLLOW_ruleTrickyG_in_ruleRoot157);
                     this_TrickyG_1=ruleTrickyG();
                     _fsp--;
 
@@ -203,12 +203,12 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:113:2: iv_ruleOp= ruleOp EOF
             {
              currentNode = createCompositeNode(grammarAccess.getOpRule(), currentNode); 
-            pushFollow(FOLLOW_ruleOp_in_entryRuleOp189);
+            pushFollow(FollowSets000.FOLLOW_ruleOp_in_entryRuleOp189);
             iv_ruleOp=ruleOp();
             _fsp--;
 
              current =iv_ruleOp; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleOp199); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleOp199); 
 
             }
 
@@ -249,7 +249,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
              
                     currentNode=createCompositeNode(grammarAccess.getOpAccess().getTermParserRuleCall_0(), currentNode); 
                 
-            pushFollow(FOLLOW_ruleTerm_in_ruleOp246);
+            pushFollow(FollowSets000.FOLLOW_ruleTerm_in_ruleOp246);
             this_Term_0=ruleTerm();
             _fsp--;
 
@@ -299,7 +299,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
             	    }
 
-            	    match(input,11,FOLLOW_11_in_ruleOp266); 
+            	    match(input,11,FollowSets000.FOLLOW_11_in_ruleOp266); 
 
             	            createLeafNode(grammarAccess.getOpAccess().getPlusSignKeyword_1_0_1(), null); 
             	        
@@ -312,7 +312,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getOpAccess().getAddOperandsTermParserRuleCall_1_0_2_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleTerm_in_ruleOp287);
+            	    pushFollow(FollowSets000.FOLLOW_ruleTerm_in_ruleOp287);
             	    lv_addOperands_3_0=ruleTerm();
             	    _fsp--;
 
@@ -372,7 +372,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
             	    }
 
-            	    match(input,12,FOLLOW_12_in_ruleOp314); 
+            	    match(input,12,FollowSets000.FOLLOW_12_in_ruleOp314); 
 
             	            createLeafNode(grammarAccess.getOpAccess().getHyphenMinusKeyword_1_1_1(), null); 
             	        
@@ -385,7 +385,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getOpAccess().getMinusOperandsTermParserRuleCall_1_1_2_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleTerm_in_ruleOp335);
+            	    pushFollow(FollowSets000.FOLLOW_ruleTerm_in_ruleOp335);
             	    lv_minusOperands_6_0=ruleTerm();
             	    _fsp--;
 
@@ -459,12 +459,12 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:232:2: iv_ruleTerm= ruleTerm EOF
             {
              currentNode = createCompositeNode(grammarAccess.getTermRule(), currentNode); 
-            pushFollow(FOLLOW_ruleTerm_in_entryRuleTerm371);
+            pushFollow(FollowSets000.FOLLOW_ruleTerm_in_entryRuleTerm371);
             iv_ruleTerm=ruleTerm();
             _fsp--;
 
              current =iv_ruleTerm; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTerm381); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTerm381); 
 
             }
 
@@ -520,7 +520,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                      
                             currentNode=createCompositeNode(grammarAccess.getTermAccess().getAtomParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleAtom_in_ruleTerm428);
+                    pushFollow(FollowSets000.FOLLOW_ruleAtom_in_ruleTerm428);
                     this_Atom_0=ruleAtom();
                     _fsp--;
 
@@ -537,7 +537,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                      
                             currentNode=createCompositeNode(grammarAccess.getTermAccess().getParensParserRuleCall_1(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleParens_in_ruleTerm455);
+                    pushFollow(FollowSets000.FOLLOW_ruleParens_in_ruleTerm455);
                     this_Parens_1=ruleParens();
                     _fsp--;
 
@@ -583,12 +583,12 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:272:2: iv_ruleAtom= ruleAtom EOF
             {
              currentNode = createCompositeNode(grammarAccess.getAtomRule(), currentNode); 
-            pushFollow(FOLLOW_ruleAtom_in_entryRuleAtom487);
+            pushFollow(FollowSets000.FOLLOW_ruleAtom_in_entryRuleAtom487);
             iv_ruleAtom=ruleAtom();
             _fsp--;
 
              current =iv_ruleAtom; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAtom497); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAtom497); 
 
             }
 
@@ -625,7 +625,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:287:3: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAtom538); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleAtom538); 
 
             			createLeafNode(grammarAccess.getAtomAccess().getNameIDTerminalRuleCall_0(), "name"); 
             		
@@ -683,12 +683,12 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:317:2: iv_ruleParens= ruleParens EOF
             {
              currentNode = createCompositeNode(grammarAccess.getParensRule(), currentNode); 
-            pushFollow(FOLLOW_ruleParens_in_entryRuleParens575);
+            pushFollow(FollowSets000.FOLLOW_ruleParens_in_entryRuleParens575);
             iv_ruleParens=ruleParens();
             _fsp--;
 
              current =iv_ruleParens; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleParens585); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleParens585); 
 
             }
 
@@ -723,14 +723,14 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:330:1: ( '(' this_Op_1= ruleOp ')' ( (lv_em_3_0= '!' ) )? )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:330:3: '(' this_Op_1= ruleOp ')' ( (lv_em_3_0= '!' ) )?
             {
-            match(input,13,FOLLOW_13_in_ruleParens620); 
+            match(input,13,FollowSets000.FOLLOW_13_in_ruleParens620); 
 
                     createLeafNode(grammarAccess.getParensAccess().getLeftParenthesisKeyword_0(), null); 
                 
              
                     currentNode=createCompositeNode(grammarAccess.getParensAccess().getOpParserRuleCall_1(), currentNode); 
                 
-            pushFollow(FOLLOW_ruleOp_in_ruleParens642);
+            pushFollow(FollowSets000.FOLLOW_ruleOp_in_ruleParens642);
             this_Op_1=ruleOp();
             _fsp--;
 
@@ -738,7 +738,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                     current = this_Op_1; 
                     currentNode = currentNode.getParent();
                 
-            match(input,14,FOLLOW_14_in_ruleParens651); 
+            match(input,14,FollowSets000.FOLLOW_14_in_ruleParens651); 
 
                     createLeafNode(grammarAccess.getParensAccess().getRightParenthesisKeyword_2(), null); 
                 
@@ -757,7 +757,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:349:3: lv_em_3_0= '!'
                     {
                     lv_em_3_0=(Token)input.LT(1);
-                    match(input,15,FOLLOW_15_in_ruleParens669); 
+                    match(input,15,FollowSets000.FOLLOW_15_in_ruleParens669); 
 
                             createLeafNode(grammarAccess.getParensAccess().getEmExclamationMarkKeyword_3_0(), "em"); 
                         
@@ -817,12 +817,12 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:378:2: iv_ruleTrickyA1= ruleTrickyA1 EOF
             {
              currentNode = createCompositeNode(grammarAccess.getTrickyA1Rule(), currentNode); 
-            pushFollow(FOLLOW_ruleTrickyA1_in_entryRuleTrickyA1718);
+            pushFollow(FollowSets000.FOLLOW_ruleTrickyA1_in_entryRuleTrickyA1718);
             iv_ruleTrickyA1=ruleTrickyA1();
             _fsp--;
 
              current =iv_ruleTrickyA1; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTrickyA1728); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTrickyA1728); 
 
             }
 
@@ -859,7 +859,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:393:3: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleTrickyA1769); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleTrickyA1769); 
 
             			createLeafNode(grammarAccess.getTrickyA1Access().getNameIDTerminalRuleCall_0(), "name"); 
             		
@@ -917,12 +917,12 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:433:2: iv_ruleTrickyG= ruleTrickyG EOF
             {
              currentNode = createCompositeNode(grammarAccess.getTrickyGRule(), currentNode); 
-            pushFollow(FOLLOW_ruleTrickyG_in_entryRuleTrickyG816);
+            pushFollow(FollowSets000.FOLLOW_ruleTrickyG_in_entryRuleTrickyG816);
             iv_ruleTrickyG=ruleTrickyG();
             _fsp--;
 
              current =iv_ruleTrickyG; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTrickyG826); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTrickyG826); 
 
             }
 
@@ -956,7 +956,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:446:1: ( 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) ) )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:446:3: 'TG' ( (lv_tree_1_0= ruleTrickyG1 ) )
             {
-            match(input,16,FOLLOW_16_in_ruleTrickyG861); 
+            match(input,16,FollowSets000.FOLLOW_16_in_ruleTrickyG861); 
 
                     createLeafNode(grammarAccess.getTrickyGAccess().getTGKeyword_0(), null); 
                 
@@ -969,7 +969,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
              
             	        currentNode=createCompositeNode(grammarAccess.getTrickyGAccess().getTreeTrickyG1ParserRuleCall_1_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleTrickyG1_in_ruleTrickyG882);
+            pushFollow(FollowSets000.FOLLOW_ruleTrickyG1_in_ruleTrickyG882);
             lv_tree_1_0=ruleTrickyG1();
             _fsp--;
 
@@ -1031,12 +1031,12 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:482:2: iv_ruleTrickyG1= ruleTrickyG1 EOF
             {
              currentNode = createCompositeNode(grammarAccess.getTrickyG1Rule(), currentNode); 
-            pushFollow(FOLLOW_ruleTrickyG1_in_entryRuleTrickyG1915);
+            pushFollow(FollowSets000.FOLLOW_ruleTrickyG1_in_entryRuleTrickyG1915);
             iv_ruleTrickyG1=ruleTrickyG1();
             _fsp--;
 
              current =iv_ruleTrickyG1; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTrickyG1925); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTrickyG1925); 
 
             }
 
@@ -1072,7 +1072,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:495:1: ( '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) ( ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? ']' )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:495:3: '[' ( ( (lv_vals_1_0= ruleTrickyG2 ) ) ( ',' ( (lv_vals_3_0= ruleTrickyG2 ) ) )* )? ']'
             {
-            match(input,17,FOLLOW_17_in_ruleTrickyG1960); 
+            match(input,17,FollowSets000.FOLLOW_17_in_ruleTrickyG1960); 
 
                     createLeafNode(grammarAccess.getTrickyG1Access().getLeftSquareBracketKeyword_0(), null); 
                 
@@ -1096,7 +1096,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                      
                     	        currentNode=createCompositeNode(grammarAccess.getTrickyG1Access().getValsTrickyG2ParserRuleCall_1_0_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleTrickyG2_in_ruleTrickyG1982);
+                    pushFollow(FollowSets000.FOLLOW_ruleTrickyG2_in_ruleTrickyG1982);
                     lv_vals_1_0=ruleTrickyG2();
                     _fsp--;
 
@@ -1138,7 +1138,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                     	case 1 :
                     	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:523:4: ',' ( (lv_vals_3_0= ruleTrickyG2 ) )
                     	    {
-                    	    match(input,18,FOLLOW_18_in_ruleTrickyG1993); 
+                    	    match(input,18,FollowSets000.FOLLOW_18_in_ruleTrickyG1993); 
 
                     	            createLeafNode(grammarAccess.getTrickyG1Access().getCommaKeyword_1_1_0(), null); 
                     	        
@@ -1151,7 +1151,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                     	     
                     	    	        currentNode=createCompositeNode(grammarAccess.getTrickyG1Access().getValsTrickyG2ParserRuleCall_1_1_1_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleTrickyG2_in_ruleTrickyG11014);
+                    	    pushFollow(FollowSets000.FOLLOW_ruleTrickyG2_in_ruleTrickyG11014);
                     	    lv_vals_3_0=ruleTrickyG2();
                     	    _fsp--;
 
@@ -1193,7 +1193,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
             }
 
-            match(input,19,FOLLOW_19_in_ruleTrickyG11028); 
+            match(input,19,FollowSets000.FOLLOW_19_in_ruleTrickyG11028); 
 
                     createLeafNode(grammarAccess.getTrickyG1Access().getRightSquareBracketKeyword_2(), null); 
                 
@@ -1232,12 +1232,12 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:563:2: iv_ruleTrickyG2= ruleTrickyG2 EOF
             {
              currentNode = createCompositeNode(grammarAccess.getTrickyG2Rule(), currentNode); 
-            pushFollow(FOLLOW_ruleTrickyG2_in_entryRuleTrickyG21061);
+            pushFollow(FollowSets000.FOLLOW_ruleTrickyG2_in_entryRuleTrickyG21061);
             iv_ruleTrickyG2=ruleTrickyG2();
             _fsp--;
 
              current =iv_ruleTrickyG2; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleTrickyG21071); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTrickyG21071); 
 
             }
 
@@ -1292,7 +1292,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                      
                             currentNode=createCompositeNode(grammarAccess.getTrickyG2Access().getTrickyG1ParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FOLLOW_ruleTrickyG1_in_ruleTrickyG21118);
+                    pushFollow(FollowSets000.FOLLOW_ruleTrickyG1_in_ruleTrickyG21118);
                     this_TrickyG1_0=ruleTrickyG1();
                     _fsp--;
 
@@ -1313,7 +1313,7 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parsetree/reconstr/parser/antlr/internal/InternalComplexReconstrTestLanguage.g:588:3: lv_val_1_0= RULE_INT
                     {
                     lv_val_1_0=(Token)input.LT(1);
-                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleTrickyG21140); 
+                    match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleTrickyG21140); 
 
                     			createLeafNode(grammarAccess.getTrickyG2Access().getValINTTerminalRuleCall_1_0(), "val"); 
                     		
@@ -1366,47 +1366,51 @@ public class InternalComplexReconstrTestLanguageParser extends AbstractInternalA
 
  
 
-    public static final BitSet FOLLOW_ruleRoot_in_entryRuleRoot73 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleRoot83 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOp_in_ruleRoot130 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTrickyG_in_ruleRoot157 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleOp_in_entryRuleOp189 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleOp199 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTerm_in_ruleOp246 = new BitSet(new long[]{0x0000000000001802L});
-    public static final BitSet FOLLOW_11_in_ruleOp266 = new BitSet(new long[]{0x0000000000002010L});
-    public static final BitSet FOLLOW_ruleTerm_in_ruleOp287 = new BitSet(new long[]{0x0000000000001802L});
-    public static final BitSet FOLLOW_12_in_ruleOp314 = new BitSet(new long[]{0x0000000000002010L});
-    public static final BitSet FOLLOW_ruleTerm_in_ruleOp335 = new BitSet(new long[]{0x0000000000001802L});
-    public static final BitSet FOLLOW_ruleTerm_in_entryRuleTerm371 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTerm381 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAtom_in_ruleTerm428 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParens_in_ruleTerm455 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAtom_in_entryRuleAtom487 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAtom497 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleAtom538 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleParens_in_entryRuleParens575 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleParens585 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_ruleParens620 = new BitSet(new long[]{0x0000000000002010L});
-    public static final BitSet FOLLOW_ruleOp_in_ruleParens642 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleParens651 = new BitSet(new long[]{0x0000000000008002L});
-    public static final BitSet FOLLOW_15_in_ruleParens669 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTrickyA1_in_entryRuleTrickyA1718 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTrickyA1728 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleTrickyA1769 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTrickyG_in_entryRuleTrickyG816 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTrickyG826 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_ruleTrickyG861 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_ruleTrickyG1_in_ruleTrickyG882 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTrickyG1_in_entryRuleTrickyG1915 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTrickyG1925 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_ruleTrickyG1960 = new BitSet(new long[]{0x00000000000A0020L});
-    public static final BitSet FOLLOW_ruleTrickyG2_in_ruleTrickyG1982 = new BitSet(new long[]{0x00000000000C0000L});
-    public static final BitSet FOLLOW_18_in_ruleTrickyG1993 = new BitSet(new long[]{0x0000000000020020L});
-    public static final BitSet FOLLOW_ruleTrickyG2_in_ruleTrickyG11014 = new BitSet(new long[]{0x00000000000C0000L});
-    public static final BitSet FOLLOW_19_in_ruleTrickyG11028 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTrickyG2_in_entryRuleTrickyG21061 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleTrickyG21071 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleTrickyG1_in_ruleTrickyG21118 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleTrickyG21140 = new BitSet(new long[]{0x0000000000000002L});
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_ruleRoot_in_entryRuleRoot73 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleRoot83 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOp_in_ruleRoot130 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTrickyG_in_ruleRoot157 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleOp_in_entryRuleOp189 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleOp199 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTerm_in_ruleOp246 = new BitSet(new long[]{0x0000000000001802L});
+        public static final BitSet FOLLOW_11_in_ruleOp266 = new BitSet(new long[]{0x0000000000002010L});
+        public static final BitSet FOLLOW_ruleTerm_in_ruleOp287 = new BitSet(new long[]{0x0000000000001802L});
+        public static final BitSet FOLLOW_12_in_ruleOp314 = new BitSet(new long[]{0x0000000000002010L});
+        public static final BitSet FOLLOW_ruleTerm_in_ruleOp335 = new BitSet(new long[]{0x0000000000001802L});
+        public static final BitSet FOLLOW_ruleTerm_in_entryRuleTerm371 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTerm381 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAtom_in_ruleTerm428 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleParens_in_ruleTerm455 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAtom_in_entryRuleAtom487 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAtom497 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleAtom538 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleParens_in_entryRuleParens575 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleParens585 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_ruleParens620 = new BitSet(new long[]{0x0000000000002010L});
+        public static final BitSet FOLLOW_ruleOp_in_ruleParens642 = new BitSet(new long[]{0x0000000000004000L});
+        public static final BitSet FOLLOW_14_in_ruleParens651 = new BitSet(new long[]{0x0000000000008002L});
+        public static final BitSet FOLLOW_15_in_ruleParens669 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTrickyA1_in_entryRuleTrickyA1718 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTrickyA1728 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleTrickyA1769 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTrickyG_in_entryRuleTrickyG816 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTrickyG826 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_16_in_ruleTrickyG861 = new BitSet(new long[]{0x0000000000020000L});
+        public static final BitSet FOLLOW_ruleTrickyG1_in_ruleTrickyG882 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTrickyG1_in_entryRuleTrickyG1915 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTrickyG1925 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_17_in_ruleTrickyG1960 = new BitSet(new long[]{0x00000000000A0020L});
+        public static final BitSet FOLLOW_ruleTrickyG2_in_ruleTrickyG1982 = new BitSet(new long[]{0x00000000000C0000L});
+        public static final BitSet FOLLOW_18_in_ruleTrickyG1993 = new BitSet(new long[]{0x0000000000020020L});
+        public static final BitSet FOLLOW_ruleTrickyG2_in_ruleTrickyG11014 = new BitSet(new long[]{0x00000000000C0000L});
+        public static final BitSet FOLLOW_19_in_ruleTrickyG11028 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTrickyG2_in_entryRuleTrickyG21061 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTrickyG21071 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTrickyG1_in_ruleTrickyG21118 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleTrickyG21140 = new BitSet(new long[]{0x0000000000000002L});
+    }
+
 
 }

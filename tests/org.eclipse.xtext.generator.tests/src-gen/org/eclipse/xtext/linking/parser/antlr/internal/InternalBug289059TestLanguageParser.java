@@ -79,12 +79,12 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:73:2: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
-            pushFollow(FOLLOW_ruleModel_in_entryRuleModel73);
+            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel73);
             iv_ruleModel=ruleModel();
             _fsp--;
 
              current =iv_ruleModel; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleModel83); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel83); 
 
             }
 
@@ -126,7 +126,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:88:3: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel125); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleModel125); 
 
             			createLeafNode(grammarAccess.getModelAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
             		
@@ -169,7 +169,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
                      
                     	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getEnabledUnassignedActionParserRuleCall_1_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleUnassignedAction_in_ruleModel151);
+                    pushFollow(FollowSets000.FOLLOW_ruleUnassignedAction_in_ruleModel151);
                     lv_enabled_1_0=ruleUnassignedAction();
                     _fsp--;
 
@@ -219,7 +219,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModel170); 
+                    match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleModel170); 
 
                     		createLeafNode(grammarAccess.getModelAccess().getReferenceModelCrossReference_2_0(), "reference"); 
                     	
@@ -267,12 +267,12 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalBug289059TestLanguage.g:156:2: iv_ruleUnassignedAction= ruleUnassignedAction EOF
             {
              currentNode = createCompositeNode(grammarAccess.getUnassignedActionRule(), currentNode); 
-            pushFollow(FOLLOW_ruleUnassignedAction_in_entryRuleUnassignedAction204);
+            pushFollow(FollowSets000.FOLLOW_ruleUnassignedAction_in_entryRuleUnassignedAction204);
             iv_ruleUnassignedAction=ruleUnassignedAction();
             _fsp--;
 
              current =iv_ruleUnassignedAction; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleUnassignedAction214); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleUnassignedAction214); 
 
             }
 
@@ -319,7 +319,7 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            match(input,11,FOLLOW_11_in_ruleUnassignedAction258); 
+            match(input,11,FollowSets000.FOLLOW_11_in_ruleUnassignedAction258); 
 
                     createLeafNode(grammarAccess.getUnassignedActionAccess().getEnabledKeyword_1(), null); 
                 
@@ -347,13 +347,17 @@ public class InternalBug289059TestLanguageParser extends AbstractInternalAntlrPa
 
  
 
-    public static final BitSet FOLLOW_ruleModel_in_entryRuleModel73 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleModel83 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleModel125 = new BitSet(new long[]{0x0000000000000812L});
-    public static final BitSet FOLLOW_ruleUnassignedAction_in_ruleModel151 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleModel170 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleUnassignedAction_in_entryRuleUnassignedAction204 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleUnassignedAction214 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_ruleUnassignedAction258 = new BitSet(new long[]{0x0000000000000002L});
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel73 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleModel83 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleModel125 = new BitSet(new long[]{0x0000000000000812L});
+        public static final BitSet FOLLOW_ruleUnassignedAction_in_ruleModel151 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleModel170 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleUnassignedAction_in_entryRuleUnassignedAction204 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleUnassignedAction214 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_ruleUnassignedAction258 = new BitSet(new long[]{0x0000000000000002L});
+    }
+
 
 }

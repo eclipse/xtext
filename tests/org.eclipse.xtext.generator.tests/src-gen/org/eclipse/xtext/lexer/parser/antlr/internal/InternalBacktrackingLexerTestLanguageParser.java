@@ -100,14 +100,14 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
             }
-            pushFollow(FOLLOW_ruleModel_in_entryRuleModel79);
+            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel79);
             iv_ruleModel=ruleModel();
             _fsp--;
             if (failed) return current;
             if ( backtracking==0 ) {
                current =iv_ruleModel; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleModel89); if (failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel89); if (failed) return current;
 
             }
 
@@ -170,7 +170,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
             	      	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getEnumsEnumNameEnumRuleCall_0_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FOLLOW_ruleEnumName_in_ruleModel135);
+            	    pushFollow(FollowSets000.FOLLOW_ruleEnumName_in_ruleModel135);
             	    lv_enums_0_0=ruleEnumName();
             	    _fsp--;
             	    if (failed) return current;
@@ -228,7 +228,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
             	      	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getAbsAbParserRuleCall_1_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FOLLOW_ruleAb_in_ruleModel157);
+            	    pushFollow(FollowSets000.FOLLOW_ruleAb_in_ruleModel157);
             	    lv_abs_1_0=ruleAb();
             	    _fsp--;
             	    if (failed) return current;
@@ -286,7 +286,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
             	      	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getXbsXbParserRuleCall_2_0(), currentNode); 
             	      	    
             	    }
-            	    pushFollow(FOLLOW_ruleXb_in_ruleModel179);
+            	    pushFollow(FollowSets000.FOLLOW_ruleXb_in_ruleModel179);
             	    lv_xbs_2_0=ruleXb();
             	    _fsp--;
             	    if (failed) return current;
@@ -362,14 +362,14 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getAbRule(), currentNode); 
             }
-            pushFollow(FOLLOW_ruleAb_in_entryRuleAb213);
+            pushFollow(FollowSets000.FOLLOW_ruleAb_in_entryRuleAb213);
             iv_ruleAb=ruleAb();
             _fsp--;
             if (failed) return current;
             if ( backtracking==0 ) {
                current =iv_ruleAb; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAb223); if (failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAb223); if (failed) return current;
 
             }
 
@@ -412,7 +412,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:183:3: lv_x_0_0= RULE_CHARA
             {
             lv_x_0_0=(Token)input.LT(1);
-            match(input,RULE_CHARA,FOLLOW_RULE_CHARA_in_ruleAb265); if (failed) return current;
+            match(input,RULE_CHARA,FollowSets000.FOLLOW_RULE_CHARA_in_ruleAb265); if (failed) return current;
             if ( backtracking==0 ) {
 
               			createLeafNode(grammarAccess.getAbAccess().getXCharATerminalRuleCall_0_0(), "x"); 
@@ -449,7 +449,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:207:3: lv_y_1_0= RULE_CHARB
             {
             lv_y_1_0=(Token)input.LT(1);
-            match(input,RULE_CHARB,FOLLOW_RULE_CHARB_in_ruleAb287); if (failed) return current;
+            match(input,RULE_CHARB,FollowSets000.FOLLOW_RULE_CHARB_in_ruleAb287); if (failed) return current;
             if ( backtracking==0 ) {
 
               			createLeafNode(grammarAccess.getAbAccess().getYCharbTerminalRuleCall_1_0(), "y"); 
@@ -520,14 +520,14 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getXbRule(), currentNode); 
             }
-            pushFollow(FOLLOW_ruleXb_in_entryRuleXb325);
+            pushFollow(FollowSets000.FOLLOW_ruleXb_in_entryRuleXb325);
             iv_ruleXb=ruleXb();
             _fsp--;
             if (failed) return current;
             if ( backtracking==0 ) {
                current =iv_ruleXb; 
             }
-            match(input,EOF,FOLLOW_EOF_in_entryRuleXb335); if (failed) return current;
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleXb335); if (failed) return current;
 
             }
 
@@ -570,7 +570,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:252:3: lv_x_0_0= RULE_CHARX
             {
             lv_x_0_0=(Token)input.LT(1);
-            match(input,RULE_CHARX,FOLLOW_RULE_CHARX_in_ruleXb377); if (failed) return current;
+            match(input,RULE_CHARX,FollowSets000.FOLLOW_RULE_CHARX_in_ruleXb377); if (failed) return current;
             if ( backtracking==0 ) {
 
               			createLeafNode(grammarAccess.getXbAccess().getXCharXTerminalRuleCall_0_0(), "x"); 
@@ -607,7 +607,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:276:3: lv_y_1_0= RULE_CHARB
             {
             lv_y_1_0=(Token)input.LT(1);
-            match(input,RULE_CHARB,FOLLOW_RULE_CHARB_in_ruleXb399); if (failed) return current;
+            match(input,RULE_CHARB,FollowSets000.FOLLOW_RULE_CHARB_in_ruleXb399); if (failed) return current;
             if ( backtracking==0 ) {
 
               			createLeafNode(grammarAccess.getXbAccess().getYCharbTerminalRuleCall_1_0(), "y"); 
@@ -697,7 +697,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:310:2: ( KEYWORD_1 )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:310:7: KEYWORD_1
                     {
-                    match(input,KEYWORD_1,FOLLOW_KEYWORD_1_in_ruleEnumName454); if (failed) return current;
+                    match(input,KEYWORD_1,FollowSets000.FOLLOW_KEYWORD_1_in_ruleEnumName454); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               current = grammarAccess.getEnumNameAccess().getAbcEnumLiteralDeclaration_0().getEnumLiteral().getInstance();
@@ -716,7 +716,7 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:316:6: ( KEYWORD_2 )
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/lexer/parser/antlr/internal/InternalBacktrackingLexerTestLanguage.g:316:11: KEYWORD_2
                     {
-                    match(input,KEYWORD_2,FOLLOW_KEYWORD_2_in_ruleEnumName471); if (failed) return current;
+                    match(input,KEYWORD_2,FollowSets000.FOLLOW_KEYWORD_2_in_ruleEnumName471); if (failed) return current;
                     if ( backtracking==0 ) {
 
                               current = grammarAccess.getEnumNameAccess().getEfgEnumLiteralDeclaration_1().getEnumLiteral().getInstance();
@@ -756,20 +756,24 @@ public class InternalBacktrackingLexerTestLanguageParser extends AbstractInterna
 
  
 
-    public static final BitSet FOLLOW_ruleModel_in_entryRuleModel79 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleModel89 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEnumName_in_ruleModel135 = new BitSet(new long[]{0x0000000000017002L});
-    public static final BitSet FOLLOW_ruleAb_in_ruleModel157 = new BitSet(new long[]{0x0000000000014002L});
-    public static final BitSet FOLLOW_ruleXb_in_ruleModel179 = new BitSet(new long[]{0x0000000000010002L});
-    public static final BitSet FOLLOW_ruleAb_in_entryRuleAb213 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAb223 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_CHARA_in_ruleAb265 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_RULE_CHARB_in_ruleAb287 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleXb_in_entryRuleXb325 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleXb335 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_CHARX_in_ruleXb377 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_RULE_CHARB_in_ruleXb399 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_1_in_ruleEnumName454 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_2_in_ruleEnumName471 = new BitSet(new long[]{0x0000000000000002L});
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel79 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleModel89 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEnumName_in_ruleModel135 = new BitSet(new long[]{0x0000000000017002L});
+        public static final BitSet FOLLOW_ruleAb_in_ruleModel157 = new BitSet(new long[]{0x0000000000014002L});
+        public static final BitSet FOLLOW_ruleXb_in_ruleModel179 = new BitSet(new long[]{0x0000000000010002L});
+        public static final BitSet FOLLOW_ruleAb_in_entryRuleAb213 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAb223 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_CHARA_in_ruleAb265 = new BitSet(new long[]{0x0000000000008000L});
+        public static final BitSet FOLLOW_RULE_CHARB_in_ruleAb287 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleXb_in_entryRuleXb325 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleXb335 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_CHARX_in_ruleXb377 = new BitSet(new long[]{0x0000000000008000L});
+        public static final BitSet FOLLOW_RULE_CHARB_in_ruleXb399 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_KEYWORD_1_in_ruleEnumName454 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_KEYWORD_2_in_ruleEnumName471 = new BitSet(new long[]{0x0000000000000002L});
+    }
+
 
 }

@@ -69,12 +69,12 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:61:1: ruleState EOF
             {
              before(grammarAccess.getStateRule()); 
-            pushFollow(FOLLOW_ruleState_in_entryRuleState60);
+            pushFollow(FollowSets000.FOLLOW_ruleState_in_entryRuleState60);
             ruleState();
             _fsp--;
 
              after(grammarAccess.getStateRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleState67); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleState67); 
 
             }
 
@@ -107,7 +107,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:75:1: ( rule__State__Group__0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:75:2: rule__State__Group__0
             {
-            pushFollow(FOLLOW_rule__State__Group__0_in_ruleState94);
+            pushFollow(FollowSets000.FOLLOW_rule__State__Group__0_in_ruleState94);
             rule__State__Group__0();
             _fsp--;
 
@@ -153,7 +153,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:95:1: ( rule__StateType__Alternatives )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:95:2: rule__StateType__Alternatives
             {
-            pushFollow(FOLLOW_rule__StateType__Alternatives_in_ruleStateType131);
+            pushFollow(FollowSets000.FOLLOW_rule__StateType__Alternatives_in_ruleStateType131);
             rule__StateType__Alternatives();
             _fsp--;
 
@@ -315,7 +315,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:113:1: ( rule__State__IsInitialAssignment_0_0 )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:113:2: rule__State__IsInitialAssignment_0_0
                     {
-                    pushFollow(FOLLOW_rule__State__IsInitialAssignment_0_0_in_rule__State__Alternatives_0166);
+                    pushFollow(FollowSets000.FOLLOW_rule__State__IsInitialAssignment_0_0_in_rule__State__Alternatives_0166);
                     rule__State__IsInitialAssignment_0_0();
                     _fsp--;
 
@@ -339,7 +339,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:119:1: ( rule__State__IsFinalAssignment_0_1 )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:119:2: rule__State__IsFinalAssignment_0_1
                     {
-                    pushFollow(FOLLOW_rule__State__IsFinalAssignment_0_1_in_rule__State__Alternatives_0184);
+                    pushFollow(FollowSets000.FOLLOW_rule__State__IsFinalAssignment_0_1_in_rule__State__Alternatives_0184);
                     rule__State__IsFinalAssignment_0_1();
                     _fsp--;
 
@@ -363,7 +363,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:125:1: ( rule__State__StateKindAssignment_0_2 )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:125:2: rule__State__StateKindAssignment_0_2
                     {
-                    pushFollow(FOLLOW_rule__State__StateKindAssignment_0_2_in_rule__State__Alternatives_0202);
+                    pushFollow(FollowSets000.FOLLOW_rule__State__StateKindAssignment_0_2_in_rule__State__Alternatives_0202);
                     rule__State__StateKindAssignment_0_2();
                     _fsp--;
 
@@ -387,7 +387,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:131:1: ( rule__State__Group_0_3__0 )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:131:2: rule__State__Group_0_3__0
                     {
-                    pushFollow(FOLLOW_rule__State__Group_0_3__0_in_rule__State__Alternatives_0220);
+                    pushFollow(FollowSets000.FOLLOW_rule__State__Group_0_3__0_in_rule__State__Alternatives_0220);
                     rule__State__Group_0_3__0();
                     _fsp--;
 
@@ -411,7 +411,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:137:1: ( rule__State__Group_0_4__0 )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:137:2: rule__State__Group_0_4__0
                     {
-                    pushFollow(FOLLOW_rule__State__Group_0_4__0_in_rule__State__Alternatives_0238);
+                    pushFollow(FollowSets000.FOLLOW_rule__State__Group_0_4__0_in_rule__State__Alternatives_0238);
                     rule__State__Group_0_4__0();
                     _fsp--;
 
@@ -490,7 +490,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:153:1: ( 'NORMAL' )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:153:3: 'NORMAL'
                     {
-                    match(input,11,FOLLOW_11_in_rule__StateType__Alternatives272); 
+                    match(input,11,FollowSets000.FOLLOW_11_in_rule__StateType__Alternatives272); 
 
                     }
 
@@ -511,7 +511,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:160:1: ( 'cond' )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:160:3: 'cond'
                     {
-                    match(input,12,FOLLOW_12_in_rule__StateType__Alternatives293); 
+                    match(input,12,FollowSets000.FOLLOW_12_in_rule__StateType__Alternatives293); 
 
                     }
 
@@ -532,7 +532,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:167:1: ( 'reference' )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:167:3: 'reference'
                     {
-                    match(input,13,FOLLOW_13_in_rule__StateType__Alternatives314); 
+                    match(input,13,FollowSets000.FOLLOW_13_in_rule__StateType__Alternatives314); 
 
                     }
 
@@ -553,7 +553,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:174:1: ( 'textual' )
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:174:3: 'textual'
                     {
-                    match(input,14,FOLLOW_14_in_rule__StateType__Alternatives335); 
+                    match(input,14,FollowSets000.FOLLOW_14_in_rule__StateType__Alternatives335); 
 
                     }
 
@@ -606,7 +606,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:193:2: rule__State__Alternatives_0
                     {
-                    pushFollow(FOLLOW_rule__State__Alternatives_0_in_rule__State__Group__0372);
+                    pushFollow(FollowSets000.FOLLOW_rule__State__Alternatives_0_in_rule__State__Group__0372);
                     rule__State__Alternatives_0();
                     _fsp--;
 
@@ -620,7 +620,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
 
             }
 
-            pushFollow(FOLLOW_rule__State__Group__1_in_rule__State__Group__0382);
+            pushFollow(FollowSets000.FOLLOW_rule__State__Group__1_in_rule__State__Group__0382);
             rule__State__Group__1();
             _fsp--;
 
@@ -667,7 +667,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:212:2: 'state'
                     {
-                    match(input,15,FOLLOW_15_in_rule__State__Group__1412); 
+                    match(input,15,FollowSets000.FOLLOW_15_in_rule__State__Group__1412); 
 
                     }
                     break;
@@ -678,7 +678,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
 
             }
 
-            pushFollow(FOLLOW_rule__State__Group__2_in_rule__State__Group__1424);
+            pushFollow(FollowSets000.FOLLOW_rule__State__Group__2_in_rule__State__Group__1424);
             rule__State__Group__2();
             _fsp--;
 
@@ -725,7 +725,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:231:2: rule__State__StateNameAssignment_2
                     {
-                    pushFollow(FOLLOW_rule__State__StateNameAssignment_2_in_rule__State__Group__2452);
+                    pushFollow(FollowSets000.FOLLOW_rule__State__StateNameAssignment_2_in_rule__State__Group__2452);
                     rule__State__StateNameAssignment_2();
                     _fsp--;
 
@@ -739,7 +739,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
 
             }
 
-            pushFollow(FOLLOW_rule__State__Group__3_in_rule__State__Group__2462);
+            pushFollow(FollowSets000.FOLLOW_rule__State__Group__3_in_rule__State__Group__2462);
             rule__State__Group__3();
             _fsp--;
 
@@ -786,7 +786,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:249:2: rule__State__LabelAssignment_3
                     {
-                    pushFollow(FOLLOW_rule__State__LabelAssignment_3_in_rule__State__Group__3490);
+                    pushFollow(FollowSets000.FOLLOW_rule__State__LabelAssignment_3_in_rule__State__Group__3490);
                     rule__State__LabelAssignment_3();
                     _fsp--;
 
@@ -835,7 +835,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:274:1: ( rule__State__IsInitialAssignment_0_3_0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:274:2: rule__State__IsInitialAssignment_0_3_0
             {
-            pushFollow(FOLLOW_rule__State__IsInitialAssignment_0_3_0_in_rule__State__Group_0_3__0533);
+            pushFollow(FollowSets000.FOLLOW_rule__State__IsInitialAssignment_0_3_0_in_rule__State__Group_0_3__0533);
             rule__State__IsInitialAssignment_0_3_0();
             _fsp--;
 
@@ -846,7 +846,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
 
             }
 
-            pushFollow(FOLLOW_rule__State__Group_0_3__1_in_rule__State__Group_0_3__0542);
+            pushFollow(FollowSets000.FOLLOW_rule__State__Group_0_3__1_in_rule__State__Group_0_3__0542);
             rule__State__Group_0_3__1();
             _fsp--;
 
@@ -885,7 +885,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:292:1: ( rule__State__StateKindAssignment_0_3_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:292:2: rule__State__StateKindAssignment_0_3_1
             {
-            pushFollow(FOLLOW_rule__State__StateKindAssignment_0_3_1_in_rule__State__Group_0_3__1570);
+            pushFollow(FollowSets000.FOLLOW_rule__State__StateKindAssignment_0_3_1_in_rule__State__Group_0_3__1570);
             rule__State__StateKindAssignment_0_3_1();
             _fsp--;
 
@@ -931,7 +931,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:313:1: ( rule__State__IsInitialAssignment_0_4_0 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:313:2: rule__State__IsInitialAssignment_0_4_0
             {
-            pushFollow(FOLLOW_rule__State__IsInitialAssignment_0_4_0_in_rule__State__Group_0_4__0608);
+            pushFollow(FollowSets000.FOLLOW_rule__State__IsInitialAssignment_0_4_0_in_rule__State__Group_0_4__0608);
             rule__State__IsInitialAssignment_0_4_0();
             _fsp--;
 
@@ -942,7 +942,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
 
             }
 
-            pushFollow(FOLLOW_rule__State__Group_0_4__1_in_rule__State__Group_0_4__0617);
+            pushFollow(FollowSets000.FOLLOW_rule__State__Group_0_4__1_in_rule__State__Group_0_4__0617);
             rule__State__Group_0_4__1();
             _fsp--;
 
@@ -981,7 +981,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:331:1: ( rule__State__StateKindAssignment_0_4_1 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:331:2: rule__State__StateKindAssignment_0_4_1
             {
-            pushFollow(FOLLOW_rule__State__StateKindAssignment_0_4_1_in_rule__State__Group_0_4__1645);
+            pushFollow(FollowSets000.FOLLOW_rule__State__StateKindAssignment_0_4_1_in_rule__State__Group_0_4__1645);
             rule__State__StateKindAssignment_0_4_1();
             _fsp--;
 
@@ -992,7 +992,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
 
             }
 
-            pushFollow(FOLLOW_rule__State__Group_0_4__2_in_rule__State__Group_0_4__1654);
+            pushFollow(FollowSets000.FOLLOW_rule__State__Group_0_4__2_in_rule__State__Group_0_4__1654);
             rule__State__Group_0_4__2();
             _fsp--;
 
@@ -1031,7 +1031,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:349:1: ( rule__State__IsFinalAssignment_0_4_2 )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:349:2: rule__State__IsFinalAssignment_0_4_2
             {
-            pushFollow(FOLLOW_rule__State__IsFinalAssignment_0_4_2_in_rule__State__Group_0_4__2682);
+            pushFollow(FollowSets000.FOLLOW_rule__State__IsFinalAssignment_0_4_2_in_rule__State__Group_0_4__2682);
             rule__State__IsFinalAssignment_0_4_2();
             _fsp--;
 
@@ -1078,7 +1078,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:373:1: 'init'
             {
              before(grammarAccess.getStateAccess().getIsInitialInitKeyword_0_0_0()); 
-            match(input,16,FOLLOW_16_in_rule__State__IsInitialAssignment_0_0727); 
+            match(input,16,FollowSets000.FOLLOW_16_in_rule__State__IsInitialAssignment_0_0727); 
              after(grammarAccess.getStateAccess().getIsInitialInitKeyword_0_0_0()); 
 
             }
@@ -1123,7 +1123,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:396:1: 'final'
             {
              before(grammarAccess.getStateAccess().getIsFinalFinalKeyword_0_1_0()); 
-            match(input,17,FOLLOW_17_in_rule__State__IsFinalAssignment_0_1771); 
+            match(input,17,FollowSets000.FOLLOW_17_in_rule__State__IsFinalAssignment_0_1771); 
              after(grammarAccess.getStateAccess().getIsFinalFinalKeyword_0_1_0()); 
 
             }
@@ -1164,7 +1164,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:417:1: ruleStateType
             {
              before(grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_0_2_0()); 
-            pushFollow(FOLLOW_ruleStateType_in_rule__State__StateKindAssignment_0_2810);
+            pushFollow(FollowSets000.FOLLOW_ruleStateType_in_rule__State__StateKindAssignment_0_2810);
             ruleStateType();
             _fsp--;
 
@@ -1208,7 +1208,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:434:1: 'init'
             {
              before(grammarAccess.getStateAccess().getIsInitialInitKeyword_0_3_0_0()); 
-            match(input,16,FOLLOW_16_in_rule__State__IsInitialAssignment_0_3_0846); 
+            match(input,16,FollowSets000.FOLLOW_16_in_rule__State__IsInitialAssignment_0_3_0846); 
              after(grammarAccess.getStateAccess().getIsInitialInitKeyword_0_3_0_0()); 
 
             }
@@ -1249,7 +1249,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:455:1: ruleStateType
             {
              before(grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_0_3_1_0()); 
-            pushFollow(FOLLOW_ruleStateType_in_rule__State__StateKindAssignment_0_3_1885);
+            pushFollow(FollowSets000.FOLLOW_ruleStateType_in_rule__State__StateKindAssignment_0_3_1885);
             ruleStateType();
             _fsp--;
 
@@ -1293,7 +1293,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:472:1: 'init'
             {
              before(grammarAccess.getStateAccess().getIsInitialInitKeyword_0_4_0_0()); 
-            match(input,16,FOLLOW_16_in_rule__State__IsInitialAssignment_0_4_0921); 
+            match(input,16,FollowSets000.FOLLOW_16_in_rule__State__IsInitialAssignment_0_4_0921); 
              after(grammarAccess.getStateAccess().getIsInitialInitKeyword_0_4_0_0()); 
 
             }
@@ -1334,7 +1334,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:493:1: ruleStateType
             {
              before(grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_0_4_1_0()); 
-            pushFollow(FOLLOW_ruleStateType_in_rule__State__StateKindAssignment_0_4_1960);
+            pushFollow(FollowSets000.FOLLOW_ruleStateType_in_rule__State__StateKindAssignment_0_4_1960);
             ruleStateType();
             _fsp--;
 
@@ -1378,7 +1378,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:510:1: 'final'
             {
              before(grammarAccess.getStateAccess().getIsFinalFinalKeyword_0_4_2_0()); 
-            match(input,17,FOLLOW_17_in_rule__State__IsFinalAssignment_0_4_2996); 
+            match(input,17,FollowSets000.FOLLOW_17_in_rule__State__IsFinalAssignment_0_4_2996); 
              after(grammarAccess.getStateAccess().getIsFinalFinalKeyword_0_4_2_0()); 
 
             }
@@ -1419,7 +1419,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:531:1: RULE_ID
             {
              before(grammarAccess.getStateAccess().getStateNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__State__StateNameAssignment_21035); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__State__StateNameAssignment_21035); 
              after(grammarAccess.getStateAccess().getStateNameIDTerminalRuleCall_2_0()); 
 
             }
@@ -1456,7 +1456,7 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug286935TestLanguage.g:546:1: RULE_STRING
             {
              before(grammarAccess.getStateAccess().getLabelSTRINGTerminalRuleCall_3_0()); 
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__State__LabelAssignment_31066); 
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__State__LabelAssignment_31066); 
              after(grammarAccess.getStateAccess().getLabelSTRINGTerminalRuleCall_3_0()); 
 
             }
@@ -1481,43 +1481,47 @@ public class InternalBug286935TestLanguageParser extends AbstractInternalContent
 
  
 
-    public static final BitSet FOLLOW_ruleState_in_entryRuleState60 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleState67 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__State__Group__0_in_ruleState94 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__StateType__Alternatives_in_ruleStateType131 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__State__IsInitialAssignment_0_0_in_rule__State__Alternatives_0166 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__State__IsFinalAssignment_0_1_in_rule__State__Alternatives_0184 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__State__StateKindAssignment_0_2_in_rule__State__Alternatives_0202 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__State__Group_0_3__0_in_rule__State__Alternatives_0220 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__State__Group_0_4__0_in_rule__State__Alternatives_0238 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_rule__StateType__Alternatives272 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_rule__StateType__Alternatives293 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__StateType__Alternatives314 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__StateType__Alternatives335 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__State__Alternatives_0_in_rule__State__Group__0372 = new BitSet(new long[]{0x0000000000008032L});
-    public static final BitSet FOLLOW_rule__State__Group__1_in_rule__State__Group__0382 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_rule__State__Group__1412 = new BitSet(new long[]{0x0000000000000032L});
-    public static final BitSet FOLLOW_rule__State__Group__2_in_rule__State__Group__1424 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__State__StateNameAssignment_2_in_rule__State__Group__2452 = new BitSet(new long[]{0x0000000000000022L});
-    public static final BitSet FOLLOW_rule__State__Group__3_in_rule__State__Group__2462 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__State__LabelAssignment_3_in_rule__State__Group__3490 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__State__IsInitialAssignment_0_3_0_in_rule__State__Group_0_3__0533 = new BitSet(new long[]{0x0000000000007800L});
-    public static final BitSet FOLLOW_rule__State__Group_0_3__1_in_rule__State__Group_0_3__0542 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__State__StateKindAssignment_0_3_1_in_rule__State__Group_0_3__1570 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__State__IsInitialAssignment_0_4_0_in_rule__State__Group_0_4__0608 = new BitSet(new long[]{0x0000000000007800L});
-    public static final BitSet FOLLOW_rule__State__Group_0_4__1_in_rule__State__Group_0_4__0617 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__State__StateKindAssignment_0_4_1_in_rule__State__Group_0_4__1645 = new BitSet(new long[]{0x0000000000020000L});
-    public static final BitSet FOLLOW_rule__State__Group_0_4__2_in_rule__State__Group_0_4__1654 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__State__IsFinalAssignment_0_4_2_in_rule__State__Group_0_4__2682 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_rule__State__IsInitialAssignment_0_0727 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_rule__State__IsFinalAssignment_0_1771 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStateType_in_rule__State__StateKindAssignment_0_2810 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_rule__State__IsInitialAssignment_0_3_0846 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStateType_in_rule__State__StateKindAssignment_0_3_1885 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_rule__State__IsInitialAssignment_0_4_0921 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleStateType_in_rule__State__StateKindAssignment_0_4_1960 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_rule__State__IsFinalAssignment_0_4_2996 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__State__StateNameAssignment_21035 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__State__LabelAssignment_31066 = new BitSet(new long[]{0x0000000000000002L});
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_ruleState_in_entryRuleState60 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleState67 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__State__Group__0_in_ruleState94 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__StateType__Alternatives_in_ruleStateType131 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__State__IsInitialAssignment_0_0_in_rule__State__Alternatives_0166 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__State__IsFinalAssignment_0_1_in_rule__State__Alternatives_0184 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__State__StateKindAssignment_0_2_in_rule__State__Alternatives_0202 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__State__Group_0_3__0_in_rule__State__Alternatives_0220 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__State__Group_0_4__0_in_rule__State__Alternatives_0238 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_rule__StateType__Alternatives272 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_rule__StateType__Alternatives293 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_rule__StateType__Alternatives314 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_rule__StateType__Alternatives335 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__State__Alternatives_0_in_rule__State__Group__0372 = new BitSet(new long[]{0x0000000000008032L});
+        public static final BitSet FOLLOW_rule__State__Group__1_in_rule__State__Group__0382 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_15_in_rule__State__Group__1412 = new BitSet(new long[]{0x0000000000000032L});
+        public static final BitSet FOLLOW_rule__State__Group__2_in_rule__State__Group__1424 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__State__StateNameAssignment_2_in_rule__State__Group__2452 = new BitSet(new long[]{0x0000000000000022L});
+        public static final BitSet FOLLOW_rule__State__Group__3_in_rule__State__Group__2462 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__State__LabelAssignment_3_in_rule__State__Group__3490 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__State__IsInitialAssignment_0_3_0_in_rule__State__Group_0_3__0533 = new BitSet(new long[]{0x0000000000007800L});
+        public static final BitSet FOLLOW_rule__State__Group_0_3__1_in_rule__State__Group_0_3__0542 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__State__StateKindAssignment_0_3_1_in_rule__State__Group_0_3__1570 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__State__IsInitialAssignment_0_4_0_in_rule__State__Group_0_4__0608 = new BitSet(new long[]{0x0000000000007800L});
+        public static final BitSet FOLLOW_rule__State__Group_0_4__1_in_rule__State__Group_0_4__0617 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__State__StateKindAssignment_0_4_1_in_rule__State__Group_0_4__1645 = new BitSet(new long[]{0x0000000000020000L});
+        public static final BitSet FOLLOW_rule__State__Group_0_4__2_in_rule__State__Group_0_4__1654 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__State__IsFinalAssignment_0_4_2_in_rule__State__Group_0_4__2682 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_16_in_rule__State__IsInitialAssignment_0_0727 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_17_in_rule__State__IsFinalAssignment_0_1771 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleStateType_in_rule__State__StateKindAssignment_0_2810 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_16_in_rule__State__IsInitialAssignment_0_3_0846 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleStateType_in_rule__State__StateKindAssignment_0_3_1885 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_16_in_rule__State__IsInitialAssignment_0_4_0921 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleStateType_in_rule__State__StateKindAssignment_0_4_1960 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_17_in_rule__State__IsFinalAssignment_0_4_2996 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__State__StateNameAssignment_21035 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__State__LabelAssignment_31066 = new BitSet(new long[]{0x0000000000000002L});
+    }
+
 
 }

@@ -79,12 +79,12 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:73:2: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
-            pushFollow(FOLLOW_ruleModel_in_entryRuleModel73);
+            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel73);
             iv_ruleModel=ruleModel();
             _fsp--;
 
              current =iv_ruleModel; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleModel83); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel83); 
 
             }
 
@@ -132,7 +132,7 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
                      
                     	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getChildGreetingParserRuleCall_0(), currentNode); 
                     	    
-                    pushFollow(FOLLOW_ruleGreeting_in_ruleModel128);
+                    pushFollow(FollowSets000.FOLLOW_ruleGreeting_in_ruleModel128);
                     lv_child_0_0=ruleGreeting();
                     _fsp--;
 
@@ -194,12 +194,12 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:118:2: iv_ruleGreeting= ruleGreeting EOF
             {
              currentNode = createCompositeNode(grammarAccess.getGreetingRule(), currentNode); 
-            pushFollow(FOLLOW_ruleGreeting_in_entryRuleGreeting161);
+            pushFollow(FollowSets000.FOLLOW_ruleGreeting_in_entryRuleGreeting161);
             iv_ruleGreeting=ruleGreeting();
             _fsp--;
 
              current =iv_ruleGreeting; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleGreeting171); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleGreeting171); 
 
             }
 
@@ -232,7 +232,7 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:131:1: ( 'hallo' ( (lv_name_1_0= RULE_ID ) ) )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:131:3: 'hallo' ( (lv_name_1_0= RULE_ID ) )
             {
-            match(input,11,FOLLOW_11_in_ruleGreeting206); 
+            match(input,11,FollowSets000.FOLLOW_11_in_ruleGreeting206); 
 
                     createLeafNode(grammarAccess.getGreetingAccess().getHalloKeyword_0(), null); 
                 
@@ -243,7 +243,7 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalOptionalEmptyTestLanguage.g:137:3: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleGreeting223); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleGreeting223); 
 
             			createLeafNode(grammarAccess.getGreetingAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             		
@@ -293,12 +293,16 @@ public class InternalOptionalEmptyTestLanguageParser extends AbstractInternalAnt
 
  
 
-    public static final BitSet FOLLOW_ruleModel_in_entryRuleModel73 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleModel83 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGreeting_in_ruleModel128 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleGreeting_in_entryRuleGreeting161 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleGreeting171 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_ruleGreeting206 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleGreeting223 = new BitSet(new long[]{0x0000000000000002L});
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel73 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleModel83 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleGreeting_in_ruleModel128 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleGreeting_in_entryRuleGreeting161 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleGreeting171 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_ruleGreeting206 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleGreeting223 = new BitSet(new long[]{0x0000000000000002L});
+    }
+
 
 }

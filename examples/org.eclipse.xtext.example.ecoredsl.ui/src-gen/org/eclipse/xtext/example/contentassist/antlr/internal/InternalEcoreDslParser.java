@@ -74,12 +74,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:61:1: ruleEcoreDsl EOF
             {
              before(grammarAccess.getEcoreDslRule()); 
-            pushFollow(FOLLOW_ruleEcoreDsl_in_entryRuleEcoreDsl60);
+            pushFollow(FollowSets000.FOLLOW_ruleEcoreDsl_in_entryRuleEcoreDsl60);
             ruleEcoreDsl();
             _fsp--;
 
              after(grammarAccess.getEcoreDslRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEcoreDsl67); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEcoreDsl67); 
 
             }
 
@@ -112,7 +112,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:75:1: ( rule__EcoreDsl__Group__0 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:75:2: rule__EcoreDsl__Group__0
             {
-            pushFollow(FOLLOW_rule__EcoreDsl__Group__0_in_ruleEcoreDsl94);
+            pushFollow(FollowSets000.FOLLOW_rule__EcoreDsl__Group__0_in_ruleEcoreDsl94);
             rule__EcoreDsl__Group__0();
             _fsp--;
 
@@ -149,12 +149,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:88:1: ruleReferencedMetamodel EOF
             {
              before(grammarAccess.getReferencedMetamodelRule()); 
-            pushFollow(FOLLOW_ruleReferencedMetamodel_in_entryRuleReferencedMetamodel120);
+            pushFollow(FollowSets000.FOLLOW_ruleReferencedMetamodel_in_entryRuleReferencedMetamodel120);
             ruleReferencedMetamodel();
             _fsp--;
 
              after(grammarAccess.getReferencedMetamodelRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleReferencedMetamodel127); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleReferencedMetamodel127); 
 
             }
 
@@ -187,7 +187,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:102:1: ( rule__ReferencedMetamodel__Group__0 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:102:2: rule__ReferencedMetamodel__Group__0
             {
-            pushFollow(FOLLOW_rule__ReferencedMetamodel__Group__0_in_ruleReferencedMetamodel154);
+            pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group__0_in_ruleReferencedMetamodel154);
             rule__ReferencedMetamodel__Group__0();
             _fsp--;
 
@@ -224,12 +224,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:115:1: ruleEPackageDecl EOF
             {
              before(grammarAccess.getEPackageDeclRule()); 
-            pushFollow(FOLLOW_ruleEPackageDecl_in_entryRuleEPackageDecl180);
+            pushFollow(FollowSets000.FOLLOW_ruleEPackageDecl_in_entryRuleEPackageDecl180);
             ruleEPackageDecl();
             _fsp--;
 
              after(grammarAccess.getEPackageDeclRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEPackageDecl187); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEPackageDecl187); 
 
             }
 
@@ -262,7 +262,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:129:1: ( rule__EPackageDecl__Group__0 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:129:2: rule__EPackageDecl__Group__0
             {
-            pushFollow(FOLLOW_rule__EPackageDecl__Group__0_in_ruleEPackageDecl214);
+            pushFollow(FollowSets000.FOLLOW_rule__EPackageDecl__Group__0_in_ruleEPackageDecl214);
             rule__EPackageDecl__Group__0();
             _fsp--;
 
@@ -299,12 +299,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:142:1: ruleSubEPackageDecl EOF
             {
              before(grammarAccess.getSubEPackageDeclRule()); 
-            pushFollow(FOLLOW_ruleSubEPackageDecl_in_entryRuleSubEPackageDecl240);
+            pushFollow(FollowSets000.FOLLOW_ruleSubEPackageDecl_in_entryRuleSubEPackageDecl240);
             ruleSubEPackageDecl();
             _fsp--;
 
              after(grammarAccess.getSubEPackageDeclRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSubEPackageDecl247); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSubEPackageDecl247); 
 
             }
 
@@ -337,7 +337,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:156:1: ( rule__SubEPackageDecl__Group__0 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:156:2: rule__SubEPackageDecl__Group__0
             {
-            pushFollow(FOLLOW_rule__SubEPackageDecl__Group__0_in_ruleSubEPackageDecl274);
+            pushFollow(FollowSets000.FOLLOW_rule__SubEPackageDecl__Group__0_in_ruleSubEPackageDecl274);
             rule__SubEPackageDecl__Group__0();
             _fsp--;
 
@@ -374,12 +374,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:169:1: ruleEClassifierDecl EOF
             {
              before(grammarAccess.getEClassifierDeclRule()); 
-            pushFollow(FOLLOW_ruleEClassifierDecl_in_entryRuleEClassifierDecl300);
+            pushFollow(FollowSets000.FOLLOW_ruleEClassifierDecl_in_entryRuleEClassifierDecl300);
             ruleEClassifierDecl();
             _fsp--;
 
              after(grammarAccess.getEClassifierDeclRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEClassifierDecl307); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEClassifierDecl307); 
 
             }
 
@@ -412,7 +412,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:183:1: ( rule__EClassifierDecl__Alternatives )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:183:2: rule__EClassifierDecl__Alternatives
             {
-            pushFollow(FOLLOW_rule__EClassifierDecl__Alternatives_in_ruleEClassifierDecl334);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassifierDecl__Alternatives_in_ruleEClassifierDecl334);
             rule__EClassifierDecl__Alternatives();
             _fsp--;
 
@@ -449,12 +449,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:196:1: ruleEDataTypeDecl EOF
             {
              before(grammarAccess.getEDataTypeDeclRule()); 
-            pushFollow(FOLLOW_ruleEDataTypeDecl_in_entryRuleEDataTypeDecl360);
+            pushFollow(FollowSets000.FOLLOW_ruleEDataTypeDecl_in_entryRuleEDataTypeDecl360);
             ruleEDataTypeDecl();
             _fsp--;
 
              after(grammarAccess.getEDataTypeDeclRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEDataTypeDecl367); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEDataTypeDecl367); 
 
             }
 
@@ -487,7 +487,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:210:1: ( rule__EDataTypeDecl__Alternatives )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:210:2: rule__EDataTypeDecl__Alternatives
             {
-            pushFollow(FOLLOW_rule__EDataTypeDecl__Alternatives_in_ruleEDataTypeDecl394);
+            pushFollow(FollowSets000.FOLLOW_rule__EDataTypeDecl__Alternatives_in_ruleEDataTypeDecl394);
             rule__EDataTypeDecl__Alternatives();
             _fsp--;
 
@@ -524,12 +524,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:223:1: ruleEAnnotationDecl EOF
             {
              before(grammarAccess.getEAnnotationDeclRule()); 
-            pushFollow(FOLLOW_ruleEAnnotationDecl_in_entryRuleEAnnotationDecl420);
+            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_entryRuleEAnnotationDecl420);
             ruleEAnnotationDecl();
             _fsp--;
 
              after(grammarAccess.getEAnnotationDeclRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEAnnotationDecl427); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEAnnotationDecl427); 
 
             }
 
@@ -562,7 +562,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:237:1: ( rule__EAnnotationDecl__Group__0 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:237:2: rule__EAnnotationDecl__Group__0
             {
-            pushFollow(FOLLOW_rule__EAnnotationDecl__Group__0_in_ruleEAnnotationDecl454);
+            pushFollow(FollowSets000.FOLLOW_rule__EAnnotationDecl__Group__0_in_ruleEAnnotationDecl454);
             rule__EAnnotationDecl__Group__0();
             _fsp--;
 
@@ -599,12 +599,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:250:1: ruleEClassDecl EOF
             {
              before(grammarAccess.getEClassDeclRule()); 
-            pushFollow(FOLLOW_ruleEClassDecl_in_entryRuleEClassDecl480);
+            pushFollow(FollowSets000.FOLLOW_ruleEClassDecl_in_entryRuleEClassDecl480);
             ruleEClassDecl();
             _fsp--;
 
              after(grammarAccess.getEClassDeclRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEClassDecl487); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEClassDecl487); 
 
             }
 
@@ -637,7 +637,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:264:1: ( rule__EClassDecl__Group__0 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:264:2: rule__EClassDecl__Group__0
             {
-            pushFollow(FOLLOW_rule__EClassDecl__Group__0_in_ruleEClassDecl514);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Group__0_in_ruleEClassDecl514);
             rule__EClassDecl__Group__0();
             _fsp--;
 
@@ -674,12 +674,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:277:1: ruleEStructuralFeatureDecl EOF
             {
              before(grammarAccess.getEStructuralFeatureDeclRule()); 
-            pushFollow(FOLLOW_ruleEStructuralFeatureDecl_in_entryRuleEStructuralFeatureDecl540);
+            pushFollow(FollowSets000.FOLLOW_ruleEStructuralFeatureDecl_in_entryRuleEStructuralFeatureDecl540);
             ruleEStructuralFeatureDecl();
             _fsp--;
 
              after(grammarAccess.getEStructuralFeatureDeclRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEStructuralFeatureDecl547); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEStructuralFeatureDecl547); 
 
             }
 
@@ -712,7 +712,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:291:1: ( rule__EStructuralFeatureDecl__Alternatives )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:291:2: rule__EStructuralFeatureDecl__Alternatives
             {
-            pushFollow(FOLLOW_rule__EStructuralFeatureDecl__Alternatives_in_ruleEStructuralFeatureDecl574);
+            pushFollow(FollowSets000.FOLLOW_rule__EStructuralFeatureDecl__Alternatives_in_ruleEStructuralFeatureDecl574);
             rule__EStructuralFeatureDecl__Alternatives();
             _fsp--;
 
@@ -749,12 +749,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:304:1: ruleEAttributeDecl EOF
             {
              before(grammarAccess.getEAttributeDeclRule()); 
-            pushFollow(FOLLOW_ruleEAttributeDecl_in_entryRuleEAttributeDecl600);
+            pushFollow(FollowSets000.FOLLOW_ruleEAttributeDecl_in_entryRuleEAttributeDecl600);
             ruleEAttributeDecl();
             _fsp--;
 
              after(grammarAccess.getEAttributeDeclRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEAttributeDecl607); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEAttributeDecl607); 
 
             }
 
@@ -787,7 +787,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:318:1: ( rule__EAttributeDecl__Group__0 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:318:2: rule__EAttributeDecl__Group__0
             {
-            pushFollow(FOLLOW_rule__EAttributeDecl__Group__0_in_ruleEAttributeDecl634);
+            pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__Group__0_in_ruleEAttributeDecl634);
             rule__EAttributeDecl__Group__0();
             _fsp--;
 
@@ -824,12 +824,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:331:1: ruleEReferenceDecl EOF
             {
              before(grammarAccess.getEReferenceDeclRule()); 
-            pushFollow(FOLLOW_ruleEReferenceDecl_in_entryRuleEReferenceDecl660);
+            pushFollow(FollowSets000.FOLLOW_ruleEReferenceDecl_in_entryRuleEReferenceDecl660);
             ruleEReferenceDecl();
             _fsp--;
 
              after(grammarAccess.getEReferenceDeclRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEReferenceDecl667); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEReferenceDecl667); 
 
             }
 
@@ -862,7 +862,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:345:1: ( rule__EReferenceDecl__Group__0 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:345:2: rule__EReferenceDecl__Group__0
             {
-            pushFollow(FOLLOW_rule__EReferenceDecl__Group__0_in_ruleEReferenceDecl694);
+            pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__Group__0_in_ruleEReferenceDecl694);
             rule__EReferenceDecl__Group__0();
             _fsp--;
 
@@ -899,12 +899,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:358:1: ruleEEnumDecl EOF
             {
              before(grammarAccess.getEEnumDeclRule()); 
-            pushFollow(FOLLOW_ruleEEnumDecl_in_entryRuleEEnumDecl720);
+            pushFollow(FollowSets000.FOLLOW_ruleEEnumDecl_in_entryRuleEEnumDecl720);
             ruleEEnumDecl();
             _fsp--;
 
              after(grammarAccess.getEEnumDeclRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEEnumDecl727); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEEnumDecl727); 
 
             }
 
@@ -937,7 +937,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:372:1: ( rule__EEnumDecl__Group__0 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:372:2: rule__EEnumDecl__Group__0
             {
-            pushFollow(FOLLOW_rule__EEnumDecl__Group__0_in_ruleEEnumDecl754);
+            pushFollow(FollowSets000.FOLLOW_rule__EEnumDecl__Group__0_in_ruleEEnumDecl754);
             rule__EEnumDecl__Group__0();
             _fsp--;
 
@@ -974,12 +974,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:385:1: ruleEEnumLiteralDecl EOF
             {
              before(grammarAccess.getEEnumLiteralDeclRule()); 
-            pushFollow(FOLLOW_ruleEEnumLiteralDecl_in_entryRuleEEnumLiteralDecl780);
+            pushFollow(FollowSets000.FOLLOW_ruleEEnumLiteralDecl_in_entryRuleEEnumLiteralDecl780);
             ruleEEnumLiteralDecl();
             _fsp--;
 
              after(grammarAccess.getEEnumLiteralDeclRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEEnumLiteralDecl787); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEEnumLiteralDecl787); 
 
             }
 
@@ -1012,7 +1012,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:399:1: ( rule__EEnumLiteralDecl__Group__0 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:399:2: rule__EEnumLiteralDecl__Group__0
             {
-            pushFollow(FOLLOW_rule__EEnumLiteralDecl__Group__0_in_ruleEEnumLiteralDecl814);
+            pushFollow(FollowSets000.FOLLOW_rule__EEnumLiteralDecl__Group__0_in_ruleEEnumLiteralDecl814);
             rule__EEnumLiteralDecl__Group__0();
             _fsp--;
 
@@ -1049,12 +1049,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:412:1: ruleETypeParameterDecl EOF
             {
              before(grammarAccess.getETypeParameterDeclRule()); 
-            pushFollow(FOLLOW_ruleETypeParameterDecl_in_entryRuleETypeParameterDecl840);
+            pushFollow(FollowSets000.FOLLOW_ruleETypeParameterDecl_in_entryRuleETypeParameterDecl840);
             ruleETypeParameterDecl();
             _fsp--;
 
              after(grammarAccess.getETypeParameterDeclRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleETypeParameterDecl847); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleETypeParameterDecl847); 
 
             }
 
@@ -1087,7 +1087,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:426:1: ( rule__ETypeParameterDecl__Group__0 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:426:2: rule__ETypeParameterDecl__Group__0
             {
-            pushFollow(FOLLOW_rule__ETypeParameterDecl__Group__0_in_ruleETypeParameterDecl874);
+            pushFollow(FollowSets000.FOLLOW_rule__ETypeParameterDecl__Group__0_in_ruleETypeParameterDecl874);
             rule__ETypeParameterDecl__Group__0();
             _fsp--;
 
@@ -1124,12 +1124,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:439:1: ruleEGenericTypeReferenceDecl EOF
             {
              before(grammarAccess.getEGenericTypeReferenceDeclRule()); 
-            pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_entryRuleEGenericTypeReferenceDecl900);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_entryRuleEGenericTypeReferenceDecl900);
             ruleEGenericTypeReferenceDecl();
             _fsp--;
 
              after(grammarAccess.getEGenericTypeReferenceDeclRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEGenericTypeReferenceDecl907); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEGenericTypeReferenceDecl907); 
 
             }
 
@@ -1162,7 +1162,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:453:1: ( rule__EGenericTypeReferenceDecl__Alternatives )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:453:2: rule__EGenericTypeReferenceDecl__Alternatives
             {
-            pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Alternatives_in_ruleEGenericTypeReferenceDecl934);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeReferenceDecl__Alternatives_in_ruleEGenericTypeReferenceDecl934);
             rule__EGenericTypeReferenceDecl__Alternatives();
             _fsp--;
 
@@ -1199,12 +1199,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:466:1: ruleEGenericTypeDecl EOF
             {
              before(grammarAccess.getEGenericTypeDeclRule()); 
-            pushFollow(FOLLOW_ruleEGenericTypeDecl_in_entryRuleEGenericTypeDecl960);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_entryRuleEGenericTypeDecl960);
             ruleEGenericTypeDecl();
             _fsp--;
 
              after(grammarAccess.getEGenericTypeDeclRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEGenericTypeDecl967); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEGenericTypeDecl967); 
 
             }
 
@@ -1237,7 +1237,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:480:1: ( rule__EGenericTypeDecl__Alternatives )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:480:2: rule__EGenericTypeDecl__Alternatives
             {
-            pushFollow(FOLLOW_rule__EGenericTypeDecl__Alternatives_in_ruleEGenericTypeDecl994);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeDecl__Alternatives_in_ruleEGenericTypeDecl994);
             rule__EGenericTypeDecl__Alternatives();
             _fsp--;
 
@@ -1274,12 +1274,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:493:1: ruleEOperationDecl EOF
             {
              before(grammarAccess.getEOperationDeclRule()); 
-            pushFollow(FOLLOW_ruleEOperationDecl_in_entryRuleEOperationDecl1020);
+            pushFollow(FollowSets000.FOLLOW_ruleEOperationDecl_in_entryRuleEOperationDecl1020);
             ruleEOperationDecl();
             _fsp--;
 
              after(grammarAccess.getEOperationDeclRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEOperationDecl1027); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEOperationDecl1027); 
 
             }
 
@@ -1312,7 +1312,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:507:1: ( rule__EOperationDecl__Group__0 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:507:2: rule__EOperationDecl__Group__0
             {
-            pushFollow(FOLLOW_rule__EOperationDecl__Group__0_in_ruleEOperationDecl1054);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group__0_in_ruleEOperationDecl1054);
             rule__EOperationDecl__Group__0();
             _fsp--;
 
@@ -1349,12 +1349,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:520:1: ruleEParameterDecl EOF
             {
              before(grammarAccess.getEParameterDeclRule()); 
-            pushFollow(FOLLOW_ruleEParameterDecl_in_entryRuleEParameterDecl1080);
+            pushFollow(FollowSets000.FOLLOW_ruleEParameterDecl_in_entryRuleEParameterDecl1080);
             ruleEParameterDecl();
             _fsp--;
 
              after(grammarAccess.getEParameterDeclRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEParameterDecl1087); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEParameterDecl1087); 
 
             }
 
@@ -1387,7 +1387,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:534:1: ( rule__EParameterDecl__Group__0 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:534:2: rule__EParameterDecl__Group__0
             {
-            pushFollow(FOLLOW_rule__EParameterDecl__Group__0_in_ruleEParameterDecl1114);
+            pushFollow(FollowSets000.FOLLOW_rule__EParameterDecl__Group__0_in_ruleEParameterDecl1114);
             rule__EParameterDecl__Group__0();
             _fsp--;
 
@@ -1424,12 +1424,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:547:1: ruleMapEntry EOF
             {
              before(grammarAccess.getMapEntryRule()); 
-            pushFollow(FOLLOW_ruleMapEntry_in_entryRuleMapEntry1140);
+            pushFollow(FollowSets000.FOLLOW_ruleMapEntry_in_entryRuleMapEntry1140);
             ruleMapEntry();
             _fsp--;
 
              after(grammarAccess.getMapEntryRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleMapEntry1147); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMapEntry1147); 
 
             }
 
@@ -1462,7 +1462,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:561:1: ( rule__MapEntry__Group__0 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:561:2: rule__MapEntry__Group__0
             {
-            pushFollow(FOLLOW_rule__MapEntry__Group__0_in_ruleMapEntry1174);
+            pushFollow(FollowSets000.FOLLOW_rule__MapEntry__Group__0_in_ruleMapEntry1174);
             rule__MapEntry__Group__0();
             _fsp--;
 
@@ -1499,12 +1499,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:574:1: ruleQID EOF
             {
              before(grammarAccess.getQIDRule()); 
-            pushFollow(FOLLOW_ruleQID_in_entryRuleQID1200);
+            pushFollow(FollowSets000.FOLLOW_ruleQID_in_entryRuleQID1200);
             ruleQID();
             _fsp--;
 
              after(grammarAccess.getQIDRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleQID1207); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleQID1207); 
 
             }
 
@@ -1537,7 +1537,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:588:1: ( rule__QID__Group__0 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:588:2: rule__QID__Group__0
             {
-            pushFollow(FOLLOW_rule__QID__Group__0_in_ruleQID1234);
+            pushFollow(FollowSets000.FOLLOW_rule__QID__Group__0_in_ruleQID1234);
             rule__QID__Group__0();
             _fsp--;
 
@@ -1574,12 +1574,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:601:1: ruleSTRING_OR_QID EOF
             {
              before(grammarAccess.getSTRING_OR_QIDRule()); 
-            pushFollow(FOLLOW_ruleSTRING_OR_QID_in_entryRuleSTRING_OR_QID1260);
+            pushFollow(FollowSets000.FOLLOW_ruleSTRING_OR_QID_in_entryRuleSTRING_OR_QID1260);
             ruleSTRING_OR_QID();
             _fsp--;
 
              after(grammarAccess.getSTRING_OR_QIDRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSTRING_OR_QID1267); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSTRING_OR_QID1267); 
 
             }
 
@@ -1612,7 +1612,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:615:1: ( rule__STRING_OR_QID__Alternatives )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:615:2: rule__STRING_OR_QID__Alternatives
             {
-            pushFollow(FOLLOW_rule__STRING_OR_QID__Alternatives_in_ruleSTRING_OR_QID1294);
+            pushFollow(FollowSets000.FOLLOW_rule__STRING_OR_QID__Alternatives_in_ruleSTRING_OR_QID1294);
             rule__STRING_OR_QID__Alternatives();
             _fsp--;
 
@@ -1649,12 +1649,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:628:1: ruleSINT EOF
             {
              before(grammarAccess.getSINTRule()); 
-            pushFollow(FOLLOW_ruleSINT_in_entryRuleSINT1320);
+            pushFollow(FollowSets000.FOLLOW_ruleSINT_in_entryRuleSINT1320);
             ruleSINT();
             _fsp--;
 
              after(grammarAccess.getSINTRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSINT1327); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSINT1327); 
 
             }
 
@@ -1687,7 +1687,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:642:1: ( rule__SINT__Group__0 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:642:2: rule__SINT__Group__0
             {
-            pushFollow(FOLLOW_rule__SINT__Group__0_in_ruleSINT1354);
+            pushFollow(FollowSets000.FOLLOW_rule__SINT__Group__0_in_ruleSINT1354);
             rule__SINT__Group__0();
             _fsp--;
 
@@ -1737,7 +1737,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:661:1: ( rule__EPackageDecl__ESubpackagesAssignment_10_0 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:661:2: rule__EPackageDecl__ESubpackagesAssignment_10_0
                     {
-                    pushFollow(FOLLOW_rule__EPackageDecl__ESubpackagesAssignment_10_0_in_rule__EPackageDecl__Alternatives_101390);
+                    pushFollow(FollowSets000.FOLLOW_rule__EPackageDecl__ESubpackagesAssignment_10_0_in_rule__EPackageDecl__Alternatives_101390);
                     rule__EPackageDecl__ESubpackagesAssignment_10_0();
                     _fsp--;
 
@@ -1761,7 +1761,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:667:1: ( rule__EPackageDecl__EClassifiersAssignment_10_1 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:667:2: rule__EPackageDecl__EClassifiersAssignment_10_1
                     {
-                    pushFollow(FOLLOW_rule__EPackageDecl__EClassifiersAssignment_10_1_in_rule__EPackageDecl__Alternatives_101408);
+                    pushFollow(FollowSets000.FOLLOW_rule__EPackageDecl__EClassifiersAssignment_10_1_in_rule__EPackageDecl__Alternatives_101408);
                     rule__EPackageDecl__EClassifiersAssignment_10_1();
                     _fsp--;
 
@@ -1813,7 +1813,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:683:1: ( rule__SubEPackageDecl__ESubpackagesAssignment_4_0 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:683:2: rule__SubEPackageDecl__ESubpackagesAssignment_4_0
                     {
-                    pushFollow(FOLLOW_rule__SubEPackageDecl__ESubpackagesAssignment_4_0_in_rule__SubEPackageDecl__Alternatives_41441);
+                    pushFollow(FollowSets000.FOLLOW_rule__SubEPackageDecl__ESubpackagesAssignment_4_0_in_rule__SubEPackageDecl__Alternatives_41441);
                     rule__SubEPackageDecl__ESubpackagesAssignment_4_0();
                     _fsp--;
 
@@ -1837,7 +1837,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:689:1: ( rule__SubEPackageDecl__EClassifiersAssignment_4_1 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:689:2: rule__SubEPackageDecl__EClassifiersAssignment_4_1
                     {
-                    pushFollow(FOLLOW_rule__SubEPackageDecl__EClassifiersAssignment_4_1_in_rule__SubEPackageDecl__Alternatives_41459);
+                    pushFollow(FollowSets000.FOLLOW_rule__SubEPackageDecl__EClassifiersAssignment_4_1_in_rule__SubEPackageDecl__Alternatives_41459);
                     rule__SubEPackageDecl__EClassifiersAssignment_4_1();
                     _fsp--;
 
@@ -1886,7 +1886,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:704:1: ruleEClassDecl
                     {
                      before(grammarAccess.getEClassifierDeclAccess().getEClassDeclParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleEClassDecl_in_rule__EClassifierDecl__Alternatives1492);
+                    pushFollow(FollowSets000.FOLLOW_ruleEClassDecl_in_rule__EClassifierDecl__Alternatives1492);
                     ruleEClassDecl();
                     _fsp--;
 
@@ -1904,7 +1904,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:710:1: ruleEDataTypeDecl
                     {
                      before(grammarAccess.getEClassifierDeclAccess().getEDataTypeDeclParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleEDataTypeDecl_in_rule__EClassifierDecl__Alternatives1509);
+                    pushFollow(FollowSets000.FOLLOW_ruleEDataTypeDecl_in_rule__EClassifierDecl__Alternatives1509);
                     ruleEDataTypeDecl();
                     _fsp--;
 
@@ -1953,7 +1953,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:727:1: ( rule__EDataTypeDecl__Group_0__0 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:727:2: rule__EDataTypeDecl__Group_0__0
                     {
-                    pushFollow(FOLLOW_rule__EDataTypeDecl__Group_0__0_in_rule__EDataTypeDecl__Alternatives1541);
+                    pushFollow(FollowSets000.FOLLOW_rule__EDataTypeDecl__Group_0__0_in_rule__EDataTypeDecl__Alternatives1541);
                     rule__EDataTypeDecl__Group_0__0();
                     _fsp--;
 
@@ -1974,7 +1974,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:732:1: ruleEEnumDecl
                     {
                      before(grammarAccess.getEDataTypeDeclAccess().getEEnumDeclParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleEEnumDecl_in_rule__EDataTypeDecl__Alternatives1559);
+                    pushFollow(FollowSets000.FOLLOW_ruleEEnumDecl_in_rule__EDataTypeDecl__Alternatives1559);
                     ruleEEnumDecl();
                     _fsp--;
 
@@ -2036,7 +2036,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:749:1: ( rule__EClassDecl__InterfaceAssignment_2_0 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:749:2: rule__EClassDecl__InterfaceAssignment_2_0
                     {
-                    pushFollow(FOLLOW_rule__EClassDecl__InterfaceAssignment_2_0_in_rule__EClassDecl__Alternatives_21591);
+                    pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__InterfaceAssignment_2_0_in_rule__EClassDecl__Alternatives_21591);
                     rule__EClassDecl__InterfaceAssignment_2_0();
                     _fsp--;
 
@@ -2057,7 +2057,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:754:1: 'class'
                     {
                      before(grammarAccess.getEClassDeclAccess().getClassKeyword_2_1()); 
-                    match(input,16,FOLLOW_16_in_rule__EClassDecl__Alternatives_21610); 
+                    match(input,16,FollowSets000.FOLLOW_16_in_rule__EClassDecl__Alternatives_21610); 
                      after(grammarAccess.getEClassDeclAccess().getClassKeyword_2_1()); 
 
                     }
@@ -2103,7 +2103,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:773:1: ( rule__EClassDecl__EStructuralFeaturesAssignment_8_0 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:773:2: rule__EClassDecl__EStructuralFeaturesAssignment_8_0
                     {
-                    pushFollow(FOLLOW_rule__EClassDecl__EStructuralFeaturesAssignment_8_0_in_rule__EClassDecl__Alternatives_81644);
+                    pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__EStructuralFeaturesAssignment_8_0_in_rule__EClassDecl__Alternatives_81644);
                     rule__EClassDecl__EStructuralFeaturesAssignment_8_0();
                     _fsp--;
 
@@ -2127,7 +2127,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:779:1: ( rule__EClassDecl__EOperationsAssignment_8_1 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:779:2: rule__EClassDecl__EOperationsAssignment_8_1
                     {
-                    pushFollow(FOLLOW_rule__EClassDecl__EOperationsAssignment_8_1_in_rule__EClassDecl__Alternatives_81662);
+                    pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__EOperationsAssignment_8_1_in_rule__EClassDecl__Alternatives_81662);
                     rule__EClassDecl__EOperationsAssignment_8_1();
                     _fsp--;
 
@@ -2176,7 +2176,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:794:1: ruleEAttributeDecl
                     {
                      before(grammarAccess.getEStructuralFeatureDeclAccess().getEAttributeDeclParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleEAttributeDecl_in_rule__EStructuralFeatureDecl__Alternatives1695);
+                    pushFollow(FollowSets000.FOLLOW_ruleEAttributeDecl_in_rule__EStructuralFeatureDecl__Alternatives1695);
                     ruleEAttributeDecl();
                     _fsp--;
 
@@ -2194,7 +2194,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:800:1: ruleEReferenceDecl
                     {
                      before(grammarAccess.getEStructuralFeatureDeclAccess().getEReferenceDeclParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleEReferenceDecl_in_rule__EStructuralFeatureDecl__Alternatives1712);
+                    pushFollow(FollowSets000.FOLLOW_ruleEReferenceDecl_in_rule__EStructuralFeatureDecl__Alternatives1712);
                     ruleEReferenceDecl();
                     _fsp--;
 
@@ -2290,7 +2290,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:817:1: ( rule__EAttributeDecl__IDAssignment_1_0 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:817:2: rule__EAttributeDecl__IDAssignment_1_0
                     {
-                    pushFollow(FOLLOW_rule__EAttributeDecl__IDAssignment_1_0_in_rule__EAttributeDecl__Alternatives_11744);
+                    pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__IDAssignment_1_0_in_rule__EAttributeDecl__Alternatives_11744);
                     rule__EAttributeDecl__IDAssignment_1_0();
                     _fsp--;
 
@@ -2314,7 +2314,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:823:1: ( rule__EAttributeDecl__UniqueAssignment_1_1 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:823:2: rule__EAttributeDecl__UniqueAssignment_1_1
                     {
-                    pushFollow(FOLLOW_rule__EAttributeDecl__UniqueAssignment_1_1_in_rule__EAttributeDecl__Alternatives_11762);
+                    pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__UniqueAssignment_1_1_in_rule__EAttributeDecl__Alternatives_11762);
                     rule__EAttributeDecl__UniqueAssignment_1_1();
                     _fsp--;
 
@@ -2338,7 +2338,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:829:1: ( rule__EAttributeDecl__OrderedAssignment_1_2 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:829:2: rule__EAttributeDecl__OrderedAssignment_1_2
                     {
-                    pushFollow(FOLLOW_rule__EAttributeDecl__OrderedAssignment_1_2_in_rule__EAttributeDecl__Alternatives_11780);
+                    pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__OrderedAssignment_1_2_in_rule__EAttributeDecl__Alternatives_11780);
                     rule__EAttributeDecl__OrderedAssignment_1_2();
                     _fsp--;
 
@@ -2362,7 +2362,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:835:1: ( rule__EAttributeDecl__ChangeableAssignment_1_3 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:835:2: rule__EAttributeDecl__ChangeableAssignment_1_3
                     {
-                    pushFollow(FOLLOW_rule__EAttributeDecl__ChangeableAssignment_1_3_in_rule__EAttributeDecl__Alternatives_11798);
+                    pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__ChangeableAssignment_1_3_in_rule__EAttributeDecl__Alternatives_11798);
                     rule__EAttributeDecl__ChangeableAssignment_1_3();
                     _fsp--;
 
@@ -2386,7 +2386,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:841:1: ( rule__EAttributeDecl__VolatileAssignment_1_4 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:841:2: rule__EAttributeDecl__VolatileAssignment_1_4
                     {
-                    pushFollow(FOLLOW_rule__EAttributeDecl__VolatileAssignment_1_4_in_rule__EAttributeDecl__Alternatives_11816);
+                    pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__VolatileAssignment_1_4_in_rule__EAttributeDecl__Alternatives_11816);
                     rule__EAttributeDecl__VolatileAssignment_1_4();
                     _fsp--;
 
@@ -2410,7 +2410,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:847:1: ( rule__EAttributeDecl__TransientAssignment_1_5 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:847:2: rule__EAttributeDecl__TransientAssignment_1_5
                     {
-                    pushFollow(FOLLOW_rule__EAttributeDecl__TransientAssignment_1_5_in_rule__EAttributeDecl__Alternatives_11834);
+                    pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__TransientAssignment_1_5_in_rule__EAttributeDecl__Alternatives_11834);
                     rule__EAttributeDecl__TransientAssignment_1_5();
                     _fsp--;
 
@@ -2434,7 +2434,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:853:1: ( rule__EAttributeDecl__UnsettableAssignment_1_6 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:853:2: rule__EAttributeDecl__UnsettableAssignment_1_6
                     {
-                    pushFollow(FOLLOW_rule__EAttributeDecl__UnsettableAssignment_1_6_in_rule__EAttributeDecl__Alternatives_11852);
+                    pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__UnsettableAssignment_1_6_in_rule__EAttributeDecl__Alternatives_11852);
                     rule__EAttributeDecl__UnsettableAssignment_1_6();
                     _fsp--;
 
@@ -2458,7 +2458,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:859:1: ( rule__EAttributeDecl__DerivedAssignment_1_7 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:859:2: rule__EAttributeDecl__DerivedAssignment_1_7
                     {
-                    pushFollow(FOLLOW_rule__EAttributeDecl__DerivedAssignment_1_7_in_rule__EAttributeDecl__Alternatives_11870);
+                    pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__DerivedAssignment_1_7_in_rule__EAttributeDecl__Alternatives_11870);
                     rule__EAttributeDecl__DerivedAssignment_1_7();
                     _fsp--;
 
@@ -2557,7 +2557,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:875:1: ( rule__EReferenceDecl__ResolveProxiesAssignment_1_0 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:875:2: rule__EReferenceDecl__ResolveProxiesAssignment_1_0
                     {
-                    pushFollow(FOLLOW_rule__EReferenceDecl__ResolveProxiesAssignment_1_0_in_rule__EReferenceDecl__Alternatives_11903);
+                    pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__ResolveProxiesAssignment_1_0_in_rule__EReferenceDecl__Alternatives_11903);
                     rule__EReferenceDecl__ResolveProxiesAssignment_1_0();
                     _fsp--;
 
@@ -2581,7 +2581,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:881:1: ( rule__EReferenceDecl__UniqueAssignment_1_1 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:881:2: rule__EReferenceDecl__UniqueAssignment_1_1
                     {
-                    pushFollow(FOLLOW_rule__EReferenceDecl__UniqueAssignment_1_1_in_rule__EReferenceDecl__Alternatives_11921);
+                    pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__UniqueAssignment_1_1_in_rule__EReferenceDecl__Alternatives_11921);
                     rule__EReferenceDecl__UniqueAssignment_1_1();
                     _fsp--;
 
@@ -2605,7 +2605,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:887:1: ( rule__EReferenceDecl__OrderedAssignment_1_2 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:887:2: rule__EReferenceDecl__OrderedAssignment_1_2
                     {
-                    pushFollow(FOLLOW_rule__EReferenceDecl__OrderedAssignment_1_2_in_rule__EReferenceDecl__Alternatives_11939);
+                    pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__OrderedAssignment_1_2_in_rule__EReferenceDecl__Alternatives_11939);
                     rule__EReferenceDecl__OrderedAssignment_1_2();
                     _fsp--;
 
@@ -2629,7 +2629,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:893:1: ( rule__EReferenceDecl__ChangeableAssignment_1_3 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:893:2: rule__EReferenceDecl__ChangeableAssignment_1_3
                     {
-                    pushFollow(FOLLOW_rule__EReferenceDecl__ChangeableAssignment_1_3_in_rule__EReferenceDecl__Alternatives_11957);
+                    pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__ChangeableAssignment_1_3_in_rule__EReferenceDecl__Alternatives_11957);
                     rule__EReferenceDecl__ChangeableAssignment_1_3();
                     _fsp--;
 
@@ -2653,7 +2653,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:899:1: ( rule__EReferenceDecl__VolatileAssignment_1_4 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:899:2: rule__EReferenceDecl__VolatileAssignment_1_4
                     {
-                    pushFollow(FOLLOW_rule__EReferenceDecl__VolatileAssignment_1_4_in_rule__EReferenceDecl__Alternatives_11975);
+                    pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__VolatileAssignment_1_4_in_rule__EReferenceDecl__Alternatives_11975);
                     rule__EReferenceDecl__VolatileAssignment_1_4();
                     _fsp--;
 
@@ -2677,7 +2677,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:905:1: ( rule__EReferenceDecl__TransientAssignment_1_5 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:905:2: rule__EReferenceDecl__TransientAssignment_1_5
                     {
-                    pushFollow(FOLLOW_rule__EReferenceDecl__TransientAssignment_1_5_in_rule__EReferenceDecl__Alternatives_11993);
+                    pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__TransientAssignment_1_5_in_rule__EReferenceDecl__Alternatives_11993);
                     rule__EReferenceDecl__TransientAssignment_1_5();
                     _fsp--;
 
@@ -2701,7 +2701,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:911:1: ( rule__EReferenceDecl__UnsettableAssignment_1_6 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:911:2: rule__EReferenceDecl__UnsettableAssignment_1_6
                     {
-                    pushFollow(FOLLOW_rule__EReferenceDecl__UnsettableAssignment_1_6_in_rule__EReferenceDecl__Alternatives_12011);
+                    pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__UnsettableAssignment_1_6_in_rule__EReferenceDecl__Alternatives_12011);
                     rule__EReferenceDecl__UnsettableAssignment_1_6();
                     _fsp--;
 
@@ -2725,7 +2725,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:917:1: ( rule__EReferenceDecl__DerivedAssignment_1_7 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:917:2: rule__EReferenceDecl__DerivedAssignment_1_7
                     {
-                    pushFollow(FOLLOW_rule__EReferenceDecl__DerivedAssignment_1_7_in_rule__EReferenceDecl__Alternatives_12029);
+                    pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__DerivedAssignment_1_7_in_rule__EReferenceDecl__Alternatives_12029);
                     rule__EReferenceDecl__DerivedAssignment_1_7();
                     _fsp--;
 
@@ -2790,7 +2790,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:933:1: ( rule__EReferenceDecl__ContainmentAssignment_2_0 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:933:2: rule__EReferenceDecl__ContainmentAssignment_2_0
                     {
-                    pushFollow(FOLLOW_rule__EReferenceDecl__ContainmentAssignment_2_0_in_rule__EReferenceDecl__Alternatives_22062);
+                    pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__ContainmentAssignment_2_0_in_rule__EReferenceDecl__Alternatives_22062);
                     rule__EReferenceDecl__ContainmentAssignment_2_0();
                     _fsp--;
 
@@ -2811,7 +2811,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:938:1: 'ref'
                     {
                      before(grammarAccess.getEReferenceDeclAccess().getRefKeyword_2_1()); 
-                    match(input,17,FOLLOW_17_in_rule__EReferenceDecl__Alternatives_22081); 
+                    match(input,17,FollowSets000.FOLLOW_17_in_rule__EReferenceDecl__Alternatives_22081); 
                      after(grammarAccess.getEReferenceDeclAccess().getRefKeyword_2_1()); 
 
                     }
@@ -2870,7 +2870,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:957:1: ( rule__EGenericTypeReferenceDecl__Group_0__0 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:957:2: rule__EGenericTypeReferenceDecl__Group_0__0
                     {
-                    pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_0__0_in_rule__EGenericTypeReferenceDecl__Alternatives2115);
+                    pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeReferenceDecl__Group_0__0_in_rule__EGenericTypeReferenceDecl__Alternatives2115);
                     rule__EGenericTypeReferenceDecl__Group_0__0();
                     _fsp--;
 
@@ -2894,7 +2894,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:963:1: ( rule__EGenericTypeReferenceDecl__Group_1__0 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:963:2: rule__EGenericTypeReferenceDecl__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_1__0_in_rule__EGenericTypeReferenceDecl__Alternatives2133);
+                    pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeReferenceDecl__Group_1__0_in_rule__EGenericTypeReferenceDecl__Alternatives2133);
                     rule__EGenericTypeReferenceDecl__Group_1__0();
                     _fsp--;
 
@@ -2968,7 +2968,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:979:1: ( rule__EGenericTypeDecl__Group_0__0 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:979:2: rule__EGenericTypeDecl__Group_0__0
                     {
-                    pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_0__0_in_rule__EGenericTypeDecl__Alternatives2166);
+                    pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeDecl__Group_0__0_in_rule__EGenericTypeDecl__Alternatives2166);
                     rule__EGenericTypeDecl__Group_0__0();
                     _fsp--;
 
@@ -2992,7 +2992,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:985:1: ( rule__EGenericTypeDecl__Group_1__0 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:985:2: rule__EGenericTypeDecl__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_1__0_in_rule__EGenericTypeDecl__Alternatives2184);
+                    pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeDecl__Group_1__0_in_rule__EGenericTypeDecl__Alternatives2184);
                     rule__EGenericTypeDecl__Group_1__0();
                     _fsp--;
 
@@ -3016,7 +3016,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:991:1: ( rule__EGenericTypeDecl__Group_2__0 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:991:2: rule__EGenericTypeDecl__Group_2__0
                     {
-                    pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_2__0_in_rule__EGenericTypeDecl__Alternatives2202);
+                    pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeDecl__Group_2__0_in_rule__EGenericTypeDecl__Alternatives2202);
                     rule__EGenericTypeDecl__Group_2__0();
                     _fsp--;
 
@@ -3081,7 +3081,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1007:1: ( rule__EGenericTypeDecl__Group_2_1_0__0 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1007:2: rule__EGenericTypeDecl__Group_2_1_0__0
                     {
-                    pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_2_1_0__0_in_rule__EGenericTypeDecl__Alternatives_2_12235);
+                    pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeDecl__Group_2_1_0__0_in_rule__EGenericTypeDecl__Alternatives_2_12235);
                     rule__EGenericTypeDecl__Group_2_1_0__0();
                     _fsp--;
 
@@ -3105,7 +3105,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1013:1: ( rule__EGenericTypeDecl__Group_2_1_1__0 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1013:2: rule__EGenericTypeDecl__Group_2_1_1__0
                     {
-                    pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_2_1_1__0_in_rule__EGenericTypeDecl__Alternatives_2_12253);
+                    pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeDecl__Group_2_1_1__0_in_rule__EGenericTypeDecl__Alternatives_2_12253);
                     rule__EGenericTypeDecl__Group_2_1_1__0();
                     _fsp--;
 
@@ -3170,7 +3170,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1029:1: ( rule__EOperationDecl__UniqueAssignment_1_0 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1029:2: rule__EOperationDecl__UniqueAssignment_1_0
                     {
-                    pushFollow(FOLLOW_rule__EOperationDecl__UniqueAssignment_1_0_in_rule__EOperationDecl__Alternatives_12286);
+                    pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__UniqueAssignment_1_0_in_rule__EOperationDecl__Alternatives_12286);
                     rule__EOperationDecl__UniqueAssignment_1_0();
                     _fsp--;
 
@@ -3194,7 +3194,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1035:1: ( rule__EOperationDecl__OrderedAssignment_1_1 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1035:2: rule__EOperationDecl__OrderedAssignment_1_1
                     {
-                    pushFollow(FOLLOW_rule__EOperationDecl__OrderedAssignment_1_1_in_rule__EOperationDecl__Alternatives_12304);
+                    pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__OrderedAssignment_1_1_in_rule__EOperationDecl__Alternatives_12304);
                     rule__EOperationDecl__OrderedAssignment_1_1();
                     _fsp--;
 
@@ -3259,7 +3259,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1051:1: ( rule__EOperationDecl__EGenericTypeAssignment_3_0 )
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1051:2: rule__EOperationDecl__EGenericTypeAssignment_3_0
                     {
-                    pushFollow(FOLLOW_rule__EOperationDecl__EGenericTypeAssignment_3_0_in_rule__EOperationDecl__Alternatives_32337);
+                    pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__EGenericTypeAssignment_3_0_in_rule__EOperationDecl__Alternatives_32337);
                     rule__EOperationDecl__EGenericTypeAssignment_3_0();
                     _fsp--;
 
@@ -3280,7 +3280,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1056:1: 'void'
                     {
                      before(grammarAccess.getEOperationDeclAccess().getVoidKeyword_3_1()); 
-                    match(input,18,FOLLOW_18_in_rule__EOperationDecl__Alternatives_32356); 
+                    match(input,18,FollowSets000.FOLLOW_18_in_rule__EOperationDecl__Alternatives_32356); 
                      after(grammarAccess.getEOperationDeclAccess().getVoidKeyword_3_1()); 
 
                     }
@@ -3336,7 +3336,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1074:1: '.'
                     {
                      before(grammarAccess.getQIDAccess().getFullStopKeyword_1_0_0()); 
-                    match(input,19,FOLLOW_19_in_rule__QID__Alternatives_1_02391); 
+                    match(input,19,FollowSets000.FOLLOW_19_in_rule__QID__Alternatives_1_02391); 
                      after(grammarAccess.getQIDAccess().getFullStopKeyword_1_0_0()); 
 
                     }
@@ -3351,7 +3351,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1082:1: '$'
                     {
                      before(grammarAccess.getQIDAccess().getDollarSignKeyword_1_0_1()); 
-                    match(input,20,FOLLOW_20_in_rule__QID__Alternatives_1_02411); 
+                    match(input,20,FollowSets000.FOLLOW_20_in_rule__QID__Alternatives_1_02411); 
                      after(grammarAccess.getQIDAccess().getDollarSignKeyword_1_0_1()); 
 
                     }
@@ -3407,7 +3407,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1100:1: RULE_STRING
                     {
                      before(grammarAccess.getSTRING_OR_QIDAccess().getSTRINGTerminalRuleCall_0()); 
-                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__STRING_OR_QID__Alternatives2445); 
+                    match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__STRING_OR_QID__Alternatives2445); 
                      after(grammarAccess.getSTRING_OR_QIDAccess().getSTRINGTerminalRuleCall_0()); 
 
                     }
@@ -3422,7 +3422,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1106:1: ruleQID
                     {
                      before(grammarAccess.getSTRING_OR_QIDAccess().getQIDParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleQID_in_rule__STRING_OR_QID__Alternatives2462);
+                    pushFollow(FollowSets000.FOLLOW_ruleQID_in_rule__STRING_OR_QID__Alternatives2462);
                     ruleQID();
                     _fsp--;
 
@@ -3479,7 +3479,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1125:2: rule__EcoreDsl__MetamodelDeclarationsAssignment_0
             	    {
-            	    pushFollow(FOLLOW_rule__EcoreDsl__MetamodelDeclarationsAssignment_0_in_rule__EcoreDsl__Group__02496);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EcoreDsl__MetamodelDeclarationsAssignment_0_in_rule__EcoreDsl__Group__02496);
             	    rule__EcoreDsl__MetamodelDeclarationsAssignment_0();
             	    _fsp--;
 
@@ -3496,7 +3496,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EcoreDsl__Group__1_in_rule__EcoreDsl__Group__02506);
+            pushFollow(FollowSets000.FOLLOW_rule__EcoreDsl__Group__1_in_rule__EcoreDsl__Group__02506);
             rule__EcoreDsl__Group__1();
             _fsp--;
 
@@ -3535,7 +3535,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1143:1: ( rule__EcoreDsl__PackageAssignment_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1143:2: rule__EcoreDsl__PackageAssignment_1
             {
-            pushFollow(FOLLOW_rule__EcoreDsl__PackageAssignment_1_in_rule__EcoreDsl__Group__12534);
+            pushFollow(FollowSets000.FOLLOW_rule__EcoreDsl__PackageAssignment_1_in_rule__EcoreDsl__Group__12534);
             rule__EcoreDsl__PackageAssignment_1();
             _fsp--;
 
@@ -3578,12 +3578,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1163:1: 'import'
             {
              before(grammarAccess.getReferencedMetamodelAccess().getImportKeyword_0()); 
-            match(input,21,FOLLOW_21_in_rule__ReferencedMetamodel__Group__02573); 
+            match(input,21,FollowSets000.FOLLOW_21_in_rule__ReferencedMetamodel__Group__02573); 
              after(grammarAccess.getReferencedMetamodelAccess().getImportKeyword_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__ReferencedMetamodel__Group__1_in_rule__ReferencedMetamodel__Group__02583);
+            pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group__1_in_rule__ReferencedMetamodel__Group__02583);
             rule__ReferencedMetamodel__Group__1();
             _fsp--;
 
@@ -3630,7 +3630,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1184:2: rule__ReferencedMetamodel__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__ReferencedMetamodel__Group_1__0_in_rule__ReferencedMetamodel__Group__12611);
+                    pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group_1__0_in_rule__ReferencedMetamodel__Group__12611);
                     rule__ReferencedMetamodel__Group_1__0();
                     _fsp--;
 
@@ -3644,7 +3644,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__ReferencedMetamodel__Group__2_in_rule__ReferencedMetamodel__Group__12621);
+            pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group__2_in_rule__ReferencedMetamodel__Group__12621);
             rule__ReferencedMetamodel__Group__2();
             _fsp--;
 
@@ -3683,7 +3683,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1202:1: ( rule__ReferencedMetamodel__EPackageAssignment_2 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1202:2: rule__ReferencedMetamodel__EPackageAssignment_2
             {
-            pushFollow(FOLLOW_rule__ReferencedMetamodel__EPackageAssignment_2_in_rule__ReferencedMetamodel__Group__22649);
+            pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__EPackageAssignment_2_in_rule__ReferencedMetamodel__Group__22649);
             rule__ReferencedMetamodel__EPackageAssignment_2();
             _fsp--;
 
@@ -3694,7 +3694,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__ReferencedMetamodel__Group__3_in_rule__ReferencedMetamodel__Group__22658);
+            pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group__3_in_rule__ReferencedMetamodel__Group__22658);
             rule__ReferencedMetamodel__Group__3();
             _fsp--;
 
@@ -3730,7 +3730,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1219:1: ';'
             {
              before(grammarAccess.getReferencedMetamodelAccess().getSemicolonKeyword_3()); 
-            match(input,22,FOLLOW_22_in_rule__ReferencedMetamodel__Group__32687); 
+            match(input,22,FollowSets000.FOLLOW_22_in_rule__ReferencedMetamodel__Group__32687); 
              after(grammarAccess.getReferencedMetamodelAccess().getSemicolonKeyword_3()); 
 
             }
@@ -3770,7 +3770,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1247:1: ( rule__ReferencedMetamodel__AliasAssignment_1_0 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1247:2: rule__ReferencedMetamodel__AliasAssignment_1_0
             {
-            pushFollow(FOLLOW_rule__ReferencedMetamodel__AliasAssignment_1_0_in_rule__ReferencedMetamodel__Group_1__02730);
+            pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__AliasAssignment_1_0_in_rule__ReferencedMetamodel__Group_1__02730);
             rule__ReferencedMetamodel__AliasAssignment_1_0();
             _fsp--;
 
@@ -3781,7 +3781,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__ReferencedMetamodel__Group_1__1_in_rule__ReferencedMetamodel__Group_1__02739);
+            pushFollow(FollowSets000.FOLLOW_rule__ReferencedMetamodel__Group_1__1_in_rule__ReferencedMetamodel__Group_1__02739);
             rule__ReferencedMetamodel__Group_1__1();
             _fsp--;
 
@@ -3817,7 +3817,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1264:1: '='
             {
              before(grammarAccess.getReferencedMetamodelAccess().getEqualsSignKeyword_1_1()); 
-            match(input,23,FOLLOW_23_in_rule__ReferencedMetamodel__Group_1__12768); 
+            match(input,23,FollowSets000.FOLLOW_23_in_rule__ReferencedMetamodel__Group_1__12768); 
              after(grammarAccess.getReferencedMetamodelAccess().getEqualsSignKeyword_1_1()); 
 
             }
@@ -3869,7 +3869,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1288:2: rule__EPackageDecl__EAnnotationsAssignment_0
             	    {
-            	    pushFollow(FOLLOW_rule__EPackageDecl__EAnnotationsAssignment_0_in_rule__EPackageDecl__Group__02807);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EPackageDecl__EAnnotationsAssignment_0_in_rule__EPackageDecl__Group__02807);
             	    rule__EPackageDecl__EAnnotationsAssignment_0();
             	    _fsp--;
 
@@ -3886,7 +3886,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EPackageDecl__Group__1_in_rule__EPackageDecl__Group__02817);
+            pushFollow(FollowSets000.FOLLOW_rule__EPackageDecl__Group__1_in_rule__EPackageDecl__Group__02817);
             rule__EPackageDecl__Group__1();
             _fsp--;
 
@@ -3922,12 +3922,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1305:1: 'package'
             {
              before(grammarAccess.getEPackageDeclAccess().getPackageKeyword_1()); 
-            match(input,24,FOLLOW_24_in_rule__EPackageDecl__Group__12846); 
+            match(input,24,FollowSets000.FOLLOW_24_in_rule__EPackageDecl__Group__12846); 
              after(grammarAccess.getEPackageDeclAccess().getPackageKeyword_1()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EPackageDecl__Group__2_in_rule__EPackageDecl__Group__12856);
+            pushFollow(FollowSets000.FOLLOW_rule__EPackageDecl__Group__2_in_rule__EPackageDecl__Group__12856);
             rule__EPackageDecl__Group__2();
             _fsp--;
 
@@ -3966,7 +3966,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1326:1: ( rule__EPackageDecl__NameAssignment_2 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1326:2: rule__EPackageDecl__NameAssignment_2
             {
-            pushFollow(FOLLOW_rule__EPackageDecl__NameAssignment_2_in_rule__EPackageDecl__Group__22884);
+            pushFollow(FollowSets000.FOLLOW_rule__EPackageDecl__NameAssignment_2_in_rule__EPackageDecl__Group__22884);
             rule__EPackageDecl__NameAssignment_2();
             _fsp--;
 
@@ -3977,7 +3977,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EPackageDecl__Group__3_in_rule__EPackageDecl__Group__22893);
+            pushFollow(FollowSets000.FOLLOW_rule__EPackageDecl__Group__3_in_rule__EPackageDecl__Group__22893);
             rule__EPackageDecl__Group__3();
             _fsp--;
 
@@ -4013,12 +4013,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1343:1: 'nsURI'
             {
              before(grammarAccess.getEPackageDeclAccess().getNsURIKeyword_3()); 
-            match(input,25,FOLLOW_25_in_rule__EPackageDecl__Group__32922); 
+            match(input,25,FollowSets000.FOLLOW_25_in_rule__EPackageDecl__Group__32922); 
              after(grammarAccess.getEPackageDeclAccess().getNsURIKeyword_3()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EPackageDecl__Group__4_in_rule__EPackageDecl__Group__32932);
+            pushFollow(FollowSets000.FOLLOW_rule__EPackageDecl__Group__4_in_rule__EPackageDecl__Group__32932);
             rule__EPackageDecl__Group__4();
             _fsp--;
 
@@ -4054,12 +4054,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1363:1: '='
             {
              before(grammarAccess.getEPackageDeclAccess().getEqualsSignKeyword_4()); 
-            match(input,23,FOLLOW_23_in_rule__EPackageDecl__Group__42961); 
+            match(input,23,FollowSets000.FOLLOW_23_in_rule__EPackageDecl__Group__42961); 
              after(grammarAccess.getEPackageDeclAccess().getEqualsSignKeyword_4()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EPackageDecl__Group__5_in_rule__EPackageDecl__Group__42971);
+            pushFollow(FollowSets000.FOLLOW_rule__EPackageDecl__Group__5_in_rule__EPackageDecl__Group__42971);
             rule__EPackageDecl__Group__5();
             _fsp--;
 
@@ -4098,7 +4098,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1384:1: ( rule__EPackageDecl__NsURIAssignment_5 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1384:2: rule__EPackageDecl__NsURIAssignment_5
             {
-            pushFollow(FOLLOW_rule__EPackageDecl__NsURIAssignment_5_in_rule__EPackageDecl__Group__52999);
+            pushFollow(FollowSets000.FOLLOW_rule__EPackageDecl__NsURIAssignment_5_in_rule__EPackageDecl__Group__52999);
             rule__EPackageDecl__NsURIAssignment_5();
             _fsp--;
 
@@ -4109,7 +4109,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EPackageDecl__Group__6_in_rule__EPackageDecl__Group__53008);
+            pushFollow(FollowSets000.FOLLOW_rule__EPackageDecl__Group__6_in_rule__EPackageDecl__Group__53008);
             rule__EPackageDecl__Group__6();
             _fsp--;
 
@@ -4145,12 +4145,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1401:1: 'nsPrefix'
             {
              before(grammarAccess.getEPackageDeclAccess().getNsPrefixKeyword_6()); 
-            match(input,26,FOLLOW_26_in_rule__EPackageDecl__Group__63037); 
+            match(input,26,FollowSets000.FOLLOW_26_in_rule__EPackageDecl__Group__63037); 
              after(grammarAccess.getEPackageDeclAccess().getNsPrefixKeyword_6()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EPackageDecl__Group__7_in_rule__EPackageDecl__Group__63047);
+            pushFollow(FollowSets000.FOLLOW_rule__EPackageDecl__Group__7_in_rule__EPackageDecl__Group__63047);
             rule__EPackageDecl__Group__7();
             _fsp--;
 
@@ -4186,12 +4186,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1421:1: '='
             {
              before(grammarAccess.getEPackageDeclAccess().getEqualsSignKeyword_7()); 
-            match(input,23,FOLLOW_23_in_rule__EPackageDecl__Group__73076); 
+            match(input,23,FollowSets000.FOLLOW_23_in_rule__EPackageDecl__Group__73076); 
              after(grammarAccess.getEPackageDeclAccess().getEqualsSignKeyword_7()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EPackageDecl__Group__8_in_rule__EPackageDecl__Group__73086);
+            pushFollow(FollowSets000.FOLLOW_rule__EPackageDecl__Group__8_in_rule__EPackageDecl__Group__73086);
             rule__EPackageDecl__Group__8();
             _fsp--;
 
@@ -4230,7 +4230,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1442:1: ( rule__EPackageDecl__NsPrefixAssignment_8 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1442:2: rule__EPackageDecl__NsPrefixAssignment_8
             {
-            pushFollow(FOLLOW_rule__EPackageDecl__NsPrefixAssignment_8_in_rule__EPackageDecl__Group__83114);
+            pushFollow(FollowSets000.FOLLOW_rule__EPackageDecl__NsPrefixAssignment_8_in_rule__EPackageDecl__Group__83114);
             rule__EPackageDecl__NsPrefixAssignment_8();
             _fsp--;
 
@@ -4241,7 +4241,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EPackageDecl__Group__9_in_rule__EPackageDecl__Group__83123);
+            pushFollow(FollowSets000.FOLLOW_rule__EPackageDecl__Group__9_in_rule__EPackageDecl__Group__83123);
             rule__EPackageDecl__Group__9();
             _fsp--;
 
@@ -4277,12 +4277,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1459:1: '{'
             {
              before(grammarAccess.getEPackageDeclAccess().getLeftCurlyBracketKeyword_9()); 
-            match(input,27,FOLLOW_27_in_rule__EPackageDecl__Group__93152); 
+            match(input,27,FollowSets000.FOLLOW_27_in_rule__EPackageDecl__Group__93152); 
              after(grammarAccess.getEPackageDeclAccess().getLeftCurlyBracketKeyword_9()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EPackageDecl__Group__10_in_rule__EPackageDecl__Group__93162);
+            pushFollow(FollowSets000.FOLLOW_rule__EPackageDecl__Group__10_in_rule__EPackageDecl__Group__93162);
             rule__EPackageDecl__Group__10();
             _fsp--;
 
@@ -4333,7 +4333,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1480:2: rule__EPackageDecl__Alternatives_10
             	    {
-            	    pushFollow(FOLLOW_rule__EPackageDecl__Alternatives_10_in_rule__EPackageDecl__Group__103190);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EPackageDecl__Alternatives_10_in_rule__EPackageDecl__Group__103190);
             	    rule__EPackageDecl__Alternatives_10();
             	    _fsp--;
 
@@ -4350,7 +4350,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EPackageDecl__Group__11_in_rule__EPackageDecl__Group__103200);
+            pushFollow(FollowSets000.FOLLOW_rule__EPackageDecl__Group__11_in_rule__EPackageDecl__Group__103200);
             rule__EPackageDecl__Group__11();
             _fsp--;
 
@@ -4386,7 +4386,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1497:1: '}'
             {
              before(grammarAccess.getEPackageDeclAccess().getRightCurlyBracketKeyword_11()); 
-            match(input,28,FOLLOW_28_in_rule__EPackageDecl__Group__113229); 
+            match(input,28,FollowSets000.FOLLOW_28_in_rule__EPackageDecl__Group__113229); 
              after(grammarAccess.getEPackageDeclAccess().getRightCurlyBracketKeyword_11()); 
 
             }
@@ -4438,7 +4438,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1541:2: rule__SubEPackageDecl__EAnnotationsAssignment_0
             	    {
-            	    pushFollow(FOLLOW_rule__SubEPackageDecl__EAnnotationsAssignment_0_in_rule__SubEPackageDecl__Group__03288);
+            	    pushFollow(FollowSets000.FOLLOW_rule__SubEPackageDecl__EAnnotationsAssignment_0_in_rule__SubEPackageDecl__Group__03288);
             	    rule__SubEPackageDecl__EAnnotationsAssignment_0();
             	    _fsp--;
 
@@ -4455,7 +4455,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__SubEPackageDecl__Group__1_in_rule__SubEPackageDecl__Group__03298);
+            pushFollow(FollowSets000.FOLLOW_rule__SubEPackageDecl__Group__1_in_rule__SubEPackageDecl__Group__03298);
             rule__SubEPackageDecl__Group__1();
             _fsp--;
 
@@ -4491,12 +4491,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1558:1: 'package'
             {
              before(grammarAccess.getSubEPackageDeclAccess().getPackageKeyword_1()); 
-            match(input,24,FOLLOW_24_in_rule__SubEPackageDecl__Group__13327); 
+            match(input,24,FollowSets000.FOLLOW_24_in_rule__SubEPackageDecl__Group__13327); 
              after(grammarAccess.getSubEPackageDeclAccess().getPackageKeyword_1()); 
 
             }
 
-            pushFollow(FOLLOW_rule__SubEPackageDecl__Group__2_in_rule__SubEPackageDecl__Group__13337);
+            pushFollow(FollowSets000.FOLLOW_rule__SubEPackageDecl__Group__2_in_rule__SubEPackageDecl__Group__13337);
             rule__SubEPackageDecl__Group__2();
             _fsp--;
 
@@ -4535,7 +4535,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1579:1: ( rule__SubEPackageDecl__NameAssignment_2 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1579:2: rule__SubEPackageDecl__NameAssignment_2
             {
-            pushFollow(FOLLOW_rule__SubEPackageDecl__NameAssignment_2_in_rule__SubEPackageDecl__Group__23365);
+            pushFollow(FollowSets000.FOLLOW_rule__SubEPackageDecl__NameAssignment_2_in_rule__SubEPackageDecl__Group__23365);
             rule__SubEPackageDecl__NameAssignment_2();
             _fsp--;
 
@@ -4546,7 +4546,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__SubEPackageDecl__Group__3_in_rule__SubEPackageDecl__Group__23374);
+            pushFollow(FollowSets000.FOLLOW_rule__SubEPackageDecl__Group__3_in_rule__SubEPackageDecl__Group__23374);
             rule__SubEPackageDecl__Group__3();
             _fsp--;
 
@@ -4582,12 +4582,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1596:1: '{'
             {
              before(grammarAccess.getSubEPackageDeclAccess().getLeftCurlyBracketKeyword_3()); 
-            match(input,27,FOLLOW_27_in_rule__SubEPackageDecl__Group__33403); 
+            match(input,27,FollowSets000.FOLLOW_27_in_rule__SubEPackageDecl__Group__33403); 
              after(grammarAccess.getSubEPackageDeclAccess().getLeftCurlyBracketKeyword_3()); 
 
             }
 
-            pushFollow(FOLLOW_rule__SubEPackageDecl__Group__4_in_rule__SubEPackageDecl__Group__33413);
+            pushFollow(FollowSets000.FOLLOW_rule__SubEPackageDecl__Group__4_in_rule__SubEPackageDecl__Group__33413);
             rule__SubEPackageDecl__Group__4();
             _fsp--;
 
@@ -4638,7 +4638,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1617:2: rule__SubEPackageDecl__Alternatives_4
             	    {
-            	    pushFollow(FOLLOW_rule__SubEPackageDecl__Alternatives_4_in_rule__SubEPackageDecl__Group__43441);
+            	    pushFollow(FollowSets000.FOLLOW_rule__SubEPackageDecl__Alternatives_4_in_rule__SubEPackageDecl__Group__43441);
             	    rule__SubEPackageDecl__Alternatives_4();
             	    _fsp--;
 
@@ -4655,7 +4655,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__SubEPackageDecl__Group__5_in_rule__SubEPackageDecl__Group__43451);
+            pushFollow(FollowSets000.FOLLOW_rule__SubEPackageDecl__Group__5_in_rule__SubEPackageDecl__Group__43451);
             rule__SubEPackageDecl__Group__5();
             _fsp--;
 
@@ -4691,7 +4691,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1634:1: '}'
             {
              before(grammarAccess.getSubEPackageDeclAccess().getRightCurlyBracketKeyword_5()); 
-            match(input,28,FOLLOW_28_in_rule__SubEPackageDecl__Group__53480); 
+            match(input,28,FollowSets000.FOLLOW_28_in_rule__SubEPackageDecl__Group__53480); 
              after(grammarAccess.getSubEPackageDeclAccess().getRightCurlyBracketKeyword_5()); 
 
             }
@@ -4743,7 +4743,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1666:2: rule__EDataTypeDecl__EAnnotationsAssignment_0_0
             	    {
-            	    pushFollow(FOLLOW_rule__EDataTypeDecl__EAnnotationsAssignment_0_0_in_rule__EDataTypeDecl__Group_0__03527);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EDataTypeDecl__EAnnotationsAssignment_0_0_in_rule__EDataTypeDecl__Group_0__03527);
             	    rule__EDataTypeDecl__EAnnotationsAssignment_0_0();
             	    _fsp--;
 
@@ -4760,7 +4760,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EDataTypeDecl__Group_0__1_in_rule__EDataTypeDecl__Group_0__03537);
+            pushFollow(FollowSets000.FOLLOW_rule__EDataTypeDecl__Group_0__1_in_rule__EDataTypeDecl__Group_0__03537);
             rule__EDataTypeDecl__Group_0__1();
             _fsp--;
 
@@ -4807,7 +4807,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1684:2: rule__EDataTypeDecl__SerializableAssignment_0_1
                     {
-                    pushFollow(FOLLOW_rule__EDataTypeDecl__SerializableAssignment_0_1_in_rule__EDataTypeDecl__Group_0__13565);
+                    pushFollow(FollowSets000.FOLLOW_rule__EDataTypeDecl__SerializableAssignment_0_1_in_rule__EDataTypeDecl__Group_0__13565);
                     rule__EDataTypeDecl__SerializableAssignment_0_1();
                     _fsp--;
 
@@ -4821,7 +4821,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EDataTypeDecl__Group_0__2_in_rule__EDataTypeDecl__Group_0__13575);
+            pushFollow(FollowSets000.FOLLOW_rule__EDataTypeDecl__Group_0__2_in_rule__EDataTypeDecl__Group_0__13575);
             rule__EDataTypeDecl__Group_0__2();
             _fsp--;
 
@@ -4860,7 +4860,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1702:1: ( rule__EDataTypeDecl__Group_0_2__0 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1702:2: rule__EDataTypeDecl__Group_0_2__0
             {
-            pushFollow(FOLLOW_rule__EDataTypeDecl__Group_0_2__0_in_rule__EDataTypeDecl__Group_0__23603);
+            pushFollow(FollowSets000.FOLLOW_rule__EDataTypeDecl__Group_0_2__0_in_rule__EDataTypeDecl__Group_0__23603);
             rule__EDataTypeDecl__Group_0_2__0();
             _fsp--;
 
@@ -4903,12 +4903,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1724:1: 'datatype'
             {
              before(grammarAccess.getEDataTypeDeclAccess().getDatatypeKeyword_0_2_0()); 
-            match(input,29,FOLLOW_29_in_rule__EDataTypeDecl__Group_0_2__03644); 
+            match(input,29,FollowSets000.FOLLOW_29_in_rule__EDataTypeDecl__Group_0_2__03644); 
              after(grammarAccess.getEDataTypeDeclAccess().getDatatypeKeyword_0_2_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EDataTypeDecl__Group_0_2__1_in_rule__EDataTypeDecl__Group_0_2__03654);
+            pushFollow(FollowSets000.FOLLOW_rule__EDataTypeDecl__Group_0_2__1_in_rule__EDataTypeDecl__Group_0_2__03654);
             rule__EDataTypeDecl__Group_0_2__1();
             _fsp--;
 
@@ -4947,7 +4947,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1745:1: ( rule__EDataTypeDecl__NameAssignment_0_2_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1745:2: rule__EDataTypeDecl__NameAssignment_0_2_1
             {
-            pushFollow(FOLLOW_rule__EDataTypeDecl__NameAssignment_0_2_1_in_rule__EDataTypeDecl__Group_0_2__13682);
+            pushFollow(FollowSets000.FOLLOW_rule__EDataTypeDecl__NameAssignment_0_2_1_in_rule__EDataTypeDecl__Group_0_2__13682);
             rule__EDataTypeDecl__NameAssignment_0_2_1();
             _fsp--;
 
@@ -4958,7 +4958,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EDataTypeDecl__Group_0_2__2_in_rule__EDataTypeDecl__Group_0_2__13691);
+            pushFollow(FollowSets000.FOLLOW_rule__EDataTypeDecl__Group_0_2__2_in_rule__EDataTypeDecl__Group_0_2__13691);
             rule__EDataTypeDecl__Group_0_2__2();
             _fsp--;
 
@@ -4994,12 +4994,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1762:1: ':'
             {
              before(grammarAccess.getEDataTypeDeclAccess().getColonKeyword_0_2_2()); 
-            match(input,30,FOLLOW_30_in_rule__EDataTypeDecl__Group_0_2__23720); 
+            match(input,30,FollowSets000.FOLLOW_30_in_rule__EDataTypeDecl__Group_0_2__23720); 
              after(grammarAccess.getEDataTypeDeclAccess().getColonKeyword_0_2_2()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EDataTypeDecl__Group_0_2__3_in_rule__EDataTypeDecl__Group_0_2__23730);
+            pushFollow(FollowSets000.FOLLOW_rule__EDataTypeDecl__Group_0_2__3_in_rule__EDataTypeDecl__Group_0_2__23730);
             rule__EDataTypeDecl__Group_0_2__3();
             _fsp--;
 
@@ -5038,7 +5038,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1783:1: ( rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_3 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1783:2: rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_3
             {
-            pushFollow(FOLLOW_rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_3_in_rule__EDataTypeDecl__Group_0_2__33758);
+            pushFollow(FollowSets000.FOLLOW_rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_3_in_rule__EDataTypeDecl__Group_0_2__33758);
             rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_3();
             _fsp--;
 
@@ -5049,7 +5049,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EDataTypeDecl__Group_0_2__4_in_rule__EDataTypeDecl__Group_0_2__33767);
+            pushFollow(FollowSets000.FOLLOW_rule__EDataTypeDecl__Group_0_2__4_in_rule__EDataTypeDecl__Group_0_2__33767);
             rule__EDataTypeDecl__Group_0_2__4();
             _fsp--;
 
@@ -5085,7 +5085,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1800:1: ';'
             {
              before(grammarAccess.getEDataTypeDeclAccess().getSemicolonKeyword_0_2_4()); 
-            match(input,22,FOLLOW_22_in_rule__EDataTypeDecl__Group_0_2__43796); 
+            match(input,22,FollowSets000.FOLLOW_22_in_rule__EDataTypeDecl__Group_0_2__43796); 
              after(grammarAccess.getEDataTypeDeclAccess().getSemicolonKeyword_0_2_4()); 
 
             }
@@ -5122,12 +5122,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1829:1: '@'
             {
              before(grammarAccess.getEAnnotationDeclAccess().getCommercialAtKeyword_0()); 
-            match(input,31,FOLLOW_31_in_rule__EAnnotationDecl__Group__03842); 
+            match(input,31,FollowSets000.FOLLOW_31_in_rule__EAnnotationDecl__Group__03842); 
              after(grammarAccess.getEAnnotationDeclAccess().getCommercialAtKeyword_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EAnnotationDecl__Group__1_in_rule__EAnnotationDecl__Group__03852);
+            pushFollow(FollowSets000.FOLLOW_rule__EAnnotationDecl__Group__1_in_rule__EAnnotationDecl__Group__03852);
             rule__EAnnotationDecl__Group__1();
             _fsp--;
 
@@ -5166,7 +5166,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1850:1: ( rule__EAnnotationDecl__SourceAssignment_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1850:2: rule__EAnnotationDecl__SourceAssignment_1
             {
-            pushFollow(FOLLOW_rule__EAnnotationDecl__SourceAssignment_1_in_rule__EAnnotationDecl__Group__13880);
+            pushFollow(FollowSets000.FOLLOW_rule__EAnnotationDecl__SourceAssignment_1_in_rule__EAnnotationDecl__Group__13880);
             rule__EAnnotationDecl__SourceAssignment_1();
             _fsp--;
 
@@ -5177,7 +5177,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EAnnotationDecl__Group__2_in_rule__EAnnotationDecl__Group__13889);
+            pushFollow(FollowSets000.FOLLOW_rule__EAnnotationDecl__Group__2_in_rule__EAnnotationDecl__Group__13889);
             rule__EAnnotationDecl__Group__2();
             _fsp--;
 
@@ -5224,7 +5224,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1868:2: rule__EAnnotationDecl__Group_2__0
                     {
-                    pushFollow(FOLLOW_rule__EAnnotationDecl__Group_2__0_in_rule__EAnnotationDecl__Group__23917);
+                    pushFollow(FollowSets000.FOLLOW_rule__EAnnotationDecl__Group_2__0_in_rule__EAnnotationDecl__Group__23917);
                     rule__EAnnotationDecl__Group_2__0();
                     _fsp--;
 
@@ -5270,12 +5270,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1890:1: '('
             {
              before(grammarAccess.getEAnnotationDeclAccess().getLeftParenthesisKeyword_2_0()); 
-            match(input,32,FOLLOW_32_in_rule__EAnnotationDecl__Group_2__03959); 
+            match(input,32,FollowSets000.FOLLOW_32_in_rule__EAnnotationDecl__Group_2__03959); 
              after(grammarAccess.getEAnnotationDeclAccess().getLeftParenthesisKeyword_2_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EAnnotationDecl__Group_2__1_in_rule__EAnnotationDecl__Group_2__03969);
+            pushFollow(FollowSets000.FOLLOW_rule__EAnnotationDecl__Group_2__1_in_rule__EAnnotationDecl__Group_2__03969);
             rule__EAnnotationDecl__Group_2__1();
             _fsp--;
 
@@ -5314,7 +5314,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1911:1: ( rule__EAnnotationDecl__DetailsAssignment_2_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1911:2: rule__EAnnotationDecl__DetailsAssignment_2_1
             {
-            pushFollow(FOLLOW_rule__EAnnotationDecl__DetailsAssignment_2_1_in_rule__EAnnotationDecl__Group_2__13997);
+            pushFollow(FollowSets000.FOLLOW_rule__EAnnotationDecl__DetailsAssignment_2_1_in_rule__EAnnotationDecl__Group_2__13997);
             rule__EAnnotationDecl__DetailsAssignment_2_1();
             _fsp--;
 
@@ -5325,7 +5325,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EAnnotationDecl__Group_2__2_in_rule__EAnnotationDecl__Group_2__14006);
+            pushFollow(FollowSets000.FOLLOW_rule__EAnnotationDecl__Group_2__2_in_rule__EAnnotationDecl__Group_2__14006);
             rule__EAnnotationDecl__Group_2__2();
             _fsp--;
 
@@ -5376,7 +5376,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1929:2: rule__EAnnotationDecl__Group_2_2__0
             	    {
-            	    pushFollow(FOLLOW_rule__EAnnotationDecl__Group_2_2__0_in_rule__EAnnotationDecl__Group_2__24034);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EAnnotationDecl__Group_2_2__0_in_rule__EAnnotationDecl__Group_2__24034);
             	    rule__EAnnotationDecl__Group_2_2__0();
             	    _fsp--;
 
@@ -5393,7 +5393,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EAnnotationDecl__Group_2__3_in_rule__EAnnotationDecl__Group_2__24044);
+            pushFollow(FollowSets000.FOLLOW_rule__EAnnotationDecl__Group_2__3_in_rule__EAnnotationDecl__Group_2__24044);
             rule__EAnnotationDecl__Group_2__3();
             _fsp--;
 
@@ -5429,7 +5429,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1946:1: ')'
             {
              before(grammarAccess.getEAnnotationDeclAccess().getRightParenthesisKeyword_2_3()); 
-            match(input,33,FOLLOW_33_in_rule__EAnnotationDecl__Group_2__34073); 
+            match(input,33,FollowSets000.FOLLOW_33_in_rule__EAnnotationDecl__Group_2__34073); 
              after(grammarAccess.getEAnnotationDeclAccess().getRightParenthesisKeyword_2_3()); 
 
             }
@@ -5466,12 +5466,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1973:1: ','
             {
              before(grammarAccess.getEAnnotationDeclAccess().getCommaKeyword_2_2_0()); 
-            match(input,34,FOLLOW_34_in_rule__EAnnotationDecl__Group_2_2__04117); 
+            match(input,34,FollowSets000.FOLLOW_34_in_rule__EAnnotationDecl__Group_2_2__04117); 
              after(grammarAccess.getEAnnotationDeclAccess().getCommaKeyword_2_2_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EAnnotationDecl__Group_2_2__1_in_rule__EAnnotationDecl__Group_2_2__04127);
+            pushFollow(FollowSets000.FOLLOW_rule__EAnnotationDecl__Group_2_2__1_in_rule__EAnnotationDecl__Group_2_2__04127);
             rule__EAnnotationDecl__Group_2_2__1();
             _fsp--;
 
@@ -5510,7 +5510,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1994:1: ( rule__EAnnotationDecl__DetailsAssignment_2_2_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:1994:2: rule__EAnnotationDecl__DetailsAssignment_2_2_1
             {
-            pushFollow(FOLLOW_rule__EAnnotationDecl__DetailsAssignment_2_2_1_in_rule__EAnnotationDecl__Group_2_2__14155);
+            pushFollow(FollowSets000.FOLLOW_rule__EAnnotationDecl__DetailsAssignment_2_2_1_in_rule__EAnnotationDecl__Group_2_2__14155);
             rule__EAnnotationDecl__DetailsAssignment_2_2_1();
             _fsp--;
 
@@ -5568,7 +5568,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2015:2: rule__EClassDecl__EAnnotationsAssignment_0
             	    {
-            	    pushFollow(FOLLOW_rule__EClassDecl__EAnnotationsAssignment_0_in_rule__EClassDecl__Group__04193);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__EAnnotationsAssignment_0_in_rule__EClassDecl__Group__04193);
             	    rule__EClassDecl__EAnnotationsAssignment_0();
             	    _fsp--;
 
@@ -5585,7 +5585,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EClassDecl__Group__1_in_rule__EClassDecl__Group__04203);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Group__1_in_rule__EClassDecl__Group__04203);
             rule__EClassDecl__Group__1();
             _fsp--;
 
@@ -5632,7 +5632,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2033:2: rule__EClassDecl__AbstractAssignment_1
                     {
-                    pushFollow(FOLLOW_rule__EClassDecl__AbstractAssignment_1_in_rule__EClassDecl__Group__14231);
+                    pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__AbstractAssignment_1_in_rule__EClassDecl__Group__14231);
                     rule__EClassDecl__AbstractAssignment_1();
                     _fsp--;
 
@@ -5646,7 +5646,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EClassDecl__Group__2_in_rule__EClassDecl__Group__14241);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Group__2_in_rule__EClassDecl__Group__14241);
             rule__EClassDecl__Group__2();
             _fsp--;
 
@@ -5685,7 +5685,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2051:1: ( rule__EClassDecl__Alternatives_2 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2051:2: rule__EClassDecl__Alternatives_2
             {
-            pushFollow(FOLLOW_rule__EClassDecl__Alternatives_2_in_rule__EClassDecl__Group__24269);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Alternatives_2_in_rule__EClassDecl__Group__24269);
             rule__EClassDecl__Alternatives_2();
             _fsp--;
 
@@ -5696,7 +5696,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EClassDecl__Group__3_in_rule__EClassDecl__Group__24278);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Group__3_in_rule__EClassDecl__Group__24278);
             rule__EClassDecl__Group__3();
             _fsp--;
 
@@ -5735,7 +5735,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2069:1: ( rule__EClassDecl__NameAssignment_3 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2069:2: rule__EClassDecl__NameAssignment_3
             {
-            pushFollow(FOLLOW_rule__EClassDecl__NameAssignment_3_in_rule__EClassDecl__Group__34306);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__NameAssignment_3_in_rule__EClassDecl__Group__34306);
             rule__EClassDecl__NameAssignment_3();
             _fsp--;
 
@@ -5746,7 +5746,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EClassDecl__Group__4_in_rule__EClassDecl__Group__34315);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Group__4_in_rule__EClassDecl__Group__34315);
             rule__EClassDecl__Group__4();
             _fsp--;
 
@@ -5793,7 +5793,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2087:2: rule__EClassDecl__Group_4__0
                     {
-                    pushFollow(FOLLOW_rule__EClassDecl__Group_4__0_in_rule__EClassDecl__Group__44343);
+                    pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Group_4__0_in_rule__EClassDecl__Group__44343);
                     rule__EClassDecl__Group_4__0();
                     _fsp--;
 
@@ -5807,7 +5807,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EClassDecl__Group__5_in_rule__EClassDecl__Group__44353);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Group__5_in_rule__EClassDecl__Group__44353);
             rule__EClassDecl__Group__5();
             _fsp--;
 
@@ -5854,7 +5854,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2105:2: rule__EClassDecl__Group_5__0
                     {
-                    pushFollow(FOLLOW_rule__EClassDecl__Group_5__0_in_rule__EClassDecl__Group__54381);
+                    pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Group_5__0_in_rule__EClassDecl__Group__54381);
                     rule__EClassDecl__Group_5__0();
                     _fsp--;
 
@@ -5868,7 +5868,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EClassDecl__Group__6_in_rule__EClassDecl__Group__54391);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Group__6_in_rule__EClassDecl__Group__54391);
             rule__EClassDecl__Group__6();
             _fsp--;
 
@@ -5915,7 +5915,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2123:2: rule__EClassDecl__Group_6__0
                     {
-                    pushFollow(FOLLOW_rule__EClassDecl__Group_6__0_in_rule__EClassDecl__Group__64419);
+                    pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Group_6__0_in_rule__EClassDecl__Group__64419);
                     rule__EClassDecl__Group_6__0();
                     _fsp--;
 
@@ -5929,7 +5929,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EClassDecl__Group__7_in_rule__EClassDecl__Group__64429);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Group__7_in_rule__EClassDecl__Group__64429);
             rule__EClassDecl__Group__7();
             _fsp--;
 
@@ -5965,12 +5965,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2140:1: '{'
             {
              before(grammarAccess.getEClassDeclAccess().getLeftCurlyBracketKeyword_7()); 
-            match(input,27,FOLLOW_27_in_rule__EClassDecl__Group__74458); 
+            match(input,27,FollowSets000.FOLLOW_27_in_rule__EClassDecl__Group__74458); 
              after(grammarAccess.getEClassDeclAccess().getLeftCurlyBracketKeyword_7()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EClassDecl__Group__8_in_rule__EClassDecl__Group__74468);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Group__8_in_rule__EClassDecl__Group__74468);
             rule__EClassDecl__Group__8();
             _fsp--;
 
@@ -6021,7 +6021,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2161:2: rule__EClassDecl__Alternatives_8
             	    {
-            	    pushFollow(FOLLOW_rule__EClassDecl__Alternatives_8_in_rule__EClassDecl__Group__84496);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Alternatives_8_in_rule__EClassDecl__Group__84496);
             	    rule__EClassDecl__Alternatives_8();
             	    _fsp--;
 
@@ -6038,7 +6038,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EClassDecl__Group__9_in_rule__EClassDecl__Group__84506);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Group__9_in_rule__EClassDecl__Group__84506);
             rule__EClassDecl__Group__9();
             _fsp--;
 
@@ -6074,7 +6074,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2178:1: '}'
             {
              before(grammarAccess.getEClassDeclAccess().getRightCurlyBracketKeyword_9()); 
-            match(input,28,FOLLOW_28_in_rule__EClassDecl__Group__94535); 
+            match(input,28,FollowSets000.FOLLOW_28_in_rule__EClassDecl__Group__94535); 
              after(grammarAccess.getEClassDeclAccess().getRightCurlyBracketKeyword_9()); 
 
             }
@@ -6111,12 +6111,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2217:1: '<'
             {
              before(grammarAccess.getEClassDeclAccess().getLessThanSignKeyword_4_0()); 
-            match(input,35,FOLLOW_35_in_rule__EClassDecl__Group_4__04591); 
+            match(input,35,FollowSets000.FOLLOW_35_in_rule__EClassDecl__Group_4__04591); 
              after(grammarAccess.getEClassDeclAccess().getLessThanSignKeyword_4_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EClassDecl__Group_4__1_in_rule__EClassDecl__Group_4__04601);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Group_4__1_in_rule__EClassDecl__Group_4__04601);
             rule__EClassDecl__Group_4__1();
             _fsp--;
 
@@ -6155,7 +6155,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2238:1: ( rule__EClassDecl__ETypeParametersAssignment_4_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2238:2: rule__EClassDecl__ETypeParametersAssignment_4_1
             {
-            pushFollow(FOLLOW_rule__EClassDecl__ETypeParametersAssignment_4_1_in_rule__EClassDecl__Group_4__14629);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__ETypeParametersAssignment_4_1_in_rule__EClassDecl__Group_4__14629);
             rule__EClassDecl__ETypeParametersAssignment_4_1();
             _fsp--;
 
@@ -6166,7 +6166,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EClassDecl__Group_4__2_in_rule__EClassDecl__Group_4__14638);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Group_4__2_in_rule__EClassDecl__Group_4__14638);
             rule__EClassDecl__Group_4__2();
             _fsp--;
 
@@ -6217,7 +6217,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2256:2: rule__EClassDecl__Group_4_2__0
             	    {
-            	    pushFollow(FOLLOW_rule__EClassDecl__Group_4_2__0_in_rule__EClassDecl__Group_4__24666);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Group_4_2__0_in_rule__EClassDecl__Group_4__24666);
             	    rule__EClassDecl__Group_4_2__0();
             	    _fsp--;
 
@@ -6234,7 +6234,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EClassDecl__Group_4__3_in_rule__EClassDecl__Group_4__24676);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Group_4__3_in_rule__EClassDecl__Group_4__24676);
             rule__EClassDecl__Group_4__3();
             _fsp--;
 
@@ -6270,7 +6270,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2273:1: '>'
             {
              before(grammarAccess.getEClassDeclAccess().getGreaterThanSignKeyword_4_3()); 
-            match(input,36,FOLLOW_36_in_rule__EClassDecl__Group_4__34705); 
+            match(input,36,FollowSets000.FOLLOW_36_in_rule__EClassDecl__Group_4__34705); 
              after(grammarAccess.getEClassDeclAccess().getGreaterThanSignKeyword_4_3()); 
 
             }
@@ -6307,12 +6307,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2300:1: ','
             {
              before(grammarAccess.getEClassDeclAccess().getCommaKeyword_4_2_0()); 
-            match(input,34,FOLLOW_34_in_rule__EClassDecl__Group_4_2__04749); 
+            match(input,34,FollowSets000.FOLLOW_34_in_rule__EClassDecl__Group_4_2__04749); 
              after(grammarAccess.getEClassDeclAccess().getCommaKeyword_4_2_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EClassDecl__Group_4_2__1_in_rule__EClassDecl__Group_4_2__04759);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Group_4_2__1_in_rule__EClassDecl__Group_4_2__04759);
             rule__EClassDecl__Group_4_2__1();
             _fsp--;
 
@@ -6351,7 +6351,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2321:1: ( rule__EClassDecl__ETypeParametersAssignment_4_2_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2321:2: rule__EClassDecl__ETypeParametersAssignment_4_2_1
             {
-            pushFollow(FOLLOW_rule__EClassDecl__ETypeParametersAssignment_4_2_1_in_rule__EClassDecl__Group_4_2__14787);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__ETypeParametersAssignment_4_2_1_in_rule__EClassDecl__Group_4_2__14787);
             rule__EClassDecl__ETypeParametersAssignment_4_2_1();
             _fsp--;
 
@@ -6394,12 +6394,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2341:1: 'extends'
             {
              before(grammarAccess.getEClassDeclAccess().getExtendsKeyword_5_0()); 
-            match(input,37,FOLLOW_37_in_rule__EClassDecl__Group_5__04826); 
+            match(input,37,FollowSets000.FOLLOW_37_in_rule__EClassDecl__Group_5__04826); 
              after(grammarAccess.getEClassDeclAccess().getExtendsKeyword_5_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EClassDecl__Group_5__1_in_rule__EClassDecl__Group_5__04836);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Group_5__1_in_rule__EClassDecl__Group_5__04836);
             rule__EClassDecl__Group_5__1();
             _fsp--;
 
@@ -6438,7 +6438,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2362:1: ( rule__EClassDecl__EGenericSuperTypesAssignment_5_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2362:2: rule__EClassDecl__EGenericSuperTypesAssignment_5_1
             {
-            pushFollow(FOLLOW_rule__EClassDecl__EGenericSuperTypesAssignment_5_1_in_rule__EClassDecl__Group_5__14864);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__EGenericSuperTypesAssignment_5_1_in_rule__EClassDecl__Group_5__14864);
             rule__EClassDecl__EGenericSuperTypesAssignment_5_1();
             _fsp--;
 
@@ -6449,7 +6449,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EClassDecl__Group_5__2_in_rule__EClassDecl__Group_5__14873);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Group_5__2_in_rule__EClassDecl__Group_5__14873);
             rule__EClassDecl__Group_5__2();
             _fsp--;
 
@@ -6500,7 +6500,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2380:2: rule__EClassDecl__Group_5_2__0
             	    {
-            	    pushFollow(FOLLOW_rule__EClassDecl__Group_5_2__0_in_rule__EClassDecl__Group_5__24901);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Group_5_2__0_in_rule__EClassDecl__Group_5__24901);
             	    rule__EClassDecl__Group_5_2__0();
             	    _fsp--;
 
@@ -6549,12 +6549,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2402:1: ','
             {
              before(grammarAccess.getEClassDeclAccess().getCommaKeyword_5_2_0()); 
-            match(input,34,FOLLOW_34_in_rule__EClassDecl__Group_5_2__04943); 
+            match(input,34,FollowSets000.FOLLOW_34_in_rule__EClassDecl__Group_5_2__04943); 
              after(grammarAccess.getEClassDeclAccess().getCommaKeyword_5_2_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EClassDecl__Group_5_2__1_in_rule__EClassDecl__Group_5_2__04953);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Group_5_2__1_in_rule__EClassDecl__Group_5_2__04953);
             rule__EClassDecl__Group_5_2__1();
             _fsp--;
 
@@ -6593,7 +6593,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2423:1: ( rule__EClassDecl__EGenericSuperTypesAssignment_5_2_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2423:2: rule__EClassDecl__EGenericSuperTypesAssignment_5_2_1
             {
-            pushFollow(FOLLOW_rule__EClassDecl__EGenericSuperTypesAssignment_5_2_1_in_rule__EClassDecl__Group_5_2__14981);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__EGenericSuperTypesAssignment_5_2_1_in_rule__EClassDecl__Group_5_2__14981);
             rule__EClassDecl__EGenericSuperTypesAssignment_5_2_1();
             _fsp--;
 
@@ -6636,12 +6636,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2443:1: ':'
             {
              before(grammarAccess.getEClassDeclAccess().getColonKeyword_6_0()); 
-            match(input,30,FOLLOW_30_in_rule__EClassDecl__Group_6__05020); 
+            match(input,30,FollowSets000.FOLLOW_30_in_rule__EClassDecl__Group_6__05020); 
              after(grammarAccess.getEClassDeclAccess().getColonKeyword_6_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EClassDecl__Group_6__1_in_rule__EClassDecl__Group_6__05030);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__Group_6__1_in_rule__EClassDecl__Group_6__05030);
             rule__EClassDecl__Group_6__1();
             _fsp--;
 
@@ -6680,7 +6680,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2464:1: ( rule__EClassDecl__InstanceClassNameAssignment_6_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2464:2: rule__EClassDecl__InstanceClassNameAssignment_6_1
             {
-            pushFollow(FOLLOW_rule__EClassDecl__InstanceClassNameAssignment_6_1_in_rule__EClassDecl__Group_6__15058);
+            pushFollow(FollowSets000.FOLLOW_rule__EClassDecl__InstanceClassNameAssignment_6_1_in_rule__EClassDecl__Group_6__15058);
             rule__EClassDecl__InstanceClassNameAssignment_6_1();
             _fsp--;
 
@@ -6738,7 +6738,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2485:2: rule__EAttributeDecl__EAnnotationsAssignment_0
             	    {
-            	    pushFollow(FOLLOW_rule__EAttributeDecl__EAnnotationsAssignment_0_in_rule__EAttributeDecl__Group__05096);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__EAnnotationsAssignment_0_in_rule__EAttributeDecl__Group__05096);
             	    rule__EAttributeDecl__EAnnotationsAssignment_0();
             	    _fsp--;
 
@@ -6755,7 +6755,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EAttributeDecl__Group__1_in_rule__EAttributeDecl__Group__05106);
+            pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__Group__1_in_rule__EAttributeDecl__Group__05106);
             rule__EAttributeDecl__Group__1();
             _fsp--;
 
@@ -6806,7 +6806,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2503:2: rule__EAttributeDecl__Alternatives_1
             	    {
-            	    pushFollow(FOLLOW_rule__EAttributeDecl__Alternatives_1_in_rule__EAttributeDecl__Group__15134);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__Alternatives_1_in_rule__EAttributeDecl__Group__15134);
             	    rule__EAttributeDecl__Alternatives_1();
             	    _fsp--;
 
@@ -6823,7 +6823,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EAttributeDecl__Group__2_in_rule__EAttributeDecl__Group__15144);
+            pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__Group__2_in_rule__EAttributeDecl__Group__15144);
             rule__EAttributeDecl__Group__2();
             _fsp--;
 
@@ -6859,12 +6859,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2520:1: 'attr'
             {
              before(grammarAccess.getEAttributeDeclAccess().getAttrKeyword_2()); 
-            match(input,38,FOLLOW_38_in_rule__EAttributeDecl__Group__25173); 
+            match(input,38,FollowSets000.FOLLOW_38_in_rule__EAttributeDecl__Group__25173); 
              after(grammarAccess.getEAttributeDeclAccess().getAttrKeyword_2()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EAttributeDecl__Group__3_in_rule__EAttributeDecl__Group__25183);
+            pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__Group__3_in_rule__EAttributeDecl__Group__25183);
             rule__EAttributeDecl__Group__3();
             _fsp--;
 
@@ -6903,7 +6903,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2541:1: ( rule__EAttributeDecl__EGenericTypeAssignment_3 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2541:2: rule__EAttributeDecl__EGenericTypeAssignment_3
             {
-            pushFollow(FOLLOW_rule__EAttributeDecl__EGenericTypeAssignment_3_in_rule__EAttributeDecl__Group__35211);
+            pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__EGenericTypeAssignment_3_in_rule__EAttributeDecl__Group__35211);
             rule__EAttributeDecl__EGenericTypeAssignment_3();
             _fsp--;
 
@@ -6914,7 +6914,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EAttributeDecl__Group__4_in_rule__EAttributeDecl__Group__35220);
+            pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__Group__4_in_rule__EAttributeDecl__Group__35220);
             rule__EAttributeDecl__Group__4();
             _fsp--;
 
@@ -6961,7 +6961,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2559:2: rule__EAttributeDecl__Group_4__0
                     {
-                    pushFollow(FOLLOW_rule__EAttributeDecl__Group_4__0_in_rule__EAttributeDecl__Group__45248);
+                    pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__Group_4__0_in_rule__EAttributeDecl__Group__45248);
                     rule__EAttributeDecl__Group_4__0();
                     _fsp--;
 
@@ -6975,7 +6975,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EAttributeDecl__Group__5_in_rule__EAttributeDecl__Group__45258);
+            pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__Group__5_in_rule__EAttributeDecl__Group__45258);
             rule__EAttributeDecl__Group__5();
             _fsp--;
 
@@ -7014,7 +7014,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2577:1: ( rule__EAttributeDecl__NameAssignment_5 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2577:2: rule__EAttributeDecl__NameAssignment_5
             {
-            pushFollow(FOLLOW_rule__EAttributeDecl__NameAssignment_5_in_rule__EAttributeDecl__Group__55286);
+            pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__NameAssignment_5_in_rule__EAttributeDecl__Group__55286);
             rule__EAttributeDecl__NameAssignment_5();
             _fsp--;
 
@@ -7025,7 +7025,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EAttributeDecl__Group__6_in_rule__EAttributeDecl__Group__55295);
+            pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__Group__6_in_rule__EAttributeDecl__Group__55295);
             rule__EAttributeDecl__Group__6();
             _fsp--;
 
@@ -7072,7 +7072,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2595:2: rule__EAttributeDecl__Group_6__0
                     {
-                    pushFollow(FOLLOW_rule__EAttributeDecl__Group_6__0_in_rule__EAttributeDecl__Group__65323);
+                    pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__Group_6__0_in_rule__EAttributeDecl__Group__65323);
                     rule__EAttributeDecl__Group_6__0();
                     _fsp--;
 
@@ -7086,7 +7086,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EAttributeDecl__Group__7_in_rule__EAttributeDecl__Group__65333);
+            pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__Group__7_in_rule__EAttributeDecl__Group__65333);
             rule__EAttributeDecl__Group__7();
             _fsp--;
 
@@ -7122,7 +7122,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2612:1: ';'
             {
              before(grammarAccess.getEAttributeDeclAccess().getSemicolonKeyword_7()); 
-            match(input,22,FOLLOW_22_in_rule__EAttributeDecl__Group__75362); 
+            match(input,22,FollowSets000.FOLLOW_22_in_rule__EAttributeDecl__Group__75362); 
              after(grammarAccess.getEAttributeDeclAccess().getSemicolonKeyword_7()); 
 
             }
@@ -7159,12 +7159,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2647:1: '['
             {
              before(grammarAccess.getEAttributeDeclAccess().getLeftSquareBracketKeyword_4_0()); 
-            match(input,39,FOLLOW_39_in_rule__EAttributeDecl__Group_4__05414); 
+            match(input,39,FollowSets000.FOLLOW_39_in_rule__EAttributeDecl__Group_4__05414); 
              after(grammarAccess.getEAttributeDeclAccess().getLeftSquareBracketKeyword_4_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EAttributeDecl__Group_4__1_in_rule__EAttributeDecl__Group_4__05424);
+            pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__Group_4__1_in_rule__EAttributeDecl__Group_4__05424);
             rule__EAttributeDecl__Group_4__1();
             _fsp--;
 
@@ -7203,7 +7203,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2668:1: ( rule__EAttributeDecl__LowerBoundAssignment_4_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2668:2: rule__EAttributeDecl__LowerBoundAssignment_4_1
             {
-            pushFollow(FOLLOW_rule__EAttributeDecl__LowerBoundAssignment_4_1_in_rule__EAttributeDecl__Group_4__15452);
+            pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__LowerBoundAssignment_4_1_in_rule__EAttributeDecl__Group_4__15452);
             rule__EAttributeDecl__LowerBoundAssignment_4_1();
             _fsp--;
 
@@ -7214,7 +7214,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EAttributeDecl__Group_4__2_in_rule__EAttributeDecl__Group_4__15461);
+            pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__Group_4__2_in_rule__EAttributeDecl__Group_4__15461);
             rule__EAttributeDecl__Group_4__2();
             _fsp--;
 
@@ -7261,7 +7261,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2686:2: rule__EAttributeDecl__Group_4_2__0
                     {
-                    pushFollow(FOLLOW_rule__EAttributeDecl__Group_4_2__0_in_rule__EAttributeDecl__Group_4__25489);
+                    pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__Group_4_2__0_in_rule__EAttributeDecl__Group_4__25489);
                     rule__EAttributeDecl__Group_4_2__0();
                     _fsp--;
 
@@ -7275,7 +7275,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EAttributeDecl__Group_4__3_in_rule__EAttributeDecl__Group_4__25499);
+            pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__Group_4__3_in_rule__EAttributeDecl__Group_4__25499);
             rule__EAttributeDecl__Group_4__3();
             _fsp--;
 
@@ -7311,7 +7311,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2703:1: ']'
             {
              before(grammarAccess.getEAttributeDeclAccess().getRightSquareBracketKeyword_4_3()); 
-            match(input,40,FOLLOW_40_in_rule__EAttributeDecl__Group_4__35528); 
+            match(input,40,FollowSets000.FOLLOW_40_in_rule__EAttributeDecl__Group_4__35528); 
              after(grammarAccess.getEAttributeDeclAccess().getRightSquareBracketKeyword_4_3()); 
 
             }
@@ -7348,12 +7348,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2730:1: '..'
             {
              before(grammarAccess.getEAttributeDeclAccess().getFullStopFullStopKeyword_4_2_0()); 
-            match(input,41,FOLLOW_41_in_rule__EAttributeDecl__Group_4_2__05572); 
+            match(input,41,FollowSets000.FOLLOW_41_in_rule__EAttributeDecl__Group_4_2__05572); 
              after(grammarAccess.getEAttributeDeclAccess().getFullStopFullStopKeyword_4_2_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EAttributeDecl__Group_4_2__1_in_rule__EAttributeDecl__Group_4_2__05582);
+            pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__Group_4_2__1_in_rule__EAttributeDecl__Group_4_2__05582);
             rule__EAttributeDecl__Group_4_2__1();
             _fsp--;
 
@@ -7392,7 +7392,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2751:1: ( rule__EAttributeDecl__UpperBoundAssignment_4_2_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2751:2: rule__EAttributeDecl__UpperBoundAssignment_4_2_1
             {
-            pushFollow(FOLLOW_rule__EAttributeDecl__UpperBoundAssignment_4_2_1_in_rule__EAttributeDecl__Group_4_2__15610);
+            pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__UpperBoundAssignment_4_2_1_in_rule__EAttributeDecl__Group_4_2__15610);
             rule__EAttributeDecl__UpperBoundAssignment_4_2_1();
             _fsp--;
 
@@ -7435,12 +7435,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2771:1: '='
             {
              before(grammarAccess.getEAttributeDeclAccess().getEqualsSignKeyword_6_0()); 
-            match(input,23,FOLLOW_23_in_rule__EAttributeDecl__Group_6__05649); 
+            match(input,23,FollowSets000.FOLLOW_23_in_rule__EAttributeDecl__Group_6__05649); 
              after(grammarAccess.getEAttributeDeclAccess().getEqualsSignKeyword_6_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EAttributeDecl__Group_6__1_in_rule__EAttributeDecl__Group_6__05659);
+            pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__Group_6__1_in_rule__EAttributeDecl__Group_6__05659);
             rule__EAttributeDecl__Group_6__1();
             _fsp--;
 
@@ -7479,7 +7479,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2792:1: ( rule__EAttributeDecl__DefaultValueLiteralAssignment_6_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2792:2: rule__EAttributeDecl__DefaultValueLiteralAssignment_6_1
             {
-            pushFollow(FOLLOW_rule__EAttributeDecl__DefaultValueLiteralAssignment_6_1_in_rule__EAttributeDecl__Group_6__15687);
+            pushFollow(FollowSets000.FOLLOW_rule__EAttributeDecl__DefaultValueLiteralAssignment_6_1_in_rule__EAttributeDecl__Group_6__15687);
             rule__EAttributeDecl__DefaultValueLiteralAssignment_6_1();
             _fsp--;
 
@@ -7537,7 +7537,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2813:2: rule__EReferenceDecl__EAnnotationsAssignment_0
             	    {
-            	    pushFollow(FOLLOW_rule__EReferenceDecl__EAnnotationsAssignment_0_in_rule__EReferenceDecl__Group__05725);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__EAnnotationsAssignment_0_in_rule__EReferenceDecl__Group__05725);
             	    rule__EReferenceDecl__EAnnotationsAssignment_0();
             	    _fsp--;
 
@@ -7554,7 +7554,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EReferenceDecl__Group__1_in_rule__EReferenceDecl__Group__05735);
+            pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__Group__1_in_rule__EReferenceDecl__Group__05735);
             rule__EReferenceDecl__Group__1();
             _fsp--;
 
@@ -7605,7 +7605,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2831:2: rule__EReferenceDecl__Alternatives_1
             	    {
-            	    pushFollow(FOLLOW_rule__EReferenceDecl__Alternatives_1_in_rule__EReferenceDecl__Group__15763);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__Alternatives_1_in_rule__EReferenceDecl__Group__15763);
             	    rule__EReferenceDecl__Alternatives_1();
             	    _fsp--;
 
@@ -7622,7 +7622,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EReferenceDecl__Group__2_in_rule__EReferenceDecl__Group__15773);
+            pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__Group__2_in_rule__EReferenceDecl__Group__15773);
             rule__EReferenceDecl__Group__2();
             _fsp--;
 
@@ -7661,7 +7661,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2849:1: ( rule__EReferenceDecl__Alternatives_2 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2849:2: rule__EReferenceDecl__Alternatives_2
             {
-            pushFollow(FOLLOW_rule__EReferenceDecl__Alternatives_2_in_rule__EReferenceDecl__Group__25801);
+            pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__Alternatives_2_in_rule__EReferenceDecl__Group__25801);
             rule__EReferenceDecl__Alternatives_2();
             _fsp--;
 
@@ -7672,7 +7672,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EReferenceDecl__Group__3_in_rule__EReferenceDecl__Group__25810);
+            pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__Group__3_in_rule__EReferenceDecl__Group__25810);
             rule__EReferenceDecl__Group__3();
             _fsp--;
 
@@ -7711,7 +7711,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2867:1: ( rule__EReferenceDecl__EGenericTypeAssignment_3 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2867:2: rule__EReferenceDecl__EGenericTypeAssignment_3
             {
-            pushFollow(FOLLOW_rule__EReferenceDecl__EGenericTypeAssignment_3_in_rule__EReferenceDecl__Group__35838);
+            pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__EGenericTypeAssignment_3_in_rule__EReferenceDecl__Group__35838);
             rule__EReferenceDecl__EGenericTypeAssignment_3();
             _fsp--;
 
@@ -7722,7 +7722,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EReferenceDecl__Group__4_in_rule__EReferenceDecl__Group__35847);
+            pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__Group__4_in_rule__EReferenceDecl__Group__35847);
             rule__EReferenceDecl__Group__4();
             _fsp--;
 
@@ -7769,7 +7769,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2885:2: rule__EReferenceDecl__Group_4__0
                     {
-                    pushFollow(FOLLOW_rule__EReferenceDecl__Group_4__0_in_rule__EReferenceDecl__Group__45875);
+                    pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__Group_4__0_in_rule__EReferenceDecl__Group__45875);
                     rule__EReferenceDecl__Group_4__0();
                     _fsp--;
 
@@ -7783,7 +7783,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EReferenceDecl__Group__5_in_rule__EReferenceDecl__Group__45885);
+            pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__Group__5_in_rule__EReferenceDecl__Group__45885);
             rule__EReferenceDecl__Group__5();
             _fsp--;
 
@@ -7830,7 +7830,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2903:2: rule__EReferenceDecl__Group_5__0
                     {
-                    pushFollow(FOLLOW_rule__EReferenceDecl__Group_5__0_in_rule__EReferenceDecl__Group__55913);
+                    pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__Group_5__0_in_rule__EReferenceDecl__Group__55913);
                     rule__EReferenceDecl__Group_5__0();
                     _fsp--;
 
@@ -7844,7 +7844,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EReferenceDecl__Group__6_in_rule__EReferenceDecl__Group__55923);
+            pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__Group__6_in_rule__EReferenceDecl__Group__55923);
             rule__EReferenceDecl__Group__6();
             _fsp--;
 
@@ -7883,7 +7883,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2921:1: ( rule__EReferenceDecl__NameAssignment_6 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2921:2: rule__EReferenceDecl__NameAssignment_6
             {
-            pushFollow(FOLLOW_rule__EReferenceDecl__NameAssignment_6_in_rule__EReferenceDecl__Group__65951);
+            pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__NameAssignment_6_in_rule__EReferenceDecl__Group__65951);
             rule__EReferenceDecl__NameAssignment_6();
             _fsp--;
 
@@ -7894,7 +7894,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EReferenceDecl__Group__7_in_rule__EReferenceDecl__Group__65960);
+            pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__Group__7_in_rule__EReferenceDecl__Group__65960);
             rule__EReferenceDecl__Group__7();
             _fsp--;
 
@@ -7930,7 +7930,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2938:1: ';'
             {
              before(grammarAccess.getEReferenceDeclAccess().getSemicolonKeyword_7()); 
-            match(input,22,FOLLOW_22_in_rule__EReferenceDecl__Group__75989); 
+            match(input,22,FollowSets000.FOLLOW_22_in_rule__EReferenceDecl__Group__75989); 
              after(grammarAccess.getEReferenceDeclAccess().getSemicolonKeyword_7()); 
 
             }
@@ -7967,12 +7967,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2973:1: '['
             {
              before(grammarAccess.getEReferenceDeclAccess().getLeftSquareBracketKeyword_4_0()); 
-            match(input,39,FOLLOW_39_in_rule__EReferenceDecl__Group_4__06041); 
+            match(input,39,FollowSets000.FOLLOW_39_in_rule__EReferenceDecl__Group_4__06041); 
              after(grammarAccess.getEReferenceDeclAccess().getLeftSquareBracketKeyword_4_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EReferenceDecl__Group_4__1_in_rule__EReferenceDecl__Group_4__06051);
+            pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__Group_4__1_in_rule__EReferenceDecl__Group_4__06051);
             rule__EReferenceDecl__Group_4__1();
             _fsp--;
 
@@ -8011,7 +8011,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2994:1: ( rule__EReferenceDecl__LowerBoundAssignment_4_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:2994:2: rule__EReferenceDecl__LowerBoundAssignment_4_1
             {
-            pushFollow(FOLLOW_rule__EReferenceDecl__LowerBoundAssignment_4_1_in_rule__EReferenceDecl__Group_4__16079);
+            pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__LowerBoundAssignment_4_1_in_rule__EReferenceDecl__Group_4__16079);
             rule__EReferenceDecl__LowerBoundAssignment_4_1();
             _fsp--;
 
@@ -8022,7 +8022,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EReferenceDecl__Group_4__2_in_rule__EReferenceDecl__Group_4__16088);
+            pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__Group_4__2_in_rule__EReferenceDecl__Group_4__16088);
             rule__EReferenceDecl__Group_4__2();
             _fsp--;
 
@@ -8069,7 +8069,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3012:2: rule__EReferenceDecl__Group_4_2__0
                     {
-                    pushFollow(FOLLOW_rule__EReferenceDecl__Group_4_2__0_in_rule__EReferenceDecl__Group_4__26116);
+                    pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__Group_4_2__0_in_rule__EReferenceDecl__Group_4__26116);
                     rule__EReferenceDecl__Group_4_2__0();
                     _fsp--;
 
@@ -8083,7 +8083,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EReferenceDecl__Group_4__3_in_rule__EReferenceDecl__Group_4__26126);
+            pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__Group_4__3_in_rule__EReferenceDecl__Group_4__26126);
             rule__EReferenceDecl__Group_4__3();
             _fsp--;
 
@@ -8119,7 +8119,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3029:1: ']'
             {
              before(grammarAccess.getEReferenceDeclAccess().getRightSquareBracketKeyword_4_3()); 
-            match(input,40,FOLLOW_40_in_rule__EReferenceDecl__Group_4__36155); 
+            match(input,40,FollowSets000.FOLLOW_40_in_rule__EReferenceDecl__Group_4__36155); 
              after(grammarAccess.getEReferenceDeclAccess().getRightSquareBracketKeyword_4_3()); 
 
             }
@@ -8156,12 +8156,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3056:1: '..'
             {
              before(grammarAccess.getEReferenceDeclAccess().getFullStopFullStopKeyword_4_2_0()); 
-            match(input,41,FOLLOW_41_in_rule__EReferenceDecl__Group_4_2__06199); 
+            match(input,41,FollowSets000.FOLLOW_41_in_rule__EReferenceDecl__Group_4_2__06199); 
              after(grammarAccess.getEReferenceDeclAccess().getFullStopFullStopKeyword_4_2_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EReferenceDecl__Group_4_2__1_in_rule__EReferenceDecl__Group_4_2__06209);
+            pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__Group_4_2__1_in_rule__EReferenceDecl__Group_4_2__06209);
             rule__EReferenceDecl__Group_4_2__1();
             _fsp--;
 
@@ -8200,7 +8200,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3077:1: ( rule__EReferenceDecl__UpperBoundAssignment_4_2_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3077:2: rule__EReferenceDecl__UpperBoundAssignment_4_2_1
             {
-            pushFollow(FOLLOW_rule__EReferenceDecl__UpperBoundAssignment_4_2_1_in_rule__EReferenceDecl__Group_4_2__16237);
+            pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__UpperBoundAssignment_4_2_1_in_rule__EReferenceDecl__Group_4_2__16237);
             rule__EReferenceDecl__UpperBoundAssignment_4_2_1();
             _fsp--;
 
@@ -8243,12 +8243,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3097:1: '#'
             {
              before(grammarAccess.getEReferenceDeclAccess().getNumberSignKeyword_5_0()); 
-            match(input,42,FOLLOW_42_in_rule__EReferenceDecl__Group_5__06276); 
+            match(input,42,FollowSets000.FOLLOW_42_in_rule__EReferenceDecl__Group_5__06276); 
              after(grammarAccess.getEReferenceDeclAccess().getNumberSignKeyword_5_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EReferenceDecl__Group_5__1_in_rule__EReferenceDecl__Group_5__06286);
+            pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__Group_5__1_in_rule__EReferenceDecl__Group_5__06286);
             rule__EReferenceDecl__Group_5__1();
             _fsp--;
 
@@ -8287,7 +8287,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3118:1: ( rule__EReferenceDecl__EOppositeAssignment_5_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3118:2: rule__EReferenceDecl__EOppositeAssignment_5_1
             {
-            pushFollow(FOLLOW_rule__EReferenceDecl__EOppositeAssignment_5_1_in_rule__EReferenceDecl__Group_5__16314);
+            pushFollow(FollowSets000.FOLLOW_rule__EReferenceDecl__EOppositeAssignment_5_1_in_rule__EReferenceDecl__Group_5__16314);
             rule__EReferenceDecl__EOppositeAssignment_5_1();
             _fsp--;
 
@@ -8345,7 +8345,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3139:2: rule__EEnumDecl__EAnnotationsAssignment_0
             	    {
-            	    pushFollow(FOLLOW_rule__EEnumDecl__EAnnotationsAssignment_0_in_rule__EEnumDecl__Group__06352);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EEnumDecl__EAnnotationsAssignment_0_in_rule__EEnumDecl__Group__06352);
             	    rule__EEnumDecl__EAnnotationsAssignment_0();
             	    _fsp--;
 
@@ -8362,7 +8362,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EEnumDecl__Group__1_in_rule__EEnumDecl__Group__06362);
+            pushFollow(FollowSets000.FOLLOW_rule__EEnumDecl__Group__1_in_rule__EEnumDecl__Group__06362);
             rule__EEnumDecl__Group__1();
             _fsp--;
 
@@ -8398,12 +8398,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3156:1: 'enum'
             {
              before(grammarAccess.getEEnumDeclAccess().getEnumKeyword_1()); 
-            match(input,43,FOLLOW_43_in_rule__EEnumDecl__Group__16391); 
+            match(input,43,FollowSets000.FOLLOW_43_in_rule__EEnumDecl__Group__16391); 
              after(grammarAccess.getEEnumDeclAccess().getEnumKeyword_1()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EEnumDecl__Group__2_in_rule__EEnumDecl__Group__16401);
+            pushFollow(FollowSets000.FOLLOW_rule__EEnumDecl__Group__2_in_rule__EEnumDecl__Group__16401);
             rule__EEnumDecl__Group__2();
             _fsp--;
 
@@ -8442,7 +8442,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3177:1: ( rule__EEnumDecl__NameAssignment_2 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3177:2: rule__EEnumDecl__NameAssignment_2
             {
-            pushFollow(FOLLOW_rule__EEnumDecl__NameAssignment_2_in_rule__EEnumDecl__Group__26429);
+            pushFollow(FollowSets000.FOLLOW_rule__EEnumDecl__NameAssignment_2_in_rule__EEnumDecl__Group__26429);
             rule__EEnumDecl__NameAssignment_2();
             _fsp--;
 
@@ -8453,7 +8453,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EEnumDecl__Group__3_in_rule__EEnumDecl__Group__26438);
+            pushFollow(FollowSets000.FOLLOW_rule__EEnumDecl__Group__3_in_rule__EEnumDecl__Group__26438);
             rule__EEnumDecl__Group__3();
             _fsp--;
 
@@ -8489,12 +8489,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3194:1: '{'
             {
              before(grammarAccess.getEEnumDeclAccess().getLeftCurlyBracketKeyword_3()); 
-            match(input,27,FOLLOW_27_in_rule__EEnumDecl__Group__36467); 
+            match(input,27,FollowSets000.FOLLOW_27_in_rule__EEnumDecl__Group__36467); 
              after(grammarAccess.getEEnumDeclAccess().getLeftCurlyBracketKeyword_3()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EEnumDecl__Group__4_in_rule__EEnumDecl__Group__36477);
+            pushFollow(FollowSets000.FOLLOW_rule__EEnumDecl__Group__4_in_rule__EEnumDecl__Group__36477);
             rule__EEnumDecl__Group__4();
             _fsp--;
 
@@ -8536,7 +8536,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3216:1: ( rule__EEnumDecl__ELiteralsAssignment_4 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3216:2: rule__EEnumDecl__ELiteralsAssignment_4
             {
-            pushFollow(FOLLOW_rule__EEnumDecl__ELiteralsAssignment_4_in_rule__EEnumDecl__Group__46507);
+            pushFollow(FollowSets000.FOLLOW_rule__EEnumDecl__ELiteralsAssignment_4_in_rule__EEnumDecl__Group__46507);
             rule__EEnumDecl__ELiteralsAssignment_4();
             _fsp--;
 
@@ -8566,7 +8566,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3221:2: rule__EEnumDecl__ELiteralsAssignment_4
             	    {
-            	    pushFollow(FOLLOW_rule__EEnumDecl__ELiteralsAssignment_4_in_rule__EEnumDecl__Group__46519);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EEnumDecl__ELiteralsAssignment_4_in_rule__EEnumDecl__Group__46519);
             	    rule__EEnumDecl__ELiteralsAssignment_4();
             	    _fsp--;
 
@@ -8586,7 +8586,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EEnumDecl__Group__5_in_rule__EEnumDecl__Group__46531);
+            pushFollow(FollowSets000.FOLLOW_rule__EEnumDecl__Group__5_in_rule__EEnumDecl__Group__46531);
             rule__EEnumDecl__Group__5();
             _fsp--;
 
@@ -8622,7 +8622,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3239:1: '}'
             {
              before(grammarAccess.getEEnumDeclAccess().getRightCurlyBracketKeyword_5()); 
-            match(input,28,FOLLOW_28_in_rule__EEnumDecl__Group__56560); 
+            match(input,28,FollowSets000.FOLLOW_28_in_rule__EEnumDecl__Group__56560); 
              after(grammarAccess.getEEnumDeclAccess().getRightCurlyBracketKeyword_5()); 
 
             }
@@ -8674,7 +8674,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3271:2: rule__EEnumLiteralDecl__EAnnotationsAssignment_0
             	    {
-            	    pushFollow(FOLLOW_rule__EEnumLiteralDecl__EAnnotationsAssignment_0_in_rule__EEnumLiteralDecl__Group__06607);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EEnumLiteralDecl__EAnnotationsAssignment_0_in_rule__EEnumLiteralDecl__Group__06607);
             	    rule__EEnumLiteralDecl__EAnnotationsAssignment_0();
             	    _fsp--;
 
@@ -8691,7 +8691,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EEnumLiteralDecl__Group__1_in_rule__EEnumLiteralDecl__Group__06617);
+            pushFollow(FollowSets000.FOLLOW_rule__EEnumLiteralDecl__Group__1_in_rule__EEnumLiteralDecl__Group__06617);
             rule__EEnumLiteralDecl__Group__1();
             _fsp--;
 
@@ -8730,7 +8730,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3289:1: ( rule__EEnumLiteralDecl__NameAssignment_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3289:2: rule__EEnumLiteralDecl__NameAssignment_1
             {
-            pushFollow(FOLLOW_rule__EEnumLiteralDecl__NameAssignment_1_in_rule__EEnumLiteralDecl__Group__16645);
+            pushFollow(FollowSets000.FOLLOW_rule__EEnumLiteralDecl__NameAssignment_1_in_rule__EEnumLiteralDecl__Group__16645);
             rule__EEnumLiteralDecl__NameAssignment_1();
             _fsp--;
 
@@ -8741,7 +8741,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EEnumLiteralDecl__Group__2_in_rule__EEnumLiteralDecl__Group__16654);
+            pushFollow(FollowSets000.FOLLOW_rule__EEnumLiteralDecl__Group__2_in_rule__EEnumLiteralDecl__Group__16654);
             rule__EEnumLiteralDecl__Group__2();
             _fsp--;
 
@@ -8788,7 +8788,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3307:2: rule__EEnumLiteralDecl__Group_2__0
                     {
-                    pushFollow(FOLLOW_rule__EEnumLiteralDecl__Group_2__0_in_rule__EEnumLiteralDecl__Group__26682);
+                    pushFollow(FollowSets000.FOLLOW_rule__EEnumLiteralDecl__Group_2__0_in_rule__EEnumLiteralDecl__Group__26682);
                     rule__EEnumLiteralDecl__Group_2__0();
                     _fsp--;
 
@@ -8802,7 +8802,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EEnumLiteralDecl__Group__3_in_rule__EEnumLiteralDecl__Group__26692);
+            pushFollow(FollowSets000.FOLLOW_rule__EEnumLiteralDecl__Group__3_in_rule__EEnumLiteralDecl__Group__26692);
             rule__EEnumLiteralDecl__Group__3();
             _fsp--;
 
@@ -8849,7 +8849,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3325:2: rule__EEnumLiteralDecl__LiteralAssignment_3
                     {
-                    pushFollow(FOLLOW_rule__EEnumLiteralDecl__LiteralAssignment_3_in_rule__EEnumLiteralDecl__Group__36720);
+                    pushFollow(FollowSets000.FOLLOW_rule__EEnumLiteralDecl__LiteralAssignment_3_in_rule__EEnumLiteralDecl__Group__36720);
                     rule__EEnumLiteralDecl__LiteralAssignment_3();
                     _fsp--;
 
@@ -8863,7 +8863,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EEnumLiteralDecl__Group__4_in_rule__EEnumLiteralDecl__Group__36730);
+            pushFollow(FollowSets000.FOLLOW_rule__EEnumLiteralDecl__Group__4_in_rule__EEnumLiteralDecl__Group__36730);
             rule__EEnumLiteralDecl__Group__4();
             _fsp--;
 
@@ -8899,7 +8899,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3342:1: ';'
             {
              before(grammarAccess.getEEnumLiteralDeclAccess().getSemicolonKeyword_4()); 
-            match(input,22,FOLLOW_22_in_rule__EEnumLiteralDecl__Group__46759); 
+            match(input,22,FollowSets000.FOLLOW_22_in_rule__EEnumLiteralDecl__Group__46759); 
              after(grammarAccess.getEEnumLiteralDeclAccess().getSemicolonKeyword_4()); 
 
             }
@@ -8936,12 +8936,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3371:1: '='
             {
              before(grammarAccess.getEEnumLiteralDeclAccess().getEqualsSignKeyword_2_0()); 
-            match(input,23,FOLLOW_23_in_rule__EEnumLiteralDecl__Group_2__06805); 
+            match(input,23,FollowSets000.FOLLOW_23_in_rule__EEnumLiteralDecl__Group_2__06805); 
              after(grammarAccess.getEEnumLiteralDeclAccess().getEqualsSignKeyword_2_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EEnumLiteralDecl__Group_2__1_in_rule__EEnumLiteralDecl__Group_2__06815);
+            pushFollow(FollowSets000.FOLLOW_rule__EEnumLiteralDecl__Group_2__1_in_rule__EEnumLiteralDecl__Group_2__06815);
             rule__EEnumLiteralDecl__Group_2__1();
             _fsp--;
 
@@ -8980,7 +8980,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3392:1: ( rule__EEnumLiteralDecl__ValueAssignment_2_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3392:2: rule__EEnumLiteralDecl__ValueAssignment_2_1
             {
-            pushFollow(FOLLOW_rule__EEnumLiteralDecl__ValueAssignment_2_1_in_rule__EEnumLiteralDecl__Group_2__16843);
+            pushFollow(FollowSets000.FOLLOW_rule__EEnumLiteralDecl__ValueAssignment_2_1_in_rule__EEnumLiteralDecl__Group_2__16843);
             rule__EEnumLiteralDecl__ValueAssignment_2_1();
             _fsp--;
 
@@ -9026,7 +9026,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3413:1: ( rule__ETypeParameterDecl__NameAssignment_0 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3413:2: rule__ETypeParameterDecl__NameAssignment_0
             {
-            pushFollow(FOLLOW_rule__ETypeParameterDecl__NameAssignment_0_in_rule__ETypeParameterDecl__Group__06881);
+            pushFollow(FollowSets000.FOLLOW_rule__ETypeParameterDecl__NameAssignment_0_in_rule__ETypeParameterDecl__Group__06881);
             rule__ETypeParameterDecl__NameAssignment_0();
             _fsp--;
 
@@ -9037,7 +9037,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__ETypeParameterDecl__Group__1_in_rule__ETypeParameterDecl__Group__06890);
+            pushFollow(FollowSets000.FOLLOW_rule__ETypeParameterDecl__Group__1_in_rule__ETypeParameterDecl__Group__06890);
             rule__ETypeParameterDecl__Group__1();
             _fsp--;
 
@@ -9084,7 +9084,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3431:2: rule__ETypeParameterDecl__Group_1__0
                     {
-                    pushFollow(FOLLOW_rule__ETypeParameterDecl__Group_1__0_in_rule__ETypeParameterDecl__Group__16918);
+                    pushFollow(FollowSets000.FOLLOW_rule__ETypeParameterDecl__Group_1__0_in_rule__ETypeParameterDecl__Group__16918);
                     rule__ETypeParameterDecl__Group_1__0();
                     _fsp--;
 
@@ -9130,12 +9130,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3451:1: 'extends'
             {
              before(grammarAccess.getETypeParameterDeclAccess().getExtendsKeyword_1_0()); 
-            match(input,37,FOLLOW_37_in_rule__ETypeParameterDecl__Group_1__06958); 
+            match(input,37,FollowSets000.FOLLOW_37_in_rule__ETypeParameterDecl__Group_1__06958); 
              after(grammarAccess.getETypeParameterDeclAccess().getExtendsKeyword_1_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__ETypeParameterDecl__Group_1__1_in_rule__ETypeParameterDecl__Group_1__06968);
+            pushFollow(FollowSets000.FOLLOW_rule__ETypeParameterDecl__Group_1__1_in_rule__ETypeParameterDecl__Group_1__06968);
             rule__ETypeParameterDecl__Group_1__1();
             _fsp--;
 
@@ -9174,7 +9174,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3472:1: ( rule__ETypeParameterDecl__EBoundsAssignment_1_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3472:2: rule__ETypeParameterDecl__EBoundsAssignment_1_1
             {
-            pushFollow(FOLLOW_rule__ETypeParameterDecl__EBoundsAssignment_1_1_in_rule__ETypeParameterDecl__Group_1__16996);
+            pushFollow(FollowSets000.FOLLOW_rule__ETypeParameterDecl__EBoundsAssignment_1_1_in_rule__ETypeParameterDecl__Group_1__16996);
             rule__ETypeParameterDecl__EBoundsAssignment_1_1();
             _fsp--;
 
@@ -9220,7 +9220,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3493:1: ( rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_0 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3493:2: rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_0
             {
-            pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_0_in_rule__EGenericTypeReferenceDecl__Group_0__07034);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_0_in_rule__EGenericTypeReferenceDecl__Group_0__07034);
             rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_0();
             _fsp--;
 
@@ -9231,7 +9231,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_0__1_in_rule__EGenericTypeReferenceDecl__Group_0__07043);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeReferenceDecl__Group_0__1_in_rule__EGenericTypeReferenceDecl__Group_0__07043);
             rule__EGenericTypeReferenceDecl__Group_0__1();
             _fsp--;
 
@@ -9278,7 +9278,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3511:2: rule__EGenericTypeReferenceDecl__Group_0_1__0
                     {
-                    pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__0_in_rule__EGenericTypeReferenceDecl__Group_0__17071);
+                    pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__0_in_rule__EGenericTypeReferenceDecl__Group_0__17071);
                     rule__EGenericTypeReferenceDecl__Group_0_1__0();
                     _fsp--;
 
@@ -9324,12 +9324,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3531:1: '<'
             {
              before(grammarAccess.getEGenericTypeReferenceDeclAccess().getLessThanSignKeyword_0_1_0()); 
-            match(input,35,FOLLOW_35_in_rule__EGenericTypeReferenceDecl__Group_0_1__07111); 
+            match(input,35,FollowSets000.FOLLOW_35_in_rule__EGenericTypeReferenceDecl__Group_0_1__07111); 
              after(grammarAccess.getEGenericTypeReferenceDeclAccess().getLessThanSignKeyword_0_1_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__1_in_rule__EGenericTypeReferenceDecl__Group_0_1__07121);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__1_in_rule__EGenericTypeReferenceDecl__Group_0_1__07121);
             rule__EGenericTypeReferenceDecl__Group_0_1__1();
             _fsp--;
 
@@ -9368,7 +9368,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3552:1: ( rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3552:2: rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_1
             {
-            pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_1_in_rule__EGenericTypeReferenceDecl__Group_0_1__17149);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_1_in_rule__EGenericTypeReferenceDecl__Group_0_1__17149);
             rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_1();
             _fsp--;
 
@@ -9379,7 +9379,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__2_in_rule__EGenericTypeReferenceDecl__Group_0_1__17158);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__2_in_rule__EGenericTypeReferenceDecl__Group_0_1__17158);
             rule__EGenericTypeReferenceDecl__Group_0_1__2();
             _fsp--;
 
@@ -9430,7 +9430,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3570:2: rule__EGenericTypeReferenceDecl__Group_0_1_2__0
             	    {
-            	    pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1_2__0_in_rule__EGenericTypeReferenceDecl__Group_0_1__27186);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1_2__0_in_rule__EGenericTypeReferenceDecl__Group_0_1__27186);
             	    rule__EGenericTypeReferenceDecl__Group_0_1_2__0();
             	    _fsp--;
 
@@ -9447,7 +9447,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__3_in_rule__EGenericTypeReferenceDecl__Group_0_1__27196);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__3_in_rule__EGenericTypeReferenceDecl__Group_0_1__27196);
             rule__EGenericTypeReferenceDecl__Group_0_1__3();
             _fsp--;
 
@@ -9483,7 +9483,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3587:1: '>'
             {
              before(grammarAccess.getEGenericTypeReferenceDeclAccess().getGreaterThanSignKeyword_0_1_3()); 
-            match(input,36,FOLLOW_36_in_rule__EGenericTypeReferenceDecl__Group_0_1__37225); 
+            match(input,36,FollowSets000.FOLLOW_36_in_rule__EGenericTypeReferenceDecl__Group_0_1__37225); 
              after(grammarAccess.getEGenericTypeReferenceDeclAccess().getGreaterThanSignKeyword_0_1_3()); 
 
             }
@@ -9520,12 +9520,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3614:1: ','
             {
              before(grammarAccess.getEGenericTypeReferenceDeclAccess().getCommaKeyword_0_1_2_0()); 
-            match(input,34,FOLLOW_34_in_rule__EGenericTypeReferenceDecl__Group_0_1_2__07269); 
+            match(input,34,FollowSets000.FOLLOW_34_in_rule__EGenericTypeReferenceDecl__Group_0_1_2__07269); 
              after(grammarAccess.getEGenericTypeReferenceDeclAccess().getCommaKeyword_0_1_2_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1_2__1_in_rule__EGenericTypeReferenceDecl__Group_0_1_2__07279);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1_2__1_in_rule__EGenericTypeReferenceDecl__Group_0_1_2__07279);
             rule__EGenericTypeReferenceDecl__Group_0_1_2__1();
             _fsp--;
 
@@ -9564,7 +9564,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3635:1: ( rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3635:2: rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_1
             {
-            pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_1_in_rule__EGenericTypeReferenceDecl__Group_0_1_2__17307);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_1_in_rule__EGenericTypeReferenceDecl__Group_0_1_2__17307);
             rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_1();
             _fsp--;
 
@@ -9607,12 +9607,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3655:1: '#'
             {
              before(grammarAccess.getEGenericTypeReferenceDeclAccess().getNumberSignKeyword_1_0()); 
-            match(input,42,FOLLOW_42_in_rule__EGenericTypeReferenceDecl__Group_1__07346); 
+            match(input,42,FollowSets000.FOLLOW_42_in_rule__EGenericTypeReferenceDecl__Group_1__07346); 
              after(grammarAccess.getEGenericTypeReferenceDeclAccess().getNumberSignKeyword_1_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__Group_1__1_in_rule__EGenericTypeReferenceDecl__Group_1__07356);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeReferenceDecl__Group_1__1_in_rule__EGenericTypeReferenceDecl__Group_1__07356);
             rule__EGenericTypeReferenceDecl__Group_1__1();
             _fsp--;
 
@@ -9651,7 +9651,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3676:1: ( rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3676:2: rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_1
             {
-            pushFollow(FOLLOW_rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_1_in_rule__EGenericTypeReferenceDecl__Group_1__17384);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_1_in_rule__EGenericTypeReferenceDecl__Group_1__17384);
             rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_1();
             _fsp--;
 
@@ -9697,7 +9697,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3697:1: ( rule__EGenericTypeDecl__EClassifierAssignment_0_0 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3697:2: rule__EGenericTypeDecl__EClassifierAssignment_0_0
             {
-            pushFollow(FOLLOW_rule__EGenericTypeDecl__EClassifierAssignment_0_0_in_rule__EGenericTypeDecl__Group_0__07422);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeDecl__EClassifierAssignment_0_0_in_rule__EGenericTypeDecl__Group_0__07422);
             rule__EGenericTypeDecl__EClassifierAssignment_0_0();
             _fsp--;
 
@@ -9708,7 +9708,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_0__1_in_rule__EGenericTypeDecl__Group_0__07431);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeDecl__Group_0__1_in_rule__EGenericTypeDecl__Group_0__07431);
             rule__EGenericTypeDecl__Group_0__1();
             _fsp--;
 
@@ -9755,7 +9755,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3715:2: rule__EGenericTypeDecl__Group_0_1__0
                     {
-                    pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_0_1__0_in_rule__EGenericTypeDecl__Group_0__17459);
+                    pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeDecl__Group_0_1__0_in_rule__EGenericTypeDecl__Group_0__17459);
                     rule__EGenericTypeDecl__Group_0_1__0();
                     _fsp--;
 
@@ -9801,12 +9801,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3735:1: '<'
             {
              before(grammarAccess.getEGenericTypeDeclAccess().getLessThanSignKeyword_0_1_0()); 
-            match(input,35,FOLLOW_35_in_rule__EGenericTypeDecl__Group_0_1__07499); 
+            match(input,35,FollowSets000.FOLLOW_35_in_rule__EGenericTypeDecl__Group_0_1__07499); 
              after(grammarAccess.getEGenericTypeDeclAccess().getLessThanSignKeyword_0_1_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_0_1__1_in_rule__EGenericTypeDecl__Group_0_1__07509);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeDecl__Group_0_1__1_in_rule__EGenericTypeDecl__Group_0_1__07509);
             rule__EGenericTypeDecl__Group_0_1__1();
             _fsp--;
 
@@ -9845,7 +9845,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3756:1: ( rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3756:2: rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_1
             {
-            pushFollow(FOLLOW_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_1_in_rule__EGenericTypeDecl__Group_0_1__17537);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_1_in_rule__EGenericTypeDecl__Group_0_1__17537);
             rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_1();
             _fsp--;
 
@@ -9856,7 +9856,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_0_1__2_in_rule__EGenericTypeDecl__Group_0_1__17546);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeDecl__Group_0_1__2_in_rule__EGenericTypeDecl__Group_0_1__17546);
             rule__EGenericTypeDecl__Group_0_1__2();
             _fsp--;
 
@@ -9907,7 +9907,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3774:2: rule__EGenericTypeDecl__Group_0_1_2__0
             	    {
-            	    pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_0_1_2__0_in_rule__EGenericTypeDecl__Group_0_1__27574);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeDecl__Group_0_1_2__0_in_rule__EGenericTypeDecl__Group_0_1__27574);
             	    rule__EGenericTypeDecl__Group_0_1_2__0();
             	    _fsp--;
 
@@ -9924,7 +9924,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_0_1__3_in_rule__EGenericTypeDecl__Group_0_1__27584);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeDecl__Group_0_1__3_in_rule__EGenericTypeDecl__Group_0_1__27584);
             rule__EGenericTypeDecl__Group_0_1__3();
             _fsp--;
 
@@ -9960,7 +9960,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3791:1: '>'
             {
              before(grammarAccess.getEGenericTypeDeclAccess().getGreaterThanSignKeyword_0_1_3()); 
-            match(input,36,FOLLOW_36_in_rule__EGenericTypeDecl__Group_0_1__37613); 
+            match(input,36,FollowSets000.FOLLOW_36_in_rule__EGenericTypeDecl__Group_0_1__37613); 
              after(grammarAccess.getEGenericTypeDeclAccess().getGreaterThanSignKeyword_0_1_3()); 
 
             }
@@ -9997,12 +9997,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3818:1: ','
             {
              before(grammarAccess.getEGenericTypeDeclAccess().getCommaKeyword_0_1_2_0()); 
-            match(input,34,FOLLOW_34_in_rule__EGenericTypeDecl__Group_0_1_2__07657); 
+            match(input,34,FollowSets000.FOLLOW_34_in_rule__EGenericTypeDecl__Group_0_1_2__07657); 
              after(grammarAccess.getEGenericTypeDeclAccess().getCommaKeyword_0_1_2_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_0_1_2__1_in_rule__EGenericTypeDecl__Group_0_1_2__07667);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeDecl__Group_0_1_2__1_in_rule__EGenericTypeDecl__Group_0_1_2__07667);
             rule__EGenericTypeDecl__Group_0_1_2__1();
             _fsp--;
 
@@ -10041,7 +10041,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3839:1: ( rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3839:2: rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_1
             {
-            pushFollow(FOLLOW_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_1_in_rule__EGenericTypeDecl__Group_0_1_2__17695);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_1_in_rule__EGenericTypeDecl__Group_0_1_2__17695);
             rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_1();
             _fsp--;
 
@@ -10084,12 +10084,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3859:1: '#'
             {
              before(grammarAccess.getEGenericTypeDeclAccess().getNumberSignKeyword_1_0()); 
-            match(input,42,FOLLOW_42_in_rule__EGenericTypeDecl__Group_1__07734); 
+            match(input,42,FollowSets000.FOLLOW_42_in_rule__EGenericTypeDecl__Group_1__07734); 
              after(grammarAccess.getEGenericTypeDeclAccess().getNumberSignKeyword_1_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_1__1_in_rule__EGenericTypeDecl__Group_1__07744);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeDecl__Group_1__1_in_rule__EGenericTypeDecl__Group_1__07744);
             rule__EGenericTypeDecl__Group_1__1();
             _fsp--;
 
@@ -10128,7 +10128,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3880:1: ( rule__EGenericTypeDecl__ETypeParameterAssignment_1_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3880:2: rule__EGenericTypeDecl__ETypeParameterAssignment_1_1
             {
-            pushFollow(FOLLOW_rule__EGenericTypeDecl__ETypeParameterAssignment_1_1_in_rule__EGenericTypeDecl__Group_1__17772);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeDecl__ETypeParameterAssignment_1_1_in_rule__EGenericTypeDecl__Group_1__17772);
             rule__EGenericTypeDecl__ETypeParameterAssignment_1_1();
             _fsp--;
 
@@ -10171,12 +10171,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3900:1: '?'
             {
              before(grammarAccess.getEGenericTypeDeclAccess().getQuestionMarkKeyword_2_0()); 
-            match(input,44,FOLLOW_44_in_rule__EGenericTypeDecl__Group_2__07811); 
+            match(input,44,FollowSets000.FOLLOW_44_in_rule__EGenericTypeDecl__Group_2__07811); 
              after(grammarAccess.getEGenericTypeDeclAccess().getQuestionMarkKeyword_2_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_2__1_in_rule__EGenericTypeDecl__Group_2__07821);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeDecl__Group_2__1_in_rule__EGenericTypeDecl__Group_2__07821);
             rule__EGenericTypeDecl__Group_2__1();
             _fsp--;
 
@@ -10215,7 +10215,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3921:1: ( rule__EGenericTypeDecl__Alternatives_2_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3921:2: rule__EGenericTypeDecl__Alternatives_2_1
             {
-            pushFollow(FOLLOW_rule__EGenericTypeDecl__Alternatives_2_1_in_rule__EGenericTypeDecl__Group_2__17849);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeDecl__Alternatives_2_1_in_rule__EGenericTypeDecl__Group_2__17849);
             rule__EGenericTypeDecl__Alternatives_2_1();
             _fsp--;
 
@@ -10258,12 +10258,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3941:1: 'extends'
             {
              before(grammarAccess.getEGenericTypeDeclAccess().getExtendsKeyword_2_1_0_0()); 
-            match(input,37,FOLLOW_37_in_rule__EGenericTypeDecl__Group_2_1_0__07888); 
+            match(input,37,FollowSets000.FOLLOW_37_in_rule__EGenericTypeDecl__Group_2_1_0__07888); 
              after(grammarAccess.getEGenericTypeDeclAccess().getExtendsKeyword_2_1_0_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_2_1_0__1_in_rule__EGenericTypeDecl__Group_2_1_0__07898);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeDecl__Group_2_1_0__1_in_rule__EGenericTypeDecl__Group_2_1_0__07898);
             rule__EGenericTypeDecl__Group_2_1_0__1();
             _fsp--;
 
@@ -10302,7 +10302,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3962:1: ( rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3962:2: rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_1
             {
-            pushFollow(FOLLOW_rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_1_in_rule__EGenericTypeDecl__Group_2_1_0__17926);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_1_in_rule__EGenericTypeDecl__Group_2_1_0__17926);
             rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_1();
             _fsp--;
 
@@ -10345,12 +10345,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:3982:1: 'super'
             {
              before(grammarAccess.getEGenericTypeDeclAccess().getSuperKeyword_2_1_1_0()); 
-            match(input,45,FOLLOW_45_in_rule__EGenericTypeDecl__Group_2_1_1__07965); 
+            match(input,45,FollowSets000.FOLLOW_45_in_rule__EGenericTypeDecl__Group_2_1_1__07965); 
              after(grammarAccess.getEGenericTypeDeclAccess().getSuperKeyword_2_1_1_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EGenericTypeDecl__Group_2_1_1__1_in_rule__EGenericTypeDecl__Group_2_1_1__07975);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeDecl__Group_2_1_1__1_in_rule__EGenericTypeDecl__Group_2_1_1__07975);
             rule__EGenericTypeDecl__Group_2_1_1__1();
             _fsp--;
 
@@ -10389,7 +10389,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4003:1: ( rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4003:2: rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_1
             {
-            pushFollow(FOLLOW_rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_1_in_rule__EGenericTypeDecl__Group_2_1_1__18003);
+            pushFollow(FollowSets000.FOLLOW_rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_1_in_rule__EGenericTypeDecl__Group_2_1_1__18003);
             rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_1();
             _fsp--;
 
@@ -10447,7 +10447,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4024:2: rule__EOperationDecl__EAnnotationsAssignment_0
             	    {
-            	    pushFollow(FOLLOW_rule__EOperationDecl__EAnnotationsAssignment_0_in_rule__EOperationDecl__Group__08041);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__EAnnotationsAssignment_0_in_rule__EOperationDecl__Group__08041);
             	    rule__EOperationDecl__EAnnotationsAssignment_0();
             	    _fsp--;
 
@@ -10464,7 +10464,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EOperationDecl__Group__1_in_rule__EOperationDecl__Group__08051);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group__1_in_rule__EOperationDecl__Group__08051);
             rule__EOperationDecl__Group__1();
             _fsp--;
 
@@ -10515,7 +10515,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4042:2: rule__EOperationDecl__Alternatives_1
             	    {
-            	    pushFollow(FOLLOW_rule__EOperationDecl__Alternatives_1_in_rule__EOperationDecl__Group__18079);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Alternatives_1_in_rule__EOperationDecl__Group__18079);
             	    rule__EOperationDecl__Alternatives_1();
             	    _fsp--;
 
@@ -10532,7 +10532,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EOperationDecl__Group__2_in_rule__EOperationDecl__Group__18089);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group__2_in_rule__EOperationDecl__Group__18089);
             rule__EOperationDecl__Group__2();
             _fsp--;
 
@@ -10568,12 +10568,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4059:1: 'op'
             {
              before(grammarAccess.getEOperationDeclAccess().getOpKeyword_2()); 
-            match(input,46,FOLLOW_46_in_rule__EOperationDecl__Group__28118); 
+            match(input,46,FollowSets000.FOLLOW_46_in_rule__EOperationDecl__Group__28118); 
              after(grammarAccess.getEOperationDeclAccess().getOpKeyword_2()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EOperationDecl__Group__3_in_rule__EOperationDecl__Group__28128);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group__3_in_rule__EOperationDecl__Group__28128);
             rule__EOperationDecl__Group__3();
             _fsp--;
 
@@ -10612,7 +10612,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4080:1: ( rule__EOperationDecl__Alternatives_3 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4080:2: rule__EOperationDecl__Alternatives_3
             {
-            pushFollow(FOLLOW_rule__EOperationDecl__Alternatives_3_in_rule__EOperationDecl__Group__38156);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Alternatives_3_in_rule__EOperationDecl__Group__38156);
             rule__EOperationDecl__Alternatives_3();
             _fsp--;
 
@@ -10623,7 +10623,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EOperationDecl__Group__4_in_rule__EOperationDecl__Group__38165);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group__4_in_rule__EOperationDecl__Group__38165);
             rule__EOperationDecl__Group__4();
             _fsp--;
 
@@ -10662,7 +10662,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4098:1: ( rule__EOperationDecl__NameAssignment_4 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4098:2: rule__EOperationDecl__NameAssignment_4
             {
-            pushFollow(FOLLOW_rule__EOperationDecl__NameAssignment_4_in_rule__EOperationDecl__Group__48193);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__NameAssignment_4_in_rule__EOperationDecl__Group__48193);
             rule__EOperationDecl__NameAssignment_4();
             _fsp--;
 
@@ -10673,7 +10673,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EOperationDecl__Group__5_in_rule__EOperationDecl__Group__48202);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group__5_in_rule__EOperationDecl__Group__48202);
             rule__EOperationDecl__Group__5();
             _fsp--;
 
@@ -10720,7 +10720,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4116:2: rule__EOperationDecl__Group_5__0
                     {
-                    pushFollow(FOLLOW_rule__EOperationDecl__Group_5__0_in_rule__EOperationDecl__Group__58230);
+                    pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group_5__0_in_rule__EOperationDecl__Group__58230);
                     rule__EOperationDecl__Group_5__0();
                     _fsp--;
 
@@ -10734,7 +10734,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EOperationDecl__Group__6_in_rule__EOperationDecl__Group__58240);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group__6_in_rule__EOperationDecl__Group__58240);
             rule__EOperationDecl__Group__6();
             _fsp--;
 
@@ -10770,12 +10770,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4133:1: '('
             {
              before(grammarAccess.getEOperationDeclAccess().getLeftParenthesisKeyword_6()); 
-            match(input,32,FOLLOW_32_in_rule__EOperationDecl__Group__68269); 
+            match(input,32,FollowSets000.FOLLOW_32_in_rule__EOperationDecl__Group__68269); 
              after(grammarAccess.getEOperationDeclAccess().getLeftParenthesisKeyword_6()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EOperationDecl__Group__7_in_rule__EOperationDecl__Group__68279);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group__7_in_rule__EOperationDecl__Group__68279);
             rule__EOperationDecl__Group__7();
             _fsp--;
 
@@ -10822,7 +10822,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4154:2: rule__EOperationDecl__Group_7__0
                     {
-                    pushFollow(FOLLOW_rule__EOperationDecl__Group_7__0_in_rule__EOperationDecl__Group__78307);
+                    pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group_7__0_in_rule__EOperationDecl__Group__78307);
                     rule__EOperationDecl__Group_7__0();
                     _fsp--;
 
@@ -10836,7 +10836,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EOperationDecl__Group__8_in_rule__EOperationDecl__Group__78317);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group__8_in_rule__EOperationDecl__Group__78317);
             rule__EOperationDecl__Group__8();
             _fsp--;
 
@@ -10872,12 +10872,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4171:1: ')'
             {
              before(grammarAccess.getEOperationDeclAccess().getRightParenthesisKeyword_8()); 
-            match(input,33,FOLLOW_33_in_rule__EOperationDecl__Group__88346); 
+            match(input,33,FollowSets000.FOLLOW_33_in_rule__EOperationDecl__Group__88346); 
              after(grammarAccess.getEOperationDeclAccess().getRightParenthesisKeyword_8()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EOperationDecl__Group__9_in_rule__EOperationDecl__Group__88356);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group__9_in_rule__EOperationDecl__Group__88356);
             rule__EOperationDecl__Group__9();
             _fsp--;
 
@@ -10924,7 +10924,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4192:2: rule__EOperationDecl__Group_9__0
                     {
-                    pushFollow(FOLLOW_rule__EOperationDecl__Group_9__0_in_rule__EOperationDecl__Group__98384);
+                    pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group_9__0_in_rule__EOperationDecl__Group__98384);
                     rule__EOperationDecl__Group_9__0();
                     _fsp--;
 
@@ -10938,7 +10938,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EOperationDecl__Group__10_in_rule__EOperationDecl__Group__98394);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group__10_in_rule__EOperationDecl__Group__98394);
             rule__EOperationDecl__Group__10();
             _fsp--;
 
@@ -10974,7 +10974,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4209:1: ';'
             {
              before(grammarAccess.getEOperationDeclAccess().getSemicolonKeyword_10()); 
-            match(input,22,FOLLOW_22_in_rule__EOperationDecl__Group__108423); 
+            match(input,22,FollowSets000.FOLLOW_22_in_rule__EOperationDecl__Group__108423); 
              after(grammarAccess.getEOperationDeclAccess().getSemicolonKeyword_10()); 
 
             }
@@ -11011,12 +11011,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4250:1: '<'
             {
              before(grammarAccess.getEOperationDeclAccess().getLessThanSignKeyword_5_0()); 
-            match(input,35,FOLLOW_35_in_rule__EOperationDecl__Group_5__08481); 
+            match(input,35,FollowSets000.FOLLOW_35_in_rule__EOperationDecl__Group_5__08481); 
              after(grammarAccess.getEOperationDeclAccess().getLessThanSignKeyword_5_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EOperationDecl__Group_5__1_in_rule__EOperationDecl__Group_5__08491);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group_5__1_in_rule__EOperationDecl__Group_5__08491);
             rule__EOperationDecl__Group_5__1();
             _fsp--;
 
@@ -11055,7 +11055,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4271:1: ( rule__EOperationDecl__ETypeParametersAssignment_5_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4271:2: rule__EOperationDecl__ETypeParametersAssignment_5_1
             {
-            pushFollow(FOLLOW_rule__EOperationDecl__ETypeParametersAssignment_5_1_in_rule__EOperationDecl__Group_5__18519);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__ETypeParametersAssignment_5_1_in_rule__EOperationDecl__Group_5__18519);
             rule__EOperationDecl__ETypeParametersAssignment_5_1();
             _fsp--;
 
@@ -11066,7 +11066,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EOperationDecl__Group_5__2_in_rule__EOperationDecl__Group_5__18528);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group_5__2_in_rule__EOperationDecl__Group_5__18528);
             rule__EOperationDecl__Group_5__2();
             _fsp--;
 
@@ -11117,7 +11117,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4289:2: rule__EOperationDecl__Group_5_2__0
             	    {
-            	    pushFollow(FOLLOW_rule__EOperationDecl__Group_5_2__0_in_rule__EOperationDecl__Group_5__28556);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group_5_2__0_in_rule__EOperationDecl__Group_5__28556);
             	    rule__EOperationDecl__Group_5_2__0();
             	    _fsp--;
 
@@ -11134,7 +11134,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EOperationDecl__Group_5__3_in_rule__EOperationDecl__Group_5__28566);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group_5__3_in_rule__EOperationDecl__Group_5__28566);
             rule__EOperationDecl__Group_5__3();
             _fsp--;
 
@@ -11170,7 +11170,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4306:1: '>'
             {
              before(grammarAccess.getEOperationDeclAccess().getGreaterThanSignKeyword_5_3()); 
-            match(input,36,FOLLOW_36_in_rule__EOperationDecl__Group_5__38595); 
+            match(input,36,FollowSets000.FOLLOW_36_in_rule__EOperationDecl__Group_5__38595); 
              after(grammarAccess.getEOperationDeclAccess().getGreaterThanSignKeyword_5_3()); 
 
             }
@@ -11207,12 +11207,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4333:1: ','
             {
              before(grammarAccess.getEOperationDeclAccess().getCommaKeyword_5_2_0()); 
-            match(input,34,FOLLOW_34_in_rule__EOperationDecl__Group_5_2__08639); 
+            match(input,34,FollowSets000.FOLLOW_34_in_rule__EOperationDecl__Group_5_2__08639); 
              after(grammarAccess.getEOperationDeclAccess().getCommaKeyword_5_2_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EOperationDecl__Group_5_2__1_in_rule__EOperationDecl__Group_5_2__08649);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group_5_2__1_in_rule__EOperationDecl__Group_5_2__08649);
             rule__EOperationDecl__Group_5_2__1();
             _fsp--;
 
@@ -11251,7 +11251,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4354:1: ( rule__EOperationDecl__ETypeParametersAssignment_5_2_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4354:2: rule__EOperationDecl__ETypeParametersAssignment_5_2_1
             {
-            pushFollow(FOLLOW_rule__EOperationDecl__ETypeParametersAssignment_5_2_1_in_rule__EOperationDecl__Group_5_2__18677);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__ETypeParametersAssignment_5_2_1_in_rule__EOperationDecl__Group_5_2__18677);
             rule__EOperationDecl__ETypeParametersAssignment_5_2_1();
             _fsp--;
 
@@ -11297,7 +11297,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4375:1: ( rule__EOperationDecl__EParametersAssignment_7_0 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4375:2: rule__EOperationDecl__EParametersAssignment_7_0
             {
-            pushFollow(FOLLOW_rule__EOperationDecl__EParametersAssignment_7_0_in_rule__EOperationDecl__Group_7__08715);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__EParametersAssignment_7_0_in_rule__EOperationDecl__Group_7__08715);
             rule__EOperationDecl__EParametersAssignment_7_0();
             _fsp--;
 
@@ -11308,7 +11308,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EOperationDecl__Group_7__1_in_rule__EOperationDecl__Group_7__08724);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group_7__1_in_rule__EOperationDecl__Group_7__08724);
             rule__EOperationDecl__Group_7__1();
             _fsp--;
 
@@ -11359,7 +11359,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4393:2: rule__EOperationDecl__Group_7_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__EOperationDecl__Group_7_1__0_in_rule__EOperationDecl__Group_7__18752);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group_7_1__0_in_rule__EOperationDecl__Group_7__18752);
             	    rule__EOperationDecl__Group_7_1__0();
             	    _fsp--;
 
@@ -11408,12 +11408,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4413:1: ','
             {
              before(grammarAccess.getEOperationDeclAccess().getCommaKeyword_7_1_0()); 
-            match(input,34,FOLLOW_34_in_rule__EOperationDecl__Group_7_1__08792); 
+            match(input,34,FollowSets000.FOLLOW_34_in_rule__EOperationDecl__Group_7_1__08792); 
              after(grammarAccess.getEOperationDeclAccess().getCommaKeyword_7_1_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EOperationDecl__Group_7_1__1_in_rule__EOperationDecl__Group_7_1__08802);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group_7_1__1_in_rule__EOperationDecl__Group_7_1__08802);
             rule__EOperationDecl__Group_7_1__1();
             _fsp--;
 
@@ -11452,7 +11452,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4434:1: ( rule__EOperationDecl__EParametersAssignment_7_1_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4434:2: rule__EOperationDecl__EParametersAssignment_7_1_1
             {
-            pushFollow(FOLLOW_rule__EOperationDecl__EParametersAssignment_7_1_1_in_rule__EOperationDecl__Group_7_1__18830);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__EParametersAssignment_7_1_1_in_rule__EOperationDecl__Group_7_1__18830);
             rule__EOperationDecl__EParametersAssignment_7_1_1();
             _fsp--;
 
@@ -11495,12 +11495,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4454:1: 'throws'
             {
              before(grammarAccess.getEOperationDeclAccess().getThrowsKeyword_9_0()); 
-            match(input,47,FOLLOW_47_in_rule__EOperationDecl__Group_9__08869); 
+            match(input,47,FollowSets000.FOLLOW_47_in_rule__EOperationDecl__Group_9__08869); 
              after(grammarAccess.getEOperationDeclAccess().getThrowsKeyword_9_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EOperationDecl__Group_9__1_in_rule__EOperationDecl__Group_9__08879);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group_9__1_in_rule__EOperationDecl__Group_9__08879);
             rule__EOperationDecl__Group_9__1();
             _fsp--;
 
@@ -11539,7 +11539,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4475:1: ( rule__EOperationDecl__EGenericExceptionsAssignment_9_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4475:2: rule__EOperationDecl__EGenericExceptionsAssignment_9_1
             {
-            pushFollow(FOLLOW_rule__EOperationDecl__EGenericExceptionsAssignment_9_1_in_rule__EOperationDecl__Group_9__18907);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__EGenericExceptionsAssignment_9_1_in_rule__EOperationDecl__Group_9__18907);
             rule__EOperationDecl__EGenericExceptionsAssignment_9_1();
             _fsp--;
 
@@ -11550,7 +11550,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EOperationDecl__Group_9__2_in_rule__EOperationDecl__Group_9__18916);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group_9__2_in_rule__EOperationDecl__Group_9__18916);
             rule__EOperationDecl__Group_9__2();
             _fsp--;
 
@@ -11601,7 +11601,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4493:2: rule__EOperationDecl__Group_9_2__0
             	    {
-            	    pushFollow(FOLLOW_rule__EOperationDecl__Group_9_2__0_in_rule__EOperationDecl__Group_9__28944);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group_9_2__0_in_rule__EOperationDecl__Group_9__28944);
             	    rule__EOperationDecl__Group_9_2__0();
             	    _fsp--;
 
@@ -11650,12 +11650,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4515:1: ','
             {
              before(grammarAccess.getEOperationDeclAccess().getCommaKeyword_9_2_0()); 
-            match(input,34,FOLLOW_34_in_rule__EOperationDecl__Group_9_2__08986); 
+            match(input,34,FollowSets000.FOLLOW_34_in_rule__EOperationDecl__Group_9_2__08986); 
              after(grammarAccess.getEOperationDeclAccess().getCommaKeyword_9_2_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__EOperationDecl__Group_9_2__1_in_rule__EOperationDecl__Group_9_2__08996);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__Group_9_2__1_in_rule__EOperationDecl__Group_9_2__08996);
             rule__EOperationDecl__Group_9_2__1();
             _fsp--;
 
@@ -11694,7 +11694,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4536:1: ( rule__EOperationDecl__EGenericExceptionsAssignment_9_2_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4536:2: rule__EOperationDecl__EGenericExceptionsAssignment_9_2_1
             {
-            pushFollow(FOLLOW_rule__EOperationDecl__EGenericExceptionsAssignment_9_2_1_in_rule__EOperationDecl__Group_9_2__19024);
+            pushFollow(FollowSets000.FOLLOW_rule__EOperationDecl__EGenericExceptionsAssignment_9_2_1_in_rule__EOperationDecl__Group_9_2__19024);
             rule__EOperationDecl__EGenericExceptionsAssignment_9_2_1();
             _fsp--;
 
@@ -11752,7 +11752,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4557:2: rule__EParameterDecl__EAnnotationsAssignment_0
             	    {
-            	    pushFollow(FOLLOW_rule__EParameterDecl__EAnnotationsAssignment_0_in_rule__EParameterDecl__Group__09062);
+            	    pushFollow(FollowSets000.FOLLOW_rule__EParameterDecl__EAnnotationsAssignment_0_in_rule__EParameterDecl__Group__09062);
             	    rule__EParameterDecl__EAnnotationsAssignment_0();
             	    _fsp--;
 
@@ -11769,7 +11769,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EParameterDecl__Group__1_in_rule__EParameterDecl__Group__09072);
+            pushFollow(FollowSets000.FOLLOW_rule__EParameterDecl__Group__1_in_rule__EParameterDecl__Group__09072);
             rule__EParameterDecl__Group__1();
             _fsp--;
 
@@ -11808,7 +11808,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4575:1: ( rule__EParameterDecl__EGenericTypeAssignment_1 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4575:2: rule__EParameterDecl__EGenericTypeAssignment_1
             {
-            pushFollow(FOLLOW_rule__EParameterDecl__EGenericTypeAssignment_1_in_rule__EParameterDecl__Group__19100);
+            pushFollow(FollowSets000.FOLLOW_rule__EParameterDecl__EGenericTypeAssignment_1_in_rule__EParameterDecl__Group__19100);
             rule__EParameterDecl__EGenericTypeAssignment_1();
             _fsp--;
 
@@ -11819,7 +11819,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__EParameterDecl__Group__2_in_rule__EParameterDecl__Group__19109);
+            pushFollow(FollowSets000.FOLLOW_rule__EParameterDecl__Group__2_in_rule__EParameterDecl__Group__19109);
             rule__EParameterDecl__Group__2();
             _fsp--;
 
@@ -11858,7 +11858,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4593:1: ( rule__EParameterDecl__NameAssignment_2 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4593:2: rule__EParameterDecl__NameAssignment_2
             {
-            pushFollow(FOLLOW_rule__EParameterDecl__NameAssignment_2_in_rule__EParameterDecl__Group__29137);
+            pushFollow(FollowSets000.FOLLOW_rule__EParameterDecl__NameAssignment_2_in_rule__EParameterDecl__Group__29137);
             rule__EParameterDecl__NameAssignment_2();
             _fsp--;
 
@@ -11904,7 +11904,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4616:1: ( rule__MapEntry__KeyAssignment_0 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4616:2: rule__MapEntry__KeyAssignment_0
             {
-            pushFollow(FOLLOW_rule__MapEntry__KeyAssignment_0_in_rule__MapEntry__Group__09177);
+            pushFollow(FollowSets000.FOLLOW_rule__MapEntry__KeyAssignment_0_in_rule__MapEntry__Group__09177);
             rule__MapEntry__KeyAssignment_0();
             _fsp--;
 
@@ -11915,7 +11915,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__MapEntry__Group__1_in_rule__MapEntry__Group__09186);
+            pushFollow(FollowSets000.FOLLOW_rule__MapEntry__Group__1_in_rule__MapEntry__Group__09186);
             rule__MapEntry__Group__1();
             _fsp--;
 
@@ -11951,12 +11951,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4633:1: '='
             {
              before(grammarAccess.getMapEntryAccess().getEqualsSignKeyword_1()); 
-            match(input,23,FOLLOW_23_in_rule__MapEntry__Group__19215); 
+            match(input,23,FollowSets000.FOLLOW_23_in_rule__MapEntry__Group__19215); 
              after(grammarAccess.getMapEntryAccess().getEqualsSignKeyword_1()); 
 
             }
 
-            pushFollow(FOLLOW_rule__MapEntry__Group__2_in_rule__MapEntry__Group__19225);
+            pushFollow(FollowSets000.FOLLOW_rule__MapEntry__Group__2_in_rule__MapEntry__Group__19225);
             rule__MapEntry__Group__2();
             _fsp--;
 
@@ -11995,7 +11995,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4654:1: ( rule__MapEntry__ValueAssignment_2 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4654:2: rule__MapEntry__ValueAssignment_2
             {
-            pushFollow(FOLLOW_rule__MapEntry__ValueAssignment_2_in_rule__MapEntry__Group__29253);
+            pushFollow(FollowSets000.FOLLOW_rule__MapEntry__ValueAssignment_2_in_rule__MapEntry__Group__29253);
             rule__MapEntry__ValueAssignment_2();
             _fsp--;
 
@@ -12038,12 +12038,12 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4676:1: RULE_ID
             {
              before(grammarAccess.getQIDAccess().getIDTerminalRuleCall_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__QID__Group__09293); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__QID__Group__09293); 
              after(grammarAccess.getQIDAccess().getIDTerminalRuleCall_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__QID__Group__1_in_rule__QID__Group__09301);
+            pushFollow(FollowSets000.FOLLOW_rule__QID__Group__1_in_rule__QID__Group__09301);
             rule__QID__Group__1();
             _fsp--;
 
@@ -12094,7 +12094,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4695:2: rule__QID__Group_1__0
             	    {
-            	    pushFollow(FOLLOW_rule__QID__Group_1__0_in_rule__QID__Group__19329);
+            	    pushFollow(FollowSets000.FOLLOW_rule__QID__Group_1__0_in_rule__QID__Group__19329);
             	    rule__QID__Group_1__0();
             	    _fsp--;
 
@@ -12146,7 +12146,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4716:1: ( rule__QID__Alternatives_1_0 )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4716:2: rule__QID__Alternatives_1_0
             {
-            pushFollow(FOLLOW_rule__QID__Alternatives_1_0_in_rule__QID__Group_1__09368);
+            pushFollow(FollowSets000.FOLLOW_rule__QID__Alternatives_1_0_in_rule__QID__Group_1__09368);
             rule__QID__Alternatives_1_0();
             _fsp--;
 
@@ -12157,7 +12157,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__QID__Group_1__1_in_rule__QID__Group_1__09377);
+            pushFollow(FollowSets000.FOLLOW_rule__QID__Group_1__1_in_rule__QID__Group_1__09377);
             rule__QID__Group_1__1();
             _fsp--;
 
@@ -12193,7 +12193,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4733:1: RULE_ID
             {
              before(grammarAccess.getQIDAccess().getIDTerminalRuleCall_1_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__QID__Group_1__19405); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__QID__Group_1__19405); 
              after(grammarAccess.getQIDAccess().getIDTerminalRuleCall_1_1()); 
 
             }
@@ -12241,7 +12241,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4756:2: '-'
                     {
-                    match(input,48,FOLLOW_48_in_rule__SINT__Group__09444); 
+                    match(input,48,FollowSets000.FOLLOW_48_in_rule__SINT__Group__09444); 
 
                     }
                     break;
@@ -12252,7 +12252,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__SINT__Group__1_in_rule__SINT__Group__09456);
+            pushFollow(FollowSets000.FOLLOW_rule__SINT__Group__1_in_rule__SINT__Group__09456);
             rule__SINT__Group__1();
             _fsp--;
 
@@ -12288,7 +12288,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4774:1: RULE_INT
             {
              before(grammarAccess.getSINTAccess().getINTTerminalRuleCall_1()); 
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__SINT__Group__19484); 
+            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_rule__SINT__Group__19484); 
              after(grammarAccess.getSINTAccess().getINTTerminalRuleCall_1()); 
 
             }
@@ -12325,7 +12325,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4795:1: ruleReferencedMetamodel
             {
              before(grammarAccess.getEcoreDslAccess().getMetamodelDeclarationsReferencedMetamodelParserRuleCall_0_0()); 
-            pushFollow(FOLLOW_ruleReferencedMetamodel_in_rule__EcoreDsl__MetamodelDeclarationsAssignment_09521);
+            pushFollow(FollowSets000.FOLLOW_ruleReferencedMetamodel_in_rule__EcoreDsl__MetamodelDeclarationsAssignment_09521);
             ruleReferencedMetamodel();
             _fsp--;
 
@@ -12365,7 +12365,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4810:1: ruleEPackageDecl
             {
              before(grammarAccess.getEcoreDslAccess().getPackageEPackageDeclParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleEPackageDecl_in_rule__EcoreDsl__PackageAssignment_19552);
+            pushFollow(FollowSets000.FOLLOW_ruleEPackageDecl_in_rule__EcoreDsl__PackageAssignment_19552);
             ruleEPackageDecl();
             _fsp--;
 
@@ -12405,7 +12405,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4825:1: RULE_ID
             {
              before(grammarAccess.getReferencedMetamodelAccess().getAliasIDTerminalRuleCall_1_0_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__ReferencedMetamodel__AliasAssignment_1_09583); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ReferencedMetamodel__AliasAssignment_1_09583); 
              after(grammarAccess.getReferencedMetamodelAccess().getAliasIDTerminalRuleCall_1_0_0()); 
 
             }
@@ -12446,7 +12446,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4842:1: RULE_STRING
             {
              before(grammarAccess.getReferencedMetamodelAccess().getEPackageEPackageSTRINGTerminalRuleCall_2_0_1()); 
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__ReferencedMetamodel__EPackageAssignment_29618); 
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__ReferencedMetamodel__EPackageAssignment_29618); 
              after(grammarAccess.getReferencedMetamodelAccess().getEPackageEPackageSTRINGTerminalRuleCall_2_0_1()); 
 
             }
@@ -12487,7 +12487,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4859:1: ruleEAnnotationDecl
             {
              before(grammarAccess.getEPackageDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
-            pushFollow(FOLLOW_ruleEAnnotationDecl_in_rule__EPackageDecl__EAnnotationsAssignment_09653);
+            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EPackageDecl__EAnnotationsAssignment_09653);
             ruleEAnnotationDecl();
             _fsp--;
 
@@ -12527,7 +12527,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4874:1: ruleQID
             {
              before(grammarAccess.getEPackageDeclAccess().getNameQIDParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleQID_in_rule__EPackageDecl__NameAssignment_29684);
+            pushFollow(FollowSets000.FOLLOW_ruleQID_in_rule__EPackageDecl__NameAssignment_29684);
             ruleQID();
             _fsp--;
 
@@ -12567,7 +12567,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4889:1: RULE_STRING
             {
              before(grammarAccess.getEPackageDeclAccess().getNsURISTRINGTerminalRuleCall_5_0()); 
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__EPackageDecl__NsURIAssignment_59715); 
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__EPackageDecl__NsURIAssignment_59715); 
              after(grammarAccess.getEPackageDeclAccess().getNsURISTRINGTerminalRuleCall_5_0()); 
 
             }
@@ -12604,7 +12604,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4904:1: ruleQID
             {
              before(grammarAccess.getEPackageDeclAccess().getNsPrefixQIDParserRuleCall_8_0()); 
-            pushFollow(FOLLOW_ruleQID_in_rule__EPackageDecl__NsPrefixAssignment_89746);
+            pushFollow(FollowSets000.FOLLOW_ruleQID_in_rule__EPackageDecl__NsPrefixAssignment_89746);
             ruleQID();
             _fsp--;
 
@@ -12644,7 +12644,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4919:1: ruleSubEPackageDecl
             {
              before(grammarAccess.getEPackageDeclAccess().getESubpackagesSubEPackageDeclParserRuleCall_10_0_0()); 
-            pushFollow(FOLLOW_ruleSubEPackageDecl_in_rule__EPackageDecl__ESubpackagesAssignment_10_09777);
+            pushFollow(FollowSets000.FOLLOW_ruleSubEPackageDecl_in_rule__EPackageDecl__ESubpackagesAssignment_10_09777);
             ruleSubEPackageDecl();
             _fsp--;
 
@@ -12684,7 +12684,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4934:1: ruleEClassifierDecl
             {
              before(grammarAccess.getEPackageDeclAccess().getEClassifiersEClassifierDeclParserRuleCall_10_1_0()); 
-            pushFollow(FOLLOW_ruleEClassifierDecl_in_rule__EPackageDecl__EClassifiersAssignment_10_19808);
+            pushFollow(FollowSets000.FOLLOW_ruleEClassifierDecl_in_rule__EPackageDecl__EClassifiersAssignment_10_19808);
             ruleEClassifierDecl();
             _fsp--;
 
@@ -12724,7 +12724,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4949:1: ruleEAnnotationDecl
             {
              before(grammarAccess.getSubEPackageDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
-            pushFollow(FOLLOW_ruleEAnnotationDecl_in_rule__SubEPackageDecl__EAnnotationsAssignment_09839);
+            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__SubEPackageDecl__EAnnotationsAssignment_09839);
             ruleEAnnotationDecl();
             _fsp--;
 
@@ -12764,7 +12764,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4964:1: RULE_ID
             {
              before(grammarAccess.getSubEPackageDeclAccess().getNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__SubEPackageDecl__NameAssignment_29870); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__SubEPackageDecl__NameAssignment_29870); 
              after(grammarAccess.getSubEPackageDeclAccess().getNameIDTerminalRuleCall_2_0()); 
 
             }
@@ -12801,7 +12801,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4979:1: ruleSubEPackageDecl
             {
              before(grammarAccess.getSubEPackageDeclAccess().getESubpackagesSubEPackageDeclParserRuleCall_4_0_0()); 
-            pushFollow(FOLLOW_ruleSubEPackageDecl_in_rule__SubEPackageDecl__ESubpackagesAssignment_4_09901);
+            pushFollow(FollowSets000.FOLLOW_ruleSubEPackageDecl_in_rule__SubEPackageDecl__ESubpackagesAssignment_4_09901);
             ruleSubEPackageDecl();
             _fsp--;
 
@@ -12841,7 +12841,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4994:1: ruleEClassifierDecl
             {
              before(grammarAccess.getSubEPackageDeclAccess().getEClassifiersEClassifierDeclParserRuleCall_4_1_0()); 
-            pushFollow(FOLLOW_ruleEClassifierDecl_in_rule__SubEPackageDecl__EClassifiersAssignment_4_19932);
+            pushFollow(FollowSets000.FOLLOW_ruleEClassifierDecl_in_rule__SubEPackageDecl__EClassifiersAssignment_4_19932);
             ruleEClassifierDecl();
             _fsp--;
 
@@ -12881,7 +12881,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5009:1: ruleEAnnotationDecl
             {
              before(grammarAccess.getEDataTypeDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0_0()); 
-            pushFollow(FOLLOW_ruleEAnnotationDecl_in_rule__EDataTypeDecl__EAnnotationsAssignment_0_09963);
+            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EDataTypeDecl__EAnnotationsAssignment_0_09963);
             ruleEAnnotationDecl();
             _fsp--;
 
@@ -12921,7 +12921,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5024:1: RULE_SERIALIZABLE
             {
              before(grammarAccess.getEDataTypeDeclAccess().getSerializableSerializableTerminalRuleCall_0_1_0()); 
-            match(input,RULE_SERIALIZABLE,FOLLOW_RULE_SERIALIZABLE_in_rule__EDataTypeDecl__SerializableAssignment_0_19994); 
+            match(input,RULE_SERIALIZABLE,FollowSets000.FOLLOW_RULE_SERIALIZABLE_in_rule__EDataTypeDecl__SerializableAssignment_0_19994); 
              after(grammarAccess.getEDataTypeDeclAccess().getSerializableSerializableTerminalRuleCall_0_1_0()); 
 
             }
@@ -12958,7 +12958,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5039:1: RULE_ID
             {
              before(grammarAccess.getEDataTypeDeclAccess().getNameIDTerminalRuleCall_0_2_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__EDataTypeDecl__NameAssignment_0_2_110025); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EDataTypeDecl__NameAssignment_0_2_110025); 
              after(grammarAccess.getEDataTypeDeclAccess().getNameIDTerminalRuleCall_0_2_1_0()); 
 
             }
@@ -12995,7 +12995,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5054:1: ruleSTRING_OR_QID
             {
              before(grammarAccess.getEDataTypeDeclAccess().getInstanceClassNameSTRING_OR_QIDParserRuleCall_0_2_3_0()); 
-            pushFollow(FOLLOW_ruleSTRING_OR_QID_in_rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_310056);
+            pushFollow(FollowSets000.FOLLOW_ruleSTRING_OR_QID_in_rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_310056);
             ruleSTRING_OR_QID();
             _fsp--;
 
@@ -13035,7 +13035,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5069:1: ruleSTRING_OR_QID
             {
              before(grammarAccess.getEAnnotationDeclAccess().getSourceSTRING_OR_QIDParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleSTRING_OR_QID_in_rule__EAnnotationDecl__SourceAssignment_110087);
+            pushFollow(FollowSets000.FOLLOW_ruleSTRING_OR_QID_in_rule__EAnnotationDecl__SourceAssignment_110087);
             ruleSTRING_OR_QID();
             _fsp--;
 
@@ -13075,7 +13075,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5084:1: ruleMapEntry
             {
              before(grammarAccess.getEAnnotationDeclAccess().getDetailsMapEntryParserRuleCall_2_1_0()); 
-            pushFollow(FOLLOW_ruleMapEntry_in_rule__EAnnotationDecl__DetailsAssignment_2_110118);
+            pushFollow(FollowSets000.FOLLOW_ruleMapEntry_in_rule__EAnnotationDecl__DetailsAssignment_2_110118);
             ruleMapEntry();
             _fsp--;
 
@@ -13115,7 +13115,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5099:1: ruleMapEntry
             {
              before(grammarAccess.getEAnnotationDeclAccess().getDetailsMapEntryParserRuleCall_2_2_1_0()); 
-            pushFollow(FOLLOW_ruleMapEntry_in_rule__EAnnotationDecl__DetailsAssignment_2_2_110149);
+            pushFollow(FollowSets000.FOLLOW_ruleMapEntry_in_rule__EAnnotationDecl__DetailsAssignment_2_2_110149);
             ruleMapEntry();
             _fsp--;
 
@@ -13155,7 +13155,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5114:1: ruleEAnnotationDecl
             {
              before(grammarAccess.getEClassDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
-            pushFollow(FOLLOW_ruleEAnnotationDecl_in_rule__EClassDecl__EAnnotationsAssignment_010180);
+            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EClassDecl__EAnnotationsAssignment_010180);
             ruleEAnnotationDecl();
             _fsp--;
 
@@ -13199,7 +13199,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5131:1: 'abstract'
             {
              before(grammarAccess.getEClassDeclAccess().getAbstractAbstractKeyword_1_0()); 
-            match(input,49,FOLLOW_49_in_rule__EClassDecl__AbstractAssignment_110216); 
+            match(input,49,FollowSets000.FOLLOW_49_in_rule__EClassDecl__AbstractAssignment_110216); 
              after(grammarAccess.getEClassDeclAccess().getAbstractAbstractKeyword_1_0()); 
 
             }
@@ -13244,7 +13244,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5154:1: 'interface'
             {
              before(grammarAccess.getEClassDeclAccess().getInterfaceInterfaceKeyword_2_0_0()); 
-            match(input,50,FOLLOW_50_in_rule__EClassDecl__InterfaceAssignment_2_010260); 
+            match(input,50,FollowSets000.FOLLOW_50_in_rule__EClassDecl__InterfaceAssignment_2_010260); 
              after(grammarAccess.getEClassDeclAccess().getInterfaceInterfaceKeyword_2_0_0()); 
 
             }
@@ -13285,7 +13285,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5175:1: RULE_ID
             {
              before(grammarAccess.getEClassDeclAccess().getNameIDTerminalRuleCall_3_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__EClassDecl__NameAssignment_310299); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EClassDecl__NameAssignment_310299); 
              after(grammarAccess.getEClassDeclAccess().getNameIDTerminalRuleCall_3_0()); 
 
             }
@@ -13322,7 +13322,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5190:1: ruleETypeParameterDecl
             {
              before(grammarAccess.getEClassDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_4_1_0()); 
-            pushFollow(FOLLOW_ruleETypeParameterDecl_in_rule__EClassDecl__ETypeParametersAssignment_4_110330);
+            pushFollow(FollowSets000.FOLLOW_ruleETypeParameterDecl_in_rule__EClassDecl__ETypeParametersAssignment_4_110330);
             ruleETypeParameterDecl();
             _fsp--;
 
@@ -13362,7 +13362,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5205:1: ruleETypeParameterDecl
             {
              before(grammarAccess.getEClassDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_4_2_1_0()); 
-            pushFollow(FOLLOW_ruleETypeParameterDecl_in_rule__EClassDecl__ETypeParametersAssignment_4_2_110361);
+            pushFollow(FollowSets000.FOLLOW_ruleETypeParameterDecl_in_rule__EClassDecl__ETypeParametersAssignment_4_2_110361);
             ruleETypeParameterDecl();
             _fsp--;
 
@@ -13402,7 +13402,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5220:1: ruleEGenericTypeReferenceDecl
             {
              before(grammarAccess.getEClassDeclAccess().getEGenericSuperTypesEGenericTypeReferenceDeclParserRuleCall_5_1_0()); 
-            pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EClassDecl__EGenericSuperTypesAssignment_5_110392);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EClassDecl__EGenericSuperTypesAssignment_5_110392);
             ruleEGenericTypeReferenceDecl();
             _fsp--;
 
@@ -13442,7 +13442,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5235:1: ruleEGenericTypeReferenceDecl
             {
              before(grammarAccess.getEClassDeclAccess().getEGenericSuperTypesEGenericTypeReferenceDeclParserRuleCall_5_2_1_0()); 
-            pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EClassDecl__EGenericSuperTypesAssignment_5_2_110423);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EClassDecl__EGenericSuperTypesAssignment_5_2_110423);
             ruleEGenericTypeReferenceDecl();
             _fsp--;
 
@@ -13482,7 +13482,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5250:1: ruleSTRING_OR_QID
             {
              before(grammarAccess.getEClassDeclAccess().getInstanceClassNameSTRING_OR_QIDParserRuleCall_6_1_0()); 
-            pushFollow(FOLLOW_ruleSTRING_OR_QID_in_rule__EClassDecl__InstanceClassNameAssignment_6_110454);
+            pushFollow(FollowSets000.FOLLOW_ruleSTRING_OR_QID_in_rule__EClassDecl__InstanceClassNameAssignment_6_110454);
             ruleSTRING_OR_QID();
             _fsp--;
 
@@ -13522,7 +13522,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5265:1: ruleEStructuralFeatureDecl
             {
              before(grammarAccess.getEClassDeclAccess().getEStructuralFeaturesEStructuralFeatureDeclParserRuleCall_8_0_0()); 
-            pushFollow(FOLLOW_ruleEStructuralFeatureDecl_in_rule__EClassDecl__EStructuralFeaturesAssignment_8_010485);
+            pushFollow(FollowSets000.FOLLOW_ruleEStructuralFeatureDecl_in_rule__EClassDecl__EStructuralFeaturesAssignment_8_010485);
             ruleEStructuralFeatureDecl();
             _fsp--;
 
@@ -13562,7 +13562,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5280:1: ruleEOperationDecl
             {
              before(grammarAccess.getEClassDeclAccess().getEOperationsEOperationDeclParserRuleCall_8_1_0()); 
-            pushFollow(FOLLOW_ruleEOperationDecl_in_rule__EClassDecl__EOperationsAssignment_8_110516);
+            pushFollow(FollowSets000.FOLLOW_ruleEOperationDecl_in_rule__EClassDecl__EOperationsAssignment_8_110516);
             ruleEOperationDecl();
             _fsp--;
 
@@ -13602,7 +13602,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5295:1: ruleEAnnotationDecl
             {
              before(grammarAccess.getEAttributeDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
-            pushFollow(FOLLOW_ruleEAnnotationDecl_in_rule__EAttributeDecl__EAnnotationsAssignment_010547);
+            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EAttributeDecl__EAnnotationsAssignment_010547);
             ruleEAnnotationDecl();
             _fsp--;
 
@@ -13646,7 +13646,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5312:1: 'ID'
             {
              before(grammarAccess.getEAttributeDeclAccess().getIDIDKeyword_1_0_0()); 
-            match(input,51,FOLLOW_51_in_rule__EAttributeDecl__IDAssignment_1_010583); 
+            match(input,51,FollowSets000.FOLLOW_51_in_rule__EAttributeDecl__IDAssignment_1_010583); 
              after(grammarAccess.getEAttributeDeclAccess().getIDIDKeyword_1_0_0()); 
 
             }
@@ -13687,7 +13687,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5333:1: RULE_BAG
             {
              before(grammarAccess.getEAttributeDeclAccess().getUniqueBagTerminalRuleCall_1_1_0()); 
-            match(input,RULE_BAG,FOLLOW_RULE_BAG_in_rule__EAttributeDecl__UniqueAssignment_1_110622); 
+            match(input,RULE_BAG,FollowSets000.FOLLOW_RULE_BAG_in_rule__EAttributeDecl__UniqueAssignment_1_110622); 
              after(grammarAccess.getEAttributeDeclAccess().getUniqueBagTerminalRuleCall_1_1_0()); 
 
             }
@@ -13724,7 +13724,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5348:1: RULE_RANDOM
             {
              before(grammarAccess.getEAttributeDeclAccess().getOrderedRandomTerminalRuleCall_1_2_0()); 
-            match(input,RULE_RANDOM,FOLLOW_RULE_RANDOM_in_rule__EAttributeDecl__OrderedAssignment_1_210653); 
+            match(input,RULE_RANDOM,FollowSets000.FOLLOW_RULE_RANDOM_in_rule__EAttributeDecl__OrderedAssignment_1_210653); 
              after(grammarAccess.getEAttributeDeclAccess().getOrderedRandomTerminalRuleCall_1_2_0()); 
 
             }
@@ -13761,7 +13761,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5363:1: RULE_READONLY
             {
              before(grammarAccess.getEAttributeDeclAccess().getChangeableReadonlyTerminalRuleCall_1_3_0()); 
-            match(input,RULE_READONLY,FOLLOW_RULE_READONLY_in_rule__EAttributeDecl__ChangeableAssignment_1_310684); 
+            match(input,RULE_READONLY,FollowSets000.FOLLOW_RULE_READONLY_in_rule__EAttributeDecl__ChangeableAssignment_1_310684); 
              after(grammarAccess.getEAttributeDeclAccess().getChangeableReadonlyTerminalRuleCall_1_3_0()); 
 
             }
@@ -13802,7 +13802,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5380:1: 'volatile'
             {
              before(grammarAccess.getEAttributeDeclAccess().getVolatileVolatileKeyword_1_4_0()); 
-            match(input,52,FOLLOW_52_in_rule__EAttributeDecl__VolatileAssignment_1_410720); 
+            match(input,52,FollowSets000.FOLLOW_52_in_rule__EAttributeDecl__VolatileAssignment_1_410720); 
              after(grammarAccess.getEAttributeDeclAccess().getVolatileVolatileKeyword_1_4_0()); 
 
             }
@@ -13847,7 +13847,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5403:1: 'transient'
             {
              before(grammarAccess.getEAttributeDeclAccess().getTransientTransientKeyword_1_5_0()); 
-            match(input,53,FOLLOW_53_in_rule__EAttributeDecl__TransientAssignment_1_510764); 
+            match(input,53,FollowSets000.FOLLOW_53_in_rule__EAttributeDecl__TransientAssignment_1_510764); 
              after(grammarAccess.getEAttributeDeclAccess().getTransientTransientKeyword_1_5_0()); 
 
             }
@@ -13892,7 +13892,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5426:1: 'unsettable'
             {
              before(grammarAccess.getEAttributeDeclAccess().getUnsettableUnsettableKeyword_1_6_0()); 
-            match(input,54,FOLLOW_54_in_rule__EAttributeDecl__UnsettableAssignment_1_610808); 
+            match(input,54,FollowSets000.FOLLOW_54_in_rule__EAttributeDecl__UnsettableAssignment_1_610808); 
              after(grammarAccess.getEAttributeDeclAccess().getUnsettableUnsettableKeyword_1_6_0()); 
 
             }
@@ -13937,7 +13937,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5449:1: 'derived'
             {
              before(grammarAccess.getEAttributeDeclAccess().getDerivedDerivedKeyword_1_7_0()); 
-            match(input,55,FOLLOW_55_in_rule__EAttributeDecl__DerivedAssignment_1_710852); 
+            match(input,55,FollowSets000.FOLLOW_55_in_rule__EAttributeDecl__DerivedAssignment_1_710852); 
              after(grammarAccess.getEAttributeDeclAccess().getDerivedDerivedKeyword_1_7_0()); 
 
             }
@@ -13978,7 +13978,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5470:1: ruleEGenericTypeReferenceDecl
             {
              before(grammarAccess.getEAttributeDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0()); 
-            pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EAttributeDecl__EGenericTypeAssignment_310891);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EAttributeDecl__EGenericTypeAssignment_310891);
             ruleEGenericTypeReferenceDecl();
             _fsp--;
 
@@ -14018,7 +14018,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5485:1: RULE_INT
             {
              before(grammarAccess.getEAttributeDeclAccess().getLowerBoundINTTerminalRuleCall_4_1_0()); 
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__EAttributeDecl__LowerBoundAssignment_4_110922); 
+            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_rule__EAttributeDecl__LowerBoundAssignment_4_110922); 
              after(grammarAccess.getEAttributeDeclAccess().getLowerBoundINTTerminalRuleCall_4_1_0()); 
 
             }
@@ -14055,7 +14055,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5500:1: ruleSINT
             {
              before(grammarAccess.getEAttributeDeclAccess().getUpperBoundSINTParserRuleCall_4_2_1_0()); 
-            pushFollow(FOLLOW_ruleSINT_in_rule__EAttributeDecl__UpperBoundAssignment_4_2_110953);
+            pushFollow(FollowSets000.FOLLOW_ruleSINT_in_rule__EAttributeDecl__UpperBoundAssignment_4_2_110953);
             ruleSINT();
             _fsp--;
 
@@ -14095,7 +14095,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5515:1: RULE_ID
             {
              before(grammarAccess.getEAttributeDeclAccess().getNameIDTerminalRuleCall_5_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__EAttributeDecl__NameAssignment_510984); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EAttributeDecl__NameAssignment_510984); 
              after(grammarAccess.getEAttributeDeclAccess().getNameIDTerminalRuleCall_5_0()); 
 
             }
@@ -14132,7 +14132,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5530:1: RULE_STRING
             {
              before(grammarAccess.getEAttributeDeclAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_6_1_0()); 
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__EAttributeDecl__DefaultValueLiteralAssignment_6_111015); 
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__EAttributeDecl__DefaultValueLiteralAssignment_6_111015); 
              after(grammarAccess.getEAttributeDeclAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_6_1_0()); 
 
             }
@@ -14169,7 +14169,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5545:1: ruleEAnnotationDecl
             {
              before(grammarAccess.getEReferenceDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
-            pushFollow(FOLLOW_ruleEAnnotationDecl_in_rule__EReferenceDecl__EAnnotationsAssignment_011046);
+            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EReferenceDecl__EAnnotationsAssignment_011046);
             ruleEAnnotationDecl();
             _fsp--;
 
@@ -14209,7 +14209,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5560:1: RULE_LOCAL
             {
              before(grammarAccess.getEReferenceDeclAccess().getResolveProxiesLocalTerminalRuleCall_1_0_0()); 
-            match(input,RULE_LOCAL,FOLLOW_RULE_LOCAL_in_rule__EReferenceDecl__ResolveProxiesAssignment_1_011077); 
+            match(input,RULE_LOCAL,FollowSets000.FOLLOW_RULE_LOCAL_in_rule__EReferenceDecl__ResolveProxiesAssignment_1_011077); 
              after(grammarAccess.getEReferenceDeclAccess().getResolveProxiesLocalTerminalRuleCall_1_0_0()); 
 
             }
@@ -14246,7 +14246,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5575:1: RULE_BAG
             {
              before(grammarAccess.getEReferenceDeclAccess().getUniqueBagTerminalRuleCall_1_1_0()); 
-            match(input,RULE_BAG,FOLLOW_RULE_BAG_in_rule__EReferenceDecl__UniqueAssignment_1_111108); 
+            match(input,RULE_BAG,FollowSets000.FOLLOW_RULE_BAG_in_rule__EReferenceDecl__UniqueAssignment_1_111108); 
              after(grammarAccess.getEReferenceDeclAccess().getUniqueBagTerminalRuleCall_1_1_0()); 
 
             }
@@ -14283,7 +14283,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5590:1: RULE_RANDOM
             {
              before(grammarAccess.getEReferenceDeclAccess().getOrderedRandomTerminalRuleCall_1_2_0()); 
-            match(input,RULE_RANDOM,FOLLOW_RULE_RANDOM_in_rule__EReferenceDecl__OrderedAssignment_1_211139); 
+            match(input,RULE_RANDOM,FollowSets000.FOLLOW_RULE_RANDOM_in_rule__EReferenceDecl__OrderedAssignment_1_211139); 
              after(grammarAccess.getEReferenceDeclAccess().getOrderedRandomTerminalRuleCall_1_2_0()); 
 
             }
@@ -14320,7 +14320,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5605:1: RULE_READONLY
             {
              before(grammarAccess.getEReferenceDeclAccess().getChangeableReadonlyTerminalRuleCall_1_3_0()); 
-            match(input,RULE_READONLY,FOLLOW_RULE_READONLY_in_rule__EReferenceDecl__ChangeableAssignment_1_311170); 
+            match(input,RULE_READONLY,FollowSets000.FOLLOW_RULE_READONLY_in_rule__EReferenceDecl__ChangeableAssignment_1_311170); 
              after(grammarAccess.getEReferenceDeclAccess().getChangeableReadonlyTerminalRuleCall_1_3_0()); 
 
             }
@@ -14361,7 +14361,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5622:1: 'volatile'
             {
              before(grammarAccess.getEReferenceDeclAccess().getVolatileVolatileKeyword_1_4_0()); 
-            match(input,52,FOLLOW_52_in_rule__EReferenceDecl__VolatileAssignment_1_411206); 
+            match(input,52,FollowSets000.FOLLOW_52_in_rule__EReferenceDecl__VolatileAssignment_1_411206); 
              after(grammarAccess.getEReferenceDeclAccess().getVolatileVolatileKeyword_1_4_0()); 
 
             }
@@ -14406,7 +14406,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5645:1: 'transient'
             {
              before(grammarAccess.getEReferenceDeclAccess().getTransientTransientKeyword_1_5_0()); 
-            match(input,53,FOLLOW_53_in_rule__EReferenceDecl__TransientAssignment_1_511250); 
+            match(input,53,FollowSets000.FOLLOW_53_in_rule__EReferenceDecl__TransientAssignment_1_511250); 
              after(grammarAccess.getEReferenceDeclAccess().getTransientTransientKeyword_1_5_0()); 
 
             }
@@ -14451,7 +14451,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5668:1: 'unsettable'
             {
              before(grammarAccess.getEReferenceDeclAccess().getUnsettableUnsettableKeyword_1_6_0()); 
-            match(input,54,FOLLOW_54_in_rule__EReferenceDecl__UnsettableAssignment_1_611294); 
+            match(input,54,FollowSets000.FOLLOW_54_in_rule__EReferenceDecl__UnsettableAssignment_1_611294); 
              after(grammarAccess.getEReferenceDeclAccess().getUnsettableUnsettableKeyword_1_6_0()); 
 
             }
@@ -14496,7 +14496,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5691:1: 'derived'
             {
              before(grammarAccess.getEReferenceDeclAccess().getDerivedDerivedKeyword_1_7_0()); 
-            match(input,55,FOLLOW_55_in_rule__EReferenceDecl__DerivedAssignment_1_711338); 
+            match(input,55,FollowSets000.FOLLOW_55_in_rule__EReferenceDecl__DerivedAssignment_1_711338); 
              after(grammarAccess.getEReferenceDeclAccess().getDerivedDerivedKeyword_1_7_0()); 
 
             }
@@ -14541,7 +14541,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5714:1: 'val'
             {
              before(grammarAccess.getEReferenceDeclAccess().getContainmentValKeyword_2_0_0()); 
-            match(input,56,FOLLOW_56_in_rule__EReferenceDecl__ContainmentAssignment_2_011382); 
+            match(input,56,FollowSets000.FOLLOW_56_in_rule__EReferenceDecl__ContainmentAssignment_2_011382); 
              after(grammarAccess.getEReferenceDeclAccess().getContainmentValKeyword_2_0_0()); 
 
             }
@@ -14582,7 +14582,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5735:1: ruleEGenericTypeReferenceDecl
             {
              before(grammarAccess.getEReferenceDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0()); 
-            pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EReferenceDecl__EGenericTypeAssignment_311421);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EReferenceDecl__EGenericTypeAssignment_311421);
             ruleEGenericTypeReferenceDecl();
             _fsp--;
 
@@ -14622,7 +14622,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5750:1: RULE_INT
             {
              before(grammarAccess.getEReferenceDeclAccess().getLowerBoundINTTerminalRuleCall_4_1_0()); 
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__EReferenceDecl__LowerBoundAssignment_4_111452); 
+            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_rule__EReferenceDecl__LowerBoundAssignment_4_111452); 
              after(grammarAccess.getEReferenceDeclAccess().getLowerBoundINTTerminalRuleCall_4_1_0()); 
 
             }
@@ -14659,7 +14659,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5765:1: ruleSINT
             {
              before(grammarAccess.getEReferenceDeclAccess().getUpperBoundSINTParserRuleCall_4_2_1_0()); 
-            pushFollow(FOLLOW_ruleSINT_in_rule__EReferenceDecl__UpperBoundAssignment_4_2_111483);
+            pushFollow(FollowSets000.FOLLOW_ruleSINT_in_rule__EReferenceDecl__UpperBoundAssignment_4_2_111483);
             ruleSINT();
             _fsp--;
 
@@ -14703,7 +14703,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5782:1: RULE_ID
             {
              before(grammarAccess.getEReferenceDeclAccess().getEOppositeEReferenceIDTerminalRuleCall_5_1_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__EReferenceDecl__EOppositeAssignment_5_111518); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EReferenceDecl__EOppositeAssignment_5_111518); 
              after(grammarAccess.getEReferenceDeclAccess().getEOppositeEReferenceIDTerminalRuleCall_5_1_0_1()); 
 
             }
@@ -14744,7 +14744,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5799:1: RULE_ID
             {
              before(grammarAccess.getEReferenceDeclAccess().getNameIDTerminalRuleCall_6_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__EReferenceDecl__NameAssignment_611553); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EReferenceDecl__NameAssignment_611553); 
              after(grammarAccess.getEReferenceDeclAccess().getNameIDTerminalRuleCall_6_0()); 
 
             }
@@ -14781,7 +14781,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5814:1: ruleEAnnotationDecl
             {
              before(grammarAccess.getEEnumDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
-            pushFollow(FOLLOW_ruleEAnnotationDecl_in_rule__EEnumDecl__EAnnotationsAssignment_011584);
+            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EEnumDecl__EAnnotationsAssignment_011584);
             ruleEAnnotationDecl();
             _fsp--;
 
@@ -14821,7 +14821,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5829:1: RULE_ID
             {
              before(grammarAccess.getEEnumDeclAccess().getNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__EEnumDecl__NameAssignment_211615); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EEnumDecl__NameAssignment_211615); 
              after(grammarAccess.getEEnumDeclAccess().getNameIDTerminalRuleCall_2_0()); 
 
             }
@@ -14858,7 +14858,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5844:1: ruleEEnumLiteralDecl
             {
              before(grammarAccess.getEEnumDeclAccess().getELiteralsEEnumLiteralDeclParserRuleCall_4_0()); 
-            pushFollow(FOLLOW_ruleEEnumLiteralDecl_in_rule__EEnumDecl__ELiteralsAssignment_411646);
+            pushFollow(FollowSets000.FOLLOW_ruleEEnumLiteralDecl_in_rule__EEnumDecl__ELiteralsAssignment_411646);
             ruleEEnumLiteralDecl();
             _fsp--;
 
@@ -14898,7 +14898,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5859:1: ruleEAnnotationDecl
             {
              before(grammarAccess.getEEnumLiteralDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
-            pushFollow(FOLLOW_ruleEAnnotationDecl_in_rule__EEnumLiteralDecl__EAnnotationsAssignment_011677);
+            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EEnumLiteralDecl__EAnnotationsAssignment_011677);
             ruleEAnnotationDecl();
             _fsp--;
 
@@ -14938,7 +14938,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5874:1: RULE_ID
             {
              before(grammarAccess.getEEnumLiteralDeclAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__EEnumLiteralDecl__NameAssignment_111708); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EEnumLiteralDecl__NameAssignment_111708); 
              after(grammarAccess.getEEnumLiteralDeclAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -14975,7 +14975,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5889:1: RULE_INT
             {
              before(grammarAccess.getEEnumLiteralDeclAccess().getValueINTTerminalRuleCall_2_1_0()); 
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_rule__EEnumLiteralDecl__ValueAssignment_2_111739); 
+            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_rule__EEnumLiteralDecl__ValueAssignment_2_111739); 
              after(grammarAccess.getEEnumLiteralDeclAccess().getValueINTTerminalRuleCall_2_1_0()); 
 
             }
@@ -15012,7 +15012,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5904:1: RULE_STRING
             {
              before(grammarAccess.getEEnumLiteralDeclAccess().getLiteralSTRINGTerminalRuleCall_3_0()); 
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__EEnumLiteralDecl__LiteralAssignment_311770); 
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__EEnumLiteralDecl__LiteralAssignment_311770); 
              after(grammarAccess.getEEnumLiteralDeclAccess().getLiteralSTRINGTerminalRuleCall_3_0()); 
 
             }
@@ -15049,7 +15049,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5919:1: RULE_ID
             {
              before(grammarAccess.getETypeParameterDeclAccess().getNameIDTerminalRuleCall_0_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__ETypeParameterDecl__NameAssignment_011801); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ETypeParameterDecl__NameAssignment_011801); 
              after(grammarAccess.getETypeParameterDeclAccess().getNameIDTerminalRuleCall_0_0()); 
 
             }
@@ -15086,7 +15086,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5934:1: ruleEGenericTypeDecl
             {
              before(grammarAccess.getETypeParameterDeclAccess().getEBoundsEGenericTypeDeclParserRuleCall_1_1_0()); 
-            pushFollow(FOLLOW_ruleEGenericTypeDecl_in_rule__ETypeParameterDecl__EBoundsAssignment_1_111832);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_rule__ETypeParameterDecl__EBoundsAssignment_1_111832);
             ruleEGenericTypeDecl();
             _fsp--;
 
@@ -15130,7 +15130,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5951:1: RULE_ID
             {
              before(grammarAccess.getEGenericTypeReferenceDeclAccess().getEClassifierEClassifierIDTerminalRuleCall_0_0_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_011867); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_011867); 
              after(grammarAccess.getEGenericTypeReferenceDeclAccess().getEClassifierEClassifierIDTerminalRuleCall_0_0_0_1()); 
 
             }
@@ -15171,7 +15171,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5968:1: ruleEGenericTypeDecl
             {
              before(grammarAccess.getEGenericTypeReferenceDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_1_0()); 
-            pushFollow(FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_111902);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_111902);
             ruleEGenericTypeDecl();
             _fsp--;
 
@@ -15211,7 +15211,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5983:1: ruleEGenericTypeDecl
             {
              before(grammarAccess.getEGenericTypeReferenceDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_2_1_0()); 
-            pushFollow(FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_111933);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_111933);
             ruleEGenericTypeDecl();
             _fsp--;
 
@@ -15255,7 +15255,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6000:1: RULE_ID
             {
              before(grammarAccess.getEGenericTypeReferenceDeclAccess().getETypeParameterETypeParameterIDTerminalRuleCall_1_1_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_111968); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_111968); 
              after(grammarAccess.getEGenericTypeReferenceDeclAccess().getETypeParameterETypeParameterIDTerminalRuleCall_1_1_0_1()); 
 
             }
@@ -15300,7 +15300,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6019:1: RULE_ID
             {
              before(grammarAccess.getEGenericTypeDeclAccess().getEClassifierEClassifierIDTerminalRuleCall_0_0_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__EGenericTypeDecl__EClassifierAssignment_0_012007); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EGenericTypeDecl__EClassifierAssignment_0_012007); 
              after(grammarAccess.getEGenericTypeDeclAccess().getEClassifierEClassifierIDTerminalRuleCall_0_0_0_1()); 
 
             }
@@ -15341,7 +15341,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6036:1: ruleEGenericTypeDecl
             {
              before(grammarAccess.getEGenericTypeDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_1_0()); 
-            pushFollow(FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_112042);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_112042);
             ruleEGenericTypeDecl();
             _fsp--;
 
@@ -15381,7 +15381,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6051:1: ruleEGenericTypeDecl
             {
              before(grammarAccess.getEGenericTypeDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_2_1_0()); 
-            pushFollow(FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_112073);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_112073);
             ruleEGenericTypeDecl();
             _fsp--;
 
@@ -15425,7 +15425,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6068:1: RULE_ID
             {
              before(grammarAccess.getEGenericTypeDeclAccess().getETypeParameterETypeParameterIDTerminalRuleCall_1_1_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__EGenericTypeDecl__ETypeParameterAssignment_1_112108); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EGenericTypeDecl__ETypeParameterAssignment_1_112108); 
              after(grammarAccess.getEGenericTypeDeclAccess().getETypeParameterETypeParameterIDTerminalRuleCall_1_1_0_1()); 
 
             }
@@ -15466,7 +15466,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6085:1: ruleEGenericTypeDecl
             {
              before(grammarAccess.getEGenericTypeDeclAccess().getEUpperBoundEGenericTypeDeclParserRuleCall_2_1_0_1_0()); 
-            pushFollow(FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_112143);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_112143);
             ruleEGenericTypeDecl();
             _fsp--;
 
@@ -15506,7 +15506,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6100:1: ruleEGenericTypeDecl
             {
              before(grammarAccess.getEGenericTypeDeclAccess().getELowerBoundEGenericTypeDeclParserRuleCall_2_1_1_1_0()); 
-            pushFollow(FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_112174);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_112174);
             ruleEGenericTypeDecl();
             _fsp--;
 
@@ -15546,7 +15546,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6115:1: ruleEAnnotationDecl
             {
              before(grammarAccess.getEOperationDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
-            pushFollow(FOLLOW_ruleEAnnotationDecl_in_rule__EOperationDecl__EAnnotationsAssignment_012205);
+            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EOperationDecl__EAnnotationsAssignment_012205);
             ruleEAnnotationDecl();
             _fsp--;
 
@@ -15586,7 +15586,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6130:1: RULE_BAG
             {
              before(grammarAccess.getEOperationDeclAccess().getUniqueBagTerminalRuleCall_1_0_0()); 
-            match(input,RULE_BAG,FOLLOW_RULE_BAG_in_rule__EOperationDecl__UniqueAssignment_1_012236); 
+            match(input,RULE_BAG,FollowSets000.FOLLOW_RULE_BAG_in_rule__EOperationDecl__UniqueAssignment_1_012236); 
              after(grammarAccess.getEOperationDeclAccess().getUniqueBagTerminalRuleCall_1_0_0()); 
 
             }
@@ -15623,7 +15623,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6145:1: RULE_RANDOM
             {
              before(grammarAccess.getEOperationDeclAccess().getOrderedRandomTerminalRuleCall_1_1_0()); 
-            match(input,RULE_RANDOM,FOLLOW_RULE_RANDOM_in_rule__EOperationDecl__OrderedAssignment_1_112267); 
+            match(input,RULE_RANDOM,FollowSets000.FOLLOW_RULE_RANDOM_in_rule__EOperationDecl__OrderedAssignment_1_112267); 
              after(grammarAccess.getEOperationDeclAccess().getOrderedRandomTerminalRuleCall_1_1_0()); 
 
             }
@@ -15660,7 +15660,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6160:1: ruleEGenericTypeReferenceDecl
             {
              before(grammarAccess.getEOperationDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0_0()); 
-            pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericTypeAssignment_3_012298);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericTypeAssignment_3_012298);
             ruleEGenericTypeReferenceDecl();
             _fsp--;
 
@@ -15700,7 +15700,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6175:1: RULE_ID
             {
              before(grammarAccess.getEOperationDeclAccess().getNameIDTerminalRuleCall_4_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__EOperationDecl__NameAssignment_412329); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EOperationDecl__NameAssignment_412329); 
              after(grammarAccess.getEOperationDeclAccess().getNameIDTerminalRuleCall_4_0()); 
 
             }
@@ -15737,7 +15737,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6190:1: ruleETypeParameterDecl
             {
              before(grammarAccess.getEOperationDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_5_1_0()); 
-            pushFollow(FOLLOW_ruleETypeParameterDecl_in_rule__EOperationDecl__ETypeParametersAssignment_5_112360);
+            pushFollow(FollowSets000.FOLLOW_ruleETypeParameterDecl_in_rule__EOperationDecl__ETypeParametersAssignment_5_112360);
             ruleETypeParameterDecl();
             _fsp--;
 
@@ -15777,7 +15777,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6205:1: ruleETypeParameterDecl
             {
              before(grammarAccess.getEOperationDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_5_2_1_0()); 
-            pushFollow(FOLLOW_ruleETypeParameterDecl_in_rule__EOperationDecl__ETypeParametersAssignment_5_2_112391);
+            pushFollow(FollowSets000.FOLLOW_ruleETypeParameterDecl_in_rule__EOperationDecl__ETypeParametersAssignment_5_2_112391);
             ruleETypeParameterDecl();
             _fsp--;
 
@@ -15817,7 +15817,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6220:1: ruleEParameterDecl
             {
              before(grammarAccess.getEOperationDeclAccess().getEParametersEParameterDeclParserRuleCall_7_0_0()); 
-            pushFollow(FOLLOW_ruleEParameterDecl_in_rule__EOperationDecl__EParametersAssignment_7_012422);
+            pushFollow(FollowSets000.FOLLOW_ruleEParameterDecl_in_rule__EOperationDecl__EParametersAssignment_7_012422);
             ruleEParameterDecl();
             _fsp--;
 
@@ -15857,7 +15857,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6235:1: ruleEParameterDecl
             {
              before(grammarAccess.getEOperationDeclAccess().getEParametersEParameterDeclParserRuleCall_7_1_1_0()); 
-            pushFollow(FOLLOW_ruleEParameterDecl_in_rule__EOperationDecl__EParametersAssignment_7_1_112453);
+            pushFollow(FollowSets000.FOLLOW_ruleEParameterDecl_in_rule__EOperationDecl__EParametersAssignment_7_1_112453);
             ruleEParameterDecl();
             _fsp--;
 
@@ -15897,7 +15897,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6250:1: ruleEGenericTypeReferenceDecl
             {
              before(grammarAccess.getEOperationDeclAccess().getEGenericExceptionsEGenericTypeReferenceDeclParserRuleCall_9_1_0()); 
-            pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericExceptionsAssignment_9_112484);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericExceptionsAssignment_9_112484);
             ruleEGenericTypeReferenceDecl();
             _fsp--;
 
@@ -15937,7 +15937,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6265:1: ruleEGenericTypeReferenceDecl
             {
              before(grammarAccess.getEOperationDeclAccess().getEGenericExceptionsEGenericTypeReferenceDeclParserRuleCall_9_2_1_0()); 
-            pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericExceptionsAssignment_9_2_112515);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericExceptionsAssignment_9_2_112515);
             ruleEGenericTypeReferenceDecl();
             _fsp--;
 
@@ -15977,7 +15977,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6280:1: ruleEAnnotationDecl
             {
              before(grammarAccess.getEParameterDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
-            pushFollow(FOLLOW_ruleEAnnotationDecl_in_rule__EParameterDecl__EAnnotationsAssignment_012546);
+            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EParameterDecl__EAnnotationsAssignment_012546);
             ruleEAnnotationDecl();
             _fsp--;
 
@@ -16017,7 +16017,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6295:1: ruleEGenericTypeReferenceDecl
             {
              before(grammarAccess.getEParameterDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EParameterDecl__EGenericTypeAssignment_112577);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EParameterDecl__EGenericTypeAssignment_112577);
             ruleEGenericTypeReferenceDecl();
             _fsp--;
 
@@ -16057,7 +16057,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6310:1: RULE_ID
             {
              before(grammarAccess.getEParameterDeclAccess().getNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__EParameterDecl__NameAssignment_212608); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EParameterDecl__NameAssignment_212608); 
              after(grammarAccess.getEParameterDeclAccess().getNameIDTerminalRuleCall_2_0()); 
 
             }
@@ -16094,7 +16094,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6325:1: RULE_ID
             {
              before(grammarAccess.getMapEntryAccess().getKeyIDTerminalRuleCall_0_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__MapEntry__KeyAssignment_012639); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__MapEntry__KeyAssignment_012639); 
              after(grammarAccess.getMapEntryAccess().getKeyIDTerminalRuleCall_0_0()); 
 
             }
@@ -16131,7 +16131,7 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6340:1: RULE_STRING
             {
              before(grammarAccess.getMapEntryAccess().getValueSTRINGTerminalRuleCall_2_0()); 
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__MapEntry__ValueAssignment_212670); 
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__MapEntry__ValueAssignment_212670); 
              after(grammarAccess.getMapEntryAccess().getValueSTRINGTerminalRuleCall_2_0()); 
 
             }
@@ -16611,521 +16611,525 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
     }
  
 
-    public static final BitSet FOLLOW_ruleEcoreDsl_in_entryRuleEcoreDsl60 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEcoreDsl67 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EcoreDsl__Group__0_in_ruleEcoreDsl94 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleReferencedMetamodel_in_entryRuleReferencedMetamodel120 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleReferencedMetamodel127 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__0_in_ruleReferencedMetamodel154 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEPackageDecl_in_entryRuleEPackageDecl180 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEPackageDecl187 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EPackageDecl__Group__0_in_ruleEPackageDecl214 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSubEPackageDecl_in_entryRuleSubEPackageDecl240 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSubEPackageDecl247 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SubEPackageDecl__Group__0_in_ruleSubEPackageDecl274 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEClassifierDecl_in_entryRuleEClassifierDecl300 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEClassifierDecl307 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassifierDecl__Alternatives_in_ruleEClassifierDecl334 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEDataTypeDecl_in_entryRuleEDataTypeDecl360 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEDataTypeDecl367 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EDataTypeDecl__Alternatives_in_ruleEDataTypeDecl394 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEAnnotationDecl_in_entryRuleEAnnotationDecl420 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEAnnotationDecl427 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAnnotationDecl__Group__0_in_ruleEAnnotationDecl454 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEClassDecl_in_entryRuleEClassDecl480 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEClassDecl487 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group__0_in_ruleEClassDecl514 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEStructuralFeatureDecl_in_entryRuleEStructuralFeatureDecl540 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEStructuralFeatureDecl547 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EStructuralFeatureDecl__Alternatives_in_ruleEStructuralFeatureDecl574 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEAttributeDecl_in_entryRuleEAttributeDecl600 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEAttributeDecl607 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__Group__0_in_ruleEAttributeDecl634 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEReferenceDecl_in_entryRuleEReferenceDecl660 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEReferenceDecl667 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__Group__0_in_ruleEReferenceDecl694 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEEnumDecl_in_entryRuleEEnumDecl720 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEEnumDecl727 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EEnumDecl__Group__0_in_ruleEEnumDecl754 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEEnumLiteralDecl_in_entryRuleEEnumLiteralDecl780 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEEnumLiteralDecl787 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group__0_in_ruleEEnumLiteralDecl814 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleETypeParameterDecl_in_entryRuleETypeParameterDecl840 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleETypeParameterDecl847 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ETypeParameterDecl__Group__0_in_ruleETypeParameterDecl874 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_entryRuleEGenericTypeReferenceDecl900 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEGenericTypeReferenceDecl907 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Alternatives_in_ruleEGenericTypeReferenceDecl934 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_entryRuleEGenericTypeDecl960 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEGenericTypeDecl967 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__Alternatives_in_ruleEGenericTypeDecl994 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEOperationDecl_in_entryRuleEOperationDecl1020 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEOperationDecl1027 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group__0_in_ruleEOperationDecl1054 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEParameterDecl_in_entryRuleEParameterDecl1080 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEParameterDecl1087 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EParameterDecl__Group__0_in_ruleEParameterDecl1114 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMapEntry_in_entryRuleMapEntry1140 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleMapEntry1147 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__MapEntry__Group__0_in_ruleMapEntry1174 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQID_in_entryRuleQID1200 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleQID1207 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QID__Group__0_in_ruleQID1234 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSTRING_OR_QID_in_entryRuleSTRING_OR_QID1260 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSTRING_OR_QID1267 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__STRING_OR_QID__Alternatives_in_ruleSTRING_OR_QID1294 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSINT_in_entryRuleSINT1320 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSINT1327 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SINT__Group__0_in_ruleSINT1354 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EPackageDecl__ESubpackagesAssignment_10_0_in_rule__EPackageDecl__Alternatives_101390 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EPackageDecl__EClassifiersAssignment_10_1_in_rule__EPackageDecl__Alternatives_101408 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SubEPackageDecl__ESubpackagesAssignment_4_0_in_rule__SubEPackageDecl__Alternatives_41441 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SubEPackageDecl__EClassifiersAssignment_4_1_in_rule__SubEPackageDecl__Alternatives_41459 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEClassDecl_in_rule__EClassifierDecl__Alternatives1492 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEDataTypeDecl_in_rule__EClassifierDecl__Alternatives1509 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EDataTypeDecl__Group_0__0_in_rule__EDataTypeDecl__Alternatives1541 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEEnumDecl_in_rule__EDataTypeDecl__Alternatives1559 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__InterfaceAssignment_2_0_in_rule__EClassDecl__Alternatives_21591 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_rule__EClassDecl__Alternatives_21610 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__EStructuralFeaturesAssignment_8_0_in_rule__EClassDecl__Alternatives_81644 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__EOperationsAssignment_8_1_in_rule__EClassDecl__Alternatives_81662 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEAttributeDecl_in_rule__EStructuralFeatureDecl__Alternatives1695 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEReferenceDecl_in_rule__EStructuralFeatureDecl__Alternatives1712 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__IDAssignment_1_0_in_rule__EAttributeDecl__Alternatives_11744 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__UniqueAssignment_1_1_in_rule__EAttributeDecl__Alternatives_11762 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__OrderedAssignment_1_2_in_rule__EAttributeDecl__Alternatives_11780 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__ChangeableAssignment_1_3_in_rule__EAttributeDecl__Alternatives_11798 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__VolatileAssignment_1_4_in_rule__EAttributeDecl__Alternatives_11816 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__TransientAssignment_1_5_in_rule__EAttributeDecl__Alternatives_11834 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__UnsettableAssignment_1_6_in_rule__EAttributeDecl__Alternatives_11852 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__DerivedAssignment_1_7_in_rule__EAttributeDecl__Alternatives_11870 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__ResolveProxiesAssignment_1_0_in_rule__EReferenceDecl__Alternatives_11903 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__UniqueAssignment_1_1_in_rule__EReferenceDecl__Alternatives_11921 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__OrderedAssignment_1_2_in_rule__EReferenceDecl__Alternatives_11939 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__ChangeableAssignment_1_3_in_rule__EReferenceDecl__Alternatives_11957 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__VolatileAssignment_1_4_in_rule__EReferenceDecl__Alternatives_11975 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__TransientAssignment_1_5_in_rule__EReferenceDecl__Alternatives_11993 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__UnsettableAssignment_1_6_in_rule__EReferenceDecl__Alternatives_12011 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__DerivedAssignment_1_7_in_rule__EReferenceDecl__Alternatives_12029 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__ContainmentAssignment_2_0_in_rule__EReferenceDecl__Alternatives_22062 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_rule__EReferenceDecl__Alternatives_22081 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0__0_in_rule__EGenericTypeReferenceDecl__Alternatives2115 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_1__0_in_rule__EGenericTypeReferenceDecl__Alternatives2133 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0__0_in_rule__EGenericTypeDecl__Alternatives2166 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_1__0_in_rule__EGenericTypeDecl__Alternatives2184 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_2__0_in_rule__EGenericTypeDecl__Alternatives2202 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_2_1_0__0_in_rule__EGenericTypeDecl__Alternatives_2_12235 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_2_1_1__0_in_rule__EGenericTypeDecl__Alternatives_2_12253 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__UniqueAssignment_1_0_in_rule__EOperationDecl__Alternatives_12286 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__OrderedAssignment_1_1_in_rule__EOperationDecl__Alternatives_12304 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__EGenericTypeAssignment_3_0_in_rule__EOperationDecl__Alternatives_32337 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_rule__EOperationDecl__Alternatives_32356 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_rule__QID__Alternatives_1_02391 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_rule__QID__Alternatives_1_02411 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__STRING_OR_QID__Alternatives2445 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQID_in_rule__STRING_OR_QID__Alternatives2462 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EcoreDsl__MetamodelDeclarationsAssignment_0_in_rule__EcoreDsl__Group__02496 = new BitSet(new long[]{0x0000000081200000L});
-    public static final BitSet FOLLOW_rule__EcoreDsl__Group__1_in_rule__EcoreDsl__Group__02506 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EcoreDsl__PackageAssignment_1_in_rule__EcoreDsl__Group__12534 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_rule__ReferencedMetamodel__Group__02573 = new BitSet(new long[]{0x0000000000000030L});
-    public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__1_in_rule__ReferencedMetamodel__Group__02583 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group_1__0_in_rule__ReferencedMetamodel__Group__12611 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__2_in_rule__ReferencedMetamodel__Group__12621 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ReferencedMetamodel__EPackageAssignment_2_in_rule__ReferencedMetamodel__Group__22649 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__3_in_rule__ReferencedMetamodel__Group__22658 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_rule__ReferencedMetamodel__Group__32687 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ReferencedMetamodel__AliasAssignment_1_0_in_rule__ReferencedMetamodel__Group_1__02730 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group_1__1_in_rule__ReferencedMetamodel__Group_1__02739 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_rule__ReferencedMetamodel__Group_1__12768 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EPackageDecl__EAnnotationsAssignment_0_in_rule__EPackageDecl__Group__02807 = new BitSet(new long[]{0x0000000081000000L});
-    public static final BitSet FOLLOW_rule__EPackageDecl__Group__1_in_rule__EPackageDecl__Group__02817 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_24_in_rule__EPackageDecl__Group__12846 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__EPackageDecl__Group__2_in_rule__EPackageDecl__Group__12856 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EPackageDecl__NameAssignment_2_in_rule__EPackageDecl__Group__22884 = new BitSet(new long[]{0x0000000002000000L});
-    public static final BitSet FOLLOW_rule__EPackageDecl__Group__3_in_rule__EPackageDecl__Group__22893 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_25_in_rule__EPackageDecl__Group__32922 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_rule__EPackageDecl__Group__4_in_rule__EPackageDecl__Group__32932 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_rule__EPackageDecl__Group__42961 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__EPackageDecl__Group__5_in_rule__EPackageDecl__Group__42971 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EPackageDecl__NsURIAssignment_5_in_rule__EPackageDecl__Group__52999 = new BitSet(new long[]{0x0000000004000000L});
-    public static final BitSet FOLLOW_rule__EPackageDecl__Group__6_in_rule__EPackageDecl__Group__53008 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_26_in_rule__EPackageDecl__Group__63037 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_rule__EPackageDecl__Group__7_in_rule__EPackageDecl__Group__63047 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_rule__EPackageDecl__Group__73076 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__EPackageDecl__Group__8_in_rule__EPackageDecl__Group__73086 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EPackageDecl__NsPrefixAssignment_8_in_rule__EPackageDecl__Group__83114 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_rule__EPackageDecl__Group__9_in_rule__EPackageDecl__Group__83123 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_rule__EPackageDecl__Group__93152 = new BitSet(new long[]{0x00060800B1010080L});
-    public static final BitSet FOLLOW_rule__EPackageDecl__Group__10_in_rule__EPackageDecl__Group__93162 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EPackageDecl__Alternatives_10_in_rule__EPackageDecl__Group__103190 = new BitSet(new long[]{0x00060800B1010080L});
-    public static final BitSet FOLLOW_rule__EPackageDecl__Group__11_in_rule__EPackageDecl__Group__103200 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_rule__EPackageDecl__Group__113229 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SubEPackageDecl__EAnnotationsAssignment_0_in_rule__SubEPackageDecl__Group__03288 = new BitSet(new long[]{0x0000000081000000L});
-    public static final BitSet FOLLOW_rule__SubEPackageDecl__Group__1_in_rule__SubEPackageDecl__Group__03298 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_24_in_rule__SubEPackageDecl__Group__13327 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__SubEPackageDecl__Group__2_in_rule__SubEPackageDecl__Group__13337 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SubEPackageDecl__NameAssignment_2_in_rule__SubEPackageDecl__Group__23365 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_rule__SubEPackageDecl__Group__3_in_rule__SubEPackageDecl__Group__23374 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_rule__SubEPackageDecl__Group__33403 = new BitSet(new long[]{0x00060800B1010080L});
-    public static final BitSet FOLLOW_rule__SubEPackageDecl__Group__4_in_rule__SubEPackageDecl__Group__33413 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SubEPackageDecl__Alternatives_4_in_rule__SubEPackageDecl__Group__43441 = new BitSet(new long[]{0x00060800B1010080L});
-    public static final BitSet FOLLOW_rule__SubEPackageDecl__Group__5_in_rule__SubEPackageDecl__Group__43451 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_rule__SubEPackageDecl__Group__53480 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EDataTypeDecl__EAnnotationsAssignment_0_0_in_rule__EDataTypeDecl__Group_0__03527 = new BitSet(new long[]{0x00000000A0000080L});
-    public static final BitSet FOLLOW_rule__EDataTypeDecl__Group_0__1_in_rule__EDataTypeDecl__Group_0__03537 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EDataTypeDecl__SerializableAssignment_0_1_in_rule__EDataTypeDecl__Group_0__13565 = new BitSet(new long[]{0x0000000020000000L});
-    public static final BitSet FOLLOW_rule__EDataTypeDecl__Group_0__2_in_rule__EDataTypeDecl__Group_0__13575 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EDataTypeDecl__Group_0_2__0_in_rule__EDataTypeDecl__Group_0__23603 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_29_in_rule__EDataTypeDecl__Group_0_2__03644 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__EDataTypeDecl__Group_0_2__1_in_rule__EDataTypeDecl__Group_0_2__03654 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EDataTypeDecl__NameAssignment_0_2_1_in_rule__EDataTypeDecl__Group_0_2__13682 = new BitSet(new long[]{0x0000000040000000L});
-    public static final BitSet FOLLOW_rule__EDataTypeDecl__Group_0_2__2_in_rule__EDataTypeDecl__Group_0_2__13691 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_30_in_rule__EDataTypeDecl__Group_0_2__23720 = new BitSet(new long[]{0x0000000000000030L});
-    public static final BitSet FOLLOW_rule__EDataTypeDecl__Group_0_2__3_in_rule__EDataTypeDecl__Group_0_2__23730 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_3_in_rule__EDataTypeDecl__Group_0_2__33758 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_rule__EDataTypeDecl__Group_0_2__4_in_rule__EDataTypeDecl__Group_0_2__33767 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_rule__EDataTypeDecl__Group_0_2__43796 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_31_in_rule__EAnnotationDecl__Group__03842 = new BitSet(new long[]{0x0000000000000030L});
-    public static final BitSet FOLLOW_rule__EAnnotationDecl__Group__1_in_rule__EAnnotationDecl__Group__03852 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAnnotationDecl__SourceAssignment_1_in_rule__EAnnotationDecl__Group__13880 = new BitSet(new long[]{0x0000000100000002L});
-    public static final BitSet FOLLOW_rule__EAnnotationDecl__Group__2_in_rule__EAnnotationDecl__Group__13889 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAnnotationDecl__Group_2__0_in_rule__EAnnotationDecl__Group__23917 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_32_in_rule__EAnnotationDecl__Group_2__03959 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__EAnnotationDecl__Group_2__1_in_rule__EAnnotationDecl__Group_2__03969 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAnnotationDecl__DetailsAssignment_2_1_in_rule__EAnnotationDecl__Group_2__13997 = new BitSet(new long[]{0x0000000600000000L});
-    public static final BitSet FOLLOW_rule__EAnnotationDecl__Group_2__2_in_rule__EAnnotationDecl__Group_2__14006 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAnnotationDecl__Group_2_2__0_in_rule__EAnnotationDecl__Group_2__24034 = new BitSet(new long[]{0x0000000600000000L});
-    public static final BitSet FOLLOW_rule__EAnnotationDecl__Group_2__3_in_rule__EAnnotationDecl__Group_2__24044 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_33_in_rule__EAnnotationDecl__Group_2__34073 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_rule__EAnnotationDecl__Group_2_2__04117 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__EAnnotationDecl__Group_2_2__1_in_rule__EAnnotationDecl__Group_2_2__04127 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAnnotationDecl__DetailsAssignment_2_2_1_in_rule__EAnnotationDecl__Group_2_2__14155 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__EAnnotationsAssignment_0_in_rule__EClassDecl__Group__04193 = new BitSet(new long[]{0x0006000080010000L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group__1_in_rule__EClassDecl__Group__04203 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__AbstractAssignment_1_in_rule__EClassDecl__Group__14231 = new BitSet(new long[]{0x0004000000010000L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group__2_in_rule__EClassDecl__Group__14241 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Alternatives_2_in_rule__EClassDecl__Group__24269 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group__3_in_rule__EClassDecl__Group__24278 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__NameAssignment_3_in_rule__EClassDecl__Group__34306 = new BitSet(new long[]{0x0000002848000000L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group__4_in_rule__EClassDecl__Group__34315 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group_4__0_in_rule__EClassDecl__Group__44343 = new BitSet(new long[]{0x0000002048000000L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group__5_in_rule__EClassDecl__Group__44353 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group_5__0_in_rule__EClassDecl__Group__54381 = new BitSet(new long[]{0x0000000048000000L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group__6_in_rule__EClassDecl__Group__54391 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group_6__0_in_rule__EClassDecl__Group__64419 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group__7_in_rule__EClassDecl__Group__64429 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_rule__EClassDecl__Group__74458 = new BitSet(new long[]{0x01F8404090020F00L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group__8_in_rule__EClassDecl__Group__74468 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Alternatives_8_in_rule__EClassDecl__Group__84496 = new BitSet(new long[]{0x01F8404090020F00L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group__9_in_rule__EClassDecl__Group__84506 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_rule__EClassDecl__Group__94535 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_35_in_rule__EClassDecl__Group_4__04591 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group_4__1_in_rule__EClassDecl__Group_4__04601 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__ETypeParametersAssignment_4_1_in_rule__EClassDecl__Group_4__14629 = new BitSet(new long[]{0x0000001400000000L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group_4__2_in_rule__EClassDecl__Group_4__14638 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group_4_2__0_in_rule__EClassDecl__Group_4__24666 = new BitSet(new long[]{0x0000001400000000L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group_4__3_in_rule__EClassDecl__Group_4__24676 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_rule__EClassDecl__Group_4__34705 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_rule__EClassDecl__Group_4_2__04749 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group_4_2__1_in_rule__EClassDecl__Group_4_2__04759 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__ETypeParametersAssignment_4_2_1_in_rule__EClassDecl__Group_4_2__14787 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_37_in_rule__EClassDecl__Group_5__04826 = new BitSet(new long[]{0x0000040000000020L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group_5__1_in_rule__EClassDecl__Group_5__04836 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__EGenericSuperTypesAssignment_5_1_in_rule__EClassDecl__Group_5__14864 = new BitSet(new long[]{0x0000000400000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group_5__2_in_rule__EClassDecl__Group_5__14873 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group_5_2__0_in_rule__EClassDecl__Group_5__24901 = new BitSet(new long[]{0x0000000400000002L});
-    public static final BitSet FOLLOW_34_in_rule__EClassDecl__Group_5_2__04943 = new BitSet(new long[]{0x0000040000000020L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group_5_2__1_in_rule__EClassDecl__Group_5_2__04953 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__EGenericSuperTypesAssignment_5_2_1_in_rule__EClassDecl__Group_5_2__14981 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_30_in_rule__EClassDecl__Group_6__05020 = new BitSet(new long[]{0x0000000000000030L});
-    public static final BitSet FOLLOW_rule__EClassDecl__Group_6__1_in_rule__EClassDecl__Group_6__05030 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EClassDecl__InstanceClassNameAssignment_6_1_in_rule__EClassDecl__Group_6__15058 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__EAnnotationsAssignment_0_in_rule__EAttributeDecl__Group__05096 = new BitSet(new long[]{0x00F8004080000700L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__Group__1_in_rule__EAttributeDecl__Group__05106 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__Alternatives_1_in_rule__EAttributeDecl__Group__15134 = new BitSet(new long[]{0x00F8004000000700L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__Group__2_in_rule__EAttributeDecl__Group__15144 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_38_in_rule__EAttributeDecl__Group__25173 = new BitSet(new long[]{0x0000040000000020L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__Group__3_in_rule__EAttributeDecl__Group__25183 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__EGenericTypeAssignment_3_in_rule__EAttributeDecl__Group__35211 = new BitSet(new long[]{0x0000008000000020L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__Group__4_in_rule__EAttributeDecl__Group__35220 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__Group_4__0_in_rule__EAttributeDecl__Group__45248 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__Group__5_in_rule__EAttributeDecl__Group__45258 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__NameAssignment_5_in_rule__EAttributeDecl__Group__55286 = new BitSet(new long[]{0x0000000000C00000L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__Group__6_in_rule__EAttributeDecl__Group__55295 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__Group_6__0_in_rule__EAttributeDecl__Group__65323 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__Group__7_in_rule__EAttributeDecl__Group__65333 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_rule__EAttributeDecl__Group__75362 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_39_in_rule__EAttributeDecl__Group_4__05414 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__Group_4__1_in_rule__EAttributeDecl__Group_4__05424 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__LowerBoundAssignment_4_1_in_rule__EAttributeDecl__Group_4__15452 = new BitSet(new long[]{0x0000030000000000L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__Group_4__2_in_rule__EAttributeDecl__Group_4__15461 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__Group_4_2__0_in_rule__EAttributeDecl__Group_4__25489 = new BitSet(new long[]{0x0000010000000000L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__Group_4__3_in_rule__EAttributeDecl__Group_4__25499 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_40_in_rule__EAttributeDecl__Group_4__35528 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_41_in_rule__EAttributeDecl__Group_4_2__05572 = new BitSet(new long[]{0x0001000000000040L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__Group_4_2__1_in_rule__EAttributeDecl__Group_4_2__05582 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__UpperBoundAssignment_4_2_1_in_rule__EAttributeDecl__Group_4_2__15610 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_rule__EAttributeDecl__Group_6__05649 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__Group_6__1_in_rule__EAttributeDecl__Group_6__05659 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EAttributeDecl__DefaultValueLiteralAssignment_6_1_in_rule__EAttributeDecl__Group_6__15687 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__EAnnotationsAssignment_0_in_rule__EReferenceDecl__Group__05725 = new BitSet(new long[]{0x01F0000080020F00L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__Group__1_in_rule__EReferenceDecl__Group__05735 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__Alternatives_1_in_rule__EReferenceDecl__Group__15763 = new BitSet(new long[]{0x01F0000000020F00L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__Group__2_in_rule__EReferenceDecl__Group__15773 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__Alternatives_2_in_rule__EReferenceDecl__Group__25801 = new BitSet(new long[]{0x0000040000000020L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__Group__3_in_rule__EReferenceDecl__Group__25810 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__EGenericTypeAssignment_3_in_rule__EReferenceDecl__Group__35838 = new BitSet(new long[]{0x0000048000000020L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__Group__4_in_rule__EReferenceDecl__Group__35847 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__Group_4__0_in_rule__EReferenceDecl__Group__45875 = new BitSet(new long[]{0x0000040000000020L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__Group__5_in_rule__EReferenceDecl__Group__45885 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__Group_5__0_in_rule__EReferenceDecl__Group__55913 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__Group__6_in_rule__EReferenceDecl__Group__55923 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__NameAssignment_6_in_rule__EReferenceDecl__Group__65951 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__Group__7_in_rule__EReferenceDecl__Group__65960 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_rule__EReferenceDecl__Group__75989 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_39_in_rule__EReferenceDecl__Group_4__06041 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__Group_4__1_in_rule__EReferenceDecl__Group_4__06051 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__LowerBoundAssignment_4_1_in_rule__EReferenceDecl__Group_4__16079 = new BitSet(new long[]{0x0000030000000000L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__Group_4__2_in_rule__EReferenceDecl__Group_4__16088 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__Group_4_2__0_in_rule__EReferenceDecl__Group_4__26116 = new BitSet(new long[]{0x0000010000000000L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__Group_4__3_in_rule__EReferenceDecl__Group_4__26126 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_40_in_rule__EReferenceDecl__Group_4__36155 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_41_in_rule__EReferenceDecl__Group_4_2__06199 = new BitSet(new long[]{0x0001000000000040L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__Group_4_2__1_in_rule__EReferenceDecl__Group_4_2__06209 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__UpperBoundAssignment_4_2_1_in_rule__EReferenceDecl__Group_4_2__16237 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_42_in_rule__EReferenceDecl__Group_5__06276 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__Group_5__1_in_rule__EReferenceDecl__Group_5__06286 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EReferenceDecl__EOppositeAssignment_5_1_in_rule__EReferenceDecl__Group_5__16314 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EEnumDecl__EAnnotationsAssignment_0_in_rule__EEnumDecl__Group__06352 = new BitSet(new long[]{0x0000080080000000L});
-    public static final BitSet FOLLOW_rule__EEnumDecl__Group__1_in_rule__EEnumDecl__Group__06362 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_43_in_rule__EEnumDecl__Group__16391 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__EEnumDecl__Group__2_in_rule__EEnumDecl__Group__16401 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EEnumDecl__NameAssignment_2_in_rule__EEnumDecl__Group__26429 = new BitSet(new long[]{0x0000000008000000L});
-    public static final BitSet FOLLOW_rule__EEnumDecl__Group__3_in_rule__EEnumDecl__Group__26438 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_27_in_rule__EEnumDecl__Group__36467 = new BitSet(new long[]{0x0000000080000020L});
-    public static final BitSet FOLLOW_rule__EEnumDecl__Group__4_in_rule__EEnumDecl__Group__36477 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EEnumDecl__ELiteralsAssignment_4_in_rule__EEnumDecl__Group__46507 = new BitSet(new long[]{0x0000000090000020L});
-    public static final BitSet FOLLOW_rule__EEnumDecl__ELiteralsAssignment_4_in_rule__EEnumDecl__Group__46519 = new BitSet(new long[]{0x0000000090000020L});
-    public static final BitSet FOLLOW_rule__EEnumDecl__Group__5_in_rule__EEnumDecl__Group__46531 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_28_in_rule__EEnumDecl__Group__56560 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EEnumLiteralDecl__EAnnotationsAssignment_0_in_rule__EEnumLiteralDecl__Group__06607 = new BitSet(new long[]{0x0000000080000020L});
-    public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group__1_in_rule__EEnumLiteralDecl__Group__06617 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EEnumLiteralDecl__NameAssignment_1_in_rule__EEnumLiteralDecl__Group__16645 = new BitSet(new long[]{0x0000000000C00010L});
-    public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group__2_in_rule__EEnumLiteralDecl__Group__16654 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group_2__0_in_rule__EEnumLiteralDecl__Group__26682 = new BitSet(new long[]{0x0000000000400010L});
-    public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group__3_in_rule__EEnumLiteralDecl__Group__26692 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EEnumLiteralDecl__LiteralAssignment_3_in_rule__EEnumLiteralDecl__Group__36720 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group__4_in_rule__EEnumLiteralDecl__Group__36730 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_rule__EEnumLiteralDecl__Group__46759 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_rule__EEnumLiteralDecl__Group_2__06805 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group_2__1_in_rule__EEnumLiteralDecl__Group_2__06815 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EEnumLiteralDecl__ValueAssignment_2_1_in_rule__EEnumLiteralDecl__Group_2__16843 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ETypeParameterDecl__NameAssignment_0_in_rule__ETypeParameterDecl__Group__06881 = new BitSet(new long[]{0x0000002000000002L});
-    public static final BitSet FOLLOW_rule__ETypeParameterDecl__Group__1_in_rule__ETypeParameterDecl__Group__06890 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ETypeParameterDecl__Group_1__0_in_rule__ETypeParameterDecl__Group__16918 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_37_in_rule__ETypeParameterDecl__Group_1__06958 = new BitSet(new long[]{0x0000140000000020L});
-    public static final BitSet FOLLOW_rule__ETypeParameterDecl__Group_1__1_in_rule__ETypeParameterDecl__Group_1__06968 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__ETypeParameterDecl__EBoundsAssignment_1_1_in_rule__ETypeParameterDecl__Group_1__16996 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_0_in_rule__EGenericTypeReferenceDecl__Group_0__07034 = new BitSet(new long[]{0x0000000800000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0__1_in_rule__EGenericTypeReferenceDecl__Group_0__07043 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__0_in_rule__EGenericTypeReferenceDecl__Group_0__17071 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_35_in_rule__EGenericTypeReferenceDecl__Group_0_1__07111 = new BitSet(new long[]{0x0000140000000020L});
-    public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__1_in_rule__EGenericTypeReferenceDecl__Group_0_1__07121 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_1_in_rule__EGenericTypeReferenceDecl__Group_0_1__17149 = new BitSet(new long[]{0x0000001400000000L});
-    public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__2_in_rule__EGenericTypeReferenceDecl__Group_0_1__17158 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1_2__0_in_rule__EGenericTypeReferenceDecl__Group_0_1__27186 = new BitSet(new long[]{0x0000001400000000L});
-    public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__3_in_rule__EGenericTypeReferenceDecl__Group_0_1__27196 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_rule__EGenericTypeReferenceDecl__Group_0_1__37225 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_rule__EGenericTypeReferenceDecl__Group_0_1_2__07269 = new BitSet(new long[]{0x0000140000000020L});
-    public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1_2__1_in_rule__EGenericTypeReferenceDecl__Group_0_1_2__07279 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_1_in_rule__EGenericTypeReferenceDecl__Group_0_1_2__17307 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_42_in_rule__EGenericTypeReferenceDecl__Group_1__07346 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_1__1_in_rule__EGenericTypeReferenceDecl__Group_1__07356 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_1_in_rule__EGenericTypeReferenceDecl__Group_1__17384 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__EClassifierAssignment_0_0_in_rule__EGenericTypeDecl__Group_0__07422 = new BitSet(new long[]{0x0000000800000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0__1_in_rule__EGenericTypeDecl__Group_0__07431 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0_1__0_in_rule__EGenericTypeDecl__Group_0__17459 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_35_in_rule__EGenericTypeDecl__Group_0_1__07499 = new BitSet(new long[]{0x0000140000000020L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0_1__1_in_rule__EGenericTypeDecl__Group_0_1__07509 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_1_in_rule__EGenericTypeDecl__Group_0_1__17537 = new BitSet(new long[]{0x0000001400000000L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0_1__2_in_rule__EGenericTypeDecl__Group_0_1__17546 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0_1_2__0_in_rule__EGenericTypeDecl__Group_0_1__27574 = new BitSet(new long[]{0x0000001400000000L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0_1__3_in_rule__EGenericTypeDecl__Group_0_1__27584 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_rule__EGenericTypeDecl__Group_0_1__37613 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_rule__EGenericTypeDecl__Group_0_1_2__07657 = new BitSet(new long[]{0x0000140000000020L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0_1_2__1_in_rule__EGenericTypeDecl__Group_0_1_2__07667 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_1_in_rule__EGenericTypeDecl__Group_0_1_2__17695 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_42_in_rule__EGenericTypeDecl__Group_1__07734 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_1__1_in_rule__EGenericTypeDecl__Group_1__07744 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__ETypeParameterAssignment_1_1_in_rule__EGenericTypeDecl__Group_1__17772 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_44_in_rule__EGenericTypeDecl__Group_2__07811 = new BitSet(new long[]{0x0000202000000000L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_2__1_in_rule__EGenericTypeDecl__Group_2__07821 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__Alternatives_2_1_in_rule__EGenericTypeDecl__Group_2__17849 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_37_in_rule__EGenericTypeDecl__Group_2_1_0__07888 = new BitSet(new long[]{0x0000140000000020L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_2_1_0__1_in_rule__EGenericTypeDecl__Group_2_1_0__07898 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_1_in_rule__EGenericTypeDecl__Group_2_1_0__17926 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_45_in_rule__EGenericTypeDecl__Group_2_1_1__07965 = new BitSet(new long[]{0x0000140000000020L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_2_1_1__1_in_rule__EGenericTypeDecl__Group_2_1_1__07975 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_1_in_rule__EGenericTypeDecl__Group_2_1_1__18003 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__EAnnotationsAssignment_0_in_rule__EOperationDecl__Group__08041 = new BitSet(new long[]{0x0000400080000300L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group__1_in_rule__EOperationDecl__Group__08051 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Alternatives_1_in_rule__EOperationDecl__Group__18079 = new BitSet(new long[]{0x0000400000000300L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group__2_in_rule__EOperationDecl__Group__18089 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_46_in_rule__EOperationDecl__Group__28118 = new BitSet(new long[]{0x0000040000040020L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group__3_in_rule__EOperationDecl__Group__28128 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Alternatives_3_in_rule__EOperationDecl__Group__38156 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group__4_in_rule__EOperationDecl__Group__38165 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__NameAssignment_4_in_rule__EOperationDecl__Group__48193 = new BitSet(new long[]{0x0000000900000000L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group__5_in_rule__EOperationDecl__Group__48202 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group_5__0_in_rule__EOperationDecl__Group__58230 = new BitSet(new long[]{0x0000000100000000L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group__6_in_rule__EOperationDecl__Group__58240 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_32_in_rule__EOperationDecl__Group__68269 = new BitSet(new long[]{0x0000040280000020L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group__7_in_rule__EOperationDecl__Group__68279 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group_7__0_in_rule__EOperationDecl__Group__78307 = new BitSet(new long[]{0x0000000200000000L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group__8_in_rule__EOperationDecl__Group__78317 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_33_in_rule__EOperationDecl__Group__88346 = new BitSet(new long[]{0x0000800000400000L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group__9_in_rule__EOperationDecl__Group__88356 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group_9__0_in_rule__EOperationDecl__Group__98384 = new BitSet(new long[]{0x0000000000400000L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group__10_in_rule__EOperationDecl__Group__98394 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_rule__EOperationDecl__Group__108423 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_35_in_rule__EOperationDecl__Group_5__08481 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group_5__1_in_rule__EOperationDecl__Group_5__08491 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__ETypeParametersAssignment_5_1_in_rule__EOperationDecl__Group_5__18519 = new BitSet(new long[]{0x0000001400000000L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group_5__2_in_rule__EOperationDecl__Group_5__18528 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group_5_2__0_in_rule__EOperationDecl__Group_5__28556 = new BitSet(new long[]{0x0000001400000000L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group_5__3_in_rule__EOperationDecl__Group_5__28566 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_36_in_rule__EOperationDecl__Group_5__38595 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_34_in_rule__EOperationDecl__Group_5_2__08639 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group_5_2__1_in_rule__EOperationDecl__Group_5_2__08649 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__ETypeParametersAssignment_5_2_1_in_rule__EOperationDecl__Group_5_2__18677 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__EParametersAssignment_7_0_in_rule__EOperationDecl__Group_7__08715 = new BitSet(new long[]{0x0000000400000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group_7__1_in_rule__EOperationDecl__Group_7__08724 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group_7_1__0_in_rule__EOperationDecl__Group_7__18752 = new BitSet(new long[]{0x0000000400000002L});
-    public static final BitSet FOLLOW_34_in_rule__EOperationDecl__Group_7_1__08792 = new BitSet(new long[]{0x0000040080000020L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group_7_1__1_in_rule__EOperationDecl__Group_7_1__08802 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__EParametersAssignment_7_1_1_in_rule__EOperationDecl__Group_7_1__18830 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_47_in_rule__EOperationDecl__Group_9__08869 = new BitSet(new long[]{0x0000040000000020L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group_9__1_in_rule__EOperationDecl__Group_9__08879 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__EGenericExceptionsAssignment_9_1_in_rule__EOperationDecl__Group_9__18907 = new BitSet(new long[]{0x0000000400000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group_9__2_in_rule__EOperationDecl__Group_9__18916 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group_9_2__0_in_rule__EOperationDecl__Group_9__28944 = new BitSet(new long[]{0x0000000400000002L});
-    public static final BitSet FOLLOW_34_in_rule__EOperationDecl__Group_9_2__08986 = new BitSet(new long[]{0x0000040000000020L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__Group_9_2__1_in_rule__EOperationDecl__Group_9_2__08996 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EOperationDecl__EGenericExceptionsAssignment_9_2_1_in_rule__EOperationDecl__Group_9_2__19024 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EParameterDecl__EAnnotationsAssignment_0_in_rule__EParameterDecl__Group__09062 = new BitSet(new long[]{0x0000040080000020L});
-    public static final BitSet FOLLOW_rule__EParameterDecl__Group__1_in_rule__EParameterDecl__Group__09072 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EParameterDecl__EGenericTypeAssignment_1_in_rule__EParameterDecl__Group__19100 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__EParameterDecl__Group__2_in_rule__EParameterDecl__Group__19109 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__EParameterDecl__NameAssignment_2_in_rule__EParameterDecl__Group__29137 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__MapEntry__KeyAssignment_0_in_rule__MapEntry__Group__09177 = new BitSet(new long[]{0x0000000000800000L});
-    public static final BitSet FOLLOW_rule__MapEntry__Group__1_in_rule__MapEntry__Group__09186 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_rule__MapEntry__Group__19215 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__MapEntry__Group__2_in_rule__MapEntry__Group__19225 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__MapEntry__ValueAssignment_2_in_rule__MapEntry__Group__29253 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__QID__Group__09293 = new BitSet(new long[]{0x0000000000180002L});
-    public static final BitSet FOLLOW_rule__QID__Group__1_in_rule__QID__Group__09301 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__QID__Group_1__0_in_rule__QID__Group__19329 = new BitSet(new long[]{0x0000000000180002L});
-    public static final BitSet FOLLOW_rule__QID__Alternatives_1_0_in_rule__QID__Group_1__09368 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__QID__Group_1__1_in_rule__QID__Group_1__09377 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__QID__Group_1__19405 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_48_in_rule__SINT__Group__09444 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_rule__SINT__Group__1_in_rule__SINT__Group__09456 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__SINT__Group__19484 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleReferencedMetamodel_in_rule__EcoreDsl__MetamodelDeclarationsAssignment_09521 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEPackageDecl_in_rule__EcoreDsl__PackageAssignment_19552 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__ReferencedMetamodel__AliasAssignment_1_09583 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__ReferencedMetamodel__EPackageAssignment_29618 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EPackageDecl__EAnnotationsAssignment_09653 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQID_in_rule__EPackageDecl__NameAssignment_29684 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__EPackageDecl__NsURIAssignment_59715 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleQID_in_rule__EPackageDecl__NsPrefixAssignment_89746 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSubEPackageDecl_in_rule__EPackageDecl__ESubpackagesAssignment_10_09777 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEClassifierDecl_in_rule__EPackageDecl__EClassifiersAssignment_10_19808 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__SubEPackageDecl__EAnnotationsAssignment_09839 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__SubEPackageDecl__NameAssignment_29870 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSubEPackageDecl_in_rule__SubEPackageDecl__ESubpackagesAssignment_4_09901 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEClassifierDecl_in_rule__SubEPackageDecl__EClassifiersAssignment_4_19932 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EDataTypeDecl__EAnnotationsAssignment_0_09963 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_SERIALIZABLE_in_rule__EDataTypeDecl__SerializableAssignment_0_19994 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__EDataTypeDecl__NameAssignment_0_2_110025 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSTRING_OR_QID_in_rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_310056 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSTRING_OR_QID_in_rule__EAnnotationDecl__SourceAssignment_110087 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMapEntry_in_rule__EAnnotationDecl__DetailsAssignment_2_110118 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleMapEntry_in_rule__EAnnotationDecl__DetailsAssignment_2_2_110149 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EClassDecl__EAnnotationsAssignment_010180 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_49_in_rule__EClassDecl__AbstractAssignment_110216 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_50_in_rule__EClassDecl__InterfaceAssignment_2_010260 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__EClassDecl__NameAssignment_310299 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleETypeParameterDecl_in_rule__EClassDecl__ETypeParametersAssignment_4_110330 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleETypeParameterDecl_in_rule__EClassDecl__ETypeParametersAssignment_4_2_110361 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EClassDecl__EGenericSuperTypesAssignment_5_110392 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EClassDecl__EGenericSuperTypesAssignment_5_2_110423 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSTRING_OR_QID_in_rule__EClassDecl__InstanceClassNameAssignment_6_110454 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEStructuralFeatureDecl_in_rule__EClassDecl__EStructuralFeaturesAssignment_8_010485 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEOperationDecl_in_rule__EClassDecl__EOperationsAssignment_8_110516 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EAttributeDecl__EAnnotationsAssignment_010547 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_51_in_rule__EAttributeDecl__IDAssignment_1_010583 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_BAG_in_rule__EAttributeDecl__UniqueAssignment_1_110622 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_RANDOM_in_rule__EAttributeDecl__OrderedAssignment_1_210653 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_READONLY_in_rule__EAttributeDecl__ChangeableAssignment_1_310684 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_52_in_rule__EAttributeDecl__VolatileAssignment_1_410720 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_53_in_rule__EAttributeDecl__TransientAssignment_1_510764 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_54_in_rule__EAttributeDecl__UnsettableAssignment_1_610808 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_55_in_rule__EAttributeDecl__DerivedAssignment_1_710852 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EAttributeDecl__EGenericTypeAssignment_310891 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__EAttributeDecl__LowerBoundAssignment_4_110922 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSINT_in_rule__EAttributeDecl__UpperBoundAssignment_4_2_110953 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__EAttributeDecl__NameAssignment_510984 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__EAttributeDecl__DefaultValueLiteralAssignment_6_111015 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EReferenceDecl__EAnnotationsAssignment_011046 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_LOCAL_in_rule__EReferenceDecl__ResolveProxiesAssignment_1_011077 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_BAG_in_rule__EReferenceDecl__UniqueAssignment_1_111108 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_RANDOM_in_rule__EReferenceDecl__OrderedAssignment_1_211139 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_READONLY_in_rule__EReferenceDecl__ChangeableAssignment_1_311170 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_52_in_rule__EReferenceDecl__VolatileAssignment_1_411206 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_53_in_rule__EReferenceDecl__TransientAssignment_1_511250 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_54_in_rule__EReferenceDecl__UnsettableAssignment_1_611294 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_55_in_rule__EReferenceDecl__DerivedAssignment_1_711338 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_56_in_rule__EReferenceDecl__ContainmentAssignment_2_011382 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EReferenceDecl__EGenericTypeAssignment_311421 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__EReferenceDecl__LowerBoundAssignment_4_111452 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSINT_in_rule__EReferenceDecl__UpperBoundAssignment_4_2_111483 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__EReferenceDecl__EOppositeAssignment_5_111518 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__EReferenceDecl__NameAssignment_611553 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EEnumDecl__EAnnotationsAssignment_011584 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__EEnumDecl__NameAssignment_211615 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEEnumLiteralDecl_in_rule__EEnumDecl__ELiteralsAssignment_411646 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EEnumLiteralDecl__EAnnotationsAssignment_011677 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__EEnumLiteralDecl__NameAssignment_111708 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_rule__EEnumLiteralDecl__ValueAssignment_2_111739 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__EEnumLiteralDecl__LiteralAssignment_311770 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__ETypeParameterDecl__NameAssignment_011801 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__ETypeParameterDecl__EBoundsAssignment_1_111832 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_011867 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_111902 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_111933 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_111968 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__EGenericTypeDecl__EClassifierAssignment_0_012007 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_112042 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_112073 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__EGenericTypeDecl__ETypeParameterAssignment_1_112108 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_112143 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_112174 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EOperationDecl__EAnnotationsAssignment_012205 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_BAG_in_rule__EOperationDecl__UniqueAssignment_1_012236 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_RANDOM_in_rule__EOperationDecl__OrderedAssignment_1_112267 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericTypeAssignment_3_012298 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__EOperationDecl__NameAssignment_412329 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleETypeParameterDecl_in_rule__EOperationDecl__ETypeParametersAssignment_5_112360 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleETypeParameterDecl_in_rule__EOperationDecl__ETypeParametersAssignment_5_2_112391 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEParameterDecl_in_rule__EOperationDecl__EParametersAssignment_7_012422 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEParameterDecl_in_rule__EOperationDecl__EParametersAssignment_7_1_112453 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericExceptionsAssignment_9_112484 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericExceptionsAssignment_9_2_112515 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EParameterDecl__EAnnotationsAssignment_012546 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EParameterDecl__EGenericTypeAssignment_112577 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__EParameterDecl__NameAssignment_212608 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__MapEntry__KeyAssignment_012639 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__MapEntry__ValueAssignment_212670 = new BitSet(new long[]{0x0000000000000002L});
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_ruleEcoreDsl_in_entryRuleEcoreDsl60 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEcoreDsl67 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EcoreDsl__Group__0_in_ruleEcoreDsl94 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleReferencedMetamodel_in_entryRuleReferencedMetamodel120 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleReferencedMetamodel127 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__0_in_ruleReferencedMetamodel154 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEPackageDecl_in_entryRuleEPackageDecl180 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEPackageDecl187 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EPackageDecl__Group__0_in_ruleEPackageDecl214 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSubEPackageDecl_in_entryRuleSubEPackageDecl240 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleSubEPackageDecl247 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SubEPackageDecl__Group__0_in_ruleSubEPackageDecl274 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEClassifierDecl_in_entryRuleEClassifierDecl300 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEClassifierDecl307 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EClassifierDecl__Alternatives_in_ruleEClassifierDecl334 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEDataTypeDecl_in_entryRuleEDataTypeDecl360 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEDataTypeDecl367 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EDataTypeDecl__Alternatives_in_ruleEDataTypeDecl394 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_entryRuleEAnnotationDecl420 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEAnnotationDecl427 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAnnotationDecl__Group__0_in_ruleEAnnotationDecl454 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEClassDecl_in_entryRuleEClassDecl480 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEClassDecl487 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Group__0_in_ruleEClassDecl514 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEStructuralFeatureDecl_in_entryRuleEStructuralFeatureDecl540 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEStructuralFeatureDecl547 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EStructuralFeatureDecl__Alternatives_in_ruleEStructuralFeatureDecl574 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEAttributeDecl_in_entryRuleEAttributeDecl600 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEAttributeDecl607 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__Group__0_in_ruleEAttributeDecl634 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEReferenceDecl_in_entryRuleEReferenceDecl660 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEReferenceDecl667 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__Group__0_in_ruleEReferenceDecl694 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEEnumDecl_in_entryRuleEEnumDecl720 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEEnumDecl727 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EEnumDecl__Group__0_in_ruleEEnumDecl754 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEEnumLiteralDecl_in_entryRuleEEnumLiteralDecl780 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEEnumLiteralDecl787 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group__0_in_ruleEEnumLiteralDecl814 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleETypeParameterDecl_in_entryRuleETypeParameterDecl840 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleETypeParameterDecl847 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ETypeParameterDecl__Group__0_in_ruleETypeParameterDecl874 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_entryRuleEGenericTypeReferenceDecl900 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEGenericTypeReferenceDecl907 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Alternatives_in_ruleEGenericTypeReferenceDecl934 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_entryRuleEGenericTypeDecl960 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEGenericTypeDecl967 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeDecl__Alternatives_in_ruleEGenericTypeDecl994 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEOperationDecl_in_entryRuleEOperationDecl1020 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEOperationDecl1027 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group__0_in_ruleEOperationDecl1054 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEParameterDecl_in_entryRuleEParameterDecl1080 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEParameterDecl1087 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EParameterDecl__Group__0_in_ruleEParameterDecl1114 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleMapEntry_in_entryRuleMapEntry1140 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleMapEntry1147 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__MapEntry__Group__0_in_ruleMapEntry1174 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleQID_in_entryRuleQID1200 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleQID1207 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__QID__Group__0_in_ruleQID1234 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSTRING_OR_QID_in_entryRuleSTRING_OR_QID1260 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleSTRING_OR_QID1267 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__STRING_OR_QID__Alternatives_in_ruleSTRING_OR_QID1294 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSINT_in_entryRuleSINT1320 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleSINT1327 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SINT__Group__0_in_ruleSINT1354 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EPackageDecl__ESubpackagesAssignment_10_0_in_rule__EPackageDecl__Alternatives_101390 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EPackageDecl__EClassifiersAssignment_10_1_in_rule__EPackageDecl__Alternatives_101408 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SubEPackageDecl__ESubpackagesAssignment_4_0_in_rule__SubEPackageDecl__Alternatives_41441 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SubEPackageDecl__EClassifiersAssignment_4_1_in_rule__SubEPackageDecl__Alternatives_41459 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEClassDecl_in_rule__EClassifierDecl__Alternatives1492 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEDataTypeDecl_in_rule__EClassifierDecl__Alternatives1509 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EDataTypeDecl__Group_0__0_in_rule__EDataTypeDecl__Alternatives1541 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEEnumDecl_in_rule__EDataTypeDecl__Alternatives1559 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EClassDecl__InterfaceAssignment_2_0_in_rule__EClassDecl__Alternatives_21591 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_16_in_rule__EClassDecl__Alternatives_21610 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EClassDecl__EStructuralFeaturesAssignment_8_0_in_rule__EClassDecl__Alternatives_81644 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EClassDecl__EOperationsAssignment_8_1_in_rule__EClassDecl__Alternatives_81662 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEAttributeDecl_in_rule__EStructuralFeatureDecl__Alternatives1695 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEReferenceDecl_in_rule__EStructuralFeatureDecl__Alternatives1712 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__IDAssignment_1_0_in_rule__EAttributeDecl__Alternatives_11744 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__UniqueAssignment_1_1_in_rule__EAttributeDecl__Alternatives_11762 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__OrderedAssignment_1_2_in_rule__EAttributeDecl__Alternatives_11780 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__ChangeableAssignment_1_3_in_rule__EAttributeDecl__Alternatives_11798 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__VolatileAssignment_1_4_in_rule__EAttributeDecl__Alternatives_11816 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__TransientAssignment_1_5_in_rule__EAttributeDecl__Alternatives_11834 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__UnsettableAssignment_1_6_in_rule__EAttributeDecl__Alternatives_11852 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__DerivedAssignment_1_7_in_rule__EAttributeDecl__Alternatives_11870 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__ResolveProxiesAssignment_1_0_in_rule__EReferenceDecl__Alternatives_11903 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__UniqueAssignment_1_1_in_rule__EReferenceDecl__Alternatives_11921 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__OrderedAssignment_1_2_in_rule__EReferenceDecl__Alternatives_11939 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__ChangeableAssignment_1_3_in_rule__EReferenceDecl__Alternatives_11957 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__VolatileAssignment_1_4_in_rule__EReferenceDecl__Alternatives_11975 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__TransientAssignment_1_5_in_rule__EReferenceDecl__Alternatives_11993 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__UnsettableAssignment_1_6_in_rule__EReferenceDecl__Alternatives_12011 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__DerivedAssignment_1_7_in_rule__EReferenceDecl__Alternatives_12029 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__ContainmentAssignment_2_0_in_rule__EReferenceDecl__Alternatives_22062 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_17_in_rule__EReferenceDecl__Alternatives_22081 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0__0_in_rule__EGenericTypeReferenceDecl__Alternatives2115 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_1__0_in_rule__EGenericTypeReferenceDecl__Alternatives2133 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0__0_in_rule__EGenericTypeDecl__Alternatives2166 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_1__0_in_rule__EGenericTypeDecl__Alternatives2184 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_2__0_in_rule__EGenericTypeDecl__Alternatives2202 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_2_1_0__0_in_rule__EGenericTypeDecl__Alternatives_2_12235 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_2_1_1__0_in_rule__EGenericTypeDecl__Alternatives_2_12253 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__UniqueAssignment_1_0_in_rule__EOperationDecl__Alternatives_12286 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__OrderedAssignment_1_1_in_rule__EOperationDecl__Alternatives_12304 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__EGenericTypeAssignment_3_0_in_rule__EOperationDecl__Alternatives_32337 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_18_in_rule__EOperationDecl__Alternatives_32356 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_19_in_rule__QID__Alternatives_1_02391 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_20_in_rule__QID__Alternatives_1_02411 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__STRING_OR_QID__Alternatives2445 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleQID_in_rule__STRING_OR_QID__Alternatives2462 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EcoreDsl__MetamodelDeclarationsAssignment_0_in_rule__EcoreDsl__Group__02496 = new BitSet(new long[]{0x0000000081200000L});
+        public static final BitSet FOLLOW_rule__EcoreDsl__Group__1_in_rule__EcoreDsl__Group__02506 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EcoreDsl__PackageAssignment_1_in_rule__EcoreDsl__Group__12534 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_21_in_rule__ReferencedMetamodel__Group__02573 = new BitSet(new long[]{0x0000000000000030L});
+        public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__1_in_rule__ReferencedMetamodel__Group__02583 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group_1__0_in_rule__ReferencedMetamodel__Group__12611 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__2_in_rule__ReferencedMetamodel__Group__12621 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ReferencedMetamodel__EPackageAssignment_2_in_rule__ReferencedMetamodel__Group__22649 = new BitSet(new long[]{0x0000000000400000L});
+        public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group__3_in_rule__ReferencedMetamodel__Group__22658 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_22_in_rule__ReferencedMetamodel__Group__32687 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ReferencedMetamodel__AliasAssignment_1_0_in_rule__ReferencedMetamodel__Group_1__02730 = new BitSet(new long[]{0x0000000000800000L});
+        public static final BitSet FOLLOW_rule__ReferencedMetamodel__Group_1__1_in_rule__ReferencedMetamodel__Group_1__02739 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_23_in_rule__ReferencedMetamodel__Group_1__12768 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EPackageDecl__EAnnotationsAssignment_0_in_rule__EPackageDecl__Group__02807 = new BitSet(new long[]{0x0000000081000000L});
+        public static final BitSet FOLLOW_rule__EPackageDecl__Group__1_in_rule__EPackageDecl__Group__02817 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_24_in_rule__EPackageDecl__Group__12846 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__EPackageDecl__Group__2_in_rule__EPackageDecl__Group__12856 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EPackageDecl__NameAssignment_2_in_rule__EPackageDecl__Group__22884 = new BitSet(new long[]{0x0000000002000000L});
+        public static final BitSet FOLLOW_rule__EPackageDecl__Group__3_in_rule__EPackageDecl__Group__22893 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_25_in_rule__EPackageDecl__Group__32922 = new BitSet(new long[]{0x0000000000800000L});
+        public static final BitSet FOLLOW_rule__EPackageDecl__Group__4_in_rule__EPackageDecl__Group__32932 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_23_in_rule__EPackageDecl__Group__42961 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__EPackageDecl__Group__5_in_rule__EPackageDecl__Group__42971 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EPackageDecl__NsURIAssignment_5_in_rule__EPackageDecl__Group__52999 = new BitSet(new long[]{0x0000000004000000L});
+        public static final BitSet FOLLOW_rule__EPackageDecl__Group__6_in_rule__EPackageDecl__Group__53008 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_26_in_rule__EPackageDecl__Group__63037 = new BitSet(new long[]{0x0000000000800000L});
+        public static final BitSet FOLLOW_rule__EPackageDecl__Group__7_in_rule__EPackageDecl__Group__63047 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_23_in_rule__EPackageDecl__Group__73076 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__EPackageDecl__Group__8_in_rule__EPackageDecl__Group__73086 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EPackageDecl__NsPrefixAssignment_8_in_rule__EPackageDecl__Group__83114 = new BitSet(new long[]{0x0000000008000000L});
+        public static final BitSet FOLLOW_rule__EPackageDecl__Group__9_in_rule__EPackageDecl__Group__83123 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_27_in_rule__EPackageDecl__Group__93152 = new BitSet(new long[]{0x00060800B1010080L});
+        public static final BitSet FOLLOW_rule__EPackageDecl__Group__10_in_rule__EPackageDecl__Group__93162 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EPackageDecl__Alternatives_10_in_rule__EPackageDecl__Group__103190 = new BitSet(new long[]{0x00060800B1010080L});
+        public static final BitSet FOLLOW_rule__EPackageDecl__Group__11_in_rule__EPackageDecl__Group__103200 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_28_in_rule__EPackageDecl__Group__113229 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SubEPackageDecl__EAnnotationsAssignment_0_in_rule__SubEPackageDecl__Group__03288 = new BitSet(new long[]{0x0000000081000000L});
+        public static final BitSet FOLLOW_rule__SubEPackageDecl__Group__1_in_rule__SubEPackageDecl__Group__03298 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_24_in_rule__SubEPackageDecl__Group__13327 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__SubEPackageDecl__Group__2_in_rule__SubEPackageDecl__Group__13337 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SubEPackageDecl__NameAssignment_2_in_rule__SubEPackageDecl__Group__23365 = new BitSet(new long[]{0x0000000008000000L});
+        public static final BitSet FOLLOW_rule__SubEPackageDecl__Group__3_in_rule__SubEPackageDecl__Group__23374 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_27_in_rule__SubEPackageDecl__Group__33403 = new BitSet(new long[]{0x00060800B1010080L});
+        public static final BitSet FOLLOW_rule__SubEPackageDecl__Group__4_in_rule__SubEPackageDecl__Group__33413 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SubEPackageDecl__Alternatives_4_in_rule__SubEPackageDecl__Group__43441 = new BitSet(new long[]{0x00060800B1010080L});
+        public static final BitSet FOLLOW_rule__SubEPackageDecl__Group__5_in_rule__SubEPackageDecl__Group__43451 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_28_in_rule__SubEPackageDecl__Group__53480 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EDataTypeDecl__EAnnotationsAssignment_0_0_in_rule__EDataTypeDecl__Group_0__03527 = new BitSet(new long[]{0x00000000A0000080L});
+        public static final BitSet FOLLOW_rule__EDataTypeDecl__Group_0__1_in_rule__EDataTypeDecl__Group_0__03537 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EDataTypeDecl__SerializableAssignment_0_1_in_rule__EDataTypeDecl__Group_0__13565 = new BitSet(new long[]{0x0000000020000000L});
+        public static final BitSet FOLLOW_rule__EDataTypeDecl__Group_0__2_in_rule__EDataTypeDecl__Group_0__13575 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EDataTypeDecl__Group_0_2__0_in_rule__EDataTypeDecl__Group_0__23603 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_29_in_rule__EDataTypeDecl__Group_0_2__03644 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__EDataTypeDecl__Group_0_2__1_in_rule__EDataTypeDecl__Group_0_2__03654 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EDataTypeDecl__NameAssignment_0_2_1_in_rule__EDataTypeDecl__Group_0_2__13682 = new BitSet(new long[]{0x0000000040000000L});
+        public static final BitSet FOLLOW_rule__EDataTypeDecl__Group_0_2__2_in_rule__EDataTypeDecl__Group_0_2__13691 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_30_in_rule__EDataTypeDecl__Group_0_2__23720 = new BitSet(new long[]{0x0000000000000030L});
+        public static final BitSet FOLLOW_rule__EDataTypeDecl__Group_0_2__3_in_rule__EDataTypeDecl__Group_0_2__23730 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_3_in_rule__EDataTypeDecl__Group_0_2__33758 = new BitSet(new long[]{0x0000000000400000L});
+        public static final BitSet FOLLOW_rule__EDataTypeDecl__Group_0_2__4_in_rule__EDataTypeDecl__Group_0_2__33767 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_22_in_rule__EDataTypeDecl__Group_0_2__43796 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_31_in_rule__EAnnotationDecl__Group__03842 = new BitSet(new long[]{0x0000000000000030L});
+        public static final BitSet FOLLOW_rule__EAnnotationDecl__Group__1_in_rule__EAnnotationDecl__Group__03852 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAnnotationDecl__SourceAssignment_1_in_rule__EAnnotationDecl__Group__13880 = new BitSet(new long[]{0x0000000100000002L});
+        public static final BitSet FOLLOW_rule__EAnnotationDecl__Group__2_in_rule__EAnnotationDecl__Group__13889 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAnnotationDecl__Group_2__0_in_rule__EAnnotationDecl__Group__23917 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_32_in_rule__EAnnotationDecl__Group_2__03959 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__EAnnotationDecl__Group_2__1_in_rule__EAnnotationDecl__Group_2__03969 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAnnotationDecl__DetailsAssignment_2_1_in_rule__EAnnotationDecl__Group_2__13997 = new BitSet(new long[]{0x0000000600000000L});
+        public static final BitSet FOLLOW_rule__EAnnotationDecl__Group_2__2_in_rule__EAnnotationDecl__Group_2__14006 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAnnotationDecl__Group_2_2__0_in_rule__EAnnotationDecl__Group_2__24034 = new BitSet(new long[]{0x0000000600000000L});
+        public static final BitSet FOLLOW_rule__EAnnotationDecl__Group_2__3_in_rule__EAnnotationDecl__Group_2__24044 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_33_in_rule__EAnnotationDecl__Group_2__34073 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_34_in_rule__EAnnotationDecl__Group_2_2__04117 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__EAnnotationDecl__Group_2_2__1_in_rule__EAnnotationDecl__Group_2_2__04127 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAnnotationDecl__DetailsAssignment_2_2_1_in_rule__EAnnotationDecl__Group_2_2__14155 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EClassDecl__EAnnotationsAssignment_0_in_rule__EClassDecl__Group__04193 = new BitSet(new long[]{0x0006000080010000L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Group__1_in_rule__EClassDecl__Group__04203 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EClassDecl__AbstractAssignment_1_in_rule__EClassDecl__Group__14231 = new BitSet(new long[]{0x0004000000010000L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Group__2_in_rule__EClassDecl__Group__14241 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Alternatives_2_in_rule__EClassDecl__Group__24269 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Group__3_in_rule__EClassDecl__Group__24278 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EClassDecl__NameAssignment_3_in_rule__EClassDecl__Group__34306 = new BitSet(new long[]{0x0000002848000000L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Group__4_in_rule__EClassDecl__Group__34315 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Group_4__0_in_rule__EClassDecl__Group__44343 = new BitSet(new long[]{0x0000002048000000L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Group__5_in_rule__EClassDecl__Group__44353 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Group_5__0_in_rule__EClassDecl__Group__54381 = new BitSet(new long[]{0x0000000048000000L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Group__6_in_rule__EClassDecl__Group__54391 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Group_6__0_in_rule__EClassDecl__Group__64419 = new BitSet(new long[]{0x0000000008000000L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Group__7_in_rule__EClassDecl__Group__64429 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_27_in_rule__EClassDecl__Group__74458 = new BitSet(new long[]{0x01F8404090020F00L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Group__8_in_rule__EClassDecl__Group__74468 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Alternatives_8_in_rule__EClassDecl__Group__84496 = new BitSet(new long[]{0x01F8404090020F00L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Group__9_in_rule__EClassDecl__Group__84506 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_28_in_rule__EClassDecl__Group__94535 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_35_in_rule__EClassDecl__Group_4__04591 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Group_4__1_in_rule__EClassDecl__Group_4__04601 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EClassDecl__ETypeParametersAssignment_4_1_in_rule__EClassDecl__Group_4__14629 = new BitSet(new long[]{0x0000001400000000L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Group_4__2_in_rule__EClassDecl__Group_4__14638 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Group_4_2__0_in_rule__EClassDecl__Group_4__24666 = new BitSet(new long[]{0x0000001400000000L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Group_4__3_in_rule__EClassDecl__Group_4__24676 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_36_in_rule__EClassDecl__Group_4__34705 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_34_in_rule__EClassDecl__Group_4_2__04749 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Group_4_2__1_in_rule__EClassDecl__Group_4_2__04759 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EClassDecl__ETypeParametersAssignment_4_2_1_in_rule__EClassDecl__Group_4_2__14787 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_37_in_rule__EClassDecl__Group_5__04826 = new BitSet(new long[]{0x0000040000000020L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Group_5__1_in_rule__EClassDecl__Group_5__04836 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EClassDecl__EGenericSuperTypesAssignment_5_1_in_rule__EClassDecl__Group_5__14864 = new BitSet(new long[]{0x0000000400000002L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Group_5__2_in_rule__EClassDecl__Group_5__14873 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Group_5_2__0_in_rule__EClassDecl__Group_5__24901 = new BitSet(new long[]{0x0000000400000002L});
+        public static final BitSet FOLLOW_34_in_rule__EClassDecl__Group_5_2__04943 = new BitSet(new long[]{0x0000040000000020L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Group_5_2__1_in_rule__EClassDecl__Group_5_2__04953 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EClassDecl__EGenericSuperTypesAssignment_5_2_1_in_rule__EClassDecl__Group_5_2__14981 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_30_in_rule__EClassDecl__Group_6__05020 = new BitSet(new long[]{0x0000000000000030L});
+        public static final BitSet FOLLOW_rule__EClassDecl__Group_6__1_in_rule__EClassDecl__Group_6__05030 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EClassDecl__InstanceClassNameAssignment_6_1_in_rule__EClassDecl__Group_6__15058 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__EAnnotationsAssignment_0_in_rule__EAttributeDecl__Group__05096 = new BitSet(new long[]{0x00F8004080000700L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__Group__1_in_rule__EAttributeDecl__Group__05106 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__Alternatives_1_in_rule__EAttributeDecl__Group__15134 = new BitSet(new long[]{0x00F8004000000700L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__Group__2_in_rule__EAttributeDecl__Group__15144 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_38_in_rule__EAttributeDecl__Group__25173 = new BitSet(new long[]{0x0000040000000020L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__Group__3_in_rule__EAttributeDecl__Group__25183 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__EGenericTypeAssignment_3_in_rule__EAttributeDecl__Group__35211 = new BitSet(new long[]{0x0000008000000020L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__Group__4_in_rule__EAttributeDecl__Group__35220 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__Group_4__0_in_rule__EAttributeDecl__Group__45248 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__Group__5_in_rule__EAttributeDecl__Group__45258 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__NameAssignment_5_in_rule__EAttributeDecl__Group__55286 = new BitSet(new long[]{0x0000000000C00000L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__Group__6_in_rule__EAttributeDecl__Group__55295 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__Group_6__0_in_rule__EAttributeDecl__Group__65323 = new BitSet(new long[]{0x0000000000400000L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__Group__7_in_rule__EAttributeDecl__Group__65333 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_22_in_rule__EAttributeDecl__Group__75362 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_39_in_rule__EAttributeDecl__Group_4__05414 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__Group_4__1_in_rule__EAttributeDecl__Group_4__05424 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__LowerBoundAssignment_4_1_in_rule__EAttributeDecl__Group_4__15452 = new BitSet(new long[]{0x0000030000000000L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__Group_4__2_in_rule__EAttributeDecl__Group_4__15461 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__Group_4_2__0_in_rule__EAttributeDecl__Group_4__25489 = new BitSet(new long[]{0x0000010000000000L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__Group_4__3_in_rule__EAttributeDecl__Group_4__25499 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_40_in_rule__EAttributeDecl__Group_4__35528 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_41_in_rule__EAttributeDecl__Group_4_2__05572 = new BitSet(new long[]{0x0001000000000040L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__Group_4_2__1_in_rule__EAttributeDecl__Group_4_2__05582 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__UpperBoundAssignment_4_2_1_in_rule__EAttributeDecl__Group_4_2__15610 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_23_in_rule__EAttributeDecl__Group_6__05649 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__Group_6__1_in_rule__EAttributeDecl__Group_6__05659 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EAttributeDecl__DefaultValueLiteralAssignment_6_1_in_rule__EAttributeDecl__Group_6__15687 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__EAnnotationsAssignment_0_in_rule__EReferenceDecl__Group__05725 = new BitSet(new long[]{0x01F0000080020F00L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__Group__1_in_rule__EReferenceDecl__Group__05735 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__Alternatives_1_in_rule__EReferenceDecl__Group__15763 = new BitSet(new long[]{0x01F0000000020F00L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__Group__2_in_rule__EReferenceDecl__Group__15773 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__Alternatives_2_in_rule__EReferenceDecl__Group__25801 = new BitSet(new long[]{0x0000040000000020L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__Group__3_in_rule__EReferenceDecl__Group__25810 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__EGenericTypeAssignment_3_in_rule__EReferenceDecl__Group__35838 = new BitSet(new long[]{0x0000048000000020L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__Group__4_in_rule__EReferenceDecl__Group__35847 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__Group_4__0_in_rule__EReferenceDecl__Group__45875 = new BitSet(new long[]{0x0000040000000020L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__Group__5_in_rule__EReferenceDecl__Group__45885 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__Group_5__0_in_rule__EReferenceDecl__Group__55913 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__Group__6_in_rule__EReferenceDecl__Group__55923 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__NameAssignment_6_in_rule__EReferenceDecl__Group__65951 = new BitSet(new long[]{0x0000000000400000L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__Group__7_in_rule__EReferenceDecl__Group__65960 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_22_in_rule__EReferenceDecl__Group__75989 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_39_in_rule__EReferenceDecl__Group_4__06041 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__Group_4__1_in_rule__EReferenceDecl__Group_4__06051 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__LowerBoundAssignment_4_1_in_rule__EReferenceDecl__Group_4__16079 = new BitSet(new long[]{0x0000030000000000L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__Group_4__2_in_rule__EReferenceDecl__Group_4__16088 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__Group_4_2__0_in_rule__EReferenceDecl__Group_4__26116 = new BitSet(new long[]{0x0000010000000000L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__Group_4__3_in_rule__EReferenceDecl__Group_4__26126 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_40_in_rule__EReferenceDecl__Group_4__36155 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_41_in_rule__EReferenceDecl__Group_4_2__06199 = new BitSet(new long[]{0x0001000000000040L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__Group_4_2__1_in_rule__EReferenceDecl__Group_4_2__06209 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__UpperBoundAssignment_4_2_1_in_rule__EReferenceDecl__Group_4_2__16237 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_42_in_rule__EReferenceDecl__Group_5__06276 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__Group_5__1_in_rule__EReferenceDecl__Group_5__06286 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EReferenceDecl__EOppositeAssignment_5_1_in_rule__EReferenceDecl__Group_5__16314 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EEnumDecl__EAnnotationsAssignment_0_in_rule__EEnumDecl__Group__06352 = new BitSet(new long[]{0x0000080080000000L});
+        public static final BitSet FOLLOW_rule__EEnumDecl__Group__1_in_rule__EEnumDecl__Group__06362 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_43_in_rule__EEnumDecl__Group__16391 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__EEnumDecl__Group__2_in_rule__EEnumDecl__Group__16401 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EEnumDecl__NameAssignment_2_in_rule__EEnumDecl__Group__26429 = new BitSet(new long[]{0x0000000008000000L});
+        public static final BitSet FOLLOW_rule__EEnumDecl__Group__3_in_rule__EEnumDecl__Group__26438 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_27_in_rule__EEnumDecl__Group__36467 = new BitSet(new long[]{0x0000000080000020L});
+        public static final BitSet FOLLOW_rule__EEnumDecl__Group__4_in_rule__EEnumDecl__Group__36477 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EEnumDecl__ELiteralsAssignment_4_in_rule__EEnumDecl__Group__46507 = new BitSet(new long[]{0x0000000090000020L});
+        public static final BitSet FOLLOW_rule__EEnumDecl__ELiteralsAssignment_4_in_rule__EEnumDecl__Group__46519 = new BitSet(new long[]{0x0000000090000020L});
+        public static final BitSet FOLLOW_rule__EEnumDecl__Group__5_in_rule__EEnumDecl__Group__46531 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_28_in_rule__EEnumDecl__Group__56560 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EEnumLiteralDecl__EAnnotationsAssignment_0_in_rule__EEnumLiteralDecl__Group__06607 = new BitSet(new long[]{0x0000000080000020L});
+        public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group__1_in_rule__EEnumLiteralDecl__Group__06617 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EEnumLiteralDecl__NameAssignment_1_in_rule__EEnumLiteralDecl__Group__16645 = new BitSet(new long[]{0x0000000000C00010L});
+        public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group__2_in_rule__EEnumLiteralDecl__Group__16654 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group_2__0_in_rule__EEnumLiteralDecl__Group__26682 = new BitSet(new long[]{0x0000000000400010L});
+        public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group__3_in_rule__EEnumLiteralDecl__Group__26692 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EEnumLiteralDecl__LiteralAssignment_3_in_rule__EEnumLiteralDecl__Group__36720 = new BitSet(new long[]{0x0000000000400000L});
+        public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group__4_in_rule__EEnumLiteralDecl__Group__36730 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_22_in_rule__EEnumLiteralDecl__Group__46759 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_23_in_rule__EEnumLiteralDecl__Group_2__06805 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_rule__EEnumLiteralDecl__Group_2__1_in_rule__EEnumLiteralDecl__Group_2__06815 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EEnumLiteralDecl__ValueAssignment_2_1_in_rule__EEnumLiteralDecl__Group_2__16843 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ETypeParameterDecl__NameAssignment_0_in_rule__ETypeParameterDecl__Group__06881 = new BitSet(new long[]{0x0000002000000002L});
+        public static final BitSet FOLLOW_rule__ETypeParameterDecl__Group__1_in_rule__ETypeParameterDecl__Group__06890 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ETypeParameterDecl__Group_1__0_in_rule__ETypeParameterDecl__Group__16918 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_37_in_rule__ETypeParameterDecl__Group_1__06958 = new BitSet(new long[]{0x0000140000000020L});
+        public static final BitSet FOLLOW_rule__ETypeParameterDecl__Group_1__1_in_rule__ETypeParameterDecl__Group_1__06968 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ETypeParameterDecl__EBoundsAssignment_1_1_in_rule__ETypeParameterDecl__Group_1__16996 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_0_in_rule__EGenericTypeReferenceDecl__Group_0__07034 = new BitSet(new long[]{0x0000000800000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0__1_in_rule__EGenericTypeReferenceDecl__Group_0__07043 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__0_in_rule__EGenericTypeReferenceDecl__Group_0__17071 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_35_in_rule__EGenericTypeReferenceDecl__Group_0_1__07111 = new BitSet(new long[]{0x0000140000000020L});
+        public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__1_in_rule__EGenericTypeReferenceDecl__Group_0_1__07121 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_1_in_rule__EGenericTypeReferenceDecl__Group_0_1__17149 = new BitSet(new long[]{0x0000001400000000L});
+        public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__2_in_rule__EGenericTypeReferenceDecl__Group_0_1__17158 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1_2__0_in_rule__EGenericTypeReferenceDecl__Group_0_1__27186 = new BitSet(new long[]{0x0000001400000000L});
+        public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1__3_in_rule__EGenericTypeReferenceDecl__Group_0_1__27196 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_36_in_rule__EGenericTypeReferenceDecl__Group_0_1__37225 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_34_in_rule__EGenericTypeReferenceDecl__Group_0_1_2__07269 = new BitSet(new long[]{0x0000140000000020L});
+        public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_0_1_2__1_in_rule__EGenericTypeReferenceDecl__Group_0_1_2__07279 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_1_in_rule__EGenericTypeReferenceDecl__Group_0_1_2__17307 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_42_in_rule__EGenericTypeReferenceDecl__Group_1__07346 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__Group_1__1_in_rule__EGenericTypeReferenceDecl__Group_1__07356 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_1_in_rule__EGenericTypeReferenceDecl__Group_1__17384 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeDecl__EClassifierAssignment_0_0_in_rule__EGenericTypeDecl__Group_0__07422 = new BitSet(new long[]{0x0000000800000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0__1_in_rule__EGenericTypeDecl__Group_0__07431 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0_1__0_in_rule__EGenericTypeDecl__Group_0__17459 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_35_in_rule__EGenericTypeDecl__Group_0_1__07499 = new BitSet(new long[]{0x0000140000000020L});
+        public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0_1__1_in_rule__EGenericTypeDecl__Group_0_1__07509 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_1_in_rule__EGenericTypeDecl__Group_0_1__17537 = new BitSet(new long[]{0x0000001400000000L});
+        public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0_1__2_in_rule__EGenericTypeDecl__Group_0_1__17546 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0_1_2__0_in_rule__EGenericTypeDecl__Group_0_1__27574 = new BitSet(new long[]{0x0000001400000000L});
+        public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0_1__3_in_rule__EGenericTypeDecl__Group_0_1__27584 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_36_in_rule__EGenericTypeDecl__Group_0_1__37613 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_34_in_rule__EGenericTypeDecl__Group_0_1_2__07657 = new BitSet(new long[]{0x0000140000000020L});
+        public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_0_1_2__1_in_rule__EGenericTypeDecl__Group_0_1_2__07667 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_1_in_rule__EGenericTypeDecl__Group_0_1_2__17695 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_42_in_rule__EGenericTypeDecl__Group_1__07734 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_1__1_in_rule__EGenericTypeDecl__Group_1__07744 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeDecl__ETypeParameterAssignment_1_1_in_rule__EGenericTypeDecl__Group_1__17772 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_44_in_rule__EGenericTypeDecl__Group_2__07811 = new BitSet(new long[]{0x0000202000000000L});
+        public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_2__1_in_rule__EGenericTypeDecl__Group_2__07821 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeDecl__Alternatives_2_1_in_rule__EGenericTypeDecl__Group_2__17849 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_37_in_rule__EGenericTypeDecl__Group_2_1_0__07888 = new BitSet(new long[]{0x0000140000000020L});
+        public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_2_1_0__1_in_rule__EGenericTypeDecl__Group_2_1_0__07898 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_1_in_rule__EGenericTypeDecl__Group_2_1_0__17926 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_45_in_rule__EGenericTypeDecl__Group_2_1_1__07965 = new BitSet(new long[]{0x0000140000000020L});
+        public static final BitSet FOLLOW_rule__EGenericTypeDecl__Group_2_1_1__1_in_rule__EGenericTypeDecl__Group_2_1_1__07975 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_1_in_rule__EGenericTypeDecl__Group_2_1_1__18003 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__EAnnotationsAssignment_0_in_rule__EOperationDecl__Group__08041 = new BitSet(new long[]{0x0000400080000300L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group__1_in_rule__EOperationDecl__Group__08051 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Alternatives_1_in_rule__EOperationDecl__Group__18079 = new BitSet(new long[]{0x0000400000000300L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group__2_in_rule__EOperationDecl__Group__18089 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_46_in_rule__EOperationDecl__Group__28118 = new BitSet(new long[]{0x0000040000040020L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group__3_in_rule__EOperationDecl__Group__28128 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Alternatives_3_in_rule__EOperationDecl__Group__38156 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group__4_in_rule__EOperationDecl__Group__38165 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__NameAssignment_4_in_rule__EOperationDecl__Group__48193 = new BitSet(new long[]{0x0000000900000000L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group__5_in_rule__EOperationDecl__Group__48202 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group_5__0_in_rule__EOperationDecl__Group__58230 = new BitSet(new long[]{0x0000000100000000L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group__6_in_rule__EOperationDecl__Group__58240 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_32_in_rule__EOperationDecl__Group__68269 = new BitSet(new long[]{0x0000040280000020L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group__7_in_rule__EOperationDecl__Group__68279 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group_7__0_in_rule__EOperationDecl__Group__78307 = new BitSet(new long[]{0x0000000200000000L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group__8_in_rule__EOperationDecl__Group__78317 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_33_in_rule__EOperationDecl__Group__88346 = new BitSet(new long[]{0x0000800000400000L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group__9_in_rule__EOperationDecl__Group__88356 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group_9__0_in_rule__EOperationDecl__Group__98384 = new BitSet(new long[]{0x0000000000400000L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group__10_in_rule__EOperationDecl__Group__98394 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_22_in_rule__EOperationDecl__Group__108423 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_35_in_rule__EOperationDecl__Group_5__08481 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group_5__1_in_rule__EOperationDecl__Group_5__08491 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__ETypeParametersAssignment_5_1_in_rule__EOperationDecl__Group_5__18519 = new BitSet(new long[]{0x0000001400000000L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group_5__2_in_rule__EOperationDecl__Group_5__18528 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group_5_2__0_in_rule__EOperationDecl__Group_5__28556 = new BitSet(new long[]{0x0000001400000000L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group_5__3_in_rule__EOperationDecl__Group_5__28566 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_36_in_rule__EOperationDecl__Group_5__38595 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_34_in_rule__EOperationDecl__Group_5_2__08639 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group_5_2__1_in_rule__EOperationDecl__Group_5_2__08649 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__ETypeParametersAssignment_5_2_1_in_rule__EOperationDecl__Group_5_2__18677 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__EParametersAssignment_7_0_in_rule__EOperationDecl__Group_7__08715 = new BitSet(new long[]{0x0000000400000002L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group_7__1_in_rule__EOperationDecl__Group_7__08724 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group_7_1__0_in_rule__EOperationDecl__Group_7__18752 = new BitSet(new long[]{0x0000000400000002L});
+        public static final BitSet FOLLOW_34_in_rule__EOperationDecl__Group_7_1__08792 = new BitSet(new long[]{0x0000040080000020L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group_7_1__1_in_rule__EOperationDecl__Group_7_1__08802 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__EParametersAssignment_7_1_1_in_rule__EOperationDecl__Group_7_1__18830 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_47_in_rule__EOperationDecl__Group_9__08869 = new BitSet(new long[]{0x0000040000000020L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group_9__1_in_rule__EOperationDecl__Group_9__08879 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__EGenericExceptionsAssignment_9_1_in_rule__EOperationDecl__Group_9__18907 = new BitSet(new long[]{0x0000000400000002L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group_9__2_in_rule__EOperationDecl__Group_9__18916 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group_9_2__0_in_rule__EOperationDecl__Group_9__28944 = new BitSet(new long[]{0x0000000400000002L});
+        public static final BitSet FOLLOW_34_in_rule__EOperationDecl__Group_9_2__08986 = new BitSet(new long[]{0x0000040000000020L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__Group_9_2__1_in_rule__EOperationDecl__Group_9_2__08996 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EOperationDecl__EGenericExceptionsAssignment_9_2_1_in_rule__EOperationDecl__Group_9_2__19024 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EParameterDecl__EAnnotationsAssignment_0_in_rule__EParameterDecl__Group__09062 = new BitSet(new long[]{0x0000040080000020L});
+        public static final BitSet FOLLOW_rule__EParameterDecl__Group__1_in_rule__EParameterDecl__Group__09072 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EParameterDecl__EGenericTypeAssignment_1_in_rule__EParameterDecl__Group__19100 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__EParameterDecl__Group__2_in_rule__EParameterDecl__Group__19109 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__EParameterDecl__NameAssignment_2_in_rule__EParameterDecl__Group__29137 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__MapEntry__KeyAssignment_0_in_rule__MapEntry__Group__09177 = new BitSet(new long[]{0x0000000000800000L});
+        public static final BitSet FOLLOW_rule__MapEntry__Group__1_in_rule__MapEntry__Group__09186 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_23_in_rule__MapEntry__Group__19215 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__MapEntry__Group__2_in_rule__MapEntry__Group__19225 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__MapEntry__ValueAssignment_2_in_rule__MapEntry__Group__29253 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__QID__Group__09293 = new BitSet(new long[]{0x0000000000180002L});
+        public static final BitSet FOLLOW_rule__QID__Group__1_in_rule__QID__Group__09301 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__QID__Group_1__0_in_rule__QID__Group__19329 = new BitSet(new long[]{0x0000000000180002L});
+        public static final BitSet FOLLOW_rule__QID__Alternatives_1_0_in_rule__QID__Group_1__09368 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_rule__QID__Group_1__1_in_rule__QID__Group_1__09377 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__QID__Group_1__19405 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_48_in_rule__SINT__Group__09444 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_rule__SINT__Group__1_in_rule__SINT__Group__09456 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_rule__SINT__Group__19484 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleReferencedMetamodel_in_rule__EcoreDsl__MetamodelDeclarationsAssignment_09521 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEPackageDecl_in_rule__EcoreDsl__PackageAssignment_19552 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__ReferencedMetamodel__AliasAssignment_1_09583 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__ReferencedMetamodel__EPackageAssignment_29618 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EPackageDecl__EAnnotationsAssignment_09653 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleQID_in_rule__EPackageDecl__NameAssignment_29684 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__EPackageDecl__NsURIAssignment_59715 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleQID_in_rule__EPackageDecl__NsPrefixAssignment_89746 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSubEPackageDecl_in_rule__EPackageDecl__ESubpackagesAssignment_10_09777 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEClassifierDecl_in_rule__EPackageDecl__EClassifiersAssignment_10_19808 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__SubEPackageDecl__EAnnotationsAssignment_09839 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__SubEPackageDecl__NameAssignment_29870 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSubEPackageDecl_in_rule__SubEPackageDecl__ESubpackagesAssignment_4_09901 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEClassifierDecl_in_rule__SubEPackageDecl__EClassifiersAssignment_4_19932 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EDataTypeDecl__EAnnotationsAssignment_0_09963 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_SERIALIZABLE_in_rule__EDataTypeDecl__SerializableAssignment_0_19994 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EDataTypeDecl__NameAssignment_0_2_110025 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSTRING_OR_QID_in_rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_310056 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSTRING_OR_QID_in_rule__EAnnotationDecl__SourceAssignment_110087 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleMapEntry_in_rule__EAnnotationDecl__DetailsAssignment_2_110118 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleMapEntry_in_rule__EAnnotationDecl__DetailsAssignment_2_2_110149 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EClassDecl__EAnnotationsAssignment_010180 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_49_in_rule__EClassDecl__AbstractAssignment_110216 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_50_in_rule__EClassDecl__InterfaceAssignment_2_010260 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EClassDecl__NameAssignment_310299 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleETypeParameterDecl_in_rule__EClassDecl__ETypeParametersAssignment_4_110330 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleETypeParameterDecl_in_rule__EClassDecl__ETypeParametersAssignment_4_2_110361 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EClassDecl__EGenericSuperTypesAssignment_5_110392 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EClassDecl__EGenericSuperTypesAssignment_5_2_110423 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSTRING_OR_QID_in_rule__EClassDecl__InstanceClassNameAssignment_6_110454 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEStructuralFeatureDecl_in_rule__EClassDecl__EStructuralFeaturesAssignment_8_010485 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEOperationDecl_in_rule__EClassDecl__EOperationsAssignment_8_110516 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EAttributeDecl__EAnnotationsAssignment_010547 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_51_in_rule__EAttributeDecl__IDAssignment_1_010583 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_BAG_in_rule__EAttributeDecl__UniqueAssignment_1_110622 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_RANDOM_in_rule__EAttributeDecl__OrderedAssignment_1_210653 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_READONLY_in_rule__EAttributeDecl__ChangeableAssignment_1_310684 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_52_in_rule__EAttributeDecl__VolatileAssignment_1_410720 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_53_in_rule__EAttributeDecl__TransientAssignment_1_510764 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_54_in_rule__EAttributeDecl__UnsettableAssignment_1_610808 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_55_in_rule__EAttributeDecl__DerivedAssignment_1_710852 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EAttributeDecl__EGenericTypeAssignment_310891 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_rule__EAttributeDecl__LowerBoundAssignment_4_110922 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSINT_in_rule__EAttributeDecl__UpperBoundAssignment_4_2_110953 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EAttributeDecl__NameAssignment_510984 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__EAttributeDecl__DefaultValueLiteralAssignment_6_111015 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EReferenceDecl__EAnnotationsAssignment_011046 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_LOCAL_in_rule__EReferenceDecl__ResolveProxiesAssignment_1_011077 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_BAG_in_rule__EReferenceDecl__UniqueAssignment_1_111108 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_RANDOM_in_rule__EReferenceDecl__OrderedAssignment_1_211139 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_READONLY_in_rule__EReferenceDecl__ChangeableAssignment_1_311170 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_52_in_rule__EReferenceDecl__VolatileAssignment_1_411206 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_53_in_rule__EReferenceDecl__TransientAssignment_1_511250 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_54_in_rule__EReferenceDecl__UnsettableAssignment_1_611294 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_55_in_rule__EReferenceDecl__DerivedAssignment_1_711338 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_56_in_rule__EReferenceDecl__ContainmentAssignment_2_011382 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EReferenceDecl__EGenericTypeAssignment_311421 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_rule__EReferenceDecl__LowerBoundAssignment_4_111452 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSINT_in_rule__EReferenceDecl__UpperBoundAssignment_4_2_111483 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EReferenceDecl__EOppositeAssignment_5_111518 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EReferenceDecl__NameAssignment_611553 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EEnumDecl__EAnnotationsAssignment_011584 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EEnumDecl__NameAssignment_211615 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEEnumLiteralDecl_in_rule__EEnumDecl__ELiteralsAssignment_411646 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EEnumLiteralDecl__EAnnotationsAssignment_011677 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EEnumLiteralDecl__NameAssignment_111708 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_rule__EEnumLiteralDecl__ValueAssignment_2_111739 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__EEnumLiteralDecl__LiteralAssignment_311770 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__ETypeParameterDecl__NameAssignment_011801 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__ETypeParameterDecl__EBoundsAssignment_1_111832 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_011867 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_111902 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_111933 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_111968 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EGenericTypeDecl__EClassifierAssignment_0_012007 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_112042 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_112073 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EGenericTypeDecl__ETypeParameterAssignment_1_112108 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_112143 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_112174 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EOperationDecl__EAnnotationsAssignment_012205 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_BAG_in_rule__EOperationDecl__UniqueAssignment_1_012236 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_RANDOM_in_rule__EOperationDecl__OrderedAssignment_1_112267 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericTypeAssignment_3_012298 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EOperationDecl__NameAssignment_412329 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleETypeParameterDecl_in_rule__EOperationDecl__ETypeParametersAssignment_5_112360 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleETypeParameterDecl_in_rule__EOperationDecl__ETypeParametersAssignment_5_2_112391 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEParameterDecl_in_rule__EOperationDecl__EParametersAssignment_7_012422 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEParameterDecl_in_rule__EOperationDecl__EParametersAssignment_7_1_112453 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericExceptionsAssignment_9_112484 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericExceptionsAssignment_9_2_112515 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EParameterDecl__EAnnotationsAssignment_012546 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EParameterDecl__EGenericTypeAssignment_112577 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EParameterDecl__NameAssignment_212608 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__MapEntry__KeyAssignment_012639 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__MapEntry__ValueAssignment_212670 = new BitSet(new long[]{0x0000000000000002L});
+    }
+
 
 }

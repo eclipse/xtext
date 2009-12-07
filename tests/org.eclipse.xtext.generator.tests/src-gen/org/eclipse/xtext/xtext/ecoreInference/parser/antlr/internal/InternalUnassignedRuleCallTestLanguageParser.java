@@ -79,12 +79,12 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:73:2: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
-            pushFollow(FOLLOW_ruleModel_in_entryRuleModel73);
+            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel73);
             iv_ruleModel=ruleModel();
             _fsp--;
 
              current =iv_ruleModel; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleModel83); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel83); 
 
             }
 
@@ -118,7 +118,7 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:86:1: ( 'model' ( RULE_INT )+ ( (lv_modelFeatures_2_0= ruleModelFeatures ) ) )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:86:3: 'model' ( RULE_INT )+ ( (lv_modelFeatures_2_0= ruleModelFeatures ) )
             {
-            match(input,11,FOLLOW_11_in_ruleModel118); 
+            match(input,11,FollowSets000.FOLLOW_11_in_ruleModel118); 
 
                     createLeafNode(grammarAccess.getModelAccess().getModelKeyword_0(), null); 
                 
@@ -138,7 +138,7 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
             	case 1 :
             	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:90:2: RULE_INT
             	    {
-            	    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleModel128); 
+            	    match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleModel128); 
             	     
             	        createLeafNode(grammarAccess.getModelAccess().getINTTerminalRuleCall_1(), null); 
             	        
@@ -164,7 +164,7 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
              
             	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getModelFeaturesModelFeaturesParserRuleCall_2_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleModelFeatures_in_ruleModel150);
+            pushFollow(FollowSets000.FOLLOW_ruleModelFeatures_in_ruleModel150);
             lv_modelFeatures_2_0=ruleModelFeatures();
             _fsp--;
 
@@ -226,12 +226,12 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:126:2: iv_ruleModelFeatures= ruleModelFeatures EOF
             {
              currentNode = createCompositeNode(grammarAccess.getModelFeaturesRule(), currentNode); 
-            pushFollow(FOLLOW_ruleModelFeatures_in_entryRuleModelFeatures183);
+            pushFollow(FollowSets000.FOLLOW_ruleModelFeatures_in_entryRuleModelFeatures183);
             iv_ruleModelFeatures=ruleModelFeatures();
             _fsp--;
 
              current =iv_ruleModelFeatures; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleModelFeatures193); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModelFeatures193); 
 
             }
 
@@ -264,7 +264,7 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:139:1: ( 'feature' ( (lv_name_1_0= RULE_ID ) ) ruleDataTypeRule ';' )
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:139:3: 'feature' ( (lv_name_1_0= RULE_ID ) ) ruleDataTypeRule ';'
             {
-            match(input,12,FOLLOW_12_in_ruleModelFeatures228); 
+            match(input,12,FollowSets000.FOLLOW_12_in_ruleModelFeatures228); 
 
                     createLeafNode(grammarAccess.getModelFeaturesAccess().getFeatureKeyword_0(), null); 
                 
@@ -275,7 +275,7 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:145:3: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleModelFeatures245); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleModelFeatures245); 
 
             			createLeafNode(grammarAccess.getModelFeaturesAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             		
@@ -301,11 +301,11 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
 
             }
 
-            pushFollow(FOLLOW_ruleDataTypeRule_in_ruleModelFeatures259);
+            pushFollow(FollowSets000.FOLLOW_ruleDataTypeRule_in_ruleModelFeatures259);
             ruleDataTypeRule();
             _fsp--;
 
-            match(input,13,FOLLOW_13_in_ruleModelFeatures261); 
+            match(input,13,FollowSets000.FOLLOW_13_in_ruleModelFeatures261); 
 
                     createLeafNode(grammarAccess.getModelFeaturesAccess().getSemicolonKeyword_3(), null); 
                 
@@ -344,12 +344,12 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:179:2: iv_ruleDataTypeRule= ruleDataTypeRule EOF
             {
              currentNode = createCompositeNode(grammarAccess.getDataTypeRuleRule(), currentNode); 
-            pushFollow(FOLLOW_ruleDataTypeRule_in_entryRuleDataTypeRule295);
+            pushFollow(FollowSets000.FOLLOW_ruleDataTypeRule_in_entryRuleDataTypeRule295);
             iv_ruleDataTypeRule=ruleDataTypeRule();
             _fsp--;
 
              current =iv_ruleDataTypeRule.getText(); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleDataTypeRule306); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleDataTypeRule306); 
 
             }
 
@@ -386,7 +386,7 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:192:6: this_INT_0= RULE_INT kw= 'keyword' this_INT_2= RULE_INT (this_STRING_3= RULE_STRING )?
             {
             this_INT_0=(Token)input.LT(1);
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDataTypeRule346); 
+            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleDataTypeRule346); 
 
             		current.merge(this_INT_0);
                 
@@ -394,13 +394,13 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
                 createLeafNode(grammarAccess.getDataTypeRuleAccess().getINTTerminalRuleCall_0(), null); 
                 
             kw=(Token)input.LT(1);
-            match(input,14,FOLLOW_14_in_ruleDataTypeRule364); 
+            match(input,14,FollowSets000.FOLLOW_14_in_ruleDataTypeRule364); 
 
                     current.merge(kw);
                     createLeafNode(grammarAccess.getDataTypeRuleAccess().getKeywordKeyword_1(), null); 
                 
             this_INT_2=(Token)input.LT(1);
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleDataTypeRule379); 
+            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleDataTypeRule379); 
 
             		current.merge(this_INT_2);
                 
@@ -419,7 +419,7 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/xtext/ecoreInference/parser/antlr/internal/InternalUnassignedRuleCallTestLanguage.g:212:6: this_STRING_3= RULE_STRING
                     {
                     this_STRING_3=(Token)input.LT(1);
-                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleDataTypeRule400); 
+                    match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleDataTypeRule400); 
 
                     		current.merge(this_STRING_3);
                         
@@ -456,22 +456,26 @@ public class InternalUnassignedRuleCallTestLanguageParser extends AbstractIntern
 
  
 
-    public static final BitSet FOLLOW_ruleModel_in_entryRuleModel73 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleModel83 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_ruleModel118 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleModel128 = new BitSet(new long[]{0x0000000000001010L});
-    public static final BitSet FOLLOW_ruleModelFeatures_in_ruleModel150 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleModelFeatures_in_entryRuleModelFeatures183 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleModelFeatures193 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_ruleModelFeatures228 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleModelFeatures245 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_ruleDataTypeRule_in_ruleModelFeatures259 = new BitSet(new long[]{0x0000000000002000L});
-    public static final BitSet FOLLOW_13_in_ruleModelFeatures261 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleDataTypeRule_in_entryRuleDataTypeRule295 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleDataTypeRule306 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleDataTypeRule346 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_14_in_ruleDataTypeRule364 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleDataTypeRule379 = new BitSet(new long[]{0x0000000000000042L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleDataTypeRule400 = new BitSet(new long[]{0x0000000000000002L});
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel73 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleModel83 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_ruleModel118 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleModel128 = new BitSet(new long[]{0x0000000000001010L});
+        public static final BitSet FOLLOW_ruleModelFeatures_in_ruleModel150 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleModelFeatures_in_entryRuleModelFeatures183 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleModelFeatures193 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_ruleModelFeatures228 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleModelFeatures245 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_ruleDataTypeRule_in_ruleModelFeatures259 = new BitSet(new long[]{0x0000000000002000L});
+        public static final BitSet FOLLOW_13_in_ruleModelFeatures261 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleDataTypeRule_in_entryRuleDataTypeRule295 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleDataTypeRule306 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleDataTypeRule346 = new BitSet(new long[]{0x0000000000004000L});
+        public static final BitSet FOLLOW_14_in_ruleDataTypeRule364 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleDataTypeRule379 = new BitSet(new long[]{0x0000000000000042L});
+        public static final BitSet FOLLOW_RULE_STRING_in_ruleDataTypeRule400 = new BitSet(new long[]{0x0000000000000002L});
+    }
+
 
 }

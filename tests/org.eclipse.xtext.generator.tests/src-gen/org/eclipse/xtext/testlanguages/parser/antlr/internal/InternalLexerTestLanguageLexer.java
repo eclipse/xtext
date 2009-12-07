@@ -427,56 +427,28 @@ public class InternalLexerTestLanguageLexer extends Lexer {
         int LA10_0 = input.LA(1);
 
         if ( (LA10_0=='#') ) {
-            int LA10_1 = input.LA(2);
-
-            if ( (LA10_1=='B') ) {
-                alt10=1;
-            }
-            else {
-                alt10=7;}
+            alt10 = mTokensHelper001();
         }
         else if ( (LA10_0=='^') ) {
-            int LA10_2 = input.LA(2);
-
-            if ( ((LA10_2>='A' && LA10_2<='Z')||LA10_2=='_'||(LA10_2>='a' && LA10_2<='z')) ) {
-                alt10=2;
-            }
-            else {
-                alt10=7;}
+            alt10 = mTokensHelper002();
         }
         else if ( ((LA10_0>='A' && LA10_0<='Z')||LA10_0=='_'||(LA10_0>='a' && LA10_0<='z')) ) {
-            alt10=2;
+            alt10 = mTokensHelper003();
         }
         else if ( ((LA10_0>='0' && LA10_0<='9')) ) {
-            alt10=3;
+            alt10 = mTokensHelper004();
         }
         else if ( (LA10_0=='/') ) {
-            switch ( input.LA(2) ) {
-            case '*':
-                {
-                alt10=4;
-                }
-                break;
-            case '/':
-                {
-                alt10=5;
-                }
-                break;
-            default:
-                alt10=7;}
-
+            alt10 = mTokensHelper005();
         }
         else if ( ((LA10_0>='\t' && LA10_0<='\n')||LA10_0=='\r'||LA10_0==' ') ) {
-            alt10=6;
+            alt10 = mTokensHelper006();
         }
         else if ( ((LA10_0>='\u0000' && LA10_0<='\b')||(LA10_0>='\u000B' && LA10_0<='\f')||(LA10_0>='\u000E' && LA10_0<='\u001F')||(LA10_0>='!' && LA10_0<='\"')||(LA10_0>='$' && LA10_0<='.')||(LA10_0>=':' && LA10_0<='@')||(LA10_0>='[' && LA10_0<=']')||LA10_0=='`'||(LA10_0>='{' && LA10_0<='\uFFFE')) ) {
-            alt10=7;
+            alt10 = mTokensHelper007();
         }
         else {
-            NoViableAltException nvae =
-                new NoViableAltException("1:1: Tokens : ( RULE_STRING | RULE_ID | RULE_INT | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 10, 0, input);
-
-            throw nvae;
+            alt10 = mTokensHelper008();
         }
         switch (alt10) {
             case 1 :
@@ -532,6 +504,64 @@ public class InternalLexerTestLanguageLexer extends Lexer {
         }
 
     }
+    private int mTokensHelper001() throws RecognitionException {
+        int LA10_1 = input.LA(2);
+
+        if ( (LA10_1=='B') ) {
+            return 1;
+        }
+        else {
+            return 7;}
+    }
+
+    private int mTokensHelper002() throws RecognitionException {
+        int LA10_2 = input.LA(2);
+
+        if ( ((LA10_2>='A' && LA10_2<='Z')||LA10_2=='_'||(LA10_2>='a' && LA10_2<='z')) ) {
+            return 2;
+        }
+        else {
+            return 7;}
+    }
+
+    private int mTokensHelper003() throws RecognitionException {
+        return 2;
+    }
+
+    private int mTokensHelper004() throws RecognitionException {
+        return 3;
+    }
+
+    private int mTokensHelper005() throws RecognitionException {
+        switch ( input.LA(2) ) {
+        case '*':
+            {
+            return 4;
+            }
+        case '/':
+            {
+            return 5;
+            }
+        default:
+            return 7;}
+
+    }
+
+    private int mTokensHelper006() throws RecognitionException {
+        return 6;
+    }
+
+    private int mTokensHelper007() throws RecognitionException {
+        return 7;
+    }
+
+    private int mTokensHelper008() throws RecognitionException {
+        NoViableAltException nvae =
+            new NoViableAltException("1:1: Tokens : ( RULE_STRING | RULE_ID | RULE_INT | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 10, 0, input);
+
+        throw nvae;
+    }
+
 
 
  

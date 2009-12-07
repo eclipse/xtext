@@ -79,12 +79,12 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
             // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:73:2: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
-            pushFollow(FOLLOW_ruleModel_in_entryRuleModel73);
+            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel73);
             iv_ruleModel=ruleModel();
             _fsp--;
 
              current =iv_ruleModel; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleModel83); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel83); 
 
             }
 
@@ -182,7 +182,7 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:88:3: lv_first_0_0= 'foo\\\\bar'
                     {
                     lv_first_0_0=(Token)input.LT(1);
-                    match(input,11,FOLLOW_11_in_ruleModel126); 
+                    match(input,11,FollowSets000.FOLLOW_11_in_ruleModel126); 
 
                             createLeafNode(grammarAccess.getModelAccess().getFirstFooBarKeyword_0_0(), "first"); 
                         
@@ -217,7 +217,7 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:110:3: lv_second_1_0= 'foo\\\\'
                     {
                     lv_second_1_0=(Token)input.LT(1);
-                    match(input,12,FOLLOW_12_in_ruleModel163); 
+                    match(input,12,FollowSets000.FOLLOW_12_in_ruleModel163); 
 
                             createLeafNode(grammarAccess.getModelAccess().getSecondFooKeyword_1_0(), "second"); 
                         
@@ -252,7 +252,7 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:132:3: lv_third_2_0= '\\\\bar'
                     {
                     lv_third_2_0=(Token)input.LT(1);
-                    match(input,13,FOLLOW_13_in_ruleModel200); 
+                    match(input,13,FollowSets000.FOLLOW_13_in_ruleModel200); 
 
                             createLeafNode(grammarAccess.getModelAccess().getThirdBarKeyword_2_0(), "third"); 
                         
@@ -287,7 +287,7 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:154:3: lv_forth_3_0= '\\\\'
                     {
                     lv_forth_3_0=(Token)input.LT(1);
-                    match(input,14,FOLLOW_14_in_ruleModel237); 
+                    match(input,14,FollowSets000.FOLLOW_14_in_ruleModel237); 
 
                             createLeafNode(grammarAccess.getModelAccess().getForthReverseSolidusKeyword_3_0(), "forth"); 
                         
@@ -322,7 +322,7 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:176:3: lv_fifth_4_0= '\"a\"'
                     {
                     lv_fifth_4_0=(Token)input.LT(1);
-                    match(input,15,FOLLOW_15_in_ruleModel274); 
+                    match(input,15,FollowSets000.FOLLOW_15_in_ruleModel274); 
 
                             createLeafNode(grammarAccess.getModelAccess().getFifthAKeyword_4_0(), "fifth"); 
                         
@@ -357,7 +357,7 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:198:3: lv_sixth_5_0= '\\'b\\''
                     {
                     lv_sixth_5_0=(Token)input.LT(1);
-                    match(input,16,FOLLOW_16_in_ruleModel311); 
+                    match(input,16,FollowSets000.FOLLOW_16_in_ruleModel311); 
 
                             createLeafNode(grammarAccess.getModelAccess().getSixthBKeyword_5_0(), "sixth"); 
                         
@@ -392,7 +392,7 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:220:3: lv_seventh_6_0= '\\'c\\''
                     {
                     lv_seventh_6_0=(Token)input.LT(1);
-                    match(input,17,FOLLOW_17_in_ruleModel348); 
+                    match(input,17,FollowSets000.FOLLOW_17_in_ruleModel348); 
 
                             createLeafNode(grammarAccess.getModelAccess().getSeventhCKeyword_6_0(), "seventh"); 
                         
@@ -427,7 +427,7 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
                     // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/keywords/parser/antlr/internal/InternalKeywordsTestLanguage.g:242:3: lv_eighth_7_0= '\"d\"'
                     {
                     lv_eighth_7_0=(Token)input.LT(1);
-                    match(input,18,FOLLOW_18_in_ruleModel385); 
+                    match(input,18,FollowSets000.FOLLOW_18_in_ruleModel385); 
 
                             createLeafNode(grammarAccess.getModelAccess().getEighthDKeyword_7_0(), "eighth"); 
                         
@@ -476,15 +476,19 @@ public class InternalKeywordsTestLanguageParser extends AbstractInternalAntlrPar
 
  
 
-    public static final BitSet FOLLOW_ruleModel_in_entryRuleModel73 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleModel83 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_ruleModel126 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_ruleModel163 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_ruleModel200 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_ruleModel237 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_ruleModel274 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_ruleModel311 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_ruleModel348 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_ruleModel385 = new BitSet(new long[]{0x0000000000000002L});
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel73 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleModel83 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_ruleModel126 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_ruleModel163 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_ruleModel200 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_ruleModel237 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_15_in_ruleModel274 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_16_in_ruleModel311 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_17_in_ruleModel348 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_18_in_ruleModel385 = new BitSet(new long[]{0x0000000000000002L});
+    }
+
 
 }

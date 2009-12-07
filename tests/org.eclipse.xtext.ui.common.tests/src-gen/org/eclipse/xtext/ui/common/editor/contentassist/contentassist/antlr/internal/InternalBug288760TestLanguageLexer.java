@@ -597,144 +597,40 @@ public class InternalBug288760TestLanguageLexer extends Lexer {
         int LA9_0 = input.LA(1);
 
         if ( (LA9_0=='<') ) {
-            switch ( input.LA(2) ) {
-            case '!':
-                {
-                alt9=1;
-                }
-                break;
-            case '/':
-                {
-                int LA9_13 = input.LA(3);
-
-                if ( ((LA9_13>='A' && LA9_13<='Z')||(LA9_13>='^' && LA9_13<='_')||(LA9_13>='a' && LA9_13<='z')) ) {
-                    alt9=8;
-                }
-                else {
-                    alt9=7;}
-                }
-                break;
-            case 'A':
-            case 'B':
-            case 'C':
-            case 'D':
-            case 'E':
-            case 'F':
-            case 'G':
-            case 'H':
-            case 'I':
-            case 'J':
-            case 'K':
-            case 'L':
-            case 'M':
-            case 'N':
-            case 'O':
-            case 'P':
-            case 'Q':
-            case 'R':
-            case 'S':
-            case 'T':
-            case 'U':
-            case 'V':
-            case 'W':
-            case 'X':
-            case 'Y':
-            case 'Z':
-            case '^':
-            case '_':
-            case 'a':
-            case 'b':
-            case 'c':
-            case 'd':
-            case 'e':
-            case 'f':
-            case 'g':
-            case 'h':
-            case 'i':
-            case 'j':
-            case 'k':
-            case 'l':
-            case 'm':
-            case 'n':
-            case 'o':
-            case 'p':
-            case 'q':
-            case 'r':
-            case 's':
-            case 't':
-            case 'u':
-            case 'v':
-            case 'w':
-            case 'x':
-            case 'y':
-            case 'z':
-                {
-                alt9=2;
-                }
-                break;
-            default:
-                alt9=3;}
-
+            alt9 = mTokensHelper001();
         }
         else if ( (LA9_0=='>') ) {
-            alt9=4;
+            alt9 = mTokensHelper002();
         }
         else if ( (LA9_0=='=') ) {
-            alt9=5;
+            alt9 = mTokensHelper003();
         }
         else if ( (LA9_0=='/') ) {
-            int LA9_4 = input.LA(2);
-
-            if ( (LA9_4=='>') ) {
-                alt9=6;
-            }
-            else {
-                alt9=13;}
+            alt9 = mTokensHelper004();
         }
         else if ( (LA9_0=='^') ) {
-            int LA9_5 = input.LA(2);
-
-            if ( ((LA9_5>='A' && LA9_5<='Z')||LA9_5=='_'||(LA9_5>='a' && LA9_5<='z')) ) {
-                alt9=9;
-            }
-            else {
-                alt9=13;}
+            alt9 = mTokensHelper005();
         }
         else if ( ((LA9_0>='A' && LA9_0<='Z')||LA9_0=='_'||(LA9_0>='a' && LA9_0<='z')) ) {
-            alt9=9;
+            alt9 = mTokensHelper006();
         }
         else if ( ((LA9_0>='0' && LA9_0<='9')) ) {
-            alt9=10;
+            alt9 = mTokensHelper007();
         }
         else if ( (LA9_0=='\"') ) {
-            int LA9_8 = input.LA(2);
-
-            if ( ((LA9_8>='\u0000' && LA9_8<='\uFFFE')) ) {
-                alt9=11;
-            }
-            else {
-                alt9=13;}
+            alt9 = mTokensHelper008();
         }
         else if ( (LA9_0=='\'') ) {
-            int LA9_9 = input.LA(2);
-
-            if ( ((LA9_9>='\u0000' && LA9_9<='\uFFFE')) ) {
-                alt9=11;
-            }
-            else {
-                alt9=13;}
+            alt9 = mTokensHelper009();
         }
         else if ( ((LA9_0>='\t' && LA9_0<='\n')||LA9_0=='\r'||LA9_0==' ') ) {
-            alt9=12;
+            alt9 = mTokensHelper010();
         }
         else if ( ((LA9_0>='\u0000' && LA9_0<='\b')||(LA9_0>='\u000B' && LA9_0<='\f')||(LA9_0>='\u000E' && LA9_0<='\u001F')||LA9_0=='!'||(LA9_0>='#' && LA9_0<='&')||(LA9_0>='(' && LA9_0<='.')||(LA9_0>=':' && LA9_0<=';')||(LA9_0>='?' && LA9_0<='@')||(LA9_0>='[' && LA9_0<=']')||LA9_0=='`'||(LA9_0>='{' && LA9_0<='\uFFFE')) ) {
-            alt9=13;
+            alt9 = mTokensHelper011();
         }
         else {
-            NoViableAltException nvae =
-                new NoViableAltException("1:1: Tokens : ( RULE_ML_COMMENT | RULE_START_TAG | RULE_LT | RULE_GT | RULE_EQ | RULE_END_TAG_SHORT | RULE_END_TAG_START | RULE_END_TAG | RULE_ID | RULE_INT | RULE_STRING | RULE_WS | RULE_ANY_OTHER );", 9, 0, input);
-
-            throw nvae;
+            alt9 = mTokensHelper012();
         }
         switch (alt9) {
             case 1 :
@@ -832,6 +728,155 @@ public class InternalBug288760TestLanguageLexer extends Lexer {
         }
 
     }
+    private int mTokensHelper001() throws RecognitionException {
+        switch ( input.LA(2) ) {
+        case '!':
+            {
+            return 1;
+            }
+        case '/':
+            {
+            int LA9_13 = input.LA(3);
+
+            if ( ((LA9_13>='A' && LA9_13<='Z')||(LA9_13>='^' && LA9_13<='_')||(LA9_13>='a' && LA9_13<='z')) ) {
+                return 8;
+            }
+            else {
+                return 7;}
+            }
+        case 'A':
+        case 'B':
+        case 'C':
+        case 'D':
+        case 'E':
+        case 'F':
+        case 'G':
+        case 'H':
+        case 'I':
+        case 'J':
+        case 'K':
+        case 'L':
+        case 'M':
+        case 'N':
+        case 'O':
+        case 'P':
+        case 'Q':
+        case 'R':
+        case 'S':
+        case 'T':
+        case 'U':
+        case 'V':
+        case 'W':
+        case 'X':
+        case 'Y':
+        case 'Z':
+        case '^':
+        case '_':
+        case 'a':
+        case 'b':
+        case 'c':
+        case 'd':
+        case 'e':
+        case 'f':
+        case 'g':
+        case 'h':
+        case 'i':
+        case 'j':
+        case 'k':
+        case 'l':
+        case 'm':
+        case 'n':
+        case 'o':
+        case 'p':
+        case 'q':
+        case 'r':
+        case 's':
+        case 't':
+        case 'u':
+        case 'v':
+        case 'w':
+        case 'x':
+        case 'y':
+        case 'z':
+            {
+            return 2;
+            }
+        default:
+            return 3;}
+
+    }
+
+    private int mTokensHelper002() throws RecognitionException {
+        return 4;
+    }
+
+    private int mTokensHelper003() throws RecognitionException {
+        return 5;
+    }
+
+    private int mTokensHelper004() throws RecognitionException {
+        int LA9_4 = input.LA(2);
+
+        if ( (LA9_4=='>') ) {
+            return 6;
+        }
+        else {
+            return 13;}
+    }
+
+    private int mTokensHelper005() throws RecognitionException {
+        int LA9_5 = input.LA(2);
+
+        if ( ((LA9_5>='A' && LA9_5<='Z')||LA9_5=='_'||(LA9_5>='a' && LA9_5<='z')) ) {
+            return 9;
+        }
+        else {
+            return 13;}
+    }
+
+    private int mTokensHelper006() throws RecognitionException {
+        return 9;
+    }
+
+    private int mTokensHelper007() throws RecognitionException {
+        return 10;
+    }
+
+    private int mTokensHelper008() throws RecognitionException {
+        int LA9_8 = input.LA(2);
+
+        if ( ((LA9_8>='\u0000' && LA9_8<='\uFFFE')) ) {
+            return 11;
+        }
+        else {
+            return 13;}
+    }
+
+    private int mTokensHelper009() throws RecognitionException {
+        int LA9_9 = input.LA(2);
+
+        if ( ((LA9_9>='\u0000' && LA9_9<='\uFFFE')) ) {
+            return 11;
+        }
+        else {
+            return 13;}
+    }
+
+    private int mTokensHelper010() throws RecognitionException {
+        return 12;
+    }
+
+    private int mTokensHelper011() throws RecognitionException {
+        return 13;
+    }
+
+    private int mTokensHelper012() throws RecognitionException {
+        NoViableAltException nvae =
+            new NoViableAltException("1:1: Tokens : ( RULE_ML_COMMENT | RULE_START_TAG | RULE_LT | RULE_GT | RULE_EQ | RULE_END_TAG_SHORT | RULE_END_TAG_START | RULE_END_TAG | RULE_ID | RULE_INT | RULE_STRING | RULE_WS | RULE_ANY_OTHER );", 9, 0, input);
+
+        throw nvae;
+    }
+
 
 
  

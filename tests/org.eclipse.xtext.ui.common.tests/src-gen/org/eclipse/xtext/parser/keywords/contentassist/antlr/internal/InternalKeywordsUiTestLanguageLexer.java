@@ -699,165 +699,37 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
         int LA12_0 = input.LA(1);
 
         if ( (LA12_0=='f') ) {
-            int LA12_1 = input.LA(2);
-
-            if ( (LA12_1=='o') ) {
-                int LA12_11 = input.LA(3);
-
-                if ( (LA12_11=='o') ) {
-                    int LA12_24 = input.LA(4);
-
-                    if ( (LA12_24=='\\') ) {
-                        int LA12_29 = input.LA(5);
-
-                        if ( (LA12_29=='b') ) {
-                            alt12=1;
-                        }
-                        else {
-                            alt12=2;}
-                    }
-                    else {
-                        alt12=9;}
-                }
-                else {
-                    alt12=9;}
-            }
-            else {
-                alt12=9;}
+            alt12 = mTokensHelper001();
         }
         else if ( (LA12_0=='\\') ) {
-            int LA12_2 = input.LA(2);
-
-            if ( (LA12_2=='b') ) {
-                alt12=3;
-            }
-            else {
-                alt12=4;}
+            alt12 = mTokensHelper002();
         }
         else if ( (LA12_0=='\"') ) {
-            int LA12_3 = input.LA(2);
-
-            if ( (LA12_3=='d') ) {
-                int LA12_15 = input.LA(3);
-
-                if ( (LA12_15=='\"') ) {
-                    alt12=8;
-                }
-                else if ( ((LA12_15>='\u0000' && LA12_15<='!')||(LA12_15>='#' && LA12_15<='\uFFFE')) ) {
-                    alt12=11;
-                }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 15, input);
-
-                    throw nvae;
-                }
-            }
-            else if ( (LA12_3=='a') ) {
-                int LA12_16 = input.LA(3);
-
-                if ( (LA12_16=='\"') ) {
-                    alt12=5;
-                }
-                else if ( ((LA12_16>='\u0000' && LA12_16<='!')||(LA12_16>='#' && LA12_16<='\uFFFE')) ) {
-                    alt12=11;
-                }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 16, input);
-
-                    throw nvae;
-                }
-            }
-            else if ( ((LA12_3>='\u0000' && LA12_3<='`')||(LA12_3>='b' && LA12_3<='c')||(LA12_3>='e' && LA12_3<='\uFFFE')) ) {
-                alt12=11;
-            }
-            else {
-                alt12=15;}
+            alt12 = mTokensHelper003();
         }
         else if ( (LA12_0=='\'') ) {
-            int LA12_4 = input.LA(2);
-
-            if ( (LA12_4=='c') ) {
-                int LA12_18 = input.LA(3);
-
-                if ( (LA12_18=='\'') ) {
-                    alt12=7;
-                }
-                else if ( ((LA12_18>='\u0000' && LA12_18<='&')||(LA12_18>='(' && LA12_18<='\uFFFE')) ) {
-                    alt12=11;
-                }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 18, input);
-
-                    throw nvae;
-                }
-            }
-            else if ( (LA12_4=='b') ) {
-                int LA12_19 = input.LA(3);
-
-                if ( (LA12_19=='\'') ) {
-                    alt12=6;
-                }
-                else if ( ((LA12_19>='\u0000' && LA12_19<='&')||(LA12_19>='(' && LA12_19<='\uFFFE')) ) {
-                    alt12=11;
-                }
-                else {
-                    NoViableAltException nvae =
-                        new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 19, input);
-
-                    throw nvae;
-                }
-            }
-            else if ( ((LA12_4>='\u0000' && LA12_4<='a')||(LA12_4>='d' && LA12_4<='\uFFFE')) ) {
-                alt12=11;
-            }
-            else {
-                alt12=15;}
+            alt12 = mTokensHelper004();
         }
         else if ( (LA12_0=='^') ) {
-            int LA12_5 = input.LA(2);
-
-            if ( ((LA12_5>='A' && LA12_5<='Z')||LA12_5=='_'||(LA12_5>='a' && LA12_5<='z')) ) {
-                alt12=9;
-            }
-            else {
-                alt12=15;}
+            alt12 = mTokensHelper005();
         }
         else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||(LA12_0>='a' && LA12_0<='e')||(LA12_0>='g' && LA12_0<='z')) ) {
-            alt12=9;
+            alt12 = mTokensHelper006();
         }
         else if ( ((LA12_0>='0' && LA12_0<='9')) ) {
-            alt12=10;
+            alt12 = mTokensHelper007();
         }
         else if ( (LA12_0=='/') ) {
-            switch ( input.LA(2) ) {
-            case '/':
-                {
-                alt12=13;
-                }
-                break;
-            case '*':
-                {
-                alt12=12;
-                }
-                break;
-            default:
-                alt12=15;}
-
+            alt12 = mTokensHelper008();
         }
         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {
-            alt12=14;
+            alt12 = mTokensHelper009();
         }
         else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='.')||(LA12_0>=':' && LA12_0<='@')||LA12_0=='['||LA12_0==']'||LA12_0=='`'||(LA12_0>='{' && LA12_0<='\uFFFE')) ) {
-            alt12=15;
+            alt12 = mTokensHelper010();
         }
         else {
-            NoViableAltException nvae =
-                new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
-
-            throw nvae;
+            alt12 = mTokensHelper011();
         }
         switch (alt12) {
             case 1 :
@@ -969,6 +841,176 @@ public class InternalKeywordsUiTestLanguageLexer extends Lexer {
         }
 
     }
+    private int mTokensHelper001() throws RecognitionException {
+        int LA12_1 = input.LA(2);
+
+        if ( (LA12_1=='o') ) {
+            int LA12_11 = input.LA(3);
+
+            if ( (LA12_11=='o') ) {
+                int LA12_24 = input.LA(4);
+
+                if ( (LA12_24=='\\') ) {
+                    int LA12_29 = input.LA(5);
+
+                    if ( (LA12_29=='b') ) {
+                        return 1;
+                    }
+                    else {
+                        return 2;}
+                }
+                else {
+                    return 9;}
+            }
+            else {
+                return 9;}
+        }
+        else {
+            return 9;}
+    }
+
+    private int mTokensHelper002() throws RecognitionException {
+        int LA12_2 = input.LA(2);
+
+        if ( (LA12_2=='b') ) {
+            return 3;
+        }
+        else {
+            return 4;}
+    }
+
+    private int mTokensHelper003() throws RecognitionException {
+        int LA12_3 = input.LA(2);
+
+        if ( (LA12_3=='d') ) {
+            int LA12_15 = input.LA(3);
+
+            if ( (LA12_15=='\"') ) {
+                return 8;
+            }
+            else if ( ((LA12_15>='\u0000' && LA12_15<='!')||(LA12_15>='#' && LA12_15<='\uFFFE')) ) {
+                return 11;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 15, input);
+
+                throw nvae;
+            }
+        }
+        else if ( (LA12_3=='a') ) {
+            int LA12_16 = input.LA(3);
+
+            if ( (LA12_16=='\"') ) {
+                return 5;
+            }
+            else if ( ((LA12_16>='\u0000' && LA12_16<='!')||(LA12_16>='#' && LA12_16<='\uFFFE')) ) {
+                return 11;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 16, input);
+
+                throw nvae;
+            }
+        }
+        else if ( ((LA12_3>='\u0000' && LA12_3<='`')||(LA12_3>='b' && LA12_3<='c')||(LA12_3>='e' && LA12_3<='\uFFFE')) ) {
+            return 11;
+        }
+        else {
+            return 15;}
+    }
+
+    private int mTokensHelper004() throws RecognitionException {
+        int LA12_4 = input.LA(2);
+
+        if ( (LA12_4=='c') ) {
+            int LA12_18 = input.LA(3);
+
+            if ( (LA12_18=='\'') ) {
+                return 7;
+            }
+            else if ( ((LA12_18>='\u0000' && LA12_18<='&')||(LA12_18>='(' && LA12_18<='\uFFFE')) ) {
+                return 11;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 18, input);
+
+                throw nvae;
+            }
+        }
+        else if ( (LA12_4=='b') ) {
+            int LA12_19 = input.LA(3);
+
+            if ( (LA12_19=='\'') ) {
+                return 6;
+            }
+            else if ( ((LA12_19>='\u0000' && LA12_19<='&')||(LA12_19>='(' && LA12_19<='\uFFFE')) ) {
+                return 11;
+            }
+            else {
+                NoViableAltException nvae =
+                    new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 19, input);
+
+                throw nvae;
+            }
+        }
+        else if ( ((LA12_4>='\u0000' && LA12_4<='a')||(LA12_4>='d' && LA12_4<='\uFFFE')) ) {
+            return 11;
+        }
+        else {
+            return 15;}
+    }
+
+    private int mTokensHelper005() throws RecognitionException {
+        int LA12_5 = input.LA(2);
+
+        if ( ((LA12_5>='A' && LA12_5<='Z')||LA12_5=='_'||(LA12_5>='a' && LA12_5<='z')) ) {
+            return 9;
+        }
+        else {
+            return 15;}
+    }
+
+    private int mTokensHelper006() throws RecognitionException {
+        return 9;
+    }
+
+    private int mTokensHelper007() throws RecognitionException {
+        return 10;
+    }
+
+    private int mTokensHelper008() throws RecognitionException {
+        switch ( input.LA(2) ) {
+        case '/':
+            {
+            return 13;
+            }
+        case '*':
+            {
+            return 12;
+            }
+        default:
+            return 15;}
+
+    }
+
+    private int mTokensHelper009() throws RecognitionException {
+        return 14;
+    }
+
+    private int mTokensHelper010() throws RecognitionException {
+        return 15;
+    }
+
+    private int mTokensHelper011() throws RecognitionException {
+        NoViableAltException nvae =
+            new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
+
+        throw nvae;
+    }
+
 
 
  
