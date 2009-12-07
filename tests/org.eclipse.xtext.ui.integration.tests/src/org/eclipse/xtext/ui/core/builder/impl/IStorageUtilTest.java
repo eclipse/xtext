@@ -18,7 +18,9 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.xtext.junit.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.ui.core.resource.JarWalker;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -47,12 +49,17 @@ public class IStorageUtilTest extends TestCase {
 		JavaProjectSetupUtil.addJarToClasspath(project, file);
 		
 		final List<IJarEntryResource> resources = new ArrayList<IJarEntryResource>();
-		new JarWalker() {
-			@Override
-			protected void handle(IJarEntryResource jarEntry) {
-				resources.add(jarEntry);
-			}
-		}.traverseAllJars(project.getProject());
+		
+		IPackageFragmentRoot[] roots = project.getPackageFragmentRoots();
+		for (IPackageFragmentRoot root : roots) {
+			new JarWalker<Void>() {
+				@Override
+				protected Void handle(IJarEntryResource jarEntry) {
+					resources.add(jarEntry);
+					return null;
+				}
+			}.traverse(root,false);
+		}
 
 //		Assertion does not hold on build server due to other jars in the jdk
 //		assertEquals(312,resources.size());

@@ -8,13 +8,17 @@
 package org.eclipse.xtext.ui.core.resource;
 
 import org.eclipse.core.resources.IStorage;
-import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.emf.common.util.URI;
+
+import com.google.inject.ImplementedBy;
 
 /**
- * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
-public interface IStorageAwareResourceDescription extends IResourceDescription {
-
-	IStorage getStorage();
+@ImplementedBy(Storage2UriMapperJavaImpl.class)
+public interface IStorage2UriMapper {
 	
+	Iterable<IStorage> getStorages(URI uri);
+	
+	URI getUri(IStorage storage);
 }

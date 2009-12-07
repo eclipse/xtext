@@ -20,6 +20,7 @@ import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.xtext.junit.util.IResourcesSetupUtil;
+import org.eclipse.xtext.ui.core.resource.JarWalker;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -40,15 +41,16 @@ public class JarWalkerTest extends TestCase {
 		addJarToClasspath(project, file);
 		
 		final Set<IPath> pathes = new HashSet<IPath>();
-		JarWalker walker = new JarWalker() {
+		JarWalker<Void> walker = new JarWalker<Void>() {
 			@Override
-			protected void handle(IJarEntryResource jarEntry) {
+			protected Void handle(IJarEntryResource jarEntry) {
 				pathes.add(jarEntry.getFullPath());
+				return null;
 			}
 		};
 		for (IPackageFragmentRoot root : project.getPackageFragmentRoots()) {
 			if (root.getElementName().equals(jarName))
-				walker.traverse(root);
+				walker.traverse(root,false);
 		}
 		assertEquals(3,pathes.size());
 	}

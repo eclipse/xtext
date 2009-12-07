@@ -29,6 +29,7 @@ import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.index.IXtextIndex;
+import org.eclipse.xtext.ui.core.resource.JarWalker;
 
 import com.google.inject.Inject;
 
@@ -95,13 +96,14 @@ public class StorageUtil {
 				
 				final String path = fragments[3];
 				final ThreadLocal<IJarEntryResource> found = new ThreadLocal<IJarEntryResource>();
-				new JarWalker() {
+				new JarWalker<Void>() {
 					@Override
-					protected void handle(IJarEntryResource jarEntry) {
+					protected Void handle(IJarEntryResource jarEntry) {
 						if (path.equals(jarEntry.getFullPath().toString()))
 							found.set(jarEntry);
+						return null;
 					}
-				}.traverse(root);
+				}.traverse(root,false);
 				return found.get();
 			} catch (CoreException e) {
 				log.error(e.getMessage());
