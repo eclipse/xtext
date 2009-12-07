@@ -34,6 +34,10 @@ public class BuilderStateUtil {
 		for (IReferenceDescription iReferenceDescription : referenceDescriptions) {
 			description.getReferenceDescriptions().add(create(iReferenceDescription));
 		}
+		Iterable<String> names = desc.getImportedNames();
+		for (String string : names) {
+			description.getImportedNames().add(string);
+		}
 		return description;
 	}
 	
