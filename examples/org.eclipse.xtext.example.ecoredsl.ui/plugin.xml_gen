@@ -112,7 +112,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.example.EcoreDslExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.example.EcoreDslExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="ecoredsl">
 		</parser>
 	</extension>

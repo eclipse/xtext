@@ -121,7 +121,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.XtextGrammarUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.XtextGrammarUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="xtextgrammaruitestlanguage">
 		</parser>
 	</extension>
@@ -245,7 +245,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.linking.ImportUriUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.linking.ImportUriUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="importuriuitestlanguage">
 		</parser>
 	</extension>
@@ -369,7 +369,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="twocontextstestlanguage">
 		</parser>
 	</extension>
@@ -493,7 +493,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.ui.common.editor.contentassist.Bug286935TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.ui.common.editor.contentassist.Bug286935TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="bug286935testlanguage">
 		</parser>
 	</extension>
@@ -617,7 +617,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="bug287941testlanguage">
 		</parser>
 	</extension>
@@ -741,7 +741,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.ui.common.editor.contentassist.Bug288734TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.ui.common.editor.contentassist.Bug288734TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="bug288734testlanguage">
 		</parser>
 	</extension>
@@ -865,7 +865,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.ui.common.editor.contentassist.Bug288760TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.ui.common.editor.contentassist.Bug288760TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="bug288760testlanguage">
 		</parser>
 	</extension>
@@ -989,7 +989,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.ui.common.editor.contentassist.Bug289187TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.ui.common.editor.contentassist.Bug289187TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="bug289187testlanguage">
 		</parser>
 	</extension>
@@ -1113,7 +1113,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.ui.common.editor.contentassist.Bug291022TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.ui.common.editor.contentassist.Bug291022TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="bug291022testlanguage">
 		</parser>
 	</extension>
@@ -1237,7 +1237,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.ui.common.editor.contentassist.ContentAssistContextTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.ui.common.editor.contentassist.ContentAssistContextTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="contentassistcontexttestlanguage">
 		</parser>
 	</extension>
@@ -1361,7 +1361,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.ui.common.editor.contentassist.CrossReferenceProposalTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.ui.common.editor.contentassist.CrossReferenceProposalTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="crossreferenceproposaltestlanguage">
 		</parser>
 	</extension>
@@ -1485,7 +1485,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.ui.common.editor.contentassist.DatatypeRuleTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.ui.common.editor.contentassist.DatatypeRuleTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="datatyperuletestlanguage">
 		</parser>
 	</extension>
@@ -1609,7 +1609,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="lookaheadcontentassisttestlanguage">
 		</parser>
 	</extension>
@@ -1733,7 +1733,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.ui.common.editor.contentassist.DomainModelTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.ui.common.editor.contentassist.DomainModelTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="domainmodeltestlanguage">
 		</parser>
 	</extension>
@@ -1857,7 +1857,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.parser.keywords.KeywordsUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.parser.keywords.KeywordsUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="keywordsuitestlanguage">
 		</parser>
 	</extension>
@@ -1981,7 +1981,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="contentassisttestlanguage">
 		</parser>
 	</extension>
@@ -2105,7 +2105,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.testlanguages.ReferenceGrammarUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.testlanguages.ReferenceGrammarUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="referencegrammaruitestlanguage">
 		</parser>
 	</extension>
@@ -2229,7 +2229,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.enumrules.EnumRulesUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.enumrules.EnumRulesUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="enumrulesuitestlanguage">
 		</parser>
 	</extension>
