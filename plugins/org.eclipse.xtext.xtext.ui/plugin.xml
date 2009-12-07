@@ -76,7 +76,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="xtext">
 		</parser>
 	</extension>
@@ -84,7 +84,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="xtext2">
 		</parser>
 	</extension>
@@ -211,6 +211,9 @@
 				message="You are generating without ANTLR. It is highly recommended to download and use the plugin 'de.itemis.xtext.antlr' \n\t using the update site http://download.itemis.com/updates/.">
 			</fragment>
 			<!-- <fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment"/> --> 
+
+			<!-- builder integration -->
+			<fragment class="org.eclipse.xtext.generator.builder.BuilderIntegrationFragment"/>
 
 			<!-- project wizard (optional) -->
 			<!--

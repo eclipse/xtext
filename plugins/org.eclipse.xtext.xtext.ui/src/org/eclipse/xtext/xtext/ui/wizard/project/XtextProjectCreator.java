@@ -30,6 +30,7 @@ import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.OutputImpl;
 import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel;
+import org.eclipse.xtext.builder.nature.XtextNature;
 import org.eclipse.xtext.ui.core.util.EclipseResourceUtil;
 import org.eclipse.xtext.ui.core.wizard.DefaultProjectCreator;
 
@@ -43,7 +44,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 	private static final String[] DSL_PROJECT_NATURES = new String[] { 
 			JavaCore.NATURE_ID,
 			"org.eclipse.pde.PluginNature", //$NON-NLS-1$
-			"org.eclipse.xtext.ui.core.xtextNature" //$NON-NLS-1$
+			XtextNature.NATURE_ID //$NON-NLS-1$
 	};
 
 	private static final String[] DSL_UI_PROJECT_NATURES = new String[] { 
