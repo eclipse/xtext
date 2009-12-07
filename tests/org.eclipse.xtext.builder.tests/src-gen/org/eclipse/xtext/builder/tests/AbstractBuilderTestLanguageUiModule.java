@@ -202,5 +202,10 @@ public abstract class AbstractBuilderTestLanguageUiModule extends BuilderTestLan
 		return org.eclipse.xtext.ui.core.scoping.namespaces.ProjectAwareContainerManager.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
+	public Class<? extends org.eclipse.xtext.ui.core.editor.IXtextEditorCallback> bindIXtextEditorCallback() {
+		return org.eclipse.xtext.builder.nature.NatureAddingEditorCallback.class;
+	}
+
 
 }

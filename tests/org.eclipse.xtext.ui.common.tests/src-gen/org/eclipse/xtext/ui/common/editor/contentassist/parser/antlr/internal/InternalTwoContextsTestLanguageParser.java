@@ -79,12 +79,12 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalTwoContextsTestLanguage.g:73:2: iv_ruleMainModel= ruleMainModel EOF
             {
              currentNode = createCompositeNode(grammarAccess.getMainModelRule(), currentNode); 
-            pushFollow(FOLLOW_ruleMainModel_in_entryRuleMainModel73);
+            pushFollow(FollowSets000.FOLLOW_ruleMainModel_in_entryRuleMainModel73);
             iv_ruleMainModel=ruleMainModel();
             _fsp--;
 
              current =iv_ruleMainModel; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleMainModel83); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMainModel83); 
 
             }
 
@@ -136,7 +136,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getMainModelAccess().getElementsAnElementParserRuleCall_0(), currentNode); 
             	    	    
-            	    pushFollow(FOLLOW_ruleAnElement_in_ruleMainModel128);
+            	    pushFollow(FollowSets000.FOLLOW_ruleAnElement_in_ruleMainModel128);
             	    lv_elements_0_0=ruleAnElement();
             	    _fsp--;
 
@@ -201,12 +201,12 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalTwoContextsTestLanguage.g:118:2: iv_ruleAnElement= ruleAnElement EOF
             {
              currentNode = createCompositeNode(grammarAccess.getAnElementRule(), currentNode); 
-            pushFollow(FOLLOW_ruleAnElement_in_entryRuleAnElement161);
+            pushFollow(FollowSets000.FOLLOW_ruleAnElement_in_entryRuleAnElement161);
             iv_ruleAnElement=ruleAnElement();
             _fsp--;
 
              current =iv_ruleAnElement; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleAnElement171); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAnElement171); 
 
             }
 
@@ -246,7 +246,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalTwoContextsTestLanguage.g:133:3: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAnElement213); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleAnElement213); 
 
             			createLeafNode(grammarAccess.getAnElementAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
             		
@@ -283,7 +283,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/parser/antlr/internal/InternalTwoContextsTestLanguage.g:155:4: 'refersTo' ( ( RULE_ID ) )
                     {
-                    match(input,11,FOLLOW_11_in_ruleAnElement229); 
+                    match(input,11,FollowSets000.FOLLOW_11_in_ruleAnElement229); 
 
                             createLeafNode(grammarAccess.getAnElementAccess().getRefersToKeyword_1_0(), null); 
                         
@@ -299,7 +299,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleAnElement247); 
+                    match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleAnElement247); 
 
                     		createLeafNode(grammarAccess.getAnElementAccess().getReferredAnElementCrossReference_1_1_0(), "referred"); 
                     	
@@ -315,7 +315,7 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
 
             }
 
-            match(input,12,FOLLOW_12_in_ruleAnElement259); 
+            match(input,12,FollowSets000.FOLLOW_12_in_ruleAnElement259); 
 
                     createLeafNode(grammarAccess.getAnElementAccess().getSemicolonKeyword_2(), null); 
                 
@@ -343,14 +343,18 @@ public class InternalTwoContextsTestLanguageParser extends AbstractInternalAntlr
 
  
 
-    public static final BitSet FOLLOW_ruleMainModel_in_entryRuleMainModel73 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleMainModel83 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleAnElement_in_ruleMainModel128 = new BitSet(new long[]{0x0000000000000012L});
-    public static final BitSet FOLLOW_ruleAnElement_in_entryRuleAnElement161 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleAnElement171 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleAnElement213 = new BitSet(new long[]{0x0000000000001800L});
-    public static final BitSet FOLLOW_11_in_ruleAnElement229 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleAnElement247 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleAnElement259 = new BitSet(new long[]{0x0000000000000002L});
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_ruleMainModel_in_entryRuleMainModel73 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleMainModel83 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAnElement_in_ruleMainModel128 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_ruleAnElement_in_entryRuleAnElement161 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAnElement171 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleAnElement213 = new BitSet(new long[]{0x0000000000001800L});
+        public static final BitSet FOLLOW_11_in_ruleAnElement229 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleAnElement247 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_12_in_ruleAnElement259 = new BitSet(new long[]{0x0000000000000002L});
+    }
+
 
 }

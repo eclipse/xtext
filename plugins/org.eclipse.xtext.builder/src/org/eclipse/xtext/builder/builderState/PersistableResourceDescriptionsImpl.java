@@ -22,9 +22,11 @@ import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 import org.eclipse.xtext.scoping.namespaces.DefaultGlobalScopeProvider;
 
+import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
+import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -34,6 +36,12 @@ import com.google.inject.Provider;
 public class PersistableResourceDescriptionsImpl extends AbstractResourceDescriptionChangeEventSource implements
 		IBuilderState {
 
+	@ImplementedBy(EMFBasedPersister.class)
+	public interface Persister {
+		Iterable<IResourceDescription> load() throws Exception;
+		void save(Iterable<IResourceDescription> descriptions) throws Exception;
+	}
+	
 	private volatile Map<URI, IResourceDescription> resourceDescriptionMap = Collections.emptyMap();
 
 	@Inject
@@ -44,9 +52,24 @@ public class PersistableResourceDescriptionsImpl extends AbstractResourceDescrip
 
 	@Inject
 	private Provider<ResourceSet> resourceSetProvider;
+	
+	@Inject
+	private Persister persister;
 
 	public void setResourceSetProvider(Provider<ResourceSet> resourceSetProvider) {
 		this.resourceSetProvider = resourceSetProvider;
+	}
+	
+	public synchronized void load() throws Exception {
+		resourceDescriptionMap = Maps.uniqueIndex(persister.load(), new Function<IResourceDescription, URI>() {
+			public URI apply(IResourceDescription from) {
+				return from.getURI();
+			}
+		});
+	}
+
+	public synchronized void save() throws Exception {
+		persister.save(getAllResourceDescriptions());
 	}
 
 	public synchronized ImmutableList<IResourceDescription.Delta> update(Set<URI> toBeAddedOrUpdated,
@@ -102,6 +125,14 @@ public class PersistableResourceDescriptionsImpl extends AbstractResourceDescrip
 
 	public IResourceDescription getResourceDescription(URI uri) {
 		return resourceDescriptionMap.get(uri);
+	}
+
+	public void setPersister(Persister persister) {
+		this.persister = persister;
+	}
+
+	public Persister getPersister() {
+		return persister;
 	}
 
 }

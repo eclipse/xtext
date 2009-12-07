@@ -79,12 +79,12 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:73:2: iv_ruleSpielplatz= ruleSpielplatz EOF
             {
              currentNode = createCompositeNode(grammarAccess.getSpielplatzRule(), currentNode); 
-            pushFollow(FOLLOW_ruleSpielplatz_in_entryRuleSpielplatz73);
+            pushFollow(FollowSets000.FOLLOW_ruleSpielplatz_in_entryRuleSpielplatz73);
             iv_ruleSpielplatz=ruleSpielplatz();
             _fsp--;
 
              current =iv_ruleSpielplatz; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSpielplatz83); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSpielplatz83); 
 
             }
 
@@ -134,7 +134,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                 case 1 :
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:86:3: 'spielplatz' ( (lv_groesse_1_0= RULE_INT ) ) ( (lv_beschreibung_2_0= RULE_STRING ) )? '{' ( ( (lv_kinder_4_0= ruleKind ) ) | ( (lv_erzieher_5_0= ruleErwachsener ) ) | ( (lv_spielzeuge_6_0= ruleSpielzeug ) ) | ( (lv_familie_7_0= ruleFamilie ) ) )* '}'
                     {
-                    match(input,11,FOLLOW_11_in_ruleSpielplatz118); 
+                    match(input,11,FollowSets000.FOLLOW_11_in_ruleSpielplatz118); 
 
                             createLeafNode(grammarAccess.getSpielplatzAccess().getSpielplatzKeyword_0(), null); 
                         
@@ -145,7 +145,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:92:3: lv_groesse_1_0= RULE_INT
                     {
                     lv_groesse_1_0=(Token)input.LT(1);
-                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleSpielplatz135); 
+                    match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleSpielplatz135); 
 
                     			createLeafNode(grammarAccess.getSpielplatzAccess().getGroesseINTTerminalRuleCall_1_0(), "groesse"); 
                     		
@@ -186,7 +186,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:116:3: lv_beschreibung_2_0= RULE_STRING
                             {
                             lv_beschreibung_2_0=(Token)input.LT(1);
-                            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleSpielplatz157); 
+                            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleSpielplatz157); 
 
                             			createLeafNode(grammarAccess.getSpielplatzAccess().getBeschreibungSTRINGTerminalRuleCall_2_0(), "beschreibung"); 
                             		
@@ -215,7 +215,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
 
                     }
 
-                    match(input,12,FOLLOW_12_in_ruleSpielplatz173); 
+                    match(input,12,FollowSets000.FOLLOW_12_in_ruleSpielplatz173); 
 
                             createLeafNode(grammarAccess.getSpielplatzAccess().getLeftCurlyBracketKeyword_3(), null); 
                         
@@ -260,7 +260,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                     	     
                     	    	        currentNode=createCompositeNode(grammarAccess.getSpielplatzAccess().getKinderKindParserRuleCall_4_0_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleKind_in_ruleSpielplatz195);
+                    	    pushFollow(FollowSets000.FOLLOW_ruleKind_in_ruleSpielplatz195);
                     	    lv_kinder_4_0=ruleKind();
                     	    _fsp--;
 
@@ -302,7 +302,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                     	     
                     	    	        currentNode=createCompositeNode(grammarAccess.getSpielplatzAccess().getErzieherErwachsenerParserRuleCall_4_1_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleErwachsener_in_ruleSpielplatz222);
+                    	    pushFollow(FollowSets000.FOLLOW_ruleErwachsener_in_ruleSpielplatz222);
                     	    lv_erzieher_5_0=ruleErwachsener();
                     	    _fsp--;
 
@@ -344,7 +344,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                     	     
                     	    	        currentNode=createCompositeNode(grammarAccess.getSpielplatzAccess().getSpielzeugeSpielzeugParserRuleCall_4_2_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleSpielzeug_in_ruleSpielplatz249);
+                    	    pushFollow(FollowSets000.FOLLOW_ruleSpielzeug_in_ruleSpielplatz249);
                     	    lv_spielzeuge_6_0=ruleSpielzeug();
                     	    _fsp--;
 
@@ -386,7 +386,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                     	     
                     	    	        currentNode=createCompositeNode(grammarAccess.getSpielplatzAccess().getFamilieFamilieParserRuleCall_4_3_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FOLLOW_ruleFamilie_in_ruleSpielplatz276);
+                    	    pushFollow(FollowSets000.FOLLOW_ruleFamilie_in_ruleSpielplatz276);
                     	    lv_familie_7_0=ruleFamilie();
                     	    _fsp--;
 
@@ -422,7 +422,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                         }
                     } while (true);
 
-                    match(input,13,FOLLOW_13_in_ruleSpielplatz288); 
+                    match(input,13,FollowSets000.FOLLOW_13_in_ruleSpielplatz288); 
 
                             createLeafNode(grammarAccess.getSpielplatzAccess().getRightCurlyBracketKeyword_5(), null); 
                         
@@ -464,12 +464,12 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:255:2: iv_ruleKind= ruleKind EOF
             {
              currentNode = createCompositeNode(grammarAccess.getKindRule(), currentNode); 
-            pushFollow(FOLLOW_ruleKind_in_entryRuleKind324);
+            pushFollow(FollowSets000.FOLLOW_ruleKind_in_entryRuleKind324);
             iv_ruleKind=ruleKind();
             _fsp--;
 
              current =iv_ruleKind; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleKind334); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleKind334); 
 
             }
 
@@ -503,11 +503,11 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:268:1: ( 'kind' '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_age_3_0= RULE_INT ) ) ')' )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:268:3: 'kind' '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_age_3_0= RULE_INT ) ) ')'
             {
-            match(input,14,FOLLOW_14_in_ruleKind369); 
+            match(input,14,FollowSets000.FOLLOW_14_in_ruleKind369); 
 
                     createLeafNode(grammarAccess.getKindAccess().getKindKeyword_0(), null); 
                 
-            match(input,15,FOLLOW_15_in_ruleKind379); 
+            match(input,15,FollowSets000.FOLLOW_15_in_ruleKind379); 
 
                     createLeafNode(grammarAccess.getKindAccess().getLeftParenthesisKeyword_1(), null); 
                 
@@ -518,7 +518,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:278:3: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleKind396); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleKind396); 
 
             			createLeafNode(grammarAccess.getKindAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
             		
@@ -551,7 +551,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:302:3: lv_age_3_0= RULE_INT
             {
             lv_age_3_0=(Token)input.LT(1);
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleKind418); 
+            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleKind418); 
 
             			createLeafNode(grammarAccess.getKindAccess().getAgeINTTerminalRuleCall_3_0(), "age"); 
             		
@@ -577,7 +577,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
 
             }
 
-            match(input,16,FOLLOW_16_in_ruleKind433); 
+            match(input,16,FollowSets000.FOLLOW_16_in_ruleKind433); 
 
                     createLeafNode(grammarAccess.getKindAccess().getRightParenthesisKeyword_4(), null); 
                 
@@ -616,12 +616,12 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:336:2: iv_ruleErwachsener= ruleErwachsener EOF
             {
              currentNode = createCompositeNode(grammarAccess.getErwachsenerRule(), currentNode); 
-            pushFollow(FOLLOW_ruleErwachsener_in_entryRuleErwachsener466);
+            pushFollow(FollowSets000.FOLLOW_ruleErwachsener_in_entryRuleErwachsener466);
             iv_ruleErwachsener=ruleErwachsener();
             _fsp--;
 
              current =iv_ruleErwachsener; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleErwachsener476); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleErwachsener476); 
 
             }
 
@@ -655,11 +655,11 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:349:1: ( 'erwachsener' '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_age_3_0= RULE_INT ) ) ')' )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:349:3: 'erwachsener' '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_age_3_0= RULE_INT ) ) ')'
             {
-            match(input,17,FOLLOW_17_in_ruleErwachsener511); 
+            match(input,17,FollowSets000.FOLLOW_17_in_ruleErwachsener511); 
 
                     createLeafNode(grammarAccess.getErwachsenerAccess().getErwachsenerKeyword_0(), null); 
                 
-            match(input,15,FOLLOW_15_in_ruleErwachsener521); 
+            match(input,15,FollowSets000.FOLLOW_15_in_ruleErwachsener521); 
 
                     createLeafNode(grammarAccess.getErwachsenerAccess().getLeftParenthesisKeyword_1(), null); 
                 
@@ -670,7 +670,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:359:3: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleErwachsener538); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleErwachsener538); 
 
             			createLeafNode(grammarAccess.getErwachsenerAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
             		
@@ -703,7 +703,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:383:3: lv_age_3_0= RULE_INT
             {
             lv_age_3_0=(Token)input.LT(1);
-            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleErwachsener560); 
+            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleErwachsener560); 
 
             			createLeafNode(grammarAccess.getErwachsenerAccess().getAgeINTTerminalRuleCall_3_0(), "age"); 
             		
@@ -729,7 +729,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
 
             }
 
-            match(input,16,FOLLOW_16_in_ruleErwachsener575); 
+            match(input,16,FollowSets000.FOLLOW_16_in_ruleErwachsener575); 
 
                     createLeafNode(grammarAccess.getErwachsenerAccess().getRightParenthesisKeyword_4(), null); 
                 
@@ -768,12 +768,12 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:417:2: iv_ruleSpielzeug= ruleSpielzeug EOF
             {
              currentNode = createCompositeNode(grammarAccess.getSpielzeugRule(), currentNode); 
-            pushFollow(FOLLOW_ruleSpielzeug_in_entryRuleSpielzeug608);
+            pushFollow(FollowSets000.FOLLOW_ruleSpielzeug_in_entryRuleSpielzeug608);
             iv_ruleSpielzeug=ruleSpielzeug();
             _fsp--;
 
              current =iv_ruleSpielzeug; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSpielzeug618); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSpielzeug618); 
 
             }
 
@@ -808,11 +808,11 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:430:1: ( 'spielzeug' '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_farbe_3_0= ruleFarbe ) ) ')' )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:430:3: 'spielzeug' '(' ( (lv_name_2_0= RULE_ID ) ) ( (lv_farbe_3_0= ruleFarbe ) ) ')'
             {
-            match(input,18,FOLLOW_18_in_ruleSpielzeug653); 
+            match(input,18,FollowSets000.FOLLOW_18_in_ruleSpielzeug653); 
 
                     createLeafNode(grammarAccess.getSpielzeugAccess().getSpielzeugKeyword_0(), null); 
                 
-            match(input,15,FOLLOW_15_in_ruleSpielzeug663); 
+            match(input,15,FollowSets000.FOLLOW_15_in_ruleSpielzeug663); 
 
                     createLeafNode(grammarAccess.getSpielzeugAccess().getLeftParenthesisKeyword_1(), null); 
                 
@@ -823,7 +823,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:440:3: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)input.LT(1);
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSpielzeug680); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSpielzeug680); 
 
             			createLeafNode(grammarAccess.getSpielzeugAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
             		
@@ -858,7 +858,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
              
             	        currentNode=createCompositeNode(grammarAccess.getSpielzeugAccess().getFarbeFarbeParserRuleCall_3_0(), currentNode); 
             	    
-            pushFollow(FOLLOW_ruleFarbe_in_ruleSpielzeug706);
+            pushFollow(FollowSets000.FOLLOW_ruleFarbe_in_ruleSpielzeug706);
             lv_farbe_3_0=ruleFarbe();
             _fsp--;
 
@@ -885,7 +885,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
 
             }
 
-            match(input,16,FOLLOW_16_in_ruleSpielzeug716); 
+            match(input,16,FollowSets000.FOLLOW_16_in_ruleSpielzeug716); 
 
                     createLeafNode(grammarAccess.getSpielzeugAccess().getRightParenthesisKeyword_4(), null); 
                 
@@ -924,12 +924,12 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:498:2: iv_ruleFarbe= ruleFarbe EOF
             {
              currentNode = createCompositeNode(grammarAccess.getFarbeRule(), currentNode); 
-            pushFollow(FOLLOW_ruleFarbe_in_entryRuleFarbe749);
+            pushFollow(FollowSets000.FOLLOW_ruleFarbe_in_entryRuleFarbe749);
             iv_ruleFarbe=ruleFarbe();
             _fsp--;
 
              current =iv_ruleFarbe; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFarbe759); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFarbe759); 
 
             }
 
@@ -1003,7 +1003,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:514:3: lv_wert_0_1= 'ROT'
                     {
                     lv_wert_0_1=(Token)input.LT(1);
-                    match(input,19,FOLLOW_19_in_ruleFarbe803); 
+                    match(input,19,FollowSets000.FOLLOW_19_in_ruleFarbe803); 
 
                             createLeafNode(grammarAccess.getFarbeAccess().getWertROTKeyword_0_0(), "wert"); 
                         
@@ -1026,7 +1026,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:532:8: lv_wert_0_2= 'BLAU'
                     {
                     lv_wert_0_2=(Token)input.LT(1);
-                    match(input,20,FOLLOW_20_in_ruleFarbe832); 
+                    match(input,20,FollowSets000.FOLLOW_20_in_ruleFarbe832); 
 
                             createLeafNode(grammarAccess.getFarbeAccess().getWertBLAUKeyword_0_1(), "wert"); 
                         
@@ -1049,7 +1049,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:550:8: lv_wert_0_3= 'GELB'
                     {
                     lv_wert_0_3=(Token)input.LT(1);
-                    match(input,21,FOLLOW_21_in_ruleFarbe861); 
+                    match(input,21,FollowSets000.FOLLOW_21_in_ruleFarbe861); 
 
                             createLeafNode(grammarAccess.getFarbeAccess().getWertGELBKeyword_0_2(), "wert"); 
                         
@@ -1072,7 +1072,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:568:8: lv_wert_0_4= 'GR\\u00DCN'
                     {
                     lv_wert_0_4=(Token)input.LT(1);
-                    match(input,22,FOLLOW_22_in_ruleFarbe890); 
+                    match(input,22,FollowSets000.FOLLOW_22_in_ruleFarbe890); 
 
                             createLeafNode(grammarAccess.getFarbeAccess().getWertGRÜNKeyword_0_3(), "wert"); 
                         
@@ -1132,12 +1132,12 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:597:2: iv_ruleFamilie= ruleFamilie EOF
             {
              currentNode = createCompositeNode(grammarAccess.getFamilieRule(), currentNode); 
-            pushFollow(FOLLOW_ruleFamilie_in_entryRuleFamilie938);
+            pushFollow(FollowSets000.FOLLOW_ruleFamilie_in_entryRuleFamilie938);
             iv_ruleFamilie=ruleFamilie();
             _fsp--;
 
              current =iv_ruleFamilie; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleFamilie948); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFamilie948); 
 
             }
 
@@ -1172,11 +1172,11 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:610:1: ( 'familie' '(' ( ( (lv_name_2_1= 'keyword' | lv_name_2_2= RULE_STRING | lv_name_2_3= RULE_ID ) ) ) ( ( RULE_ID ) ) ( ( RULE_ID ) ) ( ( RULE_ID ) ) ( ',' ( ( RULE_ID ) ) )* ')' )
             // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:610:3: 'familie' '(' ( ( (lv_name_2_1= 'keyword' | lv_name_2_2= RULE_STRING | lv_name_2_3= RULE_ID ) ) ) ( ( RULE_ID ) ) ( ( RULE_ID ) ) ( ( RULE_ID ) ) ( ',' ( ( RULE_ID ) ) )* ')'
             {
-            match(input,23,FOLLOW_23_in_ruleFamilie983); 
+            match(input,23,FollowSets000.FOLLOW_23_in_ruleFamilie983); 
 
                     createLeafNode(grammarAccess.getFamilieAccess().getFamilieKeyword_0(), null); 
                 
-            match(input,15,FOLLOW_15_in_ruleFamilie993); 
+            match(input,15,FollowSets000.FOLLOW_15_in_ruleFamilie993); 
 
                     createLeafNode(grammarAccess.getFamilieAccess().getLeftParenthesisKeyword_1(), null); 
                 
@@ -1216,7 +1216,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:621:3: lv_name_2_1= 'keyword'
                     {
                     lv_name_2_1=(Token)input.LT(1);
-                    match(input,24,FOLLOW_24_in_ruleFamilie1013); 
+                    match(input,24,FollowSets000.FOLLOW_24_in_ruleFamilie1013); 
 
                             createLeafNode(grammarAccess.getFamilieAccess().getNameKeywordKeyword_2_0_0(), "name"); 
                         
@@ -1239,7 +1239,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:639:8: lv_name_2_2= RULE_STRING
                     {
                     lv_name_2_2=(Token)input.LT(1);
-                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleFamilie1041); 
+                    match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleFamilie1041); 
 
                     			createLeafNode(grammarAccess.getFamilieAccess().getNameSTRINGTerminalRuleCall_2_0_1(), "name"); 
                     		
@@ -1266,7 +1266,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:660:8: lv_name_2_3= RULE_ID
                     {
                     lv_name_2_3=(Token)input.LT(1);
-                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1061); 
+                    match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleFamilie1061); 
 
                     			createLeafNode(grammarAccess.getFamilieAccess().getNameIDTerminalRuleCall_2_0_2(), "name"); 
                     		
@@ -1310,7 +1310,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1087); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleFamilie1087); 
 
             		createLeafNode(grammarAccess.getFamilieAccess().getMutterErwachsenerCrossReference_3_0(), "mutter"); 
             	
@@ -1332,7 +1332,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1105); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleFamilie1105); 
 
             		createLeafNode(grammarAccess.getFamilieAccess().getVaterErwachsenerCrossReference_4_0(), "vater"); 
             	
@@ -1354,7 +1354,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1123); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleFamilie1123); 
 
             		createLeafNode(grammarAccess.getFamilieAccess().getKinderKindCrossReference_5_0(), "kinder"); 
             	
@@ -1379,7 +1379,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             	case 1 :
             	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/testlanguages/parser/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:726:4: ',' ( ( RULE_ID ) )
             	    {
-            	    match(input,25,FOLLOW_25_in_ruleFamilie1134); 
+            	    match(input,25,FollowSets000.FOLLOW_25_in_ruleFamilie1134); 
 
             	            createLeafNode(grammarAccess.getFamilieAccess().getCommaKeyword_6_0(), null); 
             	        
@@ -1395,7 +1395,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
             	    	            associateNodeWithAstElement(currentNode, current);
             	    	        }
             	            
-            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleFamilie1152); 
+            	    match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleFamilie1152); 
 
             	    		createLeafNode(grammarAccess.getFamilieAccess().getKinderKindCrossReference_6_1_0(), "kinder"); 
             	    	
@@ -1414,7 +1414,7 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
                 }
             } while (true);
 
-            match(input,16,FOLLOW_16_in_ruleFamilie1164); 
+            match(input,16,FollowSets000.FOLLOW_16_in_ruleFamilie1164); 
 
                     createLeafNode(grammarAccess.getFamilieAccess().getRightParenthesisKeyword_7(), null); 
                 
@@ -1442,56 +1442,60 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
 
  
 
-    public static final BitSet FOLLOW_ruleSpielplatz_in_entryRuleSpielplatz73 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSpielplatz83 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_11_in_ruleSpielplatz118 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleSpielplatz135 = new BitSet(new long[]{0x0000000000001020L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleSpielplatz157 = new BitSet(new long[]{0x0000000000001000L});
-    public static final BitSet FOLLOW_12_in_ruleSpielplatz173 = new BitSet(new long[]{0x0000000000866000L});
-    public static final BitSet FOLLOW_ruleKind_in_ruleSpielplatz195 = new BitSet(new long[]{0x0000000000866000L});
-    public static final BitSet FOLLOW_ruleErwachsener_in_ruleSpielplatz222 = new BitSet(new long[]{0x0000000000866000L});
-    public static final BitSet FOLLOW_ruleSpielzeug_in_ruleSpielplatz249 = new BitSet(new long[]{0x0000000000866000L});
-    public static final BitSet FOLLOW_ruleFamilie_in_ruleSpielplatz276 = new BitSet(new long[]{0x0000000000866000L});
-    public static final BitSet FOLLOW_13_in_ruleSpielplatz288 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleKind_in_entryRuleKind324 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleKind334 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_ruleKind369 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleKind379 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleKind396 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleKind418 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleKind433 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleErwachsener_in_entryRuleErwachsener466 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleErwachsener476 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_ruleErwachsener511 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleErwachsener521 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleErwachsener538 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_RULE_INT_in_ruleErwachsener560 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleErwachsener575 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSpielzeug_in_entryRuleSpielzeug608 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSpielzeug618 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_ruleSpielzeug653 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleSpielzeug663 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleSpielzeug680 = new BitSet(new long[]{0x0000000000780000L});
-    public static final BitSet FOLLOW_ruleFarbe_in_ruleSpielzeug706 = new BitSet(new long[]{0x0000000000010000L});
-    public static final BitSet FOLLOW_16_in_ruleSpielzeug716 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFarbe_in_entryRuleFarbe749 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFarbe759 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_ruleFarbe803 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_ruleFarbe832 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_21_in_ruleFarbe861 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_22_in_ruleFarbe890 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleFamilie_in_entryRuleFamilie938 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleFamilie948 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_23_in_ruleFamilie983 = new BitSet(new long[]{0x0000000000008000L});
-    public static final BitSet FOLLOW_15_in_ruleFamilie993 = new BitSet(new long[]{0x0000000001000060L});
-    public static final BitSet FOLLOW_24_in_ruleFamilie1013 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_STRING_in_ruleFamilie1041 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFamilie1061 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFamilie1087 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFamilie1105 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFamilie1123 = new BitSet(new long[]{0x0000000002010000L});
-    public static final BitSet FOLLOW_25_in_ruleFamilie1134 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_RULE_ID_in_ruleFamilie1152 = new BitSet(new long[]{0x0000000002010000L});
-    public static final BitSet FOLLOW_16_in_ruleFamilie1164 = new BitSet(new long[]{0x0000000000000002L});
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_ruleSpielplatz_in_entryRuleSpielplatz73 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleSpielplatz83 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_ruleSpielplatz118 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleSpielplatz135 = new BitSet(new long[]{0x0000000000001020L});
+        public static final BitSet FOLLOW_RULE_STRING_in_ruleSpielplatz157 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_12_in_ruleSpielplatz173 = new BitSet(new long[]{0x0000000000866000L});
+        public static final BitSet FOLLOW_ruleKind_in_ruleSpielplatz195 = new BitSet(new long[]{0x0000000000866000L});
+        public static final BitSet FOLLOW_ruleErwachsener_in_ruleSpielplatz222 = new BitSet(new long[]{0x0000000000866000L});
+        public static final BitSet FOLLOW_ruleSpielzeug_in_ruleSpielplatz249 = new BitSet(new long[]{0x0000000000866000L});
+        public static final BitSet FOLLOW_ruleFamilie_in_ruleSpielplatz276 = new BitSet(new long[]{0x0000000000866000L});
+        public static final BitSet FOLLOW_13_in_ruleSpielplatz288 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleKind_in_entryRuleKind324 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleKind334 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_ruleKind369 = new BitSet(new long[]{0x0000000000008000L});
+        public static final BitSet FOLLOW_15_in_ruleKind379 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleKind396 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleKind418 = new BitSet(new long[]{0x0000000000010000L});
+        public static final BitSet FOLLOW_16_in_ruleKind433 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleErwachsener_in_entryRuleErwachsener466 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleErwachsener476 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_17_in_ruleErwachsener511 = new BitSet(new long[]{0x0000000000008000L});
+        public static final BitSet FOLLOW_15_in_ruleErwachsener521 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleErwachsener538 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_RULE_INT_in_ruleErwachsener560 = new BitSet(new long[]{0x0000000000010000L});
+        public static final BitSet FOLLOW_16_in_ruleErwachsener575 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSpielzeug_in_entryRuleSpielzeug608 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleSpielzeug618 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_18_in_ruleSpielzeug653 = new BitSet(new long[]{0x0000000000008000L});
+        public static final BitSet FOLLOW_15_in_ruleSpielzeug663 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleSpielzeug680 = new BitSet(new long[]{0x0000000000780000L});
+        public static final BitSet FOLLOW_ruleFarbe_in_ruleSpielzeug706 = new BitSet(new long[]{0x0000000000010000L});
+        public static final BitSet FOLLOW_16_in_ruleSpielzeug716 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFarbe_in_entryRuleFarbe749 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleFarbe759 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_19_in_ruleFarbe803 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_20_in_ruleFarbe832 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_21_in_ruleFarbe861 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_22_in_ruleFarbe890 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFamilie_in_entryRuleFamilie938 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleFamilie948 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_23_in_ruleFamilie983 = new BitSet(new long[]{0x0000000000008000L});
+        public static final BitSet FOLLOW_15_in_ruleFamilie993 = new BitSet(new long[]{0x0000000001000060L});
+        public static final BitSet FOLLOW_24_in_ruleFamilie1013 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_RULE_STRING_in_ruleFamilie1041 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleFamilie1061 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleFamilie1087 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleFamilie1105 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleFamilie1123 = new BitSet(new long[]{0x0000000002010000L});
+        public static final BitSet FOLLOW_25_in_ruleFamilie1134 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleFamilie1152 = new BitSet(new long[]{0x0000000002010000L});
+        public static final BitSet FOLLOW_16_in_ruleFamilie1164 = new BitSet(new long[]{0x0000000000000002L});
+    }
+
 
 }

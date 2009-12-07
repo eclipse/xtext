@@ -12,8 +12,10 @@ import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -35,6 +37,8 @@ import com.google.inject.Inject;
  */
 public class ResourceDescriptionsUpdater {
 
+	private static final Logger log = Logger.getLogger(ResourceDescriptionsUpdater.class);
+	
 	@Inject
 	private IResourceServiceProvider.Registry managerRegistry;
 
@@ -99,7 +103,11 @@ public class ResourceDescriptionsUpdater {
 	private Map<URI, Delta> update(IResourceDescriptions resourceDescriptions, final ResourceSet set,
 			Iterable<URI> toBeUpdated) {
 		for (URI uri : toBeUpdated) {
-			set.getResource(uri, true);
+			try {
+				set.getResource(uri, true);
+			} catch(WrappedException ex) {
+				log.error("Error loading resource from: " + uri.toString(), ex);
+			}
 		}
 		Map<URI, Delta> result = Maps.newHashMap();
 		for (URI uri : toBeUpdated) {
