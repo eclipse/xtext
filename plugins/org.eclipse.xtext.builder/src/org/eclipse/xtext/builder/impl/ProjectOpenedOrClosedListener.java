@@ -20,6 +20,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
@@ -65,6 +66,7 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 		}
 		if ((event.getType() == IResourceChangeEvent.PRE_CLOSE || event.getType() == IResourceChangeEvent.PRE_DELETE)) {
 			if (event.getResource() instanceof IProject) {
+				final ToBeBuilt toBeBuilt = toBeBuiltComputer.removeProject((IProject) event.getResource(), new NullProgressMonitor());
 				new Job("removing project "+event.getResource().getName()+" from xtext index.") {
 					{
 						setRule(ResourcesPlugin.getWorkspace().getRoot());
@@ -72,7 +74,6 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 					}
 					@Override
 					protected IStatus run(IProgressMonitor monitor) {
-						ToBeBuilt toBeBuilt = toBeBuiltComputer.removeProject((IProject) event.getResource(), monitor);
 						builderState.update(toBeBuilt.getToBeUpdated(), toBeBuilt.getToBeDeleted(),monitor);
 						return Status.OK_STATUS;
 					}

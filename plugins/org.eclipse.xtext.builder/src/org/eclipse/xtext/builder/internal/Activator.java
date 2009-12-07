@@ -2,7 +2,6 @@ package org.eclipse.xtext.builder.internal;
 
 import org.apache.log4j.Logger;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtext.builder.builderState.impl.IStorageUtil;
 import org.eclipse.xtext.builder.impl.javasupport.JdtBuilderModule;
 import org.osgi.framework.BundleContext;
 
@@ -32,7 +31,6 @@ public class Activator extends AbstractUIPlugin {
 		//TODO check whether JDT is available, if not use BuilderModule instead
 		try {
 			injector = Guice.createInjector(new JdtBuilderModule());
-			IStorageUtil.Access.setStorageUtil(injector.getInstance(IStorageUtil.class));
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			throw e;

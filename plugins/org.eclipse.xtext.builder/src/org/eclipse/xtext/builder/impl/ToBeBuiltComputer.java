@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.ui.core.resource.IStorage2UriMapper;
 
 import com.google.inject.Inject;
 
@@ -31,14 +32,19 @@ public class ToBeBuiltComputer {
 
 	@Inject
 	private IUriUtil iUriUtil;
+	
+	@Inject
+	private IStorage2UriMapper mapper;
 
 	public ToBeBuilt removeProject(IProject project, final IProgressMonitor monitor) {
 		ToBeBuilt result = new ToBeBuilt();
 		for (IResourceDescription iResourceDescription : builderState.getAllResourceDescriptions()) {
 			ResourceDescriptionImpl descImpl = (ResourceDescriptionImpl) iResourceDescription;
-			IStorage storage = descImpl.getStorage();
-			if (isOnProject(storage, project))
-				result.getToBeDeleted().add(descImpl.getURI());
+			Iterable<IStorage> storages = mapper.getStorages(descImpl.getURI());
+			for (IStorage storage : storages) {
+				if (isOnProject(storage, project))
+					result.getToBeDeleted().add(descImpl.getURI());
+			}
 		}
 		return result;
 	}
@@ -70,7 +76,7 @@ public class ToBeBuiltComputer {
 			return true;
 		URI uri = getUri(storage);
 		if (uri != null) {
-			toBeBuilt.getToBeUpdated().put(uri, storage);
+			toBeBuilt.getToBeUpdated().add(uri);
 		}
 		return true;
 	}

@@ -12,7 +12,6 @@ import java.io.InputStream;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -216,14 +215,8 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 		return result;
 	}
 
-	private Map<URI, IResourceDescription.Delta> update(Iterable<URI> toBeUpdated, Set<URI> toBeDeleted) {
-		Map<URI, IStorage> toBeUpdatedAsMap = Maps.newHashMap();
-		if (toBeUpdated != null) {
-			for (URI uri : toBeUpdated) {
-				toBeUpdatedAsMap.put(uri, null);
-			}
-		}
-		ImmutableList<Delta> update = builderState.update(toBeUpdatedAsMap, toBeDeleted, new NullProgressMonitor());
+	private Map<URI, IResourceDescription.Delta> update(Set<URI> toBeUpdated, Set<URI> toBeDeleted) {
+		ImmutableList<Delta> update = builderState.update(toBeUpdated, toBeDeleted, new NullProgressMonitor());
 		return Maps.uniqueIndex(update, new Function<IResourceDescription.Delta, URI>() {
 			public URI apply(IResourceDescription.Delta from) {
 				return from.getOld() != null ? from.getOld().getURI() : from.getNew().getURI();
