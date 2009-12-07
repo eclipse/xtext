@@ -122,7 +122,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.builder.tests.BuilderTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.builder.tests.BuilderTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="buildertestlanguage">
 		</parser>
 	</extension>
