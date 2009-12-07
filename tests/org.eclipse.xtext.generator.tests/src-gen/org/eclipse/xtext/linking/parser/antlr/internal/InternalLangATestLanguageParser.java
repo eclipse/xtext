@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'import'", "'type'", "'extends'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'import'", "'type'", "'extends'", "'implements'", "','"
     };
     public static final int RULE_ML_COMMENT=7;
     public static final int RULE_ID=5;
@@ -396,7 +396,7 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
 
 
     // $ANTLR start ruleType
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalLangATestLanguage.g:198:1: ruleType returns [EObject current=null] : ( 'type' ( (lv_name_1_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalLangATestLanguage.g:198:1: ruleType returns [EObject current=null] : ( 'type' ( (lv_name_1_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? ( 'implements' ( ( RULE_ID ) ) ( ',' ( ( RULE_ID ) ) )* )? ) ;
     public final EObject ruleType() throws RecognitionException {
         EObject current = null;
 
@@ -405,11 +405,11 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
          @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalLangATestLanguage.g:203:6: ( ( 'type' ( (lv_name_1_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalLangATestLanguage.g:204:1: ( 'type' ( (lv_name_1_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalLangATestLanguage.g:203:6: ( ( 'type' ( (lv_name_1_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? ( 'implements' ( ( RULE_ID ) ) ( ',' ( ( RULE_ID ) ) )* )? ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalLangATestLanguage.g:204:1: ( 'type' ( (lv_name_1_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? ( 'implements' ( ( RULE_ID ) ) ( ',' ( ( RULE_ID ) ) )* )? )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalLangATestLanguage.g:204:1: ( 'type' ( (lv_name_1_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalLangATestLanguage.g:204:3: 'type' ( (lv_name_1_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )?
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalLangATestLanguage.g:204:1: ( 'type' ( (lv_name_1_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? ( 'implements' ( ( RULE_ID ) ) ( ',' ( ( RULE_ID ) ) )* )? )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalLangATestLanguage.g:204:3: 'type' ( (lv_name_1_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? ( 'implements' ( ( RULE_ID ) ) ( ',' ( ( RULE_ID ) ) )* )?
             {
             match(input,12,FollowSets000.FOLLOW_12_in_ruleType330); 
 
@@ -491,6 +491,99 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
 
             }
 
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalLangATestLanguage.g:250:4: ( 'implements' ( ( RULE_ID ) ) ( ',' ( ( RULE_ID ) ) )* )?
+            int alt5=2;
+            int LA5_0 = input.LA(1);
+
+            if ( (LA5_0==14) ) {
+                alt5=1;
+            }
+            switch (alt5) {
+                case 1 :
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalLangATestLanguage.g:250:6: 'implements' ( ( RULE_ID ) ) ( ',' ( ( RULE_ID ) ) )*
+                    {
+                    match(input,14,FollowSets000.FOLLOW_14_in_ruleType394); 
+
+                            createLeafNode(grammarAccess.getTypeAccess().getImplementsKeyword_3_0(), null); 
+                        
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalLangATestLanguage.g:254:1: ( ( RULE_ID ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalLangATestLanguage.g:255:1: ( RULE_ID )
+                    {
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalLangATestLanguage.g:255:1: ( RULE_ID )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalLangATestLanguage.g:256:3: RULE_ID
+                    {
+
+                    			if (current==null) {
+                    	            current = factory.create(grammarAccess.getTypeRule().getType().getClassifier());
+                    	            associateNodeWithAstElement(currentNode, current);
+                    	        }
+                            
+                    match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleType412); 
+
+                    		createLeafNode(grammarAccess.getTypeAccess().getImplementsTypeCrossReference_3_1_0(), "implements"); 
+                    	
+
+                    }
+
+
+                    }
+
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalLangATestLanguage.g:268:2: ( ',' ( ( RULE_ID ) ) )*
+                    loop4:
+                    do {
+                        int alt4=2;
+                        int LA4_0 = input.LA(1);
+
+                        if ( (LA4_0==15) ) {
+                            alt4=1;
+                        }
+
+
+                        switch (alt4) {
+                    	case 1 :
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalLangATestLanguage.g:268:4: ',' ( ( RULE_ID ) )
+                    	    {
+                    	    match(input,15,FollowSets000.FOLLOW_15_in_ruleType423); 
+
+                    	            createLeafNode(grammarAccess.getTypeAccess().getCommaKeyword_3_2_0(), null); 
+                    	        
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalLangATestLanguage.g:272:1: ( ( RULE_ID ) )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalLangATestLanguage.g:273:1: ( RULE_ID )
+                    	    {
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalLangATestLanguage.g:273:1: ( RULE_ID )
+                    	    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/linking/parser/antlr/internal/InternalLangATestLanguage.g:274:3: RULE_ID
+                    	    {
+
+                    	    			if (current==null) {
+                    	    	            current = factory.create(grammarAccess.getTypeRule().getType().getClassifier());
+                    	    	            associateNodeWithAstElement(currentNode, current);
+                    	    	        }
+                    	            
+                    	    match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleType441); 
+
+                    	    		createLeafNode(grammarAccess.getTypeAccess().getImplementsTypeCrossReference_3_2_1_0(), "implements"); 
+                    	    	
+
+                    	    }
+
+
+                    	    }
+
+
+                    	    }
+                    	    break;
+
+                    	default :
+                    	    break loop4;
+                        }
+                    } while (true);
+
+
+                    }
+                    break;
+
+            }
+
 
             }
 
@@ -528,9 +621,13 @@ public class InternalLangATestLanguageParser extends AbstractInternalAntlrParser
         public static final BitSet FOLLOW_ruleType_in_entryRuleType285 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleType295 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_12_in_ruleType330 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleType347 = new BitSet(new long[]{0x0000000000002002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleType347 = new BitSet(new long[]{0x0000000000006002L});
         public static final BitSet FOLLOW_13_in_ruleType363 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleType381 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleType381 = new BitSet(new long[]{0x0000000000004002L});
+        public static final BitSet FOLLOW_14_in_ruleType394 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleType412 = new BitSet(new long[]{0x0000000000008002L});
+        public static final BitSet FOLLOW_15_in_ruleType423 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleType441 = new BitSet(new long[]{0x0000000000008002L});
     }
 
 

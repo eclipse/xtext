@@ -153,13 +153,22 @@ public interface LangATestLanguagePackage extends EPackage
   int TYPE__EXTENDS = 1;
 
   /**
+   * The feature id for the '<em><b>Implements</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TYPE__IMPLEMENTS = 2;
+
+  /**
    * The number of structural features of the '<em>Type</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int TYPE_FEATURE_COUNT = 2;
+  int TYPE_FEATURE_COUNT = 3;
 
 
   /**
@@ -246,6 +255,17 @@ public interface LangATestLanguagePackage extends EPackage
    * @generated
    */
   EReference getType_Extends();
+
+  /**
+   * Returns the meta object for the reference list '{@link org.eclipse.xtext.linking.langATestLanguage.Type#getImplements <em>Implements</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference list '<em>Implements</em>'.
+   * @see org.eclipse.xtext.linking.langATestLanguage.Type#getImplements()
+   * @see #getType()
+   * @generated
+   */
+  EReference getType_Implements();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -339,6 +359,14 @@ public interface LangATestLanguagePackage extends EPackage
      * @generated
      */
     EReference TYPE__EXTENDS = eINSTANCE.getType_Extends();
+
+    /**
+     * The meta object literal for the '<em><b>Implements</b></em>' reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TYPE__IMPLEMENTS = eINSTANCE.getType_Implements();
 
   }
 

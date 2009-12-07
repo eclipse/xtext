@@ -82,8 +82,12 @@ public class LangATestLanguageParserConfiguration extends AbstractParserConfigur
 		getImportConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.linking.parser.packrat.LangATestLanguageDelimiters.ruleCall$13$Delimiter);
 		getTypeConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.linking.parser.packrat.LangATestLanguageDelimiters.keyword$11$Delimiter);
 		getTypeConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.linking.parser.packrat.LangATestLanguageDelimiters.keyword$11$Delimiter);
+		getTypeConsumer().setKeyword$12$Delimiter(org.eclipse.xtext.linking.parser.packrat.LangATestLanguageDelimiters.keyword$11$Delimiter);
+		getTypeConsumer().setKeyword$18$Delimiter(org.eclipse.xtext.linking.parser.packrat.LangATestLanguageDelimiters.keyword$33$Delimiter);
 		getTypeConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.linking.parser.packrat.LangATestLanguageDelimiters.ruleCall$19$Delimiter);
 		getTypeConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.linking.parser.packrat.LangATestLanguageDelimiters.ruleCall$19$Delimiter);
+		getTypeConsumer().setRuleCall$16$Delimiter(org.eclipse.xtext.linking.parser.packrat.LangATestLanguageDelimiters.ruleCall$19$Delimiter);
+		getTypeConsumer().setRuleCall$22$Delimiter(org.eclipse.xtext.linking.parser.packrat.LangATestLanguageDelimiters.ruleCall$19$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {

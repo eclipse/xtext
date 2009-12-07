@@ -5,6 +5,8 @@
  */
 package org.eclipse.xtext.linking.langATestLanguage;
 
+import org.eclipse.emf.common.util.EList;
+
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -17,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.eclipse.xtext.linking.langATestLanguage.Type#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.linking.langATestLanguage.Type#getExtends <em>Extends</em>}</li>
+ *   <li>{@link org.eclipse.xtext.linking.langATestLanguage.Type#getImplements <em>Implements</em>}</li>
  * </ul>
  * </p>
  *
@@ -77,5 +80,21 @@ public interface Type extends EObject
    * @generated
    */
   void setExtends(Type value);
+
+  /**
+   * Returns the value of the '<em><b>Implements</b></em>' reference list.
+   * The list contents are of type {@link org.eclipse.xtext.linking.langATestLanguage.Type}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Implements</em>' reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Implements</em>' reference list.
+   * @see org.eclipse.xtext.linking.langATestLanguage.LangATestLanguagePackage#getType_Implements()
+   * @model
+   * @generated
+   */
+  EList<Type> getImplements();
 
 } // Type

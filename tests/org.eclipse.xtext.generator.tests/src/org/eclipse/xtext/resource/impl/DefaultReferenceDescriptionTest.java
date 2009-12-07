@@ -8,6 +8,7 @@
 package org.eclipse.xtext.resource.impl;
 
 import java.util.Collection;
+import java.util.Iterator;
 
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.linking.LangATestLanguageStandaloneSetup;
@@ -37,6 +38,27 @@ public class DefaultReferenceDescriptionTest extends AbstractXtextTests {
 		assertEquals(m.getTypes().get(1),resource.getResourceSet().getEObject(refDesc.getTargetEObjectUri(),false));
 		assertEquals(-1,refDesc.getIndexInList());
 		assertEquals(LangATestLanguagePackage.Literals.TYPE__EXTENDS,refDesc.getEReference());
+	}
+	
+	public void testgetReferenceDescriptionForMultiValue() throws Exception {
+		with(new LangATestLanguageStandaloneSetup());
+		XtextResource resource = getResource("type A implements B,C type B type C", "foo.langatestlanguage");
+		IResourceDescription resDesc = resource.getResourceServiceProvider().getResourceDescriptionManager().getResourceDescription(resource);
+		Iterable<IReferenceDescription> descriptions = resDesc.getReferenceDescriptions();
+		Collection<IReferenceDescription> collection = Collections2.forIterable(descriptions);
+		assertEquals(2,collection.size());
+		Iterator<IReferenceDescription> iterator = descriptions.iterator();
+		IReferenceDescription refDesc1 = iterator.next();
+		IReferenceDescription refDesc2 = iterator.next();
+		Main m = (Main) resource.getParseResult().getRootASTElement();
+		assertEquals(m.getTypes().get(0),resource.getResourceSet().getEObject(refDesc1.getSourceEObjectUri(),false));
+		assertEquals(m.getTypes().get(1),resource.getResourceSet().getEObject(refDesc1.getTargetEObjectUri(),false));
+		assertEquals(0,refDesc1.getIndexInList());
+		assertEquals(LangATestLanguagePackage.Literals.TYPE__IMPLEMENTS,refDesc1.getEReference());
+		assertEquals(m.getTypes().get(0),resource.getResourceSet().getEObject(refDesc2.getSourceEObjectUri(),false));
+		assertEquals(m.getTypes().get(2),resource.getResourceSet().getEObject(refDesc2.getTargetEObjectUri(),false));
+		assertEquals(1,refDesc2.getIndexInList());
+		assertEquals(LangATestLanguagePackage.Literals.TYPE__IMPLEMENTS,refDesc2.getEReference());
 	}
 	
 	
