@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStateAdapterFactory.java,v 1.6 2009/12/02 16:38:29 sefftinge Exp $
+ * $Id: BuilderStateAdapterFactory.java,v 1.7 2009/12/07 15:37:54 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.util;
 
@@ -15,7 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
 
 /**
  * <!-- begin-user-doc -->
@@ -74,7 +74,7 @@ public class BuilderStateAdapterFactory extends AdapterFactoryImpl {
 	protected BuilderStateSwitch<Adapter> modelSwitch =
 		new BuilderStateSwitch<Adapter>() {
 			@Override
-			public Adapter caseResourceDescription(IStorageAwareResourceDescription object) {
+			public Adapter caseResourceDescription(IResourceDescription object) {
 				return createResourceDescriptionAdapter();
 			}
 			@Override
@@ -110,13 +110,13 @@ public class BuilderStateAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription <em>Resource Description</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.resource.IResourceDescription <em>Resource Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription
+	 * @see org.eclipse.xtext.resource.IResourceDescription
 	 * @generated
 	 */
 	public Adapter createResourceDescriptionAdapter() {

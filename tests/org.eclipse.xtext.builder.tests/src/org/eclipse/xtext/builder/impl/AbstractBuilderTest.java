@@ -40,6 +40,8 @@ public abstract class AbstractBuilderTest extends TestCase implements IResourceD
 		waitForAutoBuild();
 		events.clear();
 		getBuilderState().removeListener(this);
+		assertEquals(0, countResourcesInIndex());
+		assertEquals(0, root().getProjects().length);
 	}
 
 	public void descriptionsChanged(Event event) {

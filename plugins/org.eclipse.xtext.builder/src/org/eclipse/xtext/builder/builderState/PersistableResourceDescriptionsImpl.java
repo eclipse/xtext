@@ -11,7 +11,6 @@ import java.util.Collections;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -50,7 +49,7 @@ public class PersistableResourceDescriptionsImpl extends AbstractResourceDescrip
 		this.resourceSetProvider = resourceSetProvider;
 	}
 
-	public synchronized ImmutableList<IResourceDescription.Delta> update(Map<URI, IStorage> toBeAddedOrUpdated,
+	public synchronized ImmutableList<IResourceDescription.Delta> update(Set<URI> toBeAddedOrUpdated,
 			Set<URI> toBeRemoved, IProgressMonitor monitor) {
 		if (monitor.isCanceled())
 			return ImmutableList.of();
@@ -58,7 +57,7 @@ public class PersistableResourceDescriptionsImpl extends AbstractResourceDescrip
 		resourceSet.eAdapters().add(new ShadowingResourceDescriptions.Adapter(this, toBeAddedOrUpdated, toBeRemoved));
 		resourceSet.getLoadOptions().put(DefaultGlobalScopeProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);
 		
-		Iterable<Delta> deltas = updater.transitiveUpdate(this, resourceSet, toBeAddedOrUpdated.keySet(), toBeRemoved,
+		Iterable<Delta> deltas = updater.transitiveUpdate(this, resourceSet, toBeAddedOrUpdated, toBeRemoved,
 				monitor);
 		Set<Delta> copiedDeltas = Sets.newHashSet();
 		Map<URI, IResourceDescription> newMap = Maps.newHashMap(resourceDescriptionMap);
@@ -89,18 +88,11 @@ public class PersistableResourceDescriptionsImpl extends AbstractResourceDescrip
 		markerUpdater.updateMarker(rs, deltas, monitor);
 	}
 
-	private IResourceDescription createNew(Delta delta, Map<URI, IStorage> toBeAddedOrUpdated) {
+	private IResourceDescription createNew(Delta delta, Set<URI> toBeAddedOrUpdated) {
 		if (delta.getNew() == null)
 			return null;
 		IResourceDescription toCopy = delta.getNew();
 		ResourceDescriptionImpl copied = BuilderStateUtil.create(toCopy);
-		IStorage storage = toBeAddedOrUpdated.get(toCopy.getURI());
-		if (storage == null) {
-			ResourceDescriptionImpl resourceDescriptionImpl = (ResourceDescriptionImpl) delta.getOld();
-			if (resourceDescriptionImpl != null)
-				storage = resourceDescriptionImpl.getStorage();
-		}
-		copied.setStorage(storage);
 		return copied;
 	}
 

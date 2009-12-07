@@ -14,6 +14,8 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.core.builder.impl.IStorageUtilTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.builder.impl.JarWalkerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.builder.impl.JavaProjectLanguageBuilderTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.core.resource.Storage2UriMapperJdtImplTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.core.resource.Storage2UriMapperTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.util.BundleClasspathUriResolverTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.util.JdtClasspathUriResolverTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.util.JdtUtilTest.class);

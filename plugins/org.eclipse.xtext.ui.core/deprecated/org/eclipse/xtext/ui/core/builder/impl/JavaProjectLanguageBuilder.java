@@ -38,6 +38,7 @@ import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.ui.core.resource.JarWalker;
 import org.eclipse.xtext.ui.core.util.JdtClasspathUriResolver;
 import org.eclipse.xtext.ui.core.util.JdtURIUtil;
 import org.eclipse.xtext.ui.core.util.JdtUtil;
@@ -218,14 +219,15 @@ public class JavaProjectLanguageBuilder extends AbstractLanguageBuilder implemen
 			return;
 		if (root.isArchive()) {
 			try {
-				new JarWalker() {
+				new JarWalker<Void>() {
 					@Override
-					protected void handle(IJarEntryResource jarEntry) {
+					protected Void handle(IJarEntryResource jarEntry) {
 						if (isManaged(jarEntry)) {
 							build(jarEntry);
 						}
+						return null;
 					}
-				}.traverse(root);
+				}.traverse(root,false);
 			} catch (JavaModelException e) {
 				throw new WrappedException(e);
 			}

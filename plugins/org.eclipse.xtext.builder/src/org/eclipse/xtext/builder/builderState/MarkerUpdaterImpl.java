@@ -17,10 +17,10 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.ui.core.editor.validation.MarkerCreator;
+import org.eclipse.xtext.ui.core.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
@@ -38,6 +38,9 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 	
 	@Inject 
 	private MarkerCreator markerCreator; 
+	
+	@Inject
+	private IStorage2UriMapper mapper;
 
 	private final static Logger log = Logger.getLogger(MarkerUpdaterImpl.class);
 
@@ -45,12 +48,14 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 			IProgressMonitor monitor) {
 		for (Delta delta : resourceDescriptionDeltas) {
 			if (delta.getNew() != null) {
-				IStorage storage = ((ResourceDescriptionImpl) delta.getNew()).getStorage();
-				if (storage instanceof IFile) {
-					IFile file = (IFile) storage;
-					if (!file.isReadOnly()) {
-						Resource resource = resourceSet.getResource(delta.getNew().getURI(), true);
-						addMarkers(file, resource, monitor);
+				Iterable<IStorage> storages = mapper.getStorages(delta.getNew().getURI());
+				for (IStorage storage : storages) {
+					if (storage instanceof IFile) {
+						IFile file = (IFile) storage;
+						if (!file.isReadOnly()) {
+							Resource resource = resourceSet.getResource(delta.getNew().getURI(), true);
+							addMarkers(file, resource, monitor);
+						}
 					}
 				}
 			}

@@ -2,14 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStateFactory.java,v 1.6 2009/12/02 16:38:29 sefftinge Exp $
+ * $Id: BuilderStateFactory.java,v 1.7 2009/12/07 15:38:01 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState;
 
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,7 +35,7 @@ public interface BuilderStateFactory extends EFactory {
 	 * @return a new object of class '<em>Resource Description</em>'.
 	 * @generated
 	 */
-	IStorageAwareResourceDescription createResourceDescription();
+	IResourceDescription createResourceDescription();
 
 	/**
 	 * Returns a new object of class '<em>EObject Description</em>'.

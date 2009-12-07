@@ -13,6 +13,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.builder.impl.ToBeBuilt;
 import org.eclipse.xtext.builder.impl.ToBeBuiltComputer;
+import org.eclipse.xtext.ui.core.resource.JarWalker;
 
 public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 	
@@ -26,14 +27,15 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 			IPackageFragmentRoot[] roots = javaProject.getPackageFragmentRoots();
 			for (IPackageFragmentRoot root : roots) {
 				if (shouldHandle(root)) {
-					new JarWalker() {
+					new JarWalker<Void>() {
 						@Override
-						protected void handle(IJarEntryResource jarEntry) {
+						protected Void handle(IJarEntryResource jarEntry) {
 							URI uri = getUri(jarEntry);
 							if (uri != null)
-								toBeBuilt.getToBeUpdated().put(uri, jarEntry);
+								toBeBuilt.getToBeUpdated().add(uri);
+							return null;
 						}
-					}.traverse(root);
+					}.traverse(root,false);
 				}
 			}
 		}

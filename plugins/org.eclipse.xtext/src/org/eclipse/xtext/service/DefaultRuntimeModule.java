@@ -9,6 +9,7 @@ package org.eclipse.xtext.service;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.common.services.DefaultTerminalConverters;
 import org.eclipse.xtext.formatting.IFormatter;
@@ -40,6 +41,7 @@ import org.eclipse.xtext.resource.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceFactory;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
@@ -159,6 +161,10 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 
 	public Class<? extends XtextResource> bindXtextResource() {
 		return LazyLinkingResource.class;
+	}
+	
+	public Class<? extends ResourceSet> bindResourceSet() {
+		return XtextResourceSet.class;
 	}
 	
 }

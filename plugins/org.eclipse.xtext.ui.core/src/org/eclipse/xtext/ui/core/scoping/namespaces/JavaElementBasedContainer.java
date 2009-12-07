@@ -14,7 +14,7 @@ import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionsBasedContainer;
-import org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription;
+import org.eclipse.xtext.ui.core.resource.IStorage2UriMapper;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -22,25 +22,30 @@ import org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription;
 public class JavaElementBasedContainer extends ResourceDescriptionsBasedContainer {
 
 	private final IPackageFragmentRoot fragmentRoot;
+	private IStorage2UriMapper mapper;
 	
-	public JavaElementBasedContainer(IResourceDescriptions descriptions, IPackageFragmentRoot fragmentRoot) {
+	public JavaElementBasedContainer(IResourceDescriptions descriptions, IPackageFragmentRoot fragmentRoot, IStorage2UriMapper mapper) {
 		super(descriptions);
 		this.fragmentRoot = fragmentRoot;
+		this.mapper = mapper;
+		
 	}
 	
 	@Override
 	protected boolean contains(IResourceDescription input) {
-		if (!(input instanceof IStorageAwareResourceDescription)) {
-			throw new IllegalArgumentException("input cannot be filtered: " + input);
-		}
-		IStorage storage = ((IStorageAwareResourceDescription) input).getStorage();
-		if (storage instanceof IJarEntryResource) {
-			IPackageFragmentRoot other = ((IJarEntryResource) storage).getPackageFragmentRoot();
-			return fragmentRoot.equals(other);
-		}
-		if (storage instanceof IFile) {
-			if (!fragmentRoot.isExternal())
-				return fragmentRoot.getResource().getFullPath().isPrefixOf(storage.getFullPath());
+		Iterable<IStorage> storages = mapper.getStorages(input.getURI());
+		for (IStorage storage : storages) {
+			if (storage instanceof IJarEntryResource) {
+				IPackageFragmentRoot other = ((IJarEntryResource) storage).getPackageFragmentRoot();
+				if (fragmentRoot.equals(other))
+					return true;
+			}
+			if (storage instanceof IFile) {
+				if (!fragmentRoot.isExternal()) {
+					if (fragmentRoot.getResource().getFullPath().isPrefixOf(storage.getFullPath()))
+						return true;
+				}
+			}
 		}
 		return false;
 	}

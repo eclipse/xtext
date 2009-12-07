@@ -26,9 +26,10 @@ import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription;
+import org.eclipse.xtext.ui.core.resource.IStorage2UriMapper;
 
 import com.google.common.collect.Lists;
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -37,6 +38,9 @@ import com.google.common.collect.Lists;
 public class JavaProjectAwareContainerManager implements IContainer.Manager {
 
 	private final static Logger log = Logger.getLogger(JavaProjectAwareContainerManager.class);
+	
+	@Inject
+	private IStorage2UriMapper mapper;
 
 	public IContainer getContainer(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
 		IPackageFragmentRoot root = getPackageFragmentRoot(desc.getURI(), resourceDescriptions);
@@ -53,12 +57,12 @@ public class JavaProjectAwareContainerManager implements IContainer.Manager {
 		return getVisibleContainers(javaProject, resourceDescriptions);
 	}
 
-	public IContainer createContainer(IPackageFragmentRoot root, IResourceDescriptions resourceDescriptions) {
-		JavaElementBasedContainer result = new JavaElementBasedContainer(resourceDescriptions, root);
+	protected IContainer createContainer(IPackageFragmentRoot root, IResourceDescriptions resourceDescriptions) {
+		JavaElementBasedContainer result = new JavaElementBasedContainer(resourceDescriptions, root,mapper);
 		return result;
 	}
 
-	public List<IContainer> getVisibleContainers(IJavaProject project, IResourceDescriptions resourceDescriptions) {
+	protected List<IContainer> getVisibleContainers(IJavaProject project, IResourceDescriptions resourceDescriptions) {
 		try {
 			IPackageFragmentRoot[] roots = project.getAllPackageFragmentRoots();
 			List<IContainer> result = Lists.newArrayListWithExpectedSize(roots.length);
@@ -72,9 +76,9 @@ public class JavaProjectAwareContainerManager implements IContainer.Manager {
 		}
 	}
 
-	public IPackageFragmentRoot getPackageFragmentRoot(URI uri, IResourceDescriptions resourceDescriptions) {
+	protected IPackageFragmentRoot getPackageFragmentRoot(URI uri, IResourceDescriptions resourceDescriptions) {
 		if (uri.isArchive()) {
-			return getJarWithEntry(uri, resourceDescriptions);
+			return getJarWithEntry(uri);
 		}
 		final IFile file = getWorkspaceRoot().getFile(new Path(uri.toPlatformString(true)));
 		if (file == null) {
@@ -83,7 +87,7 @@ public class JavaProjectAwareContainerManager implements IContainer.Manager {
 		return getJavaElement(file);
 	}
 
-	private IPackageFragmentRoot getJavaElement(final IFile file) {
+	protected IPackageFragmentRoot getJavaElement(final IFile file) {
 		IJavaProject jp = JavaCore.create(file.getProject());
 		if (!jp.exists())
 			return null;
@@ -103,10 +107,9 @@ public class JavaProjectAwareContainerManager implements IContainer.Manager {
 		return null;
 	}
 
-	public IPackageFragmentRoot getJarWithEntry(URI uri, IResourceDescriptions resourceDescriptions) {
-		IResourceDescription persistentDescription = resourceDescriptions.getResourceDescription(uri);
-		if (persistentDescription instanceof IStorageAwareResourceDescription) {
-			IStorage storage = ((IStorageAwareResourceDescription) persistentDescription).getStorage();
+	protected IPackageFragmentRoot getJarWithEntry(URI uri) {
+		Iterable<IStorage> storages = mapper.getStorages(uri);
+		for (IStorage storage : storages) {
 			if (storage instanceof IJarEntryResource) {
 				IPackageFragmentRoot fragmentRoot = ((IJarEntryResource) storage).getPackageFragmentRoot();
 				if (fragmentRoot != null)
@@ -116,7 +119,7 @@ public class JavaProjectAwareContainerManager implements IContainer.Manager {
 		throw new IllegalArgumentException("uri does not represent a valid javaElement");
 	}
 
-	private IWorkspaceRoot getWorkspaceRoot() {
+	protected IWorkspaceRoot getWorkspaceRoot() {
 		return ResourcesPlugin.getWorkspace().getRoot();
 	}
 

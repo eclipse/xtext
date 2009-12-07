@@ -10,22 +10,16 @@ package org.eclipse.xtext.builder.builderState;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterImpl;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescription.Event.Listener;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
-import org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription;
 
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
@@ -36,52 +30,13 @@ import com.google.inject.Provider;
  */
 public class ShadowingResourceDescriptions implements IResourceDescriptions, IResourceDescriptions.IContextAware {
 
-	/**
-	 * @author Sven Efftinge - Initial contribution and API
-	 */
-	protected static class StorageAwareResourceDescription implements IStorageAwareResourceDescription {
-
-		private IResourceDescription delegate;
-		private IStorage storage;
-		
-		public StorageAwareResourceDescription(IStorage storage, IResourceDescription delegate) {
-			super();
-			this.storage = storage;
-			this.delegate = delegate;
-		}
-		public Iterable<IEObjectDescription> getExportedObjects() {
-			return delegate.getExportedObjects();
-		}
-		public Iterable<IEObjectDescription> getExportedObjects(EClass clazz, String name) {
-			return delegate.getExportedObjects(clazz, name);
-		}
-		public Iterable<IEObjectDescription> getExportedObjects(EClass clazz) {
-			return delegate.getExportedObjects(clazz);
-		}
-		public Iterable<IEObjectDescription> getExportedObjectsForEObject(EObject object) {
-			return delegate.getExportedObjectsForEObject(object);
-		}
-		public Iterable<String> getImportedNames() {
-			return delegate.getImportedNames();
-		}
-		public URI getURI() {
-			return delegate.getURI();
-		}
-		public Iterable<IReferenceDescription> getReferenceDescriptions() {
-			return delegate.getReferenceDescriptions();
-		}
-		public IStorage getStorage() {
-			return storage;
-		}
-	}
-
 	public static class Adapter extends AdapterImpl {
 
 		private IResourceDescriptions toBeShadowed;
 		private Set<URI> deletedUris;
-		private Map<URI, IStorage> toBeUpdated;
+		private Set<URI> toBeUpdated;
 
-		public Adapter(IResourceDescriptions toBeShadowed, Map<URI,IStorage> toBeUpdated, Set<URI> deletedUris) {
+		public Adapter(IResourceDescriptions toBeShadowed, Set<URI> toBeUpdated, Set<URI> deletedUris) {
 			super();
 			this.toBeShadowed = toBeShadowed;
 			this.deletedUris = deletedUris;
@@ -96,7 +51,7 @@ public class ShadowingResourceDescriptions implements IResourceDescriptions, IRe
 			return deletedUris;
 		}
 		
-		public Map<URI, IStorage> getToBeUpdated() {
+		public Set<URI> getToBeUpdated() {
 			return toBeUpdated;
 		}
 
@@ -128,11 +83,10 @@ public class ShadowingResourceDescriptions implements IResourceDescriptions, IRe
 
 	public void initialize(IResourceDescriptions shadowing, Adapter adapter) {
 		this.resourceDescriptions = Maps.newHashMap();
-		for (Map.Entry<URI,IStorage> toBeUpdated : adapter.getToBeUpdated().entrySet()) {
-			URI uri = toBeUpdated.getKey();
+		for (URI uri : adapter.getToBeUpdated()) {
 			if (!resourceDescriptions.containsKey(uri)) {
 				IResourceDescription description = shadowing.getResourceDescription(uri);
-				resourceDescriptions.put(uri, new StorageAwareResourceDescription(toBeUpdated.getValue(),description));
+				resourceDescriptions.put(uri, description);
 			}
 		}
 		Iterable<? extends IResourceDescription> descriptions = adapter.getToBeShadowed().getAllResourceDescriptions();

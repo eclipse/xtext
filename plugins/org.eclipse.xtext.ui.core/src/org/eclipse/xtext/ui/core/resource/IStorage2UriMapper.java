@@ -5,30 +5,20 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.builderState.impl;
+package org.eclipse.xtext.ui.core.resource;
 
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.emf.common.util.URI;
 
 import com.google.inject.ImplementedBy;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@ImplementedBy(StorageUtilImpl.class)
-public interface IStorageUtil {
-
-	public String toExternalString(IStorage storage);
-
-	public IStorage getStorage(String externalString);
+@ImplementedBy(Storage2UriMapperJavaImpl.class)
+public interface IStorage2UriMapper {
 	
-	static class Access {
-		static IStorageUtil storageUtil;
-
-		public static void setStorageUtil(IStorageUtil instance) {
-			if (storageUtil!=null)
-				throw new IllegalStateException("storageUril already set!");
-			storageUtil = instance;
-		}
-	}
-
+	Iterable<IStorage> getStorages(URI uri);
+	
+	URI getUri(IStorage storage);
 }

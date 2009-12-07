@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStateFactoryImpl.java,v 1.6 2009/12/02 16:38:29 sefftinge Exp $
+ * $Id: BuilderStateFactoryImpl.java,v 1.7 2009/12/07 15:37:56 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -19,7 +19,7 @@ import org.eclipse.xtext.builder.builderState.BuilderStateFactory;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.ui.core.resource.IStorageAwareResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
 
 /**
  * <!-- begin-user-doc -->
@@ -113,7 +113,7 @@ public class BuilderStateFactoryImpl extends EFactoryImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IStorageAwareResourceDescription createResourceDescription() {
+	public IResourceDescription createResourceDescription() {
 		ResourceDescriptionImpl resourceDescription = new ResourceDescriptionImpl();
 		return resourceDescription;
 	}
