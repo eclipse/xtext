@@ -24,7 +24,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="«executableExtensionFactory()»:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="«executableExtensionFactory()»:org.eclipse.xtext.resource.IResourceFactory"
 			type="«ext»">
 		</parser>
 	</extension>
