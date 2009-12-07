@@ -10,7 +10,6 @@ package org.eclipse.xtext.generator.builder;
 import java.util.Set;
 
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.builder.builderState.ShadowingResourceDescriptions;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
@@ -52,8 +51,9 @@ public class BuilderIntegrationFragment extends AbstractGeneratorFragment {
 					"binder.bind(" + IResourceDescriptions.class.getName() + ".class"
 							+ ").annotatedWith(com.google.inject.name.Names.named("
 							+ DefaultGlobalScopeProvider.class.getName() + ".NAMED_BUILDER_SCOPE)).to("
-							+ ShadowingResourceDescriptions.class.getName() + ".class)")
+							+ "org.eclipse.xtext.builder.builderState.ShadowingResourceDescriptions.class)")
 			.addTypeToType(IContainer.Manager.class.getName(), "org.eclipse.xtext.ui.core.scoping.namespaces.ProjectAwareContainerManager")
+			.addTypeToType("org.eclipse.xtext.ui.core.editor.IXtextEditorCallback", "org.eclipse.xtext.builder.nature.NatureAddingEditorCallback")
 			.getBindings();
 	}
 
