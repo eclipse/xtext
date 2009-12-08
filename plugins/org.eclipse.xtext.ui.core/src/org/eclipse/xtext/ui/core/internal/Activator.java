@@ -171,5 +171,5 @@ public class Activator extends AbstractUIPlugin {
 	public IDirtyStateManager getDirtyStateManager() {
 		return dirtyStateManager;
 	}
-
+	
 }

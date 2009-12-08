@@ -12,9 +12,6 @@ import java.util.Collection;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
-import org.eclipse.xtext.ui.core.editor.IDirtyStateManager;
-
-import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -31,15 +28,6 @@ public class StateChangeEventBroker extends AbstractResourceDescriptionChangeEve
 		public IStateChangeEventBroker getSender() {
 			return (IStateChangeEventBroker) super.getSender();
 		}
-	}
-	
-	@Inject
-	public StateChangeEventBroker(IDirtyStateManager instance) {
-		registerAtDirtyStateManager(instance);
-	}
-
-	public void registerAtDirtyStateManager(IDirtyStateManager manager) {
-		manager.addListener(this);
 	}
 	
 	public void descriptionsChanged(IResourceDescription.Event event) {

@@ -12,7 +12,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IStateChangeEventBroker extends IResourceDescription.Event.Source {
+public interface IStateChangeEventBroker extends IResourceDescription.Event.Source, IResourceDescription.Event.Listener {
 	
 	interface Event extends IResourceDescription.Event {
 		

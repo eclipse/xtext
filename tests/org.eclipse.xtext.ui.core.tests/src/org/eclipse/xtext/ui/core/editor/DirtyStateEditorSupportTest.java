@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.IContainer.Manager;
@@ -27,6 +28,7 @@ import org.eclipse.xtext.ui.core.editor.model.IXtextModelListener;
 import org.eclipse.xtext.ui.core.notification.StateChangeEventBroker;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 /**
@@ -62,7 +64,8 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		dirtyStateSupport = new DirtyStateEditorSupport();
 		dirtyStateSupport.setConcurrentEditingWarningDialog(this);
 		dirtyStateManager = new DirtyStateManager();
-		stateChangeEventBroker = new StateChangeEventBroker(dirtyStateManager);
+		stateChangeEventBroker = new StateChangeEventBroker();
+		dirtyStateManager.addListener(stateChangeEventBroker);
 		dirtyStateSupport.setDirtyStateManager(dirtyStateManager);
 		dirtyStateSupport.setStateChangeEventBroker(stateChangeEventBroker);
 		dirtyResource = new DocumentBasedDirtyResource();
@@ -313,11 +316,15 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 	}
 
 	public IResourceDescription getResourceDescription(Resource resource) {
-		return new DefaultResourceDescription(resource, new SimpleNameProvider());
+		return new DefaultResourceDescription(resource, new SimpleNameProvider()) {
+			@Override
+			public Iterable<IEObjectDescription> getExportedObjects() {
+				return Iterables.emptyIterable();
+			}
+		};
 	}
 
 	public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {
-		fail("Unexpected call");
 		return false;
 	}
 	

@@ -149,14 +149,16 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 	
 	public void testGetDescription_02() {
 		dirtyResource.connect(this);
-		assertSame(this, dirtyResource.getDescription());
+		assertNotSame(this, dirtyResource.getDescription());
+		assertSame(this.getURI(), dirtyResource.getDescription().getURI());
 	}
 	
 	public void testGetDescription_03() {
 		dirtyResource.connect(this);
 		description = null;
 		assertNull(getResourceDescription(resource));
-		assertSame(this, dirtyResource.getDescription());
+		assertNotSame(this, dirtyResource.getDescription());
+		assertSame(this.getURI(), dirtyResource.getDescription().getURI());
 	}
 	
 	public void testCopyState() {
@@ -211,8 +213,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 	}
 	
 	public Iterable<IEObjectDescription> getExportedObjects() {
-		fail("Unexpected call");
-		return null;
+		return Iterables.emptyIterable();
 	}
 	
 	public Iterable<String> getImportedNames() {

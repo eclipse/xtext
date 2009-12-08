@@ -49,7 +49,8 @@ public class DocumentBasedDirtyResource implements IDirtyResource {
 	}
 	
 	public synchronized void copyState(XtextResource resource) {
-		description = resource.getResourceServiceProvider().getResourceDescriptionManager().getResourceDescription(resource);
+		final IResourceDescription original = resource.getResourceServiceProvider().getResourceDescriptionManager().getResourceDescription(resource);
+		description = new StatefulResourceDescription(original);
 		content = getUnderlyingDocument().get();
 	}
 	
