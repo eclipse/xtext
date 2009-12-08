@@ -10,10 +10,15 @@ package org.eclipse.xtext.builder;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.builderState.PersistableResourceDescriptionsImpl;
+import org.eclipse.xtext.builder.impl.DirtyStateAwareResourceDescriptions;
 import org.eclipse.xtext.builder.impl.XtextBuilder;
 import org.eclipse.xtext.resource.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.scoping.namespaces.SimpleNameProvider;
+import org.eclipse.xtext.ui.core.editor.DirtyStateManagerProvider;
+import org.eclipse.xtext.ui.core.editor.IDirtyStateManager;
+import org.eclipse.xtext.ui.core.notification.IStateChangeEventBroker;
+import org.eclipse.xtext.ui.core.notification.StateChangeEventBrokerProvider;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Scopes;
@@ -27,8 +32,10 @@ public class BuilderModule extends AbstractModule {
 	protected void configure() {
 		bindIncrementalProjectBuilder();
 		bindQualifiedNameProvider();
-		bind(IResourceDescriptions.class).to(IBuilderState.class);
 		bind(IBuilderState.class).to(PersistableResourceDescriptionsImpl.class).in(Scopes.SINGLETON);
+		bind(IResourceDescriptions.class).to(DirtyStateAwareResourceDescriptions.class).in(Scopes.SINGLETON);
+		bind(IStateChangeEventBroker.class).toProvider(StateChangeEventBrokerProvider.class);
+		bind(IDirtyStateManager.class).toProvider(DirtyStateManagerProvider.class);
 	}
 
 	protected void bindQualifiedNameProvider() {

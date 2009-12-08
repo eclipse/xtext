@@ -92,7 +92,9 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	
 	private IDirtyStateEditorSupportClient currentClient;
 	
-	private boolean isDirty;
+	private volatile boolean isDirty;
+	
+	private volatile boolean notifying;
 	
 	public void initializeDirtyStateSupport(IDirtyStateEditorSupportClient client) {
 		if (this.currentClient != null)
@@ -167,7 +169,9 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		isDirty = false;
 	}
 	
-	public void descriptionsChanged(IResourceDescription.Event event) {
+	public void descriptionsChanged(final IResourceDescription.Event event) {
+		if (currentClient == null)
+			return;
 		final Set<URI> uris = Sets.newHashSet();
 		for(IResourceDescription.Delta delta: event.getDeltas()) {
 			if (delta.getNew() != null)
@@ -176,11 +180,20 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 				uris.add(delta.getOld().getURI());
 		}
 		final IXtextDocument document = currentClient.getDocument();
+		final boolean[] isReparseRequired = new boolean[] {false};
 		final Collection<Resource> affectedResources = document.readOnly(new IUnitOfWork<Collection<Resource>, XtextResource>() {
 			public Collection<Resource> exec(XtextResource resource) throws Exception {
 				if (resource == null || resource.getResourceSet() == null)
 					return null;
 				Collection<Resource> affectedResources = collectAffectedResources(resource, uris);
+				IResourceDescription.Manager resourceDescriptionManager = resource.getResourceServiceProvider().getResourceDescriptionManager();
+				IResourceDescription description = resourceDescriptionManager.getResourceDescription(resource);
+				for(IResourceDescription.Delta delta: event.getDeltas()) {
+					if (resourceDescriptionManager.isAffected(delta, description)) {
+						isReparseRequired[0] = true;
+						break;
+					}
+				}
 				return affectedResources;
 			}
 			
@@ -203,14 +216,16 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 				return result;
 			}
 		});
-		if (affectedResources != null && !affectedResources.isEmpty()) {
+		if (affectedResources != null && !affectedResources.isEmpty() || isReparseRequired[0]) {
 			document.modify(new IUnitOfWork.Void<XtextResource>() {
 				@Override
 				public void process(XtextResource resource) throws Exception {
 					ResourceSet resourceSet = resource.getResourceSet();
-					for(Resource affectedResource: affectedResources) {
-						affectedResource.unload();
-						resourceSet.getResources().remove(affectedResource);
+					if (affectedResources != null) {
+						for(Resource affectedResource: affectedResources) {
+							affectedResource.unload();
+							resourceSet.getResources().remove(affectedResource);
+						}
 					}
 					resource.reparse(document.get());
 				}
@@ -221,10 +236,17 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	public void modelChanged(XtextResource resource) {
 		if (resource == null)
 			return;
-		if (isDirty || dirtyStateManager.manageDirtyState(dirtyResource)) {
-			synchronized (dirtyResource) {
-				dirtyResource.copyState(resource);
-				dirtyStateManager.announceDirtyStateChanged(dirtyResource);
+		if (isDirty || dirtyStateManager.manageDirtyState(dirtyResource) && !notifying) {
+			synchronized (dirtyStateManager) {
+				if (!notifying) {
+					notifying = true;
+					try {
+						dirtyResource.copyState(resource);
+						dirtyStateManager.announceDirtyStateChanged(dirtyResource);
+					} finally {
+						notifying = false;
+					}
+				}
 			}
 		}
 	}

@@ -7,19 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder;
 
-import org.eclipse.xtext.builder.internal.Activator;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.builder.internal.Activator;
 
 import com.google.inject.Provider;
 
 /**
- * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class BuilderAccess {
-	public static Provider<IResourceDescriptions> getResourceDescriptions() {
+public class GlobalResourceDescriptionsAccess {
+
+	public static Provider<IResourceDescriptions> getDirtyResourceDescriptions() {
 		return new Provider<IResourceDescriptions>() {
 			public IResourceDescriptions get() {
 				return Activator.getDefault().getInjector().getInstance(IResourceDescriptions.class);
-			}};
+			}
+		};
 	}
+	
 }

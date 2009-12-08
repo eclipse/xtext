@@ -60,7 +60,7 @@ public class BuilderIntegrationFragment extends AbstractGeneratorFragment {
 					IResourceDescriptions.class.getName(),
 					"binder.bind(" + IResourceDescriptions.class.getName() + ".class"
 							+ ").toProvider("
-							+ "org.eclipse.xtext.builder.BuilderAccess.getResourceDescriptions())")
+							+ "org.eclipse.xtext.builder.GlobalResourceDescriptionsAccess.getDirtyResourceDescriptions()).asEagerSingleton()")
 			.addTypeToType(IContainer.Manager.class.getName(), "org.eclipse.xtext.ui.core.scoping.namespaces.JavaProjectAwareContainerManager")
 			.addTypeToType("org.eclipse.xtext.ui.core.editor.IXtextEditorCallback", "org.eclipse.xtext.builder.nature.NatureAddingEditorCallback")
 			.getBindings();

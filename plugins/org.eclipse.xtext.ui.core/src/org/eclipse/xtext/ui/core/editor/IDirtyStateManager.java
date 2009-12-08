@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.IResourceDescription;
 
@@ -60,5 +61,7 @@ public interface IDirtyStateManager extends IExternalContentSupport.IExternalCon
 	 * thread.
 	 */
 	void announceDirtyStateChanged(IDirtyResource dirtyResource);
+	
+	IResourceDescription getDirtyResourceDescription(URI uri);
 	
 }

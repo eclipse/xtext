@@ -5,19 +5,23 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.notification;
+package org.eclipse.xtext.builder.impl;
 
-import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.builder.builderState.IBuilderState;
+import org.eclipse.xtext.builder.internal.Activator;
+
+import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IStateChangeEventBroker extends IResourceDescription.Event.Source, IResourceDescription.Event.Listener {
-	
-	interface Event extends IResourceDescription.Event {
-		
-		IStateChangeEventBroker getSender();
-		
+public class BuilderStateAccess {
+
+	public static Provider<IBuilderState> getBuilderState() {
+		return new Provider<IBuilderState>() {
+			public IBuilderState get() {
+				return Activator.getDefault().getInjector().getInstance(IBuilderState.class);
+			}
+		};
 	}
-	
 }

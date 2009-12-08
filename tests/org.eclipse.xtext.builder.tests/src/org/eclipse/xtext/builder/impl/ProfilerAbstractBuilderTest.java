@@ -17,7 +17,6 @@ import junit.framework.TestCase;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.xtext.builder.BuilderAccess;
 import org.eclipse.xtext.builder.nature.XtextNature;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -78,7 +77,7 @@ public class ProfilerAbstractBuilderTest extends TestCase implements IResourceDe
 	}
 
 	private IResourceDescriptions getBuilderState() {
-		return BuilderAccess.getResourceDescriptions().get();
+		return BuilderStateAccess.getBuilderState().get();
 	}
 
 	private int countResourcesInIndex() {
