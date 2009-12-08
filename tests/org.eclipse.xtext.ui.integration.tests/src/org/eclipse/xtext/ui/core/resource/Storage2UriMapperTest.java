@@ -22,7 +22,12 @@ public class Storage2UriMapperTest extends TestCase {
 		createProject("foo");
 		IFile file = createFile("foo/bar/baz.txt", "");
 		
-		Storage2UriMapperImpl mapper = new Storage2UriMapperImpl();
+		Storage2UriMapperImpl mapper = new Storage2UriMapperImpl() {
+			@Override
+			protected boolean isValidUri(URI uri) {
+				return true;
+			}
+		};
 		URI uri = mapper.getUri(file);
 		assertEquals(URI.createPlatformResourceURI(file.getFullPath().toString(),true),uri);
 		assertEquals(file,mapper.getStorages(uri).iterator().next());
