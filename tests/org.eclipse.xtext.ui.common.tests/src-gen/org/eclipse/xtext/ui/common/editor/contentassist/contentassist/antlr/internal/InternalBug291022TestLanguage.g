@@ -57,7 +57,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.Bug291022TestLa
 
 
 // Entry rule entryRuleRootModel
-entryRuleRootModel :
+entryRuleRootModel 
+:
 { before(grammarAccess.getRootModelRule()); }
 	 ruleRootModel
 { after(grammarAccess.getRootModelRule()); } 
@@ -69,7 +70,7 @@ ruleRootModel
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getRootModelAccess().getGroup()); }
 (rule__RootModel__Group__0)?
@@ -84,7 +85,8 @@ finally {
 
 
 // Entry rule entryRuleModelElement
-entryRuleModelElement :
+entryRuleModelElement 
+:
 { before(grammarAccess.getModelElementRule()); }
 	 ruleModelElement
 { after(grammarAccess.getModelElementRule()); } 
@@ -96,7 +98,7 @@ ruleModelElement
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getModelElementAccess().getGroup()); }
 (rule__ModelElement__Group__0)
@@ -111,7 +113,8 @@ finally {
 
 
 // Entry rule entryRuleModelAttribute
-entryRuleModelAttribute :
+entryRuleModelAttribute 
+:
 { before(grammarAccess.getModelAttributeRule()); }
 	 ruleModelAttribute
 { after(grammarAccess.getModelAttributeRule()); } 
@@ -123,7 +126,7 @@ ruleModelAttribute
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getModelAttributeAccess().getAlternatives()); }
 (rule__ModelAttribute__Alternatives)
@@ -138,7 +141,8 @@ finally {
 
 
 // Entry rule entryRuleAttribute
-entryRuleAttribute :
+entryRuleAttribute 
+:
 { before(grammarAccess.getAttributeRule()); }
 	 ruleAttribute
 { after(grammarAccess.getAttributeRule()); } 
@@ -150,7 +154,7 @@ ruleAttribute
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getAttributeAccess().getGroup()); }
 (rule__Attribute__Group__0)

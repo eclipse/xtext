@@ -69,7 +69,8 @@ import org.eclipse.xtext.parser.assignments.services.Bug287184TestLanguageGramma
 
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] :
+entryRuleModel returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
@@ -183,7 +184,8 @@ ruleModel returns [EObject current=null]
 )
 
 )
-)+);
+)+)
+;
 
 
 
@@ -192,7 +194,8 @@ ruleModel returns [EObject current=null]
 
 
 // Entry rule entryRuleDetail
-entryRuleDetail returns [EObject current=null] :
+entryRuleDetail returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getDetailRule(), currentNode); }
 	 iv_ruleDetail=ruleDetail 
 	 { $current=$iv_ruleDetail.current; } 
@@ -310,14 +313,16 @@ ruleDetail returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleAssociatedDetail
-entryRuleAssociatedDetail returns [EObject current=null] :
+entryRuleAssociatedDetail returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getAssociatedDetailRule(), currentNode); }
 	 iv_ruleAssociatedDetail=ruleAssociatedDetail 
 	 { $current=$iv_ruleAssociatedDetail.current; } 
@@ -361,14 +366,16 @@ ruleAssociatedDetail returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getAssociatedDetailAccess().getSemicolonKeyword_2(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleFQN
-entryRuleFQN returns [String current=null] :
+entryRuleFQN returns [String current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getFQNRule(), currentNode); } 
 	 iv_ruleFQN=ruleFQN 
 	 { $current=$iv_ruleFQN.current.getText(); }  

@@ -75,7 +75,8 @@ import org.eclipse.xtext.parser.antlr.services.Bug289524TestLanguageGrammarAcces
 
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] :
+entryRuleModel returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
@@ -131,14 +132,16 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)*);
+)*)
+;
 
 
 
 
 
 // Entry rule entryRuleModelElement
-entryRuleModelElement returns [EObject current=null] :
+entryRuleModelElement returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelElementRule(), currentNode); }
 	 iv_ruleModelElement=ruleModelElement 
 	 { $current=$iv_ruleModelElement.current; } 
@@ -233,14 +236,16 @@ ruleModelElement returns [EObject current=null]
 	}
 
 )
-))*))+);
+))*))+)
+;
 
 
 
 
 
 // Entry rule entryRuleContained
-entryRuleContained returns [EObject current=null] :
+entryRuleContained returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getContainedRule(), currentNode); }
 	 iv_ruleContained=ruleContained 
 	 { $current=$iv_ruleContained.current; } 
@@ -282,7 +287,8 @@ ruleContained returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 

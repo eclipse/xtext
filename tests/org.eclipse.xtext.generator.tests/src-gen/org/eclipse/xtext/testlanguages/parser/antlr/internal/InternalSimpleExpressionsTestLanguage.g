@@ -69,7 +69,8 @@ import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGra
 
 
 // Entry rule entryRuleSequence
-entryRuleSequence returns [EObject current=null] :
+entryRuleSequence returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getSequenceRule(), currentNode); }
 	 iv_ruleSequence=ruleSequence 
 	 { $current=$iv_ruleSequence.current; } 
@@ -132,14 +133,16 @@ ruleSequence returns [EObject current=null]
 	    }
 
 )
-))*);
+))*)
+;
 
 
 
 
 
 // Entry rule entryRuleAddition
-entryRuleAddition returns [EObject current=null] :
+entryRuleAddition returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getAdditionRule(), currentNode); }
 	 iv_ruleAddition=ruleAddition 
 	 { $current=$iv_ruleAddition.current; } 
@@ -244,14 +247,16 @@ ruleAddition returns [EObject current=null]
 	    }
 
 )
-))*);
+))*)
+;
 
 
 
 
 
 // Entry rule entryRuleMultiplication
-entryRuleMultiplication returns [EObject current=null] :
+entryRuleMultiplication returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getMultiplicationRule(), currentNode); }
 	 iv_ruleMultiplication=ruleMultiplication 
 	 { $current=$iv_ruleMultiplication.current; } 
@@ -356,14 +361,16 @@ ruleMultiplication returns [EObject current=null]
 	    }
 
 )
-))*);
+))*)
+;
 
 
 
 
 
 // Entry rule entryRuleTerm
-entryRuleTerm returns [EObject current=null] :
+entryRuleTerm returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTermRule(), currentNode); }
 	 iv_ruleTerm=ruleTerm 
 	 { $current=$iv_ruleTerm.current; } 
@@ -396,14 +403,16 @@ ruleTerm returns [EObject current=null]
         $current = $this_Parens_1.current; 
         currentNode = currentNode.getParent();
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleAtom
-entryRuleAtom returns [EObject current=null] :
+entryRuleAtom returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getAtomRule(), currentNode); }
 	 iv_ruleAtom=ruleAtom 
 	 { $current=$iv_ruleAtom.current; } 
@@ -441,14 +450,16 @@ ruleAtom returns [EObject current=null]
 	    }
 
 )
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleParens
-entryRuleParens returns [EObject current=null] :
+entryRuleParens returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getParensRule(), currentNode); }
 	 iv_ruleParens=ruleParens 
 	 { $current=$iv_ruleParens.current; } 
@@ -479,7 +490,8 @@ ruleParens returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getParensAccess().getRightParenthesisKeyword_2(), null); 
     }
-);
+)
+;
 
 
 

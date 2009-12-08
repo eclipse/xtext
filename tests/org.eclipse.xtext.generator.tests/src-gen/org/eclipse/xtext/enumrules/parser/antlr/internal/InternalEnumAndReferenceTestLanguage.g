@@ -70,7 +70,8 @@ import org.eclipse.xtext.enumrules.services.EnumAndReferenceTestLanguageGrammarA
 
 
 // Entry rule entryRuleEntityWithEnumAndReference
-entryRuleEntityWithEnumAndReference returns [EObject current=null] :
+entryRuleEntityWithEnumAndReference returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getEntityWithEnumAndReferenceRule(), currentNode); }
 	 iv_ruleEntityWithEnumAndReference=ruleEntityWithEnumAndReference 
 	 { $current=$iv_ruleEntityWithEnumAndReference.current; } 
@@ -150,7 +151,8 @@ ruleEntityWithEnumAndReference returns [EObject current=null]
 	}
 
 )
-));
+))
+;
 
 
 

@@ -71,16 +71,16 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
     // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:60:1: entryRuleWorkflowElement : ruleWorkflowElement EOF ;
     public final void entryRuleWorkflowElement() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:60:26: ( ruleWorkflowElement EOF )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:61:1: ruleWorkflowElement EOF
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:61:1: ( ruleWorkflowElement EOF )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:62:1: ruleWorkflowElement EOF
             {
              before(grammarAccess.getWorkflowElementRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleWorkflowElement_in_entryRuleWorkflowElement60);
+            pushFollow(FollowSets000.FOLLOW_ruleWorkflowElement_in_entryRuleWorkflowElement61);
             ruleWorkflowElement();
             _fsp--;
 
              after(grammarAccess.getWorkflowElementRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleWorkflowElement67); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleWorkflowElement68); 
 
             }
 
@@ -97,23 +97,23 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start ruleWorkflowElement
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:68:1: ruleWorkflowElement : ( ( rule__WorkflowElement__Alternatives ) ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:69:1: ruleWorkflowElement : ( ( rule__WorkflowElement__Alternatives ) ) ;
     public final void ruleWorkflowElement() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:72:2: ( ( ( rule__WorkflowElement__Alternatives ) ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:73:1: ( ( rule__WorkflowElement__Alternatives ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:73:2: ( ( ( rule__WorkflowElement__Alternatives ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:74:1: ( ( rule__WorkflowElement__Alternatives ) )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:73:1: ( ( rule__WorkflowElement__Alternatives ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:74:1: ( rule__WorkflowElement__Alternatives )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:74:1: ( ( rule__WorkflowElement__Alternatives ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:75:1: ( rule__WorkflowElement__Alternatives )
             {
              before(grammarAccess.getWorkflowElementAccess().getAlternatives()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:75:1: ( rule__WorkflowElement__Alternatives )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:75:2: rule__WorkflowElement__Alternatives
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:76:1: ( rule__WorkflowElement__Alternatives )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:76:2: rule__WorkflowElement__Alternatives
             {
-            pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__Alternatives_in_ruleWorkflowElement94);
+            pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__Alternatives_in_ruleWorkflowElement95);
             rule__WorkflowElement__Alternatives();
             _fsp--;
 
@@ -143,19 +143,19 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start entryRuleAttribute
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:87:1: entryRuleAttribute : ruleAttribute EOF ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:88:1: entryRuleAttribute : ruleAttribute EOF ;
     public final void entryRuleAttribute() throws RecognitionException {
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:87:20: ( ruleAttribute EOF )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:88:1: ruleAttribute EOF
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:89:1: ( ruleAttribute EOF )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:90:1: ruleAttribute EOF
             {
              before(grammarAccess.getAttributeRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleAttribute_in_entryRuleAttribute120);
+            pushFollow(FollowSets000.FOLLOW_ruleAttribute_in_entryRuleAttribute122);
             ruleAttribute();
             _fsp--;
 
              after(grammarAccess.getAttributeRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAttribute127); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAttribute129); 
 
             }
 
@@ -172,23 +172,23 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start ruleAttribute
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:95:1: ruleAttribute : ( ( rule__Attribute__Group__0 ) ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:97:1: ruleAttribute : ( ( rule__Attribute__Group__0 ) ) ;
     public final void ruleAttribute() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:99:2: ( ( ( rule__Attribute__Group__0 ) ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:100:1: ( ( rule__Attribute__Group__0 ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:101:2: ( ( ( rule__Attribute__Group__0 ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:102:1: ( ( rule__Attribute__Group__0 ) )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:100:1: ( ( rule__Attribute__Group__0 ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:101:1: ( rule__Attribute__Group__0 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:102:1: ( ( rule__Attribute__Group__0 ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:103:1: ( rule__Attribute__Group__0 )
             {
              before(grammarAccess.getAttributeAccess().getGroup()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:102:1: ( rule__Attribute__Group__0 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:102:2: rule__Attribute__Group__0
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:104:1: ( rule__Attribute__Group__0 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:104:2: rule__Attribute__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Attribute__Group__0_in_ruleAttribute154);
+            pushFollow(FollowSets000.FOLLOW_rule__Attribute__Group__0_in_ruleAttribute156);
             rule__Attribute__Group__0();
             _fsp--;
 
@@ -218,27 +218,27 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start rule__WorkflowElement__Alternatives
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:114:1: rule__WorkflowElement__Alternatives : ( ( ( rule__WorkflowElement__Group_0__0 ) ) | ( ( rule__WorkflowElement__Group_1__0 ) ) );
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:116:1: rule__WorkflowElement__Alternatives : ( ( ( rule__WorkflowElement__Group_0__0 ) ) | ( ( rule__WorkflowElement__Group_1__0 ) ) );
     public final void rule__WorkflowElement__Alternatives() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:118:1: ( ( ( rule__WorkflowElement__Group_0__0 ) ) | ( ( rule__WorkflowElement__Group_1__0 ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:120:1: ( ( ( rule__WorkflowElement__Group_0__0 ) ) | ( ( rule__WorkflowElement__Group_1__0 ) ) )
             int alt1=2;
             alt1 = dfa1.predict(input);
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:119:1: ( ( rule__WorkflowElement__Group_0__0 ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:121:1: ( ( rule__WorkflowElement__Group_0__0 ) )
                     {
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:119:1: ( ( rule__WorkflowElement__Group_0__0 ) )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:120:1: ( rule__WorkflowElement__Group_0__0 )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:121:1: ( ( rule__WorkflowElement__Group_0__0 ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:122:1: ( rule__WorkflowElement__Group_0__0 )
                     {
                      before(grammarAccess.getWorkflowElementAccess().getGroup_0()); 
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:121:1: ( rule__WorkflowElement__Group_0__0 )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:121:2: rule__WorkflowElement__Group_0__0
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:123:1: ( rule__WorkflowElement__Group_0__0 )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:123:2: rule__WorkflowElement__Group_0__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__Group_0__0_in_rule__WorkflowElement__Alternatives190);
+                    pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__Group_0__0_in_rule__WorkflowElement__Alternatives192);
                     rule__WorkflowElement__Group_0__0();
                     _fsp--;
 
@@ -253,16 +253,16 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:125:6: ( ( rule__WorkflowElement__Group_1__0 ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:127:6: ( ( rule__WorkflowElement__Group_1__0 ) )
                     {
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:125:6: ( ( rule__WorkflowElement__Group_1__0 ) )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:126:1: ( rule__WorkflowElement__Group_1__0 )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:127:6: ( ( rule__WorkflowElement__Group_1__0 ) )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:128:1: ( rule__WorkflowElement__Group_1__0 )
                     {
                      before(grammarAccess.getWorkflowElementAccess().getGroup_1()); 
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:127:1: ( rule__WorkflowElement__Group_1__0 )
-                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:127:2: rule__WorkflowElement__Group_1__0
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:129:1: ( rule__WorkflowElement__Group_1__0 )
+                    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:129:2: rule__WorkflowElement__Group_1__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__Group_1__0_in_rule__WorkflowElement__Alternatives208);
+                    pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__Group_1__0_in_rule__WorkflowElement__Alternatives210);
                     rule__WorkflowElement__Group_1__0();
                     _fsp--;
 
@@ -294,23 +294,23 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start rule__WorkflowElement__Group_0__0
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:138:1: rule__WorkflowElement__Group_0__0 : ( ( rule__WorkflowElement__NameAssignment_0_0 ) ) rule__WorkflowElement__Group_0__1 ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:140:1: rule__WorkflowElement__Group_0__0 : ( ( rule__WorkflowElement__NameAssignment_0_0 ) ) rule__WorkflowElement__Group_0__1 ;
     public final void rule__WorkflowElement__Group_0__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:142:1: ( ( ( rule__WorkflowElement__NameAssignment_0_0 ) ) rule__WorkflowElement__Group_0__1 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:143:1: ( ( rule__WorkflowElement__NameAssignment_0_0 ) ) rule__WorkflowElement__Group_0__1
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:144:1: ( ( ( rule__WorkflowElement__NameAssignment_0_0 ) ) rule__WorkflowElement__Group_0__1 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:145:1: ( ( rule__WorkflowElement__NameAssignment_0_0 ) ) rule__WorkflowElement__Group_0__1
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:143:1: ( ( rule__WorkflowElement__NameAssignment_0_0 ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:144:1: ( rule__WorkflowElement__NameAssignment_0_0 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:145:1: ( ( rule__WorkflowElement__NameAssignment_0_0 ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:146:1: ( rule__WorkflowElement__NameAssignment_0_0 )
             {
              before(grammarAccess.getWorkflowElementAccess().getNameAssignment_0_0()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:145:1: ( rule__WorkflowElement__NameAssignment_0_0 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:145:2: rule__WorkflowElement__NameAssignment_0_0
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:147:1: ( rule__WorkflowElement__NameAssignment_0_0 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:147:2: rule__WorkflowElement__NameAssignment_0_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__NameAssignment_0_0_in_rule__WorkflowElement__Group_0__0243);
+            pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__NameAssignment_0_0_in_rule__WorkflowElement__Group_0__0245);
             rule__WorkflowElement__NameAssignment_0_0();
             _fsp--;
 
@@ -321,7 +321,7 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__Group_0__1_in_rule__WorkflowElement__Group_0__0252);
+            pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__Group_0__1_in_rule__WorkflowElement__Group_0__0254);
             rule__WorkflowElement__Group_0__1();
             _fsp--;
 
@@ -344,20 +344,20 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start rule__WorkflowElement__Group_0__1
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:156:1: rule__WorkflowElement__Group_0__1 : ( ( rule__WorkflowElement__AttributesAssignment_0_1 )* ) rule__WorkflowElement__Group_0__2 ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:158:1: rule__WorkflowElement__Group_0__1 : ( ( rule__WorkflowElement__AttributesAssignment_0_1 )* ) rule__WorkflowElement__Group_0__2 ;
     public final void rule__WorkflowElement__Group_0__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:160:1: ( ( ( rule__WorkflowElement__AttributesAssignment_0_1 )* ) rule__WorkflowElement__Group_0__2 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:161:1: ( ( rule__WorkflowElement__AttributesAssignment_0_1 )* ) rule__WorkflowElement__Group_0__2
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:162:1: ( ( ( rule__WorkflowElement__AttributesAssignment_0_1 )* ) rule__WorkflowElement__Group_0__2 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:163:1: ( ( rule__WorkflowElement__AttributesAssignment_0_1 )* ) rule__WorkflowElement__Group_0__2
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:161:1: ( ( rule__WorkflowElement__AttributesAssignment_0_1 )* )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:162:1: ( rule__WorkflowElement__AttributesAssignment_0_1 )*
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:163:1: ( ( rule__WorkflowElement__AttributesAssignment_0_1 )* )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:164:1: ( rule__WorkflowElement__AttributesAssignment_0_1 )*
             {
              before(grammarAccess.getWorkflowElementAccess().getAttributesAssignment_0_1()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:163:1: ( rule__WorkflowElement__AttributesAssignment_0_1 )*
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:165:1: ( rule__WorkflowElement__AttributesAssignment_0_1 )*
             loop2:
             do {
                 int alt2=2;
@@ -370,9 +370,9 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:163:2: rule__WorkflowElement__AttributesAssignment_0_1
+            	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:165:2: rule__WorkflowElement__AttributesAssignment_0_1
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__AttributesAssignment_0_1_in_rule__WorkflowElement__Group_0__1280);
+            	    pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__AttributesAssignment_0_1_in_rule__WorkflowElement__Group_0__1282);
             	    rule__WorkflowElement__AttributesAssignment_0_1();
             	    _fsp--;
 
@@ -389,7 +389,7 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__Group_0__2_in_rule__WorkflowElement__Group_0__1290);
+            pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__Group_0__2_in_rule__WorkflowElement__Group_0__1292);
             rule__WorkflowElement__Group_0__2();
             _fsp--;
 
@@ -412,20 +412,20 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start rule__WorkflowElement__Group_0__2
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:174:1: rule__WorkflowElement__Group_0__2 : ( RULE_END_TAG_SHORT ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:176:1: rule__WorkflowElement__Group_0__2 : ( RULE_END_TAG_SHORT ) ;
     public final void rule__WorkflowElement__Group_0__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:178:1: ( ( RULE_END_TAG_SHORT ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:179:1: ( RULE_END_TAG_SHORT )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:180:1: ( ( RULE_END_TAG_SHORT ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:181:1: ( RULE_END_TAG_SHORT )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:179:1: ( RULE_END_TAG_SHORT )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:180:1: RULE_END_TAG_SHORT
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:181:1: ( RULE_END_TAG_SHORT )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:182:1: RULE_END_TAG_SHORT
             {
              before(grammarAccess.getWorkflowElementAccess().getEND_TAG_SHORTTerminalRuleCall_0_2()); 
-            match(input,RULE_END_TAG_SHORT,FollowSets000.FOLLOW_RULE_END_TAG_SHORT_in_rule__WorkflowElement__Group_0__2318); 
+            match(input,RULE_END_TAG_SHORT,FollowSets000.FOLLOW_RULE_END_TAG_SHORT_in_rule__WorkflowElement__Group_0__2320); 
              after(grammarAccess.getWorkflowElementAccess().getEND_TAG_SHORTTerminalRuleCall_0_2()); 
 
             }
@@ -449,23 +449,23 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start rule__WorkflowElement__Group_1__0
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:197:1: rule__WorkflowElement__Group_1__0 : ( ( rule__WorkflowElement__NameAssignment_1_0 ) ) rule__WorkflowElement__Group_1__1 ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:199:1: rule__WorkflowElement__Group_1__0 : ( ( rule__WorkflowElement__NameAssignment_1_0 ) ) rule__WorkflowElement__Group_1__1 ;
     public final void rule__WorkflowElement__Group_1__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:201:1: ( ( ( rule__WorkflowElement__NameAssignment_1_0 ) ) rule__WorkflowElement__Group_1__1 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:202:1: ( ( rule__WorkflowElement__NameAssignment_1_0 ) ) rule__WorkflowElement__Group_1__1
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:203:1: ( ( ( rule__WorkflowElement__NameAssignment_1_0 ) ) rule__WorkflowElement__Group_1__1 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:204:1: ( ( rule__WorkflowElement__NameAssignment_1_0 ) ) rule__WorkflowElement__Group_1__1
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:202:1: ( ( rule__WorkflowElement__NameAssignment_1_0 ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:203:1: ( rule__WorkflowElement__NameAssignment_1_0 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:204:1: ( ( rule__WorkflowElement__NameAssignment_1_0 ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:205:1: ( rule__WorkflowElement__NameAssignment_1_0 )
             {
              before(grammarAccess.getWorkflowElementAccess().getNameAssignment_1_0()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:204:1: ( rule__WorkflowElement__NameAssignment_1_0 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:204:2: rule__WorkflowElement__NameAssignment_1_0
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:206:1: ( rule__WorkflowElement__NameAssignment_1_0 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:206:2: rule__WorkflowElement__NameAssignment_1_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__NameAssignment_1_0_in_rule__WorkflowElement__Group_1__0357);
+            pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__NameAssignment_1_0_in_rule__WorkflowElement__Group_1__0359);
             rule__WorkflowElement__NameAssignment_1_0();
             _fsp--;
 
@@ -476,7 +476,7 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__Group_1__1_in_rule__WorkflowElement__Group_1__0366);
+            pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__Group_1__1_in_rule__WorkflowElement__Group_1__0368);
             rule__WorkflowElement__Group_1__1();
             _fsp--;
 
@@ -499,20 +499,20 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start rule__WorkflowElement__Group_1__1
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:215:1: rule__WorkflowElement__Group_1__1 : ( ( rule__WorkflowElement__AttributesAssignment_1_1 )* ) rule__WorkflowElement__Group_1__2 ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:217:1: rule__WorkflowElement__Group_1__1 : ( ( rule__WorkflowElement__AttributesAssignment_1_1 )* ) rule__WorkflowElement__Group_1__2 ;
     public final void rule__WorkflowElement__Group_1__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:219:1: ( ( ( rule__WorkflowElement__AttributesAssignment_1_1 )* ) rule__WorkflowElement__Group_1__2 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:220:1: ( ( rule__WorkflowElement__AttributesAssignment_1_1 )* ) rule__WorkflowElement__Group_1__2
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:221:1: ( ( ( rule__WorkflowElement__AttributesAssignment_1_1 )* ) rule__WorkflowElement__Group_1__2 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:222:1: ( ( rule__WorkflowElement__AttributesAssignment_1_1 )* ) rule__WorkflowElement__Group_1__2
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:220:1: ( ( rule__WorkflowElement__AttributesAssignment_1_1 )* )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:221:1: ( rule__WorkflowElement__AttributesAssignment_1_1 )*
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:222:1: ( ( rule__WorkflowElement__AttributesAssignment_1_1 )* )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:223:1: ( rule__WorkflowElement__AttributesAssignment_1_1 )*
             {
              before(grammarAccess.getWorkflowElementAccess().getAttributesAssignment_1_1()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:222:1: ( rule__WorkflowElement__AttributesAssignment_1_1 )*
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:224:1: ( rule__WorkflowElement__AttributesAssignment_1_1 )*
             loop3:
             do {
                 int alt3=2;
@@ -525,9 +525,9 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:222:2: rule__WorkflowElement__AttributesAssignment_1_1
+            	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:224:2: rule__WorkflowElement__AttributesAssignment_1_1
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__AttributesAssignment_1_1_in_rule__WorkflowElement__Group_1__1394);
+            	    pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__AttributesAssignment_1_1_in_rule__WorkflowElement__Group_1__1396);
             	    rule__WorkflowElement__AttributesAssignment_1_1();
             	    _fsp--;
 
@@ -544,7 +544,7 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__Group_1__2_in_rule__WorkflowElement__Group_1__1404);
+            pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__Group_1__2_in_rule__WorkflowElement__Group_1__1406);
             rule__WorkflowElement__Group_1__2();
             _fsp--;
 
@@ -567,25 +567,25 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start rule__WorkflowElement__Group_1__2
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:233:1: rule__WorkflowElement__Group_1__2 : ( RULE_GT ) rule__WorkflowElement__Group_1__3 ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:235:1: rule__WorkflowElement__Group_1__2 : ( RULE_GT ) rule__WorkflowElement__Group_1__3 ;
     public final void rule__WorkflowElement__Group_1__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:237:1: ( ( RULE_GT ) rule__WorkflowElement__Group_1__3 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:238:1: ( RULE_GT ) rule__WorkflowElement__Group_1__3
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:239:1: ( ( RULE_GT ) rule__WorkflowElement__Group_1__3 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:240:1: ( RULE_GT ) rule__WorkflowElement__Group_1__3
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:238:1: ( RULE_GT )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:239:1: RULE_GT
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:240:1: ( RULE_GT )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:241:1: RULE_GT
             {
              before(grammarAccess.getWorkflowElementAccess().getGTTerminalRuleCall_1_2()); 
-            match(input,RULE_GT,FollowSets000.FOLLOW_RULE_GT_in_rule__WorkflowElement__Group_1__2432); 
+            match(input,RULE_GT,FollowSets000.FOLLOW_RULE_GT_in_rule__WorkflowElement__Group_1__2434); 
              after(grammarAccess.getWorkflowElementAccess().getGTTerminalRuleCall_1_2()); 
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__Group_1__3_in_rule__WorkflowElement__Group_1__2440);
+            pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__Group_1__3_in_rule__WorkflowElement__Group_1__2442);
             rule__WorkflowElement__Group_1__3();
             _fsp--;
 
@@ -608,20 +608,20 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start rule__WorkflowElement__Group_1__3
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:251:1: rule__WorkflowElement__Group_1__3 : ( ( rule__WorkflowElement__ChildrenAssignment_1_3 )* ) rule__WorkflowElement__Group_1__4 ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:253:1: rule__WorkflowElement__Group_1__3 : ( ( rule__WorkflowElement__ChildrenAssignment_1_3 )* ) rule__WorkflowElement__Group_1__4 ;
     public final void rule__WorkflowElement__Group_1__3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:255:1: ( ( ( rule__WorkflowElement__ChildrenAssignment_1_3 )* ) rule__WorkflowElement__Group_1__4 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:256:1: ( ( rule__WorkflowElement__ChildrenAssignment_1_3 )* ) rule__WorkflowElement__Group_1__4
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:257:1: ( ( ( rule__WorkflowElement__ChildrenAssignment_1_3 )* ) rule__WorkflowElement__Group_1__4 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:258:1: ( ( rule__WorkflowElement__ChildrenAssignment_1_3 )* ) rule__WorkflowElement__Group_1__4
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:256:1: ( ( rule__WorkflowElement__ChildrenAssignment_1_3 )* )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:257:1: ( rule__WorkflowElement__ChildrenAssignment_1_3 )*
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:258:1: ( ( rule__WorkflowElement__ChildrenAssignment_1_3 )* )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:259:1: ( rule__WorkflowElement__ChildrenAssignment_1_3 )*
             {
              before(grammarAccess.getWorkflowElementAccess().getChildrenAssignment_1_3()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:258:1: ( rule__WorkflowElement__ChildrenAssignment_1_3 )*
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:260:1: ( rule__WorkflowElement__ChildrenAssignment_1_3 )*
             loop4:
             do {
                 int alt4=2;
@@ -634,9 +634,9 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
                 switch (alt4) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:258:2: rule__WorkflowElement__ChildrenAssignment_1_3
+            	    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:260:2: rule__WorkflowElement__ChildrenAssignment_1_3
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__ChildrenAssignment_1_3_in_rule__WorkflowElement__Group_1__3468);
+            	    pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__ChildrenAssignment_1_3_in_rule__WorkflowElement__Group_1__3470);
             	    rule__WorkflowElement__ChildrenAssignment_1_3();
             	    _fsp--;
 
@@ -653,7 +653,7 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__Group_1__4_in_rule__WorkflowElement__Group_1__3478);
+            pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__Group_1__4_in_rule__WorkflowElement__Group_1__3480);
             rule__WorkflowElement__Group_1__4();
             _fsp--;
 
@@ -676,23 +676,23 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start rule__WorkflowElement__Group_1__4
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:269:1: rule__WorkflowElement__Group_1__4 : ( ( rule__WorkflowElement__EndAssignment_1_4 ) ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:271:1: rule__WorkflowElement__Group_1__4 : ( ( rule__WorkflowElement__EndAssignment_1_4 ) ) ;
     public final void rule__WorkflowElement__Group_1__4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:273:1: ( ( ( rule__WorkflowElement__EndAssignment_1_4 ) ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:274:1: ( ( rule__WorkflowElement__EndAssignment_1_4 ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:275:1: ( ( ( rule__WorkflowElement__EndAssignment_1_4 ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:276:1: ( ( rule__WorkflowElement__EndAssignment_1_4 ) )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:274:1: ( ( rule__WorkflowElement__EndAssignment_1_4 ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:275:1: ( rule__WorkflowElement__EndAssignment_1_4 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:276:1: ( ( rule__WorkflowElement__EndAssignment_1_4 ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:277:1: ( rule__WorkflowElement__EndAssignment_1_4 )
             {
              before(grammarAccess.getWorkflowElementAccess().getEndAssignment_1_4()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:276:1: ( rule__WorkflowElement__EndAssignment_1_4 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:276:2: rule__WorkflowElement__EndAssignment_1_4
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:278:1: ( rule__WorkflowElement__EndAssignment_1_4 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:278:2: rule__WorkflowElement__EndAssignment_1_4
             {
-            pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__EndAssignment_1_4_in_rule__WorkflowElement__Group_1__4506);
+            pushFollow(FollowSets000.FOLLOW_rule__WorkflowElement__EndAssignment_1_4_in_rule__WorkflowElement__Group_1__4508);
             rule__WorkflowElement__EndAssignment_1_4();
             _fsp--;
 
@@ -722,23 +722,23 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start rule__Attribute__Group__0
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:296:1: rule__Attribute__Group__0 : ( ( rule__Attribute__NameAssignment_0 ) ) rule__Attribute__Group__1 ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:298:1: rule__Attribute__Group__0 : ( ( rule__Attribute__NameAssignment_0 ) ) rule__Attribute__Group__1 ;
     public final void rule__Attribute__Group__0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:300:1: ( ( ( rule__Attribute__NameAssignment_0 ) ) rule__Attribute__Group__1 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:301:1: ( ( rule__Attribute__NameAssignment_0 ) ) rule__Attribute__Group__1
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:302:1: ( ( ( rule__Attribute__NameAssignment_0 ) ) rule__Attribute__Group__1 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:303:1: ( ( rule__Attribute__NameAssignment_0 ) ) rule__Attribute__Group__1
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:301:1: ( ( rule__Attribute__NameAssignment_0 ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:302:1: ( rule__Attribute__NameAssignment_0 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:303:1: ( ( rule__Attribute__NameAssignment_0 ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:304:1: ( rule__Attribute__NameAssignment_0 )
             {
              before(grammarAccess.getAttributeAccess().getNameAssignment_0()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:303:1: ( rule__Attribute__NameAssignment_0 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:303:2: rule__Attribute__NameAssignment_0
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:305:1: ( rule__Attribute__NameAssignment_0 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:305:2: rule__Attribute__NameAssignment_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Attribute__NameAssignment_0_in_rule__Attribute__Group__0550);
+            pushFollow(FollowSets000.FOLLOW_rule__Attribute__NameAssignment_0_in_rule__Attribute__Group__0552);
             rule__Attribute__NameAssignment_0();
             _fsp--;
 
@@ -749,7 +749,7 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__Attribute__Group__1_in_rule__Attribute__Group__0559);
+            pushFollow(FollowSets000.FOLLOW_rule__Attribute__Group__1_in_rule__Attribute__Group__0561);
             rule__Attribute__Group__1();
             _fsp--;
 
@@ -772,25 +772,25 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start rule__Attribute__Group__1
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:314:1: rule__Attribute__Group__1 : ( RULE_EQ ) rule__Attribute__Group__2 ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:316:1: rule__Attribute__Group__1 : ( RULE_EQ ) rule__Attribute__Group__2 ;
     public final void rule__Attribute__Group__1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:318:1: ( ( RULE_EQ ) rule__Attribute__Group__2 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:319:1: ( RULE_EQ ) rule__Attribute__Group__2
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:320:1: ( ( RULE_EQ ) rule__Attribute__Group__2 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:321:1: ( RULE_EQ ) rule__Attribute__Group__2
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:319:1: ( RULE_EQ )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:320:1: RULE_EQ
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:321:1: ( RULE_EQ )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:322:1: RULE_EQ
             {
              before(grammarAccess.getAttributeAccess().getEQTerminalRuleCall_1()); 
-            match(input,RULE_EQ,FollowSets000.FOLLOW_RULE_EQ_in_rule__Attribute__Group__1587); 
+            match(input,RULE_EQ,FollowSets000.FOLLOW_RULE_EQ_in_rule__Attribute__Group__1589); 
              after(grammarAccess.getAttributeAccess().getEQTerminalRuleCall_1()); 
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__Attribute__Group__2_in_rule__Attribute__Group__1595);
+            pushFollow(FollowSets000.FOLLOW_rule__Attribute__Group__2_in_rule__Attribute__Group__1597);
             rule__Attribute__Group__2();
             _fsp--;
 
@@ -813,23 +813,23 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start rule__Attribute__Group__2
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:332:1: rule__Attribute__Group__2 : ( ( rule__Attribute__ValueAssignment_2 ) ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:334:1: rule__Attribute__Group__2 : ( ( rule__Attribute__ValueAssignment_2 ) ) ;
     public final void rule__Attribute__Group__2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:336:1: ( ( ( rule__Attribute__ValueAssignment_2 ) ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:337:1: ( ( rule__Attribute__ValueAssignment_2 ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:338:1: ( ( ( rule__Attribute__ValueAssignment_2 ) ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:339:1: ( ( rule__Attribute__ValueAssignment_2 ) )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:337:1: ( ( rule__Attribute__ValueAssignment_2 ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:338:1: ( rule__Attribute__ValueAssignment_2 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:339:1: ( ( rule__Attribute__ValueAssignment_2 ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:340:1: ( rule__Attribute__ValueAssignment_2 )
             {
              before(grammarAccess.getAttributeAccess().getValueAssignment_2()); 
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:339:1: ( rule__Attribute__ValueAssignment_2 )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:339:2: rule__Attribute__ValueAssignment_2
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:341:1: ( rule__Attribute__ValueAssignment_2 )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:341:2: rule__Attribute__ValueAssignment_2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Attribute__ValueAssignment_2_in_rule__Attribute__Group__2623);
+            pushFollow(FollowSets000.FOLLOW_rule__Attribute__ValueAssignment_2_in_rule__Attribute__Group__2625);
             rule__Attribute__ValueAssignment_2();
             _fsp--;
 
@@ -859,20 +859,20 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start rule__WorkflowElement__NameAssignment_0_0
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:355:1: rule__WorkflowElement__NameAssignment_0_0 : ( RULE_START_TAG ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:357:1: rule__WorkflowElement__NameAssignment_0_0 : ( RULE_START_TAG ) ;
     public final void rule__WorkflowElement__NameAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:359:1: ( ( RULE_START_TAG ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:360:1: ( RULE_START_TAG )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:361:1: ( ( RULE_START_TAG ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:362:1: ( RULE_START_TAG )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:360:1: ( RULE_START_TAG )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:361:1: RULE_START_TAG
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:362:1: ( RULE_START_TAG )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:363:1: RULE_START_TAG
             {
              before(grammarAccess.getWorkflowElementAccess().getNameSTART_TAGTerminalRuleCall_0_0_0()); 
-            match(input,RULE_START_TAG,FollowSets000.FOLLOW_RULE_START_TAG_in_rule__WorkflowElement__NameAssignment_0_0663); 
+            match(input,RULE_START_TAG,FollowSets000.FOLLOW_RULE_START_TAG_in_rule__WorkflowElement__NameAssignment_0_0665); 
              after(grammarAccess.getWorkflowElementAccess().getNameSTART_TAGTerminalRuleCall_0_0_0()); 
 
             }
@@ -896,20 +896,20 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start rule__WorkflowElement__AttributesAssignment_0_1
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:370:1: rule__WorkflowElement__AttributesAssignment_0_1 : ( ruleAttribute ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:372:1: rule__WorkflowElement__AttributesAssignment_0_1 : ( ruleAttribute ) ;
     public final void rule__WorkflowElement__AttributesAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:374:1: ( ( ruleAttribute ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:375:1: ( ruleAttribute )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:376:1: ( ( ruleAttribute ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:377:1: ( ruleAttribute )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:375:1: ( ruleAttribute )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:376:1: ruleAttribute
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:377:1: ( ruleAttribute )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:378:1: ruleAttribute
             {
              before(grammarAccess.getWorkflowElementAccess().getAttributesAttributeParserRuleCall_0_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleAttribute_in_rule__WorkflowElement__AttributesAssignment_0_1694);
+            pushFollow(FollowSets000.FOLLOW_ruleAttribute_in_rule__WorkflowElement__AttributesAssignment_0_1696);
             ruleAttribute();
             _fsp--;
 
@@ -936,20 +936,20 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start rule__WorkflowElement__NameAssignment_1_0
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:385:1: rule__WorkflowElement__NameAssignment_1_0 : ( RULE_START_TAG ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:387:1: rule__WorkflowElement__NameAssignment_1_0 : ( RULE_START_TAG ) ;
     public final void rule__WorkflowElement__NameAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:389:1: ( ( RULE_START_TAG ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:390:1: ( RULE_START_TAG )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:391:1: ( ( RULE_START_TAG ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:392:1: ( RULE_START_TAG )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:390:1: ( RULE_START_TAG )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:391:1: RULE_START_TAG
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:392:1: ( RULE_START_TAG )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:393:1: RULE_START_TAG
             {
              before(grammarAccess.getWorkflowElementAccess().getNameSTART_TAGTerminalRuleCall_1_0_0()); 
-            match(input,RULE_START_TAG,FollowSets000.FOLLOW_RULE_START_TAG_in_rule__WorkflowElement__NameAssignment_1_0725); 
+            match(input,RULE_START_TAG,FollowSets000.FOLLOW_RULE_START_TAG_in_rule__WorkflowElement__NameAssignment_1_0727); 
              after(grammarAccess.getWorkflowElementAccess().getNameSTART_TAGTerminalRuleCall_1_0_0()); 
 
             }
@@ -973,20 +973,20 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start rule__WorkflowElement__AttributesAssignment_1_1
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:400:1: rule__WorkflowElement__AttributesAssignment_1_1 : ( ruleAttribute ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:402:1: rule__WorkflowElement__AttributesAssignment_1_1 : ( ruleAttribute ) ;
     public final void rule__WorkflowElement__AttributesAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:404:1: ( ( ruleAttribute ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:405:1: ( ruleAttribute )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:406:1: ( ( ruleAttribute ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:407:1: ( ruleAttribute )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:405:1: ( ruleAttribute )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:406:1: ruleAttribute
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:407:1: ( ruleAttribute )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:408:1: ruleAttribute
             {
              before(grammarAccess.getWorkflowElementAccess().getAttributesAttributeParserRuleCall_1_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleAttribute_in_rule__WorkflowElement__AttributesAssignment_1_1756);
+            pushFollow(FollowSets000.FOLLOW_ruleAttribute_in_rule__WorkflowElement__AttributesAssignment_1_1758);
             ruleAttribute();
             _fsp--;
 
@@ -1013,20 +1013,20 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start rule__WorkflowElement__ChildrenAssignment_1_3
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:415:1: rule__WorkflowElement__ChildrenAssignment_1_3 : ( ruleWorkflowElement ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:417:1: rule__WorkflowElement__ChildrenAssignment_1_3 : ( ruleWorkflowElement ) ;
     public final void rule__WorkflowElement__ChildrenAssignment_1_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:419:1: ( ( ruleWorkflowElement ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:420:1: ( ruleWorkflowElement )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:421:1: ( ( ruleWorkflowElement ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:422:1: ( ruleWorkflowElement )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:420:1: ( ruleWorkflowElement )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:421:1: ruleWorkflowElement
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:422:1: ( ruleWorkflowElement )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:423:1: ruleWorkflowElement
             {
              before(grammarAccess.getWorkflowElementAccess().getChildrenWorkflowElementParserRuleCall_1_3_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleWorkflowElement_in_rule__WorkflowElement__ChildrenAssignment_1_3787);
+            pushFollow(FollowSets000.FOLLOW_ruleWorkflowElement_in_rule__WorkflowElement__ChildrenAssignment_1_3789);
             ruleWorkflowElement();
             _fsp--;
 
@@ -1053,20 +1053,20 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start rule__WorkflowElement__EndAssignment_1_4
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:430:1: rule__WorkflowElement__EndAssignment_1_4 : ( RULE_END_TAG ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:432:1: rule__WorkflowElement__EndAssignment_1_4 : ( RULE_END_TAG ) ;
     public final void rule__WorkflowElement__EndAssignment_1_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:434:1: ( ( RULE_END_TAG ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:435:1: ( RULE_END_TAG )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:436:1: ( ( RULE_END_TAG ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:437:1: ( RULE_END_TAG )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:435:1: ( RULE_END_TAG )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:436:1: RULE_END_TAG
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:437:1: ( RULE_END_TAG )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:438:1: RULE_END_TAG
             {
              before(grammarAccess.getWorkflowElementAccess().getEndEND_TAGTerminalRuleCall_1_4_0()); 
-            match(input,RULE_END_TAG,FollowSets000.FOLLOW_RULE_END_TAG_in_rule__WorkflowElement__EndAssignment_1_4818); 
+            match(input,RULE_END_TAG,FollowSets000.FOLLOW_RULE_END_TAG_in_rule__WorkflowElement__EndAssignment_1_4820); 
              after(grammarAccess.getWorkflowElementAccess().getEndEND_TAGTerminalRuleCall_1_4_0()); 
 
             }
@@ -1090,20 +1090,20 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start rule__Attribute__NameAssignment_0
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:445:1: rule__Attribute__NameAssignment_0 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:447:1: rule__Attribute__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__Attribute__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:449:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:450:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:451:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:452:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:450:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:451:1: RULE_ID
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:452:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:453:1: RULE_ID
             {
              before(grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_0_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Attribute__NameAssignment_0849); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Attribute__NameAssignment_0851); 
              after(grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_0_0()); 
 
             }
@@ -1127,20 +1127,20 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
 
 
     // $ANTLR start rule__Attribute__ValueAssignment_2
-    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:460:1: rule__Attribute__ValueAssignment_2 : ( RULE_STRING ) ;
+    // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:462:1: rule__Attribute__ValueAssignment_2 : ( RULE_STRING ) ;
     public final void rule__Attribute__ValueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:464:1: ( ( RULE_STRING ) )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:465:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:466:1: ( ( RULE_STRING ) )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:467:1: ( RULE_STRING )
             {
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:465:1: ( RULE_STRING )
-            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:466:1: RULE_STRING
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:467:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/ui/common/editor/contentassist/contentassist/antlr/internal/InternalBug288760TestLanguage.g:468:1: RULE_STRING
             {
              before(grammarAccess.getAttributeAccess().getValueSTRINGTerminalRuleCall_2_0()); 
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Attribute__ValueAssignment_2880); 
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Attribute__ValueAssignment_2882); 
              after(grammarAccess.getAttributeAccess().getValueSTRINGTerminalRuleCall_2_0()); 
 
             }
@@ -1216,48 +1216,48 @@ public class InternalBug288760TestLanguageParser extends AbstractInternalContent
             this.transition = DFA1_transition;
         }
         public String getDescription() {
-            return "114:1: rule__WorkflowElement__Alternatives : ( ( ( rule__WorkflowElement__Group_0__0 ) ) | ( ( rule__WorkflowElement__Group_1__0 ) ) );";
+            return "116:1: rule__WorkflowElement__Alternatives : ( ( ( rule__WorkflowElement__Group_0__0 ) ) | ( ( rule__WorkflowElement__Group_1__0 ) ) );";
         }
     }
  
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleWorkflowElement_in_entryRuleWorkflowElement60 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleWorkflowElement67 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__WorkflowElement__Alternatives_in_ruleWorkflowElement94 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAttribute_in_entryRuleAttribute120 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleAttribute127 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute__Group__0_in_ruleAttribute154 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__WorkflowElement__Group_0__0_in_rule__WorkflowElement__Alternatives190 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__WorkflowElement__Group_1__0_in_rule__WorkflowElement__Alternatives208 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__WorkflowElement__NameAssignment_0_0_in_rule__WorkflowElement__Group_0__0243 = new BitSet(new long[]{0x0000000000000210L});
-        public static final BitSet FOLLOW_rule__WorkflowElement__Group_0__1_in_rule__WorkflowElement__Group_0__0252 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__WorkflowElement__AttributesAssignment_0_1_in_rule__WorkflowElement__Group_0__1280 = new BitSet(new long[]{0x0000000000000210L});
-        public static final BitSet FOLLOW_rule__WorkflowElement__Group_0__2_in_rule__WorkflowElement__Group_0__1290 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_END_TAG_SHORT_in_rule__WorkflowElement__Group_0__2318 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__WorkflowElement__NameAssignment_1_0_in_rule__WorkflowElement__Group_1__0357 = new BitSet(new long[]{0x0000000000000220L});
-        public static final BitSet FOLLOW_rule__WorkflowElement__Group_1__1_in_rule__WorkflowElement__Group_1__0366 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__WorkflowElement__AttributesAssignment_1_1_in_rule__WorkflowElement__Group_1__1394 = new BitSet(new long[]{0x0000000000000220L});
-        public static final BitSet FOLLOW_rule__WorkflowElement__Group_1__2_in_rule__WorkflowElement__Group_1__1404 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_GT_in_rule__WorkflowElement__Group_1__2432 = new BitSet(new long[]{0x0000000000000180L});
-        public static final BitSet FOLLOW_rule__WorkflowElement__Group_1__3_in_rule__WorkflowElement__Group_1__2440 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__WorkflowElement__ChildrenAssignment_1_3_in_rule__WorkflowElement__Group_1__3468 = new BitSet(new long[]{0x0000000000000180L});
-        public static final BitSet FOLLOW_rule__WorkflowElement__Group_1__4_in_rule__WorkflowElement__Group_1__3478 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__WorkflowElement__EndAssignment_1_4_in_rule__WorkflowElement__Group_1__4506 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute__NameAssignment_0_in_rule__Attribute__Group__0550 = new BitSet(new long[]{0x0000000000000040L});
-        public static final BitSet FOLLOW_rule__Attribute__Group__1_in_rule__Attribute__Group__0559 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_EQ_in_rule__Attribute__Group__1587 = new BitSet(new long[]{0x0000000000000400L});
-        public static final BitSet FOLLOW_rule__Attribute__Group__2_in_rule__Attribute__Group__1595 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Attribute__ValueAssignment_2_in_rule__Attribute__Group__2623 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_START_TAG_in_rule__WorkflowElement__NameAssignment_0_0663 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAttribute_in_rule__WorkflowElement__AttributesAssignment_0_1694 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_START_TAG_in_rule__WorkflowElement__NameAssignment_1_0725 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAttribute_in_rule__WorkflowElement__AttributesAssignment_1_1756 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleWorkflowElement_in_rule__WorkflowElement__ChildrenAssignment_1_3787 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_END_TAG_in_rule__WorkflowElement__EndAssignment_1_4818 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Attribute__NameAssignment_0849 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rule__Attribute__ValueAssignment_2880 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleWorkflowElement_in_entryRuleWorkflowElement61 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleWorkflowElement68 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__WorkflowElement__Alternatives_in_ruleWorkflowElement95 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAttribute_in_entryRuleAttribute122 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAttribute129 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Attribute__Group__0_in_ruleAttribute156 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__WorkflowElement__Group_0__0_in_rule__WorkflowElement__Alternatives192 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__WorkflowElement__Group_1__0_in_rule__WorkflowElement__Alternatives210 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__WorkflowElement__NameAssignment_0_0_in_rule__WorkflowElement__Group_0__0245 = new BitSet(new long[]{0x0000000000000210L});
+        public static final BitSet FOLLOW_rule__WorkflowElement__Group_0__1_in_rule__WorkflowElement__Group_0__0254 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__WorkflowElement__AttributesAssignment_0_1_in_rule__WorkflowElement__Group_0__1282 = new BitSet(new long[]{0x0000000000000210L});
+        public static final BitSet FOLLOW_rule__WorkflowElement__Group_0__2_in_rule__WorkflowElement__Group_0__1292 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_END_TAG_SHORT_in_rule__WorkflowElement__Group_0__2320 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__WorkflowElement__NameAssignment_1_0_in_rule__WorkflowElement__Group_1__0359 = new BitSet(new long[]{0x0000000000000220L});
+        public static final BitSet FOLLOW_rule__WorkflowElement__Group_1__1_in_rule__WorkflowElement__Group_1__0368 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__WorkflowElement__AttributesAssignment_1_1_in_rule__WorkflowElement__Group_1__1396 = new BitSet(new long[]{0x0000000000000220L});
+        public static final BitSet FOLLOW_rule__WorkflowElement__Group_1__2_in_rule__WorkflowElement__Group_1__1406 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_GT_in_rule__WorkflowElement__Group_1__2434 = new BitSet(new long[]{0x0000000000000180L});
+        public static final BitSet FOLLOW_rule__WorkflowElement__Group_1__3_in_rule__WorkflowElement__Group_1__2442 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__WorkflowElement__ChildrenAssignment_1_3_in_rule__WorkflowElement__Group_1__3470 = new BitSet(new long[]{0x0000000000000180L});
+        public static final BitSet FOLLOW_rule__WorkflowElement__Group_1__4_in_rule__WorkflowElement__Group_1__3480 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__WorkflowElement__EndAssignment_1_4_in_rule__WorkflowElement__Group_1__4508 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Attribute__NameAssignment_0_in_rule__Attribute__Group__0552 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_rule__Attribute__Group__1_in_rule__Attribute__Group__0561 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_EQ_in_rule__Attribute__Group__1589 = new BitSet(new long[]{0x0000000000000400L});
+        public static final BitSet FOLLOW_rule__Attribute__Group__2_in_rule__Attribute__Group__1597 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Attribute__ValueAssignment_2_in_rule__Attribute__Group__2625 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_START_TAG_in_rule__WorkflowElement__NameAssignment_0_0665 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAttribute_in_rule__WorkflowElement__AttributesAssignment_0_1696 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_START_TAG_in_rule__WorkflowElement__NameAssignment_1_0727 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAttribute_in_rule__WorkflowElement__AttributesAssignment_1_1758 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleWorkflowElement_in_rule__WorkflowElement__ChildrenAssignment_1_3789 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_END_TAG_in_rule__WorkflowElement__EndAssignment_1_4820 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Attribute__NameAssignment_0851 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__Attribute__ValueAssignment_2882 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

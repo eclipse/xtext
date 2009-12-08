@@ -69,7 +69,8 @@ import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguage
 
 
 // Entry rule entryRuleCompositeModel
-entryRuleCompositeModel returns [EObject current=null] :
+entryRuleCompositeModel returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getCompositeModelRule(), currentNode); }
 	 iv_ruleCompositeModel=ruleCompositeModel 
 	 { $current=$iv_ruleCompositeModel.current; } 
@@ -107,14 +108,16 @@ ruleCompositeModel returns [EObject current=null]
 	    }
 
 )
-)+;
+)+
+;
 
 
 
 
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] :
+entryRuleModel returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
@@ -240,14 +243,16 @@ ruleModel returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getModelAccess().getSemicolonKeyword_4(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleModelId
-entryRuleModelId returns [String current=null] :
+entryRuleModelId returns [String current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelIdRule(), currentNode); } 
 	 iv_ruleModelId=ruleModelId 
 	 { $current=$iv_ruleModelId.current.getText(); }  
@@ -289,7 +294,8 @@ ruleModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
 
 
 // Entry rule entryRuleNestedModelId
-entryRuleNestedModelId returns [String current=null] :
+entryRuleNestedModelId returns [String current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getNestedModelIdRule(), currentNode); } 
 	 iv_ruleNestedModelId=ruleNestedModelId 
 	 { $current=$iv_ruleNestedModelId.current.getText(); }  
@@ -339,7 +345,8 @@ ruleNestedModelId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
 
 
 // Entry rule entryRuleFraction
-entryRuleFraction returns [String current=null] :
+entryRuleFraction returns [String current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getFractionRule(), currentNode); } 
 	 iv_ruleFraction=ruleFraction 
 	 { $current=$iv_ruleFraction.current.getText(); }  
@@ -381,7 +388,8 @@ ruleFraction returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
 
 
 // Entry rule entryRuleVector
-entryRuleVector returns [String current=null] :
+entryRuleVector returns [String current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getVectorRule(), currentNode); } 
 	 iv_ruleVector=ruleVector 
 	 { $current=$iv_ruleVector.current.getText(); }  
@@ -429,7 +437,8 @@ ruleVector returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 
 
 // Entry rule entryRuleDots
-entryRuleDots returns [String current=null] :
+entryRuleDots returns [String current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getDotsRule(), currentNode); } 
 	 iv_ruleDots=ruleDots 
 	 { $current=$iv_ruleDots.current.getText(); }  

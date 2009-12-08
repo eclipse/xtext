@@ -69,7 +69,8 @@ import org.eclipse.xtext.generator.grammarAccess.services.GrammarAccessTestLangu
 
 
 // Entry rule entryRuleRoot
-entryRuleRoot returns [EObject current=null] :
+entryRuleRoot returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getRootRule(), currentNode); }
 	 iv_ruleRoot=ruleRoot 
 	 { $current=$iv_ruleRoot.current; } 
@@ -107,14 +108,16 @@ ruleRoot returns [EObject current=null]
 	    }
 
 )
-)*;
+)*
+;
 
 
 
 
 
 // Entry rule entryRuleType
-entryRuleType returns [EObject current=null] :
+entryRuleType returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTypeRule(), currentNode); }
 	 iv_ruleType=ruleType 
 	 { $current=$iv_ruleType.current; } 
@@ -147,14 +150,16 @@ ruleType returns [EObject current=null]
         $current = $this_AnotherType_1.current; 
         currentNode = currentNode.getParent();
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleAType
-entryRuleAType returns [EObject current=null] :
+entryRuleAType returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getATypeRule(), currentNode); }
 	 iv_ruleAType=ruleAType 
 	 { $current=$iv_ruleAType.current; } 
@@ -183,14 +188,16 @@ ruleAType returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleAnotherType
-entryRuleAnotherType returns [EObject current=null] :
+entryRuleAnotherType returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getAnotherTypeRule(), currentNode); }
 	 iv_ruleAnotherType=ruleAnotherType 
 	 { $current=$iv_ruleAnotherType.current; } 
@@ -219,7 +226,8 @@ ruleAnotherType returns [EObject current=null]
     currentNode = newNode; 
         associateNodeWithAstElement(currentNode, $current); 
     }
-));
+))
+;
 
 
 

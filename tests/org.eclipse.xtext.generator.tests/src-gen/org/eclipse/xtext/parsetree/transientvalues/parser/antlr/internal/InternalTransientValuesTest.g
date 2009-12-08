@@ -69,7 +69,8 @@ import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestG
 
 
 // Entry rule entryRuleRoot
-entryRuleRoot returns [EObject current=null] :
+entryRuleRoot returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getRootRule(), currentNode); }
 	 iv_ruleRoot=ruleRoot 
 	 { $current=$iv_ruleRoot.current; } 
@@ -116,14 +117,16 @@ ruleRoot returns [EObject current=null]
         $current = $this_TestList_3.current; 
         currentNode = currentNode.getParent();
     }
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleTestRequired
-entryRuleTestRequired returns [EObject current=null] :
+entryRuleTestRequired returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTestRequiredRule(), currentNode); }
 	 iv_ruleTestRequired=ruleTestRequired 
 	 { $current=$iv_ruleTestRequired.current; } 
@@ -189,14 +192,16 @@ ruleTestRequired returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleTestOptional
-entryRuleTestOptional returns [EObject current=null] :
+entryRuleTestOptional returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTestOptionalRule(), currentNode); }
 	 iv_ruleTestOptional=ruleTestOptional 
 	 { $current=$iv_ruleTestOptional.current; } 
@@ -266,14 +271,16 @@ ruleTestOptional returns [EObject current=null]
 	    }
 
 )
-))?);
+))?)
+;
 
 
 
 
 
 // Entry rule entryRuleTestList
-entryRuleTestList returns [EObject current=null] :
+entryRuleTestList returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTestListRule(), currentNode); }
 	 iv_ruleTestList=ruleTestList 
 	 { $current=$iv_ruleTestList.current; } 
@@ -315,7 +322,8 @@ ruleTestList returns [EObject current=null]
 	    }
 
 )
-)*);
+)*)
+;
 
 
 

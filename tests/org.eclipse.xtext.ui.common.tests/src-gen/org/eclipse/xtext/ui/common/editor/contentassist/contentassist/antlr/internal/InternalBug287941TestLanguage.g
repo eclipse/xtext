@@ -57,7 +57,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.Bug287941TestLa
 
 
 // Entry rule entryRuleModel
-entryRuleModel :
+entryRuleModel 
+:
 { before(grammarAccess.getModelRule()); }
 	 ruleModel
 { after(grammarAccess.getModelRule()); } 
@@ -69,7 +70,7 @@ ruleModel
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getModelAccess().getGroup()); }
 (rule__Model__Group__0)
@@ -84,7 +85,8 @@ finally {
 
 
 // Entry rule entryRuleImport
-entryRuleImport :
+entryRuleImport 
+:
 { before(grammarAccess.getImportRule()); }
 	 ruleImport
 { after(grammarAccess.getImportRule()); } 
@@ -96,7 +98,7 @@ ruleImport
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getImportAccess().getGroup()); }
 (rule__Import__Group__0)
@@ -111,7 +113,8 @@ finally {
 
 
 // Entry rule entryRuleMQLquery
-entryRuleMQLquery :
+entryRuleMQLquery 
+:
 { before(grammarAccess.getMQLqueryRule()); }
 	 ruleMQLquery
 { after(grammarAccess.getMQLqueryRule()); } 
@@ -123,7 +126,7 @@ ruleMQLquery
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getMQLqueryAccess().getGroup()); }
 (rule__MQLquery__Group__0)
@@ -138,7 +141,8 @@ finally {
 
 
 // Entry rule entryRuleSelectEntry
-entryRuleSelectEntry :
+entryRuleSelectEntry 
+:
 { before(grammarAccess.getSelectEntryRule()); }
 	 ruleSelectEntry
 { after(grammarAccess.getSelectEntryRule()); } 
@@ -150,7 +154,7 @@ ruleSelectEntry
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getSelectEntryAccess().getGroup()); }
 (rule__SelectEntry__Group__0)
@@ -165,7 +169,8 @@ finally {
 
 
 // Entry rule entryRuleFromEntry
-entryRuleFromEntry :
+entryRuleFromEntry 
+:
 { before(grammarAccess.getFromEntryRule()); }
 	 ruleFromEntry
 { after(grammarAccess.getFromEntryRule()); } 
@@ -177,7 +182,7 @@ ruleFromEntry
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getFromEntryAccess().getGroup()); }
 (rule__FromEntry__Group__0)
@@ -192,7 +197,8 @@ finally {
 
 
 // Entry rule entryRuleScopeClause
-entryRuleScopeClause :
+entryRuleScopeClause 
+:
 { before(grammarAccess.getScopeClauseRule()); }
 	 ruleScopeClause
 { after(grammarAccess.getScopeClauseRule()); } 
@@ -204,7 +210,7 @@ ruleScopeClause
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getScopeClauseAccess().getGroup()); }
 (rule__ScopeClause__Group__0)
@@ -219,7 +225,8 @@ finally {
 
 
 // Entry rule entryRuleScope
-entryRuleScope :
+entryRuleScope 
+:
 { before(grammarAccess.getScopeRule()); }
 	 ruleScope
 { after(grammarAccess.getScopeRule()); } 
@@ -231,7 +238,7 @@ ruleScope
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getScopeAccess().getAlternatives()); }
 (rule__Scope__Alternatives)
@@ -246,7 +253,8 @@ finally {
 
 
 // Entry rule entryRuleResourceScope
-entryRuleResourceScope :
+entryRuleResourceScope 
+:
 { before(grammarAccess.getResourceScopeRule()); }
 	 ruleResourceScope
 { after(grammarAccess.getResourceScopeRule()); } 
@@ -258,7 +266,7 @@ ruleResourceScope
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getResourceScopeAccess().getGroup()); }
 (rule__ResourceScope__Group__0)
@@ -273,7 +281,8 @@ finally {
 
 
 // Entry rule entryRuleElementScope
-entryRuleElementScope :
+entryRuleElementScope 
+:
 { before(grammarAccess.getElementScopeRule()); }
 	 ruleElementScope
 { after(grammarAccess.getElementScopeRule()); } 
@@ -285,7 +294,7 @@ ruleElementScope
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getElementScopeAccess().getGroup()); }
 (rule__ElementScope__Group__0)
@@ -300,7 +309,8 @@ finally {
 
 
 // Entry rule entryRuleWhereEntry
-entryRuleWhereEntry :
+entryRuleWhereEntry 
+:
 { before(grammarAccess.getWhereEntryRule()); }
 	 ruleWhereEntry
 { after(grammarAccess.getWhereEntryRule()); } 
@@ -312,7 +322,7 @@ ruleWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getWhereEntryAccess().getGroup()); }
 (rule__WhereEntry__Group__0)
@@ -327,7 +337,8 @@ finally {
 
 
 // Entry rule entryRuleAndWhereEntry
-entryRuleAndWhereEntry :
+entryRuleAndWhereEntry 
+:
 { before(grammarAccess.getAndWhereEntryRule()); }
 	 ruleAndWhereEntry
 { after(grammarAccess.getAndWhereEntryRule()); } 
@@ -339,7 +350,7 @@ ruleAndWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getAndWhereEntryAccess().getGroup()); }
 (rule__AndWhereEntry__Group__0)
@@ -354,7 +365,8 @@ finally {
 
 
 // Entry rule entryRuleConcreteWhereEntry
-entryRuleConcreteWhereEntry :
+entryRuleConcreteWhereEntry 
+:
 { before(grammarAccess.getConcreteWhereEntryRule()); }
 	 ruleConcreteWhereEntry
 { after(grammarAccess.getConcreteWhereEntryRule()); } 
@@ -366,7 +378,7 @@ ruleConcreteWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getConcreteWhereEntryAccess().getAlternatives()); }
 (rule__ConcreteWhereEntry__Alternatives)
@@ -381,7 +393,8 @@ finally {
 
 
 // Entry rule entryRuleParWhereEntry
-entryRuleParWhereEntry :
+entryRuleParWhereEntry 
+:
 { before(grammarAccess.getParWhereEntryRule()); }
 	 ruleParWhereEntry
 { after(grammarAccess.getParWhereEntryRule()); } 
@@ -393,7 +406,7 @@ ruleParWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getParWhereEntryAccess().getGroup()); }
 (rule__ParWhereEntry__Group__0)
@@ -408,7 +421,8 @@ finally {
 
 
 // Entry rule entryRuleAttributeWhereEntry
-entryRuleAttributeWhereEntry :
+entryRuleAttributeWhereEntry 
+:
 { before(grammarAccess.getAttributeWhereEntryRule()); }
 	 ruleAttributeWhereEntry
 { after(grammarAccess.getAttributeWhereEntryRule()); } 
@@ -420,7 +434,7 @@ ruleAttributeWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getAttributeWhereEntryAccess().getAlternatives()); }
 (rule__AttributeWhereEntry__Alternatives)
@@ -435,7 +449,8 @@ finally {
 
 
 // Entry rule entryRuleNumericAttributeWhereEntry
-entryRuleNumericAttributeWhereEntry :
+entryRuleNumericAttributeWhereEntry 
+:
 { before(grammarAccess.getNumericAttributeWhereEntryRule()); }
 	 ruleNumericAttributeWhereEntry
 { after(grammarAccess.getNumericAttributeWhereEntryRule()); } 
@@ -447,7 +462,7 @@ ruleNumericAttributeWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getNumericAttributeWhereEntryAccess().getAlternatives()); }
 (rule__NumericAttributeWhereEntry__Alternatives)
@@ -462,7 +477,8 @@ finally {
 
 
 // Entry rule entryRuleDoubleWhereEntry
-entryRuleDoubleWhereEntry :
+entryRuleDoubleWhereEntry 
+:
 { before(grammarAccess.getDoubleWhereEntryRule()); }
 	 ruleDoubleWhereEntry
 { after(grammarAccess.getDoubleWhereEntryRule()); } 
@@ -474,7 +490,7 @@ ruleDoubleWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getDoubleWhereEntryAccess().getGroup()); }
 (rule__DoubleWhereEntry__Group__0)
@@ -489,7 +505,8 @@ finally {
 
 
 // Entry rule entryRuleLongWhereEntry
-entryRuleLongWhereEntry :
+entryRuleLongWhereEntry 
+:
 { before(grammarAccess.getLongWhereEntryRule()); }
 	 ruleLongWhereEntry
 { after(grammarAccess.getLongWhereEntryRule()); } 
@@ -501,7 +518,7 @@ ruleLongWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getLongWhereEntryAccess().getGroup()); }
 (rule__LongWhereEntry__Group__0)
@@ -516,7 +533,8 @@ finally {
 
 
 // Entry rule entryRuleVariableWhereEntry
-entryRuleVariableWhereEntry :
+entryRuleVariableWhereEntry 
+:
 { before(grammarAccess.getVariableWhereEntryRule()); }
 	 ruleVariableWhereEntry
 { after(grammarAccess.getVariableWhereEntryRule()); } 
@@ -528,7 +546,7 @@ ruleVariableWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getVariableWhereEntryAccess().getGroup()); }
 (rule__VariableWhereEntry__Group__0)
@@ -543,7 +561,8 @@ finally {
 
 
 // Entry rule entryRuleStringAttributeWhereEntry
-entryRuleStringAttributeWhereEntry :
+entryRuleStringAttributeWhereEntry 
+:
 { before(grammarAccess.getStringAttributeWhereEntryRule()); }
 	 ruleStringAttributeWhereEntry
 { after(grammarAccess.getStringAttributeWhereEntryRule()); } 
@@ -555,7 +574,7 @@ ruleStringAttributeWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getStringAttributeWhereEntryAccess().getGroup()); }
 (rule__StringAttributeWhereEntry__Group__0)
@@ -570,7 +589,8 @@ finally {
 
 
 // Entry rule entryRuleBooleanAttributeWhereEntry
-entryRuleBooleanAttributeWhereEntry :
+entryRuleBooleanAttributeWhereEntry 
+:
 { before(grammarAccess.getBooleanAttributeWhereEntryRule()); }
 	 ruleBooleanAttributeWhereEntry
 { after(grammarAccess.getBooleanAttributeWhereEntryRule()); } 
@@ -582,7 +602,7 @@ ruleBooleanAttributeWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getBooleanAttributeWhereEntryAccess().getGroup()); }
 (rule__BooleanAttributeWhereEntry__Group__0)
@@ -597,7 +617,8 @@ finally {
 
 
 // Entry rule entryRuleNullWhereEntry
-entryRuleNullWhereEntry :
+entryRuleNullWhereEntry 
+:
 { before(grammarAccess.getNullWhereEntryRule()); }
 	 ruleNullWhereEntry
 { after(grammarAccess.getNullWhereEntryRule()); } 
@@ -609,7 +630,7 @@ ruleNullWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getNullWhereEntryAccess().getGroup()); }
 (rule__NullWhereEntry__Group__0)
@@ -624,7 +645,8 @@ finally {
 
 
 // Entry rule entryRuleReferenceAliasWhereEntry
-entryRuleReferenceAliasWhereEntry :
+entryRuleReferenceAliasWhereEntry 
+:
 { before(grammarAccess.getReferenceAliasWhereEntryRule()); }
 	 ruleReferenceAliasWhereEntry
 { after(grammarAccess.getReferenceAliasWhereEntryRule()); } 
@@ -636,7 +658,7 @@ ruleReferenceAliasWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getReferenceAliasWhereEntryAccess().getGroup()); }
 (rule__ReferenceAliasWhereEntry__Group__0)
@@ -651,7 +673,8 @@ finally {
 
 
 // Entry rule entryRuleSubselectWhereEntry
-entryRuleSubselectWhereEntry :
+entryRuleSubselectWhereEntry 
+:
 { before(grammarAccess.getSubselectWhereEntryRule()); }
 	 ruleSubselectWhereEntry
 { after(grammarAccess.getSubselectWhereEntryRule()); } 
@@ -663,7 +686,7 @@ ruleSubselectWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getSubselectWhereEntryAccess().getGroup()); }
 (rule__SubselectWhereEntry__Group__0)
@@ -678,7 +701,8 @@ finally {
 
 
 // Entry rule entryRuleAliasWhereEntry
-entryRuleAliasWhereEntry :
+entryRuleAliasWhereEntry 
+:
 { before(grammarAccess.getAliasWhereEntryRule()); }
 	 ruleAliasWhereEntry
 { after(grammarAccess.getAliasWhereEntryRule()); } 
@@ -690,7 +714,7 @@ ruleAliasWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getAliasWhereEntryAccess().getGroup()); }
 (rule__AliasWhereEntry__Group__0)

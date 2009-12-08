@@ -57,7 +57,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.Bug288760TestLa
 
 
 // Entry rule entryRuleWorkflowElement
-entryRuleWorkflowElement :
+entryRuleWorkflowElement 
+:
 { before(grammarAccess.getWorkflowElementRule()); }
 	 ruleWorkflowElement
 { after(grammarAccess.getWorkflowElementRule()); } 
@@ -69,7 +70,7 @@ ruleWorkflowElement
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getWorkflowElementAccess().getAlternatives()); }
 (rule__WorkflowElement__Alternatives)
@@ -84,7 +85,8 @@ finally {
 
 
 // Entry rule entryRuleAttribute
-entryRuleAttribute :
+entryRuleAttribute 
+:
 { before(grammarAccess.getAttributeRule()); }
 	 ruleAttribute
 { after(grammarAccess.getAttributeRule()); } 
@@ -96,7 +98,7 @@ ruleAttribute
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getAttributeAccess().getGroup()); }
 (rule__Attribute__Group__0)

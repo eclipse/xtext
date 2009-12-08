@@ -69,7 +69,8 @@ import org.eclipse.xtext.parser.assignments.services.AssignmentsTestLanguageGram
 
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] :
+entryRuleModel returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
@@ -281,14 +282,16 @@ ruleModel returns [EObject current=null]
 )
 
 )
-)));
+)))
+;
 
 
 
 
 
 // Entry rule entryRuleSingleValue
-entryRuleSingleValue returns [EObject current=null] :
+entryRuleSingleValue returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getSingleValueRule(), currentNode); }
 	 iv_ruleSingleValue=ruleSingleValue 
 	 { $current=$iv_ruleSingleValue.current; } 
@@ -412,14 +415,16 @@ ruleSingleValue returns [EObject current=null]
 	    }
 
 )
-)));
+)))
+;
 
 
 
 
 
 // Entry rule entryRuleMultiValue
-entryRuleMultiValue returns [EObject current=null] :
+entryRuleMultiValue returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getMultiValueRule(), currentNode); }
 	 iv_ruleMultiValue=ruleMultiValue 
 	 { $current=$iv_ruleMultiValue.current; } 
@@ -543,14 +548,16 @@ ruleMultiValue returns [EObject current=null]
 	    }
 
 )
-)));
+)))
+;
 
 
 
 
 
 // Entry rule entryRuleSingleDatatype
-entryRuleSingleDatatype returns [EObject current=null] :
+entryRuleSingleDatatype returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getSingleDatatypeRule(), currentNode); }
 	 iv_ruleSingleDatatype=ruleSingleDatatype 
 	 { $current=$iv_ruleSingleDatatype.current; } 
@@ -674,14 +681,16 @@ ruleSingleDatatype returns [EObject current=null]
 	    }
 
 )
-)));
+)))
+;
 
 
 
 
 
 // Entry rule entryRuleMultiDatatype
-entryRuleMultiDatatype returns [EObject current=null] :
+entryRuleMultiDatatype returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getMultiDatatypeRule(), currentNode); }
 	 iv_ruleMultiDatatype=ruleMultiDatatype 
 	 { $current=$iv_ruleMultiDatatype.current; } 
@@ -805,14 +814,16 @@ ruleMultiDatatype returns [EObject current=null]
 	    }
 
 )
-)));
+)))
+;
 
 
 
 
 
 // Entry rule entryRuleIdDatatype
-entryRuleIdDatatype returns [String current=null] :
+entryRuleIdDatatype returns [String current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getIdDatatypeRule(), currentNode); } 
 	 iv_ruleIdDatatype=ruleIdDatatype 
 	 { $current=$iv_ruleIdDatatype.current.getText(); }  
@@ -841,7 +852,8 @@ ruleIdDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToke
 
 
 // Entry rule entryRuleStringDatatype
-entryRuleStringDatatype returns [String current=null] :
+entryRuleStringDatatype returns [String current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getStringDatatypeRule(), currentNode); } 
 	 iv_ruleStringDatatype=ruleStringDatatype 
 	 { $current=$iv_ruleStringDatatype.current.getText(); }  

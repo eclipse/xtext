@@ -69,7 +69,8 @@ import org.eclipse.xtext.xtext.ecoreInference.services.UnassignedRuleCallTestLan
 
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] :
+entryRuleModel returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
@@ -115,14 +116,16 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleModelFeatures
-entryRuleModelFeatures returns [EObject current=null] :
+entryRuleModelFeatures returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelFeaturesRule(), currentNode); }
 	 iv_ruleModelFeatures=ruleModelFeatures 
 	 { $current=$iv_ruleModelFeatures.current; } 
@@ -168,14 +171,16 @@ ruleModelFeatures returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getModelFeaturesAccess().getSemicolonKeyword_3(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleDataTypeRule
-entryRuleDataTypeRule returns [String current=null] :
+entryRuleDataTypeRule returns [String current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getDataTypeRuleRule(), currentNode); } 
 	 iv_ruleDataTypeRule=ruleDataTypeRule 
 	 { $current=$iv_ruleDataTypeRule.current.getText(); }  

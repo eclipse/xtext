@@ -57,7 +57,8 @@ import org.eclipse.xtext.testlanguages.services.ContentAssistTestLanguageGrammar
 
 
 // Entry rule entryRuleStart
-entryRuleStart :
+entryRuleStart 
+:
 { before(grammarAccess.getStartRule()); }
 	 ruleStart
 { after(grammarAccess.getStartRule()); } 
@@ -69,7 +70,7 @@ ruleStart
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getStartAccess().getGroup()); }
 (rule__Start__Group__0)
@@ -84,7 +85,8 @@ finally {
 
 
 // Entry rule entryRuleAbstractRule
-entryRuleAbstractRule :
+entryRuleAbstractRule 
+:
 { before(grammarAccess.getAbstractRuleRule()); }
 	 ruleAbstractRule
 { after(grammarAccess.getAbstractRuleRule()); } 
@@ -96,7 +98,7 @@ ruleAbstractRule
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getAbstractRuleAccess().getAlternatives()); }
 (rule__AbstractRule__Alternatives)
@@ -111,7 +113,8 @@ finally {
 
 
 // Entry rule entryRuleFirstAbstractRuleChild
-entryRuleFirstAbstractRuleChild :
+entryRuleFirstAbstractRuleChild 
+:
 { before(grammarAccess.getFirstAbstractRuleChildRule()); }
 	 ruleFirstAbstractRuleChild
 { after(grammarAccess.getFirstAbstractRuleChildRule()); } 
@@ -123,7 +126,7 @@ ruleFirstAbstractRuleChild
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getFirstAbstractRuleChildAccess().getGroup()); }
 (rule__FirstAbstractRuleChild__Group__0)
@@ -138,7 +141,8 @@ finally {
 
 
 // Entry rule entryRuleSecondAbstractRuleChild
-entryRuleSecondAbstractRuleChild :
+entryRuleSecondAbstractRuleChild 
+:
 { before(grammarAccess.getSecondAbstractRuleChildRule()); }
 	 ruleSecondAbstractRuleChild
 { after(grammarAccess.getSecondAbstractRuleChildRule()); } 
@@ -150,7 +154,7 @@ ruleSecondAbstractRuleChild
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getSecondAbstractRuleChildAccess().getGroup()); }
 (rule__SecondAbstractRuleChild__Group__0)
@@ -165,7 +169,8 @@ finally {
 
 
 // Entry rule entryRuleAbstractRuleCall
-entryRuleAbstractRuleCall :
+entryRuleAbstractRuleCall 
+:
 { before(grammarAccess.getAbstractRuleCallRule()); }
 	 ruleAbstractRuleCall
 { after(grammarAccess.getAbstractRuleCallRule()); } 
@@ -177,7 +182,7 @@ ruleAbstractRuleCall
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getAbstractRuleCallAccess().getRuleAssignment()); }
 (rule__AbstractRuleCall__RuleAssignment)

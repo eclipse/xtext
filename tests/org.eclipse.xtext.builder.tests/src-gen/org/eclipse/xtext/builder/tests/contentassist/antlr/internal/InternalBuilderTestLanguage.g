@@ -57,7 +57,8 @@ import org.eclipse.xtext.builder.tests.services.BuilderTestLanguageGrammarAccess
 
 
 // Entry rule entryRuleNamedElement
-entryRuleNamedElement :
+entryRuleNamedElement 
+:
 { before(grammarAccess.getNamedElementRule()); }
 	 ruleNamedElement
 { after(grammarAccess.getNamedElementRule()); } 
@@ -69,7 +70,7 @@ ruleNamedElement
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getNamedElementAccess().getAlternatives()); }
 (rule__NamedElement__Alternatives)
@@ -84,7 +85,8 @@ finally {
 
 
 // Entry rule entryRuleNamespace
-entryRuleNamespace :
+entryRuleNamespace 
+:
 { before(grammarAccess.getNamespaceRule()); }
 	 ruleNamespace
 { after(grammarAccess.getNamespaceRule()); } 
@@ -96,7 +98,7 @@ ruleNamespace
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getNamespaceAccess().getGroup()); }
 (rule__Namespace__Group__0)
@@ -111,7 +113,8 @@ finally {
 
 
 // Entry rule entryRuleImport
-entryRuleImport :
+entryRuleImport 
+:
 { before(grammarAccess.getImportRule()); }
 	 ruleImport
 { after(grammarAccess.getImportRule()); } 
@@ -123,7 +126,7 @@ ruleImport
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getImportAccess().getGroup()); }
 (rule__Import__Group__0)
@@ -138,7 +141,8 @@ finally {
 
 
 // Entry rule entryRuleElement
-entryRuleElement :
+entryRuleElement 
+:
 { before(grammarAccess.getElementRule()); }
 	 ruleElement
 { after(grammarAccess.getElementRule()); } 
@@ -150,7 +154,7 @@ ruleElement
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getElementAccess().getGroup()); }
 (rule__Element__Group__0)
@@ -165,7 +169,8 @@ finally {
 
 
 // Entry rule entryRuleQualifiedName
-entryRuleQualifiedName :
+entryRuleQualifiedName 
+:
 { before(grammarAccess.getQualifiedNameRule()); }
 	 ruleQualifiedName
 { after(grammarAccess.getQualifiedNameRule()); } 
@@ -177,7 +182,7 @@ ruleQualifiedName
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getQualifiedNameAccess().getGroup()); }
 (rule__QualifiedName__Group__0)

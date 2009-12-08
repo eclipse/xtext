@@ -69,7 +69,8 @@ import org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAcce
 
 
 // Entry rule entryRuleStatemachine
-entryRuleStatemachine returns [EObject current=null] :
+entryRuleStatemachine returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getStatemachineRule(), currentNode); }
 	 iv_ruleStatemachine=ruleStatemachine 
 	 { $current=$iv_ruleStatemachine.current; } 
@@ -171,14 +172,16 @@ ruleStatemachine returns [EObject current=null]
 	    }
 
 )
-)*);
+)*)
+;
 
 
 
 
 
 // Entry rule entryRuleEvent
-entryRuleEvent returns [EObject current=null] :
+entryRuleEvent returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getEventRule(), currentNode); }
 	 iv_ruleEvent=ruleEvent 
 	 { $current=$iv_ruleEvent.current; } 
@@ -261,14 +264,16 @@ ruleEvent returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleCommand
-entryRuleCommand returns [EObject current=null] :
+entryRuleCommand returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getCommandRule(), currentNode); }
 	 iv_ruleCommand=ruleCommand 
 	 { $current=$iv_ruleCommand.current; } 
@@ -330,14 +335,16 @@ ruleCommand returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleState
-entryRuleState returns [EObject current=null] :
+entryRuleState returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getStateRule(), currentNode); }
 	 iv_ruleState=ruleState 
 	 { $current=$iv_ruleState.current; } 
@@ -433,14 +440,16 @@ ruleState returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getStateAccess().getEndKeyword_4(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleTransition
-entryRuleTransition returns [EObject current=null] :
+entryRuleTransition returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTransitionRule(), currentNode); }
 	 iv_ruleTransition=ruleTransition 
 	 { $current=$iv_ruleTransition.current; } 
@@ -486,7 +495,8 @@ ruleTransition returns [EObject current=null]
 	}
 
 )
-));
+))
+;
 
 
 

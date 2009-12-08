@@ -57,7 +57,8 @@ import org.eclipse.xtext.example.services.EcoreDslGrammarAccess;
 
 
 // Entry rule entryRuleEcoreDsl
-entryRuleEcoreDsl :
+entryRuleEcoreDsl 
+:
 { before(grammarAccess.getEcoreDslRule()); }
 	 ruleEcoreDsl
 { after(grammarAccess.getEcoreDslRule()); } 
@@ -69,7 +70,7 @@ ruleEcoreDsl
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getEcoreDslAccess().getGroup()); }
 (rule__EcoreDsl__Group__0)
@@ -84,7 +85,8 @@ finally {
 
 
 // Entry rule entryRuleReferencedMetamodel
-entryRuleReferencedMetamodel :
+entryRuleReferencedMetamodel 
+:
 { before(grammarAccess.getReferencedMetamodelRule()); }
 	 ruleReferencedMetamodel
 { after(grammarAccess.getReferencedMetamodelRule()); } 
@@ -96,7 +98,7 @@ ruleReferencedMetamodel
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getReferencedMetamodelAccess().getGroup()); }
 (rule__ReferencedMetamodel__Group__0)
@@ -111,7 +113,8 @@ finally {
 
 
 // Entry rule entryRuleEPackageDecl
-entryRuleEPackageDecl :
+entryRuleEPackageDecl 
+:
 { before(grammarAccess.getEPackageDeclRule()); }
 	 ruleEPackageDecl
 { after(grammarAccess.getEPackageDeclRule()); } 
@@ -123,7 +126,7 @@ ruleEPackageDecl
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getEPackageDeclAccess().getGroup()); }
 (rule__EPackageDecl__Group__0)
@@ -138,7 +141,8 @@ finally {
 
 
 // Entry rule entryRuleSubEPackageDecl
-entryRuleSubEPackageDecl :
+entryRuleSubEPackageDecl 
+:
 { before(grammarAccess.getSubEPackageDeclRule()); }
 	 ruleSubEPackageDecl
 { after(grammarAccess.getSubEPackageDeclRule()); } 
@@ -150,7 +154,7 @@ ruleSubEPackageDecl
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getSubEPackageDeclAccess().getGroup()); }
 (rule__SubEPackageDecl__Group__0)
@@ -165,7 +169,8 @@ finally {
 
 
 // Entry rule entryRuleEClassifierDecl
-entryRuleEClassifierDecl :
+entryRuleEClassifierDecl 
+:
 { before(grammarAccess.getEClassifierDeclRule()); }
 	 ruleEClassifierDecl
 { after(grammarAccess.getEClassifierDeclRule()); } 
@@ -177,7 +182,7 @@ ruleEClassifierDecl
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getEClassifierDeclAccess().getAlternatives()); }
 (rule__EClassifierDecl__Alternatives)
@@ -192,7 +197,8 @@ finally {
 
 
 // Entry rule entryRuleEDataTypeDecl
-entryRuleEDataTypeDecl :
+entryRuleEDataTypeDecl 
+:
 { before(grammarAccess.getEDataTypeDeclRule()); }
 	 ruleEDataTypeDecl
 { after(grammarAccess.getEDataTypeDeclRule()); } 
@@ -204,7 +210,7 @@ ruleEDataTypeDecl
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getEDataTypeDeclAccess().getAlternatives()); }
 (rule__EDataTypeDecl__Alternatives)
@@ -219,7 +225,8 @@ finally {
 
 
 // Entry rule entryRuleEAnnotationDecl
-entryRuleEAnnotationDecl :
+entryRuleEAnnotationDecl 
+:
 { before(grammarAccess.getEAnnotationDeclRule()); }
 	 ruleEAnnotationDecl
 { after(grammarAccess.getEAnnotationDeclRule()); } 
@@ -231,7 +238,7 @@ ruleEAnnotationDecl
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getEAnnotationDeclAccess().getGroup()); }
 (rule__EAnnotationDecl__Group__0)
@@ -246,7 +253,8 @@ finally {
 
 
 // Entry rule entryRuleEClassDecl
-entryRuleEClassDecl :
+entryRuleEClassDecl 
+:
 { before(grammarAccess.getEClassDeclRule()); }
 	 ruleEClassDecl
 { after(grammarAccess.getEClassDeclRule()); } 
@@ -258,7 +266,7 @@ ruleEClassDecl
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getEClassDeclAccess().getGroup()); }
 (rule__EClassDecl__Group__0)
@@ -273,7 +281,8 @@ finally {
 
 
 // Entry rule entryRuleEStructuralFeatureDecl
-entryRuleEStructuralFeatureDecl :
+entryRuleEStructuralFeatureDecl 
+:
 { before(grammarAccess.getEStructuralFeatureDeclRule()); }
 	 ruleEStructuralFeatureDecl
 { after(grammarAccess.getEStructuralFeatureDeclRule()); } 
@@ -285,7 +294,7 @@ ruleEStructuralFeatureDecl
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getEStructuralFeatureDeclAccess().getAlternatives()); }
 (rule__EStructuralFeatureDecl__Alternatives)
@@ -300,7 +309,8 @@ finally {
 
 
 // Entry rule entryRuleEAttributeDecl
-entryRuleEAttributeDecl :
+entryRuleEAttributeDecl 
+:
 { before(grammarAccess.getEAttributeDeclRule()); }
 	 ruleEAttributeDecl
 { after(grammarAccess.getEAttributeDeclRule()); } 
@@ -312,7 +322,7 @@ ruleEAttributeDecl
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getEAttributeDeclAccess().getGroup()); }
 (rule__EAttributeDecl__Group__0)
@@ -327,7 +337,8 @@ finally {
 
 
 // Entry rule entryRuleEReferenceDecl
-entryRuleEReferenceDecl :
+entryRuleEReferenceDecl 
+:
 { before(grammarAccess.getEReferenceDeclRule()); }
 	 ruleEReferenceDecl
 { after(grammarAccess.getEReferenceDeclRule()); } 
@@ -339,7 +350,7 @@ ruleEReferenceDecl
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getEReferenceDeclAccess().getGroup()); }
 (rule__EReferenceDecl__Group__0)
@@ -354,7 +365,8 @@ finally {
 
 
 // Entry rule entryRuleEEnumDecl
-entryRuleEEnumDecl :
+entryRuleEEnumDecl 
+:
 { before(grammarAccess.getEEnumDeclRule()); }
 	 ruleEEnumDecl
 { after(grammarAccess.getEEnumDeclRule()); } 
@@ -366,7 +378,7 @@ ruleEEnumDecl
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getEEnumDeclAccess().getGroup()); }
 (rule__EEnumDecl__Group__0)
@@ -381,7 +393,8 @@ finally {
 
 
 // Entry rule entryRuleEEnumLiteralDecl
-entryRuleEEnumLiteralDecl :
+entryRuleEEnumLiteralDecl 
+:
 { before(grammarAccess.getEEnumLiteralDeclRule()); }
 	 ruleEEnumLiteralDecl
 { after(grammarAccess.getEEnumLiteralDeclRule()); } 
@@ -393,7 +406,7 @@ ruleEEnumLiteralDecl
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getEEnumLiteralDeclAccess().getGroup()); }
 (rule__EEnumLiteralDecl__Group__0)
@@ -408,7 +421,8 @@ finally {
 
 
 // Entry rule entryRuleETypeParameterDecl
-entryRuleETypeParameterDecl :
+entryRuleETypeParameterDecl 
+:
 { before(grammarAccess.getETypeParameterDeclRule()); }
 	 ruleETypeParameterDecl
 { after(grammarAccess.getETypeParameterDeclRule()); } 
@@ -420,7 +434,7 @@ ruleETypeParameterDecl
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getETypeParameterDeclAccess().getGroup()); }
 (rule__ETypeParameterDecl__Group__0)
@@ -435,7 +449,8 @@ finally {
 
 
 // Entry rule entryRuleEGenericTypeReferenceDecl
-entryRuleEGenericTypeReferenceDecl :
+entryRuleEGenericTypeReferenceDecl 
+:
 { before(grammarAccess.getEGenericTypeReferenceDeclRule()); }
 	 ruleEGenericTypeReferenceDecl
 { after(grammarAccess.getEGenericTypeReferenceDeclRule()); } 
@@ -447,7 +462,7 @@ ruleEGenericTypeReferenceDecl
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getEGenericTypeReferenceDeclAccess().getAlternatives()); }
 (rule__EGenericTypeReferenceDecl__Alternatives)
@@ -462,7 +477,8 @@ finally {
 
 
 // Entry rule entryRuleEGenericTypeDecl
-entryRuleEGenericTypeDecl :
+entryRuleEGenericTypeDecl 
+:
 { before(grammarAccess.getEGenericTypeDeclRule()); }
 	 ruleEGenericTypeDecl
 { after(grammarAccess.getEGenericTypeDeclRule()); } 
@@ -474,7 +490,7 @@ ruleEGenericTypeDecl
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getEGenericTypeDeclAccess().getAlternatives()); }
 (rule__EGenericTypeDecl__Alternatives)
@@ -489,7 +505,8 @@ finally {
 
 
 // Entry rule entryRuleEOperationDecl
-entryRuleEOperationDecl :
+entryRuleEOperationDecl 
+:
 { before(grammarAccess.getEOperationDeclRule()); }
 	 ruleEOperationDecl
 { after(grammarAccess.getEOperationDeclRule()); } 
@@ -501,7 +518,7 @@ ruleEOperationDecl
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getEOperationDeclAccess().getGroup()); }
 (rule__EOperationDecl__Group__0)
@@ -516,7 +533,8 @@ finally {
 
 
 // Entry rule entryRuleEParameterDecl
-entryRuleEParameterDecl :
+entryRuleEParameterDecl 
+:
 { before(grammarAccess.getEParameterDeclRule()); }
 	 ruleEParameterDecl
 { after(grammarAccess.getEParameterDeclRule()); } 
@@ -528,7 +546,7 @@ ruleEParameterDecl
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getEParameterDeclAccess().getGroup()); }
 (rule__EParameterDecl__Group__0)
@@ -543,7 +561,8 @@ finally {
 
 
 // Entry rule entryRuleMapEntry
-entryRuleMapEntry :
+entryRuleMapEntry 
+:
 { before(grammarAccess.getMapEntryRule()); }
 	 ruleMapEntry
 { after(grammarAccess.getMapEntryRule()); } 
@@ -555,7 +574,7 @@ ruleMapEntry
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getMapEntryAccess().getGroup()); }
 (rule__MapEntry__Group__0)
@@ -570,7 +589,8 @@ finally {
 
 
 // Entry rule entryRuleQID
-entryRuleQID :
+entryRuleQID 
+:
 { before(grammarAccess.getQIDRule()); }
 	 ruleQID
 { after(grammarAccess.getQIDRule()); } 
@@ -582,7 +602,7 @@ ruleQID
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getQIDAccess().getGroup()); }
 (rule__QID__Group__0)
@@ -597,7 +617,8 @@ finally {
 
 
 // Entry rule entryRuleSTRING_OR_QID
-entryRuleSTRING_OR_QID :
+entryRuleSTRING_OR_QID 
+:
 { before(grammarAccess.getSTRING_OR_QIDRule()); }
 	 ruleSTRING_OR_QID
 { after(grammarAccess.getSTRING_OR_QIDRule()); } 
@@ -609,7 +630,7 @@ ruleSTRING_OR_QID
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getSTRING_OR_QIDAccess().getAlternatives()); }
 (rule__STRING_OR_QID__Alternatives)
@@ -624,7 +645,8 @@ finally {
 
 
 // Entry rule entryRuleSINT
-entryRuleSINT :
+entryRuleSINT 
+:
 { before(grammarAccess.getSINTRule()); }
 	 ruleSINT
 { after(grammarAccess.getSINTRule()); } 
@@ -636,7 +658,7 @@ ruleSINT
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getSINTAccess().getGroup()); }
 (rule__SINT__Group__0)

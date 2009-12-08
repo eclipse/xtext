@@ -69,7 +69,8 @@ import org.eclipse.xtext.testlanguages.services.TestLanguageGrammarAccess;
 
 
 // Entry rule entryRuleEntryRule
-entryRuleEntryRule returns [EObject current=null] :
+entryRuleEntryRule returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getEntryRuleRule(), currentNode); }
 	 iv_ruleEntryRule=ruleEntryRule 
 	 { $current=$iv_ruleEntryRule.current; } 
@@ -107,14 +108,16 @@ ruleEntryRule returns [EObject current=null]
 	    }
 
 )
-)*;
+)*
+;
 
 
 
 
 
 // Entry rule entryRuleAbstractRule
-entryRuleAbstractRule returns [EObject current=null] :
+entryRuleAbstractRule returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getAbstractRuleRule(), currentNode); }
 	 iv_ruleAbstractRule=ruleAbstractRule 
 	 { $current=$iv_ruleAbstractRule.current; } 
@@ -147,14 +150,16 @@ ruleAbstractRule returns [EObject current=null]
         $current = $this_ReducibleRule_1.current; 
         currentNode = currentNode.getParent();
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleChoiceRule
-entryRuleChoiceRule returns [EObject current=null] :
+entryRuleChoiceRule returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getChoiceRuleRule(), currentNode); }
 	 iv_ruleChoiceRule=ruleChoiceRule 
 	 { $current=$iv_ruleChoiceRule.current; } 
@@ -217,14 +222,16 @@ ruleChoiceRule returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleReducibleRule
-entryRuleReducibleRule returns [EObject current=null] :
+entryRuleReducibleRule returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getReducibleRuleRule(), currentNode); }
 	 iv_ruleReducibleRule=ruleReducibleRule 
 	 { $current=$iv_ruleReducibleRule.current; } 
@@ -291,14 +298,16 @@ ruleReducibleRule returns [EObject current=null]
 	    }
 
 )
-))?);
+))?)
+;
 
 
 
 
 
 // Entry rule entryRuleTerminalRule
-entryRuleTerminalRule returns [EObject current=null] :
+entryRuleTerminalRule returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTerminalRuleRule(), currentNode); }
 	 iv_ruleTerminalRule=ruleTerminalRule 
 	 { $current=$iv_ruleTerminalRule.current; } 
@@ -336,7 +345,8 @@ ruleTerminalRule returns [EObject current=null]
 	    }
 
 )
-);
+)
+;
 
 
 

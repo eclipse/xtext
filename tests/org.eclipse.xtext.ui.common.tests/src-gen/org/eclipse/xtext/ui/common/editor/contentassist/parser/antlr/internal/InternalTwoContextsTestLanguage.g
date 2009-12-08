@@ -69,7 +69,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.TwoContextsTest
 
 
 // Entry rule entryRuleMainModel
-entryRuleMainModel returns [EObject current=null] :
+entryRuleMainModel returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getMainModelRule(), currentNode); }
 	 iv_ruleMainModel=ruleMainModel 
 	 { $current=$iv_ruleMainModel.current; } 
@@ -107,14 +108,16 @@ ruleMainModel returns [EObject current=null]
 	    }
 
 )
-)*;
+)*
+;
 
 
 
 
 
 // Entry rule entryRuleAnElement
-entryRuleAnElement returns [EObject current=null] :
+entryRuleAnElement returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getAnElementRule(), currentNode); }
 	 iv_ruleAnElement=ruleAnElement 
 	 { $current=$iv_ruleAnElement.current; } 
@@ -174,7 +177,8 @@ ruleAnElement returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getAnElementAccess().getSemicolonKeyword_2(), null); 
     }
-);
+)
+;
 
 
 

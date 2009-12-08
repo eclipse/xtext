@@ -69,7 +69,8 @@ import org.eclipse.xtext.testlanguages.services.ActionTestLanguageGrammarAccess;
 
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] :
+entryRuleModel returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
@@ -132,14 +133,16 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-))?);
+))?)
+;
 
 
 
 
 
 // Entry rule entryRuleChild
-entryRuleChild returns [EObject current=null] :
+entryRuleChild returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getChildRule(), currentNode); }
 	 iv_ruleChild=ruleChild 
 	 { $current=$iv_ruleChild.current; } 
@@ -177,7 +180,8 @@ ruleChild returns [EObject current=null]
 	    }
 
 )
-);
+)
+;
 
 
 

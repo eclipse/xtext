@@ -69,7 +69,8 @@ import org.eclipse.xtext.generator.ecore.services.EcoreFragmentTestLanguageGramm
 
 
 // Entry rule entryRuleSecond
-entryRuleSecond returns [EObject current=null] :
+entryRuleSecond returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getSecondRule(), currentNode); }
 	 iv_ruleSecond=ruleSecond 
 	 { $current=$iv_ruleSecond.current; } 
@@ -125,7 +126,8 @@ ruleSecond returns [EObject current=null]
 	}
 
 )
-));
+))
+;
 
 
 

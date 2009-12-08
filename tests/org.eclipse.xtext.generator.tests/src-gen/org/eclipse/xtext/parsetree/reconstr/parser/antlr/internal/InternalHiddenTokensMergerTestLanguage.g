@@ -70,7 +70,8 @@ import org.eclipse.xtext.parsetree.reconstr.services.HiddenTokensMergerTestLangu
 
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] :
+entryRuleModel returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
@@ -103,14 +104,16 @@ ruleModel returns [EObject current=null]
         $current = $this_EnumBug_1.current; 
         currentNode = currentNode.getParent();
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleDatatypeBug286557
-entryRuleDatatypeBug286557 returns [EObject current=null] :
+entryRuleDatatypeBug286557 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getDatatypeBug286557Rule(), currentNode); }
 	 iv_ruleDatatypeBug286557=ruleDatatypeBug286557 
 	 { $current=$iv_ruleDatatypeBug286557.current; } 
@@ -176,14 +179,16 @@ ruleDatatypeBug286557 returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getDatatypeBug286557Access().getSemicolonKeyword_3(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleFQN
-entryRuleFQN returns [String current=null] :
+entryRuleFQN returns [String current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getFQNRule(), currentNode); } 
 	 iv_ruleFQN=ruleFQN 
 	 { $current=$iv_ruleFQN.current.getText(); }  
@@ -225,7 +230,8 @@ ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 
 
 // Entry rule entryRuleEnumBug
-entryRuleEnumBug returns [EObject current=null] :
+entryRuleEnumBug returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getEnumBugRule(), currentNode); }
 	 iv_ruleEnumBug=ruleEnumBug 
 	 { $current=$iv_ruleEnumBug.current; } 
@@ -295,7 +301,8 @@ ruleEnumBug returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 

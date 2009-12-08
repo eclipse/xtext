@@ -69,7 +69,8 @@ import org.eclipse.xtext.parser.assignments.services.Bug288432TestLanguageGramma
 
 
 // Entry rule entryRuleBody
-entryRuleBody returns [EObject current=null] :
+entryRuleBody returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getBodyRule(), currentNode); }
 	 iv_ruleBody=ruleBody 
 	 { $current=$iv_ruleBody.current; } 
@@ -223,14 +224,16 @@ ruleBody returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getBodyAccess().getEndBodyKeyword_4(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleFoo
-entryRuleFoo returns [EObject current=null] :
+entryRuleFoo returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getFooRule(), currentNode); }
 	 iv_ruleFoo=ruleFoo 
 	 { $current=$iv_ruleFoo.current; } 
@@ -268,14 +271,16 @@ ruleFoo returns [EObject current=null]
 	    }
 
 )
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleContent
-entryRuleContent returns [EObject current=null] :
+entryRuleContent returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getContentRule(), currentNode); }
 	 iv_ruleContent=ruleContent 
 	 { $current=$iv_ruleContent.current; } 
@@ -306,14 +311,16 @@ ruleContent returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getContentAccess().getEndContentKeyword_2(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleMyElement
-entryRuleMyElement returns [EObject current=null] :
+entryRuleMyElement returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getMyElementRule(), currentNode); }
 	 iv_ruleMyElement=ruleMyElement 
 	 { $current=$iv_ruleMyElement.current; } 
@@ -379,7 +386,8 @@ ruleMyElement returns [EObject current=null]
 )
 
 )
-));
+))
+;
 
 
 
@@ -388,7 +396,8 @@ ruleMyElement returns [EObject current=null]
 
 
 // Entry rule entryRuleParameter
-entryRuleParameter returns [EObject current=null] :
+entryRuleParameter returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getParameterRule(), currentNode); }
 	 iv_ruleParameter=ruleParameter 
 	 { $current=$iv_ruleParameter.current; } 
@@ -440,14 +449,16 @@ ruleParameter returns [EObject current=null]
 	}
 
 )
-)?);
+)?)
+;
 
 
 
 
 
 // Entry rule entryRuleParameterRef
-entryRuleParameterRef returns [EObject current=null] :
+entryRuleParameterRef returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getParameterRefRule(), currentNode); }
 	 iv_ruleParameterRef=ruleParameterRef 
 	 { $current=$iv_ruleParameterRef.current; } 
@@ -475,14 +486,16 @@ ruleParameterRef returns [EObject current=null]
 	}
 
 )
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleMyInt
-entryRuleMyInt returns [EObject current=null] :
+entryRuleMyInt returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getMyIntRule(), currentNode); }
 	 iv_ruleMyInt=ruleMyInt 
 	 { $current=$iv_ruleMyInt.current; } 
@@ -520,7 +533,8 @@ ruleMyInt returns [EObject current=null]
 	    }
 
 )
-);
+)
+;
 
 
 

@@ -57,7 +57,8 @@ import org.eclipse.xtext.example.services.FowlerDslGrammarAccess;
 
 
 // Entry rule entryRuleStatemachine
-entryRuleStatemachine :
+entryRuleStatemachine 
+:
 { before(grammarAccess.getStatemachineRule()); }
 	 ruleStatemachine
 { after(grammarAccess.getStatemachineRule()); } 
@@ -69,7 +70,7 @@ ruleStatemachine
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getStatemachineAccess().getGroup()); }
 (rule__Statemachine__Group__0)
@@ -84,7 +85,8 @@ finally {
 
 
 // Entry rule entryRuleEvent
-entryRuleEvent :
+entryRuleEvent 
+:
 { before(grammarAccess.getEventRule()); }
 	 ruleEvent
 { after(grammarAccess.getEventRule()); } 
@@ -96,7 +98,7 @@ ruleEvent
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getEventAccess().getGroup()); }
 (rule__Event__Group__0)
@@ -111,7 +113,8 @@ finally {
 
 
 // Entry rule entryRuleCommand
-entryRuleCommand :
+entryRuleCommand 
+:
 { before(grammarAccess.getCommandRule()); }
 	 ruleCommand
 { after(grammarAccess.getCommandRule()); } 
@@ -123,7 +126,7 @@ ruleCommand
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getCommandAccess().getGroup()); }
 (rule__Command__Group__0)
@@ -138,7 +141,8 @@ finally {
 
 
 // Entry rule entryRuleState
-entryRuleState :
+entryRuleState 
+:
 { before(grammarAccess.getStateRule()); }
 	 ruleState
 { after(grammarAccess.getStateRule()); } 
@@ -150,7 +154,7 @@ ruleState
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getStateAccess().getGroup()); }
 (rule__State__Group__0)
@@ -165,7 +169,8 @@ finally {
 
 
 // Entry rule entryRuleTransition
-entryRuleTransition :
+entryRuleTransition 
+:
 { before(grammarAccess.getTransitionRule()); }
 	 ruleTransition
 { after(grammarAccess.getTransitionRule()); } 
@@ -177,7 +182,7 @@ ruleTransition
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getTransitionAccess().getGroup()); }
 (rule__Transition__Group__0)

@@ -58,7 +58,8 @@ import org.eclipse.xtext.example.services.DomainmodelGrammarAccess;
 
 
 // Entry rule entryRuleModel
-entryRuleModel :
+entryRuleModel 
+:
 { before(grammarAccess.getModelRule()); }
 	 ruleModel
 { after(grammarAccess.getModelRule()); } 
@@ -70,7 +71,7 @@ ruleModel
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getModelAccess().getElementsAssignment()); }
 (rule__Model__ElementsAssignment)*
@@ -85,7 +86,8 @@ finally {
 
 
 // Entry rule entryRuleAbstractElement
-entryRuleAbstractElement :
+entryRuleAbstractElement 
+:
 { before(grammarAccess.getAbstractElementRule()); }
 	 ruleAbstractElement
 { after(grammarAccess.getAbstractElementRule()); } 
@@ -97,7 +99,7 @@ ruleAbstractElement
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getAbstractElementAccess().getAlternatives()); }
 (rule__AbstractElement__Alternatives)
@@ -112,7 +114,8 @@ finally {
 
 
 // Entry rule entryRuleImport
-entryRuleImport :
+entryRuleImport 
+:
 { before(grammarAccess.getImportRule()); }
 	 ruleImport
 { after(grammarAccess.getImportRule()); } 
@@ -124,7 +127,7 @@ ruleImport
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getImportAccess().getGroup()); }
 (rule__Import__Group__0)
@@ -139,7 +142,8 @@ finally {
 
 
 // Entry rule entryRulePackageDeclaration
-entryRulePackageDeclaration :
+entryRulePackageDeclaration 
+:
 { before(grammarAccess.getPackageDeclarationRule()); }
 	 rulePackageDeclaration
 { after(grammarAccess.getPackageDeclarationRule()); } 
@@ -151,7 +155,7 @@ rulePackageDeclaration
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getPackageDeclarationAccess().getGroup()); }
 (rule__PackageDeclaration__Group__0)
@@ -166,7 +170,8 @@ finally {
 
 
 // Entry rule entryRuleType
-entryRuleType :
+entryRuleType 
+:
 { before(grammarAccess.getTypeRule()); }
 	 ruleType
 { after(grammarAccess.getTypeRule()); } 
@@ -178,7 +183,7 @@ ruleType
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getTypeAccess().getAlternatives()); }
 (rule__Type__Alternatives)
@@ -193,7 +198,8 @@ finally {
 
 
 // Entry rule entryRuleDataType
-entryRuleDataType :
+entryRuleDataType 
+:
 { before(grammarAccess.getDataTypeRule()); }
 	 ruleDataType
 { after(grammarAccess.getDataTypeRule()); } 
@@ -205,7 +211,7 @@ ruleDataType
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getDataTypeAccess().getGroup()); }
 (rule__DataType__Group__0)
@@ -220,7 +226,8 @@ finally {
 
 
 // Entry rule entryRuleEntity
-entryRuleEntity :
+entryRuleEntity 
+:
 { before(grammarAccess.getEntityRule()); }
 	 ruleEntity
 { after(grammarAccess.getEntityRule()); } 
@@ -232,7 +239,7 @@ ruleEntity
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getEntityAccess().getGroup()); }
 (rule__Entity__Group__0)
@@ -247,7 +254,8 @@ finally {
 
 
 // Entry rule entryRuleFeature
-entryRuleFeature :
+entryRuleFeature 
+:
 { before(grammarAccess.getFeatureRule()); }
 	 ruleFeature
 { after(grammarAccess.getFeatureRule()); } 
@@ -259,7 +267,7 @@ ruleFeature
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getFeatureAccess().getAlternatives()); }
 (rule__Feature__Alternatives)
@@ -274,7 +282,8 @@ finally {
 
 
 // Entry rule entryRuleStructuralFeature
-entryRuleStructuralFeature :
+entryRuleStructuralFeature 
+:
 { before(grammarAccess.getStructuralFeatureRule()); }
 	 ruleStructuralFeature
 { after(grammarAccess.getStructuralFeatureRule()); } 
@@ -286,7 +295,7 @@ ruleStructuralFeature
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getStructuralFeatureAccess().getAlternatives()); }
 (rule__StructuralFeature__Alternatives)
@@ -301,7 +310,8 @@ finally {
 
 
 // Entry rule entryRuleAttribute
-entryRuleAttribute :
+entryRuleAttribute 
+:
 { before(grammarAccess.getAttributeRule()); }
 	 ruleAttribute
 { after(grammarAccess.getAttributeRule()); } 
@@ -313,7 +323,7 @@ ruleAttribute
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getAttributeAccess().getGroup()); }
 (rule__Attribute__Group__0)
@@ -328,7 +338,8 @@ finally {
 
 
 // Entry rule entryRuleReference
-entryRuleReference :
+entryRuleReference 
+:
 { before(grammarAccess.getReferenceRule()); }
 	 ruleReference
 { after(grammarAccess.getReferenceRule()); } 
@@ -340,7 +351,7 @@ ruleReference
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getReferenceAccess().getGroup()); }
 (rule__Reference__Group__0)
@@ -355,7 +366,8 @@ finally {
 
 
 // Entry rule entryRuleOperation
-entryRuleOperation :
+entryRuleOperation 
+:
 { before(grammarAccess.getOperationRule()); }
 	 ruleOperation
 { after(grammarAccess.getOperationRule()); } 
@@ -367,7 +379,7 @@ ruleOperation
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getOperationAccess().getGroup()); }
 (rule__Operation__Group__0)
@@ -382,7 +394,8 @@ finally {
 
 
 // Entry rule entryRuleParameter
-entryRuleParameter :
+entryRuleParameter 
+:
 { before(grammarAccess.getParameterRule()); }
 	 ruleParameter
 { after(grammarAccess.getParameterRule()); } 
@@ -394,7 +407,7 @@ ruleParameter
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getParameterAccess().getGroup()); }
 (rule__Parameter__Group__0)
@@ -411,7 +424,8 @@ finally {
 
 
 // Entry rule entryRuleTypeRef
-entryRuleTypeRef :
+entryRuleTypeRef 
+:
 { before(grammarAccess.getTypeRefRule()); }
 	 ruleTypeRef
 { after(grammarAccess.getTypeRefRule()); } 
@@ -423,7 +437,7 @@ ruleTypeRef
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getTypeRefAccess().getReferencedAssignment()); }
 (rule__TypeRef__ReferencedAssignment)
@@ -438,7 +452,8 @@ finally {
 
 
 // Entry rule entryRuleQualifiedNameWithWildCard
-entryRuleQualifiedNameWithWildCard :
+entryRuleQualifiedNameWithWildCard 
+:
 { before(grammarAccess.getQualifiedNameWithWildCardRule()); }
 	 ruleQualifiedNameWithWildCard
 { after(grammarAccess.getQualifiedNameWithWildCardRule()); } 
@@ -450,7 +465,7 @@ ruleQualifiedNameWithWildCard
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getQualifiedNameWithWildCardAccess().getGroup()); }
 (rule__QualifiedNameWithWildCard__Group__0)
@@ -465,7 +480,8 @@ finally {
 
 
 // Entry rule entryRuleQualifiedName
-entryRuleQualifiedName :
+entryRuleQualifiedName 
+:
 { before(grammarAccess.getQualifiedNameRule()); }
 	 ruleQualifiedName
 { after(grammarAccess.getQualifiedNameRule()); } 
@@ -477,7 +493,7 @@ ruleQualifiedName
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getQualifiedNameAccess().getGroup()); }
 (rule__QualifiedName__Group__0)

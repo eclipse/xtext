@@ -69,7 +69,8 @@ import org.eclipse.xtext.builder.tests.services.BuilderTestLanguageGrammarAccess
 
 
 // Entry rule entryRuleNamedElement
-entryRuleNamedElement returns [EObject current=null] :
+entryRuleNamedElement returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getNamedElementRule(), currentNode); }
 	 iv_ruleNamedElement=ruleNamedElement 
 	 { $current=$iv_ruleNamedElement.current; } 
@@ -102,14 +103,16 @@ ruleNamedElement returns [EObject current=null]
         $current = $this_Element_1.current; 
         currentNode = currentNode.getParent();
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleNamespace
-entryRuleNamespace returns [EObject current=null] :
+entryRuleNamespace returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getNamespaceRule(), currentNode); }
 	 iv_ruleNamespace=ruleNamespace 
 	 { $current=$iv_ruleNamespace.current; } 
@@ -207,14 +210,16 @@ ruleNamespace returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getNamespaceAccess().getRightCurlyBracketKeyword_5(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleImport
-entryRuleImport returns [EObject current=null] :
+entryRuleImport returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getImportRule(), currentNode); }
 	 iv_ruleImport=ruleImport 
 	 { $current=$iv_ruleImport.current; } 
@@ -256,14 +261,16 @@ ruleImport returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleElement
-entryRuleElement returns [EObject current=null] :
+entryRuleElement returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getElementRule(), currentNode); }
 	 iv_ruleElement=ruleElement 
 	 { $current=$iv_ruleElement.current; } 
@@ -365,14 +372,16 @@ ruleElement returns [EObject current=null]
 	    }
 
 )
-))*)?);
+))*)?)
+;
 
 
 
 
 
 // Entry rule entryRuleQualifiedName
-entryRuleQualifiedName returns [String current=null] :
+entryRuleQualifiedName returns [String current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getQualifiedNameRule(), currentNode); } 
 	 iv_ruleQualifiedName=ruleQualifiedName 
 	 { $current=$iv_ruleQualifiedName.current.getText(); }  

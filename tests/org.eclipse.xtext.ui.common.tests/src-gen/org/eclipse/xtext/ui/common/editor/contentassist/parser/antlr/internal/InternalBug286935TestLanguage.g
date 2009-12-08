@@ -70,7 +70,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.Bug286935TestLa
 
 
 // Entry rule entryRuleState
-entryRuleState returns [EObject current=null] :
+entryRuleState returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getStateRule(), currentNode); }
 	 iv_ruleState=ruleState 
 	 { $current=$iv_ruleState.current; } 
@@ -317,7 +318,8 @@ ruleState returns [EObject current=null]
 	    }
 
 )
-)?);
+)?)
+;
 
 
 

@@ -94,8 +94,8 @@ public abstract class AbstractBuilderTestLanguageRuntimeModule extends DefaultRu
 	}
 
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
-	public Class<? extends org.eclipse.xtext.resource.IResourceDescriptions> bindIResourceDescriptions() {
-		return org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions.class;
+	public void configureIResourceDescriptions(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.resource.IResourceDescriptions.class).to(org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions.class);
 	}
 
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment

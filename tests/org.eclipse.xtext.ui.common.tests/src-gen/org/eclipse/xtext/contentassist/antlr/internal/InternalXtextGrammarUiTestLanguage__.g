@@ -39,25 +39,25 @@ T39 : '..' ;
 T40 : 'enum' ;
 T41 : 'hidden' ;
 
-// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g" 5559
+// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g" 5598
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g" 5561
+// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g" 5600
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g" 5563
+// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g" 5602
 RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
-// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g" 5565
+// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g" 5604
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g" 5567
+// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g" 5606
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g" 5569
+// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g" 5608
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g" 5571
+// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/contentassist/antlr/internal/InternalXtextGrammarUiTestLanguage.g" 5610
 RULE_ANY_OTHER : .;
 
 

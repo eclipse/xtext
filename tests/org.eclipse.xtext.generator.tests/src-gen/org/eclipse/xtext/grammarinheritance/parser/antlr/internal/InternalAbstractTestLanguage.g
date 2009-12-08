@@ -69,7 +69,8 @@ import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammar
 
 
 // Entry rule entryRuleInheritedParserRule
-entryRuleInheritedParserRule returns [EObject current=null] :
+entryRuleInheritedParserRule returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getInheritedParserRuleRule(), currentNode); }
 	 iv_ruleInheritedParserRule=ruleInheritedParserRule 
 	 { $current=$iv_ruleInheritedParserRule.current; } 
@@ -111,7 +112,8 @@ ruleInheritedParserRule returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
@@ -120,7 +122,8 @@ ruleInheritedParserRule returns [EObject current=null]
 
 
 // Entry rule entryRuleOverridableParserRule
-entryRuleOverridableParserRule returns [EObject current=null] :
+entryRuleOverridableParserRule returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getOverridableParserRuleRule(), currentNode); }
 	 iv_ruleOverridableParserRule=ruleOverridableParserRule 
 	 { $current=$iv_ruleOverridableParserRule.current; } 
@@ -162,7 +165,8 @@ ruleOverridableParserRule returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
@@ -173,7 +177,8 @@ ruleOverridableParserRule returns [EObject current=null]
 
 
 // Entry rule entryRuleExtendableParserRule
-entryRuleExtendableParserRule returns [EObject current=null] :
+entryRuleExtendableParserRule returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getExtendableParserRuleRule(), currentNode); }
 	 iv_ruleExtendableParserRule=ruleExtendableParserRule 
 	 { $current=$iv_ruleExtendableParserRule.current; } 
@@ -215,7 +220,8 @@ ruleExtendableParserRule returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
