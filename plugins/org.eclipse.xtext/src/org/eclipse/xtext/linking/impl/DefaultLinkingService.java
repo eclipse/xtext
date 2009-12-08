@@ -32,6 +32,7 @@ import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeDelegatingScopeProvider;
 
 import com.google.inject.Inject;
@@ -66,17 +67,31 @@ public class DefaultLinkingService extends AbstractLinkingService {
 	}
 
 	private void unRegisterImportedNamesAdapter() {
-		if (getScopeProvider() instanceof AbstractGlobalScopeDelegatingScopeProvider) {
-			AbstractGlobalScopeDelegatingScopeProvider provider = (AbstractGlobalScopeDelegatingScopeProvider) getScopeProvider();
+		unRegisterImportedNamesAdapter(getScopeProvider());
+	}
+	
+	private void unRegisterImportedNamesAdapter(IScopeProvider scopeProvider) {
+		if (scopeProvider instanceof AbstractGlobalScopeDelegatingScopeProvider) {
+			AbstractGlobalScopeDelegatingScopeProvider provider = (AbstractGlobalScopeDelegatingScopeProvider) scopeProvider;
 			provider.setWrapper(null);
+		} else if (scopeProvider instanceof AbstractDeclarativeScopeProvider) {
+			AbstractDeclarativeScopeProvider declarativeScopeProvider = (AbstractDeclarativeScopeProvider) scopeProvider;
+			unRegisterImportedNamesAdapter(declarativeScopeProvider.getDelegate());
 		}
 	}
 
 	private void registerImportedNamesAdapter(EObject context) {
-		if (getScopeProvider() instanceof AbstractGlobalScopeDelegatingScopeProvider) {
-			AbstractGlobalScopeDelegatingScopeProvider provider = (AbstractGlobalScopeDelegatingScopeProvider) getScopeProvider();
+		registerImportedNamesAdapter(getScopeProvider(), context);
+	}
+	
+	private void registerImportedNamesAdapter(IScopeProvider scopeProvider, EObject context) {
+		if (scopeProvider instanceof AbstractGlobalScopeDelegatingScopeProvider) {
+			AbstractGlobalScopeDelegatingScopeProvider provider = (AbstractGlobalScopeDelegatingScopeProvider) scopeProvider;
 			ImportedNamesAdapter adapter = getImportedNamesAdapter(context);
 			provider.setWrapper(adapter);
+		} else if (scopeProvider instanceof AbstractDeclarativeScopeProvider) {
+			AbstractDeclarativeScopeProvider declarativeScopeProvider = (AbstractDeclarativeScopeProvider) scopeProvider;
+			registerImportedNamesAdapter(declarativeScopeProvider.getDelegate(), context);
 		}
 	}
 
