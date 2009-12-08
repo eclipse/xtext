@@ -23,6 +23,8 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.core.editor.model.edit.DefaultTextEditComposerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.editor.quickfix.DeclarativeQuickfixProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.editor.reconciler.ReplaceRegionTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.core.scoping.namespaces.JavaElementBasedContainerTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.core.scoping.namespaces.ProjectBasedContainerTest.class);
       return suite;
    }
 }

@@ -28,7 +28,6 @@ public class JavaElementBasedContainer extends ResourceDescriptionsBasedContaine
 		super(descriptions);
 		this.fragmentRoot = fragmentRoot;
 		this.mapper = mapper;
-		
 	}
 	
 	@Override

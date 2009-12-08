@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.core.scoping.namespaces;
 
 import org.eclipse.core.resources.IProject;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -34,7 +35,14 @@ public class ProjectBasedContainer extends ResourceDescriptionsBasedContainer {
 	protected boolean contains(IResourceDescription input) {
 		URI uri = input.getURI();
 		String platformString = uri.toPlatformString(true);
-		return platformString!=null && project.exists(new Path(platformString));
+		IPath projectPath = project.getFullPath();
+		IPath descriptionPath = new Path(platformString);
+		boolean result = projectPath.isPrefixOf(descriptionPath);
+		if (result) {
+			IPath relativePath = descriptionPath.makeRelativeTo(projectPath);
+			result = project.exists(relativePath);
+		}
+		return result;
 	}
 
 }

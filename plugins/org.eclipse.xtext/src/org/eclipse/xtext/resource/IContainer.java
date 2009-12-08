@@ -58,7 +58,8 @@ public interface IContainer {
 		/**
 		 * @return a sorted list of all {@link IContainer}, which are visible from the given {@link IResourceDescription}.
 		 * In an Java environment this would correspond to the list of classpath entries. The list includes the 
-		 * container that contains the given resource description. This implies that it is never empty.
+		 * container that contains the given resource description. However, the result may be empty due to
+		 * internal errors.
 		 */
 		List<IContainer> getVisibleContainers(IResourceDescription desc, IResourceDescriptions resourceDescriptions);
 
@@ -80,6 +81,7 @@ public interface IContainer {
 		}
 		public Iterable<IResourceDescription> getResourceDescriptions() {
 			return Iterables.emptyIterable();
-		}};
+		}
+	};
 	
 }
