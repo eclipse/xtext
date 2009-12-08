@@ -44,15 +44,19 @@ public class JavaProjectAwareContainerManager implements IContainer.Manager {
 
 	public IContainer getContainer(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
 		IPackageFragmentRoot root = getPackageFragmentRoot(desc.getURI(), resourceDescriptions);
-		if (root == null)
+		if (root == null) {
+			log.warn("Cannot find IPackageFragmentRoot for: " + desc.getURI());
 			return IContainer.Null;
+		}
 		return createContainer(root, resourceDescriptions);
 	}
 
 	public List<IContainer> getVisibleContainers(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
 		IPackageFragmentRoot root = getPackageFragmentRoot(desc.getURI(), resourceDescriptions);
-		if (root == null)
+		if (root == null) {
+			log.warn("Cannot find IPackageFragmentRoot for: " + desc.getURI());
 			return Collections.emptyList();
+		}
 		IJavaProject javaProject = root.getJavaProject();
 		return getVisibleContainers(javaProject, resourceDescriptions);
 	}
@@ -63,17 +67,19 @@ public class JavaProjectAwareContainerManager implements IContainer.Manager {
 	}
 
 	protected List<IContainer> getVisibleContainers(IJavaProject project, IResourceDescriptions resourceDescriptions) {
+		List<IContainer> result = Lists.newArrayList();
 		try {
 			IPackageFragmentRoot[] roots = project.getAllPackageFragmentRoots();
-			List<IContainer> result = Lists.newArrayListWithExpectedSize(roots.length);
 			for (IPackageFragmentRoot root : roots) {
 				if (root != null && !"org.eclipse.jdt.launching.JRE_CONTAINER".equals(root.getRawClasspathEntry().getPath().toString()))
 					result.add(createContainer(root, resourceDescriptions));
 			}
-			return result;
 		} catch (JavaModelException e) {
-			throw new IllegalStateException(e);
+			if (!e.isDoesNotExist()) {
+				log.error("Cannot find visibleContainers in project " + project.getProject().getName(), e);
+			}
 		}
+		return result;
 	}
 
 	protected IPackageFragmentRoot getPackageFragmentRoot(URI uri, IResourceDescriptions resourceDescriptions) {
@@ -82,7 +88,7 @@ public class JavaProjectAwareContainerManager implements IContainer.Manager {
 		}
 		final IFile file = getWorkspaceRoot().getFile(new Path(uri.toPlatformString(true)));
 		if (file == null) {
-			throw new IllegalArgumentException("could not find IFile for " + uri);
+			return null;
 		}
 		return getJavaElement(file);
 	}
@@ -116,7 +122,7 @@ public class JavaProjectAwareContainerManager implements IContainer.Manager {
 					return fragmentRoot;
 			}
 		}
-		throw new IllegalArgumentException("uri does not represent a valid javaElement");
+		return null;
 	}
 
 	protected IWorkspaceRoot getWorkspaceRoot() {
