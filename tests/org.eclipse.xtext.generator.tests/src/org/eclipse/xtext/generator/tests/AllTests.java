@@ -95,6 +95,8 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.parser.keywords.PackratParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.packrat.PackratParserGenUtilTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.packrat.PerformanceTest.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.Bug292245Test.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.Bug297105Test.class);
       suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.DynamicChannelTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.HiddensTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.InterpreterTest.class);
