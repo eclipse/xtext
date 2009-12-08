@@ -178,9 +178,21 @@ public class IResourcesSetupUtil {
 		return new NullProgressMonitor();
 	}
 
-	public static void cleanBuild() throws CoreException {
+	public static void fullBuild() throws CoreException {
 		ResourcesPlugin.getWorkspace().build(
-				IncrementalProjectBuilder.CLEAN_BUILD, monitor());
+				IncrementalProjectBuilder.FULL_BUILD, monitor());
+		boolean wasInterrupted = false;
+		do {
+			try {
+				Job.getJobManager().join(ResourcesPlugin.FAMILY_MANUAL_BUILD,
+						null);
+				wasInterrupted = false;
+			} catch (OperationCanceledException e) {
+				e.printStackTrace();
+			} catch (InterruptedException e) {
+				wasInterrupted = true;
+			}
+		} while (wasInterrupted);
 	}
 
 	public static void waitForAutoBuild() {

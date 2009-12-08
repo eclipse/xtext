@@ -72,7 +72,7 @@ public class JavaProjectSetupUtil {
 		return javaProject;
 	}
 
-	public static IProject createProject(String projectName) throws CoreException {
+	private static IProject createProject(String projectName) throws CoreException {
 		IWorkspaceRoot root = ResourcesPlugin.getWorkspace().getRoot();
 		IProject project = root.getProject(projectName);
 		deleteProject(project);
