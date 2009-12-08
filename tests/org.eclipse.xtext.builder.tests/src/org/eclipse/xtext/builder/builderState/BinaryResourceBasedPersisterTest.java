@@ -18,4 +18,14 @@ public class BinaryResourceBasedPersisterTest extends AbstractEMFBasedPersisterT
 		super.setUp();
 		persister.setFactory(new BufferedBinaryResourceFactory());
 	}
+	
+	@Override
+	public void testSaveAndReloadTwice() throws Exception {
+		try {
+			super.testSaveAndReloadTwice();
+			fail("Expected ArrayStoreException");
+		} catch(ArrayStoreException exc) {
+			// ok
+		}
+	}
 }

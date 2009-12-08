@@ -22,16 +22,13 @@ import org.eclipse.xtext.builder.BuilderModule;
 import org.eclipse.xtext.builder.builderState.PersistableResourceDescriptionsImpl.Persister;
 import org.eclipse.xtext.builder.tests.BuilderTestLanguageStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IReferenceDescription;
+import org.eclipse.xtext.junit.util.URIBasedTestResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
-import org.eclipse.xtext.resource.impl.AbstractResourceDescription;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
@@ -221,39 +218,13 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 		URI uri2 = URI.createFileURI("2.uri");
 		URI uri3 = URI.createFileURI("3.uri");
 		ListBasedPersister persister = new ListBasedPersister();
-		persister.descriptions.add(new TestResourceDescription(uri1));
-		persister.descriptions.add(new TestResourceDescription(uri2));
+		persister.descriptions.add(new URIBasedTestResourceDescription(uri1));
+		persister.descriptions.add(new URIBasedTestResourceDescription(uri2));
 		builderState.setPersister(persister);
 		builderState.load();
 		assertNotNull(builderState.getResourceDescription(uri1));
 		assertNotNull(builderState.getResourceDescription(uri2));
 		assertNull(builderState.getResourceDescription(uri3));
-	}
-	
-	public static class TestResourceDescription extends AbstractResourceDescription {
-
-		private URI uri;
-		
-		public TestResourceDescription(URI uri) {
-			this.uri = uri;
-		}
-
-		public Iterable<IEObjectDescription> getExportedObjects() {
-			return Iterables.emptyIterable();
-		}
-
-		public Iterable<String> getImportedNames() {
-			return Iterables.emptyIterable();
-		}
-
-		public Iterable<IReferenceDescription> getReferenceDescriptions() {
-			return Iterables.emptyIterable();
-		}
-
-		public URI getURI() {
-			return uri;
-		}
-		
 	}
 	
 	public static class ListBasedPersister implements Persister {
