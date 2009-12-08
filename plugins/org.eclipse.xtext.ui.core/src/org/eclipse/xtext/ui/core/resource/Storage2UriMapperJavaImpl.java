@@ -39,12 +39,11 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl {
 	}
 
 	@Override
-	public URI getUri(IStorage storage) {
-		URI uri = super.getUri(storage);
-		if (uri == null) {
-			return computeUriForStorageInJarOrExternalClassFolder(storage);
-		}
-		return uri;
+	protected URI internalGetUri(IStorage storage) {
+		URI uri = super.internalGetUri(storage);
+		if (uri != null)
+			return uri;
+		return computeUriForStorageInJarOrExternalClassFolder(storage);
 	}
 
 	protected Iterable<IStorage> findStoragesInJarsOrExternalClassFolders(URI uri) {
@@ -55,23 +54,24 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl {
 			for (IProject iProject : projects) {
 				if (iProject.isAccessible()) {
 					IJavaProject project = JavaCore.create(iProject);
-					findStoragesInJarsOrExternalFoldersOfProject(toArchive, uri, project,result);
+					findStoragesInJarsOrExternalFoldersOfProject(toArchive, uri, project, result);
 				}
 			}
 		}
 		return result;
 	}
 
-	protected void findStoragesInJarsOrExternalFoldersOfProject(URI toArchive, URI uri, IJavaProject project, Set<IStorage> storages) {
+	protected void findStoragesInJarsOrExternalFoldersOfProject(URI toArchive, URI uri, IJavaProject project,
+			Set<IStorage> storages) {
 		if (project.exists()) {
 			try {
 				IPackageFragmentRoot[] fragmentRoots = project.getAllPackageFragmentRoots();
 				for (IPackageFragmentRoot fragRoot : fragmentRoots) {
-					if (!"org.eclipse.jdt.launching.JRE_CONTAINER".equals(fragRoot.getRawClasspathEntry()
-							.getPath().toString())) {
+					if (!"org.eclipse.jdt.launching.JRE_CONTAINER".equals(fragRoot.getRawClasspathEntry().getPath()
+							.toString())) {
 						if (getUriForPackageFragmentRoot(fragRoot).equals(toArchive)) {
-							IStorage storage = findStorageInJar(uri,fragRoot);
-							if (storage!=null)
+							IStorage storage = findStorageInJar(uri, fragRoot);
+							if (storage != null)
 								storages.add(storage);
 						}
 					}
@@ -129,6 +129,6 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl {
 		if (!archiveURI.isArchive())
 			throw new IllegalArgumentException("not an archive URI : " + archiveURI);
 		String string = archiveURI.toString();
-		return URI.createURI(string.substring(archiveURI.scheme().length()+1, string.indexOf('!')));
+		return URI.createURI(string.substring(archiveURI.scheme().length() + 1, string.indexOf('!')));
 	}
 }

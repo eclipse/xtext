@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.hyperlinking;
 
+import java.util.Iterator;
+
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IStorage;
@@ -21,9 +23,9 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
-import org.eclipse.xtext.ui.core.builder.impl.StorageUtil;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.XtextReadonlyEditorInput;
+import org.eclipse.xtext.ui.core.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
@@ -41,7 +43,7 @@ public class XtextHyperlink extends AbstractHyperlink {
 	private ILocationInFileProvider locationProvider;
 	
 	@Inject
-	private StorageUtil storageUtil;
+	private IStorage2UriMapper mapper;
 
 	public void setLocationProvider(ILocationInFileProvider locationProvider) {
 		this.locationProvider = locationProvider;
@@ -60,9 +62,10 @@ public class XtextHyperlink extends AbstractHyperlink {
 	}
 
 	public void open() {
-		IStorage storage = storageUtil.getIStorage(uri.trimFragment());
-		if (storage != null) {
+		Iterator<IStorage> storages = mapper.getStorages(uri.trimFragment()).iterator();
+		if (storages != null && storages.hasNext()) {
 			try {
+				IStorage storage = storages.next();
 				if (storage instanceof IFile) {
 					selectAndReveal(openEditor((IFile) storage));
 				} else {
