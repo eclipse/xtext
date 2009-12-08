@@ -85,7 +85,7 @@ public class BuilderUtil {
 		assertEquals(printMarker(markers),numberOfMarkers,markers.length);
 	}
 
-	public static Set<IReferenceDescription> getReferences(URI uri) {
+	public static Set<IReferenceDescription> getIncomingReferences(URI uri) {
 		Set<IReferenceDescription> desc = Sets.newHashSet();
 		Iterable<IResourceDescription> descriptions = getBuilderState().getAllResourceDescriptions();
 		for (IResourceDescription res : descriptions) {
@@ -96,6 +96,24 @@ public class BuilderUtil {
 						desc.add(ref);
 				} else {
 					if (ref.getTargetEObjectUri().trimFragment().equals(uri.trimFragment()))
+						desc.add(ref);
+				}
+			}
+		}
+		return desc;
+	}
+	
+	public static Set<IReferenceDescription> getContainedReferences(URI uri) {
+		Set<IReferenceDescription> desc = Sets.newHashSet();
+		Iterable<IResourceDescription> descriptions = getBuilderState().getAllResourceDescriptions();
+		for (IResourceDescription res : descriptions) {
+			Iterable<IReferenceDescription> descriptions2 = res.getReferenceDescriptions();
+			for (IReferenceDescription ref : descriptions2) {
+				if (uri.hasFragment()) {
+					if (ref.getSourceEObjectUri().equals(uri))
+						desc.add(ref);
+				} else {
+					if (ref.getSourceEObjectUri().trimFragment().equals(uri.trimFragment()))
 						desc.add(ref);
 				}
 			}
