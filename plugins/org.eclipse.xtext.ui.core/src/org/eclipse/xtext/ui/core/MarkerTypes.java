@@ -12,7 +12,8 @@ package org.eclipse.xtext.ui.core;
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-public interface IConstants {
-	
-	public final static String CROSS_REF_MARKER_ID = "org.eclipse.xtext.ui.core.danglingCrossReference";
+public final class MarkerTypes {
+	public final static String FAST_VALIDATION = "org.eclipse.xtext.ui.core.check.fast";
+	public final static String NORMAL_VALIDATION = "org.eclipse.xtext.ui.core.check.normal";
+	public final static String EXPENSIVE_VALIDATION = "org.eclipse.xtext.ui.core.check.expensive";
 }
