@@ -8,8 +8,9 @@
 package org.eclipse.xtext.builder.impl.javasupport;
 
 import org.eclipse.xtext.builder.BuilderModule;
-import org.eclipse.xtext.builder.impl.IUriUtil;
 import org.eclipse.xtext.builder.impl.ToBeBuiltComputer;
+import org.eclipse.xtext.ui.core.resource.IStorage2UriMapper;
+import org.eclipse.xtext.ui.core.resource.Storage2UriMapperJavaImpl;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -21,7 +22,7 @@ public class JdtBuilderModule extends BuilderModule {
 	protected void configure() {
 		super.configure();
 		bind(ToBeBuiltComputer.class).to(JdtToBeBuiltComputer.class);
-		bind(IUriUtil.class).to(JdtUriUtil.class);
+		bind(IStorage2UriMapper.class).to(Storage2UriMapperJavaImpl.class);
 		bind(ElementChangeListener.class).asEagerSingleton();
 	}
 	

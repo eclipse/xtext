@@ -8,8 +8,6 @@
 package org.eclipse.xtext.builder;
 
 import org.eclipse.core.resources.IncrementalProjectBuilder;
-import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.builderState.PersistableResourceDescriptionsImpl;
 import org.eclipse.xtext.builder.impl.XtextBuilder;
@@ -31,7 +29,6 @@ public class BuilderModule extends AbstractModule {
 		bindQualifiedNameProvider();
 		bind(IResourceDescriptions.class).to(IBuilderState.class);
 		bind(IBuilderState.class).to(PersistableResourceDescriptionsImpl.class).in(Scopes.SINGLETON);
-		bind(ResourceSet.class).to(ResourceSetImpl.class);
 	}
 
 	protected void bindQualifiedNameProvider() {

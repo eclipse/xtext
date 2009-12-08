@@ -106,6 +106,7 @@ public class IntegrationTest extends AbstractBuilderTest {
 		bar_project = createJavaProjectWithRootSrc("bar");
 		foo_file = createFile("foo/src/foo"+F_EXT, "object Foo ");
 		bar_file = createFile("bar/src/bar"+F_EXT, "object Bar references Foo");
+		waitForAutoBuild();
 		addProjectReference(bar_project, foo_project);
 		waitForAutoBuild();
 		assertEquals(0, countMarkers(foo_file));

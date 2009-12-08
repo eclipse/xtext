@@ -31,9 +31,6 @@ public class ToBeBuiltComputer {
 	private IBuilderState builderState;
 
 	@Inject
-	private IUriUtil iUriUtil;
-	
-	@Inject
 	private IStorage2UriMapper mapper;
 
 	public ToBeBuilt removeProject(IProject project, final IProgressMonitor monitor) {
@@ -98,7 +95,7 @@ public class ToBeBuiltComputer {
 	}
 
 	protected URI getUri(IStorage file) {
-		return iUriUtil.getUri(file);
+		return mapper.getUri(file);
 	}
 
 }

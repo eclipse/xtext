@@ -19,6 +19,7 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
+import org.eclipse.xtext.ui.core.resource.IResourceSetProvider;
 
 import com.google.inject.Inject;
 
@@ -35,6 +36,13 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 
 	@Inject
 	private IBuilderState builderState;
+
+	@Inject
+	private IResourceSetProvider resourceSetProvider;
+
+	public IResourceSetProvider getResourceSetProvider() {
+		return resourceSetProvider;
+	}
 
 	@SuppressWarnings("unchecked")
 	@Override
@@ -74,17 +82,18 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			}
 		};
 		delta.accept(visitor);
-		doBuild(toBeBuilt,monitor);
+		doBuild(toBeBuilt, monitor);
 	}
 
 	protected void doBuild(ToBeBuilt toBeBuilt, IProgressMonitor monitor) {
-		builderState.update(toBeBuilt.toBeUpdated, toBeBuilt.toBeDeleted,monitor);
+		builderState.update(getResourceSetProvider().get(getProject()), toBeBuilt.toBeUpdated, toBeBuilt.toBeDeleted,
+				monitor);
 	}
 
 	protected void fullBuild(final IProgressMonitor monitor) throws CoreException {
 		IProject project = getProject();
 		final ToBeBuilt toBeBuilt = toBeBuiltComputer.updateProject(project, monitor);
-		doBuild(toBeBuilt,monitor);
+		doBuild(toBeBuilt, monitor);
 	}
 
 	protected boolean isOpened(IResourceDelta delta) {

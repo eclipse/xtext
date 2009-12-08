@@ -14,11 +14,11 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
+import org.eclipse.xtext.ui.core.MarkerTypes;
 import org.eclipse.xtext.ui.core.editor.validation.MarkerCreator;
 import org.eclipse.xtext.ui.core.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.CancelIndicator;
@@ -64,13 +64,25 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 
 	protected void addMarkers(IFile file, Resource resource, final IProgressMonitor monitor) {
 		try {
-			file.deleteMarkers(EValidator.MARKER, true, 1);
 			IResourceServiceProvider provider = resourceServiceProviderRegistry.getResourceServiceProvider(resource
 					.getURI(), null);
-			List<Issue> list = provider.getResourceValidator().validate(resource, CheckMode.NORMAL_AND_FAST,
+			
+			List<Issue> list = provider.getResourceValidator().validate(resource, CheckMode.FAST_ONLY,
 					getCancelIndicator(monitor));
+			if (monitor.isCanceled())
+				return;
+			file.deleteMarkers(MarkerTypes.FAST_VALIDATION, true, 1);
 			for (Issue issue : list) {
-				markerCreator.createMarker(issue, file, EValidator.MARKER);
+				markerCreator.createMarker(issue, file, MarkerTypes.FAST_VALIDATION);
+			}
+			
+			list = provider.getResourceValidator().validate(resource, CheckMode.NORMAL_ONLY,
+					getCancelIndicator(monitor));
+			file.deleteMarkers(MarkerTypes.NORMAL_VALIDATION, true, 1);
+			if (monitor.isCanceled())
+				return;
+			for (Issue issue : list) {
+				markerCreator.createMarker(issue, file, MarkerTypes.NORMAL_VALIDATION);
 			}
 		} catch (CoreException e) {
 			log.error(e.getMessage(), e);

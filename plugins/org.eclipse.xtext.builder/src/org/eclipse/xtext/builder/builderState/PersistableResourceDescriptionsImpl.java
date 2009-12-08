@@ -28,7 +28,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -51,14 +50,7 @@ public class PersistableResourceDescriptionsImpl extends AbstractResourceDescrip
 	private IMarkerUpdater markerUpdater;
 
 	@Inject
-	private Provider<ResourceSet> resourceSetProvider;
-	
-	@Inject
 	private Persister persister;
-
-	public void setResourceSetProvider(Provider<ResourceSet> resourceSetProvider) {
-		this.resourceSetProvider = resourceSetProvider;
-	}
 	
 	public synchronized void load() throws Exception {
 		resourceDescriptionMap = Maps.uniqueIndex(persister.load(), new Function<IResourceDescription, URI>() {
@@ -72,11 +64,12 @@ public class PersistableResourceDescriptionsImpl extends AbstractResourceDescrip
 		persister.save(getAllResourceDescriptions());
 	}
 
-	public synchronized ImmutableList<IResourceDescription.Delta> update(Set<URI> toBeAddedOrUpdated,
+	public synchronized ImmutableList<IResourceDescription.Delta> update(ResourceSet resourceSet, Set<URI> toBeAddedOrUpdated,
 			Set<URI> toBeRemoved, IProgressMonitor monitor) {
-		if (monitor.isCanceled())
+		toBeAddedOrUpdated = toBeAddedOrUpdated!=null?toBeAddedOrUpdated:Collections.<URI>emptySet();
+		toBeRemoved = toBeRemoved!=null?toBeRemoved:Collections.<URI>emptySet();
+		if (monitor.isCanceled() || (toBeAddedOrUpdated.isEmpty() && toBeRemoved.isEmpty()))
 			return ImmutableList.of();
-		ResourceSet resourceSet = resourceSetProvider.get();
 		resourceSet.eAdapters().add(new ShadowingResourceDescriptions.Adapter(this, toBeAddedOrUpdated, toBeRemoved));
 		resourceSet.getLoadOptions().put(DefaultGlobalScopeProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);
 		
