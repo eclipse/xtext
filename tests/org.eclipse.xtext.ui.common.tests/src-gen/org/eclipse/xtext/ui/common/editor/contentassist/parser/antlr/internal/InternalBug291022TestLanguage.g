@@ -69,7 +69,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.Bug291022TestLa
 
 
 // Entry rule entryRuleRootModel
-entryRuleRootModel returns [EObject current=null] :
+entryRuleRootModel returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getRootModelRule(), currentNode); }
 	 iv_ruleRootModel=ruleRootModel 
 	 { $current=$iv_ruleRootModel.current; } 
@@ -164,14 +165,16 @@ ruleRootModel returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getRootModelAccess().getRightCurlyBracketKeyword_3_2(), null); 
     }
-)?)?;
+)?)?
+;
 
 
 
 
 
 // Entry rule entryRuleModelElement
-entryRuleModelElement returns [EObject current=null] :
+entryRuleModelElement returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelElementRule(), currentNode); }
 	 iv_ruleModelElement=ruleModelElement 
 	 { $current=$iv_ruleModelElement.current; } 
@@ -278,14 +281,16 @@ ruleModelElement returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getModelElementAccess().getRightCurlyBracketKeyword_3_1_2(), null); 
     }
-)));
+)))
+;
 
 
 
 
 
 // Entry rule entryRuleModelAttribute
-entryRuleModelAttribute returns [EObject current=null] :
+entryRuleModelAttribute returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelAttributeRule(), currentNode); }
 	 iv_ruleModelAttribute=ruleModelAttribute 
 	 { $current=$iv_ruleModelAttribute.current; } 
@@ -318,14 +323,16 @@ ruleModelAttribute returns [EObject current=null]
         $current = $this_Attribute_1.current; 
         currentNode = currentNode.getParent();
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleAttribute
-entryRuleAttribute returns [EObject current=null] :
+entryRuleAttribute returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getAttributeRule(), currentNode); }
 	 iv_ruleAttribute=ruleAttribute 
 	 { $current=$iv_ruleAttribute.current; } 
@@ -381,7 +388,8 @@ ruleAttribute returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 

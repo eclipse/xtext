@@ -69,7 +69,8 @@ import org.eclipse.xtext.ui.integration.services.TestLanguageGrammarAccess;
 
 
 // Entry rule entryRuleFile
-entryRuleFile returns [EObject current=null] :
+entryRuleFile returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getFileRule(), currentNode); }
 	 iv_ruleFile=ruleFile 
 	 { $current=$iv_ruleFile.current; } 
@@ -107,14 +108,16 @@ ruleFile returns [EObject current=null]
 	    }
 
 )
-)*;
+)*
+;
 
 
 
 
 
 // Entry rule entryRuleStuff
-entryRuleStuff returns [EObject current=null] :
+entryRuleStuff returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getStuffRule(), currentNode); }
 	 iv_ruleStuff=ruleStuff 
 	 { $current=$iv_ruleStuff.current; } 
@@ -174,7 +177,8 @@ ruleStuff returns [EObject current=null]
 	}
 
 )
-))?);
+))?)
+;
 
 
 

@@ -69,7 +69,8 @@ import org.eclipse.xtext.xtext.ecoreInference.services.MultiValueFeatureTestLang
 
 
 // Entry rule entryRuleStart
-entryRuleStart returns [EObject current=null] :
+entryRuleStart returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getStartRule(), currentNode); }
 	 iv_ruleStart=ruleStart 
 	 { $current=$iv_ruleStart.current; } 
@@ -107,7 +108,8 @@ ruleStart returns [EObject current=null]
 	    }
 
 )
-)+;
+)+
+;
 
 
 

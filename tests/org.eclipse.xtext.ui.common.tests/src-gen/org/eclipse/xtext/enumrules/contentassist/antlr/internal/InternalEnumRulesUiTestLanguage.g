@@ -57,7 +57,8 @@ import org.eclipse.xtext.enumrules.services.EnumRulesUiTestLanguageGrammarAccess
 
 
 // Entry rule entryRuleModel
-entryRuleModel :
+entryRuleModel 
+:
 { before(grammarAccess.getModelRule()); }
 	 ruleModel
 { after(grammarAccess.getModelRule()); } 
@@ -69,7 +70,7 @@ ruleModel
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getModelAccess().getAlternatives()); }
 (rule__Model__Alternatives)

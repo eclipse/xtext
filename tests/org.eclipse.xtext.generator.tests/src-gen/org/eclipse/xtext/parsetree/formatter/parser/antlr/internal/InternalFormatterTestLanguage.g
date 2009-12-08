@@ -69,7 +69,8 @@ import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGramm
 
 
 // Entry rule entryRuleRoot
-entryRuleRoot returns [EObject current=null] :
+entryRuleRoot returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getRootRule(), currentNode); }
 	 iv_ruleRoot=ruleRoot 
 	 { $current=$iv_ruleRoot.current; } 
@@ -106,14 +107,16 @@ ruleRoot returns [EObject current=null]
         $current = $this_TestIndentation_2.current; 
         currentNode = currentNode.getParent();
     }
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleLine
-entryRuleLine returns [EObject current=null] :
+entryRuleLine returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getLineRule(), currentNode); }
 	 iv_ruleLine=ruleLine 
 	 { $current=$iv_ruleLine.current; } 
@@ -180,14 +183,16 @@ ruleLine returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getLineAccess().getSemicolonKeyword_1(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleDecl
-entryRuleDecl returns [EObject current=null] :
+entryRuleDecl returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getDeclRule(), currentNode); }
 	 iv_ruleDecl=ruleDecl 
 	 { $current=$iv_ruleDecl.current; } 
@@ -249,14 +254,16 @@ ruleDecl returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleAssign
-entryRuleAssign returns [EObject current=null] :
+entryRuleAssign returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getAssignRule(), currentNode); }
 	 iv_ruleAssign=ruleAssign 
 	 { $current=$iv_ruleAssign.current; } 
@@ -396,14 +403,16 @@ ruleAssign returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getAssignAccess().getRightSquareBracketKeyword_4(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleMeth
-entryRuleMeth returns [EObject current=null] :
+entryRuleMeth returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getMethRule(), currentNode); }
 	 iv_ruleMeth=ruleMeth 
 	 { $current=$iv_ruleMeth.current; } 
@@ -505,14 +514,16 @@ ruleMeth returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getMethAccess().getRightParenthesisKeyword_4(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleParam
-entryRuleParam returns [EObject current=null] :
+entryRuleParam returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getParamRule(), currentNode); }
 	 iv_ruleParam=ruleParam 
 	 { $current=$iv_ruleParam.current; } 
@@ -578,14 +589,16 @@ ruleParam returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleTestLinewrap
-entryRuleTestLinewrap returns [EObject current=null] :
+entryRuleTestLinewrap returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTestLinewrapRule(), currentNode); }
 	 iv_ruleTestLinewrap=ruleTestLinewrap 
 	 { $current=$iv_ruleTestLinewrap.current; } 
@@ -627,14 +640,16 @@ ruleTestLinewrap returns [EObject current=null]
 	    }
 
 )
-)*);
+)*)
+;
 
 
 
 
 
 // Entry rule entryRuleTestIndentation
-entryRuleTestIndentation returns [EObject current=null] :
+entryRuleTestIndentation returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTestIndentationRule(), currentNode); }
 	 iv_ruleTestIndentation=ruleTestIndentation 
 	 { $current=$iv_ruleTestIndentation.current; } 
@@ -730,14 +745,16 @@ ruleTestIndentation returns [EObject current=null]
 	    }
 
 )
-)?);
+)?)
+;
 
 
 
 
 
 // Entry rule entryRuleFqnObj
-entryRuleFqnObj returns [EObject current=null] :
+entryRuleFqnObj returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getFqnObjRule(), currentNode); }
 	 iv_ruleFqnObj=ruleFqnObj 
 	 { $current=$iv_ruleFqnObj.current; } 
@@ -779,14 +796,16 @@ ruleFqnObj returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleFQN
-entryRuleFQN returns [String current=null] :
+entryRuleFQN returns [String current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getFQNRule(), currentNode); } 
 	 iv_ruleFQN=ruleFQN 
 	 { $current=$iv_ruleFQN.current.getText(); }  
@@ -828,7 +847,8 @@ ruleFQN returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
 
 
 // Entry rule entryRuleFqnRef
-entryRuleFqnRef returns [EObject current=null] :
+entryRuleFqnRef returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getFqnRefRule(), currentNode); }
 	 iv_ruleFqnRef=ruleFqnRef 
 	 { $current=$iv_ruleFqnRef.current; } 
@@ -862,7 +882,8 @@ ruleFqnRef returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 

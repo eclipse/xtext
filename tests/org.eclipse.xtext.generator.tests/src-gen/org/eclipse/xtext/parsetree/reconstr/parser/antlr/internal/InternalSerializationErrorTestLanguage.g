@@ -69,7 +69,8 @@ import org.eclipse.xtext.parsetree.reconstr.services.SerializationErrorTestLangu
 
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] :
+entryRuleModel returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
@@ -132,14 +133,16 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleParenthesis
-entryRuleParenthesis returns [EObject current=null] :
+entryRuleParenthesis returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getParenthesisRule(), currentNode); }
 	 iv_ruleParenthesis=ruleParenthesis 
 	 { $current=$iv_ruleParenthesis.current; } 
@@ -170,14 +173,16 @@ ruleParenthesis returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getParenthesisAccess().getRightParenthesisKeyword_2(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleTest
-entryRuleTest returns [EObject current=null] :
+entryRuleTest returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTestRule(), currentNode); }
 	 iv_ruleTest=ruleTest 
 	 { $current=$iv_ruleTest.current; } 
@@ -220,14 +225,16 @@ ruleTest returns [EObject current=null]
         $current = $this_Indent_2.current; 
         currentNode = currentNode.getParent();
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleTwoRequired
-entryRuleTwoRequired returns [EObject current=null] :
+entryRuleTwoRequired returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTwoRequiredRule(), currentNode); }
 	 iv_ruleTwoRequired=ruleTwoRequired 
 	 { $current=$iv_ruleTwoRequired.current; } 
@@ -293,14 +300,16 @@ ruleTwoRequired returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleTwoOptions
-entryRuleTwoOptions returns [EObject current=null] :
+entryRuleTwoOptions returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTwoOptionsRule(), currentNode); }
 	 iv_ruleTwoOptions=ruleTwoOptions 
 	 { $current=$iv_ruleTwoOptions.current; } 
@@ -375,14 +384,16 @@ ruleTwoOptions returns [EObject current=null]
 	    }
 
 )
-))));
+))))
+;
 
 
 
 
 
 // Entry rule entryRuleIndent
-entryRuleIndent returns [EObject current=null] :
+entryRuleIndent returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getIndentRule(), currentNode); }
 	 iv_ruleIndent=ruleIndent 
 	 { $current=$iv_ruleIndent.current; } 
@@ -476,7 +487,8 @@ ruleIndent returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getIndentAccess().getRightCurlyBracketKeyword_4(), null); 
     }
-);
+)
+;
 
 
 

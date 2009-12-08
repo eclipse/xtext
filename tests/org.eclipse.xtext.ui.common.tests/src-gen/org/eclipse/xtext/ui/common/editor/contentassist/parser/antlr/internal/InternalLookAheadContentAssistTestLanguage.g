@@ -69,7 +69,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.LookAheadConten
 
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] :
+entryRuleModel returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
@@ -310,14 +311,16 @@ ruleModel returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getModelAccess().getRightCurlyBracketKeyword_3_3(), null); 
     }
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleAttribute
-entryRuleAttribute returns [EObject current=null] :
+entryRuleAttribute returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getAttributeRule(), currentNode); }
 	 iv_ruleAttribute=ruleAttribute 
 	 { $current=$iv_ruleAttribute.current; } 
@@ -355,14 +358,16 @@ ruleAttribute returns [EObject current=null]
 	    }
 
 )
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRulePair
-entryRulePair returns [EObject current=null] :
+entryRulePair returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getPairRule(), currentNode); }
 	 iv_rulePair=rulePair 
 	 { $current=$iv_rulePair.current; } 
@@ -428,7 +433,8 @@ rulePair returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 

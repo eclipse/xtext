@@ -69,7 +69,8 @@ import org.eclipse.xtext.testlanguages.services.ContentAssistTestLanguageGrammar
 
 
 // Entry rule entryRuleStart
-entryRuleStart returns [EObject current=null] :
+entryRuleStart returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getStartRule(), currentNode); }
 	 iv_ruleStart=ruleStart 
 	 { $current=$iv_ruleStart.current; } 
@@ -115,14 +116,16 @@ ruleStart returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getStartAccess().getEndKeyword_2(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleAbstractRule
-entryRuleAbstractRule returns [EObject current=null] :
+entryRuleAbstractRule returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getAbstractRuleRule(), currentNode); }
 	 iv_ruleAbstractRule=ruleAbstractRule 
 	 { $current=$iv_ruleAbstractRule.current; } 
@@ -155,14 +158,16 @@ ruleAbstractRule returns [EObject current=null]
         $current = $this_SecondAbstractRuleChild_1.current; 
         currentNode = currentNode.getParent();
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleFirstAbstractRuleChild
-entryRuleFirstAbstractRuleChild returns [EObject current=null] :
+entryRuleFirstAbstractRuleChild returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getFirstAbstractRuleChildRule(), currentNode); }
 	 iv_ruleFirstAbstractRuleChild=ruleFirstAbstractRuleChild 
 	 { $current=$iv_ruleFirstAbstractRuleChild.current; } 
@@ -236,14 +241,16 @@ ruleFirstAbstractRuleChild returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getFirstAbstractRuleChildAccess().getSemicolonKeyword_4(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleSecondAbstractRuleChild
-entryRuleSecondAbstractRuleChild returns [EObject current=null] :
+entryRuleSecondAbstractRuleChild returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getSecondAbstractRuleChildRule(), currentNode); }
 	 iv_ruleSecondAbstractRuleChild=ruleSecondAbstractRuleChild 
 	 { $current=$iv_ruleSecondAbstractRuleChild.current; } 
@@ -317,14 +324,16 @@ ruleSecondAbstractRuleChild returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getSecondAbstractRuleChildAccess().getSemicolonKeyword_4(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleAbstractRuleCall
-entryRuleAbstractRuleCall returns [EObject current=null] :
+entryRuleAbstractRuleCall returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getAbstractRuleCallRule(), currentNode); }
 	 iv_ruleAbstractRuleCall=ruleAbstractRuleCall 
 	 { $current=$iv_ruleAbstractRuleCall.current; } 
@@ -352,7 +361,8 @@ ruleAbstractRuleCall returns [EObject current=null]
 	}
 
 )
-);
+)
+;
 
 
 

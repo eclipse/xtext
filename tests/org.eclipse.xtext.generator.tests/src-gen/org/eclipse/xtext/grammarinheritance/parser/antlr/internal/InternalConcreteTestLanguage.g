@@ -69,7 +69,8 @@ import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammar
 
 
 // Entry rule entryRuleRootRule
-entryRuleRootRule returns [EObject current=null] :
+entryRuleRootRule returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getRootRuleRule(), currentNode); }
 	 iv_ruleRootRule=ruleRootRule 
 	 { $current=$iv_ruleRootRule.current; } 
@@ -122,14 +123,16 @@ ruleRootRule returns [EObject current=null]
         $current = $this_OverridableParserRule2_3.current; 
         currentNode = currentNode.getParent();
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleConcreteParserRule
-entryRuleConcreteParserRule returns [EObject current=null] :
+entryRuleConcreteParserRule returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getConcreteParserRuleRule(), currentNode); }
 	 iv_ruleConcreteParserRule=ruleConcreteParserRule 
 	 { $current=$iv_ruleConcreteParserRule.current; } 
@@ -199,14 +202,16 @@ ruleConcreteParserRule returns [EObject current=null]
 	    }
 
 )
-)*);
+)*)
+;
 
 
 
 
 
 // Entry rule entryRuleOverridableParserRule
-entryRuleOverridableParserRule returns [EObject current=null] :
+entryRuleOverridableParserRule returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getOverridableParserRuleRule(), currentNode); }
 	 iv_ruleOverridableParserRule=ruleOverridableParserRule 
 	 { $current=$iv_ruleOverridableParserRule.current; } 
@@ -248,14 +253,16 @@ ruleOverridableParserRule returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleCallOverridenParserRule
-entryRuleCallOverridenParserRule returns [EObject current=null] :
+entryRuleCallOverridenParserRule returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getCallOverridenParserRuleRule(), currentNode); }
 	 iv_ruleCallOverridenParserRule=ruleCallOverridenParserRule 
 	 { $current=$iv_ruleCallOverridenParserRule.current; } 
@@ -293,14 +300,16 @@ ruleCallOverridenParserRule returns [EObject current=null]
 	    }
 
 )
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleOverridableParserRule2
-entryRuleOverridableParserRule2 returns [EObject current=null] :
+entryRuleOverridableParserRule2 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getOverridableParserRule2Rule(), currentNode); }
 	 iv_ruleOverridableParserRule2=ruleOverridableParserRule2 
 	 { $current=$iv_ruleOverridableParserRule2.current; } 
@@ -370,14 +379,16 @@ ruleOverridableParserRule2 returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleExtendableParserRule
-entryRuleExtendableParserRule returns [EObject current=null] :
+entryRuleExtendableParserRule returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getExtendableParserRuleRule(), currentNode); }
 	 iv_ruleExtendableParserRule=ruleExtendableParserRule 
 	 { $current=$iv_ruleExtendableParserRule.current; } 
@@ -420,14 +431,16 @@ ruleExtendableParserRule returns [EObject current=null]
         $current = $this_Subrule3_2.current; 
         currentNode = currentNode.getParent();
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleSubrule1
-entryRuleSubrule1 returns [EObject current=null] :
+entryRuleSubrule1 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getSubrule1Rule(), currentNode); }
 	 iv_ruleSubrule1=ruleSubrule1 
 	 { $current=$iv_ruleSubrule1.current; } 
@@ -493,14 +506,16 @@ ruleSubrule1 returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleSubrule2
-entryRuleSubrule2 returns [EObject current=null] :
+entryRuleSubrule2 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getSubrule2Rule(), currentNode); }
 	 iv_ruleSubrule2=ruleSubrule2 
 	 { $current=$iv_ruleSubrule2.current; } 
@@ -566,14 +581,16 @@ ruleSubrule2 returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleSubrule3
-entryRuleSubrule3 returns [EObject current=null] :
+entryRuleSubrule3 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getSubrule3Rule(), currentNode); }
 	 iv_ruleSubrule3=ruleSubrule3 
 	 { $current=$iv_ruleSubrule3.current; } 
@@ -639,14 +656,16 @@ ruleSubrule3 returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleCallExtendedParserRule
-entryRuleCallExtendedParserRule returns [EObject current=null] :
+entryRuleCallExtendedParserRule returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getCallExtendedParserRuleRule(), currentNode); }
 	 iv_ruleCallExtendedParserRule=ruleCallExtendedParserRule 
 	 { $current=$iv_ruleCallExtendedParserRule.current; } 
@@ -684,14 +703,16 @@ ruleCallExtendedParserRule returns [EObject current=null]
 	    }
 
 )
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleInheritedParserRule
-entryRuleInheritedParserRule returns [EObject current=null] :
+entryRuleInheritedParserRule returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getInheritedParserRuleRule(), currentNode); }
 	 iv_ruleInheritedParserRule=ruleInheritedParserRule 
 	 { $current=$iv_ruleInheritedParserRule.current; } 
@@ -733,14 +754,16 @@ ruleInheritedParserRule returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleAbstractCallOverridenParserRule
-entryRuleAbstractCallOverridenParserRule returns [EObject current=null] :
+entryRuleAbstractCallOverridenParserRule returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getAbstractCallOverridenParserRuleRule(), currentNode); }
 	 iv_ruleAbstractCallOverridenParserRule=ruleAbstractCallOverridenParserRule 
 	 { $current=$iv_ruleAbstractCallOverridenParserRule.current; } 
@@ -782,14 +805,16 @@ ruleAbstractCallOverridenParserRule returns [EObject current=null]
 	    }
 
 )
-)*);
+)*)
+;
 
 
 
 
 
 // Entry rule entryRuleAbstractCallExtendedParserRule
-entryRuleAbstractCallExtendedParserRule returns [EObject current=null] :
+entryRuleAbstractCallExtendedParserRule returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getAbstractCallExtendedParserRuleRule(), currentNode); }
 	 iv_ruleAbstractCallExtendedParserRule=ruleAbstractCallExtendedParserRule 
 	 { $current=$iv_ruleAbstractCallExtendedParserRule.current; } 
@@ -831,7 +856,8 @@ ruleAbstractCallExtendedParserRule returns [EObject current=null]
 	    }
 
 )
-)*);
+)*)
+;
 
 
 

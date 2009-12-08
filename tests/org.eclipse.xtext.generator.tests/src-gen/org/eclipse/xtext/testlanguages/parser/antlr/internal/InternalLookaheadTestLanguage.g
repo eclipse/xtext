@@ -69,7 +69,8 @@ import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAcce
 
 
 // Entry rule entryRuleEntry
-entryRuleEntry returns [EObject current=null] :
+entryRuleEntry returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getEntryRule(), currentNode); }
 	 iv_ruleEntry=ruleEntry 
 	 { $current=$iv_ruleEntry.current; } 
@@ -107,14 +108,16 @@ ruleEntry returns [EObject current=null]
 	    }
 
 )
-)*;
+)*
+;
 
 
 
 
 
 // Entry rule entryRuleAlts
-entryRuleAlts returns [EObject current=null] :
+entryRuleAlts returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getAltsRule(), currentNode); }
 	 iv_ruleAlts=ruleAlts 
 	 { $current=$iv_ruleAlts.current; } 
@@ -157,14 +160,16 @@ ruleAlts returns [EObject current=null]
         $current = $this_LookAhead3_2.current; 
         currentNode = currentNode.getParent();
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleLookAhead0
-entryRuleLookAhead0 returns [EObject current=null] :
+entryRuleLookAhead0 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getLookAhead0Rule(), currentNode); }
 	 iv_ruleLookAhead0=ruleLookAhead0 
 	 { $current=$iv_ruleLookAhead0.current; } 
@@ -203,14 +208,16 @@ ruleLookAhead0 returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleLookAhead1
-entryRuleLookAhead1 returns [EObject current=null] :
+entryRuleLookAhead1 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getLookAhead1Rule(), currentNode); }
 	 iv_ruleLookAhead1=ruleLookAhead1 
 	 { $current=$iv_ruleLookAhead1.current; } 
@@ -294,14 +301,16 @@ ruleLookAhead1 returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleLookAhead2
-entryRuleLookAhead2 returns [EObject current=null] :
+entryRuleLookAhead2 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getLookAhead2Rule(), currentNode); }
 	 iv_ruleLookAhead2=ruleLookAhead2 
 	 { $current=$iv_ruleLookAhead2.current; } 
@@ -362,14 +371,16 @@ ruleLookAhead2 returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getLookAhead2Access().getCKeyword_1(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleLookAhead3
-entryRuleLookAhead3 returns [EObject current=null] :
+entryRuleLookAhead3 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getLookAhead3Rule(), currentNode); }
 	 iv_ruleLookAhead3=ruleLookAhead3 
 	 { $current=$iv_ruleLookAhead3.current; } 
@@ -436,14 +447,16 @@ ruleLookAhead3 returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleLookAhead4
-entryRuleLookAhead4 returns [EObject current=null] :
+entryRuleLookAhead4 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getLookAhead4Rule(), currentNode); }
 	 iv_ruleLookAhead4=ruleLookAhead4 
 	 { $current=$iv_ruleLookAhead4.current; } 
@@ -500,7 +513,8 @@ ruleLookAhead4 returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 

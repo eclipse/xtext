@@ -354,5 +354,11 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.parser.antlr.bug296889Test.util,
  org.eclipse.xtext.parser.antlr.bug296889ExTest,
  org.eclipse.xtext.parser.antlr.bug296889ExTest.impl,
- org.eclipse.xtext.parser.antlr.bug296889ExTest.util
+ org.eclipse.xtext.parser.antlr.bug296889ExTest.util,
+ org.eclipse.xtext.parser.terminalrules.bug292245TestLanguage,
+ org.eclipse.xtext.parser.terminalrules.bug292245TestLanguage.impl,
+ org.eclipse.xtext.parser.terminalrules.bug292245TestLanguage.util,
+ org.eclipse.xtext.parser.terminalrules.bug297105TestLanguage,
+ org.eclipse.xtext.parser.terminalrules.bug297105TestLanguage.impl,
+ org.eclipse.xtext.parser.terminalrules.bug297105TestLanguage.util
 

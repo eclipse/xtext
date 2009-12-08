@@ -57,7 +57,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.DatatypeRuleTes
 
 
 // Entry rule entryRuleModel
-entryRuleModel :
+entryRuleModel 
+:
 { before(grammarAccess.getModelRule()); }
 	 ruleModel
 { after(grammarAccess.getModelRule()); } 
@@ -69,7 +70,7 @@ ruleModel
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getModelAccess().getTypesParserRuleCall()); }
 	ruleTypes
@@ -84,7 +85,8 @@ finally {
 
 
 // Entry rule entryRuleTypes
-entryRuleTypes :
+entryRuleTypes 
+:
 { before(grammarAccess.getTypesRule()); }
 	 ruleTypes
 { after(grammarAccess.getTypesRule()); } 
@@ -96,7 +98,7 @@ ruleTypes
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getTypesAccess().getGroup()); }
 (rule__Types__Group__0)
@@ -111,7 +113,8 @@ finally {
 
 
 // Entry rule entryRuleType
-entryRuleType :
+entryRuleType 
+:
 { before(grammarAccess.getTypeRule()); }
 	 ruleType
 { after(grammarAccess.getTypeRule()); } 
@@ -123,7 +126,7 @@ ruleType
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getTypeAccess().getAlternatives()); }
 (rule__Type__Alternatives)
@@ -138,7 +141,8 @@ finally {
 
 
 // Entry rule entryRuleSimpleType
-entryRuleSimpleType :
+entryRuleSimpleType 
+:
 { before(grammarAccess.getSimpleTypeRule()); }
 	 ruleSimpleType
 { after(grammarAccess.getSimpleTypeRule()); } 
@@ -150,7 +154,7 @@ ruleSimpleType
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getSimpleTypeAccess().getGroup()); }
 (rule__SimpleType__Group__0)
@@ -165,7 +169,8 @@ finally {
 
 
 // Entry rule entryRuleCompositeType
-entryRuleCompositeType :
+entryRuleCompositeType 
+:
 { before(grammarAccess.getCompositeTypeRule()); }
 	 ruleCompositeType
 { after(grammarAccess.getCompositeTypeRule()); } 
@@ -177,7 +182,7 @@ ruleCompositeType
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getCompositeTypeAccess().getGroup()); }
 (rule__CompositeType__Group__0)
@@ -192,7 +197,8 @@ finally {
 
 
 // Entry rule entryRuleCompositeTypeEntry
-entryRuleCompositeTypeEntry :
+entryRuleCompositeTypeEntry 
+:
 { before(grammarAccess.getCompositeTypeEntryRule()); }
 	 ruleCompositeTypeEntry
 { after(grammarAccess.getCompositeTypeEntryRule()); } 
@@ -204,7 +210,7 @@ ruleCompositeTypeEntry
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getCompositeTypeEntryAccess().getDataTypeAssignment()); }
 (rule__CompositeTypeEntry__DataTypeAssignment)
@@ -219,7 +225,8 @@ finally {
 
 
 // Entry rule entryRuleTypeId
-entryRuleTypeId :
+entryRuleTypeId 
+:
 { before(grammarAccess.getTypeIdRule()); }
 	 ruleTypeId
 { after(grammarAccess.getTypeIdRule()); } 
@@ -231,7 +238,7 @@ ruleTypeId
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getTypeIdAccess().getGroup()); }
 (rule__TypeId__Group__0)

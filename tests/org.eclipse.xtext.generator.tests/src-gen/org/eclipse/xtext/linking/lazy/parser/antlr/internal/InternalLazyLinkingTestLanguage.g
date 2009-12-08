@@ -69,7 +69,8 @@ import org.eclipse.xtext.linking.lazy.services.LazyLinkingTestLanguageGrammarAcc
 
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] :
+entryRuleModel returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
@@ -107,14 +108,16 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)*;
+)*
+;
 
 
 
 
 
 // Entry rule entryRuleType
-entryRuleType returns [EObject current=null] :
+entryRuleType returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTypeRule(), currentNode); }
 	 iv_ruleType=ruleType 
 	 { $current=$iv_ruleType.current; } 
@@ -284,14 +287,16 @@ ruleType returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getTypeAccess().getRightCurlyBracketKeyword_7(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleProperty
-entryRuleProperty returns [EObject current=null] :
+entryRuleProperty returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getPropertyRule(), currentNode); }
 	 iv_ruleProperty=ruleProperty 
 	 { $current=$iv_ruleProperty.current; } 
@@ -347,14 +352,16 @@ ruleProperty returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getPropertyAccess().getSemicolonKeyword_2(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleUnresolvedProxyProperty
-entryRuleUnresolvedProxyProperty returns [EObject current=null] :
+entryRuleUnresolvedProxyProperty returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getUnresolvedProxyPropertyRule(), currentNode); }
 	 iv_ruleUnresolvedProxyProperty=ruleUnresolvedProxyProperty 
 	 { $current=$iv_ruleUnresolvedProxyProperty.current; } 
@@ -414,7 +421,8 @@ ruleUnresolvedProxyProperty returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getUnresolvedProxyPropertyAccess().getSemicolonKeyword_3(), null); 
     }
-);
+)
+;
 
 
 

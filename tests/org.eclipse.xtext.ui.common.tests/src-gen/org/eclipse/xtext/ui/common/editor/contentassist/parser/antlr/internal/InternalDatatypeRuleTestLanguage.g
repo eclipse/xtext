@@ -69,7 +69,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.DatatypeRuleTes
 
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] :
+entryRuleModel returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
@@ -92,6 +93,7 @@ ruleModel returns [EObject current=null]
         $current = $this_Types_0.current; 
         currentNode = currentNode.getParent();
     }
+
 ;
 
 
@@ -99,7 +101,8 @@ ruleModel returns [EObject current=null]
 
 
 // Entry rule entryRuleTypes
-entryRuleTypes returns [EObject current=null] :
+entryRuleTypes returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTypesRule(), currentNode); }
 	 iv_ruleTypes=ruleTypes 
 	 { $current=$iv_ruleTypes.current; } 
@@ -141,14 +144,16 @@ ruleTypes returns [EObject current=null]
 	    }
 
 )
-)*);
+)*)
+;
 
 
 
 
 
 // Entry rule entryRuleType
-entryRuleType returns [EObject current=null] :
+entryRuleType returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTypeRule(), currentNode); }
 	 iv_ruleType=ruleType 
 	 { $current=$iv_ruleType.current; } 
@@ -181,14 +186,16 @@ ruleType returns [EObject current=null]
         $current = $this_CompositeType_1.current; 
         currentNode = currentNode.getParent();
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleSimpleType
-entryRuleSimpleType returns [EObject current=null] :
+entryRuleSimpleType returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getSimpleTypeRule(), currentNode); }
 	 iv_ruleSimpleType=ruleSimpleType 
 	 { $current=$iv_ruleSimpleType.current; } 
@@ -234,14 +241,16 @@ ruleSimpleType returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getSimpleTypeAccess().getSemicolonKeyword_2(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleCompositeType
-entryRuleCompositeType returns [EObject current=null] :
+entryRuleCompositeType returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getCompositeTypeRule(), currentNode); }
 	 iv_ruleCompositeType=ruleCompositeType 
 	 { $current=$iv_ruleCompositeType.current; } 
@@ -315,14 +324,16 @@ ruleCompositeType returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getCompositeTypeAccess().getSemicolonKeyword_4(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleCompositeTypeEntry
-entryRuleCompositeTypeEntry returns [EObject current=null] :
+entryRuleCompositeTypeEntry returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getCompositeTypeEntryRule(), currentNode); }
 	 iv_ruleCompositeTypeEntry=ruleCompositeTypeEntry 
 	 { $current=$iv_ruleCompositeTypeEntry.current; } 
@@ -352,14 +363,16 @@ ruleCompositeTypeEntry returns [EObject current=null]
 	    }
 
 )
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleTypeId
-entryRuleTypeId returns [String current=null] :
+entryRuleTypeId returns [String current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTypeIdRule(), currentNode); } 
 	 iv_ruleTypeId=ruleTypeId 
 	 { $current=$iv_ruleTypeId.current.getText(); }  

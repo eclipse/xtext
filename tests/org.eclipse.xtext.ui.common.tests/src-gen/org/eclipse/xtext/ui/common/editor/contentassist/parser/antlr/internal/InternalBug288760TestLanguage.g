@@ -69,7 +69,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.Bug288760TestLa
 
 
 // Entry rule entryRuleWorkflowElement
-entryRuleWorkflowElement returns [EObject current=null] :
+entryRuleWorkflowElement returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getWorkflowElementRule(), currentNode); }
 	 iv_ruleWorkflowElement=ruleWorkflowElement 
 	 { $current=$iv_ruleWorkflowElement.current; } 
@@ -236,14 +237,16 @@ ruleWorkflowElement returns [EObject current=null]
 	    }
 
 )
-)));
+)))
+;
 
 
 
 
 
 // Entry rule entryRuleAttribute
-entryRuleAttribute returns [EObject current=null] :
+entryRuleAttribute returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getAttributeRule(), currentNode); }
 	 iv_ruleAttribute=ruleAttribute 
 	 { $current=$iv_ruleAttribute.current; } 
@@ -309,7 +312,8 @@ ruleAttribute returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 

@@ -57,7 +57,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.ContentAssistCo
 
 
 // Entry rule entryRuleFirstLevel
-entryRuleFirstLevel :
+entryRuleFirstLevel 
+:
 { before(grammarAccess.getFirstLevelRule()); }
 	 ruleFirstLevel
 { after(grammarAccess.getFirstLevelRule()); } 
@@ -69,7 +70,7 @@ ruleFirstLevel
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getFirstLevelAccess().getGroup()); }
 (rule__FirstLevel__Group__0)
@@ -84,7 +85,8 @@ finally {
 
 
 // Entry rule entryRuleSecondLevelA
-entryRuleSecondLevelA :
+entryRuleSecondLevelA 
+:
 { before(grammarAccess.getSecondLevelARule()); }
 	 ruleSecondLevelA
 { after(grammarAccess.getSecondLevelARule()); } 
@@ -96,7 +98,7 @@ ruleSecondLevelA
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getSecondLevelAAccess().getGroup()); }
 (rule__SecondLevelA__Group__0)
@@ -111,7 +113,8 @@ finally {
 
 
 // Entry rule entryRuleSecondLevelB
-entryRuleSecondLevelB :
+entryRuleSecondLevelB 
+:
 { before(grammarAccess.getSecondLevelBRule()); }
 	 ruleSecondLevelB
 { after(grammarAccess.getSecondLevelBRule()); } 
@@ -123,7 +126,7 @@ ruleSecondLevelB
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getSecondLevelBAccess().getGroup()); }
 (rule__SecondLevelB__Group__0)
@@ -138,7 +141,8 @@ finally {
 
 
 // Entry rule entryRuleThirdLevelA1
-entryRuleThirdLevelA1 :
+entryRuleThirdLevelA1 
+:
 { before(grammarAccess.getThirdLevelA1Rule()); }
 	 ruleThirdLevelA1
 { after(grammarAccess.getThirdLevelA1Rule()); } 
@@ -150,7 +154,7 @@ ruleThirdLevelA1
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getThirdLevelA1Access().getGroup()); }
 (rule__ThirdLevelA1__Group__0)
@@ -165,7 +169,8 @@ finally {
 
 
 // Entry rule entryRuleThirdLevelA2
-entryRuleThirdLevelA2 :
+entryRuleThirdLevelA2 
+:
 { before(grammarAccess.getThirdLevelA2Rule()); }
 	 ruleThirdLevelA2
 { after(grammarAccess.getThirdLevelA2Rule()); } 
@@ -177,7 +182,7 @@ ruleThirdLevelA2
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getThirdLevelA2Access().getGroup()); }
 (rule__ThirdLevelA2__Group__0)
@@ -192,7 +197,8 @@ finally {
 
 
 // Entry rule entryRuleThirdLevelB1
-entryRuleThirdLevelB1 :
+entryRuleThirdLevelB1 
+:
 { before(grammarAccess.getThirdLevelB1Rule()); }
 	 ruleThirdLevelB1
 { after(grammarAccess.getThirdLevelB1Rule()); } 
@@ -204,7 +210,7 @@ ruleThirdLevelB1
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getThirdLevelB1Access().getGroup()); }
 (rule__ThirdLevelB1__Group__0)
@@ -219,7 +225,8 @@ finally {
 
 
 // Entry rule entryRuleThirdLevelB2
-entryRuleThirdLevelB2 :
+entryRuleThirdLevelB2 
+:
 { before(grammarAccess.getThirdLevelB2Rule()); }
 	 ruleThirdLevelB2
 { after(grammarAccess.getThirdLevelB2Rule()); } 
@@ -231,7 +238,7 @@ ruleThirdLevelB2
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getThirdLevelB2Access().getGroup()); }
 (rule__ThirdLevelB2__Group__0)

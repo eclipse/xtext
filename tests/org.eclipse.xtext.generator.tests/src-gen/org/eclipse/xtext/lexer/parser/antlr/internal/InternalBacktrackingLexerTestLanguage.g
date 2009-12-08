@@ -71,7 +71,8 @@ import org.eclipse.xtext.lexer.services.BacktrackingLexerTestLanguageGrammarAcce
 
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] :
+entryRuleModel returns [EObject current=null]
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
@@ -157,14 +158,16 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)*);
+)*)
+;
 
 
 
 
 
 // Entry rule entryRuleAb
-entryRuleAb returns [EObject current=null] :
+entryRuleAb returns [EObject current=null]
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getAbRule(), currentNode); }
 	 iv_ruleAb=ruleAb 
 	 { $current=$iv_ruleAb.current; } 
@@ -226,14 +229,16 @@ ruleAb returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleXb
-entryRuleXb returns [EObject current=null] :
+entryRuleXb returns [EObject current=null]
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getXbRule(), currentNode); }
 	 iv_ruleXb=ruleXb 
 	 { $current=$iv_ruleXb.current; } 
@@ -295,7 +300,8 @@ ruleXb returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 

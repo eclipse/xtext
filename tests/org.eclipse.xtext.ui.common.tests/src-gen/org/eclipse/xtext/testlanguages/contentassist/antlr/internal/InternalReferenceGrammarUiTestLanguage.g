@@ -57,7 +57,8 @@ import org.eclipse.xtext.testlanguages.services.ReferenceGrammarUiTestLanguageGr
 
 
 // Entry rule entryRuleSpielplatz
-entryRuleSpielplatz :
+entryRuleSpielplatz 
+:
 { before(grammarAccess.getSpielplatzRule()); }
 	 ruleSpielplatz
 { after(grammarAccess.getSpielplatzRule()); } 
@@ -69,7 +70,7 @@ ruleSpielplatz
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getSpielplatzAccess().getGroup()); }
 (rule__Spielplatz__Group__0)?
@@ -86,7 +87,8 @@ finally {
 
 
 // Entry rule entryRuleKind
-entryRuleKind :
+entryRuleKind 
+:
 { before(grammarAccess.getKindRule()); }
 	 ruleKind
 { after(grammarAccess.getKindRule()); } 
@@ -98,7 +100,7 @@ ruleKind
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getKindAccess().getGroup()); }
 (rule__Kind__Group__0)
@@ -113,7 +115,8 @@ finally {
 
 
 // Entry rule entryRuleErwachsener
-entryRuleErwachsener :
+entryRuleErwachsener 
+:
 { before(grammarAccess.getErwachsenerRule()); }
 	 ruleErwachsener
 { after(grammarAccess.getErwachsenerRule()); } 
@@ -125,7 +128,7 @@ ruleErwachsener
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getErwachsenerAccess().getGroup()); }
 (rule__Erwachsener__Group__0)
@@ -140,7 +143,8 @@ finally {
 
 
 // Entry rule entryRuleSpielzeug
-entryRuleSpielzeug :
+entryRuleSpielzeug 
+:
 { before(grammarAccess.getSpielzeugRule()); }
 	 ruleSpielzeug
 { after(grammarAccess.getSpielzeugRule()); } 
@@ -152,7 +156,7 @@ ruleSpielzeug
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getSpielzeugAccess().getGroup()); }
 (rule__Spielzeug__Group__0)
@@ -167,7 +171,8 @@ finally {
 
 
 // Entry rule entryRuleFarbe
-entryRuleFarbe :
+entryRuleFarbe 
+:
 { before(grammarAccess.getFarbeRule()); }
 	 ruleFarbe
 { after(grammarAccess.getFarbeRule()); } 
@@ -179,7 +184,7 @@ ruleFarbe
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getFarbeAccess().getWertAssignment()); }
 (rule__Farbe__WertAssignment)
@@ -194,7 +199,8 @@ finally {
 
 
 // Entry rule entryRuleFamilie
-entryRuleFamilie :
+entryRuleFamilie 
+:
 { before(grammarAccess.getFamilieRule()); }
 	 ruleFamilie
 { after(grammarAccess.getFamilieRule()); } 
@@ -206,7 +212,7 @@ ruleFamilie
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getFamilieAccess().getGroup()); }
 (rule__Familie__Group__0)

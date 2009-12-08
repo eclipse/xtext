@@ -57,7 +57,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.LookAheadConten
 
 
 // Entry rule entryRuleModel
-entryRuleModel :
+entryRuleModel 
+:
 { before(grammarAccess.getModelRule()); }
 	 ruleModel
 { after(grammarAccess.getModelRule()); } 
@@ -69,7 +70,7 @@ ruleModel
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getModelAccess().getAlternatives()); }
 (rule__Model__Alternatives)
@@ -84,7 +85,8 @@ finally {
 
 
 // Entry rule entryRuleAttribute
-entryRuleAttribute :
+entryRuleAttribute 
+:
 { before(grammarAccess.getAttributeRule()); }
 	 ruleAttribute
 { after(grammarAccess.getAttributeRule()); } 
@@ -96,7 +98,7 @@ ruleAttribute
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getAttributeAccess().getValueAssignment()); }
 (rule__Attribute__ValueAssignment)
@@ -111,7 +113,8 @@ finally {
 
 
 // Entry rule entryRulePair
-entryRulePair :
+entryRulePair 
+:
 { before(grammarAccess.getPairRule()); }
 	 rulePair
 { after(grammarAccess.getPairRule()); } 
@@ -123,7 +126,7 @@ rulePair
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getPairAccess().getGroup()); }
 (rule__Pair__Group__0)

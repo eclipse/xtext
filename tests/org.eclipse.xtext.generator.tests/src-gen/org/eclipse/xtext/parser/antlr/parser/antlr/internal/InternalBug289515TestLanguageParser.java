@@ -75,16 +75,16 @@ public class InternalBug289515TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:72:47: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:73:2: iv_ruleModel= ruleModel EOF
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:73:2: (iv_ruleModel= ruleModel EOF )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:74:2: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel73);
+            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel75);
             iv_ruleModel=ruleModel();
             _fsp--;
 
              current =iv_ruleModel; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel83); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel85); 
 
             }
 
@@ -102,7 +102,7 @@ public class InternalBug289515TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleModel
-    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:80:1: ruleModel returns [EObject current=null] : ( ( '1' ( (lv_value_1_0= '%' ) ) ) | ( '2' ( (lv_value_3_0= '%' ) ) ) | ( '3' ( (lv_value_5_0= '\\\\%' ) ) ) | ( '4' ( (lv_value_7_0= '\\\\%' ) ) ) | ( '5' ( (lv_value_9_0= '%%' ) ) ) | ( '6' ( (lv_value_11_0= '%%' ) ) ) ) ;
+    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:81:1: ruleModel returns [EObject current=null] : ( ( '1' ( (lv_value_1_0= '%' ) ) ) | ( '2' ( (lv_value_3_0= '%' ) ) ) | ( '3' ( (lv_value_5_0= '\\\\%' ) ) ) | ( '4' ( (lv_value_7_0= '\\\\%' ) ) ) | ( '5' ( (lv_value_9_0= '%%' ) ) ) | ( '6' ( (lv_value_11_0= '%%' ) ) ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -116,10 +116,10 @@ public class InternalBug289515TestLanguageParser extends AbstractInternalAntlrPa
          @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:85:6: ( ( ( '1' ( (lv_value_1_0= '%' ) ) ) | ( '2' ( (lv_value_3_0= '%' ) ) ) | ( '3' ( (lv_value_5_0= '\\\\%' ) ) ) | ( '4' ( (lv_value_7_0= '\\\\%' ) ) ) | ( '5' ( (lv_value_9_0= '%%' ) ) ) | ( '6' ( (lv_value_11_0= '%%' ) ) ) ) )
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:86:1: ( ( '1' ( (lv_value_1_0= '%' ) ) ) | ( '2' ( (lv_value_3_0= '%' ) ) ) | ( '3' ( (lv_value_5_0= '\\\\%' ) ) ) | ( '4' ( (lv_value_7_0= '\\\\%' ) ) ) | ( '5' ( (lv_value_9_0= '%%' ) ) ) | ( '6' ( (lv_value_11_0= '%%' ) ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:86:6: ( ( ( '1' ( (lv_value_1_0= '%' ) ) ) | ( '2' ( (lv_value_3_0= '%' ) ) ) | ( '3' ( (lv_value_5_0= '\\\\%' ) ) ) | ( '4' ( (lv_value_7_0= '\\\\%' ) ) ) | ( '5' ( (lv_value_9_0= '%%' ) ) ) | ( '6' ( (lv_value_11_0= '%%' ) ) ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:87:1: ( ( '1' ( (lv_value_1_0= '%' ) ) ) | ( '2' ( (lv_value_3_0= '%' ) ) ) | ( '3' ( (lv_value_5_0= '\\\\%' ) ) ) | ( '4' ( (lv_value_7_0= '\\\\%' ) ) ) | ( '5' ( (lv_value_9_0= '%%' ) ) ) | ( '6' ( (lv_value_11_0= '%%' ) ) ) )
             {
-            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:86:1: ( ( '1' ( (lv_value_1_0= '%' ) ) ) | ( '2' ( (lv_value_3_0= '%' ) ) ) | ( '3' ( (lv_value_5_0= '\\\\%' ) ) ) | ( '4' ( (lv_value_7_0= '\\\\%' ) ) ) | ( '5' ( (lv_value_9_0= '%%' ) ) ) | ( '6' ( (lv_value_11_0= '%%' ) ) ) )
+            // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:87:1: ( ( '1' ( (lv_value_1_0= '%' ) ) ) | ( '2' ( (lv_value_3_0= '%' ) ) ) | ( '3' ( (lv_value_5_0= '\\\\%' ) ) ) | ( '4' ( (lv_value_7_0= '\\\\%' ) ) ) | ( '5' ( (lv_value_9_0= '%%' ) ) ) | ( '6' ( (lv_value_11_0= '%%' ) ) ) )
             int alt1=6;
             switch ( input.LA(1) ) {
             case 11:
@@ -154,30 +154,30 @@ public class InternalBug289515TestLanguageParser extends AbstractInternalAntlrPa
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("86:1: ( ( '1' ( (lv_value_1_0= '%' ) ) ) | ( '2' ( (lv_value_3_0= '%' ) ) ) | ( '3' ( (lv_value_5_0= '\\\\%' ) ) ) | ( '4' ( (lv_value_7_0= '\\\\%' ) ) ) | ( '5' ( (lv_value_9_0= '%%' ) ) ) | ( '6' ( (lv_value_11_0= '%%' ) ) ) )", 1, 0, input);
+                    new NoViableAltException("87:1: ( ( '1' ( (lv_value_1_0= '%' ) ) ) | ( '2' ( (lv_value_3_0= '%' ) ) ) | ( '3' ( (lv_value_5_0= '\\\\%' ) ) ) | ( '4' ( (lv_value_7_0= '\\\\%' ) ) ) | ( '5' ( (lv_value_9_0= '%%' ) ) ) | ( '6' ( (lv_value_11_0= '%%' ) ) ) )", 1, 0, input);
 
                 throw nvae;
             }
 
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:86:2: ( '1' ( (lv_value_1_0= '%' ) ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:87:2: ( '1' ( (lv_value_1_0= '%' ) ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:86:2: ( '1' ( (lv_value_1_0= '%' ) ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:86:4: '1' ( (lv_value_1_0= '%' ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:87:2: ( '1' ( (lv_value_1_0= '%' ) ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:87:4: '1' ( (lv_value_1_0= '%' ) )
                     {
-                    match(input,11,FollowSets000.FOLLOW_11_in_ruleModel119); 
+                    match(input,11,FollowSets000.FOLLOW_11_in_ruleModel121); 
 
                             createLeafNode(grammarAccess.getModelAccess().getDigitOneKeyword_0_0(), null); 
                         
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:90:1: ( (lv_value_1_0= '%' ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:91:1: (lv_value_1_0= '%' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:91:1: ( (lv_value_1_0= '%' ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:92:1: (lv_value_1_0= '%' )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:91:1: (lv_value_1_0= '%' )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:92:3: lv_value_1_0= '%'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:92:1: (lv_value_1_0= '%' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:93:3: lv_value_1_0= '%'
                     {
                     lv_value_1_0=(Token)input.LT(1);
-                    match(input,12,FollowSets000.FOLLOW_12_in_ruleModel137); 
+                    match(input,12,FollowSets000.FOLLOW_12_in_ruleModel139); 
 
                             createLeafNode(grammarAccess.getModelAccess().getValuePercentSignKeyword_0_1_0(), "value"); 
                         
@@ -206,23 +206,23 @@ public class InternalBug289515TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:112:6: ( '2' ( (lv_value_3_0= '%' ) ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:113:6: ( '2' ( (lv_value_3_0= '%' ) ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:112:6: ( '2' ( (lv_value_3_0= '%' ) ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:112:8: '2' ( (lv_value_3_0= '%' ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:113:6: ( '2' ( (lv_value_3_0= '%' ) ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:113:8: '2' ( (lv_value_3_0= '%' ) )
                     {
-                    match(input,13,FollowSets000.FOLLOW_13_in_ruleModel168); 
+                    match(input,13,FollowSets000.FOLLOW_13_in_ruleModel170); 
 
                             createLeafNode(grammarAccess.getModelAccess().getDigitTwoKeyword_1_0(), null); 
                         
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:116:1: ( (lv_value_3_0= '%' ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:117:1: (lv_value_3_0= '%' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:117:1: ( (lv_value_3_0= '%' ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:118:1: (lv_value_3_0= '%' )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:117:1: (lv_value_3_0= '%' )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:118:3: lv_value_3_0= '%'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:118:1: (lv_value_3_0= '%' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:119:3: lv_value_3_0= '%'
                     {
                     lv_value_3_0=(Token)input.LT(1);
-                    match(input,12,FollowSets000.FOLLOW_12_in_ruleModel186); 
+                    match(input,12,FollowSets000.FOLLOW_12_in_ruleModel188); 
 
                             createLeafNode(grammarAccess.getModelAccess().getValuePercentSignKeyword_1_1_0(), "value"); 
                         
@@ -251,23 +251,23 @@ public class InternalBug289515TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:138:6: ( '3' ( (lv_value_5_0= '\\\\%' ) ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:139:6: ( '3' ( (lv_value_5_0= '\\\\%' ) ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:138:6: ( '3' ( (lv_value_5_0= '\\\\%' ) ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:138:8: '3' ( (lv_value_5_0= '\\\\%' ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:139:6: ( '3' ( (lv_value_5_0= '\\\\%' ) ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:139:8: '3' ( (lv_value_5_0= '\\\\%' ) )
                     {
-                    match(input,14,FollowSets000.FOLLOW_14_in_ruleModel217); 
+                    match(input,14,FollowSets000.FOLLOW_14_in_ruleModel219); 
 
                             createLeafNode(grammarAccess.getModelAccess().getDigitThreeKeyword_2_0(), null); 
                         
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:142:1: ( (lv_value_5_0= '\\\\%' ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:143:1: (lv_value_5_0= '\\\\%' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:143:1: ( (lv_value_5_0= '\\\\%' ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:144:1: (lv_value_5_0= '\\\\%' )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:143:1: (lv_value_5_0= '\\\\%' )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:144:3: lv_value_5_0= '\\\\%'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:144:1: (lv_value_5_0= '\\\\%' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:145:3: lv_value_5_0= '\\\\%'
                     {
                     lv_value_5_0=(Token)input.LT(1);
-                    match(input,15,FollowSets000.FOLLOW_15_in_ruleModel235); 
+                    match(input,15,FollowSets000.FOLLOW_15_in_ruleModel237); 
 
                             createLeafNode(grammarAccess.getModelAccess().getValueReverseSolidusPercentSignKeyword_2_1_0(), "value"); 
                         
@@ -296,23 +296,23 @@ public class InternalBug289515TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:164:6: ( '4' ( (lv_value_7_0= '\\\\%' ) ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:165:6: ( '4' ( (lv_value_7_0= '\\\\%' ) ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:164:6: ( '4' ( (lv_value_7_0= '\\\\%' ) ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:164:8: '4' ( (lv_value_7_0= '\\\\%' ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:165:6: ( '4' ( (lv_value_7_0= '\\\\%' ) ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:165:8: '4' ( (lv_value_7_0= '\\\\%' ) )
                     {
-                    match(input,16,FollowSets000.FOLLOW_16_in_ruleModel266); 
+                    match(input,16,FollowSets000.FOLLOW_16_in_ruleModel268); 
 
                             createLeafNode(grammarAccess.getModelAccess().getDigitFourKeyword_3_0(), null); 
                         
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:168:1: ( (lv_value_7_0= '\\\\%' ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:169:1: (lv_value_7_0= '\\\\%' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:169:1: ( (lv_value_7_0= '\\\\%' ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:170:1: (lv_value_7_0= '\\\\%' )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:169:1: (lv_value_7_0= '\\\\%' )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:170:3: lv_value_7_0= '\\\\%'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:170:1: (lv_value_7_0= '\\\\%' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:171:3: lv_value_7_0= '\\\\%'
                     {
                     lv_value_7_0=(Token)input.LT(1);
-                    match(input,15,FollowSets000.FOLLOW_15_in_ruleModel284); 
+                    match(input,15,FollowSets000.FOLLOW_15_in_ruleModel286); 
 
                             createLeafNode(grammarAccess.getModelAccess().getValueReverseSolidusPercentSignKeyword_3_1_0(), "value"); 
                         
@@ -341,23 +341,23 @@ public class InternalBug289515TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 5 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:190:6: ( '5' ( (lv_value_9_0= '%%' ) ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:191:6: ( '5' ( (lv_value_9_0= '%%' ) ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:190:6: ( '5' ( (lv_value_9_0= '%%' ) ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:190:8: '5' ( (lv_value_9_0= '%%' ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:191:6: ( '5' ( (lv_value_9_0= '%%' ) ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:191:8: '5' ( (lv_value_9_0= '%%' ) )
                     {
-                    match(input,17,FollowSets000.FOLLOW_17_in_ruleModel315); 
+                    match(input,17,FollowSets000.FOLLOW_17_in_ruleModel317); 
 
                             createLeafNode(grammarAccess.getModelAccess().getDigitFiveKeyword_4_0(), null); 
                         
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:194:1: ( (lv_value_9_0= '%%' ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:195:1: (lv_value_9_0= '%%' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:195:1: ( (lv_value_9_0= '%%' ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:196:1: (lv_value_9_0= '%%' )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:195:1: (lv_value_9_0= '%%' )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:196:3: lv_value_9_0= '%%'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:196:1: (lv_value_9_0= '%%' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:197:3: lv_value_9_0= '%%'
                     {
                     lv_value_9_0=(Token)input.LT(1);
-                    match(input,18,FollowSets000.FOLLOW_18_in_ruleModel333); 
+                    match(input,18,FollowSets000.FOLLOW_18_in_ruleModel335); 
 
                             createLeafNode(grammarAccess.getModelAccess().getValuePercentSignPercentSignKeyword_4_1_0(), "value"); 
                         
@@ -386,23 +386,23 @@ public class InternalBug289515TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 6 :
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:216:6: ( '6' ( (lv_value_11_0= '%%' ) ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:217:6: ( '6' ( (lv_value_11_0= '%%' ) ) )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:216:6: ( '6' ( (lv_value_11_0= '%%' ) ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:216:8: '6' ( (lv_value_11_0= '%%' ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:217:6: ( '6' ( (lv_value_11_0= '%%' ) ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:217:8: '6' ( (lv_value_11_0= '%%' ) )
                     {
-                    match(input,19,FollowSets000.FOLLOW_19_in_ruleModel364); 
+                    match(input,19,FollowSets000.FOLLOW_19_in_ruleModel366); 
 
                             createLeafNode(grammarAccess.getModelAccess().getDigitSixKeyword_5_0(), null); 
                         
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:220:1: ( (lv_value_11_0= '%%' ) )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:221:1: (lv_value_11_0= '%%' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:221:1: ( (lv_value_11_0= '%%' ) )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:222:1: (lv_value_11_0= '%%' )
                     {
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:221:1: (lv_value_11_0= '%%' )
-                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:222:3: lv_value_11_0= '%%'
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:222:1: (lv_value_11_0= '%%' )
+                    // ../org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:223:3: lv_value_11_0= '%%'
                     {
                     lv_value_11_0=(Token)input.LT(1);
-                    match(input,18,FollowSets000.FOLLOW_18_in_ruleModel382); 
+                    match(input,18,FollowSets000.FOLLOW_18_in_ruleModel384); 
 
                             createLeafNode(grammarAccess.getModelAccess().getValuePercentSignPercentSignKeyword_5_1_0(), "value"); 
                         
@@ -456,20 +456,20 @@ public class InternalBug289515TestLanguageParser extends AbstractInternalAntlrPa
 
     
     private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel73 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleModel83 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleModel119 = new BitSet(new long[]{0x0000000000001000L});
-        public static final BitSet FOLLOW_12_in_ruleModel137 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_ruleModel168 = new BitSet(new long[]{0x0000000000001000L});
-        public static final BitSet FOLLOW_12_in_ruleModel186 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_ruleModel217 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_15_in_ruleModel235 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_16_in_ruleModel266 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_15_in_ruleModel284 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_17_in_ruleModel315 = new BitSet(new long[]{0x0000000000040000L});
-        public static final BitSet FOLLOW_18_in_ruleModel333 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_19_in_ruleModel364 = new BitSet(new long[]{0x0000000000040000L});
-        public static final BitSet FOLLOW_18_in_ruleModel382 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel75 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleModel85 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_ruleModel121 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_12_in_ruleModel139 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_ruleModel170 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_12_in_ruleModel188 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_ruleModel219 = new BitSet(new long[]{0x0000000000008000L});
+        public static final BitSet FOLLOW_15_in_ruleModel237 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_16_in_ruleModel268 = new BitSet(new long[]{0x0000000000008000L});
+        public static final BitSet FOLLOW_15_in_ruleModel286 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_17_in_ruleModel317 = new BitSet(new long[]{0x0000000000040000L});
+        public static final BitSet FOLLOW_18_in_ruleModel335 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_19_in_ruleModel366 = new BitSet(new long[]{0x0000000000040000L});
+        public static final BitSet FOLLOW_18_in_ruleModel384 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

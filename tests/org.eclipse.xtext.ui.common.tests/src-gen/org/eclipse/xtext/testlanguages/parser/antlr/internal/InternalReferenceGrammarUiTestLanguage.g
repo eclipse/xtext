@@ -69,7 +69,8 @@ import org.eclipse.xtext.testlanguages.services.ReferenceGrammarUiTestLanguageGr
 
 
 // Entry rule entryRuleSpielplatz
-entryRuleSpielplatz returns [EObject current=null] :
+entryRuleSpielplatz returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getSpielplatzRule(), currentNode); }
 	 iv_ruleSpielplatz=ruleSpielplatz 
 	 { $current=$iv_ruleSpielplatz.current; } 
@@ -242,7 +243,8 @@ ruleSpielplatz returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getSpielplatzAccess().getRightCurlyBracketKeyword_5(), null); 
     }
-)?;
+)?
+;
 
 
 
@@ -251,7 +253,8 @@ ruleSpielplatz returns [EObject current=null]
 
 
 // Entry rule entryRuleKind
-entryRuleKind returns [EObject current=null] :
+entryRuleKind returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getKindRule(), currentNode); }
 	 iv_ruleKind=ruleKind 
 	 { $current=$iv_ruleKind.current; } 
@@ -325,14 +328,16 @@ ruleKind returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getKindAccess().getRightParenthesisKeyword_4(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleErwachsener
-entryRuleErwachsener returns [EObject current=null] :
+entryRuleErwachsener returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getErwachsenerRule(), currentNode); }
 	 iv_ruleErwachsener=ruleErwachsener 
 	 { $current=$iv_ruleErwachsener.current; } 
@@ -406,14 +411,16 @@ ruleErwachsener returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getErwachsenerAccess().getRightParenthesisKeyword_4(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleSpielzeug
-entryRuleSpielzeug returns [EObject current=null] :
+entryRuleSpielzeug returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getSpielzeugRule(), currentNode); }
 	 iv_ruleSpielzeug=ruleSpielzeug 
 	 { $current=$iv_ruleSpielzeug.current; } 
@@ -487,14 +494,16 @@ ruleSpielzeug returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getSpielzeugAccess().getRightParenthesisKeyword_4(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleFarbe
-entryRuleFarbe returns [EObject current=null] :
+entryRuleFarbe returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getFarbeRule(), currentNode); }
 	 iv_ruleFarbe=ruleFarbe 
 	 { $current=$iv_ruleFarbe.current; } 
@@ -586,14 +595,16 @@ ruleFarbe returns [EObject current=null]
 )
 
 )
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleFamilie
-entryRuleFamilie returns [EObject current=null] :
+entryRuleFamilie returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getFamilieRule(), currentNode); }
 	 iv_ruleFamilie=ruleFamilie 
 	 { $current=$iv_ruleFamilie.current; } 
@@ -745,7 +756,8 @@ ruleFamilie returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getFamilieAccess().getRightParenthesisKeyword_7(), null); 
     }
-);
+)
+;
 
 
 

@@ -69,7 +69,8 @@ import org.eclipse.xtext.parser.terminalrules.services.HiddenTerminalsTestLangua
 
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] :
+entryRuleModel returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
@@ -132,14 +133,16 @@ ruleModel returns [EObject current=null]
         $current = $this_DatatypeHiddens_4.current; 
         currentNode = currentNode.getParent();
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleWithoutHiddens
-entryRuleWithoutHiddens returns [EObject current=null] :
+entryRuleWithoutHiddens returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getWithoutHiddensRule(), currentNode); }
 	 iv_ruleWithoutHiddens=ruleWithoutHiddens 
 	 { $current=$iv_ruleWithoutHiddens.current; } 
@@ -230,19 +233,27 @@ ruleWithoutHiddens returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleWithHiddens
-entryRuleWithHiddens returns [EObject current=null] :
+entryRuleWithHiddens returns [EObject current=null] 
+	@init { 
+		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
+	}
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getWithHiddensRule(), currentNode); }
 	 iv_ruleWithHiddens=ruleWithHiddens 
 	 { $current=$iv_ruleWithHiddens.current; } 
 	 EOF 
 ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 // Rule WithHiddens
 ruleWithHiddens returns [EObject current=null] 
@@ -251,7 +262,6 @@ ruleWithHiddens returns [EObject current=null]
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
-		myHiddenTokenState.restore();
     }:
 (	'with' 
     {
@@ -282,19 +292,30 @@ ruleWithHiddens returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
+finally {
+	myHiddenTokenState.restore();
+}
 
 
 
 
 
 // Entry rule entryRuleOverridingHiddens
-entryRuleOverridingHiddens returns [EObject current=null] :
+entryRuleOverridingHiddens returns [EObject current=null] 
+	@init { 
+		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
+	}
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getOverridingHiddensRule(), currentNode); }
 	 iv_ruleOverridingHiddens=ruleOverridingHiddens 
 	 { $current=$iv_ruleOverridingHiddens.current; } 
 	 EOF 
 ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 // Rule OverridingHiddens
 ruleOverridingHiddens returns [EObject current=null] 
@@ -303,7 +324,6 @@ ruleOverridingHiddens returns [EObject current=null]
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
-		myHiddenTokenState.restore();
     }:
 (	'overriding' 
     {
@@ -366,19 +386,30 @@ ruleOverridingHiddens returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
+finally {
+	myHiddenTokenState.restore();
+}
 
 
 
 
 
 // Entry rule entryRuleOverridingHiddensCall
-entryRuleOverridingHiddensCall returns [EObject current=null] :
+entryRuleOverridingHiddensCall returns [EObject current=null] 
+	@init { 
+		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+	}
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getOverridingHiddensCallRule(), currentNode); }
 	 iv_ruleOverridingHiddensCall=ruleOverridingHiddensCall 
 	 { $current=$iv_ruleOverridingHiddensCall.current; } 
 	 EOF 
 ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 // Rule OverridingHiddensCall
 ruleOverridingHiddensCall returns [EObject current=null] 
@@ -387,7 +418,6 @@ ruleOverridingHiddensCall returns [EObject current=null]
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
-		myHiddenTokenState.restore();
     }:
 (	'call' 
     {
@@ -438,19 +468,30 @@ ruleOverridingHiddensCall returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
+finally {
+	myHiddenTokenState.restore();
+}
 
 
 
 
 
 // Entry rule entryRuleInheritingHiddens
-entryRuleInheritingHiddens returns [EObject current=null] :
+entryRuleInheritingHiddens returns [EObject current=null] 
+	@init { 
+		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
+	}
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getInheritingHiddensRule(), currentNode); }
 	 iv_ruleInheritingHiddens=ruleInheritingHiddens 
 	 { $current=$iv_ruleInheritingHiddens.current; } 
 	 EOF 
 ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 // Rule InheritingHiddens
 ruleInheritingHiddens returns [EObject current=null] 
@@ -459,7 +500,6 @@ ruleInheritingHiddens returns [EObject current=null]
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
-		myHiddenTokenState.restore();
     }:
 (	'inheriting' 
     {
@@ -547,14 +587,19 @@ ruleInheritingHiddens returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
+finally {
+	myHiddenTokenState.restore();
+}
 
 
 
 
 
 // Entry rule entryRuleDatatypeHiddens
-entryRuleDatatypeHiddens returns [EObject current=null] :
+entryRuleDatatypeHiddens returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getDatatypeHiddensRule(), currentNode); }
 	 iv_ruleDatatypeHiddens=ruleDatatypeHiddens 
 	 { $current=$iv_ruleDatatypeHiddens.current; } 
@@ -596,19 +641,27 @@ ruleDatatypeHiddens returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleDatatypeRule
-entryRuleDatatypeRule returns [String current=null] :
+entryRuleDatatypeRule returns [String current=null] 
+	@init { 
+		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens("RULE_WS");
+	}
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getDatatypeRuleRule(), currentNode); } 
 	 iv_ruleDatatypeRule=ruleDatatypeRule 
 	 { $current=$iv_ruleDatatypeRule.current.getText(); }  
 	 EOF 
 ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 // Rule DatatypeRule
 ruleDatatypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
@@ -617,7 +670,6 @@ ruleDatatypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTo
     }
     @after { resetLookahead(); 
 	    lastConsumedNode = currentNode;
-		myHiddenTokenState.restore();
     }:
 (
 	kw='rule' 
@@ -633,18 +685,28 @@ ruleDatatypeRule returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleTo
     }
 )
     ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 
 
 
 
 // Entry rule entryRuleHidingHiddens
-entryRuleHidingHiddens returns [EObject current=null] :
+entryRuleHidingHiddens returns [EObject current=null] 
+	@init { 
+		HiddenTokens myHiddenTokenState = ((XtextTokenStream)input).setHiddenTokens();
+	}
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getHidingHiddensRule(), currentNode); }
 	 iv_ruleHidingHiddens=ruleHidingHiddens 
 	 { $current=$iv_ruleHidingHiddens.current; } 
 	 EOF 
 ;
+finally {
+	myHiddenTokenState.restore();
+}
 
 // Rule HidingHiddens
 ruleHidingHiddens returns [EObject current=null] 
@@ -653,7 +715,6 @@ ruleHidingHiddens returns [EObject current=null]
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
-		myHiddenTokenState.restore();
     }:
 (	'hiding' 
     {
@@ -707,14 +768,19 @@ ruleHidingHiddens returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
+finally {
+	myHiddenTokenState.restore();
+}
 
 
 
 
 
 // Entry rule entryRuleInheritingHiddensCall
-entryRuleInheritingHiddensCall returns [EObject current=null] :
+entryRuleInheritingHiddensCall returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getInheritingHiddensCallRule(), currentNode); }
 	 iv_ruleInheritingHiddensCall=ruleInheritingHiddensCall 
 	 { $current=$iv_ruleInheritingHiddensCall.current; } 
@@ -753,7 +819,8 @@ ruleInheritingHiddensCall returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 

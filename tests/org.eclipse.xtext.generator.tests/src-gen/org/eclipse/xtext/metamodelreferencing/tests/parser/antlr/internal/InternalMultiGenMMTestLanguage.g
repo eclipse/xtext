@@ -69,7 +69,8 @@ import org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLangu
 
 
 // Entry rule entryRuleFoo
-entryRuleFoo returns [EObject current=null] :
+entryRuleFoo returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getFooRule(), currentNode); }
 	 iv_ruleFoo=ruleFoo 
 	 { $current=$iv_ruleFoo.current; } 
@@ -131,14 +132,16 @@ ruleFoo returns [EObject current=null]
 	    }
 
 )
-)*);
+)*)
+;
 
 
 
 
 
 // Entry rule entryRuleNameRef
-entryRuleNameRef returns [EObject current=null] :
+entryRuleNameRef returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getNameRefRule(), currentNode); }
 	 iv_ruleNameRef=ruleNameRef 
 	 { $current=$iv_ruleNameRef.current; } 
@@ -176,7 +179,8 @@ ruleNameRef returns [EObject current=null]
 	    }
 
 )
-);
+)
+;
 
 
 

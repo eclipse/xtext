@@ -69,7 +69,8 @@ import org.eclipse.xtext.linking.services.Bug289059TestLanguageGrammarAccess;
 
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] :
+entryRuleModel returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
@@ -145,14 +146,16 @@ ruleModel returns [EObject current=null]
 	}
 
 )
-)?);
+)?)
+;
 
 
 
 
 
 // Entry rule entryRuleUnassignedAction
-entryRuleUnassignedAction returns [EObject current=null] :
+entryRuleUnassignedAction returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getUnassignedActionRule(), currentNode); }
 	 iv_ruleUnassignedAction=ruleUnassignedAction 
 	 { $current=$iv_ruleUnassignedAction.current; } 
@@ -181,7 +184,8 @@ ruleUnassignedAction returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getUnassignedActionAccess().getEnabledKeyword_1(), null); 
     }
-);
+)
+;
 
 
 

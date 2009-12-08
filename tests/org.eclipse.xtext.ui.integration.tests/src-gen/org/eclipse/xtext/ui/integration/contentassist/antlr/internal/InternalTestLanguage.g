@@ -57,7 +57,8 @@ import org.eclipse.xtext.ui.integration.services.TestLanguageGrammarAccess;
 
 
 // Entry rule entryRuleFile
-entryRuleFile :
+entryRuleFile 
+:
 { before(grammarAccess.getFileRule()); }
 	 ruleFile
 { after(grammarAccess.getFileRule()); } 
@@ -69,7 +70,7 @@ ruleFile
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getFileAccess().getStuffAssignment()); }
 (rule__File__StuffAssignment)*
@@ -84,7 +85,8 @@ finally {
 
 
 // Entry rule entryRuleStuff
-entryRuleStuff :
+entryRuleStuff 
+:
 { before(grammarAccess.getStuffRule()); }
 	 ruleStuff
 { after(grammarAccess.getStuffRule()); } 
@@ -96,7 +98,7 @@ ruleStuff
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getStuffAccess().getGroup()); }
 (rule__Stuff__Group__0)

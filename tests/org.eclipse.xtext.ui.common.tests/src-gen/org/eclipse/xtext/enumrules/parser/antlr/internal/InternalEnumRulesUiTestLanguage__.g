@@ -13,25 +13,25 @@ T13 : 'SameName' ;
 T14 : 'overridden' ;
 T15 : 'DifferentLiteral' ;
 
-// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesUiTestLanguage.g" 226
+// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesUiTestLanguage.g" 228
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesUiTestLanguage.g" 228
+// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesUiTestLanguage.g" 230
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesUiTestLanguage.g" 230
+// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesUiTestLanguage.g" 232
 RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
-// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesUiTestLanguage.g" 232
+// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesUiTestLanguage.g" 234
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesUiTestLanguage.g" 234
+// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesUiTestLanguage.g" 236
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesUiTestLanguage.g" 236
+// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesUiTestLanguage.g" 238
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesUiTestLanguage.g" 238
+// $ANTLR src "../org.eclipse.xtext.ui.common.tests/src-gen/org/eclipse/xtext/enumrules/parser/antlr/internal/InternalEnumRulesUiTestLanguage.g" 240
 RULE_ANY_OTHER : .;
 
 

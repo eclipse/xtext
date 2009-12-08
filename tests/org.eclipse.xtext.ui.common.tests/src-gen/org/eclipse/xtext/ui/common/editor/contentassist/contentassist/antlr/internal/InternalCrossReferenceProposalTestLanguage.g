@@ -57,7 +57,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.CrossReferenceP
 
 
 // Entry rule entryRuleModel
-entryRuleModel :
+entryRuleModel 
+:
 { before(grammarAccess.getModelRule()); }
 	 ruleModel
 { after(grammarAccess.getModelRule()); } 
@@ -69,7 +70,7 @@ ruleModel
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getModelAccess().getElementsAssignment()); }
 (rule__Model__ElementsAssignment)*
@@ -84,7 +85,8 @@ finally {
 
 
 // Entry rule entryRuleClass
-entryRuleClass :
+entryRuleClass 
+:
 { before(grammarAccess.getClassRule()); }
 	 ruleClass
 { after(grammarAccess.getClassRule()); } 
@@ -96,7 +98,7 @@ ruleClass
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getClassAccess().getGroup()); }
 (rule__Class__Group__0)

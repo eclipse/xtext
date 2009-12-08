@@ -69,7 +69,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.Bug288734TestLa
 
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] :
+entryRuleModel returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
@@ -107,14 +108,16 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleTConstant
-entryRuleTConstant returns [EObject current=null] :
+entryRuleTConstant returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTConstantRule(), currentNode); }
 	 iv_ruleTConstant=ruleTConstant 
 	 { $current=$iv_ruleTConstant.current; } 
@@ -157,14 +160,16 @@ ruleTConstant returns [EObject current=null]
         $current = $this_TBooleanConstant_2.current; 
         currentNode = currentNode.getParent();
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleTStringConstant
-entryRuleTStringConstant returns [EObject current=null] :
+entryRuleTStringConstant returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTStringConstantRule(), currentNode); }
 	 iv_ruleTStringConstant=ruleTStringConstant 
 	 { $current=$iv_ruleTStringConstant.current; } 
@@ -234,14 +239,16 @@ ruleTStringConstant returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleTIntegerConstant
-entryRuleTIntegerConstant returns [EObject current=null] :
+entryRuleTIntegerConstant returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTIntegerConstantRule(), currentNode); }
 	 iv_ruleTIntegerConstant=ruleTIntegerConstant 
 	 { $current=$iv_ruleTIntegerConstant.current; } 
@@ -311,14 +318,16 @@ ruleTIntegerConstant returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleTBooleanConstant
-entryRuleTBooleanConstant returns [EObject current=null] :
+entryRuleTBooleanConstant returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTBooleanConstantRule(), currentNode); }
 	 iv_ruleTBooleanConstant=ruleTBooleanConstant 
 	 { $current=$iv_ruleTBooleanConstant.current; } 
@@ -388,14 +397,16 @@ ruleTBooleanConstant returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleTAnnotation
-entryRuleTAnnotation returns [EObject current=null] :
+entryRuleTAnnotation returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTAnnotationRule(), currentNode); }
 	 iv_ruleTAnnotation=ruleTAnnotation 
 	 { $current=$iv_ruleTAnnotation.current; } 
@@ -437,7 +448,8 @@ ruleTAnnotation returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 

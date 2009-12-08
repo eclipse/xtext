@@ -69,7 +69,8 @@ import org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammar
 
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] :
+entryRuleModel returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
@@ -107,14 +108,16 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)?;
+)?
+;
 
 
 
 
 
 // Entry rule entryRuleGreeting
-entryRuleGreeting returns [EObject current=null] :
+entryRuleGreeting returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getGreetingRule(), currentNode); }
 	 iv_ruleGreeting=ruleGreeting 
 	 { $current=$iv_ruleGreeting.current; } 
@@ -156,7 +159,8 @@ ruleGreeting returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 

@@ -69,7 +69,8 @@ import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageG
 
 
 // Entry rule entryRuleOp
-entryRuleOp returns [EObject current=null] :
+entryRuleOp returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getOpRule(), currentNode); }
 	 iv_ruleOp=ruleOp 
 	 { $current=$iv_ruleOp.current; } 
@@ -132,14 +133,16 @@ ruleOp returns [EObject current=null]
 	    }
 
 )
-))*);
+))*)
+;
 
 
 
 
 
 // Entry rule entryRuleTerm
-entryRuleTerm returns [EObject current=null] :
+entryRuleTerm returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTermRule(), currentNode); }
 	 iv_ruleTerm=ruleTerm 
 	 { $current=$iv_ruleTerm.current; } 
@@ -352,14 +355,16 @@ ruleTerm returns [EObject current=null]
         $current = $this_EObjectRef_19.current; 
         currentNode = currentNode.getParent();
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleAtom
-entryRuleAtom returns [EObject current=null] :
+entryRuleAtom returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getAtomRule(), currentNode); }
 	 iv_ruleAtom=ruleAtom 
 	 { $current=$iv_ruleAtom.current; } 
@@ -397,14 +402,16 @@ ruleAtom returns [EObject current=null]
 	    }
 
 )
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleParens
-entryRuleParens returns [EObject current=null] :
+entryRuleParens returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getParensRule(), currentNode); }
 	 iv_ruleParens=ruleParens 
 	 { $current=$iv_ruleParens.current; } 
@@ -456,14 +463,16 @@ ruleParens returns [EObject current=null]
 	    }
 
 )
-)?);
+)?)
+;
 
 
 
 
 
 // Entry rule entryRuleTwoNumbers
-entryRuleTwoNumbers returns [EObject current=null] :
+entryRuleTwoNumbers returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTwoNumbersRule(), currentNode); }
 	 iv_ruleTwoNumbers=ruleTwoNumbers 
 	 { $current=$iv_ruleTwoNumbers.current; } 
@@ -553,14 +562,16 @@ ruleTwoNumbers returns [EObject current=null]
 	    }
 
 )
-))*);
+))*)
+;
 
 
 
 
 
 // Entry rule entryRuleManyStrings
-entryRuleManyStrings returns [EObject current=null] :
+entryRuleManyStrings returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getManyStringsRule(), currentNode); }
 	 iv_ruleManyStrings=ruleManyStrings 
 	 { $current=$iv_ruleManyStrings.current; } 
@@ -626,14 +637,16 @@ ruleManyStrings returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleType
-entryRuleType returns [EObject current=null] :
+entryRuleType returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTypeRule(), currentNode); }
 	 iv_ruleType=ruleType 
 	 { $current=$iv_ruleType.current; } 
@@ -693,14 +706,16 @@ ruleType returns [EObject current=null]
 	}
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleRef2
-entryRuleRef2 returns [EObject current=null] :
+entryRuleRef2 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getRef2Rule(), currentNode); }
 	 iv_ruleRef2=ruleRef2 
 	 { $current=$iv_ruleRef2.current; } 
@@ -781,14 +796,16 @@ ruleRef2 returns [EObject current=null]
 )
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleSpare
-entryRuleSpare returns [EObject current=null] :
+entryRuleSpare returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getSpareRule(), currentNode); }
 	 iv_ruleSpare=ruleSpare 
 	 { $current=$iv_ruleSpare.current; } 
@@ -858,14 +875,16 @@ ruleSpare returns [EObject current=null]
 	    }
 
 )
-))*);
+))*)
+;
 
 
 
 
 
 // Entry rule entryRuleBoolean
-entryRuleBoolean returns [EObject current=null] :
+entryRuleBoolean returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getBooleanRule(), currentNode); }
 	 iv_ruleBoolean=ruleBoolean 
 	 { $current=$iv_ruleBoolean.current; } 
@@ -932,14 +951,16 @@ ruleBoolean returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleTransient1
-entryRuleTransient1 returns [EObject current=null] :
+entryRuleTransient1 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTransient1Rule(), currentNode); }
 	 iv_ruleTransient1=ruleTransient1 
 	 { $current=$iv_ruleTransient1.current; } 
@@ -1053,14 +1074,16 @@ ruleTransient1 returns [EObject current=null]
 	    }
 
 )
-)))?);
+)))?)
+;
 
 
 
 
 
 // Entry rule entryRuleConsumed1
-entryRuleConsumed1 returns [EObject current=null] :
+entryRuleConsumed1 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getConsumed1Rule(), currentNode); }
 	 iv_ruleConsumed1=ruleConsumed1 
 	 { $current=$iv_ruleConsumed1.current; } 
@@ -1183,14 +1206,16 @@ ruleConsumed1 returns [EObject current=null]
 	    }
 
 )
-))));
+))))
+;
 
 
 
 
 
 // Entry rule entryRuleConsumed2
-entryRuleConsumed2 returns [EObject current=null] :
+entryRuleConsumed2 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getConsumed2Rule(), currentNode); }
 	 iv_ruleConsumed2=ruleConsumed2 
 	 { $current=$iv_ruleConsumed2.current; } 
@@ -1232,14 +1257,16 @@ ruleConsumed2 returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleLoop1
-entryRuleLoop1 returns [EObject current=null] :
+entryRuleLoop1 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getLoop1Rule(), currentNode); }
 	 iv_ruleLoop1=ruleLoop1 
 	 { $current=$iv_ruleLoop1.current; } 
@@ -1321,14 +1348,16 @@ ruleLoop1 returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getLoop1Access().getKw30Keyword_5_1(), null); 
     }
-)+);
+)+)
+;
 
 
 
 
 
 // Entry rule entryRuleLoop2
-entryRuleLoop2 returns [EObject current=null] :
+entryRuleLoop2 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getLoop2Rule(), currentNode); }
 	 iv_ruleLoop2=ruleLoop2 
 	 { $current=$iv_ruleLoop2.current; } 
@@ -1445,14 +1474,16 @@ ruleLoop2 returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getLoop2Access().getKw6Keyword_4_1(), null); 
     }
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleLoop3
-entryRuleLoop3 returns [EObject current=null] :
+entryRuleLoop3 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getLoop3Rule(), currentNode); }
 	 iv_ruleLoop3=ruleLoop3 
 	 { $current=$iv_ruleLoop3.current; } 
@@ -1540,14 +1571,16 @@ ruleLoop3 returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getLoop3Access().getKw5Keyword_3_2(), null); 
     }
-)*);
+)*)
+;
 
 
 
 
 
 // Entry rule entryRuleLoop4
-entryRuleLoop4 returns [EObject current=null] :
+entryRuleLoop4 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getLoop4Rule(), currentNode); }
 	 iv_ruleLoop4=ruleLoop4 
 	 { $current=$iv_ruleLoop4.current; } 
@@ -1619,14 +1652,16 @@ ruleLoop4 returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getLoop4Access().getKw7Keyword_3_1_1(), null); 
     }
-)?)?)+);
+)?)?)+)
+;
 
 
 
 
 
 // Entry rule entryRuleLoopBug285452
-entryRuleLoopBug285452 returns [EObject current=null] :
+entryRuleLoopBug285452 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getLoopBug285452Rule(), currentNode); }
 	 iv_ruleLoopBug285452=ruleLoopBug285452 
 	 { $current=$iv_ruleLoopBug285452.current; } 
@@ -1694,14 +1729,16 @@ ruleLoopBug285452 returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleDuplicateBug284491
-entryRuleDuplicateBug284491 returns [EObject current=null] :
+entryRuleDuplicateBug284491 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getDuplicateBug284491Rule(), currentNode); }
 	 iv_ruleDuplicateBug284491=ruleDuplicateBug284491 
 	 { $current=$iv_ruleDuplicateBug284491.current; } 
@@ -1784,14 +1821,16 @@ ruleDuplicateBug284491 returns [EObject current=null]
 	    }
 
 )
-))*);
+))*)
+;
 
 
 
 
 
 // Entry rule entryRuleEmptyObjectBug284850
-entryRuleEmptyObjectBug284850 returns [EObject current=null] :
+entryRuleEmptyObjectBug284850 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getEmptyObjectBug284850Rule(), currentNode); }
 	 iv_ruleEmptyObjectBug284850=ruleEmptyObjectBug284850 
 	 { $current=$iv_ruleEmptyObjectBug284850.current; } 
@@ -1833,14 +1872,16 @@ ruleEmptyObjectBug284850 returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleEmptyObjectItems
-entryRuleEmptyObjectItems returns [EObject current=null] :
+entryRuleEmptyObjectItems returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getEmptyObjectItemsRule(), currentNode); }
 	 iv_ruleEmptyObjectItems=ruleEmptyObjectItems 
 	 { $current=$iv_ruleEmptyObjectItems.current; } 
@@ -1878,14 +1919,16 @@ ruleEmptyObjectItems returns [EObject current=null]
 	    }
 
 )
-)*;
+)*
+;
 
 
 
 
 
 // Entry rule entryRuleEmptyObjectItem
-entryRuleEmptyObjectItem returns [EObject current=null] :
+entryRuleEmptyObjectItem returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getEmptyObjectItemRule(), currentNode); }
 	 iv_ruleEmptyObjectItem=ruleEmptyObjectItem 
 	 { $current=$iv_ruleEmptyObjectItem.current; } 
@@ -1927,14 +1970,16 @@ ruleEmptyObjectItem returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleMultiInheritanceBug280439
-entryRuleMultiInheritanceBug280439 returns [EObject current=null] :
+entryRuleMultiInheritanceBug280439 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getMultiInheritanceBug280439Rule(), currentNode); }
 	 iv_ruleMultiInheritanceBug280439=ruleMultiInheritanceBug280439 
 	 { $current=$iv_ruleMultiInheritanceBug280439.current; } 
@@ -1976,7 +2021,8 @@ ruleMultiInheritanceBug280439 returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
@@ -1987,7 +2033,8 @@ ruleMultiInheritanceBug280439 returns [EObject current=null]
 
 
 // Entry rule entryRuleConcreteMulti
-entryRuleConcreteMulti returns [EObject current=null] :
+entryRuleConcreteMulti returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getConcreteMultiRule(), currentNode); }
 	 iv_ruleConcreteMulti=ruleConcreteMulti 
 	 { $current=$iv_ruleConcreteMulti.current; } 
@@ -2049,14 +2096,16 @@ ruleConcreteMulti returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleEObjectRef
-entryRuleEObjectRef returns [EObject current=null] :
+entryRuleEObjectRef returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getEObjectRefRule(), currentNode); }
 	 iv_ruleEObjectRef=ruleEObjectRef 
 	 { $current=$iv_ruleEObjectRef.current; } 
@@ -2116,14 +2165,16 @@ ruleEObjectRef returns [EObject current=null]
 	}
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleEObjectElement
-entryRuleEObjectElement returns [EObject current=null] :
+entryRuleEObjectElement returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getEObjectElementRule(), currentNode); }
 	 iv_ruleEObjectElement=ruleEObjectElement 
 	 { $current=$iv_ruleEObjectElement.current; } 
@@ -2161,7 +2212,8 @@ ruleEObjectElement returns [EObject current=null]
 	    }
 
 )
-);
+)
+;
 
 
 

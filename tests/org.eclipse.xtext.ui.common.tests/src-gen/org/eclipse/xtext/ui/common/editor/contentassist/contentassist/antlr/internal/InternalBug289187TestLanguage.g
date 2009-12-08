@@ -57,7 +57,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.Bug289187TestLa
 
 
 // Entry rule entryRuleModel
-entryRuleModel :
+entryRuleModel 
+:
 { before(grammarAccess.getModelRule()); }
 	 ruleModel
 { after(grammarAccess.getModelRule()); } 
@@ -69,7 +70,7 @@ ruleModel
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getModelAccess().getClassesAssignment()); }
 (rule__Model__ClassesAssignment)*
@@ -84,7 +85,8 @@ finally {
 
 
 // Entry rule entryRuleClass
-entryRuleClass :
+entryRuleClass 
+:
 { before(grammarAccess.getClassRule()); }
 	 ruleClass
 { after(grammarAccess.getClassRule()); } 
@@ -96,7 +98,7 @@ ruleClass
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getClassAccess().getGroup()); }
 (rule__Class__Group__0)
@@ -111,7 +113,8 @@ finally {
 
 
 // Entry rule entryRuleAttribute
-entryRuleAttribute :
+entryRuleAttribute 
+:
 { before(grammarAccess.getAttributeRule()); }
 	 ruleAttribute
 { after(grammarAccess.getAttributeRule()); } 
@@ -123,7 +126,7 @@ ruleAttribute
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getAttributeAccess().getGroup()); }
 (rule__Attribute__Group__0)
@@ -138,7 +141,8 @@ finally {
 
 
 // Entry rule entryRuleOperation
-entryRuleOperation :
+entryRuleOperation 
+:
 { before(grammarAccess.getOperationRule()); }
 	 ruleOperation
 { after(grammarAccess.getOperationRule()); } 
@@ -150,7 +154,7 @@ ruleOperation
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getOperationAccess().getGroup()); }
 (rule__Operation__Group__0)

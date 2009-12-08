@@ -69,7 +69,8 @@ import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess;
 
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] :
+entryRuleModel returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
@@ -543,14 +544,16 @@ ruleModel returns [EObject current=null]
 )
 
 )
-))?));
+))?))
+;
 
 
 
 
 
 // Entry rule entryRuleDatatype
-entryRuleDatatype returns [String current=null] :
+entryRuleDatatype returns [String current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getDatatypeRule(), currentNode); } 
 	 iv_ruleDatatype=ruleDatatype 
 	 { $current=$iv_ruleDatatype.current.getText(); }  
@@ -592,7 +595,8 @@ ruleDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken(
 
 
 // Entry rule entryRuleNestedDatatype
-entryRuleNestedDatatype returns [String current=null] :
+entryRuleNestedDatatype returns [String current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getNestedDatatypeRule(), currentNode); } 
 	 iv_ruleNestedDatatype=ruleNestedDatatype 
 	 { $current=$iv_ruleNestedDatatype.current.getText(); }  
@@ -638,7 +642,8 @@ ruleNestedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRule
 
 
 // Entry rule entryRuleChild
-entryRuleChild returns [EObject current=null] :
+entryRuleChild returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getChildRule(), currentNode); }
 	 iv_ruleChild=ruleChild 
 	 { $current=$iv_ruleChild.current; } 
@@ -671,14 +676,16 @@ ruleChild returns [EObject current=null]
         $current = $this_Child2_1.current; 
         currentNode = currentNode.getParent();
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleChild1
-entryRuleChild1 returns [EObject current=null] :
+entryRuleChild1 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getChild1Rule(), currentNode); }
 	 iv_ruleChild1=ruleChild1 
 	 { $current=$iv_ruleChild1.current; } 
@@ -716,14 +723,16 @@ ruleChild1 returns [EObject current=null]
 	    }
 
 )
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleChild2
-entryRuleChild2 returns [EObject current=null] :
+entryRuleChild2 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getChild2Rule(), currentNode); }
 	 iv_ruleChild2=ruleChild2 
 	 { $current=$iv_ruleChild2.current; } 
@@ -761,7 +770,8 @@ ruleChild2 returns [EObject current=null]
 	    }
 
 )
-);
+)
+;
 
 
 

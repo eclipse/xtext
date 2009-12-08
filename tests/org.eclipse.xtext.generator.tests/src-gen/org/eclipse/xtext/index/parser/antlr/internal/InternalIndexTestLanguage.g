@@ -69,7 +69,8 @@ import org.eclipse.xtext.index.services.IndexTestLanguageGrammarAccess;
 
 
 // Entry rule entryRuleFile
-entryRuleFile returns [EObject current=null] :
+entryRuleFile returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getFileRule(), currentNode); }
 	 iv_ruleFile=ruleFile 
 	 { $current=$iv_ruleFile.current; } 
@@ -107,14 +108,16 @@ ruleFile returns [EObject current=null]
 	    }
 
 )
-)*;
+)*
+;
 
 
 
 
 
 // Entry rule entryRuleImport
-entryRuleImport returns [EObject current=null] :
+entryRuleImport returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getImportRule(), currentNode); }
 	 iv_ruleImport=ruleImport 
 	 { $current=$iv_ruleImport.current; } 
@@ -156,14 +159,16 @@ ruleImport returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleQualifiedNameWithWildCard
-entryRuleQualifiedNameWithWildCard returns [String current=null] :
+entryRuleQualifiedNameWithWildCard returns [String current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getQualifiedNameWithWildCardRule(), currentNode); } 
 	 iv_ruleQualifiedNameWithWildCard=ruleQualifiedNameWithWildCard 
 	 { $current=$iv_ruleQualifiedNameWithWildCard.current.getText(); }  
@@ -202,7 +207,8 @@ ruleQualifiedNameWithWildCard returns [AntlrDatatypeRuleToken current=new AntlrD
 
 
 // Entry rule entryRuleQualifiedName
-entryRuleQualifiedName returns [String current=null] :
+entryRuleQualifiedName returns [String current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getQualifiedNameRule(), currentNode); } 
 	 iv_ruleQualifiedName=ruleQualifiedName 
 	 { $current=$iv_ruleQualifiedName.current.getText(); }  
@@ -244,7 +250,8 @@ ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleT
 
 
 // Entry rule entryRuleNamespace
-entryRuleNamespace returns [EObject current=null] :
+entryRuleNamespace returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getNamespaceRule(), currentNode); }
 	 iv_ruleNamespace=ruleNamespace 
 	 { $current=$iv_ruleNamespace.current; } 
@@ -314,14 +321,16 @@ ruleNamespace returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getNamespaceAccess().getRightCurlyBracketKeyword_3(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleElement
-entryRuleElement returns [EObject current=null] :
+entryRuleElement returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getElementRule(), currentNode); }
 	 iv_ruleElement=ruleElement 
 	 { $current=$iv_ruleElement.current; } 
@@ -364,14 +373,16 @@ ruleElement returns [EObject current=null]
         $current = $this_Import_2.current; 
         currentNode = currentNode.getParent();
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleType
-entryRuleType returns [EObject current=null] :
+entryRuleType returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getTypeRule(), currentNode); }
 	 iv_ruleType=ruleType 
 	 { $current=$iv_ruleType.current; } 
@@ -404,14 +415,16 @@ ruleType returns [EObject current=null]
         $current = $this_Datatype_1.current; 
         currentNode = currentNode.getParent();
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleEntity
-entryRuleEntity returns [EObject current=null] :
+entryRuleEntity returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getEntityRule(), currentNode); }
 	 iv_ruleEntity=ruleEntity 
 	 { $current=$iv_ruleEntity.current; } 
@@ -485,14 +498,16 @@ ruleEntity returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getEntityAccess().getRightCurlyBracketKeyword_4(), null); 
     }
-);
+)
+;
 
 
 
 
 
 // Entry rule entryRuleDatatype
-entryRuleDatatype returns [EObject current=null] :
+entryRuleDatatype returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getDatatypeRule(), currentNode); }
 	 iv_ruleDatatype=ruleDatatype 
 	 { $current=$iv_ruleDatatype.current; } 
@@ -534,14 +549,16 @@ ruleDatatype returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 
 
 
 // Entry rule entryRuleProperty
-entryRuleProperty returns [EObject current=null] :
+entryRuleProperty returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getPropertyRule(), currentNode); }
 	 iv_ruleProperty=ruleProperty 
 	 { $current=$iv_ruleProperty.current; } 
@@ -595,7 +612,8 @@ ruleProperty returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 

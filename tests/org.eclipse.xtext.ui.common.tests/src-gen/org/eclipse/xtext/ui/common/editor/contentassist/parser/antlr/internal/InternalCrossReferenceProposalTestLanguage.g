@@ -69,7 +69,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.CrossReferenceP
 
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] :
+entryRuleModel returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
@@ -107,14 +108,16 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)*;
+)*
+;
 
 
 
 
 
 // Entry rule entryRuleClass
-entryRuleClass returns [EObject current=null] :
+entryRuleClass returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getClassRule(), currentNode); }
 	 iv_ruleClass=ruleClass 
 	 { $current=$iv_ruleClass.current; } 
@@ -178,7 +181,8 @@ ruleClass returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getClassAccess().getRightCurlyBracketKeyword_3(), null); 
     }
-);
+)
+;
 
 
 

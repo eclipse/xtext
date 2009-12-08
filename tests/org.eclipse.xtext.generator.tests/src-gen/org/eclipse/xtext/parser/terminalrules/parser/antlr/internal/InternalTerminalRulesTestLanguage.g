@@ -69,7 +69,8 @@ import org.eclipse.xtext.parser.terminalrules.services.TerminalRulesTestLanguage
 
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] :
+entryRuleModel returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
@@ -257,7 +258,8 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-));
+))
+;
 
 
 

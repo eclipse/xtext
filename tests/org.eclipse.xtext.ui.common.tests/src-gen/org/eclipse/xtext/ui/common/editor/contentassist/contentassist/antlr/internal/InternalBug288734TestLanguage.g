@@ -57,7 +57,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.Bug288734TestLa
 
 
 // Entry rule entryRuleModel
-entryRuleModel :
+entryRuleModel 
+:
 { before(grammarAccess.getModelRule()); }
 	 ruleModel
 { after(grammarAccess.getModelRule()); } 
@@ -69,7 +70,7 @@ ruleModel
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getModelAccess().getConstantsAssignment()); }
 (rule__Model__ConstantsAssignment)
@@ -84,7 +85,8 @@ finally {
 
 
 // Entry rule entryRuleTConstant
-entryRuleTConstant :
+entryRuleTConstant 
+:
 { before(grammarAccess.getTConstantRule()); }
 	 ruleTConstant
 { after(grammarAccess.getTConstantRule()); } 
@@ -96,7 +98,7 @@ ruleTConstant
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getTConstantAccess().getAlternatives()); }
 (rule__TConstant__Alternatives)
@@ -111,7 +113,8 @@ finally {
 
 
 // Entry rule entryRuleTStringConstant
-entryRuleTStringConstant :
+entryRuleTStringConstant 
+:
 { before(grammarAccess.getTStringConstantRule()); }
 	 ruleTStringConstant
 { after(grammarAccess.getTStringConstantRule()); } 
@@ -123,7 +126,7 @@ ruleTStringConstant
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getTStringConstantAccess().getGroup()); }
 (rule__TStringConstant__Group__0)
@@ -138,7 +141,8 @@ finally {
 
 
 // Entry rule entryRuleTIntegerConstant
-entryRuleTIntegerConstant :
+entryRuleTIntegerConstant 
+:
 { before(grammarAccess.getTIntegerConstantRule()); }
 	 ruleTIntegerConstant
 { after(grammarAccess.getTIntegerConstantRule()); } 
@@ -150,7 +154,7 @@ ruleTIntegerConstant
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getTIntegerConstantAccess().getGroup()); }
 (rule__TIntegerConstant__Group__0)
@@ -165,7 +169,8 @@ finally {
 
 
 // Entry rule entryRuleTBooleanConstant
-entryRuleTBooleanConstant :
+entryRuleTBooleanConstant 
+:
 { before(grammarAccess.getTBooleanConstantRule()); }
 	 ruleTBooleanConstant
 { after(grammarAccess.getTBooleanConstantRule()); } 
@@ -177,7 +182,7 @@ ruleTBooleanConstant
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getTBooleanConstantAccess().getGroup()); }
 (rule__TBooleanConstant__Group__0)
@@ -192,7 +197,8 @@ finally {
 
 
 // Entry rule entryRuleTAnnotation
-entryRuleTAnnotation :
+entryRuleTAnnotation 
+:
 { before(grammarAccess.getTAnnotationRule()); }
 	 ruleTAnnotation
 { after(grammarAccess.getTAnnotationRule()); } 
@@ -204,7 +210,7 @@ ruleTAnnotation
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getTAnnotationAccess().getGroup()); }
 (rule__TAnnotation__Group__0)

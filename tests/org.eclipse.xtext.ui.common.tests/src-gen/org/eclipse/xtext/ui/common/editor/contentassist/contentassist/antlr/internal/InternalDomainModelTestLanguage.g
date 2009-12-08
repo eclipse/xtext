@@ -57,7 +57,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.DomainModelTest
 
 
 // Entry rule entryRuleModel
-entryRuleModel :
+entryRuleModel 
+:
 { before(grammarAccess.getModelRule()); }
 	 ruleModel
 { after(grammarAccess.getModelRule()); } 
@@ -69,7 +70,7 @@ ruleModel
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getModelAccess().getGroup()); }
 (rule__Model__Group__0)
@@ -84,7 +85,8 @@ finally {
 
 
 // Entry rule entryRuleImport
-entryRuleImport :
+entryRuleImport 
+:
 { before(grammarAccess.getImportRule()); }
 	 ruleImport
 { after(grammarAccess.getImportRule()); } 
@@ -96,7 +98,7 @@ ruleImport
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getImportAccess().getGroup()); }
 (rule__Import__Group__0)
@@ -111,7 +113,8 @@ finally {
 
 
 // Entry rule entryRuleType
-entryRuleType :
+entryRuleType 
+:
 { before(grammarAccess.getTypeRule()); }
 	 ruleType
 { after(grammarAccess.getTypeRule()); } 
@@ -123,7 +126,7 @@ ruleType
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getTypeAccess().getAlternatives()); }
 (rule__Type__Alternatives)
@@ -138,7 +141,8 @@ finally {
 
 
 // Entry rule entryRuleDataType
-entryRuleDataType :
+entryRuleDataType 
+:
 { before(grammarAccess.getDataTypeRule()); }
 	 ruleDataType
 { after(grammarAccess.getDataTypeRule()); } 
@@ -150,7 +154,7 @@ ruleDataType
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getDataTypeAccess().getGroup()); }
 (rule__DataType__Group__0)
@@ -165,7 +169,8 @@ finally {
 
 
 // Entry rule entryRuleClass
-entryRuleClass :
+entryRuleClass 
+:
 { before(grammarAccess.getClassRule()); }
 	 ruleClass
 { after(grammarAccess.getClassRule()); } 
@@ -177,7 +182,7 @@ ruleClass
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getClassAccess().getGroup()); }
 (rule__Class__Group__0)
@@ -192,7 +197,8 @@ finally {
 
 
 // Entry rule entryRuleProperty
-entryRuleProperty :
+entryRuleProperty 
+:
 { before(grammarAccess.getPropertyRule()); }
 	 ruleProperty
 { after(grammarAccess.getPropertyRule()); } 
@@ -204,7 +210,7 @@ ruleProperty
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getPropertyAccess().getAlternatives()); }
 (rule__Property__Alternatives)
@@ -219,7 +225,8 @@ finally {
 
 
 // Entry rule entryRuleAttribute
-entryRuleAttribute :
+entryRuleAttribute 
+:
 { before(grammarAccess.getAttributeRule()); }
 	 ruleAttribute
 { after(grammarAccess.getAttributeRule()); } 
@@ -231,7 +238,7 @@ ruleAttribute
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getAttributeAccess().getGroup()); }
 (rule__Attribute__Group__0)
@@ -246,7 +253,8 @@ finally {
 
 
 // Entry rule entryRuleReference
-entryRuleReference :
+entryRuleReference 
+:
 { before(grammarAccess.getReferenceRule()); }
 	 ruleReference
 { after(grammarAccess.getReferenceRule()); } 
@@ -258,7 +266,7 @@ ruleReference
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getReferenceAccess().getGroup()); }
 (rule__Reference__Group__0)

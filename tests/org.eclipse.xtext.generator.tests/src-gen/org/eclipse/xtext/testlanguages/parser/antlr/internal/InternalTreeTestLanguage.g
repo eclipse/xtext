@@ -69,7 +69,8 @@ import org.eclipse.xtext.testlanguages.services.TreeTestLanguageGrammarAccess;
 
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] :
+entryRuleModel returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
@@ -107,14 +108,16 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)*;
+)*
+;
 
 
 
 
 
 // Entry rule entryRuleNode
-entryRuleNode returns [EObject current=null] :
+entryRuleNode returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getNodeRule(), currentNode); }
 	 iv_ruleNode=ruleNode 
 	 { $current=$iv_ruleNode.current; } 
@@ -216,7 +219,8 @@ ruleNode returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getNodeAccess().getRightCurlyBracketSemicolonKeyword_6(), null); 
     }
-);
+)
+;
 
 
 

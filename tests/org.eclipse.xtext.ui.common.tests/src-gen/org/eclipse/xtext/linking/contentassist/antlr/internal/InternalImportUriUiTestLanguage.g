@@ -57,7 +57,8 @@ import org.eclipse.xtext.linking.services.ImportUriUiTestLanguageGrammarAccess;
 
 
 // Entry rule entryRuleMain
-entryRuleMain :
+entryRuleMain 
+:
 { before(grammarAccess.getMainRule()); }
 	 ruleMain
 { after(grammarAccess.getMainRule()); } 
@@ -69,7 +70,7 @@ ruleMain
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getMainAccess().getGroup()); }
 (rule__Main__Group__0)
@@ -84,7 +85,8 @@ finally {
 
 
 // Entry rule entryRuleImport
-entryRuleImport :
+entryRuleImport 
+:
 { before(grammarAccess.getImportRule()); }
 	 ruleImport
 { after(grammarAccess.getImportRule()); } 
@@ -96,7 +98,7 @@ ruleImport
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getImportAccess().getGroup()); }
 (rule__Import__Group__0)
@@ -111,7 +113,8 @@ finally {
 
 
 // Entry rule entryRuleType
-entryRuleType :
+entryRuleType 
+:
 { before(grammarAccess.getTypeRule()); }
 	 ruleType
 { after(grammarAccess.getTypeRule()); } 
@@ -123,7 +126,7 @@ ruleType
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getTypeAccess().getGroup()); }
 (rule__Type__Group__0)

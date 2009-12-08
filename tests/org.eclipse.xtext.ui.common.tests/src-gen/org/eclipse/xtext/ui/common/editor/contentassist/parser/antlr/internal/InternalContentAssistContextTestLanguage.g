@@ -69,7 +69,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.ContentAssistCo
 
 
 // Entry rule entryRuleFirstLevel
-entryRuleFirstLevel returns [EObject current=null] :
+entryRuleFirstLevel returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getFirstLevelRule(), currentNode); }
 	 iv_ruleFirstLevel=ruleFirstLevel 
 	 { $current=$iv_ruleFirstLevel.current; } 
@@ -131,14 +132,16 @@ ruleFirstLevel returns [EObject current=null]
 	    }
 
 )
-)*);
+)*)
+;
 
 
 
 
 
 // Entry rule entryRuleSecondLevelA
-entryRuleSecondLevelA returns [EObject current=null] :
+entryRuleSecondLevelA returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getSecondLevelARule(), currentNode); }
 	 iv_ruleSecondLevelA=ruleSecondLevelA 
 	 { $current=$iv_ruleSecondLevelA.current; } 
@@ -200,14 +203,16 @@ ruleSecondLevelA returns [EObject current=null]
 	    }
 
 )
-)+);
+)+)
+;
 
 
 
 
 
 // Entry rule entryRuleSecondLevelB
-entryRuleSecondLevelB returns [EObject current=null] :
+entryRuleSecondLevelB returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getSecondLevelBRule(), currentNode); }
 	 iv_ruleSecondLevelB=ruleSecondLevelB 
 	 { $current=$iv_ruleSecondLevelB.current; } 
@@ -269,14 +274,16 @@ ruleSecondLevelB returns [EObject current=null]
 	    }
 
 )
-)+);
+)+)
+;
 
 
 
 
 
 // Entry rule entryRuleThirdLevelA1
-entryRuleThirdLevelA1 returns [EObject current=null] :
+entryRuleThirdLevelA1 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getThirdLevelA1Rule(), currentNode); }
 	 iv_ruleThirdLevelA1=ruleThirdLevelA1 
 	 { $current=$iv_ruleThirdLevelA1.current; } 
@@ -329,14 +336,16 @@ ruleThirdLevelA1 returns [EObject current=null]
 	    }
 
 )
-)?);
+)?)
+;
 
 
 
 
 
 // Entry rule entryRuleThirdLevelA2
-entryRuleThirdLevelA2 returns [EObject current=null] :
+entryRuleThirdLevelA2 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getThirdLevelA2Rule(), currentNode); }
 	 iv_ruleThirdLevelA2=ruleThirdLevelA2 
 	 { $current=$iv_ruleThirdLevelA2.current; } 
@@ -389,14 +398,16 @@ ruleThirdLevelA2 returns [EObject current=null]
 	    }
 
 )
-)?);
+)?)
+;
 
 
 
 
 
 // Entry rule entryRuleThirdLevelB1
-entryRuleThirdLevelB1 returns [EObject current=null] :
+entryRuleThirdLevelB1 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getThirdLevelB1Rule(), currentNode); }
 	 iv_ruleThirdLevelB1=ruleThirdLevelB1 
 	 { $current=$iv_ruleThirdLevelB1.current; } 
@@ -449,14 +460,16 @@ ruleThirdLevelB1 returns [EObject current=null]
 	    }
 
 )
-)?);
+)?)
+;
 
 
 
 
 
 // Entry rule entryRuleThirdLevelB2
-entryRuleThirdLevelB2 returns [EObject current=null] :
+entryRuleThirdLevelB2 returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getThirdLevelB2Rule(), currentNode); }
 	 iv_ruleThirdLevelB2=ruleThirdLevelB2 
 	 { $current=$iv_ruleThirdLevelB2.current; } 
@@ -509,7 +522,8 @@ ruleThirdLevelB2 returns [EObject current=null]
 	    }
 
 )
-)?);
+)?)
+;
 
 
 

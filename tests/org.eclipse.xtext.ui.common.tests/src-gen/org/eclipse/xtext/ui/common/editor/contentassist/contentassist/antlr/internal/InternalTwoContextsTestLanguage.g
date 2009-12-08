@@ -57,7 +57,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.TwoContextsTest
 
 
 // Entry rule entryRuleMainModel
-entryRuleMainModel :
+entryRuleMainModel 
+:
 { before(grammarAccess.getMainModelRule()); }
 	 ruleMainModel
 { after(grammarAccess.getMainModelRule()); } 
@@ -69,7 +70,7 @@ ruleMainModel
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getMainModelAccess().getElementsAssignment()); }
 (rule__MainModel__ElementsAssignment)*
@@ -84,7 +85,8 @@ finally {
 
 
 // Entry rule entryRuleAnElement
-entryRuleAnElement :
+entryRuleAnElement 
+:
 { before(grammarAccess.getAnElementRule()); }
 	 ruleAnElement
 { after(grammarAccess.getAnElementRule()); } 
@@ -96,7 +98,7 @@ ruleAnElement
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getAnElementAccess().getGroup()); }
 (rule__AnElement__Group__0)

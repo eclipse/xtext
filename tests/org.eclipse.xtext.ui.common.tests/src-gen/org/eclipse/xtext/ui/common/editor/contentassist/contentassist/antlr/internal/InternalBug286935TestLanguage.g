@@ -57,7 +57,8 @@ import org.eclipse.xtext.ui.common.editor.contentassist.services.Bug286935TestLa
 
 
 // Entry rule entryRuleState
-entryRuleState :
+entryRuleState 
+:
 { before(grammarAccess.getStateRule()); }
 	 ruleState
 { after(grammarAccess.getStateRule()); } 
@@ -69,7 +70,7 @@ ruleState
     @init {
 		int stackSize = keepStackSize();
     }
- :
+	:
 (
 { before(grammarAccess.getStateAccess().getGroup()); }
 (rule__State__Group__0)

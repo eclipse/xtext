@@ -69,7 +69,8 @@ import org.eclipse.xtext.dummy.services.DummyTestLanguageGrammarAccess;
 
 
 // Entry rule entryRuleModel
-entryRuleModel returns [EObject current=null] :
+entryRuleModel returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); }
 	 iv_ruleModel=ruleModel 
 	 { $current=$iv_ruleModel.current; } 
@@ -107,14 +108,16 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
-)*;
+)*
+;
 
 
 
 
 
 // Entry rule entryRuleElement
-entryRuleElement returns [EObject current=null] :
+entryRuleElement returns [EObject current=null] 
+	:
 	{ currentNode = createCompositeNode(grammarAccess.getElementRule(), currentNode); }
 	 iv_ruleElement=ruleElement 
 	 { $current=$iv_ruleElement.current; } 
@@ -205,7 +208,8 @@ ruleElement returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getElementAccess().getSemicolonKeyword_4(), null); 
     }
-);
+)
+;
 
 
 
