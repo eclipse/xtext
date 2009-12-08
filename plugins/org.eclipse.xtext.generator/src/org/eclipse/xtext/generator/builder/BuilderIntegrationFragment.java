@@ -33,7 +33,11 @@ public class BuilderIntegrationFragment extends AbstractGeneratorFragment {
 			.addTypeToType(IQualifiedNameProvider.class.getName(), DefaultDeclarativeQualifiedNameProvider.class.getName())
 			.addTypeToType(IGlobalScopeProvider.class.getName(), DefaultGlobalScopeProvider.class.getName())
 			.addTypeToType(IContainer.Manager.class.getName(), SimpleResourceDescriptionsBasedContainerManager.class.getName())
-			.addTypeToType(IResourceDescriptions.class.getName(), ResourceSetBasedResourceDescriptions.class.getName())
+			.addConfiguredBinding(
+					IResourceDescriptions.class.getName(),
+					"binder.bind(" + IResourceDescriptions.class.getName() + ".class"
+							+ ").to("
+							+ ResourceSetBasedResourceDescriptions.class.getName() + ".class)")
 			.addConfiguredBinding(
 					IResourceDescriptions.class.getName() + "BuilderScope",
 					"binder.bind(" + IResourceDescriptions.class.getName() + ".class"
@@ -52,7 +56,12 @@ public class BuilderIntegrationFragment extends AbstractGeneratorFragment {
 							+ ").annotatedWith(com.google.inject.name.Names.named("
 							+ DefaultGlobalScopeProvider.class.getName() + ".NAMED_BUILDER_SCOPE)).to("
 							+ "org.eclipse.xtext.builder.builderState.ShadowingResourceDescriptions.class)")
-			.addTypeToType(IContainer.Manager.class.getName(), "org.eclipse.xtext.ui.core.scoping.namespaces.ProjectAwareContainerManager")
+			.addConfiguredBinding(
+					IResourceDescriptions.class.getName(),
+					"binder.bind(" + IResourceDescriptions.class.getName() + ".class"
+							+ ").toProvider("
+							+ "org.eclipse.xtext.builder.BuilderAccess.getResourceDescriptions())")
+			.addTypeToType(IContainer.Manager.class.getName(), "org.eclipse.xtext.ui.core.scoping.namespaces.JavaProjectAwareContainerManager")
 			.addTypeToType("org.eclipse.xtext.ui.core.editor.IXtextEditorCallback", "org.eclipse.xtext.builder.nature.NatureAddingEditorCallback")
 			.getBindings();
 	}
