@@ -20,6 +20,7 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.linking.impl.ImportedNamesAdapter;
@@ -128,10 +129,16 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 							if (eReference.isMany()) {
 								List<EObject> list = (List<EObject>) val;
 								for(int i = 0;i<list.size();i++) {
-									referenceDescriptions.add(new DefaultReferenceDescription(eObject,list.get(i),eReference,i));
+									EObject to = list.get(i);
+									if (isResolved(to)) {
+										referenceDescriptions.add(new DefaultReferenceDescription(eObject,to,eReference,i));
+									}
 								}
 							} else {
-								referenceDescriptions.add(new DefaultReferenceDescription(eObject,(EObject) val,eReference,-1));
+								EObject to = (EObject) val;
+								if (isResolved(to)) {
+									referenceDescriptions.add(new DefaultReferenceDescription(eObject,to,eReference,-1));
+								}
 							}
 						}
 					}
@@ -139,6 +146,10 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 			}
 		}
 		return referenceDescriptions;
+	}
+
+	private boolean isResolved(EObject to) {
+		return !((InternalEObject)to).eIsProxy();
 	}
 
 }
