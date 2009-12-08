@@ -11,6 +11,8 @@ import static org.eclipse.xtext.builder.impl.BuilderUtil.*;
 import static org.eclipse.xtext.junit.util.IResourcesSetupUtil.*;
 import static org.eclipse.xtext.junit.util.JavaProjectSetupUtil.*;
 
+import java.util.Iterator;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IMarker;
@@ -19,9 +21,13 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.nature.XtextNature;
+import org.eclipse.xtext.builder.tests.builderTestLanguage.BuilderTestLanguagePackage;
 import org.eclipse.xtext.junit.util.JavaProjectSetupUtil.TextFile;
+import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.util.StringInputStream;
 
 /**
@@ -197,13 +203,13 @@ public class IntegrationTest extends AbstractBuilderTest {
 		waitForAutoBuild();
 		assertEquals(1,getEvents().get(0).getDeltas().size());
 		assertNumberOfMarkers(fileB, 0);
-		assertEquals(1,getReferences(URI.createPlatformResourceURI("foo/src/Foo"+F_EXT,true)).size());
+		assertEquals(1,getIncomingReferences(URI.createPlatformResourceURI("foo/src/Foo"+F_EXT,true)).size());
 		
 		file.setContents(new StringInputStream("object Fop"), true,true, monitor());
 		waitForAutoBuild();
 		assertEquals(2,getEvents().get(1).getDeltas().size());
 		assertNumberOfMarkers(fileB, 1);
-		assertEquals(0,getReferences(URI.createPlatformResourceURI("foo/src/Foo"+F_EXT,true)).size());
+		assertEquals(0,getIncomingReferences(URI.createPlatformResourceURI("foo/src/Foo"+F_EXT,true)).size());
 		
 		file.setContents(new StringInputStream("object Foo"), true,true, monitor());
 		waitForAutoBuild();
@@ -258,6 +264,33 @@ public class IntegrationTest extends AbstractBuilderTest {
 		
 		waitForAutoBuild();
 		assertEquals(3, countResourcesInIndex());
+	}
+	
+	public void testReexportedSource() throws Exception {
+		IJavaProject foo = createJavaProject("foo");
+		IJavaProject bar = createJavaProject("bar");
+		IJavaProject baz = createJavaProject("baz");
+		addNature(foo.getProject(), XtextNature.NATURE_ID);
+		addNature(bar.getProject(), XtextNature.NATURE_ID);
+		addNature(baz.getProject(), XtextNature.NATURE_ID);
+		IFile file = foo.getProject().getFile("foo.jar");
+		file.create(jarInputStream(new TextFile("foo/Foo"+F_EXT, "object Foo")), true, monitor());
+		IClasspathEntry newLibraryEntry = JavaCore.newLibraryEntry(file.getFullPath(), null, null,true);
+		addToClasspath(foo, newLibraryEntry);
+		addToClasspath(bar, JavaCore.newProjectEntry(foo.getPath(), true));
+		addToClasspath(baz, JavaCore.newProjectEntry(bar.getPath(), false));
+		addSourceFolder(baz, "src");
+		IFile bazFile = createFile("baz/src/Baz"+F_EXT, "object Baz references Foo");
+		waitForAutoBuild();
+		assertEquals(0,countMarkers(bazFile));
+		assertEquals(2, countResourcesInIndex());
+		Iterator<IReferenceDescription> references = getContainedReferences(URI.createPlatformResourceURI(bazFile.getFullPath().toString(),true)).iterator();
+		IReferenceDescription next = references.next();
+		assertFalse(references.hasNext());
+		assertEquals("platform:/resource/baz/src/Baz.buildertestlanguage#/",next.getSourceEObjectUri().toString());
+		assertEquals("archive:platform:/resource/foo/foo.jar!/foo/Foo.buildertestlanguage#/",next.getTargetEObjectUri().toString());
+		assertEquals(-1,next.getIndexInList());
+		assertEquals(BuilderTestLanguagePackage.Literals.ELEMENT__REFERENCES,next.getEReference());
 	}
 
 	private int countMarkers(IFile file) throws CoreException {
