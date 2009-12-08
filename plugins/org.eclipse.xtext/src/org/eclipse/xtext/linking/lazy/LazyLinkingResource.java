@@ -61,13 +61,14 @@ public class LazyLinkingResource extends XtextResource {
 	private LinkedHashSet<Triple<EObject, EReference, AbstractNode>> resolving = Sets.newLinkedHashSet();
 
 	@Override
-	public EObject getEObject(String uriFragment) {
+	public synchronized EObject getEObject(String uriFragment) {
 		try {
 			if (getEncoder().isCrossLinkFragment(this, uriFragment)) {
 				Triple<EObject, EReference, AbstractNode> triple = getEncoder().decode(this, uriFragment);
 				try {
 					if (!resolving.add(triple))
-						throw new AssertionError("Cyclic resolution of lazy links : "+getReferences(triple,resolving));
+						throw new AssertionError("Cyclic resolution of lazy links : "
+								+ getReferences(triple, resolving));
 					EReference reference = triple.getSecond();
 					List<EObject> linkedObjects = getLinkingService().getLinkedObjects(triple.getFirst(), reference,
 							triple.getThird());
@@ -81,7 +82,7 @@ public class LazyLinkingResource extends XtextResource {
 						throw new IllegalStateException("linkingService returned more than one object for fragment "
 								+ uriFragment);
 					EObject result = linkedObjects.get(0);
-					if (!EcoreUtil2.isAssignableFrom(reference.getEReferenceType(),result.eClass())) {
+					if (!EcoreUtil2.isAssignableFrom(reference.getEReferenceType(), result.eClass())) {
 						XtextLinkingDiagnostic diag = createDiagnostic(triple);
 						if (!getErrors().contains(diag))
 							getErrors().add(diag);
@@ -118,7 +119,7 @@ public class LazyLinkingResource extends XtextResource {
 	}
 
 	private String getQualifiedName(EReference eReference) {
-		return eReference.getEContainingClass().getName()+"."+eReference.getName();
+		return eReference.getEContainingClass().getName() + "." + eReference.getName();
 	}
 
 	protected XtextLinkingDiagnostic createDiagnostic(Triple<EObject, EReference, AbstractNode> triple) {
