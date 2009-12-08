@@ -5,6 +5,7 @@
  */
 package org.eclipse.xtext.builder.tests.builderTestLanguage;
 
+import org.eclipse.emf.common.util.EList;
 
 /**
  * <!-- begin-user-doc -->
@@ -15,6 +16,7 @@ package org.eclipse.xtext.builder.tests.builderTestLanguage;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.builder.tests.builderTestLanguage.Element#getReferences <em>References</em>}</li>
+ *   <li>{@link org.eclipse.xtext.builder.tests.builderTestLanguage.Element#getOtherRefs <em>Other Refs</em>}</li>
  * </ul>
  * </p>
  *
@@ -49,5 +51,21 @@ public interface Element extends NamedElement
    * @generated
    */
   void setReferences(Element value);
+
+  /**
+   * Returns the value of the '<em><b>Other Refs</b></em>' reference list.
+   * The list contents are of type {@link org.eclipse.xtext.builder.tests.builderTestLanguage.Element}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Other Refs</em>' reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Other Refs</em>' reference list.
+   * @see org.eclipse.xtext.builder.tests.builderTestLanguage.BuilderTestLanguagePackage#getElement_OtherRefs()
+   * @model
+   * @generated
+   */
+  EList<Element> getOtherRefs();
 
 } // Element

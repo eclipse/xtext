@@ -5,23 +5,18 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.impl;
+package org.eclipse.xtext.ui.core.resource;
 
-import org.eclipse.core.resources.IStorage;
-import org.eclipse.emf.common.util.URI;
+import org.eclipse.core.resources.IProject;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 
 import com.google.inject.ImplementedBy;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-@ImplementedBy(UriUtilImpl.class)
-public interface IUriUtil {
+@ImplementedBy(XtextResourceSetProvider.class)
+public interface IResourceSetProvider {
 	
-	/**
-	 * computes an EMF URI for the given IStorage.
-	 * @return the uri, or null if the given {@link IStorage} is not an EMF resource.
-	 */
-	URI getUri(IStorage storage);
-	
+	ResourceSet get(IProject project);
 }

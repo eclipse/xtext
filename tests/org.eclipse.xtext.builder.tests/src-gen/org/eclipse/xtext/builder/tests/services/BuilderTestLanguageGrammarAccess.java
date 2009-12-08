@@ -120,12 +120,24 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 		private final Assignment cReferencesAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
 		private final CrossReference cReferencesElementCrossReference_2_1_0 = (CrossReference)cReferencesAssignment_2_1.eContents().get(0);
 		private final RuleCall cReferencesElementQualifiedNameParserRuleCall_2_1_0_1 = (RuleCall)cReferencesElementCrossReference_2_1_0.eContents().get(1);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cOtherRefsKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cOtherRefsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final CrossReference cOtherRefsElementCrossReference_3_1_0 = (CrossReference)cOtherRefsAssignment_3_1.eContents().get(0);
+		private final RuleCall cOtherRefsElementQualifiedNameParserRuleCall_3_1_0_1 = (RuleCall)cOtherRefsElementCrossReference_3_1_0.eContents().get(1);
+		private final Group cGroup_3_2 = (Group)cGroup_3.eContents().get(2);
+		private final Keyword cCommaKeyword_3_2_0 = (Keyword)cGroup_3_2.eContents().get(0);
+		private final Assignment cOtherRefsAssignment_3_2_1 = (Assignment)cGroup_3_2.eContents().get(1);
+		private final CrossReference cOtherRefsElementCrossReference_3_2_1_0 = (CrossReference)cOtherRefsAssignment_3_2_1.eContents().get(0);
+		private final RuleCall cOtherRefsElementQualifiedNameParserRuleCall_3_2_1_0_1 = (RuleCall)cOtherRefsElementCrossReference_3_2_1_0.eContents().get(1);
 		
 		//Element:
-		//  "object" name=ID ("references" references=[Element|QualifiedName])?;
+		//  "object" name=ID ("references" references=[Element|QualifiedName])? ("otherRefs"
+		//  otherRefs+=[Element|QualifiedName] ("," otherRefs+=[Element|QualifiedName])*)?;
 		public ParserRule getRule() { return rule; }
 
-		//"object" name=ID ("references" references=[Element|QualifiedName])?
+		//"object" name=ID ("references" references=[Element|QualifiedName])? ("otherRefs"
+		//otherRefs+=[Element|QualifiedName] ("," otherRefs+=[Element|QualifiedName])*)?
 		public Group getGroup() { return cGroup; }
 
 		//"object"
@@ -151,6 +163,37 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 
 		//QualifiedName
 		public RuleCall getReferencesElementQualifiedNameParserRuleCall_2_1_0_1() { return cReferencesElementQualifiedNameParserRuleCall_2_1_0_1; }
+
+		//("otherRefs" otherRefs+=[Element|QualifiedName] ("," otherRefs+=[Element|
+		//QualifiedName])*)?
+		public Group getGroup_3() { return cGroup_3; }
+
+		//"otherRefs"
+		public Keyword getOtherRefsKeyword_3_0() { return cOtherRefsKeyword_3_0; }
+
+		//otherRefs+=[Element|QualifiedName]
+		public Assignment getOtherRefsAssignment_3_1() { return cOtherRefsAssignment_3_1; }
+
+		//[Element|QualifiedName]
+		public CrossReference getOtherRefsElementCrossReference_3_1_0() { return cOtherRefsElementCrossReference_3_1_0; }
+
+		//QualifiedName
+		public RuleCall getOtherRefsElementQualifiedNameParserRuleCall_3_1_0_1() { return cOtherRefsElementQualifiedNameParserRuleCall_3_1_0_1; }
+
+		//("," otherRefs+=[Element|QualifiedName])*
+		public Group getGroup_3_2() { return cGroup_3_2; }
+
+		//","
+		public Keyword getCommaKeyword_3_2_0() { return cCommaKeyword_3_2_0; }
+
+		//otherRefs+=[Element|QualifiedName]
+		public Assignment getOtherRefsAssignment_3_2_1() { return cOtherRefsAssignment_3_2_1; }
+
+		//[Element|QualifiedName]
+		public CrossReference getOtherRefsElementCrossReference_3_2_1_0() { return cOtherRefsElementCrossReference_3_2_1_0; }
+
+		//QualifiedName
+		public RuleCall getOtherRefsElementQualifiedNameParserRuleCall_3_2_1_0_1() { return cOtherRefsElementQualifiedNameParserRuleCall_3_2_1_0_1; }
 	}
 
 	public class QualifiedNameElements extends AbstractParserRuleElementFinder {
@@ -240,7 +283,8 @@ public class BuilderTestLanguageGrammarAccess extends AbstractGrammarElementFind
 	}
 
 	//Element:
-	//  "object" name=ID ("references" references=[Element|QualifiedName])?;
+	//  "object" name=ID ("references" references=[Element|QualifiedName])? ("otherRefs"
+	//  otherRefs+=[Element|QualifiedName] ("," otherRefs+=[Element|QualifiedName])*)?;
 	public ElementElements getElementAccess() {
 		return (pElement != null) ? pElement : (pElement = new ElementElements());
 	}

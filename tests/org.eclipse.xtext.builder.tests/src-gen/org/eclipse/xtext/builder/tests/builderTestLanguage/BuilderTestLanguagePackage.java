@@ -190,13 +190,22 @@ public interface BuilderTestLanguagePackage extends EPackage
   int ELEMENT__REFERENCES = NAMED_ELEMENT_FEATURE_COUNT + 0;
 
   /**
+   * The feature id for the '<em><b>Other Refs</b></em>' reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ELEMENT__OTHER_REFS = NAMED_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
    * The number of structural features of the '<em>Element</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ELEMENT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 1;
+  int ELEMENT_FEATURE_COUNT = NAMED_ELEMENT_FEATURE_COUNT + 2;
 
 
   /**
@@ -293,6 +302,17 @@ public interface BuilderTestLanguagePackage extends EPackage
    * @generated
    */
   EReference getElement_References();
+
+  /**
+   * Returns the meta object for the reference list '{@link org.eclipse.xtext.builder.tests.builderTestLanguage.Element#getOtherRefs <em>Other Refs</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference list '<em>Other Refs</em>'.
+   * @see org.eclipse.xtext.builder.tests.builderTestLanguage.Element#getOtherRefs()
+   * @see #getElement()
+   * @generated
+   */
+  EReference getElement_OtherRefs();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -396,6 +416,14 @@ public interface BuilderTestLanguagePackage extends EPackage
      * @generated
      */
     EReference ELEMENT__REFERENCES = eINSTANCE.getElement_References();
+
+    /**
+     * The meta object literal for the '<em><b>Other Refs</b></em>' reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ELEMENT__OTHER_REFS = eINSTANCE.getElement_OtherRefs();
 
   }
 

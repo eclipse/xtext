@@ -34,7 +34,6 @@ import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -61,14 +60,13 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 				return new StringInputStream(fileSystem.get(uri.toString()));
 			}
 		};
-		builderState.setResourceSetProvider(new Provider<ResourceSet>() {
 
-			public ResourceSet get() {
-				ResourceSetImpl resourceSetImpl = new ResourceSetImpl();
-				resourceSetImpl.setURIConverter(uriConverter);
-				return resourceSetImpl;
-			}
-		});
+	}
+	
+	public ResourceSet createResourceSet() {
+		ResourceSetImpl resourceSetImpl = new ResourceSetImpl();
+		resourceSetImpl.setURIConverter(uriConverter);
+		return resourceSetImpl;
 	}
 	
 	@Override
@@ -258,7 +256,7 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 	}
 
 	private Map<URI, IResourceDescription.Delta> update(Set<URI> toBeUpdated, Set<URI> toBeDeleted) {
-		ImmutableList<Delta> update = builderState.update(toBeUpdated, toBeDeleted, new NullProgressMonitor());
+		ImmutableList<Delta> update = builderState.update(createResourceSet(), toBeUpdated, toBeDeleted, new NullProgressMonitor());
 		return Maps.uniqueIndex(update, new Function<IResourceDescription.Delta, URI>() {
 			public URI apply(IResourceDescription.Delta from) {
 				return from.getOld() != null ? from.getOld().getURI() : from.getNew().getURI();

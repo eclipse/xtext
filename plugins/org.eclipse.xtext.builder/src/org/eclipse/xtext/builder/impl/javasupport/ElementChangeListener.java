@@ -25,6 +25,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.impl.ToBeBuiltComputer;
 import org.eclipse.xtext.builder.impl.UpdateProjectsJob;
+import org.eclipse.xtext.ui.core.resource.IResourceSetProvider;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -49,6 +50,13 @@ public class ElementChangeListener implements IElementChangedListener {
 
 	@Inject
 	private IBuilderState builderState;
+	
+	@Inject
+	private IResourceSetProvider resourceSetProvider;
+	
+	public IResourceSetProvider getResourceSetProvider() {
+		return resourceSetProvider;
+	}
 
 	public void elementChanged(ElementChangedEvent event) {
 		try {
@@ -60,7 +68,7 @@ public class ElementChangeListener implements IElementChangedListener {
 							return from.getProject();
 						}
 					}));
-					new UpdateProjectsJob("updating projects", iProjects, toBeBuiltComputer, builderState).schedule();
+					new UpdateProjectsJob("updating projects",getResourceSetProvider(), iProjects, toBeBuiltComputer, builderState).schedule();
 				}
 			}
 		} catch (WrappedException e) {

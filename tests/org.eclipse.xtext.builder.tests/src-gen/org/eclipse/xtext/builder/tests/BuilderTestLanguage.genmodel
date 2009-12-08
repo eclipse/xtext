@@ -21,6 +21,7 @@
     </genClasses>
     <genClasses ecoreClass="BuilderTestLanguage.ecore#//Element">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BuilderTestLanguage.ecore#//Element/references"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference BuilderTestLanguage.ecore#//Element/otherRefs"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

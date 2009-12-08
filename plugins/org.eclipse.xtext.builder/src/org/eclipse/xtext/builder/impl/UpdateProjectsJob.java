@@ -18,6 +18,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
+import org.eclipse.xtext.ui.core.resource.IResourceSetProvider;
 
 public class UpdateProjectsJob extends Job {
 	
@@ -26,12 +27,14 @@ public class UpdateProjectsJob extends Job {
 	private Set<IProject> projects;
 	private ToBeBuiltComputer toBeBuiltComputer;
 	private IBuilderState builderState;
+	private IResourceSetProvider resourceSetProvider;
 
-	public UpdateProjectsJob(String name, Set<IProject> projects, ToBeBuiltComputer toBeBuiltComputer, IBuilderState builderState) {
+	public UpdateProjectsJob(String name, IResourceSetProvider resourceSetProvider, Set<IProject> projects, ToBeBuiltComputer toBeBuiltComputer, IBuilderState builderState) {
 		super(name);
 		this.projects = projects;
 		this.toBeBuiltComputer = toBeBuiltComputer;
 		this.builderState = builderState;
+		this.resourceSetProvider = resourceSetProvider;
 		setRule(ResourcesPlugin.getWorkspace().getRoot());
 		this.belongsTo(ResourcesPlugin.FAMILY_AUTO_BUILD);
 	}
@@ -43,12 +46,12 @@ public class UpdateProjectsJob extends Job {
 				ToBeBuilt updateProject = toBeBuiltComputer.updateProject(project,
 						monitor);
 				builderState
-						.update(updateProject.getToBeUpdated(), updateProject.getToBeDeleted(), monitor);
+						.update(resourceSetProvider.get(project), updateProject.getToBeUpdated(), updateProject.getToBeDeleted(), monitor);
 			} catch (CoreException e) {
 				log.error(e.getMessage(), e);
 			}
 		}
 		return Status.OK_STATUS;
 	}
-	
+
 }

@@ -213,6 +213,16 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getElement_OtherRefs()
+  {
+    return (EReference)elementEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public BuilderTestLanguageFactory getBuilderTestLanguageFactory()
   {
     return (BuilderTestLanguageFactory)getEFactoryInstance();
@@ -250,6 +260,7 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
 
     elementEClass = createEClass(ELEMENT);
     createEReference(elementEClass, ELEMENT__REFERENCES);
+    createEReference(elementEClass, ELEMENT__OTHER_REFS);
   }
 
   /**
@@ -297,6 +308,7 @@ public class BuilderTestLanguagePackageImpl extends EPackageImpl implements Buil
 
     initEClass(elementEClass, Element.class, "Element", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getElement_References(), this.getElement(), null, "references", null, 0, 1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getElement_OtherRefs(), this.getElement(), null, "otherRefs", null, 0, -1, Element.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

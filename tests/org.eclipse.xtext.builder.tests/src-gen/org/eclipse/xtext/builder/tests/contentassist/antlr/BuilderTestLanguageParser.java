@@ -42,6 +42,8 @@ public class BuilderTestLanguageParser extends AbstractContentAssistParser {
 					put(grammarAccess.getImportAccess().getGroup(), "rule__Import__Group__0");
 					put(grammarAccess.getElementAccess().getGroup(), "rule__Element__Group__0");
 					put(grammarAccess.getElementAccess().getGroup_2(), "rule__Element__Group_2__0");
+					put(grammarAccess.getElementAccess().getGroup_3(), "rule__Element__Group_3__0");
+					put(grammarAccess.getElementAccess().getGroup_3_2(), "rule__Element__Group_3_2__0");
 					put(grammarAccess.getQualifiedNameAccess().getGroup(), "rule__QualifiedName__Group__0");
 					put(grammarAccess.getQualifiedNameAccess().getGroup_1(), "rule__QualifiedName__Group_1__0");
 					put(grammarAccess.getNamespaceAccess().getNameAssignment_1(), "rule__Namespace__NameAssignment_1");
@@ -50,6 +52,8 @@ public class BuilderTestLanguageParser extends AbstractContentAssistParser {
 					put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1(), "rule__Import__ImportedNamespaceAssignment_1");
 					put(grammarAccess.getElementAccess().getNameAssignment_1(), "rule__Element__NameAssignment_1");
 					put(grammarAccess.getElementAccess().getReferencesAssignment_2_1(), "rule__Element__ReferencesAssignment_2_1");
+					put(grammarAccess.getElementAccess().getOtherRefsAssignment_3_1(), "rule__Element__OtherRefsAssignment_3_1");
+					put(grammarAccess.getElementAccess().getOtherRefsAssignment_3_2_1(), "rule__Element__OtherRefsAssignment_3_2_1");
 				}
 			};
 		}

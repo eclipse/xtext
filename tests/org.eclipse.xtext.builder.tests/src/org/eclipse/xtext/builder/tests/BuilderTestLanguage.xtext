@@ -22,7 +22,7 @@ Import :
 	'import' importedNamespace=QualifiedName;
 	
 Element :
-	'object' name=ID ('references' references=[Element|QualifiedName])?;
+	'object' name=ID ('references' references=[Element|QualifiedName])? ('otherRefs' otherRefs+=[Element|QualifiedName](',' otherRefs+=[Element|QualifiedName])*)?;
 	
 QualifiedName :
 	ID ('.' ID)*;

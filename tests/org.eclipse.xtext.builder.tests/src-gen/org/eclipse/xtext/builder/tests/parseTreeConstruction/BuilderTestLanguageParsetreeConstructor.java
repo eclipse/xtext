@@ -484,11 +484,13 @@ protected class Import_ImportedNamespaceAssignment_1 extends AssignmentToken  {
 /************ begin Rule Element ****************
  *
  * Element:
- *   "object" name=ID ("references" references=[Element|QualifiedName])?;
+ *   "object" name=ID ("references" references=[Element|QualifiedName])? ("otherRefs"
+ *   otherRefs+=[Element|QualifiedName] ("," otherRefs+=[Element|QualifiedName])*)?;
  *
  **/
 
-// "object" name=ID ("references" references=[Element|QualifiedName])?
+// "object" name=ID ("references" references=[Element|QualifiedName])? ("otherRefs"
+// otherRefs+=[Element|QualifiedName] ("," otherRefs+=[Element|QualifiedName])*)?
 protected class Element_Group extends GroupToken {
 	
 	public Element_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -503,8 +505,9 @@ protected class Element_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Element_Group_2(parent, this, 0, inst);
-			case 1: return new Element_NameAssignment_1(parent, this, 1, inst);
+			case 0: return new Element_Group_3(parent, this, 0, inst);
+			case 1: return new Element_Group_2(parent, this, 1, inst);
+			case 2: return new Element_NameAssignment_1(parent, this, 2, inst);
 			default: return null;
 		}	
 	}	
@@ -651,6 +654,174 @@ protected class Element_ReferencesAssignment_2_1 extends AssignmentToken  {
 	}
 
 }
+
+
+// ("otherRefs" otherRefs+=[Element|QualifiedName] ("," otherRefs+=[Element|
+// QualifiedName])*)?
+protected class Element_Group_3 extends GroupToken {
+	
+	public Element_Group_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getElementAccess().getGroup_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Element_Group_3_2(parent, this, 0, inst);
+			case 1: return new Element_OtherRefsAssignment_3_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "otherRefs"
+protected class Element_OtherRefsKeyword_3_0 extends KeywordToken  {
+	
+	public Element_OtherRefsKeyword_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getElementAccess().getOtherRefsKeyword_3_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Element_Group_2(parent, this, 0, inst);
+			case 1: return new Element_NameAssignment_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// otherRefs+=[Element|QualifiedName]
+protected class Element_OtherRefsAssignment_3_1 extends AssignmentToken  {
+	
+	public Element_OtherRefsAssignment_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getElementAccess().getOtherRefsAssignment_3_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Element_OtherRefsKeyword_3_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("otherRefs",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("otherRefs");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getElementAccess().getOtherRefsElementCrossReference_3_1_0().getType().getClassifier())) {
+				type = AssignmentType.CR;
+				element = grammarAccess.getElementAccess().getOtherRefsElementCrossReference_3_1_0(); 
+				return obj;
+			}
+		}
+		return null;
+	}
+
+}
+
+// ("," otherRefs+=[Element|QualifiedName])*
+protected class Element_Group_3_2 extends GroupToken {
+	
+	public Element_Group_3_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getElementAccess().getGroup_3_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Element_OtherRefsAssignment_3_2_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// ","
+protected class Element_CommaKeyword_3_2_0 extends KeywordToken  {
+	
+	public Element_CommaKeyword_3_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getElementAccess().getCommaKeyword_3_2_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Element_Group_3_2(parent, this, 0, inst);
+			case 1: return new Element_OtherRefsAssignment_3_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// otherRefs+=[Element|QualifiedName]
+protected class Element_OtherRefsAssignment_3_2_1 extends AssignmentToken  {
+	
+	public Element_OtherRefsAssignment_3_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getElementAccess().getOtherRefsAssignment_3_2_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Element_CommaKeyword_3_2_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("otherRefs",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("otherRefs");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getElementAccess().getOtherRefsElementCrossReference_3_2_1_0().getType().getClassifier())) {
+				type = AssignmentType.CR;
+				element = grammarAccess.getElementAccess().getOtherRefsElementCrossReference_3_2_1_0(); 
+				return obj;
+			}
+		}
+		return null;
+	}
+
+}
+
 
 
 

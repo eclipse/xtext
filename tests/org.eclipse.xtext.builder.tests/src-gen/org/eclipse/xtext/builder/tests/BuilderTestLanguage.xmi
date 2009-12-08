@@ -63,6 +63,28 @@
             </terminal>
           </tokens>
         </tokens>
+        <tokens xsi:type="xtext:Group" cardinality="?">
+          <tokens xsi:type="xtext:Keyword" value="otherRefs"/>
+          <tokens xsi:type="xtext:Assignment" feature="otherRefs" operator="+=">
+            <terminal xsi:type="xtext:CrossReference">
+              <type metamodel="/0/@metamodelDeclarations.0">
+                <classifier xsi:type="ecore:EClass" href="http://eclipse.org/xtext/builderTestLanguage#//Element"/>
+              </type>
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
+            </terminal>
+          </tokens>
+          <tokens xsi:type="xtext:Group" cardinality="*">
+            <tokens xsi:type="xtext:Keyword" value=","/>
+            <tokens xsi:type="xtext:Assignment" feature="otherRefs" operator="+=">
+              <terminal xsi:type="xtext:CrossReference">
+                <type metamodel="/0/@metamodelDeclarations.0">
+                  <classifier xsi:type="ecore:EClass" href="http://eclipse.org/xtext/builderTestLanguage#//Element"/>
+                </type>
+                <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
+              </terminal>
+            </tokens>
+          </tokens>
+        </tokens>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="QualifiedName">

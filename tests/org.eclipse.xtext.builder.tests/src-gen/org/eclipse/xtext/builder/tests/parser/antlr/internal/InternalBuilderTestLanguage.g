@@ -325,7 +325,47 @@ ruleElement returns [EObject current=null]
 	    }
 
 )
-))?);
+))?(	'otherRefs' 
+    {
+        createLeafNode(grammarAccess.getElementAccess().getOtherRefsKeyword_3_0(), null); 
+    }
+(
+(
+		{
+			if ($current==null) {
+	            $current = factory.create(grammarAccess.getElementRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+        }
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getElementAccess().getOtherRefsElementCrossReference_3_1_0(), currentNode); 
+	    }
+		ruleQualifiedName		{ 
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+)(	',' 
+    {
+        createLeafNode(grammarAccess.getElementAccess().getCommaKeyword_3_2_0(), null); 
+    }
+(
+(
+		{
+			if ($current==null) {
+	            $current = factory.create(grammarAccess.getElementRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+        }
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getElementAccess().getOtherRefsElementCrossReference_3_2_1_0(), currentNode); 
+	    }
+		ruleQualifiedName		{ 
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+))*)?);
 
 
 

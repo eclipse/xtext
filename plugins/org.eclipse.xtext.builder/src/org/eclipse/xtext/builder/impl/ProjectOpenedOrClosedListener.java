@@ -24,6 +24,7 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
+import org.eclipse.xtext.ui.core.resource.IResourceSetProvider;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -32,15 +33,22 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
-	
+
 	private final static Logger log = Logger.getLogger(ProjectOpenedOrClosedListener.class);
-	
+
 	@Inject
 	private ToBeBuiltComputer toBeBuiltComputer;
-	
+
 	@Inject
 	private IBuilderState builderState;
-	
+
+	@Inject
+	private IResourceSetProvider resourceSetProvider;
+
+	public IResourceSetProvider getResourceSetProvider() {
+		return resourceSetProvider;
+	}
+
 	public void resourceChanged(final IResourceChangeEvent event) {
 		if (event.getType() == IResourceChangeEvent.POST_CHANGE) {
 			try {
@@ -59,26 +67,32 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 						return false;
 					}
 				});
-				new UpdateProjectsJob("updating projects", toUpdate, toBeBuiltComputer, builderState).schedule();
+				if (!toUpdate.isEmpty())
+					new UpdateProjectsJob("updating projects", resourceSetProvider, toUpdate, toBeBuiltComputer,
+							builderState).schedule();
 			} catch (CoreException e) {
 				log.error(e);
 			}
 		}
 		if ((event.getType() == IResourceChangeEvent.PRE_CLOSE || event.getType() == IResourceChangeEvent.PRE_DELETE)) {
 			if (event.getResource() instanceof IProject) {
-				final ToBeBuilt toBeBuilt = toBeBuiltComputer.removeProject((IProject) event.getResource(), new NullProgressMonitor());
-				new Job("removing project "+event.getResource().getName()+" from xtext index.") {
+				final ToBeBuilt toBeBuilt = toBeBuiltComputer.removeProject((IProject) event.getResource(),
+						new NullProgressMonitor());
+				new Job("removing project " + event.getResource().getName() + " from xtext index.") {
 					{
 						setRule(ResourcesPlugin.getWorkspace().getRoot());
 						this.belongsTo(ResourcesPlugin.FAMILY_AUTO_BUILD);
 					}
+
 					@Override
 					protected IStatus run(IProgressMonitor monitor) {
-						builderState.update(toBeBuilt.getToBeUpdated(), toBeBuilt.getToBeDeleted(),monitor);
+						builderState.update(getResourceSetProvider().get(event.getResource().getProject()), toBeBuilt
+								.getToBeUpdated(), toBeBuilt.getToBeDeleted(), monitor);
 						return Status.OK_STATUS;
 					}
 				}.schedule();
 			}
 		}
 	}
+
 }

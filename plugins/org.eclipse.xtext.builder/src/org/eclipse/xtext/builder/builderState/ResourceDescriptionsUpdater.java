@@ -62,10 +62,7 @@ public class ResourceDescriptionsUpdater {
 	 */
 	public Iterable<Delta> transitiveUpdate(IResourceDescriptions resourceDescriptions, final ResourceSet rs,
 			Iterable<URI> toBeUpdated, Iterable<URI> toBeDeleted, IProgressMonitor monitor) {
-		if (toBeUpdated == null)
-			toBeUpdated = Iterables.emptyIterable();
-		HashSet<URI> toBeDeletedAsSet = Sets.newHashSet(toBeDeleted != null ? toBeDeleted : Iterables
-				.<URI> emptyIterable());
+		HashSet<URI> toBeDeletedAsSet = Sets.newHashSet(toBeDeleted);
 		toBeDeletedAsSet.removeAll(Collections2.forIterable(toBeUpdated));
 		
 		Map<URI, Delta> result = Maps.newHashMap();
