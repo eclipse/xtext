@@ -127,6 +127,12 @@
 		<language uri="classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
+		<language uri="classpath:/org/eclipse/xtext/parser/terminalrules/Bug292245TestLanguage.xtext">
+			<fragment file="${standardFragments}"/>
+		</language>
+		<language uri="classpath:/org/eclipse/xtext/parser/terminalrules/Bug297105TestLanguage.xtext">
+			<fragment file="${standardFragments}" backtrack="true"/>
+		</language>
 		<language uri="classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
