@@ -66,20 +66,22 @@ public class ResourceValidatorImpl implements IResourceValidator {
 		try {
 			// Syntactical and linking errors
 			// Collect EMF Resource Diagnostics
-			for (int i = 0; i < resource.getErrors().size(); i++) {
-				markerFromXtextResourceDiagnostic(resource.getErrors().get(i), Severity.ERROR, acceptor);
+			if (mode.shouldCheck(CheckType.FAST)) {
+				for (int i = 0; i < resource.getErrors().size(); i++) {
+					if (monitor.isCanceled())
+						return null;
+					markerFromXtextResourceDiagnostic(resource.getErrors().get(i), Severity.ERROR, acceptor);
+				}
+
+				for (int i = 0; i < resource.getWarnings().size(); i++) {
+					if (monitor.isCanceled())
+						return null;
+					markerFromXtextResourceDiagnostic(resource.getWarnings().get(i), Severity.WARNING, acceptor);
+				}
 			}
 
 			if (monitor.isCanceled())
 				return null;
-
-			for (int i = 0; i < resource.getWarnings().size(); i++) {
-				markerFromXtextResourceDiagnostic(resource.getWarnings().get(i), Severity.WARNING, acceptor);
-			}
-
-			if (monitor.isCanceled())
-				return null;
-
 			boolean syntaxDiagFail = !markers.isEmpty();
 			logCheckStatus(resource, syntaxDiagFail, "Syntax");
 
