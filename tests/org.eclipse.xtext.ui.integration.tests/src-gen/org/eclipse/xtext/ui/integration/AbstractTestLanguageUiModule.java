@@ -118,11 +118,6 @@ public abstract class AbstractTestLanguageUiModule extends TestLanguageRuntimeMo
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends com.google.inject.Provider<org.eclipse.xtext.index.IXtextIndex>> provideIXtextIndex() {
-		return org.eclipse.xtext.ui.core.index.IndexProvider.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public Class<? extends org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider> bindIExternalContentSupport$IExternalContentProvider() {
 		return org.eclipse.xtext.ui.core.editor.IDirtyStateManager.class;
 	}
@@ -187,19 +182,24 @@ public abstract class AbstractTestLanguageUiModule extends TestLanguageRuntimeMo
 		binder.bind(org.eclipse.xtext.ui.common.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.core.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.ui.integration.contentassist.antlr.internal.InternalTestLanguageLexer.class);
 	}
 
-	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
-	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
-		return org.eclipse.xtext.scoping.namespaces.IndexGlobalScopeProvider.class;
+	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
+	public void configureIResourceDescriptionsBuilderScope(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.resource.IResourceDescriptions.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.scoping.namespaces.DefaultGlobalScopeProvider.NAMED_BUILDER_SCOPE)).to(org.eclipse.xtext.builder.builderState.ShadowingResourceDescriptions.class);
 	}
 
-	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
-	public Class<? extends org.eclipse.xtext.scoping.namespaces.IContainerDependencyProvider> bindIContainerDependencyProvider() {
-		return org.eclipse.xtext.ui.core.scoping.namespaces.ContainerDependencyProviderIJavaProjectImpl.class;
+	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
+	public void configureIResourceDescriptions(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.resource.IResourceDescriptions.class).toProvider(org.eclipse.xtext.builder.GlobalResourceDescriptionsAccess.getDirtyResourceDescriptions()).asEagerSingleton();
 	}
 
-	// contributed by org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment
-	public Class<? extends org.eclipse.xtext.ui.core.builder.ILanguageBuilder> bindILanguageBuilder() {
-		return org.eclipse.xtext.ui.core.builder.impl.JavaProjectLanguageBuilder.class;
+	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
+	public Class<? extends org.eclipse.xtext.resource.IContainer.Manager> bindIContainer$Manager() {
+		return org.eclipse.xtext.ui.core.scoping.namespaces.JavaProjectAwareContainerManager.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
+	public Class<? extends org.eclipse.xtext.ui.core.editor.IXtextEditorCallback> bindIXtextEditorCallback() {
+		return org.eclipse.xtext.builder.nature.NatureAddingEditorCallback.class;
 	}
 
 
