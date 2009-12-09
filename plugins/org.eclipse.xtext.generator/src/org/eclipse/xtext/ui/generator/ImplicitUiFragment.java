@@ -71,13 +71,6 @@ public class ImplicitUiFragment extends AbstractGeneratorFragment {
 		// formatting 
 		.addTypeToType("org.eclipse.xtext.ui.core.editor.formatting.IContentFormatterFactory", "org.eclipse.xtext.ui.core.editor.formatting.ContentFormatterFactory")
 		
-		// index
-		.addTypeToProvider("org.eclipse.xtext.index.IXtextIndex", "org.eclipse.xtext.ui.core.index.IndexProvider")
-		
-		// builder
-		.addTypeToType("org.eclipse.xtext.ui.core.builder.ILanguageBuilder", 
-					"org.eclipse.xtext.ui.core.builder.impl.SimpleProjectLanguageBuilder")
-		
 		// editor notification
 		.addTypeToType("org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider", 
 				"org.eclipse.xtext.ui.core.editor.IDirtyStateManager")
