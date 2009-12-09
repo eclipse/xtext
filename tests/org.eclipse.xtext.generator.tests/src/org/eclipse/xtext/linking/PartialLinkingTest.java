@@ -15,16 +15,20 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.impl.Linker;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
+import org.eclipse.xtext.scoping.impl.LoadOnDemandResourceDescriptions;
 import org.eclipse.xtext.scoping.namespaces.QualifiedNameScopeProvider;
 import org.eclipse.xtext.scoping.namespaces.SimpleNameProvider;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
+
+import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -54,6 +58,16 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 		ImportUriGlobalScopeProvider globalScopeProvider = new ImportUriGlobalScopeProvider();
 		globalScopeProvider.setImportResolver(new ImportUriResolver());
 		globalScopeProvider.setResourceServiceProviderRegistry(get(IResourceServiceProvider.Registry.class));
+		globalScopeProvider.setResourceDescriptions(new Provider<IResourceDescriptions>() {
+			public IResourceDescriptions get() {
+				return new IResourceDescriptions.NullImpl();
+			}
+		});
+		globalScopeProvider.setLoadOnDemandDescriptions(new Provider<LoadOnDemandResourceDescriptions>() {
+			public LoadOnDemandResourceDescriptions get() {
+				return PartialLinkingTest.this.get(LoadOnDemandResourceDescriptions.class);
+			}
+		});
 		scopeProvider.setGlobalScopeProvider(globalScopeProvider);
 		scopeProvider.setNameProvider(nameProvider);
 		modelAsText =

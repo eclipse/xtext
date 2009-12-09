@@ -47,6 +47,7 @@ public class Bug287988WithEagerLinkingTest extends Bug287988Test {
 		XtextResourceSet rs = get(XtextResourceSet.class);
 		rs.setClasspathURIContext(getClass());
 		XtextResource resource = (XtextResource) factory.createResource(uri);
+		rs.getResources().add(resource);
 		resource.load(in, null);
 		EcoreUtil.resolveAll(resource);
 		return resource;

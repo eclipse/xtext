@@ -89,7 +89,7 @@ public class DefaultLabelProviderTest extends TestCase {
 				return null;
 			}
 		};
-		assertEquals("<unknown>", lp.getText("foo"));
+		assertNull(lp.getText("foo"));
 		try {
 			assertEquals("89", lp.getText(new Integer(89)));
 			fail();

@@ -118,7 +118,6 @@
 	</extension>
 
 
-
    <!-- quickfix marker resolution generator -->
    <extension
          point="org.eclipse.ui.ide.markerResolution">
