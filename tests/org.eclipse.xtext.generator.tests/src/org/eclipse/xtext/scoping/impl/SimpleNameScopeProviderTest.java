@@ -10,6 +10,7 @@ package org.eclipse.xtext.scoping.impl;
 import java.io.IOException;
 import java.io.InputStream;
 import java.util.HashMap;
+import java.util.HashSet;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -17,8 +18,14 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.linking.ImportUriTestLanguageStandaloneSetup;
+import org.eclipse.xtext.linking.importedURI.ImportedURIPackage;
+import org.eclipse.xtext.linking.importedURI.Main;
+import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.StringInputStream;
+
+import com.google.common.collect.Sets;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -138,6 +145,22 @@ public class SimpleNameScopeProviderTest extends AbstractGeneratorTest {
 		assertWithXtend("'bar2'", "types.first().extends.extends.name", resource.getContents().get(0));
 		assertWithXtend("'bar'", "types.first().extends.extends.extends.name", resource.getContents().get(0));
 		assertWithXtend("null", "types.first().extends.extends.extends.extends", resource.getContents().get(0));
+	}
+	
+	public void testGetAllContents() throws Exception {
+		TestURIConverter models = new TestURIConverter();
+		ResourceSetImpl rs = new ResourceSetImpl();
+		rs.setURIConverter(models);
+
+		models.addModel("foo.importuritestlanguage", "import 'bar.importuritestlanguage' type Foo");
+		models.addModel("bar.importuritestlanguage", "type A type B type C");
+
+		Resource resource = rs.getResource(URI.createURI("foo.importuritestlanguage"), true);
+		
+		IScope scope = getScopeProvider().getScope(((Main)resource.getContents().get(0)).getTypes().get(0), ImportedURIPackage.Literals.TYPE__EXTENDS);
+		HashSet<IEObjectDescription> set = Sets.newHashSet(scope.getAllContents());
+		System.out.println(set);
+		assertEquals(4,set.size());
 	}
 
 
