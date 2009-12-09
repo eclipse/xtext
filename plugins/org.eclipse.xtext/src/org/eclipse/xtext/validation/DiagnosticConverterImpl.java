@@ -19,6 +19,7 @@ import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator.DiagnosticImpl;
 import org.eclipse.xtext.validation.Issue.IssueImpl;
 import org.eclipse.xtext.validation.Issue.Severity;
 
@@ -44,6 +45,7 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 		if (diagnostic instanceof AbstractDiagnostic) {
 			issue.setUriToProblem(((AbstractDiagnostic)diagnostic).getUriToProblem());
 		}
+		issue.setType(CheckType.FAST);
 		acceptor.accept(issue);
 	}
 
@@ -73,6 +75,9 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 		final Integer code = diagnostic.getCode();
 		if (code != null)
 			issue.setCode(code);
+		if (diagnostic instanceof DiagnosticImpl)
+			issue.setType( ((DiagnosticImpl) diagnostic).getCheckType() );
+		
 		//		marker.put(IXtextResourceChecker.DIAGNOSTIC_KEY, diagnostic);
 		issue.setMessage(diagnostic.getMessage());
 		//		marker.put(IMarker.PRIORITY, Integer.valueOf(IMarker.PRIORITY_LOW));

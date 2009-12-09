@@ -25,6 +25,8 @@ public interface Issue {
 	String getMessage();
 
 	Integer getCode();
+	
+	CheckType getType();
 
 	URI getUriToProblem();
 
@@ -43,6 +45,7 @@ public interface Issue {
 		private boolean isSyntaxError = false;
 		private URI uriToProblem;
 		private Severity severity;
+		private CheckType type;
 
 		public Integer getLength() {
 			return length;
@@ -98,6 +101,14 @@ public interface Issue {
 
 		public void setCode(Integer code) {
 			this.code = code;
+		}
+		
+		public CheckType getType() {
+			return type;
+		}
+
+		public void setType(CheckType type) {
+			this.type = type;
 		}
 
 		public void setSyntaxError(boolean isSyntaxError) {
