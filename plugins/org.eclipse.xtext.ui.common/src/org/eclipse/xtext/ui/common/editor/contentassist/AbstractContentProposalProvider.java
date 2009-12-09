@@ -210,7 +210,10 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	protected String getDisplayString(EObject element, String proposal) {
 		if (element == null)
 			return proposal;
-		return labelProvider.getText(element);
+		String result = labelProvider.getText(element);
+		if (result == null)
+			return proposal;
+		return result;
 	}
 	
 	public void setValueConverter(IValueConverterService valueConverter) {

@@ -57,7 +57,8 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 			String proposal = candidate.getName();
 			if (ruleName != null)
 				proposal = getValueConverter().toString(proposal, ruleName);
-			result = createCompletionProposal(proposal, getDisplayString(candidate.getEObjectOrProxy(), candidate.getName()), getImage(candidate.getEObjectOrProxy()), contentAssistContext);
+			EObject objectOrProxy = candidate.getEObjectOrProxy();
+			result = createCompletionProposal(proposal, getDisplayString(objectOrProxy, candidate.getName()), getImage(objectOrProxy), contentAssistContext);
 			getPriorityHelper().adjustCrossReferencePriority(result, contentAssistContext.getPrefix());			
 			return result;
 		}
