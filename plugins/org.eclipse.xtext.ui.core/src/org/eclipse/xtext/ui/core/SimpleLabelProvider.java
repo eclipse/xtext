@@ -82,9 +82,8 @@ public class SimpleLabelProvider extends LabelProvider {
 					return value.toString();
 				}
 			}
-			return eClass.getName();
 		}
-		return "<unknown>";
+		return null;
 	}
 
 	public String error_image(Object object, Exception e) {
