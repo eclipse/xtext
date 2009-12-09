@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.2"?>
 <plugin>
-   <extension-point id="languageBuilder" name="Xtext Builder" schema="schema/LanguageBuilder.exsd"/>
    <extension
          point="org.eclipse.ui.keywords">
       <keyword
@@ -185,78 +184,6 @@
         </run>
      </builder>
   </extension>
-  <extension
-        id="xtextNature"
-        name="Xtext Project Nature"
-        point="org.eclipse.core.resources.natures">
-     <runtime>
-        <run
-              class="org.eclipse.xtext.ui.core.builder.internal.XtextNature">
-        </run>
-     </runtime>
-     <builder
-           id="org.eclipse.xtext.ui.core.xtextBuilder">
-     </builder>
-  </extension>
-  <extension
-         point="org.eclipse.ui.popupMenus">
-      <objectContribution
-            adaptable="true"
-            id="org.eclipse.xtext.ui.core.contribution1"
-            objectClass="org.eclipse.core.resources.IProject">
-         <action
-               class="org.eclipse.xtext.ui.core.builder.internal.ToggleXtextNatureAction"
-               id="org.eclipse.xtend.shared.ui.action.AddXtendXpandNatureAction"
-               label="Add Xtext Nature (Deprecated)"
-               menubarPath="org.eclipse.ui.projectConfigure/additions"
-               >
-         </action>
-         <visibility>
-         	<not>
-	            <objectState
-    	              name="nature"
-        	          value="org.eclipse.xtext.ui.core.xtextNature">
-            	</objectState>
-            </not>
-         </visibility>
-      </objectContribution>
-      <objectContribution
-            adaptable="true"
-            id="org.eclipse.xtext.ui.core.contribution2"
-            objectClass="org.eclipse.core.resources.IProject">
-         <action
-               class="org.eclipse.xtext.ui.core.builder.internal.ToggleXtextNatureAction"
-               id="org.eclipse.xtend.shared.ui.action.AddXtendXpandNatureAction"
-               label="Remove Xtext Nature (Deprecated)"
-               menubarPath="org.eclipse.ui.projectConfigure/additions"
-               >
-         </action>
-         <visibility>
-               <objectState
-    	              name="nature"
-        	          value="org.eclipse.xtext.ui.core.xtextNature">
-            	</objectState>
-         </visibility>
-      </objectContribution>
-   </extension>
-   <extension
-         point="org.eclipse.ui.decorators">
-      <decorator
-            adaptable="true"
-            icon="icons/nature_overlay.png"
-            id="org.eclipse.xtext.ui.core.nature.overlay"
-            label="Xtext Nature (Deprecated)"
-            lightweight="true"
-            location="TOP_RIGHT"
-            state="true">
-         <enablement>
-            <objectState
-                  name="nature"
-                  value="org.eclipse.xtext.ui.core.xtextNature">
-            </objectState>
-         </enablement>
-      </decorator>
-   </extension>
    <extension
       point="org.eclipse.ui.editors.annotationTypes">
       <type

@@ -233,10 +233,4 @@
       </generatorConfiguration>
    </extension>
    
-   <extension
-         point="org.eclipse.xtext.ui.core.languageBuilder">
-      <languageBuilder
-            class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.ILanguageBuilder">
-      </languageBuilder>
-   </extension>
 </plugin>

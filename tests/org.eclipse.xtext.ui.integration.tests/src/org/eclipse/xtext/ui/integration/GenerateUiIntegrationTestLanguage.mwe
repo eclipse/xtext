@@ -23,7 +23,7 @@
 			<fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment">
 				<options classSplitting="true"/>
 			</fragment>
-			<fragment class="org.eclipse.xtext.ui.generator.scoping.QualifiedNameBasedScopingFragment"/>
+			<fragment class="org.eclipse.xtext.generator.builder.BuilderIntegrationFragment"/>
 		</language>
 	</component>
 </workflow>

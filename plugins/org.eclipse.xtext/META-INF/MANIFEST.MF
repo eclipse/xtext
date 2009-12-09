@@ -22,7 +22,6 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.grammaranalysis,
  org.eclipse.xtext.grammaranalysis.impl,
  org.eclipse.xtext.impl,
- org.eclipse.xtext.index,
  org.eclipse.xtext.linking,
  org.eclipse.xtext.linking.impl,
  org.eclipse.xtext.linking.lazy,
@@ -62,7 +61,6 @@ Require-Bundle: org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.emf.mwe.utils;bundle-version="0.8.0";resolution:=optional,
  org.eclipse.emf.common,
  org.eclipse.xtend;bundle-version="0.8.0";resolution:=optional,
- org.eclipse.xtend.typesystem.emf;bundle-version="0.8.0";resolution:=optional,
- org.eclipse.emf.emfindex;bundle-version="0.8.0"
+ org.eclipse.xtend.typesystem.emf;bundle-version="0.8.0";resolution:=optional
 Import-Package: org.apache.log4j;version="1.2.15"
 

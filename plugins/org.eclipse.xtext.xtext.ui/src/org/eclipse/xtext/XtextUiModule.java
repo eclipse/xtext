@@ -10,8 +10,6 @@ import org.eclipse.xtext.ui.common.editor.outline.transformer.ISemanticModelTran
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingCalculator;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingConfiguration;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
-import org.eclipse.xtext.ui.core.builder.ILanguageBuilder;
-import org.eclipse.xtext.ui.core.builder.impl.JavaProjectLanguageBuilder;
 import org.eclipse.xtext.ui.core.editor.contentassist.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.core.wizard.IProjectCreator;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
@@ -73,11 +71,6 @@ public class XtextUiModule extends AbstractXtextUiModule {
 	@Override
 	public Class<? extends IActionBarContributor> bindIActionBarContributor() {
 		return XtextActionBarContributor.class;
-	}
-	
-	@Override
-	public Class<? extends ILanguageBuilder> bindILanguageBuilder() {
-		return JavaProjectLanguageBuilder.class;
 	}
 	
 	@Override

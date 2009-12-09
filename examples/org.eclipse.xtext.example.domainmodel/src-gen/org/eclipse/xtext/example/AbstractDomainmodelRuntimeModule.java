@@ -73,24 +73,24 @@ public abstract class AbstractDomainmodelRuntimeModule extends DefaultRuntimeMod
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.exporting.SimpleNamesFragment
-	public Class<? extends org.eclipse.xtext.resource.IQualifiedNameProvider> bindIQualifiedNameProvider() {
-		return org.eclipse.xtext.scoping.namespaces.SimpleNameProvider.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.scoping.ImportURIScopingFragment
+	// contributed by org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment
 	public Class<? extends org.eclipse.xtext.scoping.IScopeProvider> bindIScopeProvider() {
 		return org.eclipse.xtext.example.scoping.DomainmodelScopeProvider.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.scoping.ImportURIScopingFragment
+	// contributed by org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment
 	public void configureIScopeProviderDelegate(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(com.google.inject.name.Names.named("org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.delegate")).to(org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider.class);
+		binder.bind(org.eclipse.xtext.scoping.IScopeProvider.class).annotatedWith(com.google.inject.name.Names.named("org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider.delegate")).to(org.eclipse.xtext.scoping.namespaces.QualifiedNameScopeProvider.class);
 	}
 
-	// contributed by org.eclipse.xtext.generator.scoping.ImportURIScopingFragment
+	// contributed by org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment
+	public Class<? extends org.eclipse.xtext.resource.IQualifiedNameProvider> bindIQualifiedNameProvider() {
+		return org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment
 	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
-		return org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider.class;
+		return org.eclipse.xtext.scoping.namespaces.DefaultGlobalScopeProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment
