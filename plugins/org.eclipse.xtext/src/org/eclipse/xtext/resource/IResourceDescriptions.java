@@ -9,6 +9,9 @@ package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.resource.IResourceDescription.Event.Listener;
+
+import com.google.common.collect.Iterables;
 
 /**
  * Represents an observable set of {@link IResourceDescription}
@@ -30,5 +33,25 @@ public interface IResourceDescriptions extends IResourceDescription.Event.Source
 	interface IContextAware extends IResourceDescriptions {
 		
 		void setContext(Notifier ctx);
+	}
+	
+	class NullImpl implements IResourceDescriptions {
+
+		public Iterable<IResourceDescription> getAllResourceDescriptions() {
+			return Iterables.emptyIterable();
+		}
+
+		public IResourceDescription getResourceDescription(URI uri) {
+			return null;
+		}
+
+		public void addListener(Listener listener) {
+			// ignore
+		}
+
+		public void removeListener(Listener listener) {
+			// ignore
+		}
+		
 	}
 }

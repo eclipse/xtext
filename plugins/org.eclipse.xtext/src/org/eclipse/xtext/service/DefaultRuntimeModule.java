@@ -36,20 +36,26 @@ import org.eclipse.xtext.parsetree.reconstr.impl.DefaultHiddenTokenMerger;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultUnassignedTextSerializer;
 import org.eclipse.xtext.resource.DefaultFragmentProvider;
+import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.resource.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceFactory;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
+import org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider;
+import org.eclipse.xtext.scoping.namespaces.AbstractGlobalScopeProvider;
 import org.eclipse.xtext.scoping.namespaces.SimpleNameProvider;
 import org.eclipse.xtext.validation.CancelableDiagnostician;
 
 import com.google.inject.Binder;
+import com.google.inject.name.Names;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
@@ -123,6 +129,14 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 		return ImportUriGlobalScopeProvider.class;
 	}
 	
+	public void configureIResourceDescriptions(com.google.inject.Binder binder) {
+		binder.bind(IResourceDescriptions.class).to(ResourceSetBasedResourceDescriptions.class);
+	}
+
+	public void configureIResourceDescriptionsBuilderScope(com.google.inject.Binder binder) {
+		binder.bind(IResourceDescriptions.class).annotatedWith(Names.named(AbstractGlobalScopeProvider.NAMED_BUILDER_SCOPE)).to(ResourceSetBasedResourceDescriptions.class);
+	}
+	
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
 		return SimpleNameProvider.class;
 	}
@@ -165,6 +179,10 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	
 	public Class<? extends ResourceSet> bindResourceSet() {
 		return XtextResourceSet.class;
+	}
+	
+	public Class<? extends IContainer.Manager> bindIContainer$Manager() {
+		return SimpleResourceDescriptionsBasedContainerManager.class;
 	}
 	
 }

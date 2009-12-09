@@ -12,7 +12,6 @@ import java.io.InputStream;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -42,13 +41,6 @@ public class ParserTestHelper {
 		XtextResource resource = createResource(uri);
 		rs.getResources().add(resource);
 		resource.load(in, null);
-
-		for (Diagnostic d : resource.getErrors())
-			System.out.println("Resource Error: " + d);
-
-		for (Diagnostic d : resource.getWarnings())
-			System.out.println("Resource Warning: " + d);
-
 		return resource;
 	}
 

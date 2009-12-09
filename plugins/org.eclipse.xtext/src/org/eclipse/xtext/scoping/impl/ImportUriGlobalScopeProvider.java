@@ -7,34 +7,39 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
-import static com.google.common.collect.Iterables.*;
-
 import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Iterator;
 import java.util.LinkedHashSet;
 
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.namespaces.AbstractGlobalScopeProvider;
 import org.eclipse.xtext.util.OnChangeEvictingCacheAdapter;
 
-import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class ImportUriGlobalScopeProvider extends AbstractExportedObjectsAwareScopeProvider implements IGlobalScopeProvider {
+public class ImportUriGlobalScopeProvider extends AbstractGlobalScopeProvider {
 
 	@Inject
 	private ImportUriResolver importResolver;
+	
+	@Inject
+	private Provider<LoadOnDemandResourceDescriptions> loadOnDemandDescriptions;
 	
 	public ImportUriResolver getImportUriResolver() {
 		return importResolver;
@@ -43,15 +48,22 @@ public class ImportUriGlobalScopeProvider extends AbstractExportedObjectsAwareSc
 	public void setImportResolver(ImportUriResolver importResolver) {
 		this.importResolver = importResolver;
 	}
+	
+	public IResourceDescriptions getResourceDescriptions(EObject ctx, Collection<URI> importUris) {
+		IResourceDescriptions result = getResourceDescriptions(ctx);
+		LoadOnDemandResourceDescriptions demandResourceDescriptions = loadOnDemandDescriptions.get();
+		demandResourceDescriptions.initialize(result, importUris, ctx.eResource());
+		return demandResourceDescriptions;
+	}
 
 	public IScope getScope(EObject context, EReference reference) {
 		final LinkedHashSet<URI> uniqueImportURIs = getImportedUris(context);
-
+		IResourceDescriptions descriptions = getResourceDescriptions(context, uniqueImportURIs);
 		ArrayList<URI> newArrayList = Lists.newArrayList(uniqueImportURIs);
 		Collections.reverse(newArrayList);
 		IScope scope = IScope.NULLSCOPE;
 		for (URI u : newArrayList) {
-			scope = createLazyResourceScope(scope, u, context, reference);
+			scope = createLazyResourceScope(scope, u, descriptions, reference);
 		}
 		return scope;
 	}
@@ -66,30 +78,39 @@ public class ImportUriGlobalScopeProvider extends AbstractExportedObjectsAwareSc
 				String uri = importResolver.apply(object);
 				if (uri != null) {
 					URI importUri = URI.createURI(uri);
-					if (EcoreUtil2.isValidUri(object, importUri))
-						uniqueImportURIs.add(importUri);
+					uniqueImportURIs.add(importUri);
 				}
+			}
+			Iterator<URI> uriIter = uniqueImportURIs.iterator();
+			while(uriIter.hasNext()) {
+				if (!EcoreUtil2.isValidUri(context, uriIter.next()))
+					uriIter.remove();
 			}
 			cache.set(getClass().getName(), uniqueImportURIs);
 		}
 		return cache.get(getClass().getName());
 	}
 
-	private SimpleScope createLazyResourceScope(IScope parent, final URI createURI, final EObject context,
+	private SimpleScope createLazyResourceScope(IScope parent, final URI uri, final IResourceDescriptions descriptions,
 			final EReference reference) {
 		return new SimpleScope(parent, null) {
 			@Override
 			public Iterable<IEObjectDescription> internalGetContents() {
-				final Resource resource = EcoreUtil2.getResource(context.eResource(), createURI.toString());
-				Iterable<IEObjectDescription> exportedObjects = getExportedEObjects(resource);
-				Iterable<IEObjectDescription> filtered = filter(exportedObjects, new Predicate<IEObjectDescription>() {
-					public boolean apply(IEObjectDescription input) {
-						return EcoreUtil2.isAssignableFrom(reference.getEReferenceType(),input.getEClass());
-					}
-				});
-				return filtered;
+				IResourceDescription description = descriptions.getResourceDescription(uri);
+				if (description == null)
+					return Iterables.emptyIterable();
+				Iterable<IEObjectDescription> exportedObjects = description.getExportedObjects(reference.getEReferenceType());
+				return exportedObjects;
 			}
 		};
+	}
+
+	public void setLoadOnDemandDescriptions(Provider<LoadOnDemandResourceDescriptions> loadOnDemandDescriptions) {
+		this.loadOnDemandDescriptions = loadOnDemandDescriptions;
+	}
+
+	public Provider<LoadOnDemandResourceDescriptions> getLoadOnDemandDescriptions() {
+		return loadOnDemandDescriptions;
 	}
 
 }

@@ -10,64 +10,28 @@ package org.eclipse.xtext.scoping.namespaces;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
-import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
-import com.google.inject.name.Named;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class DefaultGlobalScopeProvider extends AbstractScopeProvider implements IGlobalScopeProvider {
-	public static final String NAMED_BUILDER_SCOPE = "org.eclipse.xtext.scoping.namespaces.DefaultGlobalScopeProvider.BUILDER_SCOPE";
+public class DefaultGlobalScopeProvider extends AbstractGlobalScopeProvider {
 
 	@Inject
 	private IContainer.Manager containerManager;
 
 	@Inject
 	private IResourceDescription.Manager descriptionManager;
-
-	//	@Inject(optional=true)  did not work - that's why I'll register a dummy binding for now
-	@Inject
-	@Named(NAMED_BUILDER_SCOPE)
-	private Provider<IResourceDescriptions> builderScopeResourceDescriptions;
-
-	@Inject
-	private Provider<IResourceDescriptions> resourceDescriptions;
-
-	public void setBuilderScopeResourceDescriptions(Provider<IResourceDescriptions> resourceDescriptions) {
-		this.builderScopeResourceDescriptions = resourceDescriptions;
-	}
-
-	public void setResourceDescriptions(Provider<IResourceDescriptions> resourceDescriptions) {
-		this.resourceDescriptions = resourceDescriptions;
-	}
-
-	public IResourceDescriptions getResourceDescriptions(EObject ctx) {
-		Map<Object, Object> loadOptions = ctx.eResource().getResourceSet().getLoadOptions();
-		IResourceDescriptions result = resourceDescriptions.get();
-		if (loadOptions.containsKey(NAMED_BUILDER_SCOPE)) {
-			result = builderScopeResourceDescriptions.get();
-		}
-		if (result instanceof IResourceDescriptions.IContextAware) {
-			((IResourceDescriptions.IContextAware) result).setContext(ctx);
-		}
-		return result;
-	}
-
+	
 	public IScope getScope(final EObject context, EReference reference) {
 		IScope result = IScope.NULLSCOPE;
 		List<IContainer> containers = getVisibleContainers(context);
@@ -143,29 +107,15 @@ public class DefaultGlobalScopeProvider extends AbstractScopeProvider implements
 		};
 	}
 
-	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
-
 	public Iterable<IEObjectDescription> findAllDescriptionsFor(EObject object) {
 		if (object.eIsProxy())
 			throw new IllegalArgumentException("object may not be a proxy: " + object);
-		IResourceDescription.Manager descriptionManager = resourceServiceProviderRegistry.getResourceServiceProvider(
+		IResourceDescription.Manager descriptionManager = getResourceServiceProviderRegistry().getResourceServiceProvider(
 				object.eResource().getURI(), null).getResourceDescriptionManager();
 		if (descriptionManager == null)
 			throw new IllegalStateException("Cannot find description manager for " + object);
 		IResourceDescription description = descriptionManager.getResourceDescription(object.eResource());
 		return description.getExportedObjectsForEObject(object);
-	}
-
-	protected IResourceDescription getActualResourceDescription(IResourceDescription persisted) {
-		return persisted;
-	}
-
-	public IResourceServiceProvider.Registry getResourceServiceProviderRegistry() {
-		return resourceServiceProviderRegistry;
-	}
-
-	public void setResourceServiceProviderRegistry(IResourceServiceProvider.Registry resourceDescriptionsManager) {
-		this.resourceServiceProviderRegistry = resourceDescriptionsManager;
 	}
 
 }
