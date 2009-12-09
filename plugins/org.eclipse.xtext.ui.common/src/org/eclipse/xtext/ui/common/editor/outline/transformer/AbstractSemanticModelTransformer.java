@@ -31,7 +31,7 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 			return "hidden node";
 		}
 	};
-	
+
 	public ContentOutlineNode transformSemanticModel(EObject semanticModel) {
 		ContentOutlineNode outlineModel = new ContentOutlineNode();
 		outlineModel.setLabel(INVISIBLE_ROOT_NODE);
@@ -44,8 +44,7 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 		ContentOutlineNode outlineNode;
 		if (consumeSemanticNode(semanticNode)) {
 			outlineNode = createOutlineNode(semanticNode, outlineParentNode);
-		}
-		else {
+		} else {
 			outlineNode = outlineParentNode;
 		}
 		if (outlineNode == HIDDEN_NODE) {
@@ -86,7 +85,12 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 	}
 
 	public String getText(EObject object) {
-		return labelProvider.getText(object);
+		String text = labelProvider.getText(object);
+		if (text != null)
+			return text;
+		if (object!=null)
+			return object.eClass().getName();
+		return "<unkown>";
 	}
 
 	public Image getImage(EObject object) {
