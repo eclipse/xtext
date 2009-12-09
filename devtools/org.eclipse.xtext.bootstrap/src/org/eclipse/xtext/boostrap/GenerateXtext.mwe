@@ -26,11 +26,15 @@
 			<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" basePackage="${basePackage}"/>
 			<fragment class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
 			<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
-			<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"/> 
+			<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment">
+				<options classSplitting="true"/>
+			</fragment> 
 			<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 
 				fileExtensions="${file.extensions}"/>
 			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
-			<fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment"/>
+			<fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment">
+				<options classSplitting="true"/>
+			</fragment>
 		</language>
 	</component>
 	<component class="org.eclipse.xtext.generator.Generator">

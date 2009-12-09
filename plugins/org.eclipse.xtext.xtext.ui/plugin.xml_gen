@@ -112,7 +112,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="xtext">
 		</parser>
 	</extension>
@@ -120,7 +120,7 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.XtextResourceFactory"
+			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="xtext2">
 		</parser>
 	</extension>
