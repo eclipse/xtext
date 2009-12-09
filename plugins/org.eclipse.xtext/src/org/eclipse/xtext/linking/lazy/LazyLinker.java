@@ -146,6 +146,8 @@ public class LazyLinker extends AbstractCleaningLinker {
 	}
 
 	protected EObject createProxy(EObject obj, AbstractNode abstractNode, EReference eRef) {
+		if (obj.eResource()==null)
+			throw new IllegalStateException("object must be contained in a resource");
 		final URI uri = obj.eResource().getURI();
 		final URI encodedLink = uri.appendFragment(encoder.encode(obj, eRef, abstractNode));
 		EClass referenceType = eRef.getEReferenceType();
