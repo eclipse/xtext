@@ -159,7 +159,6 @@ public class SimpleNameScopeProviderTest extends AbstractGeneratorTest {
 		
 		IScope scope = getScopeProvider().getScope(((Main)resource.getContents().get(0)).getTypes().get(0), ImportedURIPackage.Literals.TYPE__EXTENDS);
 		HashSet<IEObjectDescription> set = Sets.newHashSet(scope.getAllContents());
-		System.out.println(set);
 		assertEquals(4,set.size());
 	}
 

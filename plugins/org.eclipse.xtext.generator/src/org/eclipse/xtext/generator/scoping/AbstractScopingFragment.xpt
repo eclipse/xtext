@@ -11,20 +11,8 @@
 
 «IMPORT org::eclipse::xtext»
 
-«EXTENSION org::eclipse::xtext::generator::scoping::JavaScopingExtensions»
+«EXTENSION org::eclipse::xtext::generator::scoping::AbstractScopingFragment»
 «EXTENSION org::eclipse::xtext::generator::Naming»
-
-
-«DEFINE addToPluginXmlRt FOR Grammar»«ENDDEFINE»
-
-«DEFINE addToPluginXmlUi FOR Grammar»«ENDDEFINE»
-
-«DEFINE addToStandaloneSetup FOR Grammar»«ENDDEFINE»
-
-«DEFINE generate FOR Grammar»
-	«EXPAND JavaScopeProvider»
-«ENDDEFINE»
-
 
 «DEFINE JavaScopeProvider FOR Grammar»
 «FILE scopeProviderName().asPath()+".java" SRC-»
