@@ -10,28 +10,23 @@ package org.eclipse.xtext.generator.builder;
 import java.util.Set;
 
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
+import org.eclipse.xtext.generator.DefaultGeneratorFragment;
 import org.eclipse.xtext.resource.IContainer;
-import org.eclipse.xtext.resource.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager;
-import org.eclipse.xtext.scoping.IGlobalScopeProvider;
-import org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.scoping.namespaces.DefaultGlobalScopeProvider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class BuilderIntegrationFragment extends AbstractGeneratorFragment {
+public class BuilderIntegrationFragment extends DefaultGeneratorFragment {
 
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return new BindFactory()
-			.addTypeToType(IQualifiedNameProvider.class.getName(), DefaultDeclarativeQualifiedNameProvider.class.getName())
-			.addTypeToType(IGlobalScopeProvider.class.getName(), DefaultGlobalScopeProvider.class.getName())
 			.addTypeToType(IContainer.Manager.class.getName(), SimpleResourceDescriptionsBasedContainerManager.class.getName())
 			.addConfiguredBinding(
 					IResourceDescriptions.class.getName(),

@@ -189,8 +189,15 @@
                 <composedCheck value="org.eclipse.xtext.validation.NamesAreUniqueValidator"/>
             </fragment>
             
-			<!-- scoping API -->
-			<fragment class="org.eclipse.xtext.generator.scoping.JavaScopingFragment"/>
+			<!-- scoping and exporting API -->
+			<fragment class="org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment"/>
+			<fragment class="org.eclipse.xtext.generator.exporting.QualifiedNamesFragment"/>
+			
+			<!-- scoping and exporting API -->
+			<!--
+			<fragment class="org.eclipse.xtext.generator.scoping.ImportURIScopingFragment"/>
+			<fragment class="org.eclipse.xtext.generator.exporting.SimpleNamesFragment"/>
+			-->
 			
 			<!-- formatter API -->
 			<fragment class="org.eclipse.xtext.generator.formatting.FormatterFragment"/>

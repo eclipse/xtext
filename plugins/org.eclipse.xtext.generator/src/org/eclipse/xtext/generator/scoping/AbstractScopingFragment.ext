@@ -13,5 +13,5 @@ extension org::eclipse::xtext::Extensions;
 extension org::eclipse::xtext::EcoreUtils;
 
 String scopeProviderName(Grammar this):
-	JAVA org.eclipse.xtext.generator.scoping.JavaScopingFragment.getScopeProviderName(org.eclipse.xtext.Grammar);
+	JAVA org.eclipse.xtext.generator.scoping.AbstractScopingFragment.getScopeProviderName(org.eclipse.xtext.Grammar);
  

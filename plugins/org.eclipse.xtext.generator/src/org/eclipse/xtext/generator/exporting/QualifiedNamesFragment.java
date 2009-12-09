@@ -5,25 +5,26 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.tests;
+package org.eclipse.xtext.generator.exporting;
 
+import java.util.Set;
+
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.generator.BindFactory;
+import org.eclipse.xtext.generator.Binding;
+import org.eclipse.xtext.generator.DefaultGeneratorFragment;
 import org.eclipse.xtext.resource.IQualifiedNameProvider;
-import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider;
-import org.eclipse.xtext.scoping.namespaces.DefaultGlobalScopeProvider;
 
 /**
- * Use this class to register components to be used within the IDE.
+ * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class BuilderTestLanguageRuntimeModule extends org.eclipse.xtext.builder.tests.AbstractBuilderTestLanguageRuntimeModule {
-	
+public class QualifiedNamesFragment extends DefaultGeneratorFragment {
+
 	@Override
-	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
-		return DefaultDeclarativeQualifiedNameProvider.class;
-	}
-	
-	@Override
-	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
-		return DefaultGlobalScopeProvider.class;
+	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
+		return new BindFactory()
+			.addfinalTypeToType(IQualifiedNameProvider.class.getName(), DefaultDeclarativeQualifiedNameProvider.class.getName())
+			.getBindings();
 	}
 }

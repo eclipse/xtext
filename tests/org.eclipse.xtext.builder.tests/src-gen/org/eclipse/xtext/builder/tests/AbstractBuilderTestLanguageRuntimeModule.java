@@ -79,16 +79,6 @@ public abstract class AbstractBuilderTestLanguageRuntimeModule extends DefaultRu
 	}
 
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
-	public Class<? extends org.eclipse.xtext.resource.IQualifiedNameProvider> bindIQualifiedNameProvider() {
-		return org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
-	public Class<? extends org.eclipse.xtext.scoping.IGlobalScopeProvider> bindIGlobalScopeProvider() {
-		return org.eclipse.xtext.scoping.namespaces.DefaultGlobalScopeProvider.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
 	public Class<? extends org.eclipse.xtext.resource.IContainer.Manager> bindIContainer$Manager() {
 		return org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager.class;
 	}

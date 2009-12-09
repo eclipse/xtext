@@ -84,12 +84,12 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:74:2: iv_ruleEcoreDsl= ruleEcoreDsl EOF
             {
              currentNode = createCompositeNode(grammarAccess.getEcoreDslRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleEcoreDsl_in_entryRuleEcoreDsl75);
+            pushFollow(FOLLOW_ruleEcoreDsl_in_entryRuleEcoreDsl75);
             iv_ruleEcoreDsl=ruleEcoreDsl();
             _fsp--;
 
              current =iv_ruleEcoreDsl; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEcoreDsl85); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEcoreDsl85); 
 
             }
 
@@ -146,7 +146,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getEcoreDslAccess().getMetamodelDeclarationsReferencedMetamodelParserRuleCall_0_0(), currentNode); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleReferencedMetamodel_in_ruleEcoreDsl131);
+            	    pushFollow(FOLLOW_ruleReferencedMetamodel_in_ruleEcoreDsl131);
             	    lv_metamodelDeclarations_0_0=ruleReferencedMetamodel();
             	    _fsp--;
 
@@ -188,7 +188,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
              
             	        currentNode=createCompositeNode(grammarAccess.getEcoreDslAccess().getPackageEPackageDeclParserRuleCall_1_0(), currentNode); 
             	    
-            pushFollow(FollowSets000.FOLLOW_ruleEPackageDecl_in_ruleEcoreDsl153);
+            pushFollow(FOLLOW_ruleEPackageDecl_in_ruleEcoreDsl153);
             lv_package_1_0=ruleEPackageDecl();
             _fsp--;
 
@@ -250,12 +250,12 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:145:2: iv_ruleReferencedMetamodel= ruleReferencedMetamodel EOF
             {
              currentNode = createCompositeNode(grammarAccess.getReferencedMetamodelRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleReferencedMetamodel_in_entryRuleReferencedMetamodel189);
+            pushFollow(FOLLOW_ruleReferencedMetamodel_in_entryRuleReferencedMetamodel189);
             iv_ruleReferencedMetamodel=ruleReferencedMetamodel();
             _fsp--;
 
              current =iv_ruleReferencedMetamodel; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleReferencedMetamodel199); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleReferencedMetamodel199); 
 
             }
 
@@ -288,7 +288,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:158:1: ( 'import' ( ( (lv_alias_1_0= RULE_ID ) ) '=' )? ( ( RULE_STRING ) ) ';' )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:158:3: 'import' ( ( (lv_alias_1_0= RULE_ID ) ) '=' )? ( ( RULE_STRING ) ) ';'
             {
-            match(input,16,FollowSets000.FOLLOW_16_in_ruleReferencedMetamodel234); 
+            match(input,16,FOLLOW_16_in_ruleReferencedMetamodel234); 
 
                     createLeafNode(grammarAccess.getReferencedMetamodelAccess().getImportKeyword_0(), null); 
                 
@@ -310,7 +310,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:164:3: lv_alias_1_0= RULE_ID
                     {
                     lv_alias_1_0=(Token)input.LT(1);
-                    match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleReferencedMetamodel252); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleReferencedMetamodel252); 
 
                     			createLeafNode(grammarAccess.getReferencedMetamodelAccess().getAliasIDTerminalRuleCall_1_0_0(), "alias"); 
                     		
@@ -336,7 +336,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    match(input,17,FollowSets000.FOLLOW_17_in_ruleReferencedMetamodel267); 
+                    match(input,17,FOLLOW_17_in_ruleReferencedMetamodel267); 
 
                             createLeafNode(grammarAccess.getReferencedMetamodelAccess().getEqualsSignKeyword_1_1(), null); 
                         
@@ -358,7 +358,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	            associateNodeWithAstElement(currentNode, current);
             	        }
                     
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleReferencedMetamodel287); 
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleReferencedMetamodel287); 
 
             		createLeafNode(grammarAccess.getReferencedMetamodelAccess().getEPackageEPackageCrossReference_2_0(), "ePackage"); 
             	
@@ -368,7 +368,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,18,FollowSets000.FOLLOW_18_in_ruleReferencedMetamodel297); 
+            match(input,18,FOLLOW_18_in_ruleReferencedMetamodel297); 
 
                     createLeafNode(grammarAccess.getReferencedMetamodelAccess().getSemicolonKeyword_3(), null); 
                 
@@ -407,12 +407,12 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:218:2: iv_ruleEPackageDecl= ruleEPackageDecl EOF
             {
              currentNode = createCompositeNode(grammarAccess.getEPackageDeclRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleEPackageDecl_in_entryRuleEPackageDecl333);
+            pushFollow(FOLLOW_ruleEPackageDecl_in_entryRuleEPackageDecl333);
             iv_ruleEPackageDecl=ruleEPackageDecl();
             _fsp--;
 
              current =iv_ruleEPackageDecl; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEPackageDecl343); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEPackageDecl343); 
 
             }
 
@@ -476,7 +476,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getEPackageDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0(), currentNode); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_ruleEPackageDecl389);
+            	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEPackageDecl389);
             	    lv_eAnnotations_0_0=ruleEAnnotationDecl();
             	    _fsp--;
 
@@ -509,7 +509,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            match(input,19,FollowSets000.FOLLOW_19_in_ruleEPackageDecl400); 
+            match(input,19,FOLLOW_19_in_ruleEPackageDecl400); 
 
                     createLeafNode(grammarAccess.getEPackageDeclAccess().getPackageKeyword_1(), null); 
                 
@@ -522,7 +522,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
              
             	        currentNode=createCompositeNode(grammarAccess.getEPackageDeclAccess().getNameQIDParserRuleCall_2_0(), currentNode); 
             	    
-            pushFollow(FollowSets000.FOLLOW_ruleQID_in_ruleEPackageDecl421);
+            pushFollow(FOLLOW_ruleQID_in_ruleEPackageDecl421);
             lv_name_2_0=ruleQID();
             _fsp--;
 
@@ -549,11 +549,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,20,FollowSets000.FOLLOW_20_in_ruleEPackageDecl431); 
+            match(input,20,FOLLOW_20_in_ruleEPackageDecl431); 
 
                     createLeafNode(grammarAccess.getEPackageDeclAccess().getNsURIKeyword_3(), null); 
                 
-            match(input,17,FollowSets000.FOLLOW_17_in_ruleEPackageDecl441); 
+            match(input,17,FOLLOW_17_in_ruleEPackageDecl441); 
 
                     createLeafNode(grammarAccess.getEPackageDeclAccess().getEqualsSignKeyword_4(), null); 
                 
@@ -564,7 +564,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:293:3: lv_nsURI_5_0= RULE_STRING
             {
             lv_nsURI_5_0=(Token)input.LT(1);
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleEPackageDecl458); 
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleEPackageDecl458); 
 
             			createLeafNode(grammarAccess.getEPackageDeclAccess().getNsURISTRINGTerminalRuleCall_5_0(), "nsURI"); 
             		
@@ -590,11 +590,11 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,21,FollowSets000.FOLLOW_21_in_ruleEPackageDecl473); 
+            match(input,21,FOLLOW_21_in_ruleEPackageDecl473); 
 
                     createLeafNode(grammarAccess.getEPackageDeclAccess().getNsPrefixKeyword_6(), null); 
                 
-            match(input,17,FollowSets000.FOLLOW_17_in_ruleEPackageDecl483); 
+            match(input,17,FOLLOW_17_in_ruleEPackageDecl483); 
 
                     createLeafNode(grammarAccess.getEPackageDeclAccess().getEqualsSignKeyword_7(), null); 
                 
@@ -607,7 +607,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
              
             	        currentNode=createCompositeNode(grammarAccess.getEPackageDeclAccess().getNsPrefixQIDParserRuleCall_8_0(), currentNode); 
             	    
-            pushFollow(FollowSets000.FOLLOW_ruleQID_in_ruleEPackageDecl504);
+            pushFollow(FOLLOW_ruleQID_in_ruleEPackageDecl504);
             lv_nsPrefix_8_0=ruleQID();
             _fsp--;
 
@@ -634,7 +634,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,22,FollowSets000.FOLLOW_22_in_ruleEPackageDecl514); 
+            match(input,22,FOLLOW_22_in_ruleEPackageDecl514); 
 
                     createLeafNode(grammarAccess.getEPackageDeclAccess().getLeftCurlyBracketKeyword_9(), null); 
                 
@@ -656,7 +656,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getEPackageDeclAccess().getESubpackagesSubEPackageDeclParserRuleCall_10_0_0(), currentNode); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleSubEPackageDecl_in_ruleEPackageDecl536);
+            	    pushFollow(FOLLOW_ruleSubEPackageDecl_in_ruleEPackageDecl536);
             	    lv_eSubpackages_10_0=ruleSubEPackageDecl();
             	    _fsp--;
 
@@ -698,7 +698,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getEPackageDeclAccess().getEClassifiersEClassifierDeclParserRuleCall_10_1_0(), currentNode); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleEClassifierDecl_in_ruleEPackageDecl563);
+            	    pushFollow(FOLLOW_ruleEClassifierDecl_in_ruleEPackageDecl563);
             	    lv_eClassifiers_11_0=ruleEClassifierDecl();
             	    _fsp--;
 
@@ -734,7 +734,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            match(input,23,FollowSets000.FOLLOW_23_in_ruleEPackageDecl575); 
+            match(input,23,FOLLOW_23_in_ruleEPackageDecl575); 
 
                     createLeafNode(grammarAccess.getEPackageDeclAccess().getRightCurlyBracketKeyword_11(), null); 
                 
@@ -773,12 +773,12 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:414:2: iv_ruleSubEPackageDecl= ruleSubEPackageDecl EOF
             {
              currentNode = createCompositeNode(grammarAccess.getSubEPackageDeclRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleSubEPackageDecl_in_entryRuleSubEPackageDecl611);
+            pushFollow(FOLLOW_ruleSubEPackageDecl_in_entryRuleSubEPackageDecl611);
             iv_ruleSubEPackageDecl=ruleSubEPackageDecl();
             _fsp--;
 
              current =iv_ruleSubEPackageDecl; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSubEPackageDecl621); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSubEPackageDecl621); 
 
             }
 
@@ -838,7 +838,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getSubEPackageDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0(), currentNode); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_ruleSubEPackageDecl667);
+            	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleSubEPackageDecl667);
             	    lv_eAnnotations_0_0=ruleEAnnotationDecl();
             	    _fsp--;
 
@@ -871,7 +871,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            match(input,19,FollowSets000.FOLLOW_19_in_ruleSubEPackageDecl678); 
+            match(input,19,FOLLOW_19_in_ruleSubEPackageDecl678); 
 
                     createLeafNode(grammarAccess.getSubEPackageDeclAccess().getPackageKeyword_1(), null); 
                 
@@ -882,7 +882,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:457:3: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)input.LT(1);
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleSubEPackageDecl695); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleSubEPackageDecl695); 
 
             			createLeafNode(grammarAccess.getSubEPackageDeclAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
             		
@@ -908,7 +908,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,22,FollowSets000.FOLLOW_22_in_ruleSubEPackageDecl710); 
+            match(input,22,FOLLOW_22_in_ruleSubEPackageDecl710); 
 
                     createLeafNode(grammarAccess.getSubEPackageDeclAccess().getLeftCurlyBracketKeyword_3(), null); 
                 
@@ -930,7 +930,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getSubEPackageDeclAccess().getESubpackagesSubEPackageDeclParserRuleCall_4_0_0(), currentNode); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleSubEPackageDecl_in_ruleSubEPackageDecl732);
+            	    pushFollow(FOLLOW_ruleSubEPackageDecl_in_ruleSubEPackageDecl732);
             	    lv_eSubpackages_4_0=ruleSubEPackageDecl();
             	    _fsp--;
 
@@ -972,7 +972,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getSubEPackageDeclAccess().getEClassifiersEClassifierDeclParserRuleCall_4_1_0(), currentNode); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleEClassifierDecl_in_ruleSubEPackageDecl759);
+            	    pushFollow(FOLLOW_ruleEClassifierDecl_in_ruleSubEPackageDecl759);
             	    lv_eClassifiers_5_0=ruleEClassifierDecl();
             	    _fsp--;
 
@@ -1008,7 +1008,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            match(input,23,FollowSets000.FOLLOW_23_in_ruleSubEPackageDecl771); 
+            match(input,23,FOLLOW_23_in_ruleSubEPackageDecl771); 
 
                     createLeafNode(grammarAccess.getSubEPackageDeclAccess().getRightCurlyBracketKeyword_5(), null); 
                 
@@ -1047,12 +1047,12 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:546:2: iv_ruleEClassifierDecl= ruleEClassifierDecl EOF
             {
              currentNode = createCompositeNode(grammarAccess.getEClassifierDeclRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleEClassifierDecl_in_entryRuleEClassifierDecl807);
+            pushFollow(FOLLOW_ruleEClassifierDecl_in_entryRuleEClassifierDecl807);
             iv_ruleEClassifierDecl=ruleEClassifierDecl();
             _fsp--;
 
              current =iv_ruleEClassifierDecl; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEClassifierDecl817); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEClassifierDecl817); 
 
             }
 
@@ -1095,7 +1095,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                      
                             currentNode=createCompositeNode(grammarAccess.getEClassifierDeclAccess().getEClassDeclParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FollowSets000.FOLLOW_ruleEClassDecl_in_ruleEClassifierDecl864);
+                    pushFollow(FOLLOW_ruleEClassDecl_in_ruleEClassifierDecl864);
                     this_EClassDecl_0=ruleEClassDecl();
                     _fsp--;
 
@@ -1112,7 +1112,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                      
                             currentNode=createCompositeNode(grammarAccess.getEClassifierDeclAccess().getEDataTypeDeclParserRuleCall_1(), currentNode); 
                         
-                    pushFollow(FollowSets000.FOLLOW_ruleEDataTypeDecl_in_ruleEClassifierDecl891);
+                    pushFollow(FOLLOW_ruleEDataTypeDecl_in_ruleEClassifierDecl891);
                     this_EDataTypeDecl_1=ruleEDataTypeDecl();
                     _fsp--;
 
@@ -1158,12 +1158,12 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:588:2: iv_ruleEDataTypeDecl= ruleEDataTypeDecl EOF
             {
              currentNode = createCompositeNode(grammarAccess.getEDataTypeDeclRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleEDataTypeDecl_in_entryRuleEDataTypeDecl926);
+            pushFollow(FOLLOW_ruleEDataTypeDecl_in_entryRuleEDataTypeDecl926);
             iv_ruleEDataTypeDecl=ruleEDataTypeDecl();
             _fsp--;
 
              current =iv_ruleEDataTypeDecl; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEDataTypeDecl936); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEDataTypeDecl936); 
 
             }
 
@@ -1231,7 +1231,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        currentNode=createCompositeNode(grammarAccess.getEDataTypeDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_ruleEDataTypeDecl983);
+                    	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEDataTypeDecl983);
                     	    lv_eAnnotations_0_0=ruleEAnnotationDecl();
                     	    _fsp--;
 
@@ -1279,7 +1279,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:627:3: lv_serializable_1_0= RULE_SERIALIZABLE
                             {
                             lv_serializable_1_0=(Token)input.LT(1);
-                            match(input,RULE_SERIALIZABLE,FollowSets000.FOLLOW_RULE_SERIALIZABLE_in_ruleEDataTypeDecl1001); 
+                            match(input,RULE_SERIALIZABLE,FOLLOW_RULE_SERIALIZABLE_in_ruleEDataTypeDecl1001); 
 
                             			createLeafNode(grammarAccess.getEDataTypeDeclAccess().getSerializableSerializableTerminalRuleCall_0_1_0(), "serializable"); 
                             		
@@ -1311,7 +1311,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:649:3: ( 'datatype' ( (lv_name_3_0= RULE_ID ) ) ':' ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) ) ';' )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:649:5: 'datatype' ( (lv_name_3_0= RULE_ID ) ) ':' ( (lv_instanceClassName_5_0= ruleSTRING_OR_QID ) ) ';'
                     {
-                    match(input,24,FollowSets000.FOLLOW_24_in_ruleEDataTypeDecl1018); 
+                    match(input,24,FOLLOW_24_in_ruleEDataTypeDecl1018); 
 
                             createLeafNode(grammarAccess.getEDataTypeDeclAccess().getDatatypeKeyword_0_2_0(), null); 
                         
@@ -1322,7 +1322,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:655:3: lv_name_3_0= RULE_ID
                     {
                     lv_name_3_0=(Token)input.LT(1);
-                    match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEDataTypeDecl1035); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEDataTypeDecl1035); 
 
                     			createLeafNode(grammarAccess.getEDataTypeDeclAccess().getNameIDTerminalRuleCall_0_2_1_0(), "name"); 
                     		
@@ -1348,7 +1348,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    match(input,25,FollowSets000.FOLLOW_25_in_ruleEDataTypeDecl1050); 
+                    match(input,25,FOLLOW_25_in_ruleEDataTypeDecl1050); 
 
                             createLeafNode(grammarAccess.getEDataTypeDeclAccess().getColonKeyword_0_2_2(), null); 
                         
@@ -1361,7 +1361,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getEDataTypeDeclAccess().getInstanceClassNameSTRING_OR_QIDParserRuleCall_0_2_3_0(), currentNode); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleSTRING_OR_QID_in_ruleEDataTypeDecl1071);
+                    pushFollow(FOLLOW_ruleSTRING_OR_QID_in_ruleEDataTypeDecl1071);
                     lv_instanceClassName_5_0=ruleSTRING_OR_QID();
                     _fsp--;
 
@@ -1388,7 +1388,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    match(input,18,FollowSets000.FOLLOW_18_in_ruleEDataTypeDecl1081); 
+                    match(input,18,FOLLOW_18_in_ruleEDataTypeDecl1081); 
 
                             createLeafNode(grammarAccess.getEDataTypeDeclAccess().getSemicolonKeyword_0_2_4(), null); 
                         
@@ -1407,7 +1407,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                      
                             currentNode=createCompositeNode(grammarAccess.getEDataTypeDeclAccess().getEEnumDeclParserRuleCall_1(), currentNode); 
                         
-                    pushFollow(FollowSets000.FOLLOW_ruleEEnumDecl_in_ruleEDataTypeDecl1111);
+                    pushFollow(FOLLOW_ruleEEnumDecl_in_ruleEDataTypeDecl1111);
                     this_EEnumDecl_7=ruleEEnumDecl();
                     _fsp--;
 
@@ -1453,12 +1453,12 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:729:2: iv_ruleEAnnotationDecl= ruleEAnnotationDecl EOF
             {
              currentNode = createCompositeNode(grammarAccess.getEAnnotationDeclRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_entryRuleEAnnotationDecl1146);
+            pushFollow(FOLLOW_ruleEAnnotationDecl_in_entryRuleEAnnotationDecl1146);
             iv_ruleEAnnotationDecl=ruleEAnnotationDecl();
             _fsp--;
 
              current =iv_ruleEAnnotationDecl; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEAnnotationDecl1156); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEAnnotationDecl1156); 
 
             }
 
@@ -1496,7 +1496,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:742:1: ( '@' ( (lv_source_1_0= ruleSTRING_OR_QID ) ) ( '(' ( (lv_details_3_0= ruleMapEntry ) ) ( ',' ( (lv_details_5_0= ruleMapEntry ) ) )* ')' )? )
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:742:3: '@' ( (lv_source_1_0= ruleSTRING_OR_QID ) ) ( '(' ( (lv_details_3_0= ruleMapEntry ) ) ( ',' ( (lv_details_5_0= ruleMapEntry ) ) )* ')' )?
             {
-            match(input,26,FollowSets000.FOLLOW_26_in_ruleEAnnotationDecl1191); 
+            match(input,26,FOLLOW_26_in_ruleEAnnotationDecl1191); 
 
                     createLeafNode(grammarAccess.getEAnnotationDeclAccess().getCommercialAtKeyword_0(), null); 
                 
@@ -1509,7 +1509,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
              
             	        currentNode=createCompositeNode(grammarAccess.getEAnnotationDeclAccess().getSourceSTRING_OR_QIDParserRuleCall_1_0(), currentNode); 
             	    
-            pushFollow(FollowSets000.FOLLOW_ruleSTRING_OR_QID_in_ruleEAnnotationDecl1212);
+            pushFollow(FOLLOW_ruleSTRING_OR_QID_in_ruleEAnnotationDecl1212);
             lv_source_1_0=ruleSTRING_OR_QID();
             _fsp--;
 
@@ -1547,7 +1547,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:770:4: '(' ( (lv_details_3_0= ruleMapEntry ) ) ( ',' ( (lv_details_5_0= ruleMapEntry ) ) )* ')'
                     {
-                    match(input,27,FollowSets000.FOLLOW_27_in_ruleEAnnotationDecl1223); 
+                    match(input,27,FOLLOW_27_in_ruleEAnnotationDecl1223); 
 
                             createLeafNode(grammarAccess.getEAnnotationDeclAccess().getLeftParenthesisKeyword_2_0(), null); 
                         
@@ -1560,7 +1560,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getEAnnotationDeclAccess().getDetailsMapEntryParserRuleCall_2_1_0(), currentNode); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleMapEntry_in_ruleEAnnotationDecl1244);
+                    pushFollow(FOLLOW_ruleMapEntry_in_ruleEAnnotationDecl1244);
                     lv_details_3_0=ruleMapEntry();
                     _fsp--;
 
@@ -1602,7 +1602,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:798:4: ',' ( (lv_details_5_0= ruleMapEntry ) )
                     	    {
-                    	    match(input,28,FollowSets000.FOLLOW_28_in_ruleEAnnotationDecl1255); 
+                    	    match(input,28,FOLLOW_28_in_ruleEAnnotationDecl1255); 
 
                     	            createLeafNode(grammarAccess.getEAnnotationDeclAccess().getCommaKeyword_2_2_0(), null); 
                     	        
@@ -1615,7 +1615,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        currentNode=createCompositeNode(grammarAccess.getEAnnotationDeclAccess().getDetailsMapEntryParserRuleCall_2_2_1_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FollowSets000.FOLLOW_ruleMapEntry_in_ruleEAnnotationDecl1276);
+                    	    pushFollow(FOLLOW_ruleMapEntry_in_ruleEAnnotationDecl1276);
                     	    lv_details_5_0=ruleMapEntry();
                     	    _fsp--;
 
@@ -1651,7 +1651,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    match(input,29,FollowSets000.FOLLOW_29_in_ruleEAnnotationDecl1288); 
+                    match(input,29,FOLLOW_29_in_ruleEAnnotationDecl1288); 
 
                             createLeafNode(grammarAccess.getEAnnotationDeclAccess().getRightParenthesisKeyword_2_3(), null); 
                         
@@ -1696,12 +1696,12 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:840:2: iv_ruleEClassDecl= ruleEClassDecl EOF
             {
              currentNode = createCompositeNode(grammarAccess.getEClassDeclRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleEClassDecl_in_entryRuleEClassDecl1326);
+            pushFollow(FOLLOW_ruleEClassDecl_in_entryRuleEClassDecl1326);
             iv_ruleEClassDecl=ruleEClassDecl();
             _fsp--;
 
              current =iv_ruleEClassDecl; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEClassDecl1336); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEClassDecl1336); 
 
             }
 
@@ -1773,7 +1773,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getEClassDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0(), currentNode); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_ruleEClassDecl1382);
+            	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEClassDecl1382);
             	    lv_eAnnotations_0_0=ruleEAnnotationDecl();
             	    _fsp--;
 
@@ -1821,7 +1821,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:879:3: lv_abstract_1_0= 'abstract'
                     {
                     lv_abstract_1_0=(Token)input.LT(1);
-                    match(input,30,FollowSets000.FOLLOW_30_in_ruleEClassDecl1401); 
+                    match(input,30,FOLLOW_30_in_ruleEClassDecl1401); 
 
                             createLeafNode(grammarAccess.getEClassDeclAccess().getAbstractAbstractKeyword_1_0(), "abstract"); 
                         
@@ -1873,7 +1873,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:900:3: lv_interface_2_0= 'interface'
                     {
                     lv_interface_2_0=(Token)input.LT(1);
-                    match(input,31,FollowSets000.FOLLOW_31_in_ruleEClassDecl1434); 
+                    match(input,31,FOLLOW_31_in_ruleEClassDecl1434); 
 
                             createLeafNode(grammarAccess.getEClassDeclAccess().getInterfaceInterfaceKeyword_2_0_0(), "interface"); 
                         
@@ -1901,7 +1901,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:920:7: 'class'
                     {
-                    match(input,32,FollowSets000.FOLLOW_32_in_ruleEClassDecl1463); 
+                    match(input,32,FOLLOW_32_in_ruleEClassDecl1463); 
 
                             createLeafNode(grammarAccess.getEClassDeclAccess().getClassKeyword_2_1(), null); 
                         
@@ -1918,7 +1918,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:926:3: lv_name_4_0= RULE_ID
             {
             lv_name_4_0=(Token)input.LT(1);
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEClassDecl1481); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEClassDecl1481); 
 
             			createLeafNode(grammarAccess.getEClassDeclAccess().getNameIDTerminalRuleCall_3_0(), "name"); 
             		
@@ -1955,7 +1955,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:948:4: '<' ( (lv_eTypeParameters_6_0= ruleETypeParameterDecl ) ) ( ',' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) )* '>'
                     {
-                    match(input,33,FollowSets000.FOLLOW_33_in_ruleEClassDecl1497); 
+                    match(input,33,FOLLOW_33_in_ruleEClassDecl1497); 
 
                             createLeafNode(grammarAccess.getEClassDeclAccess().getLessThanSignKeyword_4_0(), null); 
                         
@@ -1968,7 +1968,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getEClassDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_4_1_0(), currentNode); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleETypeParameterDecl_in_ruleEClassDecl1518);
+                    pushFollow(FOLLOW_ruleETypeParameterDecl_in_ruleEClassDecl1518);
                     lv_eTypeParameters_6_0=ruleETypeParameterDecl();
                     _fsp--;
 
@@ -2010,7 +2010,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:976:4: ',' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) )
                     	    {
-                    	    match(input,28,FollowSets000.FOLLOW_28_in_ruleEClassDecl1529); 
+                    	    match(input,28,FOLLOW_28_in_ruleEClassDecl1529); 
 
                     	            createLeafNode(grammarAccess.getEClassDeclAccess().getCommaKeyword_4_2_0(), null); 
                     	        
@@ -2023,7 +2023,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        currentNode=createCompositeNode(grammarAccess.getEClassDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_4_2_1_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FollowSets000.FOLLOW_ruleETypeParameterDecl_in_ruleEClassDecl1550);
+                    	    pushFollow(FOLLOW_ruleETypeParameterDecl_in_ruleEClassDecl1550);
                     	    lv_eTypeParameters_8_0=ruleETypeParameterDecl();
                     	    _fsp--;
 
@@ -2059,7 +2059,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    match(input,34,FollowSets000.FOLLOW_34_in_ruleEClassDecl1562); 
+                    match(input,34,FOLLOW_34_in_ruleEClassDecl1562); 
 
                             createLeafNode(grammarAccess.getEClassDeclAccess().getGreaterThanSignKeyword_4_3(), null); 
                         
@@ -2080,7 +2080,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1008:5: 'extends' ( (lv_eGenericSuperTypes_11_0= ruleEGenericTypeReferenceDecl ) ) ( ',' ( (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl ) ) )*
                     {
-                    match(input,35,FollowSets000.FOLLOW_35_in_ruleEClassDecl1575); 
+                    match(input,35,FOLLOW_35_in_ruleEClassDecl1575); 
 
                             createLeafNode(grammarAccess.getEClassDeclAccess().getExtendsKeyword_5_0(), null); 
                         
@@ -2093,7 +2093,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getEClassDeclAccess().getEGenericSuperTypesEGenericTypeReferenceDeclParserRuleCall_5_1_0(), currentNode); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEClassDecl1596);
+                    pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEClassDecl1596);
                     lv_eGenericSuperTypes_11_0=ruleEGenericTypeReferenceDecl();
                     _fsp--;
 
@@ -2135,7 +2135,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1036:4: ',' ( (lv_eGenericSuperTypes_13_0= ruleEGenericTypeReferenceDecl ) )
                     	    {
-                    	    match(input,28,FollowSets000.FOLLOW_28_in_ruleEClassDecl1607); 
+                    	    match(input,28,FOLLOW_28_in_ruleEClassDecl1607); 
 
                     	            createLeafNode(grammarAccess.getEClassDeclAccess().getCommaKeyword_5_2_0(), null); 
                     	        
@@ -2148,7 +2148,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        currentNode=createCompositeNode(grammarAccess.getEClassDeclAccess().getEGenericSuperTypesEGenericTypeReferenceDeclParserRuleCall_5_2_1_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEClassDecl1628);
+                    	    pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEClassDecl1628);
                     	    lv_eGenericSuperTypes_13_0=ruleEGenericTypeReferenceDecl();
                     	    _fsp--;
 
@@ -2201,7 +2201,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1064:8: ':' ( (lv_instanceClassName_15_0= ruleSTRING_OR_QID ) )
                     {
-                    match(input,25,FollowSets000.FOLLOW_25_in_ruleEClassDecl1643); 
+                    match(input,25,FOLLOW_25_in_ruleEClassDecl1643); 
 
                             createLeafNode(grammarAccess.getEClassDeclAccess().getColonKeyword_6_0(), null); 
                         
@@ -2214,7 +2214,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getEClassDeclAccess().getInstanceClassNameSTRING_OR_QIDParserRuleCall_6_1_0(), currentNode); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleSTRING_OR_QID_in_ruleEClassDecl1664);
+                    pushFollow(FOLLOW_ruleSTRING_OR_QID_in_ruleEClassDecl1664);
                     lv_instanceClassName_15_0=ruleSTRING_OR_QID();
                     _fsp--;
 
@@ -2247,7 +2247,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,22,FollowSets000.FOLLOW_22_in_ruleEClassDecl1676); 
+            match(input,22,FOLLOW_22_in_ruleEClassDecl1676); 
 
                     createLeafNode(grammarAccess.getEClassDeclAccess().getLeftCurlyBracketKeyword_7(), null); 
                 
@@ -2269,7 +2269,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getEClassDeclAccess().getEStructuralFeaturesEStructuralFeatureDeclParserRuleCall_8_0_0(), currentNode); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleEStructuralFeatureDecl_in_ruleEClassDecl1698);
+            	    pushFollow(FOLLOW_ruleEStructuralFeatureDecl_in_ruleEClassDecl1698);
             	    lv_eStructuralFeatures_17_0=ruleEStructuralFeatureDecl();
             	    _fsp--;
 
@@ -2311,7 +2311,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getEClassDeclAccess().getEOperationsEOperationDeclParserRuleCall_8_1_0(), currentNode); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleEOperationDecl_in_ruleEClassDecl1725);
+            	    pushFollow(FOLLOW_ruleEOperationDecl_in_ruleEClassDecl1725);
             	    lv_eOperations_18_0=ruleEOperationDecl();
             	    _fsp--;
 
@@ -2347,7 +2347,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            match(input,23,FollowSets000.FOLLOW_23_in_ruleEClassDecl1737); 
+            match(input,23,FOLLOW_23_in_ruleEClassDecl1737); 
 
                     createLeafNode(grammarAccess.getEClassDeclAccess().getRightCurlyBracketKeyword_9(), null); 
                 
@@ -2386,12 +2386,12 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1159:2: iv_ruleEStructuralFeatureDecl= ruleEStructuralFeatureDecl EOF
             {
              currentNode = createCompositeNode(grammarAccess.getEStructuralFeatureDeclRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleEStructuralFeatureDecl_in_entryRuleEStructuralFeatureDecl1773);
+            pushFollow(FOLLOW_ruleEStructuralFeatureDecl_in_entryRuleEStructuralFeatureDecl1773);
             iv_ruleEStructuralFeatureDecl=ruleEStructuralFeatureDecl();
             _fsp--;
 
              current =iv_ruleEStructuralFeatureDecl; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEStructuralFeatureDecl1783); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEStructuralFeatureDecl1783); 
 
             }
 
@@ -2434,7 +2434,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                      
                             currentNode=createCompositeNode(grammarAccess.getEStructuralFeatureDeclAccess().getEAttributeDeclParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FollowSets000.FOLLOW_ruleEAttributeDecl_in_ruleEStructuralFeatureDecl1830);
+                    pushFollow(FOLLOW_ruleEAttributeDecl_in_ruleEStructuralFeatureDecl1830);
                     this_EAttributeDecl_0=ruleEAttributeDecl();
                     _fsp--;
 
@@ -2451,7 +2451,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                      
                             currentNode=createCompositeNode(grammarAccess.getEStructuralFeatureDeclAccess().getEReferenceDeclParserRuleCall_1(), currentNode); 
                         
-                    pushFollow(FollowSets000.FOLLOW_ruleEReferenceDecl_in_ruleEStructuralFeatureDecl1857);
+                    pushFollow(FOLLOW_ruleEReferenceDecl_in_ruleEStructuralFeatureDecl1857);
                     this_EReferenceDecl_1=ruleEReferenceDecl();
                     _fsp--;
 
@@ -2497,12 +2497,12 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1201:2: iv_ruleEAttributeDecl= ruleEAttributeDecl EOF
             {
              currentNode = createCompositeNode(grammarAccess.getEAttributeDeclRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleEAttributeDecl_in_entryRuleEAttributeDecl1892);
+            pushFollow(FOLLOW_ruleEAttributeDecl_in_entryRuleEAttributeDecl1892);
             iv_ruleEAttributeDecl=ruleEAttributeDecl();
             _fsp--;
 
              current =iv_ruleEAttributeDecl; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEAttributeDecl1902); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEAttributeDecl1902); 
 
             }
 
@@ -2572,7 +2572,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getEAttributeDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0(), currentNode); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_ruleEAttributeDecl1948);
+            	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEAttributeDecl1948);
             	    lv_eAnnotations_0_0=ruleEAnnotationDecl();
             	    _fsp--;
 
@@ -2664,7 +2664,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1240:3: lv_iD_1_0= 'ID'
             	    {
             	    lv_iD_1_0=(Token)input.LT(1);
-            	    match(input,36,FollowSets000.FOLLOW_36_in_ruleEAttributeDecl1968); 
+            	    match(input,36,FOLLOW_36_in_ruleEAttributeDecl1968); 
 
             	            createLeafNode(grammarAccess.getEAttributeDeclAccess().getIDIDKeyword_1_0_0(), "iD"); 
             	        
@@ -2699,7 +2699,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1262:3: lv_unique_2_0= RULE_BAG
             	    {
             	    lv_unique_2_0=(Token)input.LT(1);
-            	    match(input,RULE_BAG,FollowSets000.FOLLOW_RULE_BAG_in_ruleEAttributeDecl2004); 
+            	    match(input,RULE_BAG,FOLLOW_RULE_BAG_in_ruleEAttributeDecl2004); 
 
             	    			createLeafNode(grammarAccess.getEAttributeDeclAccess().getUniqueBagTerminalRuleCall_1_1_0(), "unique"); 
             	    		
@@ -2738,7 +2738,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1287:3: lv_ordered_3_0= RULE_RANDOM
             	    {
             	    lv_ordered_3_0=(Token)input.LT(1);
-            	    match(input,RULE_RANDOM,FollowSets000.FOLLOW_RULE_RANDOM_in_ruleEAttributeDecl2032); 
+            	    match(input,RULE_RANDOM,FOLLOW_RULE_RANDOM_in_ruleEAttributeDecl2032); 
 
             	    			createLeafNode(grammarAccess.getEAttributeDeclAccess().getOrderedRandomTerminalRuleCall_1_2_0(), "ordered"); 
             	    		
@@ -2777,7 +2777,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1312:3: lv_changeable_4_0= RULE_READONLY
             	    {
             	    lv_changeable_4_0=(Token)input.LT(1);
-            	    match(input,RULE_READONLY,FollowSets000.FOLLOW_RULE_READONLY_in_ruleEAttributeDecl2060); 
+            	    match(input,RULE_READONLY,FOLLOW_RULE_READONLY_in_ruleEAttributeDecl2060); 
 
             	    			createLeafNode(grammarAccess.getEAttributeDeclAccess().getChangeableReadonlyTerminalRuleCall_1_3_0(), "changeable"); 
             	    		
@@ -2816,7 +2816,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1337:3: lv_volatile_5_0= 'volatile'
             	    {
             	    lv_volatile_5_0=(Token)input.LT(1);
-            	    match(input,37,FollowSets000.FOLLOW_37_in_ruleEAttributeDecl2089); 
+            	    match(input,37,FOLLOW_37_in_ruleEAttributeDecl2089); 
 
             	            createLeafNode(grammarAccess.getEAttributeDeclAccess().getVolatileVolatileKeyword_1_4_0(), "volatile"); 
             	        
@@ -2851,7 +2851,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1359:3: lv_transient_6_0= 'transient'
             	    {
             	    lv_transient_6_0=(Token)input.LT(1);
-            	    match(input,38,FollowSets000.FOLLOW_38_in_ruleEAttributeDecl2126); 
+            	    match(input,38,FOLLOW_38_in_ruleEAttributeDecl2126); 
 
             	            createLeafNode(grammarAccess.getEAttributeDeclAccess().getTransientTransientKeyword_1_5_0(), "transient"); 
             	        
@@ -2886,7 +2886,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1381:3: lv_unsettable_7_0= 'unsettable'
             	    {
             	    lv_unsettable_7_0=(Token)input.LT(1);
-            	    match(input,39,FollowSets000.FOLLOW_39_in_ruleEAttributeDecl2163); 
+            	    match(input,39,FOLLOW_39_in_ruleEAttributeDecl2163); 
 
             	            createLeafNode(grammarAccess.getEAttributeDeclAccess().getUnsettableUnsettableKeyword_1_6_0(), "unsettable"); 
             	        
@@ -2921,7 +2921,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1403:3: lv_derived_8_0= 'derived'
             	    {
             	    lv_derived_8_0=(Token)input.LT(1);
-            	    match(input,40,FollowSets000.FOLLOW_40_in_ruleEAttributeDecl2200); 
+            	    match(input,40,FOLLOW_40_in_ruleEAttributeDecl2200); 
 
             	            createLeafNode(grammarAccess.getEAttributeDeclAccess().getDerivedDerivedKeyword_1_7_0(), "derived"); 
             	        
@@ -2952,7 +2952,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            match(input,41,FollowSets000.FOLLOW_41_in_ruleEAttributeDecl2225); 
+            match(input,41,FOLLOW_41_in_ruleEAttributeDecl2225); 
 
                     createLeafNode(grammarAccess.getEAttributeDeclAccess().getAttrKeyword_2(), null); 
                 
@@ -2965,7 +2965,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
              
             	        currentNode=createCompositeNode(grammarAccess.getEAttributeDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0(), currentNode); 
             	    
-            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEAttributeDecl2246);
+            pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEAttributeDecl2246);
             lv_eGenericType_10_0=ruleEGenericTypeReferenceDecl();
             _fsp--;
 
@@ -3003,7 +3003,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1450:4: '[' ( (lv_lowerBound_12_0= RULE_INT ) ) ( '..' ( (lv_upperBound_14_0= ruleSINT ) ) )? ']'
                     {
-                    match(input,42,FollowSets000.FOLLOW_42_in_ruleEAttributeDecl2257); 
+                    match(input,42,FOLLOW_42_in_ruleEAttributeDecl2257); 
 
                             createLeafNode(grammarAccess.getEAttributeDeclAccess().getLeftSquareBracketKeyword_4_0(), null); 
                         
@@ -3014,7 +3014,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1456:3: lv_lowerBound_12_0= RULE_INT
                     {
                     lv_lowerBound_12_0=(Token)input.LT(1);
-                    match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleEAttributeDecl2274); 
+                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleEAttributeDecl2274); 
 
                     			createLeafNode(grammarAccess.getEAttributeDeclAccess().getLowerBoundINTTerminalRuleCall_4_1_0(), "lowerBound"); 
                     		
@@ -3051,7 +3051,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1478:4: '..' ( (lv_upperBound_14_0= ruleSINT ) )
                             {
-                            match(input,43,FollowSets000.FOLLOW_43_in_ruleEAttributeDecl2290); 
+                            match(input,43,FOLLOW_43_in_ruleEAttributeDecl2290); 
 
                                     createLeafNode(grammarAccess.getEAttributeDeclAccess().getFullStopFullStopKeyword_4_2_0(), null); 
                                 
@@ -3064,7 +3064,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                              
                             	        currentNode=createCompositeNode(grammarAccess.getEAttributeDeclAccess().getUpperBoundSINTParserRuleCall_4_2_1_0(), currentNode); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_ruleSINT_in_ruleEAttributeDecl2311);
+                            pushFollow(FOLLOW_ruleSINT_in_ruleEAttributeDecl2311);
                             lv_upperBound_14_0=ruleSINT();
                             _fsp--;
 
@@ -3097,7 +3097,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    match(input,44,FollowSets000.FOLLOW_44_in_ruleEAttributeDecl2323); 
+                    match(input,44,FOLLOW_44_in_ruleEAttributeDecl2323); 
 
                             createLeafNode(grammarAccess.getEAttributeDeclAccess().getRightSquareBracketKeyword_4_3(), null); 
                         
@@ -3114,7 +3114,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1512:3: lv_name_16_0= RULE_ID
             {
             lv_name_16_0=(Token)input.LT(1);
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEAttributeDecl2342); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEAttributeDecl2342); 
 
             			createLeafNode(grammarAccess.getEAttributeDeclAccess().getNameIDTerminalRuleCall_5_0(), "name"); 
             		
@@ -3151,7 +3151,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1534:4: '=' ( (lv_defaultValueLiteral_18_0= RULE_STRING ) )
                     {
-                    match(input,17,FollowSets000.FOLLOW_17_in_ruleEAttributeDecl2358); 
+                    match(input,17,FOLLOW_17_in_ruleEAttributeDecl2358); 
 
                             createLeafNode(grammarAccess.getEAttributeDeclAccess().getEqualsSignKeyword_6_0(), null); 
                         
@@ -3162,7 +3162,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1540:3: lv_defaultValueLiteral_18_0= RULE_STRING
                     {
                     lv_defaultValueLiteral_18_0=(Token)input.LT(1);
-                    match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleEAttributeDecl2375); 
+                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleEAttributeDecl2375); 
 
                     			createLeafNode(grammarAccess.getEAttributeDeclAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_6_1_0(), "defaultValueLiteral"); 
                     		
@@ -3194,7 +3194,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,18,FollowSets000.FOLLOW_18_in_ruleEAttributeDecl2392); 
+            match(input,18,FOLLOW_18_in_ruleEAttributeDecl2392); 
 
                     createLeafNode(grammarAccess.getEAttributeDeclAccess().getSemicolonKeyword_7(), null); 
                 
@@ -3233,12 +3233,12 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1576:2: iv_ruleEReferenceDecl= ruleEReferenceDecl EOF
             {
              currentNode = createCompositeNode(grammarAccess.getEReferenceDeclRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleEReferenceDecl_in_entryRuleEReferenceDecl2428);
+            pushFollow(FOLLOW_ruleEReferenceDecl_in_entryRuleEReferenceDecl2428);
             iv_ruleEReferenceDecl=ruleEReferenceDecl();
             _fsp--;
 
              current =iv_ruleEReferenceDecl; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEReferenceDecl2438); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEReferenceDecl2438); 
 
             }
 
@@ -3308,7 +3308,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getEReferenceDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0(), currentNode); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_ruleEReferenceDecl2484);
+            	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEReferenceDecl2484);
             	    lv_eAnnotations_0_0=ruleEAnnotationDecl();
             	    _fsp--;
 
@@ -3400,7 +3400,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1615:3: lv_resolveProxies_1_0= RULE_LOCAL
             	    {
             	    lv_resolveProxies_1_0=(Token)input.LT(1);
-            	    match(input,RULE_LOCAL,FollowSets000.FOLLOW_RULE_LOCAL_in_ruleEReferenceDecl2503); 
+            	    match(input,RULE_LOCAL,FOLLOW_RULE_LOCAL_in_ruleEReferenceDecl2503); 
 
             	    			createLeafNode(grammarAccess.getEReferenceDeclAccess().getResolveProxiesLocalTerminalRuleCall_1_0_0(), "resolveProxies"); 
             	    		
@@ -3439,7 +3439,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1640:3: lv_unique_2_0= RULE_BAG
             	    {
             	    lv_unique_2_0=(Token)input.LT(1);
-            	    match(input,RULE_BAG,FollowSets000.FOLLOW_RULE_BAG_in_ruleEReferenceDecl2531); 
+            	    match(input,RULE_BAG,FOLLOW_RULE_BAG_in_ruleEReferenceDecl2531); 
 
             	    			createLeafNode(grammarAccess.getEReferenceDeclAccess().getUniqueBagTerminalRuleCall_1_1_0(), "unique"); 
             	    		
@@ -3478,7 +3478,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1665:3: lv_ordered_3_0= RULE_RANDOM
             	    {
             	    lv_ordered_3_0=(Token)input.LT(1);
-            	    match(input,RULE_RANDOM,FollowSets000.FOLLOW_RULE_RANDOM_in_ruleEReferenceDecl2559); 
+            	    match(input,RULE_RANDOM,FOLLOW_RULE_RANDOM_in_ruleEReferenceDecl2559); 
 
             	    			createLeafNode(grammarAccess.getEReferenceDeclAccess().getOrderedRandomTerminalRuleCall_1_2_0(), "ordered"); 
             	    		
@@ -3517,7 +3517,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1690:3: lv_changeable_4_0= RULE_READONLY
             	    {
             	    lv_changeable_4_0=(Token)input.LT(1);
-            	    match(input,RULE_READONLY,FollowSets000.FOLLOW_RULE_READONLY_in_ruleEReferenceDecl2587); 
+            	    match(input,RULE_READONLY,FOLLOW_RULE_READONLY_in_ruleEReferenceDecl2587); 
 
             	    			createLeafNode(grammarAccess.getEReferenceDeclAccess().getChangeableReadonlyTerminalRuleCall_1_3_0(), "changeable"); 
             	    		
@@ -3556,7 +3556,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1715:3: lv_volatile_5_0= 'volatile'
             	    {
             	    lv_volatile_5_0=(Token)input.LT(1);
-            	    match(input,37,FollowSets000.FOLLOW_37_in_ruleEReferenceDecl2616); 
+            	    match(input,37,FOLLOW_37_in_ruleEReferenceDecl2616); 
 
             	            createLeafNode(grammarAccess.getEReferenceDeclAccess().getVolatileVolatileKeyword_1_4_0(), "volatile"); 
             	        
@@ -3591,7 +3591,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1737:3: lv_transient_6_0= 'transient'
             	    {
             	    lv_transient_6_0=(Token)input.LT(1);
-            	    match(input,38,FollowSets000.FOLLOW_38_in_ruleEReferenceDecl2653); 
+            	    match(input,38,FOLLOW_38_in_ruleEReferenceDecl2653); 
 
             	            createLeafNode(grammarAccess.getEReferenceDeclAccess().getTransientTransientKeyword_1_5_0(), "transient"); 
             	        
@@ -3626,7 +3626,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1759:3: lv_unsettable_7_0= 'unsettable'
             	    {
             	    lv_unsettable_7_0=(Token)input.LT(1);
-            	    match(input,39,FollowSets000.FOLLOW_39_in_ruleEReferenceDecl2690); 
+            	    match(input,39,FOLLOW_39_in_ruleEReferenceDecl2690); 
 
             	            createLeafNode(grammarAccess.getEReferenceDeclAccess().getUnsettableUnsettableKeyword_1_6_0(), "unsettable"); 
             	        
@@ -3661,7 +3661,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1781:3: lv_derived_8_0= 'derived'
             	    {
             	    lv_derived_8_0=(Token)input.LT(1);
-            	    match(input,40,FollowSets000.FOLLOW_40_in_ruleEReferenceDecl2727); 
+            	    match(input,40,FOLLOW_40_in_ruleEReferenceDecl2727); 
 
             	            createLeafNode(grammarAccess.getEReferenceDeclAccess().getDerivedDerivedKeyword_1_7_0(), "derived"); 
             	        
@@ -3719,7 +3719,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1802:3: lv_containment_9_0= 'val'
                     {
                     lv_containment_9_0=(Token)input.LT(1);
-                    match(input,45,FollowSets000.FOLLOW_45_in_ruleEReferenceDecl2761); 
+                    match(input,45,FOLLOW_45_in_ruleEReferenceDecl2761); 
 
                             createLeafNode(grammarAccess.getEReferenceDeclAccess().getContainmentValKeyword_2_0_0(), "containment"); 
                         
@@ -3747,7 +3747,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1822:7: 'ref'
                     {
-                    match(input,46,FollowSets000.FOLLOW_46_in_ruleEReferenceDecl2790); 
+                    match(input,46,FOLLOW_46_in_ruleEReferenceDecl2790); 
 
                             createLeafNode(grammarAccess.getEReferenceDeclAccess().getRefKeyword_2_1(), null); 
                         
@@ -3766,7 +3766,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
              
             	        currentNode=createCompositeNode(grammarAccess.getEReferenceDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0(), currentNode); 
             	    
-            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEReferenceDecl2812);
+            pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEReferenceDecl2812);
             lv_eGenericType_11_0=ruleEGenericTypeReferenceDecl();
             _fsp--;
 
@@ -3804,7 +3804,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1850:4: '[' ( (lv_lowerBound_13_0= RULE_INT ) ) ( '..' ( (lv_upperBound_15_0= ruleSINT ) ) )? ']'
                     {
-                    match(input,42,FollowSets000.FOLLOW_42_in_ruleEReferenceDecl2823); 
+                    match(input,42,FOLLOW_42_in_ruleEReferenceDecl2823); 
 
                             createLeafNode(grammarAccess.getEReferenceDeclAccess().getLeftSquareBracketKeyword_4_0(), null); 
                         
@@ -3815,7 +3815,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1856:3: lv_lowerBound_13_0= RULE_INT
                     {
                     lv_lowerBound_13_0=(Token)input.LT(1);
-                    match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleEReferenceDecl2840); 
+                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleEReferenceDecl2840); 
 
                     			createLeafNode(grammarAccess.getEReferenceDeclAccess().getLowerBoundINTTerminalRuleCall_4_1_0(), "lowerBound"); 
                     		
@@ -3852,7 +3852,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1878:4: '..' ( (lv_upperBound_15_0= ruleSINT ) )
                             {
-                            match(input,43,FollowSets000.FOLLOW_43_in_ruleEReferenceDecl2856); 
+                            match(input,43,FOLLOW_43_in_ruleEReferenceDecl2856); 
 
                                     createLeafNode(grammarAccess.getEReferenceDeclAccess().getFullStopFullStopKeyword_4_2_0(), null); 
                                 
@@ -3865,7 +3865,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                              
                             	        currentNode=createCompositeNode(grammarAccess.getEReferenceDeclAccess().getUpperBoundSINTParserRuleCall_4_2_1_0(), currentNode); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_ruleSINT_in_ruleEReferenceDecl2877);
+                            pushFollow(FOLLOW_ruleSINT_in_ruleEReferenceDecl2877);
                             lv_upperBound_15_0=ruleSINT();
                             _fsp--;
 
@@ -3898,7 +3898,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    match(input,44,FollowSets000.FOLLOW_44_in_ruleEReferenceDecl2889); 
+                    match(input,44,FOLLOW_44_in_ruleEReferenceDecl2889); 
 
                             createLeafNode(grammarAccess.getEReferenceDeclAccess().getRightSquareBracketKeyword_4_3(), null); 
                         
@@ -3919,7 +3919,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1910:5: '#' ( ( RULE_ID ) )
                     {
-                    match(input,47,FollowSets000.FOLLOW_47_in_ruleEReferenceDecl2902); 
+                    match(input,47,FOLLOW_47_in_ruleEReferenceDecl2902); 
 
                             createLeafNode(grammarAccess.getEReferenceDeclAccess().getNumberSignKeyword_5_0(), null); 
                         
@@ -3935,7 +3935,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
-                    match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEReferenceDecl2920); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEReferenceDecl2920); 
 
                     		createLeafNode(grammarAccess.getEReferenceDeclAccess().getEOppositeEReferenceCrossReference_5_1_0(), "eOpposite"); 
                     	
@@ -3958,7 +3958,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1930:3: lv_name_19_0= RULE_ID
             {
             lv_name_19_0=(Token)input.LT(1);
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEReferenceDecl2939); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEReferenceDecl2939); 
 
             			createLeafNode(grammarAccess.getEReferenceDeclAccess().getNameIDTerminalRuleCall_6_0(), "name"); 
             		
@@ -3984,7 +3984,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,18,FollowSets000.FOLLOW_18_in_ruleEReferenceDecl2954); 
+            match(input,18,FOLLOW_18_in_ruleEReferenceDecl2954); 
 
                     createLeafNode(grammarAccess.getEReferenceDeclAccess().getSemicolonKeyword_7(), null); 
                 
@@ -4023,12 +4023,12 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:1966:2: iv_ruleEEnumDecl= ruleEEnumDecl EOF
             {
              currentNode = createCompositeNode(grammarAccess.getEEnumDeclRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleEEnumDecl_in_entryRuleEEnumDecl2990);
+            pushFollow(FOLLOW_ruleEEnumDecl_in_entryRuleEEnumDecl2990);
             iv_ruleEEnumDecl=ruleEEnumDecl();
             _fsp--;
 
              current =iv_ruleEEnumDecl; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEEnumDecl3000); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEEnumDecl3000); 
 
             }
 
@@ -4086,7 +4086,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getEEnumDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0(), currentNode); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_ruleEEnumDecl3046);
+            	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEEnumDecl3046);
             	    lv_eAnnotations_0_0=ruleEAnnotationDecl();
             	    _fsp--;
 
@@ -4119,7 +4119,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            match(input,48,FollowSets000.FOLLOW_48_in_ruleEEnumDecl3057); 
+            match(input,48,FOLLOW_48_in_ruleEEnumDecl3057); 
 
                     createLeafNode(grammarAccess.getEEnumDeclAccess().getEnumKeyword_1(), null); 
                 
@@ -4130,7 +4130,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2009:3: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)input.LT(1);
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEEnumDecl3074); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEEnumDecl3074); 
 
             			createLeafNode(grammarAccess.getEEnumDeclAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
             		
@@ -4156,7 +4156,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,22,FollowSets000.FOLLOW_22_in_ruleEEnumDecl3089); 
+            match(input,22,FOLLOW_22_in_ruleEEnumDecl3089); 
 
                     createLeafNode(grammarAccess.getEEnumDeclAccess().getLeftCurlyBracketKeyword_3(), null); 
                 
@@ -4182,7 +4182,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getEEnumDeclAccess().getELiteralsEEnumLiteralDeclParserRuleCall_4_0(), currentNode); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleEEnumLiteralDecl_in_ruleEEnumDecl3110);
+            	    pushFollow(FOLLOW_ruleEEnumLiteralDecl_in_ruleEEnumDecl3110);
             	    lv_eLiterals_4_0=ruleEEnumLiteralDecl();
             	    _fsp--;
 
@@ -4219,7 +4219,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 cnt35++;
             } while (true);
 
-            match(input,23,FollowSets000.FOLLOW_23_in_ruleEEnumDecl3121); 
+            match(input,23,FOLLOW_23_in_ruleEEnumDecl3121); 
 
                     createLeafNode(grammarAccess.getEEnumDeclAccess().getRightCurlyBracketKeyword_5(), null); 
                 
@@ -4258,12 +4258,12 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2073:2: iv_ruleEEnumLiteralDecl= ruleEEnumLiteralDecl EOF
             {
              currentNode = createCompositeNode(grammarAccess.getEEnumLiteralDeclRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleEEnumLiteralDecl_in_entryRuleEEnumLiteralDecl3157);
+            pushFollow(FOLLOW_ruleEEnumLiteralDecl_in_entryRuleEEnumLiteralDecl3157);
             iv_ruleEEnumLiteralDecl=ruleEEnumLiteralDecl();
             _fsp--;
 
              current =iv_ruleEEnumLiteralDecl; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEEnumLiteralDecl3167); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEEnumLiteralDecl3167); 
 
             }
 
@@ -4321,7 +4321,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getEEnumLiteralDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0(), currentNode); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_ruleEEnumLiteralDecl3213);
+            	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEEnumLiteralDecl3213);
             	    lv_eAnnotations_0_0=ruleEAnnotationDecl();
             	    _fsp--;
 
@@ -4361,7 +4361,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2112:3: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)input.LT(1);
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEEnumLiteralDecl3231); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEEnumLiteralDecl3231); 
 
             			createLeafNode(grammarAccess.getEEnumLiteralDeclAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
             		
@@ -4398,7 +4398,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2134:4: '=' ( (lv_value_3_0= RULE_INT ) )
                     {
-                    match(input,17,FollowSets000.FOLLOW_17_in_ruleEEnumLiteralDecl3247); 
+                    match(input,17,FOLLOW_17_in_ruleEEnumLiteralDecl3247); 
 
                             createLeafNode(grammarAccess.getEEnumLiteralDeclAccess().getEqualsSignKeyword_2_0(), null); 
                         
@@ -4409,7 +4409,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2140:3: lv_value_3_0= RULE_INT
                     {
                     lv_value_3_0=(Token)input.LT(1);
-                    match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleEEnumLiteralDecl3264); 
+                    match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleEEnumLiteralDecl3264); 
 
                     			createLeafNode(grammarAccess.getEEnumLiteralDeclAccess().getValueINTTerminalRuleCall_2_1_0(), "value"); 
                     		
@@ -4456,7 +4456,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2164:3: lv_literal_4_0= RULE_STRING
                     {
                     lv_literal_4_0=(Token)input.LT(1);
-                    match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleEEnumLiteralDecl3288); 
+                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleEEnumLiteralDecl3288); 
 
                     			createLeafNode(grammarAccess.getEEnumLiteralDeclAccess().getLiteralSTRINGTerminalRuleCall_3_0(), "literal"); 
                     		
@@ -4485,7 +4485,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,18,FollowSets000.FOLLOW_18_in_ruleEEnumLiteralDecl3304); 
+            match(input,18,FOLLOW_18_in_ruleEEnumLiteralDecl3304); 
 
                     createLeafNode(grammarAccess.getEEnumLiteralDeclAccess().getSemicolonKeyword_4(), null); 
                 
@@ -4524,12 +4524,12 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2200:2: iv_ruleETypeParameterDecl= ruleETypeParameterDecl EOF
             {
              currentNode = createCompositeNode(grammarAccess.getETypeParameterDeclRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleETypeParameterDecl_in_entryRuleETypeParameterDecl3340);
+            pushFollow(FOLLOW_ruleETypeParameterDecl_in_entryRuleETypeParameterDecl3340);
             iv_ruleETypeParameterDecl=ruleETypeParameterDecl();
             _fsp--;
 
              current =iv_ruleETypeParameterDecl; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleETypeParameterDecl3350); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleETypeParameterDecl3350); 
 
             }
 
@@ -4571,7 +4571,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2215:3: lv_name_0_0= RULE_ID
             {
             lv_name_0_0=(Token)input.LT(1);
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleETypeParameterDecl3392); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleETypeParameterDecl3392); 
 
             			createLeafNode(grammarAccess.getETypeParameterDeclAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
             		
@@ -4608,7 +4608,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2237:4: 'extends' ( (lv_eBounds_2_0= ruleEGenericTypeDecl ) )
                     {
-                    match(input,35,FollowSets000.FOLLOW_35_in_ruleETypeParameterDecl3408); 
+                    match(input,35,FOLLOW_35_in_ruleETypeParameterDecl3408); 
 
                             createLeafNode(grammarAccess.getETypeParameterDeclAccess().getExtendsKeyword_1_0(), null); 
                         
@@ -4621,7 +4621,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getETypeParameterDeclAccess().getEBoundsEGenericTypeDeclParserRuleCall_1_1_0(), currentNode); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_ruleETypeParameterDecl3429);
+                    pushFollow(FOLLOW_ruleEGenericTypeDecl_in_ruleETypeParameterDecl3429);
                     lv_eBounds_2_0=ruleEGenericTypeDecl();
                     _fsp--;
 
@@ -4689,12 +4689,12 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2275:2: iv_ruleEGenericTypeReferenceDecl= ruleEGenericTypeReferenceDecl EOF
             {
              currentNode = createCompositeNode(grammarAccess.getEGenericTypeReferenceDeclRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_entryRuleEGenericTypeReferenceDecl3467);
+            pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_entryRuleEGenericTypeReferenceDecl3467);
             iv_ruleEGenericTypeReferenceDecl=ruleEGenericTypeReferenceDecl();
             _fsp--;
 
              current =iv_ruleEGenericTypeReferenceDecl; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEGenericTypeReferenceDecl3477); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEGenericTypeReferenceDecl3477); 
 
             }
 
@@ -4762,7 +4762,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
-                    match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEGenericTypeReferenceDecl3521); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEGenericTypeReferenceDecl3521); 
 
                     		createLeafNode(grammarAccess.getEGenericTypeReferenceDeclAccess().getEClassifierEClassifierCrossReference_0_0_0(), "eClassifier"); 
                     	
@@ -4783,7 +4783,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2302:4: '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) ( ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* '>'
                             {
-                            match(input,33,FollowSets000.FOLLOW_33_in_ruleEGenericTypeReferenceDecl3532); 
+                            match(input,33,FOLLOW_33_in_ruleEGenericTypeReferenceDecl3532); 
 
                                     createLeafNode(grammarAccess.getEGenericTypeReferenceDeclAccess().getLessThanSignKeyword_0_1_0(), null); 
                                 
@@ -4796,7 +4796,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                              
                             	        currentNode=createCompositeNode(grammarAccess.getEGenericTypeReferenceDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_1_0(), currentNode); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeReferenceDecl3553);
+                            pushFollow(FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeReferenceDecl3553);
                             lv_eTypeArguments_2_0=ruleEGenericTypeDecl();
                             _fsp--;
 
@@ -4838,7 +4838,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             	case 1 :
                             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2330:4: ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) )
                             	    {
-                            	    match(input,28,FollowSets000.FOLLOW_28_in_ruleEGenericTypeReferenceDecl3564); 
+                            	    match(input,28,FOLLOW_28_in_ruleEGenericTypeReferenceDecl3564); 
 
                             	            createLeafNode(grammarAccess.getEGenericTypeReferenceDeclAccess().getCommaKeyword_0_1_2_0(), null); 
                             	        
@@ -4851,7 +4851,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             	     
                             	    	        currentNode=createCompositeNode(grammarAccess.getEGenericTypeReferenceDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_2_1_0(), currentNode); 
                             	    	    
-                            	    pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeReferenceDecl3585);
+                            	    pushFollow(FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeReferenceDecl3585);
                             	    lv_eTypeArguments_4_0=ruleEGenericTypeDecl();
                             	    _fsp--;
 
@@ -4887,7 +4887,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                                 }
                             } while (true);
 
-                            match(input,34,FollowSets000.FOLLOW_34_in_ruleEGenericTypeReferenceDecl3597); 
+                            match(input,34,FOLLOW_34_in_ruleEGenericTypeReferenceDecl3597); 
 
                                     createLeafNode(grammarAccess.getEGenericTypeReferenceDeclAccess().getGreaterThanSignKeyword_0_1_3(), null); 
                                 
@@ -4909,7 +4909,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2363:6: ( '#' ( ( RULE_ID ) ) )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2363:8: '#' ( ( RULE_ID ) )
                     {
-                    match(input,47,FollowSets000.FOLLOW_47_in_ruleEGenericTypeReferenceDecl3617); 
+                    match(input,47,FOLLOW_47_in_ruleEGenericTypeReferenceDecl3617); 
 
                             createLeafNode(grammarAccess.getEGenericTypeReferenceDeclAccess().getNumberSignKeyword_1_0(), null); 
                         
@@ -4925,7 +4925,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
-                    match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEGenericTypeReferenceDecl3635); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEGenericTypeReferenceDecl3635); 
 
                     		createLeafNode(grammarAccess.getEGenericTypeReferenceDeclAccess().getETypeParameterETypeParameterCrossReference_1_1_0(), "eTypeParameter"); 
                     	
@@ -4976,12 +4976,12 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2391:2: iv_ruleEGenericTypeDecl= ruleEGenericTypeDecl EOF
             {
              currentNode = createCompositeNode(grammarAccess.getEGenericTypeDeclRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_entryRuleEGenericTypeDecl3672);
+            pushFollow(FOLLOW_ruleEGenericTypeDecl_in_entryRuleEGenericTypeDecl3672);
             iv_ruleEGenericTypeDecl=ruleEGenericTypeDecl();
             _fsp--;
 
              current =iv_ruleEGenericTypeDecl; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEGenericTypeDecl3682); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEGenericTypeDecl3682); 
 
             }
 
@@ -5062,7 +5062,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
-                    match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEGenericTypeDecl3726); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEGenericTypeDecl3726); 
 
                     		createLeafNode(grammarAccess.getEGenericTypeDeclAccess().getEClassifierEClassifierCrossReference_0_0_0(), "eClassifier"); 
                     	
@@ -5083,7 +5083,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2418:4: '<' ( (lv_eTypeArguments_2_0= ruleEGenericTypeDecl ) ) ( ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) ) )* '>'
                             {
-                            match(input,33,FollowSets000.FOLLOW_33_in_ruleEGenericTypeDecl3737); 
+                            match(input,33,FOLLOW_33_in_ruleEGenericTypeDecl3737); 
 
                                     createLeafNode(grammarAccess.getEGenericTypeDeclAccess().getLessThanSignKeyword_0_1_0(), null); 
                                 
@@ -5096,7 +5096,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                              
                             	        currentNode=createCompositeNode(grammarAccess.getEGenericTypeDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_1_0(), currentNode); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeDecl3758);
+                            pushFollow(FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeDecl3758);
                             lv_eTypeArguments_2_0=ruleEGenericTypeDecl();
                             _fsp--;
 
@@ -5138,7 +5138,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             	case 1 :
                             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2446:4: ',' ( (lv_eTypeArguments_4_0= ruleEGenericTypeDecl ) )
                             	    {
-                            	    match(input,28,FollowSets000.FOLLOW_28_in_ruleEGenericTypeDecl3769); 
+                            	    match(input,28,FOLLOW_28_in_ruleEGenericTypeDecl3769); 
 
                             	            createLeafNode(grammarAccess.getEGenericTypeDeclAccess().getCommaKeyword_0_1_2_0(), null); 
                             	        
@@ -5151,7 +5151,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             	     
                             	    	        currentNode=createCompositeNode(grammarAccess.getEGenericTypeDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_2_1_0(), currentNode); 
                             	    	    
-                            	    pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeDecl3790);
+                            	    pushFollow(FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeDecl3790);
                             	    lv_eTypeArguments_4_0=ruleEGenericTypeDecl();
                             	    _fsp--;
 
@@ -5187,7 +5187,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                                 }
                             } while (true);
 
-                            match(input,34,FollowSets000.FOLLOW_34_in_ruleEGenericTypeDecl3802); 
+                            match(input,34,FOLLOW_34_in_ruleEGenericTypeDecl3802); 
 
                                     createLeafNode(grammarAccess.getEGenericTypeDeclAccess().getGreaterThanSignKeyword_0_1_3(), null); 
                                 
@@ -5209,7 +5209,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2479:6: ( '#' ( ( RULE_ID ) ) )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2479:8: '#' ( ( RULE_ID ) )
                     {
-                    match(input,47,FollowSets000.FOLLOW_47_in_ruleEGenericTypeDecl3822); 
+                    match(input,47,FOLLOW_47_in_ruleEGenericTypeDecl3822); 
 
                             createLeafNode(grammarAccess.getEGenericTypeDeclAccess().getNumberSignKeyword_1_0(), null); 
                         
@@ -5225,7 +5225,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	            associateNodeWithAstElement(currentNode, current);
                     	        }
                             
-                    match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEGenericTypeDecl3840); 
+                    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEGenericTypeDecl3840); 
 
                     		createLeafNode(grammarAccess.getEGenericTypeDeclAccess().getETypeParameterETypeParameterCrossReference_1_1_0(), "eTypeParameter"); 
                     	
@@ -5247,7 +5247,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2498:6: ( '?' ( ( 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) ) ) | ( 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) ) ) ) )
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2498:8: '?' ( ( 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) ) ) | ( 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) ) ) )
                     {
-                    match(input,49,FollowSets000.FOLLOW_49_in_ruleEGenericTypeDecl3858); 
+                    match(input,49,FOLLOW_49_in_ruleEGenericTypeDecl3858); 
 
                             createLeafNode(grammarAccess.getEGenericTypeDeclAccess().getQuestionMarkKeyword_2_0(), null); 
                         
@@ -5274,7 +5274,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2502:2: ( 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) ) )
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2502:4: 'extends' ( (lv_eUpperBound_10_0= ruleEGenericTypeDecl ) )
                             {
-                            match(input,35,FollowSets000.FOLLOW_35_in_ruleEGenericTypeDecl3870); 
+                            match(input,35,FOLLOW_35_in_ruleEGenericTypeDecl3870); 
 
                                     createLeafNode(grammarAccess.getEGenericTypeDeclAccess().getExtendsKeyword_2_1_0_0(), null); 
                                 
@@ -5287,7 +5287,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                              
                             	        currentNode=createCompositeNode(grammarAccess.getEGenericTypeDeclAccess().getEUpperBoundEGenericTypeDeclParserRuleCall_2_1_0_1_0(), currentNode); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeDecl3891);
+                            pushFollow(FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeDecl3891);
                             lv_eUpperBound_10_0=ruleEGenericTypeDecl();
                             _fsp--;
 
@@ -5326,7 +5326,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2531:6: ( 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) ) )
                             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2531:8: 'super' ( (lv_eLowerBound_12_0= ruleEGenericTypeDecl ) )
                             {
-                            match(input,50,FollowSets000.FOLLOW_50_in_ruleEGenericTypeDecl3909); 
+                            match(input,50,FOLLOW_50_in_ruleEGenericTypeDecl3909); 
 
                                     createLeafNode(grammarAccess.getEGenericTypeDeclAccess().getSuperKeyword_2_1_1_0(), null); 
                                 
@@ -5339,7 +5339,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                              
                             	        currentNode=createCompositeNode(grammarAccess.getEGenericTypeDeclAccess().getELowerBoundEGenericTypeDeclParserRuleCall_2_1_1_1_0(), currentNode); 
                             	    
-                            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeDecl3930);
+                            pushFollow(FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeDecl3930);
                             lv_eLowerBound_12_0=ruleEGenericTypeDecl();
                             _fsp--;
 
@@ -5416,12 +5416,12 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2569:2: iv_ruleEOperationDecl= ruleEOperationDecl EOF
             {
              currentNode = createCompositeNode(grammarAccess.getEOperationDeclRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleEOperationDecl_in_entryRuleEOperationDecl3969);
+            pushFollow(FOLLOW_ruleEOperationDecl_in_entryRuleEOperationDecl3969);
             iv_ruleEOperationDecl=ruleEOperationDecl();
             _fsp--;
 
              current =iv_ruleEOperationDecl; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEOperationDecl3979); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEOperationDecl3979); 
 
             }
 
@@ -5493,7 +5493,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getEOperationDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0(), currentNode); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_ruleEOperationDecl4025);
+            	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEOperationDecl4025);
             	    lv_eAnnotations_0_0=ruleEAnnotationDecl();
             	    _fsp--;
 
@@ -5551,7 +5551,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2608:3: lv_unique_1_0= RULE_BAG
             	    {
             	    lv_unique_1_0=(Token)input.LT(1);
-            	    match(input,RULE_BAG,FollowSets000.FOLLOW_RULE_BAG_in_ruleEOperationDecl4044); 
+            	    match(input,RULE_BAG,FOLLOW_RULE_BAG_in_ruleEOperationDecl4044); 
 
             	    			createLeafNode(grammarAccess.getEOperationDeclAccess().getUniqueBagTerminalRuleCall_1_0_0(), "unique"); 
             	    		
@@ -5590,7 +5590,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2633:3: lv_ordered_2_0= RULE_RANDOM
             	    {
             	    lv_ordered_2_0=(Token)input.LT(1);
-            	    match(input,RULE_RANDOM,FollowSets000.FOLLOW_RULE_RANDOM_in_ruleEOperationDecl4072); 
+            	    match(input,RULE_RANDOM,FOLLOW_RULE_RANDOM_in_ruleEOperationDecl4072); 
 
             	    			createLeafNode(grammarAccess.getEOperationDeclAccess().getOrderedRandomTerminalRuleCall_1_1_0(), "ordered"); 
             	    		
@@ -5625,7 +5625,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 }
             } while (true);
 
-            match(input,51,FollowSets000.FOLLOW_51_in_ruleEOperationDecl4089); 
+            match(input,51,FOLLOW_51_in_ruleEOperationDecl4089); 
 
                     createLeafNode(grammarAccess.getEOperationDeclAccess().getOpKeyword_2(), null); 
                 
@@ -5658,7 +5658,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getEOperationDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0_0(), currentNode); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEOperationDecl4111);
+                    pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEOperationDecl4111);
                     lv_eGenericType_4_0=ruleEGenericTypeReferenceDecl();
                     _fsp--;
 
@@ -5691,7 +5691,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2684:7: 'void'
                     {
-                    match(input,52,FollowSets000.FOLLOW_52_in_ruleEOperationDecl4127); 
+                    match(input,52,FOLLOW_52_in_ruleEOperationDecl4127); 
 
                             createLeafNode(grammarAccess.getEOperationDeclAccess().getVoidKeyword_3_1(), null); 
                         
@@ -5708,7 +5708,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2690:3: lv_name_6_0= RULE_ID
             {
             lv_name_6_0=(Token)input.LT(1);
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEOperationDecl4145); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEOperationDecl4145); 
 
             			createLeafNode(grammarAccess.getEOperationDeclAccess().getNameIDTerminalRuleCall_4_0(), "name"); 
             		
@@ -5745,7 +5745,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2712:4: '<' ( (lv_eTypeParameters_8_0= ruleETypeParameterDecl ) ) ( ',' ( (lv_eTypeParameters_10_0= ruleETypeParameterDecl ) ) )* '>'
                     {
-                    match(input,33,FollowSets000.FOLLOW_33_in_ruleEOperationDecl4161); 
+                    match(input,33,FOLLOW_33_in_ruleEOperationDecl4161); 
 
                             createLeafNode(grammarAccess.getEOperationDeclAccess().getLessThanSignKeyword_5_0(), null); 
                         
@@ -5758,7 +5758,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getEOperationDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_5_1_0(), currentNode); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleETypeParameterDecl_in_ruleEOperationDecl4182);
+                    pushFollow(FOLLOW_ruleETypeParameterDecl_in_ruleEOperationDecl4182);
                     lv_eTypeParameters_8_0=ruleETypeParameterDecl();
                     _fsp--;
 
@@ -5800,7 +5800,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2740:4: ',' ( (lv_eTypeParameters_10_0= ruleETypeParameterDecl ) )
                     	    {
-                    	    match(input,28,FollowSets000.FOLLOW_28_in_ruleEOperationDecl4193); 
+                    	    match(input,28,FOLLOW_28_in_ruleEOperationDecl4193); 
 
                     	            createLeafNode(grammarAccess.getEOperationDeclAccess().getCommaKeyword_5_2_0(), null); 
                     	        
@@ -5813,7 +5813,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        currentNode=createCompositeNode(grammarAccess.getEOperationDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_5_2_1_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FollowSets000.FOLLOW_ruleETypeParameterDecl_in_ruleEOperationDecl4214);
+                    	    pushFollow(FOLLOW_ruleETypeParameterDecl_in_ruleEOperationDecl4214);
                     	    lv_eTypeParameters_10_0=ruleETypeParameterDecl();
                     	    _fsp--;
 
@@ -5849,7 +5849,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                         }
                     } while (true);
 
-                    match(input,34,FollowSets000.FOLLOW_34_in_ruleEOperationDecl4226); 
+                    match(input,34,FOLLOW_34_in_ruleEOperationDecl4226); 
 
                             createLeafNode(grammarAccess.getEOperationDeclAccess().getGreaterThanSignKeyword_5_3(), null); 
                         
@@ -5859,7 +5859,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,27,FollowSets000.FOLLOW_27_in_ruleEOperationDecl4238); 
+            match(input,27,FOLLOW_27_in_ruleEOperationDecl4238); 
 
                     createLeafNode(grammarAccess.getEOperationDeclAccess().getLeftParenthesisKeyword_6(), null); 
                 
@@ -5883,7 +5883,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getEOperationDeclAccess().getEParametersEParameterDeclParserRuleCall_7_0_0(), currentNode); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleEParameterDecl_in_ruleEOperationDecl4260);
+                    pushFollow(FOLLOW_ruleEParameterDecl_in_ruleEOperationDecl4260);
                     lv_eParameters_13_0=ruleEParameterDecl();
                     _fsp--;
 
@@ -5925,7 +5925,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2800:4: ',' ( (lv_eParameters_15_0= ruleEParameterDecl ) )
                     	    {
-                    	    match(input,28,FollowSets000.FOLLOW_28_in_ruleEOperationDecl4271); 
+                    	    match(input,28,FOLLOW_28_in_ruleEOperationDecl4271); 
 
                     	            createLeafNode(grammarAccess.getEOperationDeclAccess().getCommaKeyword_7_1_0(), null); 
                     	        
@@ -5938,7 +5938,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        currentNode=createCompositeNode(grammarAccess.getEOperationDeclAccess().getEParametersEParameterDeclParserRuleCall_7_1_1_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FollowSets000.FOLLOW_ruleEParameterDecl_in_ruleEOperationDecl4292);
+                    	    pushFollow(FOLLOW_ruleEParameterDecl_in_ruleEOperationDecl4292);
                     	    lv_eParameters_15_0=ruleEParameterDecl();
                     	    _fsp--;
 
@@ -5980,7 +5980,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,29,FollowSets000.FOLLOW_29_in_ruleEOperationDecl4306); 
+            match(input,29,FOLLOW_29_in_ruleEOperationDecl4306); 
 
                     createLeafNode(grammarAccess.getEOperationDeclAccess().getRightParenthesisKeyword_8(), null); 
                 
@@ -5995,7 +5995,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2832:3: 'throws' ( (lv_eGenericExceptions_18_0= ruleEGenericTypeReferenceDecl ) ) ( ',' ( (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl ) ) )*
                     {
-                    match(input,53,FollowSets000.FOLLOW_53_in_ruleEOperationDecl4317); 
+                    match(input,53,FOLLOW_53_in_ruleEOperationDecl4317); 
 
                             createLeafNode(grammarAccess.getEOperationDeclAccess().getThrowsKeyword_9_0(), null); 
                         
@@ -6008,7 +6008,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getEOperationDeclAccess().getEGenericExceptionsEGenericTypeReferenceDeclParserRuleCall_9_1_0(), currentNode); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEOperationDecl4338);
+                    pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEOperationDecl4338);
                     lv_eGenericExceptions_18_0=ruleEGenericTypeReferenceDecl();
                     _fsp--;
 
@@ -6050,7 +6050,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	case 1 :
                     	    // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2860:4: ',' ( (lv_eGenericExceptions_20_0= ruleEGenericTypeReferenceDecl ) )
                     	    {
-                    	    match(input,28,FollowSets000.FOLLOW_28_in_ruleEOperationDecl4349); 
+                    	    match(input,28,FOLLOW_28_in_ruleEOperationDecl4349); 
 
                     	            createLeafNode(grammarAccess.getEOperationDeclAccess().getCommaKeyword_9_2_0(), null); 
                     	        
@@ -6063,7 +6063,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     	     
                     	    	        currentNode=createCompositeNode(grammarAccess.getEOperationDeclAccess().getEGenericExceptionsEGenericTypeReferenceDeclParserRuleCall_9_2_1_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEOperationDecl4370);
+                    	    pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEOperationDecl4370);
                     	    lv_eGenericExceptions_20_0=ruleEGenericTypeReferenceDecl();
                     	    _fsp--;
 
@@ -6105,7 +6105,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,18,FollowSets000.FOLLOW_18_in_ruleEOperationDecl4384); 
+            match(input,18,FOLLOW_18_in_ruleEOperationDecl4384); 
 
                     createLeafNode(grammarAccess.getEOperationDeclAccess().getSemicolonKeyword_10(), null); 
                 
@@ -6144,12 +6144,12 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2902:2: iv_ruleEParameterDecl= ruleEParameterDecl EOF
             {
              currentNode = createCompositeNode(grammarAccess.getEParameterDeclRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleEParameterDecl_in_entryRuleEParameterDecl4420);
+            pushFollow(FOLLOW_ruleEParameterDecl_in_entryRuleEParameterDecl4420);
             iv_ruleEParameterDecl=ruleEParameterDecl();
             _fsp--;
 
              current =iv_ruleEParameterDecl; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEParameterDecl4430); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEParameterDecl4430); 
 
             }
 
@@ -6207,7 +6207,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getEParameterDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0(), currentNode); 
             	    	    
-            	    pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_ruleEParameterDecl4476);
+            	    pushFollow(FOLLOW_ruleEAnnotationDecl_in_ruleEParameterDecl4476);
             	    lv_eAnnotations_0_0=ruleEAnnotationDecl();
             	    _fsp--;
 
@@ -6249,7 +6249,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
              
             	        currentNode=createCompositeNode(grammarAccess.getEParameterDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_1_0(), currentNode); 
             	    
-            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEParameterDecl4498);
+            pushFollow(FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEParameterDecl4498);
             lv_eGenericType_1_0=ruleEGenericTypeReferenceDecl();
             _fsp--;
 
@@ -6283,7 +6283,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2965:3: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)input.LT(1);
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEParameterDecl4515); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleEParameterDecl4515); 
 
             			createLeafNode(grammarAccess.getEParameterDeclAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
             		
@@ -6344,12 +6344,12 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:2997:2: iv_ruleMapEntry= ruleMapEntry EOF
             {
              currentNode = createCompositeNode(grammarAccess.getMapEntryRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleMapEntry_in_entryRuleMapEntry4556);
+            pushFollow(FOLLOW_ruleMapEntry_in_entryRuleMapEntry4556);
             iv_ruleMapEntry=ruleMapEntry();
             _fsp--;
 
              current =iv_ruleMapEntry; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleMapEntry4566); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleMapEntry4566); 
 
             }
 
@@ -6390,7 +6390,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:3012:3: lv_key_0_0= RULE_ID
             {
             lv_key_0_0=(Token)input.LT(1);
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleMapEntry4608); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleMapEntry4608); 
 
             			createLeafNode(grammarAccess.getMapEntryAccess().getKeyIDTerminalRuleCall_0_0(), "key"); 
             		
@@ -6416,7 +6416,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,17,FollowSets000.FOLLOW_17_in_ruleMapEntry4623); 
+            match(input,17,FOLLOW_17_in_ruleMapEntry4623); 
 
                     createLeafNode(grammarAccess.getMapEntryAccess().getEqualsSignKeyword_1(), null); 
                 
@@ -6427,7 +6427,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:3040:3: lv_value_2_0= RULE_STRING
             {
             lv_value_2_0=(Token)input.LT(1);
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleMapEntry4640); 
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleMapEntry4640); 
 
             			createLeafNode(grammarAccess.getMapEntryAccess().getValueSTRINGTerminalRuleCall_2_0(), "value"); 
             		
@@ -6488,12 +6488,12 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:3072:2: iv_ruleQID= ruleQID EOF
             {
              currentNode = createCompositeNode(grammarAccess.getQIDRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleQID_in_entryRuleQID4682);
+            pushFollow(FOLLOW_ruleQID_in_entryRuleQID4682);
             iv_ruleQID=ruleQID();
             _fsp--;
 
              current =iv_ruleQID.getText(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleQID4693); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleQID4693); 
 
             }
 
@@ -6529,7 +6529,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:3085:6: this_ID_0= RULE_ID ( (kw= '.' | kw= '$' ) this_ID_3= RULE_ID )*
             {
             this_ID_0=(Token)input.LT(1);
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleQID4733); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleQID4733); 
 
             		current.merge(this_ID_0);
                 
@@ -6572,7 +6572,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:3093:2: kw= '.'
             	            {
             	            kw=(Token)input.LT(1);
-            	            match(input,54,FollowSets000.FOLLOW_54_in_ruleQID4753); 
+            	            match(input,54,FOLLOW_54_in_ruleQID4753); 
 
             	                    current.merge(kw);
             	                    createLeafNode(grammarAccess.getQIDAccess().getFullStopKeyword_1_0_0(), null); 
@@ -6584,7 +6584,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	            // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:3100:2: kw= '$'
             	            {
             	            kw=(Token)input.LT(1);
-            	            match(input,55,FollowSets000.FOLLOW_55_in_ruleQID4772); 
+            	            match(input,55,FOLLOW_55_in_ruleQID4772); 
 
             	                    current.merge(kw);
             	                    createLeafNode(grammarAccess.getQIDAccess().getDollarSignKeyword_1_0_1(), null); 
@@ -6596,7 +6596,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             	    }
 
             	    this_ID_3=(Token)input.LT(1);
-            	    match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleQID4788); 
+            	    match(input,RULE_ID,FOLLOW_RULE_ID_in_ruleQID4788); 
 
             	    		current.merge(this_ID_3);
             	        
@@ -6647,12 +6647,12 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:3122:2: iv_ruleSTRING_OR_QID= ruleSTRING_OR_QID EOF
             {
              currentNode = createCompositeNode(grammarAccess.getSTRING_OR_QIDRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleSTRING_OR_QID_in_entryRuleSTRING_OR_QID4836);
+            pushFollow(FOLLOW_ruleSTRING_OR_QID_in_entryRuleSTRING_OR_QID4836);
             iv_ruleSTRING_OR_QID=ruleSTRING_OR_QID();
             _fsp--;
 
              current =iv_ruleSTRING_OR_QID.getText(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSTRING_OR_QID4847); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSTRING_OR_QID4847); 
 
             }
 
@@ -6705,7 +6705,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:3135:6: this_STRING_0= RULE_STRING
                     {
                     this_STRING_0=(Token)input.LT(1);
-                    match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleSTRING_OR_QID4887); 
+                    match(input,RULE_STRING,FOLLOW_RULE_STRING_in_ruleSTRING_OR_QID4887); 
 
                     		current.merge(this_STRING_0);
                         
@@ -6721,7 +6721,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                      
                             currentNode=createCompositeNode(grammarAccess.getSTRING_OR_QIDAccess().getQIDParserRuleCall_1(), currentNode); 
                         
-                    pushFollow(FollowSets000.FOLLOW_ruleQID_in_ruleSTRING_OR_QID4920);
+                    pushFollow(FOLLOW_ruleQID_in_ruleSTRING_OR_QID4920);
                     this_QID_1=ruleQID();
                     _fsp--;
 
@@ -6769,12 +6769,12 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:3164:2: iv_ruleSINT= ruleSINT EOF
             {
              currentNode = createCompositeNode(grammarAccess.getSINTRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleSINT_in_entryRuleSINT4966);
+            pushFollow(FOLLOW_ruleSINT_in_entryRuleSINT4966);
             iv_ruleSINT=ruleSINT();
             _fsp--;
 
              current =iv_ruleSINT.getText(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSINT4977); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSINT4977); 
 
             }
 
@@ -6820,7 +6820,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext.example.ecoredsl/src-gen/org/eclipse/xtext/example/parser/antlr/internal/InternalEcoreDsl.g:3178:2: kw= '-'
                     {
                     kw=(Token)input.LT(1);
-                    match(input,56,FollowSets000.FOLLOW_56_in_ruleSINT5016); 
+                    match(input,56,FOLLOW_56_in_ruleSINT5016); 
 
                             current.merge(kw);
                             createLeafNode(grammarAccess.getSINTAccess().getHyphenMinusKeyword_0(), null); 
@@ -6832,7 +6832,7 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
             }
 
             this_INT_1=(Token)input.LT(1);
-            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleSINT5033); 
+            match(input,RULE_INT,FOLLOW_RULE_INT_in_ruleSINT5033); 
 
             		current.merge(this_INT_1);
                 
@@ -7320,232 +7320,228 @@ public class InternalEcoreDslParser extends AbstractInternalAntlrParser {
     }
  
 
-    
-    private static class FollowSets000 {
-        public static final BitSet FOLLOW_ruleEcoreDsl_in_entryRuleEcoreDsl75 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEcoreDsl85 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleReferencedMetamodel_in_ruleEcoreDsl131 = new BitSet(new long[]{0x0000000004090000L});
-        public static final BitSet FOLLOW_ruleEPackageDecl_in_ruleEcoreDsl153 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleReferencedMetamodel_in_entryRuleReferencedMetamodel189 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleReferencedMetamodel199 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_16_in_ruleReferencedMetamodel234 = new BitSet(new long[]{0x0000000000000030L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleReferencedMetamodel252 = new BitSet(new long[]{0x0000000000020000L});
-        public static final BitSet FOLLOW_17_in_ruleReferencedMetamodel267 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleReferencedMetamodel287 = new BitSet(new long[]{0x0000000000040000L});
-        public static final BitSet FOLLOW_18_in_ruleReferencedMetamodel297 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEPackageDecl_in_entryRuleEPackageDecl333 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEPackageDecl343 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_ruleEPackageDecl389 = new BitSet(new long[]{0x0000000004080000L});
-        public static final BitSet FOLLOW_19_in_ruleEPackageDecl400 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleQID_in_ruleEPackageDecl421 = new BitSet(new long[]{0x0000000000100000L});
-        public static final BitSet FOLLOW_20_in_ruleEPackageDecl431 = new BitSet(new long[]{0x0000000000020000L});
-        public static final BitSet FOLLOW_17_in_ruleEPackageDecl441 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleEPackageDecl458 = new BitSet(new long[]{0x0000000000200000L});
-        public static final BitSet FOLLOW_21_in_ruleEPackageDecl473 = new BitSet(new long[]{0x0000000000020000L});
-        public static final BitSet FOLLOW_17_in_ruleEPackageDecl483 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleQID_in_ruleEPackageDecl504 = new BitSet(new long[]{0x0000000000400000L});
-        public static final BitSet FOLLOW_22_in_ruleEPackageDecl514 = new BitSet(new long[]{0x00010001C5880040L});
-        public static final BitSet FOLLOW_ruleSubEPackageDecl_in_ruleEPackageDecl536 = new BitSet(new long[]{0x00010001C5880040L});
-        public static final BitSet FOLLOW_ruleEClassifierDecl_in_ruleEPackageDecl563 = new BitSet(new long[]{0x00010001C5880040L});
-        public static final BitSet FOLLOW_23_in_ruleEPackageDecl575 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSubEPackageDecl_in_entryRuleSubEPackageDecl611 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSubEPackageDecl621 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_ruleSubEPackageDecl667 = new BitSet(new long[]{0x0000000004080000L});
-        public static final BitSet FOLLOW_19_in_ruleSubEPackageDecl678 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleSubEPackageDecl695 = new BitSet(new long[]{0x0000000000400000L});
-        public static final BitSet FOLLOW_22_in_ruleSubEPackageDecl710 = new BitSet(new long[]{0x00010001C5880040L});
-        public static final BitSet FOLLOW_ruleSubEPackageDecl_in_ruleSubEPackageDecl732 = new BitSet(new long[]{0x00010001C5880040L});
-        public static final BitSet FOLLOW_ruleEClassifierDecl_in_ruleSubEPackageDecl759 = new BitSet(new long[]{0x00010001C5880040L});
-        public static final BitSet FOLLOW_23_in_ruleSubEPackageDecl771 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEClassifierDecl_in_entryRuleEClassifierDecl807 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEClassifierDecl817 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEClassDecl_in_ruleEClassifierDecl864 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEDataTypeDecl_in_ruleEClassifierDecl891 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEDataTypeDecl_in_entryRuleEDataTypeDecl926 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEDataTypeDecl936 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_ruleEDataTypeDecl983 = new BitSet(new long[]{0x0000000005000040L});
-        public static final BitSet FOLLOW_RULE_SERIALIZABLE_in_ruleEDataTypeDecl1001 = new BitSet(new long[]{0x0000000001000000L});
-        public static final BitSet FOLLOW_24_in_ruleEDataTypeDecl1018 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleEDataTypeDecl1035 = new BitSet(new long[]{0x0000000002000000L});
-        public static final BitSet FOLLOW_25_in_ruleEDataTypeDecl1050 = new BitSet(new long[]{0x0000000000000030L});
-        public static final BitSet FOLLOW_ruleSTRING_OR_QID_in_ruleEDataTypeDecl1071 = new BitSet(new long[]{0x0000000000040000L});
-        public static final BitSet FOLLOW_18_in_ruleEDataTypeDecl1081 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEEnumDecl_in_ruleEDataTypeDecl1111 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_entryRuleEAnnotationDecl1146 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEAnnotationDecl1156 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_26_in_ruleEAnnotationDecl1191 = new BitSet(new long[]{0x0000000000000030L});
-        public static final BitSet FOLLOW_ruleSTRING_OR_QID_in_ruleEAnnotationDecl1212 = new BitSet(new long[]{0x0000000008000002L});
-        public static final BitSet FOLLOW_27_in_ruleEAnnotationDecl1223 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleMapEntry_in_ruleEAnnotationDecl1244 = new BitSet(new long[]{0x0000000030000000L});
-        public static final BitSet FOLLOW_28_in_ruleEAnnotationDecl1255 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleMapEntry_in_ruleEAnnotationDecl1276 = new BitSet(new long[]{0x0000000030000000L});
-        public static final BitSet FOLLOW_29_in_ruleEAnnotationDecl1288 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEClassDecl_in_entryRuleEClassDecl1326 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEClassDecl1336 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_ruleEClassDecl1382 = new BitSet(new long[]{0x00000001C4000000L});
-        public static final BitSet FOLLOW_30_in_ruleEClassDecl1401 = new BitSet(new long[]{0x0000000180000000L});
-        public static final BitSet FOLLOW_31_in_ruleEClassDecl1434 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_32_in_ruleEClassDecl1463 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleEClassDecl1481 = new BitSet(new long[]{0x0000000A02400000L});
-        public static final BitSet FOLLOW_33_in_ruleEClassDecl1497 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleETypeParameterDecl_in_ruleEClassDecl1518 = new BitSet(new long[]{0x0000000410000000L});
-        public static final BitSet FOLLOW_28_in_ruleEClassDecl1529 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleETypeParameterDecl_in_ruleEClassDecl1550 = new BitSet(new long[]{0x0000000410000000L});
-        public static final BitSet FOLLOW_34_in_ruleEClassDecl1562 = new BitSet(new long[]{0x0000000802400000L});
-        public static final BitSet FOLLOW_35_in_ruleEClassDecl1575 = new BitSet(new long[]{0x0000800000000010L});
-        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEClassDecl1596 = new BitSet(new long[]{0x0000000012400000L});
-        public static final BitSet FOLLOW_28_in_ruleEClassDecl1607 = new BitSet(new long[]{0x0000800000000010L});
-        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEClassDecl1628 = new BitSet(new long[]{0x0000000012400000L});
-        public static final BitSet FOLLOW_25_in_ruleEClassDecl1643 = new BitSet(new long[]{0x0000000000000030L});
-        public static final BitSet FOLLOW_ruleSTRING_OR_QID_in_ruleEClassDecl1664 = new BitSet(new long[]{0x0000000000400000L});
-        public static final BitSet FOLLOW_22_in_ruleEClassDecl1676 = new BitSet(new long[]{0x000863F004800B80L});
-        public static final BitSet FOLLOW_ruleEStructuralFeatureDecl_in_ruleEClassDecl1698 = new BitSet(new long[]{0x000863F004800B80L});
-        public static final BitSet FOLLOW_ruleEOperationDecl_in_ruleEClassDecl1725 = new BitSet(new long[]{0x000863F004800B80L});
-        public static final BitSet FOLLOW_23_in_ruleEClassDecl1737 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEStructuralFeatureDecl_in_entryRuleEStructuralFeatureDecl1773 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEStructuralFeatureDecl1783 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEAttributeDecl_in_ruleEStructuralFeatureDecl1830 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEReferenceDecl_in_ruleEStructuralFeatureDecl1857 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEAttributeDecl_in_entryRuleEAttributeDecl1892 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEAttributeDecl1902 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_ruleEAttributeDecl1948 = new BitSet(new long[]{0x000003F004000380L});
-        public static final BitSet FOLLOW_36_in_ruleEAttributeDecl1968 = new BitSet(new long[]{0x000003F000000380L});
-        public static final BitSet FOLLOW_RULE_BAG_in_ruleEAttributeDecl2004 = new BitSet(new long[]{0x000003F000000380L});
-        public static final BitSet FOLLOW_RULE_RANDOM_in_ruleEAttributeDecl2032 = new BitSet(new long[]{0x000003F000000380L});
-        public static final BitSet FOLLOW_RULE_READONLY_in_ruleEAttributeDecl2060 = new BitSet(new long[]{0x000003F000000380L});
-        public static final BitSet FOLLOW_37_in_ruleEAttributeDecl2089 = new BitSet(new long[]{0x000003F000000380L});
-        public static final BitSet FOLLOW_38_in_ruleEAttributeDecl2126 = new BitSet(new long[]{0x000003F000000380L});
-        public static final BitSet FOLLOW_39_in_ruleEAttributeDecl2163 = new BitSet(new long[]{0x000003F000000380L});
-        public static final BitSet FOLLOW_40_in_ruleEAttributeDecl2200 = new BitSet(new long[]{0x000003F000000380L});
-        public static final BitSet FOLLOW_41_in_ruleEAttributeDecl2225 = new BitSet(new long[]{0x0000800000000010L});
-        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEAttributeDecl2246 = new BitSet(new long[]{0x0000040000000010L});
-        public static final BitSet FOLLOW_42_in_ruleEAttributeDecl2257 = new BitSet(new long[]{0x0000000000000400L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleEAttributeDecl2274 = new BitSet(new long[]{0x0000180000000000L});
-        public static final BitSet FOLLOW_43_in_ruleEAttributeDecl2290 = new BitSet(new long[]{0x0100000000000400L});
-        public static final BitSet FOLLOW_ruleSINT_in_ruleEAttributeDecl2311 = new BitSet(new long[]{0x0000100000000000L});
-        public static final BitSet FOLLOW_44_in_ruleEAttributeDecl2323 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleEAttributeDecl2342 = new BitSet(new long[]{0x0000000000060000L});
-        public static final BitSet FOLLOW_17_in_ruleEAttributeDecl2358 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleEAttributeDecl2375 = new BitSet(new long[]{0x0000000000040000L});
-        public static final BitSet FOLLOW_18_in_ruleEAttributeDecl2392 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEReferenceDecl_in_entryRuleEReferenceDecl2428 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEReferenceDecl2438 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_ruleEReferenceDecl2484 = new BitSet(new long[]{0x000061E004000B80L});
-        public static final BitSet FOLLOW_RULE_LOCAL_in_ruleEReferenceDecl2503 = new BitSet(new long[]{0x000061E000000B80L});
-        public static final BitSet FOLLOW_RULE_BAG_in_ruleEReferenceDecl2531 = new BitSet(new long[]{0x000061E000000B80L});
-        public static final BitSet FOLLOW_RULE_RANDOM_in_ruleEReferenceDecl2559 = new BitSet(new long[]{0x000061E000000B80L});
-        public static final BitSet FOLLOW_RULE_READONLY_in_ruleEReferenceDecl2587 = new BitSet(new long[]{0x000061E000000B80L});
-        public static final BitSet FOLLOW_37_in_ruleEReferenceDecl2616 = new BitSet(new long[]{0x000061E000000B80L});
-        public static final BitSet FOLLOW_38_in_ruleEReferenceDecl2653 = new BitSet(new long[]{0x000061E000000B80L});
-        public static final BitSet FOLLOW_39_in_ruleEReferenceDecl2690 = new BitSet(new long[]{0x000061E000000B80L});
-        public static final BitSet FOLLOW_40_in_ruleEReferenceDecl2727 = new BitSet(new long[]{0x000061E000000B80L});
-        public static final BitSet FOLLOW_45_in_ruleEReferenceDecl2761 = new BitSet(new long[]{0x0000800000000010L});
-        public static final BitSet FOLLOW_46_in_ruleEReferenceDecl2790 = new BitSet(new long[]{0x0000800000000010L});
-        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEReferenceDecl2812 = new BitSet(new long[]{0x0000840000000010L});
-        public static final BitSet FOLLOW_42_in_ruleEReferenceDecl2823 = new BitSet(new long[]{0x0000000000000400L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleEReferenceDecl2840 = new BitSet(new long[]{0x0000180000000000L});
-        public static final BitSet FOLLOW_43_in_ruleEReferenceDecl2856 = new BitSet(new long[]{0x0100000000000400L});
-        public static final BitSet FOLLOW_ruleSINT_in_ruleEReferenceDecl2877 = new BitSet(new long[]{0x0000100000000000L});
-        public static final BitSet FOLLOW_44_in_ruleEReferenceDecl2889 = new BitSet(new long[]{0x0000800000000010L});
-        public static final BitSet FOLLOW_47_in_ruleEReferenceDecl2902 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleEReferenceDecl2920 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleEReferenceDecl2939 = new BitSet(new long[]{0x0000000000040000L});
-        public static final BitSet FOLLOW_18_in_ruleEReferenceDecl2954 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEEnumDecl_in_entryRuleEEnumDecl2990 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEEnumDecl3000 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_ruleEEnumDecl3046 = new BitSet(new long[]{0x0001000004000000L});
-        public static final BitSet FOLLOW_48_in_ruleEEnumDecl3057 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleEEnumDecl3074 = new BitSet(new long[]{0x0000000000400000L});
-        public static final BitSet FOLLOW_22_in_ruleEEnumDecl3089 = new BitSet(new long[]{0x0000000004000010L});
-        public static final BitSet FOLLOW_ruleEEnumLiteralDecl_in_ruleEEnumDecl3110 = new BitSet(new long[]{0x0000000004800010L});
-        public static final BitSet FOLLOW_23_in_ruleEEnumDecl3121 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEEnumLiteralDecl_in_entryRuleEEnumLiteralDecl3157 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEEnumLiteralDecl3167 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_ruleEEnumLiteralDecl3213 = new BitSet(new long[]{0x0000000004000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleEEnumLiteralDecl3231 = new BitSet(new long[]{0x0000000000060020L});
-        public static final BitSet FOLLOW_17_in_ruleEEnumLiteralDecl3247 = new BitSet(new long[]{0x0000000000000400L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleEEnumLiteralDecl3264 = new BitSet(new long[]{0x0000000000040020L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleEEnumLiteralDecl3288 = new BitSet(new long[]{0x0000000000040000L});
-        public static final BitSet FOLLOW_18_in_ruleEEnumLiteralDecl3304 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleETypeParameterDecl_in_entryRuleETypeParameterDecl3340 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleETypeParameterDecl3350 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleETypeParameterDecl3392 = new BitSet(new long[]{0x0000000800000002L});
-        public static final BitSet FOLLOW_35_in_ruleETypeParameterDecl3408 = new BitSet(new long[]{0x0002800000000010L});
-        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_ruleETypeParameterDecl3429 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_entryRuleEGenericTypeReferenceDecl3467 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEGenericTypeReferenceDecl3477 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleEGenericTypeReferenceDecl3521 = new BitSet(new long[]{0x0000000200000002L});
-        public static final BitSet FOLLOW_33_in_ruleEGenericTypeReferenceDecl3532 = new BitSet(new long[]{0x0002800000000010L});
-        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeReferenceDecl3553 = new BitSet(new long[]{0x0000000410000000L});
-        public static final BitSet FOLLOW_28_in_ruleEGenericTypeReferenceDecl3564 = new BitSet(new long[]{0x0002800000000010L});
-        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeReferenceDecl3585 = new BitSet(new long[]{0x0000000410000000L});
-        public static final BitSet FOLLOW_34_in_ruleEGenericTypeReferenceDecl3597 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_47_in_ruleEGenericTypeReferenceDecl3617 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleEGenericTypeReferenceDecl3635 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_entryRuleEGenericTypeDecl3672 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEGenericTypeDecl3682 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleEGenericTypeDecl3726 = new BitSet(new long[]{0x0000000200000002L});
-        public static final BitSet FOLLOW_33_in_ruleEGenericTypeDecl3737 = new BitSet(new long[]{0x0002800000000010L});
-        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeDecl3758 = new BitSet(new long[]{0x0000000410000000L});
-        public static final BitSet FOLLOW_28_in_ruleEGenericTypeDecl3769 = new BitSet(new long[]{0x0002800000000010L});
-        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeDecl3790 = new BitSet(new long[]{0x0000000410000000L});
-        public static final BitSet FOLLOW_34_in_ruleEGenericTypeDecl3802 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_47_in_ruleEGenericTypeDecl3822 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleEGenericTypeDecl3840 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_49_in_ruleEGenericTypeDecl3858 = new BitSet(new long[]{0x0004000800000000L});
-        public static final BitSet FOLLOW_35_in_ruleEGenericTypeDecl3870 = new BitSet(new long[]{0x0002800000000010L});
-        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeDecl3891 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_50_in_ruleEGenericTypeDecl3909 = new BitSet(new long[]{0x0002800000000010L});
-        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeDecl3930 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEOperationDecl_in_entryRuleEOperationDecl3969 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEOperationDecl3979 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_ruleEOperationDecl4025 = new BitSet(new long[]{0x0008000004000180L});
-        public static final BitSet FOLLOW_RULE_BAG_in_ruleEOperationDecl4044 = new BitSet(new long[]{0x0008000000000180L});
-        public static final BitSet FOLLOW_RULE_RANDOM_in_ruleEOperationDecl4072 = new BitSet(new long[]{0x0008000000000180L});
-        public static final BitSet FOLLOW_51_in_ruleEOperationDecl4089 = new BitSet(new long[]{0x0010800000000010L});
-        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEOperationDecl4111 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_52_in_ruleEOperationDecl4127 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleEOperationDecl4145 = new BitSet(new long[]{0x0000000208000000L});
-        public static final BitSet FOLLOW_33_in_ruleEOperationDecl4161 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleETypeParameterDecl_in_ruleEOperationDecl4182 = new BitSet(new long[]{0x0000000410000000L});
-        public static final BitSet FOLLOW_28_in_ruleEOperationDecl4193 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_ruleETypeParameterDecl_in_ruleEOperationDecl4214 = new BitSet(new long[]{0x0000000410000000L});
-        public static final BitSet FOLLOW_34_in_ruleEOperationDecl4226 = new BitSet(new long[]{0x0000000008000000L});
-        public static final BitSet FOLLOW_27_in_ruleEOperationDecl4238 = new BitSet(new long[]{0x0000800024000010L});
-        public static final BitSet FOLLOW_ruleEParameterDecl_in_ruleEOperationDecl4260 = new BitSet(new long[]{0x0000000030000000L});
-        public static final BitSet FOLLOW_28_in_ruleEOperationDecl4271 = new BitSet(new long[]{0x0000800004000010L});
-        public static final BitSet FOLLOW_ruleEParameterDecl_in_ruleEOperationDecl4292 = new BitSet(new long[]{0x0000000030000000L});
-        public static final BitSet FOLLOW_29_in_ruleEOperationDecl4306 = new BitSet(new long[]{0x0020000000040000L});
-        public static final BitSet FOLLOW_53_in_ruleEOperationDecl4317 = new BitSet(new long[]{0x0000800000000010L});
-        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEOperationDecl4338 = new BitSet(new long[]{0x0000000010040000L});
-        public static final BitSet FOLLOW_28_in_ruleEOperationDecl4349 = new BitSet(new long[]{0x0000800000000010L});
-        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEOperationDecl4370 = new BitSet(new long[]{0x0000000010040000L});
-        public static final BitSet FOLLOW_18_in_ruleEOperationDecl4384 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEParameterDecl_in_entryRuleEParameterDecl4420 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEParameterDecl4430 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_ruleEParameterDecl4476 = new BitSet(new long[]{0x0000800004000010L});
-        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEParameterDecl4498 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleEParameterDecl4515 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMapEntry_in_entryRuleMapEntry4556 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleMapEntry4566 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleMapEntry4608 = new BitSet(new long[]{0x0000000000020000L});
-        public static final BitSet FOLLOW_17_in_ruleMapEntry4623 = new BitSet(new long[]{0x0000000000000020L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleMapEntry4640 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleQID_in_entryRuleQID4682 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleQID4693 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleQID4733 = new BitSet(new long[]{0x00C0000000000002L});
-        public static final BitSet FOLLOW_54_in_ruleQID4753 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_55_in_ruleQID4772 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleQID4788 = new BitSet(new long[]{0x00C0000000000002L});
-        public static final BitSet FOLLOW_ruleSTRING_OR_QID_in_entryRuleSTRING_OR_QID4836 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSTRING_OR_QID4847 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleSTRING_OR_QID4887 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleQID_in_ruleSTRING_OR_QID4920 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSINT_in_entryRuleSINT4966 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSINT4977 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_56_in_ruleSINT5016 = new BitSet(new long[]{0x0000000000000400L});
-        public static final BitSet FOLLOW_RULE_INT_in_ruleSINT5033 = new BitSet(new long[]{0x0000000000000002L});
-    }
-
+    public static final BitSet FOLLOW_ruleEcoreDsl_in_entryRuleEcoreDsl75 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEcoreDsl85 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleReferencedMetamodel_in_ruleEcoreDsl131 = new BitSet(new long[]{0x0000000004090000L});
+    public static final BitSet FOLLOW_ruleEPackageDecl_in_ruleEcoreDsl153 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleReferencedMetamodel_in_entryRuleReferencedMetamodel189 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleReferencedMetamodel199 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_ruleReferencedMetamodel234 = new BitSet(new long[]{0x0000000000000030L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleReferencedMetamodel252 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_17_in_ruleReferencedMetamodel267 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleReferencedMetamodel287 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_18_in_ruleReferencedMetamodel297 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEPackageDecl_in_entryRuleEPackageDecl333 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEPackageDecl343 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEAnnotationDecl_in_ruleEPackageDecl389 = new BitSet(new long[]{0x0000000004080000L});
+    public static final BitSet FOLLOW_19_in_ruleEPackageDecl400 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleQID_in_ruleEPackageDecl421 = new BitSet(new long[]{0x0000000000100000L});
+    public static final BitSet FOLLOW_20_in_ruleEPackageDecl431 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_17_in_ruleEPackageDecl441 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleEPackageDecl458 = new BitSet(new long[]{0x0000000000200000L});
+    public static final BitSet FOLLOW_21_in_ruleEPackageDecl473 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_17_in_ruleEPackageDecl483 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleQID_in_ruleEPackageDecl504 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_22_in_ruleEPackageDecl514 = new BitSet(new long[]{0x00010001C5880040L});
+    public static final BitSet FOLLOW_ruleSubEPackageDecl_in_ruleEPackageDecl536 = new BitSet(new long[]{0x00010001C5880040L});
+    public static final BitSet FOLLOW_ruleEClassifierDecl_in_ruleEPackageDecl563 = new BitSet(new long[]{0x00010001C5880040L});
+    public static final BitSet FOLLOW_23_in_ruleEPackageDecl575 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSubEPackageDecl_in_entryRuleSubEPackageDecl611 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSubEPackageDecl621 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEAnnotationDecl_in_ruleSubEPackageDecl667 = new BitSet(new long[]{0x0000000004080000L});
+    public static final BitSet FOLLOW_19_in_ruleSubEPackageDecl678 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleSubEPackageDecl695 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_22_in_ruleSubEPackageDecl710 = new BitSet(new long[]{0x00010001C5880040L});
+    public static final BitSet FOLLOW_ruleSubEPackageDecl_in_ruleSubEPackageDecl732 = new BitSet(new long[]{0x00010001C5880040L});
+    public static final BitSet FOLLOW_ruleEClassifierDecl_in_ruleSubEPackageDecl759 = new BitSet(new long[]{0x00010001C5880040L});
+    public static final BitSet FOLLOW_23_in_ruleSubEPackageDecl771 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEClassifierDecl_in_entryRuleEClassifierDecl807 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEClassifierDecl817 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEClassDecl_in_ruleEClassifierDecl864 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEDataTypeDecl_in_ruleEClassifierDecl891 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEDataTypeDecl_in_entryRuleEDataTypeDecl926 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEDataTypeDecl936 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEAnnotationDecl_in_ruleEDataTypeDecl983 = new BitSet(new long[]{0x0000000005000040L});
+    public static final BitSet FOLLOW_RULE_SERIALIZABLE_in_ruleEDataTypeDecl1001 = new BitSet(new long[]{0x0000000001000000L});
+    public static final BitSet FOLLOW_24_in_ruleEDataTypeDecl1018 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEDataTypeDecl1035 = new BitSet(new long[]{0x0000000002000000L});
+    public static final BitSet FOLLOW_25_in_ruleEDataTypeDecl1050 = new BitSet(new long[]{0x0000000000000030L});
+    public static final BitSet FOLLOW_ruleSTRING_OR_QID_in_ruleEDataTypeDecl1071 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_18_in_ruleEDataTypeDecl1081 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEEnumDecl_in_ruleEDataTypeDecl1111 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEAnnotationDecl_in_entryRuleEAnnotationDecl1146 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEAnnotationDecl1156 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_26_in_ruleEAnnotationDecl1191 = new BitSet(new long[]{0x0000000000000030L});
+    public static final BitSet FOLLOW_ruleSTRING_OR_QID_in_ruleEAnnotationDecl1212 = new BitSet(new long[]{0x0000000008000002L});
+    public static final BitSet FOLLOW_27_in_ruleEAnnotationDecl1223 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleMapEntry_in_ruleEAnnotationDecl1244 = new BitSet(new long[]{0x0000000030000000L});
+    public static final BitSet FOLLOW_28_in_ruleEAnnotationDecl1255 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleMapEntry_in_ruleEAnnotationDecl1276 = new BitSet(new long[]{0x0000000030000000L});
+    public static final BitSet FOLLOW_29_in_ruleEAnnotationDecl1288 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEClassDecl_in_entryRuleEClassDecl1326 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEClassDecl1336 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEAnnotationDecl_in_ruleEClassDecl1382 = new BitSet(new long[]{0x00000001C4000000L});
+    public static final BitSet FOLLOW_30_in_ruleEClassDecl1401 = new BitSet(new long[]{0x0000000180000000L});
+    public static final BitSet FOLLOW_31_in_ruleEClassDecl1434 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_32_in_ruleEClassDecl1463 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEClassDecl1481 = new BitSet(new long[]{0x0000000A02400000L});
+    public static final BitSet FOLLOW_33_in_ruleEClassDecl1497 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleETypeParameterDecl_in_ruleEClassDecl1518 = new BitSet(new long[]{0x0000000410000000L});
+    public static final BitSet FOLLOW_28_in_ruleEClassDecl1529 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleETypeParameterDecl_in_ruleEClassDecl1550 = new BitSet(new long[]{0x0000000410000000L});
+    public static final BitSet FOLLOW_34_in_ruleEClassDecl1562 = new BitSet(new long[]{0x0000000802400000L});
+    public static final BitSet FOLLOW_35_in_ruleEClassDecl1575 = new BitSet(new long[]{0x0000800000000010L});
+    public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEClassDecl1596 = new BitSet(new long[]{0x0000000012400000L});
+    public static final BitSet FOLLOW_28_in_ruleEClassDecl1607 = new BitSet(new long[]{0x0000800000000010L});
+    public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEClassDecl1628 = new BitSet(new long[]{0x0000000012400000L});
+    public static final BitSet FOLLOW_25_in_ruleEClassDecl1643 = new BitSet(new long[]{0x0000000000000030L});
+    public static final BitSet FOLLOW_ruleSTRING_OR_QID_in_ruleEClassDecl1664 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_22_in_ruleEClassDecl1676 = new BitSet(new long[]{0x000863F004800B80L});
+    public static final BitSet FOLLOW_ruleEStructuralFeatureDecl_in_ruleEClassDecl1698 = new BitSet(new long[]{0x000863F004800B80L});
+    public static final BitSet FOLLOW_ruleEOperationDecl_in_ruleEClassDecl1725 = new BitSet(new long[]{0x000863F004800B80L});
+    public static final BitSet FOLLOW_23_in_ruleEClassDecl1737 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEStructuralFeatureDecl_in_entryRuleEStructuralFeatureDecl1773 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEStructuralFeatureDecl1783 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEAttributeDecl_in_ruleEStructuralFeatureDecl1830 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEReferenceDecl_in_ruleEStructuralFeatureDecl1857 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEAttributeDecl_in_entryRuleEAttributeDecl1892 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEAttributeDecl1902 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEAnnotationDecl_in_ruleEAttributeDecl1948 = new BitSet(new long[]{0x000003F004000380L});
+    public static final BitSet FOLLOW_36_in_ruleEAttributeDecl1968 = new BitSet(new long[]{0x000003F000000380L});
+    public static final BitSet FOLLOW_RULE_BAG_in_ruleEAttributeDecl2004 = new BitSet(new long[]{0x000003F000000380L});
+    public static final BitSet FOLLOW_RULE_RANDOM_in_ruleEAttributeDecl2032 = new BitSet(new long[]{0x000003F000000380L});
+    public static final BitSet FOLLOW_RULE_READONLY_in_ruleEAttributeDecl2060 = new BitSet(new long[]{0x000003F000000380L});
+    public static final BitSet FOLLOW_37_in_ruleEAttributeDecl2089 = new BitSet(new long[]{0x000003F000000380L});
+    public static final BitSet FOLLOW_38_in_ruleEAttributeDecl2126 = new BitSet(new long[]{0x000003F000000380L});
+    public static final BitSet FOLLOW_39_in_ruleEAttributeDecl2163 = new BitSet(new long[]{0x000003F000000380L});
+    public static final BitSet FOLLOW_40_in_ruleEAttributeDecl2200 = new BitSet(new long[]{0x000003F000000380L});
+    public static final BitSet FOLLOW_41_in_ruleEAttributeDecl2225 = new BitSet(new long[]{0x0000800000000010L});
+    public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEAttributeDecl2246 = new BitSet(new long[]{0x0000040000000010L});
+    public static final BitSet FOLLOW_42_in_ruleEAttributeDecl2257 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleEAttributeDecl2274 = new BitSet(new long[]{0x0000180000000000L});
+    public static final BitSet FOLLOW_43_in_ruleEAttributeDecl2290 = new BitSet(new long[]{0x0100000000000400L});
+    public static final BitSet FOLLOW_ruleSINT_in_ruleEAttributeDecl2311 = new BitSet(new long[]{0x0000100000000000L});
+    public static final BitSet FOLLOW_44_in_ruleEAttributeDecl2323 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEAttributeDecl2342 = new BitSet(new long[]{0x0000000000060000L});
+    public static final BitSet FOLLOW_17_in_ruleEAttributeDecl2358 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleEAttributeDecl2375 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_18_in_ruleEAttributeDecl2392 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEReferenceDecl_in_entryRuleEReferenceDecl2428 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEReferenceDecl2438 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEAnnotationDecl_in_ruleEReferenceDecl2484 = new BitSet(new long[]{0x000061E004000B80L});
+    public static final BitSet FOLLOW_RULE_LOCAL_in_ruleEReferenceDecl2503 = new BitSet(new long[]{0x000061E000000B80L});
+    public static final BitSet FOLLOW_RULE_BAG_in_ruleEReferenceDecl2531 = new BitSet(new long[]{0x000061E000000B80L});
+    public static final BitSet FOLLOW_RULE_RANDOM_in_ruleEReferenceDecl2559 = new BitSet(new long[]{0x000061E000000B80L});
+    public static final BitSet FOLLOW_RULE_READONLY_in_ruleEReferenceDecl2587 = new BitSet(new long[]{0x000061E000000B80L});
+    public static final BitSet FOLLOW_37_in_ruleEReferenceDecl2616 = new BitSet(new long[]{0x000061E000000B80L});
+    public static final BitSet FOLLOW_38_in_ruleEReferenceDecl2653 = new BitSet(new long[]{0x000061E000000B80L});
+    public static final BitSet FOLLOW_39_in_ruleEReferenceDecl2690 = new BitSet(new long[]{0x000061E000000B80L});
+    public static final BitSet FOLLOW_40_in_ruleEReferenceDecl2727 = new BitSet(new long[]{0x000061E000000B80L});
+    public static final BitSet FOLLOW_45_in_ruleEReferenceDecl2761 = new BitSet(new long[]{0x0000800000000010L});
+    public static final BitSet FOLLOW_46_in_ruleEReferenceDecl2790 = new BitSet(new long[]{0x0000800000000010L});
+    public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEReferenceDecl2812 = new BitSet(new long[]{0x0000840000000010L});
+    public static final BitSet FOLLOW_42_in_ruleEReferenceDecl2823 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleEReferenceDecl2840 = new BitSet(new long[]{0x0000180000000000L});
+    public static final BitSet FOLLOW_43_in_ruleEReferenceDecl2856 = new BitSet(new long[]{0x0100000000000400L});
+    public static final BitSet FOLLOW_ruleSINT_in_ruleEReferenceDecl2877 = new BitSet(new long[]{0x0000100000000000L});
+    public static final BitSet FOLLOW_44_in_ruleEReferenceDecl2889 = new BitSet(new long[]{0x0000800000000010L});
+    public static final BitSet FOLLOW_47_in_ruleEReferenceDecl2902 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEReferenceDecl2920 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEReferenceDecl2939 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_18_in_ruleEReferenceDecl2954 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEEnumDecl_in_entryRuleEEnumDecl2990 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEEnumDecl3000 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEAnnotationDecl_in_ruleEEnumDecl3046 = new BitSet(new long[]{0x0001000004000000L});
+    public static final BitSet FOLLOW_48_in_ruleEEnumDecl3057 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEEnumDecl3074 = new BitSet(new long[]{0x0000000000400000L});
+    public static final BitSet FOLLOW_22_in_ruleEEnumDecl3089 = new BitSet(new long[]{0x0000000004000010L});
+    public static final BitSet FOLLOW_ruleEEnumLiteralDecl_in_ruleEEnumDecl3110 = new BitSet(new long[]{0x0000000004800010L});
+    public static final BitSet FOLLOW_23_in_ruleEEnumDecl3121 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEEnumLiteralDecl_in_entryRuleEEnumLiteralDecl3157 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEEnumLiteralDecl3167 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEAnnotationDecl_in_ruleEEnumLiteralDecl3213 = new BitSet(new long[]{0x0000000004000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEEnumLiteralDecl3231 = new BitSet(new long[]{0x0000000000060020L});
+    public static final BitSet FOLLOW_17_in_ruleEEnumLiteralDecl3247 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleEEnumLiteralDecl3264 = new BitSet(new long[]{0x0000000000040020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleEEnumLiteralDecl3288 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_18_in_ruleEEnumLiteralDecl3304 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleETypeParameterDecl_in_entryRuleETypeParameterDecl3340 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleETypeParameterDecl3350 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleETypeParameterDecl3392 = new BitSet(new long[]{0x0000000800000002L});
+    public static final BitSet FOLLOW_35_in_ruleETypeParameterDecl3408 = new BitSet(new long[]{0x0002800000000010L});
+    public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_ruleETypeParameterDecl3429 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_entryRuleEGenericTypeReferenceDecl3467 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEGenericTypeReferenceDecl3477 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEGenericTypeReferenceDecl3521 = new BitSet(new long[]{0x0000000200000002L});
+    public static final BitSet FOLLOW_33_in_ruleEGenericTypeReferenceDecl3532 = new BitSet(new long[]{0x0002800000000010L});
+    public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeReferenceDecl3553 = new BitSet(new long[]{0x0000000410000000L});
+    public static final BitSet FOLLOW_28_in_ruleEGenericTypeReferenceDecl3564 = new BitSet(new long[]{0x0002800000000010L});
+    public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeReferenceDecl3585 = new BitSet(new long[]{0x0000000410000000L});
+    public static final BitSet FOLLOW_34_in_ruleEGenericTypeReferenceDecl3597 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_47_in_ruleEGenericTypeReferenceDecl3617 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEGenericTypeReferenceDecl3635 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_entryRuleEGenericTypeDecl3672 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEGenericTypeDecl3682 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEGenericTypeDecl3726 = new BitSet(new long[]{0x0000000200000002L});
+    public static final BitSet FOLLOW_33_in_ruleEGenericTypeDecl3737 = new BitSet(new long[]{0x0002800000000010L});
+    public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeDecl3758 = new BitSet(new long[]{0x0000000410000000L});
+    public static final BitSet FOLLOW_28_in_ruleEGenericTypeDecl3769 = new BitSet(new long[]{0x0002800000000010L});
+    public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeDecl3790 = new BitSet(new long[]{0x0000000410000000L});
+    public static final BitSet FOLLOW_34_in_ruleEGenericTypeDecl3802 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_47_in_ruleEGenericTypeDecl3822 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEGenericTypeDecl3840 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_49_in_ruleEGenericTypeDecl3858 = new BitSet(new long[]{0x0004000800000000L});
+    public static final BitSet FOLLOW_35_in_ruleEGenericTypeDecl3870 = new BitSet(new long[]{0x0002800000000010L});
+    public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeDecl3891 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_50_in_ruleEGenericTypeDecl3909 = new BitSet(new long[]{0x0002800000000010L});
+    public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_ruleEGenericTypeDecl3930 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEOperationDecl_in_entryRuleEOperationDecl3969 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEOperationDecl3979 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEAnnotationDecl_in_ruleEOperationDecl4025 = new BitSet(new long[]{0x0008000004000180L});
+    public static final BitSet FOLLOW_RULE_BAG_in_ruleEOperationDecl4044 = new BitSet(new long[]{0x0008000000000180L});
+    public static final BitSet FOLLOW_RULE_RANDOM_in_ruleEOperationDecl4072 = new BitSet(new long[]{0x0008000000000180L});
+    public static final BitSet FOLLOW_51_in_ruleEOperationDecl4089 = new BitSet(new long[]{0x0010800000000010L});
+    public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEOperationDecl4111 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_52_in_ruleEOperationDecl4127 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEOperationDecl4145 = new BitSet(new long[]{0x0000000208000000L});
+    public static final BitSet FOLLOW_33_in_ruleEOperationDecl4161 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleETypeParameterDecl_in_ruleEOperationDecl4182 = new BitSet(new long[]{0x0000000410000000L});
+    public static final BitSet FOLLOW_28_in_ruleEOperationDecl4193 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_ruleETypeParameterDecl_in_ruleEOperationDecl4214 = new BitSet(new long[]{0x0000000410000000L});
+    public static final BitSet FOLLOW_34_in_ruleEOperationDecl4226 = new BitSet(new long[]{0x0000000008000000L});
+    public static final BitSet FOLLOW_27_in_ruleEOperationDecl4238 = new BitSet(new long[]{0x0000800024000010L});
+    public static final BitSet FOLLOW_ruleEParameterDecl_in_ruleEOperationDecl4260 = new BitSet(new long[]{0x0000000030000000L});
+    public static final BitSet FOLLOW_28_in_ruleEOperationDecl4271 = new BitSet(new long[]{0x0000800004000010L});
+    public static final BitSet FOLLOW_ruleEParameterDecl_in_ruleEOperationDecl4292 = new BitSet(new long[]{0x0000000030000000L});
+    public static final BitSet FOLLOW_29_in_ruleEOperationDecl4306 = new BitSet(new long[]{0x0020000000040000L});
+    public static final BitSet FOLLOW_53_in_ruleEOperationDecl4317 = new BitSet(new long[]{0x0000800000000010L});
+    public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEOperationDecl4338 = new BitSet(new long[]{0x0000000010040000L});
+    public static final BitSet FOLLOW_28_in_ruleEOperationDecl4349 = new BitSet(new long[]{0x0000800000000010L});
+    public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEOperationDecl4370 = new BitSet(new long[]{0x0000000010040000L});
+    public static final BitSet FOLLOW_18_in_ruleEOperationDecl4384 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEParameterDecl_in_entryRuleEParameterDecl4420 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEParameterDecl4430 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEAnnotationDecl_in_ruleEParameterDecl4476 = new BitSet(new long[]{0x0000800004000010L});
+    public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_ruleEParameterDecl4498 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleEParameterDecl4515 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleMapEntry_in_entryRuleMapEntry4556 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleMapEntry4566 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleMapEntry4608 = new BitSet(new long[]{0x0000000000020000L});
+    public static final BitSet FOLLOW_17_in_ruleMapEntry4623 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleMapEntry4640 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQID_in_entryRuleQID4682 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleQID4693 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleQID4733 = new BitSet(new long[]{0x00C0000000000002L});
+    public static final BitSet FOLLOW_54_in_ruleQID4753 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_55_in_ruleQID4772 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_RULE_ID_in_ruleQID4788 = new BitSet(new long[]{0x00C0000000000002L});
+    public static final BitSet FOLLOW_ruleSTRING_OR_QID_in_entryRuleSTRING_OR_QID4836 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSTRING_OR_QID4847 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_ruleSTRING_OR_QID4887 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleQID_in_ruleSTRING_OR_QID4920 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSINT_in_entryRuleSINT4966 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSINT4977 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_56_in_ruleSINT5016 = new BitSet(new long[]{0x0000000000000400L});
+    public static final BitSet FOLLOW_RULE_INT_in_ruleSINT5033 = new BitSet(new long[]{0x0000000000000002L});
 
 }

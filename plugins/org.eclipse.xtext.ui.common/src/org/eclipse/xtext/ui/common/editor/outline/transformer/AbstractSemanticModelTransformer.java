@@ -90,7 +90,7 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 			return text;
 		if (object!=null)
 			return object.eClass().getName();
-		return "<unkown>";
+		return "<unknown>";
 	}
 
 	public Image getImage(EObject object) {

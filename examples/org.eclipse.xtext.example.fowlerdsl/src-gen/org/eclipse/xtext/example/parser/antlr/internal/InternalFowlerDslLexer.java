@@ -718,55 +718,324 @@ public class InternalFowlerDslLexer extends Lexer {
         int LA12_0 = input.LA(1);
 
         if ( (LA12_0=='e') ) {
-            alt12 = mTokensHelper001();
+            switch ( input.LA(2) ) {
+            case 'n':
+                {
+                int LA12_17 = input.LA(3);
+
+                if ( (LA12_17=='d') ) {
+                    int LA12_32 = input.LA(4);
+
+                    if ( ((LA12_32>='0' && LA12_32<='9')||(LA12_32>='A' && LA12_32<='Z')||LA12_32=='_'||(LA12_32>='a' && LA12_32<='z')) ) {
+                        alt12=10;
+                    }
+                    else {
+                        alt12=2;}
+                }
+                else {
+                    alt12=10;}
+                }
+                break;
+            case 'v':
+                {
+                int LA12_18 = input.LA(3);
+
+                if ( (LA12_18=='e') ) {
+                    int LA12_33 = input.LA(4);
+
+                    if ( (LA12_33=='n') ) {
+                        int LA12_39 = input.LA(5);
+
+                        if ( (LA12_39=='t') ) {
+                            int LA12_44 = input.LA(6);
+
+                            if ( (LA12_44=='s') ) {
+                                int LA12_49 = input.LA(7);
+
+                                if ( ((LA12_49>='0' && LA12_49<='9')||(LA12_49>='A' && LA12_49<='Z')||LA12_49=='_'||(LA12_49>='a' && LA12_49<='z')) ) {
+                                    alt12=10;
+                                }
+                                else {
+                                    alt12=1;}
+                            }
+                            else {
+                                alt12=10;}
+                        }
+                        else {
+                            alt12=10;}
+                    }
+                    else {
+                        alt12=10;}
+                }
+                else {
+                    alt12=10;}
+                }
+                break;
+            default:
+                alt12=10;}
+
         }
         else if ( (LA12_0=='c') ) {
-            alt12 = mTokensHelper002();
+            int LA12_2 = input.LA(2);
+
+            if ( (LA12_2=='o') ) {
+                int LA12_20 = input.LA(3);
+
+                if ( (LA12_20=='m') ) {
+                    int LA12_34 = input.LA(4);
+
+                    if ( (LA12_34=='m') ) {
+                        int LA12_40 = input.LA(5);
+
+                        if ( (LA12_40=='a') ) {
+                            int LA12_45 = input.LA(6);
+
+                            if ( (LA12_45=='n') ) {
+                                int LA12_50 = input.LA(7);
+
+                                if ( (LA12_50=='d') ) {
+                                    int LA12_55 = input.LA(8);
+
+                                    if ( (LA12_55=='s') ) {
+                                        int LA12_58 = input.LA(9);
+
+                                        if ( ((LA12_58>='0' && LA12_58<='9')||(LA12_58>='A' && LA12_58<='Z')||LA12_58=='_'||(LA12_58>='a' && LA12_58<='z')) ) {
+                                            alt12=10;
+                                        }
+                                        else {
+                                            alt12=3;}
+                                    }
+                                    else {
+                                        alt12=10;}
+                                }
+                                else {
+                                    alt12=10;}
+                            }
+                            else {
+                                alt12=10;}
+                        }
+                        else {
+                            alt12=10;}
+                    }
+                    else {
+                        alt12=10;}
+                }
+                else {
+                    alt12=10;}
+            }
+            else {
+                alt12=10;}
         }
         else if ( (LA12_0=='r') ) {
-            alt12 = mTokensHelper003();
+            int LA12_3 = input.LA(2);
+
+            if ( (LA12_3=='e') ) {
+                int LA12_21 = input.LA(3);
+
+                if ( (LA12_21=='s') ) {
+                    int LA12_35 = input.LA(4);
+
+                    if ( (LA12_35=='e') ) {
+                        int LA12_41 = input.LA(5);
+
+                        if ( (LA12_41=='t') ) {
+                            int LA12_46 = input.LA(6);
+
+                            if ( (LA12_46=='t') ) {
+                                int LA12_51 = input.LA(7);
+
+                                if ( (LA12_51=='i') ) {
+                                    int LA12_56 = input.LA(8);
+
+                                    if ( (LA12_56=='n') ) {
+                                        int LA12_59 = input.LA(9);
+
+                                        if ( (LA12_59=='g') ) {
+                                            int LA12_62 = input.LA(10);
+
+                                            if ( ((LA12_62>='0' && LA12_62<='9')||(LA12_62>='A' && LA12_62<='Z')||LA12_62=='_'||(LA12_62>='a' && LA12_62<='z')) ) {
+                                                alt12=10;
+                                            }
+                                            else {
+                                                alt12=4;}
+                                        }
+                                        else {
+                                            alt12=10;}
+                                    }
+                                    else {
+                                        alt12=10;}
+                                }
+                                else {
+                                    alt12=10;}
+                            }
+                            else {
+                                alt12=10;}
+                        }
+                        else {
+                            alt12=10;}
+                    }
+                    else {
+                        alt12=10;}
+                }
+                else {
+                    alt12=10;}
+            }
+            else {
+                alt12=10;}
         }
         else if ( (LA12_0=='s') ) {
-            alt12 = mTokensHelper004();
+            int LA12_4 = input.LA(2);
+
+            if ( (LA12_4=='t') ) {
+                int LA12_22 = input.LA(3);
+
+                if ( (LA12_22=='a') ) {
+                    int LA12_36 = input.LA(4);
+
+                    if ( (LA12_36=='t') ) {
+                        int LA12_42 = input.LA(5);
+
+                        if ( (LA12_42=='e') ) {
+                            int LA12_47 = input.LA(6);
+
+                            if ( ((LA12_47>='0' && LA12_47<='9')||(LA12_47>='A' && LA12_47<='Z')||LA12_47=='_'||(LA12_47>='a' && LA12_47<='z')) ) {
+                                alt12=10;
+                            }
+                            else {
+                                alt12=5;}
+                        }
+                        else {
+                            alt12=10;}
+                    }
+                    else {
+                        alt12=10;}
+                }
+                else {
+                    alt12=10;}
+            }
+            else {
+                alt12=10;}
         }
         else if ( (LA12_0=='a') ) {
-            alt12 = mTokensHelper005();
+            int LA12_5 = input.LA(2);
+
+            if ( (LA12_5=='c') ) {
+                int LA12_23 = input.LA(3);
+
+                if ( (LA12_23=='t') ) {
+                    int LA12_37 = input.LA(4);
+
+                    if ( (LA12_37=='i') ) {
+                        int LA12_43 = input.LA(5);
+
+                        if ( (LA12_43=='o') ) {
+                            int LA12_48 = input.LA(6);
+
+                            if ( (LA12_48=='n') ) {
+                                int LA12_53 = input.LA(7);
+
+                                if ( (LA12_53=='s') ) {
+                                    int LA12_57 = input.LA(8);
+
+                                    if ( ((LA12_57>='0' && LA12_57<='9')||(LA12_57>='A' && LA12_57<='Z')||LA12_57=='_'||(LA12_57>='a' && LA12_57<='z')) ) {
+                                        alt12=10;
+                                    }
+                                    else {
+                                        alt12=6;}
+                                }
+                                else {
+                                    alt12=10;}
+                            }
+                            else {
+                                alt12=10;}
+                        }
+                        else {
+                            alt12=10;}
+                    }
+                    else {
+                        alt12=10;}
+                }
+                else {
+                    alt12=10;}
+            }
+            else {
+                alt12=10;}
         }
         else if ( (LA12_0=='{') ) {
-            alt12 = mTokensHelper006();
+            alt12=7;
         }
         else if ( (LA12_0=='}') ) {
-            alt12 = mTokensHelper007();
+            alt12=8;
         }
         else if ( (LA12_0=='=') ) {
-            alt12 = mTokensHelper008();
+            int LA12_8 = input.LA(2);
+
+            if ( (LA12_8=='>') ) {
+                alt12=9;
+            }
+            else {
+                alt12=16;}
         }
         else if ( (LA12_0=='^') ) {
-            alt12 = mTokensHelper009();
+            int LA12_9 = input.LA(2);
+
+            if ( ((LA12_9>='A' && LA12_9<='Z')||LA12_9=='_'||(LA12_9>='a' && LA12_9<='z')) ) {
+                alt12=10;
+            }
+            else {
+                alt12=16;}
         }
         else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||LA12_0=='b'||LA12_0=='d'||(LA12_0>='f' && LA12_0<='q')||(LA12_0>='t' && LA12_0<='z')) ) {
-            alt12 = mTokensHelper010();
+            alt12=10;
         }
         else if ( ((LA12_0>='0' && LA12_0<='9')) ) {
-            alt12 = mTokensHelper011();
+            alt12=11;
         }
         else if ( (LA12_0=='\"') ) {
-            alt12 = mTokensHelper012();
+            int LA12_12 = input.LA(2);
+
+            if ( ((LA12_12>='\u0000' && LA12_12<='\uFFFE')) ) {
+                alt12=12;
+            }
+            else {
+                alt12=16;}
         }
         else if ( (LA12_0=='\'') ) {
-            alt12 = mTokensHelper013();
+            int LA12_13 = input.LA(2);
+
+            if ( ((LA12_13>='\u0000' && LA12_13<='\uFFFE')) ) {
+                alt12=12;
+            }
+            else {
+                alt12=16;}
         }
         else if ( (LA12_0=='/') ) {
-            alt12 = mTokensHelper014();
+            switch ( input.LA(2) ) {
+            case '/':
+                {
+                alt12=14;
+                }
+                break;
+            case '*':
+                {
+                alt12=13;
+                }
+                break;
+            default:
+                alt12=16;}
+
         }
         else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {
-            alt12 = mTokensHelper015();
+            alt12=15;
         }
         else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='.')||(LA12_0>=':' && LA12_0<='<')||(LA12_0>='>' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFE')) ) {
-            alt12 = mTokensHelper016();
+            alt12=16;
         }
         else {
-            alt12 = mTokensHelper017();
+            NoViableAltException nvae =
+                new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
+
+            throw nvae;
         }
         switch (alt12) {
             case 1 :
@@ -885,339 +1154,6 @@ public class InternalFowlerDslLexer extends Lexer {
         }
 
     }
-    private int mTokensHelper001() throws RecognitionException {
-        switch ( input.LA(2) ) {
-        case 'n':
-            {
-            int LA12_17 = input.LA(3);
-
-            if ( (LA12_17=='d') ) {
-                int LA12_32 = input.LA(4);
-
-                if ( ((LA12_32>='0' && LA12_32<='9')||(LA12_32>='A' && LA12_32<='Z')||LA12_32=='_'||(LA12_32>='a' && LA12_32<='z')) ) {
-                    return 10;
-                }
-                else {
-                    return 2;}
-            }
-            else {
-                return 10;}
-            }
-        case 'v':
-            {
-            int LA12_18 = input.LA(3);
-
-            if ( (LA12_18=='e') ) {
-                int LA12_33 = input.LA(4);
-
-                if ( (LA12_33=='n') ) {
-                    int LA12_39 = input.LA(5);
-
-                    if ( (LA12_39=='t') ) {
-                        int LA12_44 = input.LA(6);
-
-                        if ( (LA12_44=='s') ) {
-                            int LA12_49 = input.LA(7);
-
-                            if ( ((LA12_49>='0' && LA12_49<='9')||(LA12_49>='A' && LA12_49<='Z')||LA12_49=='_'||(LA12_49>='a' && LA12_49<='z')) ) {
-                                return 10;
-                            }
-                            else {
-                                return 1;}
-                        }
-                        else {
-                            return 10;}
-                    }
-                    else {
-                        return 10;}
-                }
-                else {
-                    return 10;}
-            }
-            else {
-                return 10;}
-            }
-        default:
-            return 10;}
-
-    }
-
-    private int mTokensHelper002() throws RecognitionException {
-        int LA12_2 = input.LA(2);
-
-        if ( (LA12_2=='o') ) {
-            int LA12_20 = input.LA(3);
-
-            if ( (LA12_20=='m') ) {
-                int LA12_34 = input.LA(4);
-
-                if ( (LA12_34=='m') ) {
-                    int LA12_40 = input.LA(5);
-
-                    if ( (LA12_40=='a') ) {
-                        int LA12_45 = input.LA(6);
-
-                        if ( (LA12_45=='n') ) {
-                            int LA12_50 = input.LA(7);
-
-                            if ( (LA12_50=='d') ) {
-                                int LA12_55 = input.LA(8);
-
-                                if ( (LA12_55=='s') ) {
-                                    int LA12_58 = input.LA(9);
-
-                                    if ( ((LA12_58>='0' && LA12_58<='9')||(LA12_58>='A' && LA12_58<='Z')||LA12_58=='_'||(LA12_58>='a' && LA12_58<='z')) ) {
-                                        return 10;
-                                    }
-                                    else {
-                                        return 3;}
-                                }
-                                else {
-                                    return 10;}
-                            }
-                            else {
-                                return 10;}
-                        }
-                        else {
-                            return 10;}
-                    }
-                    else {
-                        return 10;}
-                }
-                else {
-                    return 10;}
-            }
-            else {
-                return 10;}
-        }
-        else {
-            return 10;}
-    }
-
-    private int mTokensHelper003() throws RecognitionException {
-        int LA12_3 = input.LA(2);
-
-        if ( (LA12_3=='e') ) {
-            int LA12_21 = input.LA(3);
-
-            if ( (LA12_21=='s') ) {
-                int LA12_35 = input.LA(4);
-
-                if ( (LA12_35=='e') ) {
-                    int LA12_41 = input.LA(5);
-
-                    if ( (LA12_41=='t') ) {
-                        int LA12_46 = input.LA(6);
-
-                        if ( (LA12_46=='t') ) {
-                            int LA12_51 = input.LA(7);
-
-                            if ( (LA12_51=='i') ) {
-                                int LA12_56 = input.LA(8);
-
-                                if ( (LA12_56=='n') ) {
-                                    int LA12_59 = input.LA(9);
-
-                                    if ( (LA12_59=='g') ) {
-                                        int LA12_62 = input.LA(10);
-
-                                        if ( ((LA12_62>='0' && LA12_62<='9')||(LA12_62>='A' && LA12_62<='Z')||LA12_62=='_'||(LA12_62>='a' && LA12_62<='z')) ) {
-                                            return 10;
-                                        }
-                                        else {
-                                            return 4;}
-                                    }
-                                    else {
-                                        return 10;}
-                                }
-                                else {
-                                    return 10;}
-                            }
-                            else {
-                                return 10;}
-                        }
-                        else {
-                            return 10;}
-                    }
-                    else {
-                        return 10;}
-                }
-                else {
-                    return 10;}
-            }
-            else {
-                return 10;}
-        }
-        else {
-            return 10;}
-    }
-
-    private int mTokensHelper004() throws RecognitionException {
-        int LA12_4 = input.LA(2);
-
-        if ( (LA12_4=='t') ) {
-            int LA12_22 = input.LA(3);
-
-            if ( (LA12_22=='a') ) {
-                int LA12_36 = input.LA(4);
-
-                if ( (LA12_36=='t') ) {
-                    int LA12_42 = input.LA(5);
-
-                    if ( (LA12_42=='e') ) {
-                        int LA12_47 = input.LA(6);
-
-                        if ( ((LA12_47>='0' && LA12_47<='9')||(LA12_47>='A' && LA12_47<='Z')||LA12_47=='_'||(LA12_47>='a' && LA12_47<='z')) ) {
-                            return 10;
-                        }
-                        else {
-                            return 5;}
-                    }
-                    else {
-                        return 10;}
-                }
-                else {
-                    return 10;}
-            }
-            else {
-                return 10;}
-        }
-        else {
-            return 10;}
-    }
-
-    private int mTokensHelper005() throws RecognitionException {
-        int LA12_5 = input.LA(2);
-
-        if ( (LA12_5=='c') ) {
-            int LA12_23 = input.LA(3);
-
-            if ( (LA12_23=='t') ) {
-                int LA12_37 = input.LA(4);
-
-                if ( (LA12_37=='i') ) {
-                    int LA12_43 = input.LA(5);
-
-                    if ( (LA12_43=='o') ) {
-                        int LA12_48 = input.LA(6);
-
-                        if ( (LA12_48=='n') ) {
-                            int LA12_53 = input.LA(7);
-
-                            if ( (LA12_53=='s') ) {
-                                int LA12_57 = input.LA(8);
-
-                                if ( ((LA12_57>='0' && LA12_57<='9')||(LA12_57>='A' && LA12_57<='Z')||LA12_57=='_'||(LA12_57>='a' && LA12_57<='z')) ) {
-                                    return 10;
-                                }
-                                else {
-                                    return 6;}
-                            }
-                            else {
-                                return 10;}
-                        }
-                        else {
-                            return 10;}
-                    }
-                    else {
-                        return 10;}
-                }
-                else {
-                    return 10;}
-            }
-            else {
-                return 10;}
-        }
-        else {
-            return 10;}
-    }
-
-    private int mTokensHelper006() throws RecognitionException {
-        return 7;
-    }
-
-    private int mTokensHelper007() throws RecognitionException {
-        return 8;
-    }
-
-    private int mTokensHelper008() throws RecognitionException {
-        int LA12_8 = input.LA(2);
-
-        if ( (LA12_8=='>') ) {
-            return 9;
-        }
-        else {
-            return 16;}
-    }
-
-    private int mTokensHelper009() throws RecognitionException {
-        int LA12_9 = input.LA(2);
-
-        if ( ((LA12_9>='A' && LA12_9<='Z')||LA12_9=='_'||(LA12_9>='a' && LA12_9<='z')) ) {
-            return 10;
-        }
-        else {
-            return 16;}
-    }
-
-    private int mTokensHelper010() throws RecognitionException {
-        return 10;
-    }
-
-    private int mTokensHelper011() throws RecognitionException {
-        return 11;
-    }
-
-    private int mTokensHelper012() throws RecognitionException {
-        int LA12_12 = input.LA(2);
-
-        if ( ((LA12_12>='\u0000' && LA12_12<='\uFFFE')) ) {
-            return 12;
-        }
-        else {
-            return 16;}
-    }
-
-    private int mTokensHelper013() throws RecognitionException {
-        int LA12_13 = input.LA(2);
-
-        if ( ((LA12_13>='\u0000' && LA12_13<='\uFFFE')) ) {
-            return 12;
-        }
-        else {
-            return 16;}
-    }
-
-    private int mTokensHelper014() throws RecognitionException {
-        switch ( input.LA(2) ) {
-        case '/':
-            {
-            return 14;
-            }
-        case '*':
-            {
-            return 13;
-            }
-        default:
-            return 16;}
-
-    }
-
-    private int mTokensHelper015() throws RecognitionException {
-        return 15;
-    }
-
-    private int mTokensHelper016() throws RecognitionException {
-        return 16;
-    }
-
-    private int mTokensHelper017() throws RecognitionException {
-        NoViableAltException nvae =
-            new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
-
-        throw nvae;
-    }
-
 
 
  
