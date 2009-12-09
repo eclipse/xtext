@@ -24,7 +24,7 @@
 			<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 
 				fileExtensions="${file.extensions}"/>
 			<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment" >
-				<options backtrack="true"/>
+				<options backtrack="true" classSplitting="true"/>
 			</fragment>
 			<fragment class="org.eclipse.xtext.generator.scoping.JavaScopingFragment"/>
 			<fragment class="org.eclipse.xtext.generator.validation.JavaValidatorFragment"/>
@@ -33,7 +33,7 @@
 			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
 			<fragment class="org.eclipse.xtext.generator.builder.BuilderIntegrationFragment"/>
 			<fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment">
-				<options backtrack="true"/>
+				<options backtrack="true" classSplitting="true"/>
 			</fragment>
 			<fragment class="org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment"/>
 		</language>

@@ -7,8 +7,12 @@
 	<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
 	<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 
 		fileExtensions="${file.extensions}"/>
-	<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"/>
+	<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment">
+		<options classSplitting="true"/>
+	</fragment>
 	<fragment class="org.eclipse.xtext.ui.common.SimpleLabelProviderFragment"/>
 	<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
-	<fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment"/>
+	<fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment">
+		<options classSplitting="true"/>
+	</fragment>
 </config>
