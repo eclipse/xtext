@@ -7,9 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.tests;
 
+import org.eclipse.xtext.resource.IQualifiedNameProvider;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider;
+import org.eclipse.xtext.scoping.namespaces.DefaultGlobalScopeProvider;
+
 /**
  * Use this class to register components to be used within the IDE.
  */
 public class BuilderTestLanguageRuntimeModule extends org.eclipse.xtext.builder.tests.AbstractBuilderTestLanguageRuntimeModule {
 	
+	@Override
+	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
+		return DefaultDeclarativeQualifiedNameProvider.class;
+	}
+	
+	@Override
+	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
+		return DefaultGlobalScopeProvider.class;
+	}
 }

@@ -41,13 +41,28 @@ grammar «this.languageName» with org.eclipse.xtext.common.Terminals
 
 generate «this.languageNameAbbreviation.toFirstLower()» "«this.nsURI»"
 
-Model :
+Model returns Namespace:
 	(imports+=Import)*
-	(elements+=Type)*;
+	(elements+=ModelElement)*;
 	
+ModelElement:
+	Namespace | Type;
+	
+Namespace:
+	'namespace' name=FQN '{'
+		(imports+=Import)*
+		(elements+=ModelElement)*
+	'}';
+
+FQN:
+	ID ('.' ID)*;
+
 Import :
-	'import' importURI=STRING;
-	
+	'import' importedNamespace=ImportedFQN;
+
+ImportedFQN:
+	FQN ('.' '*')?;
+
 Type:
 	SimpleType | Entity;
 	
@@ -55,12 +70,12 @@ SimpleType:
 	'type' name=ID;
 	
 Entity :
-	'entity' name=ID ('extends' extends=[Entity])? '{'
+	'entity' name=ID ('extends' extends=[Entity|FQN])? '{'
 		properties+=Property*
 	'}';
 
 Property:
-	'property' name=ID ':' type=[Type] (many?='[]')?;
+	'property' name=ID ':' type=[Type|FQN] (many?='[]')?;
 	
 «ENDFILE»
 «ENDDEFINE»

@@ -19,17 +19,16 @@
 /*
  * This is an example model
  */
-type String
-
-entity Leaf extends Composable {
-  property name: String
+namespace datatypes {
+	type String
 }
 
-entity Composite extends Composable {
-  property content: Composable[]
-}
-
-entity Composable {
+namespace entities {
+	import datatypes.*
+	
+	entity Person {
+		property name: String
+	}
 }
 «ENDFILE»
 
@@ -50,10 +49,11 @@ listSubclasses(Entity this) :
 
 «OP()»EXTENSION templates::Extensions«CL()»
 
-«OP()»DEFINE main FOR Model-«CL()»
+«OP()»DEFINE main FOR Namespace-«CL()»
 «OP()»FILE "output.txt"-«CL()»
-«OP()»FOREACH this.elements.typeSelect(Entity).sortBy(e|e.name) AS e-«CL()»
-«OP()»e.name«CL()» has «OP()»e.listSubclasses()«CL()».
+The model contains the following elements:
+«OP()»FOREACH this.elements.sortBy(e|e.name) AS e-«CL()»
+«OP()»e.metaType.name«CL()» - «OP()»e.name«CL()»
 «OP()»ENDFOREACH-«CL()»
 «OP()»ENDFILE-«CL()»
 «OP()»ENDDEFINE«CL()»
