@@ -31,8 +31,10 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 						@Override
 						protected Void handle(IJarEntryResource jarEntry) {
 							URI uri = getUri(jarEntry);
-							if (uri != null)
+							if (uri != null) {
+								toBeBuilt.getToBeDeleted().add(uri);
 								toBeBuilt.getToBeUpdated().add(uri);
+							}
 							return null;
 						}
 					}.traverse(root,false);
