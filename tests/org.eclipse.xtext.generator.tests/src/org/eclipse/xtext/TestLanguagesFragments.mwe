@@ -10,7 +10,7 @@
 	<fragment class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
 	<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
 	<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment">
-		<options backtrack="${backtrack}"/>
+		<options backtrack="${backtrack}" classSplitting="true"/>
 	</fragment>
 	<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 
 		fileExtensions="${file.extensions}"/>
