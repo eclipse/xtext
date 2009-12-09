@@ -54,26 +54,37 @@ public class ProfilerAbstractBuilderTest extends TestCase implements IResourceDe
 		IJavaProject project = createJavaProject("foo");
 		addNature(project.getProject(), XtextNature.NATURE_ID);
 		IFolder folder = addSourceFolder(project, "src");
-		int NUM_FILES = 1000;
+		int NUM_FILES = 10;
+		IFile[] files = new IFile[NUM_FILES];
 		Stopwatch timer = new Stopwatch();
-		for (int i=0;i<NUM_FILES  ;i++) {
-			IFile file = folder.getFile("Test_"+i+"_" + F_EXT);
-			String contents = "object Foo"+i+" references Foo"+(i+1);
-			if (i==NUM_FILES)
-				contents = "object Foo"+i;
+		for (int i = 0; i < NUM_FILES; i++) {
+			IFile file = folder.getFile("Test_" + i + "_" + F_EXT);
+			files[i] = file;
+			String contents = "object Foo" + i + " references Foo" + (i + 1);
+			if (i == NUM_FILES)
+				contents = "object Foo" + i;
 			file.create(new StringInputStream(contents), true, monitor());
 		}
-		logAndReset("Creating files",timer);
-
+		logAndReset("Creating files", timer);
 		waitForAutoBuild();
-		logAndReset("Auto build",timer);
-		
+		logAndReset("Auto build", timer);
+		for (int x = 0; x < 20; x++) {
+			for (int i = 0; i < NUM_FILES; i++) {
+				IFile file = files[i];
+				String contents = "object Foo" + i + " references Foo" + (i + 1);
+				if (i == NUM_FILES)
+					contents = "object Foo" + i;
+				file.setContents(new StringInputStream(contents), true, true, monitor());
+				waitForAutoBuild();
+			}
+			logAndReset("updating all " + NUM_FILES + " files", timer);
+		}
 		assertEquals(NUM_FILES, countResourcesInIndex());
 	}
-	
+
 	private void logAndReset(String string, Stopwatch timer) {
 		long took = timer.reset();
-		System.out.println(string+" took : "+took);
+		System.out.println(string + " took : " + took);
 	}
 
 	private IResourceDescriptions getBuilderState() {
