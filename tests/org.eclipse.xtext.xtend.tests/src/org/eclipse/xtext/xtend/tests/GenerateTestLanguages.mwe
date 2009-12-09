@@ -19,7 +19,9 @@
 				<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
 				<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment"/>
 				<fragment class="org.eclipse.xtext.generator.validation.CheckFragment"/>
-				<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"/>
+				<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment">
+					<options classSplitting="true"/>
+				</fragment>
 		</language>
 	</component>
 </workflow>

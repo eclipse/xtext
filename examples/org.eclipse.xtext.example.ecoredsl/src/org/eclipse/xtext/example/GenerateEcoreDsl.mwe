@@ -40,7 +40,9 @@
 	
 			<!-- java-based API for content assistance -->
 			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
-			<fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment"/>
+			<fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment">
+				<options classSplitting="true"/>
+			</fragment>
 		</language>
 	</component>
 </workflow>
