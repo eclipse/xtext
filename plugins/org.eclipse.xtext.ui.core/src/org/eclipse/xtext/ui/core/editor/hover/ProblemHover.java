@@ -10,15 +10,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor.hover;
 
-import java.util.ArrayList;
 import java.util.Iterator;
-import java.util.List;
+import java.util.LinkedHashSet;
+import java.util.Set;
 
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.jface.text.source.ISourceViewer;
-import org.eclipse.ui.texteditor.MarkerAnnotation;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -33,14 +32,11 @@ public class ProblemHover extends AbstractHover {
 	protected String getHoverInfoInternal(final int lineNumber,
 			final int offset) {
 		final IAnnotationModel model = sourceViewer.getAnnotationModel();
-		final List<String> messages = new ArrayList<String>();
+		final Set<String> messages = new LinkedHashSet<String>();
 
 		final Iterator<?> iterator = model.getAnnotationIterator();
 		while (iterator.hasNext()) {
 			final Annotation annotation = (Annotation) iterator.next();
-			if (annotation instanceof MarkerAnnotation) {
-				continue;
-			}
 			Position position = model.getPosition(annotation);
 			final int start = position.getOffset();
 			final int end = start + position.getLength();

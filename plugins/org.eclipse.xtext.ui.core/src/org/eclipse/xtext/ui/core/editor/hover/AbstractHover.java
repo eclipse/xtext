@@ -8,8 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor.hover;
 
+import java.util.Collection;
 import java.util.Iterator;
-import java.util.List;
 
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IDocument;
@@ -70,7 +70,7 @@ public abstract class AbstractHover implements IAnnotationHover, ITextHover, ITe
 		return new Region(offset, 0);
 	}
 
-	protected String formatInfo(final List<String> messages) {
+	protected String formatInfo(final Collection<String> messages) {
 		final StringBuffer buffer = new StringBuffer();
 		if (messages.size() > 1) {
 			buffer.append(XtextUIMessages.AbstractHover_MultipleMarkers);
@@ -80,7 +80,7 @@ public abstract class AbstractHover implements IAnnotationHover, ITextHover, ITe
 			}
 		}
 		else if (messages.size() == 1) {
-			splitInfo(messages.get(0), buffer);
+			splitInfo(messages.iterator().next(), buffer);
 		}
 		return buffer.toString();
 	}
