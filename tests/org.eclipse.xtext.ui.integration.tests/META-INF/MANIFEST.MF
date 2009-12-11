@@ -38,7 +38,6 @@ Require-Bundle: org.eclipse.xtext.generator;bundle-version="0.8.0";resolution:=o
  org.eclipse.ui.editors,
  org.eclipse.ui,
  org.eclipse.xtext.xtend,
- org.eclipse.emf.emfindex;bundle-version="0.8.0",
  org.eclipse.xtext.junit;bundle-version="0.8.0",
  org.eclipse.xtext.builder
 Bundle-ActivationPolicy: lazy
