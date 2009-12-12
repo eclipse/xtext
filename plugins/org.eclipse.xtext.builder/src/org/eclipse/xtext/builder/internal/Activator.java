@@ -10,17 +10,23 @@ package org.eclipse.xtext.builder.internal;
 import java.io.File;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IncrementalProjectBuilder;
+import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchListener;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.builder.BuilderModule;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.impl.javasupport.JdtBuilderModule;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Module;
 
 public class Activator extends AbstractUIPlugin {
 	
@@ -44,17 +50,20 @@ public class Activator extends AbstractUIPlugin {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		INSTANCE = this;
-		//TODO check whether JDT is available, if not use BuilderModule instead
 		try {
-			injector = Guice.createInjector(new JdtBuilderModule());
+			injector = Guice.createInjector(createBuilderModule(context));
 			final IBuilderState state = injector.getInstance(IBuilderState.class);
 			File file = getBuilderStateLocation().toFile();
 			try {
-				if (file.exists())
+				if (file.exists()) {
 					state.load();
+				} else {
+					ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD, null);
+				}
 			} catch(Exception e) {
 				log.error("Error while loading persistable builder state.", e);
-				log.error("Starting with an empty state.");
+				log.error("Triggering a full build.");
+				ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD, null);
 			} finally {
 				if (file.exists())
 					file.delete();
@@ -85,7 +94,19 @@ public class Activator extends AbstractUIPlugin {
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			throw e;
+		} catch (Error e) {
+			log.error(e.getMessage(), e);
+			throw e;
 		}
+	}
+
+	protected Module createBuilderModule(BundleContext context) {
+		String javaCorePlugin = JavaCore.PLUGIN_ID;
+		for(Bundle bundle: context.getBundles()) {
+			if (javaCorePlugin.equals(bundle.getSymbolicName()))
+				return new JdtBuilderModule(); 
+		}
+		return new BuilderModule(); 
 	}
 	
 	public IPath getBuilderStateLocation() {
