@@ -17,8 +17,7 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.common,
  org.eclipse.xtend.typesystem.emf,
  org.antlr.runtime,
- org.eclipse.xtext.xtend,
- org.apache.commons.logging;bundle-version="1.1.1"
+ org.eclipse.xtext.xtend
 Export-Package: org.eclipse.xtext.example,
  org.eclipse.xtext.example.ecoredsl,
  org.eclipse.xtext.example.parseTreeConstruction,
