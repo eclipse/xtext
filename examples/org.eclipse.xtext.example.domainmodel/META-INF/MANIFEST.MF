@@ -17,8 +17,7 @@ Require-Bundle: org.apache.log4j;bundle-version="1.2.15",
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.antlr.runtime,
- org.eclipse.xtext.xtend;bundle-version="0.8.0",
- org.apache.commons.logging;bundle-version="1.1.1"
+ org.eclipse.xtext.xtend;bundle-version="0.8.0"
 Export-Package: org.eclipse.xtext.example,
  org.eclipse.xtext.example.domainmodel,
  org.eclipse.xtext.example.domainmodel.impl,
