@@ -19,8 +19,7 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.ecore,
  org.eclipse.emf.common,
  org.antlr.runtime,
- org.eclipse.xtext.xtend,
- org.apache.commons.logging;bundle-version="1.1.1"
+ org.eclipse.xtext.xtend
 Bundle-ClassPath: lib/simple.jar,.
 Import-Package: org.apache.log4j
 Export-Package: org.eclipse.xtext,
