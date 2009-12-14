@@ -131,6 +131,7 @@ public class ContentAssistProcessorTestBuilder {
 		if (computeCompletionProposals == null)
 			computeCompletionProposals = new ICompletionProposal[0];
 
+		Arrays.sort(expectedText);
 		String expectation = Strings.concat(", ", Arrays.asList(expectedText));
 		Assert.assertEquals("expect " + expectedText.length + " CompletionProposal item for model '"
 				+ currentModelToParse + "': expectation was:\n" + expectation
@@ -180,6 +181,7 @@ public class ContentAssistProcessorTestBuilder {
 				proposedText = ((ConfigurableCompletionProposal) proposal).getReplacementString();
 			res.add(proposedText);
 		}
+		Collections.sort(res);
 		return res;
 	}
 
