@@ -8,7 +8,7 @@
 package org.eclipse.xtext.builder.tests;
 
 import org.eclipse.xtext.resource.IContainer.Manager;
-import org.eclipse.xtext.ui.core.scoping.namespaces.JavaProjectAwareContainerManager;
+import org.eclipse.xtext.ui.core.containers.JavaProjectAwareContainerManager;
 
 /**
  * Use this class to register components to be used within the IDE.
