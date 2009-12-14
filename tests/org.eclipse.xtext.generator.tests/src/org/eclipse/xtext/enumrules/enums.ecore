@@ -8,4 +8,8 @@
     <eLiterals name="OverriddenLiteral" value="2" literal="OtherLiteral"/>
     <eLiterals name="DifferentName" value="1" literal="DifferentLiteral"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="ExistingType">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="enumFeature" eType="#//ExistingEnum"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="stringFeature" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
 </ecore:EPackage>

@@ -263,9 +263,10 @@ public class EcoreUtil2 extends EcoreUtil {
 				} else if (type instanceof EDataType && existingFeature.getEType() instanceof EDataType) {
 					EDataType expected = (EDataType) type;
 					EDataType actual = (EDataType) existingFeature.getEType();
-					return actual.equals(expected)
-							|| getObjectType(actual.getInstanceClass()).isAssignableFrom(
-									getObjectType(expected.getInstanceClass()));
+					Class<?> expectedInstanceClass = getObjectType(expected.getInstanceClass());
+					Class<?> actualInstanceClass = getObjectType(actual.getInstanceClass());
+					return actual.equals(expected) || 
+						expectedInstanceClass != null && actualInstanceClass != null && actualInstanceClass.isAssignableFrom(expectedInstanceClass);
 				}
 			}
 		}
@@ -273,7 +274,7 @@ public class EcoreUtil2 extends EcoreUtil {
 	}
 
 	private static Class<?> getObjectType(Class<?> clazzA) {
-		if (clazzA.isPrimitive()) {
+		if (clazzA != null && clazzA.isPrimitive()) {
 			if (clazzA == Boolean.TYPE) {
 				return Boolean.class;
 			} else if (clazzA == Integer.TYPE) {
