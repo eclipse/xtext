@@ -152,18 +152,19 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 		if (sourceViewer != null) {
 			IDocument document = sourceViewer.getDocument();
 			IXtextDocument xtextDocument = XtextDocumentUtil.get(document);
-
-			if (modelListener == null) {
-				modelListener = new IXtextModelListener() {
-					public void modelChanged(XtextResource resource) {
-						if (logger.isDebugEnabled()) {
-							logger.debug("Document has been changed. Triggering update of outline.");
+			if (xtextDocument != null) {
+				if (modelListener == null) {
+					modelListener = new IXtextModelListener() {
+						public void modelChanged(XtextResource resource) {
+							if (logger.isDebugEnabled()) {
+								logger.debug("Document has been changed. Triggering update of outline.");
+							}
+							refresh();
 						}
-						refresh();
-					}
-				};
+					};
+				}
+				xtextDocument.addModelListener(modelListener);
 			}
-			xtextDocument.addModelListener(modelListener);
 		}
 	}
 
