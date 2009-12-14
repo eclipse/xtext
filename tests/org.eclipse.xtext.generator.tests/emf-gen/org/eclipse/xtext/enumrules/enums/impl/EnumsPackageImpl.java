@@ -2,10 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EnumsPackageImpl.java,v 1.3 2009/06/12 17:12:59 szarnekow Exp $
+ * $Id: EnumsPackageImpl.java,v 1.4 2009/12/14 09:41:09 szarnekow Exp $
  */
 package org.eclipse.xtext.enumrules.enums.impl;
 
+import org.eclipse.emf.ecore.EAttribute;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -14,6 +16,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.xtext.enumrules.enums.EnumsFactory;
 import org.eclipse.xtext.enumrules.enums.EnumsPackage;
 import org.eclipse.xtext.enumrules.enums.ExistingEnum;
+import org.eclipse.xtext.enumrules.enums.ExistingType;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,6 +25,12 @@ import org.eclipse.xtext.enumrules.enums.ExistingEnum;
  * @generated
  */
 public class EnumsPackageImpl extends EPackageImpl implements EnumsPackage {
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass existingTypeEClass = null;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -95,6 +104,33 @@ public class EnumsPackageImpl extends EPackageImpl implements EnumsPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getExistingType() {
+		return existingTypeEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getExistingType_EnumFeature() {
+		return (EAttribute)existingTypeEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EAttribute getExistingType_StringFeature() {
+		return (EAttribute)existingTypeEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EEnum getExistingEnum() {
 		return existingEnumEEnum;
 	}
@@ -126,6 +162,11 @@ public class EnumsPackageImpl extends EPackageImpl implements EnumsPackage {
 		if (isCreated) return;
 		isCreated = true;
 
+		// Create classes and their features
+		existingTypeEClass = createEClass(EXISTING_TYPE);
+		createEAttribute(existingTypeEClass, EXISTING_TYPE__ENUM_FEATURE);
+		createEAttribute(existingTypeEClass, EXISTING_TYPE__STRING_FEATURE);
+
 		// Create enums
 		existingEnumEEnum = createEEnum(EXISTING_ENUM);
 	}
@@ -152,6 +193,17 @@ public class EnumsPackageImpl extends EPackageImpl implements EnumsPackage {
 		setName(eNAME);
 		setNsPrefix(eNS_PREFIX);
 		setNsURI(eNS_URI);
+
+		// Create type parameters
+
+		// Set bounds for type parameters
+
+		// Add supertypes to classes
+
+		// Initialize classes and features; add operations and parameters
+		initEClass(existingTypeEClass, ExistingType.class, "ExistingType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEAttribute(getExistingType_EnumFeature(), this.getExistingEnum(), "enumFeature", null, 0, 1, ExistingType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getExistingType_StringFeature(), ecorePackage.getEString(), "stringFeature", null, 0, 1, ExistingType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize enums and add enum literals
 		initEEnum(existingEnumEEnum, ExistingEnum.class, "ExistingEnum");

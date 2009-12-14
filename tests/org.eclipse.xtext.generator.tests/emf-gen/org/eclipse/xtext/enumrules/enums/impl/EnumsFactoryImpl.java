@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EnumsFactoryImpl.java,v 1.3 2009/06/12 17:12:59 szarnekow Exp $
+ * $Id: EnumsFactoryImpl.java,v 1.4 2009/12/14 09:41:09 szarnekow Exp $
  */
 package org.eclipse.xtext.enumrules.enums.impl;
 
@@ -61,6 +61,7 @@ public class EnumsFactoryImpl extends EFactoryImpl implements EnumsFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
+			case EnumsPackage.EXISTING_TYPE: return createExistingType();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -94,6 +95,16 @@ public class EnumsFactoryImpl extends EFactoryImpl implements EnumsFactory {
 			default:
 				throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
 		}
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ExistingType createExistingType() {
+		ExistingTypeImpl existingType = new ExistingTypeImpl();
+		return existingType;
 	}
 
 	/**

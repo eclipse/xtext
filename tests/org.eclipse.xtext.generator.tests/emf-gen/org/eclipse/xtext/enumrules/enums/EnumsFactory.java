@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EnumsFactory.java,v 1.1 2009/03/18 16:58:37 szarnekow Exp $
+ * $Id: EnumsFactory.java,v 1.2 2009/12/14 09:41:09 szarnekow Exp $
  */
 package org.eclipse.xtext.enumrules.enums;
 
@@ -24,6 +24,15 @@ public interface EnumsFactory extends EFactory {
 	 * @generated
 	 */
 	EnumsFactory eINSTANCE = org.eclipse.xtext.enumrules.enums.impl.EnumsFactoryImpl.init();
+
+	/**
+	 * Returns a new object of class '<em>Existing Type</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Existing Type</em>'.
+	 * @generated
+	 */
+	ExistingType createExistingType();
 
 	/**
 	 * Returns the package supported by this factory.
