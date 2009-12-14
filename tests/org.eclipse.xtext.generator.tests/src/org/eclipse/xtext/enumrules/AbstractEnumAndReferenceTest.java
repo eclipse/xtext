@@ -22,7 +22,7 @@ public abstract class AbstractEnumAndReferenceTest extends AbstractXtextTests {
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(EnumAndReferenceTestLanguageStandaloneSetup.class);
-		helper = new ParserTestHelper(getResourceFactory(), getParser(), get(Keys.RESOURCE_SET_KEY));
+		helper = new ParserTestHelper(getResourceFactory(), getParser(), get(Keys.RESOURCE_SET_KEY),getCurrentFileExtension());
 	}
 	
 	@Override
