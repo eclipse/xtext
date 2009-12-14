@@ -23,8 +23,8 @@ import org.eclipse.xtext.example.ecoredsl.ReferencedMetamodel;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
-import org.eclipse.xtext.scoping.namespaces.QualifiedNameScopeProvider;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -33,7 +33,7 @@ import com.google.inject.Inject;
 /**
  * @author Michael Clay - Initial contribution and API
  */
-public class EcoreDslScopeProvider extends QualifiedNameScopeProvider {
+public class EcoreDslScopeProvider extends ImportedNamespaceAwareLocalScopeProvider {
 
 	@Inject
 	private IValueConverterService valueConverterService;

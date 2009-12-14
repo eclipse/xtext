@@ -28,8 +28,8 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.ParsetreeFactory;
-import org.eclipse.xtext.resource.ListBasedDiagnosticConsumer;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 
 import com.google.common.collect.Lists;
 import com.google.inject.AbstractModule;

@@ -11,7 +11,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider;
+import org.eclipse.xtext.scoping.impl.SimpleLocalScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 import org.eclipse.xtext.ui.common.editor.contentassist.bug287941TestLanguage.FromEntry;
 import org.eclipse.xtext.ui.common.editor.contentassist.bug287941TestLanguage.MQLquery;
@@ -31,7 +31,7 @@ public class Bug287941TestLanguageRuntimeModule extends org.eclipse.xtext.ui.com
 	}
 	
 	public void configureIScopeProviderDelegate(Binder binder) {
-		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(SimpleNameScopeProvider.class);
+		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(SimpleLocalScopeProvider.class);
 	}
 	
 	public static class ScopeProvider extends AbstractDeclarativeScopeProvider {

@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.ui.core.containers.ProjectBasedContainer;
 
 import com.google.common.collect.Lists;
 

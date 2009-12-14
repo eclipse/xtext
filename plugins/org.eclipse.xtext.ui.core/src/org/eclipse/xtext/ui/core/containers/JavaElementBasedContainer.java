@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.scoping.namespaces;
+package org.eclipse.xtext.ui.core.containers;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IStorage;

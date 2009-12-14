@@ -16,6 +16,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.ui.core.containers.JavaElementBasedContainer;
 import org.eclipse.xtext.ui.core.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.core.resource.Storage2UriMapperJavaImpl;
 
