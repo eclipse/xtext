@@ -6,14 +6,13 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.scoping.namespaces;
+package org.eclipse.xtext.naming;
 
 import java.util.Collections;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
-import org.eclipse.xtext.resource.IQualifiedNameProvider;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
+import org.eclipse.xtext.util.SimpleAttributeResolver;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

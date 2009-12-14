@@ -25,8 +25,10 @@ import org.eclipse.xtext.index.IndexTestLanguageStandaloneSetup;
 import org.eclipse.xtext.index.indexTestLanguage.Datatype;
 import org.eclipse.xtext.index.indexTestLanguage.Entity;
 import org.eclipse.xtext.index.indexTestLanguage.IndexTestLanguagePackage;
+import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.ResourceSetReferencingResourceSetImpl;
@@ -36,10 +38,7 @@ import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionManager;
 import org.eclipse.xtext.resource.impl.DefaultResourceServiceProvider;
 import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider;
-import org.eclipse.xtext.scoping.namespaces.QualifiedName;
-import org.eclipse.xtext.scoping.namespaces.QualifiedNameScopeProvider;
-import org.eclipse.xtext.scoping.namespaces.QualifiedNameScopeProvider.ImportNormalizer;
+import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider.ImportNormalizer;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -51,7 +50,7 @@ import com.google.common.collect.Iterables;
  */
 public class QualifiedNameScopeProviderTest extends AbstractGeneratorTest {
 
-	private QualifiedNameScopeProvider scopeProvider;
+	private ImportedNamespaceAwareLocalScopeProvider scopeProvider;
 	private ResourceSetGlobalScopeProvider globalScopeProvider;
 
 	@Override
@@ -77,7 +76,7 @@ public class QualifiedNameScopeProviderTest extends AbstractGeneratorTest {
 				return provider;
 			}
 		});
-		scopeProvider = new QualifiedNameScopeProvider();
+		scopeProvider = new ImportedNamespaceAwareLocalScopeProvider();
 		scopeProvider.setGlobalScopeProvider(globalScopeProvider);
 		scopeProvider.setNameProvider(nameProvider);
 	}

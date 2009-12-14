@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.impl.Linker;
+import org.eclipse.xtext.naming.SimpleNameProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
@@ -22,9 +23,8 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriResolver;
+import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 import org.eclipse.xtext.scoping.impl.LoadOnDemandResourceDescriptions;
-import org.eclipse.xtext.scoping.namespaces.QualifiedNameScopeProvider;
-import org.eclipse.xtext.scoping.namespaces.SimpleNameProvider;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
@@ -45,7 +45,7 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 
 	private String modelAsText;
 
-	private QualifiedNameScopeProvider scopeProvider;
+	private ImportedNamespaceAwareLocalScopeProvider scopeProvider;
 
 	private EReference reference;
 
@@ -53,7 +53,7 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(ReferenceGrammarTestLanguageStandaloneSetup.class);
-		scopeProvider = new QualifiedNameScopeProvider();
+		scopeProvider = new ImportedNamespaceAwareLocalScopeProvider();
 		SimpleNameProvider nameProvider = new SimpleNameProvider();
 		ImportUriGlobalScopeProvider globalScopeProvider = new ImportUriGlobalScopeProvider();
 		globalScopeProvider.setImportResolver(new ImportUriResolver());

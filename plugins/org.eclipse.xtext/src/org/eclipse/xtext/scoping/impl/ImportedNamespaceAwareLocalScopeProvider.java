@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.scoping.namespaces;
+package org.eclipse.xtext.scoping.impl;
 
 import static com.google.common.collect.Iterables.*;
 
@@ -19,13 +19,13 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.QualifiedName;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
-import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeDelegatingScopeProvider;
-import org.eclipse.xtext.scoping.impl.AbstractScope;
+import org.eclipse.xtext.util.SimpleAttributeResolver;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -35,9 +35,8 @@ import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
  */
-public class QualifiedNameScopeProvider extends AbstractGlobalScopeDelegatingScopeProvider {
+public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScopeDelegatingScopeProvider {
 
 	/**
 	 * @author Sven Efftinge - Initial contribution and API

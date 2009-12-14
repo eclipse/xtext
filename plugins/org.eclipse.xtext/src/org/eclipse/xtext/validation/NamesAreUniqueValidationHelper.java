@@ -9,6 +9,8 @@ package org.eclipse.xtext.validation;
 
 import java.util.Iterator;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.SimpleAttributeResolver;
+
 import java.util.Map;
 
 import org.eclipse.emf.common.util.EList;
@@ -16,7 +18,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EcorePackage;
-import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
 import com.google.common.collect.ImmutableSet;
