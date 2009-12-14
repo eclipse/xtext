@@ -88,6 +88,21 @@
 			type="xtext2">
 		</parser>
 	</extension>
+	
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="xtext">
+     </resourceServiceProvider>
+  </extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="xtext2">
+     </resourceServiceProvider>
+  </extension>
 
 	<!-- Wizards -->
 	<extension

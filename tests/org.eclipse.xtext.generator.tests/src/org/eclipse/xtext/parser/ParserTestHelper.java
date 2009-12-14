@@ -27,17 +27,19 @@ public class ParserTestHelper {
 	private final IResourceFactory factory;
 	private final IParser parser;
 	private final Provider<XtextResourceSet> resourceSet;
+	private String fileExtension;
 
-	public ParserTestHelper(IResourceFactory factory, IParser parser, Provider<XtextResourceSet> resourceSet) {
+	public ParserTestHelper(IResourceFactory factory, IParser parser, Provider<XtextResourceSet> resourceSet, String fileExtension) {
 		this.factory = factory;
 		this.parser = parser;
 		this.resourceSet = resourceSet;
+		this.fileExtension = fileExtension;
 	}
 
 	public XtextResource getResourceFromStream(InputStream in) throws IOException {
 		XtextResourceSet rs = resourceSet.get();
 		rs.setClasspathURIContext(getClass());
-		URI uri = URI.createURI("mytestmodel.test");
+		URI uri = URI.createURI("mytestmodel."+fileExtension);
 		XtextResource resource = createResource(uri);
 		rs.getResources().add(resource);
 		resource.load(in, null);

@@ -40,6 +40,7 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.parsetree.reconstr.impl,
  org.eclipse.xtext.parsetree.util,
  org.eclipse.xtext.resource,
+ org.eclipse.xtext.resource.ecore,
  org.eclipse.xtext.resource.impl,
  org.eclipse.xtext.scoping,
  org.eclipse.xtext.scoping.impl,
@@ -61,6 +62,9 @@ Require-Bundle: org.eclipse.emf.ecore.xmi;visibility:=reexport,
  org.eclipse.emf.mwe.utils;bundle-version="0.8.0";resolution:=optional,
  org.eclipse.emf.common,
  org.eclipse.xtend;bundle-version="0.8.0";resolution:=optional,
- org.eclipse.xtend.typesystem.emf;bundle-version="0.8.0";resolution:=optional
+ org.eclipse.xtend.typesystem.emf;bundle-version="0.8.0";resolution:=optional,
+ org.eclipse.core.runtime;bundle-version="3.5.0";resolution:=optional
 Import-Package: org.apache.log4j;version="1.2.15"
+Bundle-ActivationPolicy: lazy
+Bundle-Activator: org.eclipse.xtext.internal.Activator
 

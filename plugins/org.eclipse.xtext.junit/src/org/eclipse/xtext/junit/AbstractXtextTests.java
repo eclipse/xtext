@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.XtendFacade;
 import org.eclipse.xtend.expression.ExecutionContextImpl;
 import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.conversion.IValueConverterService;
@@ -42,6 +43,7 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor;
 import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
 import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -53,6 +55,7 @@ import com.google.inject.Key;
 import com.google.inject.Module;
 import com.google.inject.Provider;
 import com.google.inject.TypeLiteral;
+import com.google.inject.name.Names;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -67,6 +70,9 @@ public abstract class AbstractXtextTests extends TestCase {
 	private HashMap<String, Object> protocolToFactoryMap;
 	private HashMap<String, Object> extensionToFactoryMap;
 	private HashMap<String, Object> contentTypeIdentifierToFactoryMap;
+	private HashMap<String, Object> protocolToServiceProviderMap;
+	private HashMap<String, Object> extensionToServiceProviderMap;
+	private HashMap<String, Object> contentTypeIdentifierToServiceProviderMap;
 
 	static {
 		//EMF Standalone setup
@@ -89,6 +95,10 @@ public abstract class AbstractXtextTests extends TestCase {
 		this.protocolToFactoryMap = new HashMap<String, Object>(Resource.Factory.Registry.INSTANCE.getProtocolToFactoryMap());
 		this.extensionToFactoryMap = new HashMap<String, Object>(Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap());
 		this.contentTypeIdentifierToFactoryMap = new HashMap<String, Object>(Resource.Factory.Registry.INSTANCE.getContentTypeToFactoryMap());
+
+		this.protocolToServiceProviderMap = new HashMap<String, Object>(IResourceServiceProvider.Registry.INSTANCE.getProtocolToFactoryMap());
+		this.extensionToServiceProviderMap = new HashMap<String, Object>(IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap());
+		this.contentTypeIdentifierToServiceProviderMap = new HashMap<String, Object>(IResourceServiceProvider.Registry.INSTANCE.getContentTypeToFactoryMap());
 	}
 
 	@Override
@@ -106,6 +116,13 @@ public abstract class AbstractXtextTests extends TestCase {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().putAll(extensionToFactoryMap);
 		Resource.Factory.Registry.INSTANCE.getContentTypeToFactoryMap().clear();
 		Resource.Factory.Registry.INSTANCE.getContentTypeToFactoryMap().putAll(contentTypeIdentifierToFactoryMap);
+		
+		IResourceServiceProvider.Registry.INSTANCE.getProtocolToFactoryMap().clear();
+		IResourceServiceProvider.Registry.INSTANCE.getProtocolToFactoryMap().putAll(protocolToServiceProviderMap);
+		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().clear();
+		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().putAll(extensionToServiceProviderMap);
+		IResourceServiceProvider.Registry.INSTANCE.getContentTypeToFactoryMap().clear();
+		IResourceServiceProvider.Registry.INSTANCE.getContentTypeToFactoryMap().putAll(contentTypeIdentifierToServiceProviderMap);
 		super.tearDown();
 	}
 
@@ -237,11 +254,18 @@ public abstract class AbstractXtextTests extends TestCase {
 	}
 
 	public final XtextResource getResource(InputStream in) throws Exception {
-		return getResource(in, URI.createURI("mytestmodel.test"));
+		return getResource(in, URI.createURI("mytestmodel."+getCurrentFileExtension()));
 	}
 	
+	protected String getCurrentFileExtension() {
+		String instance = injector.getInstance(Key.get(String.class,Names.named(Constants.FILE_EXTENSIONS)));
+		if (instance.indexOf(',')==-1)
+			return instance;
+		return instance.split(",")[0];
+	}
+
 	public final XtextResource getResourceAndExpect(InputStream in, int errors) throws Exception {
-		return getResourceAndExpect(in, URI.createURI("mytestmodel.test"), errors);
+		return getResourceAndExpect(in, URI.createURI("mytestmodel."+getCurrentFileExtension()), errors);
 	}
 
 	public final XtextResource getResource(InputStream in, URI uri) throws Exception {

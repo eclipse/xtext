@@ -3,12 +3,18 @@
 
 <!--
  <copyright>
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
  </copyright>
-
- $Id: plugin.xml,v 1.8 2009/02/10 11:46:10 sefftinge Exp $
 -->
 
 <plugin>
+   <extension-point id="content_resourceServiceProvider" name="Content Handler Resource Service Provider Registration" schema="schema/content_resourceServiceProvider.exsd"/>
+   <extension-point id="extension_resourceServiceProvider" name="URI Extenion Resource Service Provider Registration" schema="schema/extension_resourceServiceProvider.exsd"/>
+   <extension-point id="protocol_resourceServiceProvider" name="URI Protocol (Scheme) Resource Service Provider Registration" schema="schema/protocol_resourceServiceProvider.exsd"/>
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 

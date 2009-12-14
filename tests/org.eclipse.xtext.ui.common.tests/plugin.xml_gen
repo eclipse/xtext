@@ -119,6 +119,13 @@
 			type="xtextgrammaruitestlanguage">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.XtextGrammarUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="xtextgrammaruitestlanguage">
+     </resourceServiceProvider>
+  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -237,6 +244,13 @@
 			type="importuriuitestlanguage">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.linking.ImportUriUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="importuriuitestlanguage">
+     </resourceServiceProvider>
+  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -355,6 +369,13 @@
 			type="twocontextstestlanguage">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="twocontextstestlanguage">
+     </resourceServiceProvider>
+  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -473,6 +494,13 @@
 			type="bug286935testlanguage">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.ui.common.editor.contentassist.Bug286935TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="bug286935testlanguage">
+     </resourceServiceProvider>
+  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -591,6 +619,13 @@
 			type="bug287941testlanguage">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="bug287941testlanguage">
+     </resourceServiceProvider>
+  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -709,6 +744,13 @@
 			type="bug288734testlanguage">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.ui.common.editor.contentassist.Bug288734TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="bug288734testlanguage">
+     </resourceServiceProvider>
+  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -827,6 +869,13 @@
 			type="bug288760testlanguage">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.ui.common.editor.contentassist.Bug288760TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="bug288760testlanguage">
+     </resourceServiceProvider>
+  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -945,6 +994,13 @@
 			type="bug289187testlanguage">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.ui.common.editor.contentassist.Bug289187TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="bug289187testlanguage">
+     </resourceServiceProvider>
+  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -1063,6 +1119,13 @@
 			type="bug291022testlanguage">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.ui.common.editor.contentassist.Bug291022TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="bug291022testlanguage">
+     </resourceServiceProvider>
+  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -1181,6 +1244,13 @@
 			type="contentassistcontexttestlanguage">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.ui.common.editor.contentassist.ContentAssistContextTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="contentassistcontexttestlanguage">
+     </resourceServiceProvider>
+  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -1299,6 +1369,13 @@
 			type="crossreferenceproposaltestlanguage">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.ui.common.editor.contentassist.CrossReferenceProposalTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="crossreferenceproposaltestlanguage">
+     </resourceServiceProvider>
+  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -1417,6 +1494,13 @@
 			type="datatyperuletestlanguage">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.ui.common.editor.contentassist.DatatypeRuleTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="datatyperuletestlanguage">
+     </resourceServiceProvider>
+  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -1535,6 +1619,13 @@
 			type="lookaheadcontentassisttestlanguage">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="lookaheadcontentassisttestlanguage">
+     </resourceServiceProvider>
+  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -1653,6 +1744,13 @@
 			type="domainmodeltestlanguage">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.ui.common.editor.contentassist.DomainModelTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="domainmodeltestlanguage">
+     </resourceServiceProvider>
+  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -1771,6 +1869,13 @@
 			type="keywordsuitestlanguage">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.parser.keywords.KeywordsUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="keywordsuitestlanguage">
+     </resourceServiceProvider>
+  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -1889,6 +1994,13 @@
 			type="contentassisttestlanguage">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="contentassisttestlanguage">
+     </resourceServiceProvider>
+  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -2007,6 +2119,13 @@
 			type="referencegrammaruitestlanguage">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.testlanguages.ReferenceGrammarUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="referencegrammaruitestlanguage">
+     </resourceServiceProvider>
+  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -2125,6 +2244,13 @@
 			type="enumrulesuitestlanguage">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.enumrules.EnumRulesUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="enumrulesuitestlanguage">
+     </resourceServiceProvider>
+  </extension>
 
 
 </plugin>

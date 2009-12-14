@@ -32,7 +32,8 @@ public abstract class AbstractExportedObjectsAwareScopeProvider extends Abstract
 	}
 	
 	public Iterable<IEObjectDescription> getExportedEObjects(Resource resource) {
-		IResourceDescription.Manager manager = resourceServiceProviderRegistry.getResourceServiceProvider(resource.getURI(),null).getResourceDescriptionManager();
+		IResourceServiceProvider resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(resource.getURI(),null);
+		IResourceDescription.Manager manager = resourceServiceProvider.getResourceDescriptionManager();
 		if (manager == null)
 			return Iterables.emptyIterable();
 		IResourceDescription description = manager.getResourceDescription(resource);

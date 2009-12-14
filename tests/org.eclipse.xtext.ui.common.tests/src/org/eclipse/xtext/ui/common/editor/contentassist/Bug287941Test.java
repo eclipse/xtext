@@ -8,6 +8,8 @@
 package org.eclipse.xtext.ui.common.editor.contentassist;
 
 import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.resource.ecore.EcoreResourceServiceProviderImpl;
 import org.eclipse.xtext.ui.common.service.UIPluginModule;
 import org.eclipse.xtext.ui.common.tests.Activator;
 
@@ -20,6 +22,7 @@ import com.google.inject.Injector;
 public class Bug287941Test extends AbstractContentAssistProcessorTest {
 
 	public ISetup getBug287941TestLanguageSetup() {
+		IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("ecore", new EcoreResourceServiceProviderImpl());
 		return new Bug287941TestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {

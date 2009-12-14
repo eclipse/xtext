@@ -110,6 +110,13 @@
 			type="ecoredsl">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.example.EcoreDslExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="ecoredsl">
+     </resourceServiceProvider>
+  </extension>
 
 
 </plugin>

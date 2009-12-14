@@ -20,7 +20,7 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
-import org.eclipse.xtext.scoping.namespaces.DefaultGlobalScopeProvider;
+import org.eclipse.xtext.scoping.namespaces.AbstractGlobalScopeProvider;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;
@@ -71,7 +71,7 @@ public class PersistableResourceDescriptionsImpl extends AbstractResourceDescrip
 		if (monitor.isCanceled() || (toBeAddedOrUpdated.isEmpty() && toBeRemoved.isEmpty()))
 			return ImmutableList.of();
 		resourceSet.eAdapters().add(new ShadowingResourceDescriptions.Adapter(this, toBeAddedOrUpdated, toBeRemoved));
-		resourceSet.getLoadOptions().put(DefaultGlobalScopeProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);
+		resourceSet.getLoadOptions().put(AbstractGlobalScopeProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);
 		
 		Iterable<Delta> deltas = updater.transitiveUpdate(this, resourceSet, toBeAddedOrUpdated, toBeRemoved,
 				monitor);

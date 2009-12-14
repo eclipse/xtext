@@ -38,7 +38,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(XtextStandaloneSetup.class);
-		uri = URI.createURI("scheme://foobar");
+		uri = URI.createURI("scheme:/foobar.xtext");
 		documentContent = "grammar foo with org.eclipse.xtext.common.Terminals\n"
 				+ "generate test 'http://test'\n"
 				+ "Model: name=ID;";

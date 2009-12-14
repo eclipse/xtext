@@ -14,6 +14,7 @@ import org.eclipse.xtext.builder.impl.DirtyStateAwareResourceDescriptions;
 import org.eclipse.xtext.builder.impl.XtextBuilder;
 import org.eclipse.xtext.resource.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.scoping.namespaces.SimpleNameProvider;
 import org.eclipse.xtext.ui.core.editor.DirtyStateManagerProvider;
 import org.eclipse.xtext.ui.core.editor.IDirtyStateManager;
@@ -36,6 +37,7 @@ public class BuilderModule extends AbstractModule {
 		bind(IResourceDescriptions.class).to(DirtyStateAwareResourceDescriptions.class).in(Scopes.SINGLETON);
 		bind(IStateChangeEventBroker.class).toProvider(StateChangeEventBrokerProvider.class);
 		bind(IDirtyStateManager.class).toProvider(DirtyStateManagerProvider.class);
+		bind(IResourceServiceProvider.Registry.class).toInstance(IResourceServiceProvider.Registry.INSTANCE);
 	}
 
 	protected void bindQualifiedNameProvider() {

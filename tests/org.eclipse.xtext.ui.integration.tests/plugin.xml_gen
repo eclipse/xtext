@@ -120,6 +120,13 @@
 			type="testlanguage">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.ui.integration.TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="testlanguage">
+     </resourceServiceProvider>
+  </extension>
 
 
 
