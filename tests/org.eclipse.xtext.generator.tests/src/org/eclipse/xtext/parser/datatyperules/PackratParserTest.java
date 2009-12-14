@@ -57,7 +57,7 @@ public class PackratParserTest extends ParserTest {
 
 	@Override
 	public XtextResource doGetResource(InputStream in, URI uri) throws Exception {
-		ParserTestHelper helper = new ParserTestHelper(getResourceFactory(), parser, get(Keys.RESOURCE_SET_KEY));
+		ParserTestHelper helper = new ParserTestHelper(getResourceFactory(), parser, get(Keys.RESOURCE_SET_KEY),getCurrentFileExtension());
 		return helper.getResourceFromStream(in);
 	}
 

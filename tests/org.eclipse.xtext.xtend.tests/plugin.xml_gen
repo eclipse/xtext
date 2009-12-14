@@ -119,6 +119,13 @@
 			type="treetestlanguage">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.xtend.TreeTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="treetestlanguage">
+     </resourceServiceProvider>
+  </extension>
 
 
 </plugin>

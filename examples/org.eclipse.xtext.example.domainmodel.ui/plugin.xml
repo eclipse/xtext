@@ -110,6 +110,13 @@
 			type="dmodel">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="dmodel">
+     </resourceServiceProvider>
+  </extension>
 
 
 
