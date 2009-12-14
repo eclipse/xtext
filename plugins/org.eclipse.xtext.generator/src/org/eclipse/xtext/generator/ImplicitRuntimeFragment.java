@@ -8,6 +8,7 @@
 
 package org.eclipse.xtext.generator;
 
+import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
 
 public class ImplicitRuntimeFragment extends DefaultGeneratorFragment {
@@ -20,5 +21,10 @@ public class ImplicitRuntimeFragment extends DefaultGeneratorFragment {
 	@Override
 	public String[] getImportedPackagesRt(Grammar grammar) {
 		return new String[] {"org.apache.log4j"};
+	}
+	
+	@Override
+	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
+		super.addToPluginXmlRt(grammar, ctx);
 	}
 }

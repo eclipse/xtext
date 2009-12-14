@@ -28,13 +28,22 @@
 			type="«ext»">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="«executableExtensionFactory()»:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="«ext»">
+     </resourceServiceProvider>
+  </extension>
 «ENDFOREACH»
 «ENDDEFINE»
 
 «DEFINE addToStandaloneSetup(List[String] modelFileExtensions) FOR Grammar»
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
+		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
 		«FOREACH modelFileExtensions AS modelFileExtension-»
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("«modelFileExtension»", resourceFactory);
+		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("«modelFileExtension»", serviceProvider);
 		«ENDFOREACH»
 «ENDDEFINE»
 

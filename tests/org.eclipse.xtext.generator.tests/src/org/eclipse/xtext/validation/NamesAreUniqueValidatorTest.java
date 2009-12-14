@@ -102,4 +102,16 @@ public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements I
 		}; 
 	}
 
+	public Map<String, Object> getContentTypeToFactoryMap() {
+		return null;
+	}
+
+	public Map<String, Object> getExtensionToFactoryMap() {
+		return null;
+	}
+
+	public Map<String, Object> getProtocolToFactoryMap() {
+		return null;
+	}
+
 }

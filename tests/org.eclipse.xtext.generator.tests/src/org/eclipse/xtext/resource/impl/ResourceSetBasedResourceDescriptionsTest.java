@@ -8,6 +8,7 @@
 package org.eclipse.xtext.resource.impl;
 
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
 import junit.framework.TestCase;
@@ -190,6 +191,18 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 
 	public EObject apply(IEObjectDescription from) {
 		return from.getEObjectOrProxy();
+	}
+
+	public Map<String, Object> getContentTypeToFactoryMap() {
+		return null;
+	}
+
+	public Map<String, Object> getExtensionToFactoryMap() {
+		return null;
+	}
+
+	public Map<String, Object> getProtocolToFactoryMap() {
+		return null;
 	}
 	
 }

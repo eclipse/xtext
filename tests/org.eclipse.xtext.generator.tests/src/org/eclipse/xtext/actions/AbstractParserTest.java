@@ -34,7 +34,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 		super.setUp();
 		with(ActionTestLanguageStandaloneSetup.class);
 		grammarAccess = get(ActionTestLanguageGrammarAccess.class);
-		helper = new ParserTestHelper(getResourceFactory(), getParser(), get(Keys.RESOURCE_SET_KEY));
+		helper = new ParserTestHelper(getResourceFactory(), getParser(), get(Keys.RESOURCE_SET_KEY),getCurrentFileExtension());
 	}
 
 	@Override
