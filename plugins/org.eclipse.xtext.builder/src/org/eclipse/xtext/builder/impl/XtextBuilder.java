@@ -18,6 +18,7 @@ import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.SubProgressMonitor;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.ui.core.resource.IResourceSetProvider;
 
@@ -69,6 +70,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 
 	protected void incrementalBuild(IResourceDelta delta, final IProgressMonitor monitor) throws CoreException {
 		final ToBeBuilt toBeBuilt = new ToBeBuilt();
+		monitor.beginTask("incremental build", 2);
 		IResourceDeltaVisitor visitor = new IResourceDeltaVisitor() {
 			public boolean visit(IResourceDelta delta) throws CoreException {
 				if (delta.getResource() instanceof IStorage) {
@@ -82,7 +84,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			}
 		};
 		delta.accept(visitor);
-		doBuild(toBeBuilt, monitor);
+		monitor.worked(1);
+		doBuild(toBeBuilt, new SubProgressMonitor(monitor, 1));
+		monitor.done();
 	}
 
 	protected void doBuild(ToBeBuilt toBeBuilt, IProgressMonitor monitor) {
@@ -92,8 +96,10 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 
 	protected void fullBuild(final IProgressMonitor monitor) throws CoreException {
 		IProject project = getProject();
-		final ToBeBuilt toBeBuilt = toBeBuiltComputer.updateProject(project, monitor);
-		doBuild(toBeBuilt, monitor);
+		monitor.beginTask("full build", 2);
+		final ToBeBuilt toBeBuilt = toBeBuiltComputer.updateProject(project, new SubProgressMonitor(monitor, 1));
+		doBuild(toBeBuilt, new SubProgressMonitor(monitor, 1));
+		monitor.done();
 	}
 
 	protected boolean isOpened(IResourceDelta delta) {

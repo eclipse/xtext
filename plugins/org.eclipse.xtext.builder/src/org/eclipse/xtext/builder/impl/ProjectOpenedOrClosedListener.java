@@ -67,9 +67,10 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 						return false;
 					}
 				});
-				if (!toUpdate.isEmpty())
+				if (!toUpdate.isEmpty()) {
 					new UpdateProjectsJob("updating projects", resourceSetProvider, toUpdate, toBeBuiltComputer,
 							builderState).schedule();
+				}
 			} catch (CoreException e) {
 				log.error(e);
 			}

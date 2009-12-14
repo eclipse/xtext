@@ -16,6 +16,9 @@ import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
+import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.builder.nature.XtextNature;
 import org.eclipse.xtext.resource.IResourceDescription;
@@ -48,6 +51,97 @@ public class ProfilerAbstractBuilderTest extends TestCase implements IResourceDe
 		events.clear();
 		getBuilderState().removeListener(this);
 		super.tearDown();
+	}
+	
+	public void testFullBuildBigProject() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		addNature(project.getProject(), XtextNature.NATURE_ID);
+		IFolder folder = addSourceFolder(project, "src");
+		int NUM_FILES = 200;
+		IFile[] files = new IFile[NUM_FILES];
+		Stopwatch timer = new Stopwatch();
+		for (int i = 0; i < NUM_FILES; i++) {
+			IFile file = folder.getFile("Test_" + i + "_" + F_EXT);
+			files[i] = file;
+			String contents = "object Foo" + i + " references Foo" + (i + 1);
+			if (i == NUM_FILES)
+				contents = "object Foo" + i;
+			file.create(new StringInputStream(contents), true, monitor());
+		}
+		logAndReset("Creating files", timer);
+		waitForAutoBuild();
+		logAndReset("Auto build", timer);
+	}
+	
+	public void testFullBuildBigProjectWithRefeernceToJar() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		addNature(project.getProject(), XtextNature.NATURE_ID);
+		IFolder folder = addSourceFolder(project, "src");
+		IFile jarFile = project.getProject().getFile("my.jar");
+		jarFile.create(jarInputStream(new TextFile("my/element"+F_EXT,"object ReferenceMe")), true, monitor());
+		addJarToClasspath(project, jarFile);
+		
+		int NUM_FILES = 2000;
+		IFile[] files = new IFile[NUM_FILES];
+		Stopwatch timer = new Stopwatch();
+		for (int i = 0; i < NUM_FILES; i++) {
+			IFile file = folder.getFile("Test_" + i + "_" + F_EXT);
+			files[i] = file;
+			String contents = "object Foo" + i + " references ReferenceMe";
+			file.create(new StringInputStream(contents), true, monitor());
+		}
+		logAndReset("Creating files", timer);
+		waitForAutoBuild();
+		logAndReset("Auto build", timer);
+		IMarker[] iMarkers = folder.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE);
+		for (IMarker iMarker : iMarkers) {
+			System.out.println(iMarker.getAttribute(IMarker.MESSAGE));
+		}
+		assertEquals(0,iMarkers.length);
+	}
+	
+	public void testFullBuildBigProjectWithLinkingErrors() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		addNature(project.getProject(), XtextNature.NATURE_ID);
+		IFolder folder = addSourceFolder(project, "src");
+		int NUM_FILES = 200;
+		IFile[] files = new IFile[NUM_FILES];
+		Stopwatch timer = new Stopwatch();
+		for (int i = 0; i < NUM_FILES; i++) {
+			IFile file = folder.getFile("Test_" + i + "_" + F_EXT);
+			files[i] = file;
+			String contents = "object Foo" + i + " references Foo" + (i * 1000);
+			if (i == NUM_FILES)
+				contents = "object Foo" + i;
+			file.create(new StringInputStream(contents), true, monitor());
+		}
+		logAndReset("Creating files", timer);
+		waitForAutoBuild();
+		logAndReset("Auto build", timer);
+		IMarker[] iMarkers = folder.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE);
+		assertEquals(NUM_FILES-1,iMarkers.length);
+	}
+	
+	public void testFullBuildBigProjectWithSyntaxErrors() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		addNature(project.getProject(), XtextNature.NATURE_ID);
+		IFolder folder = addSourceFolder(project, "src");
+		int NUM_FILES = 500;
+		IFile[] files = new IFile[NUM_FILES];
+		Stopwatch timer = new Stopwatch();
+		for (int i = 0; i < NUM_FILES; i++) {
+			IFile file = folder.getFile("Test_" + i + "_" + F_EXT);
+			files[i] = file;
+			String contents = "object Foo" + i + " references Foo" + (i * 1000);
+			if (i == NUM_FILES)
+				contents = "object Foo" + i;
+			file.create(new StringInputStream(contents), true, monitor());
+		}
+		logAndReset("Creating files", timer);
+		waitForAutoBuild();
+		logAndReset("Auto build", timer);
+		IMarker[] iMarkers = folder.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE);
+		assertEquals(NUM_FILES-1,iMarkers.length);
 	}
 
 	public void testLotsOfFiles() throws Exception {
