@@ -11,6 +11,8 @@ import java.util.Collections;
 import java.util.Map;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResourceChangeEvent;
+import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
@@ -21,17 +23,22 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryRegistryImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.xtext.util.SimpleCache;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
+import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class Storage2UriMapperImpl implements IStorage2UriMapper {
+@Singleton
+public class Storage2UriMapperImpl implements IStorage2UriMapper, IResourceChangeListener {
 
 	private ResourceFactoryRegistryImpl resourceFactoryRegistry;
 
 	public Storage2UriMapperImpl() {
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(this);
 		final ResourceSet resourceSet = new ResourceSetImpl();
 		resourceFactoryRegistry = new ResourceFactoryRegistryImpl() {
 			@Override
@@ -59,12 +66,9 @@ public class Storage2UriMapperImpl implements IStorage2UriMapper {
 	}
 
 	public Iterable<IStorage> getStorages(URI uri) {
-		if (uri.isPlatformResource()) {
-			Path path = new Path(uri.toPlatformString(true));
-			IFile file = getWorkspaceRoot().getFile(path);
-			return Collections.singleton((IStorage) file);
+		synchronized (cache) {
+			return cache.get(uri);
 		}
-		return Iterables.emptyIterable();
 	}
 
 	protected IWorkspaceRoot getWorkspaceRoot() {
@@ -87,6 +91,24 @@ public class Storage2UriMapperImpl implements IStorage2UriMapper {
 
 	protected boolean isValidUri(URI uri) {
 		return (resourceFactoryRegistry.getFactory(uri) != null);
+	}
+	
+	
+	private final SimpleCache<URI, Iterable<IStorage>> cache = new SimpleCache<URI, Iterable<IStorage>>(new Function<URI, Iterable<IStorage>>() {
+		public Iterable<IStorage> apply(URI uri) {
+			if (uri.isPlatformResource()) {
+				Path path = new Path(uri.toPlatformString(true));
+				IFile file = getWorkspaceRoot().getFile(path);
+				return Collections.singleton((IStorage) file);
+			}
+			return Iterables.emptyIterable();
+		}
+	});
+
+	public void resourceChanged(IResourceChangeEvent event) {
+		synchronized (cache) {
+			cache.clear();
+		}
 	}
 
 }

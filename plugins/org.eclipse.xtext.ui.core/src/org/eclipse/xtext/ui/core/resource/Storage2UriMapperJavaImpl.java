@@ -14,26 +14,51 @@ import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.core.ElementChangedEvent;
+import org.eclipse.jdt.core.IElementChangedListener;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.xtext.util.SimpleCache;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Sets;
+import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl {
+@Singleton
+public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements IElementChangedListener {
 
 	private static final Logger log = Logger.getLogger(Storage2UriMapperJavaImpl.class);
+	
+	public Storage2UriMapperJavaImpl() {
+		JavaCore.addElementChangedListener(this);
+	}
+	
+	public void elementChanged(ElementChangedEvent event) {
+		if (event.getType()==ElementChangedEvent.POST_CHANGE) {
+			synchronized (cache) {
+				cache.clear();
+			}
+		}
+	}
+	
+	private SimpleCache<URI, Iterable<IStorage>> cache = new SimpleCache<URI, Iterable<IStorage>>(new Function<URI,Iterable<IStorage>>(){
+		public Iterable<IStorage> apply(URI from) {
+			return findStoragesInJarsOrExternalClassFolders(from);
+		}});
 
 	@Override
 	public Iterable<IStorage> getStorages(URI uri) {
 		Iterable<IStorage> storages = super.getStorages(uri);
 		if (!storages.iterator().hasNext()) {
-			return findStoragesInJarsOrExternalClassFolders(uri);
+			synchronized (cache) {
+				return cache.get(uri);
+			}
 		}
 		return storages;
 	}
@@ -131,4 +156,5 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl {
 		String string = archiveURI.toString();
 		return URI.createURI(string.substring(archiveURI.scheme().length() + 1, string.indexOf('!')));
 	}
+
 }

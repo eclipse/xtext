@@ -14,6 +14,8 @@ import com.google.inject.ImplementedBy;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * 
+ * TODO reuse instance created by shared infrastructure 
  */
 @ImplementedBy(Storage2UriMapperJavaImpl.class)
 public interface IStorage2UriMapper {
