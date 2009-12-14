@@ -7,11 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ecoreInference;
 
-import static org.easymock.EasyMock.anyObject;
-import static org.easymock.EasyMock.createMock;
-import static org.easymock.EasyMock.replay;
-import static org.easymock.EasyMock.same;
-import static org.easymock.EasyMock.verify;
+import static org.easymock.EasyMock.*;
 
 import java.io.InputStream;
 import java.util.List;
@@ -1271,6 +1267,36 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 			"EClass: name=ID;";
 		XtextResource resource = getResourceFromStringAndExpect(grammar, 1);
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
+	}
+	
+	public void testBug296496_01() throws Exception {
+		final String grammar = 
+			"grammar test with org.eclipse.xtext.common.Terminals\n" + 
+			"import \"classpath:/org/eclipse/xtext/enumrules/enums.ecore\"\n" + 
+			"ExistingType:\n" + 
+			"  enumFeature=ExistingEnum stringFeature=ExistingEnum;\n" + 
+			"enum ExistingEnum:\n" + 
+			"  SameName | OverriddenLiteral = \"overridden\" | DifferentName;";
+		XtextResource resource = getResourceFromStringAndExpect(grammar, 1);
+		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
+	}
+	
+	public void testBug296496_02() throws Exception {
+		final String grammarAsString = 
+			"grammar test with org.eclipse.xtext.common.Terminals\n" + 
+			"import \"classpath:/org/eclipse/xtext/enumrules/enums.ecore\"\n" + 
+			"generate myDsl \"http://example.xtext.org/MyDsl\"\n" + 
+			"CreatedType:\n" + 
+			"  enumFeature=ExistingEnum otherEnumFeature=ExistingEnum;\n" + 
+			"enum ExistingEnum:\n" + 
+			"  SameName | OverriddenLiteral = \"overridden\" | DifferentName;";
+		XtextResource resource = getResourceFromStringAndExpect(grammarAsString, 0);
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		Grammar grammar = (Grammar) resource.getContents().get(0);
+		GeneratedMetamodel generatedMetamodel = (GeneratedMetamodel) grammar.getMetamodelDeclarations().get(1);
+		assertEquals("myDsl", generatedMetamodel.getName());
+		EClass createdType = (EClass) generatedMetamodel.getEPackage().getEClassifier("CreatedType");
+		assertEquals(createdType.getEStructuralFeature("enumFeature").getEType(), createdType.getEStructuralFeature("otherEnumFeature").getEType());
 	}
 	
 }
