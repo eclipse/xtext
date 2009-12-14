@@ -22,7 +22,6 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.namespaces.AbstractGlobalScopeProvider;
 import org.eclipse.xtext.util.OnChangeEvictingCacheAdapter;
 
 import com.google.common.collect.Iterables;

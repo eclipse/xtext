@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.scoping.namespaces;
+package org.eclipse.xtext.scoping.impl;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -17,7 +17,6 @@ import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.impl.SimpleScope;
 
 import com.google.inject.Inject;
 

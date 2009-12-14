@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.resource;
+package org.eclipse.xtext.naming;
 
 import org.eclipse.emf.ecore.EObject;
 

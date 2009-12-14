@@ -5,17 +5,18 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.tests;
+package org.eclipse.xtext.scoping.impl;
 
-import org.eclipse.xtext.resource.IContainer.Manager;
-import org.eclipse.xtext.ui.core.containers.JavaProjectAwareContainerManager;
+import org.apache.log4j.Logger;
 
 /**
- * Use this class to register components to be used within the IDE.
+ * @author Sebastian Zarnekow - Initial contribution and API
+ * @deprecated use {@link SimpleLocalScopeProvider} instead.
  */
-public class BuilderTestLanguageUiModule extends org.eclipse.xtext.builder.tests.AbstractBuilderTestLanguageUiModule {
-	@Override
-	public Class<? extends Manager> bindIContainer$Manager() {
-		return JavaProjectAwareContainerManager.class;
+@Deprecated
+public class SimpleNameScopeProvider extends SimpleLocalScopeProvider {
+
+	static {
+		Logger.getLogger(SimpleNameScopeProvider.class).warn("The SimpleNameScopeProvider is deprecated. Please change the usages to SimpleLocalScopeProvider");
 	}
 }

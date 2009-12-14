@@ -20,6 +20,8 @@ import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.lazy.LazyLinker;
 import org.eclipse.xtext.linking.lazy.LazyLinkingResource;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.SimpleNameProvider;
 import org.eclipse.xtext.parser.SwitchingParser;
 import org.eclipse.xtext.parser.antlr.AntlrTokenToStringConverter;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
@@ -38,7 +40,6 @@ import org.eclipse.xtext.parsetree.reconstr.impl.DefaultUnassignedTextSerializer
 import org.eclipse.xtext.resource.DefaultFragmentProvider;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IFragmentProvider;
-import org.eclipse.xtext.resource.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -49,10 +50,9 @@ import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
-import org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider;
-import org.eclipse.xtext.scoping.namespaces.AbstractGlobalScopeProvider;
-import org.eclipse.xtext.scoping.namespaces.SimpleNameProvider;
+import org.eclipse.xtext.scoping.impl.SimpleLocalScopeProvider;
 import org.eclipse.xtext.validation.CancelableDiagnostician;
 
 import com.google.inject.Binder;
@@ -127,7 +127,7 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	}
 
 	public Class<? extends IScopeProvider> bindIScopeProvider() {
-		return SimpleNameScopeProvider.class;
+		return SimpleLocalScopeProvider.class;
 	}
 	
 	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {

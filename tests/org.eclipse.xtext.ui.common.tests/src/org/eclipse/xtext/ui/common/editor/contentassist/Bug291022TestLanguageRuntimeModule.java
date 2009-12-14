@@ -10,7 +10,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.Scopes;
-import org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider;
+import org.eclipse.xtext.scoping.impl.SimpleLocalScopeProvider;
 import org.eclipse.xtext.ui.common.editor.contentassist.bug291022TestLanguage.Bug291022TestLanguagePackage;
 import org.eclipse.xtext.ui.common.editor.contentassist.bug291022TestLanguage.ModelElement;
 
@@ -26,7 +26,7 @@ public class Bug291022TestLanguageRuntimeModule extends org.eclipse.xtext.ui.com
 		return ScopeProvider.class;
 	}
 	
-	public static class ScopeProvider extends SimpleNameScopeProvider {
+	public static class ScopeProvider extends SimpleLocalScopeProvider {
 		
 		@Override
 		public IScope getScope(EObject context, EReference reference) {

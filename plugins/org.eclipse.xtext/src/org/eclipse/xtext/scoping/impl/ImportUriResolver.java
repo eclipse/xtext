@@ -9,7 +9,7 @@ package org.eclipse.xtext.scoping.impl;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
+import org.eclipse.xtext.util.SimpleAttributeResolver;
 
 import com.google.common.base.Function;
 import com.google.inject.Inject;

@@ -13,8 +13,8 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.DefaultGeneratorFragment;
-import org.eclipse.xtext.resource.IQualifiedNameProvider;
-import org.eclipse.xtext.scoping.namespaces.SimpleNameProvider;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.SimpleNameProvider;
 
 /**
  * An {@link IGeneratorFragment} to create simple name based scopes.

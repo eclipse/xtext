@@ -16,7 +16,7 @@ import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
-import org.eclipse.xtext.scoping.impl.SimpleNameScopeProvider;
+import org.eclipse.xtext.scoping.impl.SimpleLocalScopeProvider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -32,7 +32,7 @@ public class ImportURIScopingFragment extends AbstractScopingFragment {
 					IScopeProvider.class.getName() + ".class" +
 					").annotatedWith(com.google.inject.name.Names.named(" +
 					"\"" + AbstractDeclarativeScopeProvider.NAMED_DELEGATE + "\"" +
-					")).to("+ SimpleNameScopeProvider.class.getName() + ".class)")
+					")).to("+ SimpleLocalScopeProvider.class.getName() + ".class)")
 			.addTypeToType(IGlobalScopeProvider.class.getName(), ImportUriGlobalScopeProvider.class.getName())
 			.getBindings();
 	}

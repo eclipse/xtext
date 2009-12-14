@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.linking.impl;
+package org.eclipse.xtext.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.xtext.util.SimpleCache;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -44,7 +43,7 @@ public class SimpleAttributeResolver<K extends EObject, T> implements Function<K
 		return attributeCache.get(object.eClass());
 	}
 
-	private SimpleAttributeResolver(final Class<T> type, final String attributeName) {
+	protected SimpleAttributeResolver(final Class<T> type, final String attributeName) {
 		this.attributeName = attributeName;
 		this.discardingAdapter = new DiscardingAdapter();
 		attributeCache = new SimpleCache<EClass, EAttribute>(new Function<EClass, EAttribute>() {

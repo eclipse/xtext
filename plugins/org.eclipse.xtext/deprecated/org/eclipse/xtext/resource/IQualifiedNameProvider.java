@@ -5,17 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.scoping.namespaces;
-
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
-import org.eclipse.xtext.resource.IQualifiedNameProvider;
+package org.eclipse.xtext.resource;
 
 /**
- * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow - Initial contribution and API
+ * @deprecated use {@link org.eclipse.xtext.naming.IQualifiedNameProvider} instead.
  */
-public class SimpleNameProvider extends IQualifiedNameProvider.AbstractImpl{
-	public String getQualifiedName(EObject obj) {
-		return SimpleAttributeResolver.NAME_RESOLVER.apply(obj);
-	}
+@Deprecated
+public interface IQualifiedNameProvider extends org.eclipse.xtext.naming.IQualifiedNameProvider {
 }

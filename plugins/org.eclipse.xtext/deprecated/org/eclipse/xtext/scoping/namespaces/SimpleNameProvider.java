@@ -7,25 +7,17 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.namespaces;
 
-import com.google.inject.ImplementedBy;
+import org.apache.log4j.Logger;
+import org.eclipse.xtext.resource.IQualifiedNameProvider;
 
 /**
- * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow - Initial contribution and API
+ * @deprecated use {@link org.eclipse.xtext.naming.SimpleNameProvider} instead.
  */
-@ImplementedBy(IQualifiedNameSupport.DefaultImpl.class)
-public interface IQualifiedNameSupport {
-	/**
-	 * @author Sven Efftinge - Initial contribution and API
-	 */
-	public class DefaultImpl implements IQualifiedNameSupport {
-		public String getDelimiter() {
-			return ".";
-		}
+@Deprecated
+public class SimpleNameProvider extends org.eclipse.xtext.naming.SimpleNameProvider implements IQualifiedNameProvider {
 
-		public String getWildCard() {
-			return "*";
-		}
+	static {
+		Logger.getLogger(SimpleNameProvider.class).warn("The SimpleNameProvider is deprecated. Please change the usages to org.eclipse.xtext.naming.SimpleNameProvider");
 	}
-	String getDelimiter();
-	String getWildCard();
 }

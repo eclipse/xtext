@@ -20,7 +20,7 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
-import org.eclipse.xtext.scoping.namespaces.AbstractGlobalScopeProvider;
+import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeProvider;
 
 import com.google.common.base.Function;
 import com.google.common.collect.ImmutableList;

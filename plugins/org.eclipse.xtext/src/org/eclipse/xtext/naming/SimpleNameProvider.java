@@ -5,17 +5,16 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.tests;
+package org.eclipse.xtext.naming;
 
-import org.eclipse.xtext.resource.IContainer.Manager;
-import org.eclipse.xtext.ui.core.containers.JavaProjectAwareContainerManager;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.util.SimpleAttributeResolver;
 
 /**
- * Use this class to register components to be used within the IDE.
+ * @author Sven Efftinge - Initial contribution and API
  */
-public class BuilderTestLanguageUiModule extends org.eclipse.xtext.builder.tests.AbstractBuilderTestLanguageUiModule {
-	@Override
-	public Class<? extends Manager> bindIContainer$Manager() {
-		return JavaProjectAwareContainerManager.class;
+public class SimpleNameProvider extends IQualifiedNameProvider.AbstractImpl{
+	public String getQualifiedName(EObject obj) {
+		return SimpleAttributeResolver.NAME_RESOLVER.apply(obj);
 	}
 }

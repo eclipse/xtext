@@ -109,10 +109,12 @@ public class ResourceDescriptionsUpdater {
 		Map<URI, Delta> result = Maps.newHashMap();
 		for (URI uri : toBeUpdated) {
 			Manager manager = getResourceDescriptionManager(uri);
-			Resource resource = set.getResource(uri, false);
-			IResourceDescription description = manager.getResourceDescription(resource);
-			result.put(uri, new DefaultResourceDescriptionDelta(resourceDescriptions.getResourceDescription(uri),
-					description));
+			if (manager != null) {
+				Resource resource = set.getResource(uri, false);
+				IResourceDescription description = manager.getResourceDescription(resource);
+				result.put(uri, new DefaultResourceDescriptionDelta(resourceDescriptions.getResourceDescription(uri),
+						description));
+			}
 		}
 		return result;
 	}
@@ -130,9 +132,11 @@ public class ResourceDescriptionsUpdater {
 		Iterable<? extends IResourceDescription> descriptions = resourceDescriptions.getAllResourceDescriptions();
 		for (IResourceDescription desc : descriptions) {
 			Manager manager = getResourceDescriptionManager(desc.getURI());
-			for (Delta delta : collection) {
-				if (manager.isAffected(delta, desc))
-					result.add(desc);
+			if (manager != null) {
+				for (Delta delta : collection) {
+					if (manager.isAffected(delta, desc))
+						result.add(desc);
+				}
 			}
 		}
 		return result;

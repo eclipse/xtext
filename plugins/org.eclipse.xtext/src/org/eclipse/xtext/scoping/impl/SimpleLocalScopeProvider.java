@@ -22,7 +22,7 @@ import com.google.common.collect.Maps;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class SimpleNameScopeProvider extends AbstractGlobalScopeDelegatingScopeProvider {
+public class SimpleLocalScopeProvider extends AbstractGlobalScopeDelegatingScopeProvider {
 
 	public IScope getScope(EObject context, EReference reference) {
 		final Map<String, IEObjectDescription> result = getDescriptionsAsMap(context, reference);

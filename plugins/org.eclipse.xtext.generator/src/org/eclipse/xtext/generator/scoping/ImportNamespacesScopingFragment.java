@@ -12,13 +12,13 @@ import java.util.Set;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
-import org.eclipse.xtext.resource.IQualifiedNameProvider;
+import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import org.eclipse.xtext.scoping.namespaces.DefaultDeclarativeQualifiedNameProvider;
-import org.eclipse.xtext.scoping.namespaces.DefaultGlobalScopeProvider;
-import org.eclipse.xtext.scoping.namespaces.QualifiedNameScopeProvider;
+import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
+import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -34,7 +34,7 @@ public class ImportNamespacesScopingFragment extends AbstractScopingFragment {
 					IScopeProvider.class.getName() + ".class" +
 					").annotatedWith(com.google.inject.name.Names.named(" +
 					"\"" + AbstractDeclarativeScopeProvider.NAMED_DELEGATE + "\"" +
-					")).to("+ QualifiedNameScopeProvider.class.getName() + ".class)")
+					")).to("+ ImportedNamespaceAwareLocalScopeProvider.class.getName() + ".class)")
 			.addTypeToType(IQualifiedNameProvider.class.getName(), DefaultDeclarativeQualifiedNameProvider.class.getName())
 			.addTypeToType(IGlobalScopeProvider.class.getName(), DefaultGlobalScopeProvider.class.getName())
 			.getBindings();
