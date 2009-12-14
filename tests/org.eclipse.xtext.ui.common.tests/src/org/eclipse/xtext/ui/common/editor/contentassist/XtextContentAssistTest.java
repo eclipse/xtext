@@ -227,6 +227,79 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
                 );
     }
     
+    public void testCompleteFeatureName_01() throws Exception {
+    	newBuilder(getXtextSetup())
+	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
+	        .appendNl("generate metamodelA 'http://foo.bar/A'")
+	        .appendNl("RuleA: name=ID;")
+	        .append("RuleB returns RuleA: ")
+	        .assertText(
+	        		"name",
+	        		"Feature",
+	        		"\"Value\"",
+	        		"RuleA",
+	        		"RuleB",
+	        		"ID",
+	        		"STRING",
+	        		"INT",
+	        		"SL_COMMENT",
+	        		"WS",
+	        		"ML_COMMENT",
+	        		"ANY_OTHER",
+	        		"(",
+	        		"{");
+    }
+    
+    public void testCompleteFeatureName_02() throws Exception {
+    	newBuilder(getXtextSetup())
+	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
+	        .appendNl("generate metamodelA 'http://foo.bar/A'")
+	        .appendNl("RuleA: name=ID ")
+	        .assertText(
+	        		"name",
+	        		"Feature",
+	        		"\"Value\"",
+	        		"RuleA",
+	        		"ID",
+	        		"STRING",
+	        		"INT",
+	        		"SL_COMMENT",
+	        		"WS",
+	        		"ML_COMMENT",
+	        		"ANY_OTHER",
+	        		"(",
+	        		"{",
+	        		"*",
+	        		"+",
+	        		";",
+	        		"?",
+	        		"|");
+    }
+    
+    public void testCompleteFeatureName_03() throws Exception {
+    	newBuilder(getXtextSetup())
+	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
+	        .appendNl("generate metamodelA 'http://foo.bar/A'")
+	        .appendNl("RuleA: name=ID somethingElse=ID;")
+	        .append("RuleB returns RuleA: ")
+	        .assertText(
+	        		"name",
+	        		"somethingElse",
+	        		"Feature",
+	        		"\"Value\"",
+	        		"RuleA",
+	        		"RuleB",
+	        		"ID",
+	        		"STRING",
+	        		"INT",
+	        		"SL_COMMENT",
+	        		"WS",
+	        		"ML_COMMENT",
+	        		"ANY_OTHER",
+	        		"(",
+	        		"{");
+    }
+    
     private ContentAssistProcessorTestBuilder doTestCompleteTypeRefSetup() throws Exception {
 		return newBuilder(getXtextSetup())
         .appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
