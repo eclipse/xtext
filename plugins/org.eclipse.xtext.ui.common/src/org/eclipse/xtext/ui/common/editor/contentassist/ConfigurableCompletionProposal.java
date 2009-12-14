@@ -116,6 +116,8 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	 * @see ICompletionProposal#getSelection(IDocument)
 	 */
 	public Point getSelection(IDocument document) {
+		if (!linkedMode && getSelectionLength() == 0)
+			return new Point(getReplacementOffset() + getCursorPosition(), 0);
 		return new Point(getSelectionStart(), getSelectionLength());
 	}
 
