@@ -36,7 +36,7 @@ public abstract class AbstractParserTest extends AbstractGeneratorTest {
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(KeywordsTestLanguageStandaloneSetup.class);
-		helper = new ParserTestHelper(getResourceFactory(), getParserUnderTest(), get(Keys.RESOURCE_SET_KEY));
+		helper = new ParserTestHelper(getResourceFactory(), getParserUnderTest(), get(Keys.RESOURCE_SET_KEY),getCurrentFileExtension());
 		EPackage pack = KeywordsTestLanguagePackage.eINSTANCE;
 		EClass clazz = (EClass) pack.getEClassifier("Model");
 		first = clazz.getEStructuralFeature("first");

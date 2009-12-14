@@ -41,6 +41,7 @@ import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.resource.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceFactory;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceFactory;
 import org.eclipse.xtext.resource.XtextResourceSet;
@@ -74,6 +75,10 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 
 	public EPackage.Registry bindEPackageRegistry() {
 		return EPackage.Registry.INSTANCE;
+	}
+	
+	public IResourceServiceProvider.Registry bindIResourceServiceProvider$Registry() {
+		return IResourceServiceProvider.Registry.INSTANCE;
 	}
 	
 	@SingletonBinding
