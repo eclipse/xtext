@@ -5,7 +5,7 @@ package org.eclipse.xtext.linking.lazy;
 
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import org.eclipse.xtext.scoping.namespaces.QualifiedNameScopeProvider;
+import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -21,6 +21,6 @@ public class LazyLinkingTestLanguageRuntimeModule extends org.eclipse.xtext.link
 	}
 	
 	public void configureIScopeProviderDelegate(Binder binder) {
-		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(QualifiedNameScopeProvider.class);
+		binder.bind(IScopeProvider.class).annotatedWith(Names.named(AbstractDeclarativeScopeProvider.NAMED_DELEGATE)).to(ImportedNamespaceAwareLocalScopeProvider.class);
 	}
 }

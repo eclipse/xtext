@@ -17,7 +17,7 @@ import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 import org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager;
-import org.eclipse.xtext.scoping.namespaces.DefaultGlobalScopeProvider;
+import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -56,7 +56,7 @@ public class BuilderIntegrationFragment extends DefaultGeneratorFragment {
 					"binder.bind(" + IResourceDescriptions.class.getName() + ".class"
 							+ ").toProvider("
 							+ "org.eclipse.xtext.builder.GlobalResourceDescriptionsAccess.getDirtyResourceDescriptions()).asEagerSingleton()")
-			.addTypeToType(IContainer.Manager.class.getName(), "org.eclipse.xtext.ui.core.scoping.namespaces.JavaProjectAwareContainerManager")
+			.addTypeToType(IContainer.Manager.class.getName(), "org.eclipse.xtext.ui.core.containers.JavaProjectAwareContainerManager")
 			.addTypeToType("org.eclipse.xtext.ui.core.editor.IXtextEditorCallback", "org.eclipse.xtext.builder.nature.NatureAddingEditorCallback")
 			.getBindings();
 	}

@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.xtext.linking.impl.SimpleAttributeResolver;
+import org.eclipse.xtext.util.SimpleAttributeResolver;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
