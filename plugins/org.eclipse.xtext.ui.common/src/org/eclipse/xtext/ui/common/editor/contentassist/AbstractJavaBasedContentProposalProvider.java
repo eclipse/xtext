@@ -53,6 +53,8 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 		}
 
 		public ICompletionProposal apply(IEObjectDescription candidate) {
+			if (candidate == null)
+				return null;
 			ICompletionProposal result = null;
 			String proposal = candidate.getName();
 			if (ruleName != null)

@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -26,17 +27,26 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.GeneratedMetamodel;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.TypeRef;
+import org.eclipse.xtext.parsetree.CompositeNode;
+import org.eclipse.xtext.parsetree.LeafNode;
+import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.common.editor.contentassist.ConfigurableCompletionProposal;
 import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.core.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.base.Function;
@@ -45,6 +55,41 @@ import com.google.common.base.Function;
  * @author Sebastian Zarnekow
  */
 public class XtextProposalProvider extends org.eclipse.xtext.contentassist.AbstractXtextProposalProvider {
+	
+	public static class ClassifierPrefixMatcher extends PrefixMatcher {
+		private PrefixMatcher delegate;
+
+		private String delimiter = "::";
+		
+		public ClassifierPrefixMatcher(PrefixMatcher delegate) {
+			this.delegate = delegate;
+		}
+		
+		@Override
+		public boolean isCandidateMatchingPrefix(String name, String prefix) {
+			if (delegate.isCandidateMatchingPrefix(name, prefix))
+				return true;
+			if (name.indexOf(delimiter) >= 0) {
+				String[] splitName = name.split(delimiter);
+				if (splitName.length == 1)
+					return false;
+				String[] splitPrefix = prefix.split(delimiter);
+				if (splitName.length < splitPrefix.length) {
+					return false;
+				}
+				if (splitPrefix.length == 1) {
+					return delegate.isCandidateMatchingPrefix(splitName[1], prefix);
+				}
+				if (!delegate.isCandidateMatchingPrefix(splitName[0], splitPrefix[0]))
+					return false;
+				return delegate.isCandidateMatchingPrefix(splitName[1], splitPrefix[1]);
+			}
+			return false;
+		}
+		
+	}
+	
+	
 	
 	@Override
 	public void completeGrammar_Name(EObject model, Assignment assignment, ContentAssistContext context,
@@ -75,11 +120,50 @@ public class XtextProposalProvider extends org.eclipse.xtext.contentassist.Abstr
 	}
 	
 	@Override
+	public void completeGeneratedMetamodel_Alias(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		if (model instanceof GeneratedMetamodel) {
+			EPackage ePackage = ((GeneratedMetamodel) model).getEPackage();
+			String name = ((GeneratedMetamodel) model).getName();
+			createAliasProposal(context, acceptor, ePackage, name);
+		}
+		super.completeGeneratedMetamodel_Alias(model, assignment, context, acceptor);
+	}
+
+	private void createAliasProposal(ContentAssistContext context, ICompletionProposalAcceptor acceptor,
+			EPackage ePackage, String proposal) {
+		if (!Strings.isEmpty(proposal)) {
+			ConfigurableCompletionProposal completionProposal = (ConfigurableCompletionProposal) createCompletionProposal(
+					proposal, proposal + " - alias", ePackage != null ? getImage(ePackage) : null, context);
+			if (completionProposal != null) {
+				completionProposal.setPriority(completionProposal.getPriority() * 2);
+				acceptor.accept(completionProposal);
+			}
+		}
+	}
+	
+	@Override
+	public void completeReferencedMetamodel_Alias(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		if (model instanceof AbstractMetamodelDeclaration) {
+			EPackage ePackage = ((AbstractMetamodelDeclaration) model).getEPackage();
+			if (ePackage != null) {
+				createAliasProposal(context, acceptor, ePackage, ePackage.getName());
+				createAliasProposal(context, acceptor, ePackage, ePackage.getNsPrefix());
+			}
+		}
+		super.completeReferencedMetamodel_Alias(model, assignment, context, acceptor);
+	}
+	
+	@Override
 	protected String getDisplayString(EObject element, String proposal) {
 		if (element instanceof AbstractMetamodelDeclaration) {
 			AbstractMetamodelDeclaration decl = (AbstractMetamodelDeclaration) element;
 			if (!Strings.isEmpty(decl.getAlias()))
 				return decl.getAlias();
+		} else if (element instanceof EPackage) {
+			EPackage pack = (EPackage) element;
+			return pack.getName() + " - " + pack.getNsURI();
 		}
 		return super.getDisplayString(element, proposal);
 	}
@@ -128,4 +212,58 @@ public class XtextProposalProvider extends org.eclipse.xtext.contentassist.Abstr
 		super.completeAction_Feature(model, assignment, context, acceptor);
 	}
 	
+	@Override
+	public void completeTypeRef_Classifier(EObject model, Assignment assignment, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		Grammar grammar = GrammarUtil.getGrammar(model);
+		ContentAssistContext myContext = context.copy();
+		myContext.setMatcher(new ClassifierPrefixMatcher(context.getMatcher()));
+		if (model instanceof TypeRef) {
+			CompositeNode node = NodeUtil.getNodeAdapter(model).getParserNode();
+			int offset = node.getOffset();
+			Region replaceRegion = new Region(offset, myContext.getReplaceRegion().getLength() + 
+					myContext.getReplaceRegion().getOffset() - offset);
+			myContext.setReplaceRegion(replaceRegion);
+			myContext.setLastCompleteNode(node);
+			StringBuilder availablePrefix = new StringBuilder(4);
+			for(LeafNode leaf: node.getLeafNodes()) {
+				if (leaf.getGrammarElement() != null && !leaf.isHidden()) {
+					if ((leaf.getTotalLength() + leaf.getTotalOffset()) < context.getOffset())
+						availablePrefix.append(leaf.getText());
+					else
+						availablePrefix.append(leaf.getText().substring(0, context.getOffset() - leaf.getTotalOffset()));
+				}
+				if (leaf.getTotalOffset() >= context.getOffset())
+					break;
+			}
+			myContext.setPrefix(availablePrefix.toString());
+		}
+		for(AbstractMetamodelDeclaration declaration: grammar.getMetamodelDeclarations()) {
+			if (declaration.getEPackage() != null) {
+				createClassifierProposals(declaration, model, myContext, acceptor);
+			}
+		}
+	}
+
+	private void createClassifierProposals(AbstractMetamodelDeclaration declaration, EObject model,
+			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		String alias = declaration.getAlias();
+		String prefix = "";
+		if (!Strings.isEmpty(alias)) {
+			prefix = getValueConverter().toString(alias, "ID") + "::";
+		}
+		Function<IEObjectDescription, ICompletionProposal> factory = getProposalFactory(null, context);
+		for(EClassifier classifier: declaration.getEPackage().getEClassifiers()) {
+			String proposalString = prefix + getValueConverter().toString(classifier.getName(), "ID");
+			IEObjectDescription description = EObjectDescription.create(proposalString, classifier);
+			ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) factory.apply(description);
+			if (proposal != null) {
+				if (!Strings.isEmpty(prefix))
+					proposal.setDisplayString(proposal.getDisplayString() + " - " + alias);
+				proposal.setPriority(proposal.getPriority() * 2);
+			}
+			acceptor.accept(proposal);
+		}
+	}
+
 }

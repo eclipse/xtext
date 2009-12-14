@@ -206,6 +206,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
                                 "Class", "Import","Model","NewEnum"
                 );
     }
+    
     /**
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=270116
      * @throws Exception
@@ -216,6 +217,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
                                 "Class", "Import","Model","NewType"
                 );
     }
+	
     /**
      * https://bugs.eclipse.org/bugs/show_bug.cgi?id=270116
      * @throws Exception
@@ -300,16 +302,130 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"{");
     }
     
+    public void testAliasCompletion_01() throws Exception {
+    	newBuilder(getXtextSetup())
+	        .appendNl("grammar org.foo.bar with org.eclipse.xtext.common.Terminals")
+	        .appendNl("generate metamodelA 'http://foo.bar/A' as ")
+	        .assertText(
+	        		"Alias",
+	        		"metamodelA");
+    }
+    
+    public void testAliasCompletion_02() throws Exception {
+    	newBuilder(getXtextSetup())
+    		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
+	        .appendNl("generate myDsl1 \"http://www.xtext.org/example/MyDsl1\"")
+	        .appendNl("import 'classpath:/org/eclipse/xtext/enumrules/enumsUi.ecore' as ")
+	        .assertText("enumsUi", "Alias");
+    }
+    
+    public void testCompleteTypeRef_01() throws Exception {
+        doTestCompleteTypeRefWithAliasSetup()
+                .append("NewRule returns ").assertText(
+                                "myAlias::Class", "myAlias::Import", "myAlias::Model", "myAlias"
+                );
+    }
+    
+	public void testCompleteTypeRef_02() throws Exception {
+		doTestCompleteTypeRefWithAliasSetup()
+	        .append("NewRule returns mYal").assertText(
+	                        "myAlias::Class", "myAlias::Import","myAlias::Model", "myAlias", ":", "::"
+	        );
+    }
+	
+    public void testCompleteTypeRef_03() throws Exception {
+    	doTestCompleteTypeRefWithAliasSetup()
+	        .append("NewRule returns cl").assertText(
+	                        "myAlias::Class", ":", "::"
+	        );
+    }
+    
+    public void testCompleteTypeRef_04() throws Exception {
+    	doTestCompleteTypeRefWithAliasSetup()
+	        .append("NewRule returns my::Cl").assertText(
+	                        "myAlias::Class", ":"
+	        );
+    }
+    
+    public void testCompleteTypeRef_05() throws Exception {
+        doTestCompleteTypeRefWithAliasSetup()
+                .append("NewRule returns myAlias::NewRule: reference=[").assertText(
+                                "myAlias::Class", "myAlias::Import", "myAlias::Model", "myAlias", "myAlias::NewRule", "["
+                );
+    }
+    
+	public void testCompleteTypeRef_06() throws Exception {
+		doTestCompleteTypeRefWithAliasSetup()
+			.append("NewRule returns myAlias::NewRule: reference=[mYal").assertText(
+	                        "myAlias::Class", "myAlias::Import","myAlias::Model", "myAlias::NewRule", "myAlias", "]", "::", "|"
+	        );
+    }
+	
+    public void testCompleteTypeRef_07() throws Exception {
+    	doTestCompleteTypeRefWithAliasSetup()
+    		.append("NewRule returns myAlias::NewRule: reference=[cl").assertText(
+	                        "myAlias::Class", "]", "|", "::"
+	        );
+    }
+    
+    public void testCompleteTypeRef_08() throws Exception {
+    	doTestCompleteTypeRefWithAliasSetup()
+    		.append("NewRule returns myAlias::NewRule: reference=[my::Cl").assertText(
+	                        "myAlias::Class", "]", "|"
+	        );
+    }
+    
+    public void testCompleteTypeRef_09() throws Exception {
+        doTestCompleteTypeRefWithAliasSetup()
+                .append("NewRule returns myAlias::NewRule: {").assertText(
+                                "myAlias::Class", "myAlias::Import", "myAlias::Model", "myAlias", "myAlias::NewRule", "{"
+                );
+    }
+    
+	public void testCompleteTypeRef_10() throws Exception {
+		doTestCompleteTypeRefWithAliasSetup()
+			.append("NewRule returns myAlias::NewRule: {mYal").assertText(
+	                        "myAlias::Class", "myAlias::Import","myAlias::Model", "myAlias::NewRule", "myAlias", "}", ".", "::"
+	        );
+    }
+	
+    public void testCompleteTypeRef_11() throws Exception {
+    	doTestCompleteTypeRefWithAliasSetup()
+    		.append("NewRule returns myAlias::NewRule: {cl").assertText(
+	                        "myAlias::Class", "}", "::", "."
+	        );
+    }
+    
+    public void testCompleteTypeRef_12() throws Exception {
+    	doTestCompleteTypeRefWithAliasSetup()
+    		.append("NewRule returns myAlias::NewRule: {my::Cl").assertText(
+	                        "myAlias::Class", "}", "."
+	        );
+    }
+    
     private ContentAssistProcessorTestBuilder doTestCompleteTypeRefSetup() throws Exception {
 		return newBuilder(getXtextSetup())
-        .appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
-        .appendNl("generate myDsl1 \"http://www.xtext.org/example/MyDsl1\"")
-        .appendNl("Model :")
-        .appendNl("(imports+=Import)*")
-        .appendNl("(elements+=Class)*;")
-        .appendNl("Import :")
-        .appendNl("'import' importURI=STRING;")
-        .appendNl("Class :")
-        .appendNl("'class' name=ID ('extends' references=[Class])?;");
+			.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
+	        .appendNl("generate myDsl1 \"http://www.xtext.org/example/MyDsl1\"")
+	        .appendNl("Model :")
+	        .appendNl("(imports+=Import)*")
+	        .appendNl("(elements+=Class)*;")
+	        .appendNl("Import :")
+	        .appendNl("'import' importURI=STRING;")
+	        .appendNl("Class :")
+	        .appendNl("'class' name=ID ('extends' references=[Class])?;");
+	}
+    
+    private ContentAssistProcessorTestBuilder doTestCompleteTypeRefWithAliasSetup() throws Exception {
+		return newBuilder(getXtextSetup())
+	        .appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
+	        .appendNl("generate myDsl1 \"http://www.xtext.org/example/MyDsl1\" as myAlias")
+	        .appendNl("Model returns myAlias::Model:")
+	        .appendNl("(imports+=Import)*")
+	        .appendNl("(elements+=Class)*;")
+	        .appendNl("Import returns myAlias::Import:")
+	        .appendNl("'import' importURI=STRING;")
+	        .appendNl("Class returns myAlias::Class:")
+	        .appendNl("'class' name=ID ('extends' references=[Class])?;");
 	}
 }

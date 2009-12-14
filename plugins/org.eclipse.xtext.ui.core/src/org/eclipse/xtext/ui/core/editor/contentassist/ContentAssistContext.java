@@ -64,6 +64,23 @@ public class ContentAssistContext implements IFollowElementAcceptor {
 		super();
 		firstSetGrammarElements = new ArrayList<AbstractElement>();
 	}
+	
+	public ContentAssistContext copy() {
+		ContentAssistContext result = new ContentAssistContext();
+		result.prefix = prefix;
+		result.selectedText = selectedText;
+		result.rootModel = rootModel;
+		result.rootNode = rootNode;
+		result.currentModel = currentModel;
+		result.currentNode = currentNode;
+		result.lastCompleteNode = lastCompleteNode;
+		result.offset = offset;
+		result.viewer = viewer;
+		result.replaceRegion = replaceRegion;
+		result.matcher = matcher;
+		result.firstSetGrammarElements.addAll(firstSetGrammarElements);
+		return result;
+	}
 
 	public String getPrefix() {
 		return prefix;
