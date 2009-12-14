@@ -17,6 +17,7 @@ import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.core.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.core.notification.IStateChangeEventBroker;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 import com.google.inject.Guice;
@@ -58,9 +59,23 @@ public class Activator extends AbstractUIPlugin {
 		if (log.isDebugEnabled())
 			log.debug("Starting Xtext UI Core bundle.");
 		// make sure classpath entries are being resolved
-		JavaCore.initializeAfterLoad(new NullProgressMonitor());
-
-		initializeGuiceInjector();
+		try {
+			initJavaCore(context);
+			initializeGuiceInjector();
+		} catch(Exception e) {
+			log.error("Exception when initializing " + getClass().getName(), e);
+			throw e;
+		}
+	}
+	
+	protected void initJavaCore(BundleContext context) throws Exception {
+		String javaCorePlugin = JavaCore.PLUGIN_ID;
+		for(Bundle bundle: context.getBundles()) {
+			if (javaCorePlugin.equals(bundle.getSymbolicName())) {
+				JavaCore.initializeAfterLoad(new NullProgressMonitor());
+				return;
+			}
+		}
 	}
 
 	private static void setDefault(Activator activator) {
