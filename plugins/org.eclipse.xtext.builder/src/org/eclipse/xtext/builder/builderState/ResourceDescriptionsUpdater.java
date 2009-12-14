@@ -118,7 +118,10 @@ public class ResourceDescriptionsUpdater {
 	}
 
 	private Manager getResourceDescriptionManager(URI uri) {
-		return managerRegistry.getResourceServiceProvider(uri, null).getResourceDescriptionManager();
+		IResourceServiceProvider resourceServiceProvider = managerRegistry.getResourceServiceProvider(uri, null);
+		if (resourceServiceProvider==null)
+			return null;
+		return resourceServiceProvider.getResourceDescriptionManager();
 	}
 
 	private Set<IResourceDescription> findAffectedResourceDescriptions(IResourceDescriptions resourceDescriptions,

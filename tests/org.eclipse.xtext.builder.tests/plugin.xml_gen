@@ -120,6 +120,13 @@
 			type="buildertestlanguage">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.builder.tests.BuilderTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="buildertestlanguage">
+     </resourceServiceProvider>
+  </extension>
 
 
 
