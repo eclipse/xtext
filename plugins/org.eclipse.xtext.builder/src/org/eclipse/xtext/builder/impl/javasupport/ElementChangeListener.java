@@ -92,6 +92,9 @@ public class ElementChangeListener implements IElementChangedListener {
 		} else if (element instanceof IJavaModel) {
 			return getPackageFragmentRootDeltas(delta.getAffectedChildren());
 		} else if (element instanceof IJavaProject) {
+			if ((delta.getFlags() & IJavaElementDelta.F_CLASSPATH_CHANGED) != 0 ||
+					(delta.getFlags() & IJavaElementDelta.F_RESOLVED_CLASSPATH_CHANGED) != 0)
+				return Collections.singleton((IJavaProject)element);
 			return getPackageFragmentRootDeltas(delta.getAffectedChildren());
 		}
 		return Collections.emptySet();
