@@ -14,12 +14,14 @@ import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.ui.core.resource.IStorage2UriMapper;
 
+import com.google.common.collect.Collections2;
 import com.google.inject.Inject;
 
 /**
@@ -35,13 +37,17 @@ public class ToBeBuiltComputer {
 
 	public ToBeBuilt removeProject(IProject project, final IProgressMonitor monitor) {
 		ToBeBuilt result = new ToBeBuilt();
-		for (IResourceDescription iResourceDescription : builderState.getAllResourceDescriptions()) {
+		SubMonitor.convert(monitor, 0);
+		Iterable<IResourceDescription> allResourceDescriptions = builderState.getAllResourceDescriptions();
+		SubMonitor subMonitor = SubMonitor.convert(monitor, Collections2.forIterable(allResourceDescriptions).size());
+		for (IResourceDescription iResourceDescription : allResourceDescriptions) {
 			ResourceDescriptionImpl descImpl = (ResourceDescriptionImpl) iResourceDescription;
 			Iterable<IStorage> storages = mapper.getStorages(descImpl.getURI());
 			for (IStorage storage : storages) {
 				if (isOnProject(storage, project))
 					result.getToBeDeleted().add(descImpl.getURI());
 			}
+			subMonitor.worked(1);
 		}
 		return result;
 	}
