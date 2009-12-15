@@ -38,7 +38,7 @@ public class ValidateActionHandler extends AbstractHandler {
 		IDocumentProvider documentProvider = xtextEditor.getDocumentProvider();
 		IAnnotationModel annotationModel = documentProvider.getAnnotationModel(xtextEditor.getEditorInput());
 		ValidationJob validationJob = new ValidationJob(resourceValidator, xtextDocument,
-				new AnnotationIssueProcessor(annotationModel), CheckMode.ALL);
+				new AnnotationIssueProcessor(xtextDocument, annotationModel), CheckMode.ALL);
 		validationJob.schedule();
 		return this;
 	}

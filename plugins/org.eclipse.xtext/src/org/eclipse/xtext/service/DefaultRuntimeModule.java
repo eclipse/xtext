@@ -54,6 +54,7 @@ import org.eclipse.xtext.scoping.impl.AbstractGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleLocalScopeProvider;
 import org.eclipse.xtext.validation.CancelableDiagnostician;
+import org.eclipse.xtext.validation.IssueResolutionProvider;
 
 import com.google.inject.Binder;
 import com.google.inject.name.Names;
@@ -188,6 +189,10 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 	
 	public Class<? extends IContainer.Manager> bindIContainer$Manager() {
 		return SimpleResourceDescriptionsBasedContainerManager.class;
+	}
+	
+	public Class<? extends IssueResolutionProvider> bindIssueResolutionProvider() {
+		return IssueResolutionProvider.NullImpl.class;
 	}
 	
 }

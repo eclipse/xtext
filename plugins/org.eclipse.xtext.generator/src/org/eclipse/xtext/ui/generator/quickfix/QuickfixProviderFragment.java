@@ -8,24 +8,32 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.generator.quickfix;
 
+import java.util.Set;
+
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
+import org.eclipse.xtext.generator.BindFactory;
+import org.eclipse.xtext.generator.Binding;
+import org.eclipse.xtext.validation.IssueResolutionProvider;
 
 /**
  * {@link IGeneratorFragment} to generate a quickfix provider for a given grammar.
  * 
  * @author Knut Wannheden - Initial contribution and API
+ * @author Heiko Behrens
  */
 public class QuickfixProviderFragment extends AbstractGeneratorFragment {
 
-	@Override
-	public String[] getRequiredBundlesUi(Grammar grammar) {
-		return new String[] { "org.eclipse.ui.ide" };
-	}
-
 	public static String getQuickfixProviderName(Grammar g) {
 		return GrammarUtil.getNamespace(g) + ".quickfix." + GrammarUtil.getName(g) + "QuickfixProvider";
+	}
+
+	@Override
+	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
+		return new BindFactory()
+			.addTypeToType(IssueResolutionProvider.class.getName(), getQuickfixProviderName(grammar))
+			.getBindings();
 	}
 
 }
