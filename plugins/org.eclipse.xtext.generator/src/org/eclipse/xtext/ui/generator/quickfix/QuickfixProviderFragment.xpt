@@ -19,10 +19,16 @@
 «FILE getQuickfixProviderName().asPath()+".java" SRC_UI»
 package «getQuickfixProviderName().toJavaPackage()»;
 
-import org.eclipse.core.resources.IMarker;
 import org.eclipse.xtext.ui.core.editor.quickfix.AbstractDeclarativeQuickfixProvider;
+import org.eclipse.xtext.ui.core.editor.quickfix.Fix;
+import org.eclipse.xtext.validation.IssueContext;
 
 public class «getQuickfixProviderName().toSimpleName()» extends AbstractDeclarativeQuickfixProvider {
+
+//	@Fix(code = IssueConstants.INVALID_TYPE_NAME, label = "Capitalize name", description = "Capitalize name of type")
+//	public void fixName(Type type, IssueContext issue) {
+//		type.setName(type.getName().toUpperCase());
+//	}
 
 }
 «ENDFILE»
@@ -30,14 +36,15 @@ public class «getQuickfixProviderName().toSimpleName()» extends AbstractDeclarat
 
 «DEFINE addToPluginXmlRt FOR Grammar-»«ENDDEFINE»
 
-«DEFINE addToPluginXmlUi FOR Grammar-»
-   <!-- quickfix marker resolution generator -->
+
+«DEFINE addToPluginXmlUi FOR Grammar-»«ENDDEFINE»
+«REM»   <!-- quickfix marker resolution generator -->
    <extension
          point="org.eclipse.ui.ide.markerResolution">
       <markerResolutionGenerator
             class="«executableExtensionFactory()»:«getQuickfixProviderName()»">
       </markerResolutionGenerator>
    </extension>
-«ENDDEFINE»
+«ENDREM»
 
 «DEFINE addToStandaloneSetup FOR Grammar-»«ENDDEFINE»
