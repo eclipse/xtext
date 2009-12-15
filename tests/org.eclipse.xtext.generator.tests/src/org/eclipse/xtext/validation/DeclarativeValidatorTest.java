@@ -18,6 +18,7 @@ import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.xtext.validation.AbstractDeclarativeValidator.DiagnosticImpl;
 import org.eclipse.xtext.validation.ValidationTestHelper.TestChain;
 
 /**
@@ -223,7 +224,7 @@ public class DeclarativeValidatorTest extends TestCase {
 			@Check
 			@SuppressWarnings("unused")
 			public void foo(Object x) {
-				error("Error Message", 1, 42);
+				error("Error Message", 1, "42");
 			}
 		};
 		BasicDiagnostic chain = new BasicDiagnostic();
@@ -232,7 +233,9 @@ public class DeclarativeValidatorTest extends TestCase {
 
 		Diagnostic diag = chain.getChildren().get(0);
 		assertEquals("Error Message", diag.getMessage());
-		assertEquals(42, diag.getCode());
+		assertEquals(0, diag.getCode());
+		assertTrue(diag instanceof DiagnosticImpl);
+		assertEquals("42", ((DiagnosticImpl)diag).getIssueCode());
 		assertEquals(Diagnostic.ERROR, diag.getSeverity());
 	}
 
@@ -277,7 +280,7 @@ public class DeclarativeValidatorTest extends TestCase {
 			@Check
 			@SuppressWarnings("unused")
 			public void foo(Object x) {
-				warning("Error Message", 1, 42);
+				warning("Error Message", 1, "42");
 			}
 		};
 		BasicDiagnostic chain = new BasicDiagnostic();
@@ -286,7 +289,9 @@ public class DeclarativeValidatorTest extends TestCase {
 
 		Diagnostic diag = chain.getChildren().get(0);
 		assertEquals("Error Message", diag.getMessage());
-		assertEquals(42, diag.getCode());
+		assertEquals(0, diag.getCode());
+		assertTrue(diag instanceof DiagnosticImpl);
+		assertEquals("42", ((DiagnosticImpl)diag).getIssueCode());
 		assertEquals(Diagnostic.WARNING, diag.getSeverity());
 	}
 

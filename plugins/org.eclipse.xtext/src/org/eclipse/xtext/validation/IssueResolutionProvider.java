@@ -16,7 +16,7 @@ import java.util.List;
  */
 public interface IssueResolutionProvider {
 
-	boolean hasResolutionFor(Integer IssueCode);
+	boolean hasResolutionFor(String IssueCode);
 	
 	public List<IssueResolution> getResolutions(IssueContext context);
 	
@@ -26,7 +26,7 @@ public interface IssueResolutionProvider {
 			return Collections.emptyList();
 		}
 
-		public boolean hasResolutionFor(Integer issueCode) {
+		public boolean hasResolutionFor(String issueCode) {
 			return false;
 		}
 		

@@ -40,11 +40,11 @@ public class Bug285605Test extends AbstractXtextTests implements ValidationMessa
 		inspector.inspect(grammar);
 	}
 
-	public void acceptError(String message, EObject object, Integer feature, Integer code) {
+	public void acceptError(String message, EObject object, Integer feature, String code) {
 		fail(message);
 	}
 
-	public void acceptWarning(String message, EObject object, Integer feature, Integer code) {
+	public void acceptWarning(String message, EObject object, Integer feature, String code) {
 		fail(message);
 	}
 	
