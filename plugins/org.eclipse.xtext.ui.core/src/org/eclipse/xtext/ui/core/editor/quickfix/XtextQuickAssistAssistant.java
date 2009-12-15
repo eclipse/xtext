@@ -1,7 +1,6 @@
 package org.eclipse.xtext.ui.core.editor.quickfix;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
 
@@ -53,14 +52,10 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 	private static class XtextCompletionProposal implements ICompletionProposal, ICompletionProposalExtension3 {
 
 		private Position pos;
-		// TODO: use for missing UI stuff, e.g. image
-		@SuppressWarnings("unused")
-		private Annotation annotation;
 		private IssueResolution resolution;
 
-		public XtextCompletionProposal(Position pos, Annotation annotation, IssueResolution resolution) {
+		public XtextCompletionProposal(Position pos, IssueResolution resolution) {
 			this.pos = pos;
-			this.annotation = annotation;
 			this.resolution = resolution;
 		}
 
@@ -81,7 +76,7 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 		}
 
 		public Image getImage() {
-			// TODO: implement w annotation?
+			// TODO: implement
 			return null;
 		}
 
@@ -196,7 +191,11 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 				if(!canFix(annotation))
 					continue;
 				
-				Iterable<IssueResolution> resolutions = getResolutions(annotation, amodel, document);
+				final Issue issue = getIssueFromAnnotation(annotation, amodel, document);
+				if(issue == null)
+					continue;
+		
+				Iterable<IssueResolution> resolutions = getResolutions(issue, document);
 				if(!resolutions.iterator().hasNext())
 					continue;
 				
@@ -209,7 +208,7 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 					int end = document.getLineLength(line) + start - delimLength;
 					if (offset >= start && offset <= end) {
 						for(IssueResolution resolution : resolutions)
-							result.add(new XtextCompletionProposal(pos, annotation, resolution));
+							result.add(new XtextCompletionProposal(pos, resolution));
 					}
 				}
 				catch (BadLocationException e) {
@@ -220,7 +219,7 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 		}
 		
 
-		private Issue createIssueFromAnnotation(Annotation annotation, IAnnotationModel amodel, IXtextDocument document) {
+		private Issue getIssueFromAnnotation(Annotation annotation, IAnnotationModel amodel, IXtextDocument document) {
 			if (annotation instanceof XtextAnnotation) {
 				XtextAnnotation xtextAnnotation = (XtextAnnotation) annotation;
 				return xtextAnnotation.getIssue();
@@ -258,11 +257,7 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 			}
 		}
 
-		private Iterable<IssueResolution> getResolutions(Annotation annotation, IAnnotationModel amodel, IXtextDocument document) {
-			final Issue issue = createIssueFromAnnotation(annotation, amodel, document);
-			if(issue == null)
-				return Collections.emptyList();
-			
+		private Iterable<IssueResolution> getResolutions(final Issue issue, IXtextDocument document) {
 			final String content = document.get();
 			
 			IUnitOfWork<List<IssueResolution>, XtextResource> uow = new IUnitOfWork<List<IssueResolution>, XtextResource>() {
