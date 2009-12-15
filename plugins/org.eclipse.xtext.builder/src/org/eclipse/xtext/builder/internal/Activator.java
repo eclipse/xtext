@@ -115,7 +115,7 @@ public class Activator extends AbstractUIPlugin {
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				try {
-					ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD, null);
+					ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD, monitor);
 				} catch (Exception x) {
 					String message = "Full build on initialize failed: "+x.getMessage();
 					log.error(message, x);
