@@ -14,7 +14,7 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -63,6 +63,7 @@ public class ResourceDescriptionsUpdater {
 	 */
 	public Iterable<Delta> transitiveUpdate(IResourceDescriptions resourceDescriptions, final ResourceSet rs,
 			Set<URI> toBeUpdated, Set<URI> toBeDeleted, IProgressMonitor monitor) {
+		SubMonitor subMonitor = SubMonitor.convert(monitor, 1);
 		HashSet<URI> toBeDeletedAsSet = Sets.newHashSet(toBeDeleted);
 		toBeDeletedAsSet.removeAll(Collections2.forIterable(toBeUpdated));
 
@@ -73,43 +74,39 @@ public class ResourceDescriptionsUpdater {
 			if (resourceDescription != null)
 				result.put(toDelete, new DefaultResourceDescriptionDelta(resourceDescription, null));
 		}
-		monitor.beginTask("Transitive update ", 3);
 
 		// add toBeUpdated
-		result.putAll(update(resourceDescriptions, rs, toBeUpdated, new SubProgressMonitor(monitor, 1)));
+		result.putAll(update(resourceDescriptions, rs, toBeUpdated, subMonitor.newChild(1)));
 
 		// add transient
-		try {
-			while (true) {
-				if (monitor.isCanceled())
-					return Iterables.emptyIterable();
-				Set<IResourceDescription> descriptions = findAffectedResourceDescriptions(resourceDescriptions, result
-						.values());
-				Set<URI> uris = Sets.newHashSet(Iterables.transform(descriptions,
-						new Function<IResourceDescription, URI>() {
-							public URI apply(IResourceDescription from) {
-								return from.getURI();
-							}
-						}));
-				uris.removeAll(result.keySet());
-				if (!uris.isEmpty()) {
-					result.putAll(update(resourceDescriptions, rs, uris, new SubProgressMonitor(monitor, 1)));
-				} else {
-					return result.values();
-				}
+		while (true) {
+			if (subMonitor.isCanceled())
+				return Iterables.emptyIterable();
+			subMonitor.setWorkRemaining(1);
+			Set<IResourceDescription> descriptions = findAffectedResourceDescriptions(resourceDescriptions, result
+					.values());
+			Set<URI> uris = Sets.newHashSet(Iterables.transform(descriptions,
+					new Function<IResourceDescription, URI>() {
+						public URI apply(IResourceDescription from) {
+							return from.getURI();
+						}
+					}));
+			uris.removeAll(result.keySet());
+			if (!uris.isEmpty()) {
+				result.putAll(update(resourceDescriptions, rs, uris, subMonitor.newChild(1)));
+			} else {
+				return result.values();
 			}
-		} finally {
-			monitor.done();
 		}
 	}
 
 	private Map<URI, Delta> update(IResourceDescriptions resourceDescriptions, final ResourceSet set,
 			Set<URI> toBeUpdated, IProgressMonitor monitor) {
-		monitor.beginTask("Updating resources...", toBeUpdated.size() * 2);
+		SubMonitor subMonitor = SubMonitor.convert(monitor, toBeUpdated.size() * 2);
 		for (URI uri : toBeUpdated) {
 			try {
 				set.getResource(uri, true);
-				monitor.worked(1);
+				subMonitor.worked(1);
 			} catch (WrappedException ex) {
 				log.error("Error loading resource from: " + uri.toString(), ex);
 			}
@@ -123,9 +120,8 @@ public class ResourceDescriptionsUpdater {
 				result.put(uri, new DefaultResourceDescriptionDelta(resourceDescriptions.getResourceDescription(uri),
 						description));
 			}
-			monitor.worked(1);
+			subMonitor.worked(1);
 		}
-		monitor.done();
 		return result;
 	}
 

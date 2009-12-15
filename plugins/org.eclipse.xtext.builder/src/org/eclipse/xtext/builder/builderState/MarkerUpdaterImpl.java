@@ -14,7 +14,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -47,7 +47,7 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 
 	public void updateMarker(ResourceSet resourceSet, ImmutableList<Delta> resourceDescriptionDeltas,
 			IProgressMonitor monitor) {
-		monitor.beginTask("Validating", resourceDescriptionDeltas.size());
+		SubMonitor subMonitor = SubMonitor.convert(monitor, resourceDescriptionDeltas.size());
 		for (Delta delta : resourceDescriptionDeltas) {
 			if (delta.getNew() != null) {
 				Iterable<IStorage> storages = mapper.getStorages(delta.getNew().getURI());
@@ -56,40 +56,40 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 						IFile file = (IFile) storage;
 						if (!file.isReadOnly()) {
 							Resource resource = resourceSet.getResource(delta.getNew().getURI(), true);
-							addMarkers(file, resource, new SubProgressMonitor(monitor, 1));
+							addMarkers(file, resource, subMonitor.newChild(1));
 						}
 					}
 				}
 			}
 		}
-		monitor.done();
+		subMonitor.done();
 	}
 
 	protected void addMarkers(IFile file, Resource resource, final IProgressMonitor monitor) {
 		try {
-			monitor.beginTask("Validating "+resource.getURI(), 2);
+			SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
 			IResourceServiceProvider provider = resourceServiceProviderRegistry.getResourceServiceProvider(resource
 					.getURI(), null);
 			
 			List<Issue> list = provider.getResourceValidator().validate(resource, CheckMode.FAST_ONLY,
-					getCancelIndicator(monitor));
+					getCancelIndicator(subMonitor));
 			if (monitor.isCanceled())
 				return;
 			file.deleteMarkers(MarkerTypes.FAST_VALIDATION, true, 1);
 			for (Issue issue : list) {
 				markerCreator.createMarker(issue, file, MarkerTypes.FAST_VALIDATION);
 			}
+			subMonitor.worked(1);
 			
 			list = provider.getResourceValidator().validate(resource, CheckMode.NORMAL_ONLY,
 					getCancelIndicator(monitor));
-			monitor.worked(1);
+			subMonitor.worked(1);
 			file.deleteMarkers(MarkerTypes.NORMAL_VALIDATION, true, 1);
-			if (monitor.isCanceled())
+			if (subMonitor.isCanceled())
 				return;
 			for (Issue issue : list) {
 				markerCreator.createMarker(issue, file, MarkerTypes.NORMAL_VALIDATION);
 			}
-			monitor.done();
 		} catch (CoreException e) {
 			log.error(e.getMessage(), e);
 		}
