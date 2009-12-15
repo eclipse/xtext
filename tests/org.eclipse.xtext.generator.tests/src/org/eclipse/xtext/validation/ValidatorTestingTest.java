@@ -31,19 +31,19 @@ public class ValidatorTestingTest extends TestCase {
 	private class TestingValidator extends AbstractDeclarativeValidator {
 		@Check
 		public void someError(EAnnotation dummy) {
-			error("someError message", dummy, 1, 101);
+			error("someError message", dummy, 1, "101");
 		}
 
 		@Check
 		public void someWarning(EClass dummy) {
-			warning("someWarning message", dummy, 1, 102);
+			warning("someWarning message", dummy, 1, "102");
 		}
 
 		@Check
 		public void manyMessages(EClass dummy) {
-			error("ErrorOne message", dummy, 1, 103);
-			error("ErrorTwo message", dummy, 1, 104);
-			warning("WarningOne message", dummy, 1, 105);
+			error("ErrorOne message", dummy, 1, "103");
+			error("ErrorTwo message", dummy, 1, "104");
+			warning("WarningOne message", dummy, 1, "105");
 		}
 
 		@Override
@@ -63,17 +63,17 @@ public class ValidatorTestingTest extends TestCase {
 
 	public void testError() {
 		tester.validator().someError(EcoreFactory.eINSTANCE.createEAnnotation());
-		tester.diagnose().assertError(101, "someError");
+		tester.diagnose().assertError("101", "someError");
 	}
 
 	public void testError2() {
-		tester.validate(EcoreFactory.eINSTANCE.createEAnnotation()).assertError(101, "someError");
+		tester.validate(EcoreFactory.eINSTANCE.createEAnnotation()).assertError("101", "someError");
 	}
 
 	public void testError2Fail() {
 		boolean caught = false;
 		try {
-			tester.validate(EcoreFactory.eINSTANCE.createEAnnotation()).assertError(234242);
+			tester.validate(EcoreFactory.eINSTANCE.createEAnnotation()).assertError("234242");
 		}
 		catch (AssertionError err) {
 			caught = true;
@@ -83,14 +83,14 @@ public class ValidatorTestingTest extends TestCase {
 
 	public void testTwoErrors() {
 		tester.validator().manyMessages(EcorePackage.eINSTANCE.getEClass());
-		tester.diagnose().assertAll(warning(105, "WarningOne"), error(104, "ErrorTwo"), error(103, "ErrorOne"));
+		tester.diagnose().assertAll(warning("105", "WarningOne"), error("104", "ErrorTwo"), error("103", "ErrorOne"));
 	}
 
 	public void testFail() {
 		tester.validator().someError(EcoreFactory.eINSTANCE.createEAnnotation());
 		boolean caught = false;
 		try {
-			tester.diagnose().assertError(12345, "someError");
+			tester.diagnose().assertError("12345", "someError");
 		}
 		catch (AssertionError err) {
 			caught = true;
@@ -100,7 +100,7 @@ public class ValidatorTestingTest extends TestCase {
 
 	public void testWarning() {
 		tester.validator().someWarning(EcorePackage.eINSTANCE.getEClass());
-		tester.diagnose().assertWarning(102, "someWarning");
+		tester.diagnose().assertWarning("102", "someWarning");
 	}
 
 }
