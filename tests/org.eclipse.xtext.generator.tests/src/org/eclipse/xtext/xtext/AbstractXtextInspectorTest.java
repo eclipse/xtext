@@ -47,14 +47,14 @@ public abstract class AbstractXtextInspectorTest extends AbstractXtextTests impl
 	
 	protected abstract boolean isExpectingWarnings();
 
-	public void acceptError(String message, EObject object, Integer feature, Integer code) {
+	public void acceptError(String message, EObject object, Integer feature, String code) {
 		if (!isExpectingErrors())
 			fail("unexpected call to acceptError");
 		Triple<String,EObject,Integer> error = Tuples.create(message, object, feature);
 		errors.add(error);
 	}
 
-	public void acceptWarning(String message, EObject object, Integer feature, Integer code) {
+	public void acceptWarning(String message, EObject object, Integer feature, String code) {
 		if (!isExpectingWarnings())
 			fail("unexpected call to acceptWarning");
 		Triple<String,EObject,Integer> warning = Tuples.create(message, object, feature);

@@ -19,7 +19,7 @@ import java.lang.annotation.Target;
 @Target({ElementType.METHOD})
 public @interface Fix {
 
-    int code();
+    String code();
 
     String label() default "";
 

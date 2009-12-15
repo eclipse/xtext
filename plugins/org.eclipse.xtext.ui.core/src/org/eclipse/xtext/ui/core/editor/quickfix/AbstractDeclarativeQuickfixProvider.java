@@ -36,14 +36,14 @@ public class AbstractDeclarativeQuickfixProvider implements IssueResolutionProvi
 		return languageResourceHelper.isLanguageResource(resource);
 	}
 
-	protected Predicate<Method> getFixMethodPredicate(final Class<? extends Object> target, final Integer issueCode) {
+	protected Predicate<Method> getFixMethodPredicate(final Class<? extends Object> target, final String issueCode) {
 		return new Predicate<Method>() {
 			public boolean apply(Method input) {
 				Fix annotation = input.getAnnotation(Fix.class);
 				boolean result = input.getParameterTypes().length == 2 && Void.TYPE == input.getReturnType()
 						&& (target == null || input.getParameterTypes()[0].isAssignableFrom(target))
 						&& input.getParameterTypes()[1].isAssignableFrom(IssueContext.class)
-						&& annotation != null && issueCode != null && annotation.code() == issueCode;
+						&& annotation != null && issueCode != null && issueCode.equals(annotation.code());
 				return result;
 			}
 		};
@@ -83,7 +83,7 @@ public class AbstractDeclarativeQuickfixProvider implements IssueResolutionProvi
 		}
 	}
 
-	private Iterable<Method> collectMethods(Class<? extends AbstractDeclarativeQuickfixProvider> clazz, Class<? extends Object> target, Integer issueCode) {
+	private Iterable<Method> collectMethods(Class<? extends AbstractDeclarativeQuickfixProvider> clazz, Class<? extends Object> target, String issueCode) {
 		List<Method> methods = Lists.newArrayList(clazz.getMethods());
 		return Iterables.filter(methods, getFixMethodPredicate(target, issueCode));
 	}
@@ -95,7 +95,7 @@ public class AbstractDeclarativeQuickfixProvider implements IssueResolutionProvi
 		return Lists.newArrayList(collectMethods(getClass(), issueContext.getModel().getClass(), issueContext.getIssue().getCode()));
 	}
 
-	public boolean hasResolutionFor(final Integer issueCode) {
+	public boolean hasResolutionFor(final String issueCode) {
 		// TODO : where should this be extracted to?
 //		if (!isLanguageResource(issue.getResource()))
 //			return false;
