@@ -168,11 +168,11 @@ public class PolymorphicDispatcher<RT> {
 			return target;
 		}
 
-		public boolean isInvokeable(final Class<?>[] paramTypes) {
-			if (getParameterTypes().length != paramTypes.length)
+		public boolean isInvokeable(final List<Class<?>> paramTypes) {
+			if (getParameterTypes().length != paramTypes.size())
 				return false;
-			for (int i = 0; i < paramTypes.length; i++) {
-				Class<?> paramClass = paramTypes[i];
+			for (int i = 0; i < paramTypes.size(); i++) {
+				Class<?> paramClass = paramTypes.get(i);
 				if (!(getParameterTypes()[i].isAssignableFrom(paramClass)))
 					return false;
 			}
@@ -221,10 +221,10 @@ public class PolymorphicDispatcher<RT> {
 		return compareTo;
 	}
 
-	private final SimpleCache<Class<?>[], List<MethodDesc>> cache =
-		new SimpleCache<Class<?>[], List<MethodDesc>>(
-			new Function<Class<?>[], List<MethodDesc>>() {
-				public List<MethodDesc> apply(Class<?>[] paramTypes) {
+	private final SimpleCache<List<Class<?>>, List<MethodDesc>> cache =
+		new SimpleCache<List<Class<?>>, List<MethodDesc>>(
+			new Function<List<Class<?>>, List<MethodDesc>>() {
+				public List<MethodDesc> apply(List<Class<?>> paramTypes) {
 					List<MethodDesc> result = new ArrayList<MethodDesc>();
 					Iterator<MethodDesc> iterator = getDeclaredMethodsOrderedBySpecificParameterType().iterator();
 					while (iterator.hasNext()) {
@@ -285,10 +285,14 @@ public class PolymorphicDispatcher<RT> {
 	 * @param params
 	 * @return
 	 */
-	private Class<?>[] getTypes(Object[] params) {
-		Class<?>[] result = new Class[params.length];
-		for (int i = 0; i < result.length; i++) {
-			result[i] = params[i]==null ? getDefaultClass(i):params[i].getClass();
+	private List<Class<?>> getTypes(Object[] params) {
+		List<Class<?>> result = new ArrayList<Class<?>>(params.length);
+		for (int i = 0; i < params.length; i++) {
+			if (params[i]!=null) {
+				result.add(params[i].getClass());
+			} else {
+				result.add(getDefaultClass(i));
+			}
 		}
 		return result;
 	}
