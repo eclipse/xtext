@@ -34,23 +34,25 @@ import com.google.inject.Singleton;
 public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements IElementChangedListener {
 
 	private static final Logger log = Logger.getLogger(Storage2UriMapperJavaImpl.class);
-	
+
 	public Storage2UriMapperJavaImpl() {
 		JavaCore.addElementChangedListener(this);
 	}
-	
+
 	public void elementChanged(ElementChangedEvent event) {
-		if (event.getType()==ElementChangedEvent.POST_CHANGE) {
+		if (event.getType() == ElementChangedEvent.POST_CHANGE) {
 			synchronized (cache) {
 				cache.clear();
 			}
 		}
 	}
-	
-	private SimpleCache<URI, Iterable<IStorage>> cache = new SimpleCache<URI, Iterable<IStorage>>(new Function<URI,Iterable<IStorage>>(){
-		public Iterable<IStorage> apply(URI from) {
-			return findStoragesInJarsOrExternalClassFolders(from);
-		}});
+
+	private SimpleCache<URI, Iterable<IStorage>> cache = new SimpleCache<URI, Iterable<IStorage>>(
+			new Function<URI, Iterable<IStorage>>() {
+				public Iterable<IStorage> apply(URI from) {
+					return findStoragesInJarsOrExternalClassFolders(from);
+				}
+			});
 
 	@Override
 	public Iterable<IStorage> getStorages(URI uri) {
@@ -128,12 +130,14 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 		return null;
 	}
 
-	protected URI getUriForIJarEntryResource(IJarEntryResource resource) {
-		IJarEntryResource jarEntry = resource;
+	protected URI getUriForIJarEntryResource(IJarEntryResource jarEntry) {
 		IPackageFragmentRoot root = jarEntry.getPackageFragmentRoot();
-		URI jarURI = getUriForPackageFragmentRoot(root);
-		URI storageURI = URI.createURI(jarEntry.getFullPath().toString());
-		return createJarURI(jarURI, storageURI);
+		if (root.isArchive()) {
+			URI jarURI = getUriForPackageFragmentRoot(root);
+			URI storageURI = URI.createURI(jarEntry.getFullPath().toString());
+			return createJarURI(root.isArchive(), jarURI, storageURI);
+		}
+		return null;
 	}
 
 	protected URI getUriForPackageFragmentRoot(IPackageFragmentRoot root) {
@@ -145,9 +149,13 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 		}
 	}
 
-	protected URI createJarURI(URI jarURI, URI pathToResourceInURI) {
-		String fullURI = "archive:" + jarURI.toString() + "!" + pathToResourceInURI.toString();
-		return URI.createURI(fullURI);
+	protected URI createJarURI(boolean isArchive, URI uriToRoot, URI pathToResourceInRoot) {
+		if (isArchive) {
+			String fullURI = "archive:" + uriToRoot.toString() + "!" + pathToResourceInRoot.toString();
+			return URI.createURI(fullURI);
+		} else {
+			return null;
+		}
 	}
 
 	protected URI getPathToArchive(URI archiveURI) {
