@@ -166,12 +166,12 @@ public class GrammarWithoutLeftRecursionInspector extends XtextSwitch<Boolean> i
 		}
 	}
 
-	public void acceptError(String message, EObject object, Integer feature, Integer code) {
+	public void acceptError(String message, EObject object, Integer feature, String code) {
 		if (erroneousElements.add(object) && EcoreUtil.isAncestor(inspectedGrammar, object))
 			validationMessageAcceptor.acceptError(message, object, feature, code);			
 	}
 
-	public void acceptWarning(String message, EObject object, Integer feature, Integer code) {
+	public void acceptWarning(String message, EObject object, Integer feature, String code) {
 		throw new UnsupportedOperationException();
 	}
 

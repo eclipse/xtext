@@ -27,7 +27,7 @@ import org.eclipse.xtext.validation.IssueResolution;
  */
 public class DeclarativeQuickfixProviderTest extends TestCase implements ILanguageResourceHelper {
 
-	private static final int DUMMY_CODE = 42;
+	private static final String DUMMY_CODE = "DeclarativeQuickfixProviderTest.DummyCode";
 
 	public void testHasNoResolutionsForOutdatedSignatures() throws Exception {
 		AbstractDeclarativeQuickfixProvider provider = new AbstractDeclarativeQuickfixProvider() {
@@ -74,7 +74,7 @@ public class DeclarativeQuickfixProviderTest extends TestCase implements ILangua
 		};
 		generator.setLanguageResourceHelper(this);
 		Iterable<IssueResolution> resolutionsIterable = generator.getResolutions(
-				createIssueContext(EcoreFactory.eINSTANCE.createEObject(), 0));
+				createIssueContext(EcoreFactory.eINSTANCE.createEObject(), null));
 		assertFalse(resolutionsIterable.iterator().hasNext());
 
 		ArrayList<IssueResolution> resolutions = new ArrayList<IssueResolution>(generator.getResolutions(
@@ -84,7 +84,7 @@ public class DeclarativeQuickfixProviderTest extends TestCase implements ILangua
 		assertEquals("fixError3", resolutions.get(1).getLabel());
 	}
 
-	private IssueContext createIssueContext(EObject context, Integer code) {
+	private IssueContext createIssueContext(EObject context, String code) {
 		Issue.IssueImpl issue = new Issue.IssueImpl();
 		issue.setCode(code);
 		if(context != null)

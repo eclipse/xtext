@@ -104,7 +104,8 @@ public class NamesAreUniqueValidationHelper implements INamesAreUniqueValidation
 	/**
 	 * Returns <code>null</code>. Clients may override if they desire to attach an error code to the created errors. 
 	 */
-	protected Integer getErrorCode() {
+	protected String getErrorCode() {
+		// TODO use built-in codes to allow generic quickfixes
 		return null;
 	}
 

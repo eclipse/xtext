@@ -6,7 +6,7 @@ import org.eclipse.xtext.validation.Check;
 
 public class DomainmodelJavaValidator extends AbstractDomainmodelJavaValidator {
 
-    public static final int INVALID_TYPE_NAME = 1;
+    public static final String INVALID_TYPE_NAME = "org.eclipse.xtext.DomainModel.InvalidTypeName";
 
     @Check
     public void checkTypeNameStartsWithCapital(Type type) {

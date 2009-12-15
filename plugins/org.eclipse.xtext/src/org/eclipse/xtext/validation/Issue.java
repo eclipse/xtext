@@ -24,7 +24,7 @@ public interface Issue {
 
 	String getMessage();
 
-	Integer getCode();
+	String getCode();
 	
 	CheckType getType();
 
@@ -40,8 +40,8 @@ public interface Issue {
 
 	static class IssueImpl implements Issue {
 
-		private Integer length, lineNumber, offset, code;
-		private String message;
+		private Integer length, lineNumber, offset;
+		private String code, message;
 		private boolean isSyntaxError = false;
 		private URI uriToProblem;
 		private Severity severity;
@@ -95,11 +95,11 @@ public interface Issue {
 			this.severity = severity;
 		}
 
-		public Integer getCode() {
+		public String getCode() {
 			return code;
 		}
 
-		public void setCode(Integer code) {
+		public void setCode(String code) {
 			this.code = code;
 		}
 		

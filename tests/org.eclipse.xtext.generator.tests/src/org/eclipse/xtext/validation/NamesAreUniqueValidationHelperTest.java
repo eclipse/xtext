@@ -275,7 +275,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractXtextTests imple
 		return false;
 	}
 
-	public void acceptError(String message, EObject object, Integer feature, Integer code) {
+	public void acceptError(String message, EObject object, Integer feature, String code) {
 		assertFalse("Did not expected: " + message, expected.isEmpty());
 		assertSame(expected.remove(0), object);
 		assertEquals(EcorePackage.ENAMED_ELEMENT__NAME, feature.intValue());
@@ -283,7 +283,7 @@ public class NamesAreUniqueValidationHelperTest extends AbstractXtextTests imple
 		assertNotNull(message);
 	}
 
-	public void acceptWarning(String message, EObject object, Integer feature, Integer code) {
+	public void acceptWarning(String message, EObject object, Integer feature, String code) {
 		fail("unexpected");
 	}
 

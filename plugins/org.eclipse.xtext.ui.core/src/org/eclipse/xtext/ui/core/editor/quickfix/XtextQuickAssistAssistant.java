@@ -5,7 +5,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.AbstractReusableInformationControlCreator;
@@ -152,15 +151,9 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 			return false;
 		}
 
-		private Integer getCode(MarkerAnnotation markerAnnotation) {
+		private String getCode(MarkerAnnotation markerAnnotation) {
 			IMarker marker = markerAnnotation.getMarker();
-			try {
-				return (Integer) marker.getAttribute(Issue.CODE_KEY);
-			} catch (ClassCastException e) {
-				return null;
-			} catch (CoreException e) {
-				return null;
-			}
+			return marker.getAttribute(Issue.CODE_KEY, null);
 		}
 		
 		private URI getUriToProblem(MarkerAnnotation markerAnnotation) {

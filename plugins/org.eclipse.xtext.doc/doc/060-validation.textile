@@ -60,7 +60,7 @@ h3(#quickfixes). Quickfixes
 
 For validations written using the @AbstractDeclarativeValidator@ it is possible to provide corresponding quickfixes in the editor. To be able to implement a quickfix for a given diagnostic (a warning or error) the underlying _cause_ of the diagnostic must be known (i.e. what actual problem does the diagnostic represent?), otherwise the fix doesn't know what needs to be done. As we don't want to deduce this from the diagnostic's error message we associate a problem specific _code_ with the diagnostic.
 
-In the following example (from ${org.eclipse.xtext.example.domainmodel/src/org.eclipse.xtext.example.validation.DomainmodelJavaValidator}) the diagnostic's _code_ is given by the last argument to the @warning()@ method and it is a reference to the static @int@ field @INVALID_TYPE_NAME@ in the validator class.
+In the following example (from ${org.eclipse.xtext.example.domainmodel/src/org.eclipse.xtext.example.validation.DomainmodelJavaValidator}) the diagnostic's _code_ is given by the last argument to the @warning()@ method and it is a reference to the static @String@ field @INVALID_TYPE_NAME@ in the validator class.
 
 bc.. 
       warning("Name should start with a capital", 

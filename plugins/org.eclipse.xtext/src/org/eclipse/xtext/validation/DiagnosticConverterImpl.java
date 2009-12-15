@@ -72,11 +72,11 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 		final EObject causer = getCauser(diagnostic);
 		if (causer != null)
 			issue.setUriToProblem(EcoreUtil.getURI(causer));
-		final Integer code = diagnostic.getCode();
-		if (code != null)
-			issue.setCode(code);
-		if (diagnostic instanceof DiagnosticImpl)
-			issue.setType( ((DiagnosticImpl) diagnostic).getCheckType() );
+		if (diagnostic instanceof DiagnosticImpl) {
+			DiagnosticImpl diagnosticImpl = (DiagnosticImpl) diagnostic;
+			issue.setType(diagnosticImpl.getCheckType());
+			issue.setCode(diagnosticImpl.getIssueCode());
+		}
 		
 		//		marker.put(IXtextResourceChecker.DIAGNOSTIC_KEY, diagnostic);
 		issue.setMessage(diagnostic.getMessage());

@@ -20,7 +20,7 @@ public class XtextAnnotation extends Annotation {
 	private final IXtextDocument document;
 	private final Issue issue;
 
-	public Integer getIssueCode() {
+	public String getIssueCode() {
 		return issue.getCode();
 	}
 	
