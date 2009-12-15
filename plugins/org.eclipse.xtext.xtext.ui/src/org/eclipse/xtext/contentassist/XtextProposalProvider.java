@@ -38,6 +38,7 @@ import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TypeRef;
+import org.eclipse.xtext.naming.IQualifiedNameSupport;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
@@ -59,10 +60,11 @@ public class XtextProposalProvider extends org.eclipse.xtext.contentassist.Abstr
 	public static class ClassifierPrefixMatcher extends PrefixMatcher {
 		private PrefixMatcher delegate;
 
-		private String delimiter = "::";
+		private String delimiter;
 		
-		public ClassifierPrefixMatcher(PrefixMatcher delegate) {
+		public ClassifierPrefixMatcher(PrefixMatcher delegate, IQualifiedNameSupport qualifiedNameSupport) {
 			this.delegate = delegate;
+			this.delimiter = qualifiedNameSupport.getDelimiter();
 		}
 		
 		@Override
@@ -156,7 +158,7 @@ public class XtextProposalProvider extends org.eclipse.xtext.contentassist.Abstr
 	}
 	
 	@Override
-	protected String getDisplayString(EObject element, String proposal) {
+	protected String getDisplayString(EObject element, String proposal, String shortName) {
 		if (element instanceof AbstractMetamodelDeclaration) {
 			AbstractMetamodelDeclaration decl = (AbstractMetamodelDeclaration) element;
 			if (!Strings.isEmpty(decl.getAlias()))
@@ -165,7 +167,7 @@ public class XtextProposalProvider extends org.eclipse.xtext.contentassist.Abstr
 			EPackage pack = (EPackage) element;
 			return pack.getName() + " - " + pack.getNsURI();
 		}
-		return super.getDisplayString(element, proposal);
+		return super.getDisplayString(element, proposal, shortName);
 	}
 	
 	/**
@@ -217,7 +219,7 @@ public class XtextProposalProvider extends org.eclipse.xtext.contentassist.Abstr
 			ICompletionProposalAcceptor acceptor) {
 		Grammar grammar = GrammarUtil.getGrammar(model);
 		ContentAssistContext myContext = context.copy();
-		myContext.setMatcher(new ClassifierPrefixMatcher(context.getMatcher()));
+		myContext.setMatcher(new ClassifierPrefixMatcher(context.getMatcher(), getQualifiedNameSupport()));
 		if (model instanceof TypeRef) {
 			CompositeNode node = NodeUtil.getNodeAdapter(model).getParserNode();
 			int offset = node.getOffset();
@@ -250,7 +252,7 @@ public class XtextProposalProvider extends org.eclipse.xtext.contentassist.Abstr
 		String alias = declaration.getAlias();
 		String prefix = "";
 		if (!Strings.isEmpty(alias)) {
-			prefix = getValueConverter().toString(alias, "ID") + "::";
+			prefix = getValueConverter().toString(alias, "ID") + getQualifiedNameSupport().getDelimiter();
 		}
 		Function<IEObjectDescription, ICompletionProposal> factory = getProposalFactory(null, context);
 		for(EClassifier classifier: declaration.getEPackage().getEClassifiers()) {
@@ -259,7 +261,7 @@ public class XtextProposalProvider extends org.eclipse.xtext.contentassist.Abstr
 			ConfigurableCompletionProposal proposal = (ConfigurableCompletionProposal) factory.apply(description);
 			if (proposal != null) {
 				if (!Strings.isEmpty(prefix))
-					proposal.setDisplayString(proposal.getDisplayString() + " - " + alias);
+					proposal.setDisplayString(classifier.getName() + " - " + alias);
 				proposal.setPriority(proposal.getPriority() * 2);
 			}
 			acceptor.accept(proposal);
