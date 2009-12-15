@@ -27,7 +27,13 @@ import org.eclipse.xtext.util.SimpleAttributeResolver;
  */
 public class DefaultDeclarativeQualifiedNameProvider extends IQualifiedNameProvider.AbstractImpl {
 	
-	private PolymorphicDispatcher<String> qualifiedName = new PolymorphicDispatcher<String>("qualifiedName",1,1,Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<String>get()); 
+	private PolymorphicDispatcher<String> qualifiedName = new PolymorphicDispatcher<String>("qualifiedName",1,1,Collections.singletonList(this), PolymorphicDispatcher.NullErrorHandler.<String>get())
+	{
+		@Override
+		protected String handleNoSuchMethod(Object... params) { 
+			return null;
+		}
+	}; 
 
 	public String getDelimiter() {
 		return ".";
