@@ -57,6 +57,9 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	private ISingleLineCommentHelper singleLineCommentHelper;
 	
 	@Inject
+	private Provider<XtextQuickAssistAssistant> quickAssistAssistentProvider;
+	
+	@Inject
 	private Provider<XtextPresentationReconciler> presentationReconcilerProvider;
 
 	@Override
@@ -126,7 +129,7 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
     public IQuickAssistAssistant getQuickAssistAssistant(ISourceViewer sourceViewer) {
         if (sourceViewer.isEditable()) {
             if (quickAssistant == null)
-                quickAssistant = new XtextQuickAssistAssistant();
+                quickAssistant = quickAssistAssistentProvider.get();
             return quickAssistant;
         }
         return null;

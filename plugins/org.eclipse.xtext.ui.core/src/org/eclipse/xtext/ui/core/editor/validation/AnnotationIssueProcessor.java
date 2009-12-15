@@ -25,6 +25,7 @@ import org.eclipse.jface.text.source.IAnnotationModelExtension;
 import org.eclipse.ui.texteditor.AnnotationTypeLookup;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
+import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.Issue.Severity;
 
@@ -41,10 +42,12 @@ import com.google.common.collect.Multimaps;
 public class AnnotationIssueProcessor implements IValidationIssueProcessor {
 	private final IAnnotationModel annotationModel;
 	private AnnotationTypeLookup lookup = new AnnotationTypeLookup();
+	private final IXtextDocument xtextDocument;
 
-	public AnnotationIssueProcessor(IAnnotationModel annotationModel) {
+	public AnnotationIssueProcessor(IXtextDocument xtextDocument, IAnnotationModel annotationModel) {
 		super();
 		this.annotationModel = annotationModel;
+		this.xtextDocument = xtextDocument;
 	}
 
 	public void processIssues(List<Issue> issues, IProgressMonitor monitor) {
@@ -113,7 +116,7 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor {
 			}
 			if (issue.getOffset() != -1 && issue.getLength() != -1 && issue.getMessage() != null) {
 				String type = lookup.getAnnotationType(EValidator.MARKER, getMarkerSeverity(issue.getSeverity()));
-				Annotation annotation = new Annotation(type, false, issue.getMessage());
+				Annotation annotation = new XtextAnnotation(type, false, xtextDocument, issue);
 				Position position = new Position(issue.getOffset(), issue.getLength());
 				annotationToPosition.put(annotation, position);
 				positionToAnnotations.put(position, annotation);
