@@ -90,7 +90,7 @@ public class Storage2UriMapperImpl implements IStorage2UriMapper, IResourceChang
 	}
 
 	protected boolean isValidUri(URI uri) {
-		return (resourceFactoryRegistry.getFactory(uri) != null);
+		return uri!=null && (resourceFactoryRegistry.getFactory(uri) != null);
 	}
 	
 	
