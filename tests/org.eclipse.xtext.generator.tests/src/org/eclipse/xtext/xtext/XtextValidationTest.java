@@ -725,13 +725,13 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 			assertFalse(error);
 		}
 
-		public void acceptError(String message, EObject object, Integer feature, Integer code) {
+		public void acceptError(String message, EObject object, Integer feature, String code) {
 			assertTrue(error);
 			error = false;
 			assertSame(context, object);
 		}
 
-		public void acceptWarning(String message, EObject object, Integer feature, Integer code) {
+		public void acceptWarning(String message, EObject object, Integer feature, String code) {
 			assertTrue(warning);
 			warning = false;
 			assertSame(context, object);
@@ -739,12 +739,12 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		
 	}
 	
-	public void acceptError(String message, EObject object, Integer feature, Integer code) {
+	public void acceptError(String message, EObject object, Integer feature, String code) {
 		assertNull(lastMessage);
 		lastMessage = message;
 	}
 
-	public void acceptWarning(String message, EObject object, Integer feature, Integer code) {
+	public void acceptWarning(String message, EObject object, Integer feature, String code) {
 		fail("Unexpected call to acceptWarning(..)");
 	}
 }
