@@ -13,6 +13,10 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchListener;
@@ -58,12 +62,12 @@ public class Activator extends AbstractUIPlugin {
 				if (file.exists()) {
 					state.load();
 				} else {
-					ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD, null);
+					doFullBuild();
 				}
 			} catch(Exception e) {
 				log.error("Error while loading persistable builder state.", e);
 				log.error("Triggering a full build.");
-				ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD, null);
+				doFullBuild();
 			} finally {
 				if (file.exists())
 					file.delete();
@@ -98,6 +102,28 @@ public class Activator extends AbstractUIPlugin {
 			log.error(e.getMessage(), e);
 			throw e;
 		}
+	}
+
+	protected void doFullBuild() {
+		new Job("Indexing Xtext Resources") {
+			
+			{
+				setRule(ResourcesPlugin.getWorkspace().getRoot());
+				this.belongsTo(ResourcesPlugin.FAMILY_AUTO_BUILD);
+			}
+			
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				try {
+					ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD, null);
+				} catch (Exception x) {
+					String message = "Full build on initialize failed: "+x.getMessage();
+					log.error(message, x);
+					return new Status(IStatus.ERROR,getBundle().getSymbolicName(),message, x);
+				}
+				return Status.OK_STATUS;
+			}
+		}.schedule();
 	}
 
 	protected Module createBuilderModule(BundleContext context) {
