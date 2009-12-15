@@ -50,7 +50,8 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 	public AnnotationIssueProcessor(IXtextDocument xtextDocument, IAnnotationModel annotationModel) {
 		super();
 		this.annotationModel = annotationModel;
-		annotationModel.addAnnotationModelListener(this);
+		if (annotationModel != null)
+			annotationModel.addAnnotationModelListener(this);
 		this.xtextDocument = xtextDocument;
 	}
 
@@ -147,27 +148,28 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 		if (monitor.isCanceled()) {
 			return;
 		}
-		Iterator<MarkerAnnotation> annotationIterator = Iterators.filter(annotationModel.getAnnotationIterator(), MarkerAnnotation.class);
-		
+		Iterator<MarkerAnnotation> annotationIterator = Iterators.filter(annotationModel.getAnnotationIterator(),
+				MarkerAnnotation.class);
+
 		// every markerAnnotation produced by fast validation can be marked as deleted.
 		// If its predicate still holds, the validation annotation will covered anyway.
 		while (annotationIterator.hasNext() && !monitor.isCanceled()) {
 			final MarkerAnnotation annotation = annotationIterator.next();
 			try {
-				if(isRelevantAnnotationType(annotation.getType()))
+				if (isRelevantAnnotationType(annotation.getType()))
 					annotation.markDeleted(annotation.getMarker().isSubtypeOf(MarkerTypes.FAST_VALIDATION));
 			} catch (CoreException e) {
 				// marker type cannot be resolved - keep state of annotation
 			}
 		}
 	}
-	
+
 	private boolean isRelevantAnnotationType(String type) {
 		return type.equals(XtextEditor.ERROR_ANNOTATION_TYPE) || type.equals(XtextEditor.WARNING_ANNOTATION_TYPE);
 	}
 
 	public void modelChanged(IAnnotationModel model) {
-		if(updateMarkersOnModelChange){
+		if (updateMarkersOnModelChange) {
 			updateMarkerAnnotations(new NullProgressMonitor());
 		}
 	}
