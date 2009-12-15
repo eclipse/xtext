@@ -31,6 +31,39 @@ public class PolymorphicDispatcherTest extends TestCase {
 			return "Number_from_superclass_" + i;
 		}
 	}
+	
+	public void testPerformance() throws Exception {
+		Object first = new SuperClass() {
+			String label(Integer i) {
+				return "Integer_first_" + i;
+			}
+
+			String label(BigInteger i) {
+				return "BigInteger_" + i;
+			}
+		};
+		Object second = new Object() {
+			String label(Integer i) {
+				return "Integer_second_" + i;
+			}
+
+			String label(Number i) {
+				return "Number_" + i;
+			}
+
+			String label(Object i) {
+				return "Object_" + i;
+			}
+		};
+		PolymorphicDispatcher<String> dispatcher = new PolymorphicDispatcher<String>("label", Lists.newArrayList(first, second));
+		long before = System.currentTimeMillis();
+		for (int i=0;i<30000;i++) {
+			String string = dispatcher.invoke(34);
+			assertNotNull(string);
+		}
+		long after = System.currentTimeMillis();
+		assertTrue((after-before) < 1000);
+	}
 
 	public void testSimple() throws Exception {
 		Object first = new SuperClass() {
