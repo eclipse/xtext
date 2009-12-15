@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStatePackageImpl.java,v 1.8 2009/12/07 15:37:56 sefftinge Exp $
+ * $Id: BuilderStatePackageImpl.java,v 1.9 2009/12/15 14:08:07 szarnekow Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -438,6 +438,8 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 		addEParameter(op, ecorePackage.getEString(), "name", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		addEOperation(eObjectDescriptionEClass, this.getEStringArray(), "getUserDataKeys", 0, 1, IS_UNIQUE, !IS_ORDERED);
+
+		addEOperation(eObjectDescriptionEClass, ecorePackage.getEString(), "getQualifiedName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(userDataEntryEClass, Map.Entry.class, "UserDataEntry", !IS_ABSTRACT, !IS_INTERFACE, !IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getUserDataEntry_Key(), ecorePackage.getEString(), "key", null, 0, 1, Map.Entry.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

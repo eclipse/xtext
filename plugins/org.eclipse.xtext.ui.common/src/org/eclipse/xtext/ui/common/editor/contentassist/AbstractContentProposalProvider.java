@@ -16,6 +16,7 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.naming.IQualifiedNameSupport;
 import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider;
@@ -74,7 +75,10 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	private IContentProposalPriorities priorities;
 
 	@Inject
-	protected ILabelProvider labelProvider;
+	private ILabelProvider labelProvider;
+	
+	@Inject
+	private IQualifiedNameSupport qualifiedNameSupport;
 	
 	@Inject
 	private IValueConverterService valueConverter;
@@ -209,12 +213,25 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 		return keyword.getValue();
 	}
 	
-	protected String getDisplayString(EObject element, String proposal) {
-		if (element == null)
-			return proposal;
-		return labelProvider.getText(element);
+	protected String getDisplayString(EObject element, String qualifiedName, String shortName) {
+		if (qualifiedName == null)
+			qualifiedName = shortName;
+		if (qualifiedName == null) {
+			if (element != null)
+				qualifiedName = labelProvider.getText(element);
+			else
+				return null;
+		}
+		String delimiter = qualifiedNameSupport.getDelimiter();
+		int idx = qualifiedName.lastIndexOf(delimiter);
+		if (idx > 0) {
+			String lastSegment = qualifiedName.substring(idx + delimiter.length());
+			return lastSegment + " - " + qualifiedName;
+		} else {
+			return qualifiedName;
+		}
 	}
-	
+
 	public void setValueConverter(IValueConverterService valueConverter) {
 		this.valueConverter = valueConverter;
 	}
@@ -247,6 +264,22 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 
 	public IContentProposalPriorities getPriorityHelper() {
 		return priorities;
+	}
+
+	public void setQualifiedNameSupport(IQualifiedNameSupport qualifiedNameSupport) {
+		this.qualifiedNameSupport = qualifiedNameSupport;
+	}
+
+	public IQualifiedNameSupport getQualifiedNameSupport() {
+		return qualifiedNameSupport;
+	}
+
+	public void setLabelProvider(ILabelProvider labelProvider) {
+		this.labelProvider = labelProvider;
+	}
+
+	public ILabelProvider getLabelProvider() {
+		return labelProvider;
 	}
 	
 }

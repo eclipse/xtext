@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EObjectDescriptionImpl.java,v 1.5 2009/12/07 15:37:57 sefftinge Exp $
+ * $Id: EObjectDescriptionImpl.java,v 1.6 2009/12/15 14:08:07 szarnekow Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -304,6 +304,15 @@ public class EObjectDescriptionImpl extends Container implements IEObjectDescrip
 	 */
 	public String[] getUserDataKeys() {
 		return getUserData().keySet().toArray(new String[getUserData().size()]);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public String getQualifiedName() {
+		return getName();
 	}
 
 	/**
