@@ -32,6 +32,10 @@ public class AliasedEObjectDescription extends AbstractEObjectDescription {
 	public String getName() {
 		return alias;
 	}
+	
+	public String getQualifiedName() {
+		return delegate.getQualifiedName();
+	}
 
 	public EObject getEObjectOrProxy() {
 		return delegate.getEObjectOrProxy();

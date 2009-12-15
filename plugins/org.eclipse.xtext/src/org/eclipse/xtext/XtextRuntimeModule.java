@@ -12,6 +12,7 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.formatting.IFormatter;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.ILinkingService;
+import org.eclipse.xtext.naming.IQualifiedNameSupport;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.resource.IFragmentProvider;
@@ -19,6 +20,7 @@ import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xtext.XtextFormattingTokenSerializer;
 import org.eclipse.xtext.xtext.XtextFragmentProvider;
 import org.eclipse.xtext.xtext.XtextLinkingService;
+import org.eclipse.xtext.xtext.XtextQualifiedNameSupport;
 import org.eclipse.xtext.xtext.XtextReferableElementsUnloader;
 import org.eclipse.xtext.xtext.XtextScopeProvider;
 import org.eclipse.xtext.xtext.XtextTransientValueService;
@@ -81,5 +83,9 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 	
 	public Class<? extends IReferableElementsUnloader> bindIReferableElementsUnloader() {
 		return XtextReferableElementsUnloader.class;
+	}
+	
+	public Class<? extends IQualifiedNameSupport> bindIQualifiedNameSupport() {
+		return XtextQualifiedNameSupport.class;
 	}
 }

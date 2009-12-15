@@ -10,6 +10,7 @@ package org.eclipse.xtext.scoping.impl;
 
 import static com.google.common.collect.Iterables.*;
 
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -21,6 +22,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.QualifiedName;
+import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -144,16 +146,24 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		// filter by type
 		contents = filter(contents, typeFilter(reference.getEReferenceType()));
 		// transform to IScopedElements
-		Function<EObject, String> nameComputation = new Function<EObject, String>() {
-			public String apply(EObject from) {
-				String name = nameProvider.getQualifiedName(from);
-				if (name != null && name.startsWith(commonPrefix))
-					return name.substring(commonPrefix.length());
-				return null;
+		Function<EObject, IEObjectDescription> descriptionComputation = new Function<EObject, IEObjectDescription>() {
+			public IEObjectDescription apply(EObject from) {
+				final String fqn = nameProvider.getQualifiedName(from);
+				if (fqn == null)
+					return null;
+				String name = fqn;
+				if (fqn.startsWith(commonPrefix)) {
+					name = fqn.substring(commonPrefix.length());
+				}
+				return new EObjectDescription(name, from, Collections.<String, String>emptyMap()) {
+					@Override
+					public String getQualifiedName() {
+						return fqn;
+					}
+				};
 			}
 		};
-
-		return Scopes.scopeFor(contents, nameComputation, parent);
+		return new SimpleScope(parent, Iterables.filter(Iterables.transform(contents, descriptionComputation), Predicates.notNull()));
 	}
 
 	private Predicate<EObject> typeFilter(final EClass type) {

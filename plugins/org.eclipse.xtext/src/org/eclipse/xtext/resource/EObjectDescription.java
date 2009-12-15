@@ -51,6 +51,10 @@ public class EObjectDescription extends AbstractEObjectDescription {
 		return name;
 	}
 	
+	public String getQualifiedName() {
+		return getName();
+	}
+	
 	@Override
 	public String getUserData(String name) {
 		if (userData==null)
