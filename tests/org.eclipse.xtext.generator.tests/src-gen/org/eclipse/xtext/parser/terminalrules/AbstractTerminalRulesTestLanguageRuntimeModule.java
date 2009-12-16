@@ -24,7 +24,7 @@ public abstract class AbstractTerminalRulesTestLanguageRuntimeModule extends Def
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.properties");
 	}
 	
 	

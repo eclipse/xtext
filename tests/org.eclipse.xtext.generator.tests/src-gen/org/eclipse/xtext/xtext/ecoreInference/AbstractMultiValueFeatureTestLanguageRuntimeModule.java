@@ -24,7 +24,7 @@ public abstract class AbstractMultiValueFeatureTestLanguageRuntimeModule extends
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/xtext/ecoreInference/MultiValueFeatureTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/xtext/ecoreInference/MultiValueFeatureTestLanguage.properties");
 	}
 	
 	

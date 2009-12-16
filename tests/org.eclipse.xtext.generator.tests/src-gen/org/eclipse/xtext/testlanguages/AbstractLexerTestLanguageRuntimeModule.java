@@ -24,7 +24,7 @@ public abstract class AbstractLexerTestLanguageRuntimeModule extends DefaultRunt
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/testlanguages/LexerTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/testlanguages/LexerTestLanguage.properties");
 	}
 	
 	

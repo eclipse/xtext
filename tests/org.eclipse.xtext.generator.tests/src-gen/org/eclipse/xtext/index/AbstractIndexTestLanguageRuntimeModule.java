@@ -24,7 +24,7 @@ public abstract class AbstractIndexTestLanguageRuntimeModule extends DefaultRunt
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/index/IndexTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/index/IndexTestLanguage.properties");
 	}
 	
 	

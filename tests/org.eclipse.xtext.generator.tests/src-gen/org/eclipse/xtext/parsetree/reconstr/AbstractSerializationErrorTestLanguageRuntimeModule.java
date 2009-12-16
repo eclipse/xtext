@@ -24,7 +24,7 @@ public abstract class AbstractSerializationErrorTestLanguageRuntimeModule extend
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/parsetree/reconstr/SerializationErrorTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/parsetree/reconstr/SerializationErrorTestLanguage.properties");
 	}
 	
 	

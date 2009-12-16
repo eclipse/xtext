@@ -24,7 +24,7 @@ public abstract class AbstractConcreteTestLanguageRuntimeModule extends DefaultR
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.properties");
 	}
 	
 	

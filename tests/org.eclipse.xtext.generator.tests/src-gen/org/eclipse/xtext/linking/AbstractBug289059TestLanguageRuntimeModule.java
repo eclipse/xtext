@@ -24,7 +24,7 @@ public abstract class AbstractBug289059TestLanguageRuntimeModule extends Default
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/linking/Bug289059TestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/linking/Bug289059TestLanguage.properties");
 	}
 	
 	

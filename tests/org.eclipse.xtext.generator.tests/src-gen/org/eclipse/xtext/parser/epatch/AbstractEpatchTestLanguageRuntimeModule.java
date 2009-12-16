@@ -24,7 +24,7 @@ public abstract class AbstractEpatchTestLanguageRuntimeModule extends DefaultRun
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/parser/epatch/EpatchTestLanguage.properties");
 	}
 	
 	

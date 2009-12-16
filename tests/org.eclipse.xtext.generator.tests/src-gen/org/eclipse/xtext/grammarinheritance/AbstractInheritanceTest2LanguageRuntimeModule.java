@@ -24,7 +24,7 @@ public abstract class AbstractInheritanceTest2LanguageRuntimeModule extends Defa
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/grammarinheritance/InheritanceTest2Language.properties");
+		bindProperties(binder, "org/eclipse/xtext/grammarinheritance/InheritanceTest2Language.properties");
 	}
 	
 	

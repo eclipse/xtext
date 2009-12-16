@@ -24,7 +24,7 @@ public abstract class AbstractLazyLinkingTestLanguageRuntimeModule extends Defau
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.properties");
 	}
 	
 	

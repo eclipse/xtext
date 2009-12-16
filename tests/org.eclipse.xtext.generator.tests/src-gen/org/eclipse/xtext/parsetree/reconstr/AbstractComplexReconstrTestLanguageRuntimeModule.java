@@ -24,7 +24,7 @@ public abstract class AbstractComplexReconstrTestLanguageRuntimeModule extends D
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.properties");
 	}
 	
 	

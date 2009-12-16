@@ -24,7 +24,7 @@ public abstract class AbstractMultiGenMMTestLanguageRuntimeModule extends Defaul
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/metamodelreferencing/tests/MultiGenMMTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/metamodelreferencing/tests/MultiGenMMTestLanguage.properties");
 	}
 	
 	

@@ -24,7 +24,7 @@ public abstract class AbstractLookaheadTestLanguageRuntimeModule extends Default
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/testlanguages/LookaheadTestLanguage.properties");
 	}
 	
 	

@@ -24,7 +24,7 @@ public abstract class AbstractAbstractTestLanguageRuntimeModule extends DefaultR
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.properties");
 	}
 	
 	

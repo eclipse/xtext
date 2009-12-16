@@ -24,7 +24,7 @@ public abstract class AbstractFormatterTestLanguageRuntimeModule extends Default
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.properties");
 	}
 	
 	

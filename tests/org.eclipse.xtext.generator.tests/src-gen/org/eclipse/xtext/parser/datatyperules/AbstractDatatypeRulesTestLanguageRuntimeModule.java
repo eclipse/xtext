@@ -24,7 +24,7 @@ public abstract class AbstractDatatypeRulesTestLanguageRuntimeModule extends Def
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.properties");
 	}
 	
 	

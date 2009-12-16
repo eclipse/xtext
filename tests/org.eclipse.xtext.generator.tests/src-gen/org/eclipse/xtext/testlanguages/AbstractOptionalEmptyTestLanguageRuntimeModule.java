@@ -24,7 +24,7 @@ public abstract class AbstractOptionalEmptyTestLanguageRuntimeModule extends Def
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/testlanguages/OptionalEmptyTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/testlanguages/OptionalEmptyTestLanguage.properties");
 	}
 	
 	

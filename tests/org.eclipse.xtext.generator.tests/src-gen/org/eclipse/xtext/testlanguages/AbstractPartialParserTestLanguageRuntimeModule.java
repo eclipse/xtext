@@ -24,7 +24,7 @@ public abstract class AbstractPartialParserTestLanguageRuntimeModule extends Def
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/testlanguages/PartialParserTestLanguage.properties");
 	}
 	
 	

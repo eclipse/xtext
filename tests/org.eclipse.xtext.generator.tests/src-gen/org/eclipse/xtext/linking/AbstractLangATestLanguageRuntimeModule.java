@@ -24,7 +24,7 @@ public abstract class AbstractLangATestLanguageRuntimeModule extends DefaultRunt
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/linking/LangATestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/linking/LangATestLanguage.properties");
 	}
 	
 	

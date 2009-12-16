@@ -24,7 +24,7 @@ public abstract class AbstractKeywordsTestLanguageRuntimeModule extends DefaultR
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.properties");
 	}
 	
 	

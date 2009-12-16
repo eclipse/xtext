@@ -24,7 +24,7 @@ public abstract class AbstractSimpleExpressionsTestLanguageRuntimeModule extends
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/testlanguages/SimpleExpressionsTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/testlanguages/SimpleExpressionsTestLanguage.properties");
 	}
 	
 	

@@ -24,7 +24,7 @@ public abstract class AbstractBug292245TestLanguageRuntimeModule extends Default
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/parser/terminalrules/Bug292245TestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/parser/terminalrules/Bug292245TestLanguage.properties");
 	}
 	
 	

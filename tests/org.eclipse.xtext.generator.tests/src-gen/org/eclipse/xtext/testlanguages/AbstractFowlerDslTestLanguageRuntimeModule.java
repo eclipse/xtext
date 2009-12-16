@@ -24,7 +24,7 @@ public abstract class AbstractFowlerDslTestLanguageRuntimeModule extends Default
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.properties");
 	}
 	
 	

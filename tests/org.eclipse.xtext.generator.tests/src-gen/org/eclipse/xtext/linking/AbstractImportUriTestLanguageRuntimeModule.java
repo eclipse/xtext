@@ -24,7 +24,7 @@ public abstract class AbstractImportUriTestLanguageRuntimeModule extends Default
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/linking/ImportUriTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/linking/ImportUriTestLanguage.properties");
 	}
 	
 	

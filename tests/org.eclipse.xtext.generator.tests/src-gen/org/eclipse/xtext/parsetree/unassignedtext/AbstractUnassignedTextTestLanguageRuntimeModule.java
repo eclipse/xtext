@@ -24,7 +24,7 @@ public abstract class AbstractUnassignedTextTestLanguageRuntimeModule extends De
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.properties");
 	}
 	
 	

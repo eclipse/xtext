@@ -24,7 +24,7 @@ public abstract class AbstractEnumAndReferenceTestLanguageRuntimeModule extends 
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/enumrules/EnumAndReferenceTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/enumrules/EnumAndReferenceTestLanguage.properties");
 	}
 	
 	

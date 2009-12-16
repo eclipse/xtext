@@ -24,7 +24,7 @@ public abstract class AbstractBaseInheritanceTestLanguageRuntimeModule extends D
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.properties");
 	}
 	
 	

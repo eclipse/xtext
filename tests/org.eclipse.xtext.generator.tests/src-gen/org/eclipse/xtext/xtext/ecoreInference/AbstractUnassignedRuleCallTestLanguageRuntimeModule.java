@@ -24,7 +24,7 @@ public abstract class AbstractUnassignedRuleCallTestLanguageRuntimeModule extend
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/xtext/ecoreInference/UnassignedRuleCallTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/xtext/ecoreInference/UnassignedRuleCallTestLanguage.properties");
 	}
 	
 	

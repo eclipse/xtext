@@ -24,7 +24,7 @@ public abstract class AbstractTransientValuesTestRuntimeModule extends DefaultRu
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.properties");
+		bindProperties(binder, "org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.properties");
 	}
 	
 	
