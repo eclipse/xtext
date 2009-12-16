@@ -65,12 +65,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	}
 
 	public <T> T modify(IUnitOfWork<T, XtextResource> work) {
-		try {
-			validationJob.cancel();
-			return stateAccess.modify(work);
-		} finally {
-			checkAndUpdateAnnotations();
-		}
+		return stateAccess.modify(work);
 	}
 
 	private void ensureThatStateIsNotReturned(Object exec, IUnitOfWork<?, XtextResource> uow) {
@@ -156,6 +151,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		@Override
 		public <T> T modify(IUnitOfWork<T, XtextResource> work) {
 			try {
+				validationJob.cancel();
 				return super.modify(work);
 			} catch (RuntimeException e) {
 				try {
@@ -163,6 +159,8 @@ public class XtextDocument extends Document implements IXtextDocument {
 				} catch (IOException ioe) {
 				}
 				throw e;
+			} finally {
+				checkAndUpdateAnnotations();
 			}
 		}
 
