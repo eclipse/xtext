@@ -24,7 +24,7 @@ public abstract class AbstractInheritanceTestLanguageRuntimeModule extends Defau
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.properties");
 	}
 	
 	

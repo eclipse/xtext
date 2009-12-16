@@ -24,7 +24,7 @@ public abstract class AbstractDummyTestLanguageRuntimeModule extends DefaultRunt
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/dummy/DummyTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/dummy/DummyTestLanguage.properties");
 	}
 	
 	

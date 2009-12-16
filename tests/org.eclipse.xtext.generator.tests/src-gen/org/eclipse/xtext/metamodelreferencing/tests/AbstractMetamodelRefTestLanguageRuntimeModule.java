@@ -24,7 +24,7 @@ public abstract class AbstractMetamodelRefTestLanguageRuntimeModule extends Defa
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.properties");
 	}
 	
 	

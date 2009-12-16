@@ -24,7 +24,7 @@ public abstract class AbstractXtextTerminalsTestLanguageRuntimeModule extends De
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/parser/terminalrules/XtextTerminalsTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/parser/terminalrules/XtextTerminalsTestLanguage.properties");
 	}
 	
 	

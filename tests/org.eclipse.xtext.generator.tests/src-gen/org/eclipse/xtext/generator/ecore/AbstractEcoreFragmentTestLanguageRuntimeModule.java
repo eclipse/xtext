@@ -24,7 +24,7 @@ public abstract class AbstractEcoreFragmentTestLanguageRuntimeModule extends Def
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.properties");
 	}
 	
 	

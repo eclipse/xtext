@@ -24,7 +24,7 @@ public abstract class AbstractHiddenTokensMergerTestLanguageRuntimeModule extend
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.properties");
 	}
 	
 	

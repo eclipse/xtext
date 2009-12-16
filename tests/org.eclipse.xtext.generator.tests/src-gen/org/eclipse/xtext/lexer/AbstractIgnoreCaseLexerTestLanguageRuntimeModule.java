@@ -24,7 +24,7 @@ public abstract class AbstractIgnoreCaseLexerTestLanguageRuntimeModule extends D
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/lexer/IgnoreCaseLexerTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/lexer/IgnoreCaseLexerTestLanguage.properties");
 	}
 	
 	

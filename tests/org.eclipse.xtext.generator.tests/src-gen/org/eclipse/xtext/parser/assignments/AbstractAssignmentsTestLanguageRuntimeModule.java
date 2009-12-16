@@ -24,7 +24,7 @@ public abstract class AbstractAssignmentsTestLanguageRuntimeModule extends Defau
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.properties");
 	}
 	
 	

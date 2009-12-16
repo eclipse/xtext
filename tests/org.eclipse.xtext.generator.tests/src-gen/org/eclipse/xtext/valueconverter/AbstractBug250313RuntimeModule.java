@@ -24,7 +24,7 @@ public abstract class AbstractBug250313RuntimeModule extends DefaultRuntimeModul
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/valueconverter/Bug250313.properties");
+		bindProperties(binder, "org/eclipse/xtext/valueconverter/Bug250313.properties");
 	}
 	
 	

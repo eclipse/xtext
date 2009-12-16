@@ -24,7 +24,7 @@ public abstract class AbstractXtextGrammarTestLanguageRuntimeModule extends Defa
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/XtextGrammarTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/XtextGrammarTestLanguage.properties");
 	}
 	
 	

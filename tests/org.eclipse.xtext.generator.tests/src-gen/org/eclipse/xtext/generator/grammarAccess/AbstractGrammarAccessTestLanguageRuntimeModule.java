@@ -24,7 +24,7 @@ public abstract class AbstractGrammarAccessTestLanguageRuntimeModule extends Def
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/generator/grammarAccess/GrammarAccessTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/generator/grammarAccess/GrammarAccessTestLanguage.properties");
 	}
 	
 	

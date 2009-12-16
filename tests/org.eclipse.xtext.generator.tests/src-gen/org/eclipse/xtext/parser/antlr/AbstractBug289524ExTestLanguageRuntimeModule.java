@@ -24,7 +24,7 @@ public abstract class AbstractBug289524ExTestLanguageRuntimeModule extends Defau
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/parser/antlr/Bug289524ExTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/parser/antlr/Bug289524ExTestLanguage.properties");
 	}
 	
 	

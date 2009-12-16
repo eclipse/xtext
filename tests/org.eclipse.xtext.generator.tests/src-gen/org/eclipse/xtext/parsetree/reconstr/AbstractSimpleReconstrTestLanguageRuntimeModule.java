@@ -24,7 +24,7 @@ public abstract class AbstractSimpleReconstrTestLanguageRuntimeModule extends De
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.properties");
 	}
 	
 	

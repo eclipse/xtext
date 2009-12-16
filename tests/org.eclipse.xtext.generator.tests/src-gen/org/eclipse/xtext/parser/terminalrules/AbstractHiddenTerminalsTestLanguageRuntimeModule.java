@@ -24,7 +24,7 @@ public abstract class AbstractHiddenTerminalsTestLanguageRuntimeModule extends D
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.properties");
 	}
 	
 	

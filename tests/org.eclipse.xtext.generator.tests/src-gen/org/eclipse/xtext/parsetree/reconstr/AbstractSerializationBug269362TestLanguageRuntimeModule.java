@@ -24,7 +24,7 @@ public abstract class AbstractSerializationBug269362TestLanguageRuntimeModule ex
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/parsetree/reconstr/SerializationBug269362TestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/parsetree/reconstr/SerializationBug269362TestLanguage.properties");
 	}
 	
 	

@@ -24,7 +24,7 @@ public abstract class AbstractBacktrackingLexerTestLanguageRuntimeModule extends
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.properties");
 	}
 	
 	
