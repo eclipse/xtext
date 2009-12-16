@@ -48,7 +48,7 @@ public abstract class «guiceModuleRtGenerated().toSimpleName()» extends DefaultR
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/«name.replaceAll("\\.","/")».properties");
+		bindProperties(binder, "«name.replaceAll("\\.","/")».properties");
 	}
 	
 	«EXPAND bindingMethod FOREACH bindings»
