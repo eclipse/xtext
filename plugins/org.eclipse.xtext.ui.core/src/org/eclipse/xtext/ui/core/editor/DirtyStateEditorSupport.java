@@ -119,7 +119,7 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	public boolean doVerify() {
 		if (!dirtyStateManager.manageDirtyState(dirtyResource)) {
 			if (!isConcurrentEditingIgnored()) {
-				dirtyStateManager.discardDirtyState(dirtyResource);
+				discardDirtyResource();
 				return false;
 			}
 		}
@@ -151,7 +151,7 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 			throw new IllegalStateException("Was configured with another client or not configured at all.");
 		client.removeVerifyListener(this);
 		stateChangeEventBroker.removeListener(this);
-		dirtyStateManager.discardDirtyState(dirtyResource);
+		discardDirtyResource();
 		IXtextDocument document = client.getDocument();
 		if (document == null)
 			document = dirtyResource.getUnderlyingDocument();
@@ -165,8 +165,24 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	public void markEditorClean(IDirtyStateEditorSupportClient client) {
 		if (this.currentClient == null || this.currentClient != client)
 			throw new IllegalStateException("Was configured with another client or not configured at all.");
-		dirtyStateManager.discardDirtyState(dirtyResource);
+		discardDirtyResource();
 		isDirty = false;
+	}
+
+	protected void discardDirtyResource() {
+		if (currentClient != null) {
+			IXtextDocument document = currentClient.getDocument();
+			if (document != null) {
+				document.modify(new IUnitOfWork.Void<XtextResource>() {
+					@Override
+					public void process(XtextResource state) throws Exception {
+						dirtyStateManager.discardDirtyState(dirtyResource);
+					}
+				});
+			}
+		} else {
+			dirtyStateManager.discardDirtyState(dirtyResource);
+		}
 	}
 	
 	public void descriptionsChanged(final IResourceDescription.Event event) {
