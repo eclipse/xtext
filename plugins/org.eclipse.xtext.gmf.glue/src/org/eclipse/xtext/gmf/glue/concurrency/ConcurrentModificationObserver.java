@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.gmf.glue.concurrency;
 
 import java.util.ArrayList;
@@ -44,7 +51,6 @@ import org.eclipse.xtext.ui.core.editor.XtextEditor;
  * Detects concurrent modifications of diagrams and text files.
  * 
  * @author koehnlein
- * 
  */
 public class ConcurrentModificationObserver implements IPartListener,
 		ResourceSetListener, VerifyKeyListener {

@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.gmf.glue.editingdomain;
 
 import org.eclipse.core.commands.ExecutionException;
@@ -14,6 +21,13 @@ import org.eclipse.gmf.runtime.common.core.command.ICommand;
 import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCommand;
 import org.eclipse.xtext.resource.XtextResource;
 
+/**
+ * A Command that deactivates the {@link ChangeAggregatorAdapter} and updates a
+ * textual section of an Xtext model in an Xtext resource. Used to avoid cycles
+ * in the change aggregation.
+ * 
+ * @author koehnlein
+ */
 public class UpdateXtextResourceTextCommand {
 
 	public static Command createEMFCommand(final XtextResource xtextResource,
