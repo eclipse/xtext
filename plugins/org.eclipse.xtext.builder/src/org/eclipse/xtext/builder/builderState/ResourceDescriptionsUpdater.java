@@ -8,6 +8,7 @@
 package org.eclipse.xtext.builder.builderState;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Map;
 import java.util.Set;
@@ -61,7 +62,7 @@ public class ResourceDescriptionsUpdater {
 	 * @return returns an iterable of fresh {@link IResourceDescription} for all resources, which are affected by the
 	 *         change (i.e. the to BeUpdated and toBeDeleted resources)
 	 */
-	public Iterable<Delta> transitiveUpdate(IResourceDescriptions resourceDescriptions, final ResourceSet rs,
+	public Collection<Delta> transitiveUpdate(IResourceDescriptions resourceDescriptions, final ResourceSet rs,
 			Set<URI> toBeUpdated, Set<URI> toBeDeleted, IProgressMonitor monitor) {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 1);
 		HashSet<URI> toBeDeletedAsSet = Sets.newHashSet(toBeDeleted);
@@ -81,7 +82,7 @@ public class ResourceDescriptionsUpdater {
 		// add transient
 		while (true) {
 			if (subMonitor.isCanceled())
-				return Iterables.emptyIterable();
+				return Collections.emptySet();
 			subMonitor.setWorkRemaining(1);
 			Set<IResourceDescription> descriptions = findAffectedResourceDescriptions(resourceDescriptions, result
 					.values());

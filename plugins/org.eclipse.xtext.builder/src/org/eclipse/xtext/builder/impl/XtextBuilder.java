@@ -95,9 +95,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 
 	protected void fullBuild(final IProgressMonitor monitor) throws CoreException {
 		IProject project = getProject();
-		SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
+		SubMonitor subMonitor = SubMonitor.convert(monitor, 21);
 		final ToBeBuilt toBeBuilt = toBeBuiltComputer.updateProject(project, subMonitor.newChild(1));
-		doBuild(toBeBuilt, subMonitor.newChild(1));
+		doBuild(toBeBuilt, subMonitor.newChild(20));
 		monitor.done();
 	}
 
