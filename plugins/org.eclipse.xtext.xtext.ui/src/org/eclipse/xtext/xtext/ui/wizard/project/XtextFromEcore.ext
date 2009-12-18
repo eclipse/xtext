@@ -1,0 +1,100 @@
+import org::eclipse::emf::ecore;
+
+Collection[EPackage] allReferencedEPackages(EPackage this) :	
+	{this}
+		.union(EClassifiers.typeSelect(EClass).EStructuralFeatures.EType.EPackage)
+		.union(EClassifiers.typeSelect(EClass).ESuperTypes.EPackage)
+		.flatten().toSet();
+	
+fqn(EClassifier this):
+	EPackage.alias() + "::" + name;
+	
+alias(EPackage this):
+	name; 
+
+prefixFeatures(EClass this) :
+	EAllStructuralFeatures.select(f|f.needsAssignment() && f.EType.isBoolean());
+	
+inlinedFeatures(EClass this) :
+	EAllStructuralFeatures.select(f|f.needsAssignment()).remove(idAttribute()).removeAll(prefixFeatures());
+
+onlyOptionalFeatures(EClass this) :
+	prefixFeatures().union(inlinedFeatures()).select(f|f.required).isEmpty;
+		
+assignedRuleCall(EAttribute this):
+	if ((EClass) eContainer()).idAttribute() == this && EType.isString() then
+		 'ID' 
+	else if(EType.isEcoreType()) then 
+		switch (EAttributeType.name) {
+			case 'EBoolean': "'"+name+"'"	
+			case 'EBooleanObject': "'"+name+"'"
+			case 'EByte': 'INT'
+			// case 'EByteArray': ??
+			case 'EByteObject': 'INT'
+			case 'EChar': 'INT'
+			case 'ECharObject': 'INT'
+			// case 'EDate': ??
+			// case 'EDiagnosticChain': ??
+			// case 'EDouble': 'INT'        // TODO: allow floating point numbers
+			// case 'EDoubleObject': 'INT'  // TODO: allow floating point numbers
+			// case 'EEnumerator': ??
+			// case 'EList': ??
+			// case 'EFeatureMap': ??
+			// case 'EFeatureMapEntry': ??
+			// case 'EFloat': 'INT'         // TODO: allow floating point numbers
+			// case 'EFloatObject': 'INT'   // TODO: allow floating point numbers				
+			case 'EInt': 'INT'
+			case 'EIntegerObject': 'INT'
+			// case 'EJavaClass' : ??
+			// case 'EJavaObject' : ??
+			case 'ELong': 'INT'
+			case 'ELongObject': 'INT'
+			// case 'EMap': ??
+			// case 'EResource': ??
+			// case 'EResourceSet': ??
+			case 'EShort': 'INT'
+			case 'EShortObject': 'INT'
+			case 'EString': 'STRING'
+			// case 'ETreeIterator': ??
+			default:
+				'ID /* EDataType ' + EAttributeType.name + ' NOT SUPPORTED */'
+		}
+		else
+			// new datatype rule
+		 	EType.name;
+	
+assignmentKeyword(EStructuralFeature this) :
+	EType.isBoolean() ? "" : "'" + name + "' ";  
+	
+idAttribute(EClass this) :
+	idAttributeInternal() != null ? idAttributeInternal() : EAllAttributes.selectFirst(a|a.needsAssignment() && a.name == 'name' && a.EType.name=="EString");
+
+private idAttributeInternal(EClass this) :
+	EAllAttributes.selectFirst(a|a.needsAssignment() && a.ID);
+
+isBoolean(EClassifier this) :	
+	EDataType.isInstance(this) && {'EBoolean', 'EBooleanObject'}.contains(name) && isEcoreType();
+
+isString(EClassifier this) :	
+	EDataType.isInstance(this) && name == 'EString' && isEcoreType();
+
+isEcoreType(EClassifier this) :
+	EPackage.nsURI == "http://www.eclipse.org/emf/2002/Ecore";
+
+isID(EStructuralFeature this) :
+	EAttribute.isInstance({this}) && ((EAttribute)this).ID;
+	
+boolean needsAssignment(EStructuralFeature this) :
+	!derived && !transient && !(EReference.isInstance(this) && ((EReference)this).container);
+
+isContainment(EStructuralFeature this) :
+	false;
+	
+isContainment(EAttribute this) :
+	true;
+	
+isContainment(EReference this) :
+	containment;
+
+cached subClasses(EClass this):
+	EPackage.EClassifiers.typeSelect(EClass).select(c|c.ESuperTypes.contains(this));	

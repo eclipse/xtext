@@ -10,6 +10,7 @@ public class Messages extends NLS {
 	public static String NewXtextProject_ReferenceDescription;
 	public static String NewXtextProject_ReferenceTitle;
 	public static String NewXtextProjectWizard_WindowTitle;
+	public static String NewXtextProjectFromEcoreWizard_WindowTitle;
 	public static String WizardNewXtextProjectCreationPage_AddButtonText;
 	public static String WizardNewXtextProjectCreationPage_ClearButtonText;
 	public static String WizardNewXtextProjectCreationPage_CreateAGeneratorProject;
@@ -25,6 +26,14 @@ public class Messages extends NLS {
 	public static String WizardNewXtextProjectCreationPage_LabelLayout;
 	public static String WizardNewXtextProjectCreationPage_LabelName;
 	public static String WizardNewXtextProjectCreationPage_WindowTitle;
+	public static String WizardNewXtextProjectFromEcoreCreationPage_WindowTitle;
+	public static String WizardSelectImportedEPackagePage_AddButtonText;
+	public static String WizardSelectImportedEPackagePage_CheckButtonText;
+	public static String WizardSelectImportedEPackagePage_ListTitle;
+	public static String WizardSelectImportedEPackagePage_RemoveButtonText;
+	public static String WizardSelectImportedEPackagePage_WindowTitle;
+	public static String WizardSelectImportedEPackagePage_Description;
+	
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);

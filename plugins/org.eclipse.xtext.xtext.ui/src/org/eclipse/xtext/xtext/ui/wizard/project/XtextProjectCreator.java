@@ -160,7 +160,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 				.toOSString()));
 
 		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null);
-		execCtx.setFileEncoding("iso-8859-1"); //$NON-NLS-1$
+		execCtx.getResourceManager().setFileEncoding("iso-8859-1"); //$NON-NLS-1$
 		execCtx.registerMetaModel(new JavaBeansMetaModel());
 
 		// generate generator and activator for dsl and dsl.ui project
