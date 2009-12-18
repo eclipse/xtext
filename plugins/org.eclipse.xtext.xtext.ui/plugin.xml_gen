@@ -100,12 +100,6 @@
          </command>  
          </menuContribution>
     </extension>
-    	<extension
-         point="org.eclipse.xtext.ui.core.languageBuilder">
-      <languageBuilder
-            class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.core.builder.ILanguageBuilder">
-      </languageBuilder>
-   </extension>
 
 <!-- adding resource factories -->
 
@@ -116,6 +110,13 @@
 			type="xtext">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="xtext">
+     </resourceServiceProvider>
+  </extension>
 
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
@@ -124,6 +125,13 @@
 			type="xtext2">
 		</parser>
 	</extension>
+	<extension
+        point="org.eclipse.xtext.extension_resourceServiceProvider">
+     <resourceServiceProvider
+           class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           uriExtension="xtext2">
+     </resourceServiceProvider>
+  </extension>
 
 
 </plugin>
