@@ -19,7 +19,7 @@ import "«nsURI»" as «alias()»
 «ENDDEFINE» 
 
 «DEFINE rule FOR EClass»
-«name» returns «fqn()»:
+«name.quoteIfNeccesary()» returns «fqn()»:
 	«EXPAND subClassAlternatives»«
 	IF !abstract»«
 		IF !subClasses().isEmpty
@@ -47,7 +47,7 @@ import "«nsURI»" as «alias()»
 
 «DEFINE subClassAlternatives FOR EClass»«
 	FOREACH subClasses() AS subClass SEPARATOR " | "»«
-		subClass.name»«
+		subClass.name.quoteIfNeccesary()»«
 	ENDFOREACH»«
 ENDDEFINE»
 
@@ -67,7 +67,7 @@ ENDDEFINE»
 			»'(' «
 		ENDIF»«
 	ENDIF»«
-	name»«
+	name.quoteIfNeccesary()»«
 	EXPAND assignmentOperator»«
 	EXPAND assignedTerminal»«
 	IF many
@@ -106,7 +106,7 @@ ENDDEFINE»
 «ENDDEFINE»
 
 «DEFINE rule FOR EEnum»
-enum «name» returns «fqn()»:
+enum «name.quoteIfNeccesary()» returns «fqn()»:
 	«EXPAND enumAssignment FOREACH ELiterals SEPARATOR " | "»;
 «ENDDEFINE»
 
@@ -114,7 +114,7 @@ enum «name» returns «fqn()»:
 
 «DEFINE rule FOR EDataType»«
 	IF !isEcoreType()»
-«name» returns «fqn()»:
+«name.quoteIfNeccesary()» returns «fqn()»:
 	'«name»' /* TODO: implement */;
 «	ENDIF»«
 ENDDEFINE»

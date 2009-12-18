@@ -10,7 +10,7 @@ fqn(EClassifier this):
 	EPackage.alias() + "::" + name;
 	
 alias(EPackage this):
-	quoteIfNeccesary(name); 
+	isXtextKeyword(name) ? name + '_package' : name; 
 
 cached prefixFeatures(EClass this) :
 	EAllStructuralFeatures.select(f|f.needsAssignment() && f.EType.isBoolean());
@@ -67,10 +67,13 @@ assignmentKeyword(EStructuralFeature this) :
 	EType.isBoolean() ? "" : "'" + name + "' ";  
 
 quoteIfNeccesary(String this) :	
+	isXtextKeyword() ? '^' + this : this;
+	
+isXtextKeyword(String this) :
 	{ 'ML_COMMENT', 'ID', 'WS','INT', 'STRING', 'ANY_OTHER', 'SL_COMMENT', 
 	  'returns', 'generate', 'terminal', 'with', 'hidden', 'enum', 'grammar', 
 	  'import', 'as', 'current'
-	}.contains(this)? '^' + this : this;
+	}.contains(this);
 		
 idAttribute(EClass this) :
 	idAttributeInternal() != null ? idAttributeInternal() : EAllAttributes.selectFirst(a|a.needsAssignment() && a.name == 'name' && a.EType.name=="EString");
