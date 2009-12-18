@@ -24,7 +24,7 @@ public abstract class AbstractDomainmodelRuntimeModule extends DefaultRuntimeMod
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/example/Domainmodel.properties");
+		bindProperties(binder, "org/eclipse/xtext/example/Domainmodel.properties");
 	}
 	
 	

@@ -24,7 +24,7 @@ public abstract class AbstractTestLanguageRuntimeModule extends DefaultRuntimeMo
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/ui/integration/TestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/ui/integration/TestLanguage.properties");
 	}
 	
 	

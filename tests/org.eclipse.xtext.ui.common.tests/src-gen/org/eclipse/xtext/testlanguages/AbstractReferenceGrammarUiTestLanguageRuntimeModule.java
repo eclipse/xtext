@@ -24,7 +24,7 @@ public abstract class AbstractReferenceGrammarUiTestLanguageRuntimeModule extend
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/testlanguages/ReferenceGrammarUiTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/testlanguages/ReferenceGrammarUiTestLanguage.properties");
 	}
 	
 	

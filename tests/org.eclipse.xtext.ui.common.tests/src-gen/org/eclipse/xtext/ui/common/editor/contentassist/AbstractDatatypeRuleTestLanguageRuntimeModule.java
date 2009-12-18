@@ -24,7 +24,7 @@ public abstract class AbstractDatatypeRuleTestLanguageRuntimeModule extends Defa
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/ui/common/editor/contentassist/DatatypeRuleTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/ui/common/editor/contentassist/DatatypeRuleTestLanguage.properties");
 	}
 	
 	

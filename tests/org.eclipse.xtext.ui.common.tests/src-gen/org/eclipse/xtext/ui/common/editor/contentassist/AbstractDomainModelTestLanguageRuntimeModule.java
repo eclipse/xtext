@@ -24,7 +24,7 @@ public abstract class AbstractDomainModelTestLanguageRuntimeModule extends Defau
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/ui/common/editor/contentassist/DomainModelTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/ui/common/editor/contentassist/DomainModelTestLanguage.properties");
 	}
 	
 	

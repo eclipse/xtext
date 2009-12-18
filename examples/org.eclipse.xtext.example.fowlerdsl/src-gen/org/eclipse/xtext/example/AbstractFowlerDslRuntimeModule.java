@@ -24,7 +24,7 @@ public abstract class AbstractFowlerDslRuntimeModule extends DefaultRuntimeModul
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/example/FowlerDsl.properties");
+		bindProperties(binder, "org/eclipse/xtext/example/FowlerDsl.properties");
 	}
 	
 	

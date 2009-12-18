@@ -24,7 +24,7 @@ public abstract class AbstractImportUriUiTestLanguageRuntimeModule extends Defau
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/linking/ImportUriUiTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/linking/ImportUriUiTestLanguage.properties");
 	}
 	
 	
