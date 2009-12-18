@@ -24,7 +24,7 @@ public abstract class AbstractKeywordsUiTestLanguageRuntimeModule extends Defaul
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/parser/keywords/KeywordsUiTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/parser/keywords/KeywordsUiTestLanguage.properties");
 	}
 	
 	

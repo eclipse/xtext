@@ -24,7 +24,7 @@ public abstract class AbstractCrossReferenceProposalTestLanguageRuntimeModule ex
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/ui/common/editor/contentassist/CrossReferenceProposalTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/ui/common/editor/contentassist/CrossReferenceProposalTestLanguage.properties");
 	}
 	
 	

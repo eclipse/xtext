@@ -24,7 +24,7 @@ public abstract class AbstractXtextRuntimeModule extends DefaultRuntimeModule {
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/Xtext.properties");
+		bindProperties(binder, "org/eclipse/xtext/Xtext.properties");
 	}
 	
 	

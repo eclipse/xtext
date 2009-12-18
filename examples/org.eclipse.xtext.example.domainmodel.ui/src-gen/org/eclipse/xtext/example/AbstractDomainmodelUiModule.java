@@ -202,5 +202,10 @@ public abstract class AbstractDomainmodelUiModule extends DomainmodelRuntimeModu
 		binder.bind(org.eclipse.xtext.ui.common.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.core.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.example.contentassist.antlr.internal.InternalDomainmodelLexer.class);
 	}
 
+	// contributed by org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment
+	public Class<? extends org.eclipse.xtext.validation.IssueResolutionProvider> bindIssueResolutionProvider() {
+		return org.eclipse.xtext.example.quickfix.DomainmodelQuickfixProvider.class;
+	}
+
 
 }

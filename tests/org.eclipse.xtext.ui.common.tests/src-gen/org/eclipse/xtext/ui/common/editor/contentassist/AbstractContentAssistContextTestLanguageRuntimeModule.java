@@ -24,7 +24,7 @@ public abstract class AbstractContentAssistContextTestLanguageRuntimeModule exte
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/ui/common/editor/contentassist/ContentAssistContextTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/ui/common/editor/contentassist/ContentAssistContextTestLanguage.properties");
 	}
 	
 	

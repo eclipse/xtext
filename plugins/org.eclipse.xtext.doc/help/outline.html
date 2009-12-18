@@ -235,11 +235,11 @@
 					<a class="ulink" href="http://help.eclipse.org/stable/index.jsp?topic=/org.eclipse.platform.doc.isv/guide/workbench_basicext_popupMenus.htm" target="_new">Object contribution</a>. (Besides, using the extension point 
 					<code class="code">org.eclipse.ui.popupMenus</code> is regarded somewhat old school &ndash; you should rather use the new command and expression framework, as depicted below).
 				</p>
-<p>So to register context menus for specific node types of your Ecore model, you need to do the following:</p>
+<p>To register context menus for specific node types of your Ecore model, we need to:</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
-<p>register a 
+<p>implement 
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/IContentOutlineNodeAdapterFactory.java?root=Modeling_Project&view=co" target="_new">IContentOutlineNodeAdapterFactory</a> which will translate 
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/ContentOutlineNode.java?root=Modeling_Project&view=co" target="_new">ContentOutlineNode</a>s to their underlying node type
 						</p>
@@ -261,9 +261,8 @@
 </div>
 </div>
 </div>
-<p>Create a subclass of 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/DefaultContentOutlineNodeAdapterFactory.java?root=Modeling_Project&view=co" target="_new">DefaultContentOutlineNodeAdapterFactory</a> - this class contains some base infrastructure to manage adapters for your node types. In your subclass, you need to override 
-						<code class="code">getAdapterList()</code> and return an array of classes. This is the list of classes you want to add context menus to:
+<p>The Xtext code generator creates a subclass of 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/DefaultContentOutlineNodeAdapterFactory.java?root=Modeling_Project&view=co" target="_new">DefaultContentOutlineNodeAdapterFactory</a>. All we need to do is specify a list of types that we later want to bind context menu contributions to. 
 					</p>
 <div class="literallayout">
 <p>
@@ -284,21 +283,14 @@
 </code>
 </p>
 </div>
-<p>Register this class with your 
-						<code class="code">MyDslUiModule</code> to make it available to your DSL editor:
+<p>If you want to bind context menu actions to nodes representing 
+						<code class="code">Attribute</code> and 
+						<code class="code">Entity</code>, you need to change the declaration of 
+						<code class="code">type</code> as follows:
 					</p>
 <div class="literallayout">
 <p>
-<code class="code">public&nbsp;class&nbsp;MyDslUiModule&nbsp;extends&nbsp;AbstractMyDslUiModule&nbsp;{<br>
-&nbsp;&nbsp;...<br>
-&nbsp;&nbsp;public&nbsp;Class&lt;?&nbsp;extends&nbsp;IContentOutlineNodeAdapterFactory&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bindIContentOutlineNodeAdapterFactory()&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;org.example.myDSLContentOutlineNodeAdapterFactory.class;<br>
-&nbsp;&nbsp;}<br>
-&nbsp;&nbsp;...<br>
-}<br>
-
-<br>
+<code class="code">private&nbsp;static&nbsp;final&nbsp;Class[]&nbsp;types&nbsp;=&nbsp;{&nbsp;Attribute.class,&nbsp;Entity.class&nbsp;};<br>
 
 </code>
 </p>
@@ -313,9 +305,7 @@
 </div>
 </div>
 </div>
-<p>After you have registered the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/IContentOutlineNodeAdapterFactory.java?root=Modeling_Project&view=co" target="_new">IContentOutlineNodeAdapterFactory</a>, you can add command / handler pairs to the context menu.
-					</p>
+<p>You can now add command / handler pairs to the context menu.</p>
 <p>First, you need to define a command &ndash; it will serve as a handle to glue together the handler and the menu contribution:</p>
 <div class="literallayout">
 <p>

@@ -24,7 +24,7 @@ public abstract class AbstractTwoContextsTestLanguageRuntimeModule extends Defau
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/ui/common/editor/contentassist/TwoContextsTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/ui/common/editor/contentassist/TwoContextsTestLanguage.properties");
 	}
 	
 	

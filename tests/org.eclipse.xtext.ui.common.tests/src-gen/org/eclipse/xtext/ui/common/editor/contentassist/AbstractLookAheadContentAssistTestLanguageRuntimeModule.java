@@ -24,7 +24,7 @@ public abstract class AbstractLookAheadContentAssistTestLanguageRuntimeModule ex
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/ui/common/editor/contentassist/LookAheadContentAssistTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/ui/common/editor/contentassist/LookAheadContentAssistTestLanguage.properties");
 	}
 	
 	

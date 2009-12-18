@@ -24,7 +24,7 @@ public abstract class AbstractTerminalsRuntimeModule extends DefaultRuntimeModul
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/common/Terminals.properties");
+		bindProperties(binder, "org/eclipse/xtext/common/Terminals.properties");
 	}
 	
 	

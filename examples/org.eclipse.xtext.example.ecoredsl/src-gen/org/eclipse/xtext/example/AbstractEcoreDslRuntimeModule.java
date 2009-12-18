@@ -24,7 +24,7 @@ public abstract class AbstractEcoreDslRuntimeModule extends DefaultRuntimeModule
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/example/EcoreDsl.properties");
+		bindProperties(binder, "org/eclipse/xtext/example/EcoreDsl.properties");
 	}
 	
 	

@@ -24,7 +24,7 @@ public abstract class AbstractEnumRulesUiTestLanguageRuntimeModule extends Defau
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/enumrules/EnumRulesUiTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/enumrules/EnumRulesUiTestLanguage.properties");
 	}
 	
 	

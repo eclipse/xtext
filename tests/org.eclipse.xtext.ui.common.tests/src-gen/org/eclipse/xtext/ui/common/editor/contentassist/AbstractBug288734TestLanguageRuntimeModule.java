@@ -24,7 +24,7 @@ public abstract class AbstractBug288734TestLanguageRuntimeModule extends Default
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/ui/common/editor/contentassist/Bug288734TestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/ui/common/editor/contentassist/Bug288734TestLanguage.properties");
 	}
 	
 	

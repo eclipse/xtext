@@ -24,7 +24,7 @@ public abstract class AbstractBuilderTestLanguageRuntimeModule extends DefaultRu
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/builder/tests/BuilderTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/builder/tests/BuilderTestLanguage.properties");
 	}
 	
 	

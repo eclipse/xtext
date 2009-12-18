@@ -697,7 +697,7 @@ SimpleType:<br>
 <p>
 <code class="code">
 <br>
-&acute;IMPORT&nbsp;entities&ordf;<br>
+&laquo;IMPORT&nbsp;entities&raquo;<br>
 
 </code>
 </p>
@@ -710,10 +710,10 @@ SimpleType:<br>
 <p>
 <code class="code">
 <br>
-&acute;DEFINE&nbsp;main&nbsp;FOR&nbsp;Model&ordf;<br>
-&nbsp;&nbsp;&acute;EXPAND&nbsp;DAO::dao&nbsp;FOREACH&nbsp;this.types.typeSelect(Entity)&ordf;<br>
-&nbsp;&nbsp;&acute;EXPAND&nbsp;Entity::entity&nbsp;FOREACH&nbsp;this.types.typeSelect(Entity)&ordf;<br>
-&acute;ENDDEFINE&ordf;<br>
+&laquo;DEFINE&nbsp;main&nbsp;FOR&nbsp;Model&raquo;<br>
+&nbsp;&nbsp;&laquo;EXPAND&nbsp;DAO::dao&nbsp;FOREACH&nbsp;this.elements.typeSelect(Entity)&raquo;<br>
+&nbsp;&nbsp;&laquo;EXPAND&nbsp;Entity::entity&nbsp;FOREACH&nbsp;this.elements.typeSelect(Entity)&raquo;<br>
+&laquo;ENDDEFINE&raquo;<br>
 
 <br>
 
@@ -721,7 +721,7 @@ SimpleType:<br>
 </p>
 </div>
 <p>By using the expression 
-					<code class="code">this.types.typeSelect(Entity)</code>, we make sure we only iterate over 
+					<code class="code">this.elements.typeSelect(Entity)</code>, we make sure we only iterate over 
 					<code class="code">Entity</code> elements, and skip 
 					<code class="code">SimpleType</code> elements.
 				</p>
@@ -732,11 +732,11 @@ SimpleType:<br>
 <p>
 <code class="code">
 <br>
-&acute;IMPORT&nbsp;entities&ordf;<br>
-&acute;DEFINE&nbsp;main&nbsp;FOR&nbsp;Model&ordf;<br>
-&nbsp;&nbsp;&acute;EXPAND&nbsp;DAO::dao&nbsp;FOREACH&nbsp;this.types.typeSelect(Entity)&ordf;<br>
-&nbsp;&nbsp;&acute;EXPAND&nbsp;Entity::entity&nbsp;FOREACH&nbsp;this.types.typeSelect(Entity)&ordf;<br>
-&acute;ENDDEFINE&ordf;<br>
+&laquo;IMPORT&nbsp;entities&raquo;<br>
+&laquo;DEFINE&nbsp;main&nbsp;FOR&nbsp;Model&raquo;<br>
+&nbsp;&nbsp;&laquo;EXPAND&nbsp;DAO::dao&nbsp;FOREACH&nbsp;this.elements.typeSelect(Entity)&raquo;<br>
+&nbsp;&nbsp;&laquo;EXPAND&nbsp;Entity::entity&nbsp;FOREACH&nbsp;this.elements.typeSelect(Entity)&raquo;<br>
+&laquo;ENDDEFINE&raquo;<br>
 
 <br>
 
@@ -768,31 +768,31 @@ SimpleType:<br>
 <p>
 <code class="code">
 <br>
-&acute;IMPORT&nbsp;entities&ordf;<br>
+&laquo;IMPORT&nbsp;entities&raquo;<br>
 
 <br>
-&acute;DEFINE&nbsp;entity&nbsp;FOR&nbsp;Entity&ordf;<br>
-&nbsp;&nbsp;&acute;FILE&nbsp;this.name&nbsp;+&nbsp;".java"&ordf;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&acute;this.name&ordf;&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&acute;EXPAND&nbsp;property&nbsp;FOREACH&nbsp;this.properties&ordf;<br>
+&laquo;DEFINE&nbsp;entity&nbsp;FOR&nbsp;Entity&raquo;<br>
+&nbsp;&nbsp;&laquo;FILE&nbsp;this.name&nbsp;+&nbsp;".java"&raquo;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;this.name&raquo;&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;EXPAND&nbsp;property&nbsp;FOREACH&nbsp;this.properties&raquo;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-&nbsp;&nbsp;&acute;ENDFILE&ordf;<br>
-&acute;ENDDEFINE&ordf;<br>
+&nbsp;&nbsp;&laquo;ENDFILE&raquo;<br>
+&laquo;ENDDEFINE&raquo;<br>
 
 <br>
-&acute;DEFINE&nbsp;property&nbsp;FOR&nbsp;Property&ordf;<br>
-&nbsp;&nbsp;private&nbsp;&acute;this.type.name&ordf;&nbsp;&acute;this.name&ordf;;<br>
+&laquo;DEFINE&nbsp;property&nbsp;FOR&nbsp;Property&raquo;<br>
+&nbsp;&nbsp;private&nbsp;&laquo;this.type.name&raquo;&nbsp;&laquo;this.name&raquo;;<br>
 
 <br>
-&nbsp;&nbsp;public&nbsp;void&nbsp;set&acute;this.name.toFirstUpper()&ordf;(&acute;this.type.name&ordf;&nbsp;&acute;this.name&ordf;)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;this.&acute;this.name&ordf;&nbsp;=&nbsp;&acute;this.name&ordf;;<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;set&laquo;this.name.toFirstUpper()&raquo;(&laquo;this.type.name&raquo;&nbsp;&laquo;this.name&raquo;)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;this.&laquo;this.name&raquo;&nbsp;=&nbsp;&laquo;this.name&raquo;;<br>
 &nbsp;&nbsp;}<br>
 
 <br>
-&nbsp;&nbsp;public&nbsp;&acute;this.type.name&ordf;&nbsp;get&acute;this.name.toFirstUpper()&ordf;()&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;this.&acute;this.name&ordf;;<br>
+&nbsp;&nbsp;public&nbsp;&laquo;this.type.name&raquo;&nbsp;get&laquo;this.name.toFirstUpper()&raquo;()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;this.&laquo;this.name&raquo;;<br>
 &nbsp;&nbsp;}<br>
-&acute;ENDDEFINE&ordf;<br>
+&laquo;ENDDEFINE&raquo;<br>
 
 <br>
 
@@ -817,47 +817,47 @@ SimpleType:<br>
 <p>
 <code class="code">
 <br>
-&acute;IMPORT&nbsp;entities&ordf;<br>
+&laquo;IMPORT&nbsp;entities&raquo;<br>
 
 <br>
-&acute;DEFINE&nbsp;dao&nbsp;FOR&nbsp;Entity&ordf;<br>
-&nbsp;&nbsp;&acute;FILE&nbsp;this.name&nbsp;+&nbsp;"DAO.java"&ordf;<br>
+&laquo;DEFINE&nbsp;dao&nbsp;FOR&nbsp;Entity&raquo;<br>
+&nbsp;&nbsp;&laquo;FILE&nbsp;this.name&nbsp;+&nbsp;"DAO.java"&raquo;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;java.util.Collection;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;import&nbsp;org.springframework.orm.hibernate3.support.HibernateDaoSupport;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&acute;this.name&ordf;DAO<br>
+&nbsp;&nbsp;&nbsp;&nbsp;public&nbsp;class&nbsp;&laquo;this.name&raquo;DAO<br>
 &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;extends&nbsp;HibernateDaoSupport&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&acute;EXPAND&nbsp;crud&nbsp;FOR&nbsp;this&ordf;<br>
+&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&laquo;EXPAND&nbsp;crud&nbsp;FOR&nbsp;this&raquo;<br>
 &nbsp;&nbsp;&nbsp;&nbsp;}<br>
-&nbsp;&nbsp;&acute;ENDFILE&ordf;<br>
-&acute;ENDDEFINE&ordf;<br>
+&nbsp;&nbsp;&laquo;ENDFILE&raquo;<br>
+&laquo;ENDDEFINE&raquo;<br>
 
 <br>
-&acute;DEFINE&nbsp;crud&nbsp;FOR&nbsp;Entity&ordf;<br>
-&nbsp;&nbsp;public&nbsp;&acute;this.name&ordf;&nbsp;load(Long&nbsp;id)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;(&acute;this.name&ordf;)getHibernateTemplate().get(&acute;this.name&ordf;.class,&nbsp;id);<br>
+&laquo;DEFINE&nbsp;crud&nbsp;FOR&nbsp;Entity&raquo;<br>
+&nbsp;&nbsp;public&nbsp;&laquo;this.name&raquo;&nbsp;load(Long&nbsp;id)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;(&laquo;this.name&raquo;)getHibernateTemplate().get(&laquo;this.name&raquo;.class,&nbsp;id);<br>
 &nbsp;&nbsp;}<br>
 
 <br>
 &nbsp;&nbsp;@SuppressWarnings("unchecked")<br>
-&nbsp;&nbsp;public&nbsp;Collection&lt;&acute;this.name&ordf;&gt;&nbsp;loadAll()&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;getHibernateTemplate().loadAll(&acute;this.name&ordf;.class);<br>
+&nbsp;&nbsp;public&nbsp;Collection&lt;&laquo;this.name&raquo;&gt;&nbsp;loadAll()&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;getHibernateTemplate().loadAll(&laquo;this.name&raquo;.class);<br>
 &nbsp;&nbsp;}&nbsp;&nbsp;<br>
 
 <br>
-&nbsp;&nbsp;public&nbsp;&acute;this.name&ordf;&nbsp;create(&acute;this.name&ordf;&nbsp;entity)&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;(&acute;this.name&ordf;)&nbsp;getHibernateTemplate().save(entity);<br>
+&nbsp;&nbsp;public&nbsp;&laquo;this.name&raquo;&nbsp;create(&laquo;this.name&raquo;&nbsp;entity)&nbsp;{<br>
+&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;(&laquo;this.name&raquo;)&nbsp;getHibernateTemplate().save(entity);<br>
 &nbsp;&nbsp;}<br>
 
 <br>
-&nbsp;&nbsp;public&nbsp;void&nbsp;update(&acute;this.name&ordf;&nbsp;entity)&nbsp;{<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;update(&laquo;this.name&raquo;&nbsp;entity)&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;getHibernateTemplate().update(entity);<br>
 &nbsp;&nbsp;}<br>
 
 <br>
-&nbsp;&nbsp;public&nbsp;void&nbsp;remove(&acute;this.name&ordf;&nbsp;entity)&nbsp;{<br>
+&nbsp;&nbsp;public&nbsp;void&nbsp;remove(&laquo;this.name&raquo;&nbsp;entity)&nbsp;{<br>
 &nbsp;&nbsp;&nbsp;&nbsp;getHibernateTemplate().delete(entity);<br>
 &nbsp;&nbsp;}<br>
-&acute;ENDDEFINE&ordf;<br>
+&laquo;ENDDEFINE&raquo;<br>
 
 <br>
 
@@ -944,7 +944,7 @@ SimpleType:<br>
 		</p>
 <p>The grammar language is a domain-specific language, carefully designed for the description of textual languages based on 
 			<a class="ulink" href="http://en.wikipedia.org/wiki/LL_parser" target="_new">LL(*)-Parsing</a> that is like 
-			<a class="ulink" href="http://www.artima.com/lejava/articles/antlr_3.html" target="_new">ANTLR3's parsing strategy</a>.
+			<a class="ulink" href="http://www.artima.com/lejava/articles/antlr_3.html" target="_new">ANTLR3&rsquo;s parsing strategy</a>.
 			The main idea is to describe the concrete syntax and how an EMF-based in-memory model is created during parsing. 
 		</p>
 <div class="section" title="A first example">
@@ -1011,7 +1011,7 @@ end<br>
 </div>
 <p>So, we have a bunch of declared events, commands and states. Within states there are references to declared actions, which should be executed when entering such a state.
 				Also there are transitions consisting of a reference to an event and a state. Please read 
-				<a class="ulink" href="http://martinfowler.com/dslwip/Intro.html" target="_new">Martin's description</a> if it is not clear enough.
+				<a class="ulink" href="http://martinfowler.com/dslwip/Intro.html" target="_new">Martin&rsquo;s description</a> if it is not clear enough.
 			</p>
 <p>In order to get a complete IDE for this little language from Xtext, you need to write the following grammar:</p>
 <div class="literallayout">
@@ -1899,7 +1899,7 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 <div class="literallayout">
 <p>
 <code class="code">Expression&nbsp;:<br>
-&nbsp;&nbsp;TerminalExpression&nbsp;('+'&nbsp;Expression)?<br>
+&nbsp;&nbsp;TerminalExpression&nbsp;('+'&nbsp;TerminalExpression)?<br>
 ;<br>
 &nbsp;<br>
 TerminalExpression&nbsp;:<br>
@@ -1917,7 +1917,7 @@ TerminalExpression&nbsp;:<br>
 <div class="literallayout">
 <p>
 <code class="code">Expression&nbsp;:<br>
-&nbsp;&nbsp;{Operation}&nbsp;left=TerminalExpression&nbsp;(op='+'&nbsp;right=Expression)?<br>
+&nbsp;&nbsp;{Operation}&nbsp;left=TerminalExpression&nbsp;(op='+'&nbsp;right=TerminalExpression)?<br>
 ;<br>
 &nbsp;<br>
 TerminalExpression&nbsp;returns&nbsp;Expression:<br>
@@ -3561,7 +3561,7 @@ public&nbsp;class&nbsp;DomainmodelJavaValidator&nbsp;<br>
 					<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.example.domainmodel/src/org/eclipse/xtext/example/validation/DomainmodelJavaValidator.java?root=Modeling_Project&view=co" target="_new">DomainmodelJavaValidator</a>) the diagnostic&rsquo;s 
 					<span class="emphasis"><em>code</em></span> is given by the last argument to the 
 					<code class="code">warning()</code> method and it is a reference to the static 
-					<code class="code">int</code> field 
+					<code class="code">String</code> field 
 					<code class="code">INVALID_TYPE_NAME</code> in the validator class.
 				</p>
 <div class="literallayout">
@@ -3929,7 +3929,7 @@ public&nbsp;class&nbsp;DomainmodelQuickfixProvider&nbsp;extends&nbsp;AbstractDec
 <p>Xtext produces an instance of &lsquo;ReferringType&rsquo;. After this parsing step it enters the linking phase and tries to find an instance of '&lsquo;Entity&rsquo;' using the parsed text &lsquo;Entity01&rsquo;. The input </p>
 <div class="literallayout">
 <p>
-<code class="code">ref&nbsp;"EntityWith&#402;&divide;&lsaquo;"<br>
+<code class="code">ref&nbsp;"EntityWith&Auml;&Ouml;&Uuml;"<br>
 
 </code>
 </p>
@@ -5198,7 +5198,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 &nbsp;&nbsp;//&nbsp;check&nbsp;for&nbsp;valid&nbsp;prefixes<br>
 &nbsp;&nbsp;//&nbsp;and&nbsp;terminal&nbsp;token&nbsp;conflicts<br>
 &nbsp;&nbsp;ICompletionProposal&nbsp;completionProposal&nbsp;=&nbsp;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;createCompletionProposal(proposal,&nbsp;contentAssistContext);<br>
+&nbsp;&nbsp;&nbsp;&nbsp;createCompletionProposal(proposal,&nbsp;context);<br>
 
 <br>
 &nbsp;&nbsp;//&nbsp;register&nbsp;the&nbsp;proposal,&nbsp;the&nbsp;acceptor&nbsp;handles&nbsp;null-values&nbsp;gracefully<br>
@@ -5582,11 +5582,11 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 					<a class="ulink" href="http://help.eclipse.org/stable/index.jsp?topic=/org.eclipse.platform.doc.isv/guide/workbench_basicext_popupMenus.htm" target="_new">Object contribution</a>. (Besides, using the extension point 
 					<code class="code">org.eclipse.ui.popupMenus</code> is regarded somewhat old school &ndash; you should rather use the new command and expression framework, as depicted below).
 				</p>
-<p>So to register context menus for specific node types of your Ecore model, you need to do the following:</p>
+<p>To register context menus for specific node types of your Ecore model, we need to:</p>
 <div class="itemizedlist">
 <ul class="itemizedlist" type="disc">
 <li class="listitem">
-<p>register a 
+<p>implement 
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/IContentOutlineNodeAdapterFactory.java?root=Modeling_Project&view=co" target="_new">IContentOutlineNodeAdapterFactory</a> which will translate 
 							<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/ContentOutlineNode.java?root=Modeling_Project&view=co" target="_new">ContentOutlineNode</a>s to their underlying node type
 						</p>
@@ -5608,9 +5608,8 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </div>
 </div>
 </div>
-<p>Create a subclass of 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/DefaultContentOutlineNodeAdapterFactory.java?root=Modeling_Project&view=co" target="_new">DefaultContentOutlineNodeAdapterFactory</a> - this class contains some base infrastructure to manage adapters for your node types. In your subclass, you need to override 
-						<code class="code">getAdapterList()</code> and return an array of classes. This is the list of classes you want to add context menus to:
+<p>The Xtext code generator creates a subclass of 
+						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/DefaultContentOutlineNodeAdapterFactory.java?root=Modeling_Project&view=co" target="_new">DefaultContentOutlineNodeAdapterFactory</a>. All we need to do is specify a list of types that we later want to bind context menu contributions to. 
 					</p>
 <div class="literallayout">
 <p>
@@ -5631,21 +5630,14 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </code>
 </p>
 </div>
-<p>Register this class with your 
-						<code class="code">MyDslUiModule</code> to make it available to your DSL editor:
+<p>If you want to bind context menu actions to nodes representing 
+						<code class="code">Attribute</code> and 
+						<code class="code">Entity</code>, you need to change the declaration of 
+						<code class="code">type</code> as follows:
 					</p>
 <div class="literallayout">
 <p>
-<code class="code">public&nbsp;class&nbsp;MyDslUiModule&nbsp;extends&nbsp;AbstractMyDslUiModule&nbsp;{<br>
-&nbsp;&nbsp;...<br>
-&nbsp;&nbsp;public&nbsp;Class&lt;?&nbsp;extends&nbsp;IContentOutlineNodeAdapterFactory&gt;<br>
-&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;bindIContentOutlineNodeAdapterFactory()&nbsp;{<br>
-&nbsp;&nbsp;&nbsp;&nbsp;return&nbsp;org.example.myDSLContentOutlineNodeAdapterFactory.class;<br>
-&nbsp;&nbsp;}<br>
-&nbsp;&nbsp;...<br>
-}<br>
-
-<br>
+<code class="code">private&nbsp;static&nbsp;final&nbsp;Class[]&nbsp;types&nbsp;=&nbsp;{&nbsp;Attribute.class,&nbsp;Entity.class&nbsp;};<br>
 
 </code>
 </p>
@@ -5660,9 +5652,7 @@ public&nbsp;void&nbsp;complete_[RuleName](<br>
 </div>
 </div>
 </div>
-<p>After you have registered the 
-						<a class="ulink" href="http://dev.eclipse.org/viewcvs/index.cgi/org.eclipse.tmf/org.eclipse.xtext/plugins/org.eclipse.xtext.ui.common/src/org/eclipse/xtext/ui/common/editor/outline/actions/IContentOutlineNodeAdapterFactory.java?root=Modeling_Project&view=co" target="_new">IContentOutlineNodeAdapterFactory</a>, you can add command / handler pairs to the context menu.
-					</p>
+<p>You can now add command / handler pairs to the context menu.</p>
 <p>First, you need to define a command &ndash; it will serve as a handle to glue together the handler and the menu contribution:</p>
 <div class="literallayout">
 <p>

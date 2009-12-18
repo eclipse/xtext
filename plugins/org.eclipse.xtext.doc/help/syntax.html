@@ -846,7 +846,7 @@ MyOtherRule&nbsp;returns&nbsp;TypeB&nbsp;:<br>
 <div class="literallayout">
 <p>
 <code class="code">Expression&nbsp;:<br>
-&nbsp;&nbsp;TerminalExpression&nbsp;('+'&nbsp;Expression)?<br>
+&nbsp;&nbsp;TerminalExpression&nbsp;('+'&nbsp;TerminalExpression)?<br>
 ;<br>
 &nbsp;<br>
 TerminalExpression&nbsp;:<br>
@@ -864,7 +864,7 @@ TerminalExpression&nbsp;:<br>
 <div class="literallayout">
 <p>
 <code class="code">Expression&nbsp;:<br>
-&nbsp;&nbsp;{Operation}&nbsp;left=TerminalExpression&nbsp;(op='+'&nbsp;right=Expression)?<br>
+&nbsp;&nbsp;{Operation}&nbsp;left=TerminalExpression&nbsp;(op='+'&nbsp;right=TerminalExpression)?<br>
 ;<br>
 &nbsp;<br>
 TerminalExpression&nbsp;returns&nbsp;Expression:<br>

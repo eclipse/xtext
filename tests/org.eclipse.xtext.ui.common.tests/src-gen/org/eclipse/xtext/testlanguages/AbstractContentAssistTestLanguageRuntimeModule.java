@@ -24,7 +24,7 @@ public abstract class AbstractContentAssistTestLanguageRuntimeModule extends Def
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/testlanguages/ContentAssistTestLanguage.properties");
 	}
 	
 	

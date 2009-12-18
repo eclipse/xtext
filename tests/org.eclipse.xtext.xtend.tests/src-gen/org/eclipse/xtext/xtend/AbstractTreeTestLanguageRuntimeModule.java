@@ -24,7 +24,7 @@ public abstract class AbstractTreeTestLanguageRuntimeModule extends DefaultRunti
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "/org/eclipse/xtext/xtend/TreeTestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/xtend/TreeTestLanguage.properties");
 	}
 	
 	
