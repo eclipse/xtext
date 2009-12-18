@@ -37,6 +37,15 @@ projectName=«this.projectName»
 
 «DEFINE grammar FOR XtextProjectInfo»
 «FILE basePackagePath+"/"+languageNameAbbreviation+".xtext" -»
+«IF importedEPackages != null-»
+«EXPAND org::eclipse::xtext::xtext::ui::wizard::project::XtextFromEcore::grammar-»
+«ELSE-»
+«EXPAND defaultGrammar-»
+«ENDIF-»
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE defaultGrammar FOR XtextProjectInfo»
 grammar «this.languageName» with org.eclipse.xtext.common.Terminals
 
 generate «this.languageNameAbbreviation.toFirstLower()» "«this.nsURI»"
@@ -77,5 +86,4 @@ Entity :
 Property:
 	'property' name=ID ':' type=[Type|FQN] (many?='[]')?;
 	
-«ENDFILE»
 «ENDDEFINE»

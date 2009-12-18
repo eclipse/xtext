@@ -8,9 +8,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.project;
 
+import java.util.Collection;
 import java.util.StringTokenizer;
 
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkingSet;
 import org.eclipse.xtext.ui.core.wizard.IProjectInfo;
@@ -32,6 +34,7 @@ public class XtextProjectInfo implements IProjectInfo {
 	private IWorkbench workbench;
 	private IPath location;
 	private WizardContribution wizardContribution;
+	private Collection<EPackage> importedEPackages;
 	
 	public void setWizardContribution(WizardContribution wizardContribution) {
 		this.wizardContribution = wizardContribution;
@@ -151,6 +154,14 @@ public class XtextProjectInfo implements IProjectInfo {
 
 	public IPath getLocation() {
 		return location;
+	}
+	
+	public Collection<EPackage> getImportedEPackages() {
+		return importedEPackages;
+	}
+	
+	public void setImportedEPackages(Collection<EPackage> importedEPackages) {
+		this.importedEPackages = importedEPackages;
 	}
 
 }

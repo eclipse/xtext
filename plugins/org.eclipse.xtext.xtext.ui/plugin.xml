@@ -119,6 +119,14 @@
 			name="%Xtext_Project"
 			project="true">
 		</wizard>
+		<wizard
+			category="org.eclipse.xtext.projectwiz"
+			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectFromEcoreWizard"
+			icon="icons/editor.gif"
+			id="org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectFromEcoreWizard"
+			name="%Xtext_Project_From_Ecore"
+			project="true">
+		</wizard>
 	</extension>
 	
 	<!-- Outline context menu actions -->
