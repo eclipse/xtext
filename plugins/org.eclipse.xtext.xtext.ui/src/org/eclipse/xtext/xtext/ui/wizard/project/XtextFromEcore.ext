@@ -10,15 +10,15 @@ fqn(EClassifier this):
 	EPackage.alias() + "::" + name;
 	
 alias(EPackage this):
-	name; 
+	quoteIfNeccesary(name); 
 
-prefixFeatures(EClass this) :
+cached prefixFeatures(EClass this) :
 	EAllStructuralFeatures.select(f|f.needsAssignment() && f.EType.isBoolean());
 	
-inlinedFeatures(EClass this) :
+cached inlinedFeatures(EClass this) :
 	EAllStructuralFeatures.select(f|f.needsAssignment()).remove(idAttribute()).removeAll(prefixFeatures());
 
-onlyOptionalFeatures(EClass this) :
+cached onlyOptionalFeatures(EClass this) :
 	prefixFeatures().union(inlinedFeatures()).select(f|f.required).isEmpty;
 		
 assignedRuleCall(EAttribute this):
@@ -65,7 +65,13 @@ assignedRuleCall(EAttribute this):
 	
 assignmentKeyword(EStructuralFeature this) :
 	EType.isBoolean() ? "" : "'" + name + "' ";  
-	
+
+quoteIfNeccesary(String this) :	
+	{ 'ML_COMMENT', 'ID', 'WS','INT', 'STRING', 'ANY_OTHER', 'SL_COMMENT', 
+	  'returns', 'generate', 'terminal', 'with', 'hidden', 'enum', 'grammar', 
+	  'import', 'as', 'current'
+	}.contains(this)? '^' + this : this;
+		
 idAttribute(EClass this) :
 	idAttributeInternal() != null ? idAttributeInternal() : EAllAttributes.selectFirst(a|a.needsAssignment() && a.name == 'name' && a.EType.name=="EString");
 
