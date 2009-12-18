@@ -13,7 +13,7 @@ To provide for a better overview and to easier manage our code templates, we wil
 * DAO.xpt - will generate the _DAO_ class
 * Entity.xpt - will generate the _Entity_ class
 
-In the project navigator, right click on _org.xtext.example.start.generator/templates_ and select _New -> Other... -> Xpand Template_. Name the new template @Main.xpt@ and click on _Finish_.
+In the project navigator, right click on _org.xtext.example.start.generator/src/templates_ and select _New -> Other... -> Xpand Template_. Name the new template @Main.xpt@ and click on _Finish_.
 
 First, we need to import the meta model, as we're going to be working with the concepts from the meta model:
 
