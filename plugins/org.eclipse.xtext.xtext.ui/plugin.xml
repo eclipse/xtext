@@ -255,5 +255,45 @@
          </MweSnippet>
       </generatorConfiguration>
    </extension>
-   
+	<extension
+		point="org.eclipse.ui.commands">
+		<command
+			id="org.eclipse.xtext.xtext.launcher.GenerateArtifacts"
+			name="Generate Artifacts"
+			categoryId="org.eclipse.xtext.ui.core.category.XtextEditor"
+			description="Executes the language generator for the selected grammar">
+		</command>
+	</extension>
+	<extension
+		point="org.eclipse.ui.menus">
+		<menuContribution
+			locationURI="popup:org.eclipse.ui.popup.any?after=additions">
+			<command
+				commandId="org.eclipse.xtext.xtext.launcher.GenerateArtifacts"
+				style="push">
+				<visibleWhen>
+					<with variable="activeMenuSelection">
+						<iterate>
+							<or>
+								<adapt type="org.eclipse.xtext.Grammar" />
+								<adapt type="org.eclipse.core.resources.IResource">
+									<test property="org.eclipse.core.resources.name" value="*.xtext"/>
+								</adapt>							
+								<adapt type="org.eclipse.jface.text.ITextSelection">
+									<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>									
+								</adapt>
+							</or>
+						</iterate>
+					</with>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension
+		point="org.eclipse.ui.handlers">
+		<handler
+			class="org.eclipse.xtext.xtext.launcher.GenerateArtifacts"
+			commandId="org.eclipse.xtext.xtext.launcher.GenerateArtifacts">
+		</handler>
+	</extension>
 </plugin>

@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.outline;
 
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ui.common.editor.outline.actions.DefaultContentOutlineNodeAdapterFactory;
 
@@ -17,7 +18,7 @@ import org.eclipse.xtext.ui.common.editor.outline.actions.DefaultContentOutlineN
 public class XtextContentOutlineNodeAdapterFactory extends DefaultContentOutlineNodeAdapterFactory {
 
 	@SuppressWarnings("unchecked")
-	private static final Class[] types = { ParserRule.class };
+	private static final Class[] types = { ParserRule.class, Grammar.class };
 
 	@Override
 	@SuppressWarnings("unchecked")
