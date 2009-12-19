@@ -86,7 +86,8 @@ public class ShadowingResourceDescriptions implements IResourceDescriptions, IRe
 		for (URI uri : adapter.getToBeUpdated()) {
 			if (!resourceDescriptions.containsKey(uri)) {
 				IResourceDescription description = shadowing.getResourceDescription(uri);
-				resourceDescriptions.put(uri, description);
+				if (description != null)
+					resourceDescriptions.put(uri, description);
 			}
 		}
 		Iterable<? extends IResourceDescription> descriptions = adapter.getToBeShadowed().getAllResourceDescriptions();
