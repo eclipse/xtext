@@ -18,6 +18,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
@@ -36,11 +37,11 @@ public class ResourceSetBasedResourceDescriptions implements IResourceDescriptio
 	}
 
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
-		return Iterables.transform(resourceSet.getResources(), new Function<Resource, IResourceDescription>() {
+		return Iterables.filter(Iterables.transform(resourceSet.getResources(), new Function<Resource, IResourceDescription>() {
 			public IResourceDescription apply(Resource from) {
 				return getResourceDescription(from.getURI());
 			}
-		});
+		}), Predicates.notNull());
 	}
 
 	public IResourceDescription getResourceDescription(URI uri) {
@@ -48,6 +49,8 @@ public class ResourceSetBasedResourceDescriptions implements IResourceDescriptio
 		if (resource == null)
 			return null;
 		IResourceServiceProvider resourceServiceProvider = registry.getResourceServiceProvider(uri, null);
+		if (resourceServiceProvider == null)
+			return null;
 		Manager manager = resourceServiceProvider.getResourceDescriptionManager();
 		return manager.getResourceDescription(resource);
 	}

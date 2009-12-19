@@ -12,6 +12,7 @@ import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
 
 import com.google.common.collect.BiMap;
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
@@ -33,6 +34,7 @@ public abstract class AbstractSplittingTokenSource implements TokenSource {
 	
 	protected AbstractSplittingTokenSource() {
 		nextTokens = new TokenAcceptor();
+		tokenDefs = Maps.newHashBiMap();
 	}
 	
 	public void setDelegate(TokenSource delegate) {

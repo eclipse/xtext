@@ -10,9 +10,12 @@ package org.eclipse.xtext.validation;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.util.CancelIndicator;
 
+import com.google.inject.ImplementedBy;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@ImplementedBy(NamesAreUniqueValidationHelper.class)
 public interface INamesAreUniqueValidationHelper {
 
 	/**
