@@ -165,7 +165,7 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 		dirtyResource.connect(this);
 		assertSame(documentContent, dirtyResource.getContents());
 		documentContent = "modified";
-		dirtyResource.copyState(resource);
+		dirtyResource.copyState(resource.getResourceServiceProvider().getResourceDescriptionManager().getResourceDescription(resource));
 		assertSame(documentContent, dirtyResource.getContents());
 	}
 	

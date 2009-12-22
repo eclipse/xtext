@@ -33,7 +33,8 @@ public class DocumentBasedDirtyResource implements IDirtyResource {
 		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
 			@Override
 			public void process(XtextResource resource) throws Exception {
-				copyState(resource);
+				final IResourceDescription description = resource.getResourceServiceProvider().getResourceDescriptionManager().getResourceDescription(resource);
+				copyState(description);
 			}
 		});
 	}
@@ -48,8 +49,7 @@ public class DocumentBasedDirtyResource implements IDirtyResource {
 		content = null;
 	}
 	
-	public synchronized void copyState(XtextResource resource) {
-		final IResourceDescription original = resource.getResourceServiceProvider().getResourceDescriptionManager().getResourceDescription(resource);
+	public synchronized void copyState(IResourceDescription original) {
 		description = new StatefulResourceDescription(original);
 		content = getUnderlyingDocument().get();
 	}

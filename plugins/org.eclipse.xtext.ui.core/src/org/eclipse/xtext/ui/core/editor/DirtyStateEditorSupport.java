@@ -11,6 +11,10 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -22,6 +26,7 @@ import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.IXtextModelListener;
 import org.eclipse.xtext.ui.core.notification.IStateChangeEventBroker;
@@ -90,11 +95,9 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	@Inject
 	private IConcurrentEditingCallback concurrentEditingWarningDialog;
 	
-	private IDirtyStateEditorSupportClient currentClient;
+	private volatile IDirtyStateEditorSupportClient currentClient;
 	
 	private volatile boolean isDirty;
-	
-	private volatile boolean notifying;
 	
 	public void initializeDirtyStateSupport(IDirtyStateEditorSupportClient client) {
 		if (this.currentClient != null)
@@ -170,82 +173,94 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	}
 	
 	public void descriptionsChanged(final IResourceDescription.Event event) {
-		if (currentClient == null)
-			return;
 		final Set<URI> uris = Sets.newHashSet();
 		for(IResourceDescription.Delta delta: event.getDeltas()) {
+			if (delta.getOld() == getDirtyResource().getDescription() || delta.getNew() == getDirtyResource().getDescription())
+				return;
 			if (delta.getNew() != null)
 				uris.add(delta.getNew().getURI());
 			else if (delta.getOld() != null)
 				uris.add(delta.getOld().getURI());
 		}
-		final IXtextDocument document = currentClient.getDocument();
-		final boolean[] isReparseRequired = new boolean[] {false};
-		final Collection<Resource> affectedResources = document.readOnly(new IUnitOfWork<Collection<Resource>, XtextResource>() {
-			public Collection<Resource> exec(XtextResource resource) throws Exception {
-				if (resource == null || resource.getResourceSet() == null)
-					return null;
-				Collection<Resource> affectedResources = collectAffectedResources(resource, uris);
-				IResourceDescription.Manager resourceDescriptionManager = resource.getResourceServiceProvider().getResourceDescriptionManager();
-				IResourceDescription description = resourceDescriptionManager.getResourceDescription(resource);
-				for(IResourceDescription.Delta delta: event.getDeltas()) {
-					if (resourceDescriptionManager.isAffected(delta, description)) {
-						isReparseRequired[0] = true;
-						break;
+		new Job("Updating editor state") {
+
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				IDirtyStateEditorSupportClient myClient = currentClient;
+				if (myClient == null)
+					return Status.OK_STATUS;
+				final IXtextDocument document = myClient.getDocument();
+				if (document == null)
+					return Status.OK_STATUS;
+				final boolean[] isReparseRequired = new boolean[] {false};
+				final Collection<Resource> affectedResources = document.readOnly(new IUnitOfWork<Collection<Resource>, XtextResource>() {
+					public Collection<Resource> exec(XtextResource resource) throws Exception {
+						if (resource == null || resource.getResourceSet() == null)
+							return null;
+						Collection<Resource> affectedResources = collectAffectedResources(resource, uris);
+						IResourceDescription.Manager resourceDescriptionManager = resource.getResourceServiceProvider().getResourceDescriptionManager();
+						IResourceDescription description = resourceDescriptionManager.getResourceDescription(resource);
+						for(IResourceDescription.Delta delta: event.getDeltas()) {
+							if (resourceDescriptionManager.isAffected(delta, description)) {
+								isReparseRequired[0] = true;
+								break;
+							}
+						}
+						return affectedResources;
 					}
+					
+					protected Collection<Resource> collectAffectedResources(XtextResource resource, final Collection<URI> affectedURIs) {
+						List<Resource> result = Lists.newArrayListWithExpectedSize(2);
+						ResourceSet resourceSet = resource.getResourceSet();
+						URIConverter converter = resourceSet.getURIConverter();
+						Set<URI> normalizedAffected = Sets.newHashSetWithExpectedSize(affectedURIs.size());
+						for(URI original: affectedURIs) {
+							normalizedAffected.add(converter.normalize(original));
+						}
+						EcoreUtil.resolveAll(resource);
+						for(Resource res: resourceSet.getResources()) {
+							if (res != resource && res != null) {
+								URI normalized = converter.normalize(res.getURI());
+								if (normalizedAffected.contains(normalized))
+									result.add(res);
+							}
+						}
+						return result;
+					}
+				});
+				if (affectedResources != null && !affectedResources.isEmpty() || isReparseRequired[0]) {
+					
+					document.modify(new IUnitOfWork.Void<XtextResource>() {
+						@Override
+						public void process(XtextResource resource) throws Exception {
+							if (resource == null || resource.getResourceSet() == null)
+								return;
+							ResourceSet resourceSet = resource.getResourceSet();
+							if (affectedResources != null) {
+								for(Resource affectedResource: affectedResources) {
+									affectedResource.unload();
+									resourceSet.getResources().remove(affectedResource);
+								}
+							}
+							resource.reparse(document.get());
+						}
+					});
 				}
-				return affectedResources;
+				return Status.OK_STATUS;
 			}
 			
-			protected Collection<Resource> collectAffectedResources(XtextResource resource, final Collection<URI> affectedURIs) {
-				List<Resource> result = Lists.newArrayListWithExpectedSize(2);
-				ResourceSet resourceSet = resource.getResourceSet();
-				URIConverter converter = resourceSet.getURIConverter();
-				Set<URI> normalizedAffected = Sets.newHashSetWithExpectedSize(affectedURIs.size());
-				for(URI original: affectedURIs) {
-					normalizedAffected.add(converter.normalize(original));
-				}
-				EcoreUtil.resolveAll(resource);
-				for(Resource res: resourceSet.getResources()) {
-					if (res != resource) {
-						URI normalized = converter.normalize(res.getURI());
-						if (normalizedAffected.contains(normalized))
-							result.add(res);
-					}
-				}
-				return result;
-			}
-		});
-		if (affectedResources != null && !affectedResources.isEmpty() || isReparseRequired[0]) {
-			document.modify(new IUnitOfWork.Void<XtextResource>() {
-				@Override
-				public void process(XtextResource resource) throws Exception {
-					ResourceSet resourceSet = resource.getResourceSet();
-					if (affectedResources != null) {
-						for(Resource affectedResource: affectedResources) {
-							affectedResource.unload();
-							resourceSet.getResources().remove(affectedResource);
-						}
-					}
-					resource.reparse(document.get());
-				}
-			});
-		}
+		}.schedule();
 	}
 	
 	public void modelChanged(XtextResource resource) {
 		if (resource == null)
 			return;
-		if (isDirty || dirtyStateManager.manageDirtyState(dirtyResource) && !notifying) {
+		if (isDirty || dirtyStateManager.manageDirtyState(dirtyResource)) {
 			synchronized (dirtyStateManager) {
-				if (!notifying) {
-					notifying = true;
-					try {
-						dirtyResource.copyState(resource);
-						dirtyStateManager.announceDirtyStateChanged(dirtyResource);
-					} finally {
-						notifying = false;
-					}
+				final IResourceDescription newDescription = resource.getResourceServiceProvider().getResourceDescriptionManager().getResourceDescription(resource);
+				if (new DefaultResourceDescriptionDelta(dirtyResource.getDescription(), newDescription).hasChanges()) {
+					dirtyResource.copyState(newDescription);
+					dirtyStateManager.announceDirtyStateChanged(dirtyResource);
 				}
 			}
 		}
