@@ -107,7 +107,8 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 				String completeInput = viewer.getDocument().get(0, datatypeNode.getOffset());
 				
 				Collection<FollowElement> followElements = parser.getFollowElements(completeInput);
-				createContexts(viewer, parseResult, completionOffset, rootNode, datatypeNode, datatypeNode, result, prefix,
+				AbstractNode lastCompleteNodeBeforeDatatype = ParseTreeUtil.getLastCompleteNodeByOffset(rootNode, datatypeNode.getTotalOffset());
+				createContexts(viewer, parseResult, completionOffset, rootNode, lastCompleteNodeBeforeDatatype, datatypeNode, result, prefix,
 						currentModel, followElements);
 			}
 			
@@ -196,7 +197,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 
 	protected Multimap<EObject, AbstractElement> computeCurrentModel(EObject currentModel, AbstractNode lastCompleteNode,
 			Collection<AbstractElement> followElements) {
-		Multimap<EObject, AbstractElement> result = Multimaps.newArrayListMultimap();
+		Multimap<EObject, AbstractElement> result = Multimaps.newLinkedHashMultimap();
 		NodeAdapter adapter = NodeUtil.getNodeAdapter(currentModel);
 		if (adapter == null || adapter.getParserNode() == null) {
 			result.putAll(currentModel, followElements);
