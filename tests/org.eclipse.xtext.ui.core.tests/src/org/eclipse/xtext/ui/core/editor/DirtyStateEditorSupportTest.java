@@ -10,11 +10,13 @@ package org.eclipse.xtext.ui.core.editor;
 import java.util.LinkedList;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.naming.SimpleNameProvider;
+import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
@@ -49,6 +51,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 	private IXtextModelListener modelListener;
 	private DocumentBasedDirtyResource dirtyResource;
 	private IXtextDocument document;
+	private Iterable<IEObjectDescription> exportedObjects;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -71,6 +74,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		dirtyResource = new DocumentBasedDirtyResource();
 		dirtyStateSupport.setDirtyResource(dirtyResource);
 		ignoreConcurrentEditing = Lists.newLinkedList();
+		exportedObjects = Iterables.emptyIterable();
 	}
 	
 	public void testInitialize_01(){
@@ -232,6 +236,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		dirtyStateSupport.initializeDirtyStateSupport(this);
 		dirtyStateSupport.isEditingPossible(this);
 		assertEquals(getContents(), dirtyStateManager.getContent(resourceURI));
+		exportedObjects = Lists.newArrayList(EObjectDescription.create("foo", EcoreFactory.eINSTANCE.createEClass()));
 		dirtyStateSupport.modelChanged(resource);
 		assertTrue(dirtyStateManager.hasContent(resourceURI));
 		assertEquals(get(), dirtyStateManager.getContent(resourceURI));
@@ -241,6 +246,17 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		ignoreConcurrentEditing.add(Boolean.FALSE);
 		dirtyStateManager.manageDirtyState(this);
 		dirtyStateSupport.initializeDirtyStateSupport(this);
+		assertEquals(getContents(), dirtyStateManager.getContent(resourceURI));
+		dirtyStateSupport.modelChanged(resource);
+		assertTrue(dirtyStateManager.hasContent(resourceURI));
+		assertEquals(getContents(), dirtyStateManager.getContent(resourceURI));
+	}
+	
+	public void testModelChanged_04() {
+		ignoreConcurrentEditing.add(Boolean.TRUE);
+		dirtyStateManager.manageDirtyState(this);
+		dirtyStateSupport.initializeDirtyStateSupport(this);
+		dirtyStateSupport.isEditingPossible(this);
 		assertEquals(getContents(), dirtyStateManager.getContent(resourceURI));
 		dirtyStateSupport.modelChanged(resource);
 		assertTrue(dirtyStateManager.hasContent(resourceURI));
@@ -319,7 +335,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		return new DefaultResourceDescription(resource, new SimpleNameProvider()) {
 			@Override
 			public Iterable<IEObjectDescription> getExportedObjects() {
-				return Iterables.emptyIterable();
+				return exportedObjects;
 			}
 		};
 	}
