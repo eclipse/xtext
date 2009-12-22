@@ -137,6 +137,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.resource.ResourceSetReferencingResourceSetTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.XtextResourcePerformanceTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.XtextResourceTest.class);
+      suite.addTestSuite(org.eclipse.xtext.resource.ecore.EcoreResourceDescriptionManagerTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.impl.DefaultReferenceDescriptionTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.impl.DefaultResourceDescription2Test.class);
       suite.addTestSuite(org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDeltaTest.class);
