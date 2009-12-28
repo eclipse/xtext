@@ -58,6 +58,11 @@ public abstract class AbstractBug288760TestLanguageUiModule extends Bug288760Tes
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
+	public Class<? extends org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider> bindDelegatingStyledCellLabelProvider$IStyledLabelProvider() {
+		return org.eclipse.xtext.ui.core.DefaultStyledLabelProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public Class<? extends org.eclipse.emf.common.notify.AdapterFactory> bindAdapterFactory() {
 		return org.eclipse.xtext.ui.core.InjectableAdapterFactory.class;
 	}

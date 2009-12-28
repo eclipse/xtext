@@ -11,34 +11,67 @@ package org.eclipse.xtext.ui.common.editor.outline;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.jface.viewers.StyledString.Styler;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.util.concurrent.IEObjectHandle;
 
 /**
  * @author Peter Friese - Initial contribution and API
+ * @author Michael Clay
  */
 public class ContentOutlineNode {
 
-	private String label;
+	private StyledString styledString;
 	private Image image;
 	private ImageDescriptor imageDescriptor;
-	private int selectionOffset;
-	private int selectionLength;
+	private IRegion region;
 	private List<ContentOutlineNode> children;
 	private ContentOutlineNode parent;
-	private EClass clazz;
+	private EClass eClass;
 	private IEObjectHandle<EObject> handle;
 
+	public ContentOutlineNode() {
+	}
+
+	public ContentOutlineNode(String text) {
+		this.styledString = new StyledString(text);
+	}
+
+	public ContentOutlineNode(StyledString styledString) {
+		this.styledString = styledString;
+	}
+
+	public ContentOutlineNode(StyledString styledString, Image image, ImageDescriptor imageDescriptor, IRegion region,
+			IEObjectHandle<EObject> eObjectHandle, EClass eClass) {
+		this.styledString = styledString;
+		this.image = image;
+		this.imageDescriptor = imageDescriptor;
+		this.region = region;
+		this.handle = eObjectHandle;
+		this.eClass = eClass;
+	}
+
 	public void setLabel(String label) {
-		this.label = label;
+		this.styledString = new StyledString(label);
 	}
 
 	public String getLabel() {
-		return label;
+		return null != styledString ? styledString.getString() : null;
+	}
+
+	public void setStyledString(StyledString styledString) {
+		this.styledString = styledString;
+	}
+
+	public StyledString getStyledString() {
+		return styledString;
 	}
 
 	public void setImage(Image image) {
@@ -49,8 +82,17 @@ public class ContentOutlineNode {
 		return image;
 	}
 
-	public void setChildren(List<ContentOutlineNode> children) {
-		this.children = children;
+	public void setImageDescriptor(ImageDescriptor imageDescriptor) {
+		this.imageDescriptor = imageDescriptor;
+	}
+
+	public ImageDescriptor getImageDescriptor() {
+		return imageDescriptor;
+	}
+
+	public void addChildren(ContentOutlineNode contentOutlineNode) {
+		contentOutlineNode.parent = this;
+		getChildren().add(contentOutlineNode);
 	}
 
 	public List<ContentOutlineNode> getChildren() {
@@ -60,44 +102,16 @@ public class ContentOutlineNode {
 		return children;
 	}
 
-	public void setParent(ContentOutlineNode outlineParentNode) {
-		this.parent = outlineParentNode;
-	}
-
 	public ContentOutlineNode getParent() {
 		return parent;
 	}
 
-	public void setSelectionOffset(int selectionOffset) {
-		this.selectionOffset = selectionOffset;
-	}
-
-	public int getSelectionOffset() {
-		return selectionOffset;
-	}
-
-	public void setSelectionLength(int selectionLength) {
-		this.selectionLength = selectionLength;
-	}
-
-	public int getSelectionLength() {
-		return selectionLength;
-	}
-
-	public void setImageDescriptor(ImageDescriptor imageDescriptor) {
-		this.imageDescriptor = imageDescriptor;
-	}
-
-	public ImageDescriptor getImageDescriptor() {
-		return imageDescriptor;
-	}
-
-	public void setClazz(EClass clazz) {
-		this.clazz = clazz;
+	public IRegion getRegion() {
+		return region;
 	}
 
 	public EClass getClazz() {
-		return clazz;
+		return eClass;
 	}
 
 	public URI getUri() {
@@ -109,16 +123,28 @@ public class ContentOutlineNode {
 	public IEObjectHandle<EObject> getEObjectHandle() {
 		return handle;
 	}
-	
-	public void setEObjectHandle(IEObjectHandle<EObject> handle) {
-		this.handle = handle;
+
+	public int getSelectionOffset() {
+		return null == region ? 0 : region.getOffset();
+	}
+
+	public int getSelectionLength() {
+		return null == region ? 0 : region.getLength();
+	}
+
+	public void setStyler(Styler styler) {
+		Assert.isNotNull(styler, "parameter 'styler' must not be null");
+		StyledString styledString = getStyledString();
+		if (styledString != null) {
+			styledString.setStyle(0, styledString.getString().length(), styler);
+		}
 	}
 
 	@Override
 	public int hashCode() {
 		final int prime = 31;
 		int result = 1;
-		result = prime * result + ((label == null) ? 0 : label.hashCode());
+		result = prime * result + ((getLabel() == null) ? 0 : getLabel().hashCode());
 		result = prime * result + ((parent == null) ? 0 : parent.hashCode());
 		return result;
 	}
@@ -136,20 +162,18 @@ public class ContentOutlineNode {
 		}
 
 		final ContentOutlineNode other = (ContentOutlineNode) obj;
-		if (label == null) {
-			if (other.label != null) {
+		if (getLabel() == null) {
+			if (other.getLabel() != null) {
 				return false;
 			}
-		}
-		else if (!label.equals(other.label)) {
+		} else if (!getLabel().equals(other.getLabel())) {
 			return false;
 		}
 		if (parent == null) {
 			if (other.parent != null) {
 				return false;
 			}
-		}
-		else if (!parent.equals(other.parent)) {
+		} else if (!parent.equals(other.parent)) {
 			return false;
 		}
 

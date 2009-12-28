@@ -8,12 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.outline;
 
-import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ITreeContentProvider;
+import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 
 /**
  * @author Peter Friese - Initial contribution and API
  */
-public interface ITreeProvider extends ITreeContentProvider, ILabelProvider {
+public interface ITreeProvider extends ITreeContentProvider, IStyledLabelProvider {
 
 }

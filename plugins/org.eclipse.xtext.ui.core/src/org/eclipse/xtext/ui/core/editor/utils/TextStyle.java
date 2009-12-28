@@ -8,6 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor.utils;
 
+import static org.eclipse.xtext.ui.core.editor.utils.EditorUtils.*;
+
+import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.RGB;
@@ -93,5 +96,14 @@ public class TextStyle {
 	 */
 	public void setStyle(int style) {
 		this.style = style;
+	}
+
+	public void applyTo(org.eclipse.swt.graphics.TextStyle textStyle) {
+		int style = getStyle();
+		textStyle.strikeout = (style & TextAttribute.STRIKETHROUGH) != 0;
+		textStyle.underline = (style & TextAttribute.UNDERLINE) != 0;
+		textStyle.font = fontFromFontData(getFontData());
+		textStyle.background = colorFromRGB(getBackgroundColor());
+		textStyle.foreground = colorFromRGB(getColor());
 	}
 }

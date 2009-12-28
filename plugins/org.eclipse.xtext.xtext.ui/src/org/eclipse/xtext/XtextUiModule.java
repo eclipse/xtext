@@ -4,6 +4,8 @@ Generated with Xtext
 package org.eclipse.xtext;
 
 import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
+import org.eclipse.xtext.ui.common.editor.outline.IContentOutlineNodePostProcessor;
 import org.eclipse.xtext.ui.common.editor.outline.actions.IActionBarContributor;
 import org.eclipse.xtext.ui.common.editor.outline.actions.IContentOutlineNodeAdapterFactory;
 import org.eclipse.xtext.ui.common.editor.outline.transformer.ISemanticModelTransformer;
@@ -16,6 +18,7 @@ import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ecoreInference.ProjectAwareXtendXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ui.XtextLocationInFileProvider;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextActionBarContributor;
+import org.eclipse.xtext.xtext.ui.editor.outline.XtextContentOutlineNodePostProcessor;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextDeclarativeModelTransformer;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingCalculator;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
@@ -32,47 +35,56 @@ public class XtextUiModule extends AbstractXtextUiModule {
 	@Override
 	public void configure(Binder binder) {
 		super.configure(binder);
-		binder.bind(String.class).annotatedWith(Names.named(
-				XtextContentAssistProcessor.COMPLETION_AUTO_ACTIVATION_CHARS)).toInstance("=[{");
+		binder.bind(String.class).annotatedWith(
+				Names.named(XtextContentAssistProcessor.COMPLETION_AUTO_ACTIVATION_CHARS)).toInstance("=[{");
 
 	}
-	
+
 	@Override
 	public Class<? extends ISemanticModelTransformer> bindISemanticModelTransformer() {
 		return XtextDeclarativeModelTransformer.class;
 	}
-	
+
 	public Class<? extends ISemanticHighlightingCalculator> bindISemanticHighlightingCalculator() {
 		return SemanticHighlightingCalculator.class;
 	}
-	
+
 	public Class<? extends ISemanticHighlightingConfiguration> bindISemanticHighlightingConfiguration() {
 		return SemanticHighlightingConfiguration.class;
 	}
-	
+
 	public Class<? extends IProjectCreator> bindIProjectCreator() {
 		return XtextProjectCreator.class;
 	}
-	
+
+	public Class<? extends IContentOutlineNodePostProcessor> bindIContentOutlineNodePostProcessor() {
+		return XtextContentOutlineNodePostProcessor.class;
+	}
+
 	@Override
 	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
 		return XtextLocationInFileProvider.class;
 	}
-	
+
 	@Override
 	public Class<? extends ILabelProvider> bindILabelProvider() {
 		return XtextLabelProvider.class;
 	}
-	
+
+	@Override
+	public java.lang.Class<? extends IStyledLabelProvider> bindDelegatingStyledCellLabelProvider$IStyledLabelProvider() {
+		return XtextStyledLabelProvider.class;
+	}
+
 	public Class<? extends IContentOutlineNodeAdapterFactory> bindIContentOutlineNodeAdapterFactory() {
 		return org.eclipse.xtext.xtext.ui.editor.outline.XtextContentOutlineNodeAdapterFactory.class;
 	}
-	
+
 	@Override
 	public Class<? extends IActionBarContributor> bindIActionBarContributor() {
 		return XtextActionBarContributor.class;
 	}
-	
+
 	@Override
 	public Class<? extends IXtext2EcorePostProcessor> bindIXtext2EcorePostProcessor() {
 		return ProjectAwareXtendXtext2EcorePostProcessor.class;

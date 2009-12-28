@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
+package org.eclipse.xtext.ui.core.editor.utils;
 
 import org.apache.log4j.Logger;
 import org.eclipse.jface.preference.PreferenceConverter;
@@ -19,7 +19,7 @@ import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.RGB;
 
 /**
- * @author Dennis Hübner - Initial contribution and API
+ * @author Dennis H¸bner - Initial contribution and API
  *
  */
 public class EditorUtils {

@@ -22,22 +22,42 @@ import com.google.common.collect.Lists;
 
 /**
  * @author Peter Friese - Initial contribution and API
+ * @author Michael Clay
  */
 public class AbstractDeclarativeSemanticModelTransformer extends DefaultSemanticModelTransformer {
+	private static final String GET_CHILDREN_METHOD_NAME = "getChildren";
+	private static final String CREATE_NODE_METHOD_NAME = "createNode";
+	private static final String CONSUME_NODE_METHOD_NAME = "consumeNode";
 
-	private final PolymorphicDispatcher<ContentOutlineNode> createNode = new PolymorphicDispatcher<ContentOutlineNode>(Lists
+	private final PolymorphicDispatcher<Boolean> consumeNode = new PolymorphicDispatcher<Boolean>(Lists
 			.newArrayList(this), new Predicate<Method>() {
 		public boolean apply(Method param) {
-			return ((param.getName().equals("createNode")) || (param.getAnnotation(CreateNode.class) != null));
+			return CONSUME_NODE_METHOD_NAME.equals(param.getName());
 		}
 	});
+
+	private final PolymorphicDispatcher<ContentOutlineNode> createNode = new PolymorphicDispatcher<ContentOutlineNode>(
+			Lists.newArrayList(this), new Predicate<Method>() {
+				public boolean apply(Method param) {
+					return ((CREATE_NODE_METHOD_NAME.equals(param.getName())) || (param.getAnnotation(CreateNode.class) != null));
+				}
+			});
 
 	private final PolymorphicDispatcher<List<EObject>> getChildren = new PolymorphicDispatcher<List<EObject>>(Lists
 			.newArrayList(this), new Predicate<Method>() {
 		public boolean apply(Method param) {
-			return ((param.getName().equals("getChildren")) || (param.getAnnotation(GetChildren.class) != null));
+			return ((GET_CHILDREN_METHOD_NAME.equals(param.getName())) || (param.getAnnotation(GetChildren.class) != null));
 		}
 	});
+
+	@Override
+	public boolean consumeSemanticNode(EObject semanticModelObject) {
+		return consumeNode.invoke(semanticModelObject);
+	}
+
+	public boolean consumeNode(EObject semanticModelObject) {
+		return super.consumeSemanticNode(semanticModelObject);
+	}
 
 	@Override
 	protected ContentOutlineNode createOutlineNode(EObject semanticNode, ContentOutlineNode outlineParentNode) {
@@ -57,5 +77,4 @@ public class AbstractDeclarativeSemanticModelTransformer extends DefaultSemantic
 	protected List<EObject> getChildren(EObject semanticNode) {
 		return semanticNode.eContents();
 	}
-
 }
