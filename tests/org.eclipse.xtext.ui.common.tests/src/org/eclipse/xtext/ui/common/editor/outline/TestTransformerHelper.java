@@ -6,23 +6,19 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.outline.impl;
+package org.eclipse.xtext.ui.common.editor.outline;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
-import org.eclipse.xtext.ui.common.editor.outline.CreateNode;
-import org.eclipse.xtext.ui.common.editor.outline.GetChildren;
 import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.A;
 import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.B;
 import org.eclipse.xtext.ui.common.editor.outline.transformer.AbstractDeclarativeSemanticModelTransformer;
 import org.eclipse.xtext.ui.core.DefaultLabelProvider;
+import org.eclipse.xtext.ui.core.DefaultStyledLabelProvider;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
-
-import com.google.inject.Provider;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -41,19 +37,10 @@ public class TestTransformerHelper {
 			return null;
 		}
 	};
-	
-	private static Provider<ContentOutlineNode> myNodeProvider = new Provider<ContentOutlineNode>() {
-		public ContentOutlineNode get() {
-			return new ContentOutlineNode();
-		}
-	};
 
 	public static class TestTransformerWithNamingConvention extends AbstractDeclarativeSemanticModelTransformer {
-		
 		{
-			setLocationProvider(myLocationProvider);
-			setLabelProvider(myLabelProvider);
-			setOutlineNodeProvider(myNodeProvider);
+			setContentOutlineNodeFactory(new DefaultContentOutlineNodeFactory(new DefaultStyledLabelProvider(myLabelProvider),myLocationProvider)); 
 		}
 		
 		/**
@@ -91,9 +78,7 @@ public class TestTransformerHelper {
 	
 	public static class TestTransformerWithAnnotations extends AbstractDeclarativeSemanticModelTransformer {
 		{
-			setLocationProvider(myLocationProvider);
-			setLabelProvider(myLabelProvider);
-			setOutlineNodeProvider(myNodeProvider);
+			setContentOutlineNodeFactory(new DefaultContentOutlineNodeFactory(new DefaultStyledLabelProvider(myLabelProvider),myLocationProvider)); 
 		}
 		
 		/**

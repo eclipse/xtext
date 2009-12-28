@@ -12,30 +12,18 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
-
-import com.google.inject.Inject;
 
 /**
  * @author Peter Friese - Initial contribution and API
+ * @author Michael Clay
  */
 public abstract class AbstractSemanticModelTransformer implements ISemanticModelTransformer {
-
 	public static final String INVISIBLE_ROOT_NODE = "Invisible Root Node";
 	public static final List<EObject> NO_CHILDREN = Collections.emptyList();
-	public static final ContentOutlineNode HIDDEN_NODE = new ContentOutlineNode() {
-		@Override
-		public String getLabel() {
-			return "hidden node";
-		}
-	};
-
+	
 	public ContentOutlineNode transformSemanticModel(EObject semanticModel) {
-		ContentOutlineNode outlineModel = new ContentOutlineNode();
-		outlineModel.setLabel(INVISIBLE_ROOT_NODE);
-
+		ContentOutlineNode outlineModel = new ContentOutlineNode(INVISIBLE_ROOT_NODE);
 		transformSemanticNode(semanticModel, outlineModel);
 		return outlineModel;
 	}
@@ -44,10 +32,8 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 		ContentOutlineNode outlineNode;
 		if (consumeSemanticNode(semanticNode)) {
 			outlineNode = createOutlineNode(semanticNode, outlineParentNode);
+			postProcess(semanticNode, outlineNode);
 		} else {
-			outlineNode = outlineParentNode;
-		}
-		if (outlineNode == HIDDEN_NODE) {
 			outlineNode = outlineParentNode;
 		}
 		transformSemanticChildNodes(semanticNode, outlineNode);
@@ -77,24 +63,15 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 
 	protected abstract boolean consumeSemanticNode(EObject semanticNode);
 
-	protected ILabelProvider labelProvider;
-
-	@Inject
-	public void setLabelProvider(ILabelProvider labelProvider) {
-		this.labelProvider = labelProvider;
-	}
-
-	public String getText(EObject object) {
-		String text = labelProvider.getText(object);
-		if (text != null)
-			return text;
-		if (object!=null)
-			return object.eClass().getName();
-		return "<unknown>";
-	}
-
-	public Image getImage(EObject object) {
-		return labelProvider.getImage(object);
-	}
+	/**
+	 * Hook method to post-process the previously created {@link ContentOutlineNode node} for the actual semantic
+	 * model object.
+	 * 
+	 * @param semanticModel
+	 *            the actual transformed (semantic) <code>EObject</code> model
+	 * @param contentOutlineNode
+	 *            the transformed <code>ContentOutlineNode</code> for the given semantic model object
+	 */
+	protected abstract void postProcess(EObject semanticModel, ContentOutlineNode contentOutlineNode);
 
 }

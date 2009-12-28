@@ -17,6 +17,7 @@ import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreePathViewerSorter;
@@ -65,6 +66,7 @@ import com.google.inject.Inject;
  * by the user using the "Link with Editor" button.
  * 
  * @author Peter Friese - Initial contribution and API
+ * @author Michael Clay
  */
 public class XtextContentOutlinePage extends ContentOutlinePage implements ISourceViewerAware,
 		IXtextEditorAware {
@@ -131,7 +133,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 	protected void configureProviders() {
 		Assert.isNotNull(provider, "No ILazyTreeProvider available. Dependency injection broken?");
 		getTreeViewer().setContentProvider(provider);
-		getTreeViewer().setLabelProvider(provider);
+		getTreeViewer().setLabelProvider(new DelegatingStyledCellLabelProvider(provider));
 	}
 
 	private void configureDocument() {

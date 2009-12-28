@@ -10,43 +10,39 @@ package org.eclipse.xtext.ui.common.editor.outline.transformer;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.text.Region;
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.resource.EObjectHandleImpl;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
-import org.eclipse.xtext.ui.common.editor.outline.actions.ContentOutlineNodeAdapter;
-import org.eclipse.xtext.ui.common.editor.outline.actions.ContentOutlineNodeAdapterFactory;
-import org.eclipse.xtext.ui.core.ILocationInFileProvider;
-import org.eclipse.xtext.util.concurrent.IEObjectHandle;
+import org.eclipse.xtext.ui.common.editor.outline.IContentOutlineNodeFactory;
+import org.eclipse.xtext.ui.common.editor.outline.IContentOutlineNodePostProcessor;
 import org.eclipse.xtext.util.concurrent.IStateAccess;
 
 import com.google.inject.Inject;
-import com.google.inject.Provider;
 
 /**
  * @author Peter Friese - Initial contribution and API
+ * @author Michael Clay
  */
 public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransformer {
-
 	final static Logger logger = Logger.getLogger(DefaultSemanticModelTransformer.class);
-
-	private ILocationInFileProvider locationProvider;
-
-	private IStateAccess<XtextResource> resourceAccess;
-	
 	@Inject
-	private Provider<ContentOutlineNode> outlineNodeProvider;
+	protected IContentOutlineNodeFactory contentOutlineNodeFactory;
+	@Inject(optional=true)
+	protected IContentOutlineNodePostProcessor contentOutlineNodePostProcessor;
 
-	@Inject
-	public void setLocationProvider(ILocationInFileProvider locationProvider) {
-		this.locationProvider = locationProvider;
+	protected IStateAccess<XtextResource> resourceAccess;
+
+	public void setResourceAccess(IStateAccess<XtextResource> resourceAccess) {
+		this.resourceAccess = resourceAccess;
 	}
-	
+
+	public void setContentOutlineNodeFactory(IContentOutlineNodeFactory contentOutlineNodeFactory) {
+		this.contentOutlineNodeFactory = contentOutlineNodeFactory;
+	}
+
 	@Override
-	public boolean consumeSemanticNode(EObject semanticNode) {
-		if (semanticNode != null) {
-			String name = semanticNode.eClass().getName();
+	public boolean consumeSemanticNode(EObject semanticModelObject) {
+		if (semanticModelObject != null) {
+			String name = semanticModelObject.eClass().getName();
 			if (logger.isDebugEnabled()) {
 				logger.debug("Consume semantic node type [" + name + "]?");
 			}
@@ -56,9 +52,9 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 	}
 
 	@Override
-	public boolean consumeSemanticChildNodes(EObject semanticNode) {
-		if (semanticNode != null) {
-			String name = semanticNode.eClass().getName();
+	public boolean consumeSemanticChildNodes(EObject semanticModelObject) {
+		if (semanticModelObject != null) {
+			String name = semanticModelObject.eClass().getName();
 			if (logger.isDebugEnabled()) {
 				logger.debug("Consume semantic children of node type [" + name + "]?");
 			}
@@ -66,69 +62,20 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 		}
 		return false;
 	}
-	
-	protected ContentOutlineNode newOutlineNode(ContentOutlineNode parent, String label, Image image, Region location) {
-		ContentOutlineNode result = outlineNodeProvider.get();
-		result.setLabel(label);
-		if (image != null)
-			result.setImage(image);
-		result.setSelectionOffset(location.getOffset());
-		result.setSelectionLength(location.getLength());
-		// link with parent
-		if (parent != null) {
-			parent.getChildren().add(result);
-			result.setParent(parent);
-		}
-		return result;
-	}
 
-	protected ContentOutlineNode newOutlineNode(EObject semanticNode, ContentOutlineNode outlineParentNode) {
-		Region location = locationProvider.getLocation(semanticNode);
-		String label = getText(semanticNode);
-		Image image = getImage(semanticNode);
-		
-		ContentOutlineNode outlineNode = newOutlineNode(outlineParentNode, label, image, location);
-		outlineNode.setClazz(semanticNode.eClass());
-		
-		IEObjectHandle<EObject> handle = new EObjectHandleImpl<EObject>(semanticNode, resourceAccess);
-		outlineNode.setEObjectHandle(handle);
-		
-		/*
-		 * This adapter will be added to the semantic node in order to later be
-		 * able to get the corresponding ContentOutlineNode. This is needed e.g.
-		 * when we want to synch the outline with the currently selected editor
-		 * position.
-		 *
-		 * XXX SZ: is this feasible? What if I want to create more than one one outline node
-		 *         per semantic node? Can't we use the offset information of the outline node
-		 *         and the editor to synchronize them?
-		 *     PF: Reason for using an adapter was to not need to traverse a (more or less)
-		 *         large part the outline model when syncing the outline to the editor selection.
-		 *         However, SZ and I agreed on leaving it as-is and look into a tree traversal
-		 *         approach if we run into memory problems.
-		 */
-		ContentOutlineNodeAdapter outlineAdapter = (ContentOutlineNodeAdapter) ContentOutlineNodeAdapterFactory.INSTANCE
-		.adapt(semanticNode, ContentOutlineNode.class);
-		outlineAdapter.setContentOutlineNode(outlineNode);
-		
-		return outlineNode;
+	protected ContentOutlineNode newOutlineNode(EObject semanticModelObject, ContentOutlineNode outlineParentNode) {
+		return contentOutlineNodeFactory.create(resourceAccess, semanticModelObject, outlineParentNode);
 	}
 
 	@Override
-	protected ContentOutlineNode createOutlineNode(EObject semanticNode, ContentOutlineNode outlineParentNode) {
-		return newOutlineNode(semanticNode, outlineParentNode);
+	protected ContentOutlineNode createOutlineNode(EObject semanticModelObject, ContentOutlineNode outlineParentNode) {
+		return newOutlineNode(semanticModelObject, outlineParentNode);
 	}
 
-	public void setResourceAccess(IStateAccess<XtextResource> resourceAccess) {
-		this.resourceAccess = resourceAccess;
+	@Override
+	protected void postProcess(EObject semanticModelObject, ContentOutlineNode contentOutlineNode) {
+		if (contentOutlineNodePostProcessor!=null) {
+			contentOutlineNodePostProcessor.postProcess(semanticModelObject,contentOutlineNode);
+		}
 	}
-
-	public void setOutlineNodeProvider(Provider<ContentOutlineNode> outlineNodeProvider) {
-		this.outlineNodeProvider = outlineNodeProvider;
-	}
-
-	public Provider<ContentOutlineNode> getOutlineNodeProvider() {
-		return outlineNodeProvider;
-	}
-
 }

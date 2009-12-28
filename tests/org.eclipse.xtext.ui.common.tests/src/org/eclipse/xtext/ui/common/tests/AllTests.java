@@ -36,8 +36,8 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.antlr.internal.InternalParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.hyperlinking.HyperlinkHelperTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.outline.actions.DeclarativeActionBarContributorTest.class);
-      suite.addTestSuite(org.eclipse.xtext.ui.common.editor.outline.impl.DeclarativeSemanticModelTransformerTest.class);
-      suite.addTestSuite(org.eclipse.xtext.ui.common.editor.outline.impl.DefaultSemanticModelTransformerTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.common.editor.outline.transformer.DeclarativeSemanticModelTransformerTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.common.editor.outline.transformer.DefaultSemanticModelTransformerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.syntaxcoloring.LightweightPositionTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.syntaxcoloring.MergingHighlightedPositionAcceptorTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextTypeRegistryTest.class);

@@ -17,6 +17,7 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.xtext.ui.common.editor.preferencepage.IScopedPreferenceStoreAccessor;
 import org.eclipse.xtext.ui.common.editor.preferencepage.PreferenceStoreAccessor;
+import org.eclipse.xtext.ui.core.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
 import org.eclipse.xtext.util.Strings;
 

@@ -10,13 +10,14 @@ package org.eclipse.xtext.ui.common.editor.outline.transformer;
 
 import java.util.List;
 
-import org.apache.log4j.Logger;
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.preference.JFacePreferences;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.resource.LocalResourceManager;
-import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.viewers.BaseLabelProvider;
+import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.graphics.Image;
@@ -31,22 +32,17 @@ import com.google.inject.Inject;
 
 /**
  * @author Peter Friese - Initial contribution and API
+ * @author Michael Clay
  */
-public class TransformingTreeProvider extends LabelProvider implements ITreeProvider {
-	
+public class TransformingTreeProvider extends BaseLabelProvider implements ITreeProvider {
 	private static final Object[] EMPTY_ARRAY = new Object[0];
-
-	final static Logger logger = Logger.getLogger(TransformingTreeProvider.class);
-
+	@Inject
+	private ISemanticModelTransformer semanticModelTransformer;
 	private final LocalResourceManager resourceManager = new LocalResourceManager(JFaceResources.getResources());
-
 	private ContentOutlineNode outlineModel;
 	
-	@Override
-	public void dispose() {
-		super.dispose();
-		resourceManager.dispose();
-		outlineModel = null;
+	private ContentOutlineNode transformSemanticModelToOutlineModel(EObject semanticModel) {
+		return semanticModelTransformer.transformSemanticModel(semanticModel);
 	}
 	
 	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
@@ -64,20 +60,13 @@ public class TransformingTreeProvider extends LabelProvider implements ITreeProv
 				}
 
 				private ContentOutlineNode createErrorNode() {
-					ContentOutlineNode errorNode = new ContentOutlineNode();
-					errorNode.setLabel("Error: No model available.");
-					return errorNode;
+					return new ContentOutlineNode(new StyledString("Error: No model available.", StyledString
+							.createColorRegistryStyler(JFacePreferences.ERROR_COLOR, null)));
 				}
 			});
 		}
 	}
 	
-	@Inject
-	private ISemanticModelTransformer semanticModelTransformer;
-	
-	private ContentOutlineNode transformSemanticModelToOutlineModel(EObject semanticModel) {
-		return semanticModelTransformer.transformSemanticModel(semanticModel);
-	}
 
 	public Object[] getChildren(Object parentElement) {
 		if (parentElement instanceof ContentOutlineNode) {
@@ -99,7 +88,7 @@ public class TransformingTreeProvider extends LabelProvider implements ITreeProv
 	public boolean hasChildren(Object element) {
 		if (element instanceof ContentOutlineNode) {
 			ContentOutlineNode node = (ContentOutlineNode) element;
-			return (node.getChildren().size() > 0);
+			return (node.getChildren()!=null && node.getChildren().size() > 0);
 		}
 		return false;
 	}
@@ -112,31 +101,42 @@ public class TransformingTreeProvider extends LabelProvider implements ITreeProv
 		return EMPTY_ARRAY;
 	}
 
-	@Override
-	public String getText(Object element) {
+	public StyledString getStyledText(Object element) {
+		StyledString styledString = new StyledString();
 		if (element instanceof ContentOutlineNode) {
 			ContentOutlineNode contentOutlineNode = (ContentOutlineNode) element;
-			return contentOutlineNode.getLabel();
+			if (null!=contentOutlineNode.getStyledString()) {
+				styledString = contentOutlineNode.getStyledString();
+			} else {
+				String label = contentOutlineNode.getLabel();
+				styledString = new StyledString(null==label?"":label,StyledString.COUNTER_STYLER);
+				
+			}
 		}
-		return super.getText(element);
+		return styledString;
 	}
 
-	@Override
 	public Image getImage(Object element) {
+		Image image = null;
 		if (element instanceof ContentOutlineNode) {
 			ContentOutlineNode contentOutlineNode = (ContentOutlineNode) element;
-			Image image = contentOutlineNode.getImage();
+			image = contentOutlineNode.getImage();
 			if (image == null) {
 				ImageDescriptor imageDescriptor = contentOutlineNode.getImageDescriptor();
 				if (imageDescriptor == null) {
 					imageDescriptor = Activator.getImageDescriptor("icons/defaultoutlinenode.gif");
 				}
 				image = resourceManager.createImage(imageDescriptor);
-				contentOutlineNode.setImage(image);
 			}
-			return image;
 		}
-		return super.getImage(element);
+		return image;
+	}
+	
+
+	@Override
+	public void dispose() {
+		resourceManager.dispose();
+		outlineModel = null;
 	}
 
 }

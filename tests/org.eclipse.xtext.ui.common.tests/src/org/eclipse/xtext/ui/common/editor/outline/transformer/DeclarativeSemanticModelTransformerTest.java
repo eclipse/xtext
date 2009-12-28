@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.outline.impl;
+package org.eclipse.xtext.ui.common.editor.outline.transformer;
 
 import java.util.List;
 
@@ -14,6 +14,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
+import org.eclipse.xtext.ui.common.editor.outline.TestTransformerHelper;
 import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.A;
 import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.B;
 import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.SimplestructureFactory;
