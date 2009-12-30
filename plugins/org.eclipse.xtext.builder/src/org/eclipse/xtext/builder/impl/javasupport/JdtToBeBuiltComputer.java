@@ -22,6 +22,8 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 	@Override
 	public ToBeBuilt updateProject(IProject project, IProgressMonitor monitor) throws CoreException {
 		final ToBeBuilt toBeBuilt = super.updateProject(project, monitor);
+		if (!project.isAccessible())
+			return toBeBuilt;
 		IJavaProject javaProject = JavaCore.create(project);
 		if (javaProject.exists()) {
 			IPackageFragmentRoot[] roots = javaProject.getPackageFragmentRoots();

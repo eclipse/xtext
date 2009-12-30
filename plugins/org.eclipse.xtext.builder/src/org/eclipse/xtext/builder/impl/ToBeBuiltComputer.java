@@ -61,7 +61,7 @@ public class ToBeBuiltComputer {
 
 	public ToBeBuilt updateProject(final IProject project, final IProgressMonitor monitor) throws CoreException {
 		final ToBeBuilt toBeBuilt = removeProject(project, monitor);
-		if (!project.exists())
+		if (!project.isAccessible())
 			return toBeBuilt;
 		project.accept(new IResourceVisitor() {
 			public boolean visit(IResource resource) throws CoreException {
