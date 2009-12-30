@@ -38,7 +38,7 @@ public abstract class AbstractXtextUiModule extends XtextRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.xtext.ui.common.editor.outline.ITreeProvider> bindITreeProvider() {
+	public Class<? extends org.eclipse.xtext.ui.common.editor.outline.IOutlineTreeProvider> bindIOutlineTreeProvider() {
 		return org.eclipse.xtext.ui.common.editor.outline.transformer.TransformingTreeProvider.class;
 	}
 

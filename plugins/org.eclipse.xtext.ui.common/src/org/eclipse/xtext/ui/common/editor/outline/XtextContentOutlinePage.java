@@ -15,15 +15,21 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.resource.ImageDescriptor;
+import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.jface.resource.LocalResourceManager;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.TreePathViewerSorter;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.viewers.ViewerSorter;
+import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
@@ -43,6 +49,7 @@ import org.eclipse.xtext.ui.common.editor.outline.linking.EditorSelectionChanged
 import org.eclipse.xtext.ui.common.editor.outline.linking.LinkingHelper;
 import org.eclipse.xtext.ui.common.editor.outline.linking.OutlineSelectionChangedListener;
 import org.eclipse.xtext.ui.common.internal.Activator;
+import org.eclipse.xtext.ui.core.StyledLabelProviderAdapter;
 import org.eclipse.xtext.ui.core.editor.ISourceViewerAware;
 import org.eclipse.xtext.ui.core.editor.IXtextEditorAware;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
@@ -56,29 +63,66 @@ import com.google.inject.Inject;
 /**
  * An outline page for Xtext resources.
  * 
- * This class is not intended to be subclassed. It is designed to be configured
- * with a domain specific combined label and content provider (which is
- * automatically injected to the {@link #provider} field).
+ * This class is not intended to be subclassed. It is designed to be configured with a domain specific combined label
+ * and content provider (which is automatically injected to the {@link #provider} field).
  * 
- * The outline page can synchronize itself with the associated editor.
- * Selections made in the outline will be propagated to the editor at any time,
- * whereas the synchronization from the editor to the outline can be controlled
- * by the user using the "Link with Editor" button.
+ * The outline page can synchronize itself with the associated editor. Selections made in the outline will be propagated
+ * to the editor at any time, whereas the synchronization from the editor to the outline can be controlled by the user
+ * using the "Link with Editor" button.
  * 
  * @author Peter Friese - Initial contribution and API
  * @author Michael Clay
  */
-public class XtextContentOutlinePage extends ContentOutlinePage implements ISourceViewerAware,
-		IXtextEditorAware {
-
+public class XtextContentOutlinePage extends ContentOutlinePage implements ISourceViewerAware, IXtextEditorAware {
 	static final Logger logger = Logger.getLogger(XtextContentOutlinePage.class);
 
+	/**
+	 * @author Michael Clay - Initial contribution and API
+	 */
+	protected static class ContentOutlineNodeStyledLabelProvider extends StyledLabelProviderAdapter {
+		private final LocalResourceManager resourceManager = new LocalResourceManager(JFaceResources.getResources());
+
+		@Override
+		public StyledString getStyledText(Object element) {
+			StyledString styledString = new StyledString();
+			if (element instanceof ContentOutlineNode) {
+				ContentOutlineNode contentOutlineNode = (ContentOutlineNode) element;
+				styledString = contentOutlineNode.getStyledString();
+			}
+			return styledString;
+		}
+
+		@Override
+		public Image getImage(Object element) {
+			Image image = null;
+			if (element instanceof ContentOutlineNode) {
+				ContentOutlineNode contentOutlineNode = (ContentOutlineNode) element;
+				image = contentOutlineNode.getImage();
+				if (image == null) {
+					ImageDescriptor imageDescriptor = contentOutlineNode.getImageDescriptor();
+					if (imageDescriptor == null) {
+						imageDescriptor = Activator.getImageDescriptor("icons/defaultoutlinenode.gif");
+					}
+					image = resourceManager.createImage(imageDescriptor);
+					contentOutlineNode.setImage(image);
+				}
+			}
+			return image;
+		}
+
+		@Override
+		public void dispose() {
+			super.dispose();
+			resourceManager.dispose();
+		}
+	}
+	
 	@Inject
-	private ITreeProvider provider;
+	private IOutlineTreeProvider provider;
 
 	@Inject
 	private IContentOutlineNodeAdapterFactory outlineNodeFactory;
-	
+
 	@Inject
 	private IActionBarContributor actionbarContributor;
 
@@ -133,7 +177,11 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 	protected void configureProviders() {
 		Assert.isNotNull(provider, "No ILazyTreeProvider available. Dependency injection broken?");
 		getTreeViewer().setContentProvider(provider);
-		getTreeViewer().setLabelProvider(new DelegatingStyledCellLabelProvider(provider));
+		getTreeViewer().setLabelProvider(new DelegatingStyledCellLabelProvider(getStyledLabelProvider()));
+	}
+
+	protected IStyledLabelProvider getStyledLabelProvider() {
+		return new ContentOutlineNodeStyledLabelProvider();
 	}
 
 	private void configureDocument() {
@@ -190,7 +238,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 			actionbarContributor.init(toolBarManager, this);
 		}
 	}
-	
+
 	@Override
 	public void dispose() {
 		outlineSelectionChangedListener.uninstall(this);
@@ -208,15 +256,13 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 	}
 
 	/**
-	 * Runs the runnable in the SWT thread. (Simply runs the runnable if the
-	 * current thread is the UI thread, otherwise calls the runnable in
-	 * asyncexec.)
+	 * Runs the runnable in the SWT thread. (Simply runs the runnable if the current thread is the UI thread, otherwise
+	 * calls the runnable in asyncexec.)
 	 */
 	private void runInSWTThread(Runnable runnable) {
 		if (Display.getCurrent() == null) {
 			Display.getDefault().asyncExec(runnable);
-		}
-		else {
+		} else {
 			runnable.run();
 		}
 	}
@@ -228,7 +274,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 			expandedElements = tree.getExpandedElements();
 
 			tree.setInput(xtextDocument);
-			
+
 			if (expandedElements != null && expandedElements.length > 0)
 				tree.setExpandedElements(expandedElements);
 		}
@@ -311,8 +357,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 					if (contentOutlineNode != null) {
 						return contentOutlineNode;
 					}
-				}
-				else {
+				} else {
 					CompositeNode parent = node.getParent();
 					return findMostSignificantOutlineNode(parent);
 				}
@@ -339,8 +384,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 		if (getTreeViewer() != null) {
 			if (sorted) {
 				getTreeViewer().setSorter(sorter);
-			}
-			else {
+			} else {
 				getTreeViewer().setSorter(null);
 			}
 		}

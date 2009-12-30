@@ -12,13 +12,16 @@ import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtext.ui.core.DefaultStyledLabelProvider;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
 
+import com.google.inject.Inject;
+
 /**
  * @author Michael Clay - Initial contribution and API
  */
 public class XtextStyledLabelProvider extends DefaultStyledLabelProvider {
-	private SemanticHighlightingConfiguration semanticHighlightingConfiguration = new SemanticHighlightingConfiguration();
+	@Inject
+	private SemanticHighlightingConfiguration semanticHighlightingConfiguration;
 
-	StyledString styled_string(ParserRule parserRule) {
+	StyledString styledString(ParserRule parserRule) {
 		if (GrammarUtil.isDatatypeRule(parserRule)) {
 			return createStyledString(parserRule, createXtextStyleAdapterStyler(semanticHighlightingConfiguration
 					.dataTypeRule()));

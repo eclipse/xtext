@@ -8,19 +8,29 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.outline;
 
+import static org.eclipse.xtext.ui.core.DefaultStyledLabelProvider.*;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CharacterRange;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.EnumRule;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
+import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
 import org.eclipse.xtext.ui.common.editor.outline.transformer.AbstractDeclarativeSemanticModelTransformer;
+import org.eclipse.xtext.xtext.UsedRulesFinder;
+import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
+
+import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -29,6 +39,26 @@ import org.eclipse.xtext.ui.common.editor.outline.transformer.AbstractDeclarativ
  * @author Michael Clay
  */
 public class XtextDeclarativeModelTransformer extends AbstractDeclarativeSemanticModelTransformer {
+	@Inject
+	private SemanticHighlightingConfiguration semanticHighlightingConfiguration;
+	private Set<AbstractRule> calledRules = Sets.newHashSet();
+
+	public ContentOutlineNode createNode(AbstractRule abstractRule, ContentOutlineNode outlineParentNode) {
+		ContentOutlineNode contentOutlineNode = super.createNode(abstractRule, outlineParentNode);
+		if (!calledRules.isEmpty() && !calledRules.contains(abstractRule)) {
+			contentOutlineNode.setStyler(createXtextStyleAdapterStyler(semanticHighlightingConfiguration.unusedRule()));
+		}
+		return contentOutlineNode;
+	}
+
+	public boolean consumeNode(Grammar grammar) {
+		calledRules = Sets.newHashSet();
+		if (!grammar.getRules().isEmpty()) {
+			UsedRulesFinder usedRulesFinder = new UsedRulesFinder(calledRules);
+			usedRulesFinder.compute(grammar);
+		}
+		return true;
+	}
 
 	public boolean consumeNode(RuleCall object) {
 		return false;

@@ -9,11 +9,11 @@
 package org.eclipse.xtext.ui.common.editor.outline;
 
 import org.eclipse.jface.viewers.ITreeContentProvider;
-import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 
 /**
  * @author Peter Friese - Initial contribution and API
+ * @author Michael Clay
  */
-public interface ITreeProvider extends ITreeContentProvider, IStyledLabelProvider {
+public interface IOutlineTreeProvider extends ITreeContentProvider {
 
 }

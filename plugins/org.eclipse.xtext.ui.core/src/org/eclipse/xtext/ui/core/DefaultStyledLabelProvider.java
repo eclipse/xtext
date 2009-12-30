@@ -14,9 +14,7 @@ import org.eclipse.jface.resource.ColorRegistry;
 import org.eclipse.jface.resource.FontDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.jface.viewers.ILabelProviderListener;
 import org.eclipse.jface.viewers.StyledString;
-import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.jface.viewers.StyledString.Styler;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.TextStyle;
@@ -28,7 +26,7 @@ import com.google.inject.Inject;
 /**
  * @author Michael Clay - Initial contribution and API
  */
-public class DefaultStyledLabelProvider implements IStyledLabelProvider {
+public class DefaultStyledLabelProvider extends StyledLabelProviderAdapter {
 	@Inject
 	protected ILabelProvider labelProvider;
 
@@ -40,21 +38,23 @@ public class DefaultStyledLabelProvider implements IStyledLabelProvider {
 		this.labelProvider = labelProvider;
 	}
 
-	private final PolymorphicDispatcher<StyledString> styledTextDispatcher = new PolymorphicDispatcher<StyledString>(
-			"styled_string", 1, 1, Collections.singletonList(this));
+	private final PolymorphicDispatcher<StyledString> styledStringDispatcher = new PolymorphicDispatcher<StyledString>(
+			"styledString", 1, 1, Collections.singletonList(this));
 
 	public PolymorphicDispatcher<StyledString> getStyledTextDispatcher() {
-		return styledTextDispatcher;
+		return styledStringDispatcher;
 	}
 
+	@Override
 	public StyledString getStyledText(Object element) {
 		return getStyledTextDispatcher().invoke(element);
 	}
 
-	public StyledString styled_string(Object object) {
+	public StyledString styledString(Object object) {
 		return createStyledString(object);
 	}
 
+	@Override
 	public Image getImage(Object element) {
 		return labelProvider.getImage(element);
 	}
@@ -138,30 +138,5 @@ public class DefaultStyledLabelProvider implements IStyledLabelProvider {
 				textStyle.background = colorRegistry.get(backgroundColorName);
 			}
 		}
-	}
-
-	/**
-	 * @see IBaseLabelProvider#addListener(ILabelProviderListener)
-	 */
-	public void addListener(ILabelProviderListener listener) {
-	}
-
-	/**
-	 * @see IBaseLabelProvider#dispose()
-	 */
-	public void dispose() {
-	}
-
-	/**
-	 * @see IBaseLabelProvider#isLabelProperty(Object, String)
-	 */
-	public boolean isLabelProperty(Object element, String property) {
-		return false;
-	}
-
-	/**
-	 * @see IBaseLabelProvider#removeListener(ILabelProviderListener)
-	 */
-	public void removeListener(ILabelProviderListener listener) {
 	}
 }
