@@ -218,7 +218,7 @@ public class EcoreUtil2Test extends TestCase {
 				if (next instanceof EReference) {
 					EReference ref = (EReference) next;
 					String externalForm = EcoreUtil2.toExternalForm(ref);
-					assertEquals(ref, EcoreUtil2.getEReferenceFromExternalForm(registry,externalForm));
+					assertEquals(ref.toString() + " - " + externalForm, ref, EcoreUtil2.getEReferenceFromExternalForm(registry,externalForm));
 				}
 			}
 		}
