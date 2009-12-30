@@ -455,7 +455,7 @@ public class EcoreUtil2 extends EcoreUtil {
 			return EcoreUtil.getURI(ref).toString();
 		StringBuffer buff = new StringBuffer(class1.getEPackage().getNsURI());
 		buff.append(delim).append(class1.getName());
-		buff.append(delim).append(ref.getFeatureID());
+		buff.append(delim).append(class1.getFeatureID(ref));
 		return buff.toString();
 	}
 	
