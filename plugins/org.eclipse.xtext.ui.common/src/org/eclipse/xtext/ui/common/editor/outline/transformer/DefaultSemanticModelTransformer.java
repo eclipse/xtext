@@ -13,7 +13,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
 import org.eclipse.xtext.ui.common.editor.outline.IContentOutlineNodeFactory;
-import org.eclipse.xtext.ui.common.editor.outline.IContentOutlineNodePostProcessor;
 import org.eclipse.xtext.util.concurrent.IStateAccess;
 
 import com.google.inject.Inject;
@@ -26,8 +25,6 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 	final static Logger logger = Logger.getLogger(DefaultSemanticModelTransformer.class);
 	@Inject
 	protected IContentOutlineNodeFactory contentOutlineNodeFactory;
-	@Inject(optional=true)
-	protected IContentOutlineNodePostProcessor contentOutlineNodePostProcessor;
 
 	protected IStateAccess<XtextResource> resourceAccess;
 
@@ -72,10 +69,4 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 		return newOutlineNode(semanticModelObject, outlineParentNode);
 	}
 
-	@Override
-	protected void postProcess(EObject semanticModelObject, ContentOutlineNode contentOutlineNode) {
-		if (contentOutlineNodePostProcessor!=null) {
-			contentOutlineNodePostProcessor.postProcess(semanticModelObject,contentOutlineNode);
-		}
-	}
 }

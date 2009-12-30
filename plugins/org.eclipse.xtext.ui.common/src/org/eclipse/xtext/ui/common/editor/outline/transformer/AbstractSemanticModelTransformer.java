@@ -21,7 +21,7 @@ import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
 public abstract class AbstractSemanticModelTransformer implements ISemanticModelTransformer {
 	public static final String INVISIBLE_ROOT_NODE = "Invisible Root Node";
 	public static final List<EObject> NO_CHILDREN = Collections.emptyList();
-	
+
 	public ContentOutlineNode transformSemanticModel(EObject semanticModel) {
 		ContentOutlineNode outlineModel = new ContentOutlineNode(INVISIBLE_ROOT_NODE);
 		transformSemanticNode(semanticModel, outlineModel);
@@ -32,7 +32,6 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 		ContentOutlineNode outlineNode;
 		if (consumeSemanticNode(semanticNode)) {
 			outlineNode = createOutlineNode(semanticNode, outlineParentNode);
-			postProcess(semanticNode, outlineNode);
 		} else {
 			outlineNode = outlineParentNode;
 		}
@@ -62,16 +61,5 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 	protected abstract boolean consumeSemanticChildNodes(EObject semanticNode);
 
 	protected abstract boolean consumeSemanticNode(EObject semanticNode);
-
-	/**
-	 * Hook method to post-process the previously created {@link ContentOutlineNode node} for the actual semantic
-	 * model object.
-	 * 
-	 * @param semanticModel
-	 *            the actual transformed (semantic) <code>EObject</code> model
-	 * @param contentOutlineNode
-	 *            the transformed <code>ContentOutlineNode</code> for the given semantic model object
-	 */
-	protected abstract void postProcess(EObject semanticModel, ContentOutlineNode contentOutlineNode);
 
 }
