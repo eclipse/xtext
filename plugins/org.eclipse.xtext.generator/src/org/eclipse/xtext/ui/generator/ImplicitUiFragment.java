@@ -41,7 +41,7 @@ public class ImplicitUiFragment extends AbstractGeneratorFragment {
 		
 		// outline
 		.addTypeToType("org.eclipse.xtext.ui.common.editor.outline.transformer.ISemanticModelTransformer","org.eclipse.xtext.ui.common.editor.outline.transformer.DefaultSemanticModelTransformer")
-		.addTypeToType("org.eclipse.xtext.ui.common.editor.outline.ITreeProvider","org.eclipse.xtext.ui.common.editor.outline.transformer.TransformingTreeProvider")
+		.addTypeToType("org.eclipse.xtext.ui.common.editor.outline.IOutlineTreeProvider","org.eclipse.xtext.ui.common.editor.outline.transformer.TransformingTreeProvider")
 		.addTypeToType("org.eclipse.ui.views.contentoutline.IContentOutlinePage","org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage")
 		.addTypeToType("org.eclipse.xtext.ui.common.editor.outline.actions.IActionBarContributor", "org.eclipse.xtext.ui.common.editor.outline.actions.IActionBarContributor.DefaultActionBarContributor")
 		
