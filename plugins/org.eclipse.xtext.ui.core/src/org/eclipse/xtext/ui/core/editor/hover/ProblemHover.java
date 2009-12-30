@@ -38,21 +38,23 @@ public class ProblemHover extends AbstractHover {
 		while (iterator.hasNext()) {
 			final Annotation annotation = (Annotation) iterator.next();
 			Position position = model.getPosition(annotation);
-			final int start = position.getOffset();
-			final int end = start + position.getLength();
-
-			if (offset > 0 && !(start <= offset && offset <= end)) {
-				continue;
-			}
-			try {
-				if (lineNumber != sourceViewer.getDocument().getLineOfOffset(
-						start)) {
+			if (position != null) {
+				final int start = position.getOffset();
+				final int end = start + position.getLength();
+	
+				if (offset > 0 && !(start <= offset && offset <= end)) {
 					continue;
 				}
-			} catch (final Exception x) {
-				continue;
+				try {
+					if (lineNumber != sourceViewer.getDocument().getLineOfOffset(
+							start)) {
+						continue;
+					}
+				} catch (final Exception x) {
+					continue;
+				}
+				messages.add(annotation.getText().trim());
 			}
-			messages.add(annotation.getText().trim());
 		}
 		return formatInfo(messages);
 	}
