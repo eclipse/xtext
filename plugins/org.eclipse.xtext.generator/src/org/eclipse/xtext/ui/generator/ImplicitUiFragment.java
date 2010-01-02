@@ -52,7 +52,7 @@ public class ImplicitUiFragment extends AbstractGeneratorFragment {
 		
 		// label provider
 		.addTypeToType("org.eclipse.jface.viewers.ILabelProvider","org.eclipse.xtext.ui.core.DefaultLabelProvider")
-		.addTypeToType("org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider","org.eclipse.xtext.ui.core.DefaultStyledLabelProvider")
+		.addTypeToType("org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider","org.eclipse.xtext.ui.core.DefaultLabelProvider")
 		.addTypeToType("org.eclipse.emf.common.notify.AdapterFactory","org.eclipse.xtext.ui.core.InjectableAdapterFactory")
 		.addTypeToType("org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider","org.eclipse.xtext.ui.core.InjectableAdapterFactoryLabelProvider")
 		.addTypeToInstance("org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry","org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry.INSTANCE")

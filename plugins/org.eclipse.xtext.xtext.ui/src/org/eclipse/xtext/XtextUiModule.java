@@ -67,7 +67,7 @@ public class XtextUiModule extends AbstractXtextUiModule {
 
 	@Override
 	public java.lang.Class<? extends IStyledLabelProvider> bindDelegatingStyledCellLabelProvider$IStyledLabelProvider() {
-		return XtextStyledLabelProvider.class;
+		return XtextLabelProvider.class;
 	}
 
 	public Class<? extends IContentOutlineNodeAdapterFactory> bindIContentOutlineNodeAdapterFactory() {

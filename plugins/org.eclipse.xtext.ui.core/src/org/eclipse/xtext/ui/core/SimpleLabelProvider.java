@@ -16,6 +16,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.FeatureMap;
 import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
@@ -23,16 +25,17 @@ import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Michael Clay
  */
-public class SimpleLabelProvider extends LabelProvider {
+public class SimpleLabelProvider extends LabelProvider implements IStyledLabelProvider {
 
-	private final PolymorphicDispatcher<String> textDispatcher = new PolymorphicDispatcher<String>("text", 1, 1,
-			Collections.singletonList(this), new PolymorphicDispatcher.ErrorHandler<String>() {
+	private final PolymorphicDispatcher<Object> textDispatcher = new PolymorphicDispatcher<Object>("text", 1, 1,
+			Collections.singletonList(this), new PolymorphicDispatcher.ErrorHandler<Object>() {
 
-				private final PolymorphicDispatcher<String> recoverText = new PolymorphicDispatcher<String>(
+				private final PolymorphicDispatcher<Object> recoverText = new PolymorphicDispatcher<Object>(
 						"error_text", 2, 2, Collections.singletonList(SimpleLabelProvider.this));
 
-				public String handle(Object[] params, Throwable e) {
+				public Object handle(Object[] params, Throwable e) {
 					return recoverText.invoke(params[0], e);
 				}
 			});
@@ -53,7 +56,31 @@ public class SimpleLabelProvider extends LabelProvider {
 
 	@Override
 	public String getText(Object element) {
-		return getTextDispatcher().invoke(element);
+		Object result = getTextDispatcher().invoke(element);
+		if (result == null) {
+			return null;
+		}
+		if (result instanceof String) {
+			return (String) result;
+		}
+		if (result instanceof StyledString) {
+			return ((StyledString) result).getString();
+		}
+		return (String) unkownReturnType(result);
+	}
+
+	public StyledString getStyledText(Object element) {
+		Object result = getTextDispatcher().invoke(element);
+		if (result == null) {
+			return null;
+		}
+		if (result instanceof String) {
+			return new StyledString((String) result);
+		}
+		if (result instanceof StyledString) {
+			return (StyledString) result;
+		}
+		return (StyledString) unkownReturnType(result);
 	}
 
 	@Override
@@ -98,6 +125,11 @@ public class SimpleLabelProvider extends LabelProvider {
 		return null;
 	}
 
+	protected Object unkownReturnType(Object result) {
+		throw new IllegalStateException("The return type " + result.getClass()
+				+ " is not supported for the polymorphic text(Object o) method.");
+	}
+
 	protected EStructuralFeature getLabelFeature(EClass eClass) {
 		EAttribute result = null;
 		for (EAttribute eAttribute : eClass.getEAllAttributes()) {
@@ -105,11 +137,9 @@ public class SimpleLabelProvider extends LabelProvider {
 				if ("name".equalsIgnoreCase(eAttribute.getName())) {
 					result = eAttribute;
 					break;
-				}
-				else if (result == null) {
+				} else if (result == null) {
 					result = eAttribute;
-				}
-				else if (eAttribute.getEAttributeType().getInstanceClass() == String.class
+				} else if (eAttribute.getEAttributeType().getInstanceClass() == String.class
 						&& result.getEAttributeType().getInstanceClass() != String.class) {
 					result = eAttribute;
 				}
@@ -126,12 +156,12 @@ public class SimpleLabelProvider extends LabelProvider {
 		return imageHelper;
 	}
 
-	public PolymorphicDispatcher<String> getTextDispatcher() {
+	public PolymorphicDispatcher<Object> getTextDispatcher() {
 		return textDispatcher;
 	}
 
 	public PolymorphicDispatcher<String> getImageDispatcher() {
 		return imageDispatcher;
 	}
-
+	
 }
