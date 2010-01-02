@@ -9,17 +9,41 @@ package org.eclipse.xtext;
 
 import java.util.List;
 
+import org.eclipse.jface.preference.JFacePreferences;
+import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.ui.core.DefaultLabelProvider;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
+
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow
+ * @author Michael Clay
  */
 public class XtextLabelProvider extends DefaultLabelProvider {
 	private static final String UNKNOWN = "<unknown>";
+	@Inject
+	private SemanticHighlightingConfiguration semanticHighlightingConfiguration;
+
+	StyledString text(ParserRule parserRule) {
+		if (GrammarUtil.isDatatypeRule(parserRule)) {
+			return createStyledString(parserRule, createXtextStyleAdapterStyler(semanticHighlightingConfiguration
+					.dataTypeRule()));
+		}
+		return createStyledString(parserRule);
+	}
+
+	StyledString text(EnumLiteralDeclaration object) {
+		String literalName = getLiteralName(object);
+		Keyword kw = object.getLiteral();
+		String kwValue = kw == null ? "" : " = '" + kw.getValue() + "'";
+		return new StyledString(literalName + kwValue, UNKNOWN.equalsIgnoreCase(literalName) ? createStyler(
+				JFacePreferences.ERROR_COLOR, null) : null);
+	}
 
 	String text(Grammar object) {
 		return "grammar " + GrammarUtil.getLanguageId(object);
@@ -48,7 +72,6 @@ public class XtextLabelProvider extends DefaultLabelProvider {
 	String text(Assignment object) {
 		StringBuffer label = new StringBuffer();
 		label.append(object.getFeature()).append(" ").append(object.getOperator()).append(" ");
-
 		AbstractElement terminal = object.getTerminal();
 		if (terminal instanceof RuleCall) {
 			RuleCall ruleCall = (RuleCall) terminal;
@@ -107,18 +130,8 @@ public class XtextLabelProvider extends DefaultLabelProvider {
 		return "'" + object.getValue() + "'";
 	}
 
-	
 	String text(TypeRef object) {
 		return "'" + object + "'";
-	}
-
-	
-	String text(EnumLiteralDeclaration object) {
-		String literalName = getLiteralName(object);
-		// TODO change color when literal could not be resolved
-		Keyword kw = object.getLiteral();
-		String kwValue = kw == null ? "" : " = '" + kw.getValue() + "'";
-		return literalName + kwValue;
 	}
 
 	private String getLiteralName(EnumLiteralDeclaration declaration) {
