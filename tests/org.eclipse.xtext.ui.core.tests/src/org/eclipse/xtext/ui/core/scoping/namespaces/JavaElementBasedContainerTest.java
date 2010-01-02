@@ -25,7 +25,7 @@ import com.google.common.collect.Lists;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JavaElementBasedContainerTest extends AbstractContainerTest {
+public class JavaElementBasedContainerTest extends AbstractContainerTests {
 
 	private URI uri1;
 	private URI uri2;

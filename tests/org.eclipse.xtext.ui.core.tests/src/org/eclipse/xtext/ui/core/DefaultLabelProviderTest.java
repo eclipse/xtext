@@ -14,6 +14,9 @@ import java.util.List;
 import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.xtext.ParserRule;
+import org.eclipse.xtext.XtextFactory;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -27,7 +30,7 @@ public class DefaultLabelProviderTest extends TestCase {
 			{
 				setImageHelper(new IImageHelper.NullImageHelper());
 			}
-			
+
 			public String text(String object) {
 				return object;
 			}
@@ -57,6 +60,69 @@ public class DefaultLabelProviderTest extends TestCase {
 		lp.getImage(new Integer(45));
 		assertTrue(calls.contains("45"));
 		assertTrue(calls.size() == 2);
+	}
+
+	public void testGetStyledText() throws Exception {
+		DefaultLabelProvider defaultLabelProvider = new DefaultLabelProvider() {
+
+			@SuppressWarnings("unused")
+			public StyledString text(ParserRule parserRule) {
+				return createStyledString(parserRule);
+			}
+
+		};
+		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
+		parserRule.setName("testCreateStyledString");
+		StyledString styledText = defaultLabelProvider.getStyledText(parserRule);
+		assertEquals("testCreateStyledString", styledText.getString());
+	}
+
+	public void testGetStyledTextFallbackText() throws Exception {
+		DefaultLabelProvider defaultLabelProvider = new DefaultLabelProvider();
+		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
+		parserRule.setName("testCreateStyledString");
+		StyledString styledText = defaultLabelProvider.getStyledText(parserRule);
+		assertEquals("testCreateStyledString", styledText.getString());
+	}
+
+	public void testGetStyledTextWithExistingTextLabel() throws Exception {
+		DefaultLabelProvider defaultLabelProvider = new DefaultLabelProvider() {
+			@SuppressWarnings("unused")
+			public String text(ParserRule parserRule) {
+				return parserRule.getName();
+			}
+		};
+		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
+		parserRule.setName("testCreateStyledStringWithTextLabel");
+		StyledString styledText = defaultLabelProvider.getStyledText(parserRule);
+		assertEquals("testCreateStyledStringWithTextLabel", styledText.getString());
+	}
+
+	public void testGetTextWithExistingStyledStringLabel() throws Exception {
+		DefaultLabelProvider defaultLabelProvider = new DefaultLabelProvider() {
+			@SuppressWarnings("unused")
+			public StyledString text(ParserRule parserRule) {
+				return createStyledString(parserRule);
+			}
+
+		};
+		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
+		parserRule.setName("testGetTextWithStyledStringLabel");
+		assertEquals("testGetTextWithStyledStringLabel", defaultLabelProvider.getText(parserRule));
+	}
+
+	public void testGetNullSafeDefaultText() throws Exception {
+		DefaultLabelProvider defaultLabelProvider = new DefaultLabelProvider() {
+
+			@SuppressWarnings("unused")
+			public StyledString text(ParserRule parserRule) {
+				return createStyledString(parserRule);
+			}
+
+		};
+		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
+		StyledString styledText = defaultLabelProvider.getStyledText(parserRule);
+		assertNotNull(styledText.getString());
 	}
 
 	public void testErrorHandling() throws Exception {

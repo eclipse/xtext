@@ -59,7 +59,7 @@ public abstract class AbstractLookAheadContentAssistTestLanguageUiModule extends
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public Class<? extends org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider> bindDelegatingStyledCellLabelProvider$IStyledLabelProvider() {
-		return org.eclipse.xtext.ui.core.DefaultStyledLabelProvider.class;
+		return org.eclipse.xtext.ui.core.DefaultLabelProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
