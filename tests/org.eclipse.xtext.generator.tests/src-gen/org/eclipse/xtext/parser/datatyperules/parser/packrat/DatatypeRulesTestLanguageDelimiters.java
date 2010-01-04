@@ -5,6 +5,7 @@ package org.eclipse.xtext.parser.datatyperules.parser.packrat;
 
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
 import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
+import org.eclipse.xtext.parser.packrat.matching.SetBasedKeywordMatcher;
 
 public final class DatatypeRulesTestLanguageDelimiters {
 
@@ -14,6 +15,17 @@ public final class DatatypeRulesTestLanguageDelimiters {
 	
 	public static final ICharacterClass keyword$12$Delimiter = ICharacterClass.Factory.nullClass();
 
-	public static final ISequenceMatcher ruleCall$27$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static final ISequenceMatcher ruleCall$31$Delimiter = new SetBasedKeywordMatcher(
+		"E");
+
+	public static final ISequenceMatcher ruleCall$43$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+
+    // TODO: remove hardcoded character class from template
+	public static final ICharacterClass keyword$69$Delimiter = ICharacterClass.Factory.join(
+			ICharacterClass.Factory.createRange('a', 'z'),
+			ICharacterClass.Factory.createRange('A', 'Z'),
+			ICharacterClass.Factory.create('_'),
+			ICharacterClass.Factory.createRange('0', '9')
+	);
 
 }

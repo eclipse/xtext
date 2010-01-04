@@ -28,6 +28,7 @@ import org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.Model;
  *   <li>{@link org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.impl.ModelImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.impl.ModelImpl#getVector <em>Vector</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.impl.ModelImpl#getDots <em>Dots</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.impl.ModelImpl#getDouble <em>Double</em>}</li>
  * </ul>
  * </p>
  *
@@ -114,6 +115,26 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected String dots = DOTS_EDEFAULT;
+
+  /**
+   * The default value of the '{@link #getDouble() <em>Double</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDouble()
+   * @generated
+   * @ordered
+   */
+  protected static final double DOUBLE_EDEFAULT = 0.0;
+
+  /**
+   * The cached value of the '{@link #getDouble() <em>Double</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDouble()
+   * @generated
+   * @ordered
+   */
+  protected double double_ = DOUBLE_EDEFAULT;
 
   /**
    * <!-- begin-user-doc -->
@@ -233,6 +254,29 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  public double getDouble()
+  {
+    return double_;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setDouble(double newDouble)
+  {
+    double oldDouble = double_;
+    double_ = newDouble;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, DatatypeRulesTestLanguagePackage.MODEL__DOUBLE, oldDouble, double_));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public Object eGet(int featureID, boolean resolve, boolean coreType)
   {
@@ -246,6 +290,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return getVector();
       case DatatypeRulesTestLanguagePackage.MODEL__DOTS:
         return getDots();
+      case DatatypeRulesTestLanguagePackage.MODEL__DOUBLE:
+        return getDouble();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -271,6 +317,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return;
       case DatatypeRulesTestLanguagePackage.MODEL__DOTS:
         setDots((String)newValue);
+        return;
+      case DatatypeRulesTestLanguagePackage.MODEL__DOUBLE:
+        setDouble((Double)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -298,6 +347,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case DatatypeRulesTestLanguagePackage.MODEL__DOTS:
         setDots(DOTS_EDEFAULT);
         return;
+      case DatatypeRulesTestLanguagePackage.MODEL__DOUBLE:
+        setDouble(DOUBLE_EDEFAULT);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -320,6 +372,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return VECTOR_EDEFAULT == null ? vector != null : !VECTOR_EDEFAULT.equals(vector);
       case DatatypeRulesTestLanguagePackage.MODEL__DOTS:
         return DOTS_EDEFAULT == null ? dots != null : !DOTS_EDEFAULT.equals(dots);
+      case DatatypeRulesTestLanguagePackage.MODEL__DOUBLE:
+        return double_ != DOUBLE_EDEFAULT;
     }
     return super.eIsSet(featureID);
   }
@@ -343,6 +397,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     result.append(vector);
     result.append(", dots: ");
     result.append(dots);
+    result.append(", double: ");
+    result.append(double_);
     result.append(')');
     return result.toString();
   }

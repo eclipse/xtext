@@ -41,6 +41,12 @@
             <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
           </tokens>
         </tokens>
+        <tokens xsi:type="xtext:Group" cardinality="?">
+          <tokens xsi:type="xtext:Keyword" value="*"/>
+          <tokens xsi:type="xtext:Assignment" feature="double" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
+          </tokens>
+        </tokens>
         <tokens xsi:type="xtext:Keyword" value=";"/>
       </alternatives>
     </rules>
@@ -97,6 +103,22 @@
           <tokens xsi:type="xtext:Keyword" value="."/>
         </groups>
         <groups xsi:type="xtext:Keyword" value=".."/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Double">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <tokens xsi:type="xtext:Keyword" cardinality="?" value="-"/>
+        <tokens xsi:type="xtext:RuleCall" cardinality="?" rule="/1/@rules.1"/>
+        <tokens xsi:type="xtext:Keyword" value="."/>
+        <tokens xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+        <tokens xsi:type="xtext:Group" cardinality="?">
+          <tokens xsi:type="xtext:Keyword" value="E"/>
+          <tokens xsi:type="xtext:Keyword" cardinality="?" value="-"/>
+          <tokens xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+        </tokens>
       </alternatives>
     </rules>
   </xtext:Grammar>

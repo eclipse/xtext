@@ -16,6 +16,7 @@ import org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers.DatatypeR
 import org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers.DatatypeRulesTestLanguageFractionConsumer;
 import org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers.DatatypeRulesTestLanguageVectorConsumer;
 import org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers.DatatypeRulesTestLanguageDotsConsumer;
+import org.eclipse.xtext.parser.datatyperules.parser.packrat.consumers.DatatypeRulesTestLanguageDoubleConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSTRINGConsumer;
@@ -34,6 +35,7 @@ public class DatatypeRulesTestLanguageParserConfiguration extends AbstractParser
     private DatatypeRulesTestLanguageFractionConsumer fractionConsumer;
     private DatatypeRulesTestLanguageVectorConsumer vectorConsumer;
     private DatatypeRulesTestLanguageDotsConsumer dotsConsumer;
+    private DatatypeRulesTestLanguageDoubleConsumer doubleConsumer;
 
 	private DatatypeRulesTestLanguageGrammarAccess grammarAccess;
 
@@ -70,6 +72,9 @@ public class DatatypeRulesTestLanguageParserConfiguration extends AbstractParser
 		dotsConsumer = new DatatypeRulesTestLanguageDotsConsumer(
     		this, null
     	);
+		doubleConsumer = new DatatypeRulesTestLanguageDoubleConsumer(
+    		this, null
+    	);
 	}
 	
 	public void createTerminalConsumers() {
@@ -86,6 +91,7 @@ public class DatatypeRulesTestLanguageParserConfiguration extends AbstractParser
 		getFractionConsumer().setRule(grammarAccess.getFractionAccess());
 		getVectorConsumer().setRule(grammarAccess.getVectorAccess());
 		getDotsConsumer().setRule(grammarAccess.getDotsAccess());
+		getDoubleConsumer().setRule(grammarAccess.getDoubleAccess());
 		getIdConsumer().setRule(grammarAccess.getIDRule());
 		getIntConsumer().setRule(grammarAccess.getINTRule());
 		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
@@ -98,6 +104,7 @@ public class DatatypeRulesTestLanguageParserConfiguration extends AbstractParser
 		getCompositeModelConsumer().setModelConsumer(getModelConsumer());
 
 		getModelConsumer().setDotsConsumer(getDotsConsumer());
+		getModelConsumer().setDoubleConsumer(getDoubleConsumer());
 		getModelConsumer().setFractionConsumer(getFractionConsumer());
 		getModelConsumer().setNestedModelIdConsumer(getNestedModelIdConsumer());
 		getModelConsumer().setVectorConsumer(getVectorConsumer());
@@ -110,24 +117,34 @@ public class DatatypeRulesTestLanguageParserConfiguration extends AbstractParser
 
 		getVectorConsumer().setIntConsumer(getIntConsumer());
 
+		getDoubleConsumer().setIntConsumer(getIntConsumer());
+
 		getModelConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.keyword$12$Delimiter);
 		getModelConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.keyword$12$Delimiter);
 		getModelConsumer().setKeyword$13$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.keyword$12$Delimiter);
-		getModelConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.keyword$12$Delimiter);
+		getModelConsumer().setKeyword$17$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.keyword$12$Delimiter);
+		getModelConsumer().setKeyword$20$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.keyword$12$Delimiter);
 		getModelIdConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.keyword$12$Delimiter);
-		getModelIdConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.ruleCall$27$Delimiter);
-		getModelIdConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.ruleCall$27$Delimiter);
+		getModelIdConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.ruleCall$31$Delimiter);
+		getModelIdConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.ruleCall$31$Delimiter);
 		getNestedModelIdConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.keyword$12$Delimiter);
 		getFractionConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.keyword$12$Delimiter);
-		getFractionConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.ruleCall$27$Delimiter);
-		getFractionConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.ruleCall$27$Delimiter);
+		getFractionConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.ruleCall$43$Delimiter);
+		getFractionConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.ruleCall$43$Delimiter);
 		getVectorConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.keyword$12$Delimiter);
 		getVectorConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.keyword$12$Delimiter);
-		getVectorConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.ruleCall$27$Delimiter);
-		getVectorConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.ruleCall$27$Delimiter);
+		getVectorConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.ruleCall$43$Delimiter);
+		getVectorConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.ruleCall$43$Delimiter);
 		getDotsConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.keyword$12$Delimiter);
 		getDotsConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.keyword$12$Delimiter);
 		getDotsConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.keyword$12$Delimiter);
+		getDoubleConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.keyword$12$Delimiter);
+		getDoubleConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.keyword$12$Delimiter);
+		getDoubleConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.keyword$69$Delimiter);
+		getDoubleConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.keyword$12$Delimiter);
+		getDoubleConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.ruleCall$43$Delimiter);
+		getDoubleConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.ruleCall$43$Delimiter);
+		getDoubleConsumer().setRuleCall$9$Delimiter(org.eclipse.xtext.parser.datatyperules.parser.packrat.DatatypeRulesTestLanguageDelimiters.ruleCall$43$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
@@ -160,6 +177,10 @@ public class DatatypeRulesTestLanguageParserConfiguration extends AbstractParser
 
     public DatatypeRulesTestLanguageDotsConsumer getDotsConsumer() {
     	return dotsConsumer;
+    }
+
+    public DatatypeRulesTestLanguageDoubleConsumer getDoubleConsumer() {
+    	return doubleConsumer;
     }
 
     public TerminalsIDConsumer getIdConsumer() {
