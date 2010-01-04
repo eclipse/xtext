@@ -25,7 +25,7 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class ResourceSetBasedResourceDescriptions implements IResourceDescriptions, IResourceDescriptions.IContextAware {
+public class ResourceSetBasedResourceDescriptions implements IResourceDescriptions.IContextAware {
 
 	private ResourceSet resourceSet;
 

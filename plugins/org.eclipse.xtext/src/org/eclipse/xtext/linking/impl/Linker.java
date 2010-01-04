@@ -101,7 +101,7 @@ public class Linker extends AbstractCleaningLinker {
 		// may be overridden by clients
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "rawtypes", "unchecked" })
 	protected void ensureIsLinked(EObject obj, AbstractNode node, CrossReference ref,
 			Set<EReference> handledReferences, IDiagnosticProducer producer) {
 		final EReference eRef = GrammarUtil.getReference(ref, obj.eClass());

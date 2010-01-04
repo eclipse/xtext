@@ -57,7 +57,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 	@Inject
 	private IReferableElementsUnloader unloader;
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public IParseResult reparse(IAntlrParser parser, CompositeNode rootNode, int offset, int replacedTextLength,
 			String newText) {
 		if (offset + replacedTextLength > rootNode.getTotalLength()) {

@@ -19,9 +19,14 @@ import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.ui.core.resource.IResourceSetProvider;
 
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
 /**
@@ -45,7 +50,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		return resourceSetProvider;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	@Override
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
 		try {
@@ -89,7 +94,11 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	}
 
 	protected void doBuild(ToBeBuilt toBeBuilt, IProgressMonitor monitor) {
-		builderState.update(getResourceSetProvider().get(getProject()), toBeBuilt.toBeUpdated, toBeBuilt.toBeDeleted,
+		ResourceSet resourceSet = getResourceSetProvider().get(getProject());
+		if (resourceSet instanceof ResourceSetImpl) {
+			((ResourceSetImpl) resourceSet).setURIResourceMap(Maps.<URI, Resource>newHashMap());
+		}
+		builderState.update(resourceSet, toBeBuilt.toBeUpdated, toBeBuilt.toBeDeleted,
 				monitor);
 	}
 

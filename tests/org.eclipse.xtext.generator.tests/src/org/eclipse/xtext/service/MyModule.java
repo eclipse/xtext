@@ -13,7 +13,7 @@ import java.util.List;
 
 
 public class MyModule extends TestModule {
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public Class<? extends List> bindList() {
 		return ArrayList.class;
 	}

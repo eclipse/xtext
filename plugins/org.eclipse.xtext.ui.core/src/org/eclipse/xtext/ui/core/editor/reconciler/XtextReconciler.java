@@ -14,7 +14,6 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.text.DocumentEvent;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.jface.text.IDocumentListener;
 import org.eclipse.jface.text.ITextInputListener;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.reconciler.IReconciler;
@@ -51,7 +50,7 @@ public class XtextReconciler extends Job implements IReconciler {
 	private int delay;
 	private IReconcilingStrategy strategy;
 
-	class DocumentListener implements IDocumentListener, IXtextDocumentContentObserver {
+	class DocumentListener implements IXtextDocumentContentObserver {
 
 		public void documentAboutToBeChanged(DocumentEvent event) {
 			

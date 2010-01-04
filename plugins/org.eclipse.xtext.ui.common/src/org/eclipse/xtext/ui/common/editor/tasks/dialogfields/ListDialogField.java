@@ -57,7 +57,7 @@ import org.eclipse.swt.widgets.TableColumn;
  * 'Down'. List model is independent of widget creation. DialogFields controls
  * are: Label, List and Composite containing buttons.
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings({"rawtypes", "unchecked"})
 public class ListDialogField extends DialogField {
 
 	public static class ColumnsDescription {

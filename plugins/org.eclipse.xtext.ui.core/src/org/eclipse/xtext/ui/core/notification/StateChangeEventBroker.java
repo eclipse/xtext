@@ -16,7 +16,7 @@ import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class StateChangeEventBroker extends AbstractResourceDescriptionChangeEventSource implements IStateChangeEventBroker, IResourceDescription.Event.Listener {
+public class StateChangeEventBroker extends AbstractResourceDescriptionChangeEventSource implements IStateChangeEventBroker {
 
 	public static class StateChangeEventBrokerEvent extends ResourceDescriptionChangeEvent {
 

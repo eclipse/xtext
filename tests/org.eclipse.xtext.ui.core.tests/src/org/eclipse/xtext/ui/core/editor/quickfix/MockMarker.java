@@ -44,7 +44,7 @@ final class MockMarker implements IMarker {
 		this.attributes = attributes;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public Object getAdapter(Class adapter) {
 		return null;
 	}
@@ -53,7 +53,7 @@ final class MockMarker implements IMarker {
 		throw new UnsupportedOperationException();
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public void setAttributes(Map attributes) throws CoreException {
 		throw new UnsupportedOperationException();
 	}
@@ -98,7 +98,7 @@ final class MockMarker implements IMarker {
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public Map getAttributes() throws CoreException {
 		return attributes;
 	}

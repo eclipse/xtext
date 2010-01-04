@@ -28,14 +28,15 @@ import com.google.inject.Provider;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class ShadowingResourceDescriptions implements IResourceDescriptions, IResourceDescriptions.IContextAware {
+public class ShadowingResourceDescriptions implements IResourceDescriptions.IContextAware {
 
 	public static class Adapter extends AdapterImpl {
 
 		private IResourceDescriptions toBeShadowed;
 		private Set<URI> deletedUris;
 		private Set<URI> toBeUpdated;
-
+		private Map<URI, IResourceDescription> resourceDescriptions;
+		
 		public Adapter(IResourceDescriptions toBeShadowed, Set<URI> toBeUpdated, Set<URI> deletedUris) {
 			super();
 			this.toBeShadowed = toBeShadowed;
@@ -59,25 +60,37 @@ public class ShadowingResourceDescriptions implements IResourceDescriptions, IRe
 		public boolean isAdapterForType(Object type) {
 			return Adapter.class == type;
 		}
+		
+		public Map<URI, IResourceDescription> getResourceDescriptionsMap() {
+			return resourceDescriptions;
+		}
+		
+		public void setResourceDescriptionsMap(Map<URI, IResourceDescription> resourceDescriptions) {
+			this.resourceDescriptions = resourceDescriptions;
+		}
+		
 	}
 	
 	@Inject
 	private Provider<ResourceSetBasedResourceDescriptions> resourceSetDescriptionsProvider;
 	
 	private Map<URI, IResourceDescription> resourceDescriptions;
-
+	
 	public void setContext(Notifier ctx) {
 		ResourceSet resourceSet = EcoreUtil2.getResourceSet(ctx);
-		ResourceSetBasedResourceDescriptions resourceSetBasedResourceDescriptions = resourceSetDescriptionsProvider.get();
-		resourceSetBasedResourceDescriptions.setContext(resourceSet);
 		if (resourceSet == null)
 			throw new NullPointerException();
-		Adapter adapter = (Adapter) EcoreUtil.getAdapter(resourceSet.eAdapters(),
-				Adapter.class);
+		Adapter adapter = (Adapter) EcoreUtil.getAdapter(resourceSet.eAdapters(), Adapter.class);
 		if (adapter == null)
 			throw new IllegalArgumentException("No "+ShadowingResourceDescriptions.Adapter.class.getName()+" found");
-		
-		initialize(resourceSetBasedResourceDescriptions, adapter);
+		if (adapter.getResourceDescriptionsMap() != null) {
+			this.resourceDescriptions = adapter.getResourceDescriptionsMap();
+		} else {
+			ResourceSetBasedResourceDescriptions resourceSetBasedResourceDescriptions = resourceSetDescriptionsProvider.get();
+			resourceSetBasedResourceDescriptions.setContext(resourceSet);
+			initialize(resourceSetBasedResourceDescriptions, adapter);
+			adapter.setResourceDescriptionsMap(resourceDescriptions);
+		}
 	}
 
 

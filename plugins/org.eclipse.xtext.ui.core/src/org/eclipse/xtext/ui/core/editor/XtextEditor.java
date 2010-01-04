@@ -184,7 +184,7 @@ public class XtextEditor extends TextEditor {
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	@Override
 	public Object getAdapter(Class adapter) {
 		if (adapter.equals(IContentOutlinePage.class)) {
@@ -424,7 +424,7 @@ public class XtextEditor extends TextEditor {
 		return callback.onValidateEditorInputState(this) && super.validateEditorInputState();
 	}
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	private Annotation getAnnotation(final int offset, final int length) {
 		final IAnnotationModel model = getDocumentProvider().getAnnotationModel(getEditorInput());
 		if (model == null)
