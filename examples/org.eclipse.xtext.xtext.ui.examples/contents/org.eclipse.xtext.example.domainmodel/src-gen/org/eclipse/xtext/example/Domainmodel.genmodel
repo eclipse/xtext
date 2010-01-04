@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.example.domainmodel/src-gen"
+    editDirectory="/org.eclipse.xtext.example.domainmodel.edit/src" editorDirectory="/org.eclipse.xtext.example.domainmodel.editor/src"
+    modelPluginID="org.eclipse.xtext.example.domainmodel" forceOverwrite="true" modelName="Domainmodel"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.example.domainmodel.edit"
+    editorPluginID="org.eclipse.xtext.example.domainmodel.editor">
+  <genPackages prefix="Domainmodel" basePackage="org.eclipse.xtext.example" disposableProviderFactory="true"
+      ecorePackage="Domainmodel.ecore#/">
+    <genEnums typeSafeEnumCompatible="false" ecoreEnum="Domainmodel.ecore#//Visibility">
+      <genEnumLiterals ecoreEnumLiteral="Domainmodel.ecore#//Visibility/public"/>
+      <genEnumLiterals ecoreEnumLiteral="Domainmodel.ecore#//Visibility/private"/>
+      <genEnumLiterals ecoreEnumLiteral="Domainmodel.ecore#//Visibility/protected"/>
+    </genEnums>
+    <genClasses ecoreClass="Domainmodel.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//Model/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="Domainmodel.ecore#//AbstractElement"/>
+    <genClasses ecoreClass="Domainmodel.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Domainmodel.ecore#//Import/importedNamespace"/>
+    </genClasses>
+    <genClasses ecoreClass="Domainmodel.ecore#//PackageDeclaration">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Domainmodel.ecore#//PackageDeclaration/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//PackageDeclaration/elements"/>
+    </genClasses>
+    <genClasses ecoreClass="Domainmodel.ecore#//Type">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Domainmodel.ecore#//Type/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Domainmodel.ecore#//DataType"/>
+    <genClasses ecoreClass="Domainmodel.ecore#//Entity">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//Entity/superType"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//Entity/features"/>
+    </genClasses>
+    <genClasses ecoreClass="Domainmodel.ecore#//Feature"/>
+    <genClasses ecoreClass="Domainmodel.ecore#//StructuralFeature"/>
+    <genClasses ecoreClass="Domainmodel.ecore#//Attribute"/>
+    <genClasses ecoreClass="Domainmodel.ecore#//Reference">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//Reference/opposite"/>
+    </genClasses>
+    <genClasses ecoreClass="Domainmodel.ecore#//Operation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Domainmodel.ecore#//Operation/visibility"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//Operation/params"/>
+    </genClasses>
+    <genClasses ecoreClass="Domainmodel.ecore#//Parameter"/>
+    <genClasses ecoreClass="Domainmodel.ecore#//TypedElement">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Domainmodel.ecore#//TypedElement/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//TypedElement/type"/>
+    </genClasses>
+    <genClasses ecoreClass="Domainmodel.ecore#//TypeRef">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Domainmodel.ecore#//TypeRef/referenced"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,31 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Xtext Domainmodel Example (Incubation)
+Bundle-Vendor: Eclipse Modeling Project
+Bundle-Version: 0.8.0.qualifier
+Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.apache.log4j;bundle-version="1.2.15",
+ org.eclipse.xtext,
+ org.eclipse.xtext.generator;resolution:=optional,
+ org.eclipse.xtend,
+ org.eclipse.xtend.typesystem.emf,
+ org.eclipse.xpand,
+ org.eclipse.xtend.util.stdlib,
+ de.itemis.xtext.antlr;resolution:=optional,
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.antlr.runtime,
+ org.eclipse.xtext.xtend;bundle-version="0.8.0"
+Export-Package: org.eclipse.xtext.example,
+ org.eclipse.xtext.example.domainmodel,
+ org.eclipse.xtext.example.domainmodel.impl,
+ org.eclipse.xtext.example.domainmodel.util,
+ org.eclipse.xtext.example.parseTreeConstruction,
+ org.eclipse.xtext.example.parser.antlr,
+ org.eclipse.xtext.example.parser.antlr.internal,
+ org.eclipse.xtext.example.services,
+ org.eclipse.xtext.example.validation
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Import-Package: org.apache.log4j

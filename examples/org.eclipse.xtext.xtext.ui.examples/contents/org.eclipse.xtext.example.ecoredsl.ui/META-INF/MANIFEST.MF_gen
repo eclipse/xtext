@@ -1,0 +1,12 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.eclipse.xtext.example.ecoredsl.ui
+Bundle-SymbolicName: org.eclipse.xtext.example.ecoredsl.ui
+Bundle-Version: 0.0.1
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext.ui.core,
+ org.eclipse.xtext.ui.common,
+ org.eclipse.ui.editors,
+ org.eclipse.ui
+Bundle-Activator: org.eclipse.xtext.example.internal.EcoreDslActivator

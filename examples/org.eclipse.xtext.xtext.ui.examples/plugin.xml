@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.0"?>
+<plugin>
+	<extension point="org.eclipse.ui.newWizards">
+		<category id="org.eclipse.xtext.Examples" 
+				  name="Xtext Examples" 
+				  parentCategory="org.eclipse.ui.Examples" />
+	</extension>
+
+	<!-- ========= org.eclipse.xtext.example.domainmodel ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.xtext.examples.NewDomainModelExampleWizard" 
+			name="Domain-Model Example" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.ui.Examples/org.eclipse.xtext.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>An example Entity-language with support for full qualified names and an index.
+			</description>
+		</wizard>
+	</extension>
+	<extension point="org.eclipse.emf.common.ui.examples">
+	   <example wizardID="org.eclipse.xtext.examples.NewDomainModelExampleWizard" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.xtext.example.domainmodel" contentURI="contents/org.eclipse.xtext.example.domainmodel/" description="Parser, Serializer, Linker, etc."/>
+		 <projectDescriptor name="org.eclipse.xtext.example.domainmodel.ui" contentURI="contents/org.eclipse.xtext.example.domainmodel.ui/" description="A smart editor for the language."/>
+		 <projectDescriptor name="org.eclipse.xtext.example.domainmodel.ui.tests" contentURI="contents/org.eclipse.xtext.example.domainmodel.ui.tests/" description="JUnit test cases"/>
+	  </example>
+	</extension>   
+   
+	<!-- ========= org.eclipse.xtext.example.ecoredsl ========= -->
+	<!-- TODO: activate me!
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.xtext.examples.NewEcoreDSLExampleWizard" 
+			name="Ecore DSL Example" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.ui.Examples/org.eclipse.xtext.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>An Ecore DSL Example.
+			</description>
+		</wizard>
+	</extension>
+    <extension point="org.eclipse.emf.common.ui.examples">
+	  <example wizardID="org.eclipse.xtext.examples.NewEcoreDSLExampleWizard" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.xtext.example.ecoredsl" contentURI="contents/org.eclipse.xtext.example.ecoredsl/" description="Parser, Serializer, Linker, etc."/>
+		 <projectDescriptor name="org.eclipse.xtext.example.ecoredsl.ui" contentURI="contents/org.eclipse.xtext.example.ecoredsl.ui/"  description="A smart editor for the language."/>
+	  </example>
+    </extension>
+    -->
+   
+	<!-- ========= org.eclipse.xtext.example.fowlerdsl ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.xtext.examples.NewFowlerDSLExampleWizard" 
+			name="State-Machine Example" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.ui.Examples/org.eclipse.xtext.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>This language for state machines has been inspired by Martin Fowler.
+			</description>
+		</wizard>
+	</extension>
+   <extension point="org.eclipse.emf.common.ui.examples">
+	  <example wizardID="org.eclipse.xtext.examples.NewFowlerDSLExampleWizard" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.xtext.example.fowlerdsl" contentURI="contents/org.eclipse.xtext.example.ecoredsl/" description="Parser, Serializer, Linker, etc."/>
+		 <projectDescriptor name="org.eclipse.xtext.example.fowlerdsl.ui" contentURI="contents/org.eclipse.xtext.example.ecoredsl.ui/"  description="A smart editor for the language."/>
+	  </example>
+   </extension>
+</plugin>

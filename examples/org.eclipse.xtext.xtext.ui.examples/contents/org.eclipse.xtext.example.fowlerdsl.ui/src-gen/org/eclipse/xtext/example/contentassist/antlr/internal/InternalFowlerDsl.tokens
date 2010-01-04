@@ -1,0 +1,16 @@
+RULE_ML_COMMENT=7
+RULE_ID=4
+RULE_WS=9
+RULE_INT=5
+RULE_STRING=6
+RULE_ANY_OTHER=10
+RULE_SL_COMMENT=8
+'commands'=13
+'resetting'=19
+'events'=11
+'=>'=18
+'state'=14
+'end'=12
+'actions'=15
+'}'=17
+'{'=16

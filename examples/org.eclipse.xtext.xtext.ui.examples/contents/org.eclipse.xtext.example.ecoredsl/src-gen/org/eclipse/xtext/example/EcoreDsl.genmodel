@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.example.ecoredsl/src-gen"
+    editDirectory="/org.eclipse.xtext.example.ecoredsl.edit/src" editorDirectory="/org.eclipse.xtext.example.ecoredsl.editor/src"
+    modelPluginID="org.eclipse.xtext.example.ecoredsl" forceOverwrite="true" modelName="EcoreDsl"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.example.ecoredsl.edit"
+    editorPluginID="org.eclipse.xtext.example.ecoredsl.editor">
+  <genPackages prefix="Ecoredsl" basePackage="org.eclipse.xtext.example" disposableProviderFactory="true"
+      ecorePackage="EcoreDsl.ecore#/">
+    <genClasses ecoreClass="EcoreDsl.ecore#//EcoreDsl">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EcoreDsl.ecore#//EcoreDsl/metamodelDeclarations"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference EcoreDsl.ecore#//EcoreDsl/package"/>
+    </genClasses>
+    <genClasses ecoreClass="EcoreDsl.ecore#//ReferencedMetamodel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute EcoreDsl.ecore#//ReferencedMetamodel/alias"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference EcoreDsl.ecore#//ReferencedMetamodel/ePackage"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

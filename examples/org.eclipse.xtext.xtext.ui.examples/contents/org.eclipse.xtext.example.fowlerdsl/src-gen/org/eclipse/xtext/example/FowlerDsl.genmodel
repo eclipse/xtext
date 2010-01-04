@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.example.fowlerdsl/src-gen"
+    editDirectory="/org.eclipse.xtext.example.fowlerdsl.edit/src" editorDirectory="/org.eclipse.xtext.example.fowlerdsl.editor/src"
+    modelPluginID="org.eclipse.xtext.example.fowlerdsl" forceOverwrite="true" modelName="FowlerDsl"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.example.fowlerdsl.edit"
+    editorPluginID="org.eclipse.xtext.example.fowlerdsl.editor">
+  <genPackages prefix="Fowlerdsl" basePackage="org.eclipse.xtext.example" disposableProviderFactory="true"
+      ecorePackage="FowlerDsl.ecore#/">
+    <genClasses ecoreClass="FowlerDsl.ecore#//Statemachine">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FowlerDsl.ecore#//Statemachine/events"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FowlerDsl.ecore#//Statemachine/commands"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FowlerDsl.ecore#//Statemachine/states"/>
+    </genClasses>
+    <genClasses ecoreClass="FowlerDsl.ecore#//Event">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FowlerDsl.ecore#//Event/resetting"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FowlerDsl.ecore#//Event/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FowlerDsl.ecore#//Event/code"/>
+    </genClasses>
+    <genClasses ecoreClass="FowlerDsl.ecore#//Command">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FowlerDsl.ecore#//Command/name"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FowlerDsl.ecore#//Command/code"/>
+    </genClasses>
+    <genClasses ecoreClass="FowlerDsl.ecore#//State">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute FowlerDsl.ecore#//State/name"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FowlerDsl.ecore#//State/actions"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference FowlerDsl.ecore#//State/transitions"/>
+    </genClasses>
+    <genClasses ecoreClass="FowlerDsl.ecore#//Transition">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FowlerDsl.ecore#//Transition/event"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference FowlerDsl.ecore#//Transition/state"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
