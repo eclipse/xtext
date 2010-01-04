@@ -25,6 +25,11 @@ import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSet
 import org.eclipse.xtext.testlanguages.TreeTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.treeTestLanguage.Model;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.xtextTest.AbstractRule;
+import org.eclipse.xtext.xtextTest.Assignment;
+import org.eclipse.xtext.xtextTest.Grammar;
+import org.eclipse.xtext.xtextTest.Keyword;
+import org.eclipse.xtext.xtextTest.RuleCall;
 
 public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 
@@ -60,21 +65,35 @@ public class ParseErrorHandlingTest extends AbstractGeneratorTest {
 	}
 
 	public void testParseError2() throws Exception {
-		Object object = getModelAndExpect("grammar a import 'holla' foo returns y::Z : name=foo #;", 4);
-		assertWithXtend("'foo'", "rules.first().eAllContents.typeSelect(xtextTest::RuleCall).first().rule.name", object);
+		Grammar grammar = (Grammar) getModelAndExpect("grammar a import 'holla' foo returns y::Z : name=foo #;", 4);
+		AbstractRule rule = grammar.getRules().get(0);
+		Assignment assignment = (Assignment) rule.getAlternatives();
+		RuleCall call = (RuleCall) assignment.getTerminal();
+		assertSame(rule, call.getRule());
+//		assertWithXtend("'foo'", "rules.first().eAllContents().typeSelect(RuleCall).first().rule.name", grammar);
 	}
 
 	public void testParseError3() throws Exception {
-		Object object = getModelAndExpect("grammar a import 'holla' foo returns y::Z : name=foo #############", 4);
-		assertWithXtend("'foo'", "rules.first().eAllContents.typeSelect(xtextTest::RuleCall).first().rule.name", object);
+		Grammar grammar = (Grammar) getModelAndExpect("grammar a import 'holla' foo returns y::Z : name=foo #############", 4);
+		AbstractRule rule = grammar.getRules().get(0);
+		Assignment assignment = (Assignment) rule.getAlternatives();
+		RuleCall call = (RuleCall) assignment.getTerminal();
+		assertSame(rule, call.getRule());
+//		assertWithXtend("'foo'", "rules.first().eAllContents().typeSelect(RuleCall).first().rule.name", grammar);
 	}
 
 	public void testParseError4() throws Exception {
-		Object object = getModelAndExpect("grammar a import 'holla' foo returns y::Z : name=foo # 'foo'; bar : 'stuff'", 5);
-		//logger.debug(errors);
-		assertWithXtend("'foo'", "rules.first().eAllContents.typeSelect(xtextTest::RuleCall).first().rule.name", object);
-		assertWithXtend("null", "rules.first().eAllContents.typeSelect(xtextTest::Keyword).first().name", object);
-		assertWithXtend("'stuff'", "rules.get(1).eAllContents.typeSelect(xtextTest::Keyword).first().value", object);
+		Grammar grammar = (Grammar) getModelAndExpect("grammar a import 'holla' foo returns y::Z : name=foo # 'foo'; bar : 'stuff'", 5);
+		AbstractRule rule = grammar.getRules().get(0);
+		Assignment assignment = (Assignment) rule.getAlternatives();
+		RuleCall call = (RuleCall) assignment.getTerminal();
+		assertSame(rule, call.getRule());
+//		assertWithXtend("'foo'", "rules.first().eAllContents().typeSelect(RuleCall).first().rule.name", grammar);
+		
+		AbstractRule secondRule = grammar.getRules().get(1);
+		Keyword stuff = (Keyword) secondRule.getAlternatives();
+		assertEquals("stuff", stuff.getValue());
+//		assertWithXtend("'stuff'", "rules.get(1).eAllContents().typeSelect(Keyword).first().value", grammar);
 	}
 
 
