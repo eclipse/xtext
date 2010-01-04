@@ -30,7 +30,7 @@ public class AbstractNFATransition<S extends INFAState<S, T>, T extends INFATran
 		this.ruleCall = ruleCall;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	@Override
 	public boolean equals(Object obj) {
 		if(obj instanceof AbstractNFATransition) {

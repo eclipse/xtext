@@ -53,8 +53,8 @@ public class XtextTokenStream extends CommonTokenStream {
 		}
 	}
 	
-	@SuppressWarnings({ "serial", "unchecked" })
-	private final class TokenList extends ArrayList {
+	@SuppressWarnings({ "serial" })
+	private final class TokenList extends ArrayList<Object> {
 		private TokenList(int initialCapacity) {
 			super(initialCapacity);
 		}

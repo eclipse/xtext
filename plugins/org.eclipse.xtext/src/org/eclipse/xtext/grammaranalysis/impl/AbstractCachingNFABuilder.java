@@ -27,7 +27,7 @@ public abstract class AbstractCachingNFABuilder<S, T> implements
 		return false;
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings({ "unchecked", "rawtypes" })
 	public final S getState(AbstractElement ele) {
 		if (ele == null)
 			return null;

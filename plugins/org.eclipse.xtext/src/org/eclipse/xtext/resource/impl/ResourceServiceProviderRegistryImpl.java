@@ -25,7 +25,7 @@ public class ResourceServiceProviderRegistryImpl implements IResourceServiceProv
 	 * @author Sven Efftinge - Initial contribution and API
 	 */
 	public static class InternalData extends ResourceFactoryRegistryImpl {
-		@SuppressWarnings("unchecked")
+		@SuppressWarnings({ "unchecked", "rawtypes" })
 		public IResourceServiceProvider getServiceProvider(URI uri, String contentType) {
 			Object object = getFactory(uri, protocolToFactoryMap, extensionToFactoryMap, contentTypeIdentifierToFactoryMap, contentType, false);
 			if (object instanceof Provider) {

@@ -28,7 +28,7 @@ public class SimpleAttributeResolverTest extends TestCase {
 	
 	private SimpleAttributeResolver<EObject, String> nameResolver;
 	
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	private SimpleAttributeResolver<EObject, EList> superClassResolver;
 
 	@Override

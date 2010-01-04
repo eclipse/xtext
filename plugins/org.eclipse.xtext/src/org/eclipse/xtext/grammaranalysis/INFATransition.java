@@ -11,7 +11,7 @@ package org.eclipse.xtext.grammaranalysis;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-@SuppressWarnings("unchecked")
+@SuppressWarnings("rawtypes")
 public interface INFATransition<S extends INFAState, T extends INFATransition> {
 	public int getPrecedence();
 

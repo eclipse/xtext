@@ -119,7 +119,6 @@ public class EmfFormatter {
 		buf.append("null");
 	}
 
-	@SuppressWarnings("unchecked")
 	private static void refToStr(EObject obj, EReference ref, String indent, Appendable buf) throws Exception {
 		Object o = obj.eGet(ref);
 		if (o instanceof EObject) {
@@ -136,7 +135,7 @@ public class EmfFormatter {
 			buf.append("[");
 			int counter = 0;
 			Collection<?> coll = (Collection<?>) o;
-			for (Iterator i = coll.iterator(); i.hasNext();) {
+			for (Iterator<?> i = coll.iterator(); i.hasNext();) {
 				Object item = i.next();
 				if (counter == 0)
 					buf.append('\n');

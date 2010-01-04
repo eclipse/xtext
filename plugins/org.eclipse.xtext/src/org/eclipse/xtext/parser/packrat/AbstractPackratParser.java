@@ -56,7 +56,6 @@ import org.eclipse.xtext.parser.packrat.tokens.ParsedToken;
  */
 public abstract class AbstractPackratParser extends AbstractParser<CharSequence> implements
 	IPackratParser,
-	IMarkerFactory,
 	IMarkerClient,
 	ICharSequenceWithOffset,
 	IParsedTokenAcceptor,
