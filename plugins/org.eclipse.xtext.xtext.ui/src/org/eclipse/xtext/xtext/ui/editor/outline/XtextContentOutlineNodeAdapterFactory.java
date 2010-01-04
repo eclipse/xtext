@@ -17,11 +17,11 @@ import org.eclipse.xtext.ui.common.editor.outline.actions.DefaultContentOutlineN
  */
 public class XtextContentOutlineNodeAdapterFactory extends DefaultContentOutlineNodeAdapterFactory {
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	private static final Class[] types = { ParserRule.class, Grammar.class };
 
+	@SuppressWarnings("rawtypes")
 	@Override
-	@SuppressWarnings("unchecked")
 	public Class[] getAdapterList() {
 		return types;
 	}
