@@ -12,6 +12,7 @@ import java.util.Collection;
 import java.util.StringTokenizer;
 
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkingSet;
@@ -35,6 +36,7 @@ public class XtextProjectInfo implements IProjectInfo {
 	private IPath location;
 	private WizardContribution wizardContribution;
 	private Collection<EPackage> importedEPackages;
+	private EClass rootElementClass;
 	
 	public void setWizardContribution(WizardContribution wizardContribution) {
 		this.wizardContribution = wizardContribution;
@@ -163,5 +165,14 @@ public class XtextProjectInfo implements IProjectInfo {
 	public void setImportedEPackages(Collection<EPackage> importedEPackages) {
 		this.importedEPackages = importedEPackages;
 	}
+
+	public EClass getRootElementClass() {
+		return rootElementClass;
+	}
+
+	public void setRootElementClass(EClass rootElementClass) {
+		this.rootElementClass = rootElementClass;
+	}
+
 
 }

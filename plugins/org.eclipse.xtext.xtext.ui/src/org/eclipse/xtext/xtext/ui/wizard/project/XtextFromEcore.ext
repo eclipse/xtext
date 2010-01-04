@@ -5,6 +5,9 @@ Collection[EPackage] allReferencedEPackages(EPackage this) :
 		.union(EClassifiers.typeSelect(EClass).EStructuralFeatures.EType.EPackage)
 		.union(EClassifiers.typeSelect(EClass).ESuperTypes.EPackage)
 		.flatten().toSet();
+
+Collection[EClassifier] allReferencedClassifiers(EPackage this) :
+	EClassifiers.union(EClassifiers.typeSelect(EClass).EAllAttributes.EType.flatten()).toSet();
 	
 fqn(EClassifier this):
 	EPackage.alias() + "::" + name;
@@ -24,44 +27,47 @@ cached onlyOptionalFeatures(EClass this) :
 assignedRuleCall(EAttribute this):
 	if ((EClass) eContainer()).idAttribute() == this && EType.isString() then
 		 'ID' 
-	else if(EType.isEcoreType()) then 
-		switch (EAttributeType.name) {
-			case 'EBoolean': "'"+name+"'"	
-			case 'EBooleanObject': "'"+name+"'"
-			case 'EByte': 'INT'
-			// case 'EByteArray': ??
-			case 'EByteObject': 'INT'
-			case 'EChar': 'INT'
-			case 'ECharObject': 'INT'
-			// case 'EDate': ??
-			// case 'EDiagnosticChain': ??
-			// case 'EDouble': 'INT'        // TODO: allow floating point numbers
-			// case 'EDoubleObject': 'INT'  // TODO: allow floating point numbers
-			// case 'EEnumerator': ??
-			// case 'EList': ??
-			// case 'EFeatureMap': ??
-			// case 'EFeatureMapEntry': ??
-			// case 'EFloat': 'INT'         // TODO: allow floating point numbers
-			// case 'EFloatObject': 'INT'   // TODO: allow floating point numbers				
-			case 'EInt': 'INT'
-			case 'EIntegerObject': 'INT'
-			// case 'EJavaClass' : ??
-			// case 'EJavaObject' : ??
-			case 'ELong': 'INT'
-			case 'ELongObject': 'INT'
-			// case 'EMap': ??
-			// case 'EResource': ??
-			// case 'EResourceSet': ??
-			case 'EShort': 'INT'
-			case 'EShortObject': 'INT'
-			case 'EString': 'STRING'
-			// case 'ETreeIterator': ??
-			default:
-				'ID /* EDataType ' + EAttributeType.name + ' NOT SUPPORTED */'
-		}
+	else if(EType.isEcoreType()
+		 	&& {'EBoolean' , 'EBooleanObject'}.contains(EAttributeType.name) 
+		 	&& !many) 
+		then 
+		 	"'"+name+"'" 
 		else
-			// new datatype rule
 		 	EType.name;
+		 	
+String dataTypeRuleBody(EDataType this) :
+	switch (name) {
+		case 'EBigDecimal': "INT? '.' INT" 
+		case 'EBigInteger': intRuleBody()
+		case 'EBoolean': booleanRuleBody()
+		case 'EBooleanObject': booleanRuleBody()
+		case 'EByte': intRuleBody()
+		// case 'EByteArray': ??
+		case 'EByteObject': intRuleBody()
+		case 'EChar': intRuleBody()
+		case 'ECharObject': intRuleBody()
+		case 'EDouble': decimalRuleBody()
+		case 'EDoubleObject': decimalRuleBody()
+		case 'EFloat': decimalRuleBody()
+		case 'EFloatObject': decimalRuleBody()				
+		case 'EInt': intRuleBody()
+		case 'EIntegerObject': intRuleBody()
+		case 'ELong': intRuleBody()
+		case 'ELongObject': intRuleBody()
+		case 'EShort': intRuleBody()
+		case 'EShortObject': intRuleBody()
+		case 'EString': 'STRING | ID'
+		default: "'" + name + "' /* TODO: implement this rule and an appropriate IValueConverter */"
+	};
+	
+intRuleBody() :
+	"'-'? INT";
+	
+decimalRuleBody() :
+	"'-'? INT? '.' INT (('E'|'e') '-'? INT)?";
+	
+booleanRuleBody() :
+	"'true' | 'false'";
 	
 assignmentKeyword(EStructuralFeature this) :
 	EType.isBoolean() ? "" : "'" + name + "' ";  
@@ -74,7 +80,7 @@ isXtextKeyword(String this) :
 	  'returns', 'generate', 'terminal', 'with', 'hidden', 'enum', 'grammar', 
 	  'import', 'as', 'current'
 	}.contains(this);
-		
+	
 idAttribute(EClass this) :
 	idAttributeInternal() != null ? idAttributeInternal() : EAllAttributes.selectFirst(a|a.needsAssignment() && a.name == 'name' && a.EType.name=="EString");
 
