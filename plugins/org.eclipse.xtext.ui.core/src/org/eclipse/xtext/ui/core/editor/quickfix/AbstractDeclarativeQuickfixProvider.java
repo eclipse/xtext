@@ -66,6 +66,10 @@ public class AbstractDeclarativeQuickfixProvider implements IssueResolutionProvi
 					public String getDescription() {
 						return annotation.description();
 					}
+					
+					public String getImage() {
+						return annotation.image();
+					}
 				};
 			}
 		});
