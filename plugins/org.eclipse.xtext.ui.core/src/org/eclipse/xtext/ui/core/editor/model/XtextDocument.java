@@ -9,6 +9,9 @@
 package org.eclipse.xtext.ui.core.editor.model;
 
 import java.io.IOException;
+import java.util.concurrent.locks.Lock;
+import java.util.concurrent.locks.ReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
@@ -20,7 +23,10 @@ import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.text.BadLocationException;
+import org.eclipse.jface.text.BadPositionCategoryException;
 import org.eclipse.jface.text.Document;
+import org.eclipse.jface.text.Position;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.xtext.resource.EObjectHandleImpl;
 import org.eclipse.xtext.resource.XtextResource;
@@ -37,7 +43,7 @@ import com.google.inject.Inject;
 public class XtextDocument extends Document implements IXtextDocument {
 
 	private XtextResource resource = null;
-	
+
 	private final ListenerList modelListeners = new ListenerList(ListenerList.IDENTITY);
 
 	private final ListenerList xtextDocumentObservers = new ListenerList(ListenerList.IDENTITY);
@@ -205,6 +211,75 @@ public class XtextDocument extends Document implements IXtextDocument {
 
 	public <T extends EObject> IEObjectHandle<T> createHandle(T obj) {
 		return new EObjectHandleImpl<T>(obj, this);
+	}
+
+	/*
+	 * fix for https://bugs.eclipse.org/bugs/show_bug.cgi?id=297946
+	 */
+	private ReadWriteLock positionsLock = new ReentrantReadWriteLock();
+	private Lock positionsReadLock = positionsLock.readLock();
+	private Lock positionsWriteLock = positionsLock.writeLock();
+
+	@Override
+	public Position[] getPositions(String category, int offset, int length, boolean canStartBefore, boolean canEndAfter)
+			throws BadPositionCategoryException {
+		positionsReadLock.lock();
+		try {
+			return super.getPositions(category, offset, length, canStartBefore, canEndAfter);
+		} finally {
+			positionsReadLock.unlock();
+		}
+	}
+
+	@Override
+	public Position[] getPositions(String category) throws BadPositionCategoryException {
+		positionsReadLock.lock();
+		try {
+			return super.getPositions(category);
+		} finally {
+			positionsReadLock.unlock();
+		}
+	}
+
+	@Override
+	public void addPosition(Position position) throws BadLocationException {
+		positionsWriteLock.lock();
+		try {
+			super.addPosition(position);
+		} finally {
+			positionsWriteLock.unlock();
+		}
+	}
+
+	@Override
+	public void addPosition(String category, Position position) throws BadLocationException,
+			BadPositionCategoryException {
+		positionsWriteLock.lock();
+		try {
+			super.addPosition(category, position);
+		} finally {
+			positionsWriteLock.unlock();
+		}
+	}
+
+	@Override
+	public void removePosition(Position position) {
+		positionsWriteLock.lock();
+		try {
+			super.removePosition(position);
+		} finally {
+			positionsWriteLock.unlock();
+		}
+	}
+
+	@Override
+	public void removePosition(String category, Position position) throws BadPositionCategoryException {
+		positionsWriteLock.lock();
+		try {
+			super.removePosition(category, position);
+		} finally {
+			positionsWriteLock.unlock();
+		}
 	}
 
 }
