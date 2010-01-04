@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<templates>
+	<template name="empty Statemachine" description="template for an empty Statemachine"
+		id="org.eclipse.xtext.example.fowlerdsl.ui.templates.events"
+		context="org.eclipse.xtext.example.FowlerDsl.kw_events"
+		enabled="true">events
+  startEvent START1
+  stopEvent  STOP2
+  ${cursor} 
+end  
+
+commands  
+end  
+      
+state start
+	startEvent => start
+end  
+     
+state stop  
+	stopEvent  => stop
+end  
+	</template>
+
+	<template name="state" description="state definition"
+		id="org.eclipse.xtext.example.fowlerdsl.ui.templates.state"
+		context="org.eclipse.xtext.example.FowlerDsl.State"
+		enabled="true">state ${name}
+  ${cursor}
+end</template>
+	 
+	<template name="transition" description="event transition"
+		id="org.eclipse.xtext.example.fowlerdsl.ui.templates.transition"
+		context="org.eclipse.xtext.example.FowlerDsl.Transition"
+		enabled="true">
+		${event:CrossReference('Transition.event')} => ${state:CrossReference('Transition.state')}
+	</template>
+	
+	<template name="event" description="event definition"
+		id="org.eclipse.xtext.example.fowlerdsl.ui.templates.event"
+		context="org.eclipse.xtext.example.FowlerDsl.Event"
+		enabled="true">${event} ${shortCode}</template>
+	
+	<template name="command" description="command definition"
+		id="org.eclipse.xtext.example.fowlerdsl.ui.templates.command"
+		context="org.eclipse.xtext.example.FowlerDsl.Command"
+		enabled="true">${command} ${shortCode}</template>
+	
+	<template name="actions" description="action definition"
+		id="org.eclipse.xtext.example.fowlerdsl.ui.templates.actions"
+		context="org.eclipse.xtext.example.FowlerDsl.kw_actions"
+		enabled="true">actions {${action:CrossReference('State.actions')} ${cursor}}</template>
+	
+</templates>
