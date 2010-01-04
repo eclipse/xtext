@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtend.XtendFacade;
 import org.eclipse.xtend.expression.ExecutionContextImpl;
-import org.eclipse.xtend.typesystem.emf.EmfRegistryMetaModel;
+import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ISetup;
@@ -369,7 +369,8 @@ public abstract class AbstractXtextTests extends TestCase {
 
 	protected XtendFacade getXtendFacade() {
 		ExecutionContextImpl ctx = new ExecutionContextImpl();
-		ctx.registerMetaModel(new EmfRegistryMetaModel());
+//		ctx.registerMetaModel(new EmfRegistryMetaModel());
+		ctx.registerMetaModel(new JavaBeansMetaModel());
 		return XtendFacade.create(ctx);
 	}
 
