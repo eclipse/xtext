@@ -16,7 +16,7 @@ import org.eclipse.xtext.validation.IssueContext;
 
 public class DomainmodelQuickfixProvider extends AbstractDeclarativeQuickfixProvider {
 
-	@Fix(code = DomainmodelJavaValidator.INVALID_TYPE_NAME, label = "Capitalize name", description = "Capitalize name of type")
+	@Fix(code = DomainmodelJavaValidator.INVALID_TYPE_NAME, image = "upcase.png", label = "Capitalize name", description = "Capitalize name of type")
 	public void fixName(Type type, IssueContext issue) {
 		type.setName(type.getName().toUpperCase());
 	}
