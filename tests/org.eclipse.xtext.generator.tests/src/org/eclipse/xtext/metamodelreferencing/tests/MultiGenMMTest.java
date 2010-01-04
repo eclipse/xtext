@@ -24,8 +24,8 @@ public class MultiGenMMTest extends AbstractGeneratorTest {
 
     public void testStuff() throws Exception {
         EObject parse = getModel("foo 'bar'");
-        assertWithXtend("'simpleTest::Foo'", "metaType.name", parse);
-        assertWithXtend("'otherTest::FooBar'", "nameRefs.first().metaType.name", parse);
+        assertWithXtend("'org::eclipse::xtext::metamodelreferencing::tests::simpleTest::impl::FooImpl'", "metaType.name", parse);
+        assertWithXtend("'org::eclipse::xtext::metamodelreferencing::tests::otherTest::impl::FooBarImpl'", "nameRefs.first().metaType.name", parse);
     }
 
 }

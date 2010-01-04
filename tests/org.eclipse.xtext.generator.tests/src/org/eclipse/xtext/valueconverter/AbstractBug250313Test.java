@@ -386,8 +386,8 @@ public abstract class AbstractBug250313Test extends AbstractGeneratorTest {
 	public void testChild1_01() throws Exception {
 		// tests only, if crossrefs in alternatives work
 		EObject model = getModel("content str ref 'str'");
-		assertWithXtend("bug250313::Child1", "this.ref.metaType", model);
-		assertWithXtend("bug250313::Child1", "this.children.metaType", model);
+		assertWithXtend("org::eclipse::xtext::valueconverter::bug250313::impl::Child1Impl", "this.ref.metaType", model);
+		assertWithXtend("org::eclipse::xtext::valueconverter::bug250313::impl::Child1Impl", "this.children.metaType", model);
 		assertWithXtend("'str'", "this.ref.name", model);
 		assertEquals(lexerRule, 2, convertCallCount);
 	}
@@ -395,8 +395,8 @@ public abstract class AbstractBug250313Test extends AbstractGeneratorTest {
 	public void testChild2_01() throws Exception {
 		// tests only, if crossrefs in alternatives work
 		EObject model = getModel("content 'str' ref str");
-		assertWithXtend("bug250313::Child2", "this.ref.metaType", model);
-		assertWithXtend("bug250313::Child2", "this.children.metaType", model);
+		assertWithXtend("org::eclipse::xtext::valueconverter::bug250313::impl::Child2Impl", "this.ref.metaType", model);
+		assertWithXtend("org::eclipse::xtext::valueconverter::bug250313::impl::Child2Impl", "this.children.metaType", model);
 		assertWithXtend("'str'", "this.ref.name", model);
 		assertEquals(lexerRule, 2, convertCallCount);
 	}
