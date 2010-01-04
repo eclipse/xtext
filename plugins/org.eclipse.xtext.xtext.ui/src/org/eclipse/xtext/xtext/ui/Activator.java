@@ -8,7 +8,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui;
 
+import org.eclipse.core.runtime.NullProgressMonitor;
+import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jface.resource.ImageDescriptor;
+import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
 
 /**
@@ -32,6 +35,18 @@ public class Activator extends org.eclipse.xtext.xtext.ui.internal.Activator {
 	public void start(BundleContext context) throws Exception {
 		super.start(context);
 		setDefault(this);
+		// make sure classpath entries are being resolved
+		initJavaCore(context);
+	}
+
+	protected void initJavaCore(BundleContext context) throws Exception {
+		String javaCorePlugin = JavaCore.PLUGIN_ID;
+		for (Bundle bundle : context.getBundles()) {
+			if (javaCorePlugin.equals(bundle.getSymbolicName())) {
+				JavaCore.initializeAfterLoad(new NullProgressMonitor());
+				return;
+			}
+		}
 	}
 
 	@Override
@@ -52,12 +67,12 @@ public class Activator extends org.eclipse.xtext.xtext.ui.internal.Activator {
 	private static void setDefault(Activator activator) {
 		plugin = activator;
 	}
-	
+
 	/**
-	 * Returns an image descriptor for the image file at the given
-	 * plug-in relative path
-	 *
-	 * @param path the path
+	 * Returns an image descriptor for the image file at the given plug-in relative path
+	 * 
+	 * @param path
+	 *            the path
 	 * @return the image descriptor
 	 */
 	public static ImageDescriptor getImageDescriptor(String path) {
