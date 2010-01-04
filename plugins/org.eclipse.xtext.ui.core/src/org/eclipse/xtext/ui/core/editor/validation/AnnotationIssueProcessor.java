@@ -121,7 +121,7 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 			if (monitor.isCanceled()) {
 				return annotationToPosition;
 			}
-			if (issue.getOffset() != -1 && issue.getLength() != -1 && issue.getMessage() != null) {
+			if (isSet(issue.getOffset()) && isSet(issue.getLength()) && issue.getMessage() != null) {
 				String type = lookup.getAnnotationType(EValidator.MARKER, getMarkerSeverity(issue.getSeverity()));
 				Annotation annotation = new XtextAnnotation(type, false, xtextDocument, issue);
 				Position position = new Position(issue.getOffset(), issue.getLength());
@@ -130,6 +130,10 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 			}
 		}
 		return annotationToPosition;
+	}
+
+	private boolean isSet(Integer length) {
+		return length!=null && length!=-1;
 	}
 
 	private int getMarkerSeverity(Severity severity) {
