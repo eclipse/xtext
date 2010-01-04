@@ -239,9 +239,37 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
+))?(	'*' 
+    {
+        createLeafNode(grammarAccess.getModelAccess().getAsteriskKeyword_4_0(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getDoubleDoubleParserRuleCall_4_1_0(), currentNode); 
+	    }
+		lv_double_8_0=ruleDouble		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"double",
+	        		lv_double_8_0, 
+	        		"Double", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
 ))?	';' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getSemicolonKeyword_4(), null); 
+        createLeafNode(grammarAccess.getModelAccess().getSemicolonKeyword_5(), null); 
     }
 )
 ;
@@ -472,6 +500,74 @@ ruleDots returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()]
         createLeafNode(grammarAccess.getDotsAccess().getFullStopFullStopKeyword_1(), null); 
     }
 )
+    ;
+
+
+
+
+
+// Entry rule entryRuleDouble
+entryRuleDouble returns [String current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getDoubleRule(), currentNode); } 
+	 iv_ruleDouble=ruleDouble 
+	 { $current=$iv_ruleDouble.current.getText(); }  
+	 EOF 
+;
+
+// Rule Double
+ruleDouble returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
+    @init { setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+	    lastConsumedNode = currentNode;
+    }:
+((
+	kw='-' 
+    {
+        $current.merge(kw);
+        createLeafNode(grammarAccess.getDoubleAccess().getHyphenMinusKeyword_0(), null); 
+    }
+)?(    this_INT_1=RULE_INT    {
+		$current.merge(this_INT_1);
+    }
+
+    { 
+    createLeafNode(grammarAccess.getDoubleAccess().getINTTerminalRuleCall_1(), null); 
+    }
+)?
+	kw='.' 
+    {
+        $current.merge(kw);
+        createLeafNode(grammarAccess.getDoubleAccess().getFullStopKeyword_2(), null); 
+    }
+    this_INT_3=RULE_INT    {
+		$current.merge(this_INT_3);
+    }
+
+    { 
+    createLeafNode(grammarAccess.getDoubleAccess().getINTTerminalRuleCall_3(), null); 
+    }
+(
+	kw='E' 
+    {
+        $current.merge(kw);
+        createLeafNode(grammarAccess.getDoubleAccess().getEKeyword_4_0(), null); 
+    }
+(
+	kw='-' 
+    {
+        $current.merge(kw);
+        createLeafNode(grammarAccess.getDoubleAccess().getHyphenMinusKeyword_4_1(), null); 
+    }
+)?    this_INT_6=RULE_INT    {
+		$current.merge(this_INT_6);
+    }
+
+    { 
+    createLeafNode(grammarAccess.getDoubleAccess().getINTTerminalRuleCall_4_2(), null); 
+    }
+)?)
     ;
 
 

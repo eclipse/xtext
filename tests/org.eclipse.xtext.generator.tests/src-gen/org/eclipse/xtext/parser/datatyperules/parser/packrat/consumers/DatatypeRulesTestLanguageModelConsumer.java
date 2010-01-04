@@ -26,6 +26,8 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 
 	private INonTerminalConsumer dotsConsumer;
 
+	private INonTerminalConsumer doubleConsumer;
+
 	private INonTerminalConsumer fractionConsumer;
 
 	private INonTerminalConsumer nestedModelIdConsumer;
@@ -62,7 +64,15 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 
 	private IElementConsumer ruleCall$15$Consumer;
 
-	private IElementConsumer keyword$16$Consumer;
+	private IElementConsumer group$16$Consumer;
+
+	private IElementConsumer keyword$17$Consumer;
+
+	private IElementConsumer assignment$18$Consumer;
+
+	private IElementConsumer ruleCall$19$Consumer;
+
+	private IElementConsumer keyword$20$Consumer;
 
 	private ICharacterClass keyword$5$Delimiter;
 
@@ -70,7 +80,9 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 
 	private ICharacterClass keyword$13$Delimiter;
 
-	private ICharacterClass keyword$16$Delimiter;
+	private ICharacterClass keyword$17$Delimiter;
+
+	private ICharacterClass keyword$20$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -84,7 +96,8 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 			acceptor.accept(group$4$Consumer);
 			acceptor.accept(group$8$Consumer);
 			acceptor.accept(group$12$Consumer);
-			acceptor.accept(keyword$16$Consumer);
+			acceptor.accept(group$16$Consumer);
+			acceptor.accept(keyword$20$Consumer);
 		}
 	}
 
@@ -259,15 +272,64 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		}
 	}
 
-	protected class Keyword$16$Consumer extends ElementConsumer<Keyword> {
+	protected class Group$16$Consumer extends OptionalGroupConsumer {
 		
-		protected Keyword$16$Consumer(final Keyword keyword) {
+		protected Group$16$Consumer(final Group group) {
+			super(group);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(keyword$17$Consumer);
+			acceptor.accept(assignment$18$Consumer);
+		}
+	}
+
+	protected class Keyword$17$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$17$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$16$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$17$Delimiter(), optional);
+		}
+	}
+
+	protected class Assignment$18$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$18$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$19$Consumer;
+		}
+	}
+
+	protected class RuleCall$19$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$19$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(doubleConsumer, "double", false, true, false, getElement(), optional);
+		}
+	}
+
+	protected class Keyword$20$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$20$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$20$Delimiter(), optional);
 		}
 	}
 
@@ -276,7 +338,8 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$13$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$16$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$17$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$20$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
@@ -306,7 +369,11 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		keyword$13$Consumer = new Keyword$13$Consumer(rule.getPlusSignKeyword_3_0());
 		assignment$14$Consumer = new Assignment$14$Consumer(rule.getDotsAssignment_3_1());
 		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.getDotsDotsParserRuleCall_3_1_0());
-		keyword$16$Consumer = new Keyword$16$Consumer(rule.getSemicolonKeyword_4());
+		group$16$Consumer = new Group$16$Consumer(rule.getGroup_4());
+		keyword$17$Consumer = new Keyword$17$Consumer(rule.getAsteriskKeyword_4_0());
+		assignment$18$Consumer = new Assignment$18$Consumer(rule.getDoubleAssignment_4_1());
+		ruleCall$19$Consumer = new RuleCall$19$Consumer(rule.getDoubleDoubleParserRuleCall_4_1_0());
+		keyword$20$Consumer = new Keyword$20$Consumer(rule.getSemicolonKeyword_5());
 	}
 	
 	@Override
@@ -321,6 +388,10 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 	
 	public void setDotsConsumer(INonTerminalConsumer dotsConsumer) {
 		this.dotsConsumer = dotsConsumer;
+	}
+	
+	public void setDoubleConsumer(INonTerminalConsumer doubleConsumer) {
+		this.doubleConsumer = doubleConsumer;
 	}
 	
 	public void setFractionConsumer(INonTerminalConsumer fractionConsumer) {
@@ -359,12 +430,20 @@ public final class DatatypeRulesTestLanguageModelConsumer extends NonTerminalCon
 		keyword$13$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$16$Delimiter() {
-		return keyword$16$Delimiter;
+	public ICharacterClass getKeyword$17$Delimiter() {
+		return keyword$17$Delimiter;
 	}
 	
-	public void setKeyword$16$Delimiter(ICharacterClass characterClass) {
-		keyword$16$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setKeyword$17$Delimiter(ICharacterClass characterClass) {
+		keyword$17$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$20$Delimiter() {
+		return keyword$20$Delimiter;
+	}
+	
+	public void setKeyword$20$Delimiter(ICharacterClass characterClass) {
+		keyword$20$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

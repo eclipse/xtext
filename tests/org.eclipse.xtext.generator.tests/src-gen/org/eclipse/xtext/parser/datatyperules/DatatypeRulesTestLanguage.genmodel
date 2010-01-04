@@ -17,6 +17,7 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DatatypeRulesTestLanguage.ecore#//Model/value"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DatatypeRulesTestLanguage.ecore#//Model/vector"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DatatypeRulesTestLanguage.ecore#//Model/dots"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DatatypeRulesTestLanguage.ecore#//Model/double"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

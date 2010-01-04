@@ -134,13 +134,22 @@ public interface DatatypeRulesTestLanguagePackage extends EPackage
   int MODEL__DOTS = 3;
 
   /**
+   * The feature id for the '<em><b>Double</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__DOUBLE = 4;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 4;
+  int MODEL_FEATURE_COUNT = 5;
 
 
   /**
@@ -217,6 +226,17 @@ public interface DatatypeRulesTestLanguagePackage extends EPackage
    * @generated
    */
   EAttribute getModel_Dots();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.Model#getDouble <em>Double</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Double</em>'.
+   * @see org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.Model#getDouble()
+   * @see #getModel()
+   * @generated
+   */
+  EAttribute getModel_Double();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -300,6 +320,14 @@ public interface DatatypeRulesTestLanguagePackage extends EPackage
      * @generated
      */
     EAttribute MODEL__DOTS = eINSTANCE.getModel_Dots();
+
+    /**
+     * The meta object literal for the '<em><b>Double</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MODEL__DOUBLE = eINSTANCE.getModel_Double();
 
   }
 

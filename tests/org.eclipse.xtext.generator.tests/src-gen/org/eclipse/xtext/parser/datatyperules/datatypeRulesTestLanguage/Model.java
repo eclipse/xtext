@@ -21,6 +21,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.Model#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.Model#getVector <em>Vector</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.Model#getDots <em>Dots</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.Model#getDouble <em>Double</em>}</li>
  * </ul>
  * </p>
  *
@@ -133,5 +134,31 @@ public interface Model extends EObject
    * @generated
    */
   void setDots(String value);
+
+  /**
+   * Returns the value of the '<em><b>Double</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Double</em>' attribute isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Double</em>' attribute.
+   * @see #setDouble(double)
+   * @see org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.DatatypeRulesTestLanguagePackage#getModel_Double()
+   * @model
+   * @generated
+   */
+  double getDouble();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.parser.datatyperules.datatypeRulesTestLanguage.Model#getDouble <em>Double</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Double</em>' attribute.
+   * @see #getDouble()
+   * @generated
+   */
+  void setDouble(double value);
 
 } // Model

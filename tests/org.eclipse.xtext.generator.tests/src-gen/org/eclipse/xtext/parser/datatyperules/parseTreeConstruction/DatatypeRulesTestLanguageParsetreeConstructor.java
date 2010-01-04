@@ -107,11 +107,13 @@ protected class CompositeModel_ModelAssignment extends AssignmentToken  {
 /************ begin Rule Model ****************
  *
  * Model:
- *   id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ";";
+ *   id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ("*" double
+ *   =Double)? ";";
  *
  **/
 
-// id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ";"
+// id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ("*" double
+// =Double)? ";"
 protected class Model_Group extends GroupToken {
 	
 	public Model_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -126,7 +128,7 @@ protected class Model_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Model_SemicolonKeyword_4(parent, this, 0, inst);
+			case 0: return new Model_SemicolonKeyword_5(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -411,16 +413,38 @@ protected class Model_DotsAssignment_3_1 extends AssignmentToken  {
 }
 
 
-// ";"
-protected class Model_SemicolonKeyword_4 extends KeywordToken  {
+// ("*" double=Double)?
+protected class Model_Group_4 extends GroupToken {
 	
-	public Model_SemicolonKeyword_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Model_Group_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getModelAccess().getGroup_4();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Model_DoubleAssignment_4_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "*"
+protected class Model_AsteriskKeyword_4_0 extends KeywordToken  {
+	
+	public Model_AsteriskKeyword_4_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getModelAccess().getSemicolonKeyword_4();
+		return grammarAccess.getModelAccess().getAsteriskKeyword_4_0();
 	}
 
     @Override
@@ -436,8 +460,70 @@ protected class Model_SemicolonKeyword_4 extends KeywordToken  {
 		
 }
 
+// double=Double
+protected class Model_DoubleAssignment_4_1 extends AssignmentToken  {
+	
+	public Model_DoubleAssignment_4_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getDoubleAssignment_4_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Model_AsteriskKeyword_4_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("double",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("double");
+		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
+			type = AssignmentType.DRC;
+			element = grammarAccess.getModelAccess().getDoubleDoubleParserRuleCall_4_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// ";"
+protected class Model_SemicolonKeyword_5 extends KeywordToken  {
+	
+	public Model_SemicolonKeyword_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getModelAccess().getSemicolonKeyword_5();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Model_Group_4(parent, this, 0, inst);
+			case 1: return new Model_Group_3(parent, this, 1, inst);
+			case 2: return new Model_Group_2(parent, this, 2, inst);
+			case 3: return new Model_Group_1(parent, this, 3, inst);
+			case 4: return new Model_IdAssignment_0(parent, this, 4, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
 
 /************ end Rule Model ****************/
+
 
 
 

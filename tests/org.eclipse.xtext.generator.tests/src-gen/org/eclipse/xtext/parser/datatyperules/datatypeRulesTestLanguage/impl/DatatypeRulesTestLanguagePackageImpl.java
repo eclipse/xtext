@@ -177,6 +177,16 @@ public class DatatypeRulesTestLanguagePackageImpl extends EPackageImpl implement
    * <!-- end-user-doc -->
    * @generated
    */
+  public EAttribute getModel_Double()
+  {
+    return (EAttribute)modelEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public DatatypeRulesTestLanguageFactory getDatatypeRulesTestLanguageFactory()
   {
     return (DatatypeRulesTestLanguageFactory)getEFactoryInstance();
@@ -210,6 +220,7 @@ public class DatatypeRulesTestLanguagePackageImpl extends EPackageImpl implement
     createEAttribute(modelEClass, MODEL__VALUE);
     createEAttribute(modelEClass, MODEL__VECTOR);
     createEAttribute(modelEClass, MODEL__DOTS);
+    createEAttribute(modelEClass, MODEL__DOUBLE);
   }
 
   /**
@@ -251,6 +262,7 @@ public class DatatypeRulesTestLanguagePackageImpl extends EPackageImpl implement
     initEAttribute(getModel_Value(), ecorePackage.getEBigDecimal(), "value", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getModel_Vector(), ecorePackage.getEString(), "vector", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getModel_Dots(), ecorePackage.getEString(), "dots", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getModel_Double(), ecorePackage.getEDouble(), "double", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

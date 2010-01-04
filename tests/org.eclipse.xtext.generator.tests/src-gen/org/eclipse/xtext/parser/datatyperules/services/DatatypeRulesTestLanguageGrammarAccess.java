@@ -50,13 +50,19 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		private final Keyword cPlusSignKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
 		private final Assignment cDotsAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
 		private final RuleCall cDotsDotsParserRuleCall_3_1_0 = (RuleCall)cDotsAssignment_3_1.eContents().get(0);
-		private final Keyword cSemicolonKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cAsteriskKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Assignment cDoubleAssignment_4_1 = (Assignment)cGroup_4.eContents().get(1);
+		private final RuleCall cDoubleDoubleParserRuleCall_4_1_0 = (RuleCall)cDoubleAssignment_4_1.eContents().get(0);
+		private final Keyword cSemicolonKeyword_5 = (Keyword)cGroup.eContents().get(5);
 		
 		//Model:
-		//  id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ";";
+		//  id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ("*" double
+		//  =Double)? ";";
 		public ParserRule getRule() { return rule; }
 
-		//id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ";"
+		//id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ("*" double
+		//=Double)? ";"
 		public Group getGroup() { return cGroup; }
 
 		//id=NestedModelId
@@ -101,8 +107,20 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//Dots
 		public RuleCall getDotsDotsParserRuleCall_3_1_0() { return cDotsDotsParserRuleCall_3_1_0; }
 
+		//("*" double=Double)?
+		public Group getGroup_4() { return cGroup_4; }
+
+		//"*"
+		public Keyword getAsteriskKeyword_4_0() { return cAsteriskKeyword_4_0; }
+
+		//double=Double
+		public Assignment getDoubleAssignment_4_1() { return cDoubleAssignment_4_1; }
+
+		//Double
+		public RuleCall getDoubleDoubleParserRuleCall_4_1_0() { return cDoubleDoubleParserRuleCall_4_1_0; }
+
 		//";"
-		public Keyword getSemicolonKeyword_4() { return cSemicolonKeyword_4; }
+		public Keyword getSemicolonKeyword_5() { return cSemicolonKeyword_5; }
 	}
 
 	public class ModelIdElements extends AbstractParserRuleElementFinder {
@@ -236,6 +254,50 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 		//".."
 		public Keyword getFullStopFullStopKeyword_1() { return cFullStopFullStopKeyword_1; }
 	}
+
+	public class DoubleElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Double");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cHyphenMinusKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final RuleCall cINTTerminalRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
+		private final Keyword cFullStopKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final RuleCall cINTTerminalRuleCall_3 = (RuleCall)cGroup.eContents().get(3);
+		private final Group cGroup_4 = (Group)cGroup.eContents().get(4);
+		private final Keyword cEKeyword_4_0 = (Keyword)cGroup_4.eContents().get(0);
+		private final Keyword cHyphenMinusKeyword_4_1 = (Keyword)cGroup_4.eContents().get(1);
+		private final RuleCall cINTTerminalRuleCall_4_2 = (RuleCall)cGroup_4.eContents().get(2);
+		
+		//Double returns ecore::EDouble:
+		//  "-"? INT? "." INT ("E" "-"? INT)?;
+		public ParserRule getRule() { return rule; }
+
+		//"-"? INT? "." INT ("E" "-"? INT)?
+		public Group getGroup() { return cGroup; }
+
+		//"-"?
+		public Keyword getHyphenMinusKeyword_0() { return cHyphenMinusKeyword_0; }
+
+		//INT?
+		public RuleCall getINTTerminalRuleCall_1() { return cINTTerminalRuleCall_1; }
+
+		//"."
+		public Keyword getFullStopKeyword_2() { return cFullStopKeyword_2; }
+
+		//INT
+		public RuleCall getINTTerminalRuleCall_3() { return cINTTerminalRuleCall_3; }
+
+		//("E" "-"? INT)?
+		public Group getGroup_4() { return cGroup_4; }
+
+		//"E"
+		public Keyword getEKeyword_4_0() { return cEKeyword_4_0; }
+
+		//"-"?
+		public Keyword getHyphenMinusKeyword_4_1() { return cHyphenMinusKeyword_4_1; }
+
+		//INT
+		public RuleCall getINTTerminalRuleCall_4_2() { return cINTTerminalRuleCall_4_2; }
+	}
 	
 	
 	private CompositeModelElements pCompositeModel;
@@ -245,6 +307,7 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	private FractionElements pFraction;
 	private VectorElements pVector;
 	private DotsElements pDots;
+	private DoubleElements pDouble;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -278,7 +341,8 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	}
 
 	//Model:
-	//  id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ";";
+	//  id=NestedModelId (":" value=Fraction)? ("#" vector=Vector)? ("+" dots=Dots)? ("*" double
+	//  =Double)? ";";
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -335,6 +399,16 @@ public class DatatypeRulesTestLanguageGrammarAccess extends AbstractGrammarEleme
 	
 	public ParserRule getDotsRule() {
 		return getDotsAccess().getRule();
+	}
+
+	//Double returns ecore::EDouble:
+	//  "-"? INT? "." INT ("E" "-"? INT)?;
+	public DoubleElements getDoubleAccess() {
+		return (pDouble != null) ? pDouble : (pDouble = new DoubleElements());
+	}
+	
+	public ParserRule getDoubleRule() {
+		return getDoubleAccess().getRule();
 	}
 
 	//terminal ID:
