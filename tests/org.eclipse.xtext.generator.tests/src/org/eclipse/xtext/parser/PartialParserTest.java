@@ -198,15 +198,14 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
 	public void testNodeState() throws Exception {
 		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
 		String model = "(a\r\n+(b\r\n*c\r\n)+d\r\n)";
 		CompositeNode rootNode = getRootNode(model);
-		Iterator iter = rootNode.getLeafNodes().iterator();
+		Iterator<LeafNode> iter = rootNode.getLeafNodes().iterator();
 		boolean found = false;
 		while (iter.hasNext()) {
-			LeafNode leaf = (LeafNode) iter.next();
+			LeafNode leaf = iter.next();
 			if (leaf.getText().equals("c")) {
 				assertEquals("before", 3, leaf.getTotalLine());
 				assertEquals("before", 10, leaf.getTotalOffset());
@@ -219,7 +218,7 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		iter = rootNode.getLeafNodes().iterator();
 		found = false;
 		while (iter.hasNext()) {
-			LeafNode leaf = (LeafNode) iter.next();
+			LeafNode leaf = iter.next();
 			if (leaf.getText().equals("xy")) {
 				assertEquals("after", 3, leaf.getTotalLine());
 				assertEquals("after", 10, leaf.getTotalOffset());
