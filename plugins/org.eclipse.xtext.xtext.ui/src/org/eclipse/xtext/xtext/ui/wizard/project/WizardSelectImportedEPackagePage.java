@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.command.BasicCommandStack;
@@ -32,6 +33,7 @@ import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.window.Window;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.custom.CCombo;
 import org.eclipse.swt.events.SelectionAdapter;
 import org.eclipse.swt.events.SelectionEvent;
 import org.eclipse.swt.layout.GridData;
@@ -48,11 +50,15 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 
 	private EditingDomain editingDomain;
 
-	private java.util.Set<EPackage> ePackages = new HashSet<EPackage>();
+	private Set<EPackage> ePackages = new HashSet<EPackage>();
 
 	private IStructuredSelection selection;
 
 	private boolean isAutoImportReferencedEPackages;
+
+	private CCombo rootElementComboBoxCellEditor;
+
+	private List importedEPackagesListBox;
 
 	public WizardSelectImportedEPackagePage(String pageName, IStructuredSelection selection) {
 		super(pageName);
@@ -74,13 +80,13 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 
 	public void createControl(Composite parent) {
 		Composite composite = new Composite(parent, SWT.NONE);
-		composite.setLayout(new GridLayout(2, true));
+		composite.setLayout(new GridLayout(2, false));
 		Label label = new Label(composite, SWT.NONE);
 		label.setText(Messages.WizardSelectImportedEPackagePage_ListTitle);
 		label.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 2, 1));
-		final List list = new List(composite, SWT.MULTI);
-		initializeListFromSelection(list, selection);
-		list.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 2));
+		importedEPackagesListBox = new List(composite, SWT.MULTI);
+		initializeListFromSelection(selection);
+		importedEPackagesListBox.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 2));
 		Button addButton = new Button(composite, SWT.PUSH);
 		addButton.setText(Messages.WizardSelectImportedEPackagePage_AddButtonText);
 		addButton.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, false, false, 1, 1));
@@ -93,7 +99,7 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 				int result = loadResourceDialog.open();
 				if (result == Window.OK) {
 					for (URI uri : loadResourceDialog.getURIs()) {
-						addEPackages(list, uri);
+						addEPackages(uri);
 					}
 				}
 			}
@@ -104,14 +110,8 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		removeButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				for (String listSelection : list.getSelection()) {
-					for (Iterator<EPackage> i = ePackages.iterator(); i.hasNext();) {
-						EPackage ePackage = i.next();
-						if (ePackage.getNsURI().equals(listSelection)) {
-							i.remove();
-							list.remove(listSelection);
-						}
-					}
+				for (String listSelection : importedEPackagesListBox.getSelection()) {
+					removeEPackage(importedEPackagesListBox, listSelection);
 				}
 			}
 		});
@@ -125,12 +125,25 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 				isAutoImportReferencedEPackages = addReferencedEPackagesButton.getSelection();
 				if (isAutoImportReferencedEPackages) {
 					for (EPackage ePackage : ePackages) {
-						addEPackage(list, ePackage);
+						addEPackage(ePackage);
 					}
 				}
 			}
 		});
+		Label entryRuleLabel = new Label(composite, SWT.NONE);
+		entryRuleLabel.setText(Messages.WizardSelectImportedEPackagePage_entryRuleLabelText);
+		entryRuleLabel.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 2, 1));
+		rootElementComboBoxCellEditor = new CCombo(composite, SWT.DROP_DOWN);
+		rootElementComboBoxCellEditor.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, true, 1, 1));
+		rootElementComboBoxCellEditor.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				validatePage();
+			}
+		});
+		resetEClassesInUI();
 		setControl(composite);
+		validatePage();
 		Dialog.applyDialogFont(getControl());
 	}
 
@@ -138,59 +151,81 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		return ePackages;
 	}
 
-	protected boolean validatePage() {
-		return !ePackages.isEmpty();
-	}
-
-	private void addEPackages(final List list, URI uri) {
-		if ("http".equals(uri.scheme())) {
+	private void addEPackages(URI uri) {
+		if ("http".equals(uri.scheme())) { //$NON-NLS-1$
 			EPackage ePackage = EPackage.Registry.INSTANCE.getEPackage(uri.toString());
 			if (ePackage != null) {
-				addEPackage(list, ePackage);
+				addEPackage(ePackage);
 			}
 		} else {
 			Resource resource = getEditingDomain().getResourceSet().getResource(uri, true);
 			for (EPackage ePackage : ePackagesInResource(resource)) {
-				addEPackage(list, ePackage);
+				addEPackage(ePackage);
 			}
 		}
 	}
 
-	private void addEPackage(final List list, EPackage ePackage) {
-		addEPackageToList(list, ePackage);
+	private void addEPackage(EPackage ePackage) {
+		addEPackageToUI(ePackage);
 		if (isAutoImportReferencedEPackages) {
 			for (EClassifier classifier : ePackage.getEClassifiers()) {
 				if (classifier instanceof EClass) {
 					for (EStructuralFeature feature : ((EClass) classifier).getEAllStructuralFeatures()) {
 						EPackage featurePackage = feature.getEType().getEPackage();
-						addEPackageToList(list, featurePackage);
+						addEPackageToUI(featurePackage);
 					}
 					for (EClass superType : ((EClass) classifier).getESuperTypes()) {
 						EPackage superTypePackage = superType.getEPackage();
-						addEPackageToList(list, superTypePackage);
+						addEPackageToUI(superTypePackage);
 					}
 				}
 			}
 		}
 	}
 
-	private void addEPackageToList(final List list, EPackage ePackage) {
+	private void addEPackageToUI(EPackage ePackage) {
 		if (ePackage != null) {
 			boolean isAdded = ePackages.add(ePackage);
 			if (isAdded) {
-				list.add(ePackage.getNsURI().toString());
+				importedEPackagesListBox.add(ePackage.getNsURI().toString());
+				resetEClassesInUI();
 			}
+			validatePage();
 		}
 	}
 
+	private void resetEClassesInUI() {
+		java.util.List<String> classNames = new ArrayList<String>();
+		for (EPackage ePackage : ePackages) {
+			for (EClassifier eClassifier : ePackage.getEClassifiers()) {
+				if (eClassifier instanceof EClass) {
+					classNames.add(eClassifier.getName());
+				}
+			}
+		}
+		rootElementComboBoxCellEditor.deselectAll();
+		rootElementComboBoxCellEditor.setItems(classNames.toArray(new String[classNames.size()]));
+	}
+
+	private void removeEPackage(final List list, String uri) {
+		for (Iterator<EPackage> i = ePackages.iterator(); i.hasNext();) {
+			EPackage ePackage = i.next();
+			if (ePackage.getNsURI().equals(uri)) {
+				i.remove();
+				list.remove(uri);
+			}
+		}
+		validatePage();
+	}
+
 	@SuppressWarnings("unchecked")
-	private void initializeListFromSelection(List list, IStructuredSelection selection) {
+	private void initializeListFromSelection(IStructuredSelection selection) {
 		for (Iterator i = selection.iterator(); i.hasNext();) {
 			Object selectedObject = i.next();
 			if (selectedObject instanceof IFile) {
 				IFile ecoreFile = (IFile) selectedObject;
 				try {
-					addEPackages(list, URI.createPlatformResourceURI(ecoreFile.getFullPath().toString(), true));
+					addEPackages(URI.createPlatformResourceURI(ecoreFile.getFullPath().toString(), true));
 				} catch (Exception exc) {
 					// TODO log
 				}
@@ -211,6 +246,24 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 			}
 		}
 		return (result == null) ? Collections.<EPackage> emptyList() : result;
+	}
+
+	private void validatePage() {
+		setPageComplete(!ePackages.isEmpty() && getRootElementClass() != null);
+	}
+
+	public EClass getRootElementClass() {
+		int selectionIndex = rootElementComboBoxCellEditor.getSelectionIndex();
+		if (selectionIndex != -1) {
+			String selectedEClass = rootElementComboBoxCellEditor.getItem(selectionIndex);
+			for (EPackage ePackage : ePackages) {
+				EClassifier eClassifier = ePackage.getEClassifier(selectedEClass);
+				if (eClassifier instanceof EClass) {
+					return (EClass) eClassifier;
+				}
+			}
+		}
+		return null;
 	}
 
 }

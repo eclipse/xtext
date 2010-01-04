@@ -33,6 +33,7 @@ public class Messages extends NLS {
 	public static String WizardSelectImportedEPackagePage_RemoveButtonText;
 	public static String WizardSelectImportedEPackagePage_WindowTitle;
 	public static String WizardSelectImportedEPackagePage_Description;
+	public static String WizardSelectImportedEPackagePage_entryRuleLabelText;
 	
 	static {
 		// initialize resource bundle

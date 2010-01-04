@@ -6,7 +6,8 @@
 «DEFINE grammar FOR XtextProjectInfo-»
 «EXPAND grammarDeclaration-»
 «EXPAND metamodelImport FOREACH importedEPackages.allReferencedEPackages().flatten().toSet()-»
-«EXPAND rule FOREACH importedEPackages.EClassifiers.flatten()-»
+«EXPAND rule FOR rootElementClass»
+«EXPAND rule FOREACH importedEPackages.allReferencedClassifiers().flatten().toSet().remove(rootElementClass)-»
 «ENDDEFINE»
 
 «DEFINE grammarDeclaration FOR XtextProjectInfo-»
@@ -113,9 +114,9 @@ enum «name.quoteIfNeccesary()» returns «fqn()»:
 «DEFINE enumAssignment FOR EEnumLiteral»«name» = '«name»'«ENDDEFINE»
 
 «DEFINE rule FOR EDataType»«
-	IF !isEcoreType()»
+	IF serializable»
 «name.quoteIfNeccesary()» returns «fqn()»:
-	'«name»' /* TODO: implement */;
+	«dataTypeRuleBody()»;
 «	ENDIF»«
 ENDDEFINE»
 
