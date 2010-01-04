@@ -17,5 +17,7 @@ public interface IssueResolution {
 	String getDescription();
 	
 	void run();
+
+	String getImage();
 	
 }
