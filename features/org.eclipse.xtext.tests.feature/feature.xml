@@ -107,10 +107,6 @@ Everyone is permitted to copy and distribute copies of this Agreement, but in or
 This Agreement is governed by the laws of the State of New York and the intellectual property laws of the United States of America. No party to this Agreement will bring a legal action under this Agreement more than one year after the cause of action arose. Each party waives its rights to a jury trial in any resulting litigation.
    </license>
 
-   <includes
-         id="org.eclipse.xtext.examples"
-         version="0.0.0"/>
-
    <requires>
       <import feature="org.eclipse.xtext.runtime" version="0.0.0"/>
       <import feature="org.eclipse.xtext.sdk" version="0.0.0"/>
@@ -189,6 +185,20 @@ This Agreement is governed by the laws of the State of New York and the intellec
 
    <plugin
          id="org.eclipse.xtext.builder.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.example.domainmodel"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.example.domainmodel.ui"
          download-size="0"
          install-size="0"
          version="0.0.0"
