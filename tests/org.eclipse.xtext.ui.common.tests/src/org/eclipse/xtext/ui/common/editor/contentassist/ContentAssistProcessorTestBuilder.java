@@ -228,7 +228,7 @@ public class ContentAssistProcessorTestBuilder {
 
 					@SuppressWarnings("unchecked")
 					public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-						if (args!=null && args[0] instanceof IUnitOfWork)
+						if (args!=null && args[0] instanceof IUnitOfWork<?,?>)
 							return ((IUnitOfWork<?,XtextResource>) args[0]).exec(xtextResource);
 						if (method.getName().equals("get")) {
 							if (args != null && args.length == 2) {

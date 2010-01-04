@@ -17,12 +17,12 @@ import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
  */
 public class DefaultContentOutlineNodeAdapterFactory implements IContentOutlineNodeAdapterFactory {
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	private static final Class[] EMPTY_CLASSES = new Class[0];
 	
 	static final Logger logger = Logger.getLogger(DefaultContentOutlineNodeAdapterFactory.class);
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public Object getAdapter(Object adaptableObject, Class adapterType) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("Requesting adapter type " + adapterType.getName() + ", adaptableObject type is "
@@ -42,7 +42,7 @@ public class DefaultContentOutlineNodeAdapterFactory implements IContentOutlineN
 	/**
 	 * Subclasses should override this method.
 	 */
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	public Class[] getAdapterList() {
 		return EMPTY_CLASSES;
 	}
