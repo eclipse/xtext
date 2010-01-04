@@ -28,6 +28,7 @@ import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.core.IImageHelper;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.edit.IDocumentEditor;
 import org.eclipse.xtext.ui.core.editor.validation.XtextAnnotation;
@@ -52,10 +53,12 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 
 		private Position pos;
 		private IssueResolution resolution;
+		private IImageHelper imageHelper;
 
-		public XtextCompletionProposal(Position pos, IssueResolution resolution) {
+		public XtextCompletionProposal(Position pos, IssueResolution resolution, IImageHelper imageHelper) {
 			this.pos = pos;
 			this.resolution = resolution;
+			this.imageHelper = imageHelper;
 		}
 
 		public void apply(IDocument document) {
@@ -75,8 +78,7 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 		}
 
 		public Image getImage() {
-			// TODO: implement
-			return null;
+			return resolution.getImage() == null ? null : imageHelper.getImage(resolution.getImage());
 		}
 
 		public IContextInformation getContextInformation() {
@@ -102,10 +104,12 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 		private String errorMessage;
 		private final IssueResolutionProvider issueResolutionProvider;
 		private final IDocumentEditor documentEditor;
+		private final IImageHelper imageHelper;
 
-		public XtextQuickAssistProcessor(IssueResolutionProvider issueResolutionProvider, IDocumentEditor documentEditor) {
+		public XtextQuickAssistProcessor(IssueResolutionProvider issueResolutionProvider, IDocumentEditor documentEditor, IImageHelper imageHelper) {
 			this.issueResolutionProvider = issueResolutionProvider;
 			this.documentEditor = documentEditor;
+			this.imageHelper = imageHelper;
 		}
 
 		public String getErrorMessage() {
@@ -201,7 +205,7 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 					int end = document.getLineLength(line) + start - delimLength;
 					if (offset >= start && offset <= end) {
 						for(IssueResolution resolution : resolutions)
-							result.add(new XtextCompletionProposal(pos, resolution));
+							result.add(new XtextCompletionProposal(pos, resolution, imageHelper));
 					}
 				}
 				catch (BadLocationException e) {
@@ -292,16 +296,20 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 						public String getDescription() {
 							return delegate.getDescription();
 						}
+						
+						public String getImage() {
+							return delegate.getImage();
+						}
 					};
 				}
 			});
 		}
 
 	}
-	
+
 	@Inject
-	public XtextQuickAssistAssistant(IssueResolutionProvider issueResolutionProvider, IDocumentEditor documentEditor) {
-		setQuickAssistProcessor(new XtextQuickAssistProcessor(issueResolutionProvider, documentEditor));
+	public XtextQuickAssistAssistant(IssueResolutionProvider issueResolutionProvider, IDocumentEditor documentEditor, IImageHelper imageHelper) {
+		setQuickAssistProcessor(new XtextQuickAssistProcessor(issueResolutionProvider, documentEditor, imageHelper));
 		setInformationControlCreator(new AbstractReusableInformationControlCreator() {
 			@Override
 			public IInformationControl doCreateInformationControl(Shell parent) {
