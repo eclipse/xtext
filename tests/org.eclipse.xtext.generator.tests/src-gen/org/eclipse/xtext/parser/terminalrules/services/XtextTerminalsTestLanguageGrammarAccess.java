@@ -959,13 +959,12 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cKeywordParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cRuleCallParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
-		private final RuleCall cParenthesizedCrossReferenceableElementParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		
 		//CrossReferenceableTerminal returns AbstractElement:
-		//  Keyword|RuleCall|ParenthesizedCrossReferenceableElement;
+		//  Keyword|RuleCall;
 		public ParserRule getRule() { return rule; }
 
-		//Keyword|RuleCall|ParenthesizedCrossReferenceableElement
+		//Keyword|RuleCall
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//Keyword
@@ -973,75 +972,6 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 
 		//RuleCall
 		public RuleCall getRuleCallParserRuleCall_1() { return cRuleCallParserRuleCall_1; }
-
-		//ParenthesizedCrossReferenceableElement
-		public RuleCall getParenthesizedCrossReferenceableElementParserRuleCall_2() { return cParenthesizedCrossReferenceableElementParserRuleCall_2; }
-	}
-
-	public class ParenthesizedCrossReferenceableElementElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ParenthesizedCrossReferenceableElement");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Keyword cLeftParenthesisKeyword_0 = (Keyword)cGroup.eContents().get(0);
-		private final RuleCall cCrossReferenceableAlternativesParserRuleCall_1 = (RuleCall)cGroup.eContents().get(1);
-		private final Keyword cRightParenthesisKeyword_2 = (Keyword)cGroup.eContents().get(2);
-		
-		//ParenthesizedCrossReferenceableElement returns AbstractElement:
-		//  "(" CrossReferenceableAlternatives ")";
-		public ParserRule getRule() { return rule; }
-
-		//"(" CrossReferenceableAlternatives ")"
-		public Group getGroup() { return cGroup; }
-
-		//"("
-		public Keyword getLeftParenthesisKeyword_0() { return cLeftParenthesisKeyword_0; }
-
-		//CrossReferenceableAlternatives
-		public RuleCall getCrossReferenceableAlternativesParserRuleCall_1() { return cCrossReferenceableAlternativesParserRuleCall_1; }
-
-		//")"
-		public Keyword getRightParenthesisKeyword_2() { return cRightParenthesisKeyword_2; }
-	}
-
-	public class CrossReferenceableAlternativesElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CrossReferenceableAlternatives");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cCrossReferenceableTerminalParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
-		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
-		private final Action cAlternativesGroupsAction_1_0 = (Action)cGroup_1.eContents().get(0);
-		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
-		private final Keyword cVerticalLineKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
-		private final Assignment cGroupsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
-		private final RuleCall cGroupsCrossReferenceableTerminalParserRuleCall_1_1_1_0 = (RuleCall)cGroupsAssignment_1_1_1.eContents().get(0);
-		
-		//CrossReferenceableAlternatives returns AbstractElement:
-		//  CrossReferenceableTerminal ({Alternatives.groups+=current} ("|" groups+=
-		//  CrossReferenceableTerminal)+)?;
-		public ParserRule getRule() { return rule; }
-
-		//CrossReferenceableTerminal ({Alternatives.groups+=current} ("|" groups+=
-		//CrossReferenceableTerminal)+)?
-		public Group getGroup() { return cGroup; }
-
-		//CrossReferenceableTerminal
-		public RuleCall getCrossReferenceableTerminalParserRuleCall_0() { return cCrossReferenceableTerminalParserRuleCall_0; }
-
-		//({Alternatives.groups+=current} ("|" groups+=CrossReferenceableTerminal)+)?
-		public Group getGroup_1() { return cGroup_1; }
-
-		//{Alternatives.groups+=current}
-		public Action getAlternativesGroupsAction_1_0() { return cAlternativesGroupsAction_1_0; }
-
-		//("|" groups+=CrossReferenceableTerminal)+
-		public Group getGroup_1_1() { return cGroup_1_1; }
-
-		//"|"
-		public Keyword getVerticalLineKeyword_1_1_0() { return cVerticalLineKeyword_1_1_0; }
-
-		//groups+=CrossReferenceableTerminal
-		public Assignment getGroupsAssignment_1_1_1() { return cGroupsAssignment_1_1_1; }
-
-		//CrossReferenceableTerminal
-		public RuleCall getGroupsCrossReferenceableTerminalParserRuleCall_1_1_1_0() { return cGroupsCrossReferenceableTerminalParserRuleCall_1_1_1_0; }
 	}
 
 	public class ParenthesizedElementElements extends AbstractParserRuleElementFinder {
@@ -1576,8 +1506,6 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 	private AssignableAlternativesElements pAssignableAlternatives;
 	private CrossReferenceElements pCrossReference;
 	private CrossReferenceableTerminalElements pCrossReferenceableTerminal;
-	private ParenthesizedCrossReferenceableElementElements pParenthesizedCrossReferenceableElement;
-	private CrossReferenceableAlternativesElements pCrossReferenceableAlternatives;
 	private ParenthesizedElementElements pParenthesizedElement;
 	private TerminalRuleElements pTerminalRule;
 	private TerminalAlternativesElements pTerminalAlternatives;
@@ -1848,34 +1776,13 @@ public class XtextTerminalsTestLanguageGrammarAccess extends AbstractGrammarElem
 	}
 
 	//CrossReferenceableTerminal returns AbstractElement:
-	//  Keyword|RuleCall|ParenthesizedCrossReferenceableElement;
+	//  Keyword|RuleCall;
 	public CrossReferenceableTerminalElements getCrossReferenceableTerminalAccess() {
 		return (pCrossReferenceableTerminal != null) ? pCrossReferenceableTerminal : (pCrossReferenceableTerminal = new CrossReferenceableTerminalElements());
 	}
 	
 	public ParserRule getCrossReferenceableTerminalRule() {
 		return getCrossReferenceableTerminalAccess().getRule();
-	}
-
-	//ParenthesizedCrossReferenceableElement returns AbstractElement:
-	//  "(" CrossReferenceableAlternatives ")";
-	public ParenthesizedCrossReferenceableElementElements getParenthesizedCrossReferenceableElementAccess() {
-		return (pParenthesizedCrossReferenceableElement != null) ? pParenthesizedCrossReferenceableElement : (pParenthesizedCrossReferenceableElement = new ParenthesizedCrossReferenceableElementElements());
-	}
-	
-	public ParserRule getParenthesizedCrossReferenceableElementRule() {
-		return getParenthesizedCrossReferenceableElementAccess().getRule();
-	}
-
-	//CrossReferenceableAlternatives returns AbstractElement:
-	//  CrossReferenceableTerminal ({Alternatives.groups+=current} ("|" groups+=
-	//  CrossReferenceableTerminal)+)?;
-	public CrossReferenceableAlternativesElements getCrossReferenceableAlternativesAccess() {
-		return (pCrossReferenceableAlternatives != null) ? pCrossReferenceableAlternatives : (pCrossReferenceableAlternatives = new CrossReferenceableAlternativesElements());
-	}
-	
-	public ParserRule getCrossReferenceableAlternativesRule() {
-		return getCrossReferenceableAlternativesAccess().getRule();
 	}
 
 	//ParenthesizedElement returns AbstractElement:

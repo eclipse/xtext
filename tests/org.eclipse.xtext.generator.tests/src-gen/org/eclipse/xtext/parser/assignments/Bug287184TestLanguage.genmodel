@@ -17,7 +17,6 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Bug287184TestLanguage.ecore#//AbstractDetail/detailClass"/>
     </genClasses>
     <genClasses ecoreClass="Bug287184TestLanguage.ecore#//Detail">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug287184TestLanguage.ecore#//Detail/doc"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug287184TestLanguage.ecore#//Detail/visibility"/>
     </genClasses>
     <genClasses ecoreClass="Bug287184TestLanguage.ecore#//AssociatedDetail"/>

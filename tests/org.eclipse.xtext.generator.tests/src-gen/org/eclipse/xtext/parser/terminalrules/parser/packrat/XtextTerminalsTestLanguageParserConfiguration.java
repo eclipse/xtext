@@ -30,8 +30,6 @@ import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerm
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageAssignableAlternativesConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageCrossReferenceConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageCrossReferenceableTerminalConsumer;
-import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageParenthesizedCrossReferenceableElementConsumer;
-import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageCrossReferenceableAlternativesConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageParenthesizedElementConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageTerminalRuleConsumer;
 import org.eclipse.xtext.parser.terminalrules.parser.packrat.consumers.XtextTerminalsTestLanguageTerminalAlternativesConsumer;
@@ -79,8 +77,6 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
     private XtextTerminalsTestLanguageAssignableAlternativesConsumer assignableAlternativesConsumer;
     private XtextTerminalsTestLanguageCrossReferenceConsumer crossReferenceConsumer;
     private XtextTerminalsTestLanguageCrossReferenceableTerminalConsumer crossReferenceableTerminalConsumer;
-    private XtextTerminalsTestLanguageParenthesizedCrossReferenceableElementConsumer parenthesizedCrossReferenceableElementConsumer;
-    private XtextTerminalsTestLanguageCrossReferenceableAlternativesConsumer crossReferenceableAlternativesConsumer;
     private XtextTerminalsTestLanguageParenthesizedElementConsumer parenthesizedElementConsumer;
     private XtextTerminalsTestLanguageTerminalRuleConsumer terminalRuleConsumer;
     private XtextTerminalsTestLanguageTerminalAlternativesConsumer terminalAlternativesConsumer;
@@ -182,12 +178,6 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
 		crossReferenceableTerminalConsumer = new XtextTerminalsTestLanguageCrossReferenceableTerminalConsumer(
     		this, null
     	);
-		parenthesizedCrossReferenceableElementConsumer = new XtextTerminalsTestLanguageParenthesizedCrossReferenceableElementConsumer(
-    		this, null
-    	);
-		crossReferenceableAlternativesConsumer = new XtextTerminalsTestLanguageCrossReferenceableAlternativesConsumer(
-    		this, null
-    	);
 		parenthesizedElementConsumer = new XtextTerminalsTestLanguageParenthesizedElementConsumer(
     		this, null
     	);
@@ -270,8 +260,6 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
 		getAssignableAlternativesConsumer().setRule(grammarAccess.getAssignableAlternativesAccess());
 		getCrossReferenceConsumer().setRule(grammarAccess.getCrossReferenceAccess());
 		getCrossReferenceableTerminalConsumer().setRule(grammarAccess.getCrossReferenceableTerminalAccess());
-		getParenthesizedCrossReferenceableElementConsumer().setRule(grammarAccess.getParenthesizedCrossReferenceableElementAccess());
-		getCrossReferenceableAlternativesConsumer().setRule(grammarAccess.getCrossReferenceableAlternativesAccess());
 		getParenthesizedElementConsumer().setRule(grammarAccess.getParenthesizedElementAccess());
 		getTerminalRuleConsumer().setRule(grammarAccess.getTerminalRuleAccess());
 		getTerminalAlternativesConsumer().setRule(grammarAccess.getTerminalAlternativesAccess());
@@ -359,12 +347,7 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
 		getCrossReferenceConsumer().setTypeRefConsumer(getTypeRefConsumer());
 
 		getCrossReferenceableTerminalConsumer().setKeywordConsumer(getKeywordConsumer());
-		getCrossReferenceableTerminalConsumer().setParenthesizedCrossReferenceableElementConsumer(getParenthesizedCrossReferenceableElementConsumer());
 		getCrossReferenceableTerminalConsumer().setRuleCallConsumer(getRuleCallConsumer());
-
-		getParenthesizedCrossReferenceableElementConsumer().setCrossReferenceableAlternativesConsumer(getCrossReferenceableAlternativesConsumer());
-
-		getCrossReferenceableAlternativesConsumer().setCrossReferenceableTerminalConsumer(getCrossReferenceableTerminalConsumer());
 
 		getParenthesizedElementConsumer().setAlternativesConsumer(getAlternativesConsumer());
 
@@ -461,9 +444,6 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
 		getCrossReferenceConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$15$Delimiter);
 		getCrossReferenceConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$15$Delimiter);
 		getCrossReferenceConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$15$Delimiter);
-		getParenthesizedCrossReferenceableElementConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$15$Delimiter);
-		getParenthesizedCrossReferenceableElementConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$15$Delimiter);
-		getCrossReferenceableAlternativesConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$15$Delimiter);
 		getParenthesizedElementConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$15$Delimiter);
 		getParenthesizedElementConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$15$Delimiter);
 		getTerminalRuleConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.terminalrules.parser.packrat.XtextTerminalsTestLanguageDelimiters.keyword$5$Delimiter);
@@ -577,14 +557,6 @@ public class XtextTerminalsTestLanguageParserConfiguration extends AbstractParse
 
     public XtextTerminalsTestLanguageCrossReferenceableTerminalConsumer getCrossReferenceableTerminalConsumer() {
     	return crossReferenceableTerminalConsumer;
-    }
-
-    public XtextTerminalsTestLanguageParenthesizedCrossReferenceableElementConsumer getParenthesizedCrossReferenceableElementConsumer() {
-    	return parenthesizedCrossReferenceableElementConsumer;
-    }
-
-    public XtextTerminalsTestLanguageCrossReferenceableAlternativesConsumer getCrossReferenceableAlternativesConsumer() {
-    	return crossReferenceableAlternativesConsumer;
     }
 
     public XtextTerminalsTestLanguageParenthesizedElementConsumer getParenthesizedElementConsumer() {

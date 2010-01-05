@@ -48,11 +48,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   "model" name=( ID | FQN ) detail+=( Detail | AssociatedDetail )+;
+ *   "model" name=FQN detail+=( Detail | AssociatedDetail )+;
  *
  **/
 
-// "model" name=( ID | FQN ) detail+=( Detail | AssociatedDetail )+
+// "model" name=FQN detail+=( Detail | AssociatedDetail )+
 protected class Model_Group extends GroupToken {
 	
 	public Model_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -100,7 +100,7 @@ protected class Model_ModelKeyword_0 extends KeywordToken  {
 		
 }
 
-// name=( ID | FQN )
+// name=FQN
 protected class Model_NameAssignment_1 extends AssignmentToken  {
 	
 	public Model_NameAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -124,14 +124,9 @@ protected class Model_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
-			type = AssignmentType.LRC;
-			element = grammarAccess.getModelAccess().getNameIDTerminalRuleCall_1_0_0();
-			return obj;
-		}
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
 			type = AssignmentType.DRC;
-			element = grammarAccess.getModelAccess().getNameFQNParserRuleCall_1_0_1();
+			element = grammarAccess.getModelAccess().getNameFQNParserRuleCall_1_0();
 			return obj;
 		}
 		return null;
@@ -312,13 +307,11 @@ protected class AbstractDetail_AssociatedDetailParserRuleCall_1 extends RuleCall
 /************ begin Rule Detail ****************
  *
  * Detail:
- *   doc=ML_COMMENT? "detail" visibility=( "private" | "protected" | "public" )? detailClass=[
- *   Model|FQN];
+ *   "detail" visibility=( "private" | "protected" | "public" )? detailClass=[Model|FQN];
  *
  **/
 
-// doc=ML_COMMENT? "detail" visibility=( "private" | "protected" | "public" )? detailClass=[
-// Model|FQN]
+// "detail" visibility=( "private" | "protected" | "public" )? detailClass=[Model|FQN]
 protected class Detail_Group extends GroupToken {
 	
 	public Detail_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -333,7 +326,7 @@ protected class Detail_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Detail_DetailClassAssignment_3(parent, this, 0, inst);
+			case 0: return new Detail_DetailClassAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -345,16 +338,16 @@ protected class Detail_Group extends GroupToken {
 	}
 }
 
-// doc=ML_COMMENT?
-protected class Detail_DocAssignment_0 extends AssignmentToken  {
+// "detail"
+protected class Detail_DetailKeyword_0 extends KeywordToken  {
 	
-	public Detail_DocAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Detail_DetailKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getDetailAccess().getDocAssignment_0();
+	public Keyword getGrammarElement() {
+		return grammarAccess.getDetailAccess().getDetailKeyword_0();
 	}
 
     @Override
@@ -364,58 +357,24 @@ protected class Detail_DocAssignment_0 extends AssignmentToken  {
 		}	
 	}	
 		
-    @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("doc",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("doc");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
-			type = AssignmentType.LRC;
-			element = grammarAccess.getDetailAccess().getDocML_COMMENTTerminalRuleCall_0_0();
-			return obj;
-		}
-		return null;
-	}
-
-}
-
-// "detail"
-protected class Detail_DetailKeyword_1 extends KeywordToken  {
-	
-	public Detail_DetailKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getDetailAccess().getDetailKeyword_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Detail_DocAssignment_0(parent, this, 0, inst);
-			default: return parent.createParentFollower(this, index, index - 1, inst);
-		}	
-	}	
-		
 }
 
 // visibility=( "private" | "protected" | "public" )?
-protected class Detail_VisibilityAssignment_2 extends AssignmentToken  {
+protected class Detail_VisibilityAssignment_1 extends AssignmentToken  {
 	
-	public Detail_VisibilityAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Detail_VisibilityAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getDetailAccess().getVisibilityAssignment_2();
+		return grammarAccess.getDetailAccess().getVisibilityAssignment_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Detail_DetailKeyword_1(parent, this, 0, inst);
+			case 0: return new Detail_DetailKeyword_0(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -426,17 +385,17 @@ protected class Detail_VisibilityAssignment_2 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("visibility");
 		if("private".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
-			element = grammarAccess.getDetailAccess().getVisibilityPrivateKeyword_2_0_0();
+			element = grammarAccess.getDetailAccess().getVisibilityPrivateKeyword_1_0_0();
 			return obj;
 		}
 		if("protected".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
-			element = grammarAccess.getDetailAccess().getVisibilityProtectedKeyword_2_0_1();
+			element = grammarAccess.getDetailAccess().getVisibilityProtectedKeyword_1_0_1();
 			return obj;
 		}
 		if("public".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
-			element = grammarAccess.getDetailAccess().getVisibilityPublicKeyword_2_0_2();
+			element = grammarAccess.getDetailAccess().getVisibilityPublicKeyword_1_0_2();
 			return obj;
 		}
 		return null;
@@ -445,22 +404,22 @@ protected class Detail_VisibilityAssignment_2 extends AssignmentToken  {
 }
 
 // detailClass=[Model|FQN]
-protected class Detail_DetailClassAssignment_3 extends AssignmentToken  {
+protected class Detail_DetailClassAssignment_2 extends AssignmentToken  {
 	
-	public Detail_DetailClassAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Detail_DetailClassAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getDetailAccess().getDetailClassAssignment_3();
+		return grammarAccess.getDetailAccess().getDetailClassAssignment_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Detail_VisibilityAssignment_2(parent, this, 0, inst);
-			case 1: return new Detail_DetailKeyword_1(parent, this, 1, inst);
+			case 0: return new Detail_VisibilityAssignment_1(parent, this, 0, inst);
+			case 1: return new Detail_DetailKeyword_0(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -471,9 +430,9 @@ protected class Detail_DetailClassAssignment_3 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("detailClass");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getDetailAccess().getDetailClassModelCrossReference_3_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getDetailAccess().getDetailClassModelCrossReference_2_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.getDetailAccess().getDetailClassModelCrossReference_3_0(); 
+				element = grammarAccess.getDetailAccess().getDetailClassModelCrossReference_2_0(); 
 				return obj;
 			}
 		}
@@ -489,11 +448,11 @@ protected class Detail_DetailClassAssignment_3 extends AssignmentToken  {
 /************ begin Rule AssociatedDetail ****************
  *
  * AssociatedDetail:
- *   "associated" detailClass=[Model|( ID | FQN )] ";";
+ *   "associated" detailClass=[Model|FQN] ";";
  *
  **/
 
-// "associated" detailClass=[Model|( ID | FQN )] ";"
+// "associated" detailClass=[Model|FQN] ";"
 protected class AssociatedDetail_Group extends GroupToken {
 	
 	public AssociatedDetail_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -541,7 +500,7 @@ protected class AssociatedDetail_AssociatedKeyword_0 extends KeywordToken  {
 		
 }
 
-// detailClass=[Model|( ID | FQN )]
+// detailClass=[Model|FQN]
 protected class AssociatedDetail_DetailClassAssignment_1 extends AssignmentToken  {
 	
 	public AssociatedDetail_DetailClassAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {

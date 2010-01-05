@@ -56,23 +56,21 @@ protected class ThisRootNode extends RootToken {
 			case 18: return new AssignableAlternatives_Group(this, this, 18, inst);
 			case 19: return new CrossReference_Group(this, this, 19, inst);
 			case 20: return new CrossReferenceableTerminal_Alternatives(this, this, 20, inst);
-			case 21: return new ParenthesizedCrossReferenceableElement_Group(this, this, 21, inst);
-			case 22: return new CrossReferenceableAlternatives_Group(this, this, 22, inst);
-			case 23: return new ParenthesizedElement_Group(this, this, 23, inst);
-			case 24: return new TerminalRule_Group(this, this, 24, inst);
-			case 25: return new TerminalAlternatives_Group(this, this, 25, inst);
-			case 26: return new TerminalGroup_Group(this, this, 26, inst);
-			case 27: return new TerminalToken_Group(this, this, 27, inst);
-			case 28: return new TerminalTokenElement_Alternatives(this, this, 28, inst);
-			case 29: return new ParenthesizedTerminalElement_Group(this, this, 29, inst);
-			case 30: return new AbstractNegatedToken_Alternatives(this, this, 30, inst);
-			case 31: return new NegatedToken_Group(this, this, 31, inst);
-			case 32: return new UntilToken_Group(this, this, 32, inst);
-			case 33: return new Wildcard_Group(this, this, 33, inst);
-			case 34: return new CharacterRange_Group(this, this, 34, inst);
-			case 35: return new EnumRule_Group(this, this, 35, inst);
-			case 36: return new EnumLiterals_Group(this, this, 36, inst);
-			case 37: return new EnumLiteralDeclaration_Group(this, this, 37, inst);
+			case 21: return new ParenthesizedElement_Group(this, this, 21, inst);
+			case 22: return new TerminalRule_Group(this, this, 22, inst);
+			case 23: return new TerminalAlternatives_Group(this, this, 23, inst);
+			case 24: return new TerminalGroup_Group(this, this, 24, inst);
+			case 25: return new TerminalToken_Group(this, this, 25, inst);
+			case 26: return new TerminalTokenElement_Alternatives(this, this, 26, inst);
+			case 27: return new ParenthesizedTerminalElement_Group(this, this, 27, inst);
+			case 28: return new AbstractNegatedToken_Alternatives(this, this, 28, inst);
+			case 29: return new NegatedToken_Group(this, this, 29, inst);
+			case 30: return new UntilToken_Group(this, this, 30, inst);
+			case 31: return new Wildcard_Group(this, this, 31, inst);
+			case 32: return new CharacterRange_Group(this, this, 32, inst);
+			case 33: return new EnumRule_Group(this, this, 33, inst);
+			case 34: return new EnumLiterals_Group(this, this, 34, inst);
+			case 35: return new EnumLiteralDeclaration_Group(this, this, 35, inst);
 			default: return null;
 		}	
 	}	
@@ -4114,11 +4112,11 @@ protected class CrossReference_RightSquareBracketKeyword_3 extends KeywordToken 
 /************ begin Rule CrossReferenceableTerminal ****************
  *
  * CrossReferenceableTerminal returns AbstractElement:
- *   Keyword|RuleCall|ParenthesizedCrossReferenceableElement;
+ *   Keyword|RuleCall;
  *
  **/
 
-// Keyword|RuleCall|ParenthesizedCrossReferenceableElement
+// Keyword|RuleCall
 protected class CrossReferenceableTerminal_Alternatives extends AlternativesToken {
 
 	public CrossReferenceableTerminal_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -4135,7 +4133,6 @@ protected class CrossReferenceableTerminal_Alternatives extends AlternativesToke
 		switch(index) {
 			case 0: return new CrossReferenceableTerminal_KeywordParserRuleCall_0(parent, this, 0, inst);
 			case 1: return new CrossReferenceableTerminal_RuleCallParserRuleCall_1(parent, this, 1, inst);
-			case 2: return new CrossReferenceableTerminal_ParenthesizedCrossReferenceableElementParserRuleCall_2(parent, this, 2, inst);
 			default: return null;
 		}	
 	}	
@@ -4217,382 +4214,8 @@ protected class CrossReferenceableTerminal_RuleCallParserRuleCall_1 extends Rule
 	}	
 }
 
-// ParenthesizedCrossReferenceableElement
-protected class CrossReferenceableTerminal_ParenthesizedCrossReferenceableElementParserRuleCall_2 extends RuleCallToken {
-	
-	public CrossReferenceableTerminal_ParenthesizedCrossReferenceableElementParserRuleCall_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getCrossReferenceableTerminalAccess().getParenthesizedCrossReferenceableElementParserRuleCall_2();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new ParenthesizedCrossReferenceableElement_Group(this, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(ParenthesizedCrossReferenceableElement_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getParenthesizedCrossReferenceableElementRule().getType().getClassifier())) return null;
-		return current;
-	}
-	
-    @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
-		}	
-	}	
-}
-
 
 /************ end Rule CrossReferenceableTerminal ****************/
-
-
-/************ begin Rule ParenthesizedCrossReferenceableElement ****************
- *
- * ParenthesizedCrossReferenceableElement returns AbstractElement:
- *   "(" CrossReferenceableAlternatives ")";
- *
- **/
-
-// "(" CrossReferenceableAlternatives ")"
-protected class ParenthesizedCrossReferenceableElement_Group extends GroupToken {
-	
-	public ParenthesizedCrossReferenceableElement_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.getParenthesizedCrossReferenceableElementAccess().getGroup();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new ParenthesizedCrossReferenceableElement_RightParenthesisKeyword_2(parent, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-    @Override
-	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getParenthesizedCrossReferenceableElementRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
-	}
-}
-
-// "("
-protected class ParenthesizedCrossReferenceableElement_LeftParenthesisKeyword_0 extends KeywordToken  {
-	
-	public ParenthesizedCrossReferenceableElement_LeftParenthesisKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getParenthesizedCrossReferenceableElementAccess().getLeftParenthesisKeyword_0();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			default: return parent.createParentFollower(this, index, index, inst);
-		}	
-	}	
-		
-}
-
-// CrossReferenceableAlternatives
-protected class ParenthesizedCrossReferenceableElement_CrossReferenceableAlternativesParserRuleCall_1 extends RuleCallToken {
-	
-	public ParenthesizedCrossReferenceableElement_CrossReferenceableAlternativesParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getParenthesizedCrossReferenceableElementAccess().getCrossReferenceableAlternativesParserRuleCall_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new CrossReferenceableAlternatives_Group(this, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(CrossReferenceableAlternatives_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getCrossReferenceableAlternativesRule().getType().getClassifier())) return null;
-		return current;
-	}
-	
-    @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new ParenthesizedCrossReferenceableElement_LeftParenthesisKeyword_0(parent, next, actIndex, inst);
-			default: return null;
-		}	
-	}	
-}
-
-// ")"
-protected class ParenthesizedCrossReferenceableElement_RightParenthesisKeyword_2 extends KeywordToken  {
-	
-	public ParenthesizedCrossReferenceableElement_RightParenthesisKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getParenthesizedCrossReferenceableElementAccess().getRightParenthesisKeyword_2();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new ParenthesizedCrossReferenceableElement_CrossReferenceableAlternativesParserRuleCall_1(parent, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-}
-
-
-/************ end Rule ParenthesizedCrossReferenceableElement ****************/
-
-
-/************ begin Rule CrossReferenceableAlternatives ****************
- *
- * CrossReferenceableAlternatives returns AbstractElement:
- *   CrossReferenceableTerminal ({Alternatives.groups+=current} ("|" groups+=
- *   CrossReferenceableTerminal)+)?;
- *
- **/
-
-// CrossReferenceableTerminal ({Alternatives.groups+=current} ("|" groups+=
-// CrossReferenceableTerminal)+)?
-protected class CrossReferenceableAlternatives_Group extends GroupToken {
-	
-	public CrossReferenceableAlternatives_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.getCrossReferenceableAlternativesAccess().getGroup();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new CrossReferenceableAlternatives_Group_1(parent, this, 0, inst);
-			case 1: return new CrossReferenceableAlternatives_CrossReferenceableTerminalParserRuleCall_0(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
-    @Override
-	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getCrossReferenceableAlternativesRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
-	}
-}
-
-// CrossReferenceableTerminal
-protected class CrossReferenceableAlternatives_CrossReferenceableTerminalParserRuleCall_0 extends RuleCallToken {
-	
-	public CrossReferenceableAlternatives_CrossReferenceableTerminalParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getCrossReferenceableAlternativesAccess().getCrossReferenceableTerminalParserRuleCall_0();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new CrossReferenceableTerminal_Alternatives(this, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(CrossReferenceableTerminal_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getCrossReferenceableTerminalRule().getType().getClassifier())) return null;
-		return current;
-	}
-	
-    @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
-		}	
-	}	
-}
-
-// ({Alternatives.groups+=current} ("|" groups+=CrossReferenceableTerminal)+)?
-protected class CrossReferenceableAlternatives_Group_1 extends GroupToken {
-	
-	public CrossReferenceableAlternatives_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.getCrossReferenceableAlternativesAccess().getGroup_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new CrossReferenceableAlternatives_Group_1_1(parent, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-}
-
-// {Alternatives.groups+=current}
-protected class CrossReferenceableAlternatives_AlternativesGroupsAction_1_0 extends ActionToken  {
-
-	public CrossReferenceableAlternatives_AlternativesGroupsAction_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public Action getGrammarElement() {
-		return grammarAccess.getCrossReferenceableAlternativesAccess().getAlternativesGroupsAction_1_0();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new CrossReferenceableAlternatives_CrossReferenceableTerminalParserRuleCall_0(parent, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-	
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getCrossReferenceableAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier())) return null;
-		Object val = current.getConsumable("groups", false);
-		if(val == null) return null;
-		if(!current.isConsumedWithLastConsumtion("groups")) return null;
-		return getDescr((EObject) val);
-	}
-}
-
-// ("|" groups+=CrossReferenceableTerminal)+
-protected class CrossReferenceableAlternatives_Group_1_1 extends GroupToken {
-	
-	public CrossReferenceableAlternatives_Group_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.getCrossReferenceableAlternativesAccess().getGroup_1_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new CrossReferenceableAlternatives_GroupsAssignment_1_1_1(parent, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-}
-
-// "|"
-protected class CrossReferenceableAlternatives_VerticalLineKeyword_1_1_0 extends KeywordToken  {
-	
-	public CrossReferenceableAlternatives_VerticalLineKeyword_1_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getCrossReferenceableAlternativesAccess().getVerticalLineKeyword_1_1_0();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new CrossReferenceableAlternatives_Group_1_1(parent, this, 0, inst);
-			case 1: return new CrossReferenceableAlternatives_AlternativesGroupsAction_1_0(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
-}
-
-// groups+=CrossReferenceableTerminal
-protected class CrossReferenceableAlternatives_GroupsAssignment_1_1_1 extends AssignmentToken  {
-	
-	public CrossReferenceableAlternatives_GroupsAssignment_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getCrossReferenceableAlternativesAccess().getGroupsAssignment_1_1_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new CrossReferenceableTerminal_Alternatives(this, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-    @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("groups",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("groups");
-		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getCrossReferenceableTerminalRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
-				element = grammarAccess.getCrossReferenceableAlternativesAccess().getGroupsCrossReferenceableTerminalParserRuleCall_1_1_1_0(); 
-				consumed = obj;
-				return param;
-			}
-		}
-		return null;
-	}
-
-    @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
-		switch(index) {
-			case 0: return new CrossReferenceableAlternatives_VerticalLineKeyword_1_1_0(parent, next, actIndex, consumed);
-			default: return null;
-		}	
-	}	
-}
-
-
-
-
-/************ end Rule CrossReferenceableAlternatives ****************/
 
 
 /************ begin Rule ParenthesizedElement ****************

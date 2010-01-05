@@ -14,7 +14,6 @@ package org.eclipse.xtext.parser.assignments.bug287184Test;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.parser.assignments.bug287184Test.Detail#getDoc <em>Doc</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.assignments.bug287184Test.Detail#getVisibility <em>Visibility</em>}</li>
  * </ul>
  * </p>
@@ -25,32 +24,6 @@ package org.eclipse.xtext.parser.assignments.bug287184Test;
  */
 public interface Detail extends AbstractDetail
 {
-  /**
-   * Returns the value of the '<em><b>Doc</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Doc</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Doc</em>' attribute.
-   * @see #setDoc(String)
-   * @see org.eclipse.xtext.parser.assignments.bug287184Test.Bug287184TestPackage#getDetail_Doc()
-   * @model
-   * @generated
-   */
-  String getDoc();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.xtext.parser.assignments.bug287184Test.Detail#getDoc <em>Doc</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Doc</em>' attribute.
-   * @see #getDoc()
-   * @generated
-   */
-  void setDoc(String value);
-
   /**
    * Returns the value of the '<em><b>Visibility</b></em>' attribute.
    * <!-- begin-user-doc -->

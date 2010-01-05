@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.generator.tests/src-gen"
+    editDirectory="/org.eclipse.xtext.generator.tests.edit/src" editorDirectory="/org.eclipse.xtext.generator.tests.editor/src"
+    modelPluginID="org.eclipse.xtext.generator.tests" forceOverwrite="true" modelName="UnicodeCharacterTestLanguage"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.generator.tests.edit"
+    editorPluginID="org.eclipse.xtext.generator.tests.editor">
+  <genPackages prefix="UnicodeTest" basePackage="org.eclipse.xtext.parser" disposableProviderFactory="true"
+      ecorePackage="UnicodeCharacterTestLanguage.ecore#/">
+    <genClasses ecoreClass="UnicodeCharacterTestLanguage.ecore#//UnicodeTestStartRule">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnicodeCharacterTestLanguage.ecore#//UnicodeTestStartRule/bar"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
