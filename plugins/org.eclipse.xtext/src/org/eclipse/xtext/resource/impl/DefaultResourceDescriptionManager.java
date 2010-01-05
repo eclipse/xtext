@@ -16,6 +16,7 @@ import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
+import org.eclipse.xtext.util.OnChangeEvictingCacheAdapter;
 
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Sets;
@@ -33,8 +34,16 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 	@Inject
 	private IContainer.Manager containerManager;
 	
+	private static final String CACHE_KEY = DefaultResourceDescriptionManager.class.getName() + "#getResourceDescription";
+	
 	public IResourceDescription getResourceDescription(Resource resource) {
-		return new DefaultResourceDescription(resource, nameProvider);
+		OnChangeEvictingCacheAdapter adapter = OnChangeEvictingCacheAdapter.getOrCreate(resource);
+		IResourceDescription result = adapter.get(CACHE_KEY);
+		if (result == null) {
+			result = new DefaultResourceDescription(resource, nameProvider);
+			adapter.set(CACHE_KEY, result);
+		}
+		return result;
 	}
 	
 	public void setNameProvider(IQualifiedNameProvider nameProvider) {

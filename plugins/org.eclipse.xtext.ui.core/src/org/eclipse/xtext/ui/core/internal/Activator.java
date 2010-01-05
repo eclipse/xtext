@@ -13,6 +13,9 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.core.containers.IAllContainerState;
+import org.eclipse.xtext.ui.core.containers.JavaProjectsState;
+import org.eclipse.xtext.ui.core.containers.WorkspaceProjectsState;
 import org.eclipse.xtext.ui.core.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.core.notification.IStateChangeEventBroker;
 import org.osgi.framework.BundleContext;
@@ -111,6 +114,10 @@ public class Activator extends AbstractUIPlugin {
 	
 	private IDirtyStateManager dirtyStateManager;
 	
+	private IAllContainerState javaProjectsState;
+	
+	private IAllContainerState workspaceProjectsState;
+	
 	private void initializeGuiceInjector() {
 		try {
 			injector = Guice.createInjector(createGuiceModule());
@@ -136,5 +143,16 @@ public class Activator extends AbstractUIPlugin {
 	public IDirtyStateManager getDirtyStateManager() {
 		return dirtyStateManager;
 	}
+
+	public IAllContainerState getJavaProjectsState() {
+		if (javaProjectsState == null)
+			javaProjectsState = injector.getInstance(JavaProjectsState.class);
+		return javaProjectsState;
+	}
 	
+	public IAllContainerState getWorkspaceProjectsState() {
+		if (workspaceProjectsState == null)
+			workspaceProjectsState = injector.getInstance(WorkspaceProjectsState.class);
+		return workspaceProjectsState;
+	}
 }

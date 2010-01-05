@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.junit.util;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
@@ -25,10 +28,11 @@ public class URIBasedTestResourceDescription extends AbstractResourceDescription
 		this.uri = uri;
 	}
 
-	public Iterable<IEObjectDescription> getExportedObjects() {
-		return Iterables.emptyIterable();
+	@Override
+	protected List<IEObjectDescription> computeExportedObjects() {
+		return Collections.emptyList();
 	}
-
+	
 	public Iterable<String> getImportedNames() {
 		return Iterables.emptyIterable();
 	}

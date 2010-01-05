@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
+import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
@@ -51,10 +52,11 @@ public class StatefulResourceDescription extends AbstractResourceDescription {
 		}));
 	}
 
-	public Iterable<IEObjectDescription> getExportedObjects() {
+	@Override
+	protected List<IEObjectDescription> computeExportedObjects() {
 		return exported;
 	}
-
+	
 	public Iterable<String> getImportedNames() {
 		throw new UnsupportedOperationException("getImportedNames()");
 	}
@@ -66,7 +68,5 @@ public class StatefulResourceDescription extends AbstractResourceDescription {
 	public URI getURI() {
 		return uri;
 	}
-	
-	
 
 }

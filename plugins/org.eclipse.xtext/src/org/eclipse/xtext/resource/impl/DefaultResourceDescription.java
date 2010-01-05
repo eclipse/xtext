@@ -40,7 +40,7 @@ import com.google.common.collect.Lists;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DefaultResourceDescription extends AbstractResourceDescription {
+public class DefaultResourceDescription extends AbstractResourceDescription implements OnChangeEvictingCacheAdapter.Listener {
 
 	private final static Logger log = Logger.getLogger(DefaultResourceDescription.class);
 
@@ -55,7 +55,8 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 		this.nameProvider = nameProvider;
 	}
 
-	public Iterable<IEObjectDescription> getExportedObjects() {
+	@Override
+	protected List<IEObjectDescription> computeExportedObjects() {
 		OnChangeEvictingCacheAdapter adapter = OnChangeEvictingCacheAdapter.getOrCreate(getResource());
 		if (adapter.get(getClass().getName()) == null) {
 			if (!getResource().isLoaded()) {
@@ -63,7 +64,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 					getResource().load(null);
 				} catch (IOException e) {
 					log.error(e.getMessage(), e);
-					return Iterables.emptyIterable();
+					return Collections.<IEObjectDescription>emptyList();
 				}
 			}
 			Iterable<EObject> contents = new Iterable<EObject>() {
@@ -77,11 +78,16 @@ public class DefaultResourceDescription extends AbstractResourceDescription {
 				}
 			});
 			Iterable<IEObjectDescription> filter = Iterables.filter(result, Predicates.notNull());
-			adapter.set(getClass().getName(), filter);
+			adapter.set(getClass().getName(), Lists.newArrayList(filter));
+			adapter.addCacheListener(this);
 		}
 		return adapter.get(getClass().getName());
 	}
-
+	
+	public void onEvict(OnChangeEvictingCacheAdapter cache) {
+		invalidateCache();
+	}
+	
 	protected IEObjectDescription createIEObjectDescription(EObject from) {
 		if (nameProvider == null)
 			return null;

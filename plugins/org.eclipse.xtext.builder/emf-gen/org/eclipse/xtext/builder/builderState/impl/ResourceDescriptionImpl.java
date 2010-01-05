@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ResourceDescriptionImpl.java,v 1.8 2009/12/07 15:37:56 sefftinge Exp $
+ * $Id: ResourceDescriptionImpl.java,v 1.9 2010/01/05 14:16:46 szarnekow Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -20,16 +20,12 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl.Container;
 import org.eclipse.emf.ecore.util.EDataTypeUniqueEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
+import org.eclipse.xtext.resource.impl.EObjectDescriptionLookUp;
 
 /**
  * <!-- begin-user-doc -->
@@ -138,14 +134,23 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 			eNotify(new ENotificationImpl(this, Notification.SET, BuilderStatePackage.RESOURCE_DESCRIPTION__URI, oldURI, uri));
 	}
 
+	private EObjectDescriptionLookUp lookUp;
+	
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
+	 * @generated NOT
 	 */
+	@SuppressWarnings("serial")
 	public EList<IEObjectDescription> getExportedObjects() {
 		if (exportedObjects == null) {
-			exportedObjects = new EObjectContainmentWithInverseEList<IEObjectDescription>(IEObjectDescription.class, this, BuilderStatePackage.RESOURCE_DESCRIPTION__EXPORTED_OBJECTS, BuilderStatePackage.EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR);
+			exportedObjects = new EObjectContainmentWithInverseEList<IEObjectDescription>(IEObjectDescription.class, this, BuilderStatePackage.RESOURCE_DESCRIPTION__EXPORTED_OBJECTS, BuilderStatePackage.EOBJECT_DESCRIPTION__RESOURCE_DESCRIPTOR) {
+				@Override
+				protected void didChange() {
+					if (lookUp != null)
+						lookUp.setExportedObjects(exportedObjects);
+				}
+			};
 		}
 		return exportedObjects;
 	}
@@ -173,30 +178,24 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 		}
 		return referenceDescriptions;
 	}
+	
+	private EObjectDescriptionLookUp getLookUp() {
+		if (lookUp == null) {
+			lookUp = new EObjectDescriptionLookUp(getExportedObjects());
+		}
+		return lookUp;
+	}
 
 	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz, final String name) {
-		return Iterables.filter(getExportedObjects(), new Predicate<IEObjectDescription>() {
-			public boolean apply(IEObjectDescription input) {
-				return (EcoreUtil2.isAssignableFrom(clazz,input.getEClass())) && input.getName().equals(name);
-			}
-		});
+		return getLookUp().getExportedObjects(clazz, name);
 	}
 
 	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz) {
-		return Iterables.filter(getExportedObjects(), new Predicate<IEObjectDescription>() {
-			public boolean apply(IEObjectDescription input) {
-				return EcoreUtil2.isAssignableFrom(clazz,input.getEClass());
-			}
-		});
+		return getLookUp().getExportedObjects(clazz);
 	}
 
 	public Iterable<IEObjectDescription> getExportedObjectsForEObject(EObject object) {
-		final URI uri = EcoreUtil.getURI(object);
-		return Iterables.filter(getExportedObjects(), new Predicate<IEObjectDescription>() {
-			public boolean apply(IEObjectDescription input) {
-				return uri.equals(input.getEObjectURI());
-			}
-		});
+		return getLookUp().getExportedObjectsForEObject(object);
 	}
 
 	/**

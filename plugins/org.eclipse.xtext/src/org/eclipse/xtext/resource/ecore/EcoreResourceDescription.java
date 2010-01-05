@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.ecore;
 
-import java.util.Set;
+import java.util.Iterator;
+import java.util.List;
 
-import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
@@ -21,7 +21,7 @@ import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescription;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Sets;
+import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -43,23 +43,23 @@ public class EcoreResourceDescription extends AbstractResourceDescription {
 	}
 
 	private Resource resource;
-	private Set<IEObjectDescription> descriptions;
 
 	public EcoreResourceDescription(Resource resource) {
 		this.resource = resource;
-		TreeIterator<EObject> contents = resource.getAllContents();
-		descriptions = Sets.newHashSet();
-		Switch switch1 = new Switch();
-		while (contents.hasNext()) {
-			EObject eObject = contents.next();
-			IEObjectDescription desc = switch1.doSwitch(eObject);
-			if (desc!=null)
-				descriptions.add(desc);
-		}
 	}
 
-	public Iterable<IEObjectDescription> getExportedObjects() {
-		return descriptions;
+	@Override
+	protected List<IEObjectDescription> computeExportedObjects() {
+		Iterator<EObject> contents = resource.getAllContents();
+		List<IEObjectDescription> result = Lists.newArrayList();
+		Switch factory = new Switch();
+		while (contents.hasNext()) {
+			EObject eObject = contents.next();
+			IEObjectDescription desc = factory.doSwitch(eObject);
+			if (desc!=null)
+				result.add(desc);
+		}
+		return result;
 	}
 
 	public Iterable<String> getImportedNames() {

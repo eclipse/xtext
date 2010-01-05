@@ -7,22 +7,20 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
-import static com.google.common.collect.Iterables.*;
-
-import java.util.ArrayList;
-import java.util.List;
+import java.util.Iterator;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.ResourceSetReferencingResourceSet;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScope;
 
-import com.google.common.base.Predicate;
+import com.google.common.base.Function;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 
 /**
@@ -49,18 +47,38 @@ public class ResourceSetGlobalScopeProvider extends AbstractExportedObjectsAware
 
 	protected IScope createScopeWithQualifiedNames(final IScope parent, final EObject context,
 			final EReference reference, ResourceSet resourceSet) {
-		List<Iterable<IEObjectDescription>> iterables = new ArrayList<Iterable<IEObjectDescription>>();
-
-		for (Resource resource : resourceSet.getResources()) {
-			iterables.add(getExportedEObjects(resource));
-		}
-		Iterable<IEObjectDescription> descriptions = Iterables.concat(iterables);
-		Iterable<IEObjectDescription> filtered = filter(descriptions, new Predicate<IEObjectDescription>() {
-			public boolean apply(IEObjectDescription input) {
-				return EcoreUtil2.isAssignableFrom(reference.getEReferenceType(),input.getEClass());
+		Iterable<IResourceDescription> descriptions = Iterables.transform(resourceSet.getResources(), new Function<Resource, IResourceDescription>() {
+			public IResourceDescription apply(Resource from) {
+				return getResourceDescription(from);
 			}
 		});
-		return new SimpleScope(parent,filtered);
+		final Iterable<IResourceDescription> filteredDescriptions = Iterables.filter(descriptions, Predicates.notNull());
+		Iterable<Iterable<IEObjectDescription>> objectDescriptionsIter = Iterables.transform(filteredDescriptions, new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
+			public Iterable<IEObjectDescription> apply(IResourceDescription from) {
+				return from.getExportedObjects(reference.getEReferenceType());
+			}
+		});
+		Iterable<IEObjectDescription> objectDescriptions = Iterables.concat(objectDescriptionsIter);
+		return new SimpleScope(parent, objectDescriptions) {
+			@Override
+			public IEObjectDescription getContentByName(String name) {
+				IEObjectDescription result = null;
+				for(IResourceDescription description: filteredDescriptions) {
+					Iterable<IEObjectDescription> objects = description.getExportedObjects(reference.getEReferenceType(), name);
+					Iterator<IEObjectDescription> iter = objects.iterator();
+					if (iter.hasNext()) {
+						if (result != null)
+							return getOuterScope().getContentByName(name);
+						result = iter.next();
+						if (iter.hasNext())
+							return getOuterScope().getContentByName(name);
+					}
+				}
+				if (result != null)
+					return result;
+				return getOuterScope().getContentByName(name);
+			}
+		};
 	}
 
 }

@@ -9,30 +9,28 @@ package org.eclipse.xtext.ui.core.scoping.namespaces;
 
 import static org.eclipse.xtext.junit.util.JavaProjectSetupUtil.*;
 
-import java.util.ArrayList;
+import java.util.Collection;
 
 import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
-import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.ui.core.containers.JavaElementBasedContainer;
+import org.eclipse.xtext.ui.core.containers.JavaProjectsState;
 import org.eclipse.xtext.ui.core.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.core.resource.Storage2UriMapperJavaImpl;
-
-import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JavaElementBasedContainerTest extends AbstractContainerTests {
+public class JavaProjectsStateTest extends AbstractAllContainersStateTests {
 
 	private URI uri1;
 	private URI uri2;
 	private URI uri3;
 	
 	private IJavaProject javaProject1;
-	private JavaElementBasedContainer container;
+	private JavaProjectsState projectsState;
+	private IPackageFragmentRoot srcRoot;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -43,21 +41,31 @@ public class JavaElementBasedContainerTest extends AbstractContainerTests {
 		uri2 = createFileAndRegisterResource(project1, "src/file2");
 		uri3 = createFileAndRegisterResource(project2, "src2/file3");
 		IResource member = javaProject1.getProject().findMember("src");
-		IPackageFragmentRoot fragmentRoot = javaProject1.getPackageFragmentRoot(member);
-		IStorage2UriMapper mapper = new Storage2UriMapperJavaImpl();
-		container = new JavaElementBasedContainer(this, fragmentRoot, mapper);
+		srcRoot = javaProject1.getPackageFragmentRoot(member);
+		IStorage2UriMapper mapper = new Storage2UriMapperJavaImpl() {
+			@Override
+			protected boolean isValidUri(URI uri) {
+				return uri != null;
+			}
+		};
+		projectsState = new JavaProjectsState();
+		projectsState.setMapper(mapper);
 	}
 	
-	public void testGetResourceDescription() {
-		assertNotNull(container.getResourceDescription(uri1));
-		assertNotNull(container.getResourceDescription(uri2));
-		assertNull(container.getResourceDescription(uri3));
+	public void testGetContainerHandle() {
+		String uri1ContainerHandle = projectsState.getContainerHandle(uri1);
+		String uri2ContainerHandle = projectsState.getContainerHandle(uri2);
+		String uri3ContainerHandle = projectsState.getContainerHandle(uri3);
+		assertEquals(srcRoot.getHandleIdentifier(), uri1ContainerHandle);
+		assertEquals(srcRoot.getHandleIdentifier(), uri2ContainerHandle);
+		assertNull(uri3ContainerHandle);
 	}
 	
-	public void testGetResourceDescriptions() {
-		ArrayList<IResourceDescription> list = Lists.newArrayList(container.getResourceDescriptions());
-		assertEquals(2, list.size());
-		assertFalse(list.contains(uriToResourceDescription.get(uri3)));
+	public void testGetContainedURIs() {
+		Collection<URI> containedURIs = projectsState.getContainedURIs(srcRoot.getHandleIdentifier());
+		assertEquals(2, containedURIs.size());
+		assertTrue(containedURIs.contains(uri1));
+		assertTrue(containedURIs.contains(uri2));
 	}
 	
 }
