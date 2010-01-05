@@ -36,7 +36,11 @@ public class UpdateProjectsJob extends Job {
 		this.builderState = builderState;
 		this.resourceSetProvider = resourceSetProvider;
 		setRule(ResourcesPlugin.getWorkspace().getRoot());
-		this.belongsTo(ResourcesPlugin.FAMILY_AUTO_BUILD);
+	}
+	
+	@Override
+	public boolean belongsTo(Object family) {
+		return family == ResourcesPlugin.FAMILY_AUTO_BUILD;
 	}
 
 	@Override

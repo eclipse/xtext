@@ -106,10 +106,13 @@ public class Activator extends AbstractUIPlugin {
 
 	protected void doFullBuild() {
 		new Job("Indexing Xtext Resources") {
-			
 			{
-				setRule(ResourcesPlugin.getWorkspace().getRoot());
-				this.belongsTo(ResourcesPlugin.FAMILY_AUTO_BUILD);
+				setRule(ResourcesPlugin.getWorkspace().getRuleFactory().buildRule());
+			}
+			
+			@Override
+			public boolean belongsTo(Object family) {
+				return ResourcesPlugin.FAMILY_AUTO_BUILD == family;
 			}
 			
 			@Override

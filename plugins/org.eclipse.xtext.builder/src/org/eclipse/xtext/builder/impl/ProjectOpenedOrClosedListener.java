@@ -72,7 +72,7 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 							builderState).schedule();
 				}
 			} catch (CoreException e) {
-				log.error(e);
+				log.error(e.getMessage(), e);
 			}
 		}
 		if ((event.getType() == IResourceChangeEvent.PRE_CLOSE || event.getType() == IResourceChangeEvent.PRE_DELETE)) {
@@ -82,7 +82,11 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 				new Job("removing project " + event.getResource().getName() + " from xtext index.") {
 					{
 						setRule(ResourcesPlugin.getWorkspace().getRoot());
-						this.belongsTo(ResourcesPlugin.FAMILY_AUTO_BUILD);
+					}
+					
+					@Override
+					public boolean belongsTo(Object family) {
+						return family == ResourcesPlugin.FAMILY_AUTO_BUILD;
 					}
 
 					@Override
