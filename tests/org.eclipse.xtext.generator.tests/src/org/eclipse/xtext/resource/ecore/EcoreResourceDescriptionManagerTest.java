@@ -7,14 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.ecore;
 
+import java.util.Collection;
+import java.util.Iterator;
 import java.util.Map;
 
 import junit.framework.TestCase;
 
+import org.eclipse.emf.ecore.ENamedElement;
+import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 
 /**
@@ -35,4 +42,25 @@ public class EcoreResourceDescriptionManagerTest extends TestCase {
 		assertEquals(EcorePackage.Literals.ECLASS, index.get("EClass").getEObjectOrProxy());
 	}
 
+	public void testPerformance() throws Exception {
+		EcoreResourceDescriptionManager manager = new EcoreResourceDescriptionManager();
+		Collection<String> uris = ImmutableList.copyOf(EPackage.Registry.INSTANCE.keySet());
+		for(String uri: uris) {
+			EPackage pack = EPackage.Registry.INSTANCE.getEPackage(uri);
+			IResourceDescription description = manager.getResourceDescription(pack.eResource());
+			assertNotNull(description);
+			for(int i = 0; i < 10; i++) {
+				Iterator<EObject> iter = EcoreUtil.getAllProperContents(pack, true);
+				while(iter.hasNext()) {
+					EObject next = iter.next();
+					if (next instanceof ENamedElement) {
+						String name = ((ENamedElement) next).getName();
+//						Iterable<IEObjectDescription> objects = 
+						description.getExportedObjects(next.eClass(), name);
+//						assertFalse(name + " - " + uri + " - " + next, Iterables.isEmpty(objects));
+					}
+				}
+			}
+		}
+	}
 }

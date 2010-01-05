@@ -56,8 +56,10 @@ public class BuilderIntegrationFragment extends DefaultGeneratorFragment {
 					"binder.bind(" + IResourceDescriptions.class.getName() + ".class"
 							+ ").toProvider("
 							+ "org.eclipse.xtext.builder.GlobalResourceDescriptionsAccess.getDirtyResourceDescriptions()).asEagerSingleton()")
-			.addTypeToType(IContainer.Manager.class.getName(), "org.eclipse.xtext.ui.core.containers.JavaProjectAwareContainerManager")
+			.addTypeToType(IContainer.Manager.class.getName(), "org.eclipse.xtext.ui.core.containers.StateBasedContainerManager")
 			.addTypeToType("org.eclipse.xtext.ui.core.editor.IXtextEditorCallback", "org.eclipse.xtext.builder.nature.NatureAddingEditorCallback")
+			.addTypeToProviderInstance("org.eclipse.xtext.ui.core.containers.IAllContainerState", 
+				"new org.eclipse.xtext.ui.core.containers.JavaProjectsStateProvider()")
 			.getBindings();
 	}
 

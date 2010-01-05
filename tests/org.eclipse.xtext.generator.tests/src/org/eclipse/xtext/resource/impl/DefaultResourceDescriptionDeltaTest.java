@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.impl;
 
+import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
@@ -21,25 +22,28 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 
 import com.google.common.collect.Iterables;
-import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class DefaultResourceDescriptionDeltaTest extends TestCase {
+	
+	@SuppressWarnings("serial")
 	static class TestResDesc extends AbstractResourceDescription {
 
-		public List<IEObjectDescription> exported = Lists.newArrayList();
+		protected TestResDesc() {
+		}
+
+		public List<IEObjectDescription> exported = new ArrayList<IEObjectDescription>() {
+			@Override
+			public boolean add(IEObjectDescription o) {
+				invalidateCache();
+				return super.add(o);
+			}
+		};
+		
 		public Set<String> imported = Sets.newHashSet();
-
-		public Iterable<IEObjectDescription> getExportedObjects() {
-			return exported;
-		}
-
-		public IEObjectDescription getExportedObjectForName(String name) {
-			throw new UnsupportedOperationException();
-		}
 
 		public Iterable<String> getImportedNames() {
 			return imported;
@@ -52,6 +56,12 @@ public class DefaultResourceDescriptionDeltaTest extends TestCase {
 		public Iterable<IReferenceDescription> getReferenceDescriptions() {
 			return Iterables.emptyIterable();
 		}
+		
+		@Override
+		protected List<IEObjectDescription> computeExportedObjects() {
+			return exported;
+		}
+		
 	}
 	
 	public void testHasChanges_1() throws Exception {
