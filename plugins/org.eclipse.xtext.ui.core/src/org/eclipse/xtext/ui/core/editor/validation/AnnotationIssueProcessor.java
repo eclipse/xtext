@@ -28,6 +28,7 @@ import org.eclipse.xtext.ui.core.MarkerTypes;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.validation.Issue;
+import org.eclipse.xtext.validation.IssueResolutionProvider;
 import org.eclipse.xtext.validation.Issue.Severity;
 
 import com.google.common.collect.Iterators;
@@ -46,13 +47,15 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 	private AnnotationTypeLookup lookup = new AnnotationTypeLookup();
 	private final IXtextDocument xtextDocument;
 	private boolean updateMarkersOnModelChange;
+	private final IssueResolutionProvider issueResolutionProvider;
 
-	public AnnotationIssueProcessor(IXtextDocument xtextDocument, IAnnotationModel annotationModel) {
+	public AnnotationIssueProcessor(IXtextDocument xtextDocument, IAnnotationModel annotationModel, IssueResolutionProvider issueResolutionProvider) {
 		super();
 		this.annotationModel = annotationModel;
 		if (annotationModel != null)
 			annotationModel.addAnnotationModelListener(this);
 		this.xtextDocument = xtextDocument;
+		this.issueResolutionProvider = issueResolutionProvider;
 	}
 
 	public void processIssues(List<Issue> issues, IProgressMonitor monitor) {
@@ -123,7 +126,8 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 			}
 			if (isSet(issue.getOffset()) && isSet(issue.getLength()) && issue.getMessage() != null) {
 				String type = lookup.getAnnotationType(EValidator.MARKER, getMarkerSeverity(issue.getSeverity()));
-				Annotation annotation = new XtextAnnotation(type, false, xtextDocument, issue);
+				boolean isQuickfixable = issueResolutionProvider.hasResolutionFor(issue.getCode());
+				Annotation annotation = new XtextAnnotation(type, false, xtextDocument, issue, isQuickfixable);
 				Position position = new Position(issue.getOffset(), issue.getLength());
 				annotationToPosition.put(annotation, position);
 				positionToAnnotations.put(position, annotation);

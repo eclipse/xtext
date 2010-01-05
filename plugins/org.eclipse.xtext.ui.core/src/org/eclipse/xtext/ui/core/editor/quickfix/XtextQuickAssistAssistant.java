@@ -29,6 +29,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.IImageHelper;
+import org.eclipse.xtext.ui.core.MarkerTypes;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.edit.IDocumentEditor;
 import org.eclipse.xtext.ui.core.editor.validation.XtextAnnotation;
@@ -149,7 +150,7 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 //					canFix = contributedResolutions.length > 0;
 //				}
 				
-				boolean canFix = issueResolutionProvider.hasResolutionFor(getCode(markerAnnotation));
+				boolean canFix = issueResolutionProvider.hasResolutionFor(MarkerTypes.getCode(markerAnnotation));
 				
 				if (!markerAnnotation.isQuickFixableStateSet())
 					markerAnnotation.setQuickFixable(canFix);
@@ -160,11 +161,6 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 			return false;
 		}
 
-		private String getCode(MarkerAnnotation markerAnnotation) {
-			IMarker marker = markerAnnotation.getMarker();
-			return marker.getAttribute(Issue.CODE_KEY, null);
-		}
-		
 		private URI getUriToProblem(MarkerAnnotation markerAnnotation) {
 			String uri = markerAnnotation.getMarker().getAttribute(Issue.URI_KEY, null);
 			return uri != null ? URI.createURI(uri) : null;
@@ -237,7 +233,7 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 				} catch (BadLocationException e) {
 				}
 
-				issue.setCode(getCode(markerAnnotation));
+				issue.setCode(MarkerTypes.getCode(markerAnnotation));
 				issue.setUriToProblem(getUriToProblem(markerAnnotation));
 				issue.setSeverity(getSeverityFromMarker(markerAnnotation.getMarker()));
 				
