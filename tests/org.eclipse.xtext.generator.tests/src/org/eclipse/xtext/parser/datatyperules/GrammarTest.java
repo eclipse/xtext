@@ -34,7 +34,7 @@ public class GrammarTest extends AbstractXtextTests {
 
 	public void testGrammarAccess() {
 		assertEquals(2, grammar.getMetamodelDeclarations().size());
-		assertEquals(7, grammar.getRules().size());
+		assertEquals(8, grammar.getRules().size());
 	}
 
 	public void testRuleCompositeModel() {
