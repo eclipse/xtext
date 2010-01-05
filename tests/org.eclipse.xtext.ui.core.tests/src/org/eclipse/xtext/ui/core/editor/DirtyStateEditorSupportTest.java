@@ -7,7 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor;
 
+import java.util.Collections;
 import java.util.LinkedList;
+import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EcoreFactory;
@@ -30,7 +32,6 @@ import org.eclipse.xtext.ui.core.editor.model.IXtextModelListener;
 import org.eclipse.xtext.ui.core.notification.StateChangeEventBroker;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 
 /**
@@ -51,7 +52,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 	private IXtextModelListener modelListener;
 	private DocumentBasedDirtyResource dirtyResource;
 	private IXtextDocument document;
-	private Iterable<IEObjectDescription> exportedObjects;
+	private List<IEObjectDescription> exportedObjects;
 
 	@Override
 	protected void setUp() throws Exception {
@@ -74,7 +75,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		dirtyResource = new DocumentBasedDirtyResource();
 		dirtyStateSupport.setDirtyResource(dirtyResource);
 		ignoreConcurrentEditing = Lists.newLinkedList();
-		exportedObjects = Iterables.emptyIterable();
+		exportedObjects = Collections.emptyList();
 	}
 	
 	public void testInitialize_01(){
@@ -334,7 +335,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 	public IResourceDescription getResourceDescription(Resource resource) {
 		return new DefaultResourceDescription(resource, new SimpleNameProvider()) {
 			@Override
-			public Iterable<IEObjectDescription> getExportedObjects() {
+			protected List<IEObjectDescription> computeExportedObjects() {
 				return exportedObjects;
 			}
 		};

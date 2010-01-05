@@ -28,7 +28,7 @@ import com.google.common.collect.Maps;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractContainerTests extends TestCase implements IResourceDescriptions{
+public abstract class AbstractAllContainersStateTests extends TestCase implements IResourceDescriptions {
 
 	protected IProject project1;
 	protected IProject project2;

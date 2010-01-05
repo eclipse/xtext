@@ -472,10 +472,12 @@ public final class Iterators {
       Iterator<? extends T> removeFrom;
 
       public boolean hasNext() {
-        while (!current.hasNext() && inputs.hasNext()) {
+    	boolean result = current.hasNext();
+        while (!result && inputs.hasNext()) {
           current = inputs.next();
+          result = current.hasNext();
         }
-        return current.hasNext();
+        return result;
       }
       public T next() {
         if (!hasNext()) {
