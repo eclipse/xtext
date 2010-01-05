@@ -7,7 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
+import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.Map;
 
 import org.eclipse.emf.common.notify.Notification;
@@ -15,10 +17,17 @@ import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.util.EContentAdapter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
+import com.google.common.collect.Sets;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class OnChangeEvictingCacheAdapter extends EContentAdapter {
+	
+	public interface Listener {
+		void onEvict(OnChangeEvictingCacheAdapter cache);
+	}
+	
 	public static OnChangeEvictingCacheAdapter getOrCreate(Notifier notifier) {
 		OnChangeEvictingCacheAdapter adapter = (OnChangeEvictingCacheAdapter) EcoreUtil.getAdapter(notifier.eAdapters(), OnChangeEvictingCacheAdapter.class);
 		if (adapter == null) {
@@ -30,6 +39,8 @@ public class OnChangeEvictingCacheAdapter extends EContentAdapter {
 
 	private Map<String, Object> values = new HashMap<String, Object>();
 
+	private Collection<Listener> listeners = Sets.newHashSet();
+	
 	public void set(String name, Object value) {
 		this.values.put(name, value);
 	}
@@ -38,12 +49,27 @@ public class OnChangeEvictingCacheAdapter extends EContentAdapter {
 	public <T> T get(String name) {
 		return (T) this.values.get(name);
 	}
+	
+	public void addCacheListener(Listener listener) {
+		this.listeners.add(listener);
+	}
 
+	public void removeCacheListener(Listener listener) {
+		this.listeners.remove(listener);
+	}
+	
 	@Override
 	public void notifyChanged(Notification notification) {
 		super.notifyChanged(notification);
-		if (!notification.isTouch())
+		if (!notification.isTouch()) {
 			values.clear();
+			Iterator<Listener> iter = listeners.iterator();
+			while(iter.hasNext()) {
+				Listener next = iter.next();
+				iter.remove();
+				next.onEvict(this);
+			}
+		}
 	}
 
 	@Override

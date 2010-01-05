@@ -29,9 +29,10 @@ import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractExportedObjectsAwareScopeProvider;
+import org.eclipse.xtext.scoping.impl.ResourceDescriptionBasedScope;
 import org.eclipse.xtext.scoping.impl.SimpleScope;
 
 import com.google.common.base.Function;
@@ -127,10 +128,11 @@ public class XtextScopeProvider extends AbstractExportedObjectsAwareScopeProvide
 		return current;
 	}
 
-	protected IScope createScope(final Grammar grammar, EClass type, IScope parent) {
-		Iterable<IEObjectDescription> exportedObjects = getExportedEObjects(grammar.eResource());
-		Iterable<IEObjectDescription> compatible = Scopes.selectCompatible(exportedObjects, type);
-		return new SimpleScope(parent, compatible);
+	protected IScope createScope(final Grammar grammar, final EClass type, IScope parent) {
+		final IResourceDescription resourceDescription = getResourceDescription(grammar.eResource());
+		if (resourceDescription == null)
+			return parent;
+		return new ResourceDescriptionBasedScope(parent, resourceDescription, type);
 	}
 
 	private List<Grammar> getAllGrammars(Grammar grammar) {

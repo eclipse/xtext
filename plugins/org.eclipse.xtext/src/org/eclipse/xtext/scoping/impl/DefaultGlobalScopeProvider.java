@@ -10,13 +10,17 @@ package org.eclipse.xtext.scoping.impl;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.util.OnChangeEvictingCacheAdapter;
 
 import com.google.inject.Inject;
 
@@ -44,11 +48,25 @@ public class DefaultGlobalScopeProvider extends AbstractGlobalScopeProvider {
 	}
 
 	protected List<IContainer> getVisibleContainers(EObject context) {
-		// TODO read state from ResourceSet
 		IResourceDescription description = descriptionManager.getResourceDescription(context.eResource());
-		List<IContainer> containers = containerManager.getVisibleContainers(description,
-				getResourceDescriptions(context));
-		return containers;
+		IResourceDescriptions resourceDescriptions = getResourceDescriptions(context);
+		String cacheKey = getCacheKey("VisibleContainers", context.eResource().getResourceSet());
+		OnChangeEvictingCacheAdapter cache = OnChangeEvictingCacheAdapter.getOrCreate(context);
+		List<IContainer> result = null;
+		result = cache.get(cacheKey);
+		if (result == null) {
+			result = containerManager.getVisibleContainers(description,	resourceDescriptions);
+			cache.set(cacheKey, result);
+		}
+		return result;
+	}
+	
+	protected String getCacheKey(String base, ResourceSet context) {
+		Map<Object, Object> loadOptions = context.getLoadOptions();
+		if (loadOptions.containsKey(NAMED_BUILDER_SCOPE)) {
+			return base + "@" + NAMED_BUILDER_SCOPE;
+		} 
+		return base + "@DEFAULT_SCOPE"; 
 	}
 
 	protected SimpleScope createIndexScope(IScope parent, final IContainer container, final EReference reference) {
@@ -67,7 +85,7 @@ public class DefaultGlobalScopeProvider extends AbstractGlobalScopeProvider {
 				IEObjectDescription result = null;
 				while (iter.hasNext()) {
 					if (result != null)
-						return null;
+						return getOuterScope().getContentByName(name);
 					result = iter.next();
 				}
 				if (result != null)

@@ -47,14 +47,21 @@ public class ResourceDescriptionsBasedContainer implements IContainer {
 	}
 
 	protected Map<URI, IResourceDescription> getUriToDescription() {
-		if (uriToDescription == null) {
-			Iterable<? extends IResourceDescription> filtered = Iterables.filter(descriptions.getAllResourceDescriptions(), new DelegatingPredicate());
-			uriToDescription = Maps.newHashMap();
-			for(IResourceDescription description: filtered) {
-				uriToDescription.put(description.getURI(), description);
-			}
+		Map<URI, IResourceDescription> result = uriToDescription;
+		if (result == null) {
+			result = doGetUriToDescription();
+			uriToDescription = result;
 		}
-		return uriToDescription;
+		return result;
+	}
+
+	protected Map<URI, IResourceDescription> doGetUriToDescription() {
+		Iterable<? extends IResourceDescription> filtered = Iterables.filter(descriptions.getAllResourceDescriptions(), new DelegatingPredicate());
+		Map<URI, IResourceDescription> result = Maps.newLinkedHashMap();
+		for(IResourceDescription description: filtered) {
+			result.put(description.getURI(), description);
+		}
+		return result;
 	}
 	
 	private class DelegatingPredicate implements Predicate<IResourceDescription> {
@@ -68,6 +75,10 @@ public class ResourceDescriptionsBasedContainer implements IContainer {
 	protected boolean contains(IResourceDescription input) {
 		return true;
 	}
+	
+	protected IResourceDescriptions getDescriptions() {
+		return descriptions;
+	}
 
 	public Iterable<IEObjectDescription> findAllEObjects(final EClass type) {
 		return Iterables.concat(Iterables.transform(getResourceDescriptions(), new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
@@ -80,6 +91,8 @@ public class ResourceDescriptionsBasedContainer implements IContainer {
 	public Iterable<IEObjectDescription> findAllEObjects(final EClass type, final String name) {
 		return Iterables.concat(Iterables.transform(getResourceDescriptions(), new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
 			public Iterable<IEObjectDescription> apply(IResourceDescription from) {
+				if (from == null)
+					throw new NullPointerException(ResourceDescriptionsBasedContainer.this.getClass().getName());
 				return from.getExportedObjects(type, name);
 			}
 		}));

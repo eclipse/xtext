@@ -7,45 +7,61 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.impl;
 
-import org.eclipse.emf.common.util.URI;
+import java.util.List;
+
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
-
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public abstract class AbstractResourceDescription implements IResourceDescription {
 	
-	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz, final String name) {
-		return Iterables.filter(getExportedObjects(), new Predicate<IEObjectDescription>() {
-			public boolean apply(IEObjectDescription input) {
-				return (EcoreUtil2.isAssignableFrom(clazz,input.getEClass()))
-					&& input.getName().equals(name);
-			}
-		});
+	private EObjectDescriptionLookUp lookup;
+	private boolean invalidated;
+	
+	protected AbstractResourceDescription() {
+		invalidated = true;
 	}
 
-	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz) {
-		return Iterables.filter(getExportedObjects(), new Predicate<IEObjectDescription>() {
-			public boolean apply(IEObjectDescription input) {
-				return EcoreUtil2.isAssignableFrom(clazz,input.getEClass());
-			}
-		});
+	public Iterable<IEObjectDescription> getExportedObjects(EClass clazz, String name) {
+		updateLookup();
+		return lookup.getExportedObjects(clazz, name);
+	}
+
+	public Iterable<IEObjectDescription> getExportedObjects(EClass clazz) {
+		updateLookup();
+		return lookup.getExportedObjects(clazz);
 	}
 
 	public Iterable<IEObjectDescription> getExportedObjectsForEObject(EObject object) {
-		final URI uri = EcoreUtil.getURI(object);
-		return Iterables.filter(getExportedObjects(), new Predicate<IEObjectDescription>() {
-			public boolean apply(IEObjectDescription input) {
-				return uri.equals(input.getEObjectURI());
-			}
-		});
+		updateLookup();
+		return lookup.getExportedObjectsForEObject(object);
+	}
+	
+	public Iterable<IEObjectDescription> getExportedObjects() {
+		updateLookup();
+		return lookup.getExportedObjects();
+	}
+	
+	public void invalidateCache() {
+		invalidated = true;
+	}
+	
+	protected abstract List<IEObjectDescription> computeExportedObjects();
+	
+	protected void updateLookup() {
+		if (lookup == null) {
+			lookup = new EObjectDescriptionLookUp(computeExportedObjects());
+		} else if (isInvalid()) {
+			lookup.setExportedObjects(computeExportedObjects());
+		}
+		invalidated = false;
+	}
+
+	protected boolean isInvalid() {
+		return invalidated;
 	}
 }

@@ -8,11 +8,9 @@
 package org.eclipse.xtext.scoping.impl;
 
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
@@ -31,18 +29,15 @@ public abstract class AbstractExportedObjectsAwareScopeProvider extends Abstract
 		this.resourceServiceProviderRegistry = resourceDescriptionManagerRegistry;
 	}
 	
-	public Iterable<IEObjectDescription> getExportedEObjects(Resource resource) {
+	protected IResourceDescription getResourceDescription(Resource resource) {
 		IResourceServiceProvider resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(resource.getURI(),null);
 		if (resourceServiceProvider == null)
-			return Iterables.emptyIterable();
+			return null;
 		IResourceDescription.Manager manager = resourceServiceProvider.getResourceDescriptionManager();
 		if (manager == null)
-			return Iterables.emptyIterable();
+			return null;
 		IResourceDescription description = manager.getResourceDescription(resource);
-		if (description == null)
-			return Iterables.emptyIterable();
-		Iterable<IEObjectDescription> result = description.getExportedObjects();
-		return result;
+		return description;
 	}
 	
 }
