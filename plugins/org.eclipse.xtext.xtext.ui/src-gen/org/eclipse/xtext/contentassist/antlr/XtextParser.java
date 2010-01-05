@@ -84,10 +84,6 @@ public class XtextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAssignableAlternativesAccess().getGroup_1_1(), "rule__AssignableAlternatives__Group_1_1__0");
 					put(grammarAccess.getCrossReferenceAccess().getGroup(), "rule__CrossReference__Group__0");
 					put(grammarAccess.getCrossReferenceAccess().getGroup_2(), "rule__CrossReference__Group_2__0");
-					put(grammarAccess.getParenthesizedCrossReferenceableElementAccess().getGroup(), "rule__ParenthesizedCrossReferenceableElement__Group__0");
-					put(grammarAccess.getCrossReferenceableAlternativesAccess().getGroup(), "rule__CrossReferenceableAlternatives__Group__0");
-					put(grammarAccess.getCrossReferenceableAlternativesAccess().getGroup_1(), "rule__CrossReferenceableAlternatives__Group_1__0");
-					put(grammarAccess.getCrossReferenceableAlternativesAccess().getGroup_1_1(), "rule__CrossReferenceableAlternatives__Group_1_1__0");
 					put(grammarAccess.getParenthesizedElementAccess().getGroup(), "rule__ParenthesizedElement__Group__0");
 					put(grammarAccess.getTerminalRuleAccess().getGroup(), "rule__TerminalRule__Group__0");
 					put(grammarAccess.getTerminalRuleAccess().getGroup_2(), "rule__TerminalRule__Group_2__0");
@@ -145,7 +141,6 @@ public class XtextParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAssignableAlternativesAccess().getGroupsAssignment_1_1_1(), "rule__AssignableAlternatives__GroupsAssignment_1_1_1");
 					put(grammarAccess.getCrossReferenceAccess().getTypeAssignment_1(), "rule__CrossReference__TypeAssignment_1");
 					put(grammarAccess.getCrossReferenceAccess().getTerminalAssignment_2_1(), "rule__CrossReference__TerminalAssignment_2_1");
-					put(grammarAccess.getCrossReferenceableAlternativesAccess().getGroupsAssignment_1_1_1(), "rule__CrossReferenceableAlternatives__GroupsAssignment_1_1_1");
 					put(grammarAccess.getTerminalRuleAccess().getNameAssignment_1(), "rule__TerminalRule__NameAssignment_1");
 					put(grammarAccess.getTerminalRuleAccess().getTypeAssignment_2_1(), "rule__TerminalRule__TypeAssignment_2_1");
 					put(grammarAccess.getTerminalRuleAccess().getAlternativesAssignment_4(), "rule__TerminalRule__AlternativesAssignment_4");

@@ -66,7 +66,7 @@ public final class Bug287184TestLanguageFQNConsumer extends NonTerminalConsumer 
 		}
 	}
 
-	protected class Group$3$Consumer extends MandatoryLoopGroupConsumer {
+	protected class Group$3$Consumer extends LoopGroupConsumer {
 		
 		protected Group$3$Consumer(final Group group) {
 			super(group);

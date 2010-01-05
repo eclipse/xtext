@@ -31,8 +31,6 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextParenthesizedAssignableEl
 import org.eclipse.xtext.parser.packrat.consumers.XtextAssignableAlternativesConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextCrossReferenceConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextCrossReferenceableTerminalConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.XtextParenthesizedCrossReferenceableElementConsumer;
-import org.eclipse.xtext.parser.packrat.consumers.XtextCrossReferenceableAlternativesConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextParenthesizedElementConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextTerminalRuleConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextTerminalAlternativesConsumer;
@@ -81,8 +79,6 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
     private XtextAssignableAlternativesConsumer assignableAlternativesConsumer;
     private XtextCrossReferenceConsumer crossReferenceConsumer;
     private XtextCrossReferenceableTerminalConsumer crossReferenceableTerminalConsumer;
-    private XtextParenthesizedCrossReferenceableElementConsumer parenthesizedCrossReferenceableElementConsumer;
-    private XtextCrossReferenceableAlternativesConsumer crossReferenceableAlternativesConsumer;
     private XtextParenthesizedElementConsumer parenthesizedElementConsumer;
     private XtextTerminalRuleConsumer terminalRuleConsumer;
     private XtextTerminalAlternativesConsumer terminalAlternativesConsumer;
@@ -179,12 +175,6 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 		crossReferenceableTerminalConsumer = new XtextCrossReferenceableTerminalConsumer(
     		this, null
     	);
-		parenthesizedCrossReferenceableElementConsumer = new XtextParenthesizedCrossReferenceableElementConsumer(
-    		this, null
-    	);
-		crossReferenceableAlternativesConsumer = new XtextCrossReferenceableAlternativesConsumer(
-    		this, null
-    	);
 		parenthesizedElementConsumer = new XtextParenthesizedElementConsumer(
     		this, null
     	);
@@ -261,8 +251,6 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 		getAssignableAlternativesConsumer().setRule(grammarAccess.getAssignableAlternativesAccess());
 		getCrossReferenceConsumer().setRule(grammarAccess.getCrossReferenceAccess());
 		getCrossReferenceableTerminalConsumer().setRule(grammarAccess.getCrossReferenceableTerminalAccess());
-		getParenthesizedCrossReferenceableElementConsumer().setRule(grammarAccess.getParenthesizedCrossReferenceableElementAccess());
-		getCrossReferenceableAlternativesConsumer().setRule(grammarAccess.getCrossReferenceableAlternativesAccess());
 		getParenthesizedElementConsumer().setRule(grammarAccess.getParenthesizedElementAccess());
 		getTerminalRuleConsumer().setRule(grammarAccess.getTerminalRuleAccess());
 		getTerminalAlternativesConsumer().setRule(grammarAccess.getTerminalAlternativesAccess());
@@ -350,12 +338,7 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 		getCrossReferenceConsumer().setTypeRefConsumer(getTypeRefConsumer());
 
 		getCrossReferenceableTerminalConsumer().setKeywordConsumer(getKeywordConsumer());
-		getCrossReferenceableTerminalConsumer().setParenthesizedCrossReferenceableElementConsumer(getParenthesizedCrossReferenceableElementConsumer());
 		getCrossReferenceableTerminalConsumer().setRuleCallConsumer(getRuleCallConsumer());
-
-		getParenthesizedCrossReferenceableElementConsumer().setCrossReferenceableAlternativesConsumer(getCrossReferenceableAlternativesConsumer());
-
-		getCrossReferenceableAlternativesConsumer().setCrossReferenceableTerminalConsumer(getCrossReferenceableTerminalConsumer());
 
 		getParenthesizedElementConsumer().setAlternativesConsumer(getAlternativesConsumer());
 
@@ -452,9 +435,6 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 		getCrossReferenceConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
 		getCrossReferenceConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
 		getCrossReferenceConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
-		getParenthesizedCrossReferenceableElementConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
-		getParenthesizedCrossReferenceableElementConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
-		getCrossReferenceableAlternativesConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
 		getParenthesizedElementConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
 		getParenthesizedElementConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
 		getTerminalRuleConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$5$Delimiter);
@@ -572,14 +552,6 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 
     public XtextCrossReferenceableTerminalConsumer getCrossReferenceableTerminalConsumer() {
     	return crossReferenceableTerminalConsumer;
-    }
-
-    public XtextParenthesizedCrossReferenceableElementConsumer getParenthesizedCrossReferenceableElementConsumer() {
-    	return parenthesizedCrossReferenceableElementConsumer;
-    }
-
-    public XtextCrossReferenceableAlternativesConsumer getCrossReferenceableAlternativesConsumer() {
-    	return crossReferenceableAlternativesConsumer;
     }
 
     public XtextParenthesizedElementConsumer getParenthesizedElementConsumer() {

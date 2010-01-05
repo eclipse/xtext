@@ -22,35 +22,27 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cModelKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final Alternatives cNameAlternatives_1_0 = (Alternatives)cNameAssignment_1.eContents().get(0);
-		private final RuleCall cNameIDTerminalRuleCall_1_0_0 = (RuleCall)cNameAlternatives_1_0.eContents().get(0);
-		private final RuleCall cNameFQNParserRuleCall_1_0_1 = (RuleCall)cNameAlternatives_1_0.eContents().get(1);
+		private final RuleCall cNameFQNParserRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
 		private final Assignment cDetailAssignment_2 = (Assignment)cGroup.eContents().get(2);
 		private final Alternatives cDetailAlternatives_2_0 = (Alternatives)cDetailAssignment_2.eContents().get(0);
 		private final RuleCall cDetailDetailParserRuleCall_2_0_0 = (RuleCall)cDetailAlternatives_2_0.eContents().get(0);
 		private final RuleCall cDetailAssociatedDetailParserRuleCall_2_0_1 = (RuleCall)cDetailAlternatives_2_0.eContents().get(1);
 		
 		//Model:
-		//  "model" name=( ID | FQN ) detail+=( Detail | AssociatedDetail )+;
+		//  "model" name=FQN detail+=( Detail | AssociatedDetail )+;
 		public ParserRule getRule() { return rule; }
 
-		//"model" name=( ID | FQN ) detail+=( Detail | AssociatedDetail )+
+		//"model" name=FQN detail+=( Detail | AssociatedDetail )+
 		public Group getGroup() { return cGroup; }
 
 		//"model"
 		public Keyword getModelKeyword_0() { return cModelKeyword_0; }
 
-		//name=( ID | FQN )
+		//name=FQN
 		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
 
-		//ID|FQN
-		public Alternatives getNameAlternatives_1_0() { return cNameAlternatives_1_0; }
-
-		//ID
-		public RuleCall getNameIDTerminalRuleCall_1_0_0() { return cNameIDTerminalRuleCall_1_0_0; }
-
 		//FQN
-		public RuleCall getNameFQNParserRuleCall_1_0_1() { return cNameFQNParserRuleCall_1_0_1; }
+		public RuleCall getNameFQNParserRuleCall_1_0() { return cNameFQNParserRuleCall_1_0; }
 
 		//detail+=( Detail | AssociatedDetail )+
 		public Assignment getDetailAssignment_2() { return cDetailAssignment_2; }
@@ -88,59 +80,49 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	public class DetailElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Detail");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Assignment cDocAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final RuleCall cDocML_COMMENTTerminalRuleCall_0_0 = (RuleCall)cDocAssignment_0.eContents().get(0);
-		private final Keyword cDetailKeyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cVisibilityAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final Alternatives cVisibilityAlternatives_2_0 = (Alternatives)cVisibilityAssignment_2.eContents().get(0);
-		private final Keyword cVisibilityPrivateKeyword_2_0_0 = (Keyword)cVisibilityAlternatives_2_0.eContents().get(0);
-		private final Keyword cVisibilityProtectedKeyword_2_0_1 = (Keyword)cVisibilityAlternatives_2_0.eContents().get(1);
-		private final Keyword cVisibilityPublicKeyword_2_0_2 = (Keyword)cVisibilityAlternatives_2_0.eContents().get(2);
-		private final Assignment cDetailClassAssignment_3 = (Assignment)cGroup.eContents().get(3);
-		private final CrossReference cDetailClassModelCrossReference_3_0 = (CrossReference)cDetailClassAssignment_3.eContents().get(0);
-		private final RuleCall cDetailClassModelFQNParserRuleCall_3_0_1 = (RuleCall)cDetailClassModelCrossReference_3_0.eContents().get(1);
+		private final Keyword cDetailKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cVisibilityAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final Alternatives cVisibilityAlternatives_1_0 = (Alternatives)cVisibilityAssignment_1.eContents().get(0);
+		private final Keyword cVisibilityPrivateKeyword_1_0_0 = (Keyword)cVisibilityAlternatives_1_0.eContents().get(0);
+		private final Keyword cVisibilityProtectedKeyword_1_0_1 = (Keyword)cVisibilityAlternatives_1_0.eContents().get(1);
+		private final Keyword cVisibilityPublicKeyword_1_0_2 = (Keyword)cVisibilityAlternatives_1_0.eContents().get(2);
+		private final Assignment cDetailClassAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final CrossReference cDetailClassModelCrossReference_2_0 = (CrossReference)cDetailClassAssignment_2.eContents().get(0);
+		private final RuleCall cDetailClassModelFQNParserRuleCall_2_0_1 = (RuleCall)cDetailClassModelCrossReference_2_0.eContents().get(1);
 		
 		//Detail:
-		//  doc=ML_COMMENT? "detail" visibility=( "private" | "protected" | "public" )? detailClass=[
-		//  Model|FQN];
+		//  "detail" visibility=( "private" | "protected" | "public" )? detailClass=[Model|FQN];
 		public ParserRule getRule() { return rule; }
 
-		//doc=ML_COMMENT? "detail" visibility=( "private" | "protected" | "public" )? detailClass=[
-		//Model|FQN]
+		//"detail" visibility=( "private" | "protected" | "public" )? detailClass=[Model|FQN]
 		public Group getGroup() { return cGroup; }
 
-		//doc=ML_COMMENT?
-		public Assignment getDocAssignment_0() { return cDocAssignment_0; }
-
-		//ML_COMMENT
-		public RuleCall getDocML_COMMENTTerminalRuleCall_0_0() { return cDocML_COMMENTTerminalRuleCall_0_0; }
-
 		//"detail"
-		public Keyword getDetailKeyword_1() { return cDetailKeyword_1; }
+		public Keyword getDetailKeyword_0() { return cDetailKeyword_0; }
 
 		//visibility=( "private" | "protected" | "public" )?
-		public Assignment getVisibilityAssignment_2() { return cVisibilityAssignment_2; }
+		public Assignment getVisibilityAssignment_1() { return cVisibilityAssignment_1; }
 
 		//"private"|"protected"|"public"
-		public Alternatives getVisibilityAlternatives_2_0() { return cVisibilityAlternatives_2_0; }
+		public Alternatives getVisibilityAlternatives_1_0() { return cVisibilityAlternatives_1_0; }
 
 		//"private"
-		public Keyword getVisibilityPrivateKeyword_2_0_0() { return cVisibilityPrivateKeyword_2_0_0; }
+		public Keyword getVisibilityPrivateKeyword_1_0_0() { return cVisibilityPrivateKeyword_1_0_0; }
 
 		//"protected"
-		public Keyword getVisibilityProtectedKeyword_2_0_1() { return cVisibilityProtectedKeyword_2_0_1; }
+		public Keyword getVisibilityProtectedKeyword_1_0_1() { return cVisibilityProtectedKeyword_1_0_1; }
 
 		//"public"
-		public Keyword getVisibilityPublicKeyword_2_0_2() { return cVisibilityPublicKeyword_2_0_2; }
+		public Keyword getVisibilityPublicKeyword_1_0_2() { return cVisibilityPublicKeyword_1_0_2; }
 
 		//detailClass=[Model|FQN]
-		public Assignment getDetailClassAssignment_3() { return cDetailClassAssignment_3; }
+		public Assignment getDetailClassAssignment_2() { return cDetailClassAssignment_2; }
 
 		//[Model|FQN]
-		public CrossReference getDetailClassModelCrossReference_3_0() { return cDetailClassModelCrossReference_3_0; }
+		public CrossReference getDetailClassModelCrossReference_2_0() { return cDetailClassModelCrossReference_2_0; }
 
 		//FQN
-		public RuleCall getDetailClassModelFQNParserRuleCall_3_0_1() { return cDetailClassModelFQNParserRuleCall_3_0_1; }
+		public RuleCall getDetailClassModelFQNParserRuleCall_2_0_1() { return cDetailClassModelFQNParserRuleCall_2_0_1; }
 	}
 
 	public class AssociatedDetailElements extends AbstractParserRuleElementFinder {
@@ -149,35 +131,27 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Keyword cAssociatedKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cDetailClassAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final CrossReference cDetailClassModelCrossReference_1_0 = (CrossReference)cDetailClassAssignment_1.eContents().get(0);
-		private final Alternatives cDetailClassModelAlternatives_1_0_1 = (Alternatives)cDetailClassModelCrossReference_1_0.eContents().get(1);
-		private final RuleCall cDetailClassModelIDTerminalRuleCall_1_0_1_0 = (RuleCall)cDetailClassModelAlternatives_1_0_1.eContents().get(0);
-		private final RuleCall cDetailClassModelFQNParserRuleCall_1_0_1_1 = (RuleCall)cDetailClassModelAlternatives_1_0_1.eContents().get(1);
+		private final RuleCall cDetailClassModelFQNParserRuleCall_1_0_1 = (RuleCall)cDetailClassModelCrossReference_1_0.eContents().get(1);
 		private final Keyword cSemicolonKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//AssociatedDetail:
-		//  "associated" detailClass=[Model|( ID | FQN )] ";";
+		//  "associated" detailClass=[Model|FQN] ";";
 		public ParserRule getRule() { return rule; }
 
-		//"associated" detailClass=[Model|( ID | FQN )] ";"
+		//"associated" detailClass=[Model|FQN] ";"
 		public Group getGroup() { return cGroup; }
 
 		//"associated"
 		public Keyword getAssociatedKeyword_0() { return cAssociatedKeyword_0; }
 
-		//detailClass=[Model|( ID | FQN )]
+		//detailClass=[Model|FQN]
 		public Assignment getDetailClassAssignment_1() { return cDetailClassAssignment_1; }
 
-		//[Model|( ID | FQN )]
+		//[Model|FQN]
 		public CrossReference getDetailClassModelCrossReference_1_0() { return cDetailClassModelCrossReference_1_0; }
 
-		//ID|FQN
-		public Alternatives getDetailClassModelAlternatives_1_0_1() { return cDetailClassModelAlternatives_1_0_1; }
-
-		//ID
-		public RuleCall getDetailClassModelIDTerminalRuleCall_1_0_1_0() { return cDetailClassModelIDTerminalRuleCall_1_0_1_0; }
-
 		//FQN
-		public RuleCall getDetailClassModelFQNParserRuleCall_1_0_1_1() { return cDetailClassModelFQNParserRuleCall_1_0_1_1; }
+		public RuleCall getDetailClassModelFQNParserRuleCall_1_0_1() { return cDetailClassModelFQNParserRuleCall_1_0_1; }
 
 		//";"
 		public Keyword getSemicolonKeyword_2() { return cSemicolonKeyword_2; }
@@ -192,16 +166,16 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final RuleCall cIDTerminalRuleCall_1_1 = (RuleCall)cGroup_1.eContents().get(1);
 		
 		//FQN returns ecore::EString:
-		//  ID ("." ID)+;
+		//  ID ("." ID)*;
 		public ParserRule getRule() { return rule; }
 
-		//ID ("." ID)+
+		//ID ("." ID)*
 		public Group getGroup() { return cGroup; }
 
 		//ID
 		public RuleCall getIDTerminalRuleCall_0() { return cIDTerminalRuleCall_0; }
 
-		//("." ID)+
+		//("." ID)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//"."
@@ -240,7 +214,7 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//  "model" name=( ID | FQN ) detail+=( Detail | AssociatedDetail )+;
+	//  "model" name=FQN detail+=( Detail | AssociatedDetail )+;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -260,8 +234,7 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Detail:
-	//  doc=ML_COMMENT? "detail" visibility=( "private" | "protected" | "public" )? detailClass=[
-	//  Model|FQN];
+	//  "detail" visibility=( "private" | "protected" | "public" )? detailClass=[Model|FQN];
 	public DetailElements getDetailAccess() {
 		return (pDetail != null) ? pDetail : (pDetail = new DetailElements());
 	}
@@ -271,7 +244,7 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//AssociatedDetail:
-	//  "associated" detailClass=[Model|( ID | FQN )] ";";
+	//  "associated" detailClass=[Model|FQN] ";";
 	public AssociatedDetailElements getAssociatedDetailAccess() {
 		return (pAssociatedDetail != null) ? pAssociatedDetail : (pAssociatedDetail = new AssociatedDetailElements());
 	}
@@ -281,7 +254,7 @@ public class Bug287184TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//FQN returns ecore::EString:
-	//  ID ("." ID)+;
+	//  ID ("." ID)*;
 	public FQNElements getFQNAccess() {
 		return (pFQN != null) ? pFQN : (pFQN = new FQNElements());
 	}

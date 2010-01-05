@@ -19,7 +19,7 @@
 		<projectNameUi value="${uiProjectName}"/>
 		<activator value="org.eclipse.xtext.xtext.ui.internal.Activator"/>
 				
-		<language uri="classpath:/org/eclipse/xtext/Xtext.xtext" fileExtensions="${file.extensions}">
+		<language uri="platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.xtext" fileExtensions="${file.extensions}">
 			<property name="basePackage" value="org.eclipse"/>
 			
 			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
@@ -43,7 +43,7 @@
 		<projectNameRt value="${runtimeProjectName}"/>
 		<projectNameUi value="${commonUiProjectName}"/>
 				
-		<language uri="classpath:/org/eclipse/xtext/common/Terminals.xtext">
+		<language uri="platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/common/Terminals.xtext">
 			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
 			<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/>
 			<fragment class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>

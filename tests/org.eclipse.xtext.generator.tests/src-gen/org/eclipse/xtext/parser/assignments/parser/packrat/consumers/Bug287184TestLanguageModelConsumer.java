@@ -18,7 +18,6 @@ import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfigurat
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.assignments.services.Bug287184TestLanguageGrammarAccess.ModelElements;
 
@@ -32,31 +31,23 @@ public final class Bug287184TestLanguageModelConsumer extends NonTerminalConsume
 
 	private INonTerminalConsumer fqnConsumer;
 
-	private ITerminalConsumer idConsumer;
-
 	private IElementConsumer group$1$Consumer;
 
 	private IElementConsumer keyword$2$Consumer;
 
 	private IElementConsumer assignment$3$Consumer;
 
-	private IElementConsumer alternatives$4$Consumer;
+	private IElementConsumer ruleCall$4$Consumer;
 
-	private IElementConsumer ruleCall$5$Consumer;
+	private IElementConsumer assignment$5$Consumer;
 
-	private IElementConsumer ruleCall$6$Consumer;
+	private IElementConsumer alternatives$6$Consumer;
 
-	private IElementConsumer assignment$7$Consumer;
+	private IElementConsumer ruleCall$7$Consumer;
 
-	private IElementConsumer alternatives$8$Consumer;
-
-	private IElementConsumer ruleCall$9$Consumer;
-
-	private IElementConsumer ruleCall$10$Consumer;
+	private IElementConsumer ruleCall$8$Consumer;
 
 	private ICharacterClass keyword$2$Delimiter;
-
-	private ISequenceMatcher ruleCall$5$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -68,7 +59,7 @@ public final class Bug287184TestLanguageModelConsumer extends NonTerminalConsume
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
 			acceptor.accept(keyword$2$Consumer);
 			acceptor.accept(assignment$3$Consumer);
-			acceptor.accept(assignment$7$Consumer);
+			acceptor.accept(assignment$5$Consumer);
 		}
 	}
 
@@ -92,38 +83,13 @@ public final class Bug287184TestLanguageModelConsumer extends NonTerminalConsume
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return alternatives$4$Consumer;
+			return ruleCall$4$Consumer;
 		}
 	}
 
-	protected class Alternatives$4$Consumer extends AlternativesConsumer {
+	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected Alternatives$4$Consumer(final Alternatives alternatives) {
-			super(alternatives);
-		}
-		
-		@Override
-		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(ruleCall$5$Consumer);
-			acceptor.accept(ruleCall$6$Consumer);
-		}
-	}
-
-	protected class RuleCall$5$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$5$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(idConsumer, "name", false, false, getElement(), getRuleCall$5$Delimiter(), optional);
-		}
-	}
-
-	protected class RuleCall$6$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$6$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -133,34 +99,34 @@ public final class Bug287184TestLanguageModelConsumer extends NonTerminalConsume
 		}
 	}
 
-	protected class Assignment$7$Consumer extends MandatoryLoopAssignmentConsumer {
+	protected class Assignment$5$Consumer extends MandatoryLoopAssignmentConsumer {
 		
-		protected Assignment$7$Consumer(final Assignment assignment) {
+		protected Assignment$5$Consumer(final Assignment assignment) {
 			super(assignment);
 		}
 		
 		@Override
 		protected IElementConsumer getConsumer() {
-			return alternatives$8$Consumer;
+			return alternatives$6$Consumer;
 		}
 	}
 
-	protected class Alternatives$8$Consumer extends AlternativesConsumer {
+	protected class Alternatives$6$Consumer extends AlternativesConsumer {
 		
-		protected Alternatives$8$Consumer(final Alternatives alternatives) {
+		protected Alternatives$6$Consumer(final Alternatives alternatives) {
 			super(alternatives);
 		}
 		
 		@Override
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(ruleCall$9$Consumer);
-			acceptor.accept(ruleCall$10$Consumer);
+			acceptor.accept(ruleCall$7$Consumer);
+			acceptor.accept(ruleCall$8$Consumer);
 		}
 	}
 
-	protected class RuleCall$9$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$7$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$9$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$7$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -170,9 +136,9 @@ public final class Bug287184TestLanguageModelConsumer extends NonTerminalConsume
 		}
 	}
 
-	protected class RuleCall$10$Consumer extends ElementConsumer<RuleCall> {
+	protected class RuleCall$8$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected RuleCall$10$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$8$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -185,7 +151,6 @@ public final class Bug287184TestLanguageModelConsumer extends NonTerminalConsume
 	public Bug287184TestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
-		ruleCall$5$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	@Override
@@ -203,17 +168,13 @@ public final class Bug287184TestLanguageModelConsumer extends NonTerminalConsume
 		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
 		keyword$2$Consumer = new Keyword$2$Consumer(rule.getModelKeyword_0());
 		assignment$3$Consumer = new Assignment$3$Consumer(rule.getNameAssignment_1());
-		alternatives$4$Consumer = new Alternatives$4$Consumer(rule.getNameAlternatives_1_0());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getNameIDTerminalRuleCall_1_0_0());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getNameFQNParserRuleCall_1_0_1());
-		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getNameIDTerminalRuleCall_1_0_0());
-		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getNameFQNParserRuleCall_1_0_1());
-		assignment$7$Consumer = new Assignment$7$Consumer(rule.getDetailAssignment_2());
-		alternatives$8$Consumer = new Alternatives$8$Consumer(rule.getDetailAlternatives_2_0());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getDetailDetailParserRuleCall_2_0_0());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.getDetailAssociatedDetailParserRuleCall_2_0_1());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getDetailDetailParserRuleCall_2_0_0());
-		ruleCall$10$Consumer = new RuleCall$10$Consumer(rule.getDetailAssociatedDetailParserRuleCall_2_0_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getNameFQNParserRuleCall_1_0());
+		assignment$5$Consumer = new Assignment$5$Consumer(rule.getDetailAssignment_2());
+		alternatives$6$Consumer = new Alternatives$6$Consumer(rule.getDetailAlternatives_2_0());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getDetailDetailParserRuleCall_2_0_0());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getDetailAssociatedDetailParserRuleCall_2_0_1());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getDetailDetailParserRuleCall_2_0_0());
+		ruleCall$8$Consumer = new RuleCall$8$Consumer(rule.getDetailAssociatedDetailParserRuleCall_2_0_1());
 	}
 	
 	@Override
@@ -238,24 +199,12 @@ public final class Bug287184TestLanguageModelConsumer extends NonTerminalConsume
 		this.fqnConsumer = fqnConsumer;
 	}
 	
-	public void setIdConsumer(ITerminalConsumer idConsumer) {
-		this.idConsumer = idConsumer;
-	}
-	
 	public ICharacterClass getKeyword$2$Delimiter() {
 		return keyword$2$Delimiter;
 	}
 	
 	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
 		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ISequenceMatcher getRuleCall$5$Delimiter() {
-		return ruleCall$5$Delimiter;
-	}
-	
-	public void setRuleCall$5$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$5$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

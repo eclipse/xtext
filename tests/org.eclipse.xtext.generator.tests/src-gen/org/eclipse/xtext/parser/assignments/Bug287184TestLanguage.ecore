@@ -12,7 +12,6 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="detailClass" eType="#//Model"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="Detail" eSuperTypes="#//AbstractDetail">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="doc" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="AssociatedDetail" eSuperTypes="#//AbstractDetail"/>

@@ -280,14 +280,6 @@ public class AbstractXtextProposalProvider extends TerminalsProposalProvider {
 		}
 		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
 	}
-	public void completeCrossReferenceableAlternatives_Groups(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeCrossReferenceableAlternatives_Groups feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ context.getPrefix() + "'");
-		}
-		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
-	}
 	public void completeTerminalRule_Name(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeTerminalRule_Name feature '" + assignment.getFeature() + "' terminal '"
@@ -561,20 +553,6 @@ public class AbstractXtextProposalProvider extends TerminalsProposalProvider {
 	public void complete_CrossReferenceableTerminal(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("complete_CrossReferenceableTerminal '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
-					+ "' for model '" + context.getCurrentModel() + "' and prefix '" + context.getPrefix() + "'");
-		}
-		// subclasses may override
-	}
-	public void complete_ParenthesizedCrossReferenceableElement(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("complete_ParenthesizedCrossReferenceableElement '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
-					+ "' for model '" + context.getCurrentModel() + "' and prefix '" + context.getPrefix() + "'");
-		}
-		// subclasses may override
-	}
-	public void complete_CrossReferenceableAlternatives(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("complete_CrossReferenceableAlternatives '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
 					+ "' for model '" + context.getCurrentModel() + "' and prefix '" + context.getPrefix() + "'");
 		}
 		// subclasses may override

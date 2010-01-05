@@ -15,11 +15,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.Alternatives;
-import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
@@ -48,40 +45,11 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		with(XtextStandaloneSetup.class);
 	}
 
-	public void testMarkerForCrossReferences() throws Exception {
-		XtextResource resource = getResourceFromString(
-				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
-				"generate metamodel 'myURI'\n" +
-				"Model: name=ID ref=[Model|(ID|STRING)];");
-		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
-		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
-
-		Grammar grammar = (Grammar) resource.getContents().get(0);
-		ParserRule modelRule = (ParserRule) grammar.getRules().get(0);
-		Assignment assignment = (Assignment) ((Group) modelRule.getAlternatives()).getTokens().get(1);
-		CrossReference reference = (CrossReference) assignment.getTerminal();
-
-		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
-		assertNotNull("diag", diag);
-		assertEquals(diag.getChildren().toString(), 1, diag.getChildren().size());
-		assertEquals("diag.isWarning", diag.getSeverity(), Diagnostic.WARNING);
-		assertEquals(diag.getData().toString(), grammar, diag.getData().get(0));
-		assertEquals(diag.getData().toString(), 1, diag.getData().size());
-
-		Diagnostic child = diag.getChildren().get(0);
-		assertNotNull("child", child);
-		assertEquals("child.isWarning", child.getSeverity(), Diagnostic.WARNING);
-		assertNotNull("child.children", child.getChildren());
-		assertTrue("child.children.isEmpty", child.getChildren().isEmpty());
-		assertEquals("child.data[0]", reference.getTerminal(), child.getData().get(0));
-		assertEquals(child.getData().toString(), 1, child.getData().size());
-	}
-
 	public void testRulenamesAreNotEqualIgnoreCase() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'myURI'\n" +
-				"Model: name=ID ref=[Model|(ID)];\n" +
+				"Model: name=ID ref=[Model|ID];\n" +
 				"moDel: name=ID ref='foo';");
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
@@ -656,42 +624,6 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		rule.setType(typeRef);
 		typeRef.setClassifier(EcorePackage.Literals.EINT);
 		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(call, true, false);
-		validator.setMessageAcceptor(messageAcceptor);
-		validator.checkCrossReferenceTerminal(reference);
-		messageAcceptor.validate();
-	}
-	
-	public void testCheckCrossReferenceTerminal_03() throws Exception {
-		XtextValidator validator = get(XtextValidator.class);
-		CrossReference reference = XtextFactory.eINSTANCE.createCrossReference();
-		Alternatives alternatives = XtextFactory.eINSTANCE.createAlternatives();
-		reference.setTerminal(alternatives);
-		RuleCall call = XtextFactory.eINSTANCE.createRuleCall();
-		alternatives.getGroups().add(call);
-		ParserRule rule = XtextFactory.eINSTANCE.createParserRule();
-		call.setRule(rule);
-		TypeRef typeRef = XtextFactory.eINSTANCE.createTypeRef();
-		rule.setType(typeRef);
-		typeRef.setClassifier(EcorePackage.Literals.EINT);
-		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(call, true, false);
-		validator.setMessageAcceptor(messageAcceptor);
-		validator.checkCrossReferenceTerminal(reference);
-		messageAcceptor.validate();
-	}
-	
-	public void testCheckCrossReferenceTerminal_04() throws Exception {
-		XtextValidator validator = get(XtextValidator.class);
-		CrossReference reference = XtextFactory.eINSTANCE.createCrossReference();
-		Alternatives alternatives = XtextFactory.eINSTANCE.createAlternatives();
-		reference.setTerminal(alternatives);
-		RuleCall call = XtextFactory.eINSTANCE.createRuleCall();
-		alternatives.getGroups().add(call);
-		ParserRule rule = XtextFactory.eINSTANCE.createParserRule();
-		call.setRule(rule);
-		TypeRef typeRef = XtextFactory.eINSTANCE.createTypeRef();
-		rule.setType(typeRef);
-		typeRef.setClassifier(EcorePackage.Literals.ESTRING);
-		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(alternatives, false, true);
 		validator.setMessageAcceptor(messageAcceptor);
 		validator.checkCrossReferenceTerminal(reference);
 		messageAcceptor.validate();

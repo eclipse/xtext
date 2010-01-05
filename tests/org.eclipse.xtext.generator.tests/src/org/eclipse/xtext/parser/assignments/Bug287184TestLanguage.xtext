@@ -11,16 +11,15 @@ grammar org.eclipse.xtext.parser.assignments.Bug287184TestLanguage with org.ecli
 generate bug287184Test "http://www.eclipse.org/2008/tmf/xtext/Bug287184Test"
 
 Model:
-   "model" name=(ID|FQN) detail+=(Detail|AssociatedDetail)+;
+   "model" name=FQN detail+=(Detail|AssociatedDetail)+;
 
 AbstractDetail:
         Detail | AssociatedDetail;
 
 Detail:
-         doc=ML_COMMENT?
         "detail" visibility=("private"|"protected"|"public")? detailClass=[Model|FQN];
 
 AssociatedDetail:
-        "associated" detailClass=[Model|(ID|FQN)] ";";        
+        "associated" detailClass=[Model|FQN] ";";        
 
-FQN: ID ("." ID)+;
+FQN: ID ("." ID)*;

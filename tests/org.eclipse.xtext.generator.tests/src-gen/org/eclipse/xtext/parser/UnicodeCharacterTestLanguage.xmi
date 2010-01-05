@@ -1,85 +1,15 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
-  <xtext:Grammar name="org.eclipse.xtext.parser.assignments.Bug287184TestLanguage" usedGrammars="/1">
-    <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="bug287184Test">
-      <ePackage href="http://www.eclipse.org/2008/tmf/xtext/Bug287184Test#/"/>
+  <xtext:Grammar name="org.eclipse.xtext.parser.UnicodeCharacterTestLanguage" usedGrammars="/1">
+    <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="unicodeTest">
+      <ePackage href="http://www.eclipse.org/xtext/test/unicodeChars#/"/>
     </metamodelDeclarations>
-    <rules xsi:type="xtext:ParserRule" name="Model">
+    <rules xsi:type="xtext:ParserRule" name="UnicodeTestStartRule">
       <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/Bug287184Test#//Model"/>
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/test/unicodeChars#//UnicodeTestStartRule"/>
       </type>
-      <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="model"/>
-        <tokens xsi:type="xtext:Assignment" feature="name" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
-        </tokens>
-        <tokens xsi:type="xtext:Assignment" cardinality="+" feature="detail" operator="+=">
-          <terminal xsi:type="xtext:Alternatives">
-            <groups xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
-            <groups xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
-          </terminal>
-        </tokens>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="AbstractDetail">
-      <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/Bug287184Test#//AbstractDetail"/>
-      </type>
-      <alternatives xsi:type="xtext:Alternatives">
-        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
-        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="Detail">
-      <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/Bug287184Test#//Detail"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="detail"/>
-        <tokens xsi:type="xtext:Assignment" cardinality="?" feature="visibility" operator="=">
-          <terminal xsi:type="xtext:Alternatives">
-            <groups xsi:type="xtext:Keyword" value="private"/>
-            <groups xsi:type="xtext:Keyword" value="protected"/>
-            <groups xsi:type="xtext:Keyword" value="public"/>
-          </terminal>
-        </tokens>
-        <tokens xsi:type="xtext:Assignment" feature="detailClass" operator="=">
-          <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/Bug287184Test#//Model"/>
-            </type>
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
-          </terminal>
-        </tokens>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="AssociatedDetail">
-      <type metamodel="/0/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/Bug287184Test#//AssociatedDetail"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="associated"/>
-        <tokens xsi:type="xtext:Assignment" feature="detailClass" operator="=">
-          <terminal xsi:type="xtext:CrossReference">
-            <type metamodel="/0/@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/Bug287184Test#//Model"/>
-            </type>
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
-          </terminal>
-        </tokens>
-        <tokens xsi:type="xtext:Keyword" value=";"/>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="FQN">
-      <type metamodel="/1/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        <tokens xsi:type="xtext:Group" cardinality="*">
-          <tokens xsi:type="xtext:Keyword" value="."/>
-          <tokens xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
+      <alternatives xsi:type="xtext:Assignment" feature="bar" operator="=">
+        <terminal xsi:type="xtext:Keyword" value="&#xe3;&#x82;&#x8b;"/>
       </alternatives>
     </rules>
   </xtext:Grammar>

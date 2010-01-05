@@ -21,11 +21,9 @@ public final class Bug287184TestLanguageDelimiters {
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
-	public static final ISequenceMatcher ruleCall$7$Delimiter = new SetBasedKeywordMatcher(
+	public static final ICharacterClass keyword$37$Delimiter = ICharacterClass.Factory.nullClass();
+
+	public static final ISequenceMatcher ruleCall$41$Delimiter = new SetBasedKeywordMatcher(
 		"model", "detail", "private", "protected", "public", "associated");
-
-	public static final ISequenceMatcher ruleCall$22$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-
-	public static final ICharacterClass keyword$43$Delimiter = ICharacterClass.Factory.nullClass();
 
 }

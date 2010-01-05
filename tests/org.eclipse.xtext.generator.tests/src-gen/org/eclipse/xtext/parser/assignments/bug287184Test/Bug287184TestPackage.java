@@ -144,22 +144,13 @@ public interface Bug287184TestPackage extends EPackage
   int DETAIL__DETAIL_CLASS = ABSTRACT_DETAIL__DETAIL_CLASS;
 
   /**
-   * The feature id for the '<em><b>Doc</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int DETAIL__DOC = ABSTRACT_DETAIL_FEATURE_COUNT + 0;
-
-  /**
    * The feature id for the '<em><b>Visibility</b></em>' attribute.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int DETAIL__VISIBILITY = ABSTRACT_DETAIL_FEATURE_COUNT + 1;
+  int DETAIL__VISIBILITY = ABSTRACT_DETAIL_FEATURE_COUNT + 0;
 
   /**
    * The number of structural features of the '<em>Detail</em>' class.
@@ -168,7 +159,7 @@ public interface Bug287184TestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int DETAIL_FEATURE_COUNT = ABSTRACT_DETAIL_FEATURE_COUNT + 2;
+  int DETAIL_FEATURE_COUNT = ABSTRACT_DETAIL_FEATURE_COUNT + 1;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.parser.assignments.bug287184Test.impl.AssociatedDetailImpl <em>Associated Detail</em>}' class.
@@ -261,17 +252,6 @@ public interface Bug287184TestPackage extends EPackage
    * @generated
    */
   EClass getDetail();
-
-  /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parser.assignments.bug287184Test.Detail#getDoc <em>Doc</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the attribute '<em>Doc</em>'.
-   * @see org.eclipse.xtext.parser.assignments.bug287184Test.Detail#getDoc()
-   * @see #getDetail()
-   * @generated
-   */
-  EAttribute getDetail_Doc();
 
   /**
    * Returns the meta object for the attribute '{@link org.eclipse.xtext.parser.assignments.bug287184Test.Detail#getVisibility <em>Visibility</em>}'.
@@ -370,14 +350,6 @@ public interface Bug287184TestPackage extends EPackage
      * @generated
      */
     EClass DETAIL = eINSTANCE.getDetail();
-
-    /**
-     * The meta object literal for the '<em><b>Doc</b></em>' attribute feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EAttribute DETAIL__DOC = eINSTANCE.getDetail_Doc();
 
     /**
      * The meta object literal for the '<em><b>Visibility</b></em>' attribute feature.

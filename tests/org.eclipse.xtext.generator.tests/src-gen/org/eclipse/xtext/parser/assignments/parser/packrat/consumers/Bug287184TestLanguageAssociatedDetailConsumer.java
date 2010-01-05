@@ -6,7 +6,6 @@ package org.eclipse.xtext.parser.assignments.parser.packrat.consumers;
 import org.eclipse.emf.ecore.EClassifier;
 
 import org.eclipse.xtext.AbstractRule;
-import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.Group;
@@ -19,7 +18,6 @@ import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfigurat
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.matching.ICharacterClass;
-import org.eclipse.xtext.parser.packrat.matching.ISequenceMatcher;
 
 import org.eclipse.xtext.parser.assignments.services.Bug287184TestLanguageGrammarAccess.AssociatedDetailElements;
 
@@ -29,8 +27,6 @@ public final class Bug287184TestLanguageAssociatedDetailConsumer extends NonTerm
 
 	private INonTerminalConsumer fqnConsumer;
 
-	private ITerminalConsumer idConsumer;
-
 	private IElementConsumer group$1$Consumer;
 
 	private IElementConsumer keyword$2$Consumer;
@@ -39,19 +35,13 @@ public final class Bug287184TestLanguageAssociatedDetailConsumer extends NonTerm
 
 	private IElementConsumer crossReference$4$Consumer;
 
-	private IElementConsumer alternatives$6$Consumer;
+	private IElementConsumer ruleCall$6$Consumer;
 
-	private IElementConsumer ruleCall$7$Consumer;
-
-	private IElementConsumer ruleCall$8$Consumer;
-
-	private IElementConsumer keyword$9$Consumer;
+	private IElementConsumer keyword$7$Consumer;
 
 	private ICharacterClass keyword$2$Delimiter;
 
-	private ICharacterClass keyword$9$Delimiter;
-
-	private ISequenceMatcher ruleCall$7$Delimiter;
+	private ICharacterClass keyword$7$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -63,7 +53,7 @@ public final class Bug287184TestLanguageAssociatedDetailConsumer extends NonTerm
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
 			acceptor.accept(keyword$2$Consumer);
 			acceptor.accept(assignment$3$Consumer);
-			acceptor.accept(keyword$9$Consumer);
+			acceptor.accept(keyword$7$Consumer);
 		}
 	}
 
@@ -99,38 +89,13 @@ public final class Bug287184TestLanguageAssociatedDetailConsumer extends NonTerm
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return alternatives$6$Consumer.consume();
+			return consumeNonTerminal(fqnConsumer, "detailClass", false, true, false, getElement(), optional);
 		}
 	}
 
-	protected class Alternatives$6$Consumer extends AlternativesConsumer {
+	protected class RuleCall$6$Consumer extends ElementConsumer<RuleCall> {
 		
-		protected Alternatives$6$Consumer(final Alternatives alternatives) {
-			super(alternatives);
-		}
-		
-		@Override
-		protected void doGetConsumers(ConsumerAcceptor acceptor) {
-			acceptor.accept(ruleCall$7$Consumer);
-			acceptor.accept(ruleCall$8$Consumer);
-		}
-	}
-
-	protected class RuleCall$7$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$7$Consumer(final RuleCall ruleCall) {
-			super(ruleCall);
-		}
-		
-		@Override
-		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(idConsumer, "detailClass", false, false, getElement(), getRuleCall$7$Delimiter(), optional);
-		}
-	}
-
-	protected class RuleCall$8$Consumer extends ElementConsumer<RuleCall> {
-		
-		protected RuleCall$8$Consumer(final RuleCall ruleCall) {
+		protected RuleCall$6$Consumer(final RuleCall ruleCall) {
 			super(ruleCall);
 		}
 		
@@ -140,23 +105,22 @@ public final class Bug287184TestLanguageAssociatedDetailConsumer extends NonTerm
 		}
 	}
 
-	protected class Keyword$9$Consumer extends ElementConsumer<Keyword> {
+	protected class Keyword$7$Consumer extends ElementConsumer<Keyword> {
 		
-		protected Keyword$9$Consumer(final Keyword keyword) {
+		protected Keyword$7$Consumer(final Keyword keyword) {
 			super(keyword);
 		}
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeKeyword(getElement(), null, false, false, getKeyword$9$Delimiter(), optional);
+			return consumeKeyword(getElement(), null, false, false, getKeyword$7$Delimiter(), optional);
 		}
 	}
 
 	public Bug287184TestLanguageAssociatedDetailConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
-		ruleCall$7$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
@@ -175,7 +139,7 @@ public final class Bug287184TestLanguageAssociatedDetailConsumer extends NonTerm
 		keyword$2$Consumer = new Keyword$2$Consumer(rule.getAssociatedKeyword_0());
 		assignment$3$Consumer = new Assignment$3$Consumer(rule.getDetailClassAssignment_1());
 		crossReference$4$Consumer = new CrossReference$4$Consumer(rule.getDetailClassModelCrossReference_1_0());
-		keyword$9$Consumer = new Keyword$9$Consumer(rule.getSemicolonKeyword_2());
+		keyword$7$Consumer = new Keyword$7$Consumer(rule.getSemicolonKeyword_2());
 	}
 	
 	@Override
@@ -192,10 +156,6 @@ public final class Bug287184TestLanguageAssociatedDetailConsumer extends NonTerm
 		this.fqnConsumer = fqnConsumer;
 	}
 	
-	public void setIdConsumer(ITerminalConsumer idConsumer) {
-		this.idConsumer = idConsumer;
-	}
-	
 	public ICharacterClass getKeyword$2$Delimiter() {
 		return keyword$2$Delimiter;
 	}
@@ -204,20 +164,12 @@ public final class Bug287184TestLanguageAssociatedDetailConsumer extends NonTerm
 		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$9$Delimiter() {
-		return keyword$9$Delimiter;
+	public ICharacterClass getKeyword$7$Delimiter() {
+		return keyword$7$Delimiter;
 	}
 	
-	public void setKeyword$9$Delimiter(ICharacterClass characterClass) {
-		keyword$9$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ISequenceMatcher getRuleCall$7$Delimiter() {
-		return ruleCall$7$Delimiter;
-	}
-	
-	public void setRuleCall$7$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$7$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
+		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

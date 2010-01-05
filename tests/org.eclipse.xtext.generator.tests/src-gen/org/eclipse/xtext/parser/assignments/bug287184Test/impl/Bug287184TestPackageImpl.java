@@ -183,19 +183,9 @@ public class Bug287184TestPackageImpl extends EPackageImpl implements Bug287184T
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getDetail_Doc()
-  {
-    return (EAttribute)detailEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EAttribute getDetail_Visibility()
   {
-    return (EAttribute)detailEClass.getEStructuralFeatures().get(1);
+    return (EAttribute)detailEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -246,7 +236,6 @@ public class Bug287184TestPackageImpl extends EPackageImpl implements Bug287184T
     createEReference(abstractDetailEClass, ABSTRACT_DETAIL__DETAIL_CLASS);
 
     detailEClass = createEClass(DETAIL);
-    createEAttribute(detailEClass, DETAIL__DOC);
     createEAttribute(detailEClass, DETAIL__VISIBILITY);
 
     associatedDetailEClass = createEClass(ASSOCIATED_DETAIL);
@@ -293,7 +282,6 @@ public class Bug287184TestPackageImpl extends EPackageImpl implements Bug287184T
     initEReference(getAbstractDetail_DetailClass(), this.getModel(), null, "detailClass", null, 0, 1, AbstractDetail.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(detailEClass, Detail.class, "Detail", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getDetail_Doc(), ecorePackage.getEString(), "doc", null, 0, 1, Detail.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getDetail_Visibility(), ecorePackage.getEString(), "visibility", null, 0, 1, Detail.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(associatedDetailEClass, AssociatedDetail.class, "AssociatedDetail", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

@@ -86,32 +86,26 @@ public class Bug287184TestLanguageParserConfiguration extends AbstractParserConf
 		getModelConsumer().setAssociatedDetailConsumer(getAssociatedDetailConsumer());
 		getModelConsumer().setDetailConsumer(getDetailConsumer());
 		getModelConsumer().setFqnConsumer(getFqnConsumer());
-		getModelConsumer().setIdConsumer(getIdConsumer());
 
 		getAbstractDetailConsumer().setAssociatedDetailConsumer(getAssociatedDetailConsumer());
 		getAbstractDetailConsumer().setDetailConsumer(getDetailConsumer());
 
 		getDetailConsumer().setFqnConsumer(getFqnConsumer());
-		getDetailConsumer().setMlCommentConsumer(getMlCommentConsumer());
 
 		getAssociatedDetailConsumer().setFqnConsumer(getFqnConsumer());
-		getAssociatedDetailConsumer().setIdConsumer(getIdConsumer());
 
 		getFqnConsumer().setIdConsumer(getIdConsumer());
 
 		getModelConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.assignments.parser.packrat.Bug287184TestLanguageDelimiters.keyword$4$Delimiter);
-		getModelConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parser.assignments.parser.packrat.Bug287184TestLanguageDelimiters.ruleCall$7$Delimiter);
-		getDetailConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.assignments.parser.packrat.Bug287184TestLanguageDelimiters.keyword$4$Delimiter);
+		getDetailConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.assignments.parser.packrat.Bug287184TestLanguageDelimiters.keyword$4$Delimiter);
+		getDetailConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.parser.assignments.parser.packrat.Bug287184TestLanguageDelimiters.keyword$4$Delimiter);
+		getDetailConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.assignments.parser.packrat.Bug287184TestLanguageDelimiters.keyword$4$Delimiter);
 		getDetailConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.assignments.parser.packrat.Bug287184TestLanguageDelimiters.keyword$4$Delimiter);
-		getDetailConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.parser.assignments.parser.packrat.Bug287184TestLanguageDelimiters.keyword$4$Delimiter);
-		getDetailConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parser.assignments.parser.packrat.Bug287184TestLanguageDelimiters.keyword$4$Delimiter);
-		getDetailConsumer().setRuleCall$3$Delimiter(org.eclipse.xtext.parser.assignments.parser.packrat.Bug287184TestLanguageDelimiters.ruleCall$22$Delimiter);
 		getAssociatedDetailConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.parser.assignments.parser.packrat.Bug287184TestLanguageDelimiters.keyword$4$Delimiter);
-		getAssociatedDetailConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parser.assignments.parser.packrat.Bug287184TestLanguageDelimiters.keyword$43$Delimiter);
-		getAssociatedDetailConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.parser.assignments.parser.packrat.Bug287184TestLanguageDelimiters.ruleCall$7$Delimiter);
-		getFqnConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.assignments.parser.packrat.Bug287184TestLanguageDelimiters.keyword$43$Delimiter);
-		getFqnConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parser.assignments.parser.packrat.Bug287184TestLanguageDelimiters.ruleCall$7$Delimiter);
-		getFqnConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parser.assignments.parser.packrat.Bug287184TestLanguageDelimiters.ruleCall$7$Delimiter);
+		getAssociatedDetailConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.assignments.parser.packrat.Bug287184TestLanguageDelimiters.keyword$37$Delimiter);
+		getFqnConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.parser.assignments.parser.packrat.Bug287184TestLanguageDelimiters.keyword$37$Delimiter);
+		getFqnConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.parser.assignments.parser.packrat.Bug287184TestLanguageDelimiters.ruleCall$41$Delimiter);
+		getFqnConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.parser.assignments.parser.packrat.Bug287184TestLanguageDelimiters.ruleCall$41$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
