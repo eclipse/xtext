@@ -255,6 +255,7 @@
          </MweSnippet>
       </generatorConfiguration>
    </extension>
+   <!--
 	<extension
 		point="org.eclipse.ui.commands">
 		<command
@@ -296,4 +297,5 @@
 			commandId="org.eclipse.xtext.xtext.launcher.GenerateArtifacts">
 		</handler>
 	</extension>
+	-->
 </plugin>
