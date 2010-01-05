@@ -32,6 +32,8 @@ import org.eclipse.xtext.ui.core.IImageHelper;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.edit.IDocumentEditor;
 import org.eclipse.xtext.ui.core.editor.validation.XtextAnnotation;
+import org.eclipse.xtext.ui.core.internal.XtextPluginImages;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.IssueContext;
@@ -78,7 +80,10 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 		}
 
 		public Image getImage() {
-			return resolution.getImage() == null ? null : imageHelper.getImage(resolution.getImage());
+			if(Strings.isEmpty(resolution.getImage()))
+				return XtextPluginImages.get(XtextPluginImages.OBJ_CORRECTION_CHANGE);
+			else
+				return imageHelper.getImage(resolution.getImage());
 		}
 
 		public IContextInformation getContextInformation() {

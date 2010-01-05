@@ -9,12 +9,19 @@
 package org.eclipse.xtext.ui.core.internal;
 
 import java.net.URL;
+import java.util.HashMap;
+import java.util.Map;
 
 import org.eclipse.core.runtime.FileLocator;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.ImageRegistry;
+import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.ISharedImages;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtext.ui.core.editor.XtextEditor;
 
 /**
  * Bundle of all images used by the Xtext UI plugin. Inspired by
@@ -51,12 +58,22 @@ public class XtextPluginImages {
 	public static final String OBJ_DESC_SERVICE_NOT_LOADED = NAME_PREFIX + "OBJ_DESC_SERVICE_NOT_LOADED"; //$NON-NLS-1$
 	public static final String OBJ_DESC_LANGUAGE = NAME_PREFIX + "OBJ_DESC_LANGUAGE"; //$NON-NLS-1$
 
+	public static final String OBJ_CORRECTION_CHANGE = NAME_PREFIX + "CORRECTION_CHANGE"; //$NON-NLS-1$
+
+	public static final String OBJ_FIXABLE_ERROR = NAME_PREFIX + "OBJ_FIXABLE_ERROR"; //$NON-NLS-1$
+	public static final String OBJ_FIXABLE_WARNING = NAME_PREFIX + "OBJ_FIXABLE_WARNING"; //$NON-NLS-1$
+
 	/**
 	 * OBJ16
 	 */
 	public static final ImageDescriptor DESC_SERVICE_LOADED_OBJ = create(PATH_OBJ, "service_loaded.gif"); //$NON-NLS-1$
 	public static final ImageDescriptor DESC_SERVICE_NOT_LOADED_OBJ = create(PATH_OBJ, "service_not_loaded.gif"); //$NON-NLS-1$
 	public static final ImageDescriptor DESC_LANGUAGE_OBJ = create(PATH_OBJ, "font.gif"); //$NON-NLS-1$
+	
+	public static final ImageDescriptor DESC_CORRECTION_CHANGE = create(PATH_OBJ, "correction_change.gif"); //$NON-NLS-1$
+
+	public static final ImageDescriptor DESC_FIXABLE_ERROR = create(PATH_OBJ, "quickfix_error_obj.gif"); //$NON-NLS-1$
+	public static final ImageDescriptor DESC_FIXABLE_WARNING = create(PATH_OBJ, "quickfix_warning_obj.gif"); //$NON-NLS-1$
 
 	/**
 	 * OVR16
@@ -88,10 +105,39 @@ public class XtextPluginImages {
 	}
 
 	public static Image get(String key) {
-		if (PLUGIN_REGISTRY == null)
-			initialize();
+		ensureInitialized();
 		return PLUGIN_REGISTRY.get(key);
 	}
+
+	private static void ensureInitialized() {
+		if (PLUGIN_REGISTRY == null)
+			initialize();
+	}
+	
+	private static boolean imagesInitialized;
+
+	private static final Map<String, Image> annotationImagesFixable = new HashMap<String, Image>();
+	private static final Map<String, Image> annotationImagesNonFixable = new HashMap<String, Image>();
+	private static final Map<String, Image> annotationImagesDeleted = new HashMap<String, Image>();
+
+	private static final void initializeImageMaps() {
+		if(imagesInitialized)
+			return;
+		
+		annotationImagesFixable.put(XtextEditor.ERROR_ANNOTATION_TYPE, get(OBJ_FIXABLE_ERROR));
+		annotationImagesFixable.put(XtextEditor.WARNING_ANNOTATION_TYPE, get(OBJ_FIXABLE_WARNING));
+
+		ISharedImages sharedImages= PlatformUI.getWorkbench().getSharedImages();
+		Image error = sharedImages.getImage(ISharedImages.IMG_OBJS_ERROR_TSK);
+		Image warning = sharedImages.getImage(ISharedImages.IMG_OBJS_WARN_TSK);
+		annotationImagesNonFixable.put(XtextEditor.ERROR_ANNOTATION_TYPE, error);
+		annotationImagesNonFixable.put(XtextEditor.WARNING_ANNOTATION_TYPE, warning);
+		
+		Display display = Display.getCurrent();
+		annotationImagesDeleted.put(XtextEditor.ERROR_ANNOTATION_TYPE, new Image(display, error, SWT.IMAGE_GRAY));
+		annotationImagesDeleted.put(XtextEditor.WARNING_ANNOTATION_TYPE, new Image(display, warning, SWT.IMAGE_GRAY));
+	}	
+
 
 	/* package */
 	private static final void initialize() {
@@ -99,6 +145,11 @@ public class XtextPluginImages {
 		manage(OBJ_DESC_SERVICE_LOADED, DESC_SERVICE_LOADED_OBJ);
 		manage(OBJ_DESC_SERVICE_NOT_LOADED, DESC_SERVICE_NOT_LOADED_OBJ);
 		manage(OBJ_DESC_LANGUAGE, DESC_LANGUAGE_OBJ);
+		manage(OBJ_CORRECTION_CHANGE, DESC_CORRECTION_CHANGE);
+		manage(OBJ_FIXABLE_ERROR, DESC_FIXABLE_ERROR);
+		manage(OBJ_FIXABLE_WARNING, DESC_FIXABLE_WARNING);
+		
+		initializeImageMaps();
 	}
 
 	private static URL makeImageURL(String prefix, String name) {
@@ -110,5 +161,20 @@ public class XtextPluginImages {
 		Image image = desc.createImage();
 		PLUGIN_REGISTRY.put(key, image);
 		return image;
+	}
+
+	public static Map<String, Image> getAnnotationImagesNonfixable() {
+		ensureInitialized();
+		return annotationImagesNonFixable;
+	}
+
+	public static Map<String, Image> getAnnotationImagesFixable() {
+		ensureInitialized();
+		return annotationImagesFixable;
+	}
+
+	public static Map<String, Image> getAnnotationImagesDeleted() {
+		ensureInitialized();
+		return annotationImagesDeleted;
 	}
 }
