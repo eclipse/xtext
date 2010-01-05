@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.Iterator;
 import java.util.Set;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.notify.AdapterFactory;
@@ -48,6 +49,8 @@ import org.eclipse.swt.widgets.List;
  */
 public class WizardSelectImportedEPackagePage extends WizardPage {
 
+	private static final Logger LOG = Logger.getLogger(WizardSelectImportedEPackagePage.class);
+	
 	private EditingDomain editingDomain;
 
 	private Set<EPackage> ePackages = new HashSet<EPackage>();
@@ -85,7 +88,6 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		label.setText(Messages.WizardSelectImportedEPackagePage_ListTitle);
 		label.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 2, 1));
 		importedEPackagesListBox = new List(composite, SWT.MULTI);
-		initializeListFromSelection(selection);
 		importedEPackagesListBox.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 2));
 		Button addButton = new Button(composite, SWT.PUSH);
 		addButton.setText(Messages.WizardSelectImportedEPackagePage_AddButtonText);
@@ -133,7 +135,7 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		Label entryRuleLabel = new Label(composite, SWT.NONE);
 		entryRuleLabel.setText(Messages.WizardSelectImportedEPackagePage_entryRuleLabelText);
 		entryRuleLabel.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 2, 1));
-		rootElementComboBoxCellEditor = new CCombo(composite, SWT.DROP_DOWN);
+		rootElementComboBoxCellEditor = new CCombo(composite, SWT.DROP_DOWN | SWT.READ_ONLY);
 		rootElementComboBoxCellEditor.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, true, 1, 1));
 		rootElementComboBoxCellEditor.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -141,7 +143,7 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 				validatePage();
 			}
 		});
-		resetEClassesInUI();
+		initializeListFromSelection(selection);
 		setControl(composite);
 		validatePage();
 		Dialog.applyDialogFont(getControl());
@@ -204,6 +206,7 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 			}
 		}
 		rootElementComboBoxCellEditor.deselectAll();
+		Collections.sort(classNames);
 		rootElementComboBoxCellEditor.setItems(classNames.toArray(new String[classNames.size()]));
 	}
 
@@ -227,7 +230,7 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 				try {
 					addEPackages(URI.createPlatformResourceURI(ecoreFile.getFullPath().toString(), true));
 				} catch (Exception exc) {
-					// TODO log
+					LOG.error("Error adding EPackage from file", exc); //$NON-NLS-1$
 				}
 			}
 		}
