@@ -10,12 +10,16 @@ package org.eclipse.xtext.ui.core.editor.model;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.jface.text.IDocument;
+import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.editors.text.FileDocumentProvider;
+import org.eclipse.xtext.ui.core.editor.quickfix.XtextResourceMarkerAnnotationModel;
 import org.eclipse.xtext.ui.core.editor.validation.AnnotationIssueProcessor;
 import org.eclipse.xtext.ui.core.editor.validation.ValidationJob;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
+import org.eclipse.xtext.validation.IssueResolutionProvider;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -24,12 +28,17 @@ import com.google.inject.Provider;
  * @author Peter Friese - Initial contribution and API
  * @author Sven Efftinge
  * @author Michael Clay
+ * @author Heiko Behrens
  */
 public class XtextDocumentProvider extends FileDocumentProvider {
 	@Inject
 	private Provider<XtextDocument> document;
 	@Inject
 	private IResourceValidator resourceValidator;
+	
+	// TODO use a provider for objects that depend on issueResolitionProvider when guice2 is available
+	@Inject
+	private IssueResolutionProvider issueResolutionProvider;
 
 	@Override
 	protected XtextDocument createEmptyDocument() {
@@ -48,10 +57,20 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	protected ElementInfo createElementInfo(Object element) throws CoreException {
 		ElementInfo info = super.createElementInfo(element);
 		XtextDocument doc = (XtextDocument) info.fDocument;
-		AnnotationIssueProcessor annotationIssueProcessor = new AnnotationIssueProcessor(doc, info.fModel);
+		AnnotationIssueProcessor annotationIssueProcessor = new AnnotationIssueProcessor(doc, info.fModel, issueResolutionProvider);
 		ValidationJob job = new ValidationJob(resourceValidator, doc, annotationIssueProcessor,CheckMode.FAST_ONLY);
 		doc.setValidationJob(job);
 		return info;
+	}
+	
+	@Override
+	protected IAnnotationModel createAnnotationModel(Object element) throws CoreException {
+		if (element instanceof IFileEditorInput) {
+			IFileEditorInput input= (IFileEditorInput) element;
+			return new XtextResourceMarkerAnnotationModel(input.getFile(), issueResolutionProvider);
+		}
+
+		return super.createAnnotationModel(element);
 	}
 
 }

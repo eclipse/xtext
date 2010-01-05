@@ -21,6 +21,7 @@ import org.eclipse.xtext.ui.core.editor.validation.AnnotationIssueProcessor;
 import org.eclipse.xtext.ui.core.editor.validation.ValidationJob;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.IResourceValidator;
+import org.eclipse.xtext.validation.IssueResolutionProvider;
 
 import com.google.inject.Inject;
 
@@ -32,13 +33,17 @@ public class ValidateActionHandler extends AbstractHandler {
 	@Inject
 	private IResourceValidator resourceValidator;
 
+	// TODO use a provider for objects that depend on annotationIssueProcessor when guice2 is available
+	@Inject
+	private IssueResolutionProvider issueResolutionProvider;
+
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		XtextEditor xtextEditor = (XtextEditor) HandlerUtil.getActiveEditor(event);
 		IXtextDocument xtextDocument = XtextDocumentUtil.get(xtextEditor);
 		IDocumentProvider documentProvider = xtextEditor.getDocumentProvider();
 		IAnnotationModel annotationModel = documentProvider.getAnnotationModel(xtextEditor.getEditorInput());
 		ValidationJob validationJob = new ValidationJob(resourceValidator, xtextDocument,
-				new AnnotationIssueProcessor(xtextDocument, annotationModel), CheckMode.ALL);
+				new AnnotationIssueProcessor(xtextDocument, annotationModel, issueResolutionProvider), CheckMode.ALL);
 		validationJob.schedule();
 		return this;
 	}

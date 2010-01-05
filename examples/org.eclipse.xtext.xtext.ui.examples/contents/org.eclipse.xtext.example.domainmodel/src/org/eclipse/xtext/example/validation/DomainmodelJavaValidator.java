@@ -1,6 +1,7 @@
 package org.eclipse.xtext.example.validation;
 
 import org.eclipse.xtext.example.domainmodel.DomainmodelPackage;
+import org.eclipse.xtext.example.domainmodel.Feature;
 import org.eclipse.xtext.example.domainmodel.Type;
 import org.eclipse.xtext.validation.Check;
 
@@ -15,4 +16,10 @@ public class DomainmodelJavaValidator extends AbstractDomainmodelJavaValidator {
         }
     }
 
+    @Check
+    public void checkFeatureNameStartsWithLowercase(Feature feature) {
+        if (!Character.isLowerCase(feature.getName().charAt(0))) {
+            warning("Name should start with a lowercase", DomainmodelPackage.FEATURE__NAME);
+        }
+    }
 }
