@@ -99,15 +99,7 @@ CrossReference :
 ;
 
 CrossReferenceableTerminal returns AbstractElement:
-   Keyword | RuleCall | ParenthesizedCrossReferenceableElement
-;
-
-ParenthesizedCrossReferenceableElement returns AbstractElement:
-   '(' CrossReferenceableAlternatives ')'
-;
-
-CrossReferenceableAlternatives returns AbstractElement:
-    CrossReferenceableTerminal ({Alternatives.groups+=current} ('|' groups+=CrossReferenceableTerminal)+)?
+   Keyword | RuleCall
 ;
 
 ParenthesizedElement returns AbstractElement:

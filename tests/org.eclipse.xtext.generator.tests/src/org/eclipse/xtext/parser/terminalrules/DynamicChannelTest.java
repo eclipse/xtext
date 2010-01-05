@@ -50,7 +50,7 @@ public class DynamicChannelTest extends AbstractGeneratorTest {
 		assertNotNull(result.getRootASTElement());
 		assertNotNull(result.getRootNode());
 		assertNotNull(result.getParseErrors());
-		assertTrue(result.getParseErrors().isEmpty());
+		assertTrue(result.getParseErrors().toString(),result.getParseErrors().isEmpty());
 	}
 
 	public void testNodeModelOfSimpleLanguage() throws Exception {
