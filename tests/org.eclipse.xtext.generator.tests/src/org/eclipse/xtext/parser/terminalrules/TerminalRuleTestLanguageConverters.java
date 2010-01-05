@@ -7,9 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.terminalrules;
 
-import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.impl.AbstractDeclarativeValueConverterService;
@@ -17,20 +15,10 @@ import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.util.Strings;
 
-import com.google.inject.Inject;
-
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class TerminalRuleTestLanguageConverters extends AbstractDeclarativeValueConverterService {
-
-	// copied from Common.Terminals but without rule for int
-	private Grammar g;
-
-	@Inject
-	public void setGrammar(IGrammarAccess ga) {
-		this.g = ga.getGrammar();
-	}
 
 	@ValueConverter(rule = "ID")
 	public IValueConverter<String> ID() {
@@ -42,7 +30,7 @@ public class TerminalRuleTestLanguageConverters extends AbstractDeclarativeValue
 
 			@Override
 			protected String internalToString(String value) {
-				if (GrammarUtil.getAllKeywords(g).contains(value)) {
+				if (GrammarUtil.getAllKeywords(getGrammar()).contains(value)) {
 					return "^"+value;
 				}
 				return value;
