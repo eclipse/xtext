@@ -4,4 +4,4 @@ Bundle-Name: Xtext Xtext Editor UI Tests
 Bundle-SymbolicName: org.eclipse.xtext.xtext.ui.tests
 Bundle-Version: 0.8.0.qualifier
 Bundle-Vendor: Eclipse Modeling Project
-Bundle-RequiredExecutionEnvironment: JavaSE-1.6
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
