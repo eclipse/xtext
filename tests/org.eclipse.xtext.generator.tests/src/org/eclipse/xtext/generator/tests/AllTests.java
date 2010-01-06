@@ -30,7 +30,9 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.ElementFinderTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.EmptyPackageAwareGrammarAccessFragmentTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.FragmentFakingEcoreResourceTest.class);
+      suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtilTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.ParserTest.class);
+      suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.UnicodeCharacterDatabaseNamesTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.resource.ResourceTest.class);
       suite.addTestSuite(org.eclipse.xtext.grammarinheritance.AnotherInheritanceTest.class);
       suite.addTestSuite(org.eclipse.xtext.grammarinheritance.Bug265111Test.class);
