@@ -13,14 +13,13 @@ import org.eclipse.core.resources.IResourceVisitor;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.internal.core.ExternalPackageFragmentRoot;
-import org.eclipse.jdt.internal.core.JarEntryResource;
-import org.eclipse.jdt.internal.core.NonJavaResource;
 import org.eclipse.xtext.resource.ClasspathUriResolutionException;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
 import org.eclipse.xtext.resource.IClasspathUriResolver;
@@ -68,8 +67,8 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
 						for(Object nonJavaResource: nonJavaResources) {
 							// we have to check for concrete class because getFullPath
 							// behaves differently
-							if (nonJavaResource instanceof JarEntryResource) {
-								JarEntryResource jarEntryResource = (JarEntryResource) nonJavaResource;
+							IJarEntryResource jarEntryResource = (IJarEntryResource) nonJavaResource;
+							if (packageFragmentRoot.isArchive()) {
 								if (fullPath.equals(jarEntryResource.getFullPath().toString())) {
 									IResource packageFragmentRootResource = packageFragmentRoot.getResource();
 									if (packageFragmentRootResource != null) { // we have a resource - use nested platform/resource
@@ -84,11 +83,15 @@ public class JdtClasspathUriResolver implements IClasspathUriResolver {
 										return result;
 									}
 								}
-							} else if (nonJavaResource instanceof NonJavaResource) {
-								String nonJavaResourceName = ((NonJavaResource) nonJavaResource).getName();
+							} else {
+								String nonJavaResourceName = jarEntryResource.getName();
 								if (name.equals(nonJavaResourceName)) {
-									if (packageFragmentRoot instanceof ExternalPackageFragmentRoot) {
-										IResource resource = ((ExternalPackageFragmentRoot) packageFragmentRoot).resource();
+									if (packageFragmentRoot.isExternal()) {
+										// the following code will return null
+//										IResource resource = packageFragmentRoot.getUnderlyingResource();
+										if (!(packageFragmentRoot instanceof ExternalPackageFragmentRoot))
+											throw new IllegalStateException();
+										IResource resource = ((ExternalPackageFragmentRoot)packageFragmentRoot).resource();
 										IPath absolutePath = resource.getFullPath();
 										absolutePath = absolutePath.append(fullPath);
 										return createPlatformResourceURI(absolutePath);

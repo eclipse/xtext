@@ -24,16 +24,19 @@ import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.Plugin;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.jdt.internal.core.JavaModelManager;
 import org.eclipse.jdt.launching.JavaRuntime;
 
 import com.google.common.collect.Lists;
 
+@SuppressWarnings("restriction")
 public class JavaProjectSetupUtil {
 
 	public static class TextFile {
@@ -81,6 +84,25 @@ public class JavaProjectSetupUtil {
 		return project;
 	}
 
+	public static IFolder createExternalFolder(String folderName) throws CoreException {
+		IPath externalFolderPath = new Path(folderName);
+		IProject externalFoldersProject = JavaModelManager.getExternalManager().getExternalFoldersProject();
+		if (!externalFoldersProject.isAccessible()) {
+			if (!externalFoldersProject.exists())
+				externalFoldersProject.create(monitor());
+			externalFoldersProject.open(monitor());
+		}
+		IFolder result = externalFoldersProject.getFolder(externalFolderPath);
+		result.create(true, false, null);
+		JavaModelManager.getExternalManager().addFolder(result.getFullPath());
+		return result;
+	}
+	
+	public static void deleteExternalFolder(IFolder folder) throws CoreException {
+		JavaModelManager.getExternalManager().removeFolder(folder.getFullPath());
+		folder.delete(true, null);
+	}
+	
 	public static IFolder deleteSourceFolder(IJavaProject project, String folderPath) throws JavaModelException,
 			CoreException {
 		IFolder folder = project.getProject().getFolder(folderPath);
@@ -226,6 +248,12 @@ public class JavaProjectSetupUtil {
 
 	public static IClasspathEntry addJarToClasspath(IJavaProject javaProject, IFile jarFile) throws JavaModelException {
 		IClasspathEntry newLibraryEntry = JavaCore.newLibraryEntry(jarFile.getFullPath(), null, null);
+		addToClasspath(javaProject, newLibraryEntry);
+		return newLibraryEntry;
+	}
+	
+	public static IClasspathEntry addExternalFolderToClasspath(IJavaProject javaProject, IFolder folder) throws JavaModelException {
+		IClasspathEntry newLibraryEntry = JavaCore.newLibraryEntry(folder.getFullPath(), null, null);
 		addToClasspath(javaProject, newLibraryEntry);
 		return newLibraryEntry;
 	}

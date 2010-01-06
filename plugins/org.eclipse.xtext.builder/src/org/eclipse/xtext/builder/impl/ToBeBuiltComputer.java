@@ -105,5 +105,9 @@ public class ToBeBuiltComputer {
 	protected URI getUri(IStorage file) {
 		return mapper.getUri(file);
 	}
+	
+	protected boolean isValid(URI uri) {
+		return mapper.isValidUri(uri);
+	}
 
 }

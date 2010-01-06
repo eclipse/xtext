@@ -13,7 +13,8 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.builder.impl.ToBeBuilt;
 import org.eclipse.xtext.builder.impl.ToBeBuiltComputer;
-import org.eclipse.xtext.ui.core.resource.JarWalker;
+import org.eclipse.xtext.ui.core.resource.JarEntryLocator;
+import org.eclipse.xtext.ui.core.resource.PackageFragmentRootWalker;
 
 public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 	
@@ -27,13 +28,15 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 		IJavaProject javaProject = JavaCore.create(project);
 		if (javaProject.exists()) {
 			IPackageFragmentRoot[] roots = javaProject.getPackageFragmentRoots();
-			for (IPackageFragmentRoot root : roots) {
+			final JarEntryLocator locator = new JarEntryLocator();
+			for (final IPackageFragmentRoot root : roots) {
 				if (shouldHandle(root)) {
-					new JarWalker<Void>() {
+					
+					new PackageFragmentRootWalker<Void>() {
 						@Override
-						protected Void handle(IJarEntryResource jarEntry) {
-							URI uri = getUri(jarEntry);
-							if (uri != null) {
+						protected Void handle(IJarEntryResource jarEntry, TraversalState state) {
+							URI uri = locator.getURI(root, jarEntry, state);
+							if (isValid(uri)) {
 								toBeBuilt.getToBeDeleted().add(uri);
 								toBeBuilt.getToBeUpdated().add(uri);
 							}
@@ -48,8 +51,8 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 
 	private boolean shouldHandle(IPackageFragmentRoot root) {
 		try {
-			return (!"org.eclipse.jdt.launching.JRE_CONTAINER".equals(root.getRawClasspathEntry().getPath().toString()) && (root
-					.isArchive() || root.isExternal()));
+			return (!"org.eclipse.jdt.launching.JRE_CONTAINER".equals(root.getRawClasspathEntry().getPath().toString()) && 
+					(root.isArchive() || root.isExternal()));
 		} catch (JavaModelException e) {
 			log.error(e.getMessage(),e);
 			return false;

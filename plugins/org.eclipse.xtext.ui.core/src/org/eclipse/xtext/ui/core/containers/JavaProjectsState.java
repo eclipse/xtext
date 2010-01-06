@@ -28,7 +28,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.xtext.ui.core.resource.JarWalker;
+import org.eclipse.xtext.ui.core.resource.PackageFragmentRootWalker;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Singleton;
@@ -67,11 +67,11 @@ public class JavaProjectsState extends AbstractAllContainersState implements IEl
 		if (javaElement instanceof IPackageFragmentRoot) {
 			IPackageFragmentRoot root = (IPackageFragmentRoot) javaElement;
 			final List<URI> uris = Lists.newArrayList();
-			if (root.isArchive()) {
+			if (root.isArchive() || root.isExternal()) {
 				try {
-					new JarWalker<Void>() {
+					new PackageFragmentRootWalker<Void>() {
 						@Override
-						protected Void handle(IJarEntryResource jarEntry) {
+						protected Void handle(IJarEntryResource jarEntry, TraversalState state) {
 							URI uri = getUri(jarEntry);
 							if (uri != null) {
 								uris.add(uri);	
@@ -86,18 +86,21 @@ public class JavaProjectsState extends AbstractAllContainersState implements IEl
 				}
 			} else {
 				try {
-					root.getResource().accept(new IResourceVisitor() {
-						public boolean visit(IResource resource) throws CoreException {
-							if (resource instanceof IStorage) {
-								URI uri = getUri((IStorage) resource);
-								if (uri != null) {
-									uris.add(uri);	
+					IResource resource = root.getResource();
+					if (resource != null) {
+						resource.accept(new IResourceVisitor() {
+							public boolean visit(IResource resource) throws CoreException {
+								if (resource instanceof IStorage) {
+									URI uri = getUri((IStorage) resource);
+									if (uri != null) {
+										uris.add(uri);	
+									}
+									return false;
 								}
-								return false;
+								return true;
 							}
-							return true;
-						}
-					});
+						});
+					}
 					result.addAll(uris);
 				} catch (CoreException e) {
 					log.error(e.getMessage(), e);
@@ -139,9 +142,12 @@ public class JavaProjectsState extends AbstractAllContainersState implements IEl
 		}
 		final IFile file = getWorkspaceRoot().getFile(new Path(uri.toPlatformString(true)));
 		if (file == null) {
-			return null;
+			return getJarWithEntry(uri);
 		}
-		return getJavaElement(file);
+		IPackageFragmentRoot root = getJavaElement(file);
+		if (root == null)
+			return getJarWithEntry(uri);
+		return root;
 	}
 	
 	protected IPackageFragmentRoot getJavaElement(final IFile file) {

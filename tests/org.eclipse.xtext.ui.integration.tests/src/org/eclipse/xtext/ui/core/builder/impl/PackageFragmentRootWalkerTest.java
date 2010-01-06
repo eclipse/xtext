@@ -20,12 +20,12 @@ import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.xtext.junit.util.IResourcesSetupUtil;
-import org.eclipse.xtext.ui.core.resource.JarWalker;
+import org.eclipse.xtext.ui.core.resource.PackageFragmentRootWalker;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class JarWalkerTest extends TestCase {
+public class PackageFragmentRootWalkerTest extends TestCase {
 	
 	@Override
 	protected void tearDown() throws Exception {
@@ -41,9 +41,9 @@ public class JarWalkerTest extends TestCase {
 		addJarToClasspath(project, file);
 		
 		final Set<IPath> pathes = new HashSet<IPath>();
-		JarWalker<Void> walker = new JarWalker<Void>() {
+		PackageFragmentRootWalker<Void> walker = new PackageFragmentRootWalker<Void>() {
 			@Override
-			protected Void handle(IJarEntryResource jarEntry) {
+			protected Void handle(IJarEntryResource jarEntry, TraversalState state) {
 				pathes.add(jarEntry.getFullPath());
 				return null;
 			}

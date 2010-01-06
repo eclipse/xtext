@@ -7,33 +7,61 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.resource;
 
+import java.util.Collections;
+import java.util.List;
+
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IPackageFragment;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaModelException;
 
+import com.google.common.collect.Lists;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class JarWalker<T> {
+public abstract class PackageFragmentRootWalker<T> {
 
+	public static class TraversalState {
+		
+		private List<Object> parents;
+
+		private TraversalState(IPackageFragmentRoot start) {
+			parents = Lists.<Object>newArrayList(start);
+		}
+		
+		public List<?> getParents() {
+			return Collections.unmodifiableList(parents);
+		}
+		
+		private void pop() {
+			parents.remove(parents.size() - 1);
+		}
+		
+		private void push(Object obj) {
+			parents.add(obj);
+		}
+		
+	}
+	
 	public T traverse(IPackageFragmentRoot root, boolean stopOnFirstResult) throws JavaModelException {
 		T result = null;
-		
+		TraversalState state = new TraversalState(root);
 		Object[] resources = root.getNonJavaResources();
 		for (Object object : resources) {
 			if (object instanceof IJarEntryResource) {
-				result = traverse((IJarEntryResource) object,stopOnFirstResult);
+				result = traverse((IJarEntryResource) object, stopOnFirstResult, state);
 				if (stopOnFirstResult && result!=null)
 					return result;
 			}
 		}
 		
 		IJavaElement[] children = root.getChildren();
-		for (IJavaElement iJavaElement : children) {
-			if (iJavaElement instanceof IPackageFragment) {
-				result = traverse((IPackageFragment) iJavaElement,stopOnFirstResult);
+		for (IJavaElement javaElement : children) {
+			if (javaElement instanceof IPackageFragment) {
+				result = traverse((IPackageFragment) javaElement, stopOnFirstResult, state);
 				if (stopOnFirstResult && result!=null)
 					return result;
 			}
@@ -41,12 +69,13 @@ public abstract class JarWalker<T> {
 		return result;
 	}
 
-	protected T traverse(IPackageFragment pack, boolean stopOnFirstResult) throws JavaModelException {
+	protected T traverse(IPackageFragment pack, boolean stopOnFirstResult, TraversalState state) throws JavaModelException {
 		T result = null;
+		state.push(pack);
 		IJavaElement[] children = pack.getChildren();
 		for (IJavaElement iJavaElement : children) {
 			if (iJavaElement instanceof IPackageFragment) {
-				result = traverse((IPackageFragment) iJavaElement,stopOnFirstResult);
+				result = traverse((IPackageFragment) iJavaElement, stopOnFirstResult, state);
 				if (stopOnFirstResult && result!=null)
 					return result;
 			}
@@ -54,29 +83,32 @@ public abstract class JarWalker<T> {
 		Object[] resources = pack.getNonJavaResources();
 		for (Object object : resources) {
 			if (object instanceof IJarEntryResource) {
-				result = traverse((IJarEntryResource) object,stopOnFirstResult);
+				result = traverse((IJarEntryResource) object, stopOnFirstResult, state);
 				if (stopOnFirstResult && result!=null)
 					return result;
 			}
 		}
+		state.pop();
 		return result;
 	}
 
-	protected T traverse(IJarEntryResource jarEntry, boolean stopOnFirstResult) {
+	protected T traverse(IJarEntryResource jarEntry, boolean stopOnFirstResult, TraversalState state) {
 		T result = null;
 		if (jarEntry.isFile()) {
-			result = handle(jarEntry);
+			result = handle(jarEntry, state);
 		} else {
+			state.push(jarEntry);
 			IJarEntryResource[] children = jarEntry.getChildren();
 			for (IJarEntryResource child : children) {
-				result = traverse(child,stopOnFirstResult);
+				result = traverse(child, stopOnFirstResult, state);
 				if (stopOnFirstResult && result!=null)
 					return result;
 			}
+			state.pop();
 		}
 		return result;
 	}
 
-	protected abstract T handle(IJarEntryResource jarEntry);
-
+	protected abstract T handle(IJarEntryResource jarEntry, TraversalState state);
+	
 }

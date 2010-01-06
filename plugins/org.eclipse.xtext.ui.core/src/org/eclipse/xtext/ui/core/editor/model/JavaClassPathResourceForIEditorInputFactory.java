@@ -23,8 +23,8 @@ import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider;
+import org.eclipse.xtext.ui.core.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.core.util.JdtClasspathUriResolver;
-import org.eclipse.xtext.ui.core.util.JdtURIUtil;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -32,7 +32,7 @@ import com.google.inject.Provider;
 public class JavaClassPathResourceForIEditorInputFactory implements IResourceForEditorInputFactory {
 
 	@Inject
-	private JdtURIUtil jdtURIUtil;
+	private IStorage2UriMapper storageToUriMapper;
 	
 	@Inject
 	private Provider<XtextResourceSet> resourceSetProvider;
@@ -61,7 +61,7 @@ public class JavaClassPathResourceForIEditorInputFactory implements IResourceFor
 
 	private Resource createResourceFor(IJarEntryResource storage) {
 		XtextResourceSet resourceSet = getResourceSet(storage);
-		URI uri = jdtURIUtil.getURI(storage);
+		URI uri = storageToUriMapper.getUri(storage);
 		configureResourceSet(resourceSet, uri);
 		XtextResource resource = getResource(resourceSet, uri);
 		resource.setValidationDisabled(true);

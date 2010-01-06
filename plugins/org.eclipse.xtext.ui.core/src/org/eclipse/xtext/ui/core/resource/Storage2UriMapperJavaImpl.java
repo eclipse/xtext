@@ -10,8 +10,8 @@ package org.eclipse.xtext.ui.core.resource;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
-import org.eclipse.core.resources.IResource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.ElementChangedEvent;
@@ -64,6 +64,16 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 		}
 		return storages;
 	}
+	
+	@Override
+	protected boolean isValidStorageFor(URI uri, IStorage storage) {
+		if (storage instanceof IFile) {
+			IProject project = ((IFile) storage).getProject();
+			if (!project.isAccessible() || project.isHidden())
+				return false;
+		}
+		return true;
+	}
 
 	@Override
 	protected URI internalGetUri(IStorage storage) {
@@ -81,23 +91,51 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 			for (IProject iProject : projects) {
 				if (iProject.isAccessible()) {
 					IJavaProject project = JavaCore.create(iProject);
-					findStoragesInJarsOrExternalFoldersOfProject(toArchive, uri, project, result);
+					findStoragesInJarsOfProject(toArchive, uri, project, result);
+				}
+			}
+		} else {
+			IProject[] projects = getWorkspaceRoot().getProjects();
+			for (IProject project : projects) {
+				if (project.isAccessible()) {
+					IJavaProject javaProject = JavaCore.create(project);
+					findStoragesInExternalFoldersOfProject(uri, javaProject, result);
 				}
 			}
 		}
 		return result;
 	}
 
-	protected void findStoragesInJarsOrExternalFoldersOfProject(URI toArchive, URI uri, IJavaProject project,
+	protected void findStoragesInExternalFoldersOfProject(URI uri, IJavaProject project,
 			Set<IStorage> storages) {
 		if (project.exists()) {
 			try {
 				IPackageFragmentRoot[] fragmentRoots = project.getAllPackageFragmentRoots();
+				JarEntryLocator locator = new JarEntryLocator();
+				for (IPackageFragmentRoot fragRoot : fragmentRoots) {
+					if (fragRoot.isExternal() && !fragRoot.isArchive()) {
+						IStorage storage = locator.getJarEntry(uri, fragRoot);
+						if (storage != null)
+							storages.add(storage);
+					}
+				}
+			} catch (JavaModelException e) {
+				log.error(e.getMessage(), e);
+			}
+		}
+	}
+	
+	protected void findStoragesInJarsOfProject(URI toArchive, URI uri, IJavaProject project,
+			Set<IStorage> storages) {
+		if (project.exists()) {
+			try {
+				IPackageFragmentRoot[] fragmentRoots = project.getAllPackageFragmentRoots();
+				JarEntryLocator locator = new JarEntryLocator();
 				for (IPackageFragmentRoot fragRoot : fragmentRoots) {
 					if (!"org.eclipse.jdt.launching.JRE_CONTAINER".equals(fragRoot.getRawClasspathEntry().getPath()
 							.toString())) {
-						if (getUriForPackageFragmentRoot(fragRoot).equals(toArchive)) {
-							IStorage storage = findStorageInJar(uri, fragRoot);
+						if (JarEntryURIHelper.getUriForPackageFragmentRoot(fragRoot).equals(toArchive)) {
+							IStorage storage = locator.getJarEntry(uri, fragRoot);
 							if (storage != null)
 								storages.add(storage);
 						}
@@ -107,18 +145,6 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 				log.error(e.getMessage(), e);
 			}
 		}
-	}
-
-	protected IStorage findStorageInJar(URI toArchive, IPackageFragmentRoot fragRoot) throws JavaModelException {
-		final String path = toArchive.devicePath().substring(toArchive.authority().length());
-		return new JarWalker<IStorage>() {
-			@Override
-			protected IStorage handle(IJarEntryResource jarEntry) {
-				if (jarEntry.getFullPath().toString().equals(path))
-					return jarEntry;
-				return null;
-			}
-		}.traverse(fragRoot, true);
 	}
 
 	protected URI computeUriForStorageInJarOrExternalClassFolder(IStorage storage) {
@@ -131,33 +157,9 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 	}
 
 	protected URI getUriForIJarEntryResource(IJarEntryResource jarEntry) {
-		IPackageFragmentRoot root = jarEntry.getPackageFragmentRoot();
-		if (root.isArchive()) {
-			URI jarURI = getUriForPackageFragmentRoot(root);
-			URI storageURI = URI.createURI(jarEntry.getFullPath().toString());
-			return createJarURI(root.isArchive(), jarURI, storageURI);
-		}
-		return null;
+		return new JarEntryLocator().getURI(jarEntry);
 	}
-
-	protected URI getUriForPackageFragmentRoot(IPackageFragmentRoot root) {
-		IResource underlyingResource = root.getResource();
-		if (underlyingResource == null) {
-			return URI.createFileURI(root.getPath().toString());
-		} else {
-			return URI.createPlatformResourceURI(underlyingResource.getFullPath().toString(), true);
-		}
-	}
-
-	protected URI createJarURI(boolean isArchive, URI uriToRoot, URI pathToResourceInRoot) {
-		if (isArchive) {
-			String fullURI = "archive:" + uriToRoot.toString() + "!" + pathToResourceInRoot.toString();
-			return URI.createURI(fullURI);
-		} else {
-			return null;
-		}
-	}
-
+	
 	protected URI getPathToArchive(URI archiveURI) {
 		if (!archiveURI.isArchive())
 			throw new IllegalArgumentException("not an archive URI : " + archiveURI);

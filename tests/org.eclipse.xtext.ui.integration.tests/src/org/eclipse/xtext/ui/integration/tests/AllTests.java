@@ -11,7 +11,7 @@ import junit.framework.TestSuite;
 public class AllTests {
    public static Test suite() {
       TestSuite suite = new TestSuite("Tests for org.eclipse.xtext.ui.integration.tests");
-      suite.addTestSuite(org.eclipse.xtext.ui.core.builder.impl.JarWalkerTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.core.builder.impl.PackageFragmentRootWalkerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.resource.Storage2UriMapperJdtImplTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.resource.Storage2UriMapperTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.util.BundleClasspathUriResolverTest.class);

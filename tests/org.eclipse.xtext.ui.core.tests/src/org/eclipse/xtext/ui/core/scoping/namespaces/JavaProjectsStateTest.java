@@ -44,7 +44,7 @@ public class JavaProjectsStateTest extends AbstractAllContainersStateTests {
 		srcRoot = javaProject1.getPackageFragmentRoot(member);
 		IStorage2UriMapper mapper = new Storage2UriMapperJavaImpl() {
 			@Override
-			protected boolean isValidUri(URI uri) {
+			public boolean isValidUri(URI uri) {
 				return uri != null;
 			}
 		};
