@@ -37,14 +37,14 @@ public class «getQuickfixProviderName().toSimpleName()» extends AbstractDeclarat
 «DEFINE addToPluginXmlRt FOR Grammar-»«ENDDEFINE»
 
 
-«DEFINE addToPluginXmlUi FOR Grammar-»«ENDDEFINE»
-«REM»   <!-- quickfix marker resolution generator -->
+«DEFINE addToPluginXmlUi FOR Grammar-»
+   <!-- quickfix marker resolution generator -->
    <extension
          point="org.eclipse.ui.ide.markerResolution">
       <markerResolutionGenerator
-            class="«executableExtensionFactory()»:«getQuickfixProviderName()»">
+            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.core.editor.quickfix.MarkerResolutionGenerator">
       </markerResolutionGenerator>
    </extension>
-«ENDREM»
+«ENDDEFINE»
 
 «DEFINE addToStandaloneSetup FOR Grammar-»«ENDDEFINE»
