@@ -104,22 +104,29 @@ public class ResourceDescriptionsUpdater {
 	private Map<URI, Delta> update(IResourceDescriptions resourceDescriptions, final ResourceSet set,
 			Set<URI> toBeUpdated, IProgressMonitor monitor) {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, toBeUpdated.size() * 2);
-		for (URI uri : toBeUpdated) {
-			try {
-				set.getResource(uri, true);
-				subMonitor.worked(1);
-			} catch (WrappedException ex) {
-				log.error("Error loading resource from: " + uri.toString(), ex);
-			}
-		}
 		Map<URI, Delta> result = Maps.newHashMap();
 		for (URI uri : toBeUpdated) {
-			Manager manager = getResourceDescriptionManager(uri);
-			if (manager != null) {
-				Resource resource = set.getResource(uri, false);
-				IResourceDescription description = manager.getResourceDescription(resource);
-				result.put(uri, new DefaultResourceDescriptionDelta(resourceDescriptions.getResourceDescription(uri),
-						description));
+			Resource res = null;
+			try {
+				res = set.getResource(uri, true);
+			} catch (WrappedException ex) {
+				log.error("Error loading resource from: " + uri.toString(), ex);
+				if (res != null) {
+					set.getResources().remove(res);
+					result.put(uri, new DefaultResourceDescriptionDelta(resourceDescriptions.getResourceDescription(uri), null));
+				}
+			}
+			subMonitor.worked(1);
+		}
+		for (URI uri : toBeUpdated) {
+			if (!result.containsKey(uri)) {
+				Manager manager = getResourceDescriptionManager(uri);
+				if (manager != null) {
+					Resource resource = set.getResource(uri, false);
+					IResourceDescription description = manager.getResourceDescription(resource);
+					result.put(uri, new DefaultResourceDescriptionDelta(resourceDescriptions.getResourceDescription(uri),
+							description));
+				}
 			}
 			subMonitor.worked(1);
 		}
