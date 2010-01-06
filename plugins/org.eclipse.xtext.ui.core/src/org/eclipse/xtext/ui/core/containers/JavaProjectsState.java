@@ -197,7 +197,11 @@ public class JavaProjectsState extends AbstractAllContainersState implements IEl
 				|| delta.getKind() == IJavaElementDelta.ADDED
 				|| (delta.getFlags() & IJavaElementDelta.F_REORDER) != 0
 				|| (delta.getFlags() & IJavaElementDelta.F_REMOVED_FROM_CLASSPATH) != 0
-				|| (delta.getFlags() & IJavaElementDelta.F_ADDED_TO_CLASSPATH) != 0) {
+				|| (delta.getFlags() & IJavaElementDelta.F_ADDED_TO_CLASSPATH) != 0
+				|| (((IPackageFragmentRoot) element).isExternal() && (delta.getFlags() & // external folders change
+						(IJavaElementDelta.F_CONTENT 
+								| IJavaElementDelta.F_SOURCEATTACHED 
+								| IJavaElementDelta.F_SOURCEDETACHED)) == delta.getFlags())) {
 				return true;
 			}
 		} else if (element instanceof IJavaModel) {
