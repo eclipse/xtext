@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
-import java.util.Collections;
+import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -16,7 +16,6 @@ import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
-import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -25,6 +24,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.ui.core.resource.IResourceSetProvider;
 
@@ -56,7 +56,6 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 			try {
 				final Set<IProject> toUpdate = Sets.newLinkedHashSet();
 				event.getDelta().accept(new IResourceDeltaVisitor() {
-
 					public boolean visit(IResourceDelta delta) throws CoreException {
 						if (delta.getResource() instanceof IWorkspaceRoot)
 							return true;
@@ -72,21 +71,6 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 				scheduleBuildIfNecessary(toUpdate);
 			} catch (CoreException e) {
 				log.error(e.getMessage(), e);
-			}
-		} else if (event.getType() == IResourceChangeEvent.PRE_REFRESH) {
-			if (event.getResource() instanceof IProject) {
-				Set<IProject> toUpdate = Collections.singleton((IProject)event.getResource());
-				scheduleBuildIfNecessary(toUpdate);	
-			} else if (event.getResource() == null && event.getSource() instanceof IWorkspace) {
-				IWorkspace ws = (IWorkspace) event.getSource();
-				IProject[] projects = ws.getRoot().getProjects();
-				final Set<IProject> toUpdate = Sets.newLinkedHashSet();
-				for(IProject project: projects) {
-					if (project.isAccessible()) {
-						toUpdate.add(project);
-					}
-				}
-				scheduleBuildIfNecessary(toUpdate);
 			}
 		} else if ((event.getType() == IResourceChangeEvent.PRE_CLOSE 
 				|| event.getType() == IResourceChangeEvent.PRE_DELETE)) {
@@ -105,8 +89,20 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 
 					@Override
 					protected IStatus run(IProgressMonitor monitor) {
-						builderState.update(getResourceSetProvider().get(event.getResource().getProject()), toBeBuilt
-								.getToBeUpdated(), toBeBuilt.getToBeDeleted(), monitor);
+						try {
+							new WorkspaceModifyOperation(getRule()) {
+								@Override
+								protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,
+										InterruptedException {
+									builderState.update(getResourceSetProvider().get(event.getResource().getProject()), toBeBuilt
+											.getToBeUpdated(), toBeBuilt.getToBeDeleted(), monitor);
+								}
+							}.run(monitor);
+						} catch (InvocationTargetException e) {
+							log.error(e.getMessage(), e);
+						} catch (InterruptedException e) {
+							log.error(e.getMessage(), e);
+						}
 						return Status.OK_STATUS;
 					}
 				}.schedule();

@@ -58,7 +58,7 @@ public abstract class AbstractAllContainersState implements IResourceChangeListe
 			  IResourceChangeEvent.PRE_DELETE 
 			| IResourceChangeEvent.POST_CHANGE 
 			| IResourceChangeEvent.PRE_CLOSE
-			| IResourceChangeEvent.PRE_REFRESH);
+			);
 	}
 	
 	public void unregisterAsListener() {
@@ -134,8 +134,7 @@ public abstract class AbstractAllContainersState implements IResourceChangeListe
 	
 	public void resourceChanged(IResourceChangeEvent event) {
 		if (event.getType() == IResourceChangeEvent.PRE_CLOSE 
-				|| event.getType() == IResourceChangeEvent.PRE_DELETE
-				|| event.getType() == IResourceChangeEvent.PRE_REFRESH) {
+				|| event.getType() == IResourceChangeEvent.PRE_DELETE) {
 			initialize();
 			return;
 		}
