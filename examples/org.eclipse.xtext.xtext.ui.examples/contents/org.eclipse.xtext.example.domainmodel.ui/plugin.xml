@@ -117,6 +117,12 @@
            uriExtension="dmodel">
      </resourceServiceProvider>
   </extension>
+ <extension
+       point="org.eclipse.ui.ide.markerResolution">
+    <markerResolutionGenerator
+          class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.quickfix.MarkerResolutionGenerator">
+    </markerResolutionGenerator>
+ </extension>
 
 
 </plugin>
