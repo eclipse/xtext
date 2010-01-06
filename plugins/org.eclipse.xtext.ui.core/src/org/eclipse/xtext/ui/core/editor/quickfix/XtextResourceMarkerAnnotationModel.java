@@ -11,7 +11,7 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.ui.texteditor.ResourceMarkerAnnotationModel;
-import org.eclipse.xtext.ui.core.MarkerTypes;
+import org.eclipse.xtext.ui.core.MarkerUtil;
 import org.eclipse.xtext.validation.IssueResolutionProvider;
 
 /**
@@ -29,7 +29,7 @@ public class XtextResourceMarkerAnnotationModel extends ResourceMarkerAnnotation
 	@Override
 	protected MarkerAnnotation createMarkerAnnotation(IMarker marker) {
 		MarkerAnnotation annotation = super.createMarkerAnnotation(marker);
-		String issueCode = MarkerTypes.getCode(annotation);
+		String issueCode = MarkerUtil.getCode(annotation);
 		annotation.setQuickFixable(issueResolutionProvider.hasResolutionFor(issueCode));
 		return annotation;
 	}

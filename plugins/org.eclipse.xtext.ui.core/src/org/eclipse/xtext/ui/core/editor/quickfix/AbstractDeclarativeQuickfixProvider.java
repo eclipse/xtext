@@ -49,14 +49,14 @@ public class AbstractDeclarativeQuickfixProvider implements IssueResolutionProvi
 		};
 	}
 
-	protected List<IssueResolution> getResolutions(final IssueContext issueContext, List<Method> fixMethods) {
+	protected List<IssueResolution> getResolutions(final IssueContextProvider provider, List<Method> fixMethods) {
 		return Lists.transform(fixMethods, new Function<Method, IssueResolution>() {
 			public IssueResolution apply(final Method from) {
 				return new IssueResolution() {
 					private final Fix annotation = from.getAnnotation(Fix.class);
 
 					public void run() {
-						executeFixMethod(from, issueContext);
+						executeFixMethod(from, provider.getIssueContext());
 					}
 
 					public String getLabel() {
@@ -112,11 +112,23 @@ public class AbstractDeclarativeQuickfixProvider implements IssueResolutionProvi
 		return methods.iterator().hasNext();
 	}
 
-	public List<IssueResolution> getResolutions(IssueContext issueContext) {
-		List<Method> fixMethods = getFixMethods(issueContext);
-		return getResolutions(issueContext, fixMethods);
-	}
+	public List<IssueResolution> getResolutions(final IssueContext issueContext) {
+		final IssueContextProvider provider = new IssueContextProvider() {
+			public IssueContext getIssueContext() {
+				return issueContext;
+			}
+		};
 
+		List<Method> fixMethods = getFixMethods(issueContext);
+		return getResolutions(provider, fixMethods);
+	}
+	
+	public List<IssueResolution> getResolutions(String issueCode, IssueContextProvider provider) {
+		List<Method> fixMethods = Lists.newArrayList(collectMethods(getClass(), null, issueCode));
+		return getResolutions(provider, fixMethods);
+	}
+	
+	
 	public void setLanguageResourceHelper(ILanguageResourceHelper languageResourceHelper) {
 		this.languageResourceHelper = languageResourceHelper;
 	}

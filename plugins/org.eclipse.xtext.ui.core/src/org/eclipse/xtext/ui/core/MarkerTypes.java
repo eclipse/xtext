@@ -8,9 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core;
 
-import org.eclipse.core.resources.IMarker;
-import org.eclipse.ui.texteditor.MarkerAnnotation;
-import org.eclipse.xtext.validation.Issue;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -22,9 +19,4 @@ public final class MarkerTypes {
 	public final static String NORMAL_VALIDATION = "org.eclipse.xtext.ui.core.check.normal";
 	public final static String EXPENSIVE_VALIDATION = "org.eclipse.xtext.ui.core.check.expensive";
 	
-	public static String getCode(MarkerAnnotation markerAnnotation) {
-		IMarker marker = markerAnnotation.getMarker();
-		return marker.getAttribute(Issue.CODE_KEY, null);
-	}
-
 }
