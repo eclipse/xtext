@@ -77,13 +77,12 @@ public class GrammarAccessUtil {
 		return Collections.emptyList();
 	}
 
-	private static SerializerUtil xtextSerializer = Guice.createInjector(
-			new XtextRuntimeModule()).getInstance(SerializerUtil.class);
+	private static SerializerUtil xtextSerializer;
 
 	public static String serialize(EObject obj, String prefix) {
 		String s;
 		try {
-			s = xtextSerializer.serialize(obj, true);
+			s = getSerializer().serialize(obj, true);
 		} catch (Exception e) {
 			s = e.toString();
 			// e.printStackTrace();
@@ -92,6 +91,13 @@ public class GrammarAccessUtil {
 				+ s.trim().replaceAll("[\\r\\n]", "\n" + prefix).replaceAll(
 						"/\\*", "/ *").replaceAll("\\*/", "* /");
 		return s;
+	}
+
+	private static SerializerUtil getSerializer() {
+		if (xtextSerializer==null)
+			xtextSerializer = Guice.createInjector(
+					new XtextRuntimeModule()).getInstance(SerializerUtil.class);
+		return xtextSerializer;
 	}
 
 	private static String getElementPath(AbstractElement ele) {
@@ -154,12 +160,7 @@ public class GrammarAccessUtil {
 		boolean start = isFirst, up = true;
 		StringBuffer r = new StringBuffer();
 		for (char c : text.toCharArray()) {
-			boolean valid = c != '$' /*
-									 * special case: don't use dollar sign,
-									 * since antlr uses them as variable prefix
-									 */
-					&& (start ? Character.isJavaIdentifierStart(c) : Character
-							.isJavaIdentifierPart(c));
+			boolean valid = isValidJavaLatinIdentifier(start, c);
 			if (valid) {
 				if (start)
 					r.append(uppercaseFirst ? Character.toUpperCase(c)
@@ -172,6 +173,17 @@ public class GrammarAccessUtil {
 				up = true;
 		}
 		return r.toString();
+	}
+
+	public static boolean isValidJavaLatinIdentifier(boolean start, char c) {
+		boolean valid = c >= 'A' && c<= 'Z';
+		valid = valid || c >= 'a' && c<= 'z';
+		valid = valid || c == 'ä' || c == 'ö' || c == 'ü' || c == 'Ä' || c == 'Ö'|| c == 'Ü';
+		valid = valid || c == '_';
+		if (!start) {
+			valid = valid || c>='0' && c<='9';
+		}
+		return valid;
 	}
 
 	private static String toJavaIdentifierSegment(String text, boolean isFirst,
