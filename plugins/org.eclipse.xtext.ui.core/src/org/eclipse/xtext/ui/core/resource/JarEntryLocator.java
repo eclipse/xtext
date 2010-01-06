@@ -109,10 +109,10 @@ public class JarEntryLocator {
 				if (obj instanceof IPackageFragment) {
 					result = result.append(new Path(((IPackageFragment) obj).getElementName().replace('.', '/')));
 				} else if (obj instanceof IJarEntryResource) {
-					result = result.append(((IJarEntryResource) obj).getFullPath());
+					result = result.append(((IJarEntryResource) obj).getName());
 				}
 			}
-			result = result.append(jarEntry.getFullPath());
+			result = result.append(jarEntry.getName());
 			return URI.createPlatformResourceURI(result.toString(), true);			
 		} else {
 			throw new IllegalStateException("Unexpeced root type: " + root.getClass().getName());
