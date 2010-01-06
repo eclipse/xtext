@@ -28,7 +28,7 @@ public class StateBasedContainerManager implements IContainer.Manager {
 	private final static Logger log = Logger.getLogger(StateBasedContainerManager.class);
 	
 	@Inject
-	private IAllContainerState state;
+	private IAllContainersState state;
 
 	public IContainer getContainer(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
 		String root = getPackageFragmentRoot(desc.getURI());

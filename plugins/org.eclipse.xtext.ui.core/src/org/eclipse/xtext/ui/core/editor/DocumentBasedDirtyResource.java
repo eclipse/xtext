@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.core.editor;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -33,8 +34,17 @@ public class DocumentBasedDirtyResource implements IDirtyResource {
 		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
 			@Override
 			public void process(XtextResource resource) throws Exception {
-				final IResourceDescription description = resource.getResourceServiceProvider().getResourceDescriptionManager().getResourceDescription(resource);
-				copyState(description);
+				if (resource != null) {
+					IResourceServiceProvider serviceProvider = resource.getResourceServiceProvider();
+					if (serviceProvider != null) {
+						IResourceDescription.Manager descriptionManager = serviceProvider.getResourceDescriptionManager();
+						if (descriptionManager != null) {
+							final IResourceDescription description = descriptionManager.getResourceDescription(resource);
+							if (description != null)
+								copyState(description);							
+						}
+					}
+				}
 			}
 		});
 	}
@@ -58,9 +68,15 @@ public class DocumentBasedDirtyResource implements IDirtyResource {
 		return document;
 	}
 	
+	public boolean isInitialized() {
+		return description != null;
+	}
+	
 	public URI getURI() {
 		if (document == null)
 			throw new IllegalStateException("Cannot use getURI if this dirty resource is not connected to a document");
+		if (description == null)
+			throw new IllegalStateException("Cannot use getURI if this dirty resource is currently not initialized");
 		return description.getURI();
 	}
 	
@@ -68,7 +84,7 @@ public class DocumentBasedDirtyResource implements IDirtyResource {
 		if (document == null)
 			throw new IllegalStateException("Cannot use getDescription if this dirty resource is not connected to a document");
 		if (description == null)
-			throw new IllegalStateException("Cannot use getDescription if this dirty resource is currently not mementoed");
+			throw new IllegalStateException("Cannot use getDescription if this dirty resource is currently not initialized");
 		return description;
 	}
 
