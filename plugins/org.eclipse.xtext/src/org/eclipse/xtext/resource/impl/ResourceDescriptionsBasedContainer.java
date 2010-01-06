@@ -28,7 +28,7 @@ import com.google.common.collect.Maps;
  *  - ReentrantRWLock
  *  - Listen for description deltas
  */
-public class ResourceDescriptionsBasedContainer implements IContainer {
+public class ResourceDescriptionsBasedContainer implements IContainer, IResourceDescription.Event.Listener {
 
 	private final IResourceDescriptions descriptions;
 	
@@ -96,5 +96,15 @@ public class ResourceDescriptionsBasedContainer implements IContainer {
 				return from.getExportedObjects(type, name);
 			}
 		}));
+	}
+
+	public void descriptionsChanged(IResourceDescription.Event event) {
+		if (uriToDescription != null) {
+			for(IResourceDescription.Delta delta: event.getDeltas()) {
+				if (uriToDescription.containsKey(delta.getUri())) {
+					uriToDescription.put(delta.getUri(), delta.getNew());
+				}
+			}
+		}
 	}
 }

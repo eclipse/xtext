@@ -19,6 +19,7 @@ import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.IResourceDescription.Event.Listener;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.OnChangeEvictingCacheAdapter;
 
@@ -56,6 +57,22 @@ public class DefaultGlobalScopeProvider extends AbstractGlobalScopeProvider {
 		result = cache.get(cacheKey);
 		if (result == null) {
 			result = containerManager.getVisibleContainers(description,	resourceDescriptions);
+			final List<IContainer> finalResult = result;
+			final IResourceDescriptions finalDescriptions = resourceDescriptions;
+			cache.addCacheListener(new OnChangeEvictingCacheAdapter.Listener() {
+				public void onEvict(OnChangeEvictingCacheAdapter cache) {
+					for(IContainer container: finalResult) {
+						if (container instanceof IResourceDescription.Event.Listener) {
+							finalDescriptions.removeListener((Listener) container);
+						}
+					}
+				}
+			});
+			for(IContainer container: finalResult) {
+				if (container instanceof IResourceDescription.Event.Listener) {
+					finalDescriptions.addListener((Listener) container);
+				}
+			}
 			cache.set(cacheKey, result);
 		}
 		return result;
