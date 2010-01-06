@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
+import java.lang.reflect.InvocationTargetException;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -17,6 +18,7 @@ import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
+import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.ui.core.resource.IResourceSetProvider;
 
@@ -45,16 +47,30 @@ public class UpdateProjectsJob extends Job {
 
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
-		for (IProject project : projects) {
-			try {
-				ToBeBuilt updateProject = toBeBuiltComputer.updateProject(project,
-						monitor);
-				builderState
-						.update(resourceSetProvider.get(project), updateProject.getToBeUpdated(), updateProject.getToBeDeleted(), monitor);
-			} catch (CoreException e) {
-				log.error(e.getMessage(), e);
-			}
+		try {
+			new WorkspaceModifyOperation() {
+	
+				@Override
+				protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,
+						InterruptedException {
+					for (IProject project : projects) {
+						try {
+							ToBeBuilt updateProject = toBeBuiltComputer.updateProject(project, monitor);
+							builderState.update(resourceSetProvider.get(project), 
+									updateProject.getToBeUpdated(), updateProject.getToBeDeleted(), monitor);
+						} catch (CoreException e) {
+							log.error(e.getMessage(), e);
+						}
+					}
+				}
+				
+			}.run(monitor);
+		} catch (InvocationTargetException e) {
+			log.error(e.getMessage(), e);
+		} catch (InterruptedException e) {
+			log.error(e.getMessage(), e);
 		}
+		
 		return Status.OK_STATUS;
 	}
 

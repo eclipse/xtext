@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
+import java.util.Collections;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
@@ -15,6 +16,7 @@ import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IResourceChangeListener;
 import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
+import org.eclipse.core.resources.IWorkspace;
 import org.eclipse.core.resources.IWorkspaceRoot;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
@@ -67,15 +69,27 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 						return false;
 					}
 				});
-				if (!toUpdate.isEmpty()) {
-					new UpdateProjectsJob("updating projects", resourceSetProvider, toUpdate, toBeBuiltComputer,
-							builderState).schedule();
-				}
+				scheduleBuildIfNecessary(toUpdate);
 			} catch (CoreException e) {
 				log.error(e.getMessage(), e);
 			}
-		}
-		if ((event.getType() == IResourceChangeEvent.PRE_CLOSE || event.getType() == IResourceChangeEvent.PRE_DELETE)) {
+		} else if (event.getType() == IResourceChangeEvent.PRE_REFRESH) {
+			if (event.getResource() instanceof IProject) {
+				Set<IProject> toUpdate = Collections.singleton((IProject)event.getResource());
+				scheduleBuildIfNecessary(toUpdate);	
+			} else if (event.getResource() == null && event.getSource() instanceof IWorkspace) {
+				IWorkspace ws = (IWorkspace) event.getSource();
+				IProject[] projects = ws.getRoot().getProjects();
+				final Set<IProject> toUpdate = Sets.newLinkedHashSet();
+				for(IProject project: projects) {
+					if (project.isAccessible()) {
+						toUpdate.add(project);
+					}
+				}
+				scheduleBuildIfNecessary(toUpdate);
+			}
+		} else if ((event.getType() == IResourceChangeEvent.PRE_CLOSE 
+				|| event.getType() == IResourceChangeEvent.PRE_DELETE)) {
 			if (event.getResource() instanceof IProject) {
 				final ToBeBuilt toBeBuilt = toBeBuiltComputer.removeProject((IProject) event.getResource(),
 						new NullProgressMonitor());
@@ -97,6 +111,13 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 					}
 				}.schedule();
 			}
+		}
+	}
+
+	protected void scheduleBuildIfNecessary(final Set<IProject> toUpdate) {
+		if (!toUpdate.isEmpty()) {
+			new UpdateProjectsJob("Updating projects", resourceSetProvider, toUpdate, toBeBuiltComputer,
+					builderState).schedule();
 		}
 	}
 

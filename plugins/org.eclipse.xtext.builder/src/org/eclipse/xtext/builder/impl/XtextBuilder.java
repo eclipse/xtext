@@ -15,7 +15,6 @@ import org.eclipse.core.resources.IResourceDelta;
 import org.eclipse.core.resources.IResourceDeltaVisitor;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
-import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
@@ -114,14 +113,5 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		return delta.getResource() instanceof IProject && (delta.getFlags() & IResourceDelta.OPEN) != 0
 				&& ((IProject) delta.getResource()).isOpen();
 	}
-
-	@Override
-	protected void startupOnInitialize() {
-		super.startupOnInitialize();
-		ResourcesPlugin.getWorkspace().addResourceChangeListener(listener);
-	}
-
-	@Inject
-	private ProjectOpenedOrClosedListener listener;
 
 }
