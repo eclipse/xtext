@@ -62,8 +62,7 @@ public class Activator extends AbstractUIPlugin {
 			ResourcesPlugin.getWorkspace().addResourceChangeListener(listener,
 					  IResourceChangeEvent.PRE_CLOSE 
 					| IResourceChangeEvent.PRE_DELETE 
-					| IResourceChangeEvent.POST_CHANGE
-					| IResourceChangeEvent.PRE_REFRESH);
+					| IResourceChangeEvent.POST_CHANGE);
 			final IBuilderState state = injector.getInstance(IBuilderState.class);
 			File file = getBuilderStateLocation().toFile();
 			try {

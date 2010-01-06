@@ -48,7 +48,7 @@ public class UpdateProjectsJob extends Job {
 	@Override
 	protected IStatus run(IProgressMonitor monitor) {
 		try {
-			new WorkspaceModifyOperation() {
+			new WorkspaceModifyOperation(getRule()) {
 	
 				@Override
 				protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,

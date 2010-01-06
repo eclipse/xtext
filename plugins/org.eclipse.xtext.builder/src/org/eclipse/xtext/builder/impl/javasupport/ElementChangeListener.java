@@ -86,7 +86,11 @@ public class ElementChangeListener implements IElementChangedListener {
 				|| delta.getKind() == IJavaElementDelta.ADDED
 				|| (delta.getFlags() & IJavaElementDelta.F_REORDER) != 0
 				|| (delta.getFlags() & IJavaElementDelta.F_REMOVED_FROM_CLASSPATH) != 0
-				|| (delta.getFlags() & IJavaElementDelta.F_ADDED_TO_CLASSPATH) != 0) {
+				|| (delta.getFlags() & IJavaElementDelta.F_ADDED_TO_CLASSPATH) != 0
+				|| (root.isExternal() && (delta.getFlags() & // external folders change
+						(IJavaElementDelta.F_CONTENT 
+								| IJavaElementDelta.F_SOURCEATTACHED 
+								| IJavaElementDelta.F_SOURCEDETACHED)) == delta.getFlags())) {
 				return Collections.singleton(root.getJavaProject());
 			}
 		} else if (element instanceof IJavaModel) {

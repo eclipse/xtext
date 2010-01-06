@@ -31,18 +31,21 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 			final JarEntryLocator locator = new JarEntryLocator();
 			for (final IPackageFragmentRoot root : roots) {
 				if (shouldHandle(root)) {
-					
-					new PackageFragmentRootWalker<Void>() {
-						@Override
-						protected Void handle(IJarEntryResource jarEntry, TraversalState state) {
-							URI uri = locator.getURI(root, jarEntry, state);
-							if (isValid(uri)) {
-								toBeBuilt.getToBeDeleted().add(uri);
-								toBeBuilt.getToBeUpdated().add(uri);
+					try {
+						new PackageFragmentRootWalker<Void>() {
+							@Override
+							protected Void handle(IJarEntryResource jarEntry, TraversalState state) {
+								URI uri = locator.getURI(root, jarEntry, state);
+								if (isValid(uri)) {
+									toBeBuilt.getToBeDeleted().add(uri);
+									toBeBuilt.getToBeUpdated().add(uri);
+								}
+								return null;
 							}
-							return null;
-						}
-					}.traverse(root,false);
+						}.traverse(root,false);
+					} catch (JavaModelException ex) {
+						log.error(ex.getMessage(), ex);
+					}
 				}
 			}
 		}
