@@ -86,9 +86,11 @@ public class XtextHyperlink extends AbstractHyperlink {
 				edit.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
 					@Override
 					public void process(XtextResource resource) throws Exception {
-						EObject object = resource.getEObject(uri.fragment());
-						Region region = locationProvider.getLocation(object);
-						edit.selectAndReveal(region.getOffset(), region.getLength());
+						if (resource != null) {
+							EObject object = resource.getEObject(uri.fragment());
+							Region region = locationProvider.getLocation(object);
+							edit.selectAndReveal(region.getOffset(), region.getLength());
+						}
 					}
 				});
 			}

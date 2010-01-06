@@ -10,6 +10,7 @@ package org.eclipse.xtext.builder.internal;
 import java.io.File;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IResourceChangeEvent;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.IPath;
@@ -24,6 +25,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.builder.BuilderModule;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
+import org.eclipse.xtext.builder.impl.ProjectOpenedOrClosedListener;
 import org.eclipse.xtext.builder.impl.javasupport.JdtBuilderModule;
 import org.osgi.framework.Bundle;
 import org.osgi.framework.BundleContext;
@@ -56,6 +58,12 @@ public class Activator extends AbstractUIPlugin {
 		INSTANCE = this;
 		try {
 			injector = Guice.createInjector(createBuilderModule(context));
+			final ProjectOpenedOrClosedListener listener = injector.getInstance(ProjectOpenedOrClosedListener.class);
+			ResourcesPlugin.getWorkspace().addResourceChangeListener(listener,
+					  IResourceChangeEvent.PRE_CLOSE 
+					| IResourceChangeEvent.PRE_DELETE 
+					| IResourceChangeEvent.POST_CHANGE
+					| IResourceChangeEvent.PRE_REFRESH);
 			final IBuilderState state = injector.getInstance(IBuilderState.class);
 			File file = getBuilderStateLocation().toFile();
 			try {

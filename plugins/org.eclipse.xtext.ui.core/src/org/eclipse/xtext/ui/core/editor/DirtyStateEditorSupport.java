@@ -154,7 +154,8 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 			throw new IllegalStateException("Was configured with another client or not configured at all.");
 		client.removeVerifyListener(this);
 		stateChangeEventBroker.removeListener(this);
-		dirtyStateManager.discardDirtyState(dirtyResource);
+		if (dirtyResource.isInitialized()) 
+			dirtyStateManager.discardDirtyState(dirtyResource);
 		IXtextDocument document = client.getDocument();
 		if (document == null)
 			document = dirtyResource.getUnderlyingDocument();
@@ -173,6 +174,8 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	}
 	
 	public void descriptionsChanged(final IResourceDescription.Event event) {
+		if (!getDirtyResource().isInitialized())
+			return;
 		final Set<URI> uris = Sets.newHashSet();
 		for(IResourceDescription.Delta delta: event.getDeltas()) {
 			if (delta.getOld() == getDirtyResource().getDescription() || delta.getNew() == getDirtyResource().getDescription())

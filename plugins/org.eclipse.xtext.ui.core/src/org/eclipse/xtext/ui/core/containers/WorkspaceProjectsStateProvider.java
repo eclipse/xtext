@@ -14,9 +14,9 @@ import com.google.inject.Provider;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class WorkspaceProjectsStateProvider implements Provider<IAllContainerState>{
+public class WorkspaceProjectsStateProvider implements Provider<IAllContainersState>{
 
-	public IAllContainerState get() {
+	public IAllContainersState get() {
 		return Activator.getDefault().getWorkspaceProjectsState();
 	}
 	

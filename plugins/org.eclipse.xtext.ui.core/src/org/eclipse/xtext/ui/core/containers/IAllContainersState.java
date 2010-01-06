@@ -15,7 +15,7 @@ import org.eclipse.emf.common.util.URI;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IAllContainerState {
+public interface IAllContainersState {
 
 	List<String> getVisibleContainerHandles(String handle);
 

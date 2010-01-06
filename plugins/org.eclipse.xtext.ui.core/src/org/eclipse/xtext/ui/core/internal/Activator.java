@@ -13,7 +13,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtext.ui.core.containers.IAllContainerState;
+import org.eclipse.xtext.ui.core.containers.IAllContainersState;
 import org.eclipse.xtext.ui.core.containers.JavaProjectsState;
 import org.eclipse.xtext.ui.core.containers.WorkspaceProjectsState;
 import org.eclipse.xtext.ui.core.editor.IDirtyStateManager;
@@ -114,9 +114,9 @@ public class Activator extends AbstractUIPlugin {
 	
 	private IDirtyStateManager dirtyStateManager;
 	
-	private IAllContainerState javaProjectsState;
+	private IAllContainersState javaProjectsState;
 	
-	private IAllContainerState workspaceProjectsState;
+	private IAllContainersState workspaceProjectsState;
 	
 	private void initializeGuiceInjector() {
 		try {
@@ -144,13 +144,13 @@ public class Activator extends AbstractUIPlugin {
 		return dirtyStateManager;
 	}
 
-	public IAllContainerState getJavaProjectsState() {
+	public IAllContainersState getJavaProjectsState() {
 		if (javaProjectsState == null)
 			javaProjectsState = injector.getInstance(JavaProjectsState.class);
 		return javaProjectsState;
 	}
 	
-	public IAllContainerState getWorkspaceProjectsState() {
+	public IAllContainersState getWorkspaceProjectsState() {
 		if (workspaceProjectsState == null)
 			workspaceProjectsState = injector.getInstance(WorkspaceProjectsState.class);
 		return workspaceProjectsState;

@@ -208,7 +208,7 @@ public abstract class AbstractBuilderTestLanguageUiModule extends BuilderTestLan
 	}
 
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
-	public com.google.inject.Provider<org.eclipse.xtext.ui.core.containers.IAllContainerState> provideIAllContainerState() {
+	public com.google.inject.Provider<org.eclipse.xtext.ui.core.containers.IAllContainersState> provideIAllContainerState() {
 		return new org.eclipse.xtext.ui.core.containers.JavaProjectsStateProvider();
 	}
 

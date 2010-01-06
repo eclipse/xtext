@@ -36,7 +36,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public abstract class AbstractAllContainersState implements IResourceChangeListener, IAllContainerState {
+public abstract class AbstractAllContainersState implements IResourceChangeListener, IAllContainersState {
 
 	private final static Logger log = Logger.getLogger(AbstractAllContainersState.class);
 	
@@ -54,7 +54,11 @@ public abstract class AbstractAllContainersState implements IResourceChangeListe
 	}
 	
 	protected void registerAsListener() {
-		ResourcesPlugin.getWorkspace().addResourceChangeListener(this, IResourceChangeEvent.PRE_DELETE | IResourceChangeEvent.POST_CHANGE | IResourceChangeEvent.PRE_CLOSE);
+		ResourcesPlugin.getWorkspace().addResourceChangeListener(this, 
+			  IResourceChangeEvent.PRE_DELETE 
+			| IResourceChangeEvent.POST_CHANGE 
+			| IResourceChangeEvent.PRE_CLOSE
+			| IResourceChangeEvent.PRE_REFRESH);
 	}
 	
 	public void unregisterAsListener() {
@@ -129,7 +133,9 @@ public abstract class AbstractAllContainersState implements IResourceChangeListe
 	protected abstract void doInitVisibleHandles(String handle, List<String> visibleHandles);
 	
 	public void resourceChanged(IResourceChangeEvent event) {
-		if (event.getType() == IResourceChangeEvent.PRE_CLOSE || event.getType() == IResourceChangeEvent.PRE_DELETE) {
+		if (event.getType() == IResourceChangeEvent.PRE_CLOSE 
+				|| event.getType() == IResourceChangeEvent.PRE_DELETE
+				|| event.getType() == IResourceChangeEvent.PRE_REFRESH) {
 			initialize();
 			return;
 		}

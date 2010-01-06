@@ -13,9 +13,9 @@ import org.eclipse.emf.common.util.URI;
 
 class ContainerState implements IContainerState {
 	private final String root;
-	private final IAllContainerState globalState;
+	private final IAllContainersState globalState;
 
-	protected ContainerState(String root, IAllContainerState globalState) {
+	protected ContainerState(String root, IAllContainersState globalState) {
 		this.root = root;
 		this.globalState = globalState;
 	}
