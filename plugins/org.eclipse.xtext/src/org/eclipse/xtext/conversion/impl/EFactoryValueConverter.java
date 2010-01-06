@@ -30,7 +30,11 @@ public class EFactoryValueConverter implements IValueConverter<Object> {
 	}
 
 	public Object toValue(String string, AbstractNode node) throws ValueConverterException {
-		return dataType.getEPackage().getEFactoryInstance().createFromString(dataType, string);
+		try {
+			return dataType.getEPackage().getEFactoryInstance().createFromString(dataType, string);
+		} catch (Exception exc) {
+			throw new ValueConverterException("Error converting string to value", node, exc);
+		}
 	}
 
 }
