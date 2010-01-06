@@ -85,11 +85,11 @@ public class Storage2UriMapperImpl implements IStorage2UriMapper, IResourceChang
 	protected URI internalGetUri(IStorage storage) {
 		if (storage instanceof IFile) {
 			return URI.createPlatformResourceURI(storage.getFullPath().toString(), true);
-		}
+		} 
 		return null;
 	}
 
-	protected boolean isValidUri(URI uri) {
+	public boolean isValidUri(URI uri) {
 		return uri!=null && (resourceFactoryRegistry.getFactory(uri) != null);
 	}
 	
@@ -99,12 +99,18 @@ public class Storage2UriMapperImpl implements IStorage2UriMapper, IResourceChang
 			if (uri.isPlatformResource()) {
 				Path path = new Path(uri.toPlatformString(true));
 				IFile file = getWorkspaceRoot().getFile(path);
-				return Collections.singleton((IStorage) file);
+				if (isValidStorageFor(uri, file))
+					return Collections.singleton((IStorage) file);
 			}
 			return Iterables.emptyIterable();
 		}
 	});
 
+	protected boolean isValidStorageFor(URI uri, IStorage storage) {
+		// subclasses may override
+		return true;
+	}
+	
 	public void resourceChanged(IResourceChangeEvent event) {
 		synchronized (cache) {
 			cache.clear();

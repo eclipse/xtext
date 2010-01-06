@@ -35,7 +35,7 @@ public class WorkspaceProjectsStateTest extends AbstractAllContainersStateTests 
 		uri3 = createFileAndRegisterResource(project2, "file3");
 		IStorage2UriMapper mapper = new Storage2UriMapperImpl() {
 			@Override
-			protected boolean isValidUri(URI uri) {
+			public boolean isValidUri(URI uri) {
 				return uri != null && !uri.toString().endsWith("/.project");
 			}
 		};

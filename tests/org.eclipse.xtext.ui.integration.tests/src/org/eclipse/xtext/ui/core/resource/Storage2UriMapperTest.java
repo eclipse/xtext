@@ -24,7 +24,7 @@ public class Storage2UriMapperTest extends TestCase {
 		
 		Storage2UriMapperImpl mapper = new Storage2UriMapperImpl() {
 			@Override
-			protected boolean isValidUri(URI uri) {
+			public boolean isValidUri(URI uri) {
 				return true;
 			}
 		};

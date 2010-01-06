@@ -25,12 +25,12 @@ public class UnicodeCharacterTestLanguageStandaloneSetup implements ISetup {
 	}
 	
 	public Injector createInjector() {
-		return Guice.createInjector(new org.eclipse.xtext.parser.UnicodeCharacterTestLanguageRuntimeModule());
+		return Guice.createInjector(/*new org.eclipse.xtext.parser.UnicodeCharacterTestLanguageRuntimeModule()*/);
 	}
 	
 	public void register(Injector injector) {
 	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/xtext/test/unicodeChars")) {
-		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/xtext/test/unicodeChars", org.eclipse.xtext.parser.unicodeTest.UnicodeTestPackage.eINSTANCE);
+//		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/xtext/test/unicodeChars", org.eclipse.xtext.parser.unicodeTest.UnicodeTestPackage.eINSTANCE);
 	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);

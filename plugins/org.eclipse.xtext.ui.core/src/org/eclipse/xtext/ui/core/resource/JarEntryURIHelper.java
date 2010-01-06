@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -7,22 +7,22 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.resource;
 
-import org.eclipse.core.resources.IStorage;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.common.util.URI;
-
-import com.google.inject.ImplementedBy;
+import org.eclipse.jdt.core.IPackageFragmentRoot;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
- * TODO reuse instance created by shared infrastructure 
  */
-@ImplementedBy(Storage2UriMapperJavaImpl.class)
-public interface IStorage2UriMapper {
+public class JarEntryURIHelper {
+
+	public static URI getUriForPackageFragmentRoot(IPackageFragmentRoot root) {
+		IResource underlyingResource = root.getResource();
+		if (underlyingResource == null) {
+			return URI.createFileURI(root.getPath().toString());
+		} else {
+			return URI.createPlatformResourceURI(underlyingResource.getFullPath().toString(), true);
+		}
+	}
 	
-	Iterable<IStorage> getStorages(URI uri);
-	
-	URI getUri(IStorage storage);
-	
-	boolean isValidUri(URI uri);
 }

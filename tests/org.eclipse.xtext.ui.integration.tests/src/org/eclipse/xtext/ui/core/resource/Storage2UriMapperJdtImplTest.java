@@ -15,10 +15,12 @@ import java.util.Iterator;
 import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.junit.util.JavaProjectSetupUtil.TextFile;
+import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -33,7 +35,7 @@ public class Storage2UriMapperJdtImplTest extends TestCase {
 		
 		Storage2UriMapperJavaImpl impl = new Storage2UriMapperJavaImpl() {
 			@Override
-			protected boolean isValidUri(URI uri) {
+			public boolean isValidUri(URI uri) {
 				return uri!=null;
 			}
 		};
@@ -43,6 +45,26 @@ public class Storage2UriMapperJdtImplTest extends TestCase {
 		IStorage next = iterator.next();
 		assertFalse(iterator.hasNext());
 		assertEquals(uri, impl.getUri(next));
+	}
+	
+	public void testResourceInExternalFolder() throws Exception {
+		IFolder externalFolder = createExternalFolder("externalFolder");
+		IJavaProject project = createJavaProject("foo");
+		IFile file = externalFolder.getFile("someFile.ext");
+		file.create(new StringInputStream("content"), true, monitor());
+		addExternalFolderToClasspath(project, externalFolder);
 		
+		Storage2UriMapperJavaImpl impl = new Storage2UriMapperJavaImpl() {
+			@Override
+			public boolean isValidUri(URI uri) {
+				return uri!=null;
+			}
+		};
+		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
+		Iterable<IStorage> storages = impl.getStorages(uri);
+		Iterator<IStorage> iterator = storages.iterator();
+		IStorage next = iterator.next();
+		assertFalse(iterator.hasNext());
+		assertEquals(uri, impl.getUri(next));
 	}
 }
