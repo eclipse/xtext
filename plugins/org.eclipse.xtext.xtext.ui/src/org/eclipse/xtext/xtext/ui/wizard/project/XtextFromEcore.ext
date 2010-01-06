@@ -1,19 +1,26 @@
 import org::eclipse::emf::ecore;
+import org::eclipse::xtext::xtext::ui::wizard::project;
+
+Collection[EPackage] allImportedEPackages(XtextProjectInfo this) :
+	EPackagesForRules.allReferencedEPackages().flatten().toSet();
 
 Collection[EPackage] allReferencedEPackages(EPackage this) :	
-	{this}
-		.union(EClassifiers.typeSelect(EClass).EStructuralFeatures.EType.EPackage)
-		.union(EClassifiers.typeSelect(EClass).ESuperTypes.EPackage)
-		.flatten().toSet();
+	allReferencedClassifiers().EPackage.toSet();
 
 Collection[EClassifier] allReferencedClassifiers(EPackage this) :
-	EClassifiers.union(EClassifiers.typeSelect(EClass).EAllAttributes.EType.flatten()).toSet();
+	EClassifiers.union(EClassifiers.typeSelect(EClass).EAllStructuralFeatures.select(f|f.needsAssignment()).EType.flatten()).toSet();
 	
 fqn(EClassifier this):
-	EPackage.alias() + "::" + name;
+	EPackage.uniqueName() + "::" + name;
 	
-alias(EPackage this):
-	isXtextKeyword(name) ? name + '_package' : name; 
+Void calculateAliases() :
+	calculateAliases();
+	
+Void clearUniqueNames():
+	 JAVA org.eclipse.xtext.xtext.ui.wizard.project.XtextFromEcore.clearUniqueNames();
+
+String uniqueName(ENamedElement this):
+	 JAVA org.eclipse.xtext.xtext.ui.wizard.project.XtextFromEcore.uniqueName(org.eclipse.emf.ecore.ENamedElement);
 
 cached prefixFeatures(EClass this) :
 	EAllStructuralFeatures.select(f|f.needsAssignment() && f.EType.isBoolean());
@@ -33,7 +40,7 @@ assignedRuleCall(EAttribute this):
 		then 
 		 	"'"+name+"'" 
 		else
-		 	EType.name;
+		 	EType.uniqueName();
 		 	
 String dataTypeRuleBody(EDataType this) :
 	switch (name) {
@@ -82,7 +89,7 @@ isXtextKeyword(String this) :
 	}.contains(this);
 	
 idAttribute(EClass this) :
-	idAttributeInternal() != null ? idAttributeInternal() : EAllAttributes.selectFirst(a|a.needsAssignment() && a.name == 'name' && a.EType.name=="EString");
+	idAttributeInternal() != null ? idAttributeInternal() : EAllAttributes.selectFirst(a|a.needsAssignment() && a.name == 'name' && a.EType.name=="EString" && !a.many);
 
 private idAttributeInternal(EClass this) :
 	EAllAttributes.selectFirst(a|a.needsAssignment() && a.ID);
@@ -100,7 +107,7 @@ isID(EStructuralFeature this) :
 	EAttribute.isInstance({this}) && ((EAttribute)this).ID;
 	
 boolean needsAssignment(EStructuralFeature this) :
-	!derived && !transient && !(EReference.isInstance(this) && ((EReference)this).container);
+	!derived && !transient && !(EReference.isInstance(this) && ((EReference)this).container) && !(EDataType.isInstance(this.EType) && !((EDataType) this.EType).serializable);
 
 isContainment(EStructuralFeature this) :
 	false;

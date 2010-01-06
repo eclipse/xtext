@@ -35,7 +35,7 @@ public class XtextProjectInfo implements IProjectInfo {
 	private IWorkbench workbench;
 	private IPath location;
 	private WizardContribution wizardContribution;
-	private Collection<EPackage> importedEPackages;
+	private Collection<EPackage> ePackagesForRules;
 	private EClass rootElementClass;
 	
 	public void setWizardContribution(WizardContribution wizardContribution) {
@@ -158,12 +158,12 @@ public class XtextProjectInfo implements IProjectInfo {
 		return location;
 	}
 	
-	public Collection<EPackage> getImportedEPackages() {
-		return importedEPackages;
+	public Collection<EPackage> getEPackagesForRules() {
+		return ePackagesForRules;
 	}
 	
-	public void setImportedEPackages(Collection<EPackage> importedEPackages) {
-		this.importedEPackages = importedEPackages;
+	public void setEPackagesForRules(Collection<EPackage> ePackagesForRules) {
+		this.ePackagesForRules = ePackagesForRules;
 	}
 
 	public EClass getRootElementClass() {
