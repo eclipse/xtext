@@ -31,7 +31,10 @@ public class DefaultResourceDescriptionDelta implements IResourceDescription.Del
 			throw new AssertionError("'old!=_new' constraint violated");
 		}
 		if (_new!=null && old!=null && !old.getURI().equals(_new.getURI())) {
-			throw new AssertionError("'_new!=null && old!=null && !old.getURI().equals(_new.getURI())' constraint violated");
+			URI oldURI = old.getURI();
+			URI newURI = _new.getURI();
+			throw new AssertionError("'_new!=null && old!=null && !old.getURI().equals(_new.getURI())' constraint violated, old was" + 
+					oldURI + " new was: " + newURI);
 		}
 		this.old = old;
 		this._new = _new;

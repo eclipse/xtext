@@ -45,6 +45,8 @@ public class DefaultResourceDescription extends AbstractResourceDescription impl
 	private final static Logger log = Logger.getLogger(DefaultResourceDescription.class);
 
 	private final Resource resource;
+	
+	private final URI uri;
 
 	private final IQualifiedNameProvider nameProvider;
 
@@ -53,6 +55,10 @@ public class DefaultResourceDescription extends AbstractResourceDescription impl
 	public DefaultResourceDescription(Resource resource, IQualifiedNameProvider nameProvider) {
 		this.resource = resource;
 		this.nameProvider = nameProvider;
+		if (resource.getResourceSet() != null)
+			this.uri = resource.getResourceSet().getURIConverter().normalize(resource.getURI());
+		else
+			this.uri = resource.getURI();
 	}
 
 	@Override
@@ -113,7 +119,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription impl
 	}
 
 	public URI getURI() {
-		return resource.getURI();
+		return uri;
 	}
 
 	public IQualifiedNameProvider getNameProvider() {
