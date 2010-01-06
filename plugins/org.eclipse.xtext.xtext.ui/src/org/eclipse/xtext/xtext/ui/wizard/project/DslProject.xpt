@@ -37,7 +37,7 @@ projectName=«this.projectName»
 
 «DEFINE grammar FOR XtextProjectInfo»
 «FILE basePackagePath+"/"+languageNameAbbreviation+".xtext" -»
-«IF importedEPackages != null-»
+«IF EPackagesForRules != null-»
 «EXPAND org::eclipse::xtext::xtext::ui::wizard::project::XtextFromEcore::grammar-»
 «ELSE-»
 «EXPAND defaultGrammar-»

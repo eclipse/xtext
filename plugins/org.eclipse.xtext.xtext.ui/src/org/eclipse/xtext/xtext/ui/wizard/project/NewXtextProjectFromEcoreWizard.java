@@ -39,7 +39,7 @@ public class NewXtextProjectFromEcoreWizard extends NewXtextProjectWizard {
 	@Override
 	protected IProjectInfo getProjectInfo() {
 		XtextProjectInfo projectInfo = (XtextProjectInfo) super.getProjectInfo();
-		projectInfo.setImportedEPackages(ePackageSelectionPage.getEPackages());
+		projectInfo.setEPackagesForRules(ePackageSelectionPage.getEPackagesForRules());
 		projectInfo.setRootElementClass(ePackageSelectionPage.getRootElementClass());
 		return projectInfo;
 	}

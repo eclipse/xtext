@@ -3,11 +3,11 @@
 
 «EXTENSION org::eclipse::xtext::xtext::ui::wizard::project::XtextFromEcore»
 
-«DEFINE grammar FOR XtextProjectInfo-»
+«DEFINE grammar FOR XtextProjectInfo-»«clearUniqueNames()»
 «EXPAND grammarDeclaration-»
-«EXPAND metamodelImport FOREACH importedEPackages.allReferencedEPackages().flatten().toSet()-»
+«EXPAND metamodelImport FOREACH allImportedEPackages()-»
 «EXPAND rule FOR rootElementClass»
-«EXPAND rule FOREACH importedEPackages.allReferencedClassifiers().flatten().toSet().remove(rootElementClass)-»
+«EXPAND rule FOREACH EPackagesForRules.EClassifiers.remove(rootElementClass)-»
 «ENDDEFINE»
 
 «DEFINE grammarDeclaration FOR XtextProjectInfo-»
@@ -16,13 +16,17 @@ grammar «languageName»  with org.eclipse.xtext.common.Terminals
 «ENDDEFINE»
 
 «DEFINE metamodelImport FOR EPackage»
-import "«nsURI»" as «alias()»
+import "«nsURI»" as «uniqueName()»
 «ENDDEFINE» 
 
 «DEFINE rule FOR EClass»
-«name.quoteIfNeccesary()» returns «fqn()»:
+«uniqueName()» returns «fqn()»:
 	«EXPAND subClassAlternatives»«
-	IF !abstract»«
+	IF abstract»«
+		IF subClasses().isEmpty
+			»'«name»' /* TODO: abstract class does not have subclasses. Consider removing this rule */ «
+		ENDIF»«
+	ELSE»«
 		IF !subClasses().isEmpty
 			» |
     «	
@@ -48,7 +52,7 @@ import "«nsURI»" as «alias()»
 
 «DEFINE subClassAlternatives FOR EClass»«
 	FOREACH subClasses() AS subClass SEPARATOR " | "»«
-		subClass.name.quoteIfNeccesary()»«
+		subClass.uniqueName()»«
 	ENDFOREACH»«
 ENDDEFINE»
 
@@ -73,7 +77,7 @@ ENDDEFINE»
 	EXPAND assignedTerminal»«
 	IF many
 		» ( "," «
-		name»«
+		name.quoteIfNeccesary()»«
 		EXPAND assignmentOperator»«
 		EXPAND assignedTerminal
 		»)* «
@@ -94,7 +98,7 @@ ENDDEFINE»
 
 «DEFINE assignedTerminal FOR EReference»«
 	IF containment»«
-		EReferenceType.name»«
+		EReferenceType.uniqueName()»«
 	ELSE
 		»[«EReferenceType.fqn()»]«
 	ENDIF»«
@@ -115,7 +119,7 @@ enum «name.quoteIfNeccesary()» returns «fqn()»:
 
 «DEFINE rule FOR EDataType»«
 	IF serializable»
-«name.quoteIfNeccesary()» returns «fqn()»:
+«uniqueName()» returns «fqn()»:
 	«dataTypeRuleBody()»;
 «	ENDIF»«
 ENDDEFINE»

@@ -29,5 +29,6 @@ Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.contentassist,
- org.eclipse.xtext.contentassist.antlr
+ org.eclipse.xtext.contentassist.antlr,
+ org.eclipse.xtext.xtext.ui.wizard.project;x-friends:="org.eclipse.xtext.xtext.ui.tests"
 Import-Package: org.apache.log4j

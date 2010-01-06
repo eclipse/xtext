@@ -18,9 +18,11 @@ import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.command.BasicCommandStack;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.presentation.EcoreActionBarContributor;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -50,14 +52,16 @@ import org.eclipse.swt.widgets.List;
 public class WizardSelectImportedEPackagePage extends WizardPage {
 
 	private static final Logger LOG = Logger.getLogger(WizardSelectImportedEPackagePage.class);
-	
+
 	private EditingDomain editingDomain;
 
-	private Set<EPackage> ePackages = new HashSet<EPackage>();
+	private Set<EPackage> ePackagesForRules = new HashSet<EPackage>();
+
+	private Set<EPackage> ePackagesToImport = new HashSet<EPackage>();
 
 	private IStructuredSelection selection;
 
-	private boolean isAutoImportReferencedEPackages;
+	private boolean isAutoImportCrossReferencedEPackages;
 
 	private CCombo rootElementComboBoxCellEditor;
 
@@ -119,14 +123,14 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		});
 		final Button addReferencedEPackagesButton = new Button(composite, SWT.CHECK);
 		addReferencedEPackagesButton.setText(Messages.WizardSelectImportedEPackagePage_CheckButtonText);
-		addReferencedEPackagesButton.setSelection(isAutoImportReferencedEPackages);
+		addReferencedEPackagesButton.setSelection(isAutoImportCrossReferencedEPackages);
 		addReferencedEPackagesButton.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 2, 1));
 		addReferencedEPackagesButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				isAutoImportReferencedEPackages = addReferencedEPackagesButton.getSelection();
-				if (isAutoImportReferencedEPackages) {
-					for (EPackage ePackage : ePackages) {
+				isAutoImportCrossReferencedEPackages = addReferencedEPackagesButton.getSelection();
+				if (isAutoImportCrossReferencedEPackages) {
+					for (EPackage ePackage : ePackagesForRules) {
 						addEPackage(ePackage);
 					}
 				}
@@ -149,8 +153,8 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		Dialog.applyDialogFont(getControl());
 	}
 
-	public java.util.Collection<EPackage> getEPackages() {
-		return ePackages;
+	public java.util.Collection<EPackage> getEPackagesForRules() {
+		return ePackagesForRules;
 	}
 
 	private void addEPackages(URI uri) {
@@ -169,25 +173,34 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 
 	private void addEPackage(EPackage ePackage) {
 		addEPackageToUI(ePackage);
-		if (isAutoImportReferencedEPackages) {
-			for (EClassifier classifier : ePackage.getEClassifiers()) {
-				if (classifier instanceof EClass) {
-					for (EStructuralFeature feature : ((EClass) classifier).getEAllStructuralFeatures()) {
+		for (EClassifier classifier : ePackage.getEClassifiers()) {
+			if (classifier instanceof EClass) {
+				for (EStructuralFeature feature : ((EClass) classifier).getEAllStructuralFeatures()) {
+					if (isFeatureTypeNeedsEPackageImport(feature)) {
 						EPackage featurePackage = feature.getEType().getEPackage();
 						addEPackageToUI(featurePackage);
 					}
-					for (EClass superType : ((EClass) classifier).getESuperTypes()) {
-						EPackage superTypePackage = superType.getEPackage();
-						addEPackageToUI(superTypePackage);
+					if (isAutoImportCrossReferencedEPackages) {
+						for (EClass superType : ((EClass) classifier).getESuperTypes()) {
+							EPackage superTypePackage = superType.getEPackage();
+							addEPackageToUI(superTypePackage);
+						}
 					}
 				}
 			}
 		}
 	}
 
+	private boolean isFeatureTypeNeedsEPackageImport(EStructuralFeature feature) {
+		return !feature.isDerived()
+				&& !feature.isTransient()
+				&& (isAutoImportCrossReferencedEPackages
+						|| (feature instanceof EReference && ((EReference) feature).isContainment()) || feature instanceof EAttribute);
+	}
+
 	private void addEPackageToUI(EPackage ePackage) {
 		if (ePackage != null) {
-			boolean isAdded = ePackages.add(ePackage);
+			boolean isAdded = ePackagesForRules.add(ePackage);
 			if (isAdded) {
 				importedEPackagesListBox.add(ePackage.getNsURI().toString());
 				resetEClassesInUI();
@@ -198,7 +211,7 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 
 	private void resetEClassesInUI() {
 		java.util.List<String> classNames = new ArrayList<String>();
-		for (EPackage ePackage : ePackages) {
+		for (EPackage ePackage : ePackagesForRules) {
 			for (EClassifier eClassifier : ePackage.getEClassifiers()) {
 				if (eClassifier instanceof EClass) {
 					classNames.add(eClassifier.getName());
@@ -211,7 +224,7 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 	}
 
 	private void removeEPackage(final List list, String uri) {
-		for (Iterator<EPackage> i = ePackages.iterator(); i.hasNext();) {
+		for (Iterator<EPackage> i = ePackagesForRules.iterator(); i.hasNext();) {
 			EPackage ePackage = i.next();
 			if (ePackage.getNsURI().equals(uri)) {
 				i.remove();
@@ -252,14 +265,14 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 	}
 
 	private void validatePage() {
-		setPageComplete(!ePackages.isEmpty() && getRootElementClass() != null);
+		setPageComplete(!ePackagesForRules.isEmpty() && getRootElementClass() != null);
 	}
 
 	public EClass getRootElementClass() {
 		int selectionIndex = rootElementComboBoxCellEditor.getSelectionIndex();
 		if (selectionIndex != -1) {
 			String selectedEClass = rootElementComboBoxCellEditor.getItem(selectionIndex);
-			for (EPackage ePackage : ePackages) {
+			for (EPackage ePackage : ePackagesForRules) {
 				EClassifier eClassifier = ePackage.getEClassifier(selectedEClass);
 				if (eClassifier instanceof EClass) {
 					return (EClass) eClassifier;
