@@ -220,7 +220,7 @@ public class Reader extends AbstractWorkflowComponent2 {
 	@Override
 	protected void invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
 		ResourceSet resourceSet = getResourceSet();
-		Multimap<String, URI> uris = new PathTraverser().resolvePathes(pathes, new Predicate<URI>() {
+		Multimap<String, URI> uris = getPathTraverser().resolvePathes(pathes, new Predicate<URI>() {
 			public boolean apply(URI input) {
 				return getRegistry().getResourceServiceProvider(input, null) != null;
 			}
@@ -232,6 +232,10 @@ public class Reader extends AbstractWorkflowComponent2 {
 			validator.validate(resourceSet, getRegistry(), issues);
 		}
 		addModelElementsToContext(ctx, resourceSet);
+	}
+
+	protected PathTraverser getPathTraverser() {
+		return new PathTraverser();
 	}
 
 	protected void addModelElementsToContext(WorkflowContext ctx, ResourceSet resourceSet) {
