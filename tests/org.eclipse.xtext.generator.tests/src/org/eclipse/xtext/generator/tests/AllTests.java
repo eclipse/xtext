@@ -60,6 +60,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTest.class);
       suite.addTestSuite(org.eclipse.xtext.mwe.PathTraverserTest.class);
       suite.addTestSuite(org.eclipse.xtext.mwe.ReaderTest.class);
+      suite.addTestSuite(org.eclipse.xtext.mwe.UriBasedReaderTest.class);
       suite.addTestSuite(org.eclipse.xtext.parseerrorhandling.ParseErrorHandlingTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.AntlrDatatypeRuleTokenTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.CrossContainmentTest.class);

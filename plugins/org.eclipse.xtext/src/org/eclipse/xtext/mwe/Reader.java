@@ -10,20 +10,14 @@ package org.eclipse.xtext.mwe;
 import java.io.File;
 import java.util.Collection;
 import java.util.List;
-import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.mwe.core.WorkflowContext;
 import org.eclipse.emf.mwe.core.WorkflowInterruptedException;
 import org.eclipse.emf.mwe.core.issues.Issues;
-import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
-import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.containers.DelegatingIAllContainerAdapter;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
 
@@ -31,8 +25,6 @@ import com.google.common.base.Predicate;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Sets;
-import com.google.inject.Injector;
-import com.google.inject.Provider;
 
 /**
  * <p>
@@ -69,10 +61,10 @@ import com.google.inject.Provider;
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public class Reader extends AbstractWorkflowComponent2 {
+public class Reader extends AbstractReader {
 
-	private final static Logger log = Logger.getLogger(Reader.class.getName());
-	private List<String> pathes = Lists.newArrayList();
+	final static Logger log = Logger.getLogger(Reader.class.getName());
+	List<String> pathes = Lists.newArrayList();
 
 	/**
 	 * <p>
@@ -113,80 +105,6 @@ public class Reader extends AbstractWorkflowComponent2 {
 		}
 	}
 
-	private Set<SlotEntry> slotEntries = Sets.newHashSet();
-
-	/**
-	 * Example use: 
-	 * &lt;load type="Entity"/&gt;
-	 */
-	public void addLoad(SlotEntry outputSlot) {
-		slotEntries.add(outputSlot);
-	}
-	
-	public Set<SlotEntry> getSlotEntries() {
-		return slotEntries;
-	}
-
-	private List<Injector> injectors = Lists.newArrayList();
-
-	/**
-	 * <p>
-	 * Used to register any languages.
-	 * </p>
-	 * <p>
-	 * For Xtext language a [MyLanguage]StandaloneSetup is generated automatically.
-	 * If you want to work with other EMF based resources, you can use this hook in order to do any kind of initialization.
-	 * </p>
-	 */
-	public void addRegister(ISetup setup) {
-		injectors.add(setup.createInjectorAndDoEMFRegistration());
-	}
-	
-	public List<Injector> getInjectors() {
-		return injectors;
-	}
-
-	private Provider<ResourceSet> provider = null;
-
-	public void setResourceSetProvider(Provider<ResourceSet> provider) {
-		this.provider = provider;
-	}
-	
-	/**
-	 * By default the first registered language (see {@link #addRegister(ISetup)} is used to
-	 * create an instanceof {@link ResourceSet}.
-	 * 
-	 * Use this hook in order to configure a different startegy.
-	 */
-	public Provider<ResourceSet> getResourceSetProvider() {
-		return provider;
-	}
-
-	private Validator validator = new Validator();
-
-	public void setValidate(Validator validator) {
-		this.validator = validator;
-	}
-	
-	/**
-	 * The validator is used in order to validate the models.
-	 * By default this property is not set. See {@link Validator} for details
-	 * 
-	 */
-	public Validator getValidator() {
-		return validator;
-	}
-	
-	private ResourceDescriptionsProvider resourceDescriptionsProvider = new ResourceDescriptionsProvider();
-
-	public void setResourceDescriptionsProvider(ResourceDescriptionsProvider resourceDescriptionsProvider) {
-		this.resourceDescriptionsProvider = resourceDescriptionsProvider;
-	}
-	
-	public ResourceDescriptionsProvider getResourceDescriptionsProvider() {
-		return resourceDescriptionsProvider;
-	}
-	
 	private ContainersStateFactory containersStateFactory = new ContainersStateFactory();
 
 	public void setContainersStateFactory(ContainersStateFactory containersStateFactory) {
@@ -196,7 +114,7 @@ public class Reader extends AbstractWorkflowComponent2 {
 	public ContainersStateFactory getContainersStateFactory() {
 		return containersStateFactory;
 	}
-
+	
 	@Override
 	protected void checkConfigurationInternal(Issues issues) {
 		super.checkConfigurationInternal(issues);
@@ -211,10 +129,6 @@ public class Reader extends AbstractWorkflowComponent2 {
 			if (!new File(path).exists())
 				issues.addWarning("Skipping the path '" + path + "', because it does not exist.");
 		}
-		
-		if (slotEntries.isEmpty()) {
-			issues.addError("No slot entries (example <load slot='mySlot' type='Type'/>) configured. You need to add at least one slot entry.");
-		}
 	}
 
 	@Override
@@ -228,21 +142,12 @@ public class Reader extends AbstractWorkflowComponent2 {
 		IAllContainersState containersState = containersStateFactory.getContainersState(pathes, uris);
 		installAsAdapter(resourceSet, containersState);
 		populateResourceSet(resourceSet, uris);
-		if (validator != null) {
-			validator.validate(resourceSet, getRegistry(), issues);
-		}
+		getValidator().validate(resourceSet, getRegistry(), issues);
 		addModelElementsToContext(ctx, resourceSet);
 	}
 
 	protected PathTraverser getPathTraverser() {
 		return new PathTraverser();
-	}
-
-	protected void addModelElementsToContext(WorkflowContext ctx, ResourceSet resourceSet) {
-		IResourceDescriptions descriptions = resourceDescriptionsProvider.get(resourceSet);
-		for (SlotEntry entries : this.slotEntries) {
-			entries.put(ctx, descriptions, resourceSet);
-		}
 	}
 
 	protected void populateResourceSet(ResourceSet set, Multimap<String, URI> uris) {
@@ -255,20 +160,6 @@ public class Reader extends AbstractWorkflowComponent2 {
 	protected void installAsAdapter(ResourceSet set, IAllContainersState containersState)
 			throws WorkflowInterruptedException {
 		set.eAdapters().add(new DelegatingIAllContainerAdapter(containersState));
-	}
-
-	protected IResourceServiceProvider.Registry getRegistry() {
-		return IResourceServiceProvider.Registry.INSTANCE;
-	}
-
-	protected ResourceSet getResourceSet() {
-		if (provider != null)
-			return provider.get();
-		if (!injectors.isEmpty()) {
-			ResourceSet instance = injectors.get(0).getInstance(ResourceSet.class);
-			return instance;
-		}
-		return new ResourceSetImpl();
 	}
 
 }
