@@ -58,6 +58,8 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.metamodelreferencing.tests.ExceptionTest.class);
       suite.addTestSuite(org.eclipse.xtext.metamodelreferencing.tests.MetamodelRefTest.class);
       suite.addTestSuite(org.eclipse.xtext.metamodelreferencing.tests.MultiGenMMTest.class);
+      suite.addTestSuite(org.eclipse.xtext.mwe.PathTraverserTest.class);
+      suite.addTestSuite(org.eclipse.xtext.mwe.ReaderTest.class);
       suite.addTestSuite(org.eclipse.xtext.parseerrorhandling.ParseErrorHandlingTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.AntlrDatatypeRuleTokenTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.CrossContainmentTest.class);
@@ -82,6 +84,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.parser.assignments.Bug287184Test.class);
       suite.addTestSuite(org.eclipse.xtext.parser.assignments.Bug288432Test.class);
       suite.addTestSuite(org.eclipse.xtext.parser.assignments.ParserBug281962Test.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.EFactoryValueConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.GrammarTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.MetamodelTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.datatyperules.MetamodelTransformationErrorTest.class);

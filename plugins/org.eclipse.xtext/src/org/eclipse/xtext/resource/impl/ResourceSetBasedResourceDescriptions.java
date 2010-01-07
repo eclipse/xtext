@@ -35,6 +35,10 @@ public class ResourceSetBasedResourceDescriptions implements IResourceDescriptio
 	public void setRegistry(IResourceServiceProvider.Registry registry) {
 		this.registry = registry;
 	}
+	
+	public ResourceSet getResourceSet() {
+		return resourceSet;
+	}
 
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
 		return Iterables.filter(Iterables.transform(resourceSet.getResources(), new Function<Resource, IResourceDescription>() {
