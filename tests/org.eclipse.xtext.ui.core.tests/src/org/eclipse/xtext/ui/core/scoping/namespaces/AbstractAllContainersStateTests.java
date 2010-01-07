@@ -21,7 +21,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.junit.util.URIBasedTestResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.resource.IResourceDescription.Event.Listener;
 
 import com.google.common.collect.Maps;
 
@@ -66,11 +65,4 @@ public abstract class AbstractAllContainersStateTests extends TestCase implement
 		return uriToResourceDescription.get(uri);
 	}
 
-	public void addListener(Listener listener) {
-		// ignore
-	}
-
-	public void removeListener(Listener listener) {
-		// ignore
-	}
 }

@@ -59,12 +59,4 @@ public class ResourceSetBasedResourceDescriptions implements IResourceDescriptio
 		this.resourceSet = EcoreUtil2.getResourceSet(ctx);
 	}
 
-	public void addListener(IResourceDescription.Event.Listener listener) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void removeListener(IResourceDescription.Event.Listener listener) {
-		throw new UnsupportedOperationException();
-	}
-
 }

@@ -19,10 +19,12 @@ import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.resource.IResourceDescription.Event.Listener;
+import org.eclipse.xtext.resource.IResourceDescription.Event.Source;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.OnChangeEvictingCacheAdapter;
 
+import com.google.common.collect.Collections2;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
@@ -57,21 +59,14 @@ public class DefaultGlobalScopeProvider extends AbstractGlobalScopeProvider {
 		result = cache.get(cacheKey);
 		if (result == null) {
 			result = containerManager.getVisibleContainers(description,	resourceDescriptions);
-			final List<IContainer> finalResult = result;
-			final IResourceDescriptions finalDescriptions = resourceDescriptions;
-			cache.addCacheListener(new OnChangeEvictingCacheAdapter.Listener() {
-				public void onEvict(OnChangeEvictingCacheAdapter cache) {
-					for(IContainer container: finalResult) {
-						if (container instanceof IResourceDescription.Event.Listener) {
-							finalDescriptions.removeListener((Listener) container);
-						}
-					}
-				}
-			});
-			for(IContainer container: finalResult) {
-				if (container instanceof IResourceDescription.Event.Listener) {
-					finalDescriptions.addListener((Listener) container);
-				}
+			// SZ: I'ld like this dependency to be moved to the implementation of the
+			// container manager, but it is not aware of a CacheAdapter
+			if (resourceDescriptions instanceof IResourceDescription.Event.Source) {
+				IResourceDescription.Event.Source eventSource = (Source) resourceDescriptions;
+				DelegatingEventSource delegatingEventSource = new DelegatingEventSource(eventSource);
+				delegatingEventSource.addListeners(Collections2.forIterable(Iterables.filter(result, IResourceDescription.Event.Listener.class)));
+				delegatingEventSource.initialize();
+				cache.addCacheListener(delegatingEventSource);
 			}
 			cache.set(cacheKey, result);
 		}

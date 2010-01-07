@@ -19,6 +19,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -71,7 +72,7 @@ public class BuilderUtil {
 		return false;
 	}
 
-	public static IResourceDescriptions getBuilderState() {
+	public static IBuilderState getBuilderState() {
 		return BuilderStateAccess.getBuilderState().get();
 	}
 

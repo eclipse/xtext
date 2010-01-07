@@ -15,7 +15,6 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.resource.IResourceDescription.Event.Listener;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
@@ -58,14 +57,6 @@ public class LoadOnDemandResourceDescriptions implements IResourceDescriptions {
 			}
 		}
 		return result;
-	}
-
-	public void addListener(Listener listener) {
-		throw new UnsupportedOperationException();
-	}
-
-	public void removeListener(Listener listener) {
-		throw new UnsupportedOperationException();
 	}
 
 }

@@ -20,9 +20,10 @@ import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.nature.XtextNature;
+import org.eclipse.xtext.junit.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescription.Event;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -181,7 +182,7 @@ public class ProfilerAbstractBuilderTest extends TestCase implements IResourceDe
 		System.out.println(string + " took : " + took);
 	}
 
-	private IResourceDescriptions getBuilderState() {
+	private IBuilderState getBuilderState() {
 		return BuilderStateAccess.getBuilderState().get();
 	}
 
