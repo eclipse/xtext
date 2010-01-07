@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.core.editor.quickfix;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.ui.texteditor.ResourceMarkerAnnotationModel;
 import org.eclipse.xtext.ui.core.MarkerUtil;
@@ -32,6 +33,14 @@ public class XtextResourceMarkerAnnotationModel extends ResourceMarkerAnnotation
 		String issueCode = MarkerUtil.getCode(annotation);
 		annotation.setQuickFixable(issueResolutionProvider.hasResolutionFor(issueCode));
 		return annotation;
+	}
+	
+	public void fireAnnotationChangedEvent(Annotation annotation) {
+		synchronized (getLockObject()) {
+			getAnnotationModelEvent().annotationChanged(annotation);
+		}
+
+		fireModelChanged();
 	}
 
 }
