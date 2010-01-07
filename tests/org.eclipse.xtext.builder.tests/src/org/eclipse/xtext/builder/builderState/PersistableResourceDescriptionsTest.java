@@ -9,6 +9,7 @@ package org.eclipse.xtext.builder.builderState;
 
 import java.io.IOException;
 import java.io.InputStream;
+import java.util.Collection;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
@@ -25,6 +26,8 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.junit.util.URIBasedTestResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
+import org.eclipse.xtext.resource.containers.DelegatingIAllContainerAdapter;
+import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.base.Function;
@@ -66,6 +69,19 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 	public ResourceSet createResourceSet() {
 		ResourceSetImpl resourceSetImpl = new ResourceSetImpl();
 		resourceSetImpl.setURIConverter(uriConverter);
+		resourceSetImpl.eAdapters().add(new DelegatingIAllContainerAdapter(new IAllContainersState(){
+
+			public List<String> getVisibleContainerHandles(String handle) {
+				return null;
+			}
+
+			public Collection<URI> getContainedURIs(String containerHandle) {
+				return null;
+			}
+
+			public String getContainerHandle(URI uri) {
+				return null;
+			}}));
 		return resourceSetImpl;
 	}
 	
