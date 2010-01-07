@@ -40,9 +40,6 @@ public class PathTraverserTest extends TestCase {
 	}
 
 	private String pathTo(String string) throws Exception {
-		java.net.URI uri = getClass().getClassLoader().getResource(getClass().getName().replace('.', '/')+".class").toURI();
-		URI fileURI = URI.createURI(uri.toString());
-		URI fileURI2 = URI.createURI(string);
-		return fileURI2.resolve(fileURI).toFileString();
+		return new ReaderTest().pathTo(string);
 	}
 }
