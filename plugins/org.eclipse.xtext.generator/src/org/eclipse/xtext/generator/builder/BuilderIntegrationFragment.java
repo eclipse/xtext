@@ -15,8 +15,9 @@ import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.DefaultGeneratorFragment;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.containers.IAllContainersState;
+import org.eclipse.xtext.resource.containers.StateBasedContainerManager;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
-import org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 
 /**
@@ -27,8 +28,10 @@ public class BuilderIntegrationFragment extends DefaultGeneratorFragment {
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return new BindFactory()
-			.addTypeToType(IContainer.Manager.class.getName(), SimpleResourceDescriptionsBasedContainerManager.class.getName())
-			.addConfiguredBinding(
+		.addTypeToType(IContainer.Manager.class.getName(), StateBasedContainerManager.class.getName())
+		.addTypeToType(IAllContainersState.Provider.class.getName(), 
+				org.eclipse.xtext.resource.containers.ResourceSetBasedAllContainersStateProvider.class.getName())
+		.addConfiguredBinding(
 					IResourceDescriptions.class.getName(),
 					"binder.bind(" + IResourceDescriptions.class.getName() + ".class"
 							+ ").to("
@@ -56,10 +59,9 @@ public class BuilderIntegrationFragment extends DefaultGeneratorFragment {
 					"binder.bind(" + IResourceDescriptions.class.getName() + ".class"
 							+ ").toProvider("
 							+ "org.eclipse.xtext.builder.GlobalResourceDescriptionsAccess.getDirtyResourceDescriptions()).asEagerSingleton()")
-			.addTypeToType(IContainer.Manager.class.getName(), "org.eclipse.xtext.ui.core.containers.StateBasedContainerManager")
 			.addTypeToType("org.eclipse.xtext.ui.core.editor.IXtextEditorCallback", "org.eclipse.xtext.builder.nature.NatureAddingEditorCallback")
-			.addTypeToProviderInstance("org.eclipse.xtext.ui.core.containers.IAllContainersState", 
-				"new org.eclipse.xtext.ui.core.containers.JavaProjectsStateProvider()")
+			.addTypeToType(IAllContainersState.Provider.class.getName(), 
+				"org.eclipse.xtext.ui.core.containers.JavaProjectsStateProvider")
 			.getBindings();
 	}
 
