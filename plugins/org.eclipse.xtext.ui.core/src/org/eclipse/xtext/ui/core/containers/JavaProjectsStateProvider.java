@@ -7,16 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.containers;
 
+import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.ui.core.internal.Activator;
-
-import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class JavaProjectsStateProvider implements Provider<IAllContainersState>{
+public class JavaProjectsStateProvider implements IAllContainersState.Provider{
 
-	public IAllContainersState get() {
+	public IAllContainersState get(IResourceDescriptions context) {
 		return Activator.getDefault().getJavaProjectsState();
 	}
 	

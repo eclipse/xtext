@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.containers;
 
+import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.ui.core.internal.Activator;
 
 import com.google.inject.Provider;
