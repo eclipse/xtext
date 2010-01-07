@@ -10,7 +10,6 @@ package org.eclipse.xtext.mwe;
 import java.io.IOException;
 import java.util.List;
 
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.mwe.core.WorkflowInterruptedException;
@@ -19,6 +18,8 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider.Registry;
 import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -46,7 +47,7 @@ public class Validator {
 	}
 	
 	public void validate(ResourceSet resourceSet, IResourceServiceProvider.Registry registry, Issues issues) {
-		EList<Resource> resources = resourceSet.getResources();
+		List<Resource> resources = Lists.newArrayList(resourceSet.getResources());
 		for (Resource resource : resources) {
 			try {
 				resource.load(null);
@@ -72,7 +73,7 @@ public class Validator {
 			}
 		}
 		if (isStopOnError() && issues.hasErrors()) {
-			throw new WorkflowInterruptedException("Aborting workflow.");
+			throw new WorkflowInterruptedException("Validation errors.");
 		}
 	}
 	
