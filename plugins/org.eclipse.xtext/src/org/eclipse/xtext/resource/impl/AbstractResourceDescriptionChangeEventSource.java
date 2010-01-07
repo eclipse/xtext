@@ -26,9 +26,17 @@ public class AbstractResourceDescriptionChangeEventSource implements IResourceDe
 	public void addListener(IResourceDescription.Event.Listener listener) {
 		listenerList.add(listener);
 	}
+	
+	public void addListeners(Collection<IResourceDescription.Event.Listener> listeners) {
+		listenerList.addAll(listeners);
+	}
 
 	public void removeListener(IResourceDescription.Event.Listener listener) {
 		listenerList.remove(listener);
+	}
+	
+	public void removeListeners(Collection<IResourceDescription.Event.Listener> listeners) {
+		listenerList.removeAll(listeners);
 	}
 	
 	protected void notifyListeners(IResourceDescription.Event event) {

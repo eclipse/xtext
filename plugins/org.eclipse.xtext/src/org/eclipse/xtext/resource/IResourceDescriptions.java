@@ -9,7 +9,6 @@ package org.eclipse.xtext.resource;
 
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.xtext.resource.IResourceDescription.Event.Listener;
 
 import com.google.common.collect.Iterables;
 
@@ -18,7 +17,7 @@ import com.google.common.collect.Iterables;
  * 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IResourceDescriptions extends IResourceDescription.Event.Source {
+public interface IResourceDescriptions {
 
 	Iterable<IResourceDescription> getAllResourceDescriptions();
 
@@ -45,13 +44,5 @@ public interface IResourceDescriptions extends IResourceDescription.Event.Source
 			return null;
 		}
 
-		public void addListener(Listener listener) {
-			// ignore
-		}
-
-		public void removeListener(Listener listener) {
-			// ignore
-		}
-		
 	}
 }
