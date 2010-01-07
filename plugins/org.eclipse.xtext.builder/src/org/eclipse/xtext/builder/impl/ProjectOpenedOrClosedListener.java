@@ -25,31 +25,16 @@ import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
-import org.eclipse.xtext.builder.builderState.IBuilderState;
-import org.eclipse.xtext.ui.core.resource.IResourceSetProvider;
+import org.eclipse.xtext.builder.nature.XtextNature;
 
 import com.google.common.collect.Sets;
-import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
+public class ProjectOpenedOrClosedListener extends AbstractBuildScheduler implements IResourceChangeListener {
 
 	private final static Logger log = Logger.getLogger(ProjectOpenedOrClosedListener.class);
-
-	@Inject
-	private ToBeBuiltComputer toBeBuiltComputer;
-
-	@Inject
-	private IBuilderState builderState;
-
-	@Inject
-	private IResourceSetProvider resourceSetProvider;
-
-	public IResourceSetProvider getResourceSetProvider() {
-		return resourceSetProvider;
-	}
 
 	public void resourceChanged(final IResourceChangeEvent event) {
 		if (event.getType() == IResourceChangeEvent.POST_CHANGE) {
@@ -62,7 +47,8 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 						if (delta.getResource() instanceof IProject) {
 							IProject project = (IProject) delta.getResource();
 							if ((delta.getFlags() & IResourceDelta.OPEN) != 0 && project.isOpen()) {
-								toUpdate.add(project);
+								if (XtextNature.hasNature(project))
+									toUpdate.add(project);
 							}
 						}
 						return false;
@@ -74,8 +60,8 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 			}
 		} else if ((event.getType() == IResourceChangeEvent.PRE_CLOSE 
 				|| event.getType() == IResourceChangeEvent.PRE_DELETE)) {
-			if (event.getResource() instanceof IProject) {
-				final ToBeBuilt toBeBuilt = toBeBuiltComputer.removeProject((IProject) event.getResource(),
+			if (event.getResource() instanceof IProject && XtextNature.hasNature((IProject) event.getResource())) {
+				final ToBeBuilt toBeBuilt = getToBeBuiltComputer().removeProject((IProject) event.getResource(),
 						new NullProgressMonitor());
 				new Job("removing project " + event.getResource().getName() + " from xtext index.") {
 					{
@@ -94,8 +80,8 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 								@Override
 								protected void execute(IProgressMonitor monitor) throws CoreException, InvocationTargetException,
 										InterruptedException {
-									builderState.update(getResourceSetProvider().get(event.getResource().getProject()), toBeBuilt
-											.getToBeUpdated(), toBeBuilt.getToBeDeleted(), monitor);
+									getBuilderState().update(getResourceSetProvider().get(event.getResource().getProject()), 
+											toBeBuilt.getToBeUpdated(), toBeBuilt.getToBeDeleted(), monitor);
 								}
 							}.run(monitor);
 						} catch (InvocationTargetException e) {
@@ -107,13 +93,6 @@ public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 					}
 				}.schedule();
 			}
-		}
-	}
-
-	protected void scheduleBuildIfNecessary(final Set<IProject> toUpdate) {
-		if (!toUpdate.isEmpty()) {
-			new UpdateProjectsJob("Updating projects", resourceSetProvider, toUpdate, toBeBuiltComputer,
-					builderState).schedule();
 		}
 	}
 

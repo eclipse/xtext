@@ -22,53 +22,42 @@ import org.eclipse.jdt.core.IJavaModel;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.xtext.builder.builderState.IBuilderState;
-import org.eclipse.xtext.builder.impl.ToBeBuiltComputer;
-import org.eclipse.xtext.builder.impl.UpdateProjectsJob;
-import org.eclipse.xtext.ui.core.resource.IResourceSetProvider;
+import org.eclipse.xtext.builder.impl.AbstractBuildScheduler;
+import org.eclipse.xtext.builder.nature.XtextNature;
 
 import com.google.common.base.Function;
+import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Sets;
-import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 @Singleton
-public class ElementChangeListener implements IElementChangedListener {
+public class ElementChangeListener extends AbstractBuildScheduler implements IElementChangedListener {
 
-	final static Logger log = Logger.getLogger(ElementChangeListener.class);
+	public final static Logger log = Logger.getLogger(ElementChangeListener.class);
 
 	public ElementChangeListener() {
 		JavaCore.addElementChangedListener(this);
 	}
 
-	@Inject
-	private ToBeBuiltComputer toBeBuiltComputer;
-
-	@Inject
-	private IBuilderState builderState;
-	
-	@Inject
-	private IResourceSetProvider resourceSetProvider;
-	
-	public IResourceSetProvider getResourceSetProvider() {
-		return resourceSetProvider;
-	}
-
 	public void elementChanged(ElementChangedEvent event) {
 		try {
 			if (event.getDelta() != null) {
-				Set<IJavaProject> projects = getJavaProjectsWithClasspathChange(event.getDelta());
-				if (!projects.isEmpty()) {
-					Set<IProject> iProjects = Sets.newHashSet(Iterables.transform(projects, new Function<IJavaProject, IProject>() {
+				Set<IJavaProject> javaProjects = getJavaProjectsWithClasspathChange(event.getDelta());
+				if (!javaProjects.isEmpty()) {
+					Set<IProject> projects = Sets.newHashSet(
+							Iterables.filter(Iterables.transform(javaProjects, new Function<IJavaProject, IProject>() {
 						public IProject apply(IJavaProject from) {
-							return from.getProject();
+							IProject project = from.getProject();
+							if (XtextNature.hasNature(project))
+								return from.getProject();
+							return null;
 						}
-					}));
-					new UpdateProjectsJob("updating projects",getResourceSetProvider(), iProjects, toBeBuiltComputer, builderState).schedule();
+					}), Predicates.notNull()));
+					scheduleBuildIfNecessary(projects);
 				}
 			}
 		} catch (WrappedException e) {
