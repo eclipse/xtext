@@ -1,13 +1,15 @@
 «IMPORT org::eclipse::emf::ecore»
 «IMPORT org::eclipse::xtext::xtext::ui::wizard::project»
 
-«EXTENSION org::eclipse::xtext::xtext::ui::wizard::project::XtextFromEcore»
+«EXTENSION org::eclipse::xtext::xtext::ui::wizard::ecore2xtext::Ecore2Xtext»
 
-«DEFINE grammar FOR XtextProjectInfo-»«clearUniqueNames()»
+«DEFINE grammar FOR Ecore2XtextProjectInfo-»«resetUniqueNames(defaultEPackage)-»
+«FILE basePackagePath+"/"+languageNameAbbreviation+".xtext" -»
 «EXPAND grammarDeclaration-»
 «EXPAND metamodelImport FOREACH allImportedEPackages()-»
 «EXPAND rule FOR rootElementClass»
-«EXPAND rule FOREACH EPackagesForRules.EClassifiers.remove(rootElementClass)-»
+«EXPAND rule FOREACH allRuleClassifiers()-»
+«ENDFILE»
 «ENDDEFINE»
 
 «DEFINE grammarDeclaration FOR XtextProjectInfo-»
@@ -16,7 +18,7 @@ grammar «languageName»  with org.eclipse.xtext.common.Terminals
 «ENDDEFINE»
 
 «DEFINE metamodelImport FOR EPackage»
-import "«nsURI»" as «uniqueName()»
+import "«importURI()»" «IF uniqueName() != null && uniqueName() != ""»as «uniqueName()»«ENDIF»
 «ENDDEFINE» 
 
 «DEFINE rule FOR EClass»

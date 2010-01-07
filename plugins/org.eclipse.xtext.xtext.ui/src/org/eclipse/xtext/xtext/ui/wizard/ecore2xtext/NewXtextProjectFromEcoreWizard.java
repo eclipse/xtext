@@ -8,9 +8,11 @@
  * Contributors:
  *     Dakshinamurthy Karra (Jalian Systems)
  *******************************************************************************/
-package org.eclipse.xtext.xtext.ui.wizard.project;
+package org.eclipse.xtext.xtext.ui.wizard.ecore2xtext;
 
 import org.eclipse.xtext.ui.core.wizard.IProjectInfo;
+import org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard;
+import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectInfo;
 
 /**
  * A project wizard to create Xtext projects from given Ecore metamodels.
@@ -38,10 +40,16 @@ public class NewXtextProjectFromEcoreWizard extends NewXtextProjectWizard {
 	
 	@Override
 	protected IProjectInfo getProjectInfo() {
-		XtextProjectInfo projectInfo = (XtextProjectInfo) super.getProjectInfo();
+		Ecore2XtextProjectInfo projectInfo = (Ecore2XtextProjectInfo) super.getProjectInfo();
 		projectInfo.setEPackagesForRules(ePackageSelectionPage.getEPackagesForRules());
 		projectInfo.setRootElementClass(ePackageSelectionPage.getRootElementClass());
+		projectInfo.setDefaultEPackage(ePackageSelectionPage.getDefaultEPackage());
 		return projectInfo;
+	}
+	
+	@Override
+	protected XtextProjectInfo createProjectInfo() {
+		return new Ecore2XtextProjectInfo();
 	}
 
 }

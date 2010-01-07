@@ -1,0 +1,17 @@
+<workflow>
+	<property name="projectName" value="org.eclipse.xtext.xtext.ui.tests"/>
+	<property name="runtimeProject" value="../${projectName}"/>
+	<property name="src-gen" value="${runtimeProject}/src-gen"/>
+	
+	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" platformUri="${runtimeProject}/.."/>
+	
+	<component class="org.eclipse.xtext.generator.Generator">
+		<pathRtProject value="${runtimeProject}"/>
+		<pathUiProject value="${runtimeProject}"/>
+		<projectNameRt value="${projectName}"/>
+		<activator value="org.eclipse.xtext.ui.common.tests.Activator"/>
+		<language uri="classpath:/org/eclipse/xtext/xtext/ui/ecore2xtext/Ecore2XtextTest.xtext">
+			<fragment file="org/eclipse/xtext/xtext/ui/TestLanguageSetup.mwe"/>
+		</language>
+	</component>
+</workflow>

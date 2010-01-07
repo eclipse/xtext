@@ -1,26 +1,30 @@
 import org::eclipse::emf::ecore;
 import org::eclipse::xtext::xtext::ui::wizard::project;
+import org::eclipse::xtext::xtext::ui::wizard::ecore2xtext;
 
-Collection[EPackage] allImportedEPackages(XtextProjectInfo this) :
-	EPackagesForRules.allReferencedEPackages().flatten().toSet();
+Collection[EPackage] allImportedEPackages(Ecore2XtextProjectInfo this) :
+	EPackagesForRules.allReferencedEPackages(true).flatten().toSet();
 
-Collection[EPackage] allReferencedEPackages(EPackage this) :	
-	allReferencedClassifiers().EPackage.toSet();
+Collection[EClassifier] allRuleClassifiers(Ecore2XtextProjectInfo this) :
+	EPackagesForRules.allReferencedClassifiers(false).flatten().toSet().remove(rootElementClass);
 
-Collection[EClassifier] allReferencedClassifiers(EPackage this) :
-	EClassifiers.union(EClassifiers.typeSelect(EClass).EAllStructuralFeatures.select(f|f.needsAssignment()).EType.flatten()).toSet();
+private Collection[EPackage] allReferencedEPackages(EPackage this, boolean includeCrossRefs) :	
+	allReferencedClassifiers(includeCrossRefs).EPackage.toSet();
+
+private Collection[EClassifier] allReferencedClassifiers(EPackage this, boolean includeCrossRefs) :
+	EClassifiers.union(EClassifiers.typeSelect(EClass).EAllStructuralFeatures.select(f|f.needsAssignment() && (includeCrossRefs || f.isContainment())).EType.flatten()).toSet();
+	
+String importURI(EPackage this) :
+	JAVA org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.importURI(org.eclipse.emf.ecore.EPackage);
 	
 fqn(EClassifier this):
-	EPackage.uniqueName() + "::" + name;
+	(EPackage.uniqueName() == "")? name : EPackage.uniqueName() + "::" + name;
 	
-Void calculateAliases() :
-	calculateAliases();
-	
-Void clearUniqueNames():
-	 JAVA org.eclipse.xtext.xtext.ui.wizard.project.XtextFromEcore.clearUniqueNames();
+Void resetUniqueNames(EPackage defaultPackage):
+	 JAVA org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.clearUniqueNames(org.eclipse.emf.ecore.EPackage);
 
 String uniqueName(ENamedElement this):
-	 JAVA org.eclipse.xtext.xtext.ui.wizard.project.XtextFromEcore.uniqueName(org.eclipse.emf.ecore.ENamedElement);
+	 JAVA org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.uniqueName(org.eclipse.emf.ecore.ENamedElement);
 
 cached prefixFeatures(EClass this) :
 	EAllStructuralFeatures.select(f|f.needsAssignment() && f.EType.isBoolean());
@@ -32,9 +36,7 @@ cached onlyOptionalFeatures(EClass this) :
 	prefixFeatures().union(inlinedFeatures()).select(f|f.required).isEmpty;
 		
 assignedRuleCall(EAttribute this):
-	if ((EClass) eContainer()).idAttribute() == this && EType.isString() then
-		 'ID' 
-	else if(EType.isEcoreType()
+	if(EType.isEcoreType()
 		 	&& {'EBoolean' , 'EBooleanObject'}.contains(EAttributeType.name) 
 		 	&& !many) 
 		then 

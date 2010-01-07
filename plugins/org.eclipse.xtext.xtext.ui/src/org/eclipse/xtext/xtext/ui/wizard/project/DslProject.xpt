@@ -9,6 +9,7 @@
  *******************************************************************************/
 «ENDREM»
 «IMPORT org::eclipse::xtext::xtext::ui::wizard::project»
+«IMPORT org::eclipse::xtext::xtext::ui::wizard::ecore2xtext»
 
 «EXTENSION org::eclipse::xtext::xtext::ui::wizard::project::Extensions»
 
@@ -35,17 +36,12 @@ projectName=«this.projectName»
 
 «ENDDEFINE»
 
-«DEFINE grammar FOR XtextProjectInfo»
-«FILE basePackagePath+"/"+languageNameAbbreviation+".xtext" -»
-«IF EPackagesForRules != null-»
-«EXPAND org::eclipse::xtext::xtext::ui::wizard::project::XtextFromEcore::grammar-»
-«ELSE-»
-«EXPAND defaultGrammar-»
-«ENDIF-»
-«ENDFILE»
+«DEFINE grammar FOR Ecore2XtextProjectInfo»
+«EXPAND org::eclipse::xtext::xtext::ui::wizard::ecore2xtext::Ecore2Xtext::grammar-»
 «ENDDEFINE»
 
-«DEFINE defaultGrammar FOR XtextProjectInfo»
+«DEFINE grammar FOR XtextProjectInfo»
+«FILE basePackagePath+"/"+languageNameAbbreviation+".xtext" -»
 grammar «this.languageName» with org.eclipse.xtext.common.Terminals
 
 generate «this.languageNameAbbreviation.toFirstLower()» "«this.nsURI»"
@@ -85,5 +81,5 @@ Entity :
 
 Property:
 	'property' name=ID ':' type=[Type|FQN] (many?='[]')?;
-	
+«ENDFILE»
 «ENDDEFINE»
