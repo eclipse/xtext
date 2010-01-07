@@ -33,7 +33,6 @@ import org.eclipse.xtext.ui.core.editor.validation.XtextAnnotation;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.IssueResolution;
 import org.eclipse.xtext.validation.IssueResolutionProvider;
-import org.eclipse.xtext.validation.Issue.IssueImpl;
 
 import com.google.inject.Inject;
 
@@ -43,16 +42,16 @@ import com.google.inject.Inject;
  */
 public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 
-	private static class XtextCompletionProposal implements ICompletionProposal, ICompletionProposalExtension3 {
+	public static class XtextCompletionProposalAdapter implements ICompletionProposal, ICompletionProposalExtension3 {
 
 		private Position pos;
 		private IssueResolution resolution;
-		private IImageHelper imageHelper;
+		private Image image;
 
-		public XtextCompletionProposal(Position pos, IssueResolution resolution, IImageHelper imageHelper) {
+		public XtextCompletionProposalAdapter(Position pos, IssueResolution resolution, Image image) {
 			this.pos = pos;
 			this.resolution = resolution;
-			this.imageHelper = imageHelper;
+			this.image = image;
 		}
 
 		public void apply(IDocument document) {
@@ -72,7 +71,7 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 		}
 
 		public Image getImage() {
-			return IssueUtil.getImage(resolution, imageHelper);
+			return image;
 		}
 
 		public IContextInformation getContextInformation() {
@@ -93,7 +92,7 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 
 	}
 
-	private static class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAdapter implements IQuickAssistProcessor {
+	public static class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAdapter implements IQuickAssistProcessor {
 
 		private String errorMessage;
 
@@ -146,7 +145,7 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 				if(!canFix(annotation))
 					continue;
 				
-				final Issue issue = getIssueFromAnnotation(annotation, amodel, document);
+				final Issue issue = IssueUtil.getIssueFromAnnotation(annotation, amodel, document);
 				if(issue == null)
 					continue;
 		
@@ -163,7 +162,7 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 					int end = document.getLineLength(line) + start - delimLength;
 					if (offset >= start && offset <= end) {
 						for(IssueResolution resolution : resolutions)
-							result.add(new XtextCompletionProposal(pos, resolution, getImageHelper()));
+							result.add(new XtextCompletionProposalAdapter(pos, resolution, getImage(resolution)));
 					}
 				}
 				catch (BadLocationException e) {
@@ -173,17 +172,6 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 			return result.toArray(new ICompletionProposal[result.size()]);
 		}
 
-		private Issue getIssueFromAnnotation(Annotation annotation, IAnnotationModel amodel, IXtextDocument document) {
-			if (annotation instanceof XtextAnnotation) {
-				XtextAnnotation xtextAnnotation = (XtextAnnotation) annotation;
-				return xtextAnnotation.getIssue();
-			} else if(annotation instanceof MarkerAnnotation) {
-				MarkerAnnotation markerAnnotation = (MarkerAnnotation)annotation;
-				Issue.IssueImpl issue = (IssueImpl) IssueUtil.createIssue(markerAnnotation.getMarker());
-				return issue;
-			} else
-				return null;
-		}
 	}
 
 	@Inject

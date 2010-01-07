@@ -66,7 +66,7 @@ public final class MarkerUtil {
 		}
 	}
 
-	public static final boolean referToSameIssue(IMarker marker, Annotation annotation) {
+	public static final boolean refersToSameIssue(IMarker marker, Annotation annotation) {
 		URI markerURI = getUriToProblem(marker);
 		String markerIssue = getCode(marker);
 		if(markerURI == null || markerIssue == null)

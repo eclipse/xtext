@@ -32,7 +32,7 @@ public class AbstractDeclarativeQuickfixProvider implements IssueResolutionProvi
 	@Inject
 	private ILanguageResourceHelper languageResourceHelper;
 	
-	protected boolean isLanguageResource(IResource resource) {
+	public boolean isLanguageResource(IResource resource) {
 		return languageResourceHelper.isLanguageResource(resource);
 	}
 
@@ -49,7 +49,7 @@ public class AbstractDeclarativeQuickfixProvider implements IssueResolutionProvi
 		};
 	}
 
-	protected List<IssueResolution> getResolutions(final IssueContextProvider provider, List<Method> fixMethods) {
+	public List<IssueResolution> getResolutions(final IssueContextProvider provider, List<Method> fixMethods) {
 		return Lists.transform(fixMethods, new Function<Method, IssueResolution>() {
 			public IssueResolution apply(final Method from) {
 				return new IssueResolution() {
@@ -87,7 +87,7 @@ public class AbstractDeclarativeQuickfixProvider implements IssueResolutionProvi
 		}
 	}
 
-	private Iterable<Method> collectMethods(Class<? extends AbstractDeclarativeQuickfixProvider> clazz, Class<? extends Object> target, String issueCode) {
+	protected Iterable<Method> collectMethods(Class<? extends AbstractDeclarativeQuickfixProvider> clazz, Class<? extends Object> target, String issueCode) {
 		List<Method> methods = Lists.newArrayList(clazz.getMethods());
 		return Iterables.filter(methods, getFixMethodPredicate(target, issueCode));
 	}
