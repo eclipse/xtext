@@ -34,8 +34,8 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class PersistableResourceDescriptionsImpl extends AbstractResourceDescriptionChangeEventSource implements
-		IBuilderState {
+public class PersistableResourceDescriptionsImpl extends AbstractResourceDescriptionChangeEventSource 
+	implements IBuilderState {
 
 	@ImplementedBy(EMFBasedPersister.class)
 	public interface Persister {

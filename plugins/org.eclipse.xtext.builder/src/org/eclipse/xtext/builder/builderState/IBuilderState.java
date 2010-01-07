@@ -20,7 +20,7 @@ import com.google.common.collect.ImmutableList;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public interface IBuilderState extends IResourceDescriptions {
+public interface IBuilderState extends IResourceDescriptions, IResourceDescription.Event.Source {
 	
 	/**
 	 * Updated the underlying {@link IResourceDescriptions} according to the passed URIs.

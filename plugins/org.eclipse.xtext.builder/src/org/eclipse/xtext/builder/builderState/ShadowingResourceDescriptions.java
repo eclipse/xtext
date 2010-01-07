@@ -18,7 +18,6 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.resource.IResourceDescription.Event.Listener;
 import org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions;
 
 import com.google.common.collect.Maps;
@@ -119,12 +118,6 @@ public class ShadowingResourceDescriptions implements IResourceDescriptions.ICon
 
 	public IResourceDescription getResourceDescription(URI uri) {
 		return resourceDescriptions.get(uri);
-	}
-
-	public void addListener(Listener listener) {
-	}
-
-	public void removeListener(Listener listener) {
 	}
 
 }
