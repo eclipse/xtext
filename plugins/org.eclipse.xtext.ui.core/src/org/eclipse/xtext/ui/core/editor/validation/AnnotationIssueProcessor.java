@@ -27,6 +27,7 @@ import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.xtext.ui.core.MarkerTypes;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.core.editor.quickfix.XtextResourceMarkerAnnotationModel;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.IssueResolutionProvider;
 import org.eclipse.xtext.validation.Issue.Severity;
@@ -156,18 +157,39 @@ public class AnnotationIssueProcessor implements IValidationIssueProcessor, IAnn
 		if (monitor.isCanceled()) {
 			return;
 		}
+		
 		Iterator<MarkerAnnotation> annotationIterator = Iterators.filter(annotationModel.getAnnotationIterator(),
 				MarkerAnnotation.class);
 
 		// every markerAnnotation produced by fast validation can be marked as deleted.
-		// If its predicate still holds, the validation annotation will covered anyway.
+		// If its predicate still holds, the validation annotation will be covered anyway.
 		while (annotationIterator.hasNext() && !monitor.isCanceled()) {
 			final MarkerAnnotation annotation = annotationIterator.next();
-			try {
-				if (isRelevantAnnotationType(annotation.getType()))
-					annotation.markDeleted(annotation.getMarker().isSubtypeOf(MarkerTypes.FAST_VALIDATION));
-			} catch (CoreException e) {
-				// marker type cannot be resolved - keep state of annotation
+			if(!annotation.isMarkedDeleted())
+				try {
+					if (isRelevantAnnotationType(annotation.getType())) {
+						boolean markAsDeleted = annotation.getMarker().isSubtypeOf(MarkerTypes.FAST_VALIDATION);
+						if(markAsDeleted) {
+							annotation.markDeleted(true);
+							announceAnnotationChanged(annotation);
+						}
+					}
+				} catch (CoreException e) {
+					// marker type cannot be resolved - keep state of annotation
+				}
+		}
+	}
+
+	private void announceAnnotationChanged(Annotation annotation) {
+		if (annotationModel instanceof XtextResourceMarkerAnnotationModel)
+			((XtextResourceMarkerAnnotationModel) annotationModel).fireAnnotationChangedEvent(annotation);
+		else {
+			Position position = annotationModel.getPosition(annotation);
+			if (annotationModel instanceof IAnnotationModelExtension)
+				((IAnnotationModelExtension) annotationModel).modifyAnnotationPosition(annotation, position);
+			else {
+				annotationModel.removeAnnotation(annotation);
+				annotationModel.addAnnotation(annotation, position);
 			}
 		}
 	}
