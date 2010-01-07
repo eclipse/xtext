@@ -110,10 +110,6 @@ public class ResourceDescriptionsBasedContainerTest extends TestCase implements 
 		assertTrue(Iterables.isEmpty(iterable));
 	}
 
-	public void addListener(IResourceDescription.Event.Listener listener) {
-		fail("unexpected");
-	}
-	
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
 		return Collections.<IResourceDescription>singletonList(resourceDescription);
 	}
@@ -124,7 +120,4 @@ public class ResourceDescriptionsBasedContainerTest extends TestCase implements 
 		return null;
 	}
 	
-	public void removeListener(IResourceDescription.Event.Listener listener) {
-		fail("unexpected");
-	}
 }
