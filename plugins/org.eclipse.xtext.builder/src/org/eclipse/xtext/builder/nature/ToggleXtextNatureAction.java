@@ -15,7 +15,7 @@ import org.eclipse.ui.IWorkbenchPart;
 
 public class ToggleXtextNatureAction implements IObjectActionDelegate {
 	
-	private Logger log = Logger.getLogger(getClass());
+	private static final Logger log = Logger.getLogger(ToggleXtextNatureAction.class);
 
 	private ISelection selection;
 
@@ -72,19 +72,7 @@ public class ToggleXtextNatureAction implements IObjectActionDelegate {
 	}
 
 	public boolean hasNature(IProject project) {
-		try {
-			IProjectDescription description = project.getDescription();
-			String[] natures = description.getNatureIds();
-
-			for (int i = 0; i < natures.length; ++i) {
-				if (XtextNature.NATURE_ID.equals(natures[i])) {
-					return true;
-				}
-			}
-		} catch (CoreException e) {
-			log.error(e);
-		}
-		return false;
+		return XtextNature.hasNature(project);
 	}
 
 }

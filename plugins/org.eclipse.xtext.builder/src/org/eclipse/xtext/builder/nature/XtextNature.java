@@ -1,5 +1,13 @@
+/*******************************************************************************
+ * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.builder.nature;
 
+import org.apache.log4j.Logger;
 import org.eclipse.core.resources.ICommand;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IProjectDescription;
@@ -7,12 +15,12 @@ import org.eclipse.core.resources.IProjectNature;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.xtext.builder.impl.XtextBuilder;
 
-/**
- */
 public class XtextNature implements IProjectNature {
 	
 	public static final String NATURE_ID = "org.eclipse.xtext.builder.xtextNature";
 
+	private static final Logger log = Logger.getLogger(XtextNature.class);
+	
 	private IProject project;
 
 	public void configure() throws CoreException {
@@ -56,6 +64,17 @@ public class XtextNature implements IProjectNature {
 
 	public void setProject(IProject project) {
 		this.project = project;
+	}
+	
+	public static boolean hasNature(IProject project) {
+		try {
+			if (project.isAccessible()) {
+				return project.hasNature(NATURE_ID);
+			}
+		} catch (CoreException e) {
+			log.error(e.getMessage(), e);
+		}
+		return false;
 	}
 
 }
