@@ -198,18 +198,13 @@ public abstract class AbstractBuilderTestLanguageUiModule extends BuilderTestLan
 	}
 
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
-	public Class<? extends org.eclipse.xtext.resource.IContainer.Manager> bindIContainer$Manager() {
-		return org.eclipse.xtext.ui.core.containers.StateBasedContainerManager.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
 	public Class<? extends org.eclipse.xtext.ui.core.editor.IXtextEditorCallback> bindIXtextEditorCallback() {
 		return org.eclipse.xtext.builder.nature.NatureAddingEditorCallback.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
-	public com.google.inject.Provider<org.eclipse.xtext.ui.core.containers.IAllContainersState> provideIAllContainerState() {
-		return new org.eclipse.xtext.ui.core.containers.JavaProjectsStateProvider();
+	public Class<? extends org.eclipse.xtext.resource.containers.IAllContainersState.Provider> bindIAllContainersState$Provider() {
+		return org.eclipse.xtext.ui.core.containers.JavaProjectsStateProvider.class;
 	}
 
 

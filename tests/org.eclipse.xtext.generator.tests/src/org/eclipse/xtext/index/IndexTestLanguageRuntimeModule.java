@@ -3,10 +3,16 @@
  */
 package org.eclipse.xtext.index;
 
+import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+
 
 /**
  * Use this class to register components to be used within the IDE.
  */
 public class IndexTestLanguageRuntimeModule extends org.eclipse.xtext.index.AbstractIndexTestLanguageRuntimeModule {
-	
+	@Override
+	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
+		return DefaultDeclarativeQualifiedNameProvider.class;
+	}
 }

@@ -9,6 +9,8 @@ package org.eclipse.xtext.builder.tests;
 
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.IContainer.Manager;
+import org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 
@@ -25,5 +27,10 @@ public class BuilderTestLanguageRuntimeModule extends org.eclipse.xtext.builder.
 	@Override
 	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return DefaultGlobalScopeProvider.class;
+	}
+	
+	@Override
+	public Class<? extends Manager> bindIContainer$Manager() {
+		return SimpleResourceDescriptionsBasedContainerManager.class;
 	}
 }

@@ -5,22 +5,19 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.containers;
+package org.eclipse.xtext.resource.containers;
 
 import java.util.Collection;
-import java.util.List;
 
 import org.eclipse.emf.common.util.URI;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public interface IAllContainersState {
+public interface IContainerState {
 
-	List<String> getVisibleContainerHandles(String handle);
-
-	Collection<URI> getContainedURIs(String containerHandle);
-
-	String getContainerHandle(URI uri);
-
+	Collection<URI> getContents();
+	
+	boolean contains(URI uri);
+	
 }

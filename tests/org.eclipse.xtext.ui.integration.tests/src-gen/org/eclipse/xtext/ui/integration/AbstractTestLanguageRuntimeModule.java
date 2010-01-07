@@ -80,7 +80,12 @@ public abstract class AbstractTestLanguageRuntimeModule extends DefaultRuntimeMo
 
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
 	public Class<? extends org.eclipse.xtext.resource.IContainer.Manager> bindIContainer$Manager() {
-		return org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager.class;
+		return org.eclipse.xtext.resource.containers.StateBasedContainerManager.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
+	public Class<? extends org.eclipse.xtext.resource.containers.IAllContainersState.Provider> bindIAllContainersState$Provider() {
+		return org.eclipse.xtext.resource.containers.ResourceSetBasedAllContainersStateProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment

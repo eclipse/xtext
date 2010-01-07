@@ -33,11 +33,6 @@ public abstract class AbstractIndexTestLanguageRuntimeModule extends DefaultRunt
 		return org.eclipse.xtext.index.services.IndexTestLanguageGrammarAccess.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.index.parser.packrat.IndexTestLanguagePackratParser.class;
-	}
-
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
 		return org.eclipse.xtext.index.parseTreeConstruction.IndexTestLanguageParsetreeConstructor.class;
@@ -76,6 +71,26 @@ public abstract class AbstractIndexTestLanguageRuntimeModule extends DefaultRunt
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
+	public Class<? extends org.eclipse.xtext.resource.IContainer.Manager> bindIContainer$Manager() {
+		return org.eclipse.xtext.resource.containers.StateBasedContainerManager.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
+	public Class<? extends org.eclipse.xtext.resource.containers.IAllContainersState.Provider> bindIAllContainersState$Provider() {
+		return org.eclipse.xtext.resource.containers.ResourceSetBasedAllContainersStateProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
+	public void configureIResourceDescriptions(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.resource.IResourceDescriptions.class).to(org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions.class);
+	}
+
+	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment
+	public void configureIResourceDescriptionsBuilderScope(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.xtext.resource.IResourceDescriptions.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider.NAMED_BUILDER_SCOPE)).to(org.eclipse.xtext.resource.impl.ResourceSetBasedResourceDescriptions.class);
 	}
 
 }

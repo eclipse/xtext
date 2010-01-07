@@ -1,6 +1,7 @@
 <workflow>
 	<property name="standardFragments" value="org/eclipse/xtext/TestLanguagesFragments.mwe"/>
 	<property name="exFragments" value="org/eclipse/xtext/TestLanguagesFragmentsEx.mwe"/>
+	<property name="qualifiedNamesFragments" value="org/eclipse/xtext/TestLanguagesFragmentsQualifiedNames.mwe"/>
 	<property name="standardFragmentsWithBacktracking" value="org/eclipse/xtext/lexer/StandardRuntimeFragmentsWithBacktracking.mwe"/>
 	<property name="standardFragmentsWithIgnoreCase" value="org/eclipse/xtext/lexer/StandardRuntimeFragmentsWithIgnoreCase.mwe"/>
 	<property name="genmodelReferenceFragments" value="org/eclipse/xtext/GenModelReferenceFragments.mwe"/>
@@ -85,7 +86,7 @@
 				genModels="${inheritance.genmodel}"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/index/IndexTestLanguage.xtext">
-			<fragment file="${standardFragments}"/>
+			<fragment file="${qualifiedNamesFragments}"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.xtext">
 			<fragment file="${standardFragments}"

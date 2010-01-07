@@ -7,9 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.tests;
 
+import org.eclipse.xtext.resource.IContainer.Manager;
+
 /**
  * Use this class to register components to be used within the IDE.
  */
 public class BuilderTestLanguageUiModule extends org.eclipse.xtext.builder.tests.AbstractBuilderTestLanguageUiModule {
-	
+	@Override
+	public Class<? extends Manager> bindIContainer$Manager() {
+		return org.eclipse.xtext.resource.containers.StateBasedContainerManager.class;
+	}
 }

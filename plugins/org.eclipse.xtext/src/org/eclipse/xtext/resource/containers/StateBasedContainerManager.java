@@ -5,13 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.containers;
+package org.eclipse.xtext.resource.containers;
 
 import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
@@ -28,10 +27,10 @@ public class StateBasedContainerManager implements IContainer.Manager {
 	private final static Logger log = Logger.getLogger(StateBasedContainerManager.class);
 	
 	@Inject
-	private IAllContainersState state;
+	private IAllContainersState.Provider stateProvider;
 
 	public IContainer getContainer(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
-		String root = getPackageFragmentRoot(desc.getURI());
+		String root = getPackageFragmentRoot(desc, resourceDescriptions);
 		if (root == null) {
 			log.warn("Cannot find IPackageFragmentRoot for: " + desc.getURI());
 			return IContainer.Null;
@@ -40,17 +39,21 @@ public class StateBasedContainerManager implements IContainer.Manager {
 	}
 
 	public List<IContainer> getVisibleContainers(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
-		String root = getPackageFragmentRoot(desc.getURI());
+		String root = getPackageFragmentRoot(desc, resourceDescriptions);
 		if (root == null) {
 			log.warn("Cannot find IPackageFragmentRoot for: " + desc.getURI());
 			return Collections.emptyList();
 		}
-		List<String> handles = state.getVisibleContainerHandles(root);
+		List<String> handles = getState(resourceDescriptions).getVisibleContainerHandles(root);
 		return getVisibleContainers(handles, resourceDescriptions);
 	}
 
+	private IAllContainersState getState(IResourceDescriptions resourceDescriptions) {
+		return stateProvider.get(resourceDescriptions);
+	}
+
 	protected IContainer createContainer(final String handle, IResourceDescriptions resourceDescriptions) {
-		IContainerState containerState = new ContainerState(handle, state);
+		IContainerState containerState = new ContainerState(handle, getState(resourceDescriptions));
 		StateBasedContainer result = new StateBasedContainer(resourceDescriptions, containerState);
 		return result;
 	}
@@ -63,8 +66,8 @@ public class StateBasedContainerManager implements IContainer.Manager {
 		return result;
 	}
 
-	protected String getPackageFragmentRoot(URI uri) {
-		return state.getContainerHandle(uri);
+	protected String getPackageFragmentRoot(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
+		return getState(resourceDescriptions).getContainerHandle(desc.getURI());
 	}
 
 }

@@ -5,19 +5,26 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.containers;
+package org.eclipse.xtext.resource.containers;
 
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.URI;
 
-/**
- * @author Sebastian Zarnekow - Initial contribution and API
- */
-public interface IContainerState {
+class ContainerState implements IContainerState {
+	private final String root;
+	private final IAllContainersState globalState;
 
-	Collection<URI> getContents();
-	
-	boolean contains(URI uri);
-	
+	protected ContainerState(String root, IAllContainersState globalState) {
+		this.root = root;
+		this.globalState = globalState;
+	}
+
+	public Collection<URI> getContents() {
+		return globalState.getContainedURIs(root);
+	}
+
+	public boolean contains(URI uri) {
+		return getContents().contains(uri);
+	}
 }

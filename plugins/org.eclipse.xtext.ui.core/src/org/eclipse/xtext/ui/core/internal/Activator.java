@@ -13,7 +13,7 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtext.ui.core.containers.IAllContainersState;
+import org.eclipse.xtext.resource.containers.IAllContainersState;
 import org.eclipse.xtext.ui.core.containers.JavaProjectsState;
 import org.eclipse.xtext.ui.core.containers.WorkspaceProjectsState;
 import org.eclipse.xtext.ui.core.editor.IDirtyStateManager;

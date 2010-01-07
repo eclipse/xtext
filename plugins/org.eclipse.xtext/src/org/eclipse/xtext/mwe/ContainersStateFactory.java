@@ -5,19 +5,20 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.containers;
+package org.eclipse.xtext.mwe;
 
-import org.eclipse.xtext.resource.IResourceDescriptions;
+import java.util.List;
+
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
-import org.eclipse.xtext.ui.core.internal.Activator;
+import org.eclipse.xtext.resource.containers.ResourceSetBasedAllContainersState;
 
-/**
- * @author Sebastian Zarnekow - Initial contribution and API
- */
-public class JavaProjectsStateProvider implements IAllContainersState.Provider{
+import com.google.common.collect.Multimap;
 
-	public IAllContainersState get(IResourceDescriptions context) {
-		return Activator.getDefault().getJavaProjectsState();
+public class ContainersStateFactory {
+	public IAllContainersState getContainersState(List<String> paths, Multimap<String, URI> uris) {
+		ResourceSetBasedAllContainersState containersState = new ResourceSetBasedAllContainersState();
+		containersState.configure(paths, uris);
+		return containersState;
 	}
-	
 }
