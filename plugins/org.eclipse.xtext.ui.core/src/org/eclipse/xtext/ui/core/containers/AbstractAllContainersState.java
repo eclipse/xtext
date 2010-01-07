@@ -12,6 +12,9 @@ import java.util.Collections;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import java.util.concurrent.locks.ReentrantReadWriteLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock.ReadLock;
+import java.util.concurrent.locks.ReentrantReadWriteLock.WriteLock;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IResourceChangeEvent;
@@ -49,7 +52,14 @@ public abstract class AbstractAllContainersState implements IResourceChangeListe
 	private SetMultimap<String, URI> handleToContent;
 	private Set<String> emptyHandles;
 	
+	private ReentrantReadWriteLock readWriteLock;
+	private ReadLock readLock;
+	private WriteLock writeLock;
+	
 	protected AbstractAllContainersState() {
+		readWriteLock = new ReentrantReadWriteLock();
+		readLock = readWriteLock.readLock();
+		writeLock = readWriteLock.writeLock();
 		initialize();
 		registerAsListener();
 	}
@@ -66,72 +76,106 @@ public abstract class AbstractAllContainersState implements IResourceChangeListe
 		ResourcesPlugin.getWorkspace().removeResourceChangeListener(this);
 	}
 	
-	protected synchronized void initialize() {
-		uriToHandle = Collections.synchronizedMap(Maps.<URI, String>newHashMap());
-		handleToVisibleHandles = Multimaps.newArrayListMultimap();
-		handleToContent = Multimaps.newLinkedHashMultimap();
-		emptyHandles = Collections.synchronizedSet(Sets.<String>newHashSet());
+	protected void initialize() {
+		try {
+			writeLock.lock();
+			uriToHandle = Collections.synchronizedMap(Maps.<URI, String>newHashMap());
+			handleToVisibleHandles = Multimaps.newArrayListMultimap();
+			handleToContent = Multimaps.newLinkedHashMultimap();
+			emptyHandles = Collections.synchronizedSet(Sets.<String>newHashSet());
+		} finally {
+			writeLock.unlock();
+		}
 	}
 	
 	public String getContainerHandle(URI uri) {
-		String result = uriToHandle.get(uri);
+		String result = null;
+		try {
+			readLock.lock();
+			result = uriToHandle.get(uri);
+		} finally {
+			readLock.unlock();
+		}
 		if (result == null) {
 			result = initHandle(uri);
 		}
 		return result;
 	}
 	
-	protected synchronized String initHandle(URI uri) {
-		if (!uriToHandle.containsKey(uri)) {
-			String result = doInitHandle(uri);
+	protected String initHandle(URI uri) {
+		String result = doInitHandle(uri);
+		try {
+			writeLock.lock();
 			uriToHandle.put(uri, result);
 			return result;
-		}
-		return uriToHandle.get(uri);
+		} finally {
+			writeLock.unlock();
+		} 
 	}
 	
 	protected abstract String doInitHandle(URI uri);
 	
 	public Collection<URI> getContainedURIs(String containerHandle) {
-		if (emptyHandles.contains(containerHandle))
-			return Collections.emptyList();
-		Collection<URI> result = handleToContent.get(containerHandle);
-		if (result.isEmpty()) {
-			result = initContainedURIs(containerHandle, result);
+		Collection<URI> result = null;
+		try {
+			readLock.lock();
+			if (emptyHandles.contains(containerHandle))
+				return Collections.emptyList();
+			result = handleToContent.get(containerHandle);
+			if (!result.isEmpty())
+				return result;
+		} finally {
+			readLock.unlock();
 		}
-		return result;
+		return initContainedURIs(containerHandle, result);
 	}
 
-	protected synchronized Collection<URI> initContainedURIs(String containerHandle, Collection<URI> result) {
-		if (emptyHandles.contains(containerHandle))
-			return Collections.emptyList();
-		if (result.isEmpty()) {
-			doInitContainedURIs(containerHandle, result);
-		}
-		if (result.isEmpty()) {
-			emptyHandles.add(containerHandle);
-			return Collections.emptyList();
+	protected Collection<URI> initContainedURIs(String containerHandle, Collection<URI> result) {
+		Collection<URI> uris = doInitContainedURIs(containerHandle);
+		try {
+			writeLock.lock();
+			if (uris.isEmpty()) {
+				emptyHandles.add(containerHandle);
+				return Collections.emptyList();
+			} else {
+				if (result.isEmpty())
+					result.addAll(uris);
+			}
+		} finally {
+			writeLock.unlock();
 		}
 		return result;
 	}
 	
-	protected abstract void doInitContainedURIs(String containerHandle, Collection<URI> result);
+	protected abstract Collection<URI> doInitContainedURIs(String containerHandle);
 
 	public List<String> getVisibleContainerHandles(String handle) {
-		List<String> visibleHandles = handleToVisibleHandles.get(handle);
-		if (visibleHandles.isEmpty()) {
-			initVisibleContainerHandles(handle, visibleHandles);
+		List<String> visibleHandles = null;
+		try {
+			readLock.lock();
+			visibleHandles = handleToVisibleHandles.get(handle);
+			if (!visibleHandles.isEmpty()) {
+				return visibleHandles;
+			}
+		} finally {
+			readLock.unlock();
 		}
-		return visibleHandles;
+		return initVisibleContainerHandles(handle, visibleHandles);
 	}
 	
-	protected synchronized void initVisibleContainerHandles(String handle, List<String> visibleHandles) {
-		if (visibleHandles.isEmpty()) {
-			doInitVisibleHandles(handle, visibleHandles);
+	protected List<String> initVisibleContainerHandles(String handle, List<String> result) {
+		List<String> visibleHandles = doInitVisibleHandles(handle);
+		try {
+			writeLock.lock();
+			if (result.isEmpty())
+				result.addAll(visibleHandles);
+		} finally {
+			writeLock.unlock();
 		}
+		return result;
 	}
 	
-	protected abstract void doInitVisibleHandles(String handle, List<String> visibleHandles);
+	protected abstract List<String> doInitVisibleHandles(String handle);
 	
 	public void resourceChanged(IResourceChangeEvent event) {
 		if (event.getType() == IResourceChangeEvent.PRE_CLOSE 

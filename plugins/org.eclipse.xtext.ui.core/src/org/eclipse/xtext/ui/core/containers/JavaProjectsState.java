@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.core.containers;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -62,7 +63,7 @@ public class JavaProjectsState extends AbstractAllContainersState implements IEl
 	}
 	
 	@Override
-	protected void doInitContainedURIs(String containerHandle, Collection<URI> result) {
+	protected Collection<URI> doInitContainedURIs(String containerHandle) {
 		IJavaElement javaElement = JavaCore.create(containerHandle);
 		if (javaElement instanceof IPackageFragmentRoot) {
 			IPackageFragmentRoot root = (IPackageFragmentRoot) javaElement;
@@ -79,10 +80,10 @@ public class JavaProjectsState extends AbstractAllContainersState implements IEl
 							return null;
 						}
 					}.traverse(root, false);
-					result.addAll(uris);
+					return uris;
 				} catch (JavaModelException e) {
 					log.error(e.getMessage(), e);
-					result.clear();
+					return Collections.emptyList();
 				}
 			} else {
 				try {
@@ -101,23 +102,25 @@ public class JavaProjectsState extends AbstractAllContainersState implements IEl
 							}
 						});
 					}
-					result.addAll(uris);
+					return uris;
 				} catch (CoreException e) {
 					log.error(e.getMessage(), e);
-					result.clear();
+					return Collections.emptyList();
 				}
 			}
 		}
+		return Collections.emptyList();
 	}
 	
 	@Override
-	protected void doInitVisibleHandles(String handle, List<String> visibleHandles) {
+	protected List<String> doInitVisibleHandles(String handle) {
 		IJavaElement javaElement = JavaCore.create(handle);
 		if (javaElement != null) {
 			IJavaProject project = javaElement.getJavaProject();
 			List<String> rootHandles = getPackageFragmentRootHandles(project);
-			visibleHandles.addAll(rootHandles);
+			return rootHandles;
 		}
+		return Collections.emptyList();
 	}
 	
 	protected List<String> getPackageFragmentRootHandles(IJavaProject project) {
