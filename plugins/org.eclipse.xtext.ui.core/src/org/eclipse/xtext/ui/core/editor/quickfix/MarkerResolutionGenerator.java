@@ -44,6 +44,14 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 	@Named(Constants.LANGUAGE_NAME)
 	private String editorId; 
 
+	public void setEditorId(String editorId) {
+		this.editorId = editorId;
+	}
+
+	public String getEditorId() {
+		return editorId;
+	}
+
 	public boolean hasResolutions(IMarker marker) {
 		return getResolutionProvider().hasResolutionFor(MarkerUtil.getCode(marker));
 	}
@@ -70,19 +78,18 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 	}
 
 	@SuppressWarnings("unchecked")
-	private boolean isMarkerStillValid(final IMarker marker, final IAnnotationModel annotationModel) {
+	public boolean isMarkerStillValid(final IMarker marker, final IAnnotationModel annotationModel) {
 		Iterator<Annotation> iterator = annotationModel.getAnnotationIterator();
 		return Iterators.any(iterator, new Predicate<Annotation>() {
 
 			public boolean apply(Annotation annotation) {
 				if (annotation.isMarkedDeleted())
 					return false;
-
 				return referringToSameIssue(annotation, marker);
 			}
 
 			private boolean referringToSameIssue(Annotation annotation, IMarker marker) {
-				if(MarkerUtil.referToSameIssue(marker, annotation)) {
+				if(MarkerUtil.refersToSameIssue(marker, annotation)) {
 					return true;
 				}
 				return false;
@@ -90,14 +97,14 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 		});
 	}
 
-	protected IXtextDocument getXtextDocument(IResource resource) {
+	public IXtextDocument getXtextDocument(IResource resource) {
 		IXtextDocument result = XtextDocumentUtil.get(resource);
 		if(result == null) {
 			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 			try {
 				IFile file = ResourceUtil.getFile(resource);
 				IEditorInput input = new FileEditorInput(file);
-				page.openEditor(input, editorId);
+				page.openEditor(input, getEditorId());
 			} catch (PartInitException e) {
 				return null;
 			}
@@ -105,14 +112,14 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 		return XtextDocumentUtil.get(resource);
 	}
 	
-	protected XtextEditor getEditor(IResource resource) {
+	public XtextEditor getEditor(IResource resource) {
 		XtextEditor result = findEditor(resource);
 		if(result == null) {
 			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 			try {
 				IFile file = ResourceUtil.getFile(resource);
 				IEditorInput input = new FileEditorInput(file);
-				result = (XtextEditor) page.openEditor(input, editorId);
+				result = (XtextEditor) page.openEditor(input, getEditorId());
 			} catch (PartInitException e) {
 				return null;
 			}
@@ -121,7 +128,7 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 		return result;
 	}
 	
-	protected XtextEditor findEditor(IResource resource) {
+	public XtextEditor findEditor(IResource resource) {
 		if(resource instanceof IFile) {
 			IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 			IEditorPart editor = activePage.findEditor(new FileEditorInput((IFile) resource));
@@ -132,7 +139,7 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 
 	}
 
-	protected class ResolutionAdapter implements IMarkerResolution2 {
+	public class ResolutionAdapter implements IMarkerResolution2 {
 
 		private final IssueResolution resolution;
 
@@ -153,7 +160,7 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 		}
 
 		public Image getImage() {
-			return IssueUtil.getImage(resolution, getImageHelper());
+			return MarkerResolutionGenerator.this.getImage(resolution);
 		}
 
 	}

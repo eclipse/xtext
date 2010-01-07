@@ -10,33 +10,45 @@ package org.eclipse.xtext.ui.core.editor.quickfix;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.core.IImageHelper;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.edit.IDocumentEditor;
-import org.eclipse.xtext.ui.core.editor.model.edit.IssueUtil;
+import org.eclipse.xtext.ui.core.internal.XtextPluginImages;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.IssueContext;
 import org.eclipse.xtext.validation.IssueResolution;
 import org.eclipse.xtext.validation.IssueResolutionProvider;
 
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
  */
 public abstract class AbstractIssueResolutionProviderAdapter {
 
+	public static final String DEFAULT_IMAGE = "org.eclipse.xtext.ui.core.editor.quickfix.AbstractIssueResolutionProviderAdapter.DEFAULT_IMAGE"; 
+	
+	@Named(DEFAULT_IMAGE)
+	@Inject(optional=true)
+	private String defaultImage = XtextPluginImages.OBJ_CORRECTION_CHANGE;  
+	@Inject
 	private IssueResolutionProvider resolutionProvider;
+	@Inject
 	private IDocumentEditor documentEditor;
+	@Inject
 	private IImageHelper imageHelper;
 
 	public IssueResolutionProvider getResolutionProvider() {
 		return resolutionProvider;
 	}
 
-	@Inject
 	public void setResolutionProvider(IssueResolutionProvider resolutionProvider) {
 		this.resolutionProvider = resolutionProvider;
 	}
@@ -45,7 +57,6 @@ public abstract class AbstractIssueResolutionProviderAdapter {
 		return documentEditor;
 	}
 
-	@Inject
 	public void setDocumentEditor(IDocumentEditor documentEditor) {
 		this.documentEditor = documentEditor;
 	}
@@ -54,7 +65,6 @@ public abstract class AbstractIssueResolutionProviderAdapter {
 		return imageHelper;
 	}
 
-	@Inject
 	public void setImageHelper(IImageHelper imageHelper) {
 		this.imageHelper = imageHelper;
 	}
@@ -72,7 +82,48 @@ public abstract class AbstractIssueResolutionProviderAdapter {
 		};
 		
 		Iterable<IssueResolution> result = document.readOnly(uow);
-		return IssueUtil.getDocumentAwareResolutions(document, documentEditor, result);			
+		return getDocumentAwareResolutions(document, result);
 	}
+
+	public Iterable<IssueResolution> getDocumentAwareResolutions(final IXtextDocument document, Iterable<IssueResolution> resolutions) {
+		return Iterables.transform(resolutions, new Function<IssueResolution, IssueResolution>() {
+
+			public IssueResolution apply(final IssueResolution delegate) {
+				return new IssueResolution() {
+					
+					public void run() {
+						IUnitOfWork<Object, XtextResource> uow = new IUnitOfWork.Void<XtextResource>() {
+							@Override
+							public void process(XtextResource state) throws Exception {
+								delegate.run();
+							}
+						};
+						
+						documentEditor.process(uow, document);
+					}
+					
+					public String getLabel() {
+						return delegate.getLabel();
+					}
+					
+					public String getDescription() {
+						return delegate.getDescription();
+					}
+					
+					public String getImage() {
+						return delegate.getImage();
+					}
+				};
+			}
+		});
+	}
+	
+	public Image getImage(IssueResolution resolution) {
+		if(Strings.isEmpty(resolution.getImage()))
+			return XtextPluginImages.get(defaultImage);
+		else
+			return imageHelper.getImage(resolution.getImage());
+	}
+
 
 }
