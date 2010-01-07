@@ -28,7 +28,9 @@ import com.google.inject.Injector;
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
+ *@deprecated use {@link org.eclipse.xtext.mwe.UriBasedReader} instead
  */
+@Deprecated
 public class MweReader extends AbstractWorkflowComponent2 {
 
 	public static final String DEFAULT_OUTPUT_SLOT = "model";
