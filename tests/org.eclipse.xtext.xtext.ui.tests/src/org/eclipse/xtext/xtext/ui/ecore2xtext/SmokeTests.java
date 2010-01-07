@@ -1,4 +1,4 @@
-package org.eclipse.xtext.xtext.ui;
+package org.eclipse.xtext.xtext.ui.ecore2xtext;
 
 import java.io.IOException;
 import java.util.Arrays;
@@ -23,9 +23,10 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StringInputStream;
-import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectInfo;
+import org.eclipse.xtext.xtext.ui.OutputStringImpl;
+import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectInfo;
 
-public class Ecore2XtextTests extends AbstractXtextTests {
+public class SmokeTests extends AbstractXtextTests {
 
 	private static final List<String> MINIMUM_PACKAGE_NS_URIS = Arrays
 			.asList(new String[] { "http://www.eclipse.org/emf/2002/Ecore",
@@ -41,11 +42,11 @@ public class Ecore2XtextTests extends AbstractXtextTests {
 	public void testCreateErrorFreeGrammar() throws IOException {
 		XtextStandaloneSetup.doSetup();
 		Collection<String> keySet =
-		// new HashSet<String>(EPackage.Registry.INSTANCE.keySet())
+		//new HashSet<String>(EPackage.Registry.INSTANCE.keySet());
 		MINIMUM_PACKAGE_NS_URIS;
 		for (String nsURI : keySet) {
 			EPackage ePackage = EPackage.Registry.INSTANCE.getEPackage(nsURI);
-			XtextProjectInfo xtextProjectInfo = new XtextProjectInfo();
+			Ecore2XtextProjectInfo xtextProjectInfo = new Ecore2XtextProjectInfo();
 			Set<EPackage> ePackages = new HashSet<EPackage>();
 			if (addImportedEPackages(ePackage, ePackages)) {
 				System.out.print(nsURI);
@@ -60,7 +61,7 @@ public class Ecore2XtextTests extends AbstractXtextTests {
 				XpandFacade xpandFacade = XpandFacade.create(executionContext);
 				xpandFacade
 						.evaluate2(
-								"org::eclipse::xtext::xtext::ui::wizard::project::XtextFromEcore::grammar",
+								"org::eclipse::xtext::xtext::ui::wizard::ecore2xtext::Ecore2Xtext::grammar",
 								xtextProjectInfo, null);
 				String grammarFileName = languageName.replaceAll("\\.", "/")
 						+ ".xtext";

@@ -121,9 +121,9 @@
 		</wizard>
 		<wizard
 			category="org.eclipse.xtext.projectwiz"
-			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectFromEcoreWizard"
+			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.NewXtextProjectFromEcoreWizard"
 			icon="icons/editor.gif"
-			id="org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectFromEcoreWizard"
+			id="org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.NewXtextProjectFromEcoreWizard"
 			name="%Xtext_Project_From_Ecore"
 			project="true">
 		</wizard>

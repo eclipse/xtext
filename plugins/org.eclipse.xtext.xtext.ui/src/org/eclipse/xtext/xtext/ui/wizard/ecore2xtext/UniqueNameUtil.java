@@ -5,19 +5,23 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtext.ui.wizard.project;
+package org.eclipse.xtext.xtext.ui.wizard.ecore2xtext;
 
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.ENamedElement;
+import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class XtextFromEcore {
+public class UniqueNameUtil {
 
 	private static Map<ENamedElement, String> element2uniqueName = new HashMap<ENamedElement, String>();
 
@@ -34,8 +38,7 @@ public class XtextFromEcore {
 		}
 		String trueName = element.getName();
 		uniqueName = trueName;
-		for (int i = 0; RESERVED_KEYWORDS.contains(uniqueName) 
-				|| RESERVED_RULES.contains(uniqueName.toLowerCase())
+		for (int i = 0; RESERVED_KEYWORDS.contains(uniqueName) || RESERVED_RULES.contains(uniqueName.toLowerCase())
 				|| element2uniqueName.containsValue(uniqueName); ++i) {
 			uniqueName = trueName + i;
 		}
@@ -43,8 +46,21 @@ public class XtextFromEcore {
 		return uniqueName;
 	}
 
-	public static void clearUniqueNames() {
+	public static void clearUniqueNames(EPackage defaultPackage) {
 		element2uniqueName.clear();
+		element2uniqueName.put(defaultPackage, null);
 	}
 
+	public static String importURI(EPackage ePackage) {
+		Resource resource = ePackage.eResource();
+		if (resource != null) {
+			URI uri = resource.getURI();
+			if (uri != null) {
+				if(!Strings.equal(uri.scheme(), URI.createURI(ePackage.getNsURI()).scheme())) {
+					return resource.getURI().toString();
+				}
+			}
+		}
+		return ePackage.getNsURI();
+	}
 }

@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtext.ui.wizard.project;
+package org.eclipse.xtext.xtext.ui.wizard.ecore2xtext;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -57,8 +57,6 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 
 	private Set<EPackage> ePackagesForRules = new HashSet<EPackage>();
 
-	private Set<EPackage> ePackagesToImport = new HashSet<EPackage>();
-
 	private IStructuredSelection selection;
 
 	private boolean isAutoImportCrossReferencedEPackages;
@@ -66,6 +64,8 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 	private CCombo rootElementComboBoxCellEditor;
 
 	private List importedEPackagesListBox;
+
+	private CCombo defaultPackageComboBoxCellEditor;
 
 	public WizardSelectImportedEPackagePage(String pageName, IStructuredSelection selection) {
 		super(pageName);
@@ -117,7 +117,7 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				for (String listSelection : importedEPackagesListBox.getSelection()) {
-					removeEPackage(importedEPackagesListBox, listSelection);
+					removeEPackage(listSelection);
 				}
 			}
 		});
@@ -140,13 +140,18 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		entryRuleLabel.setText(Messages.WizardSelectImportedEPackagePage_entryRuleLabelText);
 		entryRuleLabel.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 2, 1));
 		rootElementComboBoxCellEditor = new CCombo(composite, SWT.DROP_DOWN | SWT.READ_ONLY);
-		rootElementComboBoxCellEditor.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, true, 1, 1));
+		rootElementComboBoxCellEditor.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
 		rootElementComboBoxCellEditor.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				validatePage();
 			}
 		});
+		Label defaultPackageLabel = new Label(composite, SWT.NONE);
+		defaultPackageLabel.setText("Default package:");
+		defaultPackageLabel.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 2, 1));
+		defaultPackageComboBoxCellEditor = new CCombo(composite, SWT.DROP_DOWN | SWT.READ_ONLY);
+		defaultPackageComboBoxCellEditor.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, true, 1, 1));
 		initializeListFromSelection(selection);
 		setControl(composite);
 		validatePage();
@@ -202,8 +207,10 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		if (ePackage != null) {
 			boolean isAdded = ePackagesForRules.add(ePackage);
 			if (isAdded) {
-				importedEPackagesListBox.add(ePackage.getNsURI().toString());
+				String nsURI = ePackage.getNsURI().toString();
+				importedEPackagesListBox.add(nsURI);
 				resetEClassesInUI();
+				defaultPackageComboBoxCellEditor.add(nsURI);
 			}
 			validatePage();
 		}
@@ -223,12 +230,13 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		rootElementComboBoxCellEditor.setItems(classNames.toArray(new String[classNames.size()]));
 	}
 
-	private void removeEPackage(final List list, String uri) {
+	private void removeEPackage(String uri) {
 		for (Iterator<EPackage> i = ePackagesForRules.iterator(); i.hasNext();) {
 			EPackage ePackage = i.next();
 			if (ePackage.getNsURI().equals(uri)) {
 				i.remove();
-				list.remove(uri);
+				importedEPackagesListBox.remove(uri);
+				defaultPackageComboBoxCellEditor.remove(uri);
 			}
 		}
 		validatePage();
@@ -282,4 +290,16 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		return null;
 	}
 
+	public EPackage getDefaultEPackage() {
+		int selectionIndex = defaultPackageComboBoxCellEditor.getSelectionIndex();
+		if(selectionIndex != -1) {
+			String defaultEPackageURI = defaultPackageComboBoxCellEditor.getItem(selectionIndex);
+			for(EPackage ePackage: ePackagesForRules) {
+				if(ePackage.getNsURI().equals(defaultEPackageURI)) {
+					return ePackage;
+				}
+			}
+		}
+		return null;
+	}
 }
