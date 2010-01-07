@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.core.containers;
 
 import java.util.Collection;
+import java.util.Collections;
 import java.util.List;
 
 import org.apache.log4j.Logger;
@@ -42,7 +43,7 @@ public class WorkspaceProjectsState extends AbstractAllContainersState {
 	}
 	
 	@Override
-	protected void doInitContainedURIs(String containerHandle, Collection<URI> result) {
+	protected Collection<URI> doInitContainedURIs(String containerHandle) {
 		IProject project = getWorkspaceRoot().getProject(containerHandle);
 		if (project != null && project.exists()) {
 			final List<URI> uris = Lists.newArrayList();
@@ -59,16 +60,16 @@ public class WorkspaceProjectsState extends AbstractAllContainersState {
 						return true;
 					}
 				});
-				result.addAll(uris);
+				return uris;
 			} catch (CoreException e) {
 				log.error(e.getMessage(), e);
-				result.clear();
 			}
 		}
+		return Collections.emptyList();
 	}
 
 	@Override
-	protected void doInitVisibleHandles(String handle, List<String> visibleHandles) {
+	protected List<String> doInitVisibleHandles(String handle) {
 		IProject project = getWorkspaceRoot().getProject(handle);
 		if (isAccessibleXtextProject(project)) {
 			try {
@@ -79,12 +80,12 @@ public class WorkspaceProjectsState extends AbstractAllContainersState {
 						result.add(referencedProject.getName());
 					}
 				}
-				visibleHandles.addAll(result);
+				return result;
 			} catch(CoreException e) {
 				log.error(e.getMessage(), e);
-				visibleHandles.clear();
 			}
 		}
+		return Collections.emptyList();
 	}
 	
 	protected boolean isAccessibleXtextProject(IProject p) {
