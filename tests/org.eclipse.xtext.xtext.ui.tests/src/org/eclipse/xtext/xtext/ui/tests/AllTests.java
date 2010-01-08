@@ -14,6 +14,9 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.xtext.ui.ecore2xtext.GrammarGeneratorTest.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.ui.ecore2xtext.GrammarTest.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.ui.ecore2xtext.ParserTest.class);
+      suite.addTestSuite(org.eclipse.xtext.xtext.ui.editor.contentassist.XtextContentAssistTest.class);
+      suite.addTestSuite(org.eclipse.xtext.xtext.ui.editor.hyperlinking.HyperlinkHelperTest.class);
+      suite.addTestSuite(org.eclipse.xtext.xtext.ui.editor.templates.XtextTemplateContextTypeRegistryTest.class);
       return suite;
    }
 }
