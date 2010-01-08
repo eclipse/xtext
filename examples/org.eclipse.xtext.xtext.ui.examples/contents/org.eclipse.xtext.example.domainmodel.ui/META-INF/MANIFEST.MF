@@ -16,8 +16,7 @@ Require-Bundle: org.eclipse.xtext.example.domainmodel,
  org.eclipse.ui.ide,
  org.antlr.runtime,
  org.eclipse.jdt.core;bundle-version="3.5.0";resolution:=optional,
- org.eclipse.xtext.builder,
- org.junit;bundle-version="3.8"
+ org.eclipse.xtext.builder
 Export-Package: org.eclipse.xtext.example,
  org.eclipse.xtext.example.contentassist,
  org.eclipse.xtext.example.contentassist.antlr
