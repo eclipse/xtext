@@ -14,7 +14,6 @@ import org.eclipse.emf.mwe.core.WorkflowContextDefaultImpl;
 import org.eclipse.emf.mwe.core.issues.IssuesImpl;
 import org.eclipse.emf.mwe.core.monitor.NullProgressMonitor;
 import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.MweReader;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.linking.ImportUriTestLanguageStandaloneSetup;
@@ -77,7 +76,7 @@ public class UriBasedReaderTest extends AbstractXtextTests {
 		reader.checkConfiguration(issues);
 		assertFalse(issues.toString(), issues.hasErrors());
 		reader.invoke(ctx, new NullProgressMonitor(), issues);
-		assertTrue(ctx.get(MweReader.DEFAULT_OUTPUT_SLOT) instanceof Grammar);
+		assertTrue(ctx.get(slotEntry.getSlot()) instanceof Grammar);
 		assertEquals(issues.toString(), 1, issues.getErrors().length);
 	}
 
@@ -124,7 +123,7 @@ public class UriBasedReaderTest extends AbstractXtextTests {
 		reader.checkConfiguration(issues);
 		assertFalse(issues.toString(), issues.hasErrors());
 		reader.invoke(ctx, new NullProgressMonitor(), issues);
-		assertTrue(ctx.get(MweReader.DEFAULT_OUTPUT_SLOT) instanceof Grammar);
+		assertTrue(ctx.get(slotEntry.getSlot()) instanceof Grammar);
 
 		assertEquals(1, issues.getErrors().length);
 		final String errorString = issues.getErrors()[0].toString();
