@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.xtext.ui;
 
 import java.util.ArrayList;
@@ -25,6 +32,9 @@ import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectInfo;
 
+/**
+ * @author koehnlein - Initial contribution and API
+ */
 public class Ecore2XtextGenerator extends AbstractWorkflowComponent2 {
 
 	protected final Log log = LogFactory.getLog(getClass());
@@ -52,7 +62,7 @@ public class Ecore2XtextGenerator extends AbstractWorkflowComponent2 {
 		if(languageName == null) {
 			languageName = uri.replaceAll("/", ".").substring(0, uri.lastIndexOf('.'));
 		}
-		resourceSet.getResource(URI.createURI("classpath:/" + uri), true);
+		resourceSet.getResource(URI.createURI("platform:/resource/org.eclipse.xtext.xtext.ui.tests/src/" + uri), true);
 	}
 
 	public void setGenPath(String genPath) {

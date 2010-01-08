@@ -3,6 +3,7 @@
 
 <plugin>
 
+
     <extension
             point="org.eclipse.ui.editors">
         <editor

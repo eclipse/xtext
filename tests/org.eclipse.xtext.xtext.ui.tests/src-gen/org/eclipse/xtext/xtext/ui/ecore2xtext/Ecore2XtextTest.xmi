@@ -18,13 +18,10 @@
           </type>
         </tokens>
         <tokens xsi:type="xtext:Keyword" value="Root"/>
-        <tokens xsi:type="xtext:Keyword" value="{"/>
-        <tokens xsi:type="xtext:Group" cardinality="?">
-          <tokens xsi:type="xtext:Keyword" value="name"/>
-          <tokens xsi:type="xtext:Assignment" feature="name" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
-          </tokens>
+        <tokens xsi:type="xtext:Assignment" feature="name" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
         </tokens>
+        <tokens xsi:type="xtext:Keyword" value="{"/>
         <tokens xsi:type="xtext:Group" cardinality="?">
           <tokens xsi:type="xtext:Keyword" value="classes"/>
           <tokens xsi:type="xtext:Keyword" value="{"/>

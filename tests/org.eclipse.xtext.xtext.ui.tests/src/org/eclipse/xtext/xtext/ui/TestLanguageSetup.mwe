@@ -1,6 +1,7 @@
 <config class="org.eclipse.xtext.generator.CompositeGeneratorFragment">
 	<property name="genModels" value=""/>
 	<property name="file.extensions" value=""/>
+	<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/>
 	<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
 	<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
 	<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 

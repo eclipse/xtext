@@ -32,12 +32,11 @@ public class UniqueNameUtil {
 			"terminal", "with", "hidden", "enum", "grammar", "import", "as", "current" });
 
 	public static String uniqueName(ENamedElement element) {
-		String uniqueName = element2uniqueName.get(element);
-		if (uniqueName != null) {
-			return uniqueName;
+		if (element2uniqueName.containsKey(element)) {
+			return element2uniqueName.get(element);
 		}
 		String trueName = element.getName();
-		uniqueName = trueName;
+		String uniqueName = trueName;
 		for (int i = 0; RESERVED_KEYWORDS.contains(uniqueName) || RESERVED_RULES.contains(uniqueName.toLowerCase())
 				|| element2uniqueName.containsValue(uniqueName); ++i) {
 			uniqueName = trueName + i;

@@ -11,31 +11,30 @@ T11 : 'INT' ;
 T12 : 'Root' ;
 T13 : '{' ;
 T14 : '}' ;
-T15 : 'name' ;
-T16 : 'classes' ;
-T17 : ',' ;
-T18 : 'Concrete0' ;
-T19 : 'Concrete1' ;
+T15 : 'classes' ;
+T16 : ',' ;
+T17 : 'Concrete0' ;
+T18 : 'Concrete1' ;
 
-// $ANTLR src "../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/contentassist/antlr/internal/InternalEcore2XtextTest.g" 792
+// $ANTLR src "../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/contentassist/antlr/internal/InternalEcore2XtextTest.g" 751
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/contentassist/antlr/internal/InternalEcore2XtextTest.g" 794
+// $ANTLR src "../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/contentassist/antlr/internal/InternalEcore2XtextTest.g" 753
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/contentassist/antlr/internal/InternalEcore2XtextTest.g" 796
+// $ANTLR src "../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/contentassist/antlr/internal/InternalEcore2XtextTest.g" 755
 RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
-// $ANTLR src "../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/contentassist/antlr/internal/InternalEcore2XtextTest.g" 798
+// $ANTLR src "../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/contentassist/antlr/internal/InternalEcore2XtextTest.g" 757
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-// $ANTLR src "../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/contentassist/antlr/internal/InternalEcore2XtextTest.g" 800
+// $ANTLR src "../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/contentassist/antlr/internal/InternalEcore2XtextTest.g" 759
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-// $ANTLR src "../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/contentassist/antlr/internal/InternalEcore2XtextTest.g" 802
+// $ANTLR src "../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/contentassist/antlr/internal/InternalEcore2XtextTest.g" 761
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-// $ANTLR src "../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/contentassist/antlr/internal/InternalEcore2XtextTest.g" 804
+// $ANTLR src "../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/contentassist/antlr/internal/InternalEcore2XtextTest.g" 763
 RULE_ANY_OTHER : .;
 
 

@@ -17,12 +17,12 @@ public class Ecore2XtextTestExecutableExtensionFactory extends AbstractGuiceAwar
 
 	@Override
 	protected Bundle getBundle() {
-		return org.eclipse.xtext.ui.common.tests.Activator.getInstance().getBundle();
+		return org.eclipse.xtext.xtext.ui.tests.Activator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return org.eclipse.xtext.ui.common.tests.Activator.getInstance().getInjector("org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest");
+		return org.eclipse.xtext.xtext.ui.tests.Activator.getInstance().getInjector("org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest");
 	}
 	
 }

@@ -40,12 +40,11 @@ public class Ecore2XtextTestParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAbstractAccess().getAlternatives(), "rule__Abstract__Alternatives");
 					put(grammarAccess.getEStringAccess().getAlternatives(), "rule__EString__Alternatives");
 					put(grammarAccess.getRootAccess().getGroup(), "rule__Root__Group__0");
-					put(grammarAccess.getRootAccess().getGroup_3(), "rule__Root__Group_3__0");
 					put(grammarAccess.getRootAccess().getGroup_4(), "rule__Root__Group_4__0");
 					put(grammarAccess.getRootAccess().getGroup_4_3(), "rule__Root__Group_4_3__0");
 					put(grammarAccess.getConcrete0Access().getGroup(), "rule__Concrete0__Group__0");
 					put(grammarAccess.getConcrete1Access().getGroup(), "rule__Concrete1__Group__0");
-					put(grammarAccess.getRootAccess().getNameAssignment_3_1(), "rule__Root__NameAssignment_3_1");
+					put(grammarAccess.getRootAccess().getNameAssignment_2(), "rule__Root__NameAssignment_2");
 					put(grammarAccess.getRootAccess().getClassesAssignment_4_2(), "rule__Root__ClassesAssignment_4_2");
 					put(grammarAccess.getRootAccess().getClassesAssignment_4_3_1(), "rule__Root__ClassesAssignment_4_3_1");
 					put(grammarAccess.getConcrete0Access().getNameAssignment_2(), "rule__Concrete0__NameAssignment_2");

@@ -1,3 +1,11 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+
 import org::eclipse::emf::ecore;
 import org::eclipse::xtext::xtext::ui::wizard::project;
 import org::eclipse::xtext::xtext::ui::wizard::ecore2xtext;
@@ -18,7 +26,7 @@ String importURI(EPackage this) :
 	JAVA org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.importURI(org.eclipse.emf.ecore.EPackage);
 	
 fqn(EClassifier this):
-	(EPackage.uniqueName() == "")? name : EPackage.uniqueName() + "::" + name;
+	(EPackage.uniqueName() == null)? name : EPackage.uniqueName() + "::" + name;
 	
 Void resetUniqueNames(EPackage defaultPackage):
 	 JAVA org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.clearUniqueNames(org.eclipse.emf.ecore.EPackage);

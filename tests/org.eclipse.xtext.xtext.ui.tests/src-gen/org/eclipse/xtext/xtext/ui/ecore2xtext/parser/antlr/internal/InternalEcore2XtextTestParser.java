@@ -23,7 +23,7 @@ import java.util.ArrayList;
 
 public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
     public static final String[] tokenNames = new String[] {
-        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'Root'", "'{'", "'name'", "'classes'", "','", "'}'", "'Concrete0'", "'Concrete1'", "'INT'"
+        "<invalid>", "<EOR>", "<DOWN>", "<UP>", "RULE_STRING", "RULE_ID", "RULE_INT", "RULE_ML_COMMENT", "RULE_SL_COMMENT", "RULE_WS", "RULE_ANY_OTHER", "'Root'", "'{'", "'classes'", "','", "'}'", "'Concrete0'", "'Concrete1'", "'INT'"
     };
     public static final int RULE_ID=5;
     public static final int RULE_STRING=4;
@@ -102,25 +102,25 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleRoot
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:81:1: ruleRoot returns [EObject current=null] : ( () 'Root' '{' ( 'name' ( (lv_name_4_0= ruleINT0 ) ) )? ( 'classes' '{' ( (lv_classes_7_0= ruleAbstract ) ) ( ',' ( (lv_classes_9_0= ruleAbstract ) ) )* '}' )? '}' ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:81:1: ruleRoot returns [EObject current=null] : ( () 'Root' ( (lv_name_2_0= ruleINT0 ) ) '{' ( 'classes' '{' ( (lv_classes_6_0= ruleAbstract ) ) ( ',' ( (lv_classes_8_0= ruleAbstract ) ) )* '}' )? '}' ) ;
     public final EObject ruleRoot() throws RecognitionException {
         EObject current = null;
 
-        AntlrDatatypeRuleToken lv_name_4_0 = null;
+        AntlrDatatypeRuleToken lv_name_2_0 = null;
 
-        EObject lv_classes_7_0 = null;
+        EObject lv_classes_6_0 = null;
 
-        EObject lv_classes_9_0 = null;
+        EObject lv_classes_8_0 = null;
 
 
          @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:86:6: ( ( () 'Root' '{' ( 'name' ( (lv_name_4_0= ruleINT0 ) ) )? ( 'classes' '{' ( (lv_classes_7_0= ruleAbstract ) ) ( ',' ( (lv_classes_9_0= ruleAbstract ) ) )* '}' )? '}' ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:87:1: ( () 'Root' '{' ( 'name' ( (lv_name_4_0= ruleINT0 ) ) )? ( 'classes' '{' ( (lv_classes_7_0= ruleAbstract ) ) ( ',' ( (lv_classes_9_0= ruleAbstract ) ) )* '}' )? '}' )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:86:6: ( ( () 'Root' ( (lv_name_2_0= ruleINT0 ) ) '{' ( 'classes' '{' ( (lv_classes_6_0= ruleAbstract ) ) ( ',' ( (lv_classes_8_0= ruleAbstract ) ) )* '}' )? '}' ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:87:1: ( () 'Root' ( (lv_name_2_0= ruleINT0 ) ) '{' ( 'classes' '{' ( (lv_classes_6_0= ruleAbstract ) ) ( ',' ( (lv_classes_8_0= ruleAbstract ) ) )* '}' )? '}' )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:87:1: ( () 'Root' '{' ( 'name' ( (lv_name_4_0= ruleINT0 ) ) )? ( 'classes' '{' ( (lv_classes_7_0= ruleAbstract ) ) ( ',' ( (lv_classes_9_0= ruleAbstract ) ) )* '}' )? '}' )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:87:2: () 'Root' '{' ( 'name' ( (lv_name_4_0= ruleINT0 ) ) )? ( 'classes' '{' ( (lv_classes_7_0= ruleAbstract ) ) ( ',' ( (lv_classes_9_0= ruleAbstract ) ) )* '}' )? '}'
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:87:1: ( () 'Root' ( (lv_name_2_0= ruleINT0 ) ) '{' ( 'classes' '{' ( (lv_classes_6_0= ruleAbstract ) ) ( ',' ( (lv_classes_8_0= ruleAbstract ) ) )* '}' )? '}' )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:87:2: () 'Root' ( (lv_name_2_0= ruleINT0 ) ) '{' ( 'classes' '{' ( (lv_classes_6_0= ruleAbstract ) ) ( ',' ( (lv_classes_8_0= ruleAbstract ) ) )* '}' )? '}'
             {
             // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:87:2: ()
             // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:88:5: 
@@ -142,97 +142,76 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
                     createLeafNode(grammarAccess.getRootAccess().getRootKeyword_1(), null); 
                 
-            match(input,12,FollowSets000.FOLLOW_12_in_ruleRoot139); 
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:102:1: ( (lv_name_2_0= ruleINT0 ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:103:1: (lv_name_2_0= ruleINT0 )
+            {
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:103:1: (lv_name_2_0= ruleINT0 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:104:3: lv_name_2_0= ruleINT0
+            {
+             
+            	        currentNode=createCompositeNode(grammarAccess.getRootAccess().getNameINT0ParserRuleCall_2_0(), currentNode); 
+            	    
+            pushFollow(FollowSets000.FOLLOW_ruleINT0_in_ruleRoot150);
+            lv_name_2_0=ruleINT0();
+            _fsp--;
 
-                    createLeafNode(grammarAccess.getRootAccess().getLeftCurlyBracketKeyword_2(), null); 
+
+            	        if (current==null) {
+            	            current = factory.create(grammarAccess.getRootRule().getType().getClassifier());
+            	            associateNodeWithAstElement(currentNode.getParent(), current);
+            	        }
+            	        try {
+            	       		set(
+            	       			current, 
+            	       			"name",
+            	        		lv_name_2_0, 
+            	        		"INT0", 
+            	        		currentNode);
+            	        } catch (ValueConverterException vce) {
+            				handleValueConverterException(vce);
+            	        }
+            	        currentNode = currentNode.getParent();
+            	    
+
+            }
+
+
+            }
+
+            match(input,12,FollowSets000.FOLLOW_12_in_ruleRoot160); 
+
+                    createLeafNode(grammarAccess.getRootAccess().getLeftCurlyBracketKeyword_3(), null); 
                 
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:106:1: ( 'name' ( (lv_name_4_0= ruleINT0 ) ) )?
-            int alt1=2;
-            int LA1_0 = input.LA(1);
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:130:1: ( 'classes' '{' ( (lv_classes_6_0= ruleAbstract ) ) ( ',' ( (lv_classes_8_0= ruleAbstract ) ) )* '}' )?
+            int alt2=2;
+            int LA2_0 = input.LA(1);
 
-            if ( (LA1_0==13) ) {
-                alt1=1;
+            if ( (LA2_0==13) ) {
+                alt2=1;
             }
-            switch (alt1) {
+            switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:106:3: 'name' ( (lv_name_4_0= ruleINT0 ) )
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:130:3: 'classes' '{' ( (lv_classes_6_0= ruleAbstract ) ) ( ',' ( (lv_classes_8_0= ruleAbstract ) ) )* '}'
                     {
-                    match(input,13,FollowSets000.FOLLOW_13_in_ruleRoot150); 
-
-                            createLeafNode(grammarAccess.getRootAccess().getNameKeyword_3_0(), null); 
-                        
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:110:1: ( (lv_name_4_0= ruleINT0 ) )
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:111:1: (lv_name_4_0= ruleINT0 )
-                    {
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:111:1: (lv_name_4_0= ruleINT0 )
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:112:3: lv_name_4_0= ruleINT0
-                    {
-                     
-                    	        currentNode=createCompositeNode(grammarAccess.getRootAccess().getNameINT0ParserRuleCall_3_1_0(), currentNode); 
-                    	    
-                    pushFollow(FollowSets000.FOLLOW_ruleINT0_in_ruleRoot171);
-                    lv_name_4_0=ruleINT0();
-                    _fsp--;
-
-
-                    	        if (current==null) {
-                    	            current = factory.create(grammarAccess.getRootRule().getType().getClassifier());
-                    	            associateNodeWithAstElement(currentNode.getParent(), current);
-                    	        }
-                    	        try {
-                    	       		set(
-                    	       			current, 
-                    	       			"name",
-                    	        		lv_name_4_0, 
-                    	        		"INT0", 
-                    	        		currentNode);
-                    	        } catch (ValueConverterException vce) {
-                    				handleValueConverterException(vce);
-                    	        }
-                    	        currentNode = currentNode.getParent();
-                    	    
-
-                    }
-
-
-                    }
-
-
-                    }
-                    break;
-
-            }
-
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:134:4: ( 'classes' '{' ( (lv_classes_7_0= ruleAbstract ) ) ( ',' ( (lv_classes_9_0= ruleAbstract ) ) )* '}' )?
-            int alt3=2;
-            int LA3_0 = input.LA(1);
-
-            if ( (LA3_0==14) ) {
-                alt3=1;
-            }
-            switch (alt3) {
-                case 1 :
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:134:6: 'classes' '{' ( (lv_classes_7_0= ruleAbstract ) ) ( ',' ( (lv_classes_9_0= ruleAbstract ) ) )* '}'
-                    {
-                    match(input,14,FollowSets000.FOLLOW_14_in_ruleRoot184); 
+                    match(input,13,FollowSets000.FOLLOW_13_in_ruleRoot171); 
 
                             createLeafNode(grammarAccess.getRootAccess().getClassesKeyword_4_0(), null); 
                         
-                    match(input,12,FollowSets000.FOLLOW_12_in_ruleRoot194); 
+                    match(input,12,FollowSets000.FOLLOW_12_in_ruleRoot181); 
 
                             createLeafNode(grammarAccess.getRootAccess().getLeftCurlyBracketKeyword_4_1(), null); 
                         
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:142:1: ( (lv_classes_7_0= ruleAbstract ) )
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:143:1: (lv_classes_7_0= ruleAbstract )
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:138:1: ( (lv_classes_6_0= ruleAbstract ) )
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:139:1: (lv_classes_6_0= ruleAbstract )
                     {
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:143:1: (lv_classes_7_0= ruleAbstract )
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:144:3: lv_classes_7_0= ruleAbstract
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:139:1: (lv_classes_6_0= ruleAbstract )
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:140:3: lv_classes_6_0= ruleAbstract
                     {
                      
                     	        currentNode=createCompositeNode(grammarAccess.getRootAccess().getClassesAbstractParserRuleCall_4_2_0(), currentNode); 
                     	    
-                    pushFollow(FollowSets000.FOLLOW_ruleAbstract_in_ruleRoot215);
-                    lv_classes_7_0=ruleAbstract();
+                    pushFollow(FollowSets000.FOLLOW_ruleAbstract_in_ruleRoot202);
+                    lv_classes_6_0=ruleAbstract();
                     _fsp--;
 
 
@@ -244,7 +223,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                     	       		add(
                     	       			current, 
                     	       			"classes",
-                    	        		lv_classes_7_0, 
+                    	        		lv_classes_6_0, 
                     	        		"Abstract", 
                     	        		currentNode);
                     	        } catch (ValueConverterException vce) {
@@ -258,36 +237,36 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:166:2: ( ',' ( (lv_classes_9_0= ruleAbstract ) ) )*
-                    loop2:
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:162:2: ( ',' ( (lv_classes_8_0= ruleAbstract ) ) )*
+                    loop1:
                     do {
-                        int alt2=2;
-                        int LA2_0 = input.LA(1);
+                        int alt1=2;
+                        int LA1_0 = input.LA(1);
 
-                        if ( (LA2_0==15) ) {
-                            alt2=1;
+                        if ( (LA1_0==14) ) {
+                            alt1=1;
                         }
 
 
-                        switch (alt2) {
+                        switch (alt1) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:166:4: ',' ( (lv_classes_9_0= ruleAbstract ) )
+                    	    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:162:4: ',' ( (lv_classes_8_0= ruleAbstract ) )
                     	    {
-                    	    match(input,15,FollowSets000.FOLLOW_15_in_ruleRoot226); 
+                    	    match(input,14,FollowSets000.FOLLOW_14_in_ruleRoot213); 
 
                     	            createLeafNode(grammarAccess.getRootAccess().getCommaKeyword_4_3_0(), null); 
                     	        
-                    	    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:170:1: ( (lv_classes_9_0= ruleAbstract ) )
-                    	    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:171:1: (lv_classes_9_0= ruleAbstract )
+                    	    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:166:1: ( (lv_classes_8_0= ruleAbstract ) )
+                    	    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:167:1: (lv_classes_8_0= ruleAbstract )
                     	    {
-                    	    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:171:1: (lv_classes_9_0= ruleAbstract )
-                    	    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:172:3: lv_classes_9_0= ruleAbstract
+                    	    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:167:1: (lv_classes_8_0= ruleAbstract )
+                    	    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:168:3: lv_classes_8_0= ruleAbstract
                     	    {
                     	     
                     	    	        currentNode=createCompositeNode(grammarAccess.getRootAccess().getClassesAbstractParserRuleCall_4_3_1_0(), currentNode); 
                     	    	    
-                    	    pushFollow(FollowSets000.FOLLOW_ruleAbstract_in_ruleRoot247);
-                    	    lv_classes_9_0=ruleAbstract();
+                    	    pushFollow(FollowSets000.FOLLOW_ruleAbstract_in_ruleRoot234);
+                    	    lv_classes_8_0=ruleAbstract();
                     	    _fsp--;
 
 
@@ -299,7 +278,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                     	    	       		add(
                     	    	       			current, 
                     	    	       			"classes",
-                    	    	        		lv_classes_9_0, 
+                    	    	        		lv_classes_8_0, 
                     	    	        		"Abstract", 
                     	    	        		currentNode);
                     	    	        } catch (ValueConverterException vce) {
@@ -318,11 +297,11 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                     	    break;
 
                     	default :
-                    	    break loop2;
+                    	    break loop1;
                         }
                     } while (true);
 
-                    match(input,16,FollowSets000.FOLLOW_16_in_ruleRoot259); 
+                    match(input,15,FollowSets000.FOLLOW_15_in_ruleRoot246); 
 
                             createLeafNode(grammarAccess.getRootAccess().getRightCurlyBracketKeyword_4_4(), null); 
                         
@@ -332,7 +311,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,16,FollowSets000.FOLLOW_16_in_ruleRoot271); 
+            match(input,15,FollowSets000.FOLLOW_15_in_ruleRoot258); 
 
                     createLeafNode(grammarAccess.getRootAccess().getRightCurlyBracketKeyword_5(), null); 
                 
@@ -359,7 +338,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleAbstract
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:210:1: entryRuleAbstract returns [EObject current=null] : iv_ruleAbstract= ruleAbstract EOF ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:206:1: entryRuleAbstract returns [EObject current=null] : iv_ruleAbstract= ruleAbstract EOF ;
     public final EObject entryRuleAbstract() throws RecognitionException {
         EObject current = null;
 
@@ -367,16 +346,16 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:211:2: (iv_ruleAbstract= ruleAbstract EOF )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:212:2: iv_ruleAbstract= ruleAbstract EOF
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:207:2: (iv_ruleAbstract= ruleAbstract EOF )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:208:2: iv_ruleAbstract= ruleAbstract EOF
             {
              currentNode = createCompositeNode(grammarAccess.getAbstractRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleAbstract_in_entryRuleAbstract307);
+            pushFollow(FollowSets000.FOLLOW_ruleAbstract_in_entryRuleAbstract294);
             iv_ruleAbstract=ruleAbstract();
             _fsp--;
 
              current =iv_ruleAbstract; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstract317); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstract304); 
 
             }
 
@@ -394,7 +373,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleAbstract
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:219:1: ruleAbstract returns [EObject current=null] : (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:215:1: ruleAbstract returns [EObject current=null] : (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 ) ;
     public final EObject ruleAbstract() throws RecognitionException {
         EObject current = null;
 
@@ -406,33 +385,33 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
          @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:224:6: ( (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:225:1: (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:220:6: ( (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:221:1: (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:225:1: (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 )
-            int alt4=2;
-            int LA4_0 = input.LA(1);
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:221:1: (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 )
+            int alt3=2;
+            int LA3_0 = input.LA(1);
 
-            if ( (LA4_0==17) ) {
-                alt4=1;
+            if ( (LA3_0==16) ) {
+                alt3=1;
             }
-            else if ( (LA4_0==18) ) {
-                alt4=2;
+            else if ( (LA3_0==17) ) {
+                alt3=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("225:1: (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 )", 4, 0, input);
+                    new NoViableAltException("221:1: (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 )", 3, 0, input);
 
                 throw nvae;
             }
-            switch (alt4) {
+            switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:226:5: this_Concrete0_0= ruleConcrete0
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:222:5: this_Concrete0_0= ruleConcrete0
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getAbstractAccess().getConcrete0ParserRuleCall_0(), currentNode); 
                         
-                    pushFollow(FollowSets000.FOLLOW_ruleConcrete0_in_ruleAbstract364);
+                    pushFollow(FollowSets000.FOLLOW_ruleConcrete0_in_ruleAbstract351);
                     this_Concrete0_0=ruleConcrete0();
                     _fsp--;
 
@@ -444,12 +423,12 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:236:5: this_Concrete1_1= ruleConcrete1
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:232:5: this_Concrete1_1= ruleConcrete1
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getAbstractAccess().getConcrete1ParserRuleCall_1(), currentNode); 
                         
-                    pushFollow(FollowSets000.FOLLOW_ruleConcrete1_in_ruleAbstract391);
+                    pushFollow(FollowSets000.FOLLOW_ruleConcrete1_in_ruleAbstract378);
                     this_Concrete1_1=ruleConcrete1();
                     _fsp--;
 
@@ -483,7 +462,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleConcrete0
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:252:1: entryRuleConcrete0 returns [EObject current=null] : iv_ruleConcrete0= ruleConcrete0 EOF ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:248:1: entryRuleConcrete0 returns [EObject current=null] : iv_ruleConcrete0= ruleConcrete0 EOF ;
     public final EObject entryRuleConcrete0() throws RecognitionException {
         EObject current = null;
 
@@ -491,16 +470,16 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:253:2: (iv_ruleConcrete0= ruleConcrete0 EOF )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:254:2: iv_ruleConcrete0= ruleConcrete0 EOF
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:249:2: (iv_ruleConcrete0= ruleConcrete0 EOF )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:250:2: iv_ruleConcrete0= ruleConcrete0 EOF
             {
              currentNode = createCompositeNode(grammarAccess.getConcrete0Rule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleConcrete0_in_entryRuleConcrete0426);
+            pushFollow(FollowSets000.FOLLOW_ruleConcrete0_in_entryRuleConcrete0413);
             iv_ruleConcrete0=ruleConcrete0();
             _fsp--;
 
              current =iv_ruleConcrete0; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleConcrete0436); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleConcrete0423); 
 
             }
 
@@ -518,7 +497,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleConcrete0
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:261:1: ruleConcrete0 returns [EObject current=null] : ( () 'Concrete0' ( (lv_name_2_0= ruleEString ) ) ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:257:1: ruleConcrete0 returns [EObject current=null] : ( () 'Concrete0' ( (lv_name_2_0= ruleEString ) ) ) ;
     public final EObject ruleConcrete0() throws RecognitionException {
         EObject current = null;
 
@@ -528,14 +507,14 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
          @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:266:6: ( ( () 'Concrete0' ( (lv_name_2_0= ruleEString ) ) ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:267:1: ( () 'Concrete0' ( (lv_name_2_0= ruleEString ) ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:262:6: ( ( () 'Concrete0' ( (lv_name_2_0= ruleEString ) ) ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:263:1: ( () 'Concrete0' ( (lv_name_2_0= ruleEString ) ) )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:267:1: ( () 'Concrete0' ( (lv_name_2_0= ruleEString ) ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:267:2: () 'Concrete0' ( (lv_name_2_0= ruleEString ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:263:1: ( () 'Concrete0' ( (lv_name_2_0= ruleEString ) ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:263:2: () 'Concrete0' ( (lv_name_2_0= ruleEString ) )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:267:2: ()
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:268:5: 
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:263:2: ()
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:264:5: 
             {
              
                     temp=factory.create(grammarAccess.getConcrete0Access().getConcrete0Action_0().getType().getClassifier());
@@ -550,20 +529,20 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,17,FollowSets000.FOLLOW_17_in_ruleConcrete0480); 
+            match(input,16,FollowSets000.FOLLOW_16_in_ruleConcrete0467); 
 
                     createLeafNode(grammarAccess.getConcrete0Access().getConcrete0Keyword_1(), null); 
                 
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:282:1: ( (lv_name_2_0= ruleEString ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:283:1: (lv_name_2_0= ruleEString )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:278:1: ( (lv_name_2_0= ruleEString ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:279:1: (lv_name_2_0= ruleEString )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:283:1: (lv_name_2_0= ruleEString )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:284:3: lv_name_2_0= ruleEString
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:279:1: (lv_name_2_0= ruleEString )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:280:3: lv_name_2_0= ruleEString
             {
              
             	        currentNode=createCompositeNode(grammarAccess.getConcrete0Access().getNameEStringParserRuleCall_2_0(), currentNode); 
             	    
-            pushFollow(FollowSets000.FOLLOW_ruleEString_in_ruleConcrete0501);
+            pushFollow(FollowSets000.FOLLOW_ruleEString_in_ruleConcrete0488);
             lv_name_2_0=ruleEString();
             _fsp--;
 
@@ -613,7 +592,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleConcrete1
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:314:1: entryRuleConcrete1 returns [EObject current=null] : iv_ruleConcrete1= ruleConcrete1 EOF ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:310:1: entryRuleConcrete1 returns [EObject current=null] : iv_ruleConcrete1= ruleConcrete1 EOF ;
     public final EObject entryRuleConcrete1() throws RecognitionException {
         EObject current = null;
 
@@ -621,16 +600,16 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:315:2: (iv_ruleConcrete1= ruleConcrete1 EOF )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:316:2: iv_ruleConcrete1= ruleConcrete1 EOF
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:311:2: (iv_ruleConcrete1= ruleConcrete1 EOF )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:312:2: iv_ruleConcrete1= ruleConcrete1 EOF
             {
              currentNode = createCompositeNode(grammarAccess.getConcrete1Rule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleConcrete1_in_entryRuleConcrete1537);
+            pushFollow(FollowSets000.FOLLOW_ruleConcrete1_in_entryRuleConcrete1524);
             iv_ruleConcrete1=ruleConcrete1();
             _fsp--;
 
              current =iv_ruleConcrete1; 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleConcrete1547); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleConcrete1534); 
 
             }
 
@@ -648,7 +627,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleConcrete1
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:323:1: ruleConcrete1 returns [EObject current=null] : ( () 'Concrete1' ( (lv_name_2_0= ruleEString ) ) ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:319:1: ruleConcrete1 returns [EObject current=null] : ( () 'Concrete1' ( (lv_name_2_0= ruleEString ) ) ) ;
     public final EObject ruleConcrete1() throws RecognitionException {
         EObject current = null;
 
@@ -658,14 +637,14 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
          @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:328:6: ( ( () 'Concrete1' ( (lv_name_2_0= ruleEString ) ) ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:329:1: ( () 'Concrete1' ( (lv_name_2_0= ruleEString ) ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:324:6: ( ( () 'Concrete1' ( (lv_name_2_0= ruleEString ) ) ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:325:1: ( () 'Concrete1' ( (lv_name_2_0= ruleEString ) ) )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:329:1: ( () 'Concrete1' ( (lv_name_2_0= ruleEString ) ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:329:2: () 'Concrete1' ( (lv_name_2_0= ruleEString ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:325:1: ( () 'Concrete1' ( (lv_name_2_0= ruleEString ) ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:325:2: () 'Concrete1' ( (lv_name_2_0= ruleEString ) )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:329:2: ()
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:330:5: 
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:325:2: ()
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:326:5: 
             {
              
                     temp=factory.create(grammarAccess.getConcrete1Access().getConcrete1Action_0().getType().getClassifier());
@@ -680,20 +659,20 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
             }
 
-            match(input,18,FollowSets000.FOLLOW_18_in_ruleConcrete1591); 
+            match(input,17,FollowSets000.FOLLOW_17_in_ruleConcrete1578); 
 
                     createLeafNode(grammarAccess.getConcrete1Access().getConcrete1Keyword_1(), null); 
                 
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:344:1: ( (lv_name_2_0= ruleEString ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:345:1: (lv_name_2_0= ruleEString )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:340:1: ( (lv_name_2_0= ruleEString ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:341:1: (lv_name_2_0= ruleEString )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:345:1: (lv_name_2_0= ruleEString )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:346:3: lv_name_2_0= ruleEString
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:341:1: (lv_name_2_0= ruleEString )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:342:3: lv_name_2_0= ruleEString
             {
              
             	        currentNode=createCompositeNode(grammarAccess.getConcrete1Access().getNameEStringParserRuleCall_2_0(), currentNode); 
             	    
-            pushFollow(FollowSets000.FOLLOW_ruleEString_in_ruleConcrete1612);
+            pushFollow(FollowSets000.FOLLOW_ruleEString_in_ruleConcrete1599);
             lv_name_2_0=ruleEString();
             _fsp--;
 
@@ -743,7 +722,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleINT0
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:376:1: entryRuleINT0 returns [String current=null] : iv_ruleINT0= ruleINT0 EOF ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:372:1: entryRuleINT0 returns [String current=null] : iv_ruleINT0= ruleINT0 EOF ;
     public final String entryRuleINT0() throws RecognitionException {
         String current = null;
 
@@ -751,16 +730,16 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:377:2: (iv_ruleINT0= ruleINT0 EOF )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:378:2: iv_ruleINT0= ruleINT0 EOF
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:373:2: (iv_ruleINT0= ruleINT0 EOF )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:374:2: iv_ruleINT0= ruleINT0 EOF
             {
              currentNode = createCompositeNode(grammarAccess.getINT0Rule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleINT0_in_entryRuleINT0649);
+            pushFollow(FollowSets000.FOLLOW_ruleINT0_in_entryRuleINT0636);
             iv_ruleINT0=ruleINT0();
             _fsp--;
 
              current =iv_ruleINT0.getText(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleINT0660); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleINT0647); 
 
             }
 
@@ -778,7 +757,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleINT0
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:385:1: ruleINT0 returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= 'INT' ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:381:1: ruleINT0 returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= 'INT' ;
     public final AntlrDatatypeRuleToken ruleINT0() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -787,11 +766,11 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
          setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:390:6: (kw= 'INT' )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:392:2: kw= 'INT'
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:386:6: (kw= 'INT' )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:388:2: kw= 'INT'
             {
             kw=(Token)input.LT(1);
-            match(input,19,FollowSets000.FOLLOW_19_in_ruleINT0697); 
+            match(input,18,FollowSets000.FOLLOW_18_in_ruleINT0684); 
 
                     current.merge(kw);
                     createLeafNode(grammarAccess.getINT0Access().getINTKeyword(), null); 
@@ -816,7 +795,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleEString
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:405:1: entryRuleEString returns [String current=null] : iv_ruleEString= ruleEString EOF ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:401:1: entryRuleEString returns [String current=null] : iv_ruleEString= ruleEString EOF ;
     public final String entryRuleEString() throws RecognitionException {
         String current = null;
 
@@ -824,16 +803,16 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:406:2: (iv_ruleEString= ruleEString EOF )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:407:2: iv_ruleEString= ruleEString EOF
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:402:2: (iv_ruleEString= ruleEString EOF )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:403:2: iv_ruleEString= ruleEString EOF
             {
              currentNode = createCompositeNode(grammarAccess.getEStringRule(), currentNode); 
-            pushFollow(FollowSets000.FOLLOW_ruleEString_in_entryRuleEString737);
+            pushFollow(FollowSets000.FOLLOW_ruleEString_in_entryRuleEString724);
             iv_ruleEString=ruleEString();
             _fsp--;
 
              current =iv_ruleEString.getText(); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEString748); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleEString735); 
 
             }
 
@@ -851,7 +830,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleEString
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:414:1: ruleEString returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:410:1: ruleEString returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID ) ;
     public final AntlrDatatypeRuleToken ruleEString() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -861,31 +840,31 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
          setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:419:6: ( (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:420:1: (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:415:6: ( (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:416:1: (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:420:1: (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID )
-            int alt5=2;
-            int LA5_0 = input.LA(1);
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:416:1: (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID )
+            int alt4=2;
+            int LA4_0 = input.LA(1);
 
-            if ( (LA5_0==RULE_STRING) ) {
-                alt5=1;
+            if ( (LA4_0==RULE_STRING) ) {
+                alt4=1;
             }
-            else if ( (LA5_0==RULE_ID) ) {
-                alt5=2;
+            else if ( (LA4_0==RULE_ID) ) {
+                alt4=2;
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("420:1: (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID )", 5, 0, input);
+                    new NoViableAltException("416:1: (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID )", 4, 0, input);
 
                 throw nvae;
             }
-            switch (alt5) {
+            switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:420:6: this_STRING_0= RULE_STRING
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:416:6: this_STRING_0= RULE_STRING
                     {
                     this_STRING_0=(Token)input.LT(1);
-                    match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleEString788); 
+                    match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleEString775); 
 
                     		current.merge(this_STRING_0);
                         
@@ -896,10 +875,10 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:428:10: this_ID_1= RULE_ID
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:424:10: this_ID_1= RULE_ID
                     {
                     this_ID_1=(Token)input.LT(1);
-                    match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEString814); 
+                    match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEString801); 
 
                     		current.merge(this_ID_1);
                         
@@ -937,36 +916,35 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleRoot_in_entryRuleRoot75 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleRoot85 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_ruleRoot129 = new BitSet(new long[]{0x0000000000001000L});
-        public static final BitSet FOLLOW_12_in_ruleRoot139 = new BitSet(new long[]{0x0000000000016000L});
-        public static final BitSet FOLLOW_13_in_ruleRoot150 = new BitSet(new long[]{0x0000000000080000L});
-        public static final BitSet FOLLOW_ruleINT0_in_ruleRoot171 = new BitSet(new long[]{0x0000000000014000L});
-        public static final BitSet FOLLOW_14_in_ruleRoot184 = new BitSet(new long[]{0x0000000000001000L});
-        public static final BitSet FOLLOW_12_in_ruleRoot194 = new BitSet(new long[]{0x0000000000060000L});
-        public static final BitSet FOLLOW_ruleAbstract_in_ruleRoot215 = new BitSet(new long[]{0x0000000000018000L});
-        public static final BitSet FOLLOW_15_in_ruleRoot226 = new BitSet(new long[]{0x0000000000060000L});
-        public static final BitSet FOLLOW_ruleAbstract_in_ruleRoot247 = new BitSet(new long[]{0x0000000000018000L});
-        public static final BitSet FOLLOW_16_in_ruleRoot259 = new BitSet(new long[]{0x0000000000010000L});
-        public static final BitSet FOLLOW_16_in_ruleRoot271 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAbstract_in_entryRuleAbstract307 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleAbstract317 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleConcrete0_in_ruleAbstract364 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleConcrete1_in_ruleAbstract391 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleConcrete0_in_entryRuleConcrete0426 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleConcrete0436 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_17_in_ruleConcrete0480 = new BitSet(new long[]{0x0000000000000030L});
-        public static final BitSet FOLLOW_ruleEString_in_ruleConcrete0501 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleConcrete1_in_entryRuleConcrete1537 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleConcrete1547 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_18_in_ruleConcrete1591 = new BitSet(new long[]{0x0000000000000030L});
-        public static final BitSet FOLLOW_ruleEString_in_ruleConcrete1612 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleINT0_in_entryRuleINT0649 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleINT0660 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_19_in_ruleINT0697 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEString_in_entryRuleEString737 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleEString748 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_ruleEString788 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_ruleEString814 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_ruleRoot129 = new BitSet(new long[]{0x0000000000040000L});
+        public static final BitSet FOLLOW_ruleINT0_in_ruleRoot150 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_12_in_ruleRoot160 = new BitSet(new long[]{0x000000000000A000L});
+        public static final BitSet FOLLOW_13_in_ruleRoot171 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_12_in_ruleRoot181 = new BitSet(new long[]{0x0000000000030000L});
+        public static final BitSet FOLLOW_ruleAbstract_in_ruleRoot202 = new BitSet(new long[]{0x000000000000C000L});
+        public static final BitSet FOLLOW_14_in_ruleRoot213 = new BitSet(new long[]{0x0000000000030000L});
+        public static final BitSet FOLLOW_ruleAbstract_in_ruleRoot234 = new BitSet(new long[]{0x000000000000C000L});
+        public static final BitSet FOLLOW_15_in_ruleRoot246 = new BitSet(new long[]{0x0000000000008000L});
+        public static final BitSet FOLLOW_15_in_ruleRoot258 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAbstract_in_entryRuleAbstract294 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAbstract304 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleConcrete0_in_ruleAbstract351 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleConcrete1_in_ruleAbstract378 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleConcrete0_in_entryRuleConcrete0413 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleConcrete0423 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_16_in_ruleConcrete0467 = new BitSet(new long[]{0x0000000000000030L});
+        public static final BitSet FOLLOW_ruleEString_in_ruleConcrete0488 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleConcrete1_in_entryRuleConcrete1524 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleConcrete1534 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_17_in_ruleConcrete1578 = new BitSet(new long[]{0x0000000000000030L});
+        public static final BitSet FOLLOW_ruleEString_in_ruleConcrete1599 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleINT0_in_entryRuleINT0636 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleINT0647 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_18_in_ruleINT0684 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEString_in_entryRuleEString724 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleEString735 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_ruleEString775 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_ruleEString801 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

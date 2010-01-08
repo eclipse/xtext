@@ -48,13 +48,13 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Root ****************
  *
  * Root:
- *   {Root} "Root" "{" ("name" name=INT0)? ("classes" "{" classes+=Abstract ("," classes+=
- *   Abstract)* "}")? "}";
+ *   {Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract ("," classes+=Abstract)* "}"
+ *   )? "}";
  *
  **/
 
-// {Root} "Root" "{" ("name" name=INT0)? ("classes" "{" classes+=Abstract ("," classes+=
-// Abstract)* "}")? "}"
+// {Root} "Root" name=INT0 "{" ("classes" "{" classes+=Abstract ("," classes+=Abstract)* "}"
+// )? "}"
 protected class Root_Group extends GroupToken {
 	
 	public Root_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -131,16 +131,16 @@ protected class Root_RootKeyword_1 extends KeywordToken  {
 		
 }
 
-// "{"
-protected class Root_LeftCurlyBracketKeyword_2 extends KeywordToken  {
+// name=INT0
+protected class Root_NameAssignment_2 extends AssignmentToken  {
 	
-	public Root_LeftCurlyBracketKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Root_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getRootAccess().getLeftCurlyBracketKeyword_2();
+	public Assignment getGrammarElement() {
+		return grammarAccess.getRootAccess().getNameAssignment_2();
 	}
 
     @Override
@@ -151,79 +151,13 @@ protected class Root_LeftCurlyBracketKeyword_2 extends KeywordToken  {
 		}	
 	}	
 		
-}
-
-// ("name" name=INT0)?
-protected class Root_Group_3 extends GroupToken {
-	
-	public Root_Group_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.getRootAccess().getGroup_3();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Root_NameAssignment_3_1(parent, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-}
-
-// "name"
-protected class Root_NameKeyword_3_0 extends KeywordToken  {
-	
-	public Root_NameKeyword_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getRootAccess().getNameKeyword_3_0();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Root_LeftCurlyBracketKeyword_2(parent, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-}
-
-// name=INT0
-protected class Root_NameAssignment_3_1 extends AssignmentToken  {
-	
-	public Root_NameAssignment_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getRootAccess().getNameAssignment_3_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new Root_NameKeyword_3_0(parent, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("name",false)) == null) return null;
+		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
 			type = AssignmentType.DRC;
-			element = grammarAccess.getRootAccess().getNameINT0ParserRuleCall_3_1_0();
+			element = grammarAccess.getRootAccess().getNameINT0ParserRuleCall_2_0();
 			return obj;
 		}
 		return null;
@@ -231,6 +165,27 @@ protected class Root_NameAssignment_3_1 extends AssignmentToken  {
 
 }
 
+// "{"
+protected class Root_LeftCurlyBracketKeyword_3 extends KeywordToken  {
+	
+	public Root_LeftCurlyBracketKeyword_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getRootAccess().getLeftCurlyBracketKeyword_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Root_NameAssignment_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
 
 // ("classes" "{" classes+=Abstract ("," classes+=Abstract)* "}")?
 protected class Root_Group_4 extends GroupToken {
@@ -269,8 +224,7 @@ protected class Root_ClassesKeyword_4_0 extends KeywordToken  {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Root_Group_3(parent, this, 0, inst);
-			case 1: return new Root_LeftCurlyBracketKeyword_2(parent, this, 1, inst);
+			case 0: return new Root_LeftCurlyBracketKeyword_3(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -477,8 +431,7 @@ protected class Root_RightCurlyBracketKeyword_5 extends KeywordToken  {
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Root_Group_4(parent, this, 0, inst);
-			case 1: return new Root_Group_3(parent, this, 1, inst);
-			case 2: return new Root_LeftCurlyBracketKeyword_2(parent, this, 2, inst);
+			case 1: return new Root_LeftCurlyBracketKeyword_3(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	

@@ -11,6 +11,9 @@ import junit.framework.TestSuite;
 public class AllTests {
    public static Test suite() {
       TestSuite suite = new TestSuite("Tests for org.eclipse.xtext.xtext.ui.tests");
+      suite.addTestSuite(org.eclipse.xtext.xtext.ui.ecore2xtext.GrammarGeneratorTest.class);
+      suite.addTestSuite(org.eclipse.xtext.xtext.ui.ecore2xtext.GrammarTest.class);
+      suite.addTestSuite(org.eclipse.xtext.xtext.ui.ecore2xtext.ParserTest.class);
       return suite;
    }
 }

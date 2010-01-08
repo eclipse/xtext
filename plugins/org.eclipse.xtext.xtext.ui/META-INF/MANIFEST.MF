@@ -31,5 +31,6 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.contentassist,
  org.eclipse.xtext.contentassist.antlr,
  org.eclipse.xtext.xtext.ui.wizard.ecore2xtext;x-friends:="org.eclipse.xtext.xtext.ui.tests",
- org.eclipse.xtext.xtext.ui.wizard.project;x-friends:="org.eclipse.xtext.xtext.ui.tests"
+ org.eclipse.xtext.xtext.ui.wizard.project;x-friends:="org.eclipse.xtext.xtext.ui.tests",
+ org.eclipse.xtext.xtext.ui
 Import-Package: org.apache.log4j

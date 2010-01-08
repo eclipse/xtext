@@ -10,9 +10,9 @@
   <eClassifiers xsi:type="ecore:EClass" name="Concrete0" eSuperTypes="#//Abstract"/>
   <eClassifiers xsi:type="ecore:EClass" name="Concrete1" eSuperTypes="#//Abstract"/>
   <eClassifiers xsi:type="ecore:EClass" name="Root">
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//INT"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="classes" upperBound="-1"
         eType="#//Abstract" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="#//INT" iD="true"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EDataType" name="INT"/>
+  <eClassifiers xsi:type="ecore:EDataType" name="INT" instanceClassName="java.lang.String"/>
 </ecore:EPackage>
