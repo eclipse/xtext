@@ -50,8 +50,8 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 	}
 
 	public DeclaredType createType(Class<?> clazz) {
-		if (clazz.isAnonymousClass())
-			throw new IllegalStateException("Cannot create type for anonymous class");
+		if (clazz.isAnonymousClass() || clazz.isSynthetic())
+			throw new IllegalStateException("Cannot create type for anonymous or synthetic classes");
 		if (clazz.isAnnotation())
 			return createAnnotationType(clazz);
 		if (clazz.isEnum())
@@ -70,18 +70,21 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			result.setVisibility(Visibility.PUBLIC);
 		result.setFullyQualifiedName(clazz.getName());
 		for (Class<?> declaredClass : clazz.getDeclaredClasses()) {
-			if (!declaredClass.isAnonymousClass()) {
+			if (!declaredClass.isAnonymousClass() && !declaredClass.isSynthetic()) {
 				result.getMembers().add(createType(declaredClass));
 			}
 		}
 		for (Method method : clazz.getDeclaredMethods()) {
-			result.getMembers().add(createOperation(method));
+			if (!method.isSynthetic())
+				result.getMembers().add(createOperation(method));
 		}
 		for (Constructor<?> constructor : clazz.getDeclaredConstructors()) {
-			result.getMembers().add(createConstructor(constructor));
+			if (!constructor.isSynthetic())
+				result.getMembers().add(createConstructor(constructor));
 		}
 		for (Field field : clazz.getDeclaredFields()) {
-			result.getMembers().add(createField(field));
+			if (!field.isSynthetic())
+				result.getMembers().add(createField(field));
 		}
 		if (clazz.getGenericSuperclass() != null)
 			result.getSuperTypes().add(createReferencedType(clazz.getGenericSuperclass(), result));
