@@ -9,7 +9,7 @@
 		<pathRtProject value="${runtimeProject}"/>
 		<pathUiProject value="${runtimeProject}"/>
 		<projectNameRt value="${projectName}"/>
-		<activator value="org.eclipse.xtext.ui.common.tests.Activator"/>
+		<activator value="org.eclipse.xtext.xtext.ui.tests.Activator"/>
 		<language uri="classpath:/org/eclipse/xtext/xtext/ui/ecore2xtext/Ecore2XtextTest.xtext">
 			<fragment file="org/eclipse/xtext/xtext/ui/TestLanguageSetup.mwe"/>
 		</language>

@@ -38,6 +38,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextFactory;
@@ -271,43 +272,59 @@ public class XtextProposalProvider extends org.eclipse.xtext.contentassist.Abstr
 		}
 	}
 
-	
+	@Override
+	public void complete_ParserRule(EObject model, org.eclipse.xtext.RuleCall ruleCall, ContentAssistContext context,
+			ICompletionProposalAcceptor acceptor) {
+		completeParserRule(model, context, acceptor);
+		super.complete_ParserRule(model, ruleCall, context, acceptor);
+	}
+
 	@Override
 	public void completeParserRule_Name(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
+		completeParserRule(model, context, acceptor);
+		super.completeParserRule_Name(model, assignment, context, acceptor);
+	}
+
+	private void completeParserRule(EObject model, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		final Grammar grammar = GrammarUtil.getGrammar(model);
 		List<AbstractMetamodelDeclaration> allMetamodelDeclarations = GrammarUtil.allMetamodelDeclarations(grammar);
-		for(AbstractMetamodelDeclaration metamodelDeclaration: allMetamodelDeclarations) {
+		for (AbstractMetamodelDeclaration metamodelDeclaration : allMetamodelDeclarations) {
 			if (metamodelDeclaration instanceof ReferencedMetamodel) {
 				ReferencedMetamodel referencedMetamodel = (ReferencedMetamodel) metamodelDeclaration;
 				EPackage ePackage = referencedMetamodel.getEPackage();
-				if(ePackage != null) {
-					for(EClassifier eClassifier: ePackage.getEClassifiers()){
-						if(isProposeParserRule(eClassifier, grammar)) {
-							String proposal = eClassifier.getName() + " returns " + referencedMetamodel.getAlias() + "::" + eClassifier.getName() + ": \n;\n";
+				if (ePackage != null) {
+					for (EClassifier eClassifier : ePackage.getEClassifiers()) {
+						if (isProposeParserRule(eClassifier, grammar)) {
+							String metamodelAlias = referencedMetamodel.getAlias();
+							String proposal = eClassifier.getName() + " returns "
+									+ ((metamodelAlias != null) ? (metamodelAlias + "::") : "") + eClassifier.getName() + ": \n;\n";
 							ConfigurableCompletionProposal completionProposal = (ConfigurableCompletionProposal) createCompletionProposal(
-									proposal, eClassifier.getName() + " - parser rule", getImage(XtextFactory.eINSTANCE.createParserRule()), context);
-							completionProposal.setCursorPosition(proposal.length()-3);
-							acceptor.accept(completionProposal);
+									proposal, eClassifier.getName() + " - parser rule", getImage(XtextFactory.eINSTANCE
+											.createParserRule()), context);
+							if (completionProposal != null) {
+								completionProposal.setCursorPosition(proposal.length() - 3);
+								acceptor.accept(completionProposal);
+							}
 						}
 					}
 				}
 			}
 		}
-		super.completeParserRule_Name(model, assignment, context, acceptor);
 	}
-	
+
 	private boolean isProposeParserRule(EClassifier eClassifier, Grammar grammar) {
-		if(eClassifier instanceof EDataType && !((EDataType) eClassifier).isSerializable()) { 
+		if (eClassifier instanceof EDataType && !((EDataType) eClassifier).isSerializable()) {
 			return false;
 		}
-		Iterable<String> allRuleNames = Iterables.transform(GrammarUtil.allRules(grammar), new Function<AbstractRule, String>() {
-			public String apply(AbstractRule from) {
-				return from.getName();
-			}
-		});
-		return !Iterables.contains(allRuleNames, eClassifier.getName());
-		
+		Iterable<EClassifier> allRuleNames = Iterables.transform(GrammarUtil.allParserRules(grammar),
+				new Function<ParserRule, EClassifier>() {
+					public EClassifier apply(ParserRule from) {
+						return from.getType().getClassifier();
+					}
+				});
+		return !Iterables.contains(allRuleNames, eClassifier);
+
 	}
 
 }

@@ -1,8 +1,14 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.ecore2xtext;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -26,9 +32,12 @@ import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xtext.ui.OutputStringImpl;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectInfo;
 
-public class SmokeTests extends AbstractXtextTests {
+/**
+ * @author koehnlein - Initial contribution and API
+ */
+public class GrammarGeneratorTest extends AbstractXtextTests {
 
-	private static final List<String> MINIMUM_PACKAGE_NS_URIS = Arrays
+	private static final List<String> EXAMPLE_EPACKAGE_NS_URIS = Arrays
 			.asList(new String[] { "http://www.eclipse.org/emf/2002/Ecore",
 					"http://www.eclipse.org/2008/Xtext",
 					"http://simple/formattertestlanguage" });
@@ -39,17 +48,34 @@ public class SmokeTests extends AbstractXtextTests {
 	private static final List<String> WARNING_PACKAGE_NS_URIS = Arrays
 			.asList(new String[] { "http://www.eclipse.org/OCL2/1.0.0/ocl/uml" });
 
-	public void testCreateErrorFreeGrammar() throws IOException {
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
 		XtextStandaloneSetup.doSetup();
-		Collection<String> keySet =
-		//new HashSet<String>(EPackage.Registry.INSTANCE.keySet());
-		MINIMUM_PACKAGE_NS_URIS;
-		for (String nsURI : keySet) {
+	}
+	
+	public void testExampleEPackages() throws IOException {
+		checkGeneratedGrammarIsValid(EXAMPLE_EPACKAGE_NS_URIS);
+	}
+
+	/*
+	// Smoke test 
+	public void testAllEPackagesFromRegistry() throws IOException {
+		checkGeneratedGrammarIsValid(Lists
+				.newArrayList(EPackage.Registry.INSTANCE.keySet()));
+	}
+	*/
+	
+	private void checkGeneratedGrammarIsValid(List<String> ePackageURIs)
+			throws IOException {
+		for (String nsURI : ePackageURIs) {
+			System.out.print(nsURI);
 			EPackage ePackage = EPackage.Registry.INSTANCE.getEPackage(nsURI);
 			Ecore2XtextProjectInfo xtextProjectInfo = new Ecore2XtextProjectInfo();
 			Set<EPackage> ePackages = new HashSet<EPackage>();
-			if (addImportedEPackages(ePackage, ePackages)) {
-				System.out.print(nsURI);
+			if (!addImportedEPackages(ePackage, ePackages)) {
+				System.out.println("...skipping");
+			} else {
 				OutputStringImpl output = new OutputStringImpl();
 				xtextProjectInfo.setEPackagesForRules(ePackages);
 				String languageName = "org.eclipse.xtext.xtext.ui.tests."

@@ -1,9 +1,23 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
 
+<!--
+ <copyright>
+ </copyright>
+
+ $Id: plugin.xml,v 1.2 2010/01/08 12:38:24 jkohnlein Exp $
+-->
+
 <plugin>
 
-    <extension
+   <extension point="org.eclipse.emf.ecore.generated_package">
+      <package
+            uri="http://www.eclipse.org/xtext/ecore2xtext"
+            class="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2xtextPackage"
+            genModel="src/org/eclipse/xtext/xtext/ui/ecore2xtext/Ecore2XtextTest.genmodel"/>
+   </extension>
+   
+       <extension
             point="org.eclipse.ui.editors">
         <editor
             class="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTestExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
@@ -117,6 +131,6 @@
            uriExtension="ecore2xtexttest">
      </resourceServiceProvider>
   </extension>
-
+   
 
 </plugin>
