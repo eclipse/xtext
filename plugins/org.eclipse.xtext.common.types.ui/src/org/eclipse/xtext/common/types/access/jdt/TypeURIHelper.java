@@ -149,12 +149,17 @@ public class TypeURIHelper {
 			case Signature.BASE_TYPE_SIGNATURE:
 			case Signature.ARRAY_TYPE_SIGNATURE:
 			case Signature.TYPE_VARIABLE_SIGNATURE:
-				String erased = Signature.getTypeErasure(signature);
+				String erased = getTypeErasure(signature);
 				uriBuilder.append(Signature.toString(erased));
 				return;
 			default:
 				throw new IllegalStateException("Unexpected Signature: " + signature);
 		}
+	}
+
+	public String getTypeErasure(String signature) {
+		String fixedSignature = signature.replaceAll(">\\.", ">\\$");
+		return Signature.getTypeErasure(fixedSignature);
 	}
 
 	public String computeParameterizedTypeName(String signature) {

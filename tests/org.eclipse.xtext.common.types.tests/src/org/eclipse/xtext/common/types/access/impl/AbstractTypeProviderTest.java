@@ -8,12 +8,19 @@
 package org.eclipse.xtext.common.types.access.impl;
 
 import java.io.Serializable;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
 
 import junit.framework.TestCase;
 
+import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.emf.ecore.impl.EValidatorRegistryImpl;
+import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.util.Diagnostician;
+import org.eclipse.emf.ecore.util.EObjectValidator;
 import org.eclipse.xtext.common.types.ArrayType;
 import org.eclipse.xtext.common.types.ComponentType;
 import org.eclipse.xtext.common.types.DeclaredType;
@@ -30,6 +37,7 @@ import org.eclipse.xtext.common.types.TypeArgument;
 import org.eclipse.xtext.common.types.TypeConstraint;
 import org.eclipse.xtext.common.types.TypeParameter;
 import org.eclipse.xtext.common.types.TypeParameterDeclarator;
+import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.UpperBound;
 import org.eclipse.xtext.common.types.Visibility;
 import org.eclipse.xtext.common.types.Wildcard;
@@ -50,7 +58,25 @@ import com.google.common.collect.Sets;
  */
 public abstract class AbstractTypeProviderTest extends TestCase {
 
+	private Diagnostician diagnostician;
+
 	protected abstract ITypeProvider getTypeProvider();
+	
+	@Override
+	protected void setUp() throws Exception {
+		super.setUp();
+		EValidator.Registry registry = new EValidatorRegistryImpl(EValidator.Registry.INSTANCE);
+		registry.put(TypesPackage.eINSTANCE, new EObjectValidator());
+		diagnostician = new Diagnostician(registry);
+	}
+	
+	protected void diagnose(EObject object) {
+		Resource resource = object.eResource();
+		for(EObject content: resource.getContents()) {
+			Diagnostic diagnostic = diagnostician.validate(content);
+			assertTrue(diagnostic.toString(), diagnostic.getSeverity() == Diagnostic.OK);
+		}
+	}
 	
 	public void testFindTypeByName_int() {
 		String typeName = "int";
@@ -58,6 +84,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertNotNull(type);
 		assertTrue(type instanceof PrimitiveType);
 		assertEquals(typeName, type.getCanonicalName());
+		diagnose(type);
 	}
 	
 	public void testFindTypeByName_int_twice() {
@@ -73,6 +100,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertNotNull(type);
 		assertTrue(type instanceof ArrayType);
 		assertEquals(typeName, type.getCanonicalName());
+		diagnose(type);
 	}
 	
 	public void testFindTypeByName_int_array_02() {
@@ -89,6 +117,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertNotNull(type);
 		assertTrue(type instanceof ArrayType);
 		assertEquals("int[][][]", type.getCanonicalName());
+		diagnose(type);
 	}
 	
 	public void testFindTypeByName_int_array_04() {
@@ -105,6 +134,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertNotNull(type);
 		assertTrue(type instanceof GenericType);
 		assertEquals(typeName, type.getCanonicalName());
+		diagnose(type);
 	}
 	
 	public void testFindTypeByName_javaLangCharSequence_02() {
@@ -154,6 +184,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		Type serializableType = type.getSuperTypes().get(1);
 		assertFalse("isProxy: "+ serializableType, serializableType.eIsProxy());
 		assertEquals(Serializable.class.getName(), serializableType.getCanonicalName());
+		diagnose(type);
 	}
 	
 	public void testFindTypeByName_javaLangNumber_02() {
@@ -165,6 +196,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertNotNull(number.getArrayType());
 		assertSame(type, number.getArrayType().getArrayType());
 		assertNull(type.getArrayType());
+		diagnose(type);
 	}
 	
 	public void testFindTypeByName_javaUtilList_01() {
@@ -183,6 +215,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertNotNull(upperBound.getReferencedType());
 		assertFalse(upperBound.getReferencedType().eIsProxy());
 		assertEquals(Object.class.getName(), upperBound.getReferencedType().getCanonicalName());
+		diagnose(type);
 	}
 	
 	public void testFindTypeByName_javaUtilList_02() {
@@ -267,6 +300,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		int constructorCount = ParameterizedMethods.class.getDeclaredConstructors().length;
 		assertEquals(1, constructorCount);
 		assertEquals(methodCount + constructorCount, type.getMembers().size());
+		diagnose(type);
 	}
 	
 	public void testMemberCount_02() {
@@ -277,6 +311,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		int constructorCount = InitializerWithConstructor.class.getDeclaredConstructors().length;
 		assertEquals(1, constructorCount);
 		assertEquals(methodCount + constructorCount, type.getMembers().size());
+		diagnose(type);
 	}
 	
 	public void testMemberCount_03() {
@@ -287,6 +322,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		int constructorCount = InitializerWithoutConstructor.class.getDeclaredConstructors().length;
 		assertEquals(1, constructorCount); // default constructor
 		assertEquals(methodCount + constructorCount, type.getMembers().size());
+		diagnose(type);
 	}
 	
 	public void testMemberCount_04() {
@@ -299,6 +335,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		int nestedTypesCount = NestedTypes.class.getClasses().length;
 		assertEquals(1, nestedTypesCount);
 		assertEquals(methodCount + constructorCount + nestedTypesCount, type.getMembers().size());
+		diagnose(type);
 	}
 	
 	public void testMemberCount_05() {
@@ -310,9 +347,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(1, constructorCount); // default constructor
 		int nestedTypesCount = NestedTypes.Outer.class.getClasses().length;
 		assertEquals(1, nestedTypesCount);
-		int fieldCount = NestedTypes.Outer.class.getDeclaredFields().length;
-		assertEquals(1, fieldCount); // implicit reference to enclosing type
-		assertEquals(methodCount + constructorCount + nestedTypesCount + fieldCount, type.getMembers().size());
+		assertEquals(methodCount + constructorCount + nestedTypesCount, type.getMembers().size());
 	}
 	
 	public void testMemberCount_06() {
@@ -322,9 +357,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(1, methodCount);
 		int constructorCount = NestedTypes.Outer.Inner.class.getDeclaredConstructors().length;
 		assertEquals(1, constructorCount); // default constructor
-		int fieldCount = NestedTypes.Outer.Inner.class.getDeclaredFields().length;
-		assertEquals(1, fieldCount); // implicit reference to enclosing type
-		assertEquals(methodCount + constructorCount + fieldCount, type.getMembers().size());
+		assertEquals(methodCount + constructorCount, type.getMembers().size());
 	}
 	
 	public void testMemberCount_07() {
@@ -337,6 +370,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		int nestedTypesCount = StaticNestedTypes.class.getClasses().length;
 		assertEquals(1, nestedTypesCount);
 		assertEquals(methodCount + constructorCount + nestedTypesCount, type.getMembers().size());
+		diagnose(type);
 	}
 	
 	public void testMemberCount_08() {
@@ -371,6 +405,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		int nestedTypesCount = ParameterizedTypes.class.getClasses().length;
 		assertEquals(1, nestedTypesCount);
 		assertEquals(methodCount + constructorCount + nestedTypesCount, type.getMembers().size());
+		diagnose(type);
 	}
 	
 	public void testMemberCount_11() {
@@ -378,11 +413,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
 		int methodCount = ParameterizedTypes.Inner.class.getDeclaredMethods().length;
 		assertEquals(7, methodCount);
-		int constructorCount = ParameterizedTypes.Inner.class.getDeclaredConstructors().length;
-		assertEquals(1, constructorCount); // default constructor
 		int fieldCount = ParameterizedTypes.Inner.class.getDeclaredFields().length;
 		assertEquals(1, fieldCount);
-		assertEquals(methodCount + constructorCount + fieldCount, type.getMembers().size());
+		assertEquals(methodCount + fieldCount, type.getMembers().size());
 	}
 	
 	public void testMemberCount_12() {
@@ -395,6 +428,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		int nestedCount = Fields.class.getDeclaredClasses().length;
 		assertEquals(1, nestedCount);
 		assertEquals(nestedCount + constructorCount + fieldCount, type.getMembers().size());
+		diagnose(type);
 	}
 	
 	public void testMemberCount_13() {
@@ -1214,6 +1248,13 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertTrue(field.getType() instanceof ParameterizedType);
 		ParameterizedType parameterizedFieldType = (ParameterizedType) fieldType;
 		assertSame(type, parameterizedFieldType.getRawType());
+	}
+	
+	public void testHashMap_01() {
+		String typeName = HashMap.class.getName();
+		Type type = getTypeProvider().findTypeByName(typeName);
+		assertNotNull(type);
+		diagnose(type);
 	}
 	
 	protected abstract String getCollectionParamName();

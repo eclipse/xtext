@@ -54,8 +54,8 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 
 	public DeclaredType createType(IType jdtType) {
 		try {
-			if (jdtType.isAnonymous())
-				throw new IllegalStateException("Cannot create type for anonymous class");
+			if (jdtType.isAnonymous() || Flags.isSynthetic(jdtType.getFlags()))
+				throw new IllegalStateException("Cannot create type for anonymous or synthetic classes");
 			if (jdtType.isAnnotation())
 				return createAnnotationType(jdtType);
 			if (jdtType.isEnum())
@@ -69,7 +69,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			setVisibility(result, jdtType.getFlags());
 			result.setFullyQualifiedName(jdtType.getFullyQualifiedName());
 			for (IType declaredType : jdtType.getTypes()) {
-				if (!declaredType.isAnonymous()) {
+				if (!declaredType.isAnonymous() && !Flags.isSynthetic(declaredType.getFlags())) {
 					result.getMembers().add(createType(declaredType));
 				}
 			}
@@ -84,7 +84,8 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 				}
 			}
 			for (IField field : jdtType.getFields()) {
-				result.getMembers().add(createField(field));
+				if (!Flags.isSynthetic(field.getFlags()))
+					result.getMembers().add(createField(field));
 			}
 			if (!jdtType.isInterface() && jdtType.getSuperclassTypeSignature() != null)
 				result.getSuperTypes().add(createReferencedType(jdtType.getSuperclassTypeSignature(), jdtType, result));
@@ -184,7 +185,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 					return existingType;
 				}
 			}
-			String rawType = Signature.getTypeErasure(signature);
+			String rawType = uriHelper.getTypeErasure(signature);
 			ParameterizedType newParameterizedType = TypesFactory.eINSTANCE.createParameterizedType();
 			newParameterizedType.setFullyQualifiedName(name);
 			newParameterizedType.setRawType(createReferencedType(rawType, declarator, container));
