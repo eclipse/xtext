@@ -428,4 +428,33 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        .appendNl("Class returns myAlias::Class:")
 	        .appendNl("'class' name=ID ('extends' references=[Class])?;");
 	}
+    
+    public void testCompleteRuleCallForReferencedType() throws Exception {
+    	newBuilder(getXtextSetup())
+			.appendNl("grammar Foo with org.eclipse.xtext.common.Terminals")
+			.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\"") 
+			.append("EPac")
+			.assertText("EPackage returns EPackage: \n;\n", ":");
+    	newBuilder(getXtextSetup())
+    		.appendNl("grammar Foo with org.eclipse.xtext.common.Terminals")
+    		.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\"") 
+    		.appendNl("FooBar returns EPackage: 'bar';") 
+    		.append("EPac")
+    		.assertText(":");
+    }
+
+    public void testCompleteRuleCallForReferencedTypeWithAlias() throws Exception {
+    	newBuilder(getXtextSetup())
+    		.appendNl("grammar Foo with org.eclipse.xtext.common.Terminals")
+    		.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\" as ecore") 
+    		.append("EPac")
+    		.assertText("EPackage returns ecore::EPackage: \n;\n", ":");
+    	newBuilder(getXtextSetup())
+    		.appendNl("grammar Foo with org.eclipse.xtext.common.Terminals")
+    		.appendNl("import \"http://www.eclipse.org/emf/2002/Ecore\" as ecore") 
+    		.appendNl("FooBar returns ecore::EPackage : 'bar';") 
+    		.append("EPac")
+    		.assertText(":");
+    }
+
 }
