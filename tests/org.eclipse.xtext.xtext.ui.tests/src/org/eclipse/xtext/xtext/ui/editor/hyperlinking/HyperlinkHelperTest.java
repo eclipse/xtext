@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.hyperlinking;
+package org.eclipse.xtext.xtext.ui.editor.hyperlinking;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
@@ -17,8 +17,10 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.common.editor.hyperlinking.HyperlinkHelper;
+import org.eclipse.xtext.ui.common.editor.hyperlinking.XtextHyperlink;
 import org.eclipse.xtext.ui.common.service.UIPluginModule;
-import org.eclipse.xtext.ui.common.tests.Activator;
+import org.eclipse.xtext.xtext.ui.Activator;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -33,7 +35,7 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 			@Override
 			public Injector createInjector() {
 				return Guice.createInjector(new org.eclipse.xtext.XtextUiModule(),
-						new UIPluginModule(Activator.getInstance()));
+						new UIPluginModule(Activator.getDefault()));
 			}
 		};
 	}

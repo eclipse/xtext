@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.contentassist;
+package org.eclipse.xtext.xtext.ui.editor.contentassist;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jface.viewers.ILabelProvider;
@@ -13,8 +13,10 @@ import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.XtextUiModule;
 import org.eclipse.xtext.ui.common.service.UIPluginModule;
-import org.eclipse.xtext.ui.common.tests.Activator;
 import org.eclipse.xtext.ui.core.SimpleLabelProvider;
+import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
+import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.xtext.ui.Activator;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -33,7 +35,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 					public Class<? extends ILabelProvider> bindILabelProvider() {
 						return SimpleLabelProvider.class;
 					}
-				}, new UIPluginModule(Activator.getInstance()));
+				}, new UIPluginModule(Activator.getDefault()));
 			}
 		};
 	}
@@ -191,7 +193,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     	newBuilder(getXtextSetup())
     		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate myDsl1 \"http://www.xtext.org/example/MyDsl1\"")
-	        .appendNl("import 'classpath:/org/eclipse/xtext/enumrules/enumsUi.ecore'")
+	        .appendNl("import 'classpath:/org/eclipse/xtext/xtext/ui/editor/contentassist/enumsUi.ecore'")
 	        .appendNl("enum ExistingEnum:")
 	        .assertText("SameName", "DifferentName", "OverriddenLiteral");
     }
@@ -315,7 +317,7 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
     	newBuilder(getXtextSetup())
     		.appendNl("grammar org.xtext.example.MyDsl1 with org.eclipse.xtext.common.Terminals")
 	        .appendNl("generate myDsl1 \"http://www.xtext.org/example/MyDsl1\"")
-	        .appendNl("import 'classpath:/org/eclipse/xtext/enumrules/enumsUi.ecore' as ")
+	        .appendNl("import 'classpath:/org/eclipse/xtext/xtext/ui/editor/contentassist/enumsUi.ecore' as")
 	        .assertText("enumsUi", "Alias");
     }
     

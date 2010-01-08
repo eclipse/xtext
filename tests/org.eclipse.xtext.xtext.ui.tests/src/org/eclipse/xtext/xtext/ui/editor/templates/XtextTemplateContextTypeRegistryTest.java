@@ -5,13 +5,15 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.templates;
+package org.eclipse.xtext.xtext.ui.editor.templates;
 
 import java.util.Iterator;
 
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.services.XtextGrammarAccess;
+import org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextType;
+import org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextTypeRegistry;
 
 import com.google.inject.Provider;
 

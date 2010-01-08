@@ -12,6 +12,7 @@ import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.ecore.EcoreResourceServiceProviderImpl;
 import org.eclipse.xtext.ui.common.service.UIPluginModule;
 import org.eclipse.xtext.ui.common.tests.Activator;
+import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
