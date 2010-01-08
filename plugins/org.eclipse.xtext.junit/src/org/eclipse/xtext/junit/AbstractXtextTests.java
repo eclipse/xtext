@@ -366,11 +366,12 @@ public abstract class AbstractXtextTests extends TestCase {
 		}
 		return code;
 	}
+	
+	private static JavaBeansMetaModel mm = new JavaBeansMetaModel();
 
 	protected XtendFacade getXtendFacade() {
 		ExecutionContextImpl ctx = new ExecutionContextImpl();
-//		ctx.registerMetaModel(new EmfRegistryMetaModel());
-		ctx.registerMetaModel(new JavaBeansMetaModel());
+		ctx.registerMetaModel(mm);
 		return XtendFacade.create(ctx);
 	}
 
