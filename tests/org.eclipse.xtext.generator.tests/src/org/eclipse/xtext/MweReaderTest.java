@@ -19,6 +19,7 @@ import org.eclipse.emf.mwe.core.monitor.NullProgressMonitor;
  * @author Heiko Behrens
  *
  */
+@SuppressWarnings("deprecation")
 public class MweReaderTest extends TestCase {
 
 	public void testSimple() throws Exception {
