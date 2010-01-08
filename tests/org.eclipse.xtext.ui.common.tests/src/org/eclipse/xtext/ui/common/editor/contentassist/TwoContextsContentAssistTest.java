@@ -17,6 +17,7 @@ import org.eclipse.xtext.ui.common.tests.Activator;
 import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider;
+import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
 
 import com.google.common.base.Predicate;
 import com.google.inject.Guice;

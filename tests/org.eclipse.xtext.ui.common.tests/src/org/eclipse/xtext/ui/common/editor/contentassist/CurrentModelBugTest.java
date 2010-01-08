@@ -23,6 +23,7 @@ import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider;
 import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext.Factory;
+import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;

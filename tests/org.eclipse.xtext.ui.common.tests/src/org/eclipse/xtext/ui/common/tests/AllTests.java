@@ -28,20 +28,17 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.ProposalConflictHelperAntlrTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.ReferenceGrammarUiContentAssistTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsContentAssistTest.class);
-      suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.XtextContentAssistTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.XtextGrammarUiContentAssistTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.antlr.Bug281198ParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.antlr.Bug282031ParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.antlr.ParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.contentassist.antlr.internal.InternalParserTest.class);
-      suite.addTestSuite(org.eclipse.xtext.ui.common.editor.hyperlinking.HyperlinkHelperTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.outline.DefaultContentOutlineNodeFactoryTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.outline.actions.DeclarativeActionBarContributorTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.outline.transformer.DeclarativeSemanticModelTransformerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.outline.transformer.DefaultSemanticModelTransformerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.syntaxcoloring.LightweightPositionTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.common.editor.syntaxcoloring.MergingHighlightedPositionAcceptorTest.class);
-      suite.addTestSuite(org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextTypeRegistryTest.class);
       return suite;
    }
 }
