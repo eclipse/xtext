@@ -14,11 +14,10 @@ import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.jface.text.Region;
-import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.core.DefaultLabelProvider;
-import org.eclipse.xtext.ui.core.DefaultStyledLabelProvider;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
 
 /**
@@ -36,7 +35,7 @@ public abstract class AbstractContentOutlineTests extends AbstractXtextTests {
 		}
 	};
 
-	private static ILabelProvider labelProvider = new DefaultLabelProvider() {
+	private static IStyledLabelProvider labelProvider = new DefaultLabelProvider() {
 		@Override
 		public org.eclipse.swt.graphics.Image getImage(Object element) {
 			return null;
@@ -57,7 +56,6 @@ public abstract class AbstractContentOutlineTests extends AbstractXtextTests {
 		root = resource.getContents().get(0);
 		a1 = root.eContents().get(0);
 		a2 = root.eContents().get(1);
-		contentOutlineNodeFactory = new DefaultContentOutlineNodeFactory(new DefaultStyledLabelProvider(labelProvider),
-				locationProvider);
+		contentOutlineNodeFactory = new DefaultContentOutlineNodeFactory(labelProvider, locationProvider);
 	}
 }

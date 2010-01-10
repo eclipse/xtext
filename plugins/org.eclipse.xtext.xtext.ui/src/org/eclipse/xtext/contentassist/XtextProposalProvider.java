@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.contentassist;
 
+import static org.eclipse.xtext.ui.core.DefaultLabelProvider.*;
+
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -30,6 +32,7 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
@@ -38,6 +41,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.TypeRef;
@@ -49,18 +53,25 @@ import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.common.editor.contentassist.ConfigurableCompletionProposal;
+import org.eclipse.xtext.ui.common.editor.syntaxcoloring.DefaultLexicalHighlightingConfiguration;
 import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.core.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.util.Strings;
+import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow
  */
 public class XtextProposalProvider extends org.eclipse.xtext.contentassist.AbstractXtextProposalProvider {
+	@Inject
+	private DefaultLexicalHighlightingConfiguration defaultLexicalHighlightingConfiguration;
+	@Inject 
+	private SemanticHighlightingConfiguration semanticHighlightingConfiguration;
 
 	public static class ClassifierPrefixMatcher extends PrefixMatcher {
 		private PrefixMatcher delegate;
@@ -95,7 +106,7 @@ public class XtextProposalProvider extends org.eclipse.xtext.contentassist.Abstr
 		}
 
 	}
-
+	
 	@Override
 	public void completeGrammar_Name(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
@@ -114,7 +125,7 @@ public class XtextProposalProvider extends org.eclipse.xtext.contentassist.Abstr
 						relativePath = relativePath.removeFileExtension();
 						String result = relativePath.toString();
 						result = result.replace('/', '.');
-						acceptor.accept(createCompletionProposal(result, null, null, context));
+						acceptor.accept(createCompletionProposal(result, context));
 						return;
 					}
 				}
@@ -158,6 +169,21 @@ public class XtextProposalProvider extends org.eclipse.xtext.contentassist.Abstr
 			}
 		}
 		super.completeReferencedMetamodel_Alias(model, assignment, context, acceptor);
+	}
+
+	@Override
+	protected StyledString getKeywordDisplayString(Keyword keyword) {
+		return createFromXtextStyle(keyword.getValue(), defaultLexicalHighlightingConfiguration.keywordTextStyle());
+	}
+
+	@Override
+	protected StyledString getStyledDisplayString(EObject element, String qualifiedName, String shortName) {
+		StyledString styledDisplayString = super.getStyledDisplayString(element, qualifiedName, shortName);
+		if (element instanceof ParserRule && GrammarUtil.isDatatypeRule((ParserRule) element)) {
+			styledDisplayString = createFromXtextStyle(styledDisplayString.getString(),
+					semanticHighlightingConfiguration.dataTypeRule());
+		}
+		return styledDisplayString;
 	}
 
 	@Override
@@ -267,6 +293,8 @@ public class XtextProposalProvider extends org.eclipse.xtext.contentassist.Abstr
 				if (!Strings.isEmpty(prefix))
 					proposal.setDisplayString(classifier.getName() + " - " + alias);
 				proposal.setPriority(proposal.getPriority() * 2);
+				proposal.setDisplayString(createFromXtextStyle(proposal.getDisplayString(),
+						semanticHighlightingConfiguration.typeReference()));
 			}
 			acceptor.accept(proposal);
 		}

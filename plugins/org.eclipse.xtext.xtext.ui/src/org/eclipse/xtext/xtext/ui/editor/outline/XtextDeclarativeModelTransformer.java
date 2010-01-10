@@ -8,7 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.outline;
 
-import static org.eclipse.xtext.ui.core.DefaultStyledLabelProvider.*;
+import static org.eclipse.xtext.ui.core.DefaultLabelProvider.*;
+
 import java.util.List;
 import java.util.Set;
 

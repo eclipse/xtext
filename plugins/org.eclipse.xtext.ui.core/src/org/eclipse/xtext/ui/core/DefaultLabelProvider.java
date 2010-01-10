@@ -7,12 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core;
 
+import static org.eclipse.xtext.ui.core.editor.utils.EditorUtils.*;
+
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.resource.ColorRegistry;
 import org.eclipse.jface.resource.FontDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
+import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.StyledString.Styler;
+import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.TextStyle;
 import org.eclipse.swt.widgets.Display;
@@ -94,16 +98,41 @@ public class DefaultLabelProvider extends SimpleLabelProvider {
 		return new XtextStyleAdapterStyler(xtextStyle);
 	}
 
+	/**
+	 * Convenience method to create a new <code>StyledString</code> from a given label text and
+	 * {@link org.eclipse.xtext.ui.core.editor.utils.TextStyle XtextTextStyle}
+	 * 
+	 * @param text
+	 *            the label to display
+	 * @param xtextStyle
+	 *            the style to apply to the given text
+	 * @return the created style
+	 */
+	public static StyledString createFromXtextStyle(String text,
+			org.eclipse.xtext.ui.core.editor.utils.TextStyle xtextStyle) {
+		return new StyledString(text, new XtextStyleAdapterStyler(xtextStyle));
+	}
+
 	private static class XtextStyleAdapterStyler extends Styler {
-		private org.eclipse.xtext.ui.core.editor.utils.TextStyle textStyle;
+		private org.eclipse.xtext.ui.core.editor.utils.TextStyle xtextTextStyle;
 
 		public XtextStyleAdapterStyler(org.eclipse.xtext.ui.core.editor.utils.TextStyle textStyle) {
-			this.textStyle = textStyle;
+			this.xtextTextStyle = textStyle;
 		}
 
 		@Override
 		public void applyStyles(TextStyle textStyle) {
-			this.textStyle.applyTo(textStyle);
+			textStyle.strikeout = (xtextTextStyle.getStyle() & TextAttribute.STRIKETHROUGH) != 0;
+			textStyle.underline = (xtextTextStyle.getStyle() & TextAttribute.UNDERLINE) != 0;
+			if (xtextTextStyle.getFontData() == null
+					&& xtextTextStyle.getStyle() != org.eclipse.xtext.ui.core.editor.utils.TextStyle.DEFAULT_FONT_STYLE) {
+				FontData fontData = new FontData();
+				fontData.style = xtextTextStyle.getStyle();
+				xtextTextStyle.setFontData(fontData);
+			}
+			textStyle.font = fontFromFontData(xtextTextStyle.getFontData());
+			textStyle.background = colorFromRGB(xtextTextStyle.getBackgroundColor());
+			textStyle.foreground = colorFromRGB(xtextTextStyle.getColor());
 		}
 	}
 

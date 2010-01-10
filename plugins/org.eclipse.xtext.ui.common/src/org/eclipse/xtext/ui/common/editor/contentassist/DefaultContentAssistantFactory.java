@@ -20,6 +20,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Michael Clay
  */
 public class DefaultContentAssistantFactory implements IContentAssistantFactory {
 
@@ -56,6 +57,7 @@ public class DefaultContentAssistantFactory implements IContentAssistantFactory 
 		setContentAssistProcessor(assistant);
 		setInformationControlCreator(assistant, configuration, sourceViewer);
 		setDialogSettings(assistant);
+		setColoredLabels(assistant);
 	}
 
 	private void setDialogSettings(ContentAssistant assistant) {
@@ -92,5 +94,9 @@ public class DefaultContentAssistantFactory implements IContentAssistantFactory 
 	public IDialogSettings getDialogSettings() {
 		return dialogSettings;
 	}
-
+	
+	protected void setColoredLabels(ContentAssistant assistant) {
+		assistant.enableColoredLabels(true);
+	}
+	
 }

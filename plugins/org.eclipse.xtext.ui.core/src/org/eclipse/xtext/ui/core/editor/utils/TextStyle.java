@@ -8,9 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.editor.utils;
 
-import static org.eclipse.xtext.ui.core.editor.utils.EditorUtils.*;
-
-import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.RGB;
@@ -20,10 +17,11 @@ import org.eclipse.swt.graphics.RGB;
  * 
  */
 public class TextStyle {
+	public static final int DEFAULT_FONT_STYLE = SWT.NORMAL;
 	private RGB color;
 	private RGB backgroundColor;
 	private FontData[] fontData;
-	private int style = SWT.NORMAL;
+	private int style = DEFAULT_FONT_STYLE;
 
 	private TextStyle(TextStyle textStyle) {
 		this.backgroundColor = textStyle.backgroundColor;
@@ -61,7 +59,7 @@ public class TextStyle {
 	 * @param fontData
 	 *            the fontData to set
 	 */
-	public void setFontData(FontData[] fontData) {
+	public void setFontData(FontData... fontData) {
 		this.fontData = fontData;
 	}
 
@@ -96,14 +94,5 @@ public class TextStyle {
 	 */
 	public void setStyle(int style) {
 		this.style = style;
-	}
-
-	public void applyTo(org.eclipse.swt.graphics.TextStyle textStyle) {
-		int style = getStyle();
-		textStyle.strikeout = (style & TextAttribute.STRIKETHROUGH) != 0;
-		textStyle.underline = (style & TextAttribute.UNDERLINE) != 0;
-		textStyle.font = fontFromFontData(getFontData());
-		textStyle.background = colorFromRGB(getBackgroundColor());
-		textStyle.foreground = colorFromRGB(getColor());
 	}
 }

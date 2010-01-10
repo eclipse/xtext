@@ -12,12 +12,11 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Region;
-import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.A;
 import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.B;
 import org.eclipse.xtext.ui.common.editor.outline.transformer.AbstractDeclarativeSemanticModelTransformer;
 import org.eclipse.xtext.ui.core.DefaultLabelProvider;
-import org.eclipse.xtext.ui.core.DefaultStyledLabelProvider;
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
 
 /**
@@ -31,7 +30,7 @@ public class TestTransformerHelper {
 		}
 	};
 	
-	private static ILabelProvider myLabelProvider = new DefaultLabelProvider() {
+	private static IStyledLabelProvider myLabelProvider = new DefaultLabelProvider() {
 		@Override
 		public org.eclipse.swt.graphics.Image getImage(Object element) {
 			return null;
@@ -40,7 +39,7 @@ public class TestTransformerHelper {
 
 	public static class TestTransformerWithNamingConvention extends AbstractDeclarativeSemanticModelTransformer {
 		{
-			setContentOutlineNodeFactory(new DefaultContentOutlineNodeFactory(new DefaultStyledLabelProvider(myLabelProvider),myLocationProvider)); 
+			setContentOutlineNodeFactory(new DefaultContentOutlineNodeFactory(myLabelProvider,myLocationProvider)); 
 		}
 		
 		/**
@@ -78,7 +77,7 @@ public class TestTransformerHelper {
 	
 	public static class TestTransformerWithAnnotations extends AbstractDeclarativeSemanticModelTransformer {
 		{
-			setContentOutlineNodeFactory(new DefaultContentOutlineNodeFactory(new DefaultStyledLabelProvider(myLabelProvider),myLocationProvider)); 
+			setContentOutlineNodeFactory(new DefaultContentOutlineNodeFactory(myLabelProvider,myLocationProvider)); 
 		}
 		
 		/**
