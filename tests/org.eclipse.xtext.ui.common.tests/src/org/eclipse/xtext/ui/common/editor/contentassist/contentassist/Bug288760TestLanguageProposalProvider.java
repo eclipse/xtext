@@ -18,7 +18,7 @@ public class Bug288760TestLanguageProposalProvider extends AbstractBug288760Test
 	public void completeWorkflowElement_Name(EObject model, Assignment assignment, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		if (model instanceof WorkflowElement) {
-			acceptor.accept(createCompletionProposal(((WorkflowElement) model).getName(), null, null, context));
+			acceptor.accept(createCompletionProposal(((WorkflowElement) model).getName(), context));
 		}
 	}
 	

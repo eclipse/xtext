@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.common.editor.contentassist;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
@@ -166,6 +167,15 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 
 	public ICompletionProposal createCompletionProposal(String proposal, String displayString, Image image,
 			ContentAssistContext contentAssistContext) {
+		return createCompletionProposal(proposal, new StyledString(displayString), image, getPriorityHelper().getDefaultPriority(), contentAssistContext.getPrefix(), contentAssistContext);
+	}
+	
+	protected ICompletionProposal createCompletionProposal(String proposal, ContentAssistContext contentAssistContext) {
+		return createCompletionProposal(proposal, null, null, getPriorityHelper().getDefaultPriority(), contentAssistContext.getPrefix(), contentAssistContext);
+	}
+	
+	protected ICompletionProposal createCompletionProposal(String proposal, StyledString displayString, Image image,
+			ContentAssistContext contentAssistContext) {
 		return createCompletionProposal(proposal, displayString, image, getPriorityHelper().getDefaultPriority(), contentAssistContext.getPrefix(), contentAssistContext);
 	}
 	
@@ -173,7 +183,7 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	 * @see #isValidProposal(String, String, ContentAssistContext)
 	 * @see #doCreateProposal(String, String, Image, int, ContentAssistContext)
 	 */
-	protected ICompletionProposal createCompletionProposal(String proposal, String displayString, Image image,
+	protected ICompletionProposal createCompletionProposal(String proposal, StyledString displayString, Image image,
 			int priority, String prefix, ContentAssistContext context) {
 		if (isValidProposal(proposal, prefix, context)) {
 			return doCreateProposal(proposal, displayString, image, priority, context);
@@ -191,7 +201,7 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 		return true;
 	}
 
-	protected ConfigurableCompletionProposal doCreateProposal(String proposal, String displayString, Image image,
+	protected ConfigurableCompletionProposal doCreateProposal(String proposal, StyledString displayString, Image image,
 			int priority, ContentAssistContext context) {
 		int replacementOffset = context.getReplaceRegion().getOffset();
 		int replacementLength = context.getReplaceRegion().getLength();
@@ -203,14 +213,18 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 		return result;
 	}
 
-	protected ConfigurableCompletionProposal doCreateProposal(String proposal, String displayString, Image image,
+	protected ConfigurableCompletionProposal doCreateProposal(String proposal, StyledString displayString, Image image,
 			int replacementOffset, int replacementLength) {
 		return new ConfigurableCompletionProposal(proposal, replacementOffset, replacementLength, 
 				proposal.length(), image, displayString, null, null);
 	}
 	
-	protected String getKeywordDisplayString(Keyword keyword) {
-		return keyword.getValue();
+	protected StyledString getKeywordDisplayString(Keyword keyword) {
+		return new StyledString(keyword.getValue());
+	}
+	
+	protected StyledString getStyledDisplayString(EObject element, String qualifiedName, String shortName) {
+		return new StyledString(getDisplayString(element, qualifiedName, shortName));
 	}
 	
 	protected String getDisplayString(EObject element, String qualifiedName, String shortName) {

@@ -14,6 +14,7 @@ import java.util.Map;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
+import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Assignment;
@@ -61,7 +62,7 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 			if (ruleName != null)
 				proposal = getValueConverter().toString(proposal, ruleName);
 			EObject objectOrProxy = candidate.getEObjectOrProxy();
-			String displayString = getDisplayString(objectOrProxy, candidate.getQualifiedName(), candidate.getName());
+			StyledString displayString = getStyledDisplayString(objectOrProxy, candidate.getQualifiedName(), candidate.getName());
 			Image image = getImage(objectOrProxy);
 			result = createCompletionProposal(proposal, displayString, image, contentAssistContext);
 			getPriorityHelper().adjustCrossReferencePriority(result, contentAssistContext.getPrefix());			

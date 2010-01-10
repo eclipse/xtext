@@ -16,6 +16,7 @@ import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.jface.text.contentassist.ICompletionProposalExtension2;
 import org.eclipse.jface.text.contentassist.ICompletionProposalExtension4;
+import org.eclipse.jface.text.contentassist.ICompletionProposalExtension6;
 import org.eclipse.jface.text.contentassist.IContextInformation;
 import org.eclipse.jface.text.link.ILinkedModeListener;
 import org.eclipse.jface.text.link.LinkedModeModel;
@@ -24,6 +25,7 @@ import org.eclipse.jface.text.link.LinkedPosition;
 import org.eclipse.jface.text.link.LinkedPositionGroup;
 import org.eclipse.jface.text.link.LinkedModeUI.ExitFlags;
 import org.eclipse.jface.text.link.LinkedModeUI.IExitPolicy;
+import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.graphics.Image;
@@ -33,15 +35,16 @@ import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Michael Clay
  */
-public class ConfigurableCompletionProposal implements Comparable<ConfigurableCompletionProposal>, ICompletionProposal, ICompletionProposalExtension2, ICompletionProposalExtension4 {
+public class ConfigurableCompletionProposal implements Comparable<ConfigurableCompletionProposal>, ICompletionProposal, ICompletionProposalExtension2, ICompletionProposalExtension4, ICompletionProposalExtension6 {
 
 	private static final Logger log = Logger.getLogger(ConfigurableCompletionProposal.class);
 	
 	// copied from final class CompletionProposal
 	
-	/** The string to be displayed in the completion proposal popup. */
-	private String displayString;
+	/** The styled string builder used to display this proposal */
+	private StyledString displayString;
 	/** The replacement string. */
 	private String replacementString;
 	/** The replacement offset. */
@@ -82,7 +85,7 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	 * @param contextInformation the context information associated with this proposal
 	 * @param additionalProposalInfo the additional information associated with this proposal
 	 */
-	public ConfigurableCompletionProposal(String replacementString, int replacementOffset, int replacementLength, int cursorPosition, Image image, String displayString, IContextInformation contextInformation, String additionalProposalInfo) {
+	public ConfigurableCompletionProposal(String replacementString, int replacementOffset, int replacementLength, int cursorPosition, Image image, StyledString displayString, IContextInformation contextInformation, String additionalProposalInfo) {
 		Assert.isNotNull(replacementString);
 		Assert.isTrue(replacementOffset >= 0);
 		Assert.isTrue(replacementLength >= 0);
@@ -94,7 +97,7 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 		this.cursorPosition= cursorPosition;
 		this.selectionStart = replacementOffset + cursorPosition;
 		this.image= image;
-		this.displayString= displayString;
+		this.displayString= displayString==null ? new StyledString(this.replacementString) : displayString;
 		this.contextInformation= contextInformation;
 		this.additionalProposalInfo= additionalProposalInfo;
 	}
@@ -139,11 +142,18 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	 * @see ICompletionProposal#getDisplayString()
 	 */
 	public String getDisplayString() {
-		if (displayString != null)
-			return displayString;
+		if (displayString != null) {
+			return getStyledDisplayString().getString();
+		}
 		return replacementString;
 	}
 
+	/*
+	 * @see ICompletionProposalExtension6#getStyledDisplayString()
+	 */
+	public StyledString getStyledDisplayString() {
+		return displayString;
+	}
 	/*
 	 * @see ICompletionProposal#getAdditionalProposalInfo()
 	 */
@@ -206,6 +216,10 @@ public class ConfigurableCompletionProposal implements Comparable<ConfigurableCo
 	}
 
 	public void setDisplayString(String displayString) {
+		setDisplayString(new StyledString(displayString));
+	}
+	
+	public void setDisplayString(StyledString displayString) {
 		this.displayString = displayString;
 	}
 
