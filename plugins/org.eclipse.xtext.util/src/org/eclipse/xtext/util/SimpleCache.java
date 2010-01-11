@@ -67,20 +67,20 @@ public class SimpleCache<Key, Value> {
 		try {
 			readLock.lock();
 			result = content.get(k);
+			if (result != null || content.containsKey(k))
+				return result;
 		} finally {
 			readLock.unlock();
 		}
-		if (result == null && !content.containsKey(k)) {
-			result = f.apply(k);
-			try {
-				writeLock.lock();
-				// f.apply(k) should produce equal results for equal keys
-				// it is save to put the new result without checking for a
-				// value that has been set meanwhile
-				content.put(k, result);
-			} finally {
-				writeLock.unlock();
-			}
+		result = f.apply(k);
+		try {
+			writeLock.lock();
+			// f.apply(k) should produce equal results for equal keys
+			// it is save to put the new result without checking for a
+			// value that has been set meanwhile
+			content.put(k, result);
+		} finally {
+			writeLock.unlock();
 		}
 		return result;
 	}
