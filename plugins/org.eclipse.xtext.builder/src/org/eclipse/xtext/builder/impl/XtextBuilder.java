@@ -17,14 +17,18 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.resources.IncrementalProjectBuilder;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.ProgressMonitorWrapper;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
+import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.ui.core.resource.IResourceSetProvider;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
@@ -44,6 +48,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 
 	@Inject
 	private IResourceSetProvider resourceSetProvider;
+	
+	@Inject
+	private IXtextBuilderParticipant participant;
 
 	public IResourceSetProvider getResourceSetProvider() {
 		return resourceSetProvider;
@@ -53,6 +60,13 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	@Override
 	protected IProject[] build(int kind, Map args, IProgressMonitor monitor) throws CoreException {
 		try {
+			final String taskName = "Building " + getProject().getName() + ": ";
+			monitor = new ProgressMonitorWrapper(monitor) {
+				@Override
+				public void subTask(String name) {
+					super.subTask(taskName + name);
+				}
+			};
 			if (kind == FULL_BUILD) {
 				fullBuild(monitor);
 			} else {
@@ -68,45 +82,61 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
+		} finally {
+			monitor.done();
 		}
 		return null;
 	}
 
 	protected void incrementalBuild(IResourceDelta delta, final IProgressMonitor monitor) throws CoreException {
 		final ToBeBuilt toBeBuilt = new ToBeBuilt();
-		SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
-		IResourceDeltaVisitor visitor = new IResourceDeltaVisitor() {
-			public boolean visit(IResourceDelta delta) throws CoreException {
-				if (delta.getResource() instanceof IStorage) {
-					if (delta.getKind() == IResourceDelta.REMOVED) {
-						return toBeBuiltComputer.removeStorage(monitor, toBeBuilt, (IStorage) delta.getResource());
-					} else if (delta.getKind() == IResourceDelta.ADDED || delta.getKind() == IResourceDelta.CHANGED) {
-						return toBeBuiltComputer.updateStorage(monitor, toBeBuilt, (IStorage) delta.getResource());
+		final SubMonitor subMonitor = SubMonitor.convert(monitor, "Collecting resources", 2);
+		subMonitor.subTask("Collecting resources");
+		try {
+			IResourceDeltaVisitor visitor = new IResourceDeltaVisitor() {
+				public boolean visit(IResourceDelta delta) throws CoreException {
+					if (delta.getResource() instanceof IStorage) {
+						if (delta.getKind() == IResourceDelta.REMOVED) {
+							return toBeBuiltComputer.removeStorage(subMonitor, toBeBuilt, (IStorage) delta.getResource());
+						} else if (delta.getKind() == IResourceDelta.ADDED || delta.getKind() == IResourceDelta.CHANGED) {
+							return toBeBuiltComputer.updateStorage(subMonitor, toBeBuilt, (IStorage) delta.getResource());
+						}
 					}
+					return true;
 				}
-				return true;
-			}
-		};
-		delta.accept(visitor);
-		subMonitor.worked(1);
-		doBuild(toBeBuilt, subMonitor.newChild(1));
+			};
+			delta.accept(visitor);
+			subMonitor.worked(1);
+			doBuild(toBeBuilt, subMonitor.newChild(1));
+		} finally {
+			subMonitor.done();
+		}
 	}
 
-	protected void doBuild(ToBeBuilt toBeBuilt, IProgressMonitor monitor) {
-		ResourceSet resourceSet = getResourceSetProvider().get(getProject());
-		if (resourceSet instanceof ResourceSetImpl) {
-			((ResourceSetImpl) resourceSet).setURIResourceMap(Maps.<URI, Resource>newHashMap());
+	protected void doBuild(ToBeBuilt toBeBuilt, IProgressMonitor monitor) throws CoreException {
+		SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
+		try {
+			ResourceSet resourceSet = getResourceSetProvider().get(getProject());
+			if (resourceSet instanceof ResourceSetImpl) {
+				((ResourceSetImpl) resourceSet).setURIResourceMap(Maps.<URI, Resource>newHashMap());
+			}
+			ImmutableList<Delta> deltas = builderState.update(resourceSet, toBeBuilt.toBeUpdated, toBeBuilt.toBeDeleted, subMonitor.newChild(1));
+			if (participant != null)
+				participant.build(resourceSet, deltas, subMonitor.newChild(1));
+		} finally {
+			subMonitor.done();
 		}
-		builderState.update(resourceSet, toBeBuilt.toBeUpdated, toBeBuilt.toBeDeleted,
-				monitor);
 	}
 
 	protected void fullBuild(final IProgressMonitor monitor) throws CoreException {
-		IProject project = getProject();
-		SubMonitor subMonitor = SubMonitor.convert(monitor, 21);
-		final ToBeBuilt toBeBuilt = toBeBuiltComputer.updateProject(project, subMonitor.newChild(1));
-		doBuild(toBeBuilt, subMonitor.newChild(20));
-		monitor.done();
+		SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
+		try {
+			IProject project = getProject();
+			final ToBeBuilt toBeBuilt = toBeBuiltComputer.updateProject(project, subMonitor.newChild(1));
+			doBuild(toBeBuilt, subMonitor.newChild(1));
+		} finally {
+			subMonitor.done();			
+		}
 	}
 
 	protected boolean isOpened(IResourceDelta delta) {

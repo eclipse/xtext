@@ -8,8 +8,11 @@
 package org.eclipse.xtext.builder;
 
 import org.eclipse.core.resources.IncrementalProjectBuilder;
+import org.eclipse.core.runtime.IExtensionRegistry;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.builderState.PersistableResourceDescriptionsImpl;
+import org.eclipse.xtext.builder.impl.CompoundBuilderParticipant;
 import org.eclipse.xtext.builder.impl.DirtyStateAwareResourceDescriptions;
 import org.eclipse.xtext.builder.impl.XtextBuilder;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
@@ -38,6 +41,8 @@ public class BuilderModule extends AbstractModule {
 		bind(IStateChangeEventBroker.class).toProvider(StateChangeEventBrokerProvider.class);
 		bind(IDirtyStateManager.class).toProvider(DirtyStateManagerProvider.class);
 		bind(IResourceServiceProvider.Registry.class).toInstance(IResourceServiceProvider.Registry.INSTANCE);
+		bind(IXtextBuilderParticipant.class).to(CompoundBuilderParticipant.class);
+		bind(IExtensionRegistry.class).toInstance(Platform.getExtensionRegistry());
 	}
 
 	protected void bindQualifiedNameProvider() {
