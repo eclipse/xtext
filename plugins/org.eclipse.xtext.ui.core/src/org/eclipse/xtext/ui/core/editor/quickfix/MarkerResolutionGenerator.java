@@ -42,7 +42,29 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 	
 	@Inject
 	@Named(Constants.LANGUAGE_NAME)
-	private String editorId; 
+	private String editorId;
+	
+	@Inject
+	private IssueUtil issueUtil;
+	
+	@Inject
+	private MarkerUtil markerUtil;
+
+	public IssueUtil getIssueUtil() {
+		return issueUtil;
+	}
+
+	public void setIssueUtil(IssueUtil issueUtil) {
+		this.issueUtil = issueUtil;
+	}
+
+	public void setMarkerUtil(MarkerUtil markerUtil) {
+		this.markerUtil = markerUtil;
+	}
+
+	public MarkerUtil getMarkerUtil() {
+		return markerUtil;
+	}
 
 	public void setEditorId(String editorId) {
 		this.editorId = editorId;
@@ -53,7 +75,7 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 	}
 
 	public boolean hasResolutions(IMarker marker) {
-		return getResolutionProvider().hasResolutionFor(MarkerUtil.getCode(marker));
+		return getResolutionProvider().hasResolutionFor(getMarkerUtil().getCode(marker));
 	}
 
 	public IMarkerResolution[] getResolutions(IMarker marker) {
@@ -73,7 +95,7 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 		if(annotationModel != null && !isMarkerStillValid(marker, annotationModel))
 			return emptyResult;
 		
-		final Iterable<IssueResolution> resolutions = getResolutions(IssueUtil.createIssue(marker), editor.getDocument());
+		final Iterable<IssueResolution> resolutions = getResolutions(getIssueUtil().createIssue(marker), editor.getDocument());
 		return getAdaptedResolutions(Lists.newArrayList(resolutions));
 	}
 
@@ -89,7 +111,7 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 			}
 
 			private boolean referringToSameIssue(Annotation annotation, IMarker marker) {
-				if(MarkerUtil.refersToSameIssue(marker, annotation)) {
+				if(getMarkerUtil().refersToSameIssue(marker, annotation)) {
 					return true;
 				}
 				return false;

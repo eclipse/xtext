@@ -21,16 +21,18 @@ import org.eclipse.xtext.validation.IssueResolutionProvider;
 public class XtextResourceMarkerAnnotationModel extends ResourceMarkerAnnotationModel {
 
 	private final IssueResolutionProvider issueResolutionProvider;
+	private final MarkerUtil markerUtil;
 
-	public XtextResourceMarkerAnnotationModel(IFile file, IssueResolutionProvider issueResolutionProvider) {
+	public XtextResourceMarkerAnnotationModel(IFile file, IssueResolutionProvider issueResolutionProvider, MarkerUtil markerUtil) {
 		super(file);
 		this.issueResolutionProvider = issueResolutionProvider;
+		this.markerUtil = markerUtil;
 	}
 
 	@Override
 	protected MarkerAnnotation createMarkerAnnotation(IMarker marker) {
 		MarkerAnnotation annotation = super.createMarkerAnnotation(marker);
-		String issueCode = MarkerUtil.getCode(annotation);
+		String issueCode = markerUtil.getCode(annotation);
 		annotation.setQuickFixable(issueResolutionProvider.hasResolutionFor(issueCode));
 		return annotation;
 	}
