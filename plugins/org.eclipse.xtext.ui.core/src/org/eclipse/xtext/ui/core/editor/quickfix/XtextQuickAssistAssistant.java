@@ -94,6 +94,14 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 
 	public static class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAdapter implements IQuickAssistProcessor {
 
+		private final IssueUtil issueUtil;
+		private final MarkerUtil markerUtil;
+		
+		public XtextQuickAssistProcessor(IssueUtil issueUtil, MarkerUtil markerUtil) {
+			this.issueUtil = issueUtil;
+			this.markerUtil = markerUtil;
+		}
+		
 		private String errorMessage;
 
 		public String getErrorMessage() {
@@ -114,7 +122,7 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 			if (annotation instanceof MarkerAnnotation) {
 				MarkerAnnotation markerAnnotation = (MarkerAnnotation) annotation;
 				if (!markerAnnotation.isQuickFixableStateSet())
-					markerAnnotation.setQuickFixable(getResolutionProvider().hasResolutionFor(MarkerUtil.getCode(markerAnnotation)));
+					markerAnnotation.setQuickFixable(getResolutionProvider().hasResolutionFor(markerUtil.getCode(markerAnnotation)));
 				
 				return markerAnnotation.isQuickFixable();
 			}
@@ -145,7 +153,7 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 				if(!canFix(annotation))
 					continue;
 				
-				final Issue issue = IssueUtil.getIssueFromAnnotation(annotation, amodel, document);
+				final Issue issue = issueUtil.getIssueFromAnnotation(annotation, amodel, document);
 				if(issue == null)
 					continue;
 		
@@ -175,8 +183,9 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 	}
 
 	@Inject
-	public XtextQuickAssistAssistant(IssueResolutionProvider issueResolutionProvider, IDocumentEditor documentEditor, IImageHelper imageHelper) {
-		XtextQuickAssistProcessor processor = new XtextQuickAssistProcessor();
+	public XtextQuickAssistAssistant(IssueResolutionProvider issueResolutionProvider, IDocumentEditor documentEditor, IImageHelper imageHelper, IssueUtil issueUtil, MarkerUtil markerUtil) {
+		// pass-through parameters issueUtil+markerUtil should be injected with provider via guice2
+		XtextQuickAssistProcessor processor = new XtextQuickAssistProcessor(issueUtil, markerUtil);
 		processor.setDocumentEditor(documentEditor);
 		processor.setImageHelper(imageHelper);
 		processor.setResolutionProvider(issueResolutionProvider);

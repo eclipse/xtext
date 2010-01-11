@@ -14,6 +14,7 @@ import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IFileEditorInput;
 import org.eclipse.ui.editors.text.FileDocumentProvider;
+import org.eclipse.xtext.ui.core.MarkerUtil;
 import org.eclipse.xtext.ui.core.editor.quickfix.XtextResourceMarkerAnnotationModel;
 import org.eclipse.xtext.ui.core.editor.validation.AnnotationIssueProcessor;
 import org.eclipse.xtext.ui.core.editor.validation.ValidationJob;
@@ -36,9 +37,12 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	@Inject
 	private IResourceValidator resourceValidator;
 	
-	// TODO use a provider for objects that depend on issueResolitionProvider when guice2 is available
+	// TODO use a provider for objects that depend on issueResolitionProvider+markerUtil when guice2 is available
 	@Inject
 	private IssueResolutionProvider issueResolutionProvider;
+	
+	@Inject
+	private MarkerUtil markerUtil;
 
 	@Override
 	protected XtextDocument createEmptyDocument() {
@@ -67,7 +71,7 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 	protected IAnnotationModel createAnnotationModel(Object element) throws CoreException {
 		if (element instanceof IFileEditorInput) {
 			IFileEditorInput input= (IFileEditorInput) element;
-			return new XtextResourceMarkerAnnotationModel(input.getFile(), issueResolutionProvider);
+			return new XtextResourceMarkerAnnotationModel(input.getFile(), issueResolutionProvider, markerUtil);
 		}
 
 		return super.createAnnotationModel(element);

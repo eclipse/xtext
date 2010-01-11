@@ -20,9 +20,9 @@ import org.eclipse.xtext.validation.Issue.Severity;
  * @author Heiko Behrens - Initial contribution and API
  *
  */
-public final class MarkerUtil {
+public class MarkerUtil {
 
-	public static String getCode(Annotation annotation) {
+	public String getCode(Annotation annotation) {
 		if (annotation instanceof MarkerAnnotation) {
 			MarkerAnnotation ma = (MarkerAnnotation) annotation;
 			return getCode(ma.getMarker());
@@ -34,16 +34,16 @@ public final class MarkerUtil {
 		return null;
 	}
 
-	public static String getCode(IMarker marker) {
+	public String getCode(IMarker marker) {
 		return marker.getAttribute(Issue.CODE_KEY, null);
 	}
 
-	public static URI getUriToProblem(IMarker marker) {
+	public URI getUriToProblem(IMarker marker) {
 		String uri = marker.getAttribute(Issue.URI_KEY, null);
 		return uri != null ? URI.createURI(uri) : null;
 	}
 	
-	public static URI getUriToProblem(Annotation annotation) {
+	public URI getUriToProblem(Annotation annotation) {
 		if (annotation instanceof MarkerAnnotation) {
 			MarkerAnnotation ma = (MarkerAnnotation) annotation;
 			return getUriToProblem(ma.getMarker());
@@ -55,7 +55,7 @@ public final class MarkerUtil {
 		return null;
 	}
 	
-	public static Severity getSeverity(IMarker marker) {
+	public Severity getSeverity(IMarker marker) {
 		switch (marker.getAttribute(IMarker.SEVERITY, 0)) {
 			case IMarker.SEVERITY_ERROR:
 				return Severity.ERROR;
@@ -66,7 +66,7 @@ public final class MarkerUtil {
 		}
 	}
 
-	public static final boolean refersToSameIssue(IMarker marker, Annotation annotation) {
+	public final boolean refersToSameIssue(IMarker marker, Annotation annotation) {
 		URI markerURI = getUriToProblem(marker);
 		String markerIssue = getCode(marker);
 		if(markerURI == null || markerIssue == null)

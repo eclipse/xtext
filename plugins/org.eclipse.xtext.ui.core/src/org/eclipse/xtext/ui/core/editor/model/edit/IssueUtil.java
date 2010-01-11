@@ -17,12 +17,24 @@ import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.validation.XtextAnnotation;
 import org.eclipse.xtext.validation.Issue;
 
+import com.google.inject.Inject;
+
 /**
  * @author Heiko Behrens - Initial contribution and API
  */
-public final class IssueUtil {
+public class IssueUtil {
 
-	public static Issue createIssue(IMarker marker) {
+	@Inject MarkerUtil markerUtil;
+	
+	public MarkerUtil getMarkerUtil() {
+		return markerUtil;
+	}
+
+	public void setMarkerUtil(MarkerUtil markerUtil) {
+		this.markerUtil = markerUtil;
+	}
+
+	public Issue createIssue(IMarker marker) {
 		Issue.IssueImpl issue = new Issue.IssueImpl();
 		issue.setMessage(MarkerUtilities.getMessage(marker));
 		
@@ -30,15 +42,15 @@ public final class IssueUtil {
 		issue.setOffset(MarkerUtilities.getCharStart(marker));
 		issue.setLength(MarkerUtilities.getCharEnd(marker)-MarkerUtilities.getCharStart(marker));
 		
-		issue.setCode(MarkerUtil.getCode(marker));
-		issue.setUriToProblem(MarkerUtil.getUriToProblem(marker));
-		issue.setSeverity(MarkerUtil.getSeverity(marker));
+		issue.setCode(markerUtil.getCode(marker));
+		issue.setUriToProblem(markerUtil.getUriToProblem(marker));
+		issue.setSeverity(markerUtil.getSeverity(marker));
 		// Note, isSyntaxError is unset, but currently the api does not allow fixing
 		// syntax errors anyway.
 		return issue;
 	}
 	
-	public static Issue getIssueFromAnnotation(Annotation annotation, IAnnotationModel amodel, IXtextDocument document) {
+	public Issue getIssueFromAnnotation(Annotation annotation, IAnnotationModel amodel, IXtextDocument document) {
 		if (annotation instanceof XtextAnnotation) {
 			XtextAnnotation xtextAnnotation = (XtextAnnotation) annotation;
 			return xtextAnnotation.getIssue();
