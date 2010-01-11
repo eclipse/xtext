@@ -47,27 +47,34 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 
 	public void updateMarker(ResourceSet resourceSet, ImmutableList<Delta> resourceDescriptionDeltas,
 			IProgressMonitor monitor) {
-		SubMonitor subMonitor = SubMonitor.convert(monitor, resourceDescriptionDeltas.size());
-		for (Delta delta : resourceDescriptionDeltas) {
-			if (delta.getNew() != null) {
-				Iterable<IStorage> storages = mapper.getStorages(delta.getNew().getURI());
-				for (IStorage storage : storages) {
-					if (storage instanceof IFile) {
-						IFile file = (IFile) storage;
-						if (!file.isReadOnly()) {
-							Resource resource = resourceSet.getResource(delta.getNew().getURI(), true);
-							addMarkers(file, resource, subMonitor.newChild(1));
+		SubMonitor subMonitor = SubMonitor.convert(monitor, "Validate resources", resourceDescriptionDeltas.size());
+		subMonitor.subTask("Validate resources");
+		try {
+			for (Delta delta : resourceDescriptionDeltas) {
+				if (delta.getNew() != null) {
+					Iterable<IStorage> storages = mapper.getStorages(delta.getNew().getURI());
+					SubMonitor child = subMonitor.newChild(1);
+					for (IStorage storage : storages) {
+						if (storage instanceof IFile) {
+							IFile file = (IFile) storage;
+							if (!file.isReadOnly()) {
+								Resource resource = resourceSet.getResource(delta.getNew().getURI(), true);
+								addMarkers(file, resource, child);
+							}
 						}
 					}
+				} else {
+					subMonitor.worked(1);
 				}
 			}
+		} finally {
+			subMonitor.done();
 		}
-		subMonitor.done();
 	}
 
 	protected void addMarkers(IFile file, Resource resource, final IProgressMonitor monitor) {
+		SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
 		try {
-			SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
 			IResourceServiceProvider provider = resourceServiceProviderRegistry.getResourceServiceProvider(resource
 					.getURI(), null);
 			
@@ -92,6 +99,8 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 			}
 		} catch (CoreException e) {
 			log.error(e.getMessage(), e);
+		} finally {
+			subMonitor.done();
 		}
 	}
 	

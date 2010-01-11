@@ -66,42 +66,58 @@ public class PersistableResourceDescriptionsImpl extends AbstractResourceDescrip
 		persister.save(getAllResourceDescriptions());
 	}
 
-	public synchronized ImmutableList<IResourceDescription.Delta> update(ResourceSet resourceSet, Set<URI> toBeAddedOrUpdated,
-			Set<URI> toBeRemoved, IProgressMonitor monitor) {
-		SubMonitor subMonitor = SubMonitor.convert(monitor, 102);
+	public synchronized ImmutableList<IResourceDescription.Delta> update(ResourceSet resourceSet, 
+			Set<URI> toBeAddedOrUpdated,
+			Set<URI> toBeRemoved, 
+			IProgressMonitor monitor) {
 		toBeAddedOrUpdated = toBeAddedOrUpdated!=null?toBeAddedOrUpdated:Collections.<URI>emptySet();
 		toBeRemoved = toBeRemoved!=null?toBeRemoved:Collections.<URI>emptySet();
-		if (subMonitor.isCanceled() || (toBeAddedOrUpdated.isEmpty() && toBeRemoved.isEmpty()))
-			return ImmutableList.of();
-		resourceSet.eAdapters().add(new ShadowingResourceDescriptions.Adapter(this, toBeAddedOrUpdated, toBeRemoved));
-		resourceSet.getLoadOptions().put(AbstractGlobalScopeProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);
-		Collection<Delta> deltas = updater.transitiveUpdate(this, resourceSet, toBeAddedOrUpdated, toBeRemoved,
-				subMonitor.newChild(1));
-		Set<Delta> copiedDeltas = Sets.newHashSet();
-		Map<URI, IResourceDescription> newMap = Maps.newHashMap(resourceDescriptionMap);
-		SubMonitor subMonitor2 = SubMonitor.convert(subMonitor.newChild(100),deltas.size());
-		for (Delta delta : deltas) {
-			if (subMonitor2.isCanceled())
+		SubMonitor subMonitor = SubMonitor.convert(monitor, "Create resource descriptions", 3);
+		subMonitor.subTask("Create resource descriptions");
+		try {
+			if (subMonitor.isCanceled() || (toBeAddedOrUpdated.isEmpty() && toBeRemoved.isEmpty()))
 				return ImmutableList.of();
-			DefaultResourceDescriptionDelta copiedDelta = new DefaultResourceDescriptionDelta(delta.getOld(),
-					createNew(delta, toBeAddedOrUpdated));
-			copiedDeltas.add(copiedDelta);
-			if (delta.getNew() == null) {
-				newMap.remove(copiedDelta.getOld().getURI());
-			} else {
-				newMap.put(copiedDelta.getNew().getURI(), copiedDelta.getNew());
+			resourceSet.eAdapters().add(new ShadowingResourceDescriptions.Adapter(this, toBeAddedOrUpdated, toBeRemoved));
+			resourceSet.getLoadOptions().put(AbstractGlobalScopeProvider.NAMED_BUILDER_SCOPE, Boolean.TRUE);
+			Collection<Delta> deltas = updater.transitiveUpdate(
+					this, resourceSet, toBeAddedOrUpdated, toBeRemoved, subMonitor.newChild(1));
+			
+			Set<Delta> copiedDeltas = Sets.newHashSet();
+			Map<URI, IResourceDescription> newMap = Maps.newHashMap(resourceDescriptionMap);
+			
+			SubMonitor deltaMonitor = SubMonitor.convert(subMonitor.newChild(1), "Update resource descriptions", deltas.size());
+			int total = deltas.size();
+			int current = 1;
+			try {
+				for (Delta delta : deltas) {
+					if (deltaMonitor.isCanceled())
+						return ImmutableList.of();
+					deltaMonitor.subTask("Update resource description " + current + " of " + total);
+					DefaultResourceDescriptionDelta copiedDelta = new DefaultResourceDescriptionDelta(delta.getOld(),
+							createNew(delta, toBeAddedOrUpdated));
+					copiedDeltas.add(copiedDelta);
+					if (delta.getNew() == null) {
+						newMap.remove(copiedDelta.getOld().getURI());
+					} else {
+						newMap.put(copiedDelta.getNew().getURI(), copiedDelta.getNew());
+					}
+					current++;
+					deltaMonitor.worked(1);
+				}
+			} finally {
+				deltaMonitor.done();
 			}
-			subMonitor2.worked(1);
+			ResourceDescriptionChangeEvent event = new ResourceDescriptionChangeEvent(copiedDeltas, this);
+			if (subMonitor.isCanceled())
+				return ImmutableList.of();
+			doValidate(resourceSet, event.getDeltas(), subMonitor.newChild(1));
+			// update the reference
+			resourceDescriptionMap = Collections.unmodifiableMap(newMap);
+			notifyListeners(event);
+			return event.getDeltas();
+		} finally {
+			subMonitor.done();
 		}
-		ResourceDescriptionChangeEvent event = new ResourceDescriptionChangeEvent(copiedDeltas, this);
-		if (subMonitor.isCanceled())
-			return ImmutableList.of();
-		doValidate(resourceSet, event.getDeltas(), subMonitor.newChild(1));
-
-		// update the reference
-		resourceDescriptionMap = Collections.unmodifiableMap(newMap);
-		notifyListeners(event);
-		return event.getDeltas();
 	}
 
 	protected void doValidate(ResourceSet rs, ImmutableList<Delta> deltas, IProgressMonitor monitor) {

@@ -60,18 +60,24 @@ public class ToBeBuiltComputer {
 	}
 
 	public ToBeBuilt updateProject(final IProject project, final IProgressMonitor monitor) throws CoreException {
-		final ToBeBuilt toBeBuilt = removeProject(project, monitor);
-		if (!project.isAccessible())
-			return toBeBuilt;
-		project.accept(new IResourceVisitor() {
-			public boolean visit(IResource resource) throws CoreException {
-				if (resource instanceof IStorage) {
-					return updateStorage(monitor, toBeBuilt, (IStorage) resource);
+		SubMonitor subMonitor = SubMonitor.convert(monitor, "Collecting resources", 1);
+		subMonitor.subTask("Collecting resources");
+		try {
+			final ToBeBuilt toBeBuilt = removeProject(project, monitor);
+			if (!project.isAccessible())
+				return toBeBuilt;
+			project.accept(new IResourceVisitor() {
+				public boolean visit(IResource resource) throws CoreException {
+					if (resource instanceof IStorage) {
+						return updateStorage(monitor, toBeBuilt, (IStorage) resource);
+					}
+					return true;
 				}
-				return true;
-			}
-		});
-		return toBeBuilt;
+			});
+			return toBeBuilt;
+		} finally {
+			subMonitor.done();
+		}
 	}
 
 	public boolean updateStorage(final IProgressMonitor monitor, final ToBeBuilt toBeBuilt, IStorage storage) {

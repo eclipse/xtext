@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.tests;
 
+import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.resource.IContainer.Manager;
@@ -32,5 +33,9 @@ public class BuilderTestLanguageRuntimeModule extends org.eclipse.xtext.builder.
 	@Override
 	public Class<? extends Manager> bindIContainer$Manager() {
 		return SimpleResourceDescriptionsBasedContainerManager.class;
+	}
+	
+	public Class<? extends IXtextBuilderParticipant> bindBuilderParticipant() {
+		return LoggingBuilderParticipant.class;
 	}
 }

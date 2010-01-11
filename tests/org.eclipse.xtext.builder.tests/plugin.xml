@@ -126,6 +126,11 @@
            uriExtension="buildertestlanguage">
      </resourceServiceProvider>
   </extension>
+ <extension
+       point="org.eclipse.xtext.builder.participant">
+    <participant class="org.eclipse.xtext.builder.tests.BuilderTestLanguageExecutableExtensionFactory:org.eclipse.xtext.builder.IXtextBuilderParticipant">
+    </participant>
+ </extension>
 
 
 
