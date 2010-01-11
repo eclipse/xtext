@@ -14,9 +14,11 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.naming.IQualifiedNameSupport;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
+import org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.xtext.XtextCrossReferenceSerializer;
 import org.eclipse.xtext.xtext.XtextFormattingTokenSerializer;
 import org.eclipse.xtext.xtext.XtextFragmentProvider;
 import org.eclipse.xtext.xtext.XtextLinkingService;
@@ -50,6 +52,11 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 	@Override
 	public Class<? extends IScopeProvider> bindIScopeProvider() {
 		return XtextScopeProvider.class;
+	}
+
+	@Override
+	public Class<? extends ICrossReferenceSerializer> bindICrossReferenceSerializer() {
+		return XtextCrossReferenceSerializer.class;
 	}
 
 	@Override

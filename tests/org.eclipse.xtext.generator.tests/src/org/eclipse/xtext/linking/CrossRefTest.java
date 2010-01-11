@@ -1,34 +1,40 @@
 package org.eclipse.xtext.linking;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.linking.impl.DefaultLinkingService;
-import org.eclipse.xtext.linking.langATestLanguage.LangATestLanguagePackage;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.linking.langATestLanguage.LangATestLanguageFactory;
 import org.eclipse.xtext.linking.langATestLanguage.Main;
 import org.eclipse.xtext.linking.langATestLanguage.Type;
 import org.eclipse.xtext.linking.lazy.LazyLinkingTestLanguageStandaloneSetup;
-import org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingPackage;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Model;
 import org.eclipse.xtext.linking.lazy.lazyLinking.Property;
+import org.eclipse.xtext.linking.lazy.services.LazyLinkingTestLanguageGrammarAccess;
 import org.eclipse.xtext.linking.services.LangATestLanguageGrammarAccess;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
 
 public class CrossRefTest extends AbstractGeneratorTest {
 	private static final Logger logger = Logger.getLogger(CrossRefTest.class);
-	private DefaultLinkingService linkingService;
+	private ICrossReferenceSerializer linkingService;
+	private LangATestLanguageGrammarAccess grammar;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(LangATestLanguageStandaloneSetup.class);
-		linkingService = (DefaultLinkingService) get(ILinkingService.class);
+		linkingService =  get(ICrossReferenceSerializer.class);
+		grammar = (LangATestLanguageGrammarAccess) get(IGrammarAccess.class);
 	}
 
 	public void testSimple() throws Exception {
@@ -50,7 +56,7 @@ public class CrossRefTest extends AbstractGeneratorTest {
 		CrossReference xref = (CrossReference) asExtends.getTerminal();
 		EReference ref = GrammarUtil.getReference(xref, context.eClass());
 
-		assertEquals(1, linkingService.getLinkedObjects(context, ref, leaf).size());
+		assertEquals(1, getLinkingService().getLinkedObjects(context, ref, leaf).size());
 	}
 
 	public void testGetSingleValuedLinkText() throws Exception {
@@ -62,23 +68,24 @@ public class CrossRefTest extends AbstractGeneratorTest {
 		assertEquals("TypeA", type.getName());
 		Type superType = type.getExtends();
 		assertEquals("extends", superType.getName());
-		String linkText = linkingService.getLinkText(superType, LangATestLanguagePackage.Literals.TYPE__EXTENDS, type);
+		String linkText = linkingService.serializeCrossRef(type, grammar.getTypeAccess().getExtendsTypeCrossReference_2_1_0(), superType);
 		assertEquals("^extends", linkText);
 
 		type = superType;
 		superType = type.getExtends();
 		assertTrue(superType.eIsProxy());
-		linkText = linkingService.getLinkText(superType, LangATestLanguagePackage.Literals.TYPE__EXTENDS, type);
+		linkText = linkingService.serializeCrossRef(type, grammar.getTypeAccess().getExtendsTypeCrossReference_2_1_0(), superType);
 		assertEquals("^type", linkText);
 
 		type.eAdapters().remove(NodeUtil.getNodeAdapter(type));
-		linkText = linkingService.getLinkText(superType, LangATestLanguagePackage.Literals.TYPE__EXTENDS, type);
+		linkText = linkingService.serializeCrossRef(type, grammar.getTypeAccess().getExtendsTypeCrossReference_2_1_0(), superType);
 		assertNull(linkText);
 	}
 
 	public void testGetMultiValuedLinkText() throws Exception {
 		with(LazyLinkingTestLanguageStandaloneSetup.class);
-		linkingService = (DefaultLinkingService) get(ILinkingService.class);
+		linkingService =  get(ICrossReferenceSerializer.class);
+		LazyLinkingTestLanguageGrammarAccess g =  (LazyLinkingTestLanguageGrammarAccess) get(IGrammarAccess.class);
 
 		XtextResource r = getResourceFromStringAndExpect("type TypeA {} type TypeB { TypeA TypeC TypeB p1; }", 1);
 		Model model = (Model) r.getContents().get(0);
@@ -94,23 +101,23 @@ public class CrossRefTest extends AbstractGeneratorTest {
 
 		org.eclipse.xtext.linking.lazy.lazyLinking.Type propType = prop.getType().get(0);
 		assertFalse(propType.eIsProxy());
-		String linkText = linkingService.getLinkText(propType, LazyLinkingPackage.Literals.PROPERTY__TYPE, prop);
+		String linkText = linkingService.serializeCrossRef(prop,g.getPropertyAccess().getTypeTypeCrossReference_0_0(), propType);
 		assertEquals("TypeA", linkText);
 
 		propType = prop.getType().get(1);
 		assertTrue(propType.eIsProxy());
-		linkText = linkingService.getLinkText(propType, LazyLinkingPackage.Literals.PROPERTY__TYPE, prop);
+		linkText = linkingService.serializeCrossRef(prop,g.getPropertyAccess().getTypeTypeCrossReference_0_0(), propType);
 		assertEquals("TypeC", linkText);
 
 		propType = prop.getType().get(2);
 		assertFalse(propType.eIsProxy());
-		linkText = linkingService.getLinkText(propType, LazyLinkingPackage.Literals.PROPERTY__TYPE, prop);
+		linkText = linkingService.serializeCrossRef(prop,g.getPropertyAccess().getTypeTypeCrossReference_0_0(), propType);
 		assertEquals("TypeB", linkText);
 
 		prop.eAdapters().remove(NodeUtil.getNodeAdapter(prop));
 		propType = prop.getType().get(1);
 		assertTrue(propType.eIsProxy());
-		linkText = linkingService.getLinkText(propType, LazyLinkingPackage.Literals.PROPERTY__TYPE, prop);
+		linkText = linkingService.serializeCrossRef(prop,g.getPropertyAccess().getTypeTypeCrossReference_0_0(), propType);
 		assertNull(linkText);
 	}
 
@@ -124,7 +131,7 @@ public class CrossRefTest extends AbstractGeneratorTest {
 		assertEquals("TypeA", type.getName());
 		Type superType = type.getExtends();
 		assertEquals("TypeB", superType.getName());
-		String linkText = linkingService.getLinkText(superType, LangATestLanguagePackage.Literals.TYPE__EXTENDS, type);
+		String linkText = linkingService.serializeCrossRef(type, grammar.getTypeAccess().getExtendsTypeCrossReference_2_1_0(), superType);
 		assertEquals("^TypeB", linkText);
 	}
 
@@ -137,8 +144,18 @@ public class CrossRefTest extends AbstractGeneratorTest {
 		Type superType = type.getExtends();
 		superType.setName("TypeC");
 
-		String linkText = linkingService.getLinkText(superType, LangATestLanguagePackage.Literals.TYPE__EXTENDS, type);
+		String linkText = linkingService.serializeCrossRef(type, grammar.getTypeAccess().getExtendsTypeCrossReference_2_1_0(), superType);
 		assertEquals("TypeC", linkText);
+	}
+	
+	/* see https://bugs.eclipse.org/bugs/show_bug.cgi?id=298506 */
+	public void testCrossReferenceValueConverter() throws Exception {
+		Resource r = get(XtextResourceSet.class).createResource(URI.createURI("test." + getCurrentFileExtension()));
+		Type ele = LangATestLanguageFactory.eINSTANCE.createType();
+		r.getContents().add(ele);
+		ele.setName("type");
+		ele.setExtends(ele);
+		assertEquals("type ^type extends ^type", getSerializer().serialize(ele));
 	}
 
 }

@@ -30,15 +30,4 @@ public interface ILinkingService {
 	 */
 	List<EObject> getLinkedObjects(EObject context, EReference reference, AbstractNode node)
 			throws IllegalNodeException;
-
-	/**
-	 * Returns the textual representation of a given object as it would be
-	 * serialized in the given context.
-	 * 
-	 * @param object
-	 * @param reference
-	 * @param context
-	 * @return the text representation.
-	 */
-	String getLinkText(EObject object, EReference reference, EObject context);
 }
