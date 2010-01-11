@@ -20,6 +20,7 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.EnumRule;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
@@ -32,6 +33,7 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.parsetree.reconstr.IUnassignedTextSerializer;
 import org.eclipse.xtext.parsetree.reconstr.XtextSerializationException;
+import org.eclipse.xtext.util.EmfFormatter;
 
 import com.google.inject.Inject;
 
@@ -220,37 +222,41 @@ public abstract class AbstractParseTreeConstructor implements
 			if (type == null)
 				return null;
 			switch (type) {
-			case CR:
-				return crossRefSerializer.serializeCrossRef(current,
-						(CrossReference) element, (EObject) value);
-			case KW:
-				return ((Keyword) element).getValue();
-			case LRC:
-				return converterService.toString(value, ((RuleCall) element)
-						.getRule().getName());
-			case ERC:
-				EnumRule rule = (EnumRule) ((RuleCall) element).getRule();
-				if (rule.getAlternatives() instanceof EnumLiteralDeclaration) {
-					EnumLiteralDeclaration decl = (EnumLiteralDeclaration) rule
-							.getAlternatives();
-					return decl.getLiteral().getValue();
-				} else {
-					for (AbstractElement element : ((Alternatives) rule
-							.getAlternatives()).getGroups()) {
-						EnumLiteralDeclaration decl = (EnumLiteralDeclaration) element;
-						if (decl.getEnumLiteral().getInstance().equals(value)) {
-							return decl.getLiteral().getValue();
-						}
+				case CR:
+					String ref = crossRefSerializer.serializeCrossRef(current.getDelegate(), (CrossReference) element,
+							(EObject) value);
+					if (ref == null) {
+						Assignment ass = GrammarUtil.containingAssignment(element);
+						throw new XtextSerializationException("Could not serialize cross reference from "
+								+ EmfFormatter.objPath(current.getDelegate()) + "." + ass.getFeature() + " to "
+								+ EmfFormatter.objPath((EObject) value));
 					}
+					return ref;
+				case KW:
+					return ((Keyword) element).getValue();
+				case LRC:
+					return converterService.toString(value, ((RuleCall) element).getRule().getName());
+				case ERC:
+					EnumRule rule = (EnumRule) ((RuleCall) element).getRule();
+					if (rule.getAlternatives() instanceof EnumLiteralDeclaration) {
+						EnumLiteralDeclaration decl = (EnumLiteralDeclaration) rule.getAlternatives();
+						return decl.getLiteral().getValue();
+					} else {
+						for (AbstractElement element : ((Alternatives) rule.getAlternatives()).getGroups()) {
+							EnumLiteralDeclaration decl = (EnumLiteralDeclaration) element;
+							if (decl.getEnumLiteral().getInstance().equals(value)) {
+								return decl.getLiteral().getValue();
+							}
+						}
+						return null;
+					}
+				case PRC:
 					return null;
-				}
-			case PRC:
-				return null;
-			case DRC:
-				ParserRule p = (ParserRule) ((RuleCall) element).getRule();
-				return converterService.toString(value, p.getName());
-			default:
-				return null;
+				case DRC:
+					ParserRule p = (ParserRule) ((RuleCall) element).getRule();
+					return converterService.toString(value, p.getName());
+				default:
+					return null;
 			}
 		}
 	}

@@ -22,7 +22,6 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.xmi.impl.EcoreResourceFactoryImpl;
 import org.eclipse.xtext.AbstractMetamodelDeclaration;
-import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
@@ -40,7 +39,6 @@ import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.resource.ClasspathUriResolutionException;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.util.SimpleAttributeResolver;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -52,14 +50,11 @@ public class XtextLinkingService extends DefaultLinkingService {
 
 	private static Logger log = Logger.getLogger(XtextLinkingService.class);
 
-	private final SimpleAttributeResolver<EObject, String> aliasResolver;
-
 	@Inject
 	private IValueConverterService valueConverterService;
 
 	public XtextLinkingService() {
 		super();
-		aliasResolver = SimpleAttributeResolver.newResolver(String.class, "alias");
 	}
 
 	@Override
@@ -142,9 +137,8 @@ public class XtextLinkingService extends DefaultLinkingService {
 
 	private String getMetamodelNsURI(LeafNode text) {
 		try {
-			return (String) valueConverterService.toValue(text.getText(),
-					getRuleNameFrom(text.getGrammarElement()), text);
-//					"STRING", text);
+			return (String) valueConverterService.toValue(text.getText(), linkingHelper.getRuleNameFrom(text
+					.getGrammarElement()), text);
 		} catch (ValueConverterException e) {
 			log.debug("Exception on leaf '" + text.getText() + "'", e);
 			return null;
@@ -227,19 +221,6 @@ public class XtextLinkingService extends DefaultLinkingService {
 			}
 		}
 		return Collections.emptyList();
-	}
-
-	@Override
-	protected String getUnconvertedLinkText(EObject object, EReference reference, EObject context) {
-		if (reference == XtextPackage.eINSTANCE.getGrammar_UsedGrammars())
-			return ((Grammar) object).getName();
-		if (reference == XtextPackage.eINSTANCE.getTypeRef_Metamodel())
-			return aliasResolver.getValue(object);
-		if (reference == XtextPackage.eINSTANCE.getAbstractMetamodelDeclaration_EPackage())
-			return ((EPackage) object).getNsURI();
-		if (object instanceof AbstractRule)
-			return ((AbstractRule) object).getName();
-		return super.getUnconvertedLinkText(object, reference, context);
 	}
 
 }

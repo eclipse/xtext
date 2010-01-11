@@ -144,8 +144,8 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 	protected void replaceLinker(XtextResource resource) {
 		Linker linker = new Linker();
 		DefaultLinkingService linkingService = new DefaultLinkingService();
+		getInjector().injectMembers(linkingService);
 		linkingService.setScopeProvider(this);
-		linkingService.setValueConverter(getValueConverterService());
 		linker.setLinkingService(linkingService);
 		resource.setLinker(linker);
 	}
