@@ -56,10 +56,6 @@ public class LazyLinkingResourceTest extends TestCase {
                     throws IllegalNodeException {
                 return Lists.newArrayList(referencedObject);
             }
-
-            public String getLinkText(EObject object, EReference reference, EObject context) {
-                throw new UnsupportedOperationException();
-            }
         });
 
         assertEquals(referencedObject, res.getEObject("foo"));
