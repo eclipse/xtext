@@ -62,7 +62,7 @@ public class EcoreDslLinkingService extends DefaultLinkingService {
 	private String getMetamodelNsURI(LeafNode text) {
 		try {
 			return (String) valueConverterService.toValue(text.getText(),
-					linkingHelper.getRuleNameFrom(text.getGrammarElement()), text);
+					getLinkingHelper().getRuleNameFrom(text.getGrammarElement()), text);
 		} catch (ValueConverterException e) {
 			log.debug("Exception on leaf '" + text.getText() + "'", e);
 			return null;
