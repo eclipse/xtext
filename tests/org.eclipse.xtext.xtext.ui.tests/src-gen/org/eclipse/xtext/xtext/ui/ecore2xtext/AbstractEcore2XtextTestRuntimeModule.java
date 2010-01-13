@@ -73,4 +73,9 @@ public abstract class AbstractEcore2XtextTestRuntimeModule extends DefaultRuntim
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.ecore2xtext.Ecore2XtextValueConverterServiceFragment
+	public Class<? extends org.eclipse.xtext.conversion.IValueConverterService> bindIValueConverterService() {
+		return org.eclipse.xtext.common.services.Ecore2XtextTerminalConverters.class;
+	}
+
 }

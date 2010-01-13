@@ -39,11 +39,14 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 	@Override
 	public void addPages() {
 		super.addPages();
-		mainPage = new WizardNewXtextProjectCreationPage("mainPage", this.selection); //$NON-NLS-1$
+		mainPage = new WizardNewXtextProjectCreationPage("mainPage", this.selection, getDefaultConfigName()); //$NON-NLS-1$
 		addPage(mainPage);
 	}
 
-
+	protected String getDefaultConfigName() {
+		return "Standard";
+	}
+	
 	@Override
 	protected IProjectInfo getProjectInfo() {
 		XtextProjectInfo projectInfo = createProjectInfo();
