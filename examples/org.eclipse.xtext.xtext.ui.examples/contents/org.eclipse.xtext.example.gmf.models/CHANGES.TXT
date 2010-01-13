@@ -1,0 +1,14 @@
+gmfgen:
+- GenEditorGenerator:
+	Dynamic Templates -> true
+	Template Directory -> "org.eclipse.xtext.example.gmf.models/templates"
+- GenPlugin
+	Printing Enabled -> true
+	Required Plugins -> "org.eclipse.xtext.gmf.glue" 
+- GenDiagram 
+	Validation Decorators -> true
+	Validation Enabled -> true
+	
+GMF codegen templates:
+- Added template aspect to add XtextNodeModelReconciler on new DiagramEditingDomain
+

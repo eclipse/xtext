@@ -1,0 +1,31 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.eclipse.xtext.example.gmf
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0
+Bundle-SymbolicName: org.eclipse.xtext.example.gmf; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext,
+ org.eclipse.xtext.generator;resolution:=optional,
+ de.itemis.xtext.antlr;resolution:=optional,
+ org.apache.commons.logging;resolution:=optional,
+ org.eclipse.emf.codegen.ecore;resolution:=optional,
+ org.eclipse.emf.mwe.utils;resolution:=optional,
+ org.eclipse.emf.mwe.core;resolution:=optional,
+ com.ibm.icu;resolution:=optional,
+ org.eclipse.xtext.xtend;resolution:=optional,
+ org.eclipse.xtext.util,
+ org.eclipse.emf.ecore,
+ org.eclipse.emf.common,
+ org.antlr.runtime
+Import-Package: org.apache.log4j
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipse.xtext.example.gmf,
+ org.eclipse.xtext.example.gmf.services,
+ org.eclipse.xtext.example.gmf.entities,
+ org.eclipse.xtext.example.gmf.entities.impl,
+ org.eclipse.xtext.example.gmf.entities.util,
+ org.eclipse.xtext.example.gmf.parseTreeConstruction,
+ org.eclipse.xtext.example.gmf.parser.antlr,
+ org.eclipse.xtext.example.gmf.parser.antlr.internal,
+ org.eclipse.xtext.example.gmf.validation
