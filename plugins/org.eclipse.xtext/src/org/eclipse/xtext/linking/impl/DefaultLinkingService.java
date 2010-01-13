@@ -33,13 +33,13 @@ import com.google.inject.Provider;
 public class DefaultLinkingService extends AbstractLinkingService {
 
 	@Inject
-	protected IScopeProvider scopeProvider;
+	private IScopeProvider scopeProvider;
 
 	@Inject
-	protected Provider<ImportedNamesAdapter> importedNamesAdapterProvider;
+	private Provider<ImportedNamesAdapter> importedNamesAdapterProvider;
 	
 	@Inject 
-	protected LinkingHelper linkingHelper;
+	private LinkingHelper linkingHelper;
 
 	protected IScope getScope(EObject context, EReference reference) {
 		if (getScopeProvider() == null)
@@ -120,6 +120,10 @@ public class DefaultLinkingService extends AbstractLinkingService {
 
 	public IScopeProvider getScopeProvider() {
 		return scopeProvider;
+	}
+
+	protected LinkingHelper getLinkingHelper() {
+		return linkingHelper;
 	}
 
 }
