@@ -3,9 +3,9 @@
  */
 package org.eclipse.xtext.example.gmf;
 
+import org.eclipse.xtext.example.gmf.resource.QualifiedNameFragmentProvider;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.resource.IFragmentProvider;
-import org.eclipse.xtext.resource.QualifiedNameFragmentProvider;
 
 /**
  * Use this class to register components to be used within the IDE.
