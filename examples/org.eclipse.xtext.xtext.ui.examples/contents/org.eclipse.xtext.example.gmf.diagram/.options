@@ -1,0 +1,7 @@
+# Tracing options for the org.eclipse.xtext.example.gmf.diagram plug-in
+
+# Common issues
+org.eclipse.xtext.example.gmf.diagram/debug=false
+
+# Visual IDs
+org.eclipse.xtext.example.gmf.diagram/debug/visualID=false
