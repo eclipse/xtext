@@ -25,6 +25,7 @@ import org.eclipse.xtext.util.OnChangeEvictingCacheAdapter;
 
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
@@ -40,7 +41,7 @@ public class DefaultGlobalScopeProvider extends AbstractGlobalScopeProvider {
 	
 	public IScope getScope(final EObject context, EReference reference) {
 		IScope result = IScope.NULLSCOPE;
-		List<IContainer> containers = getVisibleContainers(context);
+		List<IContainer> containers = Lists.newArrayList(getVisibleContainers(context));
 		Collections.reverse(containers);
 		Iterator<IContainer> iter = containers.iterator();
 		while (iter.hasNext()) {
