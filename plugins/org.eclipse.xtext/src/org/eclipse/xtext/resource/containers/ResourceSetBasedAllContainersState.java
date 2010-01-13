@@ -8,7 +8,6 @@
 package org.eclipse.xtext.resource.containers;
 
 import java.util.Collection;
-import java.util.Collections;
 import java.util.List;
 import java.util.Set;
 
@@ -34,10 +33,7 @@ public class ResourceSetBasedAllContainersState implements IAllContainersState {
 	}
 
 	public List<String> getVisibleContainerHandles(String handle) {
-		int indexOf = containers.indexOf(handle);
-		if (indexOf!=-1)
-			return containers.subList(indexOf, containers.size());
-		return Collections.emptyList();
+		return containers;
 	}
 
 	public Collection<URI> getContainedURIs(String containerHandle) {

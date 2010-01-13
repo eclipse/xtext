@@ -3,3 +3,4 @@ entity Person {
   Boolean isMale
   Person father
 }
+datatype Boolean
