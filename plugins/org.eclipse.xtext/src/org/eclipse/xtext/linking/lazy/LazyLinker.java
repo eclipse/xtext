@@ -11,7 +11,7 @@ import java.util.Collection;
 import java.util.List;
 import java.util.Set;
 
-import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.AbstractEList;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
@@ -139,7 +139,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 	protected void createAndSetProxy(EObject obj, AbstractNode abstractNode, EReference eRef) {
 		final EObject proxy = createProxy(obj, abstractNode, eRef);
 		if (eRef.isMany()) {
-			((BasicEList<EObject>) obj.eGet(eRef, false)).addUnique(proxy);
+			((AbstractEList<EObject>) obj.eGet(eRef, false)).addUnique(proxy);
 		} else {
 			obj.eSet(eRef, proxy);
 		}
