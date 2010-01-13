@@ -157,7 +157,7 @@ public abstract class AbstractKeywordsUiTestLanguageUiModule extends KeywordsUiT
 		binder.bind(org.eclipse.xtext.parser.antlr.ITokenDefProvider.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.core.LexerUIBindings.HIGHLIGHTING)).to(org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class);
 	}
 
-	// contributed by org.eclipse.xtext.ui.common.SimpleLabelProviderFragment
+	// contributed by org.eclipse.xtext.ui.junit.editor.outline.SimpleLabelProviderFragment
 	public Class<? extends org.eclipse.jface.viewers.ILabelProvider> bindILabelProvider() {
 		return org.eclipse.xtext.ui.core.SimpleLabelProvider.class;
 	}

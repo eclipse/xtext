@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.common;
+package org.eclipse.xtext.ui.junit.editor.outline;
 
 import java.util.Set;
 

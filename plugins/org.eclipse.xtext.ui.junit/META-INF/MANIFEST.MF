@@ -8,7 +8,9 @@ Bundle-Vendor: Eclipse Modeling Project
 Require-Bundle: org.eclipse.core.runtime,
  org.eclipse.xtext.junit;bundle-version="0.8.0";visibility:=reexport,
  org.eclipse.xtext.ui.core;bundle-version="0.8.0",
- org.eclipse.xtext.ui.common;bundle-version="0.8.0"
+ org.eclipse.xtext.ui.common;bundle-version="0.8.0",
+ org.eclipse.xtext.generator;bundle-version="0.8.0"
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Export-Package: org.eclipse.xtext.ui.junit.editor.contentassist
+Export-Package: org.eclipse.xtext.ui.junit.editor.contentassist,
+ org.eclipse.xtext.ui.junit.editor.outline
