@@ -137,7 +137,7 @@ public class XtextLinkingService extends DefaultLinkingService {
 
 	private String getMetamodelNsURI(LeafNode text) {
 		try {
-			return (String) valueConverterService.toValue(text.getText(), linkingHelper.getRuleNameFrom(text
+			return (String) valueConverterService.toValue(text.getText(), getLinkingHelper().getRuleNameFrom(text
 					.getGrammarElement()), text);
 		} catch (ValueConverterException e) {
 			log.debug("Exception on leaf '" + text.getText() + "'", e);
