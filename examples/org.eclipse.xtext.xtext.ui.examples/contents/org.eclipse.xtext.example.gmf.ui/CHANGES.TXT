@@ -1,0 +1,2 @@
+- Export activator package
+- bind ResourceForResourceWorkingCopyEditorInputFactory 

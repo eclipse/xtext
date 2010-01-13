@@ -1,0 +1,16 @@
+Lots of classes in org.eclipse.xtext.example.gmf.diagram.edit.part
+
+Activator:
+- Workaround for bug http://bugs.eclipse.org/bugs/show_bug.cgi?id=281014
+
+MANIFEST.MF:
+- Added dependencies to 
+	org.eclipse.gmf.runtime.diagram.core
+	org.eclipse.xtext.example.gmf.diagram
+	org.eclipse.gmf.runtime.diagram.ui
+	org.eclipse.xtext.example.gmf.ui
+	com.google.guice
+	
+plugin.xml
+- Added EditPartProvider
+

@@ -1,0 +1,21 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: org.eclipse.xtext.example.gmf.ui
+Bundle-Vendor: My Company
+Bundle-Version: 1.0.0
+Bundle-SymbolicName: org.eclipse.xtext.example.gmf.ui; singleton:=true
+Bundle-ActivationPolicy: lazy
+Require-Bundle: org.eclipse.xtext.example.gmf;visibility:=reexport,
+ org.eclipse.xtext.ui.core,
+ org.eclipse.xtext.ui.common,
+ org.eclipse.ui.editors;bundle-version="3.5.0",
+ org.eclipse.ui.ide;bundle-version="3.5.0",
+ org.eclipse.ui,
+ org.antlr.runtime,
+ org.eclipse.xtext.builder
+Import-Package: org.apache.log4j
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Export-Package: org.eclipse.xtext.example.gmf.contentassist,
+ org.eclipse.xtext.example.gmf.contentassist.antlr,
+ org.eclipse.xtext.example.gmf.internal
+Bundle-Activator: org.eclipse.xtext.example.gmf.internal.EntitiesActivator

@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<gmftool:ToolRegistry xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:gmftool="http://www.eclipse.org/gmf/2005/ToolDefinition">
+  <palette
+      title="entitiesPalette">
+    <tools
+        xsi:type="gmftool:ToolGroup"
+        title="entities">
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="Entity"
+          description="Create new Entity">
+        <smallIcon
+            xsi:type="gmftool:DefaultImage"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="SimpleType"
+          description="Create new SimpleType">
+        <smallIcon
+            xsi:type="gmftool:DefaultImage"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="SuperType"
+          description="Create new SuperType">
+        <smallIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/Generalization.gif"
+            bundle="org.eclipse.xtext.example.gmf.edit"/>
+        <largeIcon
+            xsi:type="gmftool:BundleImage"
+            path="icons/full/obj16/Generalization.gif"
+            bundle="org.eclipse.xtext.example.gmf.edit"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="SimpleProperty"
+          description="Create new SimpleProperty">
+        <smallIcon
+            xsi:type="gmftool:DefaultImage"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+      <tools
+          xsi:type="gmftool:CreationTool"
+          title="ReferenceProperty"
+          description="Create new ReferenceProperty">
+        <smallIcon
+            xsi:type="gmftool:DefaultImage"/>
+        <largeIcon
+            xsi:type="gmftool:DefaultImage"/>
+      </tools>
+    </tools>
+  </palette>
+</gmftool:ToolRegistry>

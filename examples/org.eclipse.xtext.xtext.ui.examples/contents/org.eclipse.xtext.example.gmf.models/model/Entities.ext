@@ -1,0 +1,26 @@
+import gmfgen;
+import ecore;
+
+// transforms the given GMFGenModel
+List[emf::EObject] transform(List[emf::EObject] gmfGenModelContents) :
+   let contents = gmfGenModelContents.eAllContents.addAll(gmfGenModelContents) :
+   	contents.internalTransform() ->
+   gmfGenModelContents;
+ 
+internalTransform(GenEditorGenerator this) :
+	setDomainGenModel(diagram.domainDiagramElement.genPackage.genModel)->
+	setDomainFileExtension("entities") ->
+	setDynamicTemplates(true) ->
+	setTemplateDirectory("org.xtext.examples.entities.gmf/templates");
+ 
+internalTransform(GenPlugin this) :
+	setPrintingEnabled(true) ->
+	requiredPlugins.addAll({"org.xtext.example.entities", "org.eclipse.xtext.gmf.glue"}); 
+
+internalTransform(GenDiagram this) :
+	setValidationDecorators(true) ->
+	setValidationEnabled(true);
+	
+internalTransform(emf::EObject this) :
+	{};
+	
