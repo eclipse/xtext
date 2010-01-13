@@ -197,6 +197,11 @@ public class ReaderTest extends AbstractXtextTests {
 		entry2.setSlot("stringTypes");
 		entry2.setName("String");
 		reader.addLoad(entry2);
+		SlotEntry entry3 = new SlotEntry();
+		entry3.setType("Datatype");
+		entry3.setSlot("booleanTypes");
+		entry3.setName("Boolean");
+		reader.addLoad(entry3);
 		
 		WorkflowContext ctx = ctx();
 		Issues issues = issues();
@@ -207,31 +212,35 @@ public class ReaderTest extends AbstractXtextTests {
 			throw e;
 		}
 		List<Entity> entities = (List<Entity>) ctx.get(entry.getSlot());
-		List<Datatype> datatypes = (List<Datatype>) ctx.get(entry2.getSlot());
+		List<Datatype> stringTypes = (List<Datatype>) ctx.get(entry2.getSlot());
+		List<Datatype> booleanTypes = (List<Datatype>) ctx.get(entry3.getSlot());
 		
 		assertEquals(3,entities.size());
-		assertEquals(2,datatypes.size());
+		assertEquals(2,stringTypes.size());
+		assertEquals(2,booleanTypes.size());
 		
 		Entity ent1 = Iterables.find(entities, getPredicate("1"));
 		Entity ent2 = Iterables.find(entities, getPredicate("2"));
 		Entity ent3 = Iterables.find(entities, getPredicate("3"));
-		Datatype string2 = Iterables.find(datatypes, getPredicate("2"));
-		Datatype string3 = Iterables.find(datatypes, getPredicate("3"));
+		Datatype string2 = Iterables.find(stringTypes, getPredicate("2"));
+		Datatype string3 = Iterables.find(stringTypes, getPredicate("3"));
+		Datatype bool1 = Iterables.find(booleanTypes, getPredicate("1"));
+		Datatype bool2 = Iterables.find(booleanTypes, getPredicate("2"));
 		
 		assertEquals(string2,ent1.getProperties().get(0).getType());
-		assertFalse(ent1.getProperties().get(1).getType().eIsProxy());
+		assertEquals(bool1, ent1.getProperties().get(1).getType());
 		assertEquals(ent1,ent1.getProperties().get(2).getType());
-		
+
 		assertEquals(string2,ent2.getProperties().get(0).getType());
-		assertFalse(ent2.getProperties().get(1).getType().eIsProxy());
+		assertEquals(bool2, ent2.getProperties().get(1).getType());
 		assertEquals(ent2,ent2.getProperties().get(2).getType());
 		
 		assertEquals(string3,ent3.getProperties().get(0).getType());
-		assertTrue(ent3.getProperties().get(1).getType().eIsProxy());
+		assertEquals(bool1, ent3.getProperties().get(1).getType());
 		assertEquals(ent3,ent3.getProperties().get(2).getType());
+		
 	}
-
-
+	
 	private Predicate<EObject> getPredicate(final String uriContains) {
 		return new Predicate<EObject>() {
 			public boolean apply(EObject input) {
