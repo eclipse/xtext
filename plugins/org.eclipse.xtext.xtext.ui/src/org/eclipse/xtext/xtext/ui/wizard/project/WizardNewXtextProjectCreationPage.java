@@ -46,6 +46,7 @@ public final class WizardNewXtextProjectCreationPage extends WizardNewProjectCre
 	private Text extensionsField;
 	private Button generatorProjectField;
 	private Combo generatorConfigurationField;
+	private Object defaultConfigurationName;
 	
 	/**
 	 * Constructs a new WizardNewXtextProjectCreationPage.
@@ -57,9 +58,10 @@ public final class WizardNewXtextProjectCreationPage extends WizardNewProjectCre
 	 *            The current selection. If the current selection includes workingsets the workingsets field is
 	 *            initialized with the selection.
 	 */
-	public WizardNewXtextProjectCreationPage(String pageName, IStructuredSelection selection) {
+	public WizardNewXtextProjectCreationPage(String pageName, IStructuredSelection selection, String defaultConfigurationName) {
 		super(pageName);
 		this.selection = selection;
+		this.defaultConfigurationName = defaultConfigurationName;
 		setTitle(Messages.WizardNewXtextProjectCreationPage_WindowTitle);
 		setDescription(Messages.WizardNewXtextProjectCreationPage_Description);
 	}
@@ -106,8 +108,8 @@ public final class WizardNewXtextProjectCreationPage extends WizardNewProjectCre
 		}
 	}
 
-	public static int indexOfDefault(List<String> contributions) {
-		int indexOf = contributions.indexOf("Standard");
+	private int indexOfDefault(List<String> contributions) {
+		int indexOf = contributions.indexOf(defaultConfigurationName);
 		return indexOf != -1 ? indexOf : 0;
 	}
 

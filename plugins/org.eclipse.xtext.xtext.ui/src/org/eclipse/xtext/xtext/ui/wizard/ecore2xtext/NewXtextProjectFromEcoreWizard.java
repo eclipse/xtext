@@ -39,6 +39,11 @@ public class NewXtextProjectFromEcoreWizard extends NewXtextProjectWizard {
 	}
 	
 	@Override
+	protected String getDefaultConfigName() {
+		return "Ecore2Xtext";
+	}
+	
+	@Override
 	protected IProjectInfo getProjectInfo() {
 		Ecore2XtextProjectInfo projectInfo = (Ecore2XtextProjectInfo) super.getProjectInfo();
 		projectInfo.setEPackagesForRules(ePackageSelectionPage.getEPackagesForRules());
@@ -51,5 +56,7 @@ public class NewXtextProjectFromEcoreWizard extends NewXtextProjectWizard {
 	protected XtextProjectInfo createProjectInfo() {
 		return new Ecore2XtextProjectInfo();
 	}
+	
+	
 
 }

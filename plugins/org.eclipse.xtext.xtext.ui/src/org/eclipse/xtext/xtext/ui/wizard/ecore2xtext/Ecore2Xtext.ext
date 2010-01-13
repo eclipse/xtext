@@ -14,13 +14,16 @@ Collection[EPackage] allImportedEPackages(Ecore2XtextProjectInfo this) :
 	EPackagesForRules.allReferencedEPackages(true).flatten().toSet();
 
 Collection[EClassifier] allRuleClassifiers(Ecore2XtextProjectInfo this) :
-	EPackagesForRules.allReferencedClassifiers(false).flatten().toSet().remove(rootElementClass);
+	EPackagesForRules.allReferencedClassifiers(false).flatten().toSet();
 
 private Collection[EPackage] allReferencedEPackages(EPackage this, boolean includeCrossRefs) :	
 	allReferencedClassifiers(includeCrossRefs).EPackage.toSet();
 
 private Collection[EClassifier] allReferencedClassifiers(EPackage this, boolean includeCrossRefs) :
-	EClassifiers.union(EClassifiers.typeSelect(EClass).EAllStructuralFeatures.select(f|f.needsAssignment() && (includeCrossRefs || f.isContainment())).EType.flatten()).toSet();
+	EClassifiers.union(EClassifiers.typeSelect(EClass).EAllStructuralFeatures.select(f|f.needsAssignment() && (includeCrossRefs || f.isContainment())).EType.flatten()).add(eString()).toSet();
+	
+EClassifier eString() :
+	JAVA org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.eString();
 	
 String importURI(EPackage this) :
 	JAVA org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.importURI(org.eclipse.emf.ecore.EPackage);
@@ -35,7 +38,7 @@ String uniqueName(ENamedElement this):
 	 JAVA org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.uniqueName(org.eclipse.emf.ecore.ENamedElement);
 
 cached prefixFeatures(EClass this) :
-	EAllStructuralFeatures.select(f|f.needsAssignment() && f.EType.isBoolean());
+	EAllStructuralFeatures.select(f|f.needsAssignment() && f.isPrefixBooleanFeature());
 	
 cached inlinedFeatures(EClass this) :
 	EAllStructuralFeatures.select(f|f.needsAssignment()).remove(idAttribute()).removeAll(prefixFeatures());
@@ -44,14 +47,8 @@ cached onlyOptionalFeatures(EClass this) :
 	prefixFeatures().union(inlinedFeatures()).select(f|f.required).isEmpty;
 		
 assignedRuleCall(EAttribute this):
-	if(EType.isEcoreType()
-		 	&& {'EBoolean' , 'EBooleanObject'}.contains(EAttributeType.name) 
-		 	&& !many) 
-		then 
-		 	"'"+name+"'" 
-		else
-		 	EType.uniqueName();
-		 	
+	(isPrefixBooleanFeature()) ? "'"+name+"'" : EType.uniqueName();
+	
 String dataTypeRuleBody(EDataType this) :
 	switch (name) {
 		case 'EBigDecimal': "INT? '.' INT" 
@@ -87,7 +84,7 @@ booleanRuleBody() :
 	"'true' | 'false'";
 	
 assignmentKeyword(EStructuralFeature this) :
-	EType.isBoolean() ? "" : "'" + name + "' ";  
+	isPrefixBooleanFeature() ? "" : "'" + name + "' ";  
 
 quoteIfNeccesary(String this) :	
 	isXtextKeyword() ? '^' + this : this;
@@ -107,6 +104,9 @@ private idAttributeInternal(EClass this) :
 isBoolean(EClassifier this) :	
 	EDataType.isInstance(this) && {'EBoolean', 'EBooleanObject'}.contains(name) && isEcoreType();
 
+isPrefixBooleanFeature(EStructuralFeature this) :
+	EType.isBoolean() && !many && defaultValueLiteral != "true";
+	
 isString(EClassifier this) :	
 	EDataType.isInstance(this) && name == 'EString' && isEcoreType();
 

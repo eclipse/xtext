@@ -13,6 +13,7 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -22,6 +23,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.xpand2.XpandExecutionContextImpl;
 import org.eclipse.xpand2.XpandFacade;
 import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel;
@@ -32,6 +34,8 @@ import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xtext.ui.OutputStringImpl;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectInfo;
 
+import com.google.common.collect.Lists;
+
 /**
  * @author koehnlein - Initial contribution and API
  */
@@ -40,7 +44,8 @@ public class GrammarGeneratorTest extends AbstractXtextTests {
 	private static final List<String> EXAMPLE_EPACKAGE_NS_URIS = Arrays
 			.asList(new String[] { "http://www.eclipse.org/emf/2002/Ecore",
 					"http://www.eclipse.org/2008/Xtext",
-					"http://simple/formattertestlanguage" });
+					"http://simple/formattertestlanguage",
+					"http://www.w3.org/XML/1998/namespace"});
 
 	private static final List<String> BROKEN_PACKAGE_NS_URIS = Arrays
 			.asList(new String[] { "http://www.eclipse.org/ocl/1.1.0/Ecore" });
@@ -58,13 +63,11 @@ public class GrammarGeneratorTest extends AbstractXtextTests {
 		checkGeneratedGrammarIsValid(EXAMPLE_EPACKAGE_NS_URIS);
 	}
 
-	/*
 	// Smoke test 
 	public void testAllEPackagesFromRegistry() throws IOException {
 		checkGeneratedGrammarIsValid(Lists
 				.newArrayList(EPackage.Registry.INSTANCE.keySet()));
 	}
-	*/
 	
 	private void checkGeneratedGrammarIsValid(List<String> ePackageURIs)
 			throws IOException {
@@ -96,8 +99,7 @@ public class GrammarGeneratorTest extends AbstractXtextTests {
 				Resource xtextResource = resourceSet.createResource(URI
 						.createFileURI(grammarFileName));
 				xtextResource.load(new StringInputStream(xtextGrammar), null);
-				assertTrue("Errors in grammar for " + ePackage.getNsURI(),
-						xtextResource.getErrors().isEmpty());
+				checkErrors(ePackage, xtextResource, xtextGrammar);
 				if (!WARNING_PACKAGE_NS_URIS.contains(ePackage.getNsURI())) {
 					assertTrue(
 							"Warnings in grammar for " + ePackage.getNsURI(),
@@ -108,6 +110,14 @@ public class GrammarGeneratorTest extends AbstractXtextTests {
 		}
 	}
 
+	private void checkErrors(EPackage ePackage, Resource xtextResource, String xtextGrammar) {
+		EList<Diagnostic> errors = xtextResource.getErrors();
+		if(!errors.isEmpty()) {
+			System.out.println(xtextGrammar);
+			fail("Errors in grammar for " + ePackage.getNsURI() + ":" + errors.get(0).getMessage());
+		}
+	}
+	
 	private boolean addImportedEPackages(EPackage ePackage,
 			Set<EPackage> importedEPackages) {
 		if (BROKEN_PACKAGE_NS_URIS.contains(ePackage.getNsURI())) {

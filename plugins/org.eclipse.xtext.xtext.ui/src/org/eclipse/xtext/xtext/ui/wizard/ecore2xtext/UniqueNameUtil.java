@@ -13,8 +13,10 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.util.Strings;
 
@@ -61,5 +63,9 @@ public class UniqueNameUtil {
 			}
 		}
 		return ePackage.getNsURI();
+	}
+	
+	public static EClassifier eString() {
+		return EcorePackage.eINSTANCE.getEString();
 	}
 }
