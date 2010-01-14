@@ -63,11 +63,13 @@ public class GrammarGeneratorTest extends AbstractXtextTests {
 		checkGeneratedGrammarIsValid(EXAMPLE_EPACKAGE_NS_URIS);
 	}
 
+	/*
 	// Smoke test 
 	public void testAllEPackagesFromRegistry() throws IOException {
 		checkGeneratedGrammarIsValid(Lists
 				.newArrayList(EPackage.Registry.INSTANCE.keySet()));
 	}
+	*/
 	
 	private void checkGeneratedGrammarIsValid(List<String> ePackageURIs)
 			throws IOException {
