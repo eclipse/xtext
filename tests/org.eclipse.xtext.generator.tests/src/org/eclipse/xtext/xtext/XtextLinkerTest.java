@@ -9,7 +9,7 @@
 package org.eclipse.xtext.xtext;
 
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.xtext.GeneratedMetamodel;
+import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
@@ -20,23 +20,45 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
  *
  */
 public class XtextLinkerTest extends AbstractGeneratorTest {
+
+
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		with(new XtextStandaloneSetup());
 	}
 	
-	public void testPackageRemovedProperly() throws Exception {
-		XtextResource res = getResourceFromStringAndExpect("grammar foo.Bar generate foo 'bar' Model : name=ID;", 1);
-		res.load(null);
+	public void testGeneratedPackageRemovedProperly() throws Exception {
+		String testGrammar = "grammar foo.Bar generate foo 'bar'  Model : name=ID;";
+		checkPackageRemovalAfterGrammarChange(true, testGrammar, testGrammar.indexOf("name"), 4, "foo");
+		checkPackageRemovalAfterGrammarChange(true, testGrammar, testGrammar.indexOf("generate foo") + 11, 1, "x");
+		checkPackageRemovalAfterGrammarChange(true, testGrammar, testGrammar.indexOf("foo.Bar"), 1, "x");
+	}
+
+	public void testImportedPackageRemovedProperly() throws Exception {
+		String testGrammar = "grammar foo.Bar import 'classpath:/org/eclipse/xtext/xtext/Foo.ecore' as foo Model returns foo::Model: name=ID;";
+		// package import not influenced by parser rule change
+		checkPackageRemovalAfterGrammarChange(false, testGrammar, testGrammar.indexOf("name"), 4, "foo");
+		checkPackageRemovalAfterGrammarChange(true, testGrammar, testGrammar.indexOf("as foo") + 4, 1, "x");
+		checkPackageRemovalAfterGrammarChange(true, testGrammar, testGrammar.indexOf("foo.Bar"), 1, "x");
+	}
+
+	private void checkPackageRemovalAfterGrammarChange(boolean isRemoved, String originalGrammar, int offset, int length, String replacement) throws Exception {
+		XtextResource res = getResourceFromStringAndExpect(originalGrammar, 1);
+		res.load(null);  // triggers linking
 		Grammar g = (Grammar) res.getContents().get(0);
-		GeneratedMetamodel genMM = (GeneratedMetamodel) g.getMetamodelDeclarations().get(0);
+		AbstractMetamodelDeclaration  genMM =  g.getMetamodelDeclarations().get(0);
 		EPackage ePackage = genMM.getEPackage();
 		assertEquals(ePackage.eResource().getResourceSet(),res.getResourceSet());
-		res.update(40, 0, "");
-		assertNull(ePackage.eResource().getResourceSet());
+		res.update(offset, length, replacement);
+		if(isRemoved) {
+			assertNull(ePackage.eResource().getResourceSet());
+		} else {
+			assertEquals(ePackage.eResource().getResourceSet(),res.getResourceSet());
+		}
+		g = (Grammar) res.getContents().get(0);
+		genMM = g.getMetamodelDeclarations().get(0);
 		ePackage = genMM.getEPackage();
-		assertEquals(ePackage.eResource().getResourceSet(),res.getResourceSet());
-		
+		assertEquals(res.getResourceSet(), ePackage.eResource().getResourceSet());
 	}
 }
