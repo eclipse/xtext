@@ -1,11 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="org.eclipse.xtext.sdk"
+      id="org.eclipse.xtext.xbase"
       label="%featureName"
       version="0.8.0.qualifier"
-      provider-name="%providerName"
-      plugin="org.eclipse.xtext"
-      image="modeling32.png">
+      provider-name="%providerName">
 
    <description>
       %description
@@ -109,48 +107,18 @@ Everyone is permitted to copy and distribute copies of this Agreement, but in or
 This Agreement is governed by the laws of the State of New York and the intellectual property laws of the United States of America. No party to this Agreement will bring a legal action under this Agreement more than one year after the cause of action arose. Each party waives its rights to a jury trial in any resulting litigation.
    </license>
 
-   <url>
-      <update label="%updateSiteName" url="http://download.eclipse.org/modeling/tmf/updates/"/>
-   </url>
-
-   <includes
-         id="org.eclipse.xtext.runtime"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.xtext.ui"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.xtext.examples"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.xtext.sdk.source"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.xtext.runtime.source"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.xtext.ui.source"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.xtext.examples.source"
-         version="0.0.0"/>
-
-   <includes
-         id="org.eclipse.xtext.docs"
-         version="0.0.0"/>
-
-   <includes
+   <plugin
          id="org.eclipse.xtext.xbase"
-         version="0.0.0"/>
-         
-   <includes
-         id="org.eclipse.xtext.xbase.source"
-         version="0.0.0"/>
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.xbase.ui"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
 
 </feature>
