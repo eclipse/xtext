@@ -1,0 +1,34 @@
+grammar org.eclipse.xtext.xbase.Xtype with org.eclipse.xtext.common.Terminals
+
+import "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore"
+import "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore" as types
+
+TypeRef:
+  SimpleTypeRef|FunctionTypeRef;
+
+FunctionTypeRef:
+  ('(' paramTypes+=TypeRef (',' paramTypes+=TypeRef)* ')')? '=>' returnType+=TypeRef;
+
+SimpleTypeRef:
+  type=[types::Type|QualifiedName] ('<' typeParams+=TypeParam (',' typeParams+=TypeParam)* '>')?;
+
+TypeParam returns TypeRef:
+  TypeRef|WildcardParam;
+
+
+WildcardParam returns TypeRef:
+  {WildcardParam} '?' 
+  (
+   ('extends' extends=TypeRef) |
+   ('super' super=TypeRef)
+  )?;
+
+TypeParamDeclaration:
+  name=ID 
+  (
+   ('extends' extends+=TypeRef ('&' extends+=TypeRef)*) |
+   ('super' super=TypeRef)
+  )?;
+
+QualifiedName:
+  ID ('.' ID)*;

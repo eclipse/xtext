@@ -1,0 +1,24 @@
+grammar org.eclipse.xtext.xbase.Xbase with org.eclipse.xtext.xbase.Xpression
+
+import "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore"
+import "platform:/resource/org.eclipse.xtext.xbase/model/Xpression.ecore" as xpression
+import "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore" as xtype
+
+File  : 	
+	(imports+=Import)*
+	(functions+=Function)*
+;
+
+Import  : 
+	'import' importedNamespace=QualifiedName ('.' wildcard?='*')?
+;
+
+Function  : 
+	( private?='private'|final?='final')* 
+	('<' typeParams+=TypeParamDeclaration (',' typeParams+=TypeParamDeclaration )*'>')?
+	(returnType=TypeRef)? name=ID '(' (declaredParams+=DeclaredParameter (',' declaredParams+=DeclaredParameter )*)? ')'
+		('if' guard=Expression )?
+			(':' expression=Expression ';' | expression=BlockExpression)
+;
+
+

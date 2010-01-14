@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.xbase/emf-gen"
+    editDirectory="" editorDirectory="" modelPluginID="org.eclipse.xtext.xbase" forceOverwrite="true"
+    modelName="Xbase" updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.xbase.edit"
+    editorPluginID="org.eclipse.xtext.xbase.edit" usedGenPackages="../../org.eclipse.xtext.common.types/model/JavaVMTypes.genmodel#//types">
+  <genPackages prefix="Xbase" basePackage="org.eclipse.xtext" disposableProviderFactory="true"
+      ecorePackage="Xbase.ecore#/">
+    <genClasses ecoreClass="Xbase.ecore#//File">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//File/imports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//File/functions"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//Import/importedNamespace"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//Import/wildcard"/>
+    </genClasses>
+    <genClasses ecoreClass="Xbase.ecore#//Function">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//Function/private"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//Function/final"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//Function/typeParams"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//Function/returnType"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xbase.ecore#//Function/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//Function/declaredParams"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//Function/guard"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xbase.ecore#//Function/expression"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Xtype" basePackage="org.eclipse.xtext" ecorePackage="Xtype.ecore#/">
+    <genClasses ecoreClass="Xtype.ecore#//TypeRef"/>
+    <genClasses ecoreClass="Xtype.ecore#//ClosureTypeRef">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtype.ecore#//ClosureTypeRef/paramTypes"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtype.ecore#//ClosureTypeRef/returnType"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtype.ecore#//SimpleTypeRef">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtype.ecore#//SimpleTypeRef/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtype.ecore#//SimpleTypeRef/typeParams"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtype.ecore#//TypeParam"/>
+    <genClasses ecoreClass="Xtype.ecore#//TypeRefParam"/>
+    <genClasses ecoreClass="Xtype.ecore#//WildcardParam">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtype.ecore#//WildcardParam/extends"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtype.ecore#//WildcardParam/super"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtype.ecore#//TypeParamDeclaration">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtype.ecore#//TypeParamDeclaration/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtype.ecore#//TypeParamDeclaration/extends"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtype.ecore#//TypeParamDeclaration/super"/>
+    </genClasses>
+  </genPackages>
+  <genPackages prefix="Xpression" basePackage="org.eclipse.xtext" ecorePackage="Xpression.ecore#/">
+    <genClasses ecoreClass="Xpression.ecore#//Expression"/>
+    <genClasses ecoreClass="Xpression.ecore#//IfExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//IfExpression/if"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//IfExpression/then"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//IfExpression/else"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpression.ecore#//SwitchExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//SwitchExpression/switch"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//SwitchExpression/cases"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//SwitchExpression/default"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpression.ecore#//CasePart">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//CasePart/case"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//CasePart/then"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpression.ecore#//BlockExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//BlockExpression/expressions"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpression.ecore#//VariableDeclaration">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//VariableDeclaration/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpression.ecore#//VariableDeclaration/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//VariableDeclaration/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpression.ecore#//DeclaredParameter">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//DeclaredParameter/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpression.ecore#//DeclaredParameter/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpression.ecore#//FeatureCall">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//FeatureCall/target"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpression.ecore#//FeatureCall/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//FeatureCall/params"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpression.ecore#//ConstructorCall">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//ConstructorCall/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//ConstructorCall/params"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//ConstructorCall/initializer"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpression.ecore#//BooleanLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpression.ecore#//BooleanLiteral/isTrue"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpression.ecore#//NullLiteral"/>
+    <genClasses ecoreClass="Xpression.ecore#//IntLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpression.ecore#//IntLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpression.ecore#//StringLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpression.ecore#//StringLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpression.ecore#//RichString">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//RichString/expressions"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpression.ecore#//RichStringLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpression.ecore#//RichStringLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpression.ecore#//Closure">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//Closure/params"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//Closure/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpression.ecore#//CastedExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//CastedExpression/type"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//CastedExpression/target"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpression.ecore#//Assignment">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//Assignment/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//Assignment/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpression.ecore#//BinaryOperation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//BinaryOperation/left"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpression.ecore#//BinaryOperation/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//BinaryOperation/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Xpression.ecore#//UnaryOperation">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Xpression.ecore#//UnaryOperation/operator"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xpression.ecore#//UnaryOperation/target"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
