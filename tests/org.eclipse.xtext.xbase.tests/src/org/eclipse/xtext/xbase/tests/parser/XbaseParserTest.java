@@ -238,7 +238,7 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 	}
 
 	public void testRichString() throws Exception {
-		RichString rs = (RichString) expression("»Hallo «foo» Welt!«");
+		RichString rs = (RichString) expression("\u00BBHallo \u00ABfoo\u00BB Welt!\u00AB");
 		assertEquals(3, rs.getExpressions().size());
 		assertTrue(rs.getExpressions().get(0) instanceof RichStringLiteral);
 		assertTrue(rs.getExpressions().get(1) instanceof FeatureCall);
