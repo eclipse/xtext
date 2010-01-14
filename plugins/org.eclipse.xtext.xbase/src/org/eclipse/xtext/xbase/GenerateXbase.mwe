@@ -38,11 +38,12 @@
 			<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment" >
 				<options backtrack="true"/>
 			</fragment>
-			<fragment class="org.eclipse.xtext.generator.validation.JavaValidatorFragment">
-                <composedCheck value="org.eclipse.xtext.validation.ImportUriValidator"/>
-            </fragment>
-			<fragment class="org.eclipse.xtext.generator.exporting.QualifiedNamesFragment"/>
+			<fragment class="org.eclipse.xtext.generator.validation.JavaValidatorFragment"/>
+            
+			<fragment class="org.eclipse.xtext.generator.types.TypesGeneratorFragment"/>
+			<fragment class="org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment"/>
 			<fragment class="org.eclipse.xtext.generator.builder.BuilderIntegrationFragment"/>
+			
 			<fragment class="org.eclipse.xtext.generator.formatting.FormatterFragment"/>
 			<fragment class="org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment"/>
 			<fragment class="org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment"/>
