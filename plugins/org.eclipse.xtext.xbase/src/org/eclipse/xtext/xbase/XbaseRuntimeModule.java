@@ -6,13 +6,22 @@ package org.eclipse.xtext.xbase;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.xbase.scoping.DelegatingGlobalScopeProvider;
 
+import com.google.inject.Binder;
+
 /**
  * Use this class to register components to be used within the IDE.
  */
 public class XbaseRuntimeModule extends
 		org.eclipse.xtext.xbase.AbstractXbaseRuntimeModule {
+	
+	@Override
+	public void configure(Binder binder) {
+		super.configure(binder);
+		binder.bind(ClassLoader.class).toInstance(getClass().getClassLoader());
+	}
 	@Override
 	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return DelegatingGlobalScopeProvider.class;
 	}
+	
 }

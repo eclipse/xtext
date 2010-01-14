@@ -7,8 +7,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="FunctionTypeRef" eSuperTypes="#//TypeRef">
     <eStructuralFeatures xsi:type="ecore:EReference" name="paramTypes" upperBound="-1"
         eType="#//TypeRef" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" upperBound="-1"
-        eType="#//TypeRef" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="#//TypeRef"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SimpleTypeRef" eSuperTypes="#//TypeRef">
     <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//Type"/>
