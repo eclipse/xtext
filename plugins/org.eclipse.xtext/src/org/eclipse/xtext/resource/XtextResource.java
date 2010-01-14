@@ -128,37 +128,32 @@ public class XtextResource extends ResourceImpl {
 		if (!isLoaded()) {
 			throw new IllegalStateException("You can't update an unloaded resource.");
 		}
-		try {
-			isLoading = true;
-			EObject oldRootContainer = null;
-			EObject oldRootObject = null;
-			if (parseResult != null && parseResult.getRootASTElement() != null) {
-				oldRootObject = parseResult.getRootASTElement();
-				oldRootContainer = parseResult.getRootASTElement().eContainer();
-			}
-			CompositeNode rootNode = parseResult.getRootNode();
-			parseResult = parser.reparse(rootNode, offset, replacedTextLength, newText);
-			clearOutput();
-			if (parseResult != null) {
-				getErrors().addAll(createDiagnostics(parseResult));
-				if (parseResult.getRootASTElement() != null) {
-					if (getContents().add(parseResult.getRootASTElement())) {
+		EObject oldRootObject = null;
+		if (parseResult != null && parseResult.getRootASTElement() != null) {
+			oldRootObject = parseResult.getRootASTElement();
+		}
+		CompositeNode rootNode = parseResult.getRootNode();
+		parseResult = parser.reparse(rootNode, offset, replacedTextLength, newText);
+		getErrors().clear();
+		if (parseResult != null) {
+			getErrors().addAll(createDiagnostics(parseResult));
+			if (parseResult.getRootASTElement() != null) {
+				if (parseResult.getRootASTElement() != oldRootObject) {
+					if (oldRootObject != null) {
+						EcoreUtil.replace(oldRootObject, parseResult.getRootASTElement());
 						reattachModificationTracker();
-						if (oldRootContainer != null && oldRootObject != parseResult.getRootASTElement()) {
-							EcoreUtil.replace(oldRootObject, parseResult.getRootASTElement());
-						}
+					} else {
+						getContents().add(parseResult.getRootASTElement());
 					}
 				}
-				if (parseResult.getRootNode() != rootNode) {
-					addAdaptersToRoot();
-				}
 			}
-			doLinking();
-			setModified(false);
+			if (parseResult.getRootNode() != rootNode) {
+				addAdaptersToRoot();
+			}
+		} else {
+			getContents().clear();
 		}
-		finally {
-			isLoading = false;
-		}
+		doLinking();
 	}
 
 	private void clearOutput() {

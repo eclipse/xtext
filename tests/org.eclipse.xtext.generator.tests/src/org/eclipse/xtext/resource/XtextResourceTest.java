@@ -68,7 +68,7 @@ public class XtextResourceTest extends AbstractGeneratorTest {
 	public void testModify_04() throws Exception {
 		resource.setTrackingModification(true);
 		resource.update(0, 0, simpleModel);
-		assertFalse(resource.isModified());
+		assertTrue(resource.isModified());
 	}
 
 	public void testModify_05() throws Exception {
