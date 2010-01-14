@@ -1,0 +1,151 @@
+grammar org.eclipse.xtext.xbase.Xpression with org.eclipse.xtext.xbase.Xtype
+
+import "platform:/resource/org.eclipse.xtext.xbase/model/Xpression.ecore"
+
+Expression returns Expression:
+	Closure;	
+
+Closure returns Expression :
+	{Closure} (params+=DeclaredParameter (',' params+=DeclaredParameter)*)? '|' expression=CastedExpression |
+	CastedExpression	
+;
+	
+CastedExpression returns Expression:
+ 	{CastedExpression} '(' type=TypeRef ')' target=Assignment
+ 	| Assignment
+;
+	
+Assignment returns Expression : 
+    OrExpression  ({Assignment.left=current} '=' right=OrExpression)?
+;
+
+OrExpression returns Expression : 
+	 AndExpression ({BinaryOperation.left=current} operator='||'  right=AndExpression )*
+;
+
+AndExpression returns Expression : 
+	RelationalExpression ({BinaryOperation.left=current} operator='&&' right=RelationalExpression)*	    
+;
+
+RelationalExpression returns Expression : 
+	AdditiveExpression ({BinaryOperation.left=current} operator=('=='|'!='|'>='|'<='|'>'|'<' ) right=AdditiveExpression )*
+;
+
+AdditiveExpression returns Expression :
+	MultiplicativeExpression ({BinaryOperation.left=current} operator=('+'|'-') right=MultiplicativeExpression )*	    
+;
+
+MultiplicativeExpression returns Expression : 
+	OtherOperatorExpression ({BinaryOperation.left=current} operator=('*'|'/') right=OtherOperatorExpression )*
+;
+
+OtherOperatorExpression returns Expression: 
+	UnaryOperation ({BinaryOperation.left=current} operator=('+='|'..') right=UnaryOperation )*
+;
+
+UnaryOperation returns Expression :
+	FeatureCall |
+	{UnaryOperation} operator=("!"|"-") target=FeatureCall
+;
+  
+
+FeatureCall returns Expression : 
+	PrimaryExpression 
+	  ({FeatureCall.target=current} "." name=ID ('('(params+=Expression (','params+=Expression )*)?')')?)*
+;
+
+PrimaryExpression returns Expression : 
+  BooleanLiteral   |  
+  IntLiteral   |  
+  NullLiteral   |  
+  StringLiteral |
+  ConstructorCall   | 
+  BlockExpression   | 
+  RichString |
+  IfExpression |
+  SwitchExpression |  
+  WhileExpression |
+  SimpleFeatureCall   |  
+  ParenthesizedExpression;
+  
+ParenthesizedExpression returns Expression: 
+	'(' Expression ')'	    
+;
+
+IfExpression :	
+	'if' '('if=Expression')'
+		then=Expression
+	('else' else=Expression)?
+;
+
+SwitchExpression :
+	'switch' switch=Expression? '{'
+		(cases+=CasePart)+
+		('default' ':' default=Expression)?
+	'}'
+;
+
+WhileExpression :
+    'while' predicate=ParenthesizedExpression 
+    	body=Expression;
+
+CasePart :
+	'case' case=Expression ':' then=Expression;
+
+BlockExpression  : 
+	'{'
+		(expressions+=ExpressionInsideBlock ';')+
+	'}'	    
+;
+
+ExpressionInsideBlock returns Expression:
+	VariableDeclaration | Expression;
+
+VariableDeclaration :
+	('def' | type=TypeRef ) name=ID ':=' right=Expression;
+
+DeclaredParameter :
+	(type=TypeRef)? name=ID;
+
+SimpleFeatureCall returns FeatureCall  : 
+   name=ID ('('(params+=Expression (',' params+=Expression )*)?')')?
+;
+
+ConstructorCall  : 
+	'new' type=TypeRef ('('(params+=Expression (','params+=Expression)*)?')')?
+	initializer=BlockExpression?
+;
+
+BooleanLiteral  : 
+	{BooleanLiteral} 'false'|isTrue?='true'
+;
+
+NullLiteral  : 
+	{NullLiteral}'null'
+;
+
+IntLiteral  : 
+	value=INT
+;
+
+StringLiteral :
+	value=STRING
+;
+
+RichString :	
+	expressions+=RichStringLiteral 
+	(expressions+=Expression
+	expressions+=RichStringLiteral)*
+;
+
+RichStringLiteral :
+	value=RICH_STRING;
+
+terminal RICH_STRING	: 
+	'»' ( '\\' ('b'|'t'|'n'|'f'|'r'|'"'|"'"|'\\') | !('\\'|'«') )* '«'
+;
+
+	
+
+
+

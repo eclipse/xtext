@@ -112,6 +112,7 @@ This Agreement is governed by the laws of the State of New York and the intellec
       <import feature="org.eclipse.xtext.sdk" version="0.0.0"/>
       <import feature="org.eclipse.xtext.examples" version="0.0.0"/>
       <import feature="org.eclipse.xtext.ui"/>
+      <import feature="org.eclipse.xtext.xbase" version="0.8.0.qualifier"/>
    </requires>
 
    <plugin
@@ -206,6 +207,13 @@ This Agreement is governed by the laws of the State of New York and the intellec
 
    <plugin
          id="org.eclipse.xtext.xtext.ui.tests"
+         download-size="0"
+         install-size="0"
+         version="0.0.0"
+         unpack="false"/>
+
+   <plugin
+         id="org.eclipse.xtext.xbase.tests"
          download-size="0"
          install-size="0"
          version="0.0.0"

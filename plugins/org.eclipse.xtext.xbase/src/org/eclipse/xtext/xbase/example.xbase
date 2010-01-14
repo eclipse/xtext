@@ -1,0 +1,47 @@
+foo(String=>Boolean predicate) {
+  foo(s|s.isEmpty());
+}
+
+
+foo () :
+	new Foo as f {
+	   recursion = new Bar() as b{
+	      foo = f;
+	      f.bar = b;
+	      other= createOther(f,b);
+	   }
+	   bar = b;
+	}
+	
+	
+expr() :<<
+
+ class ${foo.bar} extends 
+ 
+>>;
+
+#
+file A
+
+import B
+import C
+
+foo() {
+   myType.fooBar();
+   myType.fooBar2();
+ }
+   
+   
+file B
+
+fooBar(MyType mytype) : stuff;
+fooBar2(MySpecialType mytype) : stuff;
+
+file C
+
+fooBar2(MyType mytype) : true;
+
+
+class MySpecialType {
+   fooBar() {}
+}

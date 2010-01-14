@@ -1,0 +1,57 @@
+<workflow>
+	<property name="projectName" value="org.eclipse.xtext.xbase"/>
+	<property name="runtimeProject" value="../${projectName}"/>
+	
+	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" 
+		platformUri="${runtimeProject}/.."/>
+	
+	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}/src-gen"/>
+	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}.ui/src-gen"/>
+	
+	<component class="org.eclipse.xtext.generator.Generator">
+		<pathRtProject value="${runtimeProject}"/>
+		<pathUiProject value="${runtimeProject}.ui"/>
+		<projectNameRt value="${projectName}"/>
+		<projectNameUi value="${projectName}.ui"/>
+		
+		<language uri="classpath:/org/eclipse/xtext/xbase/Xtype.xtext" fileExtensions="___xtype">
+			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
+			<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
+			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
+		</language>
+		<language uri="classpath:/org/eclipse/xtext/xbase/Xpression.xtext" fileExtensions="___xtension">
+			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
+			<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
+			<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment" >
+				<options backtrack="true"/>
+			</fragment>
+			<fragment class="de.itemis.xtext.antlr.ex.debug.DebugAntlrGrammar" >
+				<options backtrack="true"/>
+			</fragment>
+			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
+		</language>
+		<language uri="classpath:/org/eclipse/xtext/xbase/Xbase.xtext" fileExtensions="xbase">
+			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
+			<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
+			<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 
+				fileExtensions="xbase"/>
+			<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment" >
+				<options backtrack="true"/>
+			</fragment>
+			<fragment class="org.eclipse.xtext.generator.validation.JavaValidatorFragment">
+                <composedCheck value="org.eclipse.xtext.validation.ImportUriValidator"/>
+            </fragment>
+			<fragment class="org.eclipse.xtext.generator.exporting.QualifiedNamesFragment"/>
+			<fragment class="org.eclipse.xtext.generator.builder.BuilderIntegrationFragment"/>
+			<fragment class="org.eclipse.xtext.generator.formatting.FormatterFragment"/>
+			<fragment class="org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment"/>
+			<fragment class="org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment"/>
+			<fragment class="org.eclipse.xtext.ui.generator.outline.TransformerFragment"/>
+			<fragment class="org.eclipse.xtext.ui.generator.outline.OutlineNodeAdapterFactoryFragment"/>
+			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
+			<fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment">
+				<options backtrack="true"/>
+			</fragment>
+		</language>
+	</component>
+</workflow>
