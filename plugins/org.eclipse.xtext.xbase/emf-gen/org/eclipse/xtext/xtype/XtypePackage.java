@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtypePackage.java,v 1.1 2010/01/14 14:40:17 sefftinge Exp $
+ * $Id: XtypePackage.java,v 1.2 2010/01/14 15:53:25 sefftinge Exp $
  */
 package org.eclipse.xtext.xtype;
 
@@ -100,7 +100,7 @@ public interface XtypePackage extends EPackage {
 	int FUNCTION_TYPE_REF__PARAM_TYPES = TYPE_REF_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Return Type</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
@@ -270,10 +270,10 @@ public interface XtypePackage extends EPackage {
 	EReference getFunctionTypeRef_ParamTypes();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtype.FunctionTypeRef#getReturnType <em>Return Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtype.FunctionTypeRef#getReturnType <em>Return Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Return Type</em>'.
+	 * @return the meta object for the containment reference '<em>Return Type</em>'.
 	 * @see org.eclipse.xtext.xtype.FunctionTypeRef#getReturnType()
 	 * @see #getFunctionTypeRef()
 	 * @generated
@@ -438,7 +438,7 @@ public interface XtypePackage extends EPackage {
 		EReference FUNCTION_TYPE_REF__PARAM_TYPES = eINSTANCE.getFunctionTypeRef_ParamTypes();
 
 		/**
-		 * The meta object literal for the '<em><b>Return Type</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Return Type</b></em>' containment reference feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated

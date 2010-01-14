@@ -19,7 +19,7 @@
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
         </tokens>
         <tokens xsi:type="xtext:Assignment" cardinality="*" feature="functions" operator="+=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
         </tokens>
       </alternatives>
     </rules>
@@ -30,13 +30,19 @@
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Keyword" value="import"/>
         <tokens xsi:type="xtext:Assignment" feature="importedNamespace" operator="=">
-          <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.6"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
         </tokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="QualifiedNameWithWildCard">
+      <type metamodel="/3/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <tokens xsi:type="xtext:RuleCall" rule="/2/@rules.6"/>
         <tokens xsi:type="xtext:Group" cardinality="?">
           <tokens xsi:type="xtext:Keyword" value="."/>
-          <tokens xsi:type="xtext:Assignment" feature="wildcard" operator="?=">
-            <terminal xsi:type="xtext:Keyword" value="*"/>
-          </tokens>
+          <tokens xsi:type="xtext:Keyword" value="*"/>
         </tokens>
       </alternatives>
     </rules>
@@ -597,10 +603,6 @@
           </tokens>
           <tokens xsi:type="xtext:Keyword" value=")"/>
         </tokens>
-        <tokens xsi:type="xtext:Group" cardinality="?">
-          <tokens xsi:type="xtext:Keyword" value="as"/>
-          <tokens xsi:type="xtext:RuleCall" rule="/3/@rules.0"/>
-        </tokens>
         <tokens xsi:type="xtext:Assignment" cardinality="?" feature="initializer" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.18"/>
         </tokens>
@@ -745,7 +747,7 @@
           <tokens xsi:type="xtext:Keyword" value=")"/>
         </tokens>
         <tokens xsi:type="xtext:Keyword" value="=>"/>
-        <tokens xsi:type="xtext:Assignment" feature="returnType" operator="+=">
+        <tokens xsi:type="xtext:Assignment" feature="returnType" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.0"/>
         </tokens>
       </alternatives>

@@ -51,39 +51,51 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Keyword cImportKeyword_0 = (Keyword)cGroup.eContents().get(0);
 		private final Assignment cImportedNamespaceAssignment_1 = (Assignment)cGroup.eContents().get(1);
-		private final RuleCall cImportedNamespaceQualifiedNameParserRuleCall_1_0 = (RuleCall)cImportedNamespaceAssignment_1.eContents().get(0);
-		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
-		private final Keyword cFullStopKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
-		private final Assignment cWildcardAssignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
-		private final Keyword cWildcardAsteriskKeyword_2_1_0 = (Keyword)cWildcardAssignment_2_1.eContents().get(0);
+		private final RuleCall cImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0 = (RuleCall)cImportedNamespaceAssignment_1.eContents().get(0);
 		
 		//Import:
-		//  "import" importedNamespace=QualifiedName ("." wildcard?="*")?;
+		//  "import" importedNamespace=QualifiedNameWithWildCard;
 		public ParserRule getRule() { return rule; }
 
-		//"import" importedNamespace=QualifiedName ("." wildcard?="*")?
+		//"import" importedNamespace=QualifiedNameWithWildCard
 		public Group getGroup() { return cGroup; }
 
 		//"import"
 		public Keyword getImportKeyword_0() { return cImportKeyword_0; }
 
-		//importedNamespace=QualifiedName
+		//importedNamespace=QualifiedNameWithWildCard
 		public Assignment getImportedNamespaceAssignment_1() { return cImportedNamespaceAssignment_1; }
 
-		//QualifiedName
-		public RuleCall getImportedNamespaceQualifiedNameParserRuleCall_1_0() { return cImportedNamespaceQualifiedNameParserRuleCall_1_0; }
+		//QualifiedNameWithWildCard
+		public RuleCall getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0() { return cImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0; }
+	}
 
-		//("." wildcard?="*")?
-		public Group getGroup_2() { return cGroup_2; }
+	public class QualifiedNameWithWildCardElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "QualifiedNameWithWildCard");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cQualifiedNameParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cFullStopKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Keyword cAsteriskKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		
+		//QualifiedNameWithWildCard returns ecore::EString:
+		//  QualifiedName ("." "*")?;
+		public ParserRule getRule() { return rule; }
+
+		//QualifiedName ("." "*")?
+		public Group getGroup() { return cGroup; }
+
+		//QualifiedName
+		public RuleCall getQualifiedNameParserRuleCall_0() { return cQualifiedNameParserRuleCall_0; }
+
+		//("." "*")?
+		public Group getGroup_1() { return cGroup_1; }
 
 		//"."
-		public Keyword getFullStopKeyword_2_0() { return cFullStopKeyword_2_0; }
-
-		//wildcard?="*"
-		public Assignment getWildcardAssignment_2_1() { return cWildcardAssignment_2_1; }
+		public Keyword getFullStopKeyword_1_0() { return cFullStopKeyword_1_0; }
 
 		//"*"
-		public Keyword getWildcardAsteriskKeyword_2_1_0() { return cWildcardAsteriskKeyword_2_1_0; }
+		public Keyword getAsteriskKeyword_1_1() { return cAsteriskKeyword_1_1; }
 	}
 
 	public class FunctionElements extends AbstractParserRuleElementFinder {
@@ -263,6 +275,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	
 	private FileElements pFile;
 	private ImportElements pImport;
+	private QualifiedNameWithWildCardElements pQualifiedNameWithWildCard;
 	private FunctionElements pFunction;
 	
 	private final GrammarProvider grammarProvider;
@@ -297,13 +310,23 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Import:
-	//  "import" importedNamespace=QualifiedName ("." wildcard?="*")?;
+	//  "import" importedNamespace=QualifiedNameWithWildCard;
 	public ImportElements getImportAccess() {
 		return (pImport != null) ? pImport : (pImport = new ImportElements());
 	}
 	
 	public ParserRule getImportRule() {
 		return getImportAccess().getRule();
+	}
+
+	//QualifiedNameWithWildCard returns ecore::EString:
+	//  QualifiedName ("." "*")?;
+	public QualifiedNameWithWildCardElements getQualifiedNameWithWildCardAccess() {
+		return (pQualifiedNameWithWildCard != null) ? pQualifiedNameWithWildCard : (pQualifiedNameWithWildCard = new QualifiedNameWithWildCardElements());
+	}
+	
+	public ParserRule getQualifiedNameWithWildCardRule() {
+		return getQualifiedNameWithWildCardAccess().getRule();
 	}
 
 	//Function:
@@ -560,7 +583,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ConstructorCall:
-	//  "new" type=TypeRef ("(" (params+=Expression ("," params+=Expression)*)? ")")? ("as" ID)?
+	//  "new" type=TypeRef ("(" (params+=Expression ("," params+=Expression)*)? ")")?
 	//  initializer=BlockExpression?;
 	public XpressionGrammarAccess.ConstructorCallElements getConstructorCallAccess() {
 		return gaXpression.getConstructorCallAccess();
@@ -648,7 +671,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FunctionTypeRef:
-	//  ("(" paramTypes+=TypeRef ("," paramTypes+=TypeRef)* ")")? "=>" returnType+=TypeRef;
+	//  ("(" paramTypes+=TypeRef ("," paramTypes+=TypeRef)* ")")? "=>" returnType=TypeRef;
 	public XtypeGrammarAccess.FunctionTypeRefElements getFunctionTypeRefAccess() {
 		return gaXpression.getFunctionTypeRefAccess();
 	}

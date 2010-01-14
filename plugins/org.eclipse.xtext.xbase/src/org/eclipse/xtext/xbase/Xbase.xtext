@@ -10,8 +10,11 @@ File  :
 ;
 
 Import  : 
-	'import' importedNamespace=QualifiedName ('.' wildcard?='*')?
+	'import' importedNamespace=QualifiedNameWithWildCard
 ;
+
+QualifiedNameWithWildCard :
+	QualifiedName  ('.' '*')?;
 
 Function  : 
 	( private?='private'|final?='final')* 

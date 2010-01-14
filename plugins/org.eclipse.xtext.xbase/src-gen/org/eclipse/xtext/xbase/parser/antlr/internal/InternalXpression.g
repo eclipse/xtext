@@ -2529,20 +2529,12 @@ ruleConstructorCall returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getConstructorCallAccess().getRightParenthesisKeyword_2_2(), null); 
     }
-)?(	'as' 
-    {
-        createLeafNode(grammarAccess.getConstructorCallAccess().getAsKeyword_3_0(), null); 
-    }
-RULE_ID
-    { 
-    createLeafNode(grammarAccess.getConstructorCallAccess().getIDTerminalRuleCall_3_1(), null); 
-    }
 )?(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getConstructorCallAccess().getInitializerBlockExpressionParserRuleCall_4_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getConstructorCallAccess().getInitializerBlockExpressionParserRuleCall_3_0(), currentNode); 
 	    }
-		lv_initializer_9_0=ruleBlockExpression		{
+		lv_initializer_7_0=ruleBlockExpression		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getConstructorCallRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -2551,7 +2543,7 @@ RULE_ID
 	       		set(
 	       			$current, 
 	       			"initializer",
-	        		lv_initializer_9_0, 
+	        		lv_initializer_7_0, 
 	        		"BlockExpression", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -3047,7 +3039,7 @@ ruleFunctionTypeRef returns [EObject current=null]
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {
-	       		add(
+	       		set(
 	       			$current, 
 	       			"returnType",
 	        		lv_returnType_6_0, 

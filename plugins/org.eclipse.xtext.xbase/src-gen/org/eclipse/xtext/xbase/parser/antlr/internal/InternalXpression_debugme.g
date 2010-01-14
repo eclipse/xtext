@@ -302,9 +302,7 @@ ruleConstructorCall :
 	',' 
 (		ruleExpression))*)?
 	')' 
-)?(
-	'as' 
-	RULE_ID)?(		ruleBlockExpression)?)
+)?(		ruleBlockExpression)?)
 ;
 
 

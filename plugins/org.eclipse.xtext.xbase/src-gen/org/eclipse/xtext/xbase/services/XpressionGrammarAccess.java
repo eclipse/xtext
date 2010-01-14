@@ -1089,18 +1089,15 @@ public class XpressionGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cParamsAssignment_2_1_1_1 = (Assignment)cGroup_2_1_1.eContents().get(1);
 		private final RuleCall cParamsExpressionParserRuleCall_2_1_1_1_0 = (RuleCall)cParamsAssignment_2_1_1_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
-		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
-		private final Keyword cAsKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
-		private final RuleCall cIDTerminalRuleCall_3_1 = (RuleCall)cGroup_3.eContents().get(1);
-		private final Assignment cInitializerAssignment_4 = (Assignment)cGroup.eContents().get(4);
-		private final RuleCall cInitializerBlockExpressionParserRuleCall_4_0 = (RuleCall)cInitializerAssignment_4.eContents().get(0);
+		private final Assignment cInitializerAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cInitializerBlockExpressionParserRuleCall_3_0 = (RuleCall)cInitializerAssignment_3.eContents().get(0);
 		
 		//ConstructorCall:
-		//  "new" type=TypeRef ("(" (params+=Expression ("," params+=Expression)*)? ")")? ("as" ID)?
+		//  "new" type=TypeRef ("(" (params+=Expression ("," params+=Expression)*)? ")")?
 		//  initializer=BlockExpression?;
 		public ParserRule getRule() { return rule; }
 
-		//"new" type=TypeRef ("(" (params+=Expression ("," params+=Expression)*)? ")")? ("as" ID)?
+		//"new" type=TypeRef ("(" (params+=Expression ("," params+=Expression)*)? ")")?
 		//initializer=BlockExpression?
 		public Group getGroup() { return cGroup; }
 
@@ -1143,20 +1140,11 @@ public class XpressionGrammarAccess extends AbstractGrammarElementFinder {
 		//")"
 		public Keyword getRightParenthesisKeyword_2_2() { return cRightParenthesisKeyword_2_2; }
 
-		//("as" ID)?
-		public Group getGroup_3() { return cGroup_3; }
-
-		//"as"
-		public Keyword getAsKeyword_3_0() { return cAsKeyword_3_0; }
-
-		//ID
-		public RuleCall getIDTerminalRuleCall_3_1() { return cIDTerminalRuleCall_3_1; }
-
 		//initializer=BlockExpression?
-		public Assignment getInitializerAssignment_4() { return cInitializerAssignment_4; }
+		public Assignment getInitializerAssignment_3() { return cInitializerAssignment_3; }
 
 		//BlockExpression
-		public RuleCall getInitializerBlockExpressionParserRuleCall_4_0() { return cInitializerBlockExpressionParserRuleCall_4_0; }
+		public RuleCall getInitializerBlockExpressionParserRuleCall_3_0() { return cInitializerBlockExpressionParserRuleCall_3_0; }
 	}
 
 	public class BooleanLiteralElements extends AbstractParserRuleElementFinder {
@@ -1596,7 +1584,7 @@ public class XpressionGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//ConstructorCall:
-	//  "new" type=TypeRef ("(" (params+=Expression ("," params+=Expression)*)? ")")? ("as" ID)?
+	//  "new" type=TypeRef ("(" (params+=Expression ("," params+=Expression)*)? ")")?
 	//  initializer=BlockExpression?;
 	public ConstructorCallElements getConstructorCallAccess() {
 		return (pConstructorCall != null) ? pConstructorCall : (pConstructorCall = new ConstructorCallElements());
@@ -1684,7 +1672,7 @@ public class XpressionGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FunctionTypeRef:
-	//  ("(" paramTypes+=TypeRef ("," paramTypes+=TypeRef)* ")")? "=>" returnType+=TypeRef;
+	//  ("(" paramTypes+=TypeRef ("," paramTypes+=TypeRef)* ")")? "=>" returnType=TypeRef;
 	public XtypeGrammarAccess.FunctionTypeRefElements getFunctionTypeRefAccess() {
 		return gaXtype.getFunctionTypeRefAccess();
 	}

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FunctionTypeRef.java,v 1.1 2010/01/14 14:40:17 sefftinge Exp $
+ * $Id: FunctionTypeRef.java,v 1.2 2010/01/14 15:53:25 sefftinge Exp $
  */
 package org.eclipse.xtext.xtype;
 
@@ -43,19 +43,29 @@ public interface FunctionTypeRef extends TypeRef {
 	EList<TypeRef> getParamTypes();
 
 	/**
-	 * Returns the value of the '<em><b>Return Type</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.xtext.xtype.TypeRef}.
+	 * Returns the value of the '<em><b>Return Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Return Type</em>' containment reference list isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Return Type</em>' containment reference list.
+	 * @return the value of the '<em>Return Type</em>' containment reference.
+	 * @see #setReturnType(TypeRef)
 	 * @see org.eclipse.xtext.xtype.XtypePackage#getFunctionTypeRef_ReturnType()
 	 * @model containment="true"
 	 * @generated
 	 */
-	EList<TypeRef> getReturnType();
+	TypeRef getReturnType();
+
+	/**
+	 * Sets the value of the '{@link org.eclipse.xtext.xtype.FunctionTypeRef#getReturnType <em>Return Type</em>}' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @param value the new value of the '<em>Return Type</em>' containment reference.
+	 * @see #getReturnType()
+	 * @generated
+	 */
+	void setReturnType(TypeRef value);
 
 } // FunctionTypeRef

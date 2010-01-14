@@ -5326,12 +5326,12 @@ protected class SimpleFeatureCall_RightParenthesisKeyword_1_2 extends KeywordTok
 /************ begin Rule ConstructorCall ****************
  *
  * ConstructorCall:
- *   "new" type=TypeRef ("(" (params+=Expression ("," params+=Expression)*)? ")")? ("as" ID)?
+ *   "new" type=TypeRef ("(" (params+=Expression ("," params+=Expression)*)? ")")?
  *   initializer=BlockExpression?;
  *
  **/
 
-// "new" type=TypeRef ("(" (params+=Expression ("," params+=Expression)*)? ")")? ("as" ID)?
+// "new" type=TypeRef ("(" (params+=Expression ("," params+=Expression)*)? ")")?
 // initializer=BlockExpression?
 protected class ConstructorCall_Group extends GroupToken {
 	
@@ -5347,10 +5347,9 @@ protected class ConstructorCall_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new ConstructorCall_InitializerAssignment_4(parent, this, 0, inst);
-			case 1: return new ConstructorCall_Group_3(parent, this, 1, inst);
-			case 2: return new ConstructorCall_Group_2(parent, this, 2, inst);
-			case 3: return new ConstructorCall_TypeAssignment_1(parent, this, 3, inst);
+			case 0: return new ConstructorCall_InitializerAssignment_3(parent, this, 0, inst);
+			case 1: return new ConstructorCall_Group_2(parent, this, 1, inst);
+			case 2: return new ConstructorCall_TypeAssignment_1(parent, this, 2, inst);
 			default: return null;
 		}	
 	}	
@@ -5659,84 +5658,16 @@ protected class ConstructorCall_RightParenthesisKeyword_2_2 extends KeywordToken
 }
 
 
-// ("as" ID)?
-protected class ConstructorCall_Group_3 extends GroupToken {
-	
-	public ConstructorCall_Group_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.getConstructorCallAccess().getGroup_3();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new ConstructorCall_IDTerminalRuleCall_3_1(parent, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-}
-
-// "as"
-protected class ConstructorCall_AsKeyword_3_0 extends KeywordToken  {
-	
-	public ConstructorCall_AsKeyword_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public Keyword getGrammarElement() {
-		return grammarAccess.getConstructorCallAccess().getAsKeyword_3_0();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new ConstructorCall_Group_2(parent, this, 0, inst);
-			case 1: return new ConstructorCall_TypeAssignment_1(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
-}
-
-// ID
-protected class ConstructorCall_IDTerminalRuleCall_3_1 extends UnassignedTextToken {
-
-	public ConstructorCall_IDTerminalRuleCall_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getConstructorCallAccess().getIDTerminalRuleCall_3_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new ConstructorCall_AsKeyword_3_0(parent, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-}
-
-
 // initializer=BlockExpression?
-protected class ConstructorCall_InitializerAssignment_4 extends AssignmentToken  {
+protected class ConstructorCall_InitializerAssignment_3 extends AssignmentToken  {
 	
-	public ConstructorCall_InitializerAssignment_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public ConstructorCall_InitializerAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getConstructorCallAccess().getInitializerAssignment_4();
+		return grammarAccess.getConstructorCallAccess().getInitializerAssignment_3();
 	}
 
     @Override
@@ -5755,7 +5686,7 @@ protected class ConstructorCall_InitializerAssignment_4 extends AssignmentToken 
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getBlockExpressionRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getConstructorCallAccess().getInitializerBlockExpressionParserRuleCall_4_0(); 
+				element = grammarAccess.getConstructorCallAccess().getInitializerBlockExpressionParserRuleCall_3_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -5767,9 +5698,8 @@ protected class ConstructorCall_InitializerAssignment_4 extends AssignmentToken 
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new ConstructorCall_Group_3(parent, next, actIndex, consumed);
-			case 1: return new ConstructorCall_Group_2(parent, next, actIndex, consumed);
-			case 2: return new ConstructorCall_TypeAssignment_1(parent, next, actIndex, consumed);
+			case 0: return new ConstructorCall_Group_2(parent, next, actIndex, consumed);
+			case 1: return new ConstructorCall_TypeAssignment_1(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -6470,11 +6400,11 @@ protected class TypeRef_FunctionTypeRefParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule FunctionTypeRef ****************
  *
  * FunctionTypeRef:
- *   ("(" paramTypes+=TypeRef ("," paramTypes+=TypeRef)* ")")? "=>" returnType+=TypeRef;
+ *   ("(" paramTypes+=TypeRef ("," paramTypes+=TypeRef)* ")")? "=>" returnType=TypeRef;
  *
  **/
 
-// ("(" paramTypes+=TypeRef ("," paramTypes+=TypeRef)* ")")? "=>" returnType+=TypeRef
+// ("(" paramTypes+=TypeRef ("," paramTypes+=TypeRef)* ")")? "=>" returnType=TypeRef
 protected class FunctionTypeRef_Group extends GroupToken {
 	
 	public FunctionTypeRef_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -6728,7 +6658,7 @@ protected class FunctionTypeRef_EqualsSignGreaterThanSignKeyword_1 extends Keywo
 		
 }
 
-// returnType+=TypeRef
+// returnType=TypeRef
 protected class FunctionTypeRef_ReturnTypeAssignment_2 extends AssignmentToken  {
 	
 	public FunctionTypeRef_ReturnTypeAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {

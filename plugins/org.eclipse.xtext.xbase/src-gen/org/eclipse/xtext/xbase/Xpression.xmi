@@ -491,10 +491,6 @@
           </tokens>
           <tokens xsi:type="xtext:Keyword" value=")"/>
         </tokens>
-        <tokens xsi:type="xtext:Group" cardinality="?">
-          <tokens xsi:type="xtext:Keyword" value="as"/>
-          <tokens xsi:type="xtext:RuleCall" rule="/2/@rules.0"/>
-        </tokens>
         <tokens xsi:type="xtext:Assignment" cardinality="?" feature="initializer" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
         </tokens>
@@ -639,7 +635,7 @@
           <tokens xsi:type="xtext:Keyword" value=")"/>
         </tokens>
         <tokens xsi:type="xtext:Keyword" value="=>"/>
-        <tokens xsi:type="xtext:Assignment" feature="returnType" operator="+=">
+        <tokens xsi:type="xtext:Assignment" feature="returnType" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
         </tokens>
       </alternatives>

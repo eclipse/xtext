@@ -2,12 +2,13 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FunctionTypeRefImpl.java,v 1.1 2010/01/14 14:40:21 sefftinge Exp $
+ * $Id: FunctionTypeRefImpl.java,v 1.2 2010/01/14 15:53:25 sefftinge Exp $
  */
 package org.eclipse.xtext.xtype.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -15,6 +16,7 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -48,14 +50,14 @@ public class FunctionTypeRefImpl extends TypeRefImpl implements FunctionTypeRef 
 	protected EList<TypeRef> paramTypes;
 
 	/**
-	 * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' containment reference list.
+	 * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getReturnType()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<TypeRef> returnType;
+	protected TypeRef returnType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -93,11 +95,42 @@ public class FunctionTypeRefImpl extends TypeRefImpl implements FunctionTypeRef 
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<TypeRef> getReturnType() {
-		if (returnType == null) {
-			returnType = new EObjectContainmentEList<TypeRef>(TypeRef.class, this, XtypePackage.FUNCTION_TYPE_REF__RETURN_TYPE);
-		}
+	public TypeRef getReturnType() {
 		return returnType;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetReturnType(TypeRef newReturnType, NotificationChain msgs) {
+		TypeRef oldReturnType = returnType;
+		returnType = newReturnType;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XtypePackage.FUNCTION_TYPE_REF__RETURN_TYPE, oldReturnType, newReturnType);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReturnType(TypeRef newReturnType) {
+		if (newReturnType != returnType) {
+			NotificationChain msgs = null;
+			if (returnType != null)
+				msgs = ((InternalEObject)returnType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XtypePackage.FUNCTION_TYPE_REF__RETURN_TYPE, null, msgs);
+			if (newReturnType != null)
+				msgs = ((InternalEObject)newReturnType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XtypePackage.FUNCTION_TYPE_REF__RETURN_TYPE, null, msgs);
+			msgs = basicSetReturnType(newReturnType, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, XtypePackage.FUNCTION_TYPE_REF__RETURN_TYPE, newReturnType, newReturnType));
 	}
 
 	/**
@@ -111,7 +144,7 @@ public class FunctionTypeRefImpl extends TypeRefImpl implements FunctionTypeRef 
 			case XtypePackage.FUNCTION_TYPE_REF__PARAM_TYPES:
 				return ((InternalEList<?>)getParamTypes()).basicRemove(otherEnd, msgs);
 			case XtypePackage.FUNCTION_TYPE_REF__RETURN_TYPE:
-				return ((InternalEList<?>)getReturnType()).basicRemove(otherEnd, msgs);
+				return basicSetReturnType(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -146,8 +179,7 @@ public class FunctionTypeRefImpl extends TypeRefImpl implements FunctionTypeRef 
 				getParamTypes().addAll((Collection<? extends TypeRef>)newValue);
 				return;
 			case XtypePackage.FUNCTION_TYPE_REF__RETURN_TYPE:
-				getReturnType().clear();
-				getReturnType().addAll((Collection<? extends TypeRef>)newValue);
+				setReturnType((TypeRef)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -165,7 +197,7 @@ public class FunctionTypeRefImpl extends TypeRefImpl implements FunctionTypeRef 
 				getParamTypes().clear();
 				return;
 			case XtypePackage.FUNCTION_TYPE_REF__RETURN_TYPE:
-				getReturnType().clear();
+				setReturnType((TypeRef)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -182,7 +214,7 @@ public class FunctionTypeRefImpl extends TypeRefImpl implements FunctionTypeRef 
 			case XtypePackage.FUNCTION_TYPE_REF__PARAM_TYPES:
 				return paramTypes != null && !paramTypes.isEmpty();
 			case XtypePackage.FUNCTION_TYPE_REF__RETURN_TYPE:
-				return returnType != null && !returnType.isEmpty();
+				return returnType != null;
 		}
 		return super.eIsSet(featureID);
 	}

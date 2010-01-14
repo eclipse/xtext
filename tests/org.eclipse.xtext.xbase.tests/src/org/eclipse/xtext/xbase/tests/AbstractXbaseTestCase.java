@@ -30,8 +30,7 @@ public abstract class AbstractXbaseTestCase extends TestCase {
 
 	@Override
 	protected void setUp() throws Exception {
-		injector = new CustomXbaseStandaloneSetup()
-				.createInjectorAndDoEMFRegistration();
+		injector = new CustomXbaseStandaloneSetup().createInjectorAndDoEMFRegistration();
 	}
 
 	/**

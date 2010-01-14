@@ -159,11 +159,11 @@ protected class TypeRef_FunctionTypeRefParserRuleCall_1 extends RuleCallToken {
 /************ begin Rule FunctionTypeRef ****************
  *
  * FunctionTypeRef:
- *   ("(" paramTypes+=TypeRef ("," paramTypes+=TypeRef)* ")")? "=>" returnType+=TypeRef;
+ *   ("(" paramTypes+=TypeRef ("," paramTypes+=TypeRef)* ")")? "=>" returnType=TypeRef;
  *
  **/
 
-// ("(" paramTypes+=TypeRef ("," paramTypes+=TypeRef)* ")")? "=>" returnType+=TypeRef
+// ("(" paramTypes+=TypeRef ("," paramTypes+=TypeRef)* ")")? "=>" returnType=TypeRef
 protected class FunctionTypeRef_Group extends GroupToken {
 	
 	public FunctionTypeRef_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -417,7 +417,7 @@ protected class FunctionTypeRef_EqualsSignGreaterThanSignKeyword_1 extends Keywo
 		
 }
 
-// returnType+=TypeRef
+// returnType=TypeRef
 protected class FunctionTypeRef_ReturnTypeAssignment_2 extends AssignmentToken  {
 	
 	public FunctionTypeRef_ReturnTypeAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {

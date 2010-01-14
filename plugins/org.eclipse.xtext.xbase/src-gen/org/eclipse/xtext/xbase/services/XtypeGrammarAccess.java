@@ -54,10 +54,10 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cReturnTypeTypeRefParserRuleCall_2_0 = (RuleCall)cReturnTypeAssignment_2.eContents().get(0);
 		
 		//FunctionTypeRef:
-		//  ("(" paramTypes+=TypeRef ("," paramTypes+=TypeRef)* ")")? "=>" returnType+=TypeRef;
+		//  ("(" paramTypes+=TypeRef ("," paramTypes+=TypeRef)* ")")? "=>" returnType=TypeRef;
 		public ParserRule getRule() { return rule; }
 
-		//("(" paramTypes+=TypeRef ("," paramTypes+=TypeRef)* ")")? "=>" returnType+=TypeRef
+		//("(" paramTypes+=TypeRef ("," paramTypes+=TypeRef)* ")")? "=>" returnType=TypeRef
 		public Group getGroup() { return cGroup; }
 
 		//("(" paramTypes+=TypeRef ("," paramTypes+=TypeRef)* ")")?
@@ -90,7 +90,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		//"=>"
 		public Keyword getEqualsSignGreaterThanSignKeyword_1() { return cEqualsSignGreaterThanSignKeyword_1; }
 
-		//returnType+=TypeRef
+		//returnType=TypeRef
 		public Assignment getReturnTypeAssignment_2() { return cReturnTypeAssignment_2; }
 
 		//TypeRef
@@ -376,7 +376,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//FunctionTypeRef:
-	//  ("(" paramTypes+=TypeRef ("," paramTypes+=TypeRef)* ")")? "=>" returnType+=TypeRef;
+	//  ("(" paramTypes+=TypeRef ("," paramTypes+=TypeRef)* ")")? "=>" returnType=TypeRef;
 	public FunctionTypeRefElements getFunctionTypeRefAccess() {
 		return (pFunctionTypeRef != null) ? pFunctionTypeRef : (pFunctionTypeRef = new FunctionTypeRefElements());
 	}

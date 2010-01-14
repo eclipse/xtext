@@ -57,7 +57,8 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getTypeParamDeclarationAccess().getAlternatives_1(), "rule__TypeParamDeclaration__Alternatives_1");
 					put(grammarAccess.getFileAccess().getGroup(), "rule__File__Group__0");
 					put(grammarAccess.getImportAccess().getGroup(), "rule__Import__Group__0");
-					put(grammarAccess.getImportAccess().getGroup_2(), "rule__Import__Group_2__0");
+					put(grammarAccess.getQualifiedNameWithWildCardAccess().getGroup(), "rule__QualifiedNameWithWildCard__Group__0");
+					put(grammarAccess.getQualifiedNameWithWildCardAccess().getGroup_1(), "rule__QualifiedNameWithWildCard__Group_1__0");
 					put(grammarAccess.getFunctionAccess().getGroup(), "rule__Function__Group__0");
 					put(grammarAccess.getFunctionAccess().getGroup_1(), "rule__Function__Group_1__0");
 					put(grammarAccess.getFunctionAccess().getGroup_1_2(), "rule__Function__Group_1_2__0");
@@ -108,7 +109,6 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getConstructorCallAccess().getGroup_2(), "rule__ConstructorCall__Group_2__0");
 					put(grammarAccess.getConstructorCallAccess().getGroup_2_1(), "rule__ConstructorCall__Group_2_1__0");
 					put(grammarAccess.getConstructorCallAccess().getGroup_2_1_1(), "rule__ConstructorCall__Group_2_1_1__0");
-					put(grammarAccess.getConstructorCallAccess().getGroup_3(), "rule__ConstructorCall__Group_3__0");
 					put(grammarAccess.getBooleanLiteralAccess().getGroup_0(), "rule__BooleanLiteral__Group_0__0");
 					put(grammarAccess.getNullLiteralAccess().getGroup(), "rule__NullLiteral__Group__0");
 					put(grammarAccess.getRichStringAccess().getGroup(), "rule__RichString__Group__0");
@@ -131,7 +131,6 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getFileAccess().getImportsAssignment_0(), "rule__File__ImportsAssignment_0");
 					put(grammarAccess.getFileAccess().getFunctionsAssignment_1(), "rule__File__FunctionsAssignment_1");
 					put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1(), "rule__Import__ImportedNamespaceAssignment_1");
-					put(grammarAccess.getImportAccess().getWildcardAssignment_2_1(), "rule__Import__WildcardAssignment_2_1");
 					put(grammarAccess.getFunctionAccess().getPrivateAssignment_0_0(), "rule__Function__PrivateAssignment_0_0");
 					put(grammarAccess.getFunctionAccess().getFinalAssignment_0_1(), "rule__Function__FinalAssignment_0_1");
 					put(grammarAccess.getFunctionAccess().getTypeParamsAssignment_1_1(), "rule__Function__TypeParamsAssignment_1_1");
@@ -188,7 +187,7 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getConstructorCallAccess().getTypeAssignment_1(), "rule__ConstructorCall__TypeAssignment_1");
 					put(grammarAccess.getConstructorCallAccess().getParamsAssignment_2_1_0(), "rule__ConstructorCall__ParamsAssignment_2_1_0");
 					put(grammarAccess.getConstructorCallAccess().getParamsAssignment_2_1_1_1(), "rule__ConstructorCall__ParamsAssignment_2_1_1_1");
-					put(grammarAccess.getConstructorCallAccess().getInitializerAssignment_4(), "rule__ConstructorCall__InitializerAssignment_4");
+					put(grammarAccess.getConstructorCallAccess().getInitializerAssignment_3(), "rule__ConstructorCall__InitializerAssignment_3");
 					put(grammarAccess.getBooleanLiteralAccess().getIsTrueAssignment_1(), "rule__BooleanLiteral__IsTrueAssignment_1");
 					put(grammarAccess.getIntLiteralAccess().getValueAssignment(), "rule__IntLiteral__ValueAssignment");
 					put(grammarAccess.getStringLiteralAccess().getValueAssignment(), "rule__StringLiteral__ValueAssignment");

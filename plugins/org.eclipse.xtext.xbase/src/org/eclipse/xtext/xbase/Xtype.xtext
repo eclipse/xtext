@@ -7,7 +7,7 @@ TypeRef:
   SimpleTypeRef|FunctionTypeRef;
 
 FunctionTypeRef:
-  ('(' paramTypes+=TypeRef (',' paramTypes+=TypeRef)* ')')? '=>' returnType+=TypeRef;
+  ('(' paramTypes+=TypeRef (',' paramTypes+=TypeRef)* ')')? '=>' returnType=TypeRef;
 
 SimpleTypeRef:
   type=[types::Type|QualifiedName] ('<' typeParams+=TypeParam (',' typeParams+=TypeParam)* '>')?;
