@@ -46,8 +46,8 @@ import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.xtext.ecoreInference.TransformationDiagnosticsProducer;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
+import org.eclipse.xtext.xtext.ecoreInference.TransformationDiagnosticsProducer;
 import org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformer;
 
 import com.google.common.collect.Sets;
@@ -63,8 +63,11 @@ public class XtextLinker extends Linker {
 	@Inject
 	private IScopeProvider scopeProvider;
 
-	@Inject(optional=true)
+	@Inject(optional = true)
 	private IXtext2EcorePostProcessor postProcessor;
+
+	@Inject(optional = true)
+	private IReferableElementsUnloader unloader;
 
 	public IScopeProvider getScopeProvider() {
 		return scopeProvider;
@@ -97,9 +100,8 @@ public class XtextLinker extends Linker {
 			public void setTarget(EObject object, EStructuralFeature feature) {
 				super.setTarget(object, feature);
 				// we don't want to mark generated types as errors unless generation fails
-				filter = isTypeRef(object, feature) ||
-					isGeneratedPackage(object, feature) ||
-					isEnumLiteral(object, feature);
+				filter = isTypeRef(object, feature) || isGeneratedPackage(object, feature)
+						|| isEnumLiteral(object, feature);
 			}
 
 			private boolean isEnumLiteral(EObject object, EStructuralFeature feature) {
@@ -111,13 +113,11 @@ public class XtextLinker extends Linker {
 			}
 
 			private boolean isGeneratedPackage(EObject object, EStructuralFeature feature) {
-				return (feature == XtextPackage.eINSTANCE.getAbstractMetamodelDeclaration_EPackage() &&
-						(object instanceof GeneratedMetamodel));
+				return (feature == XtextPackage.eINSTANCE.getAbstractMetamodelDeclaration_EPackage() && (object instanceof GeneratedMetamodel));
 			}
 
 			private boolean isTypeRef(EObject object, EStructuralFeature feature) {
-				return (feature == XtextPackage.eINSTANCE.getTypeRef_Classifier() &&
-						((TypeRef) object).getMetamodel() instanceof GeneratedMetamodel);
+				return (feature == XtextPackage.eINSTANCE.getTypeRef_Classifier() && ((TypeRef) object).getMetamodel() instanceof GeneratedMetamodel);
 			}
 
 		};
@@ -133,8 +133,8 @@ public class XtextLinker extends Linker {
 		if (XtextPackage.eINSTANCE.getTypeRef_Metamodel() == ref) {
 			final TypeRef typeRef = (TypeRef) obj;
 			final String typeRefName = GrammarUtil.getTypeRefName(typeRef);
-			final List<EObject> metamodels = XtextMetamodelReferenceHelper.findBestMetamodelForType(
-					typeRef, "", typeRefName, scopeProvider.getScope(typeRef, ref));
+			final List<EObject> metamodels = XtextMetamodelReferenceHelper.findBestMetamodelForType(typeRef, "",
+					typeRefName, scopeProvider.getScope(typeRef, ref));
 			if (metamodels.isEmpty() || metamodels.size() > 1)
 				producer.addDiagnostic("Cannot find meta model for type '" + typeRefName + "'");
 			else
@@ -146,7 +146,7 @@ public class XtextLinker extends Linker {
 			else {
 				RuleCall call = XtextFactory.eINSTANCE.createRuleCall();
 				call.setRule(rule);
-				((CrossReference)obj).setTerminal(call);
+				((CrossReference) obj).setTerminal(call);
 			}
 		} else {
 			super.setDefaultValueImpl(obj, ref, producer);
@@ -171,6 +171,30 @@ public class XtextLinker extends Linker {
 	}
 
 	@Override
+	protected void beforeModelLinked(EObject model, IDiagnosticConsumer diagnosticsConsumer) {
+		if (model instanceof Grammar) {
+			// unload generated metamodels as they will be recreated during linking 
+			for (AbstractMetamodelDeclaration metamodelDeclaration : ((Grammar) model).getMetamodelDeclarations()) {
+				if (metamodelDeclaration instanceof GeneratedMetamodel) {
+					EPackage ePackage = ((GeneratedMetamodel) metamodelDeclaration).getEPackage();
+					if (ePackage != null) {
+						Resource resource = ePackage.eResource();
+						if (resource != null && resource.getResourceSet() != null) {
+							if (unloader != null) {
+								for (EObject content : resource.getContents()) {
+									unloader.unloadRoot(content);
+								}
+							}
+							resource.getResourceSet().getResources().remove(resource);
+						}
+					}
+				}
+			}
+		}
+		super.beforeModelLinked(model, diagnosticsConsumer);
+	}
+
+	@Override
 	public void linkModel(EObject model, IDiagnosticConsumer consumer) {
 		final Xtext2EcoreTransformer transformer = createTransformer((Grammar) model, consumer);
 		//TODO duplicate
@@ -179,7 +203,7 @@ public class XtextLinker extends Linker {
 		updateOverriddenRules((Grammar) model);
 		try {
 			transformer.transform();
-		} catch(Exception e) {
+		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 			consumer.consume(new ExceptionDiagnostic(e));
 		}
@@ -194,7 +218,7 @@ public class XtextLinker extends Linker {
 
 		@Inject
 		private IReferableElementsUnloader unloader;
-		
+
 		@SuppressWarnings("unchecked")
 		@Override
 		public void notifyChanged(Notification msg) {
@@ -226,11 +250,12 @@ public class XtextLinker extends Linker {
 						Collection<Resource> referencedResources = Sets.newHashSet(notifyingResource);
 						Collection<Resource> resourcesToRemove = new HashSet<Resource>();
 						if (oldValue instanceof Grammar) {
-							for(AbstractMetamodelDeclaration declaration: ((Grammar)oldValue).getMetamodelDeclarations()) {
+							for (AbstractMetamodelDeclaration declaration : ((Grammar) oldValue)
+									.getMetamodelDeclarations()) {
 								EPackage pack = declaration.getEPackage();
 								if (pack != null && pack.eResource() != null) {
 									resourcesToRemove.add(pack.eResource());
-									if (isPackageReferenced(set, pack, ((Grammar)oldValue).getMetamodelDeclarations())) {
+									if (isPackageReferenced(set, pack, ((Grammar) oldValue).getMetamodelDeclarations())) {
 										referencedResources.add(pack.eResource());
 									}
 								}
@@ -239,18 +264,19 @@ public class XtextLinker extends Linker {
 							EPackage pack = ((AbstractMetamodelDeclaration) oldValue).getEPackage();
 							if (pack != null && pack.eResource() != null) {
 								resourcesToRemove.add(pack.eResource());
-								if (!isPackageReferenced(set, pack, Collections.singletonList((AbstractMetamodelDeclaration)oldValue))) {
+								if (isPackageReferenced(set, pack, Collections
+										.singletonList((AbstractMetamodelDeclaration) oldValue))) {
 									referencedResources.add(pack.eResource());
 								}
 							}
 						} else if (oldValue instanceof Collection<?>) {
 							if (XtextPackage.Literals.GRAMMAR__METAMODEL_DECLARATIONS == msg.getFeature()) {
 								Collection<AbstractMetamodelDeclaration> metamodelDeclarations = (Collection<AbstractMetamodelDeclaration>) oldValue;
-								for(AbstractMetamodelDeclaration declaration: metamodelDeclarations) {
-									EPackage pack =declaration.getEPackage();
+								for (AbstractMetamodelDeclaration declaration : metamodelDeclarations) {
+									EPackage pack = declaration.getEPackage();
 									if (pack != null && pack.eResource() != null) {
 										resourcesToRemove.add(pack.eResource());
-										if (!isPackageReferenced(set, pack, metamodelDeclarations)) {
+										if (isPackageReferenced(set, pack, metamodelDeclarations)) {
 											referencedResources.add(pack.eResource());
 										}
 									}
@@ -259,8 +285,8 @@ public class XtextLinker extends Linker {
 						}
 						resourcesToRemove.removeAll(referencedResources);
 						if (unloader != null) {
-							for(Resource resource: resourcesToRemove) {
-								for(EObject content: resource.getContents())
+							for (Resource resource : resourcesToRemove) {
+								for (EObject content : resource.getContents())
 									unloader.unloadRoot(content);
 							}
 						}
@@ -272,15 +298,17 @@ public class XtextLinker extends Linker {
 			}
 		}
 
-		public boolean isPackageReferenced(ResourceSet set, EPackage pack, Collection<AbstractMetamodelDeclaration> knownReferences) {
-			for(int i = 0; i < set.getResources().size(); i++) { // cannot use foreach since we may get
-																 // a CME due to proxy resolution and transparent
-																 // loading of resources
+		public boolean isPackageReferenced(ResourceSet set, EPackage pack,
+				Collection<AbstractMetamodelDeclaration> knownReferences) {
+			for (int i = 0; i < set.getResources().size(); i++) { 
+				// cannot use foreach since we may get
+				// a CME due to proxy resolution and transparent
+				// loading of resources
 				Resource resource = set.getResources().get(i);
 				if (resource != null) {
-					for(EObject content: resource.getContents()) {
+					for (EObject content : resource.getContents()) {
 						if (content instanceof Grammar) {
-							for (AbstractMetamodelDeclaration decl: ((Grammar) content).getMetamodelDeclarations()) {
+							for (AbstractMetamodelDeclaration decl : ((Grammar) content).getMetamodelDeclarations()) {
 								if (pack.equals(decl.getEPackage()) && !knownReferences.contains(decl))
 									return true;
 							}
@@ -304,20 +332,21 @@ public class XtextLinker extends Linker {
 		if (grammar.getUsedGrammars().isEmpty())
 			return;
 		Map<String, AbstractRule> rulePerName = new HashMap<String, AbstractRule>(grammar.getRules().size());
-		for (AbstractRule rule: grammar.getRules())
+		for (AbstractRule rule : grammar.getRules())
 			rulePerName.put(rule.getName(), rule);
 		Set<Grammar> visitedGrammars = new HashSet<Grammar>();
 		visitedGrammars.add(grammar);
-		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
+		for (Grammar usedGrammar : grammar.getUsedGrammars()) {
 			updateOverriddenRules(usedGrammar, rulePerName, visitedGrammars);
 		}
 	}
 
-	protected void updateOverriddenRules(Grammar grammar, Map<String, AbstractRule> rulePerName, Set<Grammar> visitedGrammars) {
+	protected void updateOverriddenRules(Grammar grammar, Map<String, AbstractRule> rulePerName,
+			Set<Grammar> visitedGrammars) {
 		if (!visitedGrammars.add(grammar))
 			return;
 		updateOverriddenRules(grammar, rulePerName);
-		for(Grammar usedGrammar: grammar.getUsedGrammars()) {
+		for (Grammar usedGrammar : grammar.getUsedGrammars()) {
 			updateOverriddenRules(usedGrammar, rulePerName, visitedGrammars);
 		}
 	}
@@ -326,13 +355,13 @@ public class XtextLinker extends Linker {
 		if (grammar.isDefinesHiddenTokens()) {
 			updateHiddenTokens(grammar.getHiddenTokens(), rulePerName);
 		}
-		for (AbstractRule rule: grammar.getRules()) {
-			if (rule instanceof ParserRule && ((ParserRule)rule).isDefinesHiddenTokens()) {
+		for (AbstractRule rule : grammar.getRules()) {
+			if (rule instanceof ParserRule && ((ParserRule) rule).isDefinesHiddenTokens()) {
 				updateHiddenTokens(((ParserRule) rule).getHiddenTokens(), rulePerName);
 			}
 		}
 		final List<RuleCall> allRuleCalls = EcoreUtil2.getAllContentsOfType(grammar, RuleCall.class);
-		for (RuleCall call: allRuleCalls) {
+		for (RuleCall call : allRuleCalls) {
 			if (call.getRule() != null) {
 				AbstractRule rule = rulePerName.get(call.getRule().getName());
 				if (rule != null)
@@ -342,7 +371,7 @@ public class XtextLinker extends Linker {
 	}
 
 	private void updateHiddenTokens(List<AbstractRule> hiddenTokens, Map<String, AbstractRule> rulePerName) {
-		for(int i = 0; i < hiddenTokens.size(); i++) {
+		for (int i = 0; i < hiddenTokens.size(); i++) {
 			AbstractRule hidden = hiddenTokens.get(i);
 			AbstractRule overridden = rulePerName.get(hidden.getName());
 			if (overridden != null)
@@ -351,8 +380,7 @@ public class XtextLinker extends Linker {
 	}
 
 	/**
-	 * We add typeRefs without Nodes on the fly, so we should remove them before
-	 * relinking.
+	 * We add typeRefs without Nodes on the fly, so we should remove them before relinking.
 	 */
 	@Override
 	protected void clearReference(EObject obj, EReference ref) {
