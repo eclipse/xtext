@@ -23,4 +23,10 @@ public class XbaseScopeProvider extends AbstractDeclarativeScopeProvider {
 			return delegateGetScope(function, reference);
 		return Scopes.scopeFor(function.getTypeParams(), delegateGetScope(function, reference));
 	}
+	
+	
+	/**
+	 * scoping for simple feature
+	 * 
+	 */
 }

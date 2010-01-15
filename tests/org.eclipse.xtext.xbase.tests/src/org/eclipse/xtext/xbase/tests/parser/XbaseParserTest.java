@@ -12,11 +12,13 @@ import org.eclipse.xtext.xpression.Closure;
 import org.eclipse.xtext.xpression.ConstructorCall;
 import org.eclipse.xtext.xpression.FeatureCall;
 import org.eclipse.xtext.xpression.IfExpression;
+import org.eclipse.xtext.xpression.InstanceOfExpression;
 import org.eclipse.xtext.xpression.IntLiteral;
 import org.eclipse.xtext.xpression.RichString;
 import org.eclipse.xtext.xpression.RichStringLiteral;
 import org.eclipse.xtext.xpression.StringLiteral;
 import org.eclipse.xtext.xpression.SwitchExpression;
+import org.eclipse.xtext.xpression.TypeLiteral;
 import org.eclipse.xtext.xpression.UnaryOperation;
 import org.eclipse.xtext.xpression.VariableDeclaration;
 import org.eclipse.xtext.xpression.WhileExpression;
@@ -249,6 +251,17 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		WhileExpression expression = (WhileExpression) expression("while (true) 'foo'");
 		assertTrue(expression.getPredicate() instanceof BooleanLiteral);
 		assertTrue(expression.getBody() instanceof StringLiteral);
+	}
+	
+	public void testTypeLiteral() throws Exception {
+		TypeLiteral expression = (TypeLiteral) expression("java.lang.String.class");
+		assertEquals("java.lang.String",expression.getType().getCanonicalName());
+	}
+	
+	public void testInstanceOf() throws Exception {
+		InstanceOfExpression expression = (InstanceOfExpression) expression("true instanceof java.lang.Boolean");
+		assertEquals("java.lang.Boolean",expression.getType().getCanonicalName());
+		assertTrue(expression.getExpression() instanceof BooleanLiteral);
 	}
 
 	public void testFile_0() throws Exception {
