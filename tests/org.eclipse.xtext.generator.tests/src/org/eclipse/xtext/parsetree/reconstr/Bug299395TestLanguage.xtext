@@ -13,14 +13,24 @@ generate bug299395 "http://www.eclipse.org/2010/tmf/xtext/Bug299395"
 Model: {Model}
 	( 
 	  	'{' 
-		unused+=STRING ?
+		strings += STRING ?
 	   	'}'
 	)*
 	(
 		'['
-		(key+=STRING
-		value+=STRING)*
+		(	keys += STRING
+			values += STRING
+		)*
 		']'
 	)*
+	('subModel' subModel=SubModel)?
 ;
-
+	
+SubModel: {SubModel}
+		(
+			 '1' 
+			 '2' 
+			 strings += STRING? 
+		)*
+	;
+	
