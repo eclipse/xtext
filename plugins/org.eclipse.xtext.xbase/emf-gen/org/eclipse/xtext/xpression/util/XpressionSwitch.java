@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XpressionSwitch.java,v 1.1 2010/01/14 14:40:23 sefftinge Exp $
+ * $Id: XpressionSwitch.java,v 1.2 2010/01/15 08:16:16 sefftinge Exp $
  */
 package org.eclipse.xtext.xpression.util;
 
@@ -227,6 +227,20 @@ public class XpressionSwitch<T> {
 				WhileExpression whileExpression = (WhileExpression)theEObject;
 				T result = caseWhileExpression(whileExpression);
 				if (result == null) result = caseExpression(whileExpression);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XpressionPackage.TYPE_LITERAL: {
+				TypeLiteral typeLiteral = (TypeLiteral)theEObject;
+				T result = caseTypeLiteral(typeLiteral);
+				if (result == null) result = caseExpression(typeLiteral);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XpressionPackage.INSTANCE_OF_EXPRESSION: {
+				InstanceOfExpression instanceOfExpression = (InstanceOfExpression)theEObject;
+				T result = caseInstanceOfExpression(instanceOfExpression);
+				if (result == null) result = caseExpression(instanceOfExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -546,6 +560,36 @@ public class XpressionSwitch<T> {
 	 * @generated
 	 */
 	public T caseWhileExpression(WhileExpression object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Type Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Type Literal</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseTypeLiteral(TypeLiteral object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Instance Of Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Instance Of Expression</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseInstanceOfExpression(InstanceOfExpression object) {
 		return null;
 	}
 

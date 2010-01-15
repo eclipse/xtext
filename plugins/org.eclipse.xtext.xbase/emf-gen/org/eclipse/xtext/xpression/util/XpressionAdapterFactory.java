@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XpressionAdapterFactory.java,v 1.1 2010/01/14 14:40:23 sefftinge Exp $
+ * $Id: XpressionAdapterFactory.java,v 1.2 2010/01/15 08:16:16 sefftinge Exp $
  */
 package org.eclipse.xtext.xpression.util;
 
@@ -154,6 +154,14 @@ public class XpressionAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseWhileExpression(WhileExpression object) {
 				return createWhileExpressionAdapter();
+			}
+			@Override
+			public Adapter caseTypeLiteral(TypeLiteral object) {
+				return createTypeLiteralAdapter();
+			}
+			@Override
+			public Adapter caseInstanceOfExpression(InstanceOfExpression object) {
+				return createInstanceOfExpressionAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -466,6 +474,34 @@ public class XpressionAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createWhileExpressionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.TypeLiteral <em>Type Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xpression.TypeLiteral
+	 * @generated
+	 */
+	public Adapter createTypeLiteralAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.InstanceOfExpression <em>Instance Of Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xpression.InstanceOfExpression
+	 * @generated
+	 */
+	public Adapter createInstanceOfExpressionAdapter() {
 		return null;
 	}
 

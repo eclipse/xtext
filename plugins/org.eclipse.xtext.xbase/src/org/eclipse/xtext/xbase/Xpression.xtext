@@ -1,22 +1,13 @@
 grammar org.eclipse.xtext.xbase.Xpression with org.eclipse.xtext.xbase.Xtype
 
 import "platform:/resource/org.eclipse.xtext.xbase/model/Xpression.ecore"
+import "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore" as types
 
 Expression returns Expression:
-	Closure;	
+	Assignment;	
 
-Closure returns Expression :
-	{Closure} (params+=DeclaredParameter (',' params+=DeclaredParameter)*)? '|' expression=CastedExpression |
-	CastedExpression	
-;
-	
-CastedExpression returns Expression:
- 	{CastedExpression} '(' type=TypeRef ')' target=Assignment
- 	| Assignment
-;
-	
 Assignment returns Expression : 
-    OrExpression  ({Assignment.left=current} '=' right=OrExpression)?
+    OrExpression  ({BinaryOperation.left=current} operator=('='|'+=') right=OrExpression)?
 ;
 
 OrExpression returns Expression : 
@@ -24,11 +15,17 @@ OrExpression returns Expression :
 ;
 
 AndExpression returns Expression : 
-	RelationalExpression ({BinaryOperation.left=current} operator='&&' right=RelationalExpression)*	    
+	EqualityExpression ({BinaryOperation.left=current} operator='&&' right=EqualityExpression)*	    
+;
+
+EqualityExpression returns Expression : 
+	RelationalExpression ({BinaryOperation.left=current} operator=('=='|'!=') right=RelationalExpression )*
 ;
 
 RelationalExpression returns Expression : 
-	AdditiveExpression ({BinaryOperation.left=current} operator=('=='|'!='|'>='|'<='|'>'|'<' ) right=AdditiveExpression )*
+	AdditiveExpression 
+		({InstanceOfExpression.expression=current} 'instanceof' type=[types::Type|QualifiedName] |
+		 {BinaryOperation.left=current} operator=('>='|'<='|'>'|'<' ) right=AdditiveExpression )*
 ;
 
 AdditiveExpression returns Expression :
@@ -36,7 +33,7 @@ AdditiveExpression returns Expression :
 ;
 
 MultiplicativeExpression returns Expression : 
-	OtherOperatorExpression ({BinaryOperation.left=current} operator=('*'|'/') right=OtherOperatorExpression )*
+	OtherOperatorExpression ({BinaryOperation.left=current} operator=('*'|'/'|'%') right=OtherOperatorExpression )*
 ;
 
 OtherOperatorExpression returns Expression: 
@@ -44,8 +41,9 @@ OtherOperatorExpression returns Expression:
 ;
 
 UnaryOperation returns Expression :
-	FeatureCall |
-	{UnaryOperation} operator=("!"|"-") target=FeatureCall
+	{UnaryOperation} operator=("!"|"-"|"+") target=FeatureCall |
+	{CastedExpression} '(' type=TypeRef ')' target=Expression |
+	FeatureCall
 ;
   
 
@@ -55,10 +53,12 @@ FeatureCall returns Expression :
 ;
 
 PrimaryExpression returns Expression : 
+  Closure |
   BooleanLiteral   |  
   IntLiteral   |  
   NullLiteral   |  
   StringLiteral |
+  TypeLiteral |
   ConstructorCall   | 
   BlockExpression   | 
   RichString |
@@ -67,6 +67,10 @@ PrimaryExpression returns Expression :
   WhileExpression |
   SimpleFeatureCall   |  
   ParenthesizedExpression;
+  
+Closure returns Expression :
+	{Closure} (params+=DeclaredParameter (',' params+=DeclaredParameter)*)? '|' expression=Expression
+;
   
 ParenthesizedExpression returns Expression: 
 	'(' Expression ')'	    
@@ -132,6 +136,9 @@ StringLiteral :
 	value=STRING
 ;
 
+TypeLiteral :
+	type=[types::Type|QualifiedName]'.''class';
+	
 RichString :	
 	expressions+=RichStringLiteral 
 	(expressions+=Expression

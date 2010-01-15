@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XpressionFactoryImpl.java,v 1.1 2010/01/14 14:40:17 sefftinge Exp $
+ * $Id: XpressionFactoryImpl.java,v 1.2 2010/01/15 08:16:16 sefftinge Exp $
  */
 package org.eclipse.xtext.xpression.impl;
 
@@ -81,6 +81,8 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 			case XpressionPackage.BINARY_OPERATION: return createBinaryOperation();
 			case XpressionPackage.UNARY_OPERATION: return createUnaryOperation();
 			case XpressionPackage.WHILE_EXPRESSION: return createWhileExpression();
+			case XpressionPackage.TYPE_LITERAL: return createTypeLiteral();
+			case XpressionPackage.INSTANCE_OF_EXPRESSION: return createInstanceOfExpression();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -294,6 +296,26 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	public WhileExpression createWhileExpression() {
 		WhileExpressionImpl whileExpression = new WhileExpressionImpl();
 		return whileExpression;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public TypeLiteral createTypeLiteral() {
+		TypeLiteralImpl typeLiteral = new TypeLiteralImpl();
+		return typeLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public InstanceOfExpression createInstanceOfExpression() {
+		InstanceOfExpressionImpl instanceOfExpression = new InstanceOfExpressionImpl();
+		return instanceOfExpression;
 	}
 
 	/**

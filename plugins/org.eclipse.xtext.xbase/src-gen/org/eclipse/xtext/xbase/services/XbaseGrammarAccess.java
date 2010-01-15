@@ -343,7 +343,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Expression:
-	//  Closure;
+	//  Assignment;
 	public XpressionGrammarAccess.ExpressionElements getExpressionAccess() {
 		return gaXpression.getExpressionAccess();
 	}
@@ -352,29 +352,9 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		return getExpressionAccess().getRule();
 	}
 
-	//Closure returns Expression:
-	//  {Closure} (params+=DeclaredParameter ("," params+=DeclaredParameter)*)? "|"
-	//  expression=CastedExpression|CastedExpression;
-	public XpressionGrammarAccess.ClosureElements getClosureAccess() {
-		return gaXpression.getClosureAccess();
-	}
-	
-	public ParserRule getClosureRule() {
-		return getClosureAccess().getRule();
-	}
-
-	//CastedExpression returns Expression:
-	//  {CastedExpression} "(" type=TypeRef ")" target=Assignment|Assignment;
-	public XpressionGrammarAccess.CastedExpressionElements getCastedExpressionAccess() {
-		return gaXpression.getCastedExpressionAccess();
-	}
-	
-	public ParserRule getCastedExpressionRule() {
-		return getCastedExpressionAccess().getRule();
-	}
-
 	//Assignment returns Expression:
-	//  OrExpression ({Assignment.left=current} "=" right=OrExpression)?;
+	//  OrExpression ({BinaryOperation.left=current} operator=( "=" | "+=" ) right=OrExpression
+	//  )?;
 	public XpressionGrammarAccess.AssignmentElements getAssignmentAccess() {
 		return gaXpression.getAssignmentAccess();
 	}
@@ -394,8 +374,8 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//AndExpression returns Expression:
-	//  RelationalExpression ({BinaryOperation.left=current} operator="&&" right=
-	//  RelationalExpression)*;
+	//  EqualityExpression ({BinaryOperation.left=current} operator="&&" right=
+	//  EqualityExpression)*;
 	public XpressionGrammarAccess.AndExpressionElements getAndExpressionAccess() {
 		return gaXpression.getAndExpressionAccess();
 	}
@@ -404,9 +384,21 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 		return getAndExpressionAccess().getRule();
 	}
 
+	//EqualityExpression returns Expression:
+	//  RelationalExpression ({BinaryOperation.left=current} operator=( "==" | "!=" ) right=
+	//  RelationalExpression)*;
+	public XpressionGrammarAccess.EqualityExpressionElements getEqualityExpressionAccess() {
+		return gaXpression.getEqualityExpressionAccess();
+	}
+	
+	public ParserRule getEqualityExpressionRule() {
+		return getEqualityExpressionAccess().getRule();
+	}
+
 	//RelationalExpression returns Expression:
-	//  AdditiveExpression ({BinaryOperation.left=current} operator=( "==" | "!=" | ">=" | "<=" |
-	//  ">" | "<" ) right=AdditiveExpression)*;
+	//  AdditiveExpression ({InstanceOfExpression.expression=current} "instanceof" type=[
+	//  types::Type|QualifiedName]|{BinaryOperation.left=current} operator=( ">=" | "<=" | ">"
+	//  | "<" ) right=AdditiveExpression)*;
 	public XpressionGrammarAccess.RelationalExpressionElements getRelationalExpressionAccess() {
 		return gaXpression.getRelationalExpressionAccess();
 	}
@@ -427,8 +419,8 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//MultiplicativeExpression returns Expression:
-	//  OtherOperatorExpression ({BinaryOperation.left=current} operator=( "*" | "/" ) right=
-	//  OtherOperatorExpression)*;
+	//  OtherOperatorExpression ({BinaryOperation.left=current} operator=( "*" | "/" | "%" )
+	//  right=OtherOperatorExpression)*;
 	public XpressionGrammarAccess.MultiplicativeExpressionElements getMultiplicativeExpressionAccess() {
 		return gaXpression.getMultiplicativeExpressionAccess();
 	}
@@ -449,7 +441,8 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//UnaryOperation returns Expression:
-	//  FeatureCall|{UnaryOperation} operator=( "!" | "-" ) target=FeatureCall;
+	//  {UnaryOperation} operator=( "!" | "-" | "+" ) target=FeatureCall|{CastedExpression} "("
+	//  type=TypeRef ")" target=Expression|FeatureCall;
 	public XpressionGrammarAccess.UnaryOperationElements getUnaryOperationAccess() {
 		return gaXpression.getUnaryOperationAccess();
 	}
@@ -470,15 +463,26 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//PrimaryExpression returns Expression:
-	//  BooleanLiteral|IntLiteral|NullLiteral|StringLiteral|ConstructorCall|
-	//  BlockExpression|RichString|IfExpression|SwitchExpression|WhileExpression|
-	//  SimpleFeatureCall|ParenthesizedExpression;
+	//  Closure|BooleanLiteral|IntLiteral|NullLiteral|StringLiteral|TypeLiteral|
+	//  ConstructorCall|BlockExpression|RichString|IfExpression|SwitchExpression|
+	//  WhileExpression|SimpleFeatureCall|ParenthesizedExpression;
 	public XpressionGrammarAccess.PrimaryExpressionElements getPrimaryExpressionAccess() {
 		return gaXpression.getPrimaryExpressionAccess();
 	}
 	
 	public ParserRule getPrimaryExpressionRule() {
 		return getPrimaryExpressionAccess().getRule();
+	}
+
+	//Closure returns Expression:
+	//  {Closure} (params+=DeclaredParameter ("," params+=DeclaredParameter)*)? "|"
+	//  expression=Expression;
+	public XpressionGrammarAccess.ClosureElements getClosureAccess() {
+		return gaXpression.getClosureAccess();
+	}
+	
+	public ParserRule getClosureRule() {
+		return getClosureAccess().getRule();
 	}
 
 	//ParenthesizedExpression returns Expression:
@@ -631,6 +635,16 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getStringLiteralRule() {
 		return getStringLiteralAccess().getRule();
+	}
+
+	//TypeLiteral:
+	//  type=[types::Type|QualifiedName] "." "class";
+	public XpressionGrammarAccess.TypeLiteralElements getTypeLiteralAccess() {
+		return gaXpression.getTypeLiteralAccess();
+	}
+	
+	public ParserRule getTypeLiteralRule() {
+		return getTypeLiteralAccess().getRule();
 	}
 
 	//RichString:

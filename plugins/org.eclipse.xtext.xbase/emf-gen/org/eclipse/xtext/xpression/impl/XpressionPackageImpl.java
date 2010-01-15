@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XpressionPackageImpl.java,v 1.1 2010/01/14 14:40:18 sefftinge Exp $
+ * $Id: XpressionPackageImpl.java,v 1.2 2010/01/15 08:16:16 sefftinge Exp $
  */
 package org.eclipse.xtext.xpression.impl;
 
@@ -31,12 +31,14 @@ import org.eclipse.xtext.xpression.DeclaredParameter;
 import org.eclipse.xtext.xpression.Expression;
 import org.eclipse.xtext.xpression.FeatureCall;
 import org.eclipse.xtext.xpression.IfExpression;
+import org.eclipse.xtext.xpression.InstanceOfExpression;
 import org.eclipse.xtext.xpression.IntLiteral;
 import org.eclipse.xtext.xpression.NullLiteral;
 import org.eclipse.xtext.xpression.RichString;
 import org.eclipse.xtext.xpression.RichStringLiteral;
 import org.eclipse.xtext.xpression.StringLiteral;
 import org.eclipse.xtext.xpression.SwitchExpression;
+import org.eclipse.xtext.xpression.TypeLiteral;
 import org.eclipse.xtext.xpression.UnaryOperation;
 import org.eclipse.xtext.xpression.VariableDeclaration;
 import org.eclipse.xtext.xpression.WhileExpression;
@@ -200,6 +202,20 @@ public class XpressionPackageImpl extends EPackageImpl implements XpressionPacka
 	 * @generated
 	 */
 	private EClass whileExpressionEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass typeLiteralEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass instanceOfExpressionEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -809,6 +825,51 @@ public class XpressionPackageImpl extends EPackageImpl implements XpressionPacka
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getTypeLiteral() {
+		return typeLiteralEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getTypeLiteral_Type() {
+		return (EReference)typeLiteralEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getInstanceOfExpression() {
+		return instanceOfExpressionEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getInstanceOfExpression_Type() {
+		return (EReference)instanceOfExpressionEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getInstanceOfExpression_Expression() {
+		return (EReference)instanceOfExpressionEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public XpressionFactory getXpressionFactory() {
 		return (XpressionFactory)getEFactoryInstance();
 	}
@@ -911,6 +972,13 @@ public class XpressionPackageImpl extends EPackageImpl implements XpressionPacka
 		whileExpressionEClass = createEClass(WHILE_EXPRESSION);
 		createEReference(whileExpressionEClass, WHILE_EXPRESSION__PREDICATE);
 		createEReference(whileExpressionEClass, WHILE_EXPRESSION__BODY);
+
+		typeLiteralEClass = createEClass(TYPE_LITERAL);
+		createEReference(typeLiteralEClass, TYPE_LITERAL__TYPE);
+
+		instanceOfExpressionEClass = createEClass(INSTANCE_OF_EXPRESSION);
+		createEReference(instanceOfExpressionEClass, INSTANCE_OF_EXPRESSION__TYPE);
+		createEReference(instanceOfExpressionEClass, INSTANCE_OF_EXPRESSION__EXPRESSION);
 	}
 
 	/**
@@ -938,6 +1006,7 @@ public class XpressionPackageImpl extends EPackageImpl implements XpressionPacka
 
 		// Obtain other dependent packages
 		XtypePackage theXtypePackage = (XtypePackage)EPackage.Registry.INSTANCE.getEPackage(XtypePackage.eNS_URI);
+		TypesPackage theTypesPackage = (TypesPackage)EPackage.Registry.INSTANCE.getEPackage(TypesPackage.eNS_URI);
 
 		// Create type parameters
 
@@ -961,6 +1030,8 @@ public class XpressionPackageImpl extends EPackageImpl implements XpressionPacka
 		binaryOperationEClass.getESuperTypes().add(this.getExpression());
 		unaryOperationEClass.getESuperTypes().add(this.getExpression());
 		whileExpressionEClass.getESuperTypes().add(this.getExpression());
+		typeLiteralEClass.getESuperTypes().add(this.getExpression());
+		instanceOfExpressionEClass.getESuperTypes().add(this.getExpression());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(expressionEClass, Expression.class, "Expression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1031,17 +1102,24 @@ public class XpressionPackageImpl extends EPackageImpl implements XpressionPacka
 		initEReference(getAssignment_Right(), this.getExpression(), null, "right", null, 0, 1, Assignment.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(binaryOperationEClass, BinaryOperation.class, "BinaryOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getBinaryOperation_Left(), this.getExpression(), null, "left", null, 0, 1, BinaryOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getBinaryOperation_Operator(), ecorePackage.getEString(), "operator", null, 0, 1, BinaryOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getBinaryOperation_Right(), this.getExpression(), null, "right", null, 0, 1, BinaryOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBinaryOperation_Left(), this.getExpression(), null, "left", null, 1, 1, BinaryOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getBinaryOperation_Operator(), ecorePackage.getEString(), "operator", null, 1, 1, BinaryOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getBinaryOperation_Right(), this.getExpression(), null, "right", null, 1, 1, BinaryOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(unaryOperationEClass, UnaryOperation.class, "UnaryOperation", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getUnaryOperation_Operator(), ecorePackage.getEString(), "operator", null, 0, 1, UnaryOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getUnaryOperation_Target(), this.getExpression(), null, "target", null, 0, 1, UnaryOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getUnaryOperation_Operator(), ecorePackage.getEString(), "operator", null, 1, 1, UnaryOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getUnaryOperation_Target(), this.getExpression(), null, "target", null, 1, 1, UnaryOperation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(whileExpressionEClass, WhileExpression.class, "WhileExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getWhileExpression_Predicate(), this.getExpression(), null, "predicate", null, 0, 1, WhileExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getWhileExpression_Body(), this.getExpression(), null, "body", null, 0, 1, WhileExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(typeLiteralEClass, TypeLiteral.class, "TypeLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTypeLiteral_Type(), theTypesPackage.getType(), null, "type", null, 1, 1, TypeLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(instanceOfExpressionEClass, InstanceOfExpression.class, "InstanceOfExpression", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getInstanceOfExpression_Type(), theTypesPackage.getType(), null, "type", null, 1, 1, InstanceOfExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getInstanceOfExpression_Expression(), this.getExpression(), null, "expression", null, 1, 1, InstanceOfExpression.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

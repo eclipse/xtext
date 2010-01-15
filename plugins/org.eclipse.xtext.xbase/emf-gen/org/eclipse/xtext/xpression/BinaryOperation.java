@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BinaryOperation.java,v 1.1 2010/01/14 14:40:19 sefftinge Exp $
+ * $Id: BinaryOperation.java,v 1.2 2010/01/15 08:16:16 sefftinge Exp $
  */
 package org.eclipse.xtext.xpression;
 
@@ -37,7 +37,7 @@ public interface BinaryOperation extends Expression {
 	 * @return the value of the '<em>Left</em>' containment reference.
 	 * @see #setLeft(Expression)
 	 * @see org.eclipse.xtext.xpression.XpressionPackage#getBinaryOperation_Left()
-	 * @model containment="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	Expression getLeft();
@@ -63,7 +63,7 @@ public interface BinaryOperation extends Expression {
 	 * @return the value of the '<em>Operator</em>' attribute.
 	 * @see #setOperator(String)
 	 * @see org.eclipse.xtext.xpression.XpressionPackage#getBinaryOperation_Operator()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	String getOperator();
@@ -89,7 +89,7 @@ public interface BinaryOperation extends Expression {
 	 * @return the value of the '<em>Right</em>' containment reference.
 	 * @see #setRight(Expression)
 	 * @see org.eclipse.xtext.xpression.XpressionPackage#getBinaryOperation_Right()
-	 * @model containment="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	Expression getRight();

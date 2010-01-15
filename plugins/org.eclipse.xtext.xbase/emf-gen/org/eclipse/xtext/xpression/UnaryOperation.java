@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: UnaryOperation.java,v 1.1 2010/01/14 14:40:20 sefftinge Exp $
+ * $Id: UnaryOperation.java,v 1.2 2010/01/15 08:16:16 sefftinge Exp $
  */
 package org.eclipse.xtext.xpression;
 
@@ -36,7 +36,7 @@ public interface UnaryOperation extends Expression {
 	 * @return the value of the '<em>Operator</em>' attribute.
 	 * @see #setOperator(String)
 	 * @see org.eclipse.xtext.xpression.XpressionPackage#getUnaryOperation_Operator()
-	 * @model
+	 * @model required="true"
 	 * @generated
 	 */
 	String getOperator();
@@ -62,7 +62,7 @@ public interface UnaryOperation extends Expression {
 	 * @return the value of the '<em>Target</em>' containment reference.
 	 * @see #setTarget(Expression)
 	 * @see org.eclipse.xtext.xpression.XpressionPackage#getUnaryOperation_Target()
-	 * @model containment="true"
+	 * @model containment="true" required="true"
 	 * @generated
 	 */
 	Expression getTarget();

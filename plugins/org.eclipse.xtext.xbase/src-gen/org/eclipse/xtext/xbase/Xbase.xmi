@@ -116,85 +116,82 @@
     <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel">
       <ePackage href="http://www.eclipse.org/xtext/xbase/Xpression#/"/>
     </metamodelDeclarations>
+    <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="types">
+      <ePackage href="http://www.eclipse.org/xtext/common/JavaVMTypes#/"/>
+    </metamodelDeclarations>
     <rules xsi:type="xtext:ParserRule" name="Expression">
       <type metamodel="/1/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//Expression"/>
       </type>
       <alternatives xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="Closure">
-      <type metamodel="/1/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//Expression"/>
-      </type>
-      <alternatives xsi:type="xtext:Alternatives">
-        <groups xsi:type="xtext:Group">
-          <tokens xsi:type="xtext:Action">
-            <type metamodel="/1/@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//Closure"/>
-            </type>
-          </tokens>
-          <tokens xsi:type="xtext:Group" cardinality="?">
-            <tokens xsi:type="xtext:Assignment" feature="params" operator="+=">
-              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.21"/>
-            </tokens>
-            <tokens xsi:type="xtext:Group" cardinality="*">
-              <tokens xsi:type="xtext:Keyword" value=","/>
-              <tokens xsi:type="xtext:Assignment" feature="params" operator="+=">
-                <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.21"/>
-              </tokens>
-            </tokens>
-          </tokens>
-          <tokens xsi:type="xtext:Keyword" value="|"/>
-          <tokens xsi:type="xtext:Assignment" feature="expression" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
-          </tokens>
-        </groups>
-        <groups xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="CastedExpression">
-      <type metamodel="/1/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//Expression"/>
-      </type>
-      <alternatives xsi:type="xtext:Alternatives">
-        <groups xsi:type="xtext:Group">
-          <tokens xsi:type="xtext:Action">
-            <type metamodel="/1/@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//CastedExpression"/>
-            </type>
-          </tokens>
-          <tokens xsi:type="xtext:Keyword" value="("/>
-          <tokens xsi:type="xtext:Assignment" feature="type" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.0"/>
-          </tokens>
-          <tokens xsi:type="xtext:Keyword" value=")"/>
-          <tokens xsi:type="xtext:Assignment" feature="target" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.3"/>
-          </tokens>
-        </groups>
-        <groups xsi:type="xtext:RuleCall" rule="/1/@rules.3"/>
-      </alternatives>
-    </rules>
     <rules xsi:type="xtext:ParserRule" name="Assignment">
       <type metamodel="/1/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//Expression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:RuleCall" rule="/1/@rules.4"/>
+        <tokens xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
         <tokens xsi:type="xtext:Group" cardinality="?">
           <tokens xsi:type="xtext:Action" feature="left" operator="=">
             <type metamodel="/1/@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//Assignment"/>
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//BinaryOperation"/>
             </type>
           </tokens>
-          <tokens xsi:type="xtext:Keyword" value="="/>
+          <tokens xsi:type="xtext:Assignment" feature="operator" operator="=">
+            <terminal xsi:type="xtext:Alternatives">
+              <groups xsi:type="xtext:Keyword" value="="/>
+              <groups xsi:type="xtext:Keyword" value="+="/>
+            </terminal>
+          </tokens>
+          <tokens xsi:type="xtext:Assignment" feature="right" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
+          </tokens>
+        </tokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="OrExpression">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <tokens xsi:type="xtext:RuleCall" rule="/1/@rules.3"/>
+        <tokens xsi:type="xtext:Group" cardinality="*">
+          <tokens xsi:type="xtext:Action" feature="left" operator="=">
+            <type metamodel="/1/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//BinaryOperation"/>
+            </type>
+          </tokens>
+          <tokens xsi:type="xtext:Assignment" feature="operator" operator="=">
+            <terminal xsi:type="xtext:Keyword" value="||"/>
+          </tokens>
+          <tokens xsi:type="xtext:Assignment" feature="right" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.3"/>
+          </tokens>
+        </tokens>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="AndExpression">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <tokens xsi:type="xtext:RuleCall" rule="/1/@rules.4"/>
+        <tokens xsi:type="xtext:Group" cardinality="*">
+          <tokens xsi:type="xtext:Action" feature="left" operator="=">
+            <type metamodel="/1/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//BinaryOperation"/>
+            </type>
+          </tokens>
+          <tokens xsi:type="xtext:Assignment" feature="operator" operator="=">
+            <terminal xsi:type="xtext:Keyword" value="&amp;&amp;"/>
+          </tokens>
           <tokens xsi:type="xtext:Assignment" feature="right" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.4"/>
           </tokens>
         </tokens>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="OrExpression">
+    <rules xsi:type="xtext:ParserRule" name="EqualityExpression">
       <type metamodel="/1/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//Expression"/>
       </type>
@@ -207,7 +204,10 @@
             </type>
           </tokens>
           <tokens xsi:type="xtext:Assignment" feature="operator" operator="=">
-            <terminal xsi:type="xtext:Keyword" value="||"/>
+            <terminal xsi:type="xtext:Alternatives">
+              <groups xsi:type="xtext:Keyword" value="=="/>
+              <groups xsi:type="xtext:Keyword" value="!="/>
+            </terminal>
           </tokens>
           <tokens xsi:type="xtext:Assignment" feature="right" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.5"/>
@@ -215,28 +215,51 @@
         </tokens>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="AndExpression">
+    <rules xsi:type="xtext:ParserRule" name="RelationalExpression">
       <type metamodel="/1/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//Expression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:RuleCall" rule="/1/@rules.6"/>
-        <tokens xsi:type="xtext:Group" cardinality="*">
-          <tokens xsi:type="xtext:Action" feature="left" operator="=">
-            <type metamodel="/1/@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//BinaryOperation"/>
-            </type>
-          </tokens>
-          <tokens xsi:type="xtext:Assignment" feature="operator" operator="=">
-            <terminal xsi:type="xtext:Keyword" value="&amp;&amp;"/>
-          </tokens>
-          <tokens xsi:type="xtext:Assignment" feature="right" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.6"/>
-          </tokens>
+        <tokens xsi:type="xtext:Alternatives" cardinality="*">
+          <groups xsi:type="xtext:Group">
+            <tokens xsi:type="xtext:Action" feature="expression" operator="=">
+              <type metamodel="/1/@metamodelDeclarations.0">
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//InstanceOfExpression"/>
+              </type>
+            </tokens>
+            <tokens xsi:type="xtext:Keyword" value="instanceof"/>
+            <tokens xsi:type="xtext:Assignment" feature="type" operator="=">
+              <terminal xsi:type="xtext:CrossReference">
+                <type metamodel="/1/@metamodelDeclarations.1">
+                  <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//Type"/>
+                </type>
+                <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.6"/>
+              </terminal>
+            </tokens>
+          </groups>
+          <groups xsi:type="xtext:Group">
+            <tokens xsi:type="xtext:Action" feature="left" operator="=">
+              <type metamodel="/1/@metamodelDeclarations.0">
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//BinaryOperation"/>
+              </type>
+            </tokens>
+            <tokens xsi:type="xtext:Assignment" feature="operator" operator="=">
+              <terminal xsi:type="xtext:Alternatives">
+                <groups xsi:type="xtext:Keyword" value=">="/>
+                <groups xsi:type="xtext:Keyword" value="&lt;="/>
+                <groups xsi:type="xtext:Keyword" value=">"/>
+                <groups xsi:type="xtext:Keyword" value="&lt;"/>
+              </terminal>
+            </tokens>
+            <tokens xsi:type="xtext:Assignment" feature="right" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.6"/>
+            </tokens>
+          </groups>
         </tokens>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="RelationalExpression">
+    <rules xsi:type="xtext:ParserRule" name="AdditiveExpression">
       <type metamodel="/1/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//Expression"/>
       </type>
@@ -250,12 +273,8 @@
           </tokens>
           <tokens xsi:type="xtext:Assignment" feature="operator" operator="=">
             <terminal xsi:type="xtext:Alternatives">
-              <groups xsi:type="xtext:Keyword" value="=="/>
-              <groups xsi:type="xtext:Keyword" value="!="/>
-              <groups xsi:type="xtext:Keyword" value=">="/>
-              <groups xsi:type="xtext:Keyword" value="&lt;="/>
-              <groups xsi:type="xtext:Keyword" value=">"/>
-              <groups xsi:type="xtext:Keyword" value="&lt;"/>
+              <groups xsi:type="xtext:Keyword" value="+"/>
+              <groups xsi:type="xtext:Keyword" value="-"/>
             </terminal>
           </tokens>
           <tokens xsi:type="xtext:Assignment" feature="right" operator="=">
@@ -264,7 +283,7 @@
         </tokens>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="AdditiveExpression">
+    <rules xsi:type="xtext:ParserRule" name="MultiplicativeExpression">
       <type metamodel="/1/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//Expression"/>
       </type>
@@ -278,8 +297,9 @@
           </tokens>
           <tokens xsi:type="xtext:Assignment" feature="operator" operator="=">
             <terminal xsi:type="xtext:Alternatives">
-              <groups xsi:type="xtext:Keyword" value="+"/>
-              <groups xsi:type="xtext:Keyword" value="-"/>
+              <groups xsi:type="xtext:Keyword" value="*"/>
+              <groups xsi:type="xtext:Keyword" value="/"/>
+              <groups xsi:type="xtext:Keyword" value="%"/>
             </terminal>
           </tokens>
           <tokens xsi:type="xtext:Assignment" feature="right" operator="=">
@@ -288,7 +308,7 @@
         </tokens>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="MultiplicativeExpression">
+    <rules xsi:type="xtext:ParserRule" name="OtherOperatorExpression">
       <type metamodel="/1/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//Expression"/>
       </type>
@@ -302,36 +322,12 @@
           </tokens>
           <tokens xsi:type="xtext:Assignment" feature="operator" operator="=">
             <terminal xsi:type="xtext:Alternatives">
-              <groups xsi:type="xtext:Keyword" value="*"/>
-              <groups xsi:type="xtext:Keyword" value="/"/>
-            </terminal>
-          </tokens>
-          <tokens xsi:type="xtext:Assignment" feature="right" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.9"/>
-          </tokens>
-        </tokens>
-      </alternatives>
-    </rules>
-    <rules xsi:type="xtext:ParserRule" name="OtherOperatorExpression">
-      <type metamodel="/1/@metamodelDeclarations.0">
-        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//Expression"/>
-      </type>
-      <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:RuleCall" rule="/1/@rules.10"/>
-        <tokens xsi:type="xtext:Group" cardinality="*">
-          <tokens xsi:type="xtext:Action" feature="left" operator="=">
-            <type metamodel="/1/@metamodelDeclarations.0">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//BinaryOperation"/>
-            </type>
-          </tokens>
-          <tokens xsi:type="xtext:Assignment" feature="operator" operator="=">
-            <terminal xsi:type="xtext:Alternatives">
               <groups xsi:type="xtext:Keyword" value="+="/>
               <groups xsi:type="xtext:Keyword" value=".."/>
             </terminal>
           </tokens>
           <tokens xsi:type="xtext:Assignment" feature="right" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.10"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.9"/>
           </tokens>
         </tokens>
       </alternatives>
@@ -341,7 +337,6 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//Expression"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
-        <groups xsi:type="xtext:RuleCall" rule="/1/@rules.11"/>
         <groups xsi:type="xtext:Group">
           <tokens xsi:type="xtext:Action">
             <type metamodel="/1/@metamodelDeclarations.0">
@@ -352,12 +347,29 @@
             <terminal xsi:type="xtext:Alternatives">
               <groups xsi:type="xtext:Keyword" value="!"/>
               <groups xsi:type="xtext:Keyword" value="-"/>
+              <groups xsi:type="xtext:Keyword" value="+"/>
             </terminal>
           </tokens>
           <tokens xsi:type="xtext:Assignment" feature="target" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.11"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.10"/>
           </tokens>
         </groups>
+        <groups xsi:type="xtext:Group">
+          <tokens xsi:type="xtext:Action">
+            <type metamodel="/1/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//CastedExpression"/>
+            </type>
+          </tokens>
+          <tokens xsi:type="xtext:Keyword" value="("/>
+          <tokens xsi:type="xtext:Assignment" feature="type" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.0"/>
+          </tokens>
+          <tokens xsi:type="xtext:Keyword" value=")"/>
+          <tokens xsi:type="xtext:Assignment" feature="target" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </tokens>
+        </groups>
+        <groups xsi:type="xtext:RuleCall" rule="/1/@rules.10"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="FeatureCall">
@@ -365,7 +377,7 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//Expression"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:RuleCall" rule="/1/@rules.12"/>
+        <tokens xsi:type="xtext:RuleCall" rule="/1/@rules.11"/>
         <tokens xsi:type="xtext:Group" cardinality="*">
           <tokens xsi:type="xtext:Action" feature="target" operator="=">
             <type metamodel="/1/@metamodelDeclarations.0">
@@ -399,18 +411,47 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//Expression"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
+        <groups xsi:type="xtext:RuleCall" rule="/1/@rules.12"/>
         <groups xsi:type="xtext:RuleCall" rule="/1/@rules.24"/>
         <groups xsi:type="xtext:RuleCall" rule="/1/@rules.26"/>
         <groups xsi:type="xtext:RuleCall" rule="/1/@rules.25"/>
         <groups xsi:type="xtext:RuleCall" rule="/1/@rules.27"/>
+        <groups xsi:type="xtext:RuleCall" rule="/1/@rules.28"/>
         <groups xsi:type="xtext:RuleCall" rule="/1/@rules.23"/>
         <groups xsi:type="xtext:RuleCall" rule="/1/@rules.18"/>
-        <groups xsi:type="xtext:RuleCall" rule="/1/@rules.28"/>
+        <groups xsi:type="xtext:RuleCall" rule="/1/@rules.29"/>
         <groups xsi:type="xtext:RuleCall" rule="/1/@rules.14"/>
         <groups xsi:type="xtext:RuleCall" rule="/1/@rules.15"/>
         <groups xsi:type="xtext:RuleCall" rule="/1/@rules.16"/>
         <groups xsi:type="xtext:RuleCall" rule="/1/@rules.22"/>
         <groups xsi:type="xtext:RuleCall" rule="/1/@rules.13"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Closure">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//Expression"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <tokens xsi:type="xtext:Action">
+          <type metamodel="/1/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//Closure"/>
+          </type>
+        </tokens>
+        <tokens xsi:type="xtext:Group" cardinality="?">
+          <tokens xsi:type="xtext:Assignment" feature="params" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.21"/>
+          </tokens>
+          <tokens xsi:type="xtext:Group" cardinality="*">
+            <tokens xsi:type="xtext:Keyword" value=","/>
+            <tokens xsi:type="xtext:Assignment" feature="params" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.21"/>
+            </tokens>
+          </tokens>
+        </tokens>
+        <tokens xsi:type="xtext:Keyword" value="|"/>
+        <tokens xsi:type="xtext:Assignment" feature="expression" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </tokens>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="ParenthesizedExpression">
@@ -655,20 +696,37 @@
         <terminal xsi:type="xtext:RuleCall" rule="/3/@rules.2"/>
       </alternatives>
     </rules>
+    <rules xsi:type="xtext:ParserRule" name="TypeLiteral">
+      <type metamodel="/1/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//TypeLiteral"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <tokens xsi:type="xtext:Assignment" feature="type" operator="=">
+          <terminal xsi:type="xtext:CrossReference">
+            <type metamodel="/1/@metamodelDeclarations.1">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//Type"/>
+            </type>
+            <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.6"/>
+          </terminal>
+        </tokens>
+        <tokens xsi:type="xtext:Keyword" value="."/>
+        <tokens xsi:type="xtext:Keyword" value="class"/>
+      </alternatives>
+    </rules>
     <rules xsi:type="xtext:ParserRule" name="RichString">
       <type metamodel="/1/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//RichString"/>
       </type>
       <alternatives xsi:type="xtext:Group">
         <tokens xsi:type="xtext:Assignment" feature="expressions" operator="+=">
-          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.29"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.30"/>
         </tokens>
         <tokens xsi:type="xtext:Group" cardinality="*">
           <tokens xsi:type="xtext:Assignment" feature="expressions" operator="+=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
           </tokens>
           <tokens xsi:type="xtext:Assignment" feature="expressions" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.29"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.30"/>
           </tokens>
         </tokens>
       </alternatives>
@@ -678,7 +736,7 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//RichStringLiteral"/>
       </type>
       <alternatives xsi:type="xtext:Assignment" feature="value" operator="=">
-        <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.30"/>
+        <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.31"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:TerminalRule" name="RICH_STRING">

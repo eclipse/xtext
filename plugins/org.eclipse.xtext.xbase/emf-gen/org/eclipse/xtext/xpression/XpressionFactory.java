@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XpressionFactory.java,v 1.1 2010/01/14 14:40:19 sefftinge Exp $
+ * $Id: XpressionFactory.java,v 1.2 2010/01/15 08:16:16 sefftinge Exp $
  */
 package org.eclipse.xtext.xpression;
 
@@ -213,6 +213,24 @@ public interface XpressionFactory extends EFactory {
 	 * @generated
 	 */
 	WhileExpression createWhileExpression();
+
+	/**
+	 * Returns a new object of class '<em>Type Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Type Literal</em>'.
+	 * @generated
+	 */
+	TypeLiteral createTypeLiteral();
+
+	/**
+	 * Returns a new object of class '<em>Instance Of Expression</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Instance Of Expression</em>'.
+	 * @generated
+	 */
+	InstanceOfExpression createInstanceOfExpression();
 
 	/**
 	 * Returns the package supported by this factory.

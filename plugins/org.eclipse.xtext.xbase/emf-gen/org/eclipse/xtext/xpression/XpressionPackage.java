@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XpressionPackage.java,v 1.1 2010/01/14 14:40:19 sefftinge Exp $
+ * $Id: XpressionPackage.java,v 1.2 2010/01/15 08:16:16 sefftinge Exp $
  */
 package org.eclipse.xtext.xpression;
 
@@ -803,6 +803,72 @@ public interface XpressionPackage extends EPackage {
 
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xpression.impl.TypeLiteralImpl <em>Type Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xpression.impl.TypeLiteralImpl
+	 * @see org.eclipse.xtext.xpression.impl.XpressionPackageImpl#getTypeLiteral()
+	 * @generated
+	 */
+	int TYPE_LITERAL = 21;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_LITERAL__TYPE = EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Type Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int TYPE_LITERAL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xpression.impl.InstanceOfExpressionImpl <em>Instance Of Expression</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xpression.impl.InstanceOfExpressionImpl
+	 * @see org.eclipse.xtext.xpression.impl.XpressionPackageImpl#getInstanceOfExpression()
+	 * @generated
+	 */
+	int INSTANCE_OF_EXPRESSION = 22;
+
+	/**
+	 * The feature id for the '<em><b>Type</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE_OF_EXPRESSION__TYPE = EXPRESSION_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE_OF_EXPRESSION__EXPRESSION = EXPRESSION_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Instance Of Expression</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int INSTANCE_OF_EXPRESSION_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 2;
+
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.xpression.Expression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1431,6 +1497,59 @@ public interface XpressionPackage extends EPackage {
 	EReference getWhileExpression_Body();
 
 	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xpression.TypeLiteral <em>Type Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Type Literal</em>'.
+	 * @see org.eclipse.xtext.xpression.TypeLiteral
+	 * @generated
+	 */
+	EClass getTypeLiteral();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xpression.TypeLiteral#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @see org.eclipse.xtext.xpression.TypeLiteral#getType()
+	 * @see #getTypeLiteral()
+	 * @generated
+	 */
+	EReference getTypeLiteral_Type();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xpression.InstanceOfExpression <em>Instance Of Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Instance Of Expression</em>'.
+	 * @see org.eclipse.xtext.xpression.InstanceOfExpression
+	 * @generated
+	 */
+	EClass getInstanceOfExpression();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xpression.InstanceOfExpression#getType <em>Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Type</em>'.
+	 * @see org.eclipse.xtext.xpression.InstanceOfExpression#getType()
+	 * @see #getInstanceOfExpression()
+	 * @generated
+	 */
+	EReference getInstanceOfExpression_Type();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xpression.InstanceOfExpression#getExpression <em>Expression</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Expression</em>'.
+	 * @see org.eclipse.xtext.xpression.InstanceOfExpression#getExpression()
+	 * @see #getInstanceOfExpression()
+	 * @generated
+	 */
+	EReference getInstanceOfExpression_Expression();
+
+	/**
 	 * Returns the factory that creates the instances of the model.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1965,6 +2084,50 @@ public interface XpressionPackage extends EPackage {
 		 * @generated
 		 */
 		EReference WHILE_EXPRESSION__BODY = eINSTANCE.getWhileExpression_Body();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xpression.impl.TypeLiteralImpl <em>Type Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xpression.impl.TypeLiteralImpl
+		 * @see org.eclipse.xtext.xpression.impl.XpressionPackageImpl#getTypeLiteral()
+		 * @generated
+		 */
+		EClass TYPE_LITERAL = eINSTANCE.getTypeLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference TYPE_LITERAL__TYPE = eINSTANCE.getTypeLiteral_Type();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xpression.impl.InstanceOfExpressionImpl <em>Instance Of Expression</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xpression.impl.InstanceOfExpressionImpl
+		 * @see org.eclipse.xtext.xpression.impl.XpressionPackageImpl#getInstanceOfExpression()
+		 * @generated
+		 */
+		EClass INSTANCE_OF_EXPRESSION = eINSTANCE.getInstanceOfExpression();
+
+		/**
+		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INSTANCE_OF_EXPRESSION__TYPE = eINSTANCE.getInstanceOfExpression_Type();
+
+		/**
+		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference INSTANCE_OF_EXPRESSION__EXPRESSION = eINSTANCE.getInstanceOfExpression_Expression();
 
 	}
 

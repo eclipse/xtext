@@ -14,40 +14,19 @@ entryRuleExpression :
 
 // Rule Expression
 ruleExpression :
-	ruleClosure
-;
-
-
-
-// Rule Closure
-ruleClosure :
-((()((		ruleDeclaredParameter)(
-	',' 
-(		ruleDeclaredParameter))*)?
-	'|' 
-(		ruleCastedExpression))
-    |	ruleCastedExpression)
-;
-
-
-
-// Rule CastedExpression
-ruleCastedExpression :
-((()
-	'(' 
-(		ruleTypeRef)
-	')' 
-(		ruleAssignment))
-    |	ruleAssignment)
+	ruleAssignment
 ;
 
 
 
 // Rule Assignment
 ruleAssignment :
-(	ruleOrExpression(()
+(	ruleOrExpression(()(	
 	'=' 
-(		ruleOrExpression))?)
+
+    |
+	'+=' 
+)(		ruleOrExpression))?)
 ;
 
 
@@ -63,8 +42,20 @@ ruleOrExpression :
 
 // Rule AndExpression
 ruleAndExpression :
-(	ruleRelationalExpression(()(	
+(	ruleEqualityExpression(()(	
 	'&&' 
+)(		ruleEqualityExpression))*)
+;
+
+
+
+// Rule EqualityExpression
+ruleEqualityExpression :
+(	ruleRelationalExpression(()(	
+	'==' 
+
+    |
+	'!=' 
 )(		ruleRelationalExpression))*)
 ;
 
@@ -72,13 +63,10 @@ ruleAndExpression :
 
 // Rule RelationalExpression
 ruleRelationalExpression :
-(	ruleAdditiveExpression(()(	
-	'==' 
-
-    |
-	'!=' 
-
-    |
+(	ruleAdditiveExpression((()
+	'instanceof' 
+(			ruleQualifiedName))
+    |(()(	
 	'>=' 
 
     |
@@ -89,7 +77,7 @@ ruleRelationalExpression :
 
     |
 	'<' 
-)(		ruleAdditiveExpression))*)
+)(		ruleAdditiveExpression)))*)
 ;
 
 
@@ -113,6 +101,9 @@ ruleMultiplicativeExpression :
 
     |
 	'/' 
+
+    |
+	'%' 
 )(		ruleOtherOperatorExpression))*)
 ;
 
@@ -132,13 +123,21 @@ ruleOtherOperatorExpression :
 
 // Rule UnaryOperation
 ruleUnaryOperation :
-(	ruleFeatureCall
-    |(()(	
+((()(	
 	'!' 
 
     |
 	'-' 
-)(		ruleFeatureCall)))
+
+    |
+	'+' 
+)(		ruleFeatureCall))
+    |(()
+	'(' 
+(		ruleTypeRef)
+	')' 
+(		ruleExpression))
+    |	ruleFeatureCall)
 ;
 
 
@@ -160,10 +159,12 @@ ruleFeatureCall :
 
 // Rule PrimaryExpression
 rulePrimaryExpression :
-(	ruleBooleanLiteral
+(	ruleClosure
+    |	ruleBooleanLiteral
     |	ruleIntLiteral
     |	ruleNullLiteral
     |	ruleStringLiteral
+    |	ruleTypeLiteral
     |	ruleConstructorCall
     |	ruleBlockExpression
     |	ruleRichString
@@ -172,6 +173,17 @@ rulePrimaryExpression :
     |	ruleWhileExpression
     |	ruleSimpleFeatureCall
     |	ruleParenthesizedExpression)
+;
+
+
+
+// Rule Closure
+ruleClosure :
+(()((		ruleDeclaredParameter)(
+	',' 
+(		ruleDeclaredParameter))*)?
+	'|' 
+(		ruleExpression))
 ;
 
 
@@ -338,6 +350,17 @@ ruleIntLiteral :
 // Rule StringLiteral
 ruleStringLiteral :
 (		RULE_STRING)
+;
+
+
+
+// Rule TypeLiteral
+ruleTypeLiteral :
+((			ruleQualifiedName)
+	'.' 
+
+	'class' 
+)
 ;
 
 
