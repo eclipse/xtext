@@ -31,9 +31,9 @@ import com.google.inject.Inject;
 public class DefaultContentOutlineNodeFactory implements IContentOutlineNodeFactory {
 	private static final StyledString UNKNOWN_STYLED_STRING = new StyledString("<unknown>");
 	@Inject
-	protected IStyledLabelProvider styledLabelProvider;
+	private IStyledLabelProvider styledLabelProvider;
 	@Inject
-	protected ILocationInFileProvider locationProvider;
+	private ILocationInFileProvider locationProvider;
 
 	public DefaultContentOutlineNodeFactory() {
 		super();
@@ -110,5 +110,13 @@ public class DefaultContentOutlineNodeFactory implements IContentOutlineNodeFact
 			return new EObjectHandleImpl<EObject>(semanticNode, resourceAccess);
 		}
 		return null;
+	}
+	
+	public IStyledLabelProvider getStyledLabelProvider() {
+		return styledLabelProvider;
+	}
+	
+	public ILocationInFileProvider getLocationProvider() {
+		return locationProvider;
 	}
 }
