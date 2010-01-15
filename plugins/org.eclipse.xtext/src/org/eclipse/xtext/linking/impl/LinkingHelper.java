@@ -22,8 +22,8 @@ import com.google.inject.Inject;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-
 public class LinkingHelper {
+	
 	@Inject
 	private IValueConverterService valueConverter;
 

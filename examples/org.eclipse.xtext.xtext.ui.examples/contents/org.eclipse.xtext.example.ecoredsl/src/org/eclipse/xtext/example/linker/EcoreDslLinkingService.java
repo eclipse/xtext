@@ -34,7 +34,7 @@ import com.google.inject.Inject;
  */
 public class EcoreDslLinkingService extends DefaultLinkingService {
 
-	private static Logger log = Logger.getLogger(EcoreDslLinkingService.class);
+	private static final Logger log = Logger.getLogger(EcoreDslLinkingService.class);
 
 	@Inject
 	private IValueConverterService valueConverterService;

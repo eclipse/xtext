@@ -48,7 +48,7 @@ import com.google.inject.Inject;
  */
 public class XtextLinkingService extends DefaultLinkingService {
 
-	private static Logger log = Logger.getLogger(XtextLinkingService.class);
+	private static final Logger log = Logger.getLogger(XtextLinkingService.class);
 
 	@Inject
 	private IValueConverterService valueConverterService;
