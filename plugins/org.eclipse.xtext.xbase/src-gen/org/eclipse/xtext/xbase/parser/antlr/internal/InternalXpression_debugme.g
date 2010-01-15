@@ -112,7 +112,7 @@ ruleMultiplicativeExpression :
 // Rule OtherOperatorExpression
 ruleOtherOperatorExpression :
 (	ruleUnaryOperation(()(	
-	'+=' 
+	'->' 
 
     |
 	'..' 

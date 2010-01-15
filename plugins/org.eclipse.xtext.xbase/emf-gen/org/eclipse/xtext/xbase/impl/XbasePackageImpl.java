@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XbasePackageImpl.java,v 1.1 2010/01/14 14:40:21 sefftinge Exp $
+ * $Id: XbasePackageImpl.java,v 1.2 2010/01/15 11:02:49 sefftinge Exp $
  */
 package org.eclipse.xtext.xbase.impl;
 
@@ -206,17 +206,8 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getFunction_Final() {
-		return (EAttribute)functionEClass.getEStructuralFeatures().get(1);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EReference getFunction_TypeParams() {
-		return (EReference)functionEClass.getEStructuralFeatures().get(2);
+		return (EReference)functionEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -225,7 +216,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage {
 	 * @generated
 	 */
 	public EReference getFunction_ReturnType() {
-		return (EReference)functionEClass.getEStructuralFeatures().get(3);
+		return (EReference)functionEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -234,7 +225,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage {
 	 * @generated
 	 */
 	public EAttribute getFunction_Name() {
-		return (EAttribute)functionEClass.getEStructuralFeatures().get(4);
+		return (EAttribute)functionEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -243,16 +234,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage {
 	 * @generated
 	 */
 	public EReference getFunction_DeclaredParams() {
-		return (EReference)functionEClass.getEStructuralFeatures().get(5);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getFunction_Guard() {
-		return (EReference)functionEClass.getEStructuralFeatures().get(6);
+		return (EReference)functionEClass.getEStructuralFeatures().get(4);
 	}
 
 	/**
@@ -261,7 +243,7 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage {
 	 * @generated
 	 */
 	public EReference getFunction_Expression() {
-		return (EReference)functionEClass.getEStructuralFeatures().get(7);
+		return (EReference)functionEClass.getEStructuralFeatures().get(5);
 	}
 
 	/**
@@ -302,12 +284,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage {
 
 		functionEClass = createEClass(FUNCTION);
 		createEAttribute(functionEClass, FUNCTION__PRIVATE);
-		createEAttribute(functionEClass, FUNCTION__FINAL);
 		createEReference(functionEClass, FUNCTION__TYPE_PARAMS);
 		createEReference(functionEClass, FUNCTION__RETURN_TYPE);
 		createEAttribute(functionEClass, FUNCTION__NAME);
 		createEReference(functionEClass, FUNCTION__DECLARED_PARAMS);
-		createEReference(functionEClass, FUNCTION__GUARD);
 		createEReference(functionEClass, FUNCTION__EXPRESSION);
 	}
 
@@ -355,12 +335,10 @@ public class XbasePackageImpl extends EPackageImpl implements XbasePackage {
 
 		initEClass(functionEClass, Function.class, "Function", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFunction_Private(), ecorePackage.getEBoolean(), "private", null, 0, 1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getFunction_Final(), ecorePackage.getEBoolean(), "final", null, 0, 1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunction_TypeParams(), theXtypePackage.getTypeParamDeclaration(), null, "typeParams", null, 0, -1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunction_ReturnType(), theXtypePackage.getTypeRef(), null, "returnType", null, 0, 1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getFunction_Name(), ecorePackage.getEString(), "name", null, 0, 1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunction_DeclaredParams(), theXpressionPackage.getDeclaredParameter(), null, "declaredParams", null, 0, -1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFunction_Guard(), theXpressionPackage.getExpression(), null, "guard", null, 0, 1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getFunction_Expression(), theXpressionPackage.getExpression(), null, "expression", null, 0, 1, Function.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource

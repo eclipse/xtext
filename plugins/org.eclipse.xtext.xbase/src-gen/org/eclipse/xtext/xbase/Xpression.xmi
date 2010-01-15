@@ -210,7 +210,7 @@
           </tokens>
           <tokens xsi:type="xtext:Assignment" feature="operator" operator="=">
             <terminal xsi:type="xtext:Alternatives">
-              <groups xsi:type="xtext:Keyword" value="+="/>
+              <groups xsi:type="xtext:Keyword" value="->"/>
               <groups xsi:type="xtext:Keyword" value=".."/>
             </terminal>
           </tokens>

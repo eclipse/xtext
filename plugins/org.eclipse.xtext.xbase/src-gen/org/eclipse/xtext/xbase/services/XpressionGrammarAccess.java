@@ -417,37 +417,37 @@ public class XpressionGrammarAccess extends AbstractGrammarElementFinder {
 		private final Action cBinaryOperationLeftAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Assignment cOperatorAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
 		private final Alternatives cOperatorAlternatives_1_1_0 = (Alternatives)cOperatorAssignment_1_1.eContents().get(0);
-		private final Keyword cOperatorPlusSignEqualsSignKeyword_1_1_0_0 = (Keyword)cOperatorAlternatives_1_1_0.eContents().get(0);
+		private final Keyword cOperatorHyphenMinusGreaterThanSignKeyword_1_1_0_0 = (Keyword)cOperatorAlternatives_1_1_0.eContents().get(0);
 		private final Keyword cOperatorFullStopFullStopKeyword_1_1_0_1 = (Keyword)cOperatorAlternatives_1_1_0.eContents().get(1);
 		private final Assignment cRightAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
 		private final RuleCall cRightUnaryOperationParserRuleCall_1_2_0 = (RuleCall)cRightAssignment_1_2.eContents().get(0);
 		
 		//OtherOperatorExpression returns Expression:
-		//  UnaryOperation ({BinaryOperation.left=current} operator=( "+=" | ".." ) right=
+		//  UnaryOperation ({BinaryOperation.left=current} operator=( "->" | ".." ) right=
 		//  UnaryOperation)*;
 		public ParserRule getRule() { return rule; }
 
-		//UnaryOperation ({BinaryOperation.left=current} operator=( "+=" | ".." ) right=
+		//UnaryOperation ({BinaryOperation.left=current} operator=( "->" | ".." ) right=
 		//UnaryOperation)*
 		public Group getGroup() { return cGroup; }
 
 		//UnaryOperation
 		public RuleCall getUnaryOperationParserRuleCall_0() { return cUnaryOperationParserRuleCall_0; }
 
-		//({BinaryOperation.left=current} operator=( "+=" | ".." ) right=UnaryOperation)*
+		//({BinaryOperation.left=current} operator=( "->" | ".." ) right=UnaryOperation)*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{BinaryOperation.left=current}
 		public Action getBinaryOperationLeftAction_1_0() { return cBinaryOperationLeftAction_1_0; }
 
-		//operator=( "+=" | ".." )
+		//operator=( "->" | ".." )
 		public Assignment getOperatorAssignment_1_1() { return cOperatorAssignment_1_1; }
 
-		//"+="|".."
+		//"->"|".."
 		public Alternatives getOperatorAlternatives_1_1_0() { return cOperatorAlternatives_1_1_0; }
 
-		//"+="
-		public Keyword getOperatorPlusSignEqualsSignKeyword_1_1_0_0() { return cOperatorPlusSignEqualsSignKeyword_1_1_0_0; }
+		//"->"
+		public Keyword getOperatorHyphenMinusGreaterThanSignKeyword_1_1_0_0() { return cOperatorHyphenMinusGreaterThanSignKeyword_1_1_0_0; }
 
 		//".."
 		public Keyword getOperatorFullStopFullStopKeyword_1_1_0_1() { return cOperatorFullStopFullStopKeyword_1_1_0_1; }
@@ -1547,7 +1547,7 @@ public class XpressionGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//OtherOperatorExpression returns Expression:
-	//  UnaryOperation ({BinaryOperation.left=current} operator=( "+=" | ".." ) right=
+	//  UnaryOperation ({BinaryOperation.left=current} operator=( "->" | ".." ) right=
 	//  UnaryOperation)*;
 	public OtherOperatorExpressionElements getOtherOperatorExpressionAccess() {
 		return (pOtherOperatorExpression != null) ? pOtherOperatorExpression : (pOtherOperatorExpression = new OtherOperatorExpressionElements());

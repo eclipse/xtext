@@ -51,14 +51,6 @@ public class AbstractXbaseProposalProvider extends XpressionProposalProvider {
 		}
 		// subclasses may override
 	}
-	public void completeFunction_Final(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeFunction_Final feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ context.getPrefix() + "'");
-		}
-		// subclasses may override
-	}
 	public void completeFunction_TypeParams(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeFunction_TypeParams feature '" + assignment.getFeature() + "' terminal '"
@@ -86,14 +78,6 @@ public class AbstractXbaseProposalProvider extends XpressionProposalProvider {
 	public void completeFunction_DeclaredParams(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		if (logger.isDebugEnabled()) {
 			logger.debug("completeFunction_DeclaredParams feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ context.getPrefix() + "'");
-		}
-		completeRuleCall(((RuleCall)assignment.getTerminal()), context, acceptor);
-	}
-	public void completeFunction_Guard(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("completeFunction_Guard feature '" + assignment.getFeature() + "' terminal '"
 					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
 					+ context.getPrefix() + "'");
 		}

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XbasePackage.java,v 1.1 2010/01/14 14:40:22 sefftinge Exp $
+ * $Id: XbasePackage.java,v 1.2 2010/01/15 11:02:49 sefftinge Exp $
  */
 package org.eclipse.xtext.xbase;
 
@@ -153,22 +153,13 @@ public interface XbasePackage extends EPackage {
 	int FUNCTION__PRIVATE = 0;
 
 	/**
-	 * The feature id for the '<em><b>Final</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION__FINAL = 1;
-
-	/**
 	 * The feature id for the '<em><b>Type Params</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION__TYPE_PARAMS = 2;
+	int FUNCTION__TYPE_PARAMS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
@@ -177,7 +168,7 @@ public interface XbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION__RETURN_TYPE = 3;
+	int FUNCTION__RETURN_TYPE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -186,7 +177,7 @@ public interface XbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION__NAME = 4;
+	int FUNCTION__NAME = 3;
 
 	/**
 	 * The feature id for the '<em><b>Declared Params</b></em>' containment reference list.
@@ -195,16 +186,7 @@ public interface XbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION__DECLARED_PARAMS = 5;
-
-	/**
-	 * The feature id for the '<em><b>Guard</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int FUNCTION__GUARD = 6;
+	int FUNCTION__DECLARED_PARAMS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -213,7 +195,7 @@ public interface XbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION__EXPRESSION = 7;
+	int FUNCTION__EXPRESSION = 5;
 
 	/**
 	 * The number of structural features of the '<em>Function</em>' class.
@@ -222,7 +204,7 @@ public interface XbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_FEATURE_COUNT = 8;
+	int FUNCTION_FEATURE_COUNT = 6;
 
 
 	/**
@@ -311,17 +293,6 @@ public interface XbasePackage extends EPackage {
 	EAttribute getFunction_Private();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.Function#isFinal <em>Final</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Final</em>'.
-	 * @see org.eclipse.xtext.xbase.Function#isFinal()
-	 * @see #getFunction()
-	 * @generated
-	 */
-	EAttribute getFunction_Final();
-
-	/**
 	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.Function#getTypeParams <em>Type Params</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -364,17 +335,6 @@ public interface XbasePackage extends EPackage {
 	 * @generated
 	 */
 	EReference getFunction_DeclaredParams();
-
-	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.Function#getGuard <em>Guard</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference '<em>Guard</em>'.
-	 * @see org.eclipse.xtext.xbase.Function#getGuard()
-	 * @see #getFunction()
-	 * @generated
-	 */
-	EReference getFunction_Guard();
 
 	/**
 	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.Function#getExpression <em>Expression</em>}'.
@@ -480,14 +440,6 @@ public interface XbasePackage extends EPackage {
 		EAttribute FUNCTION__PRIVATE = eINSTANCE.getFunction_Private();
 
 		/**
-		 * The meta object literal for the '<em><b>Final</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute FUNCTION__FINAL = eINSTANCE.getFunction_Final();
-
-		/**
 		 * The meta object literal for the '<em><b>Type Params</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -518,14 +470,6 @@ public interface XbasePackage extends EPackage {
 		 * @generated
 		 */
 		EReference FUNCTION__DECLARED_PARAMS = eINSTANCE.getFunction_DeclaredParams();
-
-		/**
-		 * The meta object literal for the '<em><b>Guard</b></em>' containment reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference FUNCTION__GUARD = eINSTANCE.getFunction_Guard();
 
 		/**
 		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.

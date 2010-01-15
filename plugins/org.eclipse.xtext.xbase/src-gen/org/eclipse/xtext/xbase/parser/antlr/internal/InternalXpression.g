@@ -1054,9 +1054,9 @@ ruleOtherOperatorExpression returns [EObject current=null]
 )(
 (
 (
-		lv_operator_2_1=	'+=' 
+		lv_operator_2_1=	'->' 
     {
-        createLeafNode(grammarAccess.getOtherOperatorExpressionAccess().getOperatorPlusSignEqualsSignKeyword_1_1_0_0(), "operator"); 
+        createLeafNode(grammarAccess.getOtherOperatorExpressionAccess().getOperatorHyphenMinusGreaterThanSignKeyword_1_1_0_0(), "operator"); 
     }
  
 	    {

@@ -51,13 +51,8 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/Xbase#//Function"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Alternatives" cardinality="*">
-          <groups xsi:type="xtext:Assignment" feature="private" operator="?=">
-            <terminal xsi:type="xtext:Keyword" value="private"/>
-          </groups>
-          <groups xsi:type="xtext:Assignment" feature="final" operator="?=">
-            <terminal xsi:type="xtext:Keyword" value="final"/>
-          </groups>
+        <tokens xsi:type="xtext:Assignment" cardinality="?" feature="private" operator="?=">
+          <terminal xsi:type="xtext:Keyword" value="private"/>
         </tokens>
         <tokens xsi:type="xtext:Group" cardinality="?">
           <tokens xsi:type="xtext:Keyword" value="&lt;"/>
@@ -91,12 +86,6 @@
           </tokens>
         </tokens>
         <tokens xsi:type="xtext:Keyword" value=")"/>
-        <tokens xsi:type="xtext:Group" cardinality="?">
-          <tokens xsi:type="xtext:Keyword" value="if"/>
-          <tokens xsi:type="xtext:Assignment" feature="guard" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-          </tokens>
-        </tokens>
         <tokens xsi:type="xtext:Alternatives">
           <groups xsi:type="xtext:Group">
             <tokens xsi:type="xtext:Keyword" value=":"/>
@@ -322,7 +311,7 @@
           </tokens>
           <tokens xsi:type="xtext:Assignment" feature="operator" operator="=">
             <terminal xsi:type="xtext:Alternatives">
-              <groups xsi:type="xtext:Keyword" value="+="/>
+              <groups xsi:type="xtext:Keyword" value="->"/>
               <groups xsi:type="xtext:Keyword" value=".."/>
             </terminal>
           </tokens>

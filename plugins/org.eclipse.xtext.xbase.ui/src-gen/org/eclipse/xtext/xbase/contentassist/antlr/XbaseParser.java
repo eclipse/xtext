@@ -37,8 +37,7 @@ public class XbaseParser extends AbstractContentAssistParser {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
-					put(grammarAccess.getFunctionAccess().getAlternatives_0(), "rule__Function__Alternatives_0");
-					put(grammarAccess.getFunctionAccess().getAlternatives_8(), "rule__Function__Alternatives_8");
+					put(grammarAccess.getFunctionAccess().getAlternatives_7(), "rule__Function__Alternatives_7");
 					put(grammarAccess.getAssignmentAccess().getOperatorAlternatives_1_1_0(), "rule__Assignment__OperatorAlternatives_1_1_0");
 					put(grammarAccess.getEqualityExpressionAccess().getOperatorAlternatives_1_1_0(), "rule__EqualityExpression__OperatorAlternatives_1_1_0");
 					put(grammarAccess.getRelationalExpressionAccess().getAlternatives_1(), "rule__RelationalExpression__Alternatives_1");
@@ -65,8 +64,7 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getFunctionAccess().getGroup_1_2(), "rule__Function__Group_1_2__0");
 					put(grammarAccess.getFunctionAccess().getGroup_5(), "rule__Function__Group_5__0");
 					put(grammarAccess.getFunctionAccess().getGroup_5_1(), "rule__Function__Group_5_1__0");
-					put(grammarAccess.getFunctionAccess().getGroup_7(), "rule__Function__Group_7__0");
-					put(grammarAccess.getFunctionAccess().getGroup_8_0(), "rule__Function__Group_8_0__0");
+					put(grammarAccess.getFunctionAccess().getGroup_7_0(), "rule__Function__Group_7_0__0");
 					put(grammarAccess.getAssignmentAccess().getGroup(), "rule__Assignment__Group__0");
 					put(grammarAccess.getAssignmentAccess().getGroup_1(), "rule__Assignment__Group_1__0");
 					put(grammarAccess.getOrExpressionAccess().getGroup(), "rule__OrExpression__Group__0");
@@ -136,17 +134,15 @@ public class XbaseParser extends AbstractContentAssistParser {
 					put(grammarAccess.getFileAccess().getImportsAssignment_0(), "rule__File__ImportsAssignment_0");
 					put(grammarAccess.getFileAccess().getFunctionsAssignment_1(), "rule__File__FunctionsAssignment_1");
 					put(grammarAccess.getImportAccess().getImportedNamespaceAssignment_1(), "rule__Import__ImportedNamespaceAssignment_1");
-					put(grammarAccess.getFunctionAccess().getPrivateAssignment_0_0(), "rule__Function__PrivateAssignment_0_0");
-					put(grammarAccess.getFunctionAccess().getFinalAssignment_0_1(), "rule__Function__FinalAssignment_0_1");
+					put(grammarAccess.getFunctionAccess().getPrivateAssignment_0(), "rule__Function__PrivateAssignment_0");
 					put(grammarAccess.getFunctionAccess().getTypeParamsAssignment_1_1(), "rule__Function__TypeParamsAssignment_1_1");
 					put(grammarAccess.getFunctionAccess().getTypeParamsAssignment_1_2_1(), "rule__Function__TypeParamsAssignment_1_2_1");
 					put(grammarAccess.getFunctionAccess().getReturnTypeAssignment_2(), "rule__Function__ReturnTypeAssignment_2");
 					put(grammarAccess.getFunctionAccess().getNameAssignment_3(), "rule__Function__NameAssignment_3");
 					put(grammarAccess.getFunctionAccess().getDeclaredParamsAssignment_5_0(), "rule__Function__DeclaredParamsAssignment_5_0");
 					put(grammarAccess.getFunctionAccess().getDeclaredParamsAssignment_5_1_1(), "rule__Function__DeclaredParamsAssignment_5_1_1");
-					put(grammarAccess.getFunctionAccess().getGuardAssignment_7_1(), "rule__Function__GuardAssignment_7_1");
-					put(grammarAccess.getFunctionAccess().getExpressionAssignment_8_0_1(), "rule__Function__ExpressionAssignment_8_0_1");
-					put(grammarAccess.getFunctionAccess().getExpressionAssignment_8_1(), "rule__Function__ExpressionAssignment_8_1");
+					put(grammarAccess.getFunctionAccess().getExpressionAssignment_7_0_1(), "rule__Function__ExpressionAssignment_7_0_1");
+					put(grammarAccess.getFunctionAccess().getExpressionAssignment_7_1(), "rule__Function__ExpressionAssignment_7_1");
 					put(grammarAccess.getAssignmentAccess().getOperatorAssignment_1_1(), "rule__Assignment__OperatorAssignment_1_1");
 					put(grammarAccess.getAssignmentAccess().getRightAssignment_1_2(), "rule__Assignment__RightAssignment_1_2");
 					put(grammarAccess.getOrExpressionAccess().getOperatorAssignment_1_1(), "rule__OrExpression__OperatorAssignment_1_1");

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: FunctionImpl.java,v 1.1 2010/01/14 14:40:21 sefftinge Exp $
+ * $Id: FunctionImpl.java,v 1.2 2010/01/15 11:02:49 sefftinge Exp $
  */
 package org.eclipse.xtext.xbase.impl;
 
@@ -39,12 +39,10 @@ import org.eclipse.xtext.xtype.TypeRef;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.impl.FunctionImpl#isPrivate <em>Private</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.impl.FunctionImpl#isFinal <em>Final</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.FunctionImpl#getTypeParams <em>Type Params</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.FunctionImpl#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.FunctionImpl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.FunctionImpl#getDeclaredParams <em>Declared Params</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.impl.FunctionImpl#getGuard <em>Guard</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.impl.FunctionImpl#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
@@ -71,26 +69,6 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 	 * @ordered
 	 */
 	protected boolean private_ = PRIVATE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isFinal() <em>Final</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isFinal()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean FINAL_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isFinal() <em>Final</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isFinal()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean final_ = FINAL_EDEFAULT;
 
 	/**
 	 * The cached value of the '{@link #getTypeParams() <em>Type Params</em>}' containment reference list.
@@ -143,16 +121,6 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 	protected EList<DeclaredParameter> declaredParams;
 
 	/**
-	 * The cached value of the '{@link #getGuard() <em>Guard</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getGuard()
-	 * @generated
-	 * @ordered
-	 */
-	protected Expression guard;
-
-	/**
 	 * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -200,27 +168,6 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 		private_ = newPrivate;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.FUNCTION__PRIVATE, oldPrivate, private_));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isFinal() {
-		return final_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setFinal(boolean newFinal) {
-		boolean oldFinal = final_;
-		final_ = newFinal;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.FUNCTION__FINAL, oldFinal, final_));
 	}
 
 	/**
@@ -316,49 +263,6 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression getGuard() {
-		return guard;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetGuard(Expression newGuard, NotificationChain msgs) {
-		Expression oldGuard = guard;
-		guard = newGuard;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XbasePackage.FUNCTION__GUARD, oldGuard, newGuard);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setGuard(Expression newGuard) {
-		if (newGuard != guard) {
-			NotificationChain msgs = null;
-			if (guard != null)
-				msgs = ((InternalEObject)guard).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XbasePackage.FUNCTION__GUARD, null, msgs);
-			if (newGuard != null)
-				msgs = ((InternalEObject)newGuard).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XbasePackage.FUNCTION__GUARD, null, msgs);
-			msgs = basicSetGuard(newGuard, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XbasePackage.FUNCTION__GUARD, newGuard, newGuard));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public Expression getExpression() {
 		return expression;
 	}
@@ -411,8 +315,6 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 				return basicSetReturnType(null, msgs);
 			case XbasePackage.FUNCTION__DECLARED_PARAMS:
 				return ((InternalEList<?>)getDeclaredParams()).basicRemove(otherEnd, msgs);
-			case XbasePackage.FUNCTION__GUARD:
-				return basicSetGuard(null, msgs);
 			case XbasePackage.FUNCTION__EXPRESSION:
 				return basicSetExpression(null, msgs);
 		}
@@ -429,8 +331,6 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 		switch (featureID) {
 			case XbasePackage.FUNCTION__PRIVATE:
 				return isPrivate();
-			case XbasePackage.FUNCTION__FINAL:
-				return isFinal();
 			case XbasePackage.FUNCTION__TYPE_PARAMS:
 				return getTypeParams();
 			case XbasePackage.FUNCTION__RETURN_TYPE:
@@ -439,8 +339,6 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 				return getName();
 			case XbasePackage.FUNCTION__DECLARED_PARAMS:
 				return getDeclaredParams();
-			case XbasePackage.FUNCTION__GUARD:
-				return getGuard();
 			case XbasePackage.FUNCTION__EXPRESSION:
 				return getExpression();
 		}
@@ -459,9 +357,6 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 			case XbasePackage.FUNCTION__PRIVATE:
 				setPrivate((Boolean)newValue);
 				return;
-			case XbasePackage.FUNCTION__FINAL:
-				setFinal((Boolean)newValue);
-				return;
 			case XbasePackage.FUNCTION__TYPE_PARAMS:
 				getTypeParams().clear();
 				getTypeParams().addAll((Collection<? extends TypeParamDeclaration>)newValue);
@@ -475,9 +370,6 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 			case XbasePackage.FUNCTION__DECLARED_PARAMS:
 				getDeclaredParams().clear();
 				getDeclaredParams().addAll((Collection<? extends DeclaredParameter>)newValue);
-				return;
-			case XbasePackage.FUNCTION__GUARD:
-				setGuard((Expression)newValue);
 				return;
 			case XbasePackage.FUNCTION__EXPRESSION:
 				setExpression((Expression)newValue);
@@ -497,9 +389,6 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 			case XbasePackage.FUNCTION__PRIVATE:
 				setPrivate(PRIVATE_EDEFAULT);
 				return;
-			case XbasePackage.FUNCTION__FINAL:
-				setFinal(FINAL_EDEFAULT);
-				return;
 			case XbasePackage.FUNCTION__TYPE_PARAMS:
 				getTypeParams().clear();
 				return;
@@ -511,9 +400,6 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 				return;
 			case XbasePackage.FUNCTION__DECLARED_PARAMS:
 				getDeclaredParams().clear();
-				return;
-			case XbasePackage.FUNCTION__GUARD:
-				setGuard((Expression)null);
 				return;
 			case XbasePackage.FUNCTION__EXPRESSION:
 				setExpression((Expression)null);
@@ -532,8 +418,6 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 		switch (featureID) {
 			case XbasePackage.FUNCTION__PRIVATE:
 				return private_ != PRIVATE_EDEFAULT;
-			case XbasePackage.FUNCTION__FINAL:
-				return final_ != FINAL_EDEFAULT;
 			case XbasePackage.FUNCTION__TYPE_PARAMS:
 				return typeParams != null && !typeParams.isEmpty();
 			case XbasePackage.FUNCTION__RETURN_TYPE:
@@ -542,8 +426,6 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 				return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
 			case XbasePackage.FUNCTION__DECLARED_PARAMS:
 				return declaredParams != null && !declaredParams.isEmpty();
-			case XbasePackage.FUNCTION__GUARD:
-				return guard != null;
 			case XbasePackage.FUNCTION__EXPRESSION:
 				return expression != null;
 		}
@@ -562,8 +444,6 @@ public class FunctionImpl extends MinimalEObjectImpl.Container implements Functi
 		StringBuffer result = new StringBuffer(super.toString());
 		result.append(" (private: ");
 		result.append(private_);
-		result.append(", final: ");
-		result.append(final_);
 		result.append(", name: ");
 		result.append(name);
 		result.append(')');

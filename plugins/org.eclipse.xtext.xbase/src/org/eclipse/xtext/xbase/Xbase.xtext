@@ -17,10 +17,9 @@ QualifiedNameWithWildCard :
 	QualifiedName  ('.' '*')?;
 
 Function  : 
-	( private?='private'|final?='final')* 
+	( private?='private')? 
 	('<' typeParams+=TypeParamDeclaration (',' typeParams+=TypeParamDeclaration )*'>')?
 	(returnType=TypeRef)? name=ID '(' (declaredParams+=DeclaredParameter (',' declaredParams+=DeclaredParameter )*)? ')'
-		('if' guard=Expression )?
 			(':' expression=Expression ';' | expression=BlockExpression)
 ;
 

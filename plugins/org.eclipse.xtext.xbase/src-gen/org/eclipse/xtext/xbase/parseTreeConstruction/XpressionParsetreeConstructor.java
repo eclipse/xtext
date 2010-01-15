@@ -1791,12 +1791,12 @@ protected class MultiplicativeExpression_RightAssignment_1_2 extends AssignmentT
 /************ begin Rule OtherOperatorExpression ****************
  *
  * OtherOperatorExpression returns Expression:
- *   UnaryOperation ({BinaryOperation.left=current} operator=( "+=" | ".." ) right=
+ *   UnaryOperation ({BinaryOperation.left=current} operator=( "->" | ".." ) right=
  *   UnaryOperation)*;
  *
  **/
 
-// UnaryOperation ({BinaryOperation.left=current} operator=( "+=" | ".." ) right=
+// UnaryOperation ({BinaryOperation.left=current} operator=( "->" | ".." ) right=
 // UnaryOperation)*
 protected class OtherOperatorExpression_Group extends GroupToken {
 	
@@ -1860,7 +1860,7 @@ protected class OtherOperatorExpression_UnaryOperationParserRuleCall_0 extends R
 	}	
 }
 
-// ({BinaryOperation.left=current} operator=( "+=" | ".." ) right=UnaryOperation)*
+// ({BinaryOperation.left=current} operator=( "->" | ".." ) right=UnaryOperation)*
 protected class OtherOperatorExpression_Group_1 extends GroupToken {
 	
 	public OtherOperatorExpression_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1914,7 +1914,7 @@ protected class OtherOperatorExpression_BinaryOperationLeftAction_1_0 extends Ac
 	}
 }
 
-// operator=( "+=" | ".." )
+// operator=( "->" | ".." )
 protected class OtherOperatorExpression_OperatorAssignment_1_1 extends AssignmentToken  {
 	
 	public OtherOperatorExpression_OperatorAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1938,9 +1938,9 @@ protected class OtherOperatorExpression_OperatorAssignment_1_1 extends Assignmen
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("operator",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("operator");
-		if("+=".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+		if("->".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
-			element = grammarAccess.getOtherOperatorExpressionAccess().getOperatorPlusSignEqualsSignKeyword_1_1_0_0();
+			element = grammarAccess.getOtherOperatorExpressionAccess().getOperatorHyphenMinusGreaterThanSignKeyword_1_1_0_0();
 			return obj;
 		}
 		if("..".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
@@ -2815,7 +2815,6 @@ protected class FeatureCall_RightParenthesisKeyword_1_3_2 extends KeywordToken  
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new FeatureCall_Group_1_3_1(parent, this, 0, inst);
-			case 1: return new FeatureCall_LeftParenthesisKeyword_1_3_0(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -5632,7 +5631,6 @@ protected class SimpleFeatureCall_RightParenthesisKeyword_1_2 extends KeywordTok
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SimpleFeatureCall_Group_1_1(parent, this, 0, inst);
-			case 1: return new SimpleFeatureCall_LeftParenthesisKeyword_1_0(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -5971,7 +5969,6 @@ protected class ConstructorCall_RightParenthesisKeyword_2_2 extends KeywordToken
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ConstructorCall_Group_2_1(parent, this, 0, inst);
-			case 1: return new ConstructorCall_LeftParenthesisKeyword_2_0(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Function.java,v 1.1 2010/01/14 14:40:22 sefftinge Exp $
+ * $Id: Function.java,v 1.2 2010/01/15 11:02:49 sefftinge Exp $
  */
 package org.eclipse.xtext.xbase;
 
@@ -25,12 +25,10 @@ import org.eclipse.xtext.xtype.TypeRef;
  * The following features are supported:
  * <ul>
  *   <li>{@link org.eclipse.xtext.xbase.Function#isPrivate <em>Private</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.Function#isFinal <em>Final</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.Function#getTypeParams <em>Type Params</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.Function#getReturnType <em>Return Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.Function#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.Function#getDeclaredParams <em>Declared Params</em>}</li>
- *   <li>{@link org.eclipse.xtext.xbase.Function#getGuard <em>Guard</em>}</li>
  *   <li>{@link org.eclipse.xtext.xbase.Function#getExpression <em>Expression</em>}</li>
  * </ul>
  * </p>
@@ -65,32 +63,6 @@ public interface Function extends EObject {
 	 * @generated
 	 */
 	void setPrivate(boolean value);
-
-	/**
-	 * Returns the value of the '<em><b>Final</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Final</em>' attribute isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Final</em>' attribute.
-	 * @see #setFinal(boolean)
-	 * @see org.eclipse.xtext.xbase.XbasePackage#getFunction_Final()
-	 * @model
-	 * @generated
-	 */
-	boolean isFinal();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.xbase.Function#isFinal <em>Final</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Final</em>' attribute.
-	 * @see #isFinal()
-	 * @generated
-	 */
-	void setFinal(boolean value);
 
 	/**
 	 * Returns the value of the '<em><b>Type Params</b></em>' containment reference list.
@@ -175,32 +147,6 @@ public interface Function extends EObject {
 	 * @generated
 	 */
 	EList<DeclaredParameter> getDeclaredParams();
-
-	/**
-	 * Returns the value of the '<em><b>Guard</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Guard</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Guard</em>' containment reference.
-	 * @see #setGuard(Expression)
-	 * @see org.eclipse.xtext.xbase.XbasePackage#getFunction_Guard()
-	 * @model containment="true"
-	 * @generated
-	 */
-	Expression getGuard();
-
-	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.xbase.Function#getGuard <em>Guard</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Guard</em>' containment reference.
-	 * @see #getGuard()
-	 * @generated
-	 */
-	void setGuard(Expression value);
 
 	/**
 	 * Returns the value of the '<em><b>Expression</b></em>' containment reference.
