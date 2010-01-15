@@ -76,27 +76,25 @@ public class TreeConstState extends
 			if (!t.isRuleCall())
 				t.getTarget().discardMisleadingDistances(visited);
 		}
-		if (isConsumingElement())
+		if (isConsumingElement() || isEndState())
 			return;
-		Set<TreeConstState> toBeRemoved = new HashSet<TreeConstState>();
 		Set<TreeConstState> doNotRemove = new HashSet<TreeConstState>();
 		for (TreeConstTransition t : concat(getFollowers(),	getParentFollowers())) {
-			TreeConstState target = t.getTarget();
 			if (!t.isRuleCall()) {
+				TreeConstState target = t.getTarget();
 				Map<TreeConstState, Integer> targetDistances = target.distances;
 				for(Map.Entry<TreeConstState, Integer> entry: targetDistances.entrySet()) {
 					Integer targetDistance = entry.getValue();
 					Integer ownDistance = distances.get(entry.getKey());
-					if (ownDistance != null && targetDistance < ownDistance) { // && !entry.getKey().isConsumingElement()) {
-						toBeRemoved.add(entry.getKey());
-					} else {
+					if (ownDistance == null || targetDistance >= ownDistance) {
 						doNotRemove.add(entry.getKey());
-					}
+					} 
 				}
-			} 
+			} else {
+				doNotRemove.addAll(t.getTarget().distances.keySet());
+			}
 		}
-		toBeRemoved.removeAll(doNotRemove);
-		distances.keySet().removeAll(toBeRemoved);
+		distances.keySet().retainAll(doNotRemove);
 	}
 	
 	protected Status checkForAmbigiousPaths(Set<TreeConstState> visited) {

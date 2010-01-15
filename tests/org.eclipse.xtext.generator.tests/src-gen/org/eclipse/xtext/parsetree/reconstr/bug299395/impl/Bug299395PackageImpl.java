@@ -8,12 +8,14 @@ package org.eclipse.xtext.parsetree.reconstr.bug299395.impl;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.parsetree.reconstr.bug299395.Bug299395Factory;
 import org.eclipse.xtext.parsetree.reconstr.bug299395.Bug299395Package;
 import org.eclipse.xtext.parsetree.reconstr.bug299395.Model;
+import org.eclipse.xtext.parsetree.reconstr.bug299395.SubModel;
 
 /**
  * <!-- begin-user-doc -->
@@ -29,6 +31,13 @@ public class Bug299395PackageImpl extends EPackageImpl implements Bug299395Packa
    * @generated
    */
   private EClass modelEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass subModelEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -108,7 +117,7 @@ public class Bug299395PackageImpl extends EPackageImpl implements Bug299395Packa
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getModel_Unused()
+  public EAttribute getModel_Strings()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
   }
@@ -118,7 +127,7 @@ public class Bug299395PackageImpl extends EPackageImpl implements Bug299395Packa
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getModel_Key()
+  public EAttribute getModel_Keys()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(1);
   }
@@ -128,9 +137,39 @@ public class Bug299395PackageImpl extends EPackageImpl implements Bug299395Packa
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getModel_Value()
+  public EAttribute getModel_Values()
   {
     return (EAttribute)modelEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_SubModel()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getSubModel()
+  {
+    return subModelEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getSubModel_Strings()
+  {
+    return (EAttribute)subModelEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -164,9 +203,13 @@ public class Bug299395PackageImpl extends EPackageImpl implements Bug299395Packa
 
     // Create classes and their features
     modelEClass = createEClass(MODEL);
-    createEAttribute(modelEClass, MODEL__UNUSED);
-    createEAttribute(modelEClass, MODEL__KEY);
-    createEAttribute(modelEClass, MODEL__VALUE);
+    createEAttribute(modelEClass, MODEL__STRINGS);
+    createEAttribute(modelEClass, MODEL__KEYS);
+    createEAttribute(modelEClass, MODEL__VALUES);
+    createEReference(modelEClass, MODEL__SUB_MODEL);
+
+    subModelEClass = createEClass(SUB_MODEL);
+    createEAttribute(subModelEClass, SUB_MODEL__STRINGS);
   }
 
   /**
@@ -201,9 +244,13 @@ public class Bug299395PackageImpl extends EPackageImpl implements Bug299395Packa
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getModel_Unused(), ecorePackage.getEString(), "unused", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getModel_Key(), ecorePackage.getEString(), "key", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getModel_Value(), ecorePackage.getEString(), "value", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getModel_Strings(), ecorePackage.getEString(), "strings", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getModel_Keys(), ecorePackage.getEString(), "keys", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getModel_Values(), ecorePackage.getEString(), "values", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_SubModel(), this.getSubModel(), null, "subModel", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(subModelEClass, SubModel.class, "SubModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getSubModel_Strings(), ecorePackage.getEString(), "strings", null, 0, -1, SubModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

@@ -23,70 +23,125 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Action cModelAction_0 = (Action)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Keyword cLeftCurlyBracketKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
-		private final Assignment cUnusedAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cUnusedSTRINGTerminalRuleCall_1_1_0 = (RuleCall)cUnusedAssignment_1_1.eContents().get(0);
+		private final Assignment cStringsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cStringsSTRINGTerminalRuleCall_1_1_0 = (RuleCall)cStringsAssignment_1_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_1_2 = (Keyword)cGroup_1.eContents().get(2);
 		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
 		private final Keyword cLeftSquareBracketKeyword_2_0 = (Keyword)cGroup_2.eContents().get(0);
 		private final Group cGroup_2_1 = (Group)cGroup_2.eContents().get(1);
-		private final Assignment cKeyAssignment_2_1_0 = (Assignment)cGroup_2_1.eContents().get(0);
-		private final RuleCall cKeySTRINGTerminalRuleCall_2_1_0_0 = (RuleCall)cKeyAssignment_2_1_0.eContents().get(0);
-		private final Assignment cValueAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
-		private final RuleCall cValueSTRINGTerminalRuleCall_2_1_1_0 = (RuleCall)cValueAssignment_2_1_1.eContents().get(0);
+		private final Assignment cKeysAssignment_2_1_0 = (Assignment)cGroup_2_1.eContents().get(0);
+		private final RuleCall cKeysSTRINGTerminalRuleCall_2_1_0_0 = (RuleCall)cKeysAssignment_2_1_0.eContents().get(0);
+		private final Assignment cValuesAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
+		private final RuleCall cValuesSTRINGTerminalRuleCall_2_1_1_0 = (RuleCall)cValuesAssignment_2_1_1.eContents().get(0);
 		private final Keyword cRightSquareBracketKeyword_2_2 = (Keyword)cGroup_2.eContents().get(2);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cSubModelKeyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Assignment cSubModelAssignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cSubModelSubModelParserRuleCall_3_1_0 = (RuleCall)cSubModelAssignment_3_1.eContents().get(0);
 		
 		//Model:
-		//  {Model} ("{" unused+=STRING? "}")* ("[" (key+=STRING value+=STRING)* "]")*;
+		//  {Model} ("{" strings+=STRING? "}")* ("[" (keys+=STRING values+=STRING)* "]")* (
+		//  "subModel" subModel=SubModel)?;
 		public ParserRule getRule() { return rule; }
 
-		//{Model} ("{" unused+=STRING? "}")* ("[" (key+=STRING value+=STRING)* "]")*
+		//{Model} ("{" strings+=STRING? "}")* ("[" (keys+=STRING values+=STRING)* "]")* (
+		//"subModel" subModel=SubModel)?
 		public Group getGroup() { return cGroup; }
 
 		//{Model}
 		public Action getModelAction_0() { return cModelAction_0; }
 
-		//("{" unused+=STRING? "}")*
+		//("{" strings+=STRING? "}")*
 		public Group getGroup_1() { return cGroup_1; }
 
 		//"{"
 		public Keyword getLeftCurlyBracketKeyword_1_0() { return cLeftCurlyBracketKeyword_1_0; }
 
-		//unused+=STRING?
-		public Assignment getUnusedAssignment_1_1() { return cUnusedAssignment_1_1; }
+		//strings+=STRING?
+		public Assignment getStringsAssignment_1_1() { return cStringsAssignment_1_1; }
 
 		//STRING
-		public RuleCall getUnusedSTRINGTerminalRuleCall_1_1_0() { return cUnusedSTRINGTerminalRuleCall_1_1_0; }
+		public RuleCall getStringsSTRINGTerminalRuleCall_1_1_0() { return cStringsSTRINGTerminalRuleCall_1_1_0; }
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_1_2() { return cRightCurlyBracketKeyword_1_2; }
 
-		//("[" (key+=STRING value+=STRING)* "]")*
+		//("[" (keys+=STRING values+=STRING)* "]")*
 		public Group getGroup_2() { return cGroup_2; }
 
 		//"["
 		public Keyword getLeftSquareBracketKeyword_2_0() { return cLeftSquareBracketKeyword_2_0; }
 
-		//(key+=STRING value+=STRING)*
+		//(keys+=STRING values+=STRING)*
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
-		//key+=STRING
-		public Assignment getKeyAssignment_2_1_0() { return cKeyAssignment_2_1_0; }
+		//keys+=STRING
+		public Assignment getKeysAssignment_2_1_0() { return cKeysAssignment_2_1_0; }
 
 		//STRING
-		public RuleCall getKeySTRINGTerminalRuleCall_2_1_0_0() { return cKeySTRINGTerminalRuleCall_2_1_0_0; }
+		public RuleCall getKeysSTRINGTerminalRuleCall_2_1_0_0() { return cKeysSTRINGTerminalRuleCall_2_1_0_0; }
 
-		//value+=STRING
-		public Assignment getValueAssignment_2_1_1() { return cValueAssignment_2_1_1; }
+		//values+=STRING
+		public Assignment getValuesAssignment_2_1_1() { return cValuesAssignment_2_1_1; }
 
 		//STRING
-		public RuleCall getValueSTRINGTerminalRuleCall_2_1_1_0() { return cValueSTRINGTerminalRuleCall_2_1_1_0; }
+		public RuleCall getValuesSTRINGTerminalRuleCall_2_1_1_0() { return cValuesSTRINGTerminalRuleCall_2_1_1_0; }
 
 		//"]"
 		public Keyword getRightSquareBracketKeyword_2_2() { return cRightSquareBracketKeyword_2_2; }
+
+		//("subModel" subModel=SubModel)?
+		public Group getGroup_3() { return cGroup_3; }
+
+		//"subModel"
+		public Keyword getSubModelKeyword_3_0() { return cSubModelKeyword_3_0; }
+
+		//subModel=SubModel
+		public Assignment getSubModelAssignment_3_1() { return cSubModelAssignment_3_1; }
+
+		//SubModel
+		public RuleCall getSubModelSubModelParserRuleCall_3_1_0() { return cSubModelSubModelParserRuleCall_3_1_0; }
+	}
+
+	public class SubModelElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SubModel");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cSubModelAction_0 = (Action)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Keyword cDigitOneKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
+		private final Keyword cDigitTwoKeyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cStringsAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cStringsSTRINGTerminalRuleCall_1_2_0 = (RuleCall)cStringsAssignment_1_2.eContents().get(0);
+		
+		//SubModel:
+		//  {SubModel} ("1" "2" strings+=STRING?)*;
+		public ParserRule getRule() { return rule; }
+
+		//{SubModel} ("1" "2" strings+=STRING?)*
+		public Group getGroup() { return cGroup; }
+
+		//{SubModel}
+		public Action getSubModelAction_0() { return cSubModelAction_0; }
+
+		//("1" "2" strings+=STRING?)*
+		public Group getGroup_1() { return cGroup_1; }
+
+		//"1"
+		public Keyword getDigitOneKeyword_1_0() { return cDigitOneKeyword_1_0; }
+
+		//"2"
+		public Keyword getDigitTwoKeyword_1_1() { return cDigitTwoKeyword_1_1; }
+
+		//strings+=STRING?
+		public Assignment getStringsAssignment_1_2() { return cStringsAssignment_1_2; }
+
+		//STRING
+		public RuleCall getStringsSTRINGTerminalRuleCall_1_2_0() { return cStringsSTRINGTerminalRuleCall_1_2_0; }
 	}
 	
 	
 	private ModelElements pModel;
+	private SubModelElements pSubModel;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -110,13 +165,24 @@ public class Bug299395TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 	
 	//Model:
-	//  {Model} ("{" unused+=STRING? "}")* ("[" (key+=STRING value+=STRING)* "]")*;
+	//  {Model} ("{" strings+=STRING? "}")* ("[" (keys+=STRING values+=STRING)* "]")* (
+	//  "subModel" subModel=SubModel)?;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
 	
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
+	}
+
+	//SubModel:
+	//  {SubModel} ("1" "2" strings+=STRING?)*;
+	public SubModelElements getSubModelAccess() {
+		return (pSubModel != null) ? pSubModel : (pSubModel = new SubModelElements());
+	}
+	
+	public ParserRule getSubModelRule() {
+		return getSubModelAccess().getRule();
 	}
 
 	//terminal ID:

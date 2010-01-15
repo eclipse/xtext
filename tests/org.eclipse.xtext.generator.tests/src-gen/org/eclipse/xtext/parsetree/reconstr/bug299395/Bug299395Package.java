@@ -8,6 +8,7 @@ package org.eclipse.xtext.parsetree.reconstr.bug299395;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -69,31 +70,40 @@ public interface Bug299395Package extends EPackage
   int MODEL = 0;
 
   /**
-   * The feature id for the '<em><b>Unused</b></em>' attribute list.
+   * The feature id for the '<em><b>Strings</b></em>' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL__UNUSED = 0;
+  int MODEL__STRINGS = 0;
 
   /**
-   * The feature id for the '<em><b>Key</b></em>' attribute list.
+   * The feature id for the '<em><b>Keys</b></em>' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL__KEY = 1;
+  int MODEL__KEYS = 1;
 
   /**
-   * The feature id for the '<em><b>Value</b></em>' attribute list.
+   * The feature id for the '<em><b>Values</b></em>' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL__VALUE = 2;
+  int MODEL__VALUES = 2;
+
+  /**
+   * The feature id for the '<em><b>Sub Model</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__SUB_MODEL = 3;
 
   /**
    * The number of structural features of the '<em>Model</em>' class.
@@ -102,7 +112,35 @@ public interface Bug299395Package extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 3;
+  int MODEL_FEATURE_COUNT = 4;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.bug299395.impl.SubModelImpl <em>Sub Model</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.bug299395.impl.SubModelImpl
+   * @see org.eclipse.xtext.parsetree.reconstr.bug299395.impl.Bug299395PackageImpl#getSubModel()
+   * @generated
+   */
+  int SUB_MODEL = 1;
+
+  /**
+   * The feature id for the '<em><b>Strings</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SUB_MODEL__STRINGS = 0;
+
+  /**
+   * The number of structural features of the '<em>Sub Model</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SUB_MODEL_FEATURE_COUNT = 1;
 
 
   /**
@@ -116,37 +154,69 @@ public interface Bug299395Package extends EPackage
   EClass getModel();
 
   /**
-   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.reconstr.bug299395.Model#getUnused <em>Unused</em>}'.
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.reconstr.bug299395.Model#getStrings <em>Strings</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Unused</em>'.
-   * @see org.eclipse.xtext.parsetree.reconstr.bug299395.Model#getUnused()
+   * @return the meta object for the attribute list '<em>Strings</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.bug299395.Model#getStrings()
    * @see #getModel()
    * @generated
    */
-  EAttribute getModel_Unused();
+  EAttribute getModel_Strings();
 
   /**
-   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.reconstr.bug299395.Model#getKey <em>Key</em>}'.
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.reconstr.bug299395.Model#getKeys <em>Keys</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Key</em>'.
-   * @see org.eclipse.xtext.parsetree.reconstr.bug299395.Model#getKey()
+   * @return the meta object for the attribute list '<em>Keys</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.bug299395.Model#getKeys()
    * @see #getModel()
    * @generated
    */
-  EAttribute getModel_Key();
+  EAttribute getModel_Keys();
 
   /**
-   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.reconstr.bug299395.Model#getValue <em>Value</em>}'.
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.reconstr.bug299395.Model#getValues <em>Values</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the attribute list '<em>Value</em>'.
-   * @see org.eclipse.xtext.parsetree.reconstr.bug299395.Model#getValue()
+   * @return the meta object for the attribute list '<em>Values</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.bug299395.Model#getValues()
    * @see #getModel()
    * @generated
    */
-  EAttribute getModel_Value();
+  EAttribute getModel_Values();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.parsetree.reconstr.bug299395.Model#getSubModel <em>Sub Model</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Sub Model</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.bug299395.Model#getSubModel()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_SubModel();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.bug299395.SubModel <em>Sub Model</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Sub Model</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.bug299395.SubModel
+   * @generated
+   */
+  EClass getSubModel();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.parsetree.reconstr.bug299395.SubModel#getStrings <em>Strings</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Strings</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.bug299395.SubModel#getStrings()
+   * @see #getSubModel()
+   * @generated
+   */
+  EAttribute getSubModel_Strings();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -182,28 +252,54 @@ public interface Bug299395Package extends EPackage
     EClass MODEL = eINSTANCE.getModel();
 
     /**
-     * The meta object literal for the '<em><b>Unused</b></em>' attribute list feature.
+     * The meta object literal for the '<em><b>Strings</b></em>' attribute list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute MODEL__UNUSED = eINSTANCE.getModel_Unused();
+    EAttribute MODEL__STRINGS = eINSTANCE.getModel_Strings();
 
     /**
-     * The meta object literal for the '<em><b>Key</b></em>' attribute list feature.
+     * The meta object literal for the '<em><b>Keys</b></em>' attribute list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute MODEL__KEY = eINSTANCE.getModel_Key();
+    EAttribute MODEL__KEYS = eINSTANCE.getModel_Keys();
 
     /**
-     * The meta object literal for the '<em><b>Value</b></em>' attribute list feature.
+     * The meta object literal for the '<em><b>Values</b></em>' attribute list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute MODEL__VALUE = eINSTANCE.getModel_Value();
+    EAttribute MODEL__VALUES = eINSTANCE.getModel_Values();
+
+    /**
+     * The meta object literal for the '<em><b>Sub Model</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__SUB_MODEL = eINSTANCE.getModel_SubModel();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.bug299395.impl.SubModelImpl <em>Sub Model</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.bug299395.impl.SubModelImpl
+     * @see org.eclipse.xtext.parsetree.reconstr.bug299395.impl.Bug299395PackageImpl#getSubModel()
+     * @generated
+     */
+    EClass SUB_MODEL = eINSTANCE.getSubModel();
+
+    /**
+     * The meta object literal for the '<em><b>Strings</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute SUB_MODEL__STRINGS = eINSTANCE.getSubModel_Strings();
 
   }
 

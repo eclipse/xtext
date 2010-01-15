@@ -10,6 +10,7 @@ import org.eclipse.xtext.parsetree.reconstr.services.Bug299395TestLanguageGramma
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
 import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.Bug299395TestLanguageModelConsumer;
+import org.eclipse.xtext.parsetree.reconstr.parser.packrat.consumers.Bug299395TestLanguageSubModelConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSTRINGConsumer;
@@ -22,6 +23,7 @@ public class Bug299395TestLanguageParserConfiguration extends AbstractParserConf
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
     private Bug299395TestLanguageModelConsumer modelConsumer;
+    private Bug299395TestLanguageSubModelConsumer subModelConsumer;
 
 	private Bug299395TestLanguageGrammarAccess grammarAccess;
 
@@ -40,6 +42,9 @@ public class Bug299395TestLanguageParserConfiguration extends AbstractParserConf
 		modelConsumer = new Bug299395TestLanguageModelConsumer(
     		this, null
     	);
+		subModelConsumer = new Bug299395TestLanguageSubModelConsumer(
+    		this, null
+    	);
 	}
 	
 	public void createTerminalConsumers() {
@@ -50,6 +55,7 @@ public class Bug299395TestLanguageParserConfiguration extends AbstractParserConf
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
 		getModelConsumer().setRule(grammarAccess.getModelAccess());
+		getSubModelConsumer().setRule(grammarAccess.getSubModelAccess());
 		getIdConsumer().setRule(grammarAccess.getIDRule());
 		getIntConsumer().setRule(grammarAccess.getINTRule());
 		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
@@ -60,14 +66,21 @@ public class Bug299395TestLanguageParserConfiguration extends AbstractParserConf
 
 
 		getModelConsumer().setStringConsumer(getStringConsumer());
+		getModelConsumer().setSubModelConsumer(getSubModelConsumer());
+
+		getSubModelConsumer().setStringConsumer(getStringConsumer());
 
 		getModelConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.Bug299395TestLanguageDelimiters.keyword$7$Delimiter);
 		getModelConsumer().setKeyword$10$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.Bug299395TestLanguageDelimiters.keyword$7$Delimiter);
 		getModelConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.Bug299395TestLanguageDelimiters.keyword$7$Delimiter);
+		getModelConsumer().setKeyword$18$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.Bug299395TestLanguageDelimiters.keyword$20$Delimiter);
 		getModelConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.Bug299395TestLanguageDelimiters.keyword$7$Delimiter);
 		getModelConsumer().setRuleCall$13$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.Bug299395TestLanguageDelimiters.ruleCall$9$Delimiter);
 		getModelConsumer().setRuleCall$15$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.Bug299395TestLanguageDelimiters.ruleCall$9$Delimiter);
 		getModelConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.Bug299395TestLanguageDelimiters.ruleCall$9$Delimiter);
+		getSubModelConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.Bug299395TestLanguageDelimiters.keyword$7$Delimiter);
+		getSubModelConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.Bug299395TestLanguageDelimiters.keyword$7$Delimiter);
+		getSubModelConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.parsetree.reconstr.parser.packrat.Bug299395TestLanguageDelimiters.ruleCall$9$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
@@ -76,6 +89,10 @@ public class Bug299395TestLanguageParserConfiguration extends AbstractParserConf
 	
     public Bug299395TestLanguageModelConsumer getModelConsumer() {
     	return modelConsumer;
+    }
+
+    public Bug299395TestLanguageSubModelConsumer getSubModelConsumer() {
+    	return subModelConsumer;
     }
 
     public TerminalsIDConsumer getIdConsumer() {

@@ -35,6 +35,15 @@ public interface Bug299395Factory extends EFactory
   Model createModel();
 
   /**
+   * Returns a new object of class '<em>Sub Model</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Sub Model</em>'.
+   * @generated
+   */
+  SubModel createSubModel();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
