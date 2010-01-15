@@ -7,11 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.gmf.glue.edit.part;
 
-import java.util.Arrays;
-import java.util.LinkedList;
-
-import org.eclipse.core.runtime.CoreException;
-import org.eclipse.draw2d.Figure;
 import org.eclipse.draw2d.IFigure;
 import org.eclipse.draw2d.geometry.Rectangle;
 import org.eclipse.emf.ecore.EObject;
@@ -19,6 +14,8 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.gef.EditPartViewer;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramRootEditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.IGraphicalEditPart;
+import org.eclipse.gmf.runtime.diagram.ui.parts.DiagramEditDomain;
+import org.eclipse.gmf.runtime.diagram.ui.parts.IDiagramEditDomain;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.TextCellEditor;
@@ -30,10 +27,17 @@ import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
+import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Decorations;
+import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorSite;
+import org.eclipse.ui.IPartListener;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.xtext.gmf.glue.Activator;
 import org.eclipse.xtext.gmf.glue.editingdomain.UpdateXtextResourceTextCommand;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -64,6 +68,8 @@ public class InDiagramXtextEditorHelper {
 
 	private IGraphicalEditPart hostEditPart;
 
+	private IEditorPart diagramEditor;
+
 	private XtextEditor xtextEditor;
 
 	private int editorOffset;
@@ -73,11 +79,6 @@ public class InDiagramXtextEditorHelper {
 	private int initialDocumentSize;
 
 	private Composite xtextEditorComposite;
-
-	private IFigure artificialFigure;
-
-	private EditPartViewer diagramViewer;
-
 	private final Injector xtextInjector;
 
 	private XtextResource xtextResource;
@@ -106,27 +107,20 @@ public class InDiagramXtextEditorHelper {
 					|| "".equals(semanticElementFragment)) {
 				return;
 			}
+			IDiagramEditDomain diagramEditDomain = hostEditPart
+					.getDiagramEditDomain();
+			diagramEditor = ((DiagramEditDomain) diagramEditDomain)
+					.getEditorPart();
 			xtextResource = (XtextResource) semanticResource;
 			createXtextEditor(new ResourceWorkingCopyFileEditorInput(
 					semanticResource));
-			setEditorRegion();
-			setEditorBounds();
-			EditorSiteFactory.activate(xtextEditor);
 		} catch (Exception e) {
 			Activator.logError(e);
-		} finally {
-			if (hostEditPart != null) {
-				hostEditPart.refresh();
-			}
-		}
+		} 
 	}
 
 	public void closeEditor(boolean isReconcile) {
 		if (xtextEditor != null) {
-			final IFigure parent = artificialFigure.getParent();
-			if (parent != null) {
-				parent.remove(artificialFigure);
-			}
 			if (isReconcile) {
 				try {
 					final IXtextDocument xtextDocument = xtextEditor
@@ -143,35 +137,53 @@ public class InDiagramXtextEditorHelper {
 					Activator.logError(exc);
 				}
 			}
-			xtextEditor.dispose();
+
+			xtextEditor.close(false);
 			xtextEditorComposite.setVisible(false);
 			xtextEditorComposite.dispose();
 			xtextEditor = null;
+			PartReactivationUtil.forceReactivation(diagramEditor);
 		}
 	}
 
-	private void createXtextEditor(IEditorInput editorInput)
-			throws CoreException {
-		diagramViewer = hostEditPart.getRoot().getViewer();
-		Composite diagramComposite = (Composite) diagramViewer.getControl();
+	private void createXtextEditor(IEditorInput editorInput) throws Exception {
+		Shell diagramShell = diagramEditor.getSite().getShell();
+		xtextEditorComposite = new Decorations(diagramShell, SWT.RESIZE | SWT.ON_TOP | SWT.BORDER);
+		xtextEditorComposite.setLayout(new FillLayout());
+		IEditorSite editorSite = diagramEditor.getEditorSite();
 		xtextEditor = xtextInjector.getInstance(XtextEditor.class);
-		IEditorSite xtextEditorSite = EditorSiteFactory.createEditorSite(
-				xtextEditor, editorInput, xtextEditor.getLanguageName());
-		xtextEditor.init(xtextEditorSite, editorInput);
-		createEditorPartControl(diagramComposite);
+		xtextEditor.init(editorSite, editorInput);
+		xtextEditor.createPartControl(xtextEditorComposite);
 		addKeyVerifyListener();
-	}
+		setEditorRegion();
+		setEditorBounds();
+		xtextEditorComposite.setVisible(true);
+		xtextEditorComposite.setFocus();
+		xtextEditor.setFocus();
+		IWorkbenchPage page = diagramEditor.getSite().getPage();
+		page.addPartListener(new IPartListener() {
 
-	private void createEditorPartControl(Composite diagramComposite) {
-		// TODO: find a more elegant way to get the xtextEditorComposite
-		Control[] siblingsBefore = diagramComposite.getChildren();
-		Composite diagramParentComposite = (Composite) diagramComposite;
-		xtextEditor.createPartControl(diagramParentComposite);
-		Control[] siblingsAfter = diagramComposite.getChildren();
-		java.util.List<Control> controlSiblings = new LinkedList<Control>(
-				Arrays.asList(siblingsAfter));
-		controlSiblings.removeAll(Arrays.asList(siblingsBefore));
-		xtextEditorComposite = (Composite) controlSiblings.get(0);
+			public void partActivated(IWorkbenchPart part) {
+				closeEditor(false);
+			}
+
+			public void partBroughtToTop(IWorkbenchPart part) {
+				//closeEditor(false);
+			}
+
+			public void partClosed(IWorkbenchPart part) {
+				closeEditor(false);
+			}
+
+			public void partDeactivated(IWorkbenchPart part) {
+				closeEditor(false);				
+			}
+
+			public void partOpened(IWorkbenchPart part) {
+				closeEditor(false);
+			}
+			
+		});
 	}
 
 	private void addKeyVerifyListener() {
@@ -247,12 +259,19 @@ public class InDiagramXtextEditorHelper {
 		}
 		int numLines = StringUtil.getNumLines(editString);
 		int numColumns = StringUtil.getMaxColumns(editString);
+
 		IFigure figure = hostEditPart.getFigure();
 		Rectangle bounds = figure.getBounds().getCopy();
 		DiagramRootEditPart diagramEditPart = (DiagramRootEditPart) hostEditPart
 				.getRoot();
 		IFigure contentPane = diagramEditPart.getContentPane();
 		contentPane.translateToAbsolute(bounds);
+		EditPartViewer viewer = hostEditPart.getViewer();
+		Control control = viewer.getControl();
+		while (control != null && false == control instanceof Shell) {
+			bounds.translate(control.getBounds().x, control.getBounds().y);
+			control = control.getParent();
+		}
 
 		Font font = figure.getFont();
 		FontData fontData = font.getFontData()[0];
@@ -264,14 +283,6 @@ public class InDiagramXtextEditorHelper {
 		int height = Math.max(fontHeightInPixel * (numLines + 4),
 				MIN_EDITOR_HEIGHT);
 		xtextEditorComposite.setBounds(bounds.x, bounds.y, width, height);
-
-		// add an artificial figure of same size to enable scrolling
-		Rectangle boundsForArtificialFigure = new Rectangle(bounds.x, bounds.y,
-				width, height);
-		contentPane.translateToRelative(boundsForArtificialFigure);
-		artificialFigure = new Figure();
-		artificialFigure.setBounds(boundsForArtificialFigure);
-		contentPane.add(artificialFigure);
 	}
 
 	private CompositeNode getCompositeNode(EObject semanticElement) {
