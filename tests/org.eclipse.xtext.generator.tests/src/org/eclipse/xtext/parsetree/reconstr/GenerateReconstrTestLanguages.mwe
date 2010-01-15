@@ -4,17 +4,31 @@
 	<property name="runtimeProject" value="../${projectName}"/>
 
 	<property name="generateDotDiagram" value="true"/>
-	 <property name="graphvizCommand" value="/opt/local/bin/dot -o %1.pdf -v -T pdf"/> 
-	<!--<property name="graphvizCommand" value=""/>-->
+	<!-- <property name="graphvizCommand" value="/opt/local/bin/dot -o %1.pdf -v -T pdf"/> --> 
+	<property name="graphvizCommand" value=""/>
 	
 	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" platformUri="${runtimeProject}/.."/>
-	
+
 	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}/src-gen/org/eclipse/xtext/parsetree/reconstr"/>
-	
+
 	<component class="org.eclipse.xtext.generator.Generator">
 		<pathRtProject value="${runtimeProject}"/>
 		<projectNameRt value="${projectName}"/>
 		
+		<language uri="classpath:/org/eclipse/xtext/parsetree/reconstr/Bug299395TestLanguage.xtext">
+			<fragment class="org.eclipse.xtext.generator.DelegatingGeneratorFragment" 
+				delegate="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"
+				message="You are generating without ANTLR. It is highly recommended to download and use the plugin 'de.itemis.xtext.antlr' \n\t using the update site http://download.itemis.com/updates/.">
+				<fallback class="org.eclipse.xtext.generator.parser.PackratParserFragment" />
+			</fragment>
+			<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment"/>
+			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
+			<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/>
+			<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"
+				generateDotDiagram="${generateDotDiagram}"
+				graphvizCommand="${graphvizCommand}" />
+		</language>
+
 		<language uri="classpath:/org/eclipse/xtext/parsetree/reconstr/SerializationBug269362TestLanguage.xtext">
 			<fragment class="org.eclipse.xtext.generator.DelegatingGeneratorFragment" 
 				delegate="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment"
