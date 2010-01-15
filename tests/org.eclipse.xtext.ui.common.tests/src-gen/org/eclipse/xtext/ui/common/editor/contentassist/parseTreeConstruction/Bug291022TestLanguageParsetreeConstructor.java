@@ -288,7 +288,6 @@ protected class RootModel_RightCurlyBracketKeyword_3_2 extends KeywordToken  {
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new RootModel_ElementsAssignment_3_1(parent, this, 0, inst);
-			case 1: return new RootModel_LeftCurlyBracketKeyword_3_0(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -645,7 +644,6 @@ protected class ModelElement_RightCurlyBracketKeyword_3_1_2 extends KeywordToken
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new ModelElement_ElementsAssignment_3_1_1(parent, this, 0, inst);
-			case 1: return new ModelElement_LeftCurlyBracketKeyword_3_1_0(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
