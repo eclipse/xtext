@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<psf version="2.0">
+<provider id="org.eclipse.team.cvs.core.cvsnature">
+<project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/examples/org.eclipse.xtext.xtext.ui.examples/contents/org.eclipse.xtext.example.gmf,org.eclipse.xtext.example.gmf"/>
+<project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/examples/org.eclipse.xtext.xtext.ui.examples/contents/org.eclipse.xtext.example.gmf.diagram,org.eclipse.xtext.example.gmf.diagram"/>
+<project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/examples/org.eclipse.xtext.xtext.ui.examples/contents/org.eclipse.xtext.example.gmf.diagram.extensions,org.eclipse.xtext.example.gmf.diagram.extensions"/>
+<project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/examples/org.eclipse.xtext.xtext.ui.examples/contents/org.eclipse.xtext.example.gmf.edit,org.eclipse.xtext.example.gmf.edit"/>
+<project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/examples/org.eclipse.xtext.xtext.ui.examples/contents/org.eclipse.xtext.example.gmf.models,org.eclipse.xtext.example.gmf.models"/>
+<project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/examples/org.eclipse.xtext.xtext.ui.examples/contents/org.eclipse.xtext.example.gmf.ui,org.eclipse.xtext.example.gmf.ui"/>
+<project reference="1.0,:extssh:dev.eclipse.org:/cvsroot/modeling,org.eclipse.tmf/org.eclipse.xtext/examples/org.eclipse.xtext.xtext.ui.examples/contents/org.eclipse.xtext.gmf.glue,org.eclipse.xtext.gmf.glue"/>
+</provider>
+<workingSets editPageId="org.eclipse.jdt.ui.JavaWorkingSetPage" id="1260974488017_12" label="xtext GMF" name="xtext GMF">
+<item elementID="=org.eclipse.xtext.gmf.glue" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.example.gmf" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.example.gmf.diagram" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.example.gmf.diagram.extensions" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=org.eclipse.xtext.example.gmf.edit" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item factoryID="org.eclipse.ui.internal.model.ResourceFactory" path="/org.eclipse.xtext.example.gmf.models" type="4"/>
+<item elementID="=org.eclipse.xtext.example.gmf.ui" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSets>
+</psf>
