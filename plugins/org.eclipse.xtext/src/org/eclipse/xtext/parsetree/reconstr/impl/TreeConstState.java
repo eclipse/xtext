@@ -62,13 +62,43 @@ public class TreeConstState extends
 			dist = 0;
 		}
 		for (TreeConstTransition t : concat(getFollowers(),
-				getParentFollowers()))
+				getParentFollowers())) 
 			if (!t.isRuleCall())
 				t.getTarget().calculateDistances(root, dist + 1);
 		if (isEndState())
 			getEndDistances().put(root, dist + 1);
 	}
 
+	protected void discardMisleadingDistances(Set<TreeConstState> visited) {
+		if (!visited.add(this))
+			return;
+		for (TreeConstTransition t : concat(getFollowers(),	getParentFollowers())) { 
+			if (!t.isRuleCall())
+				t.getTarget().discardMisleadingDistances(visited);
+		}
+		if (isConsumingElement())
+			return;
+		Set<TreeConstState> toBeRemoved = new HashSet<TreeConstState>();
+		Set<TreeConstState> doNotRemove = new HashSet<TreeConstState>();
+		for (TreeConstTransition t : concat(getFollowers(),	getParentFollowers())) {
+			TreeConstState target = t.getTarget();
+			if (!t.isRuleCall()) {
+				Map<TreeConstState, Integer> targetDistances = target.distances;
+				for(Map.Entry<TreeConstState, Integer> entry: targetDistances.entrySet()) {
+					Integer targetDistance = entry.getValue();
+					Integer ownDistance = distances.get(entry.getKey());
+					if (ownDistance != null && targetDistance < ownDistance) { // && !entry.getKey().isConsumingElement()) {
+						toBeRemoved.add(entry.getKey());
+					} else {
+						doNotRemove.add(entry.getKey());
+					}
+				}
+			} 
+		}
+		toBeRemoved.removeAll(doNotRemove);
+		distances.keySet().removeAll(toBeRemoved);
+	}
+	
 	protected Status checkForAmbigiousPaths(Set<TreeConstState> visited) {
 		if (getStatInt() != Status.ENABLED || visited.contains(this))
 			return getStatInt();
@@ -175,6 +205,7 @@ public class TreeConstState extends
 	protected void initStatus() {
 		if (distances == null) {
 			calculateDistances(this, 1);
+			discardMisleadingDistances(new HashSet<TreeConstState>());
 			checkForDetoursAndLoops(new HashSet<TreeConstState>());
 			checkForAmbigiousPaths(new HashSet<TreeConstState>());
 		}
@@ -204,10 +235,10 @@ public class TreeConstState extends
 	public String toString() {
 		if (distances == null)
 			return "????";
-		StringBuffer b = new StringBuffer();
+		StringBuffer b = new StringBuffer(element.eClass().getName()).append("-").append(Integer.toHexString(hashCode())).append("\\n");
 		for (Map.Entry<TreeConstState, Integer> e : distances.entrySet()) {
-			String hash = e.getKey() == null ? "??" : Integer.toHexString(e
-					.getKey().hashCode());
+			String hash = e.getKey() == null ? "??" : 
+					e.getKey().element.eClass().getName() + "-" + Integer.toHexString(e.getKey().hashCode());
 			b.append(hash + "-" + e.getValue() + "\\n");
 		}
 		return b.toString();

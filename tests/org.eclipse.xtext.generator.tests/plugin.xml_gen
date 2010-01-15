@@ -335,6 +335,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.eclipse.org/2010/tmf/xtext/Bug299395" 
+       class = "org.eclipse.xtext.parsetree.reconstr.bug299395.Bug299395Package"
+       genModel = "org/eclipse/xtext/parsetree/reconstr/Bug299395TestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://www.eclipse.org/2009/tmf/xtext/complexrewritetest" 
        class = "org.eclipse.xtext.parsetree.reconstr.complexrewritetest.ComplexrewritetestPackage"
        genModel = "org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.genmodel" /> 

@@ -35,7 +35,7 @@ public class TreeConstNFAToDot extends GrammarToDot {
 		if (nfas.isEndState())
 			n.put("peripheries", "2");
 		setStatusStyle(n, nfas.getStatus());
-		// n.setLabel(nfas + n.get("label"));
+		n.setLabel(nfas + n.get("label"));
 		return n;
 	}
 
