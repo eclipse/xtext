@@ -7,16 +7,22 @@ package org.eclipse.xtext.parsetree.reconstr.bug299395.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
+
 import org.eclipse.emf.common.util.EList;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeEList;
 
 import org.eclipse.xtext.parsetree.reconstr.bug299395.Bug299395Package;
 import org.eclipse.xtext.parsetree.reconstr.bug299395.Model;
+import org.eclipse.xtext.parsetree.reconstr.bug299395.SubModel;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,9 +31,10 @@ import org.eclipse.xtext.parsetree.reconstr.bug299395.Model;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.parsetree.reconstr.bug299395.impl.ModelImpl#getUnused <em>Unused</em>}</li>
- *   <li>{@link org.eclipse.xtext.parsetree.reconstr.bug299395.impl.ModelImpl#getKey <em>Key</em>}</li>
- *   <li>{@link org.eclipse.xtext.parsetree.reconstr.bug299395.impl.ModelImpl#getValue <em>Value</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.reconstr.bug299395.impl.ModelImpl#getStrings <em>Strings</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.reconstr.bug299395.impl.ModelImpl#getKeys <em>Keys</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.reconstr.bug299395.impl.ModelImpl#getValues <em>Values</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parsetree.reconstr.bug299395.impl.ModelImpl#getSubModel <em>Sub Model</em>}</li>
  * </ul>
  * </p>
  *
@@ -36,34 +43,44 @@ import org.eclipse.xtext.parsetree.reconstr.bug299395.Model;
 public class ModelImpl extends MinimalEObjectImpl.Container implements Model
 {
   /**
-   * The cached value of the '{@link #getUnused() <em>Unused</em>}' attribute list.
+   * The cached value of the '{@link #getStrings() <em>Strings</em>}' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getUnused()
+   * @see #getStrings()
    * @generated
    * @ordered
    */
-  protected EList<String> unused;
+  protected EList<String> strings;
 
   /**
-   * The cached value of the '{@link #getKey() <em>Key</em>}' attribute list.
+   * The cached value of the '{@link #getKeys() <em>Keys</em>}' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getKey()
+   * @see #getKeys()
    * @generated
    * @ordered
    */
-  protected EList<String> key;
+  protected EList<String> keys;
 
   /**
-   * The cached value of the '{@link #getValue() <em>Value</em>}' attribute list.
+   * The cached value of the '{@link #getValues() <em>Values</em>}' attribute list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getValue()
+   * @see #getValues()
    * @generated
    * @ordered
    */
-  protected EList<String> value;
+  protected EList<String> values;
+
+  /**
+   * The cached value of the '{@link #getSubModel() <em>Sub Model</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getSubModel()
+   * @generated
+   * @ordered
+   */
+  protected SubModel subModel;
 
   /**
    * <!-- begin-user-doc -->
@@ -91,13 +108,13 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getUnused()
+  public EList<String> getStrings()
   {
-    if (unused == null)
+    if (strings == null)
     {
-      unused = new EDataTypeEList<String>(String.class, this, Bug299395Package.MODEL__UNUSED);
+      strings = new EDataTypeEList<String>(String.class, this, Bug299395Package.MODEL__STRINGS);
     }
-    return unused;
+    return strings;
   }
 
   /**
@@ -105,13 +122,13 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getKey()
+  public EList<String> getKeys()
   {
-    if (key == null)
+    if (keys == null)
     {
-      key = new EDataTypeEList<String>(String.class, this, Bug299395Package.MODEL__KEY);
+      keys = new EDataTypeEList<String>(String.class, this, Bug299395Package.MODEL__KEYS);
     }
-    return key;
+    return keys;
   }
 
   /**
@@ -119,13 +136,77 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<String> getValue()
+  public EList<String> getValues()
   {
-    if (value == null)
+    if (values == null)
     {
-      value = new EDataTypeEList<String>(String.class, this, Bug299395Package.MODEL__VALUE);
+      values = new EDataTypeEList<String>(String.class, this, Bug299395Package.MODEL__VALUES);
     }
-    return value;
+    return values;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SubModel getSubModel()
+  {
+    return subModel;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetSubModel(SubModel newSubModel, NotificationChain msgs)
+  {
+    SubModel oldSubModel = subModel;
+    subModel = newSubModel;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, Bug299395Package.MODEL__SUB_MODEL, oldSubModel, newSubModel);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setSubModel(SubModel newSubModel)
+  {
+    if (newSubModel != subModel)
+    {
+      NotificationChain msgs = null;
+      if (subModel != null)
+        msgs = ((InternalEObject)subModel).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - Bug299395Package.MODEL__SUB_MODEL, null, msgs);
+      if (newSubModel != null)
+        msgs = ((InternalEObject)newSubModel).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - Bug299395Package.MODEL__SUB_MODEL, null, msgs);
+      msgs = basicSetSubModel(newSubModel, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, Bug299395Package.MODEL__SUB_MODEL, newSubModel, newSubModel));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case Bug299395Package.MODEL__SUB_MODEL:
+        return basicSetSubModel(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -138,12 +219,14 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case Bug299395Package.MODEL__UNUSED:
-        return getUnused();
-      case Bug299395Package.MODEL__KEY:
-        return getKey();
-      case Bug299395Package.MODEL__VALUE:
-        return getValue();
+      case Bug299395Package.MODEL__STRINGS:
+        return getStrings();
+      case Bug299395Package.MODEL__KEYS:
+        return getKeys();
+      case Bug299395Package.MODEL__VALUES:
+        return getValues();
+      case Bug299395Package.MODEL__SUB_MODEL:
+        return getSubModel();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -159,17 +242,20 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case Bug299395Package.MODEL__UNUSED:
-        getUnused().clear();
-        getUnused().addAll((Collection<? extends String>)newValue);
+      case Bug299395Package.MODEL__STRINGS:
+        getStrings().clear();
+        getStrings().addAll((Collection<? extends String>)newValue);
         return;
-      case Bug299395Package.MODEL__KEY:
-        getKey().clear();
-        getKey().addAll((Collection<? extends String>)newValue);
+      case Bug299395Package.MODEL__KEYS:
+        getKeys().clear();
+        getKeys().addAll((Collection<? extends String>)newValue);
         return;
-      case Bug299395Package.MODEL__VALUE:
-        getValue().clear();
-        getValue().addAll((Collection<? extends String>)newValue);
+      case Bug299395Package.MODEL__VALUES:
+        getValues().clear();
+        getValues().addAll((Collection<? extends String>)newValue);
+        return;
+      case Bug299395Package.MODEL__SUB_MODEL:
+        setSubModel((SubModel)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -185,14 +271,17 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case Bug299395Package.MODEL__UNUSED:
-        getUnused().clear();
+      case Bug299395Package.MODEL__STRINGS:
+        getStrings().clear();
         return;
-      case Bug299395Package.MODEL__KEY:
-        getKey().clear();
+      case Bug299395Package.MODEL__KEYS:
+        getKeys().clear();
         return;
-      case Bug299395Package.MODEL__VALUE:
-        getValue().clear();
+      case Bug299395Package.MODEL__VALUES:
+        getValues().clear();
+        return;
+      case Bug299395Package.MODEL__SUB_MODEL:
+        setSubModel((SubModel)null);
         return;
     }
     super.eUnset(featureID);
@@ -208,12 +297,14 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case Bug299395Package.MODEL__UNUSED:
-        return unused != null && !unused.isEmpty();
-      case Bug299395Package.MODEL__KEY:
-        return key != null && !key.isEmpty();
-      case Bug299395Package.MODEL__VALUE:
-        return value != null && !value.isEmpty();
+      case Bug299395Package.MODEL__STRINGS:
+        return strings != null && !strings.isEmpty();
+      case Bug299395Package.MODEL__KEYS:
+        return keys != null && !keys.isEmpty();
+      case Bug299395Package.MODEL__VALUES:
+        return values != null && !values.isEmpty();
+      case Bug299395Package.MODEL__SUB_MODEL:
+        return subModel != null;
     }
     return super.eIsSet(featureID);
   }
@@ -229,12 +320,12 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     if (eIsProxy()) return super.toString();
 
     StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (unused: ");
-    result.append(unused);
-    result.append(", key: ");
-    result.append(key);
-    result.append(", value: ");
-    result.append(value);
+    result.append(" (strings: ");
+    result.append(strings);
+    result.append(", keys: ");
+    result.append(keys);
+    result.append(", values: ");
+    result.append(values);
     result.append(')');
     return result.toString();
   }

@@ -10,9 +10,13 @@
   <genPackages prefix="Bug299395" basePackage="org.eclipse.xtext.parsetree.reconstr"
       disposableProviderFactory="true" ecorePackage="Bug299395TestLanguage.ecore#/">
     <genClasses ecoreClass="Bug299395TestLanguage.ecore#//Model">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug299395TestLanguage.ecore#//Model/unused"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug299395TestLanguage.ecore#//Model/key"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug299395TestLanguage.ecore#//Model/value"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug299395TestLanguage.ecore#//Model/strings"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug299395TestLanguage.ecore#//Model/keys"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug299395TestLanguage.ecore#//Model/values"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug299395TestLanguage.ecore#//Model/subModel"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug299395TestLanguage.ecore#//SubModel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug299395TestLanguage.ecore#//SubModel/strings"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -13,6 +13,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 
 import org.eclipse.xtext.parser.packrat.consumers.IElementConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.INonTerminalConsumerConfiguration;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.NonTerminalConsumer;
@@ -26,6 +27,8 @@ public final class Bug299395TestLanguageModelConsumer extends NonTerminalConsume
 	private ModelElements rule;	
 
 	private ITerminalConsumer stringConsumer;
+
+	private INonTerminalConsumer subModelConsumer;
 
 	private IElementConsumer group$1$Consumer;
 
@@ -57,11 +60,21 @@ public final class Bug299395TestLanguageModelConsumer extends NonTerminalConsume
 
 	private IElementConsumer keyword$16$Consumer;
 
+	private IElementConsumer group$17$Consumer;
+
+	private IElementConsumer keyword$18$Consumer;
+
+	private IElementConsumer assignment$19$Consumer;
+
+	private IElementConsumer ruleCall$20$Consumer;
+
 	private ICharacterClass keyword$8$Delimiter;
 
 	private ICharacterClass keyword$10$Delimiter;
 
 	private ICharacterClass keyword$16$Delimiter;
+
+	private ICharacterClass keyword$18$Delimiter;
 
 	private ICharacterClass keyword$5$Delimiter;
 
@@ -82,6 +95,7 @@ public final class Bug299395TestLanguageModelConsumer extends NonTerminalConsume
 			acceptor.accept(action$2$Consumer);
 			acceptor.accept(group$4$Consumer);
 			acceptor.accept(group$9$Consumer);
+			acceptor.accept(group$17$Consumer);
 		}
 	}
 
@@ -144,7 +158,7 @@ public final class Bug299395TestLanguageModelConsumer extends NonTerminalConsume
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(stringConsumer, "unused", true, false, getElement(), getRuleCall$7$Delimiter(), optional);
+			return consumeTerminal(stringConsumer, "strings", true, false, getElement(), getRuleCall$7$Delimiter(), optional);
 		}
 	}
 
@@ -219,7 +233,7 @@ public final class Bug299395TestLanguageModelConsumer extends NonTerminalConsume
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(stringConsumer, "key", true, false, getElement(), getRuleCall$13$Delimiter(), optional);
+			return consumeTerminal(stringConsumer, "keys", true, false, getElement(), getRuleCall$13$Delimiter(), optional);
 		}
 	}
 
@@ -243,7 +257,7 @@ public final class Bug299395TestLanguageModelConsumer extends NonTerminalConsume
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeTerminal(stringConsumer, "value", true, false, getElement(), getRuleCall$15$Delimiter(), optional);
+			return consumeTerminal(stringConsumer, "values", true, false, getElement(), getRuleCall$15$Delimiter(), optional);
 		}
 	}
 
@@ -259,11 +273,61 @@ public final class Bug299395TestLanguageModelConsumer extends NonTerminalConsume
 		}
 	}
 
+	protected class Group$17$Consumer extends OptionalGroupConsumer {
+		
+		protected Group$17$Consumer(final Group group) {
+			super(group);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(keyword$18$Consumer);
+			acceptor.accept(assignment$19$Consumer);
+		}
+	}
+
+	protected class Keyword$18$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$18$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$18$Delimiter(), optional);
+		}
+	}
+
+	protected class Assignment$19$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$19$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$20$Consumer;
+		}
+	}
+
+	protected class RuleCall$20$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$20$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(subModelConsumer, "subModel", false, false, false, getElement(), optional);
+		}
+	}
+
 	public Bug299395TestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$16$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$18$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$13$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$15$Delimiter = ISequenceMatcher.Factory.nullMatcher();
@@ -286,17 +350,21 @@ public final class Bug299395TestLanguageModelConsumer extends NonTerminalConsume
 		action$2$Consumer = new Action$2$Consumer(rule.getModelAction_0());
 		group$4$Consumer = new Group$4$Consumer(rule.getGroup_1());
 		keyword$5$Consumer = new Keyword$5$Consumer(rule.getLeftCurlyBracketKeyword_1_0());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.getUnusedAssignment_1_1());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getUnusedSTRINGTerminalRuleCall_1_1_0());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getStringsAssignment_1_1());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getStringsSTRINGTerminalRuleCall_1_1_0());
 		keyword$8$Consumer = new Keyword$8$Consumer(rule.getRightCurlyBracketKeyword_1_2());
 		group$9$Consumer = new Group$9$Consumer(rule.getGroup_2());
 		keyword$10$Consumer = new Keyword$10$Consumer(rule.getLeftSquareBracketKeyword_2_0());
 		group$11$Consumer = new Group$11$Consumer(rule.getGroup_2_1());
-		assignment$12$Consumer = new Assignment$12$Consumer(rule.getKeyAssignment_2_1_0());
-		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.getKeySTRINGTerminalRuleCall_2_1_0_0());
-		assignment$14$Consumer = new Assignment$14$Consumer(rule.getValueAssignment_2_1_1());
-		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.getValueSTRINGTerminalRuleCall_2_1_1_0());
+		assignment$12$Consumer = new Assignment$12$Consumer(rule.getKeysAssignment_2_1_0());
+		ruleCall$13$Consumer = new RuleCall$13$Consumer(rule.getKeysSTRINGTerminalRuleCall_2_1_0_0());
+		assignment$14$Consumer = new Assignment$14$Consumer(rule.getValuesAssignment_2_1_1());
+		ruleCall$15$Consumer = new RuleCall$15$Consumer(rule.getValuesSTRINGTerminalRuleCall_2_1_1_0());
 		keyword$16$Consumer = new Keyword$16$Consumer(rule.getRightSquareBracketKeyword_2_2());
+		group$17$Consumer = new Group$17$Consumer(rule.getGroup_3());
+		keyword$18$Consumer = new Keyword$18$Consumer(rule.getSubModelKeyword_3_0());
+		assignment$19$Consumer = new Assignment$19$Consumer(rule.getSubModelAssignment_3_1());
+		ruleCall$20$Consumer = new RuleCall$20$Consumer(rule.getSubModelSubModelParserRuleCall_3_1_0());
 	}
 	
 	@Override
@@ -311,6 +379,10 @@ public final class Bug299395TestLanguageModelConsumer extends NonTerminalConsume
 	
 	public void setStringConsumer(ITerminalConsumer stringConsumer) {
 		this.stringConsumer = stringConsumer;
+	}
+	
+	public void setSubModelConsumer(INonTerminalConsumer subModelConsumer) {
+		this.subModelConsumer = subModelConsumer;
 	}
 	
 	public ICharacterClass getKeyword$8$Delimiter() {
@@ -335,6 +407,14 @@ public final class Bug299395TestLanguageModelConsumer extends NonTerminalConsume
 	
 	public void setKeyword$16$Delimiter(ICharacterClass characterClass) {
 		keyword$16$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$18$Delimiter() {
+		return keyword$18$Delimiter;
+	}
+	
+	public void setKeyword$18$Delimiter(ICharacterClass characterClass) {
+		keyword$18$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$5$Delimiter() {

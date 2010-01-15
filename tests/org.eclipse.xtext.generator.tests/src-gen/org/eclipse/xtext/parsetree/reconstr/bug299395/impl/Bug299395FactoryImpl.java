@@ -68,6 +68,7 @@ public class Bug299395FactoryImpl extends EFactoryImpl implements Bug299395Facto
     switch (eClass.getClassifierID())
     {
       case Bug299395Package.MODEL: return createModel();
+      case Bug299395Package.SUB_MODEL: return createSubModel();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -82,6 +83,17 @@ public class Bug299395FactoryImpl extends EFactoryImpl implements Bug299395Facto
   {
     ModelImpl model = new ModelImpl();
     return model;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SubModel createSubModel()
+  {
+    SubModelImpl subModel = new SubModelImpl();
+    return subModel;
   }
 
   /**
