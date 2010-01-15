@@ -146,6 +146,9 @@
 		<language uri="classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
+		<language uri="classpath:/org/eclipse/xtext/parsetree/reconstr/Bug299395TestLanguage.xtext">
+			<fragment file="${standardFragments}"/>
+		</language>
 		<language uri="classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>

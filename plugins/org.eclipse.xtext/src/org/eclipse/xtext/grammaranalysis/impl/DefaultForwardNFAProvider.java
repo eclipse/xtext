@@ -16,7 +16,7 @@ import org.eclipse.xtext.AbstractElement;
 public class DefaultForwardNFAProvider extends
 		AbstractNFAProvider<DefaultNFAState, DefaultNFATransition> {
 
-	public static class DefaultBackwardsNFABuilder extends
+	public static class DefaultForwardsNFABuilder extends
 			AbstractCachingNFABuilder<DefaultNFAState, DefaultNFATransition> {
 
 		@Override
@@ -42,6 +42,6 @@ public class DefaultForwardNFAProvider extends
 
 	@Override
 	protected NFABuilder<DefaultNFAState, DefaultNFATransition> createBuilder() {
-		return new DefaultBackwardsNFABuilder();
+		return new DefaultForwardsNFABuilder();
 	}
 }
