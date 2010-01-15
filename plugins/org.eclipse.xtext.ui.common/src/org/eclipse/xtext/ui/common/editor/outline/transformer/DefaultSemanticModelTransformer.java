@@ -22,11 +22,11 @@ import com.google.inject.Inject;
  * @author Michael Clay
  */
 public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransformer {
-	final static Logger logger = Logger.getLogger(DefaultSemanticModelTransformer.class);
+	private static final Logger logger = Logger.getLogger(DefaultSemanticModelTransformer.class);
 	@Inject
-	protected IContentOutlineNodeFactory contentOutlineNodeFactory;
+	private IContentOutlineNodeFactory contentOutlineNodeFactory;
 
-	protected IStateAccess<XtextResource> resourceAccess;
+	private IStateAccess<XtextResource> resourceAccess;
 
 	public void setResourceAccess(IStateAccess<XtextResource> resourceAccess) {
 		this.resourceAccess = resourceAccess;
@@ -67,6 +67,10 @@ public class DefaultSemanticModelTransformer extends AbstractSemanticModelTransf
 	@Override
 	protected ContentOutlineNode createOutlineNode(EObject semanticModelObject, ContentOutlineNode outlineParentNode) {
 		return newOutlineNode(semanticModelObject, outlineParentNode);
+	}
+	
+	public IContentOutlineNodeFactory getContentOutlineNodeFactory() {
+		return contentOutlineNodeFactory;
 	}
 
 }
