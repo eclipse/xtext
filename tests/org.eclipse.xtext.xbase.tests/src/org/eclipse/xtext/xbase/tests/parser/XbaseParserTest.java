@@ -273,7 +273,6 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertTrue(func.getExpression() instanceof FeatureCall);
 		assertEquals(0, func.getDeclaredParams().size());
 		assertNull(func.getReturnType());
-		assertNull(func.getGuard());
 		assertEquals(0, func.getTypeParams().size());
 	}
 
@@ -286,7 +285,6 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertTrue(func.getExpression() instanceof FeatureCall);
 		assertEquals(0, func.getDeclaredParams().size());
 		assertNotNull(func.getReturnType());
-		assertNull(func.getGuard());
 		assertEquals(0, func.getTypeParams().size());
 	}
 
@@ -301,7 +299,6 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertEquals("s", func.getDeclaredParams().get(0).getName());
 		assertNotNull(func.getDeclaredParams().get(0).getType());
 		assertNull(func.getReturnType());
-		assertNull(func.getGuard());
 		assertEquals(0, func.getTypeParams().size());
 	}
 
@@ -318,7 +315,6 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertEquals("i", func.getDeclaredParams().get(1).getName());
 		assertNotNull(func.getDeclaredParams().get(1).getType());
 		assertNull(func.getReturnType());
-		assertNull(func.getGuard());
 		assertEquals(0, func.getTypeParams().size());
 	}
 
@@ -331,56 +327,10 @@ public class XbaseParserTest extends AbstractXbaseTestCase {
 		assertTrue(func.getExpression() instanceof FeatureCall);
 		assertEquals(0, func.getDeclaredParams().size());
 		assertNull(func.getReturnType());
-		assertNull(func.getGuard());
-		assertFalse(func.isFinal());
 		assertTrue(func.isPrivate());
 		assertEquals(0, func.getTypeParams().size());
 	}
 
-	public void testFile_5() throws Exception {
-		File file = file("private final foo() : bar;");
-		assertNotNull(file);
-		assertEquals(1, file.getFunctions().size());
-		Function func = file.getFunctions().get(0);
-		assertEquals("foo", func.getName());
-		assertTrue(func.getExpression() instanceof FeatureCall);
-		assertEquals(0, func.getDeclaredParams().size());
-		assertNull(func.getReturnType());
-		assertNull(func.getGuard());
-		assertTrue(func.isFinal());
-		assertTrue(func.isPrivate());
-		assertEquals(0, func.getTypeParams().size());
-	}
-
-	public void testFile_6() throws Exception {
-		File file = file("final private foo() : bar;");
-		assertNotNull(file);
-		assertEquals(1, file.getFunctions().size());
-		Function func = file.getFunctions().get(0);
-		assertEquals("foo", func.getName());
-		assertTrue(func.getExpression() instanceof FeatureCall);
-		assertEquals(0, func.getDeclaredParams().size());
-		assertNull(func.getReturnType());
-		assertNull(func.getGuard());
-		assertTrue(func.isFinal());
-		assertTrue(func.isPrivate());
-		assertEquals(0, func.getTypeParams().size());
-	}
-
-	public void testFile_7() throws Exception {
-		File file = file("final foo() : bar;");
-		assertNotNull(file);
-		assertEquals(1, file.getFunctions().size());
-		Function func = file.getFunctions().get(0);
-		assertEquals("foo", func.getName());
-		assertTrue(func.getExpression() instanceof FeatureCall);
-		assertEquals(0, func.getDeclaredParams().size());
-		assertNull(func.getReturnType());
-		assertNull(func.getGuard());
-		assertTrue(func.isFinal());
-		assertFalse(func.isPrivate());
-		assertEquals(0, func.getTypeParams().size());
-	}
 
 	public void testTypeParams_1() throws Exception {
 		File file = file("<T> foo(T t) : bar;");

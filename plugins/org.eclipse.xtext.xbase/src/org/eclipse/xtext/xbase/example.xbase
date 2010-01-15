@@ -1,27 +1,26 @@
-foo(String=>Boolean predicate) {
+foo((String)=>Boolean predicate) {
   foo(s|s.isEmpty());
 }
 
 
 foo () :
-	new Foo as f {
-	   recursion = new Bar() as b{
+	new Foo {
+	   recursion = new Bar() {
 	      foo = f;
 	      f.bar = b;
 	      other= createOther(f,b);
 	   }
 	   bar = b;
-	}
+	};
 	
 	
-expr() :<<
+expr() :»
 
- class ${foo.bar} extends 
+ class «foo.bar» extends 
  
->>;
+«;
 
-#
-file A
+//file A
 
 import B
 import C
@@ -32,12 +31,12 @@ foo() {
  }
    
    
-file B
+//file B
 
 fooBar(MyType mytype) : stuff;
 fooBar2(MySpecialType mytype) : stuff;
 
-file C
+//file C
 
 fooBar2(MyType mytype) : true;
 

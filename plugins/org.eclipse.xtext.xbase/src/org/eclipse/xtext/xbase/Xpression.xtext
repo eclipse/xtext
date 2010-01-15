@@ -37,7 +37,7 @@ MultiplicativeExpression returns Expression :
 ;
 
 OtherOperatorExpression returns Expression: 
-	UnaryOperation ({BinaryOperation.left=current} operator=('+='|'..') right=UnaryOperation )*
+	UnaryOperation ({BinaryOperation.left=current} operator=('->'|'..') right=UnaryOperation )*
 ;
 
 UnaryOperation returns Expression :
