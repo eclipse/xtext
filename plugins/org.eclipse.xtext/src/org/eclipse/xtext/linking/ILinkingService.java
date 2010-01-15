@@ -20,7 +20,7 @@ import org.eclipse.xtext.parsetree.AbstractNode;
  * @author Heiko Behrens - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-@Stable(since = "0.7.0", subClass = AbstractLinkingService.class)
+@Stable(since = "0.8.0", subClass = AbstractLinkingService.class)
 public interface ILinkingService {
 
 	/**

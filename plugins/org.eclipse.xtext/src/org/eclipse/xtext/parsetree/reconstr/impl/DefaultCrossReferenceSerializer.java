@@ -31,16 +31,16 @@ import com.google.inject.Inject;
 public class DefaultCrossReferenceSerializer extends AbstractCrossReferenceSerializer {
 
 	@Inject
-	protected LinkingHelper linkingHelper;
+	private LinkingHelper linkingHelper;
 
 	@Inject
-	protected ILinkingService linkingService;
+	private ILinkingService linkingService;
 
 	@Inject
-	protected IScopeProvider scopeProvider;
+	private IScopeProvider scopeProvider;
 
 	@Inject
-	protected IValueConverterService valueConverter;
+	private IValueConverterService valueConverter;
 
 	protected String getConvertedValue(String unconverted, CrossReference grammarElement) {
 		String ruleName = linkingHelper.getRuleNameFrom(grammarElement);
