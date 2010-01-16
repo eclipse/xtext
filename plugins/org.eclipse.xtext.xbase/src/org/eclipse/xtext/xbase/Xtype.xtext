@@ -3,31 +3,31 @@ grammar org.eclipse.xtext.xbase.Xtype with org.eclipse.xtext.common.Terminals
 import "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore"
 import "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore" as types
 
-TypeRef:
-  SimpleTypeRef|FunctionTypeRef;
+XTypeRef:
+  XSimpleTypeRef|XFunctionTypeRef;
 
-FunctionTypeRef:
-  ('(' paramTypes+=TypeRef (',' paramTypes+=TypeRef)* ')')? '=>' returnType=TypeRef;
+XFunctionTypeRef:
+  ('(' paramTypes+=XTypeRef (',' paramTypes+=XTypeRef)* ')')? '=>' returnType=XTypeRef;
 
-SimpleTypeRef:
-  type=[types::Type|QualifiedName] ('<' typeParams+=TypeParam (',' typeParams+=TypeParam)* '>')?;
+XSimpleTypeRef:
+  type=[types::Type|QualifiedName] ('<' typeParams+=XTypeParam (',' typeParams+=XTypeParam)* '>')?;
 
-TypeParam returns TypeRef:
-  TypeRef|WildcardParam;
+XTypeParam returns XTypeRef:
+  XTypeRef|XWildcardParam;
 
 
-WildcardParam returns TypeRef:
-  {WildcardParam} '?' 
+XWildcardParam returns XTypeRef:
+  {XWildcardParam} '?' 
   (
-   ('extends' extends=TypeRef) |
-   ('super' super=TypeRef)
+   ('extends' extends=XTypeRef) |
+   ('super' super=XTypeRef)
   )?;
 
-TypeParamDeclaration:
+XTypeParamDeclaration:
   name=ID 
   (
-   ('extends' extends+=TypeRef ('&' extends+=TypeRef)*) |
-   ('super' super=TypeRef)
+   ('extends' extends+=XTypeRef ('&' extends+=XTypeRef)*) |
+   ('super' super=XTypeRef)
   )?;
 
 QualifiedName:

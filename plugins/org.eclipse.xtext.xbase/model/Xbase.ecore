@@ -3,28 +3,36 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="xbase"
     nsURI="http://www.eclipse.org/xtext/Xbase" nsPrefix="xbase">
-  <eClassifiers xsi:type="ecore:EClass" name="File">
+  <eClassifiers xsi:type="ecore:EClass" name="XFile">
     <eStructuralFeatures xsi:type="ecore:EReference" name="imports" upperBound="-1"
-        eType="#//Import" containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="functions" upperBound="-1"
-        eType="#//Function" containment="true"/>
+        eType="#//XImport" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="classes" upperBound="-1"
+        eType="#//XClass" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="package" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Import">
+  <eClassifiers xsi:type="ecore:EClass" name="XImport">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="importedNamespace" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="wildcard" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Function">
+  <eClassifiers xsi:type="ecore:EClass" name="XFunction">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="private" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeParams" upperBound="-1"
-        eType="ecore:EClass Xtype.ecore#//TypeParamDeclaration"
-        containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="ecore:EClass Xtype.ecore#//TypeRef"
+        eType="ecore:EClass Xtype.ecore#//XTypeParamDeclaration" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="returnType" eType="ecore:EClass Xtype.ecore#//XTypeRef"
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="declaredParams" upperBound="-1"
-        eType="ecore:EClass Xpression.ecore#//DeclaredParameter"
+        eType="ecore:EClass Xpression.ecore#//XDeclaredParameter" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass Xpression.ecore#//XExpression"
         containment="true"/>
-    <eStructuralFeatures xsi:type="ecore:EReference" name="expression" eType="ecore:EClass Xpression.ecore#//Expression"
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="XClass">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="extends" eType="ecore:EClass Xtype.ecore#//XTypeRef"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="implements" upperBound="-1"
+        eType="ecore:EClass Xtype.ecore#//XTypeRef" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="functions" upperBound="-1"
+        eType="#//XFunction" containment="true"/>
   </eClassifiers>
 </ecore:EPackage>

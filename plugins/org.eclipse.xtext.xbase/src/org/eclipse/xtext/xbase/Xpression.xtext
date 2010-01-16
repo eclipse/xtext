@@ -3,149 +3,149 @@ grammar org.eclipse.xtext.xbase.Xpression with org.eclipse.xtext.xbase.Xtype
 import "platform:/resource/org.eclipse.xtext.xbase/model/Xpression.ecore"
 import "platform:/resource/org.eclipse.xtext.common.types/model/JavaVMTypes.ecore" as types
 
-Expression returns Expression:
-	Assignment;	
+XExpression returns XExpression:
+	XAssignment;	
 
-Assignment returns Expression : 
-    OrExpression  ({BinaryOperation.left=current} operator=('='|'+=') right=OrExpression)?
+XAssignment returns XExpression : 
+    XOrExpression  ({XBinaryOperation.left=current} operator=('='|'+=') right=XOrExpression)?
 ;
 
-OrExpression returns Expression : 
-	 AndExpression ({BinaryOperation.left=current} operator='||'  right=AndExpression )*
+XOrExpression returns XExpression : 
+	 XAndExpression ({XBinaryOperation.left=current} operator='||'  right=XAndExpression )*
 ;
 
-AndExpression returns Expression : 
-	EqualityExpression ({BinaryOperation.left=current} operator='&&' right=EqualityExpression)*	    
+XAndExpression returns XExpression : 
+	XEqualityExpression ({XBinaryOperation.left=current} operator='&&' right=XEqualityExpression)*	    
 ;
 
-EqualityExpression returns Expression : 
-	RelationalExpression ({BinaryOperation.left=current} operator=('=='|'!=') right=RelationalExpression )*
+XEqualityExpression returns XExpression : 
+	XRelationalExpression ({XBinaryOperation.left=current} operator=('=='|'!=') right=XRelationalExpression )*
 ;
 
-RelationalExpression returns Expression : 
-	AdditiveExpression 
-		({InstanceOfExpression.expression=current} 'instanceof' type=[types::Type|QualifiedName] |
-		 {BinaryOperation.left=current} operator=('>='|'<='|'>'|'<' ) right=AdditiveExpression )*
+XRelationalExpression returns XExpression : 
+	XAdditiveExpression 
+		({XInstanceOfExpression.expression=current} 'instanceof' type=[types::Type|QualifiedName] |
+		 {XBinaryOperation.left=current} operator=('>='|'<='|'>'|'<' ) right=XAdditiveExpression )*
 ;
 
-AdditiveExpression returns Expression :
-	MultiplicativeExpression ({BinaryOperation.left=current} operator=('+'|'-') right=MultiplicativeExpression )*	    
+XAdditiveExpression returns XExpression :
+	XMultiplicativeExpression ({XBinaryOperation.left=current} operator=('+'|'-') right=XMultiplicativeExpression )*	    
 ;
 
-MultiplicativeExpression returns Expression : 
-	OtherOperatorExpression ({BinaryOperation.left=current} operator=('*'|'/'|'%') right=OtherOperatorExpression )*
+XMultiplicativeExpression returns XExpression : 
+	XOtherOperatorExpression ({XBinaryOperation.left=current} operator=('*'|'/'|'%') right=XOtherOperatorExpression )*
 ;
 
-OtherOperatorExpression returns Expression: 
-	UnaryOperation ({BinaryOperation.left=current} operator=('->'|'..') right=UnaryOperation )*
+XOtherOperatorExpression returns XExpression: 
+	XUnaryOperation ({XBinaryOperation.left=current} operator=('->'|'..') right=XUnaryOperation )*
 ;
 
-UnaryOperation returns Expression :
-	{UnaryOperation} operator=("!"|"-"|"+") target=FeatureCall |
-	{CastedExpression} '(' type=TypeRef ')' target=Expression |
-	FeatureCall
-;
-  
-
-FeatureCall returns Expression : 
-	PrimaryExpression 
-	  ({FeatureCall.target=current} "." name=ID ('('(params+=Expression (','params+=Expression )*)?')')?)*
-;
-
-PrimaryExpression returns Expression : 
-  Closure |
-  BooleanLiteral   |  
-  IntLiteral   |  
-  NullLiteral   |  
-  StringLiteral |
-  TypeLiteral |
-  ConstructorCall   | 
-  BlockExpression   | 
-  RichString |
-  IfExpression |
-  SwitchExpression |  
-  WhileExpression |
-  SimpleFeatureCall   |  
-  ParenthesizedExpression;
-  
-Closure returns Expression :
-	{Closure} (params+=DeclaredParameter (',' params+=DeclaredParameter)*)? '|' expression=Expression
+XUnaryOperation returns XExpression :
+	{XUnaryOperation} operator=("!"|"-"|"+") target=XFeatureCall |
+	{XCastedExpression} '(' type=XTypeRef ')' target=XExpression |
+	XFeatureCall
 ;
   
-ParenthesizedExpression returns Expression: 
-	'(' Expression ')'	    
+
+XFeatureCall returns XExpression : 
+	XPrimaryExpression 
+	  ({XFeatureCall.target=current} "." name=ID ('('(params+=XExpression (','params+=XExpression )*)?')')?)*
 ;
 
-IfExpression :	
-	'if' '('if=Expression')'
-		then=Expression
-	('else' else=Expression)?
+XPrimaryExpression returns XExpression : 
+  XClosure |
+  XBooleanLiteral   |  
+  XIntLiteral   |  
+  XNullLiteral   |  
+  XStringLiteral |
+  XTypeLiteral |
+  XConstructorCall   | 
+  XBlockExpression   | 
+  XRichString |
+  XIfExpression |
+  XSwitchExpression |  
+  XWhileExpression |
+  XSimpleFeatureCall   |  
+  XParenthesizedExpression;
+  
+XClosure returns XExpression :
+	{XClosure} (params+=XDeclaredParameter (',' params+=XDeclaredParameter)*)? '|' expression=XExpression
+;
+  
+XParenthesizedExpression returns XExpression: 
+	'(' XExpression ')'	    
 ;
 
-SwitchExpression :
-	'switch' switch=Expression? '{'
-		(cases+=CasePart)+
-		('default' ':' default=Expression)?
+XIfExpression :	
+	'if' '('if=XExpression')'
+		then=XExpression
+	('else' else=XExpression)?
+;
+
+XSwitchExpression :
+	'switch' switch=XExpression? '{'
+		(cases+=XCasePart)+
+		('default' ':' default=XExpression)?
 	'}'
 ;
 
-WhileExpression :
-    'while' predicate=ParenthesizedExpression 
-    	body=Expression;
+XWhileExpression :
+    'while' predicate=XParenthesizedExpression 
+    	body=XExpression;
 
-CasePart :
-	'case' case=Expression ':' then=Expression;
+XCasePart :
+	'case' case=XExpression ':' then=XExpression;
 
-BlockExpression  : 
+XBlockExpression  : 
 	'{'
-		(expressions+=ExpressionInsideBlock ';')+
+		(expressions+=XExpressionInsideBlock ';')+
 	'}'	    
 ;
 
-ExpressionInsideBlock returns Expression:
-	VariableDeclaration | Expression;
+XExpressionInsideBlock returns XExpression:
+	XVariableDeclaration | XExpression;
 
-VariableDeclaration :
-	('def' | type=TypeRef ) name=ID ':=' right=Expression;
+XVariableDeclaration :
+	('def' | type=XTypeRef ) name=ID '=' right=XExpression;
 
-DeclaredParameter :
-	(type=TypeRef)? name=ID;
+XDeclaredParameter :
+	(type=XTypeRef)? name=ID;
 
-SimpleFeatureCall returns FeatureCall  : 
-   name=ID ('('(params+=Expression (',' params+=Expression )*)?')')?
+XSimpleFeatureCall returns XFeatureCall  : 
+   name=ID ('('(params+=XExpression (',' params+=XExpression )*)?')')?
 ;
 
-ConstructorCall  : 
-	'new' type=TypeRef ('('(params+=Expression (','params+=Expression)*)?')')?
-	initializer=BlockExpression?
+XConstructorCall  : 
+	'new' type=XTypeRef ('('(params+=XExpression (','params+=XExpression)*)?')')?
+	initializer=XBlockExpression?
 ;
 
-BooleanLiteral  : 
-	{BooleanLiteral} 'false'|isTrue?='true'
+XBooleanLiteral  : 
+	{XBooleanLiteral} 'false'|isTrue?='true'
 ;
 
-NullLiteral  : 
-	{NullLiteral}'null'
+XNullLiteral  : 
+	{XNullLiteral}'null'
 ;
 
-IntLiteral  : 
+XIntLiteral  : 
 	value=INT
 ;
 
-StringLiteral :
+XStringLiteral :
 	value=STRING
 ;
 
-TypeLiteral :
+XTypeLiteral :
 	type=[types::Type|QualifiedName]'.''class';
 	
-RichString :	
-	expressions+=RichStringLiteral 
-	(expressions+=Expression
-	expressions+=RichStringLiteral)*
+XRichString :	
+	expressions+=XRichStringLiteral 
+	(expressions+=XExpression
+	expressions+=XRichStringLiteral)*
 ;
 
-RichStringLiteral :
+XRichStringLiteral :
 	value=RICH_STRING;
 
 terminal RICH_STRING	: 
