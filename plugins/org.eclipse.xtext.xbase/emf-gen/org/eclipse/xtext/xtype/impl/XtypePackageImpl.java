@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtypePackageImpl.java,v 1.2 2010/01/14 15:53:25 sefftinge Exp $
+ * $Id: XtypePackageImpl.java,v 1.3 2010/01/16 08:50:50 sefftinge Exp $
  */
 package org.eclipse.xtext.xtype.impl;
 
@@ -10,17 +10,24 @@ import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
+
 import org.eclipse.emf.ecore.impl.EPackageImpl;
+
 import org.eclipse.xtext.common.types.TypesPackage;
+
 import org.eclipse.xtext.xbase.XbasePackage;
+
 import org.eclipse.xtext.xbase.impl.XbasePackageImpl;
+
 import org.eclipse.xtext.xpression.XpressionPackage;
+
 import org.eclipse.xtext.xpression.impl.XpressionPackageImpl;
-import org.eclipse.xtext.xtype.FunctionTypeRef;
-import org.eclipse.xtext.xtype.SimpleTypeRef;
-import org.eclipse.xtext.xtype.TypeParamDeclaration;
-import org.eclipse.xtext.xtype.TypeRef;
-import org.eclipse.xtext.xtype.WildcardParam;
+
+import org.eclipse.xtext.xtype.XFunctionTypeRef;
+import org.eclipse.xtext.xtype.XSimpleTypeRef;
+import org.eclipse.xtext.xtype.XTypeParamDeclaration;
+import org.eclipse.xtext.xtype.XTypeRef;
+import org.eclipse.xtext.xtype.XWildcardParam;
 import org.eclipse.xtext.xtype.XtypeFactory;
 import org.eclipse.xtext.xtype.XtypePackage;
 
@@ -36,35 +43,35 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass typeRefEClass = null;
+	private EClass xTypeRefEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass functionTypeRefEClass = null;
+	private EClass xFunctionTypeRefEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass simpleTypeRefEClass = null;
+	private EClass xSimpleTypeRefEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass wildcardParamEClass = null;
+	private EClass xWildcardParamEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass typeParamDeclarationEClass = null;
+	private EClass xTypeParamDeclarationEClass = null;
 
 	/**
 	 * Creates an instance of the model <b>Package</b>, registered with
@@ -143,8 +150,8 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getTypeRef() {
-		return typeRefEClass;
+	public EClass getXTypeRef() {
+		return xTypeRefEClass;
 	}
 
 	/**
@@ -152,8 +159,8 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getFunctionTypeRef() {
-		return functionTypeRefEClass;
+	public EClass getXFunctionTypeRef() {
+		return xFunctionTypeRefEClass;
 	}
 
 	/**
@@ -161,8 +168,8 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFunctionTypeRef_ParamTypes() {
-		return (EReference)functionTypeRefEClass.getEStructuralFeatures().get(0);
+	public EReference getXFunctionTypeRef_ParamTypes() {
+		return (EReference)xFunctionTypeRefEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -170,8 +177,8 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getFunctionTypeRef_ReturnType() {
-		return (EReference)functionTypeRefEClass.getEStructuralFeatures().get(1);
+	public EReference getXFunctionTypeRef_ReturnType() {
+		return (EReference)xFunctionTypeRefEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -179,8 +186,8 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getSimpleTypeRef() {
-		return simpleTypeRefEClass;
+	public EClass getXSimpleTypeRef() {
+		return xSimpleTypeRefEClass;
 	}
 
 	/**
@@ -188,8 +195,8 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSimpleTypeRef_Type() {
-		return (EReference)simpleTypeRefEClass.getEStructuralFeatures().get(0);
+	public EReference getXSimpleTypeRef_Type() {
+		return (EReference)xSimpleTypeRefEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -197,8 +204,8 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getSimpleTypeRef_TypeParams() {
-		return (EReference)simpleTypeRefEClass.getEStructuralFeatures().get(1);
+	public EReference getXSimpleTypeRef_TypeParams() {
+		return (EReference)xSimpleTypeRefEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -206,8 +213,8 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getWildcardParam() {
-		return wildcardParamEClass;
+	public EClass getXWildcardParam() {
+		return xWildcardParamEClass;
 	}
 
 	/**
@@ -215,8 +222,8 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getWildcardParam_Extends() {
-		return (EReference)wildcardParamEClass.getEStructuralFeatures().get(0);
+	public EReference getXWildcardParam_Extends() {
+		return (EReference)xWildcardParamEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -224,8 +231,8 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getWildcardParam_Super() {
-		return (EReference)wildcardParamEClass.getEStructuralFeatures().get(1);
+	public EReference getXWildcardParam_Super() {
+		return (EReference)xWildcardParamEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -233,8 +240,8 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getTypeParamDeclaration() {
-		return typeParamDeclarationEClass;
+	public EClass getXTypeParamDeclaration() {
+		return xTypeParamDeclarationEClass;
 	}
 
 	/**
@@ -242,8 +249,8 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTypeParamDeclaration_Extends() {
-		return (EReference)typeParamDeclarationEClass.getEStructuralFeatures().get(0);
+	public EReference getXTypeParamDeclaration_Extends() {
+		return (EReference)xTypeParamDeclarationEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -251,8 +258,8 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTypeParamDeclaration_Super() {
-		return (EReference)typeParamDeclarationEClass.getEStructuralFeatures().get(1);
+	public EReference getXTypeParamDeclaration_Super() {
+		return (EReference)xTypeParamDeclarationEClass.getEStructuralFeatures().get(1);
 	}
 
 	/**
@@ -260,8 +267,8 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getTypeParamDeclaration_Name() {
-		return (EAttribute)typeParamDeclarationEClass.getEStructuralFeatures().get(2);
+	public EAttribute getXTypeParamDeclaration_Name() {
+		return (EAttribute)xTypeParamDeclarationEClass.getEStructuralFeatures().get(2);
 	}
 
 	/**
@@ -292,24 +299,24 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage {
 		isCreated = true;
 
 		// Create classes and their features
-		typeRefEClass = createEClass(TYPE_REF);
+		xTypeRefEClass = createEClass(XTYPE_REF);
 
-		functionTypeRefEClass = createEClass(FUNCTION_TYPE_REF);
-		createEReference(functionTypeRefEClass, FUNCTION_TYPE_REF__PARAM_TYPES);
-		createEReference(functionTypeRefEClass, FUNCTION_TYPE_REF__RETURN_TYPE);
+		xFunctionTypeRefEClass = createEClass(XFUNCTION_TYPE_REF);
+		createEReference(xFunctionTypeRefEClass, XFUNCTION_TYPE_REF__PARAM_TYPES);
+		createEReference(xFunctionTypeRefEClass, XFUNCTION_TYPE_REF__RETURN_TYPE);
 
-		simpleTypeRefEClass = createEClass(SIMPLE_TYPE_REF);
-		createEReference(simpleTypeRefEClass, SIMPLE_TYPE_REF__TYPE);
-		createEReference(simpleTypeRefEClass, SIMPLE_TYPE_REF__TYPE_PARAMS);
+		xSimpleTypeRefEClass = createEClass(XSIMPLE_TYPE_REF);
+		createEReference(xSimpleTypeRefEClass, XSIMPLE_TYPE_REF__TYPE);
+		createEReference(xSimpleTypeRefEClass, XSIMPLE_TYPE_REF__TYPE_PARAMS);
 
-		wildcardParamEClass = createEClass(WILDCARD_PARAM);
-		createEReference(wildcardParamEClass, WILDCARD_PARAM__EXTENDS);
-		createEReference(wildcardParamEClass, WILDCARD_PARAM__SUPER);
+		xWildcardParamEClass = createEClass(XWILDCARD_PARAM);
+		createEReference(xWildcardParamEClass, XWILDCARD_PARAM__EXTENDS);
+		createEReference(xWildcardParamEClass, XWILDCARD_PARAM__SUPER);
 
-		typeParamDeclarationEClass = createEClass(TYPE_PARAM_DECLARATION);
-		createEReference(typeParamDeclarationEClass, TYPE_PARAM_DECLARATION__EXTENDS);
-		createEReference(typeParamDeclarationEClass, TYPE_PARAM_DECLARATION__SUPER);
-		createEAttribute(typeParamDeclarationEClass, TYPE_PARAM_DECLARATION__NAME);
+		xTypeParamDeclarationEClass = createEClass(XTYPE_PARAM_DECLARATION);
+		createEReference(xTypeParamDeclarationEClass, XTYPE_PARAM_DECLARATION__EXTENDS);
+		createEReference(xTypeParamDeclarationEClass, XTYPE_PARAM_DECLARATION__SUPER);
+		createEAttribute(xTypeParamDeclarationEClass, XTYPE_PARAM_DECLARATION__NAME);
 	}
 
 	/**
@@ -343,30 +350,30 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage {
 		// Set bounds for type parameters
 
 		// Add supertypes to classes
-		functionTypeRefEClass.getESuperTypes().add(this.getTypeRef());
-		simpleTypeRefEClass.getESuperTypes().add(this.getTypeRef());
-		wildcardParamEClass.getESuperTypes().add(this.getTypeRef());
-		typeParamDeclarationEClass.getESuperTypes().add(theTypesPackage.getType());
+		xFunctionTypeRefEClass.getESuperTypes().add(this.getXTypeRef());
+		xSimpleTypeRefEClass.getESuperTypes().add(this.getXTypeRef());
+		xWildcardParamEClass.getESuperTypes().add(this.getXTypeRef());
+		xTypeParamDeclarationEClass.getESuperTypes().add(theTypesPackage.getType());
 
 		// Initialize classes and features; add operations and parameters
-		initEClass(typeRefEClass, TypeRef.class, "TypeRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEClass(xTypeRefEClass, XTypeRef.class, "XTypeRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(functionTypeRefEClass, FunctionTypeRef.class, "FunctionTypeRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getFunctionTypeRef_ParamTypes(), this.getTypeRef(), null, "paramTypes", null, 0, -1, FunctionTypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFunctionTypeRef_ReturnType(), this.getTypeRef(), null, "returnType", null, 0, 1, FunctionTypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(xFunctionTypeRefEClass, XFunctionTypeRef.class, "XFunctionTypeRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getXFunctionTypeRef_ParamTypes(), this.getXTypeRef(), null, "paramTypes", null, 0, -1, XFunctionTypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXFunctionTypeRef_ReturnType(), this.getXTypeRef(), null, "returnType", null, 0, 1, XFunctionTypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(simpleTypeRefEClass, SimpleTypeRef.class, "SimpleTypeRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSimpleTypeRef_Type(), theTypesPackage.getType(), null, "type", null, 0, 1, SimpleTypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getSimpleTypeRef_TypeParams(), this.getTypeRef(), null, "typeParams", null, 0, -1, SimpleTypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(xSimpleTypeRefEClass, XSimpleTypeRef.class, "XSimpleTypeRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getXSimpleTypeRef_Type(), theTypesPackage.getType(), null, "type", null, 0, 1, XSimpleTypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXSimpleTypeRef_TypeParams(), this.getXTypeRef(), null, "typeParams", null, 0, -1, XSimpleTypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(wildcardParamEClass, WildcardParam.class, "WildcardParam", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getWildcardParam_Extends(), this.getTypeRef(), null, "extends", null, 0, 1, WildcardParam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getWildcardParam_Super(), this.getTypeRef(), null, "super", null, 0, 1, WildcardParam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(xWildcardParamEClass, XWildcardParam.class, "XWildcardParam", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getXWildcardParam_Extends(), this.getXTypeRef(), null, "extends", null, 0, 1, XWildcardParam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXWildcardParam_Super(), this.getXTypeRef(), null, "super", null, 0, 1, XWildcardParam.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(typeParamDeclarationEClass, TypeParamDeclaration.class, "TypeParamDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypeParamDeclaration_Extends(), this.getTypeRef(), null, "extends", null, 0, -1, TypeParamDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTypeParamDeclaration_Super(), this.getTypeRef(), null, "super", null, 0, 1, TypeParamDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEAttribute(getTypeParamDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, TypeParamDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(xTypeParamDeclarationEClass, XTypeParamDeclaration.class, "XTypeParamDeclaration", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getXTypeParamDeclaration_Extends(), this.getXTypeRef(), null, "extends", null, 0, -1, XTypeParamDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getXTypeParamDeclaration_Super(), this.getXTypeRef(), null, "super", null, 0, 1, XTypeParamDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getXTypeParamDeclaration_Name(), ecorePackage.getEString(), "name", null, 0, 1, XTypeParamDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Create resource
 		createResource(eNS_URI);

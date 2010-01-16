@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XbasePackage.java,v 1.2 2010/01/15 11:02:49 sefftinge Exp $
+ * $Id: XbasePackage.java,v 1.3 2010/01/16 08:50:53 sefftinge Exp $
  */
 package org.eclipse.xtext.xbase;
 
@@ -60,14 +60,14 @@ public interface XbasePackage extends EPackage {
 	XbasePackage eINSTANCE = org.eclipse.xtext.xbase.impl.XbasePackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.FileImpl <em>File</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XFileImpl <em>XFile</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.xbase.impl.FileImpl
-	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getFile()
+	 * @see org.eclipse.xtext.xbase.impl.XFileImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXFile()
 	 * @generated
 	 */
-	int FILE = 0;
+	int XFILE = 0;
 
 	/**
 	 * The feature id for the '<em><b>Imports</b></em>' containment reference list.
@@ -76,35 +76,44 @@ public interface XbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FILE__IMPORTS = 0;
+	int XFILE__IMPORTS = 0;
 
 	/**
-	 * The feature id for the '<em><b>Functions</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Classes</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FILE__FUNCTIONS = 1;
+	int XFILE__CLASSES = 1;
 
 	/**
-	 * The number of structural features of the '<em>File</em>' class.
+	 * The feature id for the '<em><b>Package</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FILE_FEATURE_COUNT = 2;
+	int XFILE__PACKAGE = 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.ImportImpl <em>Import</em>}' class.
+	 * The number of structural features of the '<em>XFile</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.xbase.impl.ImportImpl
-	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getImport()
+	 * @generated
+	 * @ordered
+	 */
+	int XFILE_FEATURE_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XImportImpl <em>XImport</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xbase.impl.XImportImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXImport()
 	 * @generated
 	 */
-	int IMPORT = 1;
+	int XIMPORT = 1;
 
 	/**
 	 * The feature id for the '<em><b>Imported Namespace</b></em>' attribute.
@@ -113,7 +122,7 @@ public interface XbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IMPORT__IMPORTED_NAMESPACE = 0;
+	int XIMPORT__IMPORTED_NAMESPACE = 0;
 
 	/**
 	 * The feature id for the '<em><b>Wildcard</b></em>' attribute.
@@ -122,26 +131,26 @@ public interface XbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int IMPORT__WILDCARD = 1;
+	int XIMPORT__WILDCARD = 1;
 
 	/**
-	 * The number of structural features of the '<em>Import</em>' class.
+	 * The number of structural features of the '<em>XImport</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IMPORT_FEATURE_COUNT = 2;
+	int XIMPORT_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.FunctionImpl <em>Function</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XFunctionImpl <em>XFunction</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.xbase.impl.FunctionImpl
-	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getFunction()
+	 * @see org.eclipse.xtext.xbase.impl.XFunctionImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXFunction()
 	 * @generated
 	 */
-	int FUNCTION = 2;
+	int XFUNCTION = 2;
 
 	/**
 	 * The feature id for the '<em><b>Private</b></em>' attribute.
@@ -150,7 +159,7 @@ public interface XbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION__PRIVATE = 0;
+	int XFUNCTION__PRIVATE = 0;
 
 	/**
 	 * The feature id for the '<em><b>Type Params</b></em>' containment reference list.
@@ -159,7 +168,7 @@ public interface XbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION__TYPE_PARAMS = 1;
+	int XFUNCTION__TYPE_PARAMS = 1;
 
 	/**
 	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
@@ -168,7 +177,7 @@ public interface XbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION__RETURN_TYPE = 2;
+	int XFUNCTION__RETURN_TYPE = 2;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -177,7 +186,7 @@ public interface XbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION__NAME = 3;
+	int XFUNCTION__NAME = 3;
 
 	/**
 	 * The feature id for the '<em><b>Declared Params</b></em>' containment reference list.
@@ -186,7 +195,7 @@ public interface XbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION__DECLARED_PARAMS = 4;
+	int XFUNCTION__DECLARED_PARAMS = 4;
 
 	/**
 	 * The feature id for the '<em><b>Expression</b></em>' containment reference.
@@ -195,157 +204,277 @@ public interface XbasePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION__EXPRESSION = 5;
+	int XFUNCTION__EXPRESSION = 5;
 
 	/**
-	 * The number of structural features of the '<em>Function</em>' class.
+	 * The number of structural features of the '<em>XFunction</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_FEATURE_COUNT = 6;
-
+	int XFUNCTION_FEATURE_COUNT = 6;
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.File <em>File</em>}'.
+	 * The meta object id for the '{@link org.eclipse.xtext.xbase.impl.XClassImpl <em>XClass</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>File</em>'.
-	 * @see org.eclipse.xtext.xbase.File
+	 * @see org.eclipse.xtext.xbase.impl.XClassImpl
+	 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXClass()
 	 * @generated
 	 */
-	EClass getFile();
+	int XCLASS = 3;
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.File#getImports <em>Imports</em>}'.
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCLASS__NAME = 0;
+
+	/**
+	 * The feature id for the '<em><b>Extends</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCLASS__EXTENDS = 1;
+
+	/**
+	 * The feature id for the '<em><b>Implements</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCLASS__IMPLEMENTS = 2;
+
+	/**
+	 * The feature id for the '<em><b>Functions</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCLASS__FUNCTIONS = 3;
+
+	/**
+	 * The number of structural features of the '<em>XClass</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int XCLASS_FEATURE_COUNT = 4;
+
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XFile <em>XFile</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XFile</em>'.
+	 * @see org.eclipse.xtext.xbase.XFile
+	 * @generated
+	 */
+	EClass getXFile();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XFile#getImports <em>Imports</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Imports</em>'.
-	 * @see org.eclipse.xtext.xbase.File#getImports()
-	 * @see #getFile()
+	 * @see org.eclipse.xtext.xbase.XFile#getImports()
+	 * @see #getXFile()
 	 * @generated
 	 */
-	EReference getFile_Imports();
+	EReference getXFile_Imports();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.File#getFunctions <em>Functions</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XFile#getClasses <em>Classes</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for the containment reference list '<em>Functions</em>'.
-	 * @see org.eclipse.xtext.xbase.File#getFunctions()
-	 * @see #getFile()
+	 * @return the meta object for the containment reference list '<em>Classes</em>'.
+	 * @see org.eclipse.xtext.xbase.XFile#getClasses()
+	 * @see #getXFile()
 	 * @generated
 	 */
-	EReference getFile_Functions();
+	EReference getXFile_Classes();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.Import <em>Import</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XFile#getPackage <em>Package</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Import</em>'.
-	 * @see org.eclipse.xtext.xbase.Import
+	 * @return the meta object for the attribute '<em>Package</em>'.
+	 * @see org.eclipse.xtext.xbase.XFile#getPackage()
+	 * @see #getXFile()
 	 * @generated
 	 */
-	EClass getImport();
+	EAttribute getXFile_Package();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.Import#getImportedNamespace <em>Imported Namespace</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XImport <em>XImport</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XImport</em>'.
+	 * @see org.eclipse.xtext.xbase.XImport
+	 * @generated
+	 */
+	EClass getXImport();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XImport#getImportedNamespace <em>Imported Namespace</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Imported Namespace</em>'.
-	 * @see org.eclipse.xtext.xbase.Import#getImportedNamespace()
-	 * @see #getImport()
+	 * @see org.eclipse.xtext.xbase.XImport#getImportedNamespace()
+	 * @see #getXImport()
 	 * @generated
 	 */
-	EAttribute getImport_ImportedNamespace();
+	EAttribute getXImport_ImportedNamespace();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.Import#isWildcard <em>Wildcard</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XImport#isWildcard <em>Wildcard</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Wildcard</em>'.
-	 * @see org.eclipse.xtext.xbase.Import#isWildcard()
-	 * @see #getImport()
+	 * @see org.eclipse.xtext.xbase.XImport#isWildcard()
+	 * @see #getXImport()
 	 * @generated
 	 */
-	EAttribute getImport_Wildcard();
+	EAttribute getXImport_Wildcard();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.Function <em>Function</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XFunction <em>XFunction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Function</em>'.
-	 * @see org.eclipse.xtext.xbase.Function
+	 * @return the meta object for class '<em>XFunction</em>'.
+	 * @see org.eclipse.xtext.xbase.XFunction
 	 * @generated
 	 */
-	EClass getFunction();
+	EClass getXFunction();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.Function#isPrivate <em>Private</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XFunction#isPrivate <em>Private</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Private</em>'.
-	 * @see org.eclipse.xtext.xbase.Function#isPrivate()
-	 * @see #getFunction()
+	 * @see org.eclipse.xtext.xbase.XFunction#isPrivate()
+	 * @see #getXFunction()
 	 * @generated
 	 */
-	EAttribute getFunction_Private();
+	EAttribute getXFunction_Private();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.Function#getTypeParams <em>Type Params</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XFunction#getTypeParams <em>Type Params</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Type Params</em>'.
-	 * @see org.eclipse.xtext.xbase.Function#getTypeParams()
-	 * @see #getFunction()
+	 * @see org.eclipse.xtext.xbase.XFunction#getTypeParams()
+	 * @see #getXFunction()
 	 * @generated
 	 */
-	EReference getFunction_TypeParams();
+	EReference getXFunction_TypeParams();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.Function#getReturnType <em>Return Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XFunction#getReturnType <em>Return Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Return Type</em>'.
-	 * @see org.eclipse.xtext.xbase.Function#getReturnType()
-	 * @see #getFunction()
+	 * @see org.eclipse.xtext.xbase.XFunction#getReturnType()
+	 * @see #getXFunction()
 	 * @generated
 	 */
-	EReference getFunction_ReturnType();
+	EReference getXFunction_ReturnType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.Function#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XFunction#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.xtext.xbase.Function#getName()
-	 * @see #getFunction()
+	 * @see org.eclipse.xtext.xbase.XFunction#getName()
+	 * @see #getXFunction()
 	 * @generated
 	 */
-	EAttribute getFunction_Name();
+	EAttribute getXFunction_Name();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.Function#getDeclaredParams <em>Declared Params</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XFunction#getDeclaredParams <em>Declared Params</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Declared Params</em>'.
-	 * @see org.eclipse.xtext.xbase.Function#getDeclaredParams()
-	 * @see #getFunction()
+	 * @see org.eclipse.xtext.xbase.XFunction#getDeclaredParams()
+	 * @see #getXFunction()
 	 * @generated
 	 */
-	EReference getFunction_DeclaredParams();
+	EReference getXFunction_DeclaredParams();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.Function#getExpression <em>Expression</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XFunction#getExpression <em>Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Expression</em>'.
-	 * @see org.eclipse.xtext.xbase.Function#getExpression()
-	 * @see #getFunction()
+	 * @see org.eclipse.xtext.xbase.XFunction#getExpression()
+	 * @see #getXFunction()
 	 * @generated
 	 */
-	EReference getFunction_Expression();
+	EReference getXFunction_Expression();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xbase.XClass <em>XClass</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>XClass</em>'.
+	 * @see org.eclipse.xtext.xbase.XClass
+	 * @generated
+	 */
+	EClass getXClass();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xbase.XClass#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.xtext.xbase.XClass#getName()
+	 * @see #getXClass()
+	 * @generated
+	 */
+	EAttribute getXClass_Name();
+
+	/**
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xbase.XClass#getExtends <em>Extends</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference '<em>Extends</em>'.
+	 * @see org.eclipse.xtext.xbase.XClass#getExtends()
+	 * @see #getXClass()
+	 * @generated
+	 */
+	EReference getXClass_Extends();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XClass#getImplements <em>Implements</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Implements</em>'.
+	 * @see org.eclipse.xtext.xbase.XClass#getImplements()
+	 * @see #getXClass()
+	 * @generated
+	 */
+	EReference getXClass_Implements();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xbase.XClass#getFunctions <em>Functions</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Functions</em>'.
+	 * @see org.eclipse.xtext.xbase.XClass#getFunctions()
+	 * @see #getXClass()
+	 * @generated
+	 */
+	EReference getXClass_Functions();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -370,14 +499,14 @@ public interface XbasePackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.FileImpl <em>File</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XFileImpl <em>XFile</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.xbase.impl.FileImpl
-		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getFile()
+		 * @see org.eclipse.xtext.xbase.impl.XFileImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXFile()
 		 * @generated
 		 */
-		EClass FILE = eINSTANCE.getFile();
+		EClass XFILE = eINSTANCE.getXFile();
 
 		/**
 		 * The meta object literal for the '<em><b>Imports</b></em>' containment reference list feature.
@@ -385,25 +514,33 @@ public interface XbasePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FILE__IMPORTS = eINSTANCE.getFile_Imports();
+		EReference XFILE__IMPORTS = eINSTANCE.getXFile_Imports();
 
 		/**
-		 * The meta object literal for the '<em><b>Functions</b></em>' containment reference list feature.
+		 * The meta object literal for the '<em><b>Classes</b></em>' containment reference list feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FILE__FUNCTIONS = eINSTANCE.getFile_Functions();
+		EReference XFILE__CLASSES = eINSTANCE.getXFile_Classes();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.ImportImpl <em>Import</em>}' class.
+		 * The meta object literal for the '<em><b>Package</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.xbase.impl.ImportImpl
-		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getImport()
 		 * @generated
 		 */
-		EClass IMPORT = eINSTANCE.getImport();
+		EAttribute XFILE__PACKAGE = eINSTANCE.getXFile_Package();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XImportImpl <em>XImport</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XImportImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXImport()
+		 * @generated
+		 */
+		EClass XIMPORT = eINSTANCE.getXImport();
 
 		/**
 		 * The meta object literal for the '<em><b>Imported Namespace</b></em>' attribute feature.
@@ -411,7 +548,7 @@ public interface XbasePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute IMPORT__IMPORTED_NAMESPACE = eINSTANCE.getImport_ImportedNamespace();
+		EAttribute XIMPORT__IMPORTED_NAMESPACE = eINSTANCE.getXImport_ImportedNamespace();
 
 		/**
 		 * The meta object literal for the '<em><b>Wildcard</b></em>' attribute feature.
@@ -419,17 +556,17 @@ public interface XbasePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute IMPORT__WILDCARD = eINSTANCE.getImport_Wildcard();
+		EAttribute XIMPORT__WILDCARD = eINSTANCE.getXImport_Wildcard();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.FunctionImpl <em>Function</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XFunctionImpl <em>XFunction</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.xbase.impl.FunctionImpl
-		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getFunction()
+		 * @see org.eclipse.xtext.xbase.impl.XFunctionImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXFunction()
 		 * @generated
 		 */
-		EClass FUNCTION = eINSTANCE.getFunction();
+		EClass XFUNCTION = eINSTANCE.getXFunction();
 
 		/**
 		 * The meta object literal for the '<em><b>Private</b></em>' attribute feature.
@@ -437,7 +574,7 @@ public interface XbasePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute FUNCTION__PRIVATE = eINSTANCE.getFunction_Private();
+		EAttribute XFUNCTION__PRIVATE = eINSTANCE.getXFunction_Private();
 
 		/**
 		 * The meta object literal for the '<em><b>Type Params</b></em>' containment reference list feature.
@@ -445,7 +582,7 @@ public interface XbasePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FUNCTION__TYPE_PARAMS = eINSTANCE.getFunction_TypeParams();
+		EReference XFUNCTION__TYPE_PARAMS = eINSTANCE.getXFunction_TypeParams();
 
 		/**
 		 * The meta object literal for the '<em><b>Return Type</b></em>' containment reference feature.
@@ -453,7 +590,7 @@ public interface XbasePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FUNCTION__RETURN_TYPE = eINSTANCE.getFunction_ReturnType();
+		EReference XFUNCTION__RETURN_TYPE = eINSTANCE.getXFunction_ReturnType();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -461,7 +598,7 @@ public interface XbasePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute FUNCTION__NAME = eINSTANCE.getFunction_Name();
+		EAttribute XFUNCTION__NAME = eINSTANCE.getXFunction_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Declared Params</b></em>' containment reference list feature.
@@ -469,7 +606,7 @@ public interface XbasePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FUNCTION__DECLARED_PARAMS = eINSTANCE.getFunction_DeclaredParams();
+		EReference XFUNCTION__DECLARED_PARAMS = eINSTANCE.getXFunction_DeclaredParams();
 
 		/**
 		 * The meta object literal for the '<em><b>Expression</b></em>' containment reference feature.
@@ -477,7 +614,49 @@ public interface XbasePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FUNCTION__EXPRESSION = eINSTANCE.getFunction_Expression();
+		EReference XFUNCTION__EXPRESSION = eINSTANCE.getXFunction_Expression();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xbase.impl.XClassImpl <em>XClass</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xbase.impl.XClassImpl
+		 * @see org.eclipse.xtext.xbase.impl.XbasePackageImpl#getXClass()
+		 * @generated
+		 */
+		EClass XCLASS = eINSTANCE.getXClass();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute XCLASS__NAME = eINSTANCE.getXClass_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Extends</b></em>' containment reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XCLASS__EXTENDS = eINSTANCE.getXClass_Extends();
+
+		/**
+		 * The meta object literal for the '<em><b>Implements</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XCLASS__IMPLEMENTS = eINSTANCE.getXClass_Implements();
+
+		/**
+		 * The meta object literal for the '<em><b>Functions</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference XCLASS__FUNCTIONS = eINSTANCE.getXClass_Functions();
 
 	}
 

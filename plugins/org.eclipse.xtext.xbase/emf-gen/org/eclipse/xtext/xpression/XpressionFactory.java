@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XpressionFactory.java,v 1.2 2010/01/15 08:16:16 sefftinge Exp $
+ * $Id: XpressionFactory.java,v 1.3 2010/01/16 08:50:52 sefftinge Exp $
  */
 package org.eclipse.xtext.xpression;
 
@@ -26,211 +26,211 @@ public interface XpressionFactory extends EFactory {
 	XpressionFactory eINSTANCE = org.eclipse.xtext.xpression.impl.XpressionFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Expression</em>'.
+	 * Returns a new object of class '<em>XExpression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Expression</em>'.
+	 * @return a new object of class '<em>XExpression</em>'.
 	 * @generated
 	 */
-	Expression createExpression();
+	XExpression createXExpression();
 
 	/**
-	 * Returns a new object of class '<em>If Expression</em>'.
+	 * Returns a new object of class '<em>XIf Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>If Expression</em>'.
+	 * @return a new object of class '<em>XIf Expression</em>'.
 	 * @generated
 	 */
-	IfExpression createIfExpression();
+	XIfExpression createXIfExpression();
 
 	/**
-	 * Returns a new object of class '<em>Switch Expression</em>'.
+	 * Returns a new object of class '<em>XSwitch Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Switch Expression</em>'.
+	 * @return a new object of class '<em>XSwitch Expression</em>'.
 	 * @generated
 	 */
-	SwitchExpression createSwitchExpression();
+	XSwitchExpression createXSwitchExpression();
 
 	/**
-	 * Returns a new object of class '<em>Case Part</em>'.
+	 * Returns a new object of class '<em>XCase Part</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Case Part</em>'.
+	 * @return a new object of class '<em>XCase Part</em>'.
 	 * @generated
 	 */
-	CasePart createCasePart();
+	XCasePart createXCasePart();
 
 	/**
-	 * Returns a new object of class '<em>Block Expression</em>'.
+	 * Returns a new object of class '<em>XBlock Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Block Expression</em>'.
+	 * @return a new object of class '<em>XBlock Expression</em>'.
 	 * @generated
 	 */
-	BlockExpression createBlockExpression();
+	XBlockExpression createXBlockExpression();
 
 	/**
-	 * Returns a new object of class '<em>Variable Declaration</em>'.
+	 * Returns a new object of class '<em>XVariable Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Variable Declaration</em>'.
+	 * @return a new object of class '<em>XVariable Declaration</em>'.
 	 * @generated
 	 */
-	VariableDeclaration createVariableDeclaration();
+	XVariableDeclaration createXVariableDeclaration();
 
 	/**
-	 * Returns a new object of class '<em>Declared Parameter</em>'.
+	 * Returns a new object of class '<em>XDeclared Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Declared Parameter</em>'.
+	 * @return a new object of class '<em>XDeclared Parameter</em>'.
 	 * @generated
 	 */
-	DeclaredParameter createDeclaredParameter();
+	XDeclaredParameter createXDeclaredParameter();
 
 	/**
-	 * Returns a new object of class '<em>Feature Call</em>'.
+	 * Returns a new object of class '<em>XFeature Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Feature Call</em>'.
+	 * @return a new object of class '<em>XFeature Call</em>'.
 	 * @generated
 	 */
-	FeatureCall createFeatureCall();
+	XFeatureCall createXFeatureCall();
 
 	/**
-	 * Returns a new object of class '<em>Constructor Call</em>'.
+	 * Returns a new object of class '<em>XConstructor Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Constructor Call</em>'.
+	 * @return a new object of class '<em>XConstructor Call</em>'.
 	 * @generated
 	 */
-	ConstructorCall createConstructorCall();
+	XConstructorCall createXConstructorCall();
 
 	/**
-	 * Returns a new object of class '<em>Boolean Literal</em>'.
+	 * Returns a new object of class '<em>XBoolean Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Boolean Literal</em>'.
+	 * @return a new object of class '<em>XBoolean Literal</em>'.
 	 * @generated
 	 */
-	BooleanLiteral createBooleanLiteral();
+	XBooleanLiteral createXBooleanLiteral();
 
 	/**
-	 * Returns a new object of class '<em>Null Literal</em>'.
+	 * Returns a new object of class '<em>XNull Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Null Literal</em>'.
+	 * @return a new object of class '<em>XNull Literal</em>'.
 	 * @generated
 	 */
-	NullLiteral createNullLiteral();
+	XNullLiteral createXNullLiteral();
 
 	/**
-	 * Returns a new object of class '<em>Int Literal</em>'.
+	 * Returns a new object of class '<em>XInt Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Int Literal</em>'.
+	 * @return a new object of class '<em>XInt Literal</em>'.
 	 * @generated
 	 */
-	IntLiteral createIntLiteral();
+	XIntLiteral createXIntLiteral();
 
 	/**
-	 * Returns a new object of class '<em>String Literal</em>'.
+	 * Returns a new object of class '<em>XString Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>String Literal</em>'.
+	 * @return a new object of class '<em>XString Literal</em>'.
 	 * @generated
 	 */
-	StringLiteral createStringLiteral();
+	XStringLiteral createXStringLiteral();
 
 	/**
-	 * Returns a new object of class '<em>Rich String</em>'.
+	 * Returns a new object of class '<em>XRich String</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Rich String</em>'.
+	 * @return a new object of class '<em>XRich String</em>'.
 	 * @generated
 	 */
-	RichString createRichString();
+	XRichString createXRichString();
 
 	/**
-	 * Returns a new object of class '<em>Rich String Literal</em>'.
+	 * Returns a new object of class '<em>XRich String Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Rich String Literal</em>'.
+	 * @return a new object of class '<em>XRich String Literal</em>'.
 	 * @generated
 	 */
-	RichStringLiteral createRichStringLiteral();
+	XRichStringLiteral createXRichStringLiteral();
 
 	/**
-	 * Returns a new object of class '<em>Closure</em>'.
+	 * Returns a new object of class '<em>XClosure</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Closure</em>'.
+	 * @return a new object of class '<em>XClosure</em>'.
 	 * @generated
 	 */
-	Closure createClosure();
+	XClosure createXClosure();
 
 	/**
-	 * Returns a new object of class '<em>Casted Expression</em>'.
+	 * Returns a new object of class '<em>XCasted Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Casted Expression</em>'.
+	 * @return a new object of class '<em>XCasted Expression</em>'.
 	 * @generated
 	 */
-	CastedExpression createCastedExpression();
+	XCastedExpression createXCastedExpression();
 
 	/**
-	 * Returns a new object of class '<em>Assignment</em>'.
+	 * Returns a new object of class '<em>XAssignment</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Assignment</em>'.
+	 * @return a new object of class '<em>XAssignment</em>'.
 	 * @generated
 	 */
-	Assignment createAssignment();
+	XAssignment createXAssignment();
 
 	/**
-	 * Returns a new object of class '<em>Binary Operation</em>'.
+	 * Returns a new object of class '<em>XBinary Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Binary Operation</em>'.
+	 * @return a new object of class '<em>XBinary Operation</em>'.
 	 * @generated
 	 */
-	BinaryOperation createBinaryOperation();
+	XBinaryOperation createXBinaryOperation();
 
 	/**
-	 * Returns a new object of class '<em>Unary Operation</em>'.
+	 * Returns a new object of class '<em>XUnary Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Unary Operation</em>'.
+	 * @return a new object of class '<em>XUnary Operation</em>'.
 	 * @generated
 	 */
-	UnaryOperation createUnaryOperation();
+	XUnaryOperation createXUnaryOperation();
 
 	/**
-	 * Returns a new object of class '<em>While Expression</em>'.
+	 * Returns a new object of class '<em>XWhile Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>While Expression</em>'.
+	 * @return a new object of class '<em>XWhile Expression</em>'.
 	 * @generated
 	 */
-	WhileExpression createWhileExpression();
+	XWhileExpression createXWhileExpression();
 
 	/**
-	 * Returns a new object of class '<em>Type Literal</em>'.
+	 * Returns a new object of class '<em>XType Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Type Literal</em>'.
+	 * @return a new object of class '<em>XType Literal</em>'.
 	 * @generated
 	 */
-	TypeLiteral createTypeLiteral();
+	XTypeLiteral createXTypeLiteral();
 
 	/**
-	 * Returns a new object of class '<em>Instance Of Expression</em>'.
+	 * Returns a new object of class '<em>XInstance Of Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Instance Of Expression</em>'.
+	 * @return a new object of class '<em>XInstance Of Expression</em>'.
 	 * @generated
 	 */
-	InstanceOfExpression createInstanceOfExpression();
+	XInstanceOfExpression createXInstanceOfExpression();
 
 	/**
 	 * Returns the package supported by this factory.

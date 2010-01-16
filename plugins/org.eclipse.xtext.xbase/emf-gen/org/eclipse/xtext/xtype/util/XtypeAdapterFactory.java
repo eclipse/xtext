@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtypeAdapterFactory.java,v 1.1 2010/01/14 14:40:23 sefftinge Exp $
+ * $Id: XtypeAdapterFactory.java,v 1.2 2010/01/16 08:50:54 sefftinge Exp $
  */
 package org.eclipse.xtext.xtype.util;
 
@@ -75,24 +75,24 @@ public class XtypeAdapterFactory extends AdapterFactoryImpl {
 	protected XtypeSwitch<Adapter> modelSwitch =
 		new XtypeSwitch<Adapter>() {
 			@Override
-			public Adapter caseTypeRef(TypeRef object) {
-				return createTypeRefAdapter();
+			public Adapter caseXTypeRef(XTypeRef object) {
+				return createXTypeRefAdapter();
 			}
 			@Override
-			public Adapter caseFunctionTypeRef(FunctionTypeRef object) {
-				return createFunctionTypeRefAdapter();
+			public Adapter caseXFunctionTypeRef(XFunctionTypeRef object) {
+				return createXFunctionTypeRefAdapter();
 			}
 			@Override
-			public Adapter caseSimpleTypeRef(SimpleTypeRef object) {
-				return createSimpleTypeRefAdapter();
+			public Adapter caseXSimpleTypeRef(XSimpleTypeRef object) {
+				return createXSimpleTypeRefAdapter();
 			}
 			@Override
-			public Adapter caseWildcardParam(WildcardParam object) {
-				return createWildcardParamAdapter();
+			public Adapter caseXWildcardParam(XWildcardParam object) {
+				return createXWildcardParamAdapter();
 			}
 			@Override
-			public Adapter caseTypeParamDeclaration(TypeParamDeclaration object) {
-				return createTypeParamDeclarationAdapter();
+			public Adapter caseXTypeParamDeclaration(XTypeParamDeclaration object) {
+				return createXTypeParamDeclarationAdapter();
 			}
 			@Override
 			public Adapter caseIdentifyableElement(IdentifyableElement object) {
@@ -123,72 +123,72 @@ public class XtypeAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtype.TypeRef <em>Type Ref</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtype.XTypeRef <em>XType Ref</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xtype.TypeRef
+	 * @see org.eclipse.xtext.xtype.XTypeRef
 	 * @generated
 	 */
-	public Adapter createTypeRefAdapter() {
+	public Adapter createXTypeRefAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtype.FunctionTypeRef <em>Function Type Ref</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtype.XFunctionTypeRef <em>XFunction Type Ref</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xtype.FunctionTypeRef
+	 * @see org.eclipse.xtext.xtype.XFunctionTypeRef
 	 * @generated
 	 */
-	public Adapter createFunctionTypeRefAdapter() {
+	public Adapter createXFunctionTypeRefAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtype.SimpleTypeRef <em>Simple Type Ref</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtype.XSimpleTypeRef <em>XSimple Type Ref</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xtype.SimpleTypeRef
+	 * @see org.eclipse.xtext.xtype.XSimpleTypeRef
 	 * @generated
 	 */
-	public Adapter createSimpleTypeRefAdapter() {
+	public Adapter createXSimpleTypeRefAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtype.WildcardParam <em>Wildcard Param</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtype.XWildcardParam <em>XWildcard Param</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xtype.WildcardParam
+	 * @see org.eclipse.xtext.xtype.XWildcardParam
 	 * @generated
 	 */
-	public Adapter createWildcardParamAdapter() {
+	public Adapter createXWildcardParamAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtype.TypeParamDeclaration <em>Type Param Declaration</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtype.XTypeParamDeclaration <em>XType Param Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xtype.TypeParamDeclaration
+	 * @see org.eclipse.xtext.xtype.XTypeParamDeclaration
 	 * @generated
 	 */
-	public Adapter createTypeParamDeclarationAdapter() {
+	public Adapter createXTypeParamDeclarationAdapter() {
 		return null;
 	}
 

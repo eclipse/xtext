@@ -7,7 +7,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
 import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
-import org.eclipse.xtext.xbase.Function;
+import org.eclipse.xtext.xbase.XFunction;
 
 /**
  * This class contains custom scoping description.
@@ -18,15 +18,11 @@ import org.eclipse.xtext.xbase.Function;
  */
 public class XbaseScopeProvider extends AbstractDeclarativeScopeProvider {
 	
-	protected IScope scope_Type(Function function, EReference reference) {
+	protected IScope scope_Type(XFunction function, EReference reference) {
 		if (function.getTypeParams().isEmpty())
 			return delegateGetScope(function, reference);
 		return Scopes.scopeFor(function.getTypeParams(), delegateGetScope(function, reference));
 	}
 	
 	
-	/**
-	 * scoping for simple feature
-	 * 
-	 */
 }

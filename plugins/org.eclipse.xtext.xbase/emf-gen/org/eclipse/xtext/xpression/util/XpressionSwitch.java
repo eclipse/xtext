@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XpressionSwitch.java,v 1.2 2010/01/15 08:16:16 sefftinge Exp $
+ * $Id: XpressionSwitch.java,v 1.3 2010/01/16 08:50:54 sefftinge Exp $
  */
 package org.eclipse.xtext.xpression.util;
 
@@ -87,160 +87,160 @@ public class XpressionSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case XpressionPackage.EXPRESSION: {
-				Expression expression = (Expression)theEObject;
-				T result = caseExpression(expression);
+			case XpressionPackage.XEXPRESSION: {
+				XExpression xExpression = (XExpression)theEObject;
+				T result = caseXExpression(xExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XpressionPackage.IF_EXPRESSION: {
-				IfExpression ifExpression = (IfExpression)theEObject;
-				T result = caseIfExpression(ifExpression);
-				if (result == null) result = caseExpression(ifExpression);
+			case XpressionPackage.XIF_EXPRESSION: {
+				XIfExpression xIfExpression = (XIfExpression)theEObject;
+				T result = caseXIfExpression(xIfExpression);
+				if (result == null) result = caseXExpression(xIfExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XpressionPackage.SWITCH_EXPRESSION: {
-				SwitchExpression switchExpression = (SwitchExpression)theEObject;
-				T result = caseSwitchExpression(switchExpression);
-				if (result == null) result = caseExpression(switchExpression);
+			case XpressionPackage.XSWITCH_EXPRESSION: {
+				XSwitchExpression xSwitchExpression = (XSwitchExpression)theEObject;
+				T result = caseXSwitchExpression(xSwitchExpression);
+				if (result == null) result = caseXExpression(xSwitchExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XpressionPackage.CASE_PART: {
-				CasePart casePart = (CasePart)theEObject;
-				T result = caseCasePart(casePart);
+			case XpressionPackage.XCASE_PART: {
+				XCasePart xCasePart = (XCasePart)theEObject;
+				T result = caseXCasePart(xCasePart);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XpressionPackage.BLOCK_EXPRESSION: {
-				BlockExpression blockExpression = (BlockExpression)theEObject;
-				T result = caseBlockExpression(blockExpression);
-				if (result == null) result = caseExpression(blockExpression);
+			case XpressionPackage.XBLOCK_EXPRESSION: {
+				XBlockExpression xBlockExpression = (XBlockExpression)theEObject;
+				T result = caseXBlockExpression(xBlockExpression);
+				if (result == null) result = caseXExpression(xBlockExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XpressionPackage.VARIABLE_DECLARATION: {
-				VariableDeclaration variableDeclaration = (VariableDeclaration)theEObject;
-				T result = caseVariableDeclaration(variableDeclaration);
-				if (result == null) result = caseExpression(variableDeclaration);
+			case XpressionPackage.XVARIABLE_DECLARATION: {
+				XVariableDeclaration xVariableDeclaration = (XVariableDeclaration)theEObject;
+				T result = caseXVariableDeclaration(xVariableDeclaration);
+				if (result == null) result = caseXExpression(xVariableDeclaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XpressionPackage.DECLARED_PARAMETER: {
-				DeclaredParameter declaredParameter = (DeclaredParameter)theEObject;
-				T result = caseDeclaredParameter(declaredParameter);
+			case XpressionPackage.XDECLARED_PARAMETER: {
+				XDeclaredParameter xDeclaredParameter = (XDeclaredParameter)theEObject;
+				T result = caseXDeclaredParameter(xDeclaredParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XpressionPackage.FEATURE_CALL: {
-				FeatureCall featureCall = (FeatureCall)theEObject;
-				T result = caseFeatureCall(featureCall);
-				if (result == null) result = caseExpression(featureCall);
+			case XpressionPackage.XFEATURE_CALL: {
+				XFeatureCall xFeatureCall = (XFeatureCall)theEObject;
+				T result = caseXFeatureCall(xFeatureCall);
+				if (result == null) result = caseXExpression(xFeatureCall);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XpressionPackage.CONSTRUCTOR_CALL: {
-				ConstructorCall constructorCall = (ConstructorCall)theEObject;
-				T result = caseConstructorCall(constructorCall);
-				if (result == null) result = caseExpression(constructorCall);
+			case XpressionPackage.XCONSTRUCTOR_CALL: {
+				XConstructorCall xConstructorCall = (XConstructorCall)theEObject;
+				T result = caseXConstructorCall(xConstructorCall);
+				if (result == null) result = caseXExpression(xConstructorCall);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XpressionPackage.BOOLEAN_LITERAL: {
-				BooleanLiteral booleanLiteral = (BooleanLiteral)theEObject;
-				T result = caseBooleanLiteral(booleanLiteral);
-				if (result == null) result = caseExpression(booleanLiteral);
+			case XpressionPackage.XBOOLEAN_LITERAL: {
+				XBooleanLiteral xBooleanLiteral = (XBooleanLiteral)theEObject;
+				T result = caseXBooleanLiteral(xBooleanLiteral);
+				if (result == null) result = caseXExpression(xBooleanLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XpressionPackage.NULL_LITERAL: {
-				NullLiteral nullLiteral = (NullLiteral)theEObject;
-				T result = caseNullLiteral(nullLiteral);
-				if (result == null) result = caseExpression(nullLiteral);
+			case XpressionPackage.XNULL_LITERAL: {
+				XNullLiteral xNullLiteral = (XNullLiteral)theEObject;
+				T result = caseXNullLiteral(xNullLiteral);
+				if (result == null) result = caseXExpression(xNullLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XpressionPackage.INT_LITERAL: {
-				IntLiteral intLiteral = (IntLiteral)theEObject;
-				T result = caseIntLiteral(intLiteral);
-				if (result == null) result = caseExpression(intLiteral);
+			case XpressionPackage.XINT_LITERAL: {
+				XIntLiteral xIntLiteral = (XIntLiteral)theEObject;
+				T result = caseXIntLiteral(xIntLiteral);
+				if (result == null) result = caseXExpression(xIntLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XpressionPackage.STRING_LITERAL: {
-				StringLiteral stringLiteral = (StringLiteral)theEObject;
-				T result = caseStringLiteral(stringLiteral);
-				if (result == null) result = caseExpression(stringLiteral);
+			case XpressionPackage.XSTRING_LITERAL: {
+				XStringLiteral xStringLiteral = (XStringLiteral)theEObject;
+				T result = caseXStringLiteral(xStringLiteral);
+				if (result == null) result = caseXExpression(xStringLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XpressionPackage.RICH_STRING: {
-				RichString richString = (RichString)theEObject;
-				T result = caseRichString(richString);
-				if (result == null) result = caseExpression(richString);
+			case XpressionPackage.XRICH_STRING: {
+				XRichString xRichString = (XRichString)theEObject;
+				T result = caseXRichString(xRichString);
+				if (result == null) result = caseXExpression(xRichString);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XpressionPackage.RICH_STRING_LITERAL: {
-				RichStringLiteral richStringLiteral = (RichStringLiteral)theEObject;
-				T result = caseRichStringLiteral(richStringLiteral);
+			case XpressionPackage.XRICH_STRING_LITERAL: {
+				XRichStringLiteral xRichStringLiteral = (XRichStringLiteral)theEObject;
+				T result = caseXRichStringLiteral(xRichStringLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XpressionPackage.CLOSURE: {
-				Closure closure = (Closure)theEObject;
-				T result = caseClosure(closure);
-				if (result == null) result = caseExpression(closure);
+			case XpressionPackage.XCLOSURE: {
+				XClosure xClosure = (XClosure)theEObject;
+				T result = caseXClosure(xClosure);
+				if (result == null) result = caseXExpression(xClosure);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XpressionPackage.CASTED_EXPRESSION: {
-				CastedExpression castedExpression = (CastedExpression)theEObject;
-				T result = caseCastedExpression(castedExpression);
-				if (result == null) result = caseExpression(castedExpression);
+			case XpressionPackage.XCASTED_EXPRESSION: {
+				XCastedExpression xCastedExpression = (XCastedExpression)theEObject;
+				T result = caseXCastedExpression(xCastedExpression);
+				if (result == null) result = caseXExpression(xCastedExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XpressionPackage.ASSIGNMENT: {
-				Assignment assignment = (Assignment)theEObject;
-				T result = caseAssignment(assignment);
-				if (result == null) result = caseExpression(assignment);
+			case XpressionPackage.XASSIGNMENT: {
+				XAssignment xAssignment = (XAssignment)theEObject;
+				T result = caseXAssignment(xAssignment);
+				if (result == null) result = caseXExpression(xAssignment);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XpressionPackage.BINARY_OPERATION: {
-				BinaryOperation binaryOperation = (BinaryOperation)theEObject;
-				T result = caseBinaryOperation(binaryOperation);
-				if (result == null) result = caseExpression(binaryOperation);
+			case XpressionPackage.XBINARY_OPERATION: {
+				XBinaryOperation xBinaryOperation = (XBinaryOperation)theEObject;
+				T result = caseXBinaryOperation(xBinaryOperation);
+				if (result == null) result = caseXExpression(xBinaryOperation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XpressionPackage.UNARY_OPERATION: {
-				UnaryOperation unaryOperation = (UnaryOperation)theEObject;
-				T result = caseUnaryOperation(unaryOperation);
-				if (result == null) result = caseExpression(unaryOperation);
+			case XpressionPackage.XUNARY_OPERATION: {
+				XUnaryOperation xUnaryOperation = (XUnaryOperation)theEObject;
+				T result = caseXUnaryOperation(xUnaryOperation);
+				if (result == null) result = caseXExpression(xUnaryOperation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XpressionPackage.WHILE_EXPRESSION: {
-				WhileExpression whileExpression = (WhileExpression)theEObject;
-				T result = caseWhileExpression(whileExpression);
-				if (result == null) result = caseExpression(whileExpression);
+			case XpressionPackage.XWHILE_EXPRESSION: {
+				XWhileExpression xWhileExpression = (XWhileExpression)theEObject;
+				T result = caseXWhileExpression(xWhileExpression);
+				if (result == null) result = caseXExpression(xWhileExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XpressionPackage.TYPE_LITERAL: {
-				TypeLiteral typeLiteral = (TypeLiteral)theEObject;
-				T result = caseTypeLiteral(typeLiteral);
-				if (result == null) result = caseExpression(typeLiteral);
+			case XpressionPackage.XTYPE_LITERAL: {
+				XTypeLiteral xTypeLiteral = (XTypeLiteral)theEObject;
+				T result = caseXTypeLiteral(xTypeLiteral);
+				if (result == null) result = caseXExpression(xTypeLiteral);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XpressionPackage.INSTANCE_OF_EXPRESSION: {
-				InstanceOfExpression instanceOfExpression = (InstanceOfExpression)theEObject;
-				T result = caseInstanceOfExpression(instanceOfExpression);
-				if (result == null) result = caseExpression(instanceOfExpression);
+			case XpressionPackage.XINSTANCE_OF_EXPRESSION: {
+				XInstanceOfExpression xInstanceOfExpression = (XInstanceOfExpression)theEObject;
+				T result = caseXInstanceOfExpression(xInstanceOfExpression);
+				if (result == null) result = caseXExpression(xInstanceOfExpression);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -249,347 +249,347 @@ public class XpressionSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Expression</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XExpression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Expression</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XExpression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseExpression(Expression object) {
+	public T caseXExpression(XExpression object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>If Expression</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XIf Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>If Expression</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XIf Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseIfExpression(IfExpression object) {
+	public T caseXIfExpression(XIfExpression object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Switch Expression</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XSwitch Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Switch Expression</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XSwitch Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSwitchExpression(SwitchExpression object) {
+	public T caseXSwitchExpression(XSwitchExpression object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Case Part</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XCase Part</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Case Part</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XCase Part</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCasePart(CasePart object) {
+	public T caseXCasePart(XCasePart object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Block Expression</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XBlock Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Block Expression</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XBlock Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseBlockExpression(BlockExpression object) {
+	public T caseXBlockExpression(XBlockExpression object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Variable Declaration</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XVariable Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Variable Declaration</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XVariable Declaration</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseVariableDeclaration(VariableDeclaration object) {
+	public T caseXVariableDeclaration(XVariableDeclaration object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Declared Parameter</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XDeclared Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Declared Parameter</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XDeclared Parameter</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDeclaredParameter(DeclaredParameter object) {
+	public T caseXDeclaredParameter(XDeclaredParameter object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Feature Call</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XFeature Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Feature Call</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XFeature Call</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFeatureCall(FeatureCall object) {
+	public T caseXFeatureCall(XFeatureCall object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Constructor Call</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XConstructor Call</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Constructor Call</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XConstructor Call</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseConstructorCall(ConstructorCall object) {
+	public T caseXConstructorCall(XConstructorCall object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Boolean Literal</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XBoolean Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Boolean Literal</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XBoolean Literal</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseBooleanLiteral(BooleanLiteral object) {
+	public T caseXBooleanLiteral(XBooleanLiteral object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Null Literal</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XNull Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Null Literal</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XNull Literal</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseNullLiteral(NullLiteral object) {
+	public T caseXNullLiteral(XNullLiteral object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Int Literal</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XInt Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Int Literal</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XInt Literal</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseIntLiteral(IntLiteral object) {
+	public T caseXIntLiteral(XIntLiteral object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>String Literal</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XString Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>String Literal</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XString Literal</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseStringLiteral(StringLiteral object) {
+	public T caseXStringLiteral(XStringLiteral object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Rich String</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XRich String</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Rich String</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XRich String</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRichString(RichString object) {
+	public T caseXRichString(XRichString object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Rich String Literal</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XRich String Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Rich String Literal</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XRich String Literal</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseRichStringLiteral(RichStringLiteral object) {
+	public T caseXRichStringLiteral(XRichStringLiteral object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Closure</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XClosure</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Closure</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XClosure</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseClosure(Closure object) {
+	public T caseXClosure(XClosure object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Casted Expression</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XCasted Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Casted Expression</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XCasted Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseCastedExpression(CastedExpression object) {
+	public T caseXCastedExpression(XCastedExpression object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Assignment</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XAssignment</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Assignment</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XAssignment</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAssignment(Assignment object) {
+	public T caseXAssignment(XAssignment object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Binary Operation</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XBinary Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Binary Operation</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XBinary Operation</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseBinaryOperation(BinaryOperation object) {
+	public T caseXBinaryOperation(XBinaryOperation object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Unary Operation</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XUnary Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Unary Operation</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XUnary Operation</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseUnaryOperation(UnaryOperation object) {
+	public T caseXUnaryOperation(XUnaryOperation object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>While Expression</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XWhile Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>While Expression</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XWhile Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseWhileExpression(WhileExpression object) {
+	public T caseXWhileExpression(XWhileExpression object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Literal</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XType Literal</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Literal</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XType Literal</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTypeLiteral(TypeLiteral object) {
+	public T caseXTypeLiteral(XTypeLiteral object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Instance Of Expression</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XInstance Of Expression</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Instance Of Expression</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XInstance Of Expression</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseInstanceOfExpression(InstanceOfExpression object) {
+	public T caseXInstanceOfExpression(XInstanceOfExpression object) {
 		return null;
 	}
 

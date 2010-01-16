@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XbaseSwitch.java,v 1.1 2010/01/14 14:40:23 sefftinge Exp $
+ * $Id: XbaseSwitch.java,v 1.2 2010/01/16 08:50:54 sefftinge Exp $
  */
 package org.eclipse.xtext.xbase.util;
 
@@ -87,21 +87,27 @@ public class XbaseSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case XbasePackage.FILE: {
-				File file = (File)theEObject;
-				T result = caseFile(file);
+			case XbasePackage.XFILE: {
+				XFile xFile = (XFile)theEObject;
+				T result = caseXFile(xFile);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XbasePackage.IMPORT: {
-				Import import_ = (Import)theEObject;
-				T result = caseImport(import_);
+			case XbasePackage.XIMPORT: {
+				XImport xImport = (XImport)theEObject;
+				T result = caseXImport(xImport);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XbasePackage.FUNCTION: {
-				Function function = (Function)theEObject;
-				T result = caseFunction(function);
+			case XbasePackage.XFUNCTION: {
+				XFunction xFunction = (XFunction)theEObject;
+				T result = caseXFunction(xFunction);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case XbasePackage.XCLASS: {
+				XClass xClass = (XClass)theEObject;
+				T result = caseXClass(xClass);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -110,47 +116,62 @@ public class XbaseSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>File</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XFile</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>File</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XFile</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFile(File object) {
+	public T caseXFile(XFile object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Import</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XImport</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Import</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XImport</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseImport(Import object) {
+	public T caseXImport(XImport object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Function</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XFunction</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Function</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XFunction</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFunction(Function object) {
+	public T caseXFunction(XFunction object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>XClass</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>XClass</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseXClass(XClass object) {
 		return null;
 	}
 

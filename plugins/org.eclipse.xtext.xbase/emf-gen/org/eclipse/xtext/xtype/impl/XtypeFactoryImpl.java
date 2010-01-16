@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtypeFactoryImpl.java,v 1.1 2010/01/14 14:40:21 sefftinge Exp $
+ * $Id: XtypeFactoryImpl.java,v 1.2 2010/01/16 08:50:51 sefftinge Exp $
  */
 package org.eclipse.xtext.xtype.impl;
 
@@ -60,11 +60,11 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case XtypePackage.TYPE_REF: return createTypeRef();
-			case XtypePackage.FUNCTION_TYPE_REF: return createFunctionTypeRef();
-			case XtypePackage.SIMPLE_TYPE_REF: return createSimpleTypeRef();
-			case XtypePackage.WILDCARD_PARAM: return createWildcardParam();
-			case XtypePackage.TYPE_PARAM_DECLARATION: return createTypeParamDeclaration();
+			case XtypePackage.XTYPE_REF: return createXTypeRef();
+			case XtypePackage.XFUNCTION_TYPE_REF: return createXFunctionTypeRef();
+			case XtypePackage.XSIMPLE_TYPE_REF: return createXSimpleTypeRef();
+			case XtypePackage.XWILDCARD_PARAM: return createXWildcardParam();
+			case XtypePackage.XTYPE_PARAM_DECLARATION: return createXTypeParamDeclaration();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -75,9 +75,9 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeRef createTypeRef() {
-		TypeRefImpl typeRef = new TypeRefImpl();
-		return typeRef;
+	public XTypeRef createXTypeRef() {
+		XTypeRefImpl xTypeRef = new XTypeRefImpl();
+		return xTypeRef;
 	}
 
 	/**
@@ -85,9 +85,9 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FunctionTypeRef createFunctionTypeRef() {
-		FunctionTypeRefImpl functionTypeRef = new FunctionTypeRefImpl();
-		return functionTypeRef;
+	public XFunctionTypeRef createXFunctionTypeRef() {
+		XFunctionTypeRefImpl xFunctionTypeRef = new XFunctionTypeRefImpl();
+		return xFunctionTypeRef;
 	}
 
 	/**
@@ -95,9 +95,9 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SimpleTypeRef createSimpleTypeRef() {
-		SimpleTypeRefImpl simpleTypeRef = new SimpleTypeRefImpl();
-		return simpleTypeRef;
+	public XSimpleTypeRef createXSimpleTypeRef() {
+		XSimpleTypeRefImpl xSimpleTypeRef = new XSimpleTypeRefImpl();
+		return xSimpleTypeRef;
 	}
 
 	/**
@@ -105,9 +105,9 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public WildcardParam createWildcardParam() {
-		WildcardParamImpl wildcardParam = new WildcardParamImpl();
-		return wildcardParam;
+	public XWildcardParam createXWildcardParam() {
+		XWildcardParamImpl xWildcardParam = new XWildcardParamImpl();
+		return xWildcardParam;
 	}
 
 	/**
@@ -115,9 +115,9 @@ public class XtypeFactoryImpl extends EFactoryImpl implements XtypeFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeParamDeclaration createTypeParamDeclaration() {
-		TypeParamDeclarationImpl typeParamDeclaration = new TypeParamDeclarationImpl();
-		return typeParamDeclaration;
+	public XTypeParamDeclaration createXTypeParamDeclaration() {
+		XTypeParamDeclarationImpl xTypeParamDeclaration = new XTypeParamDeclarationImpl();
+		return xTypeParamDeclaration;
 	}
 
 	/**

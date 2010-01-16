@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XpressionFactoryImpl.java,v 1.2 2010/01/15 08:16:16 sefftinge Exp $
+ * $Id: XpressionFactoryImpl.java,v 1.3 2010/01/16 08:50:51 sefftinge Exp $
  */
 package org.eclipse.xtext.xpression.impl;
 
@@ -60,29 +60,29 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case XpressionPackage.EXPRESSION: return createExpression();
-			case XpressionPackage.IF_EXPRESSION: return createIfExpression();
-			case XpressionPackage.SWITCH_EXPRESSION: return createSwitchExpression();
-			case XpressionPackage.CASE_PART: return createCasePart();
-			case XpressionPackage.BLOCK_EXPRESSION: return createBlockExpression();
-			case XpressionPackage.VARIABLE_DECLARATION: return createVariableDeclaration();
-			case XpressionPackage.DECLARED_PARAMETER: return createDeclaredParameter();
-			case XpressionPackage.FEATURE_CALL: return createFeatureCall();
-			case XpressionPackage.CONSTRUCTOR_CALL: return createConstructorCall();
-			case XpressionPackage.BOOLEAN_LITERAL: return createBooleanLiteral();
-			case XpressionPackage.NULL_LITERAL: return createNullLiteral();
-			case XpressionPackage.INT_LITERAL: return createIntLiteral();
-			case XpressionPackage.STRING_LITERAL: return createStringLiteral();
-			case XpressionPackage.RICH_STRING: return createRichString();
-			case XpressionPackage.RICH_STRING_LITERAL: return createRichStringLiteral();
-			case XpressionPackage.CLOSURE: return createClosure();
-			case XpressionPackage.CASTED_EXPRESSION: return createCastedExpression();
-			case XpressionPackage.ASSIGNMENT: return createAssignment();
-			case XpressionPackage.BINARY_OPERATION: return createBinaryOperation();
-			case XpressionPackage.UNARY_OPERATION: return createUnaryOperation();
-			case XpressionPackage.WHILE_EXPRESSION: return createWhileExpression();
-			case XpressionPackage.TYPE_LITERAL: return createTypeLiteral();
-			case XpressionPackage.INSTANCE_OF_EXPRESSION: return createInstanceOfExpression();
+			case XpressionPackage.XEXPRESSION: return createXExpression();
+			case XpressionPackage.XIF_EXPRESSION: return createXIfExpression();
+			case XpressionPackage.XSWITCH_EXPRESSION: return createXSwitchExpression();
+			case XpressionPackage.XCASE_PART: return createXCasePart();
+			case XpressionPackage.XBLOCK_EXPRESSION: return createXBlockExpression();
+			case XpressionPackage.XVARIABLE_DECLARATION: return createXVariableDeclaration();
+			case XpressionPackage.XDECLARED_PARAMETER: return createXDeclaredParameter();
+			case XpressionPackage.XFEATURE_CALL: return createXFeatureCall();
+			case XpressionPackage.XCONSTRUCTOR_CALL: return createXConstructorCall();
+			case XpressionPackage.XBOOLEAN_LITERAL: return createXBooleanLiteral();
+			case XpressionPackage.XNULL_LITERAL: return createXNullLiteral();
+			case XpressionPackage.XINT_LITERAL: return createXIntLiteral();
+			case XpressionPackage.XSTRING_LITERAL: return createXStringLiteral();
+			case XpressionPackage.XRICH_STRING: return createXRichString();
+			case XpressionPackage.XRICH_STRING_LITERAL: return createXRichStringLiteral();
+			case XpressionPackage.XCLOSURE: return createXClosure();
+			case XpressionPackage.XCASTED_EXPRESSION: return createXCastedExpression();
+			case XpressionPackage.XASSIGNMENT: return createXAssignment();
+			case XpressionPackage.XBINARY_OPERATION: return createXBinaryOperation();
+			case XpressionPackage.XUNARY_OPERATION: return createXUnaryOperation();
+			case XpressionPackage.XWHILE_EXPRESSION: return createXWhileExpression();
+			case XpressionPackage.XTYPE_LITERAL: return createXTypeLiteral();
+			case XpressionPackage.XINSTANCE_OF_EXPRESSION: return createXInstanceOfExpression();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -93,9 +93,9 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Expression createExpression() {
-		ExpressionImpl expression = new ExpressionImpl();
-		return expression;
+	public XExpression createXExpression() {
+		XExpressionImpl xExpression = new XExpressionImpl();
+		return xExpression;
 	}
 
 	/**
@@ -103,9 +103,9 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IfExpression createIfExpression() {
-		IfExpressionImpl ifExpression = new IfExpressionImpl();
-		return ifExpression;
+	public XIfExpression createXIfExpression() {
+		XIfExpressionImpl xIfExpression = new XIfExpressionImpl();
+		return xIfExpression;
 	}
 
 	/**
@@ -113,9 +113,9 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public SwitchExpression createSwitchExpression() {
-		SwitchExpressionImpl switchExpression = new SwitchExpressionImpl();
-		return switchExpression;
+	public XSwitchExpression createXSwitchExpression() {
+		XSwitchExpressionImpl xSwitchExpression = new XSwitchExpressionImpl();
+		return xSwitchExpression;
 	}
 
 	/**
@@ -123,9 +123,9 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CasePart createCasePart() {
-		CasePartImpl casePart = new CasePartImpl();
-		return casePart;
+	public XCasePart createXCasePart() {
+		XCasePartImpl xCasePart = new XCasePartImpl();
+		return xCasePart;
 	}
 
 	/**
@@ -133,9 +133,9 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BlockExpression createBlockExpression() {
-		BlockExpressionImpl blockExpression = new BlockExpressionImpl();
-		return blockExpression;
+	public XBlockExpression createXBlockExpression() {
+		XBlockExpressionImpl xBlockExpression = new XBlockExpressionImpl();
+		return xBlockExpression;
 	}
 
 	/**
@@ -143,9 +143,9 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public VariableDeclaration createVariableDeclaration() {
-		VariableDeclarationImpl variableDeclaration = new VariableDeclarationImpl();
-		return variableDeclaration;
+	public XVariableDeclaration createXVariableDeclaration() {
+		XVariableDeclarationImpl xVariableDeclaration = new XVariableDeclarationImpl();
+		return xVariableDeclaration;
 	}
 
 	/**
@@ -153,9 +153,9 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public DeclaredParameter createDeclaredParameter() {
-		DeclaredParameterImpl declaredParameter = new DeclaredParameterImpl();
-		return declaredParameter;
+	public XDeclaredParameter createXDeclaredParameter() {
+		XDeclaredParameterImpl xDeclaredParameter = new XDeclaredParameterImpl();
+		return xDeclaredParameter;
 	}
 
 	/**
@@ -163,9 +163,9 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FeatureCall createFeatureCall() {
-		FeatureCallImpl featureCall = new FeatureCallImpl();
-		return featureCall;
+	public XFeatureCall createXFeatureCall() {
+		XFeatureCallImpl xFeatureCall = new XFeatureCallImpl();
+		return xFeatureCall;
 	}
 
 	/**
@@ -173,9 +173,9 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ConstructorCall createConstructorCall() {
-		ConstructorCallImpl constructorCall = new ConstructorCallImpl();
-		return constructorCall;
+	public XConstructorCall createXConstructorCall() {
+		XConstructorCallImpl xConstructorCall = new XConstructorCallImpl();
+		return xConstructorCall;
 	}
 
 	/**
@@ -183,9 +183,9 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BooleanLiteral createBooleanLiteral() {
-		BooleanLiteralImpl booleanLiteral = new BooleanLiteralImpl();
-		return booleanLiteral;
+	public XBooleanLiteral createXBooleanLiteral() {
+		XBooleanLiteralImpl xBooleanLiteral = new XBooleanLiteralImpl();
+		return xBooleanLiteral;
 	}
 
 	/**
@@ -193,9 +193,9 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NullLiteral createNullLiteral() {
-		NullLiteralImpl nullLiteral = new NullLiteralImpl();
-		return nullLiteral;
+	public XNullLiteral createXNullLiteral() {
+		XNullLiteralImpl xNullLiteral = new XNullLiteralImpl();
+		return xNullLiteral;
 	}
 
 	/**
@@ -203,9 +203,9 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public IntLiteral createIntLiteral() {
-		IntLiteralImpl intLiteral = new IntLiteralImpl();
-		return intLiteral;
+	public XIntLiteral createXIntLiteral() {
+		XIntLiteralImpl xIntLiteral = new XIntLiteralImpl();
+		return xIntLiteral;
 	}
 
 	/**
@@ -213,9 +213,9 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public StringLiteral createStringLiteral() {
-		StringLiteralImpl stringLiteral = new StringLiteralImpl();
-		return stringLiteral;
+	public XStringLiteral createXStringLiteral() {
+		XStringLiteralImpl xStringLiteral = new XStringLiteralImpl();
+		return xStringLiteral;
 	}
 
 	/**
@@ -223,9 +223,9 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RichString createRichString() {
-		RichStringImpl richString = new RichStringImpl();
-		return richString;
+	public XRichString createXRichString() {
+		XRichStringImpl xRichString = new XRichStringImpl();
+		return xRichString;
 	}
 
 	/**
@@ -233,9 +233,9 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public RichStringLiteral createRichStringLiteral() {
-		RichStringLiteralImpl richStringLiteral = new RichStringLiteralImpl();
-		return richStringLiteral;
+	public XRichStringLiteral createXRichStringLiteral() {
+		XRichStringLiteralImpl xRichStringLiteral = new XRichStringLiteralImpl();
+		return xRichStringLiteral;
 	}
 
 	/**
@@ -243,9 +243,9 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Closure createClosure() {
-		ClosureImpl closure = new ClosureImpl();
-		return closure;
+	public XClosure createXClosure() {
+		XClosureImpl xClosure = new XClosureImpl();
+		return xClosure;
 	}
 
 	/**
@@ -253,9 +253,9 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public CastedExpression createCastedExpression() {
-		CastedExpressionImpl castedExpression = new CastedExpressionImpl();
-		return castedExpression;
+	public XCastedExpression createXCastedExpression() {
+		XCastedExpressionImpl xCastedExpression = new XCastedExpressionImpl();
+		return xCastedExpression;
 	}
 
 	/**
@@ -263,9 +263,9 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Assignment createAssignment() {
-		AssignmentImpl assignment = new AssignmentImpl();
-		return assignment;
+	public XAssignment createXAssignment() {
+		XAssignmentImpl xAssignment = new XAssignmentImpl();
+		return xAssignment;
 	}
 
 	/**
@@ -273,9 +273,9 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public BinaryOperation createBinaryOperation() {
-		BinaryOperationImpl binaryOperation = new BinaryOperationImpl();
-		return binaryOperation;
+	public XBinaryOperation createXBinaryOperation() {
+		XBinaryOperationImpl xBinaryOperation = new XBinaryOperationImpl();
+		return xBinaryOperation;
 	}
 
 	/**
@@ -283,9 +283,9 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public UnaryOperation createUnaryOperation() {
-		UnaryOperationImpl unaryOperation = new UnaryOperationImpl();
-		return unaryOperation;
+	public XUnaryOperation createXUnaryOperation() {
+		XUnaryOperationImpl xUnaryOperation = new XUnaryOperationImpl();
+		return xUnaryOperation;
 	}
 
 	/**
@@ -293,9 +293,9 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public WhileExpression createWhileExpression() {
-		WhileExpressionImpl whileExpression = new WhileExpressionImpl();
-		return whileExpression;
+	public XWhileExpression createXWhileExpression() {
+		XWhileExpressionImpl xWhileExpression = new XWhileExpressionImpl();
+		return xWhileExpression;
 	}
 
 	/**
@@ -303,9 +303,9 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeLiteral createTypeLiteral() {
-		TypeLiteralImpl typeLiteral = new TypeLiteralImpl();
-		return typeLiteral;
+	public XTypeLiteral createXTypeLiteral() {
+		XTypeLiteralImpl xTypeLiteral = new XTypeLiteralImpl();
+		return xTypeLiteral;
 	}
 
 	/**
@@ -313,9 +313,9 @@ public class XpressionFactoryImpl extends EFactoryImpl implements XpressionFacto
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public InstanceOfExpression createInstanceOfExpression() {
-		InstanceOfExpressionImpl instanceOfExpression = new InstanceOfExpressionImpl();
-		return instanceOfExpression;
+	public XInstanceOfExpression createXInstanceOfExpression() {
+		XInstanceOfExpressionImpl xInstanceOfExpression = new XInstanceOfExpressionImpl();
+		return xInstanceOfExpression;
 	}
 
 	/**

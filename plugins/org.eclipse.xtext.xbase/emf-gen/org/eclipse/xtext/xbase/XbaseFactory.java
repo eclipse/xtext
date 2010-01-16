@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XbaseFactory.java,v 1.1 2010/01/14 14:40:22 sefftinge Exp $
+ * $Id: XbaseFactory.java,v 1.2 2010/01/16 08:50:53 sefftinge Exp $
  */
 package org.eclipse.xtext.xbase;
 
@@ -26,31 +26,40 @@ public interface XbaseFactory extends EFactory {
 	XbaseFactory eINSTANCE = org.eclipse.xtext.xbase.impl.XbaseFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>File</em>'.
+	 * Returns a new object of class '<em>XFile</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>File</em>'.
+	 * @return a new object of class '<em>XFile</em>'.
 	 * @generated
 	 */
-	File createFile();
+	XFile createXFile();
 
 	/**
-	 * Returns a new object of class '<em>Import</em>'.
+	 * Returns a new object of class '<em>XImport</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Import</em>'.
+	 * @return a new object of class '<em>XImport</em>'.
 	 * @generated
 	 */
-	Import createImport();
+	XImport createXImport();
 
 	/**
-	 * Returns a new object of class '<em>Function</em>'.
+	 * Returns a new object of class '<em>XFunction</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Function</em>'.
+	 * @return a new object of class '<em>XFunction</em>'.
 	 * @generated
 	 */
-	Function createFunction();
+	XFunction createXFunction();
+
+	/**
+	 * Returns a new object of class '<em>XClass</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>XClass</em>'.
+	 * @generated
+	 */
+	XClass createXClass();
 
 	/**
 	 * Returns the package supported by this factory.

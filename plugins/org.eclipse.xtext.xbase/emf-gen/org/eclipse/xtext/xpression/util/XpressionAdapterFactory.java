@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XpressionAdapterFactory.java,v 1.2 2010/01/15 08:16:16 sefftinge Exp $
+ * $Id: XpressionAdapterFactory.java,v 1.3 2010/01/16 08:50:54 sefftinge Exp $
  */
 package org.eclipse.xtext.xpression.util;
 
@@ -72,96 +72,96 @@ public class XpressionAdapterFactory extends AdapterFactoryImpl {
 	protected XpressionSwitch<Adapter> modelSwitch =
 		new XpressionSwitch<Adapter>() {
 			@Override
-			public Adapter caseExpression(Expression object) {
-				return createExpressionAdapter();
+			public Adapter caseXExpression(XExpression object) {
+				return createXExpressionAdapter();
 			}
 			@Override
-			public Adapter caseIfExpression(IfExpression object) {
-				return createIfExpressionAdapter();
+			public Adapter caseXIfExpression(XIfExpression object) {
+				return createXIfExpressionAdapter();
 			}
 			@Override
-			public Adapter caseSwitchExpression(SwitchExpression object) {
-				return createSwitchExpressionAdapter();
+			public Adapter caseXSwitchExpression(XSwitchExpression object) {
+				return createXSwitchExpressionAdapter();
 			}
 			@Override
-			public Adapter caseCasePart(CasePart object) {
-				return createCasePartAdapter();
+			public Adapter caseXCasePart(XCasePart object) {
+				return createXCasePartAdapter();
 			}
 			@Override
-			public Adapter caseBlockExpression(BlockExpression object) {
-				return createBlockExpressionAdapter();
+			public Adapter caseXBlockExpression(XBlockExpression object) {
+				return createXBlockExpressionAdapter();
 			}
 			@Override
-			public Adapter caseVariableDeclaration(VariableDeclaration object) {
-				return createVariableDeclarationAdapter();
+			public Adapter caseXVariableDeclaration(XVariableDeclaration object) {
+				return createXVariableDeclarationAdapter();
 			}
 			@Override
-			public Adapter caseDeclaredParameter(DeclaredParameter object) {
-				return createDeclaredParameterAdapter();
+			public Adapter caseXDeclaredParameter(XDeclaredParameter object) {
+				return createXDeclaredParameterAdapter();
 			}
 			@Override
-			public Adapter caseFeatureCall(FeatureCall object) {
-				return createFeatureCallAdapter();
+			public Adapter caseXFeatureCall(XFeatureCall object) {
+				return createXFeatureCallAdapter();
 			}
 			@Override
-			public Adapter caseConstructorCall(ConstructorCall object) {
-				return createConstructorCallAdapter();
+			public Adapter caseXConstructorCall(XConstructorCall object) {
+				return createXConstructorCallAdapter();
 			}
 			@Override
-			public Adapter caseBooleanLiteral(BooleanLiteral object) {
-				return createBooleanLiteralAdapter();
+			public Adapter caseXBooleanLiteral(XBooleanLiteral object) {
+				return createXBooleanLiteralAdapter();
 			}
 			@Override
-			public Adapter caseNullLiteral(NullLiteral object) {
-				return createNullLiteralAdapter();
+			public Adapter caseXNullLiteral(XNullLiteral object) {
+				return createXNullLiteralAdapter();
 			}
 			@Override
-			public Adapter caseIntLiteral(IntLiteral object) {
-				return createIntLiteralAdapter();
+			public Adapter caseXIntLiteral(XIntLiteral object) {
+				return createXIntLiteralAdapter();
 			}
 			@Override
-			public Adapter caseStringLiteral(StringLiteral object) {
-				return createStringLiteralAdapter();
+			public Adapter caseXStringLiteral(XStringLiteral object) {
+				return createXStringLiteralAdapter();
 			}
 			@Override
-			public Adapter caseRichString(RichString object) {
-				return createRichStringAdapter();
+			public Adapter caseXRichString(XRichString object) {
+				return createXRichStringAdapter();
 			}
 			@Override
-			public Adapter caseRichStringLiteral(RichStringLiteral object) {
-				return createRichStringLiteralAdapter();
+			public Adapter caseXRichStringLiteral(XRichStringLiteral object) {
+				return createXRichStringLiteralAdapter();
 			}
 			@Override
-			public Adapter caseClosure(Closure object) {
-				return createClosureAdapter();
+			public Adapter caseXClosure(XClosure object) {
+				return createXClosureAdapter();
 			}
 			@Override
-			public Adapter caseCastedExpression(CastedExpression object) {
-				return createCastedExpressionAdapter();
+			public Adapter caseXCastedExpression(XCastedExpression object) {
+				return createXCastedExpressionAdapter();
 			}
 			@Override
-			public Adapter caseAssignment(Assignment object) {
-				return createAssignmentAdapter();
+			public Adapter caseXAssignment(XAssignment object) {
+				return createXAssignmentAdapter();
 			}
 			@Override
-			public Adapter caseBinaryOperation(BinaryOperation object) {
-				return createBinaryOperationAdapter();
+			public Adapter caseXBinaryOperation(XBinaryOperation object) {
+				return createXBinaryOperationAdapter();
 			}
 			@Override
-			public Adapter caseUnaryOperation(UnaryOperation object) {
-				return createUnaryOperationAdapter();
+			public Adapter caseXUnaryOperation(XUnaryOperation object) {
+				return createXUnaryOperationAdapter();
 			}
 			@Override
-			public Adapter caseWhileExpression(WhileExpression object) {
-				return createWhileExpressionAdapter();
+			public Adapter caseXWhileExpression(XWhileExpression object) {
+				return createXWhileExpressionAdapter();
 			}
 			@Override
-			public Adapter caseTypeLiteral(TypeLiteral object) {
-				return createTypeLiteralAdapter();
+			public Adapter caseXTypeLiteral(XTypeLiteral object) {
+				return createXTypeLiteralAdapter();
 			}
 			@Override
-			public Adapter caseInstanceOfExpression(InstanceOfExpression object) {
-				return createInstanceOfExpressionAdapter();
+			public Adapter caseXInstanceOfExpression(XInstanceOfExpression object) {
+				return createXInstanceOfExpressionAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -184,324 +184,324 @@ public class XpressionAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.Expression <em>Expression</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XExpression <em>XExpression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.Expression
+	 * @see org.eclipse.xtext.xpression.XExpression
 	 * @generated
 	 */
-	public Adapter createExpressionAdapter() {
+	public Adapter createXExpressionAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.IfExpression <em>If Expression</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XIfExpression <em>XIf Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.IfExpression
+	 * @see org.eclipse.xtext.xpression.XIfExpression
 	 * @generated
 	 */
-	public Adapter createIfExpressionAdapter() {
+	public Adapter createXIfExpressionAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.SwitchExpression <em>Switch Expression</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XSwitchExpression <em>XSwitch Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.SwitchExpression
+	 * @see org.eclipse.xtext.xpression.XSwitchExpression
 	 * @generated
 	 */
-	public Adapter createSwitchExpressionAdapter() {
+	public Adapter createXSwitchExpressionAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.CasePart <em>Case Part</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XCasePart <em>XCase Part</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.CasePart
+	 * @see org.eclipse.xtext.xpression.XCasePart
 	 * @generated
 	 */
-	public Adapter createCasePartAdapter() {
+	public Adapter createXCasePartAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.BlockExpression <em>Block Expression</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XBlockExpression <em>XBlock Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.BlockExpression
+	 * @see org.eclipse.xtext.xpression.XBlockExpression
 	 * @generated
 	 */
-	public Adapter createBlockExpressionAdapter() {
+	public Adapter createXBlockExpressionAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.VariableDeclaration <em>Variable Declaration</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XVariableDeclaration <em>XVariable Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.VariableDeclaration
+	 * @see org.eclipse.xtext.xpression.XVariableDeclaration
 	 * @generated
 	 */
-	public Adapter createVariableDeclarationAdapter() {
+	public Adapter createXVariableDeclarationAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.DeclaredParameter <em>Declared Parameter</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XDeclaredParameter <em>XDeclared Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.DeclaredParameter
+	 * @see org.eclipse.xtext.xpression.XDeclaredParameter
 	 * @generated
 	 */
-	public Adapter createDeclaredParameterAdapter() {
+	public Adapter createXDeclaredParameterAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.FeatureCall <em>Feature Call</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XFeatureCall <em>XFeature Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.FeatureCall
+	 * @see org.eclipse.xtext.xpression.XFeatureCall
 	 * @generated
 	 */
-	public Adapter createFeatureCallAdapter() {
+	public Adapter createXFeatureCallAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.ConstructorCall <em>Constructor Call</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XConstructorCall <em>XConstructor Call</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.ConstructorCall
+	 * @see org.eclipse.xtext.xpression.XConstructorCall
 	 * @generated
 	 */
-	public Adapter createConstructorCallAdapter() {
+	public Adapter createXConstructorCallAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.BooleanLiteral <em>Boolean Literal</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XBooleanLiteral <em>XBoolean Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.BooleanLiteral
+	 * @see org.eclipse.xtext.xpression.XBooleanLiteral
 	 * @generated
 	 */
-	public Adapter createBooleanLiteralAdapter() {
+	public Adapter createXBooleanLiteralAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.NullLiteral <em>Null Literal</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XNullLiteral <em>XNull Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.NullLiteral
+	 * @see org.eclipse.xtext.xpression.XNullLiteral
 	 * @generated
 	 */
-	public Adapter createNullLiteralAdapter() {
+	public Adapter createXNullLiteralAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.IntLiteral <em>Int Literal</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XIntLiteral <em>XInt Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.IntLiteral
+	 * @see org.eclipse.xtext.xpression.XIntLiteral
 	 * @generated
 	 */
-	public Adapter createIntLiteralAdapter() {
+	public Adapter createXIntLiteralAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.StringLiteral <em>String Literal</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XStringLiteral <em>XString Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.StringLiteral
+	 * @see org.eclipse.xtext.xpression.XStringLiteral
 	 * @generated
 	 */
-	public Adapter createStringLiteralAdapter() {
+	public Adapter createXStringLiteralAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.RichString <em>Rich String</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XRichString <em>XRich String</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.RichString
+	 * @see org.eclipse.xtext.xpression.XRichString
 	 * @generated
 	 */
-	public Adapter createRichStringAdapter() {
+	public Adapter createXRichStringAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.RichStringLiteral <em>Rich String Literal</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XRichStringLiteral <em>XRich String Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.RichStringLiteral
+	 * @see org.eclipse.xtext.xpression.XRichStringLiteral
 	 * @generated
 	 */
-	public Adapter createRichStringLiteralAdapter() {
+	public Adapter createXRichStringLiteralAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.Closure <em>Closure</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XClosure <em>XClosure</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.Closure
+	 * @see org.eclipse.xtext.xpression.XClosure
 	 * @generated
 	 */
-	public Adapter createClosureAdapter() {
+	public Adapter createXClosureAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.CastedExpression <em>Casted Expression</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XCastedExpression <em>XCasted Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.CastedExpression
+	 * @see org.eclipse.xtext.xpression.XCastedExpression
 	 * @generated
 	 */
-	public Adapter createCastedExpressionAdapter() {
+	public Adapter createXCastedExpressionAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.Assignment <em>Assignment</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XAssignment <em>XAssignment</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.Assignment
+	 * @see org.eclipse.xtext.xpression.XAssignment
 	 * @generated
 	 */
-	public Adapter createAssignmentAdapter() {
+	public Adapter createXAssignmentAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.BinaryOperation <em>Binary Operation</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XBinaryOperation <em>XBinary Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.BinaryOperation
+	 * @see org.eclipse.xtext.xpression.XBinaryOperation
 	 * @generated
 	 */
-	public Adapter createBinaryOperationAdapter() {
+	public Adapter createXBinaryOperationAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.UnaryOperation <em>Unary Operation</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XUnaryOperation <em>XUnary Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.UnaryOperation
+	 * @see org.eclipse.xtext.xpression.XUnaryOperation
 	 * @generated
 	 */
-	public Adapter createUnaryOperationAdapter() {
+	public Adapter createXUnaryOperationAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.WhileExpression <em>While Expression</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XWhileExpression <em>XWhile Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.WhileExpression
+	 * @see org.eclipse.xtext.xpression.XWhileExpression
 	 * @generated
 	 */
-	public Adapter createWhileExpressionAdapter() {
+	public Adapter createXWhileExpressionAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.TypeLiteral <em>Type Literal</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XTypeLiteral <em>XType Literal</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.TypeLiteral
+	 * @see org.eclipse.xtext.xpression.XTypeLiteral
 	 * @generated
 	 */
-	public Adapter createTypeLiteralAdapter() {
+	public Adapter createXTypeLiteralAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.InstanceOfExpression <em>Instance Of Expression</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xpression.XInstanceOfExpression <em>XInstance Of Expression</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xpression.InstanceOfExpression
+	 * @see org.eclipse.xtext.xpression.XInstanceOfExpression
 	 * @generated
 	 */
-	public Adapter createInstanceOfExpressionAdapter() {
+	public Adapter createXInstanceOfExpressionAdapter() {
 		return null;
 	}
 

@@ -40,7 +40,7 @@ public class XbaseParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrPar
 	
 	@Override 
 	protected String getDefaultRuleName() {
-		return "File";
+		return "XFile";
 	}
 	
 	public XbaseGrammarAccess getGrammarAccess() {

@@ -40,7 +40,7 @@ public class XpressionParser extends org.eclipse.xtext.parser.antlr.AbstractAntl
 	
 	@Override 
 	protected String getDefaultRuleName() {
-		return "Expression";
+		return "XExpression";
 	}
 	
 	public XpressionGrammarAccess getGrammarAccess() {

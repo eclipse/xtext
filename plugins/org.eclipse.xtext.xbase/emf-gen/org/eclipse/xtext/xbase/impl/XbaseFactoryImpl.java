@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XbaseFactoryImpl.java,v 1.1 2010/01/14 14:40:21 sefftinge Exp $
+ * $Id: XbaseFactoryImpl.java,v 1.2 2010/01/16 08:50:53 sefftinge Exp $
  */
 package org.eclipse.xtext.xbase.impl;
 
@@ -60,9 +60,10 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case XbasePackage.FILE: return createFile();
-			case XbasePackage.IMPORT: return createImport();
-			case XbasePackage.FUNCTION: return createFunction();
+			case XbasePackage.XFILE: return createXFile();
+			case XbasePackage.XIMPORT: return createXImport();
+			case XbasePackage.XFUNCTION: return createXFunction();
+			case XbasePackage.XCLASS: return createXClass();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -73,9 +74,9 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public File createFile() {
-		FileImpl file = new FileImpl();
-		return file;
+	public XFile createXFile() {
+		XFileImpl xFile = new XFileImpl();
+		return xFile;
 	}
 
 	/**
@@ -83,9 +84,9 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Import createImport() {
-		ImportImpl import_ = new ImportImpl();
-		return import_;
+	public XImport createXImport() {
+		XImportImpl xImport = new XImportImpl();
+		return xImport;
 	}
 
 	/**
@@ -93,9 +94,19 @@ public class XbaseFactoryImpl extends EFactoryImpl implements XbaseFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Function createFunction() {
-		FunctionImpl function = new FunctionImpl();
-		return function;
+	public XFunction createXFunction() {
+		XFunctionImpl xFunction = new XFunctionImpl();
+		return xFunction;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public XClass createXClass() {
+		XClassImpl xClass = new XClassImpl();
+		return xClass;
 	}
 
 	/**

@@ -42,16 +42,15 @@ T43 : 'while' ;
 T44 : 'case' ;
 T45 : ';' ;
 T46 : 'def' ;
-T47 : ':=' ;
-T48 : 'new' ;
-T49 : 'false' ;
-T50 : 'true' ;
-T51 : 'null' ;
-T52 : 'class' ;
-T53 : '=>' ;
-T54 : '?' ;
-T55 : 'extends' ;
-T56 : 'super' ;
+T47 : 'new' ;
+T48 : 'false' ;
+T49 : 'true' ;
+T50 : 'null' ;
+T51 : 'class' ;
+T52 : '=>' ;
+T53 : '?' ;
+T54 : 'extends' ;
+T55 : 'super' ;
 
 // $ANTLR src "../org.eclipse.xtext.xbase/src-gen/org/eclipse/xtext/xbase/parser/antlr/internal/InternalXpression.g" 3584
 RULE_RICH_STRING : '\u00BB' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'\u00AB')))* '\u00AB';

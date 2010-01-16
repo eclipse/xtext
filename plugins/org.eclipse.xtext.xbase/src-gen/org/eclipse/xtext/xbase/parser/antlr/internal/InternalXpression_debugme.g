@@ -5,65 +5,65 @@ options {
 	
 }
 
-entryRuleExpression :
-	 ruleExpression 
+entryRuleXExpression :
+	 ruleXExpression 
 	 EOF 
 ;
 
 
 
-// Rule Expression
-ruleExpression :
-	ruleAssignment
+// Rule XExpression
+ruleXExpression :
+	ruleXAssignment
 ;
 
 
 
-// Rule Assignment
-ruleAssignment :
-(	ruleOrExpression(()(	
+// Rule XAssignment
+ruleXAssignment :
+(	ruleXOrExpression(()(	
 	'=' 
 
     |
 	'+=' 
-)(		ruleOrExpression))?)
+)(		ruleXOrExpression))?)
 ;
 
 
 
-// Rule OrExpression
-ruleOrExpression :
-(	ruleAndExpression(()(	
+// Rule XOrExpression
+ruleXOrExpression :
+(	ruleXAndExpression(()(	
 	'||' 
-)(		ruleAndExpression))*)
+)(		ruleXAndExpression))*)
 ;
 
 
 
-// Rule AndExpression
-ruleAndExpression :
-(	ruleEqualityExpression(()(	
+// Rule XAndExpression
+ruleXAndExpression :
+(	ruleXEqualityExpression(()(	
 	'&&' 
-)(		ruleEqualityExpression))*)
+)(		ruleXEqualityExpression))*)
 ;
 
 
 
-// Rule EqualityExpression
-ruleEqualityExpression :
-(	ruleRelationalExpression(()(	
+// Rule XEqualityExpression
+ruleXEqualityExpression :
+(	ruleXRelationalExpression(()(	
 	'==' 
 
     |
 	'!=' 
-)(		ruleRelationalExpression))*)
+)(		ruleXRelationalExpression))*)
 ;
 
 
 
-// Rule RelationalExpression
-ruleRelationalExpression :
-(	ruleAdditiveExpression((()
+// Rule XRelationalExpression
+ruleXRelationalExpression :
+(	ruleXAdditiveExpression((()
 	'instanceof' 
 (			ruleQualifiedName))
     |(()(	
@@ -77,26 +77,26 @@ ruleRelationalExpression :
 
     |
 	'<' 
-)(		ruleAdditiveExpression)))*)
+)(		ruleXAdditiveExpression)))*)
 ;
 
 
 
-// Rule AdditiveExpression
-ruleAdditiveExpression :
-(	ruleMultiplicativeExpression(()(	
+// Rule XAdditiveExpression
+ruleXAdditiveExpression :
+(	ruleXMultiplicativeExpression(()(	
 	'+' 
 
     |
 	'-' 
-)(		ruleMultiplicativeExpression))*)
+)(		ruleXMultiplicativeExpression))*)
 ;
 
 
 
-// Rule MultiplicativeExpression
-ruleMultiplicativeExpression :
-(	ruleOtherOperatorExpression(()(	
+// Rule XMultiplicativeExpression
+ruleXMultiplicativeExpression :
+(	ruleXOtherOperatorExpression(()(	
 	'*' 
 
     |
@@ -104,25 +104,25 @@ ruleMultiplicativeExpression :
 
     |
 	'%' 
-)(		ruleOtherOperatorExpression))*)
+)(		ruleXOtherOperatorExpression))*)
 ;
 
 
 
-// Rule OtherOperatorExpression
-ruleOtherOperatorExpression :
-(	ruleUnaryOperation(()(	
+// Rule XOtherOperatorExpression
+ruleXOtherOperatorExpression :
+(	ruleXUnaryOperation(()(	
 	'->' 
 
     |
 	'..' 
-)(		ruleUnaryOperation))*)
+)(		ruleXUnaryOperation))*)
 ;
 
 
 
-// Rule UnaryOperation
-ruleUnaryOperation :
+// Rule XUnaryOperation
+ruleXUnaryOperation :
 ((()(	
 	'!' 
 
@@ -131,131 +131,131 @@ ruleUnaryOperation :
 
     |
 	'+' 
-)(		ruleFeatureCall))
+)(		ruleXFeatureCall))
     |(()
 	'(' 
-(		ruleTypeRef)
+(		ruleXTypeRef)
 	')' 
-(		ruleExpression))
-    |	ruleFeatureCall)
+(		ruleXExpression))
+    |	ruleXFeatureCall)
 ;
 
 
 
-// Rule FeatureCall
-ruleFeatureCall :
-(	rulePrimaryExpression(()
+// Rule XFeatureCall
+ruleXFeatureCall :
+(	ruleXPrimaryExpression(()
 	'.' 
 (		RULE_ID)(
 	'(' 
-((		ruleExpression)(
+((		ruleXExpression)(
 	',' 
-(		ruleExpression))*)?
+(		ruleXExpression))*)?
 	')' 
 )?)*)
 ;
 
 
 
-// Rule PrimaryExpression
-rulePrimaryExpression :
-(	ruleClosure
-    |	ruleBooleanLiteral
-    |	ruleIntLiteral
-    |	ruleNullLiteral
-    |	ruleStringLiteral
-    |	ruleTypeLiteral
-    |	ruleConstructorCall
-    |	ruleBlockExpression
-    |	ruleRichString
-    |	ruleIfExpression
-    |	ruleSwitchExpression
-    |	ruleWhileExpression
-    |	ruleSimpleFeatureCall
-    |	ruleParenthesizedExpression)
+// Rule XPrimaryExpression
+ruleXPrimaryExpression :
+(	ruleXClosure
+    |	ruleXBooleanLiteral
+    |	ruleXIntLiteral
+    |	ruleXNullLiteral
+    |	ruleXStringLiteral
+    |	ruleXTypeLiteral
+    |	ruleXConstructorCall
+    |	ruleXBlockExpression
+    |	ruleXRichString
+    |	ruleXIfExpression
+    |	ruleXSwitchExpression
+    |	ruleXWhileExpression
+    |	ruleXSimpleFeatureCall
+    |	ruleXParenthesizedExpression)
 ;
 
 
 
-// Rule Closure
-ruleClosure :
-(()((		ruleDeclaredParameter)(
+// Rule XClosure
+ruleXClosure :
+(()((		ruleXDeclaredParameter)(
 	',' 
-(		ruleDeclaredParameter))*)?
+(		ruleXDeclaredParameter))*)?
 	'|' 
-(		ruleExpression))
+(		ruleXExpression))
 ;
 
 
 
-// Rule ParenthesizedExpression
-ruleParenthesizedExpression :
+// Rule XParenthesizedExpression
+ruleXParenthesizedExpression :
 (
 	'(' 
-	ruleExpression
+	ruleXExpression
 	')' 
 )
 ;
 
 
 
-// Rule IfExpression
-ruleIfExpression :
+// Rule XIfExpression
+ruleXIfExpression :
 (
 	'if' 
 
 	'(' 
-(		ruleExpression)
+(		ruleXExpression)
 	')' 
-(		ruleExpression)(
+(		ruleXExpression)(
 	'else' 
-(		ruleExpression))?)
+(		ruleXExpression))?)
 ;
 
 
 
-// Rule SwitchExpression
-ruleSwitchExpression :
+// Rule XSwitchExpression
+ruleXSwitchExpression :
 (
 	'switch' 
-(		ruleExpression)?
+(		ruleXExpression)?
 	'{' 
-(		ruleCasePart)+(
+(		ruleXCasePart)+(
 	'default' 
 
 	':' 
-(		ruleExpression))?
+(		ruleXExpression))?
 	'}' 
 )
 ;
 
 
 
-// Rule WhileExpression
-ruleWhileExpression :
+// Rule XWhileExpression
+ruleXWhileExpression :
 (
 	'while' 
-(		ruleParenthesizedExpression)(		ruleExpression))
+(		ruleXParenthesizedExpression)(		ruleXExpression))
 ;
 
 
 
-// Rule CasePart
-ruleCasePart :
+// Rule XCasePart
+ruleXCasePart :
 (
 	'case' 
-(		ruleExpression)
+(		ruleXExpression)
 	':' 
-(		ruleExpression))
+(		ruleXExpression))
 ;
 
 
 
-// Rule BlockExpression
-ruleBlockExpression :
+// Rule XBlockExpression
+ruleXBlockExpression :
 (
 	'{' 
-((		ruleExpressionInsideBlock)
+((		ruleXExpressionInsideBlock)
 	';' 
 )+
 	'}' 
@@ -264,63 +264,63 @@ ruleBlockExpression :
 
 
 
-// Rule ExpressionInsideBlock
-ruleExpressionInsideBlock :
-(	ruleVariableDeclaration
-    |	ruleExpression)
+// Rule XExpressionInsideBlock
+ruleXExpressionInsideBlock :
+(	ruleXVariableDeclaration
+    |	ruleXExpression)
 ;
 
 
 
-// Rule VariableDeclaration
-ruleVariableDeclaration :
+// Rule XVariableDeclaration
+ruleXVariableDeclaration :
 ((
 	'def' 
 
-    |(		ruleTypeRef))(		RULE_ID)
-	':=' 
-(		ruleExpression))
+    |(		ruleXTypeRef))(		RULE_ID)
+	'=' 
+(		ruleXExpression))
 ;
 
 
 
-// Rule DeclaredParameter
-ruleDeclaredParameter :
-((		ruleTypeRef)?(		RULE_ID))
+// Rule XDeclaredParameter
+ruleXDeclaredParameter :
+((		ruleXTypeRef)?(		RULE_ID))
 ;
 
 
 
-// Rule SimpleFeatureCall
-ruleSimpleFeatureCall :
+// Rule XSimpleFeatureCall
+ruleXSimpleFeatureCall :
 ((		RULE_ID)(
 	'(' 
-((		ruleExpression)(
+((		ruleXExpression)(
 	',' 
-(		ruleExpression))*)?
+(		ruleXExpression))*)?
 	')' 
 )?)
 ;
 
 
 
-// Rule ConstructorCall
-ruleConstructorCall :
+// Rule XConstructorCall
+ruleXConstructorCall :
 (
 	'new' 
-(		ruleTypeRef)(
+(		ruleXTypeRef)(
 	'(' 
-((		ruleExpression)(
+((		ruleXExpression)(
 	',' 
-(		ruleExpression))*)?
+(		ruleXExpression))*)?
 	')' 
-)?(		ruleBlockExpression)?)
+)?(		ruleXBlockExpression)?)
 ;
 
 
 
-// Rule BooleanLiteral
-ruleBooleanLiteral :
+// Rule XBooleanLiteral
+ruleXBooleanLiteral :
 ((()
 	'false' 
 )
@@ -331,8 +331,8 @@ ruleBooleanLiteral :
 
 
 
-// Rule NullLiteral
-ruleNullLiteral :
+// Rule XNullLiteral
+ruleXNullLiteral :
 (()
 	'null' 
 )
@@ -340,22 +340,22 @@ ruleNullLiteral :
 
 
 
-// Rule IntLiteral
-ruleIntLiteral :
+// Rule XIntLiteral
+ruleXIntLiteral :
 (		RULE_INT)
 ;
 
 
 
-// Rule StringLiteral
-ruleStringLiteral :
+// Rule XStringLiteral
+ruleXStringLiteral :
 (		RULE_STRING)
 ;
 
 
 
-// Rule TypeLiteral
-ruleTypeLiteral :
+// Rule XTypeLiteral
+ruleXTypeLiteral :
 ((			ruleQualifiedName)
 	'.' 
 
@@ -365,74 +365,74 @@ ruleTypeLiteral :
 
 
 
-// Rule RichString
-ruleRichString :
-((		ruleRichStringLiteral)((		ruleExpression)(		ruleRichStringLiteral))*)
+// Rule XRichString
+ruleXRichString :
+((		ruleXRichStringLiteral)((		ruleXExpression)(		ruleXRichStringLiteral))*)
 ;
 
 
 
-// Rule RichStringLiteral
-ruleRichStringLiteral :
+// Rule XRichStringLiteral
+ruleXRichStringLiteral :
 (		RULE_RICH_STRING)
 ;
 
 
 
-// Rule TypeRef
-ruleTypeRef :
-(	ruleSimpleTypeRef
-    |	ruleFunctionTypeRef)
+// Rule XTypeRef
+ruleXTypeRef :
+(	ruleXSimpleTypeRef
+    |	ruleXFunctionTypeRef)
 ;
 
 
 
-// Rule FunctionTypeRef
-ruleFunctionTypeRef :
+// Rule XFunctionTypeRef
+ruleXFunctionTypeRef :
 ((
 	'(' 
-(		ruleTypeRef)(
+(		ruleXTypeRef)(
 	',' 
-(		ruleTypeRef))*
+(		ruleXTypeRef))*
 	')' 
 )?
 	'=>' 
-(		ruleTypeRef))
+(		ruleXTypeRef))
 ;
 
 
 
-// Rule SimpleTypeRef
-ruleSimpleTypeRef :
+// Rule XSimpleTypeRef
+ruleXSimpleTypeRef :
 ((			ruleQualifiedName)(
 	'<' 
-(		ruleTypeParam)(
+(		ruleXTypeParam)(
 	',' 
-(		ruleTypeParam))*
+(		ruleXTypeParam))*
 	'>' 
 )?)
 ;
 
 
 
-// Rule TypeParam
-ruleTypeParam :
-(	ruleTypeRef
-    |	ruleWildcardParam)
+// Rule XTypeParam
+ruleXTypeParam :
+(	ruleXTypeRef
+    |	ruleXWildcardParam)
 ;
 
 
 
-// Rule WildcardParam
-ruleWildcardParam :
+// Rule XWildcardParam
+ruleXWildcardParam :
 (()
 	'?' 
 ((
 	'extends' 
-(		ruleTypeRef))
+(		ruleXTypeRef))
     |(
 	'super' 
-(		ruleTypeRef)))?)
+(		ruleXTypeRef)))?)
 ;
 
 

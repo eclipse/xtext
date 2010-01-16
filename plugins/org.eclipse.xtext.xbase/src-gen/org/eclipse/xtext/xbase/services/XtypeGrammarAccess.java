@@ -17,72 +17,72 @@ import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
-	public class TypeRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeRef");
+	public class XTypeRefElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "XTypeRef");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cSimpleTypeRefParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cFunctionTypeRefParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cXSimpleTypeRefParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cXFunctionTypeRefParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//TypeRef:
-		//  SimpleTypeRef|FunctionTypeRef;
+		//XTypeRef:
+		//  XSimpleTypeRef|XFunctionTypeRef;
 		public ParserRule getRule() { return rule; }
 
-		//SimpleTypeRef|FunctionTypeRef
+		//XSimpleTypeRef|XFunctionTypeRef
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//SimpleTypeRef
-		public RuleCall getSimpleTypeRefParserRuleCall_0() { return cSimpleTypeRefParserRuleCall_0; }
+		//XSimpleTypeRef
+		public RuleCall getXSimpleTypeRefParserRuleCall_0() { return cXSimpleTypeRefParserRuleCall_0; }
 
-		//FunctionTypeRef
-		public RuleCall getFunctionTypeRefParserRuleCall_1() { return cFunctionTypeRefParserRuleCall_1; }
+		//XFunctionTypeRef
+		public RuleCall getXFunctionTypeRefParserRuleCall_1() { return cXFunctionTypeRefParserRuleCall_1; }
 	}
 
-	public class FunctionTypeRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "FunctionTypeRef");
+	public class XFunctionTypeRefElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "XFunctionTypeRef");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Group cGroup_0 = (Group)cGroup.eContents().get(0);
 		private final Keyword cLeftParenthesisKeyword_0_0 = (Keyword)cGroup_0.eContents().get(0);
 		private final Assignment cParamTypesAssignment_0_1 = (Assignment)cGroup_0.eContents().get(1);
-		private final RuleCall cParamTypesTypeRefParserRuleCall_0_1_0 = (RuleCall)cParamTypesAssignment_0_1.eContents().get(0);
+		private final RuleCall cParamTypesXTypeRefParserRuleCall_0_1_0 = (RuleCall)cParamTypesAssignment_0_1.eContents().get(0);
 		private final Group cGroup_0_2 = (Group)cGroup_0.eContents().get(2);
 		private final Keyword cCommaKeyword_0_2_0 = (Keyword)cGroup_0_2.eContents().get(0);
 		private final Assignment cParamTypesAssignment_0_2_1 = (Assignment)cGroup_0_2.eContents().get(1);
-		private final RuleCall cParamTypesTypeRefParserRuleCall_0_2_1_0 = (RuleCall)cParamTypesAssignment_0_2_1.eContents().get(0);
+		private final RuleCall cParamTypesXTypeRefParserRuleCall_0_2_1_0 = (RuleCall)cParamTypesAssignment_0_2_1.eContents().get(0);
 		private final Keyword cRightParenthesisKeyword_0_3 = (Keyword)cGroup_0.eContents().get(3);
 		private final Keyword cEqualsSignGreaterThanSignKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Assignment cReturnTypeAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cReturnTypeTypeRefParserRuleCall_2_0 = (RuleCall)cReturnTypeAssignment_2.eContents().get(0);
+		private final RuleCall cReturnTypeXTypeRefParserRuleCall_2_0 = (RuleCall)cReturnTypeAssignment_2.eContents().get(0);
 		
-		//FunctionTypeRef:
-		//  ("(" paramTypes+=TypeRef ("," paramTypes+=TypeRef)* ")")? "=>" returnType=TypeRef;
+		//XFunctionTypeRef:
+		//  ("(" paramTypes+=XTypeRef ("," paramTypes+=XTypeRef)* ")")? "=>" returnType=XTypeRef;
 		public ParserRule getRule() { return rule; }
 
-		//("(" paramTypes+=TypeRef ("," paramTypes+=TypeRef)* ")")? "=>" returnType=TypeRef
+		//("(" paramTypes+=XTypeRef ("," paramTypes+=XTypeRef)* ")")? "=>" returnType=XTypeRef
 		public Group getGroup() { return cGroup; }
 
-		//("(" paramTypes+=TypeRef ("," paramTypes+=TypeRef)* ")")?
+		//("(" paramTypes+=XTypeRef ("," paramTypes+=XTypeRef)* ")")?
 		public Group getGroup_0() { return cGroup_0; }
 
 		//"("
 		public Keyword getLeftParenthesisKeyword_0_0() { return cLeftParenthesisKeyword_0_0; }
 
-		//paramTypes+=TypeRef
+		//paramTypes+=XTypeRef
 		public Assignment getParamTypesAssignment_0_1() { return cParamTypesAssignment_0_1; }
 
-		//TypeRef
-		public RuleCall getParamTypesTypeRefParserRuleCall_0_1_0() { return cParamTypesTypeRefParserRuleCall_0_1_0; }
+		//XTypeRef
+		public RuleCall getParamTypesXTypeRefParserRuleCall_0_1_0() { return cParamTypesXTypeRefParserRuleCall_0_1_0; }
 
-		//("," paramTypes+=TypeRef)*
+		//("," paramTypes+=XTypeRef)*
 		public Group getGroup_0_2() { return cGroup_0_2; }
 
 		//","
 		public Keyword getCommaKeyword_0_2_0() { return cCommaKeyword_0_2_0; }
 
-		//paramTypes+=TypeRef
+		//paramTypes+=XTypeRef
 		public Assignment getParamTypesAssignment_0_2_1() { return cParamTypesAssignment_0_2_1; }
 
-		//TypeRef
-		public RuleCall getParamTypesTypeRefParserRuleCall_0_2_1_0() { return cParamTypesTypeRefParserRuleCall_0_2_1_0; }
+		//XTypeRef
+		public RuleCall getParamTypesXTypeRefParserRuleCall_0_2_1_0() { return cParamTypesXTypeRefParserRuleCall_0_2_1_0; }
 
 		//")"
 		public Keyword getRightParenthesisKeyword_0_3() { return cRightParenthesisKeyword_0_3; }
@@ -90,15 +90,15 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		//"=>"
 		public Keyword getEqualsSignGreaterThanSignKeyword_1() { return cEqualsSignGreaterThanSignKeyword_1; }
 
-		//returnType=TypeRef
+		//returnType=XTypeRef
 		public Assignment getReturnTypeAssignment_2() { return cReturnTypeAssignment_2; }
 
-		//TypeRef
-		public RuleCall getReturnTypeTypeRefParserRuleCall_2_0() { return cReturnTypeTypeRefParserRuleCall_2_0; }
+		//XTypeRef
+		public RuleCall getReturnTypeXTypeRefParserRuleCall_2_0() { return cReturnTypeXTypeRefParserRuleCall_2_0; }
 	}
 
-	public class SimpleTypeRefElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SimpleTypeRef");
+	public class XSimpleTypeRefElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "XSimpleTypeRef");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final CrossReference cTypeTypeCrossReference_0_0 = (CrossReference)cTypeAssignment_0.eContents().get(0);
@@ -106,20 +106,20 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Keyword cLessThanSignKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cTypeParamsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
-		private final RuleCall cTypeParamsTypeParamParserRuleCall_1_1_0 = (RuleCall)cTypeParamsAssignment_1_1.eContents().get(0);
+		private final RuleCall cTypeParamsXTypeParamParserRuleCall_1_1_0 = (RuleCall)cTypeParamsAssignment_1_1.eContents().get(0);
 		private final Group cGroup_1_2 = (Group)cGroup_1.eContents().get(2);
 		private final Keyword cCommaKeyword_1_2_0 = (Keyword)cGroup_1_2.eContents().get(0);
 		private final Assignment cTypeParamsAssignment_1_2_1 = (Assignment)cGroup_1_2.eContents().get(1);
-		private final RuleCall cTypeParamsTypeParamParserRuleCall_1_2_1_0 = (RuleCall)cTypeParamsAssignment_1_2_1.eContents().get(0);
+		private final RuleCall cTypeParamsXTypeParamParserRuleCall_1_2_1_0 = (RuleCall)cTypeParamsAssignment_1_2_1.eContents().get(0);
 		private final Keyword cGreaterThanSignKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
 		
-		//SimpleTypeRef:
-		//  type=[types::Type|QualifiedName] ("<" typeParams+=TypeParam ("," typeParams+=
-		//  TypeParam)* ">")?;
+		//XSimpleTypeRef:
+		//  type=[types::Type|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=
+		//  XTypeParam)* ">")?;
 		public ParserRule getRule() { return rule; }
 
-		//type=[types::Type|QualifiedName] ("<" typeParams+=TypeParam ("," typeParams+=
-		//TypeParam)* ">")?
+		//type=[types::Type|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=
+		//XTypeParam)* ">")?
 		public Group getGroup() { return cGroup; }
 
 		//type=[types::Type|QualifiedName]
@@ -131,112 +131,112 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		//QualifiedName
 		public RuleCall getTypeTypeQualifiedNameParserRuleCall_0_0_1() { return cTypeTypeQualifiedNameParserRuleCall_0_0_1; }
 
-		//("<" typeParams+=TypeParam ("," typeParams+=TypeParam)* ">")?
+		//("<" typeParams+=XTypeParam ("," typeParams+=XTypeParam)* ">")?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//"<"
 		public Keyword getLessThanSignKeyword_1_0() { return cLessThanSignKeyword_1_0; }
 
-		//typeParams+=TypeParam
+		//typeParams+=XTypeParam
 		public Assignment getTypeParamsAssignment_1_1() { return cTypeParamsAssignment_1_1; }
 
-		//TypeParam
-		public RuleCall getTypeParamsTypeParamParserRuleCall_1_1_0() { return cTypeParamsTypeParamParserRuleCall_1_1_0; }
+		//XTypeParam
+		public RuleCall getTypeParamsXTypeParamParserRuleCall_1_1_0() { return cTypeParamsXTypeParamParserRuleCall_1_1_0; }
 
-		//("," typeParams+=TypeParam)*
+		//("," typeParams+=XTypeParam)*
 		public Group getGroup_1_2() { return cGroup_1_2; }
 
 		//","
 		public Keyword getCommaKeyword_1_2_0() { return cCommaKeyword_1_2_0; }
 
-		//typeParams+=TypeParam
+		//typeParams+=XTypeParam
 		public Assignment getTypeParamsAssignment_1_2_1() { return cTypeParamsAssignment_1_2_1; }
 
-		//TypeParam
-		public RuleCall getTypeParamsTypeParamParserRuleCall_1_2_1_0() { return cTypeParamsTypeParamParserRuleCall_1_2_1_0; }
+		//XTypeParam
+		public RuleCall getTypeParamsXTypeParamParserRuleCall_1_2_1_0() { return cTypeParamsXTypeParamParserRuleCall_1_2_1_0; }
 
 		//">"
 		public Keyword getGreaterThanSignKeyword_1_3() { return cGreaterThanSignKeyword_1_3; }
 	}
 
-	public class TypeParamElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeParam");
+	public class XTypeParamElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "XTypeParam");
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
-		private final RuleCall cTypeRefParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
-		private final RuleCall cWildcardParamParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cXTypeRefParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final RuleCall cXWildcardParamParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
 		
-		//TypeParam returns TypeRef:
-		//  TypeRef|WildcardParam;
+		//XTypeParam returns XTypeRef:
+		//  XTypeRef|XWildcardParam;
 		public ParserRule getRule() { return rule; }
 
-		//TypeRef|WildcardParam
+		//XTypeRef|XWildcardParam
 		public Alternatives getAlternatives() { return cAlternatives; }
 
-		//TypeRef
-		public RuleCall getTypeRefParserRuleCall_0() { return cTypeRefParserRuleCall_0; }
+		//XTypeRef
+		public RuleCall getXTypeRefParserRuleCall_0() { return cXTypeRefParserRuleCall_0; }
 
-		//WildcardParam
-		public RuleCall getWildcardParamParserRuleCall_1() { return cWildcardParamParserRuleCall_1; }
+		//XWildcardParam
+		public RuleCall getXWildcardParamParserRuleCall_1() { return cXWildcardParamParserRuleCall_1; }
 	}
 
-	public class WildcardParamElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "WildcardParam");
+	public class XWildcardParamElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "XWildcardParam");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cWildcardParamAction_0 = (Action)cGroup.eContents().get(0);
+		private final Action cXWildcardParamAction_0 = (Action)cGroup.eContents().get(0);
 		private final Keyword cQuestionMarkKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
 		private final Group cGroup_2_0 = (Group)cAlternatives_2.eContents().get(0);
 		private final Keyword cExtendsKeyword_2_0_0 = (Keyword)cGroup_2_0.eContents().get(0);
 		private final Assignment cExtendsAssignment_2_0_1 = (Assignment)cGroup_2_0.eContents().get(1);
-		private final RuleCall cExtendsTypeRefParserRuleCall_2_0_1_0 = (RuleCall)cExtendsAssignment_2_0_1.eContents().get(0);
+		private final RuleCall cExtendsXTypeRefParserRuleCall_2_0_1_0 = (RuleCall)cExtendsAssignment_2_0_1.eContents().get(0);
 		private final Group cGroup_2_1 = (Group)cAlternatives_2.eContents().get(1);
 		private final Keyword cSuperKeyword_2_1_0 = (Keyword)cGroup_2_1.eContents().get(0);
 		private final Assignment cSuperAssignment_2_1_1 = (Assignment)cGroup_2_1.eContents().get(1);
-		private final RuleCall cSuperTypeRefParserRuleCall_2_1_1_0 = (RuleCall)cSuperAssignment_2_1_1.eContents().get(0);
+		private final RuleCall cSuperXTypeRefParserRuleCall_2_1_1_0 = (RuleCall)cSuperAssignment_2_1_1.eContents().get(0);
 		
-		//WildcardParam returns TypeRef:
-		//  {WildcardParam} "?" ("extends" extends=TypeRef|"super" super=TypeRef)?;
+		//XWildcardParam returns XTypeRef:
+		//  {XWildcardParam} "?" ("extends" extends=XTypeRef|"super" super=XTypeRef)?;
 		public ParserRule getRule() { return rule; }
 
-		//{WildcardParam} "?" ("extends" extends=TypeRef|"super" super=TypeRef)?
+		//{XWildcardParam} "?" ("extends" extends=XTypeRef|"super" super=XTypeRef)?
 		public Group getGroup() { return cGroup; }
 
-		//{WildcardParam}
-		public Action getWildcardParamAction_0() { return cWildcardParamAction_0; }
+		//{XWildcardParam}
+		public Action getXWildcardParamAction_0() { return cXWildcardParamAction_0; }
 
 		//"?"
 		public Keyword getQuestionMarkKeyword_1() { return cQuestionMarkKeyword_1; }
 
-		//("extends" extends=TypeRef|"super" super=TypeRef)?
+		//("extends" extends=XTypeRef|"super" super=XTypeRef)?
 		public Alternatives getAlternatives_2() { return cAlternatives_2; }
 
-		//"extends" extends=TypeRef
+		//"extends" extends=XTypeRef
 		public Group getGroup_2_0() { return cGroup_2_0; }
 
 		//"extends"
 		public Keyword getExtendsKeyword_2_0_0() { return cExtendsKeyword_2_0_0; }
 
-		//extends=TypeRef
+		//extends=XTypeRef
 		public Assignment getExtendsAssignment_2_0_1() { return cExtendsAssignment_2_0_1; }
 
-		//TypeRef
-		public RuleCall getExtendsTypeRefParserRuleCall_2_0_1_0() { return cExtendsTypeRefParserRuleCall_2_0_1_0; }
+		//XTypeRef
+		public RuleCall getExtendsXTypeRefParserRuleCall_2_0_1_0() { return cExtendsXTypeRefParserRuleCall_2_0_1_0; }
 
-		//"super" super=TypeRef
+		//"super" super=XTypeRef
 		public Group getGroup_2_1() { return cGroup_2_1; }
 
 		//"super"
 		public Keyword getSuperKeyword_2_1_0() { return cSuperKeyword_2_1_0; }
 
-		//super=TypeRef
+		//super=XTypeRef
 		public Assignment getSuperAssignment_2_1_1() { return cSuperAssignment_2_1_1; }
 
-		//TypeRef
-		public RuleCall getSuperTypeRefParserRuleCall_2_1_1_0() { return cSuperTypeRefParserRuleCall_2_1_1_0; }
+		//XTypeRef
+		public RuleCall getSuperXTypeRefParserRuleCall_2_1_1_0() { return cSuperXTypeRefParserRuleCall_2_1_1_0; }
 	}
 
-	public class TypeParamDeclarationElements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TypeParamDeclaration");
+	public class XTypeParamDeclarationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "XTypeParamDeclaration");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cNameAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cNameIDTerminalRuleCall_0_0 = (RuleCall)cNameAssignment_0.eContents().get(0);
@@ -244,21 +244,23 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
 		private final Keyword cExtendsKeyword_1_0_0 = (Keyword)cGroup_1_0.eContents().get(0);
 		private final Assignment cExtendsAssignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
-		private final RuleCall cExtendsTypeRefParserRuleCall_1_0_1_0 = (RuleCall)cExtendsAssignment_1_0_1.eContents().get(0);
+		private final RuleCall cExtendsXTypeRefParserRuleCall_1_0_1_0 = (RuleCall)cExtendsAssignment_1_0_1.eContents().get(0);
 		private final Group cGroup_1_0_2 = (Group)cGroup_1_0.eContents().get(2);
 		private final Keyword cAmpersandKeyword_1_0_2_0 = (Keyword)cGroup_1_0_2.eContents().get(0);
 		private final Assignment cExtendsAssignment_1_0_2_1 = (Assignment)cGroup_1_0_2.eContents().get(1);
-		private final RuleCall cExtendsTypeRefParserRuleCall_1_0_2_1_0 = (RuleCall)cExtendsAssignment_1_0_2_1.eContents().get(0);
+		private final RuleCall cExtendsXTypeRefParserRuleCall_1_0_2_1_0 = (RuleCall)cExtendsAssignment_1_0_2_1.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
 		private final Keyword cSuperKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
 		private final Assignment cSuperAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
-		private final RuleCall cSuperTypeRefParserRuleCall_1_1_1_0 = (RuleCall)cSuperAssignment_1_1_1.eContents().get(0);
+		private final RuleCall cSuperXTypeRefParserRuleCall_1_1_1_0 = (RuleCall)cSuperAssignment_1_1_1.eContents().get(0);
 		
-		//TypeParamDeclaration:
-		//  name=ID ("extends" extends+=TypeRef ("&" extends+=TypeRef)*|"super" super=TypeRef)?;
+		//XTypeParamDeclaration:
+		//  name=ID ("extends" extends+=XTypeRef ("&" extends+=XTypeRef)*|"super" super=XTypeRef)
+		//  ?;
 		public ParserRule getRule() { return rule; }
 
-		//name=ID ("extends" extends+=TypeRef ("&" extends+=TypeRef)*|"super" super=TypeRef)?
+		//name=ID ("extends" extends+=XTypeRef ("&" extends+=XTypeRef)*|"super" super=XTypeRef)
+		//?
 		public Group getGroup() { return cGroup; }
 
 		//name=ID
@@ -267,44 +269,44 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_0_0() { return cNameIDTerminalRuleCall_0_0; }
 
-		//("extends" extends+=TypeRef ("&" extends+=TypeRef)*|"super" super=TypeRef)?
+		//("extends" extends+=XTypeRef ("&" extends+=XTypeRef)*|"super" super=XTypeRef)?
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//"extends" extends+=TypeRef ("&" extends+=TypeRef)*
+		//"extends" extends+=XTypeRef ("&" extends+=XTypeRef)*
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
 		//"extends"
 		public Keyword getExtendsKeyword_1_0_0() { return cExtendsKeyword_1_0_0; }
 
-		//extends+=TypeRef
+		//extends+=XTypeRef
 		public Assignment getExtendsAssignment_1_0_1() { return cExtendsAssignment_1_0_1; }
 
-		//TypeRef
-		public RuleCall getExtendsTypeRefParserRuleCall_1_0_1_0() { return cExtendsTypeRefParserRuleCall_1_0_1_0; }
+		//XTypeRef
+		public RuleCall getExtendsXTypeRefParserRuleCall_1_0_1_0() { return cExtendsXTypeRefParserRuleCall_1_0_1_0; }
 
-		//("&" extends+=TypeRef)*
+		//("&" extends+=XTypeRef)*
 		public Group getGroup_1_0_2() { return cGroup_1_0_2; }
 
 		//"&"
 		public Keyword getAmpersandKeyword_1_0_2_0() { return cAmpersandKeyword_1_0_2_0; }
 
-		//extends+=TypeRef
+		//extends+=XTypeRef
 		public Assignment getExtendsAssignment_1_0_2_1() { return cExtendsAssignment_1_0_2_1; }
 
-		//TypeRef
-		public RuleCall getExtendsTypeRefParserRuleCall_1_0_2_1_0() { return cExtendsTypeRefParserRuleCall_1_0_2_1_0; }
+		//XTypeRef
+		public RuleCall getExtendsXTypeRefParserRuleCall_1_0_2_1_0() { return cExtendsXTypeRefParserRuleCall_1_0_2_1_0; }
 
-		//"super" super=TypeRef
+		//"super" super=XTypeRef
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//"super"
 		public Keyword getSuperKeyword_1_1_0() { return cSuperKeyword_1_1_0; }
 
-		//super=TypeRef
+		//super=XTypeRef
 		public Assignment getSuperAssignment_1_1_1() { return cSuperAssignment_1_1_1; }
 
-		//TypeRef
-		public RuleCall getSuperTypeRefParserRuleCall_1_1_1_0() { return cSuperTypeRefParserRuleCall_1_1_1_0; }
+		//XTypeRef
+		public RuleCall getSuperXTypeRefParserRuleCall_1_1_1_0() { return cSuperXTypeRefParserRuleCall_1_1_1_0; }
 	}
 
 	public class QualifiedNameElements extends AbstractParserRuleElementFinder {
@@ -336,12 +338,12 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 	
 	
-	private TypeRefElements pTypeRef;
-	private FunctionTypeRefElements pFunctionTypeRef;
-	private SimpleTypeRefElements pSimpleTypeRef;
-	private TypeParamElements pTypeParam;
-	private WildcardParamElements pWildcardParam;
-	private TypeParamDeclarationElements pTypeParamDeclaration;
+	private XTypeRefElements pXTypeRef;
+	private XFunctionTypeRefElements pXFunctionTypeRef;
+	private XSimpleTypeRefElements pXSimpleTypeRef;
+	private XTypeParamElements pXTypeParam;
+	private XWildcardParamElements pXWildcardParam;
+	private XTypeParamDeclarationElements pXTypeParamDeclaration;
 	private QualifiedNameElements pQualifiedName;
 	
 	private final GrammarProvider grammarProvider;
@@ -365,65 +367,66 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	
-	//TypeRef:
-	//  SimpleTypeRef|FunctionTypeRef;
-	public TypeRefElements getTypeRefAccess() {
-		return (pTypeRef != null) ? pTypeRef : (pTypeRef = new TypeRefElements());
+	//XTypeRef:
+	//  XSimpleTypeRef|XFunctionTypeRef;
+	public XTypeRefElements getXTypeRefAccess() {
+		return (pXTypeRef != null) ? pXTypeRef : (pXTypeRef = new XTypeRefElements());
 	}
 	
-	public ParserRule getTypeRefRule() {
-		return getTypeRefAccess().getRule();
+	public ParserRule getXTypeRefRule() {
+		return getXTypeRefAccess().getRule();
 	}
 
-	//FunctionTypeRef:
-	//  ("(" paramTypes+=TypeRef ("," paramTypes+=TypeRef)* ")")? "=>" returnType=TypeRef;
-	public FunctionTypeRefElements getFunctionTypeRefAccess() {
-		return (pFunctionTypeRef != null) ? pFunctionTypeRef : (pFunctionTypeRef = new FunctionTypeRefElements());
+	//XFunctionTypeRef:
+	//  ("(" paramTypes+=XTypeRef ("," paramTypes+=XTypeRef)* ")")? "=>" returnType=XTypeRef;
+	public XFunctionTypeRefElements getXFunctionTypeRefAccess() {
+		return (pXFunctionTypeRef != null) ? pXFunctionTypeRef : (pXFunctionTypeRef = new XFunctionTypeRefElements());
 	}
 	
-	public ParserRule getFunctionTypeRefRule() {
-		return getFunctionTypeRefAccess().getRule();
+	public ParserRule getXFunctionTypeRefRule() {
+		return getXFunctionTypeRefAccess().getRule();
 	}
 
-	//SimpleTypeRef:
-	//  type=[types::Type|QualifiedName] ("<" typeParams+=TypeParam ("," typeParams+=
-	//  TypeParam)* ">")?;
-	public SimpleTypeRefElements getSimpleTypeRefAccess() {
-		return (pSimpleTypeRef != null) ? pSimpleTypeRef : (pSimpleTypeRef = new SimpleTypeRefElements());
+	//XSimpleTypeRef:
+	//  type=[types::Type|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=
+	//  XTypeParam)* ">")?;
+	public XSimpleTypeRefElements getXSimpleTypeRefAccess() {
+		return (pXSimpleTypeRef != null) ? pXSimpleTypeRef : (pXSimpleTypeRef = new XSimpleTypeRefElements());
 	}
 	
-	public ParserRule getSimpleTypeRefRule() {
-		return getSimpleTypeRefAccess().getRule();
+	public ParserRule getXSimpleTypeRefRule() {
+		return getXSimpleTypeRefAccess().getRule();
 	}
 
-	//TypeParam returns TypeRef:
-	//  TypeRef|WildcardParam;
-	public TypeParamElements getTypeParamAccess() {
-		return (pTypeParam != null) ? pTypeParam : (pTypeParam = new TypeParamElements());
+	//XTypeParam returns XTypeRef:
+	//  XTypeRef|XWildcardParam;
+	public XTypeParamElements getXTypeParamAccess() {
+		return (pXTypeParam != null) ? pXTypeParam : (pXTypeParam = new XTypeParamElements());
 	}
 	
-	public ParserRule getTypeParamRule() {
-		return getTypeParamAccess().getRule();
+	public ParserRule getXTypeParamRule() {
+		return getXTypeParamAccess().getRule();
 	}
 
-	//WildcardParam returns TypeRef:
-	//  {WildcardParam} "?" ("extends" extends=TypeRef|"super" super=TypeRef)?;
-	public WildcardParamElements getWildcardParamAccess() {
-		return (pWildcardParam != null) ? pWildcardParam : (pWildcardParam = new WildcardParamElements());
+	//XWildcardParam returns XTypeRef:
+	//  {XWildcardParam} "?" ("extends" extends=XTypeRef|"super" super=XTypeRef)?;
+	public XWildcardParamElements getXWildcardParamAccess() {
+		return (pXWildcardParam != null) ? pXWildcardParam : (pXWildcardParam = new XWildcardParamElements());
 	}
 	
-	public ParserRule getWildcardParamRule() {
-		return getWildcardParamAccess().getRule();
+	public ParserRule getXWildcardParamRule() {
+		return getXWildcardParamAccess().getRule();
 	}
 
-	//TypeParamDeclaration:
-	//  name=ID ("extends" extends+=TypeRef ("&" extends+=TypeRef)*|"super" super=TypeRef)?;
-	public TypeParamDeclarationElements getTypeParamDeclarationAccess() {
-		return (pTypeParamDeclaration != null) ? pTypeParamDeclaration : (pTypeParamDeclaration = new TypeParamDeclarationElements());
+	//XTypeParamDeclaration:
+	//  name=ID ("extends" extends+=XTypeRef ("&" extends+=XTypeRef)*|"super" super=XTypeRef)
+	//  ?;
+	public XTypeParamDeclarationElements getXTypeParamDeclarationAccess() {
+		return (pXTypeParamDeclaration != null) ? pXTypeParamDeclaration : (pXTypeParamDeclaration = new XTypeParamDeclarationElements());
 	}
 	
-	public ParserRule getTypeParamDeclarationRule() {
-		return getTypeParamDeclarationAccess().getRule();
+	public ParserRule getXTypeParamDeclarationRule() {
+		return getXTypeParamDeclarationAccess().getRule();
 	}
 
 	//QualifiedName returns ecore::EString:

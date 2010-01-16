@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtypeFactory.java,v 1.1 2010/01/14 14:40:17 sefftinge Exp $
+ * $Id: XtypeFactory.java,v 1.2 2010/01/16 08:50:52 sefftinge Exp $
  */
 package org.eclipse.xtext.xtype;
 
@@ -26,49 +26,49 @@ public interface XtypeFactory extends EFactory {
 	XtypeFactory eINSTANCE = org.eclipse.xtext.xtype.impl.XtypeFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Type Ref</em>'.
+	 * Returns a new object of class '<em>XType Ref</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Type Ref</em>'.
+	 * @return a new object of class '<em>XType Ref</em>'.
 	 * @generated
 	 */
-	TypeRef createTypeRef();
+	XTypeRef createXTypeRef();
 
 	/**
-	 * Returns a new object of class '<em>Function Type Ref</em>'.
+	 * Returns a new object of class '<em>XFunction Type Ref</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Function Type Ref</em>'.
+	 * @return a new object of class '<em>XFunction Type Ref</em>'.
 	 * @generated
 	 */
-	FunctionTypeRef createFunctionTypeRef();
+	XFunctionTypeRef createXFunctionTypeRef();
 
 	/**
-	 * Returns a new object of class '<em>Simple Type Ref</em>'.
+	 * Returns a new object of class '<em>XSimple Type Ref</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Simple Type Ref</em>'.
+	 * @return a new object of class '<em>XSimple Type Ref</em>'.
 	 * @generated
 	 */
-	SimpleTypeRef createSimpleTypeRef();
+	XSimpleTypeRef createXSimpleTypeRef();
 
 	/**
-	 * Returns a new object of class '<em>Wildcard Param</em>'.
+	 * Returns a new object of class '<em>XWildcard Param</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Wildcard Param</em>'.
+	 * @return a new object of class '<em>XWildcard Param</em>'.
 	 * @generated
 	 */
-	WildcardParam createWildcardParam();
+	XWildcardParam createXWildcardParam();
 
 	/**
-	 * Returns a new object of class '<em>Type Param Declaration</em>'.
+	 * Returns a new object of class '<em>XType Param Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Type Param Declaration</em>'.
+	 * @return a new object of class '<em>XType Param Declaration</em>'.
 	 * @generated
 	 */
-	TypeParamDeclaration createTypeParamDeclaration();
+	XTypeParamDeclaration createXTypeParamDeclaration();
 
 	/**
 	 * Returns the package supported by this factory.

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XbaseAdapterFactory.java,v 1.1 2010/01/14 14:40:23 sefftinge Exp $
+ * $Id: XbaseAdapterFactory.java,v 1.2 2010/01/16 08:50:54 sefftinge Exp $
  */
 package org.eclipse.xtext.xbase.util;
 
@@ -72,16 +72,20 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl {
 	protected XbaseSwitch<Adapter> modelSwitch =
 		new XbaseSwitch<Adapter>() {
 			@Override
-			public Adapter caseFile(File object) {
-				return createFileAdapter();
+			public Adapter caseXFile(XFile object) {
+				return createXFileAdapter();
 			}
 			@Override
-			public Adapter caseImport(Import object) {
-				return createImportAdapter();
+			public Adapter caseXImport(XImport object) {
+				return createXImportAdapter();
 			}
 			@Override
-			public Adapter caseFunction(Function object) {
-				return createFunctionAdapter();
+			public Adapter caseXFunction(XFunction object) {
+				return createXFunctionAdapter();
+			}
+			@Override
+			public Adapter caseXClass(XClass object) {
+				return createXClassAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -104,44 +108,58 @@ public class XbaseAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.File <em>File</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XFile <em>XFile</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xbase.File
+	 * @see org.eclipse.xtext.xbase.XFile
 	 * @generated
 	 */
-	public Adapter createFileAdapter() {
+	public Adapter createXFileAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.Import <em>Import</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XImport <em>XImport</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xbase.Import
+	 * @see org.eclipse.xtext.xbase.XImport
 	 * @generated
 	 */
-	public Adapter createImportAdapter() {
+	public Adapter createXImportAdapter() {
 		return null;
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.Function <em>Function</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XFunction <em>XFunction</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.xbase.Function
+	 * @see org.eclipse.xtext.xbase.XFunction
 	 * @generated
 	 */
-	public Adapter createFunctionAdapter() {
+	public Adapter createXFunctionAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xbase.XClass <em>XClass</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xbase.XClass
+	 * @generated
+	 */
+	public Adapter createXClassAdapter() {
 		return null;
 	}
 

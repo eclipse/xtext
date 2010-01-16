@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtypeSwitch.java,v 1.1 2010/01/14 14:40:23 sefftinge Exp $
+ * $Id: XtypeSwitch.java,v 1.2 2010/01/16 08:50:54 sefftinge Exp $
  */
 package org.eclipse.xtext.xtype.util;
 
@@ -90,38 +90,38 @@ public class XtypeSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case XtypePackage.TYPE_REF: {
-				TypeRef typeRef = (TypeRef)theEObject;
-				T result = caseTypeRef(typeRef);
+			case XtypePackage.XTYPE_REF: {
+				XTypeRef xTypeRef = (XTypeRef)theEObject;
+				T result = caseXTypeRef(xTypeRef);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XtypePackage.FUNCTION_TYPE_REF: {
-				FunctionTypeRef functionTypeRef = (FunctionTypeRef)theEObject;
-				T result = caseFunctionTypeRef(functionTypeRef);
-				if (result == null) result = caseTypeRef(functionTypeRef);
+			case XtypePackage.XFUNCTION_TYPE_REF: {
+				XFunctionTypeRef xFunctionTypeRef = (XFunctionTypeRef)theEObject;
+				T result = caseXFunctionTypeRef(xFunctionTypeRef);
+				if (result == null) result = caseXTypeRef(xFunctionTypeRef);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XtypePackage.SIMPLE_TYPE_REF: {
-				SimpleTypeRef simpleTypeRef = (SimpleTypeRef)theEObject;
-				T result = caseSimpleTypeRef(simpleTypeRef);
-				if (result == null) result = caseTypeRef(simpleTypeRef);
+			case XtypePackage.XSIMPLE_TYPE_REF: {
+				XSimpleTypeRef xSimpleTypeRef = (XSimpleTypeRef)theEObject;
+				T result = caseXSimpleTypeRef(xSimpleTypeRef);
+				if (result == null) result = caseXTypeRef(xSimpleTypeRef);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XtypePackage.WILDCARD_PARAM: {
-				WildcardParam wildcardParam = (WildcardParam)theEObject;
-				T result = caseWildcardParam(wildcardParam);
-				if (result == null) result = caseTypeRef(wildcardParam);
+			case XtypePackage.XWILDCARD_PARAM: {
+				XWildcardParam xWildcardParam = (XWildcardParam)theEObject;
+				T result = caseXWildcardParam(xWildcardParam);
+				if (result == null) result = caseXTypeRef(xWildcardParam);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case XtypePackage.TYPE_PARAM_DECLARATION: {
-				TypeParamDeclaration typeParamDeclaration = (TypeParamDeclaration)theEObject;
-				T result = caseTypeParamDeclaration(typeParamDeclaration);
-				if (result == null) result = caseType(typeParamDeclaration);
-				if (result == null) result = caseIdentifyableElement(typeParamDeclaration);
+			case XtypePackage.XTYPE_PARAM_DECLARATION: {
+				XTypeParamDeclaration xTypeParamDeclaration = (XTypeParamDeclaration)theEObject;
+				T result = caseXTypeParamDeclaration(xTypeParamDeclaration);
+				if (result == null) result = caseType(xTypeParamDeclaration);
+				if (result == null) result = caseIdentifyableElement(xTypeParamDeclaration);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -130,77 +130,77 @@ public class XtypeSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Ref</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XType Ref</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Ref</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XType Ref</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTypeRef(TypeRef object) {
+	public T caseXTypeRef(XTypeRef object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Function Type Ref</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XFunction Type Ref</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Function Type Ref</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XFunction Type Ref</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFunctionTypeRef(FunctionTypeRef object) {
+	public T caseXFunctionTypeRef(XFunctionTypeRef object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Simple Type Ref</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XSimple Type Ref</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Simple Type Ref</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XSimple Type Ref</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseSimpleTypeRef(SimpleTypeRef object) {
+	public T caseXSimpleTypeRef(XSimpleTypeRef object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Wildcard Param</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XWildcard Param</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Wildcard Param</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XWildcard Param</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseWildcardParam(WildcardParam object) {
+	public T caseXWildcardParam(XWildcardParam object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Param Declaration</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>XType Param Declaration</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Param Declaration</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>XType Param Declaration</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTypeParamDeclaration(TypeParamDeclaration object) {
+	public T caseXTypeParamDeclaration(XTypeParamDeclaration object) {
 		return null;
 	}
 

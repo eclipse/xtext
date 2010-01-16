@@ -9,8 +9,9 @@ import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.EmfFormatter;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xbase.CustomXbaseStandaloneSetup;
-import org.eclipse.xtext.xbase.File;
-import org.eclipse.xtext.xpression.Expression;
+import org.eclipse.xtext.xbase.XFile;
+import org.eclipse.xtext.xbase.XFunction;
+import org.eclipse.xtext.xpression.XExpression;
 
 import com.google.inject.Injector;
 
@@ -40,10 +41,10 @@ public abstract class AbstractXbaseTestCase extends TestCase {
 		System.out.println(EmfFormatter.objToStr(expr));
 	}
 
-	protected Expression expression(String string) throws IOException {
-		String model = "foo() : " + string + ";";
-		File file = file(model);
-		return file.getFunctions().get(0).getExpression();
+	protected XExpression expression(String string) throws IOException {
+		String text = "foo() : " + string + ";";
+		XFunction function = function(text);
+		return function.getExpression();
 	}
 
 	/**
@@ -51,11 +52,17 @@ public abstract class AbstractXbaseTestCase extends TestCase {
 	 * @return
 	 * @throws IOException
 	 */
-	protected File file(String model) throws IOException {
+	protected XFunction function(String model) throws IOException {
+		String text = "class X {" + model + "}";
+		XFile file = file(text);
+		return file.getClasses().get(0).getFunctions().get(0);
+	}
+	
+	protected XFile file(String model) throws IOException {
 		XtextResourceSet set = injector.getInstance(XtextResourceSet.class);
 		Resource resource = set.createResource(URI.createURI("Test.xbase"));
 		resource.load(new StringInputStream(model), null);
-		File file = (File) resource.getContents().get(0);
+		XFile file = (XFile) resource.getContents().get(0);
 		assertTrue(resource.getErrors().toString(), resource.getErrors()
 				.isEmpty());
 		return file;

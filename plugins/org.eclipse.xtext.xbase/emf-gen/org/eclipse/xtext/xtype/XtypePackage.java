@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtypePackage.java,v 1.2 2010/01/14 15:53:25 sefftinge Exp $
+ * $Id: XtypePackage.java,v 1.3 2010/01/16 08:50:52 sefftinge Exp $
  */
 package org.eclipse.xtext.xtype;
 
@@ -62,33 +62,33 @@ public interface XtypePackage extends EPackage {
 	XtypePackage eINSTANCE = org.eclipse.xtext.xtype.impl.XtypePackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.xtype.impl.TypeRefImpl <em>Type Ref</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.xtype.impl.XTypeRefImpl <em>XType Ref</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.xtype.impl.TypeRefImpl
-	 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getTypeRef()
+	 * @see org.eclipse.xtext.xtype.impl.XTypeRefImpl
+	 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXTypeRef()
 	 * @generated
 	 */
-	int TYPE_REF = 0;
+	int XTYPE_REF = 0;
 
 	/**
-	 * The number of structural features of the '<em>Type Ref</em>' class.
+	 * The number of structural features of the '<em>XType Ref</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_REF_FEATURE_COUNT = 0;
+	int XTYPE_REF_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.xtype.impl.FunctionTypeRefImpl <em>Function Type Ref</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.xtype.impl.XFunctionTypeRefImpl <em>XFunction Type Ref</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.xtype.impl.FunctionTypeRefImpl
-	 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getFunctionTypeRef()
+	 * @see org.eclipse.xtext.xtype.impl.XFunctionTypeRefImpl
+	 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXFunctionTypeRef()
 	 * @generated
 	 */
-	int FUNCTION_TYPE_REF = 1;
+	int XFUNCTION_TYPE_REF = 1;
 
 	/**
 	 * The feature id for the '<em><b>Param Types</b></em>' containment reference list.
@@ -97,7 +97,7 @@ public interface XtypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_TYPE_REF__PARAM_TYPES = TYPE_REF_FEATURE_COUNT + 0;
+	int XFUNCTION_TYPE_REF__PARAM_TYPES = XTYPE_REF_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
@@ -106,26 +106,26 @@ public interface XtypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_TYPE_REF__RETURN_TYPE = TYPE_REF_FEATURE_COUNT + 1;
+	int XFUNCTION_TYPE_REF__RETURN_TYPE = XTYPE_REF_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Function Type Ref</em>' class.
+	 * The number of structural features of the '<em>XFunction Type Ref</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FUNCTION_TYPE_REF_FEATURE_COUNT = TYPE_REF_FEATURE_COUNT + 2;
+	int XFUNCTION_TYPE_REF_FEATURE_COUNT = XTYPE_REF_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.xtype.impl.SimpleTypeRefImpl <em>Simple Type Ref</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.xtype.impl.XSimpleTypeRefImpl <em>XSimple Type Ref</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.xtype.impl.SimpleTypeRefImpl
-	 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getSimpleTypeRef()
+	 * @see org.eclipse.xtext.xtype.impl.XSimpleTypeRefImpl
+	 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXSimpleTypeRef()
 	 * @generated
 	 */
-	int SIMPLE_TYPE_REF = 2;
+	int XSIMPLE_TYPE_REF = 2;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -134,7 +134,7 @@ public interface XtypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_TYPE_REF__TYPE = TYPE_REF_FEATURE_COUNT + 0;
+	int XSIMPLE_TYPE_REF__TYPE = XTYPE_REF_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Type Params</b></em>' containment reference list.
@@ -143,26 +143,26 @@ public interface XtypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_TYPE_REF__TYPE_PARAMS = TYPE_REF_FEATURE_COUNT + 1;
+	int XSIMPLE_TYPE_REF__TYPE_PARAMS = XTYPE_REF_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Simple Type Ref</em>' class.
+	 * The number of structural features of the '<em>XSimple Type Ref</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int SIMPLE_TYPE_REF_FEATURE_COUNT = TYPE_REF_FEATURE_COUNT + 2;
+	int XSIMPLE_TYPE_REF_FEATURE_COUNT = XTYPE_REF_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.xtype.impl.WildcardParamImpl <em>Wildcard Param</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.xtype.impl.XWildcardParamImpl <em>XWildcard Param</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.xtype.impl.WildcardParamImpl
-	 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getWildcardParam()
+	 * @see org.eclipse.xtext.xtype.impl.XWildcardParamImpl
+	 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXWildcardParam()
 	 * @generated
 	 */
-	int WILDCARD_PARAM = 3;
+	int XWILDCARD_PARAM = 3;
 
 	/**
 	 * The feature id for the '<em><b>Extends</b></em>' containment reference.
@@ -171,7 +171,7 @@ public interface XtypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WILDCARD_PARAM__EXTENDS = TYPE_REF_FEATURE_COUNT + 0;
+	int XWILDCARD_PARAM__EXTENDS = XTYPE_REF_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Super</b></em>' containment reference.
@@ -180,26 +180,26 @@ public interface XtypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WILDCARD_PARAM__SUPER = TYPE_REF_FEATURE_COUNT + 1;
+	int XWILDCARD_PARAM__SUPER = XTYPE_REF_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Wildcard Param</em>' class.
+	 * The number of structural features of the '<em>XWildcard Param</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WILDCARD_PARAM_FEATURE_COUNT = TYPE_REF_FEATURE_COUNT + 2;
+	int XWILDCARD_PARAM_FEATURE_COUNT = XTYPE_REF_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.xtype.impl.TypeParamDeclarationImpl <em>Type Param Declaration</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.xtype.impl.XTypeParamDeclarationImpl <em>XType Param Declaration</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.xtype.impl.TypeParamDeclarationImpl
-	 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getTypeParamDeclaration()
+	 * @see org.eclipse.xtext.xtype.impl.XTypeParamDeclarationImpl
+	 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXTypeParamDeclaration()
 	 * @generated
 	 */
-	int TYPE_PARAM_DECLARATION = 4;
+	int XTYPE_PARAM_DECLARATION = 4;
 
 	/**
 	 * The feature id for the '<em><b>Extends</b></em>' containment reference list.
@@ -208,7 +208,7 @@ public interface XtypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_PARAM_DECLARATION__EXTENDS = TypesPackage.TYPE_FEATURE_COUNT + 0;
+	int XTYPE_PARAM_DECLARATION__EXTENDS = TypesPackage.TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Super</b></em>' containment reference.
@@ -217,7 +217,7 @@ public interface XtypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_PARAM_DECLARATION__SUPER = TypesPackage.TYPE_FEATURE_COUNT + 1;
+	int XTYPE_PARAM_DECLARATION__SUPER = TypesPackage.TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -226,166 +226,166 @@ public interface XtypePackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_PARAM_DECLARATION__NAME = TypesPackage.TYPE_FEATURE_COUNT + 2;
+	int XTYPE_PARAM_DECLARATION__NAME = TypesPackage.TYPE_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '<em>Type Param Declaration</em>' class.
+	 * The number of structural features of the '<em>XType Param Declaration</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_PARAM_DECLARATION_FEATURE_COUNT = TypesPackage.TYPE_FEATURE_COUNT + 3;
+	int XTYPE_PARAM_DECLARATION_FEATURE_COUNT = TypesPackage.TYPE_FEATURE_COUNT + 3;
 
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.xtype.TypeRef <em>Type Ref</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xtype.XTypeRef <em>XType Ref</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Type Ref</em>'.
-	 * @see org.eclipse.xtext.xtype.TypeRef
+	 * @return the meta object for class '<em>XType Ref</em>'.
+	 * @see org.eclipse.xtext.xtype.XTypeRef
 	 * @generated
 	 */
-	EClass getTypeRef();
+	EClass getXTypeRef();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.xtype.FunctionTypeRef <em>Function Type Ref</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xtype.XFunctionTypeRef <em>XFunction Type Ref</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Function Type Ref</em>'.
-	 * @see org.eclipse.xtext.xtype.FunctionTypeRef
+	 * @return the meta object for class '<em>XFunction Type Ref</em>'.
+	 * @see org.eclipse.xtext.xtype.XFunctionTypeRef
 	 * @generated
 	 */
-	EClass getFunctionTypeRef();
+	EClass getXFunctionTypeRef();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtype.FunctionTypeRef#getParamTypes <em>Param Types</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtype.XFunctionTypeRef#getParamTypes <em>Param Types</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Param Types</em>'.
-	 * @see org.eclipse.xtext.xtype.FunctionTypeRef#getParamTypes()
-	 * @see #getFunctionTypeRef()
+	 * @see org.eclipse.xtext.xtype.XFunctionTypeRef#getParamTypes()
+	 * @see #getXFunctionTypeRef()
 	 * @generated
 	 */
-	EReference getFunctionTypeRef_ParamTypes();
+	EReference getXFunctionTypeRef_ParamTypes();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtype.FunctionTypeRef#getReturnType <em>Return Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtype.XFunctionTypeRef#getReturnType <em>Return Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Return Type</em>'.
-	 * @see org.eclipse.xtext.xtype.FunctionTypeRef#getReturnType()
-	 * @see #getFunctionTypeRef()
+	 * @see org.eclipse.xtext.xtype.XFunctionTypeRef#getReturnType()
+	 * @see #getXFunctionTypeRef()
 	 * @generated
 	 */
-	EReference getFunctionTypeRef_ReturnType();
+	EReference getXFunctionTypeRef_ReturnType();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.xtype.SimpleTypeRef <em>Simple Type Ref</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xtype.XSimpleTypeRef <em>XSimple Type Ref</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Simple Type Ref</em>'.
-	 * @see org.eclipse.xtext.xtype.SimpleTypeRef
+	 * @return the meta object for class '<em>XSimple Type Ref</em>'.
+	 * @see org.eclipse.xtext.xtype.XSimpleTypeRef
 	 * @generated
 	 */
-	EClass getSimpleTypeRef();
+	EClass getXSimpleTypeRef();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xtype.SimpleTypeRef#getType <em>Type</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.xtype.XSimpleTypeRef#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Type</em>'.
-	 * @see org.eclipse.xtext.xtype.SimpleTypeRef#getType()
-	 * @see #getSimpleTypeRef()
+	 * @see org.eclipse.xtext.xtype.XSimpleTypeRef#getType()
+	 * @see #getXSimpleTypeRef()
 	 * @generated
 	 */
-	EReference getSimpleTypeRef_Type();
+	EReference getXSimpleTypeRef_Type();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtype.SimpleTypeRef#getTypeParams <em>Type Params</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtype.XSimpleTypeRef#getTypeParams <em>Type Params</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Type Params</em>'.
-	 * @see org.eclipse.xtext.xtype.SimpleTypeRef#getTypeParams()
-	 * @see #getSimpleTypeRef()
+	 * @see org.eclipse.xtext.xtype.XSimpleTypeRef#getTypeParams()
+	 * @see #getXSimpleTypeRef()
 	 * @generated
 	 */
-	EReference getSimpleTypeRef_TypeParams();
+	EReference getXSimpleTypeRef_TypeParams();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.xtype.WildcardParam <em>Wildcard Param</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xtype.XWildcardParam <em>XWildcard Param</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Wildcard Param</em>'.
-	 * @see org.eclipse.xtext.xtype.WildcardParam
+	 * @return the meta object for class '<em>XWildcard Param</em>'.
+	 * @see org.eclipse.xtext.xtype.XWildcardParam
 	 * @generated
 	 */
-	EClass getWildcardParam();
+	EClass getXWildcardParam();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtype.WildcardParam#getExtends <em>Extends</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtype.XWildcardParam#getExtends <em>Extends</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Extends</em>'.
-	 * @see org.eclipse.xtext.xtype.WildcardParam#getExtends()
-	 * @see #getWildcardParam()
+	 * @see org.eclipse.xtext.xtype.XWildcardParam#getExtends()
+	 * @see #getXWildcardParam()
 	 * @generated
 	 */
-	EReference getWildcardParam_Extends();
+	EReference getXWildcardParam_Extends();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtype.WildcardParam#getSuper <em>Super</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtype.XWildcardParam#getSuper <em>Super</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Super</em>'.
-	 * @see org.eclipse.xtext.xtype.WildcardParam#getSuper()
-	 * @see #getWildcardParam()
+	 * @see org.eclipse.xtext.xtype.XWildcardParam#getSuper()
+	 * @see #getXWildcardParam()
 	 * @generated
 	 */
-	EReference getWildcardParam_Super();
+	EReference getXWildcardParam_Super();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.xtype.TypeParamDeclaration <em>Type Param Declaration</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xtype.XTypeParamDeclaration <em>XType Param Declaration</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Type Param Declaration</em>'.
-	 * @see org.eclipse.xtext.xtype.TypeParamDeclaration
+	 * @return the meta object for class '<em>XType Param Declaration</em>'.
+	 * @see org.eclipse.xtext.xtype.XTypeParamDeclaration
 	 * @generated
 	 */
-	EClass getTypeParamDeclaration();
+	EClass getXTypeParamDeclaration();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtype.TypeParamDeclaration#getExtends <em>Extends</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.xtype.XTypeParamDeclaration#getExtends <em>Extends</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Extends</em>'.
-	 * @see org.eclipse.xtext.xtype.TypeParamDeclaration#getExtends()
-	 * @see #getTypeParamDeclaration()
+	 * @see org.eclipse.xtext.xtype.XTypeParamDeclaration#getExtends()
+	 * @see #getXTypeParamDeclaration()
 	 * @generated
 	 */
-	EReference getTypeParamDeclaration_Extends();
+	EReference getXTypeParamDeclaration_Extends();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtype.TypeParamDeclaration#getSuper <em>Super</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.xtype.XTypeParamDeclaration#getSuper <em>Super</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Super</em>'.
-	 * @see org.eclipse.xtext.xtype.TypeParamDeclaration#getSuper()
-	 * @see #getTypeParamDeclaration()
+	 * @see org.eclipse.xtext.xtype.XTypeParamDeclaration#getSuper()
+	 * @see #getXTypeParamDeclaration()
 	 * @generated
 	 */
-	EReference getTypeParamDeclaration_Super();
+	EReference getXTypeParamDeclaration_Super();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtype.TypeParamDeclaration#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.xtype.XTypeParamDeclaration#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.xtext.xtype.TypeParamDeclaration#getName()
-	 * @see #getTypeParamDeclaration()
+	 * @see org.eclipse.xtext.xtype.XTypeParamDeclaration#getName()
+	 * @see #getXTypeParamDeclaration()
 	 * @generated
 	 */
-	EAttribute getTypeParamDeclaration_Name();
+	EAttribute getXTypeParamDeclaration_Name();
 
 	/**
 	 * Returns the factory that creates the instances of the model.
@@ -410,24 +410,24 @@ public interface XtypePackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.xtype.impl.TypeRefImpl <em>Type Ref</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.xtype.impl.XTypeRefImpl <em>XType Ref</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.xtype.impl.TypeRefImpl
-		 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getTypeRef()
+		 * @see org.eclipse.xtext.xtype.impl.XTypeRefImpl
+		 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXTypeRef()
 		 * @generated
 		 */
-		EClass TYPE_REF = eINSTANCE.getTypeRef();
+		EClass XTYPE_REF = eINSTANCE.getXTypeRef();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.xtype.impl.FunctionTypeRefImpl <em>Function Type Ref</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.xtype.impl.XFunctionTypeRefImpl <em>XFunction Type Ref</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.xtype.impl.FunctionTypeRefImpl
-		 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getFunctionTypeRef()
+		 * @see org.eclipse.xtext.xtype.impl.XFunctionTypeRefImpl
+		 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXFunctionTypeRef()
 		 * @generated
 		 */
-		EClass FUNCTION_TYPE_REF = eINSTANCE.getFunctionTypeRef();
+		EClass XFUNCTION_TYPE_REF = eINSTANCE.getXFunctionTypeRef();
 
 		/**
 		 * The meta object literal for the '<em><b>Param Types</b></em>' containment reference list feature.
@@ -435,7 +435,7 @@ public interface XtypePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FUNCTION_TYPE_REF__PARAM_TYPES = eINSTANCE.getFunctionTypeRef_ParamTypes();
+		EReference XFUNCTION_TYPE_REF__PARAM_TYPES = eINSTANCE.getXFunctionTypeRef_ParamTypes();
 
 		/**
 		 * The meta object literal for the '<em><b>Return Type</b></em>' containment reference feature.
@@ -443,17 +443,17 @@ public interface XtypePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FUNCTION_TYPE_REF__RETURN_TYPE = eINSTANCE.getFunctionTypeRef_ReturnType();
+		EReference XFUNCTION_TYPE_REF__RETURN_TYPE = eINSTANCE.getXFunctionTypeRef_ReturnType();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.xtype.impl.SimpleTypeRefImpl <em>Simple Type Ref</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.xtype.impl.XSimpleTypeRefImpl <em>XSimple Type Ref</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.xtype.impl.SimpleTypeRefImpl
-		 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getSimpleTypeRef()
+		 * @see org.eclipse.xtext.xtype.impl.XSimpleTypeRefImpl
+		 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXSimpleTypeRef()
 		 * @generated
 		 */
-		EClass SIMPLE_TYPE_REF = eINSTANCE.getSimpleTypeRef();
+		EClass XSIMPLE_TYPE_REF = eINSTANCE.getXSimpleTypeRef();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
@@ -461,7 +461,7 @@ public interface XtypePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SIMPLE_TYPE_REF__TYPE = eINSTANCE.getSimpleTypeRef_Type();
+		EReference XSIMPLE_TYPE_REF__TYPE = eINSTANCE.getXSimpleTypeRef_Type();
 
 		/**
 		 * The meta object literal for the '<em><b>Type Params</b></em>' containment reference list feature.
@@ -469,17 +469,17 @@ public interface XtypePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference SIMPLE_TYPE_REF__TYPE_PARAMS = eINSTANCE.getSimpleTypeRef_TypeParams();
+		EReference XSIMPLE_TYPE_REF__TYPE_PARAMS = eINSTANCE.getXSimpleTypeRef_TypeParams();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.xtype.impl.WildcardParamImpl <em>Wildcard Param</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.xtype.impl.XWildcardParamImpl <em>XWildcard Param</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.xtype.impl.WildcardParamImpl
-		 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getWildcardParam()
+		 * @see org.eclipse.xtext.xtype.impl.XWildcardParamImpl
+		 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXWildcardParam()
 		 * @generated
 		 */
-		EClass WILDCARD_PARAM = eINSTANCE.getWildcardParam();
+		EClass XWILDCARD_PARAM = eINSTANCE.getXWildcardParam();
 
 		/**
 		 * The meta object literal for the '<em><b>Extends</b></em>' containment reference feature.
@@ -487,7 +487,7 @@ public interface XtypePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference WILDCARD_PARAM__EXTENDS = eINSTANCE.getWildcardParam_Extends();
+		EReference XWILDCARD_PARAM__EXTENDS = eINSTANCE.getXWildcardParam_Extends();
 
 		/**
 		 * The meta object literal for the '<em><b>Super</b></em>' containment reference feature.
@@ -495,17 +495,17 @@ public interface XtypePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference WILDCARD_PARAM__SUPER = eINSTANCE.getWildcardParam_Super();
+		EReference XWILDCARD_PARAM__SUPER = eINSTANCE.getXWildcardParam_Super();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.xtype.impl.TypeParamDeclarationImpl <em>Type Param Declaration</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.xtype.impl.XTypeParamDeclarationImpl <em>XType Param Declaration</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.xtype.impl.TypeParamDeclarationImpl
-		 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getTypeParamDeclaration()
+		 * @see org.eclipse.xtext.xtype.impl.XTypeParamDeclarationImpl
+		 * @see org.eclipse.xtext.xtype.impl.XtypePackageImpl#getXTypeParamDeclaration()
 		 * @generated
 		 */
-		EClass TYPE_PARAM_DECLARATION = eINSTANCE.getTypeParamDeclaration();
+		EClass XTYPE_PARAM_DECLARATION = eINSTANCE.getXTypeParamDeclaration();
 
 		/**
 		 * The meta object literal for the '<em><b>Extends</b></em>' containment reference list feature.
@@ -513,7 +513,7 @@ public interface XtypePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TYPE_PARAM_DECLARATION__EXTENDS = eINSTANCE.getTypeParamDeclaration_Extends();
+		EReference XTYPE_PARAM_DECLARATION__EXTENDS = eINSTANCE.getXTypeParamDeclaration_Extends();
 
 		/**
 		 * The meta object literal for the '<em><b>Super</b></em>' containment reference feature.
@@ -521,7 +521,7 @@ public interface XtypePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TYPE_PARAM_DECLARATION__SUPER = eINSTANCE.getTypeParamDeclaration_Super();
+		EReference XTYPE_PARAM_DECLARATION__SUPER = eINSTANCE.getXTypeParamDeclaration_Super();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -529,7 +529,7 @@ public interface XtypePackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute TYPE_PARAM_DECLARATION__NAME = eINSTANCE.getTypeParamDeclaration_Name();
+		EAttribute XTYPE_PARAM_DECLARATION__NAME = eINSTANCE.getXTypeParamDeclaration_Name();
 
 	}
 

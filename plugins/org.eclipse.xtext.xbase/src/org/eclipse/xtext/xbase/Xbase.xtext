@@ -4,23 +4,29 @@ import "platform:/resource/org.eclipse.xtext.xbase/model/Xbase.ecore"
 import "platform:/resource/org.eclipse.xtext.xbase/model/Xpression.ecore" as xpression
 import "platform:/resource/org.eclipse.xtext.xbase/model/Xtype.ecore" as xtype
 
-File  : 	
-	(imports+=Import)*
-	(functions+=Function)*
+XFile  : 	
+    (package=QualifiedName)?
+	(imports+=XImport)*
+	(classes+=XClass)*
 ;
 
-Import  : 
-	'import' importedNamespace=QualifiedNameWithWildCard
+XImport  : 
+	'import' importedNamespace=XQualifiedNameWithWildCard
 ;
 
-QualifiedNameWithWildCard :
+XQualifiedNameWithWildCard :
 	QualifiedName  ('.' '*')?;
+	
+XClass :
+   "class" name=ID ("extends" extends=XTypeRef)? ('implements' implements+=XTypeRef)* '{'
+	   (functions+=XFunction)*
+   '}'; 
 
-Function  : 
+XFunction  : 
 	( private?='private')? 
-	('<' typeParams+=TypeParamDeclaration (',' typeParams+=TypeParamDeclaration )*'>')?
-	(returnType=TypeRef)? name=ID '(' (declaredParams+=DeclaredParameter (',' declaredParams+=DeclaredParameter )*)? ')'
-			(':' expression=Expression ';' | expression=BlockExpression)
+	('<' typeParams+=XTypeParamDeclaration (',' typeParams+=XTypeParamDeclaration )*'>')?
+	(returnType=XTypeRef)? name=ID '(' (declaredParams+=XDeclaredParameter (',' declaredParams+=XDeclaredParameter )*)? ')'
+			(':' expression=XExpression ';' | expression=XBlockExpression)
 ;
 
 
