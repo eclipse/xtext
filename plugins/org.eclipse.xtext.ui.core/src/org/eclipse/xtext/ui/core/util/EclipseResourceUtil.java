@@ -31,7 +31,7 @@ import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Path;
-import org.eclipse.core.runtime.SubProgressMonitor;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.jdt.core.IClasspathEntry;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
@@ -59,15 +59,14 @@ public class EclipseResourceUtil {
 
 	public static IProject createProject(final String projectName, final IPath location, final List<String> srcFolders,
 			final List<IProject> referencedProjects, final Set<String> requiredBundles,
-			final List<String> exportedPackages, final List<String> importedPackages,
-			final String activatorClassName,
-			final IProgressMonitor progressMonitor,	final Shell theShell,String[] projectNatures,
-			IWorkingSet[] workingSets, IWorkbench workbench) {
+			final List<String> exportedPackages, final List<String> importedPackages, final String activatorClassName,
+			final IProgressMonitor monitor, final Shell theShell, String[] projectNatures, IWorkingSet[] workingSets,
+			IWorkbench workbench) {
 
 		IProject project = null;
+		SubMonitor subMonitor = SubMonitor.convert(monitor, 10);
 		try {
-			progressMonitor.beginTask("", 10);
-			progressMonitor.subTask("Creating project " + projectName);
+			subMonitor.subTask("Creating project " + projectName);
 			final IWorkspace workspace = ResourcesPlugin.getWorkspace();
 			project = workspace.getRoot().getProject(projectName);
 
@@ -82,9 +81,8 @@ public class EclipseResourceUtil {
 					}
 				});
 				if (result[0]) {
-					project.delete(true, true, new SubProgressMonitor(progressMonitor, 1));
-				}
-				else
+					project.delete(true, true, subMonitor.newChild(1));
+				} else
 					return null;
 			}
 
@@ -92,7 +90,7 @@ public class EclipseResourceUtil {
 			final IProjectDescription projectDescription = ResourcesPlugin.getWorkspace().newProjectDescription(
 					projectName);
 			projectDescription.setLocation(location);
-			project.create(projectDescription, new SubProgressMonitor(progressMonitor, 1));
+			project.create(projectDescription, subMonitor.newChild(1));
 			final List<IClasspathEntry> classpathEntries = new ArrayList<IClasspathEntry>();
 			if (referencedProjects.size() != 0) {
 				projectDescription.setReferencedProjects(referencedProjects.toArray(new IProject[referencedProjects
@@ -103,7 +101,6 @@ public class EclipseResourceUtil {
 					classpathEntries.add(referencedProjectClasspathEntry);
 				}
 			}
-
 			projectDescription.setNatureIds(projectNatures);
 
 			final ICommand java = projectDescription.newCommand();
@@ -117,13 +114,13 @@ public class EclipseResourceUtil {
 
 			projectDescription.setBuildSpec(new ICommand[] { java, manifest, schema });
 
-			project.open(new SubProgressMonitor(progressMonitor, 1));
-			project.setDescription(projectDescription, new SubProgressMonitor(progressMonitor, 1));
+			project.open(subMonitor.newChild(1));
+			project.setDescription(projectDescription, subMonitor.newChild(1));
 
 			for (final String src : srcFolders) {
 				final IFolder srcContainer = project.getFolder(src);
 				if (!srcContainer.exists()) {
-					srcContainer.create(false, true, new SubProgressMonitor(progressMonitor, 1));
+					srcContainer.create(false, true, subMonitor.newChild(1));
 				}
 				final IClasspathEntry srcClasspathEntry = JavaCore.newSourceEntry(srcContainer.getFullPath());
 				classpathEntries.add(srcClasspathEntry);
@@ -133,57 +130,49 @@ public class EclipseResourceUtil {
 			classpathEntries.add(JavaCore.newContainerEntry(new Path("org.eclipse.pde.core.requiredPlugins")));
 
 			javaProject.setRawClasspath(classpathEntries.toArray(new IClasspathEntry[classpathEntries.size()]),
-					new SubProgressMonitor(progressMonitor, 1));
+					subMonitor.newChild(1));
 
-			javaProject.setOutputLocation(new Path("/" + projectName + "/bin"), new SubProgressMonitor(progressMonitor,
-					1));
-			createManifest(projectName, requiredBundles, exportedPackages, importedPackages, activatorClassName, progressMonitor, project);
-			createBuildProps(progressMonitor, project, srcFolders);
-		}
-		catch (final Exception exception) {
+			javaProject.setOutputLocation(new Path("/" + projectName + "/bin"), subMonitor.newChild(1));
+			createManifest(projectName, requiredBundles, exportedPackages, importedPackages, activatorClassName,
+					subMonitor.newChild(1), project);
+			createBuildProps(subMonitor.newChild(1), project, srcFolders);
+			if (workbench != null && workingSets != null)
+				workbench.getWorkingSetManager().addToWorkingSets(project, workingSets);
+		} catch (final Exception exception) {
 			exception.printStackTrace();
 			logger.error(exception);
+		} finally {
+			subMonitor.done();
 		}
-		finally {
-			progressMonitor.done();
-		}
-
-		if (workbench != null && workingSets != null)
-			workbench.getWorkingSetManager().addToWorkingSets(project,
-				workingSets);
-		return project ;
-		
+		return project;
 	}
 	
 	public static IProject createProject(final String projectName, final List<String> srcFolders,
 			final List<IProject> referencedProjects, final Set<String> requiredBundles,
-			final List<String> exportedPackages, final List<String> importedPackages,
-			final String activatorClassName,
-			final IProgressMonitor progressMonitor,	final Shell theShell,String[] projectNatures) {
+			final List<String> exportedPackages, final List<String> importedPackages, final String activatorClassName,
+			final IProgressMonitor progressMonitor, final Shell theShell, String[] projectNatures) {
 		return createProject(projectName, null, srcFolders, referencedProjects, requiredBundles, exportedPackages,
-					importedPackages, activatorClassName, progressMonitor, theShell, projectNatures,
-					null, null);
+				importedPackages, activatorClassName, progressMonitor, theShell, projectNatures, null, null);
 	}
 
 	public static IFile createFile(final String name, final IContainer container, final String content,
 			final IProgressMonitor progressMonitor) {
 		final IFile file = container.getFile(new Path(name));
 		assertExist(file.getParent());
+		SubMonitor subMonitor = SubMonitor.convert(progressMonitor, 1);
 		try {
 			final InputStream stream = new ByteArrayInputStream(content.getBytes(file.getCharset()));
 			if (file.exists()) {
-				file.setContents(stream, true, true, progressMonitor);
-			}
-			else {
-				file.create(stream, true, progressMonitor);
+				file.setContents(stream, true, true, subMonitor.newChild(1));
+			} else {
+				file.create(stream, true, subMonitor.newChild(1));
 			}
 			stream.close();
-		}
-		catch (final Exception e) {
+		} catch (final Exception e) {
 			logger.error(e);
+		} finally {
+			subMonitor.done();
 		}
-		progressMonitor.worked(1);
-
 		return file;
 	}
 
@@ -193,7 +182,6 @@ public class EclipseResourceUtil {
 		if (file != null && charSet != null) {
 			file.setCharset(charSet, progressMonitor);
 		}
-
 		return file;
 	}
 
@@ -215,9 +203,8 @@ public class EclipseResourceUtil {
 	}
 
 	private static void createManifest(final String projectName, final Set<String> requiredBundles,
-			final List<String> exportedPackages, final List<String> importedPackages,
-			final String activatorClassName,
-			final IProgressMonitor progressMonitor,	final IProject project) throws CoreException {
+			final List<String> exportedPackages, final List<String> importedPackages, final String activatorClassName,
+			final IProgressMonitor progressMonitor, final IProject project) throws CoreException {
 		final StringBuilder mainContent = new StringBuilder("Manifest-Version: 1.0\n");
 		mainContent.append("Bundle-ManifestVersion: 2\n");
 		mainContent.append("Bundle-Name: " + projectName + "\n");
@@ -260,8 +247,13 @@ public class EclipseResourceUtil {
 		mainContent.append("Bundle-RequiredExecutionEnvironment: J2SE-1.5\n");
 
 		final IFolder metaInf = project.getFolder("META-INF");
-		metaInf.create(false, true, new SubProgressMonitor(progressMonitor, 1));
-		createFile("MANIFEST.MF", metaInf, mainContent.toString(), progressMonitor);
+		SubMonitor subMonitor = SubMonitor.convert(progressMonitor, 2);
+		try {
+			metaInf.create(false, true, subMonitor.newChild(1));
+			createFile("MANIFEST.MF", metaInf, mainContent.toString(), subMonitor.newChild(1));
+		} finally {
+			subMonitor.done();
+		}
 	}
 
 	/**
@@ -278,34 +270,32 @@ public class EclipseResourceUtil {
 	 */
 	public static IFile createFile(final String name, final IContainer container, final URL contentUrl,
 			final IProgressMonitor progressMonitor) {
-
 		final IFile file = container.getFile(new Path(name));
-		InputStream inputStream = null;
+		SubMonitor subMonitor = SubMonitor.convert(progressMonitor, 1);
 		try {
-			inputStream = contentUrl.openStream();
-			if (file.exists()) {
-				file.setContents(inputStream, true, true, progressMonitor);
-			}
-			else {
-				file.create(inputStream, true, progressMonitor);
-			}
-			inputStream.close();
-		}
-		catch (final Exception e) {
-			logger.error(e);
-		}
-		finally {
-			if (null != inputStream) {
-				try {
-					inputStream.close();
+			InputStream inputStream = null;
+			try {
+				inputStream = contentUrl.openStream();
+				if (file.exists()) {
+					file.setContents(inputStream, true, true, subMonitor.newChild(1));
+				} else {
+					file.create(inputStream, true, subMonitor.newChild(1));
 				}
-				catch (final IOException e) {
-					logger.error(e);
+				inputStream.close();
+			} catch (final Exception e) {
+				logger.error(e);
+			} finally {
+				if (null != inputStream) {
+					try {
+						inputStream.close();
+					} catch (final IOException e) {
+						logger.error(e);
+					}
 				}
 			}
+		} finally {
+			subMonitor.done();
 		}
-		progressMonitor.worked(1);
-
 		return file;
 	}
 
@@ -317,14 +307,11 @@ public class EclipseResourceUtil {
 			if (c instanceof IFolder) {
 				try {
 					((IFolder) c).create(false, true, new NullProgressMonitor());
-				}
-				catch (final CoreException e) {
+				} catch (final CoreException e) {
 					logger.error(e);
 				}
 			}
-
 		}
-
 	}
 
 	public static void openFileToEdit(final Shell s, final IFile file) {
@@ -333,20 +320,20 @@ public class EclipseResourceUtil {
 				final IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 				try {
 					IDE.openEditor(page, file, true);
-				}
-				catch (final PartInitException e) {
+				} catch (final PartInitException e) {
 					logger.error(e);
 				}
 			}
 		});
 	}
 
-	public static void createPackagesWithDummyClasses(IProject dslProject, String string, List<String> exportedPackages) throws CoreException {
+	public static void createPackagesWithDummyClasses(IProject dslProject, String string, List<String> exportedPackages)
+			throws CoreException {
 		for (String string2 : exportedPackages) {
-			IFolder folder = dslProject.getFolder(string+"/"+(string2.replace('.', '/')));
+			IFolder folder = dslProject.getFolder(string + "/" + (string2.replace('.', '/')));
 			create(folder);
 			IFile file = folder.getFile("Foo.java");
-			String contents = "package "+string2+";\nclass Foo {}";
+			String contents = "package " + string2 + ";\nclass Foo {}";
 			file.create(new ByteArrayInputStream(contents.getBytes()), true, null);
 		}
 	}
