@@ -58,16 +58,6 @@ public abstract class AbstractXtextUiModule extends XtextRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.jface.viewers.ILabelProvider> bindILabelProvider() {
-		return org.eclipse.xtext.ui.core.DefaultLabelProvider.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider> bindDelegatingStyledCellLabelProvider$IStyledLabelProvider() {
-		return org.eclipse.xtext.ui.core.DefaultLabelProvider.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public Class<? extends org.eclipse.emf.common.notify.AdapterFactory> bindAdapterFactory() {
 		return org.eclipse.xtext.ui.core.InjectableAdapterFactory.class;
 	}
@@ -165,6 +155,16 @@ public abstract class AbstractXtextUiModule extends XtextRuntimeModule {
 	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment
 	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
 		return org.eclipse.xtext.contentassist.XtextProposalProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment
+	public Class<? extends org.eclipse.jface.viewers.ILabelProvider> bindILabelProvider() {
+		return org.eclipse.xtext.labeling.XtextLabelProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment
+	public Class<? extends org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider> bindDelegatingStyledCellLabelProvider$IStyledLabelProvider() {
+		return org.eclipse.xtext.labeling.XtextLabelProvider.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
