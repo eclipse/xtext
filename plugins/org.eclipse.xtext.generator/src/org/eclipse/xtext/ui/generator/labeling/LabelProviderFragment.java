@@ -20,6 +20,8 @@ public class LabelProviderFragment extends AbstractGeneratorFragment {
 		return new BindFactory()
 			.addTypeToType("org.eclipse.jface.viewers.ILabelProvider",
 					getQualifiedName(grammar))
+			.addTypeToType("org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider",
+					getQualifiedName(grammar))
 			.getBindings();
 	}
 
