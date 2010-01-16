@@ -22,6 +22,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
+import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.wizards.newresource.BasicNewResourceWizard;
@@ -66,15 +67,17 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 	@Override
 	protected void execute(final IProgressMonitor monitor) throws CoreException, InvocationTargetException,
 			InterruptedException {
-		monitor.beginTask(Messages.XtextProjectCreator_CreatingProjectsMessage2
-				+ getXtextProjectInfo().getProjectName(), 3);
+		SubMonitor subMonitor = SubMonitor.convert(
+				monitor, 
+				Messages.XtextProjectCreator_CreatingProjectsMessage2 + getXtextProjectInfo().getProjectName(), 
+				getXtextProjectInfo().isCreateGeneratorProject() ? 3 : 2);
 
-		IProject project = createDslProject(monitor);
+		IProject project = createDslProject(subMonitor.newChild(1));
 
-		createDslUiProject(monitor);
+		createDslUiProject(subMonitor.newChild(1));
 
 		if (getXtextProjectInfo().isCreateGeneratorProject()) {
-			createGeneratorProject(monitor);
+			createGeneratorProject(subMonitor.newChild(1));
 		}
 
 		IFile dslGrammarFile = project.getFile(new Path(SRC_ROOT
@@ -85,6 +88,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 	}
 
 	private IProject createDslUiProject(final IProgressMonitor monitor) throws CoreException {
+		
 		String projectName = getXtextProjectInfo().getUiProjectName();
 
 		LinkedHashSet<String> requiredBundles = new LinkedHashSet<String>(Arrays.asList(getXtextProjectInfo()
