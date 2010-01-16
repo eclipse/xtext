@@ -3,8 +3,6 @@ Generated with Xtext
 */
 package org.eclipse.xtext;
 
-import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.xtext.ui.common.editor.outline.actions.IActionBarContributor;
 import org.eclipse.xtext.ui.common.editor.outline.actions.IContentOutlineNodeAdapterFactory;
 import org.eclipse.xtext.ui.common.editor.outline.transformer.ISemanticModelTransformer;
@@ -60,15 +58,15 @@ public class XtextUiModule extends AbstractXtextUiModule {
 		return XtextLocationInFileProvider.class;
 	}
 
-	@Override
-	public Class<? extends ILabelProvider> bindILabelProvider() {
-		return XtextLabelProvider.class;
-	}
+//	@Override
+//	public Class<? extends ILabelProvider> bindILabelProvider() {
+//		return XtextLabelProvider.class;
+//	}
 
-	@Override
-	public java.lang.Class<? extends IStyledLabelProvider> bindDelegatingStyledCellLabelProvider$IStyledLabelProvider() {
-		return XtextLabelProvider.class;
-	}
+//	@Override
+//	public java.lang.Class<? extends IStyledLabelProvider> bindDelegatingStyledCellLabelProvider$IStyledLabelProvider() {
+//		return XtextLabelProvider.class;
+//	}
 
 	public Class<? extends IContentOutlineNodeAdapterFactory> bindIContentOutlineNodeAdapterFactory() {
 		return org.eclipse.xtext.xtext.ui.editor.outline.XtextContentOutlineNodeAdapterFactory.class;
