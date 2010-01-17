@@ -34,6 +34,7 @@ import org.eclipse.jface.viewers.IPostSelectionProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
@@ -76,7 +77,7 @@ public class XtextEditor extends TextEditor {
 	public static final String ID = "org.eclipse.xtext.baseEditor"; //$NON-NLS-1$
 
 	@Inject
-	private IXtextEditorCallback callback;
+	private CompoundXtextEditorCallback callback;
 	
 	@Inject
 	private XtextSourceViewerConfiguration sourceViewerConfiguration;
@@ -124,6 +125,7 @@ public class XtextEditor extends TextEditor {
 			log.debug("Editor instance is [" + this.toString() + "]");
 		}
 		super.doSetInput(input);
+		callback.afterSetInput(this);
 	}
 
 	@Override
@@ -422,6 +424,10 @@ public class XtextEditor extends TextEditor {
 	@Override
 	public boolean validateEditorInputState() {
 		return callback.onValidateEditorInputState(this) && super.validateEditorInputState();
+	}
+	
+	public void updatedTitleImage(Image image) {
+		setTitleImage(image);
 	}
 	
 	@SuppressWarnings("rawtypes")

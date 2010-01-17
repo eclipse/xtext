@@ -51,6 +51,8 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Table;
 import org.eclipse.swt.widgets.TableColumn;
+import org.eclipse.xtext.ui.core.util.PixelConverter;
+import org.eclipse.xtext.ui.core.util.SWTUtil;
 
 /**
  * A list with a button bar. Typical buttons are 'Add', 'Remove', 'Up' and

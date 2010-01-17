@@ -7,23 +7,32 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core;
 
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 
 import com.google.inject.ImplementedBy;
 
 /**
  * @author Sebastian Zarnekow
+ * @author Michael Clay
  */
 @ImplementedBy(IImageHelper.NullImageHelper.class)
 public interface IImageHelper {
 
 	Image getImage(String name);
 	
+	Image getImage(ImageDescriptor imageDescriptor);
+	
 	class NullImageHelper implements IImageHelper {
 
 		public Image getImage(String name) {
 			return null;
 		}
+
+		public Image getImage(ImageDescriptor imageDescriptor) {
+			return null;
+		}
 		
 	}
+
 }

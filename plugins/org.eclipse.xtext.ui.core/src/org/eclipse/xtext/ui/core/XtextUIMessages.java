@@ -102,4 +102,6 @@ public class XtextUIMessages extends NLS {
 	public static String TaskTagInputDialog_error_comma;
 	public static String TaskTagInputDialog_error_entryExists;
 	public static String TaskTagInputDialog_error_noSpace;
+	
+	public static String ProblemMarkerManager_problem_marker_update_job_description;
 }

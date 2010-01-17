@@ -48,7 +48,7 @@ public class XtextPluginImages {
 	private static final String PATH_LCL = ICONS_PATH + "elcl16/"; //$NON-NLS-1$
 	private static final String PATH_LCL_DISABLED = ICONS_PATH + "dlcl16/"; //$NON-NLS-1$
 	//    private static final String PATH_TOOL = ICONS_PATH + "etool16/"; //$NON-NLS-1$
-	//    private static final String PATH_OVR = ICONS_PATH + "ovr16/"; //$NON-NLS-1$
+    private static final String PATH_OVR = ICONS_PATH + "ovr16/"; //$NON-NLS-1$
 	//    private static final String PATH_WIZBAN = ICONS_PATH + "wizban/"; //$NON-NLS-1$
 
 	/**
@@ -78,6 +78,8 @@ public class XtextPluginImages {
 	/**
 	 * OVR16
 	 */
+	public static final ImageDescriptor DESC_OVR_ERROR = create(PATH_OVR, "error_co.gif"); //$NON-NLS-1$
+	public static final ImageDescriptor DESC_OVR_WARNING =create(PATH_OVR, "warning_co.gif"); //$NON-NLS-1$
 
 	/**
 	 * TOOL16
