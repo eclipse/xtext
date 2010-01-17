@@ -27,9 +27,8 @@ public abstract class AbstractDirtyStateAwareEditorCallback implements IXtextEdi
 	private XtextEditor currentEditor;
 	
 	public void afterCreatePartControl(final XtextEditor editor) {
-		if (this.currentEditor != null)
-			throw new IllegalStateException("afterCreatePartControl was called twice");
-		this.currentEditor = editor;
+		if (this.currentEditor != editor)
+			throw new IllegalStateException("different instances of editor were given.");
 		editorSupport.initializeDirtyStateSupport(this);
 	}
 	
@@ -50,6 +49,12 @@ public abstract class AbstractDirtyStateAwareEditorCallback implements IXtextEdi
 		if (this.currentEditor != editor)
 			throw new IllegalStateException("different instances of editor were given.");
 		return editorSupport.isEditingPossible(this);
+	}
+	
+	public void afterSetInput(XtextEditor editor) {
+		if (this.currentEditor != null)
+			throw new IllegalStateException("afterSetInput was called twice.");
+		this.currentEditor = editor;
 	}
 	
 	public IXtextDocument getDocument() {

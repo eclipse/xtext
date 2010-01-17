@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.FeatureMap;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
@@ -40,13 +41,13 @@ public class SimpleLabelProvider extends LabelProvider implements IStyledLabelPr
 				}
 			});
 
-	private final PolymorphicDispatcher<String> imageDispatcher = new PolymorphicDispatcher<String>("image", 1, 1,
-			Collections.singletonList(this), new PolymorphicDispatcher.ErrorHandler<String>() {
+	private final PolymorphicDispatcher<Object> imageDispatcher = new PolymorphicDispatcher<Object>("image", 1, 1,
+			Collections.singletonList(this), new PolymorphicDispatcher.ErrorHandler<Object>() {
 
-				private final PolymorphicDispatcher<String> recoverImage = new PolymorphicDispatcher<String>(
+				private final PolymorphicDispatcher<Object> recoverImage = new PolymorphicDispatcher<Object>(
 						"error_image", 2, 2, Collections.singletonList(SimpleLabelProvider.this));
 
-				public String handle(Object[] params, Throwable e) {
+				public Object handle(Object[] params, Throwable e) {
 					return recoverImage.invoke(params[0], e);
 				}
 			});
@@ -85,8 +86,21 @@ public class SimpleLabelProvider extends LabelProvider implements IStyledLabelPr
 
 	@Override
 	public Image getImage(Object element) {
-		String imageName = getImageDispatcher().invoke(element);
-		return getImageHelper().getImage(imageName);
+		Object result = getImageDispatcher().invoke(element);
+		return doGetImage(result);
+	}
+
+	protected Image doGetImage(Object result) {
+		if (result == null) {
+			return null;
+		} else if (result instanceof String) {
+			return getImageHelper().getImage((String) result);
+		} else if (result instanceof ImageDescriptor) {
+			return getImageHelper().getImage((ImageDescriptor) result);
+		} else if (result instanceof Image) {
+			return (Image) result;
+		}
+		return (Image) unkownReturnType(result);
 	}
 
 	public String error_text(Object object, Exception e) {
@@ -127,7 +141,7 @@ public class SimpleLabelProvider extends LabelProvider implements IStyledLabelPr
 
 	protected Object unkownReturnType(Object result) {
 		throw new IllegalStateException("The return type " + result.getClass()
-				+ " is not supported for the polymorphic text(Object o) method.");
+				+ " is not supported for the polymorphic text(Object o) or image(Object o) method.");
 	}
 
 	protected EStructuralFeature getLabelFeature(EClass eClass) {
@@ -160,7 +174,7 @@ public class SimpleLabelProvider extends LabelProvider implements IStyledLabelPr
 		return textDispatcher;
 	}
 
-	public PolymorphicDispatcher<String> getImageDispatcher() {
+	public PolymorphicDispatcher<Object> getImageDispatcher() {
 		return imageDispatcher;
 	}
 	

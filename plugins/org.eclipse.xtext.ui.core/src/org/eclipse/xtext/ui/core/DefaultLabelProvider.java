@@ -9,9 +9,13 @@ package org.eclipse.xtext.ui.core;
 
 import static org.eclipse.xtext.ui.core.editor.utils.EditorUtils.*;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.content.IContentType;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.resource.ColorRegistry;
 import org.eclipse.jface.resource.FontDescriptor;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.viewers.StyledString;
@@ -20,6 +24,9 @@ import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.TextStyle;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.ide.IDE;
+import org.eclipse.ui.model.IWorkbenchAdapter;
 
 import com.google.inject.Inject;
 
@@ -33,14 +40,30 @@ public class DefaultLabelProvider extends SimpleLabelProvider {
 	@Inject
 	private AdapterFactoryLabelProvider adapterFactoryLabelProvider;
 
+	public ImageDescriptor image(IFile file) {
+		IContentType contentType = IDE.getContentType(file);
+		return PlatformUI.getWorkbench().getEditorRegistry().getImageDescriptor(file.getName(), contentType);
+	}
+	
+	public ImageDescriptor image(IAdaptable adaptable) {
+		IWorkbenchAdapter workbenchAdapter = (IWorkbenchAdapter) adaptable.getAdapter(IWorkbenchAdapter.class);
+		if (workbenchAdapter == null) {
+			return null;
+		}
+		return workbenchAdapter.getImageDescriptor(adaptable);
+	}
+	
 	@Override
 	public Image getImage(Object element) {
-		String imageName = getImageDispatcher().invoke(element);
-		if (imageName == null && adapterFactoryLabelProvider != null)
-			return adapterFactoryLabelProvider.getImage(element);
-		return getImageHelper().getImage(imageName);
+		Object result= getImageDispatcher().invoke(element);
+		if (result == null && adapterFactoryLabelProvider != null) {			
+			result= adapterFactoryLabelProvider.getImage(element); 
+		} else {
+			result = super.doGetImage(result);
+		} 
+		return (Image) result;
 	}
-
+	
 	public AdapterFactoryLabelProvider getAdapterFactoryLabelProvider() {
 		return adapterFactoryLabelProvider;
 	}

@@ -17,6 +17,7 @@ import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.xtext.ui.core.util.SWTUtil;
 
 /**
  * Dialog Field containing a single button such as a radio or checkbox button.

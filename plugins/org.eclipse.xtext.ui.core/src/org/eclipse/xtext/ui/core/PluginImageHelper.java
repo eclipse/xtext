@@ -8,34 +8,81 @@
 package org.eclipse.xtext.ui.core;
 
 import java.net.URL;
+import java.util.Iterator;
+import java.util.Map;
 
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.osgi.framework.BundleEvent;
+import org.osgi.framework.BundleListener;
 
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 import com.google.inject.name.Named;
 
 /**
  * @author Sebastian Zarnekow
  */
-public class PluginImageHelper implements IImageHelper {
+public class PluginImageHelper implements IImageHelper, BundleListener {
+	private Map<ImageDescriptor, Image> registry = Maps.newHashMapWithExpectedSize(10);
 
 	@Inject
 	private AbstractUIPlugin plugin;
-	
-	@Inject(optional=true)
+
+	@Inject(optional = true)
 	@Named("org.eclipse.xtext.ui.core.PluginImageHelper.pathSuffix")
 	private String pathSuffix = "icons/";
-	
-	@Inject(optional=true)
+
+	@Inject(optional = true)
 	@Named("org.eclipse.xtext.ui.core.PluginImageHelper.defaultImage")
 	private String defaultImage = "default.gif";
-	
-	@Inject(optional=true)
+
+	@Inject(optional = true)
 	@Named("org.eclipse.xtext.ui.core.PluginImageHelper.notFound")
 	private String notFound = "notFound.gif";
-	
+
+	/**
+	 * Returns the image associated with the given image descriptor.
+	 * 
+	 * @param descriptor
+	 *            the image descriptor for which the helper manages an image, or <code>null</code> for a missing image
+	 *            descriptor
+	 * @return the image associated with the image descriptor or <code>null</code> if the image descriptor can't create
+	 *         the requested image.
+	 */
+	public Image getImage(ImageDescriptor descriptor) {
+		if (descriptor == null) {
+			descriptor = ImageDescriptor.getMissingImageDescriptor();
+		}
+
+		Image result = registry.get(descriptor);
+		if (result != null) {
+			return result;
+		}
+		result = descriptor.createImage();
+		if (result != null) {
+			registry.put(descriptor, result);
+		}
+		return result;
+	}
+
+	/**
+	 * Disposes all images managed by this iamge helper.
+	 */
+	public void dispose() {
+		for (Iterator<Image> iter = registry.values().iterator(); iter.hasNext();) {
+			Image image = iter.next();
+			image.dispose();
+		}
+		registry.clear();
+	}
+
+	@Inject
+	public void hookBundleListener(AbstractUIPlugin plugin) {
+		plugin.getBundle().getBundleContext().addBundleListener(this);
+	}
+
 	public Image getImage(String imageName) {
 		String imgname = imageName == null ? defaultImage : imageName;
 		if (imgname != null) {
@@ -91,5 +138,11 @@ public class PluginImageHelper implements IImageHelper {
 	public void setDefaultImage(String defaultImage) {
 		this.defaultImage = defaultImage;
 	}
-	
+
+	public void bundleChanged(BundleEvent event) {
+		if (event.getType() == BundleEvent.STOPPED) {
+			dispose();
+		}
+	}
+
 }
