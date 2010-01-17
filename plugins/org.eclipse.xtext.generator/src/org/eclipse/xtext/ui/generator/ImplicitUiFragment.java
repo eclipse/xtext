@@ -52,9 +52,12 @@ public class ImplicitUiFragment extends AbstractGeneratorFragment {
 		
 		// label provider
 		.addTypeToType("org.eclipse.jface.viewers.ILabelProvider","org.eclipse.xtext.ui.core.DefaultLabelProvider")
+		.addTypeToType("org.eclipse.jface.viewers.ILabelDecorator","org.eclipse.xtext.ui.core.editor.validation.ProblemsLabelDecorator")
 		.addTypeToType("org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider","org.eclipse.xtext.ui.core.DefaultLabelProvider")
 		.addTypeToType("org.eclipse.emf.common.notify.AdapterFactory","org.eclipse.xtext.ui.core.InjectableAdapterFactory")
 		.addTypeToType("org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider","org.eclipse.xtext.ui.core.InjectableAdapterFactoryLabelProvider")
+		.addTypeToProviderInstance("org.eclipse.jface.viewers.DecoratingLabelProvider", 
+				"new org.eclipse.xtext.ui.core.InjectableDecoratingLabelProvider()")
 		.addTypeToInstance("org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry","org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry.INSTANCE")
 		
 		// content assist
@@ -73,6 +76,9 @@ public class ImplicitUiFragment extends AbstractGeneratorFragment {
 		.addTypeToType("org.eclipse.xtext.ui.core.editor.formatting.IContentFormatterFactory", "org.eclipse.xtext.ui.core.editor.formatting.ContentFormatterFactory")
 		
 		// editor notification
+		.addConfiguredBinding("XtextEditorErrorTickUpdater", 
+					"binder.bind(org.eclipse.xtext.ui.core.editor.IXtextEditorCallback.class)"+
+					".annotatedWith(com.google.inject.name.Names.named(\"TODO_REPLACE_WITH_GUICE20_MULITIBINDINGS\")).to(org.eclipse.xtext.ui.core.editor.XtextEditorErrorTickUpdater.class)")
 		.addTypeToType("org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider", 
 				"org.eclipse.xtext.ui.core.editor.IDirtyStateManager")
 		.addTypeToProviderInstance("org.eclipse.xtext.ui.core.editor.IDirtyStateManager", 
