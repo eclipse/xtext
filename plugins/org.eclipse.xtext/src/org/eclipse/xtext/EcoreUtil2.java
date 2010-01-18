@@ -44,6 +44,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.util.ReflectionUtil;
 
 /**
  * @author Heiko Behrens
@@ -263,37 +264,14 @@ public class EcoreUtil2 extends EcoreUtil {
 				} else if (type instanceof EDataType && existingFeature.getEType() instanceof EDataType) {
 					EDataType expected = (EDataType) type;
 					EDataType actual = (EDataType) existingFeature.getEType();
-					Class<?> expectedInstanceClass = getObjectType(expected.getInstanceClass());
-					Class<?> actualInstanceClass = getObjectType(actual.getInstanceClass());
+					Class<?> expectedInstanceClass = ReflectionUtil.getObjectType(expected.getInstanceClass());
+					Class<?> actualInstanceClass = ReflectionUtil.getObjectType(actual.getInstanceClass());
 					return actual.equals(expected) || 
 						expectedInstanceClass != null && actualInstanceClass != null && actualInstanceClass.isAssignableFrom(expectedInstanceClass);
 				}
 			}
 		}
 		return false;
-	}
-
-	private static Class<?> getObjectType(Class<?> clazzA) {
-		if (clazzA != null && clazzA.isPrimitive()) {
-			if (clazzA == Boolean.TYPE) {
-				return Boolean.class;
-			} else if (clazzA == Integer.TYPE) {
-				return Integer.class;
-			} else if (clazzA == Float.TYPE) {
-				return Float.class;
-			} else if (clazzA == Byte.TYPE) {
-				return Byte.class;
-			} else if (clazzA == Character.TYPE) {
-				return Character.class;
-			} else if (clazzA == Double.TYPE) {
-				return Double.class;
-			} else if (clazzA == Short.TYPE) {
-				return Short.class;
-			} else if (clazzA == Long.TYPE) {
-				return Long.class;
-			}
-		}
-		return clazzA;
 	}
 
 	public static FindResult containsSemanticallyEqualFeature(EClass eClass, EStructuralFeature feature) {
