@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Glue
-Bundle-SymbolicName: org.eclipse.xtext.gmf.glue
+Bundle-SymbolicName: org.eclipse.xtext.gmf.glue;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.eclipse.xtext.gmf.glue.Activator
 Bundle-Vendor: Eclipse Modeling Project

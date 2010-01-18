@@ -40,8 +40,10 @@ import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IEditorReference;
 import org.eclipse.ui.IPartListener;
+import org.eclipse.ui.IStartup;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.gmf.glue.Activator;
@@ -167,10 +169,12 @@ public class ConcurrentModificationObserver implements IPartListener,
 				}
 			}
 		}
-		for(Iterator<IEditorPart> i=conflictingEditors.iterator(); i.hasNext();) {
+		for (Iterator<IEditorPart> i = conflictingEditors.iterator(); i
+				.hasNext();) {
 			IEditorPart conflictingEditor = i.next();
-			if(conflictingEditor instanceof DiagramEditor) {
-				if(((DiagramEditor) conflictingEditor).getEditingDomain().equals(event.getEditingDomain())) {
+			if (conflictingEditor instanceof DiagramEditor) {
+				if (((DiagramEditor) conflictingEditor).getEditingDomain()
+						.equals(event.getEditingDomain())) {
 					i.remove();
 				}
 			}
@@ -246,4 +250,19 @@ public class ConcurrentModificationObserver implements IPartListener,
 									+ "Apply changes anyway?", SWT.NONE);
 		}
 	}
+
+	public static class Initializer implements IStartup {
+		public void earlyStartup() {
+			Display.getDefault().asyncExec(new Runnable() {
+				public void run() {
+					IWorkbenchPage activePage = PlatformUI.getWorkbench()
+							.getActiveWorkbenchWindow().getActivePage();
+					activePage
+							.addPartListener(new ConcurrentModificationObserver(
+									activePage));
+				}
+			});
+		}
+	}
+
 }
