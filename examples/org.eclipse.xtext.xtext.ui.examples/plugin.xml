@@ -66,4 +66,28 @@
 		 <projectDescriptor name="org.eclipse.xtext.example.fowlerdsl.ui" contentURI="contents/org.eclipse.xtext.example.ecoredsl.ui/"  description="A smart editor for the language."/>
 	  </example>
    </extension>
+
+	<!-- ========= org.eclipse.xtext.gmf.example ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.xtext.examples.NewGMFIntegrationExampleWizard" 
+			name="GMF Integration Example" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.ui.Examples/org.eclipse.xtext.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>An example how to integrate Xtext with GMF (experimental).
+			</description>
+		</wizard>
+	</extension>
+   <extension point="org.eclipse.emf.common.ui.examples">
+	  <example wizardID="org.eclipse.xtext.examples.NewGMFIntegrationExampleWizard" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.xtext.example.gmf" contentURI="contents/org.eclipse.xtext.example.gmf/" description="Xtext Parser, Serializer, Linker, etc."/>
+		 <projectDescriptor name="org.eclipse.xtext.example.gmf.ui" contentURI="contents/org.eclipse.xtext.example.gmf.ui/" description="Xtext editor, etc."/>
+		 <projectDescriptor name="org.eclipse.xtext.example.gmf.edit" contentURI="contents/org.eclipse.xtext.example.gmf.edit/" description="EMF edit plug-in"/>
+		 <projectDescriptor name="org.eclipse.xtext.example.gmf.models" contentURI="contents/org.eclipse.xtext.example.gmf.models/" description="GMF design models"/>
+		 <projectDescriptor name="org.eclipse.xtext.example.gmf.diagram" contentURI="contents/org.eclipse.xtext.example.gmf.diagram/" description="Generated GMF diagram editor"/>
+		 <projectDescriptor name="org.eclipse.xtext.example.gmf.diagram.extensions" contentURI="contents/org.eclipse.xtext.example.gmf.diagram.extensions/" description="Manual extensions to the GMF diagram editor"/>
+		 <projectDescriptor name="org.eclipse.xtext.gmf.glue" contentURI="contents/org.eclipse.xtext.gmf.glue/" description="Generic Xtext/GMF glue code"/>
+	  </example>
+   </extension>
 </plugin>
