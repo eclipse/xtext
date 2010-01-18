@@ -18,7 +18,7 @@ public class EntitiesEditPartFactoryOverride extends EntitiesEditPartFactory {
 			case ModelEditPart.VISUAL_ID:
 				return new ModelEditPartOverride(view);
 			case SimplePropertyEditPart.VISUAL_ID:
-				return new SimplePropertyInDiagramEditorEditPartOverride(view);
+				return new SimplePropertyPopupXtextEditorEditPartOverride(view);
 				// return new SimplePropertyWrapperEditPartOverride(view);
 			}
 		}
