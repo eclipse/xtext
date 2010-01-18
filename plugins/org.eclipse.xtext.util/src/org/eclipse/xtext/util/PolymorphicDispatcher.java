@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
+import static org.eclipse.xtext.util.ReflectionUtil.getObjectType;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -173,7 +174,7 @@ public class PolymorphicDispatcher<RT> {
 				return false;
 			for (int i = 0; i < paramTypes.size(); i++) {
 				Class<?> paramClass = paramTypes.get(i);
-				if (!(getParameterTypes()[i].isAssignableFrom(paramClass)))
+				if (!(getObjectType(getParameterTypes()[i]).isAssignableFrom(getObjectType(paramClass))))
 					return false;
 			}
 			return true;
