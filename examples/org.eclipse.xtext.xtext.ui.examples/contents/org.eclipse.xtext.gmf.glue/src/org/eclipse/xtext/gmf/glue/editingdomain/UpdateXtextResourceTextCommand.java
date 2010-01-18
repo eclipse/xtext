@@ -44,7 +44,6 @@ public class UpdateXtextResourceTextCommand {
 		return new RecordingCommand(editingDomain, "update xtext resource") {
 			@Override
 			protected void doExecute() {
-				// TODO Auto-generated method stub
 				try {
 					if (changeAggregator != null) {
 						changeAggregator.setSuspended(true);
@@ -61,7 +60,7 @@ public class UpdateXtextResourceTextCommand {
 		};
 	}
 
-	public static ICommand createICommand(final XtextResource xtextResource,
+	public static ICommand createUpdateCommand(final XtextResource xtextResource,
 			final int offset, final int length, final String newText) {
 		final TransactionalEditingDomain editingDomain = TransactionUtil
 				.getEditingDomain(xtextResource);

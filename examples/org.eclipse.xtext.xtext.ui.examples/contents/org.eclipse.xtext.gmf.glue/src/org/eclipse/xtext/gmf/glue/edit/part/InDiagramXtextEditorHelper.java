@@ -40,6 +40,7 @@ import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.xtext.gmf.glue.Activator;
 import org.eclipse.xtext.gmf.glue.editingdomain.UpdateXtextResourceTextCommand;
+import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
@@ -116,7 +117,7 @@ public class InDiagramXtextEditorHelper {
 					semanticResource));
 		} catch (Exception e) {
 			Activator.logError(e);
-		} 
+		}
 	}
 
 	public void closeEditor(boolean isReconcile) {
@@ -125,20 +126,21 @@ public class InDiagramXtextEditorHelper {
 				try {
 					final IXtextDocument xtextDocument = xtextEditor
 							.getDocument();
-					// subtract 2 for the artificial newlines
-					int documentGrowth = xtextDocument.getLength()
-							- initialDocumentSize - 2;
-					String newText = xtextDocument.get(editorOffset + 1,
-							initialEditorSize + documentGrowth);
-					UpdateXtextResourceTextCommand.createICommand(
-							xtextResource, editorOffset, initialEditorSize,
-							newText).execute(null, null);
+					if (!isDocumentHasErrors(xtextDocument)) {
+						// subtract 2 for the artificial newlines
+						int documentGrowth = xtextDocument.getLength()
+								- initialDocumentSize - 2;
+						String newText = xtextDocument.get(editorOffset + 1,
+								initialEditorSize + documentGrowth);
+						UpdateXtextResourceTextCommand.createUpdateCommand(
+								xtextResource, editorOffset, initialEditorSize,
+								newText).execute(null, null);
+					}
 				} catch (Exception exc) {
 					Activator.logError(exc);
 				}
 			}
-
-			xtextEditor.close(false);
+			xtextEditor.dispose();
 			xtextEditorComposite.setVisible(false);
 			xtextEditorComposite.dispose();
 			xtextEditor = null;
@@ -148,7 +150,8 @@ public class InDiagramXtextEditorHelper {
 
 	private void createXtextEditor(IEditorInput editorInput) throws Exception {
 		Shell diagramShell = diagramEditor.getSite().getShell();
-		xtextEditorComposite = new Decorations(diagramShell, SWT.RESIZE | SWT.ON_TOP | SWT.BORDER);
+		xtextEditorComposite = new Decorations(diagramShell, SWT.RESIZE
+				| SWT.ON_TOP | SWT.BORDER);
 		xtextEditorComposite.setLayout(new FillLayout());
 		IEditorSite editorSite = diagramEditor.getEditorSite();
 		xtextEditor = xtextInjector.getInstance(XtextEditor.class);
@@ -168,7 +171,6 @@ public class InDiagramXtextEditorHelper {
 			}
 
 			public void partBroughtToTop(IWorkbenchPart part) {
-				//closeEditor(false);
 			}
 
 			public void partClosed(IWorkbenchPart part) {
@@ -176,13 +178,13 @@ public class InDiagramXtextEditorHelper {
 			}
 
 			public void partDeactivated(IWorkbenchPart part) {
-				closeEditor(false);				
+				closeEditor(false);
 			}
 
 			public void partOpened(IWorkbenchPart part) {
 				closeEditor(false);
 			}
-			
+
 		});
 	}
 
@@ -293,5 +295,17 @@ public class InDiagramXtextEditorHelper {
 		}
 		return null;
 	}
+
+	private boolean isDocumentHasErrors(final IXtextDocument xtextDocument) {
+		return ((boolean) xtextDocument
+				.readOnly(new IUnitOfWork<Boolean, XtextResource>() {
+					public Boolean exec(XtextResource state)
+							throws Exception {
+						IParseResult parseResult = state.getParseResult();
+						return !state.getErrors().isEmpty() || parseResult == null || !parseResult.getParseErrors().isEmpty();
+					}
+				}));
+	}
+
 
 }
