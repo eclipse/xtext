@@ -79,7 +79,7 @@ public class AntlrParserWrapper implements IParser {
 				if (nodeAdapter != null) {
 					final CompositeNode parserNode = nodeAdapter.getParserNode();
 					final XtextResource semanticResource = (XtextResource) semanticElement.eResource();
-					ICommand reparseCommand = UpdateXtextResourceTextCommand.createICommand(semanticResource,
+					ICommand reparseCommand = UpdateXtextResourceTextCommand.createUpdateCommand(semanticResource,
 							parserNode.getOffset(), parserNode.getLength(), newString);
 					return reparseCommand;
 				}

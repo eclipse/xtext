@@ -85,7 +85,7 @@ public class ChangeAggregatorAdapter extends EContentAdapter {
 	public void endRecording() {
 		isRecording = false;
 	}
-	
+
 	public void setSuspended(boolean isSuspended) {
 		this.isSuspended = isSuspended;
 	}
@@ -93,20 +93,24 @@ public class ChangeAggregatorAdapter extends EContentAdapter {
 	public List<EObject> getModificationRoots() {
 		Map<Resource, List<EObject>> resource2ChangePathMap = new HashMap<Resource, List<EObject>>();
 		for (EObject eObject : modifiedObjects) {
-			Resource resource = eObject.eResource();
-			List<EObject> resourceChangePath = resource2ChangePathMap
-					.get(resource);
-			if (resourceChangePath == null) {
-				resourceChangePath = allContainers(eObject);
-				resource2ChangePathMap.put(resource, resourceChangePath);
-			} else {
-				resourceChangePath.retainAll(allContainers(eObject));
+			if (!eObject.eIsProxy()) {
+				Resource resource = eObject.eResource();
+				List<EObject> resourceChangePath = resource2ChangePathMap
+						.get(resource);
+				if (resourceChangePath == null) {
+					resourceChangePath = allContainers(eObject);
+					resource2ChangePathMap.put(resource, resourceChangePath);
+				} else {
+					resourceChangePath.retainAll(allContainers(eObject));
+				}
 			}
 		}
 		List<EObject> modificationRoots = new ArrayList<EObject>(
 				resource2ChangePathMap.size());
 		for (List<EObject> changePath : resource2ChangePathMap.values()) {
-			modificationRoots.add(changePath.get(changePath.size() - 1));
+			if (!changePath.isEmpty()) {
+				modificationRoots.add(changePath.get(changePath.size() - 1));
+			}
 		}
 		return modificationRoots;
 	}

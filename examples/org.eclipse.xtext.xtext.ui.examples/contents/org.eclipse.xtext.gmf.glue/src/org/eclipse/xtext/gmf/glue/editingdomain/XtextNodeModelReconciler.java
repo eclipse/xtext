@@ -122,7 +122,7 @@ public class XtextNodeModelReconciler extends AdapterImpl implements
 				SerializerUtil serializer = xtextResource.getSerializer();
 				String newText = serializer.serialize(modificationRoot);
 				ICommand newCommand = UpdateXtextResourceTextCommand
-						.createICommand(xtextResource, parserNode.getOffset(),
+						.createUpdateCommand(xtextResource, parserNode.getOffset(),
 								parserNode.getLength(), newText);
 				if (updateXtextResourceTextCommand == null) {
 					updateXtextResourceTextCommand = newCommand;
