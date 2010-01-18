@@ -310,7 +310,7 @@ bc. terminal ASCII : '0x' ('0'..'7') ('0'..'9'|'A'..'F');
 
 That is the 2-digit hexadecimal code of ascii characters.
 
-h3. Parser Rules
+h3(#parser_rules). Parser Rules
 
 The parser reads a sequence of terminals and walks through the parser rules. Hence a parser rule - contrary to a terminal rule - does not produce a single terminal token but a tree of non-terminal and terminal tokens. They lead to a so called parse tree (in Xtext it is also referred as node model). Furthermore, parser rules are handled as kind of a building plan for the creation of the EObjects that form the semantic model (the linked abstract syntax graph or AST). Due to this fact, parser rules are even called production rules. The different constructs like actions and assignments are used to derive types and initialize the semantic objects accordingly. 
 

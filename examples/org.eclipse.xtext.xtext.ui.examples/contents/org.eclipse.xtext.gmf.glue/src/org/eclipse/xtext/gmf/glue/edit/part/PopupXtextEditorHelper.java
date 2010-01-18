@@ -61,7 +61,7 @@ import com.google.inject.Injector;
  * 
  * @author koehnlein
  */
-public class InDiagramXtextEditorHelper {
+public class PopupXtextEditorHelper {
 
 	private static int MIN_EDITOR_WIDTH = 100;
 
@@ -86,7 +86,7 @@ public class InDiagramXtextEditorHelper {
 
 	private String semanticElementFragment;
 
-	public InDiagramXtextEditorHelper(IGraphicalEditPart editPart,
+	public PopupXtextEditorHelper(IGraphicalEditPart editPart,
 			Injector xtextInjector) {
 		this.hostEditPart = editPart;
 		this.xtextInjector = xtextInjector;

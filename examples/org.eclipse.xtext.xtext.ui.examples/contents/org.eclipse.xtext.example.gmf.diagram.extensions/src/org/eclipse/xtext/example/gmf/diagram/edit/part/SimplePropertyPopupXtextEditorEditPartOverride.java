@@ -9,11 +9,11 @@ import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.xtext.example.gmf.diagram.edit.parts.SimplePropertyEditPart;
 import org.eclipse.xtext.example.gmf.diagram.extensions.Activator;
 import org.eclipse.xtext.example.gmf.internal.EntitiesActivator;
-import org.eclipse.xtext.gmf.glue.edit.part.InDiagramXtextEditorHelper;
+import org.eclipse.xtext.gmf.glue.edit.part.PopupXtextEditorHelper;
 
-public class SimplePropertyInDiagramEditorEditPartOverride extends SimplePropertyEditPart {
+public class SimplePropertyPopupXtextEditorEditPartOverride extends SimplePropertyEditPart {
 
-	public SimplePropertyInDiagramEditorEditPartOverride(View view) {
+	public SimplePropertyPopupXtextEditorEditPartOverride(View view) {
 		super(view);
 	}
 
@@ -52,7 +52,7 @@ public class SimplePropertyInDiagramEditorEditPartOverride extends SimplePropert
 
 	private void openInDiagramXtextEditor() {
 		try {
-			new InDiagramXtextEditorHelper(this, EntitiesActivator.getInstance().getInjector(
+			new PopupXtextEditorHelper(this, EntitiesActivator.getInstance().getInjector(
 					"org.eclipse.xtext.example.gmf.Entities")).showEditor();
 		} catch (Exception e) {
 			Activator.getDefault().getLog().log(new Status(IStatus.ERROR, Activator.PLUGIN_ID, e.getMessage(), e));
