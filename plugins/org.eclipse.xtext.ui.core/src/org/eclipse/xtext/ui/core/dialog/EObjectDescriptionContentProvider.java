@@ -34,19 +34,21 @@ public class EObjectDescriptionContentProvider implements ILazyContentProvider {
 	private TableViewer viewer;
 
 	private SizeCalculationJob sizeCalculationJob;
-	
+
 	private Label statusLabel;
 
 	public EObjectDescriptionContentProvider(Label statusLabel) {
 		this.statusLabel = statusLabel;
 	}
-	
+
 	public void dispose() {
 		viewer = null;
 		matches = null;
 		statusLabel = null;
-		sizeCalculationJob.cancel();
-		sizeCalculationJob = null;
+		if (sizeCalculationJob != null) {
+			sizeCalculationJob.cancel();
+			sizeCalculationJob = null;
+		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -97,11 +99,11 @@ public class EObjectDescriptionContentProvider implements ILazyContentProvider {
 	}
 
 	private void updateStatusLabel(boolean isFinished) {
-		if(statusLabel != null) {
+		if (statusLabel != null) {
 			statusLabel.setText((isFinished) ? "" : Messages.EObjectDescriptionContentProvider_StatusMessageSearching1); //$NON-NLS-1$
 		}
 	}
-	
+
 	private final class SizeCalculationJob extends Job {
 
 		private static final int TIME_THRESHOLD = 500;
