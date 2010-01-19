@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.3 2010/01/11 13:58:57 szarnekow Exp $
+ $Id: plugin.xml,v 1.4 2010/01/19 15:19:11 jkohnlein Exp $
 -->
 
 <plugin>
@@ -101,6 +101,31 @@
             </objectState>
          </enablement>
       </decorator>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.eclipse.xtext.builder.internal.GuiceAwareExtensionFactory:org.eclipse.xtext.builder.action.OpenXtextElementHandler"
+            commandId="org.eclipse.xtext.builder.action.OpenXtextElementCommand">
+      </handler>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.eclipse.ui.category.window"
+            description="Open the declaration of an Xtext element"
+            id="org.eclipse.xtext.builder.action.OpenXtextElementCommand"
+            name="Open Xtext Element">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="org.eclipse.xtext.builder.action.OpenXtextElementCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+SHIFT+M">
+      </key>
    </extension>
 
 </plugin>
