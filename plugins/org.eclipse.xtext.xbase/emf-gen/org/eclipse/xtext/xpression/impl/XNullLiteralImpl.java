@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XNullLiteralImpl.java,v 1.1 2010/01/16 08:50:51 sefftinge Exp $
+ * $Id: XNullLiteralImpl.java,v 1.2 2010/01/19 19:53:09 sefftinge Exp $
  */
 package org.eclipse.xtext.xpression.impl;
 
@@ -20,24 +20,27 @@ import org.eclipse.xtext.xpression.XpressionPackage;
  *
  * @generated
  */
-public class XNullLiteralImpl extends XExpressionImpl implements XNullLiteral {
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected XNullLiteralImpl() {
-		super();
-	}
+public class XNullLiteralImpl extends XExpressionImpl implements XNullLiteral
+{
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected XNullLiteralImpl()
+  {
+    super();
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return XpressionPackage.Literals.XNULL_LITERAL;
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass()
+  {
+    return XpressionPackage.Literals.XNULL_LITERAL;
+  }
 
 } //XNullLiteralImpl

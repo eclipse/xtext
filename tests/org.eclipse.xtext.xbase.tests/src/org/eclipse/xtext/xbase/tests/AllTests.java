@@ -13,6 +13,8 @@ public class AllTests {
       TestSuite suite = new TestSuite("Tests for org.eclipse.xtext.xbase.tests");
       suite.addTestSuite(org.eclipse.xtext.xbase.tests.linking.LinkingTest.class);
       suite.addTestSuite(org.eclipse.xtext.xbase.tests.parser.XbaseParserTest.class);
+      suite.addTestSuite(org.eclipse.xtext.xbase.tests.types.TypeResolverTest.class);
+      suite.addTestSuite(org.eclipse.xtext.xbase.tests.types.TypesServiceTest.class);
       return suite;
    }
 }

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XTypeRef.java,v 1.1 2010/01/16 08:50:52 sefftinge Exp $
+ * $Id: XTypeRef.java,v 1.2 2010/01/19 19:53:12 sefftinge Exp $
  */
 package org.eclipse.xtext.xtype;
 
@@ -18,5 +18,6 @@ import org.eclipse.emf.ecore.EObject;
  * @model
  * @generated
  */
-public interface XTypeRef extends EObject {
+public interface XTypeRef extends EObject
+{
 } // XTypeRef

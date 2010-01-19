@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XSwitchExpressionImpl.java,v 1.1 2010/01/16 08:50:51 sefftinge Exp $
+ * $Id: XSwitchExpressionImpl.java,v 1.2 2010/01/19 19:53:08 sefftinge Exp $
  */
 package org.eclipse.xtext.xpression.impl;
 
@@ -41,250 +41,275 @@ import org.eclipse.xtext.xpression.XpressionPackage;
  *
  * @generated
  */
-public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExpression {
-	/**
-	 * The cached value of the '{@link #getSwitch() <em>Switch</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getSwitch()
-	 * @generated
-	 * @ordered
-	 */
-	protected XExpression switch_;
+public class XSwitchExpressionImpl extends XExpressionImpl implements XSwitchExpression
+{
+  /**
+   * The cached value of the '{@link #getSwitch() <em>Switch</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getSwitch()
+   * @generated
+   * @ordered
+   */
+  protected XExpression switch_;
 
-	/**
-	 * The cached value of the '{@link #getCases() <em>Cases</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getCases()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<XCasePart> cases;
+  /**
+   * The cached value of the '{@link #getCases() <em>Cases</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getCases()
+   * @generated
+   * @ordered
+   */
+  protected EList<XCasePart> cases;
 
-	/**
-	 * The cached value of the '{@link #getDefault() <em>Default</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDefault()
-	 * @generated
-	 * @ordered
-	 */
-	protected XExpression default_;
+  /**
+   * The cached value of the '{@link #getDefault() <em>Default</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getDefault()
+   * @generated
+   * @ordered
+   */
+  protected XExpression default_;
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected XSwitchExpressionImpl() {
-		super();
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected XSwitchExpressionImpl()
+  {
+    super();
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EClass eStaticClass() {
-		return XpressionPackage.Literals.XSWITCH_EXPRESSION;
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  protected EClass eStaticClass()
+  {
+    return XpressionPackage.Literals.XSWITCH_EXPRESSION;
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public XExpression getSwitch() {
-		return switch_;
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public XExpression getSwitch()
+  {
+    return switch_;
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetSwitch(XExpression newSwitch, NotificationChain msgs) {
-		XExpression oldSwitch = switch_;
-		switch_ = newSwitch;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XpressionPackage.XSWITCH_EXPRESSION__SWITCH, oldSwitch, newSwitch);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetSwitch(XExpression newSwitch, NotificationChain msgs)
+  {
+    XExpression oldSwitch = switch_;
+    switch_ = newSwitch;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XpressionPackage.XSWITCH_EXPRESSION__SWITCH, oldSwitch, newSwitch);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setSwitch(XExpression newSwitch) {
-		if (newSwitch != switch_) {
-			NotificationChain msgs = null;
-			if (switch_ != null)
-				msgs = ((InternalEObject)switch_).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XpressionPackage.XSWITCH_EXPRESSION__SWITCH, null, msgs);
-			if (newSwitch != null)
-				msgs = ((InternalEObject)newSwitch).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XpressionPackage.XSWITCH_EXPRESSION__SWITCH, null, msgs);
-			msgs = basicSetSwitch(newSwitch, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XpressionPackage.XSWITCH_EXPRESSION__SWITCH, newSwitch, newSwitch));
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setSwitch(XExpression newSwitch)
+  {
+    if (newSwitch != switch_)
+    {
+      NotificationChain msgs = null;
+      if (switch_ != null)
+        msgs = ((InternalEObject)switch_).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XpressionPackage.XSWITCH_EXPRESSION__SWITCH, null, msgs);
+      if (newSwitch != null)
+        msgs = ((InternalEObject)newSwitch).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XpressionPackage.XSWITCH_EXPRESSION__SWITCH, null, msgs);
+      msgs = basicSetSwitch(newSwitch, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XpressionPackage.XSWITCH_EXPRESSION__SWITCH, newSwitch, newSwitch));
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<XCasePart> getCases() {
-		if (cases == null) {
-			cases = new EObjectContainmentEList<XCasePart>(XCasePart.class, this, XpressionPackage.XSWITCH_EXPRESSION__CASES);
-		}
-		return cases;
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EList<XCasePart> getCases()
+  {
+    if (cases == null)
+    {
+      cases = new EObjectContainmentEList<XCasePart>(XCasePart.class, this, XpressionPackage.XSWITCH_EXPRESSION__CASES);
+    }
+    return cases;
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public XExpression getDefault() {
-		return default_;
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public XExpression getDefault()
+  {
+    return default_;
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetDefault(XExpression newDefault, NotificationChain msgs) {
-		XExpression oldDefault = default_;
-		default_ = newDefault;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XpressionPackage.XSWITCH_EXPRESSION__DEFAULT, oldDefault, newDefault);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
-		}
-		return msgs;
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetDefault(XExpression newDefault, NotificationChain msgs)
+  {
+    XExpression oldDefault = default_;
+    default_ = newDefault;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, XpressionPackage.XSWITCH_EXPRESSION__DEFAULT, oldDefault, newDefault);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setDefault(XExpression newDefault) {
-		if (newDefault != default_) {
-			NotificationChain msgs = null;
-			if (default_ != null)
-				msgs = ((InternalEObject)default_).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XpressionPackage.XSWITCH_EXPRESSION__DEFAULT, null, msgs);
-			if (newDefault != null)
-				msgs = ((InternalEObject)newDefault).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XpressionPackage.XSWITCH_EXPRESSION__DEFAULT, null, msgs);
-			msgs = basicSetDefault(newDefault, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, XpressionPackage.XSWITCH_EXPRESSION__DEFAULT, newDefault, newDefault));
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setDefault(XExpression newDefault)
+  {
+    if (newDefault != default_)
+    {
+      NotificationChain msgs = null;
+      if (default_ != null)
+        msgs = ((InternalEObject)default_).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - XpressionPackage.XSWITCH_EXPRESSION__DEFAULT, null, msgs);
+      if (newDefault != null)
+        msgs = ((InternalEObject)newDefault).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - XpressionPackage.XSWITCH_EXPRESSION__DEFAULT, null, msgs);
+      msgs = basicSetDefault(newDefault, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, XpressionPackage.XSWITCH_EXPRESSION__DEFAULT, newDefault, newDefault));
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case XpressionPackage.XSWITCH_EXPRESSION__SWITCH:
-				return basicSetSwitch(null, msgs);
-			case XpressionPackage.XSWITCH_EXPRESSION__CASES:
-				return ((InternalEList<?>)getCases()).basicRemove(otherEnd, msgs);
-			case XpressionPackage.XSWITCH_EXPRESSION__DEFAULT:
-				return basicSetDefault(null, msgs);
-		}
-		return super.eInverseRemove(otherEnd, featureID, msgs);
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
+  {
+    switch (featureID)
+    {
+      case XpressionPackage.XSWITCH_EXPRESSION__SWITCH:
+        return basicSetSwitch(null, msgs);
+      case XpressionPackage.XSWITCH_EXPRESSION__CASES:
+        return ((InternalEList<?>)getCases()).basicRemove(otherEnd, msgs);
+      case XpressionPackage.XSWITCH_EXPRESSION__DEFAULT:
+        return basicSetDefault(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object eGet(int featureID, boolean resolve, boolean coreType) {
-		switch (featureID) {
-			case XpressionPackage.XSWITCH_EXPRESSION__SWITCH:
-				return getSwitch();
-			case XpressionPackage.XSWITCH_EXPRESSION__CASES:
-				return getCases();
-			case XpressionPackage.XSWITCH_EXPRESSION__DEFAULT:
-				return getDefault();
-		}
-		return super.eGet(featureID, resolve, coreType);
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Object eGet(int featureID, boolean resolve, boolean coreType)
+  {
+    switch (featureID)
+    {
+      case XpressionPackage.XSWITCH_EXPRESSION__SWITCH:
+        return getSwitch();
+      case XpressionPackage.XSWITCH_EXPRESSION__CASES:
+        return getCases();
+      case XpressionPackage.XSWITCH_EXPRESSION__DEFAULT:
+        return getDefault();
+    }
+    return super.eGet(featureID, resolve, coreType);
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@SuppressWarnings("unchecked")
-	@Override
-	public void eSet(int featureID, Object newValue) {
-		switch (featureID) {
-			case XpressionPackage.XSWITCH_EXPRESSION__SWITCH:
-				setSwitch((XExpression)newValue);
-				return;
-			case XpressionPackage.XSWITCH_EXPRESSION__CASES:
-				getCases().clear();
-				getCases().addAll((Collection<? extends XCasePart>)newValue);
-				return;
-			case XpressionPackage.XSWITCH_EXPRESSION__DEFAULT:
-				setDefault((XExpression)newValue);
-				return;
-		}
-		super.eSet(featureID, newValue);
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @SuppressWarnings("unchecked")
+  @Override
+  public void eSet(int featureID, Object newValue)
+  {
+    switch (featureID)
+    {
+      case XpressionPackage.XSWITCH_EXPRESSION__SWITCH:
+        setSwitch((XExpression)newValue);
+        return;
+      case XpressionPackage.XSWITCH_EXPRESSION__CASES:
+        getCases().clear();
+        getCases().addAll((Collection<? extends XCasePart>)newValue);
+        return;
+      case XpressionPackage.XSWITCH_EXPRESSION__DEFAULT:
+        setDefault((XExpression)newValue);
+        return;
+    }
+    super.eSet(featureID, newValue);
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public void eUnset(int featureID) {
-		switch (featureID) {
-			case XpressionPackage.XSWITCH_EXPRESSION__SWITCH:
-				setSwitch((XExpression)null);
-				return;
-			case XpressionPackage.XSWITCH_EXPRESSION__CASES:
-				getCases().clear();
-				return;
-			case XpressionPackage.XSWITCH_EXPRESSION__DEFAULT:
-				setDefault((XExpression)null);
-				return;
-		}
-		super.eUnset(featureID);
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public void eUnset(int featureID)
+  {
+    switch (featureID)
+    {
+      case XpressionPackage.XSWITCH_EXPRESSION__SWITCH:
+        setSwitch((XExpression)null);
+        return;
+      case XpressionPackage.XSWITCH_EXPRESSION__CASES:
+        getCases().clear();
+        return;
+      case XpressionPackage.XSWITCH_EXPRESSION__DEFAULT:
+        setDefault((XExpression)null);
+        return;
+    }
+    super.eUnset(featureID);
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean eIsSet(int featureID) {
-		switch (featureID) {
-			case XpressionPackage.XSWITCH_EXPRESSION__SWITCH:
-				return switch_ != null;
-			case XpressionPackage.XSWITCH_EXPRESSION__CASES:
-				return cases != null && !cases.isEmpty();
-			case XpressionPackage.XSWITCH_EXPRESSION__DEFAULT:
-				return default_ != null;
-		}
-		return super.eIsSet(featureID);
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public boolean eIsSet(int featureID)
+  {
+    switch (featureID)
+    {
+      case XpressionPackage.XSWITCH_EXPRESSION__SWITCH:
+        return switch_ != null;
+      case XpressionPackage.XSWITCH_EXPRESSION__CASES:
+        return cases != null && !cases.isEmpty();
+      case XpressionPackage.XSWITCH_EXPRESSION__DEFAULT:
+        return default_ != null;
+    }
+    return super.eIsSet(featureID);
+  }
 
 } //XSwitchExpressionImpl

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XNullLiteral.java,v 1.1 2010/01/16 08:50:52 sefftinge Exp $
+ * $Id: XNullLiteral.java,v 1.2 2010/01/19 19:53:10 sefftinge Exp $
  */
 package org.eclipse.xtext.xpression;
 
@@ -17,5 +17,6 @@ package org.eclipse.xtext.xpression;
  * @model
  * @generated
  */
-public interface XNullLiteral extends XExpression {
+public interface XNullLiteral extends XExpression
+{
 } // XNullLiteral

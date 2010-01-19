@@ -3,7 +3,9 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="xpression"
     nsURI="http://www.eclipse.org/xtext/xbase/Xpression" nsPrefix="xpression">
-  <eClassifiers xsi:type="ecore:EClass" name="XExpression"/>
+  <eClassifiers xsi:type="ecore:EClass" name="XExpression" abstract="true">
+    <eOperations name="getDerivedReturnType" eType="ecore:EClass Xtype.ecore#//XTypeRef"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XIfExpression" eSuperTypes="#//XExpression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="if" eType="#//XExpression"
         containment="true"/>

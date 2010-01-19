@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XFunctionTypeRef.java,v 1.1 2010/01/16 08:50:52 sefftinge Exp $
+ * $Id: XFunctionTypeRef.java,v 1.2 2010/01/19 19:53:12 sefftinge Exp $
  */
 package org.eclipse.xtext.xtype;
 
@@ -25,47 +25,48 @@ import org.eclipse.emf.common.util.EList;
  * @model
  * @generated
  */
-public interface XFunctionTypeRef extends XTypeRef {
-	/**
-	 * Returns the value of the '<em><b>Param Types</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.xtext.xtype.XTypeRef}.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Param Types</em>' containment reference list isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Param Types</em>' containment reference list.
-	 * @see org.eclipse.xtext.xtype.XtypePackage#getXFunctionTypeRef_ParamTypes()
-	 * @model containment="true"
-	 * @generated
-	 */
-	EList<XTypeRef> getParamTypes();
+public interface XFunctionTypeRef extends XTypeRef
+{
+  /**
+   * Returns the value of the '<em><b>Param Types</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.xtext.xtype.XTypeRef}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Param Types</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Param Types</em>' containment reference list.
+   * @see org.eclipse.xtext.xtype.XtypePackage#getXFunctionTypeRef_ParamTypes()
+   * @model containment="true"
+   * @generated
+   */
+  EList<XTypeRef> getParamTypes();
 
-	/**
-	 * Returns the value of the '<em><b>Return Type</b></em>' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <p>
-	 * If the meaning of the '<em>Return Type</em>' containment reference isn't clear,
-	 * there really should be more of a description here...
-	 * </p>
-	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Return Type</em>' containment reference.
-	 * @see #setReturnType(XTypeRef)
-	 * @see org.eclipse.xtext.xtype.XtypePackage#getXFunctionTypeRef_ReturnType()
-	 * @model containment="true"
-	 * @generated
-	 */
-	XTypeRef getReturnType();
+  /**
+   * Returns the value of the '<em><b>Return Type</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Return Type</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Return Type</em>' containment reference.
+   * @see #setReturnType(XTypeRef)
+   * @see org.eclipse.xtext.xtype.XtypePackage#getXFunctionTypeRef_ReturnType()
+   * @model containment="true"
+   * @generated
+   */
+  XTypeRef getReturnType();
 
-	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.xtype.XFunctionTypeRef#getReturnType <em>Return Type</em>}' containment reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Return Type</em>' containment reference.
-	 * @see #getReturnType()
-	 * @generated
-	 */
-	void setReturnType(XTypeRef value);
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.xtype.XFunctionTypeRef#getReturnType <em>Return Type</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Return Type</em>' containment reference.
+   * @see #getReturnType()
+   * @generated
+   */
+  void setReturnType(XTypeRef value);
 
 } // XFunctionTypeRef
