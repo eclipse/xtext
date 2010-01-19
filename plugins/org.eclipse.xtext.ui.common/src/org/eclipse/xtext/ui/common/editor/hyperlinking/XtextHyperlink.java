@@ -7,106 +7,30 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.hyperlinking;
 
-import java.util.Iterator;
-
-import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.common.util.WrappedException;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.text.Region;
-import org.eclipse.ui.IEditorPart;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.ide.IDE;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.core.ILocationInFileProvider;
-import org.eclipse.xtext.ui.core.editor.XtextEditor;
-import org.eclipse.xtext.ui.core.editor.XtextReadonlyEditorInput;
-import org.eclipse.xtext.ui.core.resource.IStorage2UriMapper;
-import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.ui.core.editor.IURIEditorOpener;
 
 import com.google.inject.Inject;
 
 /**
+ * @author Jan Koehnlein
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextHyperlink extends AbstractHyperlink {
+public class XtextHyperlink extends AbstractHyperlink implements IURIEditorOpener {
 
-	private static final Logger logger = Logger.getLogger(XtextHyperlink.class);
-
-	private URI uri;
-
-	@Inject
-	private ILocationInFileProvider locationProvider;
+	@Inject 
+	private IURIEditorOpener uriEditorOpener;
 	
-	@Inject
-	private IStorage2UriMapper mapper;
-
-	public void setLocationProvider(ILocationInFileProvider locationProvider) {
-		this.locationProvider = locationProvider;
-	}
-
-	public ILocationInFileProvider getLocationProvider() {
-		return locationProvider;
-	}
-
-	public void setURI(URI uri) {
-		this.uri = uri;
+	public void open() {
+		uriEditorOpener.open();
 	}
 
 	public URI getURI() {
-		return uri;
+		return uriEditorOpener.getURI();
 	}
-
-	public void open() {
-		Iterator<IStorage> storages = mapper.getStorages(uri.trimFragment()).iterator();
-		if (storages != null && storages.hasNext()) {
-			try {
-				IStorage storage = storages.next();
-				if (storage instanceof IFile) {
-					selectAndReveal(openEditor((IFile) storage));
-				} else {
-					selectAndReveal(openEditor(storage));
-				}
-			} catch (WrappedException e) {
-				logger.error("Error while opening editor part for EMF URI '" + uri + "'", e.getCause());
-			} catch (PartInitException partInitException) {
-				logger.error("Error while opening editor part for EMF URI '" + uri + "'", partInitException);
-			}
-		}
-	}
-
-	protected void selectAndReveal(IEditorPart openEditor) {
-		if (openEditor != null && openEditor instanceof XtextEditor) {
-			final XtextEditor edit = (XtextEditor) openEditor;
-			if (uri.fragment() != null) {
-				edit.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
-					@Override
-					public void process(XtextResource resource) throws Exception {
-						if (resource != null) {
-							EObject object = resource.getEObject(uri.fragment());
-							Region region = locationProvider.getLocation(object);
-							edit.selectAndReveal(region.getOffset(), region.getLength());
-						}
-					}
-				});
-			}
-		}
-	}
-
-	protected IEditorPart openEditor(IFile file) throws PartInitException {
-		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-		return IDE.openEditor(page, file);
-	}
-
-	protected IEditorPart openEditor(IStorage storage) throws PartInitException {
-		XtextReadonlyEditorInput editorInput = new XtextReadonlyEditorInput(storage);
-		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-		return IDE.openEditor(page, editorInput, PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(
-				uri.lastSegment()).getId());
+	
+	public void setURI(URI uri) {
+		uriEditorOpener.setURI(uri);
 	}
 
 }
