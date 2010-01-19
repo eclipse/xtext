@@ -25,8 +25,8 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ListDialog;
+import org.eclipse.ui.dialogs.SearchPattern;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.ui.core.editor.contentassist.PrefixMatcher;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -41,8 +41,6 @@ public abstract class AbstractEObjectSearchDialog extends ListDialog {
 	private Label messageLabel;
 
 	private Label searchStatusLabel;
-
-	private PrefixMatcher prefixMatcher = new PrefixMatcher.CamelCase();
 
 	public AbstractEObjectSearchDialog(Shell parent) {
 		super(parent);
@@ -135,19 +133,17 @@ public abstract class AbstractEObjectSearchDialog extends ListDialog {
 		return Iterables.filter(getSearchScope(), getSearchPredicate(searchPattern));
 	}
 
-	protected Predicate<IEObjectDescription> getSearchPredicate(final String searchPattern) {
+	protected Predicate<IEObjectDescription> getSearchPredicate(final String stringPattern) {
+		final SearchPattern searchPattern = new SearchPattern();
+		searchPattern.setPattern(stringPattern);
 		return new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
-				return getPrefixMatcher().isCandidateMatchingPrefix(input.getName(), searchPattern)
-						|| getPrefixMatcher().isCandidateMatchingPrefix(input.getQualifiedName(), searchPattern);
+				return searchPattern.matches(input.getName()) 
+						|| searchPattern.matches(input.getQualifiedName());
 			}
 		};
 	}
 
 	protected abstract Iterable<IEObjectDescription> getSearchScope();
-
-	protected PrefixMatcher getPrefixMatcher() {
-		return prefixMatcher;
-	}
 
 }
