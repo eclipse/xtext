@@ -16,21 +16,22 @@ import com.google.inject.Inject;
  * @author Jan Koehnlein
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextHyperlink extends AbstractHyperlink implements IURIEditorOpener {
+public class XtextHyperlink extends AbstractHyperlink {
 
+	private URI uri;
 	@Inject 
 	private IURIEditorOpener uriEditorOpener;
 	
 	public void open() {
-		uriEditorOpener.open();
+		uriEditorOpener.open(getURI());
 	}
 
 	public URI getURI() {
-		return uriEditorOpener.getURI();
+		return uri;
 	}
 	
 	public void setURI(URI uri) {
-		uriEditorOpener.setURI(uri);
+		this.uri = uri;
 	}
 
 }

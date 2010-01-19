@@ -17,10 +17,6 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(DefaultURIEditorOpener.class)
 public interface IURIEditorOpener {
 
-	void setURI(URI uri);
-	
-	URI getURI();
-	
-	void open();
+	void open(URI uri);
 	
 }
