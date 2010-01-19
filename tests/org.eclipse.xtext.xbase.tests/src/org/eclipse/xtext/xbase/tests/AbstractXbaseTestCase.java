@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.xbase.tests;
 
 import java.io.IOException;
@@ -17,6 +24,10 @@ import com.google.inject.Injector;
 
 import junit.framework.TestCase;
 
+/**
+ * @author Sven Efftinge
+ *
+ */
 public abstract class AbstractXbaseTestCase extends TestCase {
 
 	public AbstractXbaseTestCase() {
@@ -32,6 +43,7 @@ public abstract class AbstractXbaseTestCase extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		injector = new CustomXbaseStandaloneSetup().createInjectorAndDoEMFRegistration();
+		injector.injectMembers(this);
 	}
 
 	/**

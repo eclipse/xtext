@@ -5,11 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase;
+package org.eclipse.xtext.xtype.impl;
 
 
-/**
- * Use this class to register components to be used within the IDE.
- */
-public class XtypeRuntimeModule extends org.eclipse.xtext.xbase.AbstractXtypeRuntimeModule {
+public class XAbstractTypeParamDeclarationImplCustom extends org.eclipse.xtext.xtype.impl.XAbstractTypeParamDeclarationImpl {
+
+	@Override
+	public String getCanonicalName() {
+		return getName();
+	}
+
 }
