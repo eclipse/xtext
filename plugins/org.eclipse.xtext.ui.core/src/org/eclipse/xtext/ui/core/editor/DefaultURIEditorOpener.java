@@ -42,8 +42,6 @@ public class DefaultURIEditorOpener implements IURIEditorOpener {
 	@Inject
 	private IStorage2UriMapper mapper;
 
-	private URI uri;
-
 	public void setLocationProvider(ILocationInFileProvider locationProvider) {
 		this.locationProvider = locationProvider;
 	}
@@ -52,23 +50,15 @@ public class DefaultURIEditorOpener implements IURIEditorOpener {
 		return locationProvider;
 	}
 
-	public void setURI(URI uri) {
-		this.uri = uri;
-	}
-
-	public URI getURI() {
-		return uri;
-	}
-
-	public void open() {
+	public void open(URI uri) {
 		Iterator<IStorage> storages = mapper.getStorages(uri.trimFragment()).iterator();
 		if (storages != null && storages.hasNext()) {
 			try {
 				IStorage storage = storages.next();
 				if (storage instanceof IFile) {
-					selectAndReveal(openEditor((IFile) storage));
+					selectAndReveal(openEditor((IFile) storage),uri);
 				} else {
-					selectAndReveal(openEditor(storage));
+					selectAndReveal(openEditor(storage, uri),uri);
 				}
 			} catch (WrappedException e) {
 				logger.error("Error while opening editor part for EMF URI '" + uri + "'", e.getCause());
@@ -78,7 +68,7 @@ public class DefaultURIEditorOpener implements IURIEditorOpener {
 		}
 	}
 
-	protected void selectAndReveal(IEditorPart openEditor) {
+	protected void selectAndReveal(IEditorPart openEditor, final URI uri) {
 		if (openEditor != null && openEditor instanceof XtextEditor) {
 			final XtextEditor edit = (XtextEditor) openEditor;
 			if (uri.fragment() != null) {
@@ -101,7 +91,7 @@ public class DefaultURIEditorOpener implements IURIEditorOpener {
 		return IDE.openEditor(page, file);
 	}
 
-	protected IEditorPart openEditor(IStorage storage) throws PartInitException {
+	protected IEditorPart openEditor(IStorage storage, URI uri) throws PartInitException {
 		XtextReadonlyEditorInput editorInput = new XtextReadonlyEditorInput(storage);
 		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 		return IDE.openEditor(page, editorInput, PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(
