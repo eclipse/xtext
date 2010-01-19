@@ -46,8 +46,8 @@ public abstract class AbstractEObjectSearchDialog extends ListDialog {
 
 	public AbstractEObjectSearchDialog(Shell parent) {
 		super(parent);
-		setTitle("Open Xtext Element");
-		setMessage("Enter element or camel case pattern:");
+		setTitle(Messages.AbstractEObjectSearchDialog_TableLabelDialogTitle);
+		setMessage(Messages.AbstractEObjectSearchDialog_TableLabelSearchControlLabel);
 		setAddCancelButton(true);
 		// super class needs an IStructuredContentProvider so we register this dummy and register the lazy one later
 		setContentProvider(new IStructuredContentProvider() {
@@ -100,7 +100,7 @@ public abstract class AbstractEObjectSearchDialog extends ListDialog {
 						}
 					}
 				}
-				messageLabel.setText("");
+				messageLabel.setText(""); //$NON-NLS-1$
 			}
 		});
 		return parent;
@@ -124,7 +124,7 @@ public abstract class AbstractEObjectSearchDialog extends ListDialog {
 		labelCompositeLayout.marginWidth = 0;
 		labelComposite.setLayout(labelCompositeLayout);
 		Label tableLabel = new Label(labelComposite, SWT.NONE);
-		tableLabel.setText("Matching items:");
+		tableLabel.setText(Messages.AbstractEObjectSearchDialog_TableLabel3);
 		tableLabel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		searchStatusLabel = new Label(labelComposite, SWT.RIGHT);
 		searchStatusLabel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));

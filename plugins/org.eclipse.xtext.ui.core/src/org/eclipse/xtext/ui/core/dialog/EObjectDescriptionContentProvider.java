@@ -98,7 +98,7 @@ public class EObjectDescriptionContentProvider implements ILazyContentProvider {
 
 	private void updateStatusLabel(boolean isFinished) {
 		if(statusLabel != null) {
-			statusLabel.setText((isFinished) ? "" : "Searching...");
+			statusLabel.setText((isFinished) ? "" : Messages.EObjectDescriptionContentProvider_StatusMessageSearching1); //$NON-NLS-1$
 		}
 	}
 	
@@ -113,7 +113,7 @@ public class EObjectDescriptionContentProvider implements ILazyContentProvider {
 		private int currentSize;
 
 		private SizeCalculationJob() {
-			super("Calculate result size");
+			super(Messages.EObjectDescriptionContentProvider_StatusMessageSearchingSearchJobName);
 			setSystem(true);
 		}
 
