@@ -209,6 +209,9 @@
 		<language uri="classpath:/org/eclipse/xtext/xtext/ecoreInference/UnassignedRuleCallTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
+		<language uri="classpath:/org/eclipse/xtext/validation/ConcreteSyntaxValidationTestLanguage.xtext">
+			<fragment file="${standardFragments}"/>
+		</language>
 	</component>
 	
 	
