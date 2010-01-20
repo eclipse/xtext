@@ -1,0 +1,6 @@
+grammar org.eclipse.xtext.generator.ecore.SuperTestLanguage with org.eclipse.xtext.common.Terminals
+
+generate superPackage "http://www.eclipse.org/2009/tmf/xtext/SuperTestLanguage"
+
+SuperMain :
+    "super" name=ID; 

@@ -13,6 +13,7 @@
 	<property name="baseinheritance.genmodel" value="platform:/resource/org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.genmodel"/>
 	<property name="inheritance.genmodel" value="platform:/resource/org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.genmodel"/>
 	<property name="xtext.genmodel" value="platform:/resource/org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.genmodel"/>
+	<property name="supertest.genmodel" value="platform:/resource/org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/generator/ecore/SuperTestLanguage.genmodel"/>
 	
 	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" platformUri="${runtimeProject}/.."/>
 	
@@ -21,6 +22,13 @@
 	<component class="org.eclipse.xtext.generator.Generator">
 		<pathRtProject value="${runtimeProject}"/>
 		<projectNameRt value="${projectName}"/>
+		
+		<language uri="classpath:/org/eclipse/xtext/generator/ecore/SuperTestLanguage.xtext">
+			<fragment file="${standardFragments}"/>
+		</language>
+		<language uri="classpath:/org/eclipse/xtext/generator/ecore/SubTestLanguage.xtext">
+			<fragment file="${standardFragments}" genModels="${supertest.genmodel}"/>
+		</language>
 		
 		<language uri="classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
@@ -55,11 +63,7 @@
 		<language uri="classpath:/org/eclipse/xtext/enumrules/EnumAndReferenceTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
-<!--
-		<language uri="classpath:/org/eclipse/xtext/generator/GeneratorTestLanguage.xtext">
-			<fragment file="${standardFragments}"/>
-		</language>
--->
+
 		<language uri="classpath:/org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.xtext">
 			<fragment file="${genmodelReferenceFragments}" referencedGenModel="platform:/resource/org.eclipse.xtext.generator.tests/src/org/eclipse/xtext/generator/ecore/Genmodel.genmodel"/>
 		</language>
@@ -212,6 +216,11 @@
 		<language uri="classpath:/org/eclipse/xtext/validation/ConcreteSyntaxValidationTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
+		<!--
+		<language uri="classpath:/org/eclipse/xtext/generator/GeneratorTestLanguage.xtext">
+			<fragment file="${standardFragments}"/>
+		</language>
+		-->
 	</component>
 	
 	

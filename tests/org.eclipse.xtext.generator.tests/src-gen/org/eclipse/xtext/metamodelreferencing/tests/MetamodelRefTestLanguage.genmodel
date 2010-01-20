@@ -6,7 +6,7 @@
     modelPluginID="org.eclipse.xtext.generator.tests" forceOverwrite="true" modelName="MetamodelRefTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.generator.tests.edit"
-    editorPluginID="org.eclipse.xtext.generator.tests.editor" usedGenPackages="platform:/resource/org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.genmodel#//xtext">
+    editorPluginID="org.eclipse.xtext.generator.tests.editor" usedGenPackages="../../../../../../../org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.genmodel#//xtext">
   <genPackages prefix="AnotherSimpleTest" basePackage="org.eclipse.xtext.metamodelreferencing.tests"
       disposableProviderFactory="true" ecorePackage="MetamodelRefTestLanguage.ecore#/">
     <genClasses ecoreClass="MetamodelRefTestLanguage.ecore#//Foo">

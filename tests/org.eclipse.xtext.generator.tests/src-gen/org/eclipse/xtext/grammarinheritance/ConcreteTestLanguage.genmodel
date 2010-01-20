@@ -6,7 +6,7 @@
     modelPluginID="org.eclipse.xtext.generator.tests" forceOverwrite="true" modelName="ConcreteTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.generator.tests.edit"
-    editorPluginID="org.eclipse.xtext.generator.tests.editor" usedGenPackages="platform:/resource/org.eclipse.xtext.generator.tests/src/org/eclipse/xtext/grammarinheritance/ametamodel.genmodel#//ametamodel">
+    editorPluginID="org.eclipse.xtext.generator.tests.editor" usedGenPackages="../../../../../src/org/eclipse/xtext/grammarinheritance/ametamodel.genmodel#//ametamodel">
   <genPackages prefix="Foo" basePackage="org.eclipse.xtext.grammarinheritance" disposableProviderFactory="true"
       ecorePackage="ConcreteTestLanguage.ecore#/">
     <genClasses ecoreClass="ConcreteTestLanguage.ecore#//RootRule"/>
