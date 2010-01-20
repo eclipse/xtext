@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.action;
+package org.eclipse.xtext.builder.search;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.commands.AbstractHandler;
@@ -16,8 +16,9 @@ import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.ui.core.dialog.XtextEObjectSearchDialog;
 import org.eclipse.xtext.ui.core.editor.IURIEditorOpener;
+import org.eclipse.xtext.ui.core.search.IXtextEObjectSearch;
+import org.eclipse.xtext.ui.core.search.XtextEObjectSearchDialog;
 
 import com.google.inject.Inject;
 
@@ -31,12 +32,15 @@ public class OpenXtextElementHandler extends AbstractHandler {
 
 	@Inject
 	private IURIEditorOpener uriEditorOpener;
+	
+	@Inject
+	private IXtextEObjectSearch searchEngine;
 
 	private static final Logger LOG = Logger.getLogger(OpenXtextElementHandler.class);
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		Shell activeShell = Display.getCurrent().getActiveShell();
-		XtextEObjectSearchDialog searchDialog = new XtextEObjectSearchDialog(activeShell, resourceDescriptions);
+		XtextEObjectSearchDialog searchDialog = new XtextEObjectSearchDialog(activeShell, searchEngine);
 		int result = searchDialog.open();
 		if (result == Window.OK) {
 			try {
