@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.tests.types;
+package org.eclipse.xtext.xbase.tests.typing;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
@@ -21,7 +21,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge
  *
  */
-public class TypeResolverTest extends AbstractXbaseTestCase {
+public class ExpressionsTypeResolverTest extends AbstractXbaseTestCase {
 	
 	@Inject
 	private ExpressionsTypeResolver typeResolver;
