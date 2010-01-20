@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xbase.tests.types;
+package org.eclipse.xtext.xbase.tests.typing;
 
 import org.eclipse.xtext.xbase.tests.AbstractXbaseTestCase;
 
