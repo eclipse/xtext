@@ -29,7 +29,7 @@ import com.google.inject.Injector;
 public class Activator extends AbstractUIPlugin {
 
 	// The plug-in ID
-	public static final String PLUGIN_ID = "org.eclipse.xtext.ui";
+	public static final String PLUGIN_ID = "org.eclipse.xtext.ui.core";
 
 	private static Logger log = Logger.getLogger(Activator.class);
 
