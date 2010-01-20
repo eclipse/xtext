@@ -157,6 +157,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.scoping.impl.QualifiedNameScopeProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.scoping.impl.SimpleNameScopeProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.service.GenericModuleTest.class);
+      suite.addTestSuite(org.eclipse.xtext.util.AutoBoxingDispatcherTest.class);
       suite.addTestSuite(org.eclipse.xtext.util.ChainedIteratorTest.class);
       suite.addTestSuite(org.eclipse.xtext.util.FilteringIteratorTest.class);
       suite.addTestSuite(org.eclipse.xtext.util.LineFilterOutputStreamTest.class);
@@ -170,6 +171,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.util.TuplesTest.class);
       suite.addTestSuite(org.eclipse.xtext.validation.CompositeValidatorWithEObjectValidatorTest.class);
       suite.addTestSuite(org.eclipse.xtext.validation.CompositeValidatorWithoutEObjectValidatorTest.class);
+      suite.addTestSuite(org.eclipse.xtext.validation.ConcreteSyntaxValidationTest.class);
       suite.addTestSuite(org.eclipse.xtext.validation.ConcurrentValidationTest.class);
       suite.addTestSuite(org.eclipse.xtext.validation.DeclarativeValidatorTest.class);
       suite.addTestSuite(org.eclipse.xtext.validation.ImportUriValidatorTest.class);
