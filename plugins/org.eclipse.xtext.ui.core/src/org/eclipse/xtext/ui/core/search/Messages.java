@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.dialog;
+package org.eclipse.xtext.ui.core.search;
 
 import org.eclipse.osgi.util.NLS;
 
@@ -14,9 +14,11 @@ import org.eclipse.osgi.util.NLS;
  */
 public class Messages extends NLS {
 	private static final String BUNDLE_NAME = "org.eclipse.xtext.ui.core.dialog.messages"; //$NON-NLS-1$
+	public static String XtextEObjectSearchDialog_Matches;
 	public static String XtextEObjectSearchDialog_MatchingElementsLabel;
 	public static String XtextEObjectSearchDialog_TableLabelDialogTitle;
 	public static String XtextEObjectSearchDialog_TableLabelSearchControlLabel;
+	public static String XtextEObjectSearchDialog_TypeSearchLabel;
 	public static String XtextEObjectSearchDialog_StatusMessageSearching;
 	public static String SizeCalculationJob_SearchJobName;
 	static {

@@ -5,9 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.core.dialog;
-
-import java.util.Collection;
+package org.eclipse.xtext.ui.core.search;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.viewers.ISelection;
@@ -32,14 +30,7 @@ import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ListDialog;
-import org.eclipse.ui.dialogs.SearchPattern;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescriptions;
-
-import com.google.common.base.Function;
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -52,15 +43,17 @@ public class XtextEObjectSearchDialog extends ListDialog {
 
 	private Label searchStatusLabel;
 
-	private IResourceDescriptions resourceDescriptions;
-	
 	private SizeCalculationJob sizeCalculationJob;
 
 	private Label matchingElementsLabel;
 
-	public XtextEObjectSearchDialog(Shell parent, IResourceDescriptions resourceDescriptions) {
+	private Text typeSearchControl;
+
+	private IXtextEObjectSearch searchEngine;
+
+	public XtextEObjectSearchDialog(Shell parent, IXtextEObjectSearch searchEngine) {
 		super(parent);
-		this.resourceDescriptions = resourceDescriptions;
+		this.searchEngine = searchEngine;
 		setTitle(Messages.XtextEObjectSearchDialog_TableLabelDialogTitle);
 		setMessage(Messages.XtextEObjectSearchDialog_TableLabelSearchControlLabel);
 		setAddCancelButton(true);
@@ -89,7 +82,7 @@ public class XtextEObjectSearchDialog extends ListDialog {
 	protected Control createDialogArea(Composite container) {
 		Composite parent = (Composite) super.createDialogArea(container);
 		messageLabel = new Label(parent, SWT.NONE);
-		messageLabel.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL | GridData.GRAB_HORIZONTAL));
+		setDefaultGridData(messageLabel);
 		EObjectDescriptionContentProvider contentProvider = new EObjectDescriptionContentProvider();
 		getTableViewer().setContentProvider(contentProvider);
 		getTableViewer().addSelectionChangedListener(new ISelectionChangedListener() {
@@ -123,16 +116,45 @@ public class XtextEObjectSearchDialog extends ListDialog {
 	protected Label createMessageArea(Composite composite) {
 		Label label = super.createMessageArea(composite);
 		searchControl = new Text(composite, SWT.BORDER | SWT.SEARCH | SWT.ICON_CANCEL);
-		searchControl.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL | GridData.GRAB_HORIZONTAL));
-		searchControl.addModifyListener(new ModifyListener() {
+		setDefaultGridData(searchControl);
+		Label typePatternLabel = new Label(composite, SWT.NONE);
+		typePatternLabel.setText(Messages.XtextEObjectSearchDialog_TypeSearchLabel);
+		setDefaultGridData(typePatternLabel);
+		typeSearchControl = new Text(composite, SWT.BORDER | SWT.SEARCH | SWT.ICON_CANCEL);
+		setDefaultGridData(typeSearchControl);
+
+		Composite labelComposite = new Composite(composite, SWT.NONE);
+		setDefaultGridData(labelComposite);
+		GridLayout labelCompositeLayout = new GridLayout(2, true);
+		labelCompositeLayout.marginWidth = 0;
+		labelComposite.setLayout(labelCompositeLayout);
+		matchingElementsLabel = new Label(labelComposite, SWT.NONE);
+		matchingElementsLabel.setText(Messages.XtextEObjectSearchDialog_MatchingElementsLabel);
+		matchingElementsLabel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+		searchStatusLabel = new Label(labelComposite, SWT.RIGHT);
+		searchStatusLabel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+
+		ModifyListener textModifyListener = new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
 				String searchPattern = searchControl.getText();
-				Iterable<IEObjectDescription> matches = calculateMatches(searchPattern);
+				String typeSearchPattern = typeSearchControl.getText();
+				Iterable<IEObjectDescription> matches = searchEngine.findMatches(searchPattern, typeSearchPattern);
 				startSizeCalculation(matches);
 				getTableViewer().setInput(matches);
 			}
-		});
+		};
+		searchControl.addModifyListener(textModifyListener);
+		typeSearchControl.addModifyListener(textModifyListener);
+
 		searchControl.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.keyCode == SWT.ARROW_DOWN) {
+					typeSearchControl.setFocus();
+				}
+			}
+		});
+		typeSearchControl.addKeyListener(new KeyAdapter() {
 			@Override
 			public void keyPressed(KeyEvent e) {
 				if (e.keyCode == SWT.ARROW_DOWN) {
@@ -147,64 +169,25 @@ public class XtextEObjectSearchDialog extends ListDialog {
 				}
 			}
 		});
-		Composite labelComposite = new Composite(composite, SWT.NONE);
-		labelComposite.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL | GridData.GRAB_HORIZONTAL));
-		GridLayout labelCompositeLayout = new GridLayout(2, true);
-		labelCompositeLayout.marginWidth = 0;
-		labelComposite.setLayout(labelCompositeLayout);
-		matchingElementsLabel = new Label(labelComposite, SWT.NONE);
-		matchingElementsLabel.setText(Messages.XtextEObjectSearchDialog_MatchingElementsLabel);
-		matchingElementsLabel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
-		searchStatusLabel = new Label(labelComposite, SWT.RIGHT);
-		searchStatusLabel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
+
 		return label;
 	}
 
-	protected Iterable<IEObjectDescription> calculateMatches(final String searchPattern) {
-		return Iterables.filter(getSearchScope(), getSearchPredicate(searchPattern));
+	private void setDefaultGridData(Control control) {
+		control.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL | GridData.GRAB_HORIZONTAL));
 	}
 
-	protected Predicate<IEObjectDescription> getSearchPredicate(final String stringPattern) {
-		final SearchPattern searchPattern = new SearchPattern();
-		searchPattern.setPattern(stringPattern);
-		final Collection<IXtextSearchFilter> registeredFilters = IXtextSearchFilter.Registry.allRegisteredFilters();
-		return new Predicate<IEObjectDescription>() {
-			public boolean apply(IEObjectDescription input) {
-				if(searchPattern.matches(input.getQualifiedName())) {
-					for (IXtextSearchFilter xtextSearchFilter: registeredFilters) {
-						if(xtextSearchFilter.reject(input)) {
-							return false;
-						}
-					}
-					return true;
-				}
-				return false;
-			}
-		};
-	}
-
-	protected Iterable<IEObjectDescription> getSearchScope() {
-		return Iterables.concat(Iterables.transform(getResourceDescriptions().getAllResourceDescriptions(),
-				new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
-					public Iterable<IEObjectDescription> apply(IResourceDescription from) {
-						return from.getExportedObjects();
-					}
-				}));
-	}
-
-	private IResourceDescriptions getResourceDescriptions() {
-		return resourceDescriptions;
-	}
-	
 	public void updateItemCount(final int itemCount, final boolean isFinished) {
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
-				if(getShell() != null) {
+				if (getShell() != null) {
 					if (getTableViewer() != null) {
 						getTableViewer().setItemCount(itemCount);
 					}
-					searchStatusLabel.setText((isFinished) ? "" : Messages.XtextEObjectSearchDialog_StatusMessageSearching); //$NON-NLS-1$
-					matchingElementsLabel.setText(Messages.XtextEObjectSearchDialog_MatchingElementsLabel + " (" + itemCount + " matches)"); //$NON-NLS-1$
+					searchStatusLabel
+							.setText((isFinished) ? "" : Messages.XtextEObjectSearchDialog_StatusMessageSearching); //$NON-NLS-1$
+					matchingElementsLabel.setText(Messages.XtextEObjectSearchDialog_MatchingElementsLabel
+							+ " (" + itemCount + Messages.XtextEObjectSearchDialog_Matches); //$NON-NLS-1$
 				}
 			}
 		});

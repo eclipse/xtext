@@ -22,7 +22,6 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0";visibility:=reex
 Bundle-Activator: org.eclipse.xtext.ui.core.internal.Activator
 Export-Package: org.eclipse.xtext.ui.core,
  org.eclipse.xtext.ui.core.containers,
- org.eclipse.xtext.ui.core.dialog,
  org.eclipse.xtext.ui.core.editor,
  org.eclipse.xtext.ui.core.editor.contentassist,
  org.eclipse.xtext.ui.core.editor.formatting,
@@ -43,6 +42,7 @@ Export-Package: org.eclipse.xtext.ui.core,
  org.eclipse.xtext.ui.core.internal,
  org.eclipse.xtext.ui.core.notification,
  org.eclipse.xtext.ui.core.resource,
+ org.eclipse.xtext.ui.core.search,
  org.eclipse.xtext.ui.core.util,
  org.eclipse.xtext.ui.core.wizard
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
