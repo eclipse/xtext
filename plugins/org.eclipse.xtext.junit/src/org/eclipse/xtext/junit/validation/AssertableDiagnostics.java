@@ -29,7 +29,7 @@ import com.google.common.collect.Iterables;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
- *
+ * 
  */
 public class AssertableDiagnostics {
 
@@ -70,25 +70,26 @@ public class AssertableDiagnostics {
 	}
 
 	protected static class Pred implements DiagnosticPredicate {
-		protected String code;
+		protected String issueCode;
 		protected String msg;
 		protected Integer severity;
+		protected Integer code;
 
-		public Pred(Integer severity, String code, String msg) {
+		public Pred(Integer severity, Integer code, String issueCode, String msg) {
 			super();
 			this.severity = severity;
 			this.code = code;
+			this.issueCode = issueCode;
 			this.msg = msg;
 		}
 
 		public boolean apply(Diagnostic d) {
 			if (severity != null && d.getSeverity() != severity)
 				return false;
-			if(d.getCode() != 0)
+			if (code != null && !code.equals(d.getCode()))
 				return false;
-			if(!(d instanceof DiagnosticImpl))
-				return false;
-			if (code != null && !((DiagnosticImpl)d).getIssueCode().equals(code) )
+			if (issueCode != null && d instanceof DiagnosticImpl
+					&& !((DiagnosticImpl) d).getIssueCode().equals(issueCode))
 				return false;
 			if (msg != null && d.getMessage() != null && !d.getMessage().contains(msg))
 				return false;
@@ -100,6 +101,8 @@ public class AssertableDiagnostics {
 			List<String> r = new ArrayList<String>();
 			if (severity != null)
 				r.add(DiagnosticImpl.severityToStr(severity));
+			if (issueCode != null)
+				r.add("issueCode=" + issueCode);
 			if (code != null)
 				r.add("code=" + code);
 			if (msg != null)
@@ -110,32 +113,56 @@ public class AssertableDiagnostics {
 
 	public static final Logger log = Logger.getLogger(AssertableDiagnostics.class);
 
-	public static Pred diagnostic(int severity, String code, String messageFragment) {
-		return new Pred(severity, code, messageFragment);
+	public static Pred diagnostic(int severity, String issueCode, String messageFragment) {
+		return new Pred(severity, null, issueCode, messageFragment);
 	}
 
-	public static Pred errorWithCode(String code) {
-		return new Pred(ERROR, code, null);
+	public static Pred diagnostic(int severity, int code, String messageFragment) {
+		return new Pred(severity, code, null, messageFragment);
+	}
+
+	public static Pred diagnostic(int severity, int code, String issueCode, String messageFragment) {
+		return new Pred(severity, code, issueCode, messageFragment);
+	}
+
+	public static Pred errorCode(String code) {
+		return new Pred(ERROR, null, code, null);
+	}
+
+	public static Pred errorCode(int code) {
+		return new Pred(ERROR, code, null, null);
 	}
 
 	public static Pred error(String code, String messageFragment) {
-		return new Pred(ERROR, code, messageFragment);
+		return new Pred(ERROR, null, code, messageFragment);
 	}
 
-	public static Pred error(String messageFragment) {
-		return new Pred(ERROR, null, messageFragment);
+	public static Pred error(int code, String messageFragment) {
+		return new Pred(ERROR, code, null, messageFragment);
 	}
 
-	public static Pred warningWithCode(String code) {
-		return new Pred(WARNING, code, null);
+	public static Pred errorMsg(String messageFragment) {
+		return new Pred(ERROR, null, null, messageFragment);
+	}
+
+	public static Pred warningCode(String code) {
+		return new Pred(WARNING, null, code, null);
+	}
+
+	public static Pred warningCode(int code) {
+		return new Pred(WARNING, code, null, null);
 	}
 
 	public static Pred warning(String code, String messageFragment) {
-		return new Pred(WARNING, code, messageFragment);
+		return new Pred(WARNING, null, code, messageFragment);
 	}
 
-	public static Pred warning(String messageFragment) {
-		return new Pred(WARNING, null, messageFragment);
+	public static Pred warning(int code, String messageFragment) {
+		return new Pred(WARNING, code, null, messageFragment);
+	}
+
+	public static Pred warningMsg(String messageFragment) {
+		return new Pred(WARNING, null, null, messageFragment);
 	}
 
 	protected Diagnostic diag;
@@ -179,8 +206,16 @@ public class AssertableDiagnostics {
 		return this;
 	}
 
-	public void assertDiagnostic(Integer severity, String code, String messageFragment) {
-		assertAll(new Pred(severity, code, messageFragment));
+	public void assertDiagnostic(Integer severity, String issueCode, String messageFragment) {
+		assertAll(diagnostic(severity, issueCode, messageFragment));
+	}
+
+	public void assertDiagnostic(Integer severity, int code, String issueCode, String messageFragment) {
+		assertAll(diagnostic(severity, code, issueCode, messageFragment));
+	}
+
+	public void assertDiagnostic(Integer severity, int code, String messageFragment) {
+		assertAll(diagnostic(severity, code, messageFragment));
 	}
 
 	public AssertableDiagnostics assertDiagnosticsCount(int size) {
@@ -191,16 +226,24 @@ public class AssertableDiagnostics {
 		return this;
 	}
 
-	public void assertError(String code) {
-		assertAll(error(code));
+	public void assertError(String issueCode) {
+		assertAll(errorCode(issueCode));
 	}
 
-	public void assertError(String code, String messageFragment) {
+	public void assertError(int code) {
+		assertAll(errorCode(code));
+	}
+
+	public void assertError(String issueCode, String messageFragment) {
+		assertAll(error(issueCode, messageFragment));
+	}
+
+	public void assertError(int code, String messageFragment) {
 		assertAll(error(code, messageFragment));
 	}
 
 	public void assertErrorContains(String messageFragment) {
-		assertAll(error(messageFragment));
+		assertAll(errorMsg(messageFragment));
 	}
 
 	public void assertOK() {
@@ -208,16 +251,24 @@ public class AssertableDiagnostics {
 			fail("There are exprected to be no diagnostics.");
 	}
 
-	public void assertWarning(String code) {
-		assertAll(warning(code));
+	public void assertWarning(String issueCode) {
+		assertAll(warningCode(issueCode));
+	}
+
+	public void assertWarning(int code) {
+		assertAll(warningCode(code));
 	}
 
 	public void assertWarning(String code, String messageFragment) {
 		assertAll(warning(code, messageFragment));
 	}
 
+	public void assertWarning(int code, String messageFragment) {
+		assertAll(warning(code, messageFragment));
+	}
+
 	public void assertWarningContains(String messageFragment) {
-		assertAll(warning(messageFragment));
+		assertAll(warningMsg(messageFragment));
 	}
 
 	public void fail(String message) {
@@ -253,8 +304,7 @@ public class AssertableDiagnostics {
 				printDiagnostic(out, prefix2, c);
 			out.append(prefix);
 			out.append("}\n");
-		}
-		else
+		} else
 			out.append("\n");
 	}
 

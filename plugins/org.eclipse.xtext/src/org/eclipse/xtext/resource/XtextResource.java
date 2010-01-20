@@ -21,6 +21,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
@@ -69,6 +70,9 @@ public class XtextResource extends ResourceImpl {
 	
 	@Inject
 	private IResourceServiceProvider resourceServiceProvider;
+	
+	@Inject 
+	private IGrammarAccess grammar; 
 	
 	public IResourceServiceProvider getResourceServiceProvider() {
 		return resourceServiceProvider;
@@ -245,6 +249,10 @@ public class XtextResource extends ResourceImpl {
 
 	public void setParser(IParser parser) {
 		this.parser = parser;
+	}
+	
+	public IGrammarAccess getGrammar() {
+		return this.grammar;
 	}
 
 	public ILinker getLinker() {
