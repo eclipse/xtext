@@ -9,15 +9,9 @@ package org.eclipse.xtext.ui.core.dialog;
 
 import java.util.Iterator;
 
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.viewers.ILazyContentProvider;
 import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
-import org.eclipse.swt.widgets.Display;
-import org.eclipse.swt.widgets.Label;
 import org.eclipse.xtext.resource.IEObjectDescription;
 
 /**
@@ -33,22 +27,9 @@ public class EObjectDescriptionContentProvider implements ILazyContentProvider {
 
 	private TableViewer viewer;
 
-	private SizeCalculationJob sizeCalculationJob;
-
-	private Label statusLabel;
-
-	public EObjectDescriptionContentProvider(Label statusLabel) {
-		this.statusLabel = statusLabel;
-	}
-
 	public void dispose() {
 		viewer = null;
 		matches = null;
-		statusLabel = null;
-		if (sizeCalculationJob != null) {
-			sizeCalculationJob.cancel();
-			sizeCalculationJob = null;
-		}
 	}
 
 	@SuppressWarnings("unchecked")
@@ -57,7 +38,6 @@ public class EObjectDescriptionContentProvider implements ILazyContentProvider {
 		if (newInput instanceof Iterable<?>) {
 			matches = (Iterable<IEObjectDescription>) newInput;
 			reset();
-			startSizeCalculation();
 			viewer.refresh();
 		}
 	}
@@ -80,78 +60,4 @@ public class EObjectDescriptionContentProvider implements ILazyContentProvider {
 		currentIterator = matches.iterator();
 	}
 
-	private void startSizeCalculation() {
-		if (viewer != null) {
-			if (sizeCalculationJob != null) {
-				sizeCalculationJob.cancel();
-				try {
-					sizeCalculationJob.join();
-				} catch (InterruptedException e) {
-					sizeCalculationJob = new SizeCalculationJob();
-				}
-			} else {
-				sizeCalculationJob = new SizeCalculationJob();
-			}
-			updateStatusLabel(false);
-			sizeCalculationJob.init(matches);
-			sizeCalculationJob.schedule();
-		}
-	}
-
-	private void updateStatusLabel(boolean isFinished) {
-		if (statusLabel != null) {
-			statusLabel.setText((isFinished) ? "" : Messages.EObjectDescriptionContentProvider_StatusMessageSearching1); //$NON-NLS-1$
-		}
-	}
-
-	private final class SizeCalculationJob extends Job {
-
-		private static final int TIME_THRESHOLD = 500;
-
-		private static final int HIT_THRESHOLD = 100;
-
-		private Iterator<IEObjectDescription> sizeIterator;
-
-		private int currentSize;
-
-		private SizeCalculationJob() {
-			super(Messages.EObjectDescriptionContentProvider_StatusMessageSearchingSearchJobName);
-			setSystem(true);
-		}
-
-		public void init(Iterable<IEObjectDescription> matchResult) {
-			this.sizeIterator = matchResult.iterator();
-			currentSize = 0;
-		}
-
-		@Override
-		protected IStatus run(IProgressMonitor monitor) {
-			long startTime = System.currentTimeMillis();
-			while (sizeIterator.hasNext()) {
-				sizeIterator.next();
-				long endTime = System.currentTimeMillis();
-				++currentSize;
-				if (currentSize % HIT_THRESHOLD == 0 || endTime - startTime > TIME_THRESHOLD) {
-					if (monitor.isCanceled()) {
-						return Status.CANCEL_STATUS;
-					}
-					updateItemCount(false);
-				}
-				startTime = endTime;
-			}
-			updateItemCount(true);
-			return Status.OK_STATUS;
-		}
-
-		private void updateItemCount(final boolean isFinished) {
-			Display.getDefault().asyncExec(new Runnable() {
-				public void run() {
-					if (viewer != null) {
-						viewer.setItemCount(currentSize);
-					}
-					updateStatusLabel(isFinished);
-				}
-			});
-		}
-	}
 }
