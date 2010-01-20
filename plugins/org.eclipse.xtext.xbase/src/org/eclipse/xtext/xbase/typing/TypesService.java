@@ -70,8 +70,17 @@ public class TypesService {
 	}
 
 	public XTypeRef getCommonType(List<XTypeRef> returnTypes) {
-		//TODO fix me
+		for (XTypeRef xTypeRef : returnTypes) {
+			for (XTypeRef xTypeRef1 : returnTypes) {
+				isAssignableFrom(xTypeRef,xTypeRef1);
+			}
+		}
 		return returnTypes.get(0);
+	}
+
+	public boolean isAssignableFrom(XTypeRef xTypeRef, XTypeRef xTypeRef1) {
+		
+		return false;
 	}
 
 	public XTypeRef createFunctionTypeRef(List<XTypeRef> parameterTypes,
