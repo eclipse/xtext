@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.search;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
@@ -43,7 +45,7 @@ public class XtextEObjectSearchDialog extends ListDialog {
 
 	private Label searchStatusLabel;
 
-	private SizeCalculationJob sizeCalculationJob;
+	private IteratorJob sizeCalculationJob;
 
 	private Label matchingElementsLabel;
 
@@ -140,7 +142,7 @@ public class XtextEObjectSearchDialog extends ListDialog {
 				String typeSearchPattern = typeSearchControl.getText();
 				Iterable<IEObjectDescription> matches = searchEngine.findMatches(searchPattern, typeSearchPattern);
 				startSizeCalculation(matches);
-				getTableViewer().setInput(matches);
+				//getTableViewer().setInput(matches);
 			}
 		};
 		searchControl.addModifyListener(textModifyListener);
@@ -177,17 +179,18 @@ public class XtextEObjectSearchDialog extends ListDialog {
 		control.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL | GridData.GRAB_HORIZONTAL));
 	}
 
-	public void updateItemCount(final int itemCount, final boolean isFinished) {
+	public void updateMatches(final Collection<IEObjectDescription> matches, final boolean isFinished) {
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
 				if (getShell() != null) {
 					if (getTableViewer() != null) {
-						getTableViewer().setItemCount(itemCount);
+						getTableViewer().setItemCount(matches.size());
+						getTableViewer().setInput(matches);
 					}
 					searchStatusLabel
 							.setText((isFinished) ? "" : Messages.XtextEObjectSearchDialog_StatusMessageSearching); //$NON-NLS-1$
 					matchingElementsLabel.setText(Messages.XtextEObjectSearchDialog_MatchingElementsLabel
-							+ " (" + itemCount + Messages.XtextEObjectSearchDialog_Matches); //$NON-NLS-1$
+							+ " (" + matches.size() + Messages.XtextEObjectSearchDialog_Matches); //$NON-NLS-1$
 				}
 			}
 		});
@@ -200,10 +203,10 @@ public class XtextEObjectSearchDialog extends ListDialog {
 				try {
 					sizeCalculationJob.join();
 				} catch (InterruptedException e) {
-					sizeCalculationJob = new SizeCalculationJob(this);
+					sizeCalculationJob = new IteratorJob(this);
 				}
 			} else {
-				sizeCalculationJob = new SizeCalculationJob(this);
+				sizeCalculationJob = new IteratorJob(this);
 			}
 			sizeCalculationJob.init(matches);
 			sizeCalculationJob.schedule();

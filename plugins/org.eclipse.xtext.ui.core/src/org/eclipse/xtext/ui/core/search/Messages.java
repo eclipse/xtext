@@ -13,14 +13,14 @@ import org.eclipse.osgi.util.NLS;
  * @author koehnlein - Initial contribution and API
  */
 public class Messages extends NLS {
-	private static final String BUNDLE_NAME = "org.eclipse.xtext.ui.core.dialog.messages"; //$NON-NLS-1$
+	private static final String BUNDLE_NAME = "org.eclipse.xtext.ui.core.search.messages"; //$NON-NLS-1$
 	public static String XtextEObjectSearchDialog_Matches;
 	public static String XtextEObjectSearchDialog_MatchingElementsLabel;
 	public static String XtextEObjectSearchDialog_TableLabelDialogTitle;
 	public static String XtextEObjectSearchDialog_TableLabelSearchControlLabel;
 	public static String XtextEObjectSearchDialog_TypeSearchLabel;
 	public static String XtextEObjectSearchDialog_StatusMessageSearching;
-	public static String SizeCalculationJob_SearchJobName;
+	public static String IteratorJob_SearchJobName;
 	static {
 		// initialize resource bundle
 		NLS.initializeMessages(BUNDLE_NAME, Messages.class);
