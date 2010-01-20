@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.4 2010/01/19 15:19:11 jkohnlein Exp $
+ $Id: plugin.xml,v 1.5 2010/01/20 12:42:27 jkohnlein Exp $
 -->
 
 <plugin>
@@ -124,7 +124,7 @@
             commandId="org.eclipse.xtext.builder.action.OpenXtextElementCommand"
             contextId="org.eclipse.ui.contexts.window"
             schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="M1+SHIFT+M">
+            sequence="M1+SHIFT+Z">
       </key>
    </extension>
 

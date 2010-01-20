@@ -123,6 +123,12 @@
           class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.quickfix.MarkerResolutionGenerator">
     </markerResolutionGenerator>
  </extension>
-
+ <extension
+       point="org.eclipse.xtext.ui.core.searchFilter">
+    <filter
+          class="org.eclipse.xtext.example.ui.search.DomainmodelSearchFilter">
+    </filter>
+ </extension>
+ 
 
 </plugin>

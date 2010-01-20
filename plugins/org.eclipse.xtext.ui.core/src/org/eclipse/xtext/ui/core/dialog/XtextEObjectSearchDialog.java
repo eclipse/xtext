@@ -7,34 +7,44 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.dialog;
 
+import java.util.Collection;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TableViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.swt.SWT;
+import org.eclipse.swt.events.KeyAdapter;
+import org.eclipse.swt.events.KeyEvent;
 import org.eclipse.swt.events.ModifyEvent;
 import org.eclipse.swt.events.ModifyListener;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Label;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.swt.widgets.Text;
 import org.eclipse.ui.dialogs.ListDialog;
 import org.eclipse.ui.dialogs.SearchPattern;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
-public abstract class AbstractEObjectSearchDialog extends ListDialog {
+public class XtextEObjectSearchDialog extends ListDialog {
 
 	protected Text searchControl;
 
@@ -42,23 +52,28 @@ public abstract class AbstractEObjectSearchDialog extends ListDialog {
 
 	private Label searchStatusLabel;
 
-	public AbstractEObjectSearchDialog(Shell parent) {
+	private IResourceDescriptions resourceDescriptions;
+	
+	private SizeCalculationJob sizeCalculationJob;
+
+	private Label matchingElementsLabel;
+
+	public XtextEObjectSearchDialog(Shell parent, IResourceDescriptions resourceDescriptions) {
 		super(parent);
-		setTitle(Messages.AbstractEObjectSearchDialog_TableLabelDialogTitle);
-		setMessage(Messages.AbstractEObjectSearchDialog_TableLabelSearchControlLabel);
+		this.resourceDescriptions = resourceDescriptions;
+		setTitle(Messages.XtextEObjectSearchDialog_TableLabelDialogTitle);
+		setMessage(Messages.XtextEObjectSearchDialog_TableLabelSearchControlLabel);
 		setAddCancelButton(true);
-		// super class needs an IStructuredContentProvider so we register this dummy and register the lazy one later
+		// super class needs an IStructuredContentProvider so we register this dummy and 
+		// register the lazy one later
 		setContentProvider(new IStructuredContentProvider() {
 			public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-				// TODO Auto-generated method stub
 			}
 
 			public void dispose() {
-				// TODO Auto-generated method stub
 			}
 
 			public Object[] getElements(Object inputElement) {
-				// TODO Auto-generated method stub
 				return null;
 			}
 		});
@@ -75,7 +90,7 @@ public abstract class AbstractEObjectSearchDialog extends ListDialog {
 		Composite parent = (Composite) super.createDialogArea(container);
 		messageLabel = new Label(parent, SWT.NONE);
 		messageLabel.setLayoutData(new GridData(GridData.HORIZONTAL_ALIGN_FILL | GridData.GRAB_HORIZONTAL));
-		EObjectDescriptionContentProvider contentProvider = new EObjectDescriptionContentProvider(searchStatusLabel);
+		EObjectDescriptionContentProvider contentProvider = new EObjectDescriptionContentProvider();
 		getTableViewer().setContentProvider(contentProvider);
 		getTableViewer().addSelectionChangedListener(new ISelectionChangedListener() {
 			public void selectionChanged(SelectionChangedEvent event) {
@@ -112,8 +127,24 @@ public abstract class AbstractEObjectSearchDialog extends ListDialog {
 		searchControl.addModifyListener(new ModifyListener() {
 			public void modifyText(ModifyEvent e) {
 				String searchPattern = searchControl.getText();
-				Iterable<IEObjectDescription> matches = getMatches(searchPattern);
+				Iterable<IEObjectDescription> matches = calculateMatches(searchPattern);
+				startSizeCalculation(matches);
 				getTableViewer().setInput(matches);
+			}
+		});
+		searchControl.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyPressed(KeyEvent e) {
+				if (e.keyCode == SWT.ARROW_DOWN) {
+					TableViewer tableViewer = getTableViewer();
+					tableViewer.getTable().setFocus();
+					if (tableViewer.getSelection().isEmpty()) {
+						Object firstElement = tableViewer.getElementAt(0);
+						if (firstElement != null) {
+							tableViewer.setSelection(new StructuredSelection(firstElement));
+						}
+					}
+				}
 			}
 		});
 		Composite labelComposite = new Composite(composite, SWT.NONE);
@@ -121,29 +152,79 @@ public abstract class AbstractEObjectSearchDialog extends ListDialog {
 		GridLayout labelCompositeLayout = new GridLayout(2, true);
 		labelCompositeLayout.marginWidth = 0;
 		labelComposite.setLayout(labelCompositeLayout);
-		Label tableLabel = new Label(labelComposite, SWT.NONE);
-		tableLabel.setText(Messages.AbstractEObjectSearchDialog_TableLabel3);
-		tableLabel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
+		matchingElementsLabel = new Label(labelComposite, SWT.NONE);
+		matchingElementsLabel.setText(Messages.XtextEObjectSearchDialog_MatchingElementsLabel);
+		matchingElementsLabel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, false, false, 1, 1));
 		searchStatusLabel = new Label(labelComposite, SWT.RIGHT);
 		searchStatusLabel.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, false, 1, 1));
 		return label;
 	}
 
-	protected Iterable<IEObjectDescription> getMatches(final String searchPattern) {
+	protected Iterable<IEObjectDescription> calculateMatches(final String searchPattern) {
 		return Iterables.filter(getSearchScope(), getSearchPredicate(searchPattern));
 	}
 
 	protected Predicate<IEObjectDescription> getSearchPredicate(final String stringPattern) {
 		final SearchPattern searchPattern = new SearchPattern();
 		searchPattern.setPattern(stringPattern);
+		final Collection<IXtextSearchFilter> registeredFilters = IXtextSearchFilter.Registry.allRegisteredFilters();
 		return new Predicate<IEObjectDescription>() {
 			public boolean apply(IEObjectDescription input) {
-				return searchPattern.matches(input.getName()) 
-						|| searchPattern.matches(input.getQualifiedName());
+				if(searchPattern.matches(input.getQualifiedName())) {
+					for (IXtextSearchFilter xtextSearchFilter: registeredFilters) {
+						if(xtextSearchFilter.reject(input)) {
+							return false;
+						}
+					}
+					return true;
+				}
+				return false;
 			}
 		};
 	}
 
-	protected abstract Iterable<IEObjectDescription> getSearchScope();
+	protected Iterable<IEObjectDescription> getSearchScope() {
+		return Iterables.concat(Iterables.transform(getResourceDescriptions().getAllResourceDescriptions(),
+				new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
+					public Iterable<IEObjectDescription> apply(IResourceDescription from) {
+						return from.getExportedObjects();
+					}
+				}));
+	}
+
+	private IResourceDescriptions getResourceDescriptions() {
+		return resourceDescriptions;
+	}
+	
+	public void updateItemCount(final int itemCount, final boolean isFinished) {
+		Display.getDefault().asyncExec(new Runnable() {
+			public void run() {
+				if(getShell() != null) {
+					if (getTableViewer() != null) {
+						getTableViewer().setItemCount(itemCount);
+					}
+					searchStatusLabel.setText((isFinished) ? "" : Messages.XtextEObjectSearchDialog_StatusMessageSearching); //$NON-NLS-1$
+					matchingElementsLabel.setText(Messages.XtextEObjectSearchDialog_MatchingElementsLabel + " (" + itemCount + " matches)"); //$NON-NLS-1$
+				}
+			}
+		});
+	}
+
+	private void startSizeCalculation(Iterable<IEObjectDescription> matches) {
+		if (getTableViewer() != null) {
+			if (sizeCalculationJob != null) {
+				sizeCalculationJob.cancel();
+				try {
+					sizeCalculationJob.join();
+				} catch (InterruptedException e) {
+					sizeCalculationJob = new SizeCalculationJob(this);
+				}
+			} else {
+				sizeCalculationJob = new SizeCalculationJob(this);
+			}
+			sizeCalculationJob.init(matches);
+			sizeCalculationJob.schedule();
+		}
+	}
 
 }
