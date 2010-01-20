@@ -6,7 +6,7 @@
     modelPluginID="org.eclipse.xtext.generator.tests" forceOverwrite="true" modelName="InheritanceTest2Language"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.generator.tests.edit"
-    editorPluginID="org.eclipse.xtext.generator.tests.editor" usedGenPackages="platform:/resource/org.eclipse.xtext.generator.tests/src-gen/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.genmodel#//inheritanceTest">
+    editorPluginID="org.eclipse.xtext.generator.tests.editor" usedGenPackages="InheritanceTestLanguage.genmodel#//inheritanceTest">
   <genPackages prefix="InheritanceTest2" basePackage="org.eclipse.xtext.grammarinheritance"
       disposableProviderFactory="true" ecorePackage="InheritanceTest2Language.ecore#/">
     <genClasses ecoreClass="InheritanceTest2Language.ecore#//Model">
