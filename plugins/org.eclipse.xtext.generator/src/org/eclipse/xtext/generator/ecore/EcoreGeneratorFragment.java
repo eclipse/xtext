@@ -112,7 +112,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		GenModelPackage.eINSTANCE.getGenAnnotation();
 	}
 
-	private Resource createResourceForEPackages(Grammar grammar, XpandExecutionContext ctx, List<EPackage> packs,
+	protected Resource createResourceForEPackages(Grammar grammar, XpandExecutionContext ctx, List<EPackage> packs,
 			ResourceSet rs) {
 		URI ecoreFileUri = getEcoreFileUri(grammar, ctx);
 		Resource ecoreFile = rs.createResource(ecoreFileUri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
@@ -120,7 +120,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		return ecoreFile;
 	}
 
-	private void doGenerate(GenModel genModel) {
+	protected void doGenerate(GenModel genModel) {
 		Generator generator = new Generator();
 		generator.getAdapterFactoryDescriptorRegistry().addDescriptor(GenModelPackage.eNS_URI,
 				new GeneratorAdapterFactoryDescriptor());
@@ -177,7 +177,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		}
 	}
 	
-	private List<GenPackage> loadReferencedGenModels(ResourceSet rs) {
+	protected List<GenPackage> loadReferencedGenModels(ResourceSet rs) {
 		List<GenPackage> result = Lists.newArrayList();
 		if (getReferencedGenModels() != null) {
 			for (String uri : getReferencedGenModels().split(",")) {
@@ -198,7 +198,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		return result;
 	}
 
-	private void proxifyExternalReferences(List<EPackage> packs) {
+	protected void proxifyExternalReferences(List<EPackage> packs) {
 		// has to be done in two phases. Causes endless recursion otherwise.
 		Map<EObject, URI> object2Uri = Maps.newHashMap();
 		Map<EObject, Collection<Setting>> map = EcoreUtil.CrossReferencer.find(packs);
@@ -214,13 +214,13 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		}
 	}
 
-	private void removeFromResource(List<EPackage> packs) {
+	protected void removeFromResource(List<EPackage> packs) {
 		for (EPackage ePackage : packs) {
 			ePackage.eResource().getContents().remove(ePackage);
 		}
 	}
 
-	private void resolveAll(ResourceSet resourceSet) {
+	protected void resolveAll(ResourceSet resourceSet) {
 		for (Resource res : resourceSet.getResources()) {
 			URI uri = res.getURI();
 			if (uri.isPlatformResource()) {
@@ -237,7 +237,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 			return GrammarUtil.getNamespace(g);
 		return basePackage;
 	}
-	private URI getEcoreFileUri(Grammar grammar, XpandExecutionContext ctx) {
+	protected URI getEcoreFileUri(Grammar grammar, XpandExecutionContext ctx) {
 		String javaPath = getJavaModelDirectory(ctx);
 		String xmiPath = getXmiModelDirectory(grammar, javaPath);
 		try {
@@ -263,7 +263,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		}
 		return editorDirectory;
 	}
-	private String getEditorPluginID(XpandExecutionContext ctx) {
+	protected String getEditorPluginID(XpandExecutionContext ctx) {
 		if ((editorPluginID == null || "".equals(editorPluginID)) && (getModelPluginID(ctx) != null)) {
 			editorPluginID = getModelPluginID(ctx) + ".editor";
 		}
@@ -296,13 +296,13 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		return getBasePackage(g) + "." + pack.getName() + "." + Strings.toFirstUpper(pack.getName()) + "Package";
 	}
 
-	private List<EPackage> getGeneratedEPackages(Grammar grammar) {
+	protected List<EPackage> getGeneratedEPackages(Grammar grammar) {
 		List<GeneratedMetamodel> list = typeSelect(grammar.getMetamodelDeclarations(), GeneratedMetamodel.class);
 		List<EPackage> packs = collect(list, GENERATED_METAMODEL__EPACKAGE, EPackage.class);
 		return packs;
 	}
 
-	private GenModel getGenModel(ResourceSet rs, Grammar grammar, XpandExecutionContext ctx, List<EPackage> packs) {
+	protected GenModel getGenModel(ResourceSet rs, Grammar grammar, XpandExecutionContext ctx, List<EPackage> packs) {
 		URI genModelUri = getGenModelUri(grammar, ctx);
 		Resource genModelFile = rs.createResource(genModelUri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 		GenModel genModel;
@@ -339,7 +339,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		return genModel;
 	}
 
-	private URI getGenModelUri(Grammar grammar, XpandExecutionContext ctx) {
+	protected URI getGenModelUri(Grammar grammar, XpandExecutionContext ctx) {
 		if (genModel != null) {
 			return URI.createURI(genModel);
 		} else {
@@ -355,7 +355,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		}
 	}
 
-	private String getJavaModelDirectory(XpandExecutionContext ctx) {
+	protected String getJavaModelDirectory(XpandExecutionContext ctx) {
 		String javaPath;
 		if (javaModelDirectory == null || "".equals(javaModelDirectory))
 			javaPath = ctx.getOutput().getOutlet(org.eclipse.xtext.generator.Generator.SRC_GEN).getPath();
@@ -364,7 +364,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		return javaPath;
 	}
 
-	private String getModelName(Grammar grammar) {
+	protected String getModelName(Grammar grammar) {
 		return grammar.getName().substring(grammar.getName().lastIndexOf('.') + 1);
 	}
 
@@ -375,7 +375,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		return modelPluginID;
 	}
 
-	private XtextResourceSet getNsUriMappingResourceSet() {
+	protected XtextResourceSet getNsUriMappingResourceSet() {
 		return new XtextResourceSet() {
 			final Map<URI, URI> uriMapping = Maps.newHashMap();
 
@@ -412,7 +412,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		return new String[] { "org.eclipse.emf.ecore", "org.eclipse.emf.common" };
 	}
 
-	private GenModel getSaveAndReconcileGenModel(ResourceSet rs, Grammar grammar, XpandExecutionContext ctx,
+	protected GenModel getSaveAndReconcileGenModel(ResourceSet rs, Grammar grammar, XpandExecutionContext ctx,
 			List<EPackage> packs, List<GenPackage> usedGenPackages) throws ConfigurationException {
 		GenModel genModel = null;
 
@@ -435,7 +435,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		return xmiModelDirectory;
 	}
 
-	private String getXmiModelDirectory(Grammar grammar, String javaPath) {
+	protected String getXmiModelDirectory(Grammar grammar, String javaPath) {
 		String xmiPath;
 		if (getXmiModelDirectory() == null || "".equals(getXmiModelDirectory()))
 			xmiPath = javaPath + "/"
@@ -580,14 +580,14 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	/**
 	 * required to match the path format as expected from {@link GenModelImpl#getProjectPath}
 	 */
-	private String toGenModelProjectPath(String path) {
+	protected String toGenModelProjectPath(String path) {
 		return null == path || "".equals(path) || path.startsWith("/") ? path : path.substring(path.indexOf("/"));
 	}
 
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
 	 */
-	private final static class GeneratorAdapterFactoryDescriptor implements GeneratorAdapterFactory.Descriptor {
+	protected final static class GeneratorAdapterFactoryDescriptor implements GeneratorAdapterFactory.Descriptor {
 		protected OutputStream createOutputStream(OutputStream stream, String lineDelimiter) throws Exception {
 			return new LineFilterOutputStream(stream, " * $Id" + "$", lineDelimiter != null ? lineDelimiter : Strings
 					.newLine());
