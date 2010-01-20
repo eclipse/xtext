@@ -15,13 +15,10 @@ import org.eclipse.jface.window.Window;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.ui.core.dialog.AbstractEObjectSearchDialog;
+import org.eclipse.xtext.ui.core.dialog.XtextEObjectSearchDialog;
 import org.eclipse.xtext.ui.core.editor.IURIEditorOpener;
 
-import com.google.common.base.Function;
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
@@ -39,17 +36,7 @@ public class OpenXtextElementHandler extends AbstractHandler {
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		Shell activeShell = Display.getCurrent().getActiveShell();
-		AbstractEObjectSearchDialog searchDialog = new AbstractEObjectSearchDialog(activeShell) {
-			@Override
-			protected Iterable<IEObjectDescription> getSearchScope() {
-				return Iterables.concat(Iterables.transform(getResourceDescriptions().getAllResourceDescriptions(),
-						new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
-							public Iterable<IEObjectDescription> apply(IResourceDescription from) {
-								return from.getExportedObjects();
-							}
-						}));
-			}
-		};
+		XtextEObjectSearchDialog searchDialog = new XtextEObjectSearchDialog(activeShell, resourceDescriptions);
 		int result = searchDialog.open();
 		if (result == Window.OK) {
 			try {
