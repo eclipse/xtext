@@ -94,6 +94,9 @@ public class ResourceValidatorImpl implements IResourceValidator {
 					Map<Object, Object> options = Maps.newHashMap();
 					options.put(CheckMode.KEY, mode);
 					options.put(CancelableDiagnostician.CANCEL_INDICATOR, monitor);
+					// disable concrete syntax validation, since a semantic model that has been parsed 
+					// from the concrete syntax always complies with it - otherwise there are parse errors.
+					options.put(ConcreteSyntaxEValidator.DISABLE_CONCRETE_SYNTAX_EVALIDATOR, Boolean.TRUE);
 					// see EObjectValidator.getRootEValidator(Map<Object, Object>)
 					options.put(EValidator.class, diagnostician);
 					Diagnostic diagnostic = diagnostician.validate(ele, options);
