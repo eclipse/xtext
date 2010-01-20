@@ -522,4 +522,13 @@
   </extension>
 
 
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.eclipse.org/2009/tmf/xtext/csvalidationtest" 
+       class = "org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage"
+       genModel = "org/eclipse/xtext/validation/ConcreteSyntaxValidationTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
 </plugin>
