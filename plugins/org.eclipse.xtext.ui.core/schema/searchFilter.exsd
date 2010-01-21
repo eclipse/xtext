@@ -17,9 +17,10 @@
          </appInfo>
       </annotation>
       <complexType>
-         <sequence>
-            <element ref="filter" minOccurs="1" maxOccurs="unbounded"/>
-         </sequence>
+         <choice minOccurs="1" maxOccurs="unbounded">
+            <element ref="filter"/>
+            <element ref="namespace_delimiter"/>
+         </choice>
          <attribute name="point" type="string" use="required">
             <annotation>
                <documentation>
@@ -62,6 +63,18 @@
       </complexType>
    </element>
 
+   <element name="namespace_delimiter">
+      <complexType>
+         <attribute name="value" type="string" use="required">
+            <annotation>
+               <documentation>
+                  
+               </documentation>
+            </annotation>
+         </attribute>
+      </complexType>
+   </element>
+
    <annotation>
       <appInfo>
          <meta.section type="since"/>
@@ -85,7 +98,7 @@
     &lt;/filter&gt;
  &lt;/extension&gt;
  
-Registers a filter to the extension point. 
+Registers a filter to the extension point.
       </documentation>
    </annotation>
 

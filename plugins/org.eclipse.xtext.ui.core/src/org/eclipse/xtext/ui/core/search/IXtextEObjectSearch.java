@@ -38,14 +38,15 @@ public interface IXtextEObjectSearch {
 
 		protected Predicate<IEObjectDescription> getSearchPredicate(final String stringPattern,
 				final String typeStringPattern) {
+			final Collection<String> namespaceDelimiters = IXtextSearchFilter.Registry.allNamespaceDelimiters();			
 			final SearchPattern searchPattern = new SearchPattern();
 			searchPattern.setPattern(stringPattern);
 			final SearchPattern typeSearchPattern = new SearchPattern();
 			typeSearchPattern.setPattern(typeStringPattern);
-			final Collection<IXtextSearchFilter> registeredFilters = IXtextSearchFilter.Registry.allRegisteredFilters();
+			final Collection<IXtextSearchFilter> registeredFilters = IXtextSearchFilter.Registry.allFilters();
 			return new Predicate<IEObjectDescription>() {
 				public boolean apply(IEObjectDescription input) {
-					if (searchPattern.matches(input.getQualifiedName())
+					if (isNameMatches(searchPattern, input, namespaceDelimiters)
 							&& typeSearchPattern.matches(input.getEClass().getName())) {
 						for (IXtextSearchFilter xtextSearchFilter : registeredFilters) {
 							if (xtextSearchFilter.reject(input)) {
@@ -59,6 +60,20 @@ public interface IXtextEObjectSearch {
 			};
 		}
 
+		protected boolean isNameMatches(SearchPattern searchPattern, IEObjectDescription eObjectDescription, Collection<String> namespaceDelimiters) {
+			String qualifiedName = eObjectDescription.getQualifiedName();
+			if(searchPattern.matches(qualifiedName)) {
+				return true;
+			}
+			for(String namespaceDelimiter : namespaceDelimiters) {
+				int index = qualifiedName.lastIndexOf(namespaceDelimiter); 
+				if(index!=-1 && searchPattern.matches(qualifiedName.substring(index+1))) {
+					return true;
+				}
+			}
+			return false;
+		}
+		
 		protected Iterable<IEObjectDescription> getSearchScope() {
 			return Iterables.concat(Iterables.transform(resourceDescriptions.getAllResourceDescriptions(),
 					new Function<IResourceDescription, Iterable<IEObjectDescription>>() {

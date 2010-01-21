@@ -53,8 +53,8 @@ public class IteratorJob extends Job {
 					return Status.CANCEL_STATUS;
 				}
 				dialog.updateMatches(sortedCopy(matches), false);
+				startTime = endTime;
 			}
-			startTime = endTime;
 		}
 		dialog.updateMatches(sortedCopy(matches), true);
 		return Status.OK_STATUS;
