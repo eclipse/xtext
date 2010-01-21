@@ -10,7 +10,7 @@
 	<!-- ========= org.eclipse.xtext.example.domainmodel ========= -->
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.xtext.examples.NewDomainModelExampleWizard" 
-			name="Domain-Model Example" 
+			name="Xtext Domain-Model Example" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
 			category="org.eclipse.ui.Examples/org.eclipse.xtext.Examples"
 			icon="icons/genproject.gif" 
@@ -31,7 +31,7 @@
 	<!-- TODO: activate me!
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.xtext.examples.NewEcoreDSLExampleWizard" 
-			name="Ecore DSL Example" 
+			name="Xtext Ecore DSL Example" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
 			category="org.eclipse.ui.Examples/org.eclipse.xtext.Examples"
 			icon="icons/genproject.gif" 
@@ -51,7 +51,7 @@
 	<!-- ========= org.eclipse.xtext.example.fowlerdsl ========= -->
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.xtext.examples.NewFowlerDSLExampleWizard" 
-			name="State-Machine Example" 
+			name="Xtext State-Machine Example" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
 			category="org.eclipse.ui.Examples/org.eclipse.xtext.Examples"
 			icon="icons/genproject.gif" 
@@ -70,7 +70,7 @@
 	<!-- ========= org.eclipse.xtext.gmf.example ========= -->
 	<extension point="org.eclipse.ui.newWizards">
 		<wizard	id="org.eclipse.xtext.examples.NewGMFIntegrationExampleWizard" 
-			name="GMF Integration Example" 
+			name="Xtext GMF Integration Example" 
 			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
 			category="org.eclipse.ui.Examples/org.eclipse.xtext.Examples"
 			icon="icons/genproject.gif" 
