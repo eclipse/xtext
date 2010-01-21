@@ -17,6 +17,7 @@ import java.util.Set;
 
 import org.apache.log4j.Level;
 import org.apache.log4j.Logger;
+import org.eclipse.emf.mwe.core.WorkflowInterruptedException;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.Grammar;
@@ -75,6 +76,8 @@ public class CompositeGeneratorFragment implements IGeneratorFragment {
 		for (IGeneratorFragment fragment : fragments) {
 			try {
 				fragment.generate(grammar, ctx);
+			} catch (WorkflowInterruptedException e) {
+				throw e;
 			} catch (Exception e) {
 				LOG.error(e.getMessage(), e);
 			}

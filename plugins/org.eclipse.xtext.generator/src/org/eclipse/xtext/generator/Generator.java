@@ -26,6 +26,7 @@ import java.util.Set;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.mwe.core.WorkflowContext;
+import org.eclipse.emf.mwe.core.WorkflowInterruptedException;
 import org.eclipse.emf.mwe.core.issues.Issues;
 import org.eclipse.emf.mwe.core.lib.AbstractWorkflowComponent2;
 import org.eclipse.emf.mwe.core.monitor.ProgressMonitor;
@@ -107,6 +108,8 @@ public class Generator extends AbstractWorkflowComponent2 {
 				generateManifestUi(languageConfigs, exeCtx);
 				generateActivator(languageConfigs, exeCtx);
 			}
+		} catch (WorkflowInterruptedException e) {
+			throw e;
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
