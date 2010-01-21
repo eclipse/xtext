@@ -10,11 +10,19 @@ package org.eclipse.xtext.validation;
 import java.util.Map;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.Constants;
+
+import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public abstract class AbstractConcreteSyntaxValidator implements IConcreteSyntaxValidator {
+
+	@Inject
+	@Named(Constants.LANGUAGE_NAME)
+	private String language;
 
 	public boolean validateObject(EObject obj, IDiagnosticAcceptor acceptor, Map<Object, Object> context) {
 		return true;
@@ -22,6 +30,18 @@ public abstract class AbstractConcreteSyntaxValidator implements IConcreteSyntax
 
 	public boolean validateRecursive(EObject obj, IDiagnosticAcceptor acceptor, Map<Object, Object> context) {
 		return true;
+	}
+
+	@Override
+	public boolean equals(Object obj) {
+		if (obj instanceof AbstractConcreteSyntaxValidator)
+			return language.equals(((AbstractConcreteSyntaxValidator) obj).language);
+		return false;
+	}
+
+	@Override
+	public int hashCode() {
+		return language.hashCode();
 	}
 
 }

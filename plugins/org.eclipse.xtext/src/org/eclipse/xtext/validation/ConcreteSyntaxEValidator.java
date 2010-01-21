@@ -56,10 +56,8 @@ public class ConcreteSyntaxEValidator extends AbstractInjectableValidator {
 			return true;
 		if (!(eObject.eResource() instanceof XtextResource))
 			return true;
-		IGrammarAccess g = ((XtextResource) eObject.eResource()).getGrammar();
-		if (!grammar.getGrammar().getName().equals(g.getGrammar().getName()))
+		if (!validator.equals(((XtextResource) eObject.eResource()).getConcreteSyntaxValidator()))
 			return true;
 		return validator.validateObject(eObject, new DiagnosticChainAcceptor(diagnostics), context);
 	}
-
 }

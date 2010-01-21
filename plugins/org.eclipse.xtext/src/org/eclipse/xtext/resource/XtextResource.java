@@ -13,6 +13,7 @@ import java.io.InputStream;
 import java.io.OutputStream;
 import java.util.ArrayList;
 import java.util.Collections;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -21,7 +22,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
@@ -33,6 +33,8 @@ import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
+import org.eclipse.xtext.validation.IConcreteSyntaxValidator.IDiagnosticAcceptor;
 
 import com.google.inject.Inject;
 
@@ -72,7 +74,7 @@ public class XtextResource extends ResourceImpl {
 	private IResourceServiceProvider resourceServiceProvider;
 	
 	@Inject 
-	private IGrammarAccess grammar; 
+	private IConcreteSyntaxValidator validator; 
 	
 	public IResourceServiceProvider getResourceServiceProvider() {
 		return resourceServiceProvider;
@@ -251,8 +253,16 @@ public class XtextResource extends ResourceImpl {
 		this.parser = parser;
 	}
 	
-	public IGrammarAccess getGrammar() {
-		return this.grammar;
+	public IConcreteSyntaxValidator getConcreteSyntaxValidator() {
+		return validator;
+	}
+	
+	public List<org.eclipse.emf.common.util.Diagnostic> validateConcreteSyntax() {
+		List<org.eclipse.emf.common.util.Diagnostic> diagnostics = new ArrayList<org.eclipse.emf.common.util.Diagnostic>();
+		IDiagnosticAcceptor acceptor = new IConcreteSyntaxValidator.DiagnosticListAcceptor(diagnostics);
+		for (EObject obj : getContents())
+			validator.validateRecursive(obj, acceptor, new HashMap<Object, Object>());
+		return diagnostics;
 	}
 
 	public ILinker getLinker() {
