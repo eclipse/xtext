@@ -12,6 +12,7 @@ import java.io.IOException;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor.TreeConstructionReport;
+import org.eclipse.xtext.parsetree.reconstr.SerializerUtil.SerializationOptions;
 import org.eclipse.xtext.parsetree.reconstr.impl.TokenStringBuffer;
 import org.eclipse.xtext.parsetree.reconstr.serializationerror.Indent;
 import org.eclipse.xtext.parsetree.reconstr.serializationerror.Model;
@@ -31,7 +32,7 @@ public class SerializationErrorTest extends AbstractGeneratorTest {
 		TokenStringBuffer b = new TokenStringBuffer();
 		TreeConstructionReport r;
 		try {
-			r = getSerializer().serialize(obj, b, null, true);
+			r = getSerializer().serialize(obj, b, null, new SerializationOptions());
 		} catch (XtextSerializationException e) {
 			r = e.getReport();
 		}

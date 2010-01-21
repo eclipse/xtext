@@ -728,7 +728,12 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 
 	@Override
 	public boolean validateRecursive(EObject obj, IDiagnosticAcceptor acceptor, Map<Object, Object> context) {
-		return true;
+		boolean r = true;
+		r &= validateObject(obj, acceptor, context);
+		TreeIterator<EObject> i = obj.eAllContents();
+		while (i.hasNext())
+			r &= validateObject(i.next(), acceptor, context);
+		return r;
 	}
 
 	@Override

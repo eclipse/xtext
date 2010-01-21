@@ -47,6 +47,33 @@ public interface IConcreteSyntaxValidator {
 
 	}
 
+	public class InvalidConcreteSyntaxException extends RuntimeException {
+
+		private static final long serialVersionUID = -6599356530663272947L;
+
+		private List<Diagnostic> diagnostics;
+
+		public InvalidConcreteSyntaxException(String msg, List<Diagnostic> diagnostics) {
+			super(msg);
+			this.diagnostics = diagnostics;
+		}
+
+		@Override
+		public String getMessage() {
+			StringBuffer msg = new StringBuffer();
+			msg.append(super.getMessage());
+			msg.append("\n");
+			for (Diagnostic d : diagnostics) {
+				msg.append(d.getSource());
+				msg.append(": ");
+				msg.append(d.getMessage());
+				msg.append("\n");
+			}
+			return msg.toString();
+		}
+
+	}
+
 	public interface IConcreteSyntaxDiagnostic extends Diagnostic {
 	}
 
