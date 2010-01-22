@@ -14,7 +14,9 @@ public class HiddenTokensMergerTest extends AbstractXtextTests {
 	private void assertRoundtrip(String model) throws Exception {
 		EObject o = getModel(model);
 		 //System.out.println(EmfFormatter.objToStr(((XtextResource) o.eResource()).getParseResult().getRootNode()));
-		String r = getSerializer().serialize(o, false);
+		SerializerUtil.SerializationOptions opt = new SerializerUtil.SerializationOptions();
+		opt.setFormat(false);
+		String r = getSerializer().serialize(o, opt);
 		assertEquals(model, r);
 	}
 

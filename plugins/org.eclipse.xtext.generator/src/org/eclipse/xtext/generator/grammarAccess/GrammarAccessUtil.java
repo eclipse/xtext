@@ -82,7 +82,9 @@ public class GrammarAccessUtil {
 	public static String serialize(EObject obj, String prefix) {
 		String s;
 		try {
-			s = getSerializer().serialize(obj, true);
+			SerializerUtil.SerializationOptions opt = new SerializerUtil.SerializationOptions();
+			opt.setFormat(true);
+			s = getSerializer().serialize(obj, opt);
 		} catch (Exception e) {
 			s = e.toString();
 			// e.printStackTrace();
