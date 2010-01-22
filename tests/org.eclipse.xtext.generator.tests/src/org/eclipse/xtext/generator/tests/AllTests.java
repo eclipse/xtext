@@ -27,6 +27,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.enumrules.PackratParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.enumrules.SerializationTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.ManifestMergerTest.class);
+      suite.addTestSuite(org.eclipse.xtext.generator.ecore.Bug283278Test.class);
       suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.ElementFinderTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.EmptyPackageAwareGrammarAccessFragmentTest.class);
       suite.addTestSuite(org.eclipse.xtext.generator.grammarAccess.FragmentFakingEcoreResourceTest.class);

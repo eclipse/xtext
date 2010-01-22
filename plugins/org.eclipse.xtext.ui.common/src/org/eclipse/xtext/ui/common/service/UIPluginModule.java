@@ -13,8 +13,11 @@ import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.core.IImageHelper;
 import org.eclipse.xtext.ui.core.PluginImageHelper;
+import org.eclipse.xtext.ui.core.editor.actions.IActionContributor;
+import org.eclipse.xtext.ui.core.editor.preferences.IPreferenceStoreInitializer;
 
 import com.google.inject.Binder;
+import com.google.inject.name.Names;
 
 /**
  * @author Sebastian Zarnekow
@@ -32,6 +35,11 @@ public class UIPluginModule extends AbstractGenericModule {
 		super.configure(binder);
 		binder.bind(AbstractUIPlugin.class).toInstance(plugin);
 		binder.bind(IDialogSettings.class).toInstance(plugin.getDialogSettings());
+	}
+	
+	public void configureBracketMatchingAction(Binder binder) {
+		binder.bind(IActionContributor.class).annotatedWith(Names.named("bracketMatcherAction")).to(org.eclipse.xtext.ui.core.editor.bracketmatching.GoToMatchingBracketAction.class);
+		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("bracketMatcherPrefernceInitializer")).to(org.eclipse.xtext.ui.core.editor.bracketmatching.BracketMatchingPreferencesInitializer.class);
 	}
 
 	public Class<? extends IImageHelper> bindIImageHelper() {

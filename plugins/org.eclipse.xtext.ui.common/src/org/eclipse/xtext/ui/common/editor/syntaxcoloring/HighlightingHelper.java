@@ -9,11 +9,11 @@ package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
 
 import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
-import org.eclipse.xtext.ui.common.editor.preferencepage.IScopedPreferenceStoreAccessor;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.editor.XtextPresentationReconciler;
 import org.eclipse.xtext.ui.core.editor.XtextSourceViewer;
 import org.eclipse.xtext.ui.core.editor.XtextSourceViewerConfiguration;
+import org.eclipse.xtext.ui.core.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.core.editor.syntaxcoloring.IHighlightingHelper;
 
 import com.google.inject.Inject;
@@ -34,7 +34,7 @@ public class HighlightingHelper implements IHighlightingHelper, IPropertyChangeL
 	private Provider<HighlightingPresenter> presenterProvider;
 	
 	@Inject
-	private IScopedPreferenceStoreAccessor preferenceStoreAccessor;
+	private IPreferenceStoreAccess preferenceStoreAccessor;
 	
 	/** Highlighting presenter */
 	private HighlightingPresenter fPresenter;
@@ -60,7 +60,7 @@ public class HighlightingHelper implements IHighlightingHelper, IPropertyChangeL
 			fConfiguration= null;
 			fPresentationReconciler= null;
 		}
-		preferenceStoreAccessor.getStore().addPropertyChangeListener(this);
+		preferenceStoreAccessor.getPreferenceStore().addPropertyChangeListener(this);
 		enable();
 	}
 
@@ -79,7 +79,7 @@ public class HighlightingHelper implements IHighlightingHelper, IPropertyChangeL
 
 	public void uninstall() {
 		disable();
-		preferenceStoreAccessor.getStore().removePropertyChangeListener(this);
+		preferenceStoreAccessor.getPreferenceStore().removePropertyChangeListener(this);
 		fEditor= null;
 		fSourceViewer= null;
 		fConfiguration= null;
@@ -126,11 +126,11 @@ public class HighlightingHelper implements IHighlightingHelper, IPropertyChangeL
 		return presenterProvider;
 	}
 
-	public void setPreferenceStoreAccessor(IScopedPreferenceStoreAccessor preferenceStoreAccessor) {
+	public void setPreferenceStoreAccessor(IPreferenceStoreAccess preferenceStoreAccessor) {
 		this.preferenceStoreAccessor = preferenceStoreAccessor;
 	}
 
-	public IScopedPreferenceStoreAccessor getPreferenceStoreAccessor() {
+	public IPreferenceStoreAccess getPreferenceStoreAccessor() {
 		return preferenceStoreAccessor;
 	}
 

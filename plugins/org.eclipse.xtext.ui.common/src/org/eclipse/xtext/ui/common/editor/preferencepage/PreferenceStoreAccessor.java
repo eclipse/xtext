@@ -8,12 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.preferencepage;
 
-import static org.eclipse.xtext.ui.common.editor.preferencepage.CommonPreferenceConstants.BACKGROUNDCOLOR_SUFFIX;
-import static org.eclipse.xtext.ui.common.editor.preferencepage.CommonPreferenceConstants.FONT_SUFFIX;
-import static org.eclipse.xtext.ui.common.editor.preferencepage.CommonPreferenceConstants.STYLE_SUFFIX;
-import static org.eclipse.xtext.ui.common.editor.preferencepage.CommonPreferenceConstants.SYNTAX_COLORER_PREFERENCE_TAG;
-import static org.eclipse.xtext.ui.common.editor.preferencepage.CommonPreferenceConstants.TOKEN_STYLES_PREFERENCE_TAG;
-import static org.eclipse.xtext.ui.core.editor.preferences.PreferenceConstants.SEPARATOR;
+import static org.eclipse.xtext.ui.common.editor.preferencepage.CommonPreferenceConstants.*;
 
 import java.util.Arrays;
 
@@ -26,9 +21,9 @@ import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.editors.text.EditorsUI;
-import org.eclipse.ui.preferences.ScopedPreferenceStore;
 import org.eclipse.ui.texteditor.AbstractTextEditor;
 import org.eclipse.xtext.Constants;
+import org.eclipse.xtext.ui.core.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
 
 import com.google.inject.Inject;
@@ -39,10 +34,10 @@ import com.google.inject.name.Named;
  */
 public class PreferenceStoreAccessor {
 	private final String PREFERENCE_TAG;
-	private final IScopedPreferenceStoreAccessor scopedAccessor;
+	private final IPreferenceStoreAccess scopedAccessor;
 
 	@Inject
-	public PreferenceStoreAccessor(@Named(Constants.LANGUAGE_NAME) String languageName, IScopedPreferenceStoreAccessor scopedAccessor) {
+	public PreferenceStoreAccessor(@Named(Constants.LANGUAGE_NAME) String languageName, IPreferenceStoreAccess scopedAccessor) {
 		this.scopedAccessor = scopedAccessor;
 		PREFERENCE_TAG = tokenTypeTag(languageName) + SEPARATOR;
 	}
@@ -66,7 +61,7 @@ public class PreferenceStoreAccessor {
 		FontData[] fontDataDefaultDefault = JFaceResources.getTextFont().getFontData();
 
 		// set defaults
-		ScopedPreferenceStore preferenceStore = getPreferenceStore();
+		IPreferenceStore preferenceStore = getPreferenceStore();
 		if (defaults.getColor() != null)
 			PreferenceConverter.setDefault(preferenceStore, colorKey, defaults.getColor());
 		else {
@@ -98,8 +93,8 @@ public class PreferenceStoreAccessor {
 		style.setStyle(preferenceStore.getInt(styleKey));
 	}
 
-	private ScopedPreferenceStore getPreferenceStore() {
-		return scopedAccessor.getStore();
+	private IPreferenceStore getPreferenceStore() {
+		return scopedAccessor.getWritablePreferenceStore();
 	}
 
 	private Device getDisplay() {

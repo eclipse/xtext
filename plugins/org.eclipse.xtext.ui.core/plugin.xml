@@ -13,14 +13,6 @@
             label="Syntax">
       </keyword>
    </extension>
-   <extension
-			point="org.eclipse.ui.preferencePages">
-		<page
-          class="org.eclipse.xtext.ui.core.editor.preferences.EmptyPreferencePage"
-          id="org.eclipse.xtext.languages"
-          name="Xtext Languages">
-		</page>
-	</extension>
   <extension
          point="org.eclipse.ui.handlers">
       <handler
@@ -108,6 +100,12 @@
             categoryId="org.eclipse.xtext.ui.core.category.XtextEditor"
             id="org.eclipse.xtext.ui.ToggleCommentAction">
       </command>
+      <command
+            name="Got to Matching Bracket"
+            description="Got to Matching Bracket"
+            categoryId="org.eclipse.xtext.ui.core.category.XtextEditor"
+            id="org.eclipse.xtext.ui.GotToMatchingBracketAction">
+      </command>
       <category
             description="Xtext Editing Commands"
             id="org.eclipse.xtext.ui.core.category.XtextEditor"
@@ -140,6 +138,10 @@
     <key sequence="M1+M2+C"
         contextId="org.eclipse.xtext.ui.core.XtextEditorScope"
         commandId="org.eclipse.xtext.ui.ToggleCommentAction"
+        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+    <key sequence="M1+M2+P"
+        contextId="org.eclipse.xtext.ui.core.XtextEditorScope"
+        commandId="org.eclipse.xtext.ui.GotToMatchingBracketAction"
         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
   </extension>
   <extension
