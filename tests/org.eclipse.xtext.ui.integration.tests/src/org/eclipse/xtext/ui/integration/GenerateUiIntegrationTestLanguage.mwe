@@ -25,5 +25,20 @@
 			</fragment>
 			<fragment class="org.eclipse.xtext.generator.builder.BuilderIntegrationFragment"/>
 		</language>
+		<language uri="classpath:/org/eclipse/xtext/ui/integration/tests/editor/bracketmatching/TestLanguage.xtext">
+			<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/>
+			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
+			<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
+			<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment"/>
+			<fragment class="org.eclipse.xtext.generator.validation.JavaValidatorFragment"/>
+			<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment">
+				<options classSplitting="true"/>
+			</fragment>
+			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
+			<fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment">
+				<options classSplitting="true"/>
+			</fragment>
+			<fragment class="org.eclipse.xtext.generator.builder.BuilderIntegrationFragment"/>
+		</language>
 	</component>
 </workflow>

@@ -87,20 +87,16 @@ public abstract class AbstractPreferencePage extends FieldEditorPreferencePage i
 	public AbstractPreferencePage() {
 		super(GRID);
 	}
+	
+	@Inject
+	private IPreferenceStoreAccess preferenceStoreAccess;
 
 	@Override
 	protected IPreferenceStore doGetPreferenceStore() {
-		String qualifier = getQualifier();
 		if (isPropertyPage()) {
-			ProjectScope projectScope = new ProjectScope(currentProject());
-			ScopedPreferenceStore scopedPreferenceStore = new ScopedPreferenceStore(projectScope, qualifier);
-			scopedPreferenceStore.setSearchContexts(new IScopeContext[] { projectScope, new InstanceScope(),
-					new ConfigurationScope() });
-			return scopedPreferenceStore;
+			return preferenceStoreAccess.getWritablePreferenceStore(currentProject());
 		}
-		ScopedPreferenceStore scopedPreferenceStore = new ScopedPreferenceStore(new InstanceScope(), qualifier);
-		scopedPreferenceStore.setSearchContexts(new IScopeContext[] { new InstanceScope(), new ConfigurationScope() });
-		return scopedPreferenceStore;
+		return preferenceStoreAccess.getWritablePreferenceStore();
 	}
 
 	/**

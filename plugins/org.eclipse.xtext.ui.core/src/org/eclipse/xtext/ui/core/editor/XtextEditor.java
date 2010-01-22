@@ -16,7 +16,6 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.action.Action;
-import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
@@ -39,20 +38,23 @@ import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.editors.text.EditorsUI;
 import org.eclipse.ui.editors.text.TextEditor;
-import org.eclipse.ui.texteditor.ChainedPreferenceStore;
 import org.eclipse.ui.texteditor.DefaultMarkerAnnotationAccess;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.ui.texteditor.SelectMarkerRulerAction;
+import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
 import org.eclipse.ui.texteditor.TextOperationAction;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.ui.core.XtextUIMessages;
+import org.eclipse.xtext.ui.core.editor.actions.IActionContributor;
+import org.eclipse.xtext.ui.core.editor.bracketmatching.BracketMatchingPreferencesInitializer;
+import org.eclipse.xtext.ui.core.editor.bracketmatching.CharacterPairMatcher;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentProvider;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
+import org.eclipse.xtext.ui.core.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.core.editor.syntaxcoloring.IHighlightingHelper;
 import org.eclipse.xtext.ui.core.editor.toggleComments.ToggleSLCommentAction;
 import org.eclipse.xtext.ui.core.internal.Activator;
@@ -95,6 +97,9 @@ public class XtextEditor extends TextEditor {
 
 	@Inject
 	private IHighlightingHelper highlightingHelper;
+	
+	@Inject
+	private IPreferenceStoreAccess preferenceStoreAccess;
 
 	private ISelectionChangedListener selectionChangedListener;
 
@@ -139,18 +144,18 @@ public class XtextEditor extends TextEditor {
 		// source viewer setup
 		setSourceViewerConfiguration(sourceViewerConfiguration);
 
-		setPreferenceStore(new ChainedPreferenceStore(new IPreferenceStore[] {
-				Activator.getDefault().getPreferenceStore(), EditorsUI.getPreferenceStore() }));
+		setPreferenceStore(preferenceStoreAccess.getContextPreferenceStore(input));
 
 		// NOTE: Outline CANNOT be initialized here, since we do not have access
 		// to the source viewer yet (it will be created later).
 
 		super.init(site, input);
 	}
-	
+
 	public XtextSourceViewerConfiguration getXtextSourceViewerConfiguration() {
 		return sourceViewerConfiguration;
 	}
+	
 	
 	@Override
 	public void doSaveAs() {
@@ -169,7 +174,6 @@ public class XtextEditor extends TextEditor {
 		super.doRevertToSaved();
 		callback.afterSave(this);
 	}
-
 	/**
 	 * Set key binding scope. Needed to make F3 work properly.
 	 */
@@ -230,6 +234,9 @@ public class XtextEditor extends TextEditor {
 		}
 	}
 	
+	@Inject
+	private IActionContributor.CompositeImpl actioncontributor;
+	
 	@Override
 	protected void createActions() {
 		super.createActions();
@@ -255,6 +262,8 @@ public class XtextEditor extends TextEditor {
 		SelectMarkerRulerAction markerAction = new XtextMarkerRulerAction(XtextUIMessages.getResourceBundle(),
 				"XtextSelectAnnotationRulerAction.", this, getVerticalRuler()); //$NON-NLS-1$
 		setAction(ITextEditorActionConstants.RULER_CLICK, markerAction);
+		
+		actioncontributor.contributeActions(this);
 	}
 
 	private void configureToggleCommentAction(ToggleSLCommentAction action) {
@@ -283,6 +292,18 @@ public class XtextEditor extends TextEditor {
 				isOverviewRulerVisible(), styles);
 		getSourceViewerDecorationSupport(projectionViewer);
 		return projectionViewer;
+	}
+	
+	@Inject
+	private CharacterPairMatcher characterPairMatcher;
+	
+	@Override
+	protected void configureSourceViewerDecorationSupport(SourceViewerDecorationSupport support) {
+		super.configureSourceViewerDecorationSupport(support);
+		if (characterPairMatcher!=null) {
+			support.setCharacterPairMatcher(characterPairMatcher);
+			support.setMatchingCharacterPainterPreferenceKeys(BracketMatchingPreferencesInitializer.IS_ACTIVE_KEY, BracketMatchingPreferencesInitializer.COLOR_KEY);
+		}
 	}
 
 	private ProjectionSupport projectionSupport;
@@ -458,8 +479,7 @@ public class XtextEditor extends TextEditor {
 			return false;
 		try {
 			return (((MarkerAnnotation) annotation).getMarker().isSubtypeOf(IMarker.PROBLEM));
-		}
-		catch (final CoreException e) {
+		} catch (final CoreException e) {
 			return false;
 		}
 	}

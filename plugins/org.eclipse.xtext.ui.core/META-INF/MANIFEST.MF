@@ -23,6 +23,8 @@ Bundle-Activator: org.eclipse.xtext.ui.core.internal.Activator
 Export-Package: org.eclipse.xtext.ui.core,
  org.eclipse.xtext.ui.core.containers,
  org.eclipse.xtext.ui.core.editor,
+ org.eclipse.xtext.ui.core.editor.actions,
+ org.eclipse.xtext.ui.core.editor.bracketmatching,
  org.eclipse.xtext.ui.core.editor.contentassist,
  org.eclipse.xtext.ui.core.editor.formatting,
  org.eclipse.xtext.ui.core.editor.handler,

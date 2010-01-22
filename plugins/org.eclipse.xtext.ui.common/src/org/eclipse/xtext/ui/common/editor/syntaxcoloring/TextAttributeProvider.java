@@ -15,8 +15,8 @@ import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
-import org.eclipse.xtext.ui.common.editor.preferencepage.IScopedPreferenceStoreAccessor;
 import org.eclipse.xtext.ui.common.editor.preferencepage.PreferenceStoreAccessor;
+import org.eclipse.xtext.ui.core.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.core.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
 import org.eclipse.xtext.util.Strings;
@@ -37,12 +37,12 @@ public class TextAttributeProvider implements ITextAttributeProvider, IHighlight
 
 	@Inject
 	public TextAttributeProvider(ILexicalHighlightingConfiguration lexical, ISemanticHighlightingConfiguration semantic,
-			IScopedPreferenceStoreAccessor preferences, PreferenceStoreAccessor preferencesAccessor) {
+			IPreferenceStoreAccess preferenceStoreAccess, PreferenceStoreAccessor prefStoreAccessor) {
 		this.lexical = lexical;
 		this.semantic = semantic;
-		this.preferencesAccessor = preferencesAccessor;
+		this.preferencesAccessor = prefStoreAccessor;
 		this.attributes = new HashMap<String, TextAttribute>();
-		preferences.getStore().addPropertyChangeListener(this);
+		preferenceStoreAccess.getPreferenceStore().addPropertyChangeListener(this);
 		initialize();
 	}
 
