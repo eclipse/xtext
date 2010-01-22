@@ -47,7 +47,9 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 			logger.trace(EmfFormatter.objToStr(NodeUtil.getRootNode(result)));
 			logger.trace(EmfFormatter.objToStr(NodeUtil.getRootNode(result).getLeafNodes()));
 		}
-		return getSerializer().serialize(result, false);
+		SerializerUtil.SerializationOptions opt = new SerializerUtil.SerializationOptions();
+		opt.setFormat(false);
+		return getSerializer().serialize(result, opt);
 	}
 
 	public void testSimpleExpressions5() throws Exception {
@@ -245,20 +247,26 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		EmptyObjectBug284850 result = (EmptyObjectBug284850) getModel(model);
 		result.getItems().getList().clear();
 		System.out.println(EmfFormatter.objToStr(result));
-		String actual = getSerializer().serialize(result, false);
+		SerializerUtil.SerializationOptions opt = new SerializerUtil.SerializationOptions();
+		opt.setFormat(false);
+		String actual = getSerializer().serialize(result, opt);
 		assertEquals(model, actual);
 	}
 
 	public void testMultiInheritanceBug280439() throws Exception {
 		String model = "#15 a b";
 		EObject result = getModel(model);
-		assertEquals(model, getSerializer().serialize(result, false));
+		SerializerUtil.SerializationOptions opt = new SerializerUtil.SerializationOptions();
+		opt.setFormat(false);
+		assertEquals(model, getSerializer().serialize(result, opt));
 	}
 	
 	public void testEObjectRef() throws Exception {
 		String model = "#16 obj refs obj";
 		EObject result = getModel(model);
-		assertEquals(model, getSerializer().serialize(result, false));
+		SerializerUtil.SerializationOptions opt = new SerializerUtil.SerializationOptions();
+		opt.setFormat(false);
+		assertEquals(model, getSerializer().serialize(result, opt));
 	}
 
 	@Override
