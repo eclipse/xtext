@@ -21,6 +21,7 @@ import java.util.Set;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EDataType;
@@ -63,6 +64,7 @@ import org.eclipse.xtext.util.XtextSwitch;
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import com.google.common.collect.Sets;
 
 /**
@@ -163,11 +165,16 @@ public class Xtext2EcoreTransformer {
 	}
 	
 	protected void clearPackage(Resource resource, EPackage pack) {
+		Map<InternalEObject, URI> uris = Maps.newHashMap();
 		for(EClassifier classifier: pack.getEClassifiers()) {
 			InternalEObject internalEObject = (InternalEObject) classifier;
-			internalEObject.eSetProxyURI(resource.getURI().appendFragment(resource.getURIFragment(internalEObject)));
+			URI appendFragment = resource.getURI().appendFragment(resource.getURIFragment(internalEObject));
+			uris.put(internalEObject, appendFragment);
 		}
 		pack.getEClassifiers().clear();
+		for (Map.Entry<InternalEObject, URI> entry : uris.entrySet()) {
+			entry.getKey().eSetProxyURI(entry.getValue());
+		}
 	}
 
 	private static List<EPackage> getPackagesSortedByName(Collection<EPackage> packages) {
