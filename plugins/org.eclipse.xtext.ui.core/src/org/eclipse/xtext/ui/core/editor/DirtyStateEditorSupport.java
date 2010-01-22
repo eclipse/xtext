@@ -43,6 +43,59 @@ import com.google.inject.Inject;
 public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDescription.Event.Listener, VerifyListener {
 	
 	/**
+	 * @author Sebastian Zarnekow - Initial contribution and API
+	 */
+	protected class UpdateEditorStateJob extends Job {
+		private final IResourceDescription.Event event;
+		private final Set<URI> uris;
+
+		protected UpdateEditorStateJob(IResourceDescription.Event event, Set<URI> uris) {
+			super("Updating editor state");
+			this.event = event;
+			this.uris = uris;
+		}
+
+		@Override
+		protected IStatus run(IProgressMonitor monitor) {
+			IDirtyStateEditorSupportClient myClient = currentClient;
+			if (myClient == null)
+				return Status.OK_STATUS;
+			final IXtextDocument document = myClient.getDocument();
+			if (document == null)
+				return Status.OK_STATUS;
+			final boolean[] isReparseRequired = new boolean[] {false};
+			final Collection<Resource> affectedResources = document.readOnly(new IUnitOfWork<Collection<Resource>, XtextResource>() {
+				public Collection<Resource> exec(XtextResource resource) throws Exception {
+					if (resource == null || resource.getResourceSet() == null)
+						return null;
+					Collection<Resource> affectedResources = collectAffectedResources(resource, event, uris);
+					isReparseRequired[0] = isReparseRequired(resource, event);
+					return affectedResources;
+				}
+			});
+			if (affectedResources != null && !affectedResources.isEmpty() || isReparseRequired[0]) {
+				document.modify(new IUnitOfWork.Void<XtextResource>() {
+					@Override
+					public void process(XtextResource resource) throws Exception {
+						if (resource == null || resource.getResourceSet() == null)
+							return;
+						ResourceSet resourceSet = resource.getResourceSet();
+						if (affectedResources != null) {
+							for(Resource affectedResource: affectedResources) {
+								affectedResource.unload();
+								resourceSet.getResources().remove(affectedResource);
+							}
+						}
+						resource.reparse(document.get());
+					}
+				});
+			}
+			return Status.OK_STATUS;
+		}
+		
+	}
+
+	/**
 	 * Allows to mock the user decision in unit tests.
 	 * @author Sebastian Zarnekow - Initial contribution and API
 	 */
@@ -185,74 +238,12 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 			else if (delta.getOld() != null)
 				uris.add(delta.getOld().getURI());
 		}
-		new Job("Updating editor state") {
+		Job updateJob = createUpdateEditorJob(event, uris);
+		updateJob.schedule();
+	}
 
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
-				IDirtyStateEditorSupportClient myClient = currentClient;
-				if (myClient == null)
-					return Status.OK_STATUS;
-				final IXtextDocument document = myClient.getDocument();
-				if (document == null)
-					return Status.OK_STATUS;
-				final boolean[] isReparseRequired = new boolean[] {false};
-				final Collection<Resource> affectedResources = document.readOnly(new IUnitOfWork<Collection<Resource>, XtextResource>() {
-					public Collection<Resource> exec(XtextResource resource) throws Exception {
-						if (resource == null || resource.getResourceSet() == null)
-							return null;
-						Collection<Resource> affectedResources = collectAffectedResources(resource, uris);
-						IResourceDescription.Manager resourceDescriptionManager = resource.getResourceServiceProvider().getResourceDescriptionManager();
-						IResourceDescription description = resourceDescriptionManager.getResourceDescription(resource);
-						for(IResourceDescription.Delta delta: event.getDeltas()) {
-							if (resourceDescriptionManager.isAffected(delta, description)) {
-								isReparseRequired[0] = true;
-								break;
-							}
-						}
-						return affectedResources;
-					}
-					
-					protected Collection<Resource> collectAffectedResources(XtextResource resource, final Collection<URI> affectedURIs) {
-						List<Resource> result = Lists.newArrayListWithExpectedSize(2);
-						ResourceSet resourceSet = resource.getResourceSet();
-						URIConverter converter = resourceSet.getURIConverter();
-						Set<URI> normalizedAffected = Sets.newHashSetWithExpectedSize(affectedURIs.size());
-						for(URI original: affectedURIs) {
-							normalizedAffected.add(converter.normalize(original));
-						}
-						EcoreUtil.resolveAll(resource);
-						for(Resource res: resourceSet.getResources()) {
-							if (res != resource && res != null) {
-								URI normalized = converter.normalize(res.getURI());
-								if (normalizedAffected.contains(normalized))
-									result.add(res);
-							}
-						}
-						return result;
-					}
-				});
-				if (affectedResources != null && !affectedResources.isEmpty() || isReparseRequired[0]) {
-					
-					document.modify(new IUnitOfWork.Void<XtextResource>() {
-						@Override
-						public void process(XtextResource resource) throws Exception {
-							if (resource == null || resource.getResourceSet() == null)
-								return;
-							ResourceSet resourceSet = resource.getResourceSet();
-							if (affectedResources != null) {
-								for(Resource affectedResource: affectedResources) {
-									affectedResource.unload();
-									resourceSet.getResources().remove(affectedResource);
-								}
-							}
-							resource.reparse(document.get());
-						}
-					});
-				}
-				return Status.OK_STATUS;
-			}
-			
-		}.schedule();
+	public UpdateEditorStateJob createUpdateEditorJob(final IResourceDescription.Event event, final Set<URI> uris) {
+		return new UpdateEditorStateJob(event, uris);
 	}
 	
 	public void modelChanged(XtextResource resource) {
@@ -267,6 +258,40 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 				}
 			}
 		}
+	}
+	
+	protected Collection<Resource> collectAffectedResources(XtextResource resource, IResourceDescription.Event event, Collection<URI> affectedURIs) {
+		List<Resource> result = Lists.newArrayListWithExpectedSize(2);
+		ResourceSet resourceSet = resource.getResourceSet();
+		URIConverter converter = resourceSet.getURIConverter();
+		Set<URI> normalizedAffected = Sets.newHashSetWithExpectedSize(affectedURIs.size());
+		for(URI original: affectedURIs) {
+			normalizedAffected.add(converter.normalize(original));
+		}
+		EcoreUtil.resolveAll(resource);
+		for(Resource res: resourceSet.getResources()) {
+			if (res != resource && res != null) {
+				URI normalized = converter.normalize(res.getURI());
+				if (normalizedAffected.contains(normalized))
+					result.add(res);
+			}
+		}
+		return result;
+	}
+	
+	protected boolean isReparseRequired(XtextResource resource, IResourceDescription.Event event) {
+		IResourceDescription.Manager resourceDescriptionManager = resource.getResourceServiceProvider().getResourceDescriptionManager();
+		IResourceDescription description = resourceDescriptionManager.getResourceDescription(resource);
+		for(IResourceDescription.Delta delta: event.getDeltas()) {
+			if (resourceDescriptionManager.isAffected(delta, description)) {
+				return true;
+			}
+		}
+		return false;
+	}
+	
+	protected boolean isDirty() {
+		return isDirty;
 	}
 		
 	public IDirtyStateManager getDirtyStateManager() {

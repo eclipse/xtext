@@ -136,7 +136,7 @@ public class DefaultLabelProvider extends SimpleLabelProvider {
 		return new StyledString(text, new XtextStyleAdapterStyler(xtextStyle));
 	}
 
-	private static class XtextStyleAdapterStyler extends Styler {
+	protected static class XtextStyleAdapterStyler extends Styler {
 		private org.eclipse.xtext.ui.core.editor.utils.TextStyle xtextTextStyle;
 
 		public XtextStyleAdapterStyler(org.eclipse.xtext.ui.core.editor.utils.TextStyle textStyle) {
@@ -159,7 +159,7 @@ public class DefaultLabelProvider extends SimpleLabelProvider {
 		}
 	}
 
-	private static class DefaultFontStyler extends Styler {
+	protected static class DefaultFontStyler extends Styler {
 		private final FontDescriptor fontDescriptor;
 		private final String foregroundColorName;
 		private final String backgroundColorName;
