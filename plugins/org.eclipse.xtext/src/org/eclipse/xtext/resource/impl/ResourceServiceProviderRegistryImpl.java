@@ -10,6 +10,7 @@ package org.eclipse.xtext.resource.impl;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.impl.ResourceFactoryRegistryImpl;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 
@@ -51,6 +52,10 @@ public class ResourceServiceProviderRegistryImpl implements IResourceServiceProv
 
 	public Map<String, Object> getProtocolToFactoryMap() {
 		return data.getProtocolToFactoryMap();
+	}
+
+	public IResourceServiceProvider getResourceServiceProvider(URI uri) {
+		return data.getServiceProvider(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 	}
 	
 	

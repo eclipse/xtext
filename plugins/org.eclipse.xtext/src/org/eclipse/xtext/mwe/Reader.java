@@ -136,7 +136,7 @@ public class Reader extends AbstractReader {
 		ResourceSet resourceSet = getResourceSet();
 		Multimap<String, URI> uris = getPathTraverser().resolvePathes(pathes, new Predicate<URI>() {
 			public boolean apply(URI input) {
-				return getRegistry().getResourceServiceProvider(input, null) != null;
+				return getRegistry().getResourceServiceProvider(input) != null;
 			}
 		});
 		IAllContainersState containersState = containersStateFactory.getContainersState(pathes, uris);

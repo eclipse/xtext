@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.preferencepage;
+package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
 
 
 

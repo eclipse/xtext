@@ -30,7 +30,7 @@ public abstract class AbstractExportedObjectsAwareScopeProvider extends Abstract
 	}
 	
 	protected IResourceDescription getResourceDescription(Resource resource) {
-		IResourceServiceProvider resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(resource.getURI(),null);
+		IResourceServiceProvider resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(resource.getURI());
 		if (resourceServiceProvider == null)
 			return null;
 		IResourceDescription.Manager manager = resourceServiceProvider.getResourceDescriptionManager();

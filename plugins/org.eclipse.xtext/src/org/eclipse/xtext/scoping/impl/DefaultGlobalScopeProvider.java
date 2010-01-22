@@ -141,7 +141,7 @@ public class DefaultGlobalScopeProvider extends AbstractGlobalScopeProvider {
 		if (object.eIsProxy())
 			throw new IllegalArgumentException("object may not be a proxy: " + object);
 		IResourceDescription.Manager descriptionManager = getResourceServiceProviderRegistry().getResourceServiceProvider(
-				object.eResource().getURI(), null).getResourceDescriptionManager();
+				object.eResource().getURI()).getResourceDescriptionManager();
 		if (descriptionManager == null)
 			throw new IllegalStateException("Cannot find description manager for " + object);
 		IResourceDescription description = descriptionManager.getResourceDescription(object.eResource());

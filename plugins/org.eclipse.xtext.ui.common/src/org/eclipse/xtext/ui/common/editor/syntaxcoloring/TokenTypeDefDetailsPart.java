@@ -13,7 +13,6 @@ import org.eclipse.jface.preference.FontFieldEditor;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.swt.SWT;
-import org.eclipse.xtext.ui.common.editor.preferencepage.CommonPreferenceConstants;
 import org.eclipse.xtext.ui.core.editor.preferences.fields.AbstractDetailsPart;
 import org.eclipse.xtext.ui.core.editor.preferences.fields.CheckBoxGroupFieldEditor;
 

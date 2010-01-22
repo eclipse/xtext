@@ -76,7 +76,7 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
 		try {
 			IResourceServiceProvider provider = resourceServiceProviderRegistry.getResourceServiceProvider(resource
-					.getURI(), null);
+					.getURI());
 			
 			List<Issue> list = provider.getResourceValidator().validate(resource, CheckMode.FAST_ONLY,
 					getCancelIndicator(subMonitor));

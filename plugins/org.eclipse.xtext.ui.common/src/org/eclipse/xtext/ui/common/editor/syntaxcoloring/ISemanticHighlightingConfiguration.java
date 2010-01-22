@@ -7,38 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
 
-import com.google.inject.ImplementedBy;
 
 /**
- * Clients should implement this interface to provide the set of semantic highlighting styles.
- * Implementors have to provide an <code>id</code>, <code>name</code> and default <code>style</code>.
- * 
- * @author Sebastian Zarnekow - Initial contribution and API
+ * @deprecated use {@link IHighlightingConfiguration}
  */
-@ImplementedBy(ISemanticHighlightingConfiguration.NullSemanticHighlightingConfiguration.class)
-public interface ISemanticHighlightingConfiguration {
+@Deprecated
+public interface ISemanticHighlightingConfiguration extends IHighlightingConfiguration {
 
-	/**
-	 * This method is called by the framework and allows clients to register the default styles for
-	 * the semantic highlighting stage.
-	 * 
-	 * @param acceptor the acceptor is used to announce the various default styles. It is never <code>null</code>.
-	 * @see IHighlightingConfigurationAcceptor#acceptDefaultHighlighting(String, String, org.eclipse.xtext.ui.core.editor.utils.TextStyle)
-	 */
-	void configure(IHighlightingConfigurationAcceptor acceptor);
-
-	/**
-	 * Null-implementation of the ISemanticHighlightingConfiguration. It is bound by default and does nothing.
-	 * 
-	 * @author Sebastian Zarnekow - Initial contribution and API
-	 */
-	public class NullSemanticHighlightingConfiguration implements ISemanticHighlightingConfiguration {
-
-		/**
-		 * No-op implementation.
-		 */
-		public void configure(IHighlightingConfigurationAcceptor acceptor) {
-		}
-		
-	}
 }
