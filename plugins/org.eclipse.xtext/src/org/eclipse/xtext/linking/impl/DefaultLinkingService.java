@@ -52,11 +52,11 @@ public class DefaultLinkingService extends AbstractLinkingService {
 		}
 	}
 
-	private void unRegisterImportedNamesAdapter() {
+	protected void unRegisterImportedNamesAdapter() {
 		unRegisterImportedNamesAdapter(getScopeProvider());
 	}
 	
-	private void unRegisterImportedNamesAdapter(IScopeProvider scopeProvider) {
+	protected void unRegisterImportedNamesAdapter(IScopeProvider scopeProvider) {
 		if (scopeProvider instanceof AbstractGlobalScopeDelegatingScopeProvider) {
 			AbstractGlobalScopeDelegatingScopeProvider provider = (AbstractGlobalScopeDelegatingScopeProvider) scopeProvider;
 			provider.setWrapper(null);
@@ -66,11 +66,11 @@ public class DefaultLinkingService extends AbstractLinkingService {
 		}
 	}
 
-	private void registerImportedNamesAdapter(EObject context) {
+	protected void registerImportedNamesAdapter(EObject context) {
 		registerImportedNamesAdapter(getScopeProvider(), context);
 	}
 	
-	private void registerImportedNamesAdapter(IScopeProvider scopeProvider, EObject context) {
+	protected void registerImportedNamesAdapter(IScopeProvider scopeProvider, EObject context) {
 		if (scopeProvider instanceof AbstractGlobalScopeDelegatingScopeProvider) {
 			AbstractGlobalScopeDelegatingScopeProvider provider = (AbstractGlobalScopeDelegatingScopeProvider) scopeProvider;
 			ImportedNamesAdapter adapter = getImportedNamesAdapter(context);
@@ -81,7 +81,7 @@ public class DefaultLinkingService extends AbstractLinkingService {
 		}
 	}
 
-	private ImportedNamesAdapter getImportedNamesAdapter(EObject context) {
+	protected ImportedNamesAdapter getImportedNamesAdapter(EObject context) {
 		ImportedNamesAdapter adapter = ImportedNamesAdapter.find(context.eResource());
 		if (adapter!=null)
 			return adapter;

@@ -38,6 +38,8 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 
 	private Grammar grammar;
 
+	private Map<String, IValueConverter<Object>> converters;
+	
 	@Inject
 	public void setGrammar(IGrammarAccess grammarAccess) {
 		this.grammar = grammarAccess.getGrammar();
@@ -47,16 +49,16 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 		return grammar;
 	}
 
-	public final String toString(Object value, String lexerRule) {
+	public String toString(Object value, String lexerRule) {
 		return getConverter(lexerRule).toString(value);
 	}
 
-	public final Object toValue(String string, String lexerRule, AbstractNode node) throws ValueConverterException {
+	public Object toValue(String string, String lexerRule, AbstractNode node) throws ValueConverterException {
 		return getConverter(lexerRule).toValue(string, node);
 	}
 
 	@SuppressWarnings("unchecked")
-	private final IValueConverter<Object> getConverter(String lexerRule) {
+	protected IValueConverter<Object> getConverter(String lexerRule) {
 		Map<String, IValueConverter<Object>> map = getConverters();
 		if (map.containsKey(lexerRule)) {
 			return map.get(lexerRule);
@@ -64,9 +66,8 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 		return (IValueConverter<Object>) IValueConverter.NO_OP_CONVERTER;
 	}
 
-	private Map<String, IValueConverter<Object>> converters;
 
-	private Map<String, IValueConverter<Object>> getConverters() {
+	protected Map<String, IValueConverter<Object>> getConverters() {
 		if (converters == null) {
 			converters = new HashMap<String, IValueConverter<Object>>();
 			internalRegisterForClass(getClass());
@@ -75,7 +76,7 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 	}
 
 	@SuppressWarnings("unchecked")
-	private void internalRegisterForClass(Class<?> clazz) {
+	protected void internalRegisterForClass(Class<?> clazz) {
 		Method[] methods = clazz.getDeclaredMethods();
 		for (Method method : methods) {
 			if (isConfigurationMethod(method)) {
@@ -94,12 +95,12 @@ public abstract class AbstractDeclarativeValueConverterService extends AbstractV
 		registerEFactoryConverters();
 	}
 
-	private boolean isConfigurationMethod(Method method) {
+	protected boolean isConfigurationMethod(Method method) {
 		return method.isAnnotationPresent(ValueConverter.class) && method.getParameterTypes().length == 0
 				&& IValueConverter.class.isAssignableFrom(method.getReturnType());
 	}
 
-	private void registerEFactoryConverters() {
+	protected void registerEFactoryConverters() {
 		for (ParserRule parserRule : allParserRules(getGrammar())) {
 			if(isDatatypeRule(parserRule) && !converters.containsKey(parserRule.getName())) {
 				EDataType datatype = (EDataType) parserRule.getType().getClassifier();
