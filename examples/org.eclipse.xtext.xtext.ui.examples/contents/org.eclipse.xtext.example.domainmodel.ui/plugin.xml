@@ -52,8 +52,7 @@
         <page
             class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.xtext.example.Domainmodel"
-            name="Domainmodel"
-            category="org.eclipse.xtext.languages">
+            name="Domainmodel">
             <keywordReference id="org.eclipse.xtext.example.ui.keyword_Domainmodel"/>
         </page>
         <page

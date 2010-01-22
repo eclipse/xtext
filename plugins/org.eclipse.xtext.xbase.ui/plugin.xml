@@ -52,8 +52,7 @@
         <page
             class="org.eclipse.xtext.xbase.XtypeExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.xtext.xbase.Xtype"
-            name="Xtype"
-            category="org.eclipse.xtext.languages">
+            name="Xtype">
             <keywordReference id="org.eclipse.xtext.xbase.ui.keyword_Xtype"/>
         </page>
         <page
@@ -150,8 +149,7 @@
         <page
             class="org.eclipse.xtext.xbase.XpressionExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.xtext.xbase.Xpression"
-            name="Xpression"
-            category="org.eclipse.xtext.languages">
+            name="Xpression">
             <keywordReference id="org.eclipse.xtext.xbase.ui.keyword_Xpression"/>
         </page>
         <page
@@ -248,8 +246,7 @@
         <page
             class="org.eclipse.xtext.xbase.XbaseExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.xtext.xbase.Xbase"
-            name="Xbase"
-            category="org.eclipse.xtext.languages">
+            name="Xbase">
             <keywordReference id="org.eclipse.xtext.xbase.ui.keyword_Xbase"/>
         </page>
         <page

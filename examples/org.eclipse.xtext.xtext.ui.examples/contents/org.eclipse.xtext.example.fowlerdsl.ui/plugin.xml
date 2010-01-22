@@ -52,8 +52,7 @@
         <page
             class="org.eclipse.xtext.example.FowlerDslExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.xtext.example.FowlerDsl"
-            name="FowlerDsl"
-            category="org.eclipse.xtext.languages">
+            name="FowlerDsl">
             <keywordReference id="org.eclipse.xtext.example.ui.keyword_FowlerDsl"/>
         </page>
         <page

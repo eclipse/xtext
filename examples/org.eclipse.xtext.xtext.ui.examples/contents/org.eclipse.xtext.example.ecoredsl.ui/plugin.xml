@@ -52,8 +52,7 @@
         <page
             class="org.eclipse.xtext.example.EcoreDslExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.xtext.example.EcoreDsl"
-            name="EcoreDsl"
-            category="org.eclipse.xtext.languages">
+            name="EcoreDsl">
             <keywordReference id="org.eclipse.xtext.example.ui.keyword_EcoreDsl"/>
         </page>
         <page
