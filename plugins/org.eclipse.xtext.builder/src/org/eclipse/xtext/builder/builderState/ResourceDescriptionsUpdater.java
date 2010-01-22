@@ -146,7 +146,7 @@ public class ResourceDescriptionsUpdater {
 	}
 
 	private Manager getResourceDescriptionManager(URI uri) {
-		IResourceServiceProvider resourceServiceProvider = managerRegistry.getResourceServiceProvider(uri, null);
+		IResourceServiceProvider resourceServiceProvider = managerRegistry.getResourceServiceProvider(uri);
 		if (resourceServiceProvider == null)
 			return null;
 		return resourceServiceProvider.getResourceDescriptionManager();

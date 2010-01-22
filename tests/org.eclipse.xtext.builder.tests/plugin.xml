@@ -62,8 +62,7 @@
         <page
             class="org.eclipse.xtext.builder.tests.BuilderTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.xtext.builder.tests.BuilderTestLanguage"
-            name="BuilderTestLanguage"
-            category="org.eclipse.xtext.languages">
+            name="BuilderTestLanguage">
             <keywordReference id="org.eclipse.xtext.builder.tests.ui.keyword_BuilderTestLanguage"/>
         </page>
         <page

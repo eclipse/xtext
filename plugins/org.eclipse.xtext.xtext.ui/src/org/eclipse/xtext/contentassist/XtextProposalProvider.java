@@ -53,7 +53,7 @@ import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.common.editor.contentassist.ConfigurableCompletionProposal;
-import org.eclipse.xtext.ui.common.editor.syntaxcoloring.DefaultLexicalHighlightingConfiguration;
+import org.eclipse.xtext.ui.common.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.core.editor.contentassist.PrefixMatcher;
@@ -69,7 +69,7 @@ import com.google.inject.Inject;
  */
 public class XtextProposalProvider extends org.eclipse.xtext.contentassist.AbstractXtextProposalProvider {
 	@Inject
-	private DefaultLexicalHighlightingConfiguration defaultLexicalHighlightingConfiguration;
+	private DefaultHighlightingConfiguration defaultLexicalHighlightingConfiguration;
 	@Inject 
 	private SemanticHighlightingConfiguration semanticHighlightingConfiguration;
 
