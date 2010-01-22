@@ -18,6 +18,7 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.ENamedElement;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
@@ -203,6 +204,10 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 
 	public Map<String, Object> getProtocolToFactoryMap() {
 		return null;
+	}
+
+	public IResourceServiceProvider getResourceServiceProvider(URI uri) {
+		return getResourceServiceProvider(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 	}
 	
 }
