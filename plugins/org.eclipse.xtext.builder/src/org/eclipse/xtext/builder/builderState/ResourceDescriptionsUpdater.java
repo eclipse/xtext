@@ -86,7 +86,7 @@ public class ResourceDescriptionsUpdater {
 					return Collections.emptySet();
 				subMonitor.setWorkRemaining(1);
 				Set<IResourceDescription> descriptions = findAffectedResourceDescriptions(resourceDescriptions, result
-						.values());
+						.values(), subMonitor);
 				Set<URI> uris = Sets.newHashSet(Iterables.transform(descriptions,
 						new Function<IResourceDescription, URI>() {
 							public URI apply(IResourceDescription from) {
@@ -105,7 +105,7 @@ public class ResourceDescriptionsUpdater {
 		}
 	}
 
-	private Map<URI, Delta> update(IResourceDescriptions resourceDescriptions, final ResourceSet set,
+	protected Map<URI, Delta> update(IResourceDescriptions resourceDescriptions, final ResourceSet set,
 			Set<URI> toBeUpdated, IProgressMonitor monitor) {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, toBeUpdated.size() * 2);
 		int total = toBeUpdated.size();
@@ -113,6 +113,8 @@ public class ResourceDescriptionsUpdater {
 		try {
 			Map<URI, Delta> result = Maps.newHashMap();
 			for (URI uri : toBeUpdated) {
+				if (subMonitor.isCanceled())
+					return Collections.emptyMap();
 				Resource res = null;
 				try {
 					subMonitor.subTask("Loading affected resource " + current + " of " + total);
@@ -128,6 +130,8 @@ public class ResourceDescriptionsUpdater {
 				subMonitor.worked(1);
 			}
 			for (URI uri : toBeUpdated) {
+				if (subMonitor.isCanceled())
+					return Collections.emptyMap();
 				if (!result.containsKey(uri)) {
 					Manager manager = getResourceDescriptionManager(uri);
 					if (manager != null) {
@@ -145,18 +149,20 @@ public class ResourceDescriptionsUpdater {
 		}
 	}
 
-	private Manager getResourceDescriptionManager(URI uri) {
+	protected Manager getResourceDescriptionManager(URI uri) {
 		IResourceServiceProvider resourceServiceProvider = managerRegistry.getResourceServiceProvider(uri);
 		if (resourceServiceProvider == null)
 			return null;
 		return resourceServiceProvider.getResourceDescriptionManager();
 	}
 
-	private Set<IResourceDescription> findAffectedResourceDescriptions(IResourceDescriptions resourceDescriptions,
-			Collection<Delta> collection) throws IllegalArgumentException {
+	protected Set<IResourceDescription> findAffectedResourceDescriptions(IResourceDescriptions resourceDescriptions,
+			Collection<Delta> collection, IProgressMonitor monitor) throws IllegalArgumentException {
 		Set<IResourceDescription> result = Sets.newHashSet();
 		Iterable<? extends IResourceDescription> descriptions = resourceDescriptions.getAllResourceDescriptions();
 		for (IResourceDescription desc : descriptions) {
+			if (monitor.isCanceled())
+				return Collections.emptySet();
 			Manager manager = getResourceDescriptionManager(desc.getURI());
 			if (manager != null) {
 				for (Delta delta : collection) {
