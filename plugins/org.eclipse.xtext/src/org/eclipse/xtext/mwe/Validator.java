@@ -51,7 +51,7 @@ public class Validator {
 		for (Resource resource : resources) {
 			try {
 				resource.load(null);
-				IResourceServiceProvider provider = registry.getResourceServiceProvider(resource.getURI(), null);
+				IResourceServiceProvider provider = registry.getResourceServiceProvider(resource.getURI());
 				if (provider!=null) {
 					List<Issue> result = provider.getResourceValidator().validate(resource, CheckMode.ALL, null);
 					for (Issue issue : result) {

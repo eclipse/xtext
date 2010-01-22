@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcoreFactory;
+import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
 import org.eclipse.xtext.junit.AbstractXtextTests;
@@ -112,6 +113,10 @@ public class NamesAreUniqueValidatorTest extends AbstractXtextTests implements I
 
 	public Map<String, Object> getProtocolToFactoryMap() {
 		return null;
+	}
+
+	public IResourceServiceProvider getResourceServiceProvider(URI uri) {
+		return getResourceServiceProvider(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 	}
 
 }

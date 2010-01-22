@@ -52,7 +52,7 @@ public class ResourceSetBasedResourceDescriptions implements IResourceDescriptio
 		Resource resource = resourceSet.getResource(uri, false);
 		if (resource == null)
 			return null;
-		IResourceServiceProvider resourceServiceProvider = registry.getResourceServiceProvider(uri, null);
+		IResourceServiceProvider resourceServiceProvider = registry.getResourceServiceProvider(uri);
 		if (resourceServiceProvider == null)
 			return null;
 		Manager manager = resourceServiceProvider.getResourceDescriptionManager();

@@ -23,12 +23,12 @@ import com.google.inject.ImplementedBy;
 public interface IResourceServiceProvider {
 
 	/**
-	 *@return the resource description manager for this resource service manager.
+	 * @return the resource description manager for this resource service manager.
 	 */
 	IResourceValidator getResourceValidator();
 
 	/**
-	 *@return the resource description manager for this resource service manager.
+	 * @return the resource description manager for this resource service manager.
 	 */
 	IResourceDescription.Manager getResourceDescriptionManager();
 
@@ -51,6 +51,23 @@ public interface IResourceServiceProvider {
 		 *         isn't one.
 		 */
 		IResourceServiceProvider getResourceServiceProvider(URI uri, String contentType);
+
+		/**
+		 * Returns the resource factory appropriate for the given URI.
+		 * <p>
+		 * An implementation will (typically) use the URI's {@link URI#scheme scheme} to search the
+		 * {@link #getProtocolToFactoryMap protocol} map the URI's {@link URI#fileExtension file extension} to search
+		 * {@link #getExtensionToFactoryMap extension} map, and the URI's
+		 * {@link URIConverter#contentDescription(URI, Map) content type identifier} to search the
+		 * {@link #getContentTypeToFactoryMap() content type} map.
+		 * </p>
+		 * 
+		 * @param uri
+		 *            the URI.
+		 * @return the {@link IResourceServiceProvider} appropriate for the given URI, or <code>null</code> if there
+		 *         isn't one.
+		 */
+		IResourceServiceProvider getResourceServiceProvider(URI uri);
 
 		final static Registry INSTANCE = new ResourceServiceProviderRegistryImpl();
 

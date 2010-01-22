@@ -52,7 +52,7 @@ public class LoadOnDemandResourceDescriptions implements IResourceDescriptions {
 		if (result == null) {
 			Resource resource = EcoreUtil2.getResource(context, uri.toString());
 			if (resource != null) {
-				IResourceServiceProvider serviceProvider = serviceProviderRegistry.getResourceServiceProvider(uri, null);
+				IResourceServiceProvider serviceProvider = serviceProviderRegistry.getResourceServiceProvider(uri);
 				result = serviceProvider.getResourceDescriptionManager().getResourceDescription(resource);
 			}
 		}
