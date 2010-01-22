@@ -11,11 +11,17 @@ import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.RGB;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
 
+import com.google.inject.Inject;
+
 /**
  * @author Jan Köhnlein - Initial contribution and API
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DefaultLexicalHighlightingConfiguration implements ILexicalHighlightingConfiguration {
+public class DefaultHighlightingConfiguration implements IHighlightingConfiguration {
+	
+	@Inject(optional=true)
+	@Deprecated
+	private ISemanticHighlightingConfiguration semanticHighlighter;
 
 	public static final String KEYWORD_ID = "keyword";
 	public static final String PUNCTUATION_ID = "punctuation";
@@ -33,6 +39,8 @@ public class DefaultLexicalHighlightingConfiguration implements ILexicalHighligh
 		acceptor.acceptDefaultHighlighting(NUMBER_ID, "Number", numberTextStyle());
 		acceptor.acceptDefaultHighlighting(DEFAULT_ID, "Default", defaultTextStyle());
 		acceptor.acceptDefaultHighlighting(INVALID_TOKEN_ID, "Invalid Symbol", errorTextStyle());
+		if (semanticHighlighter !=null)
+			semanticHighlighter.configure(acceptor);
 	}
 	
 	public TextStyle defaultTextStyle() {

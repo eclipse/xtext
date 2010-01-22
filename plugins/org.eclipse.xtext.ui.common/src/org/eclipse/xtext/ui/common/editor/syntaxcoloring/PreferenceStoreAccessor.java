@@ -6,9 +6,9 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.common.editor.preferencepage;
+package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
 
-import static org.eclipse.xtext.ui.common.editor.preferencepage.CommonPreferenceConstants.*;
+import static org.eclipse.xtext.ui.common.editor.syntaxcoloring.CommonPreferenceConstants.*;
 
 import java.util.Arrays;
 

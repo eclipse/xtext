@@ -13,8 +13,6 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.List;
 
-import org.eclipse.xtext.ui.common.editor.preferencepage.CommonPreferenceConstants;
-import org.eclipse.xtext.ui.common.editor.preferencepage.PreferenceStoreAccessor;
 import org.eclipse.xtext.ui.core.editor.preferences.AbstractPreferencePage;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
 import org.eclipse.xtext.util.Triple;
@@ -43,11 +41,12 @@ public class SyntaxColoringPreferencePage extends AbstractPreferencePage impleme
 	}
 
 	@Inject
-	public void collectLexicalHighlightings(ILexicalHighlightingConfiguration configuration) {
+	public void collectHighlightings(IHighlightingConfiguration configuration) {
 		configuration.configure(this);
 	}
 	
-	@Inject
+	@Inject(optional=true)
+	@Deprecated
 	public void collectSemanticHighlightings(ISemanticHighlightingConfiguration configuration) {
 		configuration.configure(this);
 	}

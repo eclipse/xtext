@@ -30,7 +30,7 @@ public class DefaultTokenScanner extends AbstractTokenScanner {
 	public IToken nextToken() {
 		if (!tokenReturned) {
 			tokenReturned = true;
-			return new Token(getAttribute(DefaultLexicalHighlightingConfiguration.DEFAULT_ID));
+			return new Token(getAttribute(DefaultHighlightingConfiguration.DEFAULT_ID));
 		}
 		return Token.EOF;
 	}

@@ -15,7 +15,6 @@ import org.eclipse.jface.util.IPropertyChangeListener;
 import org.eclipse.jface.util.PropertyChangeEvent;
 import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
-import org.eclipse.xtext.ui.common.editor.preferencepage.PreferenceStoreAccessor;
 import org.eclipse.xtext.ui.core.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.core.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
@@ -32,14 +31,12 @@ public class TextAttributeProvider implements ITextAttributeProvider, IHighlight
 
 	private final PreferenceStoreAccessor preferencesAccessor;
 	private final HashMap<String, TextAttribute> attributes;
-	private final ILexicalHighlightingConfiguration lexical;
-	private final ISemanticHighlightingConfiguration semantic;
+	private final IHighlightingConfiguration highlightingConfig;
 
 	@Inject
-	public TextAttributeProvider(ILexicalHighlightingConfiguration lexical, ISemanticHighlightingConfiguration semantic,
+	public TextAttributeProvider(IHighlightingConfiguration lexical,
 			IPreferenceStoreAccess preferenceStoreAccess, PreferenceStoreAccessor prefStoreAccessor) {
-		this.lexical = lexical;
-		this.semantic = semantic;
+		this.highlightingConfig = lexical;
 		this.preferencesAccessor = prefStoreAccessor;
 		this.attributes = new HashMap<String, TextAttribute>();
 		preferenceStoreAccess.getPreferenceStore().addPropertyChangeListener(this);
@@ -48,8 +45,7 @@ public class TextAttributeProvider implements ITextAttributeProvider, IHighlight
 
 	private void initialize() {
 		attributes.clear();
-		lexical.configure(this);
-		semantic.configure(this);
+		highlightingConfig.configure(this);
 	}
 	
 	public TextAttribute getAttribute(String id) {
