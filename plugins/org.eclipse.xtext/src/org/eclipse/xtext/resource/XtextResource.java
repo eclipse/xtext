@@ -31,6 +31,7 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeContentAdapter;
 import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
+import org.eclipse.xtext.parsetree.reconstr.SerializerUtil.SerializationOptions;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
@@ -221,9 +222,10 @@ public class XtextResource extends ResourceImpl {
 	public void doSave(OutputStream outputStream, Map<?, ?> options) throws IOException {
 		if (contents.size() != 1)
 			throw new IllegalStateException("The Xtext resource must contain exactly one root element");
-		boolean format = options != null && Boolean.TRUE.equals(options.get(OPTION_FORMAT));
 		CompositeNode node = parseResult != null ? parseResult.getRootNode() : null;
-		serializer.serialize(contents.get(0), outputStream, node, format);
+		SerializerUtil.SerializationOptions serialzeOptions = new SerializationOptions();
+		serialzeOptions.setFormat(options != null && Boolean.TRUE.equals(options.get(OPTION_FORMAT)));
+		serializer.serialize(contents.get(0), outputStream, node, serialzeOptions);
 	}
 
 	/**

@@ -58,7 +58,9 @@ public class ComplexReconstrTest extends AbstractGeneratorTest {
 		EObject result = getModel(model);
 		if (logger.isTraceEnabled())
 			logger.trace(EmfFormatter.objToStr(result));
-		return getSerializer().serialize(result, false);
+		SerializerUtil.SerializationOptions opt = new SerializerUtil.SerializationOptions();
+		opt.setFormat(false);
+		return getSerializer().serialize(result, opt);
 	}
 
 	public void testNormalizableCompositeNodesIncluded() throws Exception {

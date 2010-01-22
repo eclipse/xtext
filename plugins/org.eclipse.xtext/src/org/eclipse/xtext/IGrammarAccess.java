@@ -7,6 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext;
 
+import java.util.List;
+
+import org.eclipse.xtext.util.Pair;
+
 
 /**
  * TODO Javadoc
@@ -27,6 +31,8 @@ public interface IGrammarAccess {
 	public interface IEnumRuleAccess extends IAbstractRuleAccess {
 		public EnumRule getRule();
 	}
+	
+	public List<Pair<Keyword, Keyword>> findKeywordPairs(String leftKw, String rightKw);
 
 	public Grammar getGrammar();
 
