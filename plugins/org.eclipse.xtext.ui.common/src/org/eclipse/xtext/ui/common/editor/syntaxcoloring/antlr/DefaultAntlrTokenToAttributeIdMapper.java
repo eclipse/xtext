@@ -9,7 +9,7 @@ package org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr;
 
 import java.util.regex.Pattern;
 
-import org.eclipse.xtext.ui.common.editor.syntaxcoloring.DefaultLexicalHighlightingConfiguration;
+import org.eclipse.xtext.ui.common.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 
 import com.google.inject.Singleton;
 
@@ -26,21 +26,21 @@ public class DefaultAntlrTokenToAttributeIdMapper extends AbstractAntlrTokenToAt
 	@Override
 	protected String calculateId(String tokenName, int tokenType) {
 		if(PUNCTUATION.matcher(tokenName).matches()) {
-			return DefaultLexicalHighlightingConfiguration.PUNCTUATION_ID;
+			return DefaultHighlightingConfiguration.PUNCTUATION_ID;
 		}
 		if(QUOTED.matcher(tokenName).matches()) {
-			return DefaultLexicalHighlightingConfiguration.KEYWORD_ID;
+			return DefaultHighlightingConfiguration.KEYWORD_ID;
 		}
 		if("RULE_STRING".equals(tokenName)) {
-			return DefaultLexicalHighlightingConfiguration.STRING_ID;
+			return DefaultHighlightingConfiguration.STRING_ID;
 		}
 		if("RULE_INT".equals(tokenName)) {
-			return DefaultLexicalHighlightingConfiguration.NUMBER_ID;
+			return DefaultHighlightingConfiguration.NUMBER_ID;
 		}
 		if("RULE_ML_COMMENT".equals(tokenName) | "RULE_SL_COMMENT".equals(tokenName)) {
-			return DefaultLexicalHighlightingConfiguration.COMMENT_ID;
+			return DefaultHighlightingConfiguration.COMMENT_ID;
 		}
-		return DefaultLexicalHighlightingConfiguration.DEFAULT_ID;
+		return DefaultHighlightingConfiguration.DEFAULT_ID;
 	}
 	
 }
