@@ -43,6 +43,8 @@ public abstract class AbstractBracketMatcher implements IBracketMatcher {
 	}
 	
 	public IRegion computeMatchingRegion(XtextResource state, int offset) {
+		if (state.getContents().isEmpty()) 
+			return null;
 		CompositeNode rootNode = NodeUtil.getRootNode(state.getContents().get(0));
 		AbstractNode node = NodeUtil.findLeafNodeAtOffset(rootNode, offset);
 		AbstractElement element = findElement(node, getPairs());
