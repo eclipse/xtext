@@ -55,7 +55,7 @@ public class ResourceServiceProviderRegistryImpl implements IResourceServiceProv
 	}
 
 	public IResourceServiceProvider getResourceServiceProvider(URI uri) {
-		return data.getServiceProvider(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
+		return getResourceServiceProvider(uri, ContentHandler.UNSPECIFIED_CONTENT_TYPE);
 	}
 	
 	
