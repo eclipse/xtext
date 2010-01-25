@@ -10,10 +10,12 @@ package org.eclipse.xtext.ui.common.service;
 import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.preference.IPreferenceStore;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.core.IImageHelper;
 import org.eclipse.xtext.ui.core.PluginImageHelper;
 import org.eclipse.xtext.ui.core.editor.actions.IActionContributor;
+import org.eclipse.xtext.ui.core.editor.formatting.PreferenceStoreIndentationInformation;
 import org.eclipse.xtext.ui.core.editor.preferences.IPreferenceStoreInitializer;
 
 import com.google.inject.Binder;
@@ -44,6 +46,10 @@ public class UIPluginModule extends AbstractGenericModule {
 
 	public Class<? extends IImageHelper> bindIImageHelper() {
 		return PluginImageHelper.class;
+	}
+	
+	public Class<? extends IIndentationInformation> bindIIndentationInformation() {
+		return PreferenceStoreIndentationInformation.class;
 	}
 	
 	public IPreferenceStore bindIPreferenceStore() {

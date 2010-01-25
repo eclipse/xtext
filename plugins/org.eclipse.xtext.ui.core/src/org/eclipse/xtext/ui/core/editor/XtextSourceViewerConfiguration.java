@@ -10,6 +10,8 @@ package org.eclipse.xtext.ui.core.editor;
 import java.util.LinkedList;
 import java.util.List;
 
+import org.eclipse.jface.text.DefaultIndentLineAutoEditStrategy;
+import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.ITextHover;
@@ -24,6 +26,8 @@ import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
+import org.eclipse.xtext.formatting.IIndentationInformation;
+import org.eclipse.xtext.ui.core.editor.autoedit.DefaultAutoEditStrategy;
 import org.eclipse.xtext.ui.core.editor.contentassist.IContentAssistantFactory;
 import org.eclipse.xtext.ui.core.editor.formatting.IContentFormatterFactory;
 import org.eclipse.xtext.ui.core.editor.hover.ProblemHover;
@@ -61,6 +65,14 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	
 	@Inject
 	private Provider<XtextPresentationReconciler> presentationReconcilerProvider;
+	
+	@Inject
+	private IIndentationInformation indentationInformation;
+	
+	@Override
+	public int getTabWidth(ISourceViewer sourceViewer) {
+		return indentationInformation.getIndentString().length();
+	}
 
 	@Override
 	public IAnnotationHover getAnnotationHover(ISourceViewer sourceViewer) {
@@ -164,5 +176,25 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	public Provider<XtextPresentationReconciler> getPresentationReconcilerProvider() {
 		return presentationReconcilerProvider;
 	}
+	
+	@Inject(optional=true)
+	private IAutoEditStrategy autoEditStrategy ;
+	@Inject
+	private DefaultAutoEditStrategy defaultEditStrategy; 
+	
+	protected IAutoEditStrategy internalGetEditStrategy() {
+		if (autoEditStrategy==null)
+			return defaultEditStrategy;
+		return autoEditStrategy;
+	}
+	
+	@Override
+	public IAutoEditStrategy[] getAutoEditStrategies(ISourceViewer sourceViewer, String contentType) {
+		if (internalGetEditStrategy() instanceof ISourceViewerAware) {
+			((ISourceViewerAware) internalGetEditStrategy()).setSourceViewer(sourceViewer);
+		}
+		return new IAutoEditStrategy[]{new DefaultIndentLineAutoEditStrategy(),internalGetEditStrategy()};
+	}
+
 	
 }
