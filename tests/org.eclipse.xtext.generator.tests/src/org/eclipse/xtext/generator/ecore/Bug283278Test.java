@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.ecore;
 
+import java.net.URL;
+
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
@@ -21,7 +23,9 @@ public class Bug283278Test extends AbstractXtextTests {
 	
 	public void testCheckGeneratedEcoreModel() throws Exception {
 		ResourceSet rs = new ResourceSetImpl();
-		Resource resource = rs.getResource(URI.createURI("./src-gen/org/eclipse/xtext/generator/ecore/SubTestLanguage.ecore"), true);
+		URL url = getClass().getResource("SubTestLanguage.ecore");
+		URI uri = URI.createURI(url.toString());
+		Resource resource = rs.getResource(uri, true);
 		EcoreUtil.resolveAll(resource);
 		assertEquals(2,rs.getResources().size());
 	}
