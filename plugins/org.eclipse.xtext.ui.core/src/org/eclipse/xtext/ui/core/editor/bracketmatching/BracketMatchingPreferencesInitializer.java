@@ -24,7 +24,7 @@ public class BracketMatchingPreferencesInitializer implements IPreferenceStoreIn
 	}
 	
 	public String getDefautColor() {
-		return "grey";
+		return "192,192,192"; // grey
 	}
 
 }

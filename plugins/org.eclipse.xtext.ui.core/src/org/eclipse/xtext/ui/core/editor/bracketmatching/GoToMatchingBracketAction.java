@@ -40,7 +40,8 @@ public class GoToMatchingBracketAction extends Action implements IActionContribu
 			TextSelection textSelection = (TextSelection) selection;
 			if (textSelection.getLength()==0) {
 				IRegion region = BracketMatchingUnitOfWork.match(document, bracketMatcher, textSelection.getOffset());
-				editor.selectAndReveal(region.getOffset()+region.getLength(),0);
+				if (region != null)
+					editor.selectAndReveal(region.getOffset()+region.getLength(),0);
 			}
 		}
 	}
