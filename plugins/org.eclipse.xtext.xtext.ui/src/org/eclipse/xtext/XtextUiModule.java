@@ -3,6 +3,7 @@ Generated with Xtext
 */
 package org.eclipse.xtext;
 
+import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.xtext.ui.common.editor.outline.actions.IActionBarContributor;
 import org.eclipse.xtext.ui.common.editor.outline.actions.IContentOutlineNodeAdapterFactory;
 import org.eclipse.xtext.ui.common.editor.outline.transformer.ISemanticModelTransformer;
@@ -15,6 +16,7 @@ import org.eclipse.xtext.ui.core.wizard.IProjectCreator;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ecoreInference.ProjectAwareXtendXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ui.XtextLocationInFileProvider;
+import org.eclipse.xtext.xtext.ui.editor.autoedit.XtextAutoEditStrategy;
 import org.eclipse.xtext.xtext.ui.editor.bracketmatching.XtextGrammarBracketMatcher;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextActionBarContributor;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextDeclarativeModelTransformer;
@@ -57,6 +59,10 @@ public class XtextUiModule extends AbstractXtextUiModule {
 	
 	public Class<? extends IBracketMatcher> bindIBracketMatcher() {
 		return XtextGrammarBracketMatcher.class;
+	}
+	
+	public Class<? extends IAutoEditStrategy> bindIAutoEditStrategy() {
+		return XtextAutoEditStrategy.class;
 	}
 
 	@Override
