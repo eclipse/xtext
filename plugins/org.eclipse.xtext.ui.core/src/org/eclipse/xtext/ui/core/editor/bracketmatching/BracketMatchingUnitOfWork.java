@@ -15,8 +15,8 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-class BracketMatchingUnitOfWork  implements IUnitOfWork<IRegion, XtextResource> {
-		
+class BracketMatchingUnitOfWork implements IUnitOfWork<IRegion, XtextResource> {
+
 	private IBracketMatcher matcher;
 	private int offset;
 
@@ -28,7 +28,7 @@ class BracketMatchingUnitOfWork  implements IUnitOfWork<IRegion, XtextResource> 
 	public IRegion exec(XtextResource state) throws Exception {
 		return matcher.computeMatchingRegion(state, offset);
 	}
-	
+
 	static IRegion match(IStateAccess<XtextResource> document, IBracketMatcher matcher, int offset) {
 		return document.readOnly(new BracketMatchingUnitOfWork(matcher, offset));
 	}
