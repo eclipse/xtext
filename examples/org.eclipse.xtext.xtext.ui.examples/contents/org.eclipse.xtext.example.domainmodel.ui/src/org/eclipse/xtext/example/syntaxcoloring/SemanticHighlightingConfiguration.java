@@ -10,22 +10,25 @@ package org.eclipse.xtext.example.syntaxcoloring;
 
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.graphics.RGB;
+import org.eclipse.xtext.ui.common.editor.syntaxcoloring.DefaultHighlightingConfiguration;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.IHighlightingConfigurationAcceptor;
-import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingConfiguration;
 import org.eclipse.xtext.ui.core.editor.utils.TextStyle;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-public class SemanticHighlightingConfiguration implements ISemanticHighlightingConfiguration {
+public class SemanticHighlightingConfiguration extends DefaultHighlightingConfiguration {
 	
 	public final static String CROSS_REF = "CrossReference"; 
 
+	@Override
 	public void configure(IHighlightingConfigurationAcceptor acceptor) {
+		super.configure(acceptor);
 		acceptor.acceptDefaultHighlighting(CROSS_REF, "Cross References", crossReferenceTextStyle());
 	}
 
+	@Override
 	public TextStyle defaultTextStyle() {
 		TextStyle textStyle = new TextStyle();
 		textStyle.setBackgroundColor(new RGB(255, 255, 255));

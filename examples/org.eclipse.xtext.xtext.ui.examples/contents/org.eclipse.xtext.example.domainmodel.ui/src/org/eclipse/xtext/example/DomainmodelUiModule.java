@@ -6,8 +6,8 @@ package org.eclipse.xtext.example;
 import org.eclipse.xtext.example.quickfix.DomainmodelQuickfixProvider;
 import org.eclipse.xtext.example.syntaxcoloring.SemanticHighlightingCalculator;
 import org.eclipse.xtext.example.syntaxcoloring.SemanticHighlightingConfiguration;
+import org.eclipse.xtext.ui.common.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingCalculator;
-import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingConfiguration;
 import org.eclipse.xtext.validation.IssueResolutionProvider;
 
 
@@ -20,7 +20,7 @@ public class DomainmodelUiModule extends AbstractDomainmodelUiModule {
 		return SemanticHighlightingCalculator.class;
 	}
 	
-	public Class<? extends ISemanticHighlightingConfiguration> bindISemanticHighlightingConfiguration() {
+	public Class<? extends IHighlightingConfiguration> bindIHighlightingConfiguration() {
 		return SemanticHighlightingConfiguration.class;
 	}
 	
