@@ -7,30 +7,25 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.bracketmatching;
 
-import java.util.List;
-
-import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.services.XtextGrammarAccess;
-import org.eclipse.xtext.ui.core.editor.bracketmatching.AbstractBracketMatcher;
-import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.ui.core.editor.bracketmatching.DefaultBracketMatcher;
 
 import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class XtextGrammarBracketMatcher extends AbstractBracketMatcher {
+public class XtextGrammarBracketMatcher extends DefaultBracketMatcher {
 
 	@Inject
 	private XtextGrammarAccess grammarAccess;
 	
 	@Override
 	public void configure(IBracketPairAcceptor acceptor) {
-		List<Pair<Keyword,Keyword>> pairs2 = grammarAccess.findKeywordPairs("(", ")");
-		for (Pair<Keyword, Keyword> pair : pairs2) {
-			acceptor.accept(pair.getFirst(), pair.getSecond());
-		}
+		super.configure(acceptor);
 		acceptor.accept(grammarAccess.getParserRuleAccess().getColonKeyword_3(), grammarAccess.getParserRuleAccess().getSemicolonKeyword_5());
+		acceptor.accept(grammarAccess.getTerminalRuleAccess().getColonKeyword_3(), grammarAccess.getTerminalRuleAccess().getSemicolonKeyword_5());
+		acceptor.accept(grammarAccess.getEnumRuleAccess().getColonKeyword_3(), grammarAccess.getEnumRuleAccess().getSemicolonKeyword_5());
 	}
 
 }
