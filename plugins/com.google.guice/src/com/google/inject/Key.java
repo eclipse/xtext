@@ -16,12 +16,12 @@
 
 package com.google.inject;
 
-import static com.google.inject.util.Objects.nonNull;
-import com.google.inject.util.StackTraceElements;
-import com.google.inject.util.ToStringBuilder;
-import com.google.inject.util.Annotations;
+import com.google.inject.internal.Annotations;
+import com.google.inject.internal.MoreTypes;
+import static com.google.inject.internal.Preconditions.checkArgument;
+import static com.google.inject.internal.Preconditions.checkNotNull;
+import com.google.inject.internal.ToStringBuilder;
 import java.lang.annotation.Annotation;
-import java.lang.reflect.Member;
 import java.lang.reflect.Type;
 
 /**
@@ -41,14 +41,18 @@ import java.lang.reflect.Type;
  * <p>{@code Key} supports generic types via subclassing just like {@link
  * TypeLiteral}.
  *
+ * <p>Keys do not differentiate between primitive types (int, char, etc.) and
+ * their correpsonding wrapper types (Integer, Character, etc.). Primitive
+ * types will be replaced with their wrapper types when keys are created.
+ *
  * @author crazybob@google.com (Bob Lee)
  */
-public abstract class Key<T> {
+public class Key<T> {
 
-  final AnnotationStrategy annotationStrategy;
+  private final AnnotationStrategy annotationStrategy;
 
-  final TypeLiteral<T> typeLiteral;
-  final int hashCode;
+  private final TypeLiteral<T> typeLiteral;
+  private final int hashCode;
 
   /**
    * Constructs a new key. Derives the type from this class's type parameter.
@@ -65,8 +69,7 @@ public abstract class Key<T> {
   @SuppressWarnings("unchecked")
   protected Key(Class<? extends Annotation> annotationType) {
     this.annotationStrategy = strategyFor(annotationType);
-    this.typeLiteral
-        = (TypeLiteral<T>) TypeLiteral.fromSuperclassTypeParameter(getClass());
+    this.typeLiteral = (TypeLiteral<T>) TypeLiteral.fromSuperclassTypeParameter(getClass());
     this.hashCode = computeHashCode();
   }
 
@@ -86,8 +89,7 @@ public abstract class Key<T> {
   protected Key(Annotation annotation) {
     // no usages, not test-covered
     this.annotationStrategy = strategyFor(annotation);
-    this.typeLiteral
-        = (TypeLiteral<T>) TypeLiteral.fromSuperclassTypeParameter(getClass());
+    this.typeLiteral = (TypeLiteral<T>) TypeLiteral.fromSuperclassTypeParameter(getClass());
     this.hashCode = computeHashCode();
   }
 
@@ -104,9 +106,8 @@ public abstract class Key<T> {
    */
   @SuppressWarnings("unchecked")
   protected Key() {
-    this.annotationStrategy = NULL_STRATEGY;
-    this.typeLiteral
-        = (TypeLiteral<T>) TypeLiteral.fromSuperclassTypeParameter(getClass());
+    this.annotationStrategy = NullAnnotationStrategy.INSTANCE;
+    this.typeLiteral = (TypeLiteral<T>) TypeLiteral.fromSuperclassTypeParameter(getClass());
     this.hashCode = computeHashCode();
   }
 
@@ -116,15 +117,14 @@ public abstract class Key<T> {
   @SuppressWarnings("unchecked")
   private Key(Type type, AnnotationStrategy annotationStrategy) {
     this.annotationStrategy = annotationStrategy;
-    this.typeLiteral = (TypeLiteral<T>) TypeLiteral.get(type);
+    this.typeLiteral = MoreTypes.makeKeySafe((TypeLiteral<T>) TypeLiteral.get(type));
     this.hashCode = computeHashCode();
   }
 
   /** Constructs a key from a manually specified type. */
-  private Key(TypeLiteral<T> typeLiteral,
-      AnnotationStrategy annotationStrategy) {
+  private Key(TypeLiteral<T> typeLiteral, AnnotationStrategy annotationStrategy) {
     this.annotationStrategy = annotationStrategy;
-    this.typeLiteral = typeLiteral;
+    this.typeLiteral = MoreTypes.makeKeySafe(typeLiteral);
     this.hashCode = computeHashCode();
   }
 
@@ -135,21 +135,21 @@ public abstract class Key<T> {
   /**
    * Gets the key type.
    */
-  public TypeLiteral<T> getTypeLiteral() {
+  public final TypeLiteral<T> getTypeLiteral() {
     return typeLiteral;
   }
 
   /**
    * Gets the annotation type.
    */
-  public Class<? extends Annotation> getAnnotationType() {
+  public final Class<? extends Annotation> getAnnotationType() {
     return annotationStrategy.getAnnotationType();
   }
 
   /**
    * Gets the annotation.
    */
-  public Annotation getAnnotation() {
+  public final Annotation getAnnotation() {
     return annotationStrategy.getAnnotation();
   }
 
@@ -167,15 +167,18 @@ public abstract class Key<T> {
     return annotationStrategy.getAnnotationType().toString();
   }
 
-  public int hashCode() {
-    return this.hashCode;
-  }
-
   Class<? super T> getRawType() {
     return typeLiteral.getRawType();
   }
 
-  public boolean equals(Object o) {
+  /**
+   * Gets the key of this key's provider.
+   */
+  Key<Provider<T>> providerKey() {
+    return ofType(typeLiteral.providerType());
+  }
+
+  @Override public final boolean equals(Object o) {
     if (o == this) {
       return true;
     }
@@ -187,7 +190,11 @@ public abstract class Key<T> {
         && typeLiteral.equals(other.typeLiteral);
   }
 
-  public String toString() {
+  @Override public final int hashCode() {
+    return this.hashCode;
+  }
+
+  @Override public final String toString() {
     return new ToStringBuilder(Key.class)
         .add("type", typeLiteral)
         .add("annotation", annotationStrategy)
@@ -199,14 +206,14 @@ public abstract class Key<T> {
    */
   static <T> Key<T> get(Class<T> type,
       AnnotationStrategy annotationStrategy) {
-    return new SimpleKey<T>(type, annotationStrategy);
+    return new Key<T>(type, annotationStrategy);
   }
 
   /**
    * Gets a key for an injection type.
    */
   public static <T> Key<T> get(Class<T> type) {
-    return new SimpleKey<T>(type, NULL_STRATEGY);
+    return new Key<T>(type, NullAnnotationStrategy.INSTANCE);
   }
 
   /**
@@ -214,21 +221,21 @@ public abstract class Key<T> {
    */
   public static <T> Key<T> get(Class<T> type,
       Class<? extends Annotation> annotationType) {
-    return new SimpleKey<T>(type, strategyFor(annotationType));
+    return new Key<T>(type, strategyFor(annotationType));
   }
 
   /**
    * Gets a key for an injection type and an annotation.
    */
   public static <T> Key<T> get(Class<T> type, Annotation annotation) {
-    return new SimpleKey<T>(type, strategyFor(annotation));
+    return new Key<T>(type, strategyFor(annotation));
   }
 
   /**
    * Gets a key for an injection type.
    */
   public static Key<?> get(Type type) {
-    return new SimpleKey<Object>(type, NULL_STRATEGY);
+    return new Key<Object>(type, NullAnnotationStrategy.INSTANCE);
   }
 
   /**
@@ -236,21 +243,21 @@ public abstract class Key<T> {
    */
   public static Key<?> get(Type type,
       Class<? extends Annotation> annotationType) {
-    return new SimpleKey<Object>(type, strategyFor(annotationType));
+    return new Key<Object>(type, strategyFor(annotationType));
   }
 
   /**
    * Gets a key for an injection type and an annotation.
    */
   public static Key<?> get(Type type, Annotation annotation) {
-    return new SimpleKey<Object>(type, strategyFor(annotation));
+    return new Key<Object>(type, strategyFor(annotation));
   }
 
   /**
    * Gets a key for an injection type.
    */
   public static <T> Key<T> get(TypeLiteral<T> typeLiteral) {
-    return new SimpleKey<T>(typeLiteral, NULL_STRATEGY);
+    return new Key<T>(typeLiteral, NullAnnotationStrategy.INSTANCE);
   }
 
   /**
@@ -258,7 +265,7 @@ public abstract class Key<T> {
    */
   public static <T> Key<T> get(TypeLiteral<T> typeLiteral,
       Class<? extends Annotation> annotationType) {
-    return new SimpleKey<T>(typeLiteral, strategyFor(annotationType));
+    return new Key<T>(typeLiteral, strategyFor(annotationType));
   }
 
   /**
@@ -266,27 +273,7 @@ public abstract class Key<T> {
    */
   public static <T> Key<T> get(TypeLiteral<T> typeLiteral,
       Annotation annotation) {
-    return new SimpleKey<T>(typeLiteral, strategyFor(annotation));
-  }
-
-  /**
-   * Gets a key for the given type, member and annotations.
-   */
-  static Key<?> get(Type type, Member member, Annotation[] annotations,
-      ErrorHandler errorHandler) {
-    Annotation found = null;
-    for (Annotation annotation : annotations) {
-      if (annotation.annotationType().getAnnotation(BindingAnnotation.class) != null) {
-        if (found == null) {
-          found = annotation;
-        } else {
-          errorHandler.handle(StackTraceElements.forMember(member),
-              ErrorMessages.DUPLICATE_ANNOTATIONS, found, annotation);
-        }
-      }
-    }
-    Key<?> key = found == null ? Key.get(type) : Key.get(type, found);
-    return key;
+    return new Key<T>(typeLiteral, strategyFor(annotation));
   }
 
   /**
@@ -294,7 +281,7 @@ public abstract class Key<T> {
    * key.
    */
   <T> Key<T> ofType(Class<T> type) {
-    return new SimpleKey<T>(type, annotationStrategy);
+    return new Key<T>(type, annotationStrategy);
   }
 
   /**
@@ -302,12 +289,19 @@ public abstract class Key<T> {
    * key.
    */
   Key<?> ofType(Type type) {
-    return new SimpleKey<Object>(type, annotationStrategy);
+    return new Key<Object>(type, annotationStrategy);
+  }
+
+  /**
+   * Returns a new key of the specified type with the same annotation as this
+   * key.
+   */
+  <T> Key<T> ofType(TypeLiteral<T> type) {
+    return new Key<T>(type, annotationStrategy);
   }
 
   /**
    * Returns true if this key has annotation attributes.
-   * @return
    */
   boolean hasAttributes() {
     return annotationStrategy.hasAttributes();
@@ -318,30 +312,65 @@ public abstract class Key<T> {
    * annotation type.
    */
   Key<T> withoutAttributes() {
-    return new SimpleKey<T>(typeLiteral, annotationStrategy.withoutAttributes());
-  }
-
-  private static class SimpleKey<T> extends Key<T> {
-
-    private SimpleKey(Type type, AnnotationStrategy annotationStrategy) {
-      super(type, annotationStrategy);
-    }
-
-    private SimpleKey(TypeLiteral<T> typeLiteral,
-        AnnotationStrategy annotationStrategy) {
-      super(typeLiteral, annotationStrategy);
-    }
+    return new Key<T>(typeLiteral, annotationStrategy.withoutAttributes());
   }
 
   interface AnnotationStrategy {
-
     Annotation getAnnotation();
     Class<? extends Annotation> getAnnotationType();
     boolean hasAttributes();
     AnnotationStrategy withoutAttributes();
   }
 
-  static final AnnotationStrategy NULL_STRATEGY = new AnnotationStrategy() {
+  /**
+   * Returns {@code true} if the given annotation type has no attributes.
+   */
+  static boolean isMarker(Class<? extends Annotation> annotationType) {
+    return annotationType.getDeclaredMethods().length == 0;
+  }
+
+  /**
+   * Gets the strategy for an annotation.
+   */
+  static AnnotationStrategy strategyFor(Annotation annotation) {
+    checkNotNull(annotation, "annotation");
+    Class<? extends Annotation> annotationType = annotation.annotationType();
+    ensureRetainedAtRuntime(annotationType);
+    ensureIsBindingAnnotation(annotationType);
+
+    if (annotationType.getDeclaredMethods().length == 0) {
+      return new AnnotationTypeStrategy(annotationType, annotation);
+    }
+
+    return new AnnotationInstanceStrategy(annotation);
+  }
+
+  /**
+   * Gets the strategy for an annotation type.
+   */
+  static AnnotationStrategy strategyFor(Class<? extends Annotation> annotationType) {
+    checkNotNull(annotationType, "annotation type");
+    ensureRetainedAtRuntime(annotationType);
+    ensureIsBindingAnnotation(annotationType);
+    return new AnnotationTypeStrategy(annotationType, null);
+  }
+
+  private static void ensureRetainedAtRuntime(
+      Class<? extends Annotation> annotationType) {
+    checkArgument(Annotations.isRetainedAtRuntime(annotationType),
+        "%s is not retained at runtime. Please annotate it with @Retention(RUNTIME).",
+        annotationType.getName());
+  }
+
+  private static void ensureIsBindingAnnotation(
+      Class<? extends Annotation> annotationType) {
+    checkArgument(isBindingAnnotation(annotationType),
+        "%s is not a binding annotation. Please annotate it with @BindingAnnotation.",
+        annotationType.getName());
+  }
+
+  static enum NullAnnotationStrategy implements AnnotationStrategy {
+    INSTANCE;
 
     public boolean hasAttributes() {
       return false;
@@ -359,63 +388,8 @@ public abstract class Key<T> {
       return null;
     }
 
-    public boolean equals(Object o) {
-      return o == NULL_STRATEGY;
-    }
-
-    public int hashCode() {
-      return 0;
-    }
-
-    public String toString() {
+    @Override public String toString() {
       return "[none]";
-    }
-  };
-
-  /**
-   * Returns {@code true} if the given annotation type has no attributes.
-   */
-  static boolean isMarker(Class<? extends Annotation> annotationType) {
-    return annotationType.getDeclaredMethods().length == 0;
-  }
-
-  /**
-   * Gets the strategy for an annotation.
-   */
-  static AnnotationStrategy strategyFor(Annotation annotation) {
-    nonNull(annotation, "annotation");
-    Class<? extends Annotation> annotationType = annotation.annotationType();
-    ensureRetainedAtRuntime(annotationType);
-    ensureIsBindingAnnotation(annotationType);
-    return new AnnotationInstanceStrategy(annotation);
-  }
-
-  /**
-   * Gets the strategy for an annotation type.
-   */
-  static AnnotationStrategy strategyFor(
-      Class<? extends Annotation> annotationType) {
-    nonNull(annotationType, "annotation type");
-    ensureRetainedAtRuntime(annotationType);
-    ensureIsBindingAnnotation(annotationType);
-    return new AnnotationTypeStrategy(annotationType, null);
-  }
-
-  private static void ensureRetainedAtRuntime(
-      Class<? extends Annotation> annotationType) {
-    if (!Annotations.isRetainedAtRuntime(annotationType)) {
-      throw new IllegalArgumentException(annotationType.getName()
-          + " is not retained at runtime."
-          + " Please annotate it with @Retention(RUNTIME).");
-    }
-  }
-
-  private static void ensureIsBindingAnnotation(
-      Class<? extends Annotation> annotationType) {
-    if (!isBindingAnnotation(annotationType)) {
-      throw new IllegalArgumentException(annotationType.getName()
-          + " is not a binding annotation."
-          + " Please annotate it with @BindingAnnotation.");
     }
   }
 
@@ -425,7 +399,7 @@ public abstract class Key<T> {
     final Annotation annotation;
 
     AnnotationInstanceStrategy(Annotation annotation) {
-      this.annotation = nonNull(annotation, "annotation");
+      this.annotation = checkNotNull(annotation, "annotation");
     }
 
     public boolean hasAttributes() {
@@ -444,7 +418,7 @@ public abstract class Key<T> {
       return annotation.annotationType();
     }
 
-    public boolean equals(Object o) {
+    @Override public boolean equals(Object o) {
       if (!(o instanceof AnnotationInstanceStrategy)) {
         return false;
       }
@@ -453,11 +427,11 @@ public abstract class Key<T> {
       return annotation.equals(other.annotation);
     }
 
-    public int hashCode() {
+    @Override public int hashCode() {
       return annotation.hashCode();
     }
 
-    public String toString() {
+    @Override public String toString() {
       return annotation.toString();
     }
   }
@@ -471,7 +445,7 @@ public abstract class Key<T> {
 
     AnnotationTypeStrategy(Class<? extends Annotation> annotationType,
         Annotation annotation) {
-      this.annotationType = nonNull(annotationType, "annotation type");
+      this.annotationType = checkNotNull(annotationType, "annotation type");
       this.annotation = annotation;
     }
 
@@ -491,7 +465,7 @@ public abstract class Key<T> {
       return annotationType;
     }
 
-    public boolean equals(Object o) {
+    @Override public boolean equals(Object o) {
       if (!(o instanceof AnnotationTypeStrategy)) {
         return false;
       }
@@ -500,11 +474,11 @@ public abstract class Key<T> {
       return annotationType.equals(other.annotationType);
     }
 
-    public int hashCode() {
+    @Override public int hashCode() {
       return annotationType.hashCode();
     }
 
-    public String toString() {
+    @Override public String toString() {
       return "@" + annotationType.getName();
     }
   }

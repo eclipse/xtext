@@ -16,12 +16,13 @@
 
 package com.google.inject;
 
-import com.google.inject.util.StackTraceElements;
+import com.google.inject.internal.Errors;
+import com.google.inject.internal.InternalFactory;
+import com.google.inject.internal.Scoping;
 import java.lang.annotation.Annotation;
-import java.util.Map;
 
 /**
- * Built in scope implementations.
+ * Built-in scope implementations.
  *
  * @author crazybob@google.com (Bob Lee)
  */
@@ -48,7 +49,7 @@ public class Scopes {
              * Maybe one of these days we will identify independent graphs of
              * objects and offer to load them in parallel.
              */
-            synchronized (Injector.class) {
+            synchronized (InjectorImpl.class) {
               if (instance == null) {
                 instance = creator.get();
               }
@@ -58,66 +59,70 @@ public class Scopes {
         }
 
         public String toString() {
-          return creator.toString();
+          return String.format("%s[%s]", creator, SINGLETON);
         }
       };
     }
 
-    public String toString() {
+    @Override public String toString() {
       return "Scopes.SINGLETON";
     }
   };
 
   /**
-   * Gets the scope for a type based on its annotations. Returns {@code null}
-   * if none specified.
+   * No scope; the same as not applying any scope at all.  Each time the
+   * Injector obtains an instance of an object with "no scope", it injects this
+   * instance then immediately forgets it.  When the next request for the same
+   * binding arrives it will need to obtain the instance over again.
    *
-   * @param implementation type
-   * @param scopes map of scope names to scopes
-   * @param errorHandler handles errors
+   * <p>This exists only in case a class has been annotated with a scope
+   * annotation such as {@link Singleton @Singleton}, and you need to override
+   * this to "no scope" in your binding.
+   *
+   * @since 2.0
    */
-  static Scope getScopeForType(Class<?> implementation,
-      Map<Class<? extends Annotation>, Scope> scopes,
-      ErrorHandler errorHandler) {
-    Class<? extends Annotation> found = null;
-    for (Annotation annotation : implementation.getAnnotations()) {
-      if (isScopeAnnotation(annotation)) {
-        if (found != null) {
-          errorHandler.handle(
-              StackTraceElements.forType(implementation),
-              ErrorMessages.DUPLICATE_SCOPE_ANNOTATIONS,
-              "@" + found.getSimpleName(),
-              "@" + annotation.annotationType().getSimpleName()
-          );
-        } else {
-          found = annotation.annotationType();
-        }
-      }
+  public static final Scope NO_SCOPE = new Scope() {
+    public <T> Provider<T> scope(Key<T> key, Provider<T> unscoped) {
+      return unscoped;
+    }
+    @Override public String toString() {
+      return "Scopes.NO_SCOPE";
+    }
+  };
+
+  /** Scopes an internal factory. */
+  static <T> InternalFactory<? extends T> scope(Key<T> key, InjectorImpl injector,
+      InternalFactory<? extends T> creator, Scoping scoping) {
+
+    if (scoping.isNoScope()) {
+      return creator;
     }
 
-    return scopes.get(found);
-  }
+    Scope scope = scoping.getScopeInstance();
 
-  static boolean isScopeAnnotation(Annotation annotation) {
-    return isScopeAnnotation(annotation.annotationType());
-  }
-
-  static boolean isScopeAnnotation(Class<? extends Annotation> annotationType) {
-    return annotationType.isAnnotationPresent(ScopeAnnotation.class);
+    Provider<T> scoped
+        = scope.scope(key, new ProviderToInternalFactoryAdapter<T>(injector, creator));
+    return new InternalFactoryToProviderAdapter<T>(
+        Initializables.<Provider<? extends T>>of(scoped));
   }
 
   /**
-   * Scopes an internal factory.
+   * Replaces annotation scopes with instance scopes using the Injector's annotation-to-instance
+   * map. If the scope annotation has no corresponding instance, an error will be added and unscoped
+   * will be retuned.
    */
-  static <T> InternalFactory<? extends T> scope(Key<T> key,
-      InjectorImpl injector, InternalFactory<? extends T> creator,
-      Scope scope) {
-    // No scope does nothing.
-    if (scope == null) {
-      return creator;
+  static Scoping makeInjectable(Scoping scoping, InjectorImpl injector, Errors errors) {
+    Class<? extends Annotation> scopeAnnotation = scoping.getScopeAnnotation();
+    if (scopeAnnotation == null) {
+      return scoping;
     }
-    Provider<T> scoped = scope.scope(key,
-        new ProviderToInternalFactoryAdapter<T>(injector, creator));
-    return new InternalFactoryToProviderAdapter<T>(scoped);
+
+    Scope scope = injector.state.getScope(scopeAnnotation);
+    if (scope != null) {
+      return Scoping.forInstance(scope);
+    }
+
+    errors.scopeNotFound(scopeAnnotation);
+    return Scoping.UNSCOPED;
   }
 }

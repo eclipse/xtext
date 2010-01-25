@@ -16,9 +16,12 @@
 
 package com.google.inject;
 
+import com.google.inject.internal.ErrorsException;
+import com.google.inject.internal.InternalContext;
+
 /**
  * @author crazybob@google.com (Bob Lee)
 */
 interface ContextualCallable<T> {
-  T call(InternalContext context);
+  T call(InternalContext context) throws ErrorsException;
 }

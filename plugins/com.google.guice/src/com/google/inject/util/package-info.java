@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2006 Google Inc.
+ * Copyright (C) 2009 Google Inc.
  *
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
@@ -15,7 +15,6 @@
  */
 
 /**
- * <i>Guice</i> (sounds like like "juice")
+ * Helper methods for working with Guice.
  */
-
 package com.google.inject.util;

@@ -16,16 +16,17 @@
 
 package com.google.inject;
 
-import com.google.inject.binder.ConstantBindingBuilder;
 import com.google.inject.binder.AnnotatedBindingBuilder;
-import com.google.inject.binder.LinkedBindingBuilder;
 import com.google.inject.binder.AnnotatedConstantBindingBuilder;
+import com.google.inject.binder.LinkedBindingBuilder;
+import static com.google.inject.internal.Preconditions.checkNotNull;
+import static com.google.inject.internal.Preconditions.checkState;
 import com.google.inject.matcher.Matcher;
-import com.google.inject.spi.SourceProviders;
-import com.google.inject.util.Objects;
+import com.google.inject.spi.Message;
+import com.google.inject.spi.TypeConverter;
+import com.google.inject.spi.TypeListener;
 import java.lang.annotation.Annotation;
 import java.lang.reflect.Method;
-import org.aopalliance.intercept.MethodInterceptor;
 
 /**
  * A support class for {@link Module}s which reduces repetition and results in
@@ -34,14 +35,12 @@ import org.aopalliance.intercept.MethodInterceptor;
  * {@link Binder}. For example:
  *
  * <pre>
- * import static com.google.inject.Names.named;
- *
  * public class MyModule extends AbstractModule {
  *   protected void configure() {
- *     bind(Foo.class).to(FooImpl.class).in(Scopes.SINGLETON);
- *     bind(BarImpl.class);
- *     link(Bar.class).to(BarImpl.class);
- *     bindConstant(named("port")).to(8080);
+ *     bind(Service.class).to(ServiceImpl.class).in(Singleton.class);
+ *     bind(CreditCardPaymentService.class);
+ *     bind(PaymentService.class).to(CreditCardPaymentService.class);
+ *     bindConstant().annotatedWith(Names.named("port")).to(8080);
  *   }
  * }
  * </pre>
@@ -50,24 +49,17 @@ import org.aopalliance.intercept.MethodInterceptor;
  */
 public abstract class AbstractModule implements Module {
 
-  static {
-    SourceProviders.skip(AbstractModule.class);
-  }
-
-  Binder builder;
+  Binder binder;
 
   public final synchronized void configure(Binder builder) {
+    checkState(this.binder == null, "Re-entry is not allowed.");
+
+    this.binder = checkNotNull(builder, "builder");
     try {
-      if (this.builder != null) {
-        throw new IllegalStateException("Re-entry is not allowed.");
-      }
-      this.builder = Objects.nonNull(builder, "builder");
-
       configure();
-
     }
     finally {
-      this.builder = null;
+      this.binder = null;
     }
   }
 
@@ -80,7 +72,7 @@ public abstract class AbstractModule implements Module {
    * Gets direct access to the underlying {@code Binder}.
    */
   protected Binder binder() {
-    return builder;
+    return binder;
   }
 
   /**
@@ -88,65 +80,82 @@ public abstract class AbstractModule implements Module {
    */
   protected void bindScope(Class<? extends Annotation> scopeAnnotation,
       Scope scope) {
-    builder.bindScope(scopeAnnotation, scope);
+    binder.bindScope(scopeAnnotation, scope);
   }
 
   /**
    * @see Binder#bind(Key)
    */
   protected <T> LinkedBindingBuilder<T> bind(Key<T> key) {
-    return builder.bind(key);
+    return binder.bind(key);
   }
 
   /**
    * @see Binder#bind(TypeLiteral)
    */
   protected <T> AnnotatedBindingBuilder<T> bind(TypeLiteral<T> typeLiteral) {
-    return builder.bind(typeLiteral);
+    return binder.bind(typeLiteral);
   }
 
   /**
    * @see Binder#bind(Class)
    */
   protected <T> AnnotatedBindingBuilder<T> bind(Class<T> clazz) {
-    return builder.bind(clazz);
+    return binder.bind(clazz);
   }
 
   /**
    * @see Binder#bindConstant()
    */
   protected AnnotatedConstantBindingBuilder bindConstant() {
-    return builder.bindConstant();
+    return binder.bindConstant();
   }
 
   /**
    * @see Binder#install(Module)
    */
   protected void install(Module module) {
-    builder.install(module);
+    binder.install(module);
   }
 
   /**
    * @see Binder#addError(String, Object[])
    */
   protected void addError(String message, Object... arguments) {
-    builder.addError(message, arguments);
+    binder.addError(message, arguments);
   }
 
   /**
    * @see Binder#addError(Throwable) 
    */
   protected void addError(Throwable t) {
-    builder.addError(t);
+    binder.addError(t);
+  }
+
+  /**
+   * @see Binder#addError(Message)
+   * @since 2.0
+   */
+  protected void addError(Message message) {
+    binder.addError(message);
+  }
+
+  /**
+   * @see Binder#requestInjection(Object)
+   * @since 2.0
+   */
+  protected void requestInjection(Object instance) {
+    binder.requestInjection(instance);
   }
 
   /**
    * @see Binder#requestStaticInjection(Class[])
    */
   protected void requestStaticInjection(Class<?>... types) {
-    builder.requestStaticInjection(types);
+    binder.requestStaticInjection(types);
   }
 
+  /*if[AOP]*/
   /**
    * @see Binder#bindInterceptor(com.google.inject.matcher.Matcher,
    *  com.google.inject.matcher.Matcher,
@@ -154,7 +163,91 @@ public abstract class AbstractModule implements Module {
    */
   protected void bindInterceptor(Matcher<? super Class<?>> classMatcher,
       Matcher<? super Method> methodMatcher,
-      MethodInterceptor... interceptors) {
-    builder.bindInterceptor(classMatcher, methodMatcher, interceptors);
+      org.aopalliance.intercept.MethodInterceptor... interceptors) {
+    binder.bindInterceptor(classMatcher, methodMatcher, interceptors);
+  }
+  /*end[AOP]*/
+
+  /**
+   * Adds a dependency from this module to {@code key}. When the injector is
+   * created, Guice will report an error if {@code key} cannot be injected.
+   * Note that this requirement may be satisfied by implicit binding, such as
+   * a public no-arguments constructor.
+   *
+   * @since 2.0
+   */
+  protected void requireBinding(Key<?> key) {
+    binder.getProvider(key);
+  }
+
+  /**
+   * Adds a dependency from this module to {@code type}. When the injector is
+   * created, Guice will report an error if {@code type} cannot be injected.
+   * Note that this requirement may be satisfied by implicit binding, such as
+   * a public no-arguments constructor.
+   *
+   * @since 2.0
+   */
+  protected void requireBinding(Class<?> type) {
+    binder.getProvider(type);
+  }
+
+  /**
+   * @see Binder#getProvider(Key)
+   * @since 2.0
+   */
+  protected <T> Provider<T> getProvider(Key<T> key) {
+    return binder.getProvider(key);
+  }
+
+  /**
+   * @see Binder#getProvider(Class)
+   * @since 2.0
+   */
+  protected <T> Provider<T> getProvider(Class<T> type) {
+    return binder.getProvider(type);
+  }
+
+  /**
+   * @see Binder#convertToTypes
+   * @since 2.0
+   */
+  protected void convertToTypes(Matcher<? super TypeLiteral<?>> typeMatcher,
+      TypeConverter converter) {
+    binder.convertToTypes(typeMatcher, converter);
+  }
+
+  /**
+   * @see Binder#currentStage() 
+   * @since 2.0
+   */
+  protected Stage currentStage() {
+    return binder.currentStage();
+  }
+
+  /**
+   * @see Binder#getMembersInjector(Class)
+   * @since 2.0
+   */
+  protected <T> MembersInjector<T> getMembersInjector(Class<T> type) {
+    return binder.getMembersInjector(type);
+  }
+
+  /**
+   * @see Binder#getMembersInjector(TypeLiteral)
+   * @since 2.0
+   */
+  protected <T> MembersInjector<T> getMembersInjector(TypeLiteral<T> type) {
+    return binder.getMembersInjector(type);
+  }
+
+  /**
+   * @see Binder#bindListener(com.google.inject.matcher.Matcher,
+   *  com.google.inject.spi.TypeListener)
+   * @since 2.0
+   */
+  protected void bindListener(Matcher<? super TypeLiteral<?>> typeMatcher,
+      TypeListener listener) {
+    binder.bindListener(typeMatcher, listener);
   }
 }

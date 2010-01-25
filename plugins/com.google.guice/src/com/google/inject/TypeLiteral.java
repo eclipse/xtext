@@ -16,12 +16,22 @@
 
 package com.google.inject;
 
-import static com.google.inject.util.Objects.nonNull;
+import com.google.inject.internal.ImmutableList;
+import com.google.inject.internal.MoreTypes;
+import static com.google.inject.internal.MoreTypes.canonicalize;
+import static com.google.inject.internal.Preconditions.checkArgument;
+import static com.google.inject.internal.Preconditions.checkNotNull;
+import com.google.inject.util.Types;
+import java.lang.reflect.Constructor;
+import java.lang.reflect.Field;
+import java.lang.reflect.GenericArrayType;
+import java.lang.reflect.Member;
+import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
-import java.lang.reflect.GenericArrayType;
-import java.lang.reflect.Array;
-import java.util.Arrays;
+import java.lang.reflect.TypeVariable;
+import java.lang.reflect.WildcardType;
+import java.util.List;
 
 /**
  * Represents a generic type {@code T}. Java doesn't yet provide a way to
@@ -35,12 +45,26 @@ import java.util.Arrays;
  * <p>
  * {@code TypeLiteral<List<String>> list = new TypeLiteral<List<String>>() {};}
  *
- * <p>Assumes that type {@code T} implements {@link Object#equals} and
- * {@link Object#hashCode()} as value (as opposed to identity) comparison.
+ * <p>This syntax cannot be used to create type literals that have wildcard
+ * parameters, such as {@code Class<?>} or {@code List<? extends CharSequence>}.
+ * Such type literals must be constructed programatically, either by {@link
+ * Method#getGenericReturnType extracting types from members} or by using the
+ * {@link Types} factory class.
+ *
+ * <p>Along with modeling generic types, this class can resolve type parameters.
+ * For example, to figure out what type {@code keySet()} returns on a {@code
+ * Map<Integer, String>}, use this code:<pre>   {@code
+ *
+ *   TypeLiteral<Map<Integer, String>> mapType
+ *       = new TypeLiteral<Map<Integer, String>>() {};
+ *   TypeLiteral<?> keySetType
+ *       = mapType.getReturnType(Map.class.getMethod("keySet"));
+ *   System.out.println(keySetType); // prints "Set<Integer>"}</pre>
  *
  * @author crazybob@google.com (Bob Lee)
+ * @author jessewilson@google.com (Jesse Wilson)
  */
-public abstract class TypeLiteral<T> {
+public class TypeLiteral<T> {
 
   final Class<? super T> rawType;
   final Type type;
@@ -57,8 +81,8 @@ public abstract class TypeLiteral<T> {
   @SuppressWarnings("unchecked")
   protected TypeLiteral() {
     this.type = getSuperclassTypeParameter(getClass());
-    this.rawType = (Class<? super T>) getRawType(type);
-    this.hashCode = hashCode(type);
+    this.rawType = (Class<? super T>) MoreTypes.getRawType(type);
+    this.hashCode = MoreTypes.hashCode(type);
   }
 
   /**
@@ -66,192 +90,256 @@ public abstract class TypeLiteral<T> {
    */
   @SuppressWarnings("unchecked")
   TypeLiteral(Type type) {
-    this.rawType = (Class<? super T>) getRawType(nonNull(type, "type"));
-    this.type = type;
-    this.hashCode = hashCode(type);
+    this.type = canonicalize(checkNotNull(type, "type"));
+    this.rawType = (Class<? super T>) MoreTypes.getRawType(this.type);
+    this.hashCode = MoreTypes.hashCode(this.type);
   }
 
   /**
-   * Gets type from super class's type parameter.
+   * Returns the type from super class's type parameter in {@link MoreTypes#canonicalize(Type)
+   * canonical form}.
    */
   static Type getSuperclassTypeParameter(Class<?> subclass) {
     Type superclass = subclass.getGenericSuperclass();
     if (superclass instanceof Class) {
       throw new RuntimeException("Missing type parameter.");
     }
-    return ((ParameterizedType) superclass).getActualTypeArguments()[0];
+    ParameterizedType parameterized = (ParameterizedType) superclass;
+    return canonicalize(parameterized.getActualTypeArguments()[0]);
   }
 
   /**
    * Gets type literal from super class's type parameter.
    */
   static TypeLiteral<?> fromSuperclassTypeParameter(Class<?> subclass) {
-    return new SimpleTypeLiteral<Object>(getSuperclassTypeParameter(subclass));
-  }
-
-  @SuppressWarnings({ "unchecked" })
-  private static Class<?> getRawType(Type type) {
-    if (type instanceof Class<?>) {
-      // type is a normal class.
-      return (Class<?>) type;
-    }
-    else {
-      if (type instanceof ParameterizedType) {
-        ParameterizedType parameterizedType = (ParameterizedType) type;
-
-        // I'm not exactly sure why getRawType() returns Type instead of Class.
-        // Neal isn't either but suspects some pathological case related
-        // to nested classes exists.
-        Type rawType = parameterizedType.getRawType();
-        if (!(rawType instanceof Class<?>)) {
-          throw unexpectedType(rawType, Class.class);
-        }
-        return (Class<?>) rawType;
-      }
-
-      if (type instanceof GenericArrayType) {
-        // TODO: Is this sufficient?
-        return Object[].class;
-      }
-
-      // type is a parameterized type.
-      throw unexpectedType(type, ParameterizedType.class);
-    }
+    return new TypeLiteral<Object>(getSuperclassTypeParameter(subclass));
   }
 
   /**
-   * Gets the raw type.
+   * Returns the raw (non-generic) type for this type.
+   * 
+   * @since 2.0
    */
-  Class<? super T> getRawType() {
+  public final Class<? super T> getRawType() {
     return rawType;
   }
 
   /**
    * Gets underlying {@code Type} instance.
    */
-  public Type getType() {
+  public final Type getType() {
     return type;
   }
 
-  public int hashCode() {
+  /**
+   * Gets the type of this type's provider.
+   */
+  @SuppressWarnings("unchecked")
+  final TypeLiteral<Provider<T>> providerType() {
+    // This cast is safe and wouldn't generate a warning if Type had a type
+    // parameter.
+    return (TypeLiteral<Provider<T>>) get(Types.providerOf(getType()));
+  }
+
+  @Override public final int hashCode() {
     return this.hashCode;
   }
 
-  public boolean equals(Object o) {
-    if (o == this) {
-      return true;
-    }
-    if (!(o instanceof TypeLiteral<?>)) {
-      return false;
-    }
-    TypeLiteral<?> other = (TypeLiteral<?>) o;
-
-    return equals(type, other.type);
+  @Override public final boolean equals(Object o) {
+    return o instanceof TypeLiteral<?>
+        && MoreTypes.equals(type, ((TypeLiteral) o).type);
   }
 
-  public String toString() {
-    return type instanceof Class<?>
-        ? ((Class<?>) type).getName()
-        : type.toString();
-  }
-
-  static AssertionError unexpectedType(Type type, Class<?> expected) {
-    return new AssertionError(
-        "Unexpected type. Expected: " + expected.getName()
-        + ", got: " + type.getClass().getName()
-        + ", for type literal: " + type.toString() + ".");
+  @Override public final String toString() {
+    return MoreTypes.toString(type);
   }
 
   /**
    * Gets type literal for the given {@code Type} instance.
    */
   public static TypeLiteral<?> get(Type type) {
-    return new SimpleTypeLiteral<Object>(type);
+    return new TypeLiteral<Object>(type);
   }
 
   /**
    * Gets type literal for the given {@code Class} instance.
    */
   public static <T> TypeLiteral<T> get(Class<T> type) {
-    return new SimpleTypeLiteral<T>(type);
+    return new TypeLiteral<T>(type);
   }
 
-  private static class SimpleTypeLiteral<T> extends TypeLiteral<T> {
-    public SimpleTypeLiteral(Type type) {
-      super(type);
+
+  /** Returns an immutable list of the resolved types. */
+  private List<TypeLiteral<?>> resolveAll(Type[] types) {
+    TypeLiteral<?>[] result = new TypeLiteral<?>[types.length];
+    for (int t = 0; t < types.length; t++) {
+      result[t] = resolve(types[t]);
     }
+    return ImmutableList.of(result);
   }
 
-  static int hashCode(Type type) {
-    if (type instanceof ParameterizedType) {
-      ParameterizedType p = (ParameterizedType) type;
-      int h = p.getRawType().hashCode();
-      for (Type argument : p.getActualTypeArguments()) {
-        h = h * 31 + hashCode(argument);
-      }
-      return h;
-    }
-
-    if (type instanceof Class) {
-      // Class specifies hashCode().
-      return type.hashCode();
-    }
-
-    if (type instanceof GenericArrayType) {
-      return hashCode(((GenericArrayType) type).getGenericComponentType()) * 31;
-    }
-
-    // This isn't a type we support. Could be a generic array type, wildcard
-    // type, etc.
-    return type.hashCode();
+  /**
+   * Resolves known type parameters in {@code toResolve} and returns the result.
+   */
+  TypeLiteral<?> resolve(Type toResolve) {
+    return TypeLiteral.get(resolveType(toResolve));
   }
 
-  static boolean equals(Type a, Type b) {
-    if (a instanceof Class) {
-      // Class already specifies equals().
-      return a.equals(b);
-    }
-
-    if (a instanceof ParameterizedType) {
-      if (!(b instanceof ParameterizedType)) {
-        return false;
-      }
-
-      ParameterizedType pa = (ParameterizedType) a;
-      ParameterizedType pb = (ParameterizedType) b;
-
-      if (!pa.getRawType().equals(pb.getRawType())) {
-        return false;
-      }
-
-      Type[] aa = pa.getActualTypeArguments();
-      Type[] ba = pb.getActualTypeArguments();
-      if (aa.length != ba.length) {
-        return false;
-      }
-
-      for (int i = 0; i < aa.length; i++) {
-        if (!equals(aa[i], ba[i])) {
-          return false;
+  Type resolveType(Type toResolve) {
+    // this implementation is made a little more complicated in an attempt to avoid object-creation
+    while (true) {
+      if (toResolve instanceof TypeVariable) {
+        TypeVariable original = (TypeVariable) toResolve;
+        toResolve = MoreTypes.resolveTypeVariable(type, rawType, original);
+        if (toResolve == original) {
+          return toResolve;
         }
-      }
 
-      return true;
+      } else if (toResolve instanceof GenericArrayType) {
+        GenericArrayType original = (GenericArrayType) toResolve;
+        Type componentType = original.getGenericComponentType();
+        Type newComponentType = resolveType(componentType);
+        return componentType == newComponentType
+            ? original
+            : Types.arrayOf(newComponentType);
+
+      } else if (toResolve instanceof ParameterizedType) {
+        ParameterizedType original = (ParameterizedType) toResolve;
+        Type ownerType = original.getOwnerType();
+        Type newOwnerType = resolveType(ownerType);
+        boolean changed = newOwnerType != ownerType;
+
+        Type[] args = original.getActualTypeArguments();
+        for (int t = 0, length = args.length; t < length; t++) {
+          Type resolvedTypeArgument = resolveType(args[t]);
+          if (resolvedTypeArgument != args[t]) {
+            if (!changed) {
+              args = args.clone();
+              changed = true;
+            }
+            args[t] = resolvedTypeArgument;
+          }
+        }
+
+        return changed
+            ? Types.newParameterizedTypeWithOwner(newOwnerType, original.getRawType(), args)
+            : original;
+
+      } else if (toResolve instanceof WildcardType) {
+        WildcardType original = (WildcardType) toResolve;
+        Type[] originalLowerBound = original.getLowerBounds();
+        Type[] originalUpperBound = original.getUpperBounds();
+
+        if (originalLowerBound.length == 1) {
+          Type lowerBound = resolveType(originalLowerBound[0]);
+          if (lowerBound != originalLowerBound[0]) {
+            return Types.supertypeOf(lowerBound);
+          }
+        } else if (originalUpperBound.length == 1) {
+          Type upperBound = resolveType(originalUpperBound[0]);
+          if (upperBound != originalUpperBound[0]) {
+            return Types.subtypeOf(upperBound);
+          }
+        }
+        return original;
+
+      } else {
+        return toResolve;
+      }
+    }
+  }
+
+  /**
+   * Returns the generic form of {@code supertype}. For example, if this is {@code
+   * ArrayList<String>}, this returns {@code Iterable<String>} given the input {@code
+   * Iterable.class}.
+   *
+   * @param supertype a superclass of, or interface implemented by, this.
+   * @since 2.0
+   */
+  public TypeLiteral<?> getSupertype(Class<?> supertype) {
+    checkArgument(supertype.isAssignableFrom(rawType),
+        "%s is not a supertype of %s", supertype, this.type);
+    return resolve(MoreTypes.getGenericSupertype(type, rawType, supertype));
+  }
+
+  /**
+   * Returns the resolved generic type of {@code field}.
+   *
+   * @param field a field defined by this or any superclass.
+   * @since 2.0
+   */
+  public TypeLiteral<?> getFieldType(Field field) {
+    checkArgument(field.getDeclaringClass().isAssignableFrom(rawType),
+        "%s is not defined by a supertype of %s", field, type);
+    return resolve(field.getGenericType());
+  }
+
+  /**
+   * Returns the resolved generic parameter types of {@code methodOrConstructor}.
+   *
+   * @param methodOrConstructor a method or constructor defined by this or any supertype.
+   * @since 2.0
+   */
+  public List<TypeLiteral<?>> getParameterTypes(Member methodOrConstructor) {
+    Type[] genericParameterTypes;
+
+    if (methodOrConstructor instanceof Method) {
+      Method method = (Method) methodOrConstructor;
+      checkArgument(method.getDeclaringClass().isAssignableFrom(rawType),
+          "%s is not defined by a supertype of %s", method, type);
+      genericParameterTypes = method.getGenericParameterTypes();
+
+    } else if (methodOrConstructor instanceof Constructor) {
+      Constructor constructor = (Constructor) methodOrConstructor;
+      checkArgument(constructor.getDeclaringClass().isAssignableFrom(rawType),
+          "%s does not construct a supertype of %s", constructor, type);
+      genericParameterTypes = constructor.getGenericParameterTypes();
+
+    } else {
+      throw new IllegalArgumentException("Not a method or a constructor: " + methodOrConstructor);
     }
 
-    if (a instanceof GenericArrayType) {
-      if (!(b instanceof GenericArrayType)) {
-        return false;
-      }
+    return resolveAll(genericParameterTypes);
+  }
 
-      return equals(
-          ((GenericArrayType) a).getGenericComponentType(),
-          ((GenericArrayType) b).getGenericComponentType()
-      );
+  /**
+   * Returns the resolved generic exception types thrown by {@code constructor}.
+   *
+   * @param methodOrConstructor a method or constructor defined by this or any supertype.
+   * @since 2.0
+   */
+  public List<TypeLiteral<?>> getExceptionTypes(Member methodOrConstructor) {
+    Type[] genericExceptionTypes;
+
+    if (methodOrConstructor instanceof Method) {
+      Method method = (Method) methodOrConstructor;
+      checkArgument(method.getDeclaringClass().isAssignableFrom(rawType),
+          "%s is not defined by a supertype of %s", method, type);
+      genericExceptionTypes = method.getGenericExceptionTypes();
+
+    } else if (methodOrConstructor instanceof Constructor) {
+      Constructor<?> constructor = (Constructor<?>) methodOrConstructor;
+      checkArgument(constructor.getDeclaringClass().isAssignableFrom(rawType),
+          "%s does not construct a supertype of %s", constructor, type);
+      genericExceptionTypes = constructor.getGenericExceptionTypes();
+
+    } else {
+      throw new IllegalArgumentException("Not a method or a constructor: " + methodOrConstructor);
     }
 
-    // This isn't a type we support. Could be a generic array type, wildcard
-    // type, etc.
-    return false;
+    return resolveAll(genericExceptionTypes);
+  }
+
+  /**
+   * Returns the resolved generic return type of {@code method}.
+   *
+   * @param method a method defined by this or any supertype.
+   * @since 2.0
+   */
+  public TypeLiteral<?> getReturnType(Method method) {
+    checkArgument(method.getDeclaringClass().isAssignableFrom(rawType),
+        "%s is not defined by a supertype of %s", method, type);
+    return resolve(method.getGenericReturnType());
   }
 }

@@ -2,28 +2,26 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Guice Plug-in
 Bundle-SymbolicName: com.google.guice
-Bundle-Version: 1.0.1.qualifier
+Bundle-Version: 2.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ClassPath: aopalliance.jar,
- guice-1.0_patched.jar
+ guice-2.0.jar,
+ guice-assistedinject-2.0.jar,
+ guice-multibindings-2.0.jar,
+ guice-throwingproviders-2.0.jar
 Export-Package: com.google.inject,
- com.google.inject.asm,
- com.google.inject.asm.signature,
+ com.google.inject.assistedinject,
  com.google.inject.binder,
- com.google.inject.cglib.asm,
- com.google.inject.cglib.asm.signature,
- com.google.inject.cglib.beans,
- com.google.inject.cglib.core,
- com.google.inject.cglib.proxy,
- com.google.inject.cglib.reflect,
- com.google.inject.cglib.transform,
- com.google.inject.cglib.transform.impl,
- com.google.inject.cglib.util,
- com.google.inject.jndi,
+ com.google.inject.internal,
+ com.google.inject.internal.asm,
+ com.google.inject.internal.cglib.core,
+ com.google.inject.internal.cglib.proxy,
+ com.google.inject.internal.cglib.reflect,
  com.google.inject.matcher,
+ com.google.inject.multibindings,
  com.google.inject.name,
  com.google.inject.spi,
- com.google.inject.tools.jmx,
+ com.google.inject.throwingproviders,
  com.google.inject.util,
  org.aopalliance.aop,
  org.aopalliance.intercept

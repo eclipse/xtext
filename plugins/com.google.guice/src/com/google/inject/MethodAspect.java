@@ -16,8 +16,8 @@
 
 package com.google.inject;
 
+import static com.google.inject.internal.Preconditions.checkNotNull;
 import com.google.inject.matcher.Matcher;
-import com.google.inject.util.Objects;
 import java.lang.reflect.Method;
 import java.util.Arrays;
 import java.util.List;
@@ -34,12 +34,23 @@ class MethodAspect {
   final Matcher<? super Method> methodMatcher;
   final List<MethodInterceptor> interceptors;
 
+  /**
+   * @param classMatcher matches classes the interceptor should apply to. For example: {@code
+   *     only(Runnable.class)}.
+   * @param methodMatcher matches methods the interceptor should apply to. For example: {@code
+   *     annotatedWith(Transactional.class)}.
+   * @param interceptors to apply
+   */
+  MethodAspect(Matcher<? super Class<?>> classMatcher,
+      Matcher<? super Method> methodMatcher, List<MethodInterceptor> interceptors) {
+    this.classMatcher = checkNotNull(classMatcher, "class matcher");
+    this.methodMatcher = checkNotNull(methodMatcher, "method matcher");
+    this.interceptors = checkNotNull(interceptors, "interceptors");
+  }
+
   MethodAspect(Matcher<? super Class<?>> classMatcher,
       Matcher<? super Method> methodMatcher, MethodInterceptor... interceptors) {
-    this.classMatcher = Objects.nonNull(classMatcher, "class matcher");
-    this.methodMatcher = Objects.nonNull(methodMatcher, "method matcher");
-    this.interceptors
-        = Arrays.asList(Objects.nonNull(interceptors, "interceptors"));
+    this(classMatcher, methodMatcher, Arrays.asList(interceptors));
   }
 
   boolean matches(Class<?> clazz) {
