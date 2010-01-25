@@ -242,7 +242,7 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		validatePage();
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	private void initializeListFromSelection(IStructuredSelection selection) {
 		for (Iterator i = selection.iterator(); i.hasNext();) {
 			Object selectedObject = i.next();
@@ -257,7 +257,7 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		}
 	}
 
-	@SuppressWarnings("unchecked")
+	@SuppressWarnings("rawtypes")
 	private java.util.List<EPackage> ePackagesInResource(Resource resource) {
 		java.util.List<EPackage> result = null;
 		for (Iterator i = resource.getAllContents(); i.hasNext();) {
