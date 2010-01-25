@@ -16,44 +16,42 @@
 
 package com.google.inject;
 
-import com.google.inject.spi.SourceProviders;
-import com.google.inject.util.Objects;
+import com.google.inject.internal.Errors;
+import com.google.inject.internal.ErrorsException;
+import com.google.inject.internal.InternalContext;
+import com.google.inject.internal.InternalFactory;
+import static com.google.inject.internal.Preconditions.checkNotNull;
+import com.google.inject.internal.SourceProvider;
+import com.google.inject.spi.Dependency;
 
 /**
  * @author crazybob@google.com (Bob Lee)
 */
 class InternalFactoryToProviderAdapter<T> implements InternalFactory<T> {
 
-  private final Provider<? extends T> provider;
+  private final Initializable<Provider<? extends T>> initializable;
   private final Object source;
 
-  public InternalFactoryToProviderAdapter(Provider<? extends T> provider) {
-    this(provider, SourceProviders.UNKNOWN_SOURCE);
+  public InternalFactoryToProviderAdapter(Initializable<Provider<? extends T>> initializable) {
+    this(initializable, SourceProvider.UNKNOWN_SOURCE);
   }
 
   public InternalFactoryToProviderAdapter(
-      Provider<? extends T> provider, Object source) {
-    this.provider = Objects.nonNull(provider, "provider");
-    this.source = Objects.nonNull(source, "source");
-  }
-  
-  public T get(InternalContext context) {
-    T provided = provider.get();
-    if (provided != null) {
-      return provided;
-    }
-
-    // TODO(kevinb): gee, ya think we might want to remove this?
-    if (("I'm a bad hack".equals(
-        System.getProperty("guice.allow.nulls.bad.bad.bad")))) {
-      return provided;
-    }
-    String message = String.format(ErrorMessages.NULL_PROVIDED, source);
-    throw new ProvisionException(context.getExternalContext(),
-        new NullPointerException(message));
+      Initializable<Provider<? extends T>> initializable, Object source) {
+    this.initializable = checkNotNull(initializable, "provider");
+    this.source = checkNotNull(source, "source");
   }
 
-  public String toString() {
-    return provider.toString();
+  public T get(Errors errors, InternalContext context, Dependency<?> dependency)
+      throws ErrorsException {
+    try {
+      return errors.checkForNull(initializable.get(errors).get(), source, dependency);
+    } catch (RuntimeException userException) {
+      throw errors.withSource(source).errorInProvider(userException).toException();
+    }
+  }
+
+  @Override public String toString() {
+    return initializable.toString();
   }
 }

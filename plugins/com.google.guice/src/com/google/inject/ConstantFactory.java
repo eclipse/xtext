@@ -16,27 +16,32 @@
 
 package com.google.inject;
 
-import com.google.inject.util.Objects;
-import com.google.inject.util.ToStringBuilder;
+import com.google.inject.internal.Errors;
+import com.google.inject.internal.ErrorsException;
+import com.google.inject.internal.InternalContext;
+import com.google.inject.internal.InternalFactory;
+import com.google.inject.internal.ToStringBuilder;
+import com.google.inject.spi.Dependency;
 
 /**
  * @author crazybob@google.com (Bob Lee)
  */
 class ConstantFactory<T> implements InternalFactory<T> {
 
-  private final T value;
+  private final Initializable<T> initializable;
 
-  public ConstantFactory(T value) {
-    this.value = Objects.nonNull(value, "value");
+  public ConstantFactory(Initializable<T> initializable) {
+    this.initializable = initializable;
   }
 
-  public T get(InternalContext ignored) {
-    return value;
+  public T get(Errors errors, InternalContext context, Dependency dependency)
+      throws ErrorsException {
+    return initializable.get(errors);
   }
 
   public String toString() {
     return new ToStringBuilder(ConstantFactory.class)
-        .add("value", value)
+        .add("value", initializable)
         .toString();
   }
 }

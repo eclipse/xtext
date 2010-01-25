@@ -11,10 +11,10 @@ Require-Bundle: org.eclipse.xtend;bundle-version="0.8.0";resolution:=optional,
  org.eclipse.xtend.typesystem.emf;bundle-version="0.8.0";resolution:=optional,
  org.eclipse.core.resources;bundle-version="3.5.0";resolution:=optional,
  org.eclipse.core.runtime;bundle-version="3.5.0";resolution:=optional,
- org.eclipse.xtext.ui.core;bundle-version="0.8.0";resolution:=optional,
  org.eclipse.ui.ide;bundle-version="3.5.0";resolution:=optional,
  org.eclipse.jdt.core;bundle-version="3.5.0";resolution:=optional,
- org.eclipse.jdt.launching;bundle-version="3.5.0";resolution:=optional
+ org.eclipse.jdt.launching;bundle-version="3.5.0";resolution:=optional,
+ org.eclipse.jface;resolution:=optional
 Export-Package: org.eclipse.xtext.junit,
  org.eclipse.xtext.junit.util,
  org.eclipse.xtext.junit.validation

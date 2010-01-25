@@ -16,24 +16,48 @@
 
 package com.google.inject;
 
-import com.google.inject.util.StackTraceElements;
-import java.lang.reflect.Member;
+import com.google.inject.internal.Errors;
+import com.google.inject.internal.ImmutableList;
+import com.google.inject.internal.ImmutableSet;
+import static com.google.inject.internal.Preconditions.checkArgument;
+import com.google.inject.spi.Message;
+import java.util.Collection;
 
 /**
- * Used to rethrow exceptions that occur while providing instances, to add
- * additional contextual details.
+ * Indicates that there was a runtime failure while providing an instance.
+ *
+ * @author kevinb@google.com (Kevin Bourrillion)
+ * @author jessewilson@google.com (Jesse Wilson)
+ * @since 2.0
  */
-class ProvisionException extends RuntimeException {
-  public ProvisionException(ExternalContext<?> externalContext,
-      Throwable cause) {
-    super(createMessage(externalContext), cause);
+public final class ProvisionException extends RuntimeException {
+
+  private final ImmutableSet<Message> messages;
+
+  /** Creates a ConfigurationException containing {@code messages}. */
+  public ProvisionException(Iterable<Message> messages) {
+    this.messages = ImmutableSet.copyOf(messages);
+    checkArgument(!this.messages.isEmpty());
+    initCause(Errors.getOnlyCause(this.messages));
   }
 
-  private static String createMessage(ExternalContext<?> externalContext) {
-    Key<?> key = externalContext.getKey();
-    Member member = externalContext.getMember();
-    return String.format(ErrorMessages.EXCEPTION_WHILE_CREATING,
-        ErrorMessages.convert(key),
-        StackTraceElements.forMember(member));
+  public ProvisionException(String message, Throwable cause) {
+    super(cause);
+    this.messages = ImmutableSet.of(new Message(ImmutableList.of(), message, cause));
   }
+
+  public ProvisionException(String message) {
+    this.messages = ImmutableSet.of(new Message(message));
+  }
+
+  /** Returns messages for the errors that caused this exception. */
+  public Collection<Message> getErrorMessages() {
+    return messages;
+  }
+
+  @Override public String getMessage() {
+    return Errors.format("Guice provision errors", messages);
+  }
+
+  private static final long serialVersionUID = 0;
 }

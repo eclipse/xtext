@@ -16,45 +16,60 @@
 
 package com.google.inject.spi;
 
-import static com.google.inject.util.Objects.nonNull;
+import com.google.inject.Binder;
+import com.google.inject.internal.Errors;
+import com.google.inject.internal.ImmutableList;
+import com.google.inject.internal.Objects;
+import static com.google.inject.internal.Preconditions.checkNotNull;
+import com.google.inject.internal.SourceProvider;
+import java.io.ObjectStreamException;
+import java.io.Serializable;
+import java.util.List;
 
 /**
- * A message. Contains a source pointing to the code which resulted
- * in this message and a text message.
+ * An error message and the context in which it occured. Messages are usually created internally by
+ * Guice and its extensions. Messages can be created explicitly in a module using {@link
+ * com.google.inject.Binder#addError(Throwable) addError()} statements:
+ * <pre>
+ *     try {
+ *       bindPropertiesFromFile();
+ *     } catch (IOException e) {
+ *       addError(e);
+ *     }</pre>
  *
  * @author crazybob@google.com (Bob Lee)
  */
-public class Message {
+public final class Message implements Serializable, Element {
+  private final String message;
+  private final Throwable cause;
+  private final List<Object> sources;
 
-  final Object source;
-  final String message;
+  /**
+   * @since 2.0
+   */
+  public Message(List<Object> sources, String message, Throwable cause) {
+    this.sources = ImmutableList.copyOf(sources);
+    this.message = checkNotNull(message, "message");
+    this.cause = cause;
+  }
 
   public Message(Object source, String message) {
-    this.source = nonNull(source, "source");
-    this.message = nonNull(message, "message");
+    this(ImmutableList.of(source), message, null);
   }
 
   public Message(String message) {
-    this(SourceProviders.UNKNOWN_SOURCE, message);
+    this(ImmutableList.of(), message, null);
   }
 
-  /**
-   * Gets the source of the configuration which resulted in this error message.
-   */
-  public Object getSource() {
-    return source;
+  public String getSource() {
+    return sources.isEmpty()
+        ? SourceProvider.UNKNOWN_SOURCE.toString()
+        : Errors.convert(sources.get(sources.size() - 1)).toString();
   }
 
-  String sourceString = null;
-
-  /**
-   * Returns a string representation of the source object. 
-   */
-  public String getSourceString() {
-    if (sourceString == null) {
-      sourceString = source.toString();
-    }
-    return sourceString;
+  /** @since 2.0 */
+  public List<Object> getSources() {
+    return sources;
   }
 
   /**
@@ -64,19 +79,53 @@ public class Message {
     return message;
   }
 
-  public String toString() {
-    return getSourceString() + " " + message;
+  /** @since 2.0 */
+  public <T> T acceptVisitor(ElementVisitor<T> visitor) {
+    return visitor.visit(this);
   }
 
-  public int hashCode() {
-    return source.hashCode() * 31 + message.hashCode();
+  /**
+   * Returns the throwable that caused this message, or {@code null} if this
+   * message was not caused by a throwable.
+   *
+   * @since 2.0
+   */
+  public Throwable getCause() {
+    return cause;
   }
 
-  public boolean equals(Object o) {
+  @Override public String toString() {
+    return message;
+  }
+
+  @Override public int hashCode() {
+    return message.hashCode();
+  }
+
+  @Override public boolean equals(Object o) {
     if (!(o instanceof Message)) {
       return false;
     }
     Message e = (Message) o;
-    return source.equals(e.source) && message.equals(e.message);
+    return message.equals(e.message) && Objects.equal(cause, e.cause) && sources.equals(e.sources);
   }
+
+  /** @since 2.0 */
+  public void applyTo(Binder binder) {
+    binder.withSource(getSource()).addError(this);
+  }
+
+  /**
+   * When serialized, we eagerly convert sources to strings. This hurts our formatting, but it
+   * guarantees that the receiving end will be able to read the message.
+   */
+  private Object writeReplace() throws ObjectStreamException {
+    Object[] sourcesAsStrings = sources.toArray();
+    for (int i = 0; i < sourcesAsStrings.length; i++) {
+      sourcesAsStrings[i] = Errors.convert(sourcesAsStrings[i]).toString();
+    }
+    return new Message(ImmutableList.of(sourcesAsStrings), message, cause);
+  }
+
+  private static final long serialVersionUID = 0;
 }

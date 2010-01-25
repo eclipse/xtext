@@ -16,17 +16,15 @@
 
 package com.google.inject;
 
-import java.lang.reflect.Constructor;
-
 /**
  * Creates {@link ConstructionProxy} instances.
  *
  * @author crazybob@google.com (Bob Lee)
  */
-interface ConstructionProxyFactory {
+interface ConstructionProxyFactory<T> {
 
   /**
    * Gets a construction proxy for the given constructor.
    */
-  <T> ConstructionProxy<T> get(Constructor<T> constructor);
+  ConstructionProxy<T> create();
 }

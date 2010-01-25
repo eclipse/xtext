@@ -1,8 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <classpath>
-	<classpathentry exported="true" kind="lib" path="guice-1.0_patched.jar" sourcepath="src"/>
-	<classpathentry exported="true" kind="lib" path="aopalliance.jar"/>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/J2SE-1.5"/>
 	<classpathentry kind="con" path="org.eclipse.pde.core.requiredPlugins"/>
+	<classpathentry exported="true" kind="lib" path="aopalliance.jar"/>
+	<classpathentry exported="true" kind="lib" path="guice-2.0.jar" sourcepath="src"/>
+	<classpathentry exported="true" kind="lib" path="guice-assistedinject-2.0.jar" sourcepath="src-assistedinject/com"/>
+	<classpathentry exported="true" kind="lib" path="guice-multibindings-2.0.jar" sourcepath="src-multibindings"/>
+	<classpathentry exported="true" kind="lib" path="guice-throwingproviders-2.0.jar" sourcepath="src-throwingproviders"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

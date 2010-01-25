@@ -16,47 +16,52 @@
 
 package com.google.inject;
 
-import com.google.inject.BinderImpl.CreationListener;
+import com.google.inject.BindingProcessor.CreationListener;
+import com.google.inject.internal.Errors;
+import com.google.inject.internal.ErrorsException;
+import com.google.inject.internal.InternalContext;
+import com.google.inject.internal.InternalFactory;
+import com.google.inject.spi.Dependency;
 
 /**
  * Delegates to a custom factory which is also bound in the injector.
  */
-class BoundProviderFactory<T>
-    implements InternalFactory<T>, CreationListener {
+class BoundProviderFactory<T> implements InternalFactory<T>, CreationListener {
 
+  private final InjectorImpl injector;
   final Key<? extends Provider<? extends T>> providerKey;
   final Object source;
   private InternalFactory<? extends Provider<? extends T>> providerFactory;
 
   BoundProviderFactory(
+      InjectorImpl injector,
       Key<? extends Provider<? extends T>> providerKey,
       Object source) {
+    this.injector = injector;
     this.providerKey = providerKey;
     this.source = source;
   }
 
-  BoundProviderFactory(
-      Key<? extends Provider<? extends T>> providerKey,
-      InternalFactory<? extends Provider<? extends T>> providerFactory,
-      Object source) {
-    this.providerKey = providerKey;
-    this.providerFactory = providerFactory;
-    this.source = source;
+  public void notify(Errors errors) {
+    try {
+      providerFactory = injector.getInternalFactory(providerKey, errors.withSource(source));
+    } catch (ErrorsException e) {
+      errors.merge(e.getErrors());
+    }
   }
 
-  public void notify(final InjectorImpl injector) {
-    injector.withDefaultSource(source, new Runnable() {
-      public void run() {
-        providerFactory = injector.getInternalFactory(null, providerKey);
-      }
-    });
+  public T get(Errors errors, InternalContext context, Dependency<?> dependency)
+      throws ErrorsException {
+    errors = errors.withSource(providerKey);
+    Provider<? extends T> provider = providerFactory.get(errors, context, dependency);
+    try {
+      return errors.checkForNull(provider.get(), source, dependency);
+    } catch(RuntimeException userException) {
+      throw errors.errorInProvider(userException).toException();
+    }
   }
 
-  public String toString() {
+  @Override public String toString() {
     return providerKey.toString();
-  }
-
-  public T get(InternalContext context) {
-    return providerFactory.get(context).get();
   }
 }

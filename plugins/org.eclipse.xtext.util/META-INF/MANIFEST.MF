@@ -10,5 +10,5 @@ Export-Package: org.eclipse.xtext.util,
  org.eclipse.xtext.util.concurrent
 Require-Bundle: org.eclipse.emf.ecore;bundle-version="2.3.2",
  com.google.collect;bundle-version="0.8.0";visibility:=reexport,
- com.google.guice;bundle-version="1.0.1";visibility:=reexport
+ com.google.guice;bundle-version="2.0.0";visibility:=reexport
 Import-Package: org.apache.log4j;version="1.2.15"
