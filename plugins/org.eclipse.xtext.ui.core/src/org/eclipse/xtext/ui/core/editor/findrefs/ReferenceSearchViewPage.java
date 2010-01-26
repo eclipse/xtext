@@ -54,6 +54,10 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage, 
 
 	private IAction showPreviousAction;
 
+	private IAction expandAllAction;
+
+	private IAction collapseAllAction;
+
 	@Inject
 	private ReferenceSearchResultContentProvider contentProvider;
 
@@ -66,6 +70,8 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage, 
 	public ReferenceSearchViewPage() {
 		showPreviousAction = new ReferenceSearchViewPageActions.ShowPrevious(this);
 		showNextAction = new ReferenceSearchViewPageActions.ShowNext(this);
+		expandAllAction = new ReferenceSearchViewPageActions.ExpandAll(this);
+		collapseAllAction = new ReferenceSearchViewPageActions.CollapseAll(this);
 	}
 
 	public String getID() {
@@ -77,7 +83,7 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage, 
 	}
 
 	public String getLabel() {
-		return "Find Xtext References";
+		return searchResult.getLabel();
 	}
 
 	public Object getUIState() {
@@ -152,21 +158,13 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage, 
 	protected void fillToolbar(IToolBarManager tbm) {
 		tbm.appendToGroup(IContextMenuConstants.GROUP_SHOW, showNextAction);
 		tbm.appendToGroup(IContextMenuConstants.GROUP_SHOW, showPreviousAction);
-		//		tbm.appendToGroup(IContextMenuConstants.GROUP_REMOVE_MATCHES, fRemoveSelectedMatches);
-		//		tbm.appendToGroup(IContextMenuConstants.GROUP_REMOVE_MATCHES, fRemoveAllResultsAction);
 		IActionBars actionBars = getSite().getActionBars();
 		if (actionBars != null) {
 			actionBars.setGlobalActionHandler(ActionFactory.NEXT.getId(), showNextAction);
 			actionBars.setGlobalActionHandler(ActionFactory.PREVIOUS.getId(), showPreviousAction);
-			//			actionBars.setGlobalActionHandler(ActionFactory.DELETE.getId(), fRemoveSelectedMatches);
-			//			actionBars.setGlobalActionHandler(ActionFactory.COPY.getId(), fCopyToClipboardAction);
-			//			actionBars.setGlobalActionHandler(ActionFactory.SELECT_ALL.getId(), fSelectAllAction);
 		}
-		//		if (getLayout() == FLAG_LAYOUT_TREE) {
-		//			tbm.appendToGroup(IContextMenuConstants.GROUP_VIEWER_SETUP, fExpandAllAction);
-		//			tbm.appendToGroup(IContextMenuConstants.GROUP_VIEWER_SETUP, fCollapseAllAction);
-		//		}
-
+		tbm.appendToGroup(IContextMenuConstants.GROUP_VIEWER_SETUP, expandAllAction);
+		tbm.appendToGroup(IContextMenuConstants.GROUP_VIEWER_SETUP, collapseAllAction);
 	}
 
 	protected void handleOpen(OpenEvent openEvent) {
@@ -200,7 +198,7 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage, 
 		});
 	}
 
-	public void navigateNext(boolean forward) {
-		new TreeViewerNavigator(this, viewer).navigateNext(forward);
+	public TreeViewer getViewer() {
+		return viewer;
 	}
 }

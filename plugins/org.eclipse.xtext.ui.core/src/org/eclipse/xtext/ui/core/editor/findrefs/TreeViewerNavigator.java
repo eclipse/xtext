@@ -25,9 +25,9 @@ public class TreeViewerNavigator {
 
 	private ReferenceSearchViewPage page;
 
-	public TreeViewerNavigator(ReferenceSearchViewPage page, TreeViewer viewer) {
-		this.viewer = viewer;
+	public TreeViewerNavigator(ReferenceSearchViewPage page) {
 		this.page = page;
+		this.viewer = page.getViewer();
 	}
 
 	public void navigateNext(boolean forward) {
