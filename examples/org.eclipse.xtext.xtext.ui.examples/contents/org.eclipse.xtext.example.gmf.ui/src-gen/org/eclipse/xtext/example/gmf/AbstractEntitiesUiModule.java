@@ -53,11 +53,6 @@ public abstract class AbstractEntitiesUiModule extends EntitiesRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.jface.viewers.ILabelDecorator> bindILabelDecorator() {
-		return org.eclipse.xtext.ui.core.editor.validation.ProblemsLabelDecorator.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public Class<? extends org.eclipse.emf.common.notify.AdapterFactory> bindAdapterFactory() {
 		return org.eclipse.xtext.ui.core.InjectableAdapterFactory.class;
 	}
@@ -65,11 +60,6 @@ public abstract class AbstractEntitiesUiModule extends EntitiesRuntimeModule {
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public Class<? extends org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider> bindAdapterFactoryLabelProvider() {
 		return org.eclipse.xtext.ui.core.InjectableAdapterFactoryLabelProvider.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public com.google.inject.Provider<org.eclipse.jface.viewers.DecoratingLabelProvider> provideDecoratingLabelProvider() {
-		return new org.eclipse.xtext.ui.core.InjectableDecoratingLabelProvider();
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
@@ -119,7 +109,7 @@ public abstract class AbstractEntitiesUiModule extends EntitiesRuntimeModule {
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public void configureXtextEditorErrorTickUpdater(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.ui.core.editor.IXtextEditorCallback.class).annotatedWith(com.google.inject.name.Names.named("TODO_REPLACE_WITH_GUICE20_MULITIBINDINGS")).to(org.eclipse.xtext.ui.core.editor.XtextEditorErrorTickUpdater.class);
+		binder.bind(org.eclipse.xtext.ui.core.editor.IXtextEditorCallback.class).annotatedWith(com.google.inject.name.Names.named("IXtextEditorCallBack")).to(org.eclipse.xtext.ui.core.editor.XtextEditorErrorTickUpdater.class);
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
