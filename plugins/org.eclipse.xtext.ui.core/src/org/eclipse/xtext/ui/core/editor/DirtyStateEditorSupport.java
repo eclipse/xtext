@@ -8,34 +8,44 @@
 package org.eclipse.xtext.ui.core.editor;
 
 import java.util.Collection;
+import java.util.Collections;
+import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Queue;
 import java.util.Set;
+import java.util.concurrent.ConcurrentLinkedQueue;
 
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.URIConverter;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.events.VerifyEvent;
 import org.eclipse.swt.events.VerifyListener;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
+import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.IXtextModelListener;
 import org.eclipse.xtext.ui.core.notification.IStateChangeEventBroker;
+import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.common.collect.Lists;
 import com.google.common.collect.Sets;
 import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
+import com.google.inject.internal.Maps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -43,36 +53,93 @@ import com.google.inject.Inject;
 public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDescription.Event.Listener, VerifyListener {
 	
 	/**
+	 * All jobs that are configured with the same instance of this rule
+	 * will run sequentially.
+	 * @author Sebastian Zarnekow - Initial contribution and API
+	 */
+	public static class Sequence implements ISchedulingRule {
+		
+		public boolean contains(ISchedulingRule rule) {
+			return rule == this;
+		}
+
+		public boolean isConflicting(ISchedulingRule rule) {
+			return rule instanceof Sequence;
+		}
+	}
+	
+	private static ISchedulingRule SCHEDULING_RULE = new Sequence();
+	
+	/**
 	 * @author Sebastian Zarnekow - Initial contribution and API
 	 */
 	protected class UpdateEditorStateJob extends Job {
-		private final IResourceDescription.Event event;
-		private final Set<URI> uris;
+		private Queue<IResourceDescription.Delta> pendingChanges;
 
-		protected UpdateEditorStateJob(IResourceDescription.Event event, Set<URI> uris) {
-			super("Updating editor state");
-			this.event = event;
-			this.uris = uris;
+		protected UpdateEditorStateJob(ISchedulingRule rule) {
+			this(rule, "Updating editor state");
+		}
+		
+		protected UpdateEditorStateJob(ISchedulingRule rule, String name) {
+			super(name);
+			setRule(rule);
+			pendingChanges = new ConcurrentLinkedQueue<IResourceDescription.Delta>();
+		}
+		
+		protected void scheduleFor(IResourceDescription.Event event) {
+			cancel();
+			pendingChanges.addAll(event.getDeltas());
+			schedule(getDelay());
+		}
+
+		protected int getDelay() {
+			return 500;
+		}
+		
+		protected Pair<IResourceDescription.Event, Integer> mergePendingDeltas() {
+			Map<URI, IResourceDescription.Delta> uriToDelta = Maps.newLinkedHashMap();
+			Iterator<IResourceDescription.Delta> iter = pendingChanges.iterator();
+			int size = 0;
+			while(iter.hasNext()) {
+				IResourceDescription.Delta delta = iter.next();
+				URI uri = delta.getUri();
+				IResourceDescription.Delta prev = uriToDelta.get(uri);
+				if (prev == null) {
+					uriToDelta.put(uri, delta);
+				} else if (prev.getOld() != delta.getNew()){
+					uriToDelta.put(uri, createDelta(delta, prev));
+				} else {
+					uriToDelta.remove(uri);
+				}
+				size++;
+			}
+			IResourceDescription.Event event = new ResourceDescriptionChangeEvent(uriToDelta.values(), dirtyStateManager);
+			return Tuples.create(event, size);
 		}
 
 		@Override
-		protected IStatus run(IProgressMonitor monitor) {
+		protected IStatus run(final IProgressMonitor monitor) {
 			IDirtyStateEditorSupportClient myClient = currentClient;
-			if (myClient == null)
+			if (myClient == null || monitor.isCanceled())
 				return Status.OK_STATUS;
 			final IXtextDocument document = myClient.getDocument();
 			if (document == null)
 				return Status.OK_STATUS;
 			final boolean[] isReparseRequired = new boolean[] {false};
+			final Pair<IResourceDescription.Event,Integer> event = mergePendingDeltas();
 			final Collection<Resource> affectedResources = document.readOnly(new IUnitOfWork<Collection<Resource>, XtextResource>() {
 				public Collection<Resource> exec(XtextResource resource) throws Exception {
 					if (resource == null || resource.getResourceSet() == null)
 						return null;
-					Collection<Resource> affectedResources = collectAffectedResources(resource, event, uris);
-					isReparseRequired[0] = isReparseRequired(resource, event);
+					Collection<Resource> affectedResources = collectAffectedResources(resource, event.getFirst());
+					if (monitor.isCanceled())
+						return Collections.emptySet();
+					isReparseRequired[0] = isReparseRequired(resource, event.getFirst());
 					return affectedResources;
 				}
 			});
+			if (monitor.isCanceled())
+				return Status.OK_STATUS;
 			if (affectedResources != null && !affectedResources.isEmpty() || isReparseRequired[0]) {
 				document.modify(new IUnitOfWork.Void<XtextResource>() {
 					@Override
@@ -89,6 +156,9 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 						resource.reparse(document.get());
 					}
 				});
+			}
+			for(int i = 0; i < event.getSecond(); i++) {
+				pendingChanges.poll();
 			}
 			return Status.OK_STATUS;
 		}
@@ -229,21 +299,28 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	public void descriptionsChanged(final IResourceDescription.Event event) {
 		if (!getDirtyResource().isInitialized())
 			return;
-		final Set<URI> uris = Sets.newHashSet();
 		for(IResourceDescription.Delta delta: event.getDeltas()) {
 			if (delta.getOld() == getDirtyResource().getDescription() || delta.getNew() == getDirtyResource().getDescription())
 				return;
-			if (delta.getNew() != null)
-				uris.add(delta.getNew().getURI());
-			else if (delta.getOld() != null)
-				uris.add(delta.getOld().getURI());
 		}
-		Job updateJob = createUpdateEditorJob(event, uris);
-		updateJob.schedule();
+		scheduleUpdateEditorJob(event);
 	}
 
-	public UpdateEditorStateJob createUpdateEditorJob(final IResourceDescription.Event event, final Set<URI> uris) {
-		return new UpdateEditorStateJob(event, uris);
+	private UpdateEditorStateJob updateEditorStateJob;
+	
+	public void scheduleUpdateEditorJob(final IResourceDescription.Event event) {
+		UpdateEditorStateJob job = updateEditorStateJob;
+		if (job == null) {
+			job = createUpdateEditorJob();
+			updateEditorStateJob = job;
+		}
+		job.scheduleFor(event); 
+	}
+
+	protected UpdateEditorStateJob createUpdateEditorJob() {
+		// default is sequential execution to ensure a minimum number of
+		// spawned worker threads
+		return new UpdateEditorStateJob(SCHEDULING_RULE);
 	}
 	
 	public void modelChanged(XtextResource resource) {
@@ -260,19 +337,21 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		}
 	}
 	
-	protected Collection<Resource> collectAffectedResources(XtextResource resource, IResourceDescription.Event event, Collection<URI> affectedURIs) {
-		List<Resource> result = Lists.newArrayListWithExpectedSize(2);
+	protected Collection<Resource> collectAffectedResources(XtextResource resource, IResourceDescription.Event event) {
+		List<Resource> result = Lists.newArrayListWithExpectedSize(4);
 		ResourceSet resourceSet = resource.getResourceSet();
 		URIConverter converter = resourceSet.getURIConverter();
-		Set<URI> normalizedAffected = Sets.newHashSetWithExpectedSize(affectedURIs.size());
-		for(URI original: affectedURIs) {
-			normalizedAffected.add(converter.normalize(original));
+		Set<URI> normalizedURIs = Sets.newHashSetWithExpectedSize(event.getDeltas().size());
+		for(IResourceDescription.Delta delta: event.getDeltas()) {
+			if (delta.getNew() != null)
+				normalizedURIs.add(converter.normalize(delta.getNew().getURI()));
+			else if (delta.getOld() != null)
+				normalizedURIs.add(converter.normalize(delta.getOld().getURI()));	
 		}
-		EcoreUtil.resolveAll(resource);
 		for(Resource res: resourceSet.getResources()) {
 			if (res != resource && res != null) {
 				URI normalized = converter.normalize(res.getURI());
-				if (normalizedAffected.contains(normalized))
+				if (normalizedURIs.contains(normalized))
 					result.add(res);
 			}
 		}
@@ -294,6 +373,11 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		return isDirty;
 	}
 		
+	protected ChangedResourceDescriptionDelta createDelta(IResourceDescription.Delta delta,
+			IResourceDescription.Delta prev) {
+		return new ChangedResourceDescriptionDelta(prev.getOld(), delta.getNew());
+	}
+	
 	public IDirtyStateManager getDirtyStateManager() {
 		return dirtyStateManager;
 	}
@@ -325,4 +409,5 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	public DocumentBasedDirtyResource getDirtyResource() {
 		return dirtyResource;
 	}
+
 }
