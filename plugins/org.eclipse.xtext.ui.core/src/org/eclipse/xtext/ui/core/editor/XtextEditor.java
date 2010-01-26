@@ -16,6 +16,7 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
@@ -35,9 +36,12 @@ import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
+import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.ui.IEditorRegistry;
 import org.eclipse.ui.IEditorSite;
 import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.texteditor.DefaultMarkerAnnotationAccess;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
@@ -449,6 +453,14 @@ public class XtextEditor extends TextEditor {
 	
 	public void updatedTitleImage(Image image) {
 		setTitleImage(image);
+	}
+	
+	@Override
+	public Image getDefaultImage() {
+		IEditorRegistry editorRegistry= PlatformUI.getWorkbench().getEditorRegistry();
+		IEditorDescriptor editorDesc= editorRegistry.findEditor(getSite().getId());
+		ImageDescriptor imageDesc= editorDesc != null ? editorDesc.getImageDescriptor() : null;
+		return imageDesc != null ? imageDesc.createImage() :super.getDefaultImage();
 	}
 	
 	@SuppressWarnings("rawtypes")
