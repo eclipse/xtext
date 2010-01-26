@@ -115,6 +115,24 @@
          </command>  
          </menuContribution>
     </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="«name».Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>   
+	«FOREACH modelFileExtensions AS ext-»
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
+            uriExtension="«ext»">
+        </resourceServiceProvider>
+    </extension>
+    «ENDFOREACH-»
 «ENDDEFINE»
 
 «DEFINE addToStandaloneSetup(List[String] modelFileExtensions) FOR Grammar»«ENDDEFINE»
