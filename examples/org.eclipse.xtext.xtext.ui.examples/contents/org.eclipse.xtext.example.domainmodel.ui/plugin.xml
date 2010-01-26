@@ -125,9 +125,19 @@
  <extension
        point="org.eclipse.xtext.ui.core.searchFilter">
     <filter
-          class="org.eclipse.xtext.example.ui.search.DomainmodelSearchFilter">
+          class="org.eclipse.xtext.example.search.DomainmodelSearchFilter">
     </filter>
  </extension>
+   	<extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.example.Domainmodel.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>   
  
 
 </plugin>

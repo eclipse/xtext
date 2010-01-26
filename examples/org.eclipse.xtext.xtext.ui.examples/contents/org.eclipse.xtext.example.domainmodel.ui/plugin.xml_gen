@@ -100,6 +100,22 @@
          </command>  
          </menuContribution>
     </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.example.Domainmodel.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>   
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceUIServiceProvider"
+            uriExtension="dmodel">
+        </resourceServiceProvider>
+    </extension>
 
 <!-- adding resource factories -->
 
@@ -110,13 +126,6 @@
 			type="dmodel">
 		</parser>
 	</extension>
-	<extension
-        point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
-           uriExtension="dmodel">
-     </resourceServiceProvider>
-  </extension>
 
 
    <!-- quickfix marker resolution generator -->
