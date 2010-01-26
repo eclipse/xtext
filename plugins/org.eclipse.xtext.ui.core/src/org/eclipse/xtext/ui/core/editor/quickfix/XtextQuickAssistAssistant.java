@@ -153,7 +153,7 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 				if(!canFix(annotation))
 					continue;
 				
-				final Issue issue = issueUtil.getIssueFromAnnotation(annotation, amodel, document);
+				final Issue issue = issueUtil.getIssueFromAnnotation(annotation);
 				if(issue == null)
 					continue;
 		

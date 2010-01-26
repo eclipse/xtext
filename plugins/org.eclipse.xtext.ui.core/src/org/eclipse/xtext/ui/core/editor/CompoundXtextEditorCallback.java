@@ -10,6 +10,8 @@ package org.eclipse.xtext.ui.core.editor;
 
 import java.util.List;
 
+import org.apache.log4j.Logger;
+
 import com.google.common.collect.Lists;
 import com.google.inject.Binding;
 import com.google.inject.Inject;
@@ -23,38 +25,63 @@ import com.google.inject.TypeLiteral;
  */
 public class CompoundXtextEditorCallback implements IXtextEditorCallback {
 	private List<IXtextEditorCallback> editorCallbacks = Lists.newArrayList();
+	private Logger log = Logger.getLogger(CompoundXtextEditorCallback.class);
+
+	protected void handle(Exception e) {
+		log.error(e.getMessage(), e);
+	}
 
 	@Inject
 	public CompoundXtextEditorCallback(Injector injector) {
 		List<Binding<IXtextEditorCallback>> bindingsByType = injector.findBindingsByType(TypeLiteral
 				.get(IXtextEditorCallback.class));
 		for (Binding<IXtextEditorCallback> binding : bindingsByType) {
-			editorCallbacks.add(binding.getProvider().get());
+			try {
+				editorCallbacks.add(binding.getProvider().get());
+			} catch (Exception e) {
+				handle(e);
+			}
 		}
 	}
 
 	public void afterCreatePartControl(XtextEditor xtextEditor) {
 		for (IXtextEditorCallback xtextEditorCallback : editorCallbacks) {
-			xtextEditorCallback.afterCreatePartControl(xtextEditor);
+			try {
+				xtextEditorCallback.afterCreatePartControl(xtextEditor);
+			} catch (Exception e) {
+				handle(e);
+			}
 		}
 	}
 
 	public void afterSave(XtextEditor xtextEditor) {
 		for (IXtextEditorCallback xtextEditorCallback : editorCallbacks) {
-			xtextEditorCallback.afterSave(xtextEditor);
+			try {
+				xtextEditorCallback.afterSave(xtextEditor);
+			} catch (Exception e) {
+				handle(e);
+			}
 		}
 	}
 
 	public void beforeDispose(XtextEditor xtextEditor) {
 		for (IXtextEditorCallback xtextEditorCallback : editorCallbacks) {
-			xtextEditorCallback.beforeDispose(xtextEditor);
+			try {
+				xtextEditorCallback.beforeDispose(xtextEditor);
+			} catch (Exception e) {
+				handle(e);
+			}
 		}
 	}
 
 	public boolean onValidateEditorInputState(XtextEditor xtextEditor) {
 		for (IXtextEditorCallback xtextEditorCallback : editorCallbacks) {
-			if (!xtextEditorCallback.onValidateEditorInputState(xtextEditor)) {
-				return false;
+			try {
+				if (!xtextEditorCallback.onValidateEditorInputState(xtextEditor)) {
+					return false;
+				}
+			} catch (Exception e) {
+				handle(e);
 			}
 		}
 		return true;
@@ -62,7 +89,11 @@ public class CompoundXtextEditorCallback implements IXtextEditorCallback {
 
 	public void afterSetInput(XtextEditor xtextEditor) {
 		for (IXtextEditorCallback xtextEditorCallback : editorCallbacks) {
-			xtextEditorCallback.afterSetInput(xtextEditor);
+			try {
+				xtextEditorCallback.afterSetInput(xtextEditor);
+			} catch (Exception e) {
+				handle(e);
+			}
 		}
 	}
 

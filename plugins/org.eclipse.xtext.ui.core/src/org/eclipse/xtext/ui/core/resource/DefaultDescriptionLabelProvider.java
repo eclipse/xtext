@@ -7,11 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.resource;
 
-import java.awt.Stroke;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.viewers.LabelProvider;

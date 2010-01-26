@@ -35,19 +35,21 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 
 public class Activator extends AbstractUIPlugin {
-	
+
 	private final static Logger log = Logger.getLogger(Activator.class);
 
 	private static Activator INSTANCE;
-	
+
 	private static final String BUILDER_STATE = "builder.state";
-	
+
+	private boolean listensToWorkbenchShutDown = false;
+
 	public static Activator getDefault() {
 		return INSTANCE;
 	}
 
 	private Injector injector;
-	
+
 	public Injector getInjector() {
 		return injector;
 	}
@@ -59,10 +61,11 @@ public class Activator extends AbstractUIPlugin {
 		try {
 			injector = Guice.createInjector(createBuilderModule(context));
 			final ProjectOpenedOrClosedListener listener = injector.getInstance(ProjectOpenedOrClosedListener.class);
-			ResourcesPlugin.getWorkspace().addResourceChangeListener(listener,
-					  IResourceChangeEvent.PRE_CLOSE 
-					| IResourceChangeEvent.PRE_DELETE 
-					| IResourceChangeEvent.POST_CHANGE);
+			ResourcesPlugin.getWorkspace()
+					.addResourceChangeListener(
+							listener,
+							IResourceChangeEvent.PRE_CLOSE | IResourceChangeEvent.PRE_DELETE
+									| IResourceChangeEvent.POST_CHANGE);
 			final IBuilderState state = injector.getInstance(IBuilderState.class);
 			File file = getBuilderStateLocation().toFile();
 			try {
@@ -71,7 +74,7 @@ public class Activator extends AbstractUIPlugin {
 				} else {
 					doFullBuild();
 				}
-			} catch(Exception e) {
+			} catch (Exception e) {
 				log.error("Error while loading persistable builder state.", e);
 				log.error("Triggering a full build.");
 				doFullBuild();
@@ -81,20 +84,13 @@ public class Activator extends AbstractUIPlugin {
 				if (PlatformUI.isWorkbenchRunning()) {
 					IWorkbench workbench = PlatformUI.getWorkbench();
 					if (workbench != null) {
+						listensToWorkbenchShutDown = true;
 						workbench.addWorkbenchListener(new IWorkbenchListener() {
 							public boolean preShutdown(IWorkbench workbench, boolean forced) {
-								try {
-									state.save();
-								} catch (Exception e) {
-									log.error("Error while saving persistable builder state", e);
-									log.error("Deleting builder state from disk...");
-									File file = getBuilderStateLocation().toFile();
-									if (file.exists())
-										file.delete();
-								}
+								saveBuilderState(state);
 								return true;
 							}
-	
+
 							public void postShutdown(IWorkbench workbench) {
 								// do nothing.
 							}
@@ -111,25 +107,37 @@ public class Activator extends AbstractUIPlugin {
 		}
 	}
 
+	private void saveBuilderState(final IBuilderState state) {
+		try {
+			state.save();
+		} catch (Exception e) {
+			log.error("Error while saving persistable builder state", e);
+			log.error("Deleting builder state from disk...");
+			File file = getBuilderStateLocation().toFile();
+			if (file.exists())
+				file.delete();
+		}
+	}
+
 	protected void doFullBuild() {
 		new Job("Indexing Xtext Resources") {
 			{
 				setRule(ResourcesPlugin.getWorkspace().getRuleFactory().buildRule());
 			}
-			
+
 			@Override
 			public boolean belongsTo(Object family) {
 				return ResourcesPlugin.FAMILY_AUTO_BUILD == family;
 			}
-			
+
 			@Override
 			protected IStatus run(IProgressMonitor monitor) {
 				try {
 					ResourcesPlugin.getWorkspace().build(IncrementalProjectBuilder.FULL_BUILD, monitor);
 				} catch (Exception x) {
-					String message = "Full build on initialize failed: "+x.getMessage();
+					String message = "Full build on initialize failed: " + x.getMessage();
 					log.error(message, x);
-					return new Status(IStatus.ERROR,getBundle().getSymbolicName(),message, x);
+					return new Status(IStatus.ERROR, getBundle().getSymbolicName(), message, x);
 				}
 				return Status.OK_STATUS;
 			}
@@ -138,22 +146,25 @@ public class Activator extends AbstractUIPlugin {
 
 	protected Module createBuilderModule(BundleContext context) {
 		String javaCorePlugin = JavaCore.PLUGIN_ID;
-		for(Bundle bundle: context.getBundles()) {
+		for (Bundle bundle : context.getBundles()) {
 			if (javaCorePlugin.equals(bundle.getSymbolicName()))
-				return new JdtBuilderModule(); 
+				return new JdtBuilderModule();
 		}
-		return new BuilderModule(); 
+		return new BuilderModule();
 	}
-	
+
 	public IPath getBuilderStateLocation() {
 		IPath stateLocation = getStateLocation();
 		IPath result = stateLocation.append(BUILDER_STATE);
 		return result;
 	}
-	
+
 	@Override
 	public void stop(BundleContext context) throws Exception {
 		super.stop(context);
+		if (!listensToWorkbenchShutDown) {
+			saveBuilderState(getInjector().getInstance(IBuilderState.class));
+		}
 		INSTANCE = null;
 	}
 }

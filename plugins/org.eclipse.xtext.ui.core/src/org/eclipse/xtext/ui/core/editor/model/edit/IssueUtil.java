@@ -9,11 +9,9 @@ package org.eclipse.xtext.ui.core.editor.model.edit;
 
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.jface.text.source.Annotation;
-import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.ui.texteditor.MarkerUtilities;
 import org.eclipse.xtext.ui.core.MarkerUtil;
-import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.validation.XtextAnnotation;
 import org.eclipse.xtext.validation.Issue;
 
@@ -50,7 +48,7 @@ public class IssueUtil {
 		return issue;
 	}
 	
-	public Issue getIssueFromAnnotation(Annotation annotation, IAnnotationModel amodel, IXtextDocument document) {
+	public Issue getIssueFromAnnotation(Annotation annotation) {
 		if (annotation instanceof XtextAnnotation) {
 			XtextAnnotation xtextAnnotation = (XtextAnnotation) annotation;
 			return xtextAnnotation.getIssue();
