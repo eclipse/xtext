@@ -15,22 +15,28 @@ import org.eclipse.emf.ecore.EReference;
  */
 public interface IReferenceDescription {
 	/**
-	 * @return the URI pointing to the source EObject 
+	 * @return the URI pointing to the source {@link org.eclipse.emf.ecore.EObject}
 	 */
 	URI getSourceEObjectUri();
-	
+
 	/**
-	 * @return the URI pointing to the target EObject 
+	 * @return the URI pointing to the target {@link org.eclipse.emf.ecore.EObject}
 	 */
 	URI getTargetEObjectUri();
-	
+
 	/**
 	 * @return the index of the reference, if the reference isMultiple, -1 if it is a single value reference
 	 */
 	int getIndexInList();
-	
+
 	/**
 	 * @return the {@link EReference}
 	 */
 	EReference getEReference();
+
+	/**
+	 * @return the URI pointing to the exported {@link org.eclipse.emf.ecore.EObject} containing this reference. 
+	 * 		   This can be the EObject defining the reference or one of its containers.
+	 */
+	URI getContainerEObjectURI();
 }

@@ -53,5 +53,6 @@
         defaultValueLiteral="-1"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="externalFormOfEReference"
         eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="containerEObjectURI" eType="#//EURI"/>
   </eClassifiers>
 </ecore:EPackage>

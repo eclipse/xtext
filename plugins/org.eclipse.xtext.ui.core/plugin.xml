@@ -2,8 +2,7 @@
 <?eclipse version="3.2"?>
 <plugin>
    <extension-point id="searchFilter" name="Xtext EObject Search Filter" schema="schema/searchFilter.exsd"/>
-   <extension
-         point="org.eclipse.ui.keywords">
+   <extension point="org.eclipse.ui.keywords">
       <keyword
             id="org.eclipse.xtext.keyword.editor"
             label="Editor">
@@ -13,8 +12,7 @@
             label="Syntax">
       </keyword>
    </extension>
-  <extension
-         point="org.eclipse.ui.handlers">
+  <extension point="org.eclipse.ui.handlers">
       <handler
             class="org.eclipse.xtext.ui.core.editor.handler.ContentAssistHandler"
             commandId="org.eclipse.ui.edit.text.contentAssist.proposals">
@@ -25,8 +23,7 @@
          </activeWhen>
       </handler>
    </extension>
-   <extension
-         point="org.eclipse.core.expressions.definitions">
+   <extension point="org.eclipse.core.expressions.definitions">
       <definition
             id="isActiveEditorAnInstanceOfXtextEditor">
          <with
@@ -38,8 +35,7 @@
       </definition>
    </extension>
    
-   <extension
-         point="org.eclipse.ui.menus">
+   <extension point="org.eclipse.ui.menus">
         <menuContribution
             locationURI="popup:#TextEditorContext?after=group.edit">
          <command commandId="org.eclipse.ui.edit.text.contentAssist.proposals"
@@ -238,4 +234,50 @@
          <context type="org.eclipse.xtext.ui.editor.model.IEditorModel"/>
       </target>
    </extension-->
+   
+   <!-- open Xtext element -->
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.eclipse.ui.category.window"
+            description="Open the declaration of an Xtext element"
+            id="org.eclipse.xtext.ui.core.search.OpenXtextElementCommand"
+            name="Open Xtext Element">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="org.eclipse.xtext.ui.core.search.OpenXtextElementCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+SHIFT+Z">
+      </key>
+   </extension>
+   
+   	<!-- find references -->
+	<extension point="org.eclipse.ui.commands">
+		<command 
+			id="org.eclipse.xtext.ui.core.editor.FindReferences"
+			name="Find References"
+			description="Finds all references to the selected element">
+		</command>
+	</extension>
+	<extension point="org.eclipse.ui.bindings">
+		<key
+			contextId="org.eclipse.xtext.ui.core.XtextEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M1+SHIFT+G"
+			commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+		</key>
+	</extension>
+	
+	<!-- resource service providers -->
+	<extension
+	      point="org.eclipse.xtext.extension_resourceServiceProvider">
+    <resourceServiceProvider
+          class="org.eclipse.xtext.ui.core.resource.ecore.EcoreResourceUIServiceProviderImpl"
+          uriExtension="ecore">
+    </resourceServiceProvider>
+	</extension>
 </plugin>

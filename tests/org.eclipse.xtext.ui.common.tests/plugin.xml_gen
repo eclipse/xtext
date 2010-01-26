@@ -109,6 +109,22 @@
          </command>  
          </menuContribution>
     </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.XtextGrammarUiTestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>   
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.XtextGrammarUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceUIServiceProvider"
+            uriExtension="xtextgrammaruitestlanguage">
+        </resourceServiceProvider>
+    </extension>
 
 <!-- adding resource factories -->
 
@@ -119,13 +135,6 @@
 			type="xtextgrammaruitestlanguage">
 		</parser>
 	</extension>
-	<extension
-        point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="org.eclipse.xtext.XtextGrammarUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
-           uriExtension="xtextgrammaruitestlanguage">
-     </resourceServiceProvider>
-  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -234,6 +243,22 @@
          </command>  
          </menuContribution>
     </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.linking.ImportUriUiTestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>   
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.linking.ImportUriUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceUIServiceProvider"
+            uriExtension="importuriuitestlanguage">
+        </resourceServiceProvider>
+    </extension>
 
 <!-- adding resource factories -->
 
@@ -244,13 +269,6 @@
 			type="importuriuitestlanguage">
 		</parser>
 	</extension>
-	<extension
-        point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="org.eclipse.xtext.linking.ImportUriUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
-           uriExtension="importuriuitestlanguage">
-     </resourceServiceProvider>
-  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -359,6 +377,22 @@
          </command>  
          </menuContribution>
     </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>   
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceUIServiceProvider"
+            uriExtension="twocontextstestlanguage">
+        </resourceServiceProvider>
+    </extension>
 
 <!-- adding resource factories -->
 
@@ -369,13 +403,6 @@
 			type="twocontextstestlanguage">
 		</parser>
 	</extension>
-	<extension
-        point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
-           uriExtension="twocontextstestlanguage">
-     </resourceServiceProvider>
-  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -484,6 +511,22 @@
          </command>  
          </menuContribution>
     </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.ui.common.editor.contentassist.Bug286935TestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>   
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.common.editor.contentassist.Bug286935TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceUIServiceProvider"
+            uriExtension="bug286935testlanguage">
+        </resourceServiceProvider>
+    </extension>
 
 <!-- adding resource factories -->
 
@@ -494,13 +537,6 @@
 			type="bug286935testlanguage">
 		</parser>
 	</extension>
-	<extension
-        point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="org.eclipse.xtext.ui.common.editor.contentassist.Bug286935TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
-           uriExtension="bug286935testlanguage">
-     </resourceServiceProvider>
-  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -609,6 +645,22 @@
          </command>  
          </menuContribution>
     </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>   
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceUIServiceProvider"
+            uriExtension="bug287941testlanguage">
+        </resourceServiceProvider>
+    </extension>
 
 <!-- adding resource factories -->
 
@@ -619,13 +671,6 @@
 			type="bug287941testlanguage">
 		</parser>
 	</extension>
-	<extension
-        point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
-           uriExtension="bug287941testlanguage">
-     </resourceServiceProvider>
-  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -734,6 +779,22 @@
          </command>  
          </menuContribution>
     </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.ui.common.editor.contentassist.Bug288734TestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>   
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.common.editor.contentassist.Bug288734TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceUIServiceProvider"
+            uriExtension="bug288734testlanguage">
+        </resourceServiceProvider>
+    </extension>
 
 <!-- adding resource factories -->
 
@@ -744,13 +805,6 @@
 			type="bug288734testlanguage">
 		</parser>
 	</extension>
-	<extension
-        point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="org.eclipse.xtext.ui.common.editor.contentassist.Bug288734TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
-           uriExtension="bug288734testlanguage">
-     </resourceServiceProvider>
-  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -859,6 +913,22 @@
          </command>  
          </menuContribution>
     </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.ui.common.editor.contentassist.Bug288760TestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>   
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.common.editor.contentassist.Bug288760TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceUIServiceProvider"
+            uriExtension="bug288760testlanguage">
+        </resourceServiceProvider>
+    </extension>
 
 <!-- adding resource factories -->
 
@@ -869,13 +939,6 @@
 			type="bug288760testlanguage">
 		</parser>
 	</extension>
-	<extension
-        point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="org.eclipse.xtext.ui.common.editor.contentassist.Bug288760TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
-           uriExtension="bug288760testlanguage">
-     </resourceServiceProvider>
-  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -984,6 +1047,22 @@
          </command>  
          </menuContribution>
     </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.ui.common.editor.contentassist.Bug289187TestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>   
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.common.editor.contentassist.Bug289187TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceUIServiceProvider"
+            uriExtension="bug289187testlanguage">
+        </resourceServiceProvider>
+    </extension>
 
 <!-- adding resource factories -->
 
@@ -994,13 +1073,6 @@
 			type="bug289187testlanguage">
 		</parser>
 	</extension>
-	<extension
-        point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="org.eclipse.xtext.ui.common.editor.contentassist.Bug289187TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
-           uriExtension="bug289187testlanguage">
-     </resourceServiceProvider>
-  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -1109,6 +1181,22 @@
          </command>  
          </menuContribution>
     </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.ui.common.editor.contentassist.Bug291022TestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>   
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.common.editor.contentassist.Bug291022TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceUIServiceProvider"
+            uriExtension="bug291022testlanguage">
+        </resourceServiceProvider>
+    </extension>
 
 <!-- adding resource factories -->
 
@@ -1119,13 +1207,6 @@
 			type="bug291022testlanguage">
 		</parser>
 	</extension>
-	<extension
-        point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="org.eclipse.xtext.ui.common.editor.contentassist.Bug291022TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
-           uriExtension="bug291022testlanguage">
-     </resourceServiceProvider>
-  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -1234,6 +1315,22 @@
          </command>  
          </menuContribution>
     </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.ui.common.editor.contentassist.ContentAssistContextTestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>   
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.common.editor.contentassist.ContentAssistContextTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceUIServiceProvider"
+            uriExtension="contentassistcontexttestlanguage">
+        </resourceServiceProvider>
+    </extension>
 
 <!-- adding resource factories -->
 
@@ -1244,13 +1341,6 @@
 			type="contentassistcontexttestlanguage">
 		</parser>
 	</extension>
-	<extension
-        point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="org.eclipse.xtext.ui.common.editor.contentassist.ContentAssistContextTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
-           uriExtension="contentassistcontexttestlanguage">
-     </resourceServiceProvider>
-  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -1359,6 +1449,22 @@
          </command>  
          </menuContribution>
     </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.ui.common.editor.contentassist.CrossReferenceProposalTestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>   
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.common.editor.contentassist.CrossReferenceProposalTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceUIServiceProvider"
+            uriExtension="crossreferenceproposaltestlanguage">
+        </resourceServiceProvider>
+    </extension>
 
 <!-- adding resource factories -->
 
@@ -1369,13 +1475,6 @@
 			type="crossreferenceproposaltestlanguage">
 		</parser>
 	</extension>
-	<extension
-        point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="org.eclipse.xtext.ui.common.editor.contentassist.CrossReferenceProposalTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
-           uriExtension="crossreferenceproposaltestlanguage">
-     </resourceServiceProvider>
-  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -1484,6 +1583,22 @@
          </command>  
          </menuContribution>
     </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.ui.common.editor.contentassist.DatatypeRuleTestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>   
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.common.editor.contentassist.DatatypeRuleTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceUIServiceProvider"
+            uriExtension="datatyperuletestlanguage">
+        </resourceServiceProvider>
+    </extension>
 
 <!-- adding resource factories -->
 
@@ -1494,13 +1609,6 @@
 			type="datatyperuletestlanguage">
 		</parser>
 	</extension>
-	<extension
-        point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="org.eclipse.xtext.ui.common.editor.contentassist.DatatypeRuleTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
-           uriExtension="datatyperuletestlanguage">
-     </resourceServiceProvider>
-  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -1609,6 +1717,22 @@
          </command>  
          </menuContribution>
     </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>   
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceUIServiceProvider"
+            uriExtension="lookaheadcontentassisttestlanguage">
+        </resourceServiceProvider>
+    </extension>
 
 <!-- adding resource factories -->
 
@@ -1619,13 +1743,6 @@
 			type="lookaheadcontentassisttestlanguage">
 		</parser>
 	</extension>
-	<extension
-        point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
-           uriExtension="lookaheadcontentassisttestlanguage">
-     </resourceServiceProvider>
-  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -1734,6 +1851,22 @@
          </command>  
          </menuContribution>
     </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.ui.common.editor.contentassist.DomainModelTestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>   
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.common.editor.contentassist.DomainModelTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceUIServiceProvider"
+            uriExtension="domainmodeltestlanguage">
+        </resourceServiceProvider>
+    </extension>
 
 <!-- adding resource factories -->
 
@@ -1744,13 +1877,6 @@
 			type="domainmodeltestlanguage">
 		</parser>
 	</extension>
-	<extension
-        point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="org.eclipse.xtext.ui.common.editor.contentassist.DomainModelTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
-           uriExtension="domainmodeltestlanguage">
-     </resourceServiceProvider>
-  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -1859,6 +1985,22 @@
          </command>  
          </menuContribution>
     </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.parser.keywords.KeywordsUiTestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>   
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.parser.keywords.KeywordsUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceUIServiceProvider"
+            uriExtension="keywordsuitestlanguage">
+        </resourceServiceProvider>
+    </extension>
 
 <!-- adding resource factories -->
 
@@ -1869,13 +2011,6 @@
 			type="keywordsuitestlanguage">
 		</parser>
 	</extension>
-	<extension
-        point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="org.eclipse.xtext.parser.keywords.KeywordsUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
-           uriExtension="keywordsuitestlanguage">
-     </resourceServiceProvider>
-  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -1984,6 +2119,22 @@
          </command>  
          </menuContribution>
     </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.testlanguages.ContentAssistTestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>   
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceUIServiceProvider"
+            uriExtension="contentassisttestlanguage">
+        </resourceServiceProvider>
+    </extension>
 
 <!-- adding resource factories -->
 
@@ -1994,13 +2145,6 @@
 			type="contentassisttestlanguage">
 		</parser>
 	</extension>
-	<extension
-        point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
-           uriExtension="contentassisttestlanguage">
-     </resourceServiceProvider>
-  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -2109,6 +2253,22 @@
          </command>  
          </menuContribution>
     </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.testlanguages.ReferenceGrammarUiTestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>   
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.testlanguages.ReferenceGrammarUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceUIServiceProvider"
+            uriExtension="referencegrammaruitestlanguage">
+        </resourceServiceProvider>
+    </extension>
 
 <!-- adding resource factories -->
 
@@ -2119,13 +2279,6 @@
 			type="referencegrammaruitestlanguage">
 		</parser>
 	</extension>
-	<extension
-        point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="org.eclipse.xtext.testlanguages.ReferenceGrammarUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
-           uriExtension="referencegrammaruitestlanguage">
-     </resourceServiceProvider>
-  </extension>
 
 
   <extension point="org.eclipse.emf.ecore.generated_package">
@@ -2234,6 +2387,22 @@
          </command>  
          </menuContribution>
     </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.enumrules.EnumRulesUiTestLanguage.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>   
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.enumrules.EnumRulesUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceUIServiceProvider"
+            uriExtension="enumrulesuitestlanguage">
+        </resourceServiceProvider>
+    </extension>
 
 <!-- adding resource factories -->
 
@@ -2244,13 +2413,6 @@
 			type="enumrulesuitestlanguage">
 		</parser>
 	</extension>
-	<extension
-        point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="org.eclipse.xtext.enumrules.EnumRulesUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
-           uriExtension="enumrulesuitestlanguage">
-     </resourceServiceProvider>
-  </extension>
 
 
 </plugin>

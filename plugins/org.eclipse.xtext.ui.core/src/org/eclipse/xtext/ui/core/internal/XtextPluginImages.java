@@ -94,6 +94,9 @@ public class XtextPluginImages {
 	public static final ImageDescriptor DESC_LINK_WITH_EDITOR_DISABLED = create(PATH_LCL_DISABLED, "synced.gif"); //$NON-NLS-1$
 	public static final ImageDescriptor DESC_ALPHAB_SORT_CO_DISABLED = create(PATH_LCL_DISABLED, "alphab_sort_co.gif"); //$NON-NLS-1$
 
+	public static final ImageDescriptor DESC_SEARCH_PREVIOUS = create(PATH_LCL, "prev_nav.gif");
+	public static final ImageDescriptor DESC_SEARCH_NEXT = create(PATH_LCL, "next_nav.gif");
+	
 	/**
 	 * WIZ
 	 */

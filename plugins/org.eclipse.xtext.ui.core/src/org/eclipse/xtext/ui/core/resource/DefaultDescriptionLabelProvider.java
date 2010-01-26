@@ -7,13 +7,16 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.resource;
 
+import java.awt.Stroke;
 import java.util.Iterator;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.jface.resource.ImageRegistry;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.swt.graphics.Image;
+import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IEditorDescriptor;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.resource.IEObjectDescription;
@@ -26,7 +29,7 @@ import com.google.inject.Inject;
  */
 public class DefaultDescriptionLabelProvider extends LabelProvider implements IDescriptionLabelProvider {
 
-	private ImageRegistry imageRegistry = new ImageRegistry();
+	private ImageRegistry imageRegistry = new ImageRegistry(Display.getDefault());
 	
 	@Inject
 	private IStorage2UriMapper storage2UriMapper;
@@ -63,7 +66,8 @@ public class DefaultDescriptionLabelProvider extends LabelProvider implements ID
 			Iterator<IStorage> storages = storage2UriMapper.getStorages(((IResourceDescription) description).getURI())
 					.iterator();
 			if (storages.hasNext()) {
-				return storages.next().toString();
+				IStorage storage = storages.next();
+				return storage.getFullPath().toString();
 			}
 		}
 		return description.toString();

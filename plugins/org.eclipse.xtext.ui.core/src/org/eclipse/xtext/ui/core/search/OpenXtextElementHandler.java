@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.search;
+package org.eclipse.xtext.ui.core.search;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.commands.AbstractHandler;
@@ -17,8 +17,6 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.ui.core.editor.IURIEditorOpener;
-import org.eclipse.xtext.ui.core.search.IXtextEObjectSearch;
-import org.eclipse.xtext.ui.core.search.XtextEObjectSearchDialog;
 
 import com.google.inject.Inject;
 

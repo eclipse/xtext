@@ -4,7 +4,6 @@
  */
 package org.eclipse.xtext;
 
-import org.eclipse.xtext.XtextRuntimeModule;
 
 /**
  * Manual modifications go to {org.eclipse.xtext.XtextUiModule}
@@ -186,6 +185,5 @@ public abstract class AbstractXtextUiModule extends XtextRuntimeModule {
 	public void configureContentAssistLexer(com.google.inject.Binder binder) {
 		binder.bind(org.eclipse.xtext.ui.common.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.core.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.contentassist.antlr.internal.InternalXtextLexer.class);
 	}
-
 
 }

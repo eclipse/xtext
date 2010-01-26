@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStatePackageImpl.java,v 1.9 2009/12/15 14:08:07 szarnekow Exp $
+ * $Id: BuilderStatePackageImpl.java,v 1.10 2010/01/26 14:27:52 jkohnlein Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -308,6 +308,15 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EAttribute getReferenceDescription_ContainerEObjectURI() {
+		return (EAttribute)referenceDescriptionEClass.getEStructuralFeatures().get(4);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getEURI() {
 		return euriEDataType;
 	}
@@ -371,6 +380,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 		createEAttribute(referenceDescriptionEClass, REFERENCE_DESCRIPTION__TARGET_EOBJECT_URI);
 		createEAttribute(referenceDescriptionEClass, REFERENCE_DESCRIPTION__INDEX_IN_LIST);
 		createEAttribute(referenceDescriptionEClass, REFERENCE_DESCRIPTION__EXTERNAL_FORM_OF_EREFERENCE);
+		createEAttribute(referenceDescriptionEClass, REFERENCE_DESCRIPTION__CONTAINER_EOBJECT_URI);
 
 		// Create data types
 		euriEDataType = createEDataType(EURI);
@@ -450,6 +460,7 @@ public class BuilderStatePackageImpl extends EPackageImpl implements BuilderStat
 		initEAttribute(getReferenceDescription_TargetEObjectUri(), this.getEURI(), "targetEObjectUri", null, 0, 1, IReferenceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getReferenceDescription_IndexInList(), ecorePackage.getEInt(), "indexInList", "-1", 0, 1, IReferenceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getReferenceDescription_ExternalFormOfEReference(), ecorePackage.getEString(), "externalFormOfEReference", null, 0, 1, IReferenceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEAttribute(getReferenceDescription_ContainerEObjectURI(), this.getEURI(), "containerEObjectURI", null, 0, 1, IReferenceDescription.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		// Initialize data types
 		initEDataType(euriEDataType, URI.class, "EURI", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

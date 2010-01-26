@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStatePackage.java,v 1.8 2009/12/07 15:38:01 sefftinge Exp $
+ * $Id: BuilderStatePackage.java,v 1.9 2010/01/26 14:27:53 jkohnlein Exp $
  */
 package org.eclipse.xtext.builder.builderState;
 
@@ -263,13 +263,22 @@ public interface BuilderStatePackage extends EPackage {
 	int REFERENCE_DESCRIPTION__EXTERNAL_FORM_OF_EREFERENCE = 3;
 
 	/**
+	 * The feature id for the '<em><b>Container EObject URI</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int REFERENCE_DESCRIPTION__CONTAINER_EOBJECT_URI = 4;
+
+	/**
 	 * The number of structural features of the '<em>Reference Description</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REFERENCE_DESCRIPTION_FEATURE_COUNT = 4;
+	int REFERENCE_DESCRIPTION_FEATURE_COUNT = 5;
 
 	/**
 	 * The meta object id for the '<em>EURI</em>' data type.
@@ -503,6 +512,17 @@ public interface BuilderStatePackage extends EPackage {
 	EAttribute getReferenceDescription_ExternalFormOfEReference();
 
 	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.resource.IReferenceDescription#getContainerEObjectURI <em>Container EObject URI</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Container EObject URI</em>'.
+	 * @see org.eclipse.xtext.resource.IReferenceDescription#getContainerEObjectURI()
+	 * @see #getReferenceDescription()
+	 * @generated
+	 */
+	EAttribute getReferenceDescription_ContainerEObjectURI();
+
+	/**
 	 * Returns the meta object for data type '{@link org.eclipse.emf.common.util.URI <em>EURI</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -704,6 +724,14 @@ public interface BuilderStatePackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute REFERENCE_DESCRIPTION__EXTERNAL_FORM_OF_EREFERENCE = eINSTANCE.getReferenceDescription_ExternalFormOfEReference();
+
+		/**
+		 * The meta object literal for the '<em><b>Container EObject URI</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute REFERENCE_DESCRIPTION__CONTAINER_EOBJECT_URI = eINSTANCE.getReferenceDescription_ContainerEObjectURI();
 
 		/**
 		 * The meta object literal for the '<em>EURI</em>' data type.

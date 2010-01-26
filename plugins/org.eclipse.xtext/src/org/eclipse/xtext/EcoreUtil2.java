@@ -19,6 +19,7 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.Set;
 
@@ -45,6 +46,8 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.resource.ClassloaderClasspathUriResolver;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.ReflectionUtil;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Heiko Behrens
@@ -455,6 +458,22 @@ public class EcoreUtil2 extends EcoreUtil {
 		EPackage ePackage = registry.getEPackage(split[0]);
 		EClass clazz = (EClass) ePackage.getEClassifier(split[1]);
 		return (EReference) clazz.getEStructuralFeature(Integer.valueOf(split[2]));
+	}
+
+	/**
+	 * @return the container hierarchy of the given eObject starting from the eObject itself.  
+	 */
+	public static LinkedList<URI> allContainerURIs(EObject eObject) {
+		final Resource resource = eObject.eResource();
+		final LinkedList<URI> allContainerURIs = Lists.newLinkedList();
+		allContainerURIs.add(EcoreUtil.getURI(eObject));
+		EObject currentContainer = eObject.eContainer();
+		while (currentContainer != null
+				&& resource == currentContainer.eResource()) {
+			allContainerURIs.add(EcoreUtil.getURI(currentContainer));
+			currentContainer = currentContainer.eContainer();
+		}
+		return allContainerURIs;
 	}
 
 }

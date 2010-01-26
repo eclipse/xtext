@@ -112,7 +112,7 @@
 	<extension
         point="org.eclipse.xtext.extension_resourceServiceProvider">
      <resourceServiceProvider
-           class="org.eclipse.xtext.example.EcoreDslExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           class="org.eclipse.xtext.example.EcoreDslExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
            uriExtension="ecoredsl">
      </resourceServiceProvider>
   </extension>

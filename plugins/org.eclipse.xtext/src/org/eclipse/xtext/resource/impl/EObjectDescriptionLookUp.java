@@ -73,7 +73,7 @@ public class EObjectDescriptionLookUp {
 		return allDescriptions;
 	}
 
-	public synchronized void setExportedObjects(List<IEObjectDescription> allDescriptions) {
+	public void setExportedObjects(List<IEObjectDescription> allDescriptions) {
 		synchronized (this) {
 			this.allDescriptions = allDescriptions;
 			this.nameToObjects = null;			

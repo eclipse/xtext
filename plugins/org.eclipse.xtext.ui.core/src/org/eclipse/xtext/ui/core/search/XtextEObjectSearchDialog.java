@@ -72,7 +72,7 @@ public class XtextEObjectSearchDialog extends ListDialog {
 				return null;
 			}
 		});
-		setLabelProvider(new EObjectDescriptionLabelProvider());
+		setLabelProvider(new GenericDescriptionLabelProvider());
 	}
 
 	@Override

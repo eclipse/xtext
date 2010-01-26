@@ -28,13 +28,6 @@
 			type="«ext»">
 		</parser>
 	</extension>
-	<extension
-        point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="«executableExtensionFactory()»:org.eclipse.xtext.resource.IResourceServiceProvider"
-           uriExtension="«ext»">
-     </resourceServiceProvider>
-  </extension>
 «ENDFOREACH»
 «ENDDEFINE»
 
