@@ -74,7 +74,7 @@ public abstract class AbstractDetailsPart extends FieldEditorPreferencePage {
 			}
 			else {
 				masterPreferenceStore.setToDefault(prefKey);
-
+				changed++;
 			}
 		}
 		if (changed > 0)
