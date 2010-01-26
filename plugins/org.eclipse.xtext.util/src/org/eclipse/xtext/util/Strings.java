@@ -29,7 +29,7 @@ public class Strings {
 	}
 
 	public static boolean equal(String literal, String name) {
-		return isEmpty(name) ? isEmpty(literal) : literal.equals(name);
+		return isEmpty(literal) ? isEmpty(name) : literal.equals(name);
 	}
 
 	public static String notNull(Object o) {

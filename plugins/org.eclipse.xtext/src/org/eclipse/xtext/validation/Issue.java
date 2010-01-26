@@ -14,7 +14,7 @@ import org.eclipse.emf.common.util.URI;
  */
 public interface Issue {
 	enum Severity {
-		WARNING, ERROR, INFO
+		INFO, WARNING, ERROR
 	}
 
 	String CODE_KEY = "CODE_KEY";
