@@ -112,7 +112,7 @@
 	<extension
         point="org.eclipse.xtext.extension_resourceServiceProvider">
      <resourceServiceProvider
-           class="org.eclipse.xtext.example.FowlerDslExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           class="org.eclipse.xtext.example.FowlerDslExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
            uriExtension="fowlerdsl">
      </resourceServiceProvider>
   </extension>

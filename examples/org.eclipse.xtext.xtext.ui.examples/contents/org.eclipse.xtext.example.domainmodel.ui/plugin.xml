@@ -112,7 +112,7 @@
 	<extension
         point="org.eclipse.xtext.extension_resourceServiceProvider">
      <resourceServiceProvider
-           class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
            uriExtension="dmodel">
      </resourceServiceProvider>
   </extension>

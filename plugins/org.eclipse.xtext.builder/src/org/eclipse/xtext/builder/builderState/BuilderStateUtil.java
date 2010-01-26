@@ -49,6 +49,7 @@ public class BuilderStateUtil {
 		description.setSourceEObjectUri(desc.getSourceEObjectUri());
 		description.setTargetEObjectUri(desc.getTargetEObjectUri());
 		description.setReference(desc.getEReference());
+		description.setContainerEObjectURI(desc.getContainerEObjectURI());
 		return description;
 	}
 

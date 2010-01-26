@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.6 2010/01/20 15:58:59 jkohnlein Exp $
+ $Id: plugin.xml,v 1.7 2010/01/26 14:27:52 jkohnlein Exp $
 -->
 
 <plugin>
@@ -105,27 +105,21 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="org.eclipse.xtext.builder.internal.GuiceAwareExtensionFactory:org.eclipse.xtext.builder.search.OpenXtextElementHandler"
-            commandId="org.eclipse.xtext.builder.search.OpenXtextElementCommand">
+            class="org.eclipse.xtext.builder.internal.GuiceAwareExtensionFactory:org.eclipse.xtext.ui.core.search.OpenXtextElementHandler"
+            commandId="org.eclipse.xtext.ui.core.search.OpenXtextElementCommand">
+      </handler>
+      <handler
+            class="org.eclipse.xtext.builder.internal.GuiceAwareExtensionFactory:org.eclipse.xtext.ui.core.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
       </handler>
    </extension>
-   <extension
-         point="org.eclipse.ui.commands">
-      <command
-            categoryId="org.eclipse.ui.category.window"
-            description="Open the declaration of an Xtext element"
-            id="org.eclipse.xtext.builder.search.OpenXtextElementCommand"
-            name="Open Xtext Element">
-      </command>
-   </extension>
-   <extension
-         point="org.eclipse.ui.bindings">
-      <key
-            commandId="org.eclipse.xtext.builder.search.OpenXtextElementCommand"
-            contextId="org.eclipse.ui.contexts.window"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="M1+SHIFT+Z">
-      </key>
-   </extension>
+ 	<extension point="org.eclipse.search.searchResultViewPages">
+    	<viewPage
+          class="org.eclipse.xtext.builder.internal.GuiceAwareExtensionFactory:org.eclipse.xtext.ui.core.editor.findrefs.ReferenceSearchViewPage"
+          icon="icons/searchpage.gif"
+          id="org.eclipse.xtext.ui.core.editor.findref.SearchViewPage"
+          searchResultClass="org.eclipse.xtext.ui.core.editor.findrefs.ReferenceSearchResult">
+    	</viewPage>
+ 	</extension>
 
 </plugin>

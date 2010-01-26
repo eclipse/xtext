@@ -92,14 +92,14 @@
 	<extension
         point="org.eclipse.xtext.extension_resourceServiceProvider">
      <resourceServiceProvider
-           class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
            uriExtension="xtext">
      </resourceServiceProvider>
   </extension>
 	<extension
         point="org.eclipse.xtext.extension_resourceServiceProvider">
      <resourceServiceProvider
-           class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
            uriExtension="xtext2">
      </resourceServiceProvider>
   </extension>
