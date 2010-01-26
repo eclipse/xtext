@@ -21,7 +21,7 @@ public class EcoreResourceServiceProviderImpl implements IResourceServiceProvide
 	}
 
 	private EcoreResourceDescriptionManager ecoreResourceDescriptionManager = new EcoreResourceDescriptionManager();
-	
+
 	public org.eclipse.xtext.resource.IResourceDescription.Manager getResourceDescriptionManager() {
 		return ecoreResourceDescriptionManager;
 	}
