@@ -30,18 +30,18 @@ public class StateBasedContainerManager implements IContainer.Manager {
 	private IAllContainersState.Provider stateProvider;
 
 	public IContainer getContainer(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
-		String root = getPackageFragmentRoot(desc, resourceDescriptions);
+		String root = internalGetContainerHandle(desc, resourceDescriptions);
 		if (root == null) {
-			log.warn("Cannot find IPackageFragmentRoot for: " + desc.getURI());
+			log.warn("Cannot find IContainer for: " + desc.getURI());
 			return IContainer.Null;
 		}
 		return createContainer(root, resourceDescriptions);
 	}
 
 	public List<IContainer> getVisibleContainers(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
-		String root = getPackageFragmentRoot(desc, resourceDescriptions);
+		String root = internalGetContainerHandle(desc, resourceDescriptions);
 		if (root == null) {
-			log.warn("Cannot find IPackageFragmentRoot for: " + desc.getURI());
+			log.warn("Cannot find IContainer for: " + desc.getURI());
 			return Collections.emptyList();
 		}
 		List<String> handles = getState(resourceDescriptions).getVisibleContainerHandles(root);
@@ -66,7 +66,7 @@ public class StateBasedContainerManager implements IContainer.Manager {
 		return result;
 	}
 
-	protected String getPackageFragmentRoot(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
+	protected String internalGetContainerHandle(IResourceDescription desc, IResourceDescriptions resourceDescriptions) {
 		return getState(resourceDescriptions).getContainerHandle(desc.getURI());
 	}
 
