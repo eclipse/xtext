@@ -31,7 +31,9 @@ public class StatefulResourceDescription extends AbstractResourceDescription {
 
 	private URI uri;
 	private ImmutableList<IEObjectDescription> exported;
-
+	private ImmutableList<IReferenceDescription> references;
+	
+	
 	public StatefulResourceDescription(IResourceDescription original) {
 		this.uri = original.getURI();
 		this.exported = ImmutableList.copyOf(Iterables.transform(original.getExportedObjects(), new Function<IEObjectDescription, IEObjectDescription>() {
@@ -50,6 +52,7 @@ public class StatefulResourceDescription extends AbstractResourceDescription {
 				return EObjectDescription.create(from.getName(), result, userData);
 			}
 		}));
+		this.references = ImmutableList.copyOf(original.getReferenceDescriptions());
 	}
 
 	@Override
@@ -62,7 +65,7 @@ public class StatefulResourceDescription extends AbstractResourceDescription {
 	}
 
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
-		throw new UnsupportedOperationException("getImportedNames()");
+		return references;
 	}
 
 	public URI getURI() {

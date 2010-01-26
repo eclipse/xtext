@@ -18,7 +18,8 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0";visibility:=reex
  org.eclipse.xtext.util,
  org.eclipse.jdt.core;bundle-version="3.4.0";resolution:=optional,
  org.eclipse.core.expressions,
- com.ibm.icu;bundle-version="4.0.1"
+ com.ibm.icu;bundle-version="4.0.1",
+ org.eclipse.search;bundle-version="3.5.100";visibility:=reexport
 Bundle-Activator: org.eclipse.xtext.ui.core.internal.Activator
 Export-Package: org.eclipse.xtext.ui.core,
  org.eclipse.xtext.ui.core.containers,
@@ -27,6 +28,7 @@ Export-Package: org.eclipse.xtext.ui.core,
  org.eclipse.xtext.ui.core.editor.autoedit,
  org.eclipse.xtext.ui.core.editor.bracketmatching,
  org.eclipse.xtext.ui.core.editor.contentassist,
+ org.eclipse.xtext.ui.core.editor.findrefs,
  org.eclipse.xtext.ui.core.editor.formatting,
  org.eclipse.xtext.ui.core.editor.handler,
  org.eclipse.xtext.ui.core.editor.hover,

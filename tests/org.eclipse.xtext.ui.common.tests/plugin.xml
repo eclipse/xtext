@@ -122,7 +122,7 @@
 	<extension
         point="org.eclipse.xtext.extension_resourceServiceProvider">
      <resourceServiceProvider
-           class="org.eclipse.xtext.XtextGrammarUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           class="org.eclipse.xtext.XtextGrammarUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
            uriExtension="xtextgrammaruitestlanguage">
      </resourceServiceProvider>
   </extension>
@@ -247,7 +247,7 @@
 	<extension
         point="org.eclipse.xtext.extension_resourceServiceProvider">
      <resourceServiceProvider
-           class="org.eclipse.xtext.linking.ImportUriUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           class="org.eclipse.xtext.linking.ImportUriUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
            uriExtension="importuriuitestlanguage">
      </resourceServiceProvider>
   </extension>
@@ -372,7 +372,7 @@
 	<extension
         point="org.eclipse.xtext.extension_resourceServiceProvider">
      <resourceServiceProvider
-           class="org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           class="org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
            uriExtension="twocontextstestlanguage">
      </resourceServiceProvider>
   </extension>
@@ -497,7 +497,7 @@
 	<extension
         point="org.eclipse.xtext.extension_resourceServiceProvider">
      <resourceServiceProvider
-           class="org.eclipse.xtext.ui.common.editor.contentassist.Bug286935TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           class="org.eclipse.xtext.ui.common.editor.contentassist.Bug286935TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
            uriExtension="bug286935testlanguage">
      </resourceServiceProvider>
   </extension>
@@ -622,7 +622,7 @@
 	<extension
         point="org.eclipse.xtext.extension_resourceServiceProvider">
      <resourceServiceProvider
-           class="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           class="org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
            uriExtension="bug287941testlanguage">
      </resourceServiceProvider>
   </extension>
@@ -747,7 +747,7 @@
 	<extension
         point="org.eclipse.xtext.extension_resourceServiceProvider">
      <resourceServiceProvider
-           class="org.eclipse.xtext.ui.common.editor.contentassist.Bug288734TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           class="org.eclipse.xtext.ui.common.editor.contentassist.Bug288734TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
            uriExtension="bug288734testlanguage">
      </resourceServiceProvider>
   </extension>
@@ -872,7 +872,7 @@
 	<extension
         point="org.eclipse.xtext.extension_resourceServiceProvider">
      <resourceServiceProvider
-           class="org.eclipse.xtext.ui.common.editor.contentassist.Bug288760TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           class="org.eclipse.xtext.ui.common.editor.contentassist.Bug288760TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
            uriExtension="bug288760testlanguage">
      </resourceServiceProvider>
   </extension>
@@ -997,7 +997,7 @@
 	<extension
         point="org.eclipse.xtext.extension_resourceServiceProvider">
      <resourceServiceProvider
-           class="org.eclipse.xtext.ui.common.editor.contentassist.Bug289187TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           class="org.eclipse.xtext.ui.common.editor.contentassist.Bug289187TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
            uriExtension="bug289187testlanguage">
      </resourceServiceProvider>
   </extension>
@@ -1122,7 +1122,7 @@
 	<extension
         point="org.eclipse.xtext.extension_resourceServiceProvider">
      <resourceServiceProvider
-           class="org.eclipse.xtext.ui.common.editor.contentassist.Bug291022TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           class="org.eclipse.xtext.ui.common.editor.contentassist.Bug291022TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
            uriExtension="bug291022testlanguage">
      </resourceServiceProvider>
   </extension>
@@ -1247,7 +1247,7 @@
 	<extension
         point="org.eclipse.xtext.extension_resourceServiceProvider">
      <resourceServiceProvider
-           class="org.eclipse.xtext.ui.common.editor.contentassist.ContentAssistContextTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           class="org.eclipse.xtext.ui.common.editor.contentassist.ContentAssistContextTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
            uriExtension="contentassistcontexttestlanguage">
      </resourceServiceProvider>
   </extension>
@@ -1372,7 +1372,7 @@
 	<extension
         point="org.eclipse.xtext.extension_resourceServiceProvider">
      <resourceServiceProvider
-           class="org.eclipse.xtext.ui.common.editor.contentassist.CrossReferenceProposalTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           class="org.eclipse.xtext.ui.common.editor.contentassist.CrossReferenceProposalTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
            uriExtension="crossreferenceproposaltestlanguage">
      </resourceServiceProvider>
   </extension>
@@ -1497,7 +1497,7 @@
 	<extension
         point="org.eclipse.xtext.extension_resourceServiceProvider">
      <resourceServiceProvider
-           class="org.eclipse.xtext.ui.common.editor.contentassist.DatatypeRuleTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           class="org.eclipse.xtext.ui.common.editor.contentassist.DatatypeRuleTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
            uriExtension="datatyperuletestlanguage">
      </resourceServiceProvider>
   </extension>
@@ -1622,7 +1622,7 @@
 	<extension
         point="org.eclipse.xtext.extension_resourceServiceProvider">
      <resourceServiceProvider
-           class="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           class="org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
            uriExtension="lookaheadcontentassisttestlanguage">
      </resourceServiceProvider>
   </extension>
@@ -1747,7 +1747,7 @@
 	<extension
         point="org.eclipse.xtext.extension_resourceServiceProvider">
      <resourceServiceProvider
-           class="org.eclipse.xtext.ui.common.editor.contentassist.DomainModelTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           class="org.eclipse.xtext.ui.common.editor.contentassist.DomainModelTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
            uriExtension="domainmodeltestlanguage">
      </resourceServiceProvider>
   </extension>
@@ -1872,7 +1872,7 @@
 	<extension
         point="org.eclipse.xtext.extension_resourceServiceProvider">
      <resourceServiceProvider
-           class="org.eclipse.xtext.parser.keywords.KeywordsUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           class="org.eclipse.xtext.parser.keywords.KeywordsUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
            uriExtension="keywordsuitestlanguage">
      </resourceServiceProvider>
   </extension>
@@ -1997,7 +1997,7 @@
 	<extension
         point="org.eclipse.xtext.extension_resourceServiceProvider">
      <resourceServiceProvider
-           class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           class="org.eclipse.xtext.testlanguages.ContentAssistTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
            uriExtension="contentassisttestlanguage">
      </resourceServiceProvider>
   </extension>
@@ -2122,7 +2122,7 @@
 	<extension
         point="org.eclipse.xtext.extension_resourceServiceProvider">
      <resourceServiceProvider
-           class="org.eclipse.xtext.testlanguages.ReferenceGrammarUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           class="org.eclipse.xtext.testlanguages.ReferenceGrammarUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
            uriExtension="referencegrammaruitestlanguage">
      </resourceServiceProvider>
   </extension>
@@ -2247,7 +2247,7 @@
 	<extension
         point="org.eclipse.xtext.extension_resourceServiceProvider">
      <resourceServiceProvider
-           class="org.eclipse.xtext.enumrules.EnumRulesUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceServiceProvider"
+           class="org.eclipse.xtext.enumrules.EnumRulesUiTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
            uriExtension="enumrulesuitestlanguage">
      </resourceServiceProvider>
   </extension>
