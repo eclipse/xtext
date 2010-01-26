@@ -13,7 +13,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
-import org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDelta;
+import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
 import org.eclipse.xtext.ui.core.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.core.notification.IStateChangeEventBroker;
@@ -57,24 +57,18 @@ public class DirtyStateAwareResourceDescriptions extends AbstractResourceDescrip
 					public IResourceDescription.Delta apply(IResourceDescription.Delta from) {
 						IResourceDescription.Delta result = from;
 						if (from.getNew() == null) {
-							result = new DefaultResourceDescriptionDelta(from.getOld(), globalDescriptions.getResourceDescription(from.getUri())) {
-								@Override
-								public boolean hasChanges() {
-									return true;
-								}
-							};
+							result = createDelta(from.getOld(), globalDescriptions.getResourceDescription(from.getUri()));
 						} else if (from.getOld() == null) {
-							result = new DefaultResourceDescriptionDelta(globalDescriptions.getResourceDescription(from.getUri()), from.getNew()) {
-								@Override
-								public boolean hasChanges() {
-									return true;
-								}
-							};
+							result = createDelta(globalDescriptions.getResourceDescription(from.getUri()), from.getNew());
 						}
 						return result;
 					}
 				}), this);
 		notifyListeners(changeEvent);
+	}
+	
+	protected IResourceDescription.Delta createDelta(IResourceDescription old, IResourceDescription _new) {
+		return new ChangedResourceDescriptionDelta(old, _new);
 	}
 	
 	public void globalDescriptionsChanged(IResourceDescription.Event event) {
