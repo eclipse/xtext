@@ -126,9 +126,16 @@ public class DefaultResourceDescription extends AbstractResourceDescription impl
 		return nameProvider;
 	}
 
+	@Override
+	public void invalidateCache() {
+		super.invalidateCache();
+		referenceDescriptions = null;
+	}
+	
 	@SuppressWarnings("unchecked")
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
 		if (referenceDescriptions == null) {
+			Iterable<IEObjectDescription> exportedObjects = getExportedObjects();
 			this.referenceDescriptions = Lists.newArrayList();
 			TreeIterator<EObject> contents = EcoreUtil.getAllProperContents(this.resource, true);
 			while (contents.hasNext()) {
@@ -143,13 +150,13 @@ public class DefaultResourceDescription extends AbstractResourceDescription impl
 								for(int i = 0;i<list.size();i++) {
 									EObject to = list.get(i);
 									if (isResolved(to)) {
-										referenceDescriptions.add(new DefaultReferenceDescription(eObject,to,eReference,i));
+										referenceDescriptions.add(new DefaultReferenceDescription(eObject,to,eReference,i, findContainerEObjectURI(eObject, exportedObjects)));
 									}
 								}
 							} else {
 								EObject to = (EObject) val;
 								if (isResolved(to)) {
-									referenceDescriptions.add(new DefaultReferenceDescription(eObject,to,eReference,-1));
+									referenceDescriptions.add(new DefaultReferenceDescription(eObject,to,eReference,-1,findContainerEObjectURI(eObject, exportedObjects)));
 								}
 							}
 						}
@@ -159,7 +166,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription impl
 		}
 		return referenceDescriptions;
 	}
-
+	
 	private boolean isResolved(EObject to) {
 		return !((InternalEObject)to).eIsProxy();
 	}

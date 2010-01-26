@@ -22,12 +22,14 @@ public class DefaultReferenceDescription implements IReferenceDescription {
 	private URI sourceEObjectUri;
 	private URI targetEObjectUri;
 	private EReference eReference;
+	private URI containerEObjectURI;
 
-	public DefaultReferenceDescription(EObject from, EObject to, EReference eReference, int i) {
+	public DefaultReferenceDescription(EObject from, EObject to, EReference eReference, int i, URI containerEObjectURI) {
 		this.sourceEObjectUri = EcoreUtil.getURI(from);
 		this.targetEObjectUri = EcoreUtil.getURI(to);
 		this.eReference = eReference;
 		this.indexInList = i;
+		this.containerEObjectURI = containerEObjectURI;
 	}
 
 	public int getIndexInList() {
@@ -44,6 +46,10 @@ public class DefaultReferenceDescription implements IReferenceDescription {
 
 	public EReference getEReference() {
 		return eReference;
+	}
+
+	public URI getContainerEObjectURI() {
+		return containerEObjectURI;
 	}
 
 }
