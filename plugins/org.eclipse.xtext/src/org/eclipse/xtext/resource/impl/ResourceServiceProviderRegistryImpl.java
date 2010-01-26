@@ -39,6 +39,8 @@ public class ResourceServiceProviderRegistryImpl implements IResourceServiceProv
 	private final InternalData data = new InternalData();
 
 	public IResourceServiceProvider getResourceServiceProvider(URI uri, String contentType) {
+		if (uri==null)
+			return null;
 		return data.getServiceProvider(uri, contentType);
 	}
 

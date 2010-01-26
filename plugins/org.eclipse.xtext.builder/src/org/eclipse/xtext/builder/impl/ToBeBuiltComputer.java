@@ -109,11 +109,15 @@ public class ToBeBuiltComputer {
 	}
 
 	protected URI getUri(IStorage file) {
-		return mapper.getUri(file);
+		URI uri = mapper.getUri(file);
+		return isValid(uri)?uri:null;
 	}
 	
 	protected boolean isValid(URI uri) {
-		return mapper.isValidUri(uri);
+		return uriValidator.isValid(uri);
 	}
+
+	@Inject
+	private UriValidator uriValidator;
 
 }
