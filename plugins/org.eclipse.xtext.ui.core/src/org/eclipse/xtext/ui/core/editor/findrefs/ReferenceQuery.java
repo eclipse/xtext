@@ -34,11 +34,14 @@ public class ReferenceQuery implements ISearchQuery {
 
 	private URI eObjectTargetURI;
 
+	private String label;
+
 	public ReferenceQuery() {
 	}
 
-	public void setEObjectTargetURI(URI eObjectTargetURI) {
+	public void init(URI eObjectTargetURI, String label) {
 		this.eObjectTargetURI = eObjectTargetURI;
+		this.label = label;
 	}
 
 	public boolean canRerun() {
@@ -50,7 +53,7 @@ public class ReferenceQuery implements ISearchQuery {
 	}
 
 	public String getLabel() {
-		return "Xtext References to " + eObjectTargetURI.toString();
+		return label;
 	}
 
 	public ISearchResult getSearchResult() {

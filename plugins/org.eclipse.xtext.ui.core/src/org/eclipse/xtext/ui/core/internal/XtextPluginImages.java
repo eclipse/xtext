@@ -97,6 +97,9 @@ public class XtextPluginImages {
 	public static final ImageDescriptor DESC_SEARCH_PREVIOUS = create(PATH_LCL, "prev_nav.gif");
 	public static final ImageDescriptor DESC_SEARCH_NEXT = create(PATH_LCL, "next_nav.gif");
 	
+	public static final ImageDescriptor DESC_EXPAND_ALL = create(PATH_LCL, "expandall.gif");
+	public static final ImageDescriptor DESC_COLLAPSE_ALL = create(PATH_LCL, "collapseall.gif");
+	
 	/**
 	 * WIZ
 	 */
