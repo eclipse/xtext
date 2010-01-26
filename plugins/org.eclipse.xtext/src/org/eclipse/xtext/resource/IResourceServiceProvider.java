@@ -23,12 +23,12 @@ import com.google.inject.ImplementedBy;
 public interface IResourceServiceProvider {
 
 	/**
-	 * @return the resource description manager for this resource service manager.
+	 *@return the resource description manager for this resource service manager.
 	 */
 	IResourceValidator getResourceValidator();
 
 	/**
-	 * @return the resource description manager for this resource service manager.
+	 *@return the resource description manager for this resource service manager.
 	 */
 	IResourceDescription.Manager getResourceDescriptionManager();
 
@@ -36,7 +36,7 @@ public interface IResourceServiceProvider {
 	 * @return the container manager for this resource service manager.
 	 */
 	IContainer.Manager getContainerManager();
-
+	
 	interface Registry {
 		/**
 		 * Returns the {@link IResourceServiceProvider} appropriate for the given URI. <b>Content types are not yet
