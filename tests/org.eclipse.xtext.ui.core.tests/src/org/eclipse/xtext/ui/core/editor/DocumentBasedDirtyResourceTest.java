@@ -227,7 +227,6 @@ public class DocumentBasedDirtyResourceTest extends AbstractDocumentSimulatingTe
 	}
 
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
-		fail("Unexpected call");
 		return Iterables.emptyIterable();
 	}
 	
