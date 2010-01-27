@@ -18,8 +18,12 @@ import com.google.inject.Inject;
  */
 public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvider {
 
-	@Inject
 	private IResourceServiceProvider delegate;
+	
+	@Inject
+	public DefaultResourceUIServiceProvider(IResourceServiceProvider delegate) {
+		this.delegate = delegate;
+	}
 	
 	public Manager getContainerManager() {
 		return delegate.getContainerManager();

@@ -26,7 +26,8 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 
 	public Object[] getChildren(Object parentElement) {
 		if (parentElement instanceof ReferenceSearchViewTreeNode) {
-			return Iterables.newArray(((ReferenceSearchViewTreeNode) parentElement).getChildren(), ReferenceSearchViewTreeNode.class);
+			return Iterables.newArray(((ReferenceSearchViewTreeNode) parentElement).getChildren(),
+					ReferenceSearchViewTreeNode.class);
 		}
 		return null;
 	}
@@ -46,7 +47,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 	}
 
 	public Object[] getElements(Object inputElement) {
-		if (rootElements == null) {
+		if (rootElements == null || rootElements.isEmpty()) {
 			return new Object[0];
 		}
 		return Iterables.newArray(rootElements, ReferenceSearchViewTreeNode.class);
@@ -56,23 +57,25 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 		rootElements = null;
 	}
 
-	public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
-		if (newInput instanceof ReferenceSearchResult) {
+	public void inputChanged(final Viewer viewer, Object oldInput, Object newInput) {
+		synchronized (viewer) {
 			if (rootElements != null) {
 				rootElements.clear();
 			}
-			for (IReferenceDescription referenceDescription : ((ReferenceSearchResult) newInput)
-					.getMatchingReferences()) {
-				URI containerEObjectURI = referenceDescription.getContainerEObjectURI();
-				final URI eObjectURI = (containerEObjectURI == null) ? referenceDescription.getSourceEObjectUri()
-						: containerEObjectURI;
-				IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(eObjectURI
-						.trimFragment());
-				if (resourceDescription != null) {
-					ReferenceSearchViewTreeNode resourceNode = resourceNode(resourceDescription);
-					for (IEObjectDescription eObjectDescription : resourceDescription.getExportedObjects()) {
-						if (eObjectDescription.getEObjectURI().equals(eObjectURI)) {
-							new ReferenceSearchViewTreeNode(resourceNode, eObjectURI, eObjectDescription);
+			if (newInput instanceof ReferenceSearchResult) {
+				for (IReferenceDescription referenceDescription : ((ReferenceSearchResult) newInput)
+						.getMatchingReferences()) {
+					URI containerEObjectURI = referenceDescription.getContainerEObjectURI();
+					final URI eObjectURI = (containerEObjectURI == null) ? referenceDescription.getSourceEObjectUri()
+							: containerEObjectURI;
+					IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(eObjectURI
+							.trimFragment());
+					if (resourceDescription != null) {
+						ReferenceSearchViewTreeNode resourceNode = resourceNode(resourceDescription);
+						for (IEObjectDescription eObjectDescription : resourceDescription.getExportedObjects()) {
+							if (eObjectDescription.getEObjectURI().equals(eObjectURI)) {
+								new ReferenceSearchViewTreeNode(resourceNode, eObjectURI, eObjectDescription);
+							}
 						}
 					}
 				}
@@ -90,7 +93,8 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 				return node;
 			}
 		}
-		ReferenceSearchViewTreeNode node = new ReferenceSearchViewTreeNode(null, resourceDescription.getURI(), resourceDescription);
+		ReferenceSearchViewTreeNode node = new ReferenceSearchViewTreeNode(null, resourceDescription.getURI(),
+				resourceDescription);
 		rootElements.add(node);
 		return node;
 	}

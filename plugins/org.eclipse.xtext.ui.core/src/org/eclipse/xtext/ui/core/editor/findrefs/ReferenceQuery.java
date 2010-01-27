@@ -45,7 +45,7 @@ public class ReferenceQuery implements ISearchQuery {
 	}
 
 	public boolean canRerun() {
-		return false;
+		return true;
 	}
 
 	public boolean canRunInBackground() {

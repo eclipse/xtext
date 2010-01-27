@@ -67,6 +67,8 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage, 
 	@Inject
 	private IURIEditorOpener uriEditorOpener;
 
+	private ISearchResultViewPart part;
+
 	public ReferenceSearchViewPage() {
 		showPreviousAction = new ReferenceSearchViewPageActions.ShowPrevious(this);
 		showNextAction = new ReferenceSearchViewPageActions.ShowNext(this);
@@ -83,7 +85,7 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage, 
 	}
 
 	public String getLabel() {
-		return searchResult.getLabel();
+		return searchResult == null ? "" : searchResult.getLabel();
 	}
 
 	public Object getUIState() {
@@ -104,18 +106,25 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage, 
 	}
 
 	public void setInput(ISearchResult newSearchResult, Object uiState) {
-		if (searchResult != null) {
-			searchResult.removeListener(this);
-		}
-		this.searchResult = newSearchResult;
-		this.uiState = uiState;
-		if (searchResult != null) {
-			searchResult.addListener(this);
+		synchronized (viewer) {
+			if (searchResult != null) {
+				searchResult.removeListener(this);
+			}
+			this.searchResult = newSearchResult;
+			this.uiState = uiState;
+			if (searchResult != null) {
+				searchResult.addListener(this);
+				viewer.setInput(newSearchResult);
+				if (uiState instanceof ISelection) {
+					viewer.setSelection((ISelection) uiState);
+				}
+			}
+			part.updateLabel();
 		}
 	}
 
 	public void setViewPart(ISearchResultViewPart part) {
-		// TODO Auto-generated method stub
+		this.part = part;
 	}
 
 	@Override
@@ -193,7 +202,9 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage, 
 	public void searchResultChanged(final SearchResultEvent e) {
 		Display.getDefault().asyncExec(new Runnable() {
 			public void run() {
-				viewer.setInput(e.getSearchResult());
+				synchronized (viewer) {
+					viewer.setInput(e.getSearchResult());					
+				}
 			}
 		});
 	}
