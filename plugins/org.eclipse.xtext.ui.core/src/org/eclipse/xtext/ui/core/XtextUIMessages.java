@@ -104,4 +104,6 @@ public class XtextUIMessages extends NLS {
 	public static String TaskTagInputDialog_error_noSpace;
 	
 	public static String ProblemMarkerManager_problem_marker_update_job_description;
+	
+	public static String Editor_FoldingMenu_name;
 }
