@@ -155,7 +155,6 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.scoping.ScopeTest.class);
       suite.addTestSuite(org.eclipse.xtext.scoping.ScopesTest.class);
       suite.addTestSuite(org.eclipse.xtext.scoping.impl.DeclarativeScopeProviderTest.class);
-      suite.addTestSuite(org.eclipse.xtext.scoping.impl.ProfilingTest.class);
       suite.addTestSuite(org.eclipse.xtext.scoping.impl.QualifiedNameScopeProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.scoping.impl.SimpleNameScopeProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.service.GenericModuleTest.class);
