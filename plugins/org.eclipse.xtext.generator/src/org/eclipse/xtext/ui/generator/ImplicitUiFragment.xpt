@@ -123,15 +123,18 @@
             	</visibleWhen>
 			</command>
 		</menuContribution>
-	</extension>   
-	«FOREACH modelFileExtensions AS ext-»
-	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
-        <resourceServiceProvider
-            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
-            uriExtension="«ext»">
-        </resourceServiceProvider>
-    </extension>
-    «ENDFOREACH-»
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.core.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="«name».Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>   
 «ENDDEFINE»
 
 «DEFINE addToStandaloneSetup(List[String] modelFileExtensions) FOR Grammar»«ENDDEFINE»
