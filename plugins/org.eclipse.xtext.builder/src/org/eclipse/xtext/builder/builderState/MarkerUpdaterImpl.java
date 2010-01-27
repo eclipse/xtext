@@ -24,6 +24,7 @@ import org.eclipse.xtext.ui.core.editor.validation.MarkerCreator;
 import org.eclipse.xtext.ui.core.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.validation.CheckMode;
+import org.eclipse.xtext.validation.IResourceValidator;
 import org.eclipse.xtext.validation.Issue;
 
 import com.google.common.collect.ImmutableList;
@@ -36,10 +37,10 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 
 	@Inject
 	private IResourceServiceProvider.Registry resourceServiceProviderRegistry;
-	
-	@Inject 
-	private MarkerCreator markerCreator; 
-	
+
+	@Inject
+	private MarkerCreator markerCreator;
+
 	@Inject
 	private IStorage2UriMapper mapper;
 
@@ -77,9 +78,10 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 		try {
 			IResourceServiceProvider provider = resourceServiceProviderRegistry.getResourceServiceProvider(resource
 					.getURI());
-			
-			List<Issue> list = provider.getResourceValidator().validate(resource, CheckMode.FAST_ONLY,
-					getCancelIndicator(subMonitor));
+
+			IResourceValidator resourceValidator = provider.getResourceValidator();
+			List<Issue> list = resourceValidator
+					.validate(resource, CheckMode.FAST_ONLY, getCancelIndicator(subMonitor));
 			if (monitor.isCanceled())
 				return;
 			file.deleteMarkers(MarkerTypes.FAST_VALIDATION, true, 1);
@@ -87,9 +89,8 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 				markerCreator.createMarker(issue, file, MarkerTypes.FAST_VALIDATION);
 			}
 			subMonitor.worked(1);
-			
-			list = provider.getResourceValidator().validate(resource, CheckMode.NORMAL_ONLY,
-					getCancelIndicator(monitor));
+
+			list = resourceValidator.validate(resource, CheckMode.NORMAL_ONLY, getCancelIndicator(monitor));
 			subMonitor.worked(1);
 			file.deleteMarkers(MarkerTypes.NORMAL_VALIDATION, true, 1);
 			if (subMonitor.isCanceled())
@@ -103,7 +104,7 @@ public class MarkerUpdaterImpl implements IMarkerUpdater {
 			subMonitor.done();
 		}
 	}
-	
+
 	private CancelIndicator getCancelIndicator(final IProgressMonitor monitor) {
 		return new CancelIndicator() {
 			public boolean isCanceled() {

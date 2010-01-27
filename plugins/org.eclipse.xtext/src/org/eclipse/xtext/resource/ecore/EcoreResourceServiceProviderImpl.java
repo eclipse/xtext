@@ -27,7 +27,7 @@ public class EcoreResourceServiceProviderImpl implements IResourceServiceProvide
 	}
 
 	public IResourceValidator getResourceValidator() {
-		return null;
+		return IResourceValidator.NULL;
 	}
 
 }

@@ -138,6 +138,15 @@
 			</command>
 		</menuContribution>
 	</extension>   
- 
-
+    <extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.example.Domainmodel.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>
 </plugin>

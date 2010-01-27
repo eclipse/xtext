@@ -12,4 +12,6 @@ public class ReferenceAdded extends SearchResultEvent {
 	ReferenceAdded(ISearchResult searchResult) {
 		super(searchResult);
 	}
+	
+	
 }

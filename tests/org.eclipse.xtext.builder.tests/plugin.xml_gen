@@ -62,8 +62,7 @@
         <page
             class="org.eclipse.xtext.builder.tests.BuilderTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.xtext.builder.tests.BuilderTestLanguage"
-            name="BuilderTestLanguage"
-            category="org.eclipse.xtext.languages">
+            name="BuilderTestLanguage">
             <keywordReference id="org.eclipse.xtext.builder.tests.ui.keyword_BuilderTestLanguage"/>
         </page>
         <page
@@ -119,13 +118,18 @@
             	</visibleWhen>
 			</command>
 		</menuContribution>
-	</extension>   
-	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
-        <resourceServiceProvider
-            class="org.eclipse.xtext.builder.tests.BuilderTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceUIServiceProvider"
-            uriExtension="buildertestlanguage">
-        </resourceServiceProvider>
-    </extension>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="org.eclipse.xtext.builder.tests.BuilderTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.builder.tests.BuilderTestLanguage.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>   
 
 <!-- adding resource factories -->
 
@@ -136,6 +140,12 @@
 			type="buildertestlanguage">
 		</parser>
 	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.builder.tests.BuilderTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
+            uriExtension="buildertestlanguage">
+        </resourceServiceProvider>
+    </extension>
 
 
 

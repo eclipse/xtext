@@ -52,8 +52,7 @@
         <page
             class="org.eclipse.xtext.example.FowlerDslExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.xtext.example.FowlerDsl"
-            name="FowlerDsl"
-            category="org.eclipse.xtext.languages">
+            name="FowlerDsl">
             <keywordReference id="org.eclipse.xtext.example.ui.keyword_FowlerDsl"/>
         </page>
         <page
@@ -109,13 +108,18 @@
             	</visibleWhen>
 			</command>
 		</menuContribution>
-	</extension>   
-	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
-        <resourceServiceProvider
-            class="org.eclipse.xtext.example.FowlerDslExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceUIServiceProvider"
-            uriExtension="fowlerdsl">
-        </resourceServiceProvider>
-    </extension>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="org.eclipse.xtext.example.FowlerDslExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.example.FowlerDsl.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>   
 
 <!-- adding resource factories -->
 
@@ -126,6 +130,12 @@
 			type="fowlerdsl">
 		</parser>
 	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.example.FowlerDslExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
+            uriExtension="fowlerdsl">
+        </resourceServiceProvider>
+    </extension>
 
 
 </plugin>

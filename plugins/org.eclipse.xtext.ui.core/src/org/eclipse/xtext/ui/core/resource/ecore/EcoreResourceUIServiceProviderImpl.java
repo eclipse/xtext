@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.resource.ecore;
 
+import org.eclipse.xtext.resource.ecore.EcoreResourceServiceProviderImpl;
 import org.eclipse.xtext.ui.core.resource.DefaultResourceUIServiceProvider;
 
 /**
@@ -15,6 +16,6 @@ import org.eclipse.xtext.ui.core.resource.DefaultResourceUIServiceProvider;
 public class EcoreResourceUIServiceProviderImpl extends DefaultResourceUIServiceProvider {
 
 	public EcoreResourceUIServiceProviderImpl() {
-		//setDelegate(new EcoreResourceServiceProviderImpl());
+		super(new EcoreResourceServiceProviderImpl());
 	}
 }
