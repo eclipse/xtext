@@ -13,7 +13,7 @@ import com.google.inject.Injector;
 /**
  *@generated
  */
-public class TestLanguageExecutableExtensionFactory extends AbstractGuiceAwareExecutableExtensionFactory {
+public class BmTestLanguageExecutableExtensionFactory extends AbstractGuiceAwareExecutableExtensionFactory {
 
 	@Override
 	protected Bundle getBundle() {
@@ -22,7 +22,7 @@ public class TestLanguageExecutableExtensionFactory extends AbstractGuiceAwareEx
 	
 	@Override
 	protected Injector getInjector() {
-		return org.eclipse.xtext.ui.integration.Activator.getInstance().getInjector("org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguage");
+		return org.eclipse.xtext.ui.integration.Activator.getInstance().getInjector("org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguage");
 	}
 	
 }

@@ -65,6 +65,7 @@ public class ShortCutEditStrategy implements IAutoEditStrategy, ISourceViewerAwa
 			Point range = sourceViewer.getSelectedRange();
 			try {
 				sourceViewer.getDocument().replace(range.x - longForm.length(), longForm.length(), shortcut);
+				sourceViewer.setSelectedRange(range.x - longForm.length() + shortcut.length(), 0);
 			} catch (BadLocationException e) {
 			}
 		}

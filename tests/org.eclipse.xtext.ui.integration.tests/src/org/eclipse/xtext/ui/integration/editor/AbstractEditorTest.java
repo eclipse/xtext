@@ -43,7 +43,6 @@ public abstract class AbstractEditorTest extends AbstractWorkbenchTest {
 			return (XtextEditor) openEditor;
 		}
 		else if (openEditor instanceof org.eclipse.ui.internal.ErrorEditorPart) {
-			sleep(25000);
 			fail("Could not open XtextEditor. Editor produced errors during initialization.");
 		}
 		else {

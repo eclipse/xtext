@@ -6,6 +6,6 @@ package org.eclipse.xtext.ui.integration.tests.editor.bracketmatching;
 /**
  * Use this class to register components to be used within the IDE.
  */
-public class TestLanguageUiModule extends org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.AbstractTestLanguageUiModule {
+public class BmTestLanguageRuntimeModule extends org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.AbstractBmTestLanguageRuntimeModule {
 
 }

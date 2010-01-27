@@ -6,10 +6,10 @@ package org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.parser.ant
 import java.io.InputStream;
 import org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider;
 
-public class TestLanguageAntlrTokenFileProvider implements IAntlrTokenFileProvider {
+public class BmTestLanguageAntlrTokenFileProvider implements IAntlrTokenFileProvider {
 	
 	public InputStream getAntlrTokenFile() {
 		ClassLoader classLoader = getClass().getClassLoader();
-    	return classLoader.getResourceAsStream("org/eclipse/xtext/ui/integration/tests/editor/bracketmatching/parser/antlr/internal/InternalTestLanguage.tokens");
+    	return classLoader.getResourceAsStream("org/eclipse/xtext/ui/integration/tests/editor/bracketmatching/parser/antlr/internal/InternalBmTestLanguage.tokens");
 	}
 }

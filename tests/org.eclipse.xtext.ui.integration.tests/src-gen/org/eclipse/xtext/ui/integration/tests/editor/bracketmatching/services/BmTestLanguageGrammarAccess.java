@@ -14,7 +14,7 @@ import org.eclipse.xtext.service.AbstractElementFinder.*;
 import org.eclipse.xtext.common.services.TerminalsGrammarAccess;
 
 @Singleton
-public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
+public class BmTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	
 	
 	public class FileElements extends AbstractParserRuleElementFinder {
@@ -181,7 +181,7 @@ public class TestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 	private TerminalsGrammarAccess gaTerminals;
 
 	@Inject
-	public TestLanguageGrammarAccess(GrammarProvider grammarProvider,
+	public BmTestLanguageGrammarAccess(GrammarProvider grammarProvider,
 		TerminalsGrammarAccess gaTerminals) {
 		this.grammarProvider = grammarProvider;
 		this.gaTerminals = gaTerminals;

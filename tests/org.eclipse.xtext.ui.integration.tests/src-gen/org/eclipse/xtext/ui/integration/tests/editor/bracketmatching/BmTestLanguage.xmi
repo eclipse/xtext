@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="ASCII"?>
 <xmi:XMI xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" xmlns:xtext="http://www.eclipse.org/2008/Xtext">
-  <xtext:Grammar name="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguage" usedGrammars="/1">
+  <xtext:Grammar name="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguage" usedGrammars="/1">
     <metamodelDeclarations xsi:type="xtext:GeneratedMetamodel" name="bracketmatching">
       <ePackage href="http://xtext.org/ui/integartion/tests/bracketmatching#/"/>
     </metamodelDeclarations>

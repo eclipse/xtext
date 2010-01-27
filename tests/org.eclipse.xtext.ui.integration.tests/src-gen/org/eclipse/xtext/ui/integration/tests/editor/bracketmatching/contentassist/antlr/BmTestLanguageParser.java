@@ -15,18 +15,18 @@ import org.eclipse.xtext.ui.common.editor.contentassist.antlr.internal.AbstractI
 
 import com.google.inject.Inject;
 
-import org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.services.TestLanguageGrammarAccess;
+import org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.services.BmTestLanguageGrammarAccess;
 
-public class TestLanguageParser extends AbstractContentAssistParser {
+public class BmTestLanguageParser extends AbstractContentAssistParser {
 	
 	@Inject
-	private TestLanguageGrammarAccess grammarAccess;
+	private BmTestLanguageGrammarAccess grammarAccess;
 	
 	private Map<AbstractElement, String> nameMappings;
 	
 	@Override
-	protected org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.contentassist.antlr.internal.InternalTestLanguageParser createParser() {
-		org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.contentassist.antlr.internal.InternalTestLanguageParser result = new org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.contentassist.antlr.internal.InternalTestLanguageParser(null);
+	protected org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.contentassist.antlr.internal.InternalBmTestLanguageParser createParser() {
+		org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.contentassist.antlr.internal.InternalBmTestLanguageParser result = new org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.contentassist.antlr.internal.InternalBmTestLanguageParser(null);
 		result.setGrammarAccess(grammarAccess);
 		return result;
 	}
@@ -57,7 +57,7 @@ public class TestLanguageParser extends AbstractContentAssistParser {
 	@Override
 	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
 		try {
-			org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.contentassist.antlr.internal.InternalTestLanguageParser typedParser = (org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.contentassist.antlr.internal.InternalTestLanguageParser) parser;
+			org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.contentassist.antlr.internal.InternalBmTestLanguageParser typedParser = (org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.contentassist.antlr.internal.InternalBmTestLanguageParser) parser;
 			typedParser.entryRuleFile();
 			return typedParser.getFollowElements();
 		} catch(RecognitionException ex) {
@@ -70,11 +70,11 @@ public class TestLanguageParser extends AbstractContentAssistParser {
 		return new String[] { "RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT" };
 	}
 	
-	public TestLanguageGrammarAccess getGrammarAccess() {
+	public BmTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
 	
-	public void setGrammarAccess(TestLanguageGrammarAccess grammarAccess) {
+	public void setGrammarAccess(BmTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
 }

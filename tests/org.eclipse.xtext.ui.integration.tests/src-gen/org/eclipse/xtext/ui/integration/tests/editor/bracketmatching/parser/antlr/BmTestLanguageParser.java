@@ -11,19 +11,19 @@ import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 
 import com.google.inject.Inject;
 
-import org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.services.TestLanguageGrammarAccess;
+import org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.services.BmTestLanguageGrammarAccess;
 
-public class TestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
+public class BmTestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractAntlrParser {
 	
 	@Inject
-	private TestLanguageGrammarAccess grammarAccess;
+	private BmTestLanguageGrammarAccess grammarAccess;
 	
 	@Override
 	protected IParseResult parse(String ruleName, ANTLRInputStream in) {
 		TokenSource tokenSource = createLexer(in);
 		XtextTokenStream tokenStream = createTokenStream(tokenSource);
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
-		org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.parser.antlr.internal.InternalTestLanguageParser parser = createParser(tokenStream);
+		org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.parser.antlr.internal.InternalBmTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		try {
 			if(ruleName != null)
@@ -34,8 +34,8 @@ public class TestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractA
 		}
 	}
 	
-	protected org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.parser.antlr.internal.InternalTestLanguageParser createParser(XtextTokenStream stream) {
-		return new org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.parser.antlr.internal.InternalTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
+	protected org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.parser.antlr.internal.InternalBmTestLanguageParser createParser(XtextTokenStream stream) {
+		return new org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.parser.antlr.internal.InternalBmTestLanguageParser(stream, getElementFactory(), getGrammarAccess());
 	}
 	
 	@Override 
@@ -43,11 +43,11 @@ public class TestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractA
 		return "File";
 	}
 	
-	public TestLanguageGrammarAccess getGrammarAccess() {
+	public BmTestLanguageGrammarAccess getGrammarAccess() {
 		return this.grammarAccess;
 	}
 	
-	public void setGrammarAccess(TestLanguageGrammarAccess grammarAccess) {
+	public void setGrammarAccess(BmTestLanguageGrammarAccess grammarAccess) {
 		this.grammarAccess = grammarAccess;
 	}
 	

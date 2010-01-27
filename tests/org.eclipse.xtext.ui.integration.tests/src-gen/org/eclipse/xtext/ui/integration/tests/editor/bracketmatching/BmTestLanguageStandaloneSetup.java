@@ -10,10 +10,10 @@ import com.google.inject.Injector;
 /**
  * Generated from StandaloneSetup.xpt!
  */
-public class TestLanguageStandaloneSetup implements ISetup {
+public class BmTestLanguageStandaloneSetup implements ISetup {
 
 	public static void doSetup() {
-		new TestLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
+		new BmTestLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
 	}
 
 	public Injector createInjectorAndDoEMFRegistration() {
@@ -25,7 +25,7 @@ public class TestLanguageStandaloneSetup implements ISetup {
 	}
 	
 	public Injector createInjector() {
-		return Guice.createInjector(new org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguageRuntimeModule());
+		return Guice.createInjector(new org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguageRuntimeModule());
 	}
 	
 	public void register(Injector injector) {
@@ -35,8 +35,8 @@ public class TestLanguageStandaloneSetup implements ISetup {
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
-		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("testlanguage", resourceFactory);
-		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("testlanguage", serviceProvider);
+		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("bmtestlanguage", resourceFactory);
+		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("bmtestlanguage", serviceProvider);
 		
 
 

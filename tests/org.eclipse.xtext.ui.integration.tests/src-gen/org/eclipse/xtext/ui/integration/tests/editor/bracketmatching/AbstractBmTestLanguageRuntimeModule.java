@@ -11,41 +11,41 @@ import com.google.inject.Binder;
 import com.google.inject.name.Names;
 
 /**
- * Manual modifications go to {org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguageRuntimeModule}
+ * Manual modifications go to {org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguageRuntimeModule}
  */
-public abstract class AbstractTestLanguageRuntimeModule extends DefaultRuntimeModule {
+public abstract class AbstractBmTestLanguageRuntimeModule extends DefaultRuntimeModule {
 	
 	@Override
 	public void configure(Binder binder) {
 		super.configure(binder);
 		binder.bind(String.class).annotatedWith(Names.named(Constants.LANGUAGE_NAME)).toInstance(
-			"org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguage");
+			"org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguage");
 		bindProperties(binder);
 	}
 	
 	protected void bindProperties(Binder binder) {
-		bindProperties(binder, "org/eclipse/xtext/ui/integration/tests/editor/bracketmatching/TestLanguage.properties");
+		bindProperties(binder, "org/eclipse/xtext/ui/integration/tests/editor/bracketmatching/BmTestLanguage.properties");
 	}
 	
 	
 	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
 	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
-		return org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.services.TestLanguageGrammarAccess.class;
+		return org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.services.BmTestLanguageGrammarAccess.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
 	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.parseTreeConstruction.TestLanguageParsetreeConstructor.class;
+		return org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.parseTreeConstruction.BmTestLanguageParsetreeConstructor.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.validation.TestLanguageJavaValidator> bindTestLanguageJavaValidator() {
-		return org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.validation.TestLanguageJavaValidator.class;
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.validation.BmTestLanguageJavaValidator> bindBmTestLanguageJavaValidator() {
+		return org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.validation.BmTestLanguageJavaValidator.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
-		return org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.parser.antlr.TestLanguageParser.class;
+		return org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.parser.antlr.BmTestLanguageParser.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
@@ -55,22 +55,22 @@ public abstract class AbstractTestLanguageRuntimeModule extends DefaultRuntimeMo
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrTokenFileProvider> bindIAntlrTokenFileProvider() {
-		return org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.parser.antlr.TestLanguageAntlrTokenFileProvider.class;
+		return org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.parser.antlr.BmTestLanguageAntlrTokenFileProvider.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.Lexer> bindLexer() {
-		return org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.parser.antlr.internal.InternalTestLanguageLexer.class;
+		return org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.parser.antlr.internal.InternalBmTestLanguageLexer.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
-	public com.google.inject.Provider<org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.parser.antlr.internal.InternalTestLanguageLexer> provideInternalTestLanguageLexer() {
-		return org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.parser.antlr.internal.InternalTestLanguageLexer.class);
+	public com.google.inject.Provider<org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.parser.antlr.internal.InternalBmTestLanguageLexer> provideInternalBmTestLanguageLexer() {
+		return org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.parser.antlr.internal.InternalBmTestLanguageLexer.class);
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public void configureRuntimeLexer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME)).to(org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.parser.antlr.internal.InternalTestLanguageLexer.class);
+		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.parser.antlr.LexerBindings.RUNTIME)).to(org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.parser.antlr.internal.InternalBmTestLanguageLexer.class);
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment

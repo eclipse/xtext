@@ -46,7 +46,11 @@ public abstract class AbstractBracketMatcher implements IBracketMatcher {
 		if (state.getContents().isEmpty()) 
 			return null;
 		CompositeNode rootNode = NodeUtil.getRootNode(state.getContents().get(0));
+		if (rootNode==null)
+			return null;
 		AbstractNode node = NodeUtil.findLeafNodeAtOffset(rootNode, offset);
+		if (node==null)
+			return null;
 		AbstractElement element = findElement(node, getPairs());
 		boolean forwardSearch = true;
 		if (element == null) {

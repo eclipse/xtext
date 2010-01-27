@@ -3,10 +3,10 @@
 */
 package org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.contentassist;
 
-import org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.contentassist.AbstractTestLanguageProposalProvider;
+import org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.contentassist.AbstractBmTestLanguageProposalProvider;
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */
-public class TestLanguageProposalProvider extends AbstractTestLanguageProposalProvider {
+public class BmTestLanguageProposalProvider extends AbstractBmTestLanguageProposalProvider {
 
 }

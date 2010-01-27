@@ -25,12 +25,12 @@ import org.eclipse.xtext.util.StringInputStream;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class AbstractBracketMatcherTest extends AbstractXtextTests {
+public class BracketMatcherTest extends AbstractXtextTests {
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		with(new TestLanguageStandaloneSetup());
+		with(new BmTestLanguageStandaloneSetup());
 	}
 
 	public void testMatchBracket() throws Exception {

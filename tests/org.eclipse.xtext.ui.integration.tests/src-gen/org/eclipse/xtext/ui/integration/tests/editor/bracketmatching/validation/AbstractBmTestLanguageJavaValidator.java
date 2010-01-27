@@ -6,7 +6,7 @@ import java.util.List;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 
-public class AbstractTestLanguageJavaValidator extends AbstractDeclarativeValidator {
+public class AbstractBmTestLanguageJavaValidator extends AbstractDeclarativeValidator {
 
     @Override
     protected List<EPackage> getEPackages() {

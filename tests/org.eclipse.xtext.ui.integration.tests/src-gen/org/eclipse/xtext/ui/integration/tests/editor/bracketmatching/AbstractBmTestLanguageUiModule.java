@@ -4,12 +4,12 @@
  */
 package org.eclipse.xtext.ui.integration.tests.editor.bracketmatching;
 
-import org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguageRuntimeModule;
+import org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguageRuntimeModule;
 
 /**
- * Manual modifications go to {org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguageUiModule}
+ * Manual modifications go to {org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguageUiModule}
  */
-public abstract class AbstractTestLanguageUiModule extends TestLanguageRuntimeModule {
+public abstract class AbstractBmTestLanguageUiModule extends BmTestLanguageRuntimeModule {
 	
 	
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
@@ -159,7 +159,7 @@ public abstract class AbstractTestLanguageUiModule extends TestLanguageRuntimeMo
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public void configureHighlightingLexer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.core.LexerUIBindings.HIGHLIGHTING)).to(org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.parser.antlr.internal.InternalTestLanguageLexer.class);
+		binder.bind(org.eclipse.xtext.parser.antlr.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.core.LexerUIBindings.HIGHLIGHTING)).to(org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.parser.antlr.internal.InternalBmTestLanguageLexer.class);
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
@@ -169,7 +169,7 @@ public abstract class AbstractTestLanguageUiModule extends TestLanguageRuntimeMo
 
 	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment
 	public Class<? extends org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
-		return org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.contentassist.TestLanguageProposalProvider.class;
+		return org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.contentassist.BmTestLanguageProposalProvider.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
@@ -179,17 +179,17 @@ public abstract class AbstractTestLanguageUiModule extends TestLanguageRuntimeMo
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.common.editor.contentassist.antlr.IContentAssistParser> bindIContentAssistParser() {
-		return org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.contentassist.antlr.TestLanguageParser.class;
+		return org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.contentassist.antlr.BmTestLanguageParser.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public void configureContentAssistLexerProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.contentassist.antlr.internal.InternalTestLanguageLexer.class).toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.contentassist.antlr.internal.InternalTestLanguageLexer.class));
+		binder.bind(org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.contentassist.antlr.internal.InternalBmTestLanguageLexer.class).toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.contentassist.antlr.internal.InternalBmTestLanguageLexer.class));
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public void configureContentAssistLexer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.ui.common.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.core.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.contentassist.antlr.internal.InternalTestLanguageLexer.class);
+		binder.bind(org.eclipse.xtext.ui.common.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.core.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.contentassist.antlr.internal.InternalBmTestLanguageLexer.class);
 	}
 
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment

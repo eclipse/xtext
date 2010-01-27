@@ -1,7 +1,7 @@
 package org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.validation;
  
 
-public class TestLanguageJavaValidator extends AbstractTestLanguageJavaValidator {
+public class BmTestLanguageJavaValidator extends AbstractBmTestLanguageJavaValidator {
 
 //	@Check
 //	public void checkTypeNameStartsWithCapital(Type type) {

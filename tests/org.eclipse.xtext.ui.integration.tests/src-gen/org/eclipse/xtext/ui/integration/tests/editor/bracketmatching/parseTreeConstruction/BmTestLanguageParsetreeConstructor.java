@@ -8,17 +8,17 @@ import org.eclipse.xtext.*;
 import org.eclipse.xtext.parsetree.reconstr.IInstanceDescription;
 import org.eclipse.xtext.parsetree.reconstr.impl.AbstractParseTreeConstructor;
 
-import org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.services.TestLanguageGrammarAccess;
+import org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.services.BmTestLanguageGrammarAccess;
 
 import com.google.inject.Inject;
 
-public class TestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
+public class BmTestLanguageParsetreeConstructor extends AbstractParseTreeConstructor {
 		
 	@Inject
-	private TestLanguageGrammarAccess grammarAccess;
+	private BmTestLanguageGrammarAccess grammarAccess;
 	
 	@Override	
-	public TestLanguageGrammarAccess getGrammarAccess() {
+	public BmTestLanguageGrammarAccess getGrammarAccess() {
 		return grammarAccess;
 	}
 

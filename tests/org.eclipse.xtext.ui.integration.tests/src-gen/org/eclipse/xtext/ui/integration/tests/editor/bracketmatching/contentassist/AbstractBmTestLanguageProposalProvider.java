@@ -15,9 +15,9 @@ import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
  * Methods are dynamically dispatched on the first parameter, i.e., you can override them 
  * with a more concrete subtype. 
  */
-public class AbstractTestLanguageProposalProvider extends TerminalsProposalProvider {
+public class AbstractBmTestLanguageProposalProvider extends TerminalsProposalProvider {
 		
-	private final static Logger logger = Logger.getLogger(AbstractTestLanguageProposalProvider.class);
+	private final static Logger logger = Logger.getLogger(AbstractBmTestLanguageProposalProvider.class);
 	
 	public void completeFile_Expression(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		if (logger.isDebugEnabled()) {
