@@ -23,7 +23,7 @@ import com.google.inject.ImplementedBy;
 public interface IResourceServiceProvider {
 
 	/**
-	 *@return the resource description manager for this resource service manager.
+	 *@return the resource description manager for this resource service manager. Not null.
 	 */
 	IResourceValidator getResourceValidator();
 

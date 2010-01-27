@@ -134,9 +134,9 @@ public class DefaultResourceDescription extends AbstractResourceDescription impl
 	
 	@SuppressWarnings("unchecked")
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
-		if (referenceDescriptions == null) {
+		if (this.referenceDescriptions == null) {
 			Iterable<IEObjectDescription> exportedObjects = getExportedObjects();
-			this.referenceDescriptions = Lists.newArrayList();
+			List<IReferenceDescription> referenceDescriptions = Lists.newArrayList();
 			TreeIterator<EObject> contents = EcoreUtil.getAllProperContents(this.resource, true);
 			while (contents.hasNext()) {
 				EObject eObject = contents.next();
@@ -163,6 +163,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription impl
 					}
 				}
 			}
+			this.referenceDescriptions = referenceDescriptions;
 		}
 		return referenceDescriptions;
 	}
