@@ -40,7 +40,7 @@ public abstract class AbstractWorkbenchTest extends TestCase {
 		if (PlatformUI.getWorkbench().getIntroManager().getIntro() != null) {
 			PlatformUI.getWorkbench().getIntroManager().closeIntro(
 					PlatformUI.getWorkbench().getIntroManager().getIntro());
-			sleep(2000L);
+//			sleep(2000L);
 		}
 	}
 

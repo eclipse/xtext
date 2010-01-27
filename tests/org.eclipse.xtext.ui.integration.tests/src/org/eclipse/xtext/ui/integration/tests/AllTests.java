@@ -18,6 +18,8 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.core.util.JdtClasspathUriResolverTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.util.JdtUtilTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.core.util.WorkspaceClasspathUriResolverTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.integration.tests.editor.autoedit.AutoEditTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BracketMatcherTest.class);
       return suite;
    }
 }

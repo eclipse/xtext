@@ -29,17 +29,21 @@ public class SameTerminalsEditStrategy extends AbstractEditStrategy {
 				int count = count(terminal, getTextToScan(document));
 				if (count % 2 == 0) {
 					// closing terminal
-					if (terminal.equals(document.get(command.offset, terminal.length()))) {
-						command.text = terminal;
-						command.length = 1;
-						command.caretOffset = command.offset + 1;
-						command.shiftsCaret = false;
-					} else {
-						command.text = terminal+terminal;
-						command.length = 0;
-						command.caretOffset = command.offset + 1;
-						command.shiftsCaret = false;
+					try {
+						if (terminal.equals(document.get(command.offset, terminal.length()))) {
+							command.text = terminal;
+							command.length = 1;
+							command.caretOffset = command.offset + 1;
+							command.shiftsCaret = false;
+							return;
+						}
+					} catch (BadLocationException e) {
+						//ignore
 					}
+					command.text = terminal + terminal;
+					command.length = 0;
+					command.caretOffset = command.offset + 1;
+					command.shiftsCaret = false;
 				}
 			}
 			if (command.text.equals("") && document.get(command.offset, 2).equals(terminal + terminal)) {

@@ -62,8 +62,7 @@
         <page
             class="org.eclipse.xtext.ui.integration.TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.xtext.ui.integration.TestLanguage"
-            name="TestLanguage"
-            category="org.eclipse.xtext.languages">
+            name="TestLanguage">
             <keywordReference id="org.eclipse.xtext.ui.integration.ui.keyword_TestLanguage"/>
         </page>
         <page
@@ -122,7 +121,7 @@
 	</extension>   
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
-            class="org.eclipse.xtext.ui.integration.TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceUIServiceProvider"
+            class="org.eclipse.xtext.ui.integration.TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
             uriExtension="testlanguage">
         </resourceServiceProvider>
     </extension>
@@ -143,7 +142,7 @@
     <package 
        uri = "http://xtext.org/ui/integartion/tests/bracketmatching" 
        class = "org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.bracketmatching.BracketmatchingPackage"
-       genModel = "org/eclipse/xtext/ui/integration/tests/editor/bracketmatching/TestLanguage.genmodel" /> 
+       genModel = "org/eclipse/xtext/ui/integration/tests/editor/bracketmatching/BmTestLanguage.genmodel" /> 
 	
   </extension>
 
@@ -152,42 +151,42 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-            class="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
+            class="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
-            extensions="testlanguage"
-            id="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguage"
-            name="TestLanguage Editor">
+            extensions="bmtestlanguage"
+            id="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguage"
+            name="BmTestLanguage Editor">
         </editor>
     </extension>
     <extension
         point="org.eclipse.ui.handlers">
         <handler
-            class="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
+            class="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
             commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
             <activeWhen>
                 <reference
-                    definitionId="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguage.Editor.opened">
+                    definitionId="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguage.Editor.opened">
                 </reference>
             </activeWhen>
         </handler>
         <handler
-            class="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.handler.ValidateActionHandler"
-            commandId="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguage.validate">
+            class="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguage.validate">
          <activeWhen>
             <reference
-                    definitionId="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguage.Editor.opened">
+                    definitionId="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguage.Editor.opened">
             </reference>
          </activeWhen>
       </handler>
     </extension>
     <extension point="org.eclipse.core.expressions.definitions">
-        <definition id="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguage.Editor.opened">
+        <definition id="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguage.Editor.opened">
             <and>
                 <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
                 <with variable="activeEditor">
                     <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
-                        value="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguage" 
+                        value="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguage" 
                         forcePluginActivation="true"/>
                 </with>        
             </and>
@@ -196,38 +195,37 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
-            class="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
-            id="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguage"
-            name="TestLanguage"
-            category="org.eclipse.xtext.languages">
-            <keywordReference id="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.ui.keyword_TestLanguage"/>
+            class="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguage"
+            name="BmTestLanguage">
+            <keywordReference id="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.ui.keyword_BmTestLanguage"/>
         </page>
         <page
-            category="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguage"
-            class="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-            id="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguage.coloring"
+            category="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguage"
+            class="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguage.coloring"
             name="Syntax Coloring">
-            <keywordReference id="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.ui.keyword_TestLanguage"/>
+            <keywordReference id="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.ui.keyword_BmTestLanguage"/>
         </page>
         <page
-            category="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguage"
-            class="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
-            id="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguage.templates"
+            category="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguage"
+            class="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+            id="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguage.templates"
             name="Templates">
-            <keywordReference id="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.ui.keyword_TestLanguage"/>
+            <keywordReference id="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.ui.keyword_BmTestLanguage"/>
         </page>
     </extension>
     <extension
         point="org.eclipse.ui.keywords">
         <keyword
-            id="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.ui.keyword_TestLanguage"
-            label="TestLanguage"/>
+            id="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.ui.keyword_BmTestLanguage"
+            label="BmTestLanguage"/>
     </extension>
     <extension
          point="org.eclipse.ui.commands">
       <command
             description="Trigger expensive validation"
-            id="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguage.validate"
+            id="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguage.validate"
             name="Validate">
       </command>
     </extension>
@@ -235,12 +233,12 @@
         <menuContribution
             locationURI="popup:#TextEditorContext?after=group.open">
              <command
-                 commandId="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguage.validate"
+                 commandId="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguage.validate"
                  style="push"
                  tooltip="Trigger expensive validation">
             <visibleWhen checkEnabled="false">
                 <reference
-                    definitionId="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguage.Editor.opened">
+                    definitionId="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguage.Editor.opened">
                 </reference>
             </visibleWhen>
          </command>  
@@ -250,7 +248,7 @@
 		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
 			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
 				<visibleWhen checkEnabled="false">
-                	<reference definitionId="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguage.Editor.opened">
+                	<reference definitionId="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguage.Editor.opened">
                 	</reference>
             	</visibleWhen>
 			</command>
@@ -258,8 +256,8 @@
 	</extension>   
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
-            class="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceUIServiceProvider"
-            uriExtension="testlanguage">
+            class="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
+            uriExtension="bmtestlanguage">
         </resourceServiceProvider>
     </extension>
 
@@ -268,8 +266,8 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.TestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-			type="testlanguage">
+			class="org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguageExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="bmtestlanguage">
 		</parser>
 	</extension>
 

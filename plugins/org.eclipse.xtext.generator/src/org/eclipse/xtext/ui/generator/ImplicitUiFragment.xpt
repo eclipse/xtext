@@ -67,8 +67,7 @@
         <page
             class="«executableExtensionFactory()»:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
             id="«name»"
-            name="«name.toSimpleName()»"
-            category="org.eclipse.xtext.languages">
+            name="«name.toSimpleName()»">
             <keywordReference id="«name.toJavaPackage() + ".ui.keyword_"+name.toSimpleName()»"/>
         </page>
         <page

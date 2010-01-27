@@ -35,20 +35,20 @@ public class DefaultAutoEditStrategy implements IAutoEditStrategy, ISourceViewer
 	private Provider<MultiLineTerminalsEditStrategy> multiLineTerminals;
 	private Provider<ShortCutEditStrategy> shortCuts;
 	
-	public Provider<MultiLineTerminalsEditStrategy> getMultiLineTerminals() {
-		return multiLineTerminals;
+	public MultiLineTerminalsEditStrategy newMultiLineTerminals(String start, String indentation, String end) {
+		return multiLineTerminals.get().configure(start, indentation, end);
 	}
 	
-	public Provider<SameTerminalsEditStrategy> getSameTerminal() {
-		return sameTerminal;
+	public SameTerminalsEditStrategy newSameTerminal(char terminal) {
+		return sameTerminal.get().configure(terminal);
 	}
 	
-	public Provider<ShortCutEditStrategy> getShortCuts() {
-		return shortCuts;
+	public ShortCutEditStrategy newShortCuts(String shortcut, String replacement) {
+		return shortCuts.get().configure(shortcut, replacement);
 	}
 	
-	public Provider<SingleLineTerminalsStrategy> getSingleLineTerminals() {
-		return singleLineTerminals;
+	public SingleLineTerminalsStrategy newSingleLineTerminals(char start, char end) {
+		return singleLineTerminals.get().configure(start, end);
 	}
 
 	@Inject
@@ -78,28 +78,28 @@ public class DefaultAutoEditStrategy implements IAutoEditStrategy, ISourceViewer
 	}
 
 	protected void configureImportantInformation(IEditStrategyAcceptor acceptor) {
-		acceptor.accept(shortCuts.get().configure("42", "42 /*Answer to the Ultimate Question of Life, the Universe, and Everything!*/"));
+		acceptor.accept(newShortCuts("42", "42 /*Answer to the Ultimate Question of Life, the Universe, and Everything!*/"));
 	}
 
 	protected void configureMultilineComments(IEditStrategyAcceptor acceptor) {
-		acceptor.accept(multiLineTerminals.get().configure("/*", " * ", " */"));
+		acceptor.accept(newMultiLineTerminals("/*", " * ", " */"));
 	}
 
 	protected void configureCurlyBracesBlock(IEditStrategyAcceptor acceptor) {
-		acceptor.accept(multiLineTerminals.get().configure("{", null, "}"));
+		acceptor.accept(newMultiLineTerminals("{", null, "}"));
 	}
 
 	protected void configureSquareBrackets(IEditStrategyAcceptor acceptor) {
-		acceptor.accept(singleLineTerminals.get().configure('[', ']'));
+		acceptor.accept(newSingleLineTerminals('[', ']'));
 	}
 
 	protected void configureParenthesis(IEditStrategyAcceptor acceptor) {
-		acceptor.accept(singleLineTerminals.get().configure('(', ')'));
+		acceptor.accept(newSingleLineTerminals('(', ')'));
 	}
 	
 	protected void configureStringLiteral(IEditStrategyAcceptor acceptor) {
-		acceptor.accept(sameTerminal.get().configure('"'));
-		acceptor.accept(sameTerminal.get().configure('\''));
+		acceptor.accept(newSameTerminal('"'));
+		acceptor.accept(newSameTerminal('\''));
 	}
 
 	public void setSourceViewer(final ISourceViewer sourceViewer) {

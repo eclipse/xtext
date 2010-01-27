@@ -17,7 +17,7 @@ public class XtextAutoEditStrategy extends DefaultAutoEditStrategy {
 	@Override
 	protected void configure(IEditStrategyAcceptor acceptor) {
 		super.configure(acceptor);
-		acceptor.accept(getMultiLineTerminals().get().configure(":", null, ";"));
+		acceptor.accept(newMultiLineTerminals(":", null, ";"));
 	}
 	
 }
