@@ -40,6 +40,7 @@ public class UIPluginModule extends AbstractGenericModule {
 	}
 	
 	public void configureBracketMatchingAction(Binder binder) {
+		binder.bind(IActionContributor.class).annotatedWith(Names.named("foldingActionGroup")).to(org.eclipse.xtext.ui.core.editor.folding.FoldingActionContributor.class);
 		binder.bind(IActionContributor.class).annotatedWith(Names.named("bracketMatcherAction")).to(org.eclipse.xtext.ui.core.editor.bracketmatching.GoToMatchingBracketAction.class);
 		binder.bind(IPreferenceStoreInitializer.class).annotatedWith(Names.named("bracketMatcherPrefernceInitializer")).to(org.eclipse.xtext.ui.core.editor.bracketmatching.BracketMatchingPreferencesInitializer.class);
 	}

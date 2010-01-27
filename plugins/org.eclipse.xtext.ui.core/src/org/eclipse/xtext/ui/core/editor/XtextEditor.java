@@ -16,10 +16,14 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.jface.action.Action;
+import org.eclipse.jface.action.IAction;
+import org.eclipse.jface.action.IMenuManager;
+import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
+import org.eclipse.jface.text.source.AnnotationPainter;
 import org.eclipse.jface.text.source.IAnnotationAccess;
 import org.eclipse.jface.text.source.IAnnotationAccessExtension;
 import org.eclipse.jface.text.source.IAnnotationModel;
@@ -55,6 +59,7 @@ import org.eclipse.xtext.ui.core.XtextUIMessages;
 import org.eclipse.xtext.ui.core.editor.actions.IActionContributor;
 import org.eclipse.xtext.ui.core.editor.bracketmatching.BracketMatchingPreferencesInitializer;
 import org.eclipse.xtext.ui.core.editor.bracketmatching.CharacterPairMatcher;
+import org.eclipse.xtext.ui.core.editor.folding.IFoldingStructureProvider;
 import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentProvider;
 import org.eclipse.xtext.ui.core.editor.model.XtextDocumentUtil;
@@ -82,6 +87,12 @@ public class XtextEditor extends TextEditor {
 
 	public static final String ID = "org.eclipse.xtext.baseEditor"; //$NON-NLS-1$
 
+	@Inject
+	private IFoldingStructureProvider foldingStructureProvider;
+	
+	@Inject(optional=true)
+	private AnnotationPainter.IDrawingStrategy projectionAnnotationDrawingStrategy;
+	
 	@Inject
 	private CompoundXtextEditorCallback callback;
 	
@@ -314,22 +325,29 @@ public class XtextEditor extends TextEditor {
 
 	@Override
 	public void createPartControl(Composite parent) {
-
 		super.createPartControl(parent);
-
-		// We need ProjectionViewer to support Folding
 		ProjectionViewer projectionViewer = (ProjectionViewer) getSourceViewer();
-		projectionSupport = new ProjectionSupport(projectionViewer, getAnnotationAccess(), getSharedColors());
-		projectionSupport.addSummarizableAnnotationType(WARNING_ANNOTATION_TYPE); //$NON-NLS-1$
-		projectionSupport.addSummarizableAnnotationType(ERROR_ANNOTATION_TYPE); //$NON-NLS-1$
-		projectionSupport.install();
-		// TODO Folding stuff
-		
+		projectionSupport = installProjectionSupport(projectionViewer);
+		installFoldingSupport(projectionViewer);
 		installHighlightingHelper();
 		installSelectionChangedListener();
 		callback.afterCreatePartControl(this);
 	}
 
+	protected ProjectionSupport installProjectionSupport(ProjectionViewer projectionViewer) {
+		ProjectionSupport projectionSupport = new ProjectionSupport(projectionViewer, getAnnotationAccess(), getSharedColors());
+		projectionSupport.addSummarizableAnnotationType(WARNING_ANNOTATION_TYPE); //$NON-NLS-1$
+		projectionSupport.addSummarizableAnnotationType(ERROR_ANNOTATION_TYPE); //$NON-NLS-1$
+		projectionSupport.setAnnotationPainterDrawingStrategy(projectionAnnotationDrawingStrategy);
+		projectionSupport.install();
+		return projectionSupport;
+	}
+	
+	protected void installFoldingSupport(ProjectionViewer projectionViewer) {
+		foldingStructureProvider.install(this, projectionViewer);
+		projectionViewer.doOperation(ProjectionViewer.TOGGLE);
+	}
+	
 	private void installSelectionChangedListener() {
 		selectionChangedListener = new ISelectionChangedListener() {
 			public void selectionChanged(final SelectionChangedEvent event) {
@@ -366,8 +384,16 @@ public class XtextEditor extends TextEditor {
 		if (outlinePage != null) {
 			outlinePage = null;
 		}
+		uninstallFoldingSupport();
 		uninstallHighlightingHelper();
 		uninstallSelectionChangedListener();
+	}
+
+	protected void uninstallFoldingSupport() {
+		if (foldingStructureProvider!=null) {
+			foldingStructureProvider.uninstall();
+			foldingStructureProvider= null;	
+		}
 	}
 
 	private void uninstallSelectionChangedListener() {
@@ -462,6 +488,36 @@ public class XtextEditor extends TextEditor {
 		ImageDescriptor imageDesc= editorDesc != null ? editorDesc.getImageDescriptor() : null;
 		return imageDesc != null ? imageDesc.createImage() :super.getDefaultImage();
 	}
+	
+	
+	/*
+	 * @see org.eclipse.ui.texteditor.AbstractTextEditor#rulerContextMenuAboutToShow(org.eclipse.jface.action.IMenuManager)
+	 */ 
+	@Override
+	protected void rulerContextMenuAboutToShow(IMenuManager menu) {
+		super.rulerContextMenuAboutToShow(menu);
+		IMenuManager foldingMenu= new MenuManager(XtextUIMessages.Editor_FoldingMenu_name, "projection"); //$NON-NLS-1$
+		menu.appendToGroup(ITextEditorActionConstants.GROUP_RULERS, foldingMenu);
+		IAction action= getAction("FoldingToggle"); //$NON-NLS-1$
+		foldingMenu.add(action);
+		action= getAction("FoldingExpandAll"); //$NON-NLS-1$
+		foldingMenu.add(action);
+		action= getAction("FoldingCollapseAll"); //$NON-NLS-1$
+		foldingMenu.add(action);
+		action= getAction("FoldingRestore"); //$NON-NLS-1$
+		foldingMenu.add(action);
+	}
+	 
+	/**
+	 * Resets the foldings structure according to the folding
+	 * preferences.
+	 */
+	public void resetProjection() {
+		if (foldingStructureProvider != null) {
+			foldingStructureProvider.initialize();
+		}
+	}
+	 
 	
 	@SuppressWarnings("rawtypes")
 	private Annotation getAnnotation(final int offset, final int length) {
