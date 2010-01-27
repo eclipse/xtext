@@ -52,8 +52,7 @@
         <page
             class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.xtext.example.Domainmodel"
-            name="Domainmodel"
-            category="org.eclipse.xtext.languages">
+            name="Domainmodel">
             <keywordReference id="org.eclipse.xtext.example.ui.keyword_Domainmodel"/>
         </page>
         <page
@@ -109,13 +108,18 @@
             	</visibleWhen>
 			</command>
 		</menuContribution>
-	</extension>   
-	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
-        <resourceServiceProvider
-            class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceUIServiceProvider"
-            uriExtension="dmodel">
-        </resourceServiceProvider>
-    </extension>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.example.Domainmodel.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>   
 
 <!-- adding resource factories -->
 
@@ -126,6 +130,12 @@
 			type="dmodel">
 		</parser>
 	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
+            uriExtension="dmodel">
+        </resourceServiceProvider>
+    </extension>
 
 
    <!-- quickfix marker resolution generator -->

@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.7 2010/01/26 14:27:52 jkohnlein Exp $
+ $Id: plugin.xml,v 1.8 2010/01/27 13:55:34 jkohnlein Exp $
 -->
 
 <plugin>
@@ -107,10 +107,6 @@
       <handler
             class="org.eclipse.xtext.builder.internal.GuiceAwareExtensionFactory:org.eclipse.xtext.ui.core.search.OpenXtextElementHandler"
             commandId="org.eclipse.xtext.ui.core.search.OpenXtextElementCommand">
-      </handler>
-      <handler
-            class="org.eclipse.xtext.builder.internal.GuiceAwareExtensionFactory:org.eclipse.xtext.ui.core.editor.findrefs.FindReferencesHandler"
-            commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
       </handler>
    </extension>
  	<extension point="org.eclipse.search.searchResultViewPages">
