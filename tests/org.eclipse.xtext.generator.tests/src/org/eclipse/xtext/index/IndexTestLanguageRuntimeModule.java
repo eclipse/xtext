@@ -6,6 +6,8 @@ package org.eclipse.xtext.index;
 import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
+import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 
 
 /**
@@ -15,6 +17,11 @@ public class IndexTestLanguageRuntimeModule extends org.eclipse.xtext.index.Abst
 	@Override
 	public Class<? extends IQualifiedNameProvider> bindIQualifiedNameProvider() {
 		return DefaultDeclarativeQualifiedNameProvider.class;
+	}
+	
+	@Override
+	public Class<? extends IScopeProvider> bindIScopeProvider() {
+		return ImportedNamespaceAwareLocalScopeProvider.class;
 	}
 	
 	@Override
