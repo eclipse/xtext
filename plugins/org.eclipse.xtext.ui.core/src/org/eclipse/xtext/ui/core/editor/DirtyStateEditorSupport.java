@@ -324,7 +324,7 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 	}
 	
 	public void modelChanged(XtextResource resource) {
-		if (resource == null)
+		if (resource == null || !dirtyResource.isInitialized())
 			return;
 		if (isDirty || dirtyStateManager.manageDirtyState(dirtyResource)) {
 			synchronized (dirtyStateManager) {
