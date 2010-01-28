@@ -1,15 +1,29 @@
 package org.eclipse.xtext.ui.core.editor.findrefs;
 
+import java.util.Iterator;
 import java.util.List;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.viewers.ITreeContentProvider;
+import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
+import org.eclipse.search.ui.ISearchResultListener;
+import org.eclipse.search.ui.SearchResultEvent;
+import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.progress.UIJob;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.IResourceDescription.Delta;
+import org.eclipse.xtext.resource.IResourceDescription.Event;
+import org.eclipse.xtext.ui.core.editor.StatefulResourceDescription;
+import org.eclipse.xtext.ui.core.editor.findrefs.ReferenceSearchResultEvents.Added;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -17,12 +31,27 @@ import com.google.inject.Inject;
 /**
  * @author koehnlein - Initial contribution and API
  */
-public class ReferenceSearchResultContentProvider implements ITreeContentProvider {
+public class ReferenceSearchResultContentProvider implements ITreeContentProvider, ISearchResultListener,
+		IResourceDescription.Event.Listener {
 
-	@Inject
 	private IResourceDescriptions resourceDescriptions;
 
-	private List<ReferenceSearchViewTreeNode> rootElements;
+	private List<ReferenceSearchViewTreeNode> rootNodes;
+
+	private TreeViewer viewer;
+
+	private List<SearchResultEvent> batchedSearchResultEvents;
+
+	private volatile boolean isUIUpdateScheduled;
+
+	@Inject
+	public ReferenceSearchResultContentProvider(IResourceDescriptions resourceDescriptions) {
+		batchedSearchResultEvents = Lists.newArrayList();
+		this.resourceDescriptions = resourceDescriptions;
+		if (resourceDescriptions instanceof IResourceDescription.Event.Source) {
+			((IResourceDescription.Event.Source) resourceDescriptions).addListener(this);
+		}
+	}
 
 	public Object[] getChildren(Object parentElement) {
 		if (parentElement instanceof ReferenceSearchViewTreeNode) {
@@ -47,56 +76,154 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 	}
 
 	public Object[] getElements(Object inputElement) {
-		if (rootElements == null || rootElements.isEmpty()) {
+		if (rootNodes == null || rootNodes.isEmpty()) {
 			return new Object[0];
 		}
-		return Iterables.newArray(rootElements, ReferenceSearchViewTreeNode.class);
+		return Iterables.newArray(rootNodes, ReferenceSearchViewTreeNode.class);
 	}
 
 	public void dispose() {
-		rootElements = null;
+		rootNodes = null;
 	}
 
 	public void inputChanged(final Viewer viewer, Object oldInput, Object newInput) {
 		synchronized (viewer) {
-			if (rootElements != null) {
-				rootElements.clear();
+			if (rootNodes != null) {
+				rootNodes.clear();
 			}
-			if (newInput instanceof ReferenceSearchResult) {
+			if (oldInput instanceof ReferenceSearchResult) {
+				((ReferenceSearchResult) oldInput).removeListener(this);
+			}
+			if (newInput instanceof ReferenceSearchResult && viewer instanceof TreeViewer) {
+				((ReferenceSearchResult) newInput).addListener(this);
+				this.viewer = (TreeViewer) viewer;
 				for (IReferenceDescription referenceDescription : ((ReferenceSearchResult) newInput)
 						.getMatchingReferences()) {
-					URI containerEObjectURI = referenceDescription.getContainerEObjectURI();
-					final URI eObjectURI = (containerEObjectURI == null) ? referenceDescription.getSourceEObjectUri()
-							: containerEObjectURI;
-					IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(eObjectURI
-							.trimFragment());
-					if (resourceDescription != null) {
-						ReferenceSearchViewTreeNode resourceNode = resourceNode(resourceDescription);
-						for (IEObjectDescription eObjectDescription : resourceDescription.getExportedObjects()) {
-							if (eObjectDescription.getEObjectURI().equals(eObjectURI)) {
-								new ReferenceSearchViewTreeNode(resourceNode, eObjectURI, eObjectDescription);
-							}
-						}
-					}
+					addReference(referenceDescription, false);
 				}
 			}
-			viewer.refresh();
 		}
 	}
 
-	private ReferenceSearchViewTreeNode resourceNode(IResourceDescription resourceDescription) {
-		if (rootElements == null) {
-			rootElements = Lists.newArrayList();
+	private void addReference(IReferenceDescription referenceDescription, boolean isUpdateViewer) {
+		URI containerEObjectURI = referenceDescription.getContainerEObjectURI();
+		final URI eObjectURI = (containerEObjectURI == null) ? referenceDescription.getSourceEObjectUri()
+				: containerEObjectURI;
+		IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(eObjectURI
+				.trimFragment());
+		if (resourceDescription != null) {
+			ReferenceSearchViewTreeNode resourceNode = resourceNode(resourceDescription, isUpdateViewer);
+			for (IEObjectDescription eObjectDescription : resourceDescription.getExportedObjects()) {
+				if (eObjectDescription.getEObjectURI().equals(eObjectURI)) {
+					ReferenceSearchViewTreeNode referenceNode = new ReferenceSearchViewTreeNode(resourceNode,
+							eObjectURI, referenceDescription, eObjectDescription);
+					if (isUpdateViewer) {
+						viewer.add(resourceNode, referenceNode);
+					}
+				}
+			}
 		}
-		for (ReferenceSearchViewTreeNode node : rootElements) {
+	}
+
+	private ReferenceSearchViewTreeNode resourceNode(IResourceDescription resourceDescription, boolean isUpdateViewer) {
+		if (rootNodes == null) {
+			rootNodes = Lists.newArrayList();
+		}
+		for (ReferenceSearchViewTreeNode node : rootNodes) {
 			if (node.getURI().equals(resourceDescription.getURI())) {
 				return node;
 			}
 		}
 		ReferenceSearchViewTreeNode node = new ReferenceSearchViewTreeNode(null, resourceDescription.getURI(),
-				resourceDescription);
-		rootElements.add(node);
+				resourceDescription, resourceDescription);
+		rootNodes.add(node);
+		if (isUpdateViewer) {
+			viewer.add(viewer.getInput(), node);
+		}
 		return node;
 	}
 
+	public void searchResultChanged(final SearchResultEvent e) {
+		synchronized (batchedSearchResultEvents) {
+			batchedSearchResultEvents.add(e);
+		}
+		if (!isUIUpdateScheduled) {
+			new UIUpdater().schedule();
+		}
+	}
+
+	private class UIUpdater extends UIJob {
+
+		public UIUpdater() {
+			super("ReferenceSearchViewUpdater");
+			setSystem(true);
+		}
+
+		@Override
+		public IStatus runInUIThread(IProgressMonitor monitor) {
+			isUIUpdateScheduled = false;
+			List<SearchResultEvent> events;
+			synchronized (batchedSearchResultEvents) {
+				events = Lists.newArrayList(batchedSearchResultEvents);
+				batchedSearchResultEvents.clear();
+			}
+			for (SearchResultEvent event : events) {
+				if (event instanceof Added) {
+					addReference(((Added) event).getReferenceDescription(), true);
+				}
+			}
+			return Status.OK_STATUS;
+		}
+	}
+
+	public void descriptionsChanged(final Event event) {
+		Display.getDefault().asyncExec(new Runnable() {
+			public void run() {
+				if (rootNodes != null) {
+					for (Delta delta : event.getDeltas()) {
+						if (!(delta.getNew() instanceof StatefulResourceDescription)) {
+							for (Iterator<ReferenceSearchViewTreeNode> i = rootNodes.iterator(); i.hasNext();) {
+								ReferenceSearchViewTreeNode rootNode = i.next();
+								if (((IResourceDescription) rootNode.getDescription()).getURI().equals(delta.getUri())) {
+									if (delta.getNew() == null) {
+										i.remove();
+										viewer.remove(rootNode);
+										break;
+									} else {
+										Iterable<IReferenceDescription> newReferenceDescriptions = delta.getNew()
+												.getReferenceDescriptions();
+										List<ReferenceSearchViewTreeNode> removedReferenceNodes = Lists.newArrayList();
+										for (ReferenceSearchViewTreeNode referenceNode : rootNode.getChildren()) {
+											final URI referenceSourceURI = ((IReferenceDescription) referenceNode
+													.getDescription()).getSourceEObjectUri();
+											if (Iterables.isEmpty(Iterables.filter(newReferenceDescriptions,
+													new Predicate<IReferenceDescription>() {
+														public boolean apply(IReferenceDescription input) {
+															return input.getSourceEObjectUri().equals(
+																	referenceSourceURI);
+														}
+													}))) {
+												removedReferenceNodes.add(referenceNode);
+											}
+										}
+										for (ReferenceSearchViewTreeNode removedReferenceNode : removedReferenceNodes) {
+											rootNode.removeChild(removedReferenceNode);
+										}
+										if (rootNode.getChildren().isEmpty()) {
+											i.remove();
+											viewer.remove(rootNode);
+											break;
+										} else {
+											viewer.remove(rootNode, Iterables.newArray(removedReferenceNodes,
+													ReferenceSearchViewTreeNode.class));
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		});
+	}
 }

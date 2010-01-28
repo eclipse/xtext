@@ -47,8 +47,7 @@ public class ReferenceSearchResult implements ISearchResult {
 		}
 	}
 
-	void fireMatchAdded() {
-		SearchResultEvent searchResultEvent = new ReferenceAdded(this);
+	void fireEvent(SearchResultEvent searchResultEvent) {
 		synchronized (listeners) {
 			for (ISearchResultListener listener : listeners) {
 				listener.searchResultChanged(searchResultEvent);
@@ -74,7 +73,8 @@ public class ReferenceSearchResult implements ISearchResult {
 
 	public void addMatchingReference(IReferenceDescription referenceDescription) {
 		matchingReferences.add(referenceDescription);
-		fireMatchAdded();
+		SearchResultEvent searchResultEvent = new ReferenceSearchResultEvents.Added(this, referenceDescription);
+		fireEvent(searchResultEvent);
 	}
 
 	public List<IReferenceDescription> getMatchingReferences() {
