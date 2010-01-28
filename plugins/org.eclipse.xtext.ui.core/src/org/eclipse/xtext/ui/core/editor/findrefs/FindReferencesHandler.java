@@ -8,37 +8,29 @@
 package org.eclipse.xtext.ui.core.editor.findrefs;
 
 import java.util.Iterator;
-import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.commands.AbstractHandler;
 import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IStorage;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.search.ui.NewSearchUI;
 import org.eclipse.ui.handlers.HandlerUtil;
-import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.linking.ILinkingService;
-import org.eclipse.xtext.linking.impl.IllegalNodeException;
-import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.ParseTreeUtil;
+import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.core.editor.XtextEditor;
 import org.eclipse.xtext.ui.core.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.common.base.Predicate;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -55,37 +47,19 @@ public class FindReferencesHandler extends AbstractHandler {
 		}
 
 		public IEObjectDescription exec(XtextResource state) throws Exception {
-			IParseResult parseResult = state.getParseResult();
-			if (parseResult != null && parseResult.getRootNode() != null) {
-				AbstractNode node = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(parseResult.getRootNode(),
-						selection.getOffset());
-				while (node != null) {
-					if (node.getGrammarElement() instanceof CrossReference) {
-						EObject referenceOwner = NodeUtil.getNearestSemanticObject(node);
-						EReference eReference = GrammarUtil.getReference((CrossReference) node.getGrammarElement(),
-								referenceOwner.eClass());
-						try {
-							List<EObject> linkedEObjects = linkingService.getLinkedObjects(referenceOwner, eReference,
-									node);
-							if (!linkedEObjects.isEmpty()) {
-								EObject resolved = EcoreUtil.resolve(linkedEObjects.get(0), referenceOwner);
-								IScope scope = scopeProvider.getScope(referenceOwner, eReference);
-								return scope.getContentByEObject(resolved);
-							} else {
-								return null;
+			EObject element = EObjectAtOffsetHelper.resolveElementAt(state, selection.getOffset());
+			if (element != null) {
+				final URI eObjectURI = EcoreUtil.getURI(element);
+				IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(eObjectURI
+						.trimFragment());
+				Iterator<IEObjectDescription> eObjectDescriptions = Iterables.filter(
+						resourceDescription.getExportedObjects(), new Predicate<IEObjectDescription>() {
+							public boolean apply(IEObjectDescription input) {
+								return input.getEObjectURI().equals(eObjectURI);
 							}
-						} catch (IllegalNodeException ex) {
-							return null;
-						}
-					} else if (node.getElement() != null) {
-						IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(state
-								.getURI());
-						Iterator<IEObjectDescription> eObjectDescriptors = resourceDescription.getExportedObjectsForEObject(node.getElement()).iterator();
-						if(eObjectDescriptors.hasNext()) {
-							return eObjectDescriptors.next();
-						}
-					}
-					node = node.getParent();
+						}).iterator();
+				if (eObjectDescriptions.hasNext()) {
+					return eObjectDescriptions.next();
 				}
 			}
 			return null;
@@ -97,12 +71,6 @@ public class FindReferencesHandler extends AbstractHandler {
 
 	@Inject
 	private Provider<ReferenceQuery> queryProvider;
-
-	@Inject
-	private ILinkingService linkingService;
-
-	@Inject
-	private IScopeProvider scopeProvider;
 
 	@Inject
 	private IResourceDescriptions resourceDescriptions;
@@ -118,14 +86,15 @@ public class FindReferencesHandler extends AbstractHandler {
 			if (eObjectDescription != null) {
 				ReferenceQuery referenceQuery = queryProvider.get();
 				String label = "Xtext References to " + eObjectDescription.getQualifiedName();
-				Iterator<IStorage> storages = storage2UriMapper.getStorages(eObjectDescription.getEObjectURI()).iterator();
+				Iterator<IStorage> storages = storage2UriMapper.getStorages(eObjectDescription.getEObjectURI())
+						.iterator();
 				if (storages.hasNext()) {
 					label += " (" + storages.next().getFullPath().toString() + ")";
 				}
 				referenceQuery.init(eObjectDescription.getEObjectURI(), label);
 				NewSearchUI.activateSearchResultView();
 				NewSearchUI.runQueryInBackground(referenceQuery);
-			} 
+			}
 		} catch (Exception e) {
 			LOG.error("Error finding references", e);
 		}
