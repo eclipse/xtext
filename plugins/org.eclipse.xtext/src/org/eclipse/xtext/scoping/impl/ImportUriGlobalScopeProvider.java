@@ -18,13 +18,11 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.util.OnChangeEvictingCacheAdapter;
 
-import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
@@ -67,7 +65,7 @@ public class ImportUriGlobalScopeProvider extends AbstractGlobalScopeProvider {
 		return scope;
 	}
 
-	private LinkedHashSet<URI> getImportedUris(EObject context) {
+	protected LinkedHashSet<URI> getImportedUris(EObject context) {
 		OnChangeEvictingCacheAdapter cache = OnChangeEvictingCacheAdapter.getOrCreate(context.eResource());
 		if (cache.get(getClass().getName()) == null) {
 			TreeIterator<EObject> iterator = context.eResource().getAllContents();
@@ -90,18 +88,12 @@ public class ImportUriGlobalScopeProvider extends AbstractGlobalScopeProvider {
 		return cache.get(getClass().getName());
 	}
 
-	private SimpleScope createLazyResourceScope(IScope parent, final URI uri, final IResourceDescriptions descriptions,
+	protected IScope createLazyResourceScope(IScope parent, final URI uri, final IResourceDescriptions descriptions,
 			final EReference reference) {
-		return new SimpleScope(parent, null) {
-			@Override
-			public Iterable<IEObjectDescription> internalGetContents() {
-				IResourceDescription description = descriptions.getResourceDescription(uri);
-				if (description == null)
-					return Iterables.emptyIterable();
-				Iterable<IEObjectDescription> exportedObjects = description.getExportedObjects(reference.getEReferenceType());
-				return exportedObjects;
-			}
-		};
+		IResourceDescription description = descriptions.getResourceDescription(uri);
+		if (description == null)
+			return parent;
+		return new ResourceDescriptionBasedScope(parent, description, reference.getEReferenceType());
 	}
 
 	public void setLoadOnDemandDescriptions(Provider<LoadOnDemandResourceDescriptions> loadOnDemandDescriptions) {
