@@ -25,7 +25,8 @@ public class MarkerCreator {
 		}
 		marker.setAttribute(IMarker.LOCATION, lineNR + resource.getFullPath().toString());
 		marker.setAttribute(IMarker.CHAR_START, issue.getOffset());
-		marker.setAttribute(IMarker.CHAR_END, issue.getOffset()+issue.getLength());
+		if(issue.getOffset() != null && issue.getLength() != null)
+			marker.setAttribute(IMarker.CHAR_END, issue.getOffset()+issue.getLength());
 		marker.setAttribute(IMarker.LINE_NUMBER, issue.getLineNumber());
 		marker.setAttribute(IMarker.MESSAGE, issue.getMessage());
 		marker.setAttribute(IMarker.SEVERITY, getSeverity(issue));
