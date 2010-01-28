@@ -42,12 +42,13 @@ import com.google.inject.internal.Maps;
  * @author Sven Efftinge - Initial contribution and API
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class DefaultResourceDescription extends AbstractResourceDescription implements OnChangeEvictingCacheAdapter.Listener {
+public class DefaultResourceDescription extends AbstractResourceDescription implements
+		OnChangeEvictingCacheAdapter.Listener {
 
 	private final static Logger log = Logger.getLogger(DefaultResourceDescription.class);
 
 	private final Resource resource;
-	
+
 	private final URI uri;
 
 	private final IQualifiedNameProvider nameProvider;
@@ -72,7 +73,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription impl
 					getResource().load(null);
 				} catch (IOException e) {
 					log.error(e.getMessage(), e);
-					return Collections.<IEObjectDescription>emptyList();
+					return Collections.<IEObjectDescription> emptyList();
 				}
 			}
 			Iterable<EObject> contents = new Iterable<EObject>() {
@@ -91,11 +92,11 @@ public class DefaultResourceDescription extends AbstractResourceDescription impl
 		}
 		return adapter.get(getClass().getName());
 	}
-	
+
 	public void onEvict(OnChangeEvictingCacheAdapter cache) {
 		invalidateCache();
 	}
-	
+
 	protected IEObjectDescription createIEObjectDescription(EObject from) {
 		if (nameProvider == null)
 			return null;
@@ -133,11 +134,11 @@ public class DefaultResourceDescription extends AbstractResourceDescription impl
 		super.invalidateCache();
 		referenceDescriptions = null;
 	}
-	
+
 	@SuppressWarnings("unchecked")
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
 		if (this.referenceDescriptions == null) {
-			Map<URI, IEObjectDescription> uri2exportedEObjects = createURI2ExportedEObjectsMap(getExportedObjects());
+			Map<EObject, IEObjectDescription> eObject2exportedEObjects = createEObject2ExportedEObjectsMap(getExportedObjects());
 			List<IReferenceDescription> referenceDescriptions = Lists.newArrayList();
 			TreeIterator<EObject> contents = EcoreUtil.getAllProperContents(this.resource, true);
 			while (contents.hasNext()) {
@@ -146,19 +147,22 @@ public class DefaultResourceDescription extends AbstractResourceDescription impl
 				for (EReference eReference : references) {
 					if (!eReference.isContainment()) {
 						Object val = eObject.eGet(eReference);
-						if (val!=null) {
+						if (val != null) {
 							if (eReference.isMany()) {
 								List<EObject> list = (List<EObject>) val;
-								for(int i = 0;i<list.size();i++) {
+								for (int i = 0; i < list.size(); i++) {
 									EObject to = list.get(i);
 									if (isResolved(to)) {
-										referenceDescriptions.add(new DefaultReferenceDescription(eObject,to,eReference,i, findExportedContainerURI(eObject, uri2exportedEObjects)));
+										referenceDescriptions.add(new DefaultReferenceDescription(eObject, to,
+												eReference, i, findExportedContainerURI(eObject,
+														eObject2exportedEObjects)));
 									}
 								}
 							} else {
 								EObject to = (EObject) val;
 								if (isResolved(to)) {
-									referenceDescriptions.add(new DefaultReferenceDescription(eObject,to,eReference,-1,findExportedContainerURI(eObject, uri2exportedEObjects)));
+									referenceDescriptions.add(new DefaultReferenceDescription(eObject, to, eReference,
+											-1, findExportedContainerURI(eObject, eObject2exportedEObjects)));
 								}
 							}
 						}
@@ -170,21 +174,22 @@ public class DefaultResourceDescription extends AbstractResourceDescription impl
 		return referenceDescriptions;
 	}
 
-	protected Map<URI, IEObjectDescription> createURI2ExportedEObjectsMap(Iterable<IEObjectDescription> exportedObjects) {
-		Map<URI, IEObjectDescription> uri2exportedEObjects = Maps.newHashMap();
-		for(IEObjectDescription eObjectDescription: exportedObjects) {
-			uri2exportedEObjects.put(eObjectDescription.getEObjectURI(), eObjectDescription);
+	protected Map<EObject, IEObjectDescription> createEObject2ExportedEObjectsMap(
+			Iterable<IEObjectDescription> exportedObjects) {
+		Map<EObject, IEObjectDescription> uri2exportedEObjects = Maps.newHashMap();
+		for (IEObjectDescription eObjectDescription : exportedObjects) {
+			uri2exportedEObjects.put(eObjectDescription.getEObjectOrProxy(), eObjectDescription);
 		}
 		return uri2exportedEObjects;
 	}
 
-	protected URI findExportedContainerURI(EObject referenceOwner, Map<URI, IEObjectDescription> uri2exportedEObjects) {
+	protected URI findExportedContainerURI(EObject referenceOwner,
+			Map<EObject, IEObjectDescription> eObject2exportedEObjects) {
 		EObject currentContainer = referenceOwner;
-		while(currentContainer != null) {
-			URI currentContainerURI = EcoreUtil.getURI(currentContainer);
-			IEObjectDescription currentContainerEObjectDescription = uri2exportedEObjects.get(currentContainerURI);
-			if(currentContainerEObjectDescription != null) {
-				return currentContainerURI;
+		while (currentContainer != null) {
+			IEObjectDescription currentContainerEObjectDescription = eObject2exportedEObjects.get(currentContainer);
+			if (currentContainerEObjectDescription != null) {
+				return currentContainerEObjectDescription.getEObjectURI();
 			}
 			currentContainer = currentContainer.eContainer();
 		}
@@ -192,6 +197,6 @@ public class DefaultResourceDescription extends AbstractResourceDescription impl
 	}
 
 	protected boolean isResolved(EObject to) {
-		return !((InternalEObject)to).eIsProxy();
+		return !((InternalEObject) to).eIsProxy();
 	}
 }
