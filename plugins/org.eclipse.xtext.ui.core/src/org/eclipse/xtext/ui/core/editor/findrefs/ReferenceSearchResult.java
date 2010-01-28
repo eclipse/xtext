@@ -73,12 +73,16 @@ public class ReferenceSearchResult implements ISearchResult {
 
 	public void addMatchingReference(IReferenceDescription referenceDescription) {
 		matchingReferences.add(referenceDescription);
-		SearchResultEvent searchResultEvent = new ReferenceSearchResultEvents.Added(this, referenceDescription);
-		fireEvent(searchResultEvent);
+		fireEvent(new ReferenceSearchResultEvents.Added(this, referenceDescription));
 	}
 
 	public List<IReferenceDescription> getMatchingReferences() {
 		return matchingReferences;
+	}
+	
+	public void reset() {
+		matchingReferences.clear();
+		fireEvent(new ReferenceSearchResultEvents.Reset(this));
 	}
 
 }

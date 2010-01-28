@@ -37,6 +37,7 @@ public class ReferenceQuery implements ISearchQuery {
 	private String label;
 
 	public ReferenceQuery() {
+		searchResult = new ReferenceSearchResult(this);
 	}
 
 	public void init(URI eObjectTargetURI, String label) {
@@ -57,13 +58,11 @@ public class ReferenceQuery implements ISearchQuery {
 	}
 
 	public ISearchResult getSearchResult() {
-		if(searchResult == null) {
-			searchResult = new ReferenceSearchResult(this);
-		}
 		return searchResult;
 	}
 
 	public IStatus run(IProgressMonitor monitor) throws OperationCanceledException {
+		searchResult.reset();
 		int numResources = Iterables.size(resourceDescriptions.getAllResourceDescriptions());
 		monitor.beginTask("Find Xtext references", numResources);
 		for (IResourceDescription resourceDescription : resourceDescriptions.getAllResourceDescriptions()) {
