@@ -17,6 +17,7 @@ import org.eclipse.core.commands.ExecutionException;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.search.ui.NewSearchUI;
 import org.eclipse.ui.handlers.HandlerUtil;
@@ -67,8 +68,9 @@ public class FindReferencesHandler extends AbstractHandler {
 							List<EObject> linkedEObjects = linkingService.getLinkedObjects(referenceOwner, eReference,
 									node);
 							if (!linkedEObjects.isEmpty()) {
+								EObject resolved = EcoreUtil.resolve(linkedEObjects.get(0), referenceOwner);
 								IScope scope = scopeProvider.getScope(referenceOwner, eReference);
-								return scope.getContentByEObject(linkedEObjects.get(0));
+								return scope.getContentByEObject(resolved);
 							} else {
 								return null;
 							}
