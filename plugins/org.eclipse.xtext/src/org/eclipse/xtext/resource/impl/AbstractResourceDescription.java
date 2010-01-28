@@ -9,10 +9,8 @@ package org.eclipse.xtext.resource.impl;
 
 import java.util.List;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 
@@ -67,23 +65,4 @@ public abstract class AbstractResourceDescription implements IResourceDescriptio
 		return invalidated;
 	}
 	
-	protected URI findContainerEObjectURI(EObject referenceOwner, Iterable<IEObjectDescription> exportedEObjects) {
-		List<URI> allContainers = EcoreUtil2.allContainerURIs(referenceOwner);
-		URI currentExportedContainerURI = null;
-		int currentIndex = Integer.MAX_VALUE;
-		for (IEObjectDescription eObjectDescription : exportedEObjects) {
-			int index = allContainers.indexOf(eObjectDescription.getEObjectURI());
-			if(index != -1 && index < currentIndex) {
-				currentIndex = index;
-				currentExportedContainerURI = eObjectDescription.getEObjectURI();
-				if(currentIndex == 0) {
-					break;
-				}
-				allContainers = allContainers.subList(0, currentIndex);
-			}
-		}
-		return currentExportedContainerURI;
-	}
-
-
 }
