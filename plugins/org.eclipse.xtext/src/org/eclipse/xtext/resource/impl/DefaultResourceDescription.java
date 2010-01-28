@@ -13,6 +13,7 @@ import java.io.IOException;
 import java.util.Collections;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
@@ -35,6 +36,7 @@ import com.google.common.base.Predicates;
 import com.google.common.collect.ImmutableSet;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
+import com.google.inject.internal.Maps;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -135,7 +137,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription impl
 	@SuppressWarnings("unchecked")
 	public Iterable<IReferenceDescription> getReferenceDescriptions() {
 		if (this.referenceDescriptions == null) {
-			Iterable<IEObjectDescription> exportedObjects = getExportedObjects();
+			Map<URI, IEObjectDescription> uri2exportedEObjects = createURI2ExportedEObjectsMap(getExportedObjects());
 			List<IReferenceDescription> referenceDescriptions = Lists.newArrayList();
 			TreeIterator<EObject> contents = EcoreUtil.getAllProperContents(this.resource, true);
 			while (contents.hasNext()) {
@@ -150,13 +152,13 @@ public class DefaultResourceDescription extends AbstractResourceDescription impl
 								for(int i = 0;i<list.size();i++) {
 									EObject to = list.get(i);
 									if (isResolved(to)) {
-										referenceDescriptions.add(new DefaultReferenceDescription(eObject,to,eReference,i, findContainerEObjectURI(eObject, exportedObjects)));
+										referenceDescriptions.add(new DefaultReferenceDescription(eObject,to,eReference,i, findExportedContainerURI(eObject, uri2exportedEObjects)));
 									}
 								}
 							} else {
 								EObject to = (EObject) val;
 								if (isResolved(to)) {
-									referenceDescriptions.add(new DefaultReferenceDescription(eObject,to,eReference,-1,findContainerEObjectURI(eObject, exportedObjects)));
+									referenceDescriptions.add(new DefaultReferenceDescription(eObject,to,eReference,-1,findExportedContainerURI(eObject, uri2exportedEObjects)));
 								}
 							}
 						}
@@ -167,9 +169,29 @@ public class DefaultResourceDescription extends AbstractResourceDescription impl
 		}
 		return referenceDescriptions;
 	}
-	
-	private boolean isResolved(EObject to) {
-		return !((InternalEObject)to).eIsProxy();
+
+	protected Map<URI, IEObjectDescription> createURI2ExportedEObjectsMap(Iterable<IEObjectDescription> exportedObjects) {
+		Map<URI, IEObjectDescription> uri2exportedEObjects = Maps.newHashMap();
+		for(IEObjectDescription eObjectDescription: exportedObjects) {
+			uri2exportedEObjects.put(eObjectDescription.getEObjectURI(), eObjectDescription);
+		}
+		return uri2exportedEObjects;
 	}
 
+	protected URI findExportedContainerURI(EObject referenceOwner, Map<URI, IEObjectDescription> uri2exportedEObjects) {
+		EObject currentContainer = referenceOwner;
+		while(currentContainer != null) {
+			URI currentContainerURI = EcoreUtil.getURI(currentContainer);
+			IEObjectDescription currentContainerEObjectDescription = uri2exportedEObjects.get(currentContainerURI);
+			if(currentContainerEObjectDescription != null) {
+				return currentContainerURI;
+			}
+			currentContainer = currentContainer.eContainer();
+		}
+		return null;
+	}
+
+	protected boolean isResolved(EObject to) {
+		return !((InternalEObject)to).eIsProxy();
+	}
 }
