@@ -22,6 +22,7 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.IResourceDescription.Event;
 import org.eclipse.xtext.ui.core.editor.StatefulResourceDescription;
 import org.eclipse.xtext.ui.core.editor.findrefs.ReferenceSearchResultEvents.Added;
+import org.eclipse.xtext.ui.core.editor.findrefs.ReferenceSearchResultEvents.Reset;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -170,6 +171,14 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 			for (SearchResultEvent event : events) {
 				if (event instanceof Added) {
 					addReference(((Added) event).getReferenceDescription(), true);
+				} else if (event instanceof Reset) {
+					if (rootNodes != null && !rootNodes.isEmpty()) {
+						synchronized (viewer) {
+							viewer.remove(viewer.getInput(), Iterables.newArray(rootNodes,
+									ReferenceSearchViewTreeNode.class));
+							rootNodes = null;
+						}
+					}
 				}
 			}
 			return Status.OK_STATUS;
