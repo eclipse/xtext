@@ -39,9 +39,15 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 	private IssueUtil issueUtil;
 
 	private Image defaultImage;
+	
+	private XtextEditor editor;
+
+	private IAnnotationModel annotationModel;
 
 	@Override
 	public void beforeDispose(XtextEditor xtextEditor) {
+		annotationModel.removeAnnotationModelListener(this);
+		annotationModel = null;
 		this.editor = null;
 		if (defaultImage!=null)
 			defaultImage.dispose();
@@ -50,12 +56,11 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 	@Override
 	public void afterCreatePartControl(XtextEditor xtextEditor) {
 		editor = xtextEditor;
-		defaultImage = editor.getDefaultImage();
+		defaultImage = xtextEditor.getDefaultImage();
 		updateEditorImage(xtextEditor);
-		xtextEditor.getInternalSourceViewer().getAnnotationModel().addAnnotationModelListener(this);
+		annotationModel = xtextEditor.getInternalSourceViewer().getAnnotationModel();
+		annotationModel.addAnnotationModelListener(this);
 	}
-
-	private XtextEditor editor;
 
 	protected void updateEditorImage(XtextEditor xtextEditor) {
 		Issue.Severity severity = getSeverity(xtextEditor);
