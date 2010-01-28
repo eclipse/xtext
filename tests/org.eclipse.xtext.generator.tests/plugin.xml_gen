@@ -549,4 +549,13 @@
   </extension>
 
 
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://www.xtext.org/EObjectAtOffsetTestLanguage" 
+       class = "org.eclipse.xtext.resource.eObjectAtOffsetTestLanguage.EObjectAtOffsetTestLanguagePackage"
+       genModel = "org/eclipse/xtext/resource/EObjectAtOffsetTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
 </plugin>
