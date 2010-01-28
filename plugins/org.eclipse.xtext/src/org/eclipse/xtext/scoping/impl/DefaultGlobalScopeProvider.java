@@ -16,7 +16,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IContainer;
-import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescription.Event.Source;
@@ -46,7 +45,7 @@ public class DefaultGlobalScopeProvider extends AbstractGlobalScopeProvider {
 		Iterator<IContainer> iter = containers.iterator();
 		while (iter.hasNext()) {
 			IContainer container = iter.next();
-			result = createIndexScope(result, container, reference);
+			result = createContainerScope(result, container, reference);
 		}
 		return result;
 	}
@@ -82,70 +81,8 @@ public class DefaultGlobalScopeProvider extends AbstractGlobalScopeProvider {
 		return base + "@DEFAULT_SCOPE"; 
 	}
 
-	protected SimpleScope createIndexScope(IScope parent, final IContainer container, final EReference reference) {
-		return new SimpleScope(parent, null) {
-
-			@Override
-			public Iterable<IEObjectDescription> internalGetContents() {
-				return container.findAllEObjects(reference.getEReferenceType());
-			}
-
-			@Override
-			public IEObjectDescription getContentByName(String name) {
-				Iterable<IEObjectDescription> allDescriptions = container.findAllEObjects(
-						reference.getEReferenceType(), name);
-				Iterator<IEObjectDescription> iter = allDescriptions.iterator();
-				IEObjectDescription result = null;
-				while (iter.hasNext()) {
-					if (result != null)
-						return getOuterScope().getContentByName(name);
-					result = iter.next();
-				}
-				if (result != null)
-					return result;
-				return getOuterScope().getContentByName(name);
-			}
-
-			@Override
-			public IEObjectDescription getContentByEObject(EObject object) {
-				Iterable<IEObjectDescription> allDescriptions = findAllDescriptionsFor(object);
-				Iterator<IEObjectDescription> iter = allDescriptions.iterator();
-				boolean hadNext = false;
-				while (iter.hasNext()) {
-					hadNext = true;
-					IEObjectDescription result = iter.next();
-					if (isValidForEObject(result))
-						return result;
-				}
-				if (hadNext)
-					return null;
-				return getOuterScope().getContentByEObject(object);
-			}
-
-			private boolean isValidForEObject(IEObjectDescription result) {
-				Iterable<IEObjectDescription> allDescriptionsByName = container.findAllEObjects(reference
-						.getEReferenceType(), result.getName());
-				Iterator<IEObjectDescription> iter = allDescriptionsByName.iterator();
-				IEObjectDescription inverted = null;
-				while (iter.hasNext()) {
-					if (inverted != null)
-						return false;
-					inverted = iter.next();
-				}
-				return inverted != null && inverted.getEObjectURI().equals(result.getEObjectURI());
-			}
-		};
-	}
-
-	public Iterable<IEObjectDescription> findAllDescriptionsFor(EObject object) {
-		if (object.eIsProxy())
-			throw new IllegalArgumentException("object may not be a proxy: " + object);
-		IResourceDescription.Manager descriptionManager = getResourceServiceProviderRegistry().getResourceServiceProvider(
-				object.eResource().getURI()).getResourceDescriptionManager();
-		if (descriptionManager == null)
-			throw new IllegalStateException("Cannot find description manager for " + object);
-		IResourceDescription description = descriptionManager.getResourceDescription(object.eResource());
-		return description.getExportedObjectsForEObject(object);
+	protected IScope createContainerScope(IScope parent, IContainer container, EReference reference) {
+		return new ContainerBasedScope(parent, reference, container);
 	}
 
 }
