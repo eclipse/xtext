@@ -140,6 +140,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.reference.CommentOnEofBug_234135_Test.class);
       suite.addTestSuite(org.eclipse.xtext.reference.LeafNodeBug_234132_Test.class);
       suite.addTestSuite(org.eclipse.xtext.resource.ClassloaderClasspathUriResolverTest.class);
+      suite.addTestSuite(org.eclipse.xtext.resource.EObjectAtOffsetTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.EObjectHandleImplTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.ExternalContentSupportTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.ResourceSetReferencingResourceSetTest.class);
