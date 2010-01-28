@@ -18,16 +18,13 @@ import org.eclipse.jface.viewers.OpenEvent;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.search.ui.IContextMenuConstants;
 import org.eclipse.search.ui.ISearchResult;
-import org.eclipse.search.ui.ISearchResultListener;
 import org.eclipse.search.ui.ISearchResultPage;
 import org.eclipse.search.ui.ISearchResultViewPart;
-import org.eclipse.search.ui.SearchResultEvent;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.layout.FillLayout;
 import org.eclipse.swt.layout.GridData;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Control;
-import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IActionBars;
 import org.eclipse.ui.IMemento;
 import org.eclipse.ui.OpenAndLinkWithEditorHelper;
@@ -38,17 +35,17 @@ import org.eclipse.xtext.ui.core.editor.IURIEditorOpener;
 
 import com.google.inject.Inject;
 
-public class ReferenceSearchViewPage extends Page implements ISearchResultPage, ISearchResultListener {
+public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 
 	private String id;
 
 	private ISearchResult searchResult;
 
-	private Object uiState;
-
 	private Composite control;
 
 	private TreeViewer viewer;
+
+	private ISearchResultViewPart part;
 
 	private IAction showNextAction;
 
@@ -57,7 +54,7 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage, 
 	private IAction expandAllAction;
 
 	private IAction collapseAllAction;
-
+	
 	@Inject
 	private ReferenceSearchResultContentProvider contentProvider;
 
@@ -67,7 +64,6 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage, 
 	@Inject
 	private IURIEditorOpener uriEditorOpener;
 
-	private ISearchResultViewPart part;
 
 	public ReferenceSearchViewPage() {
 		showPreviousAction = new ReferenceSearchViewPageActions.ShowPrevious(this);
@@ -89,15 +85,13 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage, 
 	}
 
 	public Object getUIState() {
-		return uiState;
+		return viewer.getSelection();
 	}
 
 	public void restoreState(IMemento memento) {
-		// TODO Auto-generated method stub
 	}
 
 	public void saveState(IMemento memento) {
-		// TODO Auto-generated method stub
 	}
 
 	@Override
@@ -107,13 +101,8 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage, 
 
 	public void setInput(ISearchResult newSearchResult, Object uiState) {
 		synchronized (viewer) {
-			if (searchResult != null) {
-				searchResult.removeListener(this);
-			}
 			this.searchResult = newSearchResult;
-			this.uiState = uiState;
 			if (searchResult != null) {
-				searchResult.addListener(this);
 				viewer.setInput(newSearchResult);
 				if (uiState instanceof ISelection) {
 					viewer.setSelection((ISelection) uiState);
@@ -196,20 +185,13 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage, 
 
 	@Override
 	public void setFocus() {
-		// TODO Auto-generated method stub
-	}
-
-	public void searchResultChanged(final SearchResultEvent e) {
-		Display.getDefault().asyncExec(new Runnable() {
-			public void run() {
-				synchronized (viewer) {
-					viewer.setInput(e.getSearchResult());					
-				}
-			}
-		});
+		Control control = viewer.getControl();
+		if (control != null && !control.isDisposed())
+			control.setFocus();
 	}
 
 	public TreeViewer getViewer() {
 		return viewer;
 	}
+	
 }

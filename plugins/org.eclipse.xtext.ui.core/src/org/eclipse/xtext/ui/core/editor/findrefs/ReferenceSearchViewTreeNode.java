@@ -28,11 +28,14 @@ public class ReferenceSearchViewTreeNode {
 	private URI uri;
 
 	private Object labelDescription;
+
+	private Object description;
 	
-	public ReferenceSearchViewTreeNode(ReferenceSearchViewTreeNode parent, URI uri, Object labelDescription) {
+	public ReferenceSearchViewTreeNode(ReferenceSearchViewTreeNode parent, URI uri, Object description, Object labelDescription) {
 		super();
 		this.parent = parent;
 		this.uri = uri;
+		this.description = description;
 		this.labelDescription = labelDescription;
 		if (parent != null) {
 			parent.addChild(this);
@@ -56,11 +59,21 @@ public class ReferenceSearchViewTreeNode {
 		}
 		children.add(child);
 	}
+	
+	public void removeChild(ReferenceSearchViewTreeNode child) {
+		if(children != null) {
+			children.remove(child);
+		}
+	}
 
 	public URI getURI() {
 		return uri;
 	}
 
+	public Object getDescription() {
+		return description;
+	}
+	
 	public Object getLabelDescription() {
 		return labelDescription;
 	}
