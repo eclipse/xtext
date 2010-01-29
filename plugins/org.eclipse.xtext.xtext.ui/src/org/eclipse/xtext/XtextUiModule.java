@@ -12,12 +12,14 @@ import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingCa
 import org.eclipse.xtext.ui.core.ILocationInFileProvider;
 import org.eclipse.xtext.ui.core.editor.bracketmatching.IBracketMatcher;
 import org.eclipse.xtext.ui.core.editor.contentassist.XtextContentAssistProcessor;
+import org.eclipse.xtext.ui.core.editor.folding.IFoldingRegionProvider;
 import org.eclipse.xtext.ui.core.wizard.IProjectCreator;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ecoreInference.ProjectAwareXtendXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ui.XtextLocationInFileProvider;
 import org.eclipse.xtext.xtext.ui.editor.autoedit.XtextAutoEditStrategy;
 import org.eclipse.xtext.xtext.ui.editor.bracketmatching.XtextGrammarBracketMatcher;
+import org.eclipse.xtext.xtext.ui.editor.folding.XtextGrammarFoldingRegionProvider;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextActionBarContributor;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextDeclarativeModelTransformer;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingCalculator;
@@ -70,15 +72,9 @@ public class XtextUiModule extends AbstractXtextUiModule {
 		return XtextLocationInFileProvider.class;
 	}
 
-//	@Override
-//	public Class<? extends ILabelProvider> bindILabelProvider() {
-//		return XtextLabelProvider.class;
-//	}
-
-//	@Override
-//	public java.lang.Class<? extends IStyledLabelProvider> bindDelegatingStyledCellLabelProvider$IStyledLabelProvider() {
-//		return XtextLabelProvider.class;
-//	}
+	public Class<? extends IFoldingRegionProvider> bindIFoldingRegionProvider() {
+		return XtextGrammarFoldingRegionProvider.class;
+	}
 
 	public Class<? extends IContentOutlineNodeAdapterFactory> bindIContentOutlineNodeAdapterFactory() {
 		return org.eclipse.xtext.xtext.ui.editor.outline.XtextContentOutlineNodeAdapterFactory.class;
