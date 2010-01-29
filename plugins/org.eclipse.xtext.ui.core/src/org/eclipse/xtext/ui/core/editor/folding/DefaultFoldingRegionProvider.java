@@ -46,24 +46,34 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 		while (allContents.hasNext()) {
 			EObject eObject = allContents.next();
 			if (isHandled(eObject)) {
-				addFoldingRegion(xtextDocument, eObject, foldingRegions);
+				addFoldingRegions(xtextDocument, eObject, foldingRegions);
 			}
 		}
 		return foldingRegions;
 	}
 
-	protected void addFoldingRegion(IXtextDocument xtextDocument, EObject eObject, List<IFoldingRegion> foldingRegions) {
-		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(eObject);
-		CompositeNode compositeNode = nodeAdapter.getParserNode();
+	protected void addFoldingRegions(IXtextDocument xtextDocument, EObject eObject, List<IFoldingRegion> foldingRegions) {
+		Assert.isNotNull(eObject, "parameter 'eObject' must not be null");
+		CompositeNode compositeNode = getCompositeNode(eObject);
 		Position position = getPosition(xtextDocument, compositeNode);
 		if (position != null) {
-			IFoldingRegion foldingRegion = createFoldingRegion(position,eObject);
-			Assert.isNotNull(foldingRegion, "foldingRegion must not be null");
-			foldingRegions.add(foldingRegion);
+			List<IFoldingRegion> newFoldingRegions = createFoldingRegions(eObject,position);
+			Assert.isNotNull(newFoldingRegions, "'newFoldingRegions' must not be null");
+			foldingRegions.addAll(newFoldingRegions);
+		} else {
+			if (log.isDebugEnabled()) {
+				log.debug("No position for eObject '"+eObject+"' with compositeNode '"+compositeNode+"' provided");
+			}
 		}
 	}
 
+	protected CompositeNode getCompositeNode(EObject eObject) {
+		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(eObject);
+		return nodeAdapter.getParserNode();
+	}
+
 	protected Position getPosition(IXtextDocument xtextDocument, CompositeNode compositeNode) {
+		Assert.isNotNull(compositeNode, "parameter 'compositeNode' must not be null");
 		Position position = null;
 		try {
 			int startLine = xtextDocument.getLineOfOffset(compositeNode.getOffset());
@@ -85,12 +95,16 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 		return eObject.eContainer() != null && !eObject.eContents().isEmpty();
 	}
 
-	protected IFoldingRegion createFoldingRegion(Position position, EObject eObject) {
+	protected List<IFoldingRegion> createFoldingRegions(EObject eObject, Position position) {
+		IFoldingRegion foldingRegion = newFoldingRegion(eObject, position);
+		return Lists.newArrayList(foldingRegion);
+	}
+
+	protected IFoldingRegion newFoldingRegion(EObject eObject, Position position) {
 		return new DefaultFoldingRegion(position);
 	}
-
-	protected IFoldingRegion createFoldingRegion(Position position, StyledString styledString) {
-		return new DefaultFoldingRegion(position, styledString);
+	
+	protected IFoldingRegion newFoldingRegion(EObject eObject, Position position,StyledString styledString) {
+		return new DefaultFoldingRegion(position,styledString);
 	}
-
 }
