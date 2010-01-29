@@ -139,7 +139,7 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		Label entryRuleLabel = new Label(composite, SWT.NONE);
 		entryRuleLabel.setText(Messages.WizardSelectImportedEPackagePage_entryRuleLabelText);
 		entryRuleLabel.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 2, 1));
-		rootElementComboBoxCellEditor = new CCombo(composite, SWT.DROP_DOWN | SWT.READ_ONLY);
+		rootElementComboBoxCellEditor = new CCombo(composite, SWT.BORDER | SWT.DROP_DOWN | SWT.READ_ONLY);
 		rootElementComboBoxCellEditor.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
 		rootElementComboBoxCellEditor.addSelectionListener(new SelectionAdapter() {
 			@Override
@@ -150,7 +150,7 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		Label defaultPackageLabel = new Label(composite, SWT.NONE);
 		defaultPackageLabel.setText("Default package:");
 		defaultPackageLabel.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 2, 1));
-		defaultPackageComboBoxCellEditor = new CCombo(composite, SWT.DROP_DOWN | SWT.READ_ONLY);
+		defaultPackageComboBoxCellEditor = new CCombo(composite, SWT.BORDER | SWT.DROP_DOWN | SWT.READ_ONLY);
 		defaultPackageComboBoxCellEditor.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, true, 1, 1));
 		initializeListFromSelection(selection);
 		setControl(composite);
