@@ -7,12 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.impl;
 
+import java.util.Set;
+
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IContainer.Manager;
 import org.eclipse.xtext.validation.IResourceValidator;
 
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -46,6 +52,21 @@ public class DefaultResourceServiceProvider implements IResourceServiceProvider 
 
 	public IResourceValidator getResourceValidator() {
 		return resourceValidator;
+	}
+	
+	private Set<String> extensions;
+	
+	@Inject
+	public void setExtensions(@Named(Constants.FILE_EXTENSIONS)String extensions) {
+		String[] split = extensions.split(",");
+		this.extensions = Sets.newHashSet();
+		for (String string : split) {
+			this.extensions.add(string);
+		}
+	}
+	
+	public boolean canHandle(URI uri) {
+		return extensions.contains(uri.fileExtension());
 	}
 
 }
