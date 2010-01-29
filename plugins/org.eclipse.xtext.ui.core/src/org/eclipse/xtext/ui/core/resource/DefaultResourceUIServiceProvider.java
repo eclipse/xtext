@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.resource;
 
+import org.eclipse.core.resources.IStorage;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IContainer.Manager;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -42,6 +44,14 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 	
 	public IDescriptionLabelProvider getDescriptionLabelProvider() {
 		return descriptionLabelProvider;
+	}
+	
+	public boolean canHandle(URI uri) {
+		return delegate.canHandle(uri);
+	}
+	
+	public boolean canHandle(URI uri, IStorage storage) {
+		return delegate.canHandle(uri);
 	}
 
 }
