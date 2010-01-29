@@ -21,32 +21,36 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
+import org.eclipse.xtext.util.TextLocation;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
 public class EObjectAtOffsetHelper {
 
-	public static EObject resolveElementAt(XtextResource resource, int offset) {
-		return internalResolveElementAt(resource, offset, true, true);
+	public static EObject resolveElementAt(XtextResource resource, int offset, TextLocation location) {
+		return internalResolveElementAt(resource, offset, true, true, location);
 	}
 
-	public static EObject resolveContainedElementAt(XtextResource resource, int offset) {
-		return internalResolveElementAt(resource, offset, true, false);
+	public static EObject resolveContainedElementAt(XtextResource resource, int offset, TextLocation location) {
+		return internalResolveElementAt(resource, offset, true, false, location);
 	}
 
-	public static EObject resolveCrossReferencedElementAt(XtextResource resource, int offset) {
-		return internalResolveElementAt(resource, offset, false, true);
+	public static EObject resolveCrossReferencedElementAt(XtextResource resource, int offset, TextLocation location) {
+		return internalResolveElementAt(resource, offset, false, true, location);
 	}
 
-	private static EObject internalResolveElementAt(XtextResource resource, int offset, boolean isContainment, boolean isCrossReference) {
+	private static EObject internalResolveElementAt(XtextResource resource, int offset, boolean isContainment,
+			boolean isCrossReference, TextLocation location) {
 		IParseResult parseResult = resource.getParseResult();
 		if (parseResult != null && parseResult.getRootNode() != null) {
 			AbstractNode node = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(parseResult.getRootNode(), offset);
 			while (node != null) {
 				if (isCrossReference && node.getGrammarElement() instanceof CrossReference) {
+					updateLocation(location, node);
 					return resolveCrossReferencedElement(node);
 				} else if (isContainment && node.getElement() != null) {
+					updateLocation(location, node);
 					return node.getElement();
 				} else {
 					node = node.getParent();
@@ -54,6 +58,13 @@ public class EObjectAtOffsetHelper {
 			}
 		}
 		return null;
+	}
+
+	private static void updateLocation(TextLocation location, AbstractNode node) {
+		if (location != null) {
+			location.setOffset(node.getOffset());
+			location.setLength(node.getLength());
+		}
 	}
 
 	private static EObject resolveCrossReferencedElement(AbstractNode node) {

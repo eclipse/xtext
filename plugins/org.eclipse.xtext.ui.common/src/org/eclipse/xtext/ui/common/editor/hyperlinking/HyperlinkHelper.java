@@ -7,31 +7,21 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.hyperlinking;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.core.runtime.Assert;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.URIConverter;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.viewers.ILabelProvider;
-import org.eclipse.xtext.Assignment;
-import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.linking.ILinkingService;
-import org.eclipse.xtext.linking.impl.IllegalNodeException;
-import org.eclipse.xtext.parser.IParseResult;
-import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.parsetree.ParseTreeUtil;
+import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.util.Wrapper;
+import org.eclipse.xtext.util.TextLocation;
 
+import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -56,30 +46,24 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 	}
 	
 	@Inject
-	private ILinkingService linkingService;
-	
-	@Inject
 	private ILabelProvider labelProvider;
-	
+
 	@Inject
 	private Provider<XtextHyperlink> hyperlinkProvider;
 
+	// TODO: consider removing the parameter createMultipleHyperlinks 
 	public IHyperlink[] createHyperlinksByOffset(XtextResource resource, int offset, boolean createMultipleHyperlinks) {
-		IParseResult parseResult = resource.getParseResult();
-		Assert.isNotNull(parseResult);
-		AbstractNode abstractNode = ParseTreeUtil.getCurrentOrFollowingNodeByOffset(parseResult.getRootNode(), offset);
-		final Wrapper<Region> location = Wrapper.wrap(new Region(abstractNode.getOffset(), abstractNode.getLength()));
-		List<EObject> crossLinkedEObjects = findCrossLinkedEObject(abstractNode, location);
-		if (crossLinkedEObjects.isEmpty())
-			return null;
-		List<IHyperlink> links = new ArrayList<IHyperlink>();
-		IHyperlinkAcceptor acceptor = new HyperlinkAcceptor(links);
-		for (EObject crossReffed : crossLinkedEObjects) {
-			if (!links.isEmpty() && !createMultipleHyperlinks)
-				break;
-			createHyperlinksTo(resource, location.get(), crossReffed, acceptor);
+		TextLocation textLocation = new TextLocation();
+		EObject crossLinkedEObject = EObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, offset,
+				textLocation);
+		if (crossLinkedEObject != null) {
+			List<IHyperlink> links = Lists.newArrayList();
+			IHyperlinkAcceptor acceptor = new HyperlinkAcceptor(links);
+			Region region = new Region(textLocation.getOffset(), textLocation.getLength());
+			createHyperlinksTo(resource, region, crossLinkedEObject, acceptor);
+			return Iterables.newArray(links, IHyperlink.class);				
 		}
-		return links.toArray(new IHyperlink[links.size()]);
+		return null;
 	}
 	
 	public void createHyperlinksTo(XtextResource from, Region region, EObject to, IHyperlinkAcceptor acceptor) {
@@ -87,7 +71,7 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 		final String hyperlinkText = labelProvider.getText(to);
 		final URI uri = EcoreUtil.getURI(to);
 		final URI normalized = uriConverter.normalize(uri);
-		
+
 		XtextHyperlink result = hyperlinkProvider.get();
 		result.setHyperlinkRegion(region);
 		result.setURI(normalized);
@@ -95,23 +79,4 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 		acceptor.accept(result);
 	}
 
-	protected List<EObject> findCrossLinkedEObject(AbstractNode node, Wrapper<Region> location) {
-		AbstractNode nodeToCheck = node;
-		while(nodeToCheck != null && !(nodeToCheck.getGrammarElement() instanceof Assignment)) {
-			if (nodeToCheck.getGrammarElement() instanceof CrossReference) {
-				EObject semanticModel = NodeUtil.getNearestSemanticObject(nodeToCheck);
-				EReference eReference = GrammarUtil.getReference((CrossReference) nodeToCheck.getGrammarElement(),
-						semanticModel.eClass());
-				try {
-					if (location != null)
-						location.set(new Region(nodeToCheck.getOffset(), nodeToCheck.getLength()));
-					return linkingService.getLinkedObjects(semanticModel, eReference, nodeToCheck);
-				} catch (IllegalNodeException ex) {
-					return Collections.emptyList();
-				}
-			}
-			nodeToCheck = nodeToCheck.getParent();
-		}
-		return Collections.emptyList();
-	}
 }

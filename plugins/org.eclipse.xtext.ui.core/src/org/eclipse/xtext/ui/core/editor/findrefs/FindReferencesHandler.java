@@ -47,7 +47,7 @@ public class FindReferencesHandler extends AbstractHandler {
 		}
 
 		public IEObjectDescription exec(XtextResource state) throws Exception {
-			EObject element = EObjectAtOffsetHelper.resolveElementAt(state, selection.getOffset());
+			EObject element = EObjectAtOffsetHelper.resolveElementAt(state, selection.getOffset(), null);
 			if (element != null) {
 				final URI eObjectURI = EcoreUtil.getURI(element);
 				IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(eObjectURI
