@@ -8,8 +8,10 @@
 package org.eclipse.xtext.ui.common.editor.templates;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.templates.TemplateVariable;
@@ -28,6 +30,7 @@ import org.eclipse.xtext.scoping.IScope;
  */
 public class CrossReferenceTemplateVariableResolver extends
 		AbstractTemplateVariableResolver {
+	private static final Logger log = Logger.getLogger(CrossReferenceTemplateVariableResolver.class);
 
 	public CrossReferenceTemplateVariableResolver() {
 		super("CrossReference", "TemplateVariableResolver for CrossReferences");
@@ -41,6 +44,11 @@ public class CrossReferenceTemplateVariableResolver extends
 		String[] classReferencePair = abbreviatedCrossReference.split("\\.");
 		EReference reference = getReference(classReferencePair[0],
 				classReferencePair[1], getGrammar(castedContext));
+		if (reference == null) {
+			log.error("CrossReference to class '" + classReferencePair[0] + "' and reference '" + classReferencePair[1]
+					+ "' could not be resolved.");
+			return Collections.emptyList();
+		}
 		IScope scope = castedContext.getScopeProvider().getScope(
 				castedContext.getContentAssistContext().getCurrentModel(),
 				reference);
