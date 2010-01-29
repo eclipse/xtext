@@ -6,7 +6,7 @@
 	<property name="xmiModelDirectory" value=""/>
 	<property name="backtrack" value="false"/>
 	<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
-	<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" genModels="${genModels}" basePackage="${basePackage}" javaModelDirectory="${javaModelDirectory}" xmiModelDirectory="${xmiModelDirectory}"/>
+	<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" referencedGenModels="${genModels}" basePackage="${basePackage}" javaModelDirectory="${javaModelDirectory}" xmiModelDirectory="${xmiModelDirectory}"/>
 	<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
 	<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment">
 		<options backtrack="${backtrack}" classSplitting="true"/>
