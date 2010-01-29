@@ -37,6 +37,12 @@ public interface IResourceServiceProvider {
 	 */
 	IContainer.Manager getContainerManager();
 	
+	/**
+	 * Tells whether the given URI can be handled by this {@link IResourceServiceProvider}
+	 * @return true if the URI can be handled
+	 */
+	boolean canHandle(URI uri);
+	
 	interface Registry {
 		/**
 		 * Returns the {@link IResourceServiceProvider} appropriate for the given URI. <b>Content types are not yet

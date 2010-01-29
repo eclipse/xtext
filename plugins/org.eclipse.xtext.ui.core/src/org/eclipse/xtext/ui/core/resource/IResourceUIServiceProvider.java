@@ -7,12 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.core.resource;
 
+import org.eclipse.core.resources.IStorage;
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 
 import com.google.inject.ImplementedBy;
 
 /**
  * @author koehnlein - Initial contribution and API
+ * @author Sven Efftinge
  */
 @ImplementedBy(DefaultResourceUIServiceProvider.class)
 public interface IResourceUIServiceProvider extends IResourceServiceProvider {
@@ -22,5 +25,10 @@ public interface IResourceUIServiceProvider extends IResourceServiceProvider {
 	 */
 	IDescriptionLabelProvider getDescriptionLabelProvider();
 	
-
+	/**
+	 * Tells whether the given URI together with the underlying {@link IStorage} can be handled by this {@link IResourceServiceProvider}
+	 * @return true if the URI and {@link IStorage} can be handled
+	 */
+	boolean canHandle(URI uri, IStorage storage);
+	
 }

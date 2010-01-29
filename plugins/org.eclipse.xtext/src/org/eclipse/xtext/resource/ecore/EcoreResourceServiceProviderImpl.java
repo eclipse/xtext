@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.ecore;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IContainer.Manager;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -28,6 +29,10 @@ public class EcoreResourceServiceProviderImpl implements IResourceServiceProvide
 
 	public IResourceValidator getResourceValidator() {
 		return IResourceValidator.NULL;
+	}
+
+	public boolean canHandle(URI uri) {
+		return "ecore".equals(uri.fileExtension());
 	}
 
 }
