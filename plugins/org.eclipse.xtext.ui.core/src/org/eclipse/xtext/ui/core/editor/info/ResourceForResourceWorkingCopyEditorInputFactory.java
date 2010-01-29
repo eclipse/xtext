@@ -3,10 +3,13 @@ package org.eclipse.xtext.ui.core.editor.info;
 import java.io.InputStream;
 
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ui.IEditorInput;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.core.editor.model.JavaClassPathResourceForIEditorInputFactory;
 
+/**
+ * @author Michael Clay
+ */
 public class ResourceForResourceWorkingCopyEditorInputFactory extends JavaClassPathResourceForIEditorInputFactory {
 
 	@Override
@@ -20,8 +23,8 @@ public class ResourceForResourceWorkingCopyEditorInputFactory extends JavaClassP
 
 	private Resource createWorkingCopy(ResourceWorkingCopyFileEditorInput editorInput) {
 		try {
-			XtextResourceSet xtextResourceSet = getResourceSet(editorInput.getFile());
-			Resource workingCopy = xtextResourceSet.createResource(editorInput.getResource().getURI());
+			ResourceSet resourceSet = getResourceSet(editorInput.getFile());
+			Resource workingCopy = resourceSet.createResource(editorInput.getResource().getURI());
 			InputStream inputStream = editorInput.getFile().getContents(); 
 			try {
 				workingCopy.load(inputStream, null);
