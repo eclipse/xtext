@@ -36,7 +36,7 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 							@Override
 							protected Void handle(IJarEntryResource jarEntry, TraversalState state) {
 								URI uri = locator.getURI(root, jarEntry, state);
-								if (isValid(uri)) {
+								if (isValid(uri, jarEntry)) {
 									toBeBuilt.getToBeDeleted().add(uri);
 									toBeBuilt.getToBeUpdated().add(uri);
 								}
