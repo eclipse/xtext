@@ -1,13 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?eclipse version="3.0"?>
-
-<!--
- <copyright>
- </copyright>
-
- $Id: plugin.xml,v 1.3 2010/01/26 14:27:14 jkohnlein Exp $
--->
-
 <plugin>
 
    <extension point="org.eclipse.emf.ecore.generated_package">
@@ -66,8 +58,7 @@
         <page
             class="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTestExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest"
-            name="Ecore2XtextTest"
-            category="org.eclipse.xtext.languages">
+            name="Ecore2XtextTest">
             <keywordReference id="org.eclipse.xtext.xtext.ui.ecore2xtext.ui.keyword_Ecore2XtextTest"/>
         </page>
         <page
@@ -101,7 +92,7 @@
     </extension>
     <extension point="org.eclipse.ui.menus">
         <menuContribution
-            locationURI="popup:#TextEditorContext?after=group.open">
+            locationURI="popup:#TextEditorContext?after=group.edit">
              <command
                  commandId="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.validate"
                  style="push"
@@ -114,6 +105,27 @@
          </command>  
          </menuContribution>
     </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTestExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>   
 
 <!-- adding resource factories -->
 
@@ -124,13 +136,12 @@
 			type="ecore2xtexttest">
 		</parser>
 	</extension>
-	<extension
-        point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTestExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
-           uriExtension="ecore2xtexttest">
-     </resourceServiceProvider>
-  </extension>
-   
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTestExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
+            uriExtension="ecore2xtexttest">
+        </resourceServiceProvider>
+    </extension>
+
 
 </plugin>
