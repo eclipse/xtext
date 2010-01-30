@@ -18,6 +18,11 @@ public class XtextAutoEditStrategy extends DefaultAutoEditStrategy {
 	protected void configure(IEditStrategyAcceptor acceptor) {
 		super.configure(acceptor);
 		acceptor.accept(newMultiLineTerminals(":", null, ";"));
+		acceptor.accept(newSingleLineTerminals('{', '}'));
 	}
-	
+
+	@Override
+	protected void configureCurlyBracesBlock(IEditStrategyAcceptor acceptor) {
+		// disable
+	}
 }
