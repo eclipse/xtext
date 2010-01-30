@@ -26,7 +26,6 @@ import org.eclipse.jface.text.reconciler.IReconciler;
 import org.eclipse.jface.text.source.IAnnotationHover;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.ui.editors.text.TextSourceViewerConfiguration;
-import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.ui.core.editor.autoedit.DefaultAutoEditStrategy;
 import org.eclipse.xtext.ui.core.editor.contentassist.IContentAssistantFactory;
 import org.eclipse.xtext.ui.core.editor.formatting.IContentFormatterFactory;
@@ -66,14 +65,6 @@ public class XtextSourceViewerConfiguration extends TextSourceViewerConfiguratio
 	@Inject
 	private Provider<XtextPresentationReconciler> presentationReconcilerProvider;
 	
-	@Inject
-	private IIndentationInformation indentationInformation;
-	
-	@Override
-	public int getTabWidth(ISourceViewer sourceViewer) {
-		return indentationInformation.getIndentString().length();
-	}
-
 	@Override
 	public IAnnotationHover getAnnotationHover(ISourceViewer sourceViewer) {
 		return new ProblemHover(sourceViewer);
