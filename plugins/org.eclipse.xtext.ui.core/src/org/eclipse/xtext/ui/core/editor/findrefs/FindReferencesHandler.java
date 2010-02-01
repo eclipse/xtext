@@ -52,14 +52,16 @@ public class FindReferencesHandler extends AbstractHandler {
 				final URI eObjectURI = EcoreUtil.getURI(element);
 				IResourceDescription resourceDescription = resourceDescriptions.getResourceDescription(eObjectURI
 						.trimFragment());
-				Iterator<IEObjectDescription> eObjectDescriptions = Iterables.filter(
-						resourceDescription.getExportedObjects(), new Predicate<IEObjectDescription>() {
-							public boolean apply(IEObjectDescription input) {
-								return input.getEObjectURI().equals(eObjectURI);
-							}
-						}).iterator();
-				if (eObjectDescriptions.hasNext()) {
-					return eObjectDescriptions.next();
+				if (resourceDescription != null) {
+					Iterator<IEObjectDescription> eObjectDescriptions = Iterables.filter(
+							resourceDescription.getExportedObjects(), new Predicate<IEObjectDescription>() {
+								public boolean apply(IEObjectDescription input) {
+									return input.getEObjectURI().equals(eObjectURI);
+								}
+							}).iterator();
+					if (eObjectDescriptions.hasNext()) {
+						return eObjectDescriptions.next();
+					}
 				}
 			}
 			return null;

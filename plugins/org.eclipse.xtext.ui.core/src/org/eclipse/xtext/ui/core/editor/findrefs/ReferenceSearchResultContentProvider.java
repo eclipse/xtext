@@ -120,6 +120,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 							eObjectURI, referenceDescription, eObjectDescription);
 					if (isUpdateViewer) {
 						viewer.add(resourceNode, referenceNode);
+						viewer.expandToLevel(resourceNode, 1);
 					}
 				}
 			}
