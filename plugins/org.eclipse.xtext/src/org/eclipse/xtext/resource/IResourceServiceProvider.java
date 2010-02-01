@@ -15,6 +15,8 @@ import org.eclipse.xtext.resource.impl.ResourceServiceProviderRegistryImpl;
 import org.eclipse.xtext.validation.IResourceValidator;
 
 import com.google.inject.ImplementedBy;
+import com.google.inject.ProvidedBy;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -43,6 +45,7 @@ public interface IResourceServiceProvider {
 	 */
 	boolean canHandle(URI uri);
 	
+	@ProvidedBy(Registry.RegistryProvider.class)
 	interface Registry {
 		/**
 		 * Returns the {@link IResourceServiceProvider} appropriate for the given URI. <b>Content types are not yet
@@ -82,5 +85,11 @@ public interface IResourceServiceProvider {
 		Map<String, Object> getExtensionToFactoryMap();
 
 		Map<String, Object> getProtocolToFactoryMap();
+		
+		public static class RegistryProvider implements Provider<Registry> {
+			public Registry get() {
+				return INSTANCE;
+			}
+		}
 	}
 }
