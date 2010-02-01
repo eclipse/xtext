@@ -27,6 +27,7 @@ import org.eclipse.xtext.util.SimpleCache;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
@@ -77,7 +78,7 @@ public class Storage2UriMapperImpl implements IStorage2UriMapper, IResourceChang
 
 	public final URI getUri(IStorage storage) {
 		URI uri = internalGetUri(storage);
-		if (uri!=null && isValidUri(uri))
+		if (uri!=null && isValidUri(uri,storage))
 			return uri;
 		return null;
 	}
@@ -88,9 +89,13 @@ public class Storage2UriMapperImpl implements IStorage2UriMapper, IResourceChang
 		} 
 		return null;
 	}
+	
+	@Inject
+	private UriValidator uriValidator;
 
-	public boolean isValidUri(URI uri) {
-		return uri!=null && (resourceFactoryRegistry.getFactory(uri) != null);
+	public boolean isValidUri(URI uri, IStorage storage) {
+		boolean valid = uriValidator.isValid(uri, storage);
+		return valid;
 	}
 	
 	

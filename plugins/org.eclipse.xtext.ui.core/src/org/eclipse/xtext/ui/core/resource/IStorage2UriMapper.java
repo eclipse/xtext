@@ -24,5 +24,4 @@ public interface IStorage2UriMapper {
 	
 	URI getUri(IStorage storage);
 	
-	boolean isValidUri(URI uri);
 }

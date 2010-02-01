@@ -35,7 +35,7 @@ public class Storage2UriMapperJdtImplTest extends TestCase {
 		
 		Storage2UriMapperJavaImpl impl = new Storage2UriMapperJavaImpl() {
 			@Override
-			public boolean isValidUri(URI uri) {
+			public boolean isValidUri(URI uri, IStorage storage) {
 				return uri!=null;
 			}
 		};
@@ -56,7 +56,7 @@ public class Storage2UriMapperJdtImplTest extends TestCase {
 		
 		Storage2UriMapperJavaImpl impl = new Storage2UriMapperJavaImpl() {
 			@Override
-			public boolean isValidUri(URI uri) {
+			public boolean isValidUri(URI uri, IStorage storage) {
 				return uri!=null;
 			}
 		};

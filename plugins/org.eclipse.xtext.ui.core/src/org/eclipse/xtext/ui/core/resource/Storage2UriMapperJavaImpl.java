@@ -150,7 +150,7 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 	protected URI computeUriForStorageInJarOrExternalClassFolder(IStorage storage) {
 		if (storage instanceof IJarEntryResource) {
 			URI uri = getUriForIJarEntryResource((IJarEntryResource) storage);
-			if (isValidUri(uri))
+			if (isValidUri(uri,storage))
 				return uri;
 		}
 		return null;

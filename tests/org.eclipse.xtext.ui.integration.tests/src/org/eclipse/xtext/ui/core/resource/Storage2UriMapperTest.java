@@ -12,6 +12,7 @@ import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.core.resources.IStorage;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -24,7 +25,7 @@ public class Storage2UriMapperTest extends TestCase {
 		
 		Storage2UriMapperImpl mapper = new Storage2UriMapperImpl() {
 			@Override
-			public boolean isValidUri(URI uri) {
+			public boolean isValidUri(URI uri, IStorage storage) {
 				return true;
 			}
 		};

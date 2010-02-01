@@ -11,7 +11,7 @@ import static org.eclipse.xtext.junit.util.JavaProjectSetupUtil.*;
 
 import java.util.Collection;
 
-import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.*;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
@@ -44,7 +44,7 @@ public class JavaProjectsStateTest extends AbstractAllContainersStateTests {
 		srcRoot = javaProject1.getPackageFragmentRoot(member);
 		IStorage2UriMapper mapper = new Storage2UriMapperJavaImpl() {
 			@Override
-			public boolean isValidUri(URI uri) {
+			public boolean isValidUri(URI uri, IStorage storage) {
 				return uri != null;
 			}
 		};
