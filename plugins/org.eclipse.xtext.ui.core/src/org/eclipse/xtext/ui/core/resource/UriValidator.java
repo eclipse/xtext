@@ -5,12 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.builder.impl;
+package org.eclipse.xtext.ui.core.resource;
 
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider;
 
 import com.google.inject.Inject;
 
@@ -23,6 +22,8 @@ public class UriValidator {
 	private IResourceServiceProvider.Registry registry;
 
 	public boolean isValid(URI uri, IStorage storage) {
+		if (uri==null)
+			return false;
 		IResourceServiceProvider resourceServiceProvider = registry.getResourceServiceProvider(uri);
 		if (resourceServiceProvider!=null) {
 			if (resourceServiceProvider instanceof IResourceUIServiceProvider) {

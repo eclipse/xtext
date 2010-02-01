@@ -27,6 +27,8 @@ public interface IResourceUIServiceProvider extends IResourceServiceProvider {
 	
 	/**
 	 * Tells whether the given URI together with the underlying {@link IStorage} can be handled by this {@link IResourceServiceProvider}
+	 * @param uri - might be null
+	 * @param storage - might be null
 	 * @return true if the URI and {@link IStorage} can be handled
 	 */
 	boolean canHandle(URI uri, IStorage storage);

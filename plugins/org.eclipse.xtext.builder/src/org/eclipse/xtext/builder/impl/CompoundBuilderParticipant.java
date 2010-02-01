@@ -17,10 +17,8 @@ import org.eclipse.core.runtime.IExtensionRegistry;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.ecore.plugin.RegistryReader;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.builder.internal.Activator;
-import org.eclipse.xtext.resource.IResourceDescription.Delta;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
@@ -46,7 +44,7 @@ public class CompoundBuilderParticipant implements IXtextBuilderParticipant {
 	
 	private Map<String, IXtextBuilderParticipant> classToParticipant;
 	
-	public void build(ResourceSet resourceSet, ImmutableList<Delta> deltas, IProgressMonitor monitor)
+	public void build(IBuildContext buildContext, IProgressMonitor monitor)
 			throws CoreException {
 		ImmutableList<IXtextBuilderParticipant> participants = getParticipants();
 		if (participants.isEmpty())
@@ -57,7 +55,7 @@ public class CompoundBuilderParticipant implements IXtextBuilderParticipant {
 			for(IXtextBuilderParticipant participant: participants) {
 				if (subMonitor.isCanceled())
 					return;
-				participant.build(resourceSet, deltas, subMonitor.newChild(1));
+				participant.build(buildContext, subMonitor.newChild(1));
 			}
 		} finally {
 			subMonitor.done();

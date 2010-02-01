@@ -15,6 +15,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.ui.core.containers.WorkspaceProjectsState;
 import org.eclipse.xtext.ui.core.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.core.resource.Storage2UriMapperImpl;
+import org.eclipse.core.resources.IStorage;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -35,7 +36,7 @@ public class WorkspaceProjectsStateTest extends AbstractAllContainersStateTests 
 		uri3 = createFileAndRegisterResource(project2, "file3");
 		IStorage2UriMapper mapper = new Storage2UriMapperImpl() {
 			@Override
-			public boolean isValidUri(URI uri) {
+			public boolean isValidUri(URI uri, IStorage storage) {
 				return uri != null && !uri.toString().endsWith("/.project");
 			}
 		};

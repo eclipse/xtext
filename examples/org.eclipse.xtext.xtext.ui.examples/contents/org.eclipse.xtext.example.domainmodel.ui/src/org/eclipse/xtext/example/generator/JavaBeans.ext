@@ -1,0 +1,19 @@
+import org::eclipse::xtext::example::domainmodel;
+
+extension org::eclipse::xtext::example::generator::JavaImports;
+
+packageName(Type this) :
+	qualifiedName(eContainer());
+	
+String qualifiedName(Void this) : null;
+String qualifiedName(Type this) : packageName()==null? name : packageName()+"."+name;
+String qualifiedName(Object this) : null;
+String qualifiedName(PackageDeclaration this) :
+	if qualifiedName(eContainer())==null 
+	then name
+	else qualifiedName(eContainer())+'.'+name;
+	
+simpleName(Type this) :
+	registerImport(this.qualifiedName()) ->
+	this.name;
+   

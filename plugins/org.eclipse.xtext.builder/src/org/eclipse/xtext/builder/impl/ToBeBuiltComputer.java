@@ -20,6 +20,7 @@ import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.ui.core.resource.IStorage2UriMapper;
+import org.eclipse.xtext.ui.core.resource.UriValidator;
 
 import com.google.common.collect.Collections2;
 import com.google.inject.Inject;
@@ -110,7 +111,7 @@ public class ToBeBuiltComputer {
 
 	protected URI getUri(IStorage file) {
 		URI uri = mapper.getUri(file);
-		return isValid(uri, file)?uri:null;
+		return uri!=null && isValid(uri, file)?uri:null;
 	}
 	
 	protected boolean isValid(URI uri, IStorage storage) {
