@@ -122,7 +122,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 			}
 			ImmutableList<Delta> deltas = builderState.update(resourceSet, toBeBuilt.toBeUpdated, toBeBuilt.toBeDeleted, subMonitor.newChild(1));
 			if (participant != null)
-				participant.build(resourceSet, deltas, subMonitor.newChild(1));
+				participant.build(new IXtextBuilderParticipant.BuildContext(this, resourceSet, deltas), subMonitor.newChild(1));
 		} finally {
 			subMonitor.done();
 		}

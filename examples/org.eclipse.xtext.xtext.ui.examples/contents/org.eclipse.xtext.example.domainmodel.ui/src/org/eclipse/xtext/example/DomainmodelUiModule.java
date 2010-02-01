@@ -3,7 +3,9 @@ Generated with Xtext
 */
 package org.eclipse.xtext.example;
 
+import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.xtext.example.autoedit.FantasticAutoEditStrategy;
 import org.eclipse.xtext.example.labeling.DomainmodelDescriptorLabelProvider;
 import org.eclipse.xtext.example.labeling.DomainmodelLabelProvider;
 import org.eclipse.xtext.example.quickfix.DomainmodelQuickfixProvider;
@@ -47,4 +49,7 @@ public class DomainmodelUiModule extends AbstractDomainmodelUiModule {
 		return DomainmodelDescriptorLabelProvider.class;
 	}
 
+	public Class<? extends IAutoEditStrategy> bindIAutoEditStrategy() {
+		return FantasticAutoEditStrategy.class;
+	}
 }

@@ -9,11 +9,8 @@ package org.eclipse.xtext.builder.tests;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
-import org.eclipse.xtext.resource.IResourceDescription.Delta;
 
-import com.google.common.collect.ImmutableList;
 import com.google.inject.Singleton;
 
 /**
@@ -24,7 +21,7 @@ public class LoggingBuilderParticipant implements IXtextBuilderParticipant {
 
 	private int invocationCount = 0;
 
-	public void build(ResourceSet resourceSet, ImmutableList<Delta> deltas, IProgressMonitor monitor)
+	public void build(IXtextBuilderParticipant.IBuildContext ctx, IProgressMonitor monitor)
 			throws CoreException {
 		invocationCount++;	
 	}
@@ -35,6 +32,11 @@ public class LoggingBuilderParticipant implements IXtextBuilderParticipant {
 	
 	public int getInvocationCount() {
 		return invocationCount;
+	}
+
+	public void build(BuildContext context, IProgressMonitor monitor) throws CoreException {
+		// TODO Auto-generated method stub
+		
 	}
 
 }

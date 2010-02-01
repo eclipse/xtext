@@ -1,0 +1,26 @@
+«IMPORT org::eclipse::xtext::example::domainmodel»
+«IMPORT org::eclipse::xtext::resource»
+
+«EXTENSION org::eclipse::xtext::example::generator::JavaBeans»
+«EXTENSION org::eclipse::xtext::example::generator::JavaImports»
+
+«DEFINE javaBean FOR Entity»
+«FILE qualifiedName()»
+package «packageName()»;
+
+«addImportsHere()»
+
+public class «name» «IF superType!=null»extends «superType.simpleName()» «ENDIF»{
+	«FOREACH features AS f»
+	private «f.type.referenced.simpleName()» «f.name»;
+	
+	public void set«f.name.toFirstUpper()»(«f.type.referenced.simpleName()» «f.name») {
+	  this.«f.name» = «f.name»;
+	} 
+	public «f.type.referenced.simpleName()» get«f.name.toFirstUpper()»() {
+	  return «f.name»;
+	} 
+	«ENDFOREACH»
+}
+«ENDFILE»
+«ENDDEFINE»

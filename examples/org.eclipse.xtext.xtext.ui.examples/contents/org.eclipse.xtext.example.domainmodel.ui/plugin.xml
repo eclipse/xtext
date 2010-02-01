@@ -151,4 +151,16 @@
           class="org.eclipse.xtext.example.search.DomainmodelSearchFilter">
     </filter>
  </extension>
+ <extension
+       point="org.eclipse.xtext.builder.participant">
+    <participant
+          class="org.eclipse.xtext.example.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.example.generator.Generator">
+    </participant>
+ </extension>
+ <extension
+       point="org.eclipse.xtext.builder.participant">
+    <participant
+          class="org.eclipse.xtext.example.generator.Generator">
+    </participant>
+ </extension>
 </plugin>
