@@ -8,7 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.outline;
 
-import static org.eclipse.xtext.ui.core.DefaultLabelProvider.*;
+import static org.eclipse.xtext.ui.DefaultLabelProvider.*;
 
 import java.util.List;
 import java.util.Set;
@@ -25,8 +25,8 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
-import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
-import org.eclipse.xtext.ui.common.editor.outline.transformer.AbstractDeclarativeSemanticModelTransformer;
+import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
+import org.eclipse.xtext.ui.editor.outline.transformer.AbstractDeclarativeSemanticModelTransformer;
 import org.eclipse.xtext.xtext.UsedRulesFinder;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
 

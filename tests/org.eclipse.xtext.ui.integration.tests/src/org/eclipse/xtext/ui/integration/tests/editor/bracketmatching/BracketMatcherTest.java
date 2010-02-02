@@ -17,8 +17,8 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.core.editor.bracketmatching.AbstractBracketMatcher;
-import org.eclipse.xtext.ui.core.editor.bracketmatching.IBracketMatcher;
+import org.eclipse.xtext.ui.editor.bracketmatching.AbstractBracketMatcher;
+import org.eclipse.xtext.ui.editor.bracketmatching.IBracketMatcher;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.StringInputStream;
 

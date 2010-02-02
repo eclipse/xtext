@@ -11,6 +11,8 @@ import java.util.Collection;
 
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.contentassist.antlr.XtextGrammarUiTestLanguageParser;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.AbstractContentAssistParser;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

@@ -8,8 +8,8 @@
 package org.eclipse.xtext.xtext.ui.editor.outline;
 
 import org.eclipse.jface.viewers.ViewerFilter;
-import org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage;
-import org.eclipse.xtext.ui.common.editor.outline.actions.AbstractFilterAction;
+import org.eclipse.xtext.ui.editor.outline.XtextContentOutlinePage;
+import org.eclipse.xtext.ui.editor.outline.actions.AbstractFilterAction;
 import org.eclipse.xtext.xtext.ui.Activator;
 
 /**

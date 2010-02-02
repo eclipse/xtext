@@ -12,6 +12,6 @@
 </manifest>
 <selectedElements exportClassFiles="true" exportJavaFiles="false" exportOutputFolder="false">
 <file path="/org.eclipse.xtext.ui.integration.tests/src/org/eclipse/xtext/ui/core/builder/impl/Foo.testlanguage"/>
-<javaElement handleIdentifier="=org.eclipse.xtext.ui.integration.tests/src&lt;org.eclipse.xtext.ui.core.builder.impl{JavaProjectLanguageBuilderTest.java"/>
+<javaElement handleIdentifier="=org.eclipse.xtext.ui.integration.tests/src&lt;org.eclipse.xtext.ui.builder.impl{JavaProjectLanguageBuilderTest.java"/>
 </selectedElements>
 </jardesc>

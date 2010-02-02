@@ -20,7 +20,7 @@ import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.xtext.junit.util.IResourcesSetupUtil;
-import org.eclipse.xtext.ui.core.resource.PackageFragmentRootWalker;
+import org.eclipse.xtext.ui.resource.PackageFragmentRootWalker;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

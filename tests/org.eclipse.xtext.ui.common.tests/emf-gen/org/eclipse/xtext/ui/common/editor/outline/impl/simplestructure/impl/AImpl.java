@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: AImpl.java,v 1.1 2009/04/15 13:05:13 szarnekow Exp $
+ * $Id: AImpl.java,v 1.2 2010/02/02 23:17:34 sefftinge Exp $
  */
 package org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.impl;
 
@@ -33,9 +33,9 @@ import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.Simplestr
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.impl.AImpl#getA <em>A</em>}</li>
- *   <li>{@link org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.impl.AImpl#getB <em>B</em>}</li>
- *   <li>{@link org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.impl.AImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.editor.outline.impl.simplestructure.impl.AImpl#getA <em>A</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.editor.outline.impl.simplestructure.impl.AImpl#getB <em>B</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.editor.outline.impl.simplestructure.impl.AImpl#getName <em>Name</em>}</li>
  * </ul>
  * </p>
  *

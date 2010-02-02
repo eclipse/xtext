@@ -12,8 +12,7 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.common,
  org.eclipse.xtend,
  org.eclipse.xtend.typesystem.emf,
- org.eclipse.xtext.ui.core,
- org.eclipse.xtext.ui.common,
+ org.eclipse.xtext.ui,
  org.eclipse.ui.editors,
  org.eclipse.ui
 Bundle-Activator: org.eclipse.xtext.ui.integration.Activator

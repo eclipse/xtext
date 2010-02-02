@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimplestructurePackage.java,v 1.1 2009/04/15 13:05:13 szarnekow Exp $
+ * $Id: SimplestructurePackage.java,v 1.2 2010/02/02 23:17:33 sefftinge Exp $
  */
 package org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure;
 
@@ -22,7 +22,7 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.SimplestructureFactory
+ * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.SimplestructureFactory
  * @model kind="package"
  * @generated
  */
@@ -60,11 +60,11 @@ public interface SimplestructurePackage extends EPackage {
 	SimplestructurePackage eINSTANCE = org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.impl.SimplestructurePackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.impl.AImpl <em>A</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.ui.editor.outline.impl.simplestructure.impl.AImpl <em>A</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.impl.AImpl
-	 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.impl.SimplestructurePackageImpl#getA()
+	 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.impl.AImpl
+	 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.impl.SimplestructurePackageImpl#getA()
 	 * @generated
 	 */
 	int A = 0;
@@ -106,11 +106,11 @@ public interface SimplestructurePackage extends EPackage {
 	int A_FEATURE_COUNT = 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.impl.BImpl <em>B</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.ui.editor.outline.impl.simplestructure.impl.BImpl <em>B</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.impl.BImpl
-	 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.impl.SimplestructurePackageImpl#getB()
+	 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.impl.BImpl
+	 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.impl.SimplestructurePackageImpl#getB()
 	 * @generated
 	 */
 	int B = 1;
@@ -143,11 +143,11 @@ public interface SimplestructurePackage extends EPackage {
 	int B_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.impl.rootImpl <em>root</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.ui.editor.outline.impl.simplestructure.impl.rootImpl <em>root</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.impl.rootImpl
-	 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.impl.SimplestructurePackageImpl#getroot()
+	 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.impl.rootImpl
+	 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.impl.SimplestructurePackageImpl#getroot()
 	 * @generated
 	 */
 	int ROOT = 2;
@@ -172,96 +172,96 @@ public interface SimplestructurePackage extends EPackage {
 
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.A <em>A</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.ui.editor.outline.impl.simplestructure.A <em>A</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>A</em>'.
-	 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.A
+	 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.A
 	 * @generated
 	 */
 	EClass getA();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.A#getA <em>A</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.ui.editor.outline.impl.simplestructure.A#getA <em>A</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>A</em>'.
-	 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.A#getA()
+	 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.A#getA()
 	 * @see #getA()
 	 * @generated
 	 */
 	EReference getA_A();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.A#getB <em>B</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ui.editor.outline.impl.simplestructure.A#getB <em>B</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>B</em>'.
-	 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.A#getB()
+	 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.A#getB()
 	 * @see #getA()
 	 * @generated
 	 */
 	EReference getA_B();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.A#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.editor.outline.impl.simplestructure.A#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.A#getName()
+	 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.A#getName()
 	 * @see #getA()
 	 * @generated
 	 */
 	EAttribute getA_Name();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.B <em>B</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.ui.editor.outline.impl.simplestructure.B <em>B</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>B</em>'.
-	 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.B
+	 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.B
 	 * @generated
 	 */
 	EClass getB();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.B#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.editor.outline.impl.simplestructure.B#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.B#getName()
+	 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.B#getName()
 	 * @see #getB()
 	 * @generated
 	 */
 	EAttribute getB_Name();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.B#getB <em>B</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ui.editor.outline.impl.simplestructure.B#getB <em>B</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>B</em>'.
-	 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.B#getB()
+	 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.B#getB()
 	 * @see #getB()
 	 * @generated
 	 */
 	EReference getB_B();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.root <em>root</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.ui.editor.outline.impl.simplestructure.root <em>root</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>root</em>'.
-	 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.root
+	 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.root
 	 * @generated
 	 */
 	EClass getroot();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.root#getA <em>A</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ui.editor.outline.impl.simplestructure.root#getA <em>A</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>A</em>'.
-	 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.root#getA()
+	 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.root#getA()
 	 * @see #getroot()
 	 * @generated
 	 */
@@ -290,11 +290,11 @@ public interface SimplestructurePackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.impl.AImpl <em>A</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.ui.editor.outline.impl.simplestructure.impl.AImpl <em>A</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.impl.AImpl
-		 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.impl.SimplestructurePackageImpl#getA()
+		 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.impl.AImpl
+		 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.impl.SimplestructurePackageImpl#getA()
 		 * @generated
 		 */
 		EClass A = eINSTANCE.getA();
@@ -324,11 +324,11 @@ public interface SimplestructurePackage extends EPackage {
 		EAttribute A__NAME = eINSTANCE.getA_Name();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.impl.BImpl <em>B</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.ui.editor.outline.impl.simplestructure.impl.BImpl <em>B</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.impl.BImpl
-		 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.impl.SimplestructurePackageImpl#getB()
+		 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.impl.BImpl
+		 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.impl.SimplestructurePackageImpl#getB()
 		 * @generated
 		 */
 		EClass B = eINSTANCE.getB();
@@ -350,11 +350,11 @@ public interface SimplestructurePackage extends EPackage {
 		EReference B__B = eINSTANCE.getB_B();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.impl.rootImpl <em>root</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.ui.editor.outline.impl.simplestructure.impl.rootImpl <em>root</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.impl.rootImpl
-		 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.impl.SimplestructurePackageImpl#getroot()
+		 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.impl.rootImpl
+		 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.impl.SimplestructurePackageImpl#getroot()
 		 * @generated
 		 */
 		EClass ROOT = eINSTANCE.getroot();

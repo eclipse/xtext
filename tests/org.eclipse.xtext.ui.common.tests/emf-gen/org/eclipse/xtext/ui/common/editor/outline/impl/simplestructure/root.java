@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: root.java,v 1.1 2009/04/15 13:05:13 szarnekow Exp $
+ * $Id: root.java,v 1.2 2010/02/02 23:17:33 sefftinge Exp $
  */
 package org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure;
 
@@ -18,18 +18,18 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.root#getA <em>A</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.editor.outline.impl.simplestructure.root#getA <em>A</em>}</li>
  * </ul>
  * </p>
  *
- * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.SimplestructurePackage#getroot()
+ * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.SimplestructurePackage#getroot()
  * @model
  * @generated
  */
 public interface root extends EObject {
 	/**
 	 * Returns the value of the '<em><b>A</b></em>' containment reference list.
-	 * The list contents are of type {@link org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.A}.
+	 * The list contents are of type {@link org.eclipse.xtext.ui.editor.outline.impl.simplestructure.A}.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>A</em>' containment reference list isn't clear,
@@ -37,7 +37,7 @@ public interface root extends EObject {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>A</em>' containment reference list.
-	 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.SimplestructurePackage#getroot_A()
+	 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.SimplestructurePackage#getroot_A()
 	 * @model containment="true"
 	 * @generated
 	 */

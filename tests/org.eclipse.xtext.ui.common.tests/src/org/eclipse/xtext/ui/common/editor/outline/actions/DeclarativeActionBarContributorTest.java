@@ -19,7 +19,8 @@ import org.eclipse.jface.action.IAction;
 import org.eclipse.jface.action.IContributionItem;
 import org.eclipse.jface.action.IContributionManagerOverrides;
 import org.eclipse.jface.action.IToolBarManager;
-import org.eclipse.xtext.ui.common.editor.outline.XtextContentOutlinePage;
+import org.eclipse.xtext.ui.editor.outline.XtextContentOutlinePage;
+import org.eclipse.xtext.ui.editor.outline.actions.DeclarativeActionBarContributor;
 
 /**
  * @author Peter Friese - Initial contribution and API

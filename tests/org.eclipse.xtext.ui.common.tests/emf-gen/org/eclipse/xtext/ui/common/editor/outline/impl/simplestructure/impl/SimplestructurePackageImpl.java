@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimplestructurePackageImpl.java,v 1.2 2009/06/08 10:00:10 pfriese Exp $
+ * $Id: SimplestructurePackageImpl.java,v 1.3 2010/02/02 23:17:34 sefftinge Exp $
  */
 package org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.impl;
 
@@ -56,7 +56,7 @@ public class SimplestructurePackageImpl extends EPackageImpl implements Simplest
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see org.eclipse.emf.ecore.EPackage.Registry
-	 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.SimplestructurePackage#eNS_URI
+	 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.SimplestructurePackage#eNS_URI
 	 * @see #init()
 	 * @generated
 	 */

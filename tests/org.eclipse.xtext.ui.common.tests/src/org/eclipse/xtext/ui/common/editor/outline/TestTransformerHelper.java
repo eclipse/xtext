@@ -13,11 +13,15 @@ import java.util.List;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Region;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
+import org.eclipse.xtext.ui.DefaultLabelProvider;
+import org.eclipse.xtext.ui.ILocationInFileProvider;
 import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.A;
 import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.B;
-import org.eclipse.xtext.ui.common.editor.outline.transformer.AbstractDeclarativeSemanticModelTransformer;
-import org.eclipse.xtext.ui.core.DefaultLabelProvider;
-import org.eclipse.xtext.ui.core.ILocationInFileProvider;
+import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
+import org.eclipse.xtext.ui.editor.outline.CreateNode;
+import org.eclipse.xtext.ui.editor.outline.DefaultContentOutlineNodeFactory;
+import org.eclipse.xtext.ui.editor.outline.GetChildren;
+import org.eclipse.xtext.ui.editor.outline.transformer.AbstractDeclarativeSemanticModelTransformer;
 
 /**
  * @author Peter Friese - Initial contribution and API

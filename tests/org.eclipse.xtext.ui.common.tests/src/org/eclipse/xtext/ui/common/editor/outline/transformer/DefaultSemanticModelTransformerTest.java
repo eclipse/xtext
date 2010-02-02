@@ -9,7 +9,8 @@
 package org.eclipse.xtext.ui.common.editor.outline.transformer;
 
 import org.eclipse.xtext.ui.common.editor.outline.AbstractContentOutlineTests;
-import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
+import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
+import org.eclipse.xtext.ui.editor.outline.transformer.DefaultSemanticModelTransformer;
 
 /**
  * @author Peter Friese - Initial contribution and API

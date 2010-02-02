@@ -25,7 +25,7 @@ public class SimpleLabelProviderFragment extends AbstractGeneratorFragment {
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory().addTypeToType("org.eclipse.jface.viewers.ILabelProvider",
-				"org.eclipse.xtext.ui.core.SimpleLabelProvider").getBindings();
+				"org.eclipse.xtext.ui.SimpleLabelProvider").getBindings();
 	}
 
 	@Override

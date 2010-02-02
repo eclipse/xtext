@@ -8,6 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.outline;
 
+import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
+
 /**
  * @author Michael Clay - Initial contribution and API
  */

@@ -5,7 +5,7 @@
     modelPluginID="org.eclipse.xtext.ui.common.tests" modelName="Simplestructure"
     importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false">
   <foreignModel>simplestructure.ecore</foreignModel>
-  <genPackages prefix="Simplestructure" basePackage="org.eclipse.xtext.ui.common.editor.outline.impl"
+  <genPackages prefix="Simplestructure" basePackage="org.eclipse.xtext.ui.editor.outline.impl"
       disposableProviderFactory="true" ecorePackage="simplestructure.ecore#/">
     <genClasses ecoreClass="simplestructure.ecore#//A">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simplestructure.ecore#//A/a"/>

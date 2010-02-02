@@ -10,9 +10,10 @@ package org.eclipse.xtext.ui.common.editor.contentassist;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.XtextGrammarUiTestLanguageStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.ui.UIPluginModule;
 import org.eclipse.xtext.ui.XtextGrammarUiTestLanguageUiModule;
-import org.eclipse.xtext.ui.common.service.UIPluginModule;
 import org.eclipse.xtext.ui.common.tests.Activator;
+import org.eclipse.xtext.ui.editor.contentassist.ProposalConflictHelper;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;

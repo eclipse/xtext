@@ -4,7 +4,7 @@
 package org.eclipse.xtext.xbase.ui;
 
 import org.eclipse.jface.text.IAutoEditStrategy;
-import org.eclipse.xtext.ui.common.editor.syntaxcoloring.antlr.AbstractAntlrTokenToAttributeIdMapper;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.antlr.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.xbase.ui.autoedit.XbaseAutoEdit;
 import org.eclipse.xtext.xbase.ui.syntaxcoloring.XbaseTokenToAttributeIdMapper;
 

@@ -16,8 +16,8 @@ import org.eclipse.xtext.contentassist.antlr.internal.InternalXtextGrammarUiTest
 import org.eclipse.xtext.contentassist.antlr.internal.InternalXtextGrammarUiTestLanguageParser;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.ui.common.editor.contentassist.antlr.AbstractParserTest;
-import org.eclipse.xtext.ui.common.editor.contentassist.antlr.ObservableXtextTokenStream;
-import org.eclipse.xtext.ui.common.editor.contentassist.antlr.FollowElement;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.ObservableXtextTokenStream;
 
 
 /**

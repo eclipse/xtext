@@ -15,7 +15,7 @@ import org.eclipse.xtext.junit.AbstractXtextTests;
  *
  * @author Michael Clay - Initial contribution and API
  * @author Jan Koehnlein
- * @see org.eclipse.xtext.ui.common.editor.contentassist.impl.DefaultContentAssistProcessor
+ * @see org.eclipse.xtext.ui.editor.contentassist.impl.DefaultContentAssistProcessor
  */
 public abstract class AbstractContentAssistProcessorTest extends AbstractXtextTests {
 

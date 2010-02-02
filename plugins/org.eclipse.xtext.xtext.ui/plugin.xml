@@ -3,106 +3,153 @@
 
 <plugin>
 	<extension-point id="wizardContribution" name="Wizard Contribution" schema="schema/org.eclipse.xtext.xtext.ui.wizardContribution.exsd"/>
-	<extension
-			point="org.eclipse.ui.editors">
-		<editor
-			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
-			contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
-			default="true"
-			extensions="xtext,xtext2"
-			id="org.eclipse.xtext.Xtext"
-			name="%Xtext_Editor">
-		</editor>
+	 <extension
+            point="org.eclipse.ui.editors">
+        <editor
+            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
+            contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
+            default="true"
+            extensions="xtext,xtext2"
+            id="org.eclipse.xtext.Xtext"
+            name="Xtext Editor">
+        </editor>
+    </extension>
+    <extension
+        point="org.eclipse.ui.handlers">
+        <handler
+            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.Xtext.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+        <handler
+            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
+            commandId="org.eclipse.xtext.Xtext.validate">
+         <activeWhen>
+            <reference
+                    definitionId="org.eclipse.xtext.Xtext.Editor.opened">
+            </reference>
+         </activeWhen>
+      </handler>
+    </extension>
+    <extension point="org.eclipse.core.expressions.definitions">
+        <definition id="org.eclipse.xtext.Xtext.Editor.opened">
+            <and>
+                <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+                <with variable="activeEditor">
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
+                        value="org.eclipse.xtext.Xtext" 
+                        forcePluginActivation="true"/>
+                </with>        
+            </and>
+        </definition>
+    </extension>
+    <extension
+            point="org.eclipse.ui.preferencePages">
+        <page
+            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
+            id="org.eclipse.xtext.Xtext"
+            name="Xtext">
+            <keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.Xtext"
+            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            id="org.eclipse.xtext.Xtext.coloring"
+            name="Syntax Coloring">
+            <keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
+        </page>
+        <page
+            category="org.eclipse.xtext.Xtext"
+            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
+            id="org.eclipse.xtext.Xtext.templates"
+            name="Templates">
+            <keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
+        </page>
+    </extension>
+    <extension
+        point="org.eclipse.ui.keywords">
+        <keyword
+            id="org.eclipse.xtext.ui.keyword_Xtext"
+            label="Xtext"/>
+    </extension>
+    <extension
+         point="org.eclipse.ui.commands">
+      <command
+            description="Trigger expensive validation"
+            id="org.eclipse.xtext.Xtext.validate"
+            name="Validate">
+      </command>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+             <command
+                 commandId="org.eclipse.xtext.Xtext.validate"
+                 style="push"
+                 tooltip="Trigger expensive validation">
+            <visibleWhen checkEnabled="false">
+                <reference
+                    definitionId="org.eclipse.xtext.Xtext.Editor.opened">
+                </reference>
+            </visibleWhen>
+         </command>  
+         </menuContribution>
+    </extension>
+    <extension point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
+				<visibleWhen checkEnabled="false">
+                	<reference definitionId="org.eclipse.xtext.Xtext.Editor.opened">
+                	</reference>
+            	</visibleWhen>
+			</command>
+		</menuContribution>
 	</extension>
-	
-	<!-- Open declaration -->
-	<extension
-		point="org.eclipse.ui.handlers">
-		<handler
-			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
-			commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
-			<activeWhen>
-				<reference
-					definitionId="org.eclipse.xtext.Xtext.Editor.opened">
-				</reference>
-			</activeWhen>
-		</handler>
-	</extension>
-	<extension point="org.eclipse.core.expressions.definitions">
-		<definition id="org.eclipse.xtext.Xtext.Editor.opened">
-			<and>
-				<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
-				<with variable="activeEditor">
-					<test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
-						value="org.eclipse.xtext.Xtext" 
-						forcePluginActivation="true"/>
-				</with>
-			</and>
-		</definition>
-	</extension>
-	
-	<!-- Preference pages -->
-	<extension
-			point="org.eclipse.ui.preferencePages">
-		<page
-			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
-			id="org.eclipse.xtext.Xtext"
-			name="%Xtext_Language_Root_Preferences">
-			<keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
-		</page>
-		<page
-			category="org.eclipse.xtext.Xtext"
-			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
-			id="org.eclipse.xtext.Xtext.coloring"
-			name="%Syntax_Coloring">
-			<keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
-		</page>
-		<page
-			category="org.eclipse.xtext.Xtext"
-			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
-			id="org.eclipse.xtext.Xtext.templates"
-			name="%Templates">
-			<keywordReference id="org.eclipse.xtext.ui.keyword_Xtext"/>
-		</page>
-	</extension>
-	<extension
-		point="org.eclipse.ui.keywords">
-		<keyword
-			id="org.eclipse.xtext.ui.keyword_Xtext"
-			label="%Xtext_keyword"/>
-	</extension>
-	
-	<!-- Resource factories -->
-	<extension
-		point="org.eclipse.emf.ecore.extension_parser">
-		<parser
-			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
-			type="xtext">
-		</parser>
-	</extension>
+	<extension point="org.eclipse.ui.handlers">
+	    <handler
+            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.editor.FindReferences">
+            <activeWhen>
+                <reference
+                    definitionId="org.eclipse.xtext.Xtext.Editor.opened">
+                </reference>
+            </activeWhen>
+        </handler>
+    </extension>   
+
+<!-- adding resource factories -->
 
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			type="xtext">
+		</parser>
+	</extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="xtext">
+        </resourceServiceProvider>
+    </extension>
+
+	<extension
+		point="org.eclipse.emf.ecore.extension_parser">
+		<parser
+			class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="xtext2">
 		</parser>
 	</extension>
-	
-	<extension
-        point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
-           uriExtension="xtext">
-     </resourceServiceProvider>
-  </extension>
-	<extension
-        point="org.eclipse.xtext.extension_resourceServiceProvider">
-     <resourceServiceProvider
-           class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
-           uriExtension="xtext2">
-     </resourceServiceProvider>
-  </extension>
+	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
+        <resourceServiceProvider
+            class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
+            uriExtension="xtext2">
+        </resourceServiceProvider>
+    </extension>
 
 	<!-- Wizards -->
 	<extension
@@ -113,7 +160,7 @@
 		</category>
 		<wizard
 			category="org.eclipse.xtext.projectwiz"
-			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard"
+			class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard"
 			icon="icons/editor.gif"
 			id="org.eclipse.xtext.xtext.ui.wizard.project.NewXtextProjectWizard"
 			name="%Xtext_Project"
@@ -121,7 +168,7 @@
 		</wizard>
 		<wizard
 			category="org.eclipse.xtext.projectwiz"
-			class="org.eclipse.xtext.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.NewXtextProjectFromEcoreWizard"
+			class="org.eclipse.xtext.ui.XtextExecutableExtensionFactory:org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.NewXtextProjectFromEcoreWizard"
 			icon="icons/editor.gif"
 			id="org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.NewXtextProjectFromEcoreWizard"
 			name="%Xtext_Project_From_Ecore"
@@ -134,7 +181,7 @@
 	<extension
 		point="org.eclipse.ui.menus">
 		<menuContribution
-			locationURI="popup:org.eclipse.xtext.ui.common.outline?after=additions">
+			locationURI="popup:org.eclipse.xtext.ui.outline?after=additions">
 			<command
 				commandId="org.eclipse.xtext.xtext.ui.editor.outline.SampleCommand"
 				label="Sample action registered for ParserRule">
@@ -344,7 +391,7 @@
 		<command
 			id="org.eclipse.xtext.xtext.launcher.GenerateArtifacts"
 			name="Generate Artifacts"
-			categoryId="org.eclipse.xtext.ui.core.category.XtextEditor"
+			categoryId="org.eclipse.xtext.ui.category.XtextEditor"
 			description="Executes the language generator for the selected grammar">
 		</command>
 	</extension>

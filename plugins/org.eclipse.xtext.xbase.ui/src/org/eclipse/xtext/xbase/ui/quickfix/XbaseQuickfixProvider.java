@@ -1,7 +1,7 @@
 
 package org.eclipse.xtext.xbase.ui.quickfix;
 
-import org.eclipse.xtext.ui.core.editor.quickfix.AbstractDeclarativeQuickfixProvider;
+import org.eclipse.xtext.ui.editor.quickfix.AbstractDeclarativeQuickfixProvider;
 
 public class XbaseQuickfixProvider extends AbstractDeclarativeQuickfixProvider {
 

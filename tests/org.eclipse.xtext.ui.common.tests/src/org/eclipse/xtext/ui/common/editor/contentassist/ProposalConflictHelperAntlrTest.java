@@ -7,7 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.common.editor.contentassist;
 
-import org.eclipse.xtext.ui.common.editor.contentassist.antlr.AntlrProposalConflictHelper;
+import org.eclipse.xtext.ui.editor.contentassist.ProposalConflictHelper;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.AntlrProposalConflictHelper;
 
 public class ProposalConflictHelperAntlrTest extends AbstractProposalConflictHelperTest {
 
