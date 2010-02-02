@@ -12,12 +12,14 @@ import java.util.Set;
 
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.ui.UIPluginModule;
 import org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.common.editor.contentassist.contentassist.antlr.LookAheadContentAssistTestLanguageParser;
 import org.eclipse.xtext.ui.common.editor.contentassist.services.LookAheadContentAssistTestLanguageGrammarAccess;
 import org.eclipse.xtext.ui.common.editor.contentassist.ui.LookAheadContentAssistTestLanguageUiModule;
-import org.eclipse.xtext.ui.common.service.UIPluginModule;
 import org.eclipse.xtext.ui.common.tests.Activator;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.AbstractContentAssistParser;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;

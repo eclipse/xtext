@@ -4,7 +4,7 @@
 package org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.ui;
 
 import org.eclipse.jface.text.IAutoEditStrategy;
-import org.eclipse.xtext.ui.core.editor.IXtextEditorCallback;
+import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.integration.tests.editor.autoedit.AutoEditStrategy;
 
 /**

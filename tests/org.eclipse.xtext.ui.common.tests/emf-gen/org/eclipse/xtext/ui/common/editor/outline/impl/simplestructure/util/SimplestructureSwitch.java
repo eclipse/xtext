@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimplestructureSwitch.java,v 1.1 2009/04/15 13:05:13 szarnekow Exp $
+ * $Id: SimplestructureSwitch.java,v 1.2 2010/02/02 23:17:34 sefftinge Exp $
  */
 package org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.util;
 
@@ -23,7 +23,7 @@ import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.*;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.SimplestructurePackage
+ * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.SimplestructurePackage
  * @generated
  */
 public class SimplestructureSwitch<T> {

@@ -4,8 +4,8 @@ package org.eclipse.xtext.ui.common.editor.contentassist;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ui.common.editor.contentassist.ui.contentassist.AbstractTwoContextsTestLanguageProposalProvider;
-import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
-import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
 import com.google.common.base.Predicate;
 

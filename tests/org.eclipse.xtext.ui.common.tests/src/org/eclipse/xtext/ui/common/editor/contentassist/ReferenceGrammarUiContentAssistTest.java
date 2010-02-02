@@ -10,7 +10,7 @@ package org.eclipse.xtext.ui.common.editor.contentassist;
 import org.apache.log4j.Logger;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarUiTestLanguageStandaloneSetup;
 import org.eclipse.xtext.testlanguages.ui.ReferenceGrammarUiTestLanguageUiModule;
-import org.eclipse.xtext.ui.common.service.UIPluginModule;
+import org.eclipse.xtext.ui.UIPluginModule;
 import org.eclipse.xtext.ui.common.tests.Activator;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;

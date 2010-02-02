@@ -15,8 +15,9 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.XtextGrammarUiTestLanguageStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.services.XtextGrammarUiTestLanguageGrammarAccess;
-import org.eclipse.xtext.ui.common.service.UIPluginModule;
+import org.eclipse.xtext.ui.UIPluginModule;
 import org.eclipse.xtext.ui.common.tests.Activator;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;

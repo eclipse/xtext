@@ -17,8 +17,9 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.ui.core.DefaultLabelProvider;
-import org.eclipse.xtext.ui.core.ILocationInFileProvider;
+import org.eclipse.xtext.ui.DefaultLabelProvider;
+import org.eclipse.xtext.ui.ILocationInFileProvider;
+import org.eclipse.xtext.ui.editor.outline.DefaultContentOutlineNodeFactory;
 
 /**
  * @author Michael Clay - Initial contribution and API

@@ -12,13 +12,13 @@ import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.ui.UIPluginModule;
 import org.eclipse.xtext.ui.common.editor.contentassist.ui.TwoContextsTestLanguageUiModule;
 import org.eclipse.xtext.ui.common.editor.contentassist.ui.contentassist.AbstractTwoContextsTestLanguageProposalProvider;
-import org.eclipse.xtext.ui.common.service.UIPluginModule;
 import org.eclipse.xtext.ui.common.tests.Activator;
-import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
-import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAcceptor;
-import org.eclipse.xtext.ui.core.editor.contentassist.IContentProposalProvider;
+import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
 import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
 
 import com.google.common.base.Predicate;

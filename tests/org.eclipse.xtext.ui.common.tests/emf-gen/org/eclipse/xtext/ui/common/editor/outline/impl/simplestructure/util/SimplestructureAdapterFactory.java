@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimplestructureAdapterFactory.java,v 1.1 2009/04/15 13:05:13 szarnekow Exp $
+ * $Id: SimplestructureAdapterFactory.java,v 1.2 2010/02/02 23:17:34 sefftinge Exp $
  */
 package org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.util;
 
@@ -20,7 +20,7 @@ import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.*;
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.SimplestructurePackage
+ * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.SimplestructurePackage
  * @generated
  */
 public class SimplestructureAdapterFactory extends AdapterFactoryImpl {
@@ -104,13 +104,13 @@ public class SimplestructureAdapterFactory extends AdapterFactoryImpl {
 
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.A <em>A</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.editor.outline.impl.simplestructure.A <em>A</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.A
+	 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.A
 	 * @generated
 	 */
 	public Adapter createAAdapter() {
@@ -118,13 +118,13 @@ public class SimplestructureAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.B <em>B</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.editor.outline.impl.simplestructure.B <em>B</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.B
+	 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.B
 	 * @generated
 	 */
 	public Adapter createBAdapter() {
@@ -132,13 +132,13 @@ public class SimplestructureAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.root <em>root</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.editor.outline.impl.simplestructure.root <em>root</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.root
+	 * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.root
 	 * @generated
 	 */
 	public Adapter createrootAdapter() {

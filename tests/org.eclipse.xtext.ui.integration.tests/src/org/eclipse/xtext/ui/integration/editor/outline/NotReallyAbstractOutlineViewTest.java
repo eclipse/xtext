@@ -31,12 +31,12 @@
 //import org.eclipse.xtext.parsetree.NodeUtil;
 //import org.eclipse.xtext.parsetree.ParseTreeUtil;
 //import org.eclipse.xtext.resource.XtextResource;
-//import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
-//import org.eclipse.xtext.ui.common.editor.outline.actions.ContentOutlineNodeAdapter;
-//import org.eclipse.xtext.ui.common.editor.outline.actions.ContentOutlineNodeAdapterFactory;
-//import org.eclipse.xtext.ui.common.editor.outline.linking.LinkingHelper;
-//import org.eclipse.xtext.ui.core.editor.XtextEditor;
-//import org.eclipse.xtext.ui.core.editor.model.XtextDocument;
+//import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
+//import org.eclipse.xtext.ui.editor.outline.actions.ContentOutlineNodeAdapter;
+//import org.eclipse.xtext.ui.editor.outline.actions.ContentOutlineNodeAdapterFactory;
+//import org.eclipse.xtext.ui.editor.outline.linking.LinkingHelper;
+//import org.eclipse.xtext.ui.editor.XtextEditor;
+//import org.eclipse.xtext.ui.editor.model.XtextDocument;
 //import org.eclipse.xtext.ui.integration.editor.AbstractEditorTest;
 //import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 //

@@ -10,8 +10,8 @@ package org.eclipse.xtext.ui.common.editor.contentassist;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.ecore.EcoreResourceServiceProviderImpl;
+import org.eclipse.xtext.ui.UIPluginModule;
 import org.eclipse.xtext.ui.common.editor.contentassist.ui.Bug287941TestLanguageUiModule;
-import org.eclipse.xtext.ui.common.service.UIPluginModule;
 import org.eclipse.xtext.ui.common.tests.Activator;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 

@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.common.editor.syntaxcoloring;
 
 import java.util.Arrays;
 
+import org.eclipse.xtext.ui.editor.syntaxcoloring.LightweightPosition;
 import org.eclipse.xtext.util.Strings;
 
 import junit.framework.TestCase;

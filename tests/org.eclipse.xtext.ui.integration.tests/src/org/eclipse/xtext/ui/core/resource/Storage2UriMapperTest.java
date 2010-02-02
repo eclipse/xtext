@@ -12,6 +12,7 @@ import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
 import org.eclipse.core.resources.IStorage;
 
 /**

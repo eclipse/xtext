@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: SimplestructureFactory.java,v 1.1 2009/04/15 13:05:13 szarnekow Exp $
+ * $Id: SimplestructureFactory.java,v 1.2 2010/02/02 23:17:33 sefftinge Exp $
  */
 package org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure;
 
@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.EFactory;
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * @see org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.SimplestructurePackage
+ * @see org.eclipse.xtext.ui.editor.outline.impl.simplestructure.SimplestructurePackage
  * @generated
  */
 public interface SimplestructureFactory extends EFactory {

@@ -7,6 +7,7 @@ import org.eclipse.xtext.junit.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.junit.util.PluginUtil;
 import org.eclipse.xtext.resource.IClasspathUriResolver;
 import org.eclipse.xtext.ui.integration.XtextUIIntegrationTestsPlugin;
+import org.eclipse.xtext.ui.util.JdtClasspathUriResolver;
 
 public class JdtClasspathUriResolverTest extends AbstractClasspathUriResolverTest {
 
