@@ -28,6 +28,8 @@ public class XtextGrammarFoldingRegionProvider extends DefaultFoldingRegionProvi
 	@Override
 	protected List<IFoldingRegion> doGetFoldingRegions(IXtextDocument xtextDocument, XtextResource xtextResource) {
 		List<IFoldingRegion> result = Lists.newArrayList();
+		if (xtextResource==null || xtextResource.getContents().isEmpty())
+			return result;
 		EList<EObject> contents = xtextResource.getContents().get(0).eContents();
 		for (EObject eObject : contents) {
 			Position position = getPosition(xtextDocument, NodeUtil.getNodeAdapter(eObject).getParserNode());
