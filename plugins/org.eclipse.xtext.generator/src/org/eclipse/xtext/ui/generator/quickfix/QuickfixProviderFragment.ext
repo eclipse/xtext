@@ -7,6 +7,12 @@
  *
  *******************************************************************************/
 import org::eclipse::xtext;
+import org::eclipse::xtext::generator;
+
+extension org::eclipse::xtext::generator::Naming;
 
 String getQuickfixProviderName(Grammar g) :
-	JAVA org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment.getQuickfixProviderName(org.eclipse.xtext.Grammar);
+	getQuickfixProviderName(g,getNaming());
+	
+private String getQuickfixProviderName(Grammar g, Naming n) :
+	JAVA org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment.getQuickfixProviderName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);

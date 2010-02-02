@@ -47,7 +47,7 @@ public class ParseTreeConstructorFragment extends AbstractGeneratorFragment {
 			try {
 				TreeConstNFAToDot ftd = new TreeConstNFAToDot();
 				String fn = new File(ctx.getOutput().getOutlet(Generator.SRC_GEN).getPath() + "/"
-						+ Naming.asPath(getParseTreeConstructorName(grammar))).getCanonicalPath();
+						+ getNaming(ctx).asPath(getParseTreeConstructorName(grammar,getNaming()))).getCanonicalPath();
 				if (generateDotDiagram) {
 					PrintStream out;
 					out = new PrintStream(fn + ".dot");
@@ -65,15 +65,19 @@ public class ParseTreeConstructorFragment extends AbstractGeneratorFragment {
 		}
 	}
 
+	private Naming getNaming(XpandExecutionContext ctx) {
+		return (Naming) ctx.getGlobalVariables().get(Naming.GLOBAL_VAR_NAME).getValue();
+	}
+
 	@Override
 	public String[] getExportedPackagesRt(Grammar grammar) {
-		return new String[] { getPackage(grammar) };
+		return new String[] { getPackage(grammar,getNaming()) };
 	}
 
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return new BindFactory().addTypeToType(IParseTreeConstructor.class.getName(),
-				getParseTreeConstructorName(grammar)).getBindings();
+				getParseTreeConstructorName(grammar, getNaming())).getBindings();
 	}
 
 	/**

@@ -7,30 +7,37 @@
  *******************************************************************************/
 
 import org::eclipse::xtext;
+import org::eclipse::xtext::generator;
 
 String guiceModuleRtGenerated(Grammar g) : 
-	JAVA org.eclipse.xtext.generator.Naming.guiceModuleRtGenerated(org.eclipse.xtext.Grammar);
+	getNaming().guiceModuleRtGenerated(g);
 	
 String guiceModuleRt(Grammar g) :
-	JAVA org.eclipse.xtext.generator.Naming.guiceModuleRt(org.eclipse.xtext.Grammar);
+	getNaming().guiceModuleRt(g);
 	
 String guiceModuleUiGenerated(Grammar g) :
-	JAVA org.eclipse.xtext.generator.Naming.guiceModuleUiGenerated(org.eclipse.xtext.Grammar);
+	getNaming().guiceModuleUiGenerated(g);
 	
 String guiceModuleUi(Grammar g) :
-	JAVA org.eclipse.xtext.generator.Naming.guiceModuleUi(org.eclipse.xtext.Grammar);
+	getNaming().guiceModuleUi(g);
 	
 String setup(Grammar g) :
-	JAVA org.eclipse.xtext.generator.Naming.setup(org.eclipse.xtext.Grammar);
+	getNaming().setup(g);
 	
 String executableExtensionFactory(Grammar g) :
-	JAVA org.eclipse.xtext.generator.Naming.executableExtensionFactory(org.eclipse.xtext.Grammar);
+	getNaming().executableExtensionFactory(g);
 	
 String asPath(String s) :
-	JAVA org.eclipse.xtext.generator.Naming.asPath(java.lang.String);
+	getNaming().asPath(s);
 	
-String javaPack(Grammar g)  :
-	JAVA org.eclipse.xtext.generator.Naming.javaPack(org.eclipse.xtext.Grammar);
+String runtimePack(Grammar g)  :
+	getNaming().basePackageRuntime(g);
+
+String uiPackage(Grammar g)  :
+	runtimePack(g)+".ui";
+	
+Naming getNaming() :
+	GLOBALVAR __Naming__;
 	
 toJavaPackage(String fqName) :
 	skipLastToken(fqName, '.');

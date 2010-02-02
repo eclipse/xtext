@@ -7,12 +7,17 @@
  *
  *******************************************************************************/
 import org::eclipse::xtext;
+import org::eclipse::xtext::generator;
 
 extension org::eclipse::xtext::generator::Naming; 
 extension org::eclipse::xtext::GrammarUtil;
 
 String qualifiedName(Grammar grammar) :
-	JAVA org.eclipse.xtext.ui.generator.outline.OutlineNodeAdapterFactoryFragment.getQualifiedName(org.eclipse.xtext.Grammar);
+	qualifiedName(grammar,getNaming());
+	
+String qualifiedName(Grammar grammar, Naming n) :
+	JAVA org.eclipse.xtext.ui.generator.outline.OutlineNodeAdapterFactoryFragment.getQualifiedName(org.eclipse.xtext.Grammar,org.eclipse.xtext.generator.Naming);
+
 
 	
 

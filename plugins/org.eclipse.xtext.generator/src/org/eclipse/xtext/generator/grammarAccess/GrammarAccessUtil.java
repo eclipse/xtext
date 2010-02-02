@@ -24,6 +24,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.XtextRuntimeModule;
+import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
 
 import com.google.inject.Guice;
@@ -123,13 +124,8 @@ public class GrammarAccessUtil {
 		return ele.eClass().getName();
 	}
 
-	public static String getGrammarAccessFQName(Grammar grammar) {
-		return GrammarUtil.getNamespace(grammar) + ".services."
-				+ getGrammarAccessSimpleName(grammar);
-	}
-
-	public static String getGrammarAccessSimpleName(Grammar grammar) {
-		return GrammarUtil.getName(grammar) + "GrammarAccess";
+	public static String getGrammarAccessFQName(Grammar grammar, Naming naming) {
+		return naming.basePackageRuntime(grammar) + ".services." +GrammarUtil.getName(grammar) + "GrammarAccess";
 	}
 
 	public static String getUniqueElementName(AbstractElement ele) {

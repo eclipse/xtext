@@ -7,11 +7,14 @@
  *
  *******************************************************************************/
 import org::eclipse::xtext;
+import org::eclipse::xtext::generator;
 import org::eclipse::emf::ecore;
 
-extension org::eclipse::xtext::Extensions;
+extension org::eclipse::xtext::generator::Naming;
 extension org::eclipse::xtext::EcoreUtils;
 
 String formatterName(Grammar this):
-	JAVA org.eclipse.xtext.generator.formatting.FormatterFragment.getFormatterName(org.eclipse.xtext.Grammar);
- 
+	formatterName(this, getNaming());
+
+private String formatterName(Grammar this, Naming naming):
+	JAVA org.eclipse.xtext.generator.formatting.FormatterFragment.getFormatterName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);

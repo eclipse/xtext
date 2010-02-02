@@ -7,13 +7,18 @@
  *
  *******************************************************************************/
 import org::eclipse::xtext;
+import org::eclipse::xtext::generator;
 import org::eclipse::xtext::parsetree::reconstr::impl;
 
 extension org::eclipse::xtext::GrammarUtil;
+extension org::eclipse::xtext::generator::Naming;
 extension org::eclipse::xtext::generator::grammarAccess::GrammarAccess; 
 
 String getParseTreeConstructorName(Grammar g):
-	JAVA org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorUtil.getParseTreeConstructorName(org.eclipse.xtext.Grammar);
+	getParseTreeConstructorName(g,getNaming());
+	
+private String getParseTreeConstructorName(Grammar g, Naming n):
+	JAVA org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorUtil.getParseTreeConstructorName(org.eclipse.xtext.Grammar,org.eclipse.xtext.generator.Naming);
 
 String elementMethodName(AbstractElement ele):
 	ele.containingRule().gaRuleIdentifyer() + "_" + ele.gaElementIdentifyer();

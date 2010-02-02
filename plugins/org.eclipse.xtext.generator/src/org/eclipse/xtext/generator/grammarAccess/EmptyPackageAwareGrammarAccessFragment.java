@@ -45,7 +45,7 @@ public class EmptyPackageAwareGrammarAccessFragment extends AbstractGeneratorFra
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return new BindFactory()
-			.addTypeToType(IGrammarAccess.class.getName(), GrammarAccessUtil.getGrammarAccessFQName(grammar))
+			.addTypeToType(IGrammarAccess.class.getName(), GrammarAccessUtil.getGrammarAccessFQName(grammar,getNaming()))
 			.getBindings();
 	}
 

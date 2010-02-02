@@ -26,7 +26,7 @@ public class PackratParserFragment extends AbstractGeneratorFragment {
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar g) {
 		return new BindFactory()
-		.addTypeToType(IPackratParser.class.getName(),PackratParserGenUtil.getGeneratedParser(g))	
+		.addTypeToType(IPackratParser.class.getName(),PackratParserGenUtil.getGeneratedParser(g,getNaming()))	
 		.getBindings();
 	}
 	

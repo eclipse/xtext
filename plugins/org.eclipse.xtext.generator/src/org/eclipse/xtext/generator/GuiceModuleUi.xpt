@@ -21,7 +21,7 @@
 /*
  «fileHeader()»
  */
-package «guiceModuleRtGenerated().toJavaPackage()»;
+package «guiceModuleUiGenerated().toJavaPackage()»;
 
 import «guiceModuleRt()»;
 

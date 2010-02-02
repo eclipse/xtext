@@ -19,6 +19,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
+import org.eclipse.xtext.generator.Naming;
 
 /**
  * {@link IGeneratorFragment} to generate a java based validity checker for a given grammar.
@@ -50,11 +51,11 @@ public class JavaValidatorFragment extends AbstractValidatorFragment {
 
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
-		return new BindFactory().addTypeToTypeEagerSingleton(getValidatorName(grammar, ""),
-				getValidatorName(grammar, "")).getBindings();
+		return new BindFactory().addTypeToTypeEagerSingleton(getValidatorName(grammar, "",getNaming()),
+				getValidatorName(grammar, "",getNaming())).getBindings();
 	}
 
-	public static String getValidatorName(Grammar g, String prefix) {
-		return GrammarUtil.getNamespace(g) + ".validation." + prefix + GrammarUtil.getName(g) + "JavaValidator";
+	public static String getValidatorName(Grammar g, String prefix, Naming n) {
+		return n.basePackageRuntime(g) + ".validation." + prefix + GrammarUtil.getName(g) + "JavaValidator";
 	}
 }

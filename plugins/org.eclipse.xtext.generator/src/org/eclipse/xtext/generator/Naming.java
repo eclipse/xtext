@@ -14,47 +14,58 @@ import org.eclipse.xtext.Grammar;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
- * Utility class providing names and the like for general artifacts used in all Xtext projects
- * There's a corresponding Xtend file (Naming.ext) mapping the methods defined inhere to Xtend signatures. 
+ * 
+ *         Utility class providing names and the like for general artifacts used in all Xtext projects There's a
+ *         corresponding Xtend file (Naming.ext) mapping the methods defined inhere to Xtend signatures.
  * 
  */
-public final class Naming {
-	private Naming(){}
+public class Naming {
 	
-	public static String guiceModuleRtGenerated(Grammar g) {
-		return getNamespace(g)+".Abstract"+getName(g)+"RuntimeModule";
+	public final static String GLOBAL_VAR_NAME = "__Naming__";
+	private String uiBasePackage;
+	
+	public void setUiBasePackage(String uiBasePackage) {
+		this.uiBasePackage = uiBasePackage;
 	}
-	
-	public static String guiceModuleRt(Grammar g) {
-		return getNamespace(g)+"."+getName(g)+"RuntimeModule";
+
+	public String guiceModuleRtGenerated(Grammar g) {
+		return basePackageRuntime(g) + ".Abstract" + getName(g) + "RuntimeModule";
 	}
-	
-	public static String guiceModuleUiGenerated(Grammar g) {
-		return getNamespace(g)+".Abstract"+getName(g)+"UiModule";
+
+	public String guiceModuleRt(Grammar g) {
+		return basePackageRuntime(g) + "." + getName(g) + "RuntimeModule";
 	}
-	
-	public static String guiceModuleUi(Grammar g) {
-		return getNamespace(g)+"."+getName(g)+"UiModule";
+
+	public String guiceModuleUiGenerated(Grammar g) {
+		return basePackageUi(g) + ".Abstract" + getName(g) + "UiModule";
 	}
-	
-	public static String setup(Grammar g) {
-		return g.getName()+"StandaloneSetup";
+
+	public String guiceModuleUi(Grammar g) {
+		return basePackageUi(g) + "." + getName(g) + "UiModule";
 	}
-	
-	public static String activator(Grammar g) {
-		return getNamespace(g)+".Activator";
+
+	public String setup(Grammar g) {
+		return basePackageRuntime(g)+"."+getName(g) + "StandaloneSetup";
 	}
-	
-	public static String executableExtensionFactory(Grammar g) {
-		return g.getName()+"ExecutableExtensionFactory";
+
+	public String activator() {
+		return uiBasePackage+ ".Activator";
 	}
-	
-	public static String asPath(String s) {
-		return s.replace('.','/');
+
+	public String executableExtensionFactory(Grammar g) {
+		return basePackageUi(g)+"."+getName(g)+"ExecutableExtensionFactory";
 	}
-	
-	public static String javaPack(Grammar g) {
+
+	public String asPath(String s) {
+		return s.replace('.', '/');
+	}
+
+	public String basePackageRuntime(Grammar g) {
 		return getNamespace(g);
 	}
+
+	public String basePackageUi(Grammar g) {
+		return getNamespace(g) + ".ui";
+	}
+
 }

@@ -7,11 +7,15 @@
  *
  *******************************************************************************/
 import org::eclipse::xtext;
+import org::eclipse::xtext::generator;
 import org::eclipse::emf::ecore;
 
 extension org::eclipse::xtext::Extensions;
+extension org::eclipse::xtext::generator::Naming;
 extension org::eclipse::xtext::EcoreUtils;
 
 String scopeProviderName(Grammar this):
-	JAVA org.eclipse.xtext.generator.scoping.AbstractScopingFragment.getScopeProviderName(org.eclipse.xtext.Grammar);
+	scopeProviderName(this,getNaming());
+private String scopeProviderName(Grammar this, Naming n):
+	JAVA org.eclipse.xtext.generator.scoping.AbstractScopingFragment.getScopeProviderName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);
  

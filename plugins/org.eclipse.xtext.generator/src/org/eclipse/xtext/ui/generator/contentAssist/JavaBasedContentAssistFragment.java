@@ -35,7 +35,7 @@ public class JavaBasedContentAssistFragment extends AbstractGeneratorFragment {
 	}
 
 	private String getProposalProviderClassName(Grammar grammar) {
-		return GrammarUtil.getNamespace(grammar) + ".contentassist." + GrammarUtil.getName(grammar) + "ProposalProvider";
+		return getNaming().basePackageUi(grammar)+ ".contentassist." + GrammarUtil.getName(grammar) + "ProposalProvider";
 	}
 	
 	@Override
@@ -46,13 +46,6 @@ public class JavaBasedContentAssistFragment extends AbstractGeneratorFragment {
 		};
 	}
 
-	@Override
-	public String[] getExportedPackagesUi(Grammar grammar) {
-		return new String[] {
-			GrammarUtil.getNamespace(grammar) + ".contentassist"
-		};
-	}
-	
 	@Override
 	public String[] getImportedPackagesUi(Grammar grammar) {
 		return new String[] { "org.apache.log4j" };
