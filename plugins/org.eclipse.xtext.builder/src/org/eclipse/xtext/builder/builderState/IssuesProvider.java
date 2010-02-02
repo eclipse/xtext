@@ -17,8 +17,8 @@ import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EValidator;
 import org.eclipse.xtext.builder.internal.Activator;
-import org.eclipse.xtext.ui.core.editor.model.edit.IssueUtil;
-import org.eclipse.xtext.ui.core.resource.IStorage2UriMapper;
+import org.eclipse.xtext.ui.editor.model.edit.IssueUtil;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.validation.Issue;
 
 import com.google.common.collect.Lists;

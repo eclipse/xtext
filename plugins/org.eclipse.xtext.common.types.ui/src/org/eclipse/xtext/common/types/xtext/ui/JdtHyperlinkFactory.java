@@ -14,7 +14,7 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.common.types.IdentifyableElement;
 import org.eclipse.xtext.common.types.access.TypeResource;
 import org.eclipse.xtext.common.types.util.jdt.IJavaElementFinder;
-import org.eclipse.xtext.ui.common.editor.hyperlinking.IHyperlinkAcceptor;
+import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkAcceptor;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

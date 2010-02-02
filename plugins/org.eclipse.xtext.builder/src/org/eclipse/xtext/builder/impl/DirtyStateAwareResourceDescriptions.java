@@ -15,8 +15,8 @@ import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
 import org.eclipse.xtext.resource.impl.ChangedResourceDescriptionDelta;
 import org.eclipse.xtext.resource.impl.ResourceDescriptionChangeEvent;
-import org.eclipse.xtext.ui.core.editor.IDirtyStateManager;
-import org.eclipse.xtext.ui.core.notification.IStateChangeEventBroker;
+import org.eclipse.xtext.ui.editor.IDirtyStateManager;
+import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;

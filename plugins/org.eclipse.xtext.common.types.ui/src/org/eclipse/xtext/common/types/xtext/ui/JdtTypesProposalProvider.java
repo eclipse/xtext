@@ -25,9 +25,9 @@ import org.eclipse.xtext.common.types.GenericType;
 import org.eclipse.xtext.common.types.Type;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
-import org.eclipse.xtext.ui.common.editor.contentassist.ICompletionProposalFactory;
-import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
-import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalFactory;
 
 import com.google.inject.Inject;
 

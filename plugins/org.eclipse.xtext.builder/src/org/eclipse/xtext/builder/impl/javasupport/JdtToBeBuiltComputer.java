@@ -13,8 +13,8 @@ import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.xtext.builder.impl.ToBeBuilt;
 import org.eclipse.xtext.builder.impl.ToBeBuiltComputer;
-import org.eclipse.xtext.ui.core.resource.JarEntryLocator;
-import org.eclipse.xtext.ui.core.resource.PackageFragmentRootWalker;
+import org.eclipse.xtext.ui.resource.JarEntryLocator;
+import org.eclipse.xtext.ui.resource.PackageFragmentRootWalker;
 
 public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 	

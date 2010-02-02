@@ -20,7 +20,7 @@ import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
-import org.eclipse.xtext.ui.core.resource.IResourceSetProvider;
+import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 
 public class UpdateProjectsJob extends Job {
 	

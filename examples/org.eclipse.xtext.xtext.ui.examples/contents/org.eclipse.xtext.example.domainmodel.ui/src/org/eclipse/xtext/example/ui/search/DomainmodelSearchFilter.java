@@ -2,7 +2,7 @@ package org.eclipse.xtext.example.ui.search;
 
 import org.eclipse.xtext.example.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.ui.core.search.IXtextSearchFilter;
+import org.eclipse.xtext.ui.search.IXtextSearchFilter;
 
 public class DomainmodelSearchFilter implements IXtextSearchFilter {
 

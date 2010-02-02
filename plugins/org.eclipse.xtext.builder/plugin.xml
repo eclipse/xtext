@@ -5,7 +5,7 @@
  <copyright>
  </copyright>
 
- $Id: plugin.xml,v 1.8 2010/01/27 13:55:34 jkohnlein Exp $
+ $Id: plugin.xml,v 1.9 2010/02/02 22:15:08 sefftinge Exp $
 -->
 
 <plugin>
@@ -105,16 +105,16 @@
    <extension
          point="org.eclipse.ui.handlers">
       <handler
-            class="org.eclipse.xtext.builder.internal.GuiceAwareExtensionFactory:org.eclipse.xtext.ui.core.search.OpenXtextElementHandler"
-            commandId="org.eclipse.xtext.ui.core.search.OpenXtextElementCommand">
+            class="org.eclipse.xtext.builder.internal.GuiceAwareExtensionFactory:org.eclipse.xtext.ui.search.OpenXtextElementHandler"
+            commandId="org.eclipse.xtext.ui.search.OpenXtextElementCommand">
       </handler>
    </extension>
  	<extension point="org.eclipse.search.searchResultViewPages">
     	<viewPage
-          class="org.eclipse.xtext.builder.internal.GuiceAwareExtensionFactory:org.eclipse.xtext.ui.core.editor.findrefs.ReferenceSearchViewPage"
+          class="org.eclipse.xtext.builder.internal.GuiceAwareExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchViewPage"
           icon="icons/searchpage.gif"
-          id="org.eclipse.xtext.ui.core.editor.findref.SearchViewPage"
-          searchResultClass="org.eclipse.xtext.ui.core.editor.findrefs.ReferenceSearchResult">
+          id="org.eclipse.xtext.ui.editor.findref.SearchViewPage"
+          searchResultClass="org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchResult">
     	</viewPage>
  	</extension>
 

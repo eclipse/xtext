@@ -6,7 +6,7 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
+            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="dmodel"
@@ -17,8 +17,8 @@
     <extension
         point="org.eclipse.ui.handlers">
         <handler
-            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
-            commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
             <activeWhen>
                 <reference
                     definitionId="org.eclipse.xtext.example.Domainmodel.Editor.opened">
@@ -26,7 +26,7 @@
             </activeWhen>
         </handler>
         <handler
-            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.handler.ValidateActionHandler"
+            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
             commandId="org.eclipse.xtext.example.Domainmodel.validate">
          <activeWhen>
             <reference
@@ -40,7 +40,7 @@
             <and>
                 <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
                 <with variable="activeEditor">
-                    <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
                         value="org.eclipse.xtext.example.Domainmodel" 
                         forcePluginActivation="true"/>
                 </with>        
@@ -50,21 +50,21 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
-            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
+            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.xtext.example.Domainmodel"
             name="Domainmodel">
             <keywordReference id="org.eclipse.xtext.example.ui.keyword_Domainmodel"/>
         </page>
         <page
             category="org.eclipse.xtext.example.Domainmodel"
-            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
             id="org.eclipse.xtext.example.Domainmodel.coloring"
             name="Syntax Coloring">
             <keywordReference id="org.eclipse.xtext.example.ui.keyword_Domainmodel"/>
         </page>
         <page
             category="org.eclipse.xtext.example.Domainmodel"
-            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
             id="org.eclipse.xtext.example.Domainmodel.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.example.ui.keyword_Domainmodel"/>
@@ -101,7 +101,7 @@
     </extension>
     <extension point="org.eclipse.ui.menus">
 		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
-			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
 				<visibleWhen checkEnabled="false">
                 	<reference definitionId="org.eclipse.xtext.example.Domainmodel.Editor.opened">
                 	</reference>
@@ -111,8 +111,8 @@
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 	    <handler
-            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.findrefs.FindReferencesHandler"
-            commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.editor.FindReferences">
             <activeWhen>
                 <reference
                     definitionId="org.eclipse.xtext.example.Domainmodel.Editor.opened">
@@ -132,7 +132,7 @@
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
-            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
+            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
             uriExtension="dmodel">
         </resourceServiceProvider>
     </extension>
@@ -142,7 +142,7 @@
    <extension
          point="org.eclipse.ui.ide.markerResolution">
       <markerResolutionGenerator
-            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.quickfix.MarkerResolutionGenerator">
+            class="org.eclipse.xtext.example.ui.DomainmodelExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
       </markerResolutionGenerator>
    </extension>
 

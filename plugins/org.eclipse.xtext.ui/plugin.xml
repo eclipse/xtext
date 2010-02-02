@@ -1,0 +1,312 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.2"?>
+<plugin>
+   <extension-point id="searchFilter" name="Xtext EObject Search Filter" schema="schema/searchFilter.exsd"/>
+   <extension point="org.eclipse.ui.keywords">
+      <keyword
+            id="org.eclipse.xtext.ui.keyword.editor"
+            label="Editor">
+      </keyword>
+      <keyword
+            id="org.eclipse.xtext.ui.keyword.syntax_coloring"
+            label="Syntax">
+      </keyword>
+   </extension>
+  <extension point="org.eclipse.ui.handlers">
+      <handler
+            class="org.eclipse.xtext.ui.editor.handler.ContentAssistHandler"
+            commandId="org.eclipse.ui.edit.text.contentAssist.proposals">
+         <activeWhen>
+            <reference
+                  definitionId="isActiveEditorAnInstanceOfXtextEditor">
+            </reference>
+         </activeWhen>
+      </handler>
+   </extension>
+   <extension point="org.eclipse.core.expressions.definitions">
+      <definition
+            id="isActiveEditorAnInstanceOfXtextEditor">
+         <with
+               variable="activeEditor">
+            <instanceof
+                  value="org.eclipse.xtext.ui.editor.XtextEditor">
+            </instanceof>
+         </with>
+      </definition>
+   </extension>
+   
+   <extension point="org.eclipse.ui.menus">
+        <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+         <command commandId="org.eclipse.ui.edit.text.contentAssist.proposals"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <reference
+                     definitionId="isActiveEditorAnInstanceOfXtextEditor">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+      <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+         <command commandId="org.eclipse.xtext.ui.ToggleCommentAction"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <reference
+                     definitionId="isActiveEditorAnInstanceOfXtextEditor">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+      <menuContribution
+            locationURI="popup:#TextEditorContext?after=group.edit">
+         <command commandId="org.eclipse.xtext.ui.FormatAction"
+               style="push">
+            <visibleWhen
+                  checkEnabled="false">
+               <reference
+                     definitionId="isActiveEditorAnInstanceOfXtextEditor">
+               </reference>
+            </visibleWhen>
+         </command>
+      </menuContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.contexts">
+      <context
+            description="Editing Xtext Source Context"
+            id="org.eclipse.xtext.ui.XtextEditorScope"
+            name="Editing Xtext Source"
+            parentId="org.eclipse.ui.textEditorScope">
+      </context>
+   </extension>
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            name="Format"
+            description="Format text"
+            categoryId="org.eclipse.xtext.ui.category.XtextEditor"
+            id="org.eclipse.xtext.ui.FormatAction">
+      </command>
+      <command
+            name="Toggle Comment"
+            description="Toggle comment"
+            categoryId="org.eclipse.xtext.ui.category.XtextEditor"
+            id="org.eclipse.xtext.ui.ToggleCommentAction">
+      </command>
+      <command
+            name="Got to Matching Bracket"
+            description="Got to Matching Bracket"
+            categoryId="org.eclipse.xtext.ui.category.XtextEditor"
+            id="org.eclipse.xtext.ui.GotToMatchingBracketAction">
+      </command>
+      <category
+            description="Xtext Editing Commands"
+            id="org.eclipse.xtext.ui.category.XtextEditor"
+            name="Source">
+      </category>
+   </extension>
+   <extension point="org.eclipse.core.expressions.propertyTesters">
+    <propertyTester
+      id="org.eclipse.xtext.ui.editor.XtextEditorPropertyTester"
+      type="org.eclipse.ui.IEditorPart"
+      namespace="org.eclipse.xtext.ui.editor.XtextEditor"
+      properties="languageName"
+      class="org.eclipse.xtext.ui.editor.XtextEditorPropertyTester">
+    </propertyTester>
+  </extension>
+  <extension
+      point="org.eclipse.ui.bindings">
+    <key sequence="M1+M2+F"
+      contextId="org.eclipse.xtext.ui.XtextEditorScope"
+      commandId="org.eclipse.xtext.ui.FormatAction"
+      schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+    <key sequence="M1+7"
+      contextId="org.eclipse.xtext.ui.XtextEditorScope"
+      commandId="org.eclipse.xtext.ui.ToggleCommentAction"
+      schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+    <key sequence="M1+/"
+      contextId="org.eclipse.xtext.ui.XtextEditorScope"
+      commandId="org.eclipse.xtext.ui.ToggleCommentAction"
+      schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+    <key sequence="M1+M2+C"
+        contextId="org.eclipse.xtext.ui.XtextEditorScope"
+        commandId="org.eclipse.xtext.ui.ToggleCommentAction"
+        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+    <key sequence="M1+M2+P"
+        contextId="org.eclipse.xtext.ui.XtextEditorScope"
+        commandId="org.eclipse.xtext.ui.GotToMatchingBracketAction"
+        schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
+  </extension>
+  <extension
+         id="check"
+         name="Xtext Check"
+         point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.emf.ecore.diagnostic"/>
+      <persistent value="true"/>
+      <attribute
+            name="code">
+      </attribute>
+   </extension>
+  <extension
+         id="org.eclipse.xtext.ui.check.fast"
+         name="Xtext Check (fast)"
+         point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.xtext.ui.check"/>
+      <persistent value="true"/>
+   </extension>
+  <extension
+         id="org.eclipse.xtext.ui.check.normal"
+         name="Xtext Check (normal)"
+         point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.xtext.ui.check"/>
+      <persistent value="true"/>
+   </extension>
+  <extension
+         id="org.eclipse.xtext.ui.check.expensive"
+         name="Xtext Check (expensive)"
+         point="org.eclipse.core.resources.markers">
+      <super type="org.eclipse.xtext.ui.check"/>
+      <persistent value="true"/>
+   </extension>
+  <extension
+        id="xtextBuilder"
+        name="Xtext Project Builder"
+        point="org.eclipse.core.resources.builders">
+     <builder
+           hasNature="true">
+        <run
+              class="org.eclipse.xtext.ui.internal.GuiceAwareExtensionFactory">
+              <parameter name="guicekey" value="org.eclipse.xtext.ui.builder.internal.XtextBuilder"/>
+        </run>
+     </builder>
+  </extension>
+   <extension
+      point="org.eclipse.ui.editors.annotationTypes">
+      <type
+      	name="org.eclipse.xtext.ui.editor.error"
+      	markerType="org.eclipse.emf.ecore.diagnostic"
+      	markerSeverity="2"
+        super="org.eclipse.ui.workbench.texteditor.error">
+      </type>
+      <type
+      	name="org.eclipse.xtext.ui.editor.warning"
+      	markerType="org.eclipse.emf.ecore.diagnostic"
+      	markerSeverity="1"
+        super="org.eclipse.ui.workbench.texteditor.warning">
+      </type>
+   </extension>
+   <extension
+         point="org.eclipse.ui.editors.markerAnnotationSpecification">
+      <specification
+            annotationImageProvider="org.eclipse.xtext.ui.editor.model.XtextMarkerAnnotationImageProvider"
+            annotationType="org.eclipse.xtext.ui.editor.error"
+            includeOnPreferencePage="true"
+            symbolicIcon="error"
+            quickFixIcon="icons/quick_fix_error_obj.gif">
+      </specification>
+      <specification
+            annotationImageProvider="org.eclipse.xtext.ui.editor.model.XtextMarkerAnnotationImageProvider"
+            annotationType="org.eclipse.xtext.ui.editor.warning"
+            includeOnPreferencePage="true"
+            symbolicIcon="warning"
+            quickFixIcon="icons/quick_fix_warning_obj.gif">
+      </specification>
+   </extension>
+   <!--extension
+         point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
+      <hyperlinkDetector
+            activate="true"
+            class="org.eclipse.xtext.ui.editor.DelegatingHyperlinkDetector"
+            id="org.eclipse.xtext.ui.hyperlinkDetector"
+            name="XtextHypeLink"
+            targetId="org.eclipse.xtext.ui.hyperlinkTarget">
+      </hyperlinkDetector>
+   </extension>
+   <extension
+         point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectorTargets">
+      <target
+            description="Depends on an EditorModel contained in all Xtext editors"
+            id="org.eclipse.xtext.ui.hyperlinkTarget"
+            name="Xtext Editors">
+         <context type="org.eclipse.xtext.ui.editor.model.IEditorModel"/>
+      </target>
+   </extension-->
+   
+   <!-- open Xtext element -->
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.eclipse.ui.category.window"
+            description="Open the declaration of an Xtext element"
+            id="org.eclipse.xtext.ui.search.OpenXtextElementCommand"
+            name="Open Xtext Element">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="org.eclipse.xtext.ui.search.OpenXtextElementCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+SHIFT+Z">
+      </key>
+   </extension>
+   
+   	<!-- find references -->
+	<extension point="org.eclipse.ui.commands">
+		<command 
+			id="org.eclipse.xtext.ui.editor.FindReferences"
+			name="Find References"
+			description="Finds all references to the selected element">
+		</command>
+	</extension>
+	<extension point="org.eclipse.ui.bindings">
+		<key
+			contextId="org.eclipse.xtext.ui.XtextEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="M1+SHIFT+G"
+			commandId="org.eclipse.xtext.ui.editor.FindReferences">
+		</key>
+	</extension>
+	
+	<!-- resource service providers -->
+	<extension
+	      point="org.eclipse.xtext.extension_resourceServiceProvider">
+    <resourceServiceProvider
+          class="org.eclipse.xtext.ui.resource.ecore.EcoreResourceUIServiceProviderImpl"
+          uriExtension="ecore">
+    </resourceServiceProvider>
+	</extension>
+	
+	<!-- F3 / Hyperlinking stuff -->
+	<extension
+		point="org.eclipse.ui.bindings">
+		<key
+			contextId="org.eclipse.xtext.ui.XtextEditorScope"
+			schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+			sequence="F3"
+			commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+		</key>
+	</extension>
+	<extension
+		point="org.eclipse.ui.commands">
+		<command
+			id="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration"
+			name="Open Declaration"
+			description="Opens the declaration for the currently selected cross reference">
+		</command>
+	</extension>
+	<extension
+		point="org.eclipse.ui.menus">
+		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
+			<command commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
+				<visibleWhen checkEnabled="false">
+					<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+				</visibleWhen>
+			</command>
+		</menuContribution>
+	</extension>	
+</plugin>

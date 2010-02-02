@@ -10,8 +10,8 @@ package org.eclipse.xtext.common.types.xtext.ui;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Region;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.common.editor.hyperlinking.HyperlinkHelper;
-import org.eclipse.xtext.ui.common.editor.hyperlinking.IHyperlinkAcceptor;
+import org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkHelper;
+import org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkAcceptor;
 
 import com.google.inject.Inject;
 

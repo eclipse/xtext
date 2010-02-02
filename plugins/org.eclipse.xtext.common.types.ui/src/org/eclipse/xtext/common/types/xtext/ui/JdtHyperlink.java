@@ -12,7 +12,7 @@ import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.ui.JavaUI;
 import org.eclipse.ui.PartInitException;
-import org.eclipse.xtext.ui.common.editor.hyperlinking.AbstractHyperlink;
+import org.eclipse.xtext.ui.editor.hyperlinking.AbstractHyperlink;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

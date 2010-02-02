@@ -30,7 +30,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.ui.core.util.JdtClasspathUriResolver;
+import org.eclipse.xtext.ui.util.JdtClasspathUriResolver;
 
 import com.google.inject.Inject;
 import com.google.inject.Provider;

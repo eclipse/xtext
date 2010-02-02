@@ -11,8 +11,8 @@ import org.eclipse.core.resources.IResource;
 import org.eclipse.jface.dialogs.IDialogConstants;
 import org.eclipse.jface.dialogs.MessageDialog;
 import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.ui.core.editor.AbstractDirtyStateAwareEditorCallback;
-import org.eclipse.xtext.ui.core.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.AbstractDirtyStateAwareEditorCallback;
+import org.eclipse.xtext.ui.editor.XtextEditor;
 
 import com.google.inject.Inject;
 

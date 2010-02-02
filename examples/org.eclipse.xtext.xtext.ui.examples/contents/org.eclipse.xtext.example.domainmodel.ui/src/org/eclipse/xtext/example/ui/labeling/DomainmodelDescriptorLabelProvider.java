@@ -10,7 +10,7 @@ package org.eclipse.xtext.example.ui.labeling;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.ui.core.resource.DefaultDescriptionLabelProvider;
+import org.eclipse.xtext.ui.resource.DefaultDescriptionLabelProvider;
 
 import com.google.inject.Inject;
 

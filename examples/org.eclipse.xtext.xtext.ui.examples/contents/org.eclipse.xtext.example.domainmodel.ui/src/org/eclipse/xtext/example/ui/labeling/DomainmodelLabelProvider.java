@@ -8,7 +8,7 @@ import org.eclipse.xtext.example.domainmodel.DataType;
 import org.eclipse.xtext.example.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.PackageDeclaration;
 import org.eclipse.xtext.example.domainmodel.Reference;
-import org.eclipse.xtext.ui.core.DefaultLabelProvider;
+import org.eclipse.xtext.ui.DefaultLabelProvider;
 
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
