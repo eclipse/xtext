@@ -9,7 +9,7 @@ package org.eclipse.xtext.ui.common.editor.contentassist;
 
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.enumrules.EnumRulesUiTestLanguageStandaloneSetup;
-import org.eclipse.xtext.enumrules.EnumRulesUiTestLanguageUiModule;
+import org.eclipse.xtext.enumrules.ui.EnumRulesUiTestLanguageUiModule;
 import org.eclipse.xtext.ui.common.service.UIPluginModule;
 import org.eclipse.xtext.ui.common.tests.Activator;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;

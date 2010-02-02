@@ -9,7 +9,7 @@ package org.eclipse.xtext.ui.common.editor.contentassist;
 
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.parser.keywords.KeywordsUiTestLanguageStandaloneSetup;
-import org.eclipse.xtext.parser.keywords.KeywordsUiTestLanguageUiModule;
+import org.eclipse.xtext.parser.keywords.ui.KeywordsUiTestLanguageUiModule;
 import org.eclipse.xtext.ui.common.service.UIPluginModule;
 import org.eclipse.xtext.ui.common.tests.Activator;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;

@@ -16,6 +16,7 @@ import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.common.editor.contentassist.crossReferenceProposalTest.CrossReferenceProposalTestPackage;
 import org.eclipse.xtext.ui.common.editor.contentassist.services.CrossReferenceProposalTestLanguageGrammarAccess;
+import org.eclipse.xtext.ui.common.editor.contentassist.ui.CrossReferenceProposalTestLanguageUiModule;
 import org.eclipse.xtext.ui.common.service.UIPluginModule;
 import org.eclipse.xtext.ui.common.tests.Activator;
 import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;

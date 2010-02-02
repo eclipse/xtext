@@ -35,92 +35,92 @@ public class Activator extends AbstractUIPlugin {
 		try {
 			
 			injectors.put("org.eclipse.xtext.XtextGrammarUiTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.XtextGrammarUiTestLanguageUiModule(),
+				new org.eclipse.xtext.ui.XtextGrammarUiTestLanguageUiModule(),
 				createUIPluginModule()
 			));
 			
 			injectors.put("org.eclipse.xtext.linking.ImportUriUiTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.linking.ImportUriUiTestLanguageUiModule(),
+				new org.eclipse.xtext.linking.ui.ImportUriUiTestLanguageUiModule(),
 				createUIPluginModule()
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.common.editor.contentassist.TwoContextsTestLanguageUiModule(),
+				new org.eclipse.xtext.ui.common.editor.contentassist.ui.TwoContextsTestLanguageUiModule(),
 				createUIPluginModule()
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.common.editor.contentassist.Bug286935TestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.common.editor.contentassist.Bug286935TestLanguageUiModule(),
+				new org.eclipse.xtext.ui.common.editor.contentassist.ui.Bug286935TestLanguageUiModule(),
 				createUIPluginModule()
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.common.editor.contentassist.Bug287941TestLanguageUiModule(),
+				new org.eclipse.xtext.ui.common.editor.contentassist.ui.Bug287941TestLanguageUiModule(),
 				createUIPluginModule()
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.common.editor.contentassist.Bug288734TestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.common.editor.contentassist.Bug288734TestLanguageUiModule(),
+				new org.eclipse.xtext.ui.common.editor.contentassist.ui.Bug288734TestLanguageUiModule(),
 				createUIPluginModule()
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.common.editor.contentassist.Bug288760TestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.common.editor.contentassist.Bug288760TestLanguageUiModule(),
+				new org.eclipse.xtext.ui.common.editor.contentassist.ui.Bug288760TestLanguageUiModule(),
 				createUIPluginModule()
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.common.editor.contentassist.Bug289187TestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.common.editor.contentassist.Bug289187TestLanguageUiModule(),
+				new org.eclipse.xtext.ui.common.editor.contentassist.ui.Bug289187TestLanguageUiModule(),
 				createUIPluginModule()
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.common.editor.contentassist.Bug291022TestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.common.editor.contentassist.Bug291022TestLanguageUiModule(),
+				new org.eclipse.xtext.ui.common.editor.contentassist.ui.Bug291022TestLanguageUiModule(),
 				createUIPluginModule()
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.common.editor.contentassist.ContentAssistContextTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.common.editor.contentassist.ContentAssistContextTestLanguageUiModule(),
+				new org.eclipse.xtext.ui.common.editor.contentassist.ui.ContentAssistContextTestLanguageUiModule(),
 				createUIPluginModule()
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.common.editor.contentassist.CrossReferenceProposalTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.common.editor.contentassist.CrossReferenceProposalTestLanguageUiModule(),
+				new org.eclipse.xtext.ui.common.editor.contentassist.ui.CrossReferenceProposalTestLanguageUiModule(),
 				createUIPluginModule()
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.common.editor.contentassist.DatatypeRuleTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.common.editor.contentassist.DatatypeRuleTestLanguageUiModule(),
+				new org.eclipse.xtext.ui.common.editor.contentassist.ui.DatatypeRuleTestLanguageUiModule(),
 				createUIPluginModule()
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.common.editor.contentassist.LookAheadContentAssistTestLanguageUiModule(),
+				new org.eclipse.xtext.ui.common.editor.contentassist.ui.LookAheadContentAssistTestLanguageUiModule(),
 				createUIPluginModule()
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.common.editor.contentassist.DomainModelTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.common.editor.contentassist.DomainModelTestLanguageUiModule(),
+				new org.eclipse.xtext.ui.common.editor.contentassist.ui.DomainModelTestLanguageUiModule(),
 				createUIPluginModule()
 			));
 			
 			injectors.put("org.eclipse.xtext.parser.keywords.KeywordsUiTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.parser.keywords.KeywordsUiTestLanguageUiModule(),
+				new org.eclipse.xtext.parser.keywords.ui.KeywordsUiTestLanguageUiModule(),
 				createUIPluginModule()
 			));
 			
 			injectors.put("org.eclipse.xtext.testlanguages.ContentAssistTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.testlanguages.ContentAssistTestLanguageUiModule(),
+				new org.eclipse.xtext.testlanguages.ui.ContentAssistTestLanguageUiModule(),
 				createUIPluginModule()
 			));
 			
 			injectors.put("org.eclipse.xtext.testlanguages.ReferenceGrammarUiTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.testlanguages.ReferenceGrammarUiTestLanguageUiModule(),
+				new org.eclipse.xtext.testlanguages.ui.ReferenceGrammarUiTestLanguageUiModule(),
 				createUIPluginModule()
 			));
 			
 			injectors.put("org.eclipse.xtext.enumrules.EnumRulesUiTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.enumrules.EnumRulesUiTestLanguageUiModule(),
+				new org.eclipse.xtext.enumrules.ui.EnumRulesUiTestLanguageUiModule(),
 				createUIPluginModule()
 			));
 			

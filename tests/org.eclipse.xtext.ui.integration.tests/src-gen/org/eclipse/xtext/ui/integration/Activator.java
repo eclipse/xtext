@@ -35,12 +35,12 @@ public class Activator extends AbstractUIPlugin {
 		try {
 			
 			injectors.put("org.eclipse.xtext.ui.integration.TestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.integration.TestLanguageUiModule(),
+				new org.eclipse.xtext.ui.integration.ui.TestLanguageUiModule(),
 				createUIPluginModule()
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.BmTestLanguageUiModule(),
+				new org.eclipse.xtext.ui.integration.tests.editor.bracketmatching.ui.BmTestLanguageUiModule(),
 				createUIPluginModule()
 			));
 			

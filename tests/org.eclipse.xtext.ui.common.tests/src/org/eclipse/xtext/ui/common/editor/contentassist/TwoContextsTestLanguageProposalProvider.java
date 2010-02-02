@@ -3,13 +3,14 @@ package org.eclipse.xtext.ui.common.editor.contentassist;
 
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ui.common.editor.contentassist.ui.contentassist.AbstractTwoContextsTestLanguageProposalProvider;
 import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAcceptor;
 
 import com.google.common.base.Predicate;
 
 
-public class TwoContextsTestLanguageProposalProvider extends org.eclipse.xtext.ui.common.editor.contentassist.contentassist.AbstractTwoContextsTestLanguageProposalProvider {
+public class TwoContextsTestLanguageProposalProvider extends AbstractTwoContextsTestLanguageProposalProvider {
 
 	@Override
 	public void completeKeyword(Keyword keyword, final ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
