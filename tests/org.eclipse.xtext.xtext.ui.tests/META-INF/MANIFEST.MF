@@ -21,13 +21,12 @@ Require-Bundle: org.eclipse.xtext.ui.junit;bundle-version="0.8.0",
  org.eclipse.ui.editors,
  org.eclipse.ui,
  org.eclipse.emf.common
+Import-Package: org.apache.log4j,
+ org.eclipse.xtext.ui.common.editor.contentassist
+Bundle-Activator: org.eclipse.xtext.xtext.ui.tests.Activator
 Export-Package: org.eclipse.xtext.xtext.ui.ecore2xtext,
  org.eclipse.xtext.xtext.ui.ecore2xtext.services,
  org.eclipse.xtext.xtext.ui.ecore2xtext.parseTreeConstruction,
  org.eclipse.xtext.xtext.ui.ecore2xtext.parser.antlr,
  org.eclipse.xtext.xtext.ui.ecore2xtext.parser.antlr.internal,
- org.eclipse.xtext.xtext.ui.ecore2xtext.contentassist,
  org.eclipse.xtext.xtext.ui.ecore2xtext.contentassist.antlr
-Import-Package: org.apache.log4j,
- org.eclipse.xtext.ui.common.editor.contentassist
-Bundle-Activator: org.eclipse.xtext.ui.common.tests.Activator

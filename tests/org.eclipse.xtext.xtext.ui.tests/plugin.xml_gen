@@ -7,7 +7,7 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-            class="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTestExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
+            class="org.eclipse.xtext.xtext.ui.ecore2xtext.ui.Ecore2XtextTestExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="ecore2xtexttest"
@@ -18,7 +18,7 @@
     <extension
         point="org.eclipse.ui.handlers">
         <handler
-            class="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTestExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
+            class="org.eclipse.xtext.xtext.ui.ecore2xtext.ui.Ecore2XtextTestExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
             commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
             <activeWhen>
                 <reference
@@ -27,7 +27,7 @@
             </activeWhen>
         </handler>
         <handler
-            class="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTestExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.handler.ValidateActionHandler"
+            class="org.eclipse.xtext.xtext.ui.ecore2xtext.ui.Ecore2XtextTestExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.handler.ValidateActionHandler"
             commandId="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.validate">
          <activeWhen>
             <reference
@@ -51,21 +51,21 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
-            class="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTestExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
+            class="org.eclipse.xtext.xtext.ui.ecore2xtext.ui.Ecore2XtextTestExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest"
             name="Ecore2XtextTest">
             <keywordReference id="org.eclipse.xtext.xtext.ui.ecore2xtext.ui.keyword_Ecore2XtextTest"/>
         </page>
         <page
             category="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest"
-            class="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTestExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            class="org.eclipse.xtext.xtext.ui.ecore2xtext.ui.Ecore2XtextTestExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
             id="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.coloring"
             name="Syntax Coloring">
             <keywordReference id="org.eclipse.xtext.xtext.ui.ecore2xtext.ui.keyword_Ecore2XtextTest"/>
         </page>
         <page
             category="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest"
-            class="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTestExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+            class="org.eclipse.xtext.xtext.ui.ecore2xtext.ui.Ecore2XtextTestExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
             id="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTest.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.xtext.ui.ecore2xtext.ui.keyword_Ecore2XtextTest"/>
@@ -112,7 +112,7 @@
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 	    <handler
-            class="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTestExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.findrefs.FindReferencesHandler"
+            class="org.eclipse.xtext.xtext.ui.ecore2xtext.ui.Ecore2XtextTestExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.findrefs.FindReferencesHandler"
             commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
             <activeWhen>
                 <reference
@@ -127,13 +127,13 @@
 	<extension
 		point="org.eclipse.emf.ecore.extension_parser">
 		<parser
-			class="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTestExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
+			class="org.eclipse.xtext.xtext.ui.ecore2xtext.ui.Ecore2XtextTestExecutableExtensionFactory:org.eclipse.xtext.resource.IResourceFactory"
 			type="ecore2xtexttest">
 		</parser>
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
-            class="org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2XtextTestExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
+            class="org.eclipse.xtext.xtext.ui.ecore2xtext.ui.Ecore2XtextTestExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
             uriExtension="ecore2xtexttest">
         </resourceServiceProvider>
     </extension>

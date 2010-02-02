@@ -34,7 +34,7 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 		return new XtextStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new org.eclipse.xtext.XtextUiModule(),
+				return Guice.createInjector(new org.eclipse.xtext.ui.XtextUiModule(),
 						new UIPluginModule(Activator.getDefault()));
 			}
 		};

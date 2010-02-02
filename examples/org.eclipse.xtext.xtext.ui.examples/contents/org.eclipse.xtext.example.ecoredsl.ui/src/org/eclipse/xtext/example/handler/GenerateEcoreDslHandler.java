@@ -38,10 +38,9 @@ public class GenerateEcoreDslHandler extends AbstractHandler {
 	@Inject
 	private Provider<XtextResourceSet> resourceSetProvider;
 
-	@SuppressWarnings( { "unchecked" })
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		EvaluationContext applicationContext = (EvaluationContext) event.getApplicationContext();
-		List fileList = (List) applicationContext.getDefaultVariable();
+		List<?> fileList = (List<?>) applicationContext.getDefaultVariable();
 		IFile ecoreFile = (IFile) fileList.get(0);
 		ResourceSet xtextResourceSet = resourceSetProvider.get();
 		Resource ecoreResource = xtextResourceSet.getResource(URI.createFileURI(ecoreFile.getLocation().toFile()
