@@ -20,8 +20,8 @@
 package «projectWizardClassName().toJavaPackage()»;
 
 import org.eclipse.ui.dialogs.WizardNewProjectCreationPage;
-import org.eclipse.xtext.ui.core.wizard.IProjectInfo;
-import org.eclipse.xtext.ui.core.wizard.XtextNewProjectWizard;
+import org.eclipse.xtext.ui.wizard.IProjectInfo;
+import org.eclipse.xtext.ui.wizard.XtextNewProjectWizard;
 
 public class «projectWizardClassName().toSimpleName()» extends XtextNewProjectWizard {
 

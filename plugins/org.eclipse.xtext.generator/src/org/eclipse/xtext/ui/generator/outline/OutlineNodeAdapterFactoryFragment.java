@@ -27,7 +27,7 @@ public class OutlineNodeAdapterFactoryFragment extends AbstractGeneratorFragment
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
-			.addTypeToType("org.eclipse.xtext.ui.common.editor.outline.actions.IContentOutlineNodeAdapterFactory",
+			.addTypeToType("org.eclipse.xtext.ui.editor.outline.actions.IContentOutlineNodeAdapterFactory",
 					getQualifiedName(grammar,getNaming()))
 			.getBindings();
 	}
@@ -39,8 +39,7 @@ public class OutlineNodeAdapterFactoryFragment extends AbstractGeneratorFragment
 	@Override
 	public String[] getRequiredBundlesUi(Grammar grammar) {
 		return new String[]{
-				"org.eclipse.xtext.ui.common",
-				"org.eclipse.xtext.ui.core"
+				"org.eclipse.xtext.ui"
 		};
 	}
 

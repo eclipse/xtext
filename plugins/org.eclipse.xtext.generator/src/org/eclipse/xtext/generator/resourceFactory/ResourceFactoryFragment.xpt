@@ -30,7 +30,7 @@
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
-            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
+            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
             uriExtension="«ext»">
         </resourceServiceProvider>
     </extension>

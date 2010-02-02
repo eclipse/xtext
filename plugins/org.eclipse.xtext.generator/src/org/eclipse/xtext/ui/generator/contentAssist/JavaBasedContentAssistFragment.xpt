@@ -28,10 +28,10 @@ import org.eclipse.xtext.*;
 «IF inherit && usedGrammars.size == 1-»
 import «usedGrammars.first().getProposalProvider()»;
 «ELSE-»
-import org.eclipse.xtext.ui.common.editor.contentassist.AbstractJavaBasedContentProposalProvider;
+import org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider;
 «ENDIF-»
-import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAcceptor;
-import org.eclipse.xtext.ui.core.editor.contentassist.ContentAssistContext;
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 
 /**
  * Represents a generated, default implementation of interface {@link IProposalProvider}.
