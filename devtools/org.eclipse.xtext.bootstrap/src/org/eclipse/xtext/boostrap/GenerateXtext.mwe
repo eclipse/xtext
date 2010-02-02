@@ -1,7 +1,7 @@
 <workflow>
 	<property name="runtimeProjectName" value="org.eclipse.xtext"/>
 	<property name="uiProjectName" value="org.eclipse.xtext.xtext.ui"/>
-	<property name="commonUiProjectName" value="org.eclipse.xtext.ui.common"/>
+	<property name="commonUiProjectName" value="org.eclipse.xtext.ui"/>
 	<property name="runtimeProject" value="../${runtimeProjectName}"/>
 	<property name="uiProject" value="../${uiProjectName}"/>
 	<property name="commonUiProject" value="../${commonUiProjectName}"/>

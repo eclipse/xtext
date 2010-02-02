@@ -26,7 +26,7 @@ import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.builder.IXtextBuilderParticipant;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
-import org.eclipse.xtext.ui.core.resource.IResourceSetProvider;
+import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;

@@ -11,7 +11,7 @@ import java.util.Set;
 
 import org.eclipse.core.resources.IProject;
 import org.eclipse.xtext.builder.builderState.IBuilderState;
-import org.eclipse.xtext.ui.core.resource.IResourceSetProvider;
+import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 
 import com.google.inject.Inject;
 

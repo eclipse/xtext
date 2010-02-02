@@ -18,7 +18,7 @@
 «FILE projectInfoClassName().asPath()+".java" SRC_GEN_UI-»
 package «projectInfoClassName().toJavaPackage()»;
 
-import org.eclipse.xtext.ui.core.wizard.DefaultProjectInfo;
+import org.eclipse.xtext.ui.wizard.DefaultProjectInfo;
 
 public class «projectInfoClassName().toSimpleName()» extends DefaultProjectInfo {
 	

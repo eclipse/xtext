@@ -5,7 +5,7 @@
 package org.eclipse.xtext.builder.tests;
 
 import org.apache.log4j.Logger;
-import org.eclipse.xtext.ui.common.service.UIPluginModule;
+import org.eclipse.xtext.ui.UIPluginModule;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;

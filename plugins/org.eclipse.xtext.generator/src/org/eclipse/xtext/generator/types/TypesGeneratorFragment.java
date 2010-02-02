@@ -44,10 +44,10 @@ public class TypesGeneratorFragment extends DefaultGeneratorFragment {
 		 .addTypeToType("org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider", "org.eclipse.xtext.common.types.xtext.ui.JdtTypesProposalProvider")
 		 .addTypeToType("org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider", 
 				 	"org.eclipse.xtext.common.types.xtext.ui.XtextResourceSetBasedProjectProvider")
-		 .addTypeToType("org.eclipse.xtext.ui.common.editor.hyperlinking.IHyperlinkHelper", 
+		 .addTypeToType("org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper", 
 				 	"org.eclipse.xtext.common.types.xtext.ui.TypeAwareHyperlinkHelper")
-		 .addTypeToType("org.eclipse.xtext.ui.core.editor.contentassist.PrefixMatcher", 
-				 	"org.eclipse.xtext.ui.core.editor.contentassist.FQNPrefixMatcher")
+		 .addTypeToType("org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher", 
+				 	"org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher")
 		 .getBindings();
 	}
 	

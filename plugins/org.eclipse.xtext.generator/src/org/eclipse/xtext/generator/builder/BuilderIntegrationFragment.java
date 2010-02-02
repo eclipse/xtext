@@ -59,9 +59,9 @@ public class BuilderIntegrationFragment extends DefaultGeneratorFragment {
 					"binder.bind(" + IResourceDescriptions.class.getName() + ".class"
 							+ ").toProvider("
 							+ "org.eclipse.xtext.builder.GlobalResourceDescriptionsAccess.getDirtyResourceDescriptions()).asEagerSingleton()")
-			.addTypeToType("org.eclipse.xtext.ui.core.editor.IXtextEditorCallback", "org.eclipse.xtext.builder.nature.NatureAddingEditorCallback")
+			.addTypeToType("org.eclipse.xtext.ui.editor.IXtextEditorCallback", "org.eclipse.xtext.builder.nature.NatureAddingEditorCallback")
 			.addTypeToType(IAllContainersState.Provider.class.getName(), 
-				"org.eclipse.xtext.ui.core.containers.JavaProjectsStateProvider")
+				"org.eclipse.xtext.ui.containers.JavaProjectsStateProvider")
 			.getBindings();
 	}
 
@@ -69,7 +69,7 @@ public class BuilderIntegrationFragment extends DefaultGeneratorFragment {
 	public String[] getRequiredBundlesUi(Grammar grammar) {
 		return new String[] { 
 			"org.eclipse.xtext.builder",
-			"org.eclipse.xtext.ui.core"
+			"org.eclipse.xtext.ui"
 		};
 	}
 }

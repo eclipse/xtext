@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.internal;
 
-import org.eclipse.xtext.ui.core.guice.AbstractGuiceAwareExecutableExtensionFactory;
+import org.eclipse.xtext.ui.guice.AbstractGuiceAwareExecutableExtensionFactory;
 import org.osgi.framework.Bundle;
 
 import com.google.inject.Injector;

@@ -9,8 +9,8 @@ package org.eclipse.xtext.builder.impl.javasupport;
 
 import org.eclipse.xtext.builder.BuilderModule;
 import org.eclipse.xtext.builder.impl.ToBeBuiltComputer;
-import org.eclipse.xtext.ui.core.resource.IStorage2UriMapper;
-import org.eclipse.xtext.ui.core.resource.Storage2UriMapperJavaImpl;
+import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl;
 
 import com.google.inject.Scopes;
 

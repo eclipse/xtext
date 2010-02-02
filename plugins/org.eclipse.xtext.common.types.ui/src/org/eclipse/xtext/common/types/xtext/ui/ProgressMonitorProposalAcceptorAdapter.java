@@ -8,7 +8,7 @@
 package org.eclipse.xtext.common.types.xtext.ui;
 
 import org.eclipse.core.runtime.NullProgressMonitor;
-import org.eclipse.xtext.ui.core.editor.contentassist.ICompletionProposalAcceptor;
+import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

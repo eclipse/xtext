@@ -19,8 +19,8 @@
 «FILE getQuickfixProviderName().asPath()+".java" SRC_UI»
 package «getQuickfixProviderName().toJavaPackage()»;
 
-import org.eclipse.xtext.ui.core.editor.quickfix.AbstractDeclarativeQuickfixProvider;
-import org.eclipse.xtext.ui.core.editor.quickfix.Fix;
+import org.eclipse.xtext.ui.editor.quickfix.AbstractDeclarativeQuickfixProvider;
+import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.validation.IssueContext;
 
 public class «getQuickfixProviderName().toSimpleName()» extends AbstractDeclarativeQuickfixProvider {
@@ -42,7 +42,7 @@ public class «getQuickfixProviderName().toSimpleName()» extends AbstractDeclarat
    <extension
          point="org.eclipse.ui.ide.markerResolution">
       <markerResolutionGenerator
-            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.core.editor.quickfix.MarkerResolutionGenerator">
+            class="«executableExtensionFactory()»:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
       </markerResolutionGenerator>
    </extension>
 «ENDDEFINE»

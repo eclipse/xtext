@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project>
+  <modelVersion>4.0.0</modelVersion>
+  <groupId>org.eclipse.xtext</groupId>
+  <artifactId>xtext-ui</artifactId>
+  <version>0.8.0-SNAPSHOT</version>
+  <name>Xtext UI</name>
+  <description>Manually created POM</description>
+  
+  <dependencies>
+  	<!-- own stuff -->
+	<dependency>
+		<groupId>org.eclipse.xtext</groupId>
+		<artifactId>log4j</artifactId>
+		<version>1.2.15</version>
+	</dependency>
+
+	<!-- Eclipse stuff -->  	
+	<dependency>
+		<groupId>org.eclipse.core</groupId>
+		<artifactId>commands</artifactId>
+		<version>3.5.0</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.core</groupId>
+		<artifactId>jobs</artifactId>
+		<version>3.5.0</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.core</groupId>
+		<artifactId>runtime</artifactId>
+		<version>3.5.0</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.equinox</groupId>
+		<artifactId>common</artifactId>
+		<version>3.5.0</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.equinox</groupId>
+		<artifactId>registry</artifactId>
+		<version>3.4.100</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.emf</groupId>
+		<artifactId>edit</artifactId>
+		<version>2.5.0</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.emf</groupId>
+		<artifactId>edit-ui</artifactId>
+		<version>2.5.0</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.jface</groupId>
+		<artifactId>jface</artifactId>
+		<version>3.5.0</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.jface</groupId>
+		<artifactId>text</artifactId>
+		<version>3.5.0</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse</groupId>
+		<artifactId>osgi</artifactId>
+		<version>3.5.0</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.ui</groupId>
+		<artifactId>views</artifactId>
+		<version>3.4.0</version>
+	</dependency>
+	<dependency>
+		<groupId>org.eclipse.ui</groupId>
+		<artifactId>workbench</artifactId>
+		<version>3.5.0</version>
+	</dependency>
+  </dependencies>
+
+  <licenses>
+    <license>
+      <name>Eclipse Public License</name>
+      <url>http://www.eclipse.org/legal/epl-v10.html</url>
+      <distribution>repo</distribution>
+    </license>
+  </licenses>
+  <organization>
+    <name>Eclipse</name>
+    <url>http://www.eclipse.org</url>
+  </organization>
+</project>

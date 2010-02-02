@@ -19,10 +19,10 @@ import org.eclipse.xtext.naming.IQualifiedNameProvider;
 import org.eclipse.xtext.naming.SimpleNameProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.ui.core.editor.DirtyStateManagerProvider;
-import org.eclipse.xtext.ui.core.editor.IDirtyStateManager;
-import org.eclipse.xtext.ui.core.notification.IStateChangeEventBroker;
-import org.eclipse.xtext.ui.core.notification.StateChangeEventBrokerProvider;
+import org.eclipse.xtext.ui.editor.DirtyStateManagerProvider;
+import org.eclipse.xtext.ui.editor.IDirtyStateManager;
+import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
+import org.eclipse.xtext.ui.notification.StateChangeEventBrokerProvider;
 
 import com.google.inject.AbstractModule;
 import com.google.inject.Scopes;

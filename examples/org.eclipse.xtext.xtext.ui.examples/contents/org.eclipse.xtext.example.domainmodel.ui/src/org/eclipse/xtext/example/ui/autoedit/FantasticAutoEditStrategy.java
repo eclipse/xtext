@@ -11,7 +11,7 @@ import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.DocumentCommand;
 import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IDocument;
-import org.eclipse.xtext.ui.core.editor.autoedit.DefaultAutoEditStrategy;
+import org.eclipse.xtext.ui.editor.autoedit.DefaultAutoEditStrategy;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

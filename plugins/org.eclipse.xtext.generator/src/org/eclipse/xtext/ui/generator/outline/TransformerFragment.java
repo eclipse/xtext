@@ -29,7 +29,7 @@ public class TransformerFragment extends AbstractGeneratorFragment {
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory().addTypeToType(
-				"org.eclipse.xtext.ui.common.editor.outline.transformer.ISemanticModelTransformer",
+				"org.eclipse.xtext.ui.editor.outline.transformer.ISemanticModelTransformer",
 				getQualifiedName(grammar, getNaming())).getBindings();
 	}
 
@@ -39,7 +39,7 @@ public class TransformerFragment extends AbstractGeneratorFragment {
 
 	@Override
 	public String[] getRequiredBundlesUi(Grammar grammar) {
-		return new String[] { "org.eclipse.xtext.ui.common", "org.eclipse.xtext.ui.core" };
+		return new String[] { "org.eclipse.xtext.ui" };
 	}
 
 }
