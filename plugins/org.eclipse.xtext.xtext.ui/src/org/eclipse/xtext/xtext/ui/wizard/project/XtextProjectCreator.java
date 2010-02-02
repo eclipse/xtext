@@ -32,8 +32,8 @@ import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.OutputImpl;
 import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel;
 import org.eclipse.xtext.builder.nature.XtextNature;
-import org.eclipse.xtext.ui.core.util.EclipseResourceUtil;
-import org.eclipse.xtext.ui.core.wizard.DefaultProjectCreator;
+import org.eclipse.xtext.ui.util.EclipseResourceUtil;
+import org.eclipse.xtext.ui.wizard.DefaultProjectCreator;
 
 /**
  * XtextProjectCreator handles the actual creation of the new Xtext project.
@@ -94,7 +94,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 		LinkedHashSet<String> requiredBundles = new LinkedHashSet<String>(Arrays.asList(getXtextProjectInfo()
 				.getProjectName().toLowerCase()
 				+ ";visibility:=reexport", //$NON-NLS-1$
-				"org.eclipse.xtext.ui.core", "org.eclipse.xtext.ui.common", //$NON-NLS-1$ //$NON-NLS-2$
+				"org.eclipse.xtext.ui", //$NON-NLS-1$
 				"org.eclipse.ui.editors;bundle-version=\"3.5.0\"", //$NON-NLS-1$
 				"org.eclipse.ui.ide;bundle-version=\"3.5.0\"")); //$NON-NLS-1$
 

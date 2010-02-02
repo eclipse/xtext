@@ -4,16 +4,16 @@
 package org.eclipse.xtext.ui;
 
 import org.eclipse.jface.text.IAutoEditStrategy;
-import org.eclipse.xtext.ui.common.editor.outline.actions.IActionBarContributor;
-import org.eclipse.xtext.ui.common.editor.outline.actions.IContentOutlineNodeAdapterFactory;
-import org.eclipse.xtext.ui.common.editor.outline.transformer.ISemanticModelTransformer;
-import org.eclipse.xtext.ui.common.editor.syntaxcoloring.IHighlightingConfiguration;
-import org.eclipse.xtext.ui.common.editor.syntaxcoloring.ISemanticHighlightingCalculator;
-import org.eclipse.xtext.ui.core.ILocationInFileProvider;
-import org.eclipse.xtext.ui.core.editor.bracketmatching.IBracketMatcher;
-import org.eclipse.xtext.ui.core.editor.contentassist.XtextContentAssistProcessor;
-import org.eclipse.xtext.ui.core.editor.folding.IFoldingRegionProvider;
-import org.eclipse.xtext.ui.core.wizard.IProjectCreator;
+import org.eclipse.xtext.ui.ILocationInFileProvider;
+import org.eclipse.xtext.ui.editor.bracketmatching.IBracketMatcher;
+import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
+import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
+import org.eclipse.xtext.ui.editor.outline.actions.IActionBarContributor;
+import org.eclipse.xtext.ui.editor.outline.actions.IContentOutlineNodeAdapterFactory;
+import org.eclipse.xtext.ui.editor.outline.transformer.ISemanticModelTransformer;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ecoreInference.ProjectAwareXtendXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ui.XtextLocationInFileProvider;

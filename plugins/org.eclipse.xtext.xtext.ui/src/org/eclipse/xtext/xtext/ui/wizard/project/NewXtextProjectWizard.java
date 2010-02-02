@@ -14,8 +14,8 @@ import java.util.Map;
 
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
-import org.eclipse.xtext.ui.core.wizard.IProjectInfo;
-import org.eclipse.xtext.ui.core.wizard.XtextNewProjectWizard;
+import org.eclipse.xtext.ui.wizard.IProjectInfo;
+import org.eclipse.xtext.ui.wizard.XtextNewProjectWizard;
 import org.eclipse.xtext.xtext.ui.Activator;
 
 /**

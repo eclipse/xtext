@@ -12,8 +12,8 @@ import java.util.Iterator;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.services.XtextGrammarAccess;
-import org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextType;
-import org.eclipse.xtext.ui.common.editor.templates.XtextTemplateContextTypeRegistry;
+import org.eclipse.xtext.ui.editor.templates.XtextTemplateContextType;
+import org.eclipse.xtext.ui.editor.templates.XtextTemplateContextTypeRegistry;
 
 import com.google.inject.Provider;
 

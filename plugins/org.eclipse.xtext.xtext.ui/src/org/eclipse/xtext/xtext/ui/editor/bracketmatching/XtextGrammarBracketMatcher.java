@@ -8,7 +8,7 @@
 package org.eclipse.xtext.xtext.ui.editor.bracketmatching;
 
 import org.eclipse.xtext.services.XtextGrammarAccess;
-import org.eclipse.xtext.ui.core.editor.bracketmatching.DefaultBracketMatcher;
+import org.eclipse.xtext.ui.editor.bracketmatching.DefaultBracketMatcher;
 
 import com.google.inject.Inject;
 

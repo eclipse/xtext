@@ -14,9 +14,9 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.Position;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.core.editor.folding.DefaultFoldingRegionProvider;
-import org.eclipse.xtext.ui.core.editor.folding.IFoldingRegion;
-import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.folding.DefaultFoldingRegionProvider;
+import org.eclipse.xtext.ui.editor.folding.IFoldingRegion;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 
 import com.google.common.collect.Lists;
 

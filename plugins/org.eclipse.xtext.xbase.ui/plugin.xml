@@ -6,7 +6,7 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-            class="org.eclipse.xtext.xbase.ui.XtypeExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
+            class="org.eclipse.xtext.xbase.ui.XtypeExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="___xtype"
@@ -17,8 +17,8 @@
     <extension
         point="org.eclipse.ui.handlers">
         <handler
-            class="org.eclipse.xtext.xbase.ui.XtypeExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
-            commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+            class="org.eclipse.xtext.xbase.ui.XtypeExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
             <activeWhen>
                 <reference
                     definitionId="org.eclipse.xtext.xbase.Xtype.Editor.opened">
@@ -26,7 +26,7 @@
             </activeWhen>
         </handler>
         <handler
-            class="org.eclipse.xtext.xbase.ui.XtypeExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.handler.ValidateActionHandler"
+            class="org.eclipse.xtext.xbase.ui.XtypeExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
             commandId="org.eclipse.xtext.xbase.Xtype.validate">
          <activeWhen>
             <reference
@@ -40,7 +40,7 @@
             <and>
                 <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
                 <with variable="activeEditor">
-                    <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
                         value="org.eclipse.xtext.xbase.Xtype" 
                         forcePluginActivation="true"/>
                 </with>        
@@ -50,21 +50,21 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
-            class="org.eclipse.xtext.xbase.ui.XtypeExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
+            class="org.eclipse.xtext.xbase.ui.XtypeExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.xtext.xbase.Xtype"
             name="Xtype">
             <keywordReference id="org.eclipse.xtext.xbase.ui.keyword_Xtype"/>
         </page>
         <page
             category="org.eclipse.xtext.xbase.Xtype"
-            class="org.eclipse.xtext.xbase.ui.XtypeExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            class="org.eclipse.xtext.xbase.ui.XtypeExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
             id="org.eclipse.xtext.xbase.Xtype.coloring"
             name="Syntax Coloring">
             <keywordReference id="org.eclipse.xtext.xbase.ui.keyword_Xtype"/>
         </page>
         <page
             category="org.eclipse.xtext.xbase.Xtype"
-            class="org.eclipse.xtext.xbase.ui.XtypeExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+            class="org.eclipse.xtext.xbase.ui.XtypeExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
             id="org.eclipse.xtext.xbase.Xtype.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.xbase.ui.keyword_Xtype"/>
@@ -101,7 +101,7 @@
     </extension>
     <extension point="org.eclipse.ui.menus">
 		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
-			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
 				<visibleWhen checkEnabled="false">
                 	<reference definitionId="org.eclipse.xtext.xbase.Xtype.Editor.opened">
                 	</reference>
@@ -111,8 +111,8 @@
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 	    <handler
-            class="org.eclipse.xtext.xbase.ui.XtypeExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.findrefs.FindReferencesHandler"
-            commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+            class="org.eclipse.xtext.xbase.ui.XtypeExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.editor.FindReferences">
             <activeWhen>
                 <reference
                     definitionId="org.eclipse.xtext.xbase.Xtype.Editor.opened">
@@ -124,7 +124,7 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-            class="org.eclipse.xtext.xbase.ui.XpressionExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
+            class="org.eclipse.xtext.xbase.ui.XpressionExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="___xtension"
@@ -135,8 +135,8 @@
     <extension
         point="org.eclipse.ui.handlers">
         <handler
-            class="org.eclipse.xtext.xbase.ui.XpressionExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
-            commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+            class="org.eclipse.xtext.xbase.ui.XpressionExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
             <activeWhen>
                 <reference
                     definitionId="org.eclipse.xtext.xbase.Xpression.Editor.opened">
@@ -144,7 +144,7 @@
             </activeWhen>
         </handler>
         <handler
-            class="org.eclipse.xtext.xbase.ui.XpressionExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.handler.ValidateActionHandler"
+            class="org.eclipse.xtext.xbase.ui.XpressionExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
             commandId="org.eclipse.xtext.xbase.Xpression.validate">
          <activeWhen>
             <reference
@@ -158,7 +158,7 @@
             <and>
                 <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
                 <with variable="activeEditor">
-                    <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
                         value="org.eclipse.xtext.xbase.Xpression" 
                         forcePluginActivation="true"/>
                 </with>        
@@ -168,21 +168,21 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
-            class="org.eclipse.xtext.xbase.ui.XpressionExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
+            class="org.eclipse.xtext.xbase.ui.XpressionExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.xtext.xbase.Xpression"
             name="Xpression">
             <keywordReference id="org.eclipse.xtext.xbase.ui.keyword_Xpression"/>
         </page>
         <page
             category="org.eclipse.xtext.xbase.Xpression"
-            class="org.eclipse.xtext.xbase.ui.XpressionExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            class="org.eclipse.xtext.xbase.ui.XpressionExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
             id="org.eclipse.xtext.xbase.Xpression.coloring"
             name="Syntax Coloring">
             <keywordReference id="org.eclipse.xtext.xbase.ui.keyword_Xpression"/>
         </page>
         <page
             category="org.eclipse.xtext.xbase.Xpression"
-            class="org.eclipse.xtext.xbase.ui.XpressionExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+            class="org.eclipse.xtext.xbase.ui.XpressionExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
             id="org.eclipse.xtext.xbase.Xpression.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.xbase.ui.keyword_Xpression"/>
@@ -219,7 +219,7 @@
     </extension>
     <extension point="org.eclipse.ui.menus">
 		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
-			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
 				<visibleWhen checkEnabled="false">
                 	<reference definitionId="org.eclipse.xtext.xbase.Xpression.Editor.opened">
                 	</reference>
@@ -229,8 +229,8 @@
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 	    <handler
-            class="org.eclipse.xtext.xbase.ui.XpressionExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.findrefs.FindReferencesHandler"
-            commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+            class="org.eclipse.xtext.xbase.ui.XpressionExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.editor.FindReferences">
             <activeWhen>
                 <reference
                     definitionId="org.eclipse.xtext.xbase.Xpression.Editor.opened">
@@ -242,7 +242,7 @@
     <extension
             point="org.eclipse.ui.editors">
         <editor
-            class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.XtextEditor"
+            class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.xtext.ui.editor.XtextEditor"
             contributorClass="org.eclipse.ui.editors.text.TextEditorActionContributor"
             default="true"
             extensions="xbase"
@@ -253,8 +253,8 @@
     <extension
         point="org.eclipse.ui.handlers">
         <handler
-            class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclarationHandler"
-            commandId="org.eclipse.xtext.ui.common.editor.hyperlinking.OpenDeclaration">
+            class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclarationHandler"
+            commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
             <activeWhen>
                 <reference
                     definitionId="org.eclipse.xtext.xbase.Xbase.Editor.opened">
@@ -262,7 +262,7 @@
             </activeWhen>
         </handler>
         <handler
-            class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.handler.ValidateActionHandler"
+            class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.xtext.ui.editor.handler.ValidateActionHandler"
             commandId="org.eclipse.xtext.xbase.Xbase.validate">
          <activeWhen>
             <reference
@@ -276,7 +276,7 @@
             <and>
                 <reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
                 <with variable="activeEditor">
-                    <test property="org.eclipse.xtext.ui.core.editor.XtextEditor.languageName" 
+                    <test property="org.eclipse.xtext.ui.editor.XtextEditor.languageName" 
                         value="org.eclipse.xtext.xbase.Xbase" 
                         forcePluginActivation="true"/>
                 </with>        
@@ -286,21 +286,21 @@
     <extension
             point="org.eclipse.ui.preferencePages">
         <page
-            class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.preferences.LanguageRootPreferencePage"
+            class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.xtext.ui.editor.preferences.LanguageRootPreferencePage"
             id="org.eclipse.xtext.xbase.Xbase"
             name="Xbase">
             <keywordReference id="org.eclipse.xtext.xbase.ui.keyword_Xbase"/>
         </page>
         <page
             category="org.eclipse.xtext.xbase.Xbase"
-            class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.syntaxcoloring.SyntaxColoringPreferencePage"
+            class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.xtext.ui.editor.syntaxcoloring.SyntaxColoringPreferencePage"
             id="org.eclipse.xtext.xbase.Xbase.coloring"
             name="Syntax Coloring">
             <keywordReference id="org.eclipse.xtext.xbase.ui.keyword_Xbase"/>
         </page>
         <page
             category="org.eclipse.xtext.xbase.Xbase"
-            class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.xtext.ui.common.editor.templates.XtextTemplatePreferencePage"
+            class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.xtext.ui.editor.templates.XtextTemplatePreferencePage"
             id="org.eclipse.xtext.xbase.Xbase.templates"
             name="Templates">
             <keywordReference id="org.eclipse.xtext.xbase.ui.keyword_Xbase"/>
@@ -337,7 +337,7 @@
     </extension>
     <extension point="org.eclipse.ui.menus">
 		<menuContribution locationURI="popup:#TextEditorContext?endof=group.find">
-			<command commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+			<command commandId="org.eclipse.xtext.ui.editor.FindReferences">
 				<visibleWhen checkEnabled="false">
                 	<reference definitionId="org.eclipse.xtext.xbase.Xbase.Editor.opened">
                 	</reference>
@@ -347,8 +347,8 @@
 	</extension>
 	<extension point="org.eclipse.ui.handlers">
 	    <handler
-            class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.findrefs.FindReferencesHandler"
-            commandId="org.eclipse.xtext.ui.core.editor.FindReferences">
+            class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.FindReferencesHandler"
+            commandId="org.eclipse.xtext.ui.editor.FindReferences">
             <activeWhen>
                 <reference
                     definitionId="org.eclipse.xtext.xbase.Xbase.Editor.opened">
@@ -368,7 +368,7 @@
 	</extension>
 	<extension point="org.eclipse.xtext.extension_resourceServiceProvider">
         <resourceServiceProvider
-            class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.xtext.ui.core.resource.IResourceUIServiceProvider"
+            class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.xtext.ui.resource.IResourceUIServiceProvider"
             uriExtension="xbase">
         </resourceServiceProvider>
     </extension>
@@ -378,7 +378,7 @@
    <extension
          point="org.eclipse.ui.ide.markerResolution">
       <markerResolutionGenerator
-            class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.xtext.ui.core.editor.quickfix.MarkerResolutionGenerator">
+            class="org.eclipse.xtext.xbase.ui.XbaseExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
       </markerResolutionGenerator>
    </extension>
 

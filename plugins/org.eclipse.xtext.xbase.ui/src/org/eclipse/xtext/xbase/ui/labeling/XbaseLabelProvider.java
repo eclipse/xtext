@@ -3,7 +3,7 @@
 */
 package org.eclipse.xtext.xbase.ui.labeling;
 
-import org.eclipse.xtext.ui.core.DefaultLabelProvider;
+import org.eclipse.xtext.ui.DefaultLabelProvider;
 
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider

@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xbase.ui.syntaxcoloring;
 
-import org.eclipse.xtext.ui.common.editor.syntaxcoloring.DefaultHighlightingConfiguration;
-import org.eclipse.xtext.ui.common.editor.syntaxcoloring.IHighlightingConfigurationAcceptor;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
+import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfigurationAcceptor;
 
 /**
  * @author Sven Efftinge - Initial contribution and API

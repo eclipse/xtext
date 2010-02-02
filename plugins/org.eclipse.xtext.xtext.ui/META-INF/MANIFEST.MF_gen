@@ -5,8 +5,7 @@ Bundle-SymbolicName: org.eclipse.xtext.xtext.ui
 Bundle-Version: 0.0.1
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
-Require-Bundle: org.eclipse.xtext.ui.core,
- org.eclipse.xtext.ui.common,
+Require-Bundle: org.eclipse.xtext.ui,
  org.eclipse.ui.editors,
  org.eclipse.ui
 Bundle-Activator: org.eclipse.xtext.xtext.ui.internal.Activator

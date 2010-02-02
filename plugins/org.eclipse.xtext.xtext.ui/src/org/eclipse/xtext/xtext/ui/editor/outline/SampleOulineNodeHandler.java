@@ -15,9 +15,9 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.common.editor.outline.ContentOutlineNode;
-import org.eclipse.xtext.ui.common.editor.outline.actions.AbstractContentOutlineNodeHandler;
-import org.eclipse.xtext.ui.core.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
+import org.eclipse.xtext.ui.editor.outline.actions.AbstractContentOutlineNodeHandler;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 /**

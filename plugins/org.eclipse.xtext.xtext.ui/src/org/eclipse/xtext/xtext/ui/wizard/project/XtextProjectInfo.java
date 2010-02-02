@@ -13,7 +13,7 @@ import java.util.StringTokenizer;
 import org.eclipse.core.runtime.IPath;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkingSet;
-import org.eclipse.xtext.ui.core.wizard.IProjectInfo;
+import org.eclipse.xtext.ui.wizard.IProjectInfo;
 import org.eclipse.xtext.util.Strings;
 
 /**
