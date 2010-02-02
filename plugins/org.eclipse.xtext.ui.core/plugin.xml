@@ -50,7 +50,7 @@
       </menuContribution>
       <menuContribution
             locationURI="popup:#TextEditorContext?after=group.edit">
-         <command commandId="org.eclipse.xtext.ui.ToggleCommentAction"
+         <command commandId="org.eclipse.xtext.ui.core.ToggleCommentAction"
                style="push">
             <visibleWhen
                   checkEnabled="false">
@@ -62,7 +62,7 @@
       </menuContribution>
       <menuContribution
             locationURI="popup:#TextEditorContext?after=group.edit">
-         <command commandId="org.eclipse.xtext.ui.FormatAction"
+         <command commandId="org.eclipse.xtext.ui.core.FormatAction"
                style="push">
             <visibleWhen
                   checkEnabled="false">
@@ -88,19 +88,19 @@
             name="Format"
             description="Format text"
             categoryId="org.eclipse.xtext.ui.core.category.XtextEditor"
-            id="org.eclipse.xtext.ui.FormatAction">
+            id="org.eclipse.xtext.ui.core.FormatAction">
       </command>
       <command
             name="Toggle Comment"
             description="Toggle comment"
             categoryId="org.eclipse.xtext.ui.core.category.XtextEditor"
-            id="org.eclipse.xtext.ui.ToggleCommentAction">
+            id="org.eclipse.xtext.ui.core.ToggleCommentAction">
       </command>
       <command
             name="Got to Matching Bracket"
             description="Got to Matching Bracket"
             categoryId="org.eclipse.xtext.ui.core.category.XtextEditor"
-            id="org.eclipse.xtext.ui.GotToMatchingBracketAction">
+            id="org.eclipse.xtext.ui.core.GotToMatchingBracketAction">
       </command>
       <category
             description="Xtext Editing Commands"
@@ -121,23 +121,23 @@
       point="org.eclipse.ui.bindings">
     <key sequence="M1+M2+F"
       contextId="org.eclipse.xtext.ui.core.XtextEditorScope"
-      commandId="org.eclipse.xtext.ui.FormatAction"
+      commandId="org.eclipse.xtext.ui.core.FormatAction"
       schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
     <key sequence="M1+7"
       contextId="org.eclipse.xtext.ui.core.XtextEditorScope"
-      commandId="org.eclipse.xtext.ui.ToggleCommentAction"
+      commandId="org.eclipse.xtext.ui.core.ToggleCommentAction"
       schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
     <key sequence="M1+/"
       contextId="org.eclipse.xtext.ui.core.XtextEditorScope"
-      commandId="org.eclipse.xtext.ui.ToggleCommentAction"
+      commandId="org.eclipse.xtext.ui.core.ToggleCommentAction"
       schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
     <key sequence="M1+M2+C"
         contextId="org.eclipse.xtext.ui.core.XtextEditorScope"
-        commandId="org.eclipse.xtext.ui.ToggleCommentAction"
+        commandId="org.eclipse.xtext.ui.core.ToggleCommentAction"
         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
     <key sequence="M1+M2+P"
         contextId="org.eclipse.xtext.ui.core.XtextEditorScope"
-        commandId="org.eclipse.xtext.ui.GotToMatchingBracketAction"
+        commandId="org.eclipse.xtext.ui.core.GotToMatchingBracketAction"
         schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"/>
   </extension>
   <extension
