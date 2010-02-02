@@ -464,15 +464,26 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XRelationalExpression returns XExpression:
-	//  XAdditiveExpression ({XInstanceOfExpression.expression=current} "instanceof" type=[
-	//  types::Type|QualifiedName]|{XBinaryOperation.left=current} operator=( ">=" | "<=" |
-	//  ">" | "<" ) right=XAdditiveExpression)*;
+	//  XOtherOperatorExpression ({XInstanceOfExpression.expression=current} "instanceof"
+	//  type=[types::Type|QualifiedName]|{XBinaryOperation.left=current} operator=( ">=" |
+	//  "<=" | ">" | "<" ) right=XOtherOperatorExpression)*;
 	public XpressionGrammarAccess.XRelationalExpressionElements getXRelationalExpressionAccess() {
 		return gaXpression.getXRelationalExpressionAccess();
 	}
 	
 	public ParserRule getXRelationalExpressionRule() {
 		return getXRelationalExpressionAccess().getRule();
+	}
+
+	//XOtherOperatorExpression returns XExpression:
+	//  XAdditiveExpression ({XBinaryOperation.left=current} operator=( "->" | ".." ) right=
+	//  XAdditiveExpression)*;
+	public XpressionGrammarAccess.XOtherOperatorExpressionElements getXOtherOperatorExpressionAccess() {
+		return gaXpression.getXOtherOperatorExpressionAccess();
+	}
+	
+	public ParserRule getXOtherOperatorExpressionRule() {
+		return getXOtherOperatorExpressionAccess().getRule();
 	}
 
 	//XAdditiveExpression returns XExpression:
@@ -487,25 +498,14 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XMultiplicativeExpression returns XExpression:
-	//  XOtherOperatorExpression ({XBinaryOperation.left=current} operator=( "*" | "/" | "%" )
-	//  right=XOtherOperatorExpression)*;
+	//  XUnaryOperation ({XBinaryOperation.left=current} operator=( "*" | "**" | "/" | "%" ) right=
+	//  XUnaryOperation)*;
 	public XpressionGrammarAccess.XMultiplicativeExpressionElements getXMultiplicativeExpressionAccess() {
 		return gaXpression.getXMultiplicativeExpressionAccess();
 	}
 	
 	public ParserRule getXMultiplicativeExpressionRule() {
 		return getXMultiplicativeExpressionAccess().getRule();
-	}
-
-	//XOtherOperatorExpression returns XExpression:
-	//  XUnaryOperation ({XBinaryOperation.left=current} operator=( "->" | ".." ) right=
-	//  XUnaryOperation)*;
-	public XpressionGrammarAccess.XOtherOperatorExpressionElements getXOtherOperatorExpressionAccess() {
-		return gaXpression.getXOtherOperatorExpressionAccess();
-	}
-	
-	public ParserRule getXOtherOperatorExpressionRule() {
-		return getXOtherOperatorExpressionAccess().getRule();
 	}
 
 	//XUnaryOperation returns XExpression:

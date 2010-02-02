@@ -21,6 +21,7 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.parsetree.reconstr.impl.TreeConstState;
 import org.eclipse.xtext.parsetree.reconstr.impl.TreeConstructionNFAProvider;
 
@@ -59,12 +60,12 @@ public class ParseTreeConstructorUtil {
 		return r;
 	}
 
-	public static String getPackage(Grammar g) {
-		return GrammarUtil.getNamespace(g) + ".parseTreeConstruction";
+	public static String getPackage(Grammar g, Naming n) {
+		return n.basePackageRuntime(g) + ".parseTreeConstruction";
 	}
 
-	public static String getParseTreeConstructorName(Grammar g) {
-		return getPackage(g) + "." + GrammarUtil.getName(g)
+	public static String getParseTreeConstructorName(Grammar g, Naming n) {
+		return getPackage(g,n) + "." + GrammarUtil.getName(g)
 				+ "ParsetreeConstructor";
 	}
 

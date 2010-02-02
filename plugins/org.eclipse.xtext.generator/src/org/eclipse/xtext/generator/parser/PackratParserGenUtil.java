@@ -7,8 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.parser;
 
-import static org.eclipse.xtext.GrammarUtil.getName;
-import static org.eclipse.xtext.GrammarUtil.getNamespace;
+import static org.eclipse.xtext.GrammarUtil.*;
 
 import java.util.Collections;
 import java.util.Iterator;
@@ -27,6 +26,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
+import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.parser.packrat.ICharSequenceWithOffset;
 import org.eclipse.xtext.parser.packrat.consumers.ConsumeResult;
 import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumerConfiguration;
@@ -83,8 +83,8 @@ public final class PackratParserGenUtil {
 	 * @param g
 	 * @return
 	 */
-	public static String getGeneratedParser(Grammar g) {
-		return getNamespace(g) + ".parser.packrat." + getName(g) + "PackratParser";
+	public static String getGeneratedParser(Grammar g, Naming naming) {
+		return naming.basePackageRuntime(g) + ".parser.packrat." + getName(g) + "PackratParser";
 	}
 
 	/**

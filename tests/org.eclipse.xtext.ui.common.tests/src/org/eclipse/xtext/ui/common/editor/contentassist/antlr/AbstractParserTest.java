@@ -40,7 +40,7 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 			@Override
 			public Injector createInjector() {
 				return Guice.createInjector(
-						new org.eclipse.xtext.XtextGrammarUiTestLanguageUiModule(),
+						new org.eclipse.xtext.ui.XtextGrammarUiTestLanguageUiModule(),
 						new UIPluginModule(Activator.getInstance()));
 			}
 		});

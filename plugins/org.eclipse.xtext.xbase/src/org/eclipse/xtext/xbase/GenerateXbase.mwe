@@ -34,9 +34,6 @@
 			<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment" >
 				<options backtrack="true"/>
 			</fragment>
-			<fragment class="de.itemis.xtext.antlr.ex.debug.DebugAntlrGrammar" >
-				<options backtrack="true"/>
-			</fragment>
 			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
 		</language>
 		<language uri="classpath:/org/eclipse/xtext/xbase/Xbase.xtext" fileExtensions="xbase">

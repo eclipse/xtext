@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStateFactoryImpl.java,v 1.9 2010/01/26 14:27:52 jkohnlein Exp $
+ * $Id: BuilderStateFactoryImpl.java,v 1.10 2010/02/02 15:35:22 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -15,7 +15,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.xtext.builder.builderState.*;
 import org.eclipse.xtext.builder.builderState.BuilderStateFactory;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.resource.IEObjectDescription;

@@ -15,6 +15,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
+import org.eclipse.xtext.generator.Naming;
 
 /**
  * An {@link IGeneratorFragment} to generate a adapter factory for outline nodes.
@@ -27,12 +28,12 @@ public class OutlineNodeAdapterFactoryFragment extends AbstractGeneratorFragment
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
 			.addTypeToType("org.eclipse.xtext.ui.common.editor.outline.actions.IContentOutlineNodeAdapterFactory",
-					getQualifiedName(grammar))
+					getQualifiedName(grammar,getNaming()))
 			.getBindings();
 	}
 
-	public static String getQualifiedName(Grammar grammar) {
-		return GrammarUtil.getNamespace(grammar) + ".outline." + GrammarUtil.getName(grammar) + "OutlineNodeAdapterFactory";
+	public static String getQualifiedName(Grammar grammar, Naming n) {
+		return n.basePackageUi(grammar) + ".outline." + GrammarUtil.getName(grammar) + "OutlineNodeAdapterFactory";
 	}
 	
 	@Override

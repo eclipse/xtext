@@ -26,7 +26,7 @@ public class ImportURIScopingFragment extends AbstractScopingFragment {
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return new BindFactory()
-			.addTypeToType(IScopeProvider.class.getName(), getScopeProviderName(grammar))
+			.addTypeToType(IScopeProvider.class.getName(), getScopeProviderName(grammar,getNaming()))
 			.addConfiguredBinding(IScopeProvider.class.getName() + "Delegate", 
 				"binder.bind(" + 
 					IScopeProvider.class.getName() + ".class" +

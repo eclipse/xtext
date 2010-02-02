@@ -16,6 +16,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
+import org.eclipse.xtext.generator.Naming;
 
 /**
  * {@link IGeneratorFragment} to generate an Xpand/Check based validity checker for a given grammar.
@@ -39,11 +40,11 @@ public class CheckFragment extends AbstractValidatorFragment {
 			.addTypeToInstance(ClassLoader.class.getName(), "Abstract" + GrammarUtil.getName(grammar) + 
 			        "RuntimeModule.class.getClassLoader()");
 		return addTypeToInstance
-			.addTypeToTypeEagerSingleton(getCheckValidatorName(grammar), getCheckValidatorName(grammar))
+			.addTypeToTypeEagerSingleton(getCheckValidatorName(grammar,getNaming()), getCheckValidatorName(grammar,getNaming()))
 			.getBindings();
 	}
 	
-	public static String getCheckValidatorName(Grammar g) {
-		return GrammarUtil.getNamespace(g) + ".validation." + GrammarUtil.getName(g) + "CheckValidator";
+	public static String getCheckValidatorName(Grammar g, Naming n) {
+		return n.basePackageRuntime(g) + ".validation." + GrammarUtil.getName(g) + "CheckValidator";
 	}
 }

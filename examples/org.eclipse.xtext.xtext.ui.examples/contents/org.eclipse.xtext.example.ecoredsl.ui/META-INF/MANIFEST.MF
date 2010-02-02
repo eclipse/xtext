@@ -16,7 +16,5 @@ Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Bundle-Activator: org.eclipse.xtext.example.EcoreDslActivator
-Export-Package: org.eclipse.xtext.example,
- org.eclipse.xtext.example.contentassist,
- org.eclipse.xtext.example.contentassist.antlr
 Import-Package: org.apache.log4j
+Export-Package: org.eclipse.xtext.example.contentassist.antlr

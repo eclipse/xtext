@@ -8,8 +8,6 @@
 
 package org.eclipse.xtext.generator;
 
-import static org.eclipse.xtext.generator.Naming.*;
-
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
@@ -43,6 +41,8 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.XtextStandaloneSetup;
 
+import com.google.common.collect.Maps;
+
 /**
  * @author Sven Efftinge - Initial contribution and API
  * @author Michael Clay
@@ -61,6 +61,12 @@ public class Generator extends AbstractWorkflowComponent2 {
 	public static final String SRC = "SRC";
 	public static final String SRC_GEN = "SRC_GEN";
 	public static final String PLUGIN_RT = "PLUGIN";
+	
+	private Naming naming = new Naming();
+	
+	public void setNaming(Naming naming) {
+		this.naming = naming;
+	}
 
 	public Generator() {
 		new XtextStandaloneSetup().createInjectorAndDoEMFRegistration();
@@ -68,8 +74,10 @@ public class Generator extends AbstractWorkflowComponent2 {
 
 	@Override
 	protected void checkConfigurationInternal(Issues issues) {
+		naming.setUiBasePackage(getProjectNameUi());
 		Map<String,Grammar> uris = new HashMap<String,Grammar>();
 		for (LanguageConfig config : languageConfigs) {
+			config.registerNaming(naming);
 			config.checkConfiguration(issues);
 			Grammar grammar = config.getGrammar();
 			List<GeneratedMetamodel> select = EcoreUtil2.typeSelect(grammar.getMetamodelDeclarations(), GeneratedMetamodel.class);
@@ -168,8 +176,12 @@ public class Generator extends AbstractWorkflowComponent2 {
 			output.addOutlet(new Outlet(false, getEncoding(), SRC_UI, false, getPathRtProject() + getSrcPath()));
 			output.addOutlet(new Outlet(false, getEncoding(), SRC_GEN_UI, true, getPathRtProject() + getSrcGenPath()));
 		}
+		// initialize global vars
+		Map<String,Variable> globalVars = Maps.newHashMap();
+		globalVars.put(Naming.GLOBAL_VAR_NAME, new Variable(Naming.GLOBAL_VAR_NAME,naming));
+		
 		// create execution context
-		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null);
+		XpandExecutionContextImpl execCtx = new XpandExecutionContextImpl(output, null,globalVars,null,null);
 		//since our templates are all encoded in ISO-8859-1, we have to fix it here.
 		execCtx.getResourceManager().setFileEncoding("ISO-8859-1");
 		
@@ -249,7 +261,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 	}
 
 	private void addToStandaloneSetup(LanguageConfig config, XpandExecutionContext ctx) {
-		ctx.getOutput().openFile(asPath(setup(config.getGrammar())) + ".java", SRC_GEN);
+		ctx.getOutput().openFile(naming.asPath(naming.setup(config.getGrammar())) + ".java", SRC_GEN);
 		try {
 			XpandFacade facade = XpandFacade.create(ctx);
 			facade.evaluate("org::eclipse::xtext::generator::StandaloneSetup::pre", config.getGrammar());

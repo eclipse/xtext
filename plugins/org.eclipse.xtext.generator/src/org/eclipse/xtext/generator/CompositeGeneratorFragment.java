@@ -27,20 +27,23 @@ import com.google.common.base.Function;
 /**
  * @author Sven Efftinge - Initial contribution and API
  * 
- *         simple composite generator fragment implementation. delegating all
- *         callbacks to its contained fragments
+ *         simple composite generator fragment implementation. delegating all callbacks to its contained fragments
  */
-public class CompositeGeneratorFragment implements IGeneratorFragment {
+public class CompositeGeneratorFragment implements IGeneratorFragment, NamingAware {
 
 	private static Logger LOG = Logger.getLogger(CompositeGeneratorFragment.class);
 
 	protected final List<IGeneratorFragment> fragments = new ArrayList<IGeneratorFragment>();
 
 	public void addFragment(IGeneratorFragment fragment) {
+		if (naming != null && fragment instanceof NamingAware)
+			((NamingAware) fragment).registerNaming(naming);
 		this.fragments.add(fragment);
 	}
 
 	public void addFragments(CompositeGeneratorFragment fragment) {
+		if (naming != null)
+			fragment.registerNaming(naming);
 		this.fragments.add(fragment);
 	}
 
@@ -92,7 +95,7 @@ public class CompositeGeneratorFragment implements IGeneratorFragment {
 			}
 		});
 	}
-	
+
 	public String[] getImportedPackagesRt(final Grammar grammar) {
 		return internalGetImportedPackages(grammar, new Function<IGeneratorFragment, String[]>() {
 			public String[] apply(IGeneratorFragment param) {
@@ -108,7 +111,7 @@ public class CompositeGeneratorFragment implements IGeneratorFragment {
 			}
 		});
 	}
-	
+
 	public String[] getImportedPackagesUi(final Grammar grammar) {
 		return internalGetImportedPackages(grammar, new Function<IGeneratorFragment, String[]>() {
 			public String[] apply(IGeneratorFragment param) {
@@ -116,7 +119,7 @@ public class CompositeGeneratorFragment implements IGeneratorFragment {
 			}
 		});
 	}
-	
+
 	public Set<Binding> getGuiceBindingsRt(final Grammar grammar) {
 		return internalGetGuiceBindings(grammar, new Function<IGeneratorFragment, Set<Binding>>() {
 			public Set<Binding> apply(IGeneratorFragment param) {
@@ -142,7 +145,7 @@ public class CompositeGeneratorFragment implements IGeneratorFragment {
 		}
 		return all.toArray(new String[all.size()]);
 	}
-	
+
 	private String[] internalGetImportedPackages(Grammar grammar, Function<IGeneratorFragment, String[]> func) {
 		Set<String> all = new LinkedHashSet<String>();
 		for (IGeneratorFragment f : this.fragments) {
@@ -167,8 +170,8 @@ public class CompositeGeneratorFragment implements IGeneratorFragment {
 									throw new IllegalStateException("Cannot override final binding '" + binding + "'");
 								} else {
 									if (LOG.isDebugEnabled()) {
-										LOG.debug("replacing binding : "+binding);
-										LOG.debug(" with new binding : "+entry);
+										LOG.debug("replacing binding : " + binding);
+										LOG.debug(" with new binding : " + entry);
 									}
 									iterator.remove();
 								}
@@ -207,6 +210,17 @@ public class CompositeGeneratorFragment implements IGeneratorFragment {
 		for (IGeneratorFragment fragment : fragments) {
 			fragment.checkConfiguration(issues);
 		}
+	}
+
+	private Naming naming;
+
+	public void registerNaming(Naming n) {
+		this.naming = n;
+		for (IGeneratorFragment f : fragments) {
+			if (f instanceof NamingAware)
+				((NamingAware) f).registerNaming(n);
+		}
+
 	}
 
 }

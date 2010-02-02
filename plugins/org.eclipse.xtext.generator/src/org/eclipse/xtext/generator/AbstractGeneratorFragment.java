@@ -18,11 +18,21 @@ import org.eclipse.xtext.Grammar;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
- *
- * base class redirecting call backs to respective Xpand definitions.
- * The template needs to have the same qualified name the extending class has.
+ * 
+ *         base class redirecting call backs to respective Xpand definitions. The template needs to have the same
+ *         qualified name the extending class has.
  */
-public abstract class AbstractGeneratorFragment extends DefaultGeneratorFragment {
+public abstract class AbstractGeneratorFragment extends DefaultGeneratorFragment implements NamingAware {
+
+	private Naming naming;
+
+	public void registerNaming(Naming naming) {
+		this.naming = naming;
+	}
+
+	public Naming getNaming() {
+		return naming;
+	}
 
 	protected String getTemplate() {
 		return getClass().getName().replaceAll("\\.", "::");
@@ -30,22 +40,22 @@ public abstract class AbstractGeneratorFragment extends DefaultGeneratorFragment
 
 	@Override
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
-		XpandFacade.create(ctx).evaluate2(getTemplate()+"::generate", grammar, getParameters(grammar));
+		XpandFacade.create(ctx).evaluate2(getTemplate() + "::generate", grammar, getParameters(grammar));
 	}
 
 	@Override
 	public void addToPluginXmlRt(Grammar grammar, XpandExecutionContext ctx) {
-		XpandFacade.create(ctx).evaluate2(getTemplate()+"::addToPluginXmlRt", grammar, getParameters(grammar));
+		XpandFacade.create(ctx).evaluate2(getTemplate() + "::addToPluginXmlRt", grammar, getParameters(grammar));
 	}
 
 	@Override
 	public void addToPluginXmlUi(Grammar grammar, XpandExecutionContext ctx) {
-		XpandFacade.create(ctx).evaluate2(getTemplate()+"::addToPluginXmlUi", grammar, getParameters(grammar));
+		XpandFacade.create(ctx).evaluate2(getTemplate() + "::addToPluginXmlUi", grammar, getParameters(grammar));
 	}
 
 	@Override
 	public void addToStandaloneSetup(Grammar grammar, XpandExecutionContext ctx) {
-		XpandFacade.create(ctx).evaluate2(getTemplate()+"::addToStandaloneSetup", grammar, getParameters(grammar));
+		XpandFacade.create(ctx).evaluate2(getTemplate() + "::addToStandaloneSetup", grammar, getParameters(grammar));
 	}
 
 	@Override

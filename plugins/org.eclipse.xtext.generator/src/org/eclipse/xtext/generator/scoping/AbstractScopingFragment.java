@@ -10,14 +10,15 @@ package org.eclipse.xtext.generator.scoping;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
+import org.eclipse.xtext.generator.Naming;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public abstract class AbstractScopingFragment extends AbstractGeneratorFragment {
 
-	public static String getScopeProviderName(Grammar grammar) {
-		return GrammarUtil.getNamespace(grammar) + ".scoping." + GrammarUtil.getName(grammar) + "ScopeProvider";
+	public static String getScopeProviderName(Grammar grammar, Naming naming) {
+		return naming.basePackageRuntime(grammar) + ".scoping." + GrammarUtil.getName(grammar) + "ScopeProvider";
 	}
 	
 }

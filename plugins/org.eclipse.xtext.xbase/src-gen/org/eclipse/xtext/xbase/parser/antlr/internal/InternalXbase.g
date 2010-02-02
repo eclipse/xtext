@@ -1168,11 +1168,11 @@ ruleXRelationalExpression returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getXRelationalExpressionAccess().getXAdditiveExpressionParserRuleCall_0(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getXRelationalExpressionAccess().getXOtherOperatorExpressionParserRuleCall_0(), currentNode); 
     }
-    this_XAdditiveExpression_0=ruleXAdditiveExpression
+    this_XOtherOperatorExpression_0=ruleXOtherOperatorExpression
     { 
-        $current = $this_XAdditiveExpression_0.current; 
+        $current = $this_XOtherOperatorExpression_0.current; 
         currentNode = currentNode.getParent();
     }
 (((
@@ -1318,9 +1318,9 @@ ruleXRelationalExpression returns [EObject current=null]
 )(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXRelationalExpressionAccess().getRightXAdditiveExpressionParserRuleCall_1_1_2_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXRelationalExpressionAccess().getRightXOtherOperatorExpressionParserRuleCall_1_1_2_0(), currentNode); 
 	    }
-		lv_right_6_0=ruleXAdditiveExpression		{
+		lv_right_6_0=ruleXOtherOperatorExpression		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getXRelationalExpressionRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -1330,7 +1330,7 @@ ruleXRelationalExpression returns [EObject current=null]
 	       			$current, 
 	       			"right",
 	        		lv_right_6_0, 
-	        		"XAdditiveExpression", 
+	        		"XOtherOperatorExpression", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
@@ -1340,6 +1340,126 @@ ruleXRelationalExpression returns [EObject current=null]
 
 )
 )))*)
+;
+
+
+
+
+
+// Entry rule entryRuleXOtherOperatorExpression
+entryRuleXOtherOperatorExpression returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getXOtherOperatorExpressionRule(), currentNode); }
+	 iv_ruleXOtherOperatorExpression=ruleXOtherOperatorExpression 
+	 { $current=$iv_ruleXOtherOperatorExpression.current; } 
+	 EOF 
+;
+
+// Rule XOtherOperatorExpression
+ruleXOtherOperatorExpression returns [EObject current=null] 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(
+	{ 
+	  /* */ 
+	}
+    { 
+        currentNode=createCompositeNode(grammarAccess.getXOtherOperatorExpressionAccess().getXAdditiveExpressionParserRuleCall_0(), currentNode); 
+    }
+    this_XAdditiveExpression_0=ruleXAdditiveExpression
+    { 
+        $current = $this_XAdditiveExpression_0.current; 
+        currentNode = currentNode.getParent();
+    }
+((
+	{ 
+	  /* */ 
+	}
+    { 
+        temp=factory.create(grammarAccess.getXOtherOperatorExpressionAccess().getXBinaryOperationLeftAction_1_0().getType().getClassifier());
+        try {
+        	factory.set(temp, "left", $current, null /*ParserRule*/, currentNode);
+        } catch(ValueConverterException vce) {
+        	handleValueConverterException(vce);
+        }
+        $current = temp; 
+        temp = null;
+        CompositeNode newNode = createCompositeNode(grammarAccess.getXOtherOperatorExpressionAccess().getXBinaryOperationLeftAction_1_0(), currentNode.getParent());
+    newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
+    currentNode = newNode; 
+        associateNodeWithAstElement(currentNode, $current); 
+    }
+)(
+(
+(
+		lv_operator_2_1=	'->' 
+    {
+        createLeafNode(grammarAccess.getXOtherOperatorExpressionAccess().getOperatorHyphenMinusGreaterThanSignKeyword_1_1_0_0(), "operator"); 
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getXOtherOperatorExpressionRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "operator", lv_operator_2_1, null, lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+    |		lv_operator_2_2=	'..' 
+    {
+        createLeafNode(grammarAccess.getXOtherOperatorExpressionAccess().getOperatorFullStopFullStopKeyword_1_1_0_1(), "operator"); 
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getXOtherOperatorExpressionRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		set($current, "operator", lv_operator_2_2, null, lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+
+)
+)(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getXOtherOperatorExpressionAccess().getRightXAdditiveExpressionParserRuleCall_1_2_0(), currentNode); 
+	    }
+		lv_right_3_0=ruleXAdditiveExpression		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getXOtherOperatorExpressionRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"right",
+	        		lv_right_3_0, 
+	        		"XAdditiveExpression", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+))*)
 ;
 
 
@@ -1487,11 +1607,11 @@ ruleXMultiplicativeExpression returns [EObject current=null]
 	  /* */ 
 	}
     { 
-        currentNode=createCompositeNode(grammarAccess.getXMultiplicativeExpressionAccess().getXOtherOperatorExpressionParserRuleCall_0(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getXMultiplicativeExpressionAccess().getXUnaryOperationParserRuleCall_0(), currentNode); 
     }
-    this_XOtherOperatorExpression_0=ruleXOtherOperatorExpression
+    this_XUnaryOperation_0=ruleXUnaryOperation
     { 
-        $current = $this_XOtherOperatorExpression_0.current; 
+        $current = $this_XUnaryOperation_0.current; 
         currentNode = currentNode.getParent();
     }
 ((
@@ -1534,9 +1654,9 @@ ruleXMultiplicativeExpression returns [EObject current=null]
 	        }
 	    }
 
-    |		lv_operator_2_2=	'/' 
+    |		lv_operator_2_2=	'**' 
     {
-        createLeafNode(grammarAccess.getXMultiplicativeExpressionAccess().getOperatorSolidusKeyword_1_1_0_1(), "operator"); 
+        createLeafNode(grammarAccess.getXMultiplicativeExpressionAccess().getOperatorAsteriskAsteriskKeyword_1_1_0_1(), "operator"); 
     }
  
 	    {
@@ -1552,9 +1672,9 @@ ruleXMultiplicativeExpression returns [EObject current=null]
 	        }
 	    }
 
-    |		lv_operator_2_3=	'%' 
+    |		lv_operator_2_3=	'/' 
     {
-        createLeafNode(grammarAccess.getXMultiplicativeExpressionAccess().getOperatorPercentSignKeyword_1_1_0_2(), "operator"); 
+        createLeafNode(grammarAccess.getXMultiplicativeExpressionAccess().getOperatorSolidusKeyword_1_1_0_2(), "operator"); 
     }
  
 	    {
@@ -1570,121 +1690,19 @@ ruleXMultiplicativeExpression returns [EObject current=null]
 	        }
 	    }
 
-)
-
-)
-)(
-(
-		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXMultiplicativeExpressionAccess().getRightXOtherOperatorExpressionParserRuleCall_1_2_0(), currentNode); 
-	    }
-		lv_right_3_0=ruleXOtherOperatorExpression		{
+    |		lv_operator_2_4=	'%' 
+    {
+        createLeafNode(grammarAccess.getXMultiplicativeExpressionAccess().getOperatorPercentSignKeyword_1_1_0_3(), "operator"); 
+    }
+ 
+	    {
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getXMultiplicativeExpressionRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
-	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"right",
-	        		lv_right_3_0, 
-	        		"XOtherOperatorExpression", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
-	    }
-
-)
-))*)
-;
-
-
-
-
-
-// Entry rule entryRuleXOtherOperatorExpression
-entryRuleXOtherOperatorExpression returns [EObject current=null] 
-	:
-	{ currentNode = createCompositeNode(grammarAccess.getXOtherOperatorExpressionRule(), currentNode); }
-	 iv_ruleXOtherOperatorExpression=ruleXOtherOperatorExpression 
-	 { $current=$iv_ruleXOtherOperatorExpression.current; } 
-	 EOF 
-;
-
-// Rule XOtherOperatorExpression
-ruleXOtherOperatorExpression returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-    }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
-(
-	{ 
-	  /* */ 
-	}
-    { 
-        currentNode=createCompositeNode(grammarAccess.getXOtherOperatorExpressionAccess().getXUnaryOperationParserRuleCall_0(), currentNode); 
-    }
-    this_XUnaryOperation_0=ruleXUnaryOperation
-    { 
-        $current = $this_XUnaryOperation_0.current; 
-        currentNode = currentNode.getParent();
-    }
-((
-	{ 
-	  /* */ 
-	}
-    { 
-        temp=factory.create(grammarAccess.getXOtherOperatorExpressionAccess().getXBinaryOperationLeftAction_1_0().getType().getClassifier());
-        try {
-        	factory.set(temp, "left", $current, null /*ParserRule*/, currentNode);
-        } catch(ValueConverterException vce) {
-        	handleValueConverterException(vce);
-        }
-        $current = temp; 
-        temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getXOtherOperatorExpressionAccess().getXBinaryOperationLeftAction_1_0(), currentNode.getParent());
-    newNode.getChildren().add(currentNode);
-    moveLookaheadInfo(currentNode, newNode);
-    currentNode = newNode; 
-        associateNodeWithAstElement(currentNode, $current); 
-    }
-)(
-(
-(
-		lv_operator_2_1=	'->' 
-    {
-        createLeafNode(grammarAccess.getXOtherOperatorExpressionAccess().getOperatorHyphenMinusGreaterThanSignKeyword_1_1_0_0(), "operator"); 
-    }
- 
-	    {
-	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getXOtherOperatorExpressionRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode, $current);
 	        }
 	        
 	        try {
-	       		set($current, "operator", lv_operator_2_1, null, lastConsumedNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	    }
-
-    |		lv_operator_2_2=	'..' 
-    {
-        createLeafNode(grammarAccess.getXOtherOperatorExpressionAccess().getOperatorFullStopFullStopKeyword_1_1_0_1(), "operator"); 
-    }
- 
-	    {
-	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getXOtherOperatorExpressionRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode, $current);
-	        }
-	        
-	        try {
-	       		set($current, "operator", lv_operator_2_2, null, lastConsumedNode);
+	       		set($current, "operator", lv_operator_2_4, null, lastConsumedNode);
 	        } catch (ValueConverterException vce) {
 				handleValueConverterException(vce);
 	        }
@@ -1696,11 +1714,11 @@ ruleXOtherOperatorExpression returns [EObject current=null]
 )(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXOtherOperatorExpressionAccess().getRightXUnaryOperationParserRuleCall_1_2_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXMultiplicativeExpressionAccess().getRightXUnaryOperationParserRuleCall_1_2_0(), currentNode); 
 	    }
 		lv_right_3_0=ruleXUnaryOperation		{
 	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getXOtherOperatorExpressionRule().getType().getClassifier());
+	            $current = factory.create(grammarAccess.getXMultiplicativeExpressionRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
 	        }
 	        try {

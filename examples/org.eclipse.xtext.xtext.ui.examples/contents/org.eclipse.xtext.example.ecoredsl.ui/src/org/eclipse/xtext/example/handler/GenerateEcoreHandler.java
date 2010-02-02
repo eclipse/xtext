@@ -60,10 +60,9 @@ public class GenerateEcoreHandler extends AbstractHandler {
 		return null;
 	}
 
-	@SuppressWarnings("unchecked")
 	private IFile getEcoreDslFileName(ExecutionEvent event) {
 		EvaluationContext applicationContext = (EvaluationContext) event.getApplicationContext();
-		List fileList = (List) applicationContext.getDefaultVariable();
+		List<?> fileList = (List<?>) applicationContext.getDefaultVariable();
 		return (IFile) fileList.get(0);
 	}
 

@@ -45,9 +45,9 @@ protected class ThisRootNode extends RootToken {
 			case 7: return new XAndExpression_Group(this, this, 7, inst);
 			case 8: return new XEqualityExpression_Group(this, this, 8, inst);
 			case 9: return new XRelationalExpression_Group(this, this, 9, inst);
-			case 10: return new XAdditiveExpression_Group(this, this, 10, inst);
-			case 11: return new XMultiplicativeExpression_Group(this, this, 11, inst);
-			case 12: return new XOtherOperatorExpression_Group(this, this, 12, inst);
+			case 10: return new XOtherOperatorExpression_Group(this, this, 10, inst);
+			case 11: return new XAdditiveExpression_Group(this, this, 11, inst);
+			case 12: return new XMultiplicativeExpression_Group(this, this, 12, inst);
 			case 13: return new XUnaryOperation_Alternatives(this, this, 13, inst);
 			case 14: return new XFeatureCall_Group(this, this, 14, inst);
 			case 15: return new XPrimaryExpression_Alternatives(this, this, 15, inst);
@@ -2381,15 +2381,15 @@ protected class XEqualityExpression_RightAssignment_1_2 extends AssignmentToken 
 /************ begin Rule XRelationalExpression ****************
  *
  * XRelationalExpression returns XExpression:
- *   XAdditiveExpression ({XInstanceOfExpression.expression=current} "instanceof" type=[
- *   types::Type|QualifiedName]|{XBinaryOperation.left=current} operator=( ">=" | "<=" |
- *   ">" | "<" ) right=XAdditiveExpression)*;
+ *   XOtherOperatorExpression ({XInstanceOfExpression.expression=current} "instanceof"
+ *   type=[types::Type|QualifiedName]|{XBinaryOperation.left=current} operator=( ">=" |
+ *   "<=" | ">" | "<" ) right=XOtherOperatorExpression)*;
  *
  **/
 
-// XAdditiveExpression ({XInstanceOfExpression.expression=current} "instanceof" type=[
-// types::Type|QualifiedName]|{XBinaryOperation.left=current} operator=( ">=" | "<=" |
-// ">" | "<" ) right=XAdditiveExpression)*
+// XOtherOperatorExpression ({XInstanceOfExpression.expression=current} "instanceof"
+// type=[types::Type|QualifiedName]|{XBinaryOperation.left=current} operator=( ">=" |
+// "<=" | ">" | "<" ) right=XOtherOperatorExpression)*
 protected class XRelationalExpression_Group extends GroupToken {
 	
 	public XRelationalExpression_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2405,7 +2405,7 @@ protected class XRelationalExpression_Group extends GroupToken {
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new XRelationalExpression_Alternatives_1(parent, this, 0, inst);
-			case 1: return new XRelationalExpression_XAdditiveExpressionParserRuleCall_0(parent, this, 1, inst);
+			case 1: return new XRelationalExpression_XOtherOperatorExpressionParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -2417,30 +2417,30 @@ protected class XRelationalExpression_Group extends GroupToken {
 	}
 }
 
-// XAdditiveExpression
-protected class XRelationalExpression_XAdditiveExpressionParserRuleCall_0 extends RuleCallToken {
+// XOtherOperatorExpression
+protected class XRelationalExpression_XOtherOperatorExpressionParserRuleCall_0 extends RuleCallToken {
 	
-	public XRelationalExpression_XAdditiveExpressionParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public XRelationalExpression_XOtherOperatorExpressionParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getXRelationalExpressionAccess().getXAdditiveExpressionParserRuleCall_0();
+		return grammarAccess.getXRelationalExpressionAccess().getXOtherOperatorExpressionParserRuleCall_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new XAdditiveExpression_Group(this, this, 0, inst);
+			case 0: return new XOtherOperatorExpression_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(XAdditiveExpression_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getXAdditiveExpressionRule().getType().getClassifier())) return null;
+		if(checkForRecursion(XOtherOperatorExpression_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getXOtherOperatorExpressionRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -2454,7 +2454,7 @@ protected class XRelationalExpression_XAdditiveExpressionParserRuleCall_0 extend
 
 // ({XInstanceOfExpression.expression=current} "instanceof" type=[types::Type|
 // QualifiedName]|{XBinaryOperation.left=current} operator=( ">=" | "<=" | ">" | "<" ) right=
-// XAdditiveExpression)*
+// XOtherOperatorExpression)*
 protected class XRelationalExpression_Alternatives_1 extends AlternativesToken {
 
 	public XRelationalExpression_Alternatives_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2516,7 +2516,7 @@ protected class XRelationalExpression_XInstanceOfExpressionExpressionAction_1_0_
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new XRelationalExpression_Alternatives_1(parent, this, 0, inst);
-			case 1: return new XRelationalExpression_XAdditiveExpressionParserRuleCall_0(parent, this, 1, inst);
+			case 1: return new XRelationalExpression_XOtherOperatorExpressionParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -2593,7 +2593,7 @@ protected class XRelationalExpression_TypeAssignment_1_0_2 extends AssignmentTok
 
 
 // {XBinaryOperation.left=current} operator=( ">=" | "<=" | ">" | "<" ) right=
-// XAdditiveExpression
+// XOtherOperatorExpression
 protected class XRelationalExpression_Group_1_1 extends GroupToken {
 	
 	public XRelationalExpression_Group_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2631,7 +2631,7 @@ protected class XRelationalExpression_XBinaryOperationLeftAction_1_1_0 extends A
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new XRelationalExpression_Alternatives_1(parent, this, 0, inst);
-			case 1: return new XRelationalExpression_XAdditiveExpressionParserRuleCall_0(parent, this, 1, inst);
+			case 1: return new XRelationalExpression_XOtherOperatorExpressionParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -2696,7 +2696,7 @@ protected class XRelationalExpression_OperatorAssignment_1_1_1 extends Assignmen
 
 }
 
-// right=XAdditiveExpression
+// right=XOtherOperatorExpression
 protected class XRelationalExpression_RightAssignment_1_1_2 extends AssignmentToken  {
 	
 	public XRelationalExpression_RightAssignment_1_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2711,7 +2711,7 @@ protected class XRelationalExpression_RightAssignment_1_1_2 extends AssignmentTo
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new XAdditiveExpression_Group(this, this, 0, inst);
+			case 0: return new XOtherOperatorExpression_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -2722,9 +2722,9 @@ protected class XRelationalExpression_RightAssignment_1_1_2 extends AssignmentTo
 		IInstanceDescription obj = current.cloneAndConsume("right");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getXAdditiveExpressionRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getXOtherOperatorExpressionRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getXRelationalExpressionAccess().getRightXAdditiveExpressionParserRuleCall_1_1_2_0(); 
+				element = grammarAccess.getXRelationalExpressionAccess().getRightXOtherOperatorExpressionParserRuleCall_1_1_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2746,6 +2746,222 @@ protected class XRelationalExpression_RightAssignment_1_1_2 extends AssignmentTo
 
 
 /************ end Rule XRelationalExpression ****************/
+
+
+/************ begin Rule XOtherOperatorExpression ****************
+ *
+ * XOtherOperatorExpression returns XExpression:
+ *   XAdditiveExpression ({XBinaryOperation.left=current} operator=( "->" | ".." ) right=
+ *   XAdditiveExpression)*;
+ *
+ **/
+
+// XAdditiveExpression ({XBinaryOperation.left=current} operator=( "->" | ".." ) right=
+// XAdditiveExpression)*
+protected class XOtherOperatorExpression_Group extends GroupToken {
+	
+	public XOtherOperatorExpression_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getXOtherOperatorExpressionAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new XOtherOperatorExpression_Group_1(parent, this, 0, inst);
+			case 1: return new XOtherOperatorExpression_XAdditiveExpressionParserRuleCall_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getXOtherOperatorExpressionRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// XAdditiveExpression
+protected class XOtherOperatorExpression_XAdditiveExpressionParserRuleCall_0 extends RuleCallToken {
+	
+	public XOtherOperatorExpression_XAdditiveExpressionParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getXOtherOperatorExpressionAccess().getXAdditiveExpressionParserRuleCall_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new XAdditiveExpression_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(XAdditiveExpression_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getXAdditiveExpressionRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// ({XBinaryOperation.left=current} operator=( "->" | ".." ) right=XAdditiveExpression)*
+protected class XOtherOperatorExpression_Group_1 extends GroupToken {
+	
+	public XOtherOperatorExpression_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getXOtherOperatorExpressionAccess().getGroup_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new XOtherOperatorExpression_RightAssignment_1_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// {XBinaryOperation.left=current}
+protected class XOtherOperatorExpression_XBinaryOperationLeftAction_1_0 extends ActionToken  {
+
+	public XOtherOperatorExpression_XBinaryOperationLeftAction_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Action getGrammarElement() {
+		return grammarAccess.getXOtherOperatorExpressionAccess().getXBinaryOperationLeftAction_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new XOtherOperatorExpression_Group_1(parent, this, 0, inst);
+			case 1: return new XOtherOperatorExpression_XAdditiveExpressionParserRuleCall_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+	
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(!current.isInstanceOf(grammarAccess.getXOtherOperatorExpressionAccess().getXBinaryOperationLeftAction_1_0().getType().getClassifier())) return null;
+		Object val = current.getConsumable("left", false);
+		if(val == null) return null;
+		if(!current.isConsumedWithLastConsumtion("left")) return null;
+		return getDescr((EObject) val);
+	}
+}
+
+// operator=( "->" | ".." )
+protected class XOtherOperatorExpression_OperatorAssignment_1_1 extends AssignmentToken  {
+	
+	public XOtherOperatorExpression_OperatorAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getXOtherOperatorExpressionAccess().getOperatorAssignment_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new XOtherOperatorExpression_XBinaryOperationLeftAction_1_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("operator",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("operator");
+		if("->".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getXOtherOperatorExpressionAccess().getOperatorHyphenMinusGreaterThanSignKeyword_1_1_0_0();
+			return obj;
+		}
+		if("..".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getXOtherOperatorExpressionAccess().getOperatorFullStopFullStopKeyword_1_1_0_1();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// right=XAdditiveExpression
+protected class XOtherOperatorExpression_RightAssignment_1_2 extends AssignmentToken  {
+	
+	public XOtherOperatorExpression_RightAssignment_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getXOtherOperatorExpressionAccess().getRightAssignment_1_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new XAdditiveExpression_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("right",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("right");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getXAdditiveExpressionRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getXOtherOperatorExpressionAccess().getRightXAdditiveExpressionParserRuleCall_1_2_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new XOtherOperatorExpression_OperatorAssignment_1_1(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+
+/************ end Rule XOtherOperatorExpression ****************/
 
 
 /************ begin Rule XAdditiveExpression ****************
@@ -2968,13 +3184,13 @@ protected class XAdditiveExpression_RightAssignment_1_2 extends AssignmentToken 
 /************ begin Rule XMultiplicativeExpression ****************
  *
  * XMultiplicativeExpression returns XExpression:
- *   XOtherOperatorExpression ({XBinaryOperation.left=current} operator=( "*" | "/" | "%" )
- *   right=XOtherOperatorExpression)*;
+ *   XUnaryOperation ({XBinaryOperation.left=current} operator=( "*" | "**" | "/" | "%" ) right=
+ *   XUnaryOperation)*;
  *
  **/
 
-// XOtherOperatorExpression ({XBinaryOperation.left=current} operator=( "*" | "/" | "%" )
-// right=XOtherOperatorExpression)*
+// XUnaryOperation ({XBinaryOperation.left=current} operator=( "*" | "**" | "/" | "%" ) right=
+// XUnaryOperation)*
 protected class XMultiplicativeExpression_Group extends GroupToken {
 	
 	public XMultiplicativeExpression_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2990,7 +3206,7 @@ protected class XMultiplicativeExpression_Group extends GroupToken {
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new XMultiplicativeExpression_Group_1(parent, this, 0, inst);
-			case 1: return new XMultiplicativeExpression_XOtherOperatorExpressionParserRuleCall_0(parent, this, 1, inst);
+			case 1: return new XMultiplicativeExpression_XUnaryOperationParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -3002,30 +3218,30 @@ protected class XMultiplicativeExpression_Group extends GroupToken {
 	}
 }
 
-// XOtherOperatorExpression
-protected class XMultiplicativeExpression_XOtherOperatorExpressionParserRuleCall_0 extends RuleCallToken {
+// XUnaryOperation
+protected class XMultiplicativeExpression_XUnaryOperationParserRuleCall_0 extends RuleCallToken {
 	
-	public XMultiplicativeExpression_XOtherOperatorExpressionParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public XMultiplicativeExpression_XUnaryOperationParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getXMultiplicativeExpressionAccess().getXOtherOperatorExpressionParserRuleCall_0();
+		return grammarAccess.getXMultiplicativeExpressionAccess().getXUnaryOperationParserRuleCall_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new XOtherOperatorExpression_Group(this, this, 0, inst);
+			case 0: return new XUnaryOperation_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(XOtherOperatorExpression_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getXOtherOperatorExpressionRule().getType().getClassifier())) return null;
+		if(checkForRecursion(XUnaryOperation_Alternatives.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getXUnaryOperationRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -3037,8 +3253,8 @@ protected class XMultiplicativeExpression_XOtherOperatorExpressionParserRuleCall
 	}	
 }
 
-// ({XBinaryOperation.left=current} operator=( "*" | "/" | "%" ) right=
-// XOtherOperatorExpression)*
+// ({XBinaryOperation.left=current} operator=( "*" | "**" | "/" | "%" ) right=XUnaryOperation
+// )*
 protected class XMultiplicativeExpression_Group_1 extends GroupToken {
 	
 	public XMultiplicativeExpression_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -3076,7 +3292,7 @@ protected class XMultiplicativeExpression_XBinaryOperationLeftAction_1_0 extends
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new XMultiplicativeExpression_Group_1(parent, this, 0, inst);
-			case 1: return new XMultiplicativeExpression_XOtherOperatorExpressionParserRuleCall_0(parent, this, 1, inst);
+			case 1: return new XMultiplicativeExpression_XUnaryOperationParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -3092,7 +3308,7 @@ protected class XMultiplicativeExpression_XBinaryOperationLeftAction_1_0 extends
 	}
 }
 
-// operator=( "*" | "/" | "%" )
+// operator=( "*" | "**" | "/" | "%" )
 protected class XMultiplicativeExpression_OperatorAssignment_1_1 extends AssignmentToken  {
 	
 	public XMultiplicativeExpression_OperatorAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -3121,14 +3337,19 @@ protected class XMultiplicativeExpression_OperatorAssignment_1_1 extends Assignm
 			element = grammarAccess.getXMultiplicativeExpressionAccess().getOperatorAsteriskKeyword_1_1_0_0();
 			return obj;
 		}
+		if("**".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getXMultiplicativeExpressionAccess().getOperatorAsteriskAsteriskKeyword_1_1_0_1();
+			return obj;
+		}
 		if("/".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
-			element = grammarAccess.getXMultiplicativeExpressionAccess().getOperatorSolidusKeyword_1_1_0_1();
+			element = grammarAccess.getXMultiplicativeExpressionAccess().getOperatorSolidusKeyword_1_1_0_2();
 			return obj;
 		}
 		if("%".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
-			element = grammarAccess.getXMultiplicativeExpressionAccess().getOperatorPercentSignKeyword_1_1_0_2();
+			element = grammarAccess.getXMultiplicativeExpressionAccess().getOperatorPercentSignKeyword_1_1_0_3();
 			return obj;
 		}
 		return null;
@@ -3136,7 +3357,7 @@ protected class XMultiplicativeExpression_OperatorAssignment_1_1 extends Assignm
 
 }
 
-// right=XOtherOperatorExpression
+// right=XUnaryOperation
 protected class XMultiplicativeExpression_RightAssignment_1_2 extends AssignmentToken  {
 	
 	public XMultiplicativeExpression_RightAssignment_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -3151,7 +3372,7 @@ protected class XMultiplicativeExpression_RightAssignment_1_2 extends Assignment
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new XOtherOperatorExpression_Group(this, this, 0, inst);
+			case 0: return new XUnaryOperation_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -3162,9 +3383,9 @@ protected class XMultiplicativeExpression_RightAssignment_1_2 extends Assignment
 		IInstanceDescription obj = current.cloneAndConsume("right");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getXOtherOperatorExpressionRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getXUnaryOperationRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getXMultiplicativeExpressionAccess().getRightXOtherOperatorExpressionParserRuleCall_1_2_0(); 
+				element = grammarAccess.getXMultiplicativeExpressionAccess().getRightXUnaryOperationParserRuleCall_1_2_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -3185,222 +3406,6 @@ protected class XMultiplicativeExpression_RightAssignment_1_2 extends Assignment
 
 
 /************ end Rule XMultiplicativeExpression ****************/
-
-
-/************ begin Rule XOtherOperatorExpression ****************
- *
- * XOtherOperatorExpression returns XExpression:
- *   XUnaryOperation ({XBinaryOperation.left=current} operator=( "->" | ".." ) right=
- *   XUnaryOperation)*;
- *
- **/
-
-// XUnaryOperation ({XBinaryOperation.left=current} operator=( "->" | ".." ) right=
-// XUnaryOperation)*
-protected class XOtherOperatorExpression_Group extends GroupToken {
-	
-	public XOtherOperatorExpression_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.getXOtherOperatorExpressionAccess().getGroup();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new XOtherOperatorExpression_Group_1(parent, this, 0, inst);
-			case 1: return new XOtherOperatorExpression_XUnaryOperationParserRuleCall_0(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
-    @Override
-	public IInstanceDescription tryConsume() {
-		if(!current.isInstanceOf(grammarAccess.getXOtherOperatorExpressionRule().getType().getClassifier())) return null;
-		return tryConsumeVal();
-	}
-}
-
-// XUnaryOperation
-protected class XOtherOperatorExpression_XUnaryOperationParserRuleCall_0 extends RuleCallToken {
-	
-	public XOtherOperatorExpression_XUnaryOperationParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public RuleCall getGrammarElement() {
-		return grammarAccess.getXOtherOperatorExpressionAccess().getXUnaryOperationParserRuleCall_0();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new XUnaryOperation_Alternatives(this, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(XUnaryOperation_Alternatives.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getXUnaryOperationRule().getType().getClassifier())) return null;
-		return current;
-	}
-	
-    @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		switch(index) {
-			default: return parent.createParentFollower(next, actIndex , index, inst);
-		}	
-	}	
-}
-
-// ({XBinaryOperation.left=current} operator=( "->" | ".." ) right=XUnaryOperation)*
-protected class XOtherOperatorExpression_Group_1 extends GroupToken {
-	
-	public XOtherOperatorExpression_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.getXOtherOperatorExpressionAccess().getGroup_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new XOtherOperatorExpression_RightAssignment_1_2(parent, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-}
-
-// {XBinaryOperation.left=current}
-protected class XOtherOperatorExpression_XBinaryOperationLeftAction_1_0 extends ActionToken  {
-
-	public XOtherOperatorExpression_XBinaryOperationLeftAction_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public Action getGrammarElement() {
-		return grammarAccess.getXOtherOperatorExpressionAccess().getXBinaryOperationLeftAction_1_0();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new XOtherOperatorExpression_Group_1(parent, this, 0, inst);
-			case 1: return new XOtherOperatorExpression_XUnaryOperationParserRuleCall_0(parent, this, 1, inst);
-			default: return null;
-		}	
-	}	
-		
-	
-    @Override
-	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getXOtherOperatorExpressionAccess().getXBinaryOperationLeftAction_1_0().getType().getClassifier())) return null;
-		Object val = current.getConsumable("left", false);
-		if(val == null) return null;
-		if(!current.isConsumedWithLastConsumtion("left")) return null;
-		return getDescr((EObject) val);
-	}
-}
-
-// operator=( "->" | ".." )
-protected class XOtherOperatorExpression_OperatorAssignment_1_1 extends AssignmentToken  {
-	
-	public XOtherOperatorExpression_OperatorAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getXOtherOperatorExpressionAccess().getOperatorAssignment_1_1();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new XOtherOperatorExpression_XBinaryOperationLeftAction_1_0(parent, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-    @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("operator",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("operator");
-		if("->".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
-			element = grammarAccess.getXOtherOperatorExpressionAccess().getOperatorHyphenMinusGreaterThanSignKeyword_1_1_0_0();
-			return obj;
-		}
-		if("..".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
-			type = AssignmentType.KW;
-			element = grammarAccess.getXOtherOperatorExpressionAccess().getOperatorFullStopFullStopKeyword_1_1_0_1();
-			return obj;
-		}
-		return null;
-	}
-
-}
-
-// right=XUnaryOperation
-protected class XOtherOperatorExpression_RightAssignment_1_2 extends AssignmentToken  {
-	
-	public XOtherOperatorExpression_RightAssignment_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
-		super(parent, next, no, current);
-	}
-	
-	@Override
-	public Assignment getGrammarElement() {
-		return grammarAccess.getXOtherOperatorExpressionAccess().getRightAssignment_1_2();
-	}
-
-    @Override
-	public AbstractToken createFollower(int index, IInstanceDescription inst) {
-		switch(index) {
-			case 0: return new XUnaryOperation_Alternatives(this, this, 0, inst);
-			default: return null;
-		}	
-	}	
-		
-    @Override	
-	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("right",true)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("right");
-		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
-			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getXUnaryOperationRule().getType().getClassifier())) {
-				type = AssignmentType.PRC;
-				element = grammarAccess.getXOtherOperatorExpressionAccess().getRightXUnaryOperationParserRuleCall_1_2_0(); 
-				consumed = obj;
-				return param;
-			}
-		}
-		return null;
-	}
-
-    @Override
-	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
-		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
-		switch(index) {
-			case 0: return new XOtherOperatorExpression_OperatorAssignment_1_1(parent, next, actIndex, consumed);
-			default: return null;
-		}	
-	}	
-}
-
-
-
-/************ end Rule XOtherOperatorExpression ****************/
 
 
 /************ begin Rule XUnaryOperation ****************

@@ -1,0 +1,10 @@
+import org::eclipse::xtext::example::ui::generator;
+
+String addImportsHere() :
+ getImportsTool().addImportsHere();
+ 
+String registerImport(String name) :
+ getImportsTool().registerImport(name);
+
+private JavaImportsTool getImportsTool() :
+   GLOBALVAR __javaImportTool;

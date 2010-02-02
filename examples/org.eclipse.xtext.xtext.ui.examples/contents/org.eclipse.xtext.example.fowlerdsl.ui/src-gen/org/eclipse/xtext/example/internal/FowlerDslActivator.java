@@ -35,7 +35,7 @@ public class FowlerDslActivator extends AbstractUIPlugin {
 		try {
 			
 			injectors.put("org.eclipse.xtext.example.FowlerDsl", Guice.createInjector(
-				new org.eclipse.xtext.example.FowlerDslUiModule(),
+				new org.eclipse.xtext.example.ui.FowlerDslUiModule(),
 				createUIPluginModule()
 			));
 			

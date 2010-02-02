@@ -35,7 +35,7 @@ public class DomainmodelActivator extends AbstractUIPlugin {
 		try {
 			
 			injectors.put("org.eclipse.xtext.example.Domainmodel", Guice.createInjector(
-				new org.eclipse.xtext.example.DomainmodelUiModule(),
+				new org.eclipse.xtext.example.ui.DomainmodelUiModule(),
 				createUIPluginModule()
 			));
 			

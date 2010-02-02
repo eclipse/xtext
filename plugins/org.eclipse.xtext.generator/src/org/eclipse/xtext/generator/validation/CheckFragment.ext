@@ -1,7 +1,17 @@
 import org::eclipse::xtext;
+import org::eclipse::xtext::generator;
+
+extension org::eclipse::xtext::generator::Naming;
 
 String getCheckValidatorName(Grammar g) :
- 	JAVA org.eclipse.xtext.generator.validation.CheckFragment.getCheckValidatorName(org.eclipse.xtext.Grammar);
+ 	getCheckValidatorName(g,getNaming());
+    
+private String getCheckValidatorName(Grammar this,Naming naming) :
+    JAVA org.eclipse.xtext.generator.validation.CheckFragment.getCheckValidatorName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);
+ 
  	
 String validationPackage(Grammar this) :
-    JAVA org.eclipse.xtext.generator.validation.AbstractValidatorFragment.getValidationPackage(org.eclipse.xtext.Grammar);
+    validationPackage(this,getNaming());
+    
+private String validationPackage(Grammar this, Naming n) :
+    JAVA org.eclipse.xtext.generator.validation.AbstractValidatorFragment.getValidationPackage(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);

@@ -7,11 +7,12 @@
  *******************************************************************************/
 import org::eclipse::xtext;
 import org::eclipse::emf::ecore;
+import org::eclipse::xtext::generator;
 
 /**
  * @author Moritz Eysholdt
  */
-
+extension org::eclipse::xtext::generator::Naming;
 extension org::eclipse::xtext::GrammarUtil;
 
 // ******************************************************************************
@@ -65,7 +66,10 @@ String gaElementIdentifyer(AbstractElement element):
  * @return the GrammarAccess' full qualified Java class name
  */
 String gaFQName(Grammar grammar):
-	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.getGrammarAccessFQName(org.eclipse.xtext.Grammar);
+	gaFQName(grammar,getNaming());
+	
+private String gaFQName(Grammar grammar, Naming naming):
+	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.getGrammarAccessFQName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);
 	
 /**
  * Returns the simple Java class name of a GrammarAccess implementation for a Grammar.
@@ -74,7 +78,7 @@ String gaFQName(Grammar grammar):
  * @return the GrammarAccess' simple class name
  */
 String gaSimpleName(Grammar grammar):
-	JAVA org.eclipse.xtext.generator.grammarAccess.GrammarAccessUtil.getGrammarAccessSimpleName(org.eclipse.xtext.Grammar);
+	gaFQName(grammar).toSimpleName();
 	
 /**
  * Returns the method name for accessing a rule via a GrammarAccess implementation.

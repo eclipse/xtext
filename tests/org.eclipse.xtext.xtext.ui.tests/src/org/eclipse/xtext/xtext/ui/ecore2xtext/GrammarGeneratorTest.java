@@ -34,8 +34,6 @@ import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.xtext.ui.OutputStringImpl;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectInfo;
 
-import com.google.common.collect.Lists;
-
 /**
  * @author koehnlein - Initial contribution and API
  */

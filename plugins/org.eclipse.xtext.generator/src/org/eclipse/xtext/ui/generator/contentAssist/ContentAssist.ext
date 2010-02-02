@@ -12,10 +12,10 @@ extension org::eclipse::xtext::generator::Naming;
 extension org::eclipse::xtext::GrammarUtil;
 
 getProposalProvider(Grammar grammar) :
-	grammar.name.toJavaPackage() + ".contentassist." + grammar.name.toSimpleName() + "ProposalProvider";
+	getNaming().basePackageUi(grammar) + ".contentassist." + grammar.name.toSimpleName() + "ProposalProvider";
 
 getGenProposalProvider(Grammar grammar) :
-	grammar.name.toJavaPackage() + ".contentassist.Abstract" + grammar.name.toSimpleName() + "ProposalProvider";
+	getNaming().basePackageUi(grammar) + ".contentassist.Abstract" + grammar.name.toSimpleName() + "ProposalProvider";
 
 String getFqFeatureName(Assignment this):
 	containingParserRule().name.toFirstUpper()+"_"+feature.toFirstUpper();

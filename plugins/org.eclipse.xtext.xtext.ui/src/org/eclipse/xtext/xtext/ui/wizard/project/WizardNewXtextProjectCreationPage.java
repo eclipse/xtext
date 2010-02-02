@@ -68,17 +68,17 @@ public final class WizardNewXtextProjectCreationPage extends WizardNewProjectCre
 
 	@Override
 	public void createControl(Composite parent) {
-		final String dslName = findNextValidDSLName("org.xtext.example", "MyDsl"); //$NON-NLS-1$ //$NON-NLS-2$
+		final String projectsuffix = findNextValidProjectSuffix("org.xtext.example", "mydsl"); //$NON-NLS-1$ //$NON-NLS-2$
 		// We need to set the initial project name before calling super.createControl()
 		// This calls the validate page and since our controls are not yet created we need to check for
 		// that case for avoiding an NPE
-		setInitialProjectName("org.xtext.example." + dslName.toLowerCase()); //$NON-NLS-1$
+		setInitialProjectName("org.xtext.example." + projectsuffix); //$NON-NLS-1$
 		super.createControl(parent);
 		createLanguageSelectionGroup((Composite) getControl());
 		createProjectLayoutGroup((Composite) getControl());
 		createWorkingSetGroup((Composite) getControl(), selection,
 				new String[] { "org.eclipse.ui.resourceWorkingSetPage" }); //$NON-NLS-1$
-		setDefaults(dslName);
+		setDefaults(projectsuffix);
 		Dialog.applyDialogFont(getControl());
 	}
 
@@ -88,9 +88,9 @@ public final class WizardNewXtextProjectCreationPage extends WizardNewProjectCre
 	 * @param dslName
 	 *            the name of the DSL
 	 */
-	private void setDefaults(String dslName) {
-		languageNameField.setText("org.xtext.example." + dslName); //$NON-NLS-1$
-		extensionsField.setText(dslName.toLowerCase());
+	private void setDefaults(String projectSuffix) {
+		languageNameField.setText("org.xtext.example." + projectSuffix+".MyDsl"); //$NON-NLS-1$
+		extensionsField.setText(projectSuffix);
 
 		fillMweSnippet();
 		validatePage();
@@ -116,7 +116,7 @@ public final class WizardNewXtextProjectCreationPage extends WizardNewProjectCre
 	/**
 	 * Find the next available (default) DSL name
 	 */
-	private String findNextValidDSLName(final String prefix, final String name) {
+	private String findNextValidProjectSuffix(final String prefix, final String name) {
 		String candidate = name;
 		int suffix = 1;
 		while (ResourcesPlugin.getWorkspace().getRoot().getProject((prefix + "." + candidate).toLowerCase()).exists()) { //$NON-NLS-1$

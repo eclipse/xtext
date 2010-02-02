@@ -23,6 +23,7 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Generator;
+import org.eclipse.xtext.generator.Naming;
 
 import com.google.common.collect.Lists;
 
@@ -41,7 +42,7 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 
 	@Override
 	public void generate(final Grammar grammar, XpandExecutionContext ctx) {
-		final String templateName = getNewProjectTemplateName(grammar);
+		final String templateName = getNewProjectTemplateName(grammar, getNaming());
 		final Outlet outlet = ctx.getOutput().getOutlet(Generator.SRC_UI);
 		final File templateFile = new File(new File(outlet.getPath()), templateName.replaceAll("::", "/") + '.' + XpandUtil.TEMPLATE_EXTENSION);
 		final boolean templateExisted = templateFile.exists();
@@ -120,8 +121,8 @@ public class SimpleProjectWizardFragment extends AbstractGeneratorFragment {
 		this.modelFileExtension = modelFileExtension.trim();
 	}
 
-	public static String getNewProjectTemplateName(Grammar grammar) {
-		return GrammarUtil.getNamespace(grammar).replaceAll("\\.", "::") + "::ui::wizard::"
+	public static String getNewProjectTemplateName(Grammar grammar, Naming n) {
+		return n.basePackageUi(grammar).replace(".", "::") + "::wizard::"
 				+ GrammarUtil.getName(grammar) + "NewProject";
 	}
 }

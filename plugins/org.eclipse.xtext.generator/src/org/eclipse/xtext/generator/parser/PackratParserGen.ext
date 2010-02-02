@@ -7,6 +7,7 @@
  *
  *******************************************************************************/
 import org::eclipse::xtext;
+import org::eclipse::xtext::generator;
 import org::eclipse::emf::ecore;
 
 extension org::eclipse::xtext::GrammarUtil reexport;
@@ -15,7 +16,9 @@ extension org::eclipse::xtext::generator::Naming;
 extension org::eclipse::xtext::EcoreUtils;
 
 cached String getParserClassName(Grammar this) :
-	JAVA org.eclipse.xtext.generator.parser.PackratParserGenUtil.getGeneratedParser(org.eclipse.xtext.Grammar);
+	getParserClassName(this,getNaming());
+private String getParserClassName(Grammar this, Naming naming) :
+	JAVA org.eclipse.xtext.generator.parser.PackratParserGenUtil.getGeneratedParser(org.eclipse.xtext.Grammar,org.eclipse.xtext.generator.Naming);
 
 cached String consumeMethodName(AbstractElement this):
 	JAVA org.eclipse.xtext.generator.parser.PackratParserGenUtil.getConsumeMethodName(org.eclipse.xtext.AbstractElement);
@@ -33,10 +36,10 @@ cached String consumerClassName(AbstractRule this):
 	JAVA org.eclipse.xtext.generator.parser.PackratParserGenUtil.getConsumerClassName(org.eclipse.xtext.AbstractRule);
 	
 cached String getParserConfigurationClassName(Grammar this) :
-	name.toJavaPackage()+".parser.packrat."+name.toSimpleName()+"ParserConfiguration";
+	runtimePack()+".parser.packrat."+name.toSimpleName()+"ParserConfiguration";
 	
 cached String getDelimiterClassName(Grammar this) :
-	name.toJavaPackage()+".parser.packrat."+name.toSimpleName()+"Delimiters";
+	runtimePack()+".parser.packrat."+name.toSimpleName()+"Delimiters";
 
 cached String consumerInterfaceName(AbstractRule this):
 	"UNSUPPORTED_RULETYPE_" + metaType.name;

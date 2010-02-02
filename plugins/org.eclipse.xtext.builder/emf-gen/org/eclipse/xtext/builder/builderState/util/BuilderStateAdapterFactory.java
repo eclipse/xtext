@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStateAdapterFactory.java,v 1.8 2010/01/26 14:27:51 jkohnlein Exp $
+ * $Id: BuilderStateAdapterFactory.java,v 1.9 2010/02/02 15:35:22 sefftinge Exp $
  */
 package org.eclipse.xtext.builder.builderState.util;
 
@@ -12,7 +12,6 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.builder.builderState.*;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;

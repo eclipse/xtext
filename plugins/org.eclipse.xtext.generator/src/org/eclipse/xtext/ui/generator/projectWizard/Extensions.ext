@@ -1,6 +1,8 @@
 import org::eclipse::xtext;
+import org::eclipse::xtext::generator;
 
 extension org::eclipse::xtext::GrammarUtil;
+extension org::eclipse::xtext::generator::Naming;
 
 projectInfoClassName(Grammar this) :
 	getNamespace()+".ui.wizard."+getName()+"ProjectInfo";
@@ -9,7 +11,10 @@ projectCreatorClassName(Grammar this) :
 	getNamespace()+".ui.wizard."+getName()+"ProjectCreator";
 	
 String newProjectTemplateName(Grammar this) :
-	JAVA org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment.getNewProjectTemplateName(org.eclipse.xtext.Grammar);
+	newProjectTemplateName(this,getNaming());
+	
+private String newProjectTemplateName(Grammar this, Naming n) :
+	JAVA org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment.getNewProjectTemplateName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);
 
 projectWizardClassName(Grammar this) :
 	getNamespace()+".ui.wizard."+getName()+"NewProjectWizard";

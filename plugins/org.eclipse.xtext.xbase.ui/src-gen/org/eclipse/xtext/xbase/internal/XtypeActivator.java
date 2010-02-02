@@ -35,17 +35,17 @@ public class XtypeActivator extends AbstractUIPlugin {
 		try {
 			
 			injectors.put("org.eclipse.xtext.xbase.Xtype", Guice.createInjector(
-				new org.eclipse.xtext.xbase.XtypeUiModule(),
+				new org.eclipse.xtext.xbase.ui.XtypeUiModule(),
 				createUIPluginModule()
 			));
 			
 			injectors.put("org.eclipse.xtext.xbase.Xpression", Guice.createInjector(
-				new org.eclipse.xtext.xbase.XpressionUiModule(),
+				new org.eclipse.xtext.xbase.ui.XpressionUiModule(),
 				createUIPluginModule()
 			));
 			
 			injectors.put("org.eclipse.xtext.xbase.Xbase", Guice.createInjector(
-				new org.eclipse.xtext.xbase.XbaseUiModule(),
+				new org.eclipse.xtext.xbase.ui.XbaseUiModule(),
 				createUIPluginModule()
 			));
 			

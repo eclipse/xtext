@@ -147,7 +147,7 @@
         </tokens>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="XAdditiveExpression">
+    <rules xsi:type="xtext:ParserRule" name="XOtherOperatorExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//XExpression"/>
       </type>
@@ -161,8 +161,8 @@
           </tokens>
           <tokens xsi:type="xtext:Assignment" feature="operator" operator="=">
             <terminal xsi:type="xtext:Alternatives">
-              <groups xsi:type="xtext:Keyword" value="+"/>
-              <groups xsi:type="xtext:Keyword" value="-"/>
+              <groups xsi:type="xtext:Keyword" value="->"/>
+              <groups xsi:type="xtext:Keyword" value=".."/>
             </terminal>
           </tokens>
           <tokens xsi:type="xtext:Assignment" feature="right" operator="=">
@@ -171,7 +171,7 @@
         </tokens>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="XMultiplicativeExpression">
+    <rules xsi:type="xtext:ParserRule" name="XAdditiveExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//XExpression"/>
       </type>
@@ -185,9 +185,8 @@
           </tokens>
           <tokens xsi:type="xtext:Assignment" feature="operator" operator="=">
             <terminal xsi:type="xtext:Alternatives">
-              <groups xsi:type="xtext:Keyword" value="*"/>
-              <groups xsi:type="xtext:Keyword" value="/"/>
-              <groups xsi:type="xtext:Keyword" value="%"/>
+              <groups xsi:type="xtext:Keyword" value="+"/>
+              <groups xsi:type="xtext:Keyword" value="-"/>
             </terminal>
           </tokens>
           <tokens xsi:type="xtext:Assignment" feature="right" operator="=">
@@ -196,7 +195,7 @@
         </tokens>
       </alternatives>
     </rules>
-    <rules xsi:type="xtext:ParserRule" name="XOtherOperatorExpression">
+    <rules xsi:type="xtext:ParserRule" name="XMultiplicativeExpression">
       <type metamodel="/0/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/xbase/Xpression#//XExpression"/>
       </type>
@@ -210,8 +209,10 @@
           </tokens>
           <tokens xsi:type="xtext:Assignment" feature="operator" operator="=">
             <terminal xsi:type="xtext:Alternatives">
-              <groups xsi:type="xtext:Keyword" value="->"/>
-              <groups xsi:type="xtext:Keyword" value=".."/>
+              <groups xsi:type="xtext:Keyword" value="*"/>
+              <groups xsi:type="xtext:Keyword" value="**"/>
+              <groups xsi:type="xtext:Keyword" value="/"/>
+              <groups xsi:type="xtext:Keyword" value="%"/>
             </terminal>
           </tokens>
           <tokens xsi:type="xtext:Assignment" feature="right" operator="=">

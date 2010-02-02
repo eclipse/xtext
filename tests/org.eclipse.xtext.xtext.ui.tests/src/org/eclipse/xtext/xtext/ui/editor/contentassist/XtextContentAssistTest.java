@@ -11,7 +11,7 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.XtextUiModule;
+import org.eclipse.xtext.ui.XtextUiModule;
 import org.eclipse.xtext.ui.common.service.UIPluginModule;
 import org.eclipse.xtext.ui.core.SimpleLabelProvider;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
