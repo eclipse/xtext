@@ -22,12 +22,13 @@ Require-Bundle: org.eclipse.xtext.ui;bundle-version="0.8.0",
  org.eclipse.emf.common,
  org.antlr.runtime,
  org.eclipse.ui.editors,
- org.eclipse.ui
+ org.eclipse.ui,
+ org.eclipse.xtext.builder
 Bundle-Activator: org.eclipse.xtext.ui.tests.Activator
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: Eclipse.org
-Export-Package: org.eclipse.xtext.ui.tests.editor.contentassist,
- org.eclipse.xtext.ui.tests.xtextUiTest,
+Import-Package: org.apache.log4j;version="1.2.15"
+Export-Package: org.eclipse.xtext.ui.tests.xtextUiTest,
  org.eclipse.xtext.ui.tests.xtextUiTest.impl,
  org.eclipse.xtext.ui.tests.xtextUiTest.util,
  org.eclipse.xtext.ui.tests,
@@ -52,6 +53,7 @@ Export-Package: org.eclipse.xtext.ui.tests.editor.contentassist,
  org.eclipse.xtext.ui.tests.editor.contentassist.twoContexts,
  org.eclipse.xtext.ui.tests.editor.contentassist.twoContexts.impl,
  org.eclipse.xtext.ui.tests.editor.contentassist.twoContexts.util,
+ org.eclipse.xtext.ui.tests.editor.contentassist,
  org.eclipse.xtext.ui.tests.editor.contentassist.services,
  org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat,
  org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.consumers,
@@ -127,5 +129,19 @@ Export-Package: org.eclipse.xtext.ui.tests.editor.contentassist,
  org.eclipse.xtext.ui.tests.enumrules.parseTreeConstruction,
  org.eclipse.xtext.ui.tests.enumrules.parser.antlr,
  org.eclipse.xtext.ui.tests.enumrules.parser.antlr.internal,
- org.eclipse.xtext.ui.tests.enumrules.contentassist.antlr
-Import-Package: org.apache.log4j;version="1.2.15"
+ org.eclipse.xtext.ui.tests.enumrules.contentassist.antlr,
+ org.eclipse.xtext.ui.tests.foo,
+ org.eclipse.xtext.ui.tests.foo.impl,
+ org.eclipse.xtext.ui.tests.foo.util,
+ org.eclipse.xtext.ui.tests.validation,
+ org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching,
+ org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.impl,
+ org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.util,
+ org.eclipse.xtext.ui.tests.editor.bracketmatching,
+ org.eclipse.xtext.ui.tests.editor.bracketmatching.services,
+ org.eclipse.xtext.ui.tests.editor.bracketmatching.parseTreeConstruction,
+ org.eclipse.xtext.ui.tests.editor.bracketmatching.validation,
+ org.eclipse.xtext.ui.tests.editor.bracketmatching.parser.antlr,
+ org.eclipse.xtext.ui.tests.editor.bracketmatching.parser.antlr.internal,
+ org.eclipse.xtext.ui.tests.editor.bracketmatching.contentassist.antlr
+

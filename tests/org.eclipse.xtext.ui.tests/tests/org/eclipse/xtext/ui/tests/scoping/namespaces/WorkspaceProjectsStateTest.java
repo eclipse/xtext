@@ -10,12 +10,12 @@ package org.eclipse.xtext.ui.tests.scoping.namespaces;
 import java.lang.reflect.InvocationTargetException;
 import java.util.Collection;
 
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.ui.containers.WorkspaceProjectsState;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperImpl;
-import org.eclipse.core.resources.IStorage;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

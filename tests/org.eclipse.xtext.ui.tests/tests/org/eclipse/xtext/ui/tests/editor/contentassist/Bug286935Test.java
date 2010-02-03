@@ -11,7 +11,6 @@ import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.ui.UIPluginModule;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.tests.Activator;
-import org.eclipse.xtext.ui.tests.editor.contentassist.Bug286935TestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug286935TestLanguageUiModule;
 
 import com.google.inject.Guice;

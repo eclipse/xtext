@@ -11,7 +11,8 @@ import static org.eclipse.xtext.junit.util.JavaProjectSetupUtil.*;
 
 import java.util.Collection;
 
-import org.eclipse.core.resources.*;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;

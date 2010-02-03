@@ -12,9 +12,18 @@ public class AllTests {
    public static Test suite() {
       TestSuite suite = new TestSuite("Tests for org.eclipse.xtext.ui.tests");
       suite.addTestSuite(org.eclipse.xtext.ui.tests.DefaultLabelProviderTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.core.builder.impl.PackageFragmentRootWalkerTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.core.resource.Storage2UriMapperJdtImplTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.core.resource.Storage2UriMapperTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.core.util.BundleClasspathUriResolverTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.core.util.JdtClasspathUriResolverTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.core.util.WorkspaceClasspathUriResolverTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.DirtyStateEditorSupportTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.DocumentBasedDirtyResourceTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.SimpleEditorTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.XtextDamageRepairerTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.autoedit.AutoEditTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.bracketmatching.BracketMatcherTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.Bug281198Test.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.Bug282031Test.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.Bug286935Test.class);

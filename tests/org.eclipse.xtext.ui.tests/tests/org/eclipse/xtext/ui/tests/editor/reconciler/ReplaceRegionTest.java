@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.reconciler;
 
-import org.eclipse.xtext.ui.editor.reconciler.ReplaceRegion;
-
 import junit.framework.TestCase;
+
+import org.eclipse.xtext.ui.editor.reconciler.ReplaceRegion;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
