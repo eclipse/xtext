@@ -64,6 +64,8 @@ public abstract class AbstractGenericModule implements Module {
 				Properties properties = new Properties();
 				properties.load(in);
 				Names.bindProperties(binder, properties);
+			} else {
+				throw new IllegalStateException("Couldn't find property file : "+propertyFilePath);
 			}
 		}
 		catch (IOException e) {
