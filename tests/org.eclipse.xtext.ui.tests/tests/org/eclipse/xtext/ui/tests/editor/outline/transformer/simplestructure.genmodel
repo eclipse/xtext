@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.ui.tests/emf-gen"
+    modelPluginID="org.eclipse.xtext.ui.tests" modelName="Simplestructure" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>simplestructure.ecore</foreignModel>
+  <genPackages prefix="Simplestructure" basePackage="org.eclipse.xtext.ui.editor.outline.impl"
+      disposableProviderFactory="true" ecorePackage="simplestructure.ecore#/">
+    <genClasses ecoreClass="simplestructure.ecore#//A">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simplestructure.ecore#//A/a"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simplestructure.ecore#//A/b"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplestructure.ecore#//A/name"/>
+    </genClasses>
+    <genClasses ecoreClass="simplestructure.ecore#//B">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute simplestructure.ecore#//B/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simplestructure.ecore#//B/b"/>
+    </genClasses>
+    <genClasses ecoreClass="simplestructure.ecore#//root">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference simplestructure.ecore#//root/a"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

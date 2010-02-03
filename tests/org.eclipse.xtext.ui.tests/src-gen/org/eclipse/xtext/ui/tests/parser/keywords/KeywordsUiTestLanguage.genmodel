@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.ui.tests/src-gen"
+    editDirectory="/org.eclipse.xtext.ui.tests.edit/src" editorDirectory="/org.eclipse.xtext.ui.tests.editor/src"
+    modelPluginID="org.eclipse.xtext.ui.tests" forceOverwrite="true" modelName="KeywordsUiTestLanguage"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
+    editorPluginID="org.eclipse.xtext.ui.tests.editor">
+  <genPackages prefix="KeywordsUiTestLanguage" basePackage="org.eclipse.xtext.ui.tests.parser.keywords"
+      disposableProviderFactory="true" ecorePackage="KeywordsUiTestLanguage.ecore#/">
+    <genClasses ecoreClass="KeywordsUiTestLanguage.ecore#//Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KeywordsUiTestLanguage.ecore#//Model/first"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KeywordsUiTestLanguage.ecore#//Model/second"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KeywordsUiTestLanguage.ecore#//Model/third"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KeywordsUiTestLanguage.ecore#//Model/forth"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KeywordsUiTestLanguage.ecore#//Model/fifth"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KeywordsUiTestLanguage.ecore#//Model/sixth"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KeywordsUiTestLanguage.ecore#//Model/seventh"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute KeywordsUiTestLanguage.ecore#//Model/eighth"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

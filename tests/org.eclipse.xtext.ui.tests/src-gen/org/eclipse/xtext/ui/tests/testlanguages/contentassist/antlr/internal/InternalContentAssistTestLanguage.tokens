@@ -1,0 +1,14 @@
+RULE_ML_COMMENT=7
+RULE_ID=4
+RULE_WS=9
+RULE_INT=5
+RULE_STRING=6
+RULE_ANY_OTHER=10
+RULE_SL_COMMENT=8
+'('=13
+':'=17
+'abstract rules'=11
+')'=14
+'rule'=16
+'end'=12
+';'=15
