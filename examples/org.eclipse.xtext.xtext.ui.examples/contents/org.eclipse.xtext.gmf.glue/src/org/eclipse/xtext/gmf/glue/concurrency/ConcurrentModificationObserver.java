@@ -47,7 +47,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.ui.texteditor.ITextEditor;
 import org.eclipse.xtext.gmf.glue.Activator;
-import org.eclipse.xtext.ui.core.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.XtextEditor;
 
 /**
  * Detects concurrent modifications of diagrams and text files.
