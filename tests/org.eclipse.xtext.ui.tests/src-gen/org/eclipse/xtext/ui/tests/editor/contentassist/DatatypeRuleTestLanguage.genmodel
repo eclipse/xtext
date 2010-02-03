@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.ui.tests/src-gen"
+    editDirectory="/org.eclipse.xtext.ui.tests.edit/src" editorDirectory="/org.eclipse.xtext.ui.tests.editor/src"
+    modelPluginID="org.eclipse.xtext.ui.tests" forceOverwrite="true" modelName="DatatypeRuleTestLanguage"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
+    editorPluginID="org.eclipse.xtext.ui.tests.editor">
+  <genPackages prefix="DatatypeRuleTest" basePackage="org.eclipse.xtext.ui.tests.editor.contentassist"
+      disposableProviderFactory="true" ecorePackage="DatatypeRuleTestLanguage.ecore#/">
+    <genClasses ecoreClass="DatatypeRuleTestLanguage.ecore#//Model"/>
+    <genClasses ecoreClass="DatatypeRuleTestLanguage.ecore#//Types">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DatatypeRuleTestLanguage.ecore#//Types/types"/>
+    </genClasses>
+    <genClasses ecoreClass="DatatypeRuleTestLanguage.ecore#//Type">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute DatatypeRuleTestLanguage.ecore#//Type/name"/>
+    </genClasses>
+    <genClasses ecoreClass="DatatypeRuleTestLanguage.ecore#//SimpleType"/>
+    <genClasses ecoreClass="DatatypeRuleTestLanguage.ecore#//CompositeType">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference DatatypeRuleTestLanguage.ecore#//CompositeType/baseType"/>
+    </genClasses>
+    <genClasses ecoreClass="DatatypeRuleTestLanguage.ecore#//CompositeTypeEntry">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference DatatypeRuleTestLanguage.ecore#//CompositeTypeEntry/dataType"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
