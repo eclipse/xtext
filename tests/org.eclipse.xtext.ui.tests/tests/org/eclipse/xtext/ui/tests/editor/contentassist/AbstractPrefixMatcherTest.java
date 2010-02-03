@@ -7,9 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
-import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
-
 import junit.framework.TestCase;
+
+import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API

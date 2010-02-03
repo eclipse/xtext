@@ -3,6 +3,7 @@
  */
 package org.eclipse.xtext.ui.tests.testlanguages.ui;
 
+
 /**
  * Use this class to register components to be used within the IDE.
  */

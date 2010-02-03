@@ -13,7 +13,6 @@ import org.eclipse.xtext.resource.ecore.EcoreResourceServiceProviderImpl;
 import org.eclipse.xtext.ui.UIPluginModule;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.tests.Activator;
-import org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug287941TestLanguageUiModule;
 
 import com.google.inject.Guice;

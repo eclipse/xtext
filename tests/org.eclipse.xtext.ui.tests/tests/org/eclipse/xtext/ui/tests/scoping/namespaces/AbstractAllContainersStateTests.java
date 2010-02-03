@@ -36,6 +36,8 @@ public abstract class AbstractAllContainersStateTests extends TestCase implement
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
+		cleanWorkspace();
+		waitForAutoBuild();
 		assertEquals(0, root().getProjects().length);
 		project1 = createProject("someProject1");
 		project2 = createProject("someProject2");
