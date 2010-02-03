@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="ASCII"?>
+<simplestructure:root xmi:version="2.0" xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:simplestructure="http://www.example.org/simplestructure" xsi:schemaLocation="http://www.example.org/simplestructure ./simplestructure.ecore">
+  <a name="A1">
+    <b name="B1"/>
+  </a>
+  <a name="A2"/>
+</simplestructure:root>

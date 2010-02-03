@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="bug287941TestModel"
+    nsURI="http://www.eclipse.org/tmf/tests/2009/bug286935TestLanguage/TestModel"
+    nsPrefix="bug287941TestModel">
+  <eClassifiers xsi:type="ecore:EClass" name="Test">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="testAttr" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="testRef" eType="#//Test2"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="Test2"/>
+</ecore:EPackage>
