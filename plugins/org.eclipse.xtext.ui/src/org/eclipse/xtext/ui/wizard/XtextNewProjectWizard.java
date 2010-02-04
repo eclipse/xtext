@@ -25,12 +25,11 @@ import org.eclipse.xtext.ui.util.EclipseResourceUtil;
  */
 public abstract class XtextNewProjectWizard extends Wizard implements INewWizard {
 
-	private static Logger logger = Logger.getLogger(XtextNewProjectWizard.class);
+	private static final Logger logger = Logger.getLogger(XtextNewProjectWizard.class);
 
 	protected IStructuredSelection selection;
 
 	public XtextNewProjectWizard(IProjectCreator creator) {
-		super();
 		this.creator = creator;
 		setNeedsProgressMonitor(true);
 	}
@@ -60,6 +59,7 @@ public abstract class XtextNewProjectWizard extends Wizard implements INewWizard
 			return false;
 		}
 		catch (InvocationTargetException e) {
+			logger.error(e.getMessage(), e);
 			Throwable realException = e.getTargetException();
 			MessageDialog.openError(getShell(), "Error", realException.getMessage());
 			return false;
@@ -78,10 +78,10 @@ public abstract class XtextNewProjectWizard extends Wizard implements INewWizard
 			EclipseResourceUtil.openFileToEdit(getShell(), creator.getResult());
 		}
 		catch (final InvocationTargetException e) {
-			logger.error(e);
+			logger.error(e.getMessage(), e);
 		}
 		catch (final InterruptedException e) {
-			logger.error(e);
+			logger.error(e.getMessage(), e);
 		}
 	}
 
