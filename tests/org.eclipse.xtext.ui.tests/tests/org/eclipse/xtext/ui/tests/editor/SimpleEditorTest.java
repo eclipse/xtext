@@ -8,10 +8,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor;
 
-import static org.eclipse.xtext.ui.tests.util.ResourceUtil.*;
+import static org.eclipse.xtext.junit.util.IResourcesSetupUtil.*;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.resources.IProject;
 import org.eclipse.core.runtime.ILogListener;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
@@ -48,8 +47,7 @@ public class SimpleEditorTest extends AbstractEditorTest {
 	}
 	
 	public void testOpenBlankFile() throws Exception {
-		IProject p = createProject("foo");
-		IFile file = createFile(p, "x.testlanguage", "");
+		IFile file = createFile("foo/x.testlanguage","");
 		XtextEditor openedEditor = openEditor(file);
 		assertNotNull(openedEditor);
 		IXtextDocument document = openedEditor.getDocument();
@@ -65,8 +63,7 @@ public class SimpleEditorTest extends AbstractEditorTest {
 	}
 
 	public void testOpenFileReadModifyRead() throws Exception {
-		IProject p = createProject("foo");
-		IFile file = createFile(p, "y.testlanguage", "/* multi line */\n" +
+		IFile file = createFile("foo/y.testlanguage", "/* multi line */\n" +
 				"stuff foo\n" +
 				"stuff bar\n" +
 				"// end");
@@ -103,8 +100,7 @@ public class SimpleEditorTest extends AbstractEditorTest {
 	}
 
 	public void testOpenFileReadModifyReadSecond() throws Exception {
-		IProject p = createProject("foo");
-		IFile file = createFile(p, "z..testlanguage", "/* multi line */\n" +
+		IFile file = createFile("foo/z.testlanguage", "/* multi line */\n" +
 				"stuff foo\n" +
 				"stuff bar\n" +
 				"// end");
