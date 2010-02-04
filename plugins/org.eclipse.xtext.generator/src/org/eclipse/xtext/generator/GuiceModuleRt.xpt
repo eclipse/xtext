@@ -10,7 +10,6 @@
 «ENDREM»
 «IMPORT org::eclipse::xtext::generator»
 «IMPORT org::eclipse::xtext»
-«IMPORT xtextgen»
 
 «EXTENSION org::eclipse::xtext::generator::Naming»
 «EXTENSION org::eclipse::xtext::generator::ModuleExtensions»

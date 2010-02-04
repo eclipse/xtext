@@ -11,9 +11,6 @@
 
 «IMPORT org::eclipse::xtext»
 
-«EXTENSION org::eclipse::xtext::generator::scoping::JavaScopingExtensions»
-«EXTENSION org::eclipse::xtext::generator::Naming»
-
 
 «DEFINE addToPluginXmlRt FOR Grammar»«ENDDEFINE»
 
