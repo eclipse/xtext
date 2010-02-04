@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.tests/emf-gen"
+    modelPluginID="org.eclipse.xtext.tests" modelName="Ametamodel" importerID="org.eclipse.emf.importer.ecore"
+    complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>ametamodel.ecore</foreignModel>
+  <genPackages prefix="Ametamodel" basePackage="org.eclipse.xtext.generator.grammarAccess"
+      disposableProviderFactory="true" ecorePackage="ametamodel.ecore#/">
+    <nestedGenPackages prefix="Asubpackage" disposableProviderFactory="true" ecorePackage="ametamodel.ecore#//asubpackage">
+      <genClasses ecoreClass="ametamodel.ecore#//asubpackage/AType">
+        <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ametamodel.ecore#//asubpackage/AType/name"/>
+      </genClasses>
+      <genClasses ecoreClass="ametamodel.ecore#//asubpackage/AModel">
+        <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ametamodel.ecore#//asubpackage/AModel/elements"/>
+      </genClasses>
+      <nestedGenPackages prefix="EmptyPackage" disposableProviderFactory="true" ecorePackage="ametamodel.ecore#//asubpackage/emptyPackage">
+        <nestedGenPackages prefix="Subsubpackage" disposableProviderFactory="true"
+            ecorePackage="ametamodel.ecore#//asubpackage/emptyPackage/subsubpackage">
+          <genClasses ecoreClass="ametamodel.ecore#//asubpackage/emptyPackage/subsubpackage/AnotherType">
+            <genFeatures notify="false" createChild="false" propertySortChoices="true"
+                ecoreFeature="ecore:EReference ametamodel.ecore#//asubpackage/emptyPackage/subsubpackage/AnotherType/ref"/>
+          </genClasses>
+        </nestedGenPackages>
+      </nestedGenPackages>
+    </nestedGenPackages>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,32 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+grammar org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage with org.eclipse.xtext.common.Terminals
+
+generate simpleExpressions "http://www.eclipse.org/xtext/test/simpleExpressions"
+
+Sequence: Addition ( {Sequence.expressions+=current} expressions+=Addition)*;
+
+Addition returns Expression: 
+	Multiplication ( {Op.values+=current} operator=('+'|'-') values+=Multiplication)*;
+
+Multiplication returns Expression: 
+	Term ( {Op.values+=current} operator=('*'|'/') values+=Term)*;
+	
+Term returns Expression:
+	Atom | Parens;
+	
+Atom: 
+	name=ID;
+
+Parens returns Expression: 
+	'(' Addition ')';
+	
+
+
+

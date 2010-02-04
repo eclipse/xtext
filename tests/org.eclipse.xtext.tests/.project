@@ -21,7 +21,7 @@
 			</arguments>
 		</buildCommand>
 		<buildCommand>
-			<name>org.eclipse.pde.api.tools.apiAnalysisBuilder</name>
+			<name>org.eclipse.xtend.shared.ui.xtendBuilder</name>
 			<arguments>
 			</arguments>
 		</buildCommand>
@@ -29,6 +29,6 @@
 	<natures>
 		<nature>org.eclipse.pde.PluginNature</nature>
 		<nature>org.eclipse.jdt.core.javanature</nature>
-		<nature>org.eclipse.pde.api.tools.apiAnalysisNature</nature>
+		<nature>org.eclipse.xtend.shared.ui.xtendXPandNature</nature>
 	</natures>
 </projectDescription>
