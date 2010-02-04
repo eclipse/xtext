@@ -17,3 +17,4 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Export-Package: org.eclipse.xtext.gmf.glue.edit.part,
  org.eclipse.xtext.gmf.glue.editingdomain
+Import-Package: org.apache.log4j;version="1.2.15"
