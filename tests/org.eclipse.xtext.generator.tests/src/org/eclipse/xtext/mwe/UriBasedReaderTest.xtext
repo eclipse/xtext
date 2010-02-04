@@ -1,5 +1,0 @@
-grammar org.eclipse.xtext.mwe.UriBasedReaderTest with org.eclipse.xtext.common.Terminals
-
-generate foo "http://foo/bar"
-
-Main : name=UKNOWN;
