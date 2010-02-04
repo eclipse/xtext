@@ -1,0 +1,38 @@
+<workflow>
+	<property name="standardFragments" value="org/eclipse/xtext/TestLanguagesFragments.mwe"/>
+	<property name="projectName" value="org.eclipse.xtext.tests"/>
+	<property name="runtimeProject" value="../${projectName}"/>
+	
+	<property name="ametamodel.genmodel" value="platform:/resource/${projectName}/src/org/eclipse/xtext/grammarinheritance/ametamodel.genmodel"/>
+	<property name="enums.genmodel" value="platform:/resource/${projectName}/src/org/eclipse/xtext/enumrules/enums.genmodel"/>
+	<property name="baseinheritance.genmodel" value="platform:/resource/${projectName}/src-gen/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.genmodel"/>
+	<property name="inheritance.genmodel" value="platform:/resource/${projectName}/src-gen/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.genmodel"/>
+	<property name="xtext.genmodel" value="platform:/resource/org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.genmodel"/>
+	
+	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" platformUri="${runtimeProject}/.."/>
+	
+	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}/src-gen/org/eclipse/xtext/grammarinheritance/"/>
+	
+	<component class="org.eclipse.xtext.generator.Generator">
+		<pathRtProject value="${runtimeProject}"/>
+		<projectNameRt value="${projectName}"/>
+		<language uri="classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xtext">
+			<fragment file="${standardFragments}"/>
+		</language>
+		<language uri="classpath:/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.xtext">
+			<fragment file="${standardFragments}" />
+		</language>
+		<language uri="classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xtext">
+			<fragment file="${standardFragments}"
+			   genModels="${ametamodel.genmodel}"/>
+		</language>
+		<language uri="classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.xtext">
+			<fragment file="${standardFragments}"
+				genModels="${baseinheritance.genmodel}"/>
+		</language>
+		<language uri="classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTest2Language.xtext">
+			<fragment file="${standardFragments}"
+				genModels="${baseinheritance.genmodel},${inheritance.genmodel}"/>
+		</language>
+	</component>
+</workflow>

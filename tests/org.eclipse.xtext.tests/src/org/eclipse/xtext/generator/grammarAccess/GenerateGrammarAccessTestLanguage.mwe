@@ -1,0 +1,19 @@
+<workflow>
+	<property name="standardFragments" value="org/eclipse/xtext/TestLanguagesFragments.mwe"/>
+	<property name="projectName" value="org.eclipse.xtext.tests"/>
+	<property name="runtimeProject" value="../${projectName}"/>
+	
+	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" platformUri="${runtimeProject}/.."/>
+	
+	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}/src-gen/org/eclipse/xtext/generator/grammarAccess"/>
+	
+	<component class="org.eclipse.xtext.generator.Generator">
+		<pathRtProject value="${runtimeProject}"/>
+		<projectNameRt value="${projectName}"/>
+		
+		<language uri="classpath:/org/eclipse/xtext/generator/grammarAccess/GrammarAccessTestLanguage.xtext">
+			<fragment file="${standardFragments}"/>
+			<fragment class="org.eclipse.xtext.generator.grammarAccess.EmptyPackageAwareGrammarAccessFragment"/>
+		</language>
+	</component>
+</workflow>

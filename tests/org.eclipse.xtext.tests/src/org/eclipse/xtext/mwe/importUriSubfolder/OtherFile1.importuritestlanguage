@@ -1,0 +1,3 @@
+import "./OtherFile2.importuritestlanguage"
+
+type Bar extends Baz
