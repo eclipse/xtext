@@ -46,8 +46,10 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 
 	@Override
 	public void beforeDispose(XtextEditor xtextEditor) {
-		annotationModel.removeAnnotationModelListener(this);
-		annotationModel = null;
+		if (annotationModel != null) {
+			annotationModel.removeAnnotationModelListener(this);
+			annotationModel = null;
+		}
 		this.editor = null;
 		if (defaultImage!=null)
 			defaultImage.dispose();
