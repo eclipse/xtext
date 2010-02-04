@@ -36,10 +36,6 @@ projectName=«this.projectName»
 
 «ENDDEFINE»
 
-«DEFINE grammar FOR Ecore2XtextProjectInfo»
-«EXPAND org::eclipse::xtext::xtext::ui::wizard::ecore2xtext::Ecore2Xtext::grammar-»
-«ENDDEFINE»
-
 «DEFINE grammar FOR XtextProjectInfo»
 «FILE basePackagePath+"/"+languageNameAbbreviation+".xtext" -»
 grammar «this.languageName» with org.eclipse.xtext.common.Terminals

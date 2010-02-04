@@ -11,7 +11,6 @@ package org.eclipse.xtext.xtext.ui.wizard.ecore2xtext;
 import java.util.Collection;
 
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectInfo;
 
 /**
@@ -19,16 +18,16 @@ import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectInfo;
  */
 public class Ecore2XtextProjectInfo extends XtextProjectInfo {
 
-	private Collection<EPackage> ePackagesForRules;
-	private EPackage defaultEPackage;
+	private Collection<EPackageInfo> ePackageInfos;
+	private EPackageInfo defaultEPackageInfo;
 	private EClass rootElementClass;
 		
-	public Collection<EPackage> getEPackagesForRules() {
-		return ePackagesForRules;
+	public Collection<EPackageInfo> getEPackageInfos() {
+		return ePackageInfos;
 	}
 	
-	public void setEPackagesForRules(Collection<EPackage> ePackagesForRules) {
-		this.ePackagesForRules = ePackagesForRules;
+	public void setEPackageInfos(Collection<EPackageInfo> ePackageInfos) {
+		this.ePackageInfos=ePackageInfos;
 	}
 
 	public EClass getRootElementClass() {
@@ -39,12 +38,12 @@ public class Ecore2XtextProjectInfo extends XtextProjectInfo {
 		this.rootElementClass = rootElementClass;
 	}
 
-	public EPackage getDefaultEPackage() {
-		return defaultEPackage;
+	public EPackageInfo getDefaultEPackageInfo() {
+		return defaultEPackageInfo;
 	}
 
-	public void setDefaultEPackage(EPackage defaultEPackage) {
-		this.defaultEPackage = defaultEPackage;
+	public void setDefaultEPackageInfo(EPackageInfo defaultEPackageInfo) {
+		this.defaultEPackageInfo = defaultEPackageInfo;
 	}
 	
 }

@@ -30,6 +30,7 @@ import org.eclipse.xpand2.output.Outlet;
 import org.eclipse.xpand2.output.OutputImpl;
 import org.eclipse.xtend.type.impl.java.JavaBeansMetaModel;
 import org.eclipse.xtext.resource.XtextResourceSet;
+import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.EPackageInfo;
 import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectInfo;
 
 /**
@@ -38,28 +39,27 @@ import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectInfo;
 public class Ecore2XtextGenerator extends AbstractWorkflowComponent2 {
 
 	protected final Log log = LogFactory.getLog(getClass());
-	
+
 	private ResourceSet resourceSet;
 
 	private String genPath;
 
 	private String rootElementClassName;
-	
+
 	private String languageName;
 
 	private Ecore2XtextProjectInfo xtextProjectInfo;
 
 	public Ecore2XtextGenerator() {
 		resourceSet = new XtextResourceSet();
-		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap()
-				.put("ecore", new XMIResourceFactoryImpl());
+		resourceSet.getResourceFactoryRegistry().getExtensionToFactoryMap().put("ecore", new XMIResourceFactoryImpl());
 	}
 
 	public void addEcoreFile(String uri) {
-		if(uri.startsWith("/")) {
+		if (uri.startsWith("/")) {
 			uri = uri.substring(1);
 		}
-		if(languageName == null) {
+		if (languageName == null) {
 			languageName = uri.replaceAll("/", ".").substring(0, uri.lastIndexOf('.'));
 		}
 		resourceSet.getResource(URI.createURI("platform:/resource/org.eclipse.xtext.xtext.ui.tests/src/" + uri), true);
@@ -76,20 +76,17 @@ public class Ecore2XtextGenerator extends AbstractWorkflowComponent2 {
 	public void setLanguageName(String languageName) {
 		this.languageName = languageName;
 	}
-	
+
 	@Override
-	protected void invokeInternal(WorkflowContext ctx, ProgressMonitor monitor,
-			Issues issues) {
+	protected void invokeInternal(WorkflowContext ctx, ProgressMonitor monitor, Issues issues) {
 		createXtextProjectInfo(issues);
 		XpandExecutionContextImpl executionContext = initializeExecutionContext(issues);
 		if (issues.hasErrors()) {
 			return;
 		}
 		XpandFacade xpandFacade = XpandFacade.create(executionContext);
-		xpandFacade
-				.evaluate2(
-						"org::eclipse::xtext::xtext::ui::wizard::ecore2xtext::Ecore2Xtext::grammar",
-						xtextProjectInfo, null);
+		xpandFacade.evaluate2("org::eclipse::xtext::xtext::ui::wizard::ecore2xtext::Ecore2Xtext::grammar",
+				xtextProjectInfo, null);
 		Outlet outlet = executionContext.getOutput().getOutlet(null);
 		log.info("Written " + outlet.getFilesWrittenAndClosed() + " files");
 
@@ -103,8 +100,7 @@ public class Ecore2XtextGenerator extends AbstractWorkflowComponent2 {
 		outlet.setOverwrite(true);
 		outlet.setPath(genPath);
 		output.addOutlet(outlet);
-		XpandExecutionContextImpl executionContext = new XpandExecutionContextImpl(
-				output, null);
+		XpandExecutionContextImpl executionContext = new XpandExecutionContextImpl(output, null);
 		executionContext.registerMetaModel(new JavaBeansMetaModel());
 		return executionContext;
 	}
@@ -112,35 +108,34 @@ public class Ecore2XtextGenerator extends AbstractWorkflowComponent2 {
 	private void createXtextProjectInfo(Issues issues) {
 		if (xtextProjectInfo == null) {
 			xtextProjectInfo = new Ecore2XtextProjectInfo();
-			List<EPackage> ePackages = new ArrayList<EPackage>();
+			List<EPackageInfo> ePackageInfos = new ArrayList<EPackageInfo>();
 			EClass rootElementClass = null;
-			for (Iterator<Notifier> i = resourceSet.getAllContents(); i
-					.hasNext();) {
+			for (Iterator<Notifier> i = resourceSet.getAllContents(); i.hasNext();) {
 				Notifier next = i.next();
 				if (next instanceof EPackage) {
-					ePackages.add((EPackage) next);
+					EPackage ePackage = (EPackage) next;
+					ePackageInfos.add(new EPackageInfo(ePackage, URI.createURI(ePackage.getNsURI()), null, null));
 					if (rootElementClass == null) {
-						EClassifier rootElementClassifier = ((EPackage) next)
-								.getEClassifier(rootElementClassName);
+						EClassifier rootElementClassifier = ePackage.getEClassifier(rootElementClassName);
 						if (rootElementClassifier instanceof EClass) {
 							rootElementClass = (EClass) rootElementClassifier;
 						}
 					}
 				}
 			}
-			if (ePackages.isEmpty()) {
+			if (ePackageInfos.isEmpty()) {
 				issues.addError("No EPackages found");
 			} else {
-				xtextProjectInfo.setDefaultEPackage(ePackages.get(0));
+				xtextProjectInfo.setDefaultEPackageInfo(ePackageInfos.get(0));
 			}
 			if (rootElementClass == null) {
 				issues.addError("No rootElement EClass " + rootElementClassName + " found");
 			}
-			if(languageName == null) {
+			if (languageName == null) {
 				issues.addError("languageName must be set");
 			}
 			xtextProjectInfo.setLanguageName(languageName);
-			xtextProjectInfo.setEPackagesForRules(ePackages);
+			xtextProjectInfo.setEPackageInfos(ePackageInfos);
 			xtextProjectInfo.setRootElementClass(rootElementClass);
 		}
 	}
@@ -150,10 +145,10 @@ public class Ecore2XtextGenerator extends AbstractWorkflowComponent2 {
 		if (genPath == null) {
 			issues.addError("genPath not set");
 		}
-		if(rootElementClassName == null) {
+		if (rootElementClassName == null) {
 			issues.addError("rootElement not set");
 		}
-		if(!issues.hasErrors()) {
+		if (!issues.hasErrors()) {
 			createXtextProjectInfo(issues);
 		}
 	}

@@ -14,9 +14,12 @@ import java.util.Map;
 
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.eclipse.xtext.ui.wizard.IProjectInfo;
 import org.eclipse.xtext.ui.wizard.XtextNewProjectWizard;
 import org.eclipse.xtext.xtext.ui.Activator;
+
+import com.google.inject.Inject;
 
 /**
  * A project wizard to create Xtext projects.
@@ -31,7 +34,9 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 	/**
 	 * Constructs a new wizard
 	 */
-	public NewXtextProjectWizard() {
+	@Inject
+	public NewXtextProjectWizard(IProjectCreator projectCreator) {
+		super(projectCreator);
 		setWindowTitle(Messages.NewXtextProjectWizard_WindowTitle);
 		setDefaultPageImageDescriptor(Activator.getImageDescriptor("icons/wizban/newxprj_wiz.png")); //$NON-NLS-1$
 	}
@@ -39,14 +44,10 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 	@Override
 	public void addPages() {
 		super.addPages();
-		mainPage = new WizardNewXtextProjectCreationPage("mainPage", this.selection, getDefaultConfigName()); //$NON-NLS-1$
+		mainPage = new WizardNewXtextProjectCreationPage("mainPage", this.selection); //$NON-NLS-1$
 		addPage(mainPage);
 	}
 
-	protected String getDefaultConfigName() {
-		return "Standard";
-	}
-	
 	@Override
 	protected IProjectInfo getProjectInfo() {
 		XtextProjectInfo projectInfo = createProjectInfo();
@@ -76,5 +77,5 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 	protected XtextProjectInfo createProjectInfo() {
 		return new XtextProjectInfo();
 	}
-
+	
 }
