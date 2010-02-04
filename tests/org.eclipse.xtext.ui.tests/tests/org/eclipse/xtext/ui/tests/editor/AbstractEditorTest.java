@@ -9,7 +9,6 @@
 package org.eclipse.xtext.ui.tests.editor;
 
 import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
@@ -38,8 +37,6 @@ public abstract class AbstractEditorTest extends AbstractWorkbenchTest {
 	protected XtextEditor openEditor(IFile file) throws Exception {
 		IEditorPart openEditor = openEditor(file, getEditorId());
 		if (openEditor instanceof XtextEditor) {
-			waitForJobCompletion();
-			sleep(STEP_DELAY);
 			return (XtextEditor) openEditor;
 		}
 		else if (openEditor instanceof org.eclipse.ui.internal.ErrorEditorPart) {
@@ -54,12 +51,6 @@ public abstract class AbstractEditorTest extends AbstractWorkbenchTest {
 	private IEditorPart openEditor(IFile file, String editorId) throws PartInitException {
 		return PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().openEditor(
 				new FileEditorInput(file), editorId);
-	}
-
-	private void waitForJobCompletion() throws InterruptedException {
-		while (Job.getJobManager().currentJob() != null) {
-			sleep(500);
-		}
 	}
 
 }
