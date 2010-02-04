@@ -1,0 +1,96 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+grammar org.eclipse.xtext.parsetree.reconstr.SimpleReconstrTestLanguage with org.eclipse.xtext.common.Terminals
+
+generate simplerewritetest "http://www.eclipse.org/2009/tmf/xtext/simplerewritetest"
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+Op returns Expression: 
+	Term ({Op.values+=current} values+=Term)*;
+	
+Term returns Expression:
+	Atom | TwoNumbers | ManyStrings | Parens | Type | Ref2 | Spare | Boolean | Transient1 | Consumed1 | Consumed2 | Loop1 | Loop2 | Loop3 | Loop4 | LoopBug285452 | DuplicateBug284491 | EmptyObjectBug284850 | MultiInheritanceBug280439 | EObjectRef;
+	
+Atom: 
+	name=ID;
+
+Parens returns Expression: 
+	'(' Op ')' em='!'?;
+	
+TwoNumbers:
+	num1=INT num2=INT ('#' num3+=INT)*;
+
+ManyStrings: 
+	'=' (str1+=STRING)* str2+=STRING; 
+
+Type :
+	'type' name=ID 'extends' ^extends=[Type];
+
+Ref2:
+	'#2' ref2=('mykeyword1' | STRING | 'mykeyword2');
+	
+Spare:
+	'#3' id+=ID ('.' id+=ID)*;
+	
+Boolean:
+	'#4' bool?='myoption'? 'kw' value=ID; 
+
+Transient1: 
+	'#5' (precStar?='*'|prec=INT) (',' (scaleStar?='*'|scale=INT))?;
+	
+Consumed1:
+	'#6' (('v1' v1+=INT* v2+=ID) | ('v2' v2+=ID* v1+=INT));
+	 
+Consumed2:
+	'#7' child=Consumed1; 
+	
+Loop1:
+	'kw0'? '#8' id+=ID 'kw1'? id+=ID ('kw2'* 'kw30')+;
+	
+Loop2:
+	'#9' id+=ID ('kw1'| (id+=ID 'kw2')) ('kw3'| (id+=ID 'kw4'))? ('kw5' | 'kw6');
+	
+Loop3:
+	('kw1'|'kw2'|'kw3') '#10' id+=ID ('kw4' id+=ID 'kw5')*;  
+	
+Loop4:
+	'#11' ('kw1' | 'kw2' | ('kw3' 'kw4')) id+=ID ('kw5' ('kw6' 'kw7'?)?)+;
+	
+LoopBug285452:
+	'#12' (interface?="interface"|"class") name=ID;
+	
+DuplicateBug284491:
+	'#13' (static?='static' | final?='final' | transient?='transient')*;
+	
+EmptyObjectBug284850:
+	'#14' items=EmptyObjectItems;
+	
+EmptyObjectItems:
+	list+=EmptyObjectItem*;
+	
+EmptyObjectItem:
+	'item' name=ID;
+	
+MultiInheritanceBug280439:
+	'#15' val=ConcreteMulti;
+
+AbstractMulti1:
+	ConcreteMulti | m1=ID;
+	
+AbstractMulti2:
+	ConcreteMulti | m2=ID;
+	
+ConcreteMulti:
+	m1=ID m2=ID;
+	
+EObjectRef:
+	'#16' obj=EObjectElement 'refs' ref=[ecore::EObject|ID];
+	
+EObjectElement:
+	name=ID;

@@ -1,0 +1,17 @@
+<compose class="org.eclipse.xtext.generator.CompositeGeneratorFragment">
+	<property name="file.extensions" value=""/>
+	<property name="genModels" value=""/>
+	<property name="basePackage" value=""/>
+	<property name="javaModelDirectory" value=""/>
+	<property name="xmiModelDirectory" value=""/>
+	<property name="backtrack" value="false"/>
+	<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
+	<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" referencedGenModels="${genModels}" basePackage="${basePackage}" javaModelDirectory="${javaModelDirectory}" xmiModelDirectory="${xmiModelDirectory}"/>
+	<fragment class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
+	<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
+	<fragment class="de.itemis.xtext.antlr.ex.rt.AntlrGeneratorFragment">
+		<options backtrack="${backtrack}"/>
+	</fragment>
+	<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 
+		fileExtensions="${file.extensions}"/>
+</compose>

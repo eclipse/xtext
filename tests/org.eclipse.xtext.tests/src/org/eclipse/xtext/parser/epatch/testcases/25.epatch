@@ -1,0 +1,17 @@
+epatch UNSET_OBJECT_WITH_REF {
+  import mm ns "http://www.itemis.de/emf/epatch/testmm1"
+  resource res0 {
+  left uri "SimpleMM1Instance1.xmi";
+  right uri "SimpleMM1Instance11.xmi";
+  }
+
+  object res0#//@tree {
+    children = [ 1:new mm#//ChildNode {
+      friend = CompositeNode1;
+      name = "ChildWithRef";
+    } | ];
+  }
+
+  object CompositeNode1 res0#//@tree/@children.0
+
+}

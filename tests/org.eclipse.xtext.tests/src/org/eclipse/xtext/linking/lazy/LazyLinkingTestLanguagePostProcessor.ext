@@ -1,0 +1,27 @@
+process(xtext::GeneratedMetamodel this) :
+    process(ePackage)
+;
+
+process(ecore::EPackage this) :
+    eClassifiers.process()
+;
+
+process(ecore::EClassifier this) :
+    null
+;
+
+process(ecore::EClass this) :
+    if (this.name == 'UnresolvedProxyProperty') then (
+        ((ecore::EReference) this.getEStructuralFeature('type')).setResolveProxies(false)
+    ) else if (this.name == 'Type') then (
+        ((ecore::EReference) this.getEStructuralFeature('extends')).defineOpposite('subtypes', -1)
+    )
+;
+
+defineOpposite(ecore::EReference this, String name, Integer upperBound) :
+    let opp = new ecore::EReference :
+        opp.setName(name) -> opp.setEType(eContainingClass) ->
+        setEOpposite(opp) -> opp.setEOpposite(this) ->
+        eReferenceType.eStructuralFeatures.add(opp) ->
+        opp.setUpperBound(upperBound)
+;

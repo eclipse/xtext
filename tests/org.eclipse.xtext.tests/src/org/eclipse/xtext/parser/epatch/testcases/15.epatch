@@ -1,0 +1,11 @@
+epatch MULTIPLE_REMOVE {
+  resource res0 {
+  left uri "SimpleMM1Instance1.xmi";
+  right uri "SimpleMM1Instance11.xmi";
+  }
+
+  object res0#/ {
+    intlist = [ 4:"10", 3:"8", 2:"6", 1:"4" | ];
+  }
+
+}

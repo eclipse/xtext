@@ -1,0 +1,29 @@
+grammar org.eclipse.xtext.generator.grammarAccess.ElementFinderTestLanguage with org.eclipse.xtext.generator.grammarAccess.ElementFinderSuperTestLanguage
+
+generate elementfinder "http://example.org/grammarfinder/0.1"
+
+Root:
+	(elements += Type)*;
+	
+Type:
+	AType | AnotherType;
+	
+AType:
+	'foo' {AType};
+	
+AnotherType:
+	'bar' {AnotherType};
+	
+FinderKeywords: 
+	'myKeyword' name=ID? 'myKeyword' 'lala'; 
+	
+FinderKeywordPairs:
+	'begin' 'whatever' name=ID ('begin' nested=ID 'end')* 'end' 'begin' second=ID 'end';
+	
+FinderRuleCalls:
+	'myKeyword2' FinderKeywords assigned=FinderKeywords;
+	
+FinderCrossReferences:
+	cross=[FinderKeywordPairs|FQN] assigned=FinderKeywordPairs type=[AType]; 
+	
+FQN: ID ("." ID)*;

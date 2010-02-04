@@ -1,0 +1,46 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+grammar org.eclipse.xtext.parser.assignments.AssignmentsTestLanguage with org.eclipse.xtext.common.Terminals
+
+generate assignmentsTestLanguage "http://www.eclipse.org/2008/tmf/xtext/AssignmentsTest"
+
+Model:
+  	'simple' (
+  	single = SingleValue
+  | multi = MultiValue
+  | single = SingleDatatype
+  | multi = MultiDatatype )
+  | 'complex' object=(
+  	SingleValue | MultiValue | SingleDatatype | MultiDatatype
+  ); 
+  
+   
+SingleValue:
+  	"id" value=ID
+  | "alternative" value=(ID|STRING)
+  |	"string" value=STRING;
+  
+MultiValue:
+  	"ids" value+=ID
+  | "alternatives" value+=(ID|STRING)
+  |	"strings" value+=STRING;
+  
+SingleDatatype returns SingleValue:
+  	"datatypeid" value=IdDatatype
+  | "datatypealternative" value=(IdDatatype|StringDatatype)
+  |	"datatypestring" value=StringDatatype;
+  
+MultiDatatype returns MultiValue:
+  	"datatypeids" value+=IdDatatype
+  | "datatypealternatives" value+=(IdDatatype|StringDatatype)
+  |	"datatypestrings" value+=StringDatatype;
+  
+IdDatatype: ID;
+
+StringDatatype: STRING;

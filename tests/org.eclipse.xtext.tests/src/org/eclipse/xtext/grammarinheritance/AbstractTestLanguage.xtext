@@ -1,0 +1,34 @@
+/*******************************************************************************
+ * Copyright (c) 2008, 2009 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+grammar org.eclipse.xtext.grammarinheritance.AbstractTestLanguage with org.eclipse.xtext.common.Terminals
+
+import "classpath:/org/eclipse/xtext/grammarinheritance/ametamodel.ecore" as mm
+
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+InheritedParserRule returns mm::AType:
+	'element' name=ID;
+	
+AbstractCallOverridenParserRule returns mm::AModel:
+	'overridemodel' (elements+=OverridableParserRule)*;
+	
+OverridableParserRule returns mm::AType :
+	'element' name=ID;
+	
+OverridableParserRule2 returns mm::AType :
+    'other element' name=STRING;
+
+AbstractCallExtendedParserRule returns mm::AModel:
+	'extendedmodel' (elements+=ExtendableParserRule)*;
+
+ExtendableParserRule returns mm::AType :
+	'element' name=ID;
+
+terminal REAL returns ecore::EDouble : INT '.' INT;
+
+terminal ID  		: ('^')?('a'..'z'|'A'..'Z'|'ö'|'ä'|'ü'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;

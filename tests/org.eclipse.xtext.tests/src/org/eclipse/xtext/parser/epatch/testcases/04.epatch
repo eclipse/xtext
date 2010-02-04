@@ -1,0 +1,13 @@
+epatch ADD_REFERENCE {
+  resource res0 {
+  left uri "SimpleMM1Instance1.xmi";
+  right uri "SimpleMM1Instance11.xmi";
+  }
+
+  object res0#/ {
+    reflist = [ | 2:ChildWithRef ];
+  }
+
+  object ChildWithRef res0#//@tree/@children.1
+
+}
