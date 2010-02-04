@@ -1,0 +1,2 @@
+import '02.importuritestlanguage'
+type Foo extends Bar

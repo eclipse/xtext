@@ -1,0 +1,106 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+grammar org.eclipse.xtext.parser.epatch.EpatchTestLanguage with org.eclipse.xtext.common.Terminals
+
+generate epatchTestLanguage "http://www.eclipse.org/2008/tmf/xtext/EpatchTestLanguage"
+
+EPatch:
+	"epatch" name=ID "{" imports+=Import* resources+=NamedResource* objects+=ObjectRef* "}";
+	
+Import:
+	ModelImport | JavaImport | ExtensionImport;
+		
+ModelImport:
+	ResourceImport | EPackageImport;
+	
+ResourceImport:
+	"import" name=ID "uri" uri=STRING;
+	
+EPackageImport:
+	"import" name=ID "ns" nsURI=STRING;
+	
+JavaImport:
+	"import" "java" path+=ID ("." path+=ID)*;
+	
+ExtensionImport:
+	"import" "extension" path+=ID ("::" path+=ID)*;
+	
+	
+NamedResource:
+	"resource" name=ID "{"
+		"left" ("uri" leftUri=STRING | leftRoot=CreatedObject) ";"
+		"right" ("uri" rightUri=STRING | rightRoot=CreatedObject) ";"
+	"}";
+	
+NamedObject: ObjectRef | CreatedObject; 
+	
+ObjectRef: 
+	"object" name=ID? (
+		(leftRes=[NamedResource] leftFrag=FRAGMENT) | 
+		("left" leftRes=[NamedResource] leftFrag=FRAGMENT "right" rightRes=[NamedResource] rightFrag=FRAGMENT)
+	) 
+	( "{"
+		(assignments+=BiSingleAssignment|assignments+=BiListAssignment)+
+		("left" leftMig=Migration)?
+		("right" rightMig=Migration)?
+	"}" )?;
+
+Assignment returns Assignment:
+	BiSingleAssignment | BiListAssignment | MonoSingleAssignment | MonoListAssignment;
+	
+BiSingleAssignment returns SingleAssignment:
+	feature=ID "=" leftValue=SingleAssignmentValue "|" rightValue=SingleAssignmentValue ";";
+	
+BiListAssignment returns ListAssignment:
+	feature=ID "=" "[" (leftValues+=ListAssignmentValue ("," leftValues+=ListAssignmentValue)*)? "|" (rightValues+=ListAssignmentValue ("," rightValues+=ListAssignmentValue)*)? "]" ";";
+	
+MonoSingleAssignment returns SingleAssignment:
+	feature=ID "=" leftValue=SingleAssignmentValue ";";
+	
+MonoListAssignment returns ListAssignment:
+	feature=ID "=" "[" (leftValues+=AssignmentValue ("," leftValues+=AssignmentValue)*)? "]" ";";
+	
+AssignmentValue returns AssignmentValue:
+	value=STRING | (refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?) | newObject=CreatedObject | (^import=[Import] impFrag=FRAGMENT);
+
+ListAssignmentValue returns AssignmentValue:
+	 index=INT ":" (("[" refIndex=INT "]") | value=STRING | (refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?) | newObject=CreatedObject | (^import=[Import] impFrag=FRAGMENT));
+	
+SingleAssignmentValue returns AssignmentValue:
+	 keyword="null" | value=STRING | (refObject=[NamedObject] ("." refFeature=ID ("[" refIndex=INT "]")?)?) | newObject=CreatedObject | (^import=[Import] impFrag=FRAGMENT);
+	
+CreatedObject: 
+	(ObjectNew|ObjectCopy) name=ID? ("{"
+		(assignments+=MonoSingleAssignment|assignments+=MonoListAssignment)+	
+		leftMig=Migration?
+	"}" )?; 
+
+ObjectNew:
+	"new" ^import=[Import] impFrag=FRAGMENT;
+	
+ObjectCopy:
+	"copy" resource=[NamedResource] fragment=FRAGMENT;
+	
+terminal FRAGMENT: 
+	'#' ('a'..'z'|'A'..'Z'|'0'..'9'|'_'|'/'|'['|']'|'{'|'}'|'.'|'@')+;
+	
+// ******************* migration *****************************
+  
+Migration:
+	"migrate" first=Executable? (("as" asOp=Executable) | ("each" eachOp=Executable))? ";";
+	
+Executable:
+	JavaExecutable | ExpressionExecutable;
+	
+JavaExecutable:
+	"java" method=ID "(" ")";
+	 
+ExpressionExecutable:
+	 exprstr=STRING; 
+  

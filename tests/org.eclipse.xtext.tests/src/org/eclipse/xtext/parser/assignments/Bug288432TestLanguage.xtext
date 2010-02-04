@@ -1,0 +1,40 @@
+/*******************************************************************************
+ * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *
+ *******************************************************************************/
+grammar org.eclipse.xtext.parser.assignments.Bug288432TestLanguage with org.eclipse.xtext.common.Terminals
+
+generate bug288432Test "http://www.eclipse.org/2008/tmf/xtext/Bug288432Test"
+
+Body :
+	('(' parameter+=(Parameter) (',' parameter+=(Parameter))* ')')?
+	'body'
+	content=(Content|ParameterRef)
+	(foo+=Foo)+
+	'end body';
+	
+Foo:
+	fooValue = STRING;
+	
+Content :
+	'content' MyElement 'end content' ;
+	
+MyElement :
+	'element' bar=(MyInt|ParameterRef);   
+	
+ParameterObject :
+	MyInt | Content | ParameterRef    ; 
+
+Parameter:
+	name=ID
+	(value=[ParameterObject])?;
+
+ParameterRef:
+	parameter=[Parameter];
+
+MyInt :
+	int=INT;
