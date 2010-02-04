@@ -1,6 +1,0 @@
-entity Person {
-  String name
-  Boolean isMale
-  Person father
-}
-datatype Boolean

@@ -1,3 +1,0 @@
-import "./OtherFile1.importuritestlanguage"
-
-type Foo extends Bar
