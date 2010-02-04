@@ -46,7 +46,6 @@ public final class WizardNewXtextProjectCreationPage extends WizardNewProjectCre
 	private Text extensionsField;
 	private Button generatorProjectField;
 	private Combo generatorConfigurationField;
-	private Object defaultConfigurationName;
 	
 	/**
 	 * Constructs a new WizardNewXtextProjectCreationPage.
@@ -58,10 +57,9 @@ public final class WizardNewXtextProjectCreationPage extends WizardNewProjectCre
 	 *            The current selection. If the current selection includes workingsets the workingsets field is
 	 *            initialized with the selection.
 	 */
-	public WizardNewXtextProjectCreationPage(String pageName, IStructuredSelection selection, String defaultConfigurationName) {
+	public WizardNewXtextProjectCreationPage(String pageName, IStructuredSelection selection) {
 		super(pageName);
 		this.selection = selection;
-		this.defaultConfigurationName = defaultConfigurationName;
 		setTitle(Messages.WizardNewXtextProjectCreationPage_WindowTitle);
 		setDescription(Messages.WizardNewXtextProjectCreationPage_Description);
 	}
@@ -109,10 +107,14 @@ public final class WizardNewXtextProjectCreationPage extends WizardNewProjectCre
 	}
 
 	private int indexOfDefault(List<String> contributions) {
-		int indexOf = contributions.indexOf(defaultConfigurationName);
+		int indexOf = contributions.indexOf(getDefaultConfigName());
 		return indexOf != -1 ? indexOf : 0;
 	}
 
+	protected String getDefaultConfigName() {
+		return "Standard";
+	}
+	
 	/**
 	 * Find the next available (default) DSL name
 	 */

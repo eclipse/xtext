@@ -7,33 +7,23 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.ecore2xtext;
 
-import java.util.ArrayList;
-import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
+import java.util.List;
 import java.util.Set;
 
-import org.apache.log4j.Logger;
-import org.eclipse.core.resources.IFile;
-import org.eclipse.emf.common.command.BasicCommandStack;
-import org.eclipse.emf.common.notify.AdapterFactory;
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.ecore.presentation.EcoreActionBarContributor;
-import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.edit.domain.AdapterFactoryEditingDomain;
-import org.eclipse.emf.edit.domain.EditingDomain;
-import org.eclipse.emf.edit.provider.ComposedAdapterFactory;
-import org.eclipse.emf.edit.provider.ReflectiveItemProviderAdapterFactory;
-import org.eclipse.emf.edit.provider.resource.ResourceItemProviderAdapterFactory;
 import org.eclipse.jface.dialogs.Dialog;
+import org.eclipse.jface.viewers.ComboViewer;
+import org.eclipse.jface.viewers.ISelection;
+import org.eclipse.jface.viewers.IStructuredContentProvider;
 import org.eclipse.jface.viewers.IStructuredSelection;
-import org.eclipse.jface.window.Window;
+import org.eclipse.jface.viewers.LabelProvider;
+import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.TableViewer;
+import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.wizard.WizardPage;
 import org.eclipse.swt.SWT;
 import org.eclipse.swt.custom.CCombo;
@@ -44,45 +34,27 @@ import org.eclipse.swt.layout.GridLayout;
 import org.eclipse.swt.widgets.Button;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Label;
-import org.eclipse.swt.widgets.List;
+
+import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
 public class WizardSelectImportedEPackagePage extends WizardPage {
 
-	private static final Logger LOG = Logger.getLogger(WizardSelectImportedEPackagePage.class);
+	private Set<EPackageInfo> ePackageInfos = new HashSet<EPackageInfo>();
 
-	private EditingDomain editingDomain;
+	private EPackageInfo defaultEPackageInfo;
 
-	private Set<EPackage> ePackagesForRules = new HashSet<EPackage>();
+	private ComboViewer rootElementComboViewer;
 
-	private IStructuredSelection selection;
-
-	private boolean isAutoImportCrossReferencedEPackages;
-
-	private CCombo rootElementComboBoxCellEditor;
-
-	private List importedEPackagesListBox;
-
-	private CCombo defaultPackageComboBoxCellEditor;
+	private TableViewer importedEPackagesViewer;
 
 	public WizardSelectImportedEPackagePage(String pageName, IStructuredSelection selection) {
 		super(pageName);
-		this.selection = selection;
 		setTitle(Messages.WizardSelectImportedEPackagePage_WindowTitle);
 		setDescription(Messages.WizardSelectImportedEPackagePage_Description);
-	}
-
-	private EditingDomain getEditingDomain() {
-		if (editingDomain == null) {
-			java.util.List<AdapterFactory> factories = new ArrayList<AdapterFactory>();
-			factories.add(new ResourceItemProviderAdapterFactory());
-			factories.add(new ReflectiveItemProviderAdapterFactory());
-			AdapterFactory adapterFactory = new ComposedAdapterFactory(factories);
-			editingDomain = new AdapterFactoryEditingDomain(adapterFactory, new BasicCommandStack());
-		}
-		return editingDomain;
 	}
 
 	public void createControl(Composite parent) {
@@ -91,23 +63,59 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		Label label = new Label(composite, SWT.NONE);
 		label.setText(Messages.WizardSelectImportedEPackagePage_ListTitle);
 		label.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 2, 1));
-		importedEPackagesListBox = new List(composite, SWT.MULTI);
-		importedEPackagesListBox.setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 2));
+		importedEPackagesViewer = new TableViewer(composite, SWT.NONE);
+		importedEPackagesViewer.getControl().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 3));
+		importedEPackagesViewer.setContentProvider(new IStructuredContentProvider() {
+			public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+			}
+
+			public void dispose() {
+			}
+
+			public Object[] getElements(Object inputElement) {
+				return Iterables.newArray(ePackageInfos, EPackageInfo.class);
+			}
+		});
+		importedEPackagesViewer.setLabelProvider(new LabelProvider() {
+			@Override
+			public String getText(Object element) {
+				if (element instanceof EPackageInfo) {
+					String label = ((EPackageInfo) element).getEPackageJavaFQN();
+					if (element == getDefaultEPackageInfo()) {
+						return label + Messages.WizardSelectImportedEPackagePage_DefaultMarker;
+					} else {
+						return label;
+					}
+				}
+				return element.toString();
+			}
+		});
 		Button addButton = new Button(composite, SWT.PUSH);
 		addButton.setText(Messages.WizardSelectImportedEPackagePage_AddButtonText);
 		addButton.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, false, false, 1, 1));
 		addButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				EcoreActionBarContributor.ExtendedLoadResourceAction.ExtendedLoadResourceDialog loadResourceDialog = new EcoreActionBarContributor.ExtendedLoadResourceAction.ExtendedLoadResourceDialog(
-						getShell(), editingDomain);
-				loadResourceDialog.setBlockOnOpen(true);
-				int result = loadResourceDialog.open();
-				if (result == Window.OK) {
-					for (URI uri : loadResourceDialog.getURIs()) {
-						addEPackages(uri);
+				addEPackageInfos(new EPackageChooser(getShell()).open());
+			}
+		});
+		Button defaultButton = new Button(composite, SWT.PUSH);
+		defaultButton.setText(Messages.WizardSelectImportedEPackagePage_SetDefault);
+		defaultButton.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
+		defaultButton.addSelectionListener(new SelectionAdapter() {
+			@Override
+			public void widgetSelected(SelectionEvent e) {
+				ISelection selection = importedEPackagesViewer.getSelection();
+				if (selection instanceof IStructuredSelection) {
+					IStructuredSelection structuredSelection = (IStructuredSelection) selection;
+					if (structuredSelection.size() == 1) {
+						Object firstElement = structuredSelection.getFirstElement();
+						if (firstElement instanceof EPackageInfo) {
+							defaultEPackageInfo = (EPackageInfo) firstElement;
+						}
 					}
 				}
+				updateUI();
 			}
 		});
 		Button removeButton = new Button(composite, SWT.PUSH);
@@ -116,190 +124,113 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		removeButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
-				for (String listSelection : importedEPackagesListBox.getSelection()) {
-					removeEPackage(listSelection);
-				}
-			}
-		});
-		final Button addReferencedEPackagesButton = new Button(composite, SWT.CHECK);
-		addReferencedEPackagesButton.setText(Messages.WizardSelectImportedEPackagePage_CheckButtonText);
-		addReferencedEPackagesButton.setSelection(isAutoImportCrossReferencedEPackages);
-		addReferencedEPackagesButton.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 2, 1));
-		addReferencedEPackagesButton.addSelectionListener(new SelectionAdapter() {
-			@Override
-			public void widgetSelected(SelectionEvent e) {
-				isAutoImportCrossReferencedEPackages = addReferencedEPackagesButton.getSelection();
-				if (isAutoImportCrossReferencedEPackages) {
-					for (EPackage ePackage : ePackagesForRules) {
-						addEPackage(ePackage);
+				ISelection selection = importedEPackagesViewer.getSelection();
+				if (selection instanceof IStructuredSelection) {
+					for (Iterator<?> i = ((IStructuredSelection) selection).iterator(); i.hasNext();) {
+						Object ePackageInfo = i.next();
+						ePackageInfos.remove(ePackageInfo);
+						if (defaultEPackageInfo == ePackageInfo) {
+							defaultEPackageInfo = null;
+						}
 					}
 				}
+				updateUI();
 			}
 		});
 		Label entryRuleLabel = new Label(composite, SWT.NONE);
 		entryRuleLabel.setText(Messages.WizardSelectImportedEPackagePage_entryRuleLabelText);
 		entryRuleLabel.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 2, 1));
-		rootElementComboBoxCellEditor = new CCombo(composite, SWT.BORDER | SWT.DROP_DOWN | SWT.READ_ONLY);
-		rootElementComboBoxCellEditor.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, false, 1, 1));
+		CCombo rootElementComboBoxCellEditor = new CCombo(composite, SWT.BORDER | SWT.DROP_DOWN | SWT.READ_ONLY);
+		GridData layoutData = new GridData(SWT.FILL, SWT.CENTER, true, false, 1, 1);
+		layoutData.heightHint = 20;
+		rootElementComboBoxCellEditor.setLayoutData(layoutData);
 		rootElementComboBoxCellEditor.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
 				validatePage();
 			}
 		});
-		Label defaultPackageLabel = new Label(composite, SWT.NONE);
-		defaultPackageLabel.setText("Default package:");
-		defaultPackageLabel.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 2, 1));
-		defaultPackageComboBoxCellEditor = new CCombo(composite, SWT.BORDER | SWT.DROP_DOWN | SWT.READ_ONLY);
-		defaultPackageComboBoxCellEditor.setLayoutData(new GridData(SWT.FILL, SWT.TOP, true, true, 1, 1));
-		initializeListFromSelection(selection);
+		rootElementComboViewer = new ComboViewer(rootElementComboBoxCellEditor);
+		rootElementComboViewer.setLabelProvider(new LabelProvider() {
+			@Override
+			public String getText(Object element) {
+				return (element instanceof EClass) ? ((EClass) element).getName() + " - "
+						+ ((EClass) element).getEPackage().getName() : super.getText(element);
+			}
+		});
+		rootElementComboViewer.setContentProvider(new IStructuredContentProvider() {
+			public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
+			}
+
+			public void dispose() {
+			}
+
+			public Object[] getElements(Object inputElement) {
+				Iterable<EClass> eClasses = Iterables.filter(Iterables.concat(Iterables.transform(ePackageInfos,
+						new Function<EPackageInfo, List<EClassifier>>() {
+							public List<EClassifier> apply(EPackageInfo from) {
+								return from.getEPackage().getEClassifiers();
+							}
+						})), EClass.class);
+				return Iterables.newArray(eClasses, EClass.class);
+			}
+		});
+		updateUI();
 		setControl(composite);
-		validatePage();
 		Dialog.applyDialogFont(getControl());
 	}
 
-	public java.util.Collection<EPackage> getEPackagesForRules() {
-		return ePackagesForRules;
+	public java.util.Collection<EPackageInfo> getEPackageInfos() {
+		return ePackageInfos;
 	}
 
-	private void addEPackages(URI uri) {
-		if ("http".equals(uri.scheme())) { //$NON-NLS-1$
-			EPackage ePackage = EPackage.Registry.INSTANCE.getEPackage(uri.toString());
-			if (ePackage != null) {
-				addEPackage(ePackage);
+	private void addEPackageInfos(List<EPackageInfo> newEPackageInfos) {
+		for (Iterator<EPackageInfo> i = newEPackageInfos.iterator(); i.hasNext();) {
+			EPackage newEPackage = i.next().getEPackage();
+			for (EPackageInfo ePackageInfo : ePackageInfos) {
+				EPackage ePackage = ePackageInfo.getEPackage();
+				if (ePackage.getNsURI().equals(newEPackage.getNsURI())) {
+					i.remove();
+					break;
+				}
+			}
+		}
+		ePackageInfos.addAll(newEPackageInfos);
+		updateUI();
+	}
+
+	private void updateUI() {
+		importedEPackagesViewer.setInput(ePackageInfos);
+		ISelection selection = rootElementComboViewer.getSelection();
+		rootElementComboViewer.setInput(ePackageInfos);
+		if (selection.isEmpty()) {
+			Object firstEClass = rootElementComboViewer.getElementAt(0);
+			if (firstEClass != null) {
+				rootElementComboViewer.setSelection(new StructuredSelection(firstEClass));
 			}
 		} else {
-			Resource resource = getEditingDomain().getResourceSet().getResource(uri, true);
-			for (EPackage ePackage : ePackagesInResource(resource)) {
-				addEPackage(ePackage);
-			}
+			rootElementComboViewer.setSelection(selection);
 		}
-	}
-
-	private void addEPackage(EPackage ePackage) {
-		addEPackageToUI(ePackage);
-		for (EClassifier classifier : ePackage.getEClassifiers()) {
-			if (classifier instanceof EClass) {
-				for (EStructuralFeature feature : ((EClass) classifier).getEAllStructuralFeatures()) {
-					if (isFeatureTypeNeedsEPackageImport(feature)) {
-						EPackage featurePackage = feature.getEType().getEPackage();
-						addEPackageToUI(featurePackage);
-					}
-					if (isAutoImportCrossReferencedEPackages) {
-						for (EClass superType : ((EClass) classifier).getESuperTypes()) {
-							EPackage superTypePackage = superType.getEPackage();
-							addEPackageToUI(superTypePackage);
-						}
-					}
-				}
-			}
-		}
-	}
-
-	private boolean isFeatureTypeNeedsEPackageImport(EStructuralFeature feature) {
-		return !feature.isDerived()
-				&& !feature.isTransient()
-				&& (isAutoImportCrossReferencedEPackages
-						|| (feature instanceof EReference && ((EReference) feature).isContainment()) || feature instanceof EAttribute);
-	}
-
-	private void addEPackageToUI(EPackage ePackage) {
-		if (ePackage != null) {
-			boolean isAdded = ePackagesForRules.add(ePackage);
-			if (isAdded) {
-				String nsURI = ePackage.getNsURI().toString();
-				importedEPackagesListBox.add(nsURI);
-				resetEClassesInUI();
-				defaultPackageComboBoxCellEditor.add(nsURI);
-			}
-			validatePage();
-		}
-	}
-
-	private void resetEClassesInUI() {
-		java.util.List<String> classNames = new ArrayList<String>();
-		for (EPackage ePackage : ePackagesForRules) {
-			for (EClassifier eClassifier : ePackage.getEClassifiers()) {
-				if (eClassifier instanceof EClass) {
-					classNames.add(eClassifier.getName());
-				}
-			}
-		}
-		rootElementComboBoxCellEditor.deselectAll();
-		Collections.sort(classNames);
-		rootElementComboBoxCellEditor.setItems(classNames.toArray(new String[classNames.size()]));
-	}
-
-	private void removeEPackage(String uri) {
-		for (Iterator<EPackage> i = ePackagesForRules.iterator(); i.hasNext();) {
-			EPackage ePackage = i.next();
-			if (ePackage.getNsURI().equals(uri)) {
-				i.remove();
-				importedEPackagesListBox.remove(uri);
-				defaultPackageComboBoxCellEditor.remove(uri);
-			}
-		}
+		importedEPackagesViewer.refresh();
 		validatePage();
 	}
 
-	@SuppressWarnings("rawtypes")
-	private void initializeListFromSelection(IStructuredSelection selection) {
-		for (Iterator i = selection.iterator(); i.hasNext();) {
-			Object selectedObject = i.next();
-			if (selectedObject instanceof IFile) {
-				IFile ecoreFile = (IFile) selectedObject;
-				try {
-					addEPackages(URI.createPlatformResourceURI(ecoreFile.getFullPath().toString(), true));
-				} catch (Exception exc) {
-					LOG.error("Error adding EPackage from file", exc); //$NON-NLS-1$
-				}
-			}
-		}
-	}
-
-	@SuppressWarnings("rawtypes")
-	private java.util.List<EPackage> ePackagesInResource(Resource resource) {
-		java.util.List<EPackage> result = null;
-		for (Iterator i = resource.getAllContents(); i.hasNext();) {
-			Object object = i.next();
-			if (object instanceof EPackage) {
-				if (result == null) {
-					result = new ArrayList<EPackage>();
-				}
-				result.add((EPackage) object);
-			}
-		}
-		return (result == null) ? Collections.<EPackage> emptyList() : result;
-	}
-
 	private void validatePage() {
-		setPageComplete(!ePackagesForRules.isEmpty() && getRootElementClass() != null);
+		setPageComplete(!ePackageInfos.isEmpty() && getRootElementClass() != null);
 	}
 
 	public EClass getRootElementClass() {
-		int selectionIndex = rootElementComboBoxCellEditor.getSelectionIndex();
-		if (selectionIndex != -1) {
-			String selectedEClass = rootElementComboBoxCellEditor.getItem(selectionIndex);
-			for (EPackage ePackage : ePackagesForRules) {
-				EClassifier eClassifier = ePackage.getEClassifier(selectedEClass);
-				if (eClassifier instanceof EClass) {
-					return (EClass) eClassifier;
-				}
-			}
+		ISelection selection = rootElementComboViewer.getSelection();
+		if (selection instanceof IStructuredSelection) {
+			return (EClass) ((IStructuredSelection) selection).getFirstElement();
 		}
 		return null;
 	}
 
-	public EPackage getDefaultEPackage() {
-		int selectionIndex = defaultPackageComboBoxCellEditor.getSelectionIndex();
-		if(selectionIndex != -1) {
-			String defaultEPackageURI = defaultPackageComboBoxCellEditor.getItem(selectionIndex);
-			for(EPackage ePackage: ePackagesForRules) {
-				if(ePackage.getNsURI().equals(defaultEPackageURI)) {
-					return ePackage;
-				}
-			}
+	public EPackageInfo getDefaultEPackageInfo() {
+		if (defaultEPackageInfo == null && !ePackageInfos.isEmpty()) {
+			defaultEPackageInfo = ePackageInfos.iterator().next();
 		}
-		return null;
+		return defaultEPackageInfo;
 	}
 }

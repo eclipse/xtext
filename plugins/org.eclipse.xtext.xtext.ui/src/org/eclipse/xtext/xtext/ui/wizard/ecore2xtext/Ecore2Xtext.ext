@@ -10,11 +10,12 @@ import org::eclipse::emf::ecore;
 import org::eclipse::xtext::xtext::ui::wizard::project;
 import org::eclipse::xtext::xtext::ui::wizard::ecore2xtext;
 
-Collection[EPackage] allImportedEPackages(Ecore2XtextProjectInfo this) :
-	EPackagesForRules.allReferencedEPackages(true).flatten().toSet();
 
 Collection[EClassifier] allRuleClassifiers(Ecore2XtextProjectInfo this) :
-	EPackagesForRules.allReferencedClassifiers(false).flatten().toSet();
+	EPackageInfos.EPackage.allReferencedClassifiers(false).flatten().toSet();
+
+Collection[EPackage] missingReferencedEPackages(Collection[EPackage] this) :
+	allReferencedEPackages(true).flatten().toSet().removeAll(this);
 
 private Collection[EPackage] allReferencedEPackages(EPackage this, boolean includeCrossRefs) :	
 	allReferencedClassifiers(includeCrossRefs).EPackage.toSet();
@@ -31,8 +32,8 @@ String importURI(EPackage this) :
 fqn(EClassifier this):
 	(EPackage.uniqueName() == null)? name : EPackage.uniqueName() + "::" + name;
 	
-Void resetUniqueNames(EPackage defaultPackage):
-	 JAVA org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.clearUniqueNames(org.eclipse.emf.ecore.EPackage);
+Void resetUniqueNames(EPackageInfo defaultPackageInfo):
+	 JAVA org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.clearUniqueNames(org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.EPackageInfo);
 
 String uniqueName(ENamedElement this):
 	 JAVA org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.uniqueName(org.eclipse.emf.ecore.ENamedElement);

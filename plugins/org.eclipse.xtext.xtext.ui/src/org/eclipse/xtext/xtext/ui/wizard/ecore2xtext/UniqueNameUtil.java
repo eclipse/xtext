@@ -47,9 +47,11 @@ public class UniqueNameUtil {
 		return uniqueName;
 	}
 
-	public static void clearUniqueNames(EPackage defaultPackage) {
+	public static void clearUniqueNames(EPackageInfo defaultPackageInfo) {
 		element2uniqueName.clear();
-		element2uniqueName.put(defaultPackage, null);
+		if (defaultPackageInfo != null) {
+			element2uniqueName.put(defaultPackageInfo.getEPackage(), null);
+		}
 	}
 
 	public static String importURI(EPackage ePackage) {
@@ -57,14 +59,14 @@ public class UniqueNameUtil {
 		if (resource != null) {
 			URI uri = resource.getURI();
 			if (uri != null) {
-				if(!Strings.equal(uri.scheme(), URI.createURI(ePackage.getNsURI()).scheme())) {
+				if (!Strings.equal(uri.scheme(), URI.createURI(ePackage.getNsURI()).scheme())) {
 					return resource.getURI().toString();
 				}
 			}
 		}
 		return ePackage.getNsURI();
 	}
-	
+
 	public static EClassifier eString() {
 		return EcorePackage.eINSTANCE.getEString();
 	}

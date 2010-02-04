@@ -10,6 +10,7 @@ package org.eclipse.xtext.xtext.ui.wizard.project;
 
 import java.lang.reflect.InvocationTargetException;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashSet;
 import java.util.List;
@@ -98,10 +99,8 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 				"org.eclipse.ui.editors;bundle-version=\"3.5.0\"", //$NON-NLS-1$
 				"org.eclipse.ui.ide;bundle-version=\"3.5.0\"")); //$NON-NLS-1$
 
-		String templateName = pathToTemplates() + "DslUiProject::main"; //$NON-NLS-1$
-
 		return createProject(getXtextProjectInfo(), projectName, DSL_UI_PROJECT_NATURES, requiredBundles, 
-				Collections.singletonList("org.apache.log4j"), SRC_FOLDER_LIST, templateName, monitor);
+				Collections.singletonList("org.apache.log4j"), SRC_FOLDER_LIST, getDslUiProjectTemplateName(), monitor);
 	}
 
 	private IProject createDslProject(final IProgressMonitor monitor) throws CoreException {
@@ -121,10 +120,12 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 		for (String bundleId : bundles) {
 			requiredBundles.add(bundleId.trim() + ";resolution:=optional"); //$NON-NLS-1$
 		}
+		for(String bundleId: getAdditionalRequiredBundles()) {
+			requiredBundles.add(bundleId.trim());
+		}
 
-		String templateName = pathToTemplates() + "DslProject::main"; //$NON-NLS-1$
 		return createProject(getXtextProjectInfo(), projectName, DSL_PROJECT_NATURES, requiredBundles, 
-				Collections.singletonList("org.apache.log4j"), SRC_FOLDER_LIST, templateName, monitor);
+				Collections.singletonList("org.apache.log4j"), SRC_FOLDER_LIST, getDslProjectTemplateName(), monitor);
 	}
 
 	private IProject createGeneratorProject(final IProgressMonitor monitor) throws CoreException {
@@ -139,10 +140,8 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 				"org.eclipse.emf.mwe.utils;visibility:=reexport",//$NON-NLS-1$
 				"org.eclipse.xtend.typesystem.emf;visibility:=reexport")); //$NON-NLS-1$
 
-		String templateName = pathToTemplates() + "GeneratorProject::main"; //$NON-NLS-1$
-
 		return createProject(getXtextProjectInfo(), projectName, GENERATOR_PROJECT_NATURES, requiredBundles,
-				Collections.singletonList("org.apache.log4j"), SRC_FOLDER_LIST, templateName, monitor);
+				Collections.singletonList("org.apache.log4j"), SRC_FOLDER_LIST, getGeneratorProjectTemplateName(), monitor);
 	}
 
 	private IProject createProject(XtextProjectInfo xtextProjectInfo, String projectName, String[] projectNatures,
@@ -183,6 +182,22 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 
 	private String pathToTemplates() {
 		return "org::eclipse::xtext::xtext::ui::wizard::project::"; //$NON-NLS-1$
+	}
+
+	protected String getDslProjectTemplateName() {
+		return pathToTemplates() + "DslProject::main";
+	}
+
+	protected String getDslUiProjectTemplateName() {
+		return pathToTemplates() + "DslUiProject::main";
+	}
+
+	protected String getGeneratorProjectTemplateName() {
+		return pathToTemplates() + "GeneratorProject::main";
+	}
+	
+	protected Collection<String> getAdditionalRequiredBundles() {
+		return Collections.emptyList();
 	}
 
 }

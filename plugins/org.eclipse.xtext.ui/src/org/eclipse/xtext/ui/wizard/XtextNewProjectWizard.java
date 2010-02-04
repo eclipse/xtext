@@ -20,8 +20,6 @@ import org.eclipse.ui.INewWizard;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.xtext.ui.util.EclipseResourceUtil;
 
-import com.google.inject.Inject;
-
 /**
  * @author Peter Friese - Initial contribution and API
  */
@@ -31,8 +29,9 @@ public abstract class XtextNewProjectWizard extends Wizard implements INewWizard
 
 	protected IStructuredSelection selection;
 
-	public XtextNewProjectWizard() {
+	public XtextNewProjectWizard(IProjectCreator creator) {
 		super();
+		this.creator = creator;
 		setNeedsProgressMonitor(true);
 	}
 
@@ -68,7 +67,6 @@ public abstract class XtextNewProjectWizard extends Wizard implements INewWizard
 		return true;
 	}
 
-	@Inject
 	private IProjectCreator creator;
 
 	private IWorkbench workbench;
