@@ -55,21 +55,24 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 	protected void addFoldingRegions(IXtextDocument xtextDocument, EObject eObject, List<IFoldingRegion> foldingRegions) {
 		Assert.isNotNull(eObject, "parameter 'eObject' must not be null");
 		CompositeNode compositeNode = getCompositeNode(eObject);
-		Position position = getPosition(xtextDocument, compositeNode);
-		if (position != null) {
-			List<IFoldingRegion> newFoldingRegions = createFoldingRegions(eObject,position);
-			Assert.isNotNull(newFoldingRegions, "'newFoldingRegions' must not be null");
-			foldingRegions.addAll(newFoldingRegions);
-		} else {
-			if (log.isDebugEnabled()) {
-				log.debug("No position for eObject '"+eObject+"' with compositeNode '"+compositeNode+"' provided");
+		if (compositeNode != null) {
+			Position position = getPosition(xtextDocument, compositeNode);
+			if (position != null) {
+				List<IFoldingRegion> newFoldingRegions = createFoldingRegions(eObject, position);
+				Assert.isNotNull(newFoldingRegions, "'newFoldingRegions' must not be null");
+				foldingRegions.addAll(newFoldingRegions);
+			} else {
+				if (log.isDebugEnabled()) {
+					log.debug("No position for eObject '" + eObject + "' with compositeNode '" + compositeNode
+							+ "' provided");
+				}
 			}
 		}
 	}
 
 	protected CompositeNode getCompositeNode(EObject eObject) {
 		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(eObject);
-		return nodeAdapter.getParserNode();
+		return nodeAdapter != null ? nodeAdapter.getParserNode() : null;
 	}
 
 	protected Position getPosition(IXtextDocument xtextDocument, CompositeNode compositeNode) {
@@ -103,8 +106,8 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 	protected IFoldingRegion newFoldingRegion(EObject eObject, Position position) {
 		return new DefaultFoldingRegion(position);
 	}
-	
-	protected IFoldingRegion newFoldingRegion(EObject eObject, Position position,StyledString styledString) {
-		return new DefaultFoldingRegion(position,styledString);
+
+	protected IFoldingRegion newFoldingRegion(EObject eObject, Position position, StyledString styledString) {
+		return new DefaultFoldingRegion(position, styledString);
 	}
 }
