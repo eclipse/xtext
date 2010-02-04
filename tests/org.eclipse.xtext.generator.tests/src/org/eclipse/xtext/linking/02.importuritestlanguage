@@ -1,2 +1,0 @@
-import '01.importuritestlanguage'
-type Zonk extends Foo
