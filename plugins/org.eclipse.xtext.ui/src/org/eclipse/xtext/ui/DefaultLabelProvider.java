@@ -150,7 +150,7 @@ public class DefaultLabelProvider extends SimpleLabelProvider {
 			if (xtextTextStyle.getFontData() == null
 					&& xtextTextStyle.getStyle() != org.eclipse.xtext.ui.editor.utils.TextStyle.DEFAULT_FONT_STYLE) {
 				FontData fontData = new FontData();
-				fontData.style = xtextTextStyle.getStyle();
+				fontData.setStyle(xtextTextStyle.getStyle());
 				xtextTextStyle.setFontData(fontData);
 			}
 			textStyle.font = fontFromFontData(xtextTextStyle.getFontData());
