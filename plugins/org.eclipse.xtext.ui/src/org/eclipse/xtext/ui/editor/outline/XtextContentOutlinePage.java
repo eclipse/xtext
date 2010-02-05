@@ -21,6 +21,7 @@ import org.eclipse.jface.resource.LocalResourceManager;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.StyledString;
@@ -77,6 +78,26 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 	static final Logger logger = Logger.getLogger(XtextContentOutlinePage.class);
 
 	/**
+	 * The label provider implements the interface {@link ILabelProvider}, because the 
+	 * default sorter will use the plain text of the label to compare two items.
+	 * @author Sebastian Zarnekow - Initial contribution and API
+	 */
+	protected static class LabelProvidingDelegatingStyledCellLabelProvider extends DelegatingStyledCellLabelProvider implements ILabelProvider {
+
+		public LabelProvidingDelegatingStyledCellLabelProvider(IStyledLabelProvider labelProvider) {
+			super(labelProvider);
+		}
+
+		public String getText(Object element) {
+			StyledString styledText = getStyledText(element);
+			if (styledText != null)
+				return styledText.getString();
+			return null;
+		}
+		
+	}
+	
+	/**
 	 * @author Michael Clay - Initial contribution and API
 	 */
 	protected static class ContentOutlineNodeStyledLabelProvider extends StyledLabelProviderAdapter {
@@ -84,12 +105,11 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 
 		@Override
 		public StyledString getStyledText(Object element) {
-			StyledString styledString = new StyledString();
 			if (element instanceof ContentOutlineNode) {
 				ContentOutlineNode contentOutlineNode = (ContentOutlineNode) element;
-				styledString = contentOutlineNode.getStyledString();
+				return contentOutlineNode.getStyledString();
 			}
-			return styledString;
+			return null;
 		}
 
 		@Override
@@ -115,6 +135,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 			super.dispose();
 			resourceManager.dispose();
 		}
+
 	}
 	
 	@Inject
@@ -137,11 +158,16 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 	private Menu contextMenu;
 	private static final String contextMenuID = "xtextOutlineContextMenu";
 
-	private ViewerSorter sorter = new TreePathViewerSorter();
+	private ViewerSorter sorter;
 
 	public XtextContentOutlinePage() {
+		sorter = createSorter();
 	}
 
+	protected ViewerSorter createSorter() {
+		return new TreePathViewerSorter();
+	}
+	
 	@Override
 	public void createControl(Composite parent) {
 		super.createControl(parent);
@@ -177,7 +203,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 	protected void configureProviders() {
 		Assert.isNotNull(provider, "No ILazyTreeProvider available. Dependency injection broken?");
 		getTreeViewer().setContentProvider(provider);
-		getTreeViewer().setLabelProvider(new DelegatingStyledCellLabelProvider(getStyledLabelProvider()));
+		getTreeViewer().setLabelProvider(new LabelProvidingDelegatingStyledCellLabelProvider(getStyledLabelProvider()));
 	}
 
 	protected IStyledLabelProvider getStyledLabelProvider() {
