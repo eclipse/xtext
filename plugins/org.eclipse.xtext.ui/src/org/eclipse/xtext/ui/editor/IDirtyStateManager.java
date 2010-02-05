@@ -45,7 +45,7 @@ public interface IDirtyStateManager extends IExternalContentSupport.IExternalCon
 	
 	/**
 	 * Mark the given dirty resource as unmanaged. This method may be called even if
-	 * manageDirtyState has not been called before. Another dirty resources with the
+	 * manageDirtyState has not been called before. Another dirty resource with the
 	 * same {@link URI} will not become unmanaged. A call to this method will raise an event.
 	 * @see #announceDirtyStateChanged(IDirtyResource)
 	 */

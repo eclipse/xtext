@@ -12,7 +12,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 
 /**
  * Representation of a resource that is currently edited. The accessible 
- * values may represent a cached, intermediate state of the resource. The 
+ * values may represent a cached, intermediate state of the resource. They 
  * are not necessarily a live view on the underlying resource. 
  * @author Sebastian Zarnekow - Initial contribution and API
  */
