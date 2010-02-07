@@ -234,7 +234,7 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		dirtyStateSupport.modelChanged(resource);
 		assertTrue(dirtyStateManager.hasContent(resourceURI));
 	}
-	
+
 	public void testModelChanged_02() {
 		ignoreConcurrentEditing.add(Boolean.TRUE);
 		dirtyStateManager.manageDirtyState(this);
@@ -266,6 +266,21 @@ public class DirtyStateEditorSupportTest extends AbstractDocumentSimulatingTest
 		dirtyStateSupport.modelChanged(resource);
 		assertTrue(dirtyStateManager.hasContent(resourceURI));
 		assertEquals(getContents(), dirtyStateManager.getContent(resourceURI));
+	}
+	
+	public void testModelChanged_05() {
+		dirtyStateSupport.initializeDirtyStateSupport(this);
+		resource.setTrackingModification(true);
+		dirtyStateSupport.modelChanged(resource);
+		assertFalse(dirtyStateManager.hasContent(resourceURI));
+	}
+	
+	public void testModelChanged_06() {
+		dirtyStateSupport.initializeDirtyStateSupport(this);
+		resource.setTrackingModification(true);
+		resource.setModified(true);
+		dirtyStateSupport.modelChanged(resource);
+		assertTrue(dirtyStateManager.hasContent(resourceURI));
 	}
 	
 	public void addVerifyListener(VerifyListener listener) {
