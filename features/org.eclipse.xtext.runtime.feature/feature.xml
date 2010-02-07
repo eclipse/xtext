@@ -152,7 +152,7 @@ This Agreement is governed by the laws of the State of New York and the intellec
          id="org.apache.log4j"
          download-size="0"
          install-size="0"
-         version="1.2.15"
+         version="1.2.15.v200910021404"
          unpack="false"/>
 
    <plugin
