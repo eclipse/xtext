@@ -15,13 +15,18 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.Action;
+import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.resource.XtextResource;
@@ -418,7 +423,7 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
 	}
 	
-	public void testBug_285605_01() throws Exception {
+	public void testLeftRecursion_Bug_285605_01() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -432,7 +437,7 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testBug_285605_02() throws Exception {
+	public void testLeftRecursion_Bug_285605_02() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -447,7 +452,7 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testBug_285605_03() throws Exception {
+	public void testLeftRecursion_Bug_285605_03() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -463,7 +468,7 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testBug_285605_04() throws Exception {
+	public void testLeftRecursion_Bug_285605_04() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -479,7 +484,7 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testBug_285605_05() throws Exception {
+	public void testLeftRecursion_Bug_285605_05() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -495,7 +500,7 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testBug_285605_06() throws Exception {
+	public void testLeftRecursion_Bug_285605_06() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -511,7 +516,7 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testBug_285605_07() throws Exception {
+	public void testLeftRecursion_Bug_285605_07() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -527,7 +532,7 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testBug_285605_08() throws Exception {
+	public void testLeftRecursion_Bug_285605_08() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -543,7 +548,7 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
 	}
 	
-	public void testBug_285605_09() throws Exception {
+	public void testLeftRecursion_Bug_285605_09() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -559,7 +564,7 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
 	}
 	
-	public void testBug_285605_10() throws Exception {
+	public void testLeftRecursion_Bug_285605_10() throws Exception {
 		XtextResource resource = getResourceFromString(
 				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
 				"generate foo 'http://foo/bar'\n" +
@@ -573,7 +578,135 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		assertEquals(diag.getSeverity(), Diagnostic.OK);
 		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
 	}
+	
+	public void testLeftRecursion_Bug_285605_11() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate foo 'http://foo/bar'\n" +
+				"RuleA : ruleB=RuleB;\n" +
+				"RuleB : ruleC=RuleC;\n" +
+				"RuleC : ruleA=RuleA & ruleB=RuleB;\n");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
 
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 6, diag.getChildren().size());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+	
+	public void testLeftRecursion_Bug_285605_12() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate foo 'http://foo/bar'\n" +
+				"RuleA : ruleB=RuleB;\n" +
+				"RuleB : ruleC=RuleC;\n" +
+				"RuleC : '_'?  ( ( '__' & ruleA+=RuleA )* '___')? name=ID;\n");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 4, diag.getChildren().size());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+	
+	public void testLeftRecursion_Bug_285605_13() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate foo 'http://foo/bar'\n" +
+				"RuleA : ruleB=RuleB;\n" +
+				"RuleB : ruleC=RuleC;\n" +
+				"RuleC : (ruleA+=RuleA & '_')* name=ID;\n");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 4, diag.getChildren().size());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+	
+	public void testLeftRecursion_Bug_285605_14() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate foo 'http://foo/bar'\n" +
+				"RuleA : ruleB=RuleB;\n" +
+				"RuleB : ruleC=RuleC;\n" +
+				"RuleC : (name=ID? & value=STRING?) ruleA=RuleA;\n");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 4, diag.getChildren().size());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+	
+	public void testLeftRecursion_Bug_285605_15() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate foo 'http://foo/bar'\n" +
+				"RuleA : ruleB=RuleB;\n" +
+				"RuleB : ruleC=RuleC;\n" +
+				"RuleC : (name=ID & value=STRING)? ruleA=RuleA;\n");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getChildren().toString(), 4, diag.getChildren().size());
+		assertEquals("diag.isError", diag.getSeverity(), Diagnostic.ERROR);
+	}
+	
+	public void testLeftRecursion_Bug_285605_16() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate foo 'http://foo/bar'\n" +
+				"RuleA : ruleB=RuleB;\n" +
+				"RuleB : ruleC=RuleC;\n" +
+				"RuleC : (name=ID & value=STRING) ruleA=RuleA;\n");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.getSeverity(), Diagnostic.OK);
+		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
+	}
+
+	public void testLeftRecursion_Bug_285605_17() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate foo 'http://foo/bar'\n" +
+				"RuleA : ruleB=RuleB;\n" +
+				"RuleB : ruleC=RuleC;\n" +
+				"RuleC : (name=ID? & value=STRING) ruleA=RuleA;\n");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.toString(), diag.getSeverity(), Diagnostic.OK);
+		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
+	}
+	
+	public void testLeftRecursion_Bug_285605_18() throws Exception {
+		XtextResource resource = getResourceFromString(
+				"grammar org.foo.Bar with org.eclipse.xtext.common.Terminals\n" +
+				"generate foo 'http://foo/bar'\n" +
+				"RuleA : ruleB=RuleB;\n" +
+				"RuleB : ruleC=RuleC;\n" +
+				"RuleC : (name=ID & value=STRING?) ruleA=RuleA;\n");
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
+
+		Diagnostic diag = Diagnostician.INSTANCE.validate(resource.getContents().get(0));
+		assertNotNull("diag", diag);
+		assertEquals(diag.toString(), diag.getSeverity(), Diagnostic.OK);
+		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
+	}
+	
 	public void testBug_286683() throws Exception {
 		XtextResource resource = getResourceFromString("grammar org.xtext.example.MyDsl with org.xtext.example.MyDsl\n"+
 				"generate myDsl 'http://www.xtext.org/example/MyDsl'\n"+
@@ -637,6 +770,93 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(null, false, false);
 		validator.setMessageAcceptor(messageAcceptor);
 		validator.checkCrossReferenceTerminal(reference);
+		messageAcceptor.validate();
+	}
+	
+	public void testCheckActionInUnorderedGroup_01() throws Exception {
+		XtextValidator validator = get(XtextValidator.class);
+		UnorderedGroup unorderedGroup = XtextFactory.eINSTANCE.createUnorderedGroup();
+		Action action = XtextFactory.eINSTANCE.createAction();
+		unorderedGroup.getElements().add(action);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(action, true, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkActionInUnorderedGroup(action);
+		messageAcceptor.validate();
+	}
+	
+	public void testCheckRuleCallInUnorderedGroup_01() throws Exception {
+		XtextValidator validator = get(XtextValidator.class);
+		UnorderedGroup unorderedGroup = XtextFactory.eINSTANCE.createUnorderedGroup();
+		RuleCall ruleCall = XtextFactory.eINSTANCE.createRuleCall();
+		TypeRef typeRef = XtextFactory.eINSTANCE.createTypeRef();
+		typeRef.setClassifier(EcorePackage.Literals.EOBJECT);
+		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
+		parserRule.setType(typeRef);
+		ruleCall.setRule(parserRule);
+		unorderedGroup.getElements().add(ruleCall);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(ruleCall, true, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkRuleCallInUnorderedGroup(ruleCall);
+		messageAcceptor.validate();
+	}
+	
+	public void testCheckRuleCallInUnorderedGroup_02() throws Exception {
+		XtextValidator validator = get(XtextValidator.class);
+		UnorderedGroup unorderedGroup = XtextFactory.eINSTANCE.createUnorderedGroup();
+		RuleCall ruleCall = XtextFactory.eINSTANCE.createRuleCall();
+		TypeRef typeRef = XtextFactory.eINSTANCE.createTypeRef();
+		typeRef.setClassifier(EcorePackage.Literals.EBIG_DECIMAL);
+		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
+		parserRule.setType(typeRef);
+		ruleCall.setRule(parserRule);
+		unorderedGroup.getElements().add(ruleCall);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(ruleCall, false, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkRuleCallInUnorderedGroup(ruleCall);
+		messageAcceptor.validate();
+	}
+	
+	public void testCheckRuleCallInUnorderedGroup_03() throws Exception {
+		XtextValidator validator = get(XtextValidator.class);
+		UnorderedGroup unorderedGroup = XtextFactory.eINSTANCE.createUnorderedGroup();
+		RuleCall ruleCall = XtextFactory.eINSTANCE.createRuleCall();
+		EnumRule enumRule = XtextFactory.eINSTANCE.createEnumRule();
+		ruleCall.setRule(enumRule);
+		unorderedGroup.getElements().add(ruleCall);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(ruleCall, false, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkRuleCallInUnorderedGroup(ruleCall);
+		messageAcceptor.validate();
+	}
+	
+	public void testCheckRuleCallInUnorderedGroup_04() throws Exception {
+		XtextValidator validator = get(XtextValidator.class);
+		UnorderedGroup unorderedGroup = XtextFactory.eINSTANCE.createUnorderedGroup();
+		RuleCall ruleCall = XtextFactory.eINSTANCE.createRuleCall();
+		TerminalRule terminalRule = XtextFactory.eINSTANCE.createTerminalRule();
+		ruleCall.setRule(terminalRule);
+		unorderedGroup.getElements().add(ruleCall);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(ruleCall, false, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkRuleCallInUnorderedGroup(ruleCall);
+		messageAcceptor.validate();
+	}
+
+	public void testCheckRuleCallInUnorderedGroup_05() throws Exception {
+		XtextValidator validator = get(XtextValidator.class);
+		UnorderedGroup unorderedGroup = XtextFactory.eINSTANCE.createUnorderedGroup();
+		RuleCall ruleCall = XtextFactory.eINSTANCE.createRuleCall();
+		TypeRef typeRef = XtextFactory.eINSTANCE.createTypeRef();
+		typeRef.setClassifier(EcorePackage.Literals.EOBJECT);
+		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
+		parserRule.setType(typeRef);
+		ruleCall.setRule(parserRule);
+		Assignment assignment = XtextFactory.eINSTANCE.createAssignment();
+		assignment.setTerminal(ruleCall);
+		unorderedGroup.getElements().add(assignment);
+		ValidatingMessageAcceptor messageAcceptor = new ValidatingMessageAcceptor(ruleCall, false, false);
+		validator.setMessageAcceptor(messageAcceptor);
+		validator.checkRuleCallInUnorderedGroup(ruleCall);
 		messageAcceptor.validate();
 	}
 	

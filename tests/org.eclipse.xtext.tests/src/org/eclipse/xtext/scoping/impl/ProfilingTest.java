@@ -24,7 +24,8 @@ public class ProfilingTest extends AbstractXtextTests {
 	public void testSimple() throws Exception {
 		with(new IndexTestLanguageStandaloneSetup());
 		long now = System.currentTimeMillis();
-		XtextResource resource = getResource(new StringInputStream(generateFile(1000)));
+//		XtextResource resource = getResource(new StringInputStream(generateFile(1000)));
+		XtextResource resource = getResource(new StringInputStream(generateFile(10)));
 		long after = System.currentTimeMillis();
 		System.out.println("loading took "+(after-now));
 		now = System.currentTimeMillis();

@@ -23,6 +23,7 @@ import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.ui.LexerUIBindings;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ObservableXtextTokenStream.StreamListener;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
@@ -182,6 +183,8 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 	private Collection<AbstractElement> getElementsToParse(AbstractElement root) {
 		if (root instanceof Alternatives)
 			return ((Alternatives) root).getGroups();
+		if (root instanceof UnorderedGroup)
+			return ((UnorderedGroup) root).getElements();
 		return Collections.singleton(root);
 	}
 

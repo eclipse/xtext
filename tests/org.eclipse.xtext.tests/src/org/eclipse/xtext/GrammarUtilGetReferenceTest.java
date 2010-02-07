@@ -106,5 +106,34 @@ public class GrammarUtilGetReferenceTest extends AbstractXtextTests {
 		assertEquals("model2", reference.getName());
 		assertEquals("SubModel2", reference.getEContainingClass().getName());
 	}
+	
+	public void testGetReference_07() throws Exception {
+		String grammarAsString = "grammar foo.bar with org.eclipse.xtext.common.Terminals\n" +
+			"generate test 'http://test'\n" +
+			"Model: model1=[Model] & model2=[Model|STRING];";
+		Grammar grammar = (Grammar) getModel(grammarAsString);
+		AbstractRule ruleModel = grammar.getRules().get(0);
+		UnorderedGroup group = (UnorderedGroup) ruleModel.getAlternatives();
+		Assignment assignment = (Assignment) group.getElements().get(0);
+		CrossReference crossRef = (CrossReference) assignment.getTerminal();
+		EReference reference = GrammarUtil.getReference(crossRef);
+		assertEquals("model1", reference.getName());
+		assertEquals("Model", reference.getEContainingClass().getName());
+	}
+
+	public void testGetReference_08() throws Exception {
+		String grammarAsString = "grammar foo.bar with org.eclipse.xtext.common.Terminals\n" +
+			"generate test 'http://test'\n" +
+			"Model: {SubModel} (model1=[Model] & model2=[Model|STRING]);";
+		Grammar grammar = (Grammar) getModel(grammarAsString);
+		AbstractRule ruleModel = grammar.getRules().get(0);
+		Group group = (Group) ruleModel.getAlternatives();
+		UnorderedGroup unorderedGroup = (UnorderedGroup) group.getTokens().get(1);
+		Assignment assignment = (Assignment) unorderedGroup.getElements().get(1);
+		CrossReference crossRef = (CrossReference) assignment.getTerminal();
+		EReference reference = GrammarUtil.getReference(crossRef);
+		assertEquals("model2", reference.getName());
+		assertEquals("SubModel", reference.getEContainingClass().getName());
+	}
 
 }

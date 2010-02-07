@@ -24,6 +24,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.UntilToken;
 import org.eclipse.xtext.Wildcard;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -122,6 +123,10 @@ public class XtextLabelProvider extends DefaultLabelProvider {
 
 	String text(Alternatives object) {
 		return "|";
+	}
+	
+	String text(UnorderedGroup object) {
+		return "&";
 	}
 
 	String text(CharacterRange object) {

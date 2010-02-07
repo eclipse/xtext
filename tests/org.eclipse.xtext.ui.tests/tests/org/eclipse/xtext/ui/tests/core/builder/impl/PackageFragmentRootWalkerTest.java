@@ -29,8 +29,8 @@ public class PackageFragmentRootWalkerTest extends TestCase {
 	
 	@Override
 	protected void tearDown() throws Exception {
-		super.tearDown();
 		IResourcesSetupUtil.cleanWorkspace();
+		super.tearDown();
 	}
 	
 	public void testTraversePackageFragmentRoot() throws Exception {
