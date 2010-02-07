@@ -21,6 +21,7 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.parsetree.reconstr.impl.TreeConstState;
 import org.eclipse.xtext.parsetree.reconstr.impl.TreeConstructionNFAProvider;
@@ -74,6 +75,8 @@ public class ParseTreeConstructorUtil {
 			return false;
 		if (assignment.eContainer() instanceof Group)
 			return !isOptionalGroup((Group) assignment.eContainer());
+		if (assignment.eContainer() instanceof UnorderedGroup)
+			return isOptionalUnorderedGroup((UnorderedGroup) assignment.eContainer());
 		return true;
 	}
 
@@ -84,6 +87,20 @@ public class ParseTreeConstructorUtil {
 			return true;
 		if (group.eContainer() instanceof Group)
 			return isOptionalGroup((Group) group.eContainer());
+		if (group.eContainer() instanceof UnorderedGroup)
+			return isOptionalUnorderedGroup((UnorderedGroup) group.eContainer());
+		return false;
+	}
+	
+	private static boolean isOptionalUnorderedGroup(UnorderedGroup group) {
+		if (GrammarUtil.containedAssignments(group).size() != 1)
+			return false;
+		if (GrammarUtil.isOptionalCardinality(group))
+			return true;
+		if (group.eContainer() instanceof Group)
+			return isOptionalGroup((Group) group.eContainer());
+		if (group.eContainer() instanceof UnorderedGroup)
+			return isOptionalUnorderedGroup((UnorderedGroup) group.eContainer());
 		return false;
 	}
 

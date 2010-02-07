@@ -147,6 +147,15 @@
 		<language uri="classpath:/org/eclipse/xtext/parser/terminalrules/XtextTerminalsTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
+		<language uri="classpath:/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.xtext">
+			<fragment file="${standardFragments}"/>
+		</language>
+		<language uri="classpath:/org/eclipse/xtext/parser/unorderedGroups/SimpleUnorderedGroupsTestLanguage.xtext">
+			<fragment file="${standardFragments}"/>
+		</language>
+		<language uri="classpath:/org/eclipse/xtext/parser/unorderedGroups/ExUnorderedGroupsTestLanguage.xtext">
+			<fragment file="${exFragments}"/>
+		</language>
 		<language uri="classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>

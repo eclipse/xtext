@@ -110,6 +110,12 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.PackratHiddensTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.PackratParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.ParserTest.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.unorderedGroups.ConcreteSyntaxValidatorTest.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.unorderedGroups.GrammarParserTest.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.unorderedGroups.MetamodelTransformationTest.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.unorderedGroups.ParserExTest.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.unorderedGroups.ParserTest.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.unorderedGroups.SerializerTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.ASTChangeTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.CommentTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.EmptyModelTest.class);

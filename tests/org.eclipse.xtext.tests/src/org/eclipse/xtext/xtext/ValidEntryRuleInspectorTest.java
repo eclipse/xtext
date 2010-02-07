@@ -270,7 +270,7 @@ public class ValidEntryRuleInspectorTest extends AbstractXtextRuleInspectorTest<
 	public void testAlternatives_02() throws Exception {
 		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'foo.sample'\n" +
-				"X : x=ID | y=INT;\n";
+				"X : (x=ID | y=INT)?;\n";
 		Grammar grammar = getGrammar(grammarAsString);
 		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
 		validateRule(rule);
@@ -321,6 +321,166 @@ public class ValidEntryRuleInspectorTest extends AbstractXtextRuleInspectorTest<
 		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'foo.sample'\n" +
 				"X : x=ID? | 'x' {X};\n";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
+		assertTrue(warnings.toString(), warnings.isEmpty());
+	}
+	
+	public void testUnorderedGroup_01() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"X : 'x' & x=ID & 'x';\n";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
+		assertTrue(warnings.toString(), warnings.isEmpty());
+	}
+	
+	public void testUnorderedGroup_02() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"X : 'x' & x=ID? & 'x';\n";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
+		assertEquals(warnings.toString(), 1, warnings.size());
+	}
+	
+	public void testUnorderedGroup_03() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"X : ('x' & x=ID? & 'x')?;\n";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
+		assertEquals(warnings.toString(), 1, warnings.size());
+	}
+	
+	public void testUnorderedGroup_04() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"X : ('x' & x=ID & 'x')?;\n";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
+		assertTrue(warnings.toString(), warnings.isEmpty());
+	}
+	
+	public void testUnorderedGroup_05() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"X : 'x' ('x' & x=ID & 'x')?;\n";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
+		assertEquals(warnings.toString(), 1, warnings.size());
+	}
+	
+	public void testUnorderedGroup_06() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"X : 'x'? ('x' & x=ID & 'x')?;\n";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
+		assertEquals(warnings.toString(), 1, warnings.size());
+	}
+	
+	public void testUnorderedGroup_07() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"X : 'x' ('x' & x=ID & 'x')+;\n";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
+		assertTrue(warnings.toString(), warnings.isEmpty());
+	}
+	
+	public void testUnorderedGroup_08() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"X : 'x'? ('x' & x=ID & 'x')+;\n";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
+		assertTrue(warnings.toString(), warnings.isEmpty());
+	}
+	
+	public void testUnorderedGroup_09() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"X : STRING? & x+=ID*;\n";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
+		assertEquals(warnings.toString(), 1, warnings.size());
+	}
+	
+	public void testUnorderedGroup_10() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"X : x=ID & y=INT;\n";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
+		assertTrue(warnings.toString(), warnings.isEmpty());
+	}
+	
+	public void testUnorderedGroup_11() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"X : (x=ID & y=INT);\n";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
+		assertTrue(warnings.toString(), warnings.isEmpty());
+	}
+	
+	public void testUnorderedGroup_12() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"X : (x=ID? & y=INT*);\n";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
+		assertTrue(warnings.toString(), warnings.isEmpty());
+	}
+	
+	public void testUnorderedGroup_13() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"X : 'x' (x=ID & y=INT);\n";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
+		assertTrue(warnings.toString(), warnings.isEmpty());
+	}
+	
+	public void testUnorderedGroup_14() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"X : (x=ID* & y=INT)?;\n";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
+		assertTrue(warnings.toString(), warnings.isEmpty());
+	}
+	
+	public void testUnorderedGroup_15() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"X : x=ID? & 'x';\n";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
+		assertEquals(warnings.toString(), 1, warnings.size());
+	}
+	
+	public void testUnorderedGroup_16() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"X : {X} (x=ID? & 'x');\n";
 		Grammar grammar = getGrammar(grammarAsString);
 		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
 		validateRule(rule);

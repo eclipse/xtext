@@ -387,5 +387,15 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.lexer.parseTreeConstruction,
  org.eclipse.xtext.lexer.ignoreCaseTestLanguage,
  org.eclipse.xtext.lexer.ignoreCaseTestLanguage.impl,
- org.eclipse.xtext.lexer.ignoreCaseTestLanguage.util
+ org.eclipse.xtext.lexer.ignoreCaseTestLanguage.util,
+ org.eclipse.xtext.parser.unorderedGroups,
+ org.eclipse.xtext.parser.unorderedGroups.services,
+ org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage,
+ org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl,
+ org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.util,
+ org.eclipse.xtext.parser.unorderedGroups.parser.packrat,
+ org.eclipse.xtext.parser.unorderedGroups.parser.packrat.consumers,
+ org.eclipse.xtext.parser.unorderedGroups.parseTreeConstruction,
+ org.eclipse.xtext.parser.unorderedGroups.parser.antlr,
+ org.eclipse.xtext.parser.unorderedGroups.parser.antlr.internal
 

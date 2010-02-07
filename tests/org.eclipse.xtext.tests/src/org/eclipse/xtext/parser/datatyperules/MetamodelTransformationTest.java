@@ -39,14 +39,16 @@ public class MetamodelTransformationTest extends AbstractGeneratorTest {
 				"OnlyKeywords: 'foo';\n" +
 				"AssignmentWithAlternative: foo=('1'|'2');\n" +
 				"Farbe :\n" + 
-				"	 wert=(\"ROT\" | \"BLAU\" | \"GELB\" | \"GRÜN\");";
+				"	 wert=(\"ROT\" | \"BLAU\" | \"GELB\" | \"GRÜN\");\n" +
+				"UnorderedGroupDataType: ID & STRING & CalledId & 'keyword';\n" +
+				"UnorderedGroupClass: ID & name=STRING & CalledId & 'keyword';\n";
 		grammar = (Grammar) getModel(model);
 		pack = grammar.getMetamodelDeclarations().get(1).getEPackage();
 	}
 
 	public void testSetUp() {
 		assertEquals(2, grammar.getMetamodelDeclarations().size());
-		assertEquals(8, grammar.getRules().size());
+		assertEquals(10, grammar.getRules().size());
 		assertNotNull(pack);
 	}
 
@@ -99,4 +101,17 @@ public class MetamodelTransformationTest extends AbstractGeneratorTest {
 		assertEquals(pack.getEClassifier("Farbe"), rule.getType().getClassifier());
 	}
 
+	public void testUnorderedGroupDataType() {
+		ParserRule rule = (ParserRule) grammar.getRules().get(8);
+		assertNotNull(rule);
+		assertEquals("UnorderedGroupDataType", rule.getName());
+		assertEquals(EcorePackage.Literals.ESTRING, rule.getType().getClassifier());
+	}
+	
+	public void testUnorderedGroupClass() {
+		ParserRule rule = (ParserRule) grammar.getRules().get(9);
+		assertNotNull(rule);
+		assertEquals("UnorderedGroupClass", rule.getName());
+		assertEquals(pack.getEClassifier("UnorderedGroupClass"), rule.getType().getClassifier());
+	}
 }
