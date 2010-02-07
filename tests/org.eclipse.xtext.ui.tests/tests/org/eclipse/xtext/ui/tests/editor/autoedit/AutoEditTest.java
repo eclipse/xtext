@@ -34,12 +34,6 @@ public class AutoEditTest extends AbstractEditorTest {
 
 	private List<IFile> files = Lists.newArrayList();
 
-	@Override
-	protected void setUp() throws Exception {
-		//dirty fix for deadlock when closing more then one editor on tearDown
-		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
-		super.setUp();
-	}
 
 	@Override
 	protected void tearDown() throws Exception {
