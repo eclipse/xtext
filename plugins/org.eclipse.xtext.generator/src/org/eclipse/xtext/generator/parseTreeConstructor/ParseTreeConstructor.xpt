@@ -149,7 +149,6 @@ protected class ThisRootNode extends RootToken {
 
 
 «DEFINE element FOR AbstractElement»
-// FIXME: unhandled element «metaType.name» in «elementMethodName()»
 «ERROR "unhandled element " + metaType.name + " in " + elementMethodName()» 
 «ENDDEFINE»
 
@@ -222,7 +221,7 @@ protected class «elementMethodName()» extends UnassignedTextToken {
 «REM» ************ Assignment ************* «ENDREM»
 
 «DEFINE assignmentCreate FOR AbstractElement-»
-		// FIXME: doing nothing for «metaType»
+«ERROR "doing nothing for " + metaType»
 «ENDDEFINE»
 
 «DEFINE assignmentCreate FOR Keyword-»
@@ -265,20 +264,20 @@ protected class «elementMethodName()» extends UnassignedTextToken {
 			}
 		}
 «ELSE-»
-		if(Boolean.TRUE.booleanValue()) { // «metaType.name» FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { «REM»metaType.name FIXME: check if value is valid for datatype rule«ENDREM»
 			type = AssignmentType.DRC;
 			element = grammarAccess.«gaRuleElementAccessor()»;
 			return obj;
 		}
 «ENDIF-»
 «ELSEIF calledEnumRule()!=null-»
-		if(Boolean.TRUE.booleanValue()) { // «metaType.name» FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { «REM»metaType.name FIXME: check if value is valid for enum rule«ENDREM» 
 			type = AssignmentType.ERC;
 			element = grammarAccess.«gaRuleElementAccessor()»;
 			return obj;
 		}
 «ELSE-»
-		if(Boolean.TRUE.booleanValue()) { // «metaType.name» FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { «REM»metaType.name FIXME: check if value is valid for lexer rule«ENDREM»
 			type = AssignmentType.LRC;
 			element = grammarAccess.«gaRuleElementAccessor()»;
 			return obj;

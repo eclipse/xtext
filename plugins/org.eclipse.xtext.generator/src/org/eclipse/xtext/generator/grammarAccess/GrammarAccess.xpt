@@ -133,7 +133,7 @@ public class «gaSimpleName()» extends AbstractGrammarElementFinder {
 
 
 «DEFINE getter(Grammar original) FOR AbstractRule»
-	// FIXME: unknown rule type «metaType»
+«ERROR "unknown rule type " + metaType»
 «ENDDEFINE»
 
 «DEFINE getter(Grammar original) FOR ParserRule»

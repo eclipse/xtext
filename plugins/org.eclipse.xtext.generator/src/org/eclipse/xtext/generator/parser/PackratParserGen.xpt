@@ -286,7 +286,7 @@ public final class «getDelimiterClassName().toSimpleName()» {
 «IF first == this-»
 «LET conflictingLexerRules(grammar) AS conflicting-»
 «IF !conflicting.isEmpty-»
-    // TODO: remove hardcoded character class from template
+    «REM»TODO: remove hardcoded character class from template«ENDREM»
 	public static final ICharacterClass «globalDelimiterFieldName()» = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
