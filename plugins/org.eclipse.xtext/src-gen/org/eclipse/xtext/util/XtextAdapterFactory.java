@@ -183,6 +183,11 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
         return createAlternativesAdapter();
       }
       @Override
+      public Adapter caseUnorderedGroup(UnorderedGroup object)
+      {
+        return createUnorderedGroupAdapter();
+      }
+      @Override
       public Adapter caseGroup(Group object)
       {
         return createGroupAdapter();
@@ -525,6 +530,21 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createAlternativesAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.UnorderedGroup <em>Unordered Group</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.UnorderedGroup
+   * @generated
+   */
+  public Adapter createUnorderedGroupAdapter()
   {
     return null;
   }

@@ -36,6 +36,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -288,15 +289,24 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 				}
 				return false;
 			}
-
+			
 			@Override
-			public Boolean caseAlternatives(Alternatives object) {
+			public Boolean caseUnorderedGroup(UnorderedGroup object) {
 				if (!checkFurther(object))
 					return result;
+				// elements may occur in any order - treat them as looped alternatives
+				if (caseAlternatives(object.getElements()))
+					return true;
+				if (!checkFurther(object))
+					return result;
+				return caseAlternatives(object.getElements());
+			}
+
+			public Boolean caseAlternatives(List<AbstractElement> elements) {
 				EObject wasGrammarElement = this.grammarElement;
 				Set<AbstractRule> visiting = Sets.newHashSet(this.visiting);
 				boolean foundSomething = false;
-				for (AbstractElement group : object.getGroups()) {
+				for (AbstractElement group : elements) {
 					this.grammarElement = wasGrammarElement;
 					this.visiting = Sets.newHashSet(visiting);
 					if (doSwitch(group))
@@ -309,25 +319,19 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 					this.grammarElement = nextGrammarElement;
 					this.visiting.clear();
 				}
+				return Boolean.FALSE;
+			}
+			
+			@Override
+			public Boolean caseAlternatives(Alternatives object) {
+				if (!checkFurther(object))
+					return result;
+				if (caseAlternatives(object.getGroups()))
+					return true;
 				if (GrammarUtil.isMultipleCardinality(object)) {
 					if (!checkFurther(object))
 						return result;
-					wasGrammarElement = this.grammarElement;
-					visiting = Sets.newHashSet(this.visiting);
-					foundSomething = false;
-					for (AbstractElement group : object.getGroups()) {
-						this.grammarElement = wasGrammarElement;
-						this.visiting = Sets.newHashSet(visiting);
-						if (doSwitch(group))
-							return true;
-						if (wasGrammarElement != this.grammarElement) {
-							foundSomething = true;
-						}
-					}
-					if (foundSomething) {
-						this.grammarElement = nextGrammarElement;
-						this.visiting.clear();
-					}
+					return caseAlternatives(object.getGroups());
 				}
 				return Boolean.FALSE;
 			}
@@ -602,6 +606,15 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			boolean more = false;
 			for(AbstractElement element: object.getGroups()) {
 				more = doSwitch(element) || more;
+			}
+			return more || isOptional(object);
+		}
+		
+		@Override
+		public Boolean caseUnorderedGroup(UnorderedGroup object) {
+			boolean more = true;
+			for(AbstractElement element: object.getElements()) {
+				more = doSwitch(element) && more;
 			}
 			return more || isOptional(object);
 		}

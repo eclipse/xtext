@@ -217,6 +217,7 @@ finally {
 
 
 
+
 rule__File__StuffAssignment
     @init {
 		int stackSize = keepStackSize();

@@ -598,6 +598,7 @@ finally {
 
 
 
+
 rule__Model__AttributeAssignment_0_1
     @init {
 		int stackSize = keepStackSize();

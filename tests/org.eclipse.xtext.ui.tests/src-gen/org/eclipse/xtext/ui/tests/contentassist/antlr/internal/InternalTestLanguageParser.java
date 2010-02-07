@@ -465,20 +465,20 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start rule__File__StuffAssignment
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:220:1: rule__File__StuffAssignment : ( ruleStuff ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:221:1: rule__File__StuffAssignment : ( ruleStuff ) ;
     public final void rule__File__StuffAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:224:1: ( ( ruleStuff ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:225:1: ( ruleStuff )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:225:1: ( ( ruleStuff ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:226:1: ( ruleStuff )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:225:1: ( ruleStuff )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:226:1: ruleStuff
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:226:1: ( ruleStuff )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:227:1: ruleStuff
             {
              before(grammarAccess.getFileAccess().getStuffStuffParserRuleCall_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleStuff_in_rule__File__StuffAssignment389);
+            pushFollow(FollowSets000.FOLLOW_ruleStuff_in_rule__File__StuffAssignment390);
             ruleStuff();
             _fsp--;
 
@@ -505,20 +505,20 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start rule__Stuff__NameAssignment_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:235:1: rule__Stuff__NameAssignment_1 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:236:1: rule__Stuff__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Stuff__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:239:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:240:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:240:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:241:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:240:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:241:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:241:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:242:1: RULE_ID
             {
              before(grammarAccess.getStuffAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Stuff__NameAssignment_1420); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Stuff__NameAssignment_1421); 
              after(grammarAccess.getStuffAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -542,24 +542,24 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
 
 
     // $ANTLR start rule__Stuff__RefsAssignment_2_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:250:1: rule__Stuff__RefsAssignment_2_1 : ( ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:251:1: rule__Stuff__RefsAssignment_2_1 : ( ( RULE_ID ) ) ;
     public final void rule__Stuff__RefsAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:254:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:255:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:255:1: ( ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:256:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:255:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:256:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:256:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:257:1: ( RULE_ID )
             {
              before(grammarAccess.getStuffAccess().getRefsStuffCrossReference_2_1_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:257:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:258:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:258:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/contentassist/antlr/internal/InternalTestLanguage.g:259:1: RULE_ID
             {
              before(grammarAccess.getStuffAccess().getRefsStuffIDTerminalRuleCall_2_1_0_1()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Stuff__RefsAssignment_2_1455); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Stuff__RefsAssignment_2_1456); 
              after(grammarAccess.getStuffAccess().getRefsStuffIDTerminalRuleCall_2_1_0_1()); 
 
             }
@@ -604,9 +604,9 @@ public class InternalTestLanguageParser extends AbstractInternalContentAssistPar
         public static final BitSet FOLLOW_12_in_rule__Stuff__Group_2__0313 = new BitSet(new long[]{0x0000000000000010L});
         public static final BitSet FOLLOW_rule__Stuff__Group_2__1_in_rule__Stuff__Group_2__0323 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Stuff__RefsAssignment_2_1_in_rule__Stuff__Group_2__1351 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleStuff_in_rule__File__StuffAssignment389 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Stuff__NameAssignment_1420 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Stuff__RefsAssignment_2_1455 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleStuff_in_rule__File__StuffAssignment390 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Stuff__NameAssignment_1421 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Stuff__RefsAssignment_2_1456 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

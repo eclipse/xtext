@@ -354,6 +354,7 @@ finally {
 
 
 
+
 rule__WorkflowElement__NameAssignment_0_0
     @init {
 		int stackSize = keepStackSize();

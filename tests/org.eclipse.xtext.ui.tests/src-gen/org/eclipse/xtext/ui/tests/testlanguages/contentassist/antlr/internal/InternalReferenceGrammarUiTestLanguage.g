@@ -982,6 +982,7 @@ finally {
 
 
 
+
 rule__Spielplatz__GroesseAssignment_1
     @init {
 		int stackSize = keepStackSize();

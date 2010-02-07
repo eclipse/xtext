@@ -1257,20 +1257,20 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start rule__File__ExpressionAssignment
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:510:1: rule__File__ExpressionAssignment : ( ruleExpression ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:511:1: rule__File__ExpressionAssignment : ( ruleExpression ) ;
     public final void rule__File__ExpressionAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:514:1: ( ( ruleExpression ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:515:1: ( ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:515:1: ( ( ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:516:1: ( ruleExpression )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:515:1: ( ruleExpression )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:516:1: ruleExpression
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:516:1: ( ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:517:1: ruleExpression
             {
              before(grammarAccess.getFileAccess().getExpressionExpressionParserRuleCall_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__File__ExpressionAssignment993);
+            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__File__ExpressionAssignment994);
             ruleExpression();
             _fsp--;
 
@@ -1297,20 +1297,20 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start rule__SExpression__ElementAssignment_1_0_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:525:1: rule__SExpression__ElementAssignment_1_0_1 : ( ruleExpression ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:526:1: rule__SExpression__ElementAssignment_1_0_1 : ( ruleExpression ) ;
     public final void rule__SExpression__ElementAssignment_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:529:1: ( ( ruleExpression ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:530:1: ( ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:530:1: ( ( ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:531:1: ( ruleExpression )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:530:1: ( ruleExpression )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:531:1: ruleExpression
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:531:1: ( ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:532:1: ruleExpression
             {
              before(grammarAccess.getSExpressionAccess().getElementExpressionParserRuleCall_1_0_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__SExpression__ElementAssignment_1_0_11024);
+            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__SExpression__ElementAssignment_1_0_11025);
             ruleExpression();
             _fsp--;
 
@@ -1337,20 +1337,20 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start rule__SExpression__ElementAssignment_1_1_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:540:1: rule__SExpression__ElementAssignment_1_1_1 : ( ruleExpression ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:541:1: rule__SExpression__ElementAssignment_1_1_1 : ( ruleExpression ) ;
     public final void rule__SExpression__ElementAssignment_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:544:1: ( ( ruleExpression ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:545:1: ( ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:545:1: ( ( ruleExpression ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:546:1: ( ruleExpression )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:545:1: ( ruleExpression )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:546:1: ruleExpression
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:546:1: ( ruleExpression )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:547:1: ruleExpression
             {
              before(grammarAccess.getSExpressionAccess().getElementExpressionParserRuleCall_1_1_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__SExpression__ElementAssignment_1_1_11055);
+            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__SExpression__ElementAssignment_1_1_11056);
             ruleExpression();
             _fsp--;
 
@@ -1377,20 +1377,20 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
 
     // $ANTLR start rule__Atom__ValueAssignment
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:555:1: rule__Atom__ValueAssignment : ( ruleVALUE ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:556:1: rule__Atom__ValueAssignment : ( ruleVALUE ) ;
     public final void rule__Atom__ValueAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:559:1: ( ( ruleVALUE ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:560:1: ( ruleVALUE )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:560:1: ( ( ruleVALUE ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:561:1: ( ruleVALUE )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:560:1: ( ruleVALUE )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:561:1: ruleVALUE
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:561:1: ( ruleVALUE )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:562:1: ruleVALUE
             {
              before(grammarAccess.getAtomAccess().getValueVALUEParserRuleCall_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleVALUE_in_rule__Atom__ValueAssignment1086);
+            pushFollow(FollowSets000.FOLLOW_ruleVALUE_in_rule__Atom__ValueAssignment1087);
             ruleVALUE();
             _fsp--;
 
@@ -1460,10 +1460,10 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
         public static final BitSet FOLLOW_rule__SExpression__ElementAssignment_1_1_1_in_rule__SExpression__Group_1_1__1913 = new BitSet(new long[]{0x000000000001A870L});
         public static final BitSet FOLLOW_rule__SExpression__Group_1_1__2_in_rule__SExpression__Group_1_1__1923 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_16_in_rule__SExpression__Group_1_1__2952 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpression_in_rule__File__ExpressionAssignment993 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpression_in_rule__SExpression__ElementAssignment_1_0_11024 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpression_in_rule__SExpression__ElementAssignment_1_1_11055 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleVALUE_in_rule__Atom__ValueAssignment1086 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpression_in_rule__File__ExpressionAssignment994 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpression_in_rule__SExpression__ElementAssignment_1_0_11025 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpression_in_rule__SExpression__ElementAssignment_1_1_11056 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleVALUE_in_rule__Atom__ValueAssignment1087 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

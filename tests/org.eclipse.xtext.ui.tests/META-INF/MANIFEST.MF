@@ -143,5 +143,8 @@ Export-Package: org.eclipse.xtext.ui.tests.xtextUiTest,
  org.eclipse.xtext.ui.tests.editor.bracketmatching.validation,
  org.eclipse.xtext.ui.tests.editor.bracketmatching.parser.antlr,
  org.eclipse.xtext.ui.tests.editor.bracketmatching.parser.antlr.internal,
- org.eclipse.xtext.ui.tests.editor.bracketmatching.contentassist.antlr
+ org.eclipse.xtext.ui.tests.editor.bracketmatching.contentassist.antlr,
+ org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest,
+ org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl,
+ org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.util
 

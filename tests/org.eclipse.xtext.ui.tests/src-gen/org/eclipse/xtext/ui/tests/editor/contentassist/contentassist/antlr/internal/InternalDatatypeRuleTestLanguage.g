@@ -649,6 +649,7 @@ finally {
 
 
 
+
 rule__Types__TypesAssignment_1
     @init {
 		int stackSize = keepStackSize();

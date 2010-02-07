@@ -218,10 +218,15 @@ public abstract class AbstractXtextTests extends TestCase {
 	protected IScopeProvider getScopeProvider() {
 		return injector.getInstance(IScopeProvider.class);
 	}
+	
+	protected InputStream getAsStream(String model) {
+		return new StringInputStream(model);
+	}
+	
 	// parse methods
 
-	public final EObject getModel(String model) throws Exception {
-		return getModel(new org.eclipse.xtext.util.StringInputStream(model));
+	public EObject getModel(String model) throws Exception {
+		return getModel(getAsStream(model));
 	}
 	
 	public final EObject getModel(InputStream model) throws Exception {
@@ -233,7 +238,7 @@ public abstract class AbstractXtextTests extends TestCase {
 	public static final int UNKNOWN_EXPECTATION = Integer.MIN_VALUE;
 
 	public final EObject getModelAndExpect(String model, int errors) throws Exception {
-		return getModelAndExpect(new org.eclipse.xtext.util.StringInputStream(model), errors);
+		return getModelAndExpect(getAsStream(model), errors);
 	}
 	
 	public final EObject getModelAndExpect(InputStream model, int errors) throws Exception {
@@ -241,16 +246,16 @@ public abstract class AbstractXtextTests extends TestCase {
 		return getModel(resource);
 	}
 
-	protected final EObject getModel(XtextResource resource) {
+	protected EObject getModel(XtextResource resource) {
 		return resource.getParseResult().getRootASTElement();
 	}
 
 	protected final XtextResource getResourceFromString(String model) throws Exception {
-		return getResource(new org.eclipse.xtext.util.StringInputStream(model));
+		return getResource(getAsStream(model));
 	}
 	
 	protected final XtextResource getResourceFromStringAndExpect(String model, int errors) throws Exception {
-		return getResourceAndExpect(new org.eclipse.xtext.util.StringInputStream(model), errors);
+		return getResourceAndExpect(getAsStream(model), errors);
 	}
 
 	public final XtextResource getResource(InputStream in) throws Exception {
@@ -273,7 +278,7 @@ public abstract class AbstractXtextTests extends TestCase {
 	}
 	
 	public final XtextResource getResource(String contents, String uri) throws Exception {
-		return getResource(new StringInputStream(contents), URI.createURI(uri));
+		return getResource(getAsStream(contents), URI.createURI(uri));
 	}
 	
 	public final XtextResource getResourceAndExpect(InputStream in, URI uri, int expectedErrors) throws Exception {
@@ -319,12 +324,12 @@ public abstract class AbstractXtextTests extends TestCase {
 		return resource.getParseResult().getRootNode();
 	}
 
-	protected final CompositeNode getRootNode(String model2) throws Exception {
-		return getRootNode(new StringInputStream(model2));
+	protected final CompositeNode getRootNode(String model) throws Exception {
+		return getRootNode(getAsStream(model));
 	}
 	
 	protected final CompositeNode getRootNodeAndExpect(String model, int errors) throws Exception {
-		return getRootNodeAndExpect(new StringInputStream(model), errors);
+		return getRootNodeAndExpect(getAsStream(model), errors);
 	}
 
 	// Xtend helper methods

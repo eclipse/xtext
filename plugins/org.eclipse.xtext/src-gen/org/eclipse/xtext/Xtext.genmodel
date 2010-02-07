@@ -75,6 +75,9 @@
     <genClasses ecoreClass="Xtext.ecore#//Alternatives">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//Alternatives/groups"/>
     </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//UnorderedGroup">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//UnorderedGroup/elements"/>
+    </genClasses>
     <genClasses ecoreClass="Xtext.ecore#//Group">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//Group/tokens"/>
     </genClasses>

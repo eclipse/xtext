@@ -605,6 +605,7 @@ finally {
 
 
 
+
 rule__RootModel__NameAssignment_1
     @init {
 		int stackSize = keepStackSize();

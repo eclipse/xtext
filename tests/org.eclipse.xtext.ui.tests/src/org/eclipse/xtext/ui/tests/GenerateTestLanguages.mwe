@@ -55,6 +55,9 @@
 		<language uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/DomainModelTestLanguage.xtext">
 			<fragment file="org/eclipse/xtext/ui/tests/TestLanguageSetup.mwe"/>
 		</language>
+		<language uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/UnorderedGroupsTestLanguage.xtext">
+			<fragment file="org/eclipse/xtext/ui/tests/TestLanguageSetup.mwe"/>
+		</language>
 		<language uri="classpath:/org/eclipse/xtext/ui/tests/parser/keywords/KeywordsUiTestLanguage.xtext">
 			<fragment file="org/eclipse/xtext/ui/tests/TestLanguageSetup.mwe"/>
 		</language>

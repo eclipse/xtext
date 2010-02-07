@@ -239,6 +239,7 @@ finally {
 
 
 
+
 rule__Model__ElementsAssignment
     @init {
 		int stackSize = keepStackSize();

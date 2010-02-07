@@ -1,0 +1,17 @@
+RULE_ML_COMMENT=7
+RULE_ID=4
+RULE_WS=9
+RULE_INT=5
+RULE_STRING=6
+RULE_ANY_OTHER=10
+RULE_SL_COMMENT=8
+'private'=12
+'final'=17
+'static'=14
+'class'=18
+'protected'=13
+'}'=20
+'{'=19
+'synchronized'=15
+'abstract'=16
+'public'=11

@@ -215,6 +215,15 @@ public interface XtextFactory extends EFactory
   Alternatives createAlternatives();
 
   /**
+   * Returns a new object of class '<em>Unordered Group</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Unordered Group</em>'.
+   * @generated
+   */
+  UnorderedGroup createUnorderedGroup();
+
+  /**
    * Returns a new object of class '<em>Group</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

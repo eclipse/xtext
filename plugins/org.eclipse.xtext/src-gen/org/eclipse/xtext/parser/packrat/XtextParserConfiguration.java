@@ -18,6 +18,7 @@ import org.eclipse.xtext.parser.packrat.consumers.XtextReferencedMetamodelConsum
 import org.eclipse.xtext.parser.packrat.consumers.XtextParserRuleConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextTypeRefConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextAlternativesConsumer;
+import org.eclipse.xtext.parser.packrat.consumers.XtextUnorderedGroupConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextGroupConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextAbstractTokenConsumer;
 import org.eclipse.xtext.parser.packrat.consumers.XtextAbstractTokenWithCardinalityConsumer;
@@ -66,6 +67,7 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
     private XtextParserRuleConsumer parserRuleConsumer;
     private XtextTypeRefConsumer typeRefConsumer;
     private XtextAlternativesConsumer alternativesConsumer;
+    private XtextUnorderedGroupConsumer unorderedGroupConsumer;
     private XtextGroupConsumer groupConsumer;
     private XtextAbstractTokenConsumer abstractTokenConsumer;
     private XtextAbstractTokenWithCardinalityConsumer abstractTokenWithCardinalityConsumer;
@@ -134,6 +136,9 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
     		this, null
     	);
 		alternativesConsumer = new XtextAlternativesConsumer(
+    		this, null
+    	);
+		unorderedGroupConsumer = new XtextUnorderedGroupConsumer(
     		this, null
     	);
 		groupConsumer = new XtextGroupConsumer(
@@ -238,6 +243,7 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 		getParserRuleConsumer().setRule(grammarAccess.getParserRuleAccess());
 		getTypeRefConsumer().setRule(grammarAccess.getTypeRefAccess());
 		getAlternativesConsumer().setRule(grammarAccess.getAlternativesAccess());
+		getUnorderedGroupConsumer().setRule(grammarAccess.getUnorderedGroupAccess());
 		getGroupConsumer().setRule(grammarAccess.getGroupAccess());
 		getAbstractTokenConsumer().setRule(grammarAccess.getAbstractTokenAccess());
 		getAbstractTokenWithCardinalityConsumer().setRule(grammarAccess.getAbstractTokenWithCardinalityAccess());
@@ -301,7 +307,9 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 
 		getTypeRefConsumer().setIdConsumer(getIdConsumer());
 
-		getAlternativesConsumer().setGroupConsumer(getGroupConsumer());
+		getAlternativesConsumer().setUnorderedGroupConsumer(getUnorderedGroupConsumer());
+
+		getUnorderedGroupConsumer().setGroupConsumer(getGroupConsumer());
 
 		getGroupConsumer().setAbstractTokenConsumer(getAbstractTokenConsumer());
 
@@ -413,6 +421,7 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 		getTypeRefConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.ruleCall$28$Delimiter);
 		getTypeRefConsumer().setRuleCall$11$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.ruleCall$28$Delimiter);
 		getAlternativesConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
+		getUnorderedGroupConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
 		getAbstractTokenWithCardinalityConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
 		getAbstractTokenWithCardinalityConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
 		getAbstractTokenWithCardinalityConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parser.packrat.XtextDelimiters.keyword$15$Delimiter);
@@ -500,6 +509,10 @@ public class XtextParserConfiguration extends AbstractParserConfiguration {
 
     public XtextAlternativesConsumer getAlternativesConsumer() {
     	return alternativesConsumer;
+    }
+
+    public XtextUnorderedGroupConsumer getUnorderedGroupConsumer() {
+    	return unorderedGroupConsumer;
     }
 
     public XtextGroupConsumer getGroupConsumer() {

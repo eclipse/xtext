@@ -45,6 +45,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.ProposalConflictHelperAntlrTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.ReferenceGrammarUiContentAssistTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.TwoContextsContentAssistTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsContentAssistTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.XtextGrammarUiContentAssistTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.antlr.Bug281198ParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.antlr.Bug282031ParserTest.class);

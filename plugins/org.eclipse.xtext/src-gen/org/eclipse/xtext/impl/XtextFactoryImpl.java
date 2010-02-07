@@ -88,6 +88,7 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
       case XtextPackage.ENUM_RULE: return createEnumRule();
       case XtextPackage.ENUM_LITERAL_DECLARATION: return createEnumLiteralDeclaration();
       case XtextPackage.ALTERNATIVES: return createAlternatives();
+      case XtextPackage.UNORDERED_GROUP: return createUnorderedGroup();
       case XtextPackage.GROUP: return createGroup();
       case XtextPackage.CHARACTER_RANGE: return createCharacterRange();
       default:
@@ -324,6 +325,17 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
   {
     AlternativesImpl alternatives = new AlternativesImpl();
     return alternatives;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public UnorderedGroup createUnorderedGroup()
+  {
+    UnorderedGroupImpl unorderedGroup = new UnorderedGroupImpl();
+    return unorderedGroup;
   }
 
   /**

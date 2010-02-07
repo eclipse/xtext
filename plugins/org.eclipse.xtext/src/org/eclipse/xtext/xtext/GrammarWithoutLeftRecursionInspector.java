@@ -23,6 +23,7 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.util.XtextSwitch;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
@@ -126,6 +127,16 @@ public class GrammarWithoutLeftRecursionInspector extends XtextSwitch<Boolean> i
 		for(AbstractElement element: object.getGroups()) {
 			if (doSwitch(element))
 				result = Boolean.TRUE;
+		}
+		return result || GrammarUtil.isOptionalCardinality(object);
+	}
+	
+	@Override
+	public Boolean caseUnorderedGroup(UnorderedGroup object) {
+		Boolean result = Boolean.TRUE;
+		for(AbstractElement element: object.getElements()) {
+			if (!doSwitch(element))
+				result = Boolean.FALSE;
 		}
 		return result || GrammarUtil.isOptionalCardinality(object);
 	}

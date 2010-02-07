@@ -277,6 +277,19 @@ public abstract class AbstractParseTreeConstructor implements
 			return current;
 		}
 	}
+	
+	public abstract class UnorderedGroupToken extends AbstractToken {
+
+		public UnorderedGroupToken(AbstractToken parent, AbstractToken next, int no,
+				IInstanceDescription current) {
+			super(parent, next, no, current);
+		}
+
+		@Override
+		protected IInstanceDescription tryConsumeVal() {
+			return current;
+		}
+	}
 
 	public abstract class KeywordToken extends AbstractToken {
 

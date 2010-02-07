@@ -969,6 +969,7 @@ finally {
 
 
 
+
 rule__Model__ClassesAssignment
     @init {
 		int stackSize = keepStackSize();

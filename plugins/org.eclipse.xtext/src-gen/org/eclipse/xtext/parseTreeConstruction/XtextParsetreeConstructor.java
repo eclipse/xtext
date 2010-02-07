@@ -43,34 +43,35 @@ protected class ThisRootNode extends RootToken {
 			case 5: return new ParserRule_Group(this, this, 5, inst);
 			case 6: return new TypeRef_Group(this, this, 6, inst);
 			case 7: return new Alternatives_Group(this, this, 7, inst);
-			case 8: return new Group_Group(this, this, 8, inst);
-			case 9: return new AbstractToken_Alternatives(this, this, 9, inst);
-			case 10: return new AbstractTokenWithCardinality_Group(this, this, 10, inst);
-			case 11: return new Action_Group(this, this, 11, inst);
-			case 12: return new AbstractTerminal_Alternatives(this, this, 12, inst);
-			case 13: return new Keyword_ValueAssignment(this, this, 13, inst);
-			case 14: return new RuleCall_RuleAssignment(this, this, 14, inst);
-			case 15: return new Assignment_Group(this, this, 15, inst);
-			case 16: return new AssignableTerminal_Alternatives(this, this, 16, inst);
-			case 17: return new ParenthesizedAssignableElement_Group(this, this, 17, inst);
-			case 18: return new AssignableAlternatives_Group(this, this, 18, inst);
-			case 19: return new CrossReference_Group(this, this, 19, inst);
-			case 20: return new CrossReferenceableTerminal_Alternatives(this, this, 20, inst);
-			case 21: return new ParenthesizedElement_Group(this, this, 21, inst);
-			case 22: return new TerminalRule_Group(this, this, 22, inst);
-			case 23: return new TerminalAlternatives_Group(this, this, 23, inst);
-			case 24: return new TerminalGroup_Group(this, this, 24, inst);
-			case 25: return new TerminalToken_Group(this, this, 25, inst);
-			case 26: return new TerminalTokenElement_Alternatives(this, this, 26, inst);
-			case 27: return new ParenthesizedTerminalElement_Group(this, this, 27, inst);
-			case 28: return new AbstractNegatedToken_Alternatives(this, this, 28, inst);
-			case 29: return new NegatedToken_Group(this, this, 29, inst);
-			case 30: return new UntilToken_Group(this, this, 30, inst);
-			case 31: return new Wildcard_Group(this, this, 31, inst);
-			case 32: return new CharacterRange_Group(this, this, 32, inst);
-			case 33: return new EnumRule_Group(this, this, 33, inst);
-			case 34: return new EnumLiterals_Group(this, this, 34, inst);
-			case 35: return new EnumLiteralDeclaration_Group(this, this, 35, inst);
+			case 8: return new UnorderedGroup_Group(this, this, 8, inst);
+			case 9: return new Group_Group(this, this, 9, inst);
+			case 10: return new AbstractToken_Alternatives(this, this, 10, inst);
+			case 11: return new AbstractTokenWithCardinality_Group(this, this, 11, inst);
+			case 12: return new Action_Group(this, this, 12, inst);
+			case 13: return new AbstractTerminal_Alternatives(this, this, 13, inst);
+			case 14: return new Keyword_ValueAssignment(this, this, 14, inst);
+			case 15: return new RuleCall_RuleAssignment(this, this, 15, inst);
+			case 16: return new Assignment_Group(this, this, 16, inst);
+			case 17: return new AssignableTerminal_Alternatives(this, this, 17, inst);
+			case 18: return new ParenthesizedAssignableElement_Group(this, this, 18, inst);
+			case 19: return new AssignableAlternatives_Group(this, this, 19, inst);
+			case 20: return new CrossReference_Group(this, this, 20, inst);
+			case 21: return new CrossReferenceableTerminal_Alternatives(this, this, 21, inst);
+			case 22: return new ParenthesizedElement_Group(this, this, 22, inst);
+			case 23: return new TerminalRule_Group(this, this, 23, inst);
+			case 24: return new TerminalAlternatives_Group(this, this, 24, inst);
+			case 25: return new TerminalGroup_Group(this, this, 25, inst);
+			case 26: return new TerminalToken_Group(this, this, 26, inst);
+			case 27: return new TerminalTokenElement_Alternatives(this, this, 27, inst);
+			case 28: return new ParenthesizedTerminalElement_Group(this, this, 28, inst);
+			case 29: return new AbstractNegatedToken_Alternatives(this, this, 29, inst);
+			case 30: return new NegatedToken_Group(this, this, 30, inst);
+			case 31: return new UntilToken_Group(this, this, 31, inst);
+			case 32: return new Wildcard_Group(this, this, 32, inst);
+			case 33: return new CharacterRange_Group(this, this, 33, inst);
+			case 34: return new EnumRule_Group(this, this, 34, inst);
+			case 35: return new EnumLiterals_Group(this, this, 35, inst);
+			case 36: return new EnumLiteralDeclaration_Group(this, this, 36, inst);
 			default: return null;
 		}	
 	}	
@@ -2019,11 +2020,11 @@ protected class TypeRef_ClassifierAssignment_1 extends AssignmentToken  {
 /************ begin Rule Alternatives ****************
  *
  * Alternatives returns AbstractElement:
- *   Group ({Alternatives.groups+=current} ("|" groups+=Group)+)?;
+ *   UnorderedGroup ({Alternatives.groups+=current} ("|" groups+=UnorderedGroup)+)?;
  *
  **/
 
-// Group ({Alternatives.groups+=current} ("|" groups+=Group)+)?
+// UnorderedGroup ({Alternatives.groups+=current} ("|" groups+=UnorderedGroup)+)?
 protected class Alternatives_Group extends GroupToken {
 	
 	public Alternatives_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2039,7 +2040,7 @@ protected class Alternatives_Group extends GroupToken {
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Alternatives_Group_1(parent, this, 0, inst);
-			case 1: return new Alternatives_GroupParserRuleCall_0(parent, this, 1, inst);
+			case 1: return new Alternatives_UnorderedGroupParserRuleCall_0(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -2051,30 +2052,30 @@ protected class Alternatives_Group extends GroupToken {
 	}
 }
 
-// Group
-protected class Alternatives_GroupParserRuleCall_0 extends RuleCallToken {
+// UnorderedGroup
+protected class Alternatives_UnorderedGroupParserRuleCall_0 extends RuleCallToken {
 	
-	public Alternatives_GroupParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Alternatives_UnorderedGroupParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public RuleCall getGrammarElement() {
-		return grammarAccess.getAlternativesAccess().getGroupParserRuleCall_0();
+		return grammarAccess.getAlternativesAccess().getUnorderedGroupParserRuleCall_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Group_Group(this, this, 0, inst);
+			case 0: return new UnorderedGroup_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(Group_Group.class, current)) return null;
-		if(!current.isInstanceOf(grammarAccess.getGroupRule().getType().getClassifier())) return null;
+		if(checkForRecursion(UnorderedGroup_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getUnorderedGroupRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -2086,7 +2087,7 @@ protected class Alternatives_GroupParserRuleCall_0 extends RuleCallToken {
 	}	
 }
 
-// ({Alternatives.groups+=current} ("|" groups+=Group)+)?
+// ({Alternatives.groups+=current} ("|" groups+=UnorderedGroup)+)?
 protected class Alternatives_Group_1 extends GroupToken {
 	
 	public Alternatives_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2123,7 +2124,7 @@ protected class Alternatives_AlternativesGroupsAction_1_0 extends ActionToken  {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Alternatives_GroupParserRuleCall_0(parent, this, 0, inst);
+			case 0: return new Alternatives_UnorderedGroupParserRuleCall_0(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -2139,7 +2140,7 @@ protected class Alternatives_AlternativesGroupsAction_1_0 extends ActionToken  {
 	}
 }
 
-// ("|" groups+=Group)+
+// ("|" groups+=UnorderedGroup)+
 protected class Alternatives_Group_1_1 extends GroupToken {
 	
 	public Alternatives_Group_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2184,7 +2185,7 @@ protected class Alternatives_VerticalLineKeyword_1_1_0 extends KeywordToken  {
 		
 }
 
-// groups+=Group
+// groups+=UnorderedGroup
 protected class Alternatives_GroupsAssignment_1_1_1 extends AssignmentToken  {
 	
 	public Alternatives_GroupsAssignment_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2199,7 +2200,7 @@ protected class Alternatives_GroupsAssignment_1_1_1 extends AssignmentToken  {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Group_Group(this, this, 0, inst);
+			case 0: return new UnorderedGroup_Group(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -2210,9 +2211,9 @@ protected class Alternatives_GroupsAssignment_1_1_1 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("groups");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getGroupRule().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getUnorderedGroupRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getAlternativesAccess().getGroupsGroupParserRuleCall_1_1_1_0(); 
+				element = grammarAccess.getAlternativesAccess().getGroupsUnorderedGroupParserRuleCall_1_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2234,6 +2235,226 @@ protected class Alternatives_GroupsAssignment_1_1_1 extends AssignmentToken  {
 
 
 /************ end Rule Alternatives ****************/
+
+
+/************ begin Rule UnorderedGroup ****************
+ *
+ * UnorderedGroup returns AbstractElement:
+ *   Group ({UnorderedGroup.elements+=current} ("&" elements+=Group)+)?;
+ *
+ **/
+
+// Group ({UnorderedGroup.elements+=current} ("&" elements+=Group)+)?
+protected class UnorderedGroup_Group extends GroupToken {
+	
+	public UnorderedGroup_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getUnorderedGroupAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new UnorderedGroup_Group_1(parent, this, 0, inst);
+			case 1: return new UnorderedGroup_GroupParserRuleCall_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getUnorderedGroupRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// Group
+protected class UnorderedGroup_GroupParserRuleCall_0 extends RuleCallToken {
+	
+	public UnorderedGroup_GroupParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getUnorderedGroupAccess().getGroupParserRuleCall_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Group_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Group_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getGroupRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// ({UnorderedGroup.elements+=current} ("&" elements+=Group)+)?
+protected class UnorderedGroup_Group_1 extends GroupToken {
+	
+	public UnorderedGroup_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getUnorderedGroupAccess().getGroup_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new UnorderedGroup_Group_1_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// {UnorderedGroup.elements+=current}
+protected class UnorderedGroup_UnorderedGroupElementsAction_1_0 extends ActionToken  {
+
+	public UnorderedGroup_UnorderedGroupElementsAction_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Action getGrammarElement() {
+		return grammarAccess.getUnorderedGroupAccess().getUnorderedGroupElementsAction_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new UnorderedGroup_GroupParserRuleCall_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(!current.isInstanceOf(grammarAccess.getUnorderedGroupAccess().getUnorderedGroupElementsAction_1_0().getType().getClassifier())) return null;
+		Object val = current.getConsumable("elements", false);
+		if(val == null) return null;
+		if(!current.isConsumedWithLastConsumtion("elements")) return null;
+		return getDescr((EObject) val);
+	}
+}
+
+// ("&" elements+=Group)+
+protected class UnorderedGroup_Group_1_1 extends GroupToken {
+	
+	public UnorderedGroup_Group_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getUnorderedGroupAccess().getGroup_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new UnorderedGroup_ElementsAssignment_1_1_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "&"
+protected class UnorderedGroup_AmpersandKeyword_1_1_0 extends KeywordToken  {
+	
+	public UnorderedGroup_AmpersandKeyword_1_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getUnorderedGroupAccess().getAmpersandKeyword_1_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new UnorderedGroup_Group_1_1(parent, this, 0, inst);
+			case 1: return new UnorderedGroup_UnorderedGroupElementsAction_1_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// elements+=Group
+protected class UnorderedGroup_ElementsAssignment_1_1_1 extends AssignmentToken  {
+	
+	public UnorderedGroup_ElementsAssignment_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getUnorderedGroupAccess().getElementsAssignment_1_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Group_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("elements",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("elements");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getGroupRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getUnorderedGroupAccess().getElementsGroupParserRuleCall_1_1_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new UnorderedGroup_AmpersandKeyword_1_1_0(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+
+
+/************ end Rule UnorderedGroup ****************/
 
 
 /************ begin Rule Group ****************

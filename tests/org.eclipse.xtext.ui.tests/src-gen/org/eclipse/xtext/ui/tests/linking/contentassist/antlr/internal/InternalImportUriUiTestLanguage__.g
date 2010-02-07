@@ -11,25 +11,25 @@ T11 : 'import' ;
 T12 : 'type' ;
 T13 : 'extends' ;
 
-// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/linking/contentassist/antlr/internal/InternalImportUriUiTestLanguage.g" 389
+// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/linking/contentassist/antlr/internal/InternalImportUriUiTestLanguage.g" 390
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/linking/contentassist/antlr/internal/InternalImportUriUiTestLanguage.g" 391
+// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/linking/contentassist/antlr/internal/InternalImportUriUiTestLanguage.g" 392
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/linking/contentassist/antlr/internal/InternalImportUriUiTestLanguage.g" 393
+// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/linking/contentassist/antlr/internal/InternalImportUriUiTestLanguage.g" 394
 RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
-// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/linking/contentassist/antlr/internal/InternalImportUriUiTestLanguage.g" 395
+// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/linking/contentassist/antlr/internal/InternalImportUriUiTestLanguage.g" 396
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/linking/contentassist/antlr/internal/InternalImportUriUiTestLanguage.g" 397
+// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/linking/contentassist/antlr/internal/InternalImportUriUiTestLanguage.g" 398
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/linking/contentassist/antlr/internal/InternalImportUriUiTestLanguage.g" 399
+// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/linking/contentassist/antlr/internal/InternalImportUriUiTestLanguage.g" 400
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/linking/contentassist/antlr/internal/InternalImportUriUiTestLanguage.g" 401
+// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/linking/contentassist/antlr/internal/InternalImportUriUiTestLanguage.g" 402
 RULE_ANY_OTHER : .;
 
 

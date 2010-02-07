@@ -28,6 +28,7 @@ import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminal;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminalEnd;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminal;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedToken;
+import org.eclipse.xtext.parser.packrat.tokens.UnorderedGroupToken;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -167,6 +168,20 @@ public class MarkerAwareBacktracker implements IBacktracker {
 				}
 			}
 		}
+		
+		@Override
+		public void visitUnorderedGroupToken(UnorderedGroupToken token) {
+			if (lookup && !token.isSkipped()) {
+				if (stackSize == 0)
+					lookup = false;
+				else {
+					if (token.canParseFurther())
+						result = true;
+					else
+						super.visitUnorderedGroupToken(token);
+				}
+			}
+		}
 
 		@Override
 		public void visitParsedNonTerminal(ParsedNonTerminal token) {
@@ -249,8 +264,6 @@ public class MarkerAwareBacktracker implements IBacktracker {
 				}
 			}
 
-
-
 			@Override
 			public void visitAlternativesToken(AlternativesToken token) {
 				if (!token.isSkipped()) {
@@ -258,6 +271,16 @@ public class MarkerAwareBacktracker implements IBacktracker {
 						continueSkip = false;
 					else
 						super.visitAlternativesToken(token);
+				}
+			}
+			
+			@Override
+			public void visitUnorderedGroupToken(UnorderedGroupToken token) {
+				if (!token.isSkipped()) {
+					if (first && token.canParseFurther())
+						continueSkip = false;
+					else
+						super.visitUnorderedGroupToken(token);
 				}
 			}
 
@@ -411,6 +434,16 @@ public class MarkerAwareBacktracker implements IBacktracker {
 				if (!token.isSkipped()) {
 					if (stackSize == 0)
 						workingMarker.accept(new AlternativesToken.End(workingMarker.getInput().getOffset(), token.getAlternative()));
+					else
+						stackSize--;
+				}
+			}
+			
+			@Override
+			public void visitUnorderedGroupTokenEnd(UnorderedGroupToken.End token) {
+				if (!token.isSkipped()) {
+					if (stackSize == 0)
+						workingMarker.accept(new UnorderedGroupToken.End(workingMarker.getInput().getOffset()));
 					else
 						stackSize--;
 				}

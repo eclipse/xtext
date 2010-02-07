@@ -808,11 +808,11 @@ ruleAlternatives returns [EObject current=null]
     }:
 (
     { 
-        currentNode=createCompositeNode(grammarAccess.getAlternativesAccess().getGroupParserRuleCall_0(), currentNode); 
+        currentNode=createCompositeNode(grammarAccess.getAlternativesAccess().getUnorderedGroupParserRuleCall_0(), currentNode); 
     }
-    this_Group_0=ruleGroup
+    this_UnorderedGroup_0=ruleUnorderedGroup
     { 
-        $current = $this_Group_0.current; 
+        $current = $this_UnorderedGroup_0.current; 
         currentNode = currentNode.getParent();
     }
 ((
@@ -838,9 +838,9 @@ ruleAlternatives returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getAlternativesAccess().getGroupsGroupParserRuleCall_1_1_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getAlternativesAccess().getGroupsUnorderedGroupParserRuleCall_1_1_1_0(), currentNode); 
 	    }
-		lv_groups_3_0=ruleGroup		{
+		lv_groups_3_0=ruleUnorderedGroup		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getAlternativesRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -850,6 +850,82 @@ ruleAlternatives returns [EObject current=null]
 	       			$current, 
 	       			"groups",
 	        		lv_groups_3_0, 
+	        		"UnorderedGroup", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+))+)?)
+;
+
+
+
+
+
+// Entry rule entryRuleUnorderedGroup
+entryRuleUnorderedGroup returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getUnorderedGroupRule(), currentNode); }
+	 iv_ruleUnorderedGroup=ruleUnorderedGroup 
+	 { $current=$iv_ruleUnorderedGroup.current; } 
+	 EOF 
+;
+
+// Rule UnorderedGroup
+ruleUnorderedGroup returns [EObject current=null] 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(
+    { 
+        currentNode=createCompositeNode(grammarAccess.getUnorderedGroupAccess().getGroupParserRuleCall_0(), currentNode); 
+    }
+    this_Group_0=ruleGroup
+    { 
+        $current = $this_Group_0.current; 
+        currentNode = currentNode.getParent();
+    }
+((
+    { 
+        temp=factory.create(grammarAccess.getUnorderedGroupAccess().getUnorderedGroupElementsAction_1_0().getType().getClassifier());
+        try {
+        	factory.add(temp, "elements", $current, null /*ParserRule*/, currentNode);
+        } catch(ValueConverterException vce) {
+        	handleValueConverterException(vce);
+        }
+        $current = temp; 
+        temp = null;
+        CompositeNode newNode = createCompositeNode(grammarAccess.getUnorderedGroupAccess().getUnorderedGroupElementsAction_1_0(), currentNode.getParent());
+    newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
+    currentNode = newNode; 
+        associateNodeWithAstElement(currentNode, $current); 
+    }
+)(	'&' 
+    {
+        createLeafNode(grammarAccess.getUnorderedGroupAccess().getAmpersandKeyword_1_1_0(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getUnorderedGroupAccess().getElementsGroupParserRuleCall_1_1_1_0(), currentNode); 
+	    }
+		lv_elements_3_0=ruleGroup		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getUnorderedGroupRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"elements",
+	        		lv_elements_3_0, 
 	        		"Group", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {

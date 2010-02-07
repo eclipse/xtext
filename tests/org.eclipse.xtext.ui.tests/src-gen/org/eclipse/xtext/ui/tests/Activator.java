@@ -104,6 +104,11 @@ public class Activator extends AbstractUIPlugin {
 				createUIPluginModule()
 			));
 			
+			injectors.put("org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage", Guice.createInjector(
+				new org.eclipse.xtext.ui.tests.editor.contentassist.ui.UnorderedGroupsTestLanguageUiModule(),
+				createUIPluginModule()
+			));
+			
 			injectors.put("org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguage", Guice.createInjector(
 				new org.eclipse.xtext.ui.tests.parser.keywords.ui.KeywordsUiTestLanguageUiModule(),
 				createUIPluginModule()

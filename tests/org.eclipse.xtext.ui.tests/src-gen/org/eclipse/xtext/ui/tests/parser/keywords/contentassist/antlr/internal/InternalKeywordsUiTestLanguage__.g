@@ -16,25 +16,25 @@ T16 : '\'b\'' ;
 T17 : '\'c\'' ;
 T18 : '"d"' ;
 
-// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g" 333
+// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g" 334
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g" 335
+// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g" 336
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g" 337
+// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g" 338
 RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
-// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g" 339
+// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g" 340
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g" 341
+// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g" 342
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g" 343
+// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g" 344
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g" 345
+// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/parser/keywords/contentassist/antlr/internal/InternalKeywordsUiTestLanguage.g" 346
 RULE_ANY_OTHER : .;
 
 

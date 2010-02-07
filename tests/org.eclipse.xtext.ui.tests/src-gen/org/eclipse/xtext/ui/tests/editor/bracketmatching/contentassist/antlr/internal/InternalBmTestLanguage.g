@@ -507,6 +507,7 @@ finally {
 
 
 
+
 rule__File__ExpressionAssignment
     @init {
 		int stackSize = keepStackSize();

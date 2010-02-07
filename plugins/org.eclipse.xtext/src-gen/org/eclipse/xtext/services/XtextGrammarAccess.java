@@ -512,41 +512,81 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	public class AlternativesElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Alternatives");
 		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final RuleCall cGroupParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final RuleCall cUnorderedGroupParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Action cAlternativesGroupsAction_1_0 = (Action)cGroup_1.eContents().get(0);
 		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
 		private final Keyword cVerticalLineKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
 		private final Assignment cGroupsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
-		private final RuleCall cGroupsGroupParserRuleCall_1_1_1_0 = (RuleCall)cGroupsAssignment_1_1_1.eContents().get(0);
+		private final RuleCall cGroupsUnorderedGroupParserRuleCall_1_1_1_0 = (RuleCall)cGroupsAssignment_1_1_1.eContents().get(0);
 		
 		//Alternatives returns AbstractElement:
-		//  Group ({Alternatives.groups+=current} ("|" groups+=Group)+)?;
+		//  UnorderedGroup ({Alternatives.groups+=current} ("|" groups+=UnorderedGroup)+)?;
 		public ParserRule getRule() { return rule; }
 
-		//Group ({Alternatives.groups+=current} ("|" groups+=Group)+)?
+		//UnorderedGroup ({Alternatives.groups+=current} ("|" groups+=UnorderedGroup)+)?
 		public Group getGroup() { return cGroup; }
 
-		//Group
-		public RuleCall getGroupParserRuleCall_0() { return cGroupParserRuleCall_0; }
+		//UnorderedGroup
+		public RuleCall getUnorderedGroupParserRuleCall_0() { return cUnorderedGroupParserRuleCall_0; }
 
-		//({Alternatives.groups+=current} ("|" groups+=Group)+)?
+		//({Alternatives.groups+=current} ("|" groups+=UnorderedGroup)+)?
 		public Group getGroup_1() { return cGroup_1; }
 
 		//{Alternatives.groups+=current}
 		public Action getAlternativesGroupsAction_1_0() { return cAlternativesGroupsAction_1_0; }
 
-		//("|" groups+=Group)+
+		//("|" groups+=UnorderedGroup)+
 		public Group getGroup_1_1() { return cGroup_1_1; }
 
 		//"|"
 		public Keyword getVerticalLineKeyword_1_1_0() { return cVerticalLineKeyword_1_1_0; }
 
-		//groups+=Group
+		//groups+=UnorderedGroup
 		public Assignment getGroupsAssignment_1_1_1() { return cGroupsAssignment_1_1_1; }
 
+		//UnorderedGroup
+		public RuleCall getGroupsUnorderedGroupParserRuleCall_1_1_1_0() { return cGroupsUnorderedGroupParserRuleCall_1_1_1_0; }
+	}
+
+	public class UnorderedGroupElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "UnorderedGroup");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final RuleCall cGroupParserRuleCall_0 = (RuleCall)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Action cUnorderedGroupElementsAction_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cGroup_1.eContents().get(1);
+		private final Keyword cAmpersandKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
+		private final Assignment cElementsAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
+		private final RuleCall cElementsGroupParserRuleCall_1_1_1_0 = (RuleCall)cElementsAssignment_1_1_1.eContents().get(0);
+		
+		//UnorderedGroup returns AbstractElement:
+		//  Group ({UnorderedGroup.elements+=current} ("&" elements+=Group)+)?;
+		public ParserRule getRule() { return rule; }
+
+		//Group ({UnorderedGroup.elements+=current} ("&" elements+=Group)+)?
+		public Group getGroup() { return cGroup; }
+
 		//Group
-		public RuleCall getGroupsGroupParserRuleCall_1_1_1_0() { return cGroupsGroupParserRuleCall_1_1_1_0; }
+		public RuleCall getGroupParserRuleCall_0() { return cGroupParserRuleCall_0; }
+
+		//({UnorderedGroup.elements+=current} ("&" elements+=Group)+)?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//{UnorderedGroup.elements+=current}
+		public Action getUnorderedGroupElementsAction_1_0() { return cUnorderedGroupElementsAction_1_0; }
+
+		//("&" elements+=Group)+
+		public Group getGroup_1_1() { return cGroup_1_1; }
+
+		//"&"
+		public Keyword getAmpersandKeyword_1_1_0() { return cAmpersandKeyword_1_1_0; }
+
+		//elements+=Group
+		public Assignment getElementsAssignment_1_1_1() { return cElementsAssignment_1_1_1; }
+
+		//Group
+		public RuleCall getElementsGroupParserRuleCall_1_1_1_0() { return cElementsGroupParserRuleCall_1_1_1_0; }
 	}
 
 	public class GroupElements extends AbstractParserRuleElementFinder {
@@ -1494,6 +1534,7 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	private ParserRuleElements pParserRule;
 	private TypeRefElements pTypeRef;
 	private AlternativesElements pAlternatives;
+	private UnorderedGroupElements pUnorderedGroup;
 	private GroupElements pGroup;
 	private AbstractTokenElements pAbstractToken;
 	private AbstractTokenWithCardinalityElements pAbstractTokenWithCardinality;
@@ -1647,13 +1688,23 @@ public class XtextGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Alternatives returns AbstractElement:
-	//  Group ({Alternatives.groups+=current} ("|" groups+=Group)+)?;
+	//  UnorderedGroup ({Alternatives.groups+=current} ("|" groups+=UnorderedGroup)+)?;
 	public AlternativesElements getAlternativesAccess() {
 		return (pAlternatives != null) ? pAlternatives : (pAlternatives = new AlternativesElements());
 	}
 	
 	public ParserRule getAlternativesRule() {
 		return getAlternativesAccess().getRule();
+	}
+
+	//UnorderedGroup returns AbstractElement:
+	//  Group ({UnorderedGroup.elements+=current} ("&" elements+=Group)+)?;
+	public UnorderedGroupElements getUnorderedGroupAccess() {
+		return (pUnorderedGroup != null) ? pUnorderedGroup : (pUnorderedGroup = new UnorderedGroupElements());
+	}
+	
+	public ParserRule getUnorderedGroupRule() {
+		return getUnorderedGroupAccess().getRule();
 	}
 
 	//Group returns AbstractElement:

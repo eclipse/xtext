@@ -33,6 +33,7 @@ import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.UntilToken;
 import org.eclipse.xtext.Wildcard;
 import org.eclipse.xtext.XtextFactory;
@@ -192,6 +193,13 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
    * @generated
    */
   private EClass alternativesEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass unorderedGroupEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -795,6 +803,26 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getUnorderedGroup()
+  {
+    return unorderedGroupEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getUnorderedGroup_Elements()
+  {
+    return (EReference)unorderedGroupEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getGroup()
   {
     return groupEClass;
@@ -943,6 +971,9 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
     alternativesEClass = createEClass(ALTERNATIVES);
     createEReference(alternativesEClass, ALTERNATIVES__GROUPS);
 
+    unorderedGroupEClass = createEClass(UNORDERED_GROUP);
+    createEReference(unorderedGroupEClass, UNORDERED_GROUP__ELEMENTS);
+
     groupEClass = createEClass(GROUP);
     createEReference(groupEClass, GROUP__TOKENS);
 
@@ -996,6 +1027,7 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
     enumRuleEClass.getESuperTypes().add(this.getAbstractRule());
     enumLiteralDeclarationEClass.getESuperTypes().add(this.getAbstractElement());
     alternativesEClass.getESuperTypes().add(this.getAbstractElement());
+    unorderedGroupEClass.getESuperTypes().add(this.getAbstractElement());
     groupEClass.getESuperTypes().add(this.getAbstractElement());
     characterRangeEClass.getESuperTypes().add(this.getAbstractElement());
 
@@ -1072,6 +1104,9 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
 
     initEClass(alternativesEClass, Alternatives.class, "Alternatives", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getAlternatives_Groups(), this.getAbstractElement(), null, "groups", null, 0, -1, Alternatives.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(unorderedGroupEClass, UnorderedGroup.class, "UnorderedGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getUnorderedGroup_Elements(), this.getAbstractElement(), null, "elements", null, 0, -1, UnorderedGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(groupEClass, Group.class, "Group", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getGroup_Tokens(), this.getAbstractElement(), null, "tokens", null, 0, -1, Group.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

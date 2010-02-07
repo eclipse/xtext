@@ -363,6 +363,7 @@ finally {
 
 
 
+
 rule__State__IsInitialAssignment_0_0
     @init {
 		int stackSize = keepStackSize();

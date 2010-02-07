@@ -2313,20 +2313,20 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
 
 
     // $ANTLR start rule__Spielplatz__GroesseAssignment_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:985:1: rule__Spielplatz__GroesseAssignment_1 : ( RULE_INT ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:986:1: rule__Spielplatz__GroesseAssignment_1 : ( RULE_INT ) ;
     public final void rule__Spielplatz__GroesseAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:989:1: ( ( RULE_INT ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:990:1: ( RULE_INT )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:990:1: ( ( RULE_INT ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:991:1: ( RULE_INT )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:990:1: ( RULE_INT )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:991:1: RULE_INT
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:991:1: ( RULE_INT )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:992:1: RULE_INT
             {
              before(grammarAccess.getSpielplatzAccess().getGroesseINTTerminalRuleCall_1_0()); 
-            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_rule__Spielplatz__GroesseAssignment_11919); 
+            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_rule__Spielplatz__GroesseAssignment_11920); 
              after(grammarAccess.getSpielplatzAccess().getGroesseINTTerminalRuleCall_1_0()); 
 
             }
@@ -2350,20 +2350,20 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
 
 
     // $ANTLR start rule__Spielplatz__BeschreibungAssignment_2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1000:1: rule__Spielplatz__BeschreibungAssignment_2 : ( RULE_STRING ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1001:1: rule__Spielplatz__BeschreibungAssignment_2 : ( RULE_STRING ) ;
     public final void rule__Spielplatz__BeschreibungAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1004:1: ( ( RULE_STRING ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1005:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1005:1: ( ( RULE_STRING ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1006:1: ( RULE_STRING )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1005:1: ( RULE_STRING )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1006:1: RULE_STRING
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1006:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1007:1: RULE_STRING
             {
              before(grammarAccess.getSpielplatzAccess().getBeschreibungSTRINGTerminalRuleCall_2_0()); 
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Spielplatz__BeschreibungAssignment_21950); 
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__Spielplatz__BeschreibungAssignment_21951); 
              after(grammarAccess.getSpielplatzAccess().getBeschreibungSTRINGTerminalRuleCall_2_0()); 
 
             }
@@ -2387,20 +2387,20 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
 
 
     // $ANTLR start rule__Spielplatz__KinderAssignment_4_0
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1015:1: rule__Spielplatz__KinderAssignment_4_0 : ( ruleKind ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1016:1: rule__Spielplatz__KinderAssignment_4_0 : ( ruleKind ) ;
     public final void rule__Spielplatz__KinderAssignment_4_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1019:1: ( ( ruleKind ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1020:1: ( ruleKind )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1020:1: ( ( ruleKind ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1021:1: ( ruleKind )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1020:1: ( ruleKind )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1021:1: ruleKind
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1021:1: ( ruleKind )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1022:1: ruleKind
             {
              before(grammarAccess.getSpielplatzAccess().getKinderKindParserRuleCall_4_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleKind_in_rule__Spielplatz__KinderAssignment_4_01981);
+            pushFollow(FollowSets000.FOLLOW_ruleKind_in_rule__Spielplatz__KinderAssignment_4_01982);
             ruleKind();
             _fsp--;
 
@@ -2427,20 +2427,20 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
 
 
     // $ANTLR start rule__Spielplatz__ErzieherAssignment_4_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1030:1: rule__Spielplatz__ErzieherAssignment_4_1 : ( ruleErwachsener ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1031:1: rule__Spielplatz__ErzieherAssignment_4_1 : ( ruleErwachsener ) ;
     public final void rule__Spielplatz__ErzieherAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1034:1: ( ( ruleErwachsener ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1035:1: ( ruleErwachsener )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1035:1: ( ( ruleErwachsener ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1036:1: ( ruleErwachsener )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1035:1: ( ruleErwachsener )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1036:1: ruleErwachsener
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1036:1: ( ruleErwachsener )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1037:1: ruleErwachsener
             {
              before(grammarAccess.getSpielplatzAccess().getErzieherErwachsenerParserRuleCall_4_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleErwachsener_in_rule__Spielplatz__ErzieherAssignment_4_12012);
+            pushFollow(FollowSets000.FOLLOW_ruleErwachsener_in_rule__Spielplatz__ErzieherAssignment_4_12013);
             ruleErwachsener();
             _fsp--;
 
@@ -2467,20 +2467,20 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
 
 
     // $ANTLR start rule__Spielplatz__SpielzeugeAssignment_4_2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1045:1: rule__Spielplatz__SpielzeugeAssignment_4_2 : ( ruleSpielzeug ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1046:1: rule__Spielplatz__SpielzeugeAssignment_4_2 : ( ruleSpielzeug ) ;
     public final void rule__Spielplatz__SpielzeugeAssignment_4_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1049:1: ( ( ruleSpielzeug ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1050:1: ( ruleSpielzeug )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1050:1: ( ( ruleSpielzeug ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1051:1: ( ruleSpielzeug )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1050:1: ( ruleSpielzeug )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1051:1: ruleSpielzeug
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1051:1: ( ruleSpielzeug )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1052:1: ruleSpielzeug
             {
              before(grammarAccess.getSpielplatzAccess().getSpielzeugeSpielzeugParserRuleCall_4_2_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSpielzeug_in_rule__Spielplatz__SpielzeugeAssignment_4_22043);
+            pushFollow(FollowSets000.FOLLOW_ruleSpielzeug_in_rule__Spielplatz__SpielzeugeAssignment_4_22044);
             ruleSpielzeug();
             _fsp--;
 
@@ -2507,20 +2507,20 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
 
 
     // $ANTLR start rule__Spielplatz__FamilieAssignment_4_3
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1060:1: rule__Spielplatz__FamilieAssignment_4_3 : ( ruleFamilie ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1061:1: rule__Spielplatz__FamilieAssignment_4_3 : ( ruleFamilie ) ;
     public final void rule__Spielplatz__FamilieAssignment_4_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1064:1: ( ( ruleFamilie ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1065:1: ( ruleFamilie )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1065:1: ( ( ruleFamilie ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1066:1: ( ruleFamilie )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1065:1: ( ruleFamilie )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1066:1: ruleFamilie
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1066:1: ( ruleFamilie )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1067:1: ruleFamilie
             {
              before(grammarAccess.getSpielplatzAccess().getFamilieFamilieParserRuleCall_4_3_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleFamilie_in_rule__Spielplatz__FamilieAssignment_4_32074);
+            pushFollow(FollowSets000.FOLLOW_ruleFamilie_in_rule__Spielplatz__FamilieAssignment_4_32075);
             ruleFamilie();
             _fsp--;
 
@@ -2547,20 +2547,20 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
 
 
     // $ANTLR start rule__Kind__NameAssignment_2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1075:1: rule__Kind__NameAssignment_2 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1076:1: rule__Kind__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__Kind__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1079:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1080:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1080:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1081:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1080:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1081:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1081:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1082:1: RULE_ID
             {
              before(grammarAccess.getKindAccess().getNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Kind__NameAssignment_22105); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Kind__NameAssignment_22106); 
              after(grammarAccess.getKindAccess().getNameIDTerminalRuleCall_2_0()); 
 
             }
@@ -2584,20 +2584,20 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
 
 
     // $ANTLR start rule__Kind__AgeAssignment_3
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1090:1: rule__Kind__AgeAssignment_3 : ( RULE_INT ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1091:1: rule__Kind__AgeAssignment_3 : ( RULE_INT ) ;
     public final void rule__Kind__AgeAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1094:1: ( ( RULE_INT ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1095:1: ( RULE_INT )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1095:1: ( ( RULE_INT ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1096:1: ( RULE_INT )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1095:1: ( RULE_INT )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1096:1: RULE_INT
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1096:1: ( RULE_INT )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1097:1: RULE_INT
             {
              before(grammarAccess.getKindAccess().getAgeINTTerminalRuleCall_3_0()); 
-            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_rule__Kind__AgeAssignment_32136); 
+            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_rule__Kind__AgeAssignment_32137); 
              after(grammarAccess.getKindAccess().getAgeINTTerminalRuleCall_3_0()); 
 
             }
@@ -2621,20 +2621,20 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
 
 
     // $ANTLR start rule__Erwachsener__NameAssignment_2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1105:1: rule__Erwachsener__NameAssignment_2 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1106:1: rule__Erwachsener__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__Erwachsener__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1109:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1110:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1110:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1111:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1110:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1111:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1111:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1112:1: RULE_ID
             {
              before(grammarAccess.getErwachsenerAccess().getNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Erwachsener__NameAssignment_22167); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Erwachsener__NameAssignment_22168); 
              after(grammarAccess.getErwachsenerAccess().getNameIDTerminalRuleCall_2_0()); 
 
             }
@@ -2658,20 +2658,20 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
 
 
     // $ANTLR start rule__Erwachsener__AgeAssignment_3
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1120:1: rule__Erwachsener__AgeAssignment_3 : ( RULE_INT ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1121:1: rule__Erwachsener__AgeAssignment_3 : ( RULE_INT ) ;
     public final void rule__Erwachsener__AgeAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1124:1: ( ( RULE_INT ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1125:1: ( RULE_INT )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1125:1: ( ( RULE_INT ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1126:1: ( RULE_INT )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1125:1: ( RULE_INT )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1126:1: RULE_INT
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1126:1: ( RULE_INT )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1127:1: RULE_INT
             {
              before(grammarAccess.getErwachsenerAccess().getAgeINTTerminalRuleCall_3_0()); 
-            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_rule__Erwachsener__AgeAssignment_32198); 
+            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_rule__Erwachsener__AgeAssignment_32199); 
              after(grammarAccess.getErwachsenerAccess().getAgeINTTerminalRuleCall_3_0()); 
 
             }
@@ -2695,20 +2695,20 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
 
 
     // $ANTLR start rule__Spielzeug__NameAssignment_2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1135:1: rule__Spielzeug__NameAssignment_2 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1136:1: rule__Spielzeug__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__Spielzeug__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1139:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1140:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1140:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1141:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1140:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1141:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1141:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1142:1: RULE_ID
             {
              before(grammarAccess.getSpielzeugAccess().getNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Spielzeug__NameAssignment_22229); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Spielzeug__NameAssignment_22230); 
              after(grammarAccess.getSpielzeugAccess().getNameIDTerminalRuleCall_2_0()); 
 
             }
@@ -2732,20 +2732,20 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
 
 
     // $ANTLR start rule__Spielzeug__FarbeAssignment_3
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1150:1: rule__Spielzeug__FarbeAssignment_3 : ( ruleFarbe ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1151:1: rule__Spielzeug__FarbeAssignment_3 : ( ruleFarbe ) ;
     public final void rule__Spielzeug__FarbeAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1154:1: ( ( ruleFarbe ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1155:1: ( ruleFarbe )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1155:1: ( ( ruleFarbe ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1156:1: ( ruleFarbe )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1155:1: ( ruleFarbe )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1156:1: ruleFarbe
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1156:1: ( ruleFarbe )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1157:1: ruleFarbe
             {
              before(grammarAccess.getSpielzeugAccess().getFarbeFarbeParserRuleCall_3_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleFarbe_in_rule__Spielzeug__FarbeAssignment_32260);
+            pushFollow(FollowSets000.FOLLOW_ruleFarbe_in_rule__Spielzeug__FarbeAssignment_32261);
             ruleFarbe();
             _fsp--;
 
@@ -2772,23 +2772,23 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
 
 
     // $ANTLR start rule__Farbe__WertAssignment
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1165:1: rule__Farbe__WertAssignment : ( ( rule__Farbe__WertAlternatives_0 ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1166:1: rule__Farbe__WertAssignment : ( ( rule__Farbe__WertAlternatives_0 ) ) ;
     public final void rule__Farbe__WertAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1169:1: ( ( ( rule__Farbe__WertAlternatives_0 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1170:1: ( ( rule__Farbe__WertAlternatives_0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1170:1: ( ( ( rule__Farbe__WertAlternatives_0 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1171:1: ( ( rule__Farbe__WertAlternatives_0 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1170:1: ( ( rule__Farbe__WertAlternatives_0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1171:1: ( rule__Farbe__WertAlternatives_0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1171:1: ( ( rule__Farbe__WertAlternatives_0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1172:1: ( rule__Farbe__WertAlternatives_0 )
             {
              before(grammarAccess.getFarbeAccess().getWertAlternatives_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1172:1: ( rule__Farbe__WertAlternatives_0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1172:2: rule__Farbe__WertAlternatives_0
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1173:1: ( rule__Farbe__WertAlternatives_0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1173:2: rule__Farbe__WertAlternatives_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Farbe__WertAlternatives_0_in_rule__Farbe__WertAssignment2291);
+            pushFollow(FollowSets000.FOLLOW_rule__Farbe__WertAlternatives_0_in_rule__Farbe__WertAssignment2292);
             rule__Farbe__WertAlternatives_0();
             _fsp--;
 
@@ -2818,23 +2818,23 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
 
 
     // $ANTLR start rule__Familie__NameAssignment_2
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1181:1: rule__Familie__NameAssignment_2 : ( ( rule__Familie__NameAlternatives_2_0 ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1182:1: rule__Familie__NameAssignment_2 : ( ( rule__Familie__NameAlternatives_2_0 ) ) ;
     public final void rule__Familie__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1185:1: ( ( ( rule__Familie__NameAlternatives_2_0 ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1186:1: ( ( rule__Familie__NameAlternatives_2_0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1186:1: ( ( ( rule__Familie__NameAlternatives_2_0 ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1187:1: ( ( rule__Familie__NameAlternatives_2_0 ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1186:1: ( ( rule__Familie__NameAlternatives_2_0 ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1187:1: ( rule__Familie__NameAlternatives_2_0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1187:1: ( ( rule__Familie__NameAlternatives_2_0 ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1188:1: ( rule__Familie__NameAlternatives_2_0 )
             {
              before(grammarAccess.getFamilieAccess().getNameAlternatives_2_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1188:1: ( rule__Familie__NameAlternatives_2_0 )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1188:2: rule__Familie__NameAlternatives_2_0
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1189:1: ( rule__Familie__NameAlternatives_2_0 )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1189:2: rule__Familie__NameAlternatives_2_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Familie__NameAlternatives_2_0_in_rule__Familie__NameAssignment_22324);
+            pushFollow(FollowSets000.FOLLOW_rule__Familie__NameAlternatives_2_0_in_rule__Familie__NameAssignment_22325);
             rule__Familie__NameAlternatives_2_0();
             _fsp--;
 
@@ -2864,24 +2864,24 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
 
 
     // $ANTLR start rule__Familie__MutterAssignment_3
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1197:1: rule__Familie__MutterAssignment_3 : ( ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1198:1: rule__Familie__MutterAssignment_3 : ( ( RULE_ID ) ) ;
     public final void rule__Familie__MutterAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1201:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1202:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1202:1: ( ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1203:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1202:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1203:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1203:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1204:1: ( RULE_ID )
             {
              before(grammarAccess.getFamilieAccess().getMutterErwachsenerCrossReference_3_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1204:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1205:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1205:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1206:1: RULE_ID
             {
              before(grammarAccess.getFamilieAccess().getMutterErwachsenerIDTerminalRuleCall_3_0_1()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Familie__MutterAssignment_32361); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Familie__MutterAssignment_32362); 
              after(grammarAccess.getFamilieAccess().getMutterErwachsenerIDTerminalRuleCall_3_0_1()); 
 
             }
@@ -2909,24 +2909,24 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
 
 
     // $ANTLR start rule__Familie__VaterAssignment_4
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1216:1: rule__Familie__VaterAssignment_4 : ( ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1217:1: rule__Familie__VaterAssignment_4 : ( ( RULE_ID ) ) ;
     public final void rule__Familie__VaterAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1220:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1221:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1221:1: ( ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1222:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1221:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1222:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1222:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1223:1: ( RULE_ID )
             {
              before(grammarAccess.getFamilieAccess().getVaterErwachsenerCrossReference_4_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1223:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1224:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1224:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1225:1: RULE_ID
             {
              before(grammarAccess.getFamilieAccess().getVaterErwachsenerIDTerminalRuleCall_4_0_1()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Familie__VaterAssignment_42400); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Familie__VaterAssignment_42401); 
              after(grammarAccess.getFamilieAccess().getVaterErwachsenerIDTerminalRuleCall_4_0_1()); 
 
             }
@@ -2954,24 +2954,24 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
 
 
     // $ANTLR start rule__Familie__KinderAssignment_5
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1235:1: rule__Familie__KinderAssignment_5 : ( ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1236:1: rule__Familie__KinderAssignment_5 : ( ( RULE_ID ) ) ;
     public final void rule__Familie__KinderAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1239:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1240:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1240:1: ( ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1241:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1240:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1241:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1241:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1242:1: ( RULE_ID )
             {
              before(grammarAccess.getFamilieAccess().getKinderKindCrossReference_5_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1242:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1243:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1243:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1244:1: RULE_ID
             {
              before(grammarAccess.getFamilieAccess().getKinderKindIDTerminalRuleCall_5_0_1()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Familie__KinderAssignment_52439); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Familie__KinderAssignment_52440); 
              after(grammarAccess.getFamilieAccess().getKinderKindIDTerminalRuleCall_5_0_1()); 
 
             }
@@ -2999,24 +2999,24 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
 
 
     // $ANTLR start rule__Familie__KinderAssignment_6_1
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1254:1: rule__Familie__KinderAssignment_6_1 : ( ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1255:1: rule__Familie__KinderAssignment_6_1 : ( ( RULE_ID ) ) ;
     public final void rule__Familie__KinderAssignment_6_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1258:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1259:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1259:1: ( ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1260:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1259:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1260:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1260:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1261:1: ( RULE_ID )
             {
              before(grammarAccess.getFamilieAccess().getKinderKindCrossReference_6_1_0()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1261:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1262:1: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1262:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalReferenceGrammarUiTestLanguage.g:1263:1: RULE_ID
             {
              before(grammarAccess.getFamilieAccess().getKinderKindIDTerminalRuleCall_6_1_0_1()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Familie__KinderAssignment_6_12478); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Familie__KinderAssignment_6_12479); 
              after(grammarAccess.getFamilieAccess().getKinderKindIDTerminalRuleCall_6_1_0_1()); 
 
             }
@@ -3132,24 +3132,24 @@ public class InternalReferenceGrammarUiTestLanguageParser extends AbstractIntern
         public static final BitSet FOLLOW_25_in_rule__Familie__Group_6__01843 = new BitSet(new long[]{0x0000000000000020L});
         public static final BitSet FOLLOW_rule__Familie__Group_6__1_in_rule__Familie__Group_6__01853 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Familie__KinderAssignment_6_1_in_rule__Familie__Group_6__11881 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_INT_in_rule__Spielplatz__GroesseAssignment_11919 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rule__Spielplatz__BeschreibungAssignment_21950 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleKind_in_rule__Spielplatz__KinderAssignment_4_01981 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleErwachsener_in_rule__Spielplatz__ErzieherAssignment_4_12012 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSpielzeug_in_rule__Spielplatz__SpielzeugeAssignment_4_22043 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFamilie_in_rule__Spielplatz__FamilieAssignment_4_32074 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Kind__NameAssignment_22105 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_INT_in_rule__Kind__AgeAssignment_32136 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Erwachsener__NameAssignment_22167 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_INT_in_rule__Erwachsener__AgeAssignment_32198 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Spielzeug__NameAssignment_22229 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFarbe_in_rule__Spielzeug__FarbeAssignment_32260 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Farbe__WertAlternatives_0_in_rule__Farbe__WertAssignment2291 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Familie__NameAlternatives_2_0_in_rule__Familie__NameAssignment_22324 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Familie__MutterAssignment_32361 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Familie__VaterAssignment_42400 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Familie__KinderAssignment_52439 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Familie__KinderAssignment_6_12478 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_rule__Spielplatz__GroesseAssignment_11920 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__Spielplatz__BeschreibungAssignment_21951 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleKind_in_rule__Spielplatz__KinderAssignment_4_01982 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleErwachsener_in_rule__Spielplatz__ErzieherAssignment_4_12013 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSpielzeug_in_rule__Spielplatz__SpielzeugeAssignment_4_22044 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFamilie_in_rule__Spielplatz__FamilieAssignment_4_32075 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Kind__NameAssignment_22106 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_rule__Kind__AgeAssignment_32137 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Erwachsener__NameAssignment_22168 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_rule__Erwachsener__AgeAssignment_32199 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Spielzeug__NameAssignment_22230 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFarbe_in_rule__Spielzeug__FarbeAssignment_32261 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Farbe__WertAlternatives_0_in_rule__Farbe__WertAssignment2292 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Familie__NameAlternatives_2_0_in_rule__Familie__NameAssignment_22325 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Familie__MutterAssignment_32362 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Familie__VaterAssignment_42401 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Familie__KinderAssignment_52440 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Familie__KinderAssignment_6_12479 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

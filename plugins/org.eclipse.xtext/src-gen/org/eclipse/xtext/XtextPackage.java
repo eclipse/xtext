@@ -972,6 +972,43 @@ public interface XtextPackage extends EPackage
   int ALTERNATIVES_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.impl.UnorderedGroupImpl <em>Unordered Group</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.impl.UnorderedGroupImpl
+   * @see org.eclipse.xtext.impl.XtextPackageImpl#getUnorderedGroup()
+   * @generated
+   */
+  int UNORDERED_GROUP = 21;
+
+  /**
+   * The feature id for the '<em><b>Cardinality</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_GROUP__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+  /**
+   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_GROUP__ELEMENTS = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Unordered Group</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int UNORDERED_GROUP_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.impl.GroupImpl <em>Group</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -979,7 +1016,7 @@ public interface XtextPackage extends EPackage
    * @see org.eclipse.xtext.impl.XtextPackageImpl#getGroup()
    * @generated
    */
-  int GROUP = 21;
+  int GROUP = 22;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -1016,7 +1053,7 @@ public interface XtextPackage extends EPackage
    * @see org.eclipse.xtext.impl.XtextPackageImpl#getCharacterRange()
    * @generated
    */
-  int CHARACTER_RANGE = 22;
+  int CHARACTER_RANGE = 23;
 
   /**
    * The feature id for the '<em><b>Cardinality</b></em>' attribute.
@@ -1607,6 +1644,27 @@ public interface XtextPackage extends EPackage
   EReference getAlternatives_Groups();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.UnorderedGroup <em>Unordered Group</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Unordered Group</em>'.
+   * @see org.eclipse.xtext.UnorderedGroup
+   * @generated
+   */
+  EClass getUnorderedGroup();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.UnorderedGroup#getElements <em>Elements</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Elements</em>'.
+   * @see org.eclipse.xtext.UnorderedGroup#getElements()
+   * @see #getUnorderedGroup()
+   * @generated
+   */
+  EReference getUnorderedGroup_Elements();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.Group <em>Group</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2139,6 +2197,24 @@ public interface XtextPackage extends EPackage
      * @generated
      */
     EReference ALTERNATIVES__GROUPS = eINSTANCE.getAlternatives_Groups();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.impl.UnorderedGroupImpl <em>Unordered Group</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.impl.UnorderedGroupImpl
+     * @see org.eclipse.xtext.impl.XtextPackageImpl#getUnorderedGroup()
+     * @generated
+     */
+    EClass UNORDERED_GROUP = eINSTANCE.getUnorderedGroup();
+
+    /**
+     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference UNORDERED_GROUP__ELEMENTS = eINSTANCE.getUnorderedGroup_Elements();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.impl.GroupImpl <em>Group</em>}' class.

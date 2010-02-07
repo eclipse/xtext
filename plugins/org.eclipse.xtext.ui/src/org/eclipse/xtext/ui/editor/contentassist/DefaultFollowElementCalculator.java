@@ -21,6 +21,7 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
@@ -81,6 +82,14 @@ public class DefaultFollowElementCalculator implements IFollowElementCalculator 
 		public FirstSetCalculator caseAlternatives(Alternatives alternatives) {
 			for (AbstractElement alternativeElement : alternatives.getGroups()) {
 				doSwitch(alternativeElement);
+			}
+			return this;
+		}
+		
+		@Override
+		public FirstSetCalculator caseUnorderedGroup(UnorderedGroup group) {
+			for (AbstractElement element : group.getElements()) {
+				doSwitch(element);
 			}
 			return this;
 		}

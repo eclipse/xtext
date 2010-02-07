@@ -185,6 +185,11 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «EXPAND defineConsumerField(this) FOREACH tokens-»
 «ENDDEFINE»
 
+«DEFINE defineConsumerField FOR UnorderedGroup-»
+«EXPAND defineConsumerFieldDeclaration FOR this-»
+«EXPAND defineConsumerField FOREACH elements-»
+«ENDDEFINE»
+
 «DEFINE defineConsumerField(Group parent) FOR AbstractElement-»
 «EXPAND defineConsumerField FOR this-»
 «ENDDEFINE»
@@ -317,6 +322,11 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «ENDIF-»
 «ENDDEFINE»
 
+«DEFINE defineConsumerClass FOR UnorderedGroup-»
+«EXPAND defineConsumerClassDeclaration FOR this-»
+«EXPAND defineConsumerClass FOREACH elements-»
+«ENDDEFINE»
+
 «DEFINE defineConsumerClass FOR Assignment-»
 «EXPAND defineConsumerClassDeclaration FOR this-»
 «EXPAND defineConsumerClass(this) FOR terminal-»
@@ -432,6 +442,9 @@ AssignmentConsumer«ENDDEFINE»
 «DEFINE parentConsumerClassNameImpl FOR Group-»
 GroupConsumer«ENDDEFINE»
 
+«DEFINE parentConsumerClassNameImpl FOR UnorderedGroup-»
+UnorderedGroupConsumer«ENDDEFINE»
+
 «REM»
 	consumerClassBody for unassigned elements
 «ENDREM»
@@ -464,6 +477,13 @@ GroupConsumer«ENDDEFINE»
 		}
 «ENDDEFINE»
 
+«DEFINE consumerClassBody FOR UnorderedGroup-»
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+«EXPAND acceptConsumers-»
+		}
+«ENDDEFINE»
+
 «DEFINE doConsumeBody FOR AbstractElement-»
 «ERROR "doConsumeBody is not defined for " + metaType.name-»
 «ENDDEFINE»
@@ -473,6 +493,10 @@ GroupConsumer«ENDDEFINE»
 «ENDDEFINE»
 
 «DEFINE doConsumeBody FOR Group-»
+			return «consumerFieldName()».consume();
+«ENDDEFINE»
+
+«DEFINE doConsumeBody FOR UnorderedGroup-»
 			return «consumerFieldName()».consume();
 «ENDDEFINE»
 
@@ -641,6 +665,12 @@ GroupConsumer«ENDDEFINE»
 «ENDFOREACH-»
 «ENDDEFINE»
 
+«DEFINE acceptConsumers FOR UnorderedGroup-»
+«FOREACH elements AS token-»
+			acceptor.accept(«token.consumerFieldName()»);
+«ENDFOREACH-»
+«ENDDEFINE»
+
 «REM»
 	IElementConsumer fields
 «ENDREM»
@@ -683,6 +713,11 @@ GroupConsumer«ENDDEFINE»
 «ENDIF-»
 «ENDDEFINE»
 
+«DEFINE assignConsumerField FOR UnorderedGroup-»
+«EXPAND assignConsumerFieldImpl FOR this-»
+«EXPAND assignConsumerField FOREACH elements-»
+«ENDDEFINE»
+
 «DEFINE assignConsumerField FOR Assignment-»
 «EXPAND assignConsumerFieldImpl FOR this-»
 «EXPAND assignConsumerField(this) FOR terminal-»
@@ -723,6 +758,10 @@ GroupConsumer«ENDDEFINE»
 
 «DEFINE assignConsumerField(Assignment assignment) FOR Group-»
 «ERROR "groups are not supported in assignments"»
+«ENDDEFINE»
+
+«DEFINE assignConsumerField(Assignment assignment) FOR UnorderedGroup-»
+«ERROR "unordered groups are not supported in assignments"»
 «ENDDEFINE»
 
 «DEFINE assignConsumerFieldImpl FOR AbstractElement-»

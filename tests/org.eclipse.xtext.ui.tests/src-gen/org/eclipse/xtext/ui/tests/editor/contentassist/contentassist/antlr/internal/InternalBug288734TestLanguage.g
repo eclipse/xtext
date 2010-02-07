@@ -545,6 +545,7 @@ finally {
 
 
 
+
 rule__Model__ConstantsAssignment
     @init {
 		int stackSize = keepStackSize();

@@ -35,6 +35,7 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.util.EmfFormatter;
 
@@ -115,6 +116,11 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 					if (children1.size() == 1)
 						return children1.get(0) + card;
 					return "(" + Join.join(" ", children1) + ")" + card;
+				case UNORDERED_GROUP:
+					List<String> elements = getChildren(element, all);
+					if (elements.size() == 1)
+						return elements.get(0) + card;
+					return "(" + Join.join("&", elements) + ")" + card;
 				case ALTERNATIVE:
 					List<String> children2 = getChildren(element, all);
 					return "(" + Join.join("|", children2) + ")" + card;
@@ -367,7 +373,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		public List<Element> getContents() {
 			if (contents == null) {
 				contents = new ArrayList<Element>();
-				if (getType() == ElementType.ALTERNATIVE || getType() == ElementType.GROUP)
+				if (getType() == ElementType.ALTERNATIVE || getType() == ElementType.GROUP || getType() == ElementType.UNORDERED_GROUP)
 					for (EObject e : element.eContents()) {
 						Element x = createElement(this, e);
 						if (x != null)
@@ -430,6 +436,8 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 					return t + ((Assignment) element).getFeature() + c;
 				case GROUP:
 					return t + "(" + Join.join(" ", getContents()) + ")" + c;
+				case UNORDERED_GROUP:
+					return t + "(" + Join.join("&", getContents()) + ")" + c;
 				case ALTERNATIVE:
 					return t + "(" + Join.join("|", getContents()) + ")" + c;
 				case ACTION:
@@ -441,7 +449,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 	}
 
 	protected enum ElementType {
-		ACTION, ALTERNATIVE, ASSIGNMENT, GROUP
+		ACTION, ALTERNATIVE, ASSIGNMENT, GROUP, UNORDERED_GROUP
 	}
 
 	public static final int ERROR_FEATURE_MISSING = 6;
@@ -554,6 +562,8 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			return ElementType.GROUP;
 		if (ele instanceof Alternatives)
 			return ElementType.ALTERNATIVE;
+		if (ele instanceof UnorderedGroup)
+			return ElementType.UNORDERED_GROUP;
 		if (ele instanceof Assignment)
 			return ElementType.ASSIGNMENT;
 		if (ele instanceof Action)
@@ -585,6 +595,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 	protected int getRequiredMaxCountByParent(EObject ctx, Element parent, Element exclude, Set<Element> involved) {
 		switch (parent.getType()) {
 			case GROUP:
+			case UNORDERED_GROUP:
 				if (parent.isRoot() && !parent.isMultiple() && !parent.isOptional())
 					return 1;
 				int max = UNDEF;
@@ -628,6 +639,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 				involved.add(child);
 				return getActualCount(ctx, f);
 			case GROUP:
+			case UNORDERED_GROUP:
 				int count = UNDEF;
 				for (Element a : child.getContents()) {
 					int c = getRequiredMaxCountForChild(ctx, a, involved);
@@ -643,6 +655,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 	protected int getRequiredMinCountByParent(EObject ctx, Element parent, Element exclude, Set<Element> involved) {
 		switch (parent.getType()) {
 			case GROUP:
+			case UNORDERED_GROUP:
 				if (parent.isRoot() && !parent.isOptional() && !parent.isMultiple())
 					return 1;
 				int count1 = UNDEF;
@@ -687,6 +700,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 				count = getActualCount(ctx, f);
 				break;
 			case GROUP:
+			case UNORDERED_GROUP:
 				for (Element a : child.getContents()) {
 					int c = getRequiredMinCountForChild(ctx, a, involved);
 					if (c > count)
@@ -720,8 +734,8 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 
 	protected boolean ruleContainsAssignedAction(Element rule) {
 		return Iterables.any(containedActions(rule.getEle()), new Predicate<Action>() {
-			public boolean apply(Action arg0) {
-				return arg0.getFeature() != null;
+			public boolean apply(Action action) {
+				return action.getFeature() != null;
 			}
 		});
 	}
@@ -798,6 +812,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			return Collections.singleton(ele);
 		switch (ele.getType()) {
 			case GROUP:
+			case UNORDERED_GROUP:
 				Set<Element> l1 = new HashSet<Element>();
 				for (Element e : ele.getContents())
 					l1.addAll(collectUnfulfilledSemanticElements(cls, e));

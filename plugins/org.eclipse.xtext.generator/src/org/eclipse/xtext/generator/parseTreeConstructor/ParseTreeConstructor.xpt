@@ -168,6 +168,17 @@ protected class «elementMethodName()» extends GroupToken {
 «EXPAND element FOREACH tokens.reject(e|e.getTreeConstState().disabled)»
 «ENDDEFINE»
 
+«REM» ************ Unordered Groups ************* «ENDREM»
+
+«DEFINE element FOR UnorderedGroup»
+«grammarFragmentToStr("// ")»
+protected class «elementMethodName()» extends UnorderedGroupToken {
+	
+«EXPAND constructor-»
+}
+«EXPAND element FOREACH elements.reject(e|e.getTreeConstState().disabled)»
+«ENDDEFINE»
+
 
 «REM» ************ Alternatives ************* «ENDREM»
 

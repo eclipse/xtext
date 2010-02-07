@@ -13,25 +13,25 @@ T13 : 'DifferentLiteral' ;
 T14 : 'existing' ;
 T15 : 'generated' ;
 
-// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g" 394
+// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g" 395
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g" 396
+// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g" 397
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g" 398
+// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g" 399
 RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
-// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g" 400
+// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g" 401
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g" 402
+// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g" 403
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g" 404
+// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g" 405
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g" 406
+// $ANTLR src "../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/enumrules/contentassist/antlr/internal/InternalEnumRulesUiTestLanguage.g" 407
 RULE_ANY_OTHER : .;
 
 

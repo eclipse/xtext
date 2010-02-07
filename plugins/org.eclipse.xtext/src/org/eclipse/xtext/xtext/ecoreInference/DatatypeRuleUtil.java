@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtext.ecoreInference;
 
 import java.util.HashSet;
+import java.util.List;
 
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.AbstractElement;
@@ -20,6 +21,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.util.XtextSwitch;
 
 /**
@@ -115,23 +117,27 @@ abstract class DatatypeRuleUtil extends XtextSwitch<Boolean>{
 
 	@Override
 	public Boolean caseAlternatives(Alternatives object) {
-		boolean result = true;
-		for(int i = 0; i < object.getGroups().size() && result; i++) {
-			result &= doSwitch(object.getGroups().get(i));
-		}
-		return result;
+		return isEveryElementValid(object.getGroups());
 	}
 
 	@Override
 	public Boolean caseGroup(Group object) {
-		boolean result = true;
-		for(int i = 0; i < object.getTokens().size() && result; i++) {
-			AbstractElement token = object.getTokens().get(i);
-			result &= doSwitch(token);
-		}
-		return result;
+		return isEveryElementValid(object.getTokens());
+	}
+	
+	@Override
+	public Boolean caseUnorderedGroup(UnorderedGroup object) {
+		return isEveryElementValid(object.getElements());
 	}
 
+	protected Boolean isEveryElementValid(List<AbstractElement> elements) {
+		for(int i = 0; i < elements.size(); i++) {
+			if (!doSwitch(elements.get(i)))
+				return false;
+		}
+		return true;
+	}
+	
 	@Override
 	public Boolean caseKeyword(Keyword object) {
 		return Boolean.TRUE;

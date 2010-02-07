@@ -80,6 +80,7 @@ entryRuleSpielplatz returns [EObject current=null]
 // Rule Spielplatz
 ruleSpielplatz returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -264,6 +265,7 @@ entryRuleKind returns [EObject current=null]
 // Rule Kind
 ruleKind returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -347,6 +349,7 @@ entryRuleErwachsener returns [EObject current=null]
 // Rule Erwachsener
 ruleErwachsener returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -430,6 +433,7 @@ entryRuleSpielzeug returns [EObject current=null]
 // Rule Spielzeug
 ruleSpielzeug returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -513,6 +517,7 @@ entryRuleFarbe returns [EObject current=null]
 // Rule Farbe
 ruleFarbe returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -614,6 +619,7 @@ entryRuleFamilie returns [EObject current=null]
 // Rule Familie
 ruleFamilie returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;

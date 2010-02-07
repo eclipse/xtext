@@ -145,6 +145,7 @@ finally {
 
 
 
+
 rule__Model__FirstAssignment_0
     @init {
 		int stackSize = keepStackSize();
