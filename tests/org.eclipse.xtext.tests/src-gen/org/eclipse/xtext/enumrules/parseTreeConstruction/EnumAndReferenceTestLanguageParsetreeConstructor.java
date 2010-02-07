@@ -99,7 +99,7 @@ protected class EntityWithEnumAndReference_TypeAssignment_0 extends AssignmentTo
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("type",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("type");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) {  
 			type = AssignmentType.ERC;
 			element = grammarAccess.getEntityWithEnumAndReferenceAccess().getTypeKindOfKeywordEnumRuleCall_0_0();
 			return obj;
@@ -133,7 +133,7 @@ protected class EntityWithEnumAndReference_NameAssignment_1 extends AssignmentTo
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEntityWithEnumAndReferenceAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;

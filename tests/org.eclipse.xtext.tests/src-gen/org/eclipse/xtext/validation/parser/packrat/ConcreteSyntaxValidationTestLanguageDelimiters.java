@@ -18,7 +18,7 @@ public final class ConcreteSyntaxValidationTestLanguageDelimiters {
 	public static final ISequenceMatcher ruleCall$47$Delimiter = new SetBasedKeywordMatcher(
 		"kw1", "kw2", "kw3", "kw4", "kw5", "group");
 
-    // TODO: remove hardcoded character class from template
+    
 	public static final ICharacterClass keyword$56$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),

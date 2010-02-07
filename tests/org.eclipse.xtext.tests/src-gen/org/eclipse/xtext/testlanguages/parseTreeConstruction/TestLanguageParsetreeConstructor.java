@@ -330,7 +330,7 @@ protected class ChoiceRule_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getChoiceRuleAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -577,7 +577,7 @@ protected class TerminalRule_StringFeatureAssignment extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("stringFeature",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stringFeature");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTerminalRuleAccess().getStringFeatureSTRINGTerminalRuleCall_0();
 			return obj;

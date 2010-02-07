@@ -2632,7 +2632,7 @@ protected class Model_ValueAssignment_1_14_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.DRC;
 			element = grammarAccess.getModelAccess().getValueUnorderedDatatypeParserRuleCall_1_14_1_0();
 			return obj;

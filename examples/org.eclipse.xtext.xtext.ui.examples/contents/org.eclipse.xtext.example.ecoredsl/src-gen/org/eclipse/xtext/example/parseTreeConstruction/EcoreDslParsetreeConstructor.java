@@ -291,7 +291,7 @@ protected class ReferencedMetamodel_AliasAssignment_1_0 extends AssignmentToken 
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("alias",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("alias");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getReferencedMetamodelAccess().getAliasIDTerminalRuleCall_1_0_0();
 			return obj;
@@ -518,7 +518,7 @@ protected class EPackageDecl_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.DRC;
 			element = grammarAccess.getEPackageDeclAccess().getNameQIDParserRuleCall_2_0();
 			return obj;
@@ -596,7 +596,7 @@ protected class EPackageDecl_NsURIAssignment_5 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("nsURI",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("nsURI");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEPackageDeclAccess().getNsURISTRINGTerminalRuleCall_5_0();
 			return obj;
@@ -674,7 +674,7 @@ protected class EPackageDecl_NsPrefixAssignment_8 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("nsPrefix",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("nsPrefix");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.DRC;
 			element = grammarAccess.getEPackageDeclAccess().getNsPrefixQIDParserRuleCall_8_0();
 			return obj;
@@ -979,7 +979,7 @@ protected class SubEPackageDecl_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSubEPackageDeclAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -1395,7 +1395,7 @@ protected class EDataTypeDecl_SerializableAssignment_0_1 extends AssignmentToken
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("serializable",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("serializable");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEDataTypeDeclAccess().getSerializableSerializableTerminalRuleCall_0_1_0();
 			return obj;
@@ -1474,7 +1474,7 @@ protected class EDataTypeDecl_NameAssignment_0_2_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEDataTypeDeclAccess().getNameIDTerminalRuleCall_0_2_1_0();
 			return obj;
@@ -1530,7 +1530,7 @@ protected class EDataTypeDecl_InstanceClassNameAssignment_0_2_3 extends Assignme
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("instanceClassName",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("instanceClassName");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.DRC;
 			element = grammarAccess.getEDataTypeDeclAccess().getInstanceClassNameSTRING_OR_QIDParserRuleCall_0_2_3_0();
 			return obj;
@@ -1683,7 +1683,7 @@ protected class EAnnotationDecl_SourceAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("source",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("source");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.DRC;
 			element = grammarAccess.getEAnnotationDeclAccess().getSourceSTRING_OR_QIDParserRuleCall_1_0();
 			return obj;
@@ -2133,7 +2133,7 @@ protected class EClassDecl_NameAssignment_3 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEClassDeclAccess().getNameIDTerminalRuleCall_3_0();
 			return obj;
@@ -2606,7 +2606,7 @@ protected class EClassDecl_InstanceClassNameAssignment_6_1 extends AssignmentTok
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("instanceClassName",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("instanceClassName");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.DRC;
 			element = grammarAccess.getEClassDeclAccess().getInstanceClassNameSTRING_OR_QIDParserRuleCall_6_1_0();
 			return obj;
@@ -3072,7 +3072,7 @@ protected class EAttributeDecl_UniqueAssignment_1_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("unique",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("unique");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEAttributeDeclAccess().getUniqueBagTerminalRuleCall_1_1_0();
 			return obj;
@@ -3107,7 +3107,7 @@ protected class EAttributeDecl_OrderedAssignment_1_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("ordered",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ordered");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEAttributeDeclAccess().getOrderedRandomTerminalRuleCall_1_2_0();
 			return obj;
@@ -3142,7 +3142,7 @@ protected class EAttributeDecl_ChangeableAssignment_1_3 extends AssignmentToken 
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("changeable",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("changeable");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEAttributeDeclAccess().getChangeableReadonlyTerminalRuleCall_1_3_0();
 			return obj;
@@ -3430,7 +3430,7 @@ protected class EAttributeDecl_LowerBoundAssignment_4_1 extends AssignmentToken 
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("lowerBound",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("lowerBound");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEAttributeDeclAccess().getLowerBoundINTTerminalRuleCall_4_1_0();
 			return obj;
@@ -3508,7 +3508,7 @@ protected class EAttributeDecl_UpperBoundAssignment_4_2_1 extends AssignmentToke
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("upperBound",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("upperBound");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.DRC;
 			element = grammarAccess.getEAttributeDeclAccess().getUpperBoundSINTParserRuleCall_4_2_1_0();
 			return obj;
@@ -3568,7 +3568,7 @@ protected class EAttributeDecl_NameAssignment_5 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEAttributeDeclAccess().getNameIDTerminalRuleCall_5_0();
 			return obj;
@@ -3646,7 +3646,7 @@ protected class EAttributeDecl_DefaultValueLiteralAssignment_6_1 extends Assignm
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("defaultValueLiteral",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("defaultValueLiteral");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEAttributeDeclAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_6_1_0();
 			return obj;
@@ -3827,7 +3827,7 @@ protected class EReferenceDecl_ResolveProxiesAssignment_1_0 extends AssignmentTo
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("resolveProxies",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("resolveProxies");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEReferenceDeclAccess().getResolveProxiesLocalTerminalRuleCall_1_0_0();
 			return obj;
@@ -3862,7 +3862,7 @@ protected class EReferenceDecl_UniqueAssignment_1_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("unique",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("unique");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEReferenceDeclAccess().getUniqueBagTerminalRuleCall_1_1_0();
 			return obj;
@@ -3897,7 +3897,7 @@ protected class EReferenceDecl_OrderedAssignment_1_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("ordered",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ordered");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEReferenceDeclAccess().getOrderedRandomTerminalRuleCall_1_2_0();
 			return obj;
@@ -3932,7 +3932,7 @@ protected class EReferenceDecl_ChangeableAssignment_1_3 extends AssignmentToken 
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("changeable",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("changeable");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEReferenceDeclAccess().getChangeableReadonlyTerminalRuleCall_1_3_0();
 			return obj;
@@ -4279,7 +4279,7 @@ protected class EReferenceDecl_LowerBoundAssignment_4_1 extends AssignmentToken 
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("lowerBound",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("lowerBound");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEReferenceDeclAccess().getLowerBoundINTTerminalRuleCall_4_1_0();
 			return obj;
@@ -4357,7 +4357,7 @@ protected class EReferenceDecl_UpperBoundAssignment_4_2_1 extends AssignmentToke
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("upperBound",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("upperBound");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.DRC;
 			element = grammarAccess.getEReferenceDeclAccess().getUpperBoundSINTParserRuleCall_4_2_1_0();
 			return obj;
@@ -4501,7 +4501,7 @@ protected class EReferenceDecl_NameAssignment_6 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEReferenceDeclAccess().getNameIDTerminalRuleCall_6_0();
 			return obj;
@@ -4663,7 +4663,7 @@ protected class EEnumDecl_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEEnumDeclAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -4872,7 +4872,7 @@ protected class EEnumLiteralDecl_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEEnumLiteralDeclAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -4950,7 +4950,7 @@ protected class EEnumLiteralDecl_ValueAssignment_2_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEEnumLiteralDeclAccess().getValueINTTerminalRuleCall_2_1_0();
 			return obj;
@@ -4986,7 +4986,7 @@ protected class EEnumLiteralDecl_LiteralAssignment_3 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("literal",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("literal");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEEnumLiteralDeclAccess().getLiteralSTRINGTerminalRuleCall_3_0();
 			return obj;
@@ -5082,7 +5082,7 @@ protected class ETypeParameterDecl_NameAssignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getETypeParameterDeclAccess().getNameIDTerminalRuleCall_0_0();
 			return obj;
@@ -6359,7 +6359,7 @@ protected class EOperationDecl_UniqueAssignment_1_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("unique",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("unique");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEOperationDeclAccess().getUniqueBagTerminalRuleCall_1_0_0();
 			return obj;
@@ -6394,7 +6394,7 @@ protected class EOperationDecl_OrderedAssignment_1_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("ordered",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("ordered");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEOperationDeclAccess().getOrderedRandomTerminalRuleCall_1_1_0();
 			return obj;
@@ -6544,7 +6544,7 @@ protected class EOperationDecl_NameAssignment_4 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEOperationDeclAccess().getNameIDTerminalRuleCall_4_0();
 			return obj;
@@ -7331,7 +7331,7 @@ protected class EParameterDecl_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEParameterDeclAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -7402,7 +7402,7 @@ protected class MapEntry_KeyAssignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("key",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("key");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getMapEntryAccess().getKeyIDTerminalRuleCall_0_0();
 			return obj;
@@ -7458,7 +7458,7 @@ protected class MapEntry_ValueAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("value",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("value");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getMapEntryAccess().getValueSTRINGTerminalRuleCall_2_0();
 			return obj;

@@ -17,25 +17,25 @@ T17 : '}' ;
 T18 : '=>' ;
 T19 : 'resetting' ;
 
-// $ANTLR src "../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalFowlerDsl.g" 919
+// $ANTLR src "../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalFowlerDsl.g" 920
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalFowlerDsl.g" 921
+// $ANTLR src "../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalFowlerDsl.g" 922
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalFowlerDsl.g" 923
+// $ANTLR src "../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalFowlerDsl.g" 924
 RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
-// $ANTLR src "../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalFowlerDsl.g" 925
+// $ANTLR src "../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalFowlerDsl.g" 926
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-// $ANTLR src "../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalFowlerDsl.g" 927
+// $ANTLR src "../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalFowlerDsl.g" 928
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-// $ANTLR src "../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalFowlerDsl.g" 929
+// $ANTLR src "../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalFowlerDsl.g" 930
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-// $ANTLR src "../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalFowlerDsl.g" 931
+// $ANTLR src "../org.eclipse.xtext.example.fowlerdsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalFowlerDsl.g" 932
 RULE_ANY_OTHER : .;
 
 

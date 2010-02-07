@@ -104,7 +104,7 @@ protected class Model_EnumsAssignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("enums",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("enums");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) {  
 			type = AssignmentType.ERC;
 			element = grammarAccess.getModelAccess().getEnumsEnumNameEnumRuleCall_0_0();
 			return obj;
@@ -270,7 +270,7 @@ protected class Ab_XAssignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("x",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAbAccess().getXCharATerminalRuleCall_0_0();
 			return obj;
@@ -304,7 +304,7 @@ protected class Ab_YAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("y",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("y");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getAbAccess().getYCharbTerminalRuleCall_1_0();
 			return obj;
@@ -375,7 +375,7 @@ protected class Xb_XAssignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("x",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("x");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getXbAccess().getXCharXTerminalRuleCall_0_0();
 			return obj;
@@ -409,7 +409,7 @@ protected class Xb_YAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("y",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("y");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getXbAccess().getYCharbTerminalRuleCall_1_0();
 			return obj;

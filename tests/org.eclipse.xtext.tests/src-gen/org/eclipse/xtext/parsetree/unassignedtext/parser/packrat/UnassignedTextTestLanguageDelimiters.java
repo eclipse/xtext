@@ -15,7 +15,7 @@ public final class UnassignedTextTestLanguageDelimiters {
 	
 	public static final ISequenceMatcher ruleCall$13$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
-    // TODO: remove hardcoded character class from template
+    
 	public static final ICharacterClass keyword$43$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),

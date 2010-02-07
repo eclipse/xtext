@@ -4808,6 +4808,7 @@ finally {
 
 
 
+
 rule__EcoreDsl__MetamodelDeclarationsAssignment_0
     @init {
 		int stackSize = keepStackSize();

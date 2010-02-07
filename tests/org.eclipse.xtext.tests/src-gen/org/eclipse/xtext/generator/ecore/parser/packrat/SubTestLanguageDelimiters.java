@@ -14,7 +14,7 @@ public final class SubTestLanguageDelimiters {
 	
 	public static final ICharacterClass keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 
-    // TODO: remove hardcoded character class from template
+    
 	public static final ICharacterClass keyword$4$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),

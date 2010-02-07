@@ -4414,22 +4414,22 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Model__ElementsAssignment
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1645:1: rule__Model__ElementsAssignment : ( ruleAbstractElement ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1646:1: rule__Model__ElementsAssignment : ( ruleAbstractElement ) ;
     public final void rule__Model__ElementsAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1649:1: ( ( ruleAbstractElement ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1650:1: ( ruleAbstractElement )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1650:1: ( ( ruleAbstractElement ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1651:1: ( ruleAbstractElement )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1650:1: ( ruleAbstractElement )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1651:1: ruleAbstractElement
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1651:1: ( ruleAbstractElement )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1652:1: ruleAbstractElement
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getModelAccess().getElementsAbstractElementParserRuleCall_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleAbstractElement_in_rule__Model__ElementsAssignment3262);
+            pushFollow(FollowSets000.FOLLOW_ruleAbstractElement_in_rule__Model__ElementsAssignment3263);
             ruleAbstractElement();
             _fsp--;
             if (failed) return ;
@@ -4458,22 +4458,22 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Import__ImportedNamespaceAssignment_1
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1660:1: rule__Import__ImportedNamespaceAssignment_1 : ( ruleQualifiedNameWithWildCard ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1661:1: rule__Import__ImportedNamespaceAssignment_1 : ( ruleQualifiedNameWithWildCard ) ;
     public final void rule__Import__ImportedNamespaceAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1664:1: ( ( ruleQualifiedNameWithWildCard ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1665:1: ( ruleQualifiedNameWithWildCard )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1665:1: ( ( ruleQualifiedNameWithWildCard ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1666:1: ( ruleQualifiedNameWithWildCard )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1665:1: ( ruleQualifiedNameWithWildCard )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1666:1: ruleQualifiedNameWithWildCard
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1666:1: ( ruleQualifiedNameWithWildCard )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1667:1: ruleQualifiedNameWithWildCard
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameWithWildCardParserRuleCall_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleQualifiedNameWithWildCard_in_rule__Import__ImportedNamespaceAssignment_13293);
+            pushFollow(FollowSets000.FOLLOW_ruleQualifiedNameWithWildCard_in_rule__Import__ImportedNamespaceAssignment_13294);
             ruleQualifiedNameWithWildCard();
             _fsp--;
             if (failed) return ;
@@ -4502,22 +4502,22 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PackageDeclaration__NameAssignment_1
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1675:1: rule__PackageDeclaration__NameAssignment_1 : ( ruleQualifiedName ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1676:1: rule__PackageDeclaration__NameAssignment_1 : ( ruleQualifiedName ) ;
     public final void rule__PackageDeclaration__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1679:1: ( ( ruleQualifiedName ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1680:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1680:1: ( ( ruleQualifiedName ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1681:1: ( ruleQualifiedName )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1680:1: ( ruleQualifiedName )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1681:1: ruleQualifiedName
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1681:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1682:1: ruleQualifiedName
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getPackageDeclarationAccess().getNameQualifiedNameParserRuleCall_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleQualifiedName_in_rule__PackageDeclaration__NameAssignment_13324);
+            pushFollow(FollowSets000.FOLLOW_ruleQualifiedName_in_rule__PackageDeclaration__NameAssignment_13325);
             ruleQualifiedName();
             _fsp--;
             if (failed) return ;
@@ -4546,22 +4546,22 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__PackageDeclaration__ElementsAssignment_3
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1690:1: rule__PackageDeclaration__ElementsAssignment_3 : ( ruleAbstractElement ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1691:1: rule__PackageDeclaration__ElementsAssignment_3 : ( ruleAbstractElement ) ;
     public final void rule__PackageDeclaration__ElementsAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1694:1: ( ( ruleAbstractElement ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1695:1: ( ruleAbstractElement )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1695:1: ( ( ruleAbstractElement ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1696:1: ( ruleAbstractElement )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1695:1: ( ruleAbstractElement )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1696:1: ruleAbstractElement
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1696:1: ( ruleAbstractElement )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1697:1: ruleAbstractElement
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getPackageDeclarationAccess().getElementsAbstractElementParserRuleCall_3_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleAbstractElement_in_rule__PackageDeclaration__ElementsAssignment_33355);
+            pushFollow(FollowSets000.FOLLOW_ruleAbstractElement_in_rule__PackageDeclaration__ElementsAssignment_33356);
             ruleAbstractElement();
             _fsp--;
             if (failed) return ;
@@ -4590,22 +4590,22 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__DataType__NameAssignment_1
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1705:1: rule__DataType__NameAssignment_1 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1706:1: rule__DataType__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__DataType__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1709:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1710:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1710:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1711:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1710:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1711:1: RULE_ID
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1711:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1712:1: RULE_ID
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getDataTypeAccess().getNameIDTerminalRuleCall_1_0()); 
             }
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__DataType__NameAssignment_13386); if (failed) return ;
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__DataType__NameAssignment_13387); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getDataTypeAccess().getNameIDTerminalRuleCall_1_0()); 
             }
@@ -4631,22 +4631,22 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Entity__NameAssignment_1
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1720:1: rule__Entity__NameAssignment_1 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1721:1: rule__Entity__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Entity__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1724:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1725:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1725:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1726:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1725:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1726:1: RULE_ID
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1726:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1727:1: RULE_ID
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getEntityAccess().getNameIDTerminalRuleCall_1_0()); 
             }
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Entity__NameAssignment_13417); if (failed) return ;
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Entity__NameAssignment_13418); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getEntityAccess().getNameIDTerminalRuleCall_1_0()); 
             }
@@ -4672,28 +4672,28 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Entity__SuperTypeAssignment_2_1
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1735:1: rule__Entity__SuperTypeAssignment_2_1 : ( ( ruleQualifiedName ) ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1736:1: rule__Entity__SuperTypeAssignment_2_1 : ( ( ruleQualifiedName ) ) ;
     public final void rule__Entity__SuperTypeAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1739:1: ( ( ( ruleQualifiedName ) ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1740:1: ( ( ruleQualifiedName ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1740:1: ( ( ( ruleQualifiedName ) ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1741:1: ( ( ruleQualifiedName ) )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1740:1: ( ( ruleQualifiedName ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1741:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1741:1: ( ( ruleQualifiedName ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1742:1: ( ruleQualifiedName )
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getEntityAccess().getSuperTypeEntityCrossReference_2_1_0()); 
             }
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1742:1: ( ruleQualifiedName )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1743:1: ruleQualifiedName
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1743:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1744:1: ruleQualifiedName
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getEntityAccess().getSuperTypeEntityQualifiedNameParserRuleCall_2_1_0_1()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleQualifiedName_in_rule__Entity__SuperTypeAssignment_2_13452);
+            pushFollow(FollowSets000.FOLLOW_ruleQualifiedName_in_rule__Entity__SuperTypeAssignment_2_13453);
             ruleQualifiedName();
             _fsp--;
             if (failed) return ;
@@ -4728,22 +4728,22 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Entity__FeaturesAssignment_4
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1754:1: rule__Entity__FeaturesAssignment_4 : ( ruleFeature ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1755:1: rule__Entity__FeaturesAssignment_4 : ( ruleFeature ) ;
     public final void rule__Entity__FeaturesAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1758:1: ( ( ruleFeature ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1759:1: ( ruleFeature )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1759:1: ( ( ruleFeature ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1760:1: ( ruleFeature )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1759:1: ( ruleFeature )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1760:1: ruleFeature
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1760:1: ( ruleFeature )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1761:1: ruleFeature
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getEntityAccess().getFeaturesFeatureParserRuleCall_4_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleFeature_in_rule__Entity__FeaturesAssignment_43487);
+            pushFollow(FollowSets000.FOLLOW_ruleFeature_in_rule__Entity__FeaturesAssignment_43488);
             ruleFeature();
             _fsp--;
             if (failed) return ;
@@ -4772,22 +4772,22 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Attribute__NameAssignment_1
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1769:1: rule__Attribute__NameAssignment_1 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1770:1: rule__Attribute__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Attribute__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1773:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1774:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1774:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1775:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1774:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1775:1: RULE_ID
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1775:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1776:1: RULE_ID
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_1_0()); 
             }
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Attribute__NameAssignment_13518); if (failed) return ;
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Attribute__NameAssignment_13519); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getAttributeAccess().getNameIDTerminalRuleCall_1_0()); 
             }
@@ -4813,22 +4813,22 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Attribute__TypeAssignment_3
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1784:1: rule__Attribute__TypeAssignment_3 : ( ruleTypeRef ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1785:1: rule__Attribute__TypeAssignment_3 : ( ruleTypeRef ) ;
     public final void rule__Attribute__TypeAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1788:1: ( ( ruleTypeRef ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1789:1: ( ruleTypeRef )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1789:1: ( ( ruleTypeRef ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1790:1: ( ruleTypeRef )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1789:1: ( ruleTypeRef )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1790:1: ruleTypeRef
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1790:1: ( ruleTypeRef )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1791:1: ruleTypeRef
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getAttributeAccess().getTypeTypeRefParserRuleCall_3_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__Attribute__TypeAssignment_33549);
+            pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__Attribute__TypeAssignment_33550);
             ruleTypeRef();
             _fsp--;
             if (failed) return ;
@@ -4857,22 +4857,22 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Reference__NameAssignment_1
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1799:1: rule__Reference__NameAssignment_1 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1800:1: rule__Reference__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Reference__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1803:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1804:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1804:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1805:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1804:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1805:1: RULE_ID
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1805:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1806:1: RULE_ID
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getNameIDTerminalRuleCall_1_0()); 
             }
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Reference__NameAssignment_13580); if (failed) return ;
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Reference__NameAssignment_13581); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getReferenceAccess().getNameIDTerminalRuleCall_1_0()); 
             }
@@ -4898,22 +4898,22 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Reference__TypeAssignment_3
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1814:1: rule__Reference__TypeAssignment_3 : ( ruleTypeRef ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1815:1: rule__Reference__TypeAssignment_3 : ( ruleTypeRef ) ;
     public final void rule__Reference__TypeAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1818:1: ( ( ruleTypeRef ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1819:1: ( ruleTypeRef )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1819:1: ( ( ruleTypeRef ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1820:1: ( ruleTypeRef )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1819:1: ( ruleTypeRef )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1820:1: ruleTypeRef
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1820:1: ( ruleTypeRef )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1821:1: ruleTypeRef
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getTypeTypeRefParserRuleCall_3_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__Reference__TypeAssignment_33611);
+            pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__Reference__TypeAssignment_33612);
             ruleTypeRef();
             _fsp--;
             if (failed) return ;
@@ -4942,28 +4942,28 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Reference__OppositeAssignment_4_1
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1829:1: rule__Reference__OppositeAssignment_4_1 : ( ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1830:1: rule__Reference__OppositeAssignment_4_1 : ( ( RULE_ID ) ) ;
     public final void rule__Reference__OppositeAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1833:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1834:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1834:1: ( ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1835:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1834:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1835:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1835:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1836:1: ( RULE_ID )
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getOppositeReferenceCrossReference_4_1_0()); 
             }
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1836:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1837:1: RULE_ID
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1837:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1838:1: RULE_ID
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getReferenceAccess().getOppositeReferenceIDTerminalRuleCall_4_1_0_1()); 
             }
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Reference__OppositeAssignment_4_13646); if (failed) return ;
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Reference__OppositeAssignment_4_13647); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getReferenceAccess().getOppositeReferenceIDTerminalRuleCall_4_1_0_1()); 
             }
@@ -4995,22 +4995,22 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Operation__VisibilityAssignment_0
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1848:1: rule__Operation__VisibilityAssignment_0 : ( ruleVisibility ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1849:1: rule__Operation__VisibilityAssignment_0 : ( ruleVisibility ) ;
     public final void rule__Operation__VisibilityAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1852:1: ( ( ruleVisibility ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1853:1: ( ruleVisibility )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1853:1: ( ( ruleVisibility ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1854:1: ( ruleVisibility )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1853:1: ( ruleVisibility )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1854:1: ruleVisibility
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1854:1: ( ruleVisibility )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1855:1: ruleVisibility
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getOperationAccess().getVisibilityVisibilityEnumRuleCall_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleVisibility_in_rule__Operation__VisibilityAssignment_03681);
+            pushFollow(FollowSets000.FOLLOW_ruleVisibility_in_rule__Operation__VisibilityAssignment_03682);
             ruleVisibility();
             _fsp--;
             if (failed) return ;
@@ -5039,22 +5039,22 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Operation__NameAssignment_2
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1863:1: rule__Operation__NameAssignment_2 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1864:1: rule__Operation__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__Operation__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1867:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1868:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1868:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1869:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1868:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1869:1: RULE_ID
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1869:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1870:1: RULE_ID
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getOperationAccess().getNameIDTerminalRuleCall_2_0()); 
             }
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Operation__NameAssignment_23712); if (failed) return ;
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Operation__NameAssignment_23713); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getOperationAccess().getNameIDTerminalRuleCall_2_0()); 
             }
@@ -5080,22 +5080,22 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Operation__ParamsAssignment_4_0
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1878:1: rule__Operation__ParamsAssignment_4_0 : ( ruleParameter ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1879:1: rule__Operation__ParamsAssignment_4_0 : ( ruleParameter ) ;
     public final void rule__Operation__ParamsAssignment_4_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1882:1: ( ( ruleParameter ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1883:1: ( ruleParameter )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1883:1: ( ( ruleParameter ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1884:1: ( ruleParameter )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1883:1: ( ruleParameter )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1884:1: ruleParameter
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1884:1: ( ruleParameter )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1885:1: ruleParameter
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getOperationAccess().getParamsParameterParserRuleCall_4_0_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleParameter_in_rule__Operation__ParamsAssignment_4_03743);
+            pushFollow(FollowSets000.FOLLOW_ruleParameter_in_rule__Operation__ParamsAssignment_4_03744);
             ruleParameter();
             _fsp--;
             if (failed) return ;
@@ -5124,22 +5124,22 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Operation__ParamsAssignment_4_1_1
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1893:1: rule__Operation__ParamsAssignment_4_1_1 : ( ruleParameter ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1894:1: rule__Operation__ParamsAssignment_4_1_1 : ( ruleParameter ) ;
     public final void rule__Operation__ParamsAssignment_4_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1897:1: ( ( ruleParameter ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1898:1: ( ruleParameter )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1898:1: ( ( ruleParameter ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1899:1: ( ruleParameter )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1898:1: ( ruleParameter )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1899:1: ruleParameter
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1899:1: ( ruleParameter )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1900:1: ruleParameter
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getOperationAccess().getParamsParameterParserRuleCall_4_1_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleParameter_in_rule__Operation__ParamsAssignment_4_1_13774);
+            pushFollow(FollowSets000.FOLLOW_ruleParameter_in_rule__Operation__ParamsAssignment_4_1_13775);
             ruleParameter();
             _fsp--;
             if (failed) return ;
@@ -5168,22 +5168,22 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Operation__TypeAssignment_7
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1908:1: rule__Operation__TypeAssignment_7 : ( ruleTypeRef ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1909:1: rule__Operation__TypeAssignment_7 : ( ruleTypeRef ) ;
     public final void rule__Operation__TypeAssignment_7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1912:1: ( ( ruleTypeRef ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1913:1: ( ruleTypeRef )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1913:1: ( ( ruleTypeRef ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1914:1: ( ruleTypeRef )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1913:1: ( ruleTypeRef )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1914:1: ruleTypeRef
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1914:1: ( ruleTypeRef )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1915:1: ruleTypeRef
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getOperationAccess().getTypeTypeRefParserRuleCall_7_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__Operation__TypeAssignment_73805);
+            pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__Operation__TypeAssignment_73806);
             ruleTypeRef();
             _fsp--;
             if (failed) return ;
@@ -5212,22 +5212,22 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Parameter__NameAssignment_0
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1923:1: rule__Parameter__NameAssignment_0 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1924:1: rule__Parameter__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__Parameter__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1927:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1928:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1928:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1929:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1928:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1929:1: RULE_ID
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1929:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1930:1: RULE_ID
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getParameterAccess().getNameIDTerminalRuleCall_0_0()); 
             }
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Parameter__NameAssignment_03836); if (failed) return ;
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__Parameter__NameAssignment_03837); if (failed) return ;
             if ( backtracking==0 ) {
                after(grammarAccess.getParameterAccess().getNameIDTerminalRuleCall_0_0()); 
             }
@@ -5253,22 +5253,22 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__Parameter__TypeAssignment_1
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1938:1: rule__Parameter__TypeAssignment_1 : ( ruleTypeRef ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1939:1: rule__Parameter__TypeAssignment_1 : ( ruleTypeRef ) ;
     public final void rule__Parameter__TypeAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1942:1: ( ( ruleTypeRef ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1943:1: ( ruleTypeRef )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1943:1: ( ( ruleTypeRef ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1944:1: ( ruleTypeRef )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1943:1: ( ruleTypeRef )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1944:1: ruleTypeRef
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1944:1: ( ruleTypeRef )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1945:1: ruleTypeRef
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getParameterAccess().getTypeTypeRefParserRuleCall_1_0()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__Parameter__TypeAssignment_13867);
+            pushFollow(FollowSets000.FOLLOW_ruleTypeRef_in_rule__Parameter__TypeAssignment_13868);
             ruleTypeRef();
             _fsp--;
             if (failed) return ;
@@ -5297,28 +5297,28 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
 
 
     // $ANTLR start rule__TypeRef__ReferencedAssignment
-    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1953:1: rule__TypeRef__ReferencedAssignment : ( ( ruleQualifiedName ) ) ;
+    // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1954:1: rule__TypeRef__ReferencedAssignment : ( ( ruleQualifiedName ) ) ;
     public final void rule__TypeRef__ReferencedAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1957:1: ( ( ( ruleQualifiedName ) ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1958:1: ( ( ruleQualifiedName ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1958:1: ( ( ( ruleQualifiedName ) ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1959:1: ( ( ruleQualifiedName ) )
             {
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1958:1: ( ( ruleQualifiedName ) )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1959:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1959:1: ( ( ruleQualifiedName ) )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1960:1: ( ruleQualifiedName )
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getTypeRefAccess().getReferencedTypeCrossReference_0()); 
             }
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1960:1: ( ruleQualifiedName )
-            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1961:1: ruleQualifiedName
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1961:1: ( ruleQualifiedName )
+            // ../org.eclipse.xtext.example.domainmodel.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalDomainmodel.g:1962:1: ruleQualifiedName
             {
             if ( backtracking==0 ) {
                before(grammarAccess.getTypeRefAccess().getReferencedTypeQualifiedNameParserRuleCall_0_1()); 
             }
-            pushFollow(FollowSets000.FOLLOW_ruleQualifiedName_in_rule__TypeRef__ReferencedAssignment3902);
+            pushFollow(FollowSets000.FOLLOW_ruleQualifiedName_in_rule__TypeRef__ReferencedAssignment3903);
             ruleQualifiedName();
             _fsp--;
             if (failed) return ;
@@ -5498,27 +5498,27 @@ public class InternalDomainmodelParser extends AbstractInternalContentAssistPars
         public static final BitSet FOLLOW_30_in_rule__QualifiedName__Group_1__03187 = new BitSet(new long[]{0x0000000000000010L});
         public static final BitSet FOLLOW_rule__QualifiedName__Group_1__1_in_rule__QualifiedName__Group_1__03197 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_rule__QualifiedName__Group_1__13225 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAbstractElement_in_rule__Model__ElementsAssignment3262 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleQualifiedNameWithWildCard_in_rule__Import__ImportedNamespaceAssignment_13293 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleQualifiedName_in_rule__PackageDeclaration__NameAssignment_13324 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAbstractElement_in_rule__PackageDeclaration__ElementsAssignment_33355 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__DataType__NameAssignment_13386 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Entity__NameAssignment_13417 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleQualifiedName_in_rule__Entity__SuperTypeAssignment_2_13452 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFeature_in_rule__Entity__FeaturesAssignment_43487 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Attribute__NameAssignment_13518 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypeRef_in_rule__Attribute__TypeAssignment_33549 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Reference__NameAssignment_13580 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypeRef_in_rule__Reference__TypeAssignment_33611 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Reference__OppositeAssignment_4_13646 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleVisibility_in_rule__Operation__VisibilityAssignment_03681 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Operation__NameAssignment_23712 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleParameter_in_rule__Operation__ParamsAssignment_4_03743 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleParameter_in_rule__Operation__ParamsAssignment_4_1_13774 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypeRef_in_rule__Operation__TypeAssignment_73805 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__Parameter__NameAssignment_03836 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypeRef_in_rule__Parameter__TypeAssignment_13867 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleQualifiedName_in_rule__TypeRef__ReferencedAssignment3902 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAbstractElement_in_rule__Model__ElementsAssignment3263 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleQualifiedNameWithWildCard_in_rule__Import__ImportedNamespaceAssignment_13294 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleQualifiedName_in_rule__PackageDeclaration__NameAssignment_13325 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAbstractElement_in_rule__PackageDeclaration__ElementsAssignment_33356 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__DataType__NameAssignment_13387 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Entity__NameAssignment_13418 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleQualifiedName_in_rule__Entity__SuperTypeAssignment_2_13453 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFeature_in_rule__Entity__FeaturesAssignment_43488 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Attribute__NameAssignment_13519 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeRef_in_rule__Attribute__TypeAssignment_33550 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Reference__NameAssignment_13581 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeRef_in_rule__Reference__TypeAssignment_33612 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Reference__OppositeAssignment_4_13647 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleVisibility_in_rule__Operation__VisibilityAssignment_03682 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Operation__NameAssignment_23713 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleParameter_in_rule__Operation__ParamsAssignment_4_03744 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleParameter_in_rule__Operation__ParamsAssignment_4_1_13775 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeRef_in_rule__Operation__TypeAssignment_73806 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__Parameter__NameAssignment_03837 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeRef_in_rule__Parameter__TypeAssignment_13868 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleQualifiedName_in_rule__TypeRef__ReferencedAssignment3903 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

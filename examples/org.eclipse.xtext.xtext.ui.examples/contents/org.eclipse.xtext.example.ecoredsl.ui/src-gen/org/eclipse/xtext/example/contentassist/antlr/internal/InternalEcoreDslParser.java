@@ -12312,20 +12312,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EcoreDsl__MetamodelDeclarationsAssignment_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4811:1: rule__EcoreDsl__MetamodelDeclarationsAssignment_0 : ( ruleReferencedMetamodel ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4812:1: rule__EcoreDsl__MetamodelDeclarationsAssignment_0 : ( ruleReferencedMetamodel ) ;
     public final void rule__EcoreDsl__MetamodelDeclarationsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4815:1: ( ( ruleReferencedMetamodel ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4816:1: ( ruleReferencedMetamodel )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4816:1: ( ( ruleReferencedMetamodel ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4817:1: ( ruleReferencedMetamodel )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4816:1: ( ruleReferencedMetamodel )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4817:1: ruleReferencedMetamodel
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4817:1: ( ruleReferencedMetamodel )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4818:1: ruleReferencedMetamodel
             {
              before(grammarAccess.getEcoreDslAccess().getMetamodelDeclarationsReferencedMetamodelParserRuleCall_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleReferencedMetamodel_in_rule__EcoreDsl__MetamodelDeclarationsAssignment_09543);
+            pushFollow(FollowSets000.FOLLOW_ruleReferencedMetamodel_in_rule__EcoreDsl__MetamodelDeclarationsAssignment_09544);
             ruleReferencedMetamodel();
             _fsp--;
 
@@ -12352,20 +12352,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EcoreDsl__PackageAssignment_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4826:1: rule__EcoreDsl__PackageAssignment_1 : ( ruleEPackageDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4827:1: rule__EcoreDsl__PackageAssignment_1 : ( ruleEPackageDecl ) ;
     public final void rule__EcoreDsl__PackageAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4830:1: ( ( ruleEPackageDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4831:1: ( ruleEPackageDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4831:1: ( ( ruleEPackageDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4832:1: ( ruleEPackageDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4831:1: ( ruleEPackageDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4832:1: ruleEPackageDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4832:1: ( ruleEPackageDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4833:1: ruleEPackageDecl
             {
              before(grammarAccess.getEcoreDslAccess().getPackageEPackageDeclParserRuleCall_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEPackageDecl_in_rule__EcoreDsl__PackageAssignment_19574);
+            pushFollow(FollowSets000.FOLLOW_ruleEPackageDecl_in_rule__EcoreDsl__PackageAssignment_19575);
             ruleEPackageDecl();
             _fsp--;
 
@@ -12392,20 +12392,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__ReferencedMetamodel__AliasAssignment_1_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4841:1: rule__ReferencedMetamodel__AliasAssignment_1_0 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4842:1: rule__ReferencedMetamodel__AliasAssignment_1_0 : ( RULE_ID ) ;
     public final void rule__ReferencedMetamodel__AliasAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4845:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4846:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4846:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4847:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4846:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4847:1: RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4847:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4848:1: RULE_ID
             {
              before(grammarAccess.getReferencedMetamodelAccess().getAliasIDTerminalRuleCall_1_0_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ReferencedMetamodel__AliasAssignment_1_09605); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ReferencedMetamodel__AliasAssignment_1_09606); 
              after(grammarAccess.getReferencedMetamodelAccess().getAliasIDTerminalRuleCall_1_0_0()); 
 
             }
@@ -12429,24 +12429,24 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__ReferencedMetamodel__EPackageAssignment_2
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4856:1: rule__ReferencedMetamodel__EPackageAssignment_2 : ( ( RULE_STRING ) ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4857:1: rule__ReferencedMetamodel__EPackageAssignment_2 : ( ( RULE_STRING ) ) ;
     public final void rule__ReferencedMetamodel__EPackageAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4860:1: ( ( ( RULE_STRING ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4861:1: ( ( RULE_STRING ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4861:1: ( ( ( RULE_STRING ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4862:1: ( ( RULE_STRING ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4861:1: ( ( RULE_STRING ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4862:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4862:1: ( ( RULE_STRING ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4863:1: ( RULE_STRING )
             {
              before(grammarAccess.getReferencedMetamodelAccess().getEPackageEPackageCrossReference_2_0()); 
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4863:1: ( RULE_STRING )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4864:1: RULE_STRING
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4864:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4865:1: RULE_STRING
             {
              before(grammarAccess.getReferencedMetamodelAccess().getEPackageEPackageSTRINGTerminalRuleCall_2_0_1()); 
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__ReferencedMetamodel__EPackageAssignment_29640); 
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__ReferencedMetamodel__EPackageAssignment_29641); 
              after(grammarAccess.getReferencedMetamodelAccess().getEPackageEPackageSTRINGTerminalRuleCall_2_0_1()); 
 
             }
@@ -12474,20 +12474,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EPackageDecl__EAnnotationsAssignment_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4875:1: rule__EPackageDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4876:1: rule__EPackageDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
     public final void rule__EPackageDecl__EAnnotationsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4879:1: ( ( ruleEAnnotationDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4880:1: ( ruleEAnnotationDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4880:1: ( ( ruleEAnnotationDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4881:1: ( ruleEAnnotationDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4880:1: ( ruleEAnnotationDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4881:1: ruleEAnnotationDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4881:1: ( ruleEAnnotationDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4882:1: ruleEAnnotationDecl
             {
              before(grammarAccess.getEPackageDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EPackageDecl__EAnnotationsAssignment_09675);
+            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EPackageDecl__EAnnotationsAssignment_09676);
             ruleEAnnotationDecl();
             _fsp--;
 
@@ -12514,20 +12514,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EPackageDecl__NameAssignment_2
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4890:1: rule__EPackageDecl__NameAssignment_2 : ( ruleQID ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4891:1: rule__EPackageDecl__NameAssignment_2 : ( ruleQID ) ;
     public final void rule__EPackageDecl__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4894:1: ( ( ruleQID ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4895:1: ( ruleQID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4895:1: ( ( ruleQID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4896:1: ( ruleQID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4895:1: ( ruleQID )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4896:1: ruleQID
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4896:1: ( ruleQID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4897:1: ruleQID
             {
              before(grammarAccess.getEPackageDeclAccess().getNameQIDParserRuleCall_2_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleQID_in_rule__EPackageDecl__NameAssignment_29706);
+            pushFollow(FollowSets000.FOLLOW_ruleQID_in_rule__EPackageDecl__NameAssignment_29707);
             ruleQID();
             _fsp--;
 
@@ -12554,20 +12554,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EPackageDecl__NsURIAssignment_5
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4905:1: rule__EPackageDecl__NsURIAssignment_5 : ( RULE_STRING ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4906:1: rule__EPackageDecl__NsURIAssignment_5 : ( RULE_STRING ) ;
     public final void rule__EPackageDecl__NsURIAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4909:1: ( ( RULE_STRING ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4910:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4910:1: ( ( RULE_STRING ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4911:1: ( RULE_STRING )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4910:1: ( RULE_STRING )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4911:1: RULE_STRING
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4911:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4912:1: RULE_STRING
             {
              before(grammarAccess.getEPackageDeclAccess().getNsURISTRINGTerminalRuleCall_5_0()); 
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__EPackageDecl__NsURIAssignment_59737); 
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__EPackageDecl__NsURIAssignment_59738); 
              after(grammarAccess.getEPackageDeclAccess().getNsURISTRINGTerminalRuleCall_5_0()); 
 
             }
@@ -12591,20 +12591,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EPackageDecl__NsPrefixAssignment_8
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4920:1: rule__EPackageDecl__NsPrefixAssignment_8 : ( ruleQID ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4921:1: rule__EPackageDecl__NsPrefixAssignment_8 : ( ruleQID ) ;
     public final void rule__EPackageDecl__NsPrefixAssignment_8() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4924:1: ( ( ruleQID ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4925:1: ( ruleQID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4925:1: ( ( ruleQID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4926:1: ( ruleQID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4925:1: ( ruleQID )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4926:1: ruleQID
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4926:1: ( ruleQID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4927:1: ruleQID
             {
              before(grammarAccess.getEPackageDeclAccess().getNsPrefixQIDParserRuleCall_8_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleQID_in_rule__EPackageDecl__NsPrefixAssignment_89768);
+            pushFollow(FollowSets000.FOLLOW_ruleQID_in_rule__EPackageDecl__NsPrefixAssignment_89769);
             ruleQID();
             _fsp--;
 
@@ -12631,20 +12631,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EPackageDecl__ESubpackagesAssignment_10_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4935:1: rule__EPackageDecl__ESubpackagesAssignment_10_0 : ( ruleSubEPackageDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4936:1: rule__EPackageDecl__ESubpackagesAssignment_10_0 : ( ruleSubEPackageDecl ) ;
     public final void rule__EPackageDecl__ESubpackagesAssignment_10_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4939:1: ( ( ruleSubEPackageDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4940:1: ( ruleSubEPackageDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4940:1: ( ( ruleSubEPackageDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4941:1: ( ruleSubEPackageDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4940:1: ( ruleSubEPackageDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4941:1: ruleSubEPackageDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4941:1: ( ruleSubEPackageDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4942:1: ruleSubEPackageDecl
             {
              before(grammarAccess.getEPackageDeclAccess().getESubpackagesSubEPackageDeclParserRuleCall_10_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSubEPackageDecl_in_rule__EPackageDecl__ESubpackagesAssignment_10_09799);
+            pushFollow(FollowSets000.FOLLOW_ruleSubEPackageDecl_in_rule__EPackageDecl__ESubpackagesAssignment_10_09800);
             ruleSubEPackageDecl();
             _fsp--;
 
@@ -12671,20 +12671,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EPackageDecl__EClassifiersAssignment_10_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4950:1: rule__EPackageDecl__EClassifiersAssignment_10_1 : ( ruleEClassifierDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4951:1: rule__EPackageDecl__EClassifiersAssignment_10_1 : ( ruleEClassifierDecl ) ;
     public final void rule__EPackageDecl__EClassifiersAssignment_10_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4954:1: ( ( ruleEClassifierDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4955:1: ( ruleEClassifierDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4955:1: ( ( ruleEClassifierDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4956:1: ( ruleEClassifierDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4955:1: ( ruleEClassifierDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4956:1: ruleEClassifierDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4956:1: ( ruleEClassifierDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4957:1: ruleEClassifierDecl
             {
              before(grammarAccess.getEPackageDeclAccess().getEClassifiersEClassifierDeclParserRuleCall_10_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEClassifierDecl_in_rule__EPackageDecl__EClassifiersAssignment_10_19830);
+            pushFollow(FollowSets000.FOLLOW_ruleEClassifierDecl_in_rule__EPackageDecl__EClassifiersAssignment_10_19831);
             ruleEClassifierDecl();
             _fsp--;
 
@@ -12711,20 +12711,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__SubEPackageDecl__EAnnotationsAssignment_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4965:1: rule__SubEPackageDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4966:1: rule__SubEPackageDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
     public final void rule__SubEPackageDecl__EAnnotationsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4969:1: ( ( ruleEAnnotationDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4970:1: ( ruleEAnnotationDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4970:1: ( ( ruleEAnnotationDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4971:1: ( ruleEAnnotationDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4970:1: ( ruleEAnnotationDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4971:1: ruleEAnnotationDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4971:1: ( ruleEAnnotationDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4972:1: ruleEAnnotationDecl
             {
              before(grammarAccess.getSubEPackageDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__SubEPackageDecl__EAnnotationsAssignment_09861);
+            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__SubEPackageDecl__EAnnotationsAssignment_09862);
             ruleEAnnotationDecl();
             _fsp--;
 
@@ -12751,20 +12751,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__SubEPackageDecl__NameAssignment_2
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4980:1: rule__SubEPackageDecl__NameAssignment_2 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4981:1: rule__SubEPackageDecl__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__SubEPackageDecl__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4984:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4985:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4985:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4986:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4985:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4986:1: RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4986:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4987:1: RULE_ID
             {
              before(grammarAccess.getSubEPackageDeclAccess().getNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__SubEPackageDecl__NameAssignment_29892); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__SubEPackageDecl__NameAssignment_29893); 
              after(grammarAccess.getSubEPackageDeclAccess().getNameIDTerminalRuleCall_2_0()); 
 
             }
@@ -12788,20 +12788,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__SubEPackageDecl__ESubpackagesAssignment_4_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4995:1: rule__SubEPackageDecl__ESubpackagesAssignment_4_0 : ( ruleSubEPackageDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4996:1: rule__SubEPackageDecl__ESubpackagesAssignment_4_0 : ( ruleSubEPackageDecl ) ;
     public final void rule__SubEPackageDecl__ESubpackagesAssignment_4_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:4999:1: ( ( ruleSubEPackageDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5000:1: ( ruleSubEPackageDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5000:1: ( ( ruleSubEPackageDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5001:1: ( ruleSubEPackageDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5000:1: ( ruleSubEPackageDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5001:1: ruleSubEPackageDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5001:1: ( ruleSubEPackageDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5002:1: ruleSubEPackageDecl
             {
              before(grammarAccess.getSubEPackageDeclAccess().getESubpackagesSubEPackageDeclParserRuleCall_4_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSubEPackageDecl_in_rule__SubEPackageDecl__ESubpackagesAssignment_4_09923);
+            pushFollow(FollowSets000.FOLLOW_ruleSubEPackageDecl_in_rule__SubEPackageDecl__ESubpackagesAssignment_4_09924);
             ruleSubEPackageDecl();
             _fsp--;
 
@@ -12828,20 +12828,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__SubEPackageDecl__EClassifiersAssignment_4_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5010:1: rule__SubEPackageDecl__EClassifiersAssignment_4_1 : ( ruleEClassifierDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5011:1: rule__SubEPackageDecl__EClassifiersAssignment_4_1 : ( ruleEClassifierDecl ) ;
     public final void rule__SubEPackageDecl__EClassifiersAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5014:1: ( ( ruleEClassifierDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5015:1: ( ruleEClassifierDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5015:1: ( ( ruleEClassifierDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5016:1: ( ruleEClassifierDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5015:1: ( ruleEClassifierDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5016:1: ruleEClassifierDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5016:1: ( ruleEClassifierDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5017:1: ruleEClassifierDecl
             {
              before(grammarAccess.getSubEPackageDeclAccess().getEClassifiersEClassifierDeclParserRuleCall_4_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEClassifierDecl_in_rule__SubEPackageDecl__EClassifiersAssignment_4_19954);
+            pushFollow(FollowSets000.FOLLOW_ruleEClassifierDecl_in_rule__SubEPackageDecl__EClassifiersAssignment_4_19955);
             ruleEClassifierDecl();
             _fsp--;
 
@@ -12868,20 +12868,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EDataTypeDecl__EAnnotationsAssignment_0_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5025:1: rule__EDataTypeDecl__EAnnotationsAssignment_0_0 : ( ruleEAnnotationDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5026:1: rule__EDataTypeDecl__EAnnotationsAssignment_0_0 : ( ruleEAnnotationDecl ) ;
     public final void rule__EDataTypeDecl__EAnnotationsAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5029:1: ( ( ruleEAnnotationDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5030:1: ( ruleEAnnotationDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5030:1: ( ( ruleEAnnotationDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5031:1: ( ruleEAnnotationDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5030:1: ( ruleEAnnotationDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5031:1: ruleEAnnotationDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5031:1: ( ruleEAnnotationDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5032:1: ruleEAnnotationDecl
             {
              before(grammarAccess.getEDataTypeDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EDataTypeDecl__EAnnotationsAssignment_0_09985);
+            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EDataTypeDecl__EAnnotationsAssignment_0_09986);
             ruleEAnnotationDecl();
             _fsp--;
 
@@ -12908,20 +12908,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EDataTypeDecl__SerializableAssignment_0_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5040:1: rule__EDataTypeDecl__SerializableAssignment_0_1 : ( RULE_SERIALIZABLE ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5041:1: rule__EDataTypeDecl__SerializableAssignment_0_1 : ( RULE_SERIALIZABLE ) ;
     public final void rule__EDataTypeDecl__SerializableAssignment_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5044:1: ( ( RULE_SERIALIZABLE ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5045:1: ( RULE_SERIALIZABLE )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5045:1: ( ( RULE_SERIALIZABLE ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5046:1: ( RULE_SERIALIZABLE )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5045:1: ( RULE_SERIALIZABLE )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5046:1: RULE_SERIALIZABLE
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5046:1: ( RULE_SERIALIZABLE )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5047:1: RULE_SERIALIZABLE
             {
              before(grammarAccess.getEDataTypeDeclAccess().getSerializableSerializableTerminalRuleCall_0_1_0()); 
-            match(input,RULE_SERIALIZABLE,FollowSets000.FOLLOW_RULE_SERIALIZABLE_in_rule__EDataTypeDecl__SerializableAssignment_0_110016); 
+            match(input,RULE_SERIALIZABLE,FollowSets000.FOLLOW_RULE_SERIALIZABLE_in_rule__EDataTypeDecl__SerializableAssignment_0_110017); 
              after(grammarAccess.getEDataTypeDeclAccess().getSerializableSerializableTerminalRuleCall_0_1_0()); 
 
             }
@@ -12945,20 +12945,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EDataTypeDecl__NameAssignment_0_2_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5055:1: rule__EDataTypeDecl__NameAssignment_0_2_1 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5056:1: rule__EDataTypeDecl__NameAssignment_0_2_1 : ( RULE_ID ) ;
     public final void rule__EDataTypeDecl__NameAssignment_0_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5059:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5060:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5060:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5061:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5060:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5061:1: RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5061:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5062:1: RULE_ID
             {
              before(grammarAccess.getEDataTypeDeclAccess().getNameIDTerminalRuleCall_0_2_1_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EDataTypeDecl__NameAssignment_0_2_110047); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EDataTypeDecl__NameAssignment_0_2_110048); 
              after(grammarAccess.getEDataTypeDeclAccess().getNameIDTerminalRuleCall_0_2_1_0()); 
 
             }
@@ -12982,20 +12982,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_3
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5070:1: rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_3 : ( ruleSTRING_OR_QID ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5071:1: rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_3 : ( ruleSTRING_OR_QID ) ;
     public final void rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5074:1: ( ( ruleSTRING_OR_QID ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5075:1: ( ruleSTRING_OR_QID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5075:1: ( ( ruleSTRING_OR_QID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5076:1: ( ruleSTRING_OR_QID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5075:1: ( ruleSTRING_OR_QID )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5076:1: ruleSTRING_OR_QID
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5076:1: ( ruleSTRING_OR_QID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5077:1: ruleSTRING_OR_QID
             {
              before(grammarAccess.getEDataTypeDeclAccess().getInstanceClassNameSTRING_OR_QIDParserRuleCall_0_2_3_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSTRING_OR_QID_in_rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_310078);
+            pushFollow(FollowSets000.FOLLOW_ruleSTRING_OR_QID_in_rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_310079);
             ruleSTRING_OR_QID();
             _fsp--;
 
@@ -13022,20 +13022,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EAnnotationDecl__SourceAssignment_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5085:1: rule__EAnnotationDecl__SourceAssignment_1 : ( ruleSTRING_OR_QID ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5086:1: rule__EAnnotationDecl__SourceAssignment_1 : ( ruleSTRING_OR_QID ) ;
     public final void rule__EAnnotationDecl__SourceAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5089:1: ( ( ruleSTRING_OR_QID ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5090:1: ( ruleSTRING_OR_QID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5090:1: ( ( ruleSTRING_OR_QID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5091:1: ( ruleSTRING_OR_QID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5090:1: ( ruleSTRING_OR_QID )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5091:1: ruleSTRING_OR_QID
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5091:1: ( ruleSTRING_OR_QID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5092:1: ruleSTRING_OR_QID
             {
              before(grammarAccess.getEAnnotationDeclAccess().getSourceSTRING_OR_QIDParserRuleCall_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSTRING_OR_QID_in_rule__EAnnotationDecl__SourceAssignment_110109);
+            pushFollow(FollowSets000.FOLLOW_ruleSTRING_OR_QID_in_rule__EAnnotationDecl__SourceAssignment_110110);
             ruleSTRING_OR_QID();
             _fsp--;
 
@@ -13062,20 +13062,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EAnnotationDecl__DetailsAssignment_2_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5100:1: rule__EAnnotationDecl__DetailsAssignment_2_1 : ( ruleMapEntry ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5101:1: rule__EAnnotationDecl__DetailsAssignment_2_1 : ( ruleMapEntry ) ;
     public final void rule__EAnnotationDecl__DetailsAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5104:1: ( ( ruleMapEntry ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5105:1: ( ruleMapEntry )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5105:1: ( ( ruleMapEntry ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5106:1: ( ruleMapEntry )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5105:1: ( ruleMapEntry )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5106:1: ruleMapEntry
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5106:1: ( ruleMapEntry )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5107:1: ruleMapEntry
             {
              before(grammarAccess.getEAnnotationDeclAccess().getDetailsMapEntryParserRuleCall_2_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleMapEntry_in_rule__EAnnotationDecl__DetailsAssignment_2_110140);
+            pushFollow(FollowSets000.FOLLOW_ruleMapEntry_in_rule__EAnnotationDecl__DetailsAssignment_2_110141);
             ruleMapEntry();
             _fsp--;
 
@@ -13102,20 +13102,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EAnnotationDecl__DetailsAssignment_2_2_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5115:1: rule__EAnnotationDecl__DetailsAssignment_2_2_1 : ( ruleMapEntry ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5116:1: rule__EAnnotationDecl__DetailsAssignment_2_2_1 : ( ruleMapEntry ) ;
     public final void rule__EAnnotationDecl__DetailsAssignment_2_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5119:1: ( ( ruleMapEntry ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5120:1: ( ruleMapEntry )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5120:1: ( ( ruleMapEntry ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5121:1: ( ruleMapEntry )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5120:1: ( ruleMapEntry )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5121:1: ruleMapEntry
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5121:1: ( ruleMapEntry )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5122:1: ruleMapEntry
             {
              before(grammarAccess.getEAnnotationDeclAccess().getDetailsMapEntryParserRuleCall_2_2_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleMapEntry_in_rule__EAnnotationDecl__DetailsAssignment_2_2_110171);
+            pushFollow(FollowSets000.FOLLOW_ruleMapEntry_in_rule__EAnnotationDecl__DetailsAssignment_2_2_110172);
             ruleMapEntry();
             _fsp--;
 
@@ -13142,20 +13142,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EClassDecl__EAnnotationsAssignment_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5130:1: rule__EClassDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5131:1: rule__EClassDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
     public final void rule__EClassDecl__EAnnotationsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5134:1: ( ( ruleEAnnotationDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5135:1: ( ruleEAnnotationDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5135:1: ( ( ruleEAnnotationDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5136:1: ( ruleEAnnotationDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5135:1: ( ruleEAnnotationDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5136:1: ruleEAnnotationDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5136:1: ( ruleEAnnotationDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5137:1: ruleEAnnotationDecl
             {
              before(grammarAccess.getEClassDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EClassDecl__EAnnotationsAssignment_010202);
+            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EClassDecl__EAnnotationsAssignment_010203);
             ruleEAnnotationDecl();
             _fsp--;
 
@@ -13182,24 +13182,24 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EClassDecl__AbstractAssignment_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5145:1: rule__EClassDecl__AbstractAssignment_1 : ( ( 'abstract' ) ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5146:1: rule__EClassDecl__AbstractAssignment_1 : ( ( 'abstract' ) ) ;
     public final void rule__EClassDecl__AbstractAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5149:1: ( ( ( 'abstract' ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5150:1: ( ( 'abstract' ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5150:1: ( ( ( 'abstract' ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5151:1: ( ( 'abstract' ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5150:1: ( ( 'abstract' ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5151:1: ( 'abstract' )
-            {
-             before(grammarAccess.getEClassDeclAccess().getAbstractAbstractKeyword_1_0()); 
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5151:1: ( ( 'abstract' ) )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5152:1: ( 'abstract' )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5153:1: 'abstract'
             {
              before(grammarAccess.getEClassDeclAccess().getAbstractAbstractKeyword_1_0()); 
-            match(input,49,FollowSets000.FOLLOW_49_in_rule__EClassDecl__AbstractAssignment_110238); 
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5153:1: ( 'abstract' )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5154:1: 'abstract'
+            {
+             before(grammarAccess.getEClassDeclAccess().getAbstractAbstractKeyword_1_0()); 
+            match(input,49,FollowSets000.FOLLOW_49_in_rule__EClassDecl__AbstractAssignment_110239); 
              after(grammarAccess.getEClassDeclAccess().getAbstractAbstractKeyword_1_0()); 
 
             }
@@ -13227,24 +13227,24 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EClassDecl__InterfaceAssignment_2_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5168:1: rule__EClassDecl__InterfaceAssignment_2_0 : ( ( 'interface' ) ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5169:1: rule__EClassDecl__InterfaceAssignment_2_0 : ( ( 'interface' ) ) ;
     public final void rule__EClassDecl__InterfaceAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5172:1: ( ( ( 'interface' ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5173:1: ( ( 'interface' ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5173:1: ( ( ( 'interface' ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5174:1: ( ( 'interface' ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5173:1: ( ( 'interface' ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5174:1: ( 'interface' )
-            {
-             before(grammarAccess.getEClassDeclAccess().getInterfaceInterfaceKeyword_2_0_0()); 
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5174:1: ( ( 'interface' ) )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5175:1: ( 'interface' )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5176:1: 'interface'
             {
              before(grammarAccess.getEClassDeclAccess().getInterfaceInterfaceKeyword_2_0_0()); 
-            match(input,50,FollowSets000.FOLLOW_50_in_rule__EClassDecl__InterfaceAssignment_2_010282); 
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5176:1: ( 'interface' )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5177:1: 'interface'
+            {
+             before(grammarAccess.getEClassDeclAccess().getInterfaceInterfaceKeyword_2_0_0()); 
+            match(input,50,FollowSets000.FOLLOW_50_in_rule__EClassDecl__InterfaceAssignment_2_010283); 
              after(grammarAccess.getEClassDeclAccess().getInterfaceInterfaceKeyword_2_0_0()); 
 
             }
@@ -13272,20 +13272,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EClassDecl__NameAssignment_3
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5191:1: rule__EClassDecl__NameAssignment_3 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5192:1: rule__EClassDecl__NameAssignment_3 : ( RULE_ID ) ;
     public final void rule__EClassDecl__NameAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5195:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5196:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5196:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5197:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5196:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5197:1: RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5197:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5198:1: RULE_ID
             {
              before(grammarAccess.getEClassDeclAccess().getNameIDTerminalRuleCall_3_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EClassDecl__NameAssignment_310321); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EClassDecl__NameAssignment_310322); 
              after(grammarAccess.getEClassDeclAccess().getNameIDTerminalRuleCall_3_0()); 
 
             }
@@ -13309,20 +13309,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EClassDecl__ETypeParametersAssignment_4_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5206:1: rule__EClassDecl__ETypeParametersAssignment_4_1 : ( ruleETypeParameterDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5207:1: rule__EClassDecl__ETypeParametersAssignment_4_1 : ( ruleETypeParameterDecl ) ;
     public final void rule__EClassDecl__ETypeParametersAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5210:1: ( ( ruleETypeParameterDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5211:1: ( ruleETypeParameterDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5211:1: ( ( ruleETypeParameterDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5212:1: ( ruleETypeParameterDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5211:1: ( ruleETypeParameterDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5212:1: ruleETypeParameterDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5212:1: ( ruleETypeParameterDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5213:1: ruleETypeParameterDecl
             {
              before(grammarAccess.getEClassDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_4_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleETypeParameterDecl_in_rule__EClassDecl__ETypeParametersAssignment_4_110352);
+            pushFollow(FollowSets000.FOLLOW_ruleETypeParameterDecl_in_rule__EClassDecl__ETypeParametersAssignment_4_110353);
             ruleETypeParameterDecl();
             _fsp--;
 
@@ -13349,20 +13349,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EClassDecl__ETypeParametersAssignment_4_2_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5221:1: rule__EClassDecl__ETypeParametersAssignment_4_2_1 : ( ruleETypeParameterDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5222:1: rule__EClassDecl__ETypeParametersAssignment_4_2_1 : ( ruleETypeParameterDecl ) ;
     public final void rule__EClassDecl__ETypeParametersAssignment_4_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5225:1: ( ( ruleETypeParameterDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5226:1: ( ruleETypeParameterDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5226:1: ( ( ruleETypeParameterDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5227:1: ( ruleETypeParameterDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5226:1: ( ruleETypeParameterDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5227:1: ruleETypeParameterDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5227:1: ( ruleETypeParameterDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5228:1: ruleETypeParameterDecl
             {
              before(grammarAccess.getEClassDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_4_2_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleETypeParameterDecl_in_rule__EClassDecl__ETypeParametersAssignment_4_2_110383);
+            pushFollow(FollowSets000.FOLLOW_ruleETypeParameterDecl_in_rule__EClassDecl__ETypeParametersAssignment_4_2_110384);
             ruleETypeParameterDecl();
             _fsp--;
 
@@ -13389,20 +13389,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EClassDecl__EGenericSuperTypesAssignment_5_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5236:1: rule__EClassDecl__EGenericSuperTypesAssignment_5_1 : ( ruleEGenericTypeReferenceDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5237:1: rule__EClassDecl__EGenericSuperTypesAssignment_5_1 : ( ruleEGenericTypeReferenceDecl ) ;
     public final void rule__EClassDecl__EGenericSuperTypesAssignment_5_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5240:1: ( ( ruleEGenericTypeReferenceDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5241:1: ( ruleEGenericTypeReferenceDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5241:1: ( ( ruleEGenericTypeReferenceDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5242:1: ( ruleEGenericTypeReferenceDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5241:1: ( ruleEGenericTypeReferenceDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5242:1: ruleEGenericTypeReferenceDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5242:1: ( ruleEGenericTypeReferenceDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5243:1: ruleEGenericTypeReferenceDecl
             {
              before(grammarAccess.getEClassDeclAccess().getEGenericSuperTypesEGenericTypeReferenceDeclParserRuleCall_5_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EClassDecl__EGenericSuperTypesAssignment_5_110414);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EClassDecl__EGenericSuperTypesAssignment_5_110415);
             ruleEGenericTypeReferenceDecl();
             _fsp--;
 
@@ -13429,20 +13429,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EClassDecl__EGenericSuperTypesAssignment_5_2_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5251:1: rule__EClassDecl__EGenericSuperTypesAssignment_5_2_1 : ( ruleEGenericTypeReferenceDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5252:1: rule__EClassDecl__EGenericSuperTypesAssignment_5_2_1 : ( ruleEGenericTypeReferenceDecl ) ;
     public final void rule__EClassDecl__EGenericSuperTypesAssignment_5_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5255:1: ( ( ruleEGenericTypeReferenceDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5256:1: ( ruleEGenericTypeReferenceDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5256:1: ( ( ruleEGenericTypeReferenceDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5257:1: ( ruleEGenericTypeReferenceDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5256:1: ( ruleEGenericTypeReferenceDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5257:1: ruleEGenericTypeReferenceDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5257:1: ( ruleEGenericTypeReferenceDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5258:1: ruleEGenericTypeReferenceDecl
             {
              before(grammarAccess.getEClassDeclAccess().getEGenericSuperTypesEGenericTypeReferenceDeclParserRuleCall_5_2_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EClassDecl__EGenericSuperTypesAssignment_5_2_110445);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EClassDecl__EGenericSuperTypesAssignment_5_2_110446);
             ruleEGenericTypeReferenceDecl();
             _fsp--;
 
@@ -13469,20 +13469,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EClassDecl__InstanceClassNameAssignment_6_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5266:1: rule__EClassDecl__InstanceClassNameAssignment_6_1 : ( ruleSTRING_OR_QID ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5267:1: rule__EClassDecl__InstanceClassNameAssignment_6_1 : ( ruleSTRING_OR_QID ) ;
     public final void rule__EClassDecl__InstanceClassNameAssignment_6_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5270:1: ( ( ruleSTRING_OR_QID ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5271:1: ( ruleSTRING_OR_QID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5271:1: ( ( ruleSTRING_OR_QID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5272:1: ( ruleSTRING_OR_QID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5271:1: ( ruleSTRING_OR_QID )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5272:1: ruleSTRING_OR_QID
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5272:1: ( ruleSTRING_OR_QID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5273:1: ruleSTRING_OR_QID
             {
              before(grammarAccess.getEClassDeclAccess().getInstanceClassNameSTRING_OR_QIDParserRuleCall_6_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSTRING_OR_QID_in_rule__EClassDecl__InstanceClassNameAssignment_6_110476);
+            pushFollow(FollowSets000.FOLLOW_ruleSTRING_OR_QID_in_rule__EClassDecl__InstanceClassNameAssignment_6_110477);
             ruleSTRING_OR_QID();
             _fsp--;
 
@@ -13509,20 +13509,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EClassDecl__EStructuralFeaturesAssignment_8_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5281:1: rule__EClassDecl__EStructuralFeaturesAssignment_8_0 : ( ruleEStructuralFeatureDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5282:1: rule__EClassDecl__EStructuralFeaturesAssignment_8_0 : ( ruleEStructuralFeatureDecl ) ;
     public final void rule__EClassDecl__EStructuralFeaturesAssignment_8_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5285:1: ( ( ruleEStructuralFeatureDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5286:1: ( ruleEStructuralFeatureDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5286:1: ( ( ruleEStructuralFeatureDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5287:1: ( ruleEStructuralFeatureDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5286:1: ( ruleEStructuralFeatureDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5287:1: ruleEStructuralFeatureDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5287:1: ( ruleEStructuralFeatureDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5288:1: ruleEStructuralFeatureDecl
             {
              before(grammarAccess.getEClassDeclAccess().getEStructuralFeaturesEStructuralFeatureDeclParserRuleCall_8_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEStructuralFeatureDecl_in_rule__EClassDecl__EStructuralFeaturesAssignment_8_010507);
+            pushFollow(FollowSets000.FOLLOW_ruleEStructuralFeatureDecl_in_rule__EClassDecl__EStructuralFeaturesAssignment_8_010508);
             ruleEStructuralFeatureDecl();
             _fsp--;
 
@@ -13549,20 +13549,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EClassDecl__EOperationsAssignment_8_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5296:1: rule__EClassDecl__EOperationsAssignment_8_1 : ( ruleEOperationDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5297:1: rule__EClassDecl__EOperationsAssignment_8_1 : ( ruleEOperationDecl ) ;
     public final void rule__EClassDecl__EOperationsAssignment_8_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5300:1: ( ( ruleEOperationDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5301:1: ( ruleEOperationDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5301:1: ( ( ruleEOperationDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5302:1: ( ruleEOperationDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5301:1: ( ruleEOperationDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5302:1: ruleEOperationDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5302:1: ( ruleEOperationDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5303:1: ruleEOperationDecl
             {
              before(grammarAccess.getEClassDeclAccess().getEOperationsEOperationDeclParserRuleCall_8_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEOperationDecl_in_rule__EClassDecl__EOperationsAssignment_8_110538);
+            pushFollow(FollowSets000.FOLLOW_ruleEOperationDecl_in_rule__EClassDecl__EOperationsAssignment_8_110539);
             ruleEOperationDecl();
             _fsp--;
 
@@ -13589,20 +13589,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EAttributeDecl__EAnnotationsAssignment_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5311:1: rule__EAttributeDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5312:1: rule__EAttributeDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
     public final void rule__EAttributeDecl__EAnnotationsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5315:1: ( ( ruleEAnnotationDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5316:1: ( ruleEAnnotationDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5316:1: ( ( ruleEAnnotationDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5317:1: ( ruleEAnnotationDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5316:1: ( ruleEAnnotationDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5317:1: ruleEAnnotationDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5317:1: ( ruleEAnnotationDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5318:1: ruleEAnnotationDecl
             {
              before(grammarAccess.getEAttributeDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EAttributeDecl__EAnnotationsAssignment_010569);
+            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EAttributeDecl__EAnnotationsAssignment_010570);
             ruleEAnnotationDecl();
             _fsp--;
 
@@ -13629,24 +13629,24 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EAttributeDecl__IDAssignment_1_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5326:1: rule__EAttributeDecl__IDAssignment_1_0 : ( ( 'ID' ) ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5327:1: rule__EAttributeDecl__IDAssignment_1_0 : ( ( 'ID' ) ) ;
     public final void rule__EAttributeDecl__IDAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5330:1: ( ( ( 'ID' ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5331:1: ( ( 'ID' ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5331:1: ( ( ( 'ID' ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5332:1: ( ( 'ID' ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5331:1: ( ( 'ID' ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5332:1: ( 'ID' )
-            {
-             before(grammarAccess.getEAttributeDeclAccess().getIDIDKeyword_1_0_0()); 
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5332:1: ( ( 'ID' ) )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5333:1: ( 'ID' )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5334:1: 'ID'
             {
              before(grammarAccess.getEAttributeDeclAccess().getIDIDKeyword_1_0_0()); 
-            match(input,51,FollowSets000.FOLLOW_51_in_rule__EAttributeDecl__IDAssignment_1_010605); 
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5334:1: ( 'ID' )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5335:1: 'ID'
+            {
+             before(grammarAccess.getEAttributeDeclAccess().getIDIDKeyword_1_0_0()); 
+            match(input,51,FollowSets000.FOLLOW_51_in_rule__EAttributeDecl__IDAssignment_1_010606); 
              after(grammarAccess.getEAttributeDeclAccess().getIDIDKeyword_1_0_0()); 
 
             }
@@ -13674,20 +13674,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EAttributeDecl__UniqueAssignment_1_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5349:1: rule__EAttributeDecl__UniqueAssignment_1_1 : ( RULE_BAG ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5350:1: rule__EAttributeDecl__UniqueAssignment_1_1 : ( RULE_BAG ) ;
     public final void rule__EAttributeDecl__UniqueAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5353:1: ( ( RULE_BAG ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5354:1: ( RULE_BAG )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5354:1: ( ( RULE_BAG ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5355:1: ( RULE_BAG )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5354:1: ( RULE_BAG )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5355:1: RULE_BAG
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5355:1: ( RULE_BAG )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5356:1: RULE_BAG
             {
              before(grammarAccess.getEAttributeDeclAccess().getUniqueBagTerminalRuleCall_1_1_0()); 
-            match(input,RULE_BAG,FollowSets000.FOLLOW_RULE_BAG_in_rule__EAttributeDecl__UniqueAssignment_1_110644); 
+            match(input,RULE_BAG,FollowSets000.FOLLOW_RULE_BAG_in_rule__EAttributeDecl__UniqueAssignment_1_110645); 
              after(grammarAccess.getEAttributeDeclAccess().getUniqueBagTerminalRuleCall_1_1_0()); 
 
             }
@@ -13711,20 +13711,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EAttributeDecl__OrderedAssignment_1_2
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5364:1: rule__EAttributeDecl__OrderedAssignment_1_2 : ( RULE_RANDOM ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5365:1: rule__EAttributeDecl__OrderedAssignment_1_2 : ( RULE_RANDOM ) ;
     public final void rule__EAttributeDecl__OrderedAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5368:1: ( ( RULE_RANDOM ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5369:1: ( RULE_RANDOM )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5369:1: ( ( RULE_RANDOM ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5370:1: ( RULE_RANDOM )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5369:1: ( RULE_RANDOM )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5370:1: RULE_RANDOM
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5370:1: ( RULE_RANDOM )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5371:1: RULE_RANDOM
             {
              before(grammarAccess.getEAttributeDeclAccess().getOrderedRandomTerminalRuleCall_1_2_0()); 
-            match(input,RULE_RANDOM,FollowSets000.FOLLOW_RULE_RANDOM_in_rule__EAttributeDecl__OrderedAssignment_1_210675); 
+            match(input,RULE_RANDOM,FollowSets000.FOLLOW_RULE_RANDOM_in_rule__EAttributeDecl__OrderedAssignment_1_210676); 
              after(grammarAccess.getEAttributeDeclAccess().getOrderedRandomTerminalRuleCall_1_2_0()); 
 
             }
@@ -13748,20 +13748,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EAttributeDecl__ChangeableAssignment_1_3
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5379:1: rule__EAttributeDecl__ChangeableAssignment_1_3 : ( RULE_READONLY ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5380:1: rule__EAttributeDecl__ChangeableAssignment_1_3 : ( RULE_READONLY ) ;
     public final void rule__EAttributeDecl__ChangeableAssignment_1_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5383:1: ( ( RULE_READONLY ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5384:1: ( RULE_READONLY )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5384:1: ( ( RULE_READONLY ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5385:1: ( RULE_READONLY )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5384:1: ( RULE_READONLY )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5385:1: RULE_READONLY
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5385:1: ( RULE_READONLY )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5386:1: RULE_READONLY
             {
              before(grammarAccess.getEAttributeDeclAccess().getChangeableReadonlyTerminalRuleCall_1_3_0()); 
-            match(input,RULE_READONLY,FollowSets000.FOLLOW_RULE_READONLY_in_rule__EAttributeDecl__ChangeableAssignment_1_310706); 
+            match(input,RULE_READONLY,FollowSets000.FOLLOW_RULE_READONLY_in_rule__EAttributeDecl__ChangeableAssignment_1_310707); 
              after(grammarAccess.getEAttributeDeclAccess().getChangeableReadonlyTerminalRuleCall_1_3_0()); 
 
             }
@@ -13785,24 +13785,24 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EAttributeDecl__VolatileAssignment_1_4
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5394:1: rule__EAttributeDecl__VolatileAssignment_1_4 : ( ( 'volatile' ) ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5395:1: rule__EAttributeDecl__VolatileAssignment_1_4 : ( ( 'volatile' ) ) ;
     public final void rule__EAttributeDecl__VolatileAssignment_1_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5398:1: ( ( ( 'volatile' ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5399:1: ( ( 'volatile' ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5399:1: ( ( ( 'volatile' ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5400:1: ( ( 'volatile' ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5399:1: ( ( 'volatile' ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5400:1: ( 'volatile' )
-            {
-             before(grammarAccess.getEAttributeDeclAccess().getVolatileVolatileKeyword_1_4_0()); 
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5400:1: ( ( 'volatile' ) )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5401:1: ( 'volatile' )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5402:1: 'volatile'
             {
              before(grammarAccess.getEAttributeDeclAccess().getVolatileVolatileKeyword_1_4_0()); 
-            match(input,52,FollowSets000.FOLLOW_52_in_rule__EAttributeDecl__VolatileAssignment_1_410742); 
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5402:1: ( 'volatile' )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5403:1: 'volatile'
+            {
+             before(grammarAccess.getEAttributeDeclAccess().getVolatileVolatileKeyword_1_4_0()); 
+            match(input,52,FollowSets000.FOLLOW_52_in_rule__EAttributeDecl__VolatileAssignment_1_410743); 
              after(grammarAccess.getEAttributeDeclAccess().getVolatileVolatileKeyword_1_4_0()); 
 
             }
@@ -13830,24 +13830,24 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EAttributeDecl__TransientAssignment_1_5
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5417:1: rule__EAttributeDecl__TransientAssignment_1_5 : ( ( 'transient' ) ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5418:1: rule__EAttributeDecl__TransientAssignment_1_5 : ( ( 'transient' ) ) ;
     public final void rule__EAttributeDecl__TransientAssignment_1_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5421:1: ( ( ( 'transient' ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5422:1: ( ( 'transient' ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5422:1: ( ( ( 'transient' ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5423:1: ( ( 'transient' ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5422:1: ( ( 'transient' ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5423:1: ( 'transient' )
-            {
-             before(grammarAccess.getEAttributeDeclAccess().getTransientTransientKeyword_1_5_0()); 
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5423:1: ( ( 'transient' ) )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5424:1: ( 'transient' )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5425:1: 'transient'
             {
              before(grammarAccess.getEAttributeDeclAccess().getTransientTransientKeyword_1_5_0()); 
-            match(input,53,FollowSets000.FOLLOW_53_in_rule__EAttributeDecl__TransientAssignment_1_510786); 
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5425:1: ( 'transient' )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5426:1: 'transient'
+            {
+             before(grammarAccess.getEAttributeDeclAccess().getTransientTransientKeyword_1_5_0()); 
+            match(input,53,FollowSets000.FOLLOW_53_in_rule__EAttributeDecl__TransientAssignment_1_510787); 
              after(grammarAccess.getEAttributeDeclAccess().getTransientTransientKeyword_1_5_0()); 
 
             }
@@ -13875,24 +13875,24 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EAttributeDecl__UnsettableAssignment_1_6
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5440:1: rule__EAttributeDecl__UnsettableAssignment_1_6 : ( ( 'unsettable' ) ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5441:1: rule__EAttributeDecl__UnsettableAssignment_1_6 : ( ( 'unsettable' ) ) ;
     public final void rule__EAttributeDecl__UnsettableAssignment_1_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5444:1: ( ( ( 'unsettable' ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5445:1: ( ( 'unsettable' ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5445:1: ( ( ( 'unsettable' ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5446:1: ( ( 'unsettable' ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5445:1: ( ( 'unsettable' ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5446:1: ( 'unsettable' )
-            {
-             before(grammarAccess.getEAttributeDeclAccess().getUnsettableUnsettableKeyword_1_6_0()); 
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5446:1: ( ( 'unsettable' ) )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5447:1: ( 'unsettable' )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5448:1: 'unsettable'
             {
              before(grammarAccess.getEAttributeDeclAccess().getUnsettableUnsettableKeyword_1_6_0()); 
-            match(input,54,FollowSets000.FOLLOW_54_in_rule__EAttributeDecl__UnsettableAssignment_1_610830); 
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5448:1: ( 'unsettable' )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5449:1: 'unsettable'
+            {
+             before(grammarAccess.getEAttributeDeclAccess().getUnsettableUnsettableKeyword_1_6_0()); 
+            match(input,54,FollowSets000.FOLLOW_54_in_rule__EAttributeDecl__UnsettableAssignment_1_610831); 
              after(grammarAccess.getEAttributeDeclAccess().getUnsettableUnsettableKeyword_1_6_0()); 
 
             }
@@ -13920,24 +13920,24 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EAttributeDecl__DerivedAssignment_1_7
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5463:1: rule__EAttributeDecl__DerivedAssignment_1_7 : ( ( 'derived' ) ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5464:1: rule__EAttributeDecl__DerivedAssignment_1_7 : ( ( 'derived' ) ) ;
     public final void rule__EAttributeDecl__DerivedAssignment_1_7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5467:1: ( ( ( 'derived' ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5468:1: ( ( 'derived' ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5468:1: ( ( ( 'derived' ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5469:1: ( ( 'derived' ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5468:1: ( ( 'derived' ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5469:1: ( 'derived' )
-            {
-             before(grammarAccess.getEAttributeDeclAccess().getDerivedDerivedKeyword_1_7_0()); 
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5469:1: ( ( 'derived' ) )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5470:1: ( 'derived' )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5471:1: 'derived'
             {
              before(grammarAccess.getEAttributeDeclAccess().getDerivedDerivedKeyword_1_7_0()); 
-            match(input,55,FollowSets000.FOLLOW_55_in_rule__EAttributeDecl__DerivedAssignment_1_710874); 
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5471:1: ( 'derived' )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5472:1: 'derived'
+            {
+             before(grammarAccess.getEAttributeDeclAccess().getDerivedDerivedKeyword_1_7_0()); 
+            match(input,55,FollowSets000.FOLLOW_55_in_rule__EAttributeDecl__DerivedAssignment_1_710875); 
              after(grammarAccess.getEAttributeDeclAccess().getDerivedDerivedKeyword_1_7_0()); 
 
             }
@@ -13965,20 +13965,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EAttributeDecl__EGenericTypeAssignment_3
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5486:1: rule__EAttributeDecl__EGenericTypeAssignment_3 : ( ruleEGenericTypeReferenceDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5487:1: rule__EAttributeDecl__EGenericTypeAssignment_3 : ( ruleEGenericTypeReferenceDecl ) ;
     public final void rule__EAttributeDecl__EGenericTypeAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5490:1: ( ( ruleEGenericTypeReferenceDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5491:1: ( ruleEGenericTypeReferenceDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5491:1: ( ( ruleEGenericTypeReferenceDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5492:1: ( ruleEGenericTypeReferenceDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5491:1: ( ruleEGenericTypeReferenceDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5492:1: ruleEGenericTypeReferenceDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5492:1: ( ruleEGenericTypeReferenceDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5493:1: ruleEGenericTypeReferenceDecl
             {
              before(grammarAccess.getEAttributeDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EAttributeDecl__EGenericTypeAssignment_310913);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EAttributeDecl__EGenericTypeAssignment_310914);
             ruleEGenericTypeReferenceDecl();
             _fsp--;
 
@@ -14005,20 +14005,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EAttributeDecl__LowerBoundAssignment_4_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5501:1: rule__EAttributeDecl__LowerBoundAssignment_4_1 : ( RULE_INT ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5502:1: rule__EAttributeDecl__LowerBoundAssignment_4_1 : ( RULE_INT ) ;
     public final void rule__EAttributeDecl__LowerBoundAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5505:1: ( ( RULE_INT ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5506:1: ( RULE_INT )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5506:1: ( ( RULE_INT ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5507:1: ( RULE_INT )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5506:1: ( RULE_INT )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5507:1: RULE_INT
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5507:1: ( RULE_INT )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5508:1: RULE_INT
             {
              before(grammarAccess.getEAttributeDeclAccess().getLowerBoundINTTerminalRuleCall_4_1_0()); 
-            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_rule__EAttributeDecl__LowerBoundAssignment_4_110944); 
+            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_rule__EAttributeDecl__LowerBoundAssignment_4_110945); 
              after(grammarAccess.getEAttributeDeclAccess().getLowerBoundINTTerminalRuleCall_4_1_0()); 
 
             }
@@ -14042,20 +14042,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EAttributeDecl__UpperBoundAssignment_4_2_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5516:1: rule__EAttributeDecl__UpperBoundAssignment_4_2_1 : ( ruleSINT ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5517:1: rule__EAttributeDecl__UpperBoundAssignment_4_2_1 : ( ruleSINT ) ;
     public final void rule__EAttributeDecl__UpperBoundAssignment_4_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5520:1: ( ( ruleSINT ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5521:1: ( ruleSINT )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5521:1: ( ( ruleSINT ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5522:1: ( ruleSINT )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5521:1: ( ruleSINT )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5522:1: ruleSINT
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5522:1: ( ruleSINT )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5523:1: ruleSINT
             {
              before(grammarAccess.getEAttributeDeclAccess().getUpperBoundSINTParserRuleCall_4_2_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSINT_in_rule__EAttributeDecl__UpperBoundAssignment_4_2_110975);
+            pushFollow(FollowSets000.FOLLOW_ruleSINT_in_rule__EAttributeDecl__UpperBoundAssignment_4_2_110976);
             ruleSINT();
             _fsp--;
 
@@ -14082,20 +14082,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EAttributeDecl__NameAssignment_5
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5531:1: rule__EAttributeDecl__NameAssignment_5 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5532:1: rule__EAttributeDecl__NameAssignment_5 : ( RULE_ID ) ;
     public final void rule__EAttributeDecl__NameAssignment_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5535:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5536:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5536:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5537:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5536:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5537:1: RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5537:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5538:1: RULE_ID
             {
              before(grammarAccess.getEAttributeDeclAccess().getNameIDTerminalRuleCall_5_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EAttributeDecl__NameAssignment_511006); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EAttributeDecl__NameAssignment_511007); 
              after(grammarAccess.getEAttributeDeclAccess().getNameIDTerminalRuleCall_5_0()); 
 
             }
@@ -14119,20 +14119,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EAttributeDecl__DefaultValueLiteralAssignment_6_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5546:1: rule__EAttributeDecl__DefaultValueLiteralAssignment_6_1 : ( RULE_STRING ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5547:1: rule__EAttributeDecl__DefaultValueLiteralAssignment_6_1 : ( RULE_STRING ) ;
     public final void rule__EAttributeDecl__DefaultValueLiteralAssignment_6_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5550:1: ( ( RULE_STRING ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5551:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5551:1: ( ( RULE_STRING ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5552:1: ( RULE_STRING )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5551:1: ( RULE_STRING )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5552:1: RULE_STRING
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5552:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5553:1: RULE_STRING
             {
              before(grammarAccess.getEAttributeDeclAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_6_1_0()); 
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__EAttributeDecl__DefaultValueLiteralAssignment_6_111037); 
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__EAttributeDecl__DefaultValueLiteralAssignment_6_111038); 
              after(grammarAccess.getEAttributeDeclAccess().getDefaultValueLiteralSTRINGTerminalRuleCall_6_1_0()); 
 
             }
@@ -14156,20 +14156,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EReferenceDecl__EAnnotationsAssignment_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5561:1: rule__EReferenceDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5562:1: rule__EReferenceDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
     public final void rule__EReferenceDecl__EAnnotationsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5565:1: ( ( ruleEAnnotationDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5566:1: ( ruleEAnnotationDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5566:1: ( ( ruleEAnnotationDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5567:1: ( ruleEAnnotationDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5566:1: ( ruleEAnnotationDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5567:1: ruleEAnnotationDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5567:1: ( ruleEAnnotationDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5568:1: ruleEAnnotationDecl
             {
              before(grammarAccess.getEReferenceDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EReferenceDecl__EAnnotationsAssignment_011068);
+            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EReferenceDecl__EAnnotationsAssignment_011069);
             ruleEAnnotationDecl();
             _fsp--;
 
@@ -14196,20 +14196,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EReferenceDecl__ResolveProxiesAssignment_1_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5576:1: rule__EReferenceDecl__ResolveProxiesAssignment_1_0 : ( RULE_LOCAL ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5577:1: rule__EReferenceDecl__ResolveProxiesAssignment_1_0 : ( RULE_LOCAL ) ;
     public final void rule__EReferenceDecl__ResolveProxiesAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5580:1: ( ( RULE_LOCAL ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5581:1: ( RULE_LOCAL )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5581:1: ( ( RULE_LOCAL ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5582:1: ( RULE_LOCAL )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5581:1: ( RULE_LOCAL )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5582:1: RULE_LOCAL
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5582:1: ( RULE_LOCAL )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5583:1: RULE_LOCAL
             {
              before(grammarAccess.getEReferenceDeclAccess().getResolveProxiesLocalTerminalRuleCall_1_0_0()); 
-            match(input,RULE_LOCAL,FollowSets000.FOLLOW_RULE_LOCAL_in_rule__EReferenceDecl__ResolveProxiesAssignment_1_011099); 
+            match(input,RULE_LOCAL,FollowSets000.FOLLOW_RULE_LOCAL_in_rule__EReferenceDecl__ResolveProxiesAssignment_1_011100); 
              after(grammarAccess.getEReferenceDeclAccess().getResolveProxiesLocalTerminalRuleCall_1_0_0()); 
 
             }
@@ -14233,20 +14233,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EReferenceDecl__UniqueAssignment_1_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5591:1: rule__EReferenceDecl__UniqueAssignment_1_1 : ( RULE_BAG ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5592:1: rule__EReferenceDecl__UniqueAssignment_1_1 : ( RULE_BAG ) ;
     public final void rule__EReferenceDecl__UniqueAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5595:1: ( ( RULE_BAG ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5596:1: ( RULE_BAG )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5596:1: ( ( RULE_BAG ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5597:1: ( RULE_BAG )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5596:1: ( RULE_BAG )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5597:1: RULE_BAG
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5597:1: ( RULE_BAG )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5598:1: RULE_BAG
             {
              before(grammarAccess.getEReferenceDeclAccess().getUniqueBagTerminalRuleCall_1_1_0()); 
-            match(input,RULE_BAG,FollowSets000.FOLLOW_RULE_BAG_in_rule__EReferenceDecl__UniqueAssignment_1_111130); 
+            match(input,RULE_BAG,FollowSets000.FOLLOW_RULE_BAG_in_rule__EReferenceDecl__UniqueAssignment_1_111131); 
              after(grammarAccess.getEReferenceDeclAccess().getUniqueBagTerminalRuleCall_1_1_0()); 
 
             }
@@ -14270,20 +14270,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EReferenceDecl__OrderedAssignment_1_2
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5606:1: rule__EReferenceDecl__OrderedAssignment_1_2 : ( RULE_RANDOM ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5607:1: rule__EReferenceDecl__OrderedAssignment_1_2 : ( RULE_RANDOM ) ;
     public final void rule__EReferenceDecl__OrderedAssignment_1_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5610:1: ( ( RULE_RANDOM ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5611:1: ( RULE_RANDOM )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5611:1: ( ( RULE_RANDOM ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5612:1: ( RULE_RANDOM )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5611:1: ( RULE_RANDOM )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5612:1: RULE_RANDOM
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5612:1: ( RULE_RANDOM )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5613:1: RULE_RANDOM
             {
              before(grammarAccess.getEReferenceDeclAccess().getOrderedRandomTerminalRuleCall_1_2_0()); 
-            match(input,RULE_RANDOM,FollowSets000.FOLLOW_RULE_RANDOM_in_rule__EReferenceDecl__OrderedAssignment_1_211161); 
+            match(input,RULE_RANDOM,FollowSets000.FOLLOW_RULE_RANDOM_in_rule__EReferenceDecl__OrderedAssignment_1_211162); 
              after(grammarAccess.getEReferenceDeclAccess().getOrderedRandomTerminalRuleCall_1_2_0()); 
 
             }
@@ -14307,20 +14307,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EReferenceDecl__ChangeableAssignment_1_3
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5621:1: rule__EReferenceDecl__ChangeableAssignment_1_3 : ( RULE_READONLY ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5622:1: rule__EReferenceDecl__ChangeableAssignment_1_3 : ( RULE_READONLY ) ;
     public final void rule__EReferenceDecl__ChangeableAssignment_1_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5625:1: ( ( RULE_READONLY ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5626:1: ( RULE_READONLY )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5626:1: ( ( RULE_READONLY ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5627:1: ( RULE_READONLY )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5626:1: ( RULE_READONLY )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5627:1: RULE_READONLY
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5627:1: ( RULE_READONLY )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5628:1: RULE_READONLY
             {
              before(grammarAccess.getEReferenceDeclAccess().getChangeableReadonlyTerminalRuleCall_1_3_0()); 
-            match(input,RULE_READONLY,FollowSets000.FOLLOW_RULE_READONLY_in_rule__EReferenceDecl__ChangeableAssignment_1_311192); 
+            match(input,RULE_READONLY,FollowSets000.FOLLOW_RULE_READONLY_in_rule__EReferenceDecl__ChangeableAssignment_1_311193); 
              after(grammarAccess.getEReferenceDeclAccess().getChangeableReadonlyTerminalRuleCall_1_3_0()); 
 
             }
@@ -14344,24 +14344,24 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EReferenceDecl__VolatileAssignment_1_4
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5636:1: rule__EReferenceDecl__VolatileAssignment_1_4 : ( ( 'volatile' ) ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5637:1: rule__EReferenceDecl__VolatileAssignment_1_4 : ( ( 'volatile' ) ) ;
     public final void rule__EReferenceDecl__VolatileAssignment_1_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5640:1: ( ( ( 'volatile' ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5641:1: ( ( 'volatile' ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5641:1: ( ( ( 'volatile' ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5642:1: ( ( 'volatile' ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5641:1: ( ( 'volatile' ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5642:1: ( 'volatile' )
-            {
-             before(grammarAccess.getEReferenceDeclAccess().getVolatileVolatileKeyword_1_4_0()); 
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5642:1: ( ( 'volatile' ) )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5643:1: ( 'volatile' )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5644:1: 'volatile'
             {
              before(grammarAccess.getEReferenceDeclAccess().getVolatileVolatileKeyword_1_4_0()); 
-            match(input,52,FollowSets000.FOLLOW_52_in_rule__EReferenceDecl__VolatileAssignment_1_411228); 
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5644:1: ( 'volatile' )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5645:1: 'volatile'
+            {
+             before(grammarAccess.getEReferenceDeclAccess().getVolatileVolatileKeyword_1_4_0()); 
+            match(input,52,FollowSets000.FOLLOW_52_in_rule__EReferenceDecl__VolatileAssignment_1_411229); 
              after(grammarAccess.getEReferenceDeclAccess().getVolatileVolatileKeyword_1_4_0()); 
 
             }
@@ -14389,24 +14389,24 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EReferenceDecl__TransientAssignment_1_5
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5659:1: rule__EReferenceDecl__TransientAssignment_1_5 : ( ( 'transient' ) ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5660:1: rule__EReferenceDecl__TransientAssignment_1_5 : ( ( 'transient' ) ) ;
     public final void rule__EReferenceDecl__TransientAssignment_1_5() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5663:1: ( ( ( 'transient' ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5664:1: ( ( 'transient' ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5664:1: ( ( ( 'transient' ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5665:1: ( ( 'transient' ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5664:1: ( ( 'transient' ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5665:1: ( 'transient' )
-            {
-             before(grammarAccess.getEReferenceDeclAccess().getTransientTransientKeyword_1_5_0()); 
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5665:1: ( ( 'transient' ) )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5666:1: ( 'transient' )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5667:1: 'transient'
             {
              before(grammarAccess.getEReferenceDeclAccess().getTransientTransientKeyword_1_5_0()); 
-            match(input,53,FollowSets000.FOLLOW_53_in_rule__EReferenceDecl__TransientAssignment_1_511272); 
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5667:1: ( 'transient' )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5668:1: 'transient'
+            {
+             before(grammarAccess.getEReferenceDeclAccess().getTransientTransientKeyword_1_5_0()); 
+            match(input,53,FollowSets000.FOLLOW_53_in_rule__EReferenceDecl__TransientAssignment_1_511273); 
              after(grammarAccess.getEReferenceDeclAccess().getTransientTransientKeyword_1_5_0()); 
 
             }
@@ -14434,24 +14434,24 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EReferenceDecl__UnsettableAssignment_1_6
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5682:1: rule__EReferenceDecl__UnsettableAssignment_1_6 : ( ( 'unsettable' ) ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5683:1: rule__EReferenceDecl__UnsettableAssignment_1_6 : ( ( 'unsettable' ) ) ;
     public final void rule__EReferenceDecl__UnsettableAssignment_1_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5686:1: ( ( ( 'unsettable' ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5687:1: ( ( 'unsettable' ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5687:1: ( ( ( 'unsettable' ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5688:1: ( ( 'unsettable' ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5687:1: ( ( 'unsettable' ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5688:1: ( 'unsettable' )
-            {
-             before(grammarAccess.getEReferenceDeclAccess().getUnsettableUnsettableKeyword_1_6_0()); 
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5688:1: ( ( 'unsettable' ) )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5689:1: ( 'unsettable' )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5690:1: 'unsettable'
             {
              before(grammarAccess.getEReferenceDeclAccess().getUnsettableUnsettableKeyword_1_6_0()); 
-            match(input,54,FollowSets000.FOLLOW_54_in_rule__EReferenceDecl__UnsettableAssignment_1_611316); 
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5690:1: ( 'unsettable' )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5691:1: 'unsettable'
+            {
+             before(grammarAccess.getEReferenceDeclAccess().getUnsettableUnsettableKeyword_1_6_0()); 
+            match(input,54,FollowSets000.FOLLOW_54_in_rule__EReferenceDecl__UnsettableAssignment_1_611317); 
              after(grammarAccess.getEReferenceDeclAccess().getUnsettableUnsettableKeyword_1_6_0()); 
 
             }
@@ -14479,24 +14479,24 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EReferenceDecl__DerivedAssignment_1_7
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5705:1: rule__EReferenceDecl__DerivedAssignment_1_7 : ( ( 'derived' ) ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5706:1: rule__EReferenceDecl__DerivedAssignment_1_7 : ( ( 'derived' ) ) ;
     public final void rule__EReferenceDecl__DerivedAssignment_1_7() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5709:1: ( ( ( 'derived' ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5710:1: ( ( 'derived' ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5710:1: ( ( ( 'derived' ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5711:1: ( ( 'derived' ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5710:1: ( ( 'derived' ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5711:1: ( 'derived' )
-            {
-             before(grammarAccess.getEReferenceDeclAccess().getDerivedDerivedKeyword_1_7_0()); 
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5711:1: ( ( 'derived' ) )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5712:1: ( 'derived' )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5713:1: 'derived'
             {
              before(grammarAccess.getEReferenceDeclAccess().getDerivedDerivedKeyword_1_7_0()); 
-            match(input,55,FollowSets000.FOLLOW_55_in_rule__EReferenceDecl__DerivedAssignment_1_711360); 
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5713:1: ( 'derived' )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5714:1: 'derived'
+            {
+             before(grammarAccess.getEReferenceDeclAccess().getDerivedDerivedKeyword_1_7_0()); 
+            match(input,55,FollowSets000.FOLLOW_55_in_rule__EReferenceDecl__DerivedAssignment_1_711361); 
              after(grammarAccess.getEReferenceDeclAccess().getDerivedDerivedKeyword_1_7_0()); 
 
             }
@@ -14524,24 +14524,24 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EReferenceDecl__ContainmentAssignment_2_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5728:1: rule__EReferenceDecl__ContainmentAssignment_2_0 : ( ( 'val' ) ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5729:1: rule__EReferenceDecl__ContainmentAssignment_2_0 : ( ( 'val' ) ) ;
     public final void rule__EReferenceDecl__ContainmentAssignment_2_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5732:1: ( ( ( 'val' ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5733:1: ( ( 'val' ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5733:1: ( ( ( 'val' ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5734:1: ( ( 'val' ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5733:1: ( ( 'val' ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5734:1: ( 'val' )
-            {
-             before(grammarAccess.getEReferenceDeclAccess().getContainmentValKeyword_2_0_0()); 
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5734:1: ( ( 'val' ) )
             // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5735:1: ( 'val' )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5736:1: 'val'
             {
              before(grammarAccess.getEReferenceDeclAccess().getContainmentValKeyword_2_0_0()); 
-            match(input,56,FollowSets000.FOLLOW_56_in_rule__EReferenceDecl__ContainmentAssignment_2_011404); 
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5736:1: ( 'val' )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5737:1: 'val'
+            {
+             before(grammarAccess.getEReferenceDeclAccess().getContainmentValKeyword_2_0_0()); 
+            match(input,56,FollowSets000.FOLLOW_56_in_rule__EReferenceDecl__ContainmentAssignment_2_011405); 
              after(grammarAccess.getEReferenceDeclAccess().getContainmentValKeyword_2_0_0()); 
 
             }
@@ -14569,20 +14569,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EReferenceDecl__EGenericTypeAssignment_3
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5751:1: rule__EReferenceDecl__EGenericTypeAssignment_3 : ( ruleEGenericTypeReferenceDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5752:1: rule__EReferenceDecl__EGenericTypeAssignment_3 : ( ruleEGenericTypeReferenceDecl ) ;
     public final void rule__EReferenceDecl__EGenericTypeAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5755:1: ( ( ruleEGenericTypeReferenceDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5756:1: ( ruleEGenericTypeReferenceDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5756:1: ( ( ruleEGenericTypeReferenceDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5757:1: ( ruleEGenericTypeReferenceDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5756:1: ( ruleEGenericTypeReferenceDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5757:1: ruleEGenericTypeReferenceDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5757:1: ( ruleEGenericTypeReferenceDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5758:1: ruleEGenericTypeReferenceDecl
             {
              before(grammarAccess.getEReferenceDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EReferenceDecl__EGenericTypeAssignment_311443);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EReferenceDecl__EGenericTypeAssignment_311444);
             ruleEGenericTypeReferenceDecl();
             _fsp--;
 
@@ -14609,20 +14609,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EReferenceDecl__LowerBoundAssignment_4_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5766:1: rule__EReferenceDecl__LowerBoundAssignment_4_1 : ( RULE_INT ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5767:1: rule__EReferenceDecl__LowerBoundAssignment_4_1 : ( RULE_INT ) ;
     public final void rule__EReferenceDecl__LowerBoundAssignment_4_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5770:1: ( ( RULE_INT ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5771:1: ( RULE_INT )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5771:1: ( ( RULE_INT ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5772:1: ( RULE_INT )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5771:1: ( RULE_INT )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5772:1: RULE_INT
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5772:1: ( RULE_INT )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5773:1: RULE_INT
             {
              before(grammarAccess.getEReferenceDeclAccess().getLowerBoundINTTerminalRuleCall_4_1_0()); 
-            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_rule__EReferenceDecl__LowerBoundAssignment_4_111474); 
+            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_rule__EReferenceDecl__LowerBoundAssignment_4_111475); 
              after(grammarAccess.getEReferenceDeclAccess().getLowerBoundINTTerminalRuleCall_4_1_0()); 
 
             }
@@ -14646,20 +14646,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EReferenceDecl__UpperBoundAssignment_4_2_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5781:1: rule__EReferenceDecl__UpperBoundAssignment_4_2_1 : ( ruleSINT ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5782:1: rule__EReferenceDecl__UpperBoundAssignment_4_2_1 : ( ruleSINT ) ;
     public final void rule__EReferenceDecl__UpperBoundAssignment_4_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5785:1: ( ( ruleSINT ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5786:1: ( ruleSINT )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5786:1: ( ( ruleSINT ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5787:1: ( ruleSINT )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5786:1: ( ruleSINT )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5787:1: ruleSINT
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5787:1: ( ruleSINT )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5788:1: ruleSINT
             {
              before(grammarAccess.getEReferenceDeclAccess().getUpperBoundSINTParserRuleCall_4_2_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSINT_in_rule__EReferenceDecl__UpperBoundAssignment_4_2_111505);
+            pushFollow(FollowSets000.FOLLOW_ruleSINT_in_rule__EReferenceDecl__UpperBoundAssignment_4_2_111506);
             ruleSINT();
             _fsp--;
 
@@ -14686,24 +14686,24 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EReferenceDecl__EOppositeAssignment_5_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5796:1: rule__EReferenceDecl__EOppositeAssignment_5_1 : ( ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5797:1: rule__EReferenceDecl__EOppositeAssignment_5_1 : ( ( RULE_ID ) ) ;
     public final void rule__EReferenceDecl__EOppositeAssignment_5_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5800:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5801:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5801:1: ( ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5802:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5801:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5802:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5802:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5803:1: ( RULE_ID )
             {
              before(grammarAccess.getEReferenceDeclAccess().getEOppositeEReferenceCrossReference_5_1_0()); 
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5803:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5804:1: RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5804:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5805:1: RULE_ID
             {
              before(grammarAccess.getEReferenceDeclAccess().getEOppositeEReferenceIDTerminalRuleCall_5_1_0_1()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EReferenceDecl__EOppositeAssignment_5_111540); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EReferenceDecl__EOppositeAssignment_5_111541); 
              after(grammarAccess.getEReferenceDeclAccess().getEOppositeEReferenceIDTerminalRuleCall_5_1_0_1()); 
 
             }
@@ -14731,20 +14731,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EReferenceDecl__NameAssignment_6
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5815:1: rule__EReferenceDecl__NameAssignment_6 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5816:1: rule__EReferenceDecl__NameAssignment_6 : ( RULE_ID ) ;
     public final void rule__EReferenceDecl__NameAssignment_6() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5819:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5820:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5820:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5821:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5820:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5821:1: RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5821:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5822:1: RULE_ID
             {
              before(grammarAccess.getEReferenceDeclAccess().getNameIDTerminalRuleCall_6_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EReferenceDecl__NameAssignment_611575); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EReferenceDecl__NameAssignment_611576); 
              after(grammarAccess.getEReferenceDeclAccess().getNameIDTerminalRuleCall_6_0()); 
 
             }
@@ -14768,20 +14768,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EEnumDecl__EAnnotationsAssignment_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5830:1: rule__EEnumDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5831:1: rule__EEnumDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
     public final void rule__EEnumDecl__EAnnotationsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5834:1: ( ( ruleEAnnotationDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5835:1: ( ruleEAnnotationDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5835:1: ( ( ruleEAnnotationDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5836:1: ( ruleEAnnotationDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5835:1: ( ruleEAnnotationDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5836:1: ruleEAnnotationDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5836:1: ( ruleEAnnotationDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5837:1: ruleEAnnotationDecl
             {
              before(grammarAccess.getEEnumDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EEnumDecl__EAnnotationsAssignment_011606);
+            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EEnumDecl__EAnnotationsAssignment_011607);
             ruleEAnnotationDecl();
             _fsp--;
 
@@ -14808,20 +14808,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EEnumDecl__NameAssignment_2
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5845:1: rule__EEnumDecl__NameAssignment_2 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5846:1: rule__EEnumDecl__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__EEnumDecl__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5849:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5850:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5850:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5851:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5850:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5851:1: RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5851:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5852:1: RULE_ID
             {
              before(grammarAccess.getEEnumDeclAccess().getNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EEnumDecl__NameAssignment_211637); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EEnumDecl__NameAssignment_211638); 
              after(grammarAccess.getEEnumDeclAccess().getNameIDTerminalRuleCall_2_0()); 
 
             }
@@ -14845,20 +14845,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EEnumDecl__ELiteralsAssignment_4
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5860:1: rule__EEnumDecl__ELiteralsAssignment_4 : ( ruleEEnumLiteralDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5861:1: rule__EEnumDecl__ELiteralsAssignment_4 : ( ruleEEnumLiteralDecl ) ;
     public final void rule__EEnumDecl__ELiteralsAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5864:1: ( ( ruleEEnumLiteralDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5865:1: ( ruleEEnumLiteralDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5865:1: ( ( ruleEEnumLiteralDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5866:1: ( ruleEEnumLiteralDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5865:1: ( ruleEEnumLiteralDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5866:1: ruleEEnumLiteralDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5866:1: ( ruleEEnumLiteralDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5867:1: ruleEEnumLiteralDecl
             {
              before(grammarAccess.getEEnumDeclAccess().getELiteralsEEnumLiteralDeclParserRuleCall_4_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEEnumLiteralDecl_in_rule__EEnumDecl__ELiteralsAssignment_411668);
+            pushFollow(FollowSets000.FOLLOW_ruleEEnumLiteralDecl_in_rule__EEnumDecl__ELiteralsAssignment_411669);
             ruleEEnumLiteralDecl();
             _fsp--;
 
@@ -14885,20 +14885,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EEnumLiteralDecl__EAnnotationsAssignment_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5875:1: rule__EEnumLiteralDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5876:1: rule__EEnumLiteralDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
     public final void rule__EEnumLiteralDecl__EAnnotationsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5879:1: ( ( ruleEAnnotationDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5880:1: ( ruleEAnnotationDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5880:1: ( ( ruleEAnnotationDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5881:1: ( ruleEAnnotationDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5880:1: ( ruleEAnnotationDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5881:1: ruleEAnnotationDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5881:1: ( ruleEAnnotationDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5882:1: ruleEAnnotationDecl
             {
              before(grammarAccess.getEEnumLiteralDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EEnumLiteralDecl__EAnnotationsAssignment_011699);
+            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EEnumLiteralDecl__EAnnotationsAssignment_011700);
             ruleEAnnotationDecl();
             _fsp--;
 
@@ -14925,20 +14925,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EEnumLiteralDecl__NameAssignment_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5890:1: rule__EEnumLiteralDecl__NameAssignment_1 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5891:1: rule__EEnumLiteralDecl__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__EEnumLiteralDecl__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5894:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5895:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5895:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5896:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5895:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5896:1: RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5896:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5897:1: RULE_ID
             {
              before(grammarAccess.getEEnumLiteralDeclAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EEnumLiteralDecl__NameAssignment_111730); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EEnumLiteralDecl__NameAssignment_111731); 
              after(grammarAccess.getEEnumLiteralDeclAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -14962,20 +14962,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EEnumLiteralDecl__ValueAssignment_2_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5905:1: rule__EEnumLiteralDecl__ValueAssignment_2_1 : ( RULE_INT ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5906:1: rule__EEnumLiteralDecl__ValueAssignment_2_1 : ( RULE_INT ) ;
     public final void rule__EEnumLiteralDecl__ValueAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5909:1: ( ( RULE_INT ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5910:1: ( RULE_INT )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5910:1: ( ( RULE_INT ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5911:1: ( RULE_INT )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5910:1: ( RULE_INT )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5911:1: RULE_INT
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5911:1: ( RULE_INT )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5912:1: RULE_INT
             {
              before(grammarAccess.getEEnumLiteralDeclAccess().getValueINTTerminalRuleCall_2_1_0()); 
-            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_rule__EEnumLiteralDecl__ValueAssignment_2_111761); 
+            match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_rule__EEnumLiteralDecl__ValueAssignment_2_111762); 
              after(grammarAccess.getEEnumLiteralDeclAccess().getValueINTTerminalRuleCall_2_1_0()); 
 
             }
@@ -14999,20 +14999,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EEnumLiteralDecl__LiteralAssignment_3
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5920:1: rule__EEnumLiteralDecl__LiteralAssignment_3 : ( RULE_STRING ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5921:1: rule__EEnumLiteralDecl__LiteralAssignment_3 : ( RULE_STRING ) ;
     public final void rule__EEnumLiteralDecl__LiteralAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5924:1: ( ( RULE_STRING ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5925:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5925:1: ( ( RULE_STRING ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5926:1: ( RULE_STRING )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5925:1: ( RULE_STRING )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5926:1: RULE_STRING
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5926:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5927:1: RULE_STRING
             {
              before(grammarAccess.getEEnumLiteralDeclAccess().getLiteralSTRINGTerminalRuleCall_3_0()); 
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__EEnumLiteralDecl__LiteralAssignment_311792); 
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__EEnumLiteralDecl__LiteralAssignment_311793); 
              after(grammarAccess.getEEnumLiteralDeclAccess().getLiteralSTRINGTerminalRuleCall_3_0()); 
 
             }
@@ -15036,20 +15036,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__ETypeParameterDecl__NameAssignment_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5935:1: rule__ETypeParameterDecl__NameAssignment_0 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5936:1: rule__ETypeParameterDecl__NameAssignment_0 : ( RULE_ID ) ;
     public final void rule__ETypeParameterDecl__NameAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5939:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5940:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5940:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5941:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5940:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5941:1: RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5941:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5942:1: RULE_ID
             {
              before(grammarAccess.getETypeParameterDeclAccess().getNameIDTerminalRuleCall_0_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ETypeParameterDecl__NameAssignment_011823); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ETypeParameterDecl__NameAssignment_011824); 
              after(grammarAccess.getETypeParameterDeclAccess().getNameIDTerminalRuleCall_0_0()); 
 
             }
@@ -15073,20 +15073,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__ETypeParameterDecl__EBoundsAssignment_1_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5950:1: rule__ETypeParameterDecl__EBoundsAssignment_1_1 : ( ruleEGenericTypeDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5951:1: rule__ETypeParameterDecl__EBoundsAssignment_1_1 : ( ruleEGenericTypeDecl ) ;
     public final void rule__ETypeParameterDecl__EBoundsAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5954:1: ( ( ruleEGenericTypeDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5955:1: ( ruleEGenericTypeDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5955:1: ( ( ruleEGenericTypeDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5956:1: ( ruleEGenericTypeDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5955:1: ( ruleEGenericTypeDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5956:1: ruleEGenericTypeDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5956:1: ( ruleEGenericTypeDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5957:1: ruleEGenericTypeDecl
             {
              before(grammarAccess.getETypeParameterDeclAccess().getEBoundsEGenericTypeDeclParserRuleCall_1_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_rule__ETypeParameterDecl__EBoundsAssignment_1_111854);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_rule__ETypeParameterDecl__EBoundsAssignment_1_111855);
             ruleEGenericTypeDecl();
             _fsp--;
 
@@ -15113,24 +15113,24 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5965:1: rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_0 : ( ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5966:1: rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_0 : ( ( RULE_ID ) ) ;
     public final void rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5969:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5970:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5970:1: ( ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5971:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5970:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5971:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5971:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5972:1: ( RULE_ID )
             {
              before(grammarAccess.getEGenericTypeReferenceDeclAccess().getEClassifierEClassifierCrossReference_0_0_0()); 
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5972:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5973:1: RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5973:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5974:1: RULE_ID
             {
              before(grammarAccess.getEGenericTypeReferenceDeclAccess().getEClassifierEClassifierIDTerminalRuleCall_0_0_0_1()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_011889); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_011890); 
              after(grammarAccess.getEGenericTypeReferenceDeclAccess().getEClassifierEClassifierIDTerminalRuleCall_0_0_0_1()); 
 
             }
@@ -15158,20 +15158,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5984:1: rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_1 : ( ruleEGenericTypeDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5985:1: rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_1 : ( ruleEGenericTypeDecl ) ;
     public final void rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5988:1: ( ( ruleEGenericTypeDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5989:1: ( ruleEGenericTypeDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5989:1: ( ( ruleEGenericTypeDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5990:1: ( ruleEGenericTypeDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5989:1: ( ruleEGenericTypeDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5990:1: ruleEGenericTypeDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5990:1: ( ruleEGenericTypeDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5991:1: ruleEGenericTypeDecl
             {
              before(grammarAccess.getEGenericTypeReferenceDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_111924);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_111925);
             ruleEGenericTypeDecl();
             _fsp--;
 
@@ -15198,20 +15198,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:5999:1: rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_1 : ( ruleEGenericTypeDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6000:1: rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_1 : ( ruleEGenericTypeDecl ) ;
     public final void rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6003:1: ( ( ruleEGenericTypeDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6004:1: ( ruleEGenericTypeDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6004:1: ( ( ruleEGenericTypeDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6005:1: ( ruleEGenericTypeDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6004:1: ( ruleEGenericTypeDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6005:1: ruleEGenericTypeDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6005:1: ( ruleEGenericTypeDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6006:1: ruleEGenericTypeDecl
             {
              before(grammarAccess.getEGenericTypeReferenceDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_2_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_111955);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_111956);
             ruleEGenericTypeDecl();
             _fsp--;
 
@@ -15238,24 +15238,24 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6014:1: rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_1 : ( ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6015:1: rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_1 : ( ( RULE_ID ) ) ;
     public final void rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6018:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6019:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6019:1: ( ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6020:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6019:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6020:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6020:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6021:1: ( RULE_ID )
             {
              before(grammarAccess.getEGenericTypeReferenceDeclAccess().getETypeParameterETypeParameterCrossReference_1_1_0()); 
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6021:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6022:1: RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6022:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6023:1: RULE_ID
             {
              before(grammarAccess.getEGenericTypeReferenceDeclAccess().getETypeParameterETypeParameterIDTerminalRuleCall_1_1_0_1()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_111990); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_111991); 
              after(grammarAccess.getEGenericTypeReferenceDeclAccess().getETypeParameterETypeParameterIDTerminalRuleCall_1_1_0_1()); 
 
             }
@@ -15283,24 +15283,24 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EGenericTypeDecl__EClassifierAssignment_0_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6033:1: rule__EGenericTypeDecl__EClassifierAssignment_0_0 : ( ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6034:1: rule__EGenericTypeDecl__EClassifierAssignment_0_0 : ( ( RULE_ID ) ) ;
     public final void rule__EGenericTypeDecl__EClassifierAssignment_0_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6037:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6038:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6038:1: ( ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6039:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6038:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6039:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6039:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6040:1: ( RULE_ID )
             {
              before(grammarAccess.getEGenericTypeDeclAccess().getEClassifierEClassifierCrossReference_0_0_0()); 
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6040:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6041:1: RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6041:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6042:1: RULE_ID
             {
              before(grammarAccess.getEGenericTypeDeclAccess().getEClassifierEClassifierIDTerminalRuleCall_0_0_0_1()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EGenericTypeDecl__EClassifierAssignment_0_012029); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EGenericTypeDecl__EClassifierAssignment_0_012030); 
              after(grammarAccess.getEGenericTypeDeclAccess().getEClassifierEClassifierIDTerminalRuleCall_0_0_0_1()); 
 
             }
@@ -15328,20 +15328,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6052:1: rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_1 : ( ruleEGenericTypeDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6053:1: rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_1 : ( ruleEGenericTypeDecl ) ;
     public final void rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6056:1: ( ( ruleEGenericTypeDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6057:1: ( ruleEGenericTypeDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6057:1: ( ( ruleEGenericTypeDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6058:1: ( ruleEGenericTypeDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6057:1: ( ruleEGenericTypeDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6058:1: ruleEGenericTypeDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6058:1: ( ruleEGenericTypeDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6059:1: ruleEGenericTypeDecl
             {
              before(grammarAccess.getEGenericTypeDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_112064);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_112065);
             ruleEGenericTypeDecl();
             _fsp--;
 
@@ -15368,20 +15368,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6067:1: rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_1 : ( ruleEGenericTypeDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6068:1: rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_1 : ( ruleEGenericTypeDecl ) ;
     public final void rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6071:1: ( ( ruleEGenericTypeDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6072:1: ( ruleEGenericTypeDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6072:1: ( ( ruleEGenericTypeDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6073:1: ( ruleEGenericTypeDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6072:1: ( ruleEGenericTypeDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6073:1: ruleEGenericTypeDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6073:1: ( ruleEGenericTypeDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6074:1: ruleEGenericTypeDecl
             {
              before(grammarAccess.getEGenericTypeDeclAccess().getETypeArgumentsEGenericTypeDeclParserRuleCall_0_1_2_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_112095);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_112096);
             ruleEGenericTypeDecl();
             _fsp--;
 
@@ -15408,24 +15408,24 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EGenericTypeDecl__ETypeParameterAssignment_1_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6082:1: rule__EGenericTypeDecl__ETypeParameterAssignment_1_1 : ( ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6083:1: rule__EGenericTypeDecl__ETypeParameterAssignment_1_1 : ( ( RULE_ID ) ) ;
     public final void rule__EGenericTypeDecl__ETypeParameterAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6086:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6087:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6087:1: ( ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6088:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6087:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6088:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6088:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6089:1: ( RULE_ID )
             {
              before(grammarAccess.getEGenericTypeDeclAccess().getETypeParameterETypeParameterCrossReference_1_1_0()); 
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6089:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6090:1: RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6090:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6091:1: RULE_ID
             {
              before(grammarAccess.getEGenericTypeDeclAccess().getETypeParameterETypeParameterIDTerminalRuleCall_1_1_0_1()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EGenericTypeDecl__ETypeParameterAssignment_1_112130); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EGenericTypeDecl__ETypeParameterAssignment_1_112131); 
              after(grammarAccess.getEGenericTypeDeclAccess().getETypeParameterETypeParameterIDTerminalRuleCall_1_1_0_1()); 
 
             }
@@ -15453,20 +15453,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6101:1: rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_1 : ( ruleEGenericTypeDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6102:1: rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_1 : ( ruleEGenericTypeDecl ) ;
     public final void rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6105:1: ( ( ruleEGenericTypeDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6106:1: ( ruleEGenericTypeDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6106:1: ( ( ruleEGenericTypeDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6107:1: ( ruleEGenericTypeDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6106:1: ( ruleEGenericTypeDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6107:1: ruleEGenericTypeDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6107:1: ( ruleEGenericTypeDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6108:1: ruleEGenericTypeDecl
             {
              before(grammarAccess.getEGenericTypeDeclAccess().getEUpperBoundEGenericTypeDeclParserRuleCall_2_1_0_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_112165);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_112166);
             ruleEGenericTypeDecl();
             _fsp--;
 
@@ -15493,20 +15493,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6116:1: rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_1 : ( ruleEGenericTypeDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6117:1: rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_1 : ( ruleEGenericTypeDecl ) ;
     public final void rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6120:1: ( ( ruleEGenericTypeDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6121:1: ( ruleEGenericTypeDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6121:1: ( ( ruleEGenericTypeDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6122:1: ( ruleEGenericTypeDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6121:1: ( ruleEGenericTypeDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6122:1: ruleEGenericTypeDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6122:1: ( ruleEGenericTypeDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6123:1: ruleEGenericTypeDecl
             {
              before(grammarAccess.getEGenericTypeDeclAccess().getELowerBoundEGenericTypeDeclParserRuleCall_2_1_1_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_112196);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_112197);
             ruleEGenericTypeDecl();
             _fsp--;
 
@@ -15533,20 +15533,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EOperationDecl__EAnnotationsAssignment_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6131:1: rule__EOperationDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6132:1: rule__EOperationDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
     public final void rule__EOperationDecl__EAnnotationsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6135:1: ( ( ruleEAnnotationDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6136:1: ( ruleEAnnotationDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6136:1: ( ( ruleEAnnotationDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6137:1: ( ruleEAnnotationDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6136:1: ( ruleEAnnotationDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6137:1: ruleEAnnotationDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6137:1: ( ruleEAnnotationDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6138:1: ruleEAnnotationDecl
             {
              before(grammarAccess.getEOperationDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EOperationDecl__EAnnotationsAssignment_012227);
+            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EOperationDecl__EAnnotationsAssignment_012228);
             ruleEAnnotationDecl();
             _fsp--;
 
@@ -15573,20 +15573,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EOperationDecl__UniqueAssignment_1_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6146:1: rule__EOperationDecl__UniqueAssignment_1_0 : ( RULE_BAG ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6147:1: rule__EOperationDecl__UniqueAssignment_1_0 : ( RULE_BAG ) ;
     public final void rule__EOperationDecl__UniqueAssignment_1_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6150:1: ( ( RULE_BAG ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6151:1: ( RULE_BAG )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6151:1: ( ( RULE_BAG ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6152:1: ( RULE_BAG )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6151:1: ( RULE_BAG )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6152:1: RULE_BAG
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6152:1: ( RULE_BAG )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6153:1: RULE_BAG
             {
              before(grammarAccess.getEOperationDeclAccess().getUniqueBagTerminalRuleCall_1_0_0()); 
-            match(input,RULE_BAG,FollowSets000.FOLLOW_RULE_BAG_in_rule__EOperationDecl__UniqueAssignment_1_012258); 
+            match(input,RULE_BAG,FollowSets000.FOLLOW_RULE_BAG_in_rule__EOperationDecl__UniqueAssignment_1_012259); 
              after(grammarAccess.getEOperationDeclAccess().getUniqueBagTerminalRuleCall_1_0_0()); 
 
             }
@@ -15610,20 +15610,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EOperationDecl__OrderedAssignment_1_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6161:1: rule__EOperationDecl__OrderedAssignment_1_1 : ( RULE_RANDOM ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6162:1: rule__EOperationDecl__OrderedAssignment_1_1 : ( RULE_RANDOM ) ;
     public final void rule__EOperationDecl__OrderedAssignment_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6165:1: ( ( RULE_RANDOM ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6166:1: ( RULE_RANDOM )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6166:1: ( ( RULE_RANDOM ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6167:1: ( RULE_RANDOM )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6166:1: ( RULE_RANDOM )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6167:1: RULE_RANDOM
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6167:1: ( RULE_RANDOM )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6168:1: RULE_RANDOM
             {
              before(grammarAccess.getEOperationDeclAccess().getOrderedRandomTerminalRuleCall_1_1_0()); 
-            match(input,RULE_RANDOM,FollowSets000.FOLLOW_RULE_RANDOM_in_rule__EOperationDecl__OrderedAssignment_1_112289); 
+            match(input,RULE_RANDOM,FollowSets000.FOLLOW_RULE_RANDOM_in_rule__EOperationDecl__OrderedAssignment_1_112290); 
              after(grammarAccess.getEOperationDeclAccess().getOrderedRandomTerminalRuleCall_1_1_0()); 
 
             }
@@ -15647,20 +15647,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EOperationDecl__EGenericTypeAssignment_3_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6176:1: rule__EOperationDecl__EGenericTypeAssignment_3_0 : ( ruleEGenericTypeReferenceDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6177:1: rule__EOperationDecl__EGenericTypeAssignment_3_0 : ( ruleEGenericTypeReferenceDecl ) ;
     public final void rule__EOperationDecl__EGenericTypeAssignment_3_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6180:1: ( ( ruleEGenericTypeReferenceDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6181:1: ( ruleEGenericTypeReferenceDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6181:1: ( ( ruleEGenericTypeReferenceDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6182:1: ( ruleEGenericTypeReferenceDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6181:1: ( ruleEGenericTypeReferenceDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6182:1: ruleEGenericTypeReferenceDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6182:1: ( ruleEGenericTypeReferenceDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6183:1: ruleEGenericTypeReferenceDecl
             {
              before(grammarAccess.getEOperationDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_3_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericTypeAssignment_3_012320);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericTypeAssignment_3_012321);
             ruleEGenericTypeReferenceDecl();
             _fsp--;
 
@@ -15687,20 +15687,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EOperationDecl__NameAssignment_4
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6191:1: rule__EOperationDecl__NameAssignment_4 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6192:1: rule__EOperationDecl__NameAssignment_4 : ( RULE_ID ) ;
     public final void rule__EOperationDecl__NameAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6195:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6196:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6196:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6197:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6196:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6197:1: RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6197:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6198:1: RULE_ID
             {
              before(grammarAccess.getEOperationDeclAccess().getNameIDTerminalRuleCall_4_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EOperationDecl__NameAssignment_412351); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EOperationDecl__NameAssignment_412352); 
              after(grammarAccess.getEOperationDeclAccess().getNameIDTerminalRuleCall_4_0()); 
 
             }
@@ -15724,20 +15724,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EOperationDecl__ETypeParametersAssignment_5_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6206:1: rule__EOperationDecl__ETypeParametersAssignment_5_1 : ( ruleETypeParameterDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6207:1: rule__EOperationDecl__ETypeParametersAssignment_5_1 : ( ruleETypeParameterDecl ) ;
     public final void rule__EOperationDecl__ETypeParametersAssignment_5_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6210:1: ( ( ruleETypeParameterDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6211:1: ( ruleETypeParameterDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6211:1: ( ( ruleETypeParameterDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6212:1: ( ruleETypeParameterDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6211:1: ( ruleETypeParameterDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6212:1: ruleETypeParameterDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6212:1: ( ruleETypeParameterDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6213:1: ruleETypeParameterDecl
             {
              before(grammarAccess.getEOperationDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_5_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleETypeParameterDecl_in_rule__EOperationDecl__ETypeParametersAssignment_5_112382);
+            pushFollow(FollowSets000.FOLLOW_ruleETypeParameterDecl_in_rule__EOperationDecl__ETypeParametersAssignment_5_112383);
             ruleETypeParameterDecl();
             _fsp--;
 
@@ -15764,20 +15764,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EOperationDecl__ETypeParametersAssignment_5_2_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6221:1: rule__EOperationDecl__ETypeParametersAssignment_5_2_1 : ( ruleETypeParameterDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6222:1: rule__EOperationDecl__ETypeParametersAssignment_5_2_1 : ( ruleETypeParameterDecl ) ;
     public final void rule__EOperationDecl__ETypeParametersAssignment_5_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6225:1: ( ( ruleETypeParameterDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6226:1: ( ruleETypeParameterDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6226:1: ( ( ruleETypeParameterDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6227:1: ( ruleETypeParameterDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6226:1: ( ruleETypeParameterDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6227:1: ruleETypeParameterDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6227:1: ( ruleETypeParameterDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6228:1: ruleETypeParameterDecl
             {
              before(grammarAccess.getEOperationDeclAccess().getETypeParametersETypeParameterDeclParserRuleCall_5_2_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleETypeParameterDecl_in_rule__EOperationDecl__ETypeParametersAssignment_5_2_112413);
+            pushFollow(FollowSets000.FOLLOW_ruleETypeParameterDecl_in_rule__EOperationDecl__ETypeParametersAssignment_5_2_112414);
             ruleETypeParameterDecl();
             _fsp--;
 
@@ -15804,20 +15804,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EOperationDecl__EParametersAssignment_7_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6236:1: rule__EOperationDecl__EParametersAssignment_7_0 : ( ruleEParameterDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6237:1: rule__EOperationDecl__EParametersAssignment_7_0 : ( ruleEParameterDecl ) ;
     public final void rule__EOperationDecl__EParametersAssignment_7_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6240:1: ( ( ruleEParameterDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6241:1: ( ruleEParameterDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6241:1: ( ( ruleEParameterDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6242:1: ( ruleEParameterDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6241:1: ( ruleEParameterDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6242:1: ruleEParameterDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6242:1: ( ruleEParameterDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6243:1: ruleEParameterDecl
             {
              before(grammarAccess.getEOperationDeclAccess().getEParametersEParameterDeclParserRuleCall_7_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEParameterDecl_in_rule__EOperationDecl__EParametersAssignment_7_012444);
+            pushFollow(FollowSets000.FOLLOW_ruleEParameterDecl_in_rule__EOperationDecl__EParametersAssignment_7_012445);
             ruleEParameterDecl();
             _fsp--;
 
@@ -15844,20 +15844,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EOperationDecl__EParametersAssignment_7_1_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6251:1: rule__EOperationDecl__EParametersAssignment_7_1_1 : ( ruleEParameterDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6252:1: rule__EOperationDecl__EParametersAssignment_7_1_1 : ( ruleEParameterDecl ) ;
     public final void rule__EOperationDecl__EParametersAssignment_7_1_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6255:1: ( ( ruleEParameterDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6256:1: ( ruleEParameterDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6256:1: ( ( ruleEParameterDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6257:1: ( ruleEParameterDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6256:1: ( ruleEParameterDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6257:1: ruleEParameterDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6257:1: ( ruleEParameterDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6258:1: ruleEParameterDecl
             {
              before(grammarAccess.getEOperationDeclAccess().getEParametersEParameterDeclParserRuleCall_7_1_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEParameterDecl_in_rule__EOperationDecl__EParametersAssignment_7_1_112475);
+            pushFollow(FollowSets000.FOLLOW_ruleEParameterDecl_in_rule__EOperationDecl__EParametersAssignment_7_1_112476);
             ruleEParameterDecl();
             _fsp--;
 
@@ -15884,20 +15884,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EOperationDecl__EGenericExceptionsAssignment_9_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6266:1: rule__EOperationDecl__EGenericExceptionsAssignment_9_1 : ( ruleEGenericTypeReferenceDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6267:1: rule__EOperationDecl__EGenericExceptionsAssignment_9_1 : ( ruleEGenericTypeReferenceDecl ) ;
     public final void rule__EOperationDecl__EGenericExceptionsAssignment_9_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6270:1: ( ( ruleEGenericTypeReferenceDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6271:1: ( ruleEGenericTypeReferenceDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6271:1: ( ( ruleEGenericTypeReferenceDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6272:1: ( ruleEGenericTypeReferenceDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6271:1: ( ruleEGenericTypeReferenceDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6272:1: ruleEGenericTypeReferenceDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6272:1: ( ruleEGenericTypeReferenceDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6273:1: ruleEGenericTypeReferenceDecl
             {
              before(grammarAccess.getEOperationDeclAccess().getEGenericExceptionsEGenericTypeReferenceDeclParserRuleCall_9_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericExceptionsAssignment_9_112506);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericExceptionsAssignment_9_112507);
             ruleEGenericTypeReferenceDecl();
             _fsp--;
 
@@ -15924,20 +15924,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EOperationDecl__EGenericExceptionsAssignment_9_2_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6281:1: rule__EOperationDecl__EGenericExceptionsAssignment_9_2_1 : ( ruleEGenericTypeReferenceDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6282:1: rule__EOperationDecl__EGenericExceptionsAssignment_9_2_1 : ( ruleEGenericTypeReferenceDecl ) ;
     public final void rule__EOperationDecl__EGenericExceptionsAssignment_9_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6285:1: ( ( ruleEGenericTypeReferenceDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6286:1: ( ruleEGenericTypeReferenceDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6286:1: ( ( ruleEGenericTypeReferenceDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6287:1: ( ruleEGenericTypeReferenceDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6286:1: ( ruleEGenericTypeReferenceDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6287:1: ruleEGenericTypeReferenceDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6287:1: ( ruleEGenericTypeReferenceDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6288:1: ruleEGenericTypeReferenceDecl
             {
              before(grammarAccess.getEOperationDeclAccess().getEGenericExceptionsEGenericTypeReferenceDeclParserRuleCall_9_2_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericExceptionsAssignment_9_2_112537);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericExceptionsAssignment_9_2_112538);
             ruleEGenericTypeReferenceDecl();
             _fsp--;
 
@@ -15964,20 +15964,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EParameterDecl__EAnnotationsAssignment_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6296:1: rule__EParameterDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6297:1: rule__EParameterDecl__EAnnotationsAssignment_0 : ( ruleEAnnotationDecl ) ;
     public final void rule__EParameterDecl__EAnnotationsAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6300:1: ( ( ruleEAnnotationDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6301:1: ( ruleEAnnotationDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6301:1: ( ( ruleEAnnotationDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6302:1: ( ruleEAnnotationDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6301:1: ( ruleEAnnotationDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6302:1: ruleEAnnotationDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6302:1: ( ruleEAnnotationDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6303:1: ruleEAnnotationDecl
             {
              before(grammarAccess.getEParameterDeclAccess().getEAnnotationsEAnnotationDeclParserRuleCall_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EParameterDecl__EAnnotationsAssignment_012568);
+            pushFollow(FollowSets000.FOLLOW_ruleEAnnotationDecl_in_rule__EParameterDecl__EAnnotationsAssignment_012569);
             ruleEAnnotationDecl();
             _fsp--;
 
@@ -16004,20 +16004,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EParameterDecl__EGenericTypeAssignment_1
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6311:1: rule__EParameterDecl__EGenericTypeAssignment_1 : ( ruleEGenericTypeReferenceDecl ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6312:1: rule__EParameterDecl__EGenericTypeAssignment_1 : ( ruleEGenericTypeReferenceDecl ) ;
     public final void rule__EParameterDecl__EGenericTypeAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6315:1: ( ( ruleEGenericTypeReferenceDecl ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6316:1: ( ruleEGenericTypeReferenceDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6316:1: ( ( ruleEGenericTypeReferenceDecl ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6317:1: ( ruleEGenericTypeReferenceDecl )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6316:1: ( ruleEGenericTypeReferenceDecl )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6317:1: ruleEGenericTypeReferenceDecl
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6317:1: ( ruleEGenericTypeReferenceDecl )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6318:1: ruleEGenericTypeReferenceDecl
             {
              before(grammarAccess.getEParameterDeclAccess().getEGenericTypeEGenericTypeReferenceDeclParserRuleCall_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EParameterDecl__EGenericTypeAssignment_112599);
+            pushFollow(FollowSets000.FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EParameterDecl__EGenericTypeAssignment_112600);
             ruleEGenericTypeReferenceDecl();
             _fsp--;
 
@@ -16044,20 +16044,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__EParameterDecl__NameAssignment_2
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6326:1: rule__EParameterDecl__NameAssignment_2 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6327:1: rule__EParameterDecl__NameAssignment_2 : ( RULE_ID ) ;
     public final void rule__EParameterDecl__NameAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6330:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6331:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6331:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6332:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6331:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6332:1: RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6332:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6333:1: RULE_ID
             {
              before(grammarAccess.getEParameterDeclAccess().getNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EParameterDecl__NameAssignment_212630); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__EParameterDecl__NameAssignment_212631); 
              after(grammarAccess.getEParameterDeclAccess().getNameIDTerminalRuleCall_2_0()); 
 
             }
@@ -16081,20 +16081,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__MapEntry__KeyAssignment_0
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6341:1: rule__MapEntry__KeyAssignment_0 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6342:1: rule__MapEntry__KeyAssignment_0 : ( RULE_ID ) ;
     public final void rule__MapEntry__KeyAssignment_0() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6345:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6346:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6346:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6347:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6346:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6347:1: RULE_ID
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6347:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6348:1: RULE_ID
             {
              before(grammarAccess.getMapEntryAccess().getKeyIDTerminalRuleCall_0_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__MapEntry__KeyAssignment_012661); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__MapEntry__KeyAssignment_012662); 
              after(grammarAccess.getMapEntryAccess().getKeyIDTerminalRuleCall_0_0()); 
 
             }
@@ -16118,20 +16118,20 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__MapEntry__ValueAssignment_2
-    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6356:1: rule__MapEntry__ValueAssignment_2 : ( RULE_STRING ) ;
+    // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6357:1: rule__MapEntry__ValueAssignment_2 : ( RULE_STRING ) ;
     public final void rule__MapEntry__ValueAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6360:1: ( ( RULE_STRING ) )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6361:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6361:1: ( ( RULE_STRING ) )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6362:1: ( RULE_STRING )
             {
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6361:1: ( RULE_STRING )
-            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6362:1: RULE_STRING
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6362:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.example.ecoredsl.ui/src-gen/org/eclipse/xtext/example/contentassist/antlr/internal/InternalEcoreDsl.g:6363:1: RULE_STRING
             {
              before(grammarAccess.getMapEntryAccess().getValueSTRINGTerminalRuleCall_2_0()); 
-            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__MapEntry__ValueAssignment_212692); 
+            match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__MapEntry__ValueAssignment_212693); 
              after(grammarAccess.getMapEntryAccess().getValueSTRINGTerminalRuleCall_2_0()); 
 
             }
@@ -17033,102 +17033,102 @@ public class InternalEcoreDslParser extends AbstractInternalContentAssistParser 
         public static final BitSet FOLLOW_48_in_rule__SINT__Group__09466 = new BitSet(new long[]{0x0000000000000040L});
         public static final BitSet FOLLOW_rule__SINT__Group__1_in_rule__SINT__Group__09478 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_INT_in_rule__SINT__Group__19506 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleReferencedMetamodel_in_rule__EcoreDsl__MetamodelDeclarationsAssignment_09543 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEPackageDecl_in_rule__EcoreDsl__PackageAssignment_19574 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__ReferencedMetamodel__AliasAssignment_1_09605 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rule__ReferencedMetamodel__EPackageAssignment_29640 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EPackageDecl__EAnnotationsAssignment_09675 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleQID_in_rule__EPackageDecl__NameAssignment_29706 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rule__EPackageDecl__NsURIAssignment_59737 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleQID_in_rule__EPackageDecl__NsPrefixAssignment_89768 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSubEPackageDecl_in_rule__EPackageDecl__ESubpackagesAssignment_10_09799 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEClassifierDecl_in_rule__EPackageDecl__EClassifiersAssignment_10_19830 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__SubEPackageDecl__EAnnotationsAssignment_09861 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__SubEPackageDecl__NameAssignment_29892 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSubEPackageDecl_in_rule__SubEPackageDecl__ESubpackagesAssignment_4_09923 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEClassifierDecl_in_rule__SubEPackageDecl__EClassifiersAssignment_4_19954 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EDataTypeDecl__EAnnotationsAssignment_0_09985 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_SERIALIZABLE_in_rule__EDataTypeDecl__SerializableAssignment_0_110016 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__EDataTypeDecl__NameAssignment_0_2_110047 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSTRING_OR_QID_in_rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_310078 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSTRING_OR_QID_in_rule__EAnnotationDecl__SourceAssignment_110109 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMapEntry_in_rule__EAnnotationDecl__DetailsAssignment_2_110140 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleMapEntry_in_rule__EAnnotationDecl__DetailsAssignment_2_2_110171 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EClassDecl__EAnnotationsAssignment_010202 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_49_in_rule__EClassDecl__AbstractAssignment_110238 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_50_in_rule__EClassDecl__InterfaceAssignment_2_010282 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__EClassDecl__NameAssignment_310321 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleETypeParameterDecl_in_rule__EClassDecl__ETypeParametersAssignment_4_110352 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleETypeParameterDecl_in_rule__EClassDecl__ETypeParametersAssignment_4_2_110383 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EClassDecl__EGenericSuperTypesAssignment_5_110414 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EClassDecl__EGenericSuperTypesAssignment_5_2_110445 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSTRING_OR_QID_in_rule__EClassDecl__InstanceClassNameAssignment_6_110476 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEStructuralFeatureDecl_in_rule__EClassDecl__EStructuralFeaturesAssignment_8_010507 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEOperationDecl_in_rule__EClassDecl__EOperationsAssignment_8_110538 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EAttributeDecl__EAnnotationsAssignment_010569 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_51_in_rule__EAttributeDecl__IDAssignment_1_010605 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_BAG_in_rule__EAttributeDecl__UniqueAssignment_1_110644 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_RANDOM_in_rule__EAttributeDecl__OrderedAssignment_1_210675 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_READONLY_in_rule__EAttributeDecl__ChangeableAssignment_1_310706 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_52_in_rule__EAttributeDecl__VolatileAssignment_1_410742 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_53_in_rule__EAttributeDecl__TransientAssignment_1_510786 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_54_in_rule__EAttributeDecl__UnsettableAssignment_1_610830 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_55_in_rule__EAttributeDecl__DerivedAssignment_1_710874 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EAttributeDecl__EGenericTypeAssignment_310913 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_INT_in_rule__EAttributeDecl__LowerBoundAssignment_4_110944 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSINT_in_rule__EAttributeDecl__UpperBoundAssignment_4_2_110975 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__EAttributeDecl__NameAssignment_511006 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rule__EAttributeDecl__DefaultValueLiteralAssignment_6_111037 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EReferenceDecl__EAnnotationsAssignment_011068 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_LOCAL_in_rule__EReferenceDecl__ResolveProxiesAssignment_1_011099 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_BAG_in_rule__EReferenceDecl__UniqueAssignment_1_111130 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_RANDOM_in_rule__EReferenceDecl__OrderedAssignment_1_211161 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_READONLY_in_rule__EReferenceDecl__ChangeableAssignment_1_311192 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_52_in_rule__EReferenceDecl__VolatileAssignment_1_411228 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_53_in_rule__EReferenceDecl__TransientAssignment_1_511272 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_54_in_rule__EReferenceDecl__UnsettableAssignment_1_611316 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_55_in_rule__EReferenceDecl__DerivedAssignment_1_711360 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_56_in_rule__EReferenceDecl__ContainmentAssignment_2_011404 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EReferenceDecl__EGenericTypeAssignment_311443 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_INT_in_rule__EReferenceDecl__LowerBoundAssignment_4_111474 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSINT_in_rule__EReferenceDecl__UpperBoundAssignment_4_2_111505 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__EReferenceDecl__EOppositeAssignment_5_111540 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__EReferenceDecl__NameAssignment_611575 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EEnumDecl__EAnnotationsAssignment_011606 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__EEnumDecl__NameAssignment_211637 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEEnumLiteralDecl_in_rule__EEnumDecl__ELiteralsAssignment_411668 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EEnumLiteralDecl__EAnnotationsAssignment_011699 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__EEnumLiteralDecl__NameAssignment_111730 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_INT_in_rule__EEnumLiteralDecl__ValueAssignment_2_111761 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rule__EEnumLiteralDecl__LiteralAssignment_311792 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__ETypeParameterDecl__NameAssignment_011823 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__ETypeParameterDecl__EBoundsAssignment_1_111854 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_011889 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_111924 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_111955 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_111990 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__EGenericTypeDecl__EClassifierAssignment_0_012029 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_112064 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_112095 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__EGenericTypeDecl__ETypeParameterAssignment_1_112130 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_112165 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_112196 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EOperationDecl__EAnnotationsAssignment_012227 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_BAG_in_rule__EOperationDecl__UniqueAssignment_1_012258 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_RANDOM_in_rule__EOperationDecl__OrderedAssignment_1_112289 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericTypeAssignment_3_012320 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__EOperationDecl__NameAssignment_412351 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleETypeParameterDecl_in_rule__EOperationDecl__ETypeParametersAssignment_5_112382 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleETypeParameterDecl_in_rule__EOperationDecl__ETypeParametersAssignment_5_2_112413 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEParameterDecl_in_rule__EOperationDecl__EParametersAssignment_7_012444 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEParameterDecl_in_rule__EOperationDecl__EParametersAssignment_7_1_112475 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericExceptionsAssignment_9_112506 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericExceptionsAssignment_9_2_112537 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EParameterDecl__EAnnotationsAssignment_012568 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EParameterDecl__EGenericTypeAssignment_112599 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__EParameterDecl__NameAssignment_212630 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__MapEntry__KeyAssignment_012661 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rule__MapEntry__ValueAssignment_212692 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleReferencedMetamodel_in_rule__EcoreDsl__MetamodelDeclarationsAssignment_09544 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEPackageDecl_in_rule__EcoreDsl__PackageAssignment_19575 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__ReferencedMetamodel__AliasAssignment_1_09606 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__ReferencedMetamodel__EPackageAssignment_29641 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EPackageDecl__EAnnotationsAssignment_09676 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleQID_in_rule__EPackageDecl__NameAssignment_29707 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__EPackageDecl__NsURIAssignment_59738 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleQID_in_rule__EPackageDecl__NsPrefixAssignment_89769 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSubEPackageDecl_in_rule__EPackageDecl__ESubpackagesAssignment_10_09800 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEClassifierDecl_in_rule__EPackageDecl__EClassifiersAssignment_10_19831 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__SubEPackageDecl__EAnnotationsAssignment_09862 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__SubEPackageDecl__NameAssignment_29893 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSubEPackageDecl_in_rule__SubEPackageDecl__ESubpackagesAssignment_4_09924 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEClassifierDecl_in_rule__SubEPackageDecl__EClassifiersAssignment_4_19955 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EDataTypeDecl__EAnnotationsAssignment_0_09986 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_SERIALIZABLE_in_rule__EDataTypeDecl__SerializableAssignment_0_110017 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EDataTypeDecl__NameAssignment_0_2_110048 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSTRING_OR_QID_in_rule__EDataTypeDecl__InstanceClassNameAssignment_0_2_310079 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSTRING_OR_QID_in_rule__EAnnotationDecl__SourceAssignment_110110 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleMapEntry_in_rule__EAnnotationDecl__DetailsAssignment_2_110141 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleMapEntry_in_rule__EAnnotationDecl__DetailsAssignment_2_2_110172 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EClassDecl__EAnnotationsAssignment_010203 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_49_in_rule__EClassDecl__AbstractAssignment_110239 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_50_in_rule__EClassDecl__InterfaceAssignment_2_010283 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EClassDecl__NameAssignment_310322 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleETypeParameterDecl_in_rule__EClassDecl__ETypeParametersAssignment_4_110353 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleETypeParameterDecl_in_rule__EClassDecl__ETypeParametersAssignment_4_2_110384 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EClassDecl__EGenericSuperTypesAssignment_5_110415 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EClassDecl__EGenericSuperTypesAssignment_5_2_110446 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSTRING_OR_QID_in_rule__EClassDecl__InstanceClassNameAssignment_6_110477 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEStructuralFeatureDecl_in_rule__EClassDecl__EStructuralFeaturesAssignment_8_010508 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEOperationDecl_in_rule__EClassDecl__EOperationsAssignment_8_110539 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EAttributeDecl__EAnnotationsAssignment_010570 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_51_in_rule__EAttributeDecl__IDAssignment_1_010606 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_BAG_in_rule__EAttributeDecl__UniqueAssignment_1_110645 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_RANDOM_in_rule__EAttributeDecl__OrderedAssignment_1_210676 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_READONLY_in_rule__EAttributeDecl__ChangeableAssignment_1_310707 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_52_in_rule__EAttributeDecl__VolatileAssignment_1_410743 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_53_in_rule__EAttributeDecl__TransientAssignment_1_510787 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_54_in_rule__EAttributeDecl__UnsettableAssignment_1_610831 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_55_in_rule__EAttributeDecl__DerivedAssignment_1_710875 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EAttributeDecl__EGenericTypeAssignment_310914 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_rule__EAttributeDecl__LowerBoundAssignment_4_110945 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSINT_in_rule__EAttributeDecl__UpperBoundAssignment_4_2_110976 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EAttributeDecl__NameAssignment_511007 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__EAttributeDecl__DefaultValueLiteralAssignment_6_111038 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EReferenceDecl__EAnnotationsAssignment_011069 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_LOCAL_in_rule__EReferenceDecl__ResolveProxiesAssignment_1_011100 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_BAG_in_rule__EReferenceDecl__UniqueAssignment_1_111131 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_RANDOM_in_rule__EReferenceDecl__OrderedAssignment_1_211162 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_READONLY_in_rule__EReferenceDecl__ChangeableAssignment_1_311193 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_52_in_rule__EReferenceDecl__VolatileAssignment_1_411229 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_53_in_rule__EReferenceDecl__TransientAssignment_1_511273 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_54_in_rule__EReferenceDecl__UnsettableAssignment_1_611317 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_55_in_rule__EReferenceDecl__DerivedAssignment_1_711361 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_56_in_rule__EReferenceDecl__ContainmentAssignment_2_011405 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EReferenceDecl__EGenericTypeAssignment_311444 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_rule__EReferenceDecl__LowerBoundAssignment_4_111475 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSINT_in_rule__EReferenceDecl__UpperBoundAssignment_4_2_111506 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EReferenceDecl__EOppositeAssignment_5_111541 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EReferenceDecl__NameAssignment_611576 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EEnumDecl__EAnnotationsAssignment_011607 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EEnumDecl__NameAssignment_211638 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEEnumLiteralDecl_in_rule__EEnumDecl__ELiteralsAssignment_411669 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EEnumLiteralDecl__EAnnotationsAssignment_011700 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EEnumLiteralDecl__NameAssignment_111731 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_rule__EEnumLiteralDecl__ValueAssignment_2_111762 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__EEnumLiteralDecl__LiteralAssignment_311793 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__ETypeParameterDecl__NameAssignment_011824 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__ETypeParameterDecl__EBoundsAssignment_1_111855 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EGenericTypeReferenceDecl__EClassifierAssignment_0_011890 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_111925 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeReferenceDecl__ETypeArgumentsAssignment_0_1_2_111956 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EGenericTypeReferenceDecl__ETypeParameterAssignment_1_111991 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EGenericTypeDecl__EClassifierAssignment_0_012030 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_112065 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ETypeArgumentsAssignment_0_1_2_112096 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EGenericTypeDecl__ETypeParameterAssignment_1_112131 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__EUpperBoundAssignment_2_1_0_112166 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeDecl_in_rule__EGenericTypeDecl__ELowerBoundAssignment_2_1_1_112197 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EOperationDecl__EAnnotationsAssignment_012228 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_BAG_in_rule__EOperationDecl__UniqueAssignment_1_012259 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_RANDOM_in_rule__EOperationDecl__OrderedAssignment_1_112290 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericTypeAssignment_3_012321 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EOperationDecl__NameAssignment_412352 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleETypeParameterDecl_in_rule__EOperationDecl__ETypeParametersAssignment_5_112383 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleETypeParameterDecl_in_rule__EOperationDecl__ETypeParametersAssignment_5_2_112414 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEParameterDecl_in_rule__EOperationDecl__EParametersAssignment_7_012445 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEParameterDecl_in_rule__EOperationDecl__EParametersAssignment_7_1_112476 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericExceptionsAssignment_9_112507 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EOperationDecl__EGenericExceptionsAssignment_9_2_112538 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEAnnotationDecl_in_rule__EParameterDecl__EAnnotationsAssignment_012569 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleEGenericTypeReferenceDecl_in_rule__EParameterDecl__EGenericTypeAssignment_112600 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__EParameterDecl__NameAssignment_212631 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__MapEntry__KeyAssignment_012662 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__MapEntry__ValueAssignment_212693 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

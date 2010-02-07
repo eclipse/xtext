@@ -80,7 +80,6 @@ entryRuleModel returns [EObject current=null]
 // Rule Model
 ruleModel returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -113,7 +112,6 @@ entryRuleTypes returns [EObject current=null]
 // Rule Types
 ruleTypes returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -165,7 +163,6 @@ entryRuleType returns [EObject current=null]
 // Rule Type
 ruleType returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -208,7 +205,6 @@ entryRuleSimpleType returns [EObject current=null]
 // Rule SimpleType
 ruleSimpleType returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -264,7 +260,6 @@ entryRuleCompositeType returns [EObject current=null]
 // Rule CompositeType
 ruleCompositeType returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -348,7 +343,6 @@ entryRuleCompositeTypeEntry returns [EObject current=null]
 // Rule CompositeTypeEntry
 ruleCompositeTypeEntry returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -388,7 +382,6 @@ entryRuleTypeId returns [String current=null]
 // Rule TypeId
 ruleTypeId returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
     @init { setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
 	    lastConsumedNode = currentNode;

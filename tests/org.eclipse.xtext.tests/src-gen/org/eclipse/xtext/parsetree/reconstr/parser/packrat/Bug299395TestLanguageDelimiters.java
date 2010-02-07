@@ -12,7 +12,7 @@ public final class Bug299395TestLanguageDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-    // TODO: remove hardcoded character class from template
+    
 	public static final ICharacterClass keyword$20$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),

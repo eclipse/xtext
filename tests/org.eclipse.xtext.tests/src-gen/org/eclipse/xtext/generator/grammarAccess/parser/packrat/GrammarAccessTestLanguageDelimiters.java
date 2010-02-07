@@ -11,7 +11,7 @@ public final class GrammarAccessTestLanguageDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-    // TODO: remove hardcoded character class from template
+    
 	public static final ICharacterClass keyword$14$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),

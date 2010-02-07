@@ -691,6 +691,7 @@ finally {
 
 
 
+
 rule__Namespace__NameAssignment_1
     @init {
 		int stackSize = keepStackSize();

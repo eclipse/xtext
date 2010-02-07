@@ -15,7 +15,7 @@ public final class Bug250313Delimiters {
 	
 	public static final ICharacterClass keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 
-    // TODO: remove hardcoded character class from template
+    
 	public static final ICharacterClass keyword$8$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),

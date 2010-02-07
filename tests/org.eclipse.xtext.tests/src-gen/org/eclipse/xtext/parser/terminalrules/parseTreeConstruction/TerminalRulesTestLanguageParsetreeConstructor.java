@@ -107,7 +107,7 @@ protected class Model_IdValueAssignment_0 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("idValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("idValue");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getIdValueIDTerminalRuleCall_0_0();
 			return obj;
@@ -140,7 +140,7 @@ protected class Model_IntValueAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("intValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("intValue");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getIntValueINTTerminalRuleCall_1_0();
 			return obj;
@@ -173,7 +173,7 @@ protected class Model_StringValueAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("stringValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stringValue");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getStringValueSTRINGTerminalRuleCall_2_0();
 			return obj;
@@ -206,7 +206,7 @@ protected class Model_MlCommentValueAssignment_3 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("mlCommentValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("mlCommentValue");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getMlCommentValueML_COMMENTTerminalRuleCall_3_0();
 			return obj;
@@ -239,7 +239,7 @@ protected class Model_SlCommentValueAssignment_4 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("slCommentValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("slCommentValue");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getSlCommentValueSL_COMMENTTerminalRuleCall_4_0();
 			return obj;
@@ -272,7 +272,7 @@ protected class Model_WsValueAssignment_5 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("wsValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("wsValue");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getWsValueWSTerminalRuleCall_5_0();
 			return obj;
@@ -305,7 +305,7 @@ protected class Model_AnyValueAssignment_6 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("anyValue",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("anyValue");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getModelAccess().getAnyValueANY_OTHERTerminalRuleCall_6_0();
 			return obj;

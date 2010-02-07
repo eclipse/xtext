@@ -517,7 +517,7 @@ protected class TwoRequired_OneAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("one",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("one");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTwoRequiredAccess().getOneIDTerminalRuleCall_1_0();
 			return obj;
@@ -551,7 +551,7 @@ protected class TwoRequired_TwoAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("two",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("two");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTwoRequiredAccess().getTwoIDTerminalRuleCall_2_0();
 			return obj;
@@ -711,7 +711,7 @@ protected class TwoOptions_OneAssignment_1_0_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("one",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("one");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTwoOptionsAccess().getOneIDTerminalRuleCall_1_0_1_0();
 			return obj;
@@ -790,7 +790,7 @@ protected class TwoOptions_TwoAssignment_1_1_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("two",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("two");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getTwoOptionsAccess().getTwoIDTerminalRuleCall_1_1_1_0();
 			return obj;

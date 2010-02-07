@@ -16,7 +16,7 @@ public final class Bug289059TestLanguageDelimiters {
 	public static final ISequenceMatcher ruleCall$5$Delimiter = new SetBasedKeywordMatcher(
 		"enabled");
 
-    // TODO: remove hardcoded character class from template
+    
 	public static final ICharacterClass keyword$17$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),

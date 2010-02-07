@@ -80,7 +80,6 @@ entryRuleFile returns [EObject current=null]
 // Rule File
 ruleFile returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -128,7 +127,6 @@ entryRuleStuff returns [EObject current=null]
 // Rule Stuff
 ruleStuff returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;

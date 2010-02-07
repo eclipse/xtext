@@ -80,7 +80,6 @@ entryRuleFirstLevel returns [EObject current=null]
 // Rule FirstLevel
 ruleFirstLevel returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -152,7 +151,6 @@ entryRuleSecondLevelA returns [EObject current=null]
 // Rule SecondLevelA
 ruleSecondLevelA returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -224,7 +222,6 @@ entryRuleSecondLevelB returns [EObject current=null]
 // Rule SecondLevelB
 ruleSecondLevelB returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -296,7 +293,6 @@ entryRuleThirdLevelA1 returns [EObject current=null]
 // Rule ThirdLevelA1
 ruleThirdLevelA1 returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -359,7 +355,6 @@ entryRuleThirdLevelA2 returns [EObject current=null]
 // Rule ThirdLevelA2
 ruleThirdLevelA2 returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -422,7 +417,6 @@ entryRuleThirdLevelB1 returns [EObject current=null]
 // Rule ThirdLevelB1
 ruleThirdLevelB1 returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -485,7 +479,6 @@ entryRuleThirdLevelB2 returns [EObject current=null]
 // Rule ThirdLevelB2
 ruleThirdLevelB2 returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;

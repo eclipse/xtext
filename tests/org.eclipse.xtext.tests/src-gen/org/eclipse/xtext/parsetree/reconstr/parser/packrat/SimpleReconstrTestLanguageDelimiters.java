@@ -20,7 +20,7 @@ public final class SimpleReconstrTestLanguageDelimiters {
 
 	public static final ISequenceMatcher ruleCall$50$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
-    // TODO: remove hardcoded character class from template
+    
 	public static final ICharacterClass keyword$68$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),

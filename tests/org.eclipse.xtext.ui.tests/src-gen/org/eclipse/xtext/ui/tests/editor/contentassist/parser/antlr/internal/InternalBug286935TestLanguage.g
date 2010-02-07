@@ -81,7 +81,6 @@ entryRuleState returns [EObject current=null]
 // Rule State
 ruleState returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;

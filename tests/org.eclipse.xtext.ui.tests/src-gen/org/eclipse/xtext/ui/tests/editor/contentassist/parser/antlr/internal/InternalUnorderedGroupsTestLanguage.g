@@ -81,7 +81,6 @@ entryRuleModel returns [EObject current=null]
 ruleModel returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
 	  boolean[] pred_0 = new boolean[4];
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;

@@ -80,7 +80,6 @@ entryRuleFile returns [EObject current=null]
 // Rule File
 ruleFile returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -128,7 +127,6 @@ entryRuleExpression returns [EObject current=null]
 // Rule Expression
 ruleExpression returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -189,7 +187,6 @@ entryRuleSExpression returns [EObject current=null]
 // Rule SExpression
 ruleSExpression returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -289,7 +286,6 @@ entryRuleAtom returns [EObject current=null]
 // Rule Atom
 ruleAtom returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -337,7 +333,6 @@ entryRuleVALUE returns [String current=null]
 // Rule VALUE
 ruleVALUE returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] 
     @init { setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
 	    lastConsumedNode = currentNode;

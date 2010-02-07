@@ -672,6 +672,7 @@ finally {
 
 
 
+
 rule__Root__NameAssignment_2
     @init {
 		int stackSize = keepStackSize();

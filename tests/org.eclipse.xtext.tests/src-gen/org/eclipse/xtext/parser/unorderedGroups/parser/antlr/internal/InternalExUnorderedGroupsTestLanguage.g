@@ -74,7 +74,6 @@ entryRuleDelegateModel returns [EObject current=null]
 // Rule DelegateModel
 ruleDelegateModel returns [EObject current=null] 
     @init { EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -124,7 +123,6 @@ ruleModel returns [EObject current=null]
 	  boolean[] pred_65 = new boolean[2];
 	  boolean[] pred_66 = new boolean[2];
 	  boolean[] pred_69 = new boolean[2];
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1795,7 +1793,6 @@ ruleUnorderedDatatype returns [AntlrDatatypeRuleToken current=new AntlrDatatypeR
 	  boolean[] pred_64 = new boolean[2];
 	  boolean[] pred_65 = new boolean[2];
 	  boolean[] pred_68 = new boolean[2];
-
     }
     @after { resetLookahead(); 
 	    lastConsumedNode = currentNode;
@@ -2823,7 +2820,6 @@ ruleUnorderedSerialization returns [EObject current=null]
 	  boolean[] pred_1 = new boolean[4];
 	  boolean[] pred_8 = new boolean[2];
 	  boolean[] pred_12 = new boolean[2];
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;

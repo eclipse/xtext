@@ -80,7 +80,6 @@ entryRuleMain returns [EObject current=null]
 // Rule Main
 ruleMain returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -152,7 +151,6 @@ entryRuleImport returns [EObject current=null]
 // Rule Import
 ruleImport returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -204,7 +202,6 @@ entryRuleType returns [EObject current=null]
 // Rule Type
 ruleType returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;

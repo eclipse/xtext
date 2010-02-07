@@ -15,7 +15,7 @@ public final class SerializationErrorTestLanguageDelimiters {
 	
 	public static final ICharacterClass keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 
-    // TODO: remove hardcoded character class from template
+    
 	public static final ICharacterClass keyword$23$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),

@@ -129,7 +129,7 @@ protected class Spielplatz_GroesseAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("groesse",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("groesse");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSpielplatzAccess().getGroesseINTTerminalRuleCall_1_0();
 			return obj;
@@ -163,7 +163,7 @@ protected class Spielplatz_BeschreibungAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("beschreibung",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("beschreibung");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSpielplatzAccess().getBeschreibungSTRINGTerminalRuleCall_2_0();
 			return obj;
@@ -647,7 +647,7 @@ protected class Kind_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getKindAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -681,7 +681,7 @@ protected class Kind_AgeAssignment_3 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("age",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("age");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getKindAccess().getAgeINTTerminalRuleCall_3_0();
 			return obj;
@@ -818,7 +818,7 @@ protected class Erwachsener_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getErwachsenerAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -852,7 +852,7 @@ protected class Erwachsener_AgeAssignment_3 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("age",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("age");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getErwachsenerAccess().getAgeINTTerminalRuleCall_3_0();
 			return obj;
@@ -989,7 +989,7 @@ protected class Spielzeug_NameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSpielzeugAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -1242,12 +1242,12 @@ protected class Familie_NameAssignment_2 extends AssignmentToken  {
 			element = grammarAccess.getFamilieAccess().getNameKeywordKeyword_2_0_0();
 			return obj;
 		}
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getFamilieAccess().getNameSTRINGTerminalRuleCall_2_0_1();
 			return obj;
 		}
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getFamilieAccess().getNameIDTerminalRuleCall_2_0_2();
 			return obj;

@@ -199,7 +199,7 @@ protected class State_StateKindAssignment_0_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("stateKind",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stateKind");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) {  
 			type = AssignmentType.ERC;
 			element = grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_0_2_0();
 			return obj;
@@ -288,7 +288,7 @@ protected class State_StateKindAssignment_0_3_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("stateKind",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stateKind");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) {  
 			type = AssignmentType.ERC;
 			element = grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_0_3_1_0();
 			return obj;
@@ -378,7 +378,7 @@ protected class State_StateKindAssignment_0_4_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("stateKind",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stateKind");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) {  
 			type = AssignmentType.ERC;
 			element = grammarAccess.getStateAccess().getStateKindStateTypeEnumRuleCall_0_4_1_0();
 			return obj;
@@ -470,7 +470,7 @@ protected class State_StateNameAssignment_2 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("stateName",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("stateName");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getStateAccess().getStateNameIDTerminalRuleCall_2_0();
 			return obj;
@@ -506,7 +506,7 @@ protected class State_LabelAssignment_3 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("label",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("label");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getStateAccess().getLabelSTRINGTerminalRuleCall_3_0();
 			return obj;

@@ -346,7 +346,7 @@ protected class WithoutHiddens_SpacesAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("spaces",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("spaces");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_1_0();
 			return obj;
@@ -402,7 +402,7 @@ protected class WithoutHiddens_SpacesAssignment_3 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("spaces",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("spaces");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getWithoutHiddensAccess().getSpacesWSTerminalRuleCall_3_0();
 			return obj;
@@ -850,7 +850,7 @@ protected class OverridingHiddensCall_SpacesAssignment_1 extends AssignmentToken
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("spaces",false)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("spaces");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getOverridingHiddensCallAccess().getSpacesWSTerminalRuleCall_1_0();
 			return obj;
@@ -1255,7 +1255,7 @@ protected class DatatypeHiddens_ValidAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("valid",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("valid");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for datatype rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.DRC;
 			element = grammarAccess.getDatatypeHiddensAccess().getValidDatatypeRuleParserRuleCall_1_0();
 			return obj;
@@ -1349,7 +1349,7 @@ protected class HidingHiddens_SpaceAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("space",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("space");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getHidingHiddensAccess().getSpaceWSTerminalRuleCall_1_0();
 			return obj;

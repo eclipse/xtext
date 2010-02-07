@@ -18,7 +18,7 @@ public final class ComplexReconstrTestLanguageDelimiters {
 	public static final ISequenceMatcher ruleCall$31$Delimiter = new SetBasedKeywordMatcher(
 		"TA", "x", "y", "TB", "TC", "z", "TD", "TE", "TF", "TG");
 
-    // TODO: remove hardcoded character class from template
+    
 	public static final ICharacterClass keyword$43$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
