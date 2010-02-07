@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Set;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
@@ -35,6 +34,7 @@ import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.util.XtextSwitch;
 
 /**
@@ -265,21 +265,18 @@ public final class ParseTreeUtil {
 		return abstractElement;
 	}
 
-	private static Set<AbstractElement> calculatePossibleElementSet(AbstractNode node,
-			AbstractElement abstractElement) {
+	private static Set<AbstractElement> calculatePossibleElementSet(AbstractNode node, AbstractElement abstractElement) {
 		assertParameterNotNull(node, "parameter 'node' must not be null");
 
 		Set<AbstractElement> elementSet = new LinkedHashSet<AbstractElement>();
 		AbstractNode contextNode = node;
-		AbstractElement initialGrammarElement = abstractElement != null ?
-				abstractElement:
-				getGrammarElementFromNode(node);
-		if (initialGrammarElement != null
-				&& initialGrammarElement.eContainer() instanceof ParserRule
+		AbstractElement initialGrammarElement = abstractElement != null ? abstractElement
+				: getGrammarElementFromNode(node);
+		if (initialGrammarElement != null && initialGrammarElement.eContainer() instanceof ParserRule
 				&& isDefaultRule((ParserRule) initialGrammarElement.eContainer())) {
 			elementSet.add(initialGrammarElement);
-		} else if (contextNode.getGrammarElement() instanceof RuleCall &&
-				(!(((RuleCall) contextNode.getGrammarElement()).getRule() instanceof TerminalRule))) {
+		} else if (contextNode.getGrammarElement() instanceof RuleCall
+				&& (!(((RuleCall) contextNode.getGrammarElement()).getRule() instanceof TerminalRule))) {
 			elementSet.add(initialGrammarElement);
 		}
 		for (; contextNode != null; contextNode = contextNode.getParent()) {
@@ -290,7 +287,7 @@ public final class ParseTreeUtil {
 
 				AbstractElement grammarElement = (AbstractElement) grammarElementObject;
 				if (grammarElement.eContainer() instanceof Group) {
-					EList<AbstractElement> contents = ((Group) grammarElement.eContainer()).getTokens();
+					List<AbstractElement> contents = ((Group) grammarElement.eContainer()).getTokens();
 					int indexOf = contents.indexOf(grammarElement) + 1;
 					int size = contents.size();
 					if (GrammarUtil.isOneOrMoreCardinality(grammarElement)) {
@@ -308,8 +305,7 @@ public final class ParseTreeUtil {
 					if (last != grammarElement && !GrammarUtil.isOptionalCardinality(last)) {
 						return elementSet;
 					}
-				}
-				else if (GrammarUtil.isMultipleCardinality(grammarElement)) {
+				} else if (GrammarUtil.isMultipleCardinality(grammarElement)) {
 					elementSet.add(grammarElement);
 				}
 			}
@@ -382,10 +378,10 @@ public final class ParseTreeUtil {
 			AbstractElement grammarElement) {
 		Set<AbstractElement> abstractElementSet = new HashSet<AbstractElement>();
 		if (grammarElement.eContainer() instanceof Assignment) {
-			Alternatives alternatives = getOutermostAlternativesElement(lastCompleteNode);
-			if (alternatives != null) {
+			AbstractElement outermost = getOutermostAlternativesElement(lastCompleteNode);
+			if (outermost != null) {
 				List<AbstractElement> filteredAssignments = new AlternativesTypeFilter(((Assignment) grammarElement
-						.eContainer())).doSwitch(alternatives);
+						.eContainer())).doSwitch(outermost);
 				for (Iterator<AbstractElement> assignmentsIterator = filteredAssignments.iterator(); assignmentsIterator
 						.hasNext();) {
 					abstractElementSet
@@ -396,21 +392,21 @@ public final class ParseTreeUtil {
 		return abstractElementSet;
 	}
 
-	private static Alternatives getOutermostAlternativesElement(final AbstractNode node) {
-		Alternatives alternatives = null;
-		for (AbstractNode baseNode = node; baseNode.eContainer() != null;
-			baseNode = (AbstractNode) baseNode.eContainer()) {
+	private static AbstractElement getOutermostAlternativesElement(final AbstractNode node) {
+		AbstractElement result = null;
+		for (AbstractNode baseNode = node; baseNode.getParent() != null;
+			baseNode = baseNode.getParent()) {
 			for (EObject abstractElement = baseNode.getGrammarElement();
 				abstractElement instanceof AbstractElement;
 					abstractElement = abstractElement.eContainer()) {
 				if (abstractElement instanceof Group) {
-					return alternatives;
-				} else if (abstractElement instanceof Alternatives) {
-					alternatives = (Alternatives) abstractElement;
+					return result;
+				} else if (abstractElement instanceof Alternatives || abstractElement instanceof UnorderedGroup) {
+					result = (AbstractElement) abstractElement;
 				}
 			}
 		}
-		return alternatives;
+		return result;
 	}
 
 	private static class AlternativesTypeFilter extends XtextSwitch<List<AbstractElement>> {
@@ -426,6 +422,15 @@ public final class ParseTreeUtil {
 			List<AbstractElement> elementList = new ArrayList<AbstractElement>();
 			for (AbstractElement alternativeElement : alternatives.getGroups()) {
 				addWithNullCheck(elementList, doSwitch(alternativeElement));
+			}
+			return elementList;
+		}
+		
+		@Override
+		public List<AbstractElement> caseUnorderedGroup(UnorderedGroup group) {
+			List<AbstractElement> elementList = new ArrayList<AbstractElement>();
+			for (AbstractElement element : group.getElements()) {
+				addWithNullCheck(elementList, doSwitch(element));
 			}
 			return elementList;
 		}
@@ -448,12 +453,12 @@ public final class ParseTreeUtil {
 			List<AbstractElement> elementList = new ArrayList<AbstractElement>();
 			if (assignment.getTerminal() instanceof RuleCall) {
 				addWithNullCheck(elementList, doSwitch(assignment.getTerminal()));
-			}
-			else if (assignment.getTerminal() instanceof Alternatives) {
+			} else if (assignment.getTerminal() instanceof Alternatives) {
 				addWithNullCheck(elementList, doSwitch(assignment.getTerminal()));
 			}
 			AbstractRule assigmentRule = getRule(this.assignment);
-			if (!this.assignment.equals(assignment) && null!=assigmentRule && assigmentRule.equals(getRule(assignment))) {
+			if (!this.assignment.equals(assignment) && null != assigmentRule
+					&& assigmentRule.equals(getRule(assignment))) {
 				elementList.add(assignment);
 			}
 			return elementList;
@@ -492,16 +497,20 @@ public final class ParseTreeUtil {
 
 		private boolean isOptional(AbstractElement groupElement) {
 			boolean isOptional = true;
-			if ((groupElement instanceof Group || groupElement instanceof Alternatives)
+			if ((groupElement instanceof Group || groupElement instanceof Alternatives || groupElement instanceof UnorderedGroup)
 					&& !GrammarUtil.isOptionalCardinality(groupElement)) {
-				EList<AbstractElement> abstractTokens = groupElement instanceof Group ? ((Group) groupElement)
-						.getTokens() : ((Alternatives) groupElement).getGroups();
-				for (Iterator<AbstractElement> iterator = abstractTokens.iterator(); isOptional && iterator.hasNext();) {
+				List<AbstractElement> children;
+				if (groupElement instanceof Group)
+					children = ((Group) groupElement).getTokens();
+				else if (groupElement instanceof Alternatives)
+					children = ((Alternatives) groupElement).getGroups();
+				else
+					children = ((UnorderedGroup) groupElement).getElements();
+				for (Iterator<AbstractElement> iterator = children.iterator(); isOptional && iterator.hasNext();) {
 					AbstractElement abstractElement = iterator.next();
 					isOptional = isOptional(abstractElement);
 				}
-			}
-			else {
+			} else {
 				isOptional = GrammarUtil.isOptionalCardinality(groupElement);
 			}
 			return isOptional;

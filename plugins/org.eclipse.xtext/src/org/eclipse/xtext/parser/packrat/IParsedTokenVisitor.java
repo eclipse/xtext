@@ -23,6 +23,7 @@ import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminalWithFeature;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedTerminalWithFeatureInfo;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedToken;
 import org.eclipse.xtext.parser.packrat.tokens.PlaceholderToken;
+import org.eclipse.xtext.parser.packrat.tokens.UnorderedGroupToken;
 
 import com.google.common.base.Function;
 
@@ -49,6 +50,10 @@ public interface IParsedTokenVisitor extends Function<AbstractParsedToken, Void>
 
 	void visitGroupTokenEnd(GroupToken.End token);
 
+	void visitUnorderedGroupToken(UnorderedGroupToken token);
+	
+	void visitUnorderedGroupTokenEnd(UnorderedGroupToken.End token);
+	
 	void visitAssignmentToken(AssignmentToken token);
 
 	void visitAssignmentTokenEnd(AssignmentToken.End token);

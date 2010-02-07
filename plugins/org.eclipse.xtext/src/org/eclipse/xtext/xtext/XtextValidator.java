@@ -38,6 +38,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.conversion.ValueConverterException;
@@ -339,6 +340,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		ParserRule rule = GrammarUtil.containingParserRule(element);
 		if (GrammarUtil.isDatatypeRule(rule))
 			return;
+		
 		XtextSwitch<Boolean> visitor = new XtextSwitch<Boolean>() {
 			private boolean isNull = true;
 
@@ -354,6 +356,18 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 				for (AbstractElement element : object.getGroups()) {
 					isNull = wasIsNull;
 					localIsNull &= doSwitch(element);
+				}
+				isNull = localIsNull;
+				return isNull;
+			}
+			
+			@Override
+			public Boolean caseUnorderedGroup(UnorderedGroup object) {
+				final boolean wasIsNull = isNull;
+				boolean localIsNull = wasIsNull;
+				for (AbstractElement element : object.getElements()) {
+					isNull = wasIsNull;
+					localIsNull |= doSwitch(element);
 				}
 				isNull = localIsNull;
 				return isNull;
@@ -434,6 +448,19 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 					for (AbstractElement element : object.getGroups()) {
 						assignedActionAllowed = wasActionAllowed;
 						localActionAllowed &= doSwitch(element);
+					}
+					assignedActionAllowed = wasActionAllowed
+							|| (localActionAllowed && !GrammarUtil.isOptionalCardinality(object));
+					return assignedActionAllowed;
+				}
+				
+				@Override
+				public Boolean caseUnorderedGroup(UnorderedGroup object) {
+					boolean wasActionAllowed = assignedActionAllowed;
+					boolean localActionAllowed = false;
+					for (AbstractElement element : object.getElements()) {
+						assignedActionAllowed = wasActionAllowed;
+						localActionAllowed |= doSwitch(element);
 					}
 					assignedActionAllowed = wasActionAllowed
 							|| (localActionAllowed && !GrammarUtil.isOptionalCardinality(object));
@@ -560,4 +587,23 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 		GrammarWithoutLeftRecursionInspector inspector = new GrammarWithoutLeftRecursionInspector(this);
 		inspector.inspect(grammar);
 	}
+	
+	@Check
+	public void checkActionInUnorderedGroup(final Action action) {
+		if (EcoreUtil2.getContainerOfType(action, UnorderedGroup.class) != null)
+			error("Actions may not be used in unordered groups.", action, null);
+	}
+	
+	@Check
+	public void checkRuleCallInUnorderedGroup(final RuleCall call) {
+		if (call.getRule() == null || call.getRule().eIsProxy() || !(call.getRule() instanceof ParserRule))
+			return;
+		if (GrammarUtil.isDatatypeRule((ParserRule) call.getRule()))
+			return;
+		if (GrammarUtil.isAssigned(call))
+			return;
+		if (EcoreUtil2.getContainerOfType(call, UnorderedGroup.class) != null)
+			error("Unassigned rule calls may not be used in unordered groups.", call, null);
+	}
+	
 }

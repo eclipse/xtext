@@ -22,6 +22,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.grammaranalysis.INFAState;
 import org.eclipse.xtext.grammaranalysis.INFATransition;
 import org.eclipse.xtext.grammaranalysis.IGrammarNFAProvider.NFABuilder;
@@ -89,22 +90,23 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 	}
 
 	protected void collectFollowers(AbstractElement ele) {
-		if (ele instanceof Group) {
-			Group g = (Group) ele;
+		if (ele instanceof Group || ele instanceof UnorderedGroup) {
+			List<AbstractElement> elements = ele instanceof Group ? 
+					((Group) ele).getTokens() : ((UnorderedGroup) ele).getElements();
 			switch (builder.getDirection()) {
 			case FORWARD:
-				for (int i = 0; i < g.getTokens().size(); i++) {
-					addFollower(g.getTokens().get(i));
+				for (int i = 0; i < elements.size(); i++) {
+					addFollower(elements.get(i));
 					if (!GrammarUtil
-							.isOptionalCardinality(g.getTokens().get(i)))
+							.isOptionalCardinality(elements.get(i)))
 						break;
 				}
 				break;
 			case BACKWARD:
-				for (int i = g.getTokens().size() - 1; i >= 0; i--) {
-					addFollower(g.getTokens().get(i));
+				for (int i = elements.size() - 1; i >= 0; i--) {
+					addFollower(elements.get(i));
 					if (!GrammarUtil
-							.isOptionalCardinality(g.getTokens().get(i)))
+							.isOptionalCardinality(elements.get(i)))
 						break;
 				}
 				break;
@@ -129,17 +131,18 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 			if (GrammarUtil.isMultipleCardinality(cntAlt))
 				addFollower(cntAlt);
 			collectFollowersOther(cntAlt);
-		} else if (ele.eContainer() instanceof Group) {
-			Group cntGroup = (Group) ele.eContainer();
-			int i = cntGroup.getTokens().indexOf(ele);
+		} else if (ele.eContainer() instanceof Group || ele.eContainer() instanceof UnorderedGroup) {
+			AbstractElement container = (AbstractElement) ele.eContainer();
+			List<AbstractElement> siblings = container instanceof Group ? ((Group) container).getTokens() : ((UnorderedGroup) container).getElements();
+			int i = siblings.indexOf(ele);
 			switch (builder.getDirection()) {
 			case FORWARD:
-				if ((i + 1) >= cntGroup.getTokens().size()) {
-					if (GrammarUtil.isMultipleCardinality(cntGroup))
-						addFollower(cntGroup);
-					collectFollowersOther(cntGroup);
+				if ((i + 1) >= siblings.size()) {
+					if (GrammarUtil.isMultipleCardinality(container))
+						addFollower(container);
+					collectFollowersOther(container);
 				} else {
-					AbstractElement next = cntGroup.getTokens().get(i + 1);
+					AbstractElement next = siblings.get(i + 1);
 					addFollower(next);
 					if (GrammarUtil.isOptionalCardinality(next))
 						collectFollowersOther(next);
@@ -147,11 +150,11 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 				break;
 			case BACKWARD:
 				if (i <= 0) {
-					if (GrammarUtil.isMultipleCardinality(cntGroup))
-						addFollower(cntGroup);
-					collectFollowersOther(cntGroup);
+					if (GrammarUtil.isMultipleCardinality(container))
+						addFollower(container);
+					collectFollowersOther(container);
 				} else {
-					AbstractElement next = cntGroup.getTokens().get(i - 1);
+					AbstractElement next = siblings.get(i - 1);
 					addFollower(next);
 					if (GrammarUtil.isOptionalCardinality(next))
 						collectFollowersOther(next);

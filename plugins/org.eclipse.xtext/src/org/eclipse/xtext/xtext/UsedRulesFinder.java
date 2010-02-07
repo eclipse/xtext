@@ -8,6 +8,7 @@
 package org.eclipse.xtext.xtext;
 
 import java.util.Collection;
+import java.util.List;
 
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractNegatedToken;
@@ -20,6 +21,7 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.util.XtextSwitch;
 
 import com.google.common.collect.Sets;
@@ -93,16 +95,23 @@ public class UsedRulesFinder extends XtextSwitch<Void> {
 	
 	@Override
 	public Void caseAlternatives(Alternatives object) {
-		for(AbstractElement element: object.getGroups())
+		return doSwitchAll(object.getGroups());
+	}
+	
+	protected Void doSwitchAll(List<AbstractElement> elements) {
+		for(AbstractElement element: elements)
 			doSwitch(element);
 		return null;
 	}
 	
 	@Override
 	public Void caseGroup(Group object) {
-		for(AbstractElement element: object.getTokens())
-			doSwitch(element);
-		return null;
+		return doSwitchAll(object.getTokens());
+	}
+	
+	@Override
+	public Void caseUnorderedGroup(UnorderedGroup object) {
+		return doSwitchAll(object.getElements());
 	}
 	
 	@Override

@@ -29,6 +29,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ParseException;
@@ -263,38 +264,51 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 	private boolean isCalledBy(final EObject child, AbstractElement parent) {
 		return new XtextSwitch<Boolean>() {
 			private final Set<ParserRule> rules = new HashSet<ParserRule>(4);
+			
 			@Override
 			public Boolean caseGroup(Group object) {
 				if (object == child)
 					return true;
-				for (AbstractElement elem: object.getTokens()) {
-					if (doSwitch(elem))
-						return true;
-				}
-				return false;
+				return caseAnyElement(object.getTokens());
 			}
+			
 			@Override
-			public Boolean caseAlternatives(org.eclipse.xtext.Alternatives object) {
+			public Boolean caseUnorderedGroup(UnorderedGroup object) {
 				if (object == child)
 					return true;
-				for (AbstractElement elem: object.getGroups()) {
+				return caseAnyElement(object.getElements());
+			}
+			
+			protected Boolean caseAnyElement(List<AbstractElement> elements) {
+				for (AbstractElement elem: elements) {
 					if (doSwitch(elem))
 						return true;
 				}
 				return false;
 			}
+			
+			@Override
+			public Boolean caseAlternatives(Alternatives object) {
+				if (object == child)
+					return true;
+				return caseAnyElement(object.getGroups());
+			}
+			
 			@Override
 			public Boolean caseAbstractElement(AbstractElement object) {
 				return object == child;
 			}
+			
 			@Override
 			public Boolean caseRuleCall(RuleCall object) {
 				return object == child || doSwitch(object.getRule());
 			}
+			
 			@Override
 			public Boolean caseAbstractRule(AbstractRule object) {
 				return object == child;
 			}
+			
 			@Override
 			public Boolean caseParserRule(ParserRule object) {
 				return object == child || (rules.add(object) && doSwitch(object.getAlternatives()));
@@ -325,17 +339,28 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 			public Boolean caseAction(Action object) {
 				return false;
 			}
+			
 			@Override
 			public Boolean caseGroup(Group object) {
+				return caseGroupOrUnorderedGroup(object, object.getTokens());
+			}
+			
+			@Override
+			public Boolean caseUnorderedGroup(UnorderedGroup object) {
+				return caseGroupOrUnorderedGroup(object, object.getElements());
+			}
+
+			public Boolean caseGroupOrUnorderedGroup(AbstractElement object, List<AbstractElement> elements) {
 				if (GrammarUtil.isOptionalCardinality(object))
 					return false;
-				for (AbstractElement child: object.getTokens()) {
+				for (AbstractElement child: elements) {
 					if (doSwitch(child)) {
 						return true;
 					}
 				}
 				return false;
 			}
+			
 			@Override
 			public Boolean caseAlternatives(Alternatives object) {
 				if (GrammarUtil.isOptionalCardinality(object))

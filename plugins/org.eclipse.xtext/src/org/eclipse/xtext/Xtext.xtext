@@ -46,7 +46,11 @@ TypeRef :
 ;
 
 Alternatives returns AbstractElement:
-    Group ({Alternatives.groups+=current} ('|' groups+=Group)+)?
+    UnorderedGroup ({Alternatives.groups+=current} ('|' groups+=UnorderedGroup)+)?
+;
+
+UnorderedGroup returns AbstractElement:
+	Group ({UnorderedGroup.elements+=current} ('&' elements+=Group)+)?
 ;
 
 Group returns AbstractElement:

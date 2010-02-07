@@ -19,6 +19,7 @@ import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.parser.packrat.IBacktracker;
 import org.eclipse.xtext.parser.packrat.IHiddenTokenHandler;
 import org.eclipse.xtext.parser.packrat.IMarkerFactory;
@@ -36,6 +37,7 @@ import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminal;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedNonTerminalEnd;
 import org.eclipse.xtext.parser.packrat.tokens.ParsedToken;
 import org.eclipse.xtext.parser.packrat.tokens.PlaceholderToken;
+import org.eclipse.xtext.parser.packrat.tokens.UnorderedGroupToken;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -68,6 +70,38 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 			}
 		}
 		return result.getResult();
+	}
+	
+	private int doConsumeUnorderedGroup(ElementConsumer<UnorderedGroup> groupConsumer, IElementConsumer[] groupElements, 
+			IFurtherParsable.Source<UnorderedGroupToken> source, boolean optional) throws Exception {
+		final UnorderedGroupResult result = createUnorderedGroupResult(groupConsumer, source, optional);
+		result.reset();
+		for(IElementConsumer consumer: groupElements) {
+			if (result.didGroupFail(consumer.consume())) {
+				if (result.result == ConsumeResult.EMPTY_MATCH) {
+					result.error(groupConsumer.getErrorMessage());
+					result.getResult();
+					return getOffset();
+				}
+				return result.getResult();
+			}
+		}
+		return result.getResult();
+//		result.reset();
+//		result.setAlternative(entry - 1);
+//		for (int i = entry; i < alternativesElements.length; i++) {
+//			result.nextAlternative();
+//			if (result.isAlternativeDone(alternativesElements[i].consume()))
+//				return result.getResult();
+//		}
+//		if (result.bestResult == ConsumeResult.EMPTY_MATCH) {
+//			result.fakeNextAlternative();
+//			result.error(alternativesConsumer.getErrorMessage());
+//			result.isAlternativeDone(ConsumeResult.SUCCESS);
+//			result.getResult();
+//			return getOffset();
+//		}
+//		return result.getResult();
 	}
 
 	private int doConsumeAlternatives(ElementConsumer<Alternatives> alternativesConsumer, IElementConsumer[] alternativesElements,
@@ -185,6 +219,36 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 
 		protected abstract void doGetConsumers(ConsumerAcceptor acceptor);
 	}
+	
+	protected abstract class UnorderedGroupConsumer extends ElementConsumer<UnorderedGroup> implements IFurtherParsable.Source<UnorderedGroupToken> {
+
+		private IElementConsumer[] consumers;
+
+		public UnorderedGroupConsumer(UnorderedGroup element) {
+			super(element);
+		}
+
+		@Override
+		protected final int doConsume(boolean optional) throws Exception {
+			return doConsumeUnorderedGroup(this, getConsumers(), this, optional);
+		}
+
+		protected final IElementConsumer[] getConsumers() {
+			if (consumers == null) {
+				ConsumerAcceptor acceptor = new ConsumerAcceptor();
+				doGetConsumers(acceptor);
+				consumers = acceptor.getResult();
+			}
+			return consumers;
+		}
+		
+		public int parseFurther(IFurtherParsable<UnorderedGroupToken> token) throws Exception {
+			final UnorderedGroupToken groupToken = token.getToken();
+			return doConsumeUnorderedGroup(this, getConsumers(), this, groupToken.isOptional() /*, groupToken.getAlternative() + 1 */);
+		}
+
+		protected abstract void doGetConsumers(ConsumerAcceptor acceptor);
+	}
 
 	protected abstract class AlternativesConsumer extends ElementConsumer<Alternatives> implements IFurtherParsable.Source<AlternativesToken> {
 
@@ -273,6 +337,36 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 
 		protected abstract void doGetConsumers(ConsumerAcceptor acceptor);
 	}
+	
+	protected abstract class OptionalUnorderedGroupConsumer extends OptionalElementConsumer<UnorderedGroup> implements IFurtherParsable.Source<UnorderedGroupToken> {
+
+		private IElementConsumer[] consumers;
+
+		public OptionalUnorderedGroupConsumer(UnorderedGroup element) {
+			super(element);
+		}
+
+		@Override
+		protected final int doConsume(boolean optional) throws Exception {
+			return doConsumeUnorderedGroup(this, getConsumers(), this, optional);
+		}
+
+		protected final IElementConsumer[] getConsumers() {
+			if (consumers == null) {
+				ConsumerAcceptor acceptor = new ConsumerAcceptor();
+				doGetConsumers(acceptor);
+				consumers = acceptor.getResult();
+			}
+			return consumers;
+		}
+		
+		public int parseFurther(IFurtherParsable<UnorderedGroupToken> token) throws Exception {
+			final UnorderedGroupToken groupToken = token.getToken();
+			return doConsumeUnorderedGroup(this, getConsumers(), this, groupToken.isOptional() /*, groupToken.getAlternative() + 1 */);
+		}
+
+		protected abstract void doGetConsumers(ConsumerAcceptor acceptor);
+	}
 
 	protected abstract class OptionalAlternativesConsumer extends OptionalElementConsumer<Alternatives> implements IFurtherParsable.Source<AlternativesToken> {
 
@@ -356,6 +450,36 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 				consumers = acceptor.getResult();
 			}
 			return consumers;
+		}
+
+		protected abstract void doGetConsumers(ConsumerAcceptor acceptor);
+	}
+	
+	protected abstract class LoopUnorderedGroupConsumer extends LoopElementConsumer<UnorderedGroup> implements IFurtherParsable.Source<UnorderedGroupToken> {
+
+		private IElementConsumer[] consumers;
+
+		public LoopUnorderedGroupConsumer(UnorderedGroup element) {
+			super(element);
+		}
+
+		@Override
+		protected final int doConsume(boolean optional) throws Exception {
+			return doConsumeUnorderedGroup(this, getConsumers(), this, optional);
+		}
+
+		protected final IElementConsumer[] getConsumers() {
+			if (consumers == null) {
+				ConsumerAcceptor acceptor = new ConsumerAcceptor();
+				doGetConsumers(acceptor);
+				consumers = acceptor.getResult();
+			}
+			return consumers;
+		}
+		
+		public int parseFurther(IFurtherParsable<UnorderedGroupToken> token) throws Exception {
+			final UnorderedGroupToken groupToken = token.getToken();
+			return doConsumeUnorderedGroup(this, getConsumers(), this, groupToken.isOptional() /*, groupToken.getAlternative() + 1 */);
 		}
 
 		protected abstract void doGetConsumers(ConsumerAcceptor acceptor);
@@ -492,6 +616,36 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 
 		protected abstract void doGetConsumers(ConsumerAcceptor acceptor);
 	}
+	
+	protected abstract class MandatoryLoopUnorderedGroupConsumer extends MandatoryLoopElementConsumer<UnorderedGroup> implements IFurtherParsable.Source<UnorderedGroupToken> {
+
+		private IElementConsumer[] consumers;
+
+		public MandatoryLoopUnorderedGroupConsumer(UnorderedGroup element) {
+			super(element);
+		}
+
+		@Override
+		protected final int doConsume(boolean optional) throws Exception {
+			return doConsumeUnorderedGroup(this, getConsumers(), this, optional);
+		}
+
+		protected final IElementConsumer[] getConsumers() {
+			if (consumers == null) {
+				ConsumerAcceptor acceptor = new ConsumerAcceptor();
+				doGetConsumers(acceptor);
+				consumers = acceptor.getResult();
+			}
+			return consumers;
+		}
+		
+		public int parseFurther(IFurtherParsable<UnorderedGroupToken> token) throws Exception {
+			final UnorderedGroupToken groupToken = token.getToken();
+			return doConsumeUnorderedGroup(this, getConsumers(), this, groupToken.isOptional() /*, groupToken.getAlternative() + 1 */);
+		}
+
+		protected abstract void doGetConsumers(ConsumerAcceptor acceptor);
+	}
 
 	protected abstract class MandatoryLoopAlternativesConsumer extends MandatoryLoopElementConsumer<Alternatives> implements IFurtherParsable.Source<AlternativesToken> {
 
@@ -602,6 +756,35 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 			return result == ConsumeResult.SUCCESS;
 		}
 	}
+	
+	protected class UnorderedGroupResult extends AbstractElementResult<UnorderedGroup> {
+		private int result;
+		private int groupIndex;
+		private final IMarker marker;
+
+		protected UnorderedGroupResult(ElementConsumer<UnorderedGroup> elementConsumer, UnorderedGroupToken begin) {
+			super(elementConsumer);
+			result = ConsumeResult.SUCCESS;
+			marker = mark();
+			groupIndex = -1;
+		}
+
+		public void reset() {
+			result = ConsumeResult.EMPTY_MATCH;
+		}
+
+		public int getResult() {
+			marker.commit();
+			getTokenAcceptor().accept(new UnorderedGroupToken.End(getOffset()));
+			return result;
+		}
+
+		public boolean didGroupFail(int result) {
+			this.groupIndex++;
+			this.result = result;
+			return result != ConsumeResult.SUCCESS;
+		}
+	}
 
 	protected class GroupResult extends AbstractElementResult<Group> {
 		private int result;
@@ -664,6 +847,13 @@ public abstract class NonTerminalConsumer extends AbstractConsumer implements IN
 	private GroupResult createGroupResult(ElementConsumer<Group> groupConsumer, boolean optional) {
 		getTokenAcceptor().accept(new GroupToken(getOffset(), groupConsumer.getElement(), groupConsumer, optional));
 		return new GroupResult(groupConsumer);
+	}
+	
+	private UnorderedGroupResult createUnorderedGroupResult(ElementConsumer<UnorderedGroup> groupConsumer, 
+			IFurtherParsable.Source<UnorderedGroupToken> source, boolean optional) {
+		final UnorderedGroupToken begin = new UnorderedGroupToken(getOffset(), groupConsumer.getElement(), source, optional);
+		getTokenAcceptor().accept(begin);
+		return new UnorderedGroupResult(groupConsumer, begin);
 	}
 
 	private AssignmentResult createAssignmentResult(ElementConsumer<Assignment> assignmentConsumer, boolean optional) {

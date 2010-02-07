@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
+import java.util.List;
+
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
@@ -15,6 +17,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
@@ -44,12 +47,21 @@ public class RuleWithoutInstantiationInspector extends XtextRuleInspector<Boolea
 					"Add an action to ensure object creation, e.g. '{" + getTypeRefName(rule.getType()) + "}'." , 
 					rule, XtextPackage.ABSTRACT_RULE__NAME);
 	}
-	
+
 	@Override
 	public Boolean caseGroup(Group object) {
+		return caseGroupOrUnorderedGroup(object, object.getTokens());
+	}
+	
+	@Override
+	public Boolean caseUnorderedGroup(UnorderedGroup object) {
+		return caseGroupOrUnorderedGroup(object, object.getElements());
+	}
+	
+	public Boolean caseGroupOrUnorderedGroup(AbstractElement object, List<AbstractElement> elements) {
 		if (GrammarUtil.isOptionalCardinality(object))
 			return Boolean.FALSE;
-		for(AbstractElement element: object.getTokens()) {
+		for(AbstractElement element: elements) {
 			if (doSwitch(element))
 				return Boolean.TRUE;
 		}

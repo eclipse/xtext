@@ -43,6 +43,11 @@ public class GrammarToDot extends GraphvizDotBuilder {
 		public Node caseAlternatives(Alternatives object) {
 			return newNode(object, "\\|" + card(object));
 		}
+		
+		@Override
+		public Node caseUnorderedGroup(UnorderedGroup object) {
+			return newNode(object, "\\&" + card(object));
+		}
 
 		@Override
 		public Node caseAssignment(Assignment object) {

@@ -53,6 +53,7 @@ import org.eclipse.xtext.ReferencedMetamodel;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.TypeRef;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.parsetree.AbstractNode;
@@ -377,6 +378,17 @@ public class Xtext2EcoreTransformer {
 			public Xtext2ECoreInterpretationContext caseGroup(Group object) {
 				return deriveFeatures(context.spawnContextForGroup(), object.getTokens());
 			}
+			
+			@Override
+			public Xtext2ECoreInterpretationContext caseUnorderedGroup(UnorderedGroup object) {
+				List<Xtext2ECoreInterpretationContext> contexts = new ArrayList<Xtext2ECoreInterpretationContext>();
+				for (AbstractElement element : object.getElements()) {
+					contexts.add(deriveFeatures(context, element));
+				}
+				if (!GrammarUtil.isOptionalCardinality(object))
+					return context.mergeSpawnedContexts(contexts);
+				return context;
+			}
 
 			@Override
 			public Xtext2ECoreInterpretationContext caseRuleCall(RuleCall object) {
@@ -573,10 +585,9 @@ public class Xtext2EcoreTransformer {
 					return ex;
 				}
 			}
-
-			@Override
-			public TransformationException caseAlternatives(Alternatives alternatives) {
-				for (AbstractElement ele : alternatives.getGroups()) {
+			
+			public TransformationException caseEveryElement(List<AbstractElement> elements) {
+				for (AbstractElement ele : elements) {
 					try {
 						deriveTypesAndHierarchy(rule, ruleReturnType, ele);
 					}
@@ -585,6 +596,21 @@ public class Xtext2EcoreTransformer {
 					}
 				}
 				return null;
+			}
+
+			@Override
+			public TransformationException caseGroup(Group group) {
+				return caseEveryElement(group.getTokens());
+			}
+			
+			@Override
+			public TransformationException caseAlternatives(Alternatives alternatives) {
+				return caseEveryElement(alternatives.getGroups());
+			}
+			
+			@Override
+			public TransformationException caseUnorderedGroup(UnorderedGroup group) {
+				return caseEveryElement(group.getElements());
 			}
 
 			@Override
@@ -612,19 +638,6 @@ public class Xtext2EcoreTransformer {
 				}
 				catch (TransformationException ex) {
 					return ex;
-				}
-				return null;
-			}
-
-			@Override
-			public TransformationException caseGroup(Group group) {
-				for (AbstractElement ele : group.getTokens()) {
-					try {
-						deriveTypesAndHierarchy(rule, ruleReturnType, ele);
-					}
-					catch (TransformationException ex) {
-						return ex;
-					}
 				}
 				return null;
 			}

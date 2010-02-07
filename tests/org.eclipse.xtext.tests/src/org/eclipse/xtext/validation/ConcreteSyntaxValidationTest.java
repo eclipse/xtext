@@ -10,18 +10,8 @@ package org.eclipse.xtext.validation;
 import static org.eclipse.xtext.junit.validation.AssertableDiagnostics.*;
 import static org.eclipse.xtext.validation.ConcreteSyntaxValidator.*;
 
-import java.util.HashMap;
-
-import org.eclipse.emf.common.util.BasicDiagnostic;
-import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.junit.validation.AssertableDiagnostics;
-import org.eclipse.xtext.junit.validation.AssertableDiagnostics.DiagnosticPredicate;
-import org.eclipse.xtext.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.validation.ConcreteSyntaxValidator.ConcreteSyntaxFeatureDiagnostic;
-import org.eclipse.xtext.validation.IConcreteSyntaxValidator.DiagnosticChainAcceptor;
 import org.eclipse.xtext.validation.csvalidationtest.AlternativeMultiplicities;
 import org.eclipse.xtext.validation.csvalidationtest.AssignedAction;
 import org.eclipse.xtext.validation.csvalidationtest.Combination1;
@@ -49,7 +39,7 @@ import org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall2SubActio
 /**
  * @author meysholdt - Initial contribution and API
  */
-public class ConcreteSyntaxValidationTest extends AbstractGeneratorTest {
+public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidationTest {
 
 	@Override
 	protected void setUp() throws Exception {
@@ -58,60 +48,18 @@ public class ConcreteSyntaxValidationTest extends AbstractGeneratorTest {
 		validator = getInjector().getInstance(ConcreteSyntaxValidator.class);
 	}
 
-	private static class DiagPred implements DiagnosticPredicate {
-
-		private EStructuralFeature feat;
-		private Integer min;
-		private Integer max;
-		private int code;
-		private String constraint;
-
-		public DiagPred(EStructuralFeature feat, int code, Integer min, Integer max, String constraint) {
-			super();
-			this.feat = feat;
-			this.min = min;
-			this.max = max;
-			this.code = code;
-			this.constraint = constraint;
-		}
-
-		@Override
-		public String toString() {
-			String f = feat == null ? "null" : feat.getEContainingClass().getName() + "." + feat.getName();
-			return "DiagPred [feat= " + f + " code=" + code + ", min=" + min + ", max=" + max + ", constraint="
-					+ constraint + "]";
-		}
-
-		public boolean apply(Diagnostic input) {
-			if (input instanceof ConcreteSyntaxFeatureDiagnostic) {
-				ConcreteSyntaxFeatureDiagnostic s = (ConcreteSyntaxFeatureDiagnostic) input;
-				if (min != null && min != s.getMin())
-					return false;
-				if (max != null && max != s.getMax())
-					return false;
-				return s.getFeature() == feat && s.getCode() == code && constraint.equals(s.getConstraint());
-			}
-			return false;
-		}
-	}
-
-	private DiagnosticPredicate err(EStructuralFeature feat, int code, Integer min, Integer max, String constraint) {
-		return new DiagPred(feat, code, min, max, constraint);
-	}
-
 	private IConcreteSyntaxValidator validator;
+	
+	@Override
+	protected IConcreteSyntaxValidator getValidator() {
+		return validator;
+	}
 
 	private static CsvalidationtestPackage p = CsvalidationtestPackage.eINSTANCE;
 	private static CsvalidationtestFactory f = CsvalidationtestFactory.eINSTANCE;
 
 	private EObject getModel2(String model) throws Exception {
 		return getModel(model).eContents().get(0);
-	}
-
-	private AssertableDiagnostics validate(EObject obj) {
-		final BasicDiagnostic dc = new BasicDiagnostic();
-		validator.validateObject(obj, new DiagnosticChainAcceptor(dc), new HashMap<Object, Object>());
-		return new AssertableDiagnostics(dc);
 	}
 
 	public void testSimpleGroup1() throws Exception {
@@ -387,17 +335,17 @@ public class ConcreteSyntaxValidationTest extends AbstractGeneratorTest {
 
 	public void testList3() throws Exception {
 		List3 copy, m = (List3) getModel2("#19 id1, id2, id2");
-		//		validate(m).assertOK();
+		validate(m).assertOK();
 
 		copy = (List3) EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		copy.getVal1().add("xxx");
-		//		validate(copy).assertOK();
+		validate(copy).assertOK();
 
 		copy = (List3) EcoreUtil.copy(m);
 		copy.getVal1().clear();
-		//		validate(copy).assertAll(err(p.getList3_Val1(), ERROR_LIST_TOO_FEW, 1, null, "((val1 val1*)|val2)"),
-		//				err(p.getList3_Val2(), ERROR_VALUE_REQUIRED, 1, null, "((val1 val1*)|val2)"));
+		validate(copy).assertAll(err(p.getList3_Val1(), ERROR_LIST_TOO_FEW, 1, null, "((val1 val1*)|val2)"),
+				err(p.getList3_Val2(), ERROR_VALUE_REQUIRED, 1, null, "((val1 val1*)|val2)"));
 
 		copy = (List3) EcoreUtil.copy(m);
 		copy.getVal1().clear();

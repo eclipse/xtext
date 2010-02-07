@@ -181,6 +181,50 @@ public class RuleWithoutInstantiationInspectorTest extends AbstractXtextRuleInsp
 		assertTrue(warnings.toString(), warnings.isEmpty());
 	}
 	
+	public void testUnorderedGroup_01() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"Model: x=X;\n" +
+				"X : {X} | 'keyword0' & 'keyword1';\n";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
+		assertEquals(warnings.toString(), 1, warnings.size());
+	}
+	
+	public void testUnorderedGroup_02() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"Model: x=X;\n" +
+				"X : value='keyword0' & 'keyword1';\n";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
+		assertEquals(warnings.toString(), 0, warnings.size());
+	}
+	
+	public void testUnorderedGroup_03() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"Model: x=X;\n" +
+				"X : value='keyword0'? & 'keyword1';\n";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
+		assertEquals(warnings.toString(), 1, warnings.size());
+	}
+	
+	public void testUnorderedGroup_04() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"Model: x=X;\n" +
+				"X : value='keyword0'? & value='keyword1';\n";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "X");
+		validateRule(rule);
+		assertEquals(warnings.toString(), 0, warnings.size());
+	}
+	
 	public void testBug_287735_01() throws Exception {
 		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
 				"generate metamodel 'foo.sample'\n" +

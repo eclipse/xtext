@@ -9,6 +9,7 @@ package org.eclipse.xtext.xtext;
 
 import java.util.Collection;
 import java.util.Collections;
+import java.util.List;
 
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
@@ -21,6 +22,7 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 import com.google.common.collect.Iterables;
@@ -151,12 +153,21 @@ public class OverriddenValueInspector extends XtextRuleInspector<Void, ParserRul
 
 	@Override
 	public Void caseGroup(Group object) {
+		return caseGroupOrUnorderedGroup(object, object.getTokens());
+	}
+	
+	@Override
+	public Void caseUnorderedGroup(UnorderedGroup object) {
+		return caseGroupOrUnorderedGroup(object, object.getElements());
+	}
+	
+	public Void caseGroupOrUnorderedGroup(AbstractElement object, List<AbstractElement> elements) {
 		Multimap<String, AbstractElement> prevAssignedFeatures = newMultimap(assignedFeatures);
-		for (AbstractElement element : object.getTokens()) {
+		for (AbstractElement element : elements) {
 			doSwitch(element);
 		}
 		if (GrammarUtil.isMultipleCardinality(object)) {
-			for (AbstractElement element : object.getTokens()) {
+			for (AbstractElement element : elements) {
 				doSwitch(element);
 			}
 		}

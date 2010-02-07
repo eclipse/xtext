@@ -22,6 +22,7 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextSwitch;
 
@@ -73,6 +74,16 @@ final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Fu
 		if (object.getTokens().size() != 1)
 			return null;
 		return doSwitch(object.getTokens().get(0));
+	}
+	
+	@Override
+	public EClassifier caseUnorderedGroup(UnorderedGroup object) {
+		// since we do not allow unassigned rule calls and
+		// actions, it is safe to use the same logic for
+		// unordered groups as for groups
+		if (object.getElements().size() != 1)
+			return null;
+		return doSwitch(object.getElements().get(0));
 	}
 
 	@Override

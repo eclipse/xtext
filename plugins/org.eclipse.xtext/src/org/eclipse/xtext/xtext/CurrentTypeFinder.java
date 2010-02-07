@@ -22,6 +22,7 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.util.XtextSwitch;
 
 import com.google.common.collect.Lists;
@@ -100,11 +101,20 @@ public class CurrentTypeFinder {
 		}
 		
 		@Override
+		public Boolean caseUnorderedGroup(UnorderedGroup object) {
+			return caseGroupOrUnorderedGroup(object, object.getElements());
+		}
+		
+		@Override
 		public Boolean caseGroup(Group object) {
+			return caseGroupOrUnorderedGroup(object, object.getTokens());
+		}
+		
+		protected Boolean caseGroupOrUnorderedGroup(AbstractElement object, List<AbstractElement> elements) {
 			if (object == stopElement)
 				return true;
 			EClassifier wasType = currentType;
-			for(AbstractElement element: object.getTokens()) {
+			for(AbstractElement element: elements) {
 				if (doSwitch(element))
 					return true;
 			}

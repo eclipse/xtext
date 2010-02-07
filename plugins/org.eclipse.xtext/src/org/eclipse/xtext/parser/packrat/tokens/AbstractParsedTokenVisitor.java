@@ -54,6 +54,14 @@ public abstract class AbstractParsedTokenVisitor implements IParsedTokenVisitor 
 	public void visitGroupTokenEnd(GroupToken.End token) {
 		visitCompoundParsedTokenEnd(token);
 	}
+	
+	public void visitUnorderedGroupToken(UnorderedGroupToken token) {
+		visitCompoundParsedToken(token);
+	}
+
+	public void visitUnorderedGroupTokenEnd(UnorderedGroupToken.End token) {
+		visitCompoundParsedTokenEnd(token);
+	}
 
 	public void visitErrorToken(ErrorToken token) {
 		visitParsedToken(token);
