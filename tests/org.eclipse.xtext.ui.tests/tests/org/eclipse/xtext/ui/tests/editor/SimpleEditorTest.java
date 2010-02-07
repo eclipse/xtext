@@ -16,6 +16,7 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.swt.widgets.Display;
+import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
@@ -34,7 +35,7 @@ public class SimpleEditorTest extends AbstractEditorTest {
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
-		
+
 		// listen to CoreLog use RuntimeLog to hear more
 		Activator.getInstance().getLog().addLogListener(new ILogListener() {
 			public void logging(IStatus status, String plugin) {
@@ -43,11 +44,17 @@ public class SimpleEditorTest extends AbstractEditorTest {
 				}
 			}
 		});
-		
+
 	}
-	
+
+	@Override
+	protected void tearDown() throws Exception {
+		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
+		super.tearDown();
+	}
+
 	public void testOpenBlankFile() throws Exception {
-		IFile file = createFile("foo/x.testlanguage","");
+		IFile file = createFile("foo/x.testlanguage", "");
 		XtextEditor openedEditor = openEditor(file);
 		assertNotNull(openedEditor);
 		IXtextDocument document = openedEditor.getDocument();
@@ -63,14 +70,11 @@ public class SimpleEditorTest extends AbstractEditorTest {
 	}
 
 	public void testOpenFileReadModifyRead() throws Exception {
-		IFile file = createFile("foo/y.testlanguage", "/* multi line */\n" +
-				"stuff foo\n" +
-				"stuff bar\n" +
-				"// end");
+		IFile file = createFile("foo/y.testlanguage", "/* multi line */\n" + "stuff foo\n" + "stuff bar\n" + "// end");
 		XtextEditor openEditor = openEditor(file);
 		assertNotNull(openEditor);
 		XtextDocument document = (XtextDocument) openEditor.getDocument();
-		
+
 		Display.getDefault().readAndDispatch();
 		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
 
@@ -92,7 +96,7 @@ public class SimpleEditorTest extends AbstractEditorTest {
 				EObject object = contents.get(0);
 				assertEquals(2, object.eContents().size());
 				EObject object2 = object.eContents().get(0);
-				assertEquals("honolulu",object2.eGet(object2.eClass().getEStructuralFeature("name")));
+				assertEquals("honolulu", object2.eGet(object2.eClass().getEStructuralFeature("name")));
 			}
 		});
 		openEditor.doSave(null);
@@ -100,14 +104,11 @@ public class SimpleEditorTest extends AbstractEditorTest {
 	}
 
 	public void testOpenFileReadModifyReadSecond() throws Exception {
-		IFile file = createFile("foo/z.testlanguage", "/* multi line */\n" +
-				"stuff foo\n" +
-				"stuff bar\n" +
-				"// end");
+		IFile file = createFile("foo/z.testlanguage", "/* multi line */\n" + "stuff foo\n" + "stuff bar\n" + "// end");
 		XtextEditor openEditor = openEditor(file);
 		assertNotNull(openEditor);
 		XtextDocument document = (XtextDocument) openEditor.getDocument();
-		
+
 		Display.getDefault().readAndDispatch();
 		document.readOnly(new IUnitOfWork.Void<XtextResource>() {
 
@@ -126,17 +127,17 @@ public class SimpleEditorTest extends AbstractEditorTest {
 			public void process(XtextResource resource) throws Exception {
 				assertNotNull(resource);
 				EList<EObject> contents = resource.getContents();
-				
+
 				EObject object = contents.get(0);
 				assertEquals(2, object.eContents().size());
-				
+
 				EObject object2 = object.eContents().get(0);
-				assertEquals("foo",object2.eGet(object2.eClass().getEStructuralFeature("name")));
-				
+				assertEquals("foo", object2.eGet(object2.eClass().getEStructuralFeature("name")));
+
 				EObject object3 = object.eContents().get(1);
 				Object name = object3.eGet(object3.eClass().getEStructuralFeature("name"));
 				assertEquals("bara", name);
-				
+
 			}
 		});
 		openEditor.doSave(null);
