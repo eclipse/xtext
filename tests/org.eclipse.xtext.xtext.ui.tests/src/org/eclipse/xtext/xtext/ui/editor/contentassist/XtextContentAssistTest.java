@@ -277,7 +277,8 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 	        		"+",
 	        		";",
 	        		"?",
-	        		"|");
+	        		"|",
+	        		"&");
     }
     
     public void testCompleteFeatureName_03() throws Exception {
