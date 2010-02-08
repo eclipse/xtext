@@ -56,7 +56,7 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 		TextLocation textLocation = new TextLocation();
 		EObject crossLinkedEObject = EObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, offset,
 				textLocation);
-		if (crossLinkedEObject != null) {
+		if (crossLinkedEObject != null && !crossLinkedEObject.eIsProxy()) {
 			List<IHyperlink> links = Lists.newArrayList();
 			IHyperlinkAcceptor acceptor = new HyperlinkAcceptor(links);
 			Region region = new Region(textLocation.getOffset(), textLocation.getLength());
