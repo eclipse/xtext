@@ -16,6 +16,7 @@ import org.eclipse.xtext.resource.EObjectDescription;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.impl.AbstractScope;
+import org.eclipse.xtext.util.Strings;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -35,6 +36,8 @@ public abstract class AbstractTypeScope extends AbstractScope {
 	
 	@Override
 	public IEObjectDescription getContentByName(String name) {
+		if (Strings.isEmpty(name))
+			return null;
 		try {
 			Type type = typeProvider.findTypeByName(name);
 			if (type == null)

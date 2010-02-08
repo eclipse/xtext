@@ -12,6 +12,8 @@ import java.util.Map;
 import junit.framework.TestCase;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
 
@@ -21,11 +23,13 @@ import org.eclipse.jdt.core.Signature;
 public class TypeURIHelperTest extends TestCase {
 
 	private TypeURIHelper uriHelper;
+	private MockJavaProjectProvider projectProvider;
 
 	@Override
 	protected void setUp() throws Exception {
 		super.setUp();
 		uriHelper = new TypeURIHelper();
+		projectProvider = new MockJavaProjectProvider();
 	}
 	
 	@Override
@@ -97,6 +101,14 @@ public class TypeURIHelperTest extends TestCase {
 	public void testFragmentURI_06() throws JavaModelException {
 		String fragment = uriHelper.getFragment(Signature.createTypeSignature("java.util.Map$Entry[]", true));
 		assertEquals(Map.Entry.class.getName() + "[]", fragment);
+	}
+	
+	public void testBug300216() throws JavaModelException {
+		String signature = "QDoesNotExist;";
+		IJavaProject project = projectProvider.getJavaProject(null);
+		IType type = project.findType("java.lang.String");
+		URI uri = uriHelper.getFullURI(signature, type);
+		assertEquals("java:/Objects/DoesNotExist#DoesNotExist", uri.toString());
 	}
 
 }
