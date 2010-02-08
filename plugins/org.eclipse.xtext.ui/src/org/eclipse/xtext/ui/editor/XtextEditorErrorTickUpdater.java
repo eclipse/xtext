@@ -61,7 +61,8 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 		defaultImage = xtextEditor.getDefaultImage();
 		updateEditorImage(xtextEditor);
 		annotationModel = xtextEditor.getInternalSourceViewer().getAnnotationModel();
-		annotationModel.addAnnotationModelListener(this);
+		if (annotationModel != null)
+			annotationModel.addAnnotationModelListener(this);
 	}
 
 	protected void updateEditorImage(XtextEditor xtextEditor) {
@@ -83,19 +84,22 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 	@SuppressWarnings("unchecked")
 	protected Severity getSeverity(XtextEditor xtextEditor) {
 		IAnnotationModel model = xtextEditor.getInternalSourceViewer().getAnnotationModel();
-		Iterator<Annotation> iterator = model.getAnnotationIterator();
-		boolean hasWarnings = false;
-		while (iterator.hasNext()) {
-			Issue issue = issueUtil.getIssueFromAnnotation(iterator.next());
-			if (issue != null) {
-				if (issue.getSeverity() == Severity.ERROR) {
-					return Severity.ERROR;
-				} else if (issue.getSeverity() == Severity.WARNING) {
-					hasWarnings = true;
+		if (model != null) {
+			Iterator<Annotation> iterator = model.getAnnotationIterator();
+			boolean hasWarnings = false;
+			while (iterator.hasNext()) {
+				Issue issue = issueUtil.getIssueFromAnnotation(iterator.next());
+				if (issue != null) {
+					if (issue.getSeverity() == Severity.ERROR) {
+						return Severity.ERROR;
+					} else if (issue.getSeverity() == Severity.WARNING) {
+						hasWarnings = true;
+					}
 				}
 			}
+			return hasWarnings?Severity.WARNING:null;
 		}
-		return hasWarnings?Severity.WARNING:null;
+		return null;
 	}
 
 	private void postImageChange(final XtextEditor xtextEditor, final Image newImage) {
