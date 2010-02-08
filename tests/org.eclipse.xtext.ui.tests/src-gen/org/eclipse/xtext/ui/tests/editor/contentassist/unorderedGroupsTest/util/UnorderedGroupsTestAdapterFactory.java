@@ -83,6 +83,26 @@ public class UnorderedGroupsTestAdapterFactory extends AdapterFactoryImpl
         return createModelAdapter();
       }
       @Override
+      public Adapter caseSimpleModel(SimpleModel object)
+      {
+        return createSimpleModelAdapter();
+      }
+      @Override
+      public Adapter caseMandatoryModel(MandatoryModel object)
+      {
+        return createMandatoryModelAdapter();
+      }
+      @Override
+      public Adapter caseLoopedModel(LoopedModel object)
+      {
+        return createLoopedModelAdapter();
+      }
+      @Override
+      public Adapter caseGroupLoopedModel(GroupLoopedModel object)
+      {
+        return createGroupLoopedModelAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -115,6 +135,66 @@ public class UnorderedGroupsTestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createModelAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.SimpleModel <em>Simple Model</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.SimpleModel
+   * @generated
+   */
+  public Adapter createSimpleModelAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.MandatoryModel <em>Mandatory Model</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.MandatoryModel
+   * @generated
+   */
+  public Adapter createMandatoryModelAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedModel <em>Looped Model</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedModel
+   * @generated
+   */
+  public Adapter createLoopedModelAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.GroupLoopedModel <em>Group Looped Model</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.GroupLoopedModel
+   * @generated
+   */
+  public Adapter createGroupLoopedModelAdapter()
   {
     return null;
   }

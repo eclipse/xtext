@@ -102,6 +102,34 @@ public class UnorderedGroupsTestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case UnorderedGroupsTestPackage.SIMPLE_MODEL:
+      {
+        SimpleModel simpleModel = (SimpleModel)theEObject;
+        T result = caseSimpleModel(simpleModel);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case UnorderedGroupsTestPackage.MANDATORY_MODEL:
+      {
+        MandatoryModel mandatoryModel = (MandatoryModel)theEObject;
+        T result = caseMandatoryModel(mandatoryModel);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case UnorderedGroupsTestPackage.LOOPED_MODEL:
+      {
+        LoopedModel loopedModel = (LoopedModel)theEObject;
+        T result = caseLoopedModel(loopedModel);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case UnorderedGroupsTestPackage.GROUP_LOOPED_MODEL:
+      {
+        GroupLoopedModel groupLoopedModel = (GroupLoopedModel)theEObject;
+        T result = caseGroupLoopedModel(groupLoopedModel);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -118,6 +146,70 @@ public class UnorderedGroupsTestSwitch<T>
    * @generated
    */
   public T caseModel(Model object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Simple Model</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Simple Model</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSimpleModel(SimpleModel object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Mandatory Model</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Mandatory Model</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseMandatoryModel(MandatoryModel object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Looped Model</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Looped Model</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLoopedModel(LoopedModel object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Group Looped Model</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Group Looped Model</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseGroupLoopedModel(GroupLoopedModel object)
   {
     return null;
   }

@@ -35,6 +35,42 @@ public interface UnorderedGroupsTestFactory extends EFactory
   Model createModel();
 
   /**
+   * Returns a new object of class '<em>Simple Model</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Simple Model</em>'.
+   * @generated
+   */
+  SimpleModel createSimpleModel();
+
+  /**
+   * Returns a new object of class '<em>Mandatory Model</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Mandatory Model</em>'.
+   * @generated
+   */
+  MandatoryModel createMandatoryModel();
+
+  /**
+   * Returns a new object of class '<em>Looped Model</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Looped Model</em>'.
+   * @generated
+   */
+  LoopedModel createLoopedModel();
+
+  /**
+   * Returns a new object of class '<em>Group Looped Model</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Group Looped Model</em>'.
+   * @generated
+   */
+  GroupLoopedModel createGroupLoopedModel();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

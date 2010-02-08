@@ -107,7 +107,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:76:1: ( rule__FirstLevel__Group__0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:76:2: rule__FirstLevel__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__FirstLevel__Group__0_in_ruleFirstLevel95);
+            pushFollow(FollowSets000.FOLLOW_rule__FirstLevel__Group__0_in_ruleFirstLevel94);
             rule__FirstLevel__Group__0();
             _fsp--;
 
@@ -144,12 +144,12 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:90:1: ruleSecondLevelA EOF
             {
              before(grammarAccess.getSecondLevelARule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSecondLevelA_in_entryRuleSecondLevelA122);
+            pushFollow(FollowSets000.FOLLOW_ruleSecondLevelA_in_entryRuleSecondLevelA121);
             ruleSecondLevelA();
             _fsp--;
 
              after(grammarAccess.getSecondLevelARule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSecondLevelA129); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSecondLevelA128); 
 
             }
 
@@ -182,7 +182,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:104:1: ( rule__SecondLevelA__Group__0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:104:2: rule__SecondLevelA__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelA__Group__0_in_ruleSecondLevelA156);
+            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelA__Group__0_in_ruleSecondLevelA154);
             rule__SecondLevelA__Group__0();
             _fsp--;
 
@@ -219,12 +219,12 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:118:1: ruleSecondLevelB EOF
             {
              before(grammarAccess.getSecondLevelBRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSecondLevelB_in_entryRuleSecondLevelB183);
+            pushFollow(FollowSets000.FOLLOW_ruleSecondLevelB_in_entryRuleSecondLevelB181);
             ruleSecondLevelB();
             _fsp--;
 
              after(grammarAccess.getSecondLevelBRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSecondLevelB190); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSecondLevelB188); 
 
             }
 
@@ -257,7 +257,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:132:1: ( rule__SecondLevelB__Group__0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:132:2: rule__SecondLevelB__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelB__Group__0_in_ruleSecondLevelB217);
+            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelB__Group__0_in_ruleSecondLevelB214);
             rule__SecondLevelB__Group__0();
             _fsp--;
 
@@ -294,12 +294,12 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:146:1: ruleThirdLevelA1 EOF
             {
              before(grammarAccess.getThirdLevelA1Rule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleThirdLevelA1_in_entryRuleThirdLevelA1244);
+            pushFollow(FollowSets000.FOLLOW_ruleThirdLevelA1_in_entryRuleThirdLevelA1241);
             ruleThirdLevelA1();
             _fsp--;
 
              after(grammarAccess.getThirdLevelA1Rule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleThirdLevelA1251); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleThirdLevelA1248); 
 
             }
 
@@ -332,7 +332,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:160:1: ( rule__ThirdLevelA1__Group__0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:160:2: rule__ThirdLevelA1__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA1__Group__0_in_ruleThirdLevelA1278);
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA1__Group__0_in_ruleThirdLevelA1274);
             rule__ThirdLevelA1__Group__0();
             _fsp--;
 
@@ -369,12 +369,12 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:174:1: ruleThirdLevelA2 EOF
             {
              before(grammarAccess.getThirdLevelA2Rule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleThirdLevelA2_in_entryRuleThirdLevelA2305);
+            pushFollow(FollowSets000.FOLLOW_ruleThirdLevelA2_in_entryRuleThirdLevelA2301);
             ruleThirdLevelA2();
             _fsp--;
 
              after(grammarAccess.getThirdLevelA2Rule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleThirdLevelA2312); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleThirdLevelA2308); 
 
             }
 
@@ -407,7 +407,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:188:1: ( rule__ThirdLevelA2__Group__0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:188:2: rule__ThirdLevelA2__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA2__Group__0_in_ruleThirdLevelA2339);
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA2__Group__0_in_ruleThirdLevelA2334);
             rule__ThirdLevelA2__Group__0();
             _fsp--;
 
@@ -444,12 +444,12 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:202:1: ruleThirdLevelB1 EOF
             {
              before(grammarAccess.getThirdLevelB1Rule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleThirdLevelB1_in_entryRuleThirdLevelB1366);
+            pushFollow(FollowSets000.FOLLOW_ruleThirdLevelB1_in_entryRuleThirdLevelB1361);
             ruleThirdLevelB1();
             _fsp--;
 
              after(grammarAccess.getThirdLevelB1Rule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleThirdLevelB1373); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleThirdLevelB1368); 
 
             }
 
@@ -482,7 +482,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:216:1: ( rule__ThirdLevelB1__Group__0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:216:2: rule__ThirdLevelB1__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB1__Group__0_in_ruleThirdLevelB1400);
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB1__Group__0_in_ruleThirdLevelB1394);
             rule__ThirdLevelB1__Group__0();
             _fsp--;
 
@@ -519,12 +519,12 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:230:1: ruleThirdLevelB2 EOF
             {
              before(grammarAccess.getThirdLevelB2Rule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleThirdLevelB2_in_entryRuleThirdLevelB2427);
+            pushFollow(FollowSets000.FOLLOW_ruleThirdLevelB2_in_entryRuleThirdLevelB2421);
             ruleThirdLevelB2();
             _fsp--;
 
              after(grammarAccess.getThirdLevelB2Rule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleThirdLevelB2434); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleThirdLevelB2428); 
 
             }
 
@@ -557,7 +557,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:244:1: ( rule__ThirdLevelB2__Group__0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:244:2: rule__ThirdLevelB2__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB2__Group__0_in_ruleThirdLevelB2461);
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB2__Group__0_in_ruleThirdLevelB2454);
             rule__ThirdLevelB2__Group__0();
             _fsp--;
 
@@ -615,7 +615,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             	case 1 :
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:265:2: rule__FirstLevel__SecondLevelAAssignment_0
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__FirstLevel__SecondLevelAAssignment_0_in_rule__FirstLevel__Group__0499);
+            	    pushFollow(FollowSets000.FOLLOW_rule__FirstLevel__SecondLevelAAssignment_0_in_rule__FirstLevel__Group__0492);
             	    rule__FirstLevel__SecondLevelAAssignment_0();
             	    _fsp--;
 
@@ -632,7 +632,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__FirstLevel__Group__1_in_rule__FirstLevel__Group__0509);
+            pushFollow(FollowSets000.FOLLOW_rule__FirstLevel__Group__1_in_rule__FirstLevel__Group__0502);
             rule__FirstLevel__Group__1();
             _fsp--;
 
@@ -683,7 +683,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             	case 1 :
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:283:2: rule__FirstLevel__SecondLevelBAssignment_1
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__FirstLevel__SecondLevelBAssignment_1_in_rule__FirstLevel__Group__1537);
+            	    pushFollow(FollowSets000.FOLLOW_rule__FirstLevel__SecondLevelBAssignment_1_in_rule__FirstLevel__Group__1530);
             	    rule__FirstLevel__SecondLevelBAssignment_1();
             	    _fsp--;
 
@@ -738,7 +738,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:305:1: ( rule__SecondLevelA__ThirdLevelA1Assignment_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:305:2: rule__SecondLevelA__ThirdLevelA1Assignment_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelA__ThirdLevelA1Assignment_0_in_rule__SecondLevelA__Group__0578);
+            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelA__ThirdLevelA1Assignment_0_in_rule__SecondLevelA__Group__0571);
             rule__SecondLevelA__ThirdLevelA1Assignment_0();
             _fsp--;
 
@@ -768,7 +768,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             	case 1 :
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:310:2: rule__SecondLevelA__ThirdLevelA1Assignment_0
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__SecondLevelA__ThirdLevelA1Assignment_0_in_rule__SecondLevelA__Group__0590);
+            	    pushFollow(FollowSets000.FOLLOW_rule__SecondLevelA__ThirdLevelA1Assignment_0_in_rule__SecondLevelA__Group__0583);
             	    rule__SecondLevelA__ThirdLevelA1Assignment_0();
             	    _fsp--;
 
@@ -788,7 +788,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelA__Group__1_in_rule__SecondLevelA__Group__0602);
+            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelA__Group__1_in_rule__SecondLevelA__Group__0595);
             rule__SecondLevelA__Group__1();
             _fsp--;
 
@@ -830,7 +830,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:330:1: ( rule__SecondLevelA__ThirdLevelA2Assignment_1 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:330:2: rule__SecondLevelA__ThirdLevelA2Assignment_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelA__ThirdLevelA2Assignment_1_in_rule__SecondLevelA__Group__1632);
+            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelA__ThirdLevelA2Assignment_1_in_rule__SecondLevelA__Group__1625);
             rule__SecondLevelA__ThirdLevelA2Assignment_1();
             _fsp--;
 
@@ -860,7 +860,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             	case 1 :
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:335:2: rule__SecondLevelA__ThirdLevelA2Assignment_1
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__SecondLevelA__ThirdLevelA2Assignment_1_in_rule__SecondLevelA__Group__1644);
+            	    pushFollow(FollowSets000.FOLLOW_rule__SecondLevelA__ThirdLevelA2Assignment_1_in_rule__SecondLevelA__Group__1637);
             	    rule__SecondLevelA__ThirdLevelA2Assignment_1();
             	    _fsp--;
 
@@ -918,7 +918,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:358:1: ( rule__SecondLevelB__ThirdLevelB1Assignment_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:358:2: rule__SecondLevelB__ThirdLevelB1Assignment_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelB__ThirdLevelB1Assignment_0_in_rule__SecondLevelB__Group__0687);
+            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelB__ThirdLevelB1Assignment_0_in_rule__SecondLevelB__Group__0680);
             rule__SecondLevelB__ThirdLevelB1Assignment_0();
             _fsp--;
 
@@ -948,7 +948,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             	case 1 :
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:363:2: rule__SecondLevelB__ThirdLevelB1Assignment_0
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__SecondLevelB__ThirdLevelB1Assignment_0_in_rule__SecondLevelB__Group__0699);
+            	    pushFollow(FollowSets000.FOLLOW_rule__SecondLevelB__ThirdLevelB1Assignment_0_in_rule__SecondLevelB__Group__0692);
             	    rule__SecondLevelB__ThirdLevelB1Assignment_0();
             	    _fsp--;
 
@@ -968,7 +968,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelB__Group__1_in_rule__SecondLevelB__Group__0711);
+            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelB__Group__1_in_rule__SecondLevelB__Group__0704);
             rule__SecondLevelB__Group__1();
             _fsp--;
 
@@ -1010,7 +1010,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:383:1: ( rule__SecondLevelB__ThirdLevelB2Assignment_1 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:383:2: rule__SecondLevelB__ThirdLevelB2Assignment_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelB__ThirdLevelB2Assignment_1_in_rule__SecondLevelB__Group__1741);
+            pushFollow(FollowSets000.FOLLOW_rule__SecondLevelB__ThirdLevelB2Assignment_1_in_rule__SecondLevelB__Group__1734);
             rule__SecondLevelB__ThirdLevelB2Assignment_1();
             _fsp--;
 
@@ -1040,7 +1040,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             	case 1 :
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:388:2: rule__SecondLevelB__ThirdLevelB2Assignment_1
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__SecondLevelB__ThirdLevelB2Assignment_1_in_rule__SecondLevelB__Group__1753);
+            	    pushFollow(FollowSets000.FOLLOW_rule__SecondLevelB__ThirdLevelB2Assignment_1_in_rule__SecondLevelB__Group__1746);
             	    rule__SecondLevelB__ThirdLevelB2Assignment_1();
             	    _fsp--;
 
@@ -1092,12 +1092,12 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:409:1: 'A1'
             {
              before(grammarAccess.getThirdLevelA1Access().getA1Keyword_0()); 
-            match(input,11,FollowSets000.FOLLOW_11_in_rule__ThirdLevelA1__Group__0795); 
+            match(input,11,FollowSets000.FOLLOW_11_in_rule__ThirdLevelA1__Group__0788); 
              after(grammarAccess.getThirdLevelA1Access().getA1Keyword_0()); 
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA1__Group__1_in_rule__ThirdLevelA1__Group__0805);
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA1__Group__1_in_rule__ThirdLevelA1__Group__0798);
             rule__ThirdLevelA1__Group__1();
             _fsp--;
 
@@ -1142,7 +1142,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA1__Group__2_in_rule__ThirdLevelA1__Group__1843);
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA1__Group__2_in_rule__ThirdLevelA1__Group__1836);
             rule__ThirdLevelA1__Group__2();
             _fsp--;
 
@@ -1189,7 +1189,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:450:2: rule__ThirdLevelA1__NameAssignment_2
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA1__NameAssignment_2_in_rule__ThirdLevelA1__Group__2871);
+                    pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA1__NameAssignment_2_in_rule__ThirdLevelA1__Group__2864);
                     rule__ThirdLevelA1__NameAssignment_2();
                     _fsp--;
 
@@ -1235,12 +1235,12 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:472:1: 'A2'
             {
              before(grammarAccess.getThirdLevelA2Access().getA2Keyword_0()); 
-            match(input,12,FollowSets000.FOLLOW_12_in_rule__ThirdLevelA2__Group__0913); 
+            match(input,12,FollowSets000.FOLLOW_12_in_rule__ThirdLevelA2__Group__0906); 
              after(grammarAccess.getThirdLevelA2Access().getA2Keyword_0()); 
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA2__Group__1_in_rule__ThirdLevelA2__Group__0923);
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA2__Group__1_in_rule__ThirdLevelA2__Group__0916);
             rule__ThirdLevelA2__Group__1();
             _fsp--;
 
@@ -1285,7 +1285,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA2__Group__2_in_rule__ThirdLevelA2__Group__1961);
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA2__Group__2_in_rule__ThirdLevelA2__Group__1954);
             rule__ThirdLevelA2__Group__2();
             _fsp--;
 
@@ -1332,7 +1332,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:513:2: rule__ThirdLevelA2__NameAssignment_2
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA2__NameAssignment_2_in_rule__ThirdLevelA2__Group__2989);
+                    pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelA2__NameAssignment_2_in_rule__ThirdLevelA2__Group__2982);
                     rule__ThirdLevelA2__NameAssignment_2();
                     _fsp--;
 
@@ -1378,12 +1378,12 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:535:1: 'B1'
             {
              before(grammarAccess.getThirdLevelB1Access().getB1Keyword_0()); 
-            match(input,13,FollowSets000.FOLLOW_13_in_rule__ThirdLevelB1__Group__01031); 
+            match(input,13,FollowSets000.FOLLOW_13_in_rule__ThirdLevelB1__Group__01024); 
              after(grammarAccess.getThirdLevelB1Access().getB1Keyword_0()); 
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB1__Group__1_in_rule__ThirdLevelB1__Group__01041);
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB1__Group__1_in_rule__ThirdLevelB1__Group__01034);
             rule__ThirdLevelB1__Group__1();
             _fsp--;
 
@@ -1428,7 +1428,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB1__Group__2_in_rule__ThirdLevelB1__Group__11079);
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB1__Group__2_in_rule__ThirdLevelB1__Group__11072);
             rule__ThirdLevelB1__Group__2();
             _fsp--;
 
@@ -1475,7 +1475,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:576:2: rule__ThirdLevelB1__NameAssignment_2
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB1__NameAssignment_2_in_rule__ThirdLevelB1__Group__21107);
+                    pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB1__NameAssignment_2_in_rule__ThirdLevelB1__Group__21100);
                     rule__ThirdLevelB1__NameAssignment_2();
                     _fsp--;
 
@@ -1521,12 +1521,12 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:598:1: 'B2'
             {
              before(grammarAccess.getThirdLevelB2Access().getB2Keyword_0()); 
-            match(input,14,FollowSets000.FOLLOW_14_in_rule__ThirdLevelB2__Group__01149); 
+            match(input,14,FollowSets000.FOLLOW_14_in_rule__ThirdLevelB2__Group__01142); 
              after(grammarAccess.getThirdLevelB2Access().getB2Keyword_0()); 
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB2__Group__1_in_rule__ThirdLevelB2__Group__01159);
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB2__Group__1_in_rule__ThirdLevelB2__Group__01152);
             rule__ThirdLevelB2__Group__1();
             _fsp--;
 
@@ -1571,7 +1571,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB2__Group__2_in_rule__ThirdLevelB2__Group__11197);
+            pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB2__Group__2_in_rule__ThirdLevelB2__Group__11190);
             rule__ThirdLevelB2__Group__2();
             _fsp--;
 
@@ -1618,7 +1618,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:639:2: rule__ThirdLevelB2__NameAssignment_2
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB2__NameAssignment_2_in_rule__ThirdLevelB2__Group__21225);
+                    pushFollow(FollowSets000.FOLLOW_rule__ThirdLevelB2__NameAssignment_2_in_rule__ThirdLevelB2__Group__21218);
                     rule__ThirdLevelB2__NameAssignment_2();
                     _fsp--;
 
@@ -1664,7 +1664,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:662:1: ruleSecondLevelA
             {
              before(grammarAccess.getFirstLevelAccess().getSecondLevelASecondLevelAParserRuleCall_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSecondLevelA_in_rule__FirstLevel__SecondLevelAAssignment_01267);
+            pushFollow(FollowSets000.FOLLOW_ruleSecondLevelA_in_rule__FirstLevel__SecondLevelAAssignment_01260);
             ruleSecondLevelA();
             _fsp--;
 
@@ -1704,7 +1704,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:677:1: ruleSecondLevelB
             {
              before(grammarAccess.getFirstLevelAccess().getSecondLevelBSecondLevelBParserRuleCall_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSecondLevelB_in_rule__FirstLevel__SecondLevelBAssignment_11298);
+            pushFollow(FollowSets000.FOLLOW_ruleSecondLevelB_in_rule__FirstLevel__SecondLevelBAssignment_11291);
             ruleSecondLevelB();
             _fsp--;
 
@@ -1744,7 +1744,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:692:1: ruleThirdLevelA1
             {
              before(grammarAccess.getSecondLevelAAccess().getThirdLevelA1ThirdLevelA1ParserRuleCall_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleThirdLevelA1_in_rule__SecondLevelA__ThirdLevelA1Assignment_01329);
+            pushFollow(FollowSets000.FOLLOW_ruleThirdLevelA1_in_rule__SecondLevelA__ThirdLevelA1Assignment_01322);
             ruleThirdLevelA1();
             _fsp--;
 
@@ -1784,7 +1784,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:707:1: ruleThirdLevelA2
             {
              before(grammarAccess.getSecondLevelAAccess().getThirdLevelA2ThirdLevelA2ParserRuleCall_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleThirdLevelA2_in_rule__SecondLevelA__ThirdLevelA2Assignment_11360);
+            pushFollow(FollowSets000.FOLLOW_ruleThirdLevelA2_in_rule__SecondLevelA__ThirdLevelA2Assignment_11353);
             ruleThirdLevelA2();
             _fsp--;
 
@@ -1824,7 +1824,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:722:1: ruleThirdLevelB1
             {
              before(grammarAccess.getSecondLevelBAccess().getThirdLevelB1ThirdLevelB1ParserRuleCall_0_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleThirdLevelB1_in_rule__SecondLevelB__ThirdLevelB1Assignment_01391);
+            pushFollow(FollowSets000.FOLLOW_ruleThirdLevelB1_in_rule__SecondLevelB__ThirdLevelB1Assignment_01384);
             ruleThirdLevelB1();
             _fsp--;
 
@@ -1864,7 +1864,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:737:1: ruleThirdLevelB2
             {
              before(grammarAccess.getSecondLevelBAccess().getThirdLevelB2ThirdLevelB2ParserRuleCall_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleThirdLevelB2_in_rule__SecondLevelB__ThirdLevelB2Assignment_11422);
+            pushFollow(FollowSets000.FOLLOW_ruleThirdLevelB2_in_rule__SecondLevelB__ThirdLevelB2Assignment_11415);
             ruleThirdLevelB2();
             _fsp--;
 
@@ -1904,7 +1904,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:752:1: RULE_ID
             {
              before(grammarAccess.getThirdLevelA1Access().getNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ThirdLevelA1__NameAssignment_21453); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ThirdLevelA1__NameAssignment_21446); 
              after(grammarAccess.getThirdLevelA1Access().getNameIDTerminalRuleCall_2_0()); 
 
             }
@@ -1941,7 +1941,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:767:1: RULE_ID
             {
              before(grammarAccess.getThirdLevelA2Access().getNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ThirdLevelA2__NameAssignment_21484); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ThirdLevelA2__NameAssignment_21477); 
              after(grammarAccess.getThirdLevelA2Access().getNameIDTerminalRuleCall_2_0()); 
 
             }
@@ -1978,7 +1978,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:782:1: RULE_ID
             {
              before(grammarAccess.getThirdLevelB1Access().getNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ThirdLevelB1__NameAssignment_21515); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ThirdLevelB1__NameAssignment_21508); 
              after(grammarAccess.getThirdLevelB1Access().getNameIDTerminalRuleCall_2_0()); 
 
             }
@@ -2015,7 +2015,7 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalContentAssistContextTestLanguage.g:797:1: RULE_ID
             {
              before(grammarAccess.getThirdLevelB2Access().getNameIDTerminalRuleCall_2_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ThirdLevelB2__NameAssignment_21546); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__ThirdLevelB2__NameAssignment_21539); 
              after(grammarAccess.getThirdLevelB2Access().getNameIDTerminalRuleCall_2_0()); 
 
             }
@@ -2044,64 +2044,64 @@ public class InternalContentAssistContextTestLanguageParser extends AbstractInte
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleFirstLevel_in_entryRuleFirstLevel61 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleFirstLevel68 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__FirstLevel__Group__0_in_ruleFirstLevel95 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSecondLevelA_in_entryRuleSecondLevelA122 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSecondLevelA129 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SecondLevelA__Group__0_in_ruleSecondLevelA156 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSecondLevelB_in_entryRuleSecondLevelB183 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSecondLevelB190 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SecondLevelB__Group__0_in_ruleSecondLevelB217 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleThirdLevelA1_in_entryRuleThirdLevelA1244 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleThirdLevelA1251 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ThirdLevelA1__Group__0_in_ruleThirdLevelA1278 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleThirdLevelA2_in_entryRuleThirdLevelA2305 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleThirdLevelA2312 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ThirdLevelA2__Group__0_in_ruleThirdLevelA2339 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleThirdLevelB1_in_entryRuleThirdLevelB1366 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleThirdLevelB1373 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ThirdLevelB1__Group__0_in_ruleThirdLevelB1400 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleThirdLevelB2_in_entryRuleThirdLevelB2427 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleThirdLevelB2434 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ThirdLevelB2__Group__0_in_ruleThirdLevelB2461 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__FirstLevel__SecondLevelAAssignment_0_in_rule__FirstLevel__Group__0499 = new BitSet(new long[]{0x0000000000002802L});
-        public static final BitSet FOLLOW_rule__FirstLevel__Group__1_in_rule__FirstLevel__Group__0509 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__FirstLevel__SecondLevelBAssignment_1_in_rule__FirstLevel__Group__1537 = new BitSet(new long[]{0x0000000000002002L});
-        public static final BitSet FOLLOW_rule__SecondLevelA__ThirdLevelA1Assignment_0_in_rule__SecondLevelA__Group__0578 = new BitSet(new long[]{0x0000000000001800L});
-        public static final BitSet FOLLOW_rule__SecondLevelA__ThirdLevelA1Assignment_0_in_rule__SecondLevelA__Group__0590 = new BitSet(new long[]{0x0000000000001800L});
-        public static final BitSet FOLLOW_rule__SecondLevelA__Group__1_in_rule__SecondLevelA__Group__0602 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SecondLevelA__ThirdLevelA2Assignment_1_in_rule__SecondLevelA__Group__1632 = new BitSet(new long[]{0x0000000000001002L});
-        public static final BitSet FOLLOW_rule__SecondLevelA__ThirdLevelA2Assignment_1_in_rule__SecondLevelA__Group__1644 = new BitSet(new long[]{0x0000000000001002L});
-        public static final BitSet FOLLOW_rule__SecondLevelB__ThirdLevelB1Assignment_0_in_rule__SecondLevelB__Group__0687 = new BitSet(new long[]{0x0000000000006000L});
-        public static final BitSet FOLLOW_rule__SecondLevelB__ThirdLevelB1Assignment_0_in_rule__SecondLevelB__Group__0699 = new BitSet(new long[]{0x0000000000006000L});
-        public static final BitSet FOLLOW_rule__SecondLevelB__Group__1_in_rule__SecondLevelB__Group__0711 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SecondLevelB__ThirdLevelB2Assignment_1_in_rule__SecondLevelB__Group__1741 = new BitSet(new long[]{0x0000000000004002L});
-        public static final BitSet FOLLOW_rule__SecondLevelB__ThirdLevelB2Assignment_1_in_rule__SecondLevelB__Group__1753 = new BitSet(new long[]{0x0000000000004002L});
-        public static final BitSet FOLLOW_11_in_rule__ThirdLevelA1__Group__0795 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_rule__ThirdLevelA1__Group__1_in_rule__ThirdLevelA1__Group__0805 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ThirdLevelA1__Group__2_in_rule__ThirdLevelA1__Group__1843 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ThirdLevelA1__NameAssignment_2_in_rule__ThirdLevelA1__Group__2871 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_rule__ThirdLevelA2__Group__0913 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_rule__ThirdLevelA2__Group__1_in_rule__ThirdLevelA2__Group__0923 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ThirdLevelA2__Group__2_in_rule__ThirdLevelA2__Group__1961 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ThirdLevelA2__NameAssignment_2_in_rule__ThirdLevelA2__Group__2989 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_rule__ThirdLevelB1__Group__01031 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_rule__ThirdLevelB1__Group__1_in_rule__ThirdLevelB1__Group__01041 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ThirdLevelB1__Group__2_in_rule__ThirdLevelB1__Group__11079 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ThirdLevelB1__NameAssignment_2_in_rule__ThirdLevelB1__Group__21107 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_rule__ThirdLevelB2__Group__01149 = new BitSet(new long[]{0x0000000000000012L});
-        public static final BitSet FOLLOW_rule__ThirdLevelB2__Group__1_in_rule__ThirdLevelB2__Group__01159 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ThirdLevelB2__Group__2_in_rule__ThirdLevelB2__Group__11197 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__ThirdLevelB2__NameAssignment_2_in_rule__ThirdLevelB2__Group__21225 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSecondLevelA_in_rule__FirstLevel__SecondLevelAAssignment_01267 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSecondLevelB_in_rule__FirstLevel__SecondLevelBAssignment_11298 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleThirdLevelA1_in_rule__SecondLevelA__ThirdLevelA1Assignment_01329 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleThirdLevelA2_in_rule__SecondLevelA__ThirdLevelA2Assignment_11360 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleThirdLevelB1_in_rule__SecondLevelB__ThirdLevelB1Assignment_01391 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleThirdLevelB2_in_rule__SecondLevelB__ThirdLevelB2Assignment_11422 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__ThirdLevelA1__NameAssignment_21453 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__ThirdLevelA2__NameAssignment_21484 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__ThirdLevelB1__NameAssignment_21515 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__ThirdLevelB2__NameAssignment_21546 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__FirstLevel__Group__0_in_ruleFirstLevel94 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSecondLevelA_in_entryRuleSecondLevelA121 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleSecondLevelA128 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SecondLevelA__Group__0_in_ruleSecondLevelA154 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSecondLevelB_in_entryRuleSecondLevelB181 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleSecondLevelB188 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SecondLevelB__Group__0_in_ruleSecondLevelB214 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleThirdLevelA1_in_entryRuleThirdLevelA1241 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleThirdLevelA1248 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelA1__Group__0_in_ruleThirdLevelA1274 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleThirdLevelA2_in_entryRuleThirdLevelA2301 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleThirdLevelA2308 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelA2__Group__0_in_ruleThirdLevelA2334 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleThirdLevelB1_in_entryRuleThirdLevelB1361 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleThirdLevelB1368 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelB1__Group__0_in_ruleThirdLevelB1394 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleThirdLevelB2_in_entryRuleThirdLevelB2421 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleThirdLevelB2428 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelB2__Group__0_in_ruleThirdLevelB2454 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__FirstLevel__SecondLevelAAssignment_0_in_rule__FirstLevel__Group__0492 = new BitSet(new long[]{0x0000000000002802L});
+        public static final BitSet FOLLOW_rule__FirstLevel__Group__1_in_rule__FirstLevel__Group__0502 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__FirstLevel__SecondLevelBAssignment_1_in_rule__FirstLevel__Group__1530 = new BitSet(new long[]{0x0000000000002002L});
+        public static final BitSet FOLLOW_rule__SecondLevelA__ThirdLevelA1Assignment_0_in_rule__SecondLevelA__Group__0571 = new BitSet(new long[]{0x0000000000001800L});
+        public static final BitSet FOLLOW_rule__SecondLevelA__ThirdLevelA1Assignment_0_in_rule__SecondLevelA__Group__0583 = new BitSet(new long[]{0x0000000000001800L});
+        public static final BitSet FOLLOW_rule__SecondLevelA__Group__1_in_rule__SecondLevelA__Group__0595 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SecondLevelA__ThirdLevelA2Assignment_1_in_rule__SecondLevelA__Group__1625 = new BitSet(new long[]{0x0000000000001002L});
+        public static final BitSet FOLLOW_rule__SecondLevelA__ThirdLevelA2Assignment_1_in_rule__SecondLevelA__Group__1637 = new BitSet(new long[]{0x0000000000001002L});
+        public static final BitSet FOLLOW_rule__SecondLevelB__ThirdLevelB1Assignment_0_in_rule__SecondLevelB__Group__0680 = new BitSet(new long[]{0x0000000000006000L});
+        public static final BitSet FOLLOW_rule__SecondLevelB__ThirdLevelB1Assignment_0_in_rule__SecondLevelB__Group__0692 = new BitSet(new long[]{0x0000000000006000L});
+        public static final BitSet FOLLOW_rule__SecondLevelB__Group__1_in_rule__SecondLevelB__Group__0704 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SecondLevelB__ThirdLevelB2Assignment_1_in_rule__SecondLevelB__Group__1734 = new BitSet(new long[]{0x0000000000004002L});
+        public static final BitSet FOLLOW_rule__SecondLevelB__ThirdLevelB2Assignment_1_in_rule__SecondLevelB__Group__1746 = new BitSet(new long[]{0x0000000000004002L});
+        public static final BitSet FOLLOW_11_in_rule__ThirdLevelA1__Group__0788 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_rule__ThirdLevelA1__Group__1_in_rule__ThirdLevelA1__Group__0798 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelA1__Group__2_in_rule__ThirdLevelA1__Group__1836 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelA1__NameAssignment_2_in_rule__ThirdLevelA1__Group__2864 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_rule__ThirdLevelA2__Group__0906 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_rule__ThirdLevelA2__Group__1_in_rule__ThirdLevelA2__Group__0916 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelA2__Group__2_in_rule__ThirdLevelA2__Group__1954 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelA2__NameAssignment_2_in_rule__ThirdLevelA2__Group__2982 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_rule__ThirdLevelB1__Group__01024 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_rule__ThirdLevelB1__Group__1_in_rule__ThirdLevelB1__Group__01034 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelB1__Group__2_in_rule__ThirdLevelB1__Group__11072 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelB1__NameAssignment_2_in_rule__ThirdLevelB1__Group__21100 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_rule__ThirdLevelB2__Group__01142 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_rule__ThirdLevelB2__Group__1_in_rule__ThirdLevelB2__Group__01152 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelB2__Group__2_in_rule__ThirdLevelB2__Group__11190 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__ThirdLevelB2__NameAssignment_2_in_rule__ThirdLevelB2__Group__21218 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSecondLevelA_in_rule__FirstLevel__SecondLevelAAssignment_01260 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSecondLevelB_in_rule__FirstLevel__SecondLevelBAssignment_11291 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleThirdLevelA1_in_rule__SecondLevelA__ThirdLevelA1Assignment_01322 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleThirdLevelA2_in_rule__SecondLevelA__ThirdLevelA2Assignment_11353 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleThirdLevelB1_in_rule__SecondLevelB__ThirdLevelB1Assignment_01384 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleThirdLevelB2_in_rule__SecondLevelB__ThirdLevelB2Assignment_11415 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__ThirdLevelA1__NameAssignment_21446 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__ThirdLevelA2__NameAssignment_21477 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__ThirdLevelB1__NameAssignment_21508 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__ThirdLevelB2__NameAssignment_21539 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

@@ -66,7 +66,7 @@ entryRuleFirstLevel
 ;
 
 // Rule FirstLevel
-ruleFirstLevel 
+ruleFirstLevel
     @init {
 		int stackSize = keepStackSize();
     }
@@ -94,7 +94,7 @@ entryRuleSecondLevelA
 ;
 
 // Rule SecondLevelA
-ruleSecondLevelA 
+ruleSecondLevelA
     @init {
 		int stackSize = keepStackSize();
     }
@@ -122,7 +122,7 @@ entryRuleSecondLevelB
 ;
 
 // Rule SecondLevelB
-ruleSecondLevelB 
+ruleSecondLevelB
     @init {
 		int stackSize = keepStackSize();
     }
@@ -150,7 +150,7 @@ entryRuleThirdLevelA1
 ;
 
 // Rule ThirdLevelA1
-ruleThirdLevelA1 
+ruleThirdLevelA1
     @init {
 		int stackSize = keepStackSize();
     }
@@ -178,7 +178,7 @@ entryRuleThirdLevelA2
 ;
 
 // Rule ThirdLevelA2
-ruleThirdLevelA2 
+ruleThirdLevelA2
     @init {
 		int stackSize = keepStackSize();
     }
@@ -206,7 +206,7 @@ entryRuleThirdLevelB1
 ;
 
 // Rule ThirdLevelB1
-ruleThirdLevelB1 
+ruleThirdLevelB1
     @init {
 		int stackSize = keepStackSize();
     }
@@ -234,7 +234,7 @@ entryRuleThirdLevelB2
 ;
 
 // Rule ThirdLevelB2
-ruleThirdLevelB2 
+ruleThirdLevelB2
     @init {
 		int stackSize = keepStackSize();
     }

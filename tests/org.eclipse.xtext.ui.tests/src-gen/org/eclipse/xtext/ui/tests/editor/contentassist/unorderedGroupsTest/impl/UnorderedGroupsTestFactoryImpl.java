@@ -68,6 +68,10 @@ public class UnorderedGroupsTestFactoryImpl extends EFactoryImpl implements Unor
     switch (eClass.getClassifierID())
     {
       case UnorderedGroupsTestPackage.MODEL: return createModel();
+      case UnorderedGroupsTestPackage.SIMPLE_MODEL: return createSimpleModel();
+      case UnorderedGroupsTestPackage.MANDATORY_MODEL: return createMandatoryModel();
+      case UnorderedGroupsTestPackage.LOOPED_MODEL: return createLoopedModel();
+      case UnorderedGroupsTestPackage.GROUP_LOOPED_MODEL: return createGroupLoopedModel();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -82,6 +86,50 @@ public class UnorderedGroupsTestFactoryImpl extends EFactoryImpl implements Unor
   {
     ModelImpl model = new ModelImpl();
     return model;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SimpleModel createSimpleModel()
+  {
+    SimpleModelImpl simpleModel = new SimpleModelImpl();
+    return simpleModel;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public MandatoryModel createMandatoryModel()
+  {
+    MandatoryModelImpl mandatoryModel = new MandatoryModelImpl();
+    return mandatoryModel;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public LoopedModel createLoopedModel()
+  {
+    LoopedModelImpl loopedModel = new LoopedModelImpl();
+    return loopedModel;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public GroupLoopedModel createGroupLoopedModel()
+  {
+    GroupLoopedModelImpl groupLoopedModel = new GroupLoopedModelImpl();
+    return groupLoopedModel;
   }
 
   /**

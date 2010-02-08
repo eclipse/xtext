@@ -6,13 +6,19 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.GroupLoopedModel;
+import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedModel;
+import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.MandatoryModel;
 import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model;
+import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.SimpleModel;
 import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.UnorderedGroupsTestPackage;
 
 /**
@@ -22,12 +28,10 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Unord
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.ModelImpl#getVisibility <em>Visibility</em>}</li>
- *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.ModelImpl#isStatic <em>Static</em>}</li>
- *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.ModelImpl#isSynchronized <em>Synchronized</em>}</li>
- *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.ModelImpl#isAbstract <em>Abstract</em>}</li>
- *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.ModelImpl#isFinal <em>Final</em>}</li>
- *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.ModelImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.ModelImpl#getFirst <em>First</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.ModelImpl#getSecond <em>Second</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.ModelImpl#getThrird <em>Thrird</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.ModelImpl#getForth <em>Forth</em>}</li>
  * </ul>
  * </p>
  *
@@ -36,124 +40,44 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Unord
 public class ModelImpl extends MinimalEObjectImpl.Container implements Model
 {
   /**
-   * The default value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+   * The cached value of the '{@link #getFirst() <em>First</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getVisibility()
+   * @see #getFirst()
    * @generated
    * @ordered
    */
-  protected static final String VISIBILITY_EDEFAULT = null;
+  protected SimpleModel first;
 
   /**
-   * The cached value of the '{@link #getVisibility() <em>Visibility</em>}' attribute.
+   * The cached value of the '{@link #getSecond() <em>Second</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getVisibility()
+   * @see #getSecond()
    * @generated
    * @ordered
    */
-  protected String visibility = VISIBILITY_EDEFAULT;
+  protected MandatoryModel second;
 
   /**
-   * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
+   * The cached value of the '{@link #getThrird() <em>Thrird</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isStatic()
+   * @see #getThrird()
    * @generated
    * @ordered
    */
-  protected static final boolean STATIC_EDEFAULT = false;
+  protected LoopedModel thrird;
 
   /**
-   * The cached value of the '{@link #isStatic() <em>Static</em>}' attribute.
+   * The cached value of the '{@link #getForth() <em>Forth</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #isStatic()
+   * @see #getForth()
    * @generated
    * @ordered
    */
-  protected boolean static_ = STATIC_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #isSynchronized() <em>Synchronized</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isSynchronized()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean SYNCHRONIZED_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isSynchronized() <em>Synchronized</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isSynchronized()
-   * @generated
-   * @ordered
-   */
-  protected boolean synchronized_ = SYNCHRONIZED_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isAbstract()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean ABSTRACT_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isAbstract()
-   * @generated
-   * @ordered
-   */
-  protected boolean abstract_ = ABSTRACT_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #isFinal() <em>Final</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isFinal()
-   * @generated
-   * @ordered
-   */
-  protected static final boolean FINAL_EDEFAULT = false;
-
-  /**
-   * The cached value of the '{@link #isFinal() <em>Final</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #isFinal()
-   * @generated
-   * @ordered
-   */
-  protected boolean final_ = FINAL_EDEFAULT;
-
-  /**
-   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected static final String NAME_EDEFAULT = null;
-
-  /**
-   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see #getName()
-   * @generated
-   * @ordered
-   */
-  protected String name = NAME_EDEFAULT;
+  protected GroupLoopedModel forth;
 
   /**
    * <!-- begin-user-doc -->
@@ -181,9 +105,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public String getVisibility()
+  public SimpleModel getFirst()
   {
-    return visibility;
+    return first;
   }
 
   /**
@@ -191,12 +115,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setVisibility(String newVisibility)
+  public NotificationChain basicSetFirst(SimpleModel newFirst, NotificationChain msgs)
   {
-    String oldVisibility = visibility;
-    visibility = newVisibility;
+    SimpleModel oldFirst = first;
+    first = newFirst;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, UnorderedGroupsTestPackage.MODEL__VISIBILITY, oldVisibility, visibility));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, UnorderedGroupsTestPackage.MODEL__FIRST, oldFirst, newFirst);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -204,9 +132,20 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isStatic()
+  public void setFirst(SimpleModel newFirst)
   {
-    return static_;
+    if (newFirst != first)
+    {
+      NotificationChain msgs = null;
+      if (first != null)
+        msgs = ((InternalEObject)first).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - UnorderedGroupsTestPackage.MODEL__FIRST, null, msgs);
+      if (newFirst != null)
+        msgs = ((InternalEObject)newFirst).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - UnorderedGroupsTestPackage.MODEL__FIRST, null, msgs);
+      msgs = basicSetFirst(newFirst, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, UnorderedGroupsTestPackage.MODEL__FIRST, newFirst, newFirst));
   }
 
   /**
@@ -214,12 +153,26 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setStatic(boolean newStatic)
+  public MandatoryModel getSecond()
   {
-    boolean oldStatic = static_;
-    static_ = newStatic;
+    return second;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetSecond(MandatoryModel newSecond, NotificationChain msgs)
+  {
+    MandatoryModel oldSecond = second;
+    second = newSecond;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, UnorderedGroupsTestPackage.MODEL__STATIC, oldStatic, static_));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, UnorderedGroupsTestPackage.MODEL__SECOND, oldSecond, newSecond);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -227,9 +180,20 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isSynchronized()
+  public void setSecond(MandatoryModel newSecond)
   {
-    return synchronized_;
+    if (newSecond != second)
+    {
+      NotificationChain msgs = null;
+      if (second != null)
+        msgs = ((InternalEObject)second).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - UnorderedGroupsTestPackage.MODEL__SECOND, null, msgs);
+      if (newSecond != null)
+        msgs = ((InternalEObject)newSecond).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - UnorderedGroupsTestPackage.MODEL__SECOND, null, msgs);
+      msgs = basicSetSecond(newSecond, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, UnorderedGroupsTestPackage.MODEL__SECOND, newSecond, newSecond));
   }
 
   /**
@@ -237,12 +201,26 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setSynchronized(boolean newSynchronized)
+  public LoopedModel getThrird()
   {
-    boolean oldSynchronized = synchronized_;
-    synchronized_ = newSynchronized;
+    return thrird;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetThrird(LoopedModel newThrird, NotificationChain msgs)
+  {
+    LoopedModel oldThrird = thrird;
+    thrird = newThrird;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, UnorderedGroupsTestPackage.MODEL__SYNCHRONIZED, oldSynchronized, synchronized_));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, UnorderedGroupsTestPackage.MODEL__THRIRD, oldThrird, newThrird);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -250,9 +228,20 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isAbstract()
+  public void setThrird(LoopedModel newThrird)
   {
-    return abstract_;
+    if (newThrird != thrird)
+    {
+      NotificationChain msgs = null;
+      if (thrird != null)
+        msgs = ((InternalEObject)thrird).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - UnorderedGroupsTestPackage.MODEL__THRIRD, null, msgs);
+      if (newThrird != null)
+        msgs = ((InternalEObject)newThrird).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - UnorderedGroupsTestPackage.MODEL__THRIRD, null, msgs);
+      msgs = basicSetThrird(newThrird, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, UnorderedGroupsTestPackage.MODEL__THRIRD, newThrird, newThrird));
   }
 
   /**
@@ -260,12 +249,26 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setAbstract(boolean newAbstract)
+  public GroupLoopedModel getForth()
   {
-    boolean oldAbstract = abstract_;
-    abstract_ = newAbstract;
+    return forth;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetForth(GroupLoopedModel newForth, NotificationChain msgs)
+  {
+    GroupLoopedModel oldForth = forth;
+    forth = newForth;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, UnorderedGroupsTestPackage.MODEL__ABSTRACT, oldAbstract, abstract_));
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, UnorderedGroupsTestPackage.MODEL__FORTH, oldForth, newForth);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
   }
 
   /**
@@ -273,9 +276,20 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public boolean isFinal()
+  public void setForth(GroupLoopedModel newForth)
   {
-    return final_;
+    if (newForth != forth)
+    {
+      NotificationChain msgs = null;
+      if (forth != null)
+        msgs = ((InternalEObject)forth).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - UnorderedGroupsTestPackage.MODEL__FORTH, null, msgs);
+      if (newForth != null)
+        msgs = ((InternalEObject)newForth).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - UnorderedGroupsTestPackage.MODEL__FORTH, null, msgs);
+      msgs = basicSetForth(newForth, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, UnorderedGroupsTestPackage.MODEL__FORTH, newForth, newForth));
   }
 
   /**
@@ -283,35 +297,21 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setFinal(boolean newFinal)
+  @Override
+  public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
-    boolean oldFinal = final_;
-    final_ = newFinal;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, UnorderedGroupsTestPackage.MODEL__FINAL, oldFinal, final_));
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public String getName()
-  {
-    return name;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public void setName(String newName)
-  {
-    String oldName = name;
-    name = newName;
-    if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, UnorderedGroupsTestPackage.MODEL__NAME, oldName, name));
+    switch (featureID)
+    {
+      case UnorderedGroupsTestPackage.MODEL__FIRST:
+        return basicSetFirst(null, msgs);
+      case UnorderedGroupsTestPackage.MODEL__SECOND:
+        return basicSetSecond(null, msgs);
+      case UnorderedGroupsTestPackage.MODEL__THRIRD:
+        return basicSetThrird(null, msgs);
+      case UnorderedGroupsTestPackage.MODEL__FORTH:
+        return basicSetForth(null, msgs);
+    }
+    return super.eInverseRemove(otherEnd, featureID, msgs);
   }
 
   /**
@@ -324,18 +324,14 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case UnorderedGroupsTestPackage.MODEL__VISIBILITY:
-        return getVisibility();
-      case UnorderedGroupsTestPackage.MODEL__STATIC:
-        return isStatic();
-      case UnorderedGroupsTestPackage.MODEL__SYNCHRONIZED:
-        return isSynchronized();
-      case UnorderedGroupsTestPackage.MODEL__ABSTRACT:
-        return isAbstract();
-      case UnorderedGroupsTestPackage.MODEL__FINAL:
-        return isFinal();
-      case UnorderedGroupsTestPackage.MODEL__NAME:
-        return getName();
+      case UnorderedGroupsTestPackage.MODEL__FIRST:
+        return getFirst();
+      case UnorderedGroupsTestPackage.MODEL__SECOND:
+        return getSecond();
+      case UnorderedGroupsTestPackage.MODEL__THRIRD:
+        return getThrird();
+      case UnorderedGroupsTestPackage.MODEL__FORTH:
+        return getForth();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -350,23 +346,17 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case UnorderedGroupsTestPackage.MODEL__VISIBILITY:
-        setVisibility((String)newValue);
+      case UnorderedGroupsTestPackage.MODEL__FIRST:
+        setFirst((SimpleModel)newValue);
         return;
-      case UnorderedGroupsTestPackage.MODEL__STATIC:
-        setStatic((Boolean)newValue);
+      case UnorderedGroupsTestPackage.MODEL__SECOND:
+        setSecond((MandatoryModel)newValue);
         return;
-      case UnorderedGroupsTestPackage.MODEL__SYNCHRONIZED:
-        setSynchronized((Boolean)newValue);
+      case UnorderedGroupsTestPackage.MODEL__THRIRD:
+        setThrird((LoopedModel)newValue);
         return;
-      case UnorderedGroupsTestPackage.MODEL__ABSTRACT:
-        setAbstract((Boolean)newValue);
-        return;
-      case UnorderedGroupsTestPackage.MODEL__FINAL:
-        setFinal((Boolean)newValue);
-        return;
-      case UnorderedGroupsTestPackage.MODEL__NAME:
-        setName((String)newValue);
+      case UnorderedGroupsTestPackage.MODEL__FORTH:
+        setForth((GroupLoopedModel)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -382,23 +372,17 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case UnorderedGroupsTestPackage.MODEL__VISIBILITY:
-        setVisibility(VISIBILITY_EDEFAULT);
+      case UnorderedGroupsTestPackage.MODEL__FIRST:
+        setFirst((SimpleModel)null);
         return;
-      case UnorderedGroupsTestPackage.MODEL__STATIC:
-        setStatic(STATIC_EDEFAULT);
+      case UnorderedGroupsTestPackage.MODEL__SECOND:
+        setSecond((MandatoryModel)null);
         return;
-      case UnorderedGroupsTestPackage.MODEL__SYNCHRONIZED:
-        setSynchronized(SYNCHRONIZED_EDEFAULT);
+      case UnorderedGroupsTestPackage.MODEL__THRIRD:
+        setThrird((LoopedModel)null);
         return;
-      case UnorderedGroupsTestPackage.MODEL__ABSTRACT:
-        setAbstract(ABSTRACT_EDEFAULT);
-        return;
-      case UnorderedGroupsTestPackage.MODEL__FINAL:
-        setFinal(FINAL_EDEFAULT);
-        return;
-      case UnorderedGroupsTestPackage.MODEL__NAME:
-        setName(NAME_EDEFAULT);
+      case UnorderedGroupsTestPackage.MODEL__FORTH:
+        setForth((GroupLoopedModel)null);
         return;
     }
     super.eUnset(featureID);
@@ -414,47 +398,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
   {
     switch (featureID)
     {
-      case UnorderedGroupsTestPackage.MODEL__VISIBILITY:
-        return VISIBILITY_EDEFAULT == null ? visibility != null : !VISIBILITY_EDEFAULT.equals(visibility);
-      case UnorderedGroupsTestPackage.MODEL__STATIC:
-        return static_ != STATIC_EDEFAULT;
-      case UnorderedGroupsTestPackage.MODEL__SYNCHRONIZED:
-        return synchronized_ != SYNCHRONIZED_EDEFAULT;
-      case UnorderedGroupsTestPackage.MODEL__ABSTRACT:
-        return abstract_ != ABSTRACT_EDEFAULT;
-      case UnorderedGroupsTestPackage.MODEL__FINAL:
-        return final_ != FINAL_EDEFAULT;
-      case UnorderedGroupsTestPackage.MODEL__NAME:
-        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
+      case UnorderedGroupsTestPackage.MODEL__FIRST:
+        return first != null;
+      case UnorderedGroupsTestPackage.MODEL__SECOND:
+        return second != null;
+      case UnorderedGroupsTestPackage.MODEL__THRIRD:
+        return thrird != null;
+      case UnorderedGroupsTestPackage.MODEL__FORTH:
+        return forth != null;
     }
     return super.eIsSet(featureID);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  @Override
-  public String toString()
-  {
-    if (eIsProxy()) return super.toString();
-
-    StringBuffer result = new StringBuffer(super.toString());
-    result.append(" (visibility: ");
-    result.append(visibility);
-    result.append(", static: ");
-    result.append(static_);
-    result.append(", synchronized: ");
-    result.append(synchronized_);
-    result.append(", abstract: ");
-    result.append(abstract_);
-    result.append(", final: ");
-    result.append(final_);
-    result.append(", name: ");
-    result.append(name);
-    result.append(')');
-    return result.toString();
   }
 
 } //ModelImpl

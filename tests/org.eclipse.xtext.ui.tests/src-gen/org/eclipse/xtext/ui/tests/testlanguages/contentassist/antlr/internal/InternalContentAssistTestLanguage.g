@@ -66,7 +66,7 @@ entryRuleStart
 ;
 
 // Rule Start
-ruleStart 
+ruleStart
     @init {
 		int stackSize = keepStackSize();
     }
@@ -94,7 +94,7 @@ entryRuleAbstractRule
 ;
 
 // Rule AbstractRule
-ruleAbstractRule 
+ruleAbstractRule
     @init {
 		int stackSize = keepStackSize();
     }
@@ -122,7 +122,7 @@ entryRuleFirstAbstractRuleChild
 ;
 
 // Rule FirstAbstractRuleChild
-ruleFirstAbstractRuleChild 
+ruleFirstAbstractRuleChild
     @init {
 		int stackSize = keepStackSize();
     }
@@ -150,7 +150,7 @@ entryRuleSecondAbstractRuleChild
 ;
 
 // Rule SecondAbstractRuleChild
-ruleSecondAbstractRuleChild 
+ruleSecondAbstractRuleChild
     @init {
 		int stackSize = keepStackSize();
     }
@@ -178,7 +178,7 @@ entryRuleAbstractRuleCall
 ;
 
 // Rule AbstractRuleCall
-ruleAbstractRuleCall 
+ruleAbstractRuleCall
     @init {
 		int stackSize = keepStackSize();
     }

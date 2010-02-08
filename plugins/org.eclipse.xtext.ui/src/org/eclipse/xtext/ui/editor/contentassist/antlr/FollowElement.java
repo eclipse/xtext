@@ -24,6 +24,7 @@ public class FollowElement {
 	private List<AbstractElement> localTrace;
 	private int lookAhead;
 	private List<LookAheadTerminal> lookAheadTerminals;
+	private List<AbstractElement> handledUnorderedGroupElements;
 	
 	public AbstractElement getGrammarElement() {
 		return currentGrammarElement;
@@ -65,6 +66,14 @@ public class FollowElement {
 		return localTrace;
 	}
 	
+	public void setHandledUnorderedGroupElements(List<AbstractElement> handledUnorderedGroupElements) {
+		this.handledUnorderedGroupElements = handledUnorderedGroupElements;
+	}
+
+	public List<AbstractElement> getHandledUnorderedGroupElements() {
+		return handledUnorderedGroupElements;
+	}
+	
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -74,6 +83,7 @@ public class FollowElement {
 		result = prime * result + lookAhead;
 		result = prime * result + ((lookAheadTerminals == null) ? 0 : lookAheadTerminals.hashCode());
 		result = prime * result + ((trace == null) ? 0 : trace.hashCode());
+		result = prime * result + ((handledUnorderedGroupElements == null) ? 0 : handledUnorderedGroupElements.hashCode());
 		return result;
 	}
 	
@@ -112,7 +122,13 @@ public class FollowElement {
 		}
 		else if (!trace.equals(other.trace))
 			return false;
+		if (handledUnorderedGroupElements == null) {
+			if (other.handledUnorderedGroupElements != null)
+				return false;
+		}
+		else if (!handledUnorderedGroupElements.equals(other.handledUnorderedGroupElements))
+			return false;
 		return true;
 	}
-	
+
 }

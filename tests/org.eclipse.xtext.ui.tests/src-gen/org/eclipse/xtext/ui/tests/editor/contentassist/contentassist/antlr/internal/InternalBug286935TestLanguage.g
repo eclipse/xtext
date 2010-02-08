@@ -66,7 +66,7 @@ entryRuleState
 ;
 
 // Rule State
-ruleState 
+ruleState
     @init {
 		int stackSize = keepStackSize();
     }

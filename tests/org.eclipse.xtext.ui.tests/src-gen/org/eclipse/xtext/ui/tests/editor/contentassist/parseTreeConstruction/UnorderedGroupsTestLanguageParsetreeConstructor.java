@@ -35,7 +35,11 @@ protected class ThisRootNode extends RootToken {
 	@Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Model_Group(this, this, 0, inst);
+			case 0: return new Model_Alternatives(this, this, 0, inst);
+			case 1: return new SimpleModel_Group(this, this, 1, inst);
+			case 2: return new MandatoryModel_Group(this, this, 2, inst);
+			case 3: return new LoopedModel_Group(this, this, 3, inst);
+			case 4: return new GroupLoopedModel_Group(this, this, 4, inst);
 			default: return null;
 		}	
 	}	
@@ -45,28 +49,31 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   (visibility=( "public" | "private" | "protected" )? & static?="static"? & synchronized?=
- *   "synchronized"? & (abstract?="abstract"|final?="final")?) "class" name=ID "{" "}";
+ *   "1" first=SimpleModel|"2" second=MandatoryModel|"3" thrird=LoopedModel|"4" forth=
+ *   GroupLoopedModel;
  *
  **/
 
-// (visibility=( "public" | "private" | "protected" )? & static?="static"? & synchronized?=
-// "synchronized"? & (abstract?="abstract"|final?="final")?) "class" name=ID "{" "}"
-protected class Model_Group extends GroupToken {
-	
-	public Model_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+// "1" first=SimpleModel|"2" second=MandatoryModel|"3" thrird=LoopedModel|"4" forth=
+// GroupLoopedModel
+protected class Model_Alternatives extends AlternativesToken {
+
+	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.getModelAccess().getGroup();
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getModelAccess().getAlternatives();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Model_RightCurlyBracketKeyword_4(parent, this, 0, inst);
+			case 0: return new Model_Group_0(parent, this, 0, inst);
+			case 1: return new Model_Group_1(parent, this, 1, inst);
+			case 2: return new Model_Group_2(parent, this, 2, inst);
+			case 3: return new Model_Group_3(parent, this, 3, inst);
 			default: return null;
 		}	
 	}	
@@ -78,26 +85,426 @@ protected class Model_Group extends GroupToken {
 	}
 }
 
-// visibility=( "public" | "private" | "protected" )? & static?="static"? & synchronized?=
-// "synchronized"? & (abstract?="abstract"|final?="final")?
-protected class Model_UnorderedGroup_0 extends UnorderedGroupToken {
+// "1" first=SimpleModel
+protected class Model_Group_0 extends GroupToken {
 	
-	public Model_UnorderedGroup_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Model_Group_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
-	public UnorderedGroup getGrammarElement() {
-		return grammarAccess.getModelAccess().getUnorderedGroup_0();
+	public Group getGrammarElement() {
+		return grammarAccess.getModelAccess().getGroup_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Model_Alternatives_0_3(parent, this, 0, inst);
-			case 1: return new Model_SynchronizedAssignment_0_2(parent, this, 1, inst);
-			case 2: return new Model_StaticAssignment_0_1(parent, this, 2, inst);
-			case 3: return new Model_VisibilityAssignment_0_0(parent, this, 3, inst);
+			case 0: return new Model_FirstAssignment_0_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "1"
+protected class Model_DigitOneKeyword_0_0 extends KeywordToken  {
+	
+	public Model_DigitOneKeyword_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getModelAccess().getDigitOneKeyword_0_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// first=SimpleModel
+protected class Model_FirstAssignment_0_1 extends AssignmentToken  {
+	
+	public Model_FirstAssignment_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getFirstAssignment_0_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new SimpleModel_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("first",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("first");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getSimpleModelRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getModelAccess().getFirstSimpleModelParserRuleCall_0_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Model_DigitOneKeyword_0_0(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+// "2" second=MandatoryModel
+protected class Model_Group_1 extends GroupToken {
+	
+	public Model_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getModelAccess().getGroup_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Model_SecondAssignment_1_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "2"
+protected class Model_DigitTwoKeyword_1_0 extends KeywordToken  {
+	
+	public Model_DigitTwoKeyword_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getModelAccess().getDigitTwoKeyword_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// second=MandatoryModel
+protected class Model_SecondAssignment_1_1 extends AssignmentToken  {
+	
+	public Model_SecondAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getSecondAssignment_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new MandatoryModel_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("second",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("second");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getMandatoryModelRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getModelAccess().getSecondMandatoryModelParserRuleCall_1_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Model_DigitTwoKeyword_1_0(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+// "3" thrird=LoopedModel
+protected class Model_Group_2 extends GroupToken {
+	
+	public Model_Group_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getModelAccess().getGroup_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Model_ThrirdAssignment_2_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "3"
+protected class Model_DigitThreeKeyword_2_0 extends KeywordToken  {
+	
+	public Model_DigitThreeKeyword_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getModelAccess().getDigitThreeKeyword_2_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// thrird=LoopedModel
+protected class Model_ThrirdAssignment_2_1 extends AssignmentToken  {
+	
+	public Model_ThrirdAssignment_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getThrirdAssignment_2_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new LoopedModel_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("thrird",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("thrird");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getLoopedModelRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getModelAccess().getThrirdLoopedModelParserRuleCall_2_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Model_DigitThreeKeyword_2_0(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+// "4" forth=GroupLoopedModel
+protected class Model_Group_3 extends GroupToken {
+	
+	public Model_Group_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getModelAccess().getGroup_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Model_ForthAssignment_3_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "4"
+protected class Model_DigitFourKeyword_3_0 extends KeywordToken  {
+	
+	public Model_DigitFourKeyword_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getModelAccess().getDigitFourKeyword_3_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// forth=GroupLoopedModel
+protected class Model_ForthAssignment_3_1 extends AssignmentToken  {
+	
+	public Model_ForthAssignment_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getForthAssignment_3_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new GroupLoopedModel_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("forth",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("forth");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getGroupLoopedModelRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getModelAccess().getForthGroupLoopedModelParserRuleCall_3_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Model_DigitFourKeyword_3_0(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+
+/************ end Rule Model ****************/
+
+
+/************ begin Rule SimpleModel ****************
+ *
+ * SimpleModel:
+ *   (visibility=( "public" | "private" | "protected" )? & static?="static"? & synchronized?=
+ *   "synchronized"? & (abstract?="abstract"|final?="final")?) "class" name=ID "{" "}";
+ *
+ **/
+
+// (visibility=( "public" | "private" | "protected" )? & static?="static"? & synchronized?=
+// "synchronized"? & (abstract?="abstract"|final?="final")?) "class" name=ID "{" "}"
+protected class SimpleModel_Group extends GroupToken {
+	
+	public SimpleModel_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getSimpleModelAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new SimpleModel_RightCurlyBracketKeyword_4(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getSimpleModelRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// visibility=( "public" | "private" | "protected" )? & static?="static"? & synchronized?=
+// "synchronized"? & (abstract?="abstract"|final?="final")?
+protected class SimpleModel_UnorderedGroup_0 extends UnorderedGroupToken {
+	
+	public SimpleModel_UnorderedGroup_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public UnorderedGroup getGrammarElement() {
+		return grammarAccess.getSimpleModelAccess().getUnorderedGroup_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new SimpleModel_Alternatives_0_3(parent, this, 0, inst);
+			case 1: return new SimpleModel_SynchronizedAssignment_0_2(parent, this, 1, inst);
+			case 2: return new SimpleModel_StaticAssignment_0_1(parent, this, 2, inst);
+			case 3: return new SimpleModel_VisibilityAssignment_0_0(parent, this, 3, inst);
 			default: return null;
 		}	
 	}	
@@ -105,15 +512,15 @@ protected class Model_UnorderedGroup_0 extends UnorderedGroupToken {
 }
 
 // visibility=( "public" | "private" | "protected" )?
-protected class Model_VisibilityAssignment_0_0 extends AssignmentToken  {
+protected class SimpleModel_VisibilityAssignment_0_0 extends AssignmentToken  {
 	
-	public Model_VisibilityAssignment_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public SimpleModel_VisibilityAssignment_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getModelAccess().getVisibilityAssignment_0_0();
+		return grammarAccess.getSimpleModelAccess().getVisibilityAssignment_0_0();
 	}
 
     @Override
@@ -129,17 +536,17 @@ protected class Model_VisibilityAssignment_0_0 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("visibility");
 		if("public".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
-			element = grammarAccess.getModelAccess().getVisibilityPublicKeyword_0_0_0_0();
+			element = grammarAccess.getSimpleModelAccess().getVisibilityPublicKeyword_0_0_0_0();
 			return obj;
 		}
 		if("private".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
-			element = grammarAccess.getModelAccess().getVisibilityPrivateKeyword_0_0_0_1();
+			element = grammarAccess.getSimpleModelAccess().getVisibilityPrivateKeyword_0_0_0_1();
 			return obj;
 		}
 		if("protected".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
-			element = grammarAccess.getModelAccess().getVisibilityProtectedKeyword_0_0_0_2();
+			element = grammarAccess.getSimpleModelAccess().getVisibilityProtectedKeyword_0_0_0_2();
 			return obj;
 		}
 		return null;
@@ -148,21 +555,21 @@ protected class Model_VisibilityAssignment_0_0 extends AssignmentToken  {
 }
 
 // static?="static"?
-protected class Model_StaticAssignment_0_1 extends AssignmentToken  {
+protected class SimpleModel_StaticAssignment_0_1 extends AssignmentToken  {
 	
-	public Model_StaticAssignment_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public SimpleModel_StaticAssignment_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getModelAccess().getStaticAssignment_0_1();
+		return grammarAccess.getSimpleModelAccess().getStaticAssignment_0_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Model_VisibilityAssignment_0_0(parent, this, 0, inst);
+			case 0: return new SimpleModel_VisibilityAssignment_0_0(parent, this, 0, inst);
 			default: return parent.createParentFollower(this, index, index - 1, inst);
 		}	
 	}	
@@ -173,7 +580,7 @@ protected class Model_StaticAssignment_0_1 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("static");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
-			element = grammarAccess.getModelAccess().getStaticStaticKeyword_0_1_0();
+			element = grammarAccess.getSimpleModelAccess().getStaticStaticKeyword_0_1_0();
 			return obj;
 		}
 		return null;
@@ -182,22 +589,22 @@ protected class Model_StaticAssignment_0_1 extends AssignmentToken  {
 }
 
 // synchronized?="synchronized"?
-protected class Model_SynchronizedAssignment_0_2 extends AssignmentToken  {
+protected class SimpleModel_SynchronizedAssignment_0_2 extends AssignmentToken  {
 	
-	public Model_SynchronizedAssignment_0_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public SimpleModel_SynchronizedAssignment_0_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getModelAccess().getSynchronizedAssignment_0_2();
+		return grammarAccess.getSimpleModelAccess().getSynchronizedAssignment_0_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Model_StaticAssignment_0_1(parent, this, 0, inst);
-			case 1: return new Model_VisibilityAssignment_0_0(parent, this, 1, inst);
+			case 0: return new SimpleModel_StaticAssignment_0_1(parent, this, 0, inst);
+			case 1: return new SimpleModel_VisibilityAssignment_0_0(parent, this, 1, inst);
 			default: return parent.createParentFollower(this, index, index - 2, inst);
 		}	
 	}	
@@ -208,7 +615,7 @@ protected class Model_SynchronizedAssignment_0_2 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("synchronized");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
-			element = grammarAccess.getModelAccess().getSynchronizedSynchronizedKeyword_0_2_0();
+			element = grammarAccess.getSimpleModelAccess().getSynchronizedSynchronizedKeyword_0_2_0();
 			return obj;
 		}
 		return null;
@@ -217,22 +624,22 @@ protected class Model_SynchronizedAssignment_0_2 extends AssignmentToken  {
 }
 
 // (abstract?="abstract"|final?="final")?
-protected class Model_Alternatives_0_3 extends AlternativesToken {
+protected class SimpleModel_Alternatives_0_3 extends AlternativesToken {
 
-	public Model_Alternatives_0_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public SimpleModel_Alternatives_0_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Alternatives getGrammarElement() {
-		return grammarAccess.getModelAccess().getAlternatives_0_3();
+		return grammarAccess.getSimpleModelAccess().getAlternatives_0_3();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Model_AbstractAssignment_0_3_0(parent, this, 0, inst);
-			case 1: return new Model_FinalAssignment_0_3_1(parent, this, 1, inst);
+			case 0: return new SimpleModel_AbstractAssignment_0_3_0(parent, this, 0, inst);
+			case 1: return new SimpleModel_FinalAssignment_0_3_1(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -240,23 +647,23 @@ protected class Model_Alternatives_0_3 extends AlternativesToken {
 }
 
 // abstract?="abstract"
-protected class Model_AbstractAssignment_0_3_0 extends AssignmentToken  {
+protected class SimpleModel_AbstractAssignment_0_3_0 extends AssignmentToken  {
 	
-	public Model_AbstractAssignment_0_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public SimpleModel_AbstractAssignment_0_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getModelAccess().getAbstractAssignment_0_3_0();
+		return grammarAccess.getSimpleModelAccess().getAbstractAssignment_0_3_0();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Model_SynchronizedAssignment_0_2(parent, this, 0, inst);
-			case 1: return new Model_StaticAssignment_0_1(parent, this, 1, inst);
-			case 2: return new Model_VisibilityAssignment_0_0(parent, this, 2, inst);
+			case 0: return new SimpleModel_SynchronizedAssignment_0_2(parent, this, 0, inst);
+			case 1: return new SimpleModel_StaticAssignment_0_1(parent, this, 1, inst);
+			case 2: return new SimpleModel_VisibilityAssignment_0_0(parent, this, 2, inst);
 			default: return parent.createParentFollower(this, index, index - 3, inst);
 		}	
 	}	
@@ -267,7 +674,7 @@ protected class Model_AbstractAssignment_0_3_0 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("abstract");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
-			element = grammarAccess.getModelAccess().getAbstractAbstractKeyword_0_3_0_0();
+			element = grammarAccess.getSimpleModelAccess().getAbstractAbstractKeyword_0_3_0_0();
 			return obj;
 		}
 		return null;
@@ -276,23 +683,23 @@ protected class Model_AbstractAssignment_0_3_0 extends AssignmentToken  {
 }
 
 // final?="final"
-protected class Model_FinalAssignment_0_3_1 extends AssignmentToken  {
+protected class SimpleModel_FinalAssignment_0_3_1 extends AssignmentToken  {
 	
-	public Model_FinalAssignment_0_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public SimpleModel_FinalAssignment_0_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getModelAccess().getFinalAssignment_0_3_1();
+		return grammarAccess.getSimpleModelAccess().getFinalAssignment_0_3_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Model_SynchronizedAssignment_0_2(parent, this, 0, inst);
-			case 1: return new Model_StaticAssignment_0_1(parent, this, 1, inst);
-			case 2: return new Model_VisibilityAssignment_0_0(parent, this, 2, inst);
+			case 0: return new SimpleModel_SynchronizedAssignment_0_2(parent, this, 0, inst);
+			case 1: return new SimpleModel_StaticAssignment_0_1(parent, this, 1, inst);
+			case 2: return new SimpleModel_VisibilityAssignment_0_0(parent, this, 2, inst);
 			default: return parent.createParentFollower(this, index, index - 3, inst);
 		}	
 	}	
@@ -303,7 +710,7 @@ protected class Model_FinalAssignment_0_3_1 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("final");
 		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
-			element = grammarAccess.getModelAccess().getFinalFinalKeyword_0_3_1_0();
+			element = grammarAccess.getSimpleModelAccess().getFinalFinalKeyword_0_3_1_0();
 			return obj;
 		}
 		return null;
@@ -314,21 +721,21 @@ protected class Model_FinalAssignment_0_3_1 extends AssignmentToken  {
 
 
 // "class"
-protected class Model_ClassKeyword_1 extends KeywordToken  {
+protected class SimpleModel_ClassKeyword_1 extends KeywordToken  {
 	
-	public Model_ClassKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public SimpleModel_ClassKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getModelAccess().getClassKeyword_1();
+		return grammarAccess.getSimpleModelAccess().getClassKeyword_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Model_UnorderedGroup_0(parent, this, 0, inst);
+			case 0: return new SimpleModel_UnorderedGroup_0(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -336,21 +743,21 @@ protected class Model_ClassKeyword_1 extends KeywordToken  {
 }
 
 // name=ID
-protected class Model_NameAssignment_2 extends AssignmentToken  {
+protected class SimpleModel_NameAssignment_2 extends AssignmentToken  {
 	
-	public Model_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public SimpleModel_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getModelAccess().getNameAssignment_2();
+		return grammarAccess.getSimpleModelAccess().getNameAssignment_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Model_ClassKeyword_1(parent, this, 0, inst);
+			case 0: return new SimpleModel_ClassKeyword_1(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -361,7 +768,7 @@ protected class Model_NameAssignment_2 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
-			element = grammarAccess.getModelAccess().getNameIDTerminalRuleCall_2_0();
+			element = grammarAccess.getSimpleModelAccess().getNameIDTerminalRuleCall_2_0();
 			return obj;
 		}
 		return null;
@@ -370,21 +777,21 @@ protected class Model_NameAssignment_2 extends AssignmentToken  {
 }
 
 // "{"
-protected class Model_LeftCurlyBracketKeyword_3 extends KeywordToken  {
+protected class SimpleModel_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 	
-	public Model_LeftCurlyBracketKeyword_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public SimpleModel_LeftCurlyBracketKeyword_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getModelAccess().getLeftCurlyBracketKeyword_3();
+		return grammarAccess.getSimpleModelAccess().getLeftCurlyBracketKeyword_3();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Model_NameAssignment_2(parent, this, 0, inst);
+			case 0: return new SimpleModel_NameAssignment_2(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -392,21 +799,21 @@ protected class Model_LeftCurlyBracketKeyword_3 extends KeywordToken  {
 }
 
 // "}"
-protected class Model_RightCurlyBracketKeyword_4 extends KeywordToken  {
+protected class SimpleModel_RightCurlyBracketKeyword_4 extends KeywordToken  {
 	
-	public Model_RightCurlyBracketKeyword_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public SimpleModel_RightCurlyBracketKeyword_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getModelAccess().getRightCurlyBracketKeyword_4();
+		return grammarAccess.getSimpleModelAccess().getRightCurlyBracketKeyword_4();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Model_LeftCurlyBracketKeyword_3(parent, this, 0, inst);
+			case 0: return new SimpleModel_LeftCurlyBracketKeyword_3(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -414,6 +821,1122 @@ protected class Model_RightCurlyBracketKeyword_4 extends KeywordToken  {
 }
 
 
-/************ end Rule Model ****************/
+/************ end Rule SimpleModel ****************/
+
+
+/************ begin Rule MandatoryModel ****************
+ *
+ * MandatoryModel:
+ *   (visibility=( "public" | "private" | "protected" ) & static?="static" & synchronized?=
+ *   "synchronized" & (abstract?="abstract"|final?="final")?) "class" name=ID "{" "}";
+ *
+ **/
+
+// (visibility=( "public" | "private" | "protected" ) & static?="static" & synchronized?=
+// "synchronized" & (abstract?="abstract"|final?="final")?) "class" name=ID "{" "}"
+protected class MandatoryModel_Group extends GroupToken {
+	
+	public MandatoryModel_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getMandatoryModelAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new MandatoryModel_RightCurlyBracketKeyword_4(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getMandatoryModelRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// visibility=( "public" | "private" | "protected" ) & static?="static" & synchronized?=
+// "synchronized" & (abstract?="abstract"|final?="final")?
+protected class MandatoryModel_UnorderedGroup_0 extends UnorderedGroupToken {
+	
+	public MandatoryModel_UnorderedGroup_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public UnorderedGroup getGrammarElement() {
+		return grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new MandatoryModel_Alternatives_0_3(parent, this, 0, inst);
+			case 1: return new MandatoryModel_SynchronizedAssignment_0_2(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// visibility=( "public" | "private" | "protected" )
+protected class MandatoryModel_VisibilityAssignment_0_0 extends AssignmentToken  {
+	
+	public MandatoryModel_VisibilityAssignment_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getMandatoryModelAccess().getVisibilityAssignment_0_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("visibility",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("visibility");
+		if("public".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getMandatoryModelAccess().getVisibilityPublicKeyword_0_0_0_0();
+			return obj;
+		}
+		if("private".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getMandatoryModelAccess().getVisibilityPrivateKeyword_0_0_0_1();
+			return obj;
+		}
+		if("protected".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getMandatoryModelAccess().getVisibilityProtectedKeyword_0_0_0_2();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// static?="static"
+protected class MandatoryModel_StaticAssignment_0_1 extends AssignmentToken  {
+	
+	public MandatoryModel_StaticAssignment_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getMandatoryModelAccess().getStaticAssignment_0_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new MandatoryModel_VisibilityAssignment_0_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("static",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("static");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getMandatoryModelAccess().getStaticStaticKeyword_0_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// synchronized?="synchronized"
+protected class MandatoryModel_SynchronizedAssignment_0_2 extends AssignmentToken  {
+	
+	public MandatoryModel_SynchronizedAssignment_0_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getMandatoryModelAccess().getSynchronizedAssignment_0_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new MandatoryModel_StaticAssignment_0_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("synchronized",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("synchronized");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getMandatoryModelAccess().getSynchronizedSynchronizedKeyword_0_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// (abstract?="abstract"|final?="final")?
+protected class MandatoryModel_Alternatives_0_3 extends AlternativesToken {
+
+	public MandatoryModel_Alternatives_0_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getMandatoryModelAccess().getAlternatives_0_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new MandatoryModel_AbstractAssignment_0_3_0(parent, this, 0, inst);
+			case 1: return new MandatoryModel_FinalAssignment_0_3_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// abstract?="abstract"
+protected class MandatoryModel_AbstractAssignment_0_3_0 extends AssignmentToken  {
+	
+	public MandatoryModel_AbstractAssignment_0_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getMandatoryModelAccess().getAbstractAssignment_0_3_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new MandatoryModel_SynchronizedAssignment_0_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("abstract",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("abstract");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getMandatoryModelAccess().getAbstractAbstractKeyword_0_3_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// final?="final"
+protected class MandatoryModel_FinalAssignment_0_3_1 extends AssignmentToken  {
+	
+	public MandatoryModel_FinalAssignment_0_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getMandatoryModelAccess().getFinalAssignment_0_3_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new MandatoryModel_SynchronizedAssignment_0_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("final",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("final");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getMandatoryModelAccess().getFinalFinalKeyword_0_3_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+
+// "class"
+protected class MandatoryModel_ClassKeyword_1 extends KeywordToken  {
+	
+	public MandatoryModel_ClassKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getMandatoryModelAccess().getClassKeyword_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new MandatoryModel_UnorderedGroup_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// name=ID
+protected class MandatoryModel_NameAssignment_2 extends AssignmentToken  {
+	
+	public MandatoryModel_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getMandatoryModelAccess().getNameAssignment_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new MandatoryModel_ClassKeyword_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getMandatoryModelAccess().getNameIDTerminalRuleCall_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// "{"
+protected class MandatoryModel_LeftCurlyBracketKeyword_3 extends KeywordToken  {
+	
+	public MandatoryModel_LeftCurlyBracketKeyword_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getMandatoryModelAccess().getLeftCurlyBracketKeyword_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new MandatoryModel_NameAssignment_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "}"
+protected class MandatoryModel_RightCurlyBracketKeyword_4 extends KeywordToken  {
+	
+	public MandatoryModel_RightCurlyBracketKeyword_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getMandatoryModelAccess().getRightCurlyBracketKeyword_4();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new MandatoryModel_LeftCurlyBracketKeyword_3(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+/************ end Rule MandatoryModel ****************/
+
+
+/************ begin Rule LoopedModel ****************
+ *
+ * LoopedModel:
+ *   (visibility+=( "public" | "private" | "protected" )* & static+="static"* & synchronized+=
+ *   "synchronized"* & (abstract+="abstract"|final+="final")*) "class" name=ID "{" "}";
+ *
+ **/
+
+// (visibility+=( "public" | "private" | "protected" )* & static+="static"* & synchronized+=
+// "synchronized"* & (abstract+="abstract"|final+="final")*) "class" name=ID "{" "}"
+protected class LoopedModel_Group extends GroupToken {
+	
+	public LoopedModel_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getLoopedModelAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new LoopedModel_RightCurlyBracketKeyword_4(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getLoopedModelRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// visibility+=( "public" | "private" | "protected" )* & static+="static"* & synchronized+=
+// "synchronized"* & (abstract+="abstract"|final+="final")*
+protected class LoopedModel_UnorderedGroup_0 extends UnorderedGroupToken {
+	
+	public LoopedModel_UnorderedGroup_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public UnorderedGroup getGrammarElement() {
+		return grammarAccess.getLoopedModelAccess().getUnorderedGroup_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new LoopedModel_Alternatives_0_3(parent, this, 0, inst);
+			case 1: return new LoopedModel_SynchronizedAssignment_0_2(parent, this, 1, inst);
+			case 2: return new LoopedModel_StaticAssignment_0_1(parent, this, 2, inst);
+			case 3: return new LoopedModel_VisibilityAssignment_0_0(parent, this, 3, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// visibility+=( "public" | "private" | "protected" )*
+protected class LoopedModel_VisibilityAssignment_0_0 extends AssignmentToken  {
+	
+	public LoopedModel_VisibilityAssignment_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getLoopedModelAccess().getVisibilityAssignment_0_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new LoopedModel_VisibilityAssignment_0_0(parent, this, 0, inst);
+			default: return parent.createParentFollower(this, index, index - 1, inst);
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("visibility",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("visibility");
+		if("public".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getLoopedModelAccess().getVisibilityPublicKeyword_0_0_0_0();
+			return obj;
+		}
+		if("private".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getLoopedModelAccess().getVisibilityPrivateKeyword_0_0_0_1();
+			return obj;
+		}
+		if("protected".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getLoopedModelAccess().getVisibilityProtectedKeyword_0_0_0_2();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// static+="static"*
+protected class LoopedModel_StaticAssignment_0_1 extends AssignmentToken  {
+	
+	public LoopedModel_StaticAssignment_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getLoopedModelAccess().getStaticAssignment_0_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new LoopedModel_StaticAssignment_0_1(parent, this, 0, inst);
+			case 1: return new LoopedModel_VisibilityAssignment_0_0(parent, this, 1, inst);
+			default: return parent.createParentFollower(this, index, index - 2, inst);
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("static",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("static");
+		if("static".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getLoopedModelAccess().getStaticStaticKeyword_0_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// synchronized+="synchronized"*
+protected class LoopedModel_SynchronizedAssignment_0_2 extends AssignmentToken  {
+	
+	public LoopedModel_SynchronizedAssignment_0_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getLoopedModelAccess().getSynchronizedAssignment_0_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new LoopedModel_SynchronizedAssignment_0_2(parent, this, 0, inst);
+			case 1: return new LoopedModel_StaticAssignment_0_1(parent, this, 1, inst);
+			case 2: return new LoopedModel_VisibilityAssignment_0_0(parent, this, 2, inst);
+			default: return parent.createParentFollower(this, index, index - 3, inst);
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("synchronized",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("synchronized");
+		if("synchronized".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getLoopedModelAccess().getSynchronizedSynchronizedKeyword_0_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// (abstract+="abstract"|final+="final")*
+protected class LoopedModel_Alternatives_0_3 extends AlternativesToken {
+
+	public LoopedModel_Alternatives_0_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getLoopedModelAccess().getAlternatives_0_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new LoopedModel_AbstractAssignment_0_3_0(parent, this, 0, inst);
+			case 1: return new LoopedModel_FinalAssignment_0_3_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// abstract+="abstract"
+protected class LoopedModel_AbstractAssignment_0_3_0 extends AssignmentToken  {
+	
+	public LoopedModel_AbstractAssignment_0_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getLoopedModelAccess().getAbstractAssignment_0_3_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new LoopedModel_Alternatives_0_3(parent, this, 0, inst);
+			case 1: return new LoopedModel_SynchronizedAssignment_0_2(parent, this, 1, inst);
+			case 2: return new LoopedModel_StaticAssignment_0_1(parent, this, 2, inst);
+			case 3: return new LoopedModel_VisibilityAssignment_0_0(parent, this, 3, inst);
+			default: return parent.createParentFollower(this, index, index - 4, inst);
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("abstract",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("abstract");
+		if("abstract".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getLoopedModelAccess().getAbstractAbstractKeyword_0_3_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// final+="final"
+protected class LoopedModel_FinalAssignment_0_3_1 extends AssignmentToken  {
+	
+	public LoopedModel_FinalAssignment_0_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getLoopedModelAccess().getFinalAssignment_0_3_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new LoopedModel_Alternatives_0_3(parent, this, 0, inst);
+			case 1: return new LoopedModel_SynchronizedAssignment_0_2(parent, this, 1, inst);
+			case 2: return new LoopedModel_StaticAssignment_0_1(parent, this, 2, inst);
+			case 3: return new LoopedModel_VisibilityAssignment_0_0(parent, this, 3, inst);
+			default: return parent.createParentFollower(this, index, index - 4, inst);
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("final",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("final");
+		if("final".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getLoopedModelAccess().getFinalFinalKeyword_0_3_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+
+// "class"
+protected class LoopedModel_ClassKeyword_1 extends KeywordToken  {
+	
+	public LoopedModel_ClassKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getLoopedModelAccess().getClassKeyword_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new LoopedModel_UnorderedGroup_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// name=ID
+protected class LoopedModel_NameAssignment_2 extends AssignmentToken  {
+	
+	public LoopedModel_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getLoopedModelAccess().getNameAssignment_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new LoopedModel_ClassKeyword_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getLoopedModelAccess().getNameIDTerminalRuleCall_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// "{"
+protected class LoopedModel_LeftCurlyBracketKeyword_3 extends KeywordToken  {
+	
+	public LoopedModel_LeftCurlyBracketKeyword_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getLoopedModelAccess().getLeftCurlyBracketKeyword_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new LoopedModel_NameAssignment_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "}"
+protected class LoopedModel_RightCurlyBracketKeyword_4 extends KeywordToken  {
+	
+	public LoopedModel_RightCurlyBracketKeyword_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getLoopedModelAccess().getRightCurlyBracketKeyword_4();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new LoopedModel_LeftCurlyBracketKeyword_3(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+/************ end Rule LoopedModel ****************/
+
+
+/************ begin Rule GroupLoopedModel ****************
+ *
+ * GroupLoopedModel:
+ *   (visibility+=( "public" | "private" | "protected" ) & static+="static" & synchronized+=
+ *   "synchronized" & (abstract+="abstract"|final+="final"))* "class" name=ID "{" "}";
+ *
+ **/
+
+// (visibility+=( "public" | "private" | "protected" ) & static+="static" & synchronized+=
+// "synchronized" & (abstract+="abstract"|final+="final"))* "class" name=ID "{" "}"
+protected class GroupLoopedModel_Group extends GroupToken {
+	
+	public GroupLoopedModel_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getGroupLoopedModelAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new GroupLoopedModel_RightCurlyBracketKeyword_4(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getGroupLoopedModelRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// (visibility+=( "public" | "private" | "protected" ) & static+="static" & synchronized+=
+// "synchronized" & (abstract+="abstract"|final+="final"))*
+protected class GroupLoopedModel_UnorderedGroup_0 extends UnorderedGroupToken {
+	
+	public GroupLoopedModel_UnorderedGroup_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public UnorderedGroup getGrammarElement() {
+		return grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new GroupLoopedModel_Alternatives_0_3(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// visibility+=( "public" | "private" | "protected" )
+protected class GroupLoopedModel_VisibilityAssignment_0_0 extends AssignmentToken  {
+	
+	public GroupLoopedModel_VisibilityAssignment_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getGroupLoopedModelAccess().getVisibilityAssignment_0_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new GroupLoopedModel_UnorderedGroup_0(parent, this, 0, inst);
+			default: return parent.createParentFollower(this, index, index - 1, inst);
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("visibility",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("visibility");
+		if("public".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getGroupLoopedModelAccess().getVisibilityPublicKeyword_0_0_0_0();
+			return obj;
+		}
+		if("private".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getGroupLoopedModelAccess().getVisibilityPrivateKeyword_0_0_0_1();
+			return obj;
+		}
+		if("protected".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getGroupLoopedModelAccess().getVisibilityProtectedKeyword_0_0_0_2();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// static+="static"
+protected class GroupLoopedModel_StaticAssignment_0_1 extends AssignmentToken  {
+	
+	public GroupLoopedModel_StaticAssignment_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getGroupLoopedModelAccess().getStaticAssignment_0_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new GroupLoopedModel_VisibilityAssignment_0_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("static",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("static");
+		if("static".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getGroupLoopedModelAccess().getStaticStaticKeyword_0_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// synchronized+="synchronized"
+protected class GroupLoopedModel_SynchronizedAssignment_0_2 extends AssignmentToken  {
+	
+	public GroupLoopedModel_SynchronizedAssignment_0_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getGroupLoopedModelAccess().getSynchronizedAssignment_0_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new GroupLoopedModel_StaticAssignment_0_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("synchronized",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("synchronized");
+		if("synchronized".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getGroupLoopedModelAccess().getSynchronizedSynchronizedKeyword_0_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// abstract+="abstract"|final+="final"
+protected class GroupLoopedModel_Alternatives_0_3 extends AlternativesToken {
+
+	public GroupLoopedModel_Alternatives_0_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getGroupLoopedModelAccess().getAlternatives_0_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new GroupLoopedModel_AbstractAssignment_0_3_0(parent, this, 0, inst);
+			case 1: return new GroupLoopedModel_FinalAssignment_0_3_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// abstract+="abstract"
+protected class GroupLoopedModel_AbstractAssignment_0_3_0 extends AssignmentToken  {
+	
+	public GroupLoopedModel_AbstractAssignment_0_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getGroupLoopedModelAccess().getAbstractAssignment_0_3_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new GroupLoopedModel_SynchronizedAssignment_0_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("abstract",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("abstract");
+		if("abstract".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getGroupLoopedModelAccess().getAbstractAbstractKeyword_0_3_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// final+="final"
+protected class GroupLoopedModel_FinalAssignment_0_3_1 extends AssignmentToken  {
+	
+	public GroupLoopedModel_FinalAssignment_0_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getGroupLoopedModelAccess().getFinalAssignment_0_3_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new GroupLoopedModel_SynchronizedAssignment_0_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("final",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("final");
+		if("final".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getGroupLoopedModelAccess().getFinalFinalKeyword_0_3_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+
+// "class"
+protected class GroupLoopedModel_ClassKeyword_1 extends KeywordToken  {
+	
+	public GroupLoopedModel_ClassKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getGroupLoopedModelAccess().getClassKeyword_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new GroupLoopedModel_UnorderedGroup_0(parent, this, 0, inst);
+			default: return parent.createParentFollower(this, index, index - 1, inst);
+		}	
+	}	
+		
+}
+
+// name=ID
+protected class GroupLoopedModel_NameAssignment_2 extends AssignmentToken  {
+	
+	public GroupLoopedModel_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getGroupLoopedModelAccess().getNameAssignment_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new GroupLoopedModel_ClassKeyword_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getGroupLoopedModelAccess().getNameIDTerminalRuleCall_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// "{"
+protected class GroupLoopedModel_LeftCurlyBracketKeyword_3 extends KeywordToken  {
+	
+	public GroupLoopedModel_LeftCurlyBracketKeyword_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getGroupLoopedModelAccess().getLeftCurlyBracketKeyword_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new GroupLoopedModel_NameAssignment_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "}"
+protected class GroupLoopedModel_RightCurlyBracketKeyword_4 extends KeywordToken  {
+	
+	public GroupLoopedModel_RightCurlyBracketKeyword_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getGroupLoopedModelAccess().getRightCurlyBracketKeyword_4();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new GroupLoopedModel_LeftCurlyBracketKeyword_3(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+/************ end Rule GroupLoopedModel ****************/
 
 }

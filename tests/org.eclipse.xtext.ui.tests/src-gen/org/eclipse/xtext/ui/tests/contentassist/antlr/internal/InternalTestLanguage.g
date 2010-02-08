@@ -66,7 +66,7 @@ entryRuleFile
 ;
 
 // Rule File
-ruleFile 
+ruleFile
     @init {
 		int stackSize = keepStackSize();
     }
@@ -94,7 +94,7 @@ entryRuleStuff
 ;
 
 // Rule Stuff
-ruleStuff 
+ruleStuff
     @init {
 		int stackSize = keepStackSize();
     }

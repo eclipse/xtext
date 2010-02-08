@@ -104,7 +104,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:75:1: ruleTypes
             {
              before(grammarAccess.getModelAccess().getTypesParserRuleCall()); 
-            pushFollow(FollowSets000.FOLLOW_ruleTypes_in_ruleModel95);
+            pushFollow(FollowSets000.FOLLOW_ruleTypes_in_ruleModel94);
             ruleTypes();
             _fsp--;
 
@@ -138,12 +138,12 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:90:1: ruleTypes EOF
             {
              before(grammarAccess.getTypesRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleTypes_in_entryRuleTypes121);
+            pushFollow(FollowSets000.FOLLOW_ruleTypes_in_entryRuleTypes120);
             ruleTypes();
             _fsp--;
 
              after(grammarAccess.getTypesRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypes128); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypes127); 
 
             }
 
@@ -176,7 +176,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:104:1: ( rule__Types__Group__0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:104:2: rule__Types__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Types__Group__0_in_ruleTypes155);
+            pushFollow(FollowSets000.FOLLOW_rule__Types__Group__0_in_ruleTypes153);
             rule__Types__Group__0();
             _fsp--;
 
@@ -213,12 +213,12 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:118:1: ruleType EOF
             {
              before(grammarAccess.getTypeRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleType_in_entryRuleType182);
+            pushFollow(FollowSets000.FOLLOW_ruleType_in_entryRuleType180);
             ruleType();
             _fsp--;
 
              after(grammarAccess.getTypeRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleType189); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleType187); 
 
             }
 
@@ -251,7 +251,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:132:1: ( rule__Type__Alternatives )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:132:2: rule__Type__Alternatives
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Type__Alternatives_in_ruleType216);
+            pushFollow(FollowSets000.FOLLOW_rule__Type__Alternatives_in_ruleType213);
             rule__Type__Alternatives();
             _fsp--;
 
@@ -288,12 +288,12 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:146:1: ruleSimpleType EOF
             {
              before(grammarAccess.getSimpleTypeRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSimpleType_in_entryRuleSimpleType243);
+            pushFollow(FollowSets000.FOLLOW_ruleSimpleType_in_entryRuleSimpleType240);
             ruleSimpleType();
             _fsp--;
 
              after(grammarAccess.getSimpleTypeRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSimpleType250); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSimpleType247); 
 
             }
 
@@ -326,7 +326,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:160:1: ( rule__SimpleType__Group__0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:160:2: rule__SimpleType__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SimpleType__Group__0_in_ruleSimpleType277);
+            pushFollow(FollowSets000.FOLLOW_rule__SimpleType__Group__0_in_ruleSimpleType273);
             rule__SimpleType__Group__0();
             _fsp--;
 
@@ -363,12 +363,12 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:174:1: ruleCompositeType EOF
             {
              before(grammarAccess.getCompositeTypeRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleCompositeType_in_entryRuleCompositeType304);
+            pushFollow(FollowSets000.FOLLOW_ruleCompositeType_in_entryRuleCompositeType300);
             ruleCompositeType();
             _fsp--;
 
              after(grammarAccess.getCompositeTypeRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCompositeType311); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCompositeType307); 
 
             }
 
@@ -401,7 +401,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:188:1: ( rule__CompositeType__Group__0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:188:2: rule__CompositeType__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__CompositeType__Group__0_in_ruleCompositeType338);
+            pushFollow(FollowSets000.FOLLOW_rule__CompositeType__Group__0_in_ruleCompositeType333);
             rule__CompositeType__Group__0();
             _fsp--;
 
@@ -438,12 +438,12 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:202:1: ruleCompositeTypeEntry EOF
             {
              before(grammarAccess.getCompositeTypeEntryRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleCompositeTypeEntry_in_entryRuleCompositeTypeEntry365);
+            pushFollow(FollowSets000.FOLLOW_ruleCompositeTypeEntry_in_entryRuleCompositeTypeEntry360);
             ruleCompositeTypeEntry();
             _fsp--;
 
              after(grammarAccess.getCompositeTypeEntryRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCompositeTypeEntry372); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleCompositeTypeEntry367); 
 
             }
 
@@ -476,7 +476,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:216:1: ( rule__CompositeTypeEntry__DataTypeAssignment )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:216:2: rule__CompositeTypeEntry__DataTypeAssignment
             {
-            pushFollow(FollowSets000.FOLLOW_rule__CompositeTypeEntry__DataTypeAssignment_in_ruleCompositeTypeEntry399);
+            pushFollow(FollowSets000.FOLLOW_rule__CompositeTypeEntry__DataTypeAssignment_in_ruleCompositeTypeEntry393);
             rule__CompositeTypeEntry__DataTypeAssignment();
             _fsp--;
 
@@ -513,12 +513,12 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:230:1: ruleTypeId EOF
             {
              before(grammarAccess.getTypeIdRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleTypeId_in_entryRuleTypeId426);
+            pushFollow(FollowSets000.FOLLOW_ruleTypeId_in_entryRuleTypeId420);
             ruleTypeId();
             _fsp--;
 
              after(grammarAccess.getTypeIdRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypeId433); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleTypeId427); 
 
             }
 
@@ -551,7 +551,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:244:1: ( rule__TypeId__Group__0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:244:2: rule__TypeId__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__TypeId__Group__0_in_ruleTypeId460);
+            pushFollow(FollowSets000.FOLLOW_rule__TypeId__Group__0_in_ruleTypeId453);
             rule__TypeId__Group__0();
             _fsp--;
 
@@ -611,7 +611,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:262:1: ruleSimpleType
                     {
                      before(grammarAccess.getTypeAccess().getSimpleTypeParserRuleCall_0()); 
-                    pushFollow(FollowSets000.FOLLOW_ruleSimpleType_in_rule__Type__Alternatives496);
+                    pushFollow(FollowSets000.FOLLOW_ruleSimpleType_in_rule__Type__Alternatives489);
                     ruleSimpleType();
                     _fsp--;
 
@@ -629,7 +629,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:268:1: ruleCompositeType
                     {
                      before(grammarAccess.getTypeAccess().getCompositeTypeParserRuleCall_1()); 
-                    pushFollow(FollowSets000.FOLLOW_ruleCompositeType_in_rule__Type__Alternatives513);
+                    pushFollow(FollowSets000.FOLLOW_ruleCompositeType_in_rule__Type__Alternatives506);
                     ruleCompositeType();
                     _fsp--;
 
@@ -671,12 +671,12 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:286:1: 'Types'
             {
              before(grammarAccess.getTypesAccess().getTypesKeyword_0()); 
-            match(input,11,FollowSets000.FOLLOW_11_in_rule__Types__Group__0548); 
+            match(input,11,FollowSets000.FOLLOW_11_in_rule__Types__Group__0541); 
              after(grammarAccess.getTypesAccess().getTypesKeyword_0()); 
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__Types__Group__1_in_rule__Types__Group__0558);
+            pushFollow(FollowSets000.FOLLOW_rule__Types__Group__1_in_rule__Types__Group__0551);
             rule__Types__Group__1();
             _fsp--;
 
@@ -727,7 +727,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             	case 1 :
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:307:2: rule__Types__TypesAssignment_1
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__Types__TypesAssignment_1_in_rule__Types__Group__1586);
+            	    pushFollow(FollowSets000.FOLLOW_rule__Types__TypesAssignment_1_in_rule__Types__Group__1579);
             	    rule__Types__TypesAssignment_1();
             	    _fsp--;
 
@@ -776,12 +776,12 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:327:1: 'Type'
             {
              before(grammarAccess.getSimpleTypeAccess().getTypeKeyword_0()); 
-            match(input,12,FollowSets000.FOLLOW_12_in_rule__SimpleType__Group__0626); 
+            match(input,12,FollowSets000.FOLLOW_12_in_rule__SimpleType__Group__0619); 
              after(grammarAccess.getSimpleTypeAccess().getTypeKeyword_0()); 
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__SimpleType__Group__1_in_rule__SimpleType__Group__0636);
+            pushFollow(FollowSets000.FOLLOW_rule__SimpleType__Group__1_in_rule__SimpleType__Group__0629);
             rule__SimpleType__Group__1();
             _fsp--;
 
@@ -820,7 +820,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:348:1: ( rule__SimpleType__NameAssignment_1 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:348:2: rule__SimpleType__NameAssignment_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SimpleType__NameAssignment_1_in_rule__SimpleType__Group__1664);
+            pushFollow(FollowSets000.FOLLOW_rule__SimpleType__NameAssignment_1_in_rule__SimpleType__Group__1657);
             rule__SimpleType__NameAssignment_1();
             _fsp--;
 
@@ -831,7 +831,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__SimpleType__Group__2_in_rule__SimpleType__Group__1673);
+            pushFollow(FollowSets000.FOLLOW_rule__SimpleType__Group__2_in_rule__SimpleType__Group__1666);
             rule__SimpleType__Group__2();
             _fsp--;
 
@@ -867,7 +867,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:365:1: ';'
             {
              before(grammarAccess.getSimpleTypeAccess().getSemicolonKeyword_2()); 
-            match(input,13,FollowSets000.FOLLOW_13_in_rule__SimpleType__Group__2702); 
+            match(input,13,FollowSets000.FOLLOW_13_in_rule__SimpleType__Group__2695); 
              after(grammarAccess.getSimpleTypeAccess().getSemicolonKeyword_2()); 
 
             }
@@ -904,12 +904,12 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:390:1: 'Composite'
             {
              before(grammarAccess.getCompositeTypeAccess().getCompositeKeyword_0()); 
-            match(input,14,FollowSets000.FOLLOW_14_in_rule__CompositeType__Group__0744); 
+            match(input,14,FollowSets000.FOLLOW_14_in_rule__CompositeType__Group__0737); 
              after(grammarAccess.getCompositeTypeAccess().getCompositeKeyword_0()); 
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__CompositeType__Group__1_in_rule__CompositeType__Group__0754);
+            pushFollow(FollowSets000.FOLLOW_rule__CompositeType__Group__1_in_rule__CompositeType__Group__0747);
             rule__CompositeType__Group__1();
             _fsp--;
 
@@ -948,7 +948,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:411:1: ( rule__CompositeType__NameAssignment_1 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:411:2: rule__CompositeType__NameAssignment_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__CompositeType__NameAssignment_1_in_rule__CompositeType__Group__1782);
+            pushFollow(FollowSets000.FOLLOW_rule__CompositeType__NameAssignment_1_in_rule__CompositeType__Group__1775);
             rule__CompositeType__NameAssignment_1();
             _fsp--;
 
@@ -959,7 +959,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__CompositeType__Group__2_in_rule__CompositeType__Group__1791);
+            pushFollow(FollowSets000.FOLLOW_rule__CompositeType__Group__2_in_rule__CompositeType__Group__1784);
             rule__CompositeType__Group__2();
             _fsp--;
 
@@ -995,12 +995,12 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:428:1: 'base'
             {
              before(grammarAccess.getCompositeTypeAccess().getBaseKeyword_2()); 
-            match(input,15,FollowSets000.FOLLOW_15_in_rule__CompositeType__Group__2820); 
+            match(input,15,FollowSets000.FOLLOW_15_in_rule__CompositeType__Group__2813); 
              after(grammarAccess.getCompositeTypeAccess().getBaseKeyword_2()); 
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__CompositeType__Group__3_in_rule__CompositeType__Group__2830);
+            pushFollow(FollowSets000.FOLLOW_rule__CompositeType__Group__3_in_rule__CompositeType__Group__2823);
             rule__CompositeType__Group__3();
             _fsp--;
 
@@ -1039,7 +1039,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:449:1: ( rule__CompositeType__BaseTypeAssignment_3 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:449:2: rule__CompositeType__BaseTypeAssignment_3
             {
-            pushFollow(FollowSets000.FOLLOW_rule__CompositeType__BaseTypeAssignment_3_in_rule__CompositeType__Group__3858);
+            pushFollow(FollowSets000.FOLLOW_rule__CompositeType__BaseTypeAssignment_3_in_rule__CompositeType__Group__3851);
             rule__CompositeType__BaseTypeAssignment_3();
             _fsp--;
 
@@ -1050,7 +1050,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__CompositeType__Group__4_in_rule__CompositeType__Group__3867);
+            pushFollow(FollowSets000.FOLLOW_rule__CompositeType__Group__4_in_rule__CompositeType__Group__3860);
             rule__CompositeType__Group__4();
             _fsp--;
 
@@ -1086,7 +1086,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:466:1: ';'
             {
              before(grammarAccess.getCompositeTypeAccess().getSemicolonKeyword_4()); 
-            match(input,13,FollowSets000.FOLLOW_13_in_rule__CompositeType__Group__4896); 
+            match(input,13,FollowSets000.FOLLOW_13_in_rule__CompositeType__Group__4889); 
              after(grammarAccess.getCompositeTypeAccess().getSemicolonKeyword_4()); 
 
             }
@@ -1123,12 +1123,12 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:495:1: RULE_ID
             {
              before(grammarAccess.getTypeIdAccess().getIDTerminalRuleCall_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__TypeId__Group__0941); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__TypeId__Group__0934); 
              after(grammarAccess.getTypeIdAccess().getIDTerminalRuleCall_0()); 
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__TypeId__Group__1_in_rule__TypeId__Group__0949);
+            pushFollow(FollowSets000.FOLLOW_rule__TypeId__Group__1_in_rule__TypeId__Group__0942);
             rule__TypeId__Group__1();
             _fsp--;
 
@@ -1175,7 +1175,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
                 case 1 :
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:514:2: rule__TypeId__Group_1__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__TypeId__Group_1__0_in_rule__TypeId__Group__1977);
+                    pushFollow(FollowSets000.FOLLOW_rule__TypeId__Group_1__0_in_rule__TypeId__Group__1970);
                     rule__TypeId__Group_1__0();
                     _fsp--;
 
@@ -1221,12 +1221,12 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:534:1: '<'
             {
              before(grammarAccess.getTypeIdAccess().getLessThanSignKeyword_1_0()); 
-            match(input,16,FollowSets000.FOLLOW_16_in_rule__TypeId__Group_1__01017); 
+            match(input,16,FollowSets000.FOLLOW_16_in_rule__TypeId__Group_1__01010); 
              after(grammarAccess.getTypeIdAccess().getLessThanSignKeyword_1_0()); 
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__TypeId__Group_1__1_in_rule__TypeId__Group_1__01027);
+            pushFollow(FollowSets000.FOLLOW_rule__TypeId__Group_1__1_in_rule__TypeId__Group_1__01020);
             rule__TypeId__Group_1__1();
             _fsp--;
 
@@ -1262,7 +1262,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:554:1: ruleTypeId
             {
              before(grammarAccess.getTypeIdAccess().getTypeIdParserRuleCall_1_1()); 
-            pushFollow(FollowSets000.FOLLOW_ruleTypeId_in_rule__TypeId__Group_1__11055);
+            pushFollow(FollowSets000.FOLLOW_ruleTypeId_in_rule__TypeId__Group_1__11048);
             ruleTypeId();
             _fsp--;
 
@@ -1270,7 +1270,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__TypeId__Group_1__2_in_rule__TypeId__Group_1__11063);
+            pushFollow(FollowSets000.FOLLOW_rule__TypeId__Group_1__2_in_rule__TypeId__Group_1__11056);
             rule__TypeId__Group_1__2();
             _fsp--;
 
@@ -1321,7 +1321,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             	case 1 :
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:573:2: rule__TypeId__Group_1_2__0
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__TypeId__Group_1_2__0_in_rule__TypeId__Group_1__21091);
+            	    pushFollow(FollowSets000.FOLLOW_rule__TypeId__Group_1_2__0_in_rule__TypeId__Group_1__21084);
             	    rule__TypeId__Group_1_2__0();
             	    _fsp--;
 
@@ -1338,7 +1338,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__TypeId__Group_1__3_in_rule__TypeId__Group_1__21101);
+            pushFollow(FollowSets000.FOLLOW_rule__TypeId__Group_1__3_in_rule__TypeId__Group_1__21094);
             rule__TypeId__Group_1__3();
             _fsp--;
 
@@ -1374,7 +1374,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:590:1: '>'
             {
              before(grammarAccess.getTypeIdAccess().getGreaterThanSignKeyword_1_3()); 
-            match(input,17,FollowSets000.FOLLOW_17_in_rule__TypeId__Group_1__31130); 
+            match(input,17,FollowSets000.FOLLOW_17_in_rule__TypeId__Group_1__31123); 
              after(grammarAccess.getTypeIdAccess().getGreaterThanSignKeyword_1_3()); 
 
             }
@@ -1411,12 +1411,12 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:617:1: ','
             {
              before(grammarAccess.getTypeIdAccess().getCommaKeyword_1_2_0()); 
-            match(input,18,FollowSets000.FOLLOW_18_in_rule__TypeId__Group_1_2__01174); 
+            match(input,18,FollowSets000.FOLLOW_18_in_rule__TypeId__Group_1_2__01167); 
              after(grammarAccess.getTypeIdAccess().getCommaKeyword_1_2_0()); 
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__TypeId__Group_1_2__1_in_rule__TypeId__Group_1_2__01184);
+            pushFollow(FollowSets000.FOLLOW_rule__TypeId__Group_1_2__1_in_rule__TypeId__Group_1_2__01177);
             rule__TypeId__Group_1_2__1();
             _fsp--;
 
@@ -1452,7 +1452,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:637:1: ruleTypeId
             {
              before(grammarAccess.getTypeIdAccess().getTypeIdParserRuleCall_1_2_1()); 
-            pushFollow(FollowSets000.FOLLOW_ruleTypeId_in_rule__TypeId__Group_1_2__11212);
+            pushFollow(FollowSets000.FOLLOW_ruleTypeId_in_rule__TypeId__Group_1_2__11205);
             ruleTypeId();
             _fsp--;
 
@@ -1492,7 +1492,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:659:1: ruleType
             {
              before(grammarAccess.getTypesAccess().getTypesTypeParserRuleCall_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleType_in_rule__Types__TypesAssignment_11250);
+            pushFollow(FollowSets000.FOLLOW_ruleType_in_rule__Types__TypesAssignment_11243);
             ruleType();
             _fsp--;
 
@@ -1532,7 +1532,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:674:1: RULE_ID
             {
              before(grammarAccess.getSimpleTypeAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__SimpleType__NameAssignment_11281); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__SimpleType__NameAssignment_11274); 
              after(grammarAccess.getSimpleTypeAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -1569,7 +1569,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:689:1: RULE_ID
             {
              before(grammarAccess.getCompositeTypeAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__CompositeType__NameAssignment_11312); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__CompositeType__NameAssignment_11305); 
              after(grammarAccess.getCompositeTypeAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -1606,7 +1606,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:704:1: ruleCompositeTypeEntry
             {
              before(grammarAccess.getCompositeTypeAccess().getBaseTypeCompositeTypeEntryParserRuleCall_3_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleCompositeTypeEntry_in_rule__CompositeType__BaseTypeAssignment_31343);
+            pushFollow(FollowSets000.FOLLOW_ruleCompositeTypeEntry_in_rule__CompositeType__BaseTypeAssignment_31336);
             ruleCompositeTypeEntry();
             _fsp--;
 
@@ -1650,7 +1650,7 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalDatatypeRuleTestLanguage.g:721:1: ruleTypeId
             {
              before(grammarAccess.getCompositeTypeEntryAccess().getDataTypeTypeTypeIdParserRuleCall_0_1()); 
-            pushFollow(FollowSets000.FOLLOW_ruleTypeId_in_rule__CompositeTypeEntry__DataTypeAssignment1378);
+            pushFollow(FollowSets000.FOLLOW_ruleTypeId_in_rule__CompositeTypeEntry__DataTypeAssignment1371);
             ruleTypeId();
             _fsp--;
 
@@ -1686,62 +1686,62 @@ public class InternalDatatypeRuleTestLanguageParser extends AbstractInternalCont
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleModel_in_entryRuleModel61 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleModel68 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypes_in_ruleModel95 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypes_in_entryRuleTypes121 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTypes128 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Types__Group__0_in_ruleTypes155 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleType_in_entryRuleType182 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleType189 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Type__Alternatives_in_ruleType216 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSimpleType_in_entryRuleSimpleType243 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSimpleType250 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SimpleType__Group__0_in_ruleSimpleType277 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleCompositeType_in_entryRuleCompositeType304 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleCompositeType311 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__CompositeType__Group__0_in_ruleCompositeType338 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleCompositeTypeEntry_in_entryRuleCompositeTypeEntry365 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleCompositeTypeEntry372 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__CompositeTypeEntry__DataTypeAssignment_in_ruleCompositeTypeEntry399 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypeId_in_entryRuleTypeId426 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleTypeId433 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__TypeId__Group__0_in_ruleTypeId460 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSimpleType_in_rule__Type__Alternatives496 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleCompositeType_in_rule__Type__Alternatives513 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_rule__Types__Group__0548 = new BitSet(new long[]{0x0000000000005002L});
-        public static final BitSet FOLLOW_rule__Types__Group__1_in_rule__Types__Group__0558 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Types__TypesAssignment_1_in_rule__Types__Group__1586 = new BitSet(new long[]{0x0000000000005002L});
-        public static final BitSet FOLLOW_12_in_rule__SimpleType__Group__0626 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_rule__SimpleType__Group__1_in_rule__SimpleType__Group__0636 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SimpleType__NameAssignment_1_in_rule__SimpleType__Group__1664 = new BitSet(new long[]{0x0000000000002000L});
-        public static final BitSet FOLLOW_rule__SimpleType__Group__2_in_rule__SimpleType__Group__1673 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_rule__SimpleType__Group__2702 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_rule__CompositeType__Group__0744 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_rule__CompositeType__Group__1_in_rule__CompositeType__Group__0754 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__CompositeType__NameAssignment_1_in_rule__CompositeType__Group__1782 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_rule__CompositeType__Group__2_in_rule__CompositeType__Group__1791 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_15_in_rule__CompositeType__Group__2820 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_rule__CompositeType__Group__3_in_rule__CompositeType__Group__2830 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__CompositeType__BaseTypeAssignment_3_in_rule__CompositeType__Group__3858 = new BitSet(new long[]{0x0000000000002000L});
-        public static final BitSet FOLLOW_rule__CompositeType__Group__4_in_rule__CompositeType__Group__3867 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_rule__CompositeType__Group__4896 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__TypeId__Group__0941 = new BitSet(new long[]{0x0000000000010002L});
-        public static final BitSet FOLLOW_rule__TypeId__Group__1_in_rule__TypeId__Group__0949 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__TypeId__Group_1__0_in_rule__TypeId__Group__1977 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_16_in_rule__TypeId__Group_1__01017 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_rule__TypeId__Group_1__1_in_rule__TypeId__Group_1__01027 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypeId_in_rule__TypeId__Group_1__11055 = new BitSet(new long[]{0x0000000000060000L});
-        public static final BitSet FOLLOW_rule__TypeId__Group_1__2_in_rule__TypeId__Group_1__11063 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__TypeId__Group_1_2__0_in_rule__TypeId__Group_1__21091 = new BitSet(new long[]{0x0000000000060000L});
-        public static final BitSet FOLLOW_rule__TypeId__Group_1__3_in_rule__TypeId__Group_1__21101 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_17_in_rule__TypeId__Group_1__31130 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_18_in_rule__TypeId__Group_1_2__01174 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_rule__TypeId__Group_1_2__1_in_rule__TypeId__Group_1_2__01184 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypeId_in_rule__TypeId__Group_1_2__11212 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleType_in_rule__Types__TypesAssignment_11250 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__SimpleType__NameAssignment_11281 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__CompositeType__NameAssignment_11312 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleCompositeTypeEntry_in_rule__CompositeType__BaseTypeAssignment_31343 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleTypeId_in_rule__CompositeTypeEntry__DataTypeAssignment1378 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypes_in_ruleModel94 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypes_in_entryRuleTypes120 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTypes127 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Types__Group__0_in_ruleTypes153 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleType_in_entryRuleType180 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleType187 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Type__Alternatives_in_ruleType213 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSimpleType_in_entryRuleSimpleType240 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleSimpleType247 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SimpleType__Group__0_in_ruleSimpleType273 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCompositeType_in_entryRuleCompositeType300 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleCompositeType307 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__CompositeType__Group__0_in_ruleCompositeType333 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCompositeTypeEntry_in_entryRuleCompositeTypeEntry360 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleCompositeTypeEntry367 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__CompositeTypeEntry__DataTypeAssignment_in_ruleCompositeTypeEntry393 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeId_in_entryRuleTypeId420 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleTypeId427 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TypeId__Group__0_in_ruleTypeId453 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSimpleType_in_rule__Type__Alternatives489 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCompositeType_in_rule__Type__Alternatives506 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_rule__Types__Group__0541 = new BitSet(new long[]{0x0000000000005002L});
+        public static final BitSet FOLLOW_rule__Types__Group__1_in_rule__Types__Group__0551 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Types__TypesAssignment_1_in_rule__Types__Group__1579 = new BitSet(new long[]{0x0000000000005002L});
+        public static final BitSet FOLLOW_12_in_rule__SimpleType__Group__0619 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__SimpleType__Group__1_in_rule__SimpleType__Group__0629 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SimpleType__NameAssignment_1_in_rule__SimpleType__Group__1657 = new BitSet(new long[]{0x0000000000002000L});
+        public static final BitSet FOLLOW_rule__SimpleType__Group__2_in_rule__SimpleType__Group__1666 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_rule__SimpleType__Group__2695 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_rule__CompositeType__Group__0737 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__CompositeType__Group__1_in_rule__CompositeType__Group__0747 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__CompositeType__NameAssignment_1_in_rule__CompositeType__Group__1775 = new BitSet(new long[]{0x0000000000008000L});
+        public static final BitSet FOLLOW_rule__CompositeType__Group__2_in_rule__CompositeType__Group__1784 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_15_in_rule__CompositeType__Group__2813 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__CompositeType__Group__3_in_rule__CompositeType__Group__2823 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__CompositeType__BaseTypeAssignment_3_in_rule__CompositeType__Group__3851 = new BitSet(new long[]{0x0000000000002000L});
+        public static final BitSet FOLLOW_rule__CompositeType__Group__4_in_rule__CompositeType__Group__3860 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_rule__CompositeType__Group__4889 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__TypeId__Group__0934 = new BitSet(new long[]{0x0000000000010002L});
+        public static final BitSet FOLLOW_rule__TypeId__Group__1_in_rule__TypeId__Group__0942 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TypeId__Group_1__0_in_rule__TypeId__Group__1970 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_16_in_rule__TypeId__Group_1__01010 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__TypeId__Group_1__1_in_rule__TypeId__Group_1__01020 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeId_in_rule__TypeId__Group_1__11048 = new BitSet(new long[]{0x0000000000060000L});
+        public static final BitSet FOLLOW_rule__TypeId__Group_1__2_in_rule__TypeId__Group_1__11056 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__TypeId__Group_1_2__0_in_rule__TypeId__Group_1__21084 = new BitSet(new long[]{0x0000000000060000L});
+        public static final BitSet FOLLOW_rule__TypeId__Group_1__3_in_rule__TypeId__Group_1__21094 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_17_in_rule__TypeId__Group_1__31123 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_18_in_rule__TypeId__Group_1_2__01167 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__TypeId__Group_1_2__1_in_rule__TypeId__Group_1_2__01177 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeId_in_rule__TypeId__Group_1_2__11205 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleType_in_rule__Types__TypesAssignment_11243 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__SimpleType__NameAssignment_11274 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__CompositeType__NameAssignment_11305 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleCompositeTypeEntry_in_rule__CompositeType__BaseTypeAssignment_31336 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleTypeId_in_rule__CompositeTypeEntry__DataTypeAssignment1371 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

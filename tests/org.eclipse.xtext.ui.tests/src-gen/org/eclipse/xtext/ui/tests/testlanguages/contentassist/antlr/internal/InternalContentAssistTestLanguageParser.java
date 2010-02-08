@@ -107,7 +107,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:76:1: ( rule__Start__Group__0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:76:2: rule__Start__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Start__Group__0_in_ruleStart95);
+            pushFollow(FollowSets000.FOLLOW_rule__Start__Group__0_in_ruleStart94);
             rule__Start__Group__0();
             _fsp--;
 
@@ -144,12 +144,12 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:90:1: ruleAbstractRule EOF
             {
              before(grammarAccess.getAbstractRuleRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleAbstractRule_in_entryRuleAbstractRule122);
+            pushFollow(FollowSets000.FOLLOW_ruleAbstractRule_in_entryRuleAbstractRule121);
             ruleAbstractRule();
             _fsp--;
 
              after(grammarAccess.getAbstractRuleRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstractRule129); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstractRule128); 
 
             }
 
@@ -182,7 +182,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:104:1: ( rule__AbstractRule__Alternatives )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:104:2: rule__AbstractRule__Alternatives
             {
-            pushFollow(FollowSets000.FOLLOW_rule__AbstractRule__Alternatives_in_ruleAbstractRule156);
+            pushFollow(FollowSets000.FOLLOW_rule__AbstractRule__Alternatives_in_ruleAbstractRule154);
             rule__AbstractRule__Alternatives();
             _fsp--;
 
@@ -219,12 +219,12 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:118:1: ruleFirstAbstractRuleChild EOF
             {
              before(grammarAccess.getFirstAbstractRuleChildRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleFirstAbstractRuleChild_in_entryRuleFirstAbstractRuleChild183);
+            pushFollow(FollowSets000.FOLLOW_ruleFirstAbstractRuleChild_in_entryRuleFirstAbstractRuleChild181);
             ruleFirstAbstractRuleChild();
             _fsp--;
 
              after(grammarAccess.getFirstAbstractRuleChildRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFirstAbstractRuleChild190); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleFirstAbstractRuleChild188); 
 
             }
 
@@ -257,7 +257,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:132:1: ( rule__FirstAbstractRuleChild__Group__0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:132:2: rule__FirstAbstractRuleChild__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__FirstAbstractRuleChild__Group__0_in_ruleFirstAbstractRuleChild217);
+            pushFollow(FollowSets000.FOLLOW_rule__FirstAbstractRuleChild__Group__0_in_ruleFirstAbstractRuleChild214);
             rule__FirstAbstractRuleChild__Group__0();
             _fsp--;
 
@@ -294,12 +294,12 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:146:1: ruleSecondAbstractRuleChild EOF
             {
              before(grammarAccess.getSecondAbstractRuleChildRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSecondAbstractRuleChild_in_entryRuleSecondAbstractRuleChild244);
+            pushFollow(FollowSets000.FOLLOW_ruleSecondAbstractRuleChild_in_entryRuleSecondAbstractRuleChild241);
             ruleSecondAbstractRuleChild();
             _fsp--;
 
              after(grammarAccess.getSecondAbstractRuleChildRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSecondAbstractRuleChild251); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSecondAbstractRuleChild248); 
 
             }
 
@@ -332,7 +332,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:160:1: ( rule__SecondAbstractRuleChild__Group__0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:160:2: rule__SecondAbstractRuleChild__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SecondAbstractRuleChild__Group__0_in_ruleSecondAbstractRuleChild278);
+            pushFollow(FollowSets000.FOLLOW_rule__SecondAbstractRuleChild__Group__0_in_ruleSecondAbstractRuleChild274);
             rule__SecondAbstractRuleChild__Group__0();
             _fsp--;
 
@@ -369,12 +369,12 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:174:1: ruleAbstractRuleCall EOF
             {
              before(grammarAccess.getAbstractRuleCallRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleAbstractRuleCall_in_entryRuleAbstractRuleCall305);
+            pushFollow(FollowSets000.FOLLOW_ruleAbstractRuleCall_in_entryRuleAbstractRuleCall301);
             ruleAbstractRuleCall();
             _fsp--;
 
              after(grammarAccess.getAbstractRuleCallRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstractRuleCall312); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAbstractRuleCall308); 
 
             }
 
@@ -407,7 +407,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:188:1: ( rule__AbstractRuleCall__RuleAssignment )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:188:2: rule__AbstractRuleCall__RuleAssignment
             {
-            pushFollow(FollowSets000.FOLLOW_rule__AbstractRuleCall__RuleAssignment_in_ruleAbstractRuleCall339);
+            pushFollow(FollowSets000.FOLLOW_rule__AbstractRuleCall__RuleAssignment_in_ruleAbstractRuleCall334);
             rule__AbstractRuleCall__RuleAssignment();
             _fsp--;
 
@@ -477,7 +477,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:206:1: ruleFirstAbstractRuleChild
                     {
                      before(grammarAccess.getAbstractRuleAccess().getFirstAbstractRuleChildParserRuleCall_0()); 
-                    pushFollow(FollowSets000.FOLLOW_ruleFirstAbstractRuleChild_in_rule__AbstractRule__Alternatives375);
+                    pushFollow(FollowSets000.FOLLOW_ruleFirstAbstractRuleChild_in_rule__AbstractRule__Alternatives370);
                     ruleFirstAbstractRuleChild();
                     _fsp--;
 
@@ -495,7 +495,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:212:1: ruleSecondAbstractRuleChild
                     {
                      before(grammarAccess.getAbstractRuleAccess().getSecondAbstractRuleChildParserRuleCall_1()); 
-                    pushFollow(FollowSets000.FOLLOW_ruleSecondAbstractRuleChild_in_rule__AbstractRule__Alternatives392);
+                    pushFollow(FollowSets000.FOLLOW_ruleSecondAbstractRuleChild_in_rule__AbstractRule__Alternatives387);
                     ruleSecondAbstractRuleChild();
                     _fsp--;
 
@@ -537,12 +537,12 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:230:1: 'abstract rules'
             {
              before(grammarAccess.getStartAccess().getAbstractRulesKeyword_0()); 
-            match(input,11,FollowSets000.FOLLOW_11_in_rule__Start__Group__0427); 
+            match(input,11,FollowSets000.FOLLOW_11_in_rule__Start__Group__0422); 
              after(grammarAccess.getStartAccess().getAbstractRulesKeyword_0()); 
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__Start__Group__1_in_rule__Start__Group__0437);
+            pushFollow(FollowSets000.FOLLOW_rule__Start__Group__1_in_rule__Start__Group__0432);
             rule__Start__Group__1();
             _fsp--;
 
@@ -584,7 +584,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:252:1: ( rule__Start__RulesAssignment_1 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:252:2: rule__Start__RulesAssignment_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Start__RulesAssignment_1_in_rule__Start__Group__1467);
+            pushFollow(FollowSets000.FOLLOW_rule__Start__RulesAssignment_1_in_rule__Start__Group__1462);
             rule__Start__RulesAssignment_1();
             _fsp--;
 
@@ -614,7 +614,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             	case 1 :
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:257:2: rule__Start__RulesAssignment_1
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__Start__RulesAssignment_1_in_rule__Start__Group__1479);
+            	    pushFollow(FollowSets000.FOLLOW_rule__Start__RulesAssignment_1_in_rule__Start__Group__1474);
             	    rule__Start__RulesAssignment_1();
             	    _fsp--;
 
@@ -634,7 +634,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__Start__Group__2_in_rule__Start__Group__1491);
+            pushFollow(FollowSets000.FOLLOW_rule__Start__Group__2_in_rule__Start__Group__1486);
             rule__Start__Group__2();
             _fsp--;
 
@@ -670,7 +670,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:275:1: 'end'
             {
              before(grammarAccess.getStartAccess().getEndKeyword_2()); 
-            match(input,12,FollowSets000.FOLLOW_12_in_rule__Start__Group__2520); 
+            match(input,12,FollowSets000.FOLLOW_12_in_rule__Start__Group__2515); 
              after(grammarAccess.getStartAccess().getEndKeyword_2()); 
 
             }
@@ -710,7 +710,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:301:1: ( rule__FirstAbstractRuleChild__NameAssignment_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:301:2: rule__FirstAbstractRuleChild__NameAssignment_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__FirstAbstractRuleChild__NameAssignment_0_in_rule__FirstAbstractRuleChild__Group__0561);
+            pushFollow(FollowSets000.FOLLOW_rule__FirstAbstractRuleChild__NameAssignment_0_in_rule__FirstAbstractRuleChild__Group__0556);
             rule__FirstAbstractRuleChild__NameAssignment_0();
             _fsp--;
 
@@ -721,7 +721,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__FirstAbstractRuleChild__Group__1_in_rule__FirstAbstractRuleChild__Group__0570);
+            pushFollow(FollowSets000.FOLLOW_rule__FirstAbstractRuleChild__Group__1_in_rule__FirstAbstractRuleChild__Group__0565);
             rule__FirstAbstractRuleChild__Group__1();
             _fsp--;
 
@@ -757,12 +757,12 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:318:1: '('
             {
              before(grammarAccess.getFirstAbstractRuleChildAccess().getLeftParenthesisKeyword_1()); 
-            match(input,13,FollowSets000.FOLLOW_13_in_rule__FirstAbstractRuleChild__Group__1599); 
+            match(input,13,FollowSets000.FOLLOW_13_in_rule__FirstAbstractRuleChild__Group__1594); 
              after(grammarAccess.getFirstAbstractRuleChildAccess().getLeftParenthesisKeyword_1()); 
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__FirstAbstractRuleChild__Group__2_in_rule__FirstAbstractRuleChild__Group__1609);
+            pushFollow(FollowSets000.FOLLOW_rule__FirstAbstractRuleChild__Group__2_in_rule__FirstAbstractRuleChild__Group__1604);
             rule__FirstAbstractRuleChild__Group__2();
             _fsp--;
 
@@ -804,7 +804,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:340:1: ( rule__FirstAbstractRuleChild__ElementsAssignment_2 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:340:2: rule__FirstAbstractRuleChild__ElementsAssignment_2
             {
-            pushFollow(FollowSets000.FOLLOW_rule__FirstAbstractRuleChild__ElementsAssignment_2_in_rule__FirstAbstractRuleChild__Group__2639);
+            pushFollow(FollowSets000.FOLLOW_rule__FirstAbstractRuleChild__ElementsAssignment_2_in_rule__FirstAbstractRuleChild__Group__2634);
             rule__FirstAbstractRuleChild__ElementsAssignment_2();
             _fsp--;
 
@@ -834,7 +834,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             	case 1 :
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:345:2: rule__FirstAbstractRuleChild__ElementsAssignment_2
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__FirstAbstractRuleChild__ElementsAssignment_2_in_rule__FirstAbstractRuleChild__Group__2651);
+            	    pushFollow(FollowSets000.FOLLOW_rule__FirstAbstractRuleChild__ElementsAssignment_2_in_rule__FirstAbstractRuleChild__Group__2646);
             	    rule__FirstAbstractRuleChild__ElementsAssignment_2();
             	    _fsp--;
 
@@ -854,7 +854,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__FirstAbstractRuleChild__Group__3_in_rule__FirstAbstractRuleChild__Group__2663);
+            pushFollow(FollowSets000.FOLLOW_rule__FirstAbstractRuleChild__Group__3_in_rule__FirstAbstractRuleChild__Group__2658);
             rule__FirstAbstractRuleChild__Group__3();
             _fsp--;
 
@@ -890,12 +890,12 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:363:1: ')'
             {
              before(grammarAccess.getFirstAbstractRuleChildAccess().getRightParenthesisKeyword_3()); 
-            match(input,14,FollowSets000.FOLLOW_14_in_rule__FirstAbstractRuleChild__Group__3692); 
+            match(input,14,FollowSets000.FOLLOW_14_in_rule__FirstAbstractRuleChild__Group__3687); 
              after(grammarAccess.getFirstAbstractRuleChildAccess().getRightParenthesisKeyword_3()); 
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__FirstAbstractRuleChild__Group__4_in_rule__FirstAbstractRuleChild__Group__3702);
+            pushFollow(FollowSets000.FOLLOW_rule__FirstAbstractRuleChild__Group__4_in_rule__FirstAbstractRuleChild__Group__3697);
             rule__FirstAbstractRuleChild__Group__4();
             _fsp--;
 
@@ -931,7 +931,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:383:1: ';'
             {
              before(grammarAccess.getFirstAbstractRuleChildAccess().getSemicolonKeyword_4()); 
-            match(input,15,FollowSets000.FOLLOW_15_in_rule__FirstAbstractRuleChild__Group__4731); 
+            match(input,15,FollowSets000.FOLLOW_15_in_rule__FirstAbstractRuleChild__Group__4726); 
              after(grammarAccess.getFirstAbstractRuleChildAccess().getSemicolonKeyword_4()); 
 
             }
@@ -971,7 +971,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:413:1: ( rule__SecondAbstractRuleChild__NameAssignment_0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:413:2: rule__SecondAbstractRuleChild__NameAssignment_0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SecondAbstractRuleChild__NameAssignment_0_in_rule__SecondAbstractRuleChild__Group__0776);
+            pushFollow(FollowSets000.FOLLOW_rule__SecondAbstractRuleChild__NameAssignment_0_in_rule__SecondAbstractRuleChild__Group__0771);
             rule__SecondAbstractRuleChild__NameAssignment_0();
             _fsp--;
 
@@ -982,7 +982,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__SecondAbstractRuleChild__Group__1_in_rule__SecondAbstractRuleChild__Group__0785);
+            pushFollow(FollowSets000.FOLLOW_rule__SecondAbstractRuleChild__Group__1_in_rule__SecondAbstractRuleChild__Group__0780);
             rule__SecondAbstractRuleChild__Group__1();
             _fsp--;
 
@@ -1018,12 +1018,12 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:430:1: 'rule'
             {
              before(grammarAccess.getSecondAbstractRuleChildAccess().getRuleKeyword_1()); 
-            match(input,16,FollowSets000.FOLLOW_16_in_rule__SecondAbstractRuleChild__Group__1814); 
+            match(input,16,FollowSets000.FOLLOW_16_in_rule__SecondAbstractRuleChild__Group__1809); 
              after(grammarAccess.getSecondAbstractRuleChildAccess().getRuleKeyword_1()); 
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__SecondAbstractRuleChild__Group__2_in_rule__SecondAbstractRuleChild__Group__1824);
+            pushFollow(FollowSets000.FOLLOW_rule__SecondAbstractRuleChild__Group__2_in_rule__SecondAbstractRuleChild__Group__1819);
             rule__SecondAbstractRuleChild__Group__2();
             _fsp--;
 
@@ -1059,12 +1059,12 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:450:1: ':'
             {
              before(grammarAccess.getSecondAbstractRuleChildAccess().getColonKeyword_2()); 
-            match(input,17,FollowSets000.FOLLOW_17_in_rule__SecondAbstractRuleChild__Group__2853); 
+            match(input,17,FollowSets000.FOLLOW_17_in_rule__SecondAbstractRuleChild__Group__2848); 
              after(grammarAccess.getSecondAbstractRuleChildAccess().getColonKeyword_2()); 
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__SecondAbstractRuleChild__Group__3_in_rule__SecondAbstractRuleChild__Group__2863);
+            pushFollow(FollowSets000.FOLLOW_rule__SecondAbstractRuleChild__Group__3_in_rule__SecondAbstractRuleChild__Group__2858);
             rule__SecondAbstractRuleChild__Group__3();
             _fsp--;
 
@@ -1103,7 +1103,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:471:1: ( rule__SecondAbstractRuleChild__RuleAssignment_3 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:471:2: rule__SecondAbstractRuleChild__RuleAssignment_3
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SecondAbstractRuleChild__RuleAssignment_3_in_rule__SecondAbstractRuleChild__Group__3891);
+            pushFollow(FollowSets000.FOLLOW_rule__SecondAbstractRuleChild__RuleAssignment_3_in_rule__SecondAbstractRuleChild__Group__3886);
             rule__SecondAbstractRuleChild__RuleAssignment_3();
             _fsp--;
 
@@ -1114,7 +1114,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__SecondAbstractRuleChild__Group__4_in_rule__SecondAbstractRuleChild__Group__3900);
+            pushFollow(FollowSets000.FOLLOW_rule__SecondAbstractRuleChild__Group__4_in_rule__SecondAbstractRuleChild__Group__3895);
             rule__SecondAbstractRuleChild__Group__4();
             _fsp--;
 
@@ -1150,7 +1150,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:488:1: ';'
             {
              before(grammarAccess.getSecondAbstractRuleChildAccess().getSemicolonKeyword_4()); 
-            match(input,15,FollowSets000.FOLLOW_15_in_rule__SecondAbstractRuleChild__Group__4929); 
+            match(input,15,FollowSets000.FOLLOW_15_in_rule__SecondAbstractRuleChild__Group__4924); 
              after(grammarAccess.getSecondAbstractRuleChildAccess().getSemicolonKeyword_4()); 
 
             }
@@ -1187,7 +1187,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:518:1: ruleAbstractRule
             {
              before(grammarAccess.getStartAccess().getRulesAbstractRuleParserRuleCall_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleAbstractRule_in_rule__Start__RulesAssignment_1975);
+            pushFollow(FollowSets000.FOLLOW_ruleAbstractRule_in_rule__Start__RulesAssignment_1970);
             ruleAbstractRule();
             _fsp--;
 
@@ -1227,7 +1227,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:533:1: RULE_ID
             {
              before(grammarAccess.getFirstAbstractRuleChildAccess().getNameIDTerminalRuleCall_0_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__FirstAbstractRuleChild__NameAssignment_01006); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__FirstAbstractRuleChild__NameAssignment_01001); 
              after(grammarAccess.getFirstAbstractRuleChildAccess().getNameIDTerminalRuleCall_0_0()); 
 
             }
@@ -1264,7 +1264,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:548:1: ruleAbstractRule
             {
              before(grammarAccess.getFirstAbstractRuleChildAccess().getElementsAbstractRuleParserRuleCall_2_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleAbstractRule_in_rule__FirstAbstractRuleChild__ElementsAssignment_21037);
+            pushFollow(FollowSets000.FOLLOW_ruleAbstractRule_in_rule__FirstAbstractRuleChild__ElementsAssignment_21032);
             ruleAbstractRule();
             _fsp--;
 
@@ -1304,7 +1304,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:563:1: RULE_ID
             {
              before(grammarAccess.getSecondAbstractRuleChildAccess().getNameIDTerminalRuleCall_0_0()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__SecondAbstractRuleChild__NameAssignment_01068); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__SecondAbstractRuleChild__NameAssignment_01063); 
              after(grammarAccess.getSecondAbstractRuleChildAccess().getNameIDTerminalRuleCall_0_0()); 
 
             }
@@ -1341,7 +1341,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:578:1: ruleAbstractRuleCall
             {
              before(grammarAccess.getSecondAbstractRuleChildAccess().getRuleAbstractRuleCallParserRuleCall_3_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleAbstractRuleCall_in_rule__SecondAbstractRuleChild__RuleAssignment_31099);
+            pushFollow(FollowSets000.FOLLOW_ruleAbstractRuleCall_in_rule__SecondAbstractRuleChild__RuleAssignment_31094);
             ruleAbstractRuleCall();
             _fsp--;
 
@@ -1385,7 +1385,7 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/testlanguages/contentassist/antlr/internal/InternalContentAssistTestLanguage.g:595:1: RULE_ID
             {
              before(grammarAccess.getAbstractRuleCallAccess().getRuleAbstractRuleIDTerminalRuleCall_0_1()); 
-            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__AbstractRuleCall__RuleAssignment1134); 
+            match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__AbstractRuleCall__RuleAssignment1129); 
              after(grammarAccess.getAbstractRuleCallAccess().getRuleAbstractRuleIDTerminalRuleCall_0_1()); 
 
             }
@@ -1418,52 +1418,52 @@ public class InternalContentAssistTestLanguageParser extends AbstractInternalCon
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleStart_in_entryRuleStart61 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleStart68 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Start__Group__0_in_ruleStart95 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAbstractRule_in_entryRuleAbstractRule122 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleAbstractRule129 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__AbstractRule__Alternatives_in_ruleAbstractRule156 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFirstAbstractRuleChild_in_entryRuleFirstAbstractRuleChild183 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleFirstAbstractRuleChild190 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__FirstAbstractRuleChild__Group__0_in_ruleFirstAbstractRuleChild217 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSecondAbstractRuleChild_in_entryRuleSecondAbstractRuleChild244 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSecondAbstractRuleChild251 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SecondAbstractRuleChild__Group__0_in_ruleSecondAbstractRuleChild278 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAbstractRuleCall_in_entryRuleAbstractRuleCall305 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleAbstractRuleCall312 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__AbstractRuleCall__RuleAssignment_in_ruleAbstractRuleCall339 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleFirstAbstractRuleChild_in_rule__AbstractRule__Alternatives375 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSecondAbstractRuleChild_in_rule__AbstractRule__Alternatives392 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_rule__Start__Group__0427 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_rule__Start__Group__1_in_rule__Start__Group__0437 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Start__RulesAssignment_1_in_rule__Start__Group__1467 = new BitSet(new long[]{0x0000000000001010L});
-        public static final BitSet FOLLOW_rule__Start__RulesAssignment_1_in_rule__Start__Group__1479 = new BitSet(new long[]{0x0000000000001010L});
-        public static final BitSet FOLLOW_rule__Start__Group__2_in_rule__Start__Group__1491 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_rule__Start__Group__2520 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__FirstAbstractRuleChild__NameAssignment_0_in_rule__FirstAbstractRuleChild__Group__0561 = new BitSet(new long[]{0x0000000000002000L});
-        public static final BitSet FOLLOW_rule__FirstAbstractRuleChild__Group__1_in_rule__FirstAbstractRuleChild__Group__0570 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_rule__FirstAbstractRuleChild__Group__1599 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_rule__FirstAbstractRuleChild__Group__2_in_rule__FirstAbstractRuleChild__Group__1609 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__FirstAbstractRuleChild__ElementsAssignment_2_in_rule__FirstAbstractRuleChild__Group__2639 = new BitSet(new long[]{0x0000000000004010L});
-        public static final BitSet FOLLOW_rule__FirstAbstractRuleChild__ElementsAssignment_2_in_rule__FirstAbstractRuleChild__Group__2651 = new BitSet(new long[]{0x0000000000004010L});
-        public static final BitSet FOLLOW_rule__FirstAbstractRuleChild__Group__3_in_rule__FirstAbstractRuleChild__Group__2663 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_rule__FirstAbstractRuleChild__Group__3692 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_rule__FirstAbstractRuleChild__Group__4_in_rule__FirstAbstractRuleChild__Group__3702 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_15_in_rule__FirstAbstractRuleChild__Group__4731 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SecondAbstractRuleChild__NameAssignment_0_in_rule__SecondAbstractRuleChild__Group__0776 = new BitSet(new long[]{0x0000000000010000L});
-        public static final BitSet FOLLOW_rule__SecondAbstractRuleChild__Group__1_in_rule__SecondAbstractRuleChild__Group__0785 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_16_in_rule__SecondAbstractRuleChild__Group__1814 = new BitSet(new long[]{0x0000000000020000L});
-        public static final BitSet FOLLOW_rule__SecondAbstractRuleChild__Group__2_in_rule__SecondAbstractRuleChild__Group__1824 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_17_in_rule__SecondAbstractRuleChild__Group__2853 = new BitSet(new long[]{0x0000000000000010L});
-        public static final BitSet FOLLOW_rule__SecondAbstractRuleChild__Group__3_in_rule__SecondAbstractRuleChild__Group__2863 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SecondAbstractRuleChild__RuleAssignment_3_in_rule__SecondAbstractRuleChild__Group__3891 = new BitSet(new long[]{0x0000000000008000L});
-        public static final BitSet FOLLOW_rule__SecondAbstractRuleChild__Group__4_in_rule__SecondAbstractRuleChild__Group__3900 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_15_in_rule__SecondAbstractRuleChild__Group__4929 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAbstractRule_in_rule__Start__RulesAssignment_1975 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__FirstAbstractRuleChild__NameAssignment_01006 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAbstractRule_in_rule__FirstAbstractRuleChild__ElementsAssignment_21037 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__SecondAbstractRuleChild__NameAssignment_01068 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAbstractRuleCall_in_rule__SecondAbstractRuleChild__RuleAssignment_31099 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__AbstractRuleCall__RuleAssignment1134 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Start__Group__0_in_ruleStart94 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAbstractRule_in_entryRuleAbstractRule121 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAbstractRule128 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__AbstractRule__Alternatives_in_ruleAbstractRule154 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFirstAbstractRuleChild_in_entryRuleFirstAbstractRuleChild181 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleFirstAbstractRuleChild188 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__FirstAbstractRuleChild__Group__0_in_ruleFirstAbstractRuleChild214 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSecondAbstractRuleChild_in_entryRuleSecondAbstractRuleChild241 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleSecondAbstractRuleChild248 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SecondAbstractRuleChild__Group__0_in_ruleSecondAbstractRuleChild274 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAbstractRuleCall_in_entryRuleAbstractRuleCall301 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAbstractRuleCall308 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__AbstractRuleCall__RuleAssignment_in_ruleAbstractRuleCall334 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleFirstAbstractRuleChild_in_rule__AbstractRule__Alternatives370 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSecondAbstractRuleChild_in_rule__AbstractRule__Alternatives387 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_rule__Start__Group__0422 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__Start__Group__1_in_rule__Start__Group__0432 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Start__RulesAssignment_1_in_rule__Start__Group__1462 = new BitSet(new long[]{0x0000000000001010L});
+        public static final BitSet FOLLOW_rule__Start__RulesAssignment_1_in_rule__Start__Group__1474 = new BitSet(new long[]{0x0000000000001010L});
+        public static final BitSet FOLLOW_rule__Start__Group__2_in_rule__Start__Group__1486 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_rule__Start__Group__2515 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__FirstAbstractRuleChild__NameAssignment_0_in_rule__FirstAbstractRuleChild__Group__0556 = new BitSet(new long[]{0x0000000000002000L});
+        public static final BitSet FOLLOW_rule__FirstAbstractRuleChild__Group__1_in_rule__FirstAbstractRuleChild__Group__0565 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_rule__FirstAbstractRuleChild__Group__1594 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__FirstAbstractRuleChild__Group__2_in_rule__FirstAbstractRuleChild__Group__1604 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__FirstAbstractRuleChild__ElementsAssignment_2_in_rule__FirstAbstractRuleChild__Group__2634 = new BitSet(new long[]{0x0000000000004010L});
+        public static final BitSet FOLLOW_rule__FirstAbstractRuleChild__ElementsAssignment_2_in_rule__FirstAbstractRuleChild__Group__2646 = new BitSet(new long[]{0x0000000000004010L});
+        public static final BitSet FOLLOW_rule__FirstAbstractRuleChild__Group__3_in_rule__FirstAbstractRuleChild__Group__2658 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_rule__FirstAbstractRuleChild__Group__3687 = new BitSet(new long[]{0x0000000000008000L});
+        public static final BitSet FOLLOW_rule__FirstAbstractRuleChild__Group__4_in_rule__FirstAbstractRuleChild__Group__3697 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_15_in_rule__FirstAbstractRuleChild__Group__4726 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SecondAbstractRuleChild__NameAssignment_0_in_rule__SecondAbstractRuleChild__Group__0771 = new BitSet(new long[]{0x0000000000010000L});
+        public static final BitSet FOLLOW_rule__SecondAbstractRuleChild__Group__1_in_rule__SecondAbstractRuleChild__Group__0780 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_16_in_rule__SecondAbstractRuleChild__Group__1809 = new BitSet(new long[]{0x0000000000020000L});
+        public static final BitSet FOLLOW_rule__SecondAbstractRuleChild__Group__2_in_rule__SecondAbstractRuleChild__Group__1819 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_17_in_rule__SecondAbstractRuleChild__Group__2848 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_rule__SecondAbstractRuleChild__Group__3_in_rule__SecondAbstractRuleChild__Group__2858 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SecondAbstractRuleChild__RuleAssignment_3_in_rule__SecondAbstractRuleChild__Group__3886 = new BitSet(new long[]{0x0000000000008000L});
+        public static final BitSet FOLLOW_rule__SecondAbstractRuleChild__Group__4_in_rule__SecondAbstractRuleChild__Group__3895 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_15_in_rule__SecondAbstractRuleChild__Group__4924 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAbstractRule_in_rule__Start__RulesAssignment_1970 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__FirstAbstractRuleChild__NameAssignment_01001 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAbstractRule_in_rule__FirstAbstractRuleChild__ElementsAssignment_21032 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__SecondAbstractRuleChild__NameAssignment_01063 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAbstractRuleCall_in_rule__SecondAbstractRuleChild__RuleAssignment_31094 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__AbstractRuleCall__RuleAssignment1129 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

@@ -66,7 +66,7 @@ entryRuleMain
 ;
 
 // Rule Main
-ruleMain 
+ruleMain
     @init {
 		int stackSize = keepStackSize();
     }
@@ -94,7 +94,7 @@ entryRuleImport
 ;
 
 // Rule Import
-ruleImport 
+ruleImport
     @init {
 		int stackSize = keepStackSize();
     }
@@ -122,7 +122,7 @@ entryRuleType
 ;
 
 // Rule Type
-ruleType 
+ruleType
     @init {
 		int stackSize = keepStackSize();
     }

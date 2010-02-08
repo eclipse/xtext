@@ -119,7 +119,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
             	case 1 :
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:76:2: rule__File__ExpressionAssignment
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__File__ExpressionAssignment_in_ruleFile95);
+            	    pushFollow(FollowSets000.FOLLOW_rule__File__ExpressionAssignment_in_ruleFile94);
             	    rule__File__ExpressionAssignment();
             	    _fsp--;
 
@@ -162,12 +162,12 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:90:1: ruleExpression EOF
             {
              before(grammarAccess.getExpressionRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_entryRuleExpression123);
+            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_entryRuleExpression122);
             ruleExpression();
             _fsp--;
 
              after(grammarAccess.getExpressionRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExpression130); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleExpression129); 
 
             }
 
@@ -200,7 +200,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:104:1: ( rule__Expression__Alternatives )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:104:2: rule__Expression__Alternatives
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Expression__Alternatives_in_ruleExpression157);
+            pushFollow(FollowSets000.FOLLOW_rule__Expression__Alternatives_in_ruleExpression155);
             rule__Expression__Alternatives();
             _fsp--;
 
@@ -237,12 +237,12 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:118:1: ruleSExpression EOF
             {
              before(grammarAccess.getSExpressionRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleSExpression_in_entryRuleSExpression184);
+            pushFollow(FollowSets000.FOLLOW_ruleSExpression_in_entryRuleSExpression182);
             ruleSExpression();
             _fsp--;
 
              after(grammarAccess.getSExpressionRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSExpression191); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleSExpression189); 
 
             }
 
@@ -275,7 +275,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:132:1: ( rule__SExpression__Group__0 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:132:2: rule__SExpression__Group__0
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SExpression__Group__0_in_ruleSExpression218);
+            pushFollow(FollowSets000.FOLLOW_rule__SExpression__Group__0_in_ruleSExpression215);
             rule__SExpression__Group__0();
             _fsp--;
 
@@ -312,12 +312,12 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:146:1: ruleAtom EOF
             {
              before(grammarAccess.getAtomRule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleAtom_in_entryRuleAtom245);
+            pushFollow(FollowSets000.FOLLOW_ruleAtom_in_entryRuleAtom242);
             ruleAtom();
             _fsp--;
 
              after(grammarAccess.getAtomRule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAtom252); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleAtom249); 
 
             }
 
@@ -350,7 +350,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:160:1: ( rule__Atom__ValueAssignment )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:160:2: rule__Atom__ValueAssignment
             {
-            pushFollow(FollowSets000.FOLLOW_rule__Atom__ValueAssignment_in_ruleAtom279);
+            pushFollow(FollowSets000.FOLLOW_rule__Atom__ValueAssignment_in_ruleAtom275);
             rule__Atom__ValueAssignment();
             _fsp--;
 
@@ -387,12 +387,12 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:174:1: ruleVALUE EOF
             {
              before(grammarAccess.getVALUERule()); 
-            pushFollow(FollowSets000.FOLLOW_ruleVALUE_in_entryRuleVALUE306);
+            pushFollow(FollowSets000.FOLLOW_ruleVALUE_in_entryRuleVALUE302);
             ruleVALUE();
             _fsp--;
 
              after(grammarAccess.getVALUERule()); 
-            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleVALUE313); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleVALUE309); 
 
             }
 
@@ -425,7 +425,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:188:1: ( rule__VALUE__Alternatives )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:188:2: rule__VALUE__Alternatives
             {
-            pushFollow(FollowSets000.FOLLOW_rule__VALUE__Alternatives_in_ruleVALUE340);
+            pushFollow(FollowSets000.FOLLOW_rule__VALUE__Alternatives_in_ruleVALUE335);
             rule__VALUE__Alternatives();
             _fsp--;
 
@@ -497,7 +497,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:206:1: ruleSExpression
                     {
                      before(grammarAccess.getExpressionAccess().getSExpressionParserRuleCall_0()); 
-                    pushFollow(FollowSets000.FOLLOW_ruleSExpression_in_rule__Expression__Alternatives376);
+                    pushFollow(FollowSets000.FOLLOW_ruleSExpression_in_rule__Expression__Alternatives371);
                     ruleSExpression();
                     _fsp--;
 
@@ -515,7 +515,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:212:1: ruleAtom
                     {
                      before(grammarAccess.getExpressionAccess().getAtomParserRuleCall_1()); 
-                    pushFollow(FollowSets000.FOLLOW_ruleAtom_in_rule__Expression__Alternatives393);
+                    pushFollow(FollowSets000.FOLLOW_ruleAtom_in_rule__Expression__Alternatives388);
                     ruleAtom();
                     _fsp--;
 
@@ -536,7 +536,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:219:1: ( rule__Expression__Group_2__0 )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:219:2: rule__Expression__Group_2__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__Expression__Group_2__0_in_rule__Expression__Alternatives410);
+                    pushFollow(FollowSets000.FOLLOW_rule__Expression__Group_2__0_in_rule__Expression__Alternatives405);
                     rule__Expression__Group_2__0();
                     _fsp--;
 
@@ -601,7 +601,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:235:1: ( rule__SExpression__Group_1_0__0 )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:235:2: rule__SExpression__Group_1_0__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__SExpression__Group_1_0__0_in_rule__SExpression__Alternatives_1443);
+                    pushFollow(FollowSets000.FOLLOW_rule__SExpression__Group_1_0__0_in_rule__SExpression__Alternatives_1438);
                     rule__SExpression__Group_1_0__0();
                     _fsp--;
 
@@ -625,7 +625,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:241:1: ( rule__SExpression__Group_1_1__0 )
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:241:2: rule__SExpression__Group_1_1__0
                     {
-                    pushFollow(FollowSets000.FOLLOW_rule__SExpression__Group_1_1__0_in_rule__SExpression__Alternatives_1461);
+                    pushFollow(FollowSets000.FOLLOW_rule__SExpression__Group_1_1__0_in_rule__SExpression__Alternatives_1456);
                     rule__SExpression__Group_1_1__0();
                     _fsp--;
 
@@ -696,7 +696,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:256:1: RULE_ID
                     {
                      before(grammarAccess.getVALUEAccess().getIDTerminalRuleCall_0()); 
-                    match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__VALUE__Alternatives494); 
+                    match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rule__VALUE__Alternatives489); 
                      after(grammarAccess.getVALUEAccess().getIDTerminalRuleCall_0()); 
 
                     }
@@ -711,7 +711,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:262:1: RULE_INT
                     {
                      before(grammarAccess.getVALUEAccess().getINTTerminalRuleCall_1()); 
-                    match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_rule__VALUE__Alternatives511); 
+                    match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_rule__VALUE__Alternatives506); 
                      after(grammarAccess.getVALUEAccess().getINTTerminalRuleCall_1()); 
 
                     }
@@ -726,7 +726,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
                     // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:268:1: RULE_STRING
                     {
                      before(grammarAccess.getVALUEAccess().getSTRINGTerminalRuleCall_2()); 
-                    match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__VALUE__Alternatives528); 
+                    match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_rule__VALUE__Alternatives523); 
                      after(grammarAccess.getVALUEAccess().getSTRINGTerminalRuleCall_2()); 
 
                     }
@@ -765,12 +765,12 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:286:1: '['
             {
              before(grammarAccess.getExpressionAccess().getLeftSquareBracketKeyword_2_0()); 
-            match(input,11,FollowSets000.FOLLOW_11_in_rule__Expression__Group_2__0563); 
+            match(input,11,FollowSets000.FOLLOW_11_in_rule__Expression__Group_2__0558); 
              after(grammarAccess.getExpressionAccess().getLeftSquareBracketKeyword_2_0()); 
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__Expression__Group_2__1_in_rule__Expression__Group_2__0573);
+            pushFollow(FollowSets000.FOLLOW_rule__Expression__Group_2__1_in_rule__Expression__Group_2__0568);
             rule__Expression__Group_2__1();
             _fsp--;
 
@@ -806,7 +806,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:306:1: ruleExpression
             {
              before(grammarAccess.getExpressionAccess().getExpressionParserRuleCall_2_1()); 
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__Expression__Group_2__1601);
+            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__Expression__Group_2__1596);
             ruleExpression();
             _fsp--;
 
@@ -814,7 +814,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__Expression__Group_2__2_in_rule__Expression__Group_2__1609);
+            pushFollow(FollowSets000.FOLLOW_rule__Expression__Group_2__2_in_rule__Expression__Group_2__1604);
             rule__Expression__Group_2__2();
             _fsp--;
 
@@ -850,7 +850,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:324:1: ']'
             {
              before(grammarAccess.getExpressionAccess().getRightSquareBracketKeyword_2_2()); 
-            match(input,12,FollowSets000.FOLLOW_12_in_rule__Expression__Group_2__2638); 
+            match(input,12,FollowSets000.FOLLOW_12_in_rule__Expression__Group_2__2633); 
              after(grammarAccess.getExpressionAccess().getRightSquareBracketKeyword_2_2()); 
 
             }
@@ -896,7 +896,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__SExpression__Group__1_in_rule__SExpression__Group__0689);
+            pushFollow(FollowSets000.FOLLOW_rule__SExpression__Group__1_in_rule__SExpression__Group__0684);
             rule__SExpression__Group__1();
             _fsp--;
 
@@ -935,7 +935,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:370:1: ( rule__SExpression__Alternatives_1 )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:370:2: rule__SExpression__Alternatives_1
             {
-            pushFollow(FollowSets000.FOLLOW_rule__SExpression__Alternatives_1_in_rule__SExpression__Group__1717);
+            pushFollow(FollowSets000.FOLLOW_rule__SExpression__Alternatives_1_in_rule__SExpression__Group__1712);
             rule__SExpression__Alternatives_1();
             _fsp--;
 
@@ -978,12 +978,12 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:390:1: '('
             {
              before(grammarAccess.getSExpressionAccess().getLeftParenthesisKeyword_1_0_0()); 
-            match(input,13,FollowSets000.FOLLOW_13_in_rule__SExpression__Group_1_0__0756); 
+            match(input,13,FollowSets000.FOLLOW_13_in_rule__SExpression__Group_1_0__0751); 
              after(grammarAccess.getSExpressionAccess().getLeftParenthesisKeyword_1_0_0()); 
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__SExpression__Group_1_0__1_in_rule__SExpression__Group_1_0__0766);
+            pushFollow(FollowSets000.FOLLOW_rule__SExpression__Group_1_0__1_in_rule__SExpression__Group_1_0__0761);
             rule__SExpression__Group_1_0__1();
             _fsp--;
 
@@ -1034,7 +1034,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
             	case 1 :
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:411:2: rule__SExpression__ElementAssignment_1_0_1
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__SExpression__ElementAssignment_1_0_1_in_rule__SExpression__Group_1_0__1794);
+            	    pushFollow(FollowSets000.FOLLOW_rule__SExpression__ElementAssignment_1_0_1_in_rule__SExpression__Group_1_0__1789);
             	    rule__SExpression__ElementAssignment_1_0_1();
             	    _fsp--;
 
@@ -1051,7 +1051,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__SExpression__Group_1_0__2_in_rule__SExpression__Group_1_0__1804);
+            pushFollow(FollowSets000.FOLLOW_rule__SExpression__Group_1_0__2_in_rule__SExpression__Group_1_0__1799);
             rule__SExpression__Group_1_0__2();
             _fsp--;
 
@@ -1087,7 +1087,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:428:1: ')'
             {
              before(grammarAccess.getSExpressionAccess().getRightParenthesisKeyword_1_0_2()); 
-            match(input,14,FollowSets000.FOLLOW_14_in_rule__SExpression__Group_1_0__2833); 
+            match(input,14,FollowSets000.FOLLOW_14_in_rule__SExpression__Group_1_0__2828); 
              after(grammarAccess.getSExpressionAccess().getRightParenthesisKeyword_1_0_2()); 
 
             }
@@ -1124,12 +1124,12 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:453:1: 'begin'
             {
              before(grammarAccess.getSExpressionAccess().getBeginKeyword_1_1_0()); 
-            match(input,15,FollowSets000.FOLLOW_15_in_rule__SExpression__Group_1_1__0875); 
+            match(input,15,FollowSets000.FOLLOW_15_in_rule__SExpression__Group_1_1__0870); 
              after(grammarAccess.getSExpressionAccess().getBeginKeyword_1_1_0()); 
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__SExpression__Group_1_1__1_in_rule__SExpression__Group_1_1__0885);
+            pushFollow(FollowSets000.FOLLOW_rule__SExpression__Group_1_1__1_in_rule__SExpression__Group_1_1__0880);
             rule__SExpression__Group_1_1__1();
             _fsp--;
 
@@ -1180,7 +1180,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
             	case 1 :
             	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:474:2: rule__SExpression__ElementAssignment_1_1_1
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__SExpression__ElementAssignment_1_1_1_in_rule__SExpression__Group_1_1__1913);
+            	    pushFollow(FollowSets000.FOLLOW_rule__SExpression__ElementAssignment_1_1_1_in_rule__SExpression__Group_1_1__1908);
             	    rule__SExpression__ElementAssignment_1_1_1();
             	    _fsp--;
 
@@ -1197,7 +1197,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
 
             }
 
-            pushFollow(FollowSets000.FOLLOW_rule__SExpression__Group_1_1__2_in_rule__SExpression__Group_1_1__1923);
+            pushFollow(FollowSets000.FOLLOW_rule__SExpression__Group_1_1__2_in_rule__SExpression__Group_1_1__1918);
             rule__SExpression__Group_1_1__2();
             _fsp--;
 
@@ -1233,7 +1233,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:491:1: 'end'
             {
              before(grammarAccess.getSExpressionAccess().getEndKeyword_1_1_2()); 
-            match(input,16,FollowSets000.FOLLOW_16_in_rule__SExpression__Group_1_1__2952); 
+            match(input,16,FollowSets000.FOLLOW_16_in_rule__SExpression__Group_1_1__2947); 
              after(grammarAccess.getSExpressionAccess().getEndKeyword_1_1_2()); 
 
             }
@@ -1270,7 +1270,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:517:1: ruleExpression
             {
              before(grammarAccess.getFileAccess().getExpressionExpressionParserRuleCall_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__File__ExpressionAssignment994);
+            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__File__ExpressionAssignment989);
             ruleExpression();
             _fsp--;
 
@@ -1310,7 +1310,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:532:1: ruleExpression
             {
              before(grammarAccess.getSExpressionAccess().getElementExpressionParserRuleCall_1_0_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__SExpression__ElementAssignment_1_0_11025);
+            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__SExpression__ElementAssignment_1_0_11020);
             ruleExpression();
             _fsp--;
 
@@ -1350,7 +1350,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:547:1: ruleExpression
             {
              before(grammarAccess.getSExpressionAccess().getElementExpressionParserRuleCall_1_1_1_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__SExpression__ElementAssignment_1_1_11056);
+            pushFollow(FollowSets000.FOLLOW_ruleExpression_in_rule__SExpression__ElementAssignment_1_1_11051);
             ruleExpression();
             _fsp--;
 
@@ -1390,7 +1390,7 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/bracketmatching/contentassist/antlr/internal/InternalBmTestLanguage.g:562:1: ruleVALUE
             {
              before(grammarAccess.getAtomAccess().getValueVALUEParserRuleCall_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleVALUE_in_rule__Atom__ValueAssignment1087);
+            pushFollow(FollowSets000.FOLLOW_ruleVALUE_in_rule__Atom__ValueAssignment1082);
             ruleVALUE();
             _fsp--;
 
@@ -1422,48 +1422,48 @@ public class InternalBmTestLanguageParser extends AbstractInternalContentAssistP
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleFile_in_entryRuleFile61 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleFile68 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__File__ExpressionAssignment_in_ruleFile95 = new BitSet(new long[]{0x000000000000A872L});
-        public static final BitSet FOLLOW_ruleExpression_in_entryRuleExpression123 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleExpression130 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Expression__Alternatives_in_ruleExpression157 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSExpression_in_entryRuleSExpression184 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleSExpression191 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SExpression__Group__0_in_ruleSExpression218 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAtom_in_entryRuleAtom245 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleAtom252 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Atom__ValueAssignment_in_ruleAtom279 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleVALUE_in_entryRuleVALUE306 = new BitSet(new long[]{0x0000000000000000L});
-        public static final BitSet FOLLOW_EOF_in_entryRuleVALUE313 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__VALUE__Alternatives_in_ruleVALUE340 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleSExpression_in_rule__Expression__Alternatives376 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleAtom_in_rule__Expression__Alternatives393 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Expression__Group_2__0_in_rule__Expression__Alternatives410 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SExpression__Group_1_0__0_in_rule__SExpression__Alternatives_1443 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SExpression__Group_1_1__0_in_rule__SExpression__Alternatives_1461 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_ID_in_rule__VALUE__Alternatives494 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_INT_in_rule__VALUE__Alternatives511 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_RULE_STRING_in_rule__VALUE__Alternatives528 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_11_in_rule__Expression__Group_2__0563 = new BitSet(new long[]{0x000000000000A870L});
-        public static final BitSet FOLLOW_rule__Expression__Group_2__1_in_rule__Expression__Group_2__0573 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpression_in_rule__Expression__Group_2__1601 = new BitSet(new long[]{0x0000000000001000L});
-        public static final BitSet FOLLOW_rule__Expression__Group_2__2_in_rule__Expression__Group_2__1609 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_12_in_rule__Expression__Group_2__2638 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SExpression__Group__1_in_rule__SExpression__Group__0689 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SExpression__Alternatives_1_in_rule__SExpression__Group__1717 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_13_in_rule__SExpression__Group_1_0__0756 = new BitSet(new long[]{0x000000000000E870L});
-        public static final BitSet FOLLOW_rule__SExpression__Group_1_0__1_in_rule__SExpression__Group_1_0__0766 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SExpression__ElementAssignment_1_0_1_in_rule__SExpression__Group_1_0__1794 = new BitSet(new long[]{0x000000000000E870L});
-        public static final BitSet FOLLOW_rule__SExpression__Group_1_0__2_in_rule__SExpression__Group_1_0__1804 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_14_in_rule__SExpression__Group_1_0__2833 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_15_in_rule__SExpression__Group_1_1__0875 = new BitSet(new long[]{0x000000000001A870L});
-        public static final BitSet FOLLOW_rule__SExpression__Group_1_1__1_in_rule__SExpression__Group_1_1__0885 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__SExpression__ElementAssignment_1_1_1_in_rule__SExpression__Group_1_1__1913 = new BitSet(new long[]{0x000000000001A870L});
-        public static final BitSet FOLLOW_rule__SExpression__Group_1_1__2_in_rule__SExpression__Group_1_1__1923 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_16_in_rule__SExpression__Group_1_1__2952 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpression_in_rule__File__ExpressionAssignment994 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpression_in_rule__SExpression__ElementAssignment_1_0_11025 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleExpression_in_rule__SExpression__ElementAssignment_1_1_11056 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleVALUE_in_rule__Atom__ValueAssignment1087 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__File__ExpressionAssignment_in_ruleFile94 = new BitSet(new long[]{0x000000000000A872L});
+        public static final BitSet FOLLOW_ruleExpression_in_entryRuleExpression122 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleExpression129 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Expression__Alternatives_in_ruleExpression155 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSExpression_in_entryRuleSExpression182 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleSExpression189 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SExpression__Group__0_in_ruleSExpression215 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAtom_in_entryRuleAtom242 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleAtom249 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Atom__ValueAssignment_in_ruleAtom275 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleVALUE_in_entryRuleVALUE302 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleVALUE309 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__VALUE__Alternatives_in_ruleVALUE335 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleSExpression_in_rule__Expression__Alternatives371 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleAtom_in_rule__Expression__Alternatives388 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__Expression__Group_2__0_in_rule__Expression__Alternatives405 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SExpression__Group_1_0__0_in_rule__SExpression__Alternatives_1438 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SExpression__Group_1_1__0_in_rule__SExpression__Alternatives_1456 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_ID_in_rule__VALUE__Alternatives489 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_INT_in_rule__VALUE__Alternatives506 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_RULE_STRING_in_rule__VALUE__Alternatives523 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_11_in_rule__Expression__Group_2__0558 = new BitSet(new long[]{0x000000000000A870L});
+        public static final BitSet FOLLOW_rule__Expression__Group_2__1_in_rule__Expression__Group_2__0568 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpression_in_rule__Expression__Group_2__1596 = new BitSet(new long[]{0x0000000000001000L});
+        public static final BitSet FOLLOW_rule__Expression__Group_2__2_in_rule__Expression__Group_2__1604 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_12_in_rule__Expression__Group_2__2633 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SExpression__Group__1_in_rule__SExpression__Group__0684 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SExpression__Alternatives_1_in_rule__SExpression__Group__1712 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_13_in_rule__SExpression__Group_1_0__0751 = new BitSet(new long[]{0x000000000000E870L});
+        public static final BitSet FOLLOW_rule__SExpression__Group_1_0__1_in_rule__SExpression__Group_1_0__0761 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SExpression__ElementAssignment_1_0_1_in_rule__SExpression__Group_1_0__1789 = new BitSet(new long[]{0x000000000000E870L});
+        public static final BitSet FOLLOW_rule__SExpression__Group_1_0__2_in_rule__SExpression__Group_1_0__1799 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_14_in_rule__SExpression__Group_1_0__2828 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_15_in_rule__SExpression__Group_1_1__0870 = new BitSet(new long[]{0x000000000001A870L});
+        public static final BitSet FOLLOW_rule__SExpression__Group_1_1__1_in_rule__SExpression__Group_1_1__0880 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_rule__SExpression__ElementAssignment_1_1_1_in_rule__SExpression__Group_1_1__1908 = new BitSet(new long[]{0x000000000001A870L});
+        public static final BitSet FOLLOW_rule__SExpression__Group_1_1__2_in_rule__SExpression__Group_1_1__1918 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_16_in_rule__SExpression__Group_1_1__2947 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpression_in_rule__File__ExpressionAssignment989 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpression_in_rule__SExpression__ElementAssignment_1_0_11020 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleExpression_in_rule__SExpression__ElementAssignment_1_1_11051 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleVALUE_in_rule__Atom__ValueAssignment1082 = new BitSet(new long[]{0x0000000000000002L});
     }
 
 

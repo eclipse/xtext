@@ -480,7 +480,28 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			if (ass != null)
 				calculator.doSwitch(ass);
 			else {
-				calculator.doSwitch(element.getGrammarElement());
+				if (element.getGrammarElement() instanceof UnorderedGroup) {
+					boolean repeat = true;
+					List<AbstractElement> groupElements = ((UnorderedGroup) element.getGrammarElement()).getElements();
+					for(AbstractElement groupElement: groupElements) {
+						if (element.getHandledUnorderedGroupElements() == null || GrammarUtil.isMultipleCardinality(groupElement)) {
+							calculator.doSwitch(groupElement);
+							if (!GrammarUtil.isOptionalCardinality(groupElement)) {
+								repeat = false;
+							}
+						} else if (!element.getHandledUnorderedGroupElements().contains(groupElement)) {
+							calculator.doSwitch(groupElement);
+							if (!GrammarUtil.isOptionalCardinality(groupElement)) {
+								repeat = false;
+							}
+						}
+					}
+					if (repeat && GrammarUtil.isMultipleCardinality(element.getGrammarElement())) {
+						calculator.doSwitch(element.getGrammarElement());
+					}
+				} else {
+					calculator.doSwitch(element.getGrammarElement());
+				}
 				ParserRule rule = EcoreUtil2.getContainerOfType(element.getGrammarElement(), ParserRule.class);
 				if (rule != null && GrammarUtil.isDatatypeRule(rule)) {
 					for (int i = element.getLocalTrace().size() - 1; i >= 0; i--) {

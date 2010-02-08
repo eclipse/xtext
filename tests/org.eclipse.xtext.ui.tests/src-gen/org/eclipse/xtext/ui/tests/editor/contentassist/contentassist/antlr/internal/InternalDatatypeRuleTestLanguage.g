@@ -66,7 +66,7 @@ entryRuleModel
 ;
 
 // Rule Model
-ruleModel 
+ruleModel
     @init {
 		int stackSize = keepStackSize();
     }
@@ -94,7 +94,7 @@ entryRuleTypes
 ;
 
 // Rule Types
-ruleTypes 
+ruleTypes
     @init {
 		int stackSize = keepStackSize();
     }
@@ -122,7 +122,7 @@ entryRuleType
 ;
 
 // Rule Type
-ruleType 
+ruleType
     @init {
 		int stackSize = keepStackSize();
     }
@@ -150,7 +150,7 @@ entryRuleSimpleType
 ;
 
 // Rule SimpleType
-ruleSimpleType 
+ruleSimpleType
     @init {
 		int stackSize = keepStackSize();
     }
@@ -178,7 +178,7 @@ entryRuleCompositeType
 ;
 
 // Rule CompositeType
-ruleCompositeType 
+ruleCompositeType
     @init {
 		int stackSize = keepStackSize();
     }
@@ -206,7 +206,7 @@ entryRuleCompositeTypeEntry
 ;
 
 // Rule CompositeTypeEntry
-ruleCompositeTypeEntry 
+ruleCompositeTypeEntry
     @init {
 		int stackSize = keepStackSize();
     }
@@ -234,7 +234,7 @@ entryRuleTypeId
 ;
 
 // Rule TypeId
-ruleTypeId 
+ruleTypeId
     @init {
 		int stackSize = keepStackSize();
     }

@@ -66,7 +66,7 @@ entryRuleModel
 ;
 
 // Rule Model
-ruleModel 
+ruleModel
     @init {
 		int stackSize = keepStackSize();
     }
@@ -94,7 +94,7 @@ entryRuleTConstant
 ;
 
 // Rule TConstant
-ruleTConstant 
+ruleTConstant
     @init {
 		int stackSize = keepStackSize();
     }
@@ -122,7 +122,7 @@ entryRuleTStringConstant
 ;
 
 // Rule TStringConstant
-ruleTStringConstant 
+ruleTStringConstant
     @init {
 		int stackSize = keepStackSize();
     }
@@ -150,7 +150,7 @@ entryRuleTIntegerConstant
 ;
 
 // Rule TIntegerConstant
-ruleTIntegerConstant 
+ruleTIntegerConstant
     @init {
 		int stackSize = keepStackSize();
     }
@@ -178,7 +178,7 @@ entryRuleTBooleanConstant
 ;
 
 // Rule TBooleanConstant
-ruleTBooleanConstant 
+ruleTBooleanConstant
     @init {
 		int stackSize = keepStackSize();
     }
@@ -206,7 +206,7 @@ entryRuleTAnnotation
 ;
 
 // Rule TAnnotation
-ruleTAnnotation 
+ruleTAnnotation
     @init {
 		int stackSize = keepStackSize();
     }

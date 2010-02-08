@@ -15,12 +15,10 @@ import org.eclipse.emf.ecore.EObject;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getVisibility <em>Visibility</em>}</li>
- *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#isStatic <em>Static</em>}</li>
- *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#isSynchronized <em>Synchronized</em>}</li>
- *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#isAbstract <em>Abstract</em>}</li>
- *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#isFinal <em>Final</em>}</li>
- *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getFirst <em>First</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getSecond <em>Second</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getThrird <em>Thrird</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getForth <em>Forth</em>}</li>
  * </ul>
  * </p>
  *
@@ -31,159 +29,107 @@ import org.eclipse.emf.ecore.EObject;
 public interface Model extends EObject
 {
   /**
-   * Returns the value of the '<em><b>Visibility</b></em>' attribute.
+   * Returns the value of the '<em><b>First</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Visibility</em>' attribute isn't clear,
+   * If the meaning of the '<em>First</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Visibility</em>' attribute.
-   * @see #setVisibility(String)
-   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.UnorderedGroupsTestPackage#getModel_Visibility()
-   * @model
+   * @return the value of the '<em>First</em>' containment reference.
+   * @see #setFirst(SimpleModel)
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.UnorderedGroupsTestPackage#getModel_First()
+   * @model containment="true"
    * @generated
    */
-  String getVisibility();
+  SimpleModel getFirst();
 
   /**
-   * Sets the value of the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getVisibility <em>Visibility</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getFirst <em>First</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Visibility</em>' attribute.
-   * @see #getVisibility()
+   * @param value the new value of the '<em>First</em>' containment reference.
+   * @see #getFirst()
    * @generated
    */
-  void setVisibility(String value);
+  void setFirst(SimpleModel value);
 
   /**
-   * Returns the value of the '<em><b>Static</b></em>' attribute.
+   * Returns the value of the '<em><b>Second</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Static</em>' attribute isn't clear,
+   * If the meaning of the '<em>Second</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Static</em>' attribute.
-   * @see #setStatic(boolean)
-   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.UnorderedGroupsTestPackage#getModel_Static()
-   * @model
+   * @return the value of the '<em>Second</em>' containment reference.
+   * @see #setSecond(MandatoryModel)
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.UnorderedGroupsTestPackage#getModel_Second()
+   * @model containment="true"
    * @generated
    */
-  boolean isStatic();
+  MandatoryModel getSecond();
 
   /**
-   * Sets the value of the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#isStatic <em>Static</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getSecond <em>Second</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Static</em>' attribute.
-   * @see #isStatic()
+   * @param value the new value of the '<em>Second</em>' containment reference.
+   * @see #getSecond()
    * @generated
    */
-  void setStatic(boolean value);
+  void setSecond(MandatoryModel value);
 
   /**
-   * Returns the value of the '<em><b>Synchronized</b></em>' attribute.
+   * Returns the value of the '<em><b>Thrird</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Synchronized</em>' attribute isn't clear,
+   * If the meaning of the '<em>Thrird</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Synchronized</em>' attribute.
-   * @see #setSynchronized(boolean)
-   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.UnorderedGroupsTestPackage#getModel_Synchronized()
-   * @model
+   * @return the value of the '<em>Thrird</em>' containment reference.
+   * @see #setThrird(LoopedModel)
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.UnorderedGroupsTestPackage#getModel_Thrird()
+   * @model containment="true"
    * @generated
    */
-  boolean isSynchronized();
+  LoopedModel getThrird();
 
   /**
-   * Sets the value of the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#isSynchronized <em>Synchronized</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getThrird <em>Thrird</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Synchronized</em>' attribute.
-   * @see #isSynchronized()
+   * @param value the new value of the '<em>Thrird</em>' containment reference.
+   * @see #getThrird()
    * @generated
    */
-  void setSynchronized(boolean value);
+  void setThrird(LoopedModel value);
 
   /**
-   * Returns the value of the '<em><b>Abstract</b></em>' attribute.
+   * Returns the value of the '<em><b>Forth</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <p>
-   * If the meaning of the '<em>Abstract</em>' attribute isn't clear,
+   * If the meaning of the '<em>Forth</em>' containment reference isn't clear,
    * there really should be more of a description here...
    * </p>
    * <!-- end-user-doc -->
-   * @return the value of the '<em>Abstract</em>' attribute.
-   * @see #setAbstract(boolean)
-   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.UnorderedGroupsTestPackage#getModel_Abstract()
-   * @model
+   * @return the value of the '<em>Forth</em>' containment reference.
+   * @see #setForth(GroupLoopedModel)
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.UnorderedGroupsTestPackage#getModel_Forth()
+   * @model containment="true"
    * @generated
    */
-  boolean isAbstract();
+  GroupLoopedModel getForth();
 
   /**
-   * Sets the value of the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#isAbstract <em>Abstract</em>}' attribute.
+   * Sets the value of the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getForth <em>Forth</em>}' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Abstract</em>' attribute.
-   * @see #isAbstract()
+   * @param value the new value of the '<em>Forth</em>' containment reference.
+   * @see #getForth()
    * @generated
    */
-  void setAbstract(boolean value);
-
-  /**
-   * Returns the value of the '<em><b>Final</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Final</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Final</em>' attribute.
-   * @see #setFinal(boolean)
-   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.UnorderedGroupsTestPackage#getModel_Final()
-   * @model
-   * @generated
-   */
-  boolean isFinal();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#isFinal <em>Final</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Final</em>' attribute.
-   * @see #isFinal()
-   * @generated
-   */
-  void setFinal(boolean value);
-
-  /**
-   * Returns the value of the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <p>
-   * If the meaning of the '<em>Name</em>' attribute isn't clear,
-   * there really should be more of a description here...
-   * </p>
-   * <!-- end-user-doc -->
-   * @return the value of the '<em>Name</em>' attribute.
-   * @see #setName(String)
-   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.UnorderedGroupsTestPackage#getModel_Name()
-   * @model
-   * @generated
-   */
-  String getName();
-
-  /**
-   * Sets the value of the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getName <em>Name</em>}' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @param value the new value of the '<em>Name</em>' attribute.
-   * @see #getName()
-   * @generated
-   */
-  void setName(String value);
+  void setForth(GroupLoopedModel value);
 
 } // Model

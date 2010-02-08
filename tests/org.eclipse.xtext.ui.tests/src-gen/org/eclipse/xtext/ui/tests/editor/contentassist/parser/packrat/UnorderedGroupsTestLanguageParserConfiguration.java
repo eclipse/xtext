@@ -10,6 +10,10 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.UnorderedGroupsT
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
 import org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.consumers.UnorderedGroupsTestLanguageModelConsumer;
+import org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.consumers.UnorderedGroupsTestLanguageSimpleModelConsumer;
+import org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.consumers.UnorderedGroupsTestLanguageMandatoryModelConsumer;
+import org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.consumers.UnorderedGroupsTestLanguageLoopedModelConsumer;
+import org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.consumers.UnorderedGroupsTestLanguageGroupLoopedModelConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSTRINGConsumer;
@@ -22,6 +26,10 @@ public class UnorderedGroupsTestLanguageParserConfiguration extends AbstractPars
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
     private UnorderedGroupsTestLanguageModelConsumer modelConsumer;
+    private UnorderedGroupsTestLanguageSimpleModelConsumer simpleModelConsumer;
+    private UnorderedGroupsTestLanguageMandatoryModelConsumer mandatoryModelConsumer;
+    private UnorderedGroupsTestLanguageLoopedModelConsumer loopedModelConsumer;
+    private UnorderedGroupsTestLanguageGroupLoopedModelConsumer groupLoopedModelConsumer;
 
 	private UnorderedGroupsTestLanguageGrammarAccess grammarAccess;
 
@@ -40,6 +48,18 @@ public class UnorderedGroupsTestLanguageParserConfiguration extends AbstractPars
 		modelConsumer = new UnorderedGroupsTestLanguageModelConsumer(
     		this, null
     	);
+		simpleModelConsumer = new UnorderedGroupsTestLanguageSimpleModelConsumer(
+    		this, null
+    	);
+		mandatoryModelConsumer = new UnorderedGroupsTestLanguageMandatoryModelConsumer(
+    		this, null
+    	);
+		loopedModelConsumer = new UnorderedGroupsTestLanguageLoopedModelConsumer(
+    		this, null
+    	);
+		groupLoopedModelConsumer = new UnorderedGroupsTestLanguageGroupLoopedModelConsumer(
+    		this, null
+    	);
 	}
 	
 	public void createTerminalConsumers() {
@@ -50,6 +70,10 @@ public class UnorderedGroupsTestLanguageParserConfiguration extends AbstractPars
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
 		getModelConsumer().setRule(grammarAccess.getModelAccess());
+		getSimpleModelConsumer().setRule(grammarAccess.getSimpleModelAccess());
+		getMandatoryModelConsumer().setRule(grammarAccess.getMandatoryModelAccess());
+		getLoopedModelConsumer().setRule(grammarAccess.getLoopedModelAccess());
+		getGroupLoopedModelConsumer().setRule(grammarAccess.getGroupLoopedModelAccess());
 		getIdConsumer().setRule(grammarAccess.getIDRule());
 		getIntConsumer().setRule(grammarAccess.getINTRule());
 		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
@@ -59,19 +83,67 @@ public class UnorderedGroupsTestLanguageParserConfiguration extends AbstractPars
 		getAnyOtherConsumer().setRule(grammarAccess.getANY_OTHERRule());
 
 
-		getModelConsumer().setIdConsumer(getIdConsumer());
+		getModelConsumer().setGroupLoopedModelConsumer(getGroupLoopedModelConsumer());
+		getModelConsumer().setLoopedModelConsumer(getLoopedModelConsumer());
+		getModelConsumer().setMandatoryModelConsumer(getMandatoryModelConsumer());
+		getModelConsumer().setSimpleModelConsumer(getSimpleModelConsumer());
 
-		getModelConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$7$Delimiter);
-		getModelConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$7$Delimiter);
-		getModelConsumer().setKeyword$14$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$7$Delimiter);
-		getModelConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$7$Delimiter);
-		getModelConsumer().setKeyword$17$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$7$Delimiter);
-		getModelConsumer().setKeyword$20$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$22$Delimiter);
-		getModelConsumer().setKeyword$21$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$22$Delimiter);
-		getModelConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$7$Delimiter);
-		getModelConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$7$Delimiter);
-		getModelConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$7$Delimiter);
-		getModelConsumer().setRuleCall$19$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.ruleCall$21$Delimiter);
+		getSimpleModelConsumer().setIdConsumer(getIdConsumer());
+
+		getMandatoryModelConsumer().setIdConsumer(getIdConsumer());
+
+		getLoopedModelConsumer().setIdConsumer(getIdConsumer());
+
+		getGroupLoopedModelConsumer().setIdConsumer(getIdConsumer());
+
+		getModelConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$5$Delimiter);
+		getModelConsumer().setKeyword$15$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$5$Delimiter);
+		getModelConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$5$Delimiter);
+		getModelConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$5$Delimiter);
+		getSimpleModelConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getSimpleModelConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getSimpleModelConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getSimpleModelConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getSimpleModelConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getSimpleModelConsumer().setKeyword$14$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getSimpleModelConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getSimpleModelConsumer().setKeyword$17$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getSimpleModelConsumer().setKeyword$20$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$5$Delimiter);
+		getSimpleModelConsumer().setKeyword$21$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$5$Delimiter);
+		getSimpleModelConsumer().setRuleCall$19$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.ruleCall$40$Delimiter);
+		getMandatoryModelConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getMandatoryModelConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getMandatoryModelConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getMandatoryModelConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getMandatoryModelConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getMandatoryModelConsumer().setKeyword$14$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getMandatoryModelConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getMandatoryModelConsumer().setKeyword$17$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getMandatoryModelConsumer().setKeyword$20$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$5$Delimiter);
+		getMandatoryModelConsumer().setKeyword$21$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$5$Delimiter);
+		getMandatoryModelConsumer().setRuleCall$19$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.ruleCall$40$Delimiter);
+		getLoopedModelConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getLoopedModelConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getLoopedModelConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getLoopedModelConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getLoopedModelConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getLoopedModelConsumer().setKeyword$14$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getLoopedModelConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getLoopedModelConsumer().setKeyword$17$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getLoopedModelConsumer().setKeyword$20$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$5$Delimiter);
+		getLoopedModelConsumer().setKeyword$21$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$5$Delimiter);
+		getLoopedModelConsumer().setRuleCall$19$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.ruleCall$40$Delimiter);
+		getGroupLoopedModelConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getGroupLoopedModelConsumer().setKeyword$14$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getGroupLoopedModelConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getGroupLoopedModelConsumer().setKeyword$17$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getGroupLoopedModelConsumer().setKeyword$20$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$5$Delimiter);
+		getGroupLoopedModelConsumer().setKeyword$21$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$5$Delimiter);
+		getGroupLoopedModelConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getGroupLoopedModelConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getGroupLoopedModelConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getGroupLoopedModelConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$26$Delimiter);
+		getGroupLoopedModelConsumer().setRuleCall$19$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.UnorderedGroupsTestLanguageDelimiters.ruleCall$40$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
@@ -80,6 +152,22 @@ public class UnorderedGroupsTestLanguageParserConfiguration extends AbstractPars
 	
     public UnorderedGroupsTestLanguageModelConsumer getModelConsumer() {
     	return modelConsumer;
+    }
+
+    public UnorderedGroupsTestLanguageSimpleModelConsumer getSimpleModelConsumer() {
+    	return simpleModelConsumer;
+    }
+
+    public UnorderedGroupsTestLanguageMandatoryModelConsumer getMandatoryModelConsumer() {
+    	return mandatoryModelConsumer;
+    }
+
+    public UnorderedGroupsTestLanguageLoopedModelConsumer getLoopedModelConsumer() {
+    	return loopedModelConsumer;
+    }
+
+    public UnorderedGroupsTestLanguageGroupLoopedModelConsumer getGroupLoopedModelConsumer() {
+    	return groupLoopedModelConsumer;
     }
 
     public TerminalsIDConsumer getIdConsumer() {

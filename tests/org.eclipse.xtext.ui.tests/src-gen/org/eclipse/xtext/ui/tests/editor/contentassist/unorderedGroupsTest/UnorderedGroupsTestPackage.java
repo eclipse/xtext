@@ -8,6 +8,7 @@ package org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 /**
  * <!-- begin-user-doc -->
@@ -69,58 +70,40 @@ public interface UnorderedGroupsTestPackage extends EPackage
   int MODEL = 0;
 
   /**
-   * The feature id for the '<em><b>Visibility</b></em>' attribute.
+   * The feature id for the '<em><b>First</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL__VISIBILITY = 0;
+  int MODEL__FIRST = 0;
 
   /**
-   * The feature id for the '<em><b>Static</b></em>' attribute.
+   * The feature id for the '<em><b>Second</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL__STATIC = 1;
+  int MODEL__SECOND = 1;
 
   /**
-   * The feature id for the '<em><b>Synchronized</b></em>' attribute.
+   * The feature id for the '<em><b>Thrird</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL__SYNCHRONIZED = 2;
+  int MODEL__THRIRD = 2;
 
   /**
-   * The feature id for the '<em><b>Abstract</b></em>' attribute.
+   * The feature id for the '<em><b>Forth</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL__ABSTRACT = 3;
-
-  /**
-   * The feature id for the '<em><b>Final</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MODEL__FINAL = 4;
-
-  /**
-   * The feature id for the '<em><b>Name</b></em>' attribute.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int MODEL__NAME = 5;
+  int MODEL__FORTH = 3;
 
   /**
    * The number of structural features of the '<em>Model</em>' class.
@@ -129,7 +112,299 @@ public interface UnorderedGroupsTestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 6;
+  int MODEL_FEATURE_COUNT = 4;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.SimpleModelImpl <em>Simple Model</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.SimpleModelImpl
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.UnorderedGroupsTestPackageImpl#getSimpleModel()
+   * @generated
+   */
+  int SIMPLE_MODEL = 1;
+
+  /**
+   * The feature id for the '<em><b>Visibility</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SIMPLE_MODEL__VISIBILITY = 0;
+
+  /**
+   * The feature id for the '<em><b>Static</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SIMPLE_MODEL__STATIC = 1;
+
+  /**
+   * The feature id for the '<em><b>Synchronized</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SIMPLE_MODEL__SYNCHRONIZED = 2;
+
+  /**
+   * The feature id for the '<em><b>Abstract</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SIMPLE_MODEL__ABSTRACT = 3;
+
+  /**
+   * The feature id for the '<em><b>Final</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SIMPLE_MODEL__FINAL = 4;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SIMPLE_MODEL__NAME = 5;
+
+  /**
+   * The number of structural features of the '<em>Simple Model</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SIMPLE_MODEL_FEATURE_COUNT = 6;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.MandatoryModelImpl <em>Mandatory Model</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.MandatoryModelImpl
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.UnorderedGroupsTestPackageImpl#getMandatoryModel()
+   * @generated
+   */
+  int MANDATORY_MODEL = 2;
+
+  /**
+   * The feature id for the '<em><b>Visibility</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MANDATORY_MODEL__VISIBILITY = 0;
+
+  /**
+   * The feature id for the '<em><b>Static</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MANDATORY_MODEL__STATIC = 1;
+
+  /**
+   * The feature id for the '<em><b>Synchronized</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MANDATORY_MODEL__SYNCHRONIZED = 2;
+
+  /**
+   * The feature id for the '<em><b>Abstract</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MANDATORY_MODEL__ABSTRACT = 3;
+
+  /**
+   * The feature id for the '<em><b>Final</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MANDATORY_MODEL__FINAL = 4;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MANDATORY_MODEL__NAME = 5;
+
+  /**
+   * The number of structural features of the '<em>Mandatory Model</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MANDATORY_MODEL_FEATURE_COUNT = 6;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.LoopedModelImpl <em>Looped Model</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.LoopedModelImpl
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.UnorderedGroupsTestPackageImpl#getLoopedModel()
+   * @generated
+   */
+  int LOOPED_MODEL = 3;
+
+  /**
+   * The feature id for the '<em><b>Visibility</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOPED_MODEL__VISIBILITY = 0;
+
+  /**
+   * The feature id for the '<em><b>Static</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOPED_MODEL__STATIC = 1;
+
+  /**
+   * The feature id for the '<em><b>Synchronized</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOPED_MODEL__SYNCHRONIZED = 2;
+
+  /**
+   * The feature id for the '<em><b>Abstract</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOPED_MODEL__ABSTRACT = 3;
+
+  /**
+   * The feature id for the '<em><b>Final</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOPED_MODEL__FINAL = 4;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOPED_MODEL__NAME = 5;
+
+  /**
+   * The number of structural features of the '<em>Looped Model</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOPED_MODEL_FEATURE_COUNT = 6;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.GroupLoopedModelImpl <em>Group Looped Model</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.GroupLoopedModelImpl
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.UnorderedGroupsTestPackageImpl#getGroupLoopedModel()
+   * @generated
+   */
+  int GROUP_LOOPED_MODEL = 4;
+
+  /**
+   * The feature id for the '<em><b>Visibility</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GROUP_LOOPED_MODEL__VISIBILITY = 0;
+
+  /**
+   * The feature id for the '<em><b>Static</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GROUP_LOOPED_MODEL__STATIC = 1;
+
+  /**
+   * The feature id for the '<em><b>Synchronized</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GROUP_LOOPED_MODEL__SYNCHRONIZED = 2;
+
+  /**
+   * The feature id for the '<em><b>Abstract</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GROUP_LOOPED_MODEL__ABSTRACT = 3;
+
+  /**
+   * The feature id for the '<em><b>Final</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GROUP_LOOPED_MODEL__FINAL = 4;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GROUP_LOOPED_MODEL__NAME = 5;
+
+  /**
+   * The number of structural features of the '<em>Group Looped Model</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int GROUP_LOOPED_MODEL_FEATURE_COUNT = 6;
 
 
   /**
@@ -143,70 +418,352 @@ public interface UnorderedGroupsTestPackage extends EPackage
   EClass getModel();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getVisibility <em>Visibility</em>}'.
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getFirst <em>First</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>First</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getFirst()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_First();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getSecond <em>Second</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Second</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getSecond()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_Second();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getThrird <em>Thrird</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Thrird</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getThrird()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_Thrird();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getForth <em>Forth</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Forth</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getForth()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_Forth();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.SimpleModel <em>Simple Model</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Simple Model</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.SimpleModel
+   * @generated
+   */
+  EClass getSimpleModel();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.SimpleModel#getVisibility <em>Visibility</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Visibility</em>'.
-   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getVisibility()
-   * @see #getModel()
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.SimpleModel#getVisibility()
+   * @see #getSimpleModel()
    * @generated
    */
-  EAttribute getModel_Visibility();
+  EAttribute getSimpleModel_Visibility();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#isStatic <em>Static</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.SimpleModel#isStatic <em>Static</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Static</em>'.
-   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#isStatic()
-   * @see #getModel()
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.SimpleModel#isStatic()
+   * @see #getSimpleModel()
    * @generated
    */
-  EAttribute getModel_Static();
+  EAttribute getSimpleModel_Static();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#isSynchronized <em>Synchronized</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.SimpleModel#isSynchronized <em>Synchronized</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Synchronized</em>'.
-   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#isSynchronized()
-   * @see #getModel()
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.SimpleModel#isSynchronized()
+   * @see #getSimpleModel()
    * @generated
    */
-  EAttribute getModel_Synchronized();
+  EAttribute getSimpleModel_Synchronized();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#isAbstract <em>Abstract</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.SimpleModel#isAbstract <em>Abstract</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Abstract</em>'.
-   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#isAbstract()
-   * @see #getModel()
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.SimpleModel#isAbstract()
+   * @see #getSimpleModel()
    * @generated
    */
-  EAttribute getModel_Abstract();
+  EAttribute getSimpleModel_Abstract();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#isFinal <em>Final</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.SimpleModel#isFinal <em>Final</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Final</em>'.
-   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#isFinal()
-   * @see #getModel()
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.SimpleModel#isFinal()
+   * @see #getSimpleModel()
    * @generated
    */
-  EAttribute getModel_Final();
+  EAttribute getSimpleModel_Final();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.SimpleModel#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getName()
-   * @see #getModel()
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.SimpleModel#getName()
+   * @see #getSimpleModel()
    * @generated
    */
-  EAttribute getModel_Name();
+  EAttribute getSimpleModel_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.MandatoryModel <em>Mandatory Model</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Mandatory Model</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.MandatoryModel
+   * @generated
+   */
+  EClass getMandatoryModel();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.MandatoryModel#getVisibility <em>Visibility</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Visibility</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.MandatoryModel#getVisibility()
+   * @see #getMandatoryModel()
+   * @generated
+   */
+  EAttribute getMandatoryModel_Visibility();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.MandatoryModel#isStatic <em>Static</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Static</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.MandatoryModel#isStatic()
+   * @see #getMandatoryModel()
+   * @generated
+   */
+  EAttribute getMandatoryModel_Static();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.MandatoryModel#isSynchronized <em>Synchronized</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Synchronized</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.MandatoryModel#isSynchronized()
+   * @see #getMandatoryModel()
+   * @generated
+   */
+  EAttribute getMandatoryModel_Synchronized();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.MandatoryModel#isAbstract <em>Abstract</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Abstract</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.MandatoryModel#isAbstract()
+   * @see #getMandatoryModel()
+   * @generated
+   */
+  EAttribute getMandatoryModel_Abstract();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.MandatoryModel#isFinal <em>Final</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Final</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.MandatoryModel#isFinal()
+   * @see #getMandatoryModel()
+   * @generated
+   */
+  EAttribute getMandatoryModel_Final();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.MandatoryModel#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.MandatoryModel#getName()
+   * @see #getMandatoryModel()
+   * @generated
+   */
+  EAttribute getMandatoryModel_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedModel <em>Looped Model</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Looped Model</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedModel
+   * @generated
+   */
+  EClass getLoopedModel();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedModel#getVisibility <em>Visibility</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Visibility</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedModel#getVisibility()
+   * @see #getLoopedModel()
+   * @generated
+   */
+  EAttribute getLoopedModel_Visibility();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedModel#getStatic <em>Static</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Static</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedModel#getStatic()
+   * @see #getLoopedModel()
+   * @generated
+   */
+  EAttribute getLoopedModel_Static();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedModel#getSynchronized <em>Synchronized</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Synchronized</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedModel#getSynchronized()
+   * @see #getLoopedModel()
+   * @generated
+   */
+  EAttribute getLoopedModel_Synchronized();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedModel#getAbstract <em>Abstract</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Abstract</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedModel#getAbstract()
+   * @see #getLoopedModel()
+   * @generated
+   */
+  EAttribute getLoopedModel_Abstract();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedModel#getFinal <em>Final</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Final</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedModel#getFinal()
+   * @see #getLoopedModel()
+   * @generated
+   */
+  EAttribute getLoopedModel_Final();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedModel#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedModel#getName()
+   * @see #getLoopedModel()
+   * @generated
+   */
+  EAttribute getLoopedModel_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.GroupLoopedModel <em>Group Looped Model</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Group Looped Model</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.GroupLoopedModel
+   * @generated
+   */
+  EClass getGroupLoopedModel();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.GroupLoopedModel#getVisibility <em>Visibility</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Visibility</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.GroupLoopedModel#getVisibility()
+   * @see #getGroupLoopedModel()
+   * @generated
+   */
+  EAttribute getGroupLoopedModel_Visibility();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.GroupLoopedModel#getStatic <em>Static</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Static</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.GroupLoopedModel#getStatic()
+   * @see #getGroupLoopedModel()
+   * @generated
+   */
+  EAttribute getGroupLoopedModel_Static();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.GroupLoopedModel#getSynchronized <em>Synchronized</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Synchronized</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.GroupLoopedModel#getSynchronized()
+   * @see #getGroupLoopedModel()
+   * @generated
+   */
+  EAttribute getGroupLoopedModel_Synchronized();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.GroupLoopedModel#getAbstract <em>Abstract</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Abstract</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.GroupLoopedModel#getAbstract()
+   * @see #getGroupLoopedModel()
+   * @generated
+   */
+  EAttribute getGroupLoopedModel_Abstract();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.GroupLoopedModel#getFinal <em>Final</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Final</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.GroupLoopedModel#getFinal()
+   * @see #getGroupLoopedModel()
+   * @generated
+   */
+  EAttribute getGroupLoopedModel_Final();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.GroupLoopedModel#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.GroupLoopedModel#getName()
+   * @see #getGroupLoopedModel()
+   * @generated
+   */
+  EAttribute getGroupLoopedModel_Name();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -242,12 +799,54 @@ public interface UnorderedGroupsTestPackage extends EPackage
     EClass MODEL = eINSTANCE.getModel();
 
     /**
+     * The meta object literal for the '<em><b>First</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__FIRST = eINSTANCE.getModel_First();
+
+    /**
+     * The meta object literal for the '<em><b>Second</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__SECOND = eINSTANCE.getModel_Second();
+
+    /**
+     * The meta object literal for the '<em><b>Thrird</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__THRIRD = eINSTANCE.getModel_Thrird();
+
+    /**
+     * The meta object literal for the '<em><b>Forth</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__FORTH = eINSTANCE.getModel_Forth();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.SimpleModelImpl <em>Simple Model</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.SimpleModelImpl
+     * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.UnorderedGroupsTestPackageImpl#getSimpleModel()
+     * @generated
+     */
+    EClass SIMPLE_MODEL = eINSTANCE.getSimpleModel();
+
+    /**
      * The meta object literal for the '<em><b>Visibility</b></em>' attribute feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute MODEL__VISIBILITY = eINSTANCE.getModel_Visibility();
+    EAttribute SIMPLE_MODEL__VISIBILITY = eINSTANCE.getSimpleModel_Visibility();
 
     /**
      * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
@@ -255,7 +854,7 @@ public interface UnorderedGroupsTestPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute MODEL__STATIC = eINSTANCE.getModel_Static();
+    EAttribute SIMPLE_MODEL__STATIC = eINSTANCE.getSimpleModel_Static();
 
     /**
      * The meta object literal for the '<em><b>Synchronized</b></em>' attribute feature.
@@ -263,7 +862,7 @@ public interface UnorderedGroupsTestPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute MODEL__SYNCHRONIZED = eINSTANCE.getModel_Synchronized();
+    EAttribute SIMPLE_MODEL__SYNCHRONIZED = eINSTANCE.getSimpleModel_Synchronized();
 
     /**
      * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
@@ -271,7 +870,7 @@ public interface UnorderedGroupsTestPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute MODEL__ABSTRACT = eINSTANCE.getModel_Abstract();
+    EAttribute SIMPLE_MODEL__ABSTRACT = eINSTANCE.getSimpleModel_Abstract();
 
     /**
      * The meta object literal for the '<em><b>Final</b></em>' attribute feature.
@@ -279,7 +878,7 @@ public interface UnorderedGroupsTestPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute MODEL__FINAL = eINSTANCE.getModel_Final();
+    EAttribute SIMPLE_MODEL__FINAL = eINSTANCE.getSimpleModel_Final();
 
     /**
      * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -287,7 +886,181 @@ public interface UnorderedGroupsTestPackage extends EPackage
      * <!-- end-user-doc -->
      * @generated
      */
-    EAttribute MODEL__NAME = eINSTANCE.getModel_Name();
+    EAttribute SIMPLE_MODEL__NAME = eINSTANCE.getSimpleModel_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.MandatoryModelImpl <em>Mandatory Model</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.MandatoryModelImpl
+     * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.UnorderedGroupsTestPackageImpl#getMandatoryModel()
+     * @generated
+     */
+    EClass MANDATORY_MODEL = eINSTANCE.getMandatoryModel();
+
+    /**
+     * The meta object literal for the '<em><b>Visibility</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MANDATORY_MODEL__VISIBILITY = eINSTANCE.getMandatoryModel_Visibility();
+
+    /**
+     * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MANDATORY_MODEL__STATIC = eINSTANCE.getMandatoryModel_Static();
+
+    /**
+     * The meta object literal for the '<em><b>Synchronized</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MANDATORY_MODEL__SYNCHRONIZED = eINSTANCE.getMandatoryModel_Synchronized();
+
+    /**
+     * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MANDATORY_MODEL__ABSTRACT = eINSTANCE.getMandatoryModel_Abstract();
+
+    /**
+     * The meta object literal for the '<em><b>Final</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MANDATORY_MODEL__FINAL = eINSTANCE.getMandatoryModel_Final();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute MANDATORY_MODEL__NAME = eINSTANCE.getMandatoryModel_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.LoopedModelImpl <em>Looped Model</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.LoopedModelImpl
+     * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.UnorderedGroupsTestPackageImpl#getLoopedModel()
+     * @generated
+     */
+    EClass LOOPED_MODEL = eINSTANCE.getLoopedModel();
+
+    /**
+     * The meta object literal for the '<em><b>Visibility</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOPED_MODEL__VISIBILITY = eINSTANCE.getLoopedModel_Visibility();
+
+    /**
+     * The meta object literal for the '<em><b>Static</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOPED_MODEL__STATIC = eINSTANCE.getLoopedModel_Static();
+
+    /**
+     * The meta object literal for the '<em><b>Synchronized</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOPED_MODEL__SYNCHRONIZED = eINSTANCE.getLoopedModel_Synchronized();
+
+    /**
+     * The meta object literal for the '<em><b>Abstract</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOPED_MODEL__ABSTRACT = eINSTANCE.getLoopedModel_Abstract();
+
+    /**
+     * The meta object literal for the '<em><b>Final</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOPED_MODEL__FINAL = eINSTANCE.getLoopedModel_Final();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOPED_MODEL__NAME = eINSTANCE.getLoopedModel_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.GroupLoopedModelImpl <em>Group Looped Model</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.GroupLoopedModelImpl
+     * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.UnorderedGroupsTestPackageImpl#getGroupLoopedModel()
+     * @generated
+     */
+    EClass GROUP_LOOPED_MODEL = eINSTANCE.getGroupLoopedModel();
+
+    /**
+     * The meta object literal for the '<em><b>Visibility</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute GROUP_LOOPED_MODEL__VISIBILITY = eINSTANCE.getGroupLoopedModel_Visibility();
+
+    /**
+     * The meta object literal for the '<em><b>Static</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute GROUP_LOOPED_MODEL__STATIC = eINSTANCE.getGroupLoopedModel_Static();
+
+    /**
+     * The meta object literal for the '<em><b>Synchronized</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute GROUP_LOOPED_MODEL__SYNCHRONIZED = eINSTANCE.getGroupLoopedModel_Synchronized();
+
+    /**
+     * The meta object literal for the '<em><b>Abstract</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute GROUP_LOOPED_MODEL__ABSTRACT = eINSTANCE.getGroupLoopedModel_Abstract();
+
+    /**
+     * The meta object literal for the '<em><b>Final</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute GROUP_LOOPED_MODEL__FINAL = eINSTANCE.getGroupLoopedModel_Final();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute GROUP_LOOPED_MODEL__NAME = eINSTANCE.getGroupLoopedModel_Name();
 
   }
 

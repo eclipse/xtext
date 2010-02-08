@@ -66,7 +66,7 @@ entryRuleModel
 ;
 
 // Rule Model
-ruleModel 
+ruleModel
     @init {
 		int stackSize = keepStackSize();
     }
@@ -94,7 +94,7 @@ entryRuleImport
 ;
 
 // Rule Import
-ruleImport 
+ruleImport
     @init {
 		int stackSize = keepStackSize();
     }
@@ -122,7 +122,7 @@ entryRuleMQLquery
 ;
 
 // Rule MQLquery
-ruleMQLquery 
+ruleMQLquery
     @init {
 		int stackSize = keepStackSize();
     }
@@ -150,7 +150,7 @@ entryRuleSelectEntry
 ;
 
 // Rule SelectEntry
-ruleSelectEntry 
+ruleSelectEntry
     @init {
 		int stackSize = keepStackSize();
     }
@@ -178,7 +178,7 @@ entryRuleFromEntry
 ;
 
 // Rule FromEntry
-ruleFromEntry 
+ruleFromEntry
     @init {
 		int stackSize = keepStackSize();
     }
@@ -206,7 +206,7 @@ entryRuleScopeClause
 ;
 
 // Rule ScopeClause
-ruleScopeClause 
+ruleScopeClause
     @init {
 		int stackSize = keepStackSize();
     }
@@ -234,7 +234,7 @@ entryRuleScope
 ;
 
 // Rule Scope
-ruleScope 
+ruleScope
     @init {
 		int stackSize = keepStackSize();
     }
@@ -262,7 +262,7 @@ entryRuleResourceScope
 ;
 
 // Rule ResourceScope
-ruleResourceScope 
+ruleResourceScope
     @init {
 		int stackSize = keepStackSize();
     }
@@ -290,7 +290,7 @@ entryRuleElementScope
 ;
 
 // Rule ElementScope
-ruleElementScope 
+ruleElementScope
     @init {
 		int stackSize = keepStackSize();
     }
@@ -318,7 +318,7 @@ entryRuleWhereEntry
 ;
 
 // Rule WhereEntry
-ruleWhereEntry 
+ruleWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
@@ -346,7 +346,7 @@ entryRuleAndWhereEntry
 ;
 
 // Rule AndWhereEntry
-ruleAndWhereEntry 
+ruleAndWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
@@ -374,7 +374,7 @@ entryRuleConcreteWhereEntry
 ;
 
 // Rule ConcreteWhereEntry
-ruleConcreteWhereEntry 
+ruleConcreteWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
@@ -402,7 +402,7 @@ entryRuleParWhereEntry
 ;
 
 // Rule ParWhereEntry
-ruleParWhereEntry 
+ruleParWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
@@ -430,7 +430,7 @@ entryRuleAttributeWhereEntry
 ;
 
 // Rule AttributeWhereEntry
-ruleAttributeWhereEntry 
+ruleAttributeWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
@@ -458,7 +458,7 @@ entryRuleNumericAttributeWhereEntry
 ;
 
 // Rule NumericAttributeWhereEntry
-ruleNumericAttributeWhereEntry 
+ruleNumericAttributeWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
@@ -486,7 +486,7 @@ entryRuleDoubleWhereEntry
 ;
 
 // Rule DoubleWhereEntry
-ruleDoubleWhereEntry 
+ruleDoubleWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
@@ -514,7 +514,7 @@ entryRuleLongWhereEntry
 ;
 
 // Rule LongWhereEntry
-ruleLongWhereEntry 
+ruleLongWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
@@ -542,7 +542,7 @@ entryRuleVariableWhereEntry
 ;
 
 // Rule VariableWhereEntry
-ruleVariableWhereEntry 
+ruleVariableWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
@@ -570,7 +570,7 @@ entryRuleStringAttributeWhereEntry
 ;
 
 // Rule StringAttributeWhereEntry
-ruleStringAttributeWhereEntry 
+ruleStringAttributeWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
@@ -598,7 +598,7 @@ entryRuleBooleanAttributeWhereEntry
 ;
 
 // Rule BooleanAttributeWhereEntry
-ruleBooleanAttributeWhereEntry 
+ruleBooleanAttributeWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
@@ -626,7 +626,7 @@ entryRuleNullWhereEntry
 ;
 
 // Rule NullWhereEntry
-ruleNullWhereEntry 
+ruleNullWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
@@ -654,7 +654,7 @@ entryRuleReferenceAliasWhereEntry
 ;
 
 // Rule ReferenceAliasWhereEntry
-ruleReferenceAliasWhereEntry 
+ruleReferenceAliasWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
@@ -682,7 +682,7 @@ entryRuleSubselectWhereEntry
 ;
 
 // Rule SubselectWhereEntry
-ruleSubselectWhereEntry 
+ruleSubselectWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }
@@ -710,7 +710,7 @@ entryRuleAliasWhereEntry
 ;
 
 // Rule AliasWhereEntry
-ruleAliasWhereEntry 
+ruleAliasWhereEntry
     @init {
 		int stackSize = keepStackSize();
     }

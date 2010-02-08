@@ -25,6 +25,7 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TerminalRule;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.LookAheadTerminal;
@@ -35,6 +36,8 @@ import org.eclipse.xtext.ui.editor.contentassist.antlr.ObservableXtextTokenStrea
 import com.google.common.collect.Iterators;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -59,6 +62,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	private boolean marked = false;
 	private int currentMarker;
 	private int firstMarker;
+	private Multimap<Integer, AbstractElement> indexToHandledElements;
 
 	public AbstractInternalContentAssistParser(TokenStream input) {
 		super(input);
@@ -77,6 +81,17 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		if (grammarElement != foundGrammarElement)
 			throw new IllegalStateException("expected element: '" + grammarElement + "', but was: '"
 					+ foundGrammarElement + "'");
+		if (grammarElement instanceof UnorderedGroup && indexToHandledElements != null) {
+			indexToHandledElements.removeAll(grammarElements.size());
+		} else if (!grammarElements.isEmpty()) {
+			int index = grammarElements.size() - 1;
+			if (grammarElements.get(index) instanceof UnorderedGroup) {
+				if (indexToHandledElements == null) {
+					indexToHandledElements = Multimaps.newHashMultimap();
+				}
+				indexToHandledElements.put(index, (AbstractElement) grammarElement);
+			}
+		}
 	}
 
 	@Override
@@ -276,6 +291,10 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		result.setGrammarElement(current);
 		result.setTrace(Lists.newArrayList(Iterators.filter(grammarElements.iterator(), AbstractElement.class)));
 		result.setLocalTrace(Lists.newArrayList(Iterators.filter(localTrace.iterator(), AbstractElement.class)));
+		if (current instanceof UnorderedGroup && indexToHandledElements != null) {
+			int index = grammarElements.lastIndexOf(current);
+			result.setHandledUnorderedGroupElements(Lists.newArrayList(Iterators.filter(indexToHandledElements.get(index).iterator(), AbstractElement.class)));
+		}
 		return result;
 	}
 

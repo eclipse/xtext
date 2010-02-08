@@ -66,7 +66,7 @@ entryRuleMainModel
 ;
 
 // Rule MainModel
-ruleMainModel 
+ruleMainModel
     @init {
 		int stackSize = keepStackSize();
     }
@@ -94,7 +94,7 @@ entryRuleAnElement
 ;
 
 // Rule AnElement
-ruleAnElement 
+ruleAnElement
     @init {
 		int stackSize = keepStackSize();
     }

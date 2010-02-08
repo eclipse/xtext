@@ -66,7 +66,7 @@ entryRuleFile
 ;
 
 // Rule File
-ruleFile 
+ruleFile
     @init {
 		int stackSize = keepStackSize();
     }
@@ -94,7 +94,7 @@ entryRuleExpression
 ;
 
 // Rule Expression
-ruleExpression 
+ruleExpression
     @init {
 		int stackSize = keepStackSize();
     }
@@ -122,7 +122,7 @@ entryRuleSExpression
 ;
 
 // Rule SExpression
-ruleSExpression 
+ruleSExpression
     @init {
 		int stackSize = keepStackSize();
     }
@@ -150,7 +150,7 @@ entryRuleAtom
 ;
 
 // Rule Atom
-ruleAtom 
+ruleAtom
     @init {
 		int stackSize = keepStackSize();
     }
@@ -178,7 +178,7 @@ entryRuleVALUE
 ;
 
 // Rule VALUE
-ruleVALUE 
+ruleVALUE
     @init {
 		int stackSize = keepStackSize();
     }

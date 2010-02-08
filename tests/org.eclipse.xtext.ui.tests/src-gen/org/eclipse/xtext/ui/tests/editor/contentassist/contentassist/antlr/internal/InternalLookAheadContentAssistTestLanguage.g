@@ -66,7 +66,7 @@ entryRuleModel
 ;
 
 // Rule Model
-ruleModel 
+ruleModel
     @init {
 		int stackSize = keepStackSize();
     }
@@ -94,7 +94,7 @@ entryRuleAttribute
 ;
 
 // Rule Attribute
-ruleAttribute 
+ruleAttribute
     @init {
 		int stackSize = keepStackSize();
     }
@@ -122,7 +122,7 @@ entryRulePair
 ;
 
 // Rule Pair
-rulePair 
+rulePair
     @init {
 		int stackSize = keepStackSize();
     }

@@ -11,12 +11,15 @@ import java.util.List;
 import java.util.ArrayList;
 
 public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
+    public static final int T21=21;
     public static final int RULE_ML_COMMENT=7;
     public static final int T14=14;
     public static final int RULE_ID=4;
+    public static final int T22=22;
     public static final int T11=11;
     public static final int RULE_STRING=6;
     public static final int T12=12;
+    public static final int T23=23;
     public static final int T13=13;
     public static final int T20=20;
     public static final int T18=18;
@@ -25,10 +28,11 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
     public static final int RULE_INT=5;
     public static final int EOF=-1;
     public static final int T17=17;
-    public static final int Tokens=21;
+    public static final int Tokens=25;
     public static final int RULE_ANY_OTHER=10;
     public static final int T16=16;
     public static final int RULE_SL_COMMENT=8;
+    public static final int T24=24;
     public static final int T19=19;
     public InternalUnorderedGroupsTestLanguageLexer() {;} 
     public InternalUnorderedGroupsTestLanguageLexer(CharStream input) {
@@ -97,11 +101,10 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
     public final void mT14() throws RecognitionException {
         try {
             int _type = T14;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:13:5: ( 'class' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:13:7: 'class'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:13:5: ( '1' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:13:7: '1'
             {
-            match("class"); 
-
+            match('1'); 
 
             }
 
@@ -116,10 +119,10 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
     public final void mT15() throws RecognitionException {
         try {
             int _type = T15;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:14:5: ( '{' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:14:7: '{'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:14:5: ( '2' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:14:7: '2'
             {
-            match('{'); 
+            match('2'); 
 
             }
 
@@ -134,10 +137,10 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
     public final void mT16() throws RecognitionException {
         try {
             int _type = T16;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:15:5: ( '}' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:15:7: '}'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:15:5: ( '3' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:15:7: '3'
             {
-            match('}'); 
+            match('3'); 
 
             }
 
@@ -152,11 +155,10 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
     public final void mT17() throws RecognitionException {
         try {
             int _type = T17;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:16:5: ( 'static' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:16:7: 'static'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:16:5: ( '4' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:16:7: '4'
             {
-            match("static"); 
-
+            match('4'); 
 
             }
 
@@ -171,10 +173,10 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
     public final void mT18() throws RecognitionException {
         try {
             int _type = T18;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:17:5: ( 'synchronized' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:17:7: 'synchronized'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:17:5: ( 'class' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:17:7: 'class'
             {
-            match("synchronized"); 
+            match("class"); 
 
 
             }
@@ -190,11 +192,10 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
     public final void mT19() throws RecognitionException {
         try {
             int _type = T19;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:18:5: ( 'abstract' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:18:7: 'abstract'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:18:5: ( '{' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:18:7: '{'
             {
-            match("abstract"); 
-
+            match('{'); 
 
             }
 
@@ -209,8 +210,83 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
     public final void mT20() throws RecognitionException {
         try {
             int _type = T20;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:19:5: ( 'final' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:19:7: 'final'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:19:5: ( '}' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:19:7: '}'
+            {
+            match('}'); 
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T20
+
+    // $ANTLR start T21
+    public final void mT21() throws RecognitionException {
+        try {
+            int _type = T21;
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:20:5: ( 'static' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:20:7: 'static'
+            {
+            match("static"); 
+
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T21
+
+    // $ANTLR start T22
+    public final void mT22() throws RecognitionException {
+        try {
+            int _type = T22;
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:21:5: ( 'synchronized' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:21:7: 'synchronized'
+            {
+            match("synchronized"); 
+
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T22
+
+    // $ANTLR start T23
+    public final void mT23() throws RecognitionException {
+        try {
+            int _type = T23;
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:22:5: ( 'abstract' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:22:7: 'abstract'
+            {
+            match("abstract"); 
+
+
+            }
+
+            this.type = _type;
+        }
+        finally {
+        }
+    }
+    // $ANTLR end T23
+
+    // $ANTLR start T24
+    public final void mT24() throws RecognitionException {
+        try {
+            int _type = T24;
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:23:5: ( 'final' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:23:7: 'final'
             {
             match("final"); 
 
@@ -222,16 +298,16 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
         finally {
         }
     }
-    // $ANTLR end T20
+    // $ANTLR end T24
 
     // $ANTLR start RULE_ID
     public final void mRULE_ID() throws RecognitionException {
         try {
             int _type = RULE_ID;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:434:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:434:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1934:9: ( ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1934:11: ( '^' )? ( 'a' .. 'z' | 'A' .. 'Z' | '_' ) ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:434:11: ( '^' )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1934:11: ( '^' )?
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -240,7 +316,7 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:434:11: '^'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1934:11: '^'
                     {
                     match('^'); 
 
@@ -259,7 +335,7 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
                 recover(mse);    throw mse;
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:434:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1934:40: ( 'a' .. 'z' | 'A' .. 'Z' | '_' | '0' .. '9' )*
             loop2:
             do {
                 int alt2=2;
@@ -307,10 +383,10 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
     public final void mRULE_INT() throws RecognitionException {
         try {
             int _type = RULE_INT;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:436:10: ( ( '0' .. '9' )+ )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:436:12: ( '0' .. '9' )+
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1936:10: ( ( '0' .. '9' )+ )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1936:12: ( '0' .. '9' )+
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:436:12: ( '0' .. '9' )+
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1936:12: ( '0' .. '9' )+
             int cnt3=0;
             loop3:
             do {
@@ -324,7 +400,7 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:436:13: '0' .. '9'
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1936:13: '0' .. '9'
             	    {
             	    matchRange('0','9'); 
 
@@ -354,10 +430,10 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
     public final void mRULE_STRING() throws RecognitionException {
         try {
             int _type = RULE_STRING;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:438:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:438:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1938:13: ( ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1938:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:438:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1938:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -369,16 +445,16 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("438:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )", 6, 0, input);
+                    new NoViableAltException("1938:15: ( '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"' | '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\'' )", 6, 0, input);
 
                 throw nvae;
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:438:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1938:16: '\"' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )* '\"'
                     {
                     match('\"'); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:438:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1938:20: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\"' ) ) )*
                     loop4:
                     do {
                         int alt4=3;
@@ -394,7 +470,7 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
 
                         switch (alt4) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:438:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1938:21: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -411,7 +487,7 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:438:62: ~ ( ( '\\\\' | '\"' ) )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1938:62: ~ ( ( '\\\\' | '\"' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='!')||(input.LA(1)>='#' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -437,10 +513,10 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:438:82: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1938:82: '\\'' ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )* '\\''
                     {
                     match('\''); 
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:438:87: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1938:87: ( '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' ) | ~ ( ( '\\\\' | '\\'' ) ) )*
                     loop5:
                     do {
                         int alt5=3;
@@ -456,7 +532,7 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:438:88: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1938:88: '\\\\' ( 'b' | 't' | 'n' | 'f' | 'r' | '\"' | '\\'' | '\\\\' )
                     	    {
                     	    match('\\'); 
                     	    if ( input.LA(1)=='\"'||input.LA(1)=='\''||input.LA(1)=='\\'||input.LA(1)=='b'||input.LA(1)=='f'||input.LA(1)=='n'||input.LA(1)=='r'||input.LA(1)=='t' ) {
@@ -473,7 +549,7 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:438:129: ~ ( ( '\\\\' | '\\'' ) )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1938:129: ~ ( ( '\\\\' | '\\'' ) )
                     	    {
                     	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='&')||(input.LA(1)>='(' && input.LA(1)<='[')||(input.LA(1)>=']' && input.LA(1)<='\uFFFE') ) {
                     	        input.consume();
@@ -515,12 +591,12 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
     public final void mRULE_ML_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_ML_COMMENT;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:440:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:440:19: '/*' ( options {greedy=false; } : . )* '*/'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1940:17: ( '/*' ( options {greedy=false; } : . )* '*/' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1940:19: '/*' ( options {greedy=false; } : . )* '*/'
             {
             match("/*"); 
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:440:24: ( options {greedy=false; } : . )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1940:24: ( options {greedy=false; } : . )*
             loop7:
             do {
                 int alt7=2;
@@ -545,7 +621,7 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:440:52: .
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1940:52: .
             	    {
             	    matchAny(); 
 
@@ -573,12 +649,12 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
     public final void mRULE_SL_COMMENT() throws RecognitionException {
         try {
             int _type = RULE_SL_COMMENT;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:442:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:442:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1942:17: ( '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )? )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1942:19: '//' (~ ( ( '\\n' | '\\r' ) ) )* ( ( '\\r' )? '\\n' )?
             {
             match("//"); 
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:442:24: (~ ( ( '\\n' | '\\r' ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1942:24: (~ ( ( '\\n' | '\\r' ) ) )*
             loop8:
             do {
                 int alt8=2;
@@ -591,7 +667,7 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:442:24: ~ ( ( '\\n' | '\\r' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1942:24: ~ ( ( '\\n' | '\\r' ) )
             	    {
             	    if ( (input.LA(1)>='\u0000' && input.LA(1)<='\t')||(input.LA(1)>='\u000B' && input.LA(1)<='\f')||(input.LA(1)>='\u000E' && input.LA(1)<='\uFFFE') ) {
             	        input.consume();
@@ -612,7 +688,7 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:442:40: ( ( '\\r' )? '\\n' )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1942:40: ( ( '\\r' )? '\\n' )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -621,9 +697,9 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:442:41: ( '\\r' )? '\\n'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1942:41: ( '\\r' )? '\\n'
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:442:41: ( '\\r' )?
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1942:41: ( '\\r' )?
                     int alt9=2;
                     int LA9_0 = input.LA(1);
 
@@ -632,7 +708,7 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
                     }
                     switch (alt9) {
                         case 1 :
-                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:442:41: '\\r'
+                            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1942:41: '\\r'
                             {
                             match('\r'); 
 
@@ -662,10 +738,10 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
     public final void mRULE_WS() throws RecognitionException {
         try {
             int _type = RULE_WS;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:444:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:444:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1944:9: ( ( ' ' | '\\t' | '\\r' | '\\n' )+ )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1944:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:444:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1944:11: ( ' ' | '\\t' | '\\r' | '\\n' )+
             int cnt11=0;
             loop11:
             do {
@@ -718,8 +794,8 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
     public final void mRULE_ANY_OTHER() throws RecognitionException {
         try {
             int _type = RULE_ANY_OTHER;
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:446:16: ( . )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:446:18: .
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1946:16: ( . )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1946:18: .
             {
             matchAny(); 
 
@@ -733,57 +809,69 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
     // $ANTLR end RULE_ANY_OTHER
 
     public void mTokens() throws RecognitionException {
-        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1:8: ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
-        int alt12=17;
+        // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1:8: ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER )
+        int alt12=21;
         int LA12_0 = input.LA(1);
 
         if ( (LA12_0=='p') ) {
             alt12 = mTokensHelper001();
         }
-        else if ( (LA12_0=='c') ) {
+        else if ( (LA12_0=='1') ) {
             alt12 = mTokensHelper002();
         }
-        else if ( (LA12_0=='{') ) {
+        else if ( (LA12_0=='2') ) {
             alt12 = mTokensHelper003();
         }
-        else if ( (LA12_0=='}') ) {
+        else if ( (LA12_0=='3') ) {
             alt12 = mTokensHelper004();
         }
-        else if ( (LA12_0=='s') ) {
+        else if ( (LA12_0=='4') ) {
             alt12 = mTokensHelper005();
         }
-        else if ( (LA12_0=='a') ) {
+        else if ( (LA12_0=='c') ) {
             alt12 = mTokensHelper006();
         }
-        else if ( (LA12_0=='f') ) {
+        else if ( (LA12_0=='{') ) {
             alt12 = mTokensHelper007();
         }
-        else if ( (LA12_0=='^') ) {
+        else if ( (LA12_0=='}') ) {
             alt12 = mTokensHelper008();
         }
-        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||LA12_0=='b'||(LA12_0>='d' && LA12_0<='e')||(LA12_0>='g' && LA12_0<='o')||(LA12_0>='q' && LA12_0<='r')||(LA12_0>='t' && LA12_0<='z')) ) {
+        else if ( (LA12_0=='s') ) {
             alt12 = mTokensHelper009();
         }
-        else if ( ((LA12_0>='0' && LA12_0<='9')) ) {
+        else if ( (LA12_0=='a') ) {
             alt12 = mTokensHelper010();
         }
-        else if ( (LA12_0=='\"') ) {
+        else if ( (LA12_0=='f') ) {
             alt12 = mTokensHelper011();
         }
-        else if ( (LA12_0=='\'') ) {
+        else if ( (LA12_0=='^') ) {
             alt12 = mTokensHelper012();
         }
-        else if ( (LA12_0=='/') ) {
+        else if ( ((LA12_0>='A' && LA12_0<='Z')||LA12_0=='_'||LA12_0=='b'||(LA12_0>='d' && LA12_0<='e')||(LA12_0>='g' && LA12_0<='o')||(LA12_0>='q' && LA12_0<='r')||(LA12_0>='t' && LA12_0<='z')) ) {
             alt12 = mTokensHelper013();
         }
-        else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {
+        else if ( (LA12_0=='0'||(LA12_0>='5' && LA12_0<='9')) ) {
             alt12 = mTokensHelper014();
         }
-        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='.')||(LA12_0>=':' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFE')) ) {
+        else if ( (LA12_0=='\"') ) {
             alt12 = mTokensHelper015();
         }
-        else {
+        else if ( (LA12_0=='\'') ) {
             alt12 = mTokensHelper016();
+        }
+        else if ( (LA12_0=='/') ) {
+            alt12 = mTokensHelper017();
+        }
+        else if ( ((LA12_0>='\t' && LA12_0<='\n')||LA12_0=='\r'||LA12_0==' ') ) {
+            alt12 = mTokensHelper018();
+        }
+        else if ( ((LA12_0>='\u0000' && LA12_0<='\b')||(LA12_0>='\u000B' && LA12_0<='\f')||(LA12_0>='\u000E' && LA12_0<='\u001F')||LA12_0=='!'||(LA12_0>='#' && LA12_0<='&')||(LA12_0>='(' && LA12_0<='.')||(LA12_0>=':' && LA12_0<='@')||(LA12_0>='[' && LA12_0<=']')||LA12_0=='`'||LA12_0=='|'||(LA12_0>='~' && LA12_0<='\uFFFE')) ) {
+            alt12 = mTokensHelper019();
+        }
+        else {
+            alt12 = mTokensHelper020();
         }
         switch (alt12) {
             case 1 :
@@ -857,49 +945,77 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
                 }
                 break;
             case 11 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1:50: RULE_ID
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1:50: T21
+                {
+                mT21(); 
+
+                }
+                break;
+            case 12 :
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1:54: T22
+                {
+                mT22(); 
+
+                }
+                break;
+            case 13 :
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1:58: T23
+                {
+                mT23(); 
+
+                }
+                break;
+            case 14 :
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1:62: T24
+                {
+                mT24(); 
+
+                }
+                break;
+            case 15 :
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1:66: RULE_ID
                 {
                 mRULE_ID(); 
 
                 }
                 break;
-            case 12 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1:58: RULE_INT
+            case 16 :
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1:74: RULE_INT
                 {
                 mRULE_INT(); 
 
                 }
                 break;
-            case 13 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1:67: RULE_STRING
+            case 17 :
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1:83: RULE_STRING
                 {
                 mRULE_STRING(); 
 
                 }
                 break;
-            case 14 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1:79: RULE_ML_COMMENT
+            case 18 :
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1:95: RULE_ML_COMMENT
                 {
                 mRULE_ML_COMMENT(); 
 
                 }
                 break;
-            case 15 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1:95: RULE_SL_COMMENT
+            case 19 :
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1:111: RULE_SL_COMMENT
                 {
                 mRULE_SL_COMMENT(); 
 
                 }
                 break;
-            case 16 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1:111: RULE_WS
+            case 20 :
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1:127: RULE_WS
                 {
                 mRULE_WS(); 
 
                 }
                 break;
-            case 17 :
-                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1:119: RULE_ANY_OTHER
+            case 21 :
+                // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/contentassist/antlr/internal/InternalUnorderedGroupsTestLanguage.g:1:135: RULE_ANY_OTHER
                 {
                 mRULE_ANY_OTHER(); 
 
@@ -916,417 +1032,418 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
             switch ( input.LA(3) ) {
             case 'o':
                 {
-                int LA12_31 = input.LA(4);
+                int LA12_39 = input.LA(4);
 
-                if ( (LA12_31=='t') ) {
-                    int LA12_39 = input.LA(5);
+                if ( (LA12_39=='t') ) {
+                    int LA12_47 = input.LA(5);
 
-                    if ( (LA12_39=='e') ) {
-                        int LA12_47 = input.LA(6);
+                    if ( (LA12_47=='e') ) {
+                        int LA12_55 = input.LA(6);
 
-                        if ( (LA12_47=='c') ) {
-                            int LA12_55 = input.LA(7);
+                        if ( (LA12_55=='c') ) {
+                            int LA12_63 = input.LA(7);
 
-                            if ( (LA12_55=='t') ) {
-                                int LA12_63 = input.LA(8);
+                            if ( (LA12_63=='t') ) {
+                                int LA12_71 = input.LA(8);
 
-                                if ( (LA12_63=='e') ) {
-                                    int LA12_69 = input.LA(9);
+                                if ( (LA12_71=='e') ) {
+                                    int LA12_77 = input.LA(9);
 
-                                    if ( (LA12_69=='d') ) {
-                                        int LA12_73 = input.LA(10);
+                                    if ( (LA12_77=='d') ) {
+                                        int LA12_81 = input.LA(10);
 
-                                        if ( ((LA12_73>='0' && LA12_73<='9')||(LA12_73>='A' && LA12_73<='Z')||LA12_73=='_'||(LA12_73>='a' && LA12_73<='z')) ) {
-                                            return 11;
+                                        if ( ((LA12_81>='0' && LA12_81<='9')||(LA12_81>='A' && LA12_81<='Z')||LA12_81=='_'||(LA12_81>='a' && LA12_81<='z')) ) {
+                                            return 15;
                                         }
                                         else {
                                             return 3;}
                                     }
                                     else {
-                                        return 11;}
+                                        return 15;}
                                 }
                                 else {
-                                    return 11;}
+                                    return 15;}
                             }
                             else {
-                                return 11;}
+                                return 15;}
                         }
                         else {
-                            return 11;}
+                            return 15;}
                     }
                     else {
-                        return 11;}
+                        return 15;}
                 }
                 else {
-                    return 11;}
+                    return 15;}
                 }
             case 'i':
                 {
-                int LA12_32 = input.LA(4);
+                int LA12_40 = input.LA(4);
 
-                if ( (LA12_32=='v') ) {
-                    int LA12_40 = input.LA(5);
+                if ( (LA12_40=='v') ) {
+                    int LA12_48 = input.LA(5);
 
-                    if ( (LA12_40=='a') ) {
-                        int LA12_48 = input.LA(6);
+                    if ( (LA12_48=='a') ) {
+                        int LA12_56 = input.LA(6);
 
-                        if ( (LA12_48=='t') ) {
-                            int LA12_56 = input.LA(7);
+                        if ( (LA12_56=='t') ) {
+                            int LA12_64 = input.LA(7);
 
-                            if ( (LA12_56=='e') ) {
-                                int LA12_64 = input.LA(8);
+                            if ( (LA12_64=='e') ) {
+                                int LA12_72 = input.LA(8);
 
-                                if ( ((LA12_64>='0' && LA12_64<='9')||(LA12_64>='A' && LA12_64<='Z')||LA12_64=='_'||(LA12_64>='a' && LA12_64<='z')) ) {
-                                    return 11;
+                                if ( ((LA12_72>='0' && LA12_72<='9')||(LA12_72>='A' && LA12_72<='Z')||LA12_72=='_'||(LA12_72>='a' && LA12_72<='z')) ) {
+                                    return 15;
                                 }
                                 else {
                                     return 2;}
                             }
                             else {
-                                return 11;}
+                                return 15;}
                         }
                         else {
-                            return 11;}
+                            return 15;}
                     }
                     else {
-                        return 11;}
+                        return 15;}
                 }
                 else {
-                    return 11;}
+                    return 15;}
                 }
             default:
-                return 11;}
+                return 15;}
 
             }
         case 'u':
             {
-            int LA12_17 = input.LA(3);
+            int LA12_21 = input.LA(3);
 
-            if ( (LA12_17=='b') ) {
-                int LA12_33 = input.LA(4);
+            if ( (LA12_21=='b') ) {
+                int LA12_41 = input.LA(4);
 
-                if ( (LA12_33=='l') ) {
-                    int LA12_41 = input.LA(5);
+                if ( (LA12_41=='l') ) {
+                    int LA12_49 = input.LA(5);
 
-                    if ( (LA12_41=='i') ) {
-                        int LA12_49 = input.LA(6);
+                    if ( (LA12_49=='i') ) {
+                        int LA12_57 = input.LA(6);
 
-                        if ( (LA12_49=='c') ) {
-                            int LA12_57 = input.LA(7);
+                        if ( (LA12_57=='c') ) {
+                            int LA12_65 = input.LA(7);
 
-                            if ( ((LA12_57>='0' && LA12_57<='9')||(LA12_57>='A' && LA12_57<='Z')||LA12_57=='_'||(LA12_57>='a' && LA12_57<='z')) ) {
-                                return 11;
+                            if ( ((LA12_65>='0' && LA12_65<='9')||(LA12_65>='A' && LA12_65<='Z')||LA12_65=='_'||(LA12_65>='a' && LA12_65<='z')) ) {
+                                return 15;
                             }
                             else {
                                 return 1;}
                         }
                         else {
-                            return 11;}
+                            return 15;}
                     }
                     else {
-                        return 11;}
+                        return 15;}
                 }
                 else {
-                    return 11;}
+                    return 15;}
             }
             else {
-                return 11;}
+                return 15;}
             }
         default:
-            return 11;}
+            return 15;}
 
     }
 
     private int mTokensHelper002() throws RecognitionException {
         int LA12_2 = input.LA(2);
 
-        if ( (LA12_2=='l') ) {
-            int LA12_19 = input.LA(3);
-
-            if ( (LA12_19=='a') ) {
-                int LA12_34 = input.LA(4);
-
-                if ( (LA12_34=='s') ) {
-                    int LA12_42 = input.LA(5);
-
-                    if ( (LA12_42=='s') ) {
-                        int LA12_50 = input.LA(6);
-
-                        if ( ((LA12_50>='0' && LA12_50<='9')||(LA12_50>='A' && LA12_50<='Z')||LA12_50=='_'||(LA12_50>='a' && LA12_50<='z')) ) {
-                            return 11;
-                        }
-                        else {
-                            return 4;}
-                    }
-                    else {
-                        return 11;}
-                }
-                else {
-                    return 11;}
-            }
-            else {
-                return 11;}
+        if ( ((LA12_2>='0' && LA12_2<='9')) ) {
+            return 16;
         }
         else {
-            return 11;}
+            return 4;}
     }
 
     private int mTokensHelper003() throws RecognitionException {
-        return 5;
+        int LA12_3 = input.LA(2);
+
+        if ( ((LA12_3>='0' && LA12_3<='9')) ) {
+            return 16;
+        }
+        else {
+            return 5;}
     }
 
     private int mTokensHelper004() throws RecognitionException {
-        return 6;
+        int LA12_4 = input.LA(2);
+
+        if ( ((LA12_4>='0' && LA12_4<='9')) ) {
+            return 16;
+        }
+        else {
+            return 6;}
     }
 
     private int mTokensHelper005() throws RecognitionException {
-        switch ( input.LA(2) ) {
-        case 't':
-            {
-            int LA12_22 = input.LA(3);
+        int LA12_5 = input.LA(2);
 
-            if ( (LA12_22=='a') ) {
-                int LA12_35 = input.LA(4);
-
-                if ( (LA12_35=='t') ) {
-                    int LA12_43 = input.LA(5);
-
-                    if ( (LA12_43=='i') ) {
-                        int LA12_51 = input.LA(6);
-
-                        if ( (LA12_51=='c') ) {
-                            int LA12_59 = input.LA(7);
-
-                            if ( ((LA12_59>='0' && LA12_59<='9')||(LA12_59>='A' && LA12_59<='Z')||LA12_59=='_'||(LA12_59>='a' && LA12_59<='z')) ) {
-                                return 11;
-                            }
-                            else {
-                                return 7;}
-                        }
-                        else {
-                            return 11;}
-                    }
-                    else {
-                        return 11;}
-                }
-                else {
-                    return 11;}
-            }
-            else {
-                return 11;}
-            }
-        case 'y':
-            {
-            int LA12_23 = input.LA(3);
-
-            if ( (LA12_23=='n') ) {
-                int LA12_36 = input.LA(4);
-
-                if ( (LA12_36=='c') ) {
-                    int LA12_44 = input.LA(5);
-
-                    if ( (LA12_44=='h') ) {
-                        int LA12_52 = input.LA(6);
-
-                        if ( (LA12_52=='r') ) {
-                            int LA12_60 = input.LA(7);
-
-                            if ( (LA12_60=='o') ) {
-                                int LA12_67 = input.LA(8);
-
-                                if ( (LA12_67=='n') ) {
-                                    int LA12_71 = input.LA(9);
-
-                                    if ( (LA12_71=='i') ) {
-                                        int LA12_74 = input.LA(10);
-
-                                        if ( (LA12_74=='z') ) {
-                                            int LA12_77 = input.LA(11);
-
-                                            if ( (LA12_77=='e') ) {
-                                                int LA12_78 = input.LA(12);
-
-                                                if ( (LA12_78=='d') ) {
-                                                    int LA12_79 = input.LA(13);
-
-                                                    if ( ((LA12_79>='0' && LA12_79<='9')||(LA12_79>='A' && LA12_79<='Z')||LA12_79=='_'||(LA12_79>='a' && LA12_79<='z')) ) {
-                                                        return 11;
-                                                    }
-                                                    else {
-                                                        return 8;}
-                                                }
-                                                else {
-                                                    return 11;}
-                                            }
-                                            else {
-                                                return 11;}
-                                        }
-                                        else {
-                                            return 11;}
-                                    }
-                                    else {
-                                        return 11;}
-                                }
-                                else {
-                                    return 11;}
-                            }
-                            else {
-                                return 11;}
-                        }
-                        else {
-                            return 11;}
-                    }
-                    else {
-                        return 11;}
-                }
-                else {
-                    return 11;}
-            }
-            else {
-                return 11;}
-            }
-        default:
-            return 11;}
-
+        if ( ((LA12_5>='0' && LA12_5<='9')) ) {
+            return 16;
+        }
+        else {
+            return 7;}
     }
 
     private int mTokensHelper006() throws RecognitionException {
         int LA12_6 = input.LA(2);
 
-        if ( (LA12_6=='b') ) {
-            int LA12_24 = input.LA(3);
+        if ( (LA12_6=='l') ) {
+            int LA12_28 = input.LA(3);
 
-            if ( (LA12_24=='s') ) {
-                int LA12_37 = input.LA(4);
+            if ( (LA12_28=='a') ) {
+                int LA12_42 = input.LA(4);
 
-                if ( (LA12_37=='t') ) {
-                    int LA12_45 = input.LA(5);
+                if ( (LA12_42=='s') ) {
+                    int LA12_50 = input.LA(5);
 
-                    if ( (LA12_45=='r') ) {
-                        int LA12_53 = input.LA(6);
+                    if ( (LA12_50=='s') ) {
+                        int LA12_58 = input.LA(6);
 
-                        if ( (LA12_53=='a') ) {
-                            int LA12_61 = input.LA(7);
+                        if ( ((LA12_58>='0' && LA12_58<='9')||(LA12_58>='A' && LA12_58<='Z')||LA12_58=='_'||(LA12_58>='a' && LA12_58<='z')) ) {
+                            return 15;
+                        }
+                        else {
+                            return 8;}
+                    }
+                    else {
+                        return 15;}
+                }
+                else {
+                    return 15;}
+            }
+            else {
+                return 15;}
+        }
+        else {
+            return 15;}
+    }
 
-                            if ( (LA12_61=='c') ) {
-                                int LA12_68 = input.LA(8);
+    private int mTokensHelper007() throws RecognitionException {
+        return 9;
+    }
 
-                                if ( (LA12_68=='t') ) {
-                                    int LA12_72 = input.LA(9);
+    private int mTokensHelper008() throws RecognitionException {
+        return 10;
+    }
 
-                                    if ( ((LA12_72>='0' && LA12_72<='9')||(LA12_72>='A' && LA12_72<='Z')||LA12_72=='_'||(LA12_72>='a' && LA12_72<='z')) ) {
-                                        return 11;
-                                    }
-                                    else {
-                                        return 9;}
-                                }
-                                else {
-                                    return 11;}
+    private int mTokensHelper009() throws RecognitionException {
+        switch ( input.LA(2) ) {
+        case 't':
+            {
+            int LA12_31 = input.LA(3);
+
+            if ( (LA12_31=='a') ) {
+                int LA12_43 = input.LA(4);
+
+                if ( (LA12_43=='t') ) {
+                    int LA12_51 = input.LA(5);
+
+                    if ( (LA12_51=='i') ) {
+                        int LA12_59 = input.LA(6);
+
+                        if ( (LA12_59=='c') ) {
+                            int LA12_67 = input.LA(7);
+
+                            if ( ((LA12_67>='0' && LA12_67<='9')||(LA12_67>='A' && LA12_67<='Z')||LA12_67=='_'||(LA12_67>='a' && LA12_67<='z')) ) {
+                                return 15;
                             }
                             else {
                                 return 11;}
                         }
                         else {
-                            return 11;}
+                            return 15;}
                     }
                     else {
-                        return 11;}
+                        return 15;}
                 }
                 else {
-                    return 11;}
+                    return 15;}
             }
             else {
-                return 11;}
-        }
-        else {
-            return 11;}
-    }
+                return 15;}
+            }
+        case 'y':
+            {
+            int LA12_32 = input.LA(3);
 
-    private int mTokensHelper007() throws RecognitionException {
-        int LA12_7 = input.LA(2);
+            if ( (LA12_32=='n') ) {
+                int LA12_44 = input.LA(4);
 
-        if ( (LA12_7=='i') ) {
-            int LA12_25 = input.LA(3);
+                if ( (LA12_44=='c') ) {
+                    int LA12_52 = input.LA(5);
 
-            if ( (LA12_25=='n') ) {
-                int LA12_38 = input.LA(4);
+                    if ( (LA12_52=='h') ) {
+                        int LA12_60 = input.LA(6);
 
-                if ( (LA12_38=='a') ) {
-                    int LA12_46 = input.LA(5);
+                        if ( (LA12_60=='r') ) {
+                            int LA12_68 = input.LA(7);
 
-                    if ( (LA12_46=='l') ) {
-                        int LA12_54 = input.LA(6);
+                            if ( (LA12_68=='o') ) {
+                                int LA12_75 = input.LA(8);
 
-                        if ( ((LA12_54>='0' && LA12_54<='9')||(LA12_54>='A' && LA12_54<='Z')||LA12_54=='_'||(LA12_54>='a' && LA12_54<='z')) ) {
-                            return 11;
+                                if ( (LA12_75=='n') ) {
+                                    int LA12_79 = input.LA(9);
+
+                                    if ( (LA12_79=='i') ) {
+                                        int LA12_82 = input.LA(10);
+
+                                        if ( (LA12_82=='z') ) {
+                                            int LA12_85 = input.LA(11);
+
+                                            if ( (LA12_85=='e') ) {
+                                                int LA12_86 = input.LA(12);
+
+                                                if ( (LA12_86=='d') ) {
+                                                    int LA12_87 = input.LA(13);
+
+                                                    if ( ((LA12_87>='0' && LA12_87<='9')||(LA12_87>='A' && LA12_87<='Z')||LA12_87=='_'||(LA12_87>='a' && LA12_87<='z')) ) {
+                                                        return 15;
+                                                    }
+                                                    else {
+                                                        return 12;}
+                                                }
+                                                else {
+                                                    return 15;}
+                                            }
+                                            else {
+                                                return 15;}
+                                        }
+                                        else {
+                                            return 15;}
+                                    }
+                                    else {
+                                        return 15;}
+                                }
+                                else {
+                                    return 15;}
+                            }
+                            else {
+                                return 15;}
                         }
                         else {
-                            return 10;}
+                            return 15;}
                     }
                     else {
-                        return 11;}
+                        return 15;}
                 }
                 else {
-                    return 11;}
+                    return 15;}
             }
             else {
-                return 11;}
-        }
-        else {
-            return 11;}
-    }
+                return 15;}
+            }
+        default:
+            return 15;}
 
-    private int mTokensHelper008() throws RecognitionException {
-        int LA12_8 = input.LA(2);
-
-        if ( ((LA12_8>='A' && LA12_8<='Z')||LA12_8=='_'||(LA12_8>='a' && LA12_8<='z')) ) {
-            return 11;
-        }
-        else {
-            return 17;}
-    }
-
-    private int mTokensHelper009() throws RecognitionException {
-        return 11;
     }
 
     private int mTokensHelper010() throws RecognitionException {
-        return 12;
+        int LA12_10 = input.LA(2);
+
+        if ( (LA12_10=='b') ) {
+            int LA12_33 = input.LA(3);
+
+            if ( (LA12_33=='s') ) {
+                int LA12_45 = input.LA(4);
+
+                if ( (LA12_45=='t') ) {
+                    int LA12_53 = input.LA(5);
+
+                    if ( (LA12_53=='r') ) {
+                        int LA12_61 = input.LA(6);
+
+                        if ( (LA12_61=='a') ) {
+                            int LA12_69 = input.LA(7);
+
+                            if ( (LA12_69=='c') ) {
+                                int LA12_76 = input.LA(8);
+
+                                if ( (LA12_76=='t') ) {
+                                    int LA12_80 = input.LA(9);
+
+                                    if ( ((LA12_80>='0' && LA12_80<='9')||(LA12_80>='A' && LA12_80<='Z')||LA12_80=='_'||(LA12_80>='a' && LA12_80<='z')) ) {
+                                        return 15;
+                                    }
+                                    else {
+                                        return 13;}
+                                }
+                                else {
+                                    return 15;}
+                            }
+                            else {
+                                return 15;}
+                        }
+                        else {
+                            return 15;}
+                    }
+                    else {
+                        return 15;}
+                }
+                else {
+                    return 15;}
+            }
+            else {
+                return 15;}
+        }
+        else {
+            return 15;}
     }
 
     private int mTokensHelper011() throws RecognitionException {
         int LA12_11 = input.LA(2);
 
-        if ( ((LA12_11>='\u0000' && LA12_11<='\uFFFE')) ) {
-            return 13;
+        if ( (LA12_11=='i') ) {
+            int LA12_34 = input.LA(3);
+
+            if ( (LA12_34=='n') ) {
+                int LA12_46 = input.LA(4);
+
+                if ( (LA12_46=='a') ) {
+                    int LA12_54 = input.LA(5);
+
+                    if ( (LA12_54=='l') ) {
+                        int LA12_62 = input.LA(6);
+
+                        if ( ((LA12_62>='0' && LA12_62<='9')||(LA12_62>='A' && LA12_62<='Z')||LA12_62=='_'||(LA12_62>='a' && LA12_62<='z')) ) {
+                            return 15;
+                        }
+                        else {
+                            return 14;}
+                    }
+                    else {
+                        return 15;}
+                }
+                else {
+                    return 15;}
+            }
+            else {
+                return 15;}
         }
         else {
-            return 17;}
+            return 15;}
     }
 
     private int mTokensHelper012() throws RecognitionException {
         int LA12_12 = input.LA(2);
 
-        if ( ((LA12_12>='\u0000' && LA12_12<='\uFFFE')) ) {
-            return 13;
+        if ( ((LA12_12>='A' && LA12_12<='Z')||LA12_12=='_'||(LA12_12>='a' && LA12_12<='z')) ) {
+            return 15;
         }
         else {
-            return 17;}
+            return 21;}
     }
 
     private int mTokensHelper013() throws RecognitionException {
-        switch ( input.LA(2) ) {
-        case '*':
-            {
-            return 14;
-            }
-        case '/':
-            {
-            return 15;
-            }
-        default:
-            return 17;}
-
+        return 15;
     }
 
     private int mTokensHelper014() throws RecognitionException {
@@ -1334,12 +1451,51 @@ public class InternalUnorderedGroupsTestLanguageLexer extends Lexer {
     }
 
     private int mTokensHelper015() throws RecognitionException {
-        return 17;
+        int LA12_15 = input.LA(2);
+
+        if ( ((LA12_15>='\u0000' && LA12_15<='\uFFFE')) ) {
+            return 17;
+        }
+        else {
+            return 21;}
     }
 
     private int mTokensHelper016() throws RecognitionException {
+        int LA12_16 = input.LA(2);
+
+        if ( ((LA12_16>='\u0000' && LA12_16<='\uFFFE')) ) {
+            return 17;
+        }
+        else {
+            return 21;}
+    }
+
+    private int mTokensHelper017() throws RecognitionException {
+        switch ( input.LA(2) ) {
+        case '/':
+            {
+            return 19;
+            }
+        case '*':
+            {
+            return 18;
+            }
+        default:
+            return 21;}
+
+    }
+
+    private int mTokensHelper018() throws RecognitionException {
+        return 20;
+    }
+
+    private int mTokensHelper019() throws RecognitionException {
+        return 21;
+    }
+
+    private int mTokensHelper020() throws RecognitionException {
         NoViableAltException nvae =
-            new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
+            new NoViableAltException("1:1: Tokens : ( T11 | T12 | T13 | T14 | T15 | T16 | T17 | T18 | T19 | T20 | T21 | T22 | T23 | T24 | RULE_ID | RULE_INT | RULE_STRING | RULE_ML_COMMENT | RULE_SL_COMMENT | RULE_WS | RULE_ANY_OTHER );", 12, 0, input);
 
         throw nvae;
     }

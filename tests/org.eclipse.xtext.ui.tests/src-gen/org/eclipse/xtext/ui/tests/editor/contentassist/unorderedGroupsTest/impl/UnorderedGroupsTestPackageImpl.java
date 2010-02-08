@@ -8,10 +8,15 @@ package org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.GroupLoopedModel;
+import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedModel;
+import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.MandatoryModel;
 import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model;
+import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.SimpleModel;
 import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.UnorderedGroupsTestFactory;
 import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.UnorderedGroupsTestPackage;
 
@@ -29,6 +34,34 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * @generated
    */
   private EClass modelEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass simpleModelEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass mandatoryModelEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass loopedModelEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass groupLoopedModelEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -108,9 +141,9 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getModel_Visibility()
+  public EReference getModel_First()
   {
-    return (EAttribute)modelEClass.getEStructuralFeatures().get(0);
+    return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -118,9 +151,9 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getModel_Static()
+  public EReference getModel_Second()
   {
-    return (EAttribute)modelEClass.getEStructuralFeatures().get(1);
+    return (EReference)modelEClass.getEStructuralFeatures().get(1);
   }
 
   /**
@@ -128,9 +161,9 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getModel_Synchronized()
+  public EReference getModel_Thrird()
   {
-    return (EAttribute)modelEClass.getEStructuralFeatures().get(2);
+    return (EReference)modelEClass.getEStructuralFeatures().get(2);
   }
 
   /**
@@ -138,9 +171,9 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getModel_Abstract()
+  public EReference getModel_Forth()
   {
-    return (EAttribute)modelEClass.getEStructuralFeatures().get(3);
+    return (EReference)modelEClass.getEStructuralFeatures().get(3);
   }
 
   /**
@@ -148,9 +181,9 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getModel_Final()
+  public EClass getSimpleModel()
   {
-    return (EAttribute)modelEClass.getEStructuralFeatures().get(4);
+    return simpleModelEClass;
   }
 
   /**
@@ -158,9 +191,269 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EAttribute getModel_Name()
+  public EAttribute getSimpleModel_Visibility()
   {
-    return (EAttribute)modelEClass.getEStructuralFeatures().get(5);
+    return (EAttribute)simpleModelEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getSimpleModel_Static()
+  {
+    return (EAttribute)simpleModelEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getSimpleModel_Synchronized()
+  {
+    return (EAttribute)simpleModelEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getSimpleModel_Abstract()
+  {
+    return (EAttribute)simpleModelEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getSimpleModel_Final()
+  {
+    return (EAttribute)simpleModelEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getSimpleModel_Name()
+  {
+    return (EAttribute)simpleModelEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getMandatoryModel()
+  {
+    return mandatoryModelEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getMandatoryModel_Visibility()
+  {
+    return (EAttribute)mandatoryModelEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getMandatoryModel_Static()
+  {
+    return (EAttribute)mandatoryModelEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getMandatoryModel_Synchronized()
+  {
+    return (EAttribute)mandatoryModelEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getMandatoryModel_Abstract()
+  {
+    return (EAttribute)mandatoryModelEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getMandatoryModel_Final()
+  {
+    return (EAttribute)mandatoryModelEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getMandatoryModel_Name()
+  {
+    return (EAttribute)mandatoryModelEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getLoopedModel()
+  {
+    return loopedModelEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLoopedModel_Visibility()
+  {
+    return (EAttribute)loopedModelEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLoopedModel_Static()
+  {
+    return (EAttribute)loopedModelEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLoopedModel_Synchronized()
+  {
+    return (EAttribute)loopedModelEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLoopedModel_Abstract()
+  {
+    return (EAttribute)loopedModelEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLoopedModel_Final()
+  {
+    return (EAttribute)loopedModelEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLoopedModel_Name()
+  {
+    return (EAttribute)loopedModelEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getGroupLoopedModel()
+  {
+    return groupLoopedModelEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getGroupLoopedModel_Visibility()
+  {
+    return (EAttribute)groupLoopedModelEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getGroupLoopedModel_Static()
+  {
+    return (EAttribute)groupLoopedModelEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getGroupLoopedModel_Synchronized()
+  {
+    return (EAttribute)groupLoopedModelEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getGroupLoopedModel_Abstract()
+  {
+    return (EAttribute)groupLoopedModelEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getGroupLoopedModel_Final()
+  {
+    return (EAttribute)groupLoopedModelEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getGroupLoopedModel_Name()
+  {
+    return (EAttribute)groupLoopedModelEClass.getEStructuralFeatures().get(5);
   }
 
   /**
@@ -194,12 +487,42 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
 
     // Create classes and their features
     modelEClass = createEClass(MODEL);
-    createEAttribute(modelEClass, MODEL__VISIBILITY);
-    createEAttribute(modelEClass, MODEL__STATIC);
-    createEAttribute(modelEClass, MODEL__SYNCHRONIZED);
-    createEAttribute(modelEClass, MODEL__ABSTRACT);
-    createEAttribute(modelEClass, MODEL__FINAL);
-    createEAttribute(modelEClass, MODEL__NAME);
+    createEReference(modelEClass, MODEL__FIRST);
+    createEReference(modelEClass, MODEL__SECOND);
+    createEReference(modelEClass, MODEL__THRIRD);
+    createEReference(modelEClass, MODEL__FORTH);
+
+    simpleModelEClass = createEClass(SIMPLE_MODEL);
+    createEAttribute(simpleModelEClass, SIMPLE_MODEL__VISIBILITY);
+    createEAttribute(simpleModelEClass, SIMPLE_MODEL__STATIC);
+    createEAttribute(simpleModelEClass, SIMPLE_MODEL__SYNCHRONIZED);
+    createEAttribute(simpleModelEClass, SIMPLE_MODEL__ABSTRACT);
+    createEAttribute(simpleModelEClass, SIMPLE_MODEL__FINAL);
+    createEAttribute(simpleModelEClass, SIMPLE_MODEL__NAME);
+
+    mandatoryModelEClass = createEClass(MANDATORY_MODEL);
+    createEAttribute(mandatoryModelEClass, MANDATORY_MODEL__VISIBILITY);
+    createEAttribute(mandatoryModelEClass, MANDATORY_MODEL__STATIC);
+    createEAttribute(mandatoryModelEClass, MANDATORY_MODEL__SYNCHRONIZED);
+    createEAttribute(mandatoryModelEClass, MANDATORY_MODEL__ABSTRACT);
+    createEAttribute(mandatoryModelEClass, MANDATORY_MODEL__FINAL);
+    createEAttribute(mandatoryModelEClass, MANDATORY_MODEL__NAME);
+
+    loopedModelEClass = createEClass(LOOPED_MODEL);
+    createEAttribute(loopedModelEClass, LOOPED_MODEL__VISIBILITY);
+    createEAttribute(loopedModelEClass, LOOPED_MODEL__STATIC);
+    createEAttribute(loopedModelEClass, LOOPED_MODEL__SYNCHRONIZED);
+    createEAttribute(loopedModelEClass, LOOPED_MODEL__ABSTRACT);
+    createEAttribute(loopedModelEClass, LOOPED_MODEL__FINAL);
+    createEAttribute(loopedModelEClass, LOOPED_MODEL__NAME);
+
+    groupLoopedModelEClass = createEClass(GROUP_LOOPED_MODEL);
+    createEAttribute(groupLoopedModelEClass, GROUP_LOOPED_MODEL__VISIBILITY);
+    createEAttribute(groupLoopedModelEClass, GROUP_LOOPED_MODEL__STATIC);
+    createEAttribute(groupLoopedModelEClass, GROUP_LOOPED_MODEL__SYNCHRONIZED);
+    createEAttribute(groupLoopedModelEClass, GROUP_LOOPED_MODEL__ABSTRACT);
+    createEAttribute(groupLoopedModelEClass, GROUP_LOOPED_MODEL__FINAL);
+    createEAttribute(groupLoopedModelEClass, GROUP_LOOPED_MODEL__NAME);
   }
 
   /**
@@ -234,12 +557,42 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEAttribute(getModel_Visibility(), ecorePackage.getEString(), "visibility", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getModel_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getModel_Synchronized(), ecorePackage.getEBoolean(), "synchronized", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getModel_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getModel_Final(), ecorePackage.getEBoolean(), "final", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-    initEAttribute(getModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_First(), this.getSimpleModel(), null, "first", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_Second(), this.getMandatoryModel(), null, "second", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_Thrird(), this.getLoopedModel(), null, "thrird", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_Forth(), this.getGroupLoopedModel(), null, "forth", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(simpleModelEClass, SimpleModel.class, "SimpleModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getSimpleModel_Visibility(), ecorePackage.getEString(), "visibility", null, 0, 1, SimpleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSimpleModel_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, SimpleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSimpleModel_Synchronized(), ecorePackage.getEBoolean(), "synchronized", null, 0, 1, SimpleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSimpleModel_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, SimpleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSimpleModel_Final(), ecorePackage.getEBoolean(), "final", null, 0, 1, SimpleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getSimpleModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, SimpleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(mandatoryModelEClass, MandatoryModel.class, "MandatoryModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getMandatoryModel_Visibility(), ecorePackage.getEString(), "visibility", null, 0, 1, MandatoryModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMandatoryModel_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, MandatoryModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMandatoryModel_Synchronized(), ecorePackage.getEBoolean(), "synchronized", null, 0, 1, MandatoryModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMandatoryModel_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, MandatoryModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMandatoryModel_Final(), ecorePackage.getEBoolean(), "final", null, 0, 1, MandatoryModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getMandatoryModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, MandatoryModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(loopedModelEClass, LoopedModel.class, "LoopedModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getLoopedModel_Visibility(), ecorePackage.getEString(), "visibility", null, 0, -1, LoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoopedModel_Static(), ecorePackage.getEString(), "static", null, 0, -1, LoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoopedModel_Synchronized(), ecorePackage.getEString(), "synchronized", null, 0, -1, LoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoopedModel_Abstract(), ecorePackage.getEString(), "abstract", null, 0, -1, LoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoopedModel_Final(), ecorePackage.getEString(), "final", null, 0, -1, LoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoopedModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, LoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(groupLoopedModelEClass, GroupLoopedModel.class, "GroupLoopedModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getGroupLoopedModel_Visibility(), ecorePackage.getEString(), "visibility", null, 0, -1, GroupLoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGroupLoopedModel_Static(), ecorePackage.getEString(), "static", null, 0, -1, GroupLoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGroupLoopedModel_Synchronized(), ecorePackage.getEString(), "synchronized", null, 0, -1, GroupLoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGroupLoopedModel_Abstract(), ecorePackage.getEString(), "abstract", null, 0, -1, GroupLoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGroupLoopedModel_Final(), ecorePackage.getEString(), "final", null, 0, -1, GroupLoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getGroupLoopedModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, GroupLoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

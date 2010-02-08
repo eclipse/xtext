@@ -11,7 +11,14 @@ grammar org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLangu
 generate unorderedGroupsTest "http://www.eclipse.org/xtext/ui/tests/2010/UnorderedGroupsTest"
 
 Model :
-    (
+     '1' first=SimpleModel
+   | '2' second=MandatoryModel
+   | '3' thrird=LoopedModel
+   | '4' forth=GroupLoopedModel
+;
+
+SimpleModel:
+	(
 	    visibility=('public'|'private'|'protected')?
 	  & static?='static'?
 	  & synchronized?='synchronized'?
@@ -19,4 +26,33 @@ Model :
 	)
 	'class' name=ID '{' '}'
 ;
+
+MandatoryModel:
+	(
+	    visibility=('public'|'private'|'protected')
+	  & static?='static'
+	  & synchronized?='synchronized'
+	  & (abstract?='abstract' | final?='final')?
+	)
+	'class' name=ID '{' '}'
+;
   
+LoopedModel:
+	(
+	    visibility+=('public'|'private'|'protected')*
+	  & static+='static'*
+	  & synchronized+='synchronized'*
+	  & (abstract+='abstract' | final+='final')*
+	)
+	'class' name=ID '{' '}'
+;
+
+GroupLoopedModel:
+	(
+	    visibility+=('public'|'private'|'protected')
+	  & static+='static'
+	  & synchronized+='synchronized'
+	  & (abstract+='abstract' | final+='final')
+	)*
+	'class' name=ID '{' '}'
+;

@@ -66,7 +66,7 @@ entryRuleModel
 ;
 
 // Rule Model
-ruleModel 
+ruleModel
     @init {
 		int stackSize = keepStackSize();
     }
@@ -94,7 +94,7 @@ entryRuleImport
 ;
 
 // Rule Import
-ruleImport 
+ruleImport
     @init {
 		int stackSize = keepStackSize();
     }
@@ -122,7 +122,7 @@ entryRuleType
 ;
 
 // Rule Type
-ruleType 
+ruleType
     @init {
 		int stackSize = keepStackSize();
     }
@@ -150,7 +150,7 @@ entryRuleDataType
 ;
 
 // Rule DataType
-ruleDataType 
+ruleDataType
     @init {
 		int stackSize = keepStackSize();
     }
@@ -178,7 +178,7 @@ entryRuleClass
 ;
 
 // Rule Class
-ruleClass 
+ruleClass
     @init {
 		int stackSize = keepStackSize();
     }
@@ -206,7 +206,7 @@ entryRuleProperty
 ;
 
 // Rule Property
-ruleProperty 
+ruleProperty
     @init {
 		int stackSize = keepStackSize();
     }
@@ -234,7 +234,7 @@ entryRuleAttribute
 ;
 
 // Rule Attribute
-ruleAttribute 
+ruleAttribute
     @init {
 		int stackSize = keepStackSize();
     }
@@ -262,7 +262,7 @@ entryRuleReference
 ;
 
 // Rule Reference
-ruleReference 
+ruleReference
     @init {
 		int stackSize = keepStackSize();
     }

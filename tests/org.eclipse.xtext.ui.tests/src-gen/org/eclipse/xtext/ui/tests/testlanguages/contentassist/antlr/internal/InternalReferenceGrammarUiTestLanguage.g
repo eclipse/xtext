@@ -66,7 +66,7 @@ entryRuleSpielplatz
 ;
 
 // Rule Spielplatz
-ruleSpielplatz 
+ruleSpielplatz
     @init {
 		int stackSize = keepStackSize();
     }
@@ -96,7 +96,7 @@ entryRuleKind
 ;
 
 // Rule Kind
-ruleKind 
+ruleKind
     @init {
 		int stackSize = keepStackSize();
     }
@@ -124,7 +124,7 @@ entryRuleErwachsener
 ;
 
 // Rule Erwachsener
-ruleErwachsener 
+ruleErwachsener
     @init {
 		int stackSize = keepStackSize();
     }
@@ -152,7 +152,7 @@ entryRuleSpielzeug
 ;
 
 // Rule Spielzeug
-ruleSpielzeug 
+ruleSpielzeug
     @init {
 		int stackSize = keepStackSize();
     }
@@ -180,7 +180,7 @@ entryRuleFarbe
 ;
 
 // Rule Farbe
-ruleFarbe 
+ruleFarbe
     @init {
 		int stackSize = keepStackSize();
     }
@@ -208,7 +208,7 @@ entryRuleFamilie
 ;
 
 // Rule Familie
-ruleFamilie 
+ruleFamilie
     @init {
 		int stackSize = keepStackSize();
     }

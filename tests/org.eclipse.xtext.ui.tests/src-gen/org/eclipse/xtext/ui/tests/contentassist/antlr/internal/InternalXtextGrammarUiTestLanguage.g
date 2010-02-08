@@ -66,7 +66,7 @@ entryRuleGrammar
 ;
 
 // Rule Grammar
-ruleGrammar 
+ruleGrammar
     @init {
 		int stackSize = keepStackSize();
     }
@@ -94,7 +94,7 @@ entryRuleGrammarID
 ;
 
 // Rule GrammarID
-ruleGrammarID 
+ruleGrammarID
     @init {
 		int stackSize = keepStackSize();
     }
@@ -122,7 +122,7 @@ entryRuleAbstractRule
 ;
 
 // Rule AbstractRule
-ruleAbstractRule 
+ruleAbstractRule
     @init {
 		int stackSize = keepStackSize();
     }
@@ -150,7 +150,7 @@ entryRuleAbstractMetamodelDeclaration
 ;
 
 // Rule AbstractMetamodelDeclaration
-ruleAbstractMetamodelDeclaration 
+ruleAbstractMetamodelDeclaration
     @init {
 		int stackSize = keepStackSize();
     }
@@ -178,7 +178,7 @@ entryRuleGeneratedMetamodel
 ;
 
 // Rule GeneratedMetamodel
-ruleGeneratedMetamodel 
+ruleGeneratedMetamodel
     @init {
 		int stackSize = keepStackSize();
     }
@@ -206,7 +206,7 @@ entryRuleReferencedMetamodel
 ;
 
 // Rule ReferencedMetamodel
-ruleReferencedMetamodel 
+ruleReferencedMetamodel
     @init {
 		int stackSize = keepStackSize();
     }
@@ -234,7 +234,7 @@ entryRuleParserRule
 ;
 
 // Rule ParserRule
-ruleParserRule 
+ruleParserRule
     @init {
 		int stackSize = keepStackSize();
     }
@@ -262,7 +262,7 @@ entryRuleTypeRef
 ;
 
 // Rule TypeRef
-ruleTypeRef 
+ruleTypeRef
     @init {
 		int stackSize = keepStackSize();
     }
@@ -290,7 +290,7 @@ entryRuleAlternatives
 ;
 
 // Rule Alternatives
-ruleAlternatives 
+ruleAlternatives
     @init {
 		int stackSize = keepStackSize();
     }
@@ -318,7 +318,7 @@ entryRuleGroup
 ;
 
 // Rule Group
-ruleGroup 
+ruleGroup
     @init {
 		int stackSize = keepStackSize();
     }
@@ -346,7 +346,7 @@ entryRuleAbstractToken
 ;
 
 // Rule AbstractToken
-ruleAbstractToken 
+ruleAbstractToken
     @init {
 		int stackSize = keepStackSize();
     }
@@ -374,7 +374,7 @@ entryRuleAbstractTokenWithCardinality
 ;
 
 // Rule AbstractTokenWithCardinality
-ruleAbstractTokenWithCardinality 
+ruleAbstractTokenWithCardinality
     @init {
 		int stackSize = keepStackSize();
     }
@@ -402,7 +402,7 @@ entryRuleAction
 ;
 
 // Rule Action
-ruleAction 
+ruleAction
     @init {
 		int stackSize = keepStackSize();
     }
@@ -430,7 +430,7 @@ entryRuleAbstractTerminal
 ;
 
 // Rule AbstractTerminal
-ruleAbstractTerminal 
+ruleAbstractTerminal
     @init {
 		int stackSize = keepStackSize();
     }
@@ -458,7 +458,7 @@ entryRuleKeyword
 ;
 
 // Rule Keyword
-ruleKeyword 
+ruleKeyword
     @init {
 		int stackSize = keepStackSize();
     }
@@ -486,7 +486,7 @@ entryRuleRuleCall
 ;
 
 // Rule RuleCall
-ruleRuleCall 
+ruleRuleCall
     @init {
 		int stackSize = keepStackSize();
     }
@@ -514,7 +514,7 @@ entryRuleAssignment
 ;
 
 // Rule Assignment
-ruleAssignment 
+ruleAssignment
     @init {
 		int stackSize = keepStackSize();
     }
@@ -542,7 +542,7 @@ entryRuleAssignableTerminal
 ;
 
 // Rule AssignableTerminal
-ruleAssignableTerminal 
+ruleAssignableTerminal
     @init {
 		int stackSize = keepStackSize();
     }
@@ -570,7 +570,7 @@ entryRuleParenthesizedAssignableElement
 ;
 
 // Rule ParenthesizedAssignableElement
-ruleParenthesizedAssignableElement 
+ruleParenthesizedAssignableElement
     @init {
 		int stackSize = keepStackSize();
     }
@@ -598,7 +598,7 @@ entryRuleAssignableAlternatives
 ;
 
 // Rule AssignableAlternatives
-ruleAssignableAlternatives 
+ruleAssignableAlternatives
     @init {
 		int stackSize = keepStackSize();
     }
@@ -626,7 +626,7 @@ entryRuleCrossReference
 ;
 
 // Rule CrossReference
-ruleCrossReference 
+ruleCrossReference
     @init {
 		int stackSize = keepStackSize();
     }
@@ -654,7 +654,7 @@ entryRuleCrossReferenceableTerminal
 ;
 
 // Rule CrossReferenceableTerminal
-ruleCrossReferenceableTerminal 
+ruleCrossReferenceableTerminal
     @init {
 		int stackSize = keepStackSize();
     }
@@ -682,7 +682,7 @@ entryRuleParenthesizedCrossReferenceableElement
 ;
 
 // Rule ParenthesizedCrossReferenceableElement
-ruleParenthesizedCrossReferenceableElement 
+ruleParenthesizedCrossReferenceableElement
     @init {
 		int stackSize = keepStackSize();
     }
@@ -710,7 +710,7 @@ entryRuleCrossReferenceableAlternatives
 ;
 
 // Rule CrossReferenceableAlternatives
-ruleCrossReferenceableAlternatives 
+ruleCrossReferenceableAlternatives
     @init {
 		int stackSize = keepStackSize();
     }
@@ -738,7 +738,7 @@ entryRuleParenthesizedElement
 ;
 
 // Rule ParenthesizedElement
-ruleParenthesizedElement 
+ruleParenthesizedElement
     @init {
 		int stackSize = keepStackSize();
     }
@@ -766,7 +766,7 @@ entryRuleTerminalRule
 ;
 
 // Rule TerminalRule
-ruleTerminalRule 
+ruleTerminalRule
     @init {
 		int stackSize = keepStackSize();
     }
@@ -794,7 +794,7 @@ entryRuleTerminalAlternatives
 ;
 
 // Rule TerminalAlternatives
-ruleTerminalAlternatives 
+ruleTerminalAlternatives
     @init {
 		int stackSize = keepStackSize();
     }
@@ -822,7 +822,7 @@ entryRuleTerminalGroup
 ;
 
 // Rule TerminalGroup
-ruleTerminalGroup 
+ruleTerminalGroup
     @init {
 		int stackSize = keepStackSize();
     }
@@ -850,7 +850,7 @@ entryRuleTerminalToken
 ;
 
 // Rule TerminalToken
-ruleTerminalToken 
+ruleTerminalToken
     @init {
 		int stackSize = keepStackSize();
     }
@@ -878,7 +878,7 @@ entryRuleTerminalTokenElement
 ;
 
 // Rule TerminalTokenElement
-ruleTerminalTokenElement 
+ruleTerminalTokenElement
     @init {
 		int stackSize = keepStackSize();
     }
@@ -906,7 +906,7 @@ entryRuleParenthesizedTerminalElement
 ;
 
 // Rule ParenthesizedTerminalElement
-ruleParenthesizedTerminalElement 
+ruleParenthesizedTerminalElement
     @init {
 		int stackSize = keepStackSize();
     }
@@ -934,7 +934,7 @@ entryRuleAbstractNegatedToken
 ;
 
 // Rule AbstractNegatedToken
-ruleAbstractNegatedToken 
+ruleAbstractNegatedToken
     @init {
 		int stackSize = keepStackSize();
     }
@@ -962,7 +962,7 @@ entryRuleNegatedToken
 ;
 
 // Rule NegatedToken
-ruleNegatedToken 
+ruleNegatedToken
     @init {
 		int stackSize = keepStackSize();
     }
@@ -990,7 +990,7 @@ entryRuleUntilToken
 ;
 
 // Rule UntilToken
-ruleUntilToken 
+ruleUntilToken
     @init {
 		int stackSize = keepStackSize();
     }
@@ -1018,7 +1018,7 @@ entryRuleWildcard
 ;
 
 // Rule Wildcard
-ruleWildcard 
+ruleWildcard
     @init {
 		int stackSize = keepStackSize();
     }
@@ -1046,7 +1046,7 @@ entryRuleCharacterRange
 ;
 
 // Rule CharacterRange
-ruleCharacterRange 
+ruleCharacterRange
     @init {
 		int stackSize = keepStackSize();
     }
@@ -1074,7 +1074,7 @@ entryRuleEnumRule
 ;
 
 // Rule EnumRule
-ruleEnumRule 
+ruleEnumRule
     @init {
 		int stackSize = keepStackSize();
     }
@@ -1102,7 +1102,7 @@ entryRuleEnumLiterals
 ;
 
 // Rule EnumLiterals
-ruleEnumLiterals 
+ruleEnumLiterals
     @init {
 		int stackSize = keepStackSize();
     }
@@ -1130,7 +1130,7 @@ entryRuleEnumLiteralDeclaration
 ;
 
 // Rule EnumLiteralDeclaration
-ruleEnumLiteralDeclaration 
+ruleEnumLiteralDeclaration
     @init {
 		int stackSize = keepStackSize();
     }

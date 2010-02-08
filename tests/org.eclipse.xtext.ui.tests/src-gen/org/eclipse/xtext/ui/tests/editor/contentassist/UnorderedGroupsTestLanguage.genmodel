@@ -10,12 +10,42 @@
   <genPackages prefix="UnorderedGroupsTest" basePackage="org.eclipse.xtext.ui.tests.editor.contentassist"
       disposableProviderFactory="true" ecorePackage="UnorderedGroupsTestLanguage.ecore#/">
     <genClasses ecoreClass="UnorderedGroupsTestLanguage.ecore#//Model">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//Model/visibility"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//Model/static"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//Model/synchronized"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//Model/abstract"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//Model/final"/>
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//Model/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UnorderedGroupsTestLanguage.ecore#//Model/first"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UnorderedGroupsTestLanguage.ecore#//Model/second"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UnorderedGroupsTestLanguage.ecore#//Model/thrird"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UnorderedGroupsTestLanguage.ecore#//Model/forth"/>
+    </genClasses>
+    <genClasses ecoreClass="UnorderedGroupsTestLanguage.ecore#//SimpleModel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//SimpleModel/visibility"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//SimpleModel/static"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//SimpleModel/synchronized"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//SimpleModel/abstract"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//SimpleModel/final"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//SimpleModel/name"/>
+    </genClasses>
+    <genClasses ecoreClass="UnorderedGroupsTestLanguage.ecore#//MandatoryModel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//MandatoryModel/visibility"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//MandatoryModel/static"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//MandatoryModel/synchronized"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//MandatoryModel/abstract"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//MandatoryModel/final"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//MandatoryModel/name"/>
+    </genClasses>
+    <genClasses ecoreClass="UnorderedGroupsTestLanguage.ecore#//LoopedModel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//LoopedModel/visibility"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//LoopedModel/static"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//LoopedModel/synchronized"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//LoopedModel/abstract"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//LoopedModel/final"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//LoopedModel/name"/>
+    </genClasses>
+    <genClasses ecoreClass="UnorderedGroupsTestLanguage.ecore#//GroupLoopedModel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//GroupLoopedModel/visibility"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//GroupLoopedModel/static"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//GroupLoopedModel/synchronized"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//GroupLoopedModel/abstract"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//GroupLoopedModel/final"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//GroupLoopedModel/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

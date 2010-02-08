@@ -66,7 +66,7 @@ entryRuleWorkflowElement
 ;
 
 // Rule WorkflowElement
-ruleWorkflowElement 
+ruleWorkflowElement
     @init {
 		int stackSize = keepStackSize();
     }
@@ -94,7 +94,7 @@ entryRuleAttribute
 ;
 
 // Rule Attribute
-ruleAttribute 
+ruleAttribute
     @init {
 		int stackSize = keepStackSize();
     }

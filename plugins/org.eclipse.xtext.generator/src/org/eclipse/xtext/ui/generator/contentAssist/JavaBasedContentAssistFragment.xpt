@@ -40,19 +40,12 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
  */
 public class «getGenProposalProvider().toSimpleName()» extends «IF inherit && usedGrammars.size == 1-»«usedGrammars.first().getProposalProvider().toSimpleName()»«ELSE-»AbstractJavaBasedContentProposalProvider«ENDIF-» {
 		
-	private final static Logger logger = Logger.getLogger(«getGenProposalProvider().toSimpleName()».class);
-	
 	«LET {} AS processedFqnFeatureNames-»
 		«FOREACH containedAssignments() AS assignment-»
 			«LET getFqFeatureName(assignment) AS fqnFeatureName-»
 				«IF !processedFqnFeatureNames.contains(fqnFeatureName)-»
 					«processedFqnFeatureNames.add(fqnFeatureName)->""-»	 
 	public void complete«fqnFeatureName»(EObject model, Assignment assignment, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("complete«fqnFeatureName» feature '" + assignment.getFeature() + "' terminal '"
-					+ assignment.getTerminal() + "' cardinality '" + assignment.getCardinality() + "' and prefix '"
-					+ context.getPrefix() + "'");
-		}
 «EXPAND assignmentTerminal("assignment.getTerminal()") FOR assignment.terminal-»
 	}
 				«ENDIF-»
@@ -64,10 +57,6 @@ public class «getGenProposalProvider().toSimpleName()» extends «IF inherit && us
 				«IF !processedFqnFeatureNames.contains(fqnFeatureName)-»
 					«processedFqnFeatureNames.add(fqnFeatureName)->""-»	 	 
 	public void complete«fqnFeatureName»(EObject model, RuleCall ruleCall, ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
-		if (logger.isDebugEnabled()) {
-			logger.debug("complete«fqnFeatureName» '" + ruleCall.getRule().getName() + "' cardinality '" + ruleCall.getCardinality()
-					+ "' for model '" + context.getCurrentModel() + "' and prefix '" + context.getPrefix() + "'");
-		}
 		// subclasses may override
 	}
 				«ENDIF-»
