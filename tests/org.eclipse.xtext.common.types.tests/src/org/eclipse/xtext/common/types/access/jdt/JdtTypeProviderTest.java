@@ -10,8 +10,12 @@ package org.eclipse.xtext.common.types.access.jdt;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
+import org.eclipse.xtext.common.types.DeclaredType;
+import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.Void;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.ITypeProvider;
 import org.eclipse.xtext.common.types.access.TypeNotFoundException;
@@ -153,13 +157,20 @@ public class JdtTypeProviderTest extends AbstractTypeProviderTest {
 			typeProvider.createMirror(uri);
 			fail("Expected TypeNotFoundException");
 		} catch (TypeNotFoundException ex) {
-			try {
-				typeProvider.createMirror(uri);
-				fail("Expected TypeNotFoundException");
-			} catch (TypeNotFoundException e) {
-				// OK
-			}
+			// OK
 		}
+	}
+	
+	public void testBug300216() {
+		DeclaredType type = (DeclaredType) getTypeProvider().findTypeByName("java.lang.Object");
+		assertTrue(type.getSuperTypes().isEmpty());
+		URI unresolveableType = URI.createURI("java:/Objects/Something#Something");
+		Void proxy = TypesFactory.eINSTANCE.createVoid();
+		((InternalEObject) proxy).eSetProxyURI(unresolveableType);
+		type.getSuperTypes().add(proxy);
+		int resources = type.eResource().getResourceSet().getResources().size();
+		assertTrue(type.getSuperTypes().get(0).eIsProxy());
+		assertEquals(resources, type.eResource().getResourceSet().getResources().size());
 	}
 	
 	@Override

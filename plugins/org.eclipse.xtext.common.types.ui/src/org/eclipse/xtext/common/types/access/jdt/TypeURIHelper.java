@@ -320,9 +320,8 @@ public class TypeURIHelper {
 				}
 				localDeclarator = localDeclarator.getDeclaringType();
 			}
-		} else {
-			createResourceURIForClassImpl(signature, uriBuilder);
 		}
+		createResourceURIForClassImpl(signature, uriBuilder);
 	}
 
 	protected String resolveSourceReference(String signature, IMember declarator) throws JavaModelException {
@@ -340,6 +339,8 @@ public class TypeURIHelper {
 				} else {
 					readable = resolved[0][1];
 				}
+				signature = Signature.createTypeSignature(readable, true);
+			} else {
 				signature = Signature.createTypeSignature(readable, true);
 			}
 		}
