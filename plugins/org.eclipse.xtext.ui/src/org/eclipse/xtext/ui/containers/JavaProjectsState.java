@@ -82,7 +82,8 @@ public class JavaProjectsState extends AbstractAllContainersState implements IEl
 					}.traverse(root, false);
 					return uris;
 				} catch (JavaModelException e) {
-					log.error(e.getMessage(), e);
+					if (!e.isDoesNotExist())
+						log.error(e.getMessage(), e);
 					return Collections.emptyList();
 				}
 			} else {
@@ -168,7 +169,8 @@ public class JavaProjectsState extends AbstractAllContainersState implements IEl
 				}
 			}
 		} catch (JavaModelException e) {
-			log.error(e.getMessage(), e);
+			if (!e.isDoesNotExist())
+				log.error(e.getMessage(), e);
 		}
 		return null;
 	}

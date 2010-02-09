@@ -47,7 +47,8 @@ public class JarEntryLocator {
 						}
 					}.traverse(root, true);
 				} catch(JavaModelException ex) {
-					log.error(ex.getMessage(), ex);
+					if (!ex.isDoesNotExist())
+						log.error(ex.getMessage(), ex);
 				}
 			} else {
 				throw new IllegalStateException("Unexpeced root type: " + root.getClass().getName());
@@ -88,10 +89,11 @@ public class JarEntryLocator {
 					throw new IllegalStateException("Unexpeced root type: " + root.getClass().getName());
 				}
 			} catch(JavaModelException ex) {
-				log.error(ex.getMessage(), ex);
+				if (!ex.isDoesNotExist())
+					log.error(ex.getMessage(), ex);
 			}
 		} catch(NullPointerException e) {
-			e.printStackTrace();
+			log.error(e.getMessage(), e);
 		}
 		return null;
 	}

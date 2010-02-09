@@ -44,7 +44,8 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 							}
 						}.traverse(root,false);
 					} catch (JavaModelException ex) {
-						log.error(ex.getMessage(), ex);
+						if (!ex.isDoesNotExist())
+							log.error(ex.getMessage(), ex);
 					}
 				}
 			}
@@ -56,8 +57,9 @@ public class JdtToBeBuiltComputer extends ToBeBuiltComputer {
 		try {
 			return (!"org.eclipse.jdt.launching.JRE_CONTAINER".equals(root.getRawClasspathEntry().getPath().toString()) && 
 					(root.isArchive() || root.isExternal()));
-		} catch (JavaModelException e) {
-			log.error(e.getMessage(),e);
+		} catch (JavaModelException ex) {
+			if (!ex.isDoesNotExist())
+				log.error(ex.getMessage(), ex);
 			return false;
 		}
 	}
