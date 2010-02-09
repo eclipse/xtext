@@ -120,7 +120,8 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 					}
 				}
 			} catch (JavaModelException e) {
-				log.error(e.getMessage(), e);
+				if (!e.isDoesNotExist())
+					log.error(e.getMessage(), e);
 			}
 		}
 	}
@@ -142,7 +143,8 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 					}
 				}
 			} catch (JavaModelException e) {
-				log.error(e.getMessage(), e);
+				if (!e.isDoesNotExist())
+					log.error(e.getMessage(), e);
 			}
 		}
 	}
