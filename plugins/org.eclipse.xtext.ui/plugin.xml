@@ -97,8 +97,8 @@
             id="org.eclipse.xtext.ui.ToggleCommentAction">
       </command>
       <command
-            name="Got to Matching Bracket"
-            description="Got to Matching Bracket"
+            name="Go to Matching Bracket"
+            description="Go to Matching Bracket"
             categoryId="org.eclipse.xtext.ui.category.XtextEditor"
             id="org.eclipse.xtext.ui.GotToMatchingBracketAction">
       </command>
