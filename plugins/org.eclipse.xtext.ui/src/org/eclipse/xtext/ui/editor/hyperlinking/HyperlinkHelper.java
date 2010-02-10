@@ -50,7 +50,15 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 
 	@Inject
 	private Provider<XtextHyperlink> hyperlinkProvider;
-
+	
+	protected Provider<XtextHyperlink> getHyperlinkProvider() {
+		return hyperlinkProvider;
+	}
+	
+	protected ILabelProvider getLabelProvider() {
+		return labelProvider;
+	}
+	
 	// TODO: consider removing the parameter createMultipleHyperlinks 
 	public IHyperlink[] createHyperlinksByOffset(XtextResource resource, int offset, boolean createMultipleHyperlinks) {
 		TextLocation textLocation = new TextLocation();
