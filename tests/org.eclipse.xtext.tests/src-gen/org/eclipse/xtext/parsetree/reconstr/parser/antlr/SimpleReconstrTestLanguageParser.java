@@ -25,6 +25,7 @@ public class SimpleReconstrTestLanguageParser extends org.eclipse.xtext.parser.a
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSimpleReconstrTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
+		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

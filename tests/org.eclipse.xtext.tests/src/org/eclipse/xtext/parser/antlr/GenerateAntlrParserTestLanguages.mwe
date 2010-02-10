@@ -27,6 +27,9 @@
 		<language uri="classpath:/org/eclipse/xtext/parser/antlr/Bug296889ExTestLanguage.xtext">
 			<fragment file="${exFragments}" backtrack="true"/>
 		</language>
+		<language uri="classpath:/org/eclipse/xtext/parser/antlr/Bug299237TestLanguage.xtext">
+			<fragment file="${exFragments}" ignoreCase="true"/>
+		</language>
 		<language uri="classpath:/org/eclipse/xtext/parser/antlr/Bug301935TestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>

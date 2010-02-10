@@ -25,6 +25,7 @@ public class LookAheadContentAssistTestLanguageParser extends org.eclipse.xtext.
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal.InternalLookAheadContentAssistTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
+		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

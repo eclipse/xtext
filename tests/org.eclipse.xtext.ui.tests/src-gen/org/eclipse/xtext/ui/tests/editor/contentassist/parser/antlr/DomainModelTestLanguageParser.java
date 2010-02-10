@@ -25,6 +25,7 @@ public class DomainModelTestLanguageParser extends org.eclipse.xtext.parser.antl
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal.InternalDomainModelTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
+		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

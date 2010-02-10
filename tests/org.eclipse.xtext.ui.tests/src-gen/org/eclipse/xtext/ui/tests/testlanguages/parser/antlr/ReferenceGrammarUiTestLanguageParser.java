@@ -25,6 +25,7 @@ public class ReferenceGrammarUiTestLanguageParser extends org.eclipse.xtext.pars
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		org.eclipse.xtext.ui.tests.testlanguages.parser.antlr.internal.InternalReferenceGrammarUiTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
+		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

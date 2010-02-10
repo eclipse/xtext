@@ -25,6 +25,7 @@ public class Bug301935ExTestLanguageParser extends org.eclipse.xtext.parser.antl
 		tokenStream.setInitialHiddenTokens();
 		org.eclipse.xtext.parser.antlr.parser.antlr.internal.InternalBug301935ExTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
+		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

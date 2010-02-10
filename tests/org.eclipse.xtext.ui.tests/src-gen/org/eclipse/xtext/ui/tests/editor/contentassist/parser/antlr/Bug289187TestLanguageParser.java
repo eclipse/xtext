@@ -25,6 +25,7 @@ public class Bug289187TestLanguageParser extends org.eclipse.xtext.parser.antlr.
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal.InternalBug289187TestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
+		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

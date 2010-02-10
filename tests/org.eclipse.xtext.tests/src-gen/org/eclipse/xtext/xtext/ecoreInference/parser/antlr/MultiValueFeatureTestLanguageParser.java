@@ -25,6 +25,7 @@ public class MultiValueFeatureTestLanguageParser extends org.eclipse.xtext.parse
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalMultiValueFeatureTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
+		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

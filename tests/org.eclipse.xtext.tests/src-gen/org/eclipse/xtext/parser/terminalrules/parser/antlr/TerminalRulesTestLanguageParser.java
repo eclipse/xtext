@@ -25,6 +25,7 @@ public class TerminalRulesTestLanguageParser extends org.eclipse.xtext.parser.an
 		tokenStream.setInitialHiddenTokens();
 		org.eclipse.xtext.parser.terminalrules.parser.antlr.internal.InternalTerminalRulesTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
+		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

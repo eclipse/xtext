@@ -39,6 +39,9 @@ public abstract class AbstractAntlrParser extends AbstractParser<InputStream> im
     private ITokenDefProvider tokenDefProvider;
 	
 	@Inject
+	private ISyntaxErrorProvider syntaxErrorProvider;
+	
+	@Inject
 	@Named(LexerBindings.RUNTIME)
 	private Provider<Lexer> lexerProvider;
 
@@ -120,6 +123,14 @@ public abstract class AbstractAntlrParser extends AbstractParser<InputStream> im
 
 	public ITokenDefProvider getTokenDefProvider() {
 		return tokenDefProvider;
+	}
+	
+	public ISyntaxErrorProvider getSyntaxErrorProvider() {
+		return syntaxErrorProvider;
+	}
+	
+	public void setSyntaxErrorProvider(ISyntaxErrorProvider syntaxErrorProvider) {
+		this.syntaxErrorProvider = syntaxErrorProvider;
 	}
 
 }

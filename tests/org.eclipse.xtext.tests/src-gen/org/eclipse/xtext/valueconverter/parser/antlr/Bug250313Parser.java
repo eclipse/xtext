@@ -25,6 +25,7 @@ public class Bug250313Parser extends org.eclipse.xtext.parser.antlr.AbstractAntl
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalBug250313Parser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
+		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);
