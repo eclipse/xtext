@@ -35,11 +35,14 @@ import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.ParseResult;
+import org.eclipse.xtext.parser.antlr.ISyntaxErrorProvider.IParserErrorContext;
+import org.eclipse.xtext.parser.antlr.ISyntaxErrorProvider.IValueConverterErrorContext;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeAdapterFactory;
+import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParsetreeFactory;
 import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.util.Strings;
@@ -52,18 +55,72 @@ import com.google.common.collect.Multimaps;
  */
 public abstract class AbstractInternalAntlrParser extends Parser {
 
+	protected class ErrorContext {
+		public EObject getCurrentContext() {
+			if (currentNode != null)
+				return NodeUtil.getNearestSemanticObject(currentNode);
+			return null;
+		}
+		
+		public AbstractNode getCurrentNode() {
+			return currentNode;
+		}	
+	}
+	
+	protected class ParserErrorContext extends ErrorContext implements IParserErrorContext {
+
+		private final RecognitionException recognitionException;
+
+		protected ParserErrorContext(RecognitionException recognitionException) {
+			this.recognitionException = recognitionException;
+		}
+		
+		public String getDefaultMessage() {
+			return superGetErrorMessage(getRecognitionException(), getTokenNames());
+		}
+
+		public RecognitionException getRecognitionException() {
+			return recognitionException;
+		}
+
+		public String[] getTokenNames() {
+			return readableTokenNames;
+		}
+
+	}
+	
+	protected class ValueConverterErrorContext extends ErrorContext implements IValueConverterErrorContext {
+
+		private final ValueConverterException valueConverterException;
+
+		protected ValueConverterErrorContext(ValueConverterException valueConverterException) {
+			this.valueConverterException = valueConverterException;
+		}
+
+		public String getDefaultMessage() {
+			return getValueConverterExceptionMessage(getValueConverterException());
+		}
+
+		public ValueConverterException getValueConverterException() {
+			return valueConverterException;
+		}
+
+	}
+	
 	private final Logger logger = Logger.getLogger(AbstractInternalAntlrParser.class);
 	
 	protected CompositeNode currentNode;
 
 	protected IAstFactory factory;
-
+	
 	protected int lastConsumedIndex = -1;
 
 	protected AbstractNode lastConsumedNode;
 
 	private final Map<String, AbstractRule> allRules;
-
+	
+	private ISyntaxErrorProvider syntaxErrorProvider;
+	
 	private final ListMultimap<Token, CompositeNode> deferredLookaheadMap = Multimaps.newArrayListMultimap();
 	private final Map<Token, LeafNode> token2NodeMap = new HashMap<Token, LeafNode>();
 
@@ -124,6 +181,8 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	}
 
 	private Map<Integer, String> antlrTypeToLexerName = null;
+	
+	private String[] readableTokenNames = null;
 
 	public void setTokenTypeMap(Map<Integer, String> tokenTypeMap) {
 		antlrTypeToLexerName = new HashMap<Integer, String>();
@@ -133,13 +192,30 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 				antlrTypeToLexerName.put(mapEntry.getKey(), TokenTool.getLexerRuleName(value));
 			}
 		}
+		String[] tokenNames = getTokenNames();
+		readableTokenNames = new String[tokenNames.length];
+		for(int i = 0; i < tokenNames.length; i++) {
+			if (tokenTypeMap.containsKey(i)) {
+				readableTokenNames[i] = tokenTypeMap.get(i);
+			} else {
+				readableTokenNames[i] = tokenNames[i];
+			}
+		}
 	}
-
+	
 	protected void setLexerRule(LeafNode leafNode, Token hidden) {
 		String ruleName = antlrTypeToLexerName.get(hidden.getType());
 		AbstractRule rule = allRules.get(ruleName);
 		if (rule != null)
 			leafNode.setGrammarElement(rule);
+	}
+	
+	public void setSyntaxErrorProvider(ISyntaxErrorProvider syntaxErrorProvider) {
+		this.syntaxErrorProvider = syntaxErrorProvider;
+	}
+	
+	public ISyntaxErrorProvider getSyntaxErrorProvider() {
+		return syntaxErrorProvider;
 	}
 
 	protected void set(EObject _this, String feature, Object value, String lexerRule, AbstractNode node) throws ValueConverterException {
@@ -161,7 +237,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	private void appendError(AbstractNode node) {
 		if (currentError != null) {
 			SyntaxError error = ParsetreeFactory.eINSTANCE.createSyntaxError();
-			error.setMessage(currentError);
+			error.setMessage(currentError.getMessage());
 			node.setSyntaxError(error);
 			currentError = null;
 		}
@@ -238,24 +314,31 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			}
 		}
 	}
-
-	private String currentError = null;
+	
+	private SyntaxErrorMessage currentError = null;
 
 	@Override
 	public void recover(IntStream input, RecognitionException re) {
 		if (currentError == null)
-			currentError = getErrorMessage(re, getTokenNames());
+			currentError = getSyntaxErrorMessage(re, getTokenNames());
 		super.recover(input, re);
 	}
-
+	
+	protected String getValueConverterExceptionMessage(ValueConverterException vce) {
+		Exception cause = (Exception) vce.getCause();
+		String result = cause != null ? cause.getMessage() : vce.getMessage();
+		if (result == null)
+			result = vce.getMessage();
+		if (result == null)
+			result = cause != null ? cause.getClass().getSimpleName() : vce.getClass().getSimpleName();
+		return result;
+	}
+	
 	protected void handleValueConverterException(ValueConverterException vce) {
 		Exception cause = (Exception) vce.getCause();
 		if (vce != cause) {
-			currentError = cause != null ? cause.getMessage() : vce.getMessage();
-			if (currentError == null)
-				currentError = vce.getMessage();
-			if (currentError == null)
-				currentError = cause != null ? cause.getClass().getSimpleName() : vce.getClass().getSimpleName();
+			IValueConverterErrorContext errorContext = createValueConverterErrorContext(vce);
+			currentError = syntaxErrorProvider.getSyntaxErrorMessage(errorContext);
 			if (vce.getNode() == null) {
 				final List<AbstractNode> children = currentNode.getChildren();
 				if (children.isEmpty()) {
@@ -271,11 +354,15 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		}
 	}
 
+	protected IValueConverterErrorContext createValueConverterErrorContext(ValueConverterException vce) {
+		return new ValueConverterErrorContext(vce);
+	}
+
 	@Override
 	public void recoverFromMismatchedToken(IntStream in, RecognitionException re, int ttype, BitSet follow)
 			throws RecognitionException {
 		if (currentError == null)
-			currentError = getErrorMessage(re, getTokenNames());
+			currentError = getSyntaxErrorMessage(re, getTokenNames());
 		// inlined super call because we want to get rid of the System.err.println(..)
 		// System.err.println("BR.recoverFromMismatchedToken");
 		// if next token is what we are looking for then "delete" this token
@@ -294,6 +381,34 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		if ( !recoverFromMismatchedElement(input, re,follow) ) {
 			throw re;
 		}
+	}
+	
+	@Override
+	public String getErrorMessage(RecognitionException e, String[] tokenNames) {
+		throw new UnsupportedOperationException("getErrorMessage");
+	}
+	
+	@Override
+	public void displayRecognitionError(String[] tokenNames, RecognitionException e) {
+		throw new UnsupportedOperationException("displayRecognitionError");
+	}
+	
+	@Override
+	public void reportError(RecognitionException e) {
+		// do nothing
+	}
+	
+	public SyntaxErrorMessage getSyntaxErrorMessage(RecognitionException e, String[] tokenNames) {
+		IParserErrorContext parseErrorContext = createErrorContext(e);
+		return syntaxErrorProvider.getSyntaxErrorMessage(parseErrorContext);
+	}
+	
+	protected String superGetErrorMessage(RecognitionException e, String[] tokenNames) {
+		return super.getErrorMessage(e, tokenNames);
+	}
+	
+	protected IParserErrorContext createErrorContext(RecognitionException e) {
+		return new ParserErrorContext(e);
 	}
 
 	public final IParseResult parse() throws RecognitionException {
