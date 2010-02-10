@@ -47,13 +47,15 @@ public class CharacterPairMatcher implements ICharacterPairMatcher, IDocumentLis
 	}
 
 	protected IXtextDocument getDocument(IDocument iDocument) {
+		if (this.document != null && this.document != iDocument) {
+			clear();
+			this.document = null;
+		}
 		if (this.document == null) {
 			this.document = (IXtextDocument) iDocument;
 			this.document.addDocumentListener(this);
 			this.document.addModelListener(this);
 		}
-		if (this.document != iDocument)
-			throw new IllegalStateException();
 		return this.document;
 	}
 
