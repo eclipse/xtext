@@ -41,7 +41,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.grammarinheritance.InheritanceTest.class);
       suite.addTestSuite(org.eclipse.xtext.grammarinheritance.ToEcoreTrafoTest.class);
       suite.addTestSuite(org.eclipse.xtext.lexer.Bug282355Test.class);
-      suite.addTestSuite(org.eclipse.xtext.lexer.IngoreCaseTest.class);
+      suite.addTestSuite(org.eclipse.xtext.lexer.IgnoreCaseTest.class);
       suite.addTestSuite(org.eclipse.xtext.lexer.LexerErrorTest.class);
       suite.addTestSuite(org.eclipse.xtext.linking.Bug266082Test.class);
       suite.addTestSuite(org.eclipse.xtext.linking.Bug287988Test.class);
@@ -81,6 +81,8 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.parser.antlr.Bug289524Test.class);
       suite.addTestSuite(org.eclipse.xtext.parser.antlr.Bug296889ExTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.antlr.Bug296889Test.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.antlr.Bug301935Test.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.antlr.Bug301935ExTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.antlr.LexerProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.antlr.TokenAcceptorTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.assignments.Bug287184Test.class);

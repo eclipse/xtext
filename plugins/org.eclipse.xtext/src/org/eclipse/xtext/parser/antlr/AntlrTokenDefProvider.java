@@ -19,6 +19,7 @@ import java.util.regex.Pattern;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.WrappedException;
+import org.eclipse.xtext.util.Strings;
 
 import com.google.inject.Inject;
 
@@ -33,6 +34,8 @@ public class AntlrTokenDefProvider implements ITokenDefProvider {
 	private IAntlrTokenFileProvider antlrTokenFileProvider;
 	
 	protected Map<Integer, String> tokenDefMap;
+	
+	private static final String TOKEN_COUNT = "Tokens";
 	
 	public Map<Integer, String> getTokenDefMap() {
 		if (antlrTokenFileProvider == null)
@@ -52,11 +55,18 @@ public class AntlrTokenDefProvider implements ITokenDefProvider {
 
 					int antlrTokenType = Integer.parseInt(m.group(2));
 					String antlrTokenDef = m.group(1);
-					tokenDefMap.put(antlrTokenType, antlrTokenDef);
+					if (!TOKEN_COUNT.equals(antlrTokenDef)) {
+						if (antlrTokenDef.startsWith("'")) {
+							antlrTokenDef = antlrTokenDef.substring(1, antlrTokenDef.length() - 1);
+							antlrTokenDef = Strings.convertFromJavaString(antlrTokenDef);
+							antlrTokenDef = "'" + antlrTokenDef + "'";
+						}
+						tokenDefMap.put(antlrTokenType, antlrTokenDef);
+					}
 					line = br.readLine();
 				}
 			} catch (Exception e) {
-				log.error(e);
+				log.error(e, e);
 				tokenDefMap = null;
 				throw new WrappedException(e);
 			} finally {
