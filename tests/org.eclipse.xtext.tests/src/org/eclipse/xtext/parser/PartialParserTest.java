@@ -306,4 +306,16 @@ public class PartialParserTest extends AbstractPartialParserTest {
 		resource.update(model.indexOf("* ") + 2, 0, ");");
 		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
 	}
+	
+	public void testReparseEmptyString() throws Exception {
+		with(XtextStandaloneSetup.class);
+		String model = "grammar org.eclipse.Bug273209_01 with org.eclipse.xtext.common.Terminals \n" +
+		"generate testLanguage 'http://www.eclipse.org/2009/tmf/xtext/partialParsing/Bug273209/3'\n" +
+		"Model : \n" +
+		"        ('model' ':' name=ID ';'*);";
+		XtextResource resource = getResourceFromString(model);
+		assertTrue(resource.getErrors().toString(), resource.getErrors().isEmpty());
+		resource.update(0, model.length(), "");
+		assertTrue(resource.getContents().isEmpty());
+	}
 }
