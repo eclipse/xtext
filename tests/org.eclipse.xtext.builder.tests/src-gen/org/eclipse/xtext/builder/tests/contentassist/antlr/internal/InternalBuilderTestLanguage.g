@@ -66,7 +66,7 @@ entryRuleNamedElement
 ;
 
 // Rule NamedElement
-ruleNamedElement 
+ruleNamedElement
     @init {
 		int stackSize = keepStackSize();
     }
@@ -94,7 +94,7 @@ entryRuleNamespace
 ;
 
 // Rule Namespace
-ruleNamespace 
+ruleNamespace
     @init {
 		int stackSize = keepStackSize();
     }
@@ -122,7 +122,7 @@ entryRuleImport
 ;
 
 // Rule Import
-ruleImport 
+ruleImport
     @init {
 		int stackSize = keepStackSize();
     }
@@ -150,7 +150,7 @@ entryRuleElement
 ;
 
 // Rule Element
-ruleElement 
+ruleElement
     @init {
 		int stackSize = keepStackSize();
     }
@@ -178,7 +178,7 @@ entryRuleQualifiedName
 ;
 
 // Rule QualifiedName
-ruleQualifiedName 
+ruleQualifiedName
     @init {
 		int stackSize = keepStackSize();
     }

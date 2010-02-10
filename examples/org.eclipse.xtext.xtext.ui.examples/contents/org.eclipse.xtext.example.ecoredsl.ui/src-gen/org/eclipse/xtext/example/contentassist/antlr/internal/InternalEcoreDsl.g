@@ -66,7 +66,7 @@ entryRuleEcoreDsl
 ;
 
 // Rule EcoreDsl
-ruleEcoreDsl 
+ruleEcoreDsl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -94,7 +94,7 @@ entryRuleReferencedMetamodel
 ;
 
 // Rule ReferencedMetamodel
-ruleReferencedMetamodel 
+ruleReferencedMetamodel
     @init {
 		int stackSize = keepStackSize();
     }
@@ -122,7 +122,7 @@ entryRuleEPackageDecl
 ;
 
 // Rule EPackageDecl
-ruleEPackageDecl 
+ruleEPackageDecl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -150,7 +150,7 @@ entryRuleSubEPackageDecl
 ;
 
 // Rule SubEPackageDecl
-ruleSubEPackageDecl 
+ruleSubEPackageDecl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -178,7 +178,7 @@ entryRuleEClassifierDecl
 ;
 
 // Rule EClassifierDecl
-ruleEClassifierDecl 
+ruleEClassifierDecl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -206,7 +206,7 @@ entryRuleEDataTypeDecl
 ;
 
 // Rule EDataTypeDecl
-ruleEDataTypeDecl 
+ruleEDataTypeDecl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -234,7 +234,7 @@ entryRuleEAnnotationDecl
 ;
 
 // Rule EAnnotationDecl
-ruleEAnnotationDecl 
+ruleEAnnotationDecl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -262,7 +262,7 @@ entryRuleEClassDecl
 ;
 
 // Rule EClassDecl
-ruleEClassDecl 
+ruleEClassDecl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -290,7 +290,7 @@ entryRuleEStructuralFeatureDecl
 ;
 
 // Rule EStructuralFeatureDecl
-ruleEStructuralFeatureDecl 
+ruleEStructuralFeatureDecl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -318,7 +318,7 @@ entryRuleEAttributeDecl
 ;
 
 // Rule EAttributeDecl
-ruleEAttributeDecl 
+ruleEAttributeDecl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -346,7 +346,7 @@ entryRuleEReferenceDecl
 ;
 
 // Rule EReferenceDecl
-ruleEReferenceDecl 
+ruleEReferenceDecl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -374,7 +374,7 @@ entryRuleEEnumDecl
 ;
 
 // Rule EEnumDecl
-ruleEEnumDecl 
+ruleEEnumDecl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -402,7 +402,7 @@ entryRuleEEnumLiteralDecl
 ;
 
 // Rule EEnumLiteralDecl
-ruleEEnumLiteralDecl 
+ruleEEnumLiteralDecl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -430,7 +430,7 @@ entryRuleETypeParameterDecl
 ;
 
 // Rule ETypeParameterDecl
-ruleETypeParameterDecl 
+ruleETypeParameterDecl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -458,7 +458,7 @@ entryRuleEGenericTypeReferenceDecl
 ;
 
 // Rule EGenericTypeReferenceDecl
-ruleEGenericTypeReferenceDecl 
+ruleEGenericTypeReferenceDecl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -486,7 +486,7 @@ entryRuleEGenericTypeDecl
 ;
 
 // Rule EGenericTypeDecl
-ruleEGenericTypeDecl 
+ruleEGenericTypeDecl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -514,7 +514,7 @@ entryRuleEOperationDecl
 ;
 
 // Rule EOperationDecl
-ruleEOperationDecl 
+ruleEOperationDecl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -542,7 +542,7 @@ entryRuleEParameterDecl
 ;
 
 // Rule EParameterDecl
-ruleEParameterDecl 
+ruleEParameterDecl
     @init {
 		int stackSize = keepStackSize();
     }
@@ -570,7 +570,7 @@ entryRuleMapEntry
 ;
 
 // Rule MapEntry
-ruleMapEntry 
+ruleMapEntry
     @init {
 		int stackSize = keepStackSize();
     }
@@ -598,7 +598,7 @@ entryRuleQID
 ;
 
 // Rule QID
-ruleQID 
+ruleQID
     @init {
 		int stackSize = keepStackSize();
     }
@@ -626,7 +626,7 @@ entryRuleSTRING_OR_QID
 ;
 
 // Rule STRING_OR_QID
-ruleSTRING_OR_QID 
+ruleSTRING_OR_QID
     @init {
 		int stackSize = keepStackSize();
     }
@@ -654,7 +654,7 @@ entryRuleSINT
 ;
 
 // Rule SINT
-ruleSINT 
+ruleSINT
     @init {
 		int stackSize = keepStackSize();
     }

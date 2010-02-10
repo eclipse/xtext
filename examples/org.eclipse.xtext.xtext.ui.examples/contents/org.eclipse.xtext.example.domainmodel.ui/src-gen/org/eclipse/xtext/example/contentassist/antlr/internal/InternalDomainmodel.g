@@ -67,7 +67,7 @@ entryRuleModel
 ;
 
 // Rule Model
-ruleModel 
+ruleModel
     @init {
 		int stackSize = keepStackSize();
     }
@@ -95,7 +95,7 @@ entryRuleAbstractElement
 ;
 
 // Rule AbstractElement
-ruleAbstractElement 
+ruleAbstractElement
     @init {
 		int stackSize = keepStackSize();
     }
@@ -123,7 +123,7 @@ entryRuleImport
 ;
 
 // Rule Import
-ruleImport 
+ruleImport
     @init {
 		int stackSize = keepStackSize();
     }
@@ -151,7 +151,7 @@ entryRulePackageDeclaration
 ;
 
 // Rule PackageDeclaration
-rulePackageDeclaration 
+rulePackageDeclaration
     @init {
 		int stackSize = keepStackSize();
     }
@@ -179,7 +179,7 @@ entryRuleType
 ;
 
 // Rule Type
-ruleType 
+ruleType
     @init {
 		int stackSize = keepStackSize();
     }
@@ -207,7 +207,7 @@ entryRuleDataType
 ;
 
 // Rule DataType
-ruleDataType 
+ruleDataType
     @init {
 		int stackSize = keepStackSize();
     }
@@ -235,7 +235,7 @@ entryRuleEntity
 ;
 
 // Rule Entity
-ruleEntity 
+ruleEntity
     @init {
 		int stackSize = keepStackSize();
     }
@@ -263,7 +263,7 @@ entryRuleFeature
 ;
 
 // Rule Feature
-ruleFeature 
+ruleFeature
     @init {
 		int stackSize = keepStackSize();
     }
@@ -291,7 +291,7 @@ entryRuleStructuralFeature
 ;
 
 // Rule StructuralFeature
-ruleStructuralFeature 
+ruleStructuralFeature
     @init {
 		int stackSize = keepStackSize();
     }
@@ -319,7 +319,7 @@ entryRuleAttribute
 ;
 
 // Rule Attribute
-ruleAttribute 
+ruleAttribute
     @init {
 		int stackSize = keepStackSize();
     }
@@ -347,7 +347,7 @@ entryRuleReference
 ;
 
 // Rule Reference
-ruleReference 
+ruleReference
     @init {
 		int stackSize = keepStackSize();
     }
@@ -375,7 +375,7 @@ entryRuleOperation
 ;
 
 // Rule Operation
-ruleOperation 
+ruleOperation
     @init {
 		int stackSize = keepStackSize();
     }
@@ -403,7 +403,7 @@ entryRuleParameter
 ;
 
 // Rule Parameter
-ruleParameter 
+ruleParameter
     @init {
 		int stackSize = keepStackSize();
     }
@@ -433,7 +433,7 @@ entryRuleTypeRef
 ;
 
 // Rule TypeRef
-ruleTypeRef 
+ruleTypeRef
     @init {
 		int stackSize = keepStackSize();
     }
@@ -461,7 +461,7 @@ entryRuleQualifiedNameWithWildCard
 ;
 
 // Rule QualifiedNameWithWildCard
-ruleQualifiedNameWithWildCard 
+ruleQualifiedNameWithWildCard
     @init {
 		int stackSize = keepStackSize();
     }
@@ -489,7 +489,7 @@ entryRuleQualifiedName
 ;
 
 // Rule QualifiedName
-ruleQualifiedName 
+ruleQualifiedName
     @init {
 		int stackSize = keepStackSize();
     }

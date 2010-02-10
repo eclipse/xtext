@@ -66,7 +66,7 @@ entryRuleStatemachine
 ;
 
 // Rule Statemachine
-ruleStatemachine 
+ruleStatemachine
     @init {
 		int stackSize = keepStackSize();
     }
@@ -94,7 +94,7 @@ entryRuleEvent
 ;
 
 // Rule Event
-ruleEvent 
+ruleEvent
     @init {
 		int stackSize = keepStackSize();
     }
@@ -122,7 +122,7 @@ entryRuleCommand
 ;
 
 // Rule Command
-ruleCommand 
+ruleCommand
     @init {
 		int stackSize = keepStackSize();
     }
@@ -150,7 +150,7 @@ entryRuleState
 ;
 
 // Rule State
-ruleState 
+ruleState
     @init {
 		int stackSize = keepStackSize();
     }
@@ -178,7 +178,7 @@ entryRuleTransition
 ;
 
 // Rule Transition
-ruleTransition 
+ruleTransition
     @init {
 		int stackSize = keepStackSize();
     }
