@@ -14,7 +14,7 @@ import org.eclipse.xtext.resource.XtextResource;
 /**
  * @author Heiko Behrens - Initial contribution and API
  */
-public class IngoreCaseTest extends AbstractXtextTests {
+public class IgnoreCaseTest extends AbstractXtextTests {
 
 	@Override
 	protected void setUp() throws Exception {

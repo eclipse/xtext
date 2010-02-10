@@ -397,5 +397,8 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.parser.unorderedGroups.parser.packrat.consumers,
  org.eclipse.xtext.parser.unorderedGroups.parseTreeConstruction,
  org.eclipse.xtext.parser.unorderedGroups.parser.antlr,
- org.eclipse.xtext.parser.unorderedGroups.parser.antlr.internal
+ org.eclipse.xtext.parser.unorderedGroups.parser.antlr.internal,
+ org.eclipse.xtext.parser.antlr.bug301935Test,
+ org.eclipse.xtext.parser.antlr.bug301935Test.impl,
+ org.eclipse.xtext.parser.antlr.bug301935Test.util
 
