@@ -23,7 +23,7 @@ public class StyledProjectionAnnotation extends ProjectionAnnotation {
 	}
 
 	public StyledProjectionAnnotation(boolean isCollapsed, StyledString styledString) {
-		super();
+		super(isCollapsed);
 		this.styledString = styledString;
 	}
 
