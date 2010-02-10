@@ -21,7 +21,6 @@ import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.impl.ResourceImpl;
-import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
@@ -41,7 +40,7 @@ import com.google.inject.Inject;
 
 /**
  * An EMF resource that reads and writes models of an Xtext DSL.
- *
+ * 
  * @author Jan Köhnlein
  * @author Heiko Behrens
  * @author Dennis Hübner
@@ -52,9 +51,9 @@ import com.google.inject.Inject;
 public class XtextResource extends ResourceImpl {
 
 	public static String OPTION_RESOLVE_ALL = XtextResource.class.getName() + ".RESOLVE_ALL";
-	
+
 	public static String OPTION_FORMAT = XtextResource.class.getName() + ".FORMAT";
-	
+
 	private boolean validationDisabled;
 
 	private IParser parser;
@@ -67,31 +66,31 @@ public class XtextResource extends ResourceImpl {
 
 	@Inject
 	private SerializerUtil serializer;
-	
+
 	@Inject
 	private IReferableElementsUnloader unloader;
-	
+
 	@Inject
 	private IResourceServiceProvider resourceServiceProvider;
-	
-	@Inject 
-	private IConcreteSyntaxValidator validator; 
-	
+
+	@Inject
+	private IConcreteSyntaxValidator validator;
+
 	public IResourceServiceProvider getResourceServiceProvider() {
 		return resourceServiceProvider;
 	}
-	
+
 	public void setResourceServiceProvider(IResourceServiceProvider resourceServiceProvider) {
 		this.resourceServiceProvider = resourceServiceProvider;
 	}
-	
+
 	private IParseResult parseResult;
 
 	@Inject
 	protected void setInjectedParser(ISwitchingParser parser) {
 		this.parser = parser;
 	}
-	
+
 	public XtextResource(URI uri) {
 		super(uri);
 	}
@@ -104,25 +103,29 @@ public class XtextResource extends ResourceImpl {
 		return parseResult;
 	}
 
+	@Override
+	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
+		IParseResult result = parser.parse(inputStream);
+		updateInternalState(result);
+	}
+
 	public void reparse(String newContent) throws IOException {
-		if (unloader != null) {
-			for(EObject content: getContents()) {
-				unloader.unloadRoot(content);
-			}
-		}
-		clearOutput();
+		clearInternalState();
 		doLoad(new StringInputStream(newContent), null);
-		reattachModificationTracker();
 		setModified(false);
 	}
 
-	private void reattachModificationTracker() {
-		if (isTrackingModification() && !getContents().isEmpty())
+	protected void reattachModificationTracker(EObject element) {
+		if (isTrackingModification() && element != null) {
+			if (!element.eAdapters().contains(modificationTrackingAdapter))
+				element.eAdapters().add(modificationTrackingAdapter);
 			// copied from ResourceImpl.setTrackingModification
-			for (TreeIterator<EObject> i = getAllProperContents(getContents()); i.hasNext();) {
+			for (TreeIterator<EObject> i = getAllProperContents(element); i.hasNext();) {
 				EObject eObject = i.next();
-				eObject.eAdapters().add(modificationTrackingAdapter);
+				if (!eObject.eAdapters().contains(modificationTrackingAdapter))
+					eObject.eAdapters().add(modificationTrackingAdapter);
 			}
+		}
 	}
 
 	@Override
@@ -135,37 +138,45 @@ public class XtextResource extends ResourceImpl {
 		if (!isLoaded()) {
 			throw new IllegalStateException("You can't update an unloaded resource.");
 		}
-		EObject oldRootObject = null;
-		if (parseResult != null && parseResult.getRootASTElement() != null) {
-			oldRootObject = parseResult.getRootASTElement();
+		EObject oldRootObject = parseResult.getRootASTElement();
+		CompositeNode oldRootNode = parseResult.getRootNode();
+		parseResult = parser.reparse(oldRootNode, offset, replacedTextLength, newText);
+		if (oldRootObject != null && oldRootObject != parseResult.getRootASTElement()) {
+			unload(oldRootObject);
+			getContents().remove(oldRootObject);
 		}
-		CompositeNode rootNode = parseResult.getRootNode();
-		parseResult = parser.reparse(rootNode, offset, replacedTextLength, newText);
-		getErrors().clear();
-		if (parseResult != null) {
-			getErrors().addAll(createDiagnostics(parseResult));
-			if (parseResult.getRootASTElement() != null) {
-				if (parseResult.getRootASTElement() != oldRootObject) {
-					if (oldRootObject != null) {
-						EcoreUtil.replace(oldRootObject, parseResult.getRootASTElement());
-						reattachModificationTracker();
-					} else {
-						getContents().add(parseResult.getRootASTElement());
-					}
-				}
-			}
-			if (parseResult.getRootNode() != rootNode) {
-				addAdaptersToRoot();
-			}
-		} else {
-			getContents().clear();
-		}
+		updateInternalState(parseResult);
+	}
+
+	protected void updateInternalState(IParseResult parseResult) {
+		this.parseResult = parseResult;
+		if (parseResult.getRootASTElement() != null && !getContents().contains(parseResult.getRootASTElement()))
+			getContents().add(parseResult.getRootASTElement());
+		addAdapterIfNeccessary(parseResult.getRootNode());
+		reattachModificationTracker(parseResult.getRootASTElement());
+		addSyntaxErrors();
 		doLinking();
 	}
 
-	private void clearOutput() {
+	protected void addSyntaxErrors() {
+		getErrors().clear();
+		getErrors().addAll(createDiagnostics(parseResult));
+	}
+
+	protected void unload(EObject oldRootObject) {
+		if (unloader != null) {
+			unloader.unloadRoot(oldRootObject);
+		}
+	}
+
+	protected void clearInternalState() {
+		for (EObject content : getContents()) {
+			unload(content);
+		}
 		getContents().clear();
 		getErrors().clear();
+		getWarnings().clear();
+		this.parseResult = null;
 	}
 
 	protected void doLinking() {
@@ -177,25 +188,12 @@ public class XtextResource extends ResourceImpl {
 		final ListBasedDiagnosticConsumer consumer = new ListBasedDiagnosticConsumer();
 		linker.linkModel(parseResult.getRootASTElement(), consumer);
 		getErrors().addAll(consumer.getResult());
-		// logger.debug("errors: " + errors.size());
+		//TODO add warnings
 	}
 
-	private void addAdaptersToRoot() {
-		NodeContentAdapter.createAdapterAndAddToNode(parseResult.getRootNode());
-	}
-
-	@Override
-	protected void doLoad(InputStream inputStream, Map<?, ?> options) throws IOException {
-		parseResult = parser.parse(inputStream);
-		if (parseResult != null) {
-			getErrors().addAll(createDiagnostics(parseResult));
-			EObject rootElement = parseResult.getRootASTElement();
-			if (rootElement != null) {
-				getContents().add(rootElement);
-			}
-			addAdaptersToRoot();
-		}
-		doLinking();
+	private void addAdapterIfNeccessary(CompositeNode node) {
+		if (node != null && !NodeContentAdapter.containsNodeContentAdapter(node))
+			NodeContentAdapter.createAdapterAndAddToNode(node);
 	}
 
 	@Override
@@ -229,9 +227,8 @@ public class XtextResource extends ResourceImpl {
 	}
 
 	/**
-	 * Creates {@link Diagnostic}s from {@link SyntaxError}s in
-	 * {@link ParseResult}
-	 *
+	 * Creates {@link Diagnostic}s from {@link SyntaxError}s in {@link ParseResult}
+	 * 
 	 * @param list
 	 *            of {@link SyntaxError}s
 	 * @return list of {@link Diagnostic}
@@ -254,11 +251,11 @@ public class XtextResource extends ResourceImpl {
 	public void setParser(IParser parser) {
 		this.parser = parser;
 	}
-	
+
 	public IConcreteSyntaxValidator getConcreteSyntaxValidator() {
 		return validator;
 	}
-	
+
 	public List<org.eclipse.emf.common.util.Diagnostic> validateConcreteSyntax() {
 		List<org.eclipse.emf.common.util.Diagnostic> diagnostics = new ArrayList<org.eclipse.emf.common.util.Diagnostic>();
 		IDiagnosticAcceptor acceptor = new IConcreteSyntaxValidator.DiagnosticListAcceptor(diagnostics);
@@ -314,5 +311,5 @@ public class XtextResource extends ResourceImpl {
 	public IReferableElementsUnloader getUnloader() {
 		return unloader;
 	}
-	
+
 }

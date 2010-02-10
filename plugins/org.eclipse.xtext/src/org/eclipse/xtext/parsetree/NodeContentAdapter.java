@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree;
 
+import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.util.EContentAdapter;
@@ -24,6 +25,16 @@ public class NodeContentAdapter extends EContentAdapter {
 		new NodeContentAdapter().addToNode(node);
 	}
 	
+	public static boolean containsNodeContentAdapter(CompositeNode node) {
+		if (node.eAdapters().isEmpty())
+			return false;
+		for (Adapter adapter : node.eAdapters()) {
+			if (adapter instanceof NodeContentAdapter)
+				return true;
+		}
+		return false;
+	}
+
 	public void addToNode(final CompositeNode node) {
 		if (node != null) {
 			node.eAdapters().add(this);
