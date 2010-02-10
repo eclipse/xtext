@@ -11,7 +11,9 @@ import java.io.InputStream;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
 import org.eclipse.xtext.parser.partialParsingTestUtil.PartialParsingTestUtilPackage;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
@@ -56,18 +58,25 @@ public abstract class AbstractPartialParserCrossContainmentTest extends Abstract
 	}
 
 	protected void replaceAndReparse(String model, int offset, int length, String inserted, boolean expectSameRoot) throws Exception {
-		XtextResource resource = getResourceFromString(model);
+		final XtextResource resource = getResourceFromString(model);
+		resource.setUnloader(new IReferableElementsUnloader() {
+			public void unloadRoot(EObject root) {
+				InternalEObject internalEObject = (InternalEObject) root;
+				internalEObject.eSetProxyURI(resource.getURI().appendFragment(resource.getURIFragment(internalEObject)));
+			    internalEObject.eAdapters().clear();
+			}});
 		assertEquals(1, resource.getContents().size());
 		EObject wasObject = resource.getContents().get(0);
 		assertNotNull(wasObject.eContainer());
 		assertNotSame(wasObject.eResource(), wasObject.eContainer().eResource());
-		EObject wasContainer = wasObject.eContainer();
 		resource.update(offset, length, inserted);
 		assertEquals(1, resource.getContents().size());
 		EObject newRoot = resource.getContents().get(0);
 		assertEquals(expectSameRoot, wasObject == newRoot);
-		assertSame(wasContainer, newRoot.eContainer());
-		assertNotSame(resource, wasContainer.eResource());
+		if (!expectSameRoot) {
+			assertTrue(((InternalEObject)wasObject).eIsProxy());
+			assertNotSame(resource, wasObject.eResource());
+		}
 		assertSame(resource, newRoot.eResource());
 	}
 
