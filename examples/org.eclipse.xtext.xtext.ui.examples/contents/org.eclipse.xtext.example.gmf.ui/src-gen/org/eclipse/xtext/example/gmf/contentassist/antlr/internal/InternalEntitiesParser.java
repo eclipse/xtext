@@ -107,7 +107,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:76:1: ( rule__Model__Group__0 )
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:76:2: rule__Model__Group__0
             {
-            pushFollow(FOLLOW_rule__Model__Group__0_in_ruleModel95);
+            pushFollow(FOLLOW_rule__Model__Group__0_in_ruleModel94);
             rule__Model__Group__0();
             _fsp--;
 
@@ -144,12 +144,12 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:90:1: ruleImport EOF
             {
              before(grammarAccess.getImportRule()); 
-            pushFollow(FOLLOW_ruleImport_in_entryRuleImport122);
+            pushFollow(FOLLOW_ruleImport_in_entryRuleImport121);
             ruleImport();
             _fsp--;
 
              after(grammarAccess.getImportRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleImport129); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleImport128); 
 
             }
 
@@ -182,7 +182,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:104:1: ( rule__Import__Group__0 )
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:104:2: rule__Import__Group__0
             {
-            pushFollow(FOLLOW_rule__Import__Group__0_in_ruleImport156);
+            pushFollow(FOLLOW_rule__Import__Group__0_in_ruleImport154);
             rule__Import__Group__0();
             _fsp--;
 
@@ -219,12 +219,12 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:118:1: ruleType EOF
             {
              before(grammarAccess.getTypeRule()); 
-            pushFollow(FOLLOW_ruleType_in_entryRuleType183);
+            pushFollow(FOLLOW_ruleType_in_entryRuleType181);
             ruleType();
             _fsp--;
 
              after(grammarAccess.getTypeRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleType190); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleType188); 
 
             }
 
@@ -257,7 +257,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:132:1: ( rule__Type__Alternatives )
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:132:2: rule__Type__Alternatives
             {
-            pushFollow(FOLLOW_rule__Type__Alternatives_in_ruleType217);
+            pushFollow(FOLLOW_rule__Type__Alternatives_in_ruleType214);
             rule__Type__Alternatives();
             _fsp--;
 
@@ -294,12 +294,12 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:146:1: ruleSimpleType EOF
             {
              before(grammarAccess.getSimpleTypeRule()); 
-            pushFollow(FOLLOW_ruleSimpleType_in_entryRuleSimpleType244);
+            pushFollow(FOLLOW_ruleSimpleType_in_entryRuleSimpleType241);
             ruleSimpleType();
             _fsp--;
 
              after(grammarAccess.getSimpleTypeRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSimpleType251); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSimpleType248); 
 
             }
 
@@ -332,7 +332,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:160:1: ( rule__SimpleType__Group__0 )
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:160:2: rule__SimpleType__Group__0
             {
-            pushFollow(FOLLOW_rule__SimpleType__Group__0_in_ruleSimpleType278);
+            pushFollow(FOLLOW_rule__SimpleType__Group__0_in_ruleSimpleType274);
             rule__SimpleType__Group__0();
             _fsp--;
 
@@ -369,12 +369,12 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:174:1: ruleEntity EOF
             {
              before(grammarAccess.getEntityRule()); 
-            pushFollow(FOLLOW_ruleEntity_in_entryRuleEntity305);
+            pushFollow(FOLLOW_ruleEntity_in_entryRuleEntity301);
             ruleEntity();
             _fsp--;
 
              after(grammarAccess.getEntityRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleEntity312); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleEntity308); 
 
             }
 
@@ -407,7 +407,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:188:1: ( rule__Entity__Group__0 )
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:188:2: rule__Entity__Group__0
             {
-            pushFollow(FOLLOW_rule__Entity__Group__0_in_ruleEntity339);
+            pushFollow(FOLLOW_rule__Entity__Group__0_in_ruleEntity334);
             rule__Entity__Group__0();
             _fsp--;
 
@@ -444,12 +444,12 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:202:1: ruleProperty EOF
             {
              before(grammarAccess.getPropertyRule()); 
-            pushFollow(FOLLOW_ruleProperty_in_entryRuleProperty366);
+            pushFollow(FOLLOW_ruleProperty_in_entryRuleProperty361);
             ruleProperty();
             _fsp--;
 
              after(grammarAccess.getPropertyRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleProperty373); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleProperty368); 
 
             }
 
@@ -482,7 +482,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:216:1: ( rule__Property__Alternatives )
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:216:2: rule__Property__Alternatives
             {
-            pushFollow(FOLLOW_rule__Property__Alternatives_in_ruleProperty400);
+            pushFollow(FOLLOW_rule__Property__Alternatives_in_ruleProperty394);
             rule__Property__Alternatives();
             _fsp--;
 
@@ -519,12 +519,12 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:230:1: ruleSimpleProperty EOF
             {
              before(grammarAccess.getSimplePropertyRule()); 
-            pushFollow(FOLLOW_ruleSimpleProperty_in_entryRuleSimpleProperty427);
+            pushFollow(FOLLOW_ruleSimpleProperty_in_entryRuleSimpleProperty421);
             ruleSimpleProperty();
             _fsp--;
 
              after(grammarAccess.getSimplePropertyRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleSimpleProperty434); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleSimpleProperty428); 
 
             }
 
@@ -557,7 +557,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:244:1: ( rule__SimpleProperty__Group__0 )
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:244:2: rule__SimpleProperty__Group__0
             {
-            pushFollow(FOLLOW_rule__SimpleProperty__Group__0_in_ruleSimpleProperty461);
+            pushFollow(FOLLOW_rule__SimpleProperty__Group__0_in_ruleSimpleProperty454);
             rule__SimpleProperty__Group__0();
             _fsp--;
 
@@ -594,12 +594,12 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:258:1: ruleReference EOF
             {
              before(grammarAccess.getReferenceRule()); 
-            pushFollow(FOLLOW_ruleReference_in_entryRuleReference488);
+            pushFollow(FOLLOW_ruleReference_in_entryRuleReference481);
             ruleReference();
             _fsp--;
 
              after(grammarAccess.getReferenceRule()); 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleReference495); 
+            match(input,EOF,FOLLOW_EOF_in_entryRuleReference488); 
 
             }
 
@@ -632,7 +632,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:272:1: ( rule__Reference__Group__0 )
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:272:2: rule__Reference__Group__0
             {
-            pushFollow(FOLLOW_rule__Reference__Group__0_in_ruleReference522);
+            pushFollow(FOLLOW_rule__Reference__Group__0_in_ruleReference514);
             rule__Reference__Group__0();
             _fsp--;
 
@@ -692,7 +692,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:290:1: ruleSimpleType
                     {
                      before(grammarAccess.getTypeAccess().getSimpleTypeParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleSimpleType_in_rule__Type__Alternatives558);
+                    pushFollow(FOLLOW_ruleSimpleType_in_rule__Type__Alternatives550);
                     ruleSimpleType();
                     _fsp--;
 
@@ -710,7 +710,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:296:1: ruleEntity
                     {
                      before(grammarAccess.getTypeAccess().getEntityParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleEntity_in_rule__Type__Alternatives575);
+                    pushFollow(FOLLOW_ruleEntity_in_rule__Type__Alternatives567);
                     ruleEntity();
                     _fsp--;
 
@@ -769,7 +769,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:312:1: ruleSimpleProperty
                     {
                      before(grammarAccess.getPropertyAccess().getSimplePropertyParserRuleCall_0()); 
-                    pushFollow(FOLLOW_ruleSimpleProperty_in_rule__Property__Alternatives607);
+                    pushFollow(FOLLOW_ruleSimpleProperty_in_rule__Property__Alternatives599);
                     ruleSimpleProperty();
                     _fsp--;
 
@@ -787,7 +787,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
                     // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:318:1: ruleReference
                     {
                      before(grammarAccess.getPropertyAccess().getReferenceParserRuleCall_1()); 
-                    pushFollow(FOLLOW_ruleReference_in_rule__Property__Alternatives624);
+                    pushFollow(FOLLOW_ruleReference_in_rule__Property__Alternatives616);
                     ruleReference();
                     _fsp--;
 
@@ -838,7 +838,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__Model__Group__1_in_rule__Model__Group__0668);
+            pushFollow(FOLLOW_rule__Model__Group__1_in_rule__Model__Group__0660);
             rule__Model__Group__1();
             _fsp--;
 
@@ -889,7 +889,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:357:2: rule__Model__ImportsAssignment_1
             	    {
-            	    pushFollow(FOLLOW_rule__Model__ImportsAssignment_1_in_rule__Model__Group__1696);
+            	    pushFollow(FOLLOW_rule__Model__ImportsAssignment_1_in_rule__Model__Group__1688);
             	    rule__Model__ImportsAssignment_1();
             	    _fsp--;
 
@@ -906,7 +906,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__Model__Group__2_in_rule__Model__Group__1706);
+            pushFollow(FOLLOW_rule__Model__Group__2_in_rule__Model__Group__1698);
             rule__Model__Group__2();
             _fsp--;
 
@@ -957,7 +957,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:375:2: rule__Model__ElementsAssignment_2
             	    {
-            	    pushFollow(FOLLOW_rule__Model__ElementsAssignment_2_in_rule__Model__Group__2734);
+            	    pushFollow(FOLLOW_rule__Model__ElementsAssignment_2_in_rule__Model__Group__2726);
             	    rule__Model__ElementsAssignment_2();
             	    _fsp--;
 
@@ -1006,12 +1006,12 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:397:1: 'import'
             {
              before(grammarAccess.getImportAccess().getImportKeyword_0()); 
-            match(input,11,FOLLOW_11_in_rule__Import__Group__0776); 
+            match(input,11,FOLLOW_11_in_rule__Import__Group__0768); 
              after(grammarAccess.getImportAccess().getImportKeyword_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__Import__Group__1_in_rule__Import__Group__0786);
+            pushFollow(FOLLOW_rule__Import__Group__1_in_rule__Import__Group__0778);
             rule__Import__Group__1();
             _fsp--;
 
@@ -1050,7 +1050,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:418:1: ( rule__Import__ImportURIAssignment_1 )
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:418:2: rule__Import__ImportURIAssignment_1
             {
-            pushFollow(FOLLOW_rule__Import__ImportURIAssignment_1_in_rule__Import__Group__1814);
+            pushFollow(FOLLOW_rule__Import__ImportURIAssignment_1_in_rule__Import__Group__1806);
             rule__Import__ImportURIAssignment_1();
             _fsp--;
 
@@ -1093,12 +1093,12 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:438:1: 'type'
             {
              before(grammarAccess.getSimpleTypeAccess().getTypeKeyword_0()); 
-            match(input,12,FOLLOW_12_in_rule__SimpleType__Group__0853); 
+            match(input,12,FOLLOW_12_in_rule__SimpleType__Group__0845); 
              after(grammarAccess.getSimpleTypeAccess().getTypeKeyword_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__SimpleType__Group__1_in_rule__SimpleType__Group__0863);
+            pushFollow(FOLLOW_rule__SimpleType__Group__1_in_rule__SimpleType__Group__0855);
             rule__SimpleType__Group__1();
             _fsp--;
 
@@ -1137,7 +1137,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:459:1: ( rule__SimpleType__NameAssignment_1 )
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:459:2: rule__SimpleType__NameAssignment_1
             {
-            pushFollow(FOLLOW_rule__SimpleType__NameAssignment_1_in_rule__SimpleType__Group__1891);
+            pushFollow(FOLLOW_rule__SimpleType__NameAssignment_1_in_rule__SimpleType__Group__1883);
             rule__SimpleType__NameAssignment_1();
             _fsp--;
 
@@ -1180,12 +1180,12 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:479:1: 'entity'
             {
              before(grammarAccess.getEntityAccess().getEntityKeyword_0()); 
-            match(input,13,FOLLOW_13_in_rule__Entity__Group__0930); 
+            match(input,13,FOLLOW_13_in_rule__Entity__Group__0922); 
              after(grammarAccess.getEntityAccess().getEntityKeyword_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__Entity__Group__1_in_rule__Entity__Group__0940);
+            pushFollow(FOLLOW_rule__Entity__Group__1_in_rule__Entity__Group__0932);
             rule__Entity__Group__1();
             _fsp--;
 
@@ -1224,7 +1224,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:500:1: ( rule__Entity__NameAssignment_1 )
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:500:2: rule__Entity__NameAssignment_1
             {
-            pushFollow(FOLLOW_rule__Entity__NameAssignment_1_in_rule__Entity__Group__1968);
+            pushFollow(FOLLOW_rule__Entity__NameAssignment_1_in_rule__Entity__Group__1960);
             rule__Entity__NameAssignment_1();
             _fsp--;
 
@@ -1235,7 +1235,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__Entity__Group__2_in_rule__Entity__Group__1977);
+            pushFollow(FOLLOW_rule__Entity__Group__2_in_rule__Entity__Group__1969);
             rule__Entity__Group__2();
             _fsp--;
 
@@ -1282,7 +1282,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:518:2: rule__Entity__Group_2__0
                     {
-                    pushFollow(FOLLOW_rule__Entity__Group_2__0_in_rule__Entity__Group__21005);
+                    pushFollow(FOLLOW_rule__Entity__Group_2__0_in_rule__Entity__Group__2997);
                     rule__Entity__Group_2__0();
                     _fsp--;
 
@@ -1296,7 +1296,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__Entity__Group__3_in_rule__Entity__Group__21015);
+            pushFollow(FOLLOW_rule__Entity__Group__3_in_rule__Entity__Group__21007);
             rule__Entity__Group__3();
             _fsp--;
 
@@ -1332,12 +1332,12 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:535:1: '{'
             {
              before(grammarAccess.getEntityAccess().getLeftCurlyBracketKeyword_3()); 
-            match(input,14,FOLLOW_14_in_rule__Entity__Group__31044); 
+            match(input,14,FOLLOW_14_in_rule__Entity__Group__31036); 
              after(grammarAccess.getEntityAccess().getLeftCurlyBracketKeyword_3()); 
 
             }
 
-            pushFollow(FOLLOW_rule__Entity__Group__4_in_rule__Entity__Group__31054);
+            pushFollow(FOLLOW_rule__Entity__Group__4_in_rule__Entity__Group__31046);
             rule__Entity__Group__4();
             _fsp--;
 
@@ -1388,7 +1388,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             	case 1 :
             	    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:556:2: rule__Entity__PropertiesAssignment_4
             	    {
-            	    pushFollow(FOLLOW_rule__Entity__PropertiesAssignment_4_in_rule__Entity__Group__41082);
+            	    pushFollow(FOLLOW_rule__Entity__PropertiesAssignment_4_in_rule__Entity__Group__41074);
             	    rule__Entity__PropertiesAssignment_4();
             	    _fsp--;
 
@@ -1405,7 +1405,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__Entity__Group__5_in_rule__Entity__Group__41092);
+            pushFollow(FOLLOW_rule__Entity__Group__5_in_rule__Entity__Group__41084);
             rule__Entity__Group__5();
             _fsp--;
 
@@ -1441,7 +1441,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:573:1: '}'
             {
              before(grammarAccess.getEntityAccess().getRightCurlyBracketKeyword_5()); 
-            match(input,15,FOLLOW_15_in_rule__Entity__Group__51121); 
+            match(input,15,FOLLOW_15_in_rule__Entity__Group__51113); 
              after(grammarAccess.getEntityAccess().getRightCurlyBracketKeyword_5()); 
 
             }
@@ -1478,12 +1478,12 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:604:1: 'extends'
             {
              before(grammarAccess.getEntityAccess().getExtendsKeyword_2_0()); 
-            match(input,16,FOLLOW_16_in_rule__Entity__Group_2__01169); 
+            match(input,16,FOLLOW_16_in_rule__Entity__Group_2__01161); 
              after(grammarAccess.getEntityAccess().getExtendsKeyword_2_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__Entity__Group_2__1_in_rule__Entity__Group_2__01179);
+            pushFollow(FOLLOW_rule__Entity__Group_2__1_in_rule__Entity__Group_2__01171);
             rule__Entity__Group_2__1();
             _fsp--;
 
@@ -1522,7 +1522,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:625:1: ( rule__Entity__ExtendsAssignment_2_1 )
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:625:2: rule__Entity__ExtendsAssignment_2_1
             {
-            pushFollow(FOLLOW_rule__Entity__ExtendsAssignment_2_1_in_rule__Entity__Group_2__11207);
+            pushFollow(FOLLOW_rule__Entity__ExtendsAssignment_2_1_in_rule__Entity__Group_2__11199);
             rule__Entity__ExtendsAssignment_2_1();
             _fsp--;
 
@@ -1565,12 +1565,12 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:645:1: 'property'
             {
              before(grammarAccess.getSimplePropertyAccess().getPropertyKeyword_0()); 
-            match(input,17,FOLLOW_17_in_rule__SimpleProperty__Group__01246); 
+            match(input,17,FOLLOW_17_in_rule__SimpleProperty__Group__01238); 
              after(grammarAccess.getSimplePropertyAccess().getPropertyKeyword_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__SimpleProperty__Group__1_in_rule__SimpleProperty__Group__01256);
+            pushFollow(FOLLOW_rule__SimpleProperty__Group__1_in_rule__SimpleProperty__Group__01248);
             rule__SimpleProperty__Group__1();
             _fsp--;
 
@@ -1609,7 +1609,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:666:1: ( rule__SimpleProperty__NameAssignment_1 )
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:666:2: rule__SimpleProperty__NameAssignment_1
             {
-            pushFollow(FOLLOW_rule__SimpleProperty__NameAssignment_1_in_rule__SimpleProperty__Group__11284);
+            pushFollow(FOLLOW_rule__SimpleProperty__NameAssignment_1_in_rule__SimpleProperty__Group__11276);
             rule__SimpleProperty__NameAssignment_1();
             _fsp--;
 
@@ -1620,7 +1620,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__SimpleProperty__Group__2_in_rule__SimpleProperty__Group__11293);
+            pushFollow(FOLLOW_rule__SimpleProperty__Group__2_in_rule__SimpleProperty__Group__11285);
             rule__SimpleProperty__Group__2();
             _fsp--;
 
@@ -1667,7 +1667,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:684:2: rule__SimpleProperty__Group_2__0
                     {
-                    pushFollow(FOLLOW_rule__SimpleProperty__Group_2__0_in_rule__SimpleProperty__Group__21321);
+                    pushFollow(FOLLOW_rule__SimpleProperty__Group_2__0_in_rule__SimpleProperty__Group__21313);
                     rule__SimpleProperty__Group_2__0();
                     _fsp--;
 
@@ -1713,12 +1713,12 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:706:1: ':'
             {
              before(grammarAccess.getSimplePropertyAccess().getColonKeyword_2_0()); 
-            match(input,18,FOLLOW_18_in_rule__SimpleProperty__Group_2__01363); 
+            match(input,18,FOLLOW_18_in_rule__SimpleProperty__Group_2__01355); 
              after(grammarAccess.getSimplePropertyAccess().getColonKeyword_2_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__SimpleProperty__Group_2__1_in_rule__SimpleProperty__Group_2__01373);
+            pushFollow(FOLLOW_rule__SimpleProperty__Group_2__1_in_rule__SimpleProperty__Group_2__01365);
             rule__SimpleProperty__Group_2__1();
             _fsp--;
 
@@ -1757,7 +1757,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:727:1: ( rule__SimpleProperty__TypeAssignment_2_1 )
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:727:2: rule__SimpleProperty__TypeAssignment_2_1
             {
-            pushFollow(FOLLOW_rule__SimpleProperty__TypeAssignment_2_1_in_rule__SimpleProperty__Group_2__11401);
+            pushFollow(FOLLOW_rule__SimpleProperty__TypeAssignment_2_1_in_rule__SimpleProperty__Group_2__11393);
             rule__SimpleProperty__TypeAssignment_2_1();
             _fsp--;
 
@@ -1768,7 +1768,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__SimpleProperty__Group_2__2_in_rule__SimpleProperty__Group_2__11410);
+            pushFollow(FOLLOW_rule__SimpleProperty__Group_2__2_in_rule__SimpleProperty__Group_2__11402);
             rule__SimpleProperty__Group_2__2();
             _fsp--;
 
@@ -1815,7 +1815,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:745:2: rule__SimpleProperty__ManyAssignment_2_2
                     {
-                    pushFollow(FOLLOW_rule__SimpleProperty__ManyAssignment_2_2_in_rule__SimpleProperty__Group_2__21438);
+                    pushFollow(FOLLOW_rule__SimpleProperty__ManyAssignment_2_2_in_rule__SimpleProperty__Group_2__21430);
                     rule__SimpleProperty__ManyAssignment_2_2();
                     _fsp--;
 
@@ -1861,12 +1861,12 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:767:1: 'reference'
             {
              before(grammarAccess.getReferenceAccess().getReferenceKeyword_0()); 
-            match(input,19,FOLLOW_19_in_rule__Reference__Group__01480); 
+            match(input,19,FOLLOW_19_in_rule__Reference__Group__01472); 
              after(grammarAccess.getReferenceAccess().getReferenceKeyword_0()); 
 
             }
 
-            pushFollow(FOLLOW_rule__Reference__Group__1_in_rule__Reference__Group__01490);
+            pushFollow(FOLLOW_rule__Reference__Group__1_in_rule__Reference__Group__01482);
             rule__Reference__Group__1();
             _fsp--;
 
@@ -1905,7 +1905,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:788:1: ( rule__Reference__NameAssignment_1 )
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:788:2: rule__Reference__NameAssignment_1
             {
-            pushFollow(FOLLOW_rule__Reference__NameAssignment_1_in_rule__Reference__Group__11518);
+            pushFollow(FOLLOW_rule__Reference__NameAssignment_1_in_rule__Reference__Group__11510);
             rule__Reference__NameAssignment_1();
             _fsp--;
 
@@ -1916,7 +1916,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__Reference__Group__2_in_rule__Reference__Group__11527);
+            pushFollow(FOLLOW_rule__Reference__Group__2_in_rule__Reference__Group__11519);
             rule__Reference__Group__2();
             _fsp--;
 
@@ -1952,12 +1952,12 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:805:1: ':'
             {
              before(grammarAccess.getReferenceAccess().getColonKeyword_2()); 
-            match(input,18,FOLLOW_18_in_rule__Reference__Group__21556); 
+            match(input,18,FOLLOW_18_in_rule__Reference__Group__21548); 
              after(grammarAccess.getReferenceAccess().getColonKeyword_2()); 
 
             }
 
-            pushFollow(FOLLOW_rule__Reference__Group__3_in_rule__Reference__Group__21566);
+            pushFollow(FOLLOW_rule__Reference__Group__3_in_rule__Reference__Group__21558);
             rule__Reference__Group__3();
             _fsp--;
 
@@ -1996,7 +1996,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:826:1: ( rule__Reference__TypeAssignment_3 )
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:826:2: rule__Reference__TypeAssignment_3
             {
-            pushFollow(FOLLOW_rule__Reference__TypeAssignment_3_in_rule__Reference__Group__31594);
+            pushFollow(FOLLOW_rule__Reference__TypeAssignment_3_in_rule__Reference__Group__31586);
             rule__Reference__TypeAssignment_3();
             _fsp--;
 
@@ -2007,7 +2007,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
 
             }
 
-            pushFollow(FOLLOW_rule__Reference__Group__4_in_rule__Reference__Group__31603);
+            pushFollow(FOLLOW_rule__Reference__Group__4_in_rule__Reference__Group__31595);
             rule__Reference__Group__4();
             _fsp--;
 
@@ -2054,7 +2054,7 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
                 case 1 :
                     // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:844:2: rule__Reference__ManyAssignment_4
                     {
-                    pushFollow(FOLLOW_rule__Reference__ManyAssignment_4_in_rule__Reference__Group__41631);
+                    pushFollow(FOLLOW_rule__Reference__ManyAssignment_4_in_rule__Reference__Group__41623);
                     rule__Reference__ManyAssignment_4();
                     _fsp--;
 
@@ -2087,20 +2087,20 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__Model__ImportsAssignment_1
-    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:864:1: rule__Model__ImportsAssignment_1 : ( ruleImport ) ;
+    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:865:1: rule__Model__ImportsAssignment_1 : ( ruleImport ) ;
     public final void rule__Model__ImportsAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:868:1: ( ( ruleImport ) )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:869:1: ( ruleImport )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:869:1: ( ( ruleImport ) )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:870:1: ( ruleImport )
             {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:869:1: ( ruleImport )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:870:1: ruleImport
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:870:1: ( ruleImport )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:871:1: ruleImport
             {
              before(grammarAccess.getModelAccess().getImportsImportParserRuleCall_1_0()); 
-            pushFollow(FOLLOW_ruleImport_in_rule__Model__ImportsAssignment_11676);
+            pushFollow(FOLLOW_ruleImport_in_rule__Model__ImportsAssignment_11669);
             ruleImport();
             _fsp--;
 
@@ -2127,20 +2127,20 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__Model__ElementsAssignment_2
-    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:879:1: rule__Model__ElementsAssignment_2 : ( ruleType ) ;
+    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:880:1: rule__Model__ElementsAssignment_2 : ( ruleType ) ;
     public final void rule__Model__ElementsAssignment_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:883:1: ( ( ruleType ) )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:884:1: ( ruleType )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:884:1: ( ( ruleType ) )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:885:1: ( ruleType )
             {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:884:1: ( ruleType )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:885:1: ruleType
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:885:1: ( ruleType )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:886:1: ruleType
             {
              before(grammarAccess.getModelAccess().getElementsTypeParserRuleCall_2_0()); 
-            pushFollow(FOLLOW_ruleType_in_rule__Model__ElementsAssignment_21707);
+            pushFollow(FOLLOW_ruleType_in_rule__Model__ElementsAssignment_21700);
             ruleType();
             _fsp--;
 
@@ -2167,20 +2167,20 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__Import__ImportURIAssignment_1
-    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:894:1: rule__Import__ImportURIAssignment_1 : ( RULE_STRING ) ;
+    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:895:1: rule__Import__ImportURIAssignment_1 : ( RULE_STRING ) ;
     public final void rule__Import__ImportURIAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:898:1: ( ( RULE_STRING ) )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:899:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:899:1: ( ( RULE_STRING ) )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:900:1: ( RULE_STRING )
             {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:899:1: ( RULE_STRING )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:900:1: RULE_STRING
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:900:1: ( RULE_STRING )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:901:1: RULE_STRING
             {
              before(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0()); 
-            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Import__ImportURIAssignment_11738); 
+            match(input,RULE_STRING,FOLLOW_RULE_STRING_in_rule__Import__ImportURIAssignment_11731); 
              after(grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0()); 
 
             }
@@ -2204,20 +2204,20 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__SimpleType__NameAssignment_1
-    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:909:1: rule__SimpleType__NameAssignment_1 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:910:1: rule__SimpleType__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__SimpleType__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:913:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:914:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:914:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:915:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:914:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:915:1: RULE_ID
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:915:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:916:1: RULE_ID
             {
              before(grammarAccess.getSimpleTypeAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__SimpleType__NameAssignment_11769); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__SimpleType__NameAssignment_11762); 
              after(grammarAccess.getSimpleTypeAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -2241,20 +2241,20 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__Entity__NameAssignment_1
-    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:924:1: rule__Entity__NameAssignment_1 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:925:1: rule__Entity__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Entity__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:928:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:929:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:929:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:930:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:929:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:930:1: RULE_ID
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:930:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:931:1: RULE_ID
             {
              before(grammarAccess.getEntityAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Entity__NameAssignment_11800); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Entity__NameAssignment_11793); 
              after(grammarAccess.getEntityAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -2278,24 +2278,24 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__Entity__ExtendsAssignment_2_1
-    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:939:1: rule__Entity__ExtendsAssignment_2_1 : ( ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:940:1: rule__Entity__ExtendsAssignment_2_1 : ( ( RULE_ID ) ) ;
     public final void rule__Entity__ExtendsAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:943:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:944:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:944:1: ( ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:945:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:944:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:945:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:945:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:946:1: ( RULE_ID )
             {
              before(grammarAccess.getEntityAccess().getExtendsEntityCrossReference_2_1_0()); 
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:946:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:947:1: RULE_ID
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:947:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:948:1: RULE_ID
             {
              before(grammarAccess.getEntityAccess().getExtendsEntityIDTerminalRuleCall_2_1_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Entity__ExtendsAssignment_2_11835); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Entity__ExtendsAssignment_2_11828); 
              after(grammarAccess.getEntityAccess().getExtendsEntityIDTerminalRuleCall_2_1_0_1()); 
 
             }
@@ -2323,20 +2323,20 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__Entity__PropertiesAssignment_4
-    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:958:1: rule__Entity__PropertiesAssignment_4 : ( ruleProperty ) ;
+    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:959:1: rule__Entity__PropertiesAssignment_4 : ( ruleProperty ) ;
     public final void rule__Entity__PropertiesAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:962:1: ( ( ruleProperty ) )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:963:1: ( ruleProperty )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:963:1: ( ( ruleProperty ) )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:964:1: ( ruleProperty )
             {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:963:1: ( ruleProperty )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:964:1: ruleProperty
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:964:1: ( ruleProperty )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:965:1: ruleProperty
             {
              before(grammarAccess.getEntityAccess().getPropertiesPropertyParserRuleCall_4_0()); 
-            pushFollow(FOLLOW_ruleProperty_in_rule__Entity__PropertiesAssignment_41870);
+            pushFollow(FOLLOW_ruleProperty_in_rule__Entity__PropertiesAssignment_41863);
             ruleProperty();
             _fsp--;
 
@@ -2363,20 +2363,20 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__SimpleProperty__NameAssignment_1
-    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:973:1: rule__SimpleProperty__NameAssignment_1 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:974:1: rule__SimpleProperty__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__SimpleProperty__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:977:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:978:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:978:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:979:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:978:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:979:1: RULE_ID
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:979:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:980:1: RULE_ID
             {
              before(grammarAccess.getSimplePropertyAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__SimpleProperty__NameAssignment_11901); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__SimpleProperty__NameAssignment_11894); 
              after(grammarAccess.getSimplePropertyAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -2400,24 +2400,24 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__SimpleProperty__TypeAssignment_2_1
-    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:988:1: rule__SimpleProperty__TypeAssignment_2_1 : ( ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:989:1: rule__SimpleProperty__TypeAssignment_2_1 : ( ( RULE_ID ) ) ;
     public final void rule__SimpleProperty__TypeAssignment_2_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:992:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:993:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:993:1: ( ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:994:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:993:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:994:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:994:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:995:1: ( RULE_ID )
             {
              before(grammarAccess.getSimplePropertyAccess().getTypeSimpleTypeCrossReference_2_1_0()); 
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:995:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:996:1: RULE_ID
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:996:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:997:1: RULE_ID
             {
              before(grammarAccess.getSimplePropertyAccess().getTypeSimpleTypeIDTerminalRuleCall_2_1_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__SimpleProperty__TypeAssignment_2_11936); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__SimpleProperty__TypeAssignment_2_11929); 
              after(grammarAccess.getSimplePropertyAccess().getTypeSimpleTypeIDTerminalRuleCall_2_1_0_1()); 
 
             }
@@ -2445,24 +2445,24 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__SimpleProperty__ManyAssignment_2_2
-    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1007:1: rule__SimpleProperty__ManyAssignment_2_2 : ( ( '[]' ) ) ;
+    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1008:1: rule__SimpleProperty__ManyAssignment_2_2 : ( ( '[]' ) ) ;
     public final void rule__SimpleProperty__ManyAssignment_2_2() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1011:1: ( ( ( '[]' ) ) )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1012:1: ( ( '[]' ) )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1012:1: ( ( ( '[]' ) ) )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1013:1: ( ( '[]' ) )
             {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1012:1: ( ( '[]' ) )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1013:1: ( '[]' )
-            {
-             before(grammarAccess.getSimplePropertyAccess().getManyLeftSquareBracketRightSquareBracketKeyword_2_2_0()); 
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1013:1: ( ( '[]' ) )
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1014:1: ( '[]' )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1015:1: '[]'
             {
              before(grammarAccess.getSimplePropertyAccess().getManyLeftSquareBracketRightSquareBracketKeyword_2_2_0()); 
-            match(input,20,FOLLOW_20_in_rule__SimpleProperty__ManyAssignment_2_21976); 
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1015:1: ( '[]' )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1016:1: '[]'
+            {
+             before(grammarAccess.getSimplePropertyAccess().getManyLeftSquareBracketRightSquareBracketKeyword_2_2_0()); 
+            match(input,20,FOLLOW_20_in_rule__SimpleProperty__ManyAssignment_2_21969); 
              after(grammarAccess.getSimplePropertyAccess().getManyLeftSquareBracketRightSquareBracketKeyword_2_2_0()); 
 
             }
@@ -2490,20 +2490,20 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__Reference__NameAssignment_1
-    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1030:1: rule__Reference__NameAssignment_1 : ( RULE_ID ) ;
+    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1031:1: rule__Reference__NameAssignment_1 : ( RULE_ID ) ;
     public final void rule__Reference__NameAssignment_1() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1034:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1035:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1035:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1036:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1035:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1036:1: RULE_ID
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1036:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1037:1: RULE_ID
             {
              before(grammarAccess.getReferenceAccess().getNameIDTerminalRuleCall_1_0()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Reference__NameAssignment_12015); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Reference__NameAssignment_12008); 
              after(grammarAccess.getReferenceAccess().getNameIDTerminalRuleCall_1_0()); 
 
             }
@@ -2527,24 +2527,24 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__Reference__TypeAssignment_3
-    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1045:1: rule__Reference__TypeAssignment_3 : ( ( RULE_ID ) ) ;
+    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1046:1: rule__Reference__TypeAssignment_3 : ( ( RULE_ID ) ) ;
     public final void rule__Reference__TypeAssignment_3() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1049:1: ( ( ( RULE_ID ) ) )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1050:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1050:1: ( ( ( RULE_ID ) ) )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1051:1: ( ( RULE_ID ) )
             {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1050:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1051:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1051:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1052:1: ( RULE_ID )
             {
              before(grammarAccess.getReferenceAccess().getTypeEntityCrossReference_3_0()); 
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1052:1: ( RULE_ID )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1053:1: RULE_ID
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1053:1: ( RULE_ID )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1054:1: RULE_ID
             {
              before(grammarAccess.getReferenceAccess().getTypeEntityIDTerminalRuleCall_3_0_1()); 
-            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Reference__TypeAssignment_32050); 
+            match(input,RULE_ID,FOLLOW_RULE_ID_in_rule__Reference__TypeAssignment_32043); 
              after(grammarAccess.getReferenceAccess().getTypeEntityIDTerminalRuleCall_3_0_1()); 
 
             }
@@ -2572,24 +2572,24 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
 
 
     // $ANTLR start rule__Reference__ManyAssignment_4
-    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1064:1: rule__Reference__ManyAssignment_4 : ( ( '[]' ) ) ;
+    // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1065:1: rule__Reference__ManyAssignment_4 : ( ( '[]' ) ) ;
     public final void rule__Reference__ManyAssignment_4() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1068:1: ( ( ( '[]' ) ) )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1069:1: ( ( '[]' ) )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1069:1: ( ( ( '[]' ) ) )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1070:1: ( ( '[]' ) )
             {
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1069:1: ( ( '[]' ) )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1070:1: ( '[]' )
-            {
-             before(grammarAccess.getReferenceAccess().getManyLeftSquareBracketRightSquareBracketKeyword_4_0()); 
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1070:1: ( ( '[]' ) )
             // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1071:1: ( '[]' )
-            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1072:1: '[]'
             {
              before(grammarAccess.getReferenceAccess().getManyLeftSquareBracketRightSquareBracketKeyword_4_0()); 
-            match(input,20,FOLLOW_20_in_rule__Reference__ManyAssignment_42090); 
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1072:1: ( '[]' )
+            // ../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g:1073:1: '[]'
+            {
+             before(grammarAccess.getReferenceAccess().getManyLeftSquareBracketRightSquareBracketKeyword_4_0()); 
+            match(input,20,FOLLOW_20_in_rule__Reference__ManyAssignment_42083); 
              after(grammarAccess.getReferenceAccess().getManyLeftSquareBracketRightSquareBracketKeyword_4_0()); 
 
             }
@@ -2620,87 +2620,87 @@ public class InternalEntitiesParser extends AbstractInternalContentAssistParser 
 
     public static final BitSet FOLLOW_ruleModel_in_entryRuleModel61 = new BitSet(new long[]{0x0000000000000000L});
     public static final BitSet FOLLOW_EOF_in_entryRuleModel68 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__Group__0_in_ruleModel95 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleImport_in_entryRuleImport122 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleImport129 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Import__Group__0_in_ruleImport156 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleType_in_entryRuleType183 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleType190 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Type__Alternatives_in_ruleType217 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSimpleType_in_entryRuleSimpleType244 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSimpleType251 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SimpleType__Group__0_in_ruleSimpleType278 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEntity_in_entryRuleEntity305 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleEntity312 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Entity__Group__0_in_ruleEntity339 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleProperty_in_entryRuleProperty366 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleProperty373 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Property__Alternatives_in_ruleProperty400 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSimpleProperty_in_entryRuleSimpleProperty427 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleSimpleProperty434 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SimpleProperty__Group__0_in_ruleSimpleProperty461 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleReference_in_entryRuleReference488 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleReference495 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Reference__Group__0_in_ruleReference522 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSimpleType_in_rule__Type__Alternatives558 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleEntity_in_rule__Type__Alternatives575 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleSimpleProperty_in_rule__Property__Alternatives607 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleReference_in_rule__Property__Alternatives624 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__Group__1_in_rule__Model__Group__0668 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__ImportsAssignment_1_in_rule__Model__Group__1696 = new BitSet(new long[]{0x0000000000003802L});
-    public static final BitSet FOLLOW_rule__Model__Group__2_in_rule__Model__Group__1706 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Model__ElementsAssignment_2_in_rule__Model__Group__2734 = new BitSet(new long[]{0x0000000000003002L});
-    public static final BitSet FOLLOW_11_in_rule__Import__Group__0776 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_rule__Import__Group__1_in_rule__Import__Group__0786 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Import__ImportURIAssignment_1_in_rule__Import__Group__1814 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_12_in_rule__SimpleType__Group__0853 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__SimpleType__Group__1_in_rule__SimpleType__Group__0863 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SimpleType__NameAssignment_1_in_rule__SimpleType__Group__1891 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_13_in_rule__Entity__Group__0930 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__Entity__Group__1_in_rule__Entity__Group__0940 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Entity__NameAssignment_1_in_rule__Entity__Group__1968 = new BitSet(new long[]{0x0000000000014000L});
-    public static final BitSet FOLLOW_rule__Entity__Group__2_in_rule__Entity__Group__1977 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Entity__Group_2__0_in_rule__Entity__Group__21005 = new BitSet(new long[]{0x0000000000004000L});
-    public static final BitSet FOLLOW_rule__Entity__Group__3_in_rule__Entity__Group__21015 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_14_in_rule__Entity__Group__31044 = new BitSet(new long[]{0x00000000000A8000L});
-    public static final BitSet FOLLOW_rule__Entity__Group__4_in_rule__Entity__Group__31054 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Entity__PropertiesAssignment_4_in_rule__Entity__Group__41082 = new BitSet(new long[]{0x00000000000A8000L});
-    public static final BitSet FOLLOW_rule__Entity__Group__5_in_rule__Entity__Group__41092 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_15_in_rule__Entity__Group__51121 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_16_in_rule__Entity__Group_2__01169 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__Entity__Group_2__1_in_rule__Entity__Group_2__01179 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Entity__ExtendsAssignment_2_1_in_rule__Entity__Group_2__11207 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_17_in_rule__SimpleProperty__Group__01246 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__SimpleProperty__Group__1_in_rule__SimpleProperty__Group__01256 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SimpleProperty__NameAssignment_1_in_rule__SimpleProperty__Group__11284 = new BitSet(new long[]{0x0000000000040002L});
-    public static final BitSet FOLLOW_rule__SimpleProperty__Group__2_in_rule__SimpleProperty__Group__11293 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SimpleProperty__Group_2__0_in_rule__SimpleProperty__Group__21321 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_rule__SimpleProperty__Group_2__01363 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__SimpleProperty__Group_2__1_in_rule__SimpleProperty__Group_2__01373 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SimpleProperty__TypeAssignment_2_1_in_rule__SimpleProperty__Group_2__11401 = new BitSet(new long[]{0x0000000000100002L});
-    public static final BitSet FOLLOW_rule__SimpleProperty__Group_2__2_in_rule__SimpleProperty__Group_2__11410 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__SimpleProperty__ManyAssignment_2_2_in_rule__SimpleProperty__Group_2__21438 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_19_in_rule__Reference__Group__01480 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__Reference__Group__1_in_rule__Reference__Group__01490 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Reference__NameAssignment_1_in_rule__Reference__Group__11518 = new BitSet(new long[]{0x0000000000040000L});
-    public static final BitSet FOLLOW_rule__Reference__Group__2_in_rule__Reference__Group__11527 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_18_in_rule__Reference__Group__21556 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_rule__Reference__Group__3_in_rule__Reference__Group__21566 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Reference__TypeAssignment_3_in_rule__Reference__Group__31594 = new BitSet(new long[]{0x0000000000100002L});
-    public static final BitSet FOLLOW_rule__Reference__Group__4_in_rule__Reference__Group__31603 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_rule__Reference__ManyAssignment_4_in_rule__Reference__Group__41631 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleImport_in_rule__Model__ImportsAssignment_11676 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleType_in_rule__Model__ElementsAssignment_21707 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_STRING_in_rule__Import__ImportURIAssignment_11738 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__SimpleType__NameAssignment_11769 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Entity__NameAssignment_11800 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Entity__ExtendsAssignment_2_11835 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_ruleProperty_in_rule__Entity__PropertiesAssignment_41870 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__SimpleProperty__NameAssignment_11901 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__SimpleProperty__TypeAssignment_2_11936 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_rule__SimpleProperty__ManyAssignment_2_21976 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Reference__NameAssignment_12015 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_RULE_ID_in_rule__Reference__TypeAssignment_32050 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_20_in_rule__Reference__ManyAssignment_42090 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Model__Group__0_in_ruleModel94 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleImport_in_entryRuleImport121 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleImport128 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Import__Group__0_in_ruleImport154 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleType_in_entryRuleType181 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleType188 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Type__Alternatives_in_ruleType214 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSimpleType_in_entryRuleSimpleType241 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSimpleType248 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleType__Group__0_in_ruleSimpleType274 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEntity_in_entryRuleEntity301 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleEntity308 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Entity__Group__0_in_ruleEntity334 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleProperty_in_entryRuleProperty361 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleProperty368 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Property__Alternatives_in_ruleProperty394 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSimpleProperty_in_entryRuleSimpleProperty421 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleSimpleProperty428 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleProperty__Group__0_in_ruleSimpleProperty454 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleReference_in_entryRuleReference481 = new BitSet(new long[]{0x0000000000000000L});
+    public static final BitSet FOLLOW_EOF_in_entryRuleReference488 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Reference__Group__0_in_ruleReference514 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSimpleType_in_rule__Type__Alternatives550 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleEntity_in_rule__Type__Alternatives567 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleSimpleProperty_in_rule__Property__Alternatives599 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleReference_in_rule__Property__Alternatives616 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Model__Group__1_in_rule__Model__Group__0660 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Model__ImportsAssignment_1_in_rule__Model__Group__1688 = new BitSet(new long[]{0x0000000000003802L});
+    public static final BitSet FOLLOW_rule__Model__Group__2_in_rule__Model__Group__1698 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Model__ElementsAssignment_2_in_rule__Model__Group__2726 = new BitSet(new long[]{0x0000000000003002L});
+    public static final BitSet FOLLOW_11_in_rule__Import__Group__0768 = new BitSet(new long[]{0x0000000000000010L});
+    public static final BitSet FOLLOW_rule__Import__Group__1_in_rule__Import__Group__0778 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Import__ImportURIAssignment_1_in_rule__Import__Group__1806 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_12_in_rule__SimpleType__Group__0845 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_rule__SimpleType__Group__1_in_rule__SimpleType__Group__0855 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleType__NameAssignment_1_in_rule__SimpleType__Group__1883 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_13_in_rule__Entity__Group__0922 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_rule__Entity__Group__1_in_rule__Entity__Group__0932 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Entity__NameAssignment_1_in_rule__Entity__Group__1960 = new BitSet(new long[]{0x0000000000014000L});
+    public static final BitSet FOLLOW_rule__Entity__Group__2_in_rule__Entity__Group__1969 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Entity__Group_2__0_in_rule__Entity__Group__2997 = new BitSet(new long[]{0x0000000000004000L});
+    public static final BitSet FOLLOW_rule__Entity__Group__3_in_rule__Entity__Group__21007 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_14_in_rule__Entity__Group__31036 = new BitSet(new long[]{0x00000000000A8000L});
+    public static final BitSet FOLLOW_rule__Entity__Group__4_in_rule__Entity__Group__31046 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Entity__PropertiesAssignment_4_in_rule__Entity__Group__41074 = new BitSet(new long[]{0x00000000000A8000L});
+    public static final BitSet FOLLOW_rule__Entity__Group__5_in_rule__Entity__Group__41084 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_15_in_rule__Entity__Group__51113 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_16_in_rule__Entity__Group_2__01161 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_rule__Entity__Group_2__1_in_rule__Entity__Group_2__01171 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Entity__ExtendsAssignment_2_1_in_rule__Entity__Group_2__11199 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_17_in_rule__SimpleProperty__Group__01238 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_rule__SimpleProperty__Group__1_in_rule__SimpleProperty__Group__01248 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleProperty__NameAssignment_1_in_rule__SimpleProperty__Group__11276 = new BitSet(new long[]{0x0000000000040002L});
+    public static final BitSet FOLLOW_rule__SimpleProperty__Group__2_in_rule__SimpleProperty__Group__11285 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleProperty__Group_2__0_in_rule__SimpleProperty__Group__21313 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_rule__SimpleProperty__Group_2__01355 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_rule__SimpleProperty__Group_2__1_in_rule__SimpleProperty__Group_2__01365 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleProperty__TypeAssignment_2_1_in_rule__SimpleProperty__Group_2__11393 = new BitSet(new long[]{0x0000000000100002L});
+    public static final BitSet FOLLOW_rule__SimpleProperty__Group_2__2_in_rule__SimpleProperty__Group_2__11402 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__SimpleProperty__ManyAssignment_2_2_in_rule__SimpleProperty__Group_2__21430 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_19_in_rule__Reference__Group__01472 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_rule__Reference__Group__1_in_rule__Reference__Group__01482 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Reference__NameAssignment_1_in_rule__Reference__Group__11510 = new BitSet(new long[]{0x0000000000040000L});
+    public static final BitSet FOLLOW_rule__Reference__Group__2_in_rule__Reference__Group__11519 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_18_in_rule__Reference__Group__21548 = new BitSet(new long[]{0x0000000000000020L});
+    public static final BitSet FOLLOW_rule__Reference__Group__3_in_rule__Reference__Group__21558 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Reference__TypeAssignment_3_in_rule__Reference__Group__31586 = new BitSet(new long[]{0x0000000000100002L});
+    public static final BitSet FOLLOW_rule__Reference__Group__4_in_rule__Reference__Group__31595 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_rule__Reference__ManyAssignment_4_in_rule__Reference__Group__41623 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleImport_in_rule__Model__ImportsAssignment_11669 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleType_in_rule__Model__ElementsAssignment_21700 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_STRING_in_rule__Import__ImportURIAssignment_11731 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__SimpleType__NameAssignment_11762 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__Entity__NameAssignment_11793 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__Entity__ExtendsAssignment_2_11828 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_ruleProperty_in_rule__Entity__PropertiesAssignment_41863 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__SimpleProperty__NameAssignment_11894 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__SimpleProperty__TypeAssignment_2_11929 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_rule__SimpleProperty__ManyAssignment_2_21969 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__Reference__NameAssignment_12008 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_RULE_ID_in_rule__Reference__TypeAssignment_32043 = new BitSet(new long[]{0x0000000000000002L});
+    public static final BitSet FOLLOW_20_in_rule__Reference__ManyAssignment_42083 = new BitSet(new long[]{0x0000000000000002L});
 
 }

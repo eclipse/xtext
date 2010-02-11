@@ -18,25 +18,25 @@ T18 : ':' ;
 T19 : 'reference' ;
 T20 : '[]' ;
 
-// $ANTLR src "../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g" 1088
+// $ANTLR src "../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g" 1089
 RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
-// $ANTLR src "../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g" 1090
+// $ANTLR src "../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g" 1091
 RULE_INT : ('0'..'9')+;
 
-// $ANTLR src "../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g" 1092
+// $ANTLR src "../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g" 1093
 RULE_STRING : ('"' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'"')))* '"'|'\'' ('\\' ('b'|'t'|'n'|'f'|'r'|'"'|'\''|'\\')|~(('\\'|'\'')))* '\'');
 
-// $ANTLR src "../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g" 1094
+// $ANTLR src "../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g" 1095
 RULE_ML_COMMENT : '/*' ( options {greedy=false;} : . )*'*/';
 
-// $ANTLR src "../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g" 1096
+// $ANTLR src "../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g" 1097
 RULE_SL_COMMENT : '//' ~(('\n'|'\r'))* ('\r'? '\n')?;
 
-// $ANTLR src "../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g" 1098
+// $ANTLR src "../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g" 1099
 RULE_WS : (' '|'\t'|'\r'|'\n')+;
 
-// $ANTLR src "../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g" 1100
+// $ANTLR src "../org.eclipse.xtext.example.gmf.ui/src-gen/org/eclipse/xtext/example/gmf/contentassist/antlr/internal/InternalEntities.g" 1101
 RULE_ANY_OTHER : .;
 
 

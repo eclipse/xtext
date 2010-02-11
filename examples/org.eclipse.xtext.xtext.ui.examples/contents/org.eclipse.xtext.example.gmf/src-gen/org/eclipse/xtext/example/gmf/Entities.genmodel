@@ -5,9 +5,8 @@
     editDirectory="/org.eclipse.xtext.example.gmf.edit/src" editorDirectory="/org.eclipse.xtext.example.gmf.editor/src"
     modelPluginID="org.eclipse.xtext.example.gmf" forceOverwrite="true" modelName="Entities"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
-    importerID="org.eclipse.emf.importer.ecore" complianceLevel="5.0" copyrightFields="false"
-    editPluginID="org.eclipse.xtext.example.gmf.edit" editorPluginID="org.eclipse.xtext.example.gmf.editor">
-  <foreignModel>Entities.ecore</foreignModel>
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.example.gmf.edit"
+    editorPluginID="org.eclipse.xtext.example.gmf.editor">
   <genPackages prefix="Entities" basePackage="org.eclipse.xtext.example.gmf" disposableProviderFactory="true"
       ecorePackage="Entities.ecore#/">
     <genClasses ecoreClass="Entities.ecore#//Model">

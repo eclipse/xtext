@@ -291,7 +291,7 @@ protected class Import_ImportURIAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("importURI",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("importURI");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getImportAccess().getImportURISTRINGTerminalRuleCall_1_0();
 			return obj;
@@ -493,7 +493,7 @@ protected class SimpleType_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSimpleTypeAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -586,7 +586,7 @@ protected class Entity_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getEntityAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -964,7 +964,7 @@ protected class SimpleProperty_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getSimplePropertyAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
@@ -1175,7 +1175,7 @@ protected class Reference_NameAssignment_1 extends AssignmentToken  {
 	protected IInstanceDescription tryConsumeVal() {
 		if((value = current.getConsumable("name",true)) == null) return null;
 		IInstanceDescription obj = current.cloneAndConsume("name");
-		if(Boolean.TRUE.booleanValue()) { // org::eclipse::xtext::impl::RuleCallImpl FIXME: check if value is valid for lexer rule
+		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.LRC;
 			element = grammarAccess.getReferenceAccess().getNameIDTerminalRuleCall_1_0();
 			return obj;
