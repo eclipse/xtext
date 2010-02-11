@@ -32,6 +32,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.Bug288760Test.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.Bug289187Test.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.Bug291022Test.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.Bug297909Test.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.CamelCasePrefixMatcherTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistGrammarContentAssistTest.class);

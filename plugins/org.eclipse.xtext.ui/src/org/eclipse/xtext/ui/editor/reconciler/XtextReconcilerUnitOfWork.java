@@ -57,6 +57,7 @@ class XtextReconcilerUnitOfWork extends IUnitOfWork.Void<XtextResource> {
 				resource.reparse(document.get());
 			} catch (Exception e) {
 				log.error("Parsing in reconciler failed.", e);
+				throw e;
 			}
 		}
 	}
