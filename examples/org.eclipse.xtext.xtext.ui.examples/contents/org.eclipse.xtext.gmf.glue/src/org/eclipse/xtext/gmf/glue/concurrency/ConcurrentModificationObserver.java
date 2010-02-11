@@ -30,10 +30,10 @@ public class ConcurrentModificationObserver implements IPartListener {
 
 	public ConcurrentModificationObserver(IWorkbenchPage activePage) {
 		factory = new EditingDomainAdapter.Factory();
-		for(IEditorReference editorRef: activePage.getEditorReferences()) {
+		for (IEditorReference editorRef : activePage.getEditorReferences()) {
 			IEditorPart editor = editorRef.getEditor(false);
-			if(editor != null) {
-				partOpened(editor);				
+			if (editor != null) {
+				partOpened(editor);
 			}
 		}
 	}
@@ -47,7 +47,18 @@ public class ConcurrentModificationObserver implements IPartListener {
 	}
 
 	public void partClosed(IWorkbenchPart part) {
-		// do nothing
+		if (part instanceof DiagramEditor) {
+			// as long as bug 299920 is not fixed, we have to dispose the adapter manually
+			TransactionalEditingDomain editingDomain = ((DiagramEditor) part)
+					.getEditingDomain();
+			if (editingDomain != null) {
+				EditingDomainAdapter adapter = (EditingDomainAdapter) factory
+						.adapt(editingDomain, EditingDomainAdapter.class);
+				if (adapter != null) {
+					adapter.dispose();
+				}
+			}
+		}
 	}
 
 	public void partActivated(IWorkbenchPart part) {
@@ -69,7 +80,8 @@ public class ConcurrentModificationObserver implements IPartListener {
 					IWorkbenchPage activePage = PlatformUI.getWorkbench()
 							.getActiveWorkbenchWindow().getActivePage();
 					activePage
-							.addPartListener(new ConcurrentModificationObserver(activePage));
+							.addPartListener(new ConcurrentModificationObserver(
+									activePage));
 				}
 			});
 		}

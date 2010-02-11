@@ -89,18 +89,18 @@ public class XtextEditor extends TextEditor {
 
 	@Inject
 	private IFoldingStructureProvider foldingStructureProvider;
-	
-	@Inject(optional=true)
+
+	@Inject(optional = true)
 	private AnnotationPainter.IDrawingStrategy projectionAnnotationDrawingStrategy;
-	
+
 	@Inject
 	private CompoundXtextEditorCallback callback;
-	
+
 	@Inject
 	private XtextSourceViewerConfiguration sourceViewerConfiguration;
 
 	private IContentOutlinePage outlinePage;
-	
+
 	@Inject(optional = true)
 	private Provider<IContentOutlinePage> outlinePageProvider;
 
@@ -112,7 +112,7 @@ public class XtextEditor extends TextEditor {
 
 	@Inject
 	private IHighlightingHelper highlightingHelper;
-	
+
 	@Inject
 	private IPreferenceStoreAccess preferenceStoreAccess;
 
@@ -128,7 +128,7 @@ public class XtextEditor extends TextEditor {
 	public IXtextDocument getDocument() {
 		return XtextDocumentUtil.get(getSourceViewer());
 	}
-	
+
 	@Inject
 	public void setLanguageName(@Named(Constants.LANGUAGE_NAME) String name) {
 		this.languageName = name;
@@ -170,25 +170,25 @@ public class XtextEditor extends TextEditor {
 	public XtextSourceViewerConfiguration getXtextSourceViewerConfiguration() {
 		return sourceViewerConfiguration;
 	}
-	
-	
+
 	@Override
 	public void doSaveAs() {
 		super.doSaveAs();
 		callback.afterSave(this);
 	}
-	
+
 	@Override
 	public void doSave(IProgressMonitor progressMonitor) {
 		super.doSave(progressMonitor);
 		callback.afterSave(this);
 	}
-	
+
 	@Override
 	public void doRevertToSaved() {
 		super.doRevertToSaved();
 		callback.afterSave(this);
 	}
+
 	/**
 	 * Set key binding scope. Needed to make F3 work properly.
 	 */
@@ -238,7 +238,7 @@ public class XtextEditor extends TextEditor {
 		}
 		return page;
 	}
-	
+
 	/**
 	 * Informs the editor that its outline has been closed.
 	 */
@@ -248,10 +248,10 @@ public class XtextEditor extends TextEditor {
 			resetHighlightRange();
 		}
 	}
-	
+
 	@Inject
 	private IActionContributor.CompositeImpl actioncontributor;
-	
+
 	@Override
 	protected void createActions() {
 		super.createActions();
@@ -277,10 +277,10 @@ public class XtextEditor extends TextEditor {
 		SelectMarkerRulerAction markerAction = new XtextMarkerRulerAction(XtextUIMessages.getResourceBundle(),
 				"XtextSelectAnnotationRulerAction.", this, getVerticalRuler()); //$NON-NLS-1$
 		setAction(ITextEditorActionConstants.RULER_CLICK, markerAction);
-		
+
 		actioncontributor.contributeActions(this);
 	}
-	
+
 	private void configureToggleCommentAction(ToggleSLCommentAction action) {
 		ISourceViewer sourceViewer = getSourceViewer();
 		SourceViewerConfiguration configuration = getSourceViewerConfiguration();
@@ -308,16 +308,17 @@ public class XtextEditor extends TextEditor {
 		getSourceViewerDecorationSupport(projectionViewer);
 		return projectionViewer;
 	}
-	
+
 	@Inject
 	private CharacterPairMatcher characterPairMatcher;
-	
+
 	@Override
 	protected void configureSourceViewerDecorationSupport(SourceViewerDecorationSupport support) {
 		super.configureSourceViewerDecorationSupport(support);
-		if (characterPairMatcher!=null) {
+		if (characterPairMatcher != null) {
 			support.setCharacterPairMatcher(characterPairMatcher);
-			support.setMatchingCharacterPainterPreferenceKeys(BracketMatchingPreferencesInitializer.IS_ACTIVE_KEY, BracketMatchingPreferencesInitializer.COLOR_KEY);
+			support.setMatchingCharacterPainterPreferenceKeys(BracketMatchingPreferencesInitializer.IS_ACTIVE_KEY,
+					BracketMatchingPreferencesInitializer.COLOR_KEY);
 		}
 	}
 
@@ -335,19 +336,20 @@ public class XtextEditor extends TextEditor {
 	}
 
 	protected ProjectionSupport installProjectionSupport(ProjectionViewer projectionViewer) {
-		ProjectionSupport projectionSupport = new ProjectionSupport(projectionViewer, getAnnotationAccess(), getSharedColors());
+		ProjectionSupport projectionSupport = new ProjectionSupport(projectionViewer, getAnnotationAccess(),
+				getSharedColors());
 		projectionSupport.addSummarizableAnnotationType(WARNING_ANNOTATION_TYPE); //$NON-NLS-1$
 		projectionSupport.addSummarizableAnnotationType(ERROR_ANNOTATION_TYPE); //$NON-NLS-1$
 		projectionSupport.setAnnotationPainterDrawingStrategy(projectionAnnotationDrawingStrategy);
 		projectionSupport.install();
 		return projectionSupport;
 	}
-	
+
 	protected void installFoldingSupport(ProjectionViewer projectionViewer) {
 		foldingStructureProvider.install(this, projectionViewer);
 		projectionViewer.doOperation(ProjectionViewer.TOGGLE);
 	}
-	
+
 	private void installSelectionChangedListener() {
 		selectionChangedListener = new ISelectionChangedListener() {
 			public void selectionChanged(final SelectionChangedEvent event) {
@@ -358,17 +360,16 @@ public class XtextEditor extends TextEditor {
 		if (selectionProvider instanceof IPostSelectionProvider) {
 			final IPostSelectionProvider postSelectionProvider = (IPostSelectionProvider) selectionProvider;
 			postSelectionProvider.addPostSelectionChangedListener(selectionChangedListener);
-		}
-		else {
+		} else {
 			getSelectionProvider().addSelectionChangedListener(selectionChangedListener);
 		}
 	}
-	
+
 	private void installHighlightingHelper() {
 		if (highlightingHelper != null)
 			highlightingHelper.install(this, (XtextSourceViewer) getSourceViewer());
 	}
-	
+
 	private void uninstallHighlightingHelper() {
 		if (highlightingHelper != null)
 			highlightingHelper.uninstall();
@@ -390,9 +391,9 @@ public class XtextEditor extends TextEditor {
 	}
 
 	protected void uninstallFoldingSupport() {
-		if (foldingStructureProvider!=null) {
+		if (foldingStructureProvider != null) {
 			foldingStructureProvider.uninstall();
-			foldingStructureProvider= null;	
+			foldingStructureProvider = null;
 		}
 	}
 
@@ -402,8 +403,7 @@ public class XtextEditor extends TextEditor {
 			if (selectionProvider instanceof IPostSelectionProvider) {
 				final IPostSelectionProvider postSelectionProvider = (IPostSelectionProvider) selectionProvider;
 				postSelectionProvider.removePostSelectionChangedListener(selectionChangedListener);
-			}
-			else {
+			} else {
 				selectionProvider.removeSelectionChangedListener(selectionChangedListener);
 			}
 		}
@@ -416,7 +416,6 @@ public class XtextEditor extends TextEditor {
 	public ISourceViewer getInternalSourceViewer() {
 		return getSourceViewer();
 	}
-
 
 	@Override
 	protected void handlePreferenceStoreChanged(PropertyChangeEvent event) {
@@ -445,10 +444,10 @@ public class XtextEditor extends TextEditor {
 		System.arraycopy(ids, 0, more, 4, ids.length);
 		return more;
 	}
-	
+
 	@Override
 	protected IAnnotationAccess createAnnotationAccess() {
-		return new DefaultMarkerAnnotationAccess(){
+		return new DefaultMarkerAnnotationAccess() {
 			@Override
 			public int getLayer(Annotation annotation) {
 				if (annotation.isMarkedDeleted()) {
@@ -471,54 +470,51 @@ public class XtextEditor extends TextEditor {
 		}
 		setStatusLineMessage(message);
 	}
-	
+
 	@Override
 	public boolean validateEditorInputState() {
 		return callback.onValidateEditorInputState(this) && super.validateEditorInputState();
 	}
-	
+
 	public void updatedTitleImage(Image image) {
 		setTitleImage(image);
 	}
-	
+
 	@Override
 	public Image getDefaultImage() {
-		IEditorRegistry editorRegistry= PlatformUI.getWorkbench().getEditorRegistry();
-		IEditorDescriptor editorDesc= editorRegistry.findEditor(getSite().getId());
-		ImageDescriptor imageDesc= editorDesc != null ? editorDesc.getImageDescriptor() : null;
-		return imageDesc != null ? imageDesc.createImage() :super.getDefaultImage();
+		IEditorRegistry editorRegistry = PlatformUI.getWorkbench().getEditorRegistry();
+		IEditorDescriptor editorDesc = editorRegistry.findEditor(getSite().getId());
+		ImageDescriptor imageDesc = editorDesc != null ? editorDesc.getImageDescriptor() : null;
+		return imageDesc != null ? imageDesc.createImage() : super.getDefaultImage();
 	}
-	
-	
+
 	/*
 	 * @see org.eclipse.ui.texteditor.AbstractTextEditor#rulerContextMenuAboutToShow(org.eclipse.jface.action.IMenuManager)
-	 */ 
+	 */
 	@Override
 	protected void rulerContextMenuAboutToShow(IMenuManager menu) {
 		super.rulerContextMenuAboutToShow(menu);
-		IMenuManager foldingMenu= new MenuManager(XtextUIMessages.Editor_FoldingMenu_name, "projection"); //$NON-NLS-1$
+		IMenuManager foldingMenu = new MenuManager(XtextUIMessages.Editor_FoldingMenu_name, "projection"); //$NON-NLS-1$
 		menu.appendToGroup(ITextEditorActionConstants.GROUP_RULERS, foldingMenu);
-		IAction action= getAction("FoldingToggle"); //$NON-NLS-1$
+		IAction action = getAction("FoldingToggle"); //$NON-NLS-1$
 		foldingMenu.add(action);
-		action= getAction("FoldingExpandAll"); //$NON-NLS-1$
+		action = getAction("FoldingExpandAll"); //$NON-NLS-1$
 		foldingMenu.add(action);
-		action= getAction("FoldingCollapseAll"); //$NON-NLS-1$
+		action = getAction("FoldingCollapseAll"); //$NON-NLS-1$
 		foldingMenu.add(action);
-		action= getAction("FoldingRestore"); //$NON-NLS-1$
+		action = getAction("FoldingRestore"); //$NON-NLS-1$
 		foldingMenu.add(action);
 	}
-	 
+
 	/**
-	 * Resets the foldings structure according to the folding
-	 * preferences.
+	 * Resets the foldings structure according to the folding preferences.
 	 */
 	public void resetProjection() {
 		if (foldingStructureProvider != null) {
 			foldingStructureProvider.initialize();
 		}
 	}
-	 
-	
+
 	@SuppressWarnings("rawtypes")
 	private Annotation getAnnotation(final int offset, final int length) {
 		final IAnnotationModel model = getDocumentProvider().getAnnotationModel(getEditorInput());
@@ -528,8 +524,7 @@ public class XtextEditor extends TextEditor {
 		Iterator iterator;
 		if (model instanceof IAnnotationModelExtension2) {
 			iterator = ((IAnnotationModelExtension2) model).getAnnotationIterator(offset, length, true, true);
-		}
-		else {
+		} else {
 			iterator = model.getAnnotationIterator();
 		}
 
@@ -541,7 +536,7 @@ public class XtextEditor extends TextEditor {
 		}
 		return null;
 	}
-	
+
 	private boolean isProblemMarkerAnnotation(final Annotation annotation) {
 		if (!(annotation instanceof MarkerAnnotation))
 			return false;
@@ -551,4 +546,12 @@ public class XtextEditor extends TextEditor {
 			return false;
 		}
 	}
+
+	/**
+	 * Externally set the editor callback, e.g. to disable dirty state support for a specific instance.
+	 */
+	public void setXtextEditorCallback(CompoundXtextEditorCallback callback) {
+		this.callback = callback;
+	}
+
 }

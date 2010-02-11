@@ -22,6 +22,7 @@ h2(#breaking_changes_08). Changes in Xtext 0.8.0
 
 *Renamed and moved org.eclipse.xtext.concurrent to org.eclipse.xtext.util.concurrent*
 
+*Java Packages in generated UI plug-in now have an additional subpackage "ui"*
 
-
+* Old versions in the src folder are not deleted and ignored. You have to transpose your changes in the src folder to the classes in the right packages. That especially holds for additional bindings in the XXXUiModule.  
 
