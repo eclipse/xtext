@@ -154,7 +154,7 @@ public class EditingDomainAdapter extends AdapterImpl implements
 					try {
 						IDirtyResource dirtyResource = createDirtyResource(resourceWithConflicts);
 						// assert resource is serializable
-						dirtyResource.getContents(); 
+						dirtyResource.getContents();
 						dirtyStateManager
 								.announceDirtyStateChanged(dirtyResource);
 					} catch (Exception exc) {
@@ -193,13 +193,21 @@ public class EditingDomainAdapter extends AdapterImpl implements
 	}
 
 	public void editingDomainDisposing(TransactionalEditingDomainEvent event) {
-		for (IDirtyResource dirtyResource : uri2dirtyResource.values()) {
-			dirtyStateManager.discardDirtyState(dirtyResource);
+		dispose();
+	}
+
+	public void dispose() {
+		if (uri2dirtyResource != null) {
+			for (IDirtyResource dirtyResource : uri2dirtyResource.values()) {
+				dirtyStateManager.discardDirtyState(dirtyResource);
+			}
+			uri2dirtyResource = null;
 		}
-		uri2dirtyResource = null;
 		Lifecycle lifecycle = TransactionUtil.getAdapter(editingDomain,
 				Lifecycle.class);
-		lifecycle.removeTransactionalEditingDomainListener(this);
+		if (lifecycle != null) {
+			lifecycle.removeTransactionalEditingDomainListener(this);
+		}
 		editingDomain.removeResourceSetListener(this);
 	}
 

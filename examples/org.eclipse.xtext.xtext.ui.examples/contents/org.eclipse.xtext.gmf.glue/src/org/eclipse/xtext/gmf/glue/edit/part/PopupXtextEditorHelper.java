@@ -45,12 +45,16 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.CompoundXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.info.ResourceWorkingCopyFileEditorInput;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
+import com.google.inject.Binder;
+import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Module;
 
 /**
  * Base class to handle a small in-diagram XtextEditor.
@@ -155,6 +159,11 @@ public class PopupXtextEditorHelper {
 		xtextEditorComposite.setLayout(new FillLayout());
 		IEditorSite editorSite = diagramEditor.getEditorSite();
 		xtextEditor = xtextInjector.getInstance(XtextEditor.class);
+		// remove dirty state editor callback
+		xtextEditor.setXtextEditorCallback(new CompoundXtextEditorCallback(Guice.createInjector(new Module() {
+			public void configure(Binder binder) {
+			}
+		})));
 		xtextEditor.init(editorSite, editorInput);
 		xtextEditor.createPartControl(xtextEditorComposite);
 		addKeyVerifyListener();
