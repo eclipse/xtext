@@ -58,7 +58,7 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 	protected void notifyListeners(final IDirtyResource dirtyResource, boolean managed) {
 		if (managed) {
 			IResourceDescription.Delta delta = new IResourceDescription.Delta() {
-				public boolean hasChanges() {
+				public boolean haveEObjectDescriptionsChanged() {
 					return true;
 				}
 				
@@ -77,7 +77,7 @@ public class DirtyStateManager extends AbstractResourceDescriptionChangeEventSou
 			notifyListeners(new Event(Collections.singletonList(delta), this));
 		} else {
 			IResourceDescription.Delta delta = new IResourceDescription.Delta() {
-				public boolean hasChanges() {
+				public boolean haveEObjectDescriptionsChanged() {
 					return true;
 				}
 				
