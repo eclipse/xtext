@@ -15,8 +15,8 @@ import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ObservableXtextTokenStream;
-import org.eclipse.xtext.ui.tests.contentassist.antlr.internal.InternalXtextGrammarUiTestLanguageLexer;
-import org.eclipse.xtext.ui.tests.contentassist.antlr.internal.InternalXtextGrammarUiTestLanguageParser;
+import org.eclipse.xtext.ui.tests.ui.contentassist.antlr.internal.InternalXtextGrammarUiTestLanguageLexer;
+import org.eclipse.xtext.ui.tests.ui.contentassist.antlr.internal.InternalXtextGrammarUiTestLanguageParser;
 import org.eclipse.xtext.ui.tests.editor.contentassist.antlr.AbstractParserTest;
 
 

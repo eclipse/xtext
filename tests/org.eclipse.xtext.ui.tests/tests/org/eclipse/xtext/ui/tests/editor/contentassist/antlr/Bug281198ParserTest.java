@@ -17,7 +17,7 @@ import org.eclipse.xtext.ui.editor.contentassist.antlr.AbstractContentAssistPars
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguageStandaloneSetup;
-import org.eclipse.xtext.ui.tests.editor.contentassist.contentassist.antlr.DatatypeRuleTestLanguageParser;
+import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.DatatypeRuleTestLanguageParser;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.DatatypeRuleTestLanguageGrammarAccess;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.DatatypeRuleTestLanguageUiModule;
 

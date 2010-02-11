@@ -17,7 +17,7 @@ import org.eclipse.xtext.ui.editor.contentassist.antlr.AbstractContentAssistPars
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguageStandaloneSetup;
-import org.eclipse.xtext.ui.tests.editor.contentassist.contentassist.antlr.LookAheadContentAssistTestLanguageParser;
+import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.LookAheadContentAssistTestLanguageParser;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.LookAheadContentAssistTestLanguageGrammarAccess;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.LookAheadContentAssistTestLanguageUiModule;
 
