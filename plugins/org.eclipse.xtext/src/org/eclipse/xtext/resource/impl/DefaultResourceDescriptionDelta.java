@@ -50,7 +50,7 @@ public class DefaultResourceDescriptionDelta implements IResourceDescription.Del
 	
 	private Boolean hasChanges;
 
-	public boolean hasChanges() {
+	public boolean haveEObjectDescriptionsChanged() {
 		if (hasChanges==null) {
 			hasChanges = internalHasChanges();
 		}
