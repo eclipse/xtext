@@ -103,7 +103,7 @@ public class Generator implements IXtextBuilderParticipant {
 
 	protected void generate(IEObjectDescription desc, XpandExecutionContextImpl ctx, IBuildContext context) {
 		EObject eObject = context.getResourceSet().getEObject(desc.getEObjectURI(), true);
-		XpandFacade.create(ctx).evaluate("org::eclipse::xtext::example::generator::JavaBean::javaBean", eObject);
+		XpandFacade.create(ctx).evaluate("org::eclipse::xtext::example::ui::generator::JavaBean::javaBean", eObject);
 	}
 
 	protected IFile createFile(final IFolder folder, String qualifiedName) {
