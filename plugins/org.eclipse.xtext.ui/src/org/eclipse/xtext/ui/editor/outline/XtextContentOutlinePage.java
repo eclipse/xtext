@@ -13,8 +13,11 @@ import org.eclipse.core.runtime.Assert;
 import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.jface.action.IMenuListener;
+import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
+import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.resource.LocalResourceManager;
@@ -30,6 +33,7 @@ import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.viewers.ViewerSorter;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
+import org.eclipse.search.ui.IContextMenuConstants;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
@@ -187,17 +191,21 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 	private void configureContextMenu() {
 		MenuManager manager = new MenuManager(contextMenuID, contextMenuID);
 		manager.setRemoveAllWhenShown(true);
-		// manager.addMenuListener(new IMenuListener() {
-		// public void menuAboutToShow(IMenuManager m) {
-		// contextMenuAboutToShow(m);
-		// }
-		// });
+		manager.addMenuListener(new IMenuListener() {
+			public void menuAboutToShow(IMenuManager manager) {
+				fillContextMenu(manager);
+			}
+		});
 		contextMenu = manager.createContextMenu(getTreeViewer().getTree());
 		getTreeViewer().getTree().setMenu(contextMenu);
 
 		IPageSite site = getSite();
 		Platform.getAdapterManager().registerAdapters(outlineNodeFactory, ContentOutlineNode.class);
 		site.registerContextMenu(Activator.PLUGIN_ID + ".outline", manager, getTreeViewer()); //$NON-NLS-1$
+	}
+	
+	private void fillContextMenu(IMenuManager menu) {
+		menu.add(new Separator(IContextMenuConstants.GROUP_ADDITIONS));
 	}
 
 	protected void configureProviders() {

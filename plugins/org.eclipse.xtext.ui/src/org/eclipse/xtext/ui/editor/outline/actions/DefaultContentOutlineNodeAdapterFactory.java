@@ -9,7 +9,12 @@
 package org.eclipse.xtext.ui.editor.outline.actions;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
 
 /**
@@ -31,12 +36,26 @@ public class DefaultContentOutlineNodeAdapterFactory implements IContentOutlineN
 		if (adaptableObject instanceof ContentOutlineNode) {
 			ContentOutlineNode node = (ContentOutlineNode) adaptableObject;
 			EClass clazz = node.getClazz();
-			if (clazz != null && clazz.getInstanceClass().equals(adapterType)) {
-				return Boolean.TRUE;
+			if (clazz != null) {
+				if (clazz.getInstanceClass().equals(adapterType)) {
+					return Boolean.TRUE;
+				}
+				else if (IFile.class.equals(adapterType)) {
+					return getUnderlyingResource();
+				}
+				else if (IResource.class.equals(adapterType)) {
+					return getUnderlyingResource();
+				}
 			}
 
 		}
 		return null;
+	}
+
+	private Object getUnderlyingResource() {
+		IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+		XtextEditor activeEditor = (XtextEditor) activePage.getActiveEditor();
+		return activeEditor.getResource();
 	}
 
 	/**
