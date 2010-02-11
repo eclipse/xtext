@@ -48,7 +48,7 @@ import com.google.inject.name.Named;
  * 
  * For instance if a scope provider is asked to return all Entities which are visible from a certain Property, it looks
  * for a method like this:</p> <code>
- * IScope scope_Entity(Reference ref, EReference ref)</p>
+ * IScope scope_Entity(Property property, EReference ref)</p>
  * </code> Again the first parameter can also be any super type of the actual type and the
  * implementation walks up the containment hierarchy again.</p>
  * 
