@@ -15,7 +15,6 @@ Require-Bundle: org.junit,
  org.eclipse.emf.common,
  org.antlr.runtime,
  org.eclipse.xtext.ui,
- 
  org.eclipse.ui.editors,
  org.eclipse.ui,
  org.eclipse.jdt.core,
@@ -31,6 +30,6 @@ Export-Package: org.eclipse.xtext.builder.tests.builderTestLanguage,
  org.eclipse.xtext.builder.tests.parseTreeConstruction,
  org.eclipse.xtext.builder.tests.parser.antlr,
  org.eclipse.xtext.builder.tests.parser.antlr.internal,
- org.eclipse.xtext.builder.tests.contentassist.antlr,
- org.eclipse.xtext.builder.tests.validation
+ org.eclipse.xtext.builder.tests.validation,
+ org.eclipse.xtext.builder.tests.ui.contentassist.antlr
 

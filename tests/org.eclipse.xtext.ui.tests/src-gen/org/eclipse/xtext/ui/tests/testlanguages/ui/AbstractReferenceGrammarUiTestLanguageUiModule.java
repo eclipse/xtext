@@ -179,17 +179,17 @@ public abstract class AbstractReferenceGrammarUiTestLanguageUiModule extends Ref
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.antlr.IContentAssistParser> bindIContentAssistParser() {
-		return org.eclipse.xtext.ui.tests.testlanguages.contentassist.antlr.ReferenceGrammarUiTestLanguageParser.class;
+		return org.eclipse.xtext.ui.tests.testlanguages.ui.contentassist.antlr.ReferenceGrammarUiTestLanguageParser.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public void configureContentAssistLexerProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.ui.tests.testlanguages.contentassist.antlr.internal.InternalReferenceGrammarUiTestLanguageLexer.class).toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.ui.tests.testlanguages.contentassist.antlr.internal.InternalReferenceGrammarUiTestLanguageLexer.class));
+		binder.bind(org.eclipse.xtext.ui.tests.testlanguages.ui.contentassist.antlr.internal.InternalReferenceGrammarUiTestLanguageLexer.class).toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.ui.tests.testlanguages.ui.contentassist.antlr.internal.InternalReferenceGrammarUiTestLanguageLexer.class));
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public void configureContentAssistLexer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.ui.tests.testlanguages.contentassist.antlr.internal.InternalReferenceGrammarUiTestLanguageLexer.class);
+		binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.ui.tests.testlanguages.ui.contentassist.antlr.internal.InternalReferenceGrammarUiTestLanguageLexer.class);
 	}
 
 

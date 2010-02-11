@@ -7,7 +7,6 @@ Bundle-Version: 0.8.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtext.example.fowlerdsl,
  org.eclipse.xtext.ui,
- 
  org.eclipse.xtext.xtend;bundle-version="0.8.0";resolution:=optional,
  org.eclipse.ui.editors,
  org.eclipse.ui,
@@ -15,4 +14,4 @@ Require-Bundle: org.eclipse.xtext.example.fowlerdsl,
 Bundle-Activator: org.eclipse.xtext.example.FowlerDslActivator
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j
-Export-Package: org.eclipse.xtext.example.contentassist.antlr
+Export-Package: org.eclipse.xtext.example.ui.contentassist.antlr

@@ -179,17 +179,17 @@ public abstract class AbstractUnorderedGroupsTestLanguageUiModule extends Unorde
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.antlr.IContentAssistParser> bindIContentAssistParser() {
-		return org.eclipse.xtext.ui.tests.editor.contentassist.contentassist.antlr.UnorderedGroupsTestLanguageParser.class;
+		return org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.UnorderedGroupsTestLanguageParser.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public void configureContentAssistLexerProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.ui.tests.editor.contentassist.contentassist.antlr.internal.InternalUnorderedGroupsTestLanguageLexer.class).toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.ui.tests.editor.contentassist.contentassist.antlr.internal.InternalUnorderedGroupsTestLanguageLexer.class));
+		binder.bind(org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.internal.InternalUnorderedGroupsTestLanguageLexer.class).toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.internal.InternalUnorderedGroupsTestLanguageLexer.class));
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public void configureContentAssistLexer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.ui.tests.editor.contentassist.contentassist.antlr.internal.InternalUnorderedGroupsTestLanguageLexer.class);
+		binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.internal.InternalUnorderedGroupsTestLanguageLexer.class);
 	}
 
 

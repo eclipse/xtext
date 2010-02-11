@@ -28,4 +28,4 @@ Export-Package: org.eclipse.xtext.xtext.ui.ecore2xtext,
  org.eclipse.xtext.xtext.ui.ecore2xtext.parseTreeConstruction,
  org.eclipse.xtext.xtext.ui.ecore2xtext.parser.antlr,
  org.eclipse.xtext.xtext.ui.ecore2xtext.parser.antlr.internal,
- org.eclipse.xtext.xtext.ui.ecore2xtext.contentassist.antlr
+ org.eclipse.xtext.xtext.ui.ecore2xtext.ui.contentassist.antlr

@@ -7,16 +7,16 @@ Bundle-SymbolicName: org.eclipse.xtext.example.domainmodel.ui; singleton:=true
 Bundle-ActivationPolicy: lazy
 Require-Bundle: org.eclipse.xtext.example.domainmodel,
  org.eclipse.xtext.ui,
- org.eclipse.xtext.builder,
  org.apache.log4j;bundle-version="1.2.15",
  org.eclipse.ui.editors,
  org.eclipse.ui,
  org.eclipse.ui.ide,
  org.antlr.runtime,
  org.eclipse.jdt.core;bundle-version="3.5.0";resolution:=optional,
+ org.eclipse.xtext.builder,
  org.eclipse.xpand;bundle-version="0.8.0",
  org.eclipse.xtend;bundle-version="0.8.0"
 Bundle-Activator: org.eclipse.xtext.example.ui.internal.DomainmodelActivator
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Import-Package: org.apache.log4j
-Export-Package: org.eclipse.xtext.example.contentassist.antlr
+Export-Package: org.eclipse.xtext.example.ui.contentassist.antlr

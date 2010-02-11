@@ -179,17 +179,17 @@ public abstract class AbstractImportUriUiTestLanguageUiModule extends ImportUriU
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.antlr.IContentAssistParser> bindIContentAssistParser() {
-		return org.eclipse.xtext.ui.tests.linking.contentassist.antlr.ImportUriUiTestLanguageParser.class;
+		return org.eclipse.xtext.ui.tests.linking.ui.contentassist.antlr.ImportUriUiTestLanguageParser.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public void configureContentAssistLexerProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.ui.tests.linking.contentassist.antlr.internal.InternalImportUriUiTestLanguageLexer.class).toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.ui.tests.linking.contentassist.antlr.internal.InternalImportUriUiTestLanguageLexer.class));
+		binder.bind(org.eclipse.xtext.ui.tests.linking.ui.contentassist.antlr.internal.InternalImportUriUiTestLanguageLexer.class).toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.ui.tests.linking.ui.contentassist.antlr.internal.InternalImportUriUiTestLanguageLexer.class));
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public void configureContentAssistLexer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.ui.tests.linking.contentassist.antlr.internal.InternalImportUriUiTestLanguageLexer.class);
+		binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.ui.tests.linking.ui.contentassist.antlr.internal.InternalImportUriUiTestLanguageLexer.class);
 	}
 
 

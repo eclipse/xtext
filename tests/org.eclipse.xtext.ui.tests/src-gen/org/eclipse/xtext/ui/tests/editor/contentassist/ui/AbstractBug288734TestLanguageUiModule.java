@@ -179,17 +179,17 @@ public abstract class AbstractBug288734TestLanguageUiModule extends Bug288734Tes
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.antlr.IContentAssistParser> bindIContentAssistParser() {
-		return org.eclipse.xtext.ui.tests.editor.contentassist.contentassist.antlr.Bug288734TestLanguageParser.class;
+		return org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.Bug288734TestLanguageParser.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public void configureContentAssistLexerProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.ui.tests.editor.contentassist.contentassist.antlr.internal.InternalBug288734TestLanguageLexer.class).toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.ui.tests.editor.contentassist.contentassist.antlr.internal.InternalBug288734TestLanguageLexer.class));
+		binder.bind(org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.internal.InternalBug288734TestLanguageLexer.class).toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.internal.InternalBug288734TestLanguageLexer.class));
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public void configureContentAssistLexer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.ui.tests.editor.contentassist.contentassist.antlr.internal.InternalBug288734TestLanguageLexer.class);
+		binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.internal.InternalBug288734TestLanguageLexer.class);
 	}
 
 
