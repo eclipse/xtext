@@ -14,6 +14,7 @@ import java.util.List;
 import java.util.Set;
 
 import org.eclipse.xtext.diagnostics.Diagnostic;
+import org.eclipse.xtext.diagnostics.DiagnosticSeverity;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -23,32 +24,71 @@ import org.eclipse.xtext.util.Tuples;
  */
 public class ListBasedDiagnosticConsumer implements IDiagnosticConsumer {
 
-	private final List<Diagnostic> diagnostics;
+	public class Internal {
 	
-	private final Set<Pair<Integer, Integer>> coveredNodes;
-
-	private boolean diagnosticsConsumed;
+		private final List<Diagnostic> diagnostics;
+		
+		private final Set<Pair<Integer, Integer>> coveredNodes;
 	
-	public ListBasedDiagnosticConsumer() {
-		this.diagnostics = new ArrayList<Diagnostic>();
-		this.coveredNodes = new HashSet<Pair<Integer,Integer>>();
-		this.diagnosticsConsumed = false;
-	}
+		private boolean diagnosticsConsumed;
+		
+		public Internal() {
+			this.diagnostics = new ArrayList<Diagnostic>();
+			this.coveredNodes = new HashSet<Pair<Integer,Integer>>();
+			this.diagnosticsConsumed = false;
+		}
+		
+		public void consume(Diagnostic diagnostic) {
+			final Pair<Integer, Integer> newRange = Tuples.create(diagnostic.getOffset(), diagnostic.getLength());
+			if (coveredNodes.add(newRange)) {
+				boolean changed = this.diagnostics.add(diagnostic);
+				diagnosticsConsumed |= changed;
+			}
+		}
 	
-	public void consume(Diagnostic diagnostic) {
-		final Pair<Integer, Integer> newRange = Tuples.create(diagnostic.getOffset(), diagnostic.getLength());
-		if (coveredNodes.add(newRange)) {
-			boolean changed = this.diagnostics.add(diagnostic);
-			diagnosticsConsumed |= changed;
+		public boolean hasConsumedDiagnostics() {
+			return diagnosticsConsumed;
+		}
+		
+		public List<Diagnostic> getResult() {
+			return Collections.unmodifiableList(diagnostics);
 		}
 	}
+	
+	private Internal errors;
+	private Internal warnings;
 
-	public boolean hasConsumedDiagnostics() {
-		return diagnosticsConsumed;
+	public void consume(Diagnostic diagnostic, DiagnosticSeverity severity) {
+		getInternal(severity).consume(diagnostic);
 	}
 	
-	public List<Diagnostic> getResult() {
-		return Collections.unmodifiableList(diagnostics);
+	private Internal getInternal(DiagnosticSeverity severity) {
+		switch(severity) {
+			case ERROR: 
+				if (errors == null) {
+					errors = new Internal();
+				}
+				return errors;
+			case WARNING:
+				if (warnings == null) {
+					warnings = new Internal();
+				}
+				return warnings;
+		}
+		throw new IllegalArgumentException("Unknown severity: " + severity);
+	}
+
+	public boolean hasConsumedDiagnostics(DiagnosticSeverity severity) {
+		if (severity == DiagnosticSeverity.ERROR)
+			return errors != null;
+		if (severity == DiagnosticSeverity.WARNING)
+			return warnings != null;
+		return getInternal(severity).hasConsumedDiagnostics();
 	}
 	
+	public List<Diagnostic> getResult(DiagnosticSeverity severity) {
+		if (hasConsumedDiagnostics(severity))
+			return getInternal(severity).getResult();
+		return Collections.emptyList();
+	}
 }

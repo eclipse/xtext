@@ -9,6 +9,7 @@ package org.eclipse.xtext.linking.impl;
 
 import org.eclipse.xtext.diagnostics.AbstractDiagnosticProducer;
 import org.eclipse.xtext.diagnostics.Diagnostic;
+import org.eclipse.xtext.diagnostics.DiagnosticMessage;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 
 /**
@@ -21,8 +22,8 @@ public class LinkingDiagnosticProducer extends AbstractDiagnosticProducer {
 	}
 
 	@Override
-	protected Diagnostic createDiagnostic(String message) {
-		return new XtextLinkingDiagnostic(getNode(), message);
+	protected Diagnostic createDiagnostic(DiagnosticMessage message) {
+		return new XtextLinkingDiagnostic(getNode(), message.getMessage());
 	}
 	
 }

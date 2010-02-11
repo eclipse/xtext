@@ -12,8 +12,8 @@ package org.eclipse.xtext.diagnostics;
  */
 public interface IDiagnosticConsumer {
 
-	void consume(Diagnostic diagnostic);
+	void consume(Diagnostic diagnostic, DiagnosticSeverity severity);
 
-	boolean hasConsumedDiagnostics();
+	boolean hasConsumedDiagnostics(DiagnosticSeverity severity);
 
 }

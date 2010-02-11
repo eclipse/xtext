@@ -35,8 +35,8 @@ import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.ParseResult;
-import org.eclipse.xtext.parser.antlr.ISyntaxErrorProvider.IParserErrorContext;
-import org.eclipse.xtext.parser.antlr.ISyntaxErrorProvider.IValueConverterErrorContext;
+import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider.IParserErrorContext;
+import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider.IValueConverterErrorContext;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -119,7 +119,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 
 	private final Map<String, AbstractRule> allRules;
 	
-	private ISyntaxErrorProvider syntaxErrorProvider;
+	private ISyntaxErrorMessageProvider syntaxErrorProvider;
 	
 	private final ListMultimap<Token, CompositeNode> deferredLookaheadMap = Multimaps.newArrayListMultimap();
 	private final Map<Token, LeafNode> token2NodeMap = new HashMap<Token, LeafNode>();
@@ -210,11 +210,11 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			leafNode.setGrammarElement(rule);
 	}
 	
-	public void setSyntaxErrorProvider(ISyntaxErrorProvider syntaxErrorProvider) {
+	public void setSyntaxErrorProvider(ISyntaxErrorMessageProvider syntaxErrorProvider) {
 		this.syntaxErrorProvider = syntaxErrorProvider;
 	}
 	
-	public ISyntaxErrorProvider getSyntaxErrorProvider() {
+	public ISyntaxErrorMessageProvider getSyntaxErrorProvider() {
 		return syntaxErrorProvider;
 	}
 
@@ -395,7 +395,10 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	
 	@Override
 	public void reportError(RecognitionException e) {
-		// do nothing
+		if (errorRecovery) {
+			return;
+		}
+		errorRecovery = true;
 	}
 	
 	public SyntaxErrorMessage getSyntaxErrorMessage(RecognitionException e, String[] tokenNames) {

@@ -23,7 +23,7 @@ public class AbstractDiagnosticProducerDecorator implements IDiagnosticProducer 
 		this.producer = producer;
 	}
 
-	public void addDiagnostic(String message) {
+	public void addDiagnostic(DiagnosticMessage message) {
 		producer.addDiagnostic(message);
 	}
 

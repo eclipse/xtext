@@ -23,9 +23,12 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.diagnostics.DiagnosticMessage;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
+import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.linking.ILinkingService;
+import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
@@ -42,6 +45,9 @@ public class Linker extends AbstractCleaningLinker {
 
 	@Inject
 	private ILinkingService linkingService;
+	
+	@Inject
+	private ILinkingDiagnosticMessageProvider.Extended diagnosticMessageProvider;
 
 	public void ensureLinked(EObject obj, IDiagnosticProducer producer) {
 		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(obj);
@@ -106,7 +112,9 @@ public class Linker extends AbstractCleaningLinker {
 			Set<EReference> handledReferences, IDiagnosticProducer producer) {
 		final EReference eRef = GrammarUtil.getReference(ref, obj.eClass());
 		if (eRef == null) {
-			producer.addDiagnostic("Cannot find reference " + ref);
+			ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context = createDiagnosticContext(obj, eRef, node);
+			DiagnosticMessage message = diagnosticMessageProvider.getIllegalCrossReferenceMessage(context, ref);
+			producer.addDiagnostic(message);
 			return;
 		}
 		handledReferences.add(eRef);
@@ -115,16 +123,18 @@ public class Linker extends AbstractCleaningLinker {
 		try {
 			final List<EObject> links = getLinkedObject(obj, eRef, node);
 			if (links == null || links.isEmpty()) {
-				if (!isNullValidResult(obj, eRef, node))
-					producer.addDiagnostic("Cannot resolve reference to '" + node.serialize() + "'");
+				if (!isNullValidResult(obj, eRef, node)) {
+					ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context = createDiagnosticContext(obj, eRef, node);
+					DiagnosticMessage message = diagnosticMessageProvider.getUnresolvedProxyMessage(context);
+					producer.addDiagnostic(message);
+				}
 				return;
 			}
 
 			if (eRef.getUpperBound() >= 0 && links.size() > eRef.getUpperBound()) {
-				producer.addDiagnostic("Too many matches for reference to '"
-						+ node.serialize() + "'. Feature " + eRef.getName() + " can only hold " + eRef.getUpperBound()
-						+ " reference" + (eRef.getUpperBound() != 1 ? "s" : "") + " but found " + links.size() + " candidates" +
-						(links.size()!=1 ? "s" : ""));
+				ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context = createDiagnosticContext(obj, eRef, node);
+				DiagnosticMessage message = diagnosticMessageProvider.getViolatedBoundsConstraintMessage(context, links.size());
+				producer.addDiagnostic(message);
 				return;
 			}
 
@@ -140,19 +150,60 @@ public class Linker extends AbstractCleaningLinker {
 					//addUs.removeAll(list); // removeAll calls most likely list.contains() which is rather slow
 					for (int i = 0; i < list.size(); i++)
 						addUs.remove(list.get(i));
-					if (!((BasicEList) list).addAllUnique(addUs))
-						producer.addDiagnostic("Cannot refer to '" + node.serialize() + "' more than once.");
+					if (!((BasicEList) list).addAllUnique(addUs)) {
+						ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context = createDiagnosticContext(obj, eRef, node);
+						DiagnosticMessage message = diagnosticMessageProvider.getViolatedBoundsConstraintMessage(context, links.size());
+						producer.addDiagnostic(message);
+					}
 				}
 				else
-					if (!list.addAll(links))
-						producer.addDiagnostic("Cannot refer to '" + node.serialize() + "' more than once.");
+					if (!list.addAll(links)) {
+						ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context = createDiagnosticContext(obj, eRef, node);
+						DiagnosticMessage message = diagnosticMessageProvider.getViolatedBoundsConstraintMessage(context, links.size());
+						producer.addDiagnostic(message);
+					}
 			}
 		} catch (IllegalNodeException e) {
-			producer.addDiagnostic(e.getMessage());
+			ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context = createDiagnosticContext(obj, eRef, node);
+			DiagnosticMessage message = diagnosticMessageProvider.getIllegalNodeMessage(context, e);
+			producer.addDiagnostic(message);
 			if (log.isDebugEnabled()) {
 				log.debug(e.getMessage(), e);
 			}
 		}
+	}
+
+	protected static class LinkingDiagnosticContext implements ILinkingDiagnosticContext {
+
+		private final EObject obj;
+		private final EReference eRef;
+		private final AbstractNode node;
+
+		protected LinkingDiagnosticContext(EObject obj, EReference eRef, AbstractNode node) {
+			this.obj = obj;
+			this.eRef = eRef;
+			this.node = node;
+		}
+		
+		public EObject getContext() {
+			return obj;
+		}
+
+		public EReference getReference() {
+			return eRef;
+		}
+
+		public String getLinkText() {
+			String serialize = node.serialize();
+			if (serialize != null)
+				return serialize.trim();
+			return null;
+		}
+		
+	}
+	
+	protected ILinkingDiagnosticContext createDiagnosticContext(EObject obj, EReference eRef, AbstractNode node) {
+		return new LinkingDiagnosticContext(obj, eRef, node);
 	}
 
 	protected List<EObject> getLinkedObject(EObject obj, EReference eRef, AbstractNode node) throws IllegalNodeException {
@@ -182,6 +233,14 @@ public class Linker extends AbstractCleaningLinker {
 		final Iterator<EObject> allContents = model.eAllContents();
 		while (allContents.hasNext())
 			ensureLinked(allContents.next(), producer);
+	}
+
+	public void setDiagnosticMessageProvider(ILinkingDiagnosticMessageProvider.Extended diagnosticMessageProvider) {
+		this.diagnosticMessageProvider = diagnosticMessageProvider;
+	}
+
+	public ILinkingDiagnosticMessageProvider.Extended getDiagnosticMessageProvider() {
+		return diagnosticMessageProvider;
 	}
 
 }
