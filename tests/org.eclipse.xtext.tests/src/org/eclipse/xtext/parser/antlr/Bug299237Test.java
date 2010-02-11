@@ -21,9 +21,9 @@ import com.google.inject.Injector;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class Bug299237Test extends AbstractXtextTests implements ISyntaxErrorProvider {
+public class Bug299237Test extends AbstractXtextTests implements ISyntaxErrorMessageProvider {
 	
-	private SyntaxErrorProvider syntaxErrorProvider;
+	private SyntaxErrorMessageProvider syntaxErrorProvider;
 
 	private String expectedMessage;
 	
@@ -35,13 +35,13 @@ public class Bug299237Test extends AbstractXtextTests implements ISyntaxErrorPro
 			public Injector createInjector() {
 				return Guice.createInjector(new Bug299237TestLanguageRuntimeModule(){
 					@SuppressWarnings("unused")
-					public ISyntaxErrorProvider bindSyntaxErrorProvider() {
+					public ISyntaxErrorMessageProvider bindSyntaxErrorProvider() {
 						return Bug299237Test.this;
 					}
 				});
 			}
 		});
-		syntaxErrorProvider = new SyntaxErrorProvider();
+		syntaxErrorProvider = new SyntaxErrorMessageProvider();
 	}
 	
 	public void testSyntaxError_01() throws Exception {
@@ -50,7 +50,7 @@ public class Bug299237Test extends AbstractXtextTests implements ISyntaxErrorPro
 	}
 	
 	public void testSyntaxError_02() throws Exception {
-		syntaxErrorProvider = new SyntaxErrorProvider() {
+		syntaxErrorProvider = new SyntaxErrorMessageProvider() {
 			@Override
 			public SyntaxErrorMessage getSyntaxErrorMessage(IParserErrorContext context) {
 				SyntaxErrorMessage result = super.getSyntaxErrorMessage(context);
