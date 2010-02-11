@@ -341,7 +341,7 @@
    </extension>
    <extension point="org.eclipse.core.runtime.adapters">
       <factory 
-         class="" 
+         class="org.eclipse.xtext.xtext.ui.editor.outline.XtextContentOutlineNodeAdapterFactory" 
          adaptableType="org.eclipse.xtext.ui.editor.outline.ContentOutlineNode">
          <adapter type="org.eclipse.debug.ui.actions.ILaunchable"/>
       </factory>
