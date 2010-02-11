@@ -18,13 +18,15 @@ import org.eclipse.xtext.Grammar;
  * @author Sebastian Zarnekow - Initial contribution and API
  * @author Sven Efftinge
  */
-public class DelegatingGeneratorFragment extends DefaultGeneratorFragment {
+public class DelegatingGeneratorFragment extends DefaultGeneratorFragment implements NamingAware {
 
 	private IGeneratorFragment delegate;
 
 	private String message;
 
 	private IGeneratorFragment fallback = new DefaultGeneratorFragment();
+
+	private Naming naming;
 
 	public void setFallback(IGeneratorFragment fragment) {
 		this.fallback = fragment;
@@ -50,6 +52,10 @@ public class DelegatingGeneratorFragment extends DefaultGeneratorFragment {
 		if (delegate == null && message != null) {
 			issues.addWarning("---- ATTENTION----\n\t" + "\n\n\t" + message);
 		}
+		if (fallback instanceof NamingAware)
+			((NamingAware) fallback).registerNaming(getNaming());
+		if (delegate instanceof NamingAware)
+			((NamingAware) delegate).registerNaming(getNaming());
 		if (delegate != null)
 			delegate.checkConfiguration(issues);
 		else
@@ -128,6 +134,14 @@ public class DelegatingGeneratorFragment extends DefaultGeneratorFragment {
 		if (delegate != null)
 			return delegate.getRequiredBundlesUi(grammar);
 		return fallback.getRequiredBundlesUi(grammar);
+	}
+
+	public void registerNaming(Naming n) {
+		this.naming = n;
+	}
+	
+	public Naming getNaming() {
+		return naming;
 	}
 
 }
