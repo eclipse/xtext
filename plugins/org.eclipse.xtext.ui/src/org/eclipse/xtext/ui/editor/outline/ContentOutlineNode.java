@@ -12,6 +12,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.core.runtime.IAdaptable;
+import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -26,7 +28,7 @@ import org.eclipse.xtext.util.concurrent.IEObjectHandle;
  * @author Peter Friese - Initial contribution and API
  * @author Michael Clay
  */
-public class ContentOutlineNode {
+public class ContentOutlineNode implements IAdaptable {
 
 	private StyledString styledString;
 	private Image image;
@@ -178,6 +180,11 @@ public class ContentOutlineNode {
 		}
 
 		return true;
+	}
+
+	@SuppressWarnings("rawtypes")
+	public Object getAdapter(Class expected) {
+		return Platform.getAdapterManager().getAdapter(this, expected);
 	}
 
 }

@@ -35,12 +35,24 @@ public class SelectionUtil {
 		ISelection selection = HandlerUtil.getCurrentSelection(event);
 		if (selection instanceof TextSelection) {
 			IEditorPart activeEditor = HandlerUtil.getActiveEditor(event);
-			IEditorInput editorInput = activeEditor.getEditorInput();
-			if (editorInput instanceof IFileEditorInput) {
-				IFileEditorInput fileEditorInput = (IFileEditorInput) editorInput;
-				return fileEditorInput.getFile();
-			}
+			return getSelectedFile(activeEditor);
 		} else if (selection instanceof IStructuredSelection) {
+			return getSelectedFile(selection);
+		}
+		return null;
+	}
+	
+	public static IFile getSelectedFile(IEditorPart editor) {
+		IEditorInput editorInput = editor.getEditorInput();
+		if (editorInput instanceof IFileEditorInput) {
+			IFileEditorInput fileEditorInput = (IFileEditorInput) editorInput;
+			return fileEditorInput.getFile();
+		}
+		return null;
+	}
+	
+	public static IFile getSelectedFile(ISelection selection) {
+		if (selection instanceof IStructuredSelection) {
 			IStructuredSelection ssel = (IStructuredSelection) selection;
 			Object firstElement = ssel.getFirstElement();
 			if (firstElement instanceof IAdaptable) {
