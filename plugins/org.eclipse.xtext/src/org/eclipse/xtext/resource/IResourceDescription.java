@@ -110,7 +110,7 @@ public interface IResourceDescription {
 		/**
 		 * @return whether there are differences between the old and the new resource description.
 		 */
-		boolean hasChanges();
+		boolean haveEObjectDescriptionsChanged();
 
 	}
 

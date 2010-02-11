@@ -63,7 +63,7 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 	}
 	
 	public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {
-		if (!delta.hasChanges())
+		if (!delta.haveEObjectDescriptionsChanged())
 			return false;
 		Set<String> names = Sets.newHashSet();
 		addExportedNames(names,delta.getOld());

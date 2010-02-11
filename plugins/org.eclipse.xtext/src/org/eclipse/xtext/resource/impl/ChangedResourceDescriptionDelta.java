@@ -15,7 +15,7 @@ public class ChangedResourceDescriptionDelta extends DefaultResourceDescriptionD
 	}
 
 	@Override
-	public boolean hasChanges() {
+	public boolean haveEObjectDescriptionsChanged() {
 		return true;
 	}
 }

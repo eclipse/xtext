@@ -329,7 +329,7 @@ public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDe
 		if (isDirty || ((!resource.isTrackingModification() || resource.isModified()) && dirtyStateManager.manageDirtyState(dirtyResource))) {
 			synchronized (dirtyStateManager) {
 				final IResourceDescription newDescription = resource.getResourceServiceProvider().getResourceDescriptionManager().getResourceDescription(resource);
-				if (new DefaultResourceDescriptionDelta(dirtyResource.getDescription(), newDescription).hasChanges()) {
+				if (new DefaultResourceDescriptionDelta(dirtyResource.getDescription(), newDescription).haveEObjectDescriptionsChanged()) {
 					dirtyResource.copyState(newDescription);
 					dirtyStateManager.announceDirtyStateChanged(dirtyResource);
 				}
