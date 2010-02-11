@@ -116,11 +116,6 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	}
 	
 	@Override
-	public void reportError(RecognitionException e) {
-		// there is no need to report an error
-	}
-	
-	@Override
 	public void recoverFromMismatchedToken(IntStream in, RecognitionException re, int ttype, BitSet follow)
 			throws RecognitionException {
 		// inlined super call because we want to get rid of the System.err.println(..)

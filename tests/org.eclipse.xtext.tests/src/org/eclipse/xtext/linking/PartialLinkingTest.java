@@ -15,6 +15,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.linking.impl.DefaultLinkingService;
 import org.eclipse.xtext.linking.impl.Linker;
+import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.naming.SimpleNameProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -147,6 +148,7 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 		getInjector().injectMembers(linkingService);
 		linkingService.setScopeProvider(this);
 		linker.setLinkingService(linkingService);
+		linker.setDiagnosticMessageProvider(new LinkingDiagnosticMessageProvider());
 		resource.setLinker(linker);
 	}
 
