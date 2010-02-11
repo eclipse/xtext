@@ -38,6 +38,8 @@ import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.diagnostics.AbstractDiagnosticProducerDecorator;
+import org.eclipse.xtext.diagnostics.DiagnosticMessage;
+import org.eclipse.xtext.diagnostics.DiagnosticSeverity;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.diagnostics.IDiagnosticProducer;
@@ -91,7 +93,7 @@ public class XtextLinker extends Linker {
 			private boolean filter = false;
 
 			@Override
-			public void addDiagnostic(String message) {
+			public void addDiagnostic(DiagnosticMessage message) {
 				if (!filter)
 					super.addDiagnostic(message);
 			}
@@ -136,13 +138,13 @@ public class XtextLinker extends Linker {
 			final List<EObject> metamodels = XtextMetamodelReferenceHelper.findBestMetamodelForType(typeRef, "",
 					typeRefName, scopeProvider.getScope(typeRef, ref));
 			if (metamodels.isEmpty() || metamodels.size() > 1)
-				producer.addDiagnostic("Cannot find meta model for type '" + typeRefName + "'");
+				producer.addDiagnostic(new DiagnosticMessage("Cannot find meta model for type '" + typeRefName + "'", DiagnosticSeverity.ERROR, null));
 			else
 				typeRef.setMetamodel((AbstractMetamodelDeclaration) metamodels.get(0));
 		} else if (XtextPackage.eINSTANCE.getCrossReference_Terminal() == ref) {
 			AbstractRule rule = GrammarUtil.findRuleForName(GrammarUtil.getGrammar(obj), "ID");
 			if (rule == null)
-				producer.addDiagnostic("Cannot resolve implicit reference to rule 'ID'");
+				producer.addDiagnostic(new DiagnosticMessage("Cannot resolve implicit reference to rule 'ID'", DiagnosticSeverity.ERROR, null));
 			else {
 				RuleCall call = XtextFactory.eINSTANCE.createRuleCall();
 				call.setRule(rule);
@@ -205,7 +207,7 @@ public class XtextLinker extends Linker {
 			transformer.transform();
 		} catch (Exception e) {
 			log.error(e.getMessage(), e);
-			consumer.consume(new ExceptionDiagnostic(e));
+			consumer.consume(new ExceptionDiagnostic(e), DiagnosticSeverity.ERROR);
 		}
 		if (!model.eResource().eAdapters().contains(packageRemover))
 			model.eResource().eAdapters().add(packageRemover);

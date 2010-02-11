@@ -5,18 +5,20 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parser.antlr;
+package org.eclipse.xtext.diagnostics;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class SyntaxErrorMessage {
+public class DiagnosticMessage {
 
 	private final String message;
+	private final DiagnosticSeverity severity;
 	private final String issueCode;
-
-	public SyntaxErrorMessage(String message, String issueCode) {
+	
+	public DiagnosticMessage(String message, DiagnosticSeverity severity, String issueCode) {
 		this.message = message;
+		this.severity = severity;
 		this.issueCode = issueCode;
 		if (issueCode != null)
 			throw new IllegalArgumentException("issueCodes are not yet supported for syntax errors");
@@ -25,9 +27,12 @@ public class SyntaxErrorMessage {
 	public String getIssueCode() {
 		return issueCode;
 	}
-
+	
 	public String getMessage() {
 		return message;
 	}
-
+	
+	public DiagnosticSeverity getSeverity() {
+		return severity;
+	}
 }

@@ -16,7 +16,7 @@ import org.eclipse.xtext.parsetree.AbstractNode;
  */
 public interface IDiagnosticProducer {
 
-	void addDiagnostic(String message);
+	void addDiagnostic(DiagnosticMessage message);
 	
 	AbstractNode getNode();
 	

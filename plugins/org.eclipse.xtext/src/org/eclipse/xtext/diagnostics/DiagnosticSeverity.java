@@ -5,18 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.parser.antlr;
+package org.eclipse.xtext.diagnostics;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class SyntaxErrorProvider implements ISyntaxErrorProvider {
+public enum DiagnosticSeverity {
 
-	public SyntaxErrorMessage getSyntaxErrorMessage(IParserErrorContext context) {
-		return new SyntaxErrorMessage(context.getDefaultMessage(), null);
-	}
+	ERROR,
+	WARNING
 	
-	public SyntaxErrorMessage getSyntaxErrorMessage(IValueConverterErrorContext context) {
-		return new SyntaxErrorMessage(context.getDefaultMessage(), null);
-	}
 }

@@ -17,27 +17,31 @@ import com.google.inject.ImplementedBy;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@ImplementedBy(SyntaxErrorProvider.class)
-public interface ISyntaxErrorProvider {
+@ImplementedBy(SyntaxErrorMessageProvider.class)
+public interface ISyntaxErrorMessageProvider {
 
 	SyntaxErrorMessage getSyntaxErrorMessage(IParserErrorContext context);
-	
+
 	SyntaxErrorMessage getSyntaxErrorMessage(IValueConverterErrorContext context);
 
 	interface IErrorContext {
 		String getDefaultMessage();
+
 		EObject getCurrentContext();
+
 		AbstractNode getCurrentNode();
 	}
-	
+
 	interface IParserErrorContext extends IErrorContext {
-	  RecognitionException getRecognitionException();
-	  String[] getTokenNames();
+		RecognitionException getRecognitionException();
+
+		String[] getTokenNames();
 	}
-	
+
 	interface IValueConverterErrorContext extends IErrorContext {
-	  String getDefaultMessage();
-	  ValueConverterException getValueConverterException();
+		String getDefaultMessage();
+
+		ValueConverterException getValueConverterException();
 	}
-	
+
 }

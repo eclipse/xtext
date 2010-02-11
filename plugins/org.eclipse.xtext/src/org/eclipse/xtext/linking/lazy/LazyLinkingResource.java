@@ -20,7 +20,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.EcoreUtil2;
+import org.eclipse.xtext.diagnostics.DiagnosticMessage;
+import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.linking.ILinkingService;
+import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext;
 import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.resource.XtextResource;
@@ -41,6 +44,9 @@ public class LazyLinkingResource extends XtextResource {
 
 	@Inject
 	private LazyURIEncoder encoder;
+	
+	@Inject
+	private ILinkingDiagnosticMessageProvider diagnosticMessageProvider;
 
 	private boolean eagerLinking = false;
 
@@ -73,9 +79,7 @@ public class LazyLinkingResource extends XtextResource {
 					List<EObject> linkedObjects = getLinkingService().getLinkedObjects(triple.getFirst(), reference,
 							triple.getThird());
 					if (linkedObjects.isEmpty()) {
-						XtextLinkingDiagnostic diag = createDiagnostic(triple);
-						if (!getErrors().contains(diag))
-							getErrors().add(diag);
+						createAndAddDiagnostic(triple);
 						return null;
 					}
 					if (linkedObjects.size() > 1)
@@ -83,14 +87,11 @@ public class LazyLinkingResource extends XtextResource {
 								+ uriFragment);
 					EObject result = linkedObjects.get(0);
 					if (!EcoreUtil2.isAssignableFrom(reference.getEReferenceType(), result.eClass())) {
-						XtextLinkingDiagnostic diag = createDiagnostic(triple);
-						if (!getErrors().contains(diag))
-							getErrors().add(diag);
+						createAndAddDiagnostic(triple);
 						return null;
 					}
 					// remove previously added error markers, since everything should be fine now
-					XtextLinkingDiagnostic diag = createDiagnostic(triple);
-					getErrors().remove(diag);
+					removeDiagnostic(triple);
 					return result;
 				} finally {
 					resolving.remove(triple);
@@ -122,12 +123,77 @@ public class LazyLinkingResource extends XtextResource {
 		return eReference.getEContainingClass().getName() + "." + eReference.getName();
 	}
 
-	protected XtextLinkingDiagnostic createDiagnostic(Triple<EObject, EReference, AbstractNode> triple) {
-		String serializedNode = triple.getThird().serialize();
-		if (serializedNode != null)
-			serializedNode = serializedNode.trim();
-		String msg = "Couldn't resolve reference to " + triple.getSecond().getEType().getName() + " " + serializedNode;
-		return new XtextLinkingDiagnostic(triple.getThird(), msg);
+	protected static class DiagnosticMessageContext implements ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext {
+
+		private final Triple<EObject, EReference, AbstractNode> triple;
+
+		protected DiagnosticMessageContext(Triple<EObject, EReference, AbstractNode> triple) {
+			this.triple = triple;
+		}
+		
+		public EObject getContext() {
+			return triple.getFirst();
+		}
+
+		public EReference getReference() {
+			return triple.getSecond();
+		}
+
+		public String getLinkText() {
+			String serialized = triple.getThird().serialize();
+			if (serialized != null)
+				return serialized.trim();
+			return null;
+		}
+		
+	}
+	
+	protected void createAndAddDiagnostic(Triple<EObject, EReference, AbstractNode> triple) {
+		DiagnosticMessage message = createDiagnosticMessage(triple);
+		List<Diagnostic> list = getDiagnosticList(message);
+		Diagnostic diagnostic = createDiagnostic(triple, message);
+		if (!list.contains(diagnostic))
+			list.add(diagnostic);
+	}
+	
+	protected void removeDiagnostic(Triple<EObject, EReference, AbstractNode> triple) {
+		DiagnosticMessage message = createDiagnosticMessage(triple);
+		List<Diagnostic> list = getDiagnosticList(message);
+		if (!list.isEmpty()) {
+			Diagnostic diagnostic = createDiagnostic(triple, message);
+			list.remove(diagnostic);
+		}
+	}
+
+	protected Diagnostic createDiagnostic(Triple<EObject, EReference, AbstractNode> triple,
+			DiagnosticMessage message) {
+		Diagnostic diagnostic = new XtextLinkingDiagnostic(triple.getThird(), message.getMessage());
+		return diagnostic;
+	}
+
+	protected List<Diagnostic> getDiagnosticList(DiagnosticMessage message) throws AssertionError {
+		List<Diagnostic> list = null;
+		switch (message.getSeverity()) {
+			case ERROR:
+				list = getErrors();
+				break;
+			case WARNING:
+				list = getWarnings();
+				break;
+			default:
+				throw new AssertionError("Unexpected severity: " + message.getSeverity());
+		}
+		return list;
+	}
+
+	protected DiagnosticMessage createDiagnosticMessage(Triple<EObject, EReference, AbstractNode> triple) {
+		ILinkingDiagnosticMessageProvider.ILinkingDiagnosticContext context = createDiagnosticMessageContext(triple);
+		DiagnosticMessage message = diagnosticMessageProvider.getUnresolvedProxyMessage(context);
+		return message;
+	}
+	
+	protected ILinkingDiagnosticContext createDiagnosticMessageContext(Triple<EObject, EReference, AbstractNode> triple) {
+		return new DiagnosticMessageContext(triple);
 	}
 
 	public void setLinkingService(ILinkingService linkingService) {
@@ -152,5 +218,13 @@ public class LazyLinkingResource extends XtextResource {
 
 	public boolean isEagerLinking() {
 		return eagerLinking;
+	}
+	
+	public ILinkingDiagnosticMessageProvider getDiagnosticMessageProvider() {
+		return diagnosticMessageProvider;
+	}
+	
+	public void setDiagnosticMessageProvider(ILinkingDiagnosticMessageProvider diagnosticMessageProvider) {
+		this.diagnosticMessageProvider = diagnosticMessageProvider;
 	}
 }

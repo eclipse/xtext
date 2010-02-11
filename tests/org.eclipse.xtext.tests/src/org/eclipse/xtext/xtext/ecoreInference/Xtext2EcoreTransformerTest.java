@@ -35,6 +35,7 @@ import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.diagnostics.ExceptionDiagnostic;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.linking.impl.Linker;
+import org.eclipse.xtext.linking.impl.LinkingDiagnosticMessageProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
@@ -110,6 +111,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 		linker.setScopeProvider(((XtextLinker) resource.getLinker()).getScopeProvider());
 		linker.setLinkingService(((Linker) resource.getLinker()).getLinkingService());
 		linker.setPackageRemover(new PackageRemover());
+		linker.setDiagnosticMessageProvider(new LinkingDiagnosticMessageProvider());
 		resource.setLinker(linker);
 		resource.load(in, null);
 		return resource;

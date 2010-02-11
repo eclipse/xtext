@@ -11,6 +11,8 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.diagnostics.AbstractDiagnosticProducer;
 import org.eclipse.xtext.diagnostics.Diagnostic;
+import org.eclipse.xtext.diagnostics.DiagnosticMessage;
+import org.eclipse.xtext.diagnostics.DiagnosticSeverity;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
@@ -27,14 +29,14 @@ public class TransformationDiagnosticsProducer extends AbstractDiagnosticProduce
 	}
 
 	@Override
-	protected Diagnostic createDiagnostic(String message) {
-		return new TransformationDiagnostic(getNode(), message, lastError);
+	protected Diagnostic createDiagnostic(DiagnosticMessage message) {
+		return new TransformationDiagnostic(getNode(), message.getMessage(), lastError);
 	}
 
 	public void acceptError(TransformationErrorCode errorCode, String message, EObject element) {
 		setTarget(element, null);
 		lastError = errorCode;
-		addDiagnostic(message);	
+		addDiagnostic(new DiagnosticMessage(message, DiagnosticSeverity.ERROR, null));	
 		lastError = null;
 	}
 	

@@ -16,7 +16,7 @@ import org.eclipse.xtext.parsetree.AbstractNode;
  */
 public class NullDiagnosticProducer implements IDiagnosticProducer {
 
-	public void addDiagnostic(String message) {
+	public void addDiagnostic(DiagnosticMessage message) {
 		// nothing to do
 	}
 

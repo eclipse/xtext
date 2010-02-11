@@ -10,24 +10,13 @@ package org.eclipse.xtext.parser.antlr;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class SyntaxErrorMessage {
+public class SyntaxErrorMessageProvider implements ISyntaxErrorMessageProvider {
 
-	private final String message;
-	private final String issueCode;
-
-	public SyntaxErrorMessage(String message, String issueCode) {
-		this.message = message;
-		this.issueCode = issueCode;
-		if (issueCode != null)
-			throw new IllegalArgumentException("issueCodes are not yet supported for syntax errors");
+	public SyntaxErrorMessage getSyntaxErrorMessage(IParserErrorContext context) {
+		return new SyntaxErrorMessage(context.getDefaultMessage(), null);
 	}
 	
-	public String getIssueCode() {
-		return issueCode;
+	public SyntaxErrorMessage getSyntaxErrorMessage(IValueConverterErrorContext context) {
+		return new SyntaxErrorMessage(context.getDefaultMessage(), null);
 	}
-
-	public String getMessage() {
-		return message;
-	}
-
 }

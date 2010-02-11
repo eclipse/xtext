@@ -26,11 +26,11 @@ public abstract class AbstractDiagnosticProducer implements IDiagnosticProducer 
 		this.consumer = consumer;
 	}
 
-	public void addDiagnostic(String message) {
-		consumer.consume(createDiagnostic(message));
+	public void addDiagnostic(DiagnosticMessage message) {
+		consumer.consume(createDiagnostic(message), message.getSeverity());
 	}
 	
-	protected abstract Diagnostic createDiagnostic(String message);
+	protected abstract Diagnostic createDiagnostic(DiagnosticMessage message);
 	
 	public void setNode(AbstractNode node) {
 		this.node = node;
