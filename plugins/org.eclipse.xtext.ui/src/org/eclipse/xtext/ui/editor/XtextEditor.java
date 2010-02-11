@@ -38,8 +38,6 @@ import org.eclipse.jface.viewers.IPostSelectionProvider;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.ISelectionProvider;
 import org.eclipse.jface.viewers.SelectionChangedEvent;
-import org.eclipse.swt.SWT;
-import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.ui.IEditorDescriptor;
@@ -51,7 +49,6 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.editors.text.TextEditor;
 import org.eclipse.ui.texteditor.DefaultMarkerAnnotationAccess;
 import org.eclipse.ui.texteditor.ITextEditorActionConstants;
-import org.eclipse.ui.texteditor.ITextEditorActionDefinitionIds;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.ui.texteditor.SelectMarkerRulerAction;
 import org.eclipse.ui.texteditor.SourceViewerDecorationSupport;
@@ -66,7 +63,6 @@ import org.eclipse.xtext.ui.editor.folding.IFoldingStructureProvider;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentProvider;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
-import org.eclipse.xtext.ui.editor.navigation.NavigatePreviousSubWordAction;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreAccess;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingHelper;
 import org.eclipse.xtext.ui.editor.toggleComments.ToggleSLCommentAction;
@@ -285,17 +281,6 @@ public class XtextEditor extends TextEditor {
 		actioncontributor.contributeActions(this);
 	}
 	
-	@Override
-	protected void createNavigationActions() {
-		super.createNavigationActions();
-		
-		final StyledText textWidget= getSourceViewer().getTextWidget();
-		IAction action = new NavigatePreviousSubWordAction(getSourceViewer());
-		action.setActionDefinitionId(ITextEditorActionDefinitionIds.WORD_PREVIOUS);
-		setAction(ITextEditorActionDefinitionIds.WORD_PREVIOUS, action);
-		textWidget.setKeyBinding(SWT.CTRL | SWT.ARROW_LEFT, SWT.NULL);
-	}
-
 	private void configureToggleCommentAction(ToggleSLCommentAction action) {
 		ISourceViewer sourceViewer = getSourceViewer();
 		SourceViewerConfiguration configuration = getSourceViewerConfiguration();
