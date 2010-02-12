@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.tests.editor.outline;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
@@ -32,6 +33,10 @@ public abstract class AbstractContentOutlineTests extends AbstractXtextTests {
 
 	private static ILocationInFileProvider locationProvider = new ILocationInFileProvider() {
 		public Region getLocation(EObject obj) {
+			return new Region(0, 0);
+		}
+
+		public Region getLocation(EObject referenceOwner, EReference crossReference, int indexInList) {
 			return new Region(0, 0);
 		}
 	};

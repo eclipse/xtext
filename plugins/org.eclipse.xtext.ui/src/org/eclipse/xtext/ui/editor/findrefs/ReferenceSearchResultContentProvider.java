@@ -117,7 +117,7 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 			for (IEObjectDescription eObjectDescription : resourceDescription.getExportedObjects()) {
 				if (eObjectDescription.getEObjectURI().equals(eObjectURI)) {
 					ReferenceSearchViewTreeNode referenceNode = new ReferenceSearchViewTreeNode(resourceNode,
-							eObjectURI, referenceDescription, eObjectDescription);
+							referenceDescription, eObjectDescription);
 					if (isUpdateViewer) {
 						viewer.add(resourceNode, referenceNode);
 						viewer.expandToLevel(resourceNode, 1);
@@ -132,12 +132,15 @@ public class ReferenceSearchResultContentProvider implements ITreeContentProvide
 			rootNodes = Lists.newArrayList();
 		}
 		for (ReferenceSearchViewTreeNode node : rootNodes) {
-			if (node.getURI().equals(resourceDescription.getURI())) {
-				return node;
+			Object nodeDescription = node.getDescription();
+			if (nodeDescription instanceof IResourceDescription) {
+				if (((IResourceDescription) nodeDescription).getURI().equals(resourceDescription.getURI())) {
+					return node;
+				}
 			}
 		}
-		ReferenceSearchViewTreeNode node = new ReferenceSearchViewTreeNode(null, resourceDescription.getURI(),
-				resourceDescription, resourceDescription);
+		ReferenceSearchViewTreeNode node = new ReferenceSearchViewTreeNode(null, resourceDescription,
+				resourceDescription);
 		rootNodes.add(node);
 		if (isUpdateViewer) {
 			viewer.add(viewer.getInput(), node);

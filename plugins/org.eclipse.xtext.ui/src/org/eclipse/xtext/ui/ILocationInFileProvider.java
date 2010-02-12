@@ -9,6 +9,7 @@
 package org.eclipse.xtext.ui;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.Region;
 
 import com.google.inject.ImplementedBy;
@@ -20,4 +21,6 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(DefaultLocationInFileProvider.class)
 public interface ILocationInFileProvider {
 	Region getLocation(EObject obj);
+	
+	Region getLocation(EObject referenceOwner, EReference crossReference, int indexInList);
 }

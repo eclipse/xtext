@@ -142,11 +142,11 @@ public final class ReferenceGrammarUiTestLanguageFarbeConsumer extends NonTermin
 		keyword$3$Consumer = new Keyword$3$Consumer(rule.getWertROTKeyword_0_0());
 		keyword$4$Consumer = new Keyword$4$Consumer(rule.getWertBLAUKeyword_0_1());
 		keyword$5$Consumer = new Keyword$5$Consumer(rule.getWertGELBKeyword_0_2());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.getWertGRÜNKeyword_0_3());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getWertGRNKeyword_0_3());
 		keyword$3$Consumer = new Keyword$3$Consumer(rule.getWertROTKeyword_0_0());
 		keyword$4$Consumer = new Keyword$4$Consumer(rule.getWertBLAUKeyword_0_1());
 		keyword$5$Consumer = new Keyword$5$Consumer(rule.getWertGELBKeyword_0_2());
-		keyword$6$Consumer = new Keyword$6$Consumer(rule.getWertGRÜNKeyword_0_3());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getWertGRNKeyword_0_3());
 	}
 	
 	@Override

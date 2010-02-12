@@ -31,6 +31,8 @@ import org.eclipse.ui.OpenAndLinkWithEditorHelper;
 import org.eclipse.ui.actions.ActionFactory;
 import org.eclipse.ui.part.IPageSite;
 import org.eclipse.ui.part.Page;
+import org.eclipse.xtext.resource.IReferenceDescription;
+import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 
 import com.google.inject.Inject;
@@ -172,7 +174,14 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 			for (Iterator<?> i = structuredSelection.iterator(); i.hasNext();) {
 				Object selectedObject = i.next();
 				if (selectedObject instanceof ReferenceSearchViewTreeNode) {
-					uriEditorOpener.open(((ReferenceSearchViewTreeNode) selectedObject).getURI());
+					ReferenceSearchViewTreeNode treeNode = (ReferenceSearchViewTreeNode) selectedObject;
+					Object description = treeNode.getDescription();
+					if(description instanceof IReferenceDescription) {
+						IReferenceDescription referenceDescription = (IReferenceDescription) description;
+						uriEditorOpener.open(referenceDescription.getSourceEObjectUri(), referenceDescription.getEReference(), referenceDescription.getIndexInList());
+					} else if(description instanceof IResourceDescription) {
+						uriEditorOpener.open(((IResourceDescription) description).getURI());
+					}
 				}
 			}
 		}
