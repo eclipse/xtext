@@ -36,6 +36,7 @@
 				<options backtrack="true" classSplitting="true"/>
 			</fragment>
 			<fragment class="org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment"/>
+			<fragment class="org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment"/>
 		</language>
 	</component>
 </workflow>
