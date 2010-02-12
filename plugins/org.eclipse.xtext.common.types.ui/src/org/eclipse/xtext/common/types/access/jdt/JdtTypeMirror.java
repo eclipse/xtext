@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.IElementChangedListener;
 import org.eclipse.jdt.core.IJavaElement;
+import org.eclipse.jdt.core.IJavaElementDelta;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.common.types.access.TypeResource;
@@ -53,23 +54,21 @@ public class JdtTypeMirror extends AbstractClassMirror implements IElementChange
 	}
 
 	public void elementChanged(ElementChangedEvent event) {
-		IJavaElement changedElement = event.getDelta().getElement();
-		while(changedElement != null) {
-			if (changedElement.equals(mirroredType)) {
-				unloadResource();
-				return;
-			}
-			changedElement = changedElement.getParent();
+		if (isAffectedBy(event.getDelta()))
+			unloadResource();
+	}
+	
+	private boolean isAffectedBy(IJavaElementDelta delta) {
+		IJavaElement element = delta.getElement();
+		if (mirroredType.equals(element))
+			return true;
+		if (element.getElementType() > IJavaElement.TYPE)
+			return false;
+		for(IJavaElementDelta child: delta.getAffectedChildren()) {
+			if (isAffectedBy(child))
+				return true;
 		}
-		IJavaElement type = mirroredType;
-		changedElement = event.getDelta().getElement();
-		while(type != null) {
-			if (type.equals(changedElement)) {
-				unloadResource();
-				return;
-			}
-			type = type.getParent();
-		}
+		return false;
 	}
 
 	private void unloadResource() {
