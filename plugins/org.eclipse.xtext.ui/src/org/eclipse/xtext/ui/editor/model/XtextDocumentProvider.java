@@ -9,6 +9,7 @@
 package org.eclipse.xtext.ui.editor.model;
 
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.IAnnotationModel;
 import org.eclipse.ui.IEditorInput;
@@ -49,6 +50,21 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 		XtextDocument xtextDocument = document.get();
 		return xtextDocument;
 	}
+	
+	@Override
+	public boolean isDeleted(Object element) {
+		if (element instanceof IFileEditorInput) {
+			final IFileEditorInput input = (IFileEditorInput) element;
+
+			final IPath path = input.getFile().getLocation();
+			if (path == null) {
+				// return true;
+				return !input.getFile().exists(); // fixed for EFS compatibility
+			}
+			return !path.toFile().exists();
+		}
+		return super.isDeleted(element);
+	}
 
 	@Override
 	protected void setupDocument(Object element, IDocument document) {
@@ -73,7 +89,6 @@ public class XtextDocumentProvider extends FileDocumentProvider {
 			IFileEditorInput input= (IFileEditorInput) element;
 			return new XtextResourceMarkerAnnotationModel(input.getFile(), issueResolutionProvider, markerUtil);
 		}
-
 		return super.createAnnotationModel(element);
 	}
 
