@@ -19,6 +19,7 @@ public class AutoEditStrategy extends DefaultAutoEditStrategy {
 		acceptor.accept(newSingleLineTerminals('(', ')'));
 		acceptor.accept(newMultiLineTerminals("{", null, "}"));
 		acceptor.accept(newMultiLineTerminals("begin", null, "end"));
+		acceptor.accept(newMultiLineTerminals("/*", " * ", " */"));
 		acceptor.accept(newSameTerminal('"'));
 		acceptor.accept(newSameTerminal('\''));
 	}
