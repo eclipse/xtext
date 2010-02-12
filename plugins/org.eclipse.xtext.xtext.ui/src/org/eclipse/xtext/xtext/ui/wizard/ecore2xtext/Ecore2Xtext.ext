@@ -14,8 +14,8 @@ import org::eclipse::xtext::xtext::ui::wizard::ecore2xtext;
 Collection[EClassifier] allRuleClassifiers(Ecore2XtextProjectInfo this) :
 	EPackageInfos.EPackage.allReferencedClassifiers(false).flatten().toSet();
 
-Collection[EPackage] missingReferencedEPackages(Collection[EPackage] this) :
-	allReferencedEPackages(true).flatten().toSet().removeAll(this);
+Collection[EPackage] allReferencedEPackages(Collection[EPackageInfo] this) :
+	EPackage.allReferencedEPackages(true).flatten().toSet();
 
 private Collection[EPackage] allReferencedEPackages(EPackage this, boolean includeCrossRefs) :	
 	allReferencedClassifiers(includeCrossRefs).EPackage.toSet();
