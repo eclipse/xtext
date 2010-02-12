@@ -64,8 +64,12 @@ public class XtextDocument extends Document implements IXtextDocument {
 		}
 	}
 
-	private final XtextDocumentLocker stateAccess = new XtextDocumentLocker();
+	private final XtextDocumentLocker stateAccess = createDocumentLocker();
 
+	protected XtextDocumentLocker createDocumentLocker() {
+		return new XtextDocumentLocker();
+	}
+	
 	public <T> T readOnly(IUnitOfWork<T, XtextResource> work) {
 		return stateAccess.readOnly(work);
 	}
@@ -74,7 +78,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		return stateAccess.modify(work);
 	}
 
-	private void ensureThatStateIsNotReturned(Object exec, IUnitOfWork<?, XtextResource> uow) {
+	protected void ensureThatStateIsNotReturned(Object exec, IUnitOfWork<?, XtextResource> uow) {
 		// TODO activate
 		// if (exec instanceof EObject) {
 		// if (((EObject) exec).eResource() == resource
@@ -96,7 +100,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		modelListeners.remove(listener);
 	}
 
-	private void notifyModelListeners(XtextResource res) {
+	protected void notifyModelListeners(XtextResource res) {
 		Object[] listeners = modelListeners.getListeners();
 		for (int i = 0; i < listeners.length; i++) {
 			((IXtextModelListener) listeners[i]).modelChanged(res);
@@ -113,7 +117,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		removeDocumentListener(observer);
 	}
 
-	private <T> void updateContentBeforeRead() {
+	protected <T> void updateContentBeforeRead() {
 		Object[] listeners = xtextDocumentObservers.getListeners();
 		for (int i = 0; i < listeners.length; i++) {
 			((IXtextDocumentContentObserver) listeners[i]).performNecessaryUpdates(stateAccess);
@@ -124,7 +128,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 	 * @author Sven Efftinge - Initial contribution and API
 	 * 
 	 */
-	private final class XtextDocumentLocker extends IStateAccess.AbstractImpl<XtextResource> implements Processor {
+	protected class XtextDocumentLocker extends IStateAccess.AbstractImpl<XtextResource> implements Processor {
 		@Override
 		protected XtextResource getState() {
 			return resource;
@@ -195,7 +199,7 @@ public class XtextDocument extends Document implements IXtextDocument {
 		this.validationJob = validationJob;
 	}
 
-	private void checkAndUpdateAnnotations() {
+	protected void checkAndUpdateAnnotations() {
 		validationJob.cancel();
 		validationJob.schedule();
 	}
