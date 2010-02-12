@@ -19,8 +19,7 @@ import org.eclipse.ui.IWorkbenchPart;
 import org.eclipse.ui.PlatformUI;
 
 /**
- * Detects concurrent modifications of GMF and Xtext editors based on Xtext's
- * dirty state management.
+ * Detects concurrent modifications of GMF and Xtext editors based on Xtext's dirty state management.
  * 
  * @author koehnlein
  */
@@ -40,8 +39,7 @@ public class ConcurrentModificationObserver implements IPartListener {
 
 	public void partOpened(IWorkbenchPart part) {
 		if (part instanceof DiagramEditor) {
-			TransactionalEditingDomain editingDomain = ((DiagramEditor) part)
-					.getEditingDomain();
+			TransactionalEditingDomain editingDomain = ((DiagramEditor) part).getEditingDomain();
 			factory.adapt(editingDomain, EditingDomainAdapter.class);
 		}
 	}
@@ -49,11 +47,10 @@ public class ConcurrentModificationObserver implements IPartListener {
 	public void partClosed(IWorkbenchPart part) {
 		if (part instanceof DiagramEditor) {
 			// as long as bug 299920 is not fixed, we have to dispose the adapter manually
-			TransactionalEditingDomain editingDomain = ((DiagramEditor) part)
-					.getEditingDomain();
+			TransactionalEditingDomain editingDomain = ((DiagramEditor) part).getEditingDomain();
 			if (editingDomain != null) {
-				EditingDomainAdapter adapter = (EditingDomainAdapter) factory
-						.adapt(editingDomain, EditingDomainAdapter.class);
+				EditingDomainAdapter adapter = (EditingDomainAdapter) factory.adapt(editingDomain,
+						EditingDomainAdapter.class);
 				if (adapter != null) {
 					adapter.dispose();
 				}
@@ -77,11 +74,8 @@ public class ConcurrentModificationObserver implements IPartListener {
 		public void earlyStartup() {
 			Display.getDefault().asyncExec(new Runnable() {
 				public void run() {
-					IWorkbenchPage activePage = PlatformUI.getWorkbench()
-							.getActiveWorkbenchWindow().getActivePage();
-					activePage
-							.addPartListener(new ConcurrentModificationObserver(
-									activePage));
+					IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+					activePage.addPartListener(new ConcurrentModificationObserver(activePage));
 				}
 			});
 		}

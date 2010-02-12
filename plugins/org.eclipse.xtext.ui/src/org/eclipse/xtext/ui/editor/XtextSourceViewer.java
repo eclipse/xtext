@@ -11,6 +11,7 @@ import java.util.ArrayList;
 
 import org.eclipse.core.runtime.Assert;
 import org.eclipse.jface.text.ITextPresentationListener;
+import org.eclipse.jface.text.contentassist.IContentAssistant;
 import org.eclipse.jface.text.source.IOverviewRuler;
 import org.eclipse.jface.text.source.IVerticalRuler;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
@@ -56,6 +57,10 @@ public class XtextSourceViewer extends ProjectionViewer {
 
 		fTextPresentationListeners.remove(listener);
 		fTextPresentationListeners.add(0, listener);
+	}
+	
+	public IContentAssistant getContentAssistant() {
+		return fContentAssistant;
 	}
 
 }

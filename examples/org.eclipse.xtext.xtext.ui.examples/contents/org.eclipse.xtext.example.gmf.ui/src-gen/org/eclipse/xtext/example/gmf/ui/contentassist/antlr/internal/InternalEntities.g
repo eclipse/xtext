@@ -9,7 +9,7 @@ options {
 }
 
 @lexer::header {
-package org.eclipse.xtext.example.gmf.contentassist.antlr.internal;
+package org.eclipse.xtext.example.gmf.ui.contentassist.antlr.internal;
 
 // Hack: Use our own Lexer superclass by means of import. 
 // Currently there is no other way to specify the superclass for the lexer.
@@ -17,7 +17,7 @@ import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
 }
 
 @parser::header {
-package org.eclipse.xtext.example.gmf.contentassist.antlr.internal; 
+package org.eclipse.xtext.example.gmf.ui.contentassist.antlr.internal; 
 
 import java.io.InputStream;
 import org.eclipse.xtext.*;

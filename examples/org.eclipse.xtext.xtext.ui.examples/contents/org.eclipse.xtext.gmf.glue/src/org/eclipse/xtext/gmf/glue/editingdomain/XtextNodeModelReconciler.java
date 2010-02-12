@@ -30,13 +30,12 @@ import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
 import org.eclipse.xtext.resource.XtextResource;
 
 /**
- * Reconciles the node models of all XtextResources in a
- * TransactionalEditingDomain with semantic changes.
+ * Reconciles the node models of all XtextResources in a TransactionalEditingDomain with semantic changes.
  * 
  * @author koehnlein
  */
-public class XtextNodeModelReconciler extends AdapterImpl implements
-		TransactionalEditingDomainListener, IOperationHistoryListener {
+public class XtextNodeModelReconciler extends AdapterImpl implements TransactionalEditingDomainListener,
+		IOperationHistoryListener {
 
 	private TransactionalEditingDomain editingDomain;
 
@@ -44,15 +43,13 @@ public class XtextNodeModelReconciler extends AdapterImpl implements
 
 	private XtextNodeModelReconciler(TransactionalEditingDomain editingDomain) {
 		this.editingDomain = editingDomain;
-		Lifecycle lifecycle = TransactionUtil.getAdapter(editingDomain,
-				Lifecycle.class);
+		Lifecycle lifecycle = TransactionUtil.getAdapter(editingDomain, Lifecycle.class);
 		lifecycle.addTransactionalEditingDomainListener(this);
 		changeAggregator = new ChangeAggregatorAdapter();
 		editingDomain.getResourceSet().eAdapters().add(changeAggregator);
 		CommandStack commandStack = editingDomain.getCommandStack();
 		if (commandStack instanceof IWorkspaceCommandStack) {
-			IOperationHistory operationHistory = ((IWorkspaceCommandStack) commandStack)
-					.getOperationHistory();
+			IOperationHistory operationHistory = ((IWorkspaceCommandStack) commandStack).getOperationHistory();
 			operationHistory.addOperationHistoryListener(this);
 		}
 		changeAggregator.beginRecording();
@@ -62,15 +59,12 @@ public class XtextNodeModelReconciler extends AdapterImpl implements
 		changeAggregator.endRecording();
 		CommandStack commandStack = editingDomain.getCommandStack();
 		if (commandStack instanceof IWorkspaceCommandStack) {
-			IOperationHistory operationHistory = ((IWorkspaceCommandStack) commandStack)
-					.getOperationHistory();
+			IOperationHistory operationHistory = ((IWorkspaceCommandStack) commandStack).getOperationHistory();
 			operationHistory.removeOperationHistoryListener(this);
 		}
 		editingDomain.getResourceSet().eAdapters().remove(changeAggregator);
-		Lifecycle lifecycle = TransactionUtil.getAdapter(editingDomain,
-				Lifecycle.class);
-		lifecycle
-				.removeTransactionalEditingDomainListener(XtextNodeModelReconciler.this);
+		Lifecycle lifecycle = TransactionUtil.getAdapter(editingDomain, Lifecycle.class);
+		lifecycle.removeTransactionalEditingDomainListener(XtextNodeModelReconciler.this);
 	}
 
 	public void transactionClosed(TransactionalEditingDomainEvent event) {
@@ -93,11 +87,9 @@ public class XtextNodeModelReconciler extends AdapterImpl implements
 		// ignore
 	}
 
-	public static XtextNodeModelReconciler adapt(
-			TransactionalEditingDomain editingDomain) {
-		XtextNodeModelReconciler adapter = (XtextNodeModelReconciler) EcoreUtil
-				.getAdapter(editingDomain.getResourceSet().eAdapters(),
-						XtextNodeModelReconciler.class);
+	public static XtextNodeModelReconciler adapt(TransactionalEditingDomain editingDomain) {
+		XtextNodeModelReconciler adapter = (XtextNodeModelReconciler) EcoreUtil.getAdapter(editingDomain
+				.getResourceSet().eAdapters(), XtextNodeModelReconciler.class);
 		if (adapter == null) {
 			adapter = new XtextNodeModelReconciler(editingDomain);
 		}
@@ -107,40 +99,36 @@ public class XtextNodeModelReconciler extends AdapterImpl implements
 	public void historyNotification(OperationHistoryEvent event) {
 		int eventType = event.getEventType();
 		switch (eventType) {
-		case OperationHistoryEvent.DONE:
-		case OperationHistoryEvent.UNDONE:
-		case OperationHistoryEvent.REDONE:
-			changeAggregator.endRecording();
-			ICommand updateXtextResourceTextCommand = null;
-			for (EObject modificationRoot : changeAggregator
-					.getModificationRoots()) {
-				XtextResource xtextResource = (XtextResource) modificationRoot
-						.eResource();
-				NodeAdapter nodeAdapter = NodeUtil
-						.getNodeAdapter(modificationRoot);
-				CompositeNode parserNode = nodeAdapter.getParserNode();
-				SerializerUtil serializer = xtextResource.getSerializer();
-				String newText = serializer.serialize(modificationRoot);
-				ICommand newCommand = UpdateXtextResourceTextCommand
-						.createUpdateCommand(xtextResource, parserNode.getOffset(),
-								parserNode.getLength(), newText);
-				if (updateXtextResourceTextCommand == null) {
-					updateXtextResourceTextCommand = newCommand;
-				} else {
-					updateXtextResourceTextCommand.compose(newCommand);
+			case OperationHistoryEvent.DONE:
+			case OperationHistoryEvent.UNDONE:
+			case OperationHistoryEvent.REDONE:
+				changeAggregator.endRecording();
+				ICommand updateXtextResourceTextCommand = null;
+				for (EObject modificationRoot : changeAggregator.getModificationRoots()) {
+					XtextResource xtextResource = (XtextResource) modificationRoot.eResource();
+					NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(modificationRoot);
+					CompositeNode parserNode = nodeAdapter.getParserNode();
+					SerializerUtil serializer = xtextResource.getSerializer();
+					String newText = serializer.serialize(modificationRoot);
+					ICommand newCommand = UpdateXtextResourceTextCommand.createUpdateCommand(xtextResource, parserNode
+							.getOffset(), parserNode.getLength(), newText);
+					if (updateXtextResourceTextCommand == null) {
+						updateXtextResourceTextCommand = newCommand;
+					} else {
+						updateXtextResourceTextCommand.compose(newCommand);
+					}
 				}
-			}
-			try {
-				if (updateXtextResourceTextCommand != null) {
-					updateXtextResourceTextCommand.execute(null, null);
+				try {
+					if (updateXtextResourceTextCommand != null) {
+						updateXtextResourceTextCommand.execute(null, null);
+					}
+				} catch (ExecutionException exc) {
+					Activator.logError(exc);
 				}
-			} catch (ExecutionException exc) {
-				Activator.logError(exc);
-			}
-			changeAggregator.beginRecording();
-			break;
-		default:
-			// ignore
+				changeAggregator.beginRecording();
+				break;
+			default:
+				// ignore
 		}
 
 	}

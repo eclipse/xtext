@@ -184,17 +184,17 @@ public abstract class AbstractEntitiesUiModule extends EntitiesRuntimeModule {
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.antlr.IContentAssistParser> bindIContentAssistParser() {
-		return org.eclipse.xtext.example.gmf.contentassist.antlr.EntitiesParser.class;
+		return org.eclipse.xtext.example.gmf.ui.contentassist.antlr.EntitiesParser.class;
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public void configureContentAssistLexerProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.example.gmf.contentassist.antlr.internal.InternalEntitiesLexer.class).toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.example.gmf.contentassist.antlr.internal.InternalEntitiesLexer.class));
+		binder.bind(org.eclipse.xtext.example.gmf.ui.contentassist.antlr.internal.InternalEntitiesLexer.class).toProvider(org.eclipse.xtext.parser.antlr.LexerProvider.create(org.eclipse.xtext.example.gmf.ui.contentassist.antlr.internal.InternalEntitiesLexer.class));
 	}
 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment
 	public void configureContentAssistLexer(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.example.gmf.contentassist.antlr.internal.InternalEntitiesLexer.class);
+		binder.bind(org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer.class).annotatedWith(com.google.inject.name.Names.named(org.eclipse.xtext.ui.LexerUIBindings.CONTENT_ASSIST)).to(org.eclipse.xtext.example.gmf.ui.contentassist.antlr.internal.InternalEntitiesLexer.class);
 	}
 
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment

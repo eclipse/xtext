@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: EntitiesItemProviderAdapterFactory.java,v 1.1 2010/01/13 11:30:50 jkohnlein Exp $
  */
 package org.eclipse.xtext.example.gmf.entities.provider;
 
@@ -36,336 +35,366 @@ import org.eclipse.xtext.example.gmf.entities.util.EntitiesAdapterFactory;
  * <!-- end-user-doc -->
  * @generated
  */
-public class EntitiesItemProviderAdapterFactory extends EntitiesAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable {
-	/**
-	 * This keeps track of the root adapter factory that delegates to this adapter factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ComposedAdapterFactory parentAdapterFactory;
+public class EntitiesItemProviderAdapterFactory extends EntitiesAdapterFactory implements ComposeableAdapterFactory, IChangeNotifier, IDisposable
+{
+  /**
+   * This keeps track of the root adapter factory that delegates to this adapter factory.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected ComposedAdapterFactory parentAdapterFactory;
 
-	/**
-	 * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected IChangeNotifier changeNotifier = new ChangeNotifier();
+  /**
+   * This is used to implement {@link org.eclipse.emf.edit.provider.IChangeNotifier}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected IChangeNotifier changeNotifier = new ChangeNotifier();
 
-	/**
-	 * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected Collection<Object> supportedTypes = new ArrayList<Object>();
+  /**
+   * This keeps track of all the supported types checked by {@link #isFactoryForType isFactoryForType}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected Collection<Object> supportedTypes = new ArrayList<Object>();
 
-	/**
-	 * This constructs an instance.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EntitiesItemProviderAdapterFactory() {
-		supportedTypes.add(IEditingDomainItemProvider.class);
-		supportedTypes.add(IStructuredItemContentProvider.class);
-		supportedTypes.add(ITreeItemContentProvider.class);
-		supportedTypes.add(IItemLabelProvider.class);
-		supportedTypes.add(IItemPropertySource.class);
-	}
+  /**
+   * This constructs an instance.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EntitiesItemProviderAdapterFactory()
+  {
+    supportedTypes.add(IEditingDomainItemProvider.class);
+    supportedTypes.add(IStructuredItemContentProvider.class);
+    supportedTypes.add(ITreeItemContentProvider.class);
+    supportedTypes.add(IItemLabelProvider.class);
+    supportedTypes.add(IItemPropertySource.class);
+  }
 
-	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.example.gmf.entities.Model} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ModelItemProvider modelItemProvider;
+  /**
+   * This keeps track of the one adapter used for all {@link org.eclipse.xtext.example.gmf.entities.Model} instances.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected ModelItemProvider modelItemProvider;
 
-	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.example.gmf.entities.Model}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createModelAdapter() {
-		if (modelItemProvider == null) {
-			modelItemProvider = new ModelItemProvider(this);
-		}
+  /**
+   * This creates an adapter for a {@link org.eclipse.xtext.example.gmf.entities.Model}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Adapter createModelAdapter()
+  {
+    if (modelItemProvider == null)
+    {
+      modelItemProvider = new ModelItemProvider(this);
+    }
 
-		return modelItemProvider;
-	}
+    return modelItemProvider;
+  }
 
-	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.example.gmf.entities.Import} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ImportItemProvider importItemProvider;
+  /**
+   * This keeps track of the one adapter used for all {@link org.eclipse.xtext.example.gmf.entities.Import} instances.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected ImportItemProvider importItemProvider;
 
-	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.example.gmf.entities.Import}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createImportAdapter() {
-		if (importItemProvider == null) {
-			importItemProvider = new ImportItemProvider(this);
-		}
+  /**
+   * This creates an adapter for a {@link org.eclipse.xtext.example.gmf.entities.Import}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Adapter createImportAdapter()
+  {
+    if (importItemProvider == null)
+    {
+      importItemProvider = new ImportItemProvider(this);
+    }
 
-		return importItemProvider;
-	}
+    return importItemProvider;
+  }
 
-	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.example.gmf.entities.Type} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected TypeItemProvider typeItemProvider;
+  /**
+   * This keeps track of the one adapter used for all {@link org.eclipse.xtext.example.gmf.entities.Type} instances.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected TypeItemProvider typeItemProvider;
 
-	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.example.gmf.entities.Type}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createTypeAdapter() {
-		if (typeItemProvider == null) {
-			typeItemProvider = new TypeItemProvider(this);
-		}
+  /**
+   * This creates an adapter for a {@link org.eclipse.xtext.example.gmf.entities.Type}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Adapter createTypeAdapter()
+  {
+    if (typeItemProvider == null)
+    {
+      typeItemProvider = new TypeItemProvider(this);
+    }
 
-		return typeItemProvider;
-	}
+    return typeItemProvider;
+  }
 
-	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.example.gmf.entities.SimpleType} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected SimpleTypeItemProvider simpleTypeItemProvider;
+  /**
+   * This keeps track of the one adapter used for all {@link org.eclipse.xtext.example.gmf.entities.SimpleType} instances.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected SimpleTypeItemProvider simpleTypeItemProvider;
 
-	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.example.gmf.entities.SimpleType}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createSimpleTypeAdapter() {
-		if (simpleTypeItemProvider == null) {
-			simpleTypeItemProvider = new SimpleTypeItemProvider(this);
-		}
+  /**
+   * This creates an adapter for a {@link org.eclipse.xtext.example.gmf.entities.SimpleType}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Adapter createSimpleTypeAdapter()
+  {
+    if (simpleTypeItemProvider == null)
+    {
+      simpleTypeItemProvider = new SimpleTypeItemProvider(this);
+    }
 
-		return simpleTypeItemProvider;
-	}
+    return simpleTypeItemProvider;
+  }
 
-	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.example.gmf.entities.Entity} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected EntityItemProvider entityItemProvider;
+  /**
+   * This keeps track of the one adapter used for all {@link org.eclipse.xtext.example.gmf.entities.Entity} instances.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected EntityItemProvider entityItemProvider;
 
-	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.example.gmf.entities.Entity}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createEntityAdapter() {
-		if (entityItemProvider == null) {
-			entityItemProvider = new EntityItemProvider(this);
-		}
+  /**
+   * This creates an adapter for a {@link org.eclipse.xtext.example.gmf.entities.Entity}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Adapter createEntityAdapter()
+  {
+    if (entityItemProvider == null)
+    {
+      entityItemProvider = new EntityItemProvider(this);
+    }
 
-		return entityItemProvider;
-	}
+    return entityItemProvider;
+  }
 
-	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.example.gmf.entities.Property} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected PropertyItemProvider propertyItemProvider;
+  /**
+   * This keeps track of the one adapter used for all {@link org.eclipse.xtext.example.gmf.entities.Property} instances.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected PropertyItemProvider propertyItemProvider;
 
-	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.example.gmf.entities.Property}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createPropertyAdapter() {
-		if (propertyItemProvider == null) {
-			propertyItemProvider = new PropertyItemProvider(this);
-		}
+  /**
+   * This creates an adapter for a {@link org.eclipse.xtext.example.gmf.entities.Property}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Adapter createPropertyAdapter()
+  {
+    if (propertyItemProvider == null)
+    {
+      propertyItemProvider = new PropertyItemProvider(this);
+    }
 
-		return propertyItemProvider;
-	}
+    return propertyItemProvider;
+  }
 
-	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.example.gmf.entities.SimpleProperty} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected SimplePropertyItemProvider simplePropertyItemProvider;
+  /**
+   * This keeps track of the one adapter used for all {@link org.eclipse.xtext.example.gmf.entities.SimpleProperty} instances.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected SimplePropertyItemProvider simplePropertyItemProvider;
 
-	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.example.gmf.entities.SimpleProperty}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createSimplePropertyAdapter() {
-		if (simplePropertyItemProvider == null) {
-			simplePropertyItemProvider = new SimplePropertyItemProvider(this);
-		}
+  /**
+   * This creates an adapter for a {@link org.eclipse.xtext.example.gmf.entities.SimpleProperty}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Adapter createSimplePropertyAdapter()
+  {
+    if (simplePropertyItemProvider == null)
+    {
+      simplePropertyItemProvider = new SimplePropertyItemProvider(this);
+    }
 
-		return simplePropertyItemProvider;
-	}
+    return simplePropertyItemProvider;
+  }
 
-	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.example.gmf.entities.Reference} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected ReferenceItemProvider referenceItemProvider;
+  /**
+   * This keeps track of the one adapter used for all {@link org.eclipse.xtext.example.gmf.entities.Reference} instances.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  protected ReferenceItemProvider referenceItemProvider;
 
-	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.example.gmf.entities.Reference}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createReferenceAdapter() {
-		if (referenceItemProvider == null) {
-			referenceItemProvider = new ReferenceItemProvider(this);
-		}
+  /**
+   * This creates an adapter for a {@link org.eclipse.xtext.example.gmf.entities.Reference}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Adapter createReferenceAdapter()
+  {
+    if (referenceItemProvider == null)
+    {
+      referenceItemProvider = new ReferenceItemProvider(this);
+    }
 
-		return referenceItemProvider;
-	}
+    return referenceItemProvider;
+  }
 
-	/**
-	 * This returns the root adapter factory that contains this factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ComposeableAdapterFactory getRootAdapterFactory() {
-		return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
-	}
+  /**
+   * This returns the root adapter factory that contains this factory.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ComposeableAdapterFactory getRootAdapterFactory()
+  {
+    return parentAdapterFactory == null ? this : parentAdapterFactory.getRootAdapterFactory();
+  }
 
-	/**
-	 * This sets the composed adapter factory that contains this factory.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory) {
-		this.parentAdapterFactory = parentAdapterFactory;
-	}
+  /**
+   * This sets the composed adapter factory that contains this factory.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setParentAdapterFactory(ComposedAdapterFactory parentAdapterFactory)
+  {
+    this.parentAdapterFactory = parentAdapterFactory;
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public boolean isFactoryForType(Object type) {
-		return supportedTypes.contains(type) || super.isFactoryForType(type);
-	}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public boolean isFactoryForType(Object type)
+  {
+    return supportedTypes.contains(type) || super.isFactoryForType(type);
+  }
 
-	/**
-	 * This implementation substitutes the factory itself as the key for the adapter.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter adapt(Notifier notifier, Object type) {
-		return super.adapt(notifier, this);
-	}
+  /**
+   * This implementation substitutes the factory itself as the key for the adapter.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Adapter adapt(Notifier notifier, Object type)
+  {
+    return super.adapt(notifier, this);
+  }
 
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object adapt(Object object, Object type) {
-		if (isFactoryForType(type)) {
-			Object adapter = super.adapt(object, type);
-			if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter))) {
-				return adapter;
-			}
-		}
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Object adapt(Object object, Object type)
+  {
+    if (isFactoryForType(type))
+    {
+      Object adapter = super.adapt(object, type);
+      if (!(type instanceof Class<?>) || (((Class<?>)type).isInstance(adapter)))
+      {
+        return adapter;
+      }
+    }
 
-		return null;
-	}
+    return null;
+  }
 
-	/**
-	 * This adds a listener.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void addListener(INotifyChangedListener notifyChangedListener) {
-		changeNotifier.addListener(notifyChangedListener);
-	}
+  /**
+   * This adds a listener.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void addListener(INotifyChangedListener notifyChangedListener)
+  {
+    changeNotifier.addListener(notifyChangedListener);
+  }
 
-	/**
-	 * This removes a listener.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void removeListener(INotifyChangedListener notifyChangedListener) {
-		changeNotifier.removeListener(notifyChangedListener);
-	}
+  /**
+   * This removes a listener.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void removeListener(INotifyChangedListener notifyChangedListener)
+  {
+    changeNotifier.removeListener(notifyChangedListener);
+  }
 
-	/**
-	 * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void fireNotifyChanged(Notification notification) {
-		changeNotifier.fireNotifyChanged(notification);
+  /**
+   * This delegates to {@link #changeNotifier} and to {@link #parentAdapterFactory}.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void fireNotifyChanged(Notification notification)
+  {
+    changeNotifier.fireNotifyChanged(notification);
 
-		if (parentAdapterFactory != null) {
-			parentAdapterFactory.fireNotifyChanged(notification);
-		}
-	}
+    if (parentAdapterFactory != null)
+    {
+      parentAdapterFactory.fireNotifyChanged(notification);
+    }
+  }
 
-	/**
-	 * This disposes all of the item providers created by this factory. 
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void dispose() {
-		if (modelItemProvider != null) modelItemProvider.dispose();
-		if (importItemProvider != null) importItemProvider.dispose();
-		if (typeItemProvider != null) typeItemProvider.dispose();
-		if (simpleTypeItemProvider != null) simpleTypeItemProvider.dispose();
-		if (entityItemProvider != null) entityItemProvider.dispose();
-		if (propertyItemProvider != null) propertyItemProvider.dispose();
-		if (simplePropertyItemProvider != null) simplePropertyItemProvider.dispose();
-		if (referenceItemProvider != null) referenceItemProvider.dispose();
-	}
+  /**
+   * This disposes all of the item providers created by this factory. 
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void dispose()
+  {
+    if (modelItemProvider != null) modelItemProvider.dispose();
+    if (importItemProvider != null) importItemProvider.dispose();
+    if (typeItemProvider != null) typeItemProvider.dispose();
+    if (simpleTypeItemProvider != null) simpleTypeItemProvider.dispose();
+    if (entityItemProvider != null) entityItemProvider.dispose();
+    if (propertyItemProvider != null) propertyItemProvider.dispose();
+    if (simplePropertyItemProvider != null) simplePropertyItemProvider.dispose();
+    if (referenceItemProvider != null) referenceItemProvider.dispose();
+  }
 
 }

@@ -37,8 +37,8 @@ import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import com.google.common.collect.Lists;
 import com.google.inject.internal.Maps;
 
-public class EditingDomainAdapter extends AdapterImpl implements
-		ResourceSetListener, TransactionalEditingDomainListener {
+public class EditingDomainAdapter extends AdapterImpl implements ResourceSetListener,
+		TransactionalEditingDomainListener {
 
 	public static class Factory extends AdapterFactoryImpl {
 		@Override
@@ -49,8 +49,7 @@ public class EditingDomainAdapter extends AdapterImpl implements
 		@Override
 		protected Object resolve(Object object, Object type) {
 			if (object instanceof TransactionalEditingDomain) {
-				return adapt(((TransactionalEditingDomain) object)
-						.getResourceSet(), type);
+				return adapt(((TransactionalEditingDomain) object).getResourceSet(), type);
 			}
 			return super.resolve(object, type);
 		}
@@ -58,8 +57,7 @@ public class EditingDomainAdapter extends AdapterImpl implements
 		@Override
 		protected Adapter createAdapter(Notifier target) {
 			if (target instanceof ResourceSet) {
-				return new EditingDomainAdapter(TransactionUtil
-						.getEditingDomain(target));
+				return new EditingDomainAdapter(TransactionUtil.getEditingDomain(target));
 			} else {
 				return null;
 			}
@@ -72,16 +70,14 @@ public class EditingDomainAdapter extends AdapterImpl implements
 
 	private Map<URI, IDirtyResource> uri2dirtyResource;
 
-	private static final Logger LOG = Logger
-			.getLogger(EditingDomainAdapter.class);
+	private static final Logger LOG = Logger.getLogger(EditingDomainAdapter.class);
 
 	protected EditingDomainAdapter(TransactionalEditingDomain editingDomain) {
 		this.editingDomain = editingDomain;
 		editingDomain.addResourceSetListener(this);
 		dirtyStateManager = new DirtyStateManagerProvider().get();
 		uri2dirtyResource = Maps.newHashMap();
-		Lifecycle lifecycle = TransactionUtil.getAdapter(editingDomain,
-				Lifecycle.class);
+		Lifecycle lifecycle = TransactionUtil.getAdapter(editingDomain, Lifecycle.class);
 		lifecycle.addTransactionalEditingDomainListener(this);
 	}
 
@@ -102,14 +98,12 @@ public class EditingDomainAdapter extends AdapterImpl implements
 	}
 
 	public void resourceSetChanged(ResourceSetChangeEvent event) {
-		List<URI> remainingURIs = Lists
-				.newArrayList(uri2dirtyResource.keySet());
+		List<URI> remainingURIs = Lists.newArrayList(uri2dirtyResource.keySet());
 		for (Resource resource : editingDomain.getResourceSet().getResources()) {
 			if (resource instanceof XtextResource) {
 				XtextResource xtextResource = (XtextResource) resource;
 				remainingURIs.remove(xtextResource.getURI());
-				IDirtyResource dirtyResource = uri2dirtyResource
-						.get(xtextResource.getURI());
+				IDirtyResource dirtyResource = uri2dirtyResource.get(xtextResource.getURI());
 				if (xtextResource.isModified()) {
 					if (dirtyResource == null) {
 						createAndRegisterDirtyState(xtextResource);
@@ -130,14 +124,12 @@ public class EditingDomainAdapter extends AdapterImpl implements
 		}
 	}
 
-	public Command transactionAboutToCommit(ResourceSetChangeEvent event)
-			throws RollbackException {
+	public Command transactionAboutToCommit(ResourceSetChangeEvent event) throws RollbackException {
 		List<XtextResource> resourcesWithConflicts = null;
 		for (Resource resource : editingDomain.getResourceSet().getResources()) {
 			if (resource instanceof XtextResource && resource.isModified()) {
 				XtextResource xtextResource = (XtextResource) resource;
-				IDirtyResource dirtyResource = uri2dirtyResource
-						.get(xtextResource.getURI());
+				IDirtyResource dirtyResource = uri2dirtyResource.get(xtextResource.getURI());
 				if (dirtyResource == null) {
 					if (!createAndRegisterDirtyState(xtextResource)) {
 						if (resourcesWithConflicts == null) {
@@ -155,15 +147,14 @@ public class EditingDomainAdapter extends AdapterImpl implements
 						IDirtyResource dirtyResource = createDirtyResource(resourceWithConflicts);
 						// assert resource is serializable
 						dirtyResource.getContents();
-						dirtyStateManager
-								.announceDirtyStateChanged(dirtyResource);
+						dirtyStateManager.announceDirtyStateChanged(dirtyResource);
 					} catch (Exception exc) {
 						LOG.error("Error serializing resource", exc);
 					}
 				}
 			} else {
-				throw new RollbackException(new Status(IStatus.ERROR,
-						Activator.PLUGIN_ID, "Transaction aborted by user"));
+				throw new RollbackException(new Status(IStatus.ERROR, Activator.PLUGIN_ID,
+						"Transaction aborted by user"));
 			}
 		}
 		return null;
@@ -174,8 +165,7 @@ public class EditingDomainAdapter extends AdapterImpl implements
 		if (dirtyResource == null) {
 			return true;
 		} else {
-			boolean isSuccess = dirtyStateManager
-					.manageDirtyState(dirtyResource);
+			boolean isSuccess = dirtyStateManager.manageDirtyState(dirtyResource);
 			if (isSuccess) {
 				uri2dirtyResource.put(xtextResource.getURI(), dirtyResource);
 			}
@@ -203,8 +193,7 @@ public class EditingDomainAdapter extends AdapterImpl implements
 			}
 			uri2dirtyResource = null;
 		}
-		Lifecycle lifecycle = TransactionUtil.getAdapter(editingDomain,
-				Lifecycle.class);
+		Lifecycle lifecycle = TransactionUtil.getAdapter(editingDomain, Lifecycle.class);
 		if (lifecycle != null) {
 			lifecycle.removeTransactionalEditingDomainListener(this);
 		}
@@ -228,14 +217,10 @@ public class EditingDomainAdapter extends AdapterImpl implements
 
 		public void run() {
 			Shell shell = Display.getDefault().getActiveShell();
-			isYesResult = MessageDialog
-					.open(
-							MessageDialog.QUESTION,
-							shell,
-							"Concurrent Modification",
-							"Other editors have a modified version of models you are going to change.\n"
-									+ "If apply your changes you are loosing the possibility to save the others.\n"
-									+ "Apply changes anyway?", SWT.NONE);
+			isYesResult = MessageDialog.open(MessageDialog.QUESTION, shell, "Concurrent Modification",
+					"Other editors have a modified version of models you are going to change.\n"
+							+ "If apply your changes you are loosing the possibility to save the others.\n"
+							+ "Apply changes anyway?", SWT.NONE);
 		}
 	}
 

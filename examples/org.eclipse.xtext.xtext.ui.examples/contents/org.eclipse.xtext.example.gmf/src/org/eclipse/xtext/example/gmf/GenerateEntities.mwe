@@ -15,75 +15,32 @@
 		<projectNameUi value="${projectName}.ui"/>
 		
 		<language uri="${grammarURI}" fileExtensions="${file.extensions}">
-			<!-- Java API to access grammar elements (required by several other fragments) -->
 			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
-			
-			<!-- generates Java API for the generated EPackages -->
-			<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/>
-			
-			<!-- the serialization component -->
+			<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" generateEdit="true"/>
 			<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
-			
-			<!-- a custom ResourceFactory for use with EMF -->
 			<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 
 				fileExtensions="${file.extensions}"/>
-				
-			<!-- the following fragment tries to use the Antlr Generator fragment which can be installed via update manager from http://download.itemis.com/updates/ -->
-			<fragment class="org.eclipse.xtext.generator.AntlrDelegatingFragment" />
-			
-			<!-- If you don't want to use the Antlr fragment for some reason, remove the antlr fragment and uncomment the packrat parser fragment below.
-			<fragment class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
-			 -->
-	
-			<!-- check-based API for validation -->
-			<!--
-			<fragment class="org.eclipse.xtext.generator.validation.CheckFragment"/>
-			 -->
-			 
-			<!-- java-based API for validation -->
+			<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment" >
+				<options backtrack="true" classSplitting="true"/>
+			</fragment>
 			<fragment class="org.eclipse.xtext.generator.validation.JavaValidatorFragment">
                 <composedCheck value="org.eclipse.xtext.validation.ImportUriValidator"/>
                 <composedCheck value="org.eclipse.xtext.validation.NamesAreUniqueValidator"/>
             </fragment>
             
-			<!-- scoping and exporting API -->
 			<fragment class="org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment"/>
 			<fragment class="org.eclipse.xtext.generator.exporting.QualifiedNamesFragment"/>
-			
-			<!-- scoping and exporting API -->
-			<!--
 			<fragment class="org.eclipse.xtext.generator.scoping.ImportURIScopingFragment"/>
-			<fragment class="org.eclipse.xtext.generator.exporting.SimpleNamesFragment"/>
-			-->
-			
-			<!-- formatter API -->
 			<fragment class="org.eclipse.xtext.generator.formatting.FormatterFragment"/>
-
-			<!-- labeling API -->
 			<fragment class="org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment"/>
-
-			<!-- outline API -->
 			<fragment class="org.eclipse.xtext.ui.generator.outline.TransformerFragment"/>
 			<fragment class="org.eclipse.xtext.ui.generator.outline.OutlineNodeAdapterFactoryFragment"/>
-
-			<!-- java-based API for content assistance -->
 			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
-			<!-- the following fragment tries to use the Antlr based content assist fragment which can be downloaded from http://www.itemis.com 
-			     and will be ignored if it's not available. -->
 			<fragment class="org.eclipse.xtext.generator.DelegatingGeneratorFragment" 
 				delegate="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment"
 				message="You are generating without ANTLR. It is highly recommended to download and use the plugin 'de.itemis.xtext.antlr' \n\t using the update site http://download.itemis.com/updates/.">
 			</fragment>
-			<!-- <fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment"/> --> 
-
-			<!-- builder integration -->
 			<fragment class="org.eclipse.xtext.generator.builder.BuilderIntegrationFragment"/>
-
-			<!-- project wizard (optional) -->
-			<!--
-			<fragment class="org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment"
-				generatorProjectName="${projectName}.generator" modelFileExtension="${file.extensions}"/>
-			-->
 		</language>
 	</component>
 </workflow>
