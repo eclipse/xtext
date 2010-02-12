@@ -22,25 +22,22 @@ import org.eclipse.gmf.runtime.emf.commands.core.command.AbstractTransactionalCo
 import org.eclipse.xtext.resource.XtextResource;
 
 /**
- * A Command that deactivates the {@link ChangeAggregatorAdapter} and updates a
- * textual section of an Xtext model in an Xtext resource. Used to avoid cycles
- * in the change aggregation.
+ * A Command that deactivates the {@link ChangeAggregatorAdapter} and updates a textual section of an Xtext model in an
+ * Xtext resource. Used to avoid cycles in the change aggregation.
  * 
  * @author koehnlein
  */
 public class UpdateXtextResourceTextCommand {
 
-	public static Command createEMFCommand(final XtextResource xtextResource,
-			final int offset, final int length, final String newText) {
-		final TransactionalEditingDomain editingDomain = TransactionUtil
-				.getEditingDomain(xtextResource);
+	public static Command createEMFCommand(final XtextResource xtextResource, final int offset, final int length,
+			final String newText) {
+		final TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(xtextResource);
 		if (editingDomain == null) {
 			return null;
 		}
 		ResourceSet resourceSet = editingDomain.getResourceSet();
-		final ChangeAggregatorAdapter changeAggregator = (ChangeAggregatorAdapter) EcoreUtil
-				.getAdapter(resourceSet.eAdapters(),
-						ChangeAggregatorAdapter.class);
+		final ChangeAggregatorAdapter changeAggregator = (ChangeAggregatorAdapter) EcoreUtil.getAdapter(resourceSet
+				.eAdapters(), ChangeAggregatorAdapter.class);
 		return new RecordingCommand(editingDomain, "update xtext resource") {
 			@Override
 			protected void doExecute() {
@@ -60,22 +57,18 @@ public class UpdateXtextResourceTextCommand {
 		};
 	}
 
-	public static ICommand createUpdateCommand(final XtextResource xtextResource,
-			final int offset, final int length, final String newText) {
-		final TransactionalEditingDomain editingDomain = TransactionUtil
-				.getEditingDomain(xtextResource);
+	public static ICommand createUpdateCommand(final XtextResource xtextResource, final int offset, final int length,
+			final String newText) {
+		final TransactionalEditingDomain editingDomain = TransactionUtil.getEditingDomain(xtextResource);
 		if (editingDomain == null) {
 			return null;
 		}
 		ResourceSet resourceSet = editingDomain.getResourceSet();
-		final ChangeAggregatorAdapter changeAggregator = (ChangeAggregatorAdapter) EcoreUtil
-				.getAdapter(resourceSet.eAdapters(),
-						ChangeAggregatorAdapter.class);
-		return new AbstractTransactionalCommand(editingDomain,
-				"update xtext resource", null) {
+		final ChangeAggregatorAdapter changeAggregator = (ChangeAggregatorAdapter) EcoreUtil.getAdapter(resourceSet
+				.eAdapters(), ChangeAggregatorAdapter.class);
+		return new AbstractTransactionalCommand(editingDomain, "update xtext resource", null) {
 			@Override
-			protected CommandResult doExecuteWithResult(
-					IProgressMonitor monitor, IAdaptable info)
+			protected CommandResult doExecuteWithResult(IProgressMonitor monitor, IAdaptable info)
 					throws ExecutionException {
 				try {
 					if (changeAggregator != null) {

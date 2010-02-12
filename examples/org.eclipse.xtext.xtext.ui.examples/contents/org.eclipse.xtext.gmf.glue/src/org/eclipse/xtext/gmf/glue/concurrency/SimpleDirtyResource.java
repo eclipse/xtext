@@ -16,8 +16,7 @@ import org.eclipse.xtext.resource.IResourceDescription.Manager;
 import org.eclipse.xtext.ui.editor.IDirtyResource;
 
 /**
- * An implementation of {@link IDirtyResource} for resources without an
- * underlying document.
+ * An implementation of {@link IDirtyResource} for resources without an underlying document.
  * 
  * @author koehnlein - Initial contribution and API
  */
@@ -27,16 +26,13 @@ public class SimpleDirtyResource implements IDirtyResource {
 
 	private Manager resourceDescriptionManager;
 
-	public SimpleDirtyResource(XtextResource resource,
-			IResourceServiceProvider resourceServiceProvider) {
+	public SimpleDirtyResource(XtextResource resource, IResourceServiceProvider resourceServiceProvider) {
 		this.resource = resource;
-		this.resourceDescriptionManager = resourceServiceProvider
-				.getResourceDescriptionManager();
+		this.resourceDescriptionManager = resourceServiceProvider.getResourceDescriptionManager();
 	}
 
 	public String getContents() {
-		return resource.getSerializer().serialize(
-				resource.getContents().get(0));
+		return resource.getSerializer().serialize(resource.getContents().get(0));
 	}
 
 	public IResourceDescription getDescription() {

@@ -15,18 +15,14 @@ import org.eclipse.emf.transaction.NotificationFilter;
 import org.eclipse.emf.transaction.ResourceSetChangeEvent;
 import org.eclipse.emf.transaction.ResourceSetListener;
 import org.eclipse.emf.transaction.RollbackException;
-import org.eclipse.gef.EditPart;
 import org.eclipse.gmf.runtime.diagram.ui.editparts.DiagramEditPart;
-import org.eclipse.xtext.resource.XtextResource;
 
 /**
- * Reloads the semantic root element (the element of the diagram) on changes and
- * refreshes the diagram. GMF does by default not listen to such events which
- * can occur in an {@link XtextResource}Êif the document changes close to the
+ * Reloads the semantic root element (the element of the diagram) on changes and refreshes the diagram. GMF does by
+ * default not listen to such events which can occur in an {@link XtextResource}, if the document changes close to the
  * root element.
  * 
- * Activate an instance of this in the {@link EditPart#activate()} method of the
- * {@link DiagramEditPart}.
+ * Activate an instance of this in the {@link EditPart#activate()} method of the {@link DiagramEditPart}.
  * 
  * @author koehnlein
  */
@@ -55,8 +51,7 @@ public class SemanticRootUnloadListener implements ResourceSetListener {
 				int featureID = notification.getFeatureID(Resource.class);
 				Object notifier = notification.getNotifier();
 				int eventType = notification.getEventType();
-				return notification.getOldValue() == semanticRootElement
-						&& featureID == Resource.RESOURCE__CONTENTS
+				return notification.getOldValue() == semanticRootElement && featureID == Resource.RESOURCE__CONTENTS
 						&& (eventType == Notification.REMOVE || eventType == Notification.SET)
 						&& notifier instanceof Resource;
 			}
@@ -80,8 +75,7 @@ public class SemanticRootUnloadListener implements ResourceSetListener {
 		rootEditPart.refresh();
 	}
 
-	public Command transactionAboutToCommit(ResourceSetChangeEvent event)
-			throws RollbackException {
+	public Command transactionAboutToCommit(ResourceSetChangeEvent event) throws RollbackException {
 		return null;
 	}
 

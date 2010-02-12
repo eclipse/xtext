@@ -48,8 +48,7 @@ public class ChangeAggregatorAdapter extends EContentAdapter {
 	}
 
 	protected void recordObjectModification(EObject obj) {
-		if (obj.eResource() == null
-				|| false == obj.eResource() instanceof XtextResource)
+		if (obj.eResource() == null || false == obj.eResource() instanceof XtextResource)
 			modifiedObjects.remove(obj);
 		else
 			modifiedObjects.add(obj);
@@ -60,16 +59,16 @@ public class ChangeAggregatorAdapter extends EContentAdapter {
 			return false;
 
 		switch (notification.getEventType()) {
-		case Notification.ADD:
-		case Notification.ADD_MANY:
-		case Notification.MOVE:
-		case Notification.REMOVE:
-		case Notification.REMOVE_MANY:
-		case Notification.SET:
-		case Notification.UNSET:
-			return true;
-		default:
-			return false;
+			case Notification.ADD:
+			case Notification.ADD_MANY:
+			case Notification.MOVE:
+			case Notification.REMOVE:
+			case Notification.REMOVE_MANY:
+			case Notification.SET:
+			case Notification.UNSET:
+				return true;
+			default:
+				return false;
 		}
 	}
 
@@ -95,8 +94,7 @@ public class ChangeAggregatorAdapter extends EContentAdapter {
 		for (EObject eObject : modifiedObjects) {
 			if (!eObject.eIsProxy()) {
 				Resource resource = eObject.eResource();
-				List<EObject> resourceChangePath = resource2ChangePathMap
-						.get(resource);
+				List<EObject> resourceChangePath = resource2ChangePathMap.get(resource);
 				if (resourceChangePath == null) {
 					resourceChangePath = allContainers(eObject);
 					resource2ChangePathMap.put(resource, resourceChangePath);
@@ -105,8 +103,7 @@ public class ChangeAggregatorAdapter extends EContentAdapter {
 				}
 			}
 		}
-		List<EObject> modificationRoots = new ArrayList<EObject>(
-				resource2ChangePathMap.size());
+		List<EObject> modificationRoots = new ArrayList<EObject>(resource2ChangePathMap.size());
 		for (List<EObject> changePath : resource2ChangePathMap.values()) {
 			if (!changePath.isEmpty()) {
 				modificationRoots.add(changePath.get(changePath.size() - 1));
@@ -120,8 +117,7 @@ public class ChangeAggregatorAdapter extends EContentAdapter {
 		allContainers.add(eObject);
 		EObject currentContainer = eObject.eContainer();
 		final Resource resource = eObject.eResource();
-		while (currentContainer != null
-				&& resource == currentContainer.eResource()) {
+		while (currentContainer != null && resource == currentContainer.eResource()) {
 			allContainers.addFirst(currentContainer);
 			currentContainer = currentContainer.eContainer();
 		}
