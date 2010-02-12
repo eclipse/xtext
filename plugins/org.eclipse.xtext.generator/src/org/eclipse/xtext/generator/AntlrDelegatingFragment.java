@@ -21,7 +21,7 @@ import org.eclipse.xtext.Grammar;
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-public class AntlrDelegatingFragment extends DefaultGeneratorFragment {
+public class AntlrDelegatingFragment extends DefaultGeneratorFragment implements NamingAware{
 
 	private String fragment = "de.itemis.xtext.antlr.XtextAntlrGeneratorFragment";
 
@@ -127,6 +127,13 @@ public class AntlrDelegatingFragment extends DefaultGeneratorFragment {
 	@Override
 	public String[] getRequiredBundlesUi(Grammar grammar) {
 		return getInstance().getRequiredBundlesUi(grammar);
+	}
+
+	public void registerNaming(Naming naming) {
+		IGeneratorFragment generatorFragment = getInstance();
+		if(generatorFragment instanceof NamingAware){
+			((NamingAware) generatorFragment).registerNaming(naming);
+		}
 	}
 
 }
