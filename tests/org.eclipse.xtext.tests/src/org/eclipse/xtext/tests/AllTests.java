@@ -137,6 +137,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.parsetree.impl.ParsetreeUtilTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.impl.ParsetreeUtilWindowsTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.Bug299395Test.class);
+      suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.Bug302128Test.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.ComplexReconstrTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.HiddenTokensMergerTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.reconstr.SerializationBug269362Test.class);
