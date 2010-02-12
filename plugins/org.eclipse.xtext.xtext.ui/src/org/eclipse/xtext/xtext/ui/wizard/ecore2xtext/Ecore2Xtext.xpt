@@ -17,8 +17,7 @@
 «DEFINE grammar FOR Ecore2XtextProjectInfo-»«resetUniqueNames(defaultEPackageInfo)-»
 «FILE basePackagePath+"/"+languageNameAbbreviation+".xtext" -»
 «EXPAND grammarDeclaration-»
-«EXPAND metamodelImport FOREACH EPackageInfos-»
-«EXPAND metamodelImport FOREACH missingReferencedEPackages(EPackageInfos.EPackage)-»
+«EXPAND metamodelImport FOREACH allReferencedEPackages(EPackageInfos)-»
 «EXPAND rule FOR rootElementClass»
 «EXPAND rule FOREACH allRuleClassifiers().remove(rootElementClass)-»
 «ENDFILE»

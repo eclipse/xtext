@@ -63,7 +63,7 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		Label label = new Label(composite, SWT.NONE);
 		label.setText(Messages.WizardSelectImportedEPackagePage_ListTitle);
 		label.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 2, 1));
-		importedEPackagesViewer = new TableViewer(composite, SWT.NONE);
+		importedEPackagesViewer = new TableViewer(composite, SWT.BORDER);
 		importedEPackagesViewer.getControl().setLayoutData(new GridData(SWT.FILL, SWT.FILL, true, true, 1, 3));
 		importedEPackagesViewer.setContentProvider(new IStructuredContentProvider() {
 			public void inputChanged(Viewer viewer, Object oldInput, Object newInput) {
@@ -92,7 +92,7 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		});
 		Button addButton = new Button(composite, SWT.PUSH);
 		addButton.setText(Messages.WizardSelectImportedEPackagePage_AddButtonText);
-		addButton.setLayoutData(new GridData(SWT.LEFT, SWT.BOTTOM, false, false, 1, 1));
+		addButton.setLayoutData(new GridData(SWT.FILL, SWT.BOTTOM, false, false, 1, 1));
 		addButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -101,7 +101,7 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		});
 		Button defaultButton = new Button(composite, SWT.PUSH);
 		defaultButton.setText(Messages.WizardSelectImportedEPackagePage_SetDefault);
-		defaultButton.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
+		defaultButton.setLayoutData(new GridData(SWT.FILL, SWT.TOP, false, false, 1, 1));
 		defaultButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
@@ -120,7 +120,7 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 		});
 		Button removeButton = new Button(composite, SWT.PUSH);
 		removeButton.setText(Messages.WizardSelectImportedEPackagePage_RemoveButtonText);
-		removeButton.setLayoutData(new GridData(SWT.LEFT, SWT.TOP, false, false, 1, 1));
+		removeButton.setLayoutData(new GridData(SWT.FILL, SWT.TOP, false, false, 1, 1));
 		removeButton.addSelectionListener(new SelectionAdapter() {
 			@Override
 			public void widgetSelected(SelectionEvent e) {
