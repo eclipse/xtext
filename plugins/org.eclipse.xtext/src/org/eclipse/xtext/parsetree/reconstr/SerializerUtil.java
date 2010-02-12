@@ -30,12 +30,22 @@ import com.google.inject.Inject;
  * @author Moritz Eysholdt - Initial contribution and API
  */
 public class SerializerUtil {
+	
+	public static final SerializationOptions NO_FORMAT= new SerializationOptions(false,false);
 
 	public static class SerializationOptions {
 		
 		private boolean format = true;
 		private boolean validateConcreteSyntax = false;
 		
+		public SerializationOptions() {
+		}
+		public SerializationOptions(boolean format, boolean validateConcreteSyntax) {
+			super();
+			this.format = format;
+			this.validateConcreteSyntax = validateConcreteSyntax;
+		}
+
 		public boolean isFormat() {
 			return format;
 		}
