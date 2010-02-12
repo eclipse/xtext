@@ -403,5 +403,8 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.parser.antlr.bug301935Test.util,
  org.eclipse.xtext.parser.antlr.bug299237Test,
  org.eclipse.xtext.parser.antlr.bug299237Test.impl,
- org.eclipse.xtext.parser.antlr.bug299237Test.util
+ org.eclipse.xtext.parser.antlr.bug299237Test.util,
+ org.eclipse.xtext.parsetree.reconstr.bug302128,
+ org.eclipse.xtext.parsetree.reconstr.bug302128.impl,
+ org.eclipse.xtext.parsetree.reconstr.bug302128.util
 

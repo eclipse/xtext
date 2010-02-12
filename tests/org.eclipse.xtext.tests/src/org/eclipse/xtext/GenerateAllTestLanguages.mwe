@@ -186,6 +186,10 @@
 		<language uri="classpath:/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
+		<language uri="classpath:/org/eclipse/xtext/parsetree/reconstr/Bug302128TestLanguage.xtext">
+			<fragment file="${standardFragments}" />
+		</language>
+		
 		<language uri="classpath:/org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
