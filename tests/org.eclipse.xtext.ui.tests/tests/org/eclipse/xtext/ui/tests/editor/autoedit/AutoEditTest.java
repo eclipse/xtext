@@ -110,6 +110,8 @@ public class AutoEditTest extends AbstractEditorTest {
 		assertState("{|", editor);
 		pressKey(editor, '\n');
 		assertState("{\n\t|\n}", editor);
+		pressKey(editor, '\n');
+		assertState("{\n\t\n\t|\n}", editor);
 	}
 
 	public void testCurlyBracesBlock_2() throws Exception {
@@ -128,6 +130,23 @@ public class AutoEditTest extends AbstractEditorTest {
 		XtextEditor editor = openEditor("begin|\nend");
 		pressKey(editor, '\n');
 		assertState("begin\n\t|\nend", editor);
+	}
+	
+	public void testMLComments() throws Exception {
+		XtextEditor editor = openEditor("|");
+		pressKey(editor, '/');
+		pressKey(editor, '*');
+		assertState("/*|", editor);
+		
+		pressKey(editor, '\n');
+		assertState("/*\n * |\n */", editor);
+		
+		pressKey(editor, '\n');
+		assertState("/*\n * \n * |\n */", editor);
+		
+		pressKeys(editor, "foo bar");
+		pressKey(editor, '\n');
+		assertState("/*\n * \n * foo bar\n * |\n */", editor);
 	}
 
 	public void testShortcut_1() throws Exception {
@@ -167,6 +186,12 @@ public class AutoEditTest extends AbstractEditorTest {
 			e.keyCode = 27;
 		}
 		textWidget.notifyListeners(SWT.KeyDown, e);
+	}
+	
+	protected void pressKeys(XtextEditor editor, String string) throws Exception {
+		for(int i = 0; i < string.length(); i++) {
+			pressKey(editor, string.charAt(i));
+		}
 	}
 
 }
