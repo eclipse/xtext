@@ -13,6 +13,9 @@
 		<projectNameRt value="${projectName}"/>
 		<activator value="org.eclipse.xtext.ui.tests.Activator"/>
 		
+		<language uri="classpath:/org/eclipse/xtext/ui/tests/LocationProviderTestLanguage.xtext">
+			<fragment file="org/eclipse/xtext/ui/tests/TestLanguageSetup.mwe"/>
+		</language>
 		<language uri="classpath:/org/eclipse/xtext/ui/tests/XtextGrammarUiTestLanguage.xtext">
 			<fragment file="org/eclipse/xtext/ui/tests/TestLanguageSetup.mwe"/>
 		</language>

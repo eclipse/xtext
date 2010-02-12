@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.editor.findrefs;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.emf.common.util.URI;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.ui.search.GenericDescriptionLabelProvider;
 
@@ -25,16 +24,13 @@ public class ReferenceSearchViewTreeNode {
 
 	private List<ReferenceSearchViewTreeNode> children;
 
-	private URI uri;
-
 	private Object labelDescription;
 
 	private Object description;
 	
-	public ReferenceSearchViewTreeNode(ReferenceSearchViewTreeNode parent, URI uri, Object description, Object labelDescription) {
+	public ReferenceSearchViewTreeNode(ReferenceSearchViewTreeNode parent, Object description, Object labelDescription) {
 		super();
 		this.parent = parent;
-		this.uri = uri;
 		this.description = description;
 		this.labelDescription = labelDescription;
 		if (parent != null) {
@@ -64,10 +60,6 @@ public class ReferenceSearchViewTreeNode {
 		if(children != null) {
 			children.remove(child);
 		}
-	}
-
-	public URI getURI() {
-		return uri;
 	}
 
 	public Object getDescription() {

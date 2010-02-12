@@ -13,12 +13,17 @@ import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.text.Region;
+import org.eclipse.xtext.CrossReference;
+import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.LeafNode;
@@ -31,6 +36,36 @@ import org.eclipse.xtext.parsetree.util.ParsetreeSwitch;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class DefaultLocationInFileProvider implements ILocationInFileProvider {
+
+	public Region getLocation(EObject referenceOwner, EReference crossReference, int indexInList) {
+		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(referenceOwner);
+		if (nodeAdapter != null) {
+			CompositeNode parserNode = nodeAdapter.getParserNode();
+			if (parserNode != null) {
+				int currentIndex = 0;
+				for (TreeIterator<EObject> childrenIterator = parserNode.eAllContents(); childrenIterator.hasNext();) {
+					AbstractNode ownerChildNode = (AbstractNode) childrenIterator.next();
+					EObject grammarElement = ownerChildNode.getGrammarElement();
+					if (grammarElement instanceof CrossReference) {
+						EReference crossReference2 = GrammarUtil.getReference((CrossReference) grammarElement,
+								referenceOwner.eClass());
+						if (crossReference == crossReference2) {
+							if (currentIndex == indexInList || !crossReference.isMany()) {
+								return new Region(ownerChildNode.getOffset(), ownerChildNode.getLength());
+							}
+							++currentIndex;
+						}
+						childrenIterator.prune();
+					}
+					if (grammarElement instanceof TypeRef || grammarElement instanceof RuleCall) {
+						childrenIterator.prune();
+					}
+				}
+				return getLocation(referenceOwner);
+			}
+		}
+		return null;
+	}
 
 	public Region getLocation(EObject obj) {
 		final NodeAdapter adapter = NodeUtil.getNodeAdapter(obj);
@@ -66,8 +101,7 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 				if (ruleName.equals("ID")) {
 					resultNodes.add(child);
 				}
-			}
-			else if (grammarElement instanceof Keyword) {
+			} else if (grammarElement instanceof Keyword) {
 				// TODO use only keywords, that aren't symbols like '=' ?
 				if (keywordNode == null && useKeyword((Keyword) grammarElement, obj)) {
 					keywordNode = child;
@@ -78,7 +112,7 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 			resultNodes.add(keywordNode);
 		return resultNodes;
 	}
-	
+
 	protected boolean useKeyword(Keyword keyword, EObject context) {
 		return true;
 	}
@@ -90,14 +124,14 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 	}
 
 	protected static class OffsetCalculator extends ParsetreeSwitch<LeafNode> {
-		
+
 		private boolean forward = true;
-		
+
 		@Override
 		public LeafNode caseCompositeNode(CompositeNode object) {
 			return handleImpl(object.getChildren());
 		}
-		
+
 		public AbstractNode handle(List<AbstractNode> nodes, boolean forward) {
 			this.forward = forward;
 			AbstractNode result = handleImpl(nodes);
@@ -105,20 +139,20 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 				if (forward)
 					result = nodes.get(0);
 				else
-					result = nodes.get(nodes.size()-1);
+					result = nodes.get(nodes.size() - 1);
 			}
 			return result;
 		}
-		
+
 		public LeafNode handleImpl(List<AbstractNode> nodes) {
-			if(forward) {
-				for (AbstractNode node: nodes) {
+			if (forward) {
+				for (AbstractNode node : nodes) {
 					LeafNode result = doSwitch(node);
 					if (result != null)
 						return result;
 				}
 			} else {
-				for(int i = nodes.size() - 1; i >= 0; i--) {
+				for (int i = nodes.size() - 1; i >= 0; i--) {
 					AbstractNode node = nodes.get(i);
 					LeafNode result = doSwitch(node);
 					if (result != null)
@@ -127,7 +161,7 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 			}
 			return null;
 		}
-		
+
 		@Override
 		public LeafNode caseLeafNode(LeafNode object) {
 			if (!object.isHidden())
@@ -135,7 +169,7 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 			return null;
 		}
 	}
-	
+
 	protected Region createRegion(final List<AbstractNode> nodes) {
 		// if we've got more than one ID elements, we want to select them all
 		OffsetCalculator calculator = createCalculator();

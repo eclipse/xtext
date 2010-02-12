@@ -15,6 +15,7 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.jface.text.Region;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
@@ -38,7 +39,7 @@ public class DefaultURIEditorOpener implements IURIEditorOpener {
 
 	@Inject
 	private ILocationInFileProvider locationProvider;
-	
+
 	@Inject
 	private IStorage2UriMapper mapper;
 
@@ -51,14 +52,18 @@ public class DefaultURIEditorOpener implements IURIEditorOpener {
 	}
 
 	public void open(URI uri) {
+		open(uri, null, -1);
+	}
+
+	public void open(URI uri, EReference crossReference, int indexInList) {
 		Iterator<IStorage> storages = mapper.getStorages(uri.trimFragment()).iterator();
 		if (storages != null && storages.hasNext()) {
 			try {
 				IStorage storage = storages.next();
 				if (storage instanceof IFile) {
-					selectAndReveal(openEditor((IFile) storage),uri);
+					selectAndReveal(openEditor((IFile) storage), uri, crossReference, indexInList);
 				} else {
-					selectAndReveal(openEditor(storage, uri),uri);
+					selectAndReveal(openEditor(storage, uri), uri, crossReference, indexInList);
 				}
 			} catch (WrappedException e) {
 				logger.error("Error while opening editor part for EMF URI '" + uri + "'", e.getCause());
@@ -68,7 +73,7 @@ public class DefaultURIEditorOpener implements IURIEditorOpener {
 		}
 	}
 
-	protected void selectAndReveal(IEditorPart openEditor, final URI uri) {
+	protected void selectAndReveal(IEditorPart openEditor, final URI uri, final EReference crossReference, final int indexInList) {
 		if (openEditor != null && openEditor instanceof XtextEditor) {
 			final XtextEditor edit = (XtextEditor) openEditor;
 			if (uri.fragment() != null) {
@@ -77,7 +82,9 @@ public class DefaultURIEditorOpener implements IURIEditorOpener {
 					public void process(XtextResource resource) throws Exception {
 						if (resource != null) {
 							EObject object = resource.getEObject(uri.fragment());
-							Region region = locationProvider.getLocation(object);
+							Region region = (crossReference != null) 
+									? locationProvider.getLocation(object, crossReference, indexInList) 
+									: locationProvider.getLocation(object);
 							edit.selectAndReveal(region.getOffset(), region.getLength());
 						}
 					}

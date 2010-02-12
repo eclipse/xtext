@@ -32,6 +32,10 @@ public class TestTransformerHelper {
 		public Region getLocation(EObject obj) {
 			return new Region(0, 0);
 		}
+		
+		public Region getLocation(EObject referenceOwner, org.eclipse.emf.ecore.EReference crossReference, int indexInList) {
+			return new Region(0, 0);
+		}
 	};
 	
 	private static IStyledLabelProvider myLabelProvider = new DefaultLabelProvider() {
