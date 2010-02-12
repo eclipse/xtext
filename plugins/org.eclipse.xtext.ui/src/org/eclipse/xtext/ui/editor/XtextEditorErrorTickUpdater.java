@@ -10,6 +10,10 @@ package org.eclipse.xtext.ui.editor;
 
 import java.util.Iterator;
 
+import org.eclipse.core.runtime.IProgressMonitor;
+import org.eclipse.core.runtime.IStatus;
+import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.IAnnotationModel;
@@ -18,6 +22,7 @@ import org.eclipse.jface.viewers.DecorationOverlayIcon;
 import org.eclipse.jface.viewers.IDecoration;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Shell;
+import org.eclipse.ui.IEditorSite;
 import org.eclipse.xtext.ui.IImageHelper;
 import org.eclipse.xtext.ui.editor.model.edit.IssueUtil;
 import org.eclipse.xtext.ui.internal.XtextPluginImages;
@@ -103,14 +108,23 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 	}
 
 	private void postImageChange(final XtextEditor xtextEditor, final Image newImage) {
-		Shell shell = xtextEditor.getEditorSite().getShell();
-		if (shell != null && !shell.isDisposed()) {
-			shell.getDisplay().syncExec(new Runnable() {
-				public void run() {
-					xtextEditor.updatedTitleImage(newImage);
+		new Job("Update error tick") {
+			@Override
+			protected IStatus run(IProgressMonitor monitor) {
+				IEditorSite site = xtextEditor.getEditorSite();
+				if (site != null) {
+					Shell shell = site.getShell();
+					if (shell != null && !shell.isDisposed()) {
+						shell.getDisplay().syncExec(new Runnable() {
+							public void run() {
+								xtextEditor.updatedTitleImage(newImage);
+							}
+						});
+					}
 				}
-			});
-		}
+				return Status.OK_STATUS;
+			}
+		}.schedule();
 	}
 
 	public void modelChanged(IAnnotationModel model) {
