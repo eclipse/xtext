@@ -13,8 +13,8 @@ public abstract class AbstractTreeTestLanguageUiModule extends TreeTestLanguageR
 	
 	
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.xtext.ui.ILocationInFileProvider> bindILocationInFileProvider() {
-		return org.eclipse.xtext.ui.DefaultLocationInFileProvider.class;
+	public Class<? extends org.eclipse.xtext.resource.ILocationInFileProvider> bindILocationInFileProvider() {
+		return org.eclipse.xtext.resource.DefaultLocationInFileProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
