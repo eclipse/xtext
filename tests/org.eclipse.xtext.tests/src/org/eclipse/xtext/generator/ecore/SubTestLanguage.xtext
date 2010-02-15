@@ -1,8 +1,10 @@
 grammar org.eclipse.xtext.generator.ecore.SubTestLanguage with org.eclipse.xtext.generator.ecore.SuperTestLanguage
 
 generate subPackage "http://www.eclipse.org/2009/tmf/xtext/SubTestLanguage"
-import "http://www.eclipse.org/2009/tmf/xtext/SuperTestLanguage" as super
 
 SubMain :
-    "{" superMains+=SuperMain "}";
+    "{" superMains+=SuperMain "}" (another=AnotherSuperMain)?;
+    
+AnotherSuperMain : 
+   "ups" name=ID;
 
