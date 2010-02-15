@@ -24,6 +24,8 @@ import org.eclipse.xtext.validation.csvalidationtest.GroupMultiplicities;
 import org.eclipse.xtext.validation.csvalidationtest.List1;
 import org.eclipse.xtext.validation.csvalidationtest.List2;
 import org.eclipse.xtext.validation.csvalidationtest.List3;
+import org.eclipse.xtext.validation.csvalidationtest.List4;
+import org.eclipse.xtext.validation.csvalidationtest.List5;
 import org.eclipse.xtext.validation.csvalidationtest.SimpleAlternative;
 import org.eclipse.xtext.validation.csvalidationtest.SimpleGroup;
 import org.eclipse.xtext.validation.csvalidationtest.SimpleMultiplicities;
@@ -49,7 +51,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 	}
 
 	private IConcreteSyntaxValidator validator;
-	
+
 	@Override
 	protected IConcreteSyntaxValidator getValidator() {
 		return validator;
@@ -112,8 +114,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 
 		copy = (GroupMultiplicities) EcoreUtil.copy(m);
 		copy.getVal5().clear();
-		validate(copy).assertAll(err(p.getGroupMultiplicities_Val4(), ERROR_LIST_TOO_MANY, null, 0, "(val4 val5)+"),
-				err(p.getGroupMultiplicities_Val5(), ERROR_LIST_TOO_FEW, 1, null, "(val4 val5)+"));
+		validate(copy).assertAll(err(p.getGroupMultiplicities_Val5(), ERROR_LIST_TOO_FEW, 1, null, "(val4 val5)+"));
 
 		copy = (GroupMultiplicities) EcoreUtil.copy(m);
 		copy.getVal4().clear();
@@ -351,6 +352,56 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		copy.getVal1().clear();
 		copy.setVal2("lala");
 		validate(copy).assertOK();
+	}
+
+	public void testList4() throws Exception {
+		List4 copy, m = (List4) getModel2("#20 id11, id12, id13 kw3 id2");
+		validate(m).assertOK();
+
+		copy = (List4) EcoreUtil.copy(m);
+		copy.getVal1().clear();
+		copy.getVal1().add("xxx");
+		validate(copy).assertOK();
+
+		copy = (List4) EcoreUtil.copy(m);
+		copy.getVal1().clear();
+		validate(copy).assertAll(err(p.getList4_Val1(), ERROR_LIST_TOO_FEW, 1, null, "(val1 val1*)"));
+
+		copy = (List4) EcoreUtil.copy(m);
+		copy.setVal2(null);
+		validate(copy).assertAll(err(p.getList4_Val2(), ERROR_VALUE_REQUIRED, 1, null, ""));
+	}
+
+	public void testList5() throws Exception {
+		List5 copy, m = (List5) getModel2("#21 id11, id12, id13 kw3 id2");
+		validate(m).assertOK();
+
+		copy = (List5) EcoreUtil.copy(m);
+		copy.getVal1().clear();
+		copy.getVal1().add("xxx");
+		validate(copy).assertOK();
+
+		copy = (List5) EcoreUtil.copy(m);
+		copy.getVal1().clear();
+		copy.setVal2(null);
+		copy.setVal3("foo");
+		validate(copy).assertOK();
+
+		copy = (List5) EcoreUtil.copy(m);
+		copy.getVal1().clear();
+		validate(copy).assertAll(err(p.getList5_Val1(), ERROR_LIST_TOO_FEW, 1, null, "((val1 val1* val2)|val3)"),
+				err(p.getList5_Val2(), ERROR_VALUE_PROHIBITED, null, 0, "((val1 val2)|val3)"));
+
+		copy = (List5) EcoreUtil.copy(m);
+		copy.setVal2(null);
+		validate(copy).assertAll(err(p.getList5_Val1(), ERROR_LIST_TOO_MANY, null, 0, "((val1 val1* val2)|val3)"),
+				err(p.getList5_Val2(), ERROR_VALUE_REQUIRED, 1, null, "((val1 val2)|val3)"));
+
+		copy = (List5) EcoreUtil.copy(m);
+		copy.setVal3("foo");
+		validate(copy).assertAll(err(p.getList5_Val1(), ERROR_LIST_TOO_MANY, null, 0, "((val1 val1* val2)|val3)"),
+				err(p.getList5_Val2(), ERROR_VALUE_PROHIBITED, null, 0, "((val1 val2)|val3)"),
+				err(p.getList5_Val3(), ERROR_VALUE_PROHIBITED, null, 0, "((val1 val1* val2)|val3)"));
 	}
 
 }
