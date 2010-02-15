@@ -12,14 +12,16 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.Region;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.resource.EObjectHandleImpl;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.ILocationInFileProvider;
 import org.eclipse.xtext.ui.editor.outline.actions.ContentOutlineNodeAdapter;
 import org.eclipse.xtext.ui.editor.outline.actions.ContentOutlineNodeAdapterFactory;
+import org.eclipse.xtext.util.TextLocation;
 import org.eclipse.xtext.util.concurrent.IEObjectHandle;
 import org.eclipse.xtext.util.concurrent.IStateAccess;
 
@@ -102,7 +104,8 @@ public class DefaultContentOutlineNodeFactory implements IContentOutlineNodeFact
 	}
 
 	protected IRegion getRegion(EObject semanticNode) {
-		return locationProvider.getLocation(semanticNode);
+		TextLocation location = locationProvider.getLocation(semanticNode);
+		return new Region(location.getOffset(), location.getLength());
 	}
 
 	protected IEObjectHandle<EObject> getEObjectHandle(EObject semanticNode, IStateAccess<XtextResource> resourceAccess) {

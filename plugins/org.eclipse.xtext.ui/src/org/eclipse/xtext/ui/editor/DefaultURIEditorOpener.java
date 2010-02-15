@@ -16,15 +16,15 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.jface.text.Region;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.ILocationInFileProvider;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
+import org.eclipse.xtext.util.TextLocation;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
@@ -82,10 +82,10 @@ public class DefaultURIEditorOpener implements IURIEditorOpener {
 					public void process(XtextResource resource) throws Exception {
 						if (resource != null) {
 							EObject object = resource.getEObject(uri.fragment());
-							Region region = (crossReference != null) 
+							TextLocation location = (crossReference != null) 
 									? locationProvider.getLocation(object, crossReference, indexInList) 
 									: locationProvider.getLocation(object);
-							edit.selectAndReveal(region.getOffset(), region.getLength());
+							edit.selectAndReveal(location.getOffset(), location.getLength());
 						}
 					}
 				});

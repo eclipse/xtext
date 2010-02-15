@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui;
+package org.eclipse.xtext.resource;
 
 import java.util.ArrayList;
 import java.util.Collections;
@@ -14,11 +14,12 @@ import java.util.List;
 
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.TreeIterator;
+import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jface.text.Region;
+import org.eclipse.emf.ecore.util.EcoreSwitch;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Keyword;
@@ -30,6 +31,7 @@ import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.util.ParsetreeSwitch;
+import org.eclipse.xtext.util.TextLocation;
 
 /**
  * @author Peter Friese - Implementation
@@ -37,8 +39,34 @@ import org.eclipse.xtext.parsetree.util.ParsetreeSwitch;
  */
 public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 
-	public Region getLocation(EObject referenceOwner, EReference crossReference, int indexInList) {
-		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(referenceOwner);
+	public TextLocation getLocation(final EObject owner, EStructuralFeature feature, final int indexInList) {
+		return new EcoreSwitch<TextLocation>() {
+			@Override
+			public TextLocation caseEAttribute(EAttribute feature) {
+				return getLocationOfAttribute(owner, feature, indexInList);
+			}
+
+			@Override
+			public TextLocation caseEReference(EReference feature) {
+				if (feature.isContainment() || feature.isContainer()) {
+					return getLocationOfContainmentReference(owner, feature, indexInList);
+				} else {
+					return getLocationOfCrossReference(owner, feature, indexInList);
+				}
+			}
+
+		}.doSwitch(feature);
+	}
+
+	protected TextLocation getLocationOfContainmentReference(final EObject owner, EReference feature,
+			final int indexInList) {
+		Object referencedElement = (feature.isMany()) ? ((List<?>) owner.eGet(feature)).get(indexInList) : owner
+				.eGet(feature);
+		return getLocation((EObject) referencedElement);
+	}
+
+	protected TextLocation getLocationOfCrossReference(EObject owner, EReference reference, int indexInList) {
+		NodeAdapter nodeAdapter = NodeUtil.getNodeAdapter(owner);
 		if (nodeAdapter != null) {
 			CompositeNode parserNode = nodeAdapter.getParserNode();
 			if (parserNode != null) {
@@ -47,11 +75,11 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 					AbstractNode ownerChildNode = (AbstractNode) childrenIterator.next();
 					EObject grammarElement = ownerChildNode.getGrammarElement();
 					if (grammarElement instanceof CrossReference) {
-						EReference crossReference2 = GrammarUtil.getReference((CrossReference) grammarElement,
-								referenceOwner.eClass());
-						if (crossReference == crossReference2) {
-							if (currentIndex == indexInList || !crossReference.isMany()) {
-								return new Region(ownerChildNode.getOffset(), ownerChildNode.getLength());
+						EReference crossReference2 = GrammarUtil.getReference((CrossReference) grammarElement, owner
+								.eClass());
+						if (reference == crossReference2) {
+							if (currentIndex == indexInList || !reference.isMany()) {
+								return new TextLocation(ownerChildNode.getOffset(), ownerChildNode.getLength());
 							}
 							++currentIndex;
 						}
@@ -61,17 +89,29 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 						childrenIterator.prune();
 					}
 				}
-				return getLocation(referenceOwner);
+				return getLocation(owner);
 			}
 		}
 		return null;
 	}
 
-	public Region getLocation(EObject obj) {
+	protected TextLocation getLocationOfAttribute(EObject owner, EAttribute attribute, int indexInList) {
+		if (indexInList >= 0) {
+			List<AbstractNode> findNodesForFeature = NodeUtil.findNodesForFeature(owner, attribute);
+			if (indexInList < findNodesForFeature.size()) {
+				AbstractNode node = findNodesForFeature.get(indexInList);
+				return new TextLocation(node.getOffset(), node.getLength());
+			}
+			return getLocation(owner);
+		}
+		return null;
+	}
+
+	public TextLocation getLocation(EObject obj) {
 		final NodeAdapter adapter = NodeUtil.getNodeAdapter(obj);
 		if (adapter == null) {
 			if (obj.eContainer() == null)
-				return new Region(0, 0);
+				return new TextLocation(0, 0);
 			return getLocation(obj.eContainer());
 		}
 
@@ -127,11 +167,6 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 
 		private boolean forward = true;
 
-		@Override
-		public LeafNode caseCompositeNode(CompositeNode object) {
-			return handleImpl(object.getChildren());
-		}
-
 		public AbstractNode handle(List<AbstractNode> nodes, boolean forward) {
 			this.forward = forward;
 			AbstractNode result = handleImpl(nodes);
@@ -163,6 +198,11 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 		}
 
 		@Override
+		public LeafNode caseCompositeNode(CompositeNode object) {
+			return handleImpl(object.getChildren());
+		}
+
+		@Override
 		public LeafNode caseLeafNode(LeafNode object) {
 			if (!object.isHidden())
 				return object;
@@ -170,13 +210,13 @@ public class DefaultLocationInFileProvider implements ILocationInFileProvider {
 		}
 	}
 
-	protected Region createRegion(final List<AbstractNode> nodes) {
+	protected TextLocation createRegion(final List<AbstractNode> nodes) {
 		// if we've got more than one ID elements, we want to select them all
 		OffsetCalculator calculator = createCalculator();
 		AbstractNode firstNode = calculator.handle(nodes, true);
 		AbstractNode lastNode = calculator.handle(nodes, false);
 		int length = (lastNode.getOffset() - firstNode.getOffset()) + lastNode.getLength();
-		return new Region(firstNode.getOffset(), length);
+		return new TextLocation(firstNode.getOffset(), length);
 	}
 
 	protected OffsetCalculator createCalculator() {

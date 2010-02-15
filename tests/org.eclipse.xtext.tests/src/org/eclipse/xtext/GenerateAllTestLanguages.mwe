@@ -241,7 +241,9 @@
 		<language uri="classpath:/org/eclipse/xtext/resource/EObjectAtOffsetTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>
 		</language>
-		-->
+		<language uri="classpath:/org/eclipse/xtext/resource/LocationProviderTestLanguage.xtext">
+			<fragment file="${standardFragments}"/>
+		</language>
 		<!--
 		<language uri="classpath:/org/eclipse/xtext/generator/GeneratorTestLanguage.xtext">
 			<fragment file="${standardFragments}"/>

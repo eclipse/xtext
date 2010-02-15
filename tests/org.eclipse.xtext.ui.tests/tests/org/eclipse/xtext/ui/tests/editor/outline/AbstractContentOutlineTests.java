@@ -10,17 +10,17 @@ package org.eclipse.xtext.ui.tests.editor.outline;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EReference;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.jface.text.Region;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.xtext.junit.AbstractXtextTests;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.ui.DefaultLabelProvider;
-import org.eclipse.xtext.ui.ILocationInFileProvider;
 import org.eclipse.xtext.ui.editor.outline.DefaultContentOutlineNodeFactory;
+import org.eclipse.xtext.util.TextLocation;
 
 /**
  * @author Michael Clay - Initial contribution and API
@@ -32,12 +32,12 @@ public abstract class AbstractContentOutlineTests extends AbstractXtextTests {
 	protected DefaultContentOutlineNodeFactory contentOutlineNodeFactory;
 
 	private static ILocationInFileProvider locationProvider = new ILocationInFileProvider() {
-		public Region getLocation(EObject obj) {
-			return new Region(0, 0);
+		public TextLocation getLocation(EObject obj) {
+			return new TextLocation(0, 0);
 		}
 
-		public Region getLocation(EObject referenceOwner, EReference crossReference, int indexInList) {
-			return new Region(0, 0);
+		public TextLocation getLocation(EObject referenceOwner, EStructuralFeature feature, int indexInList) {
+			return new TextLocation(0, 0);
 		}
 	};
 

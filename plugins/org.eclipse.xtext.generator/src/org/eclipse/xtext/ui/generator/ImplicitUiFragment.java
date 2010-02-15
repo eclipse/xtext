@@ -33,7 +33,7 @@ public class ImplicitUiFragment extends AbstractGeneratorFragment {
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
-		.addTypeToType("org.eclipse.xtext.ui.ILocationInFileProvider","org.eclipse.xtext.ui.DefaultLocationInFileProvider")
+		.addTypeToType("org.eclipse.xtext.resource.ILocationInFileProvider","org.eclipse.xtext.resource.DefaultLocationInFileProvider")
 		.addTypeToType("org.eclipse.jface.text.hyperlink.IHyperlinkDetector","org.eclipse.xtext.ui.editor.hyperlinking.DefaultHyperlinkDetector")
 		.addTypeToType("org.eclipse.jface.text.reconciler.IReconciler","org.eclipse.xtext.ui.editor.reconciler.XtextReconciler")
 		.addTypeToType("org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper","org.eclipse.xtext.ui.editor.toggleComments.DefaultSingleLineCommentHelper")

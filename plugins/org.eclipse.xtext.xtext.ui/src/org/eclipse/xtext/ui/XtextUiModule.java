@@ -4,7 +4,7 @@
 package org.eclipse.xtext.ui;
 
 import org.eclipse.jface.text.IAutoEditStrategy;
-import org.eclipse.xtext.ui.ILocationInFileProvider;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.ui.editor.bracketmatching.IBracketMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.editor.folding.IFoldingRegionProvider;
