@@ -24,7 +24,7 @@ package org.eclipse.xtext.common.types;
  * @model
  * @generated
  */
-public interface TypeParameter extends ComponentType, ConstrainedType {
+public interface TypeParameter extends ComponentType, ConstraintOwner {
 	/**
 	 * Returns the value of the '<em><b>Name</b></em>' attribute.
 	 * <!-- begin-user-doc -->

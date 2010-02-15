@@ -20,7 +20,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
-import org.eclipse.xtext.common.types.ConstrainedType;
+import org.eclipse.xtext.common.types.ConstraintOwner;
 import org.eclipse.xtext.common.types.TypeConstraint;
 import org.eclipse.xtext.common.types.TypeParameter;
 import org.eclipse.xtext.common.types.TypeParameterDeclarator;
@@ -95,7 +95,7 @@ public class TypeParameterImpl extends ComponentTypeImpl implements TypeParamete
 	 */
 	public EList<TypeConstraint> getConstraints() {
 		if (constraints == null) {
-			constraints = new EObjectContainmentWithInverseEList<TypeConstraint>(TypeConstraint.class, this, TypesPackage.TYPE_PARAMETER__CONSTRAINTS, TypesPackage.TYPE_CONSTRAINT__CONSTRAINED_TYPE);
+			constraints = new EObjectContainmentWithInverseEList<TypeConstraint>(TypeConstraint.class, this, TypesPackage.TYPE_PARAMETER__CONSTRAINTS, TypesPackage.TYPE_CONSTRAINT__OWNER);
 		}
 		return constraints;
 	}
@@ -298,9 +298,9 @@ public class TypeParameterImpl extends ComponentTypeImpl implements TypeParamete
 	 */
 	@Override
 	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
-		if (baseClass == ConstrainedType.class) {
+		if (baseClass == ConstraintOwner.class) {
 			switch (derivedFeatureID) {
-				case TypesPackage.TYPE_PARAMETER__CONSTRAINTS: return TypesPackage.CONSTRAINED_TYPE__CONSTRAINTS;
+				case TypesPackage.TYPE_PARAMETER__CONSTRAINTS: return TypesPackage.CONSTRAINT_OWNER__CONSTRAINTS;
 				default: return -1;
 			}
 		}
@@ -314,9 +314,9 @@ public class TypeParameterImpl extends ComponentTypeImpl implements TypeParamete
 	 */
 	@Override
 	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
-		if (baseClass == ConstrainedType.class) {
+		if (baseClass == ConstraintOwner.class) {
 			switch (baseFeatureID) {
-				case TypesPackage.CONSTRAINED_TYPE__CONSTRAINTS: return TypesPackage.TYPE_PARAMETER__CONSTRAINTS;
+				case TypesPackage.CONSTRAINT_OWNER__CONSTRAINTS: return TypesPackage.TYPE_PARAMETER__CONSTRAINTS;
 				default: return -1;
 			}
 		}

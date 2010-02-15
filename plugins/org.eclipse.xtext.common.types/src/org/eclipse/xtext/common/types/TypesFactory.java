@@ -45,15 +45,6 @@ public interface TypesFactory extends EFactory {
 	PrimitiveType createPrimitiveType();
 
 	/**
-	 * Returns a new object of class '<em>Wildcard</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Wildcard</em>'.
-	 * @generated
-	 */
-	Wildcard createWildcard();
-
-	/**
 	 * Returns a new object of class '<em>Array Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -117,13 +108,31 @@ public interface TypesFactory extends EFactory {
 	GenericType createGenericType();
 
 	/**
-	 * Returns a new object of class '<em>Parameterized Type</em>'.
+	 * Returns a new object of class '<em>Simple Type Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Parameterized Type</em>'.
+	 * @return a new object of class '<em>Simple Type Reference</em>'.
 	 * @generated
 	 */
-	ParameterizedType createParameterizedType();
+	SimpleTypeReference createSimpleTypeReference();
+
+	/**
+	 * Returns a new object of class '<em>Parameterized Type Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Parameterized Type Reference</em>'.
+	 * @generated
+	 */
+	ParameterizedTypeReference createParameterizedTypeReference();
+
+	/**
+	 * Returns a new object of class '<em>Generic Array Type Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Generic Array Type Reference</em>'.
+	 * @generated
+	 */
+	GenericArrayTypeReference createGenericArrayTypeReference();
 
 	/**
 	 * Returns a new object of class '<em>Wildcard Type Argument</em>'.

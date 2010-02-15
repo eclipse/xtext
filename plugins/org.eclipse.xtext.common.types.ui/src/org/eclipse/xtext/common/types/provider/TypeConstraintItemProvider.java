@@ -14,6 +14,7 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -22,6 +23,9 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
+import org.eclipse.emf.edit.provider.ViewerNotification;
+import org.eclipse.xtext.common.types.TypeConstraint;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
@@ -59,31 +63,38 @@ public class TypeConstraintItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addReferencedTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Referenced Type feature.
+	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
+	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
+	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addReferencedTypePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_TypeConstraint_referencedType_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_TypeConstraint_referencedType_feature", "_UI_TypeConstraint_type"),
-				 TypesPackage.Literals.TYPE_CONSTRAINT__REFERENCED_TYPE,
-				 true,
-				 false,
-				 true,
-				 null,
-				 null,
-				 null));
+	@Override
+	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
+		if (childrenFeatures == null) {
+			super.getChildrenFeatures(object);
+			childrenFeatures.add(TypesPackage.Literals.TYPE_CONSTRAINT__TYPE_REFERENCE);
+		}
+		return childrenFeatures;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	protected EStructuralFeature getChildFeature(Object object, Object child) {
+		// Check the type of the specified child object and return the proper feature to use for
+		// adding (see {@link AddCommand}) it as a child.
+
+		return super.getChildFeature(object, child);
 	}
 
 	/**
@@ -118,6 +129,12 @@ public class TypeConstraintItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
+
+		switch (notification.getFeatureID(TypeConstraint.class)) {
+			case TypesPackage.TYPE_CONSTRAINT__TYPE_REFERENCE:
+				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
+				return;
+		}
 		super.notifyChanged(notification);
 	}
 
@@ -131,6 +148,21 @@ public class TypeConstraintItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.TYPE_CONSTRAINT__TYPE_REFERENCE,
+				 TypesFactory.eINSTANCE.createSimpleTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.TYPE_CONSTRAINT__TYPE_REFERENCE,
+				 TypesFactory.eINSTANCE.createParameterizedTypeReference()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.TYPE_CONSTRAINT__TYPE_REFERENCE,
+				 TypesFactory.eINSTANCE.createGenericArrayTypeReference()));
 	}
 
 }

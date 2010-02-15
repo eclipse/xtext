@@ -24,12 +24,13 @@ import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.GenericType;
-import org.eclipse.xtext.common.types.ParameterizedType;
 import org.eclipse.xtext.common.types.Type;
 import org.eclipse.xtext.common.types.TypeParameter;
 import org.eclipse.xtext.common.types.TypeParameterDeclarator;
+import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 
+import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 
@@ -266,19 +267,22 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 	 * @generated NOT
 	 */
 	public Iterable<Type> getExtendedInterfaces() {
-		if (extendedClasses == null) {
-			extendedClasses = Iterables.filter(getSuperTypes(), new Predicate<Type>() {
-				public boolean apply(Type type) {
+		if (extendedInterfaces == null) {
+			extendedInterfaces = Iterables.transform(Iterables.filter(getSuperTypes(), new Predicate<TypeReference>() {
+				public boolean apply(TypeReference typeReference) {
+					Type type = typeReference.getType();
 					if (type instanceof GenericType) {
 						return ((GenericType) type).isInterface();
-					} else if (type instanceof ParameterizedType) {
-						return apply(((ParameterizedType) type).getRawType());
-					}
+					} 
 					return false;
+				}
+			}), new Function<TypeReference, Type>() {
+				public Type apply(TypeReference from) {
+					return from.getType();
 				}
 			});
 		}
-		return extendedClasses;
+		return extendedInterfaces;
 	}
 
 	/**
@@ -288,14 +292,17 @@ public class GenericTypeImpl extends DeclaredTypeImpl implements GenericType {
 	 */
 	public Iterable<Type> getExtendedClasses() {
 		if (extendedClasses == null) {
-			extendedClasses = Iterables.filter(getSuperTypes(), new Predicate<Type>() {
-				public boolean apply(Type type) {
+			extendedClasses = Iterables.transform(Iterables.filter(getSuperTypes(), new Predicate<TypeReference>() {
+				public boolean apply(TypeReference typeReference) {
+					Type type = typeReference.getType();
 					if (type instanceof GenericType) {
 						return !((GenericType) type).isInterface();
-					} else if (type instanceof ParameterizedType) {
-						return apply(((ParameterizedType) type).getRawType());
-					}
+					} 
 					return false;
+				}
+			}), new Function<TypeReference, Type>() {
+				public Type apply(TypeReference from) {
+					return from.getType();
 				}
 			});
 		}

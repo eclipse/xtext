@@ -19,8 +19,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.ecore.util.InternalEList;
 
@@ -28,8 +28,7 @@ import org.eclipse.xtext.common.types.AnnotationReference;
 import org.eclipse.xtext.common.types.AnnotationTarget;
 import org.eclipse.xtext.common.types.DeclaredType;
 import org.eclipse.xtext.common.types.Member;
-import org.eclipse.xtext.common.types.ParameterizedType;
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.Visibility;
 
@@ -44,7 +43,6 @@ import org.eclipse.xtext.common.types.Visibility;
  *   <li>{@link org.eclipse.xtext.common.types.impl.DeclaredTypeImpl#getDeclaringType <em>Declaring Type</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.DeclaredTypeImpl#getVisibility <em>Visibility</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.DeclaredTypeImpl#getFullyQualifiedName <em>Fully Qualified Name</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.impl.DeclaredTypeImpl#getDeclaredParameterizedTypes <em>Declared Parameterized Types</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.DeclaredTypeImpl#getSuperTypes <em>Super Types</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.DeclaredTypeImpl#getMembers <em>Members</em>}</li>
  * </ul>
@@ -104,24 +102,14 @@ public abstract class DeclaredTypeImpl extends ComponentTypeImpl implements Decl
 	protected String fullyQualifiedName = FULLY_QUALIFIED_NAME_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getDeclaredParameterizedTypes() <em>Declared Parameterized Types</em>}' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #getDeclaredParameterizedTypes()
-	 * @generated
-	 * @ordered
-	 */
-	protected EList<ParameterizedType> declaredParameterizedTypes;
-
-	/**
-	 * The cached value of the '{@link #getSuperTypes() <em>Super Types</em>}' reference list.
+	 * The cached value of the '{@link #getSuperTypes() <em>Super Types</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getSuperTypes()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Type> superTypes;
+	protected EList<TypeReference> superTypes;
 
 	/**
 	 * The cached value of the '{@link #getMembers() <em>Members</em>}' containment reference list.
@@ -229,18 +217,6 @@ public abstract class DeclaredTypeImpl extends ComponentTypeImpl implements Decl
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EList<ParameterizedType> getDeclaredParameterizedTypes() {
-		if (declaredParameterizedTypes == null) {
-			declaredParameterizedTypes = new EObjectContainmentWithInverseEList<ParameterizedType>(ParameterizedType.class, this, TypesPackage.DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES, TypesPackage.PARAMETERIZED_TYPE__DECLARATOR);
-		}
-		return declaredParameterizedTypes;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
 	 * @generated NOT
 	 */
 	public String getSimpleName() {
@@ -294,9 +270,9 @@ public abstract class DeclaredTypeImpl extends ComponentTypeImpl implements Decl
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Type> getSuperTypes() {
+	public EList<TypeReference> getSuperTypes() {
 		if (superTypes == null) {
-			superTypes = new EObjectResolvingEList<Type>(Type.class, this, TypesPackage.DECLARED_TYPE__SUPER_TYPES);
+			superTypes = new EObjectContainmentEList<TypeReference>(TypeReference.class, this, TypesPackage.DECLARED_TYPE__SUPER_TYPES);
 		}
 		return superTypes;
 	}
@@ -328,8 +304,6 @@ public abstract class DeclaredTypeImpl extends ComponentTypeImpl implements Decl
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
 				return basicSetDeclaringType((DeclaredType)otherEnd, msgs);
-			case TypesPackage.DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES:
-				return ((InternalEList<InternalEObject>)(InternalEList<?>)getDeclaredParameterizedTypes()).basicAdd(otherEnd, msgs);
 			case TypesPackage.DECLARED_TYPE__MEMBERS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getMembers()).basicAdd(otherEnd, msgs);
 		}
@@ -348,8 +322,8 @@ public abstract class DeclaredTypeImpl extends ComponentTypeImpl implements Decl
 				return ((InternalEList<?>)getAnnotations()).basicRemove(otherEnd, msgs);
 			case TypesPackage.DECLARED_TYPE__DECLARING_TYPE:
 				return basicSetDeclaringType(null, msgs);
-			case TypesPackage.DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES:
-				return ((InternalEList<?>)getDeclaredParameterizedTypes()).basicRemove(otherEnd, msgs);
+			case TypesPackage.DECLARED_TYPE__SUPER_TYPES:
+				return ((InternalEList<?>)getSuperTypes()).basicRemove(otherEnd, msgs);
 			case TypesPackage.DECLARED_TYPE__MEMBERS:
 				return ((InternalEList<?>)getMembers()).basicRemove(otherEnd, msgs);
 		}
@@ -386,8 +360,6 @@ public abstract class DeclaredTypeImpl extends ComponentTypeImpl implements Decl
 				return getVisibility();
 			case TypesPackage.DECLARED_TYPE__FULLY_QUALIFIED_NAME:
 				return getFullyQualifiedName();
-			case TypesPackage.DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES:
-				return getDeclaredParameterizedTypes();
 			case TypesPackage.DECLARED_TYPE__SUPER_TYPES:
 				return getSuperTypes();
 			case TypesPackage.DECLARED_TYPE__MEMBERS:
@@ -418,13 +390,9 @@ public abstract class DeclaredTypeImpl extends ComponentTypeImpl implements Decl
 			case TypesPackage.DECLARED_TYPE__FULLY_QUALIFIED_NAME:
 				setFullyQualifiedName((String)newValue);
 				return;
-			case TypesPackage.DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES:
-				getDeclaredParameterizedTypes().clear();
-				getDeclaredParameterizedTypes().addAll((Collection<? extends ParameterizedType>)newValue);
-				return;
 			case TypesPackage.DECLARED_TYPE__SUPER_TYPES:
 				getSuperTypes().clear();
-				getSuperTypes().addAll((Collection<? extends Type>)newValue);
+				getSuperTypes().addAll((Collection<? extends TypeReference>)newValue);
 				return;
 			case TypesPackage.DECLARED_TYPE__MEMBERS:
 				getMembers().clear();
@@ -454,9 +422,6 @@ public abstract class DeclaredTypeImpl extends ComponentTypeImpl implements Decl
 			case TypesPackage.DECLARED_TYPE__FULLY_QUALIFIED_NAME:
 				setFullyQualifiedName(FULLY_QUALIFIED_NAME_EDEFAULT);
 				return;
-			case TypesPackage.DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES:
-				getDeclaredParameterizedTypes().clear();
-				return;
 			case TypesPackage.DECLARED_TYPE__SUPER_TYPES:
 				getSuperTypes().clear();
 				return;
@@ -483,8 +448,6 @@ public abstract class DeclaredTypeImpl extends ComponentTypeImpl implements Decl
 				return visibility != VISIBILITY_EDEFAULT;
 			case TypesPackage.DECLARED_TYPE__FULLY_QUALIFIED_NAME:
 				return FULLY_QUALIFIED_NAME_EDEFAULT == null ? fullyQualifiedName != null : !FULLY_QUALIFIED_NAME_EDEFAULT.equals(fullyQualifiedName);
-			case TypesPackage.DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES:
-				return declaredParameterizedTypes != null && !declaredParameterizedTypes.isEmpty();
 			case TypesPackage.DECLARED_TYPE__SUPER_TYPES:
 				return superTypes != null && !superTypes.isEmpty();
 			case TypesPackage.DECLARED_TYPE__MEMBERS:
@@ -511,7 +474,6 @@ public abstract class DeclaredTypeImpl extends ComponentTypeImpl implements Decl
 				case TypesPackage.DECLARED_TYPE__DECLARING_TYPE: return TypesPackage.MEMBER__DECLARING_TYPE;
 				case TypesPackage.DECLARED_TYPE__VISIBILITY: return TypesPackage.MEMBER__VISIBILITY;
 				case TypesPackage.DECLARED_TYPE__FULLY_QUALIFIED_NAME: return TypesPackage.MEMBER__FULLY_QUALIFIED_NAME;
-				case TypesPackage.DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES: return TypesPackage.MEMBER__DECLARED_PARAMETERIZED_TYPES;
 				default: return -1;
 			}
 		}
@@ -536,7 +498,6 @@ public abstract class DeclaredTypeImpl extends ComponentTypeImpl implements Decl
 				case TypesPackage.MEMBER__DECLARING_TYPE: return TypesPackage.DECLARED_TYPE__DECLARING_TYPE;
 				case TypesPackage.MEMBER__VISIBILITY: return TypesPackage.DECLARED_TYPE__VISIBILITY;
 				case TypesPackage.MEMBER__FULLY_QUALIFIED_NAME: return TypesPackage.DECLARED_TYPE__FULLY_QUALIFIED_NAME;
-				case TypesPackage.MEMBER__DECLARED_PARAMETERIZED_TYPES: return TypesPackage.DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES;
 				default: return -1;
 			}
 		}

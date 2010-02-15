@@ -183,47 +183,17 @@ public class FormalParameterItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.FORMAL_PARAMETER__PARAMETER_TYPE,
-				 TypesFactory.eINSTANCE.createVoid()));
+				 TypesFactory.eINSTANCE.createSimpleTypeReference()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.FORMAL_PARAMETER__PARAMETER_TYPE,
-				 TypesFactory.eINSTANCE.createPrimitiveType()));
+				 TypesFactory.eINSTANCE.createParameterizedTypeReference()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.FORMAL_PARAMETER__PARAMETER_TYPE,
-				 TypesFactory.eINSTANCE.createWildcard()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.FORMAL_PARAMETER__PARAMETER_TYPE,
-				 TypesFactory.eINSTANCE.createArrayType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.FORMAL_PARAMETER__PARAMETER_TYPE,
-				 TypesFactory.eINSTANCE.createTypeParameter()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.FORMAL_PARAMETER__PARAMETER_TYPE,
-				 TypesFactory.eINSTANCE.createAnnotationType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.FORMAL_PARAMETER__PARAMETER_TYPE,
-				 TypesFactory.eINSTANCE.createEnumerationType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.FORMAL_PARAMETER__PARAMETER_TYPE,
-				 TypesFactory.eINSTANCE.createGenericType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.FORMAL_PARAMETER__PARAMETER_TYPE,
-				 TypesFactory.eINSTANCE.createParameterizedType()));
+				 TypesFactory.eINSTANCE.createGenericArrayTypeReference()));
 	}
 
 }

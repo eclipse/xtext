@@ -10,12 +10,15 @@ package org.eclipse.xtext.common.types.access.impl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
+import org.eclipse.xtext.common.types.ArrayType;
 import org.eclipse.xtext.common.types.ComponentType;
 import org.eclipse.xtext.common.types.DeclaredType;
 import org.eclipse.xtext.common.types.IdentifyableElement;
 import org.eclipse.xtext.common.types.Member;
+import org.eclipse.xtext.common.types.SimpleTypeReference;
 import org.eclipse.xtext.common.types.TypeParameter;
 import org.eclipse.xtext.common.types.TypeParameterDeclarator;
+import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 
 /**
@@ -26,6 +29,8 @@ public abstract class AbstractClassMirror implements IClassMirror {
 	public String getFragment(EObject obj) {
 		if (obj instanceof TypeParameter)
 			return getFragment(obj.eContainer()) + "/" + ((TypeParameter) obj).getName();
+		if (obj instanceof TypeReference)
+			return null; // use default implementation
 		if (obj instanceof IdentifyableElement)
 			return ((IdentifyableElement) obj).getCanonicalName();
 		return null;
@@ -33,13 +38,7 @@ public abstract class AbstractClassMirror implements IClassMirror {
 	
 	public EObject getEObject(Resource resource, String fragment) {
 		if (fragment.endsWith("[]")) {
-			ComponentType component = (ComponentType) getEObject(resource, fragment.substring(0, fragment.length() - 2));
-			if (component == null)
-				return null;
-			if (component.getArrayType() == null) {
-				component.setArrayType(TypesFactory.eINSTANCE.createArrayType());
-			}
-			return component.getArrayType();
+			return getArrayEObject(resource, fragment);
 		}
 		int slash = fragment.indexOf('/'); 
 		if (slash != -1) {
@@ -75,6 +74,20 @@ public abstract class AbstractClassMirror implements IClassMirror {
 			}
 		}
 		return null;	
+	}
+
+	protected EObject getArrayEObject(Resource resource, String fragment) {
+		ComponentType component = (ComponentType) getEObject(resource, fragment.substring(0, fragment.length() - 2));
+		if (component == null)
+			return null;
+		if (component.getArrayType() == null) {
+			ArrayType arrayType = TypesFactory.eINSTANCE.createArrayType();
+			SimpleTypeReference componentTypeReference = TypesFactory.eINSTANCE.createSimpleTypeReference();
+			componentTypeReference.setType(component);
+			arrayType.setComponentType(componentTypeReference);
+			component.setArrayType(arrayType);
+		}
+		return component.getArrayType();
 	}
 	
 	protected abstract String getTypeName();

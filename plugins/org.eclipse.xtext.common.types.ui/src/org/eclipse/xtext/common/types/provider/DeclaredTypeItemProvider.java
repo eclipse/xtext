@@ -128,7 +128,6 @@ public class DeclaredTypeItemProvider
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
 			childrenFeatures.add(TypesPackage.Literals.ANNOTATION_TARGET__ANNOTATIONS);
-			childrenFeatures.add(TypesPackage.Literals.MEMBER__DECLARED_PARAMETERIZED_TYPES);
 			childrenFeatures.add(TypesPackage.Literals.DECLARED_TYPE__SUPER_TYPES);
 			childrenFeatures.add(TypesPackage.Literals.DECLARED_TYPE__MEMBERS);
 		}
@@ -190,7 +189,6 @@ public class DeclaredTypeItemProvider
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TypesPackage.DECLARED_TYPE__ANNOTATIONS:
-			case TypesPackage.DECLARED_TYPE__DECLARED_PARAMETERIZED_TYPES:
 			case TypesPackage.DECLARED_TYPE__SUPER_TYPES:
 			case TypesPackage.DECLARED_TYPE__MEMBERS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
@@ -217,53 +215,18 @@ public class DeclaredTypeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.MEMBER__DECLARED_PARAMETERIZED_TYPES,
-				 TypesFactory.eINSTANCE.createParameterizedType()));
+				(TypesPackage.Literals.DECLARED_TYPE__SUPER_TYPES,
+				 TypesFactory.eINSTANCE.createSimpleTypeReference()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.DECLARED_TYPE__SUPER_TYPES,
-				 TypesFactory.eINSTANCE.createVoid()));
+				 TypesFactory.eINSTANCE.createParameterizedTypeReference()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.DECLARED_TYPE__SUPER_TYPES,
-				 TypesFactory.eINSTANCE.createPrimitiveType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.DECLARED_TYPE__SUPER_TYPES,
-				 TypesFactory.eINSTANCE.createWildcard()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.DECLARED_TYPE__SUPER_TYPES,
-				 TypesFactory.eINSTANCE.createArrayType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.DECLARED_TYPE__SUPER_TYPES,
-				 TypesFactory.eINSTANCE.createTypeParameter()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.DECLARED_TYPE__SUPER_TYPES,
-				 TypesFactory.eINSTANCE.createAnnotationType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.DECLARED_TYPE__SUPER_TYPES,
-				 TypesFactory.eINSTANCE.createEnumerationType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.DECLARED_TYPE__SUPER_TYPES,
-				 TypesFactory.eINSTANCE.createGenericType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.DECLARED_TYPE__SUPER_TYPES,
-				 TypesFactory.eINSTANCE.createParameterizedType()));
+				 TypesFactory.eINSTANCE.createGenericArrayTypeReference()));
 
 		newChildDescriptors.add
 			(createChildParameter
@@ -294,31 +257,6 @@ public class DeclaredTypeItemProvider
 			(createChildParameter
 				(TypesPackage.Literals.DECLARED_TYPE__MEMBERS,
 				 TypesFactory.eINSTANCE.createOperation()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == TypesPackage.Literals.COMPONENT_TYPE__ARRAY_TYPE ||
-			childFeature == TypesPackage.Literals.DECLARED_TYPE__SUPER_TYPES ||
-			childFeature == TypesPackage.Literals.MEMBER__DECLARED_PARAMETERIZED_TYPES ||
-			childFeature == TypesPackage.Literals.DECLARED_TYPE__MEMBERS;
-
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
 	}
 
 }

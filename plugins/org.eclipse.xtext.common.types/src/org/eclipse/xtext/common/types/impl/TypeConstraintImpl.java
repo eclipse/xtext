@@ -16,9 +16,9 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import org.eclipse.xtext.common.types.ConstrainedType;
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.ConstraintOwner;
 import org.eclipse.xtext.common.types.TypeConstraint;
+import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
@@ -28,8 +28,8 @@ import org.eclipse.xtext.common.types.TypesPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.impl.TypeConstraintImpl#getReferencedType <em>Referenced Type</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.impl.TypeConstraintImpl#getConstrainedType <em>Constrained Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.TypeConstraintImpl#getTypeReference <em>Type Reference</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.TypeConstraintImpl#getOwner <em>Owner</em>}</li>
  * </ul>
  * </p>
  *
@@ -37,14 +37,14 @@ import org.eclipse.xtext.common.types.TypesPackage;
  */
 public abstract class TypeConstraintImpl extends IdentifyableElementImpl implements TypeConstraint {
 	/**
-	 * The cached value of the '{@link #getReferencedType() <em>Referenced Type</em>}' reference.
+	 * The cached value of the '{@link #getTypeReference() <em>Type Reference</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getReferencedType()
+	 * @see #getTypeReference()
 	 * @generated
 	 * @ordered
 	 */
-	protected Type referencedType;
+	protected TypeReference typeReference;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -69,56 +69,22 @@ public abstract class TypeConstraintImpl extends IdentifyableElementImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Type getReferencedType() {
-		if (referencedType != null && referencedType.eIsProxy()) {
-			InternalEObject oldReferencedType = (InternalEObject)referencedType;
-			referencedType = (Type)eResolveProxy(oldReferencedType);
-			if (referencedType != oldReferencedType) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.TYPE_CONSTRAINT__REFERENCED_TYPE, oldReferencedType, referencedType));
-			}
+	public TypeReference getTypeReference() {
+		return typeReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetTypeReference(TypeReference newTypeReference, NotificationChain msgs) {
+		TypeReference oldTypeReference = typeReference;
+		typeReference = newTypeReference;
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE_CONSTRAINT__TYPE_REFERENCE, oldTypeReference, newTypeReference);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
-		return referencedType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Type basicGetReferencedType() {
-		return referencedType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setReferencedType(Type newReferencedType) {
-		Type oldReferencedType = referencedType;
-		referencedType = newReferencedType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE_CONSTRAINT__REFERENCED_TYPE, oldReferencedType, referencedType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public ConstrainedType getConstrainedType() {
-		if (eContainerFeatureID() != TypesPackage.TYPE_CONSTRAINT__CONSTRAINED_TYPE) return null;
-		return (ConstrainedType)eContainer();
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public NotificationChain basicSetConstrainedType(ConstrainedType newConstrainedType, NotificationChain msgs) {
-		msgs = eBasicSetContainer((InternalEObject)newConstrainedType, TypesPackage.TYPE_CONSTRAINT__CONSTRAINED_TYPE, msgs);
 		return msgs;
 	}
 
@@ -127,20 +93,59 @@ public abstract class TypeConstraintImpl extends IdentifyableElementImpl impleme
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setConstrainedType(ConstrainedType newConstrainedType) {
-		if (newConstrainedType != eInternalContainer() || (eContainerFeatureID() != TypesPackage.TYPE_CONSTRAINT__CONSTRAINED_TYPE && newConstrainedType != null)) {
-			if (EcoreUtil.isAncestor(this, newConstrainedType))
+	public void setTypeReference(TypeReference newTypeReference) {
+		if (newTypeReference != typeReference) {
+			NotificationChain msgs = null;
+			if (typeReference != null)
+				msgs = ((InternalEObject)typeReference).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.TYPE_CONSTRAINT__TYPE_REFERENCE, null, msgs);
+			if (newTypeReference != null)
+				msgs = ((InternalEObject)newTypeReference).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.TYPE_CONSTRAINT__TYPE_REFERENCE, null, msgs);
+			msgs = basicSetTypeReference(newTypeReference, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE_CONSTRAINT__TYPE_REFERENCE, newTypeReference, newTypeReference));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ConstraintOwner getOwner() {
+		if (eContainerFeatureID() != TypesPackage.TYPE_CONSTRAINT__OWNER) return null;
+		return (ConstraintOwner)eContainer();
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public NotificationChain basicSetOwner(ConstraintOwner newOwner, NotificationChain msgs) {
+		msgs = eBasicSetContainer((InternalEObject)newOwner, TypesPackage.TYPE_CONSTRAINT__OWNER, msgs);
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setOwner(ConstraintOwner newOwner) {
+		if (newOwner != eInternalContainer() || (eContainerFeatureID() != TypesPackage.TYPE_CONSTRAINT__OWNER && newOwner != null)) {
+			if (EcoreUtil.isAncestor(this, newOwner))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
 			NotificationChain msgs = null;
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
-			if (newConstrainedType != null)
-				msgs = ((InternalEObject)newConstrainedType).eInverseAdd(this, TypesPackage.CONSTRAINED_TYPE__CONSTRAINTS, ConstrainedType.class, msgs);
-			msgs = basicSetConstrainedType(newConstrainedType, msgs);
+			if (newOwner != null)
+				msgs = ((InternalEObject)newOwner).eInverseAdd(this, TypesPackage.CONSTRAINT_OWNER__CONSTRAINTS, ConstraintOwner.class, msgs);
+			msgs = basicSetOwner(newOwner, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE_CONSTRAINT__CONSTRAINED_TYPE, newConstrainedType, newConstrainedType));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.TYPE_CONSTRAINT__OWNER, newOwner, newOwner));
 	}
 
 	/**
@@ -151,10 +156,10 @@ public abstract class TypeConstraintImpl extends IdentifyableElementImpl impleme
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TypesPackage.TYPE_CONSTRAINT__CONSTRAINED_TYPE:
+			case TypesPackage.TYPE_CONSTRAINT__OWNER:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetConstrainedType((ConstrainedType)otherEnd, msgs);
+				return basicSetOwner((ConstraintOwner)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -167,8 +172,10 @@ public abstract class TypeConstraintImpl extends IdentifyableElementImpl impleme
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TypesPackage.TYPE_CONSTRAINT__CONSTRAINED_TYPE:
-				return basicSetConstrainedType(null, msgs);
+			case TypesPackage.TYPE_CONSTRAINT__TYPE_REFERENCE:
+				return basicSetTypeReference(null, msgs);
+			case TypesPackage.TYPE_CONSTRAINT__OWNER:
+				return basicSetOwner(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -181,8 +188,8 @@ public abstract class TypeConstraintImpl extends IdentifyableElementImpl impleme
 	@Override
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
-			case TypesPackage.TYPE_CONSTRAINT__CONSTRAINED_TYPE:
-				return eInternalContainer().eInverseRemove(this, TypesPackage.CONSTRAINED_TYPE__CONSTRAINTS, ConstrainedType.class, msgs);
+			case TypesPackage.TYPE_CONSTRAINT__OWNER:
+				return eInternalContainer().eInverseRemove(this, TypesPackage.CONSTRAINT_OWNER__CONSTRAINTS, ConstraintOwner.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -195,11 +202,10 @@ public abstract class TypeConstraintImpl extends IdentifyableElementImpl impleme
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypesPackage.TYPE_CONSTRAINT__REFERENCED_TYPE:
-				if (resolve) return getReferencedType();
-				return basicGetReferencedType();
-			case TypesPackage.TYPE_CONSTRAINT__CONSTRAINED_TYPE:
-				return getConstrainedType();
+			case TypesPackage.TYPE_CONSTRAINT__TYPE_REFERENCE:
+				return getTypeReference();
+			case TypesPackage.TYPE_CONSTRAINT__OWNER:
+				return getOwner();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -212,11 +218,11 @@ public abstract class TypeConstraintImpl extends IdentifyableElementImpl impleme
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypesPackage.TYPE_CONSTRAINT__REFERENCED_TYPE:
-				setReferencedType((Type)newValue);
+			case TypesPackage.TYPE_CONSTRAINT__TYPE_REFERENCE:
+				setTypeReference((TypeReference)newValue);
 				return;
-			case TypesPackage.TYPE_CONSTRAINT__CONSTRAINED_TYPE:
-				setConstrainedType((ConstrainedType)newValue);
+			case TypesPackage.TYPE_CONSTRAINT__OWNER:
+				setOwner((ConstraintOwner)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -230,11 +236,11 @@ public abstract class TypeConstraintImpl extends IdentifyableElementImpl impleme
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypesPackage.TYPE_CONSTRAINT__REFERENCED_TYPE:
-				setReferencedType((Type)null);
+			case TypesPackage.TYPE_CONSTRAINT__TYPE_REFERENCE:
+				setTypeReference((TypeReference)null);
 				return;
-			case TypesPackage.TYPE_CONSTRAINT__CONSTRAINED_TYPE:
-				setConstrainedType((ConstrainedType)null);
+			case TypesPackage.TYPE_CONSTRAINT__OWNER:
+				setOwner((ConstraintOwner)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -248,18 +254,18 @@ public abstract class TypeConstraintImpl extends IdentifyableElementImpl impleme
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypesPackage.TYPE_CONSTRAINT__REFERENCED_TYPE:
-				return referencedType != null;
-			case TypesPackage.TYPE_CONSTRAINT__CONSTRAINED_TYPE:
-				return getConstrainedType() != null;
+			case TypesPackage.TYPE_CONSTRAINT__TYPE_REFERENCE:
+				return typeReference != null;
+			case TypesPackage.TYPE_CONSTRAINT__OWNER:
+				return getOwner() != null;
 		}
 		return super.eIsSet(featureID);
 	}
 	
 	@Override
 	public String getCanonicalName() {
-		if (referencedType != null) {
-			return getReferencedType().getCanonicalName();
+		if (typeReference != null) {
+			return getTypeReference().getCanonicalName();
 		}
 		return null;
 	}

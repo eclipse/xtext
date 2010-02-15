@@ -16,44 +16,42 @@ abstract class Type extends IdentifyableElement {
 class Void extends Type {
 }
 
-abstract class ConstrainedType extends Type {
-  val TypeConstraint[*]#constrainedType constraints;
-}
-
 abstract class ComponentType extends Type {
-  val ArrayType#componentType arrayType;
+  val ArrayType arrayType;
 }
 
 class PrimitiveType extends ComponentType {
   attr String name;
 }
 
-class Wildcard extends ConstrainedType {
-}
-
 class ArrayType extends ComponentType {
   op int getDimensions();
-  ref ComponentType#arrayType componentType;
+  val TypeReference componentType;
 }
 
 abstract class DeclaredType extends ComponentType, Member {
   op String getPackageName();
-  ref Type[*] superTypes;
+  val TypeReference[*] superTypes;
   val Member[*]#declaringType members;
 }
 
-abstract class TypeParameterDeclarator extends IdentifyableElement {
-  val TypeParameter[*]#declarator typeParameters;
-}
-
-class TypeParameter extends ComponentType, ConstrainedType {
+class TypeParameter extends ComponentType, ConstraintOwner {
   attr String name;
   ref TypeParameterDeclarator#typeParameters declarator;
 }
 
+abstract class TypeParameterDeclarator {
+  val TypeParameter[*]#declarator typeParameters;
+}
+
+abstract class ConstraintOwner extends IdentifyableElement {
+  op String getCanonicalName();
+  val TypeConstraint[*]#owner constraints;
+}
+
 abstract class TypeConstraint extends IdentifyableElement {
-  ref Type referencedType;
-  ref ConstrainedType#constraints constrainedType;
+  val TypeReference typeReference;
+  ref ConstraintOwner#constraints owner;
 }
 
 class UpperBound extends TypeConstraint {
@@ -78,23 +76,33 @@ class GenericType extends DeclaredType, TypeParameterDeclarator {
   op boolean isInstantiateable(); 
 }
 
-class ParameterizedType extends ComponentType {
-  attr String fullyQualifiedName;
+abstract class TypeReference extends IdentifyableElement {
+  op Type getType();
+}
+
+class SimpleTypeReference extends TypeReference {
+  ref Type type;
+}
+
+class ParameterizedTypeReference extends TypeReference {
+//  attr String fullyQualifiedName;
   val TypeArgument[*]#declarator arguments;
-  ref Member#declaredParameterizedTypes declarator;
-  ref Type rawType;
+  ref Type type;
+}
+
+class GenericArrayTypeReference extends TypeReference {
+  val ArrayType type;  
 }
 
 abstract class TypeArgument extends IdentifyableElement {
-  ref ParameterizedType#arguments declarator;
+  ref ParameterizedTypeReference#arguments declarator;
 }
 
-class WildcardTypeArgument extends TypeArgument {
-  val Wildcard wildcard;
+class WildcardTypeArgument extends TypeArgument, ConstraintOwner {
 }
 
 class ReferenceTypeArgument extends TypeArgument {
-  ref Type type;
+  val TypeReference typeReference;
 }
 
 abstract class Member extends AnnotationTarget, IdentifyableElement {
@@ -102,7 +110,6 @@ abstract class Member extends AnnotationTarget, IdentifyableElement {
   attr Visibility visibility;
   attr String fullyQualifiedName;
   op String getSimpleName();
-  val ParameterizedType[*]#declarator declaredParameterizedTypes;
 }
 
 enum Visibility {
@@ -115,12 +122,12 @@ enum Visibility {
 class Field extends Member {
   attr boolean static;
   attr boolean final;
-  ref Type type;
+  val TypeReference type;
 }
 
 abstract class Executable extends Member, TypeParameterDeclarator {
   val FormalParameter[*] parameters;
-  ref Type[*] exceptions;
+  val TypeReference[*] exceptions;
 }
 
 class Constructor extends Executable {
@@ -130,12 +137,12 @@ class Operation extends Executable {
   attr boolean static;
   attr boolean final;
   attr boolean ~abstract;
-  ref Type returnType;
+  val TypeReference returnType;
 }
 
 class FormalParameter extends IdentifyableElement {
   attr String name;
-  ref Type parameterType;
+  val TypeReference parameterType;
 }
 
 abstract class AnnotationTarget {

@@ -130,10 +130,16 @@ public class GenericTypeTest extends TestCase {
 		assertTrue(Iterables.isEmpty(interfaces));
 	}
 	
+	private TypeReference createReferenceTo(Type type) {
+		SimpleTypeReference result = TypesFactory.eINSTANCE.createSimpleTypeReference();
+		result.setType(type);
+		return result;
+	}
+	
 	public void testGetExtendedInterfaces_02() {
 		GenericType interfaceType = TypesFactory.eINSTANCE.createGenericType();
 		interfaceType.setInterface(true);
-		genericType.getSuperTypes().add(interfaceType);
+		genericType.getSuperTypes().add(createReferenceTo(interfaceType));
 		Iterable<Type> interfaces = genericType.getExtendedInterfaces();
 		assertSame(interfaceType, Iterables.getOnlyElement(interfaces));
 	}
@@ -145,9 +151,9 @@ public class GenericTypeTest extends TestCase {
 		firstInterfaceType.setInterface(true);
 		secondInterfaceType.setInterface(true);
 		classType.setInterface(false);
-		genericType.getSuperTypes().add(firstInterfaceType);
-		genericType.getSuperTypes().add(secondInterfaceType);
-		genericType.getSuperTypes().add(classType);
+		genericType.getSuperTypes().add(createReferenceTo(firstInterfaceType));
+		genericType.getSuperTypes().add(createReferenceTo(secondInterfaceType));
+		genericType.getSuperTypes().add(createReferenceTo(classType));
 		Iterable<Type> interfaces = genericType.getExtendedInterfaces();
 		assertEquals(2, Iterables.size(interfaces));
 		assertTrue(Iterables.elementsEqual(interfaces, Lists.newArrayList(firstInterfaceType, secondInterfaceType)));
@@ -156,22 +162,12 @@ public class GenericTypeTest extends TestCase {
 	public void testGetExtendedInterfaces_04() {
 		Iterable<Type> interfaces = genericType.getExtendedInterfaces();
 		GenericType interfaceType = TypesFactory.eINSTANCE.createGenericType();
-		genericType.getSuperTypes().add(interfaceType);
+		genericType.getSuperTypes().add(createReferenceTo(interfaceType));
 		assertSame(interfaces, genericType.getExtendedInterfaces());
 		assertTrue(Iterables.isEmpty(interfaces));
 		interfaceType.setInterface(true);
 		assertSame(interfaces, genericType.getExtendedInterfaces());
 		assertSame(interfaceType, Iterables.getOnlyElement(interfaces));
-	}
-	
-	public void testGetExtendedInterfaces_05() {
-		GenericType interfaceType = TypesFactory.eINSTANCE.createGenericType();
-		interfaceType.setInterface(true);
-		ParameterizedType parameterizedType = TypesFactory.eINSTANCE.createParameterizedType();
-		parameterizedType.setRawType(interfaceType);
-		genericType.getSuperTypes().add(parameterizedType);
-		Iterable<Type> interfaces = genericType.getExtendedInterfaces();
-		assertSame(parameterizedType, Iterables.getOnlyElement(interfaces));
 	}
 	
 	public void testGetExtendedClasses_01() {
@@ -183,7 +179,7 @@ public class GenericTypeTest extends TestCase {
 	public void testGetExtendedClasses_02() {
 		GenericType classType = TypesFactory.eINSTANCE.createGenericType();
 		classType.setInterface(false);
-		genericType.getSuperTypes().add(classType);
+		genericType.getSuperTypes().add(createReferenceTo(classType));
 		Iterable<Type> classes = genericType.getExtendedClasses();
 		assertSame(classType, Iterables.getOnlyElement(classes));
 	}
@@ -195,9 +191,9 @@ public class GenericTypeTest extends TestCase {
 		firstInterfaceType.setInterface(true);
 		secondInterfaceType.setInterface(true);
 		classType.setInterface(false);
-		genericType.getSuperTypes().add(firstInterfaceType);
-		genericType.getSuperTypes().add(secondInterfaceType);
-		genericType.getSuperTypes().add(classType);
+		genericType.getSuperTypes().add(createReferenceTo(firstInterfaceType));
+		genericType.getSuperTypes().add(createReferenceTo(secondInterfaceType));
+		genericType.getSuperTypes().add(createReferenceTo(classType));
 		Iterable<Type> classes = genericType.getExtendedClasses();
 		assertSame(classType, Iterables.getOnlyElement(classes));
 	}
@@ -205,23 +201,12 @@ public class GenericTypeTest extends TestCase {
 	public void testGetExtendedClasses_04() {
 		Iterable<Type> classes = genericType.getExtendedClasses();
 		GenericType superType = TypesFactory.eINSTANCE.createGenericType();
-		genericType.getSuperTypes().add(superType);
-		assertSame(classes, genericType.getExtendedInterfaces());
+		genericType.getSuperTypes().add(createReferenceTo(superType));
+		assertSame(classes, genericType.getExtendedClasses());
 		assertSame(superType, Iterables.getOnlyElement(classes));
 		superType.setInterface(true);
-		assertSame(classes, genericType.getExtendedInterfaces());
+		assertSame(classes, genericType.getExtendedClasses());
 		assertTrue(Iterables.isEmpty(classes));
 	}
 	
-	public void testGetExtendedClasses_05() {
-		GenericType superType = TypesFactory.eINSTANCE.createGenericType();
-		superType.setInterface(true);
-		ParameterizedType parameterizedType = TypesFactory.eINSTANCE.createParameterizedType();
-		parameterizedType.setRawType(superType);
-		genericType.getSuperTypes().add(parameterizedType);
-		Iterable<Type> classes = genericType.getExtendedClasses();
-		assertTrue(Iterables.isEmpty(classes));
-		superType.setInterface(false);
-		assertSame(parameterizedType, Iterables.getOnlyElement(classes));
-	}
 }

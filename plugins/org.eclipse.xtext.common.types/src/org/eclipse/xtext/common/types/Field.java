@@ -80,29 +80,29 @@ public interface Field extends Member {
 	void setFinal(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Type</b></em>' reference.
+	 * Returns the value of the '<em><b>Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Type</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' reference.
-	 * @see #setType(Type)
+	 * @return the value of the '<em>Type</em>' containment reference.
+	 * @see #setType(TypeReference)
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getField_Type()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
-	Type getType();
+	TypeReference getType();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.common.types.Field#getType <em>Type</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.Field#getType <em>Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' reference.
+	 * @param value the new value of the '<em>Type</em>' containment reference.
 	 * @see #getType()
 	 * @generated
 	 */
-	void setType(Type value);
+	void setType(TypeReference value);
 
 } // Field

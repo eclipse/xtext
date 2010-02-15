@@ -29,7 +29,7 @@ import org.eclipse.xtext.common.types.FormalParameter;
 import org.eclipse.xtext.common.types.GenericType;
 import org.eclipse.xtext.common.types.LowerBound;
 import org.eclipse.xtext.common.types.Operation;
-import org.eclipse.xtext.common.types.ParameterizedType;
+import org.eclipse.xtext.common.types.ParameterizedTypeReference;
 import org.eclipse.xtext.common.types.PrimitiveType;
 import org.eclipse.xtext.common.types.ReferenceTypeArgument;
 import org.eclipse.xtext.common.types.Type;
@@ -37,10 +37,10 @@ import org.eclipse.xtext.common.types.TypeArgument;
 import org.eclipse.xtext.common.types.TypeConstraint;
 import org.eclipse.xtext.common.types.TypeParameter;
 import org.eclipse.xtext.common.types.TypeParameterDeclarator;
+import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.UpperBound;
 import org.eclipse.xtext.common.types.Visibility;
-import org.eclipse.xtext.common.types.Wildcard;
 import org.eclipse.xtext.common.types.WildcardTypeArgument;
 import org.eclipse.xtext.common.types.access.ITypeProvider;
 import org.eclipse.xtext.common.types.testSetups.Fields;
@@ -154,7 +154,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
 		Operation length = (Operation) type.eResource().getEObject("java.lang.CharSequence.length()");
 		assertNotNull(length);
-		Type returnType = length.getReturnType();
+		Type returnType = length.getReturnType().getType();
 		assertNotNull(returnType);
 		assertFalse(returnType.eIsProxy());
 		assertEquals("int", returnType.getCanonicalName());
@@ -165,23 +165,23 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
 		Operation charAt = (Operation) type.eResource().getEObject("java.lang.CharSequence.charAt(int)");
 		assertNotNull(charAt);
-		Type returnType = charAt.getReturnType();
+		Type returnType = charAt.getReturnType().getType();
 		assertNotNull(returnType);
 		assertFalse(returnType.eIsProxy());
 		assertEquals("char", returnType.getCanonicalName());
 		assertEquals(1, charAt.getParameters().size());
 		Type intType = getTypeProvider().findTypeByName("int");
-		assertSame(intType, charAt.getParameters().get(0).getParameterType());
+		assertSame(intType, charAt.getParameters().get(0).getParameterType().getType());
 	}
 	
 	public void testFindTypeByName_javaLangNumber_01() {
 		String typeName = Number.class.getName();
 		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
 		assertEquals(type.getSuperTypes().toString(), 2, type.getSuperTypes().size());
-		Type objectType = type.getSuperTypes().get(0);
+		Type objectType = type.getSuperTypes().get(0).getType();
 		assertFalse("isProxy: "+ objectType, objectType.eIsProxy());
 		assertEquals(Object.class.getName(), objectType.getCanonicalName());
-		Type serializableType = type.getSuperTypes().get(1);
+		Type serializableType = type.getSuperTypes().get(1).getType();
 		assertFalse("isProxy: "+ serializableType, serializableType.eIsProxy());
 		assertEquals(Serializable.class.getName(), serializableType.getCanonicalName());
 		diagnose(type);
@@ -211,10 +211,10 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		TypeConstraint typeConstraint = typeVariable.getConstraints().get(0);
 		assertTrue(typeConstraint instanceof UpperBound);
 		UpperBound upperBound = (UpperBound) typeConstraint;
-		assertSame(typeVariable, upperBound.getConstrainedType());
-		assertNotNull(upperBound.getReferencedType());
-		assertFalse(upperBound.getReferencedType().eIsProxy());
-		assertEquals(Object.class.getName(), upperBound.getReferencedType().getCanonicalName());
+		assertSame(typeVariable, upperBound.getOwner());
+		assertNotNull(upperBound.getTypeReference());
+		assertFalse(upperBound.getTypeReference().getType().eIsProxy());
+		assertEquals(Object.class.getName(), upperBound.getTypeReference().getCanonicalName());
 		diagnose(type);
 	}
 	
@@ -248,7 +248,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		Operation addAll = (Operation) type.eResource().getEObject("java.util.List.addAll(java.util.Collection)");
 		assertEquals(1, addAll.getParameters().size());
 		assertEquals(getCollectionParamName(), addAll.getParameters().get(0).getName());
-		Type parameterType = addAll.getParameters().get(0).getParameterType();
+		Type parameterType = addAll.getParameters().get(0).getParameterType().getType();
 		assertFalse(parameterType.toString(), parameterType.eIsProxy());
 	}
 	
@@ -258,7 +258,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		Operation containsAll = (Operation) type.eResource().getEObject("java.util.List.containsAll(java.util.Collection)");
 		assertEquals(1, containsAll.getParameters().size());
 		assertEquals(getCollectionParamName(), containsAll.getParameters().get(0).getName());
-		Type parameterType = containsAll.getParameters().get(0).getParameterType();
+		Type parameterType = containsAll.getParameters().get(0).getParameterType().getType();
 		assertFalse(parameterType.toString(), parameterType.eIsProxy());
 	}
 	
@@ -266,19 +266,17 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		String typeName = List.class.getName();
 		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
 		assertEquals(1, type.getSuperTypes().size());
-		Type superType = type.getSuperTypes().get(0);
-		assertFalse(superType.eIsProxy());
+		ParameterizedTypeReference superType = (ParameterizedTypeReference) type.getSuperTypes().get(0);
+		assertFalse(superType.getType().eIsProxy());
 		assertEquals("java.util.Collection<E>", superType.getCanonicalName());
-		assertTrue(superType instanceof ParameterizedType);
 		assertEquals(1, type.getTypeParameters().size());
-		ParameterizedType parameterizedSuperType = (ParameterizedType) superType;
-		Type rawType = parameterizedSuperType.getRawType();
+		Type rawType = superType.getType();
 		assertFalse(rawType.eIsProxy());
-		assertEquals(1, parameterizedSuperType.getArguments().size());
-		TypeArgument superTypeParameter = parameterizedSuperType.getArguments().get(0);
+		assertEquals(1, superType.getArguments().size());
+		TypeArgument superTypeParameter = superType.getArguments().get(0);
 		assertTrue(superTypeParameter instanceof ReferenceTypeArgument);
 		ReferenceTypeArgument castedSuperTypeParameter = (ReferenceTypeArgument) superTypeParameter;
-		Type parameterType = castedSuperTypeParameter.getType();
+		Type parameterType = castedSuperTypeParameter.getTypeReference().getType();
 		assertFalse(parameterType.eIsProxy());
 		assertSame(parameterType, type.getTypeParameters().get(0));
 	}
@@ -443,19 +441,19 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 	
 	public void test_twoListParamsNoResult_01() {
 		Operation twoListParamsNoResult = getMethodFromParameterizedMethods("twoListParamsNoResult(java.util.List,java.util.List)");
-		assertEquals(1, twoListParamsNoResult.getDeclaredParameterizedTypes().size());
+		assertEquals(2, twoListParamsNoResult.getParameters().size());
 	}
 	
 	public void test_twoListParamsNoResult_02() {
 		Operation twoListParamsNoResult = getMethodFromParameterizedMethods("twoListParamsNoResult(java.util.List,java.util.List)");
 		FormalParameter firstParam = twoListParamsNoResult.getParameters().get(0);
-		Type paramType = firstParam.getParameterType();
+		TypeReference paramType = firstParam.getParameterType();
 		assertNotNull(paramType);
-		assertFalse(paramType.eIsProxy());
+		assertFalse(paramType.getType().eIsProxy());
 		assertEquals("java.util.List<T>", paramType.getCanonicalName());
-		assertTrue(paramType instanceof ParameterizedType);
-		ParameterizedType parameterized = (ParameterizedType) paramType;
-		Type rawType = parameterized.getRawType();
+		assertTrue(paramType instanceof ParameterizedTypeReference);
+		ParameterizedTypeReference parameterized = (ParameterizedTypeReference) paramType;
+		Type rawType = parameterized.getType();
 		assertFalse(rawType.eIsProxy());
 		assertEquals("java.util.List", rawType.getCanonicalName());
 	}
@@ -463,13 +461,13 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 	public void test_twoListParamsNoResult_03() {
 		Operation twoListParamsNoResult = getMethodFromParameterizedMethods("twoListParamsNoResult(java.util.List,java.util.List)");
 		FormalParameter firstParam = twoListParamsNoResult.getParameters().get(0);
-		Type paramType = firstParam.getParameterType();
-		ParameterizedType parameterized = (ParameterizedType) paramType;
+		TypeReference paramType = firstParam.getParameterType();
+		ParameterizedTypeReference parameterized = (ParameterizedTypeReference) paramType;
 		assertEquals(1, parameterized.getArguments().size());
 		TypeArgument typeParameter = parameterized.getArguments().get(0);
 		assertTrue(typeParameter instanceof ReferenceTypeArgument);
 		ReferenceTypeArgument referenceTypeParameter = (ReferenceTypeArgument) typeParameter;
-		Type referencedType = referenceTypeParameter.getType();
+		Type referencedType = referenceTypeParameter.getTypeReference().getType();
 		assertFalse(referencedType.eIsProxy());
 		assertTrue(referencedType instanceof TypeParameter);
 		TypeParameter typeVar = (TypeParameter) referencedType;
@@ -479,31 +477,30 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 
 	public void test_twoListParamsListResult_01() {
 		Operation twoListParamsListResult = getMethodFromParameterizedMethods("twoListParamsListResult(java.util.List,java.util.List)");
-		assertEquals(1, twoListParamsListResult.getDeclaredParameterizedTypes().size());
+		assertEquals(2, twoListParamsListResult.getParameters().size());
 	}
 	
 	public void test_twoListParamsListResult_02() {
 		Operation twoListParamsListResult = getMethodFromParameterizedMethods("twoListParamsListResult(java.util.List,java.util.List)");
-		Type returnType = twoListParamsListResult.getReturnType();
+		TypeReference returnType = twoListParamsListResult.getReturnType();
 		assertNotNull(returnType);
-		assertFalse(returnType.eIsProxy());
 		assertEquals("java.util.List<T>", returnType.getCanonicalName());
-		assertTrue(returnType instanceof ParameterizedType);
-		ParameterizedType parameterized = (ParameterizedType) returnType;
-		Type rawType = parameterized.getRawType();
+		assertTrue(returnType instanceof ParameterizedTypeReference);
+		ParameterizedTypeReference parameterized = (ParameterizedTypeReference) returnType;
+		Type rawType = parameterized.getType();
 		assertFalse(rawType.eIsProxy());
 		assertEquals("java.util.List", rawType.getCanonicalName());
 	}
 	
 	public void test_twoListParamsListResult_03() {
 		Operation twoListParamsListResult = getMethodFromParameterizedMethods("twoListParamsListResult(java.util.List,java.util.List)");
-		Type returnType = twoListParamsListResult.getReturnType();
-		ParameterizedType parameterized = (ParameterizedType) returnType;
+		TypeReference returnType = twoListParamsListResult.getReturnType();
+		ParameterizedTypeReference parameterized = (ParameterizedTypeReference) returnType;
 		assertEquals(1, parameterized.getArguments().size());
 		TypeArgument typeParameter = parameterized.getArguments().get(0);
 		assertTrue(typeParameter instanceof ReferenceTypeArgument);
 		ReferenceTypeArgument referenceTypeParameter = (ReferenceTypeArgument) typeParameter;
-		Type referencedType = referenceTypeParameter.getType();
+		Type referencedType = referenceTypeParameter.getTypeReference().getType();
 		assertFalse(referencedType.eIsProxy());
 		assertTrue(referencedType instanceof TypeParameter);
 		TypeParameter typeVar = (TypeParameter) referencedType;
@@ -513,19 +510,18 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 	
 	public void test_twoListWildcardsNoResult_01() {
 		Operation twoListWildcardsNoResult = getMethodFromParameterizedMethods("twoListWildcardsNoResult(java.util.List,java.util.List)");
-		assertEquals(1, twoListWildcardsNoResult.getDeclaredParameterizedTypes().size());
+		assertEquals(2, twoListWildcardsNoResult.getParameters().size());
 	}
 	
 	public void test_twoListWildcardsNoResult_02() {
 		Operation twoListWildcardsNoResult = getMethodFromParameterizedMethods("twoListWildcardsNoResult(java.util.List,java.util.List)");
 		FormalParameter firstParam = twoListWildcardsNoResult.getParameters().get(0);
-		Type paramType = firstParam.getParameterType();
+		TypeReference paramType = firstParam.getParameterType();
 		assertNotNull(paramType);
-		assertFalse(paramType.eIsProxy());
 		assertEquals("java.util.List<? extends java.lang.Object>", paramType.getCanonicalName());
-		assertTrue(paramType instanceof ParameterizedType);
-		ParameterizedType parameterized = (ParameterizedType) paramType;
-		Type rawType = parameterized.getRawType();
+		assertTrue(paramType instanceof ParameterizedTypeReference);
+		ParameterizedTypeReference parameterized = (ParameterizedTypeReference) paramType;
+		Type rawType = parameterized.getType();
 		assertFalse(rawType.eIsProxy());
 		assertEquals("java.util.List", rawType.getCanonicalName());
 	}
@@ -533,143 +529,141 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 	public void test_twoListWildcardsNoResult_03() {
 		Operation twoListWildcardsNoResult = getMethodFromParameterizedMethods("twoListWildcardsNoResult(java.util.List,java.util.List)");
 		FormalParameter firstParam = twoListWildcardsNoResult.getParameters().get(0);
-		Type paramType = firstParam.getParameterType();
-		ParameterizedType parameterized = (ParameterizedType) paramType;
+		TypeReference paramType = firstParam.getParameterType();
+		ParameterizedTypeReference parameterized = (ParameterizedTypeReference) paramType;
 		assertEquals(1, parameterized.getArguments().size());
 		TypeArgument typeParameter = parameterized.getArguments().get(0);
 		assertTrue(typeParameter instanceof WildcardTypeArgument);
-		WildcardTypeArgument wildcardTypeParameter = (WildcardTypeArgument) typeParameter;
-		Wildcard wildcard = wildcardTypeParameter.getWildcard();
+		WildcardTypeArgument wildcard = (WildcardTypeArgument) typeParameter;
 		assertEquals(1, wildcard.getConstraints().size());
 		assertTrue(wildcard.getConstraints().get(0) instanceof UpperBound);
 		UpperBound upperBound = (UpperBound) wildcard.getConstraints().get(0);
-		assertNotNull(upperBound.getReferencedType());
-		Type upperBoundType = upperBound.getReferencedType();
+		assertNotNull(upperBound.getTypeReference());
+		Type upperBoundType = upperBound.getTypeReference().getType();
 		assertFalse(upperBoundType.eIsProxy());
 		assertEquals("java.lang.Object", upperBoundType.getCanonicalName());
 	}
 	
 	public void test_twoListWildcardsListResult_01() {
 		Operation twoListWildcardsListResult = getMethodFromParameterizedMethods("twoListWildcardsListResult(java.util.List,java.util.List)");
-		assertEquals(1, twoListWildcardsListResult.getDeclaredParameterizedTypes().size());
+		assertEquals(2, twoListWildcardsListResult.getParameters().size());
 	}
 	
 	public void test_twoListWildcardsListResult_02() {
 		Operation twoListWildcardsListResult = getMethodFromParameterizedMethods("twoListWildcardsListResult(java.util.List,java.util.List)");
-		Type returnType = twoListWildcardsListResult.getReturnType();
+		TypeReference returnType = twoListWildcardsListResult.getReturnType();
 		assertNotNull(returnType);
 		assertFalse(returnType.eIsProxy());
 		assertEquals("java.util.List<? extends java.lang.Object>", returnType.getCanonicalName());
-		assertTrue(returnType instanceof ParameterizedType);
-		ParameterizedType parameterized = (ParameterizedType) returnType;
-		Type rawType = parameterized.getRawType();
+		assertTrue(returnType instanceof ParameterizedTypeReference);
+		ParameterizedTypeReference parameterized = (ParameterizedTypeReference) returnType;
+		Type rawType = parameterized.getType();
 		assertFalse(rawType.eIsProxy());
 		assertEquals("java.util.List", rawType.getCanonicalName());
 	}
 	
 	public void test_twoListWildcardsListResult_03() {
 		Operation twoListWildcardsListResult = getMethodFromParameterizedMethods("twoListWildcardsListResult(java.util.List,java.util.List)");
-		Type returnType = twoListWildcardsListResult.getReturnType();
-		ParameterizedType parameterized = (ParameterizedType) returnType;
+		TypeReference returnType = twoListWildcardsListResult.getReturnType();
+		ParameterizedTypeReference parameterized = (ParameterizedTypeReference) returnType;
 		assertEquals(1, parameterized.getArguments().size());
 		TypeArgument typeParameter = parameterized.getArguments().get(0);
 		assertTrue(typeParameter instanceof WildcardTypeArgument);
-		WildcardTypeArgument wildcardTypeParameter = (WildcardTypeArgument) typeParameter;
-		Wildcard wildcard = wildcardTypeParameter.getWildcard();
+		WildcardTypeArgument wildcard = (WildcardTypeArgument) typeParameter;
 		assertEquals(1, wildcard.getConstraints().size());
 		assertTrue(wildcard.getConstraints().get(0) instanceof UpperBound);
 		UpperBound upperBound = (UpperBound) wildcard.getConstraints().get(0);
-		assertNotNull(upperBound.getReferencedType());
-		Type upperBoundType = upperBound.getReferencedType();
+		assertNotNull(upperBound.getTypeReference());
+		Type upperBoundType = upperBound.getTypeReference().getType();
 		assertFalse(upperBoundType.eIsProxy());
 		assertEquals("java.lang.Object", upperBoundType.getCanonicalName());
 	}
 	
 	public void test_arrayWildcard_01() {
 		Operation arrayWildcard = getMethodFromParameterizedMethods("arrayWildcard(java.util.List[])");
-		assertEquals(1, arrayWildcard.getDeclaredParameterizedTypes().size());
+		assertEquals(1, arrayWildcard.getParameters().size());
 	}
 	
 	public void test_arrayWildcard_02() {
 		Operation arrayWildcard = getMethodFromParameterizedMethods("arrayWildcard(java.util.List[])");
-		Type paramType = arrayWildcard.getParameters().get(0).getParameterType();
+		TypeReference paramType = arrayWildcard.getParameters().get(0).getParameterType();
 		assertEquals("java.util.List<? extends java.lang.Object>[]", paramType.getCanonicalName());
-		assertTrue(paramType instanceof ArrayType);
-		ArrayType arrayType = (ArrayType) paramType;
-		assertTrue(arrayType.getComponentType() instanceof ParameterizedType);
+		assertTrue(paramType.getType() instanceof ArrayType);
+		ArrayType arrayType = (ArrayType) paramType.getType();
+		assertTrue(arrayType.getComponentType() instanceof ParameterizedTypeReference);
 	}
 	
 	public void test_nestedArrayWildcard_01() {
 		Operation nestedArrayWildcard = getMethodFromParameterizedMethods("nestedArrayWildcard(java.util.List[][])");
-		assertEquals(1, nestedArrayWildcard.getDeclaredParameterizedTypes().size());
+		assertEquals(1, nestedArrayWildcard.getParameters().size());
 	}
 	
 	public void test_nestedArrayWildcard_02() {
 		Operation nestedArrayWildcard = getMethodFromParameterizedMethods("nestedArrayWildcard(java.util.List[][])");
-		Type paramType = nestedArrayWildcard.getParameters().get(0).getParameterType();
-		assertTrue(paramType instanceof ArrayType);
-		ArrayType arrayType = (ArrayType) paramType;
-		assertTrue(arrayType.getComponentType() instanceof ArrayType);
-		arrayType = (ArrayType) arrayType.getComponentType();
-		assertTrue(arrayType.getComponentType() instanceof ParameterizedType);
+		TypeReference paramType = nestedArrayWildcard.getParameters().get(0).getParameterType();
+		assertTrue(paramType.getType() instanceof ArrayType);
+		ArrayType arrayType = (ArrayType) paramType.getType();
+		assertTrue(arrayType.getComponentType().getType() instanceof ArrayType);
+		arrayType = (ArrayType) arrayType.getComponentType().getType();
+		assertTrue(arrayType.getComponentType() instanceof ParameterizedTypeReference);
 	}
 	
 	public void test_arrayParameterized_01() {
 		Operation arrayParameterized = getMethodFromParameterizedMethods("arrayParameterized(java.util.List[])");
-		assertEquals(1, arrayParameterized.getDeclaredParameterizedTypes().size());
+		assertEquals(1, arrayParameterized.getParameters().size());
 	}
 	
 	public void test_arrayParameterized_02() {
 		Operation arrayParameterized = getMethodFromParameterizedMethods("arrayParameterized(java.util.List[])");
-		Type paramType = arrayParameterized.getParameters().get(0).getParameterType();
+		TypeReference paramType = arrayParameterized.getParameters().get(0).getParameterType();
 		assertEquals("java.util.List<T>[]", paramType.getCanonicalName());
-		assertTrue(paramType instanceof ArrayType);
-		ArrayType arrayType = (ArrayType) paramType;
-		assertTrue(arrayType.getComponentType() instanceof ParameterizedType);
+		assertTrue(paramType.getType() instanceof ArrayType);
+		ArrayType arrayType = (ArrayType) paramType.getType();
+		assertTrue(arrayType.getComponentType() instanceof ParameterizedTypeReference);
 	}
 	
 	public void test_nestedArrayParameterized_01() {
 		Operation nestedArrayParameterized = getMethodFromParameterizedMethods("nestedArrayParameterized(java.util.List[][])");
-		assertEquals(1, nestedArrayParameterized.getDeclaredParameterizedTypes().size());
+		assertEquals(1, nestedArrayParameterized.getParameters().size());
 	}
 	
 	public void test_nestedArrayParameterized_02() {
 		Operation nestedArrayParameterized = getMethodFromParameterizedMethods("nestedArrayParameterized(java.util.List[][])");
-		Type paramType = nestedArrayParameterized.getParameters().get(0).getParameterType();
-		assertTrue(paramType instanceof ArrayType);
-		ArrayType arrayType = (ArrayType) paramType;
-		assertTrue(arrayType.getComponentType() instanceof ArrayType);
-		arrayType = (ArrayType) arrayType.getComponentType();
-		assertTrue(arrayType.getComponentType() instanceof ParameterizedType);
+		TypeReference paramType = nestedArrayParameterized.getParameters().get(0).getParameterType();
+		assertTrue(paramType.getType() instanceof ArrayType);
+		ArrayType arrayType = (ArrayType) paramType.getType();
+		assertTrue(arrayType.getComponentType().getType() instanceof ArrayType);
+		arrayType = (ArrayType) arrayType.getComponentType().getType();
+		assertTrue(arrayType.getComponentType() instanceof ParameterizedTypeReference);
 	}
 	
 	public void test_arrayVariable_01() {
 		Operation arrayVariable = getMethodFromParameterizedMethods("arrayVariable(T[])");
-		assertEquals(1, arrayVariable.getDeclaredParameterizedTypes().size());
+		assertEquals(1, arrayVariable.getParameters().size());
 	}
 	
 	public void test_arrayVariable_02() {
 		Operation arrayVariable = getMethodFromParameterizedMethods("arrayVariable(T[])");
-		Type paramType = arrayVariable.getParameters().get(0).getParameterType();
+		Type paramType = arrayVariable.getParameters().get(0).getParameterType().getType();
 		assertEquals("T[]", paramType.getCanonicalName());
 		assertTrue(paramType instanceof ArrayType);
 		ArrayType arrayType = (ArrayType) paramType;
-		assertTrue(arrayType.getComponentType() instanceof TypeParameter);
+		assertTrue(arrayType.getComponentType().getType() instanceof TypeParameter);
 	}
 	
 	public void test_nestedArrayVariable_01() {
 		Operation nestedArrayVariable = getMethodFromParameterizedMethods("nestedArrayVariable(T[][])");
-		assertEquals(1, nestedArrayVariable.getDeclaredParameterizedTypes().size());
+		assertEquals(1, nestedArrayVariable.getParameters().size());
 	}
 	
 	public void test_nestedArrayVariable_02() {
 		Operation nestedArrayVariable = getMethodFromParameterizedMethods("nestedArrayVariable(T[][])");
-		Type paramType = nestedArrayVariable.getParameters().get(0).getParameterType();
+		Type paramType = nestedArrayVariable.getParameters().get(0).getParameterType().getType();
 		assertTrue(paramType instanceof ArrayType);
 		ArrayType arrayType = (ArrayType) paramType;
-		assertTrue(arrayType.getComponentType() instanceof ArrayType);
-		arrayType = (ArrayType) arrayType.getComponentType();
-		assertTrue(arrayType.getComponentType() instanceof TypeParameter);
+		assertTrue(arrayType.getComponentType().getType() instanceof ArrayType);
+		arrayType = (ArrayType) arrayType.getComponentType().getType();
+		assertTrue(arrayType.getComponentType().getType() instanceof TypeParameter);
 	}
 	
 	public void test_nestedTypes_Outer() {
@@ -760,40 +754,40 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		String typeName = ParameterizedTypes.class.getName();
 		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
 		Operation methodS = getMethodFromType(type, ParameterizedTypes.class, "methodS(S)");
-		Type listS = methodS.getReturnType();
+		TypeReference listS = methodS.getReturnType();
 		assertFalse(listS.toString(), listS.eIsProxy());
 		assertEquals("java.util.List<? extends S>", listS.getCanonicalName());
-		ParameterizedType listType = (ParameterizedType) listS;
+		ParameterizedTypeReference listType = (ParameterizedTypeReference) listS;
 		assertEquals(1, listType.getArguments().size());
 		TypeArgument typeArgument = listType.getArguments().get(0);
 		assertTrue(typeArgument instanceof WildcardTypeArgument);
 		WildcardTypeArgument wildcardTypeArgument = (WildcardTypeArgument) typeArgument;
 		assertEquals("? extends S", wildcardTypeArgument.getCanonicalName());
-		assertEquals(1, wildcardTypeArgument.getWildcard().getConstraints().size());
-		UpperBound upperBound = (UpperBound) wildcardTypeArgument.getWildcard().getConstraints().get(0);
+		assertEquals(1, wildcardTypeArgument.getConstraints().size());
+		UpperBound upperBound = (UpperBound) wildcardTypeArgument.getConstraints().get(0);
 		TypeParameter s = type.getTypeParameters().get(0);
-		assertSame(s, upperBound.getReferencedType());
+		assertSame(s, upperBound.getTypeReference().getType());
 	}
 	
 	public void test_ParameterizedTypes_03() {
 		String typeName = ParameterizedTypes.class.getName();
 		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
 		Operation methodT = getMethodFromType(type, ParameterizedTypes.class, "methodT(T)");
-		Type listS = methodT.getReturnType();
+		TypeReference listS = methodT.getReturnType();
 		assertFalse(listS.toString(), listS.eIsProxy());
 		assertEquals("java.util.List<? extends java.lang.Object & super T>", listS.getCanonicalName());
-		ParameterizedType listType = (ParameterizedType) listS;
+		ParameterizedTypeReference listType = (ParameterizedTypeReference) listS;
 		assertEquals(1, listType.getArguments().size());
 		TypeArgument typeArgument = listType.getArguments().get(0);
 		assertTrue(typeArgument instanceof WildcardTypeArgument);
 		WildcardTypeArgument wildcardTypeArgument = (WildcardTypeArgument) typeArgument;
 		assertEquals("? extends java.lang.Object & super T", wildcardTypeArgument.getCanonicalName());
-		assertEquals(2, wildcardTypeArgument.getWildcard().getConstraints().size());
-		UpperBound uperBound = (UpperBound) wildcardTypeArgument.getWildcard().getConstraints().get(0);
-		assertEquals("java.lang.Object", uperBound.getReferencedType().getCanonicalName());
-		LowerBound lowerBound = (LowerBound) wildcardTypeArgument.getWildcard().getConstraints().get(1);
+		assertEquals(2, wildcardTypeArgument.getConstraints().size());
+		UpperBound uperBound = (UpperBound) wildcardTypeArgument.getConstraints().get(0);
+		assertEquals("java.lang.Object", uperBound.getTypeReference().getCanonicalName());
+		LowerBound lowerBound = (LowerBound) wildcardTypeArgument.getConstraints().get(1);
 		TypeParameter t = type.getTypeParameters().get(1);
-		assertSame(t, lowerBound.getReferencedType());
+		assertSame(t, lowerBound.getTypeReference().getType());
 	}
 	
 	public void test_ParameterizedTypes_04() {
@@ -801,7 +795,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
 		Operation methodY = getMethodFromType(type, ParameterizedTypes.class, "methodY(Y)");
 		assertEquals(1, methodY.getParameters().size());
-		Type parameterType = methodY.getParameters().get(0).getParameterType();
+		Type parameterType = methodY.getParameters().get(0).getParameterType().getType();
 		assertFalse(parameterType.eIsProxy());
 		assertEquals("Y", parameterType.getCanonicalName());
 		assertTrue(parameterType instanceof TypeParameter);
@@ -810,7 +804,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals(1, y.getConstraints().size());
 		UpperBound upperBound = (UpperBound) y.getConstraints().get(0);
 		TypeParameter t = type.getTypeParameters().get(1);
-		assertSame(t, upperBound.getReferencedType());
+		assertSame(t, upperBound.getTypeReference().getType());
 	}
 	
 	public void test_ParameterizedTypes_05() {
@@ -818,25 +812,24 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
 		Operation methodZ = getMethodFromType(type, ParameterizedTypes.class, "methodZ(java.util.List)");
 		assertEquals(1, methodZ.getParameters().size());
-		assertEquals(2, methodZ.getDeclaredParameterizedTypes().size());
 		assertEquals(1, methodZ.getTypeParameters().size());
 		assertEquals("Z", methodZ.getTypeParameters().get(0).getCanonicalName());
-		Type listZ = methodZ.getReturnType();
-		assertFalse(listZ.toString(), listZ.eIsProxy());
+		TypeReference listZ = methodZ.getReturnType();
+		assertFalse(listZ.toString(), listZ.getType().eIsProxy());
 		assertEquals("java.util.List<? extends java.lang.Object & super Z>", listZ.getCanonicalName());
-		ParameterizedType listType = (ParameterizedType) listZ;
+		ParameterizedTypeReference listType = (ParameterizedTypeReference) listZ;
 		assertEquals(1, listType.getArguments().size());
 		TypeArgument typeArgument = listType.getArguments().get(0);
 		assertTrue(typeArgument instanceof WildcardTypeArgument);
 		WildcardTypeArgument wildcardTypeArgument = (WildcardTypeArgument) typeArgument;
 		assertEquals("? extends java.lang.Object & super Z", wildcardTypeArgument.getCanonicalName());
-		assertEquals(2, wildcardTypeArgument.getWildcard().getConstraints().size());
-		UpperBound upperBound = (UpperBound) wildcardTypeArgument.getWildcard().getConstraints().get(0);
-		assertEquals("java.lang.Object", upperBound.getReferencedType().getCanonicalName());
-		LowerBound lowerBound = (LowerBound) wildcardTypeArgument.getWildcard().getConstraints().get(1);
-		assertEquals("Z", lowerBound.getReferencedType().getCanonicalName());
+		assertEquals(2, wildcardTypeArgument.getConstraints().size());
+		UpperBound upperBound = (UpperBound) wildcardTypeArgument.getConstraints().get(0);
+		assertEquals("java.lang.Object", upperBound.getTypeReference().getCanonicalName());
+		LowerBound lowerBound = (LowerBound) wildcardTypeArgument.getConstraints().get(1);
+		assertEquals("Z", lowerBound.getTypeReference().getCanonicalName());
 		TypeParameter z = methodZ.getTypeParameters().get(0);
-		assertSame(z, lowerBound.getReferencedType());
+		assertSame(z, lowerBound.getTypeReference().getType());
 	}
 	
 	public void test_ParameterizedTypes_06() {
@@ -844,20 +837,18 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
 		Operation methodMap = getMethodFromType(type, ParameterizedTypes.class, "methodMap(java.util.Map)");
 		assertEquals(1, methodMap.getParameters().size());
-		assertEquals(1, methodMap.getDeclaredParameterizedTypes().size());
 		assertEquals(1, methodMap.getTypeParameters().size());
 		assertEquals("Z", methodMap.getTypeParameters().get(0).getCanonicalName());
-		Type z = methodMap.getReturnType();
+		Type z = methodMap.getReturnType().getType();
 		assertSame(methodMap.getTypeParameters().get(0), z);
-		Type mapType = methodMap.getParameters().get(0).getParameterType();
+		TypeReference mapType = methodMap.getParameters().get(0).getParameterType();
 		assertEquals("java.util.Map<? extends java.lang.Object & super Z,? extends S>", mapType.getCanonicalName());
-		ParameterizedType parameterizedMapType = (ParameterizedType) mapType;
-		assertSame(methodMap, parameterizedMapType.getDeclarator());
+		ParameterizedTypeReference parameterizedMapType = (ParameterizedTypeReference) mapType;
 		assertEquals(2, parameterizedMapType.getArguments().size());
 		WildcardTypeArgument extendsS = (WildcardTypeArgument) parameterizedMapType.getArguments().get(1);
-		assertEquals(1, extendsS.getWildcard().getConstraints().size());
+		assertEquals(1, extendsS.getConstraints().size());
 		Type s = type.getTypeParameters().get(0);
-		assertSame(s, extendsS.getWildcard().getConstraints().get(0).getReferencedType());
+		assertSame(s, extendsS.getConstraints().get(0).getTypeReference().getType());
 	}
 	
 	public void test_ParameterizedTypes_S_01() {
@@ -870,8 +861,8 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		TypeConstraint typeConstraint = typeVariable.getConstraints().get(0);
 		assertTrue(typeConstraint instanceof UpperBound);
 		UpperBound upperBound = (UpperBound) typeConstraint;
-		assertNotNull(upperBound.getReferencedType());
-		assertEquals("java.lang.Object", upperBound.getReferencedType().getCanonicalName());
+		assertNotNull(upperBound.getTypeReference());
+		assertEquals("java.lang.Object", upperBound.getTypeReference().getCanonicalName());
 	}
 	
 	public void test_ParameterizedTypes_T_01() {
@@ -884,11 +875,11 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		TypeConstraint typeConstraint = typeVariable.getConstraints().get(0);
 		assertTrue(typeConstraint instanceof UpperBound);
 		UpperBound upperBound = (UpperBound) typeConstraint;
-		assertNotNull(upperBound.getReferencedType());
-		assertFalse(upperBound.getReferencedType().toString(), upperBound.getReferencedType().eIsProxy());
-		assertEquals("S", upperBound.getReferencedType().getCanonicalName());
+		assertNotNull(upperBound.getTypeReference());
+		assertFalse(upperBound.getTypeReference().toString(), upperBound.getTypeReference().eIsProxy());
+		assertEquals("S", upperBound.getTypeReference().getCanonicalName());
 		TypeParameter s = type.getTypeParameters().get(0);
-		assertSame(s, upperBound.getReferencedType());
+		assertSame(s, upperBound.getTypeReference().getType());
 	}
 	
 	public void test_ParameterizedTypes_U_01() {
@@ -901,16 +892,16 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		TypeConstraint typeConstraint = typeVariable.getConstraints().get(0);
 		assertTrue(typeConstraint instanceof UpperBound);
 		UpperBound upperBound = (UpperBound) typeConstraint;
-		assertNotNull(upperBound.getReferencedType());
-		assertFalse(upperBound.getReferencedType().toString(), upperBound.getReferencedType().eIsProxy());
-		assertEquals("java.util.List<S>", upperBound.getReferencedType().getCanonicalName());
-		ParameterizedType listType = (ParameterizedType) upperBound.getReferencedType();
+		assertNotNull(upperBound.getTypeReference());
+		assertFalse(upperBound.getTypeReference().toString(), upperBound.getTypeReference().eIsProxy());
+		assertEquals("java.util.List<S>", upperBound.getTypeReference().getCanonicalName());
+		ParameterizedTypeReference listType = (ParameterizedTypeReference) upperBound.getTypeReference();
 		assertEquals(1, listType.getArguments().size());
 		TypeArgument typeArgument = listType.getArguments().get(0);
 		assertTrue(typeArgument instanceof ReferenceTypeArgument);
 		ReferenceTypeArgument refTypeArgument = (ReferenceTypeArgument) typeArgument;
 		TypeParameter s = type.getTypeParameters().get(0);
-		assertSame(s, refTypeArgument.getType());
+		assertSame(s, refTypeArgument.getTypeReference().getType());
 	}
 	
 	public void test_ParameterizedTypes_V_01() {
@@ -923,22 +914,22 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		TypeConstraint typeConstraint = typeParameterV.getConstraints().get(0);
 		assertTrue(typeConstraint instanceof UpperBound);
 		UpperBound upperBound = (UpperBound) typeConstraint;
-		assertNotNull(upperBound.getReferencedType());
-		assertFalse(upperBound.getReferencedType().toString(), upperBound.getReferencedType().eIsProxy());
-		assertEquals("java.util.List<java.util.List<? extends V>>", upperBound.getReferencedType().getCanonicalName());
-		ParameterizedType listType = (ParameterizedType) upperBound.getReferencedType();
+		assertNotNull(upperBound.getTypeReference());
+		assertFalse(upperBound.getTypeReference().toString(), upperBound.getTypeReference().eIsProxy());
+		assertEquals("java.util.List<java.util.List<? extends V>>", upperBound.getTypeReference().getCanonicalName());
+		ParameterizedTypeReference listType = (ParameterizedTypeReference) upperBound.getTypeReference();
 		assertEquals(1, listType.getArguments().size());
 		TypeArgument typeArgument = listType.getArguments().get(0);
 		assertTrue(typeArgument instanceof ReferenceTypeArgument);
 		ReferenceTypeArgument refTypeArgument = (ReferenceTypeArgument) typeArgument;
 		assertEquals("java.util.List<? extends V>", refTypeArgument.getCanonicalName());
-		ParameterizedType nestedListType = (ParameterizedType) refTypeArgument.getType();
+		ParameterizedTypeReference nestedListType = (ParameterizedTypeReference) refTypeArgument.getTypeReference();
 		assertEquals(1, nestedListType.getArguments().size());
 		TypeArgument nestedArgument = nestedListType.getArguments().get(0);
 		assertTrue(nestedArgument instanceof WildcardTypeArgument);
-		assertEquals(1, ((WildcardTypeArgument) nestedArgument).getWildcard().getConstraints().size());
-		UpperBound nestedUpperBound = (UpperBound) ((WildcardTypeArgument) nestedArgument).getWildcard().getConstraints().get(0);
-		assertSame(typeParameterV, nestedUpperBound.getReferencedType());
+		assertEquals(1, ((WildcardTypeArgument) nestedArgument).getConstraints().size());
+		UpperBound nestedUpperBound = (UpperBound) ((WildcardTypeArgument) nestedArgument).getConstraints().get(0);
+		assertSame(typeParameterV, nestedUpperBound.getTypeReference().getType());
 	}
 	
 	public void test_ParameterizedTypes_W_01() {
@@ -951,17 +942,17 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		TypeConstraint firstTypeConstraint = typeParameterW.getConstraints().get(0);
 		assertTrue(firstTypeConstraint instanceof UpperBound);
 		UpperBound firstUpperBound = (UpperBound) firstTypeConstraint;
-		assertNotNull(firstUpperBound.getReferencedType());
-		assertFalse(firstUpperBound.getReferencedType().toString(), firstUpperBound.getReferencedType().eIsProxy());
-		assertEquals("java.lang.Comparable<S>", firstUpperBound.getReferencedType().getCanonicalName());
-		ParameterizedType comparableType = (ParameterizedType) firstUpperBound.getReferencedType();
+		assertNotNull(firstUpperBound.getTypeReference());
+		assertFalse(firstUpperBound.getTypeReference().toString(), firstUpperBound.getTypeReference().eIsProxy());
+		assertEquals("java.lang.Comparable<S>", firstUpperBound.getTypeReference().getCanonicalName());
+		ParameterizedTypeReference comparableType = (ParameterizedTypeReference) firstUpperBound.getTypeReference();
 		assertEquals(1, comparableType.getArguments().size());
 		TypeArgument typeArgument = comparableType.getArguments().get(0);
 		assertTrue(typeArgument instanceof ReferenceTypeArgument);
 		ReferenceTypeArgument refTypeArgument = (ReferenceTypeArgument) typeArgument;
 		assertEquals(refTypeArgument.toString(), "S", refTypeArgument.getCanonicalName());
 		TypeParameter s = type.getTypeParameters().get(0);
-		assertSame(s, refTypeArgument.getType());
+		assertSame(s, refTypeArgument.getTypeReference().getType());
 	}
 	
 	public void test_ParameterizedTypes_W_02() {
@@ -975,9 +966,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		TypeConstraint secondTypeConstraint = typeParameterW.getConstraints().get(1);
 		assertTrue(secondTypeConstraint instanceof UpperBound);
 		UpperBound secondUpperBound = (UpperBound) secondTypeConstraint;
-		assertNotNull(secondUpperBound.getReferencedType());
-		assertFalse(secondUpperBound.getReferencedType().toString(), secondUpperBound.getReferencedType().eIsProxy());
-		assertEquals("java.io.Serializable", secondUpperBound.getReferencedType().getCanonicalName());
+		assertNotNull(secondUpperBound.getTypeReference());
+		assertFalse(secondUpperBound.getTypeReference().toString(), secondUpperBound.getTypeReference().eIsProxy());
+		assertEquals("java.io.Serializable", secondUpperBound.getTypeReference().getCanonicalName());
 	}
 	
 	public void test_ParameterizedTypes_Inner_01() {
@@ -991,7 +982,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		String typeName = ParameterizedTypes.class.getName();
 		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
 		Operation methodS = getMethodFromType(type, ParameterizedTypes.Inner.class, "methodS()");
-		Type s = methodS.getReturnType();
+		Type s = methodS.getReturnType().getType();
 		assertFalse(s.toString(), s.eIsProxy());
 		assertTrue(s instanceof TypeParameter);
 		TypeParameter sParam = (TypeParameter) s;
@@ -1002,7 +993,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		String typeName = ParameterizedTypes.Inner.class.getName();
 		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
 		Operation methodX = getMethodFromType(type, ParameterizedTypes.Inner.class, "methodX()");
-		Type x = methodX.getReturnType();
+		Type x = methodX.getReturnType().getType();
 		assertFalse(x.toString(), x.eIsProxy());
 		assertTrue(x instanceof TypeParameter);
 		TypeParameter xParam = (TypeParameter) x;
@@ -1013,73 +1004,73 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		String typeName = ParameterizedTypes.Inner.class.getName();
 		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
 		Operation methodT = getMethodFromType(type, ParameterizedTypes.Inner.class, "methodT()");
-		Type listT = methodT.getReturnType();
+		TypeReference listT = methodT.getReturnType();
 		assertEquals("java.util.List<T>", listT.getCanonicalName());
-		ParameterizedType listType = (ParameterizedType) listT;
+		ParameterizedTypeReference listType = (ParameterizedTypeReference) listT;
 		assertEquals(1, listType.getArguments().size());
 		TypeArgument typeArgument = listType.getArguments().get(0);
 		assertTrue(typeArgument instanceof ReferenceTypeArgument);
 		ReferenceTypeArgument refTypeArgument = (ReferenceTypeArgument) typeArgument;
 		assertEquals("T", refTypeArgument.getCanonicalName());
 		TypeParameter t = ((TypeParameterDeclarator) type.getDeclaringType()).getTypeParameters().get(1);
-		assertSame(t, refTypeArgument.getType());
+		assertSame(t, refTypeArgument.getTypeReference().getType());
 	}
 	
 	public void test_ParameterizedTypes_Inner_05() {
 		String typeName = ParameterizedTypes.class.getName();
 		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
 		Operation methodV = getMethodFromType(type, ParameterizedTypes.Inner.class, "methodVArray_01()");
-		Type listT = methodV.getReturnType();
+		TypeReference listT = methodV.getReturnType();
 		assertEquals("java.util.List<? extends V>[]", listT.getCanonicalName());
-		ArrayType listArrayType = (ArrayType) listT;
-		ParameterizedType listType = (ParameterizedType) listArrayType.getComponentType();
+		ArrayType listArrayType = (ArrayType) listT.getType();
+		ParameterizedTypeReference listType = (ParameterizedTypeReference) listArrayType.getComponentType();
 		assertEquals(1, listType.getArguments().size());
 		TypeArgument typeArgument = listType.getArguments().get(0);
 		assertTrue(typeArgument instanceof WildcardTypeArgument);
 		WildcardTypeArgument wildcardTypeArgument = (WildcardTypeArgument) typeArgument;
 		assertEquals("? extends V", wildcardTypeArgument.getCanonicalName());
-		assertEquals(1, wildcardTypeArgument.getWildcard().getConstraints().size());
-		UpperBound upperBound = (UpperBound) wildcardTypeArgument.getWildcard().getConstraints().get(0);
+		assertEquals(1, wildcardTypeArgument.getConstraints().size());
+		UpperBound upperBound = (UpperBound) wildcardTypeArgument.getConstraints().get(0);
 		TypeParameter v = type.getTypeParameters().get(3);
-		assertSame(v, upperBound.getReferencedType());
+		assertSame(v, upperBound.getTypeReference().getType());
 	}
 	
 	public void test_ParameterizedTypes_Inner_06() {
 		String typeName = ParameterizedTypes.class.getName();
 		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
 		Operation methodV = getMethodFromType(type, ParameterizedTypes.Inner.class, "methodVArray_02()");
-		Type listV = methodV.getReturnType();
+		TypeReference listV = methodV.getReturnType();
 		assertEquals("java.util.List<? extends V[]>", listV.getCanonicalName());
-		ParameterizedType listType = (ParameterizedType) listV;
+		ParameterizedTypeReference listType = (ParameterizedTypeReference) listV;
 		assertEquals(1, listType.getArguments().size());
 		TypeArgument typeArgument = listType.getArguments().get(0);
 		assertTrue(typeArgument instanceof WildcardTypeArgument);
 		WildcardTypeArgument wildcardTypeArgument = (WildcardTypeArgument) typeArgument;
 		assertEquals("? extends V[]", wildcardTypeArgument.getCanonicalName());
-		assertEquals(1, wildcardTypeArgument.getWildcard().getConstraints().size());
-		UpperBound upperBound = (UpperBound) wildcardTypeArgument.getWildcard().getConstraints().get(0);
-		Type upperBoundType = upperBound.getReferencedType();
+		assertEquals(1, wildcardTypeArgument.getConstraints().size());
+		UpperBound upperBound = (UpperBound) wildcardTypeArgument.getConstraints().get(0);
+		Type upperBoundType = upperBound.getTypeReference().getType();
 		assertTrue(upperBoundType instanceof ArrayType);
-		assertTrue(((ArrayType) upperBoundType).getComponentType() instanceof TypeParameter);
+		assertTrue(((ArrayType) upperBoundType).getComponentType().getType() instanceof TypeParameter);
 		TypeParameter v = type.getTypeParameters().get(3);
-		assertSame(v, ((ArrayType) upperBoundType).getComponentType());
+		assertSame(v, ((ArrayType) upperBoundType).getComponentType().getType());
 	}
 	
 	public void test_ParameterizedTypes_Inner_07() {
 		String typeName = ParameterizedTypes.Inner.class.getName();
 		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
 		Operation methodV = getMethodFromType(type, ParameterizedTypes.Inner.class, "methodZArray_01()");
-		Type listZ = methodV.getReturnType();
+		TypeReference listZ = methodV.getReturnType();
 		assertEquals("java.util.List<Z[][]>", listZ.getCanonicalName());
-		ParameterizedType listType = (ParameterizedType) listZ;
+		ParameterizedTypeReference listType = (ParameterizedTypeReference) listZ;
 		assertEquals(1, listType.getArguments().size());
 		TypeArgument typeArgument = listType.getArguments().get(0);
 		assertTrue(typeArgument instanceof ReferenceTypeArgument);
 		ReferenceTypeArgument refTypeArgument = (ReferenceTypeArgument) typeArgument;
-		Type argumentType = refTypeArgument.getType();
+		Type argumentType = refTypeArgument.getTypeReference().getType();
 		assertTrue(argumentType instanceof ArrayType);
-		assertTrue(((ArrayType) argumentType).getComponentType() instanceof ArrayType);
-		ComponentType componentType = ((ArrayType) ((ArrayType) argumentType).getComponentType()).getComponentType();
+		assertTrue(((ArrayType) argumentType).getComponentType().getType() instanceof ArrayType);
+		ComponentType componentType = (ComponentType) ((ArrayType) ((ArrayType) argumentType).getComponentType().getType()).getComponentType().getType();
 		TypeParameter z = type.getTypeParameters().get(2);
 		assertSame(z, componentType);
 	}
@@ -1088,17 +1079,17 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		String typeName = ParameterizedTypes.Inner.class.getName();
 		GenericType type = (GenericType) getTypeProvider().findTypeByName(typeName);
 		Operation methodV = getMethodFromType(type, ParameterizedTypes.Inner.class, "methodZArray_02()");
-		Type listZ = methodV.getReturnType();
+		TypeReference listZ = methodV.getReturnType();
 		assertEquals("java.util.List<Z[]>[]", listZ.getCanonicalName());
-		ArrayType listArrayType = (ArrayType) listZ;
-		ParameterizedType listType = (ParameterizedType) listArrayType.getComponentType();
+		ArrayType listArrayType = (ArrayType) listZ.getType();
+		ParameterizedTypeReference listType = (ParameterizedTypeReference) listArrayType.getComponentType();
 		assertEquals(1, listType.getArguments().size());
 		TypeArgument typeArgument = listType.getArguments().get(0);
 		assertTrue(typeArgument instanceof ReferenceTypeArgument);
 		ReferenceTypeArgument refTypeArgument = (ReferenceTypeArgument) typeArgument;
-		Type argumentType = refTypeArgument.getType();
+		Type argumentType = refTypeArgument.getTypeReference().getType();
 		assertTrue(argumentType instanceof ArrayType);
-		ComponentType componentType = ((ArrayType) argumentType).getComponentType();
+		ComponentType componentType = (ComponentType) ((ArrayType) argumentType).getComponentType().getType();
 		TypeParameter z = type.getTypeParameters().get(2);
 		assertSame(z, componentType);
 	}
@@ -1113,9 +1104,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		TypeConstraint typeConstraint = typeParameterX.getConstraints().get(0);
 		assertTrue(typeConstraint instanceof UpperBound);
 		UpperBound upperBound = (UpperBound) typeConstraint;
-		assertNotNull(upperBound.getReferencedType());
-		assertEquals("W", upperBound.getReferencedType().getCanonicalName());
-		Type upperBoundType = upperBound.getReferencedType();
+		assertNotNull(upperBound.getTypeReference());
+		assertEquals("W", upperBound.getTypeReference().getCanonicalName());
+		Type upperBoundType = upperBound.getTypeReference().getType();
 		assertTrue(upperBoundType instanceof TypeParameter);
 		TypeParameter typeParameterW = (TypeParameter) upperBoundType;
 		assertSame(type.getDeclaringType(), typeParameterW.getDeclarator());
@@ -1131,16 +1122,16 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		TypeConstraint typeConstraint = typeParameterY.getConstraints().get(0);
 		assertTrue(typeConstraint instanceof UpperBound);
 		UpperBound upperBound = (UpperBound) typeConstraint;
-		assertNotNull(upperBound.getReferencedType());
-		assertEquals("java.util.List<X>", upperBound.getReferencedType().getCanonicalName());
-		ParameterizedType listType = (ParameterizedType) upperBound.getReferencedType();
+		assertNotNull(upperBound.getTypeReference());
+		assertEquals("java.util.List<X>", upperBound.getTypeReference().getCanonicalName());
+		ParameterizedTypeReference listType = (ParameterizedTypeReference) upperBound.getTypeReference();
 		assertEquals(1, listType.getArguments().size());
 		TypeArgument typeArgument = listType.getArguments().get(0);
 		assertTrue(typeArgument instanceof ReferenceTypeArgument);
 		ReferenceTypeArgument refTypeArgument = (ReferenceTypeArgument) typeArgument;
 		assertEquals("X", refTypeArgument.getCanonicalName());
 		TypeParameter x = type.getTypeParameters().get(0);
-		assertSame(x, refTypeArgument.getType());
+		assertSame(x, refTypeArgument.getTypeReference().getType());
 	}
 	
 	public void test_ParameterizedTypes_Inner_Z_01() {
@@ -1153,16 +1144,16 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		TypeConstraint typeConstraint = typeParameterZ.getConstraints().get(0);
 		assertTrue(typeConstraint instanceof UpperBound);
 		UpperBound upperBound = (UpperBound) typeConstraint;
-		assertNotNull(upperBound.getReferencedType());
-		assertEquals("java.util.List<W>", upperBound.getReferencedType().getCanonicalName());
-		ParameterizedType listType = (ParameterizedType) upperBound.getReferencedType();
+		assertNotNull(upperBound.getTypeReference());
+		assertEquals("java.util.List<W>", upperBound.getTypeReference().getCanonicalName());
+		ParameterizedTypeReference listType = (ParameterizedTypeReference) upperBound.getTypeReference();
 		assertEquals(1, listType.getArguments().size());
 		TypeArgument typeArgument = listType.getArguments().get(0);
 		assertTrue(typeArgument instanceof ReferenceTypeArgument);
 		ReferenceTypeArgument refTypeArgument = (ReferenceTypeArgument) typeArgument;
 		assertEquals("W", refTypeArgument.getCanonicalName());
 		TypeParameter w = ((TypeParameterDeclarator) type.getDeclaringType()).getTypeParameters().get(4);
-		assertSame(w, refTypeArgument.getType());
+		assertSame(w, refTypeArgument.getTypeReference().getType());
 	}
 	
 	public void testFields_01() {
@@ -1185,7 +1176,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		Field field = getFieldFromType(type, Fields.class, "privateT");
 		assertSame(type, field.getDeclaringType());
 		assertEquals(Visibility.PRIVATE, field.getVisibility());
-		Type fieldType = field.getType();
+		Type fieldType = field.getType().getType();
 		assertSame(type.getTypeParameters().get(0), fieldType);
 	}
 	
@@ -1195,12 +1186,12 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		Field field = getFieldFromType(type, Fields.class, "defaultListT");
 		assertSame(type, field.getDeclaringType());
 		assertEquals(Visibility.DEFAULT, field.getVisibility());
-		Type fieldType = field.getType();
+		TypeReference fieldType = field.getType();
 		assertEquals("java.util.List<T>", fieldType.getCanonicalName());
-		assertTrue(fieldType instanceof ParameterizedType);
-		ParameterizedType parameterizedFieldType = (ParameterizedType) fieldType;
+		assertTrue(fieldType instanceof ParameterizedTypeReference);
+		ParameterizedTypeReference parameterizedFieldType = (ParameterizedTypeReference) fieldType;
 		ReferenceTypeArgument refTypeArg = (ReferenceTypeArgument) parameterizedFieldType.getArguments().get(0);
-		assertSame(type.getTypeParameters().get(0), refTypeArg.getType());
+		assertSame(type.getTypeParameters().get(0), refTypeArg.getTypeReference().getType());
 	}
 	
 	public void testFields_protectedString_01() {
@@ -1209,7 +1200,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		Field field = getFieldFromType(type, Fields.class, "protectedString");
 		assertSame(type, field.getDeclaringType());
 		assertEquals(Visibility.PROTECTED, field.getVisibility());
-		Type fieldType = field.getType();
+		Type fieldType = field.getType().getType();
 		assertEquals("java.lang.String", fieldType.getCanonicalName());
 	}
 	
@@ -1220,7 +1211,7 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(type, field.getDeclaringType());
 		assertTrue(field.isStatic());
 		assertEquals(Visibility.PROTECTED, field.getVisibility());
-		Type fieldType = field.getType();
+		Type fieldType = field.getType().getType();
 		assertEquals("java.lang.String", fieldType.getCanonicalName());
 	}
 	
@@ -1230,9 +1221,9 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		Field field = getFieldFromType(type, Fields.class, "publicInt");
 		assertSame(type, field.getDeclaringType());
 		assertEquals(Visibility.PUBLIC, field.getVisibility());
-		Type fieldType = field.getType();
+		Type fieldType = field.getType().getType();
 		assertEquals("int", fieldType.getCanonicalName());
-		assertTrue(field.getType() instanceof PrimitiveType);
+		assertTrue(field.getType().getType() instanceof PrimitiveType);
 	}
 	
 	public void testFields_innerFields_01() {
@@ -1243,11 +1234,11 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertSame(innerType, field.getDeclaringType());
 		assertSame(type, innerType.getDeclaringType());
 		assertEquals(Visibility.PUBLIC, field.getVisibility());
-		Type fieldType = field.getType();
+		TypeReference fieldType = field.getType();
 		assertEquals(typeName + "<java.lang.String>", fieldType.getCanonicalName());
-		assertTrue(field.getType() instanceof ParameterizedType);
-		ParameterizedType parameterizedFieldType = (ParameterizedType) fieldType;
-		assertSame(type, parameterizedFieldType.getRawType());
+		assertTrue(field.getType() instanceof ParameterizedTypeReference);
+		ParameterizedTypeReference parameterizedFieldType = (ParameterizedTypeReference) fieldType;
+		assertSame(type, parameterizedFieldType.getType());
 	}
 	
 	public void testHashMap_01() {

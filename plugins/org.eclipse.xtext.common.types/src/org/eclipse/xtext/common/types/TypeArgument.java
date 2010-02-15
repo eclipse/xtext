@@ -1,12 +1,11 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
-
 
 /**
  * <!-- begin-user-doc -->
@@ -27,7 +26,7 @@ package org.eclipse.xtext.common.types;
 public interface TypeArgument extends IdentifyableElement {
 	/**
 	 * Returns the value of the '<em><b>Declarator</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.common.types.ParameterizedType#getArguments <em>Arguments</em>}'.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.common.types.ParameterizedTypeReference#getArguments <em>Arguments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Declarator</em>' container reference isn't clear,
@@ -35,13 +34,13 @@ public interface TypeArgument extends IdentifyableElement {
 	 * </p>
 	 * <!-- end-user-doc -->
 	 * @return the value of the '<em>Declarator</em>' container reference.
-	 * @see #setDeclarator(ParameterizedType)
+	 * @see #setDeclarator(ParameterizedTypeReference)
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getTypeArgument_Declarator()
-	 * @see org.eclipse.xtext.common.types.ParameterizedType#getArguments
+	 * @see org.eclipse.xtext.common.types.ParameterizedTypeReference#getArguments
 	 * @model opposite="arguments" transient="false"
 	 * @generated
 	 */
-	ParameterizedType getDeclarator();
+	ParameterizedTypeReference getDeclarator();
 
 	/**
 	 * Sets the value of the '{@link org.eclipse.xtext.common.types.TypeArgument#getDeclarator <em>Declarator</em>}' container reference.
@@ -51,6 +50,6 @@ public interface TypeArgument extends IdentifyableElement {
 	 * @see #getDeclarator()
 	 * @generated
 	 */
-	void setDeclarator(ParameterizedType value);
+	void setDeclarator(ParameterizedTypeReference value);
 
 } // TypeArgument

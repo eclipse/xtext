@@ -16,7 +16,7 @@ package org.eclipse.xtext.common.types;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.ReferenceTypeArgument#getType <em>Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.ReferenceTypeArgument#getTypeReference <em>Type Reference</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,29 +26,29 @@ package org.eclipse.xtext.common.types;
  */
 public interface ReferenceTypeArgument extends TypeArgument {
 	/**
-	 * Returns the value of the '<em><b>Type</b></em>' reference.
+	 * Returns the value of the '<em><b>Type Reference</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Type</em>' reference isn't clear,
+	 * If the meaning of the '<em>Type Reference</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Type</em>' reference.
-	 * @see #setType(Type)
-	 * @see org.eclipse.xtext.common.types.TypesPackage#getReferenceTypeArgument_Type()
-	 * @model
+	 * @return the value of the '<em>Type Reference</em>' containment reference.
+	 * @see #setTypeReference(TypeReference)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getReferenceTypeArgument_TypeReference()
+	 * @model containment="true"
 	 * @generated
 	 */
-	Type getType();
+	TypeReference getTypeReference();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.common.types.ReferenceTypeArgument#getType <em>Type</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.ReferenceTypeArgument#getTypeReference <em>Type Reference</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Type</em>' reference.
-	 * @see #getType()
+	 * @param value the new value of the '<em>Type Reference</em>' containment reference.
+	 * @see #getTypeReference()
 	 * @generated
 	 */
-	void setType(Type value);
+	void setTypeReference(TypeReference value);
 
 } // ReferenceTypeArgument

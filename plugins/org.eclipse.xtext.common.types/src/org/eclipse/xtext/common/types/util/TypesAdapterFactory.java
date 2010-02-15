@@ -19,29 +19,31 @@ import org.eclipse.xtext.common.types.AnnotationTarget;
 import org.eclipse.xtext.common.types.AnnotationType;
 import org.eclipse.xtext.common.types.ArrayType;
 import org.eclipse.xtext.common.types.ComponentType;
-import org.eclipse.xtext.common.types.ConstrainedType;
+import org.eclipse.xtext.common.types.ConstraintOwner;
 import org.eclipse.xtext.common.types.Constructor;
 import org.eclipse.xtext.common.types.DeclaredType;
 import org.eclipse.xtext.common.types.EnumerationType;
 import org.eclipse.xtext.common.types.Executable;
 import org.eclipse.xtext.common.types.Field;
 import org.eclipse.xtext.common.types.FormalParameter;
+import org.eclipse.xtext.common.types.GenericArrayTypeReference;
 import org.eclipse.xtext.common.types.GenericType;
 import org.eclipse.xtext.common.types.IdentifyableElement;
 import org.eclipse.xtext.common.types.LowerBound;
 import org.eclipse.xtext.common.types.Member;
 import org.eclipse.xtext.common.types.Operation;
-import org.eclipse.xtext.common.types.ParameterizedType;
+import org.eclipse.xtext.common.types.ParameterizedTypeReference;
 import org.eclipse.xtext.common.types.PrimitiveType;
 import org.eclipse.xtext.common.types.ReferenceTypeArgument;
+import org.eclipse.xtext.common.types.SimpleTypeReference;
 import org.eclipse.xtext.common.types.Type;
 import org.eclipse.xtext.common.types.TypeArgument;
 import org.eclipse.xtext.common.types.TypeConstraint;
 import org.eclipse.xtext.common.types.TypeParameter;
 import org.eclipse.xtext.common.types.TypeParameterDeclarator;
+import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.UpperBound;
-import org.eclipse.xtext.common.types.Wildcard;
 import org.eclipse.xtext.common.types.WildcardTypeArgument;
 
 /**
@@ -113,20 +115,12 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 				return createVoidAdapter();
 			}
 			@Override
-			public Adapter caseConstrainedType(ConstrainedType object) {
-				return createConstrainedTypeAdapter();
-			}
-			@Override
 			public Adapter caseComponentType(ComponentType object) {
 				return createComponentTypeAdapter();
 			}
 			@Override
 			public Adapter casePrimitiveType(PrimitiveType object) {
 				return createPrimitiveTypeAdapter();
-			}
-			@Override
-			public Adapter caseWildcard(Wildcard object) {
-				return createWildcardAdapter();
 			}
 			@Override
 			public Adapter caseArrayType(ArrayType object) {
@@ -137,12 +131,16 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 				return createDeclaredTypeAdapter();
 			}
 			@Override
+			public Adapter caseTypeParameter(TypeParameter object) {
+				return createTypeParameterAdapter();
+			}
+			@Override
 			public Adapter caseTypeParameterDeclarator(TypeParameterDeclarator object) {
 				return createTypeParameterDeclaratorAdapter();
 			}
 			@Override
-			public Adapter caseTypeParameter(TypeParameter object) {
-				return createTypeParameterAdapter();
+			public Adapter caseConstraintOwner(ConstraintOwner object) {
+				return createConstraintOwnerAdapter();
 			}
 			@Override
 			public Adapter caseTypeConstraint(TypeConstraint object) {
@@ -169,8 +167,20 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 				return createGenericTypeAdapter();
 			}
 			@Override
-			public Adapter caseParameterizedType(ParameterizedType object) {
-				return createParameterizedTypeAdapter();
+			public Adapter caseTypeReference(TypeReference object) {
+				return createTypeReferenceAdapter();
+			}
+			@Override
+			public Adapter caseSimpleTypeReference(SimpleTypeReference object) {
+				return createSimpleTypeReferenceAdapter();
+			}
+			@Override
+			public Adapter caseParameterizedTypeReference(ParameterizedTypeReference object) {
+				return createParameterizedTypeReferenceAdapter();
+			}
+			@Override
+			public Adapter caseGenericArrayTypeReference(GenericArrayTypeReference object) {
+				return createGenericArrayTypeReferenceAdapter();
 			}
 			@Override
 			public Adapter caseTypeArgument(TypeArgument object) {
@@ -279,20 +289,6 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.ConstrainedType <em>Constrained Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.ConstrainedType
-	 * @generated
-	 */
-	public Adapter createConstrainedTypeAdapter() {
-		return null;
-	}
-
-	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.ComponentType <em>Component Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -317,20 +313,6 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createPrimitiveTypeAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.Wildcard <em>Wildcard</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.Wildcard
-	 * @generated
-	 */
-	public Adapter createWildcardAdapter() {
 		return null;
 	}
 
@@ -373,6 +355,20 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTypeParameterDeclaratorAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.ConstraintOwner <em>Constraint Owner</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.ConstraintOwner
+	 * @generated
+	 */
+	public Adapter createConstraintOwnerAdapter() {
 		return null;
 	}
 
@@ -475,16 +471,58 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.ParameterizedType <em>Parameterized Type</em>}'.
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.TypeReference <em>Type Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
 	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
 	 * <!-- end-user-doc -->
 	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.ParameterizedType
+	 * @see org.eclipse.xtext.common.types.TypeReference
 	 * @generated
 	 */
-	public Adapter createParameterizedTypeAdapter() {
+	public Adapter createTypeReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.SimpleTypeReference <em>Simple Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.SimpleTypeReference
+	 * @generated
+	 */
+	public Adapter createSimpleTypeReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.ParameterizedTypeReference <em>Parameterized Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.ParameterizedTypeReference
+	 * @generated
+	 */
+	public Adapter createParameterizedTypeReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.GenericArrayTypeReference <em>Generic Array Type Reference</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.GenericArrayTypeReference
+	 * @generated
+	 */
+	public Adapter createGenericArrayTypeReferenceAdapter() {
 		return null;
 	}
 

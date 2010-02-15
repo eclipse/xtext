@@ -17,7 +17,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.emf.ecore.util.EcoreUtil;
 
-import org.eclipse.xtext.common.types.ParameterizedType;
+import org.eclipse.xtext.common.types.ParameterizedTypeReference;
 import org.eclipse.xtext.common.types.TypeArgument;
 import org.eclipse.xtext.common.types.TypesPackage;
 
@@ -59,9 +59,9 @@ public abstract class TypeArgumentImpl extends IdentifyableElementImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ParameterizedType getDeclarator() {
+	public ParameterizedTypeReference getDeclarator() {
 		if (eContainerFeatureID() != TypesPackage.TYPE_ARGUMENT__DECLARATOR) return null;
-		return (ParameterizedType)eContainer();
+		return (ParameterizedTypeReference)eContainer();
 	}
 
 	/**
@@ -69,7 +69,7 @@ public abstract class TypeArgumentImpl extends IdentifyableElementImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetDeclarator(ParameterizedType newDeclarator, NotificationChain msgs) {
+	public NotificationChain basicSetDeclarator(ParameterizedTypeReference newDeclarator, NotificationChain msgs) {
 		msgs = eBasicSetContainer((InternalEObject)newDeclarator, TypesPackage.TYPE_ARGUMENT__DECLARATOR, msgs);
 		return msgs;
 	}
@@ -79,7 +79,7 @@ public abstract class TypeArgumentImpl extends IdentifyableElementImpl implement
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setDeclarator(ParameterizedType newDeclarator) {
+	public void setDeclarator(ParameterizedTypeReference newDeclarator) {
 		if (newDeclarator != eInternalContainer() || (eContainerFeatureID() != TypesPackage.TYPE_ARGUMENT__DECLARATOR && newDeclarator != null)) {
 			if (EcoreUtil.isAncestor(this, newDeclarator))
 				throw new IllegalArgumentException("Recursive containment not allowed for " + toString());
@@ -87,7 +87,7 @@ public abstract class TypeArgumentImpl extends IdentifyableElementImpl implement
 			if (eInternalContainer() != null)
 				msgs = eBasicRemoveFromContainer(msgs);
 			if (newDeclarator != null)
-				msgs = ((InternalEObject)newDeclarator).eInverseAdd(this, TypesPackage.PARAMETERIZED_TYPE__ARGUMENTS, ParameterizedType.class, msgs);
+				msgs = ((InternalEObject)newDeclarator).eInverseAdd(this, TypesPackage.PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS, ParameterizedTypeReference.class, msgs);
 			msgs = basicSetDeclarator(newDeclarator, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
@@ -106,7 +106,7 @@ public abstract class TypeArgumentImpl extends IdentifyableElementImpl implement
 			case TypesPackage.TYPE_ARGUMENT__DECLARATOR:
 				if (eInternalContainer() != null)
 					msgs = eBasicRemoveFromContainer(msgs);
-				return basicSetDeclarator((ParameterizedType)otherEnd, msgs);
+				return basicSetDeclarator((ParameterizedTypeReference)otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
@@ -134,7 +134,7 @@ public abstract class TypeArgumentImpl extends IdentifyableElementImpl implement
 	public NotificationChain eBasicRemoveFromContainerFeature(NotificationChain msgs) {
 		switch (eContainerFeatureID()) {
 			case TypesPackage.TYPE_ARGUMENT__DECLARATOR:
-				return eInternalContainer().eInverseRemove(this, TypesPackage.PARAMETERIZED_TYPE__ARGUMENTS, ParameterizedType.class, msgs);
+				return eInternalContainer().eInverseRemove(this, TypesPackage.PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS, ParameterizedTypeReference.class, msgs);
 		}
 		return super.eBasicRemoveFromContainerFeature(msgs);
 	}
@@ -162,7 +162,7 @@ public abstract class TypeArgumentImpl extends IdentifyableElementImpl implement
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
 			case TypesPackage.TYPE_ARGUMENT__DECLARATOR:
-				setDeclarator((ParameterizedType)newValue);
+				setDeclarator((ParameterizedTypeReference)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -177,7 +177,7 @@ public abstract class TypeArgumentImpl extends IdentifyableElementImpl implement
 	public void eUnset(int featureID) {
 		switch (featureID) {
 			case TypesPackage.TYPE_ARGUMENT__DECLARATOR:
-				setDeclarator((ParameterizedType)null);
+				setDeclarator((ParameterizedTypeReference)null);
 				return;
 		}
 		super.eUnset(featureID);

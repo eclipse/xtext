@@ -95,30 +95,14 @@ public abstract class ComponentTypeImpl extends TypeImpl implements ComponentTyp
 		if (newArrayType != arrayType) {
 			NotificationChain msgs = null;
 			if (arrayType != null)
-				msgs = ((InternalEObject)arrayType).eInverseRemove(this, TypesPackage.ARRAY_TYPE__COMPONENT_TYPE, ArrayType.class, msgs);
+				msgs = ((InternalEObject)arrayType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.COMPONENT_TYPE__ARRAY_TYPE, null, msgs);
 			if (newArrayType != null)
-				msgs = ((InternalEObject)newArrayType).eInverseAdd(this, TypesPackage.ARRAY_TYPE__COMPONENT_TYPE, ArrayType.class, msgs);
+				msgs = ((InternalEObject)newArrayType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.COMPONENT_TYPE__ARRAY_TYPE, null, msgs);
 			msgs = basicSetArrayType(newArrayType, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.COMPONENT_TYPE__ARRAY_TYPE, newArrayType, newArrayType));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
-		switch (featureID) {
-			case TypesPackage.COMPONENT_TYPE__ARRAY_TYPE:
-				if (arrayType != null)
-					msgs = ((InternalEObject)arrayType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.COMPONENT_TYPE__ARRAY_TYPE, null, msgs);
-				return basicSetArrayType((ArrayType)otherEnd, msgs);
-		}
-		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**

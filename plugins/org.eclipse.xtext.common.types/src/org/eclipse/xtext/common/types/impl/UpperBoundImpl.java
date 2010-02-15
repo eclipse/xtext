@@ -43,7 +43,7 @@ public class UpperBoundImpl extends TypeConstraintImpl implements UpperBound {
 
 	@Override
 	public String getCanonicalName() {
-		if (referencedType != null)
+		if (typeReference != null)
 			return "extends " + super.getCanonicalName();
 		return null;
 	}
