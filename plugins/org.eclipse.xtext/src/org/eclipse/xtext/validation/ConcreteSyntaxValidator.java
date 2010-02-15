@@ -12,7 +12,9 @@ import static org.eclipse.xtext.GrammarUtil.*;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collection;
 import java.util.Collections;
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -43,6 +45,9 @@ import com.google.common.base.Function;
 import com.google.common.base.Join;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
+import com.google.common.collect.Multimap;
+import com.google.common.collect.Multimaps;
 import com.google.inject.Inject;
 
 /**
@@ -60,6 +65,15 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			this.rule = rule;
 			this.source = source;
 			this.involved = involved;
+		}
+
+		protected void appendConstraint(StringBuffer msg) {
+			if (involved.size() > 1) {
+				msg.append(" Constraint: ");
+				msg.append(getConstraint());
+				msg.append(" Quantities: ");
+				msg.append(getValue());
+			}
 		}
 
 		public List<Diagnostic> getChildren() {
@@ -80,22 +94,8 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 				return null;
 			Element root = i.next();
 			while (i.hasNext())
-				root = getCommonRoot(root, i.next());
+				root = root.getCommonContainer(i.next());
 			return root;
-		}
-
-		private Element getCommonRoot(Element obj1, Element obj2) {
-			Element cnt1 = obj1;
-			while (cnt1 != null) {
-				Element cnt2 = obj2;
-				while (cnt2 != null) {
-					if (cnt1.equals(cnt2))
-						return cnt1;
-					cnt2 = cnt2.getContainer();
-				}
-				cnt1 = cnt1.getContainer();
-			}
-			return null;
 		}
 
 		public String getConstraint() {
@@ -116,11 +116,6 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 					if (children1.size() == 1)
 						return children1.get(0) + card;
 					return "(" + Join.join(" ", children1) + ")" + card;
-				case UNORDERED_GROUP:
-					List<String> elements = getChildren(element, all);
-					if (elements.size() == 1)
-						return elements.get(0) + card;
-					return "(" + Join.join("&", elements) + ")" + card;
 				case ALTERNATIVE:
 					List<String> children2 = getChildren(element, all);
 					return "(" + Join.join("|", children2) + ")" + card;
@@ -132,15 +127,6 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 
 		public List<?> getData() {
 			return Arrays.asList(source);
-		}
-
-		protected void appendConstraint(StringBuffer msg) {
-			if (involved.size() > 1) {
-				msg.append(" Constraint: ");
-				msg.append(getConstraint());
-				msg.append(" Quantities: ");
-				msg.append(getValue());
-			}
 		}
 
 		public Throwable getException() {
@@ -189,6 +175,38 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 
 	}
 
+	public class ConcreteSyntaxAssignmentMissingDiagnostic extends AbstractConcreteSyntaxDiagnostic {
+		protected EStructuralFeature feature;
+
+		public ConcreteSyntaxAssignmentMissingDiagnostic(Element rule, EObject source, EStructuralFeature feature,
+				Set<Element> involved) {
+			super(rule, source, involved);
+			this.feature = feature;
+		}
+
+		public int getCode() {
+			return ERROR_ASSIGNMENT_MISSING;
+		}
+
+		public String getMessage() {
+			StringBuffer msg = new StringBuffer();
+			msg.append("The feature ");
+			msg.append(feature.getEContainingClass().getName());
+			if (feature.getEContainingClass() != source.eClass()) {
+				msg.append("(");
+				msg.append(source.eClass().getName());
+				msg.append(")");
+			}
+			msg.append(".");
+			msg.append(feature.getName());
+			msg.append(" contains non-transient values but has no corresponding assignment in rule ");
+			msg.append(getRule().getName());
+			msg.append(".");
+			appendConstraint(msg);
+			return msg.toString();
+		}
+	}
+
 	public class ConcreteSyntaxFeatureDiagnostic extends AbstractConcreteSyntaxDiagnostic {
 
 		protected EStructuralFeature feature;
@@ -201,11 +219,6 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			this.actual = actual;
 			this.min = min;
 			this.max = max;
-		}
-
-		@Override
-		public List<?> getData() {
-			return Arrays.asList(source, feature);
 		}
 
 		public int getActual() {
@@ -229,6 +242,11 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 					return ERROR_VALUE_PROHIBITED;
 			}
 			return 0;
+		}
+
+		@Override
+		public List<?> getData() {
+			return Arrays.asList(source, feature);
 		}
 
 		public EStructuralFeature getFeature() {
@@ -274,8 +292,8 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 					break;
 			}
 			appendConstraint(msg);
-			//			msg.append(" min:" + min);
-			//			msg.append(" max:" + max);
+			msg.append(" min:" + min);
+			msg.append(" max:" + max);
 			return msg.toString();
 		}
 
@@ -304,7 +322,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			msg.append(((Assignment) element.getEle()).getFeature());
 			msg.append("' in ");
 			msg.append(source.eClass().getName());
-			msg.append(" is needed for serialization with rule");
+			msg.append(" is needed for serialization with rule ");
 			msg.append(getRule().getName());
 			msg.append(".");
 			appendConstraint(msg);
@@ -339,6 +357,18 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		}
 	}
 
+	protected static class DependencyComparator implements Comparator<Element> {
+
+		public int compare(Element o1, Element o2) {
+			if (o1.dependsOn(o2))
+				return 1;
+			if (o2.dependsOn(o1))
+				return -1;
+			return 0;
+		}
+
+	}
+
 	protected class Element {
 		protected Element container;
 		protected List<Element> contents;
@@ -359,11 +389,35 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			this.optional = optional;
 		}
 
+		public boolean dependsOn(Element ele) {
+			Element cnt = getCommonContainer(ele);
+			while (ele != cnt) {
+				if (ele.isOptional())
+					return false;
+				ele = ele.getContainer();
+			}
+			return true;
+		}
+
 		@Override
 		public boolean equals(Object obj) {
 			if (obj instanceof Element)
 				return ((Element) obj).element == element;
 			return false;
+		}
+
+		public Element getCommonContainer(Element obj1) {
+			Element cnt1 = obj1;
+			while (cnt1 != null) {
+				Element cnt2 = this;
+				while (cnt2 != null) {
+					if (cnt1.equals(cnt2))
+						return cnt1;
+					cnt2 = cnt2.getContainer();
+				}
+				cnt1 = cnt1.getContainer();
+			}
+			return null;
 		}
 
 		public Element getContainer() {
@@ -373,7 +427,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		public List<Element> getContents() {
 			if (contents == null) {
 				contents = new ArrayList<Element>();
-				if (getType() == ElementType.ALTERNATIVE || getType() == ElementType.GROUP || getType() == ElementType.UNORDERED_GROUP)
+				if (getType() == ElementType.ALTERNATIVE || getType() == ElementType.GROUP)
 					for (EObject e : element.eContents()) {
 						Element x = createElement(this, e);
 						if (x != null)
@@ -401,11 +455,6 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			return semanticType;
 		}
 
-		public EClass getMinSemanticType() {
-			EClass s = getSemanticType();
-			return s != null ? s : container.getMinSemanticType();
-		}
-
 		public ElementType getType() {
 			return type;
 		}
@@ -415,12 +464,25 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			return element.hashCode();
 		}
 
+		public boolean isAbsolutMandatory() {
+			return !optional && type != ElementType.ALTERNATIVE
+					&& (container == null || container.isAbsolutMandatory());
+		}
+
 		public boolean isMultiple() {
 			return multiple;
 		}
 
+		public boolean isMultipleRecursive() {
+			return multiple || (container != null && container.isMultipleRecursive());
+		}
+
 		public boolean isOptional() {
 			return optional;
+		}
+
+		public boolean isOptionalRecursive() {
+			return optional || (container != null && container.isOptionalRecursive());
 		}
 
 		public boolean isRoot() {
@@ -436,8 +498,6 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 					return t + ((Assignment) element).getFeature() + c;
 				case GROUP:
 					return t + "(" + Join.join(" ", getContents()) + ")" + c;
-				case UNORDERED_GROUP:
-					return t + "(" + Join.join("&", getContents()) + ")" + c;
 				case ALTERNATIVE:
 					return t + "(" + Join.join("|", getContents()) + ")" + c;
 				case ACTION:
@@ -449,16 +509,44 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 	}
 
 	protected enum ElementType {
-		ACTION, ALTERNATIVE, ASSIGNMENT, GROUP, UNORDERED_GROUP
+		ACTION, ALTERNATIVE, ASSIGNMENT, GROUP
 	}
 
-	public static final int ERROR_FEATURE_MISSING = 6;
+	protected class Quantities {
+		private EObject delegate;
+		private Map<Element, Integer> quantities;
 
-	public static final int ERROR_LIST_UNDECIDEABLE = 3;
+		public Quantities(EObject delegate, Map<Element, Integer> quantities) {
+			super();
+			this.delegate = delegate;
+			this.quantities = quantities;
+		}
+
+		public EObject getDelegate() {
+			return delegate;
+		}
+
+		public Integer getQuantity(Element assignement) {
+			return quantities.get(assignement);
+		}
+
+		public Map<EStructuralFeature, Collection<Element>> groupByFeature() {
+			Multimap<EStructuralFeature, Element> map = Multimaps.newHashMultimap();
+			for (Element e : quantities.keySet())
+				map.put(delegate.eClass().getEStructuralFeature(((Assignment) e.getEle()).getFeature()), e);
+			return map.asMap();
+		}
+	}
+
+	public static final int ERROR_ASSIGNMENT_MISSING = 7;
+
+	public static final int ERROR_FEATURE_MISSING = 6;
 
 	public static final int ERROR_LIST_TOO_FEW = 4;
 
 	public static final int ERROR_LIST_TOO_MANY = 5;
+
+	public static final int ERROR_LIST_UNDECIDEABLE = 3;
 
 	public static final int ERROR_VALUE_PROHIBITED = 2;
 
@@ -476,24 +564,47 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 	@Inject
 	protected ITransientValueService transSrvc;
 
-	protected void collectAssignments(EClass type, Element root, List<Element> assignments) {
-		if (root.getSemanticType() != null && !root.getSemanticType().isSuperTypeOf(type))
+	protected void collectAssignments(Element rule, EObject obj, Element ele,
+			Multimap<EStructuralFeature, Element> assignments, List<IConcreteSyntaxDiagnostic> acceptor) {
+		if (ele.getSemanticType() != null && !ele.getSemanticType().isSuperTypeOf(obj.eClass()))
 			return;
-		if (root.getType() == ElementType.ASSIGNMENT)
-			assignments.add(root);
-		for (Element e : root.getContents())
-			collectAssignments(type, e, assignments);
+		if (ele.getType() == ElementType.ASSIGNMENT) {
+			EStructuralFeature f = obj.eClass().getEStructuralFeature(((Assignment) ele.getEle()).getFeature());
+			if (f == null)
+				acceptor.add(new ConcreteSyntaxFeatureMissingDiagnostic(rule, obj, ele, Collections
+						.<Element> emptySet()));
+			else
+				assignments.put(f, ele);
+		}
+		for (Element e : ele.getContents())
+			collectAssignments(rule, obj, e, assignments, acceptor);
 	}
 
-	protected void collectAssignmentsForFeature(EClass type, Element root, EStructuralFeature feat,
-			List<Element> assignments) {
-		if (root.getSemanticType() != null && !root.getSemanticType().isSuperTypeOf(type))
-			return;
-		if (root.getType() == ElementType.ASSIGNMENT
-				&& ((Assignment) root.getEle()).getFeature().equals(feat.getName()))
-			assignments.add(root);
-		for (Element e : root.getContents())
-			collectAssignmentsForFeature(type, e, feat, assignments);
+	protected Set<Element> collectUnfulfilledSemanticElements(EClass cls, Element ele) {
+		if (ele.isOptional())
+			return Collections.emptySet();
+		if (ele.getSemanticType() != null && !ele.getSemanticType().isSuperTypeOf(cls))
+			return Collections.singleton(ele);
+		switch (ele.getType()) {
+			case GROUP:
+				Set<Element> l1 = new HashSet<Element>();
+				for (Element e : ele.getContents())
+					l1.addAll(collectUnfulfilledSemanticElements(cls, e));
+				return l1;
+			case ALTERNATIVE:
+				Set<Element> l2 = new HashSet<Element>();
+				for (Element e : ele.getContents()) {
+					Set<Element> r = collectUnfulfilledSemanticElements(cls, e);
+					if (r.size() == 0)
+						return Collections.emptySet();
+					else
+						l2.addAll(r);
+				}
+				return l2;
+			default:
+				return Collections.emptySet();
+		}
+
 	}
 
 	protected Element createElement(Element parent, EObject e) {
@@ -558,12 +669,10 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 	}
 
 	protected ElementType getElementType(EObject ele) {
-		if (ele instanceof Group)
+		if (ele instanceof Group || ele instanceof UnorderedGroup)
 			return ElementType.GROUP;
 		if (ele instanceof Alternatives)
 			return ElementType.ALTERNATIVE;
-		if (ele instanceof UnorderedGroup)
-			return ElementType.UNORDERED_GROUP;
 		if (ele instanceof Assignment)
 			return ElementType.ASSIGNMENT;
 		if (ele instanceof Action)
@@ -579,12 +688,12 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		return f;
 	}
 
-	protected int getMaxCount(EObject ctx, Element ass, Set<Element> involved) {
+	protected int getMaxCount(Quantities ctx, Element ass, Set<Element> involved) {
 		int c = ass.isRoot() ? 1 : getRequiredMaxCountByParent(ctx, ass.getContainer(), ass, involved);
 		return ass.isMultiple() && c > 0 ? MAX : c;
 	}
 
-	protected int getMinCount(EObject ctx, Element assignment, Set<Element> involved) {
+	protected int getMinCount(Quantities ctx, Element assignment, Set<Element> involved) {
 		if (assignment.isOptional())
 			return 0;
 		if (assignment.isRoot())
@@ -592,10 +701,50 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		return getRequiredMinCountByParent(ctx, assignment.getContainer(), assignment, involved);
 	}
 
-	protected int getRequiredMaxCountByParent(EObject ctx, Element parent, Element exclude, Set<Element> involved) {
+	protected List<Quantities> getQuantities(EObject obj, Element rule, List<IConcreteSyntaxDiagnostic> acceptor) {
+		Multimap<EStructuralFeature, Element> assignments = Multimaps.newHashMultimap();
+		collectAssignments(rule, obj, rule, assignments, acceptor);
+		Map<EStructuralFeature, Integer> quantities = Maps.newHashMap();
+		for (EStructuralFeature f : obj.eClass().getEAllStructuralFeatures()) {
+			int quantity = getActualCount(obj, f);
+			if (quantity > 0 && !assignments.containsKey(f))
+				acceptor.add(new ConcreteSyntaxAssignmentMissingDiagnostic(rule, obj, f, Collections
+						.<Element> emptySet()));
+			else
+				quantities.put(f, quantity);
+		}
+		Map<Element, Integer> quants = Maps.newHashMap();
+		for (Map.Entry<EStructuralFeature, Integer> f : quantities.entrySet())
+			getQuantity(assignments.get(f.getKey()), f.getValue(), quants);
+		return Collections.singletonList(new Quantities(obj, quants));
+
+	}
+
+	protected void getQuantity(Collection<Element> assignments, int totalQuantity, Map<Element, Integer> map) {
+		if (assignments.size() == 1)
+			map.put(assignments.iterator().next(), totalQuantity);
+		else {
+			List<Element> sorted = new ArrayList<Element>(assignments);
+			Collections.sort(sorted, new DependencyComparator());
+			for (Element a : sorted)
+				map.put(a, !a.isOptionalRecursive() && totalQuantity-- > 0 ? 1 : 0);
+			if (totalQuantity > 0) {
+				Collections.reverse(sorted);
+				for (Element a : sorted)
+					if (a.isMultipleRecursive()) {
+						map.put(a, map.get(a) + totalQuantity);
+						totalQuantity = 0;
+						break;
+					}
+			}
+			if (totalQuantity > 0)
+				map.put(sorted.get(0), map.get(sorted.get(0)) + totalQuantity);
+		}
+	}
+
+	protected int getRequiredMaxCountByParent(Quantities ctx, Element parent, Element exclude, Set<Element> involved) {
 		switch (parent.getType()) {
 			case GROUP:
-			case UNORDERED_GROUP:
 				if (parent.isRoot() && !parent.isMultiple() && !parent.isOptional())
 					return 1;
 				int max = UNDEF;
@@ -610,7 +759,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 					int p = getRequiredMaxCountByParent(ctx, parent.getContainer(), parent, involved);
 					max = p == 0 || max == 0 ? 0 : Math.max(max, p);
 				}
-				return max;
+				return max == 0 && parent.isAbsolutMandatory() ? 1 : max;
 			case ALTERNATIVE:
 				if (parent.isMultiple())
 					return MAX;
@@ -628,18 +777,16 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		}
 	}
 
-	protected int getRequiredMaxCountForChild(EObject ctx, Element child, Set<Element> involved) {
+	protected int getRequiredMaxCountForChild(Quantities ctx, Element child, Set<Element> involved) {
 		if (child.getSemanticType() != null && !child.getSemanticType().isInstance(ctx))
 			return 0;
 		if (child.isOptional())
 			return MAX;
 		switch (child.getType()) {
 			case ASSIGNMENT:
-				EStructuralFeature f = getFeature(ctx.eClass(), child);
 				involved.add(child);
-				return getActualCount(ctx, f);
+				return ctx.getQuantity(child);
 			case GROUP:
-			case UNORDERED_GROUP:
 				int count = UNDEF;
 				for (Element a : child.getContents()) {
 					int c = getRequiredMaxCountForChild(ctx, a, involved);
@@ -652,10 +799,9 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		}
 	}
 
-	protected int getRequiredMinCountByParent(EObject ctx, Element parent, Element exclude, Set<Element> involved) {
+	protected int getRequiredMinCountByParent(Quantities ctx, Element parent, Element exclude, Set<Element> involved) {
 		switch (parent.getType()) {
 			case GROUP:
-			case UNORDERED_GROUP:
 				if (parent.isRoot() && !parent.isOptional() && !parent.isMultiple())
 					return 1;
 				int count1 = UNDEF;
@@ -689,18 +835,16 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		}
 	}
 
-	protected int getRequiredMinCountForChild(EObject ctx, Element child, Set<Element> involved) {
+	protected int getRequiredMinCountForChild(Quantities ctx, Element child, Set<Element> involved) {
 		if (child.getSemanticType() != null && !child.getSemanticType().isInstance(ctx))
 			return 0;
 		int count = UNDEF;
 		switch (child.getType()) {
 			case ASSIGNMENT:
-				EStructuralFeature f = getFeature(ctx.eClass(), child);
 				involved.add(child);
-				count = getActualCount(ctx, f);
+				count = ctx.getQuantity(child);
 				break;
 			case GROUP:
-			case UNORDERED_GROUP:
 				for (Element a : child.getContents()) {
 					int c = getRequiredMinCountForChild(ctx, a, involved);
 					if (c > count)
@@ -724,10 +868,6 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		return count;
 	}
 
-	protected boolean isOneCardinality(AbstractElement ele) {
-		return ele.getCardinality() == null || "".equals(ele.getCardinality());
-	}
-
 	protected boolean isValidateableRule(Element rule) {
 		return !ruleContainsAssignedAction(rule);
 	}
@@ -741,16 +881,6 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 	}
 
 	@Override
-	public boolean validateRecursive(EObject obj, IDiagnosticAcceptor acceptor, Map<Object, Object> context) {
-		boolean r = true;
-		r &= validateObject(obj, acceptor, context);
-		TreeIterator<EObject> i = obj.eAllContents();
-		while (i.hasNext())
-			r &= validateObject(i.next(), acceptor, context);
-		return r;
-	}
-
-	@Override
 	public boolean validateObject(EObject obj, IDiagnosticAcceptor acceptor, Map<Object, Object> context) {
 		List<IConcreteSyntaxDiagnostic> allDiags = new ArrayList<IConcreteSyntaxDiagnostic>();
 		Iterable<Element> rules = findRulesForType(obj.eClass());
@@ -758,7 +888,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			if (!isValidateableRule(rule))
 				return true;// validation is not supported if there is a not-validatable rule
 		for (Element rule : rules) {
-			List<IConcreteSyntaxDiagnostic> diags = validate(obj, rule);
+			List<IConcreteSyntaxDiagnostic> diags = validateRule(obj, rule);
 			if (diags.size() == 0)
 				return true; // validation succeeded
 			allDiags.addAll(diags);
@@ -768,69 +898,53 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		return false;
 	}
 
-	protected List<IConcreteSyntaxDiagnostic> validate(EObject obj, Element rule) {
+	protected List<IConcreteSyntaxDiagnostic> validateQuantities(Quantities obj, Element rule) {
 		List<IConcreteSyntaxDiagnostic> diag = new ArrayList<IConcreteSyntaxDiagnostic>();
-		Set<Element> checkedAssignments = new HashSet<Element>();
-		for (EStructuralFeature f : obj.eClass().getEAllStructuralFeatures()) {
+		for (Map.Entry<EStructuralFeature, Collection<Element>> e : obj.groupByFeature().entrySet()) {
 			int min = UNDEF, max = 0;
 			Set<Element> involved = new HashSet<Element>();
-			List<Element> assignments = new ArrayList<Element>();
-			collectAssignmentsForFeature(obj.eClass(), rule, f, assignments);
-			checkedAssignments.addAll(assignments);
-			for (Element a : assignments) {
+			for (Element a : e.getValue()) {
 				involved.add(a);
 				int mi = getMinCount(obj, a, involved);
 				if (mi != UNDEF)
 					min = min == UNDEF ? mi : mi + min;
 				int ma = getMaxCount(obj, a, involved);
-				if (ma != UNDEF)
+				if (ma != UNDEF && max != MAX)
 					max = ma == MAX ? ma : max + ma;
 			}
-			int actual = getActualCount(obj, f);
+			int actual = getActualCount(obj.getDelegate(), e.getKey());
 			if (actual < min || (actual > max))
-				diag.add(new ConcreteSyntaxFeatureDiagnostic(rule, obj, f, actual, min, max, involved));
+				diag.add(new ConcreteSyntaxFeatureDiagnostic(rule, obj.getDelegate(), e.getKey(), actual, min, max,
+						involved));
 		}
-		List<Element> requiredAssignments = new ArrayList<Element>();
-		collectAssignments(obj.eClass(), rule, requiredAssignments);
-		requiredAssignments.removeAll(checkedAssignments);
-		for (Element a : requiredAssignments) {
-			Set<Element> involved = new HashSet<Element>();
-			int min = getMinCount(obj, a, involved);
-			if (min > 0)
-				diag.add(new ConcreteSyntaxFeatureMissingDiagnostic(rule, obj, a, involved));
-		}
-		Set<Element> expectedTypes = collectUnfulfilledSemanticElements(obj.eClass(), rule);
-		if (expectedTypes.size() > 0)
-			diag.add(new ConcreteSyntaxObjectDiagnostic(rule, obj, expectedTypes));
 		return diag;
 	}
 
-	protected Set<Element> collectUnfulfilledSemanticElements(EClass cls, Element ele) {
-		if (ele.isOptional())
-			return Collections.emptySet();
-		if (ele.getSemanticType() != null && !ele.getSemanticType().isSuperTypeOf(cls))
-			return Collections.singleton(ele);
-		switch (ele.getType()) {
-			case GROUP:
-			case UNORDERED_GROUP:
-				Set<Element> l1 = new HashSet<Element>();
-				for (Element e : ele.getContents())
-					l1.addAll(collectUnfulfilledSemanticElements(cls, e));
-				return l1;
-			case ALTERNATIVE:
-				Set<Element> l2 = new HashSet<Element>();
-				for (Element e : ele.getContents()) {
-					Set<Element> r = collectUnfulfilledSemanticElements(cls, e);
-					if (r.size() == 0)
-						return Collections.emptySet();
-					else
-						l2.addAll(r);
-				}
-				return l2;
-			default:
-				return Collections.emptySet();
-		}
+	@Override
+	public boolean validateRecursive(EObject obj, IDiagnosticAcceptor acceptor, Map<Object, Object> context) {
+		boolean r = true;
+		r &= validateObject(obj, acceptor, context);
+		TreeIterator<EObject> i = obj.eAllContents();
+		while (i.hasNext())
+			r &= validateObject(i.next(), acceptor, context);
+		return r;
+	}
 
+	protected List<IConcreteSyntaxDiagnostic> validateRule(EObject obj, Element rule) {
+		List<IConcreteSyntaxDiagnostic> allDiags = new ArrayList<IConcreteSyntaxDiagnostic>();
+		Set<Element> expectedTypes = collectUnfulfilledSemanticElements(obj.eClass(), rule);
+		if (expectedTypes.size() > 0)
+			allDiags.add(new ConcreteSyntaxObjectDiagnostic(rule, obj, expectedTypes));
+		List<Quantities> quantities = getQuantities(obj, rule, allDiags);
+		if (!allDiags.isEmpty())
+			return allDiags;
+		for (Quantities q : quantities) {
+			List<IConcreteSyntaxDiagnostic> diags = validateQuantities(q, rule);
+			if (diags.isEmpty())
+				return diags;
+			allDiags.addAll(diags);
+		}
+		return allDiags;
 	}
 
 }

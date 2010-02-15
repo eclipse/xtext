@@ -13,19 +13,19 @@ public final class ConcreteSyntaxValidationTestLanguageDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-	public static final ICharacterClass keyword$45$Delimiter = ICharacterClass.Factory.nullClass();
+	public static final ICharacterClass keyword$49$Delimiter = ICharacterClass.Factory.nullClass();
 
-	public static final ISequenceMatcher ruleCall$47$Delimiter = new SetBasedKeywordMatcher(
+	public static final ISequenceMatcher ruleCall$51$Delimiter = new SetBasedKeywordMatcher(
 		"kw1", "kw2", "kw3", "kw4", "kw5", "group");
 
     
-	public static final ICharacterClass keyword$56$Delimiter = ICharacterClass.Factory.join(
+	public static final ICharacterClass keyword$60$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.create('_'),
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
-	public static final ISequenceMatcher ruleCall$249$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static final ISequenceMatcher ruleCall$253$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
 }

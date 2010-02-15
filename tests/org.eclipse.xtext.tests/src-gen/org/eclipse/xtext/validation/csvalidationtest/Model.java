@@ -34,6 +34,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX17 <em>X17</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX18 <em>X18</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX19 <em>X19</em>}</li>
+ *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX20 <em>X20</em>}</li>
+ *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX21 <em>X21</em>}</li>
  * </ul>
  * </p>
  *
@@ -536,5 +538,57 @@ public interface Model extends EObject
    * @generated
    */
   void setX19(List3 value);
+
+  /**
+   * Returns the value of the '<em><b>X20</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X20</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X20</em>' containment reference.
+   * @see #setX20(List4)
+   * @see org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage#getModel_X20()
+   * @model containment="true"
+   * @generated
+   */
+  List4 getX20();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX20 <em>X20</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X20</em>' containment reference.
+   * @see #getX20()
+   * @generated
+   */
+  void setX20(List4 value);
+
+  /**
+   * Returns the value of the '<em><b>X21</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X21</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X21</em>' containment reference.
+   * @see #setX21(List5)
+   * @see org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage#getModel_X21()
+   * @model containment="true"
+   * @generated
+   */
+  List5 getX21();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX21 <em>X21</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X21</em>' containment reference.
+   * @see #getX21()
+   * @generated
+   */
+  void setX21(List5 value);
 
 } // Model

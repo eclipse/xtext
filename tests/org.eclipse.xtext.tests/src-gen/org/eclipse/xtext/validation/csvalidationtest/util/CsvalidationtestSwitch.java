@@ -244,6 +244,20 @@ public class CsvalidationtestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case CsvalidationtestPackage.LIST4:
+      {
+        List4 list4 = (List4)theEObject;
+        T result = caseList4(list4);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case CsvalidationtestPackage.LIST5:
+      {
+        List5 list5 = (List5)theEObject;
+        T result = caseList5(list5);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case CsvalidationtestPackage.UNASSIGNED_ACTION2_SUB:
       {
         UnassignedAction2Sub unassignedAction2Sub = (UnassignedAction2Sub)theEObject;
@@ -613,6 +627,38 @@ public class CsvalidationtestSwitch<T>
    * @generated
    */
   public T caseList3(List3 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>List4</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>List4</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseList4(List4 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>List5</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>List5</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseList5(List5 object)
   {
     return null;
   }

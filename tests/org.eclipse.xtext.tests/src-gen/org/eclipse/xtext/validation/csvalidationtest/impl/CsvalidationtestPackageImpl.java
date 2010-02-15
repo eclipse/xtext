@@ -24,6 +24,8 @@ import org.eclipse.xtext.validation.csvalidationtest.GroupMultiplicities;
 import org.eclipse.xtext.validation.csvalidationtest.List1;
 import org.eclipse.xtext.validation.csvalidationtest.List2;
 import org.eclipse.xtext.validation.csvalidationtest.List3;
+import org.eclipse.xtext.validation.csvalidationtest.List4;
+import org.eclipse.xtext.validation.csvalidationtest.List5;
 import org.eclipse.xtext.validation.csvalidationtest.Model;
 import org.eclipse.xtext.validation.csvalidationtest.SimpleAlternative;
 import org.eclipse.xtext.validation.csvalidationtest.SimpleGroup;
@@ -194,6 +196,20 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
    * @generated
    */
   private EClass list3EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass list4EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass list5EClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -484,6 +500,26 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
   public EReference getModel_X19()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(18);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_X20()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(19);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_X21()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(20);
   }
 
   /**
@@ -1181,6 +1217,76 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getList4()
+  {
+    return list4EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getList4_Val1()
+  {
+    return (EAttribute)list4EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getList4_Val2()
+  {
+    return (EAttribute)list4EClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getList5()
+  {
+    return list5EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getList5_Val1()
+  {
+    return (EAttribute)list5EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getList5_Val2()
+  {
+    return (EAttribute)list5EClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getList5_Val3()
+  {
+    return (EAttribute)list5EClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getUnassignedAction2Sub()
   {
     return unassignedAction2SubEClass;
@@ -1286,6 +1392,8 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     createEReference(modelEClass, MODEL__X17);
     createEReference(modelEClass, MODEL__X18);
     createEReference(modelEClass, MODEL__X19);
+    createEReference(modelEClass, MODEL__X20);
+    createEReference(modelEClass, MODEL__X21);
 
     simpleGroupEClass = createEClass(SIMPLE_GROUP);
     createEAttribute(simpleGroupEClass, SIMPLE_GROUP__VAL1);
@@ -1376,6 +1484,15 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     createEAttribute(list3EClass, LIST3__VAL1);
     createEAttribute(list3EClass, LIST3__VAL2);
 
+    list4EClass = createEClass(LIST4);
+    createEAttribute(list4EClass, LIST4__VAL1);
+    createEAttribute(list4EClass, LIST4__VAL2);
+
+    list5EClass = createEClass(LIST5);
+    createEAttribute(list5EClass, LIST5__VAL1);
+    createEAttribute(list5EClass, LIST5__VAL2);
+    createEAttribute(list5EClass, LIST5__VAL3);
+
     unassignedAction2SubEClass = createEClass(UNASSIGNED_ACTION2_SUB);
     createEAttribute(unassignedAction2SubEClass, UNASSIGNED_ACTION2_SUB__VAL1);
     createEAttribute(unassignedAction2SubEClass, UNASSIGNED_ACTION2_SUB__VAL2);
@@ -1444,6 +1561,8 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     initEReference(getModel_X17(), this.getList1(), null, "x17", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X18(), this.getList2(), null, "x18", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X19(), this.getList3(), null, "x19", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X20(), this.getList4(), null, "x20", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X21(), this.getList5(), null, "x21", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(simpleGroupEClass, SimpleGroup.class, "SimpleGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSimpleGroup_Val1(), ecorePackage.getEString(), "val1", null, 0, 1, SimpleGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1533,6 +1652,15 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     initEClass(list3EClass, List3.class, "List3", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getList3_Val1(), ecorePackage.getEString(), "val1", null, 0, -1, List3.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getList3_Val2(), ecorePackage.getEString(), "val2", null, 0, 1, List3.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(list4EClass, List4.class, "List4", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getList4_Val1(), ecorePackage.getEString(), "val1", null, 0, -1, List4.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getList4_Val2(), ecorePackage.getEString(), "val2", null, 0, 1, List4.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(list5EClass, List5.class, "List5", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getList5_Val1(), ecorePackage.getEString(), "val1", null, 0, -1, List5.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getList5_Val2(), ecorePackage.getEString(), "val2", null, 0, 1, List5.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getList5_Val3(), ecorePackage.getEString(), "val3", null, 0, 1, List5.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(unassignedAction2SubEClass, UnassignedAction2Sub.class, "UnassignedAction2Sub", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getUnassignedAction2Sub_Val1(), ecorePackage.getEString(), "val1", null, 0, 1, UnassignedAction2Sub.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

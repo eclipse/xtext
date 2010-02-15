@@ -57,6 +57,8 @@ protected class ThisRootNode extends RootToken {
 			case 19: return new List1_Group(this, this, 19, inst);
 			case 20: return new List2_Group(this, this, 20, inst);
 			case 21: return new List3_Alternatives(this, this, 21, inst);
+			case 22: return new List4_Group(this, this, 22, inst);
+			case 23: return new List5_Group(this, this, 23, inst);
 			default: return null;
 		}	
 	}	
@@ -71,7 +73,7 @@ protected class ThisRootNode extends RootToken {
  *   AssignedActionSecond|x8=UnassignedAction1|x9=UnassignedAction2|x10=
  *   UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|x13=
  *   Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
- *   List2|x19=List3;
+ *   List2|x19=List3|x20=List4|x21=List5;
  *
  **/
 
@@ -80,7 +82,7 @@ protected class ThisRootNode extends RootToken {
 // AssignedActionSecond|x8=UnassignedAction1|x9=UnassignedAction2|x10=
 // UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|x13=
 // Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
-// List2|x19=List3
+// List2|x19=List3|x20=List4|x21=List5
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -114,6 +116,8 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 16: return new Model_X17Assignment_16(parent, this, 16, inst);
 			case 17: return new Model_X18Assignment_17(parent, this, 17, inst);
 			case 18: return new Model_X19Assignment_18(parent, this, 18, inst);
+			case 19: return new Model_X20Assignment_19(parent, this, 19, inst);
+			case 20: return new Model_X21Assignment_20(parent, this, 20, inst);
 			default: return null;
 		}	
 	}	
@@ -964,6 +968,96 @@ protected class Model_X19Assignment_18 extends AssignmentToken  {
 			if(param.isInstanceOf(grammarAccess.getList3Rule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
 				element = grammarAccess.getModelAccess().getX19List3ParserRuleCall_18_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// x20=List4
+protected class Model_X20Assignment_19 extends AssignmentToken  {
+	
+	public Model_X20Assignment_19(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getX20Assignment_19();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new List4_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("x20",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("x20");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getList4Rule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getModelAccess().getX20List4ParserRuleCall_19_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// x21=List5
+protected class Model_X21Assignment_20 extends AssignmentToken  {
+	
+	public Model_X21Assignment_20(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getX21Assignment_20();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new List5_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("x21",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("x21");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getList5Rule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getModelAccess().getX21List5ParserRuleCall_20_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -5535,5 +5629,546 @@ protected class List3_Val2Assignment_1_1 extends AssignmentToken  {
 
 
 /************ end Rule List3 ****************/
+
+
+/************ begin Rule List4 ****************
+ *
+ * List4:
+ *   "#20" val1+=ID ("," val1+=ID)* "kw3" val2=ID;
+ *
+ **/
+
+// "#20" val1+=ID ("," val1+=ID)* "kw3" val2=ID
+protected class List4_Group extends GroupToken {
+	
+	public List4_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getList4Access().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new List4_Val2Assignment_4(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getList4Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "#20"
+protected class List4_NumberSignDigitTwoDigitZeroKeyword_0 extends KeywordToken  {
+	
+	public List4_NumberSignDigitTwoDigitZeroKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getList4Access().getNumberSignDigitTwoDigitZeroKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// val1+=ID
+protected class List4_Val1Assignment_1 extends AssignmentToken  {
+	
+	public List4_Val1Assignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getList4Access().getVal1Assignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new List4_NumberSignDigitTwoDigitZeroKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val1",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val1");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getList4Access().getVal1IDTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// ("," val1+=ID)*
+protected class List4_Group_2 extends GroupToken {
+	
+	public List4_Group_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getList4Access().getGroup_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new List4_Val1Assignment_2_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// ","
+protected class List4_CommaKeyword_2_0 extends KeywordToken  {
+	
+	public List4_CommaKeyword_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getList4Access().getCommaKeyword_2_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new List4_Group_2(parent, this, 0, inst);
+			case 1: return new List4_Val1Assignment_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// val1+=ID
+protected class List4_Val1Assignment_2_1 extends AssignmentToken  {
+	
+	public List4_Val1Assignment_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getList4Access().getVal1Assignment_2_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new List4_CommaKeyword_2_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val1",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val1");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getList4Access().getVal1IDTerminalRuleCall_2_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// "kw3"
+protected class List4_Kw3Keyword_3 extends KeywordToken  {
+	
+	public List4_Kw3Keyword_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getList4Access().getKw3Keyword_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new List4_Group_2(parent, this, 0, inst);
+			case 1: return new List4_Val1Assignment_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// val2=ID
+protected class List4_Val2Assignment_4 extends AssignmentToken  {
+	
+	public List4_Val2Assignment_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getList4Access().getVal2Assignment_4();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new List4_Kw3Keyword_3(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val2",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val2");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getList4Access().getVal2IDTerminalRuleCall_4_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule List4 ****************/
+
+
+/************ begin Rule List5 ****************
+ *
+ * List5:
+ *   "#21" (val1+=ID ("," val1+=ID)* "kw3" val2=ID|val3=ID);
+ *
+ **/
+
+// "#21" (val1+=ID ("," val1+=ID)* "kw3" val2=ID|val3=ID)
+protected class List5_Group extends GroupToken {
+	
+	public List5_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getList5Access().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new List5_Alternatives_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getList5Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "#21"
+protected class List5_NumberSignDigitTwoDigitOneKeyword_0 extends KeywordToken  {
+	
+	public List5_NumberSignDigitTwoDigitOneKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getList5Access().getNumberSignDigitTwoDigitOneKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// val1+=ID ("," val1+=ID)* "kw3" val2=ID|val3=ID
+protected class List5_Alternatives_1 extends AlternativesToken {
+
+	public List5_Alternatives_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getList5Access().getAlternatives_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new List5_Group_1_0(parent, this, 0, inst);
+			case 1: return new List5_Val3Assignment_1_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// val1+=ID ("," val1+=ID)* "kw3" val2=ID
+protected class List5_Group_1_0 extends GroupToken {
+	
+	public List5_Group_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getList5Access().getGroup_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new List5_Val2Assignment_1_0_3(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// val1+=ID
+protected class List5_Val1Assignment_1_0_0 extends AssignmentToken  {
+	
+	public List5_Val1Assignment_1_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getList5Access().getVal1Assignment_1_0_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new List5_NumberSignDigitTwoDigitOneKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val1",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val1");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getList5Access().getVal1IDTerminalRuleCall_1_0_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// ("," val1+=ID)*
+protected class List5_Group_1_0_1 extends GroupToken {
+	
+	public List5_Group_1_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getList5Access().getGroup_1_0_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new List5_Val1Assignment_1_0_1_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// ","
+protected class List5_CommaKeyword_1_0_1_0 extends KeywordToken  {
+	
+	public List5_CommaKeyword_1_0_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getList5Access().getCommaKeyword_1_0_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new List5_Group_1_0_1(parent, this, 0, inst);
+			case 1: return new List5_Val1Assignment_1_0_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// val1+=ID
+protected class List5_Val1Assignment_1_0_1_1 extends AssignmentToken  {
+	
+	public List5_Val1Assignment_1_0_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getList5Access().getVal1Assignment_1_0_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new List5_CommaKeyword_1_0_1_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val1",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val1");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getList5Access().getVal1IDTerminalRuleCall_1_0_1_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// "kw3"
+protected class List5_Kw3Keyword_1_0_2 extends KeywordToken  {
+	
+	public List5_Kw3Keyword_1_0_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getList5Access().getKw3Keyword_1_0_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new List5_Group_1_0_1(parent, this, 0, inst);
+			case 1: return new List5_Val1Assignment_1_0_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// val2=ID
+protected class List5_Val2Assignment_1_0_3 extends AssignmentToken  {
+	
+	public List5_Val2Assignment_1_0_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getList5Access().getVal2Assignment_1_0_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new List5_Kw3Keyword_1_0_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val2",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val2");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getList5Access().getVal2IDTerminalRuleCall_1_0_3_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// val3=ID
+protected class List5_Val3Assignment_1_1 extends AssignmentToken  {
+	
+	public List5_Val3Assignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getList5Access().getVal3Assignment_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new List5_NumberSignDigitTwoDigitOneKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val3",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val3");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getList5Access().getVal3IDTerminalRuleCall_1_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+
+/************ end Rule List5 ****************/
 
 }

@@ -44,6 +44,10 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 
 	private INonTerminalConsumer list3Consumer;
 
+	private INonTerminalConsumer list4Consumer;
+
+	private INonTerminalConsumer list5Consumer;
+
 	private INonTerminalConsumer simpleAlternativeConsumer;
 
 	private INonTerminalConsumer simpleGroupConsumer;
@@ -138,6 +142,14 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 
 	private IElementConsumer ruleCall$39$Consumer;
 
+	private IElementConsumer assignment$40$Consumer;
+
+	private IElementConsumer ruleCall$41$Consumer;
+
+	private IElementConsumer assignment$42$Consumer;
+
+	private IElementConsumer ruleCall$43$Consumer;
+
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
 		protected Alternatives$1$Consumer(final Alternatives alternatives) {
@@ -165,6 +177,8 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 			acceptor.accept(assignment$34$Consumer);
 			acceptor.accept(assignment$36$Consumer);
 			acceptor.accept(assignment$38$Consumer);
+			acceptor.accept(assignment$40$Consumer);
+			acceptor.accept(assignment$42$Consumer);
 		}
 	}
 
@@ -624,6 +638,54 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 		}
 	}
 
+	protected class Assignment$40$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$40$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$41$Consumer;
+		}
+	}
+
+	protected class RuleCall$41$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$41$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(list4Consumer, "x20", false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class Assignment$42$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$42$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$43$Consumer;
+		}
+	}
+
+	protected class RuleCall$43$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$43$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(list5Consumer, "x21", false, false, false, getElement(), optional);
+		}
+	}
+
 	public ConcreteSyntaxValidationTestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
@@ -679,6 +741,10 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 		ruleCall$37$Consumer = new RuleCall$37$Consumer(rule.getX18List2ParserRuleCall_17_0());
 		assignment$38$Consumer = new Assignment$38$Consumer(rule.getX19Assignment_18());
 		ruleCall$39$Consumer = new RuleCall$39$Consumer(rule.getX19List3ParserRuleCall_18_0());
+		assignment$40$Consumer = new Assignment$40$Consumer(rule.getX20Assignment_19());
+		ruleCall$41$Consumer = new RuleCall$41$Consumer(rule.getX20List4ParserRuleCall_19_0());
+		assignment$42$Consumer = new Assignment$42$Consumer(rule.getX21Assignment_20());
+		ruleCall$43$Consumer = new RuleCall$43$Consumer(rule.getX21List5ParserRuleCall_20_0());
 	}
 	
 	@Override
@@ -733,6 +799,14 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 	
 	public void setList3Consumer(INonTerminalConsumer list3Consumer) {
 		this.list3Consumer = list3Consumer;
+	}
+	
+	public void setList4Consumer(INonTerminalConsumer list4Consumer) {
+		this.list4Consumer = list4Consumer;
+	}
+	
+	public void setList5Consumer(INonTerminalConsumer list5Consumer) {
+		this.list5Consumer = list5Consumer;
 	}
 	
 	public void setSimpleAlternativeConsumer(INonTerminalConsumer simpleAlternativeConsumer) {

@@ -241,13 +241,31 @@ public interface CsvalidationtestPackage extends EPackage
   int MODEL__X19 = 18;
 
   /**
+   * The feature id for the '<em><b>X20</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X20 = 19;
+
+  /**
+   * The feature id for the '<em><b>X21</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X21 = 20;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 19;
+  int MODEL_FEATURE_COUNT = 21;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -1071,6 +1089,89 @@ public interface CsvalidationtestPackage extends EPackage
   int LIST3_FEATURE_COUNT = 2;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.List4Impl <em>List4</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.validation.csvalidationtest.impl.List4Impl
+   * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getList4()
+   * @generated
+   */
+  int LIST4 = 21;
+
+  /**
+   * The feature id for the '<em><b>Val1</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LIST4__VAL1 = 0;
+
+  /**
+   * The feature id for the '<em><b>Val2</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LIST4__VAL2 = 1;
+
+  /**
+   * The number of structural features of the '<em>List4</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LIST4_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.List5Impl <em>List5</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.validation.csvalidationtest.impl.List5Impl
+   * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getList5()
+   * @generated
+   */
+  int LIST5 = 22;
+
+  /**
+   * The feature id for the '<em><b>Val1</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LIST5__VAL1 = 0;
+
+  /**
+   * The feature id for the '<em><b>Val2</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LIST5__VAL2 = 1;
+
+  /**
+   * The feature id for the '<em><b>Val3</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LIST5__VAL3 = 2;
+
+  /**
+   * The number of structural features of the '<em>List5</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LIST5_FEATURE_COUNT = 3;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.UnassignedAction2SubImpl <em>Unassigned Action2 Sub</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1078,7 +1179,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getUnassignedAction2Sub()
    * @generated
    */
-  int UNASSIGNED_ACTION2_SUB = 21;
+  int UNASSIGNED_ACTION2_SUB = 23;
 
   /**
    * The feature id for the '<em><b>Val1</b></em>' attribute.
@@ -1115,7 +1216,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getUnassignedAction2Sub1()
    * @generated
    */
-  int UNASSIGNED_ACTION2_SUB1 = 22;
+  int UNASSIGNED_ACTION2_SUB1 = 24;
 
   /**
    * The feature id for the '<em><b>Val1</b></em>' attribute.
@@ -1152,7 +1253,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getUnassignedAction2Sub2()
    * @generated
    */
-  int UNASSIGNED_ACTION2_SUB2 = 23;
+  int UNASSIGNED_ACTION2_SUB2 = 25;
 
   /**
    * The feature id for the '<em><b>Val1</b></em>' attribute.
@@ -1189,7 +1290,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getUnassignedRuleCall2SubAction()
    * @generated
    */
-  int UNASSIGNED_RULE_CALL2_SUB_ACTION = 24;
+  int UNASSIGNED_RULE_CALL2_SUB_ACTION = 26;
 
   /**
    * The feature id for the '<em><b>Val2</b></em>' attribute.
@@ -1428,6 +1529,28 @@ public interface CsvalidationtestPackage extends EPackage
    * @generated
    */
   EReference getModel_X19();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX20 <em>X20</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X20</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.Model#getX20()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X20();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX21 <em>X21</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X21</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.Model#getX21()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X21();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.validation.csvalidationtest.SimpleGroup <em>Simple Group</em>}'.
@@ -2169,6 +2292,81 @@ public interface CsvalidationtestPackage extends EPackage
   EAttribute getList3_Val2();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.validation.csvalidationtest.List4 <em>List4</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>List4</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.List4
+   * @generated
+   */
+  EClass getList4();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.validation.csvalidationtest.List4#getVal1 <em>Val1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Val1</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.List4#getVal1()
+   * @see #getList4()
+   * @generated
+   */
+  EAttribute getList4_Val1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.validation.csvalidationtest.List4#getVal2 <em>Val2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val2</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.List4#getVal2()
+   * @see #getList4()
+   * @generated
+   */
+  EAttribute getList4_Val2();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.validation.csvalidationtest.List5 <em>List5</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>List5</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.List5
+   * @generated
+   */
+  EClass getList5();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.validation.csvalidationtest.List5#getVal1 <em>Val1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Val1</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.List5#getVal1()
+   * @see #getList5()
+   * @generated
+   */
+  EAttribute getList5_Val1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.validation.csvalidationtest.List5#getVal2 <em>Val2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val2</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.List5#getVal2()
+   * @see #getList5()
+   * @generated
+   */
+  EAttribute getList5_Val2();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.validation.csvalidationtest.List5#getVal3 <em>Val3</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val3</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.List5#getVal3()
+   * @see #getList5()
+   * @generated
+   */
+  EAttribute getList5_Val3();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.validation.csvalidationtest.UnassignedAction2Sub <em>Unassigned Action2 Sub</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2414,6 +2612,22 @@ public interface CsvalidationtestPackage extends EPackage
      * @generated
      */
     EReference MODEL__X19 = eINSTANCE.getModel_X19();
+
+    /**
+     * The meta object literal for the '<em><b>X20</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X20 = eINSTANCE.getModel_X20();
+
+    /**
+     * The meta object literal for the '<em><b>X21</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X21 = eINSTANCE.getModel_X21();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -3006,6 +3220,66 @@ public interface CsvalidationtestPackage extends EPackage
      * @generated
      */
     EAttribute LIST3__VAL2 = eINSTANCE.getList3_Val2();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.List4Impl <em>List4</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.validation.csvalidationtest.impl.List4Impl
+     * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getList4()
+     * @generated
+     */
+    EClass LIST4 = eINSTANCE.getList4();
+
+    /**
+     * The meta object literal for the '<em><b>Val1</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LIST4__VAL1 = eINSTANCE.getList4_Val1();
+
+    /**
+     * The meta object literal for the '<em><b>Val2</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LIST4__VAL2 = eINSTANCE.getList4_Val2();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.List5Impl <em>List5</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.validation.csvalidationtest.impl.List5Impl
+     * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getList5()
+     * @generated
+     */
+    EClass LIST5 = eINSTANCE.getList5();
+
+    /**
+     * The meta object literal for the '<em><b>Val1</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LIST5__VAL1 = eINSTANCE.getList5_Val1();
+
+    /**
+     * The meta object literal for the '<em><b>Val2</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LIST5__VAL2 = eINSTANCE.getList5_Val2();
+
+    /**
+     * The meta object literal for the '<em><b>Val3</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LIST5__VAL3 = eINSTANCE.getList5_Val3();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.UnassignedAction2SubImpl <em>Unassigned Action2 Sub</em>}' class.
