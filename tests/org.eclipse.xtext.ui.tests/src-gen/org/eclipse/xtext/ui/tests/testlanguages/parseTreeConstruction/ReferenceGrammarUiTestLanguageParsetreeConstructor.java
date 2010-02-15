@@ -1074,11 +1074,11 @@ protected class Spielzeug_RightParenthesisKeyword_4 extends KeywordToken  {
 /************ begin Rule Farbe ****************
  *
  * Farbe:
- *   wert=( "ROT" | "BLAU" | "GELB" | "GR\u2039N" );
+ *   wert=( "ROT" | "BLAU" | "GELB" | "GR\u00DCN" );
  *
  **/
 
-// wert=( "ROT" | "BLAU" | "GELB" | "GR\u2039N" )
+// wert=( "ROT" | "BLAU" | "GELB" | "GR\u00DCN" )
 protected class Farbe_WertAssignment extends AssignmentToken  {
 	
 	public Farbe_WertAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -1123,7 +1123,7 @@ protected class Farbe_WertAssignment extends AssignmentToken  {
 		}
 		if("GRÜN".equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
 			type = AssignmentType.KW;
-			element = grammarAccess.getFarbeAccess().getWertGRNKeyword_0_3();
+			element = grammarAccess.getFarbeAccess().getWertGRÜNKeyword_0_3();
 			return obj;
 		}
 		return null;
