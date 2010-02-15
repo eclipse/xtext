@@ -48,7 +48,7 @@ public abstract class AbstractCleaningLinker extends AbstractLinker {
 	}
 
 	protected void clearReference(EObject obj, EReference ref) {
-		if (!ref.isContainment() && !ref.isContainer() && !ref.isDerived() && ref.isChangeable())
+		if (!ref.isContainment() && !ref.isContainer() && !ref.isDerived() && ref.isChangeable() && !ref.isTransient())
 			obj.eUnset(ref);
 	}
 }
