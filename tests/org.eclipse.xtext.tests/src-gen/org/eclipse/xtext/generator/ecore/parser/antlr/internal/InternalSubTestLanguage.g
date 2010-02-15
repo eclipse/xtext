@@ -116,7 +116,82 @@ ruleSubMain returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getSubMainAccess().getRightCurlyBracketKeyword_2(), null); 
     }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getSubMainAccess().getAnotherAnotherSuperMainParserRuleCall_3_0(), currentNode); 
+	    }
+		lv_another_3_0=ruleAnotherSuperMain		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getSubMainRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"another",
+	        		lv_another_3_0, 
+	        		"AnotherSuperMain", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
 )
+)?)
+;
+
+
+
+
+
+// Entry rule entryRuleAnotherSuperMain
+entryRuleAnotherSuperMain returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getAnotherSuperMainRule(), currentNode); }
+	 iv_ruleAnotherSuperMain=ruleAnotherSuperMain 
+	 { $current=$iv_ruleAnotherSuperMain.current; } 
+	 EOF 
+;
+
+// Rule AnotherSuperMain
+ruleAnotherSuperMain returns [EObject current=null] 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(	'ups' 
+    {
+        createLeafNode(grammarAccess.getAnotherSuperMainAccess().getUpsKeyword_0(), null); 
+    }
+(
+(
+		lv_name_1_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getAnotherSuperMainAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getAnotherSuperMainRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"name",
+	        		lv_name_1_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+))
 ;
 
 

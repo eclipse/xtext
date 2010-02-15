@@ -24,12 +24,14 @@ public class SubTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 		private final Assignment cSuperMainsAssignment_1 = (Assignment)cGroup.eContents().get(1);
 		private final RuleCall cSuperMainsSuperMainParserRuleCall_1_0 = (RuleCall)cSuperMainsAssignment_1.eContents().get(0);
 		private final Keyword cRightCurlyBracketKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cAnotherAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final RuleCall cAnotherAnotherSuperMainParserRuleCall_3_0 = (RuleCall)cAnotherAssignment_3.eContents().get(0);
 		
 		//SubMain:
-		//  "{" superMains+=SuperMain "}";
+		//  "{" superMains+=SuperMain "}" another=AnotherSuperMain?;
 		public ParserRule getRule() { return rule; }
 
-		//"{" superMains+=SuperMain "}"
+		//"{" superMains+=SuperMain "}" another=AnotherSuperMain?
 		public Group getGroup() { return cGroup; }
 
 		//"{"
@@ -43,10 +45,41 @@ public class SubTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 
 		//"}"
 		public Keyword getRightCurlyBracketKeyword_2() { return cRightCurlyBracketKeyword_2; }
+
+		//another=AnotherSuperMain?
+		public Assignment getAnotherAssignment_3() { return cAnotherAssignment_3; }
+
+		//AnotherSuperMain
+		public RuleCall getAnotherAnotherSuperMainParserRuleCall_3_0() { return cAnotherAnotherSuperMainParserRuleCall_3_0; }
+	}
+
+	public class AnotherSuperMainElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AnotherSuperMain");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cUpsKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		
+		//AnotherSuperMain:
+		//  "ups" name=ID;
+		public ParserRule getRule() { return rule; }
+
+		//"ups" name=ID
+		public Group getGroup() { return cGroup; }
+
+		//"ups"
+		public Keyword getUpsKeyword_0() { return cUpsKeyword_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
 	
 	
 	private SubMainElements pSubMain;
+	private AnotherSuperMainElements pAnotherSuperMain;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -70,13 +103,23 @@ public class SubTestLanguageGrammarAccess extends AbstractGrammarElementFinder {
 
 	
 	//SubMain:
-	//  "{" superMains+=SuperMain "}";
+	//  "{" superMains+=SuperMain "}" another=AnotherSuperMain?;
 	public SubMainElements getSubMainAccess() {
 		return (pSubMain != null) ? pSubMain : (pSubMain = new SubMainElements());
 	}
 	
 	public ParserRule getSubMainRule() {
 		return getSubMainAccess().getRule();
+	}
+
+	//AnotherSuperMain:
+	//  "ups" name=ID;
+	public AnotherSuperMainElements getAnotherSuperMainAccess() {
+		return (pAnotherSuperMain != null) ? pAnotherSuperMain : (pAnotherSuperMain = new AnotherSuperMainElements());
+	}
+	
+	public ParserRule getAnotherSuperMainRule() {
+		return getAnotherSuperMainAccess().getRule();
 	}
 
 	//SuperMain:

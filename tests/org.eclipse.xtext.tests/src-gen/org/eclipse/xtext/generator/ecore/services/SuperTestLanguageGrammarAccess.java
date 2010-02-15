@@ -40,9 +40,34 @@ public class SuperTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
 	}
+
+	public class AnotherSuperMainElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AnotherSuperMain");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cAnotherKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		
+		//AnotherSuperMain:
+		//  "another" name=ID;
+		public ParserRule getRule() { return rule; }
+
+		//"another" name=ID
+		public Group getGroup() { return cGroup; }
+
+		//"another"
+		public Keyword getAnotherKeyword_0() { return cAnotherKeyword_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+	}
 	
 	
 	private SuperMainElements pSuperMain;
+	private AnotherSuperMainElements pAnotherSuperMain;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -73,6 +98,16 @@ public class SuperTestLanguageGrammarAccess extends AbstractGrammarElementFinder
 	
 	public ParserRule getSuperMainRule() {
 		return getSuperMainAccess().getRule();
+	}
+
+	//AnotherSuperMain:
+	//  "another" name=ID;
+	public AnotherSuperMainElements getAnotherSuperMainAccess() {
+		return (pAnotherSuperMain != null) ? pAnotherSuperMain : (pAnotherSuperMain = new AnotherSuperMainElements());
+	}
+	
+	public ParserRule getAnotherSuperMainRule() {
+		return getAnotherSuperMainAccess().getRule();
 	}
 
 	//terminal ID:

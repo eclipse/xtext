@@ -24,6 +24,8 @@ public final class SubTestLanguageSubMainConsumer extends NonTerminalConsumer {
 
 	private SubMainElements rule;	
 
+	private INonTerminalConsumer anotherSuperMainConsumer;
+
 	private INonTerminalConsumer superMainConsumer;
 
 	private IElementConsumer group$1$Consumer;
@@ -35,6 +37,10 @@ public final class SubTestLanguageSubMainConsumer extends NonTerminalConsumer {
 	private IElementConsumer ruleCall$4$Consumer;
 
 	private IElementConsumer keyword$5$Consumer;
+
+	private IElementConsumer assignment$6$Consumer;
+
+	private IElementConsumer ruleCall$7$Consumer;
 
 	private ICharacterClass keyword$2$Delimiter;
 
@@ -51,6 +57,7 @@ public final class SubTestLanguageSubMainConsumer extends NonTerminalConsumer {
 			acceptor.accept(keyword$2$Consumer);
 			acceptor.accept(assignment$3$Consumer);
 			acceptor.accept(keyword$5$Consumer);
+			acceptor.accept(assignment$6$Consumer);
 		}
 	}
 
@@ -102,6 +109,30 @@ public final class SubTestLanguageSubMainConsumer extends NonTerminalConsumer {
 		}
 	}
 
+	protected class Assignment$6$Consumer extends OptionalAssignmentConsumer {
+		
+		protected Assignment$6$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$7$Consumer;
+		}
+	}
+
+	protected class RuleCall$7$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$7$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(anotherSuperMainConsumer, "another", false, false, false, getElement(), optional);
+		}
+	}
+
 	public SubTestLanguageSubMainConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
@@ -125,6 +156,8 @@ public final class SubTestLanguageSubMainConsumer extends NonTerminalConsumer {
 		assignment$3$Consumer = new Assignment$3$Consumer(rule.getSuperMainsAssignment_1());
 		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getSuperMainsSuperMainParserRuleCall_1_0());
 		keyword$5$Consumer = new Keyword$5$Consumer(rule.getRightCurlyBracketKeyword_2());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getAnotherAssignment_3());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getAnotherAnotherSuperMainParserRuleCall_3_0());
 	}
 	
 	@Override
@@ -135,6 +168,10 @@ public final class SubTestLanguageSubMainConsumer extends NonTerminalConsumer {
 	@Override
 	protected EClassifier getDefaultType() {
 		return getGrammarElement().getType().getClassifier();
+	}
+	
+	public void setAnotherSuperMainConsumer(INonTerminalConsumer anotherSuperMainConsumer) {
+		this.anotherSuperMainConsumer = anotherSuperMainConsumer;
 	}
 	
 	public void setSuperMainConsumer(INonTerminalConsumer superMainConsumer) {

@@ -10,6 +10,7 @@ import org.eclipse.xtext.generator.ecore.services.SubTestLanguageGrammarAccess;
 
 import org.eclipse.xtext.generator.ecore.parser.packrat.SuperTestLanguageParserConfiguration; 
 import org.eclipse.xtext.generator.ecore.parser.packrat.consumers.SubTestLanguageSubMainConsumer;
+import org.eclipse.xtext.generator.ecore.parser.packrat.consumers.SubTestLanguageAnotherSuperMainConsumer;
 import org.eclipse.xtext.generator.ecore.parser.packrat.consumers.SuperTestLanguageSuperMainConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
@@ -23,6 +24,7 @@ public class SubTestLanguageParserConfiguration extends AbstractParserConfigurat
 
 	private final SuperTestLanguageParserConfiguration superTestLanguageConfiguration; 
     private SubTestLanguageSubMainConsumer subMainConsumer;
+    private SubTestLanguageAnotherSuperMainConsumer anotherSuperMainConsumer;
 
 	private SubTestLanguageGrammarAccess grammarAccess;
 
@@ -41,6 +43,9 @@ public class SubTestLanguageParserConfiguration extends AbstractParserConfigurat
 		subMainConsumer = new SubTestLanguageSubMainConsumer(
     		this, null
     	);
+		anotherSuperMainConsumer = new SubTestLanguageAnotherSuperMainConsumer(
+    		this, null
+    	);
 	}
 	
 	public void createTerminalConsumers() {
@@ -51,6 +56,7 @@ public class SubTestLanguageParserConfiguration extends AbstractParserConfigurat
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
 		getSubMainConsumer().setRule(grammarAccess.getSubMainAccess());
+		getAnotherSuperMainConsumer().setRule(grammarAccess.getAnotherSuperMainAccess());
 		getSuperMainConsumer().setRule(grammarAccess.getSuperMainAccess());
 		getIdConsumer().setRule(grammarAccess.getIDRule());
 		getIntConsumer().setRule(grammarAccess.getINTRule());
@@ -61,14 +67,19 @@ public class SubTestLanguageParserConfiguration extends AbstractParserConfigurat
 		getAnyOtherConsumer().setRule(grammarAccess.getANY_OTHERRule());
 
 
+		getSubMainConsumer().setAnotherSuperMainConsumer(getAnotherSuperMainConsumer());
 		getSubMainConsumer().setSuperMainConsumer(getSuperMainConsumer());
+
+		getAnotherSuperMainConsumer().setIdConsumer(getIdConsumer());
 
 		getSuperMainConsumer().setIdConsumer(getIdConsumer());
 
-		getSubMainConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.generator.ecore.parser.packrat.SubTestLanguageDelimiters.keyword$5$Delimiter);
-		getSubMainConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.generator.ecore.parser.packrat.SubTestLanguageDelimiters.keyword$5$Delimiter);
-		getSuperMainConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.generator.ecore.parser.packrat.SubTestLanguageDelimiters.keyword$4$Delimiter);
-		getSuperMainConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.generator.ecore.parser.packrat.SubTestLanguageDelimiters.ruleCall$6$Delimiter);
+		getSubMainConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.generator.ecore.parser.packrat.SubTestLanguageDelimiters.keyword$4$Delimiter);
+		getSubMainConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.generator.ecore.parser.packrat.SubTestLanguageDelimiters.keyword$4$Delimiter);
+		getAnotherSuperMainConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.generator.ecore.parser.packrat.SubTestLanguageDelimiters.keyword$13$Delimiter);
+		getAnotherSuperMainConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.generator.ecore.parser.packrat.SubTestLanguageDelimiters.ruleCall$15$Delimiter);
+		getSuperMainConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.generator.ecore.parser.packrat.SubTestLanguageDelimiters.keyword$13$Delimiter);
+		getSuperMainConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.generator.ecore.parser.packrat.SubTestLanguageDelimiters.ruleCall$15$Delimiter);
 	}
 	
 	public SuperTestLanguageParserConfiguration getSuperTestLanguageConfiguration() {
@@ -77,6 +88,10 @@ public class SubTestLanguageParserConfiguration extends AbstractParserConfigurat
 	
     public SubTestLanguageSubMainConsumer getSubMainConsumer() {
     	return subMainConsumer;
+    }
+
+    public SubTestLanguageAnotherSuperMainConsumer getAnotherSuperMainConsumer() {
+    	return anotherSuperMainConsumer;
     }
 
     public SuperTestLanguageSuperMainConsumer getSuperMainConsumer() {

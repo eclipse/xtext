@@ -36,6 +36,7 @@ protected class ThisRootNode extends RootToken {
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SuperMain_Group(this, this, 0, inst);
+			case 1: return new AnotherSuperMain_Group(this, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -133,5 +134,98 @@ protected class SuperMain_NameAssignment_1 extends AssignmentToken  {
 
 
 /************ end Rule SuperMain ****************/
+
+
+/************ begin Rule AnotherSuperMain ****************
+ *
+ * AnotherSuperMain:
+ *   "another" name=ID;
+ *
+ **/
+
+// "another" name=ID
+protected class AnotherSuperMain_Group extends GroupToken {
+	
+	public AnotherSuperMain_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getAnotherSuperMainAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AnotherSuperMain_NameAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getAnotherSuperMainRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "another"
+protected class AnotherSuperMain_AnotherKeyword_0 extends KeywordToken  {
+	
+	public AnotherSuperMain_AnotherKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getAnotherSuperMainAccess().getAnotherKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// name=ID
+protected class AnotherSuperMain_NameAssignment_1 extends AssignmentToken  {
+	
+	public AnotherSuperMain_NameAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getAnotherSuperMainAccess().getNameAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AnotherSuperMain_AnotherKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getAnotherSuperMainAccess().getNameIDTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule AnotherSuperMain ****************/
 
 }

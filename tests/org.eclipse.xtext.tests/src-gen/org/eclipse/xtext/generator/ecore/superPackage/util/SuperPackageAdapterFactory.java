@@ -83,6 +83,11 @@ public class SuperPackageAdapterFactory extends AdapterFactoryImpl
         return createSuperMainAdapter();
       }
       @Override
+      public Adapter caseAnotherSuperMain(AnotherSuperMain object)
+      {
+        return createAnotherSuperMainAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -115,6 +120,21 @@ public class SuperPackageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createSuperMainAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.generator.ecore.superPackage.AnotherSuperMain <em>Another Super Main</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.generator.ecore.superPackage.AnotherSuperMain
+   * @generated
+   */
+  public Adapter createAnotherSuperMainAdapter()
   {
     return null;
   }

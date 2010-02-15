@@ -10,6 +10,7 @@ import org.eclipse.xtext.generator.ecore.services.SuperTestLanguageGrammarAccess
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
 import org.eclipse.xtext.generator.ecore.parser.packrat.consumers.SuperTestLanguageSuperMainConsumer;
+import org.eclipse.xtext.generator.ecore.parser.packrat.consumers.SuperTestLanguageAnotherSuperMainConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSTRINGConsumer;
@@ -22,6 +23,7 @@ public class SuperTestLanguageParserConfiguration extends AbstractParserConfigur
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
     private SuperTestLanguageSuperMainConsumer superMainConsumer;
+    private SuperTestLanguageAnotherSuperMainConsumer anotherSuperMainConsumer;
 
 	private SuperTestLanguageGrammarAccess grammarAccess;
 
@@ -40,6 +42,9 @@ public class SuperTestLanguageParserConfiguration extends AbstractParserConfigur
 		superMainConsumer = new SuperTestLanguageSuperMainConsumer(
     		this, null
     	);
+		anotherSuperMainConsumer = new SuperTestLanguageAnotherSuperMainConsumer(
+    		this, null
+    	);
 	}
 	
 	public void createTerminalConsumers() {
@@ -50,6 +55,7 @@ public class SuperTestLanguageParserConfiguration extends AbstractParserConfigur
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
 		getSuperMainConsumer().setRule(grammarAccess.getSuperMainAccess());
+		getAnotherSuperMainConsumer().setRule(grammarAccess.getAnotherSuperMainAccess());
 		getIdConsumer().setRule(grammarAccess.getIDRule());
 		getIntConsumer().setRule(grammarAccess.getINTRule());
 		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
@@ -61,8 +67,12 @@ public class SuperTestLanguageParserConfiguration extends AbstractParserConfigur
 
 		getSuperMainConsumer().setIdConsumer(getIdConsumer());
 
+		getAnotherSuperMainConsumer().setIdConsumer(getIdConsumer());
+
 		getSuperMainConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.generator.ecore.parser.packrat.SuperTestLanguageDelimiters.keyword$4$Delimiter);
 		getSuperMainConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.generator.ecore.parser.packrat.SuperTestLanguageDelimiters.ruleCall$6$Delimiter);
+		getAnotherSuperMainConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.generator.ecore.parser.packrat.SuperTestLanguageDelimiters.keyword$4$Delimiter);
+		getAnotherSuperMainConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.generator.ecore.parser.packrat.SuperTestLanguageDelimiters.ruleCall$6$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
@@ -71,6 +81,10 @@ public class SuperTestLanguageParserConfiguration extends AbstractParserConfigur
 	
     public SuperTestLanguageSuperMainConsumer getSuperMainConsumer() {
     	return superMainConsumer;
+    }
+
+    public SuperTestLanguageAnotherSuperMainConsumer getAnotherSuperMainConsumer() {
+    	return anotherSuperMainConsumer;
     }
 
     public TerminalsIDConsumer getIdConsumer() {

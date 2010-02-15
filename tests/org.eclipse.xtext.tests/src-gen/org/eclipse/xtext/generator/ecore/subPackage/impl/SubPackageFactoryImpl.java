@@ -68,6 +68,7 @@ public class SubPackageFactoryImpl extends EFactoryImpl implements SubPackageFac
     switch (eClass.getClassifierID())
     {
       case SubPackagePackage.SUB_MAIN: return createSubMain();
+      case SubPackagePackage.ANOTHER_SUPER_MAIN: return createAnotherSuperMain();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -82,6 +83,17 @@ public class SubPackageFactoryImpl extends EFactoryImpl implements SubPackageFac
   {
     SubMainImpl subMain = new SubMainImpl();
     return subMain;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AnotherSuperMain createAnotherSuperMain()
+  {
+    AnotherSuperMainImpl anotherSuperMain = new AnotherSuperMainImpl();
+    return anotherSuperMain;
   }
 
   /**

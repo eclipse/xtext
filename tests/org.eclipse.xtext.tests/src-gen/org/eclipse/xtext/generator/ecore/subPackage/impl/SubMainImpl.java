@@ -7,6 +7,7 @@ package org.eclipse.xtext.generator.ecore.subPackage.impl;
 
 import java.util.Collection;
 
+import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
 
 import org.eclipse.emf.common.util.EList;
@@ -14,11 +15,13 @@ import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
+import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
+import org.eclipse.xtext.generator.ecore.subPackage.AnotherSuperMain;
 import org.eclipse.xtext.generator.ecore.subPackage.SubMain;
 import org.eclipse.xtext.generator.ecore.subPackage.SubPackagePackage;
 
@@ -32,6 +35,7 @@ import org.eclipse.xtext.generator.ecore.superPackage.SuperMain;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.generator.ecore.subPackage.impl.SubMainImpl#getSuperMains <em>Super Mains</em>}</li>
+ *   <li>{@link org.eclipse.xtext.generator.ecore.subPackage.impl.SubMainImpl#getAnother <em>Another</em>}</li>
  * </ul>
  * </p>
  *
@@ -48,6 +52,16 @@ public class SubMainImpl extends MinimalEObjectImpl.Container implements SubMain
    * @ordered
    */
   protected EList<SuperMain> superMains;
+
+  /**
+   * The cached value of the '{@link #getAnother() <em>Another</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getAnother()
+   * @generated
+   * @ordered
+   */
+  protected AnotherSuperMain another;
 
   /**
    * <!-- begin-user-doc -->
@@ -89,6 +103,54 @@ public class SubMainImpl extends MinimalEObjectImpl.Container implements SubMain
    * <!-- end-user-doc -->
    * @generated
    */
+  public AnotherSuperMain getAnother()
+  {
+    return another;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetAnother(AnotherSuperMain newAnother, NotificationChain msgs)
+  {
+    AnotherSuperMain oldAnother = another;
+    another = newAnother;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, SubPackagePackage.SUB_MAIN__ANOTHER, oldAnother, newAnother);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setAnother(AnotherSuperMain newAnother)
+  {
+    if (newAnother != another)
+    {
+      NotificationChain msgs = null;
+      if (another != null)
+        msgs = ((InternalEObject)another).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - SubPackagePackage.SUB_MAIN__ANOTHER, null, msgs);
+      if (newAnother != null)
+        msgs = ((InternalEObject)newAnother).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - SubPackagePackage.SUB_MAIN__ANOTHER, null, msgs);
+      msgs = basicSetAnother(newAnother, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, SubPackagePackage.SUB_MAIN__ANOTHER, newAnother, newAnother));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -96,6 +158,8 @@ public class SubMainImpl extends MinimalEObjectImpl.Container implements SubMain
     {
       case SubPackagePackage.SUB_MAIN__SUPER_MAINS:
         return ((InternalEList<?>)getSuperMains()).basicRemove(otherEnd, msgs);
+      case SubPackagePackage.SUB_MAIN__ANOTHER:
+        return basicSetAnother(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -112,6 +176,8 @@ public class SubMainImpl extends MinimalEObjectImpl.Container implements SubMain
     {
       case SubPackagePackage.SUB_MAIN__SUPER_MAINS:
         return getSuperMains();
+      case SubPackagePackage.SUB_MAIN__ANOTHER:
+        return getAnother();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -131,6 +197,9 @@ public class SubMainImpl extends MinimalEObjectImpl.Container implements SubMain
         getSuperMains().clear();
         getSuperMains().addAll((Collection<? extends SuperMain>)newValue);
         return;
+      case SubPackagePackage.SUB_MAIN__ANOTHER:
+        setAnother((AnotherSuperMain)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -148,6 +217,9 @@ public class SubMainImpl extends MinimalEObjectImpl.Container implements SubMain
       case SubPackagePackage.SUB_MAIN__SUPER_MAINS:
         getSuperMains().clear();
         return;
+      case SubPackagePackage.SUB_MAIN__ANOTHER:
+        setAnother((AnotherSuperMain)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -164,6 +236,8 @@ public class SubMainImpl extends MinimalEObjectImpl.Container implements SubMain
     {
       case SubPackagePackage.SUB_MAIN__SUPER_MAINS:
         return superMains != null && !superMains.isEmpty();
+      case SubPackagePackage.SUB_MAIN__ANOTHER:
+        return another != null;
     }
     return super.eIsSet(featureID);
   }

@@ -36,7 +36,8 @@ protected class ThisRootNode extends RootToken {
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new SubMain_Group(this, this, 0, inst);
-			case 1: return new SuperMain_Group(this, this, 1, inst);
+			case 1: return new AnotherSuperMain_Group(this, this, 1, inst);
+			case 2: return new SuperMain_Group(this, this, 2, inst);
 			default: return null;
 		}	
 	}	
@@ -46,11 +47,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule SubMain ****************
  *
  * SubMain:
- *   "{" superMains+=SuperMain "}";
+ *   "{" superMains+=SuperMain "}" another=AnotherSuperMain?;
  *
  **/
 
-// "{" superMains+=SuperMain "}"
+// "{" superMains+=SuperMain "}" another=AnotherSuperMain?
 protected class SubMain_Group extends GroupToken {
 	
 	public SubMain_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -65,7 +66,8 @@ protected class SubMain_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new SubMain_RightCurlyBracketKeyword_2(parent, this, 0, inst);
+			case 0: return new SubMain_AnotherAssignment_3(parent, this, 0, inst);
+			case 1: return new SubMain_RightCurlyBracketKeyword_2(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -166,8 +168,147 @@ protected class SubMain_RightCurlyBracketKeyword_2 extends KeywordToken  {
 		
 }
 
+// another=AnotherSuperMain?
+protected class SubMain_AnotherAssignment_3 extends AssignmentToken  {
+	
+	public SubMain_AnotherAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getSubMainAccess().getAnotherAssignment_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AnotherSuperMain_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("another",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("another");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getAnotherSuperMainRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getSubMainAccess().getAnotherAnotherSuperMainParserRuleCall_3_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new SubMain_RightCurlyBracketKeyword_2(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
 
 /************ end Rule SubMain ****************/
+
+
+/************ begin Rule AnotherSuperMain ****************
+ *
+ * AnotherSuperMain:
+ *   "ups" name=ID;
+ *
+ **/
+
+// "ups" name=ID
+protected class AnotherSuperMain_Group extends GroupToken {
+	
+	public AnotherSuperMain_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getAnotherSuperMainAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AnotherSuperMain_NameAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getAnotherSuperMainRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "ups"
+protected class AnotherSuperMain_UpsKeyword_0 extends KeywordToken  {
+	
+	public AnotherSuperMain_UpsKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getAnotherSuperMainAccess().getUpsKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// name=ID
+protected class AnotherSuperMain_NameAssignment_1 extends AssignmentToken  {
+	
+	public AnotherSuperMain_NameAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getAnotherSuperMainAccess().getNameAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AnotherSuperMain_UpsKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getAnotherSuperMainAccess().getNameIDTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule AnotherSuperMain ****************/
 
 
 /************ begin Rule SuperMain ****************

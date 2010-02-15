@@ -86,6 +86,34 @@ public interface SuperPackagePackage extends EPackage
    */
   int SUPER_MAIN_FEATURE_COUNT = 1;
 
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.generator.ecore.superPackage.impl.AnotherSuperMainImpl <em>Another Super Main</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.generator.ecore.superPackage.impl.AnotherSuperMainImpl
+   * @see org.eclipse.xtext.generator.ecore.superPackage.impl.SuperPackagePackageImpl#getAnotherSuperMain()
+   * @generated
+   */
+  int ANOTHER_SUPER_MAIN = 1;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ANOTHER_SUPER_MAIN__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Another Super Main</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ANOTHER_SUPER_MAIN_FEATURE_COUNT = 1;
+
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.generator.ecore.superPackage.SuperMain <em>Super Main</em>}'.
@@ -107,6 +135,27 @@ public interface SuperPackagePackage extends EPackage
    * @generated
    */
   EAttribute getSuperMain_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.generator.ecore.superPackage.AnotherSuperMain <em>Another Super Main</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Another Super Main</em>'.
+   * @see org.eclipse.xtext.generator.ecore.superPackage.AnotherSuperMain
+   * @generated
+   */
+  EClass getAnotherSuperMain();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.generator.ecore.superPackage.AnotherSuperMain#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.generator.ecore.superPackage.AnotherSuperMain#getName()
+   * @see #getAnotherSuperMain()
+   * @generated
+   */
+  EAttribute getAnotherSuperMain_Name();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -148,6 +197,24 @@ public interface SuperPackagePackage extends EPackage
      * @generated
      */
     EAttribute SUPER_MAIN__NAME = eINSTANCE.getSuperMain_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.generator.ecore.superPackage.impl.AnotherSuperMainImpl <em>Another Super Main</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.generator.ecore.superPackage.impl.AnotherSuperMainImpl
+     * @see org.eclipse.xtext.generator.ecore.superPackage.impl.SuperPackagePackageImpl#getAnotherSuperMain()
+     * @generated
+     */
+    EClass ANOTHER_SUPER_MAIN = eINSTANCE.getAnotherSuperMain();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ANOTHER_SUPER_MAIN__NAME = eINSTANCE.getAnotherSuperMain_Name();
 
   }
 

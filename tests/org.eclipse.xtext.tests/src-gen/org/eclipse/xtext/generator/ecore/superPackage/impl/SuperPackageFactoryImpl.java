@@ -68,6 +68,7 @@ public class SuperPackageFactoryImpl extends EFactoryImpl implements SuperPackag
     switch (eClass.getClassifierID())
     {
       case SuperPackagePackage.SUPER_MAIN: return createSuperMain();
+      case SuperPackagePackage.ANOTHER_SUPER_MAIN: return createAnotherSuperMain();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -82,6 +83,17 @@ public class SuperPackageFactoryImpl extends EFactoryImpl implements SuperPackag
   {
     SuperMainImpl superMain = new SuperMainImpl();
     return superMain;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AnotherSuperMain createAnotherSuperMain()
+  {
+    AnotherSuperMainImpl anotherSuperMain = new AnotherSuperMainImpl();
+    return anotherSuperMain;
   }
 
   /**

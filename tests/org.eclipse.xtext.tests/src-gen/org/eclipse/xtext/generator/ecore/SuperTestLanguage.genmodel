@@ -12,5 +12,8 @@
     <genClasses ecoreClass="SuperTestLanguage.ecore#//SuperMain">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SuperTestLanguage.ecore#//SuperMain/name"/>
     </genClasses>
+    <genClasses ecoreClass="SuperTestLanguage.ecore#//AnotherSuperMain">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute SuperTestLanguage.ecore#//AnotherSuperMain/name"/>
+    </genClasses>
   </genPackages>
 </genmodel:GenModel>

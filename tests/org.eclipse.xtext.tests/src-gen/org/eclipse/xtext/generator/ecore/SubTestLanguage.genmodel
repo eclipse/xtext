@@ -11,6 +11,8 @@
       disposableProviderFactory="true" ecorePackage="SubTestLanguage.ecore#/">
     <genClasses ecoreClass="SubTestLanguage.ecore#//SubMain">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SubTestLanguage.ecore#//SubMain/superMains"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference SubTestLanguage.ecore#//SubMain/another"/>
     </genClasses>
+    <genClasses ecoreClass="SubTestLanguage.ecore#//AnotherSuperMain"/>
   </genPackages>
 </genmodel:GenModel>

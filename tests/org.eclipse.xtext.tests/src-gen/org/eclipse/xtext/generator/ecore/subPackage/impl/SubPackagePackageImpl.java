@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.generator.ecore.subPackage.AnotherSuperMain;
 import org.eclipse.xtext.generator.ecore.subPackage.SubMain;
 import org.eclipse.xtext.generator.ecore.subPackage.SubPackageFactory;
 import org.eclipse.xtext.generator.ecore.subPackage.SubPackagePackage;
@@ -31,6 +32,13 @@ public class SubPackagePackageImpl extends EPackageImpl implements SubPackagePac
    * @generated
    */
   private EClass subMainEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass anotherSuperMainEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -123,6 +131,26 @@ public class SubPackagePackageImpl extends EPackageImpl implements SubPackagePac
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getSubMain_Another()
+  {
+    return (EReference)subMainEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAnotherSuperMain()
+  {
+    return anotherSuperMainEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public SubPackageFactory getSubPackageFactory()
   {
     return (SubPackageFactory)getEFactoryInstance();
@@ -150,6 +178,9 @@ public class SubPackagePackageImpl extends EPackageImpl implements SubPackagePac
     // Create classes and their features
     subMainEClass = createEClass(SUB_MAIN);
     createEReference(subMainEClass, SUB_MAIN__SUPER_MAINS);
+    createEReference(subMainEClass, SUB_MAIN__ANOTHER);
+
+    anotherSuperMainEClass = createEClass(ANOTHER_SUPER_MAIN);
   }
 
   /**
@@ -184,10 +215,14 @@ public class SubPackagePackageImpl extends EPackageImpl implements SubPackagePac
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    anotherSuperMainEClass.getESuperTypes().add(theSuperPackagePackage.getAnotherSuperMain());
 
     // Initialize classes and features; add operations and parameters
     initEClass(subMainEClass, SubMain.class, "SubMain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getSubMain_SuperMains(), theSuperPackagePackage.getSuperMain(), null, "superMains", null, 0, -1, SubMain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSubMain_Another(), this.getAnotherSuperMain(), null, "another", null, 0, 1, SubMain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(anotherSuperMainEClass, AnotherSuperMain.class, "AnotherSuperMain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     // Create resource
     createResource(eNS_URI);

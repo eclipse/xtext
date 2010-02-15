@@ -22,6 +22,6 @@ public final class SuperTestLanguageDelimiters {
 	);
 
 	public static final ISequenceMatcher ruleCall$6$Delimiter = new SetBasedKeywordMatcher(
-		"super");
+		"super", "another");
 
 }

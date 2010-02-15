@@ -35,6 +35,15 @@ public interface SuperPackageFactory extends EFactory
   SuperMain createSuperMain();
 
   /**
+   * Returns a new object of class '<em>Another Super Main</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Another Super Main</em>'.
+   * @generated
+   */
+  AnotherSuperMain createAnotherSuperMain();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

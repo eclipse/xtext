@@ -11,6 +11,7 @@ import org.eclipse.emf.ecore.EPackage;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.generator.ecore.superPackage.AnotherSuperMain;
 import org.eclipse.xtext.generator.ecore.superPackage.SuperMain;
 import org.eclipse.xtext.generator.ecore.superPackage.SuperPackageFactory;
 import org.eclipse.xtext.generator.ecore.superPackage.SuperPackagePackage;
@@ -29,6 +30,13 @@ public class SuperPackagePackageImpl extends EPackageImpl implements SuperPackag
    * @generated
    */
   private EClass superMainEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass anotherSuperMainEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -118,6 +126,26 @@ public class SuperPackagePackageImpl extends EPackageImpl implements SuperPackag
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getAnotherSuperMain()
+  {
+    return anotherSuperMainEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAnotherSuperMain_Name()
+  {
+    return (EAttribute)anotherSuperMainEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public SuperPackageFactory getSuperPackageFactory()
   {
     return (SuperPackageFactory)getEFactoryInstance();
@@ -145,6 +173,9 @@ public class SuperPackagePackageImpl extends EPackageImpl implements SuperPackag
     // Create classes and their features
     superMainEClass = createEClass(SUPER_MAIN);
     createEAttribute(superMainEClass, SUPER_MAIN__NAME);
+
+    anotherSuperMainEClass = createEClass(ANOTHER_SUPER_MAIN);
+    createEAttribute(anotherSuperMainEClass, ANOTHER_SUPER_MAIN__NAME);
   }
 
   /**
@@ -180,6 +211,9 @@ public class SuperPackagePackageImpl extends EPackageImpl implements SuperPackag
     // Initialize classes and features; add operations and parameters
     initEClass(superMainEClass, SuperMain.class, "SuperMain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSuperMain_Name(), ecorePackage.getEString(), "name", null, 0, 1, SuperMain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(anotherSuperMainEClass, AnotherSuperMain.class, "AnotherSuperMain", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAnotherSuperMain_Name(), ecorePackage.getEString(), "name", null, 0, 1, AnotherSuperMain.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

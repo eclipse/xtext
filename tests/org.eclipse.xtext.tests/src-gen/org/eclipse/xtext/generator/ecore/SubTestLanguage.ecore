@@ -6,5 +6,8 @@
   <eClassifiers xsi:type="ecore:EClass" name="SubMain">
     <eStructuralFeatures xsi:type="ecore:EReference" name="superMains" upperBound="-1"
         eType="ecore:EClass SuperTestLanguage.ecore#//SuperMain" containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="another" eType="#//AnotherSuperMain"
+        containment="true"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="AnotherSuperMain" eSuperTypes="SuperTestLanguage.ecore#//AnotherSuperMain"/>
 </ecore:EPackage>
