@@ -207,70 +207,17 @@ public class FieldItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.FIELD__TYPE,
-				 TypesFactory.eINSTANCE.createVoid()));
+				 TypesFactory.eINSTANCE.createSimpleTypeReference()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.FIELD__TYPE,
-				 TypesFactory.eINSTANCE.createPrimitiveType()));
+				 TypesFactory.eINSTANCE.createParameterizedTypeReference()));
 
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.FIELD__TYPE,
-				 TypesFactory.eINSTANCE.createWildcard()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.FIELD__TYPE,
-				 TypesFactory.eINSTANCE.createArrayType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.FIELD__TYPE,
-				 TypesFactory.eINSTANCE.createTypeParameter()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.FIELD__TYPE,
-				 TypesFactory.eINSTANCE.createAnnotationType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.FIELD__TYPE,
-				 TypesFactory.eINSTANCE.createEnumerationType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.FIELD__TYPE,
-				 TypesFactory.eINSTANCE.createGenericType()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.FIELD__TYPE,
-				 TypesFactory.eINSTANCE.createParameterizedType()));
-	}
-
-	/**
-	 * This returns the label text for {@link org.eclipse.emf.edit.command.CreateChildCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public String getCreateChildText(Object owner, Object feature, Object child, Collection<?> selection) {
-		Object childFeature = feature;
-		Object childObject = child;
-
-		boolean qualify =
-			childFeature == TypesPackage.Literals.MEMBER__DECLARED_PARAMETERIZED_TYPES ||
-			childFeature == TypesPackage.Literals.FIELD__TYPE;
-
-		if (qualify) {
-			return getString
-				("_UI_CreateChild_text2",
-				 new Object[] { getTypeText(childObject), getFeatureText(childFeature), getTypeText(owner) });
-		}
-		return super.getCreateChildText(owner, feature, child, selection);
+				 TypesFactory.eINSTANCE.createGenericArrayTypeReference()));
 	}
 
 }

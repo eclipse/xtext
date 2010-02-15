@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -14,7 +14,6 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
@@ -23,19 +22,16 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.eclipse.xtext.common.types.ReferenceTypeArgument;
-import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.xtext.common.types.ReferenceTypeArgument} object.
+ * This is the item provider adapter for a {@link org.eclipse.xtext.common.types.SimpleTypeReference} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ReferenceTypeArgumentItemProvider
-	extends TypeArgumentItemProvider
+public class SimpleTypeReferenceItemProvider
+	extends TypeReferenceItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -48,7 +44,7 @@ public class ReferenceTypeArgumentItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ReferenceTypeArgumentItemProvider(AdapterFactory adapterFactory) {
+	public SimpleTypeReferenceItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -63,49 +59,42 @@ public class ReferenceTypeArgumentItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
+			addTypePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
+	 * This adds a property descriptor for the Type feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypesPackage.Literals.REFERENCE_TYPE_ARGUMENT__TYPE_REFERENCE);
-		}
-		return childrenFeatures;
+	protected void addTypePropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_SimpleTypeReference_type_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_SimpleTypeReference_type_feature", "_UI_SimpleTypeReference_type"),
+				 TypesPackage.Literals.SIMPLE_TYPE_REFERENCE__TYPE,
+				 true,
+				 false,
+				 true,
+				 null,
+				 null,
+				 null));
 	}
 
 	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
-	}
-
-	/**
-	 * This returns ReferenceTypeArgument.gif.
+	 * This returns SimpleTypeReference.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ReferenceTypeArgument"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/SimpleTypeReference"));
 	}
 
 	/**
@@ -116,7 +105,7 @@ public class ReferenceTypeArgumentItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_ReferenceTypeArgument_type");
+		return getString("_UI_SimpleTypeReference_type");
 	}
 
 	/**
@@ -129,12 +118,6 @@ public class ReferenceTypeArgumentItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(ReferenceTypeArgument.class)) {
-			case TypesPackage.REFERENCE_TYPE_ARGUMENT__TYPE_REFERENCE:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 
@@ -148,21 +131,6 @@ public class ReferenceTypeArgumentItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.REFERENCE_TYPE_ARGUMENT__TYPE_REFERENCE,
-				 TypesFactory.eINSTANCE.createSimpleTypeReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.REFERENCE_TYPE_ARGUMENT__TYPE_REFERENCE,
-				 TypesFactory.eINSTANCE.createParameterizedTypeReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.REFERENCE_TYPE_ARGUMENT__TYPE_REFERENCE,
-				 TypesFactory.eINSTANCE.createGenericArrayTypeReference()));
 	}
 
 }

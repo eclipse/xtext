@@ -79,7 +79,7 @@ public class WildcardTypeArgumentItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypesPackage.Literals.WILDCARD_TYPE_ARGUMENT__WILDCARD);
+			childrenFeatures.add(TypesPackage.Literals.CONSTRAINT_OWNER__CONSTRAINTS);
 		}
 		return childrenFeatures;
 	}
@@ -131,7 +131,7 @@ public class WildcardTypeArgumentItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(WildcardTypeArgument.class)) {
-			case TypesPackage.WILDCARD_TYPE_ARGUMENT__WILDCARD:
+			case TypesPackage.WILDCARD_TYPE_ARGUMENT__CONSTRAINTS:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -151,8 +151,13 @@ public class WildcardTypeArgumentItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.WILDCARD_TYPE_ARGUMENT__WILDCARD,
-				 TypesFactory.eINSTANCE.createWildcard()));
+				(TypesPackage.Literals.CONSTRAINT_OWNER__CONSTRAINTS,
+				 TypesFactory.eINSTANCE.createUpperBound()));
+
+		newChildDescriptors.add
+			(createChildParameter
+				(TypesPackage.Literals.CONSTRAINT_OWNER__CONSTRAINTS,
+				 TypesFactory.eINSTANCE.createLowerBound()));
 	}
 
 }

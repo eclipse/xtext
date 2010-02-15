@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -15,27 +15,27 @@ import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
+
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-
 import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.eclipse.xtext.common.types.ReferenceTypeArgument;
+
+import org.eclipse.xtext.common.types.GenericArrayTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.xtext.common.types.ReferenceTypeArgument} object.
+ * This is the item provider adapter for a {@link org.eclipse.xtext.common.types.GenericArrayTypeReference} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class ReferenceTypeArgumentItemProvider
-	extends TypeArgumentItemProvider
+public class GenericArrayTypeReferenceItemProvider
+	extends TypeReferenceItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -48,7 +48,7 @@ public class ReferenceTypeArgumentItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ReferenceTypeArgumentItemProvider(AdapterFactory adapterFactory) {
+	public GenericArrayTypeReferenceItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -79,7 +79,7 @@ public class ReferenceTypeArgumentItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypesPackage.Literals.REFERENCE_TYPE_ARGUMENT__TYPE_REFERENCE);
+			childrenFeatures.add(TypesPackage.Literals.GENERIC_ARRAY_TYPE_REFERENCE__TYPE);
 		}
 		return childrenFeatures;
 	}
@@ -98,14 +98,14 @@ public class ReferenceTypeArgumentItemProvider
 	}
 
 	/**
-	 * This returns ReferenceTypeArgument.gif.
+	 * This returns GenericArrayTypeReference.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/ReferenceTypeArgument"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/GenericArrayTypeReference"));
 	}
 
 	/**
@@ -116,7 +116,7 @@ public class ReferenceTypeArgumentItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		return getString("_UI_ReferenceTypeArgument_type");
+		return getString("_UI_GenericArrayTypeReference_type");
 	}
 
 	/**
@@ -130,8 +130,8 @@ public class ReferenceTypeArgumentItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(ReferenceTypeArgument.class)) {
-			case TypesPackage.REFERENCE_TYPE_ARGUMENT__TYPE_REFERENCE:
+		switch (notification.getFeatureID(GenericArrayTypeReference.class)) {
+			case TypesPackage.GENERIC_ARRAY_TYPE_REFERENCE__TYPE:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -151,18 +151,8 @@ public class ReferenceTypeArgumentItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.REFERENCE_TYPE_ARGUMENT__TYPE_REFERENCE,
-				 TypesFactory.eINSTANCE.createSimpleTypeReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.REFERENCE_TYPE_ARGUMENT__TYPE_REFERENCE,
-				 TypesFactory.eINSTANCE.createParameterizedTypeReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.REFERENCE_TYPE_ARGUMENT__TYPE_REFERENCE,
-				 TypesFactory.eINSTANCE.createGenericArrayTypeReference()));
+				(TypesPackage.Literals.GENERIC_ARRAY_TYPE_REFERENCE__TYPE,
+				 TypesFactory.eINSTANCE.createArrayType()));
 	}
 
 }

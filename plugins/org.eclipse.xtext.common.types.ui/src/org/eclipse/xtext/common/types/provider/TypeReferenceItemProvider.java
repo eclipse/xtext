@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -21,16 +21,14 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import org.eclipse.xtext.common.types.EnumerationType;
-
 /**
- * This is the item provider adapter for a {@link org.eclipse.xtext.common.types.EnumerationType} object.
+ * This is the item provider adapter for a {@link org.eclipse.xtext.common.types.TypeReference} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class EnumerationTypeItemProvider
-	extends DeclaredTypeItemProvider
+public class TypeReferenceItemProvider
+	extends IdentifyableElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -43,7 +41,7 @@ public class EnumerationTypeItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EnumerationTypeItemProvider(AdapterFactory adapterFactory) {
+	public TypeReferenceItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -63,17 +61,6 @@ public class EnumerationTypeItemProvider
 	}
 
 	/**
-	 * This returns EnumerationType.gif.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/EnumerationType"));
-	}
-
-	/**
 	 * This returns the label text for the adapted class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -81,10 +68,7 @@ public class EnumerationTypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((EnumerationType)object).getFullyQualifiedName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_EnumerationType_type") :
-			getString("_UI_EnumerationType_type") + " " + label;
+		return getString("_UI_TypeReference_type");
 	}
 
 	/**

@@ -18,26 +18,27 @@ import org.eclipse.jdt.core.ITypeParameter;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
 import org.eclipse.xtext.common.types.AnnotationType;
-import org.eclipse.xtext.common.types.ComponentType;
+import org.eclipse.xtext.common.types.ArrayType;
 import org.eclipse.xtext.common.types.Constructor;
 import org.eclipse.xtext.common.types.DeclaredType;
 import org.eclipse.xtext.common.types.EnumerationType;
 import org.eclipse.xtext.common.types.Executable;
 import org.eclipse.xtext.common.types.Field;
 import org.eclipse.xtext.common.types.FormalParameter;
+import org.eclipse.xtext.common.types.GenericArrayTypeReference;
 import org.eclipse.xtext.common.types.GenericType;
 import org.eclipse.xtext.common.types.LowerBound;
 import org.eclipse.xtext.common.types.Member;
 import org.eclipse.xtext.common.types.Operation;
-import org.eclipse.xtext.common.types.ParameterizedType;
+import org.eclipse.xtext.common.types.ParameterizedTypeReference;
 import org.eclipse.xtext.common.types.ReferenceTypeArgument;
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.SimpleTypeReference;
 import org.eclipse.xtext.common.types.TypeArgument;
 import org.eclipse.xtext.common.types.TypeParameter;
+import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.UpperBound;
 import org.eclipse.xtext.common.types.Visibility;
-import org.eclipse.xtext.common.types.Wildcard;
 import org.eclipse.xtext.common.types.WildcardTypeArgument;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
 
@@ -88,9 +89,9 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 					result.getMembers().add(createField(field));
 			}
 			if (!jdtType.isInterface() && jdtType.getSuperclassTypeSignature() != null)
-				result.getSuperTypes().add(createReferencedType(jdtType.getSuperclassTypeSignature(), jdtType, result));
+				result.getSuperTypes().add(createTypeReference(jdtType.getSuperclassTypeSignature(), jdtType, result));
 			for (String interfaceSignature : jdtType.getSuperInterfaceTypeSignatures()) {
-				result.getSuperTypes().add(createReferencedType(interfaceSignature, jdtType, result));
+				result.getSuperTypes().add(createTypeReference(interfaceSignature, jdtType, result));
 			}
 			for (ITypeParameter variable : jdtType.getTypeParameters()) {
 				result.getTypeParameters().add(createTypeParameter(variable, result));
@@ -138,39 +139,30 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 					boundSignature = Signature.createTypeSignature(bound, true);
 					parameterContainer = parameter.getDeclaringMember();
 				}
-				upperBound.setReferencedType(
-						createReferencedType(boundSignature, parameterContainer, container));
+				upperBound.setTypeReference(
+						createTypeReference(boundSignature, parameterContainer, container));
 				result.getConstraints().add(upperBound);
 			}
 		}
 		return result;
 	}
 
-	private org.eclipse.xtext.common.types.Type createReferencedType(String signature, IMember declarator,
+	private TypeReference createTypeReference(String signature, IMember declarator,
 			Member container) throws JavaModelException {
-		org.eclipse.xtext.common.types.Type result = createReferencedTypeForParameterizedOrReturnNull(signature,
-				declarator, container);
-		if (result == null)
-			result = createProxy(signature, declarator);
-		return result;
-	}
-
-	private org.eclipse.xtext.common.types.Type createReferencedTypeForParameterizedOrReturnNull(String signature,
-			IMember declarator, Member container) throws JavaModelException {
 		int arrayDim = Signature.getArrayCount(signature);
 		if (arrayDim != 0) {
 			String componentSignature = Signature.getElementType(signature);
-			org.eclipse.xtext.common.types.Type result = createReferencedTypeForParameterizedOrReturnNull(
-					componentSignature, declarator, container);
-			if (result != null) {
-				ComponentType resultComponentType = (ComponentType) result;
+			TypeReference componentTypeReference = createTypeReference(componentSignature, declarator, container);
+			if (componentTypeReference != null) {
 				for (int i = 0; i < arrayDim; i++) {
-					if (resultComponentType.getArrayType() == null) {
-						resultComponentType.setArrayType(TypesFactory.eINSTANCE.createArrayType());
-					}
-					resultComponentType = resultComponentType.getArrayType();
+					ArrayType resultArray = TypesFactory.eINSTANCE.createArrayType();
+					resultArray.setComponentType(componentTypeReference);
+					
+					GenericArrayTypeReference typeReference = TypesFactory.eINSTANCE.createGenericArrayTypeReference();
+					typeReference.setType(resultArray);
+					componentTypeReference = typeReference;
 				}
-				return resultComponentType;
+				return componentTypeReference;
 			}
 			else {
 				return null;
@@ -178,26 +170,19 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		}
 		String[] typeArguments = Signature.getTypeArguments(signature);
 		if (typeArguments.length != 0) {
-			String name = uriHelper.computeParameterizedTypeName(signature);
-			for (org.eclipse.xtext.common.types.ParameterizedType existingType : container
-					.getDeclaredParameterizedTypes()) {
-				if (name.equals(existingType.getCanonicalName())) {
-					return existingType;
-				}
-			}
 			String rawType = uriHelper.getTypeErasure(signature);
-			ParameterizedType newParameterizedType = TypesFactory.eINSTANCE.createParameterizedType();
-			newParameterizedType.setFullyQualifiedName(name);
-			newParameterizedType.setRawType(createReferencedType(rawType, declarator, container));
+			ParameterizedTypeReference result = TypesFactory.eINSTANCE.createParameterizedTypeReference();
+			result.setType(createProxy(rawType, declarator));
 			for (int i = 0; i < typeArguments.length; i++) {
 				TypeArgument argument = createTypeArgument(typeArguments[i], declarator, container, rawType, i);
-				newParameterizedType.getArguments().add(argument);
+				result.getArguments().add(argument);
 			}
-			container.getDeclaredParameterizedTypes().add(newParameterizedType);
-			return newParameterizedType;
+			return result;
 		}
 		else {
-			return null;
+			SimpleTypeReference result = TypesFactory.eINSTANCE.createSimpleTypeReference();
+			result.setType(createProxy(signature, declarator));
+			return result;
 		}
 	}
 
@@ -206,47 +191,50 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		int signatureKind = Signature.getTypeSignatureKind(actualTypeSignature);
 		if (signatureKind == Signature.WILDCARD_TYPE_SIGNATURE) {
 			WildcardTypeArgument result = TypesFactory.eINSTANCE.createWildcardTypeArgument();
-			Wildcard wildcard = TypesFactory.eINSTANCE.createWildcard();
 			switch (actualTypeSignature.charAt(0)) {
-				case '*': {
-					UpperBound upperBound = TypesFactory.eINSTANCE.createUpperBound();
-					Type reference = createReferencedType(Signature.createTypeSignature(Object.class.getName(),
-					true), declarator, container);
-					upperBound.setReferencedType(reference);
-					wildcard.getConstraints().add(upperBound);
-				}
+				case '*': 
+					{
+						UpperBound upperBound = TypesFactory.eINSTANCE.createUpperBound();
+						TypeReference reference = createTypeReference(
+								Signature.createTypeSignature(Object.class.getName(), true), 
+								declarator, container);
+						upperBound.setTypeReference(reference);
+						result.getConstraints().add(upperBound);
+					}
 					break;
-				case '+': {
-					String upperBoundSignature = actualTypeSignature.substring(1);
-					UpperBound upperBound = TypesFactory.eINSTANCE.createUpperBound();
-					Type reference = createReferencedType(upperBoundSignature, declarator, container);
-					upperBound.setReferencedType(reference);
-					wildcard.getConstraints().add(upperBound);
-				}
+				case '+': 
+					{
+						String upperBoundSignature = actualTypeSignature.substring(1);
+						UpperBound upperBound = TypesFactory.eINSTANCE.createUpperBound();
+						TypeReference reference = createTypeReference(upperBoundSignature, declarator, container);
+						upperBound.setTypeReference(reference);
+						result.getConstraints().add(upperBound);
+					}
 					break;
-				case '-': {
-					UpperBound upperBound = TypesFactory.eINSTANCE.createUpperBound();
-					Type objectReference = createReferencedType(Signature.createTypeSignature(Object.class.getName(),
-					true), declarator, container);
-					upperBound.setReferencedType(objectReference);
-					wildcard.getConstraints().add(upperBound);
-					String lowerBoundSignature = actualTypeSignature.substring(1);
-					LowerBound lowerBound = TypesFactory.eINSTANCE.createLowerBound();
-					Type reference = createReferencedType(lowerBoundSignature, declarator, container);
-					lowerBound.setReferencedType(reference);
-					wildcard.getConstraints().add(lowerBound);
-				}
+				case '-': 
+					{
+						UpperBound upperBound = TypesFactory.eINSTANCE.createUpperBound();
+						TypeReference objectReference = createTypeReference(
+								Signature.createTypeSignature(Object.class.getName(), true), 
+								declarator, container);
+						upperBound.setTypeReference(objectReference);
+						result.getConstraints().add(upperBound);
+						String lowerBoundSignature = actualTypeSignature.substring(1);
+						LowerBound lowerBound = TypesFactory.eINSTANCE.createLowerBound();
+						TypeReference reference = createTypeReference(lowerBoundSignature, declarator, container);
+						lowerBound.setTypeReference(reference);
+						result.getConstraints().add(lowerBound);
+					}
 					break;
 				default:
 					throw new IllegalArgumentException("Signature: " + actualTypeSignature);
 			}
-			result.setWildcard(wildcard);
 			return result;
 		}
 		else {
 			ReferenceTypeArgument result = TypesFactory.eINSTANCE.createReferenceTypeArgument();
-			Type typeReference = createReferencedType(actualTypeSignature, declarator, container);
-			result.setType(typeReference);
+			TypeReference typeReference = createTypeReference(actualTypeSignature, declarator, container);
+			result.setTypeReference(typeReference);
 			return result;
 		}
 	}
@@ -272,7 +260,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		result.setFinal(Flags.isFinal(field.getFlags()));
 		result.setStatic(Flags.isStatic(field.getFlags()));
 		setVisibility(result, field.getFlags());
-		result.setType(createReferencedType(field.getTypeSignature(), field, result));
+		result.setType(createTypeReference(field.getTypeSignature(), field, result));
 		return result;
 	}
 	
@@ -292,7 +280,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		enhanceGenericDeclaration(result, method.getTypeParameters());
 		enhanceExecutable(result, method, method.getParameterNames(), method.getParameterTypes());
 		for (String exceptionType : method.getExceptionTypes()) {
-			result.getExceptions().add(createReferencedType(exceptionType, method, result));
+			result.getExceptions().add(createTypeReference(exceptionType, method, result));
 		}
 		return result;
 	}
@@ -329,9 +317,9 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		enhanceExecutable(result, method, method.getParameterNames(), method.getParameterTypes());
 		result.setFinal(Flags.isFinal(method.getFlags()));
 		result.setStatic(Flags.isStatic(method.getFlags()));
-		result.setReturnType(createReferencedType(method.getReturnType(), method, result));
+		result.setReturnType(createTypeReference(method.getReturnType(), method, result));
 		for (String exceptionTypes : method.getExceptionTypes()) {
-			result.getExceptions().add(createReferencedType(exceptionTypes, method, result));
+			result.getExceptions().add(createTypeReference(exceptionTypes, method, result));
 		}
 		return result;
 	}
@@ -340,7 +328,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			org.eclipse.xtext.common.types.Member container) throws JavaModelException {
 		FormalParameter result = TypesFactory.eINSTANCE.createFormalParameter();
 		result.setName(paramName);
-		result.setParameterType(createReferencedType(parameterType, declarator, container));
+		result.setParameterType(createTypeReference(parameterType, declarator, container));
 		return result;
 	}
 

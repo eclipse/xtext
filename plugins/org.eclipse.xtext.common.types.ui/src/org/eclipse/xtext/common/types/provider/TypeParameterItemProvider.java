@@ -104,7 +104,7 @@ public class TypeParameterItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypesPackage.Literals.CONSTRAINED_TYPE__CONSTRAINTS);
+			childrenFeatures.add(TypesPackage.Literals.CONSTRAINT_OWNER__CONSTRAINTS);
 		}
 		return childrenFeatures;
 	}
@@ -182,12 +182,12 @@ public class TypeParameterItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.CONSTRAINED_TYPE__CONSTRAINTS,
+				(TypesPackage.Literals.CONSTRAINT_OWNER__CONSTRAINTS,
 				 TypesFactory.eINSTANCE.createUpperBound()));
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.CONSTRAINED_TYPE__CONSTRAINTS,
+				(TypesPackage.Literals.CONSTRAINT_OWNER__CONSTRAINTS,
 				 TypesFactory.eINSTANCE.createLowerBound()));
 	}
 

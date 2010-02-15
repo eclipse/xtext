@@ -23,11 +23,6 @@ public class WildcardTypeArgumentTest extends TestCase {
 	}
 	
 	public void testCanonicalName_01() {
-		assertNull(typeArgument.getCanonicalName());
-	}
-	
-	public void testCanonicalName_02() {
-		typeArgument.setWildcard(TypesFactory.eINSTANCE.createWildcard());
 		assertEquals("?", typeArgument.getCanonicalName());
 	}
 	

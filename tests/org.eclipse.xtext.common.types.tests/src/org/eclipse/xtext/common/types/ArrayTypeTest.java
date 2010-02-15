@@ -29,35 +29,45 @@ public class ArrayTypeTest extends TestCase {
 	public void testCanonicalName_02() {
 		PrimitiveType primitiveType = TypesFactory.eINSTANCE.createPrimitiveType();
 		primitiveType.setName("int");
-		arrayType.setComponentType(primitiveType);
+		SimpleTypeReference componentType = TypesFactory.eINSTANCE.createSimpleTypeReference();
+		componentType.setType(primitiveType);
+		arrayType.setComponentType(componentType);
 		assertEquals("int[]", arrayType.getCanonicalName());
 	}
 	
 	public void testCanonicalName_03() {
 		PrimitiveType primitiveType = TypesFactory.eINSTANCE.createPrimitiveType();
 		primitiveType.setName("int");
+		SimpleTypeReference componentType = TypesFactory.eINSTANCE.createSimpleTypeReference();
+		componentType.setType(primitiveType);
 		ArrayType arrayType = TypesFactory.eINSTANCE.createArrayType();
-		arrayType.setComponentType(primitiveType);
-		this.arrayType.setComponentType(arrayType);
+		arrayType.setComponentType(componentType);
+		componentType = TypesFactory.eINSTANCE.createSimpleTypeReference();
+		componentType.setType(arrayType);
+		this.arrayType.setComponentType(componentType);
 		assertEquals("int[][]", this.arrayType.getCanonicalName());
 	}
 	
 	public void testGetDimension_01() {
 		PrimitiveType primitiveType = TypesFactory.eINSTANCE.createPrimitiveType();
 		primitiveType.setName("int");
-		ArrayType arrayType = TypesFactory.eINSTANCE.createArrayType();
-		arrayType.setComponentType(primitiveType);
+		SimpleTypeReference componentType = TypesFactory.eINSTANCE.createSimpleTypeReference();
+		componentType.setType(primitiveType);
+		arrayType.setComponentType(componentType);
 		assertEquals(1, arrayType.getDimensions());
 	}
 	
 	public void testGetDimension_02() {
 		PrimitiveType primitiveType = TypesFactory.eINSTANCE.createPrimitiveType();
 		primitiveType.setName("int");
+		SimpleTypeReference componentType = TypesFactory.eINSTANCE.createSimpleTypeReference();
+		componentType.setType(primitiveType);
 		ArrayType arrayType = TypesFactory.eINSTANCE.createArrayType();
-		arrayType.setComponentType(primitiveType);
-		ArrayType nestedArrayType = TypesFactory.eINSTANCE.createArrayType();
-		nestedArrayType.setComponentType(arrayType);
-		assertEquals(2, nestedArrayType.getDimensions());
+		arrayType.setComponentType(componentType);
+		componentType = TypesFactory.eINSTANCE.createSimpleTypeReference();
+		componentType.setType(arrayType);
+		this.arrayType.setComponentType(componentType);
+		assertEquals(2, this.arrayType.getDimensions());
 	}
 	
 	public void testGetDimension_03() {
