@@ -39,10 +39,12 @@ import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.EStructuralFeature.Setting;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
@@ -51,6 +53,7 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.mwe.core.ConfigurationException;
+import org.eclipse.emf.mwe.core.WorkflowInterruptedException;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GeneratedMetamodel;
@@ -74,11 +77,10 @@ import com.google.common.collect.Maps;
  */
 public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 
-
 	private static final Logger log = Logger.getLogger(EcoreGeneratorFragment.class);
 
 	private static final String MODEL_PLUGIN_ID = "modelPluginID";
-	
+
 	private String basePackage = null;
 
 	private String editDirectory = null;
@@ -176,7 +178,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 			e.printStackTrace();
 		}
 	}
-	
+
 	protected List<GenPackage> loadReferencedGenModels(ResourceSet rs) {
 		List<GenPackage> result = Lists.newArrayList();
 		if (getReferencedGenModels() != null) {
@@ -210,8 +212,28 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		}
 		// proxify found elements
 		for (Entry<EObject, URI> entry : object2Uri.entrySet()) {
-			((InternalEObject) entry.getKey()).eSetProxyURI(entry.getValue());
+			InternalEObject key = (InternalEObject) entry.getKey();
+			if (shouldBeProxified(key, packs)) {
+				checkGenModelExists(key);
+				key.eSetProxyURI(entry.getValue());
+			}
 		}
+	}
+
+	protected void checkGenModelExists(InternalEObject key) {
+		if (getReferencedGenModels()==null && this.genModel==null)
+			throw new WorkflowInterruptedException("The generated EPackage references an external EPackage, but 'referencedGenModels' hasn't been registered.");
+	}
+
+	private boolean shouldBeProxified(InternalEObject key, List<EPackage> packs) {
+		if (EcorePackage.eINSTANCE.eResource() == key.eResource())
+			return false;
+		TreeIterator<Object> iterator = EcoreUtil.getAllContents(packs);
+		while (iterator.hasNext()) {
+			if (key == iterator.next())
+				return false;
+		}
+		return true;
 	}
 
 	protected void removeFromResource(List<EPackage> packs) {
@@ -230,13 +252,13 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		}
 		EcoreUtil.resolveAll(resourceSet);
 	}
-	
-	
+
 	public String getBasePackage(Grammar g) {
 		if (basePackage == null)
 			return GrammarUtil.getNamespace(g);
 		return basePackage;
 	}
+
 	protected URI getEcoreFileUri(Grammar grammar, XpandExecutionContext ctx) {
 		String javaPath = getJavaModelDirectory(ctx);
 		String xmiPath = getXmiModelDirectory(grammar, javaPath);
@@ -249,6 +271,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 					+ new File(xmiPath).getAbsolutePath());
 		}
 	}
+
 	public String getEditDirectory(XpandExecutionContext ctx) {
 		if (this.editDirectory == null || "".equals(this.editDirectory)) {
 			this.editDirectory = ctx.getOutput().getOutlet(org.eclipse.xtext.generator.Generator.PLUGIN_RT).getPath()
@@ -256,6 +279,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		}
 		return editDirectory;
 	}
+
 	public String getEditorDirectory(XpandExecutionContext ctx) {
 		if (editorDirectory == null || "".equals(editorDirectory)) {
 			editorDirectory = ctx.getOutput().getOutlet(org.eclipse.xtext.generator.Generator.PLUGIN_RT).getPath()
@@ -263,13 +287,14 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		}
 		return editorDirectory;
 	}
+
 	protected String getEditorPluginID(XpandExecutionContext ctx) {
 		if ((editorPluginID == null || "".equals(editorPluginID)) && (getModelPluginID(ctx) != null)) {
 			editorPluginID = getModelPluginID(ctx) + ".editor";
 		}
 		return editorPluginID;
 	}
-	
+
 	public String getEditPluginID(XpandExecutionContext ctx) {
 		if ((editPluginID == null || "".equals(editPluginID)) && (getModelPluginID(ctx) != null)) {
 			editPluginID = getModelPluginID(ctx) + ".edit";
@@ -400,7 +425,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
-		return Collections.singletonList((Object)getBasePackage(grammar));
+		return Collections.singletonList((Object) getBasePackage(grammar));
 	}
 
 	public String getReferencedGenModels() {
@@ -456,7 +481,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	public boolean isSkipGenerate() {
 		return skipGenerate;
 	}
-	
+
 	/**
 	 * Sets the URIs for the generated EMF generator models (aka genmodels).
 	 * 
@@ -467,7 +492,6 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		setReferencedGenModels(uris);
 	}
 
-	
 	/**
 	 * the java package the generated java classes shall be placed in.
 	 */
@@ -476,6 +500,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 			return;
 		this.basePackage = basePackage;
 	}
+
 	/**
 	 * Sets the target directory for the generated EMF-edit code. Only needed if you want to generate an EMF edit
 	 * plug-in.
@@ -485,6 +510,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	public void setEditDirectory(String editDirectory) {
 		this.editDirectory = editDirectory;
 	}
+
 	/**
 	 * Sets the target directory for the generated EMF-editor code. Only needed if you want to generate an EMF editor
 	 * plug_in.
@@ -494,6 +520,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	public void setEditorDirectory(String editorDirectory) {
 		this.editorDirectory = editorDirectory;
 	}
+
 	/**
 	 * Sets the plug-in ID of the generated EMF editor plug-in. Only needed if you want to generate an EMF editor
 	 * plug_in.
@@ -503,6 +530,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	public void setEditorPluginID(String editorPluginId) {
 		editorPluginID = editorPluginId;
 	}
+
 	/**
 	 * Sets the plug-in ID of the generated EMF edit plug-in. Only needed if you want to generate an EMF editor plug_in.
 	 * 
@@ -511,6 +539,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	public void setEditPluginID(String editPluginId) {
 		editPluginID = editPluginId;
 	}
+
 	/**
 	 * If true, the EMF-edit code will be generated as well.
 	 * 
@@ -548,7 +577,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	public void setJavaModelDirectory(String dir) {
 		javaModelDirectory = dir;
 	}
-	
+
 	/**
 	 * Sets the ID of the generated EMF-model plug-in. Only needed if you want to generate the EMF code into a separate
 	 * plug-in.
@@ -592,7 +621,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 			return new LineFilterOutputStream(stream, " * $Id" + "$", lineDelimiter != null ? lineDelimiter : Strings
 					.newLine());
 		}
-		
+
 		public GeneratorAdapterFactory createAdapterFactory() {
 			return new GenModelGeneratorAdapterFactory() {
 
