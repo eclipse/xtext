@@ -597,4 +597,13 @@
   </extension>
 
 
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://xtext.org/locationProviderTestLaguage" 
+       class = "org.eclipse.xtext.ui.tests.locationprovidertest.LocationprovidertestPackage"
+       genModel = "org/eclipse/xtext/ui/tests/LocationProviderTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
 </plugin>
