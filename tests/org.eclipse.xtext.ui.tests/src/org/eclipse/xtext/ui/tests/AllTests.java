@@ -59,6 +59,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.outline.transformer.DeclarativeSemanticModelTransformerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.outline.transformer.DefaultSemanticModelTransformerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.quickfix.DeclarativeQuickfixProviderTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.quickfix.LinkingErrorTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.reconciler.ReplaceRegionTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.syntaxcoloring.LightweightPositionTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.syntaxcoloring.MergingHighlightedPositionAcceptorTest.class);
