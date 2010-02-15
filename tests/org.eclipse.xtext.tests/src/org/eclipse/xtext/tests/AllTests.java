@@ -153,6 +153,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.resource.EObjectAtOffsetTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.EObjectHandleImplTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.ExternalContentSupportTest.class);
+      suite.addTestSuite(org.eclipse.xtext.resource.LocationInFileProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.ResourceSetReferencingResourceSetTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.XtextResourcePerformanceTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.XtextResourceTest.class);

@@ -11,10 +11,10 @@ package org.eclipse.xtext.ui.tests.editor.outline;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.text.Region;
+import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.ui.DefaultLabelProvider;
-import org.eclipse.xtext.ui.ILocationInFileProvider;
 import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.A;
 import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.B;
 import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
@@ -22,6 +22,7 @@ import org.eclipse.xtext.ui.editor.outline.CreateNode;
 import org.eclipse.xtext.ui.editor.outline.DefaultContentOutlineNodeFactory;
 import org.eclipse.xtext.ui.editor.outline.GetChildren;
 import org.eclipse.xtext.ui.editor.outline.transformer.AbstractDeclarativeSemanticModelTransformer;
+import org.eclipse.xtext.util.TextLocation;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -29,12 +30,12 @@ import org.eclipse.xtext.ui.editor.outline.transformer.AbstractDeclarativeSemant
 public class TestTransformerHelper {
 	
 	private static ILocationInFileProvider myLocationProvider = new ILocationInFileProvider() {
-		public Region getLocation(EObject obj) {
-			return new Region(0, 0);
+		public TextLocation getLocation(EObject obj) {
+			return new TextLocation(0, 0);
 		}
-		
-		public Region getLocation(EObject referenceOwner, org.eclipse.emf.ecore.EReference crossReference, int indexInList) {
-			return new Region(0, 0);
+
+		public TextLocation getLocation(EObject referenceOwner, EStructuralFeature feature, int indexInList) {
+			return new TextLocation(0, 0);
 		}
 	};
 	

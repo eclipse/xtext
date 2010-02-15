@@ -13,7 +13,7 @@ import org.eclipse.xtext.AbstractMetamodelDeclaration;
 import org.eclipse.xtext.GeneratedMetamodel;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.XtextPackage;
-import org.eclipse.xtext.ui.DefaultLocationInFileProvider;
+import org.eclipse.xtext.resource.DefaultLocationInFileProvider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
