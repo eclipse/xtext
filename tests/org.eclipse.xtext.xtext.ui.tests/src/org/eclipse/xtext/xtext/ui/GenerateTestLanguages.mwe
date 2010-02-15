@@ -2,16 +2,23 @@
 	<property name="projectName" value="org.eclipse.xtext.xtext.ui.tests"/>
 	<property name="runtimeProject" value="../${projectName}"/>
 	<property name="src-gen" value="${runtimeProject}/src-gen"/>
+	<property name="src" value="${runtimeProject}/src"/>
 	
 	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" platformUri="${runtimeProject}/.."/>
 	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}/src-gen"/>
 	
+	<component class="org.eclipse.xtext.xtext.ui.Ecore2XtextGenerator">
+		<genPath value="${src}"/>
+		<ecoreFile value="org/eclipse/xtext/xtext/ui/ecore2xtext/Ecore2XtextTest.ecore"/>
+		<rootElement value="Root"/>
+	</component>
+
 	<component class="org.eclipse.xtext.generator.Generator">
 		<pathRtProject value="${runtimeProject}"/>
 		<pathUiProject value="${runtimeProject}"/>
 		<projectNameRt value="${projectName}"/>
 		<activator value="org.eclipse.xtext.xtext.ui.tests.Activator"/>
-		<language uri="classpath:/org/eclipse/xtext/xtext/ui/ecore2xtext/Ecore2XtextTest.xtext">
+		<language uri="${src}/org/eclipse/xtext/xtext/ui/ecore2xtext/Ecore2XtextTest.xtext">
 			<fragment file="org/eclipse/xtext/xtext/ui/TestLanguageSetup.mwe"/>
 		</language>
 	</component>
