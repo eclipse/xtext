@@ -1,14 +1,13 @@
 <workflow>
 	<property name="projectName" value="org.eclipse.xtext.xtext.ui.tests"/>
 	<property name="runtimeProject" value="../${projectName}"/>
+	<property name="src" value="${runtimeProject}/src"/>
 	<property name="src-gen" value="${runtimeProject}/src-gen"/>
 	
-	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${src-gen}"/>
-
 	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" platformUri="${runtimeProject}/.."/>
 	
 	<component class="org.eclipse.xtext.xtext.ui.Ecore2XtextGenerator">
-		<genPath value="${src-gen}"/>
+		<genPath value="${src}"/>
 		<ecoreFile value="org/eclipse/xtext/xtext/ui/ecore2xtext/Ecore2XtextTest.ecore"/>
 		<rootElement value="Root"/>
 	</component>
