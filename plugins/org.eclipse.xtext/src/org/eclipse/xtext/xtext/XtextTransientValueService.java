@@ -42,7 +42,7 @@ public class XtextTransientValueService extends DefaultTransientValueService {
 			final AbstractRule rule = (AbstractRule) owner;
 			if (rule instanceof ParserRule || rule instanceof EnumRule) {
 				final TypeRef returnType = rule.getType();
-				if(returnType.getClassifier() == null)
+				if(returnType == null || returnType.getClassifier() == null)
 					return true;
 				else if (rule.getName().equals(returnType.getClassifier().getName())) {
 					return isTransient(returnType, XtextPackage.eINSTANCE.getTypeRef_Metamodel(), -1);

@@ -19,7 +19,7 @@ public interface IssueResolutionProvider {
 		public IssueContext getIssueContext();
 	}
 
-	boolean hasResolutionFor(String IssueCode);
+	boolean hasResolutionFor(String issueCode);
 
 	public List<IssueResolution> getResolutions(IssueContext context);
 

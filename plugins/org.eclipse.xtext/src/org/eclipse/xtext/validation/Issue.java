@@ -13,6 +13,10 @@ import org.eclipse.emf.common.util.URI;
  * @author Sven Efftinge - Initial contribution and API
  */
 public interface Issue {
+	
+	String LINKING_ISSUE = "org.eclipse.xtext.validation.Issue.Linking";
+	String SYNTAX_ISSUE = "org.eclipse.xtext.validation.Issue.Syntax";
+	
 	enum Severity {
 		INFO, WARNING, ERROR
 	}
