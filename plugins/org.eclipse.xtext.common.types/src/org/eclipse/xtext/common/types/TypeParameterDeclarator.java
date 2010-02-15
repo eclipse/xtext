@@ -8,6 +8,7 @@
 package org.eclipse.xtext.common.types;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * <!-- begin-user-doc -->
@@ -25,7 +26,7 @@ import org.eclipse.emf.common.util.EList;
  * @model abstract="true"
  * @generated
  */
-public interface TypeParameterDeclarator extends IdentifyableElement {
+public interface TypeParameterDeclarator extends EObject {
 	/**
 	 * Returns the value of the '<em><b>Type Parameters</b></em>' containment reference list.
 	 * The list contents are of type {@link org.eclipse.xtext.common.types.TypeParameter}.

@@ -7,16 +7,19 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
-import org.eclipse.emf.common.notify.Notification;
+import java.util.Collection;
 import org.eclipse.emf.common.notify.NotificationChain;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
-import org.eclipse.emf.ecore.impl.ENotificationImpl;
+import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
+import org.eclipse.emf.ecore.util.InternalEList;
+import org.eclipse.xtext.common.types.ConstraintOwner;
+import org.eclipse.xtext.common.types.TypeConstraint;
 
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.common.types.Wildcard;
 import org.eclipse.xtext.common.types.WildcardTypeArgument;
 
 /**
@@ -26,7 +29,7 @@ import org.eclipse.xtext.common.types.WildcardTypeArgument;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.impl.WildcardTypeArgumentImpl#getWildcard <em>Wildcard</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.WildcardTypeArgumentImpl#getConstraints <em>Constraints</em>}</li>
  * </ul>
  * </p>
  *
@@ -34,15 +37,14 @@ import org.eclipse.xtext.common.types.WildcardTypeArgument;
  */
 public class WildcardTypeArgumentImpl extends TypeArgumentImpl implements WildcardTypeArgument {
 	/**
-	 * The cached value of the '{@link #getWildcard() <em>Wildcard</em>}' containment reference.
+	 * The cached value of the '{@link #getConstraints() <em>Constraints</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getWildcard()
+	 * @see #getConstraints()
 	 * @generated
 	 * @ordered
 	 */
-	protected Wildcard wildcard;
-
+	protected EList<TypeConstraint> constraints;
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -67,8 +69,11 @@ public class WildcardTypeArgumentImpl extends TypeArgumentImpl implements Wildca
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Wildcard getWildcard() {
-		return wildcard;
+	public EList<TypeConstraint> getConstraints() {
+		if (constraints == null) {
+			constraints = new EObjectContainmentWithInverseEList<TypeConstraint>(TypeConstraint.class, this, TypesPackage.WILDCARD_TYPE_ARGUMENT__CONSTRAINTS, TypesPackage.TYPE_CONSTRAINT__OWNER);
+		}
+		return constraints;
 	}
 
 	/**
@@ -76,33 +81,14 @@ public class WildcardTypeArgumentImpl extends TypeArgumentImpl implements Wildca
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetWildcard(Wildcard newWildcard, NotificationChain msgs) {
-		Wildcard oldWildcard = wildcard;
-		wildcard = newWildcard;
-		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypesPackage.WILDCARD_TYPE_ARGUMENT__WILDCARD, oldWildcard, newWildcard);
-			if (msgs == null) msgs = notification; else msgs.add(notification);
+	@SuppressWarnings("unchecked")
+	@Override
+	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TypesPackage.WILDCARD_TYPE_ARGUMENT__CONSTRAINTS:
+				return ((InternalEList<InternalEObject>)(InternalEList<?>)getConstraints()).basicAdd(otherEnd, msgs);
 		}
-		return msgs;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setWildcard(Wildcard newWildcard) {
-		if (newWildcard != wildcard) {
-			NotificationChain msgs = null;
-			if (wildcard != null)
-				msgs = ((InternalEObject)wildcard).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.WILDCARD_TYPE_ARGUMENT__WILDCARD, null, msgs);
-			if (newWildcard != null)
-				msgs = ((InternalEObject)newWildcard).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.WILDCARD_TYPE_ARGUMENT__WILDCARD, null, msgs);
-			msgs = basicSetWildcard(newWildcard, msgs);
-			if (msgs != null) msgs.dispatch();
-		}
-		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.WILDCARD_TYPE_ARGUMENT__WILDCARD, newWildcard, newWildcard));
+		return super.eInverseAdd(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -113,8 +99,8 @@ public class WildcardTypeArgumentImpl extends TypeArgumentImpl implements Wildca
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TypesPackage.WILDCARD_TYPE_ARGUMENT__WILDCARD:
-				return basicSetWildcard(null, msgs);
+			case TypesPackage.WILDCARD_TYPE_ARGUMENT__CONSTRAINTS:
+				return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -127,8 +113,8 @@ public class WildcardTypeArgumentImpl extends TypeArgumentImpl implements Wildca
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypesPackage.WILDCARD_TYPE_ARGUMENT__WILDCARD:
-				return getWildcard();
+			case TypesPackage.WILDCARD_TYPE_ARGUMENT__CONSTRAINTS:
+				return getConstraints();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -138,11 +124,13 @@ public class WildcardTypeArgumentImpl extends TypeArgumentImpl implements Wildca
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	@SuppressWarnings("unchecked")
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypesPackage.WILDCARD_TYPE_ARGUMENT__WILDCARD:
-				setWildcard((Wildcard)newValue);
+			case TypesPackage.WILDCARD_TYPE_ARGUMENT__CONSTRAINTS:
+				getConstraints().clear();
+				getConstraints().addAll((Collection<? extends TypeConstraint>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -156,8 +144,8 @@ public class WildcardTypeArgumentImpl extends TypeArgumentImpl implements Wildca
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypesPackage.WILDCARD_TYPE_ARGUMENT__WILDCARD:
-				setWildcard((Wildcard)null);
+			case TypesPackage.WILDCARD_TYPE_ARGUMENT__CONSTRAINTS:
+				getConstraints().clear();
 				return;
 		}
 		super.eUnset(featureID);
@@ -171,17 +159,53 @@ public class WildcardTypeArgumentImpl extends TypeArgumentImpl implements Wildca
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypesPackage.WILDCARD_TYPE_ARGUMENT__WILDCARD:
-				return wildcard != null;
+			case TypesPackage.WILDCARD_TYPE_ARGUMENT__CONSTRAINTS:
+				return constraints != null && !constraints.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
 	
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eBaseStructuralFeatureID(int derivedFeatureID, Class<?> baseClass) {
+		if (baseClass == ConstraintOwner.class) {
+			switch (derivedFeatureID) {
+				case TypesPackage.WILDCARD_TYPE_ARGUMENT__CONSTRAINTS: return TypesPackage.CONSTRAINT_OWNER__CONSTRAINTS;
+				default: return -1;
+			}
+		}
+		return super.eBaseStructuralFeatureID(derivedFeatureID, baseClass);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public int eDerivedStructuralFeatureID(int baseFeatureID, Class<?> baseClass) {
+		if (baseClass == ConstraintOwner.class) {
+			switch (baseFeatureID) {
+				case TypesPackage.CONSTRAINT_OWNER__CONSTRAINTS: return TypesPackage.WILDCARD_TYPE_ARGUMENT__CONSTRAINTS;
+				default: return -1;
+			}
+		}
+		return super.eDerivedStructuralFeatureID(baseFeatureID, baseClass);
+	}
+
 	@Override
 	public String getCanonicalName() {
-		if (wildcard != null)
-			return wildcard.getCanonicalName();
-		return null;
+		if (constraints != null && !constraints.isEmpty()) {
+			StringBuilder mutableResult = new StringBuilder(64);
+			mutableResult.append("? ");
+			ConstraintOwnerImpl.appendConstraintsCanonicalName(mutableResult, constraints);
+			return mutableResult.toString();
+		}
+		return "?";
 	}
 
 } //WildcardTypeArgumentImpl

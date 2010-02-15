@@ -15,8 +15,8 @@ package org.eclipse.xtext.common.types;
  * <p>
  * The following features are supported:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.TypeConstraint#getReferencedType <em>Referenced Type</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.TypeConstraint#getConstrainedType <em>Constrained Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.TypeConstraint#getTypeReference <em>Type Reference</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.TypeConstraint#getOwner <em>Owner</em>}</li>
  * </ul>
  * </p>
  *
@@ -26,57 +26,57 @@ package org.eclipse.xtext.common.types;
  */
 public interface TypeConstraint extends IdentifyableElement {
 	/**
-	 * Returns the value of the '<em><b>Referenced Type</b></em>' reference.
+	 * Returns the value of the '<em><b>Type Reference</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Referenced Type</em>' containment reference isn't clear,
+	 * If the meaning of the '<em>Type Reference</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Referenced Type</em>' reference.
-	 * @see #setReferencedType(Type)
-	 * @see org.eclipse.xtext.common.types.TypesPackage#getTypeConstraint_ReferencedType()
-	 * @model
+	 * @return the value of the '<em>Type Reference</em>' containment reference.
+	 * @see #setTypeReference(TypeReference)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getTypeConstraint_TypeReference()
+	 * @model containment="true"
 	 * @generated
 	 */
-	Type getReferencedType();
+	TypeReference getTypeReference();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.common.types.TypeConstraint#getReferencedType <em>Referenced Type</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.TypeConstraint#getTypeReference <em>Type Reference</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Referenced Type</em>' reference.
-	 * @see #getReferencedType()
+	 * @param value the new value of the '<em>Type Reference</em>' containment reference.
+	 * @see #getTypeReference()
 	 * @generated
 	 */
-	void setReferencedType(Type value);
+	void setTypeReference(TypeReference value);
 
 	/**
-	 * Returns the value of the '<em><b>Constrained Type</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.common.types.ConstrainedType#getConstraints <em>Constraints</em>}'.
+	 * Returns the value of the '<em><b>Owner</b></em>' container reference.
+	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.common.types.ConstraintOwner#getConstraints <em>Constraints</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
-	 * If the meaning of the '<em>Constrained Type</em>' container reference isn't clear,
+	 * If the meaning of the '<em>Owner</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Constrained Type</em>' container reference.
-	 * @see #setConstrainedType(ConstrainedType)
-	 * @see org.eclipse.xtext.common.types.TypesPackage#getTypeConstraint_ConstrainedType()
-	 * @see org.eclipse.xtext.common.types.ConstrainedType#getConstraints
+	 * @return the value of the '<em>Owner</em>' container reference.
+	 * @see #setOwner(ConstraintOwner)
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getTypeConstraint_Owner()
+	 * @see org.eclipse.xtext.common.types.ConstraintOwner#getConstraints
 	 * @model opposite="constraints" transient="false"
 	 * @generated
 	 */
-	ConstrainedType getConstrainedType();
+	ConstraintOwner getOwner();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.common.types.TypeConstraint#getConstrainedType <em>Constrained Type</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.TypeConstraint#getOwner <em>Owner</em>}' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Constrained Type</em>' container reference.
-	 * @see #getConstrainedType()
+	 * @param value the new value of the '<em>Owner</em>' container reference.
+	 * @see #getOwner()
 	 * @generated
 	 */
-	void setConstrainedType(ConstrainedType value);
+	void setOwner(ConstraintOwner value);
 
 } // TypeConstraint

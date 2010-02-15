@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -20,24 +20,24 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtext.common.types.ConstrainedType;
+import org.eclipse.xtext.common.types.ConstraintOwner;
 import org.eclipse.xtext.common.types.TypeConstraint;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Constrained Type</b></em>'.
+ * An implementation of the model object '<em><b>Constraint Owner</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.impl.ConstrainedTypeImpl#getConstraints <em>Constraints</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.ConstraintOwnerImpl#getConstraints <em>Constraints</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public abstract class ConstrainedTypeImpl extends TypeImpl implements ConstrainedType {
+public abstract class ConstraintOwnerImpl extends IdentifyableElementImpl implements ConstraintOwner {
 	/**
 	 * The cached value of the '{@link #getConstraints() <em>Constraints</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
@@ -53,7 +53,7 @@ public abstract class ConstrainedTypeImpl extends TypeImpl implements Constraine
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ConstrainedTypeImpl() {
+	protected ConstraintOwnerImpl() {
 		super();
 	}
 
@@ -64,7 +64,7 @@ public abstract class ConstrainedTypeImpl extends TypeImpl implements Constraine
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TypesPackage.Literals.CONSTRAINED_TYPE;
+		return TypesPackage.Literals.CONSTRAINT_OWNER;
 	}
 
 	/**
@@ -74,7 +74,7 @@ public abstract class ConstrainedTypeImpl extends TypeImpl implements Constraine
 	 */
 	public EList<TypeConstraint> getConstraints() {
 		if (constraints == null) {
-			constraints = new EObjectContainmentWithInverseEList<TypeConstraint>(TypeConstraint.class, this, TypesPackage.CONSTRAINED_TYPE__CONSTRAINTS, TypesPackage.TYPE_CONSTRAINT__CONSTRAINED_TYPE);
+			constraints = new EObjectContainmentWithInverseEList<TypeConstraint>(TypeConstraint.class, this, TypesPackage.CONSTRAINT_OWNER__CONSTRAINTS, TypesPackage.TYPE_CONSTRAINT__OWNER);
 		}
 		return constraints;
 	}
@@ -88,7 +88,7 @@ public abstract class ConstrainedTypeImpl extends TypeImpl implements Constraine
 	@Override
 	public NotificationChain eInverseAdd(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TypesPackage.CONSTRAINED_TYPE__CONSTRAINTS:
+			case TypesPackage.CONSTRAINT_OWNER__CONSTRAINTS:
 				return ((InternalEList<InternalEObject>)(InternalEList<?>)getConstraints()).basicAdd(otherEnd, msgs);
 		}
 		return super.eInverseAdd(otherEnd, featureID, msgs);
@@ -102,7 +102,7 @@ public abstract class ConstrainedTypeImpl extends TypeImpl implements Constraine
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TypesPackage.CONSTRAINED_TYPE__CONSTRAINTS:
+			case TypesPackage.CONSTRAINT_OWNER__CONSTRAINTS:
 				return ((InternalEList<?>)getConstraints()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -116,7 +116,7 @@ public abstract class ConstrainedTypeImpl extends TypeImpl implements Constraine
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypesPackage.CONSTRAINED_TYPE__CONSTRAINTS:
+			case TypesPackage.CONSTRAINT_OWNER__CONSTRAINTS:
 				return getConstraints();
 		}
 		return super.eGet(featureID, resolve, coreType);
@@ -131,7 +131,7 @@ public abstract class ConstrainedTypeImpl extends TypeImpl implements Constraine
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypesPackage.CONSTRAINED_TYPE__CONSTRAINTS:
+			case TypesPackage.CONSTRAINT_OWNER__CONSTRAINTS:
 				getConstraints().clear();
 				getConstraints().addAll((Collection<? extends TypeConstraint>)newValue);
 				return;
@@ -147,7 +147,7 @@ public abstract class ConstrainedTypeImpl extends TypeImpl implements Constraine
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypesPackage.CONSTRAINED_TYPE__CONSTRAINTS:
+			case TypesPackage.CONSTRAINT_OWNER__CONSTRAINTS:
 				getConstraints().clear();
 				return;
 		}
@@ -162,27 +162,21 @@ public abstract class ConstrainedTypeImpl extends TypeImpl implements Constraine
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypesPackage.CONSTRAINED_TYPE__CONSTRAINTS:
+			case TypesPackage.CONSTRAINT_OWNER__CONSTRAINTS:
 				return constraints != null && !constraints.isEmpty();
 		}
 		return super.eIsSet(featureID);
 	}
-	
-	@Override
-	public String getCanonicalName() {
-		return getConstraintsCanonicalName(constraints);
-	}
 
-	static String getConstraintsCanonicalName(List<TypeConstraint> constraints) {
+	static void appendConstraintsCanonicalName(StringBuilder result, List<TypeConstraint> constraints) {
 		if (constraints == null || constraints.isEmpty())
-			return null;
-		StringBuilder result = new StringBuilder(64);
+			return;
+		int wasLength = result.length();
 		for(TypeConstraint constraint: constraints) {
-			if (result.length() != 0)
+			if (result.length() != wasLength)
 				result.append(" & ");
 			result.append(constraint.getCanonicalName());
 		}
-		return result.toString();
 	}
-
-} //ConstrainedTypeImpl
+	
+} //ConstraintOwnerImpl

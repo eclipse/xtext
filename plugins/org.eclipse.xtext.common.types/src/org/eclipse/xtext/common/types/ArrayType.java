@@ -38,31 +38,29 @@ public interface ArrayType extends ComponentType {
 	int getDimensions();
 
 	/**
-	 * Returns the value of the '<em><b>Component Type</b></em>' container reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.common.types.ComponentType#getArrayType <em>Array Type</em>}'.
+	 * Returns the value of the '<em><b>Component Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Component Type</em>' container reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Component Type</em>' container reference.
-	 * @see #setComponentType(ComponentType)
+	 * @return the value of the '<em>Component Type</em>' containment reference.
+	 * @see #setComponentType(TypeReference)
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getArrayType_ComponentType()
-	 * @see org.eclipse.xtext.common.types.ComponentType#getArrayType
-	 * @model opposite="arrayType" transient="false"
+	 * @model containment="true"
 	 * @generated
 	 */
-	ComponentType getComponentType();
+	TypeReference getComponentType();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.common.types.ArrayType#getComponentType <em>Component Type</em>}' container reference.
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.ArrayType#getComponentType <em>Component Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Component Type</em>' container reference.
+	 * @param value the new value of the '<em>Component Type</em>' containment reference.
 	 * @see #getComponentType()
 	 * @generated
 	 */
-	void setComponentType(ComponentType value);
+	void setComponentType(TypeReference value);
 
 } // ArrayType

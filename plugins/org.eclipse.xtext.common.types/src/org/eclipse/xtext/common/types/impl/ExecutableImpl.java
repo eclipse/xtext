@@ -18,14 +18,13 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectContainmentWithInverseEList;
-import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.common.types.Executable;
 import org.eclipse.xtext.common.types.FormalParameter;
-import org.eclipse.xtext.common.types.Type;
 import org.eclipse.xtext.common.types.TypeParameter;
 import org.eclipse.xtext.common.types.TypeParameterDeclarator;
+import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
@@ -65,14 +64,14 @@ public abstract class ExecutableImpl extends MemberImpl implements Executable {
 	protected EList<FormalParameter> parameters;
 
 	/**
-	 * The cached value of the '{@link #getExceptions() <em>Exceptions</em>}' reference list.
+	 * The cached value of the '{@link #getExceptions() <em>Exceptions</em>}' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getExceptions()
 	 * @generated
 	 * @ordered
 	 */
-	protected EList<Type> exceptions;
+	protected EList<TypeReference> exceptions;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -122,9 +121,9 @@ public abstract class ExecutableImpl extends MemberImpl implements Executable {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EList<Type> getExceptions() {
+	public EList<TypeReference> getExceptions() {
 		if (exceptions == null) {
-			exceptions = new EObjectResolvingEList<Type>(Type.class, this, TypesPackage.EXECUTABLE__EXCEPTIONS);
+			exceptions = new EObjectContainmentEList<TypeReference>(TypeReference.class, this, TypesPackage.EXECUTABLE__EXCEPTIONS);
 		}
 		return exceptions;
 	}
@@ -156,6 +155,8 @@ public abstract class ExecutableImpl extends MemberImpl implements Executable {
 				return ((InternalEList<?>)getTypeParameters()).basicRemove(otherEnd, msgs);
 			case TypesPackage.EXECUTABLE__PARAMETERS:
 				return ((InternalEList<?>)getParameters()).basicRemove(otherEnd, msgs);
+			case TypesPackage.EXECUTABLE__EXCEPTIONS:
+				return ((InternalEList<?>)getExceptions()).basicRemove(otherEnd, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -197,7 +198,7 @@ public abstract class ExecutableImpl extends MemberImpl implements Executable {
 				return;
 			case TypesPackage.EXECUTABLE__EXCEPTIONS:
 				getExceptions().clear();
-				getExceptions().addAll((Collection<? extends Type>)newValue);
+				getExceptions().addAll((Collection<? extends TypeReference>)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);

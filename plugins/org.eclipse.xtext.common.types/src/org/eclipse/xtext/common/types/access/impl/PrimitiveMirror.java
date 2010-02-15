@@ -9,9 +9,7 @@ package org.eclipse.xtext.common.types.access.impl;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.common.types.ComponentType;
 import org.eclipse.xtext.common.types.Type;
-import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.TypeResource;
 
 /**
@@ -28,13 +26,7 @@ public class PrimitiveMirror extends AbstractClassMirror {
 	@Override
 	public EObject getEObject(Resource resource, String fragment) {
 		if (fragment.endsWith("[]")) {
-			ComponentType component = (ComponentType) getEObject(resource, fragment.substring(0, fragment.length() - 2));
-			if (component == null)
-				return null;
-			if (component.getArrayType() == null) {
-				component.setArrayType(TypesFactory.eINSTANCE.createArrayType());
-			}
-			return component.getArrayType();
+			return getArrayEObject(resource, fragment);
 		}
 		for (EObject obj: resource.getContents()) {
 			String otherFragment = getFragment(obj);

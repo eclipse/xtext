@@ -24,18 +24,19 @@ import org.eclipse.xtext.common.types.Constructor;
 import org.eclipse.xtext.common.types.EnumerationType;
 import org.eclipse.xtext.common.types.Field;
 import org.eclipse.xtext.common.types.FormalParameter;
+import org.eclipse.xtext.common.types.GenericArrayTypeReference;
 import org.eclipse.xtext.common.types.GenericType;
 import org.eclipse.xtext.common.types.LowerBound;
 import org.eclipse.xtext.common.types.Operation;
-import org.eclipse.xtext.common.types.ParameterizedType;
+import org.eclipse.xtext.common.types.ParameterizedTypeReference;
 import org.eclipse.xtext.common.types.PrimitiveType;
 import org.eclipse.xtext.common.types.ReferenceTypeArgument;
+import org.eclipse.xtext.common.types.SimpleTypeReference;
 import org.eclipse.xtext.common.types.TypeParameter;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.UpperBound;
 import org.eclipse.xtext.common.types.Visibility;
-import org.eclipse.xtext.common.types.Wildcard;
 import org.eclipse.xtext.common.types.WildcardTypeArgument;
 
 /**
@@ -84,7 +85,6 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 		switch (eClass.getClassifierID()) {
 			case TypesPackage.VOID: return createVoid();
 			case TypesPackage.PRIMITIVE_TYPE: return createPrimitiveType();
-			case TypesPackage.WILDCARD: return createWildcard();
 			case TypesPackage.ARRAY_TYPE: return createArrayType();
 			case TypesPackage.TYPE_PARAMETER: return createTypeParameter();
 			case TypesPackage.UPPER_BOUND: return createUpperBound();
@@ -92,7 +92,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.ANNOTATION_TYPE: return createAnnotationType();
 			case TypesPackage.ENUMERATION_TYPE: return createEnumerationType();
 			case TypesPackage.GENERIC_TYPE: return createGenericType();
-			case TypesPackage.PARAMETERIZED_TYPE: return createParameterizedType();
+			case TypesPackage.SIMPLE_TYPE_REFERENCE: return createSimpleTypeReference();
+			case TypesPackage.PARAMETERIZED_TYPE_REFERENCE: return createParameterizedTypeReference();
+			case TypesPackage.GENERIC_ARRAY_TYPE_REFERENCE: return createGenericArrayTypeReference();
 			case TypesPackage.WILDCARD_TYPE_ARGUMENT: return createWildcardTypeArgument();
 			case TypesPackage.REFERENCE_TYPE_ARGUMENT: return createReferenceTypeArgument();
 			case TypesPackage.FIELD: return createField();
@@ -157,16 +159,6 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	public PrimitiveType createPrimitiveType() {
 		PrimitiveTypeImpl primitiveType = new PrimitiveTypeImpl();
 		return primitiveType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public Wildcard createWildcard() {
-		WildcardImpl wildcard = new WildcardImpl();
-		return wildcard;
 	}
 
 	/**
@@ -244,9 +236,29 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ParameterizedType createParameterizedType() {
-		ParameterizedTypeImpl parameterizedType = new ParameterizedTypeImpl();
-		return parameterizedType;
+	public SimpleTypeReference createSimpleTypeReference() {
+		SimpleTypeReferenceImpl simpleTypeReference = new SimpleTypeReferenceImpl();
+		return simpleTypeReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public ParameterizedTypeReference createParameterizedTypeReference() {
+		ParameterizedTypeReferenceImpl parameterizedTypeReference = new ParameterizedTypeReferenceImpl();
+		return parameterizedTypeReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public GenericArrayTypeReference createGenericArrayTypeReference() {
+		GenericArrayTypeReferenceImpl genericArrayTypeReference = new GenericArrayTypeReferenceImpl();
+		return genericArrayTypeReference;
 	}
 
 	/**

@@ -9,13 +9,14 @@ package org.eclipse.xtext.common.types.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
 import org.eclipse.xtext.common.types.Field;
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
@@ -75,14 +76,14 @@ public class FieldImpl extends MemberImpl implements Field {
 	protected boolean final_ = FINAL_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getType() <em>Type</em>}' reference.
+	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getType()
 	 * @generated
 	 * @ordered
 	 */
-	protected Type type;
+	protected TypeReference type;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -150,15 +151,7 @@ public class FieldImpl extends MemberImpl implements Field {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Type getType() {
-		if (type != null && type.eIsProxy()) {
-			InternalEObject oldType = (InternalEObject)type;
-			type = (Type)eResolveProxy(oldType);
-			if (type != oldType) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.FIELD__TYPE, oldType, type));
-			}
-		}
+	public TypeReference getType() {
 		return type;
 	}
 
@@ -167,20 +160,47 @@ public class FieldImpl extends MemberImpl implements Field {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Type basicGetType() {
-		return type;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setType(Type newType) {
-		Type oldType = type;
+	public NotificationChain basicSetType(TypeReference newType, NotificationChain msgs) {
+		TypeReference oldType = type;
 		type = newType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.FIELD__TYPE, oldType, type));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypesPackage.FIELD__TYPE, oldType, newType);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setType(TypeReference newType) {
+		if (newType != type) {
+			NotificationChain msgs = null;
+			if (type != null)
+				msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.FIELD__TYPE, null, msgs);
+			if (newType != null)
+				msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.FIELD__TYPE, null, msgs);
+			msgs = basicSetType(newType, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.FIELD__TYPE, newType, newType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TypesPackage.FIELD__TYPE:
+				return basicSetType(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -196,8 +216,7 @@ public class FieldImpl extends MemberImpl implements Field {
 			case TypesPackage.FIELD__FINAL:
 				return isFinal();
 			case TypesPackage.FIELD__TYPE:
-				if (resolve) return getType();
-				return basicGetType();
+				return getType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -217,7 +236,7 @@ public class FieldImpl extends MemberImpl implements Field {
 				setFinal((Boolean)newValue);
 				return;
 			case TypesPackage.FIELD__TYPE:
-				setType((Type)newValue);
+				setType((TypeReference)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -238,7 +257,7 @@ public class FieldImpl extends MemberImpl implements Field {
 				setFinal(FINAL_EDEFAULT);
 				return;
 			case TypesPackage.FIELD__TYPE:
-				setType((Type)null);
+				setType((TypeReference)null);
 				return;
 		}
 		super.eUnset(featureID);

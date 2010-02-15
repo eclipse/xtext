@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,44 +9,46 @@ package org.eclipse.xtext.common.types.impl;
 
 import org.eclipse.emf.common.notify.Notification;
 import org.eclipse.emf.common.notify.NotificationChain;
-import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
+
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
+
 import org.eclipse.xtext.common.types.ArrayType;
-import org.eclipse.xtext.common.types.TypeReference;
+import org.eclipse.xtext.common.types.GenericArrayTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Array Type</b></em>'.
+ * An implementation of the model object '<em><b>Generic Array Type Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.common.types.impl.ArrayTypeImpl#getComponentType <em>Component Type</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.impl.GenericArrayTypeReferenceImpl#getType <em>Type</em>}</li>
  * </ul>
  * </p>
  *
  * @generated
  */
-public class ArrayTypeImpl extends ComponentTypeImpl implements ArrayType {
+public class GenericArrayTypeReferenceImpl extends TypeReferenceImpl implements GenericArrayTypeReference {
 	/**
-	 * The cached value of the '{@link #getComponentType() <em>Component Type</em>}' containment reference.
+	 * The cached value of the '{@link #getType() <em>Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see #getComponentType()
+	 * @see #getType()
 	 * @generated
 	 * @ordered
 	 */
-	protected TypeReference componentType;
+	protected ArrayType type;
 
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ArrayTypeImpl() {
+	protected GenericArrayTypeReferenceImpl() {
 		super();
 	}
 
@@ -57,26 +59,7 @@ public class ArrayTypeImpl extends ComponentTypeImpl implements ArrayType {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TypesPackage.Literals.ARRAY_TYPE;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated NOT
-	 */
-	public int getDimensions() {
-		int result = 1;
-		TypeReference componentType = getComponentType();
-		if (componentType == null)
-			throw new NullPointerException("component type may not be null");
-		while(componentType.getType() instanceof ArrayType) {
-			result++;
-			componentType = ((ArrayType)componentType.getType()).getComponentType();
-			if (componentType == null)
-				return result;
-		}
-		return result;
+		return TypesPackage.Literals.GENERIC_ARRAY_TYPE_REFERENCE;
 	}
 
 	/**
@@ -84,8 +67,9 @@ public class ArrayTypeImpl extends ComponentTypeImpl implements ArrayType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeReference getComponentType() {
-		return componentType;
+	@Override
+	public ArrayType getType() {
+		return type;
 	}
 
 	/**
@@ -93,11 +77,11 @@ public class ArrayTypeImpl extends ComponentTypeImpl implements ArrayType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public NotificationChain basicSetComponentType(TypeReference newComponentType, NotificationChain msgs) {
-		TypeReference oldComponentType = componentType;
-		componentType = newComponentType;
+	public NotificationChain basicSetType(ArrayType newType, NotificationChain msgs) {
+		ArrayType oldType = type;
+		type = newType;
 		if (eNotificationRequired()) {
-			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypesPackage.ARRAY_TYPE__COMPONENT_TYPE, oldComponentType, newComponentType);
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypesPackage.GENERIC_ARRAY_TYPE_REFERENCE__TYPE, oldType, newType);
 			if (msgs == null) msgs = notification; else msgs.add(notification);
 		}
 		return msgs;
@@ -108,18 +92,18 @@ public class ArrayTypeImpl extends ComponentTypeImpl implements ArrayType {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public void setComponentType(TypeReference newComponentType) {
-		if (newComponentType != componentType) {
+	public void setType(ArrayType newType) {
+		if (newType != type) {
 			NotificationChain msgs = null;
-			if (componentType != null)
-				msgs = ((InternalEObject)componentType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.ARRAY_TYPE__COMPONENT_TYPE, null, msgs);
-			if (newComponentType != null)
-				msgs = ((InternalEObject)newComponentType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.ARRAY_TYPE__COMPONENT_TYPE, null, msgs);
-			msgs = basicSetComponentType(newComponentType, msgs);
+			if (type != null)
+				msgs = ((InternalEObject)type).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.GENERIC_ARRAY_TYPE_REFERENCE__TYPE, null, msgs);
+			if (newType != null)
+				msgs = ((InternalEObject)newType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.GENERIC_ARRAY_TYPE_REFERENCE__TYPE, null, msgs);
+			msgs = basicSetType(newType, msgs);
 			if (msgs != null) msgs.dispatch();
 		}
 		else if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.ARRAY_TYPE__COMPONENT_TYPE, newComponentType, newComponentType));
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.GENERIC_ARRAY_TYPE_REFERENCE__TYPE, newType, newType));
 	}
 
 	/**
@@ -130,8 +114,8 @@ public class ArrayTypeImpl extends ComponentTypeImpl implements ArrayType {
 	@Override
 	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
 		switch (featureID) {
-			case TypesPackage.ARRAY_TYPE__COMPONENT_TYPE:
-				return basicSetComponentType(null, msgs);
+			case TypesPackage.GENERIC_ARRAY_TYPE_REFERENCE__TYPE:
+				return basicSetType(null, msgs);
 		}
 		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
@@ -144,8 +128,8 @@ public class ArrayTypeImpl extends ComponentTypeImpl implements ArrayType {
 	@Override
 	public Object eGet(int featureID, boolean resolve, boolean coreType) {
 		switch (featureID) {
-			case TypesPackage.ARRAY_TYPE__COMPONENT_TYPE:
-				return getComponentType();
+			case TypesPackage.GENERIC_ARRAY_TYPE_REFERENCE__TYPE:
+				return getType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -158,8 +142,8 @@ public class ArrayTypeImpl extends ComponentTypeImpl implements ArrayType {
 	@Override
 	public void eSet(int featureID, Object newValue) {
 		switch (featureID) {
-			case TypesPackage.ARRAY_TYPE__COMPONENT_TYPE:
-				setComponentType((TypeReference)newValue);
+			case TypesPackage.GENERIC_ARRAY_TYPE_REFERENCE__TYPE:
+				setType((ArrayType)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -173,8 +157,8 @@ public class ArrayTypeImpl extends ComponentTypeImpl implements ArrayType {
 	@Override
 	public void eUnset(int featureID) {
 		switch (featureID) {
-			case TypesPackage.ARRAY_TYPE__COMPONENT_TYPE:
-				setComponentType((TypeReference)null);
+			case TypesPackage.GENERIC_ARRAY_TYPE_REFERENCE__TYPE:
+				setType((ArrayType)null);
 				return;
 		}
 		super.eUnset(featureID);
@@ -188,16 +172,17 @@ public class ArrayTypeImpl extends ComponentTypeImpl implements ArrayType {
 	@Override
 	public boolean eIsSet(int featureID) {
 		switch (featureID) {
-			case TypesPackage.ARRAY_TYPE__COMPONENT_TYPE:
-				return componentType != null;
+			case TypesPackage.GENERIC_ARRAY_TYPE_REFERENCE__TYPE:
+				return type != null;
 		}
 		return super.eIsSet(featureID);
 	}
-
+	
 	@Override
 	public String getCanonicalName() {
-		if (componentType != null)
-			return getComponentType().getCanonicalName() + "[]";
+		if (type != null)
+			return getType().getCanonicalName();
 		return null;
 	}
-} //ArrayTypeImpl
+
+} //GenericArrayTypeReferenceImpl

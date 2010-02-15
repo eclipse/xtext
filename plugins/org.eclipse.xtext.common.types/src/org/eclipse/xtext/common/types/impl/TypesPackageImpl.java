@@ -24,31 +24,33 @@ import org.eclipse.xtext.common.types.AnnotationTarget;
 import org.eclipse.xtext.common.types.AnnotationType;
 import org.eclipse.xtext.common.types.ArrayType;
 import org.eclipse.xtext.common.types.ComponentType;
-import org.eclipse.xtext.common.types.ConstrainedType;
+import org.eclipse.xtext.common.types.ConstraintOwner;
 import org.eclipse.xtext.common.types.Constructor;
 import org.eclipse.xtext.common.types.DeclaredType;
 import org.eclipse.xtext.common.types.EnumerationType;
 import org.eclipse.xtext.common.types.Executable;
 import org.eclipse.xtext.common.types.Field;
 import org.eclipse.xtext.common.types.FormalParameter;
+import org.eclipse.xtext.common.types.GenericArrayTypeReference;
 import org.eclipse.xtext.common.types.GenericType;
 import org.eclipse.xtext.common.types.LowerBound;
 import org.eclipse.xtext.common.types.Member;
 import org.eclipse.xtext.common.types.Operation;
-import org.eclipse.xtext.common.types.ParameterizedType;
+import org.eclipse.xtext.common.types.ParameterizedTypeReference;
 import org.eclipse.xtext.common.types.PrimitiveType;
 import org.eclipse.xtext.common.types.ReferenceTypeArgument;
+import org.eclipse.xtext.common.types.SimpleTypeReference;
 import org.eclipse.xtext.common.types.IdentifyableElement;
 import org.eclipse.xtext.common.types.Type;
 import org.eclipse.xtext.common.types.TypeArgument;
 import org.eclipse.xtext.common.types.TypeConstraint;
 import org.eclipse.xtext.common.types.TypeParameter;
 import org.eclipse.xtext.common.types.TypeParameterDeclarator;
+import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.UpperBound;
 import org.eclipse.xtext.common.types.Visibility;
-import org.eclipse.xtext.common.types.Wildcard;
 import org.eclipse.xtext.common.types.WildcardTypeArgument;
 
 /**
@@ -84,13 +86,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass constrainedTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	private EClass componentTypeEClass = null;
 
 	/**
@@ -99,13 +94,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	private EClass primitiveTypeEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass wildcardEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -127,6 +115,13 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	private EClass typeParameterDeclaratorEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass constraintOwnerEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -175,7 +170,28 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	private EClass parameterizedTypeEClass = null;
+	private EClass typeReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass simpleTypeReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass parameterizedTypeReferenceEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass genericArrayTypeReferenceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -368,24 +384,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getConstrainedType() {
-		return constrainedTypeEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getConstrainedType_Constraints() {
-		return (EReference)constrainedTypeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getComponentType() {
 		return componentTypeEClass;
 	}
@@ -415,15 +413,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 */
 	public EAttribute getPrimitiveType_Name() {
 		return (EAttribute)primitiveTypeEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EClass getWildcard() {
-		return wildcardEClass;
 	}
 
 	/**
@@ -494,6 +483,24 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getConstraintOwner() {
+		return constraintOwnerEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getConstraintOwner_Constraints() {
+		return (EReference)constraintOwnerEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EClass getTypeConstraint() {
 		return typeConstraintEClass;
 	}
@@ -503,7 +510,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTypeConstraint_ReferencedType() {
+	public EReference getTypeConstraint_TypeReference() {
 		return (EReference)typeConstraintEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -512,7 +519,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getTypeConstraint_ConstrainedType() {
+	public EReference getTypeConstraint_Owner() {
 		return (EReference)typeConstraintEClass.getEStructuralFeatures().get(1);
 	}
 
@@ -602,8 +609,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getParameterizedType() {
-		return parameterizedTypeEClass;
+	public EClass getTypeReference() {
+		return typeReferenceEClass;
 	}
 
 	/**
@@ -611,8 +618,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EAttribute getParameterizedType_FullyQualifiedName() {
-		return (EAttribute)parameterizedTypeEClass.getEStructuralFeatures().get(0);
+	public EClass getSimpleTypeReference() {
+		return simpleTypeReferenceEClass;
 	}
 
 	/**
@@ -620,8 +627,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getParameterizedType_Arguments() {
-		return (EReference)parameterizedTypeEClass.getEStructuralFeatures().get(1);
+	public EReference getSimpleTypeReference_Type() {
+		return (EReference)simpleTypeReferenceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -629,8 +636,8 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getParameterizedType_Declarator() {
-		return (EReference)parameterizedTypeEClass.getEStructuralFeatures().get(2);
+	public EClass getParameterizedTypeReference() {
+		return parameterizedTypeReferenceEClass;
 	}
 
 	/**
@@ -638,8 +645,35 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getParameterizedType_RawType() {
-		return (EReference)parameterizedTypeEClass.getEStructuralFeatures().get(3);
+	public EReference getParameterizedTypeReference_Arguments() {
+		return (EReference)parameterizedTypeReferenceEClass.getEStructuralFeatures().get(0);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getParameterizedTypeReference_Type() {
+		return (EReference)parameterizedTypeReferenceEClass.getEStructuralFeatures().get(1);
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EClass getGenericArrayTypeReference() {
+		return genericArrayTypeReferenceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public EReference getGenericArrayTypeReference_Type() {
+		return (EReference)genericArrayTypeReferenceEClass.getEStructuralFeatures().get(0);
 	}
 
 	/**
@@ -674,15 +708,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getWildcardTypeArgument_Wildcard() {
-		return (EReference)wildcardTypeArgumentEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getReferenceTypeArgument() {
 		return referenceTypeArgumentEClass;
 	}
@@ -692,7 +717,7 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EReference getReferenceTypeArgument_Type() {
+	public EReference getReferenceTypeArgument_TypeReference() {
 		return (EReference)referenceTypeArgumentEClass.getEStructuralFeatures().get(0);
 	}
 
@@ -757,15 +782,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 */
 	public EAttribute getMember_FullyQualifiedName() {
 		return (EAttribute)memberEClass.getEStructuralFeatures().get(2);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getMember_DeclaredParameterizedTypes() {
-		return (EReference)memberEClass.getEStructuralFeatures().get(3);
 	}
 
 	/**
@@ -1009,16 +1025,11 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		voidEClass = createEClass(VOID);
 
-		constrainedTypeEClass = createEClass(CONSTRAINED_TYPE);
-		createEReference(constrainedTypeEClass, CONSTRAINED_TYPE__CONSTRAINTS);
-
 		componentTypeEClass = createEClass(COMPONENT_TYPE);
 		createEReference(componentTypeEClass, COMPONENT_TYPE__ARRAY_TYPE);
 
 		primitiveTypeEClass = createEClass(PRIMITIVE_TYPE);
 		createEAttribute(primitiveTypeEClass, PRIMITIVE_TYPE__NAME);
-
-		wildcardEClass = createEClass(WILDCARD);
 
 		arrayTypeEClass = createEClass(ARRAY_TYPE);
 		createEReference(arrayTypeEClass, ARRAY_TYPE__COMPONENT_TYPE);
@@ -1027,16 +1038,19 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		createEReference(declaredTypeEClass, DECLARED_TYPE__SUPER_TYPES);
 		createEReference(declaredTypeEClass, DECLARED_TYPE__MEMBERS);
 
-		typeParameterDeclaratorEClass = createEClass(TYPE_PARAMETER_DECLARATOR);
-		createEReference(typeParameterDeclaratorEClass, TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS);
-
 		typeParameterEClass = createEClass(TYPE_PARAMETER);
 		createEAttribute(typeParameterEClass, TYPE_PARAMETER__NAME);
 		createEReference(typeParameterEClass, TYPE_PARAMETER__DECLARATOR);
 
+		typeParameterDeclaratorEClass = createEClass(TYPE_PARAMETER_DECLARATOR);
+		createEReference(typeParameterDeclaratorEClass, TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS);
+
+		constraintOwnerEClass = createEClass(CONSTRAINT_OWNER);
+		createEReference(constraintOwnerEClass, CONSTRAINT_OWNER__CONSTRAINTS);
+
 		typeConstraintEClass = createEClass(TYPE_CONSTRAINT);
-		createEReference(typeConstraintEClass, TYPE_CONSTRAINT__REFERENCED_TYPE);
-		createEReference(typeConstraintEClass, TYPE_CONSTRAINT__CONSTRAINED_TYPE);
+		createEReference(typeConstraintEClass, TYPE_CONSTRAINT__TYPE_REFERENCE);
+		createEReference(typeConstraintEClass, TYPE_CONSTRAINT__OWNER);
 
 		upperBoundEClass = createEClass(UPPER_BOUND);
 
@@ -1052,26 +1066,30 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		createEAttribute(genericTypeEClass, GENERIC_TYPE__STATIC);
 		createEAttribute(genericTypeEClass, GENERIC_TYPE__FINAL);
 
-		parameterizedTypeEClass = createEClass(PARAMETERIZED_TYPE);
-		createEAttribute(parameterizedTypeEClass, PARAMETERIZED_TYPE__FULLY_QUALIFIED_NAME);
-		createEReference(parameterizedTypeEClass, PARAMETERIZED_TYPE__ARGUMENTS);
-		createEReference(parameterizedTypeEClass, PARAMETERIZED_TYPE__DECLARATOR);
-		createEReference(parameterizedTypeEClass, PARAMETERIZED_TYPE__RAW_TYPE);
+		typeReferenceEClass = createEClass(TYPE_REFERENCE);
+
+		simpleTypeReferenceEClass = createEClass(SIMPLE_TYPE_REFERENCE);
+		createEReference(simpleTypeReferenceEClass, SIMPLE_TYPE_REFERENCE__TYPE);
+
+		parameterizedTypeReferenceEClass = createEClass(PARAMETERIZED_TYPE_REFERENCE);
+		createEReference(parameterizedTypeReferenceEClass, PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS);
+		createEReference(parameterizedTypeReferenceEClass, PARAMETERIZED_TYPE_REFERENCE__TYPE);
+
+		genericArrayTypeReferenceEClass = createEClass(GENERIC_ARRAY_TYPE_REFERENCE);
+		createEReference(genericArrayTypeReferenceEClass, GENERIC_ARRAY_TYPE_REFERENCE__TYPE);
 
 		typeArgumentEClass = createEClass(TYPE_ARGUMENT);
 		createEReference(typeArgumentEClass, TYPE_ARGUMENT__DECLARATOR);
 
 		wildcardTypeArgumentEClass = createEClass(WILDCARD_TYPE_ARGUMENT);
-		createEReference(wildcardTypeArgumentEClass, WILDCARD_TYPE_ARGUMENT__WILDCARD);
 
 		referenceTypeArgumentEClass = createEClass(REFERENCE_TYPE_ARGUMENT);
-		createEReference(referenceTypeArgumentEClass, REFERENCE_TYPE_ARGUMENT__TYPE);
+		createEReference(referenceTypeArgumentEClass, REFERENCE_TYPE_ARGUMENT__TYPE_REFERENCE);
 
 		memberEClass = createEClass(MEMBER);
 		createEReference(memberEClass, MEMBER__DECLARING_TYPE);
 		createEAttribute(memberEClass, MEMBER__VISIBILITY);
 		createEAttribute(memberEClass, MEMBER__FULLY_QUALIFIED_NAME);
-		createEReference(memberEClass, MEMBER__DECLARED_PARAMETERIZED_TYPES);
 
 		fieldEClass = createEClass(FIELD);
 		createEAttribute(fieldEClass, FIELD__STATIC);
@@ -1139,16 +1157,14 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		// Add supertypes to classes
 		typeEClass.getESuperTypes().add(this.getIdentifyableElement());
 		voidEClass.getESuperTypes().add(this.getType());
-		constrainedTypeEClass.getESuperTypes().add(this.getType());
 		componentTypeEClass.getESuperTypes().add(this.getType());
 		primitiveTypeEClass.getESuperTypes().add(this.getComponentType());
-		wildcardEClass.getESuperTypes().add(this.getConstrainedType());
 		arrayTypeEClass.getESuperTypes().add(this.getComponentType());
 		declaredTypeEClass.getESuperTypes().add(this.getComponentType());
 		declaredTypeEClass.getESuperTypes().add(this.getMember());
-		typeParameterDeclaratorEClass.getESuperTypes().add(this.getIdentifyableElement());
 		typeParameterEClass.getESuperTypes().add(this.getComponentType());
-		typeParameterEClass.getESuperTypes().add(this.getConstrainedType());
+		typeParameterEClass.getESuperTypes().add(this.getConstraintOwner());
+		constraintOwnerEClass.getESuperTypes().add(this.getIdentifyableElement());
 		typeConstraintEClass.getESuperTypes().add(this.getIdentifyableElement());
 		upperBoundEClass.getESuperTypes().add(this.getTypeConstraint());
 		lowerBoundEClass.getESuperTypes().add(this.getTypeConstraint());
@@ -1156,9 +1172,13 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		enumerationTypeEClass.getESuperTypes().add(this.getDeclaredType());
 		genericTypeEClass.getESuperTypes().add(this.getDeclaredType());
 		genericTypeEClass.getESuperTypes().add(this.getTypeParameterDeclarator());
-		parameterizedTypeEClass.getESuperTypes().add(this.getComponentType());
+		typeReferenceEClass.getESuperTypes().add(this.getIdentifyableElement());
+		simpleTypeReferenceEClass.getESuperTypes().add(this.getTypeReference());
+		parameterizedTypeReferenceEClass.getESuperTypes().add(this.getTypeReference());
+		genericArrayTypeReferenceEClass.getESuperTypes().add(this.getTypeReference());
 		typeArgumentEClass.getESuperTypes().add(this.getIdentifyableElement());
 		wildcardTypeArgumentEClass.getESuperTypes().add(this.getTypeArgument());
+		wildcardTypeArgumentEClass.getESuperTypes().add(this.getConstraintOwner());
 		referenceTypeArgumentEClass.getESuperTypes().add(this.getTypeArgument());
 		memberEClass.getESuperTypes().add(this.getAnnotationTarget());
 		memberEClass.getESuperTypes().add(this.getIdentifyableElement());
@@ -1178,38 +1198,38 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		initEClass(voidEClass, org.eclipse.xtext.common.types.Void.class, "Void", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
-		initEClass(constrainedTypeEClass, ConstrainedType.class, "ConstrainedType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getConstrainedType_Constraints(), this.getTypeConstraint(), this.getTypeConstraint_ConstrainedType(), "constraints", null, 0, -1, ConstrainedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
 		initEClass(componentTypeEClass, ComponentType.class, "ComponentType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getComponentType_ArrayType(), this.getArrayType(), this.getArrayType_ComponentType(), "arrayType", null, 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getComponentType_ArrayType(), this.getArrayType(), null, "arrayType", null, 0, 1, ComponentType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(primitiveTypeEClass, PrimitiveType.class, "PrimitiveType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getPrimitiveType_Name(), ecorePackage.getEString(), "name", null, 0, 1, PrimitiveType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
-		initEClass(wildcardEClass, Wildcard.class, "Wildcard", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-
 		initEClass(arrayTypeEClass, ArrayType.class, "ArrayType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getArrayType_ComponentType(), this.getComponentType(), this.getComponentType_ArrayType(), "componentType", null, 0, 1, ArrayType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getArrayType_ComponentType(), this.getTypeReference(), null, "componentType", null, 0, 1, ArrayType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(arrayTypeEClass, ecorePackage.getEInt(), "getDimensions", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(declaredTypeEClass, DeclaredType.class, "DeclaredType", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getDeclaredType_SuperTypes(), this.getType(), null, "superTypes", null, 0, -1, DeclaredType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getDeclaredType_SuperTypes(), this.getTypeReference(), null, "superTypes", null, 0, -1, DeclaredType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getDeclaredType_Members(), this.getMember(), this.getMember_DeclaringType(), "members", null, 0, -1, DeclaredType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(declaredTypeEClass, ecorePackage.getEString(), "getPackageName", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(typeParameterDeclaratorEClass, TypeParameterDeclarator.class, "TypeParameterDeclarator", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypeParameterDeclarator_TypeParameters(), this.getTypeParameter(), this.getTypeParameter_Declarator(), "typeParameters", null, 0, -1, TypeParameterDeclarator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeParameterEClass, TypeParameter.class, "TypeParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getTypeParameter_Name(), ecorePackage.getEString(), "name", null, 0, 1, TypeParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEReference(getTypeParameter_Declarator(), this.getTypeParameterDeclarator(), this.getTypeParameterDeclarator_TypeParameters(), "declarator", null, 0, 1, TypeParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+		initEClass(typeParameterDeclaratorEClass, TypeParameterDeclarator.class, "TypeParameterDeclarator", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getTypeParameterDeclarator_TypeParameters(), this.getTypeParameter(), this.getTypeParameter_Declarator(), "typeParameters", null, 0, -1, TypeParameterDeclarator.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(constraintOwnerEClass, ConstraintOwner.class, "ConstraintOwner", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getConstraintOwner_Constraints(), this.getTypeConstraint(), this.getTypeConstraint_Owner(), "constraints", null, 0, -1, ConstraintOwner.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		addEOperation(constraintOwnerEClass, ecorePackage.getEString(), "getCanonicalName", 0, 1, IS_UNIQUE, IS_ORDERED);
+
 		initEClass(typeConstraintEClass, TypeConstraint.class, "TypeConstraint", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypeConstraint_ReferencedType(), this.getType(), null, "referencedType", null, 0, 1, TypeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getTypeConstraint_ConstrainedType(), this.getConstrainedType(), this.getConstrainedType_Constraints(), "constrainedType", null, 0, 1, TypeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTypeConstraint_TypeReference(), this.getTypeReference(), null, "typeReference", null, 0, 1, TypeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTypeConstraint_Owner(), this.getConstraintOwner(), this.getConstraintOwner_Constraints(), "owner", null, 0, 1, TypeConstraint.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(upperBoundEClass, UpperBound.class, "UpperBound", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1239,37 +1259,43 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		addEOperation(genericTypeEClass, ecorePackage.getEBoolean(), "isInstantiateable", 0, 1, IS_UNIQUE, IS_ORDERED);
 
-		initEClass(parameterizedTypeEClass, ParameterizedType.class, "ParameterizedType", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEAttribute(getParameterizedType_FullyQualifiedName(), ecorePackage.getEString(), "fullyQualifiedName", null, 0, 1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getParameterizedType_Arguments(), this.getTypeArgument(), this.getTypeArgument_Declarator(), "arguments", null, 0, -1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getParameterizedType_Declarator(), this.getMember(), this.getMember_DeclaredParameterizedTypes(), "declarator", null, 0, 1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getParameterizedType_RawType(), this.getType(), null, "rawType", null, 0, 1, ParameterizedType.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEClass(typeReferenceEClass, TypeReference.class, "TypeReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+		addEOperation(typeReferenceEClass, this.getType(), "getType", 0, 1, IS_UNIQUE, IS_ORDERED);
+
+		initEClass(simpleTypeReferenceEClass, SimpleTypeReference.class, "SimpleTypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getSimpleTypeReference_Type(), this.getType(), null, "type", null, 0, 1, SimpleTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(parameterizedTypeReferenceEClass, ParameterizedTypeReference.class, "ParameterizedTypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getParameterizedTypeReference_Arguments(), this.getTypeArgument(), this.getTypeArgument_Declarator(), "arguments", null, 0, -1, ParameterizedTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getParameterizedTypeReference_Type(), this.getType(), null, "type", null, 0, 1, ParameterizedTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(genericArrayTypeReferenceEClass, GenericArrayTypeReference.class, "GenericArrayTypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+		initEReference(getGenericArrayTypeReference_Type(), this.getArrayType(), null, "type", null, 0, 1, GenericArrayTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(typeArgumentEClass, TypeArgument.class, "TypeArgument", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getTypeArgument_Declarator(), this.getParameterizedType(), this.getParameterizedType_Arguments(), "declarator", null, 0, 1, TypeArgument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getTypeArgument_Declarator(), this.getParameterizedTypeReference(), this.getParameterizedTypeReference_Arguments(), "declarator", null, 0, 1, TypeArgument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(wildcardTypeArgumentEClass, WildcardTypeArgument.class, "WildcardTypeArgument", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getWildcardTypeArgument_Wildcard(), this.getWildcard(), null, "wildcard", null, 0, 1, WildcardTypeArgument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(referenceTypeArgumentEClass, ReferenceTypeArgument.class, "ReferenceTypeArgument", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getReferenceTypeArgument_Type(), this.getType(), null, "type", null, 0, 1, ReferenceTypeArgument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getReferenceTypeArgument_TypeReference(), this.getTypeReference(), null, "typeReference", null, 0, 1, ReferenceTypeArgument.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(memberEClass, Member.class, "Member", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getMember_DeclaringType(), this.getDeclaredType(), this.getDeclaredType_Members(), "declaringType", null, 0, 1, Member.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMember_Visibility(), this.getVisibility(), "visibility", null, 0, 1, Member.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getMember_FullyQualifiedName(), ecorePackage.getEString(), "fullyQualifiedName", null, 0, 1, Member.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getMember_DeclaredParameterizedTypes(), this.getParameterizedType(), this.getParameterizedType_Declarator(), "declaredParameterizedTypes", null, 0, -1, Member.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		addEOperation(memberEClass, ecorePackage.getEString(), "getSimpleName", 0, 1, IS_UNIQUE, IS_ORDERED);
 
 		initEClass(fieldEClass, Field.class, "Field", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getField_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getField_Final(), ecorePackage.getEBoolean(), "final", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getField_Type(), this.getType(), null, "type", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getField_Type(), this.getTypeReference(), null, "type", null, 0, 1, Field.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(executableEClass, Executable.class, "Executable", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getExecutable_Parameters(), this.getFormalParameter(), null, "parameters", null, 0, -1, Executable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getExecutable_Exceptions(), this.getType(), null, "exceptions", null, 0, -1, Executable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getExecutable_Exceptions(), this.getTypeReference(), null, "exceptions", null, 0, -1, Executable.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(constructorEClass, Constructor.class, "Constructor", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
@@ -1277,11 +1303,11 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEAttribute(getOperation_Static(), ecorePackage.getEBoolean(), "static", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getOperation_Final(), ecorePackage.getEBoolean(), "final", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getOperation_Abstract(), ecorePackage.getEBoolean(), "abstract", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getOperation_ReturnType(), this.getType(), null, "returnType", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getOperation_ReturnType(), this.getTypeReference(), null, "returnType", null, 0, 1, Operation.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(formalParameterEClass, FormalParameter.class, "FormalParameter", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEAttribute(getFormalParameter_Name(), ecorePackage.getEString(), "name", null, 0, 1, FormalParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-		initEReference(getFormalParameter_ParameterType(), this.getType(), null, "parameterType", null, 0, 1, FormalParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+		initEReference(getFormalParameter_ParameterType(), this.getTypeReference(), null, "parameterType", null, 0, 1, FormalParameter.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(annotationTargetEClass, AnnotationTarget.class, "AnnotationTarget", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getAnnotationTarget_Annotations(), this.getAnnotationReference(), this.getAnnotationReference_Target(), "annotations", null, 0, -1, AnnotationTarget.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

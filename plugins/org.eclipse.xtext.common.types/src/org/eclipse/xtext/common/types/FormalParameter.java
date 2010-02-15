@@ -52,29 +52,29 @@ public interface FormalParameter extends IdentifyableElement {
 	void setName(String value);
 
 	/**
-	 * Returns the value of the '<em><b>Parameter Type</b></em>' reference.
+	 * Returns the value of the '<em><b>Parameter Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Parameter Type</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Parameter Type</em>' reference.
-	 * @see #setParameterType(Type)
+	 * @return the value of the '<em>Parameter Type</em>' containment reference.
+	 * @see #setParameterType(TypeReference)
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getFormalParameter_ParameterType()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
-	Type getParameterType();
+	TypeReference getParameterType();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.common.types.FormalParameter#getParameterType <em>Parameter Type</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.FormalParameter#getParameterType <em>Parameter Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Parameter Type</em>' reference.
+	 * @param value the new value of the '<em>Parameter Type</em>' containment reference.
 	 * @see #getParameterType()
 	 * @generated
 	 */
-	void setParameterType(Type value);
+	void setParameterType(TypeReference value);
 
 } // FormalParameter

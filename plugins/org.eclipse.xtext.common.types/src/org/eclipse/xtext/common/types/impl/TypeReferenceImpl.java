@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
@@ -9,25 +9,26 @@ package org.eclipse.xtext.common.types.impl;
 
 import org.eclipse.emf.ecore.EClass;
 
+import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.common.types.Wildcard;
 
 /**
  * <!-- begin-user-doc -->
- * An implementation of the model object '<em><b>Wildcard</b></em>'.
+ * An implementation of the model object '<em><b>Type Reference</b></em>'.
  * <!-- end-user-doc -->
  * <p>
  * </p>
  *
  * @generated
  */
-public class WildcardImpl extends ConstrainedTypeImpl implements Wildcard {
+public abstract class TypeReferenceImpl extends IdentifyableElementImpl implements TypeReference {
 	/**
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected WildcardImpl() {
+	protected TypeReferenceImpl() {
 		super();
 	}
 
@@ -38,14 +39,14 @@ public class WildcardImpl extends ConstrainedTypeImpl implements Wildcard {
 	 */
 	@Override
 	protected EClass eStaticClass() {
-		return TypesPackage.Literals.WILDCARD;
-	}
-	
-	@Override
-	public String getCanonicalName() {
-		if (constraints != null && !constraints.isEmpty())
-			return "? " + super.getCanonicalName();
-		return "?";
+		return TypesPackage.Literals.TYPE_REFERENCE;
 	}
 
-} //WildcardImpl
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated NOT
+	 */
+	public abstract Type getType();
+
+} //TypeReferenceImpl

@@ -17,29 +17,31 @@ import org.eclipse.xtext.common.types.AnnotationTarget;
 import org.eclipse.xtext.common.types.AnnotationType;
 import org.eclipse.xtext.common.types.ArrayType;
 import org.eclipse.xtext.common.types.ComponentType;
-import org.eclipse.xtext.common.types.ConstrainedType;
+import org.eclipse.xtext.common.types.ConstraintOwner;
 import org.eclipse.xtext.common.types.Constructor;
 import org.eclipse.xtext.common.types.DeclaredType;
 import org.eclipse.xtext.common.types.EnumerationType;
 import org.eclipse.xtext.common.types.Executable;
 import org.eclipse.xtext.common.types.Field;
 import org.eclipse.xtext.common.types.FormalParameter;
+import org.eclipse.xtext.common.types.GenericArrayTypeReference;
 import org.eclipse.xtext.common.types.GenericType;
 import org.eclipse.xtext.common.types.IdentifyableElement;
 import org.eclipse.xtext.common.types.LowerBound;
 import org.eclipse.xtext.common.types.Member;
 import org.eclipse.xtext.common.types.Operation;
-import org.eclipse.xtext.common.types.ParameterizedType;
+import org.eclipse.xtext.common.types.ParameterizedTypeReference;
 import org.eclipse.xtext.common.types.PrimitiveType;
 import org.eclipse.xtext.common.types.ReferenceTypeArgument;
+import org.eclipse.xtext.common.types.SimpleTypeReference;
 import org.eclipse.xtext.common.types.Type;
 import org.eclipse.xtext.common.types.TypeArgument;
 import org.eclipse.xtext.common.types.TypeConstraint;
 import org.eclipse.xtext.common.types.TypeParameter;
 import org.eclipse.xtext.common.types.TypeParameterDeclarator;
+import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.UpperBound;
-import org.eclipse.xtext.common.types.Wildcard;
 import org.eclipse.xtext.common.types.WildcardTypeArgument;
 
 /**
@@ -137,14 +139,6 @@ public class TypesSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.CONSTRAINED_TYPE: {
-				ConstrainedType constrainedType = (ConstrainedType)theEObject;
-				T result = caseConstrainedType(constrainedType);
-				if (result == null) result = caseType(constrainedType);
-				if (result == null) result = caseIdentifyableElement(constrainedType);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case TypesPackage.COMPONENT_TYPE: {
 				ComponentType componentType = (ComponentType)theEObject;
 				T result = caseComponentType(componentType);
@@ -159,15 +153,6 @@ public class TypesSwitch<T> {
 				if (result == null) result = caseComponentType(primitiveType);
 				if (result == null) result = caseType(primitiveType);
 				if (result == null) result = caseIdentifyableElement(primitiveType);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TypesPackage.WILDCARD: {
-				Wildcard wildcard = (Wildcard)theEObject;
-				T result = caseWildcard(wildcard);
-				if (result == null) result = caseConstrainedType(wildcard);
-				if (result == null) result = caseType(wildcard);
-				if (result == null) result = caseIdentifyableElement(wildcard);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -191,20 +176,26 @@ public class TypesSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.TYPE_PARAMETER_DECLARATOR: {
-				TypeParameterDeclarator typeParameterDeclarator = (TypeParameterDeclarator)theEObject;
-				T result = caseTypeParameterDeclarator(typeParameterDeclarator);
-				if (result == null) result = caseIdentifyableElement(typeParameterDeclarator);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
 			case TypesPackage.TYPE_PARAMETER: {
 				TypeParameter typeParameter = (TypeParameter)theEObject;
 				T result = caseTypeParameter(typeParameter);
 				if (result == null) result = caseComponentType(typeParameter);
-				if (result == null) result = caseConstrainedType(typeParameter);
+				if (result == null) result = caseConstraintOwner(typeParameter);
 				if (result == null) result = caseType(typeParameter);
 				if (result == null) result = caseIdentifyableElement(typeParameter);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.TYPE_PARAMETER_DECLARATOR: {
+				TypeParameterDeclarator typeParameterDeclarator = (TypeParameterDeclarator)theEObject;
+				T result = caseTypeParameterDeclarator(typeParameterDeclarator);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.CONSTRAINT_OWNER: {
+				ConstraintOwner constraintOwner = (ConstraintOwner)theEObject;
+				T result = caseConstraintOwner(constraintOwner);
+				if (result == null) result = caseIdentifyableElement(constraintOwner);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -268,12 +259,34 @@ public class TypesSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.PARAMETERIZED_TYPE: {
-				ParameterizedType parameterizedType = (ParameterizedType)theEObject;
-				T result = caseParameterizedType(parameterizedType);
-				if (result == null) result = caseComponentType(parameterizedType);
-				if (result == null) result = caseType(parameterizedType);
-				if (result == null) result = caseIdentifyableElement(parameterizedType);
+			case TypesPackage.TYPE_REFERENCE: {
+				TypeReference typeReference = (TypeReference)theEObject;
+				T result = caseTypeReference(typeReference);
+				if (result == null) result = caseIdentifyableElement(typeReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.SIMPLE_TYPE_REFERENCE: {
+				SimpleTypeReference simpleTypeReference = (SimpleTypeReference)theEObject;
+				T result = caseSimpleTypeReference(simpleTypeReference);
+				if (result == null) result = caseTypeReference(simpleTypeReference);
+				if (result == null) result = caseIdentifyableElement(simpleTypeReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.PARAMETERIZED_TYPE_REFERENCE: {
+				ParameterizedTypeReference parameterizedTypeReference = (ParameterizedTypeReference)theEObject;
+				T result = caseParameterizedTypeReference(parameterizedTypeReference);
+				if (result == null) result = caseTypeReference(parameterizedTypeReference);
+				if (result == null) result = caseIdentifyableElement(parameterizedTypeReference);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.GENERIC_ARRAY_TYPE_REFERENCE: {
+				GenericArrayTypeReference genericArrayTypeReference = (GenericArrayTypeReference)theEObject;
+				T result = caseGenericArrayTypeReference(genericArrayTypeReference);
+				if (result == null) result = caseTypeReference(genericArrayTypeReference);
+				if (result == null) result = caseIdentifyableElement(genericArrayTypeReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -288,6 +301,7 @@ public class TypesSwitch<T> {
 				WildcardTypeArgument wildcardTypeArgument = (WildcardTypeArgument)theEObject;
 				T result = caseWildcardTypeArgument(wildcardTypeArgument);
 				if (result == null) result = caseTypeArgument(wildcardTypeArgument);
+				if (result == null) result = caseConstraintOwner(wildcardTypeArgument);
 				if (result == null) result = caseIdentifyableElement(wildcardTypeArgument);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
@@ -418,21 +432,6 @@ public class TypesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Constrained Type</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Constrained Type</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseConstrainedType(ConstrainedType object) {
-		return null;
-	}
-
-	/**
 	 * Returns the result of interpreting the object as an instance of '<em>Component Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
@@ -459,21 +458,6 @@ public class TypesSwitch<T> {
 	 * @generated
 	 */
 	public T casePrimitiveType(PrimitiveType object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Wildcard</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Wildcard</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseWildcard(Wildcard object) {
 		return null;
 	}
 
@@ -519,6 +503,21 @@ public class TypesSwitch<T> {
 	 * @generated
 	 */
 	public T caseTypeParameterDeclarator(TypeParameterDeclarator object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Constraint Owner</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Constraint Owner</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseConstraintOwner(ConstraintOwner object) {
 		return null;
 	}
 
@@ -628,17 +627,62 @@ public class TypesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Parameterized Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Type Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Parameterized Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Type Reference</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseParameterizedType(ParameterizedType object) {
+	public T caseTypeReference(TypeReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Simple Type Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Simple Type Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseSimpleTypeReference(SimpleTypeReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Parameterized Type Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Parameterized Type Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseParameterizedTypeReference(ParameterizedTypeReference object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Generic Array Type Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Generic Array Type Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseGenericArrayTypeReference(GenericArrayTypeReference object) {
 		return null;
 	}
 

@@ -106,29 +106,29 @@ public interface Operation extends Executable {
 	void setAbstract(boolean value);
 
 	/**
-	 * Returns the value of the '<em><b>Return Type</b></em>' reference.
+	 * Returns the value of the '<em><b>Return Type</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Return Type</em>' containment reference isn't clear,
 	 * there really should be more of a description here...
 	 * </p>
 	 * <!-- end-user-doc -->
-	 * @return the value of the '<em>Return Type</em>' reference.
-	 * @see #setReturnType(Type)
+	 * @return the value of the '<em>Return Type</em>' containment reference.
+	 * @see #setReturnType(TypeReference)
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getOperation_ReturnType()
-	 * @model
+	 * @model containment="true"
 	 * @generated
 	 */
-	Type getReturnType();
+	TypeReference getReturnType();
 
 	/**
-	 * Sets the value of the '{@link org.eclipse.xtext.common.types.Operation#getReturnType <em>Return Type</em>}' reference.
+	 * Sets the value of the '{@link org.eclipse.xtext.common.types.Operation#getReturnType <em>Return Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @param value the new value of the '<em>Return Type</em>' reference.
+	 * @param value the new value of the '<em>Return Type</em>' containment reference.
 	 * @see #getReturnType()
 	 * @generated
 	 */
-	void setReturnType(Type value);
+	void setReturnType(TypeReference value);
 
 } // Operation

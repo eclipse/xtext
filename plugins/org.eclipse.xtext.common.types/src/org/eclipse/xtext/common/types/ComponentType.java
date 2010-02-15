@@ -27,7 +27,6 @@ package org.eclipse.xtext.common.types;
 public interface ComponentType extends Type {
 	/**
 	 * Returns the value of the '<em><b>Array Type</b></em>' containment reference.
-	 * It is bidirectional and its opposite is '{@link org.eclipse.xtext.common.types.ArrayType#getComponentType <em>Component Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <p>
 	 * If the meaning of the '<em>Array Type</em>' containment reference isn't clear,
@@ -37,8 +36,7 @@ public interface ComponentType extends Type {
 	 * @return the value of the '<em>Array Type</em>' containment reference.
 	 * @see #setArrayType(ArrayType)
 	 * @see org.eclipse.xtext.common.types.TypesPackage#getComponentType_ArrayType()
-	 * @see org.eclipse.xtext.common.types.ArrayType#getComponentType
-	 * @model opposite="componentType" containment="true"
+	 * @model containment="true"
 	 * @generated
 	 */
 	ArrayType getArrayType();

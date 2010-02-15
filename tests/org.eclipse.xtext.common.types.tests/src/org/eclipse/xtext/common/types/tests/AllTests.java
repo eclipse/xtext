@@ -20,13 +20,12 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.common.types.GenericTypeTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.LowerBoundTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.OperationTest.class);
-      suite.addTestSuite(org.eclipse.xtext.common.types.ParameterizedTypeTest.class);
+      suite.addTestSuite(org.eclipse.xtext.common.types.ParameterizedTypeReferenceTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.PrimitiveTypeTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.ReferenceTypeArgumentTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.TypeParameterTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.UpperBoundTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.VoidTest.class);
-      suite.addTestSuite(org.eclipse.xtext.common.types.WildcardTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.WildcardTypeArgumentTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactoryTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.TypeResourceTest.class);

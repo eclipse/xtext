@@ -8,11 +8,12 @@
 package org.eclipse.xtext.common.types.impl;
 
 import org.eclipse.emf.common.notify.Notification;
+import org.eclipse.emf.common.notify.NotificationChain;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.xtext.common.types.Operation;
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
@@ -93,14 +94,14 @@ public class OperationImpl extends ExecutableImpl implements Operation {
 	protected boolean abstract_ = ABSTRACT_EDEFAULT;
 
 	/**
-	 * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' reference.
+	 * The cached value of the '{@link #getReturnType() <em>Return Type</em>}' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @see #getReturnType()
 	 * @generated
 	 * @ordered
 	 */
-	protected Type returnType;
+	protected TypeReference returnType;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -189,15 +190,7 @@ public class OperationImpl extends ExecutableImpl implements Operation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Type getReturnType() {
-		if (returnType != null && returnType.eIsProxy()) {
-			InternalEObject oldReturnType = (InternalEObject)returnType;
-			returnType = (Type)eResolveProxy(oldReturnType);
-			if (returnType != oldReturnType) {
-				if (eNotificationRequired())
-					eNotify(new ENotificationImpl(this, Notification.RESOLVE, TypesPackage.OPERATION__RETURN_TYPE, oldReturnType, returnType));
-			}
-		}
+	public TypeReference getReturnType() {
 		return returnType;
 	}
 
@@ -206,20 +199,47 @@ public class OperationImpl extends ExecutableImpl implements Operation {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Type basicGetReturnType() {
-		return returnType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setReturnType(Type newReturnType) {
-		Type oldReturnType = returnType;
+	public NotificationChain basicSetReturnType(TypeReference newReturnType, NotificationChain msgs) {
+		TypeReference oldReturnType = returnType;
 		returnType = newReturnType;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.OPERATION__RETURN_TYPE, oldReturnType, returnType));
+		if (eNotificationRequired()) {
+			ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, TypesPackage.OPERATION__RETURN_TYPE, oldReturnType, newReturnType);
+			if (msgs == null) msgs = notification; else msgs.add(notification);
+		}
+		return msgs;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public void setReturnType(TypeReference newReturnType) {
+		if (newReturnType != returnType) {
+			NotificationChain msgs = null;
+			if (returnType != null)
+				msgs = ((InternalEObject)returnType).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - TypesPackage.OPERATION__RETURN_TYPE, null, msgs);
+			if (newReturnType != null)
+				msgs = ((InternalEObject)newReturnType).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - TypesPackage.OPERATION__RETURN_TYPE, null, msgs);
+			msgs = basicSetReturnType(newReturnType, msgs);
+			if (msgs != null) msgs.dispatch();
+		}
+		else if (eNotificationRequired())
+			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.OPERATION__RETURN_TYPE, newReturnType, newReturnType));
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs) {
+		switch (featureID) {
+			case TypesPackage.OPERATION__RETURN_TYPE:
+				return basicSetReturnType(null, msgs);
+		}
+		return super.eInverseRemove(otherEnd, featureID, msgs);
 	}
 
 	/**
@@ -237,8 +257,7 @@ public class OperationImpl extends ExecutableImpl implements Operation {
 			case TypesPackage.OPERATION__ABSTRACT:
 				return isAbstract();
 			case TypesPackage.OPERATION__RETURN_TYPE:
-				if (resolve) return getReturnType();
-				return basicGetReturnType();
+				return getReturnType();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -261,7 +280,7 @@ public class OperationImpl extends ExecutableImpl implements Operation {
 				setAbstract((Boolean)newValue);
 				return;
 			case TypesPackage.OPERATION__RETURN_TYPE:
-				setReturnType((Type)newValue);
+				setReturnType((TypeReference)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -285,7 +304,7 @@ public class OperationImpl extends ExecutableImpl implements Operation {
 				setAbstract(ABSTRACT_EDEFAULT);
 				return;
 			case TypesPackage.OPERATION__RETURN_TYPE:
-				setReturnType((Type)null);
+				setReturnType((TypeReference)null);
 				return;
 		}
 		super.eUnset(featureID);

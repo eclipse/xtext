@@ -16,8 +16,8 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.common.types.DeclaredType;
 import org.eclipse.xtext.common.types.Member;
-import org.eclipse.xtext.common.types.ParameterizedType;
 import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.ITypeProvider;
 import org.eclipse.xtext.scoping.IScope;
@@ -59,14 +59,13 @@ public abstract class AbstractTypeScopeProvider extends AbstractScopeProvider {
 			return outer;		
 		if (containerType instanceof DeclaredType) {
 			IScope result = outer;
-			List<Type> superTypes = ((DeclaredType) containerType).getSuperTypes();
-			for(Type superType: superTypes) {
-				result = createMemberScope(superType, filter, names, result);
+			List<TypeReference> superTypes = ((DeclaredType) containerType).getSuperTypes();
+			for(TypeReference superType: superTypes) {
+				if (superType.getType() != null)
+					result = createMemberScope(superType.getType(), filter, names, result);
 			}
 			List<Member> members = ((DeclaredType) containerType).getMembers();
 			return Scopes.scopeFor(Iterables.filter(members, filter), names, result);
-		} else if (containerType instanceof ParameterizedType) {
-			return createMemberScope(((ParameterizedType) containerType).getRawType(), filter, names, outer);
 		}
 		return outer;
 	}

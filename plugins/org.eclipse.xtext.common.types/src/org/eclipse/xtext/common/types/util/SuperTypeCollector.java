@@ -11,8 +11,8 @@ import java.util.Collection;
 import java.util.Collections;
 
 import org.eclipse.xtext.common.types.DeclaredType;
-import org.eclipse.xtext.common.types.ParameterizedType;
 import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.TypeReference;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Sets;
@@ -72,19 +72,14 @@ public class SuperTypeCollector {
 		}
 		
 		@Override
-		public Void caseParameterizedType(ParameterizedType object) {
-			if (object.getRawType() != null)
-				doSwitch(object.getRawType());
-			return null;
-		}
-		
-		@Override
 		public Void caseDeclaredType(DeclaredType object) {
 			if (!object.eIsProxy()) {
 				if (!collecting || result.add(transformation.apply(object))) {
 					collecting = true;
-					for(Type superType: object.getSuperTypes())
-						doSwitch(superType);
+					for(TypeReference superType: object.getSuperTypes()) {
+						if (superType.getType() != null)
+							doSwitch(superType.getType());
+					}
 				}
 			}
 			return null;
