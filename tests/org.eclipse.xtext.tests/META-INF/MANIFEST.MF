@@ -407,4 +407,3 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.parsetree.reconstr.bug302128,
  org.eclipse.xtext.parsetree.reconstr.bug302128.impl,
  org.eclipse.xtext.parsetree.reconstr.bug302128.util
-

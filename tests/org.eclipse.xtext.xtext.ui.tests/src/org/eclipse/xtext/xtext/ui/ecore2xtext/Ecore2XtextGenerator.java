@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.xtext.ui;
+package org.eclipse.xtext.xtext.ui.ecore2xtext;
 
 import java.util.ArrayList;
 import java.util.Iterator;
