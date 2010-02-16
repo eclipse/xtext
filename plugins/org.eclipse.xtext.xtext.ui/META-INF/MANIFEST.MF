@@ -7,7 +7,6 @@ Bundle-Version: 0.8.0.qualifier
 Bundle-Activator: org.eclipse.xtext.xtext.ui.Activator
 Require-Bundle: org.eclipse.xtext.ui;bundle-version="0.8.0",
  org.eclipse.ui,
- org.eclipse.xtext.ui,
  org.eclipse.core.runtime,
  org.eclipse.core.resources,
  org.eclipse.ui.ide,
@@ -32,8 +31,8 @@ Bundle-Vendor: %providerName
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.ui,
  org.eclipse.xtext.ui.contentassist,
- org.eclipse.xtext.contentassist.antlr,
  org.eclipse.xtext.xtext.ui.wizard.ecore2xtext;x-friends:="org.eclipse.xtext.xtext.ui.tests",
  org.eclipse.xtext.xtext.ui.wizard.project;x-friends:="org.eclipse.xtext.xtext.ui.tests",
- org.eclipse.xtext.xtext.ui
+ org.eclipse.xtext.xtext.ui,
+ org.eclipse.xtext.ui.contentassist.antlr
 Import-Package: org.apache.log4j

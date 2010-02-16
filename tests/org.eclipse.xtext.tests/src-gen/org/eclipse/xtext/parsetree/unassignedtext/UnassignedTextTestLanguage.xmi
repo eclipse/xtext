@@ -12,11 +12,11 @@
         <classifier xsi:type="ecore:EClass" href="http://simple/unassignedtext#//Model"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
-        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
-        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
-        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
-        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
-        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.11"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.11"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="CaseInsensitiveKeywordRule">
@@ -24,10 +24,10 @@
         <classifier xsi:type="ecore:EClass" href="http://simple/unassignedtext#//CaseInsensitiveKeywordRule"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
-        <tokens xsi:type="xtext:Assignment" feature="val" operator="=">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
+        <elements xsi:type="xtext:Assignment" feature="val" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
-        </tokens>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:TerminalRule" name="CaseInsensitiveKeyword">
@@ -35,34 +35,34 @@
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Alternatives">
-          <groups xsi:type="xtext:Keyword" value="k"/>
-          <groups xsi:type="xtext:Keyword" value="K"/>
-        </tokens>
-        <tokens xsi:type="xtext:Alternatives">
-          <groups xsi:type="xtext:Keyword" value="e"/>
-          <groups xsi:type="xtext:Keyword" value="E"/>
-        </tokens>
-        <tokens xsi:type="xtext:Alternatives">
-          <groups xsi:type="xtext:Keyword" value="y"/>
-          <groups xsi:type="xtext:Keyword" value="Y"/>
-        </tokens>
-        <tokens xsi:type="xtext:Alternatives">
-          <groups xsi:type="xtext:Keyword" value="w"/>
-          <groups xsi:type="xtext:Keyword" value="W"/>
-        </tokens>
-        <tokens xsi:type="xtext:Alternatives">
-          <groups xsi:type="xtext:Keyword" value="o"/>
-          <groups xsi:type="xtext:Keyword" value="O"/>
-        </tokens>
-        <tokens xsi:type="xtext:Alternatives">
-          <groups xsi:type="xtext:Keyword" value="r"/>
-          <groups xsi:type="xtext:Keyword" value="R"/>
-        </tokens>
-        <tokens xsi:type="xtext:Alternatives">
-          <groups xsi:type="xtext:Keyword" value="d"/>
-          <groups xsi:type="xtext:Keyword" value="D"/>
-        </tokens>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Keyword" value="k"/>
+          <elements xsi:type="xtext:Keyword" value="K"/>
+        </elements>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Keyword" value="e"/>
+          <elements xsi:type="xtext:Keyword" value="E"/>
+        </elements>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Keyword" value="y"/>
+          <elements xsi:type="xtext:Keyword" value="Y"/>
+        </elements>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Keyword" value="w"/>
+          <elements xsi:type="xtext:Keyword" value="W"/>
+        </elements>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Keyword" value="o"/>
+          <elements xsi:type="xtext:Keyword" value="O"/>
+        </elements>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Keyword" value="r"/>
+          <elements xsi:type="xtext:Keyword" value="R"/>
+        </elements>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Keyword" value="d"/>
+          <elements xsi:type="xtext:Keyword" value="D"/>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="PluralRule">
@@ -70,11 +70,11 @@
         <classifier xsi:type="ecore:EClass" href="http://simple/unassignedtext#//PluralRule"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="contents:"/>
-        <tokens xsi:type="xtext:Assignment" feature="count" operator="=">
+        <elements xsi:type="xtext:Keyword" value="contents:"/>
+        <elements xsi:type="xtext:Assignment" feature="count" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
-        </tokens>
-        <tokens xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
+        </elements>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:TerminalRule" name="Plural">
@@ -82,8 +82,8 @@
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
-        <groups xsi:type="xtext:Keyword" value="item"/>
-        <groups xsi:type="xtext:Keyword" value="items"/>
+        <elements xsi:type="xtext:Keyword" value="item"/>
+        <elements xsi:type="xtext:Keyword" value="items"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="MultiRule">
@@ -91,13 +91,13 @@
         <classifier xsi:type="ecore:EClass" href="http://simple/unassignedtext#//MultiRule"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="multi"/>
-        <tokens xsi:type="xtext:Assignment" feature="val" operator="=">
+        <elements xsi:type="xtext:Keyword" value="multi"/>
+        <elements xsi:type="xtext:Assignment" feature="val" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
-        </tokens>
-        <tokens xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
-        <tokens xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
-        <tokens xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
+        </elements>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:TerminalRule" name="Multi">
@@ -105,30 +105,30 @@
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="a"/>
-        <tokens xsi:type="xtext:Keyword" cardinality="?" value="b"/>
-        <tokens xsi:type="xtext:Keyword" cardinality="+" value="c"/>
-        <tokens xsi:type="xtext:Keyword" cardinality="*" value="d"/>
-        <tokens xsi:type="xtext:Alternatives">
-          <groups xsi:type="xtext:Keyword" value="e"/>
-          <groups xsi:type="xtext:Keyword" value="f"/>
-        </tokens>
-        <tokens xsi:type="xtext:Alternatives">
-          <groups xsi:type="xtext:Alternatives">
-            <groups xsi:type="xtext:Keyword" value="g"/>
-            <groups xsi:type="xtext:Keyword" value="h"/>
-          </groups>
-          <groups xsi:type="xtext:Keyword" cardinality="+" value="i"/>
-        </tokens>
-        <tokens xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
-        <tokens xsi:type="xtext:CharacterRange">
+        <elements xsi:type="xtext:Keyword" value="a"/>
+        <elements xsi:type="xtext:Keyword" cardinality="?" value="b"/>
+        <elements xsi:type="xtext:Keyword" cardinality="+" value="c"/>
+        <elements xsi:type="xtext:Keyword" cardinality="*" value="d"/>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Keyword" value="e"/>
+          <elements xsi:type="xtext:Keyword" value="f"/>
+        </elements>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Alternatives">
+            <elements xsi:type="xtext:Keyword" value="g"/>
+            <elements xsi:type="xtext:Keyword" value="h"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" cardinality="+" value="i"/>
+        </elements>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
+        <elements xsi:type="xtext:CharacterRange">
           <left value="0"/>
           <right value="9"/>
-        </tokens>
-        <tokens xsi:type="xtext:CharacterRange" cardinality="+">
+        </elements>
+        <elements xsi:type="xtext:CharacterRange" cardinality="+">
           <left value="0"/>
           <right value="9"/>
-        </tokens>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:TerminalRule" name="Multi2">
@@ -142,11 +142,11 @@
         <classifier xsi:type="ecore:EClass" href="http://simple/unassignedtext#//DatatypeRule"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="datatype"/>
-        <tokens xsi:type="xtext:Assignment" feature="val" operator="=">
+        <elements xsi:type="xtext:Keyword" value="datatype"/>
+        <elements xsi:type="xtext:Assignment" feature="val" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
-        </tokens>
-        <tokens xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
+        </elements>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Datatype">
@@ -154,9 +154,9 @@
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
-        <groups xsi:type="xtext:Keyword" value="str"/>
-        <groups xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
-        <groups xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
+        <elements xsi:type="xtext:Keyword" value="str"/>
+        <elements xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Datatype2">
@@ -170,13 +170,13 @@
         <classifier xsi:type="ecore:EClass" href="http://simple/unassignedtext#//CommonTerminalsRule"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="terminals"/>
-        <tokens xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        <tokens xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
-        <tokens xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
-        <tokens xsi:type="xtext:Assignment" feature="val" operator="=">
+        <elements xsi:type="xtext:Keyword" value="terminals"/>
+        <elements xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        <elements xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+        <elements xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
+        <elements xsi:type="xtext:Assignment" feature="val" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
+        </elements>
       </alternatives>
     </rules>
   </xtext:Grammar>
@@ -189,33 +189,33 @@
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" cardinality="?" value="^"/>
-        <tokens xsi:type="xtext:Alternatives">
-          <groups xsi:type="xtext:CharacterRange">
+        <elements xsi:type="xtext:Keyword" cardinality="?" value="^"/>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:CharacterRange">
             <left value="a"/>
             <right value="z"/>
-          </groups>
-          <groups xsi:type="xtext:CharacterRange">
+          </elements>
+          <elements xsi:type="xtext:CharacterRange">
             <left value="A"/>
             <right value="Z"/>
-          </groups>
-          <groups xsi:type="xtext:Keyword" value="_"/>
-        </tokens>
-        <tokens xsi:type="xtext:Alternatives" cardinality="*">
-          <groups xsi:type="xtext:CharacterRange">
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="_"/>
+        </elements>
+        <elements xsi:type="xtext:Alternatives" cardinality="*">
+          <elements xsi:type="xtext:CharacterRange">
             <left value="a"/>
             <right value="z"/>
-          </groups>
-          <groups xsi:type="xtext:CharacterRange">
+          </elements>
+          <elements xsi:type="xtext:CharacterRange">
             <left value="A"/>
             <right value="Z"/>
-          </groups>
-          <groups xsi:type="xtext:Keyword" value="_"/>
-          <groups xsi:type="xtext:CharacterRange">
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="_"/>
+          <elements xsi:type="xtext:CharacterRange">
             <left value="0"/>
             <right value="9"/>
-          </groups>
-        </tokens>
+          </elements>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:TerminalRule" name="INT">
@@ -232,56 +232,56 @@
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
-        <groups xsi:type="xtext:Group">
-          <tokens xsi:type="xtext:Keyword" value="&quot;"/>
-          <tokens xsi:type="xtext:Alternatives" cardinality="*">
-            <groups xsi:type="xtext:Group">
-              <tokens xsi:type="xtext:Keyword" value="\"/>
-              <tokens xsi:type="xtext:Alternatives">
-                <groups xsi:type="xtext:Keyword" value="b"/>
-                <groups xsi:type="xtext:Keyword" value="t"/>
-                <groups xsi:type="xtext:Keyword" value="n"/>
-                <groups xsi:type="xtext:Keyword" value="f"/>
-                <groups xsi:type="xtext:Keyword" value="r"/>
-                <groups xsi:type="xtext:Keyword" value="&quot;"/>
-                <groups xsi:type="xtext:Keyword" value="'"/>
-                <groups xsi:type="xtext:Keyword" value="\"/>
-              </tokens>
-            </groups>
-            <groups xsi:type="xtext:NegatedToken">
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Keyword" value="&quot;"/>
+          <elements xsi:type="xtext:Alternatives" cardinality="*">
+            <elements xsi:type="xtext:Group">
+              <elements xsi:type="xtext:Keyword" value="\"/>
+              <elements xsi:type="xtext:Alternatives">
+                <elements xsi:type="xtext:Keyword" value="b"/>
+                <elements xsi:type="xtext:Keyword" value="t"/>
+                <elements xsi:type="xtext:Keyword" value="n"/>
+                <elements xsi:type="xtext:Keyword" value="f"/>
+                <elements xsi:type="xtext:Keyword" value="r"/>
+                <elements xsi:type="xtext:Keyword" value="&quot;"/>
+                <elements xsi:type="xtext:Keyword" value="'"/>
+                <elements xsi:type="xtext:Keyword" value="\"/>
+              </elements>
+            </elements>
+            <elements xsi:type="xtext:NegatedToken">
               <terminal xsi:type="xtext:Alternatives">
-                <groups xsi:type="xtext:Keyword" value="\"/>
-                <groups xsi:type="xtext:Keyword" value="&quot;"/>
+                <elements xsi:type="xtext:Keyword" value="\"/>
+                <elements xsi:type="xtext:Keyword" value="&quot;"/>
               </terminal>
-            </groups>
-          </tokens>
-          <tokens xsi:type="xtext:Keyword" value="&quot;"/>
-        </groups>
-        <groups xsi:type="xtext:Group">
-          <tokens xsi:type="xtext:Keyword" value="'"/>
-          <tokens xsi:type="xtext:Alternatives" cardinality="*">
-            <groups xsi:type="xtext:Group">
-              <tokens xsi:type="xtext:Keyword" value="\"/>
-              <tokens xsi:type="xtext:Alternatives">
-                <groups xsi:type="xtext:Keyword" value="b"/>
-                <groups xsi:type="xtext:Keyword" value="t"/>
-                <groups xsi:type="xtext:Keyword" value="n"/>
-                <groups xsi:type="xtext:Keyword" value="f"/>
-                <groups xsi:type="xtext:Keyword" value="r"/>
-                <groups xsi:type="xtext:Keyword" value="&quot;"/>
-                <groups xsi:type="xtext:Keyword" value="'"/>
-                <groups xsi:type="xtext:Keyword" value="\"/>
-              </tokens>
-            </groups>
-            <groups xsi:type="xtext:NegatedToken">
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="&quot;"/>
+        </elements>
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Keyword" value="'"/>
+          <elements xsi:type="xtext:Alternatives" cardinality="*">
+            <elements xsi:type="xtext:Group">
+              <elements xsi:type="xtext:Keyword" value="\"/>
+              <elements xsi:type="xtext:Alternatives">
+                <elements xsi:type="xtext:Keyword" value="b"/>
+                <elements xsi:type="xtext:Keyword" value="t"/>
+                <elements xsi:type="xtext:Keyword" value="n"/>
+                <elements xsi:type="xtext:Keyword" value="f"/>
+                <elements xsi:type="xtext:Keyword" value="r"/>
+                <elements xsi:type="xtext:Keyword" value="&quot;"/>
+                <elements xsi:type="xtext:Keyword" value="'"/>
+                <elements xsi:type="xtext:Keyword" value="\"/>
+              </elements>
+            </elements>
+            <elements xsi:type="xtext:NegatedToken">
               <terminal xsi:type="xtext:Alternatives">
-                <groups xsi:type="xtext:Keyword" value="\"/>
-                <groups xsi:type="xtext:Keyword" value="'"/>
+                <elements xsi:type="xtext:Keyword" value="\"/>
+                <elements xsi:type="xtext:Keyword" value="'"/>
               </terminal>
-            </groups>
-          </tokens>
-          <tokens xsi:type="xtext:Keyword" value="'"/>
-        </groups>
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="'"/>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:TerminalRule" name="ML_COMMENT">
@@ -289,10 +289,10 @@
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="/*"/>
-        <tokens xsi:type="xtext:UntilToken">
+        <elements xsi:type="xtext:Keyword" value="/*"/>
+        <elements xsi:type="xtext:UntilToken">
           <terminal xsi:type="xtext:Keyword" value="*/"/>
-        </tokens>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:TerminalRule" name="SL_COMMENT">
@@ -300,17 +300,17 @@
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="//"/>
-        <tokens xsi:type="xtext:NegatedToken" cardinality="*">
+        <elements xsi:type="xtext:Keyword" value="//"/>
+        <elements xsi:type="xtext:NegatedToken" cardinality="*">
           <terminal xsi:type="xtext:Alternatives">
-            <groups xsi:type="xtext:Keyword" value="&#xA;"/>
-            <groups xsi:type="xtext:Keyword" value="&#xD;"/>
+            <elements xsi:type="xtext:Keyword" value="&#xA;"/>
+            <elements xsi:type="xtext:Keyword" value="&#xD;"/>
           </terminal>
-        </tokens>
-        <tokens xsi:type="xtext:Group" cardinality="?">
-          <tokens xsi:type="xtext:Keyword" cardinality="?" value="&#xD;"/>
-          <tokens xsi:type="xtext:Keyword" value="&#xA;"/>
-        </tokens>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" cardinality="?" value="&#xD;"/>
+          <elements xsi:type="xtext:Keyword" value="&#xA;"/>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:TerminalRule" name="WS">
@@ -318,10 +318,10 @@
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives" cardinality="+">
-        <groups xsi:type="xtext:Keyword" value=" "/>
-        <groups xsi:type="xtext:Keyword" value="&#x9;"/>
-        <groups xsi:type="xtext:Keyword" value="&#xD;"/>
-        <groups xsi:type="xtext:Keyword" value="&#xA;"/>
+        <elements xsi:type="xtext:Keyword" value=" "/>
+        <elements xsi:type="xtext:Keyword" value="&#x9;"/>
+        <elements xsi:type="xtext:Keyword" value="&#xD;"/>
+        <elements xsi:type="xtext:Keyword" value="&#xA;"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:TerminalRule" name="ANY_OTHER">

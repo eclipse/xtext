@@ -256,6 +256,7 @@ public class XtextSwitch<T>
       {
         Alternatives alternatives = (Alternatives)theEObject;
         T result = caseAlternatives(alternatives);
+        if (result == null) result = caseCompoundElement(alternatives);
         if (result == null) result = caseAbstractElement(alternatives);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -264,6 +265,7 @@ public class XtextSwitch<T>
       {
         UnorderedGroup unorderedGroup = (UnorderedGroup)theEObject;
         T result = caseUnorderedGroup(unorderedGroup);
+        if (result == null) result = caseCompoundElement(unorderedGroup);
         if (result == null) result = caseAbstractElement(unorderedGroup);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -272,6 +274,7 @@ public class XtextSwitch<T>
       {
         Group group = (Group)theEObject;
         T result = caseGroup(group);
+        if (result == null) result = caseCompoundElement(group);
         if (result == null) result = caseAbstractElement(group);
         if (result == null) result = defaultCase(theEObject);
         return result;
@@ -281,6 +284,14 @@ public class XtextSwitch<T>
         CharacterRange characterRange = (CharacterRange)theEObject;
         T result = caseCharacterRange(characterRange);
         if (result == null) result = caseAbstractElement(characterRange);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case XtextPackage.COMPOUND_ELEMENT:
+      {
+        CompoundElement compoundElement = (CompoundElement)theEObject;
+        T result = caseCompoundElement(compoundElement);
+        if (result == null) result = caseAbstractElement(compoundElement);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -668,6 +679,22 @@ public class XtextSwitch<T>
    * @generated
    */
   public T caseCharacterRange(CharacterRange object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Compound Element</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Compound Element</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCompoundElement(CompoundElement object)
   {
     return null;
   }

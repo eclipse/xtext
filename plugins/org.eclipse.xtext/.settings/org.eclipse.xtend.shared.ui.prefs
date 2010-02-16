@@ -1,4 +1,4 @@
-#Tue Mar 31 22:20:17 CEST 2009
+#Tue Feb 16 15:24:59 CET 2010
 eclipse.preferences.version=1
-metamodelContributor=org.eclipse.xtend.shared.ui.core.metamodel.jdt.javabean.JavaBeanMetamodelContributor
+metamodelContributor=org.eclipse.xtend.shared.ui.core.metamodel.jdt.javabean.JavaBeanMetamodelContributor,org.eclipse.xtend.typesystem.emf.ui.EmfMetamodelContributor
 project.specific.metamodel=true

@@ -16,13 +16,12 @@ import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
-import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.util.XtextSwitch;
 
@@ -70,14 +69,7 @@ final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Fu
 	}
 
 	@Override
-	public EClassifier caseGroup(Group object) {
-		if (object.getTokens().size() != 1)
-			return null;
-		return doSwitch(object.getTokens().get(0));
-	}
-	
-	@Override
-	public EClassifier caseUnorderedGroup(UnorderedGroup object) {
+	public EClassifier caseCompoundElement(CompoundElement object) {
 		// since we do not allow unassigned rule calls and
 		// actions, it is safe to use the same logic for
 		// unordered groups as for groups
@@ -85,7 +77,7 @@ final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Fu
 			return null;
 		return doSwitch(object.getElements().get(0));
 	}
-
+	
 	@Override
 	public EClassifier caseRuleCall(RuleCall ruleCall) {
 		if (ruleCall.getRule() != null)
@@ -96,7 +88,7 @@ final class ElementTypeCalculator extends XtextSwitch<EClassifier> implements Fu
 	@Override
 	public EClassifier caseAlternatives(Alternatives object) {
 		final Set<EClassifier> types = new HashSet<EClassifier>();
-		for (AbstractElement group : object.getGroups())
+		for (AbstractElement group : object.getElements())
 			types.add(doSwitch(group));
 		try {
 			return classifierInfos.getCompatibleTypeNameOf(types, true);

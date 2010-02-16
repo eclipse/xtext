@@ -33,7 +33,7 @@ import com.google.common.base.Function;
  *
  * @see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#metamodelInference
  */
-public class Xtext2ECoreInterpretationContext {
+public class Xtext2EcoreInterpretationContext {
 
 	private final EClassifierInfos eClassifierInfos;
 
@@ -43,7 +43,7 @@ public class Xtext2ECoreInterpretationContext {
 
 	boolean isRuleCallAllowed = true;
 
-	private Xtext2ECoreInterpretationContext(EClassifierInfos classifierInfos) {
+	private Xtext2EcoreInterpretationContext(EClassifierInfos classifierInfos) {
 		super();
 		if (classifierInfos == null)
 			throw new NullPointerException("classifierInfos may not be null");
@@ -51,19 +51,19 @@ public class Xtext2ECoreInterpretationContext {
 		this.classifierCalculator = new ElementTypeCalculator(this.eClassifierInfos);
 	}
 
-	public Xtext2ECoreInterpretationContext(EClassifierInfos eClassifierInfos, EClassifierInfo currentType) {
+	public Xtext2EcoreInterpretationContext(EClassifierInfos eClassifierInfos, EClassifierInfo currentType) {
 		this(eClassifierInfos);
 		currentTypes.add(currentType);
 	}
 
-	private Xtext2ECoreInterpretationContext(Collection<EClassifierInfo> currentTypes,
+	private Xtext2EcoreInterpretationContext(Collection<EClassifierInfo> currentTypes,
 			EClassifierInfos classifierInfos, boolean isRuleCallAllowed) {
 		this(classifierInfos);
 		this.currentTypes.addAll(currentTypes);
 		this.isRuleCallAllowed = isRuleCallAllowed;
 	}
 
-	public Xtext2ECoreInterpretationContext(EClassifierInfo newType, EClassifierInfos classifierInfos,
+	public Xtext2EcoreInterpretationContext(EClassifierInfo newType, EClassifierInfos classifierInfos,
 			boolean isRuleCallAllowed) {
 		this(classifierInfos);
 		this.currentTypes.add(newType);
@@ -98,7 +98,7 @@ public class Xtext2ECoreInterpretationContext {
 
 			@Override
 			public Boolean caseAlternatives(Alternatives object) {
-				for (AbstractElement group: object.getGroups())
+				for (AbstractElement group: object.getElements())
 					if (doSwitch(group))
 						return true;
 				return false;
@@ -147,26 +147,26 @@ public class Xtext2ECoreInterpretationContext {
 		return featureTypeInfo;
 	}
 
-	public Xtext2ECoreInterpretationContext spawnContextForGroup() {
-		Xtext2ECoreInterpretationContext result = new Xtext2ECoreInterpretationContext(currentTypes, eClassifierInfos,
+	public Xtext2EcoreInterpretationContext spawnContextForGroup() {
+		Xtext2EcoreInterpretationContext result = new Xtext2EcoreInterpretationContext(currentTypes, eClassifierInfos,
 				isRuleCallAllowed);
 		return result;
 	}
 
-	public Xtext2ECoreInterpretationContext spawnContextWithCalledRule(EClassifierInfo newType, EObject parserElement)
+	public Xtext2EcoreInterpretationContext spawnContextWithCalledRule(EClassifierInfo newType, EObject parserElement)
 			throws TransformationException {
 		if (!isRuleCallAllowed)
 			throw new TransformationException(TransformationErrorCode.MoreThanOneTypeChangeInOneRule,
 					"Cannot change type twice within a rule", parserElement);
 
-		return new Xtext2ECoreInterpretationContext(newType, eClassifierInfos, false);
+		return new Xtext2EcoreInterpretationContext(newType, eClassifierInfos, false);
 	}
 
-	public Xtext2ECoreInterpretationContext mergeSpawnedContexts(List<Xtext2ECoreInterpretationContext> contexts) {
-		Xtext2ECoreInterpretationContext result = new Xtext2ECoreInterpretationContext(eClassifierInfos);
+	public Xtext2EcoreInterpretationContext mergeSpawnedContexts(List<Xtext2EcoreInterpretationContext> contexts) {
+		Xtext2EcoreInterpretationContext result = new Xtext2EcoreInterpretationContext(eClassifierInfos);
 		// result's current types is union of all groups' types
 		// result's isRuleCallAllowed is false if any group's value is false
-		for (Xtext2ECoreInterpretationContext context : contexts) {
+		for (Xtext2EcoreInterpretationContext context : contexts) {
 			result.currentTypes.addAll(context.currentTypes);
 			result.isRuleCallAllowed &= context.isRuleCallAllowed;
 		}
@@ -177,8 +177,8 @@ public class Xtext2ECoreInterpretationContext {
 		return eClassifierInfos.getCompatibleTypeOf(currentTypes);
 	}
 
-	public Xtext2ECoreInterpretationContext spawnContextWithReferencedType(EClassifierInfo referencedType, EObject parserElement) {
-		return new Xtext2ECoreInterpretationContext(referencedType, eClassifierInfos, false);
+	public Xtext2EcoreInterpretationContext spawnContextWithReferencedType(EClassifierInfo referencedType, EObject parserElement) {
+		return new Xtext2EcoreInterpretationContext(referencedType, eClassifierInfos, false);
 	}
 
 }

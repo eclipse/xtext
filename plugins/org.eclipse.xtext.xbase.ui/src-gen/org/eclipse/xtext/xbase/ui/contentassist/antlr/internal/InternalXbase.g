@@ -10,7 +10,7 @@ options {
 }
 
 @lexer::header {
-package org.eclipse.xtext.xbase.contentassist.antlr.internal;
+package org.eclipse.xtext.xbase.ui.contentassist.antlr.internal;
 
 // Hack: Use our own Lexer superclass by means of import. 
 // Currently there is no other way to specify the superclass for the lexer.
@@ -18,7 +18,7 @@ import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
 }
 
 @parser::header {
-package org.eclipse.xtext.xbase.contentassist.antlr.internal; 
+package org.eclipse.xtext.xbase.ui.contentassist.antlr.internal; 
 
 import java.io.InputStream;
 import org.eclipse.xtext.*;
@@ -67,7 +67,7 @@ entryRuleXFile
 ;
 
 // Rule XFile
-ruleXFile 
+ruleXFile
     @init {
 		int stackSize = keepStackSize();
     }
@@ -95,7 +95,7 @@ entryRuleXImport
 ;
 
 // Rule XImport
-ruleXImport 
+ruleXImport
     @init {
 		int stackSize = keepStackSize();
     }
@@ -123,7 +123,7 @@ entryRuleXQualifiedNameWithWildCard
 ;
 
 // Rule XQualifiedNameWithWildCard
-ruleXQualifiedNameWithWildCard 
+ruleXQualifiedNameWithWildCard
     @init {
 		int stackSize = keepStackSize();
     }
@@ -151,7 +151,7 @@ entryRuleXClass
 ;
 
 // Rule XClass
-ruleXClass 
+ruleXClass
     @init {
 		int stackSize = keepStackSize();
     }
@@ -179,7 +179,7 @@ entryRuleXFunction
 ;
 
 // Rule XFunction
-ruleXFunction 
+ruleXFunction
     @init {
 		int stackSize = keepStackSize();
     }
@@ -207,7 +207,7 @@ entryRuleXExpression
 ;
 
 // Rule XExpression
-ruleXExpression 
+ruleXExpression
     @init {
 		int stackSize = keepStackSize();
     }
@@ -235,7 +235,7 @@ entryRuleXAssignment
 ;
 
 // Rule XAssignment
-ruleXAssignment 
+ruleXAssignment
     @init {
 		int stackSize = keepStackSize();
     }
@@ -263,7 +263,7 @@ entryRuleXOrExpression
 ;
 
 // Rule XOrExpression
-ruleXOrExpression 
+ruleXOrExpression
     @init {
 		int stackSize = keepStackSize();
     }
@@ -291,7 +291,7 @@ entryRuleXAndExpression
 ;
 
 // Rule XAndExpression
-ruleXAndExpression 
+ruleXAndExpression
     @init {
 		int stackSize = keepStackSize();
     }
@@ -319,7 +319,7 @@ entryRuleXEqualityExpression
 ;
 
 // Rule XEqualityExpression
-ruleXEqualityExpression 
+ruleXEqualityExpression
     @init {
 		int stackSize = keepStackSize();
     }
@@ -347,7 +347,7 @@ entryRuleXRelationalExpression
 ;
 
 // Rule XRelationalExpression
-ruleXRelationalExpression 
+ruleXRelationalExpression
     @init {
 		int stackSize = keepStackSize();
     }
@@ -375,7 +375,7 @@ entryRuleXOtherOperatorExpression
 ;
 
 // Rule XOtherOperatorExpression
-ruleXOtherOperatorExpression 
+ruleXOtherOperatorExpression
     @init {
 		int stackSize = keepStackSize();
     }
@@ -403,7 +403,7 @@ entryRuleXAdditiveExpression
 ;
 
 // Rule XAdditiveExpression
-ruleXAdditiveExpression 
+ruleXAdditiveExpression
     @init {
 		int stackSize = keepStackSize();
     }
@@ -431,7 +431,7 @@ entryRuleXMultiplicativeExpression
 ;
 
 // Rule XMultiplicativeExpression
-ruleXMultiplicativeExpression 
+ruleXMultiplicativeExpression
     @init {
 		int stackSize = keepStackSize();
     }
@@ -459,7 +459,7 @@ entryRuleXUnaryOperation
 ;
 
 // Rule XUnaryOperation
-ruleXUnaryOperation 
+ruleXUnaryOperation
     @init {
 		int stackSize = keepStackSize();
     }
@@ -487,7 +487,7 @@ entryRuleXFeatureCall
 ;
 
 // Rule XFeatureCall
-ruleXFeatureCall 
+ruleXFeatureCall
     @init {
 		int stackSize = keepStackSize();
     }
@@ -515,7 +515,7 @@ entryRuleXPrimaryExpression
 ;
 
 // Rule XPrimaryExpression
-ruleXPrimaryExpression 
+ruleXPrimaryExpression
     @init {
 		int stackSize = keepStackSize();
     }
@@ -543,7 +543,7 @@ entryRuleXClosure
 ;
 
 // Rule XClosure
-ruleXClosure 
+ruleXClosure
     @init {
 		int stackSize = keepStackSize();
     }
@@ -571,7 +571,7 @@ entryRuleXParenthesizedExpression
 ;
 
 // Rule XParenthesizedExpression
-ruleXParenthesizedExpression 
+ruleXParenthesizedExpression
     @init {
 		int stackSize = keepStackSize();
     }
@@ -599,7 +599,7 @@ entryRuleXIfExpression
 ;
 
 // Rule XIfExpression
-ruleXIfExpression 
+ruleXIfExpression
     @init {
 		int stackSize = keepStackSize();
     }
@@ -627,7 +627,7 @@ entryRuleXSwitchExpression
 ;
 
 // Rule XSwitchExpression
-ruleXSwitchExpression 
+ruleXSwitchExpression
     @init {
 		int stackSize = keepStackSize();
     }
@@ -655,7 +655,7 @@ entryRuleXWhileExpression
 ;
 
 // Rule XWhileExpression
-ruleXWhileExpression 
+ruleXWhileExpression
     @init {
 		int stackSize = keepStackSize();
     }
@@ -683,7 +683,7 @@ entryRuleXCasePart
 ;
 
 // Rule XCasePart
-ruleXCasePart 
+ruleXCasePart
     @init {
 		int stackSize = keepStackSize();
     }
@@ -711,7 +711,7 @@ entryRuleXBlockExpression
 ;
 
 // Rule XBlockExpression
-ruleXBlockExpression 
+ruleXBlockExpression
     @init {
 		int stackSize = keepStackSize();
     }
@@ -739,7 +739,7 @@ entryRuleXExpressionInsideBlock
 ;
 
 // Rule XExpressionInsideBlock
-ruleXExpressionInsideBlock 
+ruleXExpressionInsideBlock
     @init {
 		int stackSize = keepStackSize();
     }
@@ -767,7 +767,7 @@ entryRuleXVariableDeclaration
 ;
 
 // Rule XVariableDeclaration
-ruleXVariableDeclaration 
+ruleXVariableDeclaration
     @init {
 		int stackSize = keepStackSize();
     }
@@ -795,7 +795,7 @@ entryRuleXDeclaredParameter
 ;
 
 // Rule XDeclaredParameter
-ruleXDeclaredParameter 
+ruleXDeclaredParameter
     @init {
 		int stackSize = keepStackSize();
     }
@@ -823,7 +823,7 @@ entryRuleXSimpleFeatureCall
 ;
 
 // Rule XSimpleFeatureCall
-ruleXSimpleFeatureCall 
+ruleXSimpleFeatureCall
     @init {
 		int stackSize = keepStackSize();
     }
@@ -851,7 +851,7 @@ entryRuleXConstructorCall
 ;
 
 // Rule XConstructorCall
-ruleXConstructorCall 
+ruleXConstructorCall
     @init {
 		int stackSize = keepStackSize();
     }
@@ -879,7 +879,7 @@ entryRuleXBooleanLiteral
 ;
 
 // Rule XBooleanLiteral
-ruleXBooleanLiteral 
+ruleXBooleanLiteral
     @init {
 		int stackSize = keepStackSize();
     }
@@ -907,7 +907,7 @@ entryRuleXNullLiteral
 ;
 
 // Rule XNullLiteral
-ruleXNullLiteral 
+ruleXNullLiteral
     @init {
 		int stackSize = keepStackSize();
     }
@@ -935,7 +935,7 @@ entryRuleXIntLiteral
 ;
 
 // Rule XIntLiteral
-ruleXIntLiteral 
+ruleXIntLiteral
     @init {
 		int stackSize = keepStackSize();
     }
@@ -963,7 +963,7 @@ entryRuleXStringLiteral
 ;
 
 // Rule XStringLiteral
-ruleXStringLiteral 
+ruleXStringLiteral
     @init {
 		int stackSize = keepStackSize();
     }
@@ -991,7 +991,7 @@ entryRuleXTypeLiteral
 ;
 
 // Rule XTypeLiteral
-ruleXTypeLiteral 
+ruleXTypeLiteral
     @init {
 		int stackSize = keepStackSize();
     }
@@ -1019,7 +1019,7 @@ entryRuleXRichString
 ;
 
 // Rule XRichString
-ruleXRichString 
+ruleXRichString
     @init {
 		int stackSize = keepStackSize();
     }
@@ -1047,7 +1047,7 @@ entryRuleXRichStringLiteral
 ;
 
 // Rule XRichStringLiteral
-ruleXRichStringLiteral 
+ruleXRichStringLiteral
     @init {
 		int stackSize = keepStackSize();
     }
@@ -1075,7 +1075,7 @@ entryRuleXTypeRef
 ;
 
 // Rule XTypeRef
-ruleXTypeRef 
+ruleXTypeRef
     @init {
 		int stackSize = keepStackSize();
     }
@@ -1103,7 +1103,7 @@ entryRuleXFunctionTypeRef
 ;
 
 // Rule XFunctionTypeRef
-ruleXFunctionTypeRef 
+ruleXFunctionTypeRef
     @init {
 		int stackSize = keepStackSize();
     }
@@ -1131,7 +1131,7 @@ entryRuleXSimpleTypeRef
 ;
 
 // Rule XSimpleTypeRef
-ruleXSimpleTypeRef 
+ruleXSimpleTypeRef
     @init {
 		int stackSize = keepStackSize();
     }
@@ -1159,7 +1159,7 @@ entryRuleXTypeParam
 ;
 
 // Rule XTypeParam
-ruleXTypeParam 
+ruleXTypeParam
     @init {
 		int stackSize = keepStackSize();
     }
@@ -1187,7 +1187,7 @@ entryRuleXWildcardParam
 ;
 
 // Rule XWildcardParam
-ruleXWildcardParam 
+ruleXWildcardParam
     @init {
 		int stackSize = keepStackSize();
     }
@@ -1215,7 +1215,7 @@ entryRuleXTypeParamDeclaration
 ;
 
 // Rule XTypeParamDeclaration
-ruleXTypeParamDeclaration 
+ruleXTypeParamDeclaration
     @init {
 		int stackSize = keepStackSize();
     }
@@ -1243,7 +1243,7 @@ entryRuleQualifiedName
 ;
 
 // Rule QualifiedName
-ruleQualifiedName 
+ruleQualifiedName
     @init {
 		int stackSize = keepStackSize();
     }
@@ -6285,6 +6285,7 @@ rule__QualifiedName__Group_1__1
 finally {
 	restoreStackSize(stackSize);
 }
+
 
 
 

@@ -72,18 +72,15 @@
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Xtext.ecore#//EnumLiteralDeclaration/enumLiteral"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//EnumLiteralDeclaration/literal"/>
     </genClasses>
-    <genClasses ecoreClass="Xtext.ecore#//Alternatives">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//Alternatives/groups"/>
-    </genClasses>
-    <genClasses ecoreClass="Xtext.ecore#//UnorderedGroup">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//UnorderedGroup/elements"/>
-    </genClasses>
-    <genClasses ecoreClass="Xtext.ecore#//Group">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//Group/tokens"/>
-    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//Alternatives"/>
+    <genClasses ecoreClass="Xtext.ecore#//UnorderedGroup"/>
+    <genClasses ecoreClass="Xtext.ecore#//Group"/>
     <genClasses ecoreClass="Xtext.ecore#//CharacterRange">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//CharacterRange/left"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//CharacterRange/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Xtext.ecore#//CompoundElement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Xtext.ecore#//CompoundElement/elements"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

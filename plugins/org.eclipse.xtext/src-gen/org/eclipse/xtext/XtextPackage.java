@@ -935,6 +935,43 @@ public interface XtextPackage extends EPackage
   int ENUM_LITERAL_DECLARATION_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 2;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.impl.CompoundElementImpl <em>Compound Element</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.impl.CompoundElementImpl
+   * @see org.eclipse.xtext.impl.XtextPackageImpl#getCompoundElement()
+   * @generated
+   */
+  int COMPOUND_ELEMENT = 24;
+
+  /**
+   * The feature id for the '<em><b>Cardinality</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPOUND_ELEMENT__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+
+  /**
+   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPOUND_ELEMENT__ELEMENTS = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Compound Element</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int COMPOUND_ELEMENT_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.impl.AlternativesImpl <em>Alternatives</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -951,16 +988,16 @@ public interface XtextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ALTERNATIVES__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+  int ALTERNATIVES__CARDINALITY = COMPOUND_ELEMENT__CARDINALITY;
 
   /**
-   * The feature id for the '<em><b>Groups</b></em>' containment reference list.
+   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int ALTERNATIVES__GROUPS = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+  int ALTERNATIVES__ELEMENTS = COMPOUND_ELEMENT__ELEMENTS;
 
   /**
    * The number of structural features of the '<em>Alternatives</em>' class.
@@ -969,7 +1006,7 @@ public interface XtextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int ALTERNATIVES_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+  int ALTERNATIVES_FEATURE_COUNT = COMPOUND_ELEMENT_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.impl.UnorderedGroupImpl <em>Unordered Group</em>}' class.
@@ -988,7 +1025,7 @@ public interface XtextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int UNORDERED_GROUP__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+  int UNORDERED_GROUP__CARDINALITY = COMPOUND_ELEMENT__CARDINALITY;
 
   /**
    * The feature id for the '<em><b>Elements</b></em>' containment reference list.
@@ -997,7 +1034,7 @@ public interface XtextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int UNORDERED_GROUP__ELEMENTS = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+  int UNORDERED_GROUP__ELEMENTS = COMPOUND_ELEMENT__ELEMENTS;
 
   /**
    * The number of structural features of the '<em>Unordered Group</em>' class.
@@ -1006,7 +1043,7 @@ public interface XtextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int UNORDERED_GROUP_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+  int UNORDERED_GROUP_FEATURE_COUNT = COMPOUND_ELEMENT_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.impl.GroupImpl <em>Group</em>}' class.
@@ -1025,16 +1062,16 @@ public interface XtextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GROUP__CARDINALITY = ABSTRACT_ELEMENT__CARDINALITY;
+  int GROUP__CARDINALITY = COMPOUND_ELEMENT__CARDINALITY;
 
   /**
-   * The feature id for the '<em><b>Tokens</b></em>' containment reference list.
+   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int GROUP__TOKENS = ABSTRACT_ELEMENT_FEATURE_COUNT + 0;
+  int GROUP__ELEMENTS = COMPOUND_ELEMENT__ELEMENTS;
 
   /**
    * The number of structural features of the '<em>Group</em>' class.
@@ -1043,7 +1080,7 @@ public interface XtextPackage extends EPackage
    * @generated
    * @ordered
    */
-  int GROUP_FEATURE_COUNT = ABSTRACT_ELEMENT_FEATURE_COUNT + 1;
+  int GROUP_FEATURE_COUNT = COMPOUND_ELEMENT_FEATURE_COUNT + 0;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.impl.CharacterRangeImpl <em>Character Range</em>}' class.
@@ -1633,17 +1670,6 @@ public interface XtextPackage extends EPackage
   EClass getAlternatives();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.Alternatives#getGroups <em>Groups</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Groups</em>'.
-   * @see org.eclipse.xtext.Alternatives#getGroups()
-   * @see #getAlternatives()
-   * @generated
-   */
-  EReference getAlternatives_Groups();
-
-  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.UnorderedGroup <em>Unordered Group</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1654,17 +1680,6 @@ public interface XtextPackage extends EPackage
   EClass getUnorderedGroup();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.UnorderedGroup#getElements <em>Elements</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Elements</em>'.
-   * @see org.eclipse.xtext.UnorderedGroup#getElements()
-   * @see #getUnorderedGroup()
-   * @generated
-   */
-  EReference getUnorderedGroup_Elements();
-
-  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.Group <em>Group</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1673,17 +1688,6 @@ public interface XtextPackage extends EPackage
    * @generated
    */
   EClass getGroup();
-
-  /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.Group#getTokens <em>Tokens</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Tokens</em>'.
-   * @see org.eclipse.xtext.Group#getTokens()
-   * @see #getGroup()
-   * @generated
-   */
-  EReference getGroup_Tokens();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.CharacterRange <em>Character Range</em>}'.
@@ -1716,6 +1720,27 @@ public interface XtextPackage extends EPackage
    * @generated
    */
   EReference getCharacterRange_Right();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.CompoundElement <em>Compound Element</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Compound Element</em>'.
+   * @see org.eclipse.xtext.CompoundElement
+   * @generated
+   */
+  EClass getCompoundElement();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.CompoundElement#getElements <em>Elements</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Elements</em>'.
+   * @see org.eclipse.xtext.CompoundElement#getElements()
+   * @see #getCompoundElement()
+   * @generated
+   */
+  EReference getCompoundElement_Elements();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -2191,14 +2216,6 @@ public interface XtextPackage extends EPackage
     EClass ALTERNATIVES = eINSTANCE.getAlternatives();
 
     /**
-     * The meta object literal for the '<em><b>Groups</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference ALTERNATIVES__GROUPS = eINSTANCE.getAlternatives_Groups();
-
-    /**
      * The meta object literal for the '{@link org.eclipse.xtext.impl.UnorderedGroupImpl <em>Unordered Group</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2209,14 +2226,6 @@ public interface XtextPackage extends EPackage
     EClass UNORDERED_GROUP = eINSTANCE.getUnorderedGroup();
 
     /**
-     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference UNORDERED_GROUP__ELEMENTS = eINSTANCE.getUnorderedGroup_Elements();
-
-    /**
      * The meta object literal for the '{@link org.eclipse.xtext.impl.GroupImpl <em>Group</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -2225,14 +2234,6 @@ public interface XtextPackage extends EPackage
      * @generated
      */
     EClass GROUP = eINSTANCE.getGroup();
-
-    /**
-     * The meta object literal for the '<em><b>Tokens</b></em>' containment reference list feature.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @generated
-     */
-    EReference GROUP__TOKENS = eINSTANCE.getGroup_Tokens();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.impl.CharacterRangeImpl <em>Character Range</em>}' class.
@@ -2259,6 +2260,24 @@ public interface XtextPackage extends EPackage
      * @generated
      */
     EReference CHARACTER_RANGE__RIGHT = eINSTANCE.getCharacterRange_Right();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.impl.CompoundElementImpl <em>Compound Element</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.impl.CompoundElementImpl
+     * @see org.eclipse.xtext.impl.XtextPackageImpl#getCompoundElement()
+     * @generated
+     */
+    EClass COMPOUND_ELEMENT = eINSTANCE.getCompoundElement();
+
+    /**
+     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference COMPOUND_ELEMENT__ELEMENTS = eINSTANCE.getCompoundElement_Elements();
 
   }
 

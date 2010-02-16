@@ -574,9 +574,9 @@ ruleFarbe returns [EObject current=null]
 	        }
 	    }
 
-    |		lv_wert_0_4=	'GR\u2039N' 
+    |		lv_wert_0_4=	'GR\u00DCN' 
     {
-        createLeafNode(grammarAccess.getFarbeAccess().getWertGRNKeyword_0_3(), "wert"); 
+        createLeafNode(grammarAccess.getFarbeAccess().getWertGRÜNKeyword_0_3(), "wert"); 
     }
  
 	    {

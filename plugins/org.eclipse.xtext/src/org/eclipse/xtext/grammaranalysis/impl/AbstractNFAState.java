@@ -17,6 +17,7 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
@@ -91,8 +92,7 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 
 	protected void collectFollowers(AbstractElement ele) {
 		if (ele instanceof Group || ele instanceof UnorderedGroup) {
-			List<AbstractElement> elements = ele instanceof Group ? 
-					((Group) ele).getTokens() : ((UnorderedGroup) ele).getElements();
+			List<AbstractElement> elements = ((CompoundElement) ele).getElements();
 			switch (builder.getDirection()) {
 			case FORWARD:
 				for (int i = 0; i < elements.size(); i++) {
@@ -112,7 +112,7 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 				break;
 			}
 		} else if (ele instanceof Alternatives)
-			for (AbstractElement e : ((Alternatives) ele).getGroups())
+			for (AbstractElement e : ((Alternatives) ele).getElements())
 				addFollower(e);
 		else if (ele instanceof Assignment)
 			addFollower(((Assignment) ele).getTerminal());
@@ -133,7 +133,7 @@ public class AbstractNFAState<S extends INFAState<S, T>, T extends INFATransitio
 			collectFollowersOther(cntAlt);
 		} else if (ele.eContainer() instanceof Group || ele.eContainer() instanceof UnorderedGroup) {
 			AbstractElement container = (AbstractElement) ele.eContainer();
-			List<AbstractElement> siblings = container instanceof Group ? ((Group) container).getTokens() : ((UnorderedGroup) container).getElements();
+			List<AbstractElement> siblings = ((CompoundElement) container).getElements();
 			int i = siblings.indexOf(ele);
 			switch (builder.getDirection()) {
 			case FORWARD:

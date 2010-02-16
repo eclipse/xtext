@@ -25,6 +25,7 @@ public class XpressionParser extends org.eclipse.xtext.parser.antlr.AbstractAntl
 		tokenStream.setInitialHiddenTokens("RULE_WS", "RULE_ML_COMMENT", "RULE_SL_COMMENT");
 		org.eclipse.xtext.xbase.parser.antlr.internal.InternalXpressionParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
+		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

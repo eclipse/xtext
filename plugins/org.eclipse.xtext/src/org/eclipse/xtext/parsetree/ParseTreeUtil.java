@@ -25,6 +25,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.Grammar;
@@ -287,7 +288,7 @@ public final class ParseTreeUtil {
 
 				AbstractElement grammarElement = (AbstractElement) grammarElementObject;
 				if (grammarElement.eContainer() instanceof Group) {
-					List<AbstractElement> contents = ((Group) grammarElement.eContainer()).getTokens();
+					List<AbstractElement> contents = ((Group) grammarElement.eContainer()).getElements();
 					int indexOf = contents.indexOf(grammarElement) + 1;
 					int size = contents.size();
 					if (GrammarUtil.isOneOrMoreCardinality(grammarElement)) {
@@ -418,28 +419,19 @@ public final class ParseTreeUtil {
 		}
 
 		@Override
-		public List<AbstractElement> caseAlternatives(Alternatives alternatives) {
+		public List<AbstractElement> caseCompoundElement(CompoundElement object) {
 			List<AbstractElement> elementList = new ArrayList<AbstractElement>();
-			for (AbstractElement alternativeElement : alternatives.getGroups()) {
+			for (AbstractElement alternativeElement : object.getElements()) {
 				addWithNullCheck(elementList, doSwitch(alternativeElement));
 			}
 			return elementList;
 		}
 		
 		@Override
-		public List<AbstractElement> caseUnorderedGroup(UnorderedGroup group) {
-			List<AbstractElement> elementList = new ArrayList<AbstractElement>();
-			for (AbstractElement element : group.getElements()) {
-				addWithNullCheck(elementList, doSwitch(element));
-			}
-			return elementList;
-		}
-
-		@Override
 		public List<AbstractElement> caseGroup(Group group) {
 			List<AbstractElement> elementList = new ArrayList<AbstractElement>();
 			boolean includeNext = true;
-			for (Iterator<AbstractElement> iterator = group.getTokens().iterator(); iterator.hasNext()
+			for (Iterator<AbstractElement> iterator = group.getElements().iterator(); iterator.hasNext()
 					&& includeNext;) {
 				AbstractElement groupElement = iterator.next();
 				addWithNullCheck(elementList, doSwitch(groupElement));
@@ -497,15 +489,8 @@ public final class ParseTreeUtil {
 
 		private boolean isOptional(AbstractElement groupElement) {
 			boolean isOptional = true;
-			if ((groupElement instanceof Group || groupElement instanceof Alternatives || groupElement instanceof UnorderedGroup)
-					&& !GrammarUtil.isOptionalCardinality(groupElement)) {
-				List<AbstractElement> children;
-				if (groupElement instanceof Group)
-					children = ((Group) groupElement).getTokens();
-				else if (groupElement instanceof Alternatives)
-					children = ((Alternatives) groupElement).getGroups();
-				else
-					children = ((UnorderedGroup) groupElement).getElements();
+			if (groupElement instanceof CompoundElement && !GrammarUtil.isOptionalCardinality(groupElement)) {
+				List<AbstractElement> children = ((CompoundElement) groupElement).getElements();
 				for (Iterator<AbstractElement> iterator = children.iterator(); isOptional && iterator.hasNext();) {
 					AbstractElement abstractElement = iterator.next();
 					isOptional = isOptional(abstractElement);

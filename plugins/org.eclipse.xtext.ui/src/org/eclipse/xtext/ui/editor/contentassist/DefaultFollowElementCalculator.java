@@ -12,8 +12,8 @@ import java.util.Set;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
-import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GrammarUtil;
@@ -21,7 +21,6 @@ import org.eclipse.xtext.Group;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
@@ -79,17 +78,9 @@ public class DefaultFollowElementCalculator implements IFollowElementCalculator 
 		}
 		
 		@Override
-		public FirstSetCalculator caseAlternatives(Alternatives alternatives) {
-			for (AbstractElement alternativeElement : alternatives.getGroups()) {
+		public FirstSetCalculator caseCompoundElement(CompoundElement object) {
+			for (AbstractElement alternativeElement : object.getElements()) {
 				doSwitch(alternativeElement);
-			}
-			return this;
-		}
-		
-		@Override
-		public FirstSetCalculator caseUnorderedGroup(UnorderedGroup group) {
-			for (AbstractElement element : group.getElements()) {
-				doSwitch(element);
 			}
 			return this;
 		}
@@ -103,7 +94,7 @@ public class DefaultFollowElementCalculator implements IFollowElementCalculator 
 
 		@Override
 		public FirstSetCalculator caseGroup(Group group) {
-			for(AbstractElement token: group.getTokens()) {
+			for(AbstractElement token: group.getElements()) {
 				doSwitch(token);
 				if (!isOptional(token))
 					return this;

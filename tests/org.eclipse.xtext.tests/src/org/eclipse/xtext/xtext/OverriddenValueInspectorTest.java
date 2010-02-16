@@ -14,10 +14,10 @@ import org.eclipse.xtext.ParserRule;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest<Void, ParserRule> {
+public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest<Boolean, ParserRule> {
 
 	@Override
-	protected XtextRuleInspector<Void, ParserRule> createInspector() {
+	protected XtextRuleInspector<Boolean, ParserRule> createInspector() {
 		return new OverriddenValueInspector(this);
 	}
 	

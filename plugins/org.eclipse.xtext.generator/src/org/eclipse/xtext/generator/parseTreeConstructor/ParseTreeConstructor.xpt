@@ -164,7 +164,7 @@ protected class «elementMethodName()» extends GroupToken {
 	
 «EXPAND constructor-»
 }
-«EXPAND element FOREACH tokens.reject(e|e.getTreeConstState().disabled)»
+«EXPAND element FOREACH elements.reject(e|e.getTreeConstState().disabled)»
 «ENDDEFINE»
 
 «REM» ************ Unordered Groups ************* «ENDREM»
@@ -187,7 +187,7 @@ protected class «elementMethodName()» extends AlternativesToken {
 
 «EXPAND constructor-»
 }
-«EXPAND element FOREACH groups.reject(e|e.getTreeConstState().disabled)»
+«EXPAND element FOREACH elements.reject(e|e.getTreeConstState().disabled)»
 «ENDDEFINE»
 
 

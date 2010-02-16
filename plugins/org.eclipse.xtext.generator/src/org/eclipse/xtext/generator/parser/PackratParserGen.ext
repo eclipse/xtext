@@ -99,19 +99,19 @@ boolean isQuestionMark(AbstractElement this):
 	isOptionalCardinality() && !isMultipleCardinality();
 	
 int indexInGroup(AbstractElement element, Group parent):
-    parent.tokens.flattendGroupElements().indexOf(element);
+    parent.elements.flattendGroupElements().indexOf(element);
     
 cached List[AbstractElement] flattendGroupElements(Group this):
-	if(!isOptionalCardinality() && !isMultipleCardinality()) then tokens.flattendGroupElements() else this;
+	if(!isOptionalCardinality() && !isMultipleCardinality()) then elements.flattendGroupElements() else this;
 
 List[AbstractElement] flattendGroupElements(AbstractElement this):
 	this;
 		
 int indexInAlternatives(AbstractElement element, Alternatives parent):
-    parent.groups.flattendAlternativesElements().indexOf(element);
+    parent.elements.flattendAlternativesElements().indexOf(element);
     
 cached List[AbstractElement] flattendAlternativesElements(Alternatives this):
-	if(!isOptionalCardinality() && !isMultipleCardinality()) then groups.flattendAlternativesElements() else this;
+	if(!isOptionalCardinality() && !isMultipleCardinality()) then elements.flattendAlternativesElements() else this;
 
 List[AbstractElement] flattendAlternativesElements(AbstractElement this):
 	{this};

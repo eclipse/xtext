@@ -20,6 +20,7 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CharacterRange;
+import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.EnumRule;
@@ -214,6 +215,13 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
    * @generated
    */
   private EClass characterRangeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass compoundElementEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -793,16 +801,6 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getAlternatives_Groups()
-  {
-    return (EReference)alternativesEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getUnorderedGroup()
   {
     return unorderedGroupEClass;
@@ -813,29 +811,9 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getUnorderedGroup_Elements()
-  {
-    return (EReference)unorderedGroupEClass.getEStructuralFeatures().get(0);
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getGroup()
   {
     return groupEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public EReference getGroup_Tokens()
-  {
-    return (EReference)groupEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -866,6 +844,26 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
   public EReference getCharacterRange_Right()
   {
     return (EReference)characterRangeEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getCompoundElement()
+  {
+    return compoundElementEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getCompoundElement_Elements()
+  {
+    return (EReference)compoundElementEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -969,17 +967,17 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
     createEReference(enumLiteralDeclarationEClass, ENUM_LITERAL_DECLARATION__LITERAL);
 
     alternativesEClass = createEClass(ALTERNATIVES);
-    createEReference(alternativesEClass, ALTERNATIVES__GROUPS);
 
     unorderedGroupEClass = createEClass(UNORDERED_GROUP);
-    createEReference(unorderedGroupEClass, UNORDERED_GROUP__ELEMENTS);
 
     groupEClass = createEClass(GROUP);
-    createEReference(groupEClass, GROUP__TOKENS);
 
     characterRangeEClass = createEClass(CHARACTER_RANGE);
     createEReference(characterRangeEClass, CHARACTER_RANGE__LEFT);
     createEReference(characterRangeEClass, CHARACTER_RANGE__RIGHT);
+
+    compoundElementEClass = createEClass(COMPOUND_ELEMENT);
+    createEReference(compoundElementEClass, COMPOUND_ELEMENT__ELEMENTS);
   }
 
   /**
@@ -1026,10 +1024,11 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
     wildcardEClass.getESuperTypes().add(this.getAbstractElement());
     enumRuleEClass.getESuperTypes().add(this.getAbstractRule());
     enumLiteralDeclarationEClass.getESuperTypes().add(this.getAbstractElement());
-    alternativesEClass.getESuperTypes().add(this.getAbstractElement());
-    unorderedGroupEClass.getESuperTypes().add(this.getAbstractElement());
-    groupEClass.getESuperTypes().add(this.getAbstractElement());
+    alternativesEClass.getESuperTypes().add(this.getCompoundElement());
+    unorderedGroupEClass.getESuperTypes().add(this.getCompoundElement());
+    groupEClass.getESuperTypes().add(this.getCompoundElement());
     characterRangeEClass.getESuperTypes().add(this.getAbstractElement());
+    compoundElementEClass.getESuperTypes().add(this.getAbstractElement());
 
     // Initialize classes and features; add operations and parameters
     initEClass(grammarEClass, Grammar.class, "Grammar", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1103,17 +1102,17 @@ public class XtextPackageImpl extends EPackageImpl implements XtextPackage
     initEReference(getEnumLiteralDeclaration_Literal(), this.getKeyword(), null, "literal", null, 0, 1, EnumLiteralDeclaration.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(alternativesEClass, Alternatives.class, "Alternatives", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getAlternatives_Groups(), this.getAbstractElement(), null, "groups", null, 0, -1, Alternatives.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(unorderedGroupEClass, UnorderedGroup.class, "UnorderedGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getUnorderedGroup_Elements(), this.getAbstractElement(), null, "elements", null, 0, -1, UnorderedGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(groupEClass, Group.class, "Group", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getGroup_Tokens(), this.getAbstractElement(), null, "tokens", null, 0, -1, Group.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(characterRangeEClass, CharacterRange.class, "CharacterRange", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getCharacterRange_Left(), this.getKeyword(), null, "left", null, 0, 1, CharacterRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getCharacterRange_Right(), this.getKeyword(), null, "right", null, 0, 1, CharacterRange.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(compoundElementEClass, CompoundElement.class, "CompoundElement", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getCompoundElement_Elements(), this.getAbstractElement(), null, "elements", null, 0, -1, CompoundElement.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

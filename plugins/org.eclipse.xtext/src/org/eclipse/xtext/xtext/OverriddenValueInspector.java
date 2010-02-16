@@ -9,20 +9,18 @@ package org.eclipse.xtext.xtext;
 
 import java.util.Collection;
 import java.util.Collections;
-import java.util.List;
 
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.EnumRule;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
-import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
 import com.google.common.collect.Iterables;
@@ -33,7 +31,7 @@ import com.google.common.collect.Multimaps;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class OverriddenValueInspector extends XtextRuleInspector<Void, ParserRule> {
+public class OverriddenValueInspector extends XtextRuleInspector<Boolean, ParserRule> {
 
 	private Multimap<String, AbstractElement> assignedFeatures;
 
@@ -50,7 +48,7 @@ public class OverriddenValueInspector extends XtextRuleInspector<Void, ParserRul
 	}
 	
 	@Override
-	protected Void doInspect(ParserRule rule) {
+	protected Boolean doInspect(ParserRule rule) {
 		return doSwitch(rule.getAlternatives());
 	}
 	
@@ -59,24 +57,24 @@ public class OverriddenValueInspector extends XtextRuleInspector<Void, ParserRul
 	}
 
 	@Override
-	public Void caseAssignment(Assignment object) {
+	public Boolean caseAssignment(Assignment object) {
 		if (GrammarUtil.isMultipleAssignment(object))
-			return null;
+			return Boolean.FALSE;
 		checkAssignment(object, object.getFeature());
 		if (GrammarUtil.isMultipleCardinality(object))
 			checkAssignment(object, object.getFeature());
-		return null;
+		return Boolean.FALSE;
 	}
 
 	@Override
-	public Void caseAction(Action object) {
+	public Boolean caseAction(Action object) {
 		if (GrammarUtil.isMultipleAssignment(object))
 			return null;
 		assignedFeatures = newMultimap();
 		if (object.getFeature() == null)
-			return null;
+			return Boolean.FALSE;
 		checkAssignment(object, object.getFeature());
-		return null;
+		return Boolean.FALSE;
 	}
 
 	private void checkAssignment(AbstractElement object, String feature) {
@@ -106,7 +104,7 @@ public class OverriddenValueInspector extends XtextRuleInspector<Void, ParserRul
 	}
 
 	@Override
-	public Void caseRuleCall(RuleCall object) {
+	public Boolean caseRuleCall(RuleCall object) {
 		AbstractRule calledRule = object.getRule();
 		if (calledRule == null || calledRule instanceof TerminalRule || calledRule instanceof EnumRule)
 			return null;
@@ -122,14 +120,14 @@ public class OverriddenValueInspector extends XtextRuleInspector<Void, ParserRul
 			prevAssignedFeatures.put(feature, object);
 		assignedFeatures = prevAssignedFeatures;
 		removeVisited(parserRule);
-		return null;
+		return Boolean.FALSE;
 	}
 
 	@Override
-	public Void caseAlternatives(Alternatives object) {
+	public Boolean caseAlternatives(Alternatives object) {
 		Multimap<String, AbstractElement> prevAssignedFeatures = assignedFeatures;
 		Multimap<String, AbstractElement> mergedAssignedFeatures = newMultimap(prevAssignedFeatures);
-		for (AbstractElement element : object.getGroups()) {
+		for (AbstractElement element : object.getElements()) {
 			assignedFeatures = newMultimap(prevAssignedFeatures);
 			doSwitch(element);
 			mergedAssignedFeatures.putAll(assignedFeatures);
@@ -137,14 +135,14 @@ public class OverriddenValueInspector extends XtextRuleInspector<Void, ParserRul
 		assignedFeatures = mergedAssignedFeatures;
 		if (GrammarUtil.isMultipleCardinality(object)) {
 			prevAssignedFeatures = assignedFeatures;
-			for (AbstractElement element : object.getGroups()) {
+			for (AbstractElement element : object.getElements()) {
 				assignedFeatures = newMultimap(prevAssignedFeatures);
 				doSwitch(element);
 				mergedAssignedFeatures.putAll(assignedFeatures);
 			}
 			assignedFeatures = mergedAssignedFeatures;
 		}
-		return null;
+		return Boolean.FALSE;
 	}
 
 	private Multimap<String, AbstractElement> newMultimap(Multimap<String, AbstractElement> from) {
@@ -152,27 +150,19 @@ public class OverriddenValueInspector extends XtextRuleInspector<Void, ParserRul
 	}
 
 	@Override
-	public Void caseGroup(Group object) {
-		return caseGroupOrUnorderedGroup(object, object.getTokens());
-	}
-	
-	@Override
-	public Void caseUnorderedGroup(UnorderedGroup object) {
-		return caseGroupOrUnorderedGroup(object, object.getElements());
-	}
-	
-	public Void caseGroupOrUnorderedGroup(AbstractElement object, List<AbstractElement> elements) {
+	public Boolean caseCompoundElement(CompoundElement object) {
 		Multimap<String, AbstractElement> prevAssignedFeatures = newMultimap(assignedFeatures);
-		for (AbstractElement element : elements) {
+		for (AbstractElement element : object.getElements()) {
 			doSwitch(element);
 		}
 		if (GrammarUtil.isMultipleCardinality(object)) {
-			for (AbstractElement element : elements) {
+			for (AbstractElement element : object.getElements()) {
 				doSwitch(element);
 			}
 		}
 		if (GrammarUtil.isOptionalCardinality(object))
 			assignedFeatures.putAll(prevAssignedFeatures);
-		return null;
+		return Boolean.FALSE;
 	}
+	
 }

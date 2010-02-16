@@ -108,7 +108,7 @@ public final class XtextTerminalGroupConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(terminalTokenConsumer, "tokens", true, false, false, getElement(), optional);
+			return consumeNonTerminal(terminalTokenConsumer, "elements", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -131,9 +131,9 @@ public final class XtextTerminalGroupConsumer extends NonTerminalConsumer {
 		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
 		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getTerminalTokenParserRuleCall_0());
 		group$3$Consumer = new Group$3$Consumer(rule.getGroup_1());
-		action$4$Consumer = new Action$4$Consumer(rule.getGroupTokensAction_1_0());
-		assignment$6$Consumer = new Assignment$6$Consumer(rule.getTokensAssignment_1_1());
-		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getTokensTerminalTokenParserRuleCall_1_1_0());
+		action$4$Consumer = new Action$4$Consumer(rule.getGroupElementsAction_1_0());
+		assignment$6$Consumer = new Assignment$6$Consumer(rule.getElementsAssignment_1_1());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getElementsTerminalTokenParserRuleCall_1_1_0());
 	}
 	
 	@Override

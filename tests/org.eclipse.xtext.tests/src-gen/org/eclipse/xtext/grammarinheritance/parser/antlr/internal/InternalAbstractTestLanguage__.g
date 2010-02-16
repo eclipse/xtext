@@ -13,7 +13,7 @@ T12 : 'element' ;
 RULE_REAL : RULE_INT '.' RULE_INT;
 
 // $ANTLR src "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalAbstractTestLanguage.g" 232
-RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'\u02C6'|'\u2030'|'\u00B8'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
+RULE_ID : '^'? ('a'..'z'|'A'..'Z'|'\u00F6'|'\u00E4'|'\u00FC'|'_') ('a'..'z'|'A'..'Z'|'_'|'0'..'9')*;
 
 // $ANTLR src "../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/grammarinheritance/parser/antlr/internal/InternalAbstractTestLanguage.g" 234
 RULE_INT : ('0'..'9')+;

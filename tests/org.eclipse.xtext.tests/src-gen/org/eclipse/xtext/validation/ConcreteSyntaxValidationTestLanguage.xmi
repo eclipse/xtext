@@ -9,69 +9,69 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//Model"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
-        <groups xsi:type="xtext:Assignment" feature="x1" operator="=">
+        <elements xsi:type="xtext:Assignment" feature="x1" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
-        </groups>
-        <groups xsi:type="xtext:Assignment" feature="x2" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="x2" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
-        </groups>
-        <groups xsi:type="xtext:Assignment" feature="x3" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="x3" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
-        </groups>
-        <groups xsi:type="xtext:Assignment" feature="x4" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="x4" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
-        </groups>
-        <groups xsi:type="xtext:Assignment" feature="x5" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="x5" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
-        </groups>
-        <groups xsi:type="xtext:Assignment" feature="x6" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="x6" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
-        </groups>
-        <groups xsi:type="xtext:Assignment" feature="x7" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="x7" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
-        </groups>
-        <groups xsi:type="xtext:Assignment" feature="x8" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="x8" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
-        </groups>
-        <groups xsi:type="xtext:Assignment" feature="x9" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="x9" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
-        </groups>
-        <groups xsi:type="xtext:Assignment" feature="x10" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="x10" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
-        </groups>
-        <groups xsi:type="xtext:Assignment" feature="x11" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="x11" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.11"/>
-        </groups>
-        <groups xsi:type="xtext:Assignment" feature="x12" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="x12" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.13"/>
-        </groups>
-        <groups xsi:type="xtext:Assignment" feature="x13" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="x13" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.15"/>
-        </groups>
-        <groups xsi:type="xtext:Assignment" feature="x14" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="x14" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.16"/>
-        </groups>
-        <groups xsi:type="xtext:Assignment" feature="x15" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="x15" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.17"/>
-        </groups>
-        <groups xsi:type="xtext:Assignment" feature="x16" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="x16" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.18"/>
-        </groups>
-        <groups xsi:type="xtext:Assignment" feature="x17" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="x17" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.19"/>
-        </groups>
-        <groups xsi:type="xtext:Assignment" feature="x18" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="x18" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.20"/>
-        </groups>
-        <groups xsi:type="xtext:Assignment" feature="x19" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="x19" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.21"/>
-        </groups>
-        <groups xsi:type="xtext:Assignment" feature="x20" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="x20" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.22"/>
-        </groups>
-        <groups xsi:type="xtext:Assignment" feature="x21" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="x21" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.23"/>
-        </groups>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SimpleGroup">
@@ -79,13 +79,13 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//SimpleGroup"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="#1"/>
-        <tokens xsi:type="xtext:Assignment" feature="val1" operator="=">
+        <elements xsi:type="xtext:Keyword" value="#1"/>
+        <elements xsi:type="xtext:Assignment" feature="val1" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
-        <tokens xsi:type="xtext:Assignment" feature="val2" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="val2" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SimpleAlternative">
@@ -93,21 +93,21 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//SimpleAlternative"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="#2"/>
-        <tokens xsi:type="xtext:Alternatives">
-          <groups xsi:type="xtext:Group">
-            <tokens xsi:type="xtext:Keyword" value="kw1"/>
-            <tokens xsi:type="xtext:Assignment" feature="val1" operator="=">
+        <elements xsi:type="xtext:Keyword" value="#2"/>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Keyword" value="kw1"/>
+            <elements xsi:type="xtext:Assignment" feature="val1" operator="=">
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-            </tokens>
-          </groups>
-          <groups xsi:type="xtext:Group">
-            <tokens xsi:type="xtext:Keyword" value="kw2"/>
-            <tokens xsi:type="xtext:Assignment" feature="val2" operator="=">
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Keyword" value="kw2"/>
+            <elements xsi:type="xtext:Assignment" feature="val2" operator="=">
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-            </tokens>
-          </groups>
-        </tokens>
+            </elements>
+          </elements>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SimpleMultiplicities">
@@ -115,22 +115,22 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//SimpleMultiplicities"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="#3"/>
-        <tokens xsi:type="xtext:Assignment" feature="val1" operator="=">
+        <elements xsi:type="xtext:Keyword" value="#3"/>
+        <elements xsi:type="xtext:Assignment" feature="val1" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
-        <tokens xsi:type="xtext:Keyword" value="kw1"/>
-        <tokens xsi:type="xtext:Assignment" cardinality="?" feature="val2" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="kw1"/>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="val2" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
-        <tokens xsi:type="xtext:Keyword" value="kw2"/>
-        <tokens xsi:type="xtext:Assignment" cardinality="+" feature="val3" operator="+=">
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="kw2"/>
+        <elements xsi:type="xtext:Assignment" cardinality="+" feature="val3" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
-        <tokens xsi:type="xtext:Keyword" value="kw3"/>
-        <tokens xsi:type="xtext:Assignment" cardinality="*" feature="val4" operator="+=">
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="kw3"/>
+        <elements xsi:type="xtext:Assignment" cardinality="*" feature="val4" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="GroupMultiplicities">
@@ -138,37 +138,37 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//GroupMultiplicities"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="#4"/>
-        <tokens xsi:type="xtext:Assignment" feature="val1" operator="=">
+        <elements xsi:type="xtext:Keyword" value="#4"/>
+        <elements xsi:type="xtext:Assignment" feature="val1" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
-        <tokens xsi:type="xtext:Keyword" value="kw1"/>
-        <tokens xsi:type="xtext:Group" cardinality="?">
-          <tokens xsi:type="xtext:Assignment" feature="val2" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="kw1"/>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Assignment" feature="val2" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-          </tokens>
-          <tokens xsi:type="xtext:Assignment" feature="val3" operator="=">
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="val3" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-          </tokens>
-        </tokens>
-        <tokens xsi:type="xtext:Keyword" value="kw2"/>
-        <tokens xsi:type="xtext:Group" cardinality="+">
-          <tokens xsi:type="xtext:Assignment" feature="val4" operator="+=">
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="kw2"/>
+        <elements xsi:type="xtext:Group" cardinality="+">
+          <elements xsi:type="xtext:Assignment" feature="val4" operator="+=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-          </tokens>
-          <tokens xsi:type="xtext:Assignment" feature="val5" operator="+=">
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="val5" operator="+=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-          </tokens>
-        </tokens>
-        <tokens xsi:type="xtext:Keyword" value="kw3"/>
-        <tokens xsi:type="xtext:Group" cardinality="*">
-          <tokens xsi:type="xtext:Assignment" feature="val6" operator="+=">
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="kw3"/>
+        <elements xsi:type="xtext:Group" cardinality="*">
+          <elements xsi:type="xtext:Assignment" feature="val6" operator="+=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-          </tokens>
-          <tokens xsi:type="xtext:Assignment" feature="val7" operator="+=">
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="val7" operator="+=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-          </tokens>
-        </tokens>
+          </elements>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="AlternativeMultiplicities">
@@ -176,42 +176,42 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//AlternativeMultiplicities"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="#5"/>
-        <tokens xsi:type="xtext:Alternatives" cardinality="?">
-          <groups xsi:type="xtext:Assignment" feature="val2" operator="=">
+        <elements xsi:type="xtext:Keyword" value="#5"/>
+        <elements xsi:type="xtext:Alternatives" cardinality="?">
+          <elements xsi:type="xtext:Assignment" feature="val2" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-          </groups>
-          <groups xsi:type="xtext:Group">
-            <tokens xsi:type="xtext:Keyword" value="kw1"/>
-            <tokens xsi:type="xtext:Assignment" feature="val3" operator="=">
+          </elements>
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Keyword" value="kw1"/>
+            <elements xsi:type="xtext:Assignment" feature="val3" operator="=">
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-            </tokens>
-          </groups>
-        </tokens>
-        <tokens xsi:type="xtext:Keyword" value="kw2"/>
-        <tokens xsi:type="xtext:Alternatives" cardinality="+">
-          <groups xsi:type="xtext:Assignment" feature="val4" operator="+=">
+            </elements>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="kw2"/>
+        <elements xsi:type="xtext:Alternatives" cardinality="+">
+          <elements xsi:type="xtext:Assignment" feature="val4" operator="+=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-          </groups>
-          <groups xsi:type="xtext:Group">
-            <tokens xsi:type="xtext:Keyword" value="kw3"/>
-            <tokens xsi:type="xtext:Assignment" feature="val5" operator="+=">
+          </elements>
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Keyword" value="kw3"/>
+            <elements xsi:type="xtext:Assignment" feature="val5" operator="+=">
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-            </tokens>
-          </groups>
-        </tokens>
-        <tokens xsi:type="xtext:Keyword" value="kw4"/>
-        <tokens xsi:type="xtext:Alternatives" cardinality="*">
-          <groups xsi:type="xtext:Assignment" feature="val6" operator="+=">
+            </elements>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="kw4"/>
+        <elements xsi:type="xtext:Alternatives" cardinality="*">
+          <elements xsi:type="xtext:Assignment" feature="val6" operator="+=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-          </groups>
-          <groups xsi:type="xtext:Group">
-            <tokens xsi:type="xtext:Keyword" value="kw5"/>
-            <tokens xsi:type="xtext:Assignment" feature="val7" operator="+=">
+          </elements>
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Keyword" value="kw5"/>
+            <elements xsi:type="xtext:Assignment" feature="val7" operator="+=">
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-            </tokens>
-          </groups>
-        </tokens>
+            </elements>
+          </elements>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="AssignedAction">
@@ -219,20 +219,20 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//AssignedAction"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="#6"/>
-        <tokens xsi:type="xtext:Assignment" feature="val1" operator="=">
+        <elements xsi:type="xtext:Keyword" value="#6"/>
+        <elements xsi:type="xtext:Assignment" feature="val1" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
-        <tokens xsi:type="xtext:Group" cardinality="+">
-          <tokens xsi:type="xtext:Action" feature="child" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="+">
+          <elements xsi:type="xtext:Action" feature="child" operator="=">
             <type metamodel="/0/@metamodelDeclarations.0">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//AssignedAction"/>
             </type>
-          </tokens>
-          <tokens xsi:type="xtext:Assignment" feature="val1" operator="=">
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="val1" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-          </tokens>
-        </tokens>
+          </elements>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="AssignedActionSecond">
@@ -240,14 +240,14 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//AssignedAction"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="#7"/>
-        <tokens xsi:type="xtext:Assignment" feature="val1" operator="=">
+        <elements xsi:type="xtext:Keyword" value="#7"/>
+        <elements xsi:type="xtext:Assignment" feature="val1" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
-        <tokens xsi:type="xtext:Keyword" value="kw1"/>
-        <tokens xsi:type="xtext:Assignment" feature="val2" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="kw1"/>
+        <elements xsi:type="xtext:Assignment" feature="val2" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="UnassignedAction1">
@@ -255,18 +255,18 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//UnassignedAction1"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Action">
+        <elements xsi:type="xtext:Action">
           <type metamodel="/0/@metamodelDeclarations.0">
             <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//UnassignedAction1"/>
           </type>
-        </tokens>
-        <tokens xsi:type="xtext:Keyword" value="#8"/>
-        <tokens xsi:type="xtext:Assignment" feature="val1" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="#8"/>
+        <elements xsi:type="xtext:Assignment" feature="val1" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
-        <tokens xsi:type="xtext:Assignment" cardinality="?" feature="val2" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="val2" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="UnassignedAction2">
@@ -274,18 +274,18 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//UnassignedAction2"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Action">
+        <elements xsi:type="xtext:Action">
           <type metamodel="/0/@metamodelDeclarations.0">
             <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//UnassignedAction2Sub"/>
           </type>
-        </tokens>
-        <tokens xsi:type="xtext:Keyword" value="#9"/>
-        <tokens xsi:type="xtext:Assignment" feature="val1" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="#9"/>
+        <elements xsi:type="xtext:Assignment" feature="val1" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
-        <tokens xsi:type="xtext:Assignment" cardinality="?" feature="val2" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="val2" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="UnassignedAction3">
@@ -293,31 +293,31 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//UnassignedAction3"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="#10"/>
-        <tokens xsi:type="xtext:Alternatives">
-          <groups xsi:type="xtext:Group">
-            <tokens xsi:type="xtext:Keyword" value="kw1"/>
-            <tokens xsi:type="xtext:Action">
+        <elements xsi:type="xtext:Keyword" value="#10"/>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Keyword" value="kw1"/>
+            <elements xsi:type="xtext:Action">
               <type metamodel="/0/@metamodelDeclarations.0">
                 <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//UnassignedAction2Sub1"/>
               </type>
-            </tokens>
-          </groups>
-          <groups xsi:type="xtext:Group">
-            <tokens xsi:type="xtext:Keyword" value="kw2"/>
-            <tokens xsi:type="xtext:Action">
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Keyword" value="kw2"/>
+            <elements xsi:type="xtext:Action">
               <type metamodel="/0/@metamodelDeclarations.0">
                 <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//UnassignedAction2Sub2"/>
               </type>
-            </tokens>
-          </groups>
-        </tokens>
-        <tokens xsi:type="xtext:Assignment" feature="val1" operator="=">
+            </elements>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="val1" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
-        <tokens xsi:type="xtext:Assignment" cardinality="?" feature="val2" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="val2" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="UnassignedRuleCall1">
@@ -325,11 +325,11 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//UnassignedRuleCall1"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="#11"/>
-        <tokens xsi:type="xtext:RuleCall" rule="/0/@rules.12"/>
-        <tokens xsi:type="xtext:Assignment" feature="val2" operator="=">
+        <elements xsi:type="xtext:Keyword" value="#11"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.12"/>
+        <elements xsi:type="xtext:Assignment" feature="val2" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="UnassignedRuleCall1Sub">
@@ -345,11 +345,11 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//UnassignedRuleCall2"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="#12"/>
-        <tokens xsi:type="xtext:RuleCall" rule="/0/@rules.14"/>
-        <tokens xsi:type="xtext:Assignment" feature="val2" operator="=">
+        <elements xsi:type="xtext:Keyword" value="#12"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.14"/>
+        <elements xsi:type="xtext:Assignment" feature="val2" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="UnassignedRuleCall2Sub">
@@ -367,27 +367,27 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//Combination1"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="#13"/>
-        <tokens xsi:type="xtext:Assignment" feature="val1" operator="=">
+        <elements xsi:type="xtext:Keyword" value="#13"/>
+        <elements xsi:type="xtext:Assignment" feature="val1" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
-        <tokens xsi:type="xtext:Group" cardinality="?">
-          <tokens xsi:type="xtext:Keyword" value="kw1"/>
-          <tokens xsi:type="xtext:Assignment" feature="val2" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="kw1"/>
+          <elements xsi:type="xtext:Assignment" feature="val2" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-          </tokens>
-          <tokens xsi:type="xtext:Alternatives">
-            <groups xsi:type="xtext:Group">
-              <tokens xsi:type="xtext:Keyword" value="kw2"/>
-              <tokens xsi:type="xtext:Assignment" feature="val3" operator="=">
+          </elements>
+          <elements xsi:type="xtext:Alternatives">
+            <elements xsi:type="xtext:Group">
+              <elements xsi:type="xtext:Keyword" value="kw2"/>
+              <elements xsi:type="xtext:Assignment" feature="val3" operator="=">
                 <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-              </tokens>
-            </groups>
-            <groups xsi:type="xtext:Assignment" feature="val4" operator="=">
+              </elements>
+            </elements>
+            <elements xsi:type="xtext:Assignment" feature="val4" operator="=">
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-            </groups>
-          </tokens>
-        </tokens>
+            </elements>
+          </elements>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Combination2">
@@ -395,26 +395,26 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//Combination2"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="#14"/>
-        <tokens xsi:type="xtext:Assignment" feature="val1" operator="=">
+        <elements xsi:type="xtext:Keyword" value="#14"/>
+        <elements xsi:type="xtext:Assignment" feature="val1" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
-        <tokens xsi:type="xtext:Alternatives">
-          <groups xsi:type="xtext:Group">
-            <tokens xsi:type="xtext:Keyword" value="kw1"/>
-            <tokens xsi:type="xtext:Assignment" feature="val2" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Keyword" value="kw1"/>
+            <elements xsi:type="xtext:Assignment" feature="val2" operator="=">
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-            </tokens>
-          </groups>
-          <groups xsi:type="xtext:Group" cardinality="*">
-            <tokens xsi:type="xtext:Assignment" feature="val3" operator="+=">
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Group" cardinality="*">
+            <elements xsi:type="xtext:Assignment" feature="val3" operator="+=">
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-            </tokens>
-            <tokens xsi:type="xtext:Assignment" feature="val4" operator="+=">
+            </elements>
+            <elements xsi:type="xtext:Assignment" feature="val4" operator="+=">
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-            </tokens>
-          </groups>
-        </tokens>
+            </elements>
+          </elements>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Combination3">
@@ -422,18 +422,18 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//Combination3"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="#15"/>
-        <tokens xsi:type="xtext:Alternatives" cardinality="*">
-          <groups xsi:type="xtext:Assignment" feature="val1" operator="=">
+        <elements xsi:type="xtext:Keyword" value="#15"/>
+        <elements xsi:type="xtext:Alternatives" cardinality="*">
+          <elements xsi:type="xtext:Assignment" feature="val1" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-          </groups>
-          <groups xsi:type="xtext:Assignment" feature="val2" operator="=">
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="val2" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
-          </groups>
-          <groups xsi:type="xtext:Assignment" feature="val3" operator="=">
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="val3" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
-          </groups>
-        </tokens>
+          </elements>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Combination4">
@@ -441,19 +441,19 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//Combination4"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="#16"/>
-        <tokens xsi:type="xtext:Group" cardinality="+">
-          <tokens xsi:type="xtext:Keyword" value="group"/>
-          <tokens xsi:type="xtext:Assignment" feature="val1" operator="+=">
+        <elements xsi:type="xtext:Keyword" value="#16"/>
+        <elements xsi:type="xtext:Group" cardinality="+">
+          <elements xsi:type="xtext:Keyword" value="group"/>
+          <elements xsi:type="xtext:Assignment" feature="val1" operator="+=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-          </tokens>
-          <tokens xsi:type="xtext:Assignment" feature="val2" operator="+=">
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="val2" operator="+=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-          </tokens>
-          <tokens xsi:type="xtext:Assignment" feature="val3" operator="+=">
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="val3" operator="+=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-          </tokens>
-        </tokens>
+          </elements>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="List1">
@@ -461,16 +461,16 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//List1"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="#17"/>
-        <tokens xsi:type="xtext:Assignment" feature="val1" operator="+=">
+        <elements xsi:type="xtext:Keyword" value="#17"/>
+        <elements xsi:type="xtext:Assignment" feature="val1" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
-        <tokens xsi:type="xtext:Group" cardinality="*">
-          <tokens xsi:type="xtext:Keyword" value=","/>
-          <tokens xsi:type="xtext:Assignment" feature="val1" operator="+=">
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="*">
+          <elements xsi:type="xtext:Keyword" value=","/>
+          <elements xsi:type="xtext:Assignment" feature="val1" operator="+=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-          </tokens>
-        </tokens>
+          </elements>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="List2">
@@ -478,18 +478,18 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//List2"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="#18"/>
-        <tokens xsi:type="xtext:Group" cardinality="?">
-          <tokens xsi:type="xtext:Assignment" feature="val1" operator="+=">
+        <elements xsi:type="xtext:Keyword" value="#18"/>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Assignment" feature="val1" operator="+=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-          </tokens>
-          <tokens xsi:type="xtext:Group" cardinality="*">
-            <tokens xsi:type="xtext:Keyword" value=","/>
-            <tokens xsi:type="xtext:Assignment" feature="val1" operator="+=">
+          </elements>
+          <elements xsi:type="xtext:Group" cardinality="*">
+            <elements xsi:type="xtext:Keyword" value=","/>
+            <elements xsi:type="xtext:Assignment" feature="val1" operator="+=">
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-            </tokens>
-          </tokens>
-        </tokens>
+            </elements>
+          </elements>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="List3">
@@ -497,26 +497,26 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//List3"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
-        <groups xsi:type="xtext:Group">
-          <tokens xsi:type="xtext:Keyword" value="#19"/>
-          <tokens xsi:type="xtext:Group">
-            <tokens xsi:type="xtext:Assignment" feature="val1" operator="+=">
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Keyword" value="#19"/>
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Assignment" feature="val1" operator="+=">
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-            </tokens>
-            <tokens xsi:type="xtext:Group" cardinality="*">
-              <tokens xsi:type="xtext:Keyword" value=","/>
-              <tokens xsi:type="xtext:Assignment" feature="val1" operator="+=">
+            </elements>
+            <elements xsi:type="xtext:Group" cardinality="*">
+              <elements xsi:type="xtext:Keyword" value=","/>
+              <elements xsi:type="xtext:Assignment" feature="val1" operator="+=">
                 <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-              </tokens>
-            </tokens>
-          </tokens>
-        </groups>
-        <groups xsi:type="xtext:Group">
-          <tokens xsi:type="xtext:Keyword" value="kw3"/>
-          <tokens xsi:type="xtext:Assignment" feature="val2" operator="=">
+              </elements>
+            </elements>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Keyword" value="kw3"/>
+          <elements xsi:type="xtext:Assignment" feature="val2" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-          </tokens>
-        </groups>
+          </elements>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="List4">
@@ -524,20 +524,20 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//List4"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="#20"/>
-        <tokens xsi:type="xtext:Assignment" feature="val1" operator="+=">
+        <elements xsi:type="xtext:Keyword" value="#20"/>
+        <elements xsi:type="xtext:Assignment" feature="val1" operator="+=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
-        <tokens xsi:type="xtext:Group" cardinality="*">
-          <tokens xsi:type="xtext:Keyword" value=","/>
-          <tokens xsi:type="xtext:Assignment" feature="val1" operator="+=">
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="*">
+          <elements xsi:type="xtext:Keyword" value=","/>
+          <elements xsi:type="xtext:Assignment" feature="val1" operator="+=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-          </tokens>
-        </tokens>
-        <tokens xsi:type="xtext:Keyword" value="kw3"/>
-        <tokens xsi:type="xtext:Assignment" feature="val2" operator="=">
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="kw3"/>
+        <elements xsi:type="xtext:Assignment" feature="val2" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-        </tokens>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="List5">
@@ -545,27 +545,27 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//List5"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="#21"/>
-        <tokens xsi:type="xtext:Alternatives">
-          <groups xsi:type="xtext:Group">
-            <tokens xsi:type="xtext:Assignment" feature="val1" operator="+=">
+        <elements xsi:type="xtext:Keyword" value="#21"/>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Assignment" feature="val1" operator="+=">
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-            </tokens>
-            <tokens xsi:type="xtext:Group" cardinality="*">
-              <tokens xsi:type="xtext:Keyword" value=","/>
-              <tokens xsi:type="xtext:Assignment" feature="val1" operator="+=">
+            </elements>
+            <elements xsi:type="xtext:Group" cardinality="*">
+              <elements xsi:type="xtext:Keyword" value=","/>
+              <elements xsi:type="xtext:Assignment" feature="val1" operator="+=">
                 <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-              </tokens>
-            </tokens>
-            <tokens xsi:type="xtext:Keyword" value="kw3"/>
-            <tokens xsi:type="xtext:Assignment" feature="val2" operator="=">
+              </elements>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value="kw3"/>
+            <elements xsi:type="xtext:Assignment" feature="val2" operator="=">
               <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-            </tokens>
-          </groups>
-          <groups xsi:type="xtext:Assignment" feature="val3" operator="=">
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="val3" operator="=">
             <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
-          </groups>
-        </tokens>
+          </elements>
+        </elements>
       </alternatives>
     </rules>
   </xtext:Grammar>
@@ -578,33 +578,33 @@
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" cardinality="?" value="^"/>
-        <tokens xsi:type="xtext:Alternatives">
-          <groups xsi:type="xtext:CharacterRange">
+        <elements xsi:type="xtext:Keyword" cardinality="?" value="^"/>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:CharacterRange">
             <left value="a"/>
             <right value="z"/>
-          </groups>
-          <groups xsi:type="xtext:CharacterRange">
+          </elements>
+          <elements xsi:type="xtext:CharacterRange">
             <left value="A"/>
             <right value="Z"/>
-          </groups>
-          <groups xsi:type="xtext:Keyword" value="_"/>
-        </tokens>
-        <tokens xsi:type="xtext:Alternatives" cardinality="*">
-          <groups xsi:type="xtext:CharacterRange">
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="_"/>
+        </elements>
+        <elements xsi:type="xtext:Alternatives" cardinality="*">
+          <elements xsi:type="xtext:CharacterRange">
             <left value="a"/>
             <right value="z"/>
-          </groups>
-          <groups xsi:type="xtext:CharacterRange">
+          </elements>
+          <elements xsi:type="xtext:CharacterRange">
             <left value="A"/>
             <right value="Z"/>
-          </groups>
-          <groups xsi:type="xtext:Keyword" value="_"/>
-          <groups xsi:type="xtext:CharacterRange">
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="_"/>
+          <elements xsi:type="xtext:CharacterRange">
             <left value="0"/>
             <right value="9"/>
-          </groups>
-        </tokens>
+          </elements>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:TerminalRule" name="INT">
@@ -621,56 +621,56 @@
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
-        <groups xsi:type="xtext:Group">
-          <tokens xsi:type="xtext:Keyword" value="&quot;"/>
-          <tokens xsi:type="xtext:Alternatives" cardinality="*">
-            <groups xsi:type="xtext:Group">
-              <tokens xsi:type="xtext:Keyword" value="\"/>
-              <tokens xsi:type="xtext:Alternatives">
-                <groups xsi:type="xtext:Keyword" value="b"/>
-                <groups xsi:type="xtext:Keyword" value="t"/>
-                <groups xsi:type="xtext:Keyword" value="n"/>
-                <groups xsi:type="xtext:Keyword" value="f"/>
-                <groups xsi:type="xtext:Keyword" value="r"/>
-                <groups xsi:type="xtext:Keyword" value="&quot;"/>
-                <groups xsi:type="xtext:Keyword" value="'"/>
-                <groups xsi:type="xtext:Keyword" value="\"/>
-              </tokens>
-            </groups>
-            <groups xsi:type="xtext:NegatedToken">
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Keyword" value="&quot;"/>
+          <elements xsi:type="xtext:Alternatives" cardinality="*">
+            <elements xsi:type="xtext:Group">
+              <elements xsi:type="xtext:Keyword" value="\"/>
+              <elements xsi:type="xtext:Alternatives">
+                <elements xsi:type="xtext:Keyword" value="b"/>
+                <elements xsi:type="xtext:Keyword" value="t"/>
+                <elements xsi:type="xtext:Keyword" value="n"/>
+                <elements xsi:type="xtext:Keyword" value="f"/>
+                <elements xsi:type="xtext:Keyword" value="r"/>
+                <elements xsi:type="xtext:Keyword" value="&quot;"/>
+                <elements xsi:type="xtext:Keyword" value="'"/>
+                <elements xsi:type="xtext:Keyword" value="\"/>
+              </elements>
+            </elements>
+            <elements xsi:type="xtext:NegatedToken">
               <terminal xsi:type="xtext:Alternatives">
-                <groups xsi:type="xtext:Keyword" value="\"/>
-                <groups xsi:type="xtext:Keyword" value="&quot;"/>
+                <elements xsi:type="xtext:Keyword" value="\"/>
+                <elements xsi:type="xtext:Keyword" value="&quot;"/>
               </terminal>
-            </groups>
-          </tokens>
-          <tokens xsi:type="xtext:Keyword" value="&quot;"/>
-        </groups>
-        <groups xsi:type="xtext:Group">
-          <tokens xsi:type="xtext:Keyword" value="'"/>
-          <tokens xsi:type="xtext:Alternatives" cardinality="*">
-            <groups xsi:type="xtext:Group">
-              <tokens xsi:type="xtext:Keyword" value="\"/>
-              <tokens xsi:type="xtext:Alternatives">
-                <groups xsi:type="xtext:Keyword" value="b"/>
-                <groups xsi:type="xtext:Keyword" value="t"/>
-                <groups xsi:type="xtext:Keyword" value="n"/>
-                <groups xsi:type="xtext:Keyword" value="f"/>
-                <groups xsi:type="xtext:Keyword" value="r"/>
-                <groups xsi:type="xtext:Keyword" value="&quot;"/>
-                <groups xsi:type="xtext:Keyword" value="'"/>
-                <groups xsi:type="xtext:Keyword" value="\"/>
-              </tokens>
-            </groups>
-            <groups xsi:type="xtext:NegatedToken">
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="&quot;"/>
+        </elements>
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Keyword" value="'"/>
+          <elements xsi:type="xtext:Alternatives" cardinality="*">
+            <elements xsi:type="xtext:Group">
+              <elements xsi:type="xtext:Keyword" value="\"/>
+              <elements xsi:type="xtext:Alternatives">
+                <elements xsi:type="xtext:Keyword" value="b"/>
+                <elements xsi:type="xtext:Keyword" value="t"/>
+                <elements xsi:type="xtext:Keyword" value="n"/>
+                <elements xsi:type="xtext:Keyword" value="f"/>
+                <elements xsi:type="xtext:Keyword" value="r"/>
+                <elements xsi:type="xtext:Keyword" value="&quot;"/>
+                <elements xsi:type="xtext:Keyword" value="'"/>
+                <elements xsi:type="xtext:Keyword" value="\"/>
+              </elements>
+            </elements>
+            <elements xsi:type="xtext:NegatedToken">
               <terminal xsi:type="xtext:Alternatives">
-                <groups xsi:type="xtext:Keyword" value="\"/>
-                <groups xsi:type="xtext:Keyword" value="'"/>
+                <elements xsi:type="xtext:Keyword" value="\"/>
+                <elements xsi:type="xtext:Keyword" value="'"/>
               </terminal>
-            </groups>
-          </tokens>
-          <tokens xsi:type="xtext:Keyword" value="'"/>
-        </groups>
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value="'"/>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:TerminalRule" name="ML_COMMENT">
@@ -678,10 +678,10 @@
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="/*"/>
-        <tokens xsi:type="xtext:UntilToken">
+        <elements xsi:type="xtext:Keyword" value="/*"/>
+        <elements xsi:type="xtext:UntilToken">
           <terminal xsi:type="xtext:Keyword" value="*/"/>
-        </tokens>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:TerminalRule" name="SL_COMMENT">
@@ -689,17 +689,17 @@
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Group">
-        <tokens xsi:type="xtext:Keyword" value="//"/>
-        <tokens xsi:type="xtext:NegatedToken" cardinality="*">
+        <elements xsi:type="xtext:Keyword" value="//"/>
+        <elements xsi:type="xtext:NegatedToken" cardinality="*">
           <terminal xsi:type="xtext:Alternatives">
-            <groups xsi:type="xtext:Keyword" value="&#xA;"/>
-            <groups xsi:type="xtext:Keyword" value="&#xD;"/>
+            <elements xsi:type="xtext:Keyword" value="&#xA;"/>
+            <elements xsi:type="xtext:Keyword" value="&#xD;"/>
           </terminal>
-        </tokens>
-        <tokens xsi:type="xtext:Group" cardinality="?">
-          <tokens xsi:type="xtext:Keyword" cardinality="?" value="&#xD;"/>
-          <tokens xsi:type="xtext:Keyword" value="&#xA;"/>
-        </tokens>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" cardinality="?" value="&#xD;"/>
+          <elements xsi:type="xtext:Keyword" value="&#xA;"/>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:TerminalRule" name="WS">
@@ -707,10 +707,10 @@
         <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives" cardinality="+">
-        <groups xsi:type="xtext:Keyword" value=" "/>
-        <groups xsi:type="xtext:Keyword" value="&#x9;"/>
-        <groups xsi:type="xtext:Keyword" value="&#xD;"/>
-        <groups xsi:type="xtext:Keyword" value="&#xA;"/>
+        <elements xsi:type="xtext:Keyword" value=" "/>
+        <elements xsi:type="xtext:Keyword" value="&#x9;"/>
+        <elements xsi:type="xtext:Keyword" value="&#xD;"/>
+        <elements xsi:type="xtext:Keyword" value="&#xA;"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:TerminalRule" name="ANY_OTHER">

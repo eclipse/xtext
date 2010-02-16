@@ -2020,11 +2020,11 @@ protected class TypeRef_ClassifierAssignment_1 extends AssignmentToken  {
 /************ begin Rule Alternatives ****************
  *
  * Alternatives returns AbstractElement:
- *   UnorderedGroup ({Alternatives.groups+=current} ("|" groups+=UnorderedGroup)+)?;
+ *   UnorderedGroup ({Alternatives.elements+=current} ("|" elements+=UnorderedGroup)+)?;
  *
  **/
 
-// UnorderedGroup ({Alternatives.groups+=current} ("|" groups+=UnorderedGroup)+)?
+// UnorderedGroup ({Alternatives.elements+=current} ("|" elements+=UnorderedGroup)+)?
 protected class Alternatives_Group extends GroupToken {
 	
 	public Alternatives_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2087,7 +2087,7 @@ protected class Alternatives_UnorderedGroupParserRuleCall_0 extends RuleCallToke
 	}	
 }
 
-// ({Alternatives.groups+=current} ("|" groups+=UnorderedGroup)+)?
+// ({Alternatives.elements+=current} ("|" elements+=UnorderedGroup)+)?
 protected class Alternatives_Group_1 extends GroupToken {
 	
 	public Alternatives_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2109,16 +2109,16 @@ protected class Alternatives_Group_1 extends GroupToken {
 		
 }
 
-// {Alternatives.groups+=current}
-protected class Alternatives_AlternativesGroupsAction_1_0 extends ActionToken  {
+// {Alternatives.elements+=current}
+protected class Alternatives_AlternativesElementsAction_1_0 extends ActionToken  {
 
-	public Alternatives_AlternativesGroupsAction_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Alternatives_AlternativesElementsAction_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getAlternativesAccess().getAlternativesGroupsAction_1_0();
+		return grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0();
 	}
 
     @Override
@@ -2132,15 +2132,15 @@ protected class Alternatives_AlternativesGroupsAction_1_0 extends ActionToken  {
 	
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier())) return null;
-		Object val = current.getConsumable("groups", false);
+		if(!current.isInstanceOf(grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier())) return null;
+		Object val = current.getConsumable("elements", false);
 		if(val == null) return null;
-		if(!current.isConsumedWithLastConsumtion("groups")) return null;
+		if(!current.isConsumedWithLastConsumtion("elements")) return null;
 		return getDescr((EObject) val);
 	}
 }
 
-// ("|" groups+=UnorderedGroup)+
+// ("|" elements+=UnorderedGroup)+
 protected class Alternatives_Group_1_1 extends GroupToken {
 	
 	public Alternatives_Group_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2155,7 +2155,7 @@ protected class Alternatives_Group_1_1 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Alternatives_GroupsAssignment_1_1_1(parent, this, 0, inst);
+			case 0: return new Alternatives_ElementsAssignment_1_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -2178,23 +2178,23 @@ protected class Alternatives_VerticalLineKeyword_1_1_0 extends KeywordToken  {
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Alternatives_Group_1_1(parent, this, 0, inst);
-			case 1: return new Alternatives_AlternativesGroupsAction_1_0(parent, this, 1, inst);
+			case 1: return new Alternatives_AlternativesElementsAction_1_0(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
 		
 }
 
-// groups+=UnorderedGroup
-protected class Alternatives_GroupsAssignment_1_1_1 extends AssignmentToken  {
+// elements+=UnorderedGroup
+protected class Alternatives_ElementsAssignment_1_1_1 extends AssignmentToken  {
 	
-	public Alternatives_GroupsAssignment_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Alternatives_ElementsAssignment_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getAlternativesAccess().getGroupsAssignment_1_1_1();
+		return grammarAccess.getAlternativesAccess().getElementsAssignment_1_1_1();
 	}
 
     @Override
@@ -2207,13 +2207,13 @@ protected class Alternatives_GroupsAssignment_1_1_1 extends AssignmentToken  {
 		
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("groups",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("groups");
+		if((value = current.getConsumable("elements",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("elements");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getUnorderedGroupRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getAlternativesAccess().getGroupsUnorderedGroupParserRuleCall_1_1_1_0(); 
+				element = grammarAccess.getAlternativesAccess().getElementsUnorderedGroupParserRuleCall_1_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2460,11 +2460,11 @@ protected class UnorderedGroup_ElementsAssignment_1_1_1 extends AssignmentToken 
 /************ begin Rule Group ****************
  *
  * Group returns AbstractElement:
- *   AbstractToken ({Group.tokens+=current} tokens+=AbstractToken+)?;
+ *   AbstractToken ({Group.elements+=current} elements+=AbstractToken+)?;
  *
  **/
 
-// AbstractToken ({Group.tokens+=current} tokens+=AbstractToken+)?
+// AbstractToken ({Group.elements+=current} elements+=AbstractToken+)?
 protected class Group_Group extends GroupToken {
 	
 	public Group_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2527,7 +2527,7 @@ protected class Group_AbstractTokenParserRuleCall_0 extends RuleCallToken {
 	}	
 }
 
-// ({Group.tokens+=current} tokens+=AbstractToken+)?
+// ({Group.elements+=current} elements+=AbstractToken+)?
 protected class Group_Group_1 extends GroupToken {
 	
 	public Group_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2542,23 +2542,23 @@ protected class Group_Group_1 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Group_TokensAssignment_1_1(parent, this, 0, inst);
+			case 0: return new Group_ElementsAssignment_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 }
 
-// {Group.tokens+=current}
-protected class Group_GroupTokensAction_1_0 extends ActionToken  {
+// {Group.elements+=current}
+protected class Group_GroupElementsAction_1_0 extends ActionToken  {
 
-	public Group_GroupTokensAction_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Group_GroupElementsAction_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getGroupAccess().getGroupTokensAction_1_0();
+		return grammarAccess.getGroupAccess().getGroupElementsAction_1_0();
 	}
 
     @Override
@@ -2572,24 +2572,24 @@ protected class Group_GroupTokensAction_1_0 extends ActionToken  {
 	
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getGroupAccess().getGroupTokensAction_1_0().getType().getClassifier())) return null;
-		Object val = current.getConsumable("tokens", false);
+		if(!current.isInstanceOf(grammarAccess.getGroupAccess().getGroupElementsAction_1_0().getType().getClassifier())) return null;
+		Object val = current.getConsumable("elements", false);
 		if(val == null) return null;
-		if(!current.isConsumedWithLastConsumtion("tokens")) return null;
+		if(!current.isConsumedWithLastConsumtion("elements")) return null;
 		return getDescr((EObject) val);
 	}
 }
 
-// tokens+=AbstractToken+
-protected class Group_TokensAssignment_1_1 extends AssignmentToken  {
+// elements+=AbstractToken+
+protected class Group_ElementsAssignment_1_1 extends AssignmentToken  {
 	
-	public Group_TokensAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Group_ElementsAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getGroupAccess().getTokensAssignment_1_1();
+		return grammarAccess.getGroupAccess().getElementsAssignment_1_1();
 	}
 
     @Override
@@ -2602,13 +2602,13 @@ protected class Group_TokensAssignment_1_1 extends AssignmentToken  {
 		
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("tokens",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("tokens");
+		if((value = current.getConsumable("elements",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("elements");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAbstractTokenRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getGroupAccess().getTokensAbstractTokenParserRuleCall_1_1_0(); 
+				element = grammarAccess.getGroupAccess().getElementsAbstractTokenParserRuleCall_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -2620,8 +2620,8 @@ protected class Group_TokensAssignment_1_1 extends AssignmentToken  {
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Group_TokensAssignment_1_1(parent, next, actIndex, consumed);
-			case 1: return new Group_GroupTokensAction_1_0(parent, next, actIndex, consumed);
+			case 0: return new Group_ElementsAssignment_1_1(parent, next, actIndex, consumed);
+			case 1: return new Group_GroupElementsAction_1_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -3892,13 +3892,13 @@ protected class ParenthesizedAssignableElement_RightParenthesisKeyword_2 extends
 /************ begin Rule AssignableAlternatives ****************
  *
  * AssignableAlternatives returns AbstractElement:
- *   AssignableTerminal ({Alternatives.groups+=current} ("|" groups+=AssignableTerminal)
- *   +)?;
+ *   AssignableTerminal ({Alternatives.elements+=current} ("|" elements+=
+ *   AssignableTerminal)+)?;
  *
  **/
 
-// AssignableTerminal ({Alternatives.groups+=current} ("|" groups+=AssignableTerminal)
-// +)?
+// AssignableTerminal ({Alternatives.elements+=current} ("|" elements+=
+// AssignableTerminal)+)?
 protected class AssignableAlternatives_Group extends GroupToken {
 	
 	public AssignableAlternatives_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -3961,7 +3961,7 @@ protected class AssignableAlternatives_AssignableTerminalParserRuleCall_0 extend
 	}	
 }
 
-// ({Alternatives.groups+=current} ("|" groups+=AssignableTerminal)+)?
+// ({Alternatives.elements+=current} ("|" elements+=AssignableTerminal)+)?
 protected class AssignableAlternatives_Group_1 extends GroupToken {
 	
 	public AssignableAlternatives_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -3983,16 +3983,16 @@ protected class AssignableAlternatives_Group_1 extends GroupToken {
 		
 }
 
-// {Alternatives.groups+=current}
-protected class AssignableAlternatives_AlternativesGroupsAction_1_0 extends ActionToken  {
+// {Alternatives.elements+=current}
+protected class AssignableAlternatives_AlternativesElementsAction_1_0 extends ActionToken  {
 
-	public AssignableAlternatives_AlternativesGroupsAction_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public AssignableAlternatives_AlternativesElementsAction_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getAssignableAlternativesAccess().getAlternativesGroupsAction_1_0();
+		return grammarAccess.getAssignableAlternativesAccess().getAlternativesElementsAction_1_0();
 	}
 
     @Override
@@ -4006,15 +4006,15 @@ protected class AssignableAlternatives_AlternativesGroupsAction_1_0 extends Acti
 	
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getAssignableAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier())) return null;
-		Object val = current.getConsumable("groups", false);
+		if(!current.isInstanceOf(grammarAccess.getAssignableAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier())) return null;
+		Object val = current.getConsumable("elements", false);
 		if(val == null) return null;
-		if(!current.isConsumedWithLastConsumtion("groups")) return null;
+		if(!current.isConsumedWithLastConsumtion("elements")) return null;
 		return getDescr((EObject) val);
 	}
 }
 
-// ("|" groups+=AssignableTerminal)+
+// ("|" elements+=AssignableTerminal)+
 protected class AssignableAlternatives_Group_1_1 extends GroupToken {
 	
 	public AssignableAlternatives_Group_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -4029,7 +4029,7 @@ protected class AssignableAlternatives_Group_1_1 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new AssignableAlternatives_GroupsAssignment_1_1_1(parent, this, 0, inst);
+			case 0: return new AssignableAlternatives_ElementsAssignment_1_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -4052,23 +4052,23 @@ protected class AssignableAlternatives_VerticalLineKeyword_1_1_0 extends Keyword
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new AssignableAlternatives_Group_1_1(parent, this, 0, inst);
-			case 1: return new AssignableAlternatives_AlternativesGroupsAction_1_0(parent, this, 1, inst);
+			case 1: return new AssignableAlternatives_AlternativesElementsAction_1_0(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
 		
 }
 
-// groups+=AssignableTerminal
-protected class AssignableAlternatives_GroupsAssignment_1_1_1 extends AssignmentToken  {
+// elements+=AssignableTerminal
+protected class AssignableAlternatives_ElementsAssignment_1_1_1 extends AssignmentToken  {
 	
-	public AssignableAlternatives_GroupsAssignment_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public AssignableAlternatives_ElementsAssignment_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getAssignableAlternativesAccess().getGroupsAssignment_1_1_1();
+		return grammarAccess.getAssignableAlternativesAccess().getElementsAssignment_1_1_1();
 	}
 
     @Override
@@ -4081,13 +4081,13 @@ protected class AssignableAlternatives_GroupsAssignment_1_1_1 extends Assignment
 		
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("groups",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("groups");
+		if((value = current.getConsumable("elements",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("elements");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getAssignableTerminalRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getAssignableAlternativesAccess().getGroupsAssignableTerminalParserRuleCall_1_1_1_0(); 
+				element = grammarAccess.getAssignableAlternativesAccess().getElementsAssignableTerminalParserRuleCall_1_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -4835,11 +4835,11 @@ protected class TerminalRule_SemicolonKeyword_5 extends KeywordToken  {
 /************ begin Rule TerminalAlternatives ****************
  *
  * TerminalAlternatives returns AbstractElement:
- *   TerminalGroup ({Alternatives.groups+=current} ("|" groups+=TerminalGroup)+)?;
+ *   TerminalGroup ({Alternatives.elements+=current} ("|" elements+=TerminalGroup)+)?;
  *
  **/
 
-// TerminalGroup ({Alternatives.groups+=current} ("|" groups+=TerminalGroup)+)?
+// TerminalGroup ({Alternatives.elements+=current} ("|" elements+=TerminalGroup)+)?
 protected class TerminalAlternatives_Group extends GroupToken {
 	
 	public TerminalAlternatives_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -4902,7 +4902,7 @@ protected class TerminalAlternatives_TerminalGroupParserRuleCall_0 extends RuleC
 	}	
 }
 
-// ({Alternatives.groups+=current} ("|" groups+=TerminalGroup)+)?
+// ({Alternatives.elements+=current} ("|" elements+=TerminalGroup)+)?
 protected class TerminalAlternatives_Group_1 extends GroupToken {
 	
 	public TerminalAlternatives_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -4924,16 +4924,16 @@ protected class TerminalAlternatives_Group_1 extends GroupToken {
 		
 }
 
-// {Alternatives.groups+=current}
-protected class TerminalAlternatives_AlternativesGroupsAction_1_0 extends ActionToken  {
+// {Alternatives.elements+=current}
+protected class TerminalAlternatives_AlternativesElementsAction_1_0 extends ActionToken  {
 
-	public TerminalAlternatives_AlternativesGroupsAction_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public TerminalAlternatives_AlternativesElementsAction_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getTerminalAlternativesAccess().getAlternativesGroupsAction_1_0();
+		return grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0();
 	}
 
     @Override
@@ -4947,15 +4947,15 @@ protected class TerminalAlternatives_AlternativesGroupsAction_1_0 extends Action
 	
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getTerminalAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier())) return null;
-		Object val = current.getConsumable("groups", false);
+		if(!current.isInstanceOf(grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier())) return null;
+		Object val = current.getConsumable("elements", false);
 		if(val == null) return null;
-		if(!current.isConsumedWithLastConsumtion("groups")) return null;
+		if(!current.isConsumedWithLastConsumtion("elements")) return null;
 		return getDescr((EObject) val);
 	}
 }
 
-// ("|" groups+=TerminalGroup)+
+// ("|" elements+=TerminalGroup)+
 protected class TerminalAlternatives_Group_1_1 extends GroupToken {
 	
 	public TerminalAlternatives_Group_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -4970,7 +4970,7 @@ protected class TerminalAlternatives_Group_1_1 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new TerminalAlternatives_GroupsAssignment_1_1_1(parent, this, 0, inst);
+			case 0: return new TerminalAlternatives_ElementsAssignment_1_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -4993,23 +4993,23 @@ protected class TerminalAlternatives_VerticalLineKeyword_1_1_0 extends KeywordTo
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new TerminalAlternatives_Group_1_1(parent, this, 0, inst);
-			case 1: return new TerminalAlternatives_AlternativesGroupsAction_1_0(parent, this, 1, inst);
+			case 1: return new TerminalAlternatives_AlternativesElementsAction_1_0(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
 		
 }
 
-// groups+=TerminalGroup
-protected class TerminalAlternatives_GroupsAssignment_1_1_1 extends AssignmentToken  {
+// elements+=TerminalGroup
+protected class TerminalAlternatives_ElementsAssignment_1_1_1 extends AssignmentToken  {
 	
-	public TerminalAlternatives_GroupsAssignment_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public TerminalAlternatives_ElementsAssignment_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getTerminalAlternativesAccess().getGroupsAssignment_1_1_1();
+		return grammarAccess.getTerminalAlternativesAccess().getElementsAssignment_1_1_1();
 	}
 
     @Override
@@ -5022,13 +5022,13 @@ protected class TerminalAlternatives_GroupsAssignment_1_1_1 extends AssignmentTo
 		
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("groups",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("groups");
+		if((value = current.getConsumable("elements",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("elements");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTerminalGroupRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getTerminalAlternativesAccess().getGroupsTerminalGroupParserRuleCall_1_1_1_0(); 
+				element = grammarAccess.getTerminalAlternativesAccess().getElementsTerminalGroupParserRuleCall_1_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -5055,11 +5055,11 @@ protected class TerminalAlternatives_GroupsAssignment_1_1_1 extends AssignmentTo
 /************ begin Rule TerminalGroup ****************
  *
  * TerminalGroup returns AbstractElement:
- *   TerminalToken ({Group.tokens+=current} tokens+=TerminalToken+)?;
+ *   TerminalToken ({Group.elements+=current} elements+=TerminalToken+)?;
  *
  **/
 
-// TerminalToken ({Group.tokens+=current} tokens+=TerminalToken+)?
+// TerminalToken ({Group.elements+=current} elements+=TerminalToken+)?
 protected class TerminalGroup_Group extends GroupToken {
 	
 	public TerminalGroup_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -5122,7 +5122,7 @@ protected class TerminalGroup_TerminalTokenParserRuleCall_0 extends RuleCallToke
 	}	
 }
 
-// ({Group.tokens+=current} tokens+=TerminalToken+)?
+// ({Group.elements+=current} elements+=TerminalToken+)?
 protected class TerminalGroup_Group_1 extends GroupToken {
 	
 	public TerminalGroup_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -5137,23 +5137,23 @@ protected class TerminalGroup_Group_1 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new TerminalGroup_TokensAssignment_1_1(parent, this, 0, inst);
+			case 0: return new TerminalGroup_ElementsAssignment_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
 }
 
-// {Group.tokens+=current}
-protected class TerminalGroup_GroupTokensAction_1_0 extends ActionToken  {
+// {Group.elements+=current}
+protected class TerminalGroup_GroupElementsAction_1_0 extends ActionToken  {
 
-	public TerminalGroup_GroupTokensAction_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public TerminalGroup_GroupElementsAction_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getTerminalGroupAccess().getGroupTokensAction_1_0();
+		return grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0();
 	}
 
     @Override
@@ -5167,24 +5167,24 @@ protected class TerminalGroup_GroupTokensAction_1_0 extends ActionToken  {
 	
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getTerminalGroupAccess().getGroupTokensAction_1_0().getType().getClassifier())) return null;
-		Object val = current.getConsumable("tokens", false);
+		if(!current.isInstanceOf(grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0().getType().getClassifier())) return null;
+		Object val = current.getConsumable("elements", false);
 		if(val == null) return null;
-		if(!current.isConsumedWithLastConsumtion("tokens")) return null;
+		if(!current.isConsumedWithLastConsumtion("elements")) return null;
 		return getDescr((EObject) val);
 	}
 }
 
-// tokens+=TerminalToken+
-protected class TerminalGroup_TokensAssignment_1_1 extends AssignmentToken  {
+// elements+=TerminalToken+
+protected class TerminalGroup_ElementsAssignment_1_1 extends AssignmentToken  {
 	
-	public TerminalGroup_TokensAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public TerminalGroup_ElementsAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getTerminalGroupAccess().getTokensAssignment_1_1();
+		return grammarAccess.getTerminalGroupAccess().getElementsAssignment_1_1();
 	}
 
     @Override
@@ -5197,13 +5197,13 @@ protected class TerminalGroup_TokensAssignment_1_1 extends AssignmentToken  {
 		
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("tokens",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("tokens");
+		if((value = current.getConsumable("elements",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("elements");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getTerminalTokenRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getTerminalGroupAccess().getTokensTerminalTokenParserRuleCall_1_1_0(); 
+				element = grammarAccess.getTerminalGroupAccess().getElementsTerminalTokenParserRuleCall_1_1_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -5215,8 +5215,8 @@ protected class TerminalGroup_TokensAssignment_1_1 extends AssignmentToken  {
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new TerminalGroup_TokensAssignment_1_1(parent, next, actIndex, consumed);
-			case 1: return new TerminalGroup_GroupTokensAction_1_0(parent, next, actIndex, consumed);
+			case 0: return new TerminalGroup_ElementsAssignment_1_1(parent, next, actIndex, consumed);
+			case 1: return new TerminalGroup_GroupElementsAction_1_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -6562,12 +6562,12 @@ protected class EnumRule_SemicolonKeyword_5 extends KeywordToken  {
 /************ begin Rule EnumLiterals ****************
  *
  * EnumLiterals returns AbstractElement:
- *   EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=
+ *   EnumLiteralDeclaration ({Alternatives.elements+=current} ("|" elements+=
  *   EnumLiteralDeclaration)+)?;
  *
  **/
 
-// EnumLiteralDeclaration ({Alternatives.groups+=current} ("|" groups+=
+// EnumLiteralDeclaration ({Alternatives.elements+=current} ("|" elements+=
 // EnumLiteralDeclaration)+)?
 protected class EnumLiterals_Group extends GroupToken {
 	
@@ -6631,7 +6631,7 @@ protected class EnumLiterals_EnumLiteralDeclarationParserRuleCall_0 extends Rule
 	}	
 }
 
-// ({Alternatives.groups+=current} ("|" groups+=EnumLiteralDeclaration)+)?
+// ({Alternatives.elements+=current} ("|" elements+=EnumLiteralDeclaration)+)?
 protected class EnumLiterals_Group_1 extends GroupToken {
 	
 	public EnumLiterals_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -6653,16 +6653,16 @@ protected class EnumLiterals_Group_1 extends GroupToken {
 		
 }
 
-// {Alternatives.groups+=current}
-protected class EnumLiterals_AlternativesGroupsAction_1_0 extends ActionToken  {
+// {Alternatives.elements+=current}
+protected class EnumLiterals_AlternativesElementsAction_1_0 extends ActionToken  {
 
-	public EnumLiterals_AlternativesGroupsAction_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public EnumLiterals_AlternativesElementsAction_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getEnumLiteralsAccess().getAlternativesGroupsAction_1_0();
+		return grammarAccess.getEnumLiteralsAccess().getAlternativesElementsAction_1_0();
 	}
 
     @Override
@@ -6676,15 +6676,15 @@ protected class EnumLiterals_AlternativesGroupsAction_1_0 extends ActionToken  {
 	
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getEnumLiteralsAccess().getAlternativesGroupsAction_1_0().getType().getClassifier())) return null;
-		Object val = current.getConsumable("groups", false);
+		if(!current.isInstanceOf(grammarAccess.getEnumLiteralsAccess().getAlternativesElementsAction_1_0().getType().getClassifier())) return null;
+		Object val = current.getConsumable("elements", false);
 		if(val == null) return null;
-		if(!current.isConsumedWithLastConsumtion("groups")) return null;
+		if(!current.isConsumedWithLastConsumtion("elements")) return null;
 		return getDescr((EObject) val);
 	}
 }
 
-// ("|" groups+=EnumLiteralDeclaration)+
+// ("|" elements+=EnumLiteralDeclaration)+
 protected class EnumLiterals_Group_1_1 extends GroupToken {
 	
 	public EnumLiterals_Group_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -6699,7 +6699,7 @@ protected class EnumLiterals_Group_1_1 extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new EnumLiterals_GroupsAssignment_1_1_1(parent, this, 0, inst);
+			case 0: return new EnumLiterals_ElementsAssignment_1_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -6722,23 +6722,23 @@ protected class EnumLiterals_VerticalLineKeyword_1_1_0 extends KeywordToken  {
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new EnumLiterals_Group_1_1(parent, this, 0, inst);
-			case 1: return new EnumLiterals_AlternativesGroupsAction_1_0(parent, this, 1, inst);
+			case 1: return new EnumLiterals_AlternativesElementsAction_1_0(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
 		
 }
 
-// groups+=EnumLiteralDeclaration
-protected class EnumLiterals_GroupsAssignment_1_1_1 extends AssignmentToken  {
+// elements+=EnumLiteralDeclaration
+protected class EnumLiterals_ElementsAssignment_1_1_1 extends AssignmentToken  {
 	
-	public EnumLiterals_GroupsAssignment_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public EnumLiterals_ElementsAssignment_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getEnumLiteralsAccess().getGroupsAssignment_1_1_1();
+		return grammarAccess.getEnumLiteralsAccess().getElementsAssignment_1_1_1();
 	}
 
     @Override
@@ -6751,13 +6751,13 @@ protected class EnumLiterals_GroupsAssignment_1_1_1 extends AssignmentToken  {
 		
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("groups",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("groups");
+		if((value = current.getConsumable("elements",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("elements");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getEnumLiteralDeclarationRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getEnumLiteralsAccess().getGroupsEnumLiteralDeclarationParserRuleCall_1_1_1_0(); 
+				element = grammarAccess.getEnumLiteralsAccess().getElementsEnumLiteralDeclarationParserRuleCall_1_1_1_0(); 
 				consumed = obj;
 				return param;
 			}

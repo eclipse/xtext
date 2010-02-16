@@ -817,15 +817,15 @@ ruleAlternatives returns [EObject current=null]
     }
 ((
     { 
-        temp=factory.create(grammarAccess.getAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier());
+        temp=factory.create(grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier());
         try {
-        	factory.add(temp, "groups", $current, null /*ParserRule*/, currentNode);
+        	factory.add(temp, "elements", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
         	handleValueConverterException(vce);
         }
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getAlternativesAccess().getAlternativesGroupsAction_1_0(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.getAlternativesAccess().getAlternativesElementsAction_1_0(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -838,9 +838,9 @@ ruleAlternatives returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getAlternativesAccess().getGroupsUnorderedGroupParserRuleCall_1_1_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getAlternativesAccess().getElementsUnorderedGroupParserRuleCall_1_1_1_0(), currentNode); 
 	    }
-		lv_groups_3_0=ruleUnorderedGroup		{
+		lv_elements_3_0=ruleUnorderedGroup		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getAlternativesRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -848,8 +848,8 @@ ruleAlternatives returns [EObject current=null]
 	        try {
 	       		add(
 	       			$current, 
-	       			"groups",
-	        		lv_groups_3_0, 
+	       			"elements",
+	        		lv_elements_3_0, 
 	        		"UnorderedGroup", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -969,15 +969,15 @@ ruleGroup returns [EObject current=null]
     }
 ((
     { 
-        temp=factory.create(grammarAccess.getGroupAccess().getGroupTokensAction_1_0().getType().getClassifier());
+        temp=factory.create(grammarAccess.getGroupAccess().getGroupElementsAction_1_0().getType().getClassifier());
         try {
-        	factory.add(temp, "tokens", $current, null /*ParserRule*/, currentNode);
+        	factory.add(temp, "elements", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
         	handleValueConverterException(vce);
         }
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getGroupAccess().getGroupTokensAction_1_0(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.getGroupAccess().getGroupElementsAction_1_0(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -986,9 +986,9 @@ ruleGroup returns [EObject current=null]
 )(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getGroupAccess().getTokensAbstractTokenParserRuleCall_1_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getGroupAccess().getElementsAbstractTokenParserRuleCall_1_1_0(), currentNode); 
 	    }
-		lv_tokens_2_0=ruleAbstractToken		{
+		lv_elements_2_0=ruleAbstractToken		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getGroupRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -996,8 +996,8 @@ ruleGroup returns [EObject current=null]
 	        try {
 	       		add(
 	       			$current, 
-	       			"tokens",
-	        		lv_tokens_2_0, 
+	       			"elements",
+	        		lv_elements_2_0, 
 	        		"AbstractToken", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -1683,15 +1683,15 @@ ruleAssignableAlternatives returns [EObject current=null]
     }
 ((
     { 
-        temp=factory.create(grammarAccess.getAssignableAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier());
+        temp=factory.create(grammarAccess.getAssignableAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier());
         try {
-        	factory.add(temp, "groups", $current, null /*ParserRule*/, currentNode);
+        	factory.add(temp, "elements", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
         	handleValueConverterException(vce);
         }
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getAssignableAlternativesAccess().getAlternativesGroupsAction_1_0(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.getAssignableAlternativesAccess().getAlternativesElementsAction_1_0(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -1704,9 +1704,9 @@ ruleAssignableAlternatives returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getAssignableAlternativesAccess().getGroupsAssignableTerminalParserRuleCall_1_1_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getAssignableAlternativesAccess().getElementsAssignableTerminalParserRuleCall_1_1_1_0(), currentNode); 
 	    }
-		lv_groups_3_0=ruleAssignableTerminal		{
+		lv_elements_3_0=ruleAssignableTerminal		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getAssignableAlternativesRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -1714,8 +1714,8 @@ ruleAssignableAlternatives returns [EObject current=null]
 	        try {
 	       		add(
 	       			$current, 
-	       			"groups",
-	        		lv_groups_3_0, 
+	       			"elements",
+	        		lv_elements_3_0, 
 	        		"AssignableTerminal", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -2035,15 +2035,15 @@ ruleTerminalAlternatives returns [EObject current=null]
     }
 ((
     { 
-        temp=factory.create(grammarAccess.getTerminalAlternativesAccess().getAlternativesGroupsAction_1_0().getType().getClassifier());
+        temp=factory.create(grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0().getType().getClassifier());
         try {
-        	factory.add(temp, "groups", $current, null /*ParserRule*/, currentNode);
+        	factory.add(temp, "elements", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
         	handleValueConverterException(vce);
         }
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getTerminalAlternativesAccess().getAlternativesGroupsAction_1_0(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.getTerminalAlternativesAccess().getAlternativesElementsAction_1_0(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -2056,9 +2056,9 @@ ruleTerminalAlternatives returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getTerminalAlternativesAccess().getGroupsTerminalGroupParserRuleCall_1_1_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getTerminalAlternativesAccess().getElementsTerminalGroupParserRuleCall_1_1_1_0(), currentNode); 
 	    }
-		lv_groups_3_0=ruleTerminalGroup		{
+		lv_elements_3_0=ruleTerminalGroup		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getTerminalAlternativesRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -2066,8 +2066,8 @@ ruleTerminalAlternatives returns [EObject current=null]
 	        try {
 	       		add(
 	       			$current, 
-	       			"groups",
-	        		lv_groups_3_0, 
+	       			"elements",
+	        		lv_elements_3_0, 
 	        		"TerminalGroup", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -2111,15 +2111,15 @@ ruleTerminalGroup returns [EObject current=null]
     }
 ((
     { 
-        temp=factory.create(grammarAccess.getTerminalGroupAccess().getGroupTokensAction_1_0().getType().getClassifier());
+        temp=factory.create(grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0().getType().getClassifier());
         try {
-        	factory.add(temp, "tokens", $current, null /*ParserRule*/, currentNode);
+        	factory.add(temp, "elements", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
         	handleValueConverterException(vce);
         }
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getTerminalGroupAccess().getGroupTokensAction_1_0(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.getTerminalGroupAccess().getGroupElementsAction_1_0(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -2128,9 +2128,9 @@ ruleTerminalGroup returns [EObject current=null]
 )(
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getTerminalGroupAccess().getTokensTerminalTokenParserRuleCall_1_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getTerminalGroupAccess().getElementsTerminalTokenParserRuleCall_1_1_0(), currentNode); 
 	    }
-		lv_tokens_2_0=ruleTerminalToken		{
+		lv_elements_2_0=ruleTerminalToken		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getTerminalGroupRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -2138,8 +2138,8 @@ ruleTerminalGroup returns [EObject current=null]
 	        try {
 	       		add(
 	       			$current, 
-	       			"tokens",
-	        		lv_tokens_2_0, 
+	       			"elements",
+	        		lv_elements_2_0, 
 	        		"TerminalToken", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -2756,15 +2756,15 @@ ruleEnumLiterals returns [EObject current=null]
     }
 ((
     { 
-        temp=factory.create(grammarAccess.getEnumLiteralsAccess().getAlternativesGroupsAction_1_0().getType().getClassifier());
+        temp=factory.create(grammarAccess.getEnumLiteralsAccess().getAlternativesElementsAction_1_0().getType().getClassifier());
         try {
-        	factory.add(temp, "groups", $current, null /*ParserRule*/, currentNode);
+        	factory.add(temp, "elements", $current, null /*ParserRule*/, currentNode);
         } catch(ValueConverterException vce) {
         	handleValueConverterException(vce);
         }
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getEnumLiteralsAccess().getAlternativesGroupsAction_1_0(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.getEnumLiteralsAccess().getAlternativesElementsAction_1_0(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -2777,9 +2777,9 @@ ruleEnumLiterals returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getEnumLiteralsAccess().getGroupsEnumLiteralDeclarationParserRuleCall_1_1_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getEnumLiteralsAccess().getElementsEnumLiteralDeclarationParserRuleCall_1_1_1_0(), currentNode); 
 	    }
-		lv_groups_3_0=ruleEnumLiteralDeclaration		{
+		lv_elements_3_0=ruleEnumLiteralDeclaration		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getEnumLiteralsRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -2787,8 +2787,8 @@ ruleEnumLiterals returns [EObject current=null]
 	        try {
 	       		add(
 	       			$current, 
-	       			"groups",
-	        		lv_groups_3_0, 
+	       			"elements",
+	        		lv_elements_3_0, 
 	        		"EnumLiteralDeclaration", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {

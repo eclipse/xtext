@@ -91,6 +91,7 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
       case XtextPackage.UNORDERED_GROUP: return createUnorderedGroup();
       case XtextPackage.GROUP: return createGroup();
       case XtextPackage.CHARACTER_RANGE: return createCharacterRange();
+      case XtextPackage.COMPOUND_ELEMENT: return createCompoundElement();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -358,6 +359,17 @@ public class XtextFactoryImpl extends EFactoryImpl implements XtextFactory
   {
     CharacterRangeImpl characterRange = new CharacterRangeImpl();
     return characterRange;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public CompoundElement createCompoundElement()
+  {
+    CompoundElementImpl compoundElement = new CompoundElementImpl();
+    return compoundElement;
   }
 
   /**

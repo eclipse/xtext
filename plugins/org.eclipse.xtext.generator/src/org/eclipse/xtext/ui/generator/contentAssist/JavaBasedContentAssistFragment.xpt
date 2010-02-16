@@ -96,8 +96,8 @@ public class «getProposalProvider().toSimpleName()» extends «getGenProposalProvi
 «ENDDEFINE»
 
 «DEFINE assignmentTerminal(String accessor) FOR Alternatives-»
-«FOREACH groups AS group ITERATOR iter-»
-«EXPAND assignmentTerminal("((Alternatives)" + accessor + ").getGroups().get(" + iter.counter0 + ")") FOR group-» 
+«FOREACH elements AS group ITERATOR iter-»
+«EXPAND assignmentTerminal("((Alternatives)" + accessor + ").getElements().get(" + iter.counter0 + ")") FOR group-» 
 «ENDFOREACH-»
 «ENDDEFINE»
 

@@ -11,11 +11,11 @@
       <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/HiddenTerminalsTest#//Model"/>
     </type>
     <alternatives xsi:type="xtext:Alternatives">
-      <groups xsi:type="xtext:RuleCall" rule="//@rules.1"/>
-      <groups xsi:type="xtext:RuleCall" rule="//@rules.2"/>
-      <groups xsi:type="xtext:RuleCall" rule="//@rules.3"/>
-      <groups xsi:type="xtext:RuleCall" rule="//@rules.5"/>
-      <groups xsi:type="xtext:RuleCall" rule="//@rules.6"/>
+      <elements xsi:type="xtext:RuleCall" rule="//@rules.1"/>
+      <elements xsi:type="xtext:RuleCall" rule="//@rules.2"/>
+      <elements xsi:type="xtext:RuleCall" rule="//@rules.3"/>
+      <elements xsi:type="xtext:RuleCall" rule="//@rules.5"/>
+      <elements xsi:type="xtext:RuleCall" rule="//@rules.6"/>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="WithoutHiddens">
@@ -23,17 +23,17 @@
       <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/HiddenTerminalsTest#//WithoutHiddens"/>
     </type>
     <alternatives xsi:type="xtext:Group">
-      <tokens xsi:type="xtext:Keyword" value="without"/>
-      <tokens xsi:type="xtext:Assignment" feature="spaces" operator="+=">
+      <elements xsi:type="xtext:Keyword" value="without"/>
+      <elements xsi:type="xtext:Assignment" feature="spaces" operator="+=">
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.12"/>
-      </tokens>
-      <tokens xsi:type="xtext:Keyword" value="hiddens"/>
-      <tokens xsi:type="xtext:Assignment" cardinality="?" feature="spaces" operator="+=">
+      </elements>
+      <elements xsi:type="xtext:Keyword" value="hiddens"/>
+      <elements xsi:type="xtext:Assignment" cardinality="?" feature="spaces" operator="+=">
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.12"/>
-      </tokens>
-      <tokens xsi:type="xtext:Assignment" feature="valid" operator="?=">
+      </elements>
+      <elements xsi:type="xtext:Assignment" feature="valid" operator="?=">
         <terminal xsi:type="xtext:Keyword" value=";"/>
-      </tokens>
+      </elements>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="WithHiddens" definesHiddenTokens="true" hiddenTokens="//@rules.12 //@rules.10 //@rules.11">
@@ -41,11 +41,11 @@
       <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/HiddenTerminalsTest#//WithHiddens"/>
     </type>
     <alternatives xsi:type="xtext:Group">
-      <tokens xsi:type="xtext:Keyword" value="with"/>
-      <tokens xsi:type="xtext:Keyword" value="hiddens"/>
-      <tokens xsi:type="xtext:Assignment" feature="valid" operator="?=">
+      <elements xsi:type="xtext:Keyword" value="with"/>
+      <elements xsi:type="xtext:Keyword" value="hiddens"/>
+      <elements xsi:type="xtext:Assignment" feature="valid" operator="?=">
         <terminal xsi:type="xtext:Keyword" value=";"/>
-      </tokens>
+      </elements>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="OverridingHiddens" definesHiddenTokens="true" hiddenTokens="//@rules.12 //@rules.10 //@rules.11">
@@ -53,16 +53,16 @@
       <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/HiddenTerminalsTest#//OverridingHiddens"/>
     </type>
     <alternatives xsi:type="xtext:Group">
-      <tokens xsi:type="xtext:Keyword" value="overriding"/>
-      <tokens xsi:type="xtext:Keyword" value="hiddens"/>
-      <tokens xsi:type="xtext:Keyword" value="("/>
-      <tokens xsi:type="xtext:Assignment" feature="called" operator="=">
+      <elements xsi:type="xtext:Keyword" value="overriding"/>
+      <elements xsi:type="xtext:Keyword" value="hiddens"/>
+      <elements xsi:type="xtext:Keyword" value="("/>
+      <elements xsi:type="xtext:Assignment" feature="called" operator="=">
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.4"/>
-      </tokens>
-      <tokens xsi:type="xtext:Keyword" value=")"/>
-      <tokens xsi:type="xtext:Assignment" feature="valid" operator="?=">
+      </elements>
+      <elements xsi:type="xtext:Keyword" value=")"/>
+      <elements xsi:type="xtext:Assignment" feature="valid" operator="?=">
         <terminal xsi:type="xtext:Keyword" value=";"/>
-      </tokens>
+      </elements>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="OverridingHiddensCall" definesHiddenTokens="true">
@@ -70,13 +70,13 @@
       <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/HiddenTerminalsTest#//OverridingHiddensCall"/>
     </type>
     <alternatives xsi:type="xtext:Group">
-      <tokens xsi:type="xtext:Keyword" value="call"/>
-      <tokens xsi:type="xtext:Assignment" cardinality="?" feature="spaces" operator="+=">
+      <elements xsi:type="xtext:Keyword" value="call"/>
+      <elements xsi:type="xtext:Assignment" cardinality="?" feature="spaces" operator="+=">
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.12"/>
-      </tokens>
-      <tokens xsi:type="xtext:Assignment" feature="valid" operator="?=">
+      </elements>
+      <elements xsi:type="xtext:Assignment" feature="valid" operator="?=">
         <terminal xsi:type="xtext:Keyword" value=";"/>
-      </tokens>
+      </elements>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="InheritingHiddens" definesHiddenTokens="true" hiddenTokens="//@rules.12 //@rules.10 //@rules.11">
@@ -84,21 +84,21 @@
       <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/HiddenTerminalsTest#//InheritingHiddens"/>
     </type>
     <alternatives xsi:type="xtext:Group">
-      <tokens xsi:type="xtext:Keyword" value="inheriting"/>
-      <tokens xsi:type="xtext:Keyword" value="hiddens"/>
-      <tokens xsi:type="xtext:Keyword" value="("/>
-      <tokens xsi:type="xtext:Alternatives">
-        <groups xsi:type="xtext:Assignment" feature="called" operator="=">
+      <elements xsi:type="xtext:Keyword" value="inheriting"/>
+      <elements xsi:type="xtext:Keyword" value="hiddens"/>
+      <elements xsi:type="xtext:Keyword" value="("/>
+      <elements xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:Assignment" feature="called" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="//@rules.9"/>
-        </groups>
-        <groups xsi:type="xtext:Assignment" feature="hidingCalled" operator="=">
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="hidingCalled" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="//@rules.8"/>
-        </groups>
-      </tokens>
-      <tokens xsi:type="xtext:Keyword" value=")"/>
-      <tokens xsi:type="xtext:Assignment" feature="valid" operator="?=">
+        </elements>
+      </elements>
+      <elements xsi:type="xtext:Keyword" value=")"/>
+      <elements xsi:type="xtext:Assignment" feature="valid" operator="?=">
         <terminal xsi:type="xtext:Keyword" value=";"/>
-      </tokens>
+      </elements>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="DatatypeHiddens">
@@ -106,10 +106,10 @@
       <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/HiddenTerminalsTest#//DatatypeHiddens"/>
     </type>
     <alternatives xsi:type="xtext:Group">
-      <tokens xsi:type="xtext:Keyword" value="datatype"/>
-      <tokens xsi:type="xtext:Assignment" feature="valid" operator="?=">
+      <elements xsi:type="xtext:Keyword" value="datatype"/>
+      <elements xsi:type="xtext:Assignment" feature="valid" operator="?=">
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.7"/>
-      </tokens>
+      </elements>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="DatatypeRule" definesHiddenTokens="true" hiddenTokens="//@rules.12">
@@ -117,8 +117,8 @@
       <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </type>
     <alternatives xsi:type="xtext:Group">
-      <tokens xsi:type="xtext:Keyword" value="rule"/>
-      <tokens xsi:type="xtext:Keyword" value=";"/>
+      <elements xsi:type="xtext:Keyword" value="rule"/>
+      <elements xsi:type="xtext:Keyword" value=";"/>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="HidingHiddens" definesHiddenTokens="true">
@@ -126,13 +126,13 @@
       <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/HiddenTerminalsTest#//HidingHiddens"/>
     </type>
     <alternatives xsi:type="xtext:Group">
-      <tokens xsi:type="xtext:Keyword" value="hiding"/>
-      <tokens xsi:type="xtext:Assignment" feature="space" operator="=">
+      <elements xsi:type="xtext:Keyword" value="hiding"/>
+      <elements xsi:type="xtext:Assignment" feature="space" operator="=">
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.12"/>
-      </tokens>
-      <tokens xsi:type="xtext:Assignment" feature="called" operator="=">
+      </elements>
+      <elements xsi:type="xtext:Assignment" feature="called" operator="=">
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.9"/>
-      </tokens>
+      </elements>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="InheritingHiddensCall">
@@ -140,10 +140,10 @@
       <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/HiddenTerminalsTest#//InheritingHiddensCall"/>
     </type>
     <alternatives xsi:type="xtext:Group">
-      <tokens xsi:type="xtext:Keyword" value="call"/>
-      <tokens xsi:type="xtext:Assignment" feature="valid" operator="?=">
+      <elements xsi:type="xtext:Keyword" value="call"/>
+      <elements xsi:type="xtext:Assignment" feature="valid" operator="?=">
         <terminal xsi:type="xtext:Keyword" value=";"/>
-      </tokens>
+      </elements>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:TerminalRule" name="ML_COMMENT">
@@ -151,10 +151,10 @@
       <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </type>
     <alternatives xsi:type="xtext:Group">
-      <tokens xsi:type="xtext:Keyword" value="/*"/>
-      <tokens xsi:type="xtext:UntilToken">
+      <elements xsi:type="xtext:Keyword" value="/*"/>
+      <elements xsi:type="xtext:UntilToken">
         <terminal xsi:type="xtext:Keyword" value="*/"/>
-      </tokens>
+      </elements>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:TerminalRule" name="SL_COMMENT">
@@ -162,17 +162,17 @@
       <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </type>
     <alternatives xsi:type="xtext:Group">
-      <tokens xsi:type="xtext:Keyword" value="//"/>
-      <tokens xsi:type="xtext:NegatedToken" cardinality="*">
+      <elements xsi:type="xtext:Keyword" value="//"/>
+      <elements xsi:type="xtext:NegatedToken" cardinality="*">
         <terminal xsi:type="xtext:Alternatives">
-          <groups xsi:type="xtext:Keyword" value="&#xA;"/>
-          <groups xsi:type="xtext:Keyword" value="&#xD;"/>
+          <elements xsi:type="xtext:Keyword" value="&#xA;"/>
+          <elements xsi:type="xtext:Keyword" value="&#xD;"/>
         </terminal>
-      </tokens>
-      <tokens xsi:type="xtext:Group" cardinality="?">
-        <tokens xsi:type="xtext:Keyword" cardinality="?" value="&#xD;"/>
-        <tokens xsi:type="xtext:Keyword" value="&#xA;"/>
-      </tokens>
+      </elements>
+      <elements xsi:type="xtext:Group" cardinality="?">
+        <elements xsi:type="xtext:Keyword" cardinality="?" value="&#xD;"/>
+        <elements xsi:type="xtext:Keyword" value="&#xA;"/>
+      </elements>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:TerminalRule" name="WS">
@@ -180,10 +180,10 @@
       <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </type>
     <alternatives xsi:type="xtext:Alternatives" cardinality="+">
-      <groups xsi:type="xtext:Keyword" value=" "/>
-      <groups xsi:type="xtext:Keyword" value="&#x9;"/>
-      <groups xsi:type="xtext:Keyword" value="&#xD;"/>
-      <groups xsi:type="xtext:Keyword" value="&#xA;"/>
+      <elements xsi:type="xtext:Keyword" value=" "/>
+      <elements xsi:type="xtext:Keyword" value="&#x9;"/>
+      <elements xsi:type="xtext:Keyword" value="&#xD;"/>
+      <elements xsi:type="xtext:Keyword" value="&#xA;"/>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:TerminalRule" name="ANY_OTHER">

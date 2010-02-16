@@ -198,6 +198,11 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
         return createCharacterRangeAdapter();
       }
       @Override
+      public Adapter caseCompoundElement(CompoundElement object)
+      {
+        return createCompoundElementAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -575,6 +580,21 @@ public class XtextAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createCharacterRangeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.CompoundElement <em>Compound Element</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.CompoundElement
+   * @generated
+   */
+  public Adapter createCompoundElementAdapter()
   {
     return null;
   }

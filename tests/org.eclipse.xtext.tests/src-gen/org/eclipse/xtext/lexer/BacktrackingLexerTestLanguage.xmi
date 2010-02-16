@@ -11,15 +11,15 @@
       <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/BacktrackingLexerTest#//Model"/>
     </type>
     <alternatives xsi:type="xtext:Group">
-      <tokens xsi:type="xtext:Assignment" cardinality="*" feature="enums" operator="+=">
+      <elements xsi:type="xtext:Assignment" cardinality="*" feature="enums" operator="+=">
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.6"/>
-      </tokens>
-      <tokens xsi:type="xtext:Assignment" cardinality="*" feature="abs" operator="+=">
+      </elements>
+      <elements xsi:type="xtext:Assignment" cardinality="*" feature="abs" operator="+=">
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.1"/>
-      </tokens>
-      <tokens xsi:type="xtext:Assignment" cardinality="*" feature="xbs" operator="+=">
+      </elements>
+      <elements xsi:type="xtext:Assignment" cardinality="*" feature="xbs" operator="+=">
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.2"/>
-      </tokens>
+      </elements>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="Ab">
@@ -27,12 +27,12 @@
       <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/BacktrackingLexerTest#//Ab"/>
     </type>
     <alternatives xsi:type="xtext:Group">
-      <tokens xsi:type="xtext:Assignment" feature="x" operator="=">
+      <elements xsi:type="xtext:Assignment" feature="x" operator="=">
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.3"/>
-      </tokens>
-      <tokens xsi:type="xtext:Assignment" feature="y" operator="=">
+      </elements>
+      <elements xsi:type="xtext:Assignment" feature="y" operator="=">
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.4"/>
-      </tokens>
+      </elements>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:ParserRule" name="Xb">
@@ -40,12 +40,12 @@
       <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2008/tmf/xtext/BacktrackingLexerTest#//Xb"/>
     </type>
     <alternatives xsi:type="xtext:Group">
-      <tokens xsi:type="xtext:Assignment" feature="x" operator="=">
+      <elements xsi:type="xtext:Assignment" feature="x" operator="=">
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.5"/>
-      </tokens>
-      <tokens xsi:type="xtext:Assignment" feature="y" operator="=">
+      </elements>
+      <elements xsi:type="xtext:Assignment" feature="y" operator="=">
         <terminal xsi:type="xtext:RuleCall" rule="//@rules.4"/>
-      </tokens>
+      </elements>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:TerminalRule" name="CharA">
@@ -71,14 +71,14 @@
       <classifier xsi:type="ecore:EEnum" href="http://www.eclipse.org/2008/tmf/xtext/BacktrackingLexerTest#//EnumName"/>
     </type>
     <alternatives xsi:type="xtext:Alternatives">
-      <groups xsi:type="xtext:EnumLiteralDeclaration">
+      <elements xsi:type="xtext:EnumLiteralDeclaration">
         <enumLiteral href="http://www.eclipse.org/2008/tmf/xtext/BacktrackingLexerTest#//EnumName/abc"/>
         <literal value="Abc"/>
-      </groups>
-      <groups xsi:type="xtext:EnumLiteralDeclaration">
+      </elements>
+      <elements xsi:type="xtext:EnumLiteralDeclaration">
         <enumLiteral href="http://www.eclipse.org/2008/tmf/xtext/BacktrackingLexerTest#//EnumName/efg"/>
         <literal value="Efg"/>
-      </groups>
+      </elements>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:TerminalRule" name="WS">
@@ -86,10 +86,10 @@
       <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </type>
     <alternatives xsi:type="xtext:Alternatives" cardinality="+">
-      <groups xsi:type="xtext:Keyword" value=" "/>
-      <groups xsi:type="xtext:Keyword" value="&#x9;"/>
-      <groups xsi:type="xtext:Keyword" value="&#xD;"/>
-      <groups xsi:type="xtext:Keyword" value="&#xA;"/>
+      <elements xsi:type="xtext:Keyword" value=" "/>
+      <elements xsi:type="xtext:Keyword" value="&#x9;"/>
+      <elements xsi:type="xtext:Keyword" value="&#xD;"/>
+      <elements xsi:type="xtext:Keyword" value="&#xA;"/>
     </alternatives>
   </rules>
   <rules xsi:type="xtext:TerminalRule" name="SL_COMMENT">
@@ -97,17 +97,17 @@
       <classifier xsi:type="ecore:EDataType" href="http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     </type>
     <alternatives xsi:type="xtext:Group">
-      <tokens xsi:type="xtext:Keyword" value="//"/>
-      <tokens xsi:type="xtext:NegatedToken" cardinality="*">
+      <elements xsi:type="xtext:Keyword" value="//"/>
+      <elements xsi:type="xtext:NegatedToken" cardinality="*">
         <terminal xsi:type="xtext:Alternatives">
-          <groups xsi:type="xtext:Keyword" value="&#xA;"/>
-          <groups xsi:type="xtext:Keyword" value="&#xD;"/>
+          <elements xsi:type="xtext:Keyword" value="&#xA;"/>
+          <elements xsi:type="xtext:Keyword" value="&#xD;"/>
         </terminal>
-      </tokens>
-      <tokens xsi:type="xtext:Group" cardinality="?">
-        <tokens xsi:type="xtext:Keyword" cardinality="?" value="&#xD;"/>
-        <tokens xsi:type="xtext:Keyword" value="&#xA;"/>
-      </tokens>
+      </elements>
+      <elements xsi:type="xtext:Group" cardinality="?">
+        <elements xsi:type="xtext:Keyword" cardinality="?" value="&#xD;"/>
+        <elements xsi:type="xtext:Keyword" value="&#xA;"/>
+      </elements>
     </alternatives>
   </rules>
 </xtext:Grammar>

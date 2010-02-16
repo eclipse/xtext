@@ -1,0 +1,21 @@
+import ecore;
+import xtext;
+
+process(xtext::GeneratedMetamodel this) :
+  process(ePackage, createCompoundElement((ecore::EClass)ePackage.getEClassifier("AbstractElement")))
+;
+ 
+create ecore::EClass createCompoundElement(ecore::EClass superType):
+  setName("CompoundElement") ->
+  eSuperTypes.add(superType)
+;
+
+process(ecore::EPackage this, ecore::EClass compoundElement):
+  eClassifiers.add(compoundElement) ->
+  {"Alternatives", "Group", "UnorderedGroup"}.forAll(classifier|process((ecore::EClass)getEClassifier(classifier), compoundElement) -> true)
+;
+
+process(ecore::EClass this, ecore::EClass compoundElement):
+  setESuperTypes({compoundElement}) ->
+  compoundElement.eStructuralFeatures.isEmpty ? compoundElement.setEStructuralFeatures(eStructuralFeatures) : setEStructuralFeatures({})
+;

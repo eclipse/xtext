@@ -141,7 +141,7 @@ public final class XtextAssignableAlternativesConsumer extends NonTerminalConsum
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(assignableTerminalConsumer, "groups", true, false, false, getElement(), optional);
+			return consumeNonTerminal(assignableTerminalConsumer, "elements", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -165,11 +165,11 @@ public final class XtextAssignableAlternativesConsumer extends NonTerminalConsum
 		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
 		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getAssignableTerminalParserRuleCall_0());
 		group$3$Consumer = new Group$3$Consumer(rule.getGroup_1());
-		action$4$Consumer = new Action$4$Consumer(rule.getAlternativesGroupsAction_1_0());
+		action$4$Consumer = new Action$4$Consumer(rule.getAlternativesElementsAction_1_0());
 		group$6$Consumer = new Group$6$Consumer(rule.getGroup_1_1());
 		keyword$7$Consumer = new Keyword$7$Consumer(rule.getVerticalLineKeyword_1_1_0());
-		assignment$8$Consumer = new Assignment$8$Consumer(rule.getGroupsAssignment_1_1_1());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getGroupsAssignableTerminalParserRuleCall_1_1_1_0());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.getElementsAssignment_1_1_1());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getElementsAssignableTerminalParserRuleCall_1_1_1_0());
 	}
 	
 	@Override

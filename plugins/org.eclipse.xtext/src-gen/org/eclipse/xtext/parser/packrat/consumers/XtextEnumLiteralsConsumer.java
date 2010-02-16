@@ -141,7 +141,7 @@ public final class XtextEnumLiteralsConsumer extends NonTerminalConsumer {
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(enumLiteralDeclarationConsumer, "groups", true, false, false, getElement(), optional);
+			return consumeNonTerminal(enumLiteralDeclarationConsumer, "elements", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -165,11 +165,11 @@ public final class XtextEnumLiteralsConsumer extends NonTerminalConsumer {
 		group$1$Consumer = new Group$1$Consumer(rule.getGroup());
 		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getEnumLiteralDeclarationParserRuleCall_0());
 		group$3$Consumer = new Group$3$Consumer(rule.getGroup_1());
-		action$4$Consumer = new Action$4$Consumer(rule.getAlternativesGroupsAction_1_0());
+		action$4$Consumer = new Action$4$Consumer(rule.getAlternativesElementsAction_1_0());
 		group$6$Consumer = new Group$6$Consumer(rule.getGroup_1_1());
 		keyword$7$Consumer = new Keyword$7$Consumer(rule.getVerticalLineKeyword_1_1_0());
-		assignment$8$Consumer = new Assignment$8$Consumer(rule.getGroupsAssignment_1_1_1());
-		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getGroupsEnumLiteralDeclarationParserRuleCall_1_1_1_0());
+		assignment$8$Consumer = new Assignment$8$Consumer(rule.getElementsAssignment_1_1_1());
+		ruleCall$9$Consumer = new RuleCall$9$Consumer(rule.getElementsEnumLiteralDeclarationParserRuleCall_1_1_1_0());
 	}
 	
 	@Override
