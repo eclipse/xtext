@@ -46,7 +46,7 @@ TypeRef :
 ;
 
 Alternatives returns AbstractElement:
-    UnorderedGroup ({Alternatives.groups+=current} ('|' groups+=UnorderedGroup)+)?
+    UnorderedGroup ({Alternatives.elements+=current} ('|' elements+=UnorderedGroup)+)?
 ;
 
 UnorderedGroup returns AbstractElement:
@@ -54,7 +54,7 @@ UnorderedGroup returns AbstractElement:
 ;
 
 Group returns AbstractElement:
-    AbstractToken ({Group.tokens+=current} (tokens+=AbstractToken)+)?
+    AbstractToken ({Group.elements+=current} (elements+=AbstractToken)+)?
 ;
 
 AbstractToken returns AbstractElement:
@@ -96,7 +96,7 @@ ParenthesizedAssignableElement returns AbstractElement:
 ;
 
 AssignableAlternatives returns AbstractElement:
-    AssignableTerminal ({Alternatives.groups+=current} ('|' groups+=AssignableTerminal)+)?
+    AssignableTerminal ({Alternatives.elements+=current} ('|' elements+=AssignableTerminal)+)?
 ;
 
 CrossReference :
@@ -118,11 +118,11 @@ TerminalRule :
 ;
 
 TerminalAlternatives returns AbstractElement:
-	TerminalGroup ({Alternatives.groups+=current} ('|' groups+=TerminalGroup)+)?
+	TerminalGroup ({Alternatives.elements+=current} ('|' elements+=TerminalGroup)+)?
 ;
 
 TerminalGroup returns AbstractElement:
-	TerminalToken ({Group.tokens+=current} (tokens+=TerminalToken)+)?
+	TerminalToken ({Group.elements+=current} (elements+=TerminalToken)+)?
 ;
 
 TerminalToken returns AbstractElement:
@@ -164,7 +164,7 @@ EnumRule:
 ;
 
 EnumLiterals returns AbstractElement:
-	EnumLiteralDeclaration ({Alternatives.groups+=current} ('|' groups+=EnumLiteralDeclaration)+)?
+	EnumLiteralDeclaration ({Alternatives.elements+=current} ('|' elements+=EnumLiteralDeclaration)+)?
 ; 
 
 EnumLiteralDeclaration:

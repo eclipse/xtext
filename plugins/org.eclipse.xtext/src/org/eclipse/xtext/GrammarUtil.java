@@ -119,7 +119,7 @@ public class GrammarUtil {
 	public static List<AbstractElement> elementsBeforeThisInContainingGroup(AbstractElement _this) {
 		Group g = containingGroup(_this);
 		List<AbstractElement> result = new ArrayList<AbstractElement>();
-		for (AbstractElement ae : g.getTokens()) {
+		for (AbstractElement ae : g.getElements()) {
 			if (ae == _this || eAllContentsAsList(ae).contains(_this)) {
 				return result;
 			}
@@ -319,7 +319,7 @@ public class GrammarUtil {
 	}
 	
 	public static EClassifier findCurrentType(final AbstractElement element) {
-		return new CurrentTypeFinder().findCurrentType(element);
+		return new CurrentTypeFinder().findCurrentTypeAfter(element);
 	}
 
 }

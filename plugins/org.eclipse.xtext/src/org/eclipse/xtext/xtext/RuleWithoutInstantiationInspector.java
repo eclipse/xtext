@@ -7,17 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
-import java.util.List;
-
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.validation.ValidationMessageAcceptor;
 
@@ -49,19 +46,10 @@ public class RuleWithoutInstantiationInspector extends XtextRuleInspector<Boolea
 	}
 
 	@Override
-	public Boolean caseGroup(Group object) {
-		return caseGroupOrUnorderedGroup(object, object.getTokens());
-	}
-	
-	@Override
-	public Boolean caseUnorderedGroup(UnorderedGroup object) {
-		return caseGroupOrUnorderedGroup(object, object.getElements());
-	}
-	
-	public Boolean caseGroupOrUnorderedGroup(AbstractElement object, List<AbstractElement> elements) {
+	public Boolean caseCompoundElement(CompoundElement object) {
 		if (GrammarUtil.isOptionalCardinality(object))
 			return Boolean.FALSE;
-		for(AbstractElement element: elements) {
+		for(AbstractElement element: object.getElements()) {
 			if (doSwitch(element))
 				return Boolean.TRUE;
 		}
@@ -84,7 +72,7 @@ public class RuleWithoutInstantiationInspector extends XtextRuleInspector<Boolea
 	public Boolean caseAlternatives(Alternatives object) {
 		if (GrammarUtil.isOptionalCardinality(object))
 			return Boolean.FALSE;
-		for(AbstractElement element: object.getGroups()) {
+		for(AbstractElement element: object.getElements()) {
 			if (!doSwitch(element))
 				return Boolean.FALSE;
 		}

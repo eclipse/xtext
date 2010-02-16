@@ -353,7 +353,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 			public Boolean caseAlternatives(Alternatives object) {
 				final boolean wasIsNull = isNull;
 				boolean localIsNull = wasIsNull;
-				for (AbstractElement element : object.getGroups()) {
+				for (AbstractElement element : object.getElements()) {
 					isNull = wasIsNull;
 					localIsNull &= doSwitch(element);
 				}
@@ -381,7 +381,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 
 			@Override
 			public Boolean caseGroup(Group object) {
-				for (AbstractElement element : object.getTokens())
+				for (AbstractElement element : object.getElements())
 					doSwitch(element);
 				return isNull;
 			}
@@ -445,7 +445,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 				public Boolean caseAlternatives(Alternatives object) {
 					boolean wasActionAllowed = assignedActionAllowed;
 					boolean localActionAllowed = true;
-					for (AbstractElement element : object.getGroups()) {
+					for (AbstractElement element : object.getElements()) {
 						assignedActionAllowed = wasActionAllowed;
 						localActionAllowed &= doSwitch(element);
 					}
@@ -476,7 +476,7 @@ public class XtextValidator extends AbstractDeclarativeValidator {
 				@Override
 				public Boolean caseGroup(Group object) {
 					boolean wasAssignedActionAllowed = assignedActionAllowed;
-					for (AbstractElement element : object.getTokens())
+					for (AbstractElement element : object.getElements())
 						doSwitch(element);
 					assignedActionAllowed = wasAssignedActionAllowed
 							|| (assignedActionAllowed && !GrammarUtil.isOptionalCardinality(object));

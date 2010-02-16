@@ -113,7 +113,7 @@ public class GrammarWithoutLeftRecursionInspector extends XtextSwitch<Boolean> i
 	
 	@Override
 	public Boolean caseGroup(Group object) {
-		for(AbstractElement element: object.getTokens()) {
+		for(AbstractElement element: object.getElements()) {
 			if (!doSwitch(element)) {
 				return GrammarUtil.isOptionalCardinality(object);
 			}
@@ -124,7 +124,7 @@ public class GrammarWithoutLeftRecursionInspector extends XtextSwitch<Boolean> i
 	@Override
 	public Boolean caseAlternatives(Alternatives object) {
 		Boolean result = Boolean.FALSE;
-		for(AbstractElement element: object.getGroups()) {
+		for(AbstractElement element: object.getElements()) {
 			if (doSwitch(element))
 				result = Boolean.TRUE;
 		}

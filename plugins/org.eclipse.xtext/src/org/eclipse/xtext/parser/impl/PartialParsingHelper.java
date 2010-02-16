@@ -25,11 +25,11 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.IParser;
 import org.eclipse.xtext.parser.ParseException;
@@ -266,32 +266,12 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 			private final Set<ParserRule> rules = new HashSet<ParserRule>(4);
 			
 			@Override
-			public Boolean caseGroup(Group object) {
-				if (object == child)
-					return true;
-				return caseAnyElement(object.getTokens());
-			}
-			
-			@Override
-			public Boolean caseUnorderedGroup(UnorderedGroup object) {
-				if (object == child)
-					return true;
-				return caseAnyElement(object.getElements());
-			}
-			
-			protected Boolean caseAnyElement(List<AbstractElement> elements) {
-				for (AbstractElement elem: elements) {
+			public Boolean caseCompoundElement(CompoundElement object) {
+				for (AbstractElement elem: object.getElements()) {
 					if (doSwitch(elem))
 						return true;
 				}
 				return false;
-			}
-			
-			@Override
-			public Boolean caseAlternatives(Alternatives object) {
-				if (object == child)
-					return true;
-				return caseAnyElement(object.getGroups());
 			}
 			
 			@Override
@@ -321,9 +301,9 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 			AbstractElement directParent = (AbstractElement) lastParsedElement.eContainer();
 			if (directParent instanceof Group) {
 				Group group = (Group) directParent;
-				int idx = group.getTokens().indexOf(lastParsedElement) + 1;
-				for (int i = idx; i < group.getTokens().size(); i++) {
-					if (isMandatory(group.getTokens().get(i)))
+				int idx = group.getElements().indexOf(lastParsedElement) + 1;
+				for (int i = idx; i < group.getElements().size(); i++) {
+					if (isMandatory(group.getElements().get(i)))
 						return true;
 				}
 			}
@@ -341,19 +321,10 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 			}
 			
 			@Override
-			public Boolean caseGroup(Group object) {
-				return caseGroupOrUnorderedGroup(object, object.getTokens());
-			}
-			
-			@Override
-			public Boolean caseUnorderedGroup(UnorderedGroup object) {
-				return caseGroupOrUnorderedGroup(object, object.getElements());
-			}
-
-			public Boolean caseGroupOrUnorderedGroup(AbstractElement object, List<AbstractElement> elements) {
+			public Boolean caseCompoundElement(CompoundElement object) {
 				if (GrammarUtil.isOptionalCardinality(object))
 					return false;
-				for (AbstractElement child: elements) {
+				for (AbstractElement child: object.getElements()) {
 					if (doSwitch(child)) {
 						return true;
 					}
@@ -365,7 +336,7 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 			public Boolean caseAlternatives(Alternatives object) {
 				if (GrammarUtil.isOptionalCardinality(object))
 					return false;
-				for (AbstractElement child: object.getGroups()) {
+				for (AbstractElement child: object.getElements()) {
 					if (!doSwitch(child)) {
 						return false;
 					}

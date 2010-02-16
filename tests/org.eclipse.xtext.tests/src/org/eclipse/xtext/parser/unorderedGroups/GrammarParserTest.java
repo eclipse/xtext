@@ -42,13 +42,13 @@ public class GrammarParserTest extends AbstractXtextTests {
 	public void testAlternatives() throws Exception {
 		Alternatives alternatives = (Alternatives) getModel("'keyword'|'keyword'");
 		assertNotNull(alternatives);
-		assertEquals(2, alternatives.getGroups().size());
+		assertEquals(2, alternatives.getElements().size());
 	}
 	
 	public void testGroup() throws Exception {
 		Group group = (Group) getModel("'keyword' 'keyword'");
 		assertNotNull(group);
-		assertEquals(2, group.getTokens().size());
+		assertEquals(2, group.getElements().size());
 	}
 	
 	public void testRuleCall() throws Exception {
@@ -84,7 +84,7 @@ public class GrammarParserTest extends AbstractXtextTests {
 	public void testPrecedencies_01() throws Exception {
 		Alternatives alternatives = (Alternatives) getModel("'keyword' | 'keyword' & 'keyword' | 'keyword'");
 		assertNotNull(alternatives);
-		assertEquals(3, alternatives.getGroups().size());
+		assertEquals(3, alternatives.getElements().size());
 	}
 	
 	public void testPrecedencies_02() throws Exception {
@@ -106,10 +106,10 @@ public class GrammarParserTest extends AbstractXtextTests {
 	public void testPrecedencies_04() throws Exception {
 		Group group = (Group) getModel("'keyword' ('keyword' & 'keyword') 'keyword'");
 		assertNotNull(group);
-		assertEquals(3, group.getTokens().size());
-		assertTrue(group.getTokens().get(0) instanceof Keyword);
-		assertTrue(group.getTokens().get(1) instanceof UnorderedGroup);
-		assertTrue(group.getTokens().get(2) instanceof Keyword);
+		assertEquals(3, group.getElements().size());
+		assertTrue(group.getElements().get(0) instanceof Keyword);
+		assertTrue(group.getElements().get(1) instanceof UnorderedGroup);
+		assertTrue(group.getElements().get(2) instanceof Keyword);
 	}
 	
 	public void testPrecedencies_05() throws Exception {

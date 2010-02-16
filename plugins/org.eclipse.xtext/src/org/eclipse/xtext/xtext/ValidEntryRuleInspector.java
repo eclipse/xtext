@@ -7,17 +7,14 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext;
 
-import java.util.List;
-
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.GrammarUtil;
-import org.eclipse.xtext.Group;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
-import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.XtextPackage;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
@@ -52,19 +49,10 @@ public class ValidEntryRuleInspector extends XtextRuleInspector<Pair<Boolean, Bo
 	}
 
 	@Override
-	public Pair<Boolean, Boolean> caseGroup(Group object) {
-		return caseGroupOrUnorderedGroup(object, object.getTokens());
-	}
-	
-	@Override
-	public Pair<Boolean, Boolean> caseUnorderedGroup(UnorderedGroup object) {
-		return caseGroupOrUnorderedGroup(object, object.getElements());
-	}
-	
-	public Pair<Boolean, Boolean> caseGroupOrUnorderedGroup(AbstractElement object, List<AbstractElement> elements) {
+	public Pair<Boolean, Boolean> caseCompoundElement(CompoundElement object) {
 		boolean valid = true;
 		boolean instantiated = false;
-		for(AbstractElement element: elements) {
+		for(AbstractElement element: object.getElements()) {
 			Pair<Boolean, Boolean> elementResult = doSwitch(element);
 			instantiated |= elementResult.getSecond().booleanValue();
 			if (!instantiated)
@@ -89,7 +77,7 @@ public class ValidEntryRuleInspector extends XtextRuleInspector<Pair<Boolean, Bo
 	public Pair<Boolean, Boolean> caseAlternatives(Alternatives object) {
 		boolean valid = true;
 		boolean instantiated = !GrammarUtil.isOptionalCardinality(object);
-		for(AbstractElement element: object.getGroups()) {
+		for(AbstractElement element: object.getElements()) {
 			Pair<Boolean, Boolean> elementResult = doSwitch(element);
 			valid &= elementResult.getFirst().booleanValue();
 			instantiated &= elementResult.getSecond().booleanValue();

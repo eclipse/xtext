@@ -40,6 +40,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.EnumLiteralDeclaration;
 import org.eclipse.xtext.EnumRule;
@@ -350,13 +351,13 @@ public class Xtext2EcoreTransformer {
 		}
 	}
 
-	private Xtext2ECoreInterpretationContext deriveFeatures(final Xtext2ECoreInterpretationContext context,
+	private Xtext2EcoreInterpretationContext deriveFeatures(final Xtext2EcoreInterpretationContext context,
 			AbstractElement element) {
-		XtextSwitch<Xtext2ECoreInterpretationContext> visitor = new XtextSwitch<Xtext2ECoreInterpretationContext>() {
+		XtextSwitch<Xtext2EcoreInterpretationContext> visitor = new XtextSwitch<Xtext2EcoreInterpretationContext>() {
 			@Override
-			public Xtext2ECoreInterpretationContext caseAlternatives(Alternatives object) {
-				List<Xtext2ECoreInterpretationContext> contexts = new ArrayList<Xtext2ECoreInterpretationContext>();
-				for (AbstractElement group : object.getGroups()) {
+			public Xtext2EcoreInterpretationContext caseAlternatives(Alternatives object) {
+				List<Xtext2EcoreInterpretationContext> contexts = new ArrayList<Xtext2EcoreInterpretationContext>();
+				for (AbstractElement group : object.getElements()) {
 					contexts.add(deriveFeatures(context, group));
 				}
 				if (!GrammarUtil.isOptionalCardinality(object))
@@ -365,7 +366,7 @@ public class Xtext2EcoreTransformer {
 			}
 
 			@Override
-			public Xtext2ECoreInterpretationContext caseAssignment(Assignment object) {
+			public Xtext2EcoreInterpretationContext caseAssignment(Assignment object) {
 				try {
 					context.addFeature(object);
 				} catch(TransformationException ex) {
@@ -375,13 +376,13 @@ public class Xtext2EcoreTransformer {
 			}
 
 			@Override
-			public Xtext2ECoreInterpretationContext caseGroup(Group object) {
-				return deriveFeatures(context.spawnContextForGroup(), object.getTokens());
+			public Xtext2EcoreInterpretationContext caseGroup(Group object) {
+				return deriveFeatures(context.spawnContextForGroup(), object.getElements());
 			}
 			
 			@Override
-			public Xtext2ECoreInterpretationContext caseUnorderedGroup(UnorderedGroup object) {
-				List<Xtext2ECoreInterpretationContext> contexts = new ArrayList<Xtext2ECoreInterpretationContext>();
+			public Xtext2EcoreInterpretationContext caseUnorderedGroup(UnorderedGroup object) {
+				List<Xtext2EcoreInterpretationContext> contexts = new ArrayList<Xtext2EcoreInterpretationContext>();
 				for (AbstractElement element : object.getElements()) {
 					contexts.add(deriveFeatures(context, element));
 				}
@@ -391,7 +392,7 @@ public class Xtext2EcoreTransformer {
 			}
 
 			@Override
-			public Xtext2ECoreInterpretationContext caseRuleCall(RuleCall object) {
+			public Xtext2EcoreInterpretationContext caseRuleCall(RuleCall object) {
 				if (!GrammarUtil.isOptionalCardinality(object)) {
 					AbstractRule calledRule = object.getRule();
 					// do not throw an exception for missing rules, these have been
@@ -410,12 +411,12 @@ public class Xtext2EcoreTransformer {
 			}
 
 			@Override
-			public Xtext2ECoreInterpretationContext caseAction(Action object) {
+			public Xtext2EcoreInterpretationContext caseAction(Action object) {
 				try {
 					TypeRef actionTypeRef = object.getType();
 					EClassifierInfo actionType = findOrCreateEClassifierInfo(actionTypeRef, null, true);
 					EClassifierInfo currentCompatibleType = context.getCurrentCompatibleType();
-					Xtext2ECoreInterpretationContext ctx = context.spawnContextWithReferencedType(actionType, object);
+					Xtext2EcoreInterpretationContext ctx = context.spawnContextWithReferencedType(actionType, object);
 					if (object.getFeature() != null)
 						ctx.addFeature(object.getFeature(), currentCompatibleType,
 								GrammarUtil.isMultipleAssignment(object), true, object);
@@ -428,16 +429,16 @@ public class Xtext2EcoreTransformer {
 			}
 
 			@Override
-			public Xtext2ECoreInterpretationContext defaultCase(EObject object) {
+			public Xtext2EcoreInterpretationContext defaultCase(EObject object) {
 				return context;
 			}
 		};
 		return visitor.doSwitch(element);
 	}
 
-	private Xtext2ECoreInterpretationContext deriveFeatures(Xtext2ECoreInterpretationContext context,
+	private Xtext2EcoreInterpretationContext deriveFeatures(Xtext2EcoreInterpretationContext context,
 			EList<AbstractElement> elements) {
-		Xtext2ECoreInterpretationContext result = context;
+		Xtext2EcoreInterpretationContext result = context;
 		for (AbstractElement element : elements) {
 			result = deriveFeatures(result, element);
 		}
@@ -449,7 +450,7 @@ public class Xtext2EcoreTransformer {
 		if (classInfo == null)
 			throw new TransformationException(TransformationErrorCode.NoSuchTypeAvailable, "No type available for rule " +
 					rule.getName(), rule);
-		Xtext2ECoreInterpretationContext context = new Xtext2ECoreInterpretationContext(eClassifierInfos, classInfo);
+		Xtext2EcoreInterpretationContext context = new Xtext2EcoreInterpretationContext(eClassifierInfos, classInfo);
 		if (rule.getAlternatives() != null) // might happen due to syntax errors in the document
 			deriveFeatures(context, rule.getAlternatives());
 	}
@@ -586,8 +587,9 @@ public class Xtext2EcoreTransformer {
 				}
 			}
 			
-			public TransformationException caseEveryElement(List<AbstractElement> elements) {
-				for (AbstractElement ele : elements) {
+			@Override
+			public TransformationException caseCompoundElement(CompoundElement object) {
+				for (AbstractElement ele : object.getElements()) {
 					try {
 						deriveTypesAndHierarchy(rule, ruleReturnType, ele);
 					}
@@ -596,21 +598,6 @@ public class Xtext2EcoreTransformer {
 					}
 				}
 				return null;
-			}
-
-			@Override
-			public TransformationException caseGroup(Group group) {
-				return caseEveryElement(group.getTokens());
-			}
-			
-			@Override
-			public TransformationException caseAlternatives(Alternatives alternatives) {
-				return caseEveryElement(alternatives.getGroups());
-			}
-			
-			@Override
-			public TransformationException caseUnorderedGroup(UnorderedGroup group) {
-				return caseEveryElement(group.getElements());
 			}
 
 			@Override
