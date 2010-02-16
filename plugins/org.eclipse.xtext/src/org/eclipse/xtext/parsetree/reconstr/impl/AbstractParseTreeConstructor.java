@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.log4j.Logger;
+import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.xtext.AbstractElement;
@@ -34,6 +35,7 @@ import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.parsetree.reconstr.IUnassignedTextSerializer;
 import org.eclipse.xtext.parsetree.reconstr.XtextSerializationException;
 import org.eclipse.xtext.util.EmfFormatter;
+import org.eclipse.xtext.xtext.CurrentTypeFinder;
 
 import com.google.inject.Inject;
 
@@ -158,6 +160,9 @@ public abstract class AbstractParseTreeConstructor implements
 
 		@Override
 		protected IInstanceDescription tryConsumeVal() {
+			EClassifier currentType = currentTypeFinder.findCurrentTypeAfter(getGrammarElement());
+			if (currentType != null)
+				if(!current.isInstanceOf(currentType)) return null;
 			return current;
 		}
 	}
@@ -242,7 +247,7 @@ public abstract class AbstractParseTreeConstructor implements
 						EnumLiteralDeclaration decl = (EnumLiteralDeclaration) rule.getAlternatives();
 						return decl.getLiteral().getValue();
 					} else {
-						for (AbstractElement element : ((Alternatives) rule.getAlternatives()).getGroups()) {
+						for (AbstractElement element : ((Alternatives) rule.getAlternatives()).getElements()) {
 							EnumLiteralDeclaration decl = (EnumLiteralDeclaration) element;
 							if (decl.getEnumLiteral().getInstance().equals(value)) {
 								return decl.getLiteral().getValue();
@@ -274,6 +279,9 @@ public abstract class AbstractParseTreeConstructor implements
 
 		@Override
 		protected IInstanceDescription tryConsumeVal() {
+			EClassifier currentType = currentTypeFinder.findCurrentTypeAfter(getGrammarElement());
+			if (currentType != null)
+				if(!current.isInstanceOf(currentType)) return null;
 			return current;
 		}
 	}
@@ -287,6 +295,9 @@ public abstract class AbstractParseTreeConstructor implements
 
 		@Override
 		protected IInstanceDescription tryConsumeVal() {
+			EClassifier currentType = currentTypeFinder.findCurrentTypeAfter(getGrammarElement());
+			if (currentType != null)
+				if(!current.isInstanceOf(currentType)) return null;
 			return current;
 		}
 	}
@@ -382,6 +393,9 @@ public abstract class AbstractParseTreeConstructor implements
 
 	@Inject
 	protected IUnassignedTextSerializer unassTextSerializer;
+	
+	@Inject
+	protected CurrentTypeFinder currentTypeFinder;
 
 	protected TreeConstructionReportImpl createReport(EObject root) {
 		return new TreeConstructionReportImpl(root);
