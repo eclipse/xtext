@@ -93,7 +93,7 @@ public class DefaultTextEditComposerTest extends AbstractXtextTests {
 		Alternatives alternatives = (Alternatives) rule.getAlternatives();
 		Keyword keyword = XtextFactory.eINSTANCE.createKeyword();
 		keyword.setValue("qux");
-		alternatives.getGroups().add(keyword);
+		alternatives.getElements().add(keyword);
 		TextEdit edit = composer.endRecording();
 
 		assertMatches(alternatives, edit);
@@ -106,7 +106,7 @@ public class DefaultTextEditComposerTest extends AbstractXtextTests {
 		Grammar grammar = (Grammar) res.getContents().get(0);
 		AbstractRule rule = grammar.getRules().get(0);
 		Alternatives alternatives = (Alternatives) rule.getAlternatives();
-		alternatives.getGroups().remove(2);
+		alternatives.getElements().remove(2);
 		TextEdit edit = composer.endRecording();
 
 		assertMatches(alternatives, edit);
@@ -120,9 +120,9 @@ public class DefaultTextEditComposerTest extends AbstractXtextTests {
 		Grammar grammar = (Grammar) res.getContents().get(0);
 		AbstractRule rule = grammar.getRules().get(0);
 		Alternatives alternatives = (Alternatives) rule.getAlternatives();
-		Keyword bazKeyword = (Keyword) alternatives.getGroups().get(2);
+		Keyword bazKeyword = (Keyword) alternatives.getElements().get(2);
 		bazKeyword.setValue("BAZ");
-		alternatives.getGroups().remove(bazKeyword);
+		alternatives.getElements().remove(bazKeyword);
 		TextEdit edit = composer.endRecording();
 
 		assertMatches(alternatives, edit);
@@ -150,7 +150,7 @@ public class DefaultTextEditComposerTest extends AbstractXtextTests {
 		ParserRule fooRule = (ParserRule) grammar.getRules().get(0);
 		ParserRule barRule = (ParserRule) grammar.getRules().get(1);
 		Alternatives fooAlternatives = (Alternatives) fooRule.getAlternatives();
-		barRule.setAlternatives(fooAlternatives.getGroups().remove(0));
+		barRule.setAlternatives(fooAlternatives.getElements().remove(0));
 		TextEdit edit = composer.endRecording();
 
 		assertTrue(edit instanceof MultiTextEdit);

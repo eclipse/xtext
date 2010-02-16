@@ -40,7 +40,7 @@ public class GrammarUtilGetReferenceTest extends AbstractXtextTests {
 		Grammar grammar = (Grammar) getModel(grammarAsString);
 		AbstractRule ruleModel = grammar.getRules().get(0);
 		Group group = (Group) ruleModel.getAlternatives();
-		Assignment assignment = (Assignment) group.getTokens().get(1);
+		Assignment assignment = (Assignment) group.getElements().get(1);
 		CrossReference crossRef = (CrossReference) assignment.getTerminal();
 		EReference reference = GrammarUtil.getReference(crossRef);
 		assertEquals("model", reference.getName());
@@ -54,8 +54,8 @@ public class GrammarUtilGetReferenceTest extends AbstractXtextTests {
 		Grammar grammar = (Grammar) getModel(grammarAsString);
 		AbstractRule ruleModel = grammar.getRules().get(0);
 		Alternatives alternatives = (Alternatives) ruleModel.getAlternatives();
-		Group group = (Group) alternatives.getGroups().get(0);
-		Assignment assignment = (Assignment) group.getTokens().get(1);
+		Group group = (Group) alternatives.getElements().get(0);
+		Assignment assignment = (Assignment) group.getElements().get(1);
 		CrossReference crossRef = (CrossReference) assignment.getTerminal();
 		EReference reference = GrammarUtil.getReference(crossRef);
 		assertEquals("model", reference.getName());
@@ -69,8 +69,8 @@ public class GrammarUtilGetReferenceTest extends AbstractXtextTests {
 		Grammar grammar = (Grammar) getModel(grammarAsString);
 		AbstractRule ruleModel = grammar.getRules().get(0);
 		Alternatives alternatives = (Alternatives) ruleModel.getAlternatives();
-		Group group = (Group) alternatives.getGroups().get(1);
-		Assignment assignment = (Assignment) group.getTokens().get(1);
+		Group group = (Group) alternatives.getElements().get(1);
+		Assignment assignment = (Assignment) group.getElements().get(1);
 		CrossReference crossRef = (CrossReference) assignment.getTerminal();
 		EReference reference = GrammarUtil.getReference(crossRef);
 		assertEquals("model", reference.getName());
@@ -84,8 +84,8 @@ public class GrammarUtilGetReferenceTest extends AbstractXtextTests {
 		Grammar grammar = (Grammar) getModel(grammarAsString);
 		AbstractRule ruleModel = grammar.getRules().get(0);
 		Alternatives alternatives = (Alternatives) ruleModel.getAlternatives();
-		Group group = (Group) alternatives.getGroups().get(0);
-		Assignment assignment = (Assignment) group.getTokens().get(1);
+		Group group = (Group) alternatives.getElements().get(0);
+		Assignment assignment = (Assignment) group.getElements().get(1);
 		CrossReference crossRef = (CrossReference) assignment.getTerminal();
 		EReference reference = GrammarUtil.getReference(crossRef);
 		assertEquals("model1", reference.getName());
@@ -99,8 +99,8 @@ public class GrammarUtilGetReferenceTest extends AbstractXtextTests {
 		Grammar grammar = (Grammar) getModel(grammarAsString);
 		AbstractRule ruleModel = grammar.getRules().get(0);
 		Alternatives alternatives = (Alternatives) ruleModel.getAlternatives();
-		Group group = (Group) alternatives.getGroups().get(1);
-		Assignment assignment = (Assignment) group.getTokens().get(1);
+		Group group = (Group) alternatives.getElements().get(1);
+		Assignment assignment = (Assignment) group.getElements().get(1);
 		CrossReference crossRef = (CrossReference) assignment.getTerminal();
 		EReference reference = GrammarUtil.getReference(crossRef);
 		assertEquals("model2", reference.getName());
@@ -128,7 +128,7 @@ public class GrammarUtilGetReferenceTest extends AbstractXtextTests {
 		Grammar grammar = (Grammar) getModel(grammarAsString);
 		AbstractRule ruleModel = grammar.getRules().get(0);
 		Group group = (Group) ruleModel.getAlternatives();
-		UnorderedGroup unorderedGroup = (UnorderedGroup) group.getTokens().get(1);
+		UnorderedGroup unorderedGroup = (UnorderedGroup) group.getElements().get(1);
 		Assignment assignment = (Assignment) unorderedGroup.getElements().get(1);
 		CrossReference crossRef = (CrossReference) assignment.getTerminal();
 		EReference reference = GrammarUtil.getReference(crossRef);

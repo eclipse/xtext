@@ -31,7 +31,7 @@ public class SLCommentPrefixCalculator extends XtextSwitch<Boolean> {
 	@Override
 	public Boolean caseAlternatives(Alternatives object) {
 		boolean result = true;
-		for(AbstractElement elem: object.getGroups()) {
+		for(AbstractElement elem: object.getElements()) {
 			result &= doSwitch(elem);
 		}
 		return result;
@@ -39,7 +39,7 @@ public class SLCommentPrefixCalculator extends XtextSwitch<Boolean> {
 
 	@Override
 	public Boolean caseGroup(Group object) {
-		for (AbstractElement elem: object.getTokens()) {
+		for (AbstractElement elem: object.getElements()) {
 			if (!doSwitch(elem))
 				return false;
 		}

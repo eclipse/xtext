@@ -277,13 +277,13 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 			public Boolean caseGroup(Group object) {
 				if (!checkFurther(object))
 					return result;
-				for (AbstractElement token : object.getTokens())
+				for (AbstractElement token : object.getElements())
 					if (doSwitch(token))
 						return true;
 				if (GrammarUtil.isMultipleCardinality(object)) {
 					if (!checkFurther(object))
 						return result;
-					for (AbstractElement token : object.getTokens())
+					for (AbstractElement token : object.getElements())
 						if (doSwitch(token))
 							return true;
 				}
@@ -300,6 +300,20 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 				if (!checkFurther(object))
 					return result;
 				return caseAlternatives(object.getElements());
+			}
+			
+			@Override
+			public Boolean caseAlternatives(Alternatives object) {
+				if (!checkFurther(object))
+					return result;
+				if (caseAlternatives(object.getElements()))
+					return true;
+				if (GrammarUtil.isMultipleCardinality(object)) {
+					if (!checkFurther(object))
+						return result;
+					return caseAlternatives(object.getElements());
+				}
+				return Boolean.FALSE;
 			}
 
 			public Boolean caseAlternatives(List<AbstractElement> elements) {
@@ -322,20 +336,6 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 				return Boolean.FALSE;
 			}
 			
-			@Override
-			public Boolean caseAlternatives(Alternatives object) {
-				if (!checkFurther(object))
-					return result;
-				if (caseAlternatives(object.getGroups()))
-					return true;
-				if (GrammarUtil.isMultipleCardinality(object)) {
-					if (!checkFurther(object))
-						return result;
-					return caseAlternatives(object.getGroups());
-				}
-				return Boolean.FALSE;
-			}
-
 			@Override
 			public Boolean caseAbstractElement(AbstractElement object) {
 				if (!checkFurther(object))
@@ -625,7 +625,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		@Override
 		public Boolean caseAlternatives(Alternatives object) {
 			boolean more = false;
-			for(AbstractElement element: object.getGroups()) {
+			for(AbstractElement element: object.getElements()) {
 				more = doSwitch(element) || more;
 			}
 			return more || isOptional(object);
@@ -643,7 +643,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		@Override
 		public Boolean caseGroup(Group object) {
 			boolean more = true;
-			for(AbstractElement element: object.getTokens()) {
+			for(AbstractElement element: object.getElements()) {
 				more = more && doSwitch(element);
 			}
 			return more || isOptional(object);

@@ -36,7 +36,7 @@ public class GrammarTest extends AbstractXtextTests {
 		AbstractRule abstractRule = GrammarUtil.findRuleForName(grammar, "Abstract");
 		AbstractElement alternatives = abstractRule.getAlternatives();
 		assertTrue(alternatives instanceof Alternatives);
-		assertEquals(2, ((Alternatives) alternatives).getGroups().size());
+		assertEquals(2, ((Alternatives) alternatives).getElements().size());
 		assertTrue(GrammarUtil.containedAssignments(abstractRule).isEmpty());
 		
 		checkConcreteRule(grammar, "Concrete0");

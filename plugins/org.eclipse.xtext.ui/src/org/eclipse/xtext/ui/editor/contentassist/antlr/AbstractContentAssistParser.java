@@ -20,6 +20,7 @@ import org.antlr.runtime.Token;
 import org.antlr.runtime.TokenSource;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Alternatives;
+import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.RuleCall;
@@ -162,7 +163,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 		if (!(GrammarUtil.isOptionalCardinality(elementToParse) || GrammarUtil.isOneOrMoreCardinality(elementToParse)))
 			return new String[][] {{ ruleName }};
 		if ((elementToParse.eContainer() instanceof Group)) {
-			List<AbstractElement> tokens = ((Group) elementToParse.eContainer()).getTokens();
+			List<AbstractElement> tokens = ((Group) elementToParse.eContainer()).getElements();
 			int idx = tokens.indexOf(elementToParse) + 1;
 			if (idx != tokens.size()) {
 				String secondRule = getRuleName((AbstractElement) elementToParse.eContainer());
@@ -181,10 +182,8 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 	}
 
 	private Collection<AbstractElement> getElementsToParse(AbstractElement root) {
-		if (root instanceof Alternatives)
-			return ((Alternatives) root).getGroups();
-		if (root instanceof UnorderedGroup)
-			return ((UnorderedGroup) root).getElements();
+		if (root instanceof Alternatives || root instanceof UnorderedGroup)
+			return ((CompoundElement) root).getElements();
 		return Collections.singleton(root);
 	}
 
