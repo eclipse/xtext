@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.services;
 
+import java.util.Set;
+
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
@@ -16,6 +18,8 @@ import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.util.Strings;
 
+import com.google.common.collect.ImmutableSet;
+
 /**
  * Simple converters for Strings, Integers and IDs.
  */
@@ -24,6 +28,9 @@ public class DefaultTerminalConverters extends AbstractDeclarativeValueConverter
 	@ValueConverter(rule = "ID")
 	public IValueConverter<String> ID() {
 		return new AbstractNullSafeConverter<String>() {
+			
+			private Set<String> allKeywords = ImmutableSet.copyOf(GrammarUtil.getAllKeywords(getGrammar()));
+			
 			@Override
 			protected String internalToValue(String string, AbstractNode node) {
 				return string.startsWith("^") ? string.substring(1) : string;
@@ -31,7 +38,7 @@ public class DefaultTerminalConverters extends AbstractDeclarativeValueConverter
 
 			@Override
 			protected String internalToString(String value) {
-				if (GrammarUtil.getAllKeywords(getGrammar()).contains(value)) {
+				if (allKeywords.contains(value)) {
 					return "^" + value;
 				}
 				return value;
