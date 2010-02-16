@@ -64,7 +64,7 @@ public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 	public Boolean caseAlternatives(Alternatives object) {
 		boolean result = false;
 		OUTER: do {
-			for (AbstractElement element: object.getGroups()) {
+			for (AbstractElement element: object.getElements()) {
 				if (doSwitch(element)) {
 					result = true;
 					continue OUTER;
@@ -106,7 +106,7 @@ public class TerminalRuleInterpreter extends XtextSwitch<Boolean>{
 		boolean result = false;
 		OUTER: do {
 			IMarker marker = markerFactory.mark();
-			for(AbstractElement element: object.getTokens()) {
+			for(AbstractElement element: object.getElements()) {
 				if (!doSwitch(element)) {
 					marker.rollback();
 					break OUTER;

@@ -165,7 +165,7 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 
 «DEFINE defineConsumerField FOR Alternatives-»
 «EXPAND defineConsumerFieldDeclaration FOR this-»
-«EXPAND defineConsumerField(this) FOREACH groups-»
+«EXPAND defineConsumerField(this) FOREACH elements-»
 «ENDDEFINE»
 
 «DEFINE defineConsumerField(Alternatives parent) FOR AbstractElement-»
@@ -176,13 +176,13 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «IF isOptionalCardinality() || isMultipleCardinality()-»
 «EXPAND defineConsumerField FOR this-»
 «ELSE-»
-«EXPAND defineConsumerField(this) FOREACH groups-»
+«EXPAND defineConsumerField(this) FOREACH elements-»
 «ENDIF-»
 «ENDDEFINE»
 
 «DEFINE defineConsumerField FOR Group-»
 «EXPAND defineConsumerFieldDeclaration FOR this-»
-«EXPAND defineConsumerField(this) FOREACH tokens-»
+«EXPAND defineConsumerField(this) FOREACH elements-»
 «ENDDEFINE»
 
 «DEFINE defineConsumerField FOR UnorderedGroup-»
@@ -198,7 +198,7 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «IF isOptionalCardinality() || isMultipleCardinality()-»
 «EXPAND defineConsumerField FOR this-»
 «ELSE-»
-«EXPAND defineConsumerField(this) FOREACH tokens-»
+«EXPAND defineConsumerField(this) FOREACH elements-»
 «ENDIF-»
 «ENDDEFINE»
 
@@ -219,7 +219,7 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «ERROR "multiplicities are not supported in assignments"»
 «ENDIF-»
 «EXPAND defineConsumerFieldDeclaration FOR this-»
-«EXPAND defineConsumerField(assignment, this) FOREACH groups-»
+«EXPAND defineConsumerField(assignment, this) FOREACH elements-»
 «ENDDEFINE»
 
 «DEFINE defineConsumerField(Assignment assignment) FOR CrossReference-»
@@ -241,7 +241,7 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «IF isQuestionMark() || isStar() || isPlus()-»
 «ERROR "multiplicities are not supported in assignments"»
 «ENDIF-»
-«EXPAND defineConsumerField(assignment, this) FOREACH groups-»
+«EXPAND defineConsumerField(assignment, this) FOREACH elements-»
 «ENDDEFINE»
 
 «DEFINE defineConsumerField(Assignment assignment, Alternatives parent) FOR CrossReference-»
@@ -264,7 +264,7 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «ERROR "multiplicities are not supported in assignments"»
 «ENDIF-»
 «EXPAND defineConsumerFieldDeclaration FOR this-»
-«EXPAND defineConsumerField(assignment, this) FOREACH groups-»
+«EXPAND defineConsumerField(assignment, this) FOREACH elements-»
 «ENDDEFINE»
 
 «DEFINE defineConsumerField(Assignment assignment) FOR Action-»
@@ -290,7 +290,7 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 
 «DEFINE defineConsumerClass FOR Alternatives-»
 «EXPAND defineConsumerClassDeclaration FOR this-»
-«EXPAND defineConsumerClass(this) FOREACH groups-»
+«EXPAND defineConsumerClass(this) FOREACH elements-»
 «ENDDEFINE»
 
 «DEFINE defineConsumerClass(Alternatives parent) FOR AbstractElement-»
@@ -301,13 +301,13 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «IF isOptionalCardinality() || isMultipleCardinality()-»
 «EXPAND defineConsumerClass FOR this-»
 «ELSE-»
-«EXPAND defineConsumerClass(this) FOREACH groups-»
+«EXPAND defineConsumerClass(this) FOREACH elements-»
 «ENDIF-»
 «ENDDEFINE»
 
 «DEFINE defineConsumerClass FOR Group-»
 «EXPAND defineConsumerClassDeclaration FOR this-»
-«EXPAND defineConsumerClass(this) FOREACH tokens-»
+«EXPAND defineConsumerClass(this) FOREACH elements-»
 «ENDDEFINE»
 
 «DEFINE defineConsumerClass(Group parent) FOR AbstractElement-»
@@ -318,7 +318,7 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «IF isOptionalCardinality() || isMultipleCardinality()-»
 «EXPAND defineConsumerClass FOR this-»
 «ELSE-»
-«EXPAND defineConsumerClass(this) FOREACH tokens-»
+«EXPAND defineConsumerClass(this) FOREACH elements-»
 «ENDIF-»
 «ENDDEFINE»
 
@@ -344,7 +344,7 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «ERROR "multiplicities are not supported in assignments"»
 «ENDIF-»
 «EXPAND defineConsumerClassDeclaration(assignment) FOR this-»
-«EXPAND defineConsumerClass(assignment, this) FOREACH groups-»
+«EXPAND defineConsumerClass(assignment, this) FOREACH elements-»
 «ENDDEFINE»
 
 «DEFINE defineConsumerClass(Assignment assignment) FOR CrossReference-»
@@ -367,7 +367,7 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «ERROR "multiplicities are not supported in assignments"»
 «ENDIF-»
 «EXPAND defineConsumerClassDeclaration(assignment) FOR this-»
-«EXPAND defineConsumerClass(assignment, this) FOREACH groups-»
+«EXPAND defineConsumerClass(assignment, this) FOREACH elements-»
 «ENDDEFINE»
 
 «DEFINE defineConsumerClass(Assignment assignment, Alternatives parent) FOR AbstractElement-»
@@ -381,7 +381,7 @@ public final class «this.consumerClassName().toSimpleName()» extends NonTerminal
 «IF isQuestionMark() || isStar() || isPlus()-»
 «ERROR "multiplicities are not supported in assignments"»
 «ENDIF-»
-«EXPAND defineConsumerClass(assignment, this) FOREACH groups-»
+«EXPAND defineConsumerClass(assignment, this) FOREACH elements-»
 «ENDDEFINE»
 
 «DEFINE defineConsumerClass(Assignment assignment, Alternatives parent) FOR CrossReference-»
@@ -642,7 +642,7 @@ UnorderedGroupConsumer«ENDDEFINE»
 «ENDDEFINE»
 
 «DEFINE acceptConsumers(Alternatives start) FOR Alternatives-»
-«FOREACH groups AS g-»
+«FOREACH elements AS g-»
 «IF Alternatives.isInstance(g) && !g.isOptionalCardinality() && !g.isMultipleCardinality()-»
 «EXPAND acceptConsumers(start) FOR (Alternatives) g-»
 «ELSE-»
@@ -656,7 +656,7 @@ UnorderedGroupConsumer«ENDDEFINE»
 «ENDDEFINE»
 
 «DEFINE acceptConsumers(Group start) FOR Group-»
-«FOREACH tokens AS token-»
+«FOREACH elements AS token-»
 «IF Group.isInstance(token) && !token.isOptionalCardinality() && !token.isMultipleCardinality()-»
 «EXPAND acceptConsumers(start) FOR (Group)token-»
 «ELSE-»
@@ -681,7 +681,7 @@ UnorderedGroupConsumer«ENDDEFINE»
 
 «DEFINE assignConsumerField FOR Alternatives-»
 «EXPAND assignConsumerFieldImpl FOR this-»
-«EXPAND assignConsumerField(this) FOREACH groups-»
+«EXPAND assignConsumerField(this) FOREACH elements-»
 «ENDDEFINE»
 
 «DEFINE assignConsumerField(Alternatives parent) FOR AbstractElement-»
@@ -692,13 +692,13 @@ UnorderedGroupConsumer«ENDDEFINE»
 «IF isOptionalCardinality() || isMultipleCardinality()-»
 «EXPAND assignConsumerField FOR this-»
 «ELSE-»
-«EXPAND assignConsumerField(this) FOREACH groups-»
+«EXPAND assignConsumerField(this) FOREACH elements-»
 «ENDIF-»
 «ENDDEFINE»
 
 «DEFINE assignConsumerField FOR Group-»
 «EXPAND assignConsumerFieldImpl FOR this-»
-«EXPAND assignConsumerField(this) FOREACH tokens-»
+«EXPAND assignConsumerField(this) FOREACH elements-»
 «ENDDEFINE»
 
 «DEFINE assignConsumerField(Group parent) FOR AbstractElement-»
@@ -709,7 +709,7 @@ UnorderedGroupConsumer«ENDDEFINE»
 «IF isOptionalCardinality() || isMultipleCardinality()-»
 «EXPAND assignConsumerField FOR this-»
 «ELSE-»
-«EXPAND assignConsumerField(this) FOREACH tokens-»
+«EXPAND assignConsumerField(this) FOREACH elements-»
 «ENDIF-»
 «ENDDEFINE»
 
@@ -735,7 +735,7 @@ UnorderedGroupConsumer«ENDDEFINE»
 «ERROR "multiplicities are not supported in assignments"»
 «ENDIF-»
 «EXPAND assignConsumerField FOR this-»
-«EXPAND assignConsumerField(assignment, this) FOREACH groups-»
+«EXPAND assignConsumerField(assignment, this) FOREACH elements-»
 «ENDDEFINE»
 
 «DEFINE assignConsumerField(Assignment assignment, Alternatives parent) FOR AbstractElement-»
@@ -749,7 +749,7 @@ UnorderedGroupConsumer«ENDDEFINE»
 «IF isQuestionMark() || isStar() || isPlus()-»
 «ERROR "multiplicities are not supported in assignments"»
 «ENDIF-»
-«EXPAND assignConsumerField(assignment, this) FOREACH groups-»
+«EXPAND assignConsumerField(assignment, this) FOREACH elements-»
 «ENDDEFINE»
 
 «DEFINE assignConsumerField(Assignment assignment) FOR Action-»

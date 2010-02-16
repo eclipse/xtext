@@ -36,7 +36,7 @@ public class XtextParserTest extends AbstractGeneratorTest {
 				"Stuff returns boo::Stuff : 'stuff' name=ID refersTo=[boo::Stuff];");
 		AbstractRule rule = model.getRules().get(1);
 		Group group = (Group) rule.getAlternatives();
-		Assignment assignment = (Assignment) group.getTokens().get(2);
+		Assignment assignment = (Assignment) group.getElements().get(2);
 		CrossReference reference = (CrossReference) assignment.getTerminal();
 		assertEquals("boo", reference.getType().getMetamodel().getAlias());
 //		assertWithXtend("'boo'", "eAllContents.typeSelect(xtext::CrossReference).first().type.metamodel.alias", model);
