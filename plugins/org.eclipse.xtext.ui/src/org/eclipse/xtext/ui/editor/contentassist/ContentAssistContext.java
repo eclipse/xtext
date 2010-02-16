@@ -56,6 +56,7 @@ public class ContentAssistContext implements IFollowElementAcceptor {
 	private int offset;
 	private ITextViewer viewer;
 	private Region replaceRegion;
+	private Integer replaceContextLength;
 	private PrefixMatcher matcher;
 	private final List<AbstractElement> firstSetGrammarElements;
 	
@@ -77,6 +78,7 @@ public class ContentAssistContext implements IFollowElementAcceptor {
 		result.offset = offset;
 		result.viewer = viewer;
 		result.replaceRegion = replaceRegion;
+		result.replaceContextLength = replaceContextLength;
 		result.matcher = matcher;
 		result.firstSetGrammarElements.addAll(firstSetGrammarElements);
 		return result;
@@ -112,6 +114,7 @@ public class ContentAssistContext implements IFollowElementAcceptor {
 
 	public void setCurrentNode(AbstractNode currentNode) {
 		this.currentNode = currentNode;
+		this.replaceContextLength = null;
 	}
 
 	public int getOffset() {
@@ -158,6 +161,7 @@ public class ContentAssistContext implements IFollowElementAcceptor {
 
 	public void setReplaceRegion(Region replaceRegion) {
 		this.replaceRegion = replaceRegion;
+		this.replaceContextLength = null;
 	}
 
 	public Region getReplaceRegion() {
@@ -182,6 +186,16 @@ public class ContentAssistContext implements IFollowElementAcceptor {
 
 	public PrefixMatcher getMatcher() {
 		return matcher;
+	}
+
+	public int getReplaceContextLength() {
+		if (replaceContextLength == null) {
+			int replacementOffset = getReplaceRegion().getOffset();
+			int replaceContextLength = getCurrentNode().getLength() - (replacementOffset - getCurrentNode().getOffset());
+			this.replaceContextLength = replaceContextLength;
+			return replaceContextLength;
+		}
+		return replaceContextLength.intValue();
 	}
 	
 }
