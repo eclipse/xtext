@@ -10,6 +10,8 @@ package org.eclipse.xtext.validation;
 import static org.eclipse.xtext.junit.validation.AssertableDiagnostics.*;
 import static org.eclipse.xtext.validation.ConcreteSyntaxValidator.*;
 
+import org.eclipse.emf.common.util.BasicEList;
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.validation.csvalidationtest.AltList1;
@@ -31,6 +33,9 @@ import org.eclipse.xtext.validation.csvalidationtest.List5;
 import org.eclipse.xtext.validation.csvalidationtest.SimpleAlternative;
 import org.eclipse.xtext.validation.csvalidationtest.SimpleGroup;
 import org.eclipse.xtext.validation.csvalidationtest.SimpleMultiplicities;
+import org.eclipse.xtext.validation.csvalidationtest.TransientObject;
+import org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1;
+import org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1Enum;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedAction1;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedAction2Sub;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedAction3;
@@ -39,6 +44,7 @@ import org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall1Sub;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall2;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall2Sub;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall2SubAction;
+import org.eclipse.xtext.validation.csvalidationtest.impl.TransientObjectImpl;
 
 /**
  * @author meysholdt - Initial contribution and API
@@ -442,4 +448,67 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(copy).assertOK();
 	}
 
+	public void testTransientObject() {
+		TransientObject to = new TransientObjectImpl() {
+			@Override
+			public boolean eIsSet(int featureID) {
+				switch (featureID) {
+					case CsvalidationtestPackage.TRANSIENT_OBJECT__NESTED:
+						return nested != null && !"default".equals(nested.getVal2());
+				}
+				return super.eIsSet(featureID);
+			}
+
+			@Override
+			public EList<EObject> eContents() {
+				EList<EObject> r = new BasicEList<EObject>();
+				if (nested != null)
+					r.add(nested);
+				return r;
+			}
+		};
+		to.setNested(CsvalidationtestFactory.eINSTANCE.createTransientObjectSub());
+		to.getNested().setVal2("default");
+		validate(to).assertOK();
+
+		to.setVal1("xxx");
+		to.getNested().setVal2("something");
+		to.getNested().setVal3("something");
+		validate(to).assertOK();
+	}
+
+	public void testTransientSerializeables1() throws Exception {
+		TransientSerializeables1 m = CsvalidationtestFactory.eINSTANCE.createTransientSerializeables1();
+		validate(m).assertOK();
+
+		m = CsvalidationtestFactory.eINSTANCE.createTransientSerializeables1();
+		m.setVal1("foo");
+		m.setEnum1(TransientSerializeables1Enum.LIT2);
+		validate(m).assertOK();
+
+		m = CsvalidationtestFactory.eINSTANCE.createTransientSerializeables1();
+		m.setVal2("foo");
+		m.setInt1(5);
+		validate(m).assertOK();
+
+		m = CsvalidationtestFactory.eINSTANCE.createTransientSerializeables1();
+		m.setVal1("foo");
+		validate(m).assertOK();
+
+		m = CsvalidationtestFactory.eINSTANCE.createTransientSerializeables1();
+		m.setVal2("foo");
+		validate(m).assertOK();
+
+		m = CsvalidationtestFactory.eINSTANCE.createTransientSerializeables1();
+		m.setEnum1(TransientSerializeables1Enum.LIT2);
+		validate(m).assertAll(
+				err(p.getTransientSerializeables1_Enum1(), ERROR_VALUE_PROHIBITED, null, 0, "(val1 enum1)?"),
+				err(p.getTransientSerializeables1_Val1(), ERROR_VALUE_REQUIRED, 1, null, "(val1 enum1)?"));
+
+		m = CsvalidationtestFactory.eINSTANCE.createTransientSerializeables1();
+		m.setInt1(5);
+		validate(m).assertAll(
+				err(p.getTransientSerializeables1_Int1(), ERROR_VALUE_PROHIBITED, null, 0, "(val2 int1)?"),
+				err(p.getTransientSerializeables1_Val2(), ERROR_VALUE_REQUIRED, 1, null, "(val2 int1)?"));
+	}
 }
