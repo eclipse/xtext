@@ -7,6 +7,7 @@ package org.eclipse.xtext.validation.csvalidationtest.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -32,6 +33,10 @@ import org.eclipse.xtext.validation.csvalidationtest.Model;
 import org.eclipse.xtext.validation.csvalidationtest.SimpleAlternative;
 import org.eclipse.xtext.validation.csvalidationtest.SimpleGroup;
 import org.eclipse.xtext.validation.csvalidationtest.SimpleMultiplicities;
+import org.eclipse.xtext.validation.csvalidationtest.TransientObject;
+import org.eclipse.xtext.validation.csvalidationtest.TransientObjectSub;
+import org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1;
+import org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1Enum;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedAction1;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedAction2;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedAction2Sub;
@@ -232,6 +237,27 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass transientObjectEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass transientObjectSubEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass transientSerializeables1EClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass unassignedAction2SubEClass = null;
 
   /**
@@ -254,6 +280,13 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
    * @generated
    */
   private EClass unassignedRuleCall2SubActionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EEnum transientSerializeables1EnumEEnum = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -556,6 +589,26 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
   public EReference getModel_X23()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(22);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_X24()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(23);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_X25()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(24);
   }
 
   /**
@@ -1413,6 +1466,116 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getTransientObject()
+  {
+    return transientObjectEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTransientObject_Val1()
+  {
+    return (EAttribute)transientObjectEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getTransientObject_Nested()
+  {
+    return (EReference)transientObjectEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getTransientObjectSub()
+  {
+    return transientObjectSubEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTransientObjectSub_Val2()
+  {
+    return (EAttribute)transientObjectSubEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTransientObjectSub_Val3()
+  {
+    return (EAttribute)transientObjectSubEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getTransientSerializeables1()
+  {
+    return transientSerializeables1EClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTransientSerializeables1_Val1()
+  {
+    return (EAttribute)transientSerializeables1EClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTransientSerializeables1_Enum1()
+  {
+    return (EAttribute)transientSerializeables1EClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTransientSerializeables1_Val2()
+  {
+    return (EAttribute)transientSerializeables1EClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTransientSerializeables1_Int1()
+  {
+    return (EAttribute)transientSerializeables1EClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getUnassignedAction2Sub()
   {
     return unassignedAction2SubEClass;
@@ -1473,6 +1636,16 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
    * <!-- end-user-doc -->
    * @generated
    */
+  public EEnum getTransientSerializeables1Enum()
+  {
+    return transientSerializeables1EnumEEnum;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public CsvalidationtestFactory getCsvalidationtestFactory()
   {
     return (CsvalidationtestFactory)getEFactoryInstance();
@@ -1522,6 +1695,8 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     createEReference(modelEClass, MODEL__X21);
     createEReference(modelEClass, MODEL__X22);
     createEReference(modelEClass, MODEL__X23);
+    createEReference(modelEClass, MODEL__X24);
+    createEReference(modelEClass, MODEL__X25);
 
     simpleGroupEClass = createEClass(SIMPLE_GROUP);
     createEAttribute(simpleGroupEClass, SIMPLE_GROUP__VAL1);
@@ -1632,6 +1807,20 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     createEAttribute(altList2EClass, ALT_LIST2__VAL2);
     createEAttribute(altList2EClass, ALT_LIST2__VAL3);
 
+    transientObjectEClass = createEClass(TRANSIENT_OBJECT);
+    createEAttribute(transientObjectEClass, TRANSIENT_OBJECT__VAL1);
+    createEReference(transientObjectEClass, TRANSIENT_OBJECT__NESTED);
+
+    transientObjectSubEClass = createEClass(TRANSIENT_OBJECT_SUB);
+    createEAttribute(transientObjectSubEClass, TRANSIENT_OBJECT_SUB__VAL2);
+    createEAttribute(transientObjectSubEClass, TRANSIENT_OBJECT_SUB__VAL3);
+
+    transientSerializeables1EClass = createEClass(TRANSIENT_SERIALIZEABLES1);
+    createEAttribute(transientSerializeables1EClass, TRANSIENT_SERIALIZEABLES1__VAL1);
+    createEAttribute(transientSerializeables1EClass, TRANSIENT_SERIALIZEABLES1__ENUM1);
+    createEAttribute(transientSerializeables1EClass, TRANSIENT_SERIALIZEABLES1__VAL2);
+    createEAttribute(transientSerializeables1EClass, TRANSIENT_SERIALIZEABLES1__INT1);
+
     unassignedAction2SubEClass = createEClass(UNASSIGNED_ACTION2_SUB);
     createEAttribute(unassignedAction2SubEClass, UNASSIGNED_ACTION2_SUB__VAL1);
     createEAttribute(unassignedAction2SubEClass, UNASSIGNED_ACTION2_SUB__VAL2);
@@ -1641,6 +1830,9 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     unassignedAction2Sub2EClass = createEClass(UNASSIGNED_ACTION2_SUB2);
 
     unassignedRuleCall2SubActionEClass = createEClass(UNASSIGNED_RULE_CALL2_SUB_ACTION);
+
+    // Create enums
+    transientSerializeables1EnumEEnum = createEEnum(TRANSIENT_SERIALIZEABLES1_ENUM);
   }
 
   /**
@@ -1704,6 +1896,8 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     initEReference(getModel_X21(), this.getList5(), null, "x21", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X22(), this.getAltList1(), null, "x22", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X23(), this.getAltList2(), null, "x23", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X24(), this.getTransientObject(), null, "x24", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X25(), this.getTransientSerializeables1(), null, "x25", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(simpleGroupEClass, SimpleGroup.class, "SimpleGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSimpleGroup_Val1(), ecorePackage.getEString(), "val1", null, 0, 1, SimpleGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1814,6 +2008,20 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     initEAttribute(getAltList2_Val2(), ecorePackage.getEString(), "val2", null, 0, 1, AltList2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getAltList2_Val3(), ecorePackage.getEString(), "val3", null, 0, 1, AltList2.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(transientObjectEClass, TransientObject.class, "TransientObject", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getTransientObject_Val1(), ecorePackage.getEString(), "val1", null, 0, 1, TransientObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getTransientObject_Nested(), this.getTransientObjectSub(), null, "nested", null, 0, 1, TransientObject.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(transientObjectSubEClass, TransientObjectSub.class, "TransientObjectSub", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getTransientObjectSub_Val2(), ecorePackage.getEString(), "val2", null, 0, 1, TransientObjectSub.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTransientObjectSub_Val3(), ecorePackage.getEString(), "val3", null, 0, 1, TransientObjectSub.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(transientSerializeables1EClass, TransientSerializeables1.class, "TransientSerializeables1", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getTransientSerializeables1_Val1(), ecorePackage.getEString(), "val1", null, 0, 1, TransientSerializeables1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTransientSerializeables1_Enum1(), this.getTransientSerializeables1Enum(), "enum1", null, 0, 1, TransientSerializeables1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTransientSerializeables1_Val2(), ecorePackage.getEString(), "val2", null, 0, 1, TransientSerializeables1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTransientSerializeables1_Int1(), ecorePackage.getEInt(), "int1", null, 0, 1, TransientSerializeables1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(unassignedAction2SubEClass, UnassignedAction2Sub.class, "UnassignedAction2Sub", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getUnassignedAction2Sub_Val1(), ecorePackage.getEString(), "val1", null, 0, 1, UnassignedAction2Sub.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getUnassignedAction2Sub_Val2(), ecorePackage.getEString(), "val2", null, 0, 1, UnassignedAction2Sub.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -1823,6 +2031,11 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     initEClass(unassignedAction2Sub2EClass, UnassignedAction2Sub2.class, "UnassignedAction2Sub2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(unassignedRuleCall2SubActionEClass, UnassignedRuleCall2SubAction.class, "UnassignedRuleCall2SubAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    // Initialize enums and add enum literals
+    initEEnum(transientSerializeables1EnumEEnum, TransientSerializeables1Enum.class, "TransientSerializeables1Enum");
+    addEEnumLiteral(transientSerializeables1EnumEEnum, TransientSerializeables1Enum.LIT1);
+    addEEnumLiteral(transientSerializeables1EnumEEnum, TransientSerializeables1Enum.LIT2);
 
     // Create resource
     createResource(eNS_URI);

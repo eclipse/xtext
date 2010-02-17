@@ -58,6 +58,10 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 
 	private INonTerminalConsumer simpleMultiplicitiesConsumer;
 
+	private INonTerminalConsumer transientObjectConsumer;
+
+	private INonTerminalConsumer transientSerializeables1Consumer;
+
 	private INonTerminalConsumer unassignedAction1Consumer;
 
 	private INonTerminalConsumer unassignedAction2Consumer;
@@ -162,6 +166,14 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 
 	private IElementConsumer ruleCall$47$Consumer;
 
+	private IElementConsumer assignment$48$Consumer;
+
+	private IElementConsumer ruleCall$49$Consumer;
+
+	private IElementConsumer assignment$50$Consumer;
+
+	private IElementConsumer ruleCall$51$Consumer;
+
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
 		protected Alternatives$1$Consumer(final Alternatives alternatives) {
@@ -193,6 +205,8 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 			acceptor.accept(assignment$42$Consumer);
 			acceptor.accept(assignment$44$Consumer);
 			acceptor.accept(assignment$46$Consumer);
+			acceptor.accept(assignment$48$Consumer);
+			acceptor.accept(assignment$50$Consumer);
 		}
 	}
 
@@ -748,6 +762,54 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 		}
 	}
 
+	protected class Assignment$48$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$48$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$49$Consumer;
+		}
+	}
+
+	protected class RuleCall$49$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$49$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(transientObjectConsumer, "x24", false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class Assignment$50$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$50$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$51$Consumer;
+		}
+	}
+
+	protected class RuleCall$51$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$51$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(transientSerializeables1Consumer, "x25", false, false, false, getElement(), optional);
+		}
+	}
+
 	public ConcreteSyntaxValidationTestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
@@ -811,6 +873,10 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 		ruleCall$45$Consumer = new RuleCall$45$Consumer(rule.getX22AltList1ParserRuleCall_21_0());
 		assignment$46$Consumer = new Assignment$46$Consumer(rule.getX23Assignment_22());
 		ruleCall$47$Consumer = new RuleCall$47$Consumer(rule.getX23AltList2ParserRuleCall_22_0());
+		assignment$48$Consumer = new Assignment$48$Consumer(rule.getX24Assignment_23());
+		ruleCall$49$Consumer = new RuleCall$49$Consumer(rule.getX24TransientObjectParserRuleCall_23_0());
+		assignment$50$Consumer = new Assignment$50$Consumer(rule.getX25Assignment_24());
+		ruleCall$51$Consumer = new RuleCall$51$Consumer(rule.getX25TransientSerializeables1ParserRuleCall_24_0());
 	}
 	
 	@Override
@@ -893,6 +959,14 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 	
 	public void setSimpleMultiplicitiesConsumer(INonTerminalConsumer simpleMultiplicitiesConsumer) {
 		this.simpleMultiplicitiesConsumer = simpleMultiplicitiesConsumer;
+	}
+	
+	public void setTransientObjectConsumer(INonTerminalConsumer transientObjectConsumer) {
+		this.transientObjectConsumer = transientObjectConsumer;
+	}
+	
+	public void setTransientSerializeables1Consumer(INonTerminalConsumer transientSerializeables1Consumer) {
+		this.transientSerializeables1Consumer = transientSerializeables1Consumer;
 	}
 	
 	public void setUnassignedAction1Consumer(INonTerminalConsumer unassignedAction1Consumer) {

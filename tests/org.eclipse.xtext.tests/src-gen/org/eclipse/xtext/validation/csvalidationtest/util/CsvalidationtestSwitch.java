@@ -272,6 +272,27 @@ public class CsvalidationtestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case CsvalidationtestPackage.TRANSIENT_OBJECT:
+      {
+        TransientObject transientObject = (TransientObject)theEObject;
+        T result = caseTransientObject(transientObject);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case CsvalidationtestPackage.TRANSIENT_OBJECT_SUB:
+      {
+        TransientObjectSub transientObjectSub = (TransientObjectSub)theEObject;
+        T result = caseTransientObjectSub(transientObjectSub);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case CsvalidationtestPackage.TRANSIENT_SERIALIZEABLES1:
+      {
+        TransientSerializeables1 transientSerializeables1 = (TransientSerializeables1)theEObject;
+        T result = caseTransientSerializeables1(transientSerializeables1);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case CsvalidationtestPackage.UNASSIGNED_ACTION2_SUB:
       {
         UnassignedAction2Sub unassignedAction2Sub = (UnassignedAction2Sub)theEObject;
@@ -705,6 +726,54 @@ public class CsvalidationtestSwitch<T>
    * @generated
    */
   public T caseAltList2(AltList2 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Transient Object</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Transient Object</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTransientObject(TransientObject object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Transient Object Sub</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Transient Object Sub</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTransientObjectSub(TransientObjectSub object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Transient Serializeables1</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Transient Serializeables1</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTransientSerializeables1(TransientSerializeables1 object)
   {
     return null;
   }

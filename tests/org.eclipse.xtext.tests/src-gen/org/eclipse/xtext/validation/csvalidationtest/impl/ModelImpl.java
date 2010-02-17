@@ -33,6 +33,8 @@ import org.eclipse.xtext.validation.csvalidationtest.Model;
 import org.eclipse.xtext.validation.csvalidationtest.SimpleAlternative;
 import org.eclipse.xtext.validation.csvalidationtest.SimpleGroup;
 import org.eclipse.xtext.validation.csvalidationtest.SimpleMultiplicities;
+import org.eclipse.xtext.validation.csvalidationtest.TransientObject;
+import org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedAction1;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedAction2;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedAction3;
@@ -69,6 +71,8 @@ import org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall2;
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.ModelImpl#getX21 <em>X21</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.ModelImpl#getX22 <em>X22</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.ModelImpl#getX23 <em>X23</em>}</li>
+ *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.ModelImpl#getX24 <em>X24</em>}</li>
+ *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.ModelImpl#getX25 <em>X25</em>}</li>
  * </ul>
  * </p>
  *
@@ -305,6 +309,26 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected AltList2 x23;
+
+  /**
+   * The cached value of the '{@link #getX24() <em>X24</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX24()
+   * @generated
+   * @ordered
+   */
+  protected TransientObject x24;
+
+  /**
+   * The cached value of the '{@link #getX25() <em>X25</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX25()
+   * @generated
+   * @ordered
+   */
+  protected TransientSerializeables1 x25;
 
   /**
    * <!-- begin-user-doc -->
@@ -1436,6 +1460,102 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  public TransientObject getX24()
+  {
+    return x24;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX24(TransientObject newX24, NotificationChain msgs)
+  {
+    TransientObject oldX24 = x24;
+    x24 = newX24;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CsvalidationtestPackage.MODEL__X24, oldX24, newX24);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX24(TransientObject newX24)
+  {
+    if (newX24 != x24)
+    {
+      NotificationChain msgs = null;
+      if (x24 != null)
+        msgs = ((InternalEObject)x24).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CsvalidationtestPackage.MODEL__X24, null, msgs);
+      if (newX24 != null)
+        msgs = ((InternalEObject)newX24).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CsvalidationtestPackage.MODEL__X24, null, msgs);
+      msgs = basicSetX24(newX24, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, CsvalidationtestPackage.MODEL__X24, newX24, newX24));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TransientSerializeables1 getX25()
+  {
+    return x25;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX25(TransientSerializeables1 newX25, NotificationChain msgs)
+  {
+    TransientSerializeables1 oldX25 = x25;
+    x25 = newX25;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CsvalidationtestPackage.MODEL__X25, oldX25, newX25);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX25(TransientSerializeables1 newX25)
+  {
+    if (newX25 != x25)
+    {
+      NotificationChain msgs = null;
+      if (x25 != null)
+        msgs = ((InternalEObject)x25).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CsvalidationtestPackage.MODEL__X25, null, msgs);
+      if (newX25 != null)
+        msgs = ((InternalEObject)newX25).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CsvalidationtestPackage.MODEL__X25, null, msgs);
+      msgs = basicSetX25(newX25, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, CsvalidationtestPackage.MODEL__X25, newX25, newX25));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -1487,6 +1607,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return basicSetX22(null, msgs);
       case CsvalidationtestPackage.MODEL__X23:
         return basicSetX23(null, msgs);
+      case CsvalidationtestPackage.MODEL__X24:
+        return basicSetX24(null, msgs);
+      case CsvalidationtestPackage.MODEL__X25:
+        return basicSetX25(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -1547,6 +1671,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return getX22();
       case CsvalidationtestPackage.MODEL__X23:
         return getX23();
+      case CsvalidationtestPackage.MODEL__X24:
+        return getX24();
+      case CsvalidationtestPackage.MODEL__X25:
+        return getX25();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -1629,6 +1757,12 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return;
       case CsvalidationtestPackage.MODEL__X23:
         setX23((AltList2)newValue);
+        return;
+      case CsvalidationtestPackage.MODEL__X24:
+        setX24((TransientObject)newValue);
+        return;
+      case CsvalidationtestPackage.MODEL__X25:
+        setX25((TransientSerializeables1)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -1713,6 +1847,12 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case CsvalidationtestPackage.MODEL__X23:
         setX23((AltList2)null);
         return;
+      case CsvalidationtestPackage.MODEL__X24:
+        setX24((TransientObject)null);
+        return;
+      case CsvalidationtestPackage.MODEL__X25:
+        setX25((TransientSerializeables1)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -1773,6 +1913,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return x22 != null;
       case CsvalidationtestPackage.MODEL__X23:
         return x23 != null;
+      case CsvalidationtestPackage.MODEL__X24:
+        return x24 != null;
+      case CsvalidationtestPackage.MODEL__X25:
+        return x25 != null;
     }
     return super.eIsSet(featureID);
   }

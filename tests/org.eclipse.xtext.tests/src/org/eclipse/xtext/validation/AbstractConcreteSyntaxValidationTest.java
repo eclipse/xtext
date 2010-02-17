@@ -64,13 +64,13 @@ public abstract class AbstractConcreteSyntaxValidationTest extends AbstractXtext
 	protected DiagnosticPredicate err(EStructuralFeature feat, int code, Integer min, Integer max, String constraint) {
 		return new DiagPred(feat, code, min, max, constraint);
 	}
-	
+
 	protected AssertableDiagnostics validate(EObject obj) {
 		final BasicDiagnostic dc = new BasicDiagnostic();
-		getValidator().validateObject(obj, new DiagnosticChainAcceptor(dc), new HashMap<Object, Object>());
+		getValidator().validateRecursive(obj, new DiagnosticChainAcceptor(dc), new HashMap<Object, Object>());
 		return new AssertableDiagnostics(dc);
 	}
-	
+
 	protected abstract IConcreteSyntaxValidator getValidator();
 
 }

@@ -7,6 +7,7 @@ package org.eclipse.xtext.validation.csvalidationtest;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
 
@@ -277,13 +278,31 @@ public interface CsvalidationtestPackage extends EPackage
   int MODEL__X23 = 22;
 
   /**
+   * The feature id for the '<em><b>X24</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X24 = 23;
+
+  /**
+   * The feature id for the '<em><b>X25</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X25 = 24;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 23;
+  int MODEL_FEATURE_COUNT = 25;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -1291,6 +1310,135 @@ public interface CsvalidationtestPackage extends EPackage
   int ALT_LIST2_FEATURE_COUNT = 3;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.TransientObjectImpl <em>Transient Object</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.validation.csvalidationtest.impl.TransientObjectImpl
+   * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getTransientObject()
+   * @generated
+   */
+  int TRANSIENT_OBJECT = 25;
+
+  /**
+   * The feature id for the '<em><b>Val1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSIENT_OBJECT__VAL1 = 0;
+
+  /**
+   * The feature id for the '<em><b>Nested</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSIENT_OBJECT__NESTED = 1;
+
+  /**
+   * The number of structural features of the '<em>Transient Object</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSIENT_OBJECT_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.TransientObjectSubImpl <em>Transient Object Sub</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.validation.csvalidationtest.impl.TransientObjectSubImpl
+   * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getTransientObjectSub()
+   * @generated
+   */
+  int TRANSIENT_OBJECT_SUB = 26;
+
+  /**
+   * The feature id for the '<em><b>Val2</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSIENT_OBJECT_SUB__VAL2 = 0;
+
+  /**
+   * The feature id for the '<em><b>Val3</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSIENT_OBJECT_SUB__VAL3 = 1;
+
+  /**
+   * The number of structural features of the '<em>Transient Object Sub</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSIENT_OBJECT_SUB_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.TransientSerializeables1Impl <em>Transient Serializeables1</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.validation.csvalidationtest.impl.TransientSerializeables1Impl
+   * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getTransientSerializeables1()
+   * @generated
+   */
+  int TRANSIENT_SERIALIZEABLES1 = 27;
+
+  /**
+   * The feature id for the '<em><b>Val1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSIENT_SERIALIZEABLES1__VAL1 = 0;
+
+  /**
+   * The feature id for the '<em><b>Enum1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSIENT_SERIALIZEABLES1__ENUM1 = 1;
+
+  /**
+   * The feature id for the '<em><b>Val2</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSIENT_SERIALIZEABLES1__VAL2 = 2;
+
+  /**
+   * The feature id for the '<em><b>Int1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSIENT_SERIALIZEABLES1__INT1 = 3;
+
+  /**
+   * The number of structural features of the '<em>Transient Serializeables1</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TRANSIENT_SERIALIZEABLES1_FEATURE_COUNT = 4;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.UnassignedAction2SubImpl <em>Unassigned Action2 Sub</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1298,7 +1446,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getUnassignedAction2Sub()
    * @generated
    */
-  int UNASSIGNED_ACTION2_SUB = 25;
+  int UNASSIGNED_ACTION2_SUB = 28;
 
   /**
    * The feature id for the '<em><b>Val1</b></em>' attribute.
@@ -1335,7 +1483,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getUnassignedAction2Sub1()
    * @generated
    */
-  int UNASSIGNED_ACTION2_SUB1 = 26;
+  int UNASSIGNED_ACTION2_SUB1 = 29;
 
   /**
    * The feature id for the '<em><b>Val1</b></em>' attribute.
@@ -1372,7 +1520,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getUnassignedAction2Sub2()
    * @generated
    */
-  int UNASSIGNED_ACTION2_SUB2 = 27;
+  int UNASSIGNED_ACTION2_SUB2 = 30;
 
   /**
    * The feature id for the '<em><b>Val1</b></em>' attribute.
@@ -1409,7 +1557,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getUnassignedRuleCall2SubAction()
    * @generated
    */
-  int UNASSIGNED_RULE_CALL2_SUB_ACTION = 28;
+  int UNASSIGNED_RULE_CALL2_SUB_ACTION = 31;
 
   /**
    * The feature id for the '<em><b>Val2</b></em>' attribute.
@@ -1428,6 +1576,16 @@ public interface CsvalidationtestPackage extends EPackage
    * @ordered
    */
   int UNASSIGNED_RULE_CALL2_SUB_ACTION_FEATURE_COUNT = UNASSIGNED_RULE_CALL2_SUB_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1Enum <em>Transient Serializeables1 Enum</em>}' enum.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1Enum
+   * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getTransientSerializeables1Enum()
+   * @generated
+   */
+  int TRANSIENT_SERIALIZEABLES1_ENUM = 32;
 
 
   /**
@@ -1692,6 +1850,28 @@ public interface CsvalidationtestPackage extends EPackage
    * @generated
    */
   EReference getModel_X23();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX24 <em>X24</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X24</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.Model#getX24()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X24();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX25 <em>X25</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X25</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.Model#getX25()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X25();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.validation.csvalidationtest.SimpleGroup <em>Simple Group</em>}'.
@@ -2605,6 +2785,124 @@ public interface CsvalidationtestPackage extends EPackage
   EAttribute getAltList2_Val3();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.validation.csvalidationtest.TransientObject <em>Transient Object</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Transient Object</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TransientObject
+   * @generated
+   */
+  EClass getTransientObject();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.validation.csvalidationtest.TransientObject#getVal1 <em>Val1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val1</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TransientObject#getVal1()
+   * @see #getTransientObject()
+   * @generated
+   */
+  EAttribute getTransientObject_Val1();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.validation.csvalidationtest.TransientObject#getNested <em>Nested</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Nested</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TransientObject#getNested()
+   * @see #getTransientObject()
+   * @generated
+   */
+  EReference getTransientObject_Nested();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.validation.csvalidationtest.TransientObjectSub <em>Transient Object Sub</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Transient Object Sub</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TransientObjectSub
+   * @generated
+   */
+  EClass getTransientObjectSub();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.validation.csvalidationtest.TransientObjectSub#getVal2 <em>Val2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val2</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TransientObjectSub#getVal2()
+   * @see #getTransientObjectSub()
+   * @generated
+   */
+  EAttribute getTransientObjectSub_Val2();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.validation.csvalidationtest.TransientObjectSub#getVal3 <em>Val3</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val3</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TransientObjectSub#getVal3()
+   * @see #getTransientObjectSub()
+   * @generated
+   */
+  EAttribute getTransientObjectSub_Val3();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1 <em>Transient Serializeables1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Transient Serializeables1</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1
+   * @generated
+   */
+  EClass getTransientSerializeables1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1#getVal1 <em>Val1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val1</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1#getVal1()
+   * @see #getTransientSerializeables1()
+   * @generated
+   */
+  EAttribute getTransientSerializeables1_Val1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1#getEnum1 <em>Enum1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Enum1</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1#getEnum1()
+   * @see #getTransientSerializeables1()
+   * @generated
+   */
+  EAttribute getTransientSerializeables1_Enum1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1#getVal2 <em>Val2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val2</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1#getVal2()
+   * @see #getTransientSerializeables1()
+   * @generated
+   */
+  EAttribute getTransientSerializeables1_Val2();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1#getInt1 <em>Int1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Int1</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1#getInt1()
+   * @see #getTransientSerializeables1()
+   * @generated
+   */
+  EAttribute getTransientSerializeables1_Int1();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.validation.csvalidationtest.UnassignedAction2Sub <em>Unassigned Action2 Sub</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2665,6 +2963,16 @@ public interface CsvalidationtestPackage extends EPackage
    * @generated
    */
   EClass getUnassignedRuleCall2SubAction();
+
+  /**
+   * Returns the meta object for enum '{@link org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1Enum <em>Transient Serializeables1 Enum</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for enum '<em>Transient Serializeables1 Enum</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1Enum
+   * @generated
+   */
+  EEnum getTransientSerializeables1Enum();
 
   /**
    * Returns the factory that creates the instances of the model.
@@ -2882,6 +3190,22 @@ public interface CsvalidationtestPackage extends EPackage
      * @generated
      */
     EReference MODEL__X23 = eINSTANCE.getModel_X23();
+
+    /**
+     * The meta object literal for the '<em><b>X24</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X24 = eINSTANCE.getModel_X24();
+
+    /**
+     * The meta object literal for the '<em><b>X25</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X25 = eINSTANCE.getModel_X25();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -3612,6 +3936,100 @@ public interface CsvalidationtestPackage extends EPackage
     EAttribute ALT_LIST2__VAL3 = eINSTANCE.getAltList2_Val3();
 
     /**
+     * The meta object literal for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.TransientObjectImpl <em>Transient Object</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.validation.csvalidationtest.impl.TransientObjectImpl
+     * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getTransientObject()
+     * @generated
+     */
+    EClass TRANSIENT_OBJECT = eINSTANCE.getTransientObject();
+
+    /**
+     * The meta object literal for the '<em><b>Val1</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TRANSIENT_OBJECT__VAL1 = eINSTANCE.getTransientObject_Val1();
+
+    /**
+     * The meta object literal for the '<em><b>Nested</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference TRANSIENT_OBJECT__NESTED = eINSTANCE.getTransientObject_Nested();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.TransientObjectSubImpl <em>Transient Object Sub</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.validation.csvalidationtest.impl.TransientObjectSubImpl
+     * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getTransientObjectSub()
+     * @generated
+     */
+    EClass TRANSIENT_OBJECT_SUB = eINSTANCE.getTransientObjectSub();
+
+    /**
+     * The meta object literal for the '<em><b>Val2</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TRANSIENT_OBJECT_SUB__VAL2 = eINSTANCE.getTransientObjectSub_Val2();
+
+    /**
+     * The meta object literal for the '<em><b>Val3</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TRANSIENT_OBJECT_SUB__VAL3 = eINSTANCE.getTransientObjectSub_Val3();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.TransientSerializeables1Impl <em>Transient Serializeables1</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.validation.csvalidationtest.impl.TransientSerializeables1Impl
+     * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getTransientSerializeables1()
+     * @generated
+     */
+    EClass TRANSIENT_SERIALIZEABLES1 = eINSTANCE.getTransientSerializeables1();
+
+    /**
+     * The meta object literal for the '<em><b>Val1</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TRANSIENT_SERIALIZEABLES1__VAL1 = eINSTANCE.getTransientSerializeables1_Val1();
+
+    /**
+     * The meta object literal for the '<em><b>Enum1</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TRANSIENT_SERIALIZEABLES1__ENUM1 = eINSTANCE.getTransientSerializeables1_Enum1();
+
+    /**
+     * The meta object literal for the '<em><b>Val2</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TRANSIENT_SERIALIZEABLES1__VAL2 = eINSTANCE.getTransientSerializeables1_Val2();
+
+    /**
+     * The meta object literal for the '<em><b>Int1</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TRANSIENT_SERIALIZEABLES1__INT1 = eINSTANCE.getTransientSerializeables1_Int1();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.UnassignedAction2SubImpl <em>Unassigned Action2 Sub</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -3666,6 +4084,16 @@ public interface CsvalidationtestPackage extends EPackage
      * @generated
      */
     EClass UNASSIGNED_RULE_CALL2_SUB_ACTION = eINSTANCE.getUnassignedRuleCall2SubAction();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1Enum <em>Transient Serializeables1 Enum</em>}' enum.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1Enum
+     * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getTransientSerializeables1Enum()
+     * @generated
+     */
+    EEnum TRANSIENT_SERIALIZEABLES1_ENUM = eINSTANCE.getTransientSerializeables1Enum();
 
   }
 

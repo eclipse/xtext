@@ -61,6 +61,9 @@ protected class ThisRootNode extends RootToken {
 			case 23: return new List5_Group(this, this, 23, inst);
 			case 24: return new AltList1_Group(this, this, 24, inst);
 			case 25: return new AltList2_Group(this, this, 25, inst);
+			case 26: return new TransientObject_Group(this, this, 26, inst);
+			case 27: return new TransientObjectSub_Group(this, this, 27, inst);
+			case 28: return new TransientSerializeables1_Group(this, this, 28, inst);
 			default: return null;
 		}	
 	}	
@@ -75,7 +78,8 @@ protected class ThisRootNode extends RootToken {
  *   AssignedActionSecond|x8=UnassignedAction1|x9=UnassignedAction2|x10=
  *   UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|x13=
  *   Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
- *   List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2;
+ *   List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2|x24=
+ *   TransientObject|x25=TransientSerializeables1;
  *
  **/
 
@@ -84,7 +88,8 @@ protected class ThisRootNode extends RootToken {
 // AssignedActionSecond|x8=UnassignedAction1|x9=UnassignedAction2|x10=
 // UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|x13=
 // Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
-// List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2
+// List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2|x24=
+// TransientObject|x25=TransientSerializeables1
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -122,6 +127,8 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 20: return new Model_X21Assignment_20(parent, this, 20, inst);
 			case 21: return new Model_X22Assignment_21(parent, this, 21, inst);
 			case 22: return new Model_X23Assignment_22(parent, this, 22, inst);
+			case 23: return new Model_X24Assignment_23(parent, this, 23, inst);
+			case 24: return new Model_X25Assignment_24(parent, this, 24, inst);
 			default: return null;
 		}	
 	}	
@@ -1152,6 +1159,96 @@ protected class Model_X23Assignment_22 extends AssignmentToken  {
 			if(param.isInstanceOf(grammarAccess.getAltList2Rule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
 				element = grammarAccess.getModelAccess().getX23AltList2ParserRuleCall_22_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// x24=TransientObject
+protected class Model_X24Assignment_23 extends AssignmentToken  {
+	
+	public Model_X24Assignment_23(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getX24Assignment_23();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TransientObject_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("x24",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("x24");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getTransientObjectRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getModelAccess().getX24TransientObjectParserRuleCall_23_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// x25=TransientSerializeables1
+protected class Model_X25Assignment_24 extends AssignmentToken  {
+	
+	public Model_X25Assignment_24(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getX25Assignment_24();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TransientSerializeables1_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("x25",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("x25");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getTransientSerializeables1Rule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getModelAccess().getX25TransientSerializeables1ParserRuleCall_24_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -7034,5 +7131,517 @@ protected class AltList2_Val3Assignment_1_1_3 extends AssignmentToken  {
 
 
 /************ end Rule AltList2 ****************/
+
+
+/************ begin Rule TransientObject ****************
+ *
+ * TransientObject:
+ *   "#24" (val1=ID nested=TransientObjectSub)?;
+ *
+ **/
+
+// "#24" (val1=ID nested=TransientObjectSub)?
+protected class TransientObject_Group extends GroupToken {
+	
+	public TransientObject_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getTransientObjectAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TransientObject_Group_1(parent, this, 0, inst);
+			case 1: return new TransientObject_NumberSignDigitTwoDigitFourKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getTransientObjectRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "#24"
+protected class TransientObject_NumberSignDigitTwoDigitFourKeyword_0 extends KeywordToken  {
+	
+	public TransientObject_NumberSignDigitTwoDigitFourKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getTransientObjectAccess().getNumberSignDigitTwoDigitFourKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// (val1=ID nested=TransientObjectSub)?
+protected class TransientObject_Group_1 extends GroupToken {
+	
+	public TransientObject_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getTransientObjectAccess().getGroup_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TransientObject_NestedAssignment_1_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// val1=ID
+protected class TransientObject_Val1Assignment_1_0 extends AssignmentToken  {
+	
+	public TransientObject_Val1Assignment_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTransientObjectAccess().getVal1Assignment_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TransientObject_NumberSignDigitTwoDigitFourKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val1",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val1");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getTransientObjectAccess().getVal1IDTerminalRuleCall_1_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// nested=TransientObjectSub
+protected class TransientObject_NestedAssignment_1_1 extends AssignmentToken  {
+	
+	public TransientObject_NestedAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTransientObjectAccess().getNestedAssignment_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TransientObjectSub_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("nested",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("nested");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getTransientObjectSubRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getTransientObjectAccess().getNestedTransientObjectSubParserRuleCall_1_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new TransientObject_Val1Assignment_1_0(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+
+/************ end Rule TransientObject ****************/
+
+
+/************ begin Rule TransientObjectSub ****************
+ *
+ * TransientObjectSub:
+ *   val2=ID val3=ID;
+ *
+ **/
+
+// val2=ID val3=ID
+protected class TransientObjectSub_Group extends GroupToken {
+	
+	public TransientObjectSub_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getTransientObjectSubAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TransientObjectSub_Val3Assignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getTransientObjectSubRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// val2=ID
+protected class TransientObjectSub_Val2Assignment_0 extends AssignmentToken  {
+	
+	public TransientObjectSub_Val2Assignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTransientObjectSubAccess().getVal2Assignment_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val2",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val2");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getTransientObjectSubAccess().getVal2IDTerminalRuleCall_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// val3=ID
+protected class TransientObjectSub_Val3Assignment_1 extends AssignmentToken  {
+	
+	public TransientObjectSub_Val3Assignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTransientObjectSubAccess().getVal3Assignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TransientObjectSub_Val2Assignment_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val3",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val3");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getTransientObjectSubAccess().getVal3IDTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule TransientObjectSub ****************/
+
+
+/************ begin Rule TransientSerializeables1 ****************
+ *
+ * TransientSerializeables1:
+ *   "#25" (val1=ID enum1=TransientSerializeables1Enum)? (val2=ID int1=INT)?;
+ *
+ **/
+
+// "#25" (val1=ID enum1=TransientSerializeables1Enum)? (val2=ID int1=INT)?
+protected class TransientSerializeables1_Group extends GroupToken {
+	
+	public TransientSerializeables1_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getTransientSerializeables1Access().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TransientSerializeables1_Group_2(parent, this, 0, inst);
+			case 1: return new TransientSerializeables1_Group_1(parent, this, 1, inst);
+			case 2: return new TransientSerializeables1_NumberSignDigitTwoDigitFiveKeyword_0(parent, this, 2, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getTransientSerializeables1Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "#25"
+protected class TransientSerializeables1_NumberSignDigitTwoDigitFiveKeyword_0 extends KeywordToken  {
+	
+	public TransientSerializeables1_NumberSignDigitTwoDigitFiveKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getTransientSerializeables1Access().getNumberSignDigitTwoDigitFiveKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// (val1=ID enum1=TransientSerializeables1Enum)?
+protected class TransientSerializeables1_Group_1 extends GroupToken {
+	
+	public TransientSerializeables1_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getTransientSerializeables1Access().getGroup_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TransientSerializeables1_Enum1Assignment_1_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// val1=ID
+protected class TransientSerializeables1_Val1Assignment_1_0 extends AssignmentToken  {
+	
+	public TransientSerializeables1_Val1Assignment_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTransientSerializeables1Access().getVal1Assignment_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TransientSerializeables1_NumberSignDigitTwoDigitFiveKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val1",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val1");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getTransientSerializeables1Access().getVal1IDTerminalRuleCall_1_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// enum1=TransientSerializeables1Enum
+protected class TransientSerializeables1_Enum1Assignment_1_1 extends AssignmentToken  {
+	
+	public TransientSerializeables1_Enum1Assignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTransientSerializeables1Access().getEnum1Assignment_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TransientSerializeables1_Val1Assignment_1_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("enum1",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("enum1");
+		if(Boolean.TRUE.booleanValue()) {  
+			type = AssignmentType.ERC;
+			element = grammarAccess.getTransientSerializeables1Access().getEnum1TransientSerializeables1EnumEnumRuleCall_1_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// (val2=ID int1=INT)?
+protected class TransientSerializeables1_Group_2 extends GroupToken {
+	
+	public TransientSerializeables1_Group_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getTransientSerializeables1Access().getGroup_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TransientSerializeables1_Int1Assignment_2_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// val2=ID
+protected class TransientSerializeables1_Val2Assignment_2_0 extends AssignmentToken  {
+	
+	public TransientSerializeables1_Val2Assignment_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTransientSerializeables1Access().getVal2Assignment_2_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TransientSerializeables1_Group_1(parent, this, 0, inst);
+			case 1: return new TransientSerializeables1_NumberSignDigitTwoDigitFiveKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val2",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val2");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getTransientSerializeables1Access().getVal2IDTerminalRuleCall_2_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// int1=INT
+protected class TransientSerializeables1_Int1Assignment_2_1 extends AssignmentToken  {
+	
+	public TransientSerializeables1_Int1Assignment_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTransientSerializeables1Access().getInt1Assignment_2_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TransientSerializeables1_Val2Assignment_2_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("int1",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("int1");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getTransientSerializeables1Access().getInt1INTTerminalRuleCall_2_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+
+/************ end Rule TransientSerializeables1 ****************/
 
 }

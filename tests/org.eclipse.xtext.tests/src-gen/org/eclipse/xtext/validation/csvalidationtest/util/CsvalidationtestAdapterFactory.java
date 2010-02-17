@@ -203,6 +203,21 @@ public class CsvalidationtestAdapterFactory extends AdapterFactoryImpl
         return createAltList2Adapter();
       }
       @Override
+      public Adapter caseTransientObject(TransientObject object)
+      {
+        return createTransientObjectAdapter();
+      }
+      @Override
+      public Adapter caseTransientObjectSub(TransientObjectSub object)
+      {
+        return createTransientObjectSubAdapter();
+      }
+      @Override
+      public Adapter caseTransientSerializeables1(TransientSerializeables1 object)
+      {
+        return createTransientSerializeables1Adapter();
+      }
+      @Override
       public Adapter caseUnassignedAction2Sub(UnassignedAction2Sub object)
       {
         return createUnassignedAction2SubAdapter();
@@ -615,6 +630,51 @@ public class CsvalidationtestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createAltList2Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.validation.csvalidationtest.TransientObject <em>Transient Object</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TransientObject
+   * @generated
+   */
+  public Adapter createTransientObjectAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.validation.csvalidationtest.TransientObjectSub <em>Transient Object Sub</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TransientObjectSub
+   * @generated
+   */
+  public Adapter createTransientObjectSubAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1 <em>Transient Serializeables1</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1
+   * @generated
+   */
+  public Adapter createTransientSerializeables1Adapter()
   {
     return null;
   }

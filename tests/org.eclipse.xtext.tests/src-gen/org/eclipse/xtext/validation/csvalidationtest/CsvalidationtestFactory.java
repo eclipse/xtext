@@ -251,6 +251,33 @@ public interface CsvalidationtestFactory extends EFactory
   AltList2 createAltList2();
 
   /**
+   * Returns a new object of class '<em>Transient Object</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Transient Object</em>'.
+   * @generated
+   */
+  TransientObject createTransientObject();
+
+  /**
+   * Returns a new object of class '<em>Transient Object Sub</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Transient Object Sub</em>'.
+   * @generated
+   */
+  TransientObjectSub createTransientObjectSub();
+
+  /**
+   * Returns a new object of class '<em>Transient Serializeables1</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Transient Serializeables1</em>'.
+   * @generated
+   */
+  TransientSerializeables1 createTransientSerializeables1();
+
+  /**
    * Returns a new object of class '<em>Unassigned Action2 Sub</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

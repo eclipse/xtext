@@ -6,6 +6,7 @@
 package org.eclipse.xtext.validation.csvalidationtest.impl;
 
 import org.eclipse.emf.ecore.EClass;
+import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 
@@ -92,12 +93,49 @@ public class CsvalidationtestFactoryImpl extends EFactoryImpl implements Csvalid
       case CsvalidationtestPackage.LIST5: return createList5();
       case CsvalidationtestPackage.ALT_LIST1: return createAltList1();
       case CsvalidationtestPackage.ALT_LIST2: return createAltList2();
+      case CsvalidationtestPackage.TRANSIENT_OBJECT: return createTransientObject();
+      case CsvalidationtestPackage.TRANSIENT_OBJECT_SUB: return createTransientObjectSub();
+      case CsvalidationtestPackage.TRANSIENT_SERIALIZEABLES1: return createTransientSerializeables1();
       case CsvalidationtestPackage.UNASSIGNED_ACTION2_SUB: return createUnassignedAction2Sub();
       case CsvalidationtestPackage.UNASSIGNED_ACTION2_SUB1: return createUnassignedAction2Sub1();
       case CsvalidationtestPackage.UNASSIGNED_ACTION2_SUB2: return createUnassignedAction2Sub2();
       case CsvalidationtestPackage.UNASSIGNED_RULE_CALL2_SUB_ACTION: return createUnassignedRuleCall2SubAction();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
+    }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public Object createFromString(EDataType eDataType, String initialValue)
+  {
+    switch (eDataType.getClassifierID())
+    {
+      case CsvalidationtestPackage.TRANSIENT_SERIALIZEABLES1_ENUM:
+        return createTransientSerializeables1EnumFromString(eDataType, initialValue);
+      default:
+        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
+    }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String convertToString(EDataType eDataType, Object instanceValue)
+  {
+    switch (eDataType.getClassifierID())
+    {
+      case CsvalidationtestPackage.TRANSIENT_SERIALIZEABLES1_ENUM:
+        return convertTransientSerializeables1EnumToString(eDataType, instanceValue);
+      default:
+        throw new IllegalArgumentException("The datatype '" + eDataType.getName() + "' is not a valid classifier");
     }
   }
 
@@ -381,6 +419,39 @@ public class CsvalidationtestFactoryImpl extends EFactoryImpl implements Csvalid
    * <!-- end-user-doc -->
    * @generated
    */
+  public TransientObject createTransientObject()
+  {
+    TransientObjectImpl transientObject = new TransientObjectImpl();
+    return transientObject;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TransientObjectSub createTransientObjectSub()
+  {
+    TransientObjectSubImpl transientObjectSub = new TransientObjectSubImpl();
+    return transientObjectSub;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TransientSerializeables1 createTransientSerializeables1()
+  {
+    TransientSerializeables1Impl transientSerializeables1 = new TransientSerializeables1Impl();
+    return transientSerializeables1;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public UnassignedAction2Sub createUnassignedAction2Sub()
   {
     UnassignedAction2SubImpl unassignedAction2Sub = new UnassignedAction2SubImpl();
@@ -418,6 +489,28 @@ public class CsvalidationtestFactoryImpl extends EFactoryImpl implements Csvalid
   {
     UnassignedRuleCall2SubActionImpl unassignedRuleCall2SubAction = new UnassignedRuleCall2SubActionImpl();
     return unassignedRuleCall2SubAction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TransientSerializeables1Enum createTransientSerializeables1EnumFromString(EDataType eDataType, String initialValue)
+  {
+    TransientSerializeables1Enum result = TransientSerializeables1Enum.get(initialValue);
+    if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
+    return result;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String convertTransientSerializeables1EnumToString(EDataType eDataType, Object instanceValue)
+  {
+    return instanceValue == null ? null : instanceValue.toString();
   }
 
   /**

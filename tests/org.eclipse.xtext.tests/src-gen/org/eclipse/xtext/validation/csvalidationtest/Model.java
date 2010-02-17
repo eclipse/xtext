@@ -38,6 +38,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX21 <em>X21</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX22 <em>X22</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX23 <em>X23</em>}</li>
+ *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX24 <em>X24</em>}</li>
+ *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX25 <em>X25</em>}</li>
  * </ul>
  * </p>
  *
@@ -644,5 +646,57 @@ public interface Model extends EObject
    * @generated
    */
   void setX23(AltList2 value);
+
+  /**
+   * Returns the value of the '<em><b>X24</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X24</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X24</em>' containment reference.
+   * @see #setX24(TransientObject)
+   * @see org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage#getModel_X24()
+   * @model containment="true"
+   * @generated
+   */
+  TransientObject getX24();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX24 <em>X24</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X24</em>' containment reference.
+   * @see #getX24()
+   * @generated
+   */
+  void setX24(TransientObject value);
+
+  /**
+   * Returns the value of the '<em><b>X25</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X25</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X25</em>' containment reference.
+   * @see #setX25(TransientSerializeables1)
+   * @see org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage#getModel_X25()
+   * @model containment="true"
+   * @generated
+   */
+  TransientSerializeables1 getX25();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX25 <em>X25</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X25</em>' containment reference.
+   * @see #getX25()
+   * @generated
+   */
+  void setX25(TransientSerializeables1 value);
 
 } // Model

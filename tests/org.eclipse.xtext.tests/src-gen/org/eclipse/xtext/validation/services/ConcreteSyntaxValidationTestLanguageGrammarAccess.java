@@ -66,6 +66,10 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		private final RuleCall cX22AltList1ParserRuleCall_21_0 = (RuleCall)cX22Assignment_21.eContents().get(0);
 		private final Assignment cX23Assignment_22 = (Assignment)cAlternatives.eContents().get(22);
 		private final RuleCall cX23AltList2ParserRuleCall_22_0 = (RuleCall)cX23Assignment_22.eContents().get(0);
+		private final Assignment cX24Assignment_23 = (Assignment)cAlternatives.eContents().get(23);
+		private final RuleCall cX24TransientObjectParserRuleCall_23_0 = (RuleCall)cX24Assignment_23.eContents().get(0);
+		private final Assignment cX25Assignment_24 = (Assignment)cAlternatives.eContents().get(24);
+		private final RuleCall cX25TransientSerializeables1ParserRuleCall_24_0 = (RuleCall)cX25Assignment_24.eContents().get(0);
 		
 		//Model:
 		//  x1=SimpleGroup|x2=SimpleAlternative|x3=SimpleMultiplicities|x4=
@@ -73,7 +77,8 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//  AssignedActionSecond|x8=UnassignedAction1|x9=UnassignedAction2|x10=
 		//  UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|x13=
 		//  Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
-		//  List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2;
+		//  List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2|x24=
+		//  TransientObject|x25=TransientSerializeables1;
 		public ParserRule getRule() { return rule; }
 
 		//x1=SimpleGroup|x2=SimpleAlternative|x3=SimpleMultiplicities|x4=
@@ -81,7 +86,8 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//AssignedActionSecond|x8=UnassignedAction1|x9=UnassignedAction2|x10=
 		//UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|x13=
 		//Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
-		//List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2
+		//List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2|x24=
+		//TransientObject|x25=TransientSerializeables1
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//x1=SimpleGroup
@@ -221,6 +227,18 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 
 		//AltList2
 		public RuleCall getX23AltList2ParserRuleCall_22_0() { return cX23AltList2ParserRuleCall_22_0; }
+
+		//x24=TransientObject
+		public Assignment getX24Assignment_23() { return cX24Assignment_23; }
+
+		//TransientObject
+		public RuleCall getX24TransientObjectParserRuleCall_23_0() { return cX24TransientObjectParserRuleCall_23_0; }
+
+		//x25=TransientSerializeables1
+		public Assignment getX25Assignment_24() { return cX25Assignment_24; }
+
+		//TransientSerializeables1
+		public RuleCall getX25TransientSerializeables1ParserRuleCall_24_0() { return cX25TransientSerializeables1ParserRuleCall_24_0; }
 	}
 
 	public class SimpleGroupElements extends AbstractParserRuleElementFinder {
@@ -1526,7 +1544,155 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//ID
 		public RuleCall getVal3IDTerminalRuleCall_1_1_3_0() { return cVal3IDTerminalRuleCall_1_1_3_0; }
 	}
+
+	public class TransientObjectElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TransientObject");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitTwoDigitFourKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Assignment cVal1Assignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final RuleCall cVal1IDTerminalRuleCall_1_0_0 = (RuleCall)cVal1Assignment_1_0.eContents().get(0);
+		private final Assignment cNestedAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cNestedTransientObjectSubParserRuleCall_1_1_0 = (RuleCall)cNestedAssignment_1_1.eContents().get(0);
+		
+		//TransientObject:
+		//  "#24" (val1=ID nested=TransientObjectSub)?;
+		public ParserRule getRule() { return rule; }
+
+		//"#24" (val1=ID nested=TransientObjectSub)?
+		public Group getGroup() { return cGroup; }
+
+		//"#24"
+		public Keyword getNumberSignDigitTwoDigitFourKeyword_0() { return cNumberSignDigitTwoDigitFourKeyword_0; }
+
+		//(val1=ID nested=TransientObjectSub)?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//val1=ID
+		public Assignment getVal1Assignment_1_0() { return cVal1Assignment_1_0; }
+
+		//ID
+		public RuleCall getVal1IDTerminalRuleCall_1_0_0() { return cVal1IDTerminalRuleCall_1_0_0; }
+
+		//nested=TransientObjectSub
+		public Assignment getNestedAssignment_1_1() { return cNestedAssignment_1_1; }
+
+		//TransientObjectSub
+		public RuleCall getNestedTransientObjectSubParserRuleCall_1_1_0() { return cNestedTransientObjectSubParserRuleCall_1_1_0; }
+	}
+
+	public class TransientObjectSubElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TransientObjectSub");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cVal2Assignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cVal2IDTerminalRuleCall_0_0 = (RuleCall)cVal2Assignment_0.eContents().get(0);
+		private final Assignment cVal3Assignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cVal3IDTerminalRuleCall_1_0 = (RuleCall)cVal3Assignment_1.eContents().get(0);
+		
+		//TransientObjectSub:
+		//  val2=ID val3=ID;
+		public ParserRule getRule() { return rule; }
+
+		//val2=ID val3=ID
+		public Group getGroup() { return cGroup; }
+
+		//val2=ID
+		public Assignment getVal2Assignment_0() { return cVal2Assignment_0; }
+
+		//ID
+		public RuleCall getVal2IDTerminalRuleCall_0_0() { return cVal2IDTerminalRuleCall_0_0; }
+
+		//val3=ID
+		public Assignment getVal3Assignment_1() { return cVal3Assignment_1; }
+
+		//ID
+		public RuleCall getVal3IDTerminalRuleCall_1_0() { return cVal3IDTerminalRuleCall_1_0; }
+	}
+
+	public class TransientSerializeables1Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TransientSerializeables1");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitTwoDigitFiveKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
+		private final Assignment cVal1Assignment_1_0 = (Assignment)cGroup_1.eContents().get(0);
+		private final RuleCall cVal1IDTerminalRuleCall_1_0_0 = (RuleCall)cVal1Assignment_1_0.eContents().get(0);
+		private final Assignment cEnum1Assignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
+		private final RuleCall cEnum1TransientSerializeables1EnumEnumRuleCall_1_1_0 = (RuleCall)cEnum1Assignment_1_1.eContents().get(0);
+		private final Group cGroup_2 = (Group)cGroup.eContents().get(2);
+		private final Assignment cVal2Assignment_2_0 = (Assignment)cGroup_2.eContents().get(0);
+		private final RuleCall cVal2IDTerminalRuleCall_2_0_0 = (RuleCall)cVal2Assignment_2_0.eContents().get(0);
+		private final Assignment cInt1Assignment_2_1 = (Assignment)cGroup_2.eContents().get(1);
+		private final RuleCall cInt1INTTerminalRuleCall_2_1_0 = (RuleCall)cInt1Assignment_2_1.eContents().get(0);
+		
+		//TransientSerializeables1:
+		//  "#25" (val1=ID enum1=TransientSerializeables1Enum)? (val2=ID int1=INT)?;
+		public ParserRule getRule() { return rule; }
+
+		//"#25" (val1=ID enum1=TransientSerializeables1Enum)? (val2=ID int1=INT)?
+		public Group getGroup() { return cGroup; }
+
+		//"#25"
+		public Keyword getNumberSignDigitTwoDigitFiveKeyword_0() { return cNumberSignDigitTwoDigitFiveKeyword_0; }
+
+		//(val1=ID enum1=TransientSerializeables1Enum)?
+		public Group getGroup_1() { return cGroup_1; }
+
+		//val1=ID
+		public Assignment getVal1Assignment_1_0() { return cVal1Assignment_1_0; }
+
+		//ID
+		public RuleCall getVal1IDTerminalRuleCall_1_0_0() { return cVal1IDTerminalRuleCall_1_0_0; }
+
+		//enum1=TransientSerializeables1Enum
+		public Assignment getEnum1Assignment_1_1() { return cEnum1Assignment_1_1; }
+
+		//TransientSerializeables1Enum
+		public RuleCall getEnum1TransientSerializeables1EnumEnumRuleCall_1_1_0() { return cEnum1TransientSerializeables1EnumEnumRuleCall_1_1_0; }
+
+		//(val2=ID int1=INT)?
+		public Group getGroup_2() { return cGroup_2; }
+
+		//val2=ID
+		public Assignment getVal2Assignment_2_0() { return cVal2Assignment_2_0; }
+
+		//ID
+		public RuleCall getVal2IDTerminalRuleCall_2_0_0() { return cVal2IDTerminalRuleCall_2_0_0; }
+
+		//int1=INT
+		public Assignment getInt1Assignment_2_1() { return cInt1Assignment_2_1; }
+
+		//INT
+		public RuleCall getInt1INTTerminalRuleCall_2_1_0() { return cInt1INTTerminalRuleCall_2_1_0; }
+	}
 	
+	
+	public class TransientSerializeables1EnumElements extends AbstractEnumRuleElementFinder {
+		private final EnumRule rule = (EnumRule) GrammarUtil.findRuleForName(getGrammar(), "TransientSerializeables1Enum");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final EnumLiteralDeclaration cLit1EnumLiteralDeclaration_0 = (EnumLiteralDeclaration)cAlternatives.eContents().get(0);
+		private final Keyword cLit1Lit1Keyword_0_0 = (Keyword)cLit1EnumLiteralDeclaration_0.eContents().get(0);
+		private final EnumLiteralDeclaration cLit2EnumLiteralDeclaration_1 = (EnumLiteralDeclaration)cAlternatives.eContents().get(1);
+		private final Keyword cLit2Lit2Keyword_1_0 = (Keyword)cLit2EnumLiteralDeclaration_1.eContents().get(0);
+		
+		//enum TransientSerializeables1Enum:
+		//  lit1 | lit2;
+		public EnumRule getRule() { return rule; }
+
+		//lit1 | lit2
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//lit1
+		public EnumLiteralDeclaration getLit1EnumLiteralDeclaration_0() { return cLit1EnumLiteralDeclaration_0; }
+
+		//"lit1"
+		public Keyword getLit1Lit1Keyword_0_0() { return cLit1Lit1Keyword_0_0; }
+
+		//lit2
+		public EnumLiteralDeclaration getLit2EnumLiteralDeclaration_1() { return cLit2EnumLiteralDeclaration_1; }
+
+		//"lit2"
+		public Keyword getLit2Lit2Keyword_1_0() { return cLit2Lit2Keyword_1_0; }
+	}
 	
 	private ModelElements pModel;
 	private SimpleGroupElements pSimpleGroup;
@@ -1554,6 +1720,10 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	private List5Elements pList5;
 	private AltList1Elements pAltList1;
 	private AltList2Elements pAltList2;
+	private TransientObjectElements pTransientObject;
+	private TransientObjectSubElements pTransientObjectSub;
+	private TransientSerializeables1Elements pTransientSerializeables1;
+	private TransientSerializeables1EnumElements unknownRuleTransientSerializeables1Enum;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -1582,7 +1752,8 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//  AssignedActionSecond|x8=UnassignedAction1|x9=UnassignedAction2|x10=
 	//  UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|x13=
 	//  Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
-	//  List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2;
+	//  List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2|x24=
+	//  TransientObject|x25=TransientSerializeables1;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -1841,6 +2012,46 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	
 	public ParserRule getAltList2Rule() {
 		return getAltList2Access().getRule();
+	}
+
+	//TransientObject:
+	//  "#24" (val1=ID nested=TransientObjectSub)?;
+	public TransientObjectElements getTransientObjectAccess() {
+		return (pTransientObject != null) ? pTransientObject : (pTransientObject = new TransientObjectElements());
+	}
+	
+	public ParserRule getTransientObjectRule() {
+		return getTransientObjectAccess().getRule();
+	}
+
+	//TransientObjectSub:
+	//  val2=ID val3=ID;
+	public TransientObjectSubElements getTransientObjectSubAccess() {
+		return (pTransientObjectSub != null) ? pTransientObjectSub : (pTransientObjectSub = new TransientObjectSubElements());
+	}
+	
+	public ParserRule getTransientObjectSubRule() {
+		return getTransientObjectSubAccess().getRule();
+	}
+
+	//TransientSerializeables1:
+	//  "#25" (val1=ID enum1=TransientSerializeables1Enum)? (val2=ID int1=INT)?;
+	public TransientSerializeables1Elements getTransientSerializeables1Access() {
+		return (pTransientSerializeables1 != null) ? pTransientSerializeables1 : (pTransientSerializeables1 = new TransientSerializeables1Elements());
+	}
+	
+	public ParserRule getTransientSerializeables1Rule() {
+		return getTransientSerializeables1Access().getRule();
+	}
+
+	//enum TransientSerializeables1Enum:
+	//  lit1 | lit2;
+	public TransientSerializeables1EnumElements getTransientSerializeables1EnumAccess() {
+		return (unknownRuleTransientSerializeables1Enum != null) ? unknownRuleTransientSerializeables1Enum : (unknownRuleTransientSerializeables1Enum = new TransientSerializeables1EnumElements());
+	}
+	
+	public EnumRule getTransientSerializeables1EnumRule() {
+		return getTransientSerializeables1EnumAccess().getRule();
 	}
 
 	//terminal ID:
