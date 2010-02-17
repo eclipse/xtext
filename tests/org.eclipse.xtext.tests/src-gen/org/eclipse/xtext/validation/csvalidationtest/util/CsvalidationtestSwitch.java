@@ -258,6 +258,20 @@ public class CsvalidationtestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case CsvalidationtestPackage.ALT_LIST1:
+      {
+        AltList1 altList1 = (AltList1)theEObject;
+        T result = caseAltList1(altList1);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case CsvalidationtestPackage.ALT_LIST2:
+      {
+        AltList2 altList2 = (AltList2)theEObject;
+        T result = caseAltList2(altList2);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case CsvalidationtestPackage.UNASSIGNED_ACTION2_SUB:
       {
         UnassignedAction2Sub unassignedAction2Sub = (UnassignedAction2Sub)theEObject;
@@ -659,6 +673,38 @@ public class CsvalidationtestSwitch<T>
    * @generated
    */
   public T caseList5(List5 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Alt List1</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Alt List1</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAltList1(AltList1 object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Alt List2</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Alt List2</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAltList2(AltList2 object)
   {
     return null;
   }

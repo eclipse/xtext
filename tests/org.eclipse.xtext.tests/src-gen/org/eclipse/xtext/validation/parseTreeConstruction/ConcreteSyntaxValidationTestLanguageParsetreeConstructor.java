@@ -59,6 +59,8 @@ protected class ThisRootNode extends RootToken {
 			case 21: return new List3_Alternatives(this, this, 21, inst);
 			case 22: return new List4_Group(this, this, 22, inst);
 			case 23: return new List5_Group(this, this, 23, inst);
+			case 24: return new AltList1_Group(this, this, 24, inst);
+			case 25: return new AltList2_Group(this, this, 25, inst);
 			default: return null;
 		}	
 	}	
@@ -73,7 +75,7 @@ protected class ThisRootNode extends RootToken {
  *   AssignedActionSecond|x8=UnassignedAction1|x9=UnassignedAction2|x10=
  *   UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|x13=
  *   Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
- *   List2|x19=List3|x20=List4|x21=List5;
+ *   List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2;
  *
  **/
 
@@ -82,7 +84,7 @@ protected class ThisRootNode extends RootToken {
 // AssignedActionSecond|x8=UnassignedAction1|x9=UnassignedAction2|x10=
 // UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|x13=
 // Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
-// List2|x19=List3|x20=List4|x21=List5
+// List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -118,6 +120,8 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 18: return new Model_X19Assignment_18(parent, this, 18, inst);
 			case 19: return new Model_X20Assignment_19(parent, this, 19, inst);
 			case 20: return new Model_X21Assignment_20(parent, this, 20, inst);
+			case 21: return new Model_X22Assignment_21(parent, this, 21, inst);
+			case 22: return new Model_X23Assignment_22(parent, this, 22, inst);
 			default: return null;
 		}	
 	}	
@@ -1058,6 +1062,96 @@ protected class Model_X21Assignment_20 extends AssignmentToken  {
 			if(param.isInstanceOf(grammarAccess.getList5Rule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
 				element = grammarAccess.getModelAccess().getX21List5ParserRuleCall_20_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// x22=AltList1
+protected class Model_X22Assignment_21 extends AssignmentToken  {
+	
+	public Model_X22Assignment_21(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getX22Assignment_21();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList1_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("x22",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("x22");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getAltList1Rule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getModelAccess().getX22AltList1ParserRuleCall_21_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// x23=AltList2
+protected class Model_X23Assignment_22 extends AssignmentToken  {
+	
+	public Model_X23Assignment_22(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getX23Assignment_22();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList2_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("x23",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("x23");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getAltList2Rule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getModelAccess().getX23AltList2ParserRuleCall_22_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -6170,5 +6264,775 @@ protected class List5_Val3Assignment_1_1 extends AssignmentToken  {
 
 
 /************ end Rule List5 ****************/
+
+
+/************ begin Rule AltList1 ****************
+ *
+ * AltList1:
+ *   "#22" (val1=ID val2=ID|"kw1" val1=ID val3=ID|"kw2" val1=ID val4=ID?);
+ *
+ **/
+
+// "#22" (val1=ID val2=ID|"kw1" val1=ID val3=ID|"kw2" val1=ID val4=ID?)
+protected class AltList1_Group extends GroupToken {
+	
+	public AltList1_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getAltList1Access().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList1_Alternatives_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getAltList1Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "#22"
+protected class AltList1_NumberSignDigitTwoDigitTwoKeyword_0 extends KeywordToken  {
+	
+	public AltList1_NumberSignDigitTwoDigitTwoKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getAltList1Access().getNumberSignDigitTwoDigitTwoKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// val1=ID val2=ID|"kw1" val1=ID val3=ID|"kw2" val1=ID val4=ID?
+protected class AltList1_Alternatives_1 extends AlternativesToken {
+
+	public AltList1_Alternatives_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getAltList1Access().getAlternatives_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList1_Group_1_0(parent, this, 0, inst);
+			case 1: return new AltList1_Group_1_1(parent, this, 1, inst);
+			case 2: return new AltList1_Group_1_2(parent, this, 2, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// val1=ID val2=ID
+protected class AltList1_Group_1_0 extends GroupToken {
+	
+	public AltList1_Group_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getAltList1Access().getGroup_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList1_Val2Assignment_1_0_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// val1=ID
+protected class AltList1_Val1Assignment_1_0_0 extends AssignmentToken  {
+	
+	public AltList1_Val1Assignment_1_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getAltList1Access().getVal1Assignment_1_0_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList1_NumberSignDigitTwoDigitTwoKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val1",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val1");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getAltList1Access().getVal1IDTerminalRuleCall_1_0_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// val2=ID
+protected class AltList1_Val2Assignment_1_0_1 extends AssignmentToken  {
+	
+	public AltList1_Val2Assignment_1_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getAltList1Access().getVal2Assignment_1_0_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList1_Val1Assignment_1_0_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val2",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val2");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getAltList1Access().getVal2IDTerminalRuleCall_1_0_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// "kw1" val1=ID val3=ID
+protected class AltList1_Group_1_1 extends GroupToken {
+	
+	public AltList1_Group_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getAltList1Access().getGroup_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList1_Val3Assignment_1_1_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "kw1"
+protected class AltList1_Kw1Keyword_1_1_0 extends KeywordToken  {
+	
+	public AltList1_Kw1Keyword_1_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getAltList1Access().getKw1Keyword_1_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList1_NumberSignDigitTwoDigitTwoKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// val1=ID
+protected class AltList1_Val1Assignment_1_1_1 extends AssignmentToken  {
+	
+	public AltList1_Val1Assignment_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getAltList1Access().getVal1Assignment_1_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList1_Kw1Keyword_1_1_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val1",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val1");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getAltList1Access().getVal1IDTerminalRuleCall_1_1_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// val3=ID
+protected class AltList1_Val3Assignment_1_1_2 extends AssignmentToken  {
+	
+	public AltList1_Val3Assignment_1_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getAltList1Access().getVal3Assignment_1_1_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList1_Val1Assignment_1_1_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val3",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val3");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getAltList1Access().getVal3IDTerminalRuleCall_1_1_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// "kw2" val1=ID val4=ID?
+protected class AltList1_Group_1_2 extends GroupToken {
+	
+	public AltList1_Group_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getAltList1Access().getGroup_1_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList1_Val4Assignment_1_2_2(parent, this, 0, inst);
+			case 1: return new AltList1_Val1Assignment_1_2_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "kw2"
+protected class AltList1_Kw2Keyword_1_2_0 extends KeywordToken  {
+	
+	public AltList1_Kw2Keyword_1_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getAltList1Access().getKw2Keyword_1_2_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList1_NumberSignDigitTwoDigitTwoKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// val1=ID
+protected class AltList1_Val1Assignment_1_2_1 extends AssignmentToken  {
+	
+	public AltList1_Val1Assignment_1_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getAltList1Access().getVal1Assignment_1_2_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList1_Kw2Keyword_1_2_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val1",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val1");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getAltList1Access().getVal1IDTerminalRuleCall_1_2_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// val4=ID?
+protected class AltList1_Val4Assignment_1_2_2 extends AssignmentToken  {
+	
+	public AltList1_Val4Assignment_1_2_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getAltList1Access().getVal4Assignment_1_2_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList1_Val1Assignment_1_2_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val4",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val4");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getAltList1Access().getVal4IDTerminalRuleCall_1_2_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+
+
+/************ end Rule AltList1 ****************/
+
+
+/************ begin Rule AltList2 ****************
+ *
+ * AltList2:
+ *   "#23" (val1+=ID val2=ID|"kw" val1+=ID ("," val1+=ID)* val3=ID);
+ *
+ **/
+
+// "#23" (val1+=ID val2=ID|"kw" val1+=ID ("," val1+=ID)* val3=ID)
+protected class AltList2_Group extends GroupToken {
+	
+	public AltList2_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getAltList2Access().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList2_Alternatives_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getAltList2Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "#23"
+protected class AltList2_NumberSignDigitTwoDigitThreeKeyword_0 extends KeywordToken  {
+	
+	public AltList2_NumberSignDigitTwoDigitThreeKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getAltList2Access().getNumberSignDigitTwoDigitThreeKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// val1+=ID val2=ID|"kw" val1+=ID ("," val1+=ID)* val3=ID
+protected class AltList2_Alternatives_1 extends AlternativesToken {
+
+	public AltList2_Alternatives_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getAltList2Access().getAlternatives_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList2_Group_1_0(parent, this, 0, inst);
+			case 1: return new AltList2_Group_1_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// val1+=ID val2=ID
+protected class AltList2_Group_1_0 extends GroupToken {
+	
+	public AltList2_Group_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getAltList2Access().getGroup_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList2_Val2Assignment_1_0_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// val1+=ID
+protected class AltList2_Val1Assignment_1_0_0 extends AssignmentToken  {
+	
+	public AltList2_Val1Assignment_1_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getAltList2Access().getVal1Assignment_1_0_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList2_NumberSignDigitTwoDigitThreeKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val1",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val1");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getAltList2Access().getVal1IDTerminalRuleCall_1_0_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// val2=ID
+protected class AltList2_Val2Assignment_1_0_1 extends AssignmentToken  {
+	
+	public AltList2_Val2Assignment_1_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getAltList2Access().getVal2Assignment_1_0_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList2_Val1Assignment_1_0_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val2",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val2");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getAltList2Access().getVal2IDTerminalRuleCall_1_0_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// "kw" val1+=ID ("," val1+=ID)* val3=ID
+protected class AltList2_Group_1_1 extends GroupToken {
+	
+	public AltList2_Group_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getAltList2Access().getGroup_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList2_Val3Assignment_1_1_3(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "kw"
+protected class AltList2_KwKeyword_1_1_0 extends KeywordToken  {
+	
+	public AltList2_KwKeyword_1_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getAltList2Access().getKwKeyword_1_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList2_NumberSignDigitTwoDigitThreeKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// val1+=ID
+protected class AltList2_Val1Assignment_1_1_1 extends AssignmentToken  {
+	
+	public AltList2_Val1Assignment_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getAltList2Access().getVal1Assignment_1_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList2_KwKeyword_1_1_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val1",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val1");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getAltList2Access().getVal1IDTerminalRuleCall_1_1_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// ("," val1+=ID)*
+protected class AltList2_Group_1_1_2 extends GroupToken {
+	
+	public AltList2_Group_1_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getAltList2Access().getGroup_1_1_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList2_Val1Assignment_1_1_2_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// ","
+protected class AltList2_CommaKeyword_1_1_2_0 extends KeywordToken  {
+	
+	public AltList2_CommaKeyword_1_1_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getAltList2Access().getCommaKeyword_1_1_2_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList2_Group_1_1_2(parent, this, 0, inst);
+			case 1: return new AltList2_Val1Assignment_1_1_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// val1+=ID
+protected class AltList2_Val1Assignment_1_1_2_1 extends AssignmentToken  {
+	
+	public AltList2_Val1Assignment_1_1_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getAltList2Access().getVal1Assignment_1_1_2_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList2_CommaKeyword_1_1_2_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val1",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val1");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getAltList2Access().getVal1IDTerminalRuleCall_1_1_2_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// val3=ID
+protected class AltList2_Val3Assignment_1_1_3 extends AssignmentToken  {
+	
+	public AltList2_Val3Assignment_1_1_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getAltList2Access().getVal3Assignment_1_1_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AltList2_Group_1_1_2(parent, this, 0, inst);
+			case 1: return new AltList2_Val1Assignment_1_1_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val3",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val3");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getAltList2Access().getVal3IDTerminalRuleCall_1_1_3_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+
+
+/************ end Rule AltList2 ****************/
 
 }

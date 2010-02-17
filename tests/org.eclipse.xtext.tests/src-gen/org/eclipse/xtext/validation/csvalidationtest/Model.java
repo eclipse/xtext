@@ -36,6 +36,8 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX19 <em>X19</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX20 <em>X20</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX21 <em>X21</em>}</li>
+ *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX22 <em>X22</em>}</li>
+ *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX23 <em>X23</em>}</li>
  * </ul>
  * </p>
  *
@@ -590,5 +592,57 @@ public interface Model extends EObject
    * @generated
    */
   void setX21(List5 value);
+
+  /**
+   * Returns the value of the '<em><b>X22</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X22</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X22</em>' containment reference.
+   * @see #setX22(AltList1)
+   * @see org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage#getModel_X22()
+   * @model containment="true"
+   * @generated
+   */
+  AltList1 getX22();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX22 <em>X22</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X22</em>' containment reference.
+   * @see #getX22()
+   * @generated
+   */
+  void setX22(AltList1 value);
+
+  /**
+   * Returns the value of the '<em><b>X23</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X23</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X23</em>' containment reference.
+   * @see #setX23(AltList2)
+   * @see org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage#getModel_X23()
+   * @model containment="true"
+   * @generated
+   */
+  AltList2 getX23();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX23 <em>X23</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X23</em>' containment reference.
+   * @see #getX23()
+   * @generated
+   */
+  void setX23(AltList2 value);
 
 } // Model

@@ -193,6 +193,16 @@ public class CsvalidationtestAdapterFactory extends AdapterFactoryImpl
         return createList5Adapter();
       }
       @Override
+      public Adapter caseAltList1(AltList1 object)
+      {
+        return createAltList1Adapter();
+      }
+      @Override
+      public Adapter caseAltList2(AltList2 object)
+      {
+        return createAltList2Adapter();
+      }
+      @Override
       public Adapter caseUnassignedAction2Sub(UnassignedAction2Sub object)
       {
         return createUnassignedAction2SubAdapter();
@@ -575,6 +585,36 @@ public class CsvalidationtestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createList5Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.validation.csvalidationtest.AltList1 <em>Alt List1</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.validation.csvalidationtest.AltList1
+   * @generated
+   */
+  public Adapter createAltList1Adapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.validation.csvalidationtest.AltList2 <em>Alt List2</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.validation.csvalidationtest.AltList2
+   * @generated
+   */
+  public Adapter createAltList2Adapter()
   {
     return null;
   }

@@ -62,6 +62,10 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		private final RuleCall cX20List4ParserRuleCall_19_0 = (RuleCall)cX20Assignment_19.eContents().get(0);
 		private final Assignment cX21Assignment_20 = (Assignment)cAlternatives.eContents().get(20);
 		private final RuleCall cX21List5ParserRuleCall_20_0 = (RuleCall)cX21Assignment_20.eContents().get(0);
+		private final Assignment cX22Assignment_21 = (Assignment)cAlternatives.eContents().get(21);
+		private final RuleCall cX22AltList1ParserRuleCall_21_0 = (RuleCall)cX22Assignment_21.eContents().get(0);
+		private final Assignment cX23Assignment_22 = (Assignment)cAlternatives.eContents().get(22);
+		private final RuleCall cX23AltList2ParserRuleCall_22_0 = (RuleCall)cX23Assignment_22.eContents().get(0);
 		
 		//Model:
 		//  x1=SimpleGroup|x2=SimpleAlternative|x3=SimpleMultiplicities|x4=
@@ -69,7 +73,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//  AssignedActionSecond|x8=UnassignedAction1|x9=UnassignedAction2|x10=
 		//  UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|x13=
 		//  Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
-		//  List2|x19=List3|x20=List4|x21=List5;
+		//  List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2;
 		public ParserRule getRule() { return rule; }
 
 		//x1=SimpleGroup|x2=SimpleAlternative|x3=SimpleMultiplicities|x4=
@@ -77,7 +81,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//AssignedActionSecond|x8=UnassignedAction1|x9=UnassignedAction2|x10=
 		//UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|x13=
 		//Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
-		//List2|x19=List3|x20=List4|x21=List5
+		//List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//x1=SimpleGroup
@@ -205,6 +209,18 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 
 		//List5
 		public RuleCall getX21List5ParserRuleCall_20_0() { return cX21List5ParserRuleCall_20_0; }
+
+		//x22=AltList1
+		public Assignment getX22Assignment_21() { return cX22Assignment_21; }
+
+		//AltList1
+		public RuleCall getX22AltList1ParserRuleCall_21_0() { return cX22AltList1ParserRuleCall_21_0; }
+
+		//x23=AltList2
+		public Assignment getX23Assignment_22() { return cX23Assignment_22; }
+
+		//AltList2
+		public RuleCall getX23AltList2ParserRuleCall_22_0() { return cX23AltList2ParserRuleCall_22_0; }
 	}
 
 	public class SimpleGroupElements extends AbstractParserRuleElementFinder {
@@ -1342,6 +1358,174 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//ID
 		public RuleCall getVal3IDTerminalRuleCall_1_1_0() { return cVal3IDTerminalRuleCall_1_1_0; }
 	}
+
+	public class AltList1Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AltList1");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitTwoDigitTwoKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
+		private final Assignment cVal1Assignment_1_0_0 = (Assignment)cGroup_1_0.eContents().get(0);
+		private final RuleCall cVal1IDTerminalRuleCall_1_0_0_0 = (RuleCall)cVal1Assignment_1_0_0.eContents().get(0);
+		private final Assignment cVal2Assignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
+		private final RuleCall cVal2IDTerminalRuleCall_1_0_1_0 = (RuleCall)cVal2Assignment_1_0_1.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
+		private final Keyword cKw1Keyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
+		private final Assignment cVal1Assignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
+		private final RuleCall cVal1IDTerminalRuleCall_1_1_1_0 = (RuleCall)cVal1Assignment_1_1_1.eContents().get(0);
+		private final Assignment cVal3Assignment_1_1_2 = (Assignment)cGroup_1_1.eContents().get(2);
+		private final RuleCall cVal3IDTerminalRuleCall_1_1_2_0 = (RuleCall)cVal3Assignment_1_1_2.eContents().get(0);
+		private final Group cGroup_1_2 = (Group)cAlternatives_1.eContents().get(2);
+		private final Keyword cKw2Keyword_1_2_0 = (Keyword)cGroup_1_2.eContents().get(0);
+		private final Assignment cVal1Assignment_1_2_1 = (Assignment)cGroup_1_2.eContents().get(1);
+		private final RuleCall cVal1IDTerminalRuleCall_1_2_1_0 = (RuleCall)cVal1Assignment_1_2_1.eContents().get(0);
+		private final Assignment cVal4Assignment_1_2_2 = (Assignment)cGroup_1_2.eContents().get(2);
+		private final RuleCall cVal4IDTerminalRuleCall_1_2_2_0 = (RuleCall)cVal4Assignment_1_2_2.eContents().get(0);
+		
+		//AltList1:
+		//  "#22" (val1=ID val2=ID|"kw1" val1=ID val3=ID|"kw2" val1=ID val4=ID?);
+		public ParserRule getRule() { return rule; }
+
+		//"#22" (val1=ID val2=ID|"kw1" val1=ID val3=ID|"kw2" val1=ID val4=ID?)
+		public Group getGroup() { return cGroup; }
+
+		//"#22"
+		public Keyword getNumberSignDigitTwoDigitTwoKeyword_0() { return cNumberSignDigitTwoDigitTwoKeyword_0; }
+
+		//val1=ID val2=ID|"kw1" val1=ID val3=ID|"kw2" val1=ID val4=ID?
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
+		//val1=ID val2=ID
+		public Group getGroup_1_0() { return cGroup_1_0; }
+
+		//val1=ID
+		public Assignment getVal1Assignment_1_0_0() { return cVal1Assignment_1_0_0; }
+
+		//ID
+		public RuleCall getVal1IDTerminalRuleCall_1_0_0_0() { return cVal1IDTerminalRuleCall_1_0_0_0; }
+
+		//val2=ID
+		public Assignment getVal2Assignment_1_0_1() { return cVal2Assignment_1_0_1; }
+
+		//ID
+		public RuleCall getVal2IDTerminalRuleCall_1_0_1_0() { return cVal2IDTerminalRuleCall_1_0_1_0; }
+
+		//"kw1" val1=ID val3=ID
+		public Group getGroup_1_1() { return cGroup_1_1; }
+
+		//"kw1"
+		public Keyword getKw1Keyword_1_1_0() { return cKw1Keyword_1_1_0; }
+
+		//val1=ID
+		public Assignment getVal1Assignment_1_1_1() { return cVal1Assignment_1_1_1; }
+
+		//ID
+		public RuleCall getVal1IDTerminalRuleCall_1_1_1_0() { return cVal1IDTerminalRuleCall_1_1_1_0; }
+
+		//val3=ID
+		public Assignment getVal3Assignment_1_1_2() { return cVal3Assignment_1_1_2; }
+
+		//ID
+		public RuleCall getVal3IDTerminalRuleCall_1_1_2_0() { return cVal3IDTerminalRuleCall_1_1_2_0; }
+
+		//"kw2" val1=ID val4=ID?
+		public Group getGroup_1_2() { return cGroup_1_2; }
+
+		//"kw2"
+		public Keyword getKw2Keyword_1_2_0() { return cKw2Keyword_1_2_0; }
+
+		//val1=ID
+		public Assignment getVal1Assignment_1_2_1() { return cVal1Assignment_1_2_1; }
+
+		//ID
+		public RuleCall getVal1IDTerminalRuleCall_1_2_1_0() { return cVal1IDTerminalRuleCall_1_2_1_0; }
+
+		//val4=ID?
+		public Assignment getVal4Assignment_1_2_2() { return cVal4Assignment_1_2_2; }
+
+		//ID
+		public RuleCall getVal4IDTerminalRuleCall_1_2_2_0() { return cVal4IDTerminalRuleCall_1_2_2_0; }
+	}
+
+	public class AltList2Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AltList2");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitTwoDigitThreeKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Group cGroup_1_0 = (Group)cAlternatives_1.eContents().get(0);
+		private final Assignment cVal1Assignment_1_0_0 = (Assignment)cGroup_1_0.eContents().get(0);
+		private final RuleCall cVal1IDTerminalRuleCall_1_0_0_0 = (RuleCall)cVal1Assignment_1_0_0.eContents().get(0);
+		private final Assignment cVal2Assignment_1_0_1 = (Assignment)cGroup_1_0.eContents().get(1);
+		private final RuleCall cVal2IDTerminalRuleCall_1_0_1_0 = (RuleCall)cVal2Assignment_1_0_1.eContents().get(0);
+		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
+		private final Keyword cKwKeyword_1_1_0 = (Keyword)cGroup_1_1.eContents().get(0);
+		private final Assignment cVal1Assignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
+		private final RuleCall cVal1IDTerminalRuleCall_1_1_1_0 = (RuleCall)cVal1Assignment_1_1_1.eContents().get(0);
+		private final Group cGroup_1_1_2 = (Group)cGroup_1_1.eContents().get(2);
+		private final Keyword cCommaKeyword_1_1_2_0 = (Keyword)cGroup_1_1_2.eContents().get(0);
+		private final Assignment cVal1Assignment_1_1_2_1 = (Assignment)cGroup_1_1_2.eContents().get(1);
+		private final RuleCall cVal1IDTerminalRuleCall_1_1_2_1_0 = (RuleCall)cVal1Assignment_1_1_2_1.eContents().get(0);
+		private final Assignment cVal3Assignment_1_1_3 = (Assignment)cGroup_1_1.eContents().get(3);
+		private final RuleCall cVal3IDTerminalRuleCall_1_1_3_0 = (RuleCall)cVal3Assignment_1_1_3.eContents().get(0);
+		
+		//AltList2:
+		//  "#23" (val1+=ID val2=ID|"kw" val1+=ID ("," val1+=ID)* val3=ID);
+		public ParserRule getRule() { return rule; }
+
+		//"#23" (val1+=ID val2=ID|"kw" val1+=ID ("," val1+=ID)* val3=ID)
+		public Group getGroup() { return cGroup; }
+
+		//"#23"
+		public Keyword getNumberSignDigitTwoDigitThreeKeyword_0() { return cNumberSignDigitTwoDigitThreeKeyword_0; }
+
+		//val1+=ID val2=ID|"kw" val1+=ID ("," val1+=ID)* val3=ID
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
+		//val1+=ID val2=ID
+		public Group getGroup_1_0() { return cGroup_1_0; }
+
+		//val1+=ID
+		public Assignment getVal1Assignment_1_0_0() { return cVal1Assignment_1_0_0; }
+
+		//ID
+		public RuleCall getVal1IDTerminalRuleCall_1_0_0_0() { return cVal1IDTerminalRuleCall_1_0_0_0; }
+
+		//val2=ID
+		public Assignment getVal2Assignment_1_0_1() { return cVal2Assignment_1_0_1; }
+
+		//ID
+		public RuleCall getVal2IDTerminalRuleCall_1_0_1_0() { return cVal2IDTerminalRuleCall_1_0_1_0; }
+
+		//"kw" val1+=ID ("," val1+=ID)* val3=ID
+		public Group getGroup_1_1() { return cGroup_1_1; }
+
+		//"kw"
+		public Keyword getKwKeyword_1_1_0() { return cKwKeyword_1_1_0; }
+
+		//val1+=ID
+		public Assignment getVal1Assignment_1_1_1() { return cVal1Assignment_1_1_1; }
+
+		//ID
+		public RuleCall getVal1IDTerminalRuleCall_1_1_1_0() { return cVal1IDTerminalRuleCall_1_1_1_0; }
+
+		//("," val1+=ID)*
+		public Group getGroup_1_1_2() { return cGroup_1_1_2; }
+
+		//","
+		public Keyword getCommaKeyword_1_1_2_0() { return cCommaKeyword_1_1_2_0; }
+
+		//val1+=ID
+		public Assignment getVal1Assignment_1_1_2_1() { return cVal1Assignment_1_1_2_1; }
+
+		//ID
+		public RuleCall getVal1IDTerminalRuleCall_1_1_2_1_0() { return cVal1IDTerminalRuleCall_1_1_2_1_0; }
+
+		//val3=ID
+		public Assignment getVal3Assignment_1_1_3() { return cVal3Assignment_1_1_3; }
+
+		//ID
+		public RuleCall getVal3IDTerminalRuleCall_1_1_3_0() { return cVal3IDTerminalRuleCall_1_1_3_0; }
+	}
 	
 	
 	private ModelElements pModel;
@@ -1368,6 +1552,8 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	private List3Elements pList3;
 	private List4Elements pList4;
 	private List5Elements pList5;
+	private AltList1Elements pAltList1;
+	private AltList2Elements pAltList2;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -1396,7 +1582,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//  AssignedActionSecond|x8=UnassignedAction1|x9=UnassignedAction2|x10=
 	//  UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|x13=
 	//  Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
-	//  List2|x19=List3|x20=List4|x21=List5;
+	//  List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -1635,6 +1821,26 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	
 	public ParserRule getList5Rule() {
 		return getList5Access().getRule();
+	}
+
+	//AltList1:
+	//  "#22" (val1=ID val2=ID|"kw1" val1=ID val3=ID|"kw2" val1=ID val4=ID?);
+	public AltList1Elements getAltList1Access() {
+		return (pAltList1 != null) ? pAltList1 : (pAltList1 = new AltList1Elements());
+	}
+	
+	public ParserRule getAltList1Rule() {
+		return getAltList1Access().getRule();
+	}
+
+	//AltList2:
+	//  "#23" (val1+=ID val2=ID|"kw" val1+=ID ("," val1+=ID)* val3=ID);
+	public AltList2Elements getAltList2Access() {
+		return (pAltList2 != null) ? pAltList2 : (pAltList2 = new AltList2Elements());
+	}
+	
+	public ParserRule getAltList2Rule() {
+		return getAltList2Access().getRule();
 	}
 
 	//terminal ID:

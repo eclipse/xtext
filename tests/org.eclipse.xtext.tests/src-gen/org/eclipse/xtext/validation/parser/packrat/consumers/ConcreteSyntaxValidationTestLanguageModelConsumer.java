@@ -22,6 +22,10 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 
 	private ModelElements rule;	
 
+	private INonTerminalConsumer altList1Consumer;
+
+	private INonTerminalConsumer altList2Consumer;
+
 	private INonTerminalConsumer alternativeMultiplicitiesConsumer;
 
 	private INonTerminalConsumer assignedActionConsumer;
@@ -150,6 +154,14 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 
 	private IElementConsumer ruleCall$43$Consumer;
 
+	private IElementConsumer assignment$44$Consumer;
+
+	private IElementConsumer ruleCall$45$Consumer;
+
+	private IElementConsumer assignment$46$Consumer;
+
+	private IElementConsumer ruleCall$47$Consumer;
+
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
 		protected Alternatives$1$Consumer(final Alternatives alternatives) {
@@ -179,6 +191,8 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 			acceptor.accept(assignment$38$Consumer);
 			acceptor.accept(assignment$40$Consumer);
 			acceptor.accept(assignment$42$Consumer);
+			acceptor.accept(assignment$44$Consumer);
+			acceptor.accept(assignment$46$Consumer);
 		}
 	}
 
@@ -686,6 +700,54 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 		}
 	}
 
+	protected class Assignment$44$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$44$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$45$Consumer;
+		}
+	}
+
+	protected class RuleCall$45$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$45$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(altList1Consumer, "x22", false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class Assignment$46$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$46$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$47$Consumer;
+		}
+	}
+
+	protected class RuleCall$47$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$47$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(altList2Consumer, "x23", false, false, false, getElement(), optional);
+		}
+	}
+
 	public ConcreteSyntaxValidationTestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
@@ -745,6 +807,10 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 		ruleCall$41$Consumer = new RuleCall$41$Consumer(rule.getX20List4ParserRuleCall_19_0());
 		assignment$42$Consumer = new Assignment$42$Consumer(rule.getX21Assignment_20());
 		ruleCall$43$Consumer = new RuleCall$43$Consumer(rule.getX21List5ParserRuleCall_20_0());
+		assignment$44$Consumer = new Assignment$44$Consumer(rule.getX22Assignment_21());
+		ruleCall$45$Consumer = new RuleCall$45$Consumer(rule.getX22AltList1ParserRuleCall_21_0());
+		assignment$46$Consumer = new Assignment$46$Consumer(rule.getX23Assignment_22());
+		ruleCall$47$Consumer = new RuleCall$47$Consumer(rule.getX23AltList2ParserRuleCall_22_0());
 	}
 	
 	@Override
@@ -755,6 +821,14 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 	@Override
 	protected EClassifier getDefaultType() {
 		return getGrammarElement().getType().getClassifier();
+	}
+	
+	public void setAltList1Consumer(INonTerminalConsumer altList1Consumer) {
+		this.altList1Consumer = altList1Consumer;
+	}
+	
+	public void setAltList2Consumer(INonTerminalConsumer altList2Consumer) {
+		this.altList2Consumer = altList2Consumer;
 	}
 	
 	public void setAlternativeMultiplicitiesConsumer(INonTerminalConsumer alternativeMultiplicitiesConsumer) {

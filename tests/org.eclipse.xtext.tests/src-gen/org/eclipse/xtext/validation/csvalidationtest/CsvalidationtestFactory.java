@@ -233,6 +233,24 @@ public interface CsvalidationtestFactory extends EFactory
   List5 createList5();
 
   /**
+   * Returns a new object of class '<em>Alt List1</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Alt List1</em>'.
+   * @generated
+   */
+  AltList1 createAltList1();
+
+  /**
+   * Returns a new object of class '<em>Alt List2</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Alt List2</em>'.
+   * @generated
+   */
+  AltList2 createAltList2();
+
+  /**
    * Returns a new object of class '<em>Unassigned Action2 Sub</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

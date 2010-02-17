@@ -78,6 +78,10 @@ public final class ConcreteSyntaxValidationTestLanguageGroupMultiplicitiesConsum
 
 	private ICharacterClass keyword$11$Delimiter;
 
+	private ISequenceMatcher ruleCall$14$Delimiter;
+
+	private ISequenceMatcher ruleCall$16$Delimiter;
+
 	private ISequenceMatcher ruleCall$20$Delimiter;
 
 	private ISequenceMatcher ruleCall$22$Delimiter;
@@ -87,10 +91,6 @@ public final class ConcreteSyntaxValidationTestLanguageGroupMultiplicitiesConsum
 	private ISequenceMatcher ruleCall$8$Delimiter;
 
 	private ISequenceMatcher ruleCall$10$Delimiter;
-
-	private ISequenceMatcher ruleCall$14$Delimiter;
-
-	private ISequenceMatcher ruleCall$16$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -372,13 +372,13 @@ public final class ConcreteSyntaxValidationTestLanguageGroupMultiplicitiesConsum
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$14$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+		ruleCall$16$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$20$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$22$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$4$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$8$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		ruleCall$14$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		ruleCall$16$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	@Override
@@ -463,6 +463,22 @@ public final class ConcreteSyntaxValidationTestLanguageGroupMultiplicitiesConsum
 		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
+	public ISequenceMatcher getRuleCall$14$Delimiter() {
+		return ruleCall$14$Delimiter;
+	}
+	
+	public void setRuleCall$14$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$14$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
+	public ISequenceMatcher getRuleCall$16$Delimiter() {
+		return ruleCall$16$Delimiter;
+	}
+	
+	public void setRuleCall$16$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$16$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
+	}
+	
 	public ISequenceMatcher getRuleCall$20$Delimiter() {
 		return ruleCall$20$Delimiter;
 	}
@@ -501,22 +517,6 @@ public final class ConcreteSyntaxValidationTestLanguageGroupMultiplicitiesConsum
 	
 	public void setRuleCall$10$Delimiter(ISequenceMatcher matcher) {
 		ruleCall$10$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
-	public ISequenceMatcher getRuleCall$14$Delimiter() {
-		return ruleCall$14$Delimiter;
-	}
-	
-	public void setRuleCall$14$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$14$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
-	public ISequenceMatcher getRuleCall$16$Delimiter() {
-		return ruleCall$16$Delimiter;
-	}
-	
-	public void setRuleCall$16$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$16$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

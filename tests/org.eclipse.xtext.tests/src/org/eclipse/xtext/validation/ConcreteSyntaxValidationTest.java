@@ -12,6 +12,8 @@ import static org.eclipse.xtext.validation.ConcreteSyntaxValidator.*;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.validation.csvalidationtest.AltList1;
+import org.eclipse.xtext.validation.csvalidationtest.AltList2;
 import org.eclipse.xtext.validation.csvalidationtest.AlternativeMultiplicities;
 import org.eclipse.xtext.validation.csvalidationtest.AssignedAction;
 import org.eclipse.xtext.validation.csvalidationtest.Combination1;
@@ -402,6 +404,42 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		validate(copy).assertAll(err(p.getList5_Val1(), ERROR_LIST_TOO_MANY, null, 0, "((val1 val1* val2)|val3)"),
 				err(p.getList5_Val2(), ERROR_VALUE_PROHIBITED, null, 0, "((val1 val2)|val3)"),
 				err(p.getList5_Val3(), ERROR_VALUE_PROHIBITED, null, 0, "((val1 val1* val2)|val3)"));
+	}
+
+	public void testAltList1() throws Exception {
+		AltList1 copy, m = (AltList1) getModel2("#22 id1 id2");
+		validate(m).assertOK();
+
+		copy = (AltList1) EcoreUtil.copy(m);
+		copy.setVal2(null);
+		copy.setVal3("foo");
+		validate(copy).assertOK();
+
+		copy = (AltList1) EcoreUtil.copy(m);
+		copy.setVal2(null);
+		validate(copy).assertOK();
+
+		copy = (AltList1) EcoreUtil.copy(m);
+		copy.setVal2(null);
+		copy.setVal4("foo");
+		validate(copy).assertOK();
+	}
+
+	public void testAltList2() throws Exception {
+		AltList2 copy, m = (AltList2) getModel2("#23 id1 id2");
+		validate(m).assertOK();
+
+		copy = (AltList2) EcoreUtil.copy(m);
+		copy.setVal2(null);
+		copy.setVal3("foo");
+		validate(copy).assertOK();
+
+		copy = (AltList2) EcoreUtil.copy(m);
+		copy.setVal2(null);
+		copy.setVal3("foo");
+		copy.getVal1().add("foo");
+		copy.getVal1().add("foo");
+		validate(copy).assertOK();
 	}
 
 }

@@ -248,7 +248,7 @@ public class AssertableDiagnostics {
 
 	public void assertOK() {
 		if (diag.getChildren().size() != 0)
-			fail("There are exprected to be no diagnostics.");
+			fail("There are expected to be no diagnostics.");
 	}
 
 	public void assertWarning(String issueCode) {

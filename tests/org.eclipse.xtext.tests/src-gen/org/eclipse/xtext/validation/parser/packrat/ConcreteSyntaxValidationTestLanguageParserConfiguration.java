@@ -33,6 +33,8 @@ import org.eclipse.xtext.validation.parser.packrat.consumers.ConcreteSyntaxValid
 import org.eclipse.xtext.validation.parser.packrat.consumers.ConcreteSyntaxValidationTestLanguageList3Consumer;
 import org.eclipse.xtext.validation.parser.packrat.consumers.ConcreteSyntaxValidationTestLanguageList4Consumer;
 import org.eclipse.xtext.validation.parser.packrat.consumers.ConcreteSyntaxValidationTestLanguageList5Consumer;
+import org.eclipse.xtext.validation.parser.packrat.consumers.ConcreteSyntaxValidationTestLanguageAltList1Consumer;
+import org.eclipse.xtext.validation.parser.packrat.consumers.ConcreteSyntaxValidationTestLanguageAltList2Consumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSTRINGConsumer;
@@ -68,6 +70,8 @@ public class ConcreteSyntaxValidationTestLanguageParserConfiguration extends Abs
     private ConcreteSyntaxValidationTestLanguageList3Consumer list3Consumer;
     private ConcreteSyntaxValidationTestLanguageList4Consumer list4Consumer;
     private ConcreteSyntaxValidationTestLanguageList5Consumer list5Consumer;
+    private ConcreteSyntaxValidationTestLanguageAltList1Consumer altList1Consumer;
+    private ConcreteSyntaxValidationTestLanguageAltList2Consumer altList2Consumer;
 
 	private ConcreteSyntaxValidationTestLanguageGrammarAccess grammarAccess;
 
@@ -155,6 +159,12 @@ public class ConcreteSyntaxValidationTestLanguageParserConfiguration extends Abs
 		list5Consumer = new ConcreteSyntaxValidationTestLanguageList5Consumer(
     		this, null
     	);
+		altList1Consumer = new ConcreteSyntaxValidationTestLanguageAltList1Consumer(
+    		this, null
+    	);
+		altList2Consumer = new ConcreteSyntaxValidationTestLanguageAltList2Consumer(
+    		this, null
+    	);
 	}
 	
 	public void createTerminalConsumers() {
@@ -188,6 +198,8 @@ public class ConcreteSyntaxValidationTestLanguageParserConfiguration extends Abs
 		getList3Consumer().setRule(grammarAccess.getList3Access());
 		getList4Consumer().setRule(grammarAccess.getList4Access());
 		getList5Consumer().setRule(grammarAccess.getList5Access());
+		getAltList1Consumer().setRule(grammarAccess.getAltList1Access());
+		getAltList2Consumer().setRule(grammarAccess.getAltList2Access());
 		getIdConsumer().setRule(grammarAccess.getIDRule());
 		getIntConsumer().setRule(grammarAccess.getINTRule());
 		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
@@ -197,6 +209,8 @@ public class ConcreteSyntaxValidationTestLanguageParserConfiguration extends Abs
 		getAnyOtherConsumer().setRule(grammarAccess.getANY_OTHERRule());
 
 
+		getModelConsumer().setAltList1Consumer(getAltList1Consumer());
+		getModelConsumer().setAltList2Consumer(getAltList2Consumer());
 		getModelConsumer().setAlternativeMultiplicitiesConsumer(getAlternativeMultiplicitiesConsumer());
 		getModelConsumer().setAssignedActionConsumer(getAssignedActionConsumer());
 		getModelConsumer().setAssignedActionSecondConsumer(getAssignedActionSecondConsumer());
@@ -267,117 +281,138 @@ public class ConcreteSyntaxValidationTestLanguageParserConfiguration extends Abs
 
 		getList5Consumer().setIdConsumer(getIdConsumer());
 
-		getSimpleGroupConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getSimpleGroupConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getSimpleGroupConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getSimpleAlternativeConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getSimpleAlternativeConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$60$Delimiter);
-		getSimpleAlternativeConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$60$Delimiter);
-		getSimpleAlternativeConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getSimpleAlternativeConsumer().setRuleCall$11$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getSimpleMultiplicitiesConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getSimpleMultiplicitiesConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$60$Delimiter);
-		getSimpleMultiplicitiesConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$60$Delimiter);
-		getSimpleMultiplicitiesConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$60$Delimiter);
-		getSimpleMultiplicitiesConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getSimpleMultiplicitiesConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getSimpleMultiplicitiesConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getSimpleMultiplicitiesConsumer().setRuleCall$13$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getGroupMultiplicitiesConsumer().setKeyword$17$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$60$Delimiter);
-		getGroupMultiplicitiesConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getGroupMultiplicitiesConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$60$Delimiter);
-		getGroupMultiplicitiesConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$60$Delimiter);
-		getGroupMultiplicitiesConsumer().setRuleCall$20$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getGroupMultiplicitiesConsumer().setRuleCall$22$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getGroupMultiplicitiesConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getGroupMultiplicitiesConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getGroupMultiplicitiesConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getGroupMultiplicitiesConsumer().setRuleCall$14$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getGroupMultiplicitiesConsumer().setRuleCall$16$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getAlternativeMultiplicitiesConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getAlternativeMultiplicitiesConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$60$Delimiter);
-		getAlternativeMultiplicitiesConsumer().setKeyword$10$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$60$Delimiter);
-		getAlternativeMultiplicitiesConsumer().setKeyword$15$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$60$Delimiter);
-		getAlternativeMultiplicitiesConsumer().setKeyword$18$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$60$Delimiter);
-		getAlternativeMultiplicitiesConsumer().setKeyword$23$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$60$Delimiter);
-		getAlternativeMultiplicitiesConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getAlternativeMultiplicitiesConsumer().setRuleCall$9$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getAlternativeMultiplicitiesConsumer().setRuleCall$13$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getAlternativeMultiplicitiesConsumer().setRuleCall$17$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getAlternativeMultiplicitiesConsumer().setRuleCall$21$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getAlternativeMultiplicitiesConsumer().setRuleCall$25$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getAssignedActionConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getAssignedActionConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getAssignedActionConsumer().setRuleCall$9$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getAssignedActionSecondConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getAssignedActionSecondConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$60$Delimiter);
-		getAssignedActionSecondConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getAssignedActionSecondConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getUnassignedAction1Consumer().setKeyword$4$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getUnassignedAction1Consumer().setRuleCall$6$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getUnassignedAction1Consumer().setRuleCall$8$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getUnassignedAction2Consumer().setKeyword$4$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getUnassignedAction2Consumer().setRuleCall$6$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getUnassignedAction2Consumer().setRuleCall$8$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getUnassignedAction3Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getUnassignedAction3Consumer().setKeyword$5$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$60$Delimiter);
-		getUnassignedAction3Consumer().setKeyword$9$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$60$Delimiter);
-		getUnassignedAction3Consumer().setRuleCall$13$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getUnassignedAction3Consumer().setRuleCall$15$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getUnassignedRuleCall1Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getUnassignedRuleCall1Consumer().setRuleCall$5$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getUnassignedRuleCall1SubConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getUnassignedRuleCall2Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getUnassignedRuleCall2Consumer().setRuleCall$5$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getCombination1Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getCombination1Consumer().setKeyword$6$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$60$Delimiter);
-		getCombination1Consumer().setKeyword$11$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$60$Delimiter);
-		getCombination1Consumer().setRuleCall$4$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getCombination1Consumer().setRuleCall$8$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getCombination1Consumer().setRuleCall$13$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getCombination1Consumer().setRuleCall$15$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getCombination2Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getCombination2Consumer().setKeyword$7$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$60$Delimiter);
-		getCombination2Consumer().setRuleCall$4$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getCombination2Consumer().setRuleCall$9$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getCombination2Consumer().setRuleCall$12$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getCombination2Consumer().setRuleCall$14$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getCombination3Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getCombination3Consumer().setRuleCall$5$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getCombination3Consumer().setRuleCall$7$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$253$Delimiter);
-		getCombination3Consumer().setRuleCall$9$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$253$Delimiter);
-		getCombination4Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getCombination4Consumer().setKeyword$4$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$60$Delimiter);
-		getCombination4Consumer().setRuleCall$6$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getCombination4Consumer().setRuleCall$8$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getCombination4Consumer().setRuleCall$10$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getList1Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getList1Consumer().setKeyword$6$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getList1Consumer().setRuleCall$4$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getList1Consumer().setRuleCall$8$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getList2Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getList2Consumer().setKeyword$7$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getList2Consumer().setRuleCall$5$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getList2Consumer().setRuleCall$9$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getList3Consumer().setKeyword$3$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getList3Consumer().setKeyword$8$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getList3Consumer().setKeyword$12$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$60$Delimiter);
-		getList3Consumer().setRuleCall$6$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getList3Consumer().setRuleCall$10$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getList3Consumer().setRuleCall$14$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getList4Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getList4Consumer().setKeyword$6$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getList4Consumer().setKeyword$9$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$60$Delimiter);
-		getList4Consumer().setRuleCall$4$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getList4Consumer().setRuleCall$8$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getList4Consumer().setRuleCall$11$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getList5Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getList5Consumer().setKeyword$8$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$49$Delimiter);
-		getList5Consumer().setKeyword$11$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$60$Delimiter);
-		getList5Consumer().setRuleCall$6$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getList5Consumer().setRuleCall$10$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getList5Consumer().setRuleCall$13$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
-		getList5Consumer().setRuleCall$15$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$51$Delimiter);
+		getAltList1Consumer().setIdConsumer(getIdConsumer());
+
+		getAltList2Consumer().setIdConsumer(getIdConsumer());
+
+		getSimpleGroupConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getSimpleGroupConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getSimpleGroupConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getSimpleAlternativeConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getSimpleAlternativeConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getSimpleAlternativeConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getSimpleAlternativeConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getSimpleAlternativeConsumer().setRuleCall$11$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getSimpleMultiplicitiesConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getSimpleMultiplicitiesConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getSimpleMultiplicitiesConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getSimpleMultiplicitiesConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getSimpleMultiplicitiesConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getSimpleMultiplicitiesConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getSimpleMultiplicitiesConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getSimpleMultiplicitiesConsumer().setRuleCall$13$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getGroupMultiplicitiesConsumer().setKeyword$17$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getGroupMultiplicitiesConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getGroupMultiplicitiesConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getGroupMultiplicitiesConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getGroupMultiplicitiesConsumer().setRuleCall$14$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getGroupMultiplicitiesConsumer().setRuleCall$16$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getGroupMultiplicitiesConsumer().setRuleCall$20$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getGroupMultiplicitiesConsumer().setRuleCall$22$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getGroupMultiplicitiesConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getGroupMultiplicitiesConsumer().setRuleCall$8$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getGroupMultiplicitiesConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getAlternativeMultiplicitiesConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getAlternativeMultiplicitiesConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getAlternativeMultiplicitiesConsumer().setKeyword$10$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getAlternativeMultiplicitiesConsumer().setKeyword$15$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getAlternativeMultiplicitiesConsumer().setKeyword$18$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getAlternativeMultiplicitiesConsumer().setKeyword$23$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getAlternativeMultiplicitiesConsumer().setRuleCall$5$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getAlternativeMultiplicitiesConsumer().setRuleCall$9$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getAlternativeMultiplicitiesConsumer().setRuleCall$13$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getAlternativeMultiplicitiesConsumer().setRuleCall$17$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getAlternativeMultiplicitiesConsumer().setRuleCall$21$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getAlternativeMultiplicitiesConsumer().setRuleCall$25$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getAssignedActionConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getAssignedActionConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getAssignedActionConsumer().setRuleCall$9$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getAssignedActionSecondConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getAssignedActionSecondConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getAssignedActionSecondConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getAssignedActionSecondConsumer().setRuleCall$7$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getUnassignedAction1Consumer().setKeyword$4$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getUnassignedAction1Consumer().setRuleCall$6$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getUnassignedAction1Consumer().setRuleCall$8$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getUnassignedAction2Consumer().setKeyword$4$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getUnassignedAction2Consumer().setRuleCall$6$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getUnassignedAction2Consumer().setRuleCall$8$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getUnassignedAction3Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getUnassignedAction3Consumer().setKeyword$5$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getUnassignedAction3Consumer().setKeyword$9$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getUnassignedAction3Consumer().setRuleCall$13$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getUnassignedAction3Consumer().setRuleCall$15$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getUnassignedRuleCall1Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getUnassignedRuleCall1Consumer().setRuleCall$5$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getUnassignedRuleCall1SubConsumer().setRuleCall$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getUnassignedRuleCall2Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getUnassignedRuleCall2Consumer().setRuleCall$5$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getCombination1Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getCombination1Consumer().setKeyword$6$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getCombination1Consumer().setKeyword$11$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getCombination1Consumer().setRuleCall$4$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getCombination1Consumer().setRuleCall$8$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getCombination1Consumer().setRuleCall$13$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getCombination1Consumer().setRuleCall$15$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getCombination2Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getCombination2Consumer().setKeyword$7$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getCombination2Consumer().setRuleCall$4$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getCombination2Consumer().setRuleCall$9$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getCombination2Consumer().setRuleCall$12$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getCombination2Consumer().setRuleCall$14$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getCombination3Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getCombination3Consumer().setRuleCall$5$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getCombination3Consumer().setRuleCall$7$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$257$Delimiter);
+		getCombination3Consumer().setRuleCall$9$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$257$Delimiter);
+		getCombination4Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getCombination4Consumer().setKeyword$4$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getCombination4Consumer().setRuleCall$6$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getCombination4Consumer().setRuleCall$8$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getCombination4Consumer().setRuleCall$10$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getList1Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getList1Consumer().setKeyword$6$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getList1Consumer().setRuleCall$4$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getList1Consumer().setRuleCall$8$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getList2Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getList2Consumer().setKeyword$7$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getList2Consumer().setRuleCall$5$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getList2Consumer().setRuleCall$9$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getList3Consumer().setKeyword$3$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getList3Consumer().setKeyword$8$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getList3Consumer().setKeyword$12$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getList3Consumer().setRuleCall$6$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getList3Consumer().setRuleCall$10$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getList3Consumer().setRuleCall$14$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getList4Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getList4Consumer().setKeyword$6$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getList4Consumer().setKeyword$9$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getList4Consumer().setRuleCall$4$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getList4Consumer().setRuleCall$8$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getList4Consumer().setRuleCall$11$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getList5Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getList5Consumer().setKeyword$8$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getList5Consumer().setKeyword$11$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getList5Consumer().setRuleCall$6$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getList5Consumer().setRuleCall$10$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getList5Consumer().setRuleCall$13$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getList5Consumer().setRuleCall$15$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getAltList1Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getAltList1Consumer().setKeyword$10$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getAltList1Consumer().setKeyword$16$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getAltList1Consumer().setRuleCall$6$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getAltList1Consumer().setRuleCall$8$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getAltList1Consumer().setRuleCall$12$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getAltList1Consumer().setRuleCall$14$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getAltList1Consumer().setRuleCall$18$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getAltList1Consumer().setRuleCall$20$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getAltList2Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getAltList2Consumer().setKeyword$10$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$64$Delimiter);
+		getAltList2Consumer().setKeyword$14$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.keyword$53$Delimiter);
+		getAltList2Consumer().setRuleCall$6$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getAltList2Consumer().setRuleCall$8$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getAltList2Consumer().setRuleCall$12$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getAltList2Consumer().setRuleCall$16$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
+		getAltList2Consumer().setRuleCall$18$Delimiter(org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguageDelimiters.ruleCall$55$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
@@ -478,6 +513,14 @@ public class ConcreteSyntaxValidationTestLanguageParserConfiguration extends Abs
 
     public ConcreteSyntaxValidationTestLanguageList5Consumer getList5Consumer() {
     	return list5Consumer;
+    }
+
+    public ConcreteSyntaxValidationTestLanguageAltList1Consumer getAltList1Consumer() {
+    	return altList1Consumer;
+    }
+
+    public ConcreteSyntaxValidationTestLanguageAltList2Consumer getAltList2Consumer() {
+    	return altList2Consumer;
     }
 
     public TerminalsIDConsumer getIdConsumer() {

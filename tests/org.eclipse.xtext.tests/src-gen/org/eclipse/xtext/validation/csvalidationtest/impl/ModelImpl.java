@@ -14,6 +14,8 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.xtext.validation.csvalidationtest.AltList1;
+import org.eclipse.xtext.validation.csvalidationtest.AltList2;
 import org.eclipse.xtext.validation.csvalidationtest.AlternativeMultiplicities;
 import org.eclipse.xtext.validation.csvalidationtest.AssignedAction;
 import org.eclipse.xtext.validation.csvalidationtest.Combination1;
@@ -65,6 +67,8 @@ import org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall2;
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.ModelImpl#getX19 <em>X19</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.ModelImpl#getX20 <em>X20</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.ModelImpl#getX21 <em>X21</em>}</li>
+ *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.ModelImpl#getX22 <em>X22</em>}</li>
+ *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.ModelImpl#getX23 <em>X23</em>}</li>
  * </ul>
  * </p>
  *
@@ -281,6 +285,26 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected List5 x21;
+
+  /**
+   * The cached value of the '{@link #getX22() <em>X22</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX22()
+   * @generated
+   * @ordered
+   */
+  protected AltList1 x22;
+
+  /**
+   * The cached value of the '{@link #getX23() <em>X23</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX23()
+   * @generated
+   * @ordered
+   */
+  protected AltList2 x23;
 
   /**
    * <!-- begin-user-doc -->
@@ -1316,6 +1340,102 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  public AltList1 getX22()
+  {
+    return x22;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX22(AltList1 newX22, NotificationChain msgs)
+  {
+    AltList1 oldX22 = x22;
+    x22 = newX22;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CsvalidationtestPackage.MODEL__X22, oldX22, newX22);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX22(AltList1 newX22)
+  {
+    if (newX22 != x22)
+    {
+      NotificationChain msgs = null;
+      if (x22 != null)
+        msgs = ((InternalEObject)x22).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CsvalidationtestPackage.MODEL__X22, null, msgs);
+      if (newX22 != null)
+        msgs = ((InternalEObject)newX22).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CsvalidationtestPackage.MODEL__X22, null, msgs);
+      msgs = basicSetX22(newX22, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, CsvalidationtestPackage.MODEL__X22, newX22, newX22));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AltList2 getX23()
+  {
+    return x23;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX23(AltList2 newX23, NotificationChain msgs)
+  {
+    AltList2 oldX23 = x23;
+    x23 = newX23;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CsvalidationtestPackage.MODEL__X23, oldX23, newX23);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX23(AltList2 newX23)
+  {
+    if (newX23 != x23)
+    {
+      NotificationChain msgs = null;
+      if (x23 != null)
+        msgs = ((InternalEObject)x23).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CsvalidationtestPackage.MODEL__X23, null, msgs);
+      if (newX23 != null)
+        msgs = ((InternalEObject)newX23).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CsvalidationtestPackage.MODEL__X23, null, msgs);
+      msgs = basicSetX23(newX23, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, CsvalidationtestPackage.MODEL__X23, newX23, newX23));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -1363,6 +1483,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return basicSetX20(null, msgs);
       case CsvalidationtestPackage.MODEL__X21:
         return basicSetX21(null, msgs);
+      case CsvalidationtestPackage.MODEL__X22:
+        return basicSetX22(null, msgs);
+      case CsvalidationtestPackage.MODEL__X23:
+        return basicSetX23(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -1419,6 +1543,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return getX20();
       case CsvalidationtestPackage.MODEL__X21:
         return getX21();
+      case CsvalidationtestPackage.MODEL__X22:
+        return getX22();
+      case CsvalidationtestPackage.MODEL__X23:
+        return getX23();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -1495,6 +1623,12 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return;
       case CsvalidationtestPackage.MODEL__X21:
         setX21((List5)newValue);
+        return;
+      case CsvalidationtestPackage.MODEL__X22:
+        setX22((AltList1)newValue);
+        return;
+      case CsvalidationtestPackage.MODEL__X23:
+        setX23((AltList2)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -1573,6 +1707,12 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case CsvalidationtestPackage.MODEL__X21:
         setX21((List5)null);
         return;
+      case CsvalidationtestPackage.MODEL__X22:
+        setX22((AltList1)null);
+        return;
+      case CsvalidationtestPackage.MODEL__X23:
+        setX23((AltList2)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -1629,6 +1769,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return x20 != null;
       case CsvalidationtestPackage.MODEL__X21:
         return x21 != null;
+      case CsvalidationtestPackage.MODEL__X22:
+        return x22 != null;
+      case CsvalidationtestPackage.MODEL__X23:
+        return x23 != null;
     }
     return super.eIsSet(featureID);
   }

@@ -31,6 +31,8 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x19"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x20"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x21"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x22"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x23"/>
     </genClasses>
     <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//SimpleGroup">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//SimpleGroup/val1"/>
@@ -126,6 +128,17 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//List5/val1"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//List5/val2"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//List5/val3"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//AltList1">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//AltList1/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//AltList1/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//AltList1/val3"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//AltList1/val4"/>
+    </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//AltList2">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//AltList2/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//AltList2/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//AltList2/val3"/>
     </genClasses>
     <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedAction2Sub">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedAction2Sub/val1"/>

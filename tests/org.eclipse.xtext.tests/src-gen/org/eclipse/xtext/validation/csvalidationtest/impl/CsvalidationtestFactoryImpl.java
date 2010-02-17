@@ -90,6 +90,8 @@ public class CsvalidationtestFactoryImpl extends EFactoryImpl implements Csvalid
       case CsvalidationtestPackage.LIST3: return createList3();
       case CsvalidationtestPackage.LIST4: return createList4();
       case CsvalidationtestPackage.LIST5: return createList5();
+      case CsvalidationtestPackage.ALT_LIST1: return createAltList1();
+      case CsvalidationtestPackage.ALT_LIST2: return createAltList2();
       case CsvalidationtestPackage.UNASSIGNED_ACTION2_SUB: return createUnassignedAction2Sub();
       case CsvalidationtestPackage.UNASSIGNED_ACTION2_SUB1: return createUnassignedAction2Sub1();
       case CsvalidationtestPackage.UNASSIGNED_ACTION2_SUB2: return createUnassignedAction2Sub2();
@@ -350,6 +352,28 @@ public class CsvalidationtestFactoryImpl extends EFactoryImpl implements Csvalid
   {
     List5Impl list5 = new List5Impl();
     return list5;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AltList1 createAltList1()
+  {
+    AltList1Impl altList1 = new AltList1Impl();
+    return altList1;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AltList2 createAltList2()
+  {
+    AltList2Impl altList2 = new AltList2Impl();
+    return altList2;
   }
 
   /**
