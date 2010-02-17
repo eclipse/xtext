@@ -14,7 +14,8 @@ Model:
 	x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities | x5=AlternativeMultiplicities |
 	x6=AssignedAction | x7=AssignedActionSecond | x8=UnassignedAction1 | x9=UnassignedAction2 | x10=UnassignedAction3 | 
 	x11=UnassignedRuleCall1 | x12=UnassignedRuleCall2 | x13=Combination1 | x14=Combination2 | x15=Combination3 | x16=Combination4 | 
-	x17=List1 | x18=List2 | x19=List3 | x20=List4 | x21=List5 | x22=AltList1 | x23=AltList2;	
+	x17=List1 | x18=List2 | x19=List3 | x20=List4 | x21=List5 | x22=AltList1 | x23=AltList2 |
+	x24=TransientObject | x25=TransientSerializeables1;	
 	
 SimpleGroup:
 	"#1" val1=ID val2=ID;
@@ -91,3 +92,14 @@ AltList1:
 AltList2:
 	"#23" (val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID);  
 	   
+TransientObject:
+	"#24" (val1=ID nested=TransientObjectSub)?;
+	
+TransientObjectSub:
+	val2=ID val3=ID;
+	
+TransientSerializeables1:
+	"#25" (val1=ID enum1=TransientSerializeables1Enum)? (val2=ID int1=INT)?;
+	
+enum TransientSerializeables1Enum:
+	lit1 | lit2;
