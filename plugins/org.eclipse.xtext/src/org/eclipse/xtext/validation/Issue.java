@@ -14,9 +14,6 @@ import org.eclipse.emf.common.util.URI;
  */
 public interface Issue {
 	
-	String LINKING_ISSUE = "org.eclipse.xtext.validation.Issue.Linking";
-	String SYNTAX_ISSUE = "org.eclipse.xtext.validation.Issue.Syntax";
-	
 	enum Severity {
 		INFO, WARNING, ERROR
 	}

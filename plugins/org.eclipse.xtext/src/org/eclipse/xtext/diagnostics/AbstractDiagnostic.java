@@ -19,6 +19,8 @@ import org.eclipse.xtext.parsetree.NodeUtil;
 public abstract class AbstractDiagnostic implements Diagnostic {
 
 	protected abstract AbstractNode getNode();
+	
+	public abstract String getCode();
 
 	public int getLength() {
 		return getNode().getLength();

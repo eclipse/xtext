@@ -31,7 +31,7 @@ import org.eclipse.xtext.xtext.ecoreInference.EClassifierInfo.EClassInfo;
  * @author Heiko Behrens - Initial contribution and API
  * 
  */
-public class TypeHierarchyHelperTests extends TestCase {
+public class TypeHierarchyHelperTest extends TestCase {
 
 	private TypeHierarchyHelper helper;
 	private EClassifierInfos infos;
