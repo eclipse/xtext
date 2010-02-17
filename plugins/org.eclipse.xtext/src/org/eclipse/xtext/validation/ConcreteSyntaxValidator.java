@@ -25,8 +25,11 @@ import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
+import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
@@ -573,32 +576,46 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 	}
 
 	protected class Quantities {
+		private Map<Element, Integer> assignmentQuants = Maps.newHashMap();
 		private EObject delegate;
-		private Map<Element, Integer> quantities = Maps.newHashMap();
+		private Map<EStructuralFeature, Integer> featureQuants = Maps.newHashMap();
 
 		public Quantities(EObject delegate) {
 			super();
 			this.delegate = delegate;
 		}
 
+		public Integer getAssignmentQuantity(Element assignement) {
+			Integer i = assignmentQuants.get(assignement);
+			return i == null || i < 0 ? -1 : i;
+		}
+
 		public EObject getDelegate() {
 			return delegate;
 		}
 
-		public Integer getQuantity(Element assignement) {
-			Integer i = quantities.get(assignement);
+		public Map<EStructuralFeature, Integer> getFeatureQuantities() {
+			return featureQuants;
+		}
+
+		public Integer getFeatureQuantity(EStructuralFeature feat) {
+			Integer i = featureQuants.get(feat);
 			return i == null || i < 0 ? -1 : i;
 		}
 
 		public Map<EStructuralFeature, Collection<Element>> groupByFeature() {
 			Multimap<EStructuralFeature, Element> map = Multimaps.newHashMultimap();
-			for (Element e : quantities.keySet())
+			for (Element e : assignmentQuants.keySet())
 				map.put(delegate.eClass().getEStructuralFeature(((Assignment) e.getEle()).getFeature()), e);
 			return map.asMap();
 		}
 
-		public Integer setQuantity(Element assignement, int quantity) {
-			return quantities.put(assignement, quantity);
+		public void setAssignmentQuantity(Element assignement, int quantity) {
+			assignmentQuants.put(assignement, quantity);
+		}
+
+		public void setFeatureQuantity(EStructuralFeature feature, int quantity) {
+			featureQuants.put(feature, quantity);
 		}
 
 		@Override
@@ -608,7 +625,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 
 		public String toString(Map<Element, Pair<Integer, Integer>> minmax) {
 			Map<Element, String> postfix = Maps.newHashMap();
-			for (Map.Entry<Element, Integer> e : quantities.entrySet()) {
+			for (Map.Entry<Element, Integer> e : assignmentQuants.entrySet()) {
 				String s = ":" + e.getValue();
 				if (minmax != null && minmax.containsKey(e.getKey())) {
 					Pair<Integer, Integer> p = minmax.get(e.getKey());
@@ -616,7 +633,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 				}
 				postfix.put(e.getKey(), s);
 			}
-			Iterator<Element> i = quantities.keySet().iterator();
+			Iterator<Element> i = assignmentQuants.keySet().iterator();
 			if (!i.hasNext())
 				return "";
 			Element root = i.next();
@@ -636,7 +653,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 
 		@Override
 		public int compare(Element o1, Element o2) {
-			int r = quantities.getQuantity(o2).compareTo(quantities.getQuantity(o1));
+			int r = quantities.getAssignmentQuantity(o2).compareTo(quantities.getAssignmentQuantity(o1));
 			return r == 0 ? super.compare(o1, o2) : r;
 		}
 	}
@@ -666,6 +683,10 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 
 	@Inject
 	protected ITransientValueService transSrvc;
+
+	protected boolean allowTransient(EStructuralFeature f, Collection<Element> ele) {
+		return f.getEType() instanceof EEnum || f.getEType() == EcorePackage.eINSTANCE.getEInt();
+	}
 
 	protected void collectAssignments(Element rule, EObject obj, Element ele,
 			Multimap<EStructuralFeature, Element> assignments, List<IConcreteSyntaxDiagnostic> acceptor) {
@@ -737,29 +758,29 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			Map<Element, Pair<Integer, Integer>> minmax, int quantity) {
 		for (Element ass : assignments) {
 			int min = Math.max(Math.min(minmax.get(ass).getFirst(), minmax.get(ass).getSecond()), 0);
-			int q = quants.getQuantity(ass);
+			int q = quants.getAssignmentQuantity(ass);
 			if (q < 0)
 				q = 0;
 			int toAdd = min - q;
 			if (toAdd > 0) {
 				if (min <= quantity) {
-					quants.setQuantity(ass, min);
+					quants.setAssignmentQuantity(ass, min);
 					quantity -= min;
 				} else {
-					quants.setQuantity(ass, quantity);
+					quants.setAssignmentQuantity(ass, quantity);
 					quantity = 0;
 				}
 			} else
-				quants.setQuantity(ass, q);
+				quants.setAssignmentQuantity(ass, q);
 		}
 		for (Element ass : assignments) {
 			if (quantity == 0)
 				break;
 			int max = minmax.get(ass).getSecond();
-			int q = quants.getQuantity(ass);
+			int q = quants.getAssignmentQuantity(ass);
 			if (q < max) {
 				int nv = Math.min(max, quantity + q);
-				quants.setQuantity(ass, nv);
+				quants.setAssignmentQuantity(ass, nv);
 				quantity -= nv - q;
 			}
 		}
@@ -844,26 +865,42 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 	protected List<Quantities> getQuantities(EObject obj, Element rule, List<IConcreteSyntaxDiagnostic> acceptor) {
 		Multimap<EStructuralFeature, Element> assignments = Multimaps.newHashMultimap();
 		collectAssignments(rule, obj, rule, assignments, acceptor);
-		Map<EStructuralFeature, Integer> quantities = Maps.newHashMap();
+		//		Map<EStructuralFeature, Integer> quantities = Maps.newHashMap();
+		Quantities quants = new Quantities(obj);
 		for (EStructuralFeature f : obj.eClass().getEAllStructuralFeatures()) {
 			int quantity = getActualCount(obj, f);
 			if (quantity > 0 && !assignments.containsKey(f))
 				acceptor.add(new ConcreteSyntaxAssignmentMissingDiagnostic(rule, obj, f, Collections
 						.<Element> emptySet()));
 			else
-				quantities.put(f, quantity);
+				quants.setFeatureQuantity(f, quantity);
 		}
-		Quantities quants = new Quantities(obj);
 		Multimap<EStructuralFeature, Element> multiAssignments = Multimaps.newHashMultimap();
-		for (Map.Entry<EStructuralFeature, Integer> f : quantities.entrySet()) {
+		Multimap<EStructuralFeature, Element> allowTransients = Multimaps.newHashMultimap();
+		for (Map.Entry<EStructuralFeature, Integer> f : quants.getFeatureQuantities().entrySet()) {
 			Collection<Element> ass = assignments.get(f.getKey());
-			if (ass.size() == 1 || f.getValue() == 0)
-				for (Element a : ass)
-					quants.setQuantity(a, f.getValue());
-			else
+			boolean allowTransient = !f.getKey().isMany() && f.getValue() == 0 && allowTransient(f.getKey(), ass);
+			boolean multiNeeded = ass.size() > 1 && f.getValue() != 0;
+			if (allowTransient)
+				allowTransients.putAll(f.getKey(), ass);
+			if (multiNeeded)
 				multiAssignments.putAll(f.getKey(), ass);
-
+			if (!allowTransient && !multiNeeded)
+				for (Element a : ass)
+					quants.setAssignmentQuantity(a, f.getValue());
 		}
+		if (multiAssignments.isEmpty() && allowTransients.isEmpty())
+			return Collections.singletonList(quants);
+		for (Map.Entry<EStructuralFeature, Collection<Element>> e : allowTransients.asMap().entrySet()) {
+			int min = 0;
+			for (Element x : e.getValue())
+				min += getMinCount(quants, x, Sets.<Element> newHashSet());
+			int val = min > 0 ? 1 : 0;
+			quants.setFeatureQuantity(e.getKey(), val);
+			if (e.getValue().size() == 1)
+				quants.setAssignmentQuantity(e.getValue().iterator().next(), val);
+		}
+		//		System.out.println("AllowTransientsQuantities: " + quants.toString());
 		if (multiAssignments.isEmpty())
 			return Collections.singletonList(quants);
 		Map<Element, Pair<Integer, Integer>> minmax = Maps.newHashMap();
@@ -875,7 +912,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		for (Map.Entry<EStructuralFeature, Collection<Element>> e : multiAssignments.asMap().entrySet()) {
 			List<Element> ass = new ArrayList<Element>(e.getValue());
 			Collections.sort(ass, new DependencyComparator());
-			int quantity = quantities.get(e.getKey());
+			int quantity = quants.getFeatureQuantity(e.getKey());
 			quantity = distributeQuantity(ass, quants, minmax, quantity);
 			if (quantity > 0) {
 				//				System.out.println("Quantities: " + quants.toString(minmax));
@@ -884,7 +921,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 				Collections.sort(ass, new QuantityComparator(quants));
 				quantity = distributeQuantity(ass, quants, minmax, quantity);
 				if (quantity > 0)
-					quants.setQuantity(ass.get(0), quants.getQuantity(ass.get(0)) + quantity);
+					quants.setAssignmentQuantity(ass.get(0), quants.getAssignmentQuantity(ass.get(0)) + quantity);
 			}
 		}
 		//		System.out.println("FinalQuantities: " + quants.toString(minmax));
@@ -927,14 +964,14 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 	}
 
 	protected int getRequiredMaxCountForChild(Quantities ctx, Element child, Set<Element> involved) {
-		if (child.getSemanticType() != null && !child.getSemanticType().isInstance(ctx))
+		if (child.getSemanticType() != null && !child.getSemanticType().isInstance(ctx.getDelegate()))
 			return 0;
 		if (child.isOptional())
 			return MAX;
 		switch (child.getType()) {
 			case ASSIGNMENT:
 				involved.add(child);
-				return ctx.getQuantity(child);
+				return ctx.getAssignmentQuantity(child);
 			case GROUP:
 				int count = UNDEF;
 				for (Element a : child.getContents()) {
@@ -985,13 +1022,13 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 	}
 
 	protected int getRequiredMinCountForChild(Quantities ctx, Element child, Set<Element> involved) {
-		if (child.getSemanticType() != null && !child.getSemanticType().isInstance(ctx))
+		if (child.getSemanticType() != null && !child.getSemanticType().isInstance(ctx.getDelegate()))
 			return 0;
 		int count = UNDEF;
 		switch (child.getType()) {
 			case ASSIGNMENT:
 				involved.add(child);
-				count = ctx.getQuantity(child);
+				count = ctx.getAssignmentQuantity(child);
 				break;
 			case GROUP:
 				for (Element a : child.getContents()) {
@@ -1007,7 +1044,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 				}
 				break;
 			case ACTION:
-				if (child.getSemanticType().isInstance(ctx))
+				if (child.getSemanticType().isInstance(ctx.getDelegate()))
 					return 1;
 			default:
 				count = UNDEF;
@@ -1015,6 +1052,19 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		if (child.isMultiple() && count > 1)
 			count = 1;
 		return count;
+	}
+
+	protected boolean isEObjectTransient(EObject obj) {
+		if (obj.eContainmentFeature() == null)
+			return false;
+		EReference ref = obj.eContainmentFeature();
+		EObject cnt = obj.eContainer();
+		if (ref.isMany() && transSrvc.isMixedList(cnt, ref)) {
+			if (transSrvc.isTransient(cnt, ref, ((List<?>) cnt.eGet(ref)).indexOf(obj)))
+				return true;
+		} else if (transSrvc.isTransient(cnt, ref, 0))
+			return true;
+		return false;
 	}
 
 	protected boolean isParserRule(AbstractRule rule) {
@@ -1052,6 +1102,8 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 
 	@Override
 	public boolean validateObject(EObject obj, IDiagnosticAcceptor acceptor, Map<Object, Object> context) {
+		if (isEObjectTransient(obj))
+			return true;
 		List<IConcreteSyntaxDiagnostic> allDiags = new ArrayList<IConcreteSyntaxDiagnostic>();
 		Collection<Element> rules = getElementCache().getRulesFor(obj.eClass());
 		if (rules.isEmpty())
@@ -1083,7 +1135,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 					max = ma == MAX ? ma : max + ma;
 				minmax.put(a, Tuples.create(mi, ma));
 			}
-			int actual = getActualCount(obj.getDelegate(), e.getKey());
+			int actual = obj.getFeatureQuantity(e.getKey());
 			if (actual < min || (actual > max))
 				diag.add(new ConcreteSyntaxFeatureDiagnostic(rule, obj.getDelegate(), e.getKey(), actual, min, max,
 						involved));
