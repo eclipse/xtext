@@ -19,11 +19,14 @@ public class XtextLinkingDiagnostic extends AbstractDiagnostic {
 	
 	private final String message;
 	
-	public XtextLinkingDiagnostic(AbstractNode node, String message) {
+	private final String code;
+	
+	public XtextLinkingDiagnostic(AbstractNode node, String message, String code) {
 		if (node == null)
 			throw new NullPointerException("node may not be null");
 		this.node = node;
 		this.message = message;
+		this.code = code;
 	}
 
 	@Override
@@ -33,6 +36,11 @@ public class XtextLinkingDiagnostic extends AbstractDiagnostic {
 
 	public String getMessage() {
 		return message;
+	}
+
+	@Override
+	public String getCode() {
+		return code;
 	}
 
 	@Override

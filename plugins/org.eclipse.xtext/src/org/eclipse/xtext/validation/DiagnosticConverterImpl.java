@@ -14,11 +14,9 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
-import org.eclipse.xtext.linking.impl.XtextLinkingDiagnostic;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 import org.eclipse.xtext.util.Triple;
 import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.validation.AbstractDeclarativeValidator.DiagnosticImpl;
@@ -45,11 +43,9 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 			issue.setLength(xtextDiagnostic.getLength());
 		}
 		if (diagnostic instanceof AbstractDiagnostic) {
-			issue.setUriToProblem(((AbstractDiagnostic)diagnostic).getUriToProblem());
-			if (diagnostic instanceof XtextLinkingDiagnostic)
-				issue.setCode(Issue.LINKING_ISSUE);
-			else if (diagnostic instanceof XtextSyntaxDiagnostic)
-				issue.setCode(Issue.SYNTAX_ISSUE);
+			AbstractDiagnostic xtextDiagnostic = (AbstractDiagnostic)diagnostic;
+			issue.setUriToProblem(xtextDiagnostic.getUriToProblem());
+			issue.setCode(xtextDiagnostic.getCode());
 		}
 		issue.setType(CheckType.FAST);
 		acceptor.accept(issue);

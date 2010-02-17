@@ -20,8 +20,6 @@ public class DiagnosticMessage {
 		this.message = message;
 		this.severity = severity;
 		this.issueCode = issueCode;
-		if (issueCode != null)
-			throw new IllegalArgumentException("issueCodes are not yet supported for syntax errors");
 	}
 	
 	public String getIssueCode() {

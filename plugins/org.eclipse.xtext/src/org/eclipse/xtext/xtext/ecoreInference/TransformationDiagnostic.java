@@ -31,6 +31,11 @@ public class TransformationDiagnostic extends AbstractDiagnostic {
 	protected AbstractNode getNode() {
 		return node;
 	}
+	
+	@Override
+	public String getCode() {
+		return errorCode.getFullyQualifiedCode();
+	}
 
 	public String getMessage() {
 		return message;

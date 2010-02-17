@@ -12,6 +12,9 @@ package org.eclipse.xtext.diagnostics;
  */
 public interface Diagnostic extends org.eclipse.emf.ecore.resource.Resource.Diagnostic {
 	
+	public static final String SYNTAX_DIAGNOSITC = "org.eclipse.xtext.diagnostics.Diagnostic.Syntax";
+	public static final String LINKING_DIAGNOSTIC = "org.eclipse.xtext.diagnostics.Diagnostic.Linking";
+	
 	public int getOffset();
 
 	public int getLength();
