@@ -32,6 +32,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.IGrammarAccess;
@@ -40,6 +41,9 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.util.EmfFormatter;
+import org.eclipse.xtext.util.OnChangeEvictingCacheAdapter;
+import org.eclipse.xtext.util.Pair;
+import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.base.Function;
 import com.google.common.base.Join;
@@ -48,7 +52,9 @@ import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.internal.Lists;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
@@ -358,15 +364,11 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 	}
 
 	protected static class DependencyComparator implements Comparator<Element> {
-
 		public int compare(Element o1, Element o2) {
-			if (o1.dependsOn(o2))
-				return 1;
-			if (o2.dependsOn(o1))
-				return -1;
-			return 0;
+			boolean d1 = o1.dependsOn(o2);
+			boolean d2 = o2.dependsOn(o1);
+			return d1 != d2 ? d1 ? 1 : -1 : 0;
 		}
-
 	}
 
 	protected class Element {
@@ -491,21 +493,79 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 
 		@Override
 		public String toString() {
+			return toString(null);
+		}
+
+		public String toString(final Map<Element, String> postfix) {
 			String c = element.getCardinality() == null ? "" : element.getCardinality();
 			String t = getSemanticType() == null ? "" : getSemanticType().getName() + ":";
+			String p = postfix != null && postfix.containsKey(this) ? postfix.get(this) : "";
+			Iterable<String> contents = Iterables.transform(getContents(), new Function<Element, String>() {
+				public String apply(Element from) {
+					return from.toString(postfix);
+				}
+			});
 			switch (getType()) {
 				case ASSIGNMENT:
-					return t + ((Assignment) element).getFeature() + c;
+					return t + ((Assignment) element).getFeature() + p + c;
 				case GROUP:
-					return t + "(" + Join.join(" ", getContents()) + ")" + c;
+					return t + "(" + Join.join(" ", contents) + ")" + p + c;
 				case ALTERNATIVE:
-					return t + "(" + Join.join("|", getContents()) + ")" + c;
+					return t + "(" + Join.join("|", contents) + ")" + p + c;
 				case ACTION:
-					return "{" + ((Action) element).getType().getClassifier().getName() + "}";
+					return "{" + ((Action) element).getType().getClassifier().getName() + "}" + p;
 			}
 			return "";
 		}
 
+	}
+
+	protected class ElementCache {
+		private Grammar grammar;
+		private Map<ParserRule, Element> rule2element = Maps.newHashMap();
+		private Map<EClass, List<Element>> type2Elements = Maps.newHashMap();
+		private Set<ParserRule> validRules;
+
+		public ElementCache(Grammar grammar) {
+			super();
+			this.grammar = grammar;
+		}
+
+		protected Element getElement(ParserRule rule) {
+			Element e = rule2element.get(rule);
+			if (e == null)
+				rule2element.put(rule, e = createElement(null, rule.getAlternatives()));
+			return e;
+		}
+
+		public Collection<Element> getRulesFor(EClass cls) {
+			List<Element> eles = type2Elements.get(cls);
+			if (eles != null)
+				return eles;
+			eles = Lists.newArrayList();
+			for (ParserRule r : getValidRules()) {
+				if (((EClass) r.getType().getClassifier()).isSuperTypeOf(cls)) {
+					Element e = getElement(r);
+					if (e != null)
+						eles.add(e);
+				}
+			}
+			for (Element e : eles)
+				if (!isValidateableRule(GrammarUtil.containingParserRule(e.getEle()))) {
+					eles.clear();
+					break;
+				}
+			type2Elements.put(cls, eles);
+			return eles;
+		}
+
+		protected Set<ParserRule> getValidRules() {
+			if (validRules != null)
+				return validRules;
+			validRules = Sets.newHashSet();
+			collectReachableRules(getFirstParserRule(grammar), validRules);
+			return validRules;
+		}
 	}
 
 	protected enum ElementType {
@@ -514,12 +574,11 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 
 	protected class Quantities {
 		private EObject delegate;
-		private Map<Element, Integer> quantities;
+		private Map<Element, Integer> quantities = Maps.newHashMap();
 
-		public Quantities(EObject delegate, Map<Element, Integer> quantities) {
+		public Quantities(EObject delegate) {
 			super();
 			this.delegate = delegate;
-			this.quantities = quantities;
 		}
 
 		public EObject getDelegate() {
@@ -527,7 +586,8 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		}
 
 		public Integer getQuantity(Element assignement) {
-			return quantities.get(assignement);
+			Integer i = quantities.get(assignement);
+			return i == null || i < 0 ? -1 : i;
 		}
 
 		public Map<EStructuralFeature, Collection<Element>> groupByFeature() {
@@ -535,6 +595,49 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			for (Element e : quantities.keySet())
 				map.put(delegate.eClass().getEStructuralFeature(((Assignment) e.getEle()).getFeature()), e);
 			return map.asMap();
+		}
+
+		public Integer setQuantity(Element assignement, int quantity) {
+			return quantities.put(assignement, quantity);
+		}
+
+		@Override
+		public String toString() {
+			return toString(null);
+		}
+
+		public String toString(Map<Element, Pair<Integer, Integer>> minmax) {
+			Map<Element, String> postfix = Maps.newHashMap();
+			for (Map.Entry<Element, Integer> e : quantities.entrySet()) {
+				String s = ":" + e.getValue();
+				if (minmax != null && minmax.containsKey(e.getKey())) {
+					Pair<Integer, Integer> p = minmax.get(e.getKey());
+					s += "<" + p.getFirst() + "," + (p.getSecond() == Integer.MAX_VALUE ? "*" : p.getSecond()) + ">";
+				}
+				postfix.put(e.getKey(), s);
+			}
+			Iterator<Element> i = quantities.keySet().iterator();
+			if (!i.hasNext())
+				return "";
+			Element root = i.next();
+			while (i.hasNext())
+				root = root.getCommonContainer(i.next());
+			return root.toString(postfix);
+		}
+	}
+
+	protected static class QuantityComparator extends DependencyComparator {
+		private Quantities quantities;
+
+		public QuantityComparator(Quantities quantities) {
+			super();
+			this.quantities = quantities;
+		}
+
+		@Override
+		public int compare(Element o1, Element o2) {
+			int r = quantities.getQuantity(o2).compareTo(quantities.getQuantity(o1));
+			return r == 0 ? super.compare(o1, o2) : r;
 		}
 	}
 
@@ -580,6 +683,13 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			collectAssignments(rule, obj, e, assignments, acceptor);
 	}
 
+	protected void collectReachableRules(ParserRule pr, Set<ParserRule> rules) {
+		for (Assignment a : GrammarUtil.containedAssignments(pr))
+			for (RuleCall rc : GrammarUtil.containedRuleCalls(a))
+				if (isParserRule(rc.getRule()) && rules.add((ParserRule) rc.getRule()))
+					collectReachableRules((ParserRule) rc.getRule(), rules);
+	}
+
 	protected Set<Element> collectUnfulfilledSemanticElements(EClass cls, Element ele) {
 		if (ele.isOptional())
 			return Collections.emptySet();
@@ -623,35 +733,37 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		return null;
 	}
 
-	protected List<Element> findRulesForType(final EClass cls) {
-		List<ParserRule> rules = new ArrayList<ParserRule>();
-
-		// collect all rules with matching return type
-		for (ParserRule r : allParserRules(grammarAcc.getGrammar()))
-			if (r.getType().getClassifier() instanceof EClass
-					&& ((EClass) r.getType().getClassifier()).isSuperTypeOf(cls))
-				rules.add(r);
-
-		// remove rules which are called via unassigned rule call
-		for (ParserRule r : new ArrayList<ParserRule>(rules)) {
-			TreeIterator<EObject> i = r.eAllContents();
-			while (i.hasNext()) {
-				EObject o = i.next();
-				if (o instanceof Assignment)
-					i.prune();
-				else if (o instanceof RuleCall)
-					rules.remove(((RuleCall) o).getRule());
+	protected int distributeQuantity(List<Element> assignments, Quantities quants,
+			Map<Element, Pair<Integer, Integer>> minmax, int quantity) {
+		for (Element ass : assignments) {
+			int min = Math.max(Math.min(minmax.get(ass).getFirst(), minmax.get(ass).getSecond()), 0);
+			int q = quants.getQuantity(ass);
+			if (q < 0)
+				q = 0;
+			int toAdd = min - q;
+			if (toAdd > 0) {
+				if (min <= quantity) {
+					quants.setQuantity(ass, min);
+					quantity -= min;
+				} else {
+					quants.setQuantity(ass, quantity);
+					quantity = 0;
+				}
+			} else
+				quants.setQuantity(ass, q);
+		}
+		for (Element ass : assignments) {
+			if (quantity == 0)
+				break;
+			int max = minmax.get(ass).getSecond();
+			int q = quants.getQuantity(ass);
+			if (q < max) {
+				int nv = Math.min(max, quantity + q);
+				quants.setQuantity(ass, nv);
+				quantity -= nv - q;
 			}
 		}
-
-		// transform to elements
-		List<Element> elements = new ArrayList<Element>();
-		for (ParserRule r : rules) {
-			Element e = createElement(null, r.getAlternatives());
-			if (e != null)
-				elements.add(e);
-		}
-		return elements;
+		return quantity;
 	}
 
 	protected int getActualCount(EObject obj, EStructuralFeature feat) {
@@ -666,6 +778,16 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			return transSrvc.isTransient(obj, feat, 0) ? 0 : max;
 		}
 		return transSrvc.isTransient(obj, feat, 0) ? 0 : 1;
+	}
+
+	protected ElementCache getElementCache() {
+		String key = ElementCache.class.getName();
+		Grammar grammar = grammarAcc.getGrammar();
+		OnChangeEvictingCacheAdapter a = OnChangeEvictingCacheAdapter.getOrCreate(grammar);
+		ElementCache ec = a.get(key);
+		if (ec == null)
+			a.set(key, ec = new ElementCache(grammar));
+		return ec;
 	}
 
 	protected ElementType getElementType(EObject ele) {
@@ -688,8 +810,26 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		return f;
 	}
 
+	protected ParserRule getFirstParserRule(Grammar grammar) {
+		for (AbstractRule r : grammar.getRules())
+			if (isParserRule(r))
+				return (ParserRule) r;
+		throw new RuntimeException("Grammar " + grammar.getName() + " contains no parser rules");
+	}
+
+	protected int getHardMax(Element e) {
+		return e.isMultiple() ? MAX : e.isRoot() ? 1 : getHardMax(e.getContainer());
+	}
+
+	protected int getHardMin(Element e) {
+		return e.isOptional() || e.getType() == ElementType.ALTERNATIVE ? 0 : e.isRoot() ? 1 : getHardMin(e
+				.getContainer());
+	}
+
 	protected int getMaxCount(Quantities ctx, Element ass, Set<Element> involved) {
 		int c = ass.isRoot() ? 1 : getRequiredMaxCountByParent(ctx, ass.getContainer(), ass, involved);
+		if (c == 0 && ass.isAbsolutMandatory())
+			c = 1;
 		return ass.isMultiple() && c > 0 ? MAX : c;
 	}
 
@@ -713,33 +853,42 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			else
 				quantities.put(f, quantity);
 		}
-		Map<Element, Integer> quants = Maps.newHashMap();
-		for (Map.Entry<EStructuralFeature, Integer> f : quantities.entrySet())
-			getQuantity(assignments.get(f.getKey()), f.getValue(), quants);
-		return Collections.singletonList(new Quantities(obj, quants));
+		Quantities quants = new Quantities(obj);
+		Multimap<EStructuralFeature, Element> multiAssignments = Multimaps.newHashMultimap();
+		for (Map.Entry<EStructuralFeature, Integer> f : quantities.entrySet()) {
+			Collection<Element> ass = assignments.get(f.getKey());
+			if (ass.size() == 1 || f.getValue() == 0)
+				for (Element a : ass)
+					quants.setQuantity(a, f.getValue());
+			else
+				multiAssignments.putAll(f.getKey(), ass);
 
-	}
-
-	protected void getQuantity(Collection<Element> assignments, int totalQuantity, Map<Element, Integer> map) {
-		if (assignments.size() == 1)
-			map.put(assignments.iterator().next(), totalQuantity);
-		else {
-			List<Element> sorted = new ArrayList<Element>(assignments);
-			Collections.sort(sorted, new DependencyComparator());
-			for (Element a : sorted)
-				map.put(a, !a.isOptionalRecursive() && totalQuantity-- > 0 ? 1 : 0);
-			if (totalQuantity > 0) {
-				Collections.reverse(sorted);
-				for (Element a : sorted)
-					if (a.isMultipleRecursive()) {
-						map.put(a, map.get(a) + totalQuantity);
-						totalQuantity = 0;
-						break;
-					}
-			}
-			if (totalQuantity > 0)
-				map.put(sorted.get(0), map.get(sorted.get(0)) + totalQuantity);
 		}
+		if (multiAssignments.isEmpty())
+			return Collections.singletonList(quants);
+		Map<Element, Pair<Integer, Integer>> minmax = Maps.newHashMap();
+		for (Element e : multiAssignments.values()) {
+			int min = getMinCount(quants, e, Sets.<Element> newHashSet());
+			int max = getMaxCount(quants, e, Sets.<Element> newHashSet());
+			minmax.put(e, Tuples.create(min, max));
+		}
+		for (Map.Entry<EStructuralFeature, Collection<Element>> e : multiAssignments.asMap().entrySet()) {
+			List<Element> ass = new ArrayList<Element>(e.getValue());
+			Collections.sort(ass, new DependencyComparator());
+			int quantity = quantities.get(e.getKey());
+			quantity = distributeQuantity(ass, quants, minmax, quantity);
+			if (quantity > 0) {
+				//				System.out.println("Quantities: " + quants.toString(minmax));
+				for (Element x : ass)
+					minmax.put(x, Tuples.create(getHardMin(x), getHardMax(x)));
+				Collections.sort(ass, new QuantityComparator(quants));
+				quantity = distributeQuantity(ass, quants, minmax, quantity);
+				if (quantity > 0)
+					quants.setQuantity(ass.get(0), quants.getQuantity(ass.get(0)) + quantity);
+			}
+		}
+		//		System.out.println("FinalQuantities: " + quants.toString(minmax));
+		return Collections.singletonList(quants);
 	}
 
 	protected int getRequiredMaxCountByParent(Quantities ctx, Element parent, Element exclude, Set<Element> involved) {
@@ -759,7 +908,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 					int p = getRequiredMaxCountByParent(ctx, parent.getContainer(), parent, involved);
 					max = p == 0 || max == 0 ? 0 : Math.max(max, p);
 				}
-				return max == 0 && parent.isAbsolutMandatory() ? 1 : max;
+				return max;
 			case ALTERNATIVE:
 				if (parent.isMultiple())
 					return MAX;
@@ -814,7 +963,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 						}
 					}
 				if (parent.isOptional())
-					return count1;
+					return count1 == UNDEF ? 0 : count1;
 				if (!parent.isRoot())
 					return Math.max(getRequiredMinCountByParent(ctx, parent.getContainer(), parent, involved), count1);
 				return UNDEF;
@@ -868,25 +1017,45 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		return count;
 	}
 
-	protected boolean isValidateableRule(Element rule) {
-		return !ruleContainsAssignedAction(rule);
+	protected boolean isParserRule(AbstractRule rule) {
+		return rule instanceof ParserRule && !GrammarUtil.isDatatypeRule((ParserRule) rule);
 	}
 
-	protected boolean ruleContainsAssignedAction(Element rule) {
-		return Iterables.any(containedActions(rule.getEle()), new Predicate<Action>() {
+	protected boolean isValidateableRule(ParserRule rule) {
+		return !ruleContainsAssignedAction(rule)
+				&& !ruleContainsRecursiveUnassignedRuleCall(rule, new HashSet<AbstractRule>());
+	}
+
+	protected boolean ruleContainsAssignedAction(AbstractRule rule) {
+		return Iterables.any(containedActions(rule), new Predicate<Action>() {
 			public boolean apply(Action action) {
 				return action.getFeature() != null;
 			}
 		});
 	}
 
+	protected boolean ruleContainsRecursiveUnassignedRuleCall(AbstractRule rule, Set<AbstractRule> visited) {
+		if (!visited.add(rule))
+			return true;
+		TreeIterator<EObject> i = rule.eAllContents();
+		while (i.hasNext()) {
+			EObject o = i.next();
+			if (o instanceof Assignment)
+				i.prune();
+			else if (o instanceof RuleCall && isParserRule(((RuleCall) o).getRule())) {
+				if (ruleContainsRecursiveUnassignedRuleCall(((RuleCall) o).getRule(), visited))
+					return true;
+			}
+		}
+		return false;
+	}
+
 	@Override
 	public boolean validateObject(EObject obj, IDiagnosticAcceptor acceptor, Map<Object, Object> context) {
 		List<IConcreteSyntaxDiagnostic> allDiags = new ArrayList<IConcreteSyntaxDiagnostic>();
-		Iterable<Element> rules = findRulesForType(obj.eClass());
-		for (Element rule : rules)
-			if (!isValidateableRule(rule))
-				return true;// validation is not supported if there is a not-validatable rule
+		Collection<Element> rules = getElementCache().getRulesFor(obj.eClass());
+		if (rules.isEmpty())
+			return true;// no validation if there are no rules for this EClass
 		for (Element rule : rules) {
 			List<IConcreteSyntaxDiagnostic> diags = validateRule(obj, rule);
 			if (diags.size() == 0)
@@ -900,6 +1069,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 
 	protected List<IConcreteSyntaxDiagnostic> validateQuantities(Quantities obj, Element rule) {
 		List<IConcreteSyntaxDiagnostic> diag = new ArrayList<IConcreteSyntaxDiagnostic>();
+		Map<Element, Pair<Integer, Integer>> minmax = Maps.newHashMap();
 		for (Map.Entry<EStructuralFeature, Collection<Element>> e : obj.groupByFeature().entrySet()) {
 			int min = UNDEF, max = 0;
 			Set<Element> involved = new HashSet<Element>();
@@ -911,12 +1081,14 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 				int ma = getMaxCount(obj, a, involved);
 				if (ma != UNDEF && max != MAX)
 					max = ma == MAX ? ma : max + ma;
+				minmax.put(a, Tuples.create(mi, ma));
 			}
 			int actual = getActualCount(obj.getDelegate(), e.getKey());
 			if (actual < min || (actual > max))
 				diag.add(new ConcreteSyntaxFeatureDiagnostic(rule, obj.getDelegate(), e.getKey(), actual, min, max,
 						involved));
 		}
+		//		System.out.println("Validation: " + obj.toString(minmax));
 		return diag;
 	}
 

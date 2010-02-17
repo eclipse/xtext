@@ -14,7 +14,7 @@ Model:
 	x1=SimpleGroup | x2=SimpleAlternative | x3=SimpleMultiplicities | x4=GroupMultiplicities | x5=AlternativeMultiplicities |
 	x6=AssignedAction | x7=AssignedActionSecond | x8=UnassignedAction1 | x9=UnassignedAction2 | x10=UnassignedAction3 | 
 	x11=UnassignedRuleCall1 | x12=UnassignedRuleCall2 | x13=Combination1 | x14=Combination2 | x15=Combination3 | x16=Combination4 | 
-	x17=List1 | x18=List2 | x19=List3 | x20=List4 | x21=List5;	
+	x17=List1 | x18=List2 | x19=List3 | x20=List4 | x21=List5 | x22=AltList1 | x23=AltList2;	
 	
 SimpleGroup:
 	"#1" val1=ID val2=ID;
@@ -84,3 +84,10 @@ List4:
 	
 List5:
 	"#21" ((val1+=ID ("," val1+=ID)* "kw3" val2=ID) | val3=ID);
+	
+AltList1:
+	"#22" (val1=ID val2=ID | "kw1" val1=ID val3=ID | "kw2" val1=ID val4=ID?);
+	
+AltList2:
+	"#23" (val1+=ID val2=ID | "kw" val1+=ID ("," val1+=ID)* val3=ID);  
+	   
