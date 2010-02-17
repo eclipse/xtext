@@ -65,7 +65,7 @@ public class LinkingErrorTest extends AbstractXtextTests {
 			
 		converter.convertResourceDiagnostic(firstError, null, acceptor);
 		Issue firstIssue = l.get(0);
-		assertEquals(Issue.LINKING_ISSUE, firstIssue.getCode());
+		assertEquals(org.eclipse.xtext.diagnostics.Diagnostic.LINKING_DIAGNOSTIC, firstIssue.getCode());
 
 		// single quickfix is change
 		IssueContextImpl context = new IssueContextImpl(fooType, firstIssue, input);

@@ -17,13 +17,13 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.CrossReference;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.IssueContext;
 import org.eclipse.xtext.validation.IssueResolution;
 
@@ -106,7 +106,7 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 
 	@Override
 	public List<IssueResolution> getResolutions(IssueContext context) {
-		if(Issue.LINKING_ISSUE.equals(context.getIssue().getCode())) {
+		if(Diagnostic.LINKING_DIAGNOSTIC.equals(context.getIssue().getCode())) {
 			List<IssueResolution> result = new ArrayList<IssueResolution>();
 			result.addAll(getResolutionsForLinkingIssue(context));
 			result.addAll(super.getResolutions(context));
@@ -117,7 +117,7 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 
 	@Override
 	public boolean hasResolutionFor(String issueCode) {
-		return Issue.LINKING_ISSUE.equals(issueCode) || super.hasResolutionFor(issueCode);
+		return Diagnostic.LINKING_DIAGNOSTIC.equals(issueCode) || super.hasResolutionFor(issueCode);
 	}
 
 	
