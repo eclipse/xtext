@@ -35,6 +35,7 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
+import org.eclipse.xtext.CompoundElement;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
@@ -52,6 +53,7 @@ import com.google.common.base.Function;
 import com.google.common.base.Join;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Iterators;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
@@ -116,18 +118,17 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		}
 
 		private String getConstraint(Element element, Set<Element> all) {
-			String card = element.getEle().getCardinality() != null ? element.getEle().getCardinality() : "";
 			switch (element.getType()) {
 				case ASSIGNMENT:
-					return ((Assignment) element.getEle()).getFeature() + card;
+					return ((Assignment) element.getEle()).getFeature() + element.getCardinality();
 				case GROUP:
 					List<String> children1 = getChildren(element, all);
 					if (children1.size() == 1)
-						return children1.get(0) + card;
-					return "(" + Join.join(" ", children1) + ")" + card;
+						return children1.get(0) + element.getCardinality();
+					return "(" + Join.join(" ", children1) + ")" + element.getCardinality();
 				case ALTERNATIVE:
 					List<String> children2 = getChildren(element, all);
-					return "(" + Join.join("|", children2) + ")" + card;
+					return "(" + Join.join("|", children2) + ")" + element.getCardinality();
 				case ACTION:
 					return "{" + ((Action) element.getEle()).getType().getClassifier().getName() + "}";
 			}
@@ -411,6 +412,10 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			return false;
 		}
 
+		public String getCardinality() {
+			return optional ? (multiple ? "*" : "?") : (multiple ? "+" : "");
+		}
+
 		public Element getCommonContainer(Element obj1) {
 			Element cnt1 = obj1;
 			while (cnt1 != null) {
@@ -500,7 +505,6 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		}
 
 		public String toString(final Map<Element, String> postfix) {
-			String c = element.getCardinality() == null ? "" : element.getCardinality();
 			String t = getSemanticType() == null ? "" : getSemanticType().getName() + ":";
 			String p = postfix != null && postfix.containsKey(this) ? postfix.get(this) : "";
 			Iterable<String> contents = Iterables.transform(getContents(), new Function<Element, String>() {
@@ -510,11 +514,11 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			});
 			switch (getType()) {
 				case ASSIGNMENT:
-					return t + ((Assignment) element).getFeature() + p + c;
+					return t + ((Assignment) element).getFeature() + p + getCardinality();
 				case GROUP:
-					return t + "(" + Join.join(" ", contents) + ")" + p + c;
+					return t + "(" + Join.join(" ", contents) + ")" + p + getCardinality();
 				case ALTERNATIVE:
-					return t + "(" + Join.join("|", contents) + ")" + p + c;
+					return t + "(" + Join.join("|", contents) + ")" + p + getCardinality();
 				case ACTION:
 					return "{" + ((Action) element).getType().getClassifier().getName() + "}" + p;
 			}
@@ -735,23 +739,64 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			default:
 				return Collections.emptySet();
 		}
-
 	}
 
-	protected Element createElement(Element parent, EObject e) {
-		ElementType t = getElementType(e);
-		if (t != null) {
-			AbstractElement x = (AbstractElement) e;
-			return new Element(t, parent, x, isMultipleCardinality(x), isOptionalCardinality(x));
-		} else if (e instanceof RuleCall) {
-			RuleCall rc = (RuleCall) e;
-			AbstractElement x = rc.getRule().getAlternatives();
-			t = getElementType(x);
-			if (t != null)
-				return new Element(t, parent, x, isMultipleCardinality(x) || isMultipleCardinality(rc),
-						isOptionalCardinality(x) || isOptionalCardinality(rc));
+	protected boolean containsRelevantElement(AbstractElement ele) {
+		Iterator<EObject> i = Iterators.concat(Collections.singleton(ele).iterator(), ele.eAllContents());
+		while (i.hasNext()) {
+			EObject o = i.next();
+			if (o instanceof Action || o instanceof Assignment)
+				return true;
+			if (o instanceof RuleCall && containsRelevantElement(((RuleCall) o).getRule().getAlternatives()))
+				return true;
 		}
-		return null;
+		return false;
+	}
+
+	protected Element createElement(Element parent, EObject obj) {
+		if (!(obj instanceof AbstractElement))
+			return null;
+		AbstractElement ele = (AbstractElement) obj;
+		boolean multiple = false;
+		boolean optional = false;
+		while (true) {
+			multiple = multiple || isMultipleCardinality(ele);
+			optional = optional || isOptionalCardinality(ele);
+			if (ele instanceof Assignment) {
+				return new Element(ElementType.ASSIGNMENT, parent, ele, multiple, optional);
+			} else if (ele instanceof Group || ele instanceof UnorderedGroup) {
+				AbstractElement lastChild = null;
+				for (AbstractElement o : ((CompoundElement) ele).getElements())
+					if (containsRelevantElement(o)) {
+						if (lastChild == null)
+							lastChild = o;
+						else
+							return new Element(ElementType.GROUP, parent, ele, multiple, optional);
+					}
+				ele = lastChild;
+				continue;
+			} else if (ele instanceof Alternatives) {
+				int relevantChildren = 0;
+				AbstractElement lastChild = null;
+				for (AbstractElement o : ((CompoundElement) ele).getElements())
+					if (containsRelevantElement(o)) {
+						relevantChildren++;
+						lastChild = o;
+					}
+				if (relevantChildren < ((CompoundElement) ele).getElements().size())
+					optional = true;
+				if (relevantChildren > 1)
+					return new Element(ElementType.ALTERNATIVE, parent, ele, multiple, optional);
+				ele = lastChild;
+				continue;
+			} else if (ele instanceof Action) {
+				return new Element(ElementType.ACTION, parent, ele, multiple, optional);
+			} else if (ele instanceof RuleCall) {
+				ele = ((RuleCall) ele).getRule().getAlternatives();
+				continue;
+			}
+			return null;
+		}
 	}
 
 	protected int distributeQuantity(List<Element> assignments, Quantities quants,
@@ -809,18 +854,6 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		if (ec == null)
 			a.set(key, ec = new ElementCache(grammar));
 		return ec;
-	}
-
-	protected ElementType getElementType(EObject ele) {
-		if (ele instanceof Group || ele instanceof UnorderedGroup)
-			return ElementType.GROUP;
-		if (ele instanceof Alternatives)
-			return ElementType.ALTERNATIVE;
-		if (ele instanceof Assignment)
-			return ElementType.ASSIGNMENT;
-		if (ele instanceof Action)
-			return ElementType.ACTION;
-		return null;
 	}
 
 	protected EStructuralFeature getFeature(EClass cls, Element ele) {
@@ -1109,6 +1142,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		if (rules.isEmpty())
 			return true;// no validation if there are no rules for this EClass
 		for (Element rule : rules) {
+			//			System.out.println(rule);
 			List<IConcreteSyntaxDiagnostic> diags = validateRule(obj, rule);
 			if (diags.size() == 0)
 				return true; // validation succeeded
