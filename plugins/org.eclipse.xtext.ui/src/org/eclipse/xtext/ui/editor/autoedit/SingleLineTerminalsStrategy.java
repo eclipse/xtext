@@ -35,7 +35,7 @@ public class SingleLineTerminalsStrategy extends AbstractEditStrategy  {
 	}
 
 	protected void handleInsertLeftTerminal(IDocument document, DocumentCommand command) throws BadLocationException {
-		if (command.text.equals(left)) {
+		if (command.text.equals(left) && !isIdentifierPart(document, command.offset)) {
 			int opening = count(left, getTextToScan(document));
 			int closing = count(right, getTextToScan(document));
 			int occurences = opening + closing;

@@ -40,10 +40,12 @@ public class SameTerminalsEditStrategy extends AbstractEditStrategy {
 					} catch (BadLocationException e) {
 						//ignore
 					}
-					command.text = terminal + terminal;
-					command.length = 0;
-					command.caretOffset = command.offset + 1;
-					command.shiftsCaret = false;
+					if (!isIdentifierPart(document, command.offset)) {
+						command.text = terminal + terminal;
+						command.length = 0;
+						command.caretOffset = command.offset + 1;
+						command.shiftsCaret = false;
+					}
 				}
 			}
 			if (command.text.equals("") && document.get(command.offset, 2).equals(terminal + terminal)) {

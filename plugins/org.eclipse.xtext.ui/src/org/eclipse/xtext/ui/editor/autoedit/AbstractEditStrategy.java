@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.autoedit;
 
+import org.apache.log4j.Logger;
 import org.eclipse.jface.text.BadLocationException;
 import org.eclipse.jface.text.IAutoEditStrategy;
 import org.eclipse.jface.text.IDocument;
@@ -15,6 +16,8 @@ import org.eclipse.jface.text.IDocument;
  * @author Sven Efftinge - Initial contribution and API
  */
 public abstract class AbstractEditStrategy implements IAutoEditStrategy{
+	
+	private final static Logger log = Logger.getLogger(AbstractEditStrategy.class);
 	
 	public int count(String toFind, StringBuilder textToSearch) throws BadLocationException {
 		int count = 0;
@@ -33,5 +36,18 @@ public abstract class AbstractEditStrategy implements IAutoEditStrategy{
 	
 	protected StringBuilder getTextToScan(IDocument document) {
 		return new StringBuilder(document.get());
+	}
+	
+	protected boolean isIdentifierPart(IDocument doc, int offset) {
+		if (doc.getLength()<=offset) {
+			return false;
+		}
+		try {
+			char c = doc.getChar(offset);
+			return Character.isJavaIdentifierPart(c);
+		} catch (BadLocationException e) {
+			log.debug(e.getMessage(), e);
+		}
+		return false;
 	}
 }
