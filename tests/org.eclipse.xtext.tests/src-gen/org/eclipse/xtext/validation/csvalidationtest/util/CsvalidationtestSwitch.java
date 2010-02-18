@@ -293,6 +293,13 @@ public class CsvalidationtestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case CsvalidationtestPackage.STATIC_SIMPLIFICATION:
+      {
+        StaticSimplification staticSimplification = (StaticSimplification)theEObject;
+        T result = caseStaticSimplification(staticSimplification);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case CsvalidationtestPackage.UNASSIGNED_ACTION2_SUB:
       {
         UnassignedAction2Sub unassignedAction2Sub = (UnassignedAction2Sub)theEObject;
@@ -323,6 +330,14 @@ public class CsvalidationtestSwitch<T>
         T result = caseUnassignedRuleCall2SubAction(unassignedRuleCall2SubAction);
         if (result == null) result = caseUnassignedRuleCall2Sub(unassignedRuleCall2SubAction);
         if (result == null) result = caseUnassignedRuleCall2(unassignedRuleCall2SubAction);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case CsvalidationtestPackage.EMPTY_ALTERNATIVE_SUB:
+      {
+        EmptyAlternativeSub emptyAlternativeSub = (EmptyAlternativeSub)theEObject;
+        T result = caseEmptyAlternativeSub(emptyAlternativeSub);
+        if (result == null) result = caseStaticSimplification(emptyAlternativeSub);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -779,6 +794,22 @@ public class CsvalidationtestSwitch<T>
   }
 
   /**
+   * Returns the result of interpreting the object as an instance of '<em>Static Simplification</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Static Simplification</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseStaticSimplification(StaticSimplification object)
+  {
+    return null;
+  }
+
+  /**
    * Returns the result of interpreting the object as an instance of '<em>Unassigned Action2 Sub</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
@@ -838,6 +869,22 @@ public class CsvalidationtestSwitch<T>
    * @generated
    */
   public T caseUnassignedRuleCall2SubAction(UnassignedRuleCall2SubAction object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Empty Alternative Sub</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Empty Alternative Sub</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseEmptyAlternativeSub(EmptyAlternativeSub object)
   {
     return null;
   }

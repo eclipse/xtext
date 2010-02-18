@@ -218,6 +218,11 @@ public class CsvalidationtestAdapterFactory extends AdapterFactoryImpl
         return createTransientSerializeables1Adapter();
       }
       @Override
+      public Adapter caseStaticSimplification(StaticSimplification object)
+      {
+        return createStaticSimplificationAdapter();
+      }
+      @Override
       public Adapter caseUnassignedAction2Sub(UnassignedAction2Sub object)
       {
         return createUnassignedAction2SubAdapter();
@@ -236,6 +241,11 @@ public class CsvalidationtestAdapterFactory extends AdapterFactoryImpl
       public Adapter caseUnassignedRuleCall2SubAction(UnassignedRuleCall2SubAction object)
       {
         return createUnassignedRuleCall2SubActionAdapter();
+      }
+      @Override
+      public Adapter caseEmptyAlternativeSub(EmptyAlternativeSub object)
+      {
+        return createEmptyAlternativeSubAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -680,6 +690,21 @@ public class CsvalidationtestAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.validation.csvalidationtest.StaticSimplification <em>Static Simplification</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.validation.csvalidationtest.StaticSimplification
+   * @generated
+   */
+  public Adapter createStaticSimplificationAdapter()
+  {
+    return null;
+  }
+
+  /**
    * Creates a new adapter for an object of class '{@link org.eclipse.xtext.validation.csvalidationtest.UnassignedAction2Sub <em>Unassigned Action2 Sub</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
@@ -735,6 +760,21 @@ public class CsvalidationtestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createUnassignedRuleCall2SubActionAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.validation.csvalidationtest.EmptyAlternativeSub <em>Empty Alternative Sub</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.validation.csvalidationtest.EmptyAlternativeSub
+   * @generated
+   */
+  public Adapter createEmptyAlternativeSubAdapter()
   {
     return null;
   }

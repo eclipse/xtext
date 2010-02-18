@@ -278,6 +278,15 @@ public interface CsvalidationtestFactory extends EFactory
   TransientSerializeables1 createTransientSerializeables1();
 
   /**
+   * Returns a new object of class '<em>Static Simplification</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Static Simplification</em>'.
+   * @generated
+   */
+  StaticSimplification createStaticSimplification();
+
+  /**
    * Returns a new object of class '<em>Unassigned Action2 Sub</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -312,6 +321,15 @@ public interface CsvalidationtestFactory extends EFactory
    * @generated
    */
   UnassignedRuleCall2SubAction createUnassignedRuleCall2SubAction();
+
+  /**
+   * Returns a new object of class '<em>Empty Alternative Sub</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Empty Alternative Sub</em>'.
+   * @generated
+   */
+  EmptyAlternativeSub createEmptyAlternativeSub();
 
   /**
    * Returns the package supported by this factory.

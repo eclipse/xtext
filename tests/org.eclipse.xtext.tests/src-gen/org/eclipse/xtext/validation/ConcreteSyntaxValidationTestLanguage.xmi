@@ -84,6 +84,9 @@
         <elements xsi:type="xtext:Assignment" feature="x25" operator="=">
           <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.28"/>
         </elements>
+        <elements xsi:type="xtext:Assignment" feature="x26" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.30"/>
+        </elements>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="SimpleGroup">
@@ -714,6 +717,40 @@
         <elements xsi:type="xtext:EnumLiteralDeclaration">
           <enumLiteral href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//TransientSerializeables1Enum/lit2"/>
           <literal value="lit2"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="StaticSimplification">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//StaticSimplification"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="#26"/>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Keyword" value="kw1"/>
+          <elements xsi:type="xtext:Action">
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2009/tmf/xtext/csvalidationtest#//EmptyAlternativeSub"/>
+            </type>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="val1" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Keyword" value="kw2"/>
+          <elements xsi:type="xtext:Assignment" feature="val2" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Keyword" value="kw3"/>
+          <elements xsi:type="xtext:Group" cardinality="?">
+            <elements xsi:type="xtext:Keyword" value="kw4"/>
+            <elements xsi:type="xtext:Assignment" cardinality="+" feature="val3" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+            </elements>
+          </elements>
         </elements>
       </alternatives>
     </rules>

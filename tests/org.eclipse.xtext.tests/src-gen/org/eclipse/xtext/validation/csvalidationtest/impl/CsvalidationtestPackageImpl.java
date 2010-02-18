@@ -23,6 +23,7 @@ import org.eclipse.xtext.validation.csvalidationtest.Combination3;
 import org.eclipse.xtext.validation.csvalidationtest.Combination4;
 import org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestFactory;
 import org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage;
+import org.eclipse.xtext.validation.csvalidationtest.EmptyAlternativeSub;
 import org.eclipse.xtext.validation.csvalidationtest.GroupMultiplicities;
 import org.eclipse.xtext.validation.csvalidationtest.List1;
 import org.eclipse.xtext.validation.csvalidationtest.List2;
@@ -33,6 +34,7 @@ import org.eclipse.xtext.validation.csvalidationtest.Model;
 import org.eclipse.xtext.validation.csvalidationtest.SimpleAlternative;
 import org.eclipse.xtext.validation.csvalidationtest.SimpleGroup;
 import org.eclipse.xtext.validation.csvalidationtest.SimpleMultiplicities;
+import org.eclipse.xtext.validation.csvalidationtest.StaticSimplification;
 import org.eclipse.xtext.validation.csvalidationtest.TransientObject;
 import org.eclipse.xtext.validation.csvalidationtest.TransientObjectSub;
 import org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1;
@@ -258,6 +260,13 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
    * <!-- end-user-doc -->
    * @generated
    */
+  private EClass staticSimplificationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   private EClass unassignedAction2SubEClass = null;
 
   /**
@@ -280,6 +289,13 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
    * @generated
    */
   private EClass unassignedRuleCall2SubActionEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass emptyAlternativeSubEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -609,6 +625,16 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
   public EReference getModel_X25()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(24);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_X26()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(25);
   }
 
   /**
@@ -1576,6 +1602,46 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getStaticSimplification()
+  {
+    return staticSimplificationEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getStaticSimplification_Val1()
+  {
+    return (EAttribute)staticSimplificationEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getStaticSimplification_Val2()
+  {
+    return (EAttribute)staticSimplificationEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getStaticSimplification_Val3()
+  {
+    return (EAttribute)staticSimplificationEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getUnassignedAction2Sub()
   {
     return unassignedAction2SubEClass;
@@ -1629,6 +1695,16 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
   public EClass getUnassignedRuleCall2SubAction()
   {
     return unassignedRuleCall2SubActionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getEmptyAlternativeSub()
+  {
+    return emptyAlternativeSubEClass;
   }
 
   /**
@@ -1697,6 +1773,7 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     createEReference(modelEClass, MODEL__X23);
     createEReference(modelEClass, MODEL__X24);
     createEReference(modelEClass, MODEL__X25);
+    createEReference(modelEClass, MODEL__X26);
 
     simpleGroupEClass = createEClass(SIMPLE_GROUP);
     createEAttribute(simpleGroupEClass, SIMPLE_GROUP__VAL1);
@@ -1821,6 +1898,11 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     createEAttribute(transientSerializeables1EClass, TRANSIENT_SERIALIZEABLES1__VAL2);
     createEAttribute(transientSerializeables1EClass, TRANSIENT_SERIALIZEABLES1__INT1);
 
+    staticSimplificationEClass = createEClass(STATIC_SIMPLIFICATION);
+    createEAttribute(staticSimplificationEClass, STATIC_SIMPLIFICATION__VAL1);
+    createEAttribute(staticSimplificationEClass, STATIC_SIMPLIFICATION__VAL2);
+    createEAttribute(staticSimplificationEClass, STATIC_SIMPLIFICATION__VAL3);
+
     unassignedAction2SubEClass = createEClass(UNASSIGNED_ACTION2_SUB);
     createEAttribute(unassignedAction2SubEClass, UNASSIGNED_ACTION2_SUB__VAL1);
     createEAttribute(unassignedAction2SubEClass, UNASSIGNED_ACTION2_SUB__VAL2);
@@ -1830,6 +1912,8 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     unassignedAction2Sub2EClass = createEClass(UNASSIGNED_ACTION2_SUB2);
 
     unassignedRuleCall2SubActionEClass = createEClass(UNASSIGNED_RULE_CALL2_SUB_ACTION);
+
+    emptyAlternativeSubEClass = createEClass(EMPTY_ALTERNATIVE_SUB);
 
     // Create enums
     transientSerializeables1EnumEEnum = createEEnum(TRANSIENT_SERIALIZEABLES1_ENUM);
@@ -1870,6 +1954,7 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     unassignedAction2Sub1EClass.getESuperTypes().add(this.getUnassignedAction3());
     unassignedAction2Sub2EClass.getESuperTypes().add(this.getUnassignedAction3());
     unassignedRuleCall2SubActionEClass.getESuperTypes().add(this.getUnassignedRuleCall2Sub());
+    emptyAlternativeSubEClass.getESuperTypes().add(this.getStaticSimplification());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -1898,6 +1983,7 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     initEReference(getModel_X23(), this.getAltList2(), null, "x23", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X24(), this.getTransientObject(), null, "x24", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X25(), this.getTransientSerializeables1(), null, "x25", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X26(), this.getStaticSimplification(), null, "x26", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(simpleGroupEClass, SimpleGroup.class, "SimpleGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSimpleGroup_Val1(), ecorePackage.getEString(), "val1", null, 0, 1, SimpleGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2022,6 +2108,11 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     initEAttribute(getTransientSerializeables1_Val2(), ecorePackage.getEString(), "val2", null, 0, 1, TransientSerializeables1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getTransientSerializeables1_Int1(), ecorePackage.getEInt(), "int1", null, 0, 1, TransientSerializeables1.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
+    initEClass(staticSimplificationEClass, StaticSimplification.class, "StaticSimplification", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getStaticSimplification_Val1(), ecorePackage.getEString(), "val1", null, 0, 1, StaticSimplification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getStaticSimplification_Val2(), ecorePackage.getEString(), "val2", null, 0, 1, StaticSimplification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getStaticSimplification_Val3(), ecorePackage.getEString(), "val3", null, 0, 1, StaticSimplification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(unassignedAction2SubEClass, UnassignedAction2Sub.class, "UnassignedAction2Sub", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getUnassignedAction2Sub_Val1(), ecorePackage.getEString(), "val1", null, 0, 1, UnassignedAction2Sub.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getUnassignedAction2Sub_Val2(), ecorePackage.getEString(), "val2", null, 0, 1, UnassignedAction2Sub.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2031,6 +2122,8 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     initEClass(unassignedAction2Sub2EClass, UnassignedAction2Sub2.class, "UnassignedAction2Sub2", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(unassignedRuleCall2SubActionEClass, UnassignedRuleCall2SubAction.class, "UnassignedRuleCall2SubAction", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(emptyAlternativeSubEClass, EmptyAlternativeSub.class, "EmptyAlternativeSub", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     // Initialize enums and add enum literals
     initEEnum(transientSerializeables1EnumEEnum, TransientSerializeables1Enum.class, "TransientSerializeables1Enum");

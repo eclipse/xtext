@@ -33,6 +33,7 @@ import org.eclipse.xtext.validation.csvalidationtest.List5;
 import org.eclipse.xtext.validation.csvalidationtest.SimpleAlternative;
 import org.eclipse.xtext.validation.csvalidationtest.SimpleGroup;
 import org.eclipse.xtext.validation.csvalidationtest.SimpleMultiplicities;
+import org.eclipse.xtext.validation.csvalidationtest.StaticSimplification;
 import org.eclipse.xtext.validation.csvalidationtest.TransientObject;
 import org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1;
 import org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1Enum;
@@ -303,15 +304,12 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 
 		copy = (Combination4) EcoreUtil.copy(m);
 		copy.getVal1().add("xxx");
-		validate(copy).assertAll(err(p.getCombination4_Val1(), ERROR_LIST_TOO_MANY, 2, 2, "(val1 val2 val3)+"),
-				err(p.getCombination4_Val2(), ERROR_LIST_TOO_FEW, 3, null, "(val1 val2 val3)+"),
-				err(p.getCombination4_Val3(), ERROR_LIST_TOO_FEW, 3, null, "(val1 val2 val3)+"));
+		validate(copy).assertAll(err(p.getCombination4_Val1(), ERROR_LIST_TOO_MANY, null, 2, "(val1 val2 val3)+"));
 
 		copy = (Combination4) EcoreUtil.copy(m);
 		copy.getVal1().remove(0);
-		validate(copy).assertAll(err(p.getCombination4_Val1(), ERROR_LIST_TOO_FEW, 2, 2, "(val1 val2 val3)+"),
-				err(p.getCombination4_Val2(), ERROR_LIST_TOO_MANY, 1, 1, "(val1 val2 val3)+"),
-				err(p.getCombination4_Val3(), ERROR_LIST_TOO_MANY, 1, 1, "(val1 val2 val3)+"));
+		validate(copy).assertAll(err(p.getCombination4_Val2(), ERROR_LIST_TOO_MANY, null, 1, "(val1 val2 val3)+"),
+				err(p.getCombination4_Val3(), ERROR_LIST_TOO_MANY, null, 1, "(val1 val2 val3)+"));
 	}
 
 	public void testList1() throws Exception {
@@ -467,7 +465,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 				return r;
 			}
 		};
-		to.setNested(CsvalidationtestFactory.eINSTANCE.createTransientObjectSub());
+		to.setNested(f.createTransientObjectSub());
 		to.getNested().setVal2("default");
 		validate(to).assertOK();
 
@@ -478,37 +476,77 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 	}
 
 	public void testTransientSerializeables1() throws Exception {
-		TransientSerializeables1 m = CsvalidationtestFactory.eINSTANCE.createTransientSerializeables1();
+		TransientSerializeables1 m = f.createTransientSerializeables1();
 		validate(m).assertOK();
 
-		m = CsvalidationtestFactory.eINSTANCE.createTransientSerializeables1();
+		m = f.createTransientSerializeables1();
 		m.setVal1("foo");
 		m.setEnum1(TransientSerializeables1Enum.LIT2);
 		validate(m).assertOK();
 
-		m = CsvalidationtestFactory.eINSTANCE.createTransientSerializeables1();
+		m = f.createTransientSerializeables1();
 		m.setVal2("foo");
 		m.setInt1(5);
 		validate(m).assertOK();
 
-		m = CsvalidationtestFactory.eINSTANCE.createTransientSerializeables1();
+		m = f.createTransientSerializeables1();
 		m.setVal1("foo");
 		validate(m).assertOK();
 
-		m = CsvalidationtestFactory.eINSTANCE.createTransientSerializeables1();
+		m = f.createTransientSerializeables1();
 		m.setVal2("foo");
 		validate(m).assertOK();
 
-		m = CsvalidationtestFactory.eINSTANCE.createTransientSerializeables1();
+		m = f.createTransientSerializeables1();
 		m.setEnum1(TransientSerializeables1Enum.LIT2);
 		validate(m).assertAll(
 				err(p.getTransientSerializeables1_Enum1(), ERROR_VALUE_PROHIBITED, null, 0, "(val1 enum1)?"),
 				err(p.getTransientSerializeables1_Val1(), ERROR_VALUE_REQUIRED, 1, null, "(val1 enum1)?"));
 
-		m = CsvalidationtestFactory.eINSTANCE.createTransientSerializeables1();
+		m = f.createTransientSerializeables1();
 		m.setInt1(5);
 		validate(m).assertAll(
 				err(p.getTransientSerializeables1_Int1(), ERROR_VALUE_PROHIBITED, null, 0, "(val2 int1)?"),
 				err(p.getTransientSerializeables1_Val2(), ERROR_VALUE_REQUIRED, 1, null, "(val2 int1)?"));
+	}
+
+	public void testStaticSimplification() {
+		StaticSimplification m = f.createStaticSimplification();
+		validate(m).assertOK();
+
+		m = f.createStaticSimplification();
+		m.setVal1("foo");
+		validate(m).assertOK();
+
+		m = f.createStaticSimplification();
+		m.setVal2("foo");
+		validate(m).assertOK();
+
+		m = f.createStaticSimplification();
+		m.setVal3("foo");
+		validate(m).assertOK();
+
+		m = f.createStaticSimplification();
+		m.setVal1("foo");
+		m.setVal2("foo");
+		m.setVal3("foo");
+		validate(m).assertOK();
+
+		m = f.createEmptyAlternativeSub();
+		m.setVal1("foo");
+		validate(m).assertAll(err(p.getStaticSimplification_Val1(), ERROR_VALUE_PROHIBITED, null, 0, ""));
+
+		m = f.createEmptyAlternativeSub();
+		m.setVal2("foo");
+		validate(m).assertOK();
+
+		m = f.createEmptyAlternativeSub();
+		m.setVal3("foo");
+		validate(m).assertOK();
+
+		m = f.createEmptyAlternativeSub();
+		m.setVal2("foo");
+		m.setVal3("foo");
+		validate(m).assertOK();
 	}
 }

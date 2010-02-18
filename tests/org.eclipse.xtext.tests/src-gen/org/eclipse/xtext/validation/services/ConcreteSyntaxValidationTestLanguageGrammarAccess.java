@@ -70,6 +70,8 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		private final RuleCall cX24TransientObjectParserRuleCall_23_0 = (RuleCall)cX24Assignment_23.eContents().get(0);
 		private final Assignment cX25Assignment_24 = (Assignment)cAlternatives.eContents().get(24);
 		private final RuleCall cX25TransientSerializeables1ParserRuleCall_24_0 = (RuleCall)cX25Assignment_24.eContents().get(0);
+		private final Assignment cX26Assignment_25 = (Assignment)cAlternatives.eContents().get(25);
+		private final RuleCall cX26StaticSimplificationParserRuleCall_25_0 = (RuleCall)cX26Assignment_25.eContents().get(0);
 		
 		//Model:
 		//  x1=SimpleGroup|x2=SimpleAlternative|x3=SimpleMultiplicities|x4=
@@ -78,7 +80,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//  UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|x13=
 		//  Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
 		//  List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2|x24=
-		//  TransientObject|x25=TransientSerializeables1;
+		//  TransientObject|x25=TransientSerializeables1|x26=StaticSimplification;
 		public ParserRule getRule() { return rule; }
 
 		//x1=SimpleGroup|x2=SimpleAlternative|x3=SimpleMultiplicities|x4=
@@ -87,7 +89,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|x13=
 		//Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
 		//List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2|x24=
-		//TransientObject|x25=TransientSerializeables1
+		//TransientObject|x25=TransientSerializeables1|x26=StaticSimplification
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//x1=SimpleGroup
@@ -239,6 +241,12 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 
 		//TransientSerializeables1
 		public RuleCall getX25TransientSerializeables1ParserRuleCall_24_0() { return cX25TransientSerializeables1ParserRuleCall_24_0; }
+
+		//x26=StaticSimplification
+		public Assignment getX26Assignment_25() { return cX26Assignment_25; }
+
+		//StaticSimplification
+		public RuleCall getX26StaticSimplificationParserRuleCall_25_0() { return cX26StaticSimplificationParserRuleCall_25_0; }
 	}
 
 	public class SimpleGroupElements extends AbstractParserRuleElementFinder {
@@ -1664,6 +1672,83 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//INT
 		public RuleCall getInt1INTTerminalRuleCall_2_1_0() { return cInt1INTTerminalRuleCall_2_1_0; }
 	}
+
+	public class StaticSimplificationElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "StaticSimplification");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitTwoDigitSixKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final Keyword cKw1Keyword_1_0 = (Keyword)cAlternatives_1.eContents().get(0);
+		private final Action cEmptyAlternativeSubAction_1_1 = (Action)cAlternatives_1.eContents().get(1);
+		private final Assignment cVal1Assignment_1_2 = (Assignment)cAlternatives_1.eContents().get(2);
+		private final RuleCall cVal1IDTerminalRuleCall_1_2_0 = (RuleCall)cVal1Assignment_1_2.eContents().get(0);
+		private final Alternatives cAlternatives_2 = (Alternatives)cGroup.eContents().get(2);
+		private final Keyword cKw2Keyword_2_0 = (Keyword)cAlternatives_2.eContents().get(0);
+		private final Assignment cVal2Assignment_2_1 = (Assignment)cAlternatives_2.eContents().get(1);
+		private final RuleCall cVal2IDTerminalRuleCall_2_1_0 = (RuleCall)cVal2Assignment_2_1.eContents().get(0);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Keyword cKw3Keyword_3_0 = (Keyword)cGroup_3.eContents().get(0);
+		private final Group cGroup_3_1 = (Group)cGroup_3.eContents().get(1);
+		private final Keyword cKw4Keyword_3_1_0 = (Keyword)cGroup_3_1.eContents().get(0);
+		private final Assignment cVal3Assignment_3_1_1 = (Assignment)cGroup_3_1.eContents().get(1);
+		private final RuleCall cVal3IDTerminalRuleCall_3_1_1_0 = (RuleCall)cVal3Assignment_3_1_1.eContents().get(0);
+		
+		//StaticSimplification:
+		//  "#26" ("kw1"|{EmptyAlternativeSub}|val1=ID) ("kw2"|val2=ID) ("kw3" ("kw4" val3=ID+)?)
+		//;
+		public ParserRule getRule() { return rule; }
+
+		//"#26" ("kw1"|{EmptyAlternativeSub}|val1=ID) ("kw2"|val2=ID) ("kw3" ("kw4" val3=ID+)?)
+		public Group getGroup() { return cGroup; }
+
+		//"#26"
+		public Keyword getNumberSignDigitTwoDigitSixKeyword_0() { return cNumberSignDigitTwoDigitSixKeyword_0; }
+
+		//"kw1"|{EmptyAlternativeSub}|val1=ID
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
+		//"kw1"
+		public Keyword getKw1Keyword_1_0() { return cKw1Keyword_1_0; }
+
+		//{EmptyAlternativeSub}
+		public Action getEmptyAlternativeSubAction_1_1() { return cEmptyAlternativeSubAction_1_1; }
+
+		//val1=ID
+		public Assignment getVal1Assignment_1_2() { return cVal1Assignment_1_2; }
+
+		//ID
+		public RuleCall getVal1IDTerminalRuleCall_1_2_0() { return cVal1IDTerminalRuleCall_1_2_0; }
+
+		//"kw2"|val2=ID
+		public Alternatives getAlternatives_2() { return cAlternatives_2; }
+
+		//"kw2"
+		public Keyword getKw2Keyword_2_0() { return cKw2Keyword_2_0; }
+
+		//val2=ID
+		public Assignment getVal2Assignment_2_1() { return cVal2Assignment_2_1; }
+
+		//ID
+		public RuleCall getVal2IDTerminalRuleCall_2_1_0() { return cVal2IDTerminalRuleCall_2_1_0; }
+
+		//"kw3" ("kw4" val3=ID+)?
+		public Group getGroup_3() { return cGroup_3; }
+
+		//"kw3"
+		public Keyword getKw3Keyword_3_0() { return cKw3Keyword_3_0; }
+
+		//("kw4" val3=ID+)?
+		public Group getGroup_3_1() { return cGroup_3_1; }
+
+		//"kw4"
+		public Keyword getKw4Keyword_3_1_0() { return cKw4Keyword_3_1_0; }
+
+		//val3=ID+
+		public Assignment getVal3Assignment_3_1_1() { return cVal3Assignment_3_1_1; }
+
+		//ID
+		public RuleCall getVal3IDTerminalRuleCall_3_1_1_0() { return cVal3IDTerminalRuleCall_3_1_1_0; }
+	}
 	
 	
 	public class TransientSerializeables1EnumElements extends AbstractEnumRuleElementFinder {
@@ -1724,6 +1809,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	private TransientObjectSubElements pTransientObjectSub;
 	private TransientSerializeables1Elements pTransientSerializeables1;
 	private TransientSerializeables1EnumElements unknownRuleTransientSerializeables1Enum;
+	private StaticSimplificationElements pStaticSimplification;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -1753,7 +1839,7 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//  UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|x13=
 	//  Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
 	//  List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2|x24=
-	//  TransientObject|x25=TransientSerializeables1;
+	//  TransientObject|x25=TransientSerializeables1|x26=StaticSimplification;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -2052,6 +2138,17 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	
 	public EnumRule getTransientSerializeables1EnumRule() {
 		return getTransientSerializeables1EnumAccess().getRule();
+	}
+
+	//StaticSimplification:
+	//  "#26" ("kw1"|{EmptyAlternativeSub}|val1=ID) ("kw2"|val2=ID) ("kw3" ("kw4" val3=ID+)?)
+	//;
+	public StaticSimplificationElements getStaticSimplificationAccess() {
+		return (pStaticSimplification != null) ? pStaticSimplification : (pStaticSimplification = new StaticSimplificationElements());
+	}
+	
+	public ParserRule getStaticSimplificationRule() {
+		return getStaticSimplificationAccess().getRule();
 	}
 
 	//terminal ID:

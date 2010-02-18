@@ -96,10 +96,12 @@ public class CsvalidationtestFactoryImpl extends EFactoryImpl implements Csvalid
       case CsvalidationtestPackage.TRANSIENT_OBJECT: return createTransientObject();
       case CsvalidationtestPackage.TRANSIENT_OBJECT_SUB: return createTransientObjectSub();
       case CsvalidationtestPackage.TRANSIENT_SERIALIZEABLES1: return createTransientSerializeables1();
+      case CsvalidationtestPackage.STATIC_SIMPLIFICATION: return createStaticSimplification();
       case CsvalidationtestPackage.UNASSIGNED_ACTION2_SUB: return createUnassignedAction2Sub();
       case CsvalidationtestPackage.UNASSIGNED_ACTION2_SUB1: return createUnassignedAction2Sub1();
       case CsvalidationtestPackage.UNASSIGNED_ACTION2_SUB2: return createUnassignedAction2Sub2();
       case CsvalidationtestPackage.UNASSIGNED_RULE_CALL2_SUB_ACTION: return createUnassignedRuleCall2SubAction();
+      case CsvalidationtestPackage.EMPTY_ALTERNATIVE_SUB: return createEmptyAlternativeSub();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -452,6 +454,17 @@ public class CsvalidationtestFactoryImpl extends EFactoryImpl implements Csvalid
    * <!-- end-user-doc -->
    * @generated
    */
+  public StaticSimplification createStaticSimplification()
+  {
+    StaticSimplificationImpl staticSimplification = new StaticSimplificationImpl();
+    return staticSimplification;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public UnassignedAction2Sub createUnassignedAction2Sub()
   {
     UnassignedAction2SubImpl unassignedAction2Sub = new UnassignedAction2SubImpl();
@@ -489,6 +502,17 @@ public class CsvalidationtestFactoryImpl extends EFactoryImpl implements Csvalid
   {
     UnassignedRuleCall2SubActionImpl unassignedRuleCall2SubAction = new UnassignedRuleCall2SubActionImpl();
     return unassignedRuleCall2SubAction;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EmptyAlternativeSub createEmptyAlternativeSub()
+  {
+    EmptyAlternativeSubImpl emptyAlternativeSub = new EmptyAlternativeSubImpl();
+    return emptyAlternativeSub;
   }
 
   /**

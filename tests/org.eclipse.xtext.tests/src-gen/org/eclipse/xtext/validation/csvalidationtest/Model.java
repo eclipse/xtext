@@ -40,6 +40,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX23 <em>X23</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX24 <em>X24</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX25 <em>X25</em>}</li>
+ *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX26 <em>X26</em>}</li>
  * </ul>
  * </p>
  *
@@ -698,5 +699,31 @@ public interface Model extends EObject
    * @generated
    */
   void setX25(TransientSerializeables1 value);
+
+  /**
+   * Returns the value of the '<em><b>X26</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X26</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X26</em>' containment reference.
+   * @see #setX26(StaticSimplification)
+   * @see org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage#getModel_X26()
+   * @model containment="true"
+   * @generated
+   */
+  StaticSimplification getX26();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX26 <em>X26</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X26</em>' containment reference.
+   * @see #getX26()
+   * @generated
+   */
+  void setX26(StaticSimplification value);
 
 } // Model

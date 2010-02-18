@@ -39,6 +39,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x23"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x24"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x25"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference ConcreteSyntaxValidationTestLanguage.ecore#//Model/x26"/>
     </genClasses>
     <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//SimpleGroup">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//SimpleGroup/val1"/>
@@ -160,6 +161,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//TransientSerializeables1/val2"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//TransientSerializeables1/int1"/>
     </genClasses>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//StaticSimplification">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//StaticSimplification/val1"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//StaticSimplification/val2"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//StaticSimplification/val3"/>
+    </genClasses>
     <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedAction2Sub">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedAction2Sub/val1"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedAction2Sub/val2"/>
@@ -167,5 +173,6 @@
     <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedAction2Sub1"/>
     <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedAction2Sub2"/>
     <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//UnassignedRuleCall2SubAction"/>
+    <genClasses ecoreClass="ConcreteSyntaxValidationTestLanguage.ecore#//EmptyAlternativeSub"/>
   </genPackages>
 </genmodel:GenModel>

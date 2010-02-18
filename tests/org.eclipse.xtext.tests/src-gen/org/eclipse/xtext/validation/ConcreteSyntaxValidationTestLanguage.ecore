@@ -49,6 +49,8 @@
         containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="x25" eType="#//TransientSerializeables1"
         containment="true"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="x26" eType="#//StaticSimplification"
+        containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="SimpleGroup">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -197,6 +199,11 @@
     <eLiterals name="lit1" literal="lit1"/>
     <eLiterals name="lit2" value="1" literal="lit2"/>
   </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="StaticSimplification">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="val3" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="UnassignedAction2Sub" eSuperTypes="#//UnassignedAction2">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="val1" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="val2" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -204,4 +211,5 @@
   <eClassifiers xsi:type="ecore:EClass" name="UnassignedAction2Sub1" eSuperTypes="#//UnassignedAction3"/>
   <eClassifiers xsi:type="ecore:EClass" name="UnassignedAction2Sub2" eSuperTypes="#//UnassignedAction3"/>
   <eClassifiers xsi:type="ecore:EClass" name="UnassignedRuleCall2SubAction" eSuperTypes="#//UnassignedRuleCall2Sub"/>
+  <eClassifiers xsi:type="ecore:EClass" name="EmptyAlternativeSub" eSuperTypes="#//StaticSimplification"/>
 </ecore:EPackage>

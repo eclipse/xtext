@@ -709,6 +709,31 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
+)
+    |(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getX26StaticSimplificationParserRuleCall_25_0(), currentNode); 
+	    }
+		lv_x26_25_0=ruleStaticSimplification		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"x26",
+	        		lv_x26_25_0, 
+	        		"StaticSimplification", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
 ))
 ;
 
@@ -3629,6 +3654,135 @@ ruleTransientSerializeables1 returns [EObject current=null]
 
 )
 ))?)
+;
+
+
+
+
+
+// Entry rule entryRuleStaticSimplification
+entryRuleStaticSimplification returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getStaticSimplificationRule(), currentNode); }
+	 iv_ruleStaticSimplification=ruleStaticSimplification 
+	 { $current=$iv_ruleStaticSimplification.current; } 
+	 EOF 
+;
+
+// Rule StaticSimplification
+ruleStaticSimplification returns [EObject current=null] 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(	'#26' 
+    {
+        createLeafNode(grammarAccess.getStaticSimplificationAccess().getNumberSignDigitTwoDigitSixKeyword_0(), null); 
+    }
+(	'kw1' 
+    {
+        createLeafNode(grammarAccess.getStaticSimplificationAccess().getKw1Keyword_1_0(), null); 
+    }
+
+    |(
+    { 
+        temp=factory.create(grammarAccess.getStaticSimplificationAccess().getEmptyAlternativeSubAction_1_1().getType().getClassifier());
+        $current = temp; 
+        temp = null;
+        CompositeNode newNode = createCompositeNode(grammarAccess.getStaticSimplificationAccess().getEmptyAlternativeSubAction_1_1(), currentNode.getParent());
+    newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
+    currentNode = newNode; 
+        associateNodeWithAstElement(currentNode, $current); 
+    }
+)
+    |(
+(
+		lv_val1_3_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getStaticSimplificationAccess().getVal1IDTerminalRuleCall_1_2_0(), "val1"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getStaticSimplificationRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"val1",
+	        		lv_val1_3_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+))(	'kw2' 
+    {
+        createLeafNode(grammarAccess.getStaticSimplificationAccess().getKw2Keyword_2_0(), null); 
+    }
+
+    |(
+(
+		lv_val2_5_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getStaticSimplificationAccess().getVal2IDTerminalRuleCall_2_1_0(), "val2"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getStaticSimplificationRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"val2",
+	        		lv_val2_5_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+))(	'kw3' 
+    {
+        createLeafNode(grammarAccess.getStaticSimplificationAccess().getKw3Keyword_3_0(), null); 
+    }
+(	'kw4' 
+    {
+        createLeafNode(grammarAccess.getStaticSimplificationAccess().getKw4Keyword_3_1_0(), null); 
+    }
+(
+(
+		lv_val3_8_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getStaticSimplificationAccess().getVal3IDTerminalRuleCall_3_1_1_0(), "val3"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getStaticSimplificationRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"val3",
+	        		lv_val3_8_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)+)?))
 ;
 
 

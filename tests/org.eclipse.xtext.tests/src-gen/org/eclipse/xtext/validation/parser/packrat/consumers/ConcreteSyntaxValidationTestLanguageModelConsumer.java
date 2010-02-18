@@ -58,6 +58,8 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 
 	private INonTerminalConsumer simpleMultiplicitiesConsumer;
 
+	private INonTerminalConsumer staticSimplificationConsumer;
+
 	private INonTerminalConsumer transientObjectConsumer;
 
 	private INonTerminalConsumer transientSerializeables1Consumer;
@@ -174,6 +176,10 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 
 	private IElementConsumer ruleCall$51$Consumer;
 
+	private IElementConsumer assignment$52$Consumer;
+
+	private IElementConsumer ruleCall$53$Consumer;
+
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
 		protected Alternatives$1$Consumer(final Alternatives alternatives) {
@@ -207,6 +213,7 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 			acceptor.accept(assignment$46$Consumer);
 			acceptor.accept(assignment$48$Consumer);
 			acceptor.accept(assignment$50$Consumer);
+			acceptor.accept(assignment$52$Consumer);
 		}
 	}
 
@@ -810,6 +817,30 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 		}
 	}
 
+	protected class Assignment$52$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$52$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$53$Consumer;
+		}
+	}
+
+	protected class RuleCall$53$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$53$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(staticSimplificationConsumer, "x26", false, false, false, getElement(), optional);
+		}
+	}
+
 	public ConcreteSyntaxValidationTestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
@@ -877,6 +908,8 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 		ruleCall$49$Consumer = new RuleCall$49$Consumer(rule.getX24TransientObjectParserRuleCall_23_0());
 		assignment$50$Consumer = new Assignment$50$Consumer(rule.getX25Assignment_24());
 		ruleCall$51$Consumer = new RuleCall$51$Consumer(rule.getX25TransientSerializeables1ParserRuleCall_24_0());
+		assignment$52$Consumer = new Assignment$52$Consumer(rule.getX26Assignment_25());
+		ruleCall$53$Consumer = new RuleCall$53$Consumer(rule.getX26StaticSimplificationParserRuleCall_25_0());
 	}
 	
 	@Override
@@ -959,6 +992,10 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 	
 	public void setSimpleMultiplicitiesConsumer(INonTerminalConsumer simpleMultiplicitiesConsumer) {
 		this.simpleMultiplicitiesConsumer = simpleMultiplicitiesConsumer;
+	}
+	
+	public void setStaticSimplificationConsumer(INonTerminalConsumer staticSimplificationConsumer) {
+		this.staticSimplificationConsumer = staticSimplificationConsumer;
 	}
 	
 	public void setTransientObjectConsumer(INonTerminalConsumer transientObjectConsumer) {

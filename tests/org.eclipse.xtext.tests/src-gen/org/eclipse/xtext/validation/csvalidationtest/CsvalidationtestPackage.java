@@ -296,13 +296,22 @@ public interface CsvalidationtestPackage extends EPackage
   int MODEL__X25 = 24;
 
   /**
+   * The feature id for the '<em><b>X26</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X26 = 25;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 25;
+  int MODEL_FEATURE_COUNT = 26;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -1439,6 +1448,52 @@ public interface CsvalidationtestPackage extends EPackage
   int TRANSIENT_SERIALIZEABLES1_FEATURE_COUNT = 4;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.StaticSimplificationImpl <em>Static Simplification</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.validation.csvalidationtest.impl.StaticSimplificationImpl
+   * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getStaticSimplification()
+   * @generated
+   */
+  int STATIC_SIMPLIFICATION = 28;
+
+  /**
+   * The feature id for the '<em><b>Val1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATIC_SIMPLIFICATION__VAL1 = 0;
+
+  /**
+   * The feature id for the '<em><b>Val2</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATIC_SIMPLIFICATION__VAL2 = 1;
+
+  /**
+   * The feature id for the '<em><b>Val3</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATIC_SIMPLIFICATION__VAL3 = 2;
+
+  /**
+   * The number of structural features of the '<em>Static Simplification</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int STATIC_SIMPLIFICATION_FEATURE_COUNT = 3;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.UnassignedAction2SubImpl <em>Unassigned Action2 Sub</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1446,7 +1501,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getUnassignedAction2Sub()
    * @generated
    */
-  int UNASSIGNED_ACTION2_SUB = 28;
+  int UNASSIGNED_ACTION2_SUB = 29;
 
   /**
    * The feature id for the '<em><b>Val1</b></em>' attribute.
@@ -1483,7 +1538,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getUnassignedAction2Sub1()
    * @generated
    */
-  int UNASSIGNED_ACTION2_SUB1 = 29;
+  int UNASSIGNED_ACTION2_SUB1 = 30;
 
   /**
    * The feature id for the '<em><b>Val1</b></em>' attribute.
@@ -1520,7 +1575,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getUnassignedAction2Sub2()
    * @generated
    */
-  int UNASSIGNED_ACTION2_SUB2 = 30;
+  int UNASSIGNED_ACTION2_SUB2 = 31;
 
   /**
    * The feature id for the '<em><b>Val1</b></em>' attribute.
@@ -1557,7 +1612,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getUnassignedRuleCall2SubAction()
    * @generated
    */
-  int UNASSIGNED_RULE_CALL2_SUB_ACTION = 31;
+  int UNASSIGNED_RULE_CALL2_SUB_ACTION = 32;
 
   /**
    * The feature id for the '<em><b>Val2</b></em>' attribute.
@@ -1578,6 +1633,52 @@ public interface CsvalidationtestPackage extends EPackage
   int UNASSIGNED_RULE_CALL2_SUB_ACTION_FEATURE_COUNT = UNASSIGNED_RULE_CALL2_SUB_FEATURE_COUNT + 0;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.EmptyAlternativeSubImpl <em>Empty Alternative Sub</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.validation.csvalidationtest.impl.EmptyAlternativeSubImpl
+   * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getEmptyAlternativeSub()
+   * @generated
+   */
+  int EMPTY_ALTERNATIVE_SUB = 33;
+
+  /**
+   * The feature id for the '<em><b>Val1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EMPTY_ALTERNATIVE_SUB__VAL1 = STATIC_SIMPLIFICATION__VAL1;
+
+  /**
+   * The feature id for the '<em><b>Val2</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EMPTY_ALTERNATIVE_SUB__VAL2 = STATIC_SIMPLIFICATION__VAL2;
+
+  /**
+   * The feature id for the '<em><b>Val3</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EMPTY_ALTERNATIVE_SUB__VAL3 = STATIC_SIMPLIFICATION__VAL3;
+
+  /**
+   * The number of structural features of the '<em>Empty Alternative Sub</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int EMPTY_ALTERNATIVE_SUB_FEATURE_COUNT = STATIC_SIMPLIFICATION_FEATURE_COUNT + 0;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1Enum <em>Transient Serializeables1 Enum</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1585,7 +1686,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getTransientSerializeables1Enum()
    * @generated
    */
-  int TRANSIENT_SERIALIZEABLES1_ENUM = 32;
+  int TRANSIENT_SERIALIZEABLES1_ENUM = 34;
 
 
   /**
@@ -1872,6 +1973,17 @@ public interface CsvalidationtestPackage extends EPackage
    * @generated
    */
   EReference getModel_X25();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX26 <em>X26</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X26</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.Model#getX26()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X26();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.validation.csvalidationtest.SimpleGroup <em>Simple Group</em>}'.
@@ -2903,6 +3015,49 @@ public interface CsvalidationtestPackage extends EPackage
   EAttribute getTransientSerializeables1_Int1();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.validation.csvalidationtest.StaticSimplification <em>Static Simplification</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Static Simplification</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.StaticSimplification
+   * @generated
+   */
+  EClass getStaticSimplification();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.validation.csvalidationtest.StaticSimplification#getVal1 <em>Val1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val1</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.StaticSimplification#getVal1()
+   * @see #getStaticSimplification()
+   * @generated
+   */
+  EAttribute getStaticSimplification_Val1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.validation.csvalidationtest.StaticSimplification#getVal2 <em>Val2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val2</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.StaticSimplification#getVal2()
+   * @see #getStaticSimplification()
+   * @generated
+   */
+  EAttribute getStaticSimplification_Val2();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.validation.csvalidationtest.StaticSimplification#getVal3 <em>Val3</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Val3</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.StaticSimplification#getVal3()
+   * @see #getStaticSimplification()
+   * @generated
+   */
+  EAttribute getStaticSimplification_Val3();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.validation.csvalidationtest.UnassignedAction2Sub <em>Unassigned Action2 Sub</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -2963,6 +3118,16 @@ public interface CsvalidationtestPackage extends EPackage
    * @generated
    */
   EClass getUnassignedRuleCall2SubAction();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.validation.csvalidationtest.EmptyAlternativeSub <em>Empty Alternative Sub</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Empty Alternative Sub</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.EmptyAlternativeSub
+   * @generated
+   */
+  EClass getEmptyAlternativeSub();
 
   /**
    * Returns the meta object for enum '{@link org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1Enum <em>Transient Serializeables1 Enum</em>}'.
@@ -3206,6 +3371,14 @@ public interface CsvalidationtestPackage extends EPackage
      * @generated
      */
     EReference MODEL__X25 = eINSTANCE.getModel_X25();
+
+    /**
+     * The meta object literal for the '<em><b>X26</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X26 = eINSTANCE.getModel_X26();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -4030,6 +4203,40 @@ public interface CsvalidationtestPackage extends EPackage
     EAttribute TRANSIENT_SERIALIZEABLES1__INT1 = eINSTANCE.getTransientSerializeables1_Int1();
 
     /**
+     * The meta object literal for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.StaticSimplificationImpl <em>Static Simplification</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.validation.csvalidationtest.impl.StaticSimplificationImpl
+     * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getStaticSimplification()
+     * @generated
+     */
+    EClass STATIC_SIMPLIFICATION = eINSTANCE.getStaticSimplification();
+
+    /**
+     * The meta object literal for the '<em><b>Val1</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute STATIC_SIMPLIFICATION__VAL1 = eINSTANCE.getStaticSimplification_Val1();
+
+    /**
+     * The meta object literal for the '<em><b>Val2</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute STATIC_SIMPLIFICATION__VAL2 = eINSTANCE.getStaticSimplification_Val2();
+
+    /**
+     * The meta object literal for the '<em><b>Val3</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute STATIC_SIMPLIFICATION__VAL3 = eINSTANCE.getStaticSimplification_Val3();
+
+    /**
      * The meta object literal for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.UnassignedAction2SubImpl <em>Unassigned Action2 Sub</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
@@ -4084,6 +4291,16 @@ public interface CsvalidationtestPackage extends EPackage
      * @generated
      */
     EClass UNASSIGNED_RULE_CALL2_SUB_ACTION = eINSTANCE.getUnassignedRuleCall2SubAction();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.EmptyAlternativeSubImpl <em>Empty Alternative Sub</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.validation.csvalidationtest.impl.EmptyAlternativeSubImpl
+     * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getEmptyAlternativeSub()
+     * @generated
+     */
+    EClass EMPTY_ALTERNATIVE_SUB = eINSTANCE.getEmptyAlternativeSub();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1Enum <em>Transient Serializeables1 Enum</em>}' enum.

@@ -64,6 +64,7 @@ protected class ThisRootNode extends RootToken {
 			case 26: return new TransientObject_Group(this, this, 26, inst);
 			case 27: return new TransientObjectSub_Group(this, this, 27, inst);
 			case 28: return new TransientSerializeables1_Group(this, this, 28, inst);
+			case 29: return new StaticSimplification_Group(this, this, 29, inst);
 			default: return null;
 		}	
 	}	
@@ -79,7 +80,7 @@ protected class ThisRootNode extends RootToken {
  *   UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|x13=
  *   Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
  *   List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2|x24=
- *   TransientObject|x25=TransientSerializeables1;
+ *   TransientObject|x25=TransientSerializeables1|x26=StaticSimplification;
  *
  **/
 
@@ -89,7 +90,7 @@ protected class ThisRootNode extends RootToken {
 // UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|x13=
 // Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
 // List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2|x24=
-// TransientObject|x25=TransientSerializeables1
+// TransientObject|x25=TransientSerializeables1|x26=StaticSimplification
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -129,6 +130,7 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 22: return new Model_X23Assignment_22(parent, this, 22, inst);
 			case 23: return new Model_X24Assignment_23(parent, this, 23, inst);
 			case 24: return new Model_X25Assignment_24(parent, this, 24, inst);
+			case 25: return new Model_X26Assignment_25(parent, this, 25, inst);
 			default: return null;
 		}	
 	}	
@@ -1249,6 +1251,51 @@ protected class Model_X25Assignment_24 extends AssignmentToken  {
 			if(param.isInstanceOf(grammarAccess.getTransientSerializeables1Rule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
 				element = grammarAccess.getModelAccess().getX25TransientSerializeables1ParserRuleCall_24_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// x26=StaticSimplification
+protected class Model_X26Assignment_25 extends AssignmentToken  {
+	
+	public Model_X26Assignment_25(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getX26Assignment_25();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new StaticSimplification_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("x26",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("x26");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getStaticSimplificationRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getModelAccess().getX26StaticSimplificationParserRuleCall_25_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -7643,5 +7690,381 @@ protected class TransientSerializeables1_Int1Assignment_2_1 extends AssignmentTo
 
 
 /************ end Rule TransientSerializeables1 ****************/
+
+
+/************ begin Rule StaticSimplification ****************
+ *
+ * StaticSimplification:
+ *   "#26" ("kw1"|{EmptyAlternativeSub}|val1=ID) ("kw2"|val2=ID) ("kw3" ("kw4" val3=ID+)?)
+ * ;
+ *
+ **/
+
+// "#26" ("kw1"|{EmptyAlternativeSub}|val1=ID) ("kw2"|val2=ID) ("kw3" ("kw4" val3=ID+)?)
+protected class StaticSimplification_Group extends GroupToken {
+	
+	public StaticSimplification_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getStaticSimplificationAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new StaticSimplification_Group_3(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getStaticSimplificationRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "#26"
+protected class StaticSimplification_NumberSignDigitTwoDigitSixKeyword_0 extends KeywordToken  {
+	
+	public StaticSimplification_NumberSignDigitTwoDigitSixKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getStaticSimplificationAccess().getNumberSignDigitTwoDigitSixKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// "kw1"|{EmptyAlternativeSub}|val1=ID
+protected class StaticSimplification_Alternatives_1 extends AlternativesToken {
+
+	public StaticSimplification_Alternatives_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getStaticSimplificationAccess().getAlternatives_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new StaticSimplification_Kw1Keyword_1_0(parent, this, 0, inst);
+			case 1: return new StaticSimplification_EmptyAlternativeSubAction_1_1(parent, this, 1, inst);
+			case 2: return new StaticSimplification_Val1Assignment_1_2(parent, this, 2, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "kw1"
+protected class StaticSimplification_Kw1Keyword_1_0 extends KeywordToken  {
+	
+	public StaticSimplification_Kw1Keyword_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getStaticSimplificationAccess().getKw1Keyword_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new StaticSimplification_NumberSignDigitTwoDigitSixKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// {EmptyAlternativeSub}
+protected class StaticSimplification_EmptyAlternativeSubAction_1_1 extends ActionToken  {
+
+	public StaticSimplification_EmptyAlternativeSubAction_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Action getGrammarElement() {
+		return grammarAccess.getStaticSimplificationAccess().getEmptyAlternativeSubAction_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new StaticSimplification_NumberSignDigitTwoDigitSixKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+	
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(!current.isInstanceOf(grammarAccess.getStaticSimplificationAccess().getEmptyAlternativeSubAction_1_1().getType().getClassifier())) return null;
+		if(!current.isConsumed()) return null;
+		return current;
+	}
+}
+
+// val1=ID
+protected class StaticSimplification_Val1Assignment_1_2 extends AssignmentToken  {
+	
+	public StaticSimplification_Val1Assignment_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getStaticSimplificationAccess().getVal1Assignment_1_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new StaticSimplification_NumberSignDigitTwoDigitSixKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val1",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val1");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getStaticSimplificationAccess().getVal1IDTerminalRuleCall_1_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// "kw2"|val2=ID
+protected class StaticSimplification_Alternatives_2 extends AlternativesToken {
+
+	public StaticSimplification_Alternatives_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getStaticSimplificationAccess().getAlternatives_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new StaticSimplification_Kw2Keyword_2_0(parent, this, 0, inst);
+			case 1: return new StaticSimplification_Val2Assignment_2_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "kw2"
+protected class StaticSimplification_Kw2Keyword_2_0 extends KeywordToken  {
+	
+	public StaticSimplification_Kw2Keyword_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getStaticSimplificationAccess().getKw2Keyword_2_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new StaticSimplification_Alternatives_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// val2=ID
+protected class StaticSimplification_Val2Assignment_2_1 extends AssignmentToken  {
+	
+	public StaticSimplification_Val2Assignment_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getStaticSimplificationAccess().getVal2Assignment_2_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new StaticSimplification_Alternatives_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val2",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val2");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getStaticSimplificationAccess().getVal2IDTerminalRuleCall_2_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// "kw3" ("kw4" val3=ID+)?
+protected class StaticSimplification_Group_3 extends GroupToken {
+	
+	public StaticSimplification_Group_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getStaticSimplificationAccess().getGroup_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new StaticSimplification_Group_3_1(parent, this, 0, inst);
+			case 1: return new StaticSimplification_Kw3Keyword_3_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "kw3"
+protected class StaticSimplification_Kw3Keyword_3_0 extends KeywordToken  {
+	
+	public StaticSimplification_Kw3Keyword_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getStaticSimplificationAccess().getKw3Keyword_3_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new StaticSimplification_Alternatives_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// ("kw4" val3=ID+)?
+protected class StaticSimplification_Group_3_1 extends GroupToken {
+	
+	public StaticSimplification_Group_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getStaticSimplificationAccess().getGroup_3_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new StaticSimplification_Val3Assignment_3_1_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "kw4"
+protected class StaticSimplification_Kw4Keyword_3_1_0 extends KeywordToken  {
+	
+	public StaticSimplification_Kw4Keyword_3_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getStaticSimplificationAccess().getKw4Keyword_3_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new StaticSimplification_Kw3Keyword_3_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// val3=ID+
+protected class StaticSimplification_Val3Assignment_3_1_1 extends AssignmentToken  {
+	
+	public StaticSimplification_Val3Assignment_3_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getStaticSimplificationAccess().getVal3Assignment_3_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new StaticSimplification_Val3Assignment_3_1_1(parent, this, 0, inst);
+			case 1: return new StaticSimplification_Kw4Keyword_3_1_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("val3",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("val3");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getStaticSimplificationAccess().getVal3IDTerminalRuleCall_3_1_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+
+
+/************ end Rule StaticSimplification ****************/
 
 }

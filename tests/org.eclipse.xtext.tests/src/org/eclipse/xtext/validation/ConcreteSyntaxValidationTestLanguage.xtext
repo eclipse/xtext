@@ -15,7 +15,7 @@ Model:
 	x6=AssignedAction | x7=AssignedActionSecond | x8=UnassignedAction1 | x9=UnassignedAction2 | x10=UnassignedAction3 | 
 	x11=UnassignedRuleCall1 | x12=UnassignedRuleCall2 | x13=Combination1 | x14=Combination2 | x15=Combination3 | x16=Combination4 | 
 	x17=List1 | x18=List2 | x19=List3 | x20=List4 | x21=List5 | x22=AltList1 | x23=AltList2 |
-	x24=TransientObject | x25=TransientSerializeables1;	
+	x24=TransientObject | x25=TransientSerializeables1 | x26=StaticSimplification;	
 	
 SimpleGroup:
 	"#1" val1=ID val2=ID;
@@ -103,3 +103,6 @@ TransientSerializeables1:
 	
 enum TransientSerializeables1Enum:
 	lit1 | lit2;
+	
+StaticSimplification:
+	"#26" ("kw1"|{EmptyAlternativeSub}|val1=ID) ("kw2"|val2=ID) ("kw3" ("kw4" (val3=ID)+)?);
