@@ -73,6 +73,12 @@ public class AutoEditTest extends AbstractEditorTest {
 		pressKey(editor, SWT.BS);
 		assertState("|", editor);
 	}
+	
+	public void testParenthesis_4() throws Exception {
+		XtextEditor editor = openEditor("|foobar");
+		pressKey(editor, '(');
+		assertState("(|foobar", editor);
+	}
 
 	public void testStringLiteral_1() throws Exception {
 		XtextEditor editor = openEditor("|");
@@ -102,6 +108,26 @@ public class AutoEditTest extends AbstractEditorTest {
 		assertState("'''|'", editor);
 		pressKey(editor, SWT.BS);
 		assertState("''|", editor);
+	}
+	
+	public void testStringLiteral_4() throws Exception {
+		XtextEditor editor = openEditor("|foo");
+		pressKey(editor, '\'');
+		assertState("'|foo", editor);
+		pressKey(editor, '\'');
+		assertState("''|foo", editor);
+	}
+	
+	public void testStringLiteral_5() throws Exception {
+		XtextEditor editor = openEditor("|foo");
+		pressKey(editor, '\'');
+		assertState("'|foo", editor);
+		pressKey(editor, '\'');
+		assertState("''|foo", editor);
+		pressKey(editor, SWT.BS);
+		assertState("'|foo", editor);
+		pressKey(editor, SWT.BS);
+		assertState("|foo", editor);
 	}
 
 	public void testCurlyBracesBlock_1() throws Exception {
