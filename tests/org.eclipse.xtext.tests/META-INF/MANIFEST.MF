@@ -20,7 +20,8 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.emf.common,
  org.antlr.runtime,
  org.eclipse.xtext.xtend,
- com.ibm.icu
+ com.ibm.icu,
+ org.apache.commons.logging;bundle-version="1.1.1"
 Bundle-ClassPath: lib/simple.jar,.
 Import-Package: org.apache.log4j
 Export-Package: org.eclipse.xtext,
@@ -363,8 +364,6 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.validation.csvalidationtest,
  org.eclipse.xtext.validation.csvalidationtest.impl,
  org.eclipse.xtext.validation.csvalidationtest.util,
- org.eclipse.xtext.validation.parser.packrat,
- org.eclipse.xtext.validation.parser.packrat.consumers,
  org.eclipse.xtext.validation.parseTreeConstruction,
  org.eclipse.xtext.validation.parser.antlr,
  org.eclipse.xtext.validation.parser.antlr.internal,

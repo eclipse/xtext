@@ -12,12 +12,17 @@ import org::eclipse::xtext::generator;
 extension org::eclipse::xtext::generator::Naming; 
 extension org::eclipse::xtext::GrammarUtil;
 
-String qualifiedName(Grammar grammar) :
-	qualifiedName(grammar,getNaming());
+String eObjectLabelProviderQualifiedName(Grammar grammar) :
+	eObjectLabelProviderQualifiedName(grammar,getNaming());
 	
-private String qualifiedName(Grammar grammar, Naming n) :
-	JAVA org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment.getQualifiedName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);
+String descriptionLabelProviderQualifiedName(Grammar grammar) :
+	descriptionLabelProviderQualifiedName(grammar,getNaming());
+	
+private String eObjectLabelProviderQualifiedName(Grammar grammar, Naming n) :
+	JAVA org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment.getEObjectLabelProviderQualifiedName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);
 
+private String descriptionLabelProviderQualifiedName(Grammar grammar, Naming n) :
+	JAVA org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment.getDescriptionLabelProviderQualifiedName(org.eclipse.xtext.Grammar, org.eclipse.xtext.generator.Naming);
 	
 
 	

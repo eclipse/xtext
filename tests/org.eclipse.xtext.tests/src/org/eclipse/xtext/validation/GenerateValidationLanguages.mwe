@@ -4,8 +4,8 @@
 	<property name="runtimeProject" value="../${projectName}"/>
 
 	<property name="generateDotDiagram" value="true"/>
-	 <property name="graphvizCommand" value="/opt/local/bin/dot -o %1.pdf -v -T pdf"/> 
-	<!--<property name="graphvizCommand" value=""/>-->
+	<!-- <property name="graphvizCommand" value="/opt/local/bin/dot -o %1.pdf -v -T pdf"/>--> 
+	<property name="graphvizCommand" value=""/>
 	
 	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" platformUri="${runtimeProject}/.."/>
 	

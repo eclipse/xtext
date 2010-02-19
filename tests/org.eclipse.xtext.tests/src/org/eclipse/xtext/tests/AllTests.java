@@ -115,6 +115,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.ParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.unorderedGroups.ConcreteSyntaxValidatorTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.unorderedGroups.GrammarParserTest.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.unorderedGroups.GrammarSerializerTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.unorderedGroups.MetamodelTransformationTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.unorderedGroups.ParserExTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.unorderedGroups.ParserTest.class);
@@ -209,6 +210,8 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.xtext.XtextScopingTest.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.XtextValidationTest.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.ecoreInference.MultiValueFeatureTest.class);
+      suite.addTestSuite(org.eclipse.xtext.xtext.ecoreInference.TransformationDiagnosticTest.class);
+      suite.addTestSuite(org.eclipse.xtext.xtext.ecoreInference.TypeHierarchyHelperTest.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.ecoreInference.UnassignedRuleCallTest.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.ecoreInference.Xtext2EcoreTransformerTest.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.parser.packrat.XtextPackratParserTest.class);

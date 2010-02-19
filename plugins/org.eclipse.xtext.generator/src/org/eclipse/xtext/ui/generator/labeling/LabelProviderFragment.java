@@ -19,14 +19,30 @@ public class LabelProviderFragment extends AbstractGeneratorFragment {
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
-			.addTypeToType("org.eclipse.jface.viewers.ILabelProvider",
-					getQualifiedName(grammar,getNaming()))
-			.addTypeToType("org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider",
-					getQualifiedName(grammar, getNaming()))
+			.addConfiguredBinding("HyperlinkLabelProvider", 
+				"binder.bind(org.eclipse.jface.viewers.ILabelProvider.class)" +
+				".annotatedWith(org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkLabelProvider.class)" +
+				".to(" + getEObjectLabelProviderQualifiedName(grammar, getNaming()) + ".class)")
+			.addConfiguredBinding("OutlineLabelProvider", 
+				"binder.bind(org.eclipse.jface.viewers.ILabelProvider.class)" +
+				".annotatedWith(org.eclipse.xtext.ui.editor.outline.OutlineLabelProvider.class)" +
+				".to(" + getEObjectLabelProviderQualifiedName(grammar, getNaming()) + ".class)")
+			.addConfiguredBinding("ContentProposalLabelProvider", 
+				"binder.bind(org.eclipse.jface.viewers.ILabelProvider.class)" +
+				".annotatedWith(org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider.class)" +
+				".to(" + getEObjectLabelProviderQualifiedName(grammar, getNaming()) + ".class)")
+			.addConfiguredBinding("ResourceUIServiceLabelProvider", 
+				"binder.bind(org.eclipse.jface.viewers.ILabelProvider.class)" +
+				".annotatedWith(org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class)" +
+				".to(" + getDescriptionLabelProviderQualifiedName(grammar, getNaming()) + ".class)")
 			.getBindings();
 	}
 
-	public static String getQualifiedName(Grammar grammar, Naming n) {
+	public static String getDescriptionLabelProviderQualifiedName(Grammar grammar, Naming n) {
+		return n.basePackageUi(grammar) + ".labeling." + GrammarUtil.getName(grammar) + "DescriptionLabelProvider";
+	}
+	
+	public static String getEObjectLabelProviderQualifiedName(Grammar grammar, Naming n) {
 		return n.basePackageUi(grammar) + ".labeling." + GrammarUtil.getName(grammar) + "LabelProvider";
 	}
 	
