@@ -3,18 +3,28 @@
 */
 package org.eclipse.xtext.example.ui.labeling;
 
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.xtext.example.domainmodel.Attribute;
 import org.eclipse.xtext.example.domainmodel.DataType;
 import org.eclipse.xtext.example.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.PackageDeclaration;
 import org.eclipse.xtext.example.domainmodel.Reference;
-import org.eclipse.xtext.ui.DefaultLabelProvider;
+import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
+
+import com.google.inject.Inject;
 
 /**
+ * Provides labels for a EObjects.
+ * 
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
-public class DomainmodelLabelProvider extends DefaultLabelProvider {
+public class DomainmodelLabelProvider extends DefaultEObjectLabelProvider {
 	
+	@Inject
+	public DomainmodelLabelProvider(AdapterFactoryLabelProvider delegate) {
+		super(delegate);
+	}
+
 	String image(Entity e) {
 		return "Entity.gif";
 	}
@@ -34,5 +44,4 @@ public class DomainmodelLabelProvider extends DefaultLabelProvider {
 	String image(PackageDeclaration p) {
 		return "Package.gif";
 	}
-	
 }

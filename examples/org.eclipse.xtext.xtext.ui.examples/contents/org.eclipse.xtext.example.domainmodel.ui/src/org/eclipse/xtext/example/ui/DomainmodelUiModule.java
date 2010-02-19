@@ -3,16 +3,10 @@
  */
 package org.eclipse.xtext.example.ui;
 
-import org.eclipse.xtext.example.ui.labeling.DomainmodelDescriptorLabelProvider;
-import org.eclipse.xtext.ui.resource.IDescriptionLabelProvider;
 
 /**
  * Use this class to register components to be used within the IDE.
  */
 public class DomainmodelUiModule extends org.eclipse.xtext.example.ui.AbstractDomainmodelUiModule {
 
-	public Class<? extends IDescriptionLabelProvider> bindIDescriptionLabelProvider() {
-		return DomainmodelDescriptorLabelProvider.class;
-	}
-	
 }

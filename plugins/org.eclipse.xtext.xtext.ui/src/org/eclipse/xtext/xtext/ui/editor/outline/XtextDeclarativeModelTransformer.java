@@ -8,8 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.editor.outline;
 
-import static org.eclipse.xtext.ui.DefaultLabelProvider.*;
-
 import java.util.List;
 import java.util.Set;
 
@@ -27,6 +25,7 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TypeRef;
 import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
 import org.eclipse.xtext.ui.editor.outline.transformer.AbstractDeclarativeSemanticModelTransformer;
+import org.eclipse.xtext.ui.label.StylerFactory;
 import org.eclipse.xtext.xtext.UsedRulesFinder;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
 
@@ -43,11 +42,14 @@ public class XtextDeclarativeModelTransformer extends AbstractDeclarativeSemanti
 	@Inject
 	private SemanticHighlightingConfiguration semanticHighlightingConfiguration;
 	private Set<AbstractRule> calledRules = Sets.newHashSet();
+	
+	@Inject 
+	private StylerFactory stylerFactory;
 
 	public ContentOutlineNode createNode(AbstractRule abstractRule, ContentOutlineNode outlineParentNode) {
 		ContentOutlineNode contentOutlineNode = super.createNode(abstractRule, outlineParentNode);
 		if (!calledRules.isEmpty() && !calledRules.contains(abstractRule)) {
-			contentOutlineNode.setStyler(createXtextStyleAdapterStyler(semanticHighlightingConfiguration.unusedRule()));
+			contentOutlineNode.setStyler(stylerFactory.createXtextStyleAdapterStyler(semanticHighlightingConfiguration.unusedRule()));
 		}
 		return contentOutlineNode;
 	}

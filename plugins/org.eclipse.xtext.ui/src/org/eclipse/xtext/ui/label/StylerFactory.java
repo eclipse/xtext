@@ -1,94 +1,34 @@
 /*******************************************************************************
- * Copyright (c) 2008 itemis AG (http://www.itemis.eu) and others.
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui;
+package org.eclipse.xtext.ui.label;
 
 import static org.eclipse.xtext.ui.editor.utils.EditorUtils.*;
 
-import org.eclipse.core.resources.IFile;
-import org.eclipse.core.runtime.IAdaptable;
-import org.eclipse.core.runtime.content.IContentType;
-import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.resource.ColorRegistry;
 import org.eclipse.jface.resource.FontDescriptor;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.resource.JFaceResources;
 import org.eclipse.jface.text.TextAttribute;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.StyledString.Styler;
 import org.eclipse.swt.graphics.FontData;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.TextStyle;
 import org.eclipse.swt.widgets.Display;
-import org.eclipse.ui.PlatformUI;
-import org.eclipse.ui.ide.IDE;
-import org.eclipse.ui.model.IWorkbenchAdapter;
-
-import com.google.inject.Inject;
 
 /**
- * @author Sven Efftinge - Initial contribution and API
- * @author Peter Friese - Implementation
- * @author Sebastian Zarnekow
- * @author Michael Clay
+ * Helper class for styled strings.
+ * 
+ * @author koehnlein - Initial contribution and API
  */
-public class DefaultLabelProvider extends SimpleLabelProvider {
-	@Inject
-	private AdapterFactoryLabelProvider adapterFactoryLabelProvider;
-
-	public ImageDescriptor image(IFile file) {
-		IContentType contentType = IDE.getContentType(file);
-		return PlatformUI.getWorkbench().getEditorRegistry().getImageDescriptor(file.getName(), contentType);
-	}
-	
-	public ImageDescriptor image(IAdaptable adaptable) {
-		IWorkbenchAdapter workbenchAdapter = (IWorkbenchAdapter) adaptable.getAdapter(IWorkbenchAdapter.class);
-		if (workbenchAdapter == null) {
-			return null;
-		}
-		return workbenchAdapter.getImageDescriptor(adaptable);
-	}
-	
-	@Override
-	public Image getImage(Object element) {
-		Object result= getImageDispatcher().invoke(element);
-		if (result == null && adapterFactoryLabelProvider != null) {			
-			result= adapterFactoryLabelProvider.getImage(element); 
-		} else {
-			result = super.doGetImage(result);
-		} 
-		return (Image) result;
-	}
-	
-	public AdapterFactoryLabelProvider getAdapterFactoryLabelProvider() {
-		return adapterFactoryLabelProvider;
-	}
-
-	public void setAdapterFactoryLabelProvider(AdapterFactoryLabelProvider adapterFactoryLabelProvider) {
-		this.adapterFactoryLabelProvider = adapterFactoryLabelProvider;
-	}
-
-	public StyledString createStyledString(Object object) {
-		return createStyledString(object, null);
-	}
-
-	public StyledString createStyledString(Object object, Styler styler) {
-		return new StyledString(getNullSafeDefaultText(object), styler);
-	}
-
-	public String getNullSafeDefaultText(Object element) {
-		String text = text(element);
-		return null == text ? "" : text;
-	}
-
+public class StylerFactory {
 	/**
 	 * @see DefaultLabelProvider#createStyler(FontDescriptor, String, String)
 	 */
-	public static Styler createStyler(String foregroundColorName, String backgroundColorName) {
+	public Styler createStyler(String foregroundColorName, String backgroundColorName) {
 		return new DefaultFontStyler(null, foregroundColorName, backgroundColorName);
 	}
 
@@ -105,7 +45,7 @@ public class DefaultLabelProvider extends SimpleLabelProvider {
 	 * 
 	 * @return the created style
 	 */
-	public static Styler createStyler(FontDescriptor fontDescriptor, String foregroundColorName,
+	public Styler createStyler(FontDescriptor fontDescriptor, String foregroundColorName,
 			String backgroundColorName) {
 		return new DefaultFontStyler(fontDescriptor, foregroundColorName, backgroundColorName);
 	}
@@ -117,7 +57,7 @@ public class DefaultLabelProvider extends SimpleLabelProvider {
 	 *            the xtextStyle to apply
 	 * @return the created style
 	 */
-	public static Styler createXtextStyleAdapterStyler(org.eclipse.xtext.ui.editor.utils.TextStyle xtextStyle) {
+	public Styler createXtextStyleAdapterStyler(org.eclipse.xtext.ui.editor.utils.TextStyle xtextStyle) {
 		return new XtextStyleAdapterStyler(xtextStyle);
 	}
 
@@ -131,7 +71,7 @@ public class DefaultLabelProvider extends SimpleLabelProvider {
 	 *            the style to apply to the given text
 	 * @return the created style
 	 */
-	public static StyledString createFromXtextStyle(String text,
+	public StyledString createFromXtextStyle(String text,
 			org.eclipse.xtext.ui.editor.utils.TextStyle xtextStyle) {
 		return new StyledString(text, new XtextStyleAdapterStyler(xtextStyle));
 	}

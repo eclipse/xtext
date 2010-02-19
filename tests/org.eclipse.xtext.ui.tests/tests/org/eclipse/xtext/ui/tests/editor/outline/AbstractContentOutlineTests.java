@@ -14,12 +14,12 @@ import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
-import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.ui.DefaultLabelProvider;
 import org.eclipse.xtext.ui.editor.outline.DefaultContentOutlineNodeFactory;
+import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.util.TextLocation;
 
 /**
@@ -41,12 +41,7 @@ public abstract class AbstractContentOutlineTests extends AbstractXtextTests {
 		}
 	};
 
-	private static IStyledLabelProvider labelProvider = new DefaultLabelProvider() {
-		@Override
-		public org.eclipse.swt.graphics.Image getImage(Object element) {
-			return null;
-		}
-	};
+	private static ILabelProvider labelProvider = new DefaultEObjectLabelProvider(null);
 
 	@Override
 	protected void setUp() throws Exception {

@@ -5,16 +5,16 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.search;
+package org.eclipse.xtext.ui.label;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.viewers.BaseLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
-import org.eclipse.xtext.ui.resource.IDescriptionLabelProvider;
 import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
 
 /**
@@ -22,10 +22,10 @@ import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
  * 
  * @author koehnlein - Initial contribution and API
  */
-public class GenericDescriptionLabelProvider extends BaseLabelProvider implements ILabelProvider {
+public class GlobalDescriptionLabelProvider extends BaseLabelProvider implements ILabelProvider {
 
 	public Image getImage(Object element) {
-		IDescriptionLabelProvider descriptionLabelProvider = lookupDescriptionLabelProvider(element);
+		ILabelProvider descriptionLabelProvider = lookupDescriptionLabelProvider(element);
 		if (descriptionLabelProvider != null) {
 			return descriptionLabelProvider.getImage(element);
 		} else {
@@ -37,7 +37,7 @@ public class GenericDescriptionLabelProvider extends BaseLabelProvider implement
 		if (element == null) {
 			return "<null>";
 		} else {
-			IDescriptionLabelProvider descriptionLabelProvider = lookupDescriptionLabelProvider(element);
+			ILabelProvider descriptionLabelProvider = lookupDescriptionLabelProvider(element);
 			if (descriptionLabelProvider != null) {
 				return descriptionLabelProvider.getText(element);
 			} else {
@@ -46,12 +46,12 @@ public class GenericDescriptionLabelProvider extends BaseLabelProvider implement
 		}
 	}
 
-	private IDescriptionLabelProvider lookupDescriptionLabelProvider(Object description) {
+	private ILabelProvider lookupDescriptionLabelProvider(Object description) {
 		URI uri = uri(description);
 		if (uri != null) {
 			IResourceUIServiceProvider resourceServiceProvider = (IResourceUIServiceProvider) IResourceServiceProvider.Registry.INSTANCE
 					.getResourceServiceProvider(uri);
-			return resourceServiceProvider.getDescriptionLabelProvider();
+			return resourceServiceProvider.getLabelProvider();
 		} else {
 			return null;
 		}
@@ -62,9 +62,10 @@ public class GenericDescriptionLabelProvider extends BaseLabelProvider implement
 			return ((IEObjectDescription) description).getEObjectURI();
 		} else if (description instanceof IResourceDescription) {
 			return ((IResourceDescription) description).getURI();
-		} else {
-			return null;
+		} else if(description instanceof IReferenceDescription) {
+			return ((IReferenceDescription) description).getContainerEObjectURI();
 		}
+		return null;
 	}
 
 }

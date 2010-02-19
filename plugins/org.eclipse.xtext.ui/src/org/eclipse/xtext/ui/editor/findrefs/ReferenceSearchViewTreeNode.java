@@ -10,8 +10,6 @@ package org.eclipse.xtext.ui.editor.findrefs;
 import java.util.Collections;
 import java.util.List;
 
-import org.eclipse.swt.graphics.Image;
-import org.eclipse.xtext.ui.search.GenericDescriptionLabelProvider;
 
 import com.google.common.collect.Lists;
 
@@ -68,25 +66,6 @@ public class ReferenceSearchViewTreeNode {
 	
 	public Object getLabelDescription() {
 		return labelDescription;
-	}
-
-	public static class LabelProvider extends GenericDescriptionLabelProvider {
-
-		@Override
-		public String getText(Object element) {
-			if (element instanceof ReferenceSearchViewTreeNode) {
-				return super.getText(((ReferenceSearchViewTreeNode) element).getLabelDescription());
-			}
-			return "<invalid>";
-		}
-
-		@Override
-		public Image getImage(Object element) {
-			if (element instanceof ReferenceSearchViewTreeNode) {
-				return super.getImage(((ReferenceSearchViewTreeNode) element).getLabelDescription());
-			}
-			return null;
-		}
 	}
 
 }

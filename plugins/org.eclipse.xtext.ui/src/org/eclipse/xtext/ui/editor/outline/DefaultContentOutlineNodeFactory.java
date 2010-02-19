@@ -10,9 +10,9 @@ package org.eclipse.xtext.ui.editor.outline;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.text.Region;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.swt.graphics.Image;
@@ -31,9 +31,11 @@ import com.google.inject.Inject;
  * @author Michael Clay - Initial contribution and API
  */
 public class DefaultContentOutlineNodeFactory implements IContentOutlineNodeFactory {
-	private static final StyledString UNKNOWN_STYLED_STRING = new StyledString("<unknown>");
+
 	@Inject
-	private IStyledLabelProvider styledLabelProvider;
+	@OutlineLabelProvider
+	private ILabelProvider labelProvider;
+
 	@Inject
 	private ILocationInFileProvider locationProvider;
 
@@ -41,16 +43,15 @@ public class DefaultContentOutlineNodeFactory implements IContentOutlineNodeFact
 		super();
 	}
 
-	public DefaultContentOutlineNodeFactory(IStyledLabelProvider styledLabelProvider,
-			ILocationInFileProvider locationProvider) {
-		this.styledLabelProvider = styledLabelProvider;
+	public DefaultContentOutlineNodeFactory(ILabelProvider styledLabelProvider, ILocationInFileProvider locationProvider) {
+		this.labelProvider = styledLabelProvider;
 		this.locationProvider = locationProvider;
 	}
 
 	public ContentOutlineNode create(IStateAccess<XtextResource> resourceAccess, EObject semanticNode,
 			ContentOutlineNode outlineParentNode) {
-		ContentOutlineNode result = new ContentOutlineNode(getText(semanticNode), getImage(semanticNode),
-				getImageDescriptor(semanticNode), getRegion(semanticNode), getEObjectHandle(semanticNode,
+		ContentOutlineNode result = new ContentOutlineNode(getText(semanticNode), 
+				getImage(semanticNode), getRegion(semanticNode), getEObjectHandle(semanticNode,
 						resourceAccess), getEClass(semanticNode));
 
 		if (outlineParentNode != null) {
@@ -88,19 +89,13 @@ public class DefaultContentOutlineNodeFactory implements IContentOutlineNodeFact
 	}
 
 	protected StyledString getText(EObject semanticNode) {
-		StyledString text = styledLabelProvider.getStyledText(semanticNode);
-		if (text == null || "".equals(text.getString())) {
-			text = semanticNode != null ? new StyledString(semanticNode.eClass().getName()) : UNKNOWN_STYLED_STRING;
-		}
+		StyledString text = (labelProvider instanceof IStyledLabelProvider) ? ((IStyledLabelProvider) labelProvider)
+				.getStyledText(semanticNode) : new StyledString(labelProvider.getText(semanticNode));
 		return text;
 	}
 
 	protected Image getImage(EObject semanticNode) {
-		return styledLabelProvider.getImage(semanticNode);
-	}
-
-	protected ImageDescriptor getImageDescriptor(EObject semanticNode) {
-		return null;
+		return labelProvider.getImage(semanticNode);
 	}
 
 	protected IRegion getRegion(EObject semanticNode) {
@@ -114,11 +109,11 @@ public class DefaultContentOutlineNodeFactory implements IContentOutlineNodeFact
 		}
 		return null;
 	}
-	
-	public IStyledLabelProvider getStyledLabelProvider() {
-		return styledLabelProvider;
+
+	public ILabelProvider getLabelProvider() {
+		return labelProvider;
 	}
-	
+
 	public ILocationInFileProvider getLocationProvider() {
 		return locationProvider;
 	}

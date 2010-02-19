@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.resource;
 
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IContainer.Manager;
 import org.eclipse.xtext.validation.IResourceValidator;
@@ -39,10 +40,10 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 		return delegate.getResourceValidator();
 	}
 
-	@Inject
-	private IDescriptionLabelProvider descriptionLabelProvider;
+	@Inject@ResourceServiceDescriptionLabelProvider
+	private ILabelProvider descriptionLabelProvider;
 	
-	public IDescriptionLabelProvider getDescriptionLabelProvider() {
+	public ILabelProvider getLabelProvider() {
 		return descriptionLabelProvider;
 	}
 	

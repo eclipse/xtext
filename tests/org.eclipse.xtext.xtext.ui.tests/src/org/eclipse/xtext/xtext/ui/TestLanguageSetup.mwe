@@ -9,7 +9,6 @@
 	<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment">
 		<options classSplitting="true"/>
 	</fragment>
-	<fragment class="org.eclipse.xtext.ui.junit.editor.outline.SimpleLabelProviderFragment"/>
 	<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
 	<fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment">
 		<options classSplitting="true"/>

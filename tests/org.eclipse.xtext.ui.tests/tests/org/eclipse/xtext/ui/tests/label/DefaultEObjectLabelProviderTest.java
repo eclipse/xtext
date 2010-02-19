@@ -6,7 +6,7 @@
  * http://www.eclipse.org/legal/epl-v10.html
  *
  *******************************************************************************/
-package org.eclipse.xtext.ui.tests;
+package org.eclipse.xtext.ui.tests.label;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -17,18 +17,18 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextFactory;
-import org.eclipse.xtext.ui.DefaultLabelProvider;
 import org.eclipse.xtext.ui.IImageHelper;
+import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class DefaultLabelProviderTest extends TestCase {
+public class DefaultEObjectLabelProviderTest extends TestCase {
 
 	public void testSimple() throws Exception {
 		final List<String> calls = new ArrayList<String>();
 		@SuppressWarnings("unused")
-		DefaultLabelProvider lp = new DefaultLabelProvider() {
+		DefaultEObjectLabelProvider lp = new DefaultEObjectLabelProvider(null) {
 			{
 				setImageHelper(new IImageHelper.NullImageHelper());
 			}
@@ -65,11 +65,11 @@ public class DefaultLabelProviderTest extends TestCase {
 	}
 
 	public void testGetStyledText() throws Exception {
-		DefaultLabelProvider defaultLabelProvider = new DefaultLabelProvider() {
+		DefaultEObjectLabelProvider defaultLabelProvider = new DefaultEObjectLabelProvider() {
 
 			@SuppressWarnings("unused")
-			public StyledString text(ParserRule parserRule) {
-				return createStyledString(parserRule);
+			public Object text(ParserRule parserRule) {
+				return new StyledString(parserRule.getName());
 			}
 
 		};
@@ -80,7 +80,7 @@ public class DefaultLabelProviderTest extends TestCase {
 	}
 
 	public void testGetStyledTextFallbackText() throws Exception {
-		DefaultLabelProvider defaultLabelProvider = new DefaultLabelProvider();
+		DefaultEObjectLabelProvider defaultLabelProvider = new DefaultEObjectLabelProvider();
 		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
 		parserRule.setName("testCreateStyledString");
 		StyledString styledText = defaultLabelProvider.getStyledText(parserRule);
@@ -88,7 +88,7 @@ public class DefaultLabelProviderTest extends TestCase {
 	}
 
 	public void testGetStyledTextWithExistingTextLabel() throws Exception {
-		DefaultLabelProvider defaultLabelProvider = new DefaultLabelProvider() {
+		DefaultEObjectLabelProvider defaultLabelProvider = new DefaultEObjectLabelProvider() {
 			@SuppressWarnings("unused")
 			public String text(ParserRule parserRule) {
 				return parserRule.getName();
@@ -101,10 +101,10 @@ public class DefaultLabelProviderTest extends TestCase {
 	}
 
 	public void testGetTextWithExistingStyledStringLabel() throws Exception {
-		DefaultLabelProvider defaultLabelProvider = new DefaultLabelProvider() {
+		DefaultEObjectLabelProvider defaultLabelProvider = new DefaultEObjectLabelProvider() {
 			@SuppressWarnings("unused")
 			public StyledString text(ParserRule parserRule) {
-				return createStyledString(parserRule);
+				return new StyledString(parserRule.getName());
 			}
 
 		};
@@ -114,13 +114,11 @@ public class DefaultLabelProviderTest extends TestCase {
 	}
 
 	public void testGetNullSafeDefaultText() throws Exception {
-		DefaultLabelProvider defaultLabelProvider = new DefaultLabelProvider() {
-
+		DefaultEObjectLabelProvider defaultLabelProvider = new DefaultEObjectLabelProvider() {
 			@SuppressWarnings("unused")
 			public StyledString text(ParserRule parserRule) {
-				return createStyledString(parserRule);
+				return new StyledString(parserRule.getName());
 			}
-
 		};
 		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
 		StyledString styledText = defaultLabelProvider.getStyledText(parserRule);
@@ -130,7 +128,7 @@ public class DefaultLabelProviderTest extends TestCase {
 	public void testErrorHandling() throws Exception {
 		final List<String> calls = new ArrayList<String>();
 		@SuppressWarnings("unused")
-		DefaultLabelProvider lp = new DefaultLabelProvider() {
+		DefaultEObjectLabelProvider defaultLabelProvider = new DefaultEObjectLabelProvider() {
 			{
 				setImageHelper(new IImageHelper.NullImageHelper());
 			}
@@ -157,20 +155,20 @@ public class DefaultLabelProviderTest extends TestCase {
 				return null;
 			}
 		};
-		assertNull(lp.getText("foo"));
+		assertNull(defaultLabelProvider.getText("foo"));
 		try {
-			assertEquals("89", lp.getText(new Integer(89)));
+			assertEquals("89", defaultLabelProvider.getText(new Integer(89)));
 			fail();
 		} catch (WrappedException e) {
 			assertTrue(e.getCause() instanceof IllegalArgumentException);
 		}
 
 		assertTrue(calls.isEmpty());
-		lp.getImage(true);
+		defaultLabelProvider.getImage(true);
 		assertTrue(calls.isEmpty());
-		lp.getImage("String");
+		defaultLabelProvider.getImage("String");
 		assertTrue(calls.contains("error_String"));
-		lp.getImage(new Integer(45));
+		defaultLabelProvider.getImage(new Integer(45));
 		assertTrue(calls.contains("error_45"));
 		assertTrue(calls.size() == 2);
 	}

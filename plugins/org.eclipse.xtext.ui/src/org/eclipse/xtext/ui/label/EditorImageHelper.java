@@ -5,19 +5,11 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.resource;
-
-import org.eclipse.jface.viewers.ILabelProvider;
-
-import com.google.inject.ImplementedBy;
-
+package org.eclipse.xtext.ui.label;
 
 /**
- * Provides an image and a human readable display text from an {@link IEObjectDescription}.
- *  
  * @author koehnlein - Initial contribution and API
  */
-@ImplementedBy(DefaultDescriptionLabelProvider.class)
-public interface IDescriptionLabelProvider extends ILabelProvider {
+public class EditorImageHelper {
 
 }

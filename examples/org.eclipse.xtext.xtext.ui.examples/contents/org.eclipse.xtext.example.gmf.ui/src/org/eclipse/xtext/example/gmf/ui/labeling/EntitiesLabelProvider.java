@@ -3,12 +3,12 @@
 */
 package org.eclipse.xtext.example.gmf.ui.labeling;
 
-import org.eclipse.xtext.ui.DefaultLabelProvider;
+import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
-public class EntitiesLabelProvider extends DefaultLabelProvider {
+public class EntitiesLabelProvider extends DefaultEObjectLabelProvider {
 /*
 	
 	//Labels and icons can be computed like this:
