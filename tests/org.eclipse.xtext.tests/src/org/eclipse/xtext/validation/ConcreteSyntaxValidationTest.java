@@ -37,6 +37,7 @@ import org.eclipse.xtext.validation.csvalidationtest.StaticSimplification;
 import org.eclipse.xtext.validation.csvalidationtest.TransientObject;
 import org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1;
 import org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1Enum;
+import org.eclipse.xtext.validation.csvalidationtest.TwoVersion;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedAction1;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedAction2Sub;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedAction3;
@@ -264,7 +265,8 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 
 		copy = (Combination1) EcoreUtil.copy(m);
 		copy.setVal3(null);
-		validate(copy).assertAll(err(p.getCombination1_Val3(), ERROR_VALUE_REQUIRED, 1, null, "(val2 (val3|val4))?"),
+		validate(copy).assertAll(err(p.getCombination1_Val2(), ERROR_VALUE_PROHIBITED, null, 0, "(val2 (val3|val4))?"),
+				err(p.getCombination1_Val3(), ERROR_VALUE_REQUIRED, 1, null, "(val2 (val3|val4))?"),
 				err(p.getCombination1_Val4(), ERROR_VALUE_REQUIRED, 1, null, "(val2 (val3|val4))?"));
 	}
 
@@ -323,7 +325,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 
 		copy = (List1) EcoreUtil.copy(m);
 		copy.getVal1().clear();
-		validate(copy).assertAll(err(p.getList1_Val1(), ERROR_LIST_TOO_FEW, 1, null, "(val1 val1*)"));
+		validate(copy).assertAll(err(p.getList1_Val1(), ERROR_LIST_TOO_FEW, 1, null, ""));
 	}
 
 	public void testList2() throws Exception {
@@ -351,8 +353,8 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 
 		copy = (List3) EcoreUtil.copy(m);
 		copy.getVal1().clear();
-		validate(copy).assertAll(err(p.getList3_Val1(), ERROR_LIST_TOO_FEW, 1, null, "((val1 val1*)|val2)"),
-				err(p.getList3_Val2(), ERROR_VALUE_REQUIRED, 1, null, "((val1 val1*)|val2)"));
+		validate(copy).assertAll(err(p.getList3_Val1(), ERROR_LIST_TOO_FEW, 1, null, "(val1+|val2)"),
+				err(p.getList3_Val2(), ERROR_VALUE_REQUIRED, 1, null, "(val1+|val2)"));
 
 		copy = (List3) EcoreUtil.copy(m);
 		copy.getVal1().clear();
@@ -371,7 +373,7 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 
 		copy = (List4) EcoreUtil.copy(m);
 		copy.getVal1().clear();
-		validate(copy).assertAll(err(p.getList4_Val1(), ERROR_LIST_TOO_FEW, 1, null, "(val1 val1*)"));
+		validate(copy).assertAll(err(p.getList4_Val1(), ERROR_LIST_TOO_FEW, 1, null, ""));
 
 		copy = (List4) EcoreUtil.copy(m);
 		copy.setVal2(null);
@@ -395,19 +397,17 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 
 		copy = (List5) EcoreUtil.copy(m);
 		copy.getVal1().clear();
-		validate(copy).assertAll(err(p.getList5_Val1(), ERROR_LIST_TOO_FEW, 1, null, "((val1 val1* val2)|val3)"),
-				err(p.getList5_Val2(), ERROR_VALUE_PROHIBITED, null, 0, "((val1 val2)|val3)"));
+		validate(copy).assertAll(err(p.getList5_Val1(), ERROR_LIST_TOO_FEW, 1, null, "((val1+ val2)|val3)"));
 
 		copy = (List5) EcoreUtil.copy(m);
 		copy.setVal2(null);
-		validate(copy).assertAll(err(p.getList5_Val1(), ERROR_LIST_TOO_MANY, null, 0, "((val1 val1* val2)|val3)"),
-				err(p.getList5_Val2(), ERROR_VALUE_REQUIRED, 1, null, "((val1 val2)|val3)"));
+		validate(copy).assertAll(err(p.getList5_Val2(), ERROR_VALUE_REQUIRED, 1, null, "((val1+ val2)|val3)"));
 
 		copy = (List5) EcoreUtil.copy(m);
 		copy.setVal3("foo");
-		validate(copy).assertAll(err(p.getList5_Val1(), ERROR_LIST_TOO_MANY, null, 0, "((val1 val1* val2)|val3)"),
-				err(p.getList5_Val2(), ERROR_VALUE_PROHIBITED, null, 0, "((val1 val2)|val3)"),
-				err(p.getList5_Val3(), ERROR_VALUE_PROHIBITED, null, 0, "((val1 val1* val2)|val3)"));
+		validate(copy).assertAll(err(p.getList5_Val1(), ERROR_LIST_TOO_MANY, null, 0, "((val1+ val2)|val3)"),
+				err(p.getList5_Val2(), ERROR_VALUE_PROHIBITED, null, 0, "((val1+ val2)|val3)"),
+				err(p.getList5_Val3(), ERROR_VALUE_PROHIBITED, null, 0, "((val1+ val2)|val3)"));
 	}
 
 	public void testAltList1() throws Exception {
@@ -549,4 +549,94 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		m.setVal3("foo");
 		validate(m).assertOK();
 	}
+
+	public void testTwoVersion() {
+		TwoVersion m = f.createTwoVersion();
+		validate(m).assertAll(
+				err(p.getTwoVersion_Shared2(), ERROR_VALUE_REQUIRED, null, null,
+						"((shared1? shared2 shared3* version1?)|(shared1? shared2"
+								+ " shared3* extra1? ((extra2 extra3)|extra4)?))"));
+		m = f.createTwoVersion();
+		m.setShared2("foo");
+		validate(m).assertOK();
+
+		m = f.createTwoVersion();
+		m.setShared2("foo");
+		m.setShared1("bar");
+		validate(m).assertOK();
+
+		m = f.createTwoVersion();
+		m.setShared2("foo");
+		m.setShared1("bar");
+		m.getShared3().add("no1");
+		m.getShared3().add("no2");
+		m.getShared3().add("no3");
+		validate(m).assertOK();
+
+		m = f.createTwoVersion();
+		m.setShared2("foo");
+		m.setShared1("bar");
+		m.setVersion1("xxx");
+		validate(m).assertOK();
+
+		m = f.createTwoVersion();
+		m.setShared2("foo");
+		m.setShared1("bar");
+		m.setExtra1("lala");
+		validate(m).assertOK();
+
+		m = f.createTwoVersion();
+		m.setShared2("foo");
+		m.setShared1("bar");
+		m.getShared3().add("no1");
+		m.getShared3().add("no2");
+		m.getShared3().add("no3");
+		m.setExtra4("fooo");
+		validate(m).assertOK();
+
+		m = f.createTwoVersion();
+		m.setShared2("foo");
+		m.setShared1("bar");
+		m.getShared3().add("no1");
+		m.getShared3().add("no2");
+		m.getShared3().add("no3");
+		m.setExtra2("fooo");
+		m.setExtra3("fooo");
+		validate(m).assertOK();
+
+		m = f.createTwoVersion();
+		m.setShared2("foo");
+		m.setShared1("bar");
+		m.getShared3().add("no1");
+		m.getShared3().add("no2");
+		m.getShared3().add("no3");
+		m.setExtra1("fooo");
+		m.setExtra2("fooo");
+		m.setExtra3("fooo");
+		validate(m).assertOK();
+
+		m = f.createTwoVersion();
+		m.setVersion1("foo");
+		validate(m).assertAll(
+				err(p.getTwoVersion_Shared2(), ERROR_VALUE_REQUIRED, null, null,
+						"((shared1? shared2 shared3* version1?)|(shared1? shared2"
+						+ " shared3* extra1? ((extra2 extra3)|extra4)?))"));
+
+		m = f.createTwoVersion();
+		m.setExtra4("foo");
+		validate(m).assertAll(
+				err(p.getTwoVersion_Shared2(), ERROR_VALUE_REQUIRED, null, null,
+						"((shared1? shared2 shared3* version1?)|(shared1? shared2"
+						+ " shared3* extra1? ((extra2 extra3)|extra4)?))"));
+
+		m = f.createTwoVersion();
+		m.setExtra3("foo");
+		validate(m).assertAll(
+				err(p.getTwoVersion_Shared2(), ERROR_VALUE_REQUIRED, null, null,
+						"((shared1? shared2 shared3* version1?)|(shared1? shared2"
+						+ " shared3* extra1? ((extra2 extra3)|extra4)?))"),
+				err(p.getTwoVersion_Extra2(), ERROR_VALUE_REQUIRED, null, null,
+						"((shared1? shared2 shared3* version1?)|((extra2 extra3)|extra4)?)"));
+	}
+
 }
