@@ -15,7 +15,7 @@ Model:
 	x6=AssignedAction | x7=AssignedActionSecond | x8=UnassignedAction1 | x9=UnassignedAction2 | x10=UnassignedAction3 | 
 	x11=UnassignedRuleCall1 | x12=UnassignedRuleCall2 | x13=Combination1 | x14=Combination2 | x15=Combination3 | x16=Combination4 | 
 	x17=List1 | x18=List2 | x19=List3 | x20=List4 | x21=List5 | x22=AltList1 | x23=AltList2 |
-	x24=TransientObject | x25=TransientSerializeables1 | x26=StaticSimplification;	
+	x24=TransientObject | x25=TransientSerializeables1 | x26=StaticSimplification | x27=TwoVersion;	
 	
 SimpleGroup:
 	"#1" val1=ID val2=ID;
@@ -106,3 +106,14 @@ enum TransientSerializeables1Enum:
 	
 StaticSimplification:
 	"#26" ("kw1"|{EmptyAlternativeSub}|val1=ID) ("kw2"|val2=ID) ("kw3" ("kw4" (val3=ID)+)?);
+	
+TwoVersion:
+	"#27" (TwoVersionNo1 | TwoVersionNo2);
+	
+TwoVersionNo1 returns TwoVersion:
+	shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?; 
+	
+TwoVersionNo2 returns TwoVersion:
+	shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)?
+	"extra" extra1=ID? ((extra2=ID extra3=ID) | "two" extra4=ID)?; 
+	
