@@ -39,6 +39,7 @@ import org.eclipse.xtext.validation.csvalidationtest.TransientObject;
 import org.eclipse.xtext.validation.csvalidationtest.TransientObjectSub;
 import org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1;
 import org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1Enum;
+import org.eclipse.xtext.validation.csvalidationtest.TwoVersion;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedAction1;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedAction2;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedAction2Sub;
@@ -261,6 +262,13 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
    * @generated
    */
   private EClass staticSimplificationEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass twoVersionEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -635,6 +643,16 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
   public EReference getModel_X26()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(25);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_X27()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(26);
   }
 
   /**
@@ -1642,6 +1660,96 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getTwoVersion()
+  {
+    return twoVersionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTwoVersion_Shared1()
+  {
+    return (EAttribute)twoVersionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTwoVersion_Shared2()
+  {
+    return (EAttribute)twoVersionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTwoVersion_Shared3()
+  {
+    return (EAttribute)twoVersionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTwoVersion_Version1()
+  {
+    return (EAttribute)twoVersionEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTwoVersion_Extra1()
+  {
+    return (EAttribute)twoVersionEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTwoVersion_Extra2()
+  {
+    return (EAttribute)twoVersionEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTwoVersion_Extra3()
+  {
+    return (EAttribute)twoVersionEClass.getEStructuralFeatures().get(6);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getTwoVersion_Extra4()
+  {
+    return (EAttribute)twoVersionEClass.getEStructuralFeatures().get(7);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getUnassignedAction2Sub()
   {
     return unassignedAction2SubEClass;
@@ -1774,6 +1882,7 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     createEReference(modelEClass, MODEL__X24);
     createEReference(modelEClass, MODEL__X25);
     createEReference(modelEClass, MODEL__X26);
+    createEReference(modelEClass, MODEL__X27);
 
     simpleGroupEClass = createEClass(SIMPLE_GROUP);
     createEAttribute(simpleGroupEClass, SIMPLE_GROUP__VAL1);
@@ -1903,6 +2012,16 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     createEAttribute(staticSimplificationEClass, STATIC_SIMPLIFICATION__VAL2);
     createEAttribute(staticSimplificationEClass, STATIC_SIMPLIFICATION__VAL3);
 
+    twoVersionEClass = createEClass(TWO_VERSION);
+    createEAttribute(twoVersionEClass, TWO_VERSION__SHARED1);
+    createEAttribute(twoVersionEClass, TWO_VERSION__SHARED2);
+    createEAttribute(twoVersionEClass, TWO_VERSION__SHARED3);
+    createEAttribute(twoVersionEClass, TWO_VERSION__VERSION1);
+    createEAttribute(twoVersionEClass, TWO_VERSION__EXTRA1);
+    createEAttribute(twoVersionEClass, TWO_VERSION__EXTRA2);
+    createEAttribute(twoVersionEClass, TWO_VERSION__EXTRA3);
+    createEAttribute(twoVersionEClass, TWO_VERSION__EXTRA4);
+
     unassignedAction2SubEClass = createEClass(UNASSIGNED_ACTION2_SUB);
     createEAttribute(unassignedAction2SubEClass, UNASSIGNED_ACTION2_SUB__VAL1);
     createEAttribute(unassignedAction2SubEClass, UNASSIGNED_ACTION2_SUB__VAL2);
@@ -1984,6 +2103,7 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     initEReference(getModel_X24(), this.getTransientObject(), null, "x24", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X25(), this.getTransientSerializeables1(), null, "x25", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_X26(), this.getStaticSimplification(), null, "x26", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_X27(), this.getTwoVersion(), null, "x27", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(simpleGroupEClass, SimpleGroup.class, "SimpleGroup", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSimpleGroup_Val1(), ecorePackage.getEString(), "val1", null, 0, 1, SimpleGroup.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -2112,6 +2232,16 @@ public class CsvalidationtestPackageImpl extends EPackageImpl implements Csvalid
     initEAttribute(getStaticSimplification_Val1(), ecorePackage.getEString(), "val1", null, 0, 1, StaticSimplification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getStaticSimplification_Val2(), ecorePackage.getEString(), "val2", null, 0, 1, StaticSimplification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getStaticSimplification_Val3(), ecorePackage.getEString(), "val3", null, 0, 1, StaticSimplification.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(twoVersionEClass, TwoVersion.class, "TwoVersion", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getTwoVersion_Shared1(), ecorePackage.getEString(), "shared1", null, 0, 1, TwoVersion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTwoVersion_Shared2(), ecorePackage.getEString(), "shared2", null, 0, 1, TwoVersion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTwoVersion_Shared3(), ecorePackage.getEString(), "shared3", null, 0, -1, TwoVersion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTwoVersion_Version1(), ecorePackage.getEString(), "version1", null, 0, 1, TwoVersion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTwoVersion_Extra1(), ecorePackage.getEString(), "extra1", null, 0, 1, TwoVersion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTwoVersion_Extra2(), ecorePackage.getEString(), "extra2", null, 0, 1, TwoVersion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTwoVersion_Extra3(), ecorePackage.getEString(), "extra3", null, 0, 1, TwoVersion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getTwoVersion_Extra4(), ecorePackage.getEString(), "extra4", null, 0, 1, TwoVersion.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(unassignedAction2SubEClass, UnassignedAction2Sub.class, "UnassignedAction2Sub", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getUnassignedAction2Sub_Val1(), ecorePackage.getEString(), "val1", null, 0, 1, UnassignedAction2Sub.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

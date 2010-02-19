@@ -64,6 +64,8 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 
 	private INonTerminalConsumer transientSerializeables1Consumer;
 
+	private INonTerminalConsumer twoVersionConsumer;
+
 	private INonTerminalConsumer unassignedAction1Consumer;
 
 	private INonTerminalConsumer unassignedAction2Consumer;
@@ -180,6 +182,10 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 
 	private IElementConsumer ruleCall$53$Consumer;
 
+	private IElementConsumer assignment$54$Consumer;
+
+	private IElementConsumer ruleCall$55$Consumer;
+
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
 		protected Alternatives$1$Consumer(final Alternatives alternatives) {
@@ -214,6 +220,7 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 			acceptor.accept(assignment$48$Consumer);
 			acceptor.accept(assignment$50$Consumer);
 			acceptor.accept(assignment$52$Consumer);
+			acceptor.accept(assignment$54$Consumer);
 		}
 	}
 
@@ -841,6 +848,30 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 		}
 	}
 
+	protected class Assignment$54$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$54$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$55$Consumer;
+		}
+	}
+
+	protected class RuleCall$55$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$55$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(twoVersionConsumer, "x27", false, false, false, getElement(), optional);
+		}
+	}
+
 	public ConcreteSyntaxValidationTestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
@@ -910,6 +941,8 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 		ruleCall$51$Consumer = new RuleCall$51$Consumer(rule.getX25TransientSerializeables1ParserRuleCall_24_0());
 		assignment$52$Consumer = new Assignment$52$Consumer(rule.getX26Assignment_25());
 		ruleCall$53$Consumer = new RuleCall$53$Consumer(rule.getX26StaticSimplificationParserRuleCall_25_0());
+		assignment$54$Consumer = new Assignment$54$Consumer(rule.getX27Assignment_26());
+		ruleCall$55$Consumer = new RuleCall$55$Consumer(rule.getX27TwoVersionParserRuleCall_26_0());
 	}
 	
 	@Override
@@ -1004,6 +1037,10 @@ public final class ConcreteSyntaxValidationTestLanguageModelConsumer extends Non
 	
 	public void setTransientSerializeables1Consumer(INonTerminalConsumer transientSerializeables1Consumer) {
 		this.transientSerializeables1Consumer = transientSerializeables1Consumer;
+	}
+	
+	public void setTwoVersionConsumer(INonTerminalConsumer twoVersionConsumer) {
+		this.twoVersionConsumer = twoVersionConsumer;
 	}
 	
 	public void setUnassignedAction1Consumer(INonTerminalConsumer unassignedAction1Consumer) {

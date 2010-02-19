@@ -287,6 +287,15 @@ public interface CsvalidationtestFactory extends EFactory
   StaticSimplification createStaticSimplification();
 
   /**
+   * Returns a new object of class '<em>Two Version</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Two Version</em>'.
+   * @generated
+   */
+  TwoVersion createTwoVersion();
+
+  /**
    * Returns a new object of class '<em>Unassigned Action2 Sub</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

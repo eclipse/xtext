@@ -305,13 +305,22 @@ public interface CsvalidationtestPackage extends EPackage
   int MODEL__X26 = 25;
 
   /**
+   * The feature id for the '<em><b>X27</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__X27 = 26;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 26;
+  int MODEL_FEATURE_COUNT = 27;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -1494,6 +1503,97 @@ public interface CsvalidationtestPackage extends EPackage
   int STATIC_SIMPLIFICATION_FEATURE_COUNT = 3;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.TwoVersionImpl <em>Two Version</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.validation.csvalidationtest.impl.TwoVersionImpl
+   * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getTwoVersion()
+   * @generated
+   */
+  int TWO_VERSION = 29;
+
+  /**
+   * The feature id for the '<em><b>Shared1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TWO_VERSION__SHARED1 = 0;
+
+  /**
+   * The feature id for the '<em><b>Shared2</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TWO_VERSION__SHARED2 = 1;
+
+  /**
+   * The feature id for the '<em><b>Shared3</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TWO_VERSION__SHARED3 = 2;
+
+  /**
+   * The feature id for the '<em><b>Version1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TWO_VERSION__VERSION1 = 3;
+
+  /**
+   * The feature id for the '<em><b>Extra1</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TWO_VERSION__EXTRA1 = 4;
+
+  /**
+   * The feature id for the '<em><b>Extra2</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TWO_VERSION__EXTRA2 = 5;
+
+  /**
+   * The feature id for the '<em><b>Extra3</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TWO_VERSION__EXTRA3 = 6;
+
+  /**
+   * The feature id for the '<em><b>Extra4</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TWO_VERSION__EXTRA4 = 7;
+
+  /**
+   * The number of structural features of the '<em>Two Version</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int TWO_VERSION_FEATURE_COUNT = 8;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.UnassignedAction2SubImpl <em>Unassigned Action2 Sub</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1501,7 +1601,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getUnassignedAction2Sub()
    * @generated
    */
-  int UNASSIGNED_ACTION2_SUB = 29;
+  int UNASSIGNED_ACTION2_SUB = 30;
 
   /**
    * The feature id for the '<em><b>Val1</b></em>' attribute.
@@ -1538,7 +1638,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getUnassignedAction2Sub1()
    * @generated
    */
-  int UNASSIGNED_ACTION2_SUB1 = 30;
+  int UNASSIGNED_ACTION2_SUB1 = 31;
 
   /**
    * The feature id for the '<em><b>Val1</b></em>' attribute.
@@ -1575,7 +1675,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getUnassignedAction2Sub2()
    * @generated
    */
-  int UNASSIGNED_ACTION2_SUB2 = 31;
+  int UNASSIGNED_ACTION2_SUB2 = 32;
 
   /**
    * The feature id for the '<em><b>Val1</b></em>' attribute.
@@ -1612,7 +1712,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getUnassignedRuleCall2SubAction()
    * @generated
    */
-  int UNASSIGNED_RULE_CALL2_SUB_ACTION = 32;
+  int UNASSIGNED_RULE_CALL2_SUB_ACTION = 33;
 
   /**
    * The feature id for the '<em><b>Val2</b></em>' attribute.
@@ -1640,7 +1740,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getEmptyAlternativeSub()
    * @generated
    */
-  int EMPTY_ALTERNATIVE_SUB = 33;
+  int EMPTY_ALTERNATIVE_SUB = 34;
 
   /**
    * The feature id for the '<em><b>Val1</b></em>' attribute.
@@ -1686,7 +1786,7 @@ public interface CsvalidationtestPackage extends EPackage
    * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getTransientSerializeables1Enum()
    * @generated
    */
-  int TRANSIENT_SERIALIZEABLES1_ENUM = 34;
+  int TRANSIENT_SERIALIZEABLES1_ENUM = 35;
 
 
   /**
@@ -1984,6 +2084,17 @@ public interface CsvalidationtestPackage extends EPackage
    * @generated
    */
   EReference getModel_X26();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX27 <em>X27</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>X27</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.Model#getX27()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_X27();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.validation.csvalidationtest.SimpleGroup <em>Simple Group</em>}'.
@@ -3058,6 +3169,104 @@ public interface CsvalidationtestPackage extends EPackage
   EAttribute getStaticSimplification_Val3();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.validation.csvalidationtest.TwoVersion <em>Two Version</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Two Version</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TwoVersion
+   * @generated
+   */
+  EClass getTwoVersion();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.validation.csvalidationtest.TwoVersion#getShared1 <em>Shared1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Shared1</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TwoVersion#getShared1()
+   * @see #getTwoVersion()
+   * @generated
+   */
+  EAttribute getTwoVersion_Shared1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.validation.csvalidationtest.TwoVersion#getShared2 <em>Shared2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Shared2</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TwoVersion#getShared2()
+   * @see #getTwoVersion()
+   * @generated
+   */
+  EAttribute getTwoVersion_Shared2();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.validation.csvalidationtest.TwoVersion#getShared3 <em>Shared3</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Shared3</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TwoVersion#getShared3()
+   * @see #getTwoVersion()
+   * @generated
+   */
+  EAttribute getTwoVersion_Shared3();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.validation.csvalidationtest.TwoVersion#getVersion1 <em>Version1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Version1</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TwoVersion#getVersion1()
+   * @see #getTwoVersion()
+   * @generated
+   */
+  EAttribute getTwoVersion_Version1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.validation.csvalidationtest.TwoVersion#getExtra1 <em>Extra1</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Extra1</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TwoVersion#getExtra1()
+   * @see #getTwoVersion()
+   * @generated
+   */
+  EAttribute getTwoVersion_Extra1();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.validation.csvalidationtest.TwoVersion#getExtra2 <em>Extra2</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Extra2</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TwoVersion#getExtra2()
+   * @see #getTwoVersion()
+   * @generated
+   */
+  EAttribute getTwoVersion_Extra2();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.validation.csvalidationtest.TwoVersion#getExtra3 <em>Extra3</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Extra3</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TwoVersion#getExtra3()
+   * @see #getTwoVersion()
+   * @generated
+   */
+  EAttribute getTwoVersion_Extra3();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.validation.csvalidationtest.TwoVersion#getExtra4 <em>Extra4</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Extra4</em>'.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TwoVersion#getExtra4()
+   * @see #getTwoVersion()
+   * @generated
+   */
+  EAttribute getTwoVersion_Extra4();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.validation.csvalidationtest.UnassignedAction2Sub <em>Unassigned Action2 Sub</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -3379,6 +3588,14 @@ public interface CsvalidationtestPackage extends EPackage
      * @generated
      */
     EReference MODEL__X26 = eINSTANCE.getModel_X26();
+
+    /**
+     * The meta object literal for the '<em><b>X27</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__X27 = eINSTANCE.getModel_X27();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.SimpleGroupImpl <em>Simple Group</em>}' class.
@@ -4235,6 +4452,80 @@ public interface CsvalidationtestPackage extends EPackage
      * @generated
      */
     EAttribute STATIC_SIMPLIFICATION__VAL3 = eINSTANCE.getStaticSimplification_Val3();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.TwoVersionImpl <em>Two Version</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.validation.csvalidationtest.impl.TwoVersionImpl
+     * @see org.eclipse.xtext.validation.csvalidationtest.impl.CsvalidationtestPackageImpl#getTwoVersion()
+     * @generated
+     */
+    EClass TWO_VERSION = eINSTANCE.getTwoVersion();
+
+    /**
+     * The meta object literal for the '<em><b>Shared1</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TWO_VERSION__SHARED1 = eINSTANCE.getTwoVersion_Shared1();
+
+    /**
+     * The meta object literal for the '<em><b>Shared2</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TWO_VERSION__SHARED2 = eINSTANCE.getTwoVersion_Shared2();
+
+    /**
+     * The meta object literal for the '<em><b>Shared3</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TWO_VERSION__SHARED3 = eINSTANCE.getTwoVersion_Shared3();
+
+    /**
+     * The meta object literal for the '<em><b>Version1</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TWO_VERSION__VERSION1 = eINSTANCE.getTwoVersion_Version1();
+
+    /**
+     * The meta object literal for the '<em><b>Extra1</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TWO_VERSION__EXTRA1 = eINSTANCE.getTwoVersion_Extra1();
+
+    /**
+     * The meta object literal for the '<em><b>Extra2</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TWO_VERSION__EXTRA2 = eINSTANCE.getTwoVersion_Extra2();
+
+    /**
+     * The meta object literal for the '<em><b>Extra3</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TWO_VERSION__EXTRA3 = eINSTANCE.getTwoVersion_Extra3();
+
+    /**
+     * The meta object literal for the '<em><b>Extra4</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute TWO_VERSION__EXTRA4 = eINSTANCE.getTwoVersion_Extra4();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.validation.csvalidationtest.impl.UnassignedAction2SubImpl <em>Unassigned Action2 Sub</em>}' class.

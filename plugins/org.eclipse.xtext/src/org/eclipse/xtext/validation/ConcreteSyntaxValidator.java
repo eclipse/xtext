@@ -24,7 +24,6 @@ import java.util.Set;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EEnum;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -36,6 +35,7 @@ import org.eclipse.xtext.Action;
 import org.eclipse.xtext.Alternatives;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.CompoundElement;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
@@ -302,8 +302,8 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 					break;
 			}
 			appendConstraint(msg);
-			msg.append(" min:" + min);
-			msg.append(" max:" + max);
+			//			msg.append(" min:" + min);
+			//			msg.append(" max:" + max);
 			return msg.toString();
 		}
 
@@ -376,23 +376,29 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 	}
 
 	protected class Element {
-		protected Element container;
+		protected Element container = null;
 		protected List<Element> contents;
+		protected List<AbstractElement> lazyContents;
 		protected AbstractElement element;
 		protected boolean multiple = false;
 		protected boolean optional = false;
 		protected EClass semanticType = null;
 		protected ElementType type;
 
-		public Element(ElementType type, Element container, AbstractElement ele, boolean multiple, boolean optional) {
+		public Element(ElementType type, AbstractElement ele, List<AbstractElement> lazyContents,
+				List<Element> eagerContents, EClass semanticType, boolean multiple, boolean optional) {
 			super();
 			if (type == null)
 				throw new NullPointerException("type must not be null");
 			this.type = type;
-			this.container = container;
 			this.element = ele;
+			this.semanticType = semanticType;
 			this.multiple = multiple;
 			this.optional = optional;
+			this.contents = eagerContents;
+			this.lazyContents = lazyContents;
+			for (Element e : contents)
+				e.container = this;
 		}
 
 		public boolean dependsOn(Element ele) {
@@ -435,15 +441,15 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		}
 
 		public List<Element> getContents() {
-			if (contents == null) {
-				contents = new ArrayList<Element>();
-				if (getType() == ElementType.ALTERNATIVE || getType() == ElementType.GROUP)
-					for (EObject e : element.eContents()) {
-						Element x = createElement(this, e);
-						if (x != null)
-							contents.add(x);
-
+			if (lazyContents != null) {
+				for (EObject obj : lazyContents) {
+					Element e = createElement(obj);
+					if (e != null) {
+						e.container = this;
+						contents.add(e);
 					}
+				}
+				lazyContents = null;
 			}
 			return contents;
 		}
@@ -453,15 +459,6 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		}
 
 		public EClass getSemanticType() {
-			if (semanticType == null) {
-				EClassifier clsf = null;
-				if (getType() == ElementType.ACTION)
-					clsf = ((Action) element).getType().getClassifier();
-				else if (element.eContainer() instanceof AbstractRule)
-					clsf = ((AbstractRule) element.eContainer()).getType().getClassifier();
-				if (clsf instanceof EClass)
-					semanticType = (EClass) clsf;
-			}
 			return semanticType;
 		}
 
@@ -541,7 +538,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		protected Element getElement(ParserRule rule) {
 			Element e = rule2element.get(rule);
 			if (e == null)
-				rule2element.put(rule, e = createElement(null, rule.getAlternatives()));
+				rule2element.put(rule, e = createElement(rule.getAlternatives()));
 			return e;
 		}
 
@@ -570,7 +567,9 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			if (validRules != null)
 				return validRules;
 			validRules = Sets.newHashSet();
-			collectReachableRules(getFirstParserRule(grammar), validRules);
+			ParserRule first = getFirstParserRule(grammar);
+			validRules.add(first);
+			collectReachableRules(first, validRules, new HashSet<ParserRule>());
 			return validRules;
 		}
 	}
@@ -708,11 +707,15 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			collectAssignments(rule, obj, e, assignments, acceptor);
 	}
 
-	protected void collectReachableRules(ParserRule pr, Set<ParserRule> rules) {
-		for (Assignment a : GrammarUtil.containedAssignments(pr))
-			for (RuleCall rc : GrammarUtil.containedRuleCalls(a))
-				if (isParserRule(rc.getRule()) && rules.add((ParserRule) rc.getRule()))
-					collectReachableRules((ParserRule) rc.getRule(), rules);
+	protected void collectReachableRules(ParserRule pr, Set<ParserRule> rules, Set<ParserRule> visited) {
+		if (!visited.add(pr))
+			return;
+		for (RuleCall rc : GrammarUtil.containedRuleCalls(pr))
+			if (isParserRule(rc.getRule())) {
+				if (GrammarUtil.containingAssignment(rc) != null)
+					rules.add((ParserRule) rc.getRule());
+				collectReachableRules((ParserRule) rc.getRule(), rules, visited);
+			}
 	}
 
 	protected Set<Element> collectUnfulfilledSemanticElements(EClass cls, Element ele) {
@@ -753,25 +756,62 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		return false;
 	}
 
-	protected Element createElement(Element parent, EObject obj) {
+	protected boolean containsUnavailableFeature(Quantities ctx, Element child, String exclude, Set<Element> involved) {
+		if (child.isOptional())
+			return false;
+		switch (child.getType()) {
+			case ASSIGNMENT:
+				if (exclude.equals(((Assignment) child.getEle()).getFeature()))
+					return false;
+				involved.add(child);
+				return ctx.getAssignmentQuantity(child) == 0;
+			case GROUP:
+				for (Element a : child.getContents())
+					if (containsUnavailableFeature(ctx, a, exclude, involved))
+						return true;
+				return false;
+			case ALTERNATIVE:
+				for (Element a : child.getContents())
+					if (!containsUnavailableFeature(ctx, a, exclude, involved))
+						return false;
+				return true;
+			case ACTION:
+				return !child.getSemanticType().isInstance(ctx.getDelegate());
+			default:
+				return false;
+		}
+
+	}
+
+	protected Element createElement(EObject obj) {
 		if (!(obj instanceof AbstractElement))
 			return null;
 		AbstractElement ele = (AbstractElement) obj;
 		boolean multiple = false;
 		boolean optional = false;
+		EClass semanticType = null;
 		while (true) {
 			multiple = multiple || isMultipleCardinality(ele);
 			optional = optional || isOptionalCardinality(ele);
+			if (ele.eContainer() instanceof ParserRule
+					&& ((ParserRule) ele.eContainer()).getType().getClassifier() instanceof EClass)
+				semanticType = (EClass) ((ParserRule) ele.eContainer()).getType().getClassifier();
 			if (ele instanceof Assignment) {
-				return new Element(ElementType.ASSIGNMENT, parent, ele, multiple, optional);
+				return createElement(ElementType.ASSIGNMENT, ele, semanticType, multiple, optional);
 			} else if (ele instanceof Group || ele instanceof UnorderedGroup) {
+				CompoundElement comp = (CompoundElement) ele;
 				AbstractElement lastChild = null;
-				for (AbstractElement o : ((CompoundElement) ele).getElements())
+				for (AbstractElement o : comp.getElements())
 					if (containsRelevantElement(o)) {
 						if (lastChild == null)
 							lastChild = o;
-						else
-							return new Element(ElementType.GROUP, parent, ele, multiple, optional);
+						else {
+							List<AbstractElement> c = new ArrayList<AbstractElement>(comp.getElements());
+							List<Element> e = createSummarizedAssignments(comp, c, semanticType, optional);
+							if (e.size() == 1 && c.size() == 0)
+								return e.get(0);
+							return createElement(ElementType.GROUP, ele, c, e, semanticType, multiple, optional);
+						}
 					}
 				ele = lastChild;
 				continue;
@@ -786,17 +826,79 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 				if (relevantChildren < ((CompoundElement) ele).getElements().size())
 					optional = true;
 				if (relevantChildren > 1)
-					return new Element(ElementType.ALTERNATIVE, parent, ele, multiple, optional);
+					return createElement(ElementType.ALTERNATIVE, ele, semanticType, multiple, optional);
 				ele = lastChild;
 				continue;
 			} else if (ele instanceof Action) {
-				return new Element(ElementType.ACTION, parent, ele, multiple, optional);
+				semanticType = (EClass) ((Action) ele).getType().getClassifier();
+				return createElement(ElementType.ACTION, ele, semanticType, multiple, optional);
 			} else if (ele instanceof RuleCall) {
 				ele = ((RuleCall) ele).getRule().getAlternatives();
 				continue;
 			}
 			return null;
 		}
+	}
+
+	protected Element createElement(ElementType type, AbstractElement ele, List<AbstractElement> lazyContents,
+			List<Element> eagerContents, EClass semanticType, boolean multiple, boolean optional) {
+		return new Element(type, ele, lazyContents, eagerContents, semanticType, multiple, optional);
+	}
+
+	protected Element createElement(ElementType type, AbstractElement ele, EClass semanticType, boolean multiple,
+			boolean optional) {
+		List<AbstractElement> ctns = ele instanceof CompoundElement ? ((CompoundElement) ele).getElements() : null;
+		return createElement(type, ele, ctns, new ArrayList<Element>(), semanticType, multiple, optional);
+	}
+
+	protected List<Element> createSummarizedAssignments(CompoundElement group, List<AbstractElement> candidates,
+			EClass semanticType, boolean optional) {
+		Multimap<String, Assignment> feature2ass = Multimaps.newHashMultimap();
+		Multimap<String, AbstractElement> feature2child = Multimaps.newHashMultimap();
+		for (AbstractElement c : candidates) {
+			TreeIterator<EObject> i = EcoreUtil2.eAll(c);
+			while (i.hasNext()) {
+				EObject obj = i.next();
+				if (obj instanceof RuleCall || obj instanceof Action || obj instanceof Alternatives)
+					break;
+				else if (obj instanceof Assignment) {
+					Assignment a = (Assignment) obj;
+					feature2ass.put(a.getFeature(), a);
+					feature2child.put(a.getFeature(), c);
+					i.prune();
+				}
+			}
+		}
+		List<Element> result = Lists.newArrayList();
+		for (Map.Entry<String, Collection<Assignment>> ent : feature2ass.asMap().entrySet()) {
+			if (ent.getValue().size() < 2 || feature2child.get(ent.getKey()).size() < 2)
+				continue;
+			int required = 0, multiplies = 0;
+			for (Assignment assignment : ent.getValue()) {
+				AbstractElement e = assignment;
+				while (e != group)
+					if (isMultipleCardinality(e)) {
+						multiplies++;
+						break;
+					} else
+						e = (AbstractElement) e.eContainer();
+				e = assignment;
+				while (e != group)
+					if (isOptionalCardinality(e))
+						break;
+					else
+						e = (AbstractElement) e.eContainer();
+				if (e == group)
+					required++;
+			}
+			if (required > 1 || multiplies < 1)
+				continue;
+			candidates.removeAll(feature2child.get(ent.getKey()));
+			optional = optional || required < 1;
+			result.add(createElement(ElementType.ASSIGNMENT, ent.getValue().iterator().next(), semanticType, true,
+					optional));
+		}
+		return result;
 	}
 
 	protected int distributeQuantity(List<Element> assignments, Quantities quants,
@@ -880,11 +982,78 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 				.getContainer());
 	}
 
-	protected int getMaxCount(Quantities ctx, Element ass, Set<Element> involved) {
-		int c = ass.isRoot() ? 1 : getRequiredMaxCountByParent(ctx, ass.getContainer(), ass, involved);
-		if (c == 0 && ass.isAbsolutMandatory())
-			c = 1;
+	protected int getMaxCount(Quantities ctx, Element ass, Set<Element> involved, String excludeFeature) {
+		int c = ass.isRoot() ? 1 : getMaxCountByParent(ctx, ass.getContainer(), ass, excludeFeature, involved);
 		return ass.isMultiple() && c > 0 ? MAX : c;
+	}
+
+	protected int getMaxCountByParent(Quantities ctx, Element ele, Element exclude, String excludeFeature,
+			Set<Element> inv) {
+		int max = ele.isRoot() ? (ele.isMultiple() ? MAX : 1) : getMaxCountByParent(ctx, ele.getContainer(), ele,
+				excludeFeature, inv);
+		if (max == 0)
+			return 0;
+		switch (ele.getType()) {
+			case GROUP:
+				if (ele.isMultiple())
+					max = MAX;
+				if (ele.isOptional() || max == MAX) {
+					for (Element a : ele.getContents())
+						if (a != exclude) {
+							int count = getMaxCountForChild(ctx, a, inv);
+							if (count != UNDEF && (count < max))
+								max = count;
+						}
+				}
+				return max == 0 && !ele.isOptional() ? 1 : max;
+			case ALTERNATIVE:
+				if (ele.isMultiple())
+					return MAX;
+				for (Element a : ele.getContents())
+					if (a != exclude) {
+						int count = getMinCountForChild(ctx, a, inv);
+						if (count > 0)
+							return 0;
+					} else if (excludeFeature != null && containsUnavailableFeature(ctx, a, excludeFeature, inv))
+						return 0;
+				return max;
+			default:
+				return 1;
+		}
+	}
+
+	protected int getMaxCountForChild(Quantities ctx, Element child, Set<Element> involved) {
+		if (child.getSemanticType() != null && !child.getSemanticType().isInstance(ctx.getDelegate()))
+			return 0;
+		if (child.isOptional())
+			return MAX;
+		switch (child.getType()) {
+			case ASSIGNMENT:
+				involved.add(child);
+				return ctx.getAssignmentQuantity(child);
+			case GROUP:
+				int count1 = MAX;
+				for (Element a : child.getContents()) {
+					int c = getMaxCountForChild(ctx, a, involved);
+					if (c != UNDEF && c < count1)
+						count1 = c;
+				}
+				return count1;
+			case ALTERNATIVE:
+				int count2 = UNDEF;
+				for (Element a : child.getContents()) {
+					int c = getMaxCountForChild(ctx, a, involved);
+					if (c == MAX)
+						return MAX;
+					if (c != UNDEF)
+						count2 = count2 == UNDEF ? c : count2 + c;
+				}
+				return count2;
+			case ACTION:
+				return MAX;
+			default:
+				return UNDEF;
+		}
 	}
 
 	protected int getMinCount(Quantities ctx, Element assignment, Set<Element> involved) {
@@ -892,7 +1061,73 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			return 0;
 		if (assignment.isRoot())
 			return 1;
-		return getRequiredMinCountByParent(ctx, assignment.getContainer(), assignment, involved);
+		return getMinCountByParent(ctx, assignment.getContainer(), assignment, involved);
+	}
+
+	protected int getMinCountByParent(Quantities ctx, Element parent, Element exclude, Set<Element> involved) {
+		switch (parent.getType()) {
+			case GROUP:
+				if (parent.isRoot() && !parent.isOptional() && !parent.isMultiple())
+					return 1;
+				int count1 = UNDEF;
+				for (Element a : parent.getContents())
+					if (a != exclude) {
+						int c = getMinCountForChild(ctx, a, involved);
+						if (c > count1) {
+							count1 = c;
+							break;
+						}
+					}
+				if (parent.isOptional())
+					return count1 == UNDEF ? 0 : count1;
+				if (!parent.isRoot())
+					return Math.max(getMinCountByParent(ctx, parent.getContainer(), parent, involved), count1);
+				return UNDEF;
+			case ALTERNATIVE:
+				if (parent.isOptional())
+					return 0;
+				for (Element a : parent.getContents())
+					if (a != exclude) {
+						int count2 = getMinCountForChild(ctx, a, involved);
+						if (count2 > 0)
+							return 0;
+					}
+				if (!parent.isRoot())
+					return getMinCountByParent(ctx, parent.getContainer(), parent, involved);
+				return 1;
+			default:
+				return UNDEF;
+		}
+	}
+
+	protected int getMinCountForChild(Quantities ctx, Element child, Set<Element> involved) {
+		if (child.getSemanticType() != null && !child.getSemanticType().isInstance(ctx.getDelegate()))
+			return 0;
+		int count = UNDEF;
+		switch (child.getType()) {
+			case ASSIGNMENT:
+				involved.add(child);
+				count = ctx.getAssignmentQuantity(child);
+				break;
+			case GROUP:
+				for (Element a : child.getContents()) {
+					int c = getMinCountForChild(ctx, a, involved);
+					if (c > count)
+						count = c;
+				}
+				break;
+			case ALTERNATIVE:
+				for (Element a : child.getContents()) {
+					int c = getMinCountForChild(ctx, a, involved);
+					count = count == UNDEF ? c : c + count;
+				}
+				break;
+			case ACTION:
+				return 1;
+		}
+		if (child.isMultiple() && count > 1)
+			count = 1;
+		return count;
 	}
 
 	protected List<Quantities> getQuantities(EObject obj, Element rule, List<IConcreteSyntaxDiagnostic> acceptor) {
@@ -937,12 +1172,12 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		if (multiAssignments.isEmpty())
 			return Collections.singletonList(quants);
 		Map<Element, Pair<Integer, Integer>> minmax = Maps.newHashMap();
-		for (Element e : multiAssignments.values()) {
-			int min = getMinCount(quants, e, Sets.<Element> newHashSet());
-			int max = getMaxCount(quants, e, Sets.<Element> newHashSet());
-			minmax.put(e, Tuples.create(min, max));
-		}
 		for (Map.Entry<EStructuralFeature, Collection<Element>> e : multiAssignments.asMap().entrySet()) {
+			for (Element f : e.getValue()) {
+				int min = getMinCount(quants, f, Sets.<Element> newHashSet());
+				int max = getMaxCount(quants, f, Sets.<Element> newHashSet(), e.getKey().getName());
+				minmax.put(f, Tuples.create(min, max));
+			}
 			List<Element> ass = new ArrayList<Element>(e.getValue());
 			Collections.sort(ass, new DependencyComparator());
 			int quantity = quants.getFeatureQuantity(e.getKey());
@@ -959,132 +1194,6 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 		}
 		//		System.out.println("FinalQuantities: " + quants.toString(minmax));
 		return Collections.singletonList(quants);
-	}
-
-	protected int getRequiredMaxCountByParent(Quantities ctx, Element parent, Element exclude, Set<Element> involved) {
-		switch (parent.getType()) {
-			case GROUP:
-				if (parent.isRoot() && !parent.isMultiple() && !parent.isOptional())
-					return 1;
-				int max = UNDEF;
-				for (Element a : parent.getContents())
-					if (a != exclude) {
-						int count = getRequiredMaxCountForChild(ctx, a, involved);
-						if (count != UNDEF && (count < max || max == UNDEF))
-							max = count;
-					}
-				max = max == UNDEF ? parent.isMultiple() ? MAX : 1 : max;
-				if (!parent.isRoot()) {
-					int p = getRequiredMaxCountByParent(ctx, parent.getContainer(), parent, involved);
-					max = p == 0 || max == 0 ? 0 : Math.max(max, p);
-				}
-				return max;
-			case ALTERNATIVE:
-				if (parent.isMultiple())
-					return MAX;
-				for (Element a : parent.getContents())
-					if (a != exclude) {
-						int count = getRequiredMinCountForChild(ctx, a, involved);
-						if (count > 0)
-							return 0;
-					}
-				if (!parent.isRoot())
-					return getRequiredMaxCountByParent(ctx, parent.getContainer(), parent, involved);
-				return 1;
-			default:
-				return 1;
-		}
-	}
-
-	protected int getRequiredMaxCountForChild(Quantities ctx, Element child, Set<Element> involved) {
-		if (child.getSemanticType() != null && !child.getSemanticType().isInstance(ctx.getDelegate()))
-			return 0;
-		if (child.isOptional())
-			return MAX;
-		switch (child.getType()) {
-			case ASSIGNMENT:
-				involved.add(child);
-				return ctx.getAssignmentQuantity(child);
-			case GROUP:
-				int count = UNDEF;
-				for (Element a : child.getContents()) {
-					int c = getRequiredMaxCountForChild(ctx, a, involved);
-					if (c > count)
-						count = c;
-				}
-				return count;
-			default:
-				return UNDEF;
-		}
-	}
-
-	protected int getRequiredMinCountByParent(Quantities ctx, Element parent, Element exclude, Set<Element> involved) {
-		switch (parent.getType()) {
-			case GROUP:
-				if (parent.isRoot() && !parent.isOptional() && !parent.isMultiple())
-					return 1;
-				int count1 = UNDEF;
-				for (Element a : parent.getContents())
-					if (a != exclude) {
-						int c = getRequiredMinCountForChild(ctx, a, involved);
-						if (c > count1) {
-							count1 = c;
-							break;
-						}
-					}
-				if (parent.isOptional())
-					return count1 == UNDEF ? 0 : count1;
-				if (!parent.isRoot())
-					return Math.max(getRequiredMinCountByParent(ctx, parent.getContainer(), parent, involved), count1);
-				return UNDEF;
-			case ALTERNATIVE:
-				if (parent.isOptional())
-					return 0;
-				for (Element a : parent.getContents())
-					if (a != exclude) {
-						int count2 = getRequiredMinCountForChild(ctx, a, involved);
-						if (count2 > 0)
-							return 0;
-					}
-				if (!parent.isRoot())
-					return getRequiredMinCountByParent(ctx, parent.getContainer(), parent, involved);
-				return 1;
-			default:
-				return UNDEF;
-		}
-	}
-
-	protected int getRequiredMinCountForChild(Quantities ctx, Element child, Set<Element> involved) {
-		if (child.getSemanticType() != null && !child.getSemanticType().isInstance(ctx.getDelegate()))
-			return 0;
-		int count = UNDEF;
-		switch (child.getType()) {
-			case ASSIGNMENT:
-				involved.add(child);
-				count = ctx.getAssignmentQuantity(child);
-				break;
-			case GROUP:
-				for (Element a : child.getContents()) {
-					int c = getRequiredMinCountForChild(ctx, a, involved);
-					if (c > count)
-						count = c;
-				}
-				break;
-			case ALTERNATIVE:
-				for (Element a : child.getContents()) {
-					int c = getRequiredMinCountForChild(ctx, a, involved);
-					count = count == UNDEF ? c : c + count;
-				}
-				break;
-			case ACTION:
-				if (child.getSemanticType().isInstance(ctx.getDelegate()))
-					return 1;
-			default:
-				count = UNDEF;
-		}
-		if (child.isMultiple() && count > 1)
-			count = 1;
-		return count;
 	}
 
 	protected boolean isEObjectTransient(EObject obj) {
@@ -1164,7 +1273,7 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 				int mi = getMinCount(obj, a, involved);
 				if (mi != UNDEF)
 					min = min == UNDEF ? mi : mi + min;
-				int ma = getMaxCount(obj, a, involved);
+				int ma = getMaxCount(obj, a, involved, null);
 				if (ma != UNDEF && max != MAX)
 					max = ma == MAX ? ma : max + ma;
 				minmax.put(a, Tuples.create(mi, ma));

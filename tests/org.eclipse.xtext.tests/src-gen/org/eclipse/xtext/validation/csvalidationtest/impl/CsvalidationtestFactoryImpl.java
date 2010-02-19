@@ -97,6 +97,7 @@ public class CsvalidationtestFactoryImpl extends EFactoryImpl implements Csvalid
       case CsvalidationtestPackage.TRANSIENT_OBJECT_SUB: return createTransientObjectSub();
       case CsvalidationtestPackage.TRANSIENT_SERIALIZEABLES1: return createTransientSerializeables1();
       case CsvalidationtestPackage.STATIC_SIMPLIFICATION: return createStaticSimplification();
+      case CsvalidationtestPackage.TWO_VERSION: return createTwoVersion();
       case CsvalidationtestPackage.UNASSIGNED_ACTION2_SUB: return createUnassignedAction2Sub();
       case CsvalidationtestPackage.UNASSIGNED_ACTION2_SUB1: return createUnassignedAction2Sub1();
       case CsvalidationtestPackage.UNASSIGNED_ACTION2_SUB2: return createUnassignedAction2Sub2();
@@ -458,6 +459,17 @@ public class CsvalidationtestFactoryImpl extends EFactoryImpl implements Csvalid
   {
     StaticSimplificationImpl staticSimplification = new StaticSimplificationImpl();
     return staticSimplification;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public TwoVersion createTwoVersion()
+  {
+    TwoVersionImpl twoVersion = new TwoVersionImpl();
+    return twoVersion;
   }
 
   /**

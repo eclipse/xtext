@@ -65,6 +65,9 @@ protected class ThisRootNode extends RootToken {
 			case 27: return new TransientObjectSub_Group(this, this, 27, inst);
 			case 28: return new TransientSerializeables1_Group(this, this, 28, inst);
 			case 29: return new StaticSimplification_Group(this, this, 29, inst);
+			case 30: return new TwoVersion_Group(this, this, 30, inst);
+			case 31: return new TwoVersionNo1_Group(this, this, 31, inst);
+			case 32: return new TwoVersionNo2_Group(this, this, 32, inst);
 			default: return null;
 		}	
 	}	
@@ -80,7 +83,8 @@ protected class ThisRootNode extends RootToken {
  *   UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|x13=
  *   Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
  *   List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2|x24=
- *   TransientObject|x25=TransientSerializeables1|x26=StaticSimplification;
+ *   TransientObject|x25=TransientSerializeables1|x26=StaticSimplification|x27=
+ *   TwoVersion;
  *
  **/
 
@@ -90,7 +94,8 @@ protected class ThisRootNode extends RootToken {
 // UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|x13=
 // Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
 // List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2|x24=
-// TransientObject|x25=TransientSerializeables1|x26=StaticSimplification
+// TransientObject|x25=TransientSerializeables1|x26=StaticSimplification|x27=
+// TwoVersion
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -131,6 +136,7 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 23: return new Model_X24Assignment_23(parent, this, 23, inst);
 			case 24: return new Model_X25Assignment_24(parent, this, 24, inst);
 			case 25: return new Model_X26Assignment_25(parent, this, 25, inst);
+			case 26: return new Model_X27Assignment_26(parent, this, 26, inst);
 			default: return null;
 		}	
 	}	
@@ -1296,6 +1302,51 @@ protected class Model_X26Assignment_25 extends AssignmentToken  {
 			if(param.isInstanceOf(grammarAccess.getStaticSimplificationRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
 				element = grammarAccess.getModelAccess().getX26StaticSimplificationParserRuleCall_25_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, consumed);
+		}	
+	}	
+}
+
+// x27=TwoVersion
+protected class Model_X27Assignment_26 extends AssignmentToken  {
+	
+	public Model_X27Assignment_26(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getX27Assignment_26();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersion_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("x27",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("x27");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getTwoVersionRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getModelAccess().getX27TwoVersionParserRuleCall_26_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -8066,5 +8117,915 @@ protected class StaticSimplification_Val3Assignment_3_1_1 extends AssignmentToke
 
 
 /************ end Rule StaticSimplification ****************/
+
+
+/************ begin Rule TwoVersion ****************
+ *
+ * TwoVersion:
+ *   "#27" (TwoVersionNo1|TwoVersionNo2);
+ *
+ **/
+
+// "#27" (TwoVersionNo1|TwoVersionNo2)
+protected class TwoVersion_Group extends GroupToken {
+	
+	public TwoVersion_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getTwoVersionAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersion_Alternatives_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getTwoVersionRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "#27"
+protected class TwoVersion_NumberSignDigitTwoDigitSevenKeyword_0 extends KeywordToken  {
+	
+	public TwoVersion_NumberSignDigitTwoDigitSevenKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getTwoVersionAccess().getNumberSignDigitTwoDigitSevenKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// TwoVersionNo1|TwoVersionNo2
+protected class TwoVersion_Alternatives_1 extends AlternativesToken {
+
+	public TwoVersion_Alternatives_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getTwoVersionAccess().getAlternatives_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersion_TwoVersionNo1ParserRuleCall_1_0(parent, this, 0, inst);
+			case 1: return new TwoVersion_TwoVersionNo2ParserRuleCall_1_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// TwoVersionNo1
+protected class TwoVersion_TwoVersionNo1ParserRuleCall_1_0 extends RuleCallToken {
+	
+	public TwoVersion_TwoVersionNo1ParserRuleCall_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getTwoVersionAccess().getTwoVersionNo1ParserRuleCall_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo1_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(TwoVersionNo1_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getTwoVersionNo1Rule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersion_NumberSignDigitTwoDigitSevenKeyword_0(parent, next, actIndex, inst);
+			default: return null;
+		}	
+	}	
+}
+
+// TwoVersionNo2
+protected class TwoVersion_TwoVersionNo2ParserRuleCall_1_1 extends RuleCallToken {
+	
+	public TwoVersion_TwoVersionNo2ParserRuleCall_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getTwoVersionAccess().getTwoVersionNo2ParserRuleCall_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo2_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(TwoVersionNo2_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getTwoVersionNo2Rule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersion_NumberSignDigitTwoDigitSevenKeyword_0(parent, next, actIndex, inst);
+			default: return null;
+		}	
+	}	
+}
+
+
+
+/************ end Rule TwoVersion ****************/
+
+
+/************ begin Rule TwoVersionNo1 ****************
+ *
+ * TwoVersionNo1 returns TwoVersion:
+ *   shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?;
+ *
+ **/
+
+// shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?
+protected class TwoVersionNo1_Group extends GroupToken {
+	
+	public TwoVersionNo1_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getTwoVersionNo1Access().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo1_Version1Assignment_5(parent, this, 0, inst);
+			case 1: return new TwoVersionNo1_OneKeyword_4(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getTwoVersionNo1Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// shared1=ID?
+protected class TwoVersionNo1_Shared1Assignment_0 extends AssignmentToken  {
+	
+	public TwoVersionNo1_Shared1Assignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTwoVersionNo1Access().getShared1Assignment_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("shared1",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("shared1");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getTwoVersionNo1Access().getShared1IDTerminalRuleCall_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// shared2=ID
+protected class TwoVersionNo1_Shared2Assignment_1 extends AssignmentToken  {
+	
+	public TwoVersionNo1_Shared2Assignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTwoVersionNo1Access().getShared2Assignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo1_Shared1Assignment_0(parent, this, 0, inst);
+			default: return parent.createParentFollower(this, index, index - 1, inst);
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("shared2",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("shared2");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getTwoVersionNo1Access().getShared2IDTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// "short"
+protected class TwoVersionNo1_ShortKeyword_2 extends KeywordToken  {
+	
+	public TwoVersionNo1_ShortKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getTwoVersionNo1Access().getShortKeyword_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo1_Shared2Assignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// (shared3+=ID shared3+=ID*)?
+protected class TwoVersionNo1_Group_3 extends GroupToken {
+	
+	public TwoVersionNo1_Group_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getTwoVersionNo1Access().getGroup_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo1_Shared3Assignment_3_1(parent, this, 0, inst);
+			case 1: return new TwoVersionNo1_Shared3Assignment_3_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// shared3+=ID
+protected class TwoVersionNo1_Shared3Assignment_3_0 extends AssignmentToken  {
+	
+	public TwoVersionNo1_Shared3Assignment_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTwoVersionNo1Access().getShared3Assignment_3_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo1_ShortKeyword_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("shared3",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("shared3");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getTwoVersionNo1Access().getShared3IDTerminalRuleCall_3_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// shared3+=ID*
+protected class TwoVersionNo1_Shared3Assignment_3_1 extends AssignmentToken  {
+	
+	public TwoVersionNo1_Shared3Assignment_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTwoVersionNo1Access().getShared3Assignment_3_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo1_Shared3Assignment_3_1(parent, this, 0, inst);
+			case 1: return new TwoVersionNo1_Shared3Assignment_3_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("shared3",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("shared3");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getTwoVersionNo1Access().getShared3IDTerminalRuleCall_3_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// "one"
+protected class TwoVersionNo1_OneKeyword_4 extends KeywordToken  {
+	
+	public TwoVersionNo1_OneKeyword_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getTwoVersionNo1Access().getOneKeyword_4();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo1_Group_3(parent, this, 0, inst);
+			case 1: return new TwoVersionNo1_ShortKeyword_2(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// version1=ID?
+protected class TwoVersionNo1_Version1Assignment_5 extends AssignmentToken  {
+	
+	public TwoVersionNo1_Version1Assignment_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTwoVersionNo1Access().getVersion1Assignment_5();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo1_OneKeyword_4(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("version1",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("version1");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getTwoVersionNo1Access().getVersion1IDTerminalRuleCall_5_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule TwoVersionNo1 ****************/
+
+
+/************ begin Rule TwoVersionNo2 ****************
+ *
+ * TwoVersionNo2 returns TwoVersion:
+ *   shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)? "extra" extra1=ID? (extra2=ID
+ *   extra3=ID|"two" extra4=ID)?;
+ *
+ **/
+
+// shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)? "extra" extra1=ID? (extra2=ID
+// extra3=ID|"two" extra4=ID)?
+protected class TwoVersionNo2_Group extends GroupToken {
+	
+	public TwoVersionNo2_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getTwoVersionNo2Access().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo2_Alternatives_6(parent, this, 0, inst);
+			case 1: return new TwoVersionNo2_Extra1Assignment_5(parent, this, 1, inst);
+			case 2: return new TwoVersionNo2_ExtraKeyword_4(parent, this, 2, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getTwoVersionNo2Rule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// shared1=ID?
+protected class TwoVersionNo2_Shared1Assignment_0 extends AssignmentToken  {
+	
+	public TwoVersionNo2_Shared1Assignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTwoVersionNo2Access().getShared1Assignment_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("shared1",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("shared1");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getTwoVersionNo2Access().getShared1IDTerminalRuleCall_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// shared2=ID
+protected class TwoVersionNo2_Shared2Assignment_1 extends AssignmentToken  {
+	
+	public TwoVersionNo2_Shared2Assignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTwoVersionNo2Access().getShared2Assignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo2_Shared1Assignment_0(parent, this, 0, inst);
+			default: return parent.createParentFollower(this, index, index - 1, inst);
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("shared2",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("shared2");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getTwoVersionNo2Access().getShared2IDTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// "long"
+protected class TwoVersionNo2_LongKeyword_2 extends KeywordToken  {
+	
+	public TwoVersionNo2_LongKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getTwoVersionNo2Access().getLongKeyword_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo2_Shared2Assignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// (shared3+=ID shared3+=ID*)?
+protected class TwoVersionNo2_Group_3 extends GroupToken {
+	
+	public TwoVersionNo2_Group_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getTwoVersionNo2Access().getGroup_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo2_Shared3Assignment_3_1(parent, this, 0, inst);
+			case 1: return new TwoVersionNo2_Shared3Assignment_3_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// shared3+=ID
+protected class TwoVersionNo2_Shared3Assignment_3_0 extends AssignmentToken  {
+	
+	public TwoVersionNo2_Shared3Assignment_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTwoVersionNo2Access().getShared3Assignment_3_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo2_LongKeyword_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("shared3",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("shared3");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getTwoVersionNo2Access().getShared3IDTerminalRuleCall_3_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// shared3+=ID*
+protected class TwoVersionNo2_Shared3Assignment_3_1 extends AssignmentToken  {
+	
+	public TwoVersionNo2_Shared3Assignment_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTwoVersionNo2Access().getShared3Assignment_3_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo2_Shared3Assignment_3_1(parent, this, 0, inst);
+			case 1: return new TwoVersionNo2_Shared3Assignment_3_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("shared3",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("shared3");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getTwoVersionNo2Access().getShared3IDTerminalRuleCall_3_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// "extra"
+protected class TwoVersionNo2_ExtraKeyword_4 extends KeywordToken  {
+	
+	public TwoVersionNo2_ExtraKeyword_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getTwoVersionNo2Access().getExtraKeyword_4();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo2_Group_3(parent, this, 0, inst);
+			case 1: return new TwoVersionNo2_LongKeyword_2(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// extra1=ID?
+protected class TwoVersionNo2_Extra1Assignment_5 extends AssignmentToken  {
+	
+	public TwoVersionNo2_Extra1Assignment_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTwoVersionNo2Access().getExtra1Assignment_5();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo2_ExtraKeyword_4(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("extra1",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("extra1");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getTwoVersionNo2Access().getExtra1IDTerminalRuleCall_5_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// (extra2=ID extra3=ID|"two" extra4=ID)?
+protected class TwoVersionNo2_Alternatives_6 extends AlternativesToken {
+
+	public TwoVersionNo2_Alternatives_6(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getTwoVersionNo2Access().getAlternatives_6();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo2_Group_6_0(parent, this, 0, inst);
+			case 1: return new TwoVersionNo2_Group_6_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// extra2=ID extra3=ID
+protected class TwoVersionNo2_Group_6_0 extends GroupToken {
+	
+	public TwoVersionNo2_Group_6_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getTwoVersionNo2Access().getGroup_6_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo2_Extra3Assignment_6_0_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// extra2=ID
+protected class TwoVersionNo2_Extra2Assignment_6_0_0 extends AssignmentToken  {
+	
+	public TwoVersionNo2_Extra2Assignment_6_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTwoVersionNo2Access().getExtra2Assignment_6_0_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo2_Extra1Assignment_5(parent, this, 0, inst);
+			case 1: return new TwoVersionNo2_ExtraKeyword_4(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("extra2",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("extra2");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getTwoVersionNo2Access().getExtra2IDTerminalRuleCall_6_0_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// extra3=ID
+protected class TwoVersionNo2_Extra3Assignment_6_0_1 extends AssignmentToken  {
+	
+	public TwoVersionNo2_Extra3Assignment_6_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTwoVersionNo2Access().getExtra3Assignment_6_0_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo2_Extra2Assignment_6_0_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("extra3",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("extra3");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getTwoVersionNo2Access().getExtra3IDTerminalRuleCall_6_0_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// "two" extra4=ID
+protected class TwoVersionNo2_Group_6_1 extends GroupToken {
+	
+	public TwoVersionNo2_Group_6_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getTwoVersionNo2Access().getGroup_6_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo2_Extra4Assignment_6_1_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "two"
+protected class TwoVersionNo2_TwoKeyword_6_1_0 extends KeywordToken  {
+	
+	public TwoVersionNo2_TwoKeyword_6_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getTwoVersionNo2Access().getTwoKeyword_6_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo2_Extra1Assignment_5(parent, this, 0, inst);
+			case 1: return new TwoVersionNo2_ExtraKeyword_4(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// extra4=ID
+protected class TwoVersionNo2_Extra4Assignment_6_1_1 extends AssignmentToken  {
+	
+	public TwoVersionNo2_Extra4Assignment_6_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getTwoVersionNo2Access().getExtra4Assignment_6_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new TwoVersionNo2_TwoKeyword_6_1_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("extra4",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("extra4");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getTwoVersionNo2Access().getExtra4IDTerminalRuleCall_6_1_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+
+
+/************ end Rule TwoVersionNo2 ****************/
 
 }

@@ -41,6 +41,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX24 <em>X24</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX25 <em>X25</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX26 <em>X26</em>}</li>
+ *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX27 <em>X27</em>}</li>
  * </ul>
  * </p>
  *
@@ -725,5 +726,31 @@ public interface Model extends EObject
    * @generated
    */
   void setX26(StaticSimplification value);
+
+  /**
+   * Returns the value of the '<em><b>X27</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>X27</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>X27</em>' containment reference.
+   * @see #setX27(TwoVersion)
+   * @see org.eclipse.xtext.validation.csvalidationtest.CsvalidationtestPackage#getModel_X27()
+   * @model containment="true"
+   * @generated
+   */
+  TwoVersion getX27();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.validation.csvalidationtest.Model#getX27 <em>X27</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>X27</em>' containment reference.
+   * @see #getX27()
+   * @generated
+   */
+  void setX27(TwoVersion value);
 
 } // Model

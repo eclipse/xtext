@@ -116,6 +116,40 @@ public class EcoreUtil2 extends EcoreUtil {
 		return result;
 	}
 
+	public static TreeIterator<EObject> eAll(final EObject obj) {
+		return new TreeIterator<EObject>() {
+			private TreeIterator<EObject> it = null;
+			private boolean pruned = false;
+
+			public void prune() {
+				if (it != null)
+					it.prune();
+				else
+					pruned = true;
+			}
+
+			public boolean hasNext() {
+				if (it != null)
+					return it.hasNext();
+				return !pruned;
+			}
+
+			public EObject next() {
+				if (it != null)
+					return it.next();
+				it = obj.eAllContents();
+				return obj;
+			}
+
+			public void remove() {
+				if (it != null)
+					it.remove();
+				else
+					EcoreUtil.remove(obj);
+			}
+		};
+	}
+
 	public static List<EObject> eAllContentsAsList(EObject ele) {
 		List<EObject> result = new ArrayList<EObject>();
 		TreeIterator<EObject> iterator = ele.eAllContents();
@@ -266,8 +300,8 @@ public class EcoreUtil2 extends EcoreUtil {
 					EDataType actual = (EDataType) existingFeature.getEType();
 					Class<?> expectedInstanceClass = ReflectionUtil.getObjectType(expected.getInstanceClass());
 					Class<?> actualInstanceClass = ReflectionUtil.getObjectType(actual.getInstanceClass());
-					return actual.equals(expected) || 
-						expectedInstanceClass != null && actualInstanceClass != null && actualInstanceClass.isAssignableFrom(expectedInstanceClass);
+					return actual.equals(expected) || expectedInstanceClass != null && actualInstanceClass != null
+							&& actualInstanceClass.isAssignableFrom(expectedInstanceClass);
 				}
 			}
 		}
@@ -391,7 +425,7 @@ public class EcoreUtil2 extends EcoreUtil {
 		}
 		return null;
 	}
-	
+
 	/**
 	 * @see org.eclipse.emf.ecore.util.EcoreUtil#resolveAll(Resource)
 	 */
@@ -414,19 +448,21 @@ public class EcoreUtil2 extends EcoreUtil {
 	}
 
 	private static void resolveCrossReferences(EObject eObject, CancelIndicator monitor) {
-		for (Iterator<EObject> i = eObject.eCrossReferences().iterator(); !monitor.isCanceled() && i.hasNext(); i.next()) {
+		for (Iterator<EObject> i = eObject.eCrossReferences().iterator(); !monitor.isCanceled() && i.hasNext(); i
+				.next()) {
 			// The loop resolves the cross references by visiting them.
 		}
 	}
 
 	private final static String delim = "«";
-	
+
 	/**
-	 * creates an external form of the given EReference. Use {@link #getEReferenceFromExternalForm(org.eclipse.emf.ecore.EPackage.Registry, String)}
-	 * to retrieve the {@link EReference} back.
+	 * creates an external form of the given EReference. Use
+	 * {@link #getEReferenceFromExternalForm(org.eclipse.emf.ecore.EPackage.Registry, String)} to retrieve the
+	 * {@link EReference} back.
 	 */
 	public static String toExternalForm(EReference ref) {
-		if (ref==null)
+		if (ref == null)
 			return null;
 		EClass class1 = ref.getEContainingClass();
 		if (class1 == null) // some references may be contained in an EAnnotation
@@ -436,13 +472,12 @@ public class EcoreUtil2 extends EcoreUtil {
 		buff.append(delim).append(class1.getFeatureID(ref));
 		return buff.toString();
 	}
-	
+
 	/**
-	 * looks up the EReference in the passed registry, given the external form.
-	 * if registry == null this
+	 * looks up the EReference in the passed registry, given the external form. if registry == null this
 	 */
 	public static EReference getEReferenceFromExternalForm(EPackage.Registry registry, String externalForm) {
-		if (externalForm==null)
+		if (externalForm == null)
 			return null;
 		String[] split = externalForm.split(delim);
 		if (split.length != 3) {

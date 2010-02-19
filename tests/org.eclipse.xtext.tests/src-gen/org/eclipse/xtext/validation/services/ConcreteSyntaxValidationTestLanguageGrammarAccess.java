@@ -72,6 +72,8 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		private final RuleCall cX25TransientSerializeables1ParserRuleCall_24_0 = (RuleCall)cX25Assignment_24.eContents().get(0);
 		private final Assignment cX26Assignment_25 = (Assignment)cAlternatives.eContents().get(25);
 		private final RuleCall cX26StaticSimplificationParserRuleCall_25_0 = (RuleCall)cX26Assignment_25.eContents().get(0);
+		private final Assignment cX27Assignment_26 = (Assignment)cAlternatives.eContents().get(26);
+		private final RuleCall cX27TwoVersionParserRuleCall_26_0 = (RuleCall)cX27Assignment_26.eContents().get(0);
 		
 		//Model:
 		//  x1=SimpleGroup|x2=SimpleAlternative|x3=SimpleMultiplicities|x4=
@@ -80,7 +82,8 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//  UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|x13=
 		//  Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
 		//  List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2|x24=
-		//  TransientObject|x25=TransientSerializeables1|x26=StaticSimplification;
+		//  TransientObject|x25=TransientSerializeables1|x26=StaticSimplification|x27=
+		//  TwoVersion;
 		public ParserRule getRule() { return rule; }
 
 		//x1=SimpleGroup|x2=SimpleAlternative|x3=SimpleMultiplicities|x4=
@@ -89,7 +92,8 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|x13=
 		//Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
 		//List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2|x24=
-		//TransientObject|x25=TransientSerializeables1|x26=StaticSimplification
+		//TransientObject|x25=TransientSerializeables1|x26=StaticSimplification|x27=
+		//TwoVersion
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//x1=SimpleGroup
@@ -247,6 +251,12 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 
 		//StaticSimplification
 		public RuleCall getX26StaticSimplificationParserRuleCall_25_0() { return cX26StaticSimplificationParserRuleCall_25_0; }
+
+		//x27=TwoVersion
+		public Assignment getX27Assignment_26() { return cX27Assignment_26; }
+
+		//TwoVersion
+		public RuleCall getX27TwoVersionParserRuleCall_26_0() { return cX27TwoVersionParserRuleCall_26_0; }
 	}
 
 	public class SimpleGroupElements extends AbstractParserRuleElementFinder {
@@ -1749,6 +1759,204 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 		//ID
 		public RuleCall getVal3IDTerminalRuleCall_3_1_1_0() { return cVal3IDTerminalRuleCall_3_1_1_0; }
 	}
+
+	public class TwoVersionElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TwoVersion");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitTwoDigitSevenKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Alternatives cAlternatives_1 = (Alternatives)cGroup.eContents().get(1);
+		private final RuleCall cTwoVersionNo1ParserRuleCall_1_0 = (RuleCall)cAlternatives_1.eContents().get(0);
+		private final RuleCall cTwoVersionNo2ParserRuleCall_1_1 = (RuleCall)cAlternatives_1.eContents().get(1);
+		
+		//TwoVersion:
+		//  "#27" (TwoVersionNo1|TwoVersionNo2);
+		public ParserRule getRule() { return rule; }
+
+		//"#27" (TwoVersionNo1|TwoVersionNo2)
+		public Group getGroup() { return cGroup; }
+
+		//"#27"
+		public Keyword getNumberSignDigitTwoDigitSevenKeyword_0() { return cNumberSignDigitTwoDigitSevenKeyword_0; }
+
+		//TwoVersionNo1|TwoVersionNo2
+		public Alternatives getAlternatives_1() { return cAlternatives_1; }
+
+		//TwoVersionNo1
+		public RuleCall getTwoVersionNo1ParserRuleCall_1_0() { return cTwoVersionNo1ParserRuleCall_1_0; }
+
+		//TwoVersionNo2
+		public RuleCall getTwoVersionNo2ParserRuleCall_1_1() { return cTwoVersionNo2ParserRuleCall_1_1; }
+	}
+
+	public class TwoVersionNo1Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TwoVersionNo1");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cShared1Assignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cShared1IDTerminalRuleCall_0_0 = (RuleCall)cShared1Assignment_0.eContents().get(0);
+		private final Assignment cShared2Assignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cShared2IDTerminalRuleCall_1_0 = (RuleCall)cShared2Assignment_1.eContents().get(0);
+		private final Keyword cShortKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Assignment cShared3Assignment_3_0 = (Assignment)cGroup_3.eContents().get(0);
+		private final RuleCall cShared3IDTerminalRuleCall_3_0_0 = (RuleCall)cShared3Assignment_3_0.eContents().get(0);
+		private final Assignment cShared3Assignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cShared3IDTerminalRuleCall_3_1_0 = (RuleCall)cShared3Assignment_3_1.eContents().get(0);
+		private final Keyword cOneKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cVersion1Assignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cVersion1IDTerminalRuleCall_5_0 = (RuleCall)cVersion1Assignment_5.eContents().get(0);
+		
+		//TwoVersionNo1 returns TwoVersion:
+		//  shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?;
+		public ParserRule getRule() { return rule; }
+
+		//shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?
+		public Group getGroup() { return cGroup; }
+
+		//shared1=ID?
+		public Assignment getShared1Assignment_0() { return cShared1Assignment_0; }
+
+		//ID
+		public RuleCall getShared1IDTerminalRuleCall_0_0() { return cShared1IDTerminalRuleCall_0_0; }
+
+		//shared2=ID
+		public Assignment getShared2Assignment_1() { return cShared2Assignment_1; }
+
+		//ID
+		public RuleCall getShared2IDTerminalRuleCall_1_0() { return cShared2IDTerminalRuleCall_1_0; }
+
+		//"short"
+		public Keyword getShortKeyword_2() { return cShortKeyword_2; }
+
+		//(shared3+=ID shared3+=ID*)?
+		public Group getGroup_3() { return cGroup_3; }
+
+		//shared3+=ID
+		public Assignment getShared3Assignment_3_0() { return cShared3Assignment_3_0; }
+
+		//ID
+		public RuleCall getShared3IDTerminalRuleCall_3_0_0() { return cShared3IDTerminalRuleCall_3_0_0; }
+
+		//shared3+=ID*
+		public Assignment getShared3Assignment_3_1() { return cShared3Assignment_3_1; }
+
+		//ID
+		public RuleCall getShared3IDTerminalRuleCall_3_1_0() { return cShared3IDTerminalRuleCall_3_1_0; }
+
+		//"one"
+		public Keyword getOneKeyword_4() { return cOneKeyword_4; }
+
+		//version1=ID?
+		public Assignment getVersion1Assignment_5() { return cVersion1Assignment_5; }
+
+		//ID
+		public RuleCall getVersion1IDTerminalRuleCall_5_0() { return cVersion1IDTerminalRuleCall_5_0; }
+	}
+
+	public class TwoVersionNo2Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "TwoVersionNo2");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Assignment cShared1Assignment_0 = (Assignment)cGroup.eContents().get(0);
+		private final RuleCall cShared1IDTerminalRuleCall_0_0 = (RuleCall)cShared1Assignment_0.eContents().get(0);
+		private final Assignment cShared2Assignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cShared2IDTerminalRuleCall_1_0 = (RuleCall)cShared2Assignment_1.eContents().get(0);
+		private final Keyword cLongKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Group cGroup_3 = (Group)cGroup.eContents().get(3);
+		private final Assignment cShared3Assignment_3_0 = (Assignment)cGroup_3.eContents().get(0);
+		private final RuleCall cShared3IDTerminalRuleCall_3_0_0 = (RuleCall)cShared3Assignment_3_0.eContents().get(0);
+		private final Assignment cShared3Assignment_3_1 = (Assignment)cGroup_3.eContents().get(1);
+		private final RuleCall cShared3IDTerminalRuleCall_3_1_0 = (RuleCall)cShared3Assignment_3_1.eContents().get(0);
+		private final Keyword cExtraKeyword_4 = (Keyword)cGroup.eContents().get(4);
+		private final Assignment cExtra1Assignment_5 = (Assignment)cGroup.eContents().get(5);
+		private final RuleCall cExtra1IDTerminalRuleCall_5_0 = (RuleCall)cExtra1Assignment_5.eContents().get(0);
+		private final Alternatives cAlternatives_6 = (Alternatives)cGroup.eContents().get(6);
+		private final Group cGroup_6_0 = (Group)cAlternatives_6.eContents().get(0);
+		private final Assignment cExtra2Assignment_6_0_0 = (Assignment)cGroup_6_0.eContents().get(0);
+		private final RuleCall cExtra2IDTerminalRuleCall_6_0_0_0 = (RuleCall)cExtra2Assignment_6_0_0.eContents().get(0);
+		private final Assignment cExtra3Assignment_6_0_1 = (Assignment)cGroup_6_0.eContents().get(1);
+		private final RuleCall cExtra3IDTerminalRuleCall_6_0_1_0 = (RuleCall)cExtra3Assignment_6_0_1.eContents().get(0);
+		private final Group cGroup_6_1 = (Group)cAlternatives_6.eContents().get(1);
+		private final Keyword cTwoKeyword_6_1_0 = (Keyword)cGroup_6_1.eContents().get(0);
+		private final Assignment cExtra4Assignment_6_1_1 = (Assignment)cGroup_6_1.eContents().get(1);
+		private final RuleCall cExtra4IDTerminalRuleCall_6_1_1_0 = (RuleCall)cExtra4Assignment_6_1_1.eContents().get(0);
+		
+		//TwoVersionNo2 returns TwoVersion:
+		//  shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)? "extra" extra1=ID? (extra2=ID
+		//  extra3=ID|"two" extra4=ID)?;
+		public ParserRule getRule() { return rule; }
+
+		//shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)? "extra" extra1=ID? (extra2=ID
+		//extra3=ID|"two" extra4=ID)?
+		public Group getGroup() { return cGroup; }
+
+		//shared1=ID?
+		public Assignment getShared1Assignment_0() { return cShared1Assignment_0; }
+
+		//ID
+		public RuleCall getShared1IDTerminalRuleCall_0_0() { return cShared1IDTerminalRuleCall_0_0; }
+
+		//shared2=ID
+		public Assignment getShared2Assignment_1() { return cShared2Assignment_1; }
+
+		//ID
+		public RuleCall getShared2IDTerminalRuleCall_1_0() { return cShared2IDTerminalRuleCall_1_0; }
+
+		//"long"
+		public Keyword getLongKeyword_2() { return cLongKeyword_2; }
+
+		//(shared3+=ID shared3+=ID*)?
+		public Group getGroup_3() { return cGroup_3; }
+
+		//shared3+=ID
+		public Assignment getShared3Assignment_3_0() { return cShared3Assignment_3_0; }
+
+		//ID
+		public RuleCall getShared3IDTerminalRuleCall_3_0_0() { return cShared3IDTerminalRuleCall_3_0_0; }
+
+		//shared3+=ID*
+		public Assignment getShared3Assignment_3_1() { return cShared3Assignment_3_1; }
+
+		//ID
+		public RuleCall getShared3IDTerminalRuleCall_3_1_0() { return cShared3IDTerminalRuleCall_3_1_0; }
+
+		//"extra"
+		public Keyword getExtraKeyword_4() { return cExtraKeyword_4; }
+
+		//extra1=ID?
+		public Assignment getExtra1Assignment_5() { return cExtra1Assignment_5; }
+
+		//ID
+		public RuleCall getExtra1IDTerminalRuleCall_5_0() { return cExtra1IDTerminalRuleCall_5_0; }
+
+		//(extra2=ID extra3=ID|"two" extra4=ID)?
+		public Alternatives getAlternatives_6() { return cAlternatives_6; }
+
+		//extra2=ID extra3=ID
+		public Group getGroup_6_0() { return cGroup_6_0; }
+
+		//extra2=ID
+		public Assignment getExtra2Assignment_6_0_0() { return cExtra2Assignment_6_0_0; }
+
+		//ID
+		public RuleCall getExtra2IDTerminalRuleCall_6_0_0_0() { return cExtra2IDTerminalRuleCall_6_0_0_0; }
+
+		//extra3=ID
+		public Assignment getExtra3Assignment_6_0_1() { return cExtra3Assignment_6_0_1; }
+
+		//ID
+		public RuleCall getExtra3IDTerminalRuleCall_6_0_1_0() { return cExtra3IDTerminalRuleCall_6_0_1_0; }
+
+		//"two" extra4=ID
+		public Group getGroup_6_1() { return cGroup_6_1; }
+
+		//"two"
+		public Keyword getTwoKeyword_6_1_0() { return cTwoKeyword_6_1_0; }
+
+		//extra4=ID
+		public Assignment getExtra4Assignment_6_1_1() { return cExtra4Assignment_6_1_1; }
+
+		//ID
+		public RuleCall getExtra4IDTerminalRuleCall_6_1_1_0() { return cExtra4IDTerminalRuleCall_6_1_1_0; }
+	}
 	
 	
 	public class TransientSerializeables1EnumElements extends AbstractEnumRuleElementFinder {
@@ -1810,6 +2018,9 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	private TransientSerializeables1Elements pTransientSerializeables1;
 	private TransientSerializeables1EnumElements unknownRuleTransientSerializeables1Enum;
 	private StaticSimplificationElements pStaticSimplification;
+	private TwoVersionElements pTwoVersion;
+	private TwoVersionNo1Elements pTwoVersionNo1;
+	private TwoVersionNo2Elements pTwoVersionNo2;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -1839,7 +2050,8 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	//  UnassignedAction3|x11=UnassignedRuleCall1|x12=UnassignedRuleCall2|x13=
 	//  Combination1|x14=Combination2|x15=Combination3|x16=Combination4|x17=List1|x18=
 	//  List2|x19=List3|x20=List4|x21=List5|x22=AltList1|x23=AltList2|x24=
-	//  TransientObject|x25=TransientSerializeables1|x26=StaticSimplification;
+	//  TransientObject|x25=TransientSerializeables1|x26=StaticSimplification|x27=
+	//  TwoVersion;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -2149,6 +2361,37 @@ public class ConcreteSyntaxValidationTestLanguageGrammarAccess extends AbstractG
 	
 	public ParserRule getStaticSimplificationRule() {
 		return getStaticSimplificationAccess().getRule();
+	}
+
+	//TwoVersion:
+	//  "#27" (TwoVersionNo1|TwoVersionNo2);
+	public TwoVersionElements getTwoVersionAccess() {
+		return (pTwoVersion != null) ? pTwoVersion : (pTwoVersion = new TwoVersionElements());
+	}
+	
+	public ParserRule getTwoVersionRule() {
+		return getTwoVersionAccess().getRule();
+	}
+
+	//TwoVersionNo1 returns TwoVersion:
+	//  shared1=ID? shared2=ID "short" (shared3+=ID shared3+=ID*)? "one" version1=ID?;
+	public TwoVersionNo1Elements getTwoVersionNo1Access() {
+		return (pTwoVersionNo1 != null) ? pTwoVersionNo1 : (pTwoVersionNo1 = new TwoVersionNo1Elements());
+	}
+	
+	public ParserRule getTwoVersionNo1Rule() {
+		return getTwoVersionNo1Access().getRule();
+	}
+
+	//TwoVersionNo2 returns TwoVersion:
+	//  shared1=ID? shared2=ID "long" (shared3+=ID shared3+=ID*)? "extra" extra1=ID? (extra2=ID
+	//  extra3=ID|"two" extra4=ID)?;
+	public TwoVersionNo2Elements getTwoVersionNo2Access() {
+		return (pTwoVersionNo2 != null) ? pTwoVersionNo2 : (pTwoVersionNo2 = new TwoVersionNo2Elements());
+	}
+	
+	public ParserRule getTwoVersionNo2Rule() {
+		return getTwoVersionNo2Access().getRule();
 	}
 
 	//terminal ID:

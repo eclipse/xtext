@@ -300,6 +300,13 @@ public class CsvalidationtestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case CsvalidationtestPackage.TWO_VERSION:
+      {
+        TwoVersion twoVersion = (TwoVersion)theEObject;
+        T result = caseTwoVersion(twoVersion);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case CsvalidationtestPackage.UNASSIGNED_ACTION2_SUB:
       {
         UnassignedAction2Sub unassignedAction2Sub = (UnassignedAction2Sub)theEObject;
@@ -805,6 +812,22 @@ public class CsvalidationtestSwitch<T>
    * @generated
    */
   public T caseStaticSimplification(StaticSimplification object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Two Version</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Two Version</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseTwoVersion(TwoVersion object)
   {
     return null;
   }

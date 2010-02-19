@@ -734,6 +734,31 @@ ruleModel returns [EObject current=null]
 	    }
 
 )
+)
+    |(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getX27TwoVersionParserRuleCall_26_0(), currentNode); 
+	    }
+		lv_x27_26_0=ruleTwoVersion		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"x27",
+	        		lv_x27_26_0, 
+	        		"TwoVersion", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
 ))
 ;
 
@@ -3783,6 +3808,431 @@ ruleStaticSimplification returns [EObject current=null]
 
 )
 )+)?))
+;
+
+
+
+
+
+// Entry rule entryRuleTwoVersion
+entryRuleTwoVersion returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getTwoVersionRule(), currentNode); }
+	 iv_ruleTwoVersion=ruleTwoVersion 
+	 { $current=$iv_ruleTwoVersion.current; } 
+	 EOF 
+;
+
+// Rule TwoVersion
+ruleTwoVersion returns [EObject current=null] 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(	'#27' 
+    {
+        createLeafNode(grammarAccess.getTwoVersionAccess().getNumberSignDigitTwoDigitSevenKeyword_0(), null); 
+    }
+(
+    { 
+        currentNode=createCompositeNode(grammarAccess.getTwoVersionAccess().getTwoVersionNo1ParserRuleCall_1_0(), currentNode); 
+    }
+    this_TwoVersionNo1_1=ruleTwoVersionNo1
+    { 
+        $current = $this_TwoVersionNo1_1.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getTwoVersionAccess().getTwoVersionNo2ParserRuleCall_1_1(), currentNode); 
+    }
+    this_TwoVersionNo2_2=ruleTwoVersionNo2
+    { 
+        $current = $this_TwoVersionNo2_2.current; 
+        currentNode = currentNode.getParent();
+    }
+))
+;
+
+
+
+
+
+// Entry rule entryRuleTwoVersionNo1
+entryRuleTwoVersionNo1 returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getTwoVersionNo1Rule(), currentNode); }
+	 iv_ruleTwoVersionNo1=ruleTwoVersionNo1 
+	 { $current=$iv_ruleTwoVersionNo1.current; } 
+	 EOF 
+;
+
+// Rule TwoVersionNo1
+ruleTwoVersionNo1 returns [EObject current=null] 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+((
+(
+		lv_shared1_0_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getTwoVersionNo1Access().getShared1IDTerminalRuleCall_0_0(), "shared1"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTwoVersionNo1Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"shared1",
+	        		lv_shared1_0_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)?(
+(
+		lv_shared2_1_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getTwoVersionNo1Access().getShared2IDTerminalRuleCall_1_0(), "shared2"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTwoVersionNo1Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"shared2",
+	        		lv_shared2_1_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)	'short' 
+    {
+        createLeafNode(grammarAccess.getTwoVersionNo1Access().getShortKeyword_2(), null); 
+    }
+((
+(
+		lv_shared3_3_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getTwoVersionNo1Access().getShared3IDTerminalRuleCall_3_0_0(), "shared3"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTwoVersionNo1Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"shared3",
+	        		lv_shared3_3_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)(
+(
+		lv_shared3_4_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getTwoVersionNo1Access().getShared3IDTerminalRuleCall_3_1_0(), "shared3"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTwoVersionNo1Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"shared3",
+	        		lv_shared3_4_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)*)?	'one' 
+    {
+        createLeafNode(grammarAccess.getTwoVersionNo1Access().getOneKeyword_4(), null); 
+    }
+(
+(
+		lv_version1_6_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getTwoVersionNo1Access().getVersion1IDTerminalRuleCall_5_0(), "version1"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTwoVersionNo1Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"version1",
+	        		lv_version1_6_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)?)
+;
+
+
+
+
+
+// Entry rule entryRuleTwoVersionNo2
+entryRuleTwoVersionNo2 returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getTwoVersionNo2Rule(), currentNode); }
+	 iv_ruleTwoVersionNo2=ruleTwoVersionNo2 
+	 { $current=$iv_ruleTwoVersionNo2.current; } 
+	 EOF 
+;
+
+// Rule TwoVersionNo2
+ruleTwoVersionNo2 returns [EObject current=null] 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+((
+(
+		lv_shared1_0_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getTwoVersionNo2Access().getShared1IDTerminalRuleCall_0_0(), "shared1"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTwoVersionNo2Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"shared1",
+	        		lv_shared1_0_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)?(
+(
+		lv_shared2_1_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getTwoVersionNo2Access().getShared2IDTerminalRuleCall_1_0(), "shared2"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTwoVersionNo2Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"shared2",
+	        		lv_shared2_1_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)	'long' 
+    {
+        createLeafNode(grammarAccess.getTwoVersionNo2Access().getLongKeyword_2(), null); 
+    }
+((
+(
+		lv_shared3_3_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getTwoVersionNo2Access().getShared3IDTerminalRuleCall_3_0_0(), "shared3"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTwoVersionNo2Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"shared3",
+	        		lv_shared3_3_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)(
+(
+		lv_shared3_4_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getTwoVersionNo2Access().getShared3IDTerminalRuleCall_3_1_0(), "shared3"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTwoVersionNo2Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"shared3",
+	        		lv_shared3_4_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)*)?	'extra' 
+    {
+        createLeafNode(grammarAccess.getTwoVersionNo2Access().getExtraKeyword_4(), null); 
+    }
+(
+(
+		lv_extra1_6_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getTwoVersionNo2Access().getExtra1IDTerminalRuleCall_5_0(), "extra1"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTwoVersionNo2Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"extra1",
+	        		lv_extra1_6_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)?(((
+(
+		lv_extra2_7_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getTwoVersionNo2Access().getExtra2IDTerminalRuleCall_6_0_0_0(), "extra2"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTwoVersionNo2Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"extra2",
+	        		lv_extra2_7_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)(
+(
+		lv_extra3_8_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getTwoVersionNo2Access().getExtra3IDTerminalRuleCall_6_0_1_0(), "extra3"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTwoVersionNo2Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"extra3",
+	        		lv_extra3_8_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+))
+    |(	'two' 
+    {
+        createLeafNode(grammarAccess.getTwoVersionNo2Access().getTwoKeyword_6_1_0(), null); 
+    }
+(
+(
+		lv_extra4_10_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getTwoVersionNo2Access().getExtra4IDTerminalRuleCall_6_1_1_0(), "extra4"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getTwoVersionNo2Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"extra4",
+	        		lv_extra4_10_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)))?)
 ;
 
 

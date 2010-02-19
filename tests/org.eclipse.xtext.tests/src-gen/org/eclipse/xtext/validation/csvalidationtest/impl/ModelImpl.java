@@ -36,6 +36,7 @@ import org.eclipse.xtext.validation.csvalidationtest.SimpleMultiplicities;
 import org.eclipse.xtext.validation.csvalidationtest.StaticSimplification;
 import org.eclipse.xtext.validation.csvalidationtest.TransientObject;
 import org.eclipse.xtext.validation.csvalidationtest.TransientSerializeables1;
+import org.eclipse.xtext.validation.csvalidationtest.TwoVersion;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedAction1;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedAction2;
 import org.eclipse.xtext.validation.csvalidationtest.UnassignedAction3;
@@ -75,6 +76,7 @@ import org.eclipse.xtext.validation.csvalidationtest.UnassignedRuleCall2;
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.ModelImpl#getX24 <em>X24</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.ModelImpl#getX25 <em>X25</em>}</li>
  *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.ModelImpl#getX26 <em>X26</em>}</li>
+ *   <li>{@link org.eclipse.xtext.validation.csvalidationtest.impl.ModelImpl#getX27 <em>X27</em>}</li>
  * </ul>
  * </p>
  *
@@ -341,6 +343,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected StaticSimplification x26;
+
+  /**
+   * The cached value of the '{@link #getX27() <em>X27</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getX27()
+   * @generated
+   * @ordered
+   */
+  protected TwoVersion x27;
 
   /**
    * <!-- begin-user-doc -->
@@ -1616,6 +1628,54 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  public TwoVersion getX27()
+  {
+    return x27;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetX27(TwoVersion newX27, NotificationChain msgs)
+  {
+    TwoVersion oldX27 = x27;
+    x27 = newX27;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, CsvalidationtestPackage.MODEL__X27, oldX27, newX27);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setX27(TwoVersion newX27)
+  {
+    if (newX27 != x27)
+    {
+      NotificationChain msgs = null;
+      if (x27 != null)
+        msgs = ((InternalEObject)x27).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - CsvalidationtestPackage.MODEL__X27, null, msgs);
+      if (newX27 != null)
+        msgs = ((InternalEObject)newX27).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - CsvalidationtestPackage.MODEL__X27, null, msgs);
+      msgs = basicSetX27(newX27, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, CsvalidationtestPackage.MODEL__X27, newX27, newX27));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -1673,6 +1733,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return basicSetX25(null, msgs);
       case CsvalidationtestPackage.MODEL__X26:
         return basicSetX26(null, msgs);
+      case CsvalidationtestPackage.MODEL__X27:
+        return basicSetX27(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -1739,6 +1801,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return getX25();
       case CsvalidationtestPackage.MODEL__X26:
         return getX26();
+      case CsvalidationtestPackage.MODEL__X27:
+        return getX27();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -1830,6 +1894,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return;
       case CsvalidationtestPackage.MODEL__X26:
         setX26((StaticSimplification)newValue);
+        return;
+      case CsvalidationtestPackage.MODEL__X27:
+        setX27((TwoVersion)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -1923,6 +1990,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case CsvalidationtestPackage.MODEL__X26:
         setX26((StaticSimplification)null);
         return;
+      case CsvalidationtestPackage.MODEL__X27:
+        setX27((TwoVersion)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -1989,6 +2059,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return x25 != null;
       case CsvalidationtestPackage.MODEL__X26:
         return x26 != null;
+      case CsvalidationtestPackage.MODEL__X27:
+        return x27 != null;
     }
     return super.eIsSet(featureID);
   }

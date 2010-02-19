@@ -223,6 +223,11 @@ public class CsvalidationtestAdapterFactory extends AdapterFactoryImpl
         return createStaticSimplificationAdapter();
       }
       @Override
+      public Adapter caseTwoVersion(TwoVersion object)
+      {
+        return createTwoVersionAdapter();
+      }
+      @Override
       public Adapter caseUnassignedAction2Sub(UnassignedAction2Sub object)
       {
         return createUnassignedAction2SubAdapter();
@@ -700,6 +705,21 @@ public class CsvalidationtestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createStaticSimplificationAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.validation.csvalidationtest.TwoVersion <em>Two Version</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.validation.csvalidationtest.TwoVersion
+   * @generated
+   */
+  public Adapter createTwoVersionAdapter()
   {
     return null;
   }
