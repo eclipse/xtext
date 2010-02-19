@@ -72,7 +72,7 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	@Inject
 	private IContentProposalPriorities priorities;
 
-	@Inject
+	@Inject@ContentProposalLabelProvider
 	private ILabelProvider labelProvider;
 	
 	@Inject

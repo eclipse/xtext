@@ -45,7 +45,7 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 		
 	}
 	
-	@Inject
+	@Inject@HyperlinkLabelProvider
 	private ILabelProvider labelProvider;
 
 	@Inject

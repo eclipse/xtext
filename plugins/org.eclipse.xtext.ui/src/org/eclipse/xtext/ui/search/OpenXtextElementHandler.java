@@ -17,6 +17,7 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
+import org.eclipse.xtext.ui.label.GlobalDescriptionLabelProvider;
 
 import com.google.inject.Inject;
 
@@ -33,12 +34,15 @@ public class OpenXtextElementHandler extends AbstractHandler {
 	
 	@Inject
 	private IXtextEObjectSearch searchEngine;
-
+	
+	@Inject
+	private GlobalDescriptionLabelProvider globalDescriptionLabelProvider;
+	
 	private static final Logger LOG = Logger.getLogger(OpenXtextElementHandler.class);
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		Shell activeShell = Display.getCurrent().getActiveShell();
-		XtextEObjectSearchDialog searchDialog = new XtextEObjectSearchDialog(activeShell, searchEngine);
+		XtextEObjectSearchDialog searchDialog = new XtextEObjectSearchDialog(activeShell, searchEngine, globalDescriptionLabelProvider);
 		int result = searchDialog.open();
 		if (result == Window.OK) {
 			try {

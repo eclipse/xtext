@@ -28,21 +28,6 @@ public abstract class AbstractConcreteSyntaxValidationTestLanguageRuntimeModule 
 	}
 	
 	
-	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
-	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
-		return org.eclipse.xtext.validation.services.ConcreteSyntaxValidationTestLanguageGrammarAccess.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.validation.parser.packrat.ConcreteSyntaxValidationTestLanguagePackratParser.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.validation.parseTreeConstruction.ConcreteSyntaxValidationTestLanguageParsetreeConstructor.class;
-	}
-
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.validation.parser.antlr.ConcreteSyntaxValidationTestLanguageParser.class;
@@ -76,6 +61,16 @@ public abstract class AbstractConcreteSyntaxValidationTestLanguageRuntimeModule 
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
+	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
+		return org.eclipse.xtext.validation.services.ConcreteSyntaxValidationTestLanguageGrammarAccess.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
+		return org.eclipse.xtext.validation.parseTreeConstruction.ConcreteSyntaxValidationTestLanguageParsetreeConstructor.class;
 	}
 
 }

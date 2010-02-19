@@ -17,7 +17,6 @@ import org.eclipse.core.runtime.Platform;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.IRegion;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.StyledString.Styler;
@@ -32,7 +31,6 @@ public class ContentOutlineNode implements IAdaptable {
 
 	private StyledString styledString;
 	private Image image;
-	private ImageDescriptor imageDescriptor;
 	private IRegion region;
 	private List<ContentOutlineNode> children;
 	private ContentOutlineNode parent;
@@ -50,22 +48,13 @@ public class ContentOutlineNode implements IAdaptable {
 		this.styledString = styledString;
 	}
 
-	public ContentOutlineNode(StyledString styledString, Image image, ImageDescriptor imageDescriptor, IRegion region,
+	public ContentOutlineNode(StyledString styledString, Image image, IRegion region,
 			IEObjectHandle<EObject> eObjectHandle, EClass eClass) {
 		this.styledString = styledString;
 		this.image = image;
-		this.imageDescriptor = imageDescriptor;
 		this.region = region;
 		this.handle = eObjectHandle;
 		this.eClass = eClass;
-	}
-
-	public void setLabel(String label) {
-		this.styledString = new StyledString(label);
-	}
-
-	public String getLabel() {
-		return null != styledString ? styledString.getString() : null;
 	}
 
 	public void setStyledString(StyledString styledString) {
@@ -75,6 +64,14 @@ public class ContentOutlineNode implements IAdaptable {
 	public StyledString getStyledString() {
 		return styledString;
 	}
+	
+	public String getLabel() {
+		return styledString != null ? styledString.getString() : "";
+	}
+	
+	public void setLabel(String label) {
+		styledString = new StyledString(label);
+	}
 
 	public void setImage(Image image) {
 		this.image = image;
@@ -82,14 +79,6 @@ public class ContentOutlineNode implements IAdaptable {
 
 	public Image getImage() {
 		return image;
-	}
-
-	public void setImageDescriptor(ImageDescriptor imageDescriptor) {
-		this.imageDescriptor = imageDescriptor;
-	}
-
-	public ImageDescriptor getImageDescriptor() {
-		return imageDescriptor;
 	}
 
 	public void addChildren(ContentOutlineNode contentOutlineNode) {

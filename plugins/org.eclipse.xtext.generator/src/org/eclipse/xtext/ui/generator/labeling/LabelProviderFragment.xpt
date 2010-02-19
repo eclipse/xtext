@@ -15,20 +15,32 @@
 «EXTENSION org::eclipse::xtext::generator::Naming»
 
 «DEFINE generate FOR Grammar-»
- «FILE qualifiedName().asPath()+".java" SRC_UI -»
+	«EXPAND eObjectLabelProvider-»
+	«EXPAND descriptionLabelProvider-» 
+«ENDDEFINE»
+
+«DEFINE eObjectLabelProvider FOR Grammar-»
+«FILE eObjectLabelProviderQualifiedName().asPath()+".java" SRC_UI -»
 /*
 «fileHeader()»
 */
-package «qualifiedName().toJavaPackage()»;
+package «eObjectLabelProviderQualifiedName().toJavaPackage()»;
 
-import org.eclipse.xtext.ui.DefaultLabelProvider;
+import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 
 /**
+ * Provides labels for a EObjects.
+ * 
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
-public class «qualifiedName().toSimpleName()» extends DefaultLabelProvider {
+public class «eObjectLabelProviderQualifiedName().toSimpleName()» extends DefaultEObjectLabelProvider {
+
+	@Inject
+	public «descriptionLabelProviderQualifiedName().toSimpleName()»(AdapterFactoryLabelProvider delegate) {
+		super(delegate);
+	}
+
 /*
-	
 	//Labels and icons can be computed like this:
 	
 	String text(MyModel ele) {
@@ -38,8 +50,39 @@ public class «qualifiedName().toSimpleName()» extends DefaultLabelProvider {
     String image(MyModel ele) {
       return "MyModel.gif";
     }
-	 
 */
+}
+«ENDFILE»
+«ENDDEFINE»
+
+«DEFINE descriptionLabelProvider FOR Grammar-»
+«FILE descriptionLabelProviderQualifiedName().asPath()+".java" SRC_UI -»
+/*
+«fileHeader()»
+*/
+package «descriptionLabelProviderQualifiedName().toJavaPackage()»;
+
+import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
+
+/**
+ * Provides labels for a IEObjectDescriptions and IResourceDescriptions.
+ * 
+ * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
+ */
+public class «descriptionLabelProviderQualifiedName().toSimpleName()» extends DefaultDescriptionLabelProvider {
+
+/*
+	//Labels and icons can be computed like this:
+	
+	String text(IEObjectDescription ele) {
+	  return "my "+ele.getName();
+	}
+	 
+    String image(IEObjectDescription ele) {
+      return ele.getEClass().getName() + ".gif";
+    }	 
+*/
+
 }
 «ENDFILE»
 «ENDDEFINE»

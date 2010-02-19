@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.resource;
 
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 
 import com.google.inject.ImplementedBy;
@@ -23,7 +24,7 @@ public interface IResourceUIServiceProvider extends IResourceServiceProvider {
 	/**
 	 * @return the EObject description label provider for this service manager.
 	 */
-	IDescriptionLabelProvider getDescriptionLabelProvider();
+	ILabelProvider getLabelProvider();
 	
 	/**
 	 * Tells whether the given URI together with the underlying {@link IStorage} can be handled by this {@link IResourceServiceProvider}

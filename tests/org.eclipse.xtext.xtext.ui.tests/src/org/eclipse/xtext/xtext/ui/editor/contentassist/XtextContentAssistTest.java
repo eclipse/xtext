@@ -11,11 +11,12 @@ import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.XtextStandaloneSetup;
-import org.eclipse.xtext.ui.SimpleLabelProvider;
 import org.eclipse.xtext.ui.UIPluginModule;
 import org.eclipse.xtext.ui.XtextUiModule;
+import org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.xtext.ui.Activator;
 
 import com.google.inject.Guice;
@@ -32,8 +33,8 @@ public class XtextContentAssistTest extends AbstractContentAssistProcessorTest {
 			public Injector createInjector() {
 				return Guice.createInjector(new XtextUiModule() {
 					@Override
-					public Class<? extends ILabelProvider> bindILabelProvider() {
-						return SimpleLabelProvider.class;
+					public void configureContentProposalLabelProvider(com.google.inject.Binder binder) {
+						binder.bind(ILabelProvider.class).annotatedWith(ContentProposalLabelProvider.class).to(DefaultEObjectLabelProvider.class);
 					}
 				}, new UIPluginModule(Activator.getDefault()));
 			}

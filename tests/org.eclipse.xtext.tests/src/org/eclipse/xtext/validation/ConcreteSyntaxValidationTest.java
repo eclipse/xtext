@@ -97,11 +97,11 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		m.getVal4().clear();
 		validate(m).assertOK();
 
-		SimpleMultiplicities copy = (SimpleMultiplicities) EcoreUtil.copy(m);
+		SimpleMultiplicities copy = EcoreUtil.copy(m);
 		copy.setVal1(null);
 		validate(copy).assertAll(err(p.getSimpleMultiplicities_Val1(), ERROR_VALUE_REQUIRED, 1, null, ""));
 
-		copy = (SimpleMultiplicities) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal3().clear();
 		validate(copy).assertAll(err(p.getSimpleMultiplicities_Val3(), ERROR_LIST_TOO_FEW, 1, null, ""));
 	}
@@ -110,39 +110,39 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		GroupMultiplicities m = (GroupMultiplicities) getModel2("#4 abc kw1 def def kw2 fgh ijk kw3 lmn opq");
 		validate(m).assertOK();
 
-		GroupMultiplicities copy = (GroupMultiplicities) EcoreUtil.copy(m);
+		GroupMultiplicities copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		copy.setVal3(null);
 		copy.getVal6().clear();
 		copy.getVal7().clear();
 		validate(copy).assertOK();
 
-		copy = (GroupMultiplicities) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		validate(copy).assertAll(err(p.getGroupMultiplicities_Val2(), ERROR_VALUE_REQUIRED, 1, null, "(val2 val3)?"),
 				err(p.getGroupMultiplicities_Val3(), ERROR_VALUE_PROHIBITED, null, 0, "(val2 val3)?"));
 
-		copy = (GroupMultiplicities) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal5().clear();
 		validate(copy).assertAll(err(p.getGroupMultiplicities_Val5(), ERROR_LIST_TOO_FEW, 1, null, "(val4 val5)+"));
 
-		copy = (GroupMultiplicities) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal4().clear();
 		copy.getVal5().clear();
 		validate(copy).assertAll(err(p.getGroupMultiplicities_Val4(), ERROR_LIST_TOO_FEW, 1, null, "(val4 val5)+"),
 				err(p.getGroupMultiplicities_Val5(), ERROR_LIST_TOO_FEW, 1, null, "(val4 val5)+"));
 
-		copy = (GroupMultiplicities) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal5().add("sdlasjdk");
 		validate(copy).assertAll(err(p.getGroupMultiplicities_Val4(), ERROR_LIST_TOO_FEW, 2, null, "(val4 val5)+"),
 				err(p.getGroupMultiplicities_Val5(), ERROR_LIST_TOO_MANY, null, 1, "(val4 val5)+"));
 
-		copy = (GroupMultiplicities) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal6().clear();
 		validate(copy).assertAll(err(p.getGroupMultiplicities_Val6(), ERROR_LIST_TOO_FEW, 1, 1, "(val6 val7)*"),
 				err(p.getGroupMultiplicities_Val7(), ERROR_LIST_TOO_MANY, 0, 0, "(val6 val7)*"));
 
-		copy = (GroupMultiplicities) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal7().add("test");
 		validate(copy).assertAll(err(p.getGroupMultiplicities_Val6(), ERROR_LIST_TOO_FEW, 2, null, "(val6 val7)*"),
 				err(p.getGroupMultiplicities_Val7(), ERROR_LIST_TOO_MANY, 1, 1, "(val6 val7)*"));
@@ -153,30 +153,30 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		AlternativeMultiplicities m = (AlternativeMultiplicities) getModel2("#5 abc kw2 kw3 fgh kw3 xxx kw4 ijk lmn opq");
 		validate(m).assertOK();
 
-		AlternativeMultiplicities copy = (AlternativeMultiplicities) EcoreUtil.copy(m);
+		AlternativeMultiplicities copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		copy.setVal3(null);
 		copy.getVal6().clear();
 		copy.getVal7().clear();
 		validate(copy).assertOK();
 
-		copy = (AlternativeMultiplicities) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		validate(copy).assertOK();
 
-		copy = (AlternativeMultiplicities) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal3("lalal");
 		validate(copy).assertAll(
 				err(p.getAlternativeMultiplicities_Val2(), ERROR_VALUE_PROHIBITED, null, 0, "(val2|val3)?"),
 				err(p.getAlternativeMultiplicities_Val3(), ERROR_VALUE_PROHIBITED, null, 0, "(val2|val3)?"));
 
-		copy = (AlternativeMultiplicities) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal5().clear();
 		validate(copy).assertAll(
 				err(p.getAlternativeMultiplicities_Val4(), ERROR_LIST_TOO_FEW, 1, null, "(val4|val5)+"),
 				err(p.getAlternativeMultiplicities_Val5(), ERROR_LIST_TOO_FEW, 1, null, "(val4|val5)+"));
 
-		copy = (AlternativeMultiplicities) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal4().add("sdfg");
 		copy.getVal4().add("dfdf");
 		validate(copy).assertOK();
@@ -253,17 +253,17 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		Combination1 copy, m = (Combination1) getModel2("#13 id1 kw1 id2 kw2 id3");
 		validate(m).assertOK();
 
-		copy = (Combination1) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		copy.setVal3(null);
 		validate(m).assertOK();
 
-		copy = (Combination1) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		validate(copy).assertAll(err(p.getCombination1_Val2(), ERROR_VALUE_REQUIRED, 1, null, "(val2 (val3|val4))?"),
 				err(p.getCombination1_Val3(), ERROR_VALUE_PROHIBITED, null, 0, "(val2 (val3|val4))?"));
 
-		copy = (Combination1) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal3(null);
 		validate(copy).assertAll(err(p.getCombination1_Val2(), ERROR_VALUE_PROHIBITED, null, 0, "(val2 (val3|val4))?"),
 				err(p.getCombination1_Val3(), ERROR_VALUE_REQUIRED, 1, null, "(val2 (val3|val4))?"),
@@ -274,12 +274,12 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		Combination2 copy, m = (Combination2) getModel2("#14 id1 id31 id41 id32 id42");
 		validate(m).assertOK();
 
-		copy = (Combination2) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal3().add("foo");
 		validate(copy).assertAll(err(p.getCombination2_Val3(), ERROR_LIST_TOO_MANY, 2, 2, "(val2|(val3 val4)*)"),
 				err(p.getCombination2_Val4(), ERROR_LIST_TOO_FEW, 3, 3, "(val2|(val3 val4)*)"));
 
-		copy = (Combination2) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal2("foo");
 		validate(copy).assertAll(err(p.getCombination2_Val2(), ERROR_VALUE_PROHIBITED, null, 0, "(val2|(val3 val4)*)"),
 				err(p.getCombination2_Val3(), ERROR_LIST_TOO_MANY, null, 0, "(val2|(val3 val4)*)"),
@@ -290,11 +290,11 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		Combination3 copy, m = (Combination3) getModel2("#15 'string' id1 1234");
 		validate(m).assertOK();
 
-		copy = (Combination3) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal1(null);
 		validate(copy).assertOK();
 
-		copy = (Combination3) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal1(null);
 		copy.setVal2(0);
 		validate(copy).assertOK();
@@ -304,11 +304,11 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		Combination4 copy, m = (Combination4) getModel2("#16 group id11 id12 id13 group id21 id22 id23");
 		validate(m).assertOK();
 
-		copy = (Combination4) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().add("xxx");
 		validate(copy).assertAll(err(p.getCombination4_Val1(), ERROR_LIST_TOO_MANY, null, 2, "(val1 val2 val3)+"));
 
-		copy = (Combination4) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().remove(0);
 		validate(copy).assertAll(err(p.getCombination4_Val2(), ERROR_LIST_TOO_MANY, null, 1, "(val1 val2 val3)+"),
 				err(p.getCombination4_Val3(), ERROR_LIST_TOO_MANY, null, 1, "(val1 val2 val3)+"));
@@ -318,12 +318,12 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		List1 copy, m = (List1) getModel2("#17 id1, id2, id2");
 		validate(m).assertOK();
 
-		copy = (List1) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		copy.getVal1().add("xxx");
 		validate(copy).assertOK();
 
-		copy = (List1) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		validate(copy).assertAll(err(p.getList1_Val1(), ERROR_LIST_TOO_FEW, 1, null, ""));
 	}
@@ -332,12 +332,12 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		List2 copy, m = (List2) getModel2("#18 id1, id2, id2");
 		validate(m).assertOK();
 
-		copy = (List2) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		copy.getVal1().add("xxx");
 		validate(copy).assertOK();
 
-		copy = (List2) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		validate(copy).assertOK();
 	}
@@ -346,17 +346,17 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		List3 copy, m = (List3) getModel2("#19 id1, id2, id2");
 		validate(m).assertOK();
 
-		copy = (List3) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		copy.getVal1().add("xxx");
 		validate(copy).assertOK();
 
-		copy = (List3) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		validate(copy).assertAll(err(p.getList3_Val1(), ERROR_LIST_TOO_FEW, 1, null, "(val1+|val2)"),
 				err(p.getList3_Val2(), ERROR_VALUE_REQUIRED, 1, null, "(val1+|val2)"));
 
-		copy = (List3) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		copy.setVal2("lala");
 		validate(copy).assertOK();
@@ -366,16 +366,16 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		List4 copy, m = (List4) getModel2("#20 id11, id12, id13 kw3 id2");
 		validate(m).assertOK();
 
-		copy = (List4) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		copy.getVal1().add("xxx");
 		validate(copy).assertOK();
 
-		copy = (List4) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		validate(copy).assertAll(err(p.getList4_Val1(), ERROR_LIST_TOO_FEW, 1, null, ""));
 
-		copy = (List4) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		validate(copy).assertAll(err(p.getList4_Val2(), ERROR_VALUE_REQUIRED, 1, null, ""));
 	}
@@ -384,26 +384,26 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		List5 copy, m = (List5) getModel2("#21 id11, id12, id13 kw3 id2");
 		validate(m).assertOK();
 
-		copy = (List5) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		copy.getVal1().add("xxx");
 		validate(copy).assertOK();
 
-		copy = (List5) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		copy.setVal2(null);
 		copy.setVal3("foo");
 		validate(copy).assertOK();
 
-		copy = (List5) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.getVal1().clear();
 		validate(copy).assertAll(err(p.getList5_Val1(), ERROR_LIST_TOO_FEW, 1, null, "((val1+ val2)|val3)"));
 
-		copy = (List5) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		validate(copy).assertAll(err(p.getList5_Val2(), ERROR_VALUE_REQUIRED, 1, null, "((val1+ val2)|val3)"));
 
-		copy = (List5) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal3("foo");
 		validate(copy).assertAll(err(p.getList5_Val1(), ERROR_LIST_TOO_MANY, null, 0, "((val1+ val2)|val3)"),
 				err(p.getList5_Val2(), ERROR_VALUE_PROHIBITED, null, 0, "((val1+ val2)|val3)"),
@@ -414,16 +414,16 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		AltList1 copy, m = (AltList1) getModel2("#22 id1 id2");
 		validate(m).assertOK();
 
-		copy = (AltList1) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		copy.setVal3("foo");
 		validate(copy).assertOK();
 
-		copy = (AltList1) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		validate(copy).assertOK();
 
-		copy = (AltList1) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		copy.setVal4("foo");
 		validate(copy).assertOK();
@@ -433,12 +433,12 @@ public class ConcreteSyntaxValidationTest extends AbstractConcreteSyntaxValidati
 		AltList2 copy, m = (AltList2) getModel2("#23 id1 id2");
 		validate(m).assertOK();
 
-		copy = (AltList2) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		copy.setVal3("foo");
 		validate(copy).assertOK();
 
-		copy = (AltList2) EcoreUtil.copy(m);
+		copy = EcoreUtil.copy(m);
 		copy.setVal2(null);
 		copy.setVal3("foo");
 		copy.getVal1().add("foo");

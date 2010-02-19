@@ -7,6 +7,7 @@ import java.util.List;
 
 import org.eclipse.jface.preference.JFacePreferences;
 import org.eclipse.jface.viewers.StyledString;
+import org.eclipse.jface.viewers.StyledString.Styler;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Action;
@@ -30,7 +31,8 @@ import org.eclipse.xtext.Wildcard;
 import org.eclipse.xtext.parsetree.LeafNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
-import org.eclipse.xtext.ui.DefaultLabelProvider;
+import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
+import org.eclipse.xtext.ui.label.StylerFactory;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
 
@@ -39,24 +41,28 @@ import com.google.inject.Inject;
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
-public class XtextLabelProvider extends DefaultLabelProvider {
+public class XtextLabelProvider extends DefaultEObjectLabelProvider {
 	private static final String UNKNOWN = "<unknown>";
 	@Inject
 	private SemanticHighlightingConfiguration semanticHighlightingConfiguration;
 
+	@Inject 
+	private StylerFactory stylerFactory;
+	
 	StyledString text(ParserRule parserRule) {
 		if (GrammarUtil.isDatatypeRule(parserRule)) {
-			return createStyledString(parserRule, createXtextStyleAdapterStyler(semanticHighlightingConfiguration
-					.dataTypeRule()));
+			Styler xtextStyleAdapterStyler = stylerFactory.createXtextStyleAdapterStyler(semanticHighlightingConfiguration
+					.dataTypeRule());
+			return new StyledString(parserRule.getName(), xtextStyleAdapterStyler);
 		}
-		return createStyledString(parserRule);
+		return convertToStyledString(parserRule.getName());
 	}
 
 	StyledString text(EnumLiteralDeclaration object) {
 		String literalName = getLiteralName(object);
 		Keyword kw = object.getLiteral();
 		String kwValue = kw == null ? "" : " = '" + kw.getValue() + "'";
-		return new StyledString(literalName + kwValue, UNKNOWN.equalsIgnoreCase(literalName) ? createStyler(
+		return new StyledString(literalName + kwValue, UNKNOWN.equalsIgnoreCase(literalName) ? stylerFactory.createStyler(
 				JFacePreferences.ERROR_COLOR, null) : null);
 	}
 

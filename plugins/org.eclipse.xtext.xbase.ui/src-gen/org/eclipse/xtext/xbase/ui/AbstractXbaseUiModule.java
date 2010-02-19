@@ -18,11 +18,6 @@ public abstract class AbstractXbaseUiModule extends XbaseRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.jface.text.hyperlink.IHyperlinkDetector> bindIHyperlinkDetector() {
-		return org.eclipse.xtext.ui.editor.hyperlinking.DefaultHyperlinkDetector.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public Class<? extends org.eclipse.jface.text.reconciler.IReconciler> bindIReconciler() {
 		return org.eclipse.xtext.ui.editor.reconciler.XtextReconciler.class;
 	}
@@ -30,6 +25,11 @@ public abstract class AbstractXbaseUiModule extends XbaseRuntimeModule {
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper> bindISingleLineCommentHelper() {
 		return org.eclipse.xtext.ui.editor.toggleComments.DefaultSingleLineCommentHelper.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
+	public Class<? extends org.eclipse.jface.text.hyperlink.IHyperlinkDetector> bindIHyperlinkDetector() {
+		return org.eclipse.xtext.ui.editor.hyperlinking.DefaultHyperlinkDetector.class;
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
@@ -59,7 +59,7 @@ public abstract class AbstractXbaseUiModule extends XbaseRuntimeModule {
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
 	public Class<? extends org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider> bindAdapterFactoryLabelProvider() {
-		return org.eclipse.xtext.ui.InjectableAdapterFactoryLabelProvider.class;
+		return org.eclipse.xtext.ui.label.InjectableAdapterFactoryLabelProvider.class;
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
@@ -208,13 +208,23 @@ public abstract class AbstractXbaseUiModule extends XbaseRuntimeModule {
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment
-	public Class<? extends org.eclipse.jface.viewers.ILabelProvider> bindILabelProvider() {
-		return org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider.class;
+	public void configureHyperlinkLabelProvider(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkLabelProvider.class).to(org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider.class);
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment
-	public Class<? extends org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider> bindDelegatingStyledCellLabelProvider$IStyledLabelProvider() {
-		return org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider.class;
+	public void configureOutlineLabelProvider(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(org.eclipse.xtext.ui.editor.outline.OutlineLabelProvider.class).to(org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider.class);
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment
+	public void configureContentProposalLabelProvider(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider.class).to(org.eclipse.xtext.xbase.ui.labeling.XbaseLabelProvider.class);
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment
+	public void configureResourceUIServiceLabelProvider(com.google.inject.Binder binder) {
+		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class).to(org.eclipse.xtext.xbase.ui.labeling.XbaseDescriptionLabelProvider.class);
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.outline.TransformerFragment

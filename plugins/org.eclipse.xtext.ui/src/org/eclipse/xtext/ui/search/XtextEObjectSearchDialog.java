@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.search;
 import java.util.Collection;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.ISelectionChangedListener;
 import org.eclipse.jface.viewers.IStructuredContentProvider;
@@ -52,8 +53,8 @@ public class XtextEObjectSearchDialog extends ListDialog {
 	private Text typeSearchControl;
 
 	private IXtextEObjectSearch searchEngine;
-
-	public XtextEObjectSearchDialog(Shell parent, IXtextEObjectSearch searchEngine) {
+	
+	public XtextEObjectSearchDialog(Shell parent, IXtextEObjectSearch searchEngine, ILabelProvider labelProvider) {
 		super(parent);
 		this.searchEngine = searchEngine;
 		setTitle(Messages.XtextEObjectSearchDialog_TableLabelDialogTitle);
@@ -72,7 +73,7 @@ public class XtextEObjectSearchDialog extends ListDialog {
 				return null;
 			}
 		});
-		setLabelProvider(new GenericDescriptionLabelProvider());
+		setLabelProvider(labelProvider);
 	}
 
 	@Override

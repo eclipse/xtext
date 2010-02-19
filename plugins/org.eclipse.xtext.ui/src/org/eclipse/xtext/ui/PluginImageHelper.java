@@ -68,7 +68,7 @@ public class PluginImageHelper implements IImageHelper, BundleListener {
 	}
 
 	/**
-	 * Disposes all images managed by this iamge helper.
+	 * Disposes all images managed by this image helper.
 	 */
 	public void dispose() {
 		for (Iterator<Image> iter = registry.values().iterator(); iter.hasNext();) {

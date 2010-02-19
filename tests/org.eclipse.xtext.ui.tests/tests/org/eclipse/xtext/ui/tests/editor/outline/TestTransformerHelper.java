@@ -12,9 +12,8 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EStructuralFeature;
-import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
-import org.eclipse.xtext.ui.DefaultLabelProvider;
 import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.A;
 import org.eclipse.xtext.ui.common.editor.outline.impl.simplestructure.B;
 import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
@@ -22,6 +21,7 @@ import org.eclipse.xtext.ui.editor.outline.CreateNode;
 import org.eclipse.xtext.ui.editor.outline.DefaultContentOutlineNodeFactory;
 import org.eclipse.xtext.ui.editor.outline.GetChildren;
 import org.eclipse.xtext.ui.editor.outline.transformer.AbstractDeclarativeSemanticModelTransformer;
+import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.util.TextLocation;
 
 /**
@@ -39,12 +39,7 @@ public class TestTransformerHelper {
 		}
 	};
 	
-	private static IStyledLabelProvider myLabelProvider = new DefaultLabelProvider() {
-		@Override
-		public org.eclipse.swt.graphics.Image getImage(Object element) {
-			return null;
-		}
-	};
+	private static ILabelProvider myLabelProvider = new DefaultEObjectLabelProvider(null);
 
 	public static class TestTransformerWithNamingConvention extends AbstractDeclarativeSemanticModelTransformer {
 		{

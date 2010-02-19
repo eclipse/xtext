@@ -18,23 +18,15 @@ import org.eclipse.jface.action.IMenuManager;
 import org.eclipse.jface.action.IToolBarManager;
 import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
-import org.eclipse.jface.resource.ImageDescriptor;
-import org.eclipse.jface.resource.JFaceResources;
-import org.eclipse.jface.resource.LocalResourceManager;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.ISourceViewer;
-import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
-import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
-import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.TreePathViewerSorter;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerFilter;
 import org.eclipse.jface.viewers.ViewerSorter;
-import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
 import org.eclipse.search.ui.IContextMenuConstants;
-import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.widgets.Composite;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.swt.widgets.Menu;
@@ -47,7 +39,6 @@ import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.ParseTreeUtil;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.StyledLabelProviderAdapter;
 import org.eclipse.xtext.ui.editor.ISourceViewerAware;
 import org.eclipse.xtext.ui.editor.IXtextEditorAware;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -81,69 +72,11 @@ import com.google.inject.Inject;
 public class XtextContentOutlinePage extends ContentOutlinePage implements ISourceViewerAware, IXtextEditorAware {
 	static final Logger logger = Logger.getLogger(XtextContentOutlinePage.class);
 
-	/**
-	 * The label provider implements the interface {@link ILabelProvider}, because the 
-	 * default sorter will use the plain text of the label to compare two items.
-	 * @author Sebastian Zarnekow - Initial contribution and API
-	 */
-	protected static class LabelProvidingDelegatingStyledCellLabelProvider extends DelegatingStyledCellLabelProvider implements ILabelProvider {
-
-		public LabelProvidingDelegatingStyledCellLabelProvider(IStyledLabelProvider labelProvider) {
-			super(labelProvider);
-		}
-
-		public String getText(Object element) {
-			StyledString styledText = getStyledText(element);
-			if (styledText != null)
-				return styledText.getString();
-			return null;
-		}
-		
-	}
-	
-	/**
-	 * @author Michael Clay - Initial contribution and API
-	 */
-	protected static class ContentOutlineNodeStyledLabelProvider extends StyledLabelProviderAdapter {
-		private final LocalResourceManager resourceManager = new LocalResourceManager(JFaceResources.getResources());
-
-		@Override
-		public StyledString getStyledText(Object element) {
-			if (element instanceof ContentOutlineNode) {
-				ContentOutlineNode contentOutlineNode = (ContentOutlineNode) element;
-				return contentOutlineNode.getStyledString();
-			}
-			return null;
-		}
-
-		@Override
-		public Image getImage(Object element) {
-			Image image = null;
-			if (element instanceof ContentOutlineNode) {
-				ContentOutlineNode contentOutlineNode = (ContentOutlineNode) element;
-				image = contentOutlineNode.getImage();
-				if (image == null) {
-					ImageDescriptor imageDescriptor = contentOutlineNode.getImageDescriptor();
-					if (imageDescriptor == null) {
-						imageDescriptor = Activator.getImageDescriptor("icons/defaultoutlinenode.gif");
-					}
-					image = resourceManager.createImage(imageDescriptor);
-					contentOutlineNode.setImage(image);
-				}
-			}
-			return image;
-		}
-
-		@Override
-		public void dispose() {
-			super.dispose();
-			resourceManager.dispose();
-		}
-
-	}
-	
 	@Inject
-	private IOutlineTreeProvider provider;
+	private IOutlineTreeProvider contentProvider;
+
+	@Inject
+	private ContentOutlineNodeLabelProvider labelProvider;
 
 	@Inject
 	private IContentOutlineNodeAdapterFactory outlineNodeFactory;
@@ -163,7 +96,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 	private static final String contextMenuID = "xtextOutlineContextMenu";
 
 	private ViewerSorter sorter;
-
+	
 	public XtextContentOutlinePage() {
 		sorter = createSorter();
 	}
@@ -209,13 +142,8 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 	}
 
 	protected void configureProviders() {
-		Assert.isNotNull(provider, "No ILazyTreeProvider available. Dependency injection broken?");
-		getTreeViewer().setContentProvider(provider);
-		getTreeViewer().setLabelProvider(new LabelProvidingDelegatingStyledCellLabelProvider(getStyledLabelProvider()));
-	}
-
-	protected IStyledLabelProvider getStyledLabelProvider() {
-		return new ContentOutlineNodeStyledLabelProvider();
+		getTreeViewer().setContentProvider(contentProvider);
+		getTreeViewer().setLabelProvider(labelProvider);
 	}
 
 	private void configureDocument() {
@@ -284,8 +212,8 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 			editor.outlinePageClosed();
 			editor = null;
 		}
-		provider.dispose();
-		provider = null;
+		contentProvider.dispose();
+		contentProvider = null;
 		super.dispose();
 	}
 

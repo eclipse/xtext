@@ -3,8 +3,6 @@
 */
 package org.eclipse.xtext.ui.contentassist;
 
-import static org.eclipse.xtext.ui.DefaultLabelProvider.*;
-
 import java.util.List;
 
 import org.eclipse.core.resources.IFile;
@@ -52,6 +50,7 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.DefaultHighlightingConfiguration;
+import org.eclipse.xtext.ui.label.StylerFactory;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
 
@@ -62,11 +61,16 @@ import com.google.inject.Inject;
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */
 public class XtextProposalProvider extends AbstractXtextProposalProvider {
+	
 	@Inject
 	private DefaultHighlightingConfiguration defaultLexicalHighlightingConfiguration;
+	
 	@Inject 
 	private SemanticHighlightingConfiguration semanticHighlightingConfiguration;
 
+	@Inject 
+	private StylerFactory stylerFactory;
+	
 	public static class ClassifierPrefixMatcher extends PrefixMatcher {
 		private PrefixMatcher delegate;
 
@@ -167,14 +171,14 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 
 	@Override
 	protected StyledString getKeywordDisplayString(Keyword keyword) {
-		return createFromXtextStyle(keyword.getValue(), defaultLexicalHighlightingConfiguration.keywordTextStyle());
+		return stylerFactory.createFromXtextStyle(keyword.getValue(), defaultLexicalHighlightingConfiguration.keywordTextStyle());
 	}
 
 	@Override
 	protected StyledString getStyledDisplayString(EObject element, String qualifiedName, String shortName) {
 		StyledString styledDisplayString = super.getStyledDisplayString(element, qualifiedName, shortName);
 		if (element instanceof ParserRule && GrammarUtil.isDatatypeRule((ParserRule) element)) {
-			styledDisplayString = createFromXtextStyle(styledDisplayString.getString(),
+			styledDisplayString = stylerFactory.createFromXtextStyle(styledDisplayString.getString(),
 					semanticHighlightingConfiguration.dataTypeRule());
 		}
 		return styledDisplayString;
@@ -287,7 +291,7 @@ public class XtextProposalProvider extends AbstractXtextProposalProvider {
 				if (!Strings.isEmpty(prefix))
 					proposal.setDisplayString(classifier.getName() + " - " + alias);
 				proposal.setPriority(proposal.getPriority() * 2);
-				proposal.setDisplayString(createFromXtextStyle(proposal.getDisplayString(),
+				proposal.setDisplayString(stylerFactory.createFromXtextStyle(proposal.getDisplayString(),
 						semanticHighlightingConfiguration.typeReference()));
 			}
 			acceptor.accept(proposal);

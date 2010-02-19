@@ -61,7 +61,7 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 	private ReferenceSearchResultContentProvider contentProvider;
 
 	@Inject
-	private ReferenceSearchViewTreeNode.LabelProvider labelProvider;
+	private ReferenceSearchResultLabelProvider labelProvider;
 
 	@Inject
 	private IURIEditorOpener uriEditorOpener;
