@@ -12,7 +12,6 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider.IStyledLabelProvider;
-import org.eclipse.swt.custom.StyledText;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.ui.IImageHelper;
 
@@ -113,7 +112,7 @@ public abstract class AbstractLabelProvider extends LabelProvider implements ISt
 	 * @return a {@link StyledString} representing the parameter or <code>null</code>.
 	 */
 	protected StyledString convertToStyledString(Object text) {
-		if (text instanceof StyledText) {
+		if (text instanceof StyledString) {
 			return (StyledString) text;
 		} else if (text instanceof String) {
 			return new StyledString((String) text);
