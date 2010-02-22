@@ -36,7 +36,7 @@ import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 public class «eObjectLabelProviderQualifiedName().toSimpleName()» extends DefaultEObjectLabelProvider {
 
 	@Inject
-	public «descriptionLabelProviderQualifiedName().toSimpleName()»(AdapterFactoryLabelProvider delegate) {
+	public «eObjectLabelProviderQualifiedName().toSimpleName()»(AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
 
