@@ -8,7 +8,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
-import static org.eclipse.xtext.util.ReflectionUtil.getObjectType;
+import static org.eclipse.xtext.util.ReflectionUtil.*;
+
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
 import java.util.ArrayList;
@@ -19,7 +20,6 @@ import java.util.Iterator;
 import java.util.List;
 
 import org.apache.log4j.Logger;
-import org.eclipse.emf.common.util.WrappedException;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
@@ -39,15 +39,9 @@ public class PolymorphicDispatcher<RT> {
 	/**
 	 * @author Sven Efftinge - Initial contribution and API
 	 */
-	static class DefaultErrorHandler<RT> implements ErrorHandler<RT> {
+	private static class DefaultErrorHandler<RT> implements ErrorHandler<RT> {
 		public RT handle(Object[] params, Throwable e) {
-			if (e instanceof RuntimeException)
-				throw (RuntimeException) e;
-			if (e instanceof Error)
-				throw (Error) e;
-			if (e instanceof Exception)
-				throw new WrappedException((Exception) e);
-			throw new RuntimeException(e);
+			return Exceptions.throwUncheckedException(e);
 		}
 	}
 
