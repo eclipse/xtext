@@ -65,6 +65,14 @@ public class EcoreUtil2 extends EcoreUtil {
 	}
 
 	/**
+	 * In EMF 2.5 {@return EcoreUtil.copy(EObject)} does not cast the result.
+	 */
+	@SuppressWarnings("unchecked")
+	public static <T extends EObject> T clone(T eObject) {
+		return (T) EcoreUtil.copy(eObject);
+	}
+
+	/**
 	 * copies contents of a resource set into a new one
 	 */
 	public static <T extends ResourceSet> T clone(T target, ResourceSet source) {
