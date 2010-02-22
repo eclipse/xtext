@@ -98,7 +98,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 				if (eRef == null) {
 					throw new IllegalStateException("Couldn't find EReference for crossreference " + ref);
 				}
-				if (!eRef.isResolveProxies() || eRef.getEOpposite() != null) {
+				if (!eRef.isResolveProxies() /*|| eRef.getEOpposite() != null see https://bugs.eclipse.org/bugs/show_bug.cgi?id=282486*/) {
 					final EStructuralFeature.Setting setting = ((InternalEObject) obj).eSetting(eRef);
 					settingsToLink.put(new SettingDelegate(setting), abstractNode);
 				} else {

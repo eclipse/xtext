@@ -145,16 +145,19 @@ public class BasicLazyLinkingTest extends AbstractXtextTests {
 
 	
     // see https://bugs.eclipse.org/bugs/show_bug.cgi?id=282486
+	// and https://bugs.eclipse.org/bugs/show_bug.cgi?id=303441
     @SuppressWarnings("unchecked")
     public void testReferenceWithOpposite() throws Exception {
         XtextResource resource = getResourceAndExpect(new StringInputStream("type foo {} type bar extends foo {}"), 1);
         Model model = (Model) resource.getContents().get(0);
         Type typeFoo = model.getTypes().get(0);
         Type typeBar = model.getTypes().get(1);
-        assertEquals(typeFoo, typeBar.eGet(LazyLinkingPackage.Literals.TYPE__EXTENDS, false));
+        InternalEObject proxy = (InternalEObject) typeBar.eGet(LazyLinkingPackage.Literals.TYPE__EXTENDS, false);
+        assertTrue(proxy.eIsProxy());
+		assertEquals(typeFoo, typeBar.getExtends());
         List<Type> fooSubtypes = (List<Type>) typeFoo.eGet(LazyLinkingPackage.Literals.TYPE__SUBTYPES, false);
-        assertEquals(1, fooSubtypes.size());
-        assertEquals(typeBar, fooSubtypes.get(0));
+        // the opposite is not automatically set (see https://bugs.eclipse.org/bugs/show_bug.cgi?id=282486) 
+        assertEquals(0, fooSubtypes.size());
     }
 
 	@Override
