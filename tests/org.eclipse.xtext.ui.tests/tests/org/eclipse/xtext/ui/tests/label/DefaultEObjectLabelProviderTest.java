@@ -13,7 +13,6 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
-import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.XtextFactory;
@@ -24,6 +23,8 @@ import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
  * @author Sven Efftinge - Initial contribution and API
  */
 public class DefaultEObjectLabelProviderTest extends TestCase {
+
+	private static final String DEFAULT_TEXT = "default";
 
 	public void testSimple() throws Exception {
 		final List<String> calls = new ArrayList<String>();
@@ -119,14 +120,19 @@ public class DefaultEObjectLabelProviderTest extends TestCase {
 			public StyledString text(ParserRule parserRule) {
 				return new StyledString(parserRule.getName());
 			}
+
+			@Override
+			protected String getDefaultText() {
+				return DEFAULT_TEXT;
+			}
 		};
 		ParserRule parserRule = XtextFactory.eINSTANCE.createParserRule();
 		StyledString styledText = defaultLabelProvider.getStyledText(parserRule);
-		assertNotNull(styledText.getString());
+		assertEquals(DEFAULT_TEXT, styledText.getString());
 	}
 
 	public void testErrorHandling() throws Exception {
-		final List<String> calls = new ArrayList<String>();
+		final List<Object> calls = new ArrayList<Object>();
 		@SuppressWarnings("unused")
 		DefaultEObjectLabelProvider defaultLabelProvider = new DefaultEObjectLabelProvider() {
 			{
@@ -146,30 +152,46 @@ public class DefaultEObjectLabelProviderTest extends TestCase {
 			}
 
 			public String image(Integer obj) {
-				throw new NullPointerException();
+				throw new IllegalArgumentException();
 			}
 
 			@Override
-			public String error_image(Object obj, NullPointerException ex) {
-				calls.add("error_" + obj.toString());
-				return null;
+			protected String getDefaultText() {
+				return DEFAULT_TEXT;
+			}
+
+			@Override
+			protected Object handleImageError(Object[] params, Throwable e) {
+				calls.add(params[0]);
+				return super.handleImageError(params, e);
+			}
+
+			@Override
+			protected Object handleTextError(Object[] params, Throwable e) {
+				calls.add(params[0]);
+				return super.handleTextError(params, e);
 			}
 		};
-		assertNull(defaultLabelProvider.getText("foo"));
+
+		assertEquals(DEFAULT_TEXT, defaultLabelProvider.getText("foo"));
+		assertEquals(1, calls.size());
 		try {
 			assertEquals("89", defaultLabelProvider.getText(new Integer(89)));
 			fail();
-		} catch (WrappedException e) {
-			assertTrue(e.getCause() instanceof IllegalArgumentException);
+		} catch (RuntimeException e) {
+			assertTrue(e instanceof IllegalArgumentException);
 		}
+		assertEquals(2, calls.size());
 
-		assertTrue(calls.isEmpty());
-		defaultLabelProvider.getImage(true);
-		assertTrue(calls.isEmpty());
-		defaultLabelProvider.getImage("String");
-		assertTrue(calls.contains("error_String"));
-		defaultLabelProvider.getImage(new Integer(45));
-		assertTrue(calls.contains("error_45"));
-		assertTrue(calls.size() == 2);
+		assertNull(defaultLabelProvider.getImage("String"));
+		assertEquals(3, calls.size());
+		try {
+			defaultLabelProvider.getImage(new Integer(45));
+			fail();
+		} catch (RuntimeException e) {
+			assertTrue(e instanceof IllegalArgumentException);
+		}
+		assertEquals(4, calls.size());
 	}
+
 }
