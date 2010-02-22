@@ -3,7 +3,6 @@
 */
 package org.eclipse.xtext.example.ui.contentassist;
 
-import org.eclipse.xtext.example.ui.contentassist.AbstractDomainmodelProposalProvider;
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */

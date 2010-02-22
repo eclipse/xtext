@@ -4,17 +4,16 @@
  */
 package org.eclipse.xtext.example.ui.internal;
 
-import org.apache.log4j.Logger;
-import org.eclipse.xtext.ui.UIPluginModule;
+import java.util.HashMap;
+import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.ui.UIPluginModule;
 import org.osgi.framework.BundleContext;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
-
-import java.util.Map;
-import java.util.HashMap;
 
 /**
  * Generated
