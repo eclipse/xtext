@@ -3,12 +3,8 @@
 */
 package org.eclipse.xtext.example.ui.labeling;
 
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
-import org.eclipse.xtext.example.domainmodel.Attribute;
-import org.eclipse.xtext.example.domainmodel.DataType;
-import org.eclipse.xtext.example.domainmodel.Entity;
-import org.eclipse.xtext.example.domainmodel.PackageDeclaration;
-import org.eclipse.xtext.example.domainmodel.Reference;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 
 import com.google.inject.Inject;
@@ -24,24 +20,12 @@ public class DomainmodelLabelProvider extends DefaultEObjectLabelProvider {
 	public DomainmodelLabelProvider(AdapterFactoryLabelProvider delegate) {
 		super(delegate);
 	}
-
-	String image(Entity e) {
-		return "Entity.gif";
-	}
-
-	String image(Attribute a) {
-		return "Attribute.gif";
-	}
 	
-	String image(DataType d) {
-		return "DataType.gif";
-	}
-	
-	String image(Reference r) {
-		return "Reference.gif";
-	}
-	
-	String image(PackageDeclaration p) {
-		return "Package.gif";
+	@Override
+	protected Object doGetImage(Object element) {
+		if(element instanceof EObject) {
+			return ((EObject)element).eClass().getName() + ".gif";
+		}
+		return super.doGetImage(element);
 	}
 }
