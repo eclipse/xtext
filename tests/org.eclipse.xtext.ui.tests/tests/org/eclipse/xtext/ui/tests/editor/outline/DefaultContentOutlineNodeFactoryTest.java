@@ -17,7 +17,7 @@ public class DefaultContentOutlineNodeFactoryTest extends AbstractContentOutline
 
 	public void testNullSafety() {
 		ContentOutlineNode contentOutlineNode = contentOutlineNodeFactory.create(null, null, null);
-		assertEquals("<unknown>", contentOutlineNode.getLabel());
+		assertEquals("", contentOutlineNode.getLabel());
 	}
 
 	public void testGetText() {

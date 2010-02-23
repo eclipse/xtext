@@ -80,7 +80,7 @@ public class DeclarativeSemanticModelTransformerTest extends AbstractXtextTests 
 
 		List<ContentOutlineNode> children = treeModel.getChildren();
 		ContentOutlineNode rootNode = children.get(0);
-		assertEquals("root", rootNode.getLabel());
+		assertEquals("", rootNode.getLabel());
 
 		List<ContentOutlineNode> children2 = rootNode.getChildren();
 		ContentOutlineNode node1 = children2.get(0);
@@ -108,7 +108,7 @@ public class DeclarativeSemanticModelTransformerTest extends AbstractXtextTests 
 
 		List<ContentOutlineNode> children = treeModel.getChildren();
 		ContentOutlineNode rootNode = children.get(0);
-		assertEquals("root", rootNode.getLabel());
+		assertEquals("", rootNode.getLabel());
 
 		List<ContentOutlineNode> children2 = rootNode.getChildren();
 		ContentOutlineNode node1 = children2.get(0);
