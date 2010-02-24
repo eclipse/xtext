@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+   <extension-point id="overridingGuiceModule" name="overridingGuiceModule" schema="schema/overridingGuiceModule.exsd"/>
+   <extension
+        id="xtextBuilder"
+        name="Xtext Project Builder"
+        point="org.eclipse.core.resources.builders">
+     <builder
+           hasNature="true">
+        <run
+              class="org.eclipse.xtext.ui.shared.internal.ExecutableExtensionFactory">
+             <parameter name="guicekey" value="org.eclipse.core.resources.IncrementalProjectBuilder"/>
+        </run>
+     </builder>
+  </extension>
+  <extension
+        id="xtextNature"
+        name="Xtext Project Nature"
+        point="org.eclipse.core.resources.natures">
+     <runtime>
+        	<run
+              class="org.eclipse.xtext.builder.nature.XtextNature">
+      	</run>
+     </runtime>
+     <builder
+           id="org.eclipse.xtext.ui.shared.xtextBuilder">
+     </builder>
+  </extension>
+  <extension
+         point="org.eclipse.ui.popupMenus">
+      <objectContribution
+            adaptable="true"
+            id="org.eclipse.xtext.builder.addNature"
+            objectClass="org.eclipse.core.resources.IProject">
+         <action
+               class="org.eclipse.xtext.builder.nature.ToggleXtextNatureAction"
+               id="org.eclipse.xtext.builder.action.AddXtextNatureAction"
+               label="Add Xtext Nature"
+               menubarPath="org.eclipse.ui.projectConfigure/additions"
+               >
+         </action>
+         <visibility>
+         	<not>
+	            <objectState
+    	              name="nature"
+        	          value="org.eclipse.xtext.ui.shared.xtextNature">
+            	</objectState>
+            </not>
+         </visibility>
+      </objectContribution>
+      <objectContribution
+            adaptable="true"
+            id="org.eclipse.xtext.builder.removeNature"
+            objectClass="org.eclipse.core.resources.IProject">
+         <action
+               class="org.eclipse.xtext.builder.nature.ToggleXtextNatureAction"
+               id="org.eclipse.xtext.builder.action.RemoveXtextNatureAction"
+               label="Remove Xtext Nature"
+               menubarPath="org.eclipse.ui.projectConfigure/additions"
+               >
+         </action>
+         <visibility>
+               <objectState
+    	              name="nature"
+        	          value="org.eclipse.xtext.ui.shared.xtextNature">
+            	</objectState>
+         </visibility>
+      </objectContribution>
+   </extension>
+   <extension
+         point="org.eclipse.ui.decorators">
+      <decorator
+            adaptable="true"
+            icon="icons/nature_overlay.png"
+            id="org.eclipse.xtext.builder.nature.overlay"
+            label="Xtext Nature"
+            lightweight="true"
+            location="TOP_RIGHT"
+            state="true">
+         <enablement>
+            <objectState
+                  name="nature"
+                  value="org.eclipse.xtext.ui.shared.xtextNature">
+            </objectState>
+         </enablement>
+      </decorator>
+   </extension>
+   <extension
+         point="org.eclipse.ui.handlers">
+      <handler
+            class="org.eclipse.xtext.ui.shared.internal.ExecutableExtensionFactory:org.eclipse.xtext.ui.search.OpenXtextElementHandler"
+            commandId="org.eclipse.xtext.ui.search.OpenXtextElementCommand">
+      </handler>
+   </extension>
+ 	<extension point="org.eclipse.search.searchResultViewPages">
+    	<viewPage
+          class="org.eclipse.xtext.ui.shared.internal.ExecutableExtensionFactory:org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchViewPage"
+          icon="icons/searchpage.gif"
+          id="org.eclipse.xtext.ui.editor.findref.SearchViewPage"
+          searchResultClass="org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchResult">
+    	</viewPage>
+ 	</extension>
+
+</plugin>
