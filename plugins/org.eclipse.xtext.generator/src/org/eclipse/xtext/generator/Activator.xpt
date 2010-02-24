@@ -10,13 +10,14 @@
 package «activatorName.toJavaPackage()»;
 
 import org.apache.log4j.Logger;
-import org.eclipse.xtext.ui.UIPluginModule;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Module;
+import com.google.inject.util.Modules;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -40,8 +41,7 @@ public class «activatorName.toSimpleName()» extends AbstractUIPlugin {
 		try {
 			«FOREACH this AS grammar»
 			injectors.put("«grammar.name»", Guice.createInjector(
-				new «guiceModuleUi(grammar)»(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("«grammar.name»")).with(getUiModule("«grammar.name»"))).with(getSharedStateModule())
 			));
 			«ENDFOREACH»
 		} catch (Exception e) {
@@ -54,8 +54,25 @@ public class «activatorName.toSimpleName()» extends AbstractUIPlugin {
 		return INSTANCE;
 	}
 	
-	protected UIPluginModule createUIPluginModule() {
-		return new UIPluginModule(this);
+	protected Module getRuntimeModule(String grammar) {
+		«FOREACH this AS grammar»
+		if ("«grammar.name»".equals(grammar)) {
+		  return new «guiceModuleRt(grammar)»();
+		}
+		«ENDFOREACH»
+		throw new IllegalArgumentException(grammar);
+	}
+	protected Module getUiModule(String grammar) {
+		«FOREACH this AS grammar»
+		if ("«grammar.name»".equals(grammar)) {
+		  return new «guiceModuleUi(grammar)»(this);
+		}
+		«ENDFOREACH»
+		throw new IllegalArgumentException(grammar);
+	}
+	
+	protected Module getSharedStateModule() {
+		return new org.eclipse.xtext.ui.shared.SharedStateModule();
 	}
 	
 }

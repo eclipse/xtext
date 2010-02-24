@@ -22,12 +22,17 @@
  */
 package «guiceModuleUiGenerated().toJavaPackage()»;
 
-import «guiceModuleRt()»;
+import org.eclipse.xtext.ui.DefaultUiModule;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
  * Manual modifications go to {«guiceModuleUi()»}
  */
-public abstract class «guiceModuleUiGenerated().toSimpleName()» extends «guiceModuleRt().toSimpleName()» {
+public abstract class «guiceModuleUiGenerated().toSimpleName()» extends DefaultUiModule {
+	
+	public «guiceModuleUiGenerated().toSimpleName()»(AbstractUIPlugin plugin) {
+		super(plugin);
+	}
 	
 	«EXPAND GuiceModuleRt::bindingMethod FOREACH bindings»
 
@@ -45,11 +50,15 @@ public abstract class «guiceModuleUiGenerated().toSimpleName()» extends «guiceMo
  */
 package «guiceModuleUi().toJavaPackage()»;
 
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+
 /**
  * Use this class to register components to be used within the IDE.
  */
 public class «guiceModuleUi().toSimpleName()» extends «guiceModuleUiGenerated()» {
-
+	public «guiceModuleUi().toSimpleName()»(AbstractUIPlugin plugin) {
+		super(plugin);
+	}
 }
 «ENDFILE»
 «ENDDEFINE»

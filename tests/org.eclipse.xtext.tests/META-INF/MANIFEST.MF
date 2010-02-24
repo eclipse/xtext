@@ -415,5 +415,7 @@ Export-Package: org.eclipse.xtext,
  org.eclipse.xtext.ui.tests.parser.packrat.consumers,
  org.eclipse.xtext.ui.tests.parseTreeConstruction,
  org.eclipse.xtext.ui.tests.parser.antlr,
- org.eclipse.xtext.ui.tests.parser.antlr.internal
+ org.eclipse.xtext.ui.tests.parser.antlr.internal,
+ org.eclipse.xtext.validation.parser.packrat,
+ org.eclipse.xtext.validation.parser.packrat.consumers
 
