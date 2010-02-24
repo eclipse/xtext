@@ -249,6 +249,8 @@ public class EclipseResourceUtil {
 		final IFolder metaInf = project.getFolder("META-INF");
 		SubMonitor subMonitor = SubMonitor.convert(progressMonitor, 2);
 		try {
+			if (metaInf.exists())
+				metaInf.delete(false, progressMonitor);
 			metaInf.create(false, true, subMonitor.newChild(1));
 			createFile("MANIFEST.MF", metaInf, mainContent.toString(), subMonitor.newChild(1));
 		} finally {
