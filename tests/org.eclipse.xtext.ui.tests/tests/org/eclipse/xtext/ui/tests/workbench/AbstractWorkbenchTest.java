@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.workbench;
 
+import static org.eclipse.xtext.junit.util.IResourcesSetupUtil.*;
 import junit.framework.TestCase;
 
 import org.eclipse.swt.widgets.Display;
@@ -15,7 +16,6 @@ import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
 import org.eclipse.ui.PlatformUI;
-import static org.eclipse.xtext.junit.util.IResourcesSetupUtil.*;
 
 /**
  * Abstract base class for test classes that need access to the workbench.

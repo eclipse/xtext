@@ -4,6 +4,7 @@
 package org.eclipse.xtext.xbase.ui;
 
 import org.eclipse.jface.text.IAutoEditStrategy;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.antlr.AbstractAntlrTokenToAttributeIdMapper;
 import org.eclipse.xtext.xbase.ui.autoedit.XbaseAutoEdit;
 import org.eclipse.xtext.xbase.ui.syntaxcoloring.XbaseTokenToAttributeIdMapper;
@@ -12,6 +13,10 @@ import org.eclipse.xtext.xbase.ui.syntaxcoloring.XbaseTokenToAttributeIdMapper;
  * Use this class to register components to be used within the IDE.
  */
 public class XbaseUiModule extends org.eclipse.xtext.xbase.ui.AbstractXbaseUiModule {
+	public XbaseUiModule(AbstractUIPlugin plugin) {
+		super(plugin);
+	}
+
 	public Class<? extends IAutoEditStrategy> bindIAutoEditStrategy() {
 		return XbaseAutoEdit.class;
 	}

@@ -25,6 +25,7 @@ import org.eclipse.xtext.builder.nature.XtextNature;
 import org.eclipse.xtext.junit.util.JavaProjectSetupUtil.TextFile;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Event;
+import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.collect.Collections2;
@@ -183,7 +184,7 @@ public class ProfilerAbstractBuilderTest extends TestCase implements IResourceDe
 	}
 
 	private IBuilderState getBuilderState() {
-		return BuilderStateAccess.getBuilderState().get();
+		return Access.getIBuilderState().get();
 	}
 
 	private int countResourcesInIndex() {

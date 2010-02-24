@@ -4,16 +4,18 @@
  */
 package org.eclipse.xtext.example.ui.internal;
 
-import java.util.HashMap;
-import java.util.Map;
-
 import org.apache.log4j.Logger;
+
 import org.eclipse.ui.plugin.AbstractUIPlugin;
-import org.eclipse.xtext.ui.UIPluginModule;
 import org.osgi.framework.BundleContext;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Module;
+import com.google.inject.util.Modules;
+
+import java.util.Map;
+import java.util.HashMap;
 
 /**
  * Generated
@@ -34,8 +36,7 @@ public class DomainmodelActivator extends AbstractUIPlugin {
 		try {
 			
 			injectors.put("org.eclipse.xtext.example.Domainmodel", Guice.createInjector(
-				new org.eclipse.xtext.example.ui.DomainmodelUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.example.Domainmodel")).with(getUiModule("org.eclipse.xtext.example.Domainmodel"))).with(getSharedStateModule())
 			));
 			
 		} catch (Exception e) {
@@ -48,8 +49,25 @@ public class DomainmodelActivator extends AbstractUIPlugin {
 		return INSTANCE;
 	}
 	
-	protected UIPluginModule createUIPluginModule() {
-		return new UIPluginModule(this);
+	protected Module getRuntimeModule(String grammar) {
+		
+		if ("org.eclipse.xtext.example.Domainmodel".equals(grammar)) {
+		  return new org.eclipse.xtext.example.DomainmodelRuntimeModule();
+		}
+		
+		throw new IllegalArgumentException(grammar);
+	}
+	protected Module getUiModule(String grammar) {
+		
+		if ("org.eclipse.xtext.example.Domainmodel".equals(grammar)) {
+		  return new org.eclipse.xtext.example.ui.DomainmodelUiModule(this);
+		}
+		
+		throw new IllegalArgumentException(grammar);
+	}
+	
+	protected Module getSharedStateModule() {
+		return new org.eclipse.xtext.ui.shared.SharedStateModule();
 	}
 	
 }

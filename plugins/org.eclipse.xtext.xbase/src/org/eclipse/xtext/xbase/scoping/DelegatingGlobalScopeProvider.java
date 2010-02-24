@@ -21,6 +21,7 @@ public class DelegatingGlobalScopeProvider extends DefaultGlobalScopeProvider {
 	@Inject
 	private AbstractTypeScopeProvider typesScopeProvider;
 
+	@Override
 	public IScope getScope(EObject context, EReference reference) {
 		if (TypesPackage.eINSTANCE.getType().isSuperTypeOf(
 				(EClass) reference.getEType())) {

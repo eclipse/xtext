@@ -14,15 +14,16 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.jface.text.ITextViewer;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.UIPluginModule;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.crossReferenceProposalTest.CrossReferenceProposalTestPackage;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.CrossReferenceProposalTestLanguageGrammarAccess;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.CrossReferenceProposalTestLanguageUiModule;
+import org.eclipse.xtext.util.Modules2;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Guice;
@@ -37,8 +38,11 @@ public class CrossReferenceProposalTest extends AbstractContentAssistProcessorTe
 		return new CrossReferenceProposalTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new CrossReferenceProposalTestLanguageUiModule(), new UIPluginModule(
-						Activator.getInstance()));
+				return Guice.createInjector(Modules2.mixin(
+						new CrossReferenceProposalTestLanguageRuntimeModule(),
+						new CrossReferenceProposalTestLanguageUiModule(
+						Activator.getInstance()),
+						new SharedStateModule()));
 			}
 		};
 	}

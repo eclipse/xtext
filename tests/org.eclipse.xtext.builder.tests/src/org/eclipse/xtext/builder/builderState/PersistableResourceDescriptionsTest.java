@@ -19,8 +19,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.builder.BuilderModule;
-import org.eclipse.xtext.builder.builderState.PersistableResourceDescriptionsImpl.Persister;
+import org.eclipse.xtext.builder.builderState.PersistableResourceDescriptionsImpl.PersistedStateProvider;
 import org.eclipse.xtext.builder.tests.BuilderTestLanguageStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.junit.util.URIBasedTestResourceDescription;
@@ -28,6 +27,7 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
 import org.eclipse.xtext.resource.containers.DelegatingIAllContainerAdapter;
 import org.eclipse.xtext.resource.containers.IAllContainersState;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.base.Function;
@@ -53,7 +53,7 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 	public void setUp() throws Exception {
 		super.setUp();
 		with(new BuilderTestLanguageStandaloneSetup());
-		BuilderModule module = new BuilderModule();
+		SharedStateModule module = new SharedStateModule();
 		builderInjector = Guice.createInjector(module);
 		builderState = builderInjector.getInstance(PersistableResourceDescriptionsImpl.class);
 		uriConverter = new ExtensibleURIConverterImpl() {
@@ -223,7 +223,7 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 		update(uris("foo", "bar"), null);
 		ListBasedPersister persister = new ListBasedPersister();
 		builderState.setPersister(persister);
-		builderState.save();
+		persister.save(builderState.getAllResourceDescriptions());
 		assertEquals(2, persister.descriptions.size());
 	}
 	
@@ -241,11 +241,11 @@ public class PersistableResourceDescriptionsTest extends AbstractXtextTests {
 		assertNull(builderState.getResourceDescription(uri3));
 	}
 	
-	public static class ListBasedPersister implements Persister {
+	public static class ListBasedPersister implements PersistedStateProvider {
 
 		public List<IResourceDescription> descriptions = Lists.newArrayList();
 		
-		public Iterable<IResourceDescription> load() throws Exception {
+		public Iterable<IResourceDescription> load() {
 			return descriptions;
 		}
 

@@ -5,13 +5,14 @@
 package org.eclipse.xtext.ui.tests;
 
 import org.apache.log4j.Logger;
-import org.eclipse.xtext.ui.UIPluginModule;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Module;
+import com.google.inject.util.Modules;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -35,108 +36,87 @@ public class Activator extends AbstractUIPlugin {
 		try {
 			
 			injectors.put("org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.tests.ui.XtextGrammarUiTestLanguageUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage"))).with(getSharedStateModule())
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.tests.linking.ImportUriUiTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.tests.linking.ui.ImportUriUiTestLanguageUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.linking.ImportUriUiTestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.linking.ImportUriUiTestLanguage"))).with(getSharedStateModule())
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.tests.editor.contentassist.TwoContextsTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.tests.editor.contentassist.ui.TwoContextsTestLanguageUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.editor.contentassist.TwoContextsTestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.editor.contentassist.TwoContextsTestLanguage"))).with(getSharedStateModule())
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.tests.editor.contentassist.Bug286935TestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug286935TestLanguageUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.editor.contentassist.Bug286935TestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.editor.contentassist.Bug286935TestLanguage"))).with(getSharedStateModule())
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug287941TestLanguageUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage"))).with(getSharedStateModule())
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.tests.editor.contentassist.Bug288734TestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug288734TestLanguageUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.editor.contentassist.Bug288734TestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.editor.contentassist.Bug288734TestLanguage"))).with(getSharedStateModule())
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.tests.editor.contentassist.Bug288760TestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug288760TestLanguageUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.editor.contentassist.Bug288760TestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.editor.contentassist.Bug288760TestLanguage"))).with(getSharedStateModule())
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.tests.editor.contentassist.Bug289187TestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug289187TestLanguageUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.editor.contentassist.Bug289187TestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.editor.contentassist.Bug289187TestLanguage"))).with(getSharedStateModule())
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.tests.editor.contentassist.Bug291022TestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug291022TestLanguageUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.editor.contentassist.Bug291022TestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.editor.contentassist.Bug291022TestLanguage"))).with(getSharedStateModule())
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.tests.editor.contentassist.ui.ContentAssistContextTestLanguageUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage"))).with(getSharedStateModule())
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.tests.editor.contentassist.CrossReferenceProposalTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.tests.editor.contentassist.ui.CrossReferenceProposalTestLanguageUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.editor.contentassist.CrossReferenceProposalTestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.editor.contentassist.CrossReferenceProposalTestLanguage"))).with(getSharedStateModule())
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.tests.editor.contentassist.ui.DatatypeRuleTestLanguageUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage"))).with(getSharedStateModule())
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.tests.editor.contentassist.ui.LookAheadContentAssistTestLanguageUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguage"))).with(getSharedStateModule())
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.tests.editor.contentassist.ui.DomainModelTestLanguageUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguage"))).with(getSharedStateModule())
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.tests.editor.contentassist.ui.UnorderedGroupsTestLanguageUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage"))).with(getSharedStateModule())
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.tests.parser.keywords.ui.KeywordsUiTestLanguageUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguage"))).with(getSharedStateModule())
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.tests.testlanguages.ui.ContentAssistTestLanguageUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguage"))).with(getSharedStateModule())
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.tests.testlanguages.ui.ReferenceGrammarUiTestLanguageUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguage"))).with(getSharedStateModule())
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.tests.enumrules.EnumRulesUiTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.tests.enumrules.ui.EnumRulesUiTestLanguageUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.enumrules.EnumRulesUiTestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.enumrules.EnumRulesUiTestLanguage"))).with(getSharedStateModule())
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.tests.TestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.tests.ui.TestLanguageUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.TestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.TestLanguage"))).with(getSharedStateModule())
 			));
 			
 			injectors.put("org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.ui.tests.editor.bracketmatching.ui.BmTestLanguageUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage"))).with(getSharedStateModule())
 			));
 			
 		} catch (Exception e) {
@@ -149,8 +129,185 @@ public class Activator extends AbstractUIPlugin {
 		return INSTANCE;
 	}
 	
-	protected UIPluginModule createUIPluginModule() {
-		return new UIPluginModule(this);
+	protected Module getRuntimeModule(String grammar) {
+		
+		if ("org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguageRuntimeModule();
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.linking.ImportUriUiTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.linking.ImportUriUiTestLanguageRuntimeModule();
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.TwoContextsTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.TwoContextsTestLanguageRuntimeModule();
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.Bug286935TestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.Bug286935TestLanguageRuntimeModule();
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguageRuntimeModule();
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.Bug288734TestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.Bug288734TestLanguageRuntimeModule();
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.Bug288760TestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.Bug288760TestLanguageRuntimeModule();
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.Bug289187TestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.Bug289187TestLanguageRuntimeModule();
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.Bug291022TestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.Bug291022TestLanguageRuntimeModule();
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguageRuntimeModule();
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.CrossReferenceProposalTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.CrossReferenceProposalTestLanguageRuntimeModule();
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguageRuntimeModule();
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguageRuntimeModule();
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguageRuntimeModule();
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguageRuntimeModule();
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguageRuntimeModule();
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguageRuntimeModule();
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguageRuntimeModule();
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.enumrules.EnumRulesUiTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.enumrules.EnumRulesUiTestLanguageRuntimeModule();
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.TestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.TestLanguageRuntimeModule();
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguageRuntimeModule();
+		}
+		
+		throw new IllegalArgumentException(grammar);
+	}
+	protected Module getUiModule(String grammar) {
+		
+		if ("org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.ui.XtextGrammarUiTestLanguageUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.linking.ImportUriUiTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.linking.ui.ImportUriUiTestLanguageUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.TwoContextsTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ui.TwoContextsTestLanguageUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.Bug286935TestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug286935TestLanguageUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.Bug287941TestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug287941TestLanguageUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.Bug288734TestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug288734TestLanguageUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.Bug288760TestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug288760TestLanguageUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.Bug289187TestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug289187TestLanguageUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.Bug291022TestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug291022TestLanguageUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ui.ContentAssistContextTestLanguageUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.CrossReferenceProposalTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ui.CrossReferenceProposalTestLanguageUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ui.DatatypeRuleTestLanguageUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ui.LookAheadContentAssistTestLanguageUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.DomainModelTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ui.DomainModelTestLanguageUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.UnorderedGroupsTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ui.UnorderedGroupsTestLanguageUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.parser.keywords.KeywordsUiTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.parser.keywords.ui.KeywordsUiTestLanguageUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.testlanguages.ui.ContentAssistTestLanguageUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.testlanguages.ReferenceGrammarUiTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.testlanguages.ui.ReferenceGrammarUiTestLanguageUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.enumrules.EnumRulesUiTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.enumrules.ui.EnumRulesUiTestLanguageUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.TestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.ui.TestLanguageUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.bracketmatching.ui.BmTestLanguageUiModule(this);
+		}
+		
+		throw new IllegalArgumentException(grammar);
+	}
+	
+	protected Module getSharedStateModule() {
+		return new org.eclipse.xtext.ui.shared.SharedStateModule();
 	}
 	
 }

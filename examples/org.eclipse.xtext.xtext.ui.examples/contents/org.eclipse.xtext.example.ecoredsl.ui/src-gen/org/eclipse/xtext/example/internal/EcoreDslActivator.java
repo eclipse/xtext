@@ -5,13 +5,14 @@
 package org.eclipse.xtext.example.internal;
 
 import org.apache.log4j.Logger;
-import org.eclipse.xtext.ui.UIPluginModule;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Module;
+import com.google.inject.util.Modules;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -35,8 +36,7 @@ public class EcoreDslActivator extends AbstractUIPlugin {
 		try {
 			
 			injectors.put("org.eclipse.xtext.example.EcoreDsl", Guice.createInjector(
-				new org.eclipse.xtext.example.ui.EcoreDslUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.example.EcoreDsl")).with(getUiModule("org.eclipse.xtext.example.EcoreDsl"))).with(getSharedStateModule())
 			));
 			
 		} catch (Exception e) {
@@ -49,8 +49,25 @@ public class EcoreDslActivator extends AbstractUIPlugin {
 		return INSTANCE;
 	}
 	
-	protected UIPluginModule createUIPluginModule() {
-		return new UIPluginModule(this);
+	protected Module getRuntimeModule(String grammar) {
+		
+		if ("org.eclipse.xtext.example.EcoreDsl".equals(grammar)) {
+		  return new org.eclipse.xtext.example.EcoreDslRuntimeModule();
+		}
+		
+		throw new IllegalArgumentException(grammar);
+	}
+	protected Module getUiModule(String grammar) {
+		
+		if ("org.eclipse.xtext.example.EcoreDsl".equals(grammar)) {
+		  return new org.eclipse.xtext.example.ui.EcoreDslUiModule(this);
+		}
+		
+		throw new IllegalArgumentException(grammar);
+	}
+	
+	protected Module getSharedStateModule() {
+		return new org.eclipse.xtext.ui.shared.SharedStateModule();
 	}
 	
 }

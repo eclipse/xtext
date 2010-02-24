@@ -8,11 +8,13 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.ui.UIPluginModule;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.enumrules.EnumRulesUiTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.enumrules.EnumRulesUiTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.enumrules.ui.EnumRulesUiTestLanguageUiModule;
+import org.eclipse.xtext.util.Modules2;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -26,7 +28,10 @@ public class EnumsContentAssistTest extends AbstractContentAssistProcessorTest {
 		return new EnumRulesUiTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new EnumRulesUiTestLanguageUiModule(), new UIPluginModule(Activator.getInstance()));
+				return Guice.createInjector(Modules2.mixin(
+						new EnumRulesUiTestLanguageRuntimeModule(),
+						new EnumRulesUiTestLanguageUiModule(Activator.getInstance()),
+						new SharedStateModule()));
 			}
 		};
 	}

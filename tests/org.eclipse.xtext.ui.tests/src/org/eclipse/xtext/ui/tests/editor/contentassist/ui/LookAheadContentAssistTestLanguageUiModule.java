@@ -3,9 +3,15 @@
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.ui;
 
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+
 /**
  * Use this class to register components to be used within the IDE.
  */
 public class LookAheadContentAssistTestLanguageUiModule extends org.eclipse.xtext.ui.tests.editor.contentassist.ui.AbstractLookAheadContentAssistTestLanguageUiModule {
+
+	public LookAheadContentAssistTestLanguageUiModule(AbstractUIPlugin plugin) {
+		super(plugin);
+	}
 
 }

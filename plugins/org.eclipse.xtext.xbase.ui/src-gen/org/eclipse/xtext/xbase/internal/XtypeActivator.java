@@ -5,13 +5,14 @@
 package org.eclipse.xtext.xbase.internal;
 
 import org.apache.log4j.Logger;
-import org.eclipse.xtext.ui.UIPluginModule;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Module;
+import com.google.inject.util.Modules;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -35,18 +36,15 @@ public class XtypeActivator extends AbstractUIPlugin {
 		try {
 			
 			injectors.put("org.eclipse.xtext.xbase.Xtype", Guice.createInjector(
-				new org.eclipse.xtext.xbase.ui.XtypeUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.xbase.Xtype")).with(getUiModule("org.eclipse.xtext.xbase.Xtype"))).with(getSharedStateModule())
 			));
 			
 			injectors.put("org.eclipse.xtext.xbase.Xpression", Guice.createInjector(
-				new org.eclipse.xtext.xbase.ui.XpressionUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.xbase.Xpression")).with(getUiModule("org.eclipse.xtext.xbase.Xpression"))).with(getSharedStateModule())
 			));
 			
 			injectors.put("org.eclipse.xtext.xbase.Xbase", Guice.createInjector(
-				new org.eclipse.xtext.xbase.ui.XbaseUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.xbase.Xbase")).with(getUiModule("org.eclipse.xtext.xbase.Xbase"))).with(getSharedStateModule())
 			));
 			
 		} catch (Exception e) {
@@ -59,8 +57,41 @@ public class XtypeActivator extends AbstractUIPlugin {
 		return INSTANCE;
 	}
 	
-	protected UIPluginModule createUIPluginModule() {
-		return new UIPluginModule(this);
+	protected Module getRuntimeModule(String grammar) {
+		
+		if ("org.eclipse.xtext.xbase.Xtype".equals(grammar)) {
+		  return new org.eclipse.xtext.xbase.XtypeRuntimeModule();
+		}
+		
+		if ("org.eclipse.xtext.xbase.Xpression".equals(grammar)) {
+		  return new org.eclipse.xtext.xbase.XpressionRuntimeModule();
+		}
+		
+		if ("org.eclipse.xtext.xbase.Xbase".equals(grammar)) {
+		  return new org.eclipse.xtext.xbase.XbaseRuntimeModule();
+		}
+		
+		throw new IllegalArgumentException(grammar);
+	}
+	protected Module getUiModule(String grammar) {
+		
+		if ("org.eclipse.xtext.xbase.Xtype".equals(grammar)) {
+		  return new org.eclipse.xtext.xbase.ui.XtypeUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.xbase.Xpression".equals(grammar)) {
+		  return new org.eclipse.xtext.xbase.ui.XpressionUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.xbase.Xbase".equals(grammar)) {
+		  return new org.eclipse.xtext.xbase.ui.XbaseUiModule(this);
+		}
+		
+		throw new IllegalArgumentException(grammar);
+	}
+	
+	protected Module getSharedStateModule() {
+		return new org.eclipse.xtext.ui.shared.SharedStateModule();
 	}
 	
 }

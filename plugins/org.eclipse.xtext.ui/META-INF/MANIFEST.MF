@@ -21,8 +21,7 @@ Require-Bundle: org.eclipse.core.runtime;bundle-version="3.4.0";visibility:=reex
  com.ibm.icu;bundle-version="4.0.1",
  org.eclipse.search;bundle-version="3.5.0";resolution:=optional
 Bundle-Activator: org.eclipse.xtext.ui.internal.Activator
-Export-Package: org.eclipse.xtext.common.ui,
- org.eclipse.xtext.common.ui.contentassist,
+Export-Package: org.eclipse.xtext.common.ui.contentassist,
  org.eclipse.xtext.ui,
  org.eclipse.xtext.ui.containers,
  org.eclipse.xtext.ui.editor,

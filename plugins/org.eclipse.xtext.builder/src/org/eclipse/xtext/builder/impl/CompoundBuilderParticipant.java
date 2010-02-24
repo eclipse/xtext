@@ -23,10 +23,12 @@ import org.eclipse.xtext.builder.internal.Activator;
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@Singleton
 public class CompoundBuilderParticipant implements IXtextBuilderParticipant {
 
 	private static final String PARTICIPANT = "participant";

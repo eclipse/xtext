@@ -8,10 +8,11 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.ui.UIPluginModule;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.DatatypeRuleTestLanguageUiModule;
+import org.eclipse.xtext.util.Modules2;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -25,8 +26,8 @@ public class Bug281198Test extends AbstractContentAssistProcessorTest {
 		return new DatatypeRuleTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new DatatypeRuleTestLanguageUiModule(), new UIPluginModule(Activator
-						.getInstance()));
+				return Guice.createInjector(Modules2.mixin(new DatatypeRuleTestLanguageRuntimeModule() ,new DatatypeRuleTestLanguageUiModule(Activator
+						.getInstance()), new SharedStateModule()));
 			}
 		};
 	}

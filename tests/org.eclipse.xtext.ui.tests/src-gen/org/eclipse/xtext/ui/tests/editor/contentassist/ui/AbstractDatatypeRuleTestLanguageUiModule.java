@@ -4,154 +4,19 @@
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.ui;
 
-import org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguageRuntimeModule;
+import org.eclipse.xtext.ui.DefaultUiModule;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 
 /**
  * Manual modifications go to {org.eclipse.xtext.ui.tests.editor.contentassist.ui.DatatypeRuleTestLanguageUiModule}
  */
-public abstract class AbstractDatatypeRuleTestLanguageUiModule extends DatatypeRuleTestLanguageRuntimeModule {
+public abstract class AbstractDatatypeRuleTestLanguageUiModule extends DefaultUiModule {
+	
+	public AbstractDatatypeRuleTestLanguageUiModule(AbstractUIPlugin plugin) {
+		super(plugin);
+	}
 	
 	
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.xtext.resource.ILocationInFileProvider> bindILocationInFileProvider() {
-		return org.eclipse.xtext.resource.DefaultLocationInFileProvider.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.jface.text.reconciler.IReconciler> bindIReconciler() {
-		return org.eclipse.xtext.ui.editor.reconciler.XtextReconciler.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.xtext.ui.editor.toggleComments.ISingleLineCommentHelper> bindISingleLineCommentHelper() {
-		return org.eclipse.xtext.ui.editor.toggleComments.DefaultSingleLineCommentHelper.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.jface.text.hyperlink.IHyperlinkDetector> bindIHyperlinkDetector() {
-		return org.eclipse.xtext.ui.editor.hyperlinking.DefaultHyperlinkDetector.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public void configureHyperlinkLabelProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkLabelProvider.class).to(org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider.class);
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.xtext.ui.editor.outline.transformer.ISemanticModelTransformer> bindISemanticModelTransformer() {
-		return org.eclipse.xtext.ui.editor.outline.transformer.DefaultSemanticModelTransformer.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.xtext.ui.editor.outline.IOutlineTreeProvider> bindIOutlineTreeProvider() {
-		return org.eclipse.xtext.ui.editor.outline.transformer.TransformingTreeProvider.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.ui.views.contentoutline.IContentOutlinePage> bindIContentOutlinePage() {
-		return org.eclipse.xtext.ui.editor.outline.XtextContentOutlinePage.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.xtext.ui.editor.outline.actions.IActionBarContributor> bindIActionBarContributor() {
-		return org.eclipse.xtext.ui.editor.outline.actions.IActionBarContributor.DefaultActionBarContributor.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public void configureOutlineLabelProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(org.eclipse.xtext.ui.editor.outline.OutlineLabelProvider.class).to(org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider.class);
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingHelper> bindIHighlightingHelper() {
-		return org.eclipse.xtext.ui.editor.syntaxcoloring.HighlightingHelper.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.emf.common.notify.AdapterFactory> bindAdapterFactory() {
-		return org.eclipse.xtext.ui.InjectableAdapterFactory.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider> bindAdapterFactoryLabelProvider() {
-		return org.eclipse.xtext.ui.label.InjectableAdapterFactoryLabelProvider.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry bindComposedAdapterFactory$Descriptor$RegistryToInstance() {
-		return org.eclipse.emf.edit.provider.ComposedAdapterFactory.Descriptor.Registry.INSTANCE;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.IContentAssistantFactory> bindIContentAssistantFactory() {
-		return org.eclipse.xtext.ui.editor.contentassist.DefaultContentAssistantFactory.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.jface.text.contentassist.IContentAssistProcessor> bindIContentAssistProcessor() {
-		return org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalPostProcessor> bindICompletionProposalPostProcessor() {
-		return org.eclipse.xtext.ui.editor.contentassist.DefaultCompletionProposalPostProcessor.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.IFollowElementCalculator> bindIFollowElementCalculator() {
-		return org.eclipse.xtext.ui.editor.contentassist.DefaultFollowElementCalculator.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public void configureContentProposalLabelProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(org.eclipse.xtext.ui.editor.contentassist.ContentProposalLabelProvider.class).to(org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider.class);
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.ITemplateProposalProvider> bindITemplateProposalProvider() {
-		return org.eclipse.xtext.ui.editor.templates.DefaultTemplateProposalProvider.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.jface.text.templates.persistence.TemplateStore> bindTemplateStore() {
-		return org.eclipse.xtext.ui.editor.templates.XtextTemplateStore.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.jface.text.templates.ContextTypeRegistry> bindContextTypeRegistry() {
-		return org.eclipse.xtext.ui.editor.templates.XtextTemplateContextTypeRegistry.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.xtext.ui.editor.formatting.IContentFormatterFactory> bindIContentFormatterFactory() {
-		return org.eclipse.xtext.ui.editor.formatting.ContentFormatterFactory.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public void configureXtextEditorErrorTickUpdater(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.xtext.ui.editor.IXtextEditorCallback.class).annotatedWith(com.google.inject.name.Names.named("IXtextEditorCallBack")).to(org.eclipse.xtext.ui.editor.XtextEditorErrorTickUpdater.class);
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public Class<? extends org.eclipse.xtext.resource.IExternalContentSupport.IExternalContentProvider> bindIExternalContentSupport$IExternalContentProvider() {
-		return org.eclipse.xtext.ui.editor.IDirtyStateManager.class;
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public com.google.inject.Provider<org.eclipse.xtext.ui.editor.IDirtyStateManager> provideIDirtyStateManager() {
-		return new org.eclipse.xtext.ui.editor.DirtyStateManagerProvider();
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public com.google.inject.Provider<org.eclipse.xtext.ui.notification.IStateChangeEventBroker> provideIStateChangeEventBroker() {
-		return new org.eclipse.xtext.ui.notification.StateChangeEventBrokerProvider();
-	}
-
-	// contributed by org.eclipse.xtext.ui.generator.ImplicitUiFragment
-	public void configureResourceUIServiceLabelProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class).to(org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider.class);
-	}
-
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.jface.text.rules.ITokenScanner> bindITokenScanner() {
 		return org.eclipse.xtext.ui.editor.syntaxcoloring.antlr.AntlrTokenScanner.class;

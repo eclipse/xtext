@@ -13,12 +13,14 @@ import java.util.Set;
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.ui.UIPluginModule;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.XtextGrammarUiTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.services.XtextGrammarUiTestLanguageGrammarAccess;
 import org.eclipse.xtext.ui.tests.ui.XtextGrammarUiTestLanguageUiModule;
+import org.eclipse.xtext.util.Modules2;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -41,9 +43,9 @@ public abstract class AbstractParserTest extends AbstractXtextTests {
 		with(new XtextGrammarUiTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(
-						new XtextGrammarUiTestLanguageUiModule(),
-						new UIPluginModule(Activator.getInstance()));
+				return Guice.createInjector(Modules2.mixin(new XtextGrammarUiTestLanguageRuntimeModule(),
+						new XtextGrammarUiTestLanguageUiModule(Activator.getInstance()),
+						new SharedStateModule()));
 			}
 		});
 		grammarAccess = get(XtextGrammarUiTestLanguageGrammarAccess.class);

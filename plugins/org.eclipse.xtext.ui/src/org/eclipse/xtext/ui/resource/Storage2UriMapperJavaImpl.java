@@ -25,6 +25,7 @@ import org.eclipse.xtext.util.SimpleCache;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Sets;
+import com.google.inject.Inject;
 import com.google.inject.Singleton;
 
 /**
@@ -34,6 +35,13 @@ import com.google.inject.Singleton;
 public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements IElementChangedListener {
 
 	private static final Logger log = Logger.getLogger(Storage2UriMapperJavaImpl.class);
+	
+	@Inject
+	private JarEntryLocator locator;
+	
+	public void setLocator(JarEntryLocator locator) {
+		this.locator = locator;
+	}
 
 	public Storage2UriMapperJavaImpl() {
 		JavaCore.addElementChangedListener(this);
@@ -111,7 +119,6 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 		if (project.exists()) {
 			try {
 				IPackageFragmentRoot[] fragmentRoots = project.getAllPackageFragmentRoots();
-				JarEntryLocator locator = new JarEntryLocator();
 				for (IPackageFragmentRoot fragRoot : fragmentRoots) {
 					if (fragRoot.isExternal() && !fragRoot.isArchive()) {
 						IStorage storage = locator.getJarEntry(uri, fragRoot);
@@ -131,7 +138,6 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 		if (project.exists()) {
 			try {
 				IPackageFragmentRoot[] fragmentRoots = project.getAllPackageFragmentRoots();
-				JarEntryLocator locator = new JarEntryLocator();
 				for (IPackageFragmentRoot fragRoot : fragmentRoots) {
 					if (!"org.eclipse.jdt.launching.JRE_CONTAINER".equals(fragRoot.getRawClasspathEntry().getPath()
 							.toString())) {
@@ -159,7 +165,7 @@ public class Storage2UriMapperJavaImpl extends Storage2UriMapperImpl implements 
 	}
 
 	protected URI getUriForIJarEntryResource(IJarEntryResource jarEntry) {
-		return new JarEntryLocator().getURI(jarEntry);
+		return locator.getURI(jarEntry);
 	}
 	
 	protected URI getPathToArchive(URI archiveURI) {

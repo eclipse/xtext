@@ -5,13 +5,14 @@
 package org.eclipse.xtext.xtend;
 
 import org.apache.log4j.Logger;
-import org.eclipse.xtext.ui.UIPluginModule;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.osgi.framework.BundleContext;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
+import com.google.inject.Module;
+import com.google.inject.util.Modules;
 
 import java.util.Map;
 import java.util.HashMap;
@@ -35,8 +36,7 @@ public class XtendTestsActivator extends AbstractUIPlugin {
 		try {
 			
 			injectors.put("org.eclipse.xtext.xtend.TreeTestLanguage", Guice.createInjector(
-				new org.eclipse.xtext.xtend.ui.TreeTestLanguageUiModule(),
-				createUIPluginModule()
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.xtend.TreeTestLanguage")).with(getUiModule("org.eclipse.xtext.xtend.TreeTestLanguage"))).with(getSharedStateModule())
 			));
 			
 		} catch (Exception e) {
@@ -49,8 +49,25 @@ public class XtendTestsActivator extends AbstractUIPlugin {
 		return INSTANCE;
 	}
 	
-	protected UIPluginModule createUIPluginModule() {
-		return new UIPluginModule(this);
+	protected Module getRuntimeModule(String grammar) {
+		
+		if ("org.eclipse.xtext.xtend.TreeTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.xtend.TreeTestLanguageRuntimeModule();
+		}
+		
+		throw new IllegalArgumentException(grammar);
+	}
+	protected Module getUiModule(String grammar) {
+		
+		if ("org.eclipse.xtext.xtend.TreeTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.xtend.ui.TreeTestLanguageUiModule(this);
+		}
+		
+		throw new IllegalArgumentException(grammar);
+	}
+	
+	protected Module getSharedStateModule() {
+		return new org.eclipse.xtext.ui.shared.SharedStateModule();
 	}
 	
 }

@@ -38,9 +38,8 @@ public class PersistableResourceDescriptionsImpl extends AbstractResourceDescrip
 	implements IBuilderState {
 
 	@ImplementedBy(EMFBasedPersister.class)
-	public interface Persister {
-		Iterable<IResourceDescription> load() throws Exception;
-		void save(Iterable<IResourceDescription> descriptions) throws Exception;
+	public interface PersistedStateProvider {
+		Iterable<IResourceDescription> load();
 	}
 	
 	private volatile Map<URI, IResourceDescription> resourceDescriptionMap = Collections.emptyMap();
@@ -52,24 +51,25 @@ public class PersistableResourceDescriptionsImpl extends AbstractResourceDescrip
 	private IMarkerUpdater markerUpdater;
 
 	@Inject
-	private Persister persister;
+	private PersistedStateProvider persister;
 	
-	public synchronized void load() throws Exception {
+	private boolean isLoaded = false;
+	
+	public synchronized void load() {
 		resourceDescriptionMap = Maps.uniqueIndex(persister.load(), new Function<IResourceDescription, URI>() {
 			public URI apply(IResourceDescription from) {
 				return from.getURI();
 			}
 		});
-	}
-
-	public synchronized void save() throws Exception {
-		persister.save(getAllResourceDescriptions());
+		isLoaded = true;
 	}
 
 	public synchronized ImmutableList<IResourceDescription.Delta> update(ResourceSet resourceSet, 
 			Set<URI> toBeAddedOrUpdated,
 			Set<URI> toBeRemoved, 
 			IProgressMonitor monitor) {
+		if (!isLoaded)
+			load();
 		toBeAddedOrUpdated = toBeAddedOrUpdated!=null?toBeAddedOrUpdated:Collections.<URI>emptySet();
 		toBeRemoved = toBeRemoved!=null?toBeRemoved:Collections.<URI>emptySet();
 		SubMonitor subMonitor = SubMonitor.convert(monitor, "Create resource descriptions", 3);
@@ -133,19 +133,19 @@ public class PersistableResourceDescriptionsImpl extends AbstractResourceDescrip
 	}
 
 	public Iterable<IResourceDescription> getAllResourceDescriptions() {
+		if (!isLoaded)
+			load();
 		return resourceDescriptionMap.values();
 	}
 
 	public IResourceDescription getResourceDescription(URI uri) {
+		if (!isLoaded)
+			load();
 		return resourceDescriptionMap.get(uri);
 	}
 
-	public void setPersister(Persister persister) {
+	public void setPersister(PersistedStateProvider persister) {
 		this.persister = persister;
-	}
-
-	public Persister getPersister() {
-		return persister;
 	}
 
 }

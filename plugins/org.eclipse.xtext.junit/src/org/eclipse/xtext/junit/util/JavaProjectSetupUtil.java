@@ -71,6 +71,7 @@ public class JavaProjectSetupUtil {
 
 	public static IJavaProject createJavaProject(String projectName) throws CoreException {
 		IProject project = createProject(projectName);
+		JavaCore.initializeAfterLoad(monitor());
 		IJavaProject javaProject = makeJavaProject(project);
 		return javaProject;
 	}

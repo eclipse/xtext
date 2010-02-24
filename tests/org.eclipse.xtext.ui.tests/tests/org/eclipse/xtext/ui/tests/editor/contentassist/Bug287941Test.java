@@ -10,10 +10,11 @@ package org.eclipse.xtext.ui.tests.editor.contentassist;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.ecore.EcoreResourceServiceProviderImpl;
-import org.eclipse.xtext.ui.UIPluginModule;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug287941TestLanguageUiModule;
+import org.eclipse.xtext.util.Modules2;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -28,8 +29,9 @@ public class Bug287941Test extends AbstractContentAssistProcessorTest {
 		return new Bug287941TestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new Bug287941TestLanguageUiModule(), new UIPluginModule(Activator
-						.getInstance()));
+				return Guice.createInjector(Modules2.mixin(new Bug287941TestLanguageRuntimeModule(), 
+						new Bug287941TestLanguageUiModule(Activator
+						.getInstance()), new SharedStateModule()));
 			}
 		};
 	}

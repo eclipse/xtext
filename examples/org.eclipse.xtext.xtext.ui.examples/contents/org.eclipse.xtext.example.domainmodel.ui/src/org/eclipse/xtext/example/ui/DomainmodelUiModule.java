@@ -3,10 +3,16 @@
  */
 package org.eclipse.xtext.example.ui;
 
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+
 
 /**
  * Use this class to register components to be used within the IDE.
  */
 public class DomainmodelUiModule extends org.eclipse.xtext.example.ui.AbstractDomainmodelUiModule {
 
+	public DomainmodelUiModule(AbstractUIPlugin plugin) {
+		super(plugin);
+	}
+	
 }

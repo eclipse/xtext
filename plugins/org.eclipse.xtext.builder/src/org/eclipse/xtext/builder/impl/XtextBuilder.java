@@ -38,7 +38,7 @@ import com.google.inject.Inject;
 public class XtextBuilder extends IncrementalProjectBuilder {
 	public static Logger log = Logger.getLogger(XtextBuilder.class);
 
-	public static final String BUILDER_ID = "org.eclipse.xtext.builder.xtextBuilder";
+	public static final String BUILDER_ID = "org.eclipse.xtext.ui.shared.xtextBuilder";
 
 	@Inject
 	private ToBeBuiltComputer toBeBuiltComputer;
@@ -50,7 +50,7 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 	private IResourceSetProvider resourceSetProvider;
 	
 	@Inject
-	private IXtextBuilderParticipant participant;
+	private CompoundBuilderParticipant participant;
 
 	public IResourceSetProvider getResourceSetProvider() {
 		return resourceSetProvider;

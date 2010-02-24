@@ -4,6 +4,7 @@
 package org.eclipse.xtext.ui.tests.editor.bracketmatching.ui;
 
 import org.eclipse.jface.text.IAutoEditStrategy;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.tests.editor.bracketmatching.ui.autoedit.AutoEditStrategy;
 
@@ -11,6 +12,10 @@ import org.eclipse.xtext.ui.tests.editor.bracketmatching.ui.autoedit.AutoEditStr
  * Use this class to register components to be used within the IDE.
  */
 public class BmTestLanguageUiModule extends AbstractBmTestLanguageUiModule {
+
+	public BmTestLanguageUiModule(AbstractUIPlugin plugin) {
+		super(plugin);
+	}
 
 	@Override
 	public Class<? extends IXtextEditorCallback> bindIXtextEditorCallback() {

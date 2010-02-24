@@ -5,19 +5,23 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.containers;
+package org.eclipse.xtext.util;
 
-import org.eclipse.xtext.resource.IResourceDescriptions;
-import org.eclipse.xtext.resource.containers.IAllContainersState;
-import org.eclipse.xtext.ui.internal.Activator;
+import com.google.inject.Module;
+import com.google.inject.util.Modules;
 
 /**
- * @author Sebastian Zarnekow - Initial contribution and API
+ * @author svenefftinge - Initial contribution and API
  */
-public class JavaProjectsStateProvider implements IAllContainersState.Provider{
-
-	public IAllContainersState get(IResourceDescriptions context) {
-		return Activator.getDefault().getJavaProjectsState();
-	}
+public class Modules2 {
 	
+	public static Module mixin(Module...m) {
+		if (m.length==0)
+			return null;
+		Module current = m[0];
+		for (int i=1;i<m.length;i++) {
+			current = Modules.override(current).with(m[i]);
+		}
+		return current;
+	}
 }
