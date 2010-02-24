@@ -23,7 +23,8 @@ Require-Bundle: org.eclipse.xtext.ui;bundle-version="0.8.0",
  org.antlr.runtime,
  org.eclipse.ui.editors,
  org.eclipse.ui,
- org.eclipse.xtext.builder
+ org.eclipse.xtext.builder,
+ org.eclipse.xtext.ui.shared
 Bundle-Activator: org.eclipse.xtext.ui.tests.Activator
 Bundle-ActivationPolicy: lazy
 Bundle-Vendor: Eclipse.org

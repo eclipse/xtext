@@ -3,13 +3,17 @@
  */
 package org.eclipse.xtext.builder.tests.ui;
 
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.resource.IContainer;
 
 /**
  * Use this class to register components to be used within the IDE.
  */
 public class BuilderTestLanguageUiModule extends org.eclipse.xtext.builder.tests.ui.AbstractBuilderTestLanguageUiModule {
-	@Override
+	public BuilderTestLanguageUiModule(AbstractUIPlugin plugin) {
+		super(plugin);
+	}
+
 	public Class<? extends IContainer.Manager> bindIContainer$Manager() {
 		return org.eclipse.xtext.resource.containers.StateBasedContainerManager.class;
 	}

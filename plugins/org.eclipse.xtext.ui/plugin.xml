@@ -171,18 +171,6 @@
       <super type="org.eclipse.xtext.ui.check"/>
       <persistent value="true"/>
    </extension>
-  <extension
-        id="xtextBuilder"
-        name="Xtext Project Builder"
-        point="org.eclipse.core.resources.builders">
-     <builder
-           hasNature="true">
-        <run
-              class="org.eclipse.xtext.ui.internal.GuiceAwareExtensionFactory">
-              <parameter name="guicekey" value="org.eclipse.xtext.ui.builder.internal.XtextBuilder"/>
-        </run>
-     </builder>
-  </extension>
    <extension
       point="org.eclipse.ui.editors.annotationTypes">
       <type
@@ -215,25 +203,6 @@
             quickFixIcon="icons/quick_fix_warning_obj.gif">
       </specification>
    </extension>
-   <!--extension
-         point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectors">
-      <hyperlinkDetector
-            activate="true"
-            class="org.eclipse.xtext.ui.editor.DelegatingHyperlinkDetector"
-            id="org.eclipse.xtext.ui.hyperlinkDetector"
-            name="XtextHypeLink"
-            targetId="org.eclipse.xtext.ui.hyperlinkTarget">
-      </hyperlinkDetector>
-   </extension>
-   <extension
-         point="org.eclipse.ui.workbench.texteditor.hyperlinkDetectorTargets">
-      <target
-            description="Depends on an EditorModel contained in all Xtext editors"
-            id="org.eclipse.xtext.ui.hyperlinkTarget"
-            name="Xtext Editors">
-         <context type="org.eclipse.xtext.ui.editor.model.IEditorModel"/>
-      </target>
-   </extension-->
    
    <!-- open Xtext element -->
    <extension

@@ -12,14 +12,16 @@ import java.util.Set;
 
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.ui.UIPluginModule;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.AbstractContentAssistParser;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.LookAheadContentAssistTestLanguageStandaloneSetup;
-import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.LookAheadContentAssistTestLanguageParser;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.LookAheadContentAssistTestLanguageGrammarAccess;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.LookAheadContentAssistTestLanguageUiModule;
+import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.LookAheadContentAssistTestLanguageParser;
+import org.eclipse.xtext.util.Modules2;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -41,8 +43,9 @@ public class Bug282031ParserTest extends AbstractXtextTests {
 			@Override
 			public Injector createInjector() {
 				return Guice.createInjector(
-						new LookAheadContentAssistTestLanguageUiModule(),
-						new UIPluginModule(Activator.getInstance()));
+						Modules2.mixin(new LookAheadContentAssistTestLanguageRuntimeModule(),
+						new LookAheadContentAssistTestLanguageUiModule(Activator.getInstance()),
+						new SharedStateModule()));
 			}
 		});
 		grammarAccess = get(LookAheadContentAssistTestLanguageGrammarAccess.class);

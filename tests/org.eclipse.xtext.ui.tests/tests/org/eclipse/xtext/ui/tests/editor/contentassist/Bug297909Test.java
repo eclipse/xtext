@@ -19,14 +19,16 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.UIPluginModule;
 import org.eclipse.xtext.ui.editor.model.XtextDocument;
 import org.eclipse.xtext.ui.editor.reconciler.XtextDocumentReconcileStrategy;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.testlanguages.ContentAssistTestLanguageStandaloneSetup;
 import org.eclipse.xtext.ui.tests.testlanguages.services.ContentAssistTestLanguageGrammarAccess;
 import org.eclipse.xtext.ui.tests.testlanguages.ui.ContentAssistTestLanguageUiModule;
+import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.inject.Guice;
@@ -41,8 +43,8 @@ public class Bug297909Test extends AbstractContentAssistProcessorTest {
 		return new ContentAssistTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new ContentAssistTestLanguageUiModule(), new UIPluginModule(Activator
-						.getInstance()));
+				return Guice.createInjector(Modules2.mixin(new ContentAssistTestLanguageRuntimeModule(), new ContentAssistTestLanguageUiModule(Activator
+						.getInstance()), new SharedStateModule()));
 			}
 			
 			@Override

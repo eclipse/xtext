@@ -20,6 +20,7 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.xtext.junit.util.JavaProjectSetupUtil.TextFile;
+import org.eclipse.xtext.ui.resource.JarEntryLocator;
 import org.eclipse.xtext.ui.resource.Storage2UriMapperJavaImpl;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -40,6 +41,7 @@ public class Storage2UriMapperJdtImplTest extends TestCase {
 				return uri!=null;
 			}
 		};
+		impl.setLocator(new JarEntryLocator());
 		URI uri = URI.createURI("archive:platform:/resource/foo/foo.jar!/foo/bar.txt");
 		Iterable<IStorage> storages = impl.getStorages(uri);
 		Iterator<IStorage> iterator = storages.iterator();
@@ -61,6 +63,7 @@ public class Storage2UriMapperJdtImplTest extends TestCase {
 				return uri!=null;
 			}
 		};
+		impl.setLocator(new JarEntryLocator());
 		URI uri = URI.createPlatformResourceURI(file.getFullPath().toString(), true);
 		Iterable<IStorage> storages = impl.getStorages(uri);
 		Iterator<IStorage> iterator = storages.iterator();

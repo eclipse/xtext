@@ -17,7 +17,7 @@ import org.eclipse.xtext.builder.impl.XtextBuilder;
 
 public class XtextNature implements IProjectNature {
 	
-	public static final String NATURE_ID = "org.eclipse.xtext.builder.xtextNature";
+	public static final String NATURE_ID = "org.eclipse.xtext.ui.shared.xtextNature";
 
 	private static final Logger log = Logger.getLogger(XtextNature.class);
 	

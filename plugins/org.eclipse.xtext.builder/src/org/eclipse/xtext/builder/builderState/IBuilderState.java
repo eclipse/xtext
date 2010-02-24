@@ -34,8 +34,4 @@ public interface IBuilderState extends IResourceDescriptions, IResourceDescripti
 	 * @return a list of changes in the form of deltas.
 	 */
 	ImmutableList<IResourceDescription.Delta> update(ResourceSet resourceSet, Set<URI> toBeAddedOrUpdated, Set<URI> toBeRemoved, IProgressMonitor monitor);
-	
-	void save() throws Exception;
-	
-	void load() throws Exception;
 }

@@ -10,6 +10,7 @@ package org.eclipse.xtext.builder.impl;
 import static junit.framework.Assert.*;
 import static org.eclipse.xtext.junit.util.IResourcesSetupUtil.*;
 
+import java.util.Collection;
 import java.util.Set;
 
 import org.eclipse.core.resources.IFile;
@@ -24,6 +25,7 @@ import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
+import org.eclipse.xtext.ui.shared.Access;
 import org.eclipse.xtext.util.EmfFormatter;
 
 import com.google.common.collect.Collections2;
@@ -73,11 +75,12 @@ public class BuilderUtil {
 	}
 
 	public static IBuilderState getBuilderState() {
-		return BuilderStateAccess.getBuilderState().get();
+		return Access.getIBuilderState().get();
 	}
 
 	public static int countResourcesInIndex() {
-		return Collections2.forIterable(getBuilderState().getAllResourceDescriptions()).size();
+		Collection<IResourceDescription> forIterable = Collections2.forIterable(getBuilderState().getAllResourceDescriptions());
+		return forIterable.size();
 	}
 
 	public static void assertNumberOfMarkers(IFile file, int numberOfMarkers) throws CoreException {

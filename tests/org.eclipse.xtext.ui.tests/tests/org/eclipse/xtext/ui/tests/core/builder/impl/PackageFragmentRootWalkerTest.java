@@ -16,6 +16,7 @@ import junit.framework.TestCase;
 
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.runtime.IPath;
+import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.jdt.core.IJarEntryResource;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
@@ -37,7 +38,7 @@ public class PackageFragmentRootWalkerTest extends TestCase {
 		IJavaProject project = createJavaProject("foo");
 		String jarName = "JarWalkerTest.jar";
 		IFile file = project.getProject().getFile(jarName);
-		file.create(getClass().getResourceAsStream(jarName), true, new org.eclipse.core.runtime.NullProgressMonitor());
+		file.create(getClass().getResourceAsStream(jarName), true, new NullProgressMonitor());
 		addJarToClasspath(project, file);
 		
 		final Set<IPath> pathes = new HashSet<IPath>();

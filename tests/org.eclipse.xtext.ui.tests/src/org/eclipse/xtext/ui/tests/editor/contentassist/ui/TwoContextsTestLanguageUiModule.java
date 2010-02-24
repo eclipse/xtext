@@ -3,9 +3,15 @@
  */
 package org.eclipse.xtext.ui.tests.editor.contentassist.ui;
 
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+
 /**
  * Use this class to register components to be used within the IDE.
  */
 public class TwoContextsTestLanguageUiModule extends org.eclipse.xtext.ui.tests.editor.contentassist.ui.AbstractTwoContextsTestLanguageUiModule {
+
+	public TwoContextsTestLanguageUiModule(AbstractUIPlugin plugin) {
+		super(plugin);
+	}
 
 }

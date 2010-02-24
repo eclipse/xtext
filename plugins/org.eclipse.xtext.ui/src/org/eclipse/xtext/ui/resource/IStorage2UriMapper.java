@@ -10,18 +10,21 @@ package org.eclipse.xtext.ui.resource;
 import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 
-import com.google.inject.ImplementedBy;
-
 /**
  * @author Sven Efftinge - Initial contribution and API
- * 
- * TODO reuse instance created by shared infrastructure 
  */
-@ImplementedBy(Storage2UriMapperJavaImpl.class)
 public interface IStorage2UriMapper {
-	
+
+	/**
+	 * @return IStorages corresponding to the given URI. It will typically be only on {@link IStorage} but in the case
+	 *         that the same external class folder or jar is referenced in multiple projects multiple {@link IStorage}s
+	 *         are returned.
+	 */
 	Iterable<IStorage> getStorages(URI uri);
-	
+
+	/**
+	 * @return returns the URI for the given {@link IStorage}. 
+	 */
 	URI getUri(IStorage storage);
-	
+
 }

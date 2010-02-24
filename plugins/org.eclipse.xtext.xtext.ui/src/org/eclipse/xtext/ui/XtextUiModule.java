@@ -4,6 +4,7 @@
 package org.eclipse.xtext.ui;
 
 import org.eclipse.jface.text.IAutoEditStrategy;
+import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.ui.editor.bracketmatching.IBracketMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
@@ -24,7 +25,6 @@ import org.eclipse.xtext.xtext.ui.editor.outline.XtextActionBarContributor;
 import org.eclipse.xtext.xtext.ui.editor.outline.XtextDeclarativeModelTransformer;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingCalculator;
 import org.eclipse.xtext.xtext.ui.editor.syntaxcoloring.SemanticHighlightingConfiguration;
-import org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.Ecore2XtextProjectCreator;
 import org.eclipse.xtext.xtext.ui.wizard.project.XtextProjectCreator;
 
 import com.google.inject.Binder;
@@ -34,6 +34,10 @@ import com.google.inject.name.Names;
  * Use this class to register components to be used within the IDE.
  */
 public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
+	public XtextUiModule(AbstractUIPlugin plugin) {
+		super(plugin);
+	}
+
 	@Override
 	public void configure(Binder binder) {
 		super.configure(binder);
@@ -85,7 +89,6 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 		return XtextActionBarContributor.class;
 	}
 
-	@Override
 	public Class<? extends IXtext2EcorePostProcessor> bindIXtext2EcorePostProcessor() {
 		return ProjectAwareXtendXtext2EcorePostProcessor.class;
 	}

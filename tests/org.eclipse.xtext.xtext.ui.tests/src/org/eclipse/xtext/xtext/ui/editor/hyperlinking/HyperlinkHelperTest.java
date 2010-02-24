@@ -13,13 +13,15 @@ import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.XtextRuntimeModule;
 import org.eclipse.xtext.XtextStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.ClasspathUriUtil;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.UIPluginModule;
 import org.eclipse.xtext.ui.editor.hyperlinking.HyperlinkHelper;
 import org.eclipse.xtext.ui.editor.hyperlinking.XtextHyperlink;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
+import org.eclipse.xtext.util.Modules2;
 import org.eclipse.xtext.xtext.ui.Activator;
 
 import com.google.inject.Guice;
@@ -34,8 +36,7 @@ public class HyperlinkHelperTest extends AbstractXtextTests {
 		return new XtextStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new org.eclipse.xtext.ui.XtextUiModule(),
-						new UIPluginModule(Activator.getDefault()));
+				return Guice.createInjector(Modules2.mixin(new XtextRuntimeModule(), new org.eclipse.xtext.ui.XtextUiModule(Activator.getDefault()), new SharedStateModule()));
 			}
 		};
 	}

@@ -3,9 +3,15 @@
  */
 package org.eclipse.xtext.xbase.ui;
 
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+
 /**
  * Use this class to register components to be used within the IDE.
  */
 public class XpressionUiModule extends org.eclipse.xtext.xbase.ui.AbstractXpressionUiModule {
+
+	public XpressionUiModule(AbstractUIPlugin plugin) {
+		super(plugin);
+	}
 
 }

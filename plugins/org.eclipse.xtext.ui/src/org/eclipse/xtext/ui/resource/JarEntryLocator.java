@@ -61,6 +61,8 @@ public class JarEntryLocator {
 		try {
 			try {
 				if (root.isArchive()) {
+					if (!uri.isArchive())
+						return null;
 					final String path = uri.devicePath().substring(uri.authority().length());
 					return new PackageFragmentRootWalker<IJarEntryResource>() {
 						@Override
@@ -71,6 +73,8 @@ public class JarEntryLocator {
 						}
 					}.traverse(root, true);
 				} else if (root instanceof ExternalPackageFragmentRoot) {
+					if (!uri.isPlatformResource())
+						return null;
 					IResource resource = ((ExternalPackageFragmentRoot) root).resource();
 					IPath uriAsPath = new Path(uri.toPlatformString(true));
 					IPath absolutePath = resource.getFullPath(); // external folder link

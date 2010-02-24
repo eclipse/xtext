@@ -3,7 +3,6 @@
 */
 package org.eclipse.xtext.ui.tests.parser.keywords.ui.contentassist;
 
-import org.eclipse.xtext.ui.tests.parser.keywords.ui.contentassist.AbstractKeywordsUiTestLanguageProposalProvider;
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */

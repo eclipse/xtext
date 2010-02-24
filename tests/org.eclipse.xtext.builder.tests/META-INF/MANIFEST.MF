@@ -18,7 +18,8 @@ Require-Bundle: org.junit,
  org.eclipse.ui.editors,
  org.eclipse.ui,
  org.eclipse.jdt.core,
- de.itemis.xtext.antlr;bundle-version="0.8.0";resolution:=optional
+ de.itemis.xtext.antlr;bundle-version="0.8.0";resolution:=optional,
+ org.eclipse.xtext.ui.shared;bundle-version="0.8.0"
 Import-Package: org.apache.log4j
 Bundle-Activator: org.eclipse.xtext.builder.tests.Activator
 Bundle-ActivationPolicy: lazy

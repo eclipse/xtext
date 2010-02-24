@@ -20,9 +20,14 @@ import org.eclipse.xtext.builder.builderState.impl.ResourceDescriptionImpl;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.util.EmfStructureComparator;
 
 import com.google.common.collect.Lists;
+import com.google.inject.AbstractModule;
+import com.google.inject.Guice;
+import com.google.inject.Module;
+import com.google.inject.util.Modules;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -36,12 +41,18 @@ public class AbstractEMFBasedPersisterTest extends TestCase {
 	@Override
 	protected void setUp() throws Exception {
 		tempFile = File.createTempFile("foo", "bar");
-		persister = new EMFBasedPersister() {
+		SharedStateModule module = new SharedStateModule();
+		Module m = Modules.override(module).with(new AbstractModule() {
 			@Override
-			public URI getBuilderStateURI() {
-				return URI.createFileURI(tempFile.getAbsolutePath());
-			}
-		};
+			protected void configure() {
+				bind(EMFBasedPersister.class).toInstance(new EMFBasedPersister() {
+					@Override
+					protected File getBuilderStateLocation() {
+						return tempFile;
+					}
+				});
+			}});
+		persister = Guice.createInjector(m).getInstance(EMFBasedPersister.class);
 		descriptions = Lists.newArrayList(
 				createResourceDescription(1),
 				createResourceDescription(2),

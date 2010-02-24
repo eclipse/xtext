@@ -3,7 +3,6 @@
 */
 package org.eclipse.xtext.ui.tests.editor.bracketmatching.ui.contentassist;
 
-import org.eclipse.xtext.ui.tests.editor.bracketmatching.ui.contentassist.AbstractBmTestLanguageProposalProvider;
 /**
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#contentAssist on how to customize content assistant
  */

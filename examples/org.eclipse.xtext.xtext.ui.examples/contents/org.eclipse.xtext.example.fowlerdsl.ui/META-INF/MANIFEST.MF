@@ -10,7 +10,8 @@ Require-Bundle: org.eclipse.xtext.example.fowlerdsl,
  org.eclipse.xtext.xtend;bundle-version="0.8.0";resolution:=optional,
  org.eclipse.ui.editors,
  org.eclipse.ui,
- org.antlr.runtime
+ org.antlr.runtime,
+ org.eclipse.xtext.ui.shared
 Bundle-Activator: org.eclipse.xtext.example.FowlerDslActivator
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j

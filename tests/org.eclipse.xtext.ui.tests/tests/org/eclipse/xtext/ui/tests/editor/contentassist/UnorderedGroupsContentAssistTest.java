@@ -8,10 +8,11 @@
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
 import org.eclipse.xtext.ISetup;
-import org.eclipse.xtext.ui.UIPluginModule;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.UnorderedGroupsTestLanguageUiModule;
+import org.eclipse.xtext.util.Modules2;
 
 import com.google.inject.Guice;
 import com.google.inject.Injector;
@@ -25,297 +26,122 @@ public class UnorderedGroupsContentAssistTest extends AbstractContentAssistProce
 		return new UnorderedGroupsTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new UnorderedGroupsTestLanguageUiModule(), new UIPluginModule(Activator.getInstance()));
+				return Guice.createInjector(Modules2.mixin(new UnorderedGroupsTestLanguageRuntimeModule(),
+						new UnorderedGroupsTestLanguageUiModule(Activator.getInstance()), new SharedStateModule()));
 			}
 		};
 	}
-	
+
 	public void testEmptyModel() throws Exception {
-		newBuilder(getSetup())
-			.assertText(
-					"1", "2", "3", "4"
-			);
+		newBuilder(getSetup()).assertText("1", "2", "3", "4");
 	}
-	
+
 	public void testEmptySimpleModel() throws Exception {
-		newBuilder(getSetup()).appendNl("1")
-			.assertText(
-					"public",
-					"protected",
-					"private",
-					"synchronized",
-					"abstract",
-					"final",
-					"static",
-					"class"
-			);
+		newBuilder(getSetup()).appendNl("1").assertText("public", "protected", "private", "synchronized", "abstract",
+				"final", "static", "class");
 	}
-	
+
 	public void testSimpleAfterVisibility() throws Exception {
-		newBuilder(getSetup()).appendNl("1")
-			.appendNl("public")
-			.assertText(
-					"synchronized",
-					"abstract",
-					"final",
-					"static",
-					"class"
-			);
+		newBuilder(getSetup()).appendNl("1").appendNl("public").assertText("synchronized", "abstract", "final",
+				"static", "class");
 	}
-	
+
 	public void testSimpleAfterStatic() throws Exception {
-		newBuilder(getSetup()).appendNl("1")
-			.appendNl("static")
-			.assertText(
-					"public",
-					"protected",
-					"private",
-					"synchronized",
-					"abstract",
-					"final",
-					"class"
-			);
+		newBuilder(getSetup()).appendNl("1").appendNl("static").assertText("public", "protected", "private",
+				"synchronized", "abstract", "final", "class");
 	}
-	
+
 	public void testSimpleAfterPrivateFinal() throws Exception {
-		newBuilder(getSetup()).appendNl("1")
-			.appendNl("private final")
-			.assertText(
-					"synchronized",
-					"static",
-					"class"
-			);
+		newBuilder(getSetup()).appendNl("1").appendNl("private final").assertText("synchronized", "static", "class");
 	}
-	
+
 	public void testSimpleAfterStaticSynchronizedProtectedAbstract() throws Exception {
-		newBuilder(getSetup()).appendNl("1")
-			.appendNl("static synchronized protected abstract")
-			.assertText(
-					"class"
-			);
+		newBuilder(getSetup()).appendNl("1").appendNl("static synchronized protected abstract").assertText("class");
 	}
-	
+
 	public void testEmptyMandatoryModel() throws Exception {
-		newBuilder(getSetup()).appendNl("2")
-			.assertText(
-					"public",
-					"protected",
-					"private",
-					"synchronized",
-					"abstract",
-					"final",
-					"static"
-			);
+		newBuilder(getSetup()).appendNl("2").assertText("public", "protected", "private", "synchronized", "abstract",
+				"final", "static");
 	}
-	
+
 	public void testMandatoryAfterVisibility() throws Exception {
-		newBuilder(getSetup()).appendNl("2")
-			.appendNl("public")
-			.assertText(
-					"synchronized",
-					"abstract",
-					"final",
-					"static"
-			);
+		newBuilder(getSetup()).appendNl("2").appendNl("public").assertText("synchronized", "abstract", "final",
+				"static");
 	}
-	
+
 	public void testMandatoryAfterStatic() throws Exception {
-		newBuilder(getSetup()).appendNl("2")
-			.appendNl("static")
-			.assertText(
-					"public",
-					"protected",
-					"private",
-					"synchronized",
-					"abstract",
-					"final"
-			);
+		newBuilder(getSetup()).appendNl("2").appendNl("static").assertText("public", "protected", "private",
+				"synchronized", "abstract", "final");
 	}
-	
+
 	public void testMandatoryAfterPrivateFinal() throws Exception {
-		newBuilder(getSetup()).appendNl("2")
-			.appendNl("private final")
-			.assertText(
-					"synchronized",
-					"static"
-			);
+		newBuilder(getSetup()).appendNl("2").appendNl("private final").assertText("synchronized", "static");
 	}
-	
+
 	public void testMandatoryAfterStaticSynchronizedProtected() throws Exception {
-		newBuilder(getSetup()).appendNl("2")
-			.appendNl("static synchronized public ")
-			.assertText(
-					"abstract",
-					"final",
-					"class"
-			);
+		newBuilder(getSetup()).appendNl("2").appendNl("static synchronized public ").assertText("abstract", "final",
+				"class");
 	}
-	
+
 	public void testMandatoryAfterStaticSynchronizedProtectedAbstract() throws Exception {
-		newBuilder(getSetup()).appendNl("2")
-			.appendNl("static synchronized protected abstract")
-			.assertText(
-					"class"
-			);
+		newBuilder(getSetup()).appendNl("2").appendNl("static synchronized protected abstract").assertText("class");
 	}
-	
+
 	public void testEmptyLoopedModel() throws Exception {
-		newBuilder(getSetup()).appendNl("3")
-			.assertText(
-					"public",
-					"protected",
-					"private",
-					"synchronized",
-					"abstract",
-					"final",
-					"static",
-					"class"
-			);
+		newBuilder(getSetup()).appendNl("3").assertText("public", "protected", "private", "synchronized", "abstract",
+				"final", "static", "class");
 	}
-	
+
 	public void testLoopedAfterVisibility() throws Exception {
-		newBuilder(getSetup()).appendNl("3")
-			.appendNl("public")
-			.assertText(
-					"public",
-					"protected",
-					"private",
-					"synchronized",
-					"abstract",
-					"final",
-					"static",
-					"class"
-			);
+		newBuilder(getSetup()).appendNl("3").appendNl("public").assertText("public", "protected", "private",
+				"synchronized", "abstract", "final", "static", "class");
 	}
-	
+
 	public void testLoopedAfterStatic() throws Exception {
-		newBuilder(getSetup()).appendNl("3")
-			.appendNl("static")
-			.assertText(
-					"public",
-					"protected",
-					"private",
-					"synchronized",
-					"abstract",
-					"final",
-					"static",
-					"class"
-			);
+		newBuilder(getSetup()).appendNl("3").appendNl("static").assertText("public", "protected", "private",
+				"synchronized", "abstract", "final", "static", "class");
 	}
-	
+
 	public void testLoopedAfterPrivateFinal() throws Exception {
-		newBuilder(getSetup()).appendNl("3")
-			.appendNl("private final")
-			.assertText(
-					"public",
-					"protected",
-					"private",
-					"synchronized",
-					"abstract",
-					"final",
-					"static",
-					"class"
-			);
+		newBuilder(getSetup()).appendNl("3").appendNl("private final").assertText("public", "protected", "private",
+				"synchronized", "abstract", "final", "static", "class");
 	}
-	
+
 	public void testLoopedAfterStaticSynchronizedProtected() throws Exception {
-		newBuilder(getSetup()).appendNl("3")
-			.appendNl("static synchronized public ")
-			.assertText(
-					"public",
-					"protected",
-					"private",
-					"synchronized",
-					"abstract",
-					"final",
-					"static",
-					"class"
-			);
+		newBuilder(getSetup()).appendNl("3").appendNl("static synchronized public ").assertText("public", "protected",
+				"private", "synchronized", "abstract", "final", "static", "class");
 	}
-	
+
 	public void testLoopedAfterStaticSynchronizedProtectedAbstract() throws Exception {
-		newBuilder(getSetup()).appendNl("3")
-			.appendNl("static synchronized protected abstract")
-			.assertText(
-					"public",
-					"protected",
-					"private",
-					"synchronized",
-					"abstract",
-					"final",
-					"static",
-					"class"
-			);
+		newBuilder(getSetup()).appendNl("3").appendNl("static synchronized protected abstract").assertText("public",
+				"protected", "private", "synchronized", "abstract", "final", "static", "class");
 	}
-	
+
 	public void testEmptyGroupedLoopedModel() throws Exception {
-		newBuilder(getSetup()).appendNl("4")
-			.assertText(
-					"public",
-					"protected",
-					"private",
-					"synchronized",
-					"abstract",
-					"final",
-					"static",
-					"class"
-			);
+		newBuilder(getSetup()).appendNl("4").assertText("public", "protected", "private", "synchronized", "abstract",
+				"final", "static", "class");
 	}
-	
+
 	public void testGroupedLoopedAfterVisibility() throws Exception {
-		newBuilder(getSetup()).appendNl("4")
-			.appendNl("public")
-			.assertText(
-					"synchronized",
-					"abstract",
-					"final",
-					"static"
-			);
+		newBuilder(getSetup()).appendNl("4").appendNl("public").assertText("synchronized", "abstract", "final",
+				"static");
 	}
-	
+
 	public void testGroupedLoopedAfterStatic() throws Exception {
-		newBuilder(getSetup()).appendNl("4")
-			.appendNl("static")
-			.assertText(
-					"public",
-					"protected",
-					"private",
-					"synchronized",
-					"abstract",
-					"final"
-			);
+		newBuilder(getSetup()).appendNl("4").appendNl("static").assertText("public", "protected", "private",
+				"synchronized", "abstract", "final");
 	}
-	
+
 	public void testGroupedLoopedAfterPrivateFinal() throws Exception {
-		newBuilder(getSetup()).appendNl("4")
-			.appendNl("private final")
-			.assertText(
-					"synchronized",
-					"static"
-			);
+		newBuilder(getSetup()).appendNl("4").appendNl("private final").assertText("synchronized", "static");
 	}
-	
+
 	public void testGroupedLoopedAfterStaticSynchronizedProtected() throws Exception {
-		newBuilder(getSetup()).appendNl("4")
-			.appendNl("static synchronized public ")
-			.assertText(
-					"abstract",
-					"final"
-			);
+		newBuilder(getSetup()).appendNl("4").appendNl("static synchronized public ").assertText("abstract", "final");
 	}
-	
+
 	public void testGroupedLoopedAfterStaticSynchronizedProtectedAbstract() throws Exception {
-		newBuilder(getSetup()).appendNl("4")
-			.appendNl("static synchronized protected abstract")
-			.assertText(
-					"public",
-					"protected",
-					"private",
-					"synchronized",
-					"abstract",
-					"final",
-					"static",
-					"class"
-			);
+		newBuilder(getSetup()).appendNl("4").appendNl("static synchronized protected abstract").assertText("public",
+				"protected", "private", "synchronized", "abstract", "final", "static", "class");
 	}
 }

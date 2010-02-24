@@ -12,7 +12,6 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.ISetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.ui.UIPluginModule;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
@@ -20,11 +19,13 @@ import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext.Factory;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.IContentAssistParser;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ParserBasedContentAssistContextFactory;
 import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
-import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.DomainModelTestLanguageParser;
 import org.eclipse.xtext.ui.tests.editor.contentassist.domainModelTest.DomainModelTestPackage;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.DomainModelTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.DomainModelTestLanguageProposalProvider;
+import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.DomainModelTestLanguageParser;
+import org.eclipse.xtext.util.Modules2;
 
 import com.google.inject.Guice;
 import com.google.inject.Inject;
@@ -50,7 +51,7 @@ public class CurrentModelBugTest extends AbstractXtextTests {
 		return new DomainModelTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(new DomainModelTestLanguageUiModule(){
+				return Guice.createInjector(Modules2.mixin(new DomainModelTestLanguageRuntimeModule(), new DomainModelTestLanguageUiModule(Activator.getInstance()){
 
 					@Override
 					public Class<? extends IContentProposalProvider> bindIContentProposalProvider() {
@@ -71,7 +72,7 @@ public class CurrentModelBugTest extends AbstractXtextTests {
 					public CurrentModelBugTest bindCurrentModelBugTest() {
 						return CurrentModelBugTest.this;
 					}
-				}, new UIPluginModule(Activator.getInstance()));
+				}, new SharedStateModule()));
 			}
 		};
 	}

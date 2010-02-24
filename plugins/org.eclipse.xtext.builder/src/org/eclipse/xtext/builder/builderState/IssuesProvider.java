@@ -16,7 +16,6 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EValidator;
-import org.eclipse.xtext.builder.internal.Activator;
 import org.eclipse.xtext.ui.editor.model.edit.IssueUtil;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.validation.Issue;
@@ -56,9 +55,4 @@ public class IssuesProvider {
 		return result;
 	}
 	
-	public static class Access {
-		public static IssuesProvider get() {
-			return Activator.getDefault().getInjector().getInstance(IssuesProvider.class);
-		}
-	}
 }

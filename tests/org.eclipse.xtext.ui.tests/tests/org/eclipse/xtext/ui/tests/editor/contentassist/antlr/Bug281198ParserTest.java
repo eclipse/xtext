@@ -12,14 +12,16 @@ import java.util.Set;
 
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.junit.AbstractXtextTests;
-import org.eclipse.xtext.ui.UIPluginModule;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.AbstractContentAssistParser;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
+import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguageRuntimeModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.DatatypeRuleTestLanguageStandaloneSetup;
-import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.DatatypeRuleTestLanguageParser;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.DatatypeRuleTestLanguageGrammarAccess;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.DatatypeRuleTestLanguageUiModule;
+import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.DatatypeRuleTestLanguageParser;
+import org.eclipse.xtext.util.Modules2;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -40,9 +42,9 @@ public class Bug281198ParserTest extends AbstractXtextTests {
 		with(new DatatypeRuleTestLanguageStandaloneSetup() {
 			@Override
 			public Injector createInjector() {
-				return Guice.createInjector(
-						new DatatypeRuleTestLanguageUiModule(),
-						new UIPluginModule(Activator.getInstance()));
+				return Guice.createInjector(Modules2.mixin(new DatatypeRuleTestLanguageRuntimeModule(),
+						new DatatypeRuleTestLanguageUiModule(Activator.getInstance()),
+						new SharedStateModule()));
 			}
 		});
 		grammarAccess = get(DatatypeRuleTestLanguageGrammarAccess.class);

@@ -3,9 +3,15 @@
  */
 package org.eclipse.xtext.ui.tests.testlanguages.ui;
 
+import org.eclipse.ui.plugin.AbstractUIPlugin;
+
 /**
  * Use this class to register components to be used within the IDE.
  */
 public class ReferenceGrammarUiTestLanguageUiModule extends org.eclipse.xtext.ui.tests.testlanguages.ui.AbstractReferenceGrammarUiTestLanguageUiModule {
+
+	public ReferenceGrammarUiTestLanguageUiModule(AbstractUIPlugin plugin) {
+		super(plugin);
+	}
 
 }
