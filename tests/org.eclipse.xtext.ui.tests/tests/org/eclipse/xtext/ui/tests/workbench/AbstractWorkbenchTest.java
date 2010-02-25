@@ -35,6 +35,7 @@ public abstract class AbstractWorkbenchTest extends TestCase {
 	protected void setUp() throws Exception {
 		super.setUp();
 		closeWelcomePage();
+		cleanWorkspace();
 	}
 	
 	@Override
