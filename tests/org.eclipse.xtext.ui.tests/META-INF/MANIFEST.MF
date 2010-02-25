@@ -147,5 +147,8 @@ Export-Package: org.eclipse.xtext.ui.tests.xtextUiTest,
  org.eclipse.xtext.ui.tests.parser.keywords.ui.contentassist.antlr,
  org.eclipse.xtext.ui.tests.testlanguages.ui.contentassist.antlr,
  org.eclipse.xtext.ui.tests.enumrules.ui.contentassist.antlr,
- org.eclipse.xtext.ui.tests.editor.bracketmatching.ui.contentassist.antlr
+ org.eclipse.xtext.ui.tests.editor.bracketmatching.ui.contentassist.antlr,
+ org.eclipse.xtext.ui.tests.folding,
+ org.eclipse.xtext.ui.tests.folding.impl,
+ org.eclipse.xtext.ui.tests.folding.util
 

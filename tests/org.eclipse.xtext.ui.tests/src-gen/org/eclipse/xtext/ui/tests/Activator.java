@@ -115,6 +115,10 @@ public class Activator extends AbstractUIPlugin {
 				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.TestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.TestLanguage"))).with(getSharedStateModule())
 			));
 			
+			injectors.put("org.eclipse.xtext.ui.tests.FoldingTestLanguage", Guice.createInjector(
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.FoldingTestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.FoldingTestLanguage"))).with(getSharedStateModule())
+			));
+			
 			injectors.put("org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage", Guice.createInjector(
 				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage"))).with(getSharedStateModule())
 			));
@@ -211,6 +215,10 @@ public class Activator extends AbstractUIPlugin {
 		  return new org.eclipse.xtext.ui.tests.TestLanguageRuntimeModule();
 		}
 		
+		if ("org.eclipse.xtext.ui.tests.FoldingTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.FoldingTestLanguageRuntimeModule();
+		}
+		
 		if ("org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage".equals(grammar)) {
 		  return new org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguageRuntimeModule();
 		}
@@ -297,6 +305,10 @@ public class Activator extends AbstractUIPlugin {
 		
 		if ("org.eclipse.xtext.ui.tests.TestLanguage".equals(grammar)) {
 		  return new org.eclipse.xtext.ui.tests.ui.TestLanguageUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.FoldingTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.ui.FoldingTestLanguageUiModule(this);
 		}
 		
 		if ("org.eclipse.xtext.ui.tests.editor.bracketmatching.BmTestLanguage".equals(grammar)) {

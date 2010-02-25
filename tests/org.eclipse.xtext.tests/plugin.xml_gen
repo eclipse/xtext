@@ -383,6 +383,15 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://www.xtext.org/tests/bug305397" 
+       class = "org.eclipse.xtext.parsetree.impl.bug305397.Bug305397Package"
+       genModel = "org/eclipse/xtext/parsetree/impl/Bug305397.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://www.eclipse.org/2010/tmf/xtext/Bug299395" 
        class = "org.eclipse.xtext.parsetree.reconstr.bug299395.Bug299395Package"
        genModel = "org/eclipse/xtext/parsetree/reconstr/Bug299395TestLanguage.genmodel" /> 
