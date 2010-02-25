@@ -462,7 +462,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 	private String getActivator() {
 		if (activator == null) {
 			Grammar grammar = languageConfigs.get(0).getGrammar();
-			return GrammarUtil.getNamespace(grammar) + ".internal." + GrammarUtil.getName(grammar) + "Activator";
+			return naming.basePackageUi(grammar) + ".internal." + GrammarUtil.getName(grammar) + "Activator";
 		}
 		return activator;
 	}

@@ -47,7 +47,7 @@ public class MergeableManifest extends Manifest {
 	private static final String LINEBREAK = "\r\n";
 
 	/*
-	 * java.util.Manifest throws an exeception if line exceeds 512 chars
+	 * java.util.Manifest throws an exception if line exceeds 512 chars
 	 */
     static String make512Safe(StringBuffer lines) {
         if (lines.length() > 512) {
