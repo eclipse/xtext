@@ -21,7 +21,7 @@ import org.osgi.framework.BundleContext;
  * 
  * @author Michael Clay - Initial contribution and API
  */
-public class EcoreDslActivator extends org.eclipse.xtext.example.internal.EcoreDslActivator {
+public class EcoreDslActivator extends org.eclipse.xtext.example.ui.internal.EcoreDslActivator {
 
 	Logger logger = Logger.getLogger(EcoreDslActivator.class);
 

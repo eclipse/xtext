@@ -17,12 +17,12 @@ public class EcoreDslExecutableExtensionFactory extends AbstractGuiceAwareExecut
 
 	@Override
 	protected Bundle getBundle() {
-		return org.eclipse.xtext.example.internal.EcoreDslActivator.getInstance().getBundle();
+		return org.eclipse.xtext.example.ui.internal.EcoreDslActivator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return org.eclipse.xtext.example.internal.EcoreDslActivator.getInstance().getInjector("org.eclipse.xtext.example.EcoreDsl");
+		return org.eclipse.xtext.example.ui.internal.EcoreDslActivator.getInstance().getInjector("org.eclipse.xtext.example.EcoreDsl");
 	}
 	
 }

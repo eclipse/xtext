@@ -17,12 +17,12 @@ public class FowlerDslExecutableExtensionFactory extends AbstractGuiceAwareExecu
 
 	@Override
 	protected Bundle getBundle() {
-		return org.eclipse.xtext.example.internal.FowlerDslActivator.getInstance().getBundle();
+		return org.eclipse.xtext.example.ui.internal.FowlerDslActivator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return org.eclipse.xtext.example.internal.FowlerDslActivator.getInstance().getInjector("org.eclipse.xtext.example.FowlerDsl");
+		return org.eclipse.xtext.example.ui.internal.FowlerDslActivator.getInstance().getInjector("org.eclipse.xtext.example.FowlerDsl");
 	}
 	
 }
