@@ -25,7 +25,7 @@ import org.eclipse.xtext.parsetree.SyntaxError;
  * @author Sebastian Zarnekow
  */
 public class ParsetreeUtil {
-	
+
 	private static final char[] separator = System.getProperty("line.separator").toCharArray();
 
 	private static void checkArgument(AbstractNodeImpl abstractParserNode) {
@@ -47,7 +47,7 @@ public class ParsetreeUtil {
 		}
 		return line;
 	}
-	
+
 	public static int totalEndLine(AbstractNodeImpl _this) {
 		int line = _this.getTotalLine();
 		String text = _this.serialize();
@@ -58,19 +58,19 @@ public class ParsetreeUtil {
 	public static int countLines(String text) {
 		return countLines(text, separator);
 	}
-	
+
 	public static int countLines(String text, char[] separator) {
 		int line = 0;
 		char[] charArray = text.toCharArray();
-		if ( separator.length == 1) {
-			for (int i = 0; i<charArray.length; i++) {
+		if (separator.length == 1) {
+			for (int i = 0; i < charArray.length; i++) {
 				if (charArray[i] == separator[0]) {
 					line++;
 				}
 			}
-		} else if(separator.length==2){
-			for (int i = 0; i<charArray.length; i++) {
-				if (charArray[i] == separator[0] && charArray.length>i+1 && charArray[i+1]==separator[1]) {
+		} else if (separator.length == 2) {
+			for (int i = 0; i < charArray.length; i++) {
+				if (charArray[i] == separator[0] && charArray.length > i + 1 && charArray[i + 1] == separator[1]) {
 					line++;
 					i++;
 				} else if (charArray[i] == separator[1]) {
@@ -119,7 +119,7 @@ public class ParsetreeUtil {
 	public static EList<SyntaxError> allSyntaxErrors(CompositeNodeImpl compositeNodeImpl) {
 		BasicEList<SyntaxError> basicEList = new BasicEList<SyntaxError>();
 		TreeIterator<Object> iterator = EcoreUtil.getAllContents(compositeNodeImpl, false);
-		while(iterator.hasNext()) {
+		while (iterator.hasNext()) {
 			Object next = iterator.next();
 			if (next instanceof SyntaxError)
 				basicEList.add((SyntaxError) next);
@@ -146,16 +146,31 @@ public class ParsetreeUtil {
 		if (abstractNode instanceof LeafNode)
 			return abstractNode.getTotalOffset();
 		final CompositeNode node = (CompositeNode) abstractNode;
-		for(int i = 0; i < node.getChildren().size(); i++) {
+		for (int i = 0; i < node.getChildren().size(); i++) {
 			final AbstractNode child = node.getChildren().get(i);
-			if (child instanceof CompositeNode)
-				return getOffset(child);
-			final LeafNode leaf = (LeafNode) child;
-			if (!leaf.isHidden())
-				return leaf.getTotalOffset();
+			if (child instanceof CompositeNode) {
+				if (hasLeafNodes((CompositeNode) child))
+					return getOffset(child);
+			} else {
+				final LeafNode leaf = (LeafNode) child;
+				if (!leaf.isHidden())
+					return leaf.getTotalOffset();
+			}
 		}
 		// every child node is a hidden node, return total offset
 		return abstractNode.getTotalOffset();
+	}
+
+	private static boolean hasLeafNodes(CompositeNode child) {
+		for (AbstractNode node : child.getChildren()) {
+			if (node instanceof CompositeNode) {
+				if (hasLeafNodes((CompositeNode) node))
+					return true;
+			} else {
+				return true;
+			}
+		}
+		return false;
 	}
 
 	/**
@@ -166,7 +181,7 @@ public class ParsetreeUtil {
 		if (abstractNode instanceof LeafNode)
 			return abstractNode.getTotalLine();
 		final CompositeNode node = (CompositeNode) abstractNode;
-		for(int i = 0; i < node.getChildren().size(); i++) {
+		for (int i = 0; i < node.getChildren().size(); i++) {
 			final AbstractNode child = node.getChildren().get(i);
 			if (child instanceof CompositeNode)
 				return getLine(child);
@@ -186,7 +201,7 @@ public class ParsetreeUtil {
 		if (abstractNode instanceof LeafNode)
 			return abstractNode.getTotalLength();
 		final CompositeNode node = (CompositeNode) abstractNode;
-		for(int i = node.getChildren().size() - 1; i >= 0 ; i--) {
+		for (int i = node.getChildren().size() - 1; i >= 0; i--) {
 			final AbstractNode child = node.getChildren().get(i);
 			if (child instanceof CompositeNode)
 				return child.getOffset() - abstractNode.getOffset() + child.getLength();
@@ -205,7 +220,7 @@ public class ParsetreeUtil {
 		if (abstractNode instanceof LeafNode)
 			return abstractNode.totalEndLine();
 		final CompositeNode node = (CompositeNode) abstractNode;
-		for(int i = node.getChildren().size() - 1; i >= 0 ; i--) {
+		for (int i = node.getChildren().size() - 1; i >= 0; i--) {
 			final AbstractNode child = node.getChildren().get(i);
 			if (child instanceof CompositeNode)
 				return endLine(child);
