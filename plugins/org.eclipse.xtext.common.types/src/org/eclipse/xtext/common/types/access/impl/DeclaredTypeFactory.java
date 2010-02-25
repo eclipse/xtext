@@ -19,6 +19,7 @@ import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.xtext.common.types.AnnotationType;
@@ -46,6 +47,7 @@ import org.eclipse.xtext.common.types.WildcardTypeArgument;
  */
 public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 
+	private final static Logger log = Logger.getLogger(DeclaredTypeFactory.class);
 	private final ClassURIHelper uriHelper;
 
 	public DeclaredTypeFactory(ClassURIHelper uriHelper) {
@@ -65,12 +67,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		result.setFinal(Modifier.isFinal(clazz.getModifiers()));
 		result.setInterface(clazz.isInterface());
 		result.setStatic(Modifier.isStatic(clazz.getModifiers()));
-		if (Modifier.isPrivate(clazz.getModifiers()))
-			result.setVisibility(Visibility.PRIVATE);
-		else if (Modifier.isProtected(clazz.getModifiers()))
-			result.setVisibility(Visibility.PROTECTED);
-		else if (Modifier.isPublic(clazz.getModifiers()))
-			result.setVisibility(Visibility.PUBLIC);
+		setVisibility(clazz, result);
 		result.setFullyQualifiedName(clazz.getName());
 		for (Class<?> declaredClass : clazz.getDeclaredClasses()) {
 			if (!declaredClass.isAnonymousClass() && !declaredClass.isSynthetic()) {
@@ -98,6 +95,31 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			result.getTypeParameters().add(createTypeParameter(variable, result));
 		}
 		return result;
+	}
+	
+	public AnnotationType createAnnotationType(Class<?> clazz) {
+		AnnotationType result = TypesFactory.eINSTANCE.createAnnotationType();
+		result.setFullyQualifiedName(clazz.getName());
+		setVisibility(clazz, result);
+		log.error("Annotation types are not yet fully supported.");
+		return result;
+	}
+
+	public EnumerationType createEnumerationType(Class<?> clazz) {
+		EnumerationType result = TypesFactory.eINSTANCE.createEnumerationType();
+		result.setFullyQualifiedName(clazz.getName());
+		setVisibility(clazz, result);
+		log.error("Enumeration types are not yet fully supported.");
+		return result;
+	}
+
+	protected void setVisibility(Class<?> clazz, org.eclipse.xtext.common.types.Member result) {
+		if (Modifier.isPrivate(clazz.getModifiers()))
+			result.setVisibility(Visibility.PRIVATE);
+		else if (Modifier.isProtected(clazz.getModifiers()))
+			result.setVisibility(Visibility.PROTECTED);
+		else if (Modifier.isPublic(clazz.getModifiers()))
+			result.setVisibility(Visibility.PUBLIC);
 	}
 
 	public org.eclipse.xtext.common.types.TypeParameter createTypeParameter(TypeVariable<?> variable,
@@ -182,14 +204,6 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		URI uri = uriHelper.getFullURI(type);
 		proxy.eSetProxyURI(uri);
 		return (org.eclipse.xtext.common.types.Type) proxy;
-	}
-
-	public AnnotationType createAnnotationType(Class<?> clazz) {
-		throw new UnsupportedOperationException();
-	}
-
-	public EnumerationType createEnumerationType(Class<?> clazz) {
-		throw new UnsupportedOperationException();
 	}
 
 	public org.eclipse.xtext.common.types.Field createField(Field field) {

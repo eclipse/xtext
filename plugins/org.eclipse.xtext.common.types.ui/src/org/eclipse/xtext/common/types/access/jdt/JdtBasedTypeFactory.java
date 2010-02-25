@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.jdt;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.jdt.core.Flags;
@@ -47,6 +48,7 @@ import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
  */
 public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 
+	private final static Logger log = Logger.getLogger(JdtBasedTypeFactory.class);
 	private final TypeURIHelper uriHelper;
 
 	public JdtBasedTypeFactory(TypeURIHelper uriHelper) {
@@ -101,6 +103,30 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		catch (JavaModelException ex) {
 			throw new RuntimeException(ex);
 		}
+	}
+	
+	public AnnotationType createAnnotationType(IType clazz) {
+		AnnotationType result = TypesFactory.eINSTANCE.createAnnotationType();
+		result.setFullyQualifiedName(clazz.getFullyQualifiedName());
+		try {
+			setVisibility(result, clazz.getFlags());
+		} catch (JavaModelException e) {
+			throw new RuntimeException(e);
+		}
+		log.error("Annotation types are not yet fully supported.");
+		return result;
+	}
+
+	public EnumerationType createEnumerationType(IType clazz) {
+		EnumerationType result = TypesFactory.eINSTANCE.createEnumerationType();
+		result.setFullyQualifiedName(clazz.getFullyQualifiedName());
+		try {
+			setVisibility(result, clazz.getFlags());
+		} catch (JavaModelException e) {
+			throw new RuntimeException(e);
+		}
+		log.error("Enumeration types are not yet fully supported.");
+		return result;
 	}
 
 	public TypeParameter createTypeParameter(ITypeParameter parameter, org.eclipse.xtext.common.types.Member container)
@@ -244,14 +270,6 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		URI uri = uriHelper.getFullURI(signature, declarator);
 		proxy.eSetProxyURI(uri);
 		return (org.eclipse.xtext.common.types.Type) proxy;
-	}
-
-	public AnnotationType createAnnotationType(IType jdtType) {
-		throw new UnsupportedOperationException();
-	}
-
-	public EnumerationType createEnumerationType(IType jdtType) {
-		throw new UnsupportedOperationException();
 	}
 
 	public Field createField(IField field) throws JavaModelException {
