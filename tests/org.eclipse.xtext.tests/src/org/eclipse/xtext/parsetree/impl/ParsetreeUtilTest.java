@@ -125,6 +125,11 @@ public class ParsetreeUtilTest extends AbstractXtextTests {
 		assertEquals(modelAsString.indexOf("generate"), parentMetamodelNode.getOffset());
 	}
 	
+	public void testOffset_WithActionCreated() throws Exception {
+		with(new Bug305397StandaloneSetup());
+		assertEquals(modelAsString.indexOf("generate"), parentMetamodelNode.getOffset());
+	}
+	
 	public void testTotalOffset_01() {
 		assertEquals(0, grammarNode.getTotalOffset());
 	}

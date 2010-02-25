@@ -134,6 +134,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.parsetree.SerializeTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.formatter.FormatterTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.formatter.XtextFormatterTest.class);
+      suite.addTestSuite(org.eclipse.xtext.parsetree.impl.Bug305397Test.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.impl.ParsetreeUtilLinuxAndMacTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.impl.ParsetreeUtilTest.class);
       suite.addTestSuite(org.eclipse.xtext.parsetree.impl.ParsetreeUtilWindowsTest.class);

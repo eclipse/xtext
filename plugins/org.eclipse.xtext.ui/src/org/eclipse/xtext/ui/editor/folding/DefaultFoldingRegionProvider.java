@@ -95,7 +95,7 @@ public class DefaultFoldingRegionProvider implements IFoldingRegionProvider {
 	}
 
 	protected boolean isHandled(EObject eObject) {
-		return eObject.eContainer() != null && !eObject.eContents().isEmpty();
+		return eObject.eContainer() != null;
 	}
 
 	protected List<IFoldingRegion> createFoldingRegions(EObject eObject, Position position) {
