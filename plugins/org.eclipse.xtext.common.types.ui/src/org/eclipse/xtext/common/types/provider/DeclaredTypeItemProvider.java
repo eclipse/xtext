@@ -216,11 +216,6 @@ public class DeclaredTypeItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.DECLARED_TYPE__SUPER_TYPES,
-				 TypesFactory.eINSTANCE.createSimpleTypeReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.DECLARED_TYPE__SUPER_TYPES,
 				 TypesFactory.eINSTANCE.createParameterizedTypeReference()));
 
 		newChildDescriptors.add

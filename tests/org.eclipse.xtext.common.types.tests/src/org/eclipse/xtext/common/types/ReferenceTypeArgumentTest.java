@@ -27,12 +27,12 @@ public class ReferenceTypeArgumentTest extends TestCase {
 	}
 	
 	public void testCanonicalName_02() {
-		typeArgument.setTypeReference(TypesFactory.eINSTANCE.createSimpleTypeReference());
+		typeArgument.setTypeReference(TypesFactory.eINSTANCE.createParameterizedTypeReference());
 		assertNull(typeArgument.getCanonicalName());
 	}
 	
 	public void testCanonicalName_03() {
-		SimpleTypeReference typeReference = TypesFactory.eINSTANCE.createSimpleTypeReference();
+		ParameterizedTypeReference typeReference = TypesFactory.eINSTANCE.createParameterizedTypeReference();
 		typeReference.setType(TypesFactory.eINSTANCE.createVoid());
 		typeArgument.setTypeReference(typeReference);
 		assertEquals("void", typeArgument.getCanonicalName());

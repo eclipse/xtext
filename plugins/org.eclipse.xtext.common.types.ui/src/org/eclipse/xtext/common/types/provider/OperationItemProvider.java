@@ -231,11 +231,6 @@ public class OperationItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.OPERATION__RETURN_TYPE,
-				 TypesFactory.eINSTANCE.createSimpleTypeReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.OPERATION__RETURN_TYPE,
 				 TypesFactory.eINSTANCE.createParameterizedTypeReference()));
 
 		newChildDescriptors.add

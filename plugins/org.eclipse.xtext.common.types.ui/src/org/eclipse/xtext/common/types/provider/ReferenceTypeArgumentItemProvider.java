@@ -152,11 +152,6 @@ public class ReferenceTypeArgumentItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.REFERENCE_TYPE_ARGUMENT__TYPE_REFERENCE,
-				 TypesFactory.eINSTANCE.createSimpleTypeReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.REFERENCE_TYPE_ARGUMENT__TYPE_REFERENCE,
 				 TypesFactory.eINSTANCE.createParameterizedTypeReference()));
 
 		newChildDescriptors.add

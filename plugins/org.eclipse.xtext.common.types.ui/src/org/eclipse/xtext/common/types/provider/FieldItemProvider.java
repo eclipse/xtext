@@ -207,11 +207,6 @@ public class FieldItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.FIELD__TYPE,
-				 TypesFactory.eINSTANCE.createSimpleTypeReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.FIELD__TYPE,
 				 TypesFactory.eINSTANCE.createParameterizedTypeReference()));
 
 		newChildDescriptors.add

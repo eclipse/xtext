@@ -131,7 +131,7 @@ public class GenericTypeTest extends TestCase {
 	}
 	
 	private TypeReference createReferenceTo(Type type) {
-		SimpleTypeReference result = TypesFactory.eINSTANCE.createSimpleTypeReference();
+		ParameterizedTypeReference result = TypesFactory.eINSTANCE.createParameterizedTypeReference();
 		result.setType(type);
 		return result;
 	}
