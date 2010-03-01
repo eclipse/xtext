@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.ui.tests/src-gen"
+    editDirectory="/org.eclipse.xtext.ui.tests.edit/src" editorDirectory="/org.eclipse.xtext.ui.tests.editor/src"
+    modelPluginID="org.eclipse.xtext.ui.tests" forceOverwrite="true" modelName="Bug303200TestLanguage"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
+    editorPluginID="org.eclipse.xtext.ui.tests.editor">
+  <genPackages prefix="Bug303200TestLanguage" basePackage="org.eclipse.xtext.ui.tests.editor.contentassist"
+      disposableProviderFactory="true" ecorePackage="Bug303200TestLanguage.ecore#/">
+    <genClasses ecoreClass="Bug303200TestLanguage.ecore#//Program">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug303200TestLanguage.ecore#//Program/directives"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug303200TestLanguage.ecore#//ProgramDirective"/>
+    <genClasses ecoreClass="Bug303200TestLanguage.ecore#//FunctionDefinition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug303200TestLanguage.ecore#//FunctionDefinition/attributes"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug303200TestLanguage.ecore#//FunctionDefinition/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug303200TestLanguage.ecore#//FunctionDefinition/params"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug303200TestLanguage.ecore#//FunctionDefinition/body"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug303200TestLanguage.ecore#//Attribute">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug303200TestLanguage.ecore#//Attribute/ident"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug303200TestLanguage.ecore#//Parameters">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug303200TestLanguage.ecore#//Parameters/params"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug303200TestLanguage.ecore#//Block">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug303200TestLanguage.ecore#//Block/directives"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug303200TestLanguage.ecore#//Statement"/>
+    <genClasses ecoreClass="Bug303200TestLanguage.ecore#//PostfixExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug303200TestLanguage.ecore#//PostfixExpression/expression"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug303200TestLanguage.ecore#//PostfixExpression/property"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug303200TestLanguage.ecore#//ListExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug303200TestLanguage.ecore#//ListExpression/expressions"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug303200TestLanguage.ecore#//PropertyOperator">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug303200TestLanguage.ecore#//PropertyOperator/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug303200TestLanguage.ecore#//PropertyOperator/expressions"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug303200TestLanguage.ecore#//PrimaryExpression"/>
+    <genClasses ecoreClass="Bug303200TestLanguage.ecore#//BracketAttribute">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug303200TestLanguage.ecore#//BracketAttribute/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug303200TestLanguage.ecore#//ExpressionStatement">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug303200TestLanguage.ecore#//ExpressionStatement/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug303200TestLanguage.ecore#//Invocation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug303200TestLanguage.ecore#//Invocation/arguments"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug303200TestLanguage.ecore#//Identifier">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug303200TestLanguage.ecore#//Identifier/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug303200TestLanguage.ecore#//FunctionExpression">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug303200TestLanguage.ecore#//FunctionExpression/params"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug303200TestLanguage.ecore#//FunctionExpression/body"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

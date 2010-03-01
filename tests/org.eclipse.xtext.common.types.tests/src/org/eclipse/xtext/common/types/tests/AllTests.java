@@ -45,10 +45,10 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.common.types.access.xtext.ui.JdtBasedSimpleTypeScopeProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.xtext.ui.JdtBasedSimpleTypeScopeTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.xtext.ui.XtextResourceSetBasedProjectProviderTest.class);
-      suite.addTestSuite(org.eclipse.xtext.common.types.util.ClasspathSuperTypeCollectorTest.class);
-      suite.addTestSuite(org.eclipse.xtext.common.types.util.JdtSuperTypeCollectorTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.util.ClasspathAssignabilityComputerTest.class);
+      suite.addTestSuite(org.eclipse.xtext.common.types.util.ClasspathSuperTypeCollectorTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.util.JdtAssignabilityComputerTest.class);
+      suite.addTestSuite(org.eclipse.xtext.common.types.util.JdtSuperTypeCollectorTest.class);
       return suite;
    }
 }
