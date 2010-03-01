@@ -10,9 +10,7 @@ package org.eclipse.xtext.scoping;
 import java.util.Collections;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.Stable;
 import org.eclipse.xtext.resource.IEObjectDescription;
-import org.eclipse.xtext.scoping.impl.AbstractScope;
 
 /**
  * 
@@ -21,7 +19,6 @@ import org.eclipse.xtext.scoping.impl.AbstractScope;
  * 
  * @author Sven Efftinge - Initial contribution and API
  */
-@Stable(since="0.7.0", subClass=AbstractScope.class)
 public interface IScope {
 	
     /**

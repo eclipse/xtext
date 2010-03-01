@@ -9,8 +9,6 @@ package org.eclipse.xtext.scoping;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.Stable;
-import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
 
 /**
  * An IScopeProvider can be used, to get access to a set of visible elements.
@@ -21,7 +19,6 @@ import org.eclipse.xtext.scoping.impl.AbstractScopeProvider;
  * @author Sven Efftinge
  * @author Sebastian Zarnekow
  */
-@Stable(since = "0.8.0", subClass = AbstractScopeProvider.class)
 public interface IScopeProvider {
 
 	/**

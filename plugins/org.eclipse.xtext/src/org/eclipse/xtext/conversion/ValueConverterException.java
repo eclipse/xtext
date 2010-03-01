@@ -7,14 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.conversion;
 
-import org.eclipse.xtext.Stable;
 import org.eclipse.xtext.parsetree.AbstractNode;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 @SuppressWarnings("serial")
-@Stable(since="0.7.0")
 public final class ValueConverterException extends RuntimeException {
 
 	private final AbstractNode node;

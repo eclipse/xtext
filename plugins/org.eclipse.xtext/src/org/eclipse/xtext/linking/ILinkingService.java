@@ -11,8 +11,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.Stable;
-import org.eclipse.xtext.linking.impl.AbstractLinkingService;
 import org.eclipse.xtext.linking.impl.IllegalNodeException;
 import org.eclipse.xtext.parsetree.AbstractNode;
 
@@ -20,7 +18,6 @@ import org.eclipse.xtext.parsetree.AbstractNode;
  * @author Heiko Behrens - Initial contribution and API
  * @author Sebastian Zarnekow
  */
-@Stable(since = "0.8.0", subClass = AbstractLinkingService.class)
 public interface ILinkingService {
 
 	/**

@@ -8,8 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.conversion;
 
-import org.eclipse.xtext.Stable;
-import org.eclipse.xtext.conversion.impl.AbstractValueConverter;
 import org.eclipse.xtext.parsetree.AbstractNode;
 
 /**
@@ -17,7 +15,6 @@ import org.eclipse.xtext.parsetree.AbstractNode;
  *
  * @param <Type>
  */
-@Stable(since="0.7.0", subClass=AbstractValueConverter.class)
 public interface IValueConverter<Type> {
 	
 	IValueConverter<? extends Object> NO_OP_CONVERTER = new IValueConverter<String>() {

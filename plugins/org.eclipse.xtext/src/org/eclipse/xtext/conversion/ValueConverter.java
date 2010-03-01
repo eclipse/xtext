@@ -12,8 +12,6 @@ import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
 import java.lang.annotation.Target;
 
-import org.eclipse.xtext.Stable;
-
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
@@ -21,7 +19,6 @@ import org.eclipse.xtext.Stable;
  */
 @Retention(RetentionPolicy.RUNTIME)
 @Target({ElementType.METHOD, ElementType.FIELD})
-@Stable(since="0.7.0")
 public @interface ValueConverter {
 	String rule();
 }

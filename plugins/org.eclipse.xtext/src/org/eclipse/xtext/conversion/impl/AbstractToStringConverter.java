@@ -7,14 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.conversion.impl;
 
-import org.eclipse.xtext.Stable;
-
 /**
  * Abstract implementation of a {@link ValueConverter}, that does not fail on
  * <code>null</code>-Values and uses a simple {@link Object#toString()} to obtain
  * the {@link String} representation.
  */
-@Stable(since="0.7.0")
 public abstract class AbstractToStringConverter<T> extends AbstractNullSafeConverter<T> {
 
 	@Override
