@@ -19,6 +19,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.ui.Bug303200TestLanguageU
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.Bug303200TestLanguageParser;
 import org.eclipse.xtext.util.Modules2;
 
+import com.google.common.collect.Lists;
 import com.google.inject.Guice;
 import com.google.inject.Injector;
 
@@ -42,10 +43,9 @@ public class Bug303200Test extends AbstractXtextTests {
 	
 	public void testBug303200_01() throws Exception {
 		Bug303200TestLanguageParser parser = get(Bug303200TestLanguageParser.class);
-		parser.getFollowElements("function f() {");
-		// don't throw NPE
+		Collection<FollowElement> followElements = parser.getFollowElements("function f() {");
+		assertEquals(3, followElements.size());
 	}
-	
 	
 	public void testBug303200_02() throws Exception {
 		Bug303200TestLanguageParser parser = get(Bug303200TestLanguageParser.class);
@@ -53,6 +53,12 @@ public class Bug303200Test extends AbstractXtextTests {
 		for (FollowElement element: elements) {
 			recursiveTestFollowElements(parser, element);
 		}
+	}
+	
+	public void testBug303200_03() throws Exception {
+		Bug303200TestLanguageParser parser = get(Bug303200TestLanguageParser.class);
+		Collection<FollowElement> followElements = Lists.newArrayList(parser.getFollowElements("function f() {} function f() {"));
+		assertEquals(3, followElements.size());
 	}
 
 	protected void recursiveTestFollowElements(Bug303200TestLanguageParser parser, FollowElement element) {

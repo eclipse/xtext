@@ -41,10 +41,15 @@ public abstract class AbstractWorkbenchTest extends TestCase {
 	@Override
 	protected void tearDown() throws Exception {
 		super.tearDown();
+		closeEditors();
 		cleanWorkspace();
 		waitForAutoBuild();
 	}
 	
+	protected void closeEditors() {
+		PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage().closeAllEditors(false);
+	}
+
 	protected void closeWelcomePage() throws InterruptedException {
 		if (PlatformUI.getWorkbench().getIntroManager().getIntro() != null) {
 			PlatformUI.getWorkbench().getIntroManager().closeIntro(
