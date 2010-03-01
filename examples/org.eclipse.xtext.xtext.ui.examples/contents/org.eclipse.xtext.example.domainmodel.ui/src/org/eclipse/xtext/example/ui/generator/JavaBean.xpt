@@ -1,5 +1,4 @@
 «IMPORT org::eclipse::xtext::example::domainmodel»
-«IMPORT org::eclipse::xtext::resource»
 
 «EXTENSION org::eclipse::xtext::example::ui::generator::JavaBeans»
 «EXTENSION org::eclipse::xtext::example::ui::generator::JavaImports»
