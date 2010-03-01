@@ -9,13 +9,11 @@
 package org.eclipse.xtext.resource;
 
 import org.eclipse.xtext.diagnostics.AbstractDiagnostic;
-import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.SyntaxError;
 
 /**
  * @author Dennis Hübner - Initial contribution and API
- * 
  */
 public class XtextSyntaxDiagnostic extends AbstractDiagnostic {
 
@@ -27,7 +25,7 @@ public class XtextSyntaxDiagnostic extends AbstractDiagnostic {
 	
 	@Override
 	public String getCode() {
-		return Diagnostic.SYNTAX_DIAGNOSITC;
+		return error.getIssueCode();
 	}
 
 	@Override

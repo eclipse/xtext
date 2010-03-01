@@ -7,16 +7,18 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.antlr;
 
+import org.eclipse.xtext.diagnostics.Diagnostic;
+
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class SyntaxErrorMessageProvider implements ISyntaxErrorMessageProvider {
 
 	public SyntaxErrorMessage getSyntaxErrorMessage(IParserErrorContext context) {
-		return new SyntaxErrorMessage(context.getDefaultMessage(), null);
+		return new SyntaxErrorMessage(context.getDefaultMessage(), Diagnostic.SYNTAX_DIAGNOSITC);
 	}
 	
 	public SyntaxErrorMessage getSyntaxErrorMessage(IValueConverterErrorContext context) {
-		return new SyntaxErrorMessage(context.getDefaultMessage(), null);
+		return new SyntaxErrorMessage(context.getDefaultMessage(), Diagnostic.SYNTAX_DIAGNOSITC);
 	}
 }

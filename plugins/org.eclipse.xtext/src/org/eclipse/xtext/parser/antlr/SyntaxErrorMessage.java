@@ -18,8 +18,6 @@ public class SyntaxErrorMessage {
 	public SyntaxErrorMessage(String message, String issueCode) {
 		this.message = message;
 		this.issueCode = issueCode;
-		if (issueCode != null)
-			throw new IllegalArgumentException("issueCodes are not yet supported for syntax errors");
 	}
 	
 	public String getIssueCode() {

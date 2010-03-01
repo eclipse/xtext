@@ -238,6 +238,7 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		if (currentError != null) {
 			SyntaxError error = ParsetreeFactory.eINSTANCE.createSyntaxError();
 			error.setMessage(currentError.getMessage());
+			error.setIssueCode(currentError.getIssueCode());
 			node.setSyntaxError(error);
 			currentError = null;
 		}
