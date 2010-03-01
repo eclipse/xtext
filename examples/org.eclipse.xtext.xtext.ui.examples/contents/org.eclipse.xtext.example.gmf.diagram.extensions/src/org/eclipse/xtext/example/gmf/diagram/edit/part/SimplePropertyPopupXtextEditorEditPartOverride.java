@@ -8,7 +8,7 @@ import org.eclipse.gef.requests.DirectEditRequest;
 import org.eclipse.gmf.runtime.notation.View;
 import org.eclipse.xtext.example.gmf.diagram.edit.parts.SimplePropertyEditPart;
 import org.eclipse.xtext.example.gmf.diagram.extensions.Activator;
-import org.eclipse.xtext.example.gmf.internal.EntitiesActivator;
+import org.eclipse.xtext.example.gmf.ui.internal.EntitiesActivator;
 import org.eclipse.xtext.gmf.glue.edit.part.PopupXtextEditorHelper;
 
 public class SimplePropertyPopupXtextEditorEditPartOverride extends SimplePropertyEditPart {

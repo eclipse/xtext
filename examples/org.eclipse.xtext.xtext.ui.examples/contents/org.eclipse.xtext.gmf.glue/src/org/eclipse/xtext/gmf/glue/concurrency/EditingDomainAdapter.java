@@ -30,9 +30,9 @@ import org.eclipse.swt.widgets.Shell;
 import org.eclipse.xtext.gmf.glue.Activator;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.DirtyStateManagerProvider;
 import org.eclipse.xtext.ui.editor.IDirtyResource;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
+import org.eclipse.xtext.ui.shared.Access;
 
 import com.google.common.collect.Lists;
 import com.google.inject.internal.Maps;
@@ -75,7 +75,7 @@ public class EditingDomainAdapter extends AdapterImpl implements ResourceSetList
 	protected EditingDomainAdapter(TransactionalEditingDomain editingDomain) {
 		this.editingDomain = editingDomain;
 		editingDomain.addResourceSetListener(this);
-		dirtyStateManager = new DirtyStateManagerProvider().get();
+		dirtyStateManager = Access.getIDirtyStateManager().get();
 		uri2dirtyResource = Maps.newHashMap();
 		Lifecycle lifecycle = TransactionUtil.getAdapter(editingDomain, Lifecycle.class);
 		lifecycle.addTransactionalEditingDomainListener(this);
