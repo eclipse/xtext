@@ -152,11 +152,6 @@ public class TypeConstraintItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.TYPE_CONSTRAINT__TYPE_REFERENCE,
-				 TypesFactory.eINSTANCE.createSimpleTypeReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.TYPE_CONSTRAINT__TYPE_REFERENCE,
 				 TypesFactory.eINSTANCE.createParameterizedTypeReference()));
 
 		newChildDescriptors.add

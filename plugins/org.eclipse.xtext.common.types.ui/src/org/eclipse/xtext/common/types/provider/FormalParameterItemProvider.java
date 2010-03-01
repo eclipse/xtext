@@ -183,11 +183,6 @@ public class FormalParameterItemProvider
 		newChildDescriptors.add
 			(createChildParameter
 				(TypesPackage.Literals.FORMAL_PARAMETER__PARAMETER_TYPE,
-				 TypesFactory.eINSTANCE.createSimpleTypeReference()));
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.FORMAL_PARAMETER__PARAMETER_TYPE,
 				 TypesFactory.eINSTANCE.createParameterizedTypeReference()));
 
 		newChildDescriptors.add

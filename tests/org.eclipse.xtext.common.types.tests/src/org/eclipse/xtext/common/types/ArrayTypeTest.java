@@ -29,7 +29,7 @@ public class ArrayTypeTest extends TestCase {
 	public void testCanonicalName_02() {
 		PrimitiveType primitiveType = TypesFactory.eINSTANCE.createPrimitiveType();
 		primitiveType.setName("int");
-		SimpleTypeReference componentType = TypesFactory.eINSTANCE.createSimpleTypeReference();
+		ParameterizedTypeReference componentType = TypesFactory.eINSTANCE.createParameterizedTypeReference();
 		componentType.setType(primitiveType);
 		arrayType.setComponentType(componentType);
 		assertEquals("int[]", arrayType.getCanonicalName());
@@ -38,11 +38,11 @@ public class ArrayTypeTest extends TestCase {
 	public void testCanonicalName_03() {
 		PrimitiveType primitiveType = TypesFactory.eINSTANCE.createPrimitiveType();
 		primitiveType.setName("int");
-		SimpleTypeReference componentType = TypesFactory.eINSTANCE.createSimpleTypeReference();
+		ParameterizedTypeReference componentType = TypesFactory.eINSTANCE.createParameterizedTypeReference();
 		componentType.setType(primitiveType);
 		ArrayType arrayType = TypesFactory.eINSTANCE.createArrayType();
 		arrayType.setComponentType(componentType);
-		componentType = TypesFactory.eINSTANCE.createSimpleTypeReference();
+		componentType = TypesFactory.eINSTANCE.createParameterizedTypeReference();
 		componentType.setType(arrayType);
 		this.arrayType.setComponentType(componentType);
 		assertEquals("int[][]", this.arrayType.getCanonicalName());
@@ -51,7 +51,7 @@ public class ArrayTypeTest extends TestCase {
 	public void testGetDimension_01() {
 		PrimitiveType primitiveType = TypesFactory.eINSTANCE.createPrimitiveType();
 		primitiveType.setName("int");
-		SimpleTypeReference componentType = TypesFactory.eINSTANCE.createSimpleTypeReference();
+		ParameterizedTypeReference componentType = TypesFactory.eINSTANCE.createParameterizedTypeReference();
 		componentType.setType(primitiveType);
 		arrayType.setComponentType(componentType);
 		assertEquals(1, arrayType.getDimensions());
@@ -60,11 +60,11 @@ public class ArrayTypeTest extends TestCase {
 	public void testGetDimension_02() {
 		PrimitiveType primitiveType = TypesFactory.eINSTANCE.createPrimitiveType();
 		primitiveType.setName("int");
-		SimpleTypeReference componentType = TypesFactory.eINSTANCE.createSimpleTypeReference();
+		ParameterizedTypeReference componentType = TypesFactory.eINSTANCE.createParameterizedTypeReference();
 		componentType.setType(primitiveType);
 		ArrayType arrayType = TypesFactory.eINSTANCE.createArrayType();
 		arrayType.setComponentType(componentType);
-		componentType = TypesFactory.eINSTANCE.createSimpleTypeReference();
+		componentType = TypesFactory.eINSTANCE.createParameterizedTypeReference();
 		componentType.setType(arrayType);
 		this.arrayType.setComponentType(componentType);
 		assertEquals(2, this.arrayType.getDimensions());

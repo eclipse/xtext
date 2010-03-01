@@ -34,7 +34,6 @@ import org.eclipse.xtext.common.types.LowerBound;
 import org.eclipse.xtext.common.types.Operation;
 import org.eclipse.xtext.common.types.ParameterizedTypeReference;
 import org.eclipse.xtext.common.types.ReferenceTypeArgument;
-import org.eclipse.xtext.common.types.SimpleTypeReference;
 import org.eclipse.xtext.common.types.TypeArgument;
 import org.eclipse.xtext.common.types.TypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
@@ -87,9 +86,9 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 				result.getMembers().add(createField(field));
 		}
 		if (clazz.getGenericSuperclass() != null)
-			result.getSuperTypes().add(createTypeReference(clazz.getGenericSuperclass(), result));
+			result.getSuperTypes().add(createTypeReference(clazz.getGenericSuperclass()));
 		for (Type type : clazz.getGenericInterfaces()) {
-			result.getSuperTypes().add(createTypeReference(type, result));
+			result.getSuperTypes().add(createTypeReference(type));
 		}
 		for (TypeVariable<?> variable : clazz.getTypeParameters()) {
 			result.getTypeParameters().add(createTypeParameter(variable, result));
@@ -129,19 +128,18 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		if (variable.getBounds().length != 0) {
 			for (Type bound : variable.getBounds()) {
 				UpperBound upperBound = TypesFactory.eINSTANCE.createUpperBound();
-				upperBound.setTypeReference(createTypeReference(bound, container));
+				upperBound.setTypeReference(createTypeReference(bound));
 				result.getConstraints().add(upperBound);
 			}
 		}
 		return result;
 	}
 
-	public TypeReference createTypeReference(Type type,
-			org.eclipse.xtext.common.types.Member container) {
+	public TypeReference createTypeReference(Type type) {
 		if (type instanceof GenericArrayType) {
 			GenericArrayType arrayType = (GenericArrayType) type;
 			Type componentType = arrayType.getGenericComponentType();
-			TypeReference componentTypeReference = createTypeReference(componentType, container);
+			TypeReference componentTypeReference = createTypeReference(componentType);
 			if (componentTypeReference != null) {
 				GenericArrayTypeReference result = TypesFactory.eINSTANCE.createGenericArrayTypeReference();
 				ArrayType resultArray = TypesFactory.eINSTANCE.createArrayType();
@@ -156,19 +154,19 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			ParameterizedTypeReference result = TypesFactory.eINSTANCE.createParameterizedTypeReference();
 			result.setType(createProxy(parameterizedType.getRawType()));
 			for (int i = 0; i < parameterizedType.getActualTypeArguments().length; i++) {
-				TypeArgument argument = createTypeArgument(parameterizedType.getActualTypeArguments()[i], container,
+				TypeArgument argument = createTypeArgument(parameterizedType.getActualTypeArguments()[i],
 						parameterizedType.getRawType(), i);
 				result.getArguments().add(argument);
 			}
 			return result;
 		} else {
-			SimpleTypeReference result = TypesFactory.eINSTANCE.createSimpleTypeReference();
+			ParameterizedTypeReference result = TypesFactory.eINSTANCE.createParameterizedTypeReference();
 			result.setType(createProxy(type));
 			return result;
 		}
 	}
 
-	public TypeArgument createTypeArgument(Type actualTypeArgument, org.eclipse.xtext.common.types.Member container,
+	public TypeArgument createTypeArgument(Type actualTypeArgument,
 			Type rawType, int i) {
 		if (actualTypeArgument instanceof WildcardType) {
 			WildcardType wildcardType = (WildcardType) actualTypeArgument;
@@ -176,7 +174,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			if (wildcardType.getUpperBounds().length != 0) {
 				UpperBound upperBound = TypesFactory.eINSTANCE.createUpperBound();
 				for (Type boundType : wildcardType.getUpperBounds()) {
-					TypeReference upperBoundType = createTypeReference(boundType, container);
+					TypeReference upperBoundType = createTypeReference(boundType);
 					upperBound.setTypeReference(upperBoundType);
 				}
 				result.getConstraints().add(upperBound);
@@ -184,7 +182,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			if (wildcardType.getLowerBounds().length != 0) {
 				LowerBound lowerBound = TypesFactory.eINSTANCE.createLowerBound();
 				for (Type boundType : wildcardType.getLowerBounds()) {
-					TypeReference lowerBoundType = createTypeReference(boundType, container);
+					TypeReference lowerBoundType = createTypeReference(boundType);
 					lowerBound.setTypeReference(lowerBoundType);
 				}
 				result.getConstraints().add(lowerBound);
@@ -193,7 +191,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		}
 		else {
 			ReferenceTypeArgument result = TypesFactory.eINSTANCE.createReferenceTypeArgument();
-			TypeReference typeReference = createTypeReference(actualTypeArgument, container);
+			TypeReference typeReference = createTypeReference(actualTypeArgument);
 			result.setTypeReference(typeReference);
 			return result;
 		}
@@ -212,7 +210,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		result.setFinal(Modifier.isFinal(field.getModifiers()));
 		result.setStatic(Modifier.isStatic(field.getModifiers()));
 		setVisibility(result, field.getModifiers());
-		result.setType(createTypeReference(field.getGenericType(), result));
+		result.setType(createTypeReference(field.getGenericType()));
 		return result;
 	}
 
@@ -221,7 +219,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		enhanceExecutable(result, constructor, constructor.getGenericParameterTypes());
 		enhanceGenericDeclaration(result, constructor);
 		for (Type parameterType : constructor.getGenericExceptionTypes()) {
-			result.getExceptions().add(createTypeReference(parameterType, result));
+			result.getExceptions().add(createTypeReference(parameterType));
 		}
 		return result;
 	}
@@ -270,9 +268,9 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		enhanceGenericDeclaration(result, method);
 		result.setFinal(Modifier.isFinal(method.getModifiers()));
 		result.setStatic(Modifier.isStatic(method.getModifiers()));
-		result.setReturnType(createTypeReference(method.getGenericReturnType(), result));
+		result.setReturnType(createTypeReference(method.getGenericReturnType()));
 		for (Type parameterType : method.getGenericExceptionTypes()) {
-			result.getExceptions().add(createTypeReference(parameterType, result));
+			result.getExceptions().add(createTypeReference(parameterType));
 		}
 		return result;
 	}
@@ -281,7 +279,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			org.eclipse.xtext.common.types.Member container) {
 		FormalParameter result = TypesFactory.eINSTANCE.createFormalParameter();
 		result.setName(paramName);
-		result.setParameterType(createTypeReference(parameterType, container));
+		result.setParameterType(createTypeReference(parameterType));
 		return result;
 	}
 

@@ -80,10 +80,6 @@ abstract class TypeReference extends IdentifyableElement {
   op Type getType();
 }
 
-class SimpleTypeReference extends TypeReference {
-  ref Type type;
-}
-
 class ParameterizedTypeReference extends TypeReference {
 //  attr String fullyQualifiedName;
   val TypeArgument[*]#declarator arguments;

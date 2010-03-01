@@ -108,15 +108,6 @@ public interface TypesFactory extends EFactory {
 	GenericType createGenericType();
 
 	/**
-	 * Returns a new object of class '<em>Simple Type Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Simple Type Reference</em>'.
-	 * @generated
-	 */
-	SimpleTypeReference createSimpleTypeReference();
-
-	/**
 	 * Returns a new object of class '<em>Parameterized Type Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->

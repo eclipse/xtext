@@ -284,29 +284,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.SimpleTypeReference} instances.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected SimpleTypeReferenceItemProvider simpleTypeReferenceItemProvider;
-
-	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.SimpleTypeReference}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Adapter createSimpleTypeReferenceAdapter() {
-		if (simpleTypeReferenceItemProvider == null) {
-			simpleTypeReferenceItemProvider = new SimpleTypeReferenceItemProvider(this);
-		}
-
-		return simpleTypeReferenceItemProvider;
-	}
-
-	/**
 	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.ParameterizedTypeReference} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -621,7 +598,6 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		if (annotationTypeItemProvider != null) annotationTypeItemProvider.dispose();
 		if (enumerationTypeItemProvider != null) enumerationTypeItemProvider.dispose();
 		if (genericTypeItemProvider != null) genericTypeItemProvider.dispose();
-		if (simpleTypeReferenceItemProvider != null) simpleTypeReferenceItemProvider.dispose();
 		if (parameterizedTypeReferenceItemProvider != null) parameterizedTypeReferenceItemProvider.dispose();
 		if (genericArrayTypeReferenceItemProvider != null) genericArrayTypeReferenceItemProvider.dispose();
 		if (wildcardTypeArgumentItemProvider != null) wildcardTypeArgumentItemProvider.dispose();

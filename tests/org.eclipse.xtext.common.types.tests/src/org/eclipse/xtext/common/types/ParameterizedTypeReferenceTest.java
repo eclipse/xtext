@@ -58,7 +58,7 @@ public class ParameterizedTypeReferenceTest extends TestCase {
 		PrimitiveType primitiveType = TypesFactory.eINSTANCE.createPrimitiveType();
 		primitiveType.setName("int");
 		ArrayType arrayType = TypesFactory.eINSTANCE.createArrayType();
-		SimpleTypeReference componentTypeRef = TypesFactory.eINSTANCE.createSimpleTypeReference();
+		ParameterizedTypeReference componentTypeRef = TypesFactory.eINSTANCE.createParameterizedTypeReference();
 		componentTypeRef.setType(primitiveType);
 		arrayType.setComponentType(componentTypeRef);
 		primitiveType.setArrayType(arrayType);

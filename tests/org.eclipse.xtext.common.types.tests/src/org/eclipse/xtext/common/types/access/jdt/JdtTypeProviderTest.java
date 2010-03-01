@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.common.types.DeclaredType;
-import org.eclipse.xtext.common.types.SimpleTypeReference;
+import org.eclipse.xtext.common.types.ParameterizedTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.Void;
 import org.eclipse.xtext.common.types.access.IMirror;
@@ -167,7 +167,7 @@ public class JdtTypeProviderTest extends AbstractTypeProviderTest {
 		assertTrue(type.getSuperTypes().isEmpty());
 		URI unresolveableType = URI.createURI("java:/Objects/Something#Something");
 		Void proxy = TypesFactory.eINSTANCE.createVoid();
-		SimpleTypeReference typeReference = TypesFactory.eINSTANCE.createSimpleTypeReference();
+		ParameterizedTypeReference typeReference = TypesFactory.eINSTANCE.createParameterizedTypeReference();
 		typeReference.setType(proxy);
 		((InternalEObject) proxy).eSetProxyURI(unresolveableType);
 		type.getSuperTypes().add(typeReference);

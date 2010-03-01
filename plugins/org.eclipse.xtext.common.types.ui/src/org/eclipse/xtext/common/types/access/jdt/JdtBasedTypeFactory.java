@@ -33,7 +33,6 @@ import org.eclipse.xtext.common.types.Member;
 import org.eclipse.xtext.common.types.Operation;
 import org.eclipse.xtext.common.types.ParameterizedTypeReference;
 import org.eclipse.xtext.common.types.ReferenceTypeArgument;
-import org.eclipse.xtext.common.types.SimpleTypeReference;
 import org.eclipse.xtext.common.types.TypeArgument;
 import org.eclipse.xtext.common.types.TypeParameter;
 import org.eclipse.xtext.common.types.TypeReference;
@@ -206,7 +205,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			return result;
 		}
 		else {
-			SimpleTypeReference result = TypesFactory.eINSTANCE.createSimpleTypeReference();
+			ParameterizedTypeReference result = TypesFactory.eINSTANCE.createParameterizedTypeReference();
 			result.setType(createProxy(signature, declarator));
 			return result;
 		}
