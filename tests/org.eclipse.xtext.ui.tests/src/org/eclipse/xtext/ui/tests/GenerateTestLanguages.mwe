@@ -40,6 +40,9 @@
 		<language uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug291022TestLanguage.xtext">
 			<fragment file="org/eclipse/xtext/ui/tests/TestLanguageSetup.mwe"/>
 		</language>
+		<language uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/Bug303200TestLanguage.xtext">
+			<fragment file="org/eclipse/xtext/ui/tests/TestLanguageSetup.mwe" backtrack="true"/>
+		</language>
 		<language uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.xtext">
 			<fragment file="org/eclipse/xtext/ui/tests/TestLanguageSetup.mwe"/>
 		</language>

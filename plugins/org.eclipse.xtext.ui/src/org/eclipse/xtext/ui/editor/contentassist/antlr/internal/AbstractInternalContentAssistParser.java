@@ -278,12 +278,14 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 						tokenIndex--;
 				}
 				Token token = input.LT(tokenIndex);
-				if (token == Token.EOF_TOKEN) {
-					result.setLookAhead(i);
-					break;
+				if (token != null) {
+					if (token == Token.EOF_TOKEN) {
+						result.setLookAhead(i);
+						break;
+					}
+					LookAheadTerminal lookAheadTerminal = createLookAheadTerminal(token);
+					lookAheadTerminals.add(lookAheadTerminal);
 				}
-				LookAheadTerminal lookAheadTerminal = createLookAheadTerminal(token);
-				lookAheadTerminals.add(lookAheadTerminal);
 			}
 			if (!lookAheadTerminals.isEmpty())
 				result.setLookAheadTerminals(lookAheadTerminals);

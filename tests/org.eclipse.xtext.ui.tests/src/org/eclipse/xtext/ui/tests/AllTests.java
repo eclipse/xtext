@@ -49,6 +49,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.XtextGrammarUiContentAssistTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.antlr.Bug281198ParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.antlr.Bug282031ParserTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.antlr.Bug303200Test.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.antlr.ParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.antlr.internal.InternalParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.folding.DefaultFoldingRegionProviderTest.class);

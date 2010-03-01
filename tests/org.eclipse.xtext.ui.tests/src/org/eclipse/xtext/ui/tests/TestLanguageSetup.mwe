@@ -1,6 +1,7 @@
 <config class="org.eclipse.xtext.generator.CompositeGeneratorFragment">
 	<property name="genModels" value=""/>
 	<property name="file.extensions" value=""/>
+	<property name="backtrack" value="false"/>
 	<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" referencedGenModels="${genModels}"/>
 	<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
 	<fragment class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
@@ -8,10 +9,10 @@
 	<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 
 		fileExtensions="${file.extensions}"/>
 	<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment">
-		<options classSplitting="true"/>
+		<options classSplitting="true" backtrack="${backtrack}"/>
 	</fragment>
 	<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
 	<fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment">
-		<options classSplitting="true"/>
+		<options classSplitting="true" backtrack="${backtrack}"/>
 	</fragment>
 </config>
