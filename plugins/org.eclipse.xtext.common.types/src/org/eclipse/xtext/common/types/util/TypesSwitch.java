@@ -11,7 +11,6 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.xtext.common.types.AnnotationReference;
 import org.eclipse.xtext.common.types.AnnotationTarget;
 import org.eclipse.xtext.common.types.AnnotationType;
@@ -33,7 +32,6 @@ import org.eclipse.xtext.common.types.Operation;
 import org.eclipse.xtext.common.types.ParameterizedTypeReference;
 import org.eclipse.xtext.common.types.PrimitiveType;
 import org.eclipse.xtext.common.types.ReferenceTypeArgument;
-import org.eclipse.xtext.common.types.SimpleTypeReference;
 import org.eclipse.xtext.common.types.Type;
 import org.eclipse.xtext.common.types.TypeArgument;
 import org.eclipse.xtext.common.types.TypeConstraint;
@@ -263,14 +261,6 @@ public class TypesSwitch<T> {
 				TypeReference typeReference = (TypeReference)theEObject;
 				T result = caseTypeReference(typeReference);
 				if (result == null) result = caseIdentifyableElement(typeReference);
-				if (result == null) result = defaultCase(theEObject);
-				return result;
-			}
-			case TypesPackage.SIMPLE_TYPE_REFERENCE: {
-				SimpleTypeReference simpleTypeReference = (SimpleTypeReference)theEObject;
-				T result = caseSimpleTypeReference(simpleTypeReference);
-				if (result == null) result = caseTypeReference(simpleTypeReference);
-				if (result == null) result = caseIdentifyableElement(simpleTypeReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -638,21 +628,6 @@ public class TypesSwitch<T> {
 	 * @generated
 	 */
 	public T caseTypeReference(TypeReference object) {
-		return null;
-	}
-
-	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Simple Type Reference</em>'.
-	 * <!-- begin-user-doc -->
-	 * This implementation returns null;
-	 * returning a non-null result will terminate the switch.
-	 * <!-- end-user-doc -->
-	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Simple Type Reference</em>'.
-	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
-	 * @generated
-	 */
-	public T caseSimpleTypeReference(SimpleTypeReference object) {
 		return null;
 	}
 

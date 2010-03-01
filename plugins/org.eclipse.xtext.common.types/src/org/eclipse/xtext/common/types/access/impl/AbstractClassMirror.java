@@ -15,7 +15,7 @@ import org.eclipse.xtext.common.types.ComponentType;
 import org.eclipse.xtext.common.types.DeclaredType;
 import org.eclipse.xtext.common.types.IdentifyableElement;
 import org.eclipse.xtext.common.types.Member;
-import org.eclipse.xtext.common.types.SimpleTypeReference;
+import org.eclipse.xtext.common.types.ParameterizedTypeReference;
 import org.eclipse.xtext.common.types.TypeParameter;
 import org.eclipse.xtext.common.types.TypeParameterDeclarator;
 import org.eclipse.xtext.common.types.TypeReference;
@@ -82,7 +82,7 @@ public abstract class AbstractClassMirror implements IClassMirror {
 			return null;
 		if (component.getArrayType() == null) {
 			ArrayType arrayType = TypesFactory.eINSTANCE.createArrayType();
-			SimpleTypeReference componentTypeReference = TypesFactory.eINSTANCE.createSimpleTypeReference();
+			ParameterizedTypeReference componentTypeReference = TypesFactory.eINSTANCE.createParameterizedTypeReference();
 			componentTypeReference.setType(component);
 			arrayType.setComponentType(componentTypeReference);
 			component.setArrayType(arrayType);

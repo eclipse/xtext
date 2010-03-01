@@ -391,7 +391,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeArgument()
 	 * @generated
 	 */
-	int TYPE_ARGUMENT = 20;
+	int TYPE_ARGUMENT = 19;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.WildcardTypeArgumentImpl <em>Wildcard Type Argument</em>}' class.
@@ -401,7 +401,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getWildcardTypeArgument()
 	 * @generated
 	 */
-	int WILDCARD_TYPE_ARGUMENT = 21;
+	int WILDCARD_TYPE_ARGUMENT = 20;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.ReferenceTypeArgumentImpl <em>Reference Type Argument</em>}' class.
@@ -411,7 +411,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getReferenceTypeArgument()
 	 * @generated
 	 */
-	int REFERENCE_TYPE_ARGUMENT = 22;
+	int REFERENCE_TYPE_ARGUMENT = 21;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.TypeParameterImpl <em>Type Parameter</em>}' class.
@@ -866,34 +866,6 @@ public interface TypesPackage extends EPackage {
 	int TYPE_REFERENCE_FEATURE_COUNT = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.SimpleTypeReferenceImpl <em>Simple Type Reference</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.SimpleTypeReferenceImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getSimpleTypeReference()
-	 * @generated
-	 */
-	int SIMPLE_TYPE_REFERENCE = 17;
-
-	/**
-	 * The feature id for the '<em><b>Type</b></em>' reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_TYPE_REFERENCE__TYPE = TYPE_REFERENCE_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Simple Type Reference</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int SIMPLE_TYPE_REFERENCE_FEATURE_COUNT = TYPE_REFERENCE_FEATURE_COUNT + 1;
-
-	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.ParameterizedTypeReferenceImpl <em>Parameterized Type Reference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -901,7 +873,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getParameterizedTypeReference()
 	 * @generated
 	 */
-	int PARAMETERIZED_TYPE_REFERENCE = 18;
+	int PARAMETERIZED_TYPE_REFERENCE = 17;
 
 	/**
 	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
@@ -938,7 +910,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getGenericArrayTypeReference()
 	 * @generated
 	 */
-	int GENERIC_ARRAY_TYPE_REFERENCE = 19;
+	int GENERIC_ARRAY_TYPE_REFERENCE = 18;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -1038,7 +1010,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getAnnotationTarget()
 	 * @generated
 	 */
-	int ANNOTATION_TARGET = 29;
+	int ANNOTATION_TARGET = 28;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1066,7 +1038,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getMember()
 	 * @generated
 	 */
-	int MEMBER = 23;
+	int MEMBER = 22;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1121,7 +1093,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getField()
 	 * @generated
 	 */
-	int FIELD = 24;
+	int FIELD = 23;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1203,7 +1175,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getExecutable()
 	 * @generated
 	 */
-	int EXECUTABLE = 25;
+	int EXECUTABLE = 24;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1285,7 +1257,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getConstructor()
 	 * @generated
 	 */
-	int CONSTRUCTOR = 26;
+	int CONSTRUCTOR = 25;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1367,7 +1339,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getOperation()
 	 * @generated
 	 */
-	int OPERATION = 27;
+	int OPERATION = 26;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1485,7 +1457,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getFormalParameter()
 	 * @generated
 	 */
-	int FORMAL_PARAMETER = 28;
+	int FORMAL_PARAMETER = 27;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1523,7 +1495,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getAnnotationReference()
 	 * @generated
 	 */
-	int ANNOTATION_REFERENCE = 30;
+	int ANNOTATION_REFERENCE = 29;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' reference.
@@ -1561,7 +1533,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getVisibility()
 	 * @generated
 	 */
-	int VISIBILITY = 31;
+	int VISIBILITY = 30;
 
 
 	/**
@@ -1572,7 +1544,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getIterable()
 	 * @generated
 	 */
-	int ITERABLE = 32;
+	int ITERABLE = 31;
 
 
 	/**
@@ -1877,27 +1849,6 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getTypeReference();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.SimpleTypeReference <em>Simple Type Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Simple Type Reference</em>'.
-	 * @see org.eclipse.xtext.common.types.SimpleTypeReference
-	 * @generated
-	 */
-	EClass getSimpleTypeReference();
-
-	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.xtext.common.types.SimpleTypeReference#getType <em>Type</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the reference '<em>Type</em>'.
-	 * @see org.eclipse.xtext.common.types.SimpleTypeReference#getType()
-	 * @see #getSimpleTypeReference()
-	 * @generated
-	 */
-	EReference getSimpleTypeReference_Type();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.ParameterizedTypeReference <em>Parameterized Type Reference</em>}'.
@@ -2609,24 +2560,6 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EClass TYPE_REFERENCE = eINSTANCE.getTypeReference();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.SimpleTypeReferenceImpl <em>Simple Type Reference</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.SimpleTypeReferenceImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getSimpleTypeReference()
-		 * @generated
-		 */
-		EClass SIMPLE_TYPE_REFERENCE = eINSTANCE.getSimpleTypeReference();
-
-		/**
-		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference SIMPLE_TYPE_REFERENCE__TYPE = eINSTANCE.getSimpleTypeReference_Type();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.ParameterizedTypeReferenceImpl <em>Parameterized Type Reference</em>}' class.

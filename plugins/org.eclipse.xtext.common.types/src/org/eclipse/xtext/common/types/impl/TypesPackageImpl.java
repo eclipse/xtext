@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
-import java.lang.Iterable;
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
@@ -16,9 +15,7 @@ import org.eclipse.emf.ecore.EGenericType;
 import org.eclipse.emf.ecore.EOperation;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.EReference;
-
 import org.eclipse.emf.ecore.impl.EPackageImpl;
-
 import org.eclipse.xtext.common.types.AnnotationReference;
 import org.eclipse.xtext.common.types.AnnotationTarget;
 import org.eclipse.xtext.common.types.AnnotationType;
@@ -33,14 +30,13 @@ import org.eclipse.xtext.common.types.Field;
 import org.eclipse.xtext.common.types.FormalParameter;
 import org.eclipse.xtext.common.types.GenericArrayTypeReference;
 import org.eclipse.xtext.common.types.GenericType;
+import org.eclipse.xtext.common.types.IdentifyableElement;
 import org.eclipse.xtext.common.types.LowerBound;
 import org.eclipse.xtext.common.types.Member;
 import org.eclipse.xtext.common.types.Operation;
 import org.eclipse.xtext.common.types.ParameterizedTypeReference;
 import org.eclipse.xtext.common.types.PrimitiveType;
 import org.eclipse.xtext.common.types.ReferenceTypeArgument;
-import org.eclipse.xtext.common.types.SimpleTypeReference;
-import org.eclipse.xtext.common.types.IdentifyableElement;
 import org.eclipse.xtext.common.types.Type;
 import org.eclipse.xtext.common.types.TypeArgument;
 import org.eclipse.xtext.common.types.TypeConstraint;
@@ -171,13 +167,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * @generated
 	 */
 	private EClass typeReferenceEClass = null;
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	private EClass simpleTypeReferenceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -618,24 +607,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EClass getSimpleTypeReference() {
-		return simpleTypeReferenceEClass;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public EReference getSimpleTypeReference_Type() {
-		return (EReference)simpleTypeReferenceEClass.getEStructuralFeatures().get(0);
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public EClass getParameterizedTypeReference() {
 		return parameterizedTypeReferenceEClass;
 	}
@@ -1068,9 +1039,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 
 		typeReferenceEClass = createEClass(TYPE_REFERENCE);
 
-		simpleTypeReferenceEClass = createEClass(SIMPLE_TYPE_REFERENCE);
-		createEReference(simpleTypeReferenceEClass, SIMPLE_TYPE_REFERENCE__TYPE);
-
 		parameterizedTypeReferenceEClass = createEClass(PARAMETERIZED_TYPE_REFERENCE);
 		createEReference(parameterizedTypeReferenceEClass, PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS);
 		createEReference(parameterizedTypeReferenceEClass, PARAMETERIZED_TYPE_REFERENCE__TYPE);
@@ -1173,7 +1141,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		genericTypeEClass.getESuperTypes().add(this.getDeclaredType());
 		genericTypeEClass.getESuperTypes().add(this.getTypeParameterDeclarator());
 		typeReferenceEClass.getESuperTypes().add(this.getIdentifyableElement());
-		simpleTypeReferenceEClass.getESuperTypes().add(this.getTypeReference());
 		parameterizedTypeReferenceEClass.getESuperTypes().add(this.getTypeReference());
 		genericArrayTypeReferenceEClass.getESuperTypes().add(this.getTypeReference());
 		typeArgumentEClass.getESuperTypes().add(this.getIdentifyableElement());
@@ -1262,9 +1229,6 @@ public class TypesPackageImpl extends EPackageImpl implements TypesPackage {
 		initEClass(typeReferenceEClass, TypeReference.class, "TypeReference", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		addEOperation(typeReferenceEClass, this.getType(), "getType", 0, 1, IS_UNIQUE, IS_ORDERED);
-
-		initEClass(simpleTypeReferenceEClass, SimpleTypeReference.class, "SimpleTypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-		initEReference(getSimpleTypeReference_Type(), this.getType(), null, "type", null, 0, 1, SimpleTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
 		initEClass(parameterizedTypeReferenceEClass, ParameterizedTypeReference.class, "ParameterizedTypeReference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getParameterizedTypeReference_Arguments(), this.getTypeArgument(), this.getTypeArgument_Declarator(), "arguments", null, 0, -1, ParameterizedTypeReference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

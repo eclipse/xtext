@@ -71,9 +71,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="TypeReference" abstract="true" eSuperTypes="#//IdentifyableElement">
     <eOperations name="getType" eType="#//Type"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="SimpleTypeReference" eSuperTypes="#//TypeReference">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="#//Type"/>
-  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="ParameterizedTypeReference" eSuperTypes="#//TypeReference">
     <eStructuralFeatures xsi:type="ecore:EReference" name="arguments" upperBound="-1"
         eType="#//TypeArgument" containment="true" eOpposite="#//TypeArgument/declarator"/>

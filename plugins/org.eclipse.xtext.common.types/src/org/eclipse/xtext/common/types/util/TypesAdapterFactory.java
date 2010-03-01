@@ -9,11 +9,8 @@ package org.eclipse.xtext.common.types.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
-
 import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
-
 import org.eclipse.emf.ecore.EObject;
-
 import org.eclipse.xtext.common.types.AnnotationReference;
 import org.eclipse.xtext.common.types.AnnotationTarget;
 import org.eclipse.xtext.common.types.AnnotationType;
@@ -35,7 +32,6 @@ import org.eclipse.xtext.common.types.Operation;
 import org.eclipse.xtext.common.types.ParameterizedTypeReference;
 import org.eclipse.xtext.common.types.PrimitiveType;
 import org.eclipse.xtext.common.types.ReferenceTypeArgument;
-import org.eclipse.xtext.common.types.SimpleTypeReference;
 import org.eclipse.xtext.common.types.Type;
 import org.eclipse.xtext.common.types.TypeArgument;
 import org.eclipse.xtext.common.types.TypeConstraint;
@@ -169,10 +165,6 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseTypeReference(TypeReference object) {
 				return createTypeReferenceAdapter();
-			}
-			@Override
-			public Adapter caseSimpleTypeReference(SimpleTypeReference object) {
-				return createSimpleTypeReferenceAdapter();
 			}
 			@Override
 			public Adapter caseParameterizedTypeReference(ParameterizedTypeReference object) {
@@ -481,20 +473,6 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createTypeReferenceAdapter() {
-		return null;
-	}
-
-	/**
-	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.SimpleTypeReference <em>Simple Type Reference</em>}'.
-	 * <!-- begin-user-doc -->
-	 * This default implementation returns null so that we can easily ignore cases;
-	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
-	 * <!-- end-user-doc -->
-	 * @return the new adapter.
-	 * @see org.eclipse.xtext.common.types.SimpleTypeReference
-	 * @generated
-	 */
-	public Adapter createSimpleTypeReferenceAdapter() {
 		return null;
 	}
 

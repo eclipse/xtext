@@ -35,7 +35,7 @@ public class FormalParameterTest extends TestCase {
 		TypeParameter typeParameter = TypesFactory.eINSTANCE.createTypeParameter();
 		typeParameter.setName("T");
 		formalParameter.setName("param");
-		SimpleTypeReference typeReference = TypesFactory.eINSTANCE.createSimpleTypeReference();
+		ParameterizedTypeReference typeReference = TypesFactory.eINSTANCE.createParameterizedTypeReference();
 		typeReference.setType(typeParameter);
 		formalParameter.setParameterType(typeReference);
 		assertEquals("T", formalParameter.getCanonicalName());

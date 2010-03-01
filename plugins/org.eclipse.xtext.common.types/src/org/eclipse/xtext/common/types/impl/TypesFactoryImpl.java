@@ -7,16 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
-import java.lang.Iterable;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
-
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
-
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-
 import org.eclipse.xtext.common.types.AnnotationReference;
 import org.eclipse.xtext.common.types.AnnotationType;
 import org.eclipse.xtext.common.types.ArrayType;
@@ -31,7 +27,6 @@ import org.eclipse.xtext.common.types.Operation;
 import org.eclipse.xtext.common.types.ParameterizedTypeReference;
 import org.eclipse.xtext.common.types.PrimitiveType;
 import org.eclipse.xtext.common.types.ReferenceTypeArgument;
-import org.eclipse.xtext.common.types.SimpleTypeReference;
 import org.eclipse.xtext.common.types.TypeParameter;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
@@ -92,7 +87,6 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.ANNOTATION_TYPE: return createAnnotationType();
 			case TypesPackage.ENUMERATION_TYPE: return createEnumerationType();
 			case TypesPackage.GENERIC_TYPE: return createGenericType();
-			case TypesPackage.SIMPLE_TYPE_REFERENCE: return createSimpleTypeReference();
 			case TypesPackage.PARAMETERIZED_TYPE_REFERENCE: return createParameterizedTypeReference();
 			case TypesPackage.GENERIC_ARRAY_TYPE_REFERENCE: return createGenericArrayTypeReference();
 			case TypesPackage.WILDCARD_TYPE_ARGUMENT: return createWildcardTypeArgument();
@@ -229,16 +223,6 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	public GenericType createGenericType() {
 		GenericTypeImpl genericType = new GenericTypeImpl();
 		return genericType;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public SimpleTypeReference createSimpleTypeReference() {
-		SimpleTypeReferenceImpl simpleTypeReference = new SimpleTypeReferenceImpl();
-		return simpleTypeReference;
 	}
 
 	/**
