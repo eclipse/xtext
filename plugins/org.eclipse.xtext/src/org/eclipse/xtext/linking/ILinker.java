@@ -8,14 +8,11 @@
 package org.eclipse.xtext.linking;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.Stable;
 import org.eclipse.xtext.diagnostics.IDiagnosticConsumer;
-import org.eclipse.xtext.linking.impl.AbstractLinker;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-@Stable(since="0.7.0", subClass=AbstractLinker.class)
 public interface ILinker {
 
 	/**

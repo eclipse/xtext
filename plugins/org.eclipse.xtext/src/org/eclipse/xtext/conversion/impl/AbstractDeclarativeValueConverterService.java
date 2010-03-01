@@ -19,7 +19,6 @@ import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.IGrammarAccess;
 import org.eclipse.xtext.ParserRule;
-import org.eclipse.xtext.Stable;
 import org.eclipse.xtext.conversion.IValueConverter;
 import org.eclipse.xtext.conversion.ValueConverter;
 import org.eclipse.xtext.conversion.ValueConverterException;
@@ -31,7 +30,6 @@ import com.google.inject.Inject;
  * @author Sven Efftinge - Initial contribution and API
  * 
  */
-@Stable(since = "0.7.0")
 public abstract class AbstractDeclarativeValueConverterService extends AbstractValueConverterService {
 
 	private static Logger log = Logger.getLogger(AbstractDeclarativeValueConverterService.class);

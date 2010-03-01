@@ -7,7 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.conversion.impl;
 
-import org.eclipse.xtext.Stable;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parsetree.AbstractNode;
 
@@ -17,7 +16,6 @@ import org.eclipse.xtext.parsetree.AbstractNode;
  *
  * @param <T>
  */
-@Stable(since="0.7.0")
 public abstract class AbstractNullSafeConverter<T> extends AbstractValueConverter<T> {
 
 	public String toString(T value) {

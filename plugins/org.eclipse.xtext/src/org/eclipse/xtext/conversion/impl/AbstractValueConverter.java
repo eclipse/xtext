@@ -8,14 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.conversion.impl;
 
-import org.eclipse.xtext.Stable;
 import org.eclipse.xtext.conversion.IValueConverter;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  *
  */
-@Stable(since="0.7.0")
 public abstract class AbstractValueConverter<Type> implements IValueConverter<Type> {
 
 }
