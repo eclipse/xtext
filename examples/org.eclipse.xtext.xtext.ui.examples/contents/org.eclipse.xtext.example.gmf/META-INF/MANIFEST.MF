@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: org.eclipse.xtext.example.gmf
-Bundle-Vendor: My Company
+Bundle-Vendor: Eclipse Modeling Project
 Bundle-Version: 1.0.0
 Bundle-SymbolicName: org.eclipse.xtext.example.gmf; singleton:=true
 Bundle-ActivationPolicy: lazy

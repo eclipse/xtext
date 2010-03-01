@@ -17,12 +17,12 @@ public class EntitiesExecutableExtensionFactory extends AbstractGuiceAwareExecut
 
 	@Override
 	protected Bundle getBundle() {
-		return org.eclipse.xtext.example.gmf.internal.EntitiesActivator.getInstance().getBundle();
+		return org.eclipse.xtext.example.gmf.ui.internal.EntitiesActivator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return org.eclipse.xtext.example.gmf.internal.EntitiesActivator.getInstance().getInjector("org.eclipse.xtext.example.gmf.Entities");
+		return org.eclipse.xtext.example.gmf.ui.internal.EntitiesActivator.getInstance().getInjector("org.eclipse.xtext.example.gmf.Entities");
 	}
 	
 }
