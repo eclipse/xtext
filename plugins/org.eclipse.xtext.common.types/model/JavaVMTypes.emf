@@ -108,6 +108,7 @@ abstract class JvmMember extends JvmAnnotationTarget, JvmIdentifyableElement {
 }
 
 abstract class JvmFeature extends JvmIdentifyableElement {
+  op String getSimpleName();
 }
 
 enum JvmVisibility {
@@ -156,4 +157,4 @@ class JvmAnnotationReference {
 // generified datatypes, that's why you'll have to uncomment /
 // comment the next lines and add the parameter type manually
 datatype Iterable<E> : java.lang.Iterable;
-// datatype Iterable : java.lang.Iterable;
+//datatype Iterable : java.lang.Iterable;
