@@ -50,6 +50,16 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		public ImportNormalizer(QualifiedName importedNamespace) {
 			this.name = importedNamespace;
 		}
+		
+		@Override
+		public int hashCode() {
+			return name.hashCode();
+		}
+		
+		@Override
+		public boolean equals(Object obj) {
+			return obj instanceof ImportNormalizer && name.equals(((ImportNormalizer)obj).name);
+		}
 
 		public String shortToLongName(String shortName) {
 			if (!name.hasWildCard()) {
