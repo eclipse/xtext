@@ -1,11 +1,11 @@
 @namespace(uri="http://www.eclipse.org/xtext/common/JavaVMTypes", prefix="types")
 package types;
 
-abstract class IdentifyableElement {
+abstract class JvmIdentifyableElement {
   op String getCanonicalName();
 }
 
-abstract class Type extends IdentifyableElement {
+abstract class JvmType extends JvmIdentifyableElement {
 /*
   op boolean isValidReturnType();
   op boolean isValidParameterType();
@@ -13,141 +13,143 @@ abstract class Type extends IdentifyableElement {
 */
 }
 
-class Void extends Type {
+class JvmVoid extends JvmType {
 }
 
-abstract class ComponentType extends Type {
-  val ArrayType arrayType;
+abstract class JvmComponentType extends JvmType {
+  val JvmArrayType arrayType;
 }
 
-class PrimitiveType extends ComponentType {
+class JvmPrimitiveType extends JvmComponentType {
   attr String name;
 }
 
-class ArrayType extends ComponentType {
+class JvmArrayType extends JvmComponentType {
   op int getDimensions();
-  val TypeReference componentType;
+  val JvmTypeReference componentType;
 }
 
-abstract class DeclaredType extends ComponentType, Member {
+abstract class JvmDeclaredType extends JvmComponentType, JvmMember {
   op String getPackageName();
-  val TypeReference[*] superTypes;
-  val Member[*]#declaringType members;
+  val JvmTypeReference[*] superTypes;
+  val JvmMember[*]#declaringType members;
 }
 
-class TypeParameter extends ComponentType, ConstraintOwner {
+class JvmTypeParameter extends JvmComponentType, JvmConstraintOwner {
   attr String name;
-  ref TypeParameterDeclarator#typeParameters declarator;
+  ref JvmTypeParameterDeclarator#typeParameters declarator;
 }
 
-abstract class TypeParameterDeclarator {
-  val TypeParameter[*]#declarator typeParameters;
+abstract class JvmTypeParameterDeclarator {
+  val JvmTypeParameter[*]#declarator typeParameters;
 }
 
-abstract class ConstraintOwner extends IdentifyableElement {
+abstract class JvmConstraintOwner extends JvmIdentifyableElement {
   op String getCanonicalName();
-  val TypeConstraint[*]#owner constraints;
+  val JvmTypeConstraint[*]#owner constraints;
 }
 
-abstract class TypeConstraint extends IdentifyableElement {
-  val TypeReference typeReference;
-  ref ConstraintOwner#constraints owner;
+abstract class JvmTypeConstraint extends JvmIdentifyableElement {
+  val JvmTypeReference typeReference;
+  ref JvmConstraintOwner#constraints owner;
 }
 
-class UpperBound extends TypeConstraint {
+class JvmUpperBound extends JvmTypeConstraint {
 }
 
-class LowerBound extends TypeConstraint {
+class JvmLowerBound extends JvmTypeConstraint {
 }
 
-class AnnotationType extends DeclaredType {
+class JvmAnnotationType extends JvmDeclaredType {
 }
 
-class EnumerationType extends DeclaredType {
+class JvmEnumerationType extends JvmDeclaredType {
 }
 
-class GenericType extends DeclaredType, TypeParameterDeclarator {
+class JvmGenericType extends JvmDeclaredType, JvmTypeParameterDeclarator {
   attr boolean ~abstract;
   attr boolean ~interface;
   attr boolean static;
   attr boolean final;
-  op Iterable<Type> getExtendedInterfaces();
-  op Iterable<Type> getExtendedClasses();
+  op Iterable<JvmType> getExtendedInterfaces();
+  op Iterable<JvmType> getExtendedClasses();
   op boolean isInstantiateable(); 
 }
 
-abstract class TypeReference extends IdentifyableElement {
-  op Type getType();
+abstract class JvmTypeReference extends JvmIdentifyableElement {
+  op JvmType getType();
 }
 
-class ParameterizedTypeReference extends TypeReference {
-//  attr String fullyQualifiedName;
-  val TypeArgument[*]#declarator arguments;
-  ref Type type;
+class JvmParameterizedTypeReference extends JvmTypeReference {
+  val JvmTypeArgument[*]#declarator arguments;
+  ref JvmType type;
 }
 
-class GenericArrayTypeReference extends TypeReference {
-  val ArrayType type;  
+class JvmGenericArrayTypeReference extends JvmTypeReference {
+  val JvmArrayType type;  
 }
 
-abstract class TypeArgument extends IdentifyableElement {
-  ref ParameterizedTypeReference#arguments declarator;
+abstract class JvmTypeArgument extends JvmIdentifyableElement {
+  ref JvmParameterizedTypeReference#arguments declarator;
 }
 
-class WildcardTypeArgument extends TypeArgument, ConstraintOwner {
+class JvmWildcardTypeArgument extends JvmTypeArgument, JvmConstraintOwner {
 }
 
-class ReferenceTypeArgument extends TypeArgument {
-  val TypeReference typeReference;
+class JvmReferenceTypeArgument extends JvmTypeArgument {
+  val JvmTypeReference typeReference;
 }
 
-abstract class Member extends AnnotationTarget, IdentifyableElement {
-  ref DeclaredType#members declaringType;
-  attr Visibility visibility;
+abstract class JvmMember extends JvmAnnotationTarget, JvmIdentifyableElement {
+  ref JvmDeclaredType#members declaringType;
+  attr JvmVisibility visibility;
   attr String fullyQualifiedName;
   op String getSimpleName();
 }
 
-enum Visibility {
+abstract class JvmFeature extends JvmIdentifyableElement {
+}
+
+enum JvmVisibility {
   DEFAULT = 0;
   PRIVATE = 1;
   PROTECTED = 2;
   PUBLIC = 3;
 }
 
-class Field extends Member {
+class JvmField extends JvmMember, JvmFeature {
   attr boolean static;
   attr boolean final;
-  val TypeReference type;
+  val JvmTypeReference type;
 }
 
-abstract class Executable extends Member, TypeParameterDeclarator {
-  val FormalParameter[*] parameters;
-  val TypeReference[*] exceptions;
+abstract class JvmExecutable extends JvmMember, JvmTypeParameterDeclarator {
+  val JvmFormalParameter[*] parameters;
+  val JvmTypeReference[*] exceptions;
 }
 
-class Constructor extends Executable {
+class JvmConstructor extends JvmExecutable {
 }
 
-class Operation extends Executable {
+class JvmOperation extends JvmExecutable, JvmFeature {
   attr boolean static;
   attr boolean final;
   attr boolean ~abstract;
-  val TypeReference returnType;
+  val JvmTypeReference returnType;
 }
 
-class FormalParameter extends IdentifyableElement {
+class JvmFormalParameter extends JvmIdentifyableElement {
   attr String name;
-  val TypeReference parameterType;
+  val JvmTypeReference parameterType;
 }
 
-abstract class AnnotationTarget {
-  val AnnotationReference[*]#target annotations;
+abstract class JvmAnnotationTarget {
+  val JvmAnnotationReference[*]#target annotations;
 }
 
-class AnnotationReference {
-  ref AnnotationType annotation;
-  ref AnnotationTarget#annotations target;
+class JvmAnnotationReference {
+  ref JvmAnnotationType annotation;
+  ref JvmAnnotationTarget#annotations target;
 }
 
 // important note: unfortunatly, emfatic does not support 

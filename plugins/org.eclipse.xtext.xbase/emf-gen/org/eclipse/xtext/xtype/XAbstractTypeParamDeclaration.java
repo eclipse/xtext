@@ -2,13 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XAbstractTypeParamDeclaration.java,v 1.1 2010/01/19 19:53:12 sefftinge Exp $
  */
 package org.eclipse.xtext.xtype;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmType;
 
 /**
  * <!-- begin-user-doc -->
@@ -28,7 +27,7 @@ import org.eclipse.xtext.common.types.Type;
  * @model abstract="true"
  * @generated
  */
-public interface XAbstractTypeParamDeclaration extends Type
+public interface XAbstractTypeParamDeclaration extends JvmType
 {
   /**
    * Returns the value of the '<em><b>Extends</b></em>' containment reference list.

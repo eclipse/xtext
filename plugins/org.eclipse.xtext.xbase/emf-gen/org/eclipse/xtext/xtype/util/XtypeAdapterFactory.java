@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtypeAdapterFactory.java,v 1.3 2010/01/19 19:53:13 sefftinge Exp $
  */
 package org.eclipse.xtext.xtype.util;
 
@@ -13,8 +12,8 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.common.types.IdentifyableElement;
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmType;
 
 import org.eclipse.xtext.xtype.*;
 
@@ -112,14 +111,14 @@ public class XtypeAdapterFactory extends AdapterFactoryImpl
         return createXTypeParamDeclarationAdapter();
       }
       @Override
-      public Adapter caseIdentifyableElement(IdentifyableElement object)
+      public Adapter caseJvmIdentifyableElement(JvmIdentifyableElement object)
       {
-        return createIdentifyableElementAdapter();
+        return createJvmIdentifyableElementAdapter();
       }
       @Override
-      public Adapter caseType(Type object)
+      public Adapter caseJvmType(JvmType object)
       {
-        return createTypeAdapter();
+        return createJvmTypeAdapter();
       }
       @Override
       public Adapter defaultCase(EObject object)
@@ -234,31 +233,31 @@ public class XtypeAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.IdentifyableElement <em>Identifyable Element</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmIdentifyableElement <em>Jvm Identifyable Element</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.xtext.common.types.IdentifyableElement
+   * @see org.eclipse.xtext.common.types.JvmIdentifyableElement
    * @generated
    */
-  public Adapter createIdentifyableElementAdapter()
+  public Adapter createJvmIdentifyableElementAdapter()
   {
     return null;
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.Type <em>Type</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmType <em>Jvm Type</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.xtext.common.types.Type
+   * @see org.eclipse.xtext.common.types.JvmType
    * @generated
    */
-  public Adapter createTypeAdapter()
+  public Adapter createJvmTypeAdapter()
   {
     return null;
   }

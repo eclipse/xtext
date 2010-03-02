@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XSwitchExpressionImpl.java,v 1.2 2010/01/19 19:53:08 sefftinge Exp $
  */
 package org.eclipse.xtext.xpression.impl;
 

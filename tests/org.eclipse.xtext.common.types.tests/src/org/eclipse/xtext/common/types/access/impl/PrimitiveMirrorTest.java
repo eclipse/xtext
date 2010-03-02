@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.TypeResource;
 
 import junit.framework.TestCase;
@@ -50,7 +50,7 @@ public class PrimitiveMirrorTest extends TestCase implements ITypeFactory<Class<
 		assertEquals(callCount, resource.getContents().size());
 	}
 
-	public Type createType(Class<?> clazz) {
+	public JvmType createType(Class<?> clazz) {
 		callCount++;
 		return helper.createType(clazz);
 	}

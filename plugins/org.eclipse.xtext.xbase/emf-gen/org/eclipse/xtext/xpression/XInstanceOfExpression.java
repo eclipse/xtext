@@ -2,11 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XInstanceOfExpression.java,v 1.2 2010/01/19 19:53:11 sefftinge Exp $
  */
 package org.eclipse.xtext.xpression;
 
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmType;
 
 /**
  * <!-- begin-user-doc -->
@@ -36,12 +35,12 @@ public interface XInstanceOfExpression extends XExpression
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type</em>' reference.
-   * @see #setType(Type)
+   * @see #setType(JvmType)
    * @see org.eclipse.xtext.xpression.XpressionPackage#getXInstanceOfExpression_Type()
    * @model required="true"
    * @generated
    */
-  Type getType();
+  JvmType getType();
 
   /**
    * Sets the value of the '{@link org.eclipse.xtext.xpression.XInstanceOfExpression#getType <em>Type</em>}' reference.
@@ -51,7 +50,7 @@ public interface XInstanceOfExpression extends XExpression
    * @see #getType()
    * @generated
    */
-  void setType(Type value);
+  void setType(JvmType value);
 
   /**
    * Returns the value of the '<em><b>Expression</b></em>' containment reference.

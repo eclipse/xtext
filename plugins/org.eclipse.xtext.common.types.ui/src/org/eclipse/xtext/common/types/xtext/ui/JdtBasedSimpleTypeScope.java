@@ -78,7 +78,7 @@ public class JdtBasedSimpleTypeScope extends AbstractTypeScope {
 		String typeSignature = Signature.createTypeSignature(fullyQualifiedName, true);
 		try {
 			URI uri = getTypeProvider().getTypeUriHelper().getFullURI(typeSignature, null);
-			InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createVoid();
+			InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createJvmVoid();
 			proxy.eSetProxyURI(uri);
 			IEObjectDescription eObjectDescription = EObjectDescription.create(fullyQualifiedName, proxy);
 			return eObjectDescription;

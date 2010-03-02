@@ -11,36 +11,37 @@ import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.common.types.AnnotationReference;
-import org.eclipse.xtext.common.types.AnnotationTarget;
-import org.eclipse.xtext.common.types.AnnotationType;
-import org.eclipse.xtext.common.types.ArrayType;
-import org.eclipse.xtext.common.types.ComponentType;
-import org.eclipse.xtext.common.types.ConstraintOwner;
-import org.eclipse.xtext.common.types.Constructor;
-import org.eclipse.xtext.common.types.DeclaredType;
-import org.eclipse.xtext.common.types.EnumerationType;
-import org.eclipse.xtext.common.types.Executable;
-import org.eclipse.xtext.common.types.Field;
-import org.eclipse.xtext.common.types.FormalParameter;
-import org.eclipse.xtext.common.types.GenericArrayTypeReference;
-import org.eclipse.xtext.common.types.GenericType;
-import org.eclipse.xtext.common.types.IdentifyableElement;
-import org.eclipse.xtext.common.types.LowerBound;
-import org.eclipse.xtext.common.types.Member;
-import org.eclipse.xtext.common.types.Operation;
-import org.eclipse.xtext.common.types.ParameterizedTypeReference;
-import org.eclipse.xtext.common.types.PrimitiveType;
-import org.eclipse.xtext.common.types.ReferenceTypeArgument;
-import org.eclipse.xtext.common.types.Type;
-import org.eclipse.xtext.common.types.TypeArgument;
-import org.eclipse.xtext.common.types.TypeConstraint;
-import org.eclipse.xtext.common.types.TypeParameter;
-import org.eclipse.xtext.common.types.TypeParameterDeclarator;
-import org.eclipse.xtext.common.types.TypeReference;
+import org.eclipse.xtext.common.types.*;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationTarget;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmComponentType;
+import org.eclipse.xtext.common.types.JvmConstraintOwner;
+import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmEnumerationType;
+import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmLowerBound;
+import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmPrimitiveType;
+import org.eclipse.xtext.common.types.JvmReferenceTypeArgument;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeArgument;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.common.types.UpperBound;
-import org.eclipse.xtext.common.types.WildcardTypeArgument;
+import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
 
 /**
  * <!-- begin-user-doc -->
@@ -116,259 +117,268 @@ public class TypesSwitch<T> {
 	 */
 	protected T doSwitch(int classifierID, EObject theEObject) {
 		switch (classifierID) {
-			case TypesPackage.IDENTIFYABLE_ELEMENT: {
-				IdentifyableElement identifyableElement = (IdentifyableElement)theEObject;
-				T result = caseIdentifyableElement(identifyableElement);
+			case TypesPackage.JVM_IDENTIFYABLE_ELEMENT: {
+				JvmIdentifyableElement jvmIdentifyableElement = (JvmIdentifyableElement)theEObject;
+				T result = caseJvmIdentifyableElement(jvmIdentifyableElement);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.TYPE: {
-				Type type = (Type)theEObject;
-				T result = caseType(type);
-				if (result == null) result = caseIdentifyableElement(type);
+			case TypesPackage.JVM_TYPE: {
+				JvmType jvmType = (JvmType)theEObject;
+				T result = caseJvmType(jvmType);
+				if (result == null) result = caseJvmIdentifyableElement(jvmType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.VOID: {
-				org.eclipse.xtext.common.types.Void void_ = (org.eclipse.xtext.common.types.Void)theEObject;
-				T result = caseVoid(void_);
-				if (result == null) result = caseType(void_);
-				if (result == null) result = caseIdentifyableElement(void_);
+			case TypesPackage.JVM_VOID: {
+				JvmVoid jvmVoid = (JvmVoid)theEObject;
+				T result = caseJvmVoid(jvmVoid);
+				if (result == null) result = caseJvmType(jvmVoid);
+				if (result == null) result = caseJvmIdentifyableElement(jvmVoid);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.COMPONENT_TYPE: {
-				ComponentType componentType = (ComponentType)theEObject;
-				T result = caseComponentType(componentType);
-				if (result == null) result = caseType(componentType);
-				if (result == null) result = caseIdentifyableElement(componentType);
+			case TypesPackage.JVM_COMPONENT_TYPE: {
+				JvmComponentType jvmComponentType = (JvmComponentType)theEObject;
+				T result = caseJvmComponentType(jvmComponentType);
+				if (result == null) result = caseJvmType(jvmComponentType);
+				if (result == null) result = caseJvmIdentifyableElement(jvmComponentType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.PRIMITIVE_TYPE: {
-				PrimitiveType primitiveType = (PrimitiveType)theEObject;
-				T result = casePrimitiveType(primitiveType);
-				if (result == null) result = caseComponentType(primitiveType);
-				if (result == null) result = caseType(primitiveType);
-				if (result == null) result = caseIdentifyableElement(primitiveType);
+			case TypesPackage.JVM_PRIMITIVE_TYPE: {
+				JvmPrimitiveType jvmPrimitiveType = (JvmPrimitiveType)theEObject;
+				T result = caseJvmPrimitiveType(jvmPrimitiveType);
+				if (result == null) result = caseJvmComponentType(jvmPrimitiveType);
+				if (result == null) result = caseJvmType(jvmPrimitiveType);
+				if (result == null) result = caseJvmIdentifyableElement(jvmPrimitiveType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.ARRAY_TYPE: {
-				ArrayType arrayType = (ArrayType)theEObject;
-				T result = caseArrayType(arrayType);
-				if (result == null) result = caseComponentType(arrayType);
-				if (result == null) result = caseType(arrayType);
-				if (result == null) result = caseIdentifyableElement(arrayType);
+			case TypesPackage.JVM_ARRAY_TYPE: {
+				JvmArrayType jvmArrayType = (JvmArrayType)theEObject;
+				T result = caseJvmArrayType(jvmArrayType);
+				if (result == null) result = caseJvmComponentType(jvmArrayType);
+				if (result == null) result = caseJvmType(jvmArrayType);
+				if (result == null) result = caseJvmIdentifyableElement(jvmArrayType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.DECLARED_TYPE: {
-				DeclaredType declaredType = (DeclaredType)theEObject;
-				T result = caseDeclaredType(declaredType);
-				if (result == null) result = caseComponentType(declaredType);
-				if (result == null) result = caseMember(declaredType);
-				if (result == null) result = caseType(declaredType);
-				if (result == null) result = caseAnnotationTarget(declaredType);
-				if (result == null) result = caseIdentifyableElement(declaredType);
+			case TypesPackage.JVM_DECLARED_TYPE: {
+				JvmDeclaredType jvmDeclaredType = (JvmDeclaredType)theEObject;
+				T result = caseJvmDeclaredType(jvmDeclaredType);
+				if (result == null) result = caseJvmComponentType(jvmDeclaredType);
+				if (result == null) result = caseJvmMember(jvmDeclaredType);
+				if (result == null) result = caseJvmType(jvmDeclaredType);
+				if (result == null) result = caseJvmAnnotationTarget(jvmDeclaredType);
+				if (result == null) result = caseJvmIdentifyableElement(jvmDeclaredType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.TYPE_PARAMETER: {
-				TypeParameter typeParameter = (TypeParameter)theEObject;
-				T result = caseTypeParameter(typeParameter);
-				if (result == null) result = caseComponentType(typeParameter);
-				if (result == null) result = caseConstraintOwner(typeParameter);
-				if (result == null) result = caseType(typeParameter);
-				if (result == null) result = caseIdentifyableElement(typeParameter);
+			case TypesPackage.JVM_TYPE_PARAMETER: {
+				JvmTypeParameter jvmTypeParameter = (JvmTypeParameter)theEObject;
+				T result = caseJvmTypeParameter(jvmTypeParameter);
+				if (result == null) result = caseJvmComponentType(jvmTypeParameter);
+				if (result == null) result = caseJvmConstraintOwner(jvmTypeParameter);
+				if (result == null) result = caseJvmType(jvmTypeParameter);
+				if (result == null) result = caseJvmIdentifyableElement(jvmTypeParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.TYPE_PARAMETER_DECLARATOR: {
-				TypeParameterDeclarator typeParameterDeclarator = (TypeParameterDeclarator)theEObject;
-				T result = caseTypeParameterDeclarator(typeParameterDeclarator);
+			case TypesPackage.JVM_TYPE_PARAMETER_DECLARATOR: {
+				JvmTypeParameterDeclarator jvmTypeParameterDeclarator = (JvmTypeParameterDeclarator)theEObject;
+				T result = caseJvmTypeParameterDeclarator(jvmTypeParameterDeclarator);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.CONSTRAINT_OWNER: {
-				ConstraintOwner constraintOwner = (ConstraintOwner)theEObject;
-				T result = caseConstraintOwner(constraintOwner);
-				if (result == null) result = caseIdentifyableElement(constraintOwner);
+			case TypesPackage.JVM_CONSTRAINT_OWNER: {
+				JvmConstraintOwner jvmConstraintOwner = (JvmConstraintOwner)theEObject;
+				T result = caseJvmConstraintOwner(jvmConstraintOwner);
+				if (result == null) result = caseJvmIdentifyableElement(jvmConstraintOwner);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.TYPE_CONSTRAINT: {
-				TypeConstraint typeConstraint = (TypeConstraint)theEObject;
-				T result = caseTypeConstraint(typeConstraint);
-				if (result == null) result = caseIdentifyableElement(typeConstraint);
+			case TypesPackage.JVM_TYPE_CONSTRAINT: {
+				JvmTypeConstraint jvmTypeConstraint = (JvmTypeConstraint)theEObject;
+				T result = caseJvmTypeConstraint(jvmTypeConstraint);
+				if (result == null) result = caseJvmIdentifyableElement(jvmTypeConstraint);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.UPPER_BOUND: {
-				UpperBound upperBound = (UpperBound)theEObject;
-				T result = caseUpperBound(upperBound);
-				if (result == null) result = caseTypeConstraint(upperBound);
-				if (result == null) result = caseIdentifyableElement(upperBound);
+			case TypesPackage.JVM_UPPER_BOUND: {
+				JvmUpperBound jvmUpperBound = (JvmUpperBound)theEObject;
+				T result = caseJvmUpperBound(jvmUpperBound);
+				if (result == null) result = caseJvmTypeConstraint(jvmUpperBound);
+				if (result == null) result = caseJvmIdentifyableElement(jvmUpperBound);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.LOWER_BOUND: {
-				LowerBound lowerBound = (LowerBound)theEObject;
-				T result = caseLowerBound(lowerBound);
-				if (result == null) result = caseTypeConstraint(lowerBound);
-				if (result == null) result = caseIdentifyableElement(lowerBound);
+			case TypesPackage.JVM_LOWER_BOUND: {
+				JvmLowerBound jvmLowerBound = (JvmLowerBound)theEObject;
+				T result = caseJvmLowerBound(jvmLowerBound);
+				if (result == null) result = caseJvmTypeConstraint(jvmLowerBound);
+				if (result == null) result = caseJvmIdentifyableElement(jvmLowerBound);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.ANNOTATION_TYPE: {
-				AnnotationType annotationType = (AnnotationType)theEObject;
-				T result = caseAnnotationType(annotationType);
-				if (result == null) result = caseDeclaredType(annotationType);
-				if (result == null) result = caseComponentType(annotationType);
-				if (result == null) result = caseMember(annotationType);
-				if (result == null) result = caseType(annotationType);
-				if (result == null) result = caseAnnotationTarget(annotationType);
-				if (result == null) result = caseIdentifyableElement(annotationType);
+			case TypesPackage.JVM_ANNOTATION_TYPE: {
+				JvmAnnotationType jvmAnnotationType = (JvmAnnotationType)theEObject;
+				T result = caseJvmAnnotationType(jvmAnnotationType);
+				if (result == null) result = caseJvmDeclaredType(jvmAnnotationType);
+				if (result == null) result = caseJvmComponentType(jvmAnnotationType);
+				if (result == null) result = caseJvmMember(jvmAnnotationType);
+				if (result == null) result = caseJvmType(jvmAnnotationType);
+				if (result == null) result = caseJvmAnnotationTarget(jvmAnnotationType);
+				if (result == null) result = caseJvmIdentifyableElement(jvmAnnotationType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.ENUMERATION_TYPE: {
-				EnumerationType enumerationType = (EnumerationType)theEObject;
-				T result = caseEnumerationType(enumerationType);
-				if (result == null) result = caseDeclaredType(enumerationType);
-				if (result == null) result = caseComponentType(enumerationType);
-				if (result == null) result = caseMember(enumerationType);
-				if (result == null) result = caseType(enumerationType);
-				if (result == null) result = caseAnnotationTarget(enumerationType);
-				if (result == null) result = caseIdentifyableElement(enumerationType);
+			case TypesPackage.JVM_ENUMERATION_TYPE: {
+				JvmEnumerationType jvmEnumerationType = (JvmEnumerationType)theEObject;
+				T result = caseJvmEnumerationType(jvmEnumerationType);
+				if (result == null) result = caseJvmDeclaredType(jvmEnumerationType);
+				if (result == null) result = caseJvmComponentType(jvmEnumerationType);
+				if (result == null) result = caseJvmMember(jvmEnumerationType);
+				if (result == null) result = caseJvmType(jvmEnumerationType);
+				if (result == null) result = caseJvmAnnotationTarget(jvmEnumerationType);
+				if (result == null) result = caseJvmIdentifyableElement(jvmEnumerationType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.GENERIC_TYPE: {
-				GenericType genericType = (GenericType)theEObject;
-				T result = caseGenericType(genericType);
-				if (result == null) result = caseDeclaredType(genericType);
-				if (result == null) result = caseTypeParameterDeclarator(genericType);
-				if (result == null) result = caseComponentType(genericType);
-				if (result == null) result = caseMember(genericType);
-				if (result == null) result = caseType(genericType);
-				if (result == null) result = caseAnnotationTarget(genericType);
-				if (result == null) result = caseIdentifyableElement(genericType);
+			case TypesPackage.JVM_GENERIC_TYPE: {
+				JvmGenericType jvmGenericType = (JvmGenericType)theEObject;
+				T result = caseJvmGenericType(jvmGenericType);
+				if (result == null) result = caseJvmDeclaredType(jvmGenericType);
+				if (result == null) result = caseJvmTypeParameterDeclarator(jvmGenericType);
+				if (result == null) result = caseJvmComponentType(jvmGenericType);
+				if (result == null) result = caseJvmMember(jvmGenericType);
+				if (result == null) result = caseJvmType(jvmGenericType);
+				if (result == null) result = caseJvmAnnotationTarget(jvmGenericType);
+				if (result == null) result = caseJvmIdentifyableElement(jvmGenericType);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.TYPE_REFERENCE: {
-				TypeReference typeReference = (TypeReference)theEObject;
-				T result = caseTypeReference(typeReference);
-				if (result == null) result = caseIdentifyableElement(typeReference);
+			case TypesPackage.JVM_TYPE_REFERENCE: {
+				JvmTypeReference jvmTypeReference = (JvmTypeReference)theEObject;
+				T result = caseJvmTypeReference(jvmTypeReference);
+				if (result == null) result = caseJvmIdentifyableElement(jvmTypeReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.PARAMETERIZED_TYPE_REFERENCE: {
-				ParameterizedTypeReference parameterizedTypeReference = (ParameterizedTypeReference)theEObject;
-				T result = caseParameterizedTypeReference(parameterizedTypeReference);
-				if (result == null) result = caseTypeReference(parameterizedTypeReference);
-				if (result == null) result = caseIdentifyableElement(parameterizedTypeReference);
+			case TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE: {
+				JvmParameterizedTypeReference jvmParameterizedTypeReference = (JvmParameterizedTypeReference)theEObject;
+				T result = caseJvmParameterizedTypeReference(jvmParameterizedTypeReference);
+				if (result == null) result = caseJvmTypeReference(jvmParameterizedTypeReference);
+				if (result == null) result = caseJvmIdentifyableElement(jvmParameterizedTypeReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.GENERIC_ARRAY_TYPE_REFERENCE: {
-				GenericArrayTypeReference genericArrayTypeReference = (GenericArrayTypeReference)theEObject;
-				T result = caseGenericArrayTypeReference(genericArrayTypeReference);
-				if (result == null) result = caseTypeReference(genericArrayTypeReference);
-				if (result == null) result = caseIdentifyableElement(genericArrayTypeReference);
+			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE: {
+				JvmGenericArrayTypeReference jvmGenericArrayTypeReference = (JvmGenericArrayTypeReference)theEObject;
+				T result = caseJvmGenericArrayTypeReference(jvmGenericArrayTypeReference);
+				if (result == null) result = caseJvmTypeReference(jvmGenericArrayTypeReference);
+				if (result == null) result = caseJvmIdentifyableElement(jvmGenericArrayTypeReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.TYPE_ARGUMENT: {
-				TypeArgument typeArgument = (TypeArgument)theEObject;
-				T result = caseTypeArgument(typeArgument);
-				if (result == null) result = caseIdentifyableElement(typeArgument);
+			case TypesPackage.JVM_TYPE_ARGUMENT: {
+				JvmTypeArgument jvmTypeArgument = (JvmTypeArgument)theEObject;
+				T result = caseJvmTypeArgument(jvmTypeArgument);
+				if (result == null) result = caseJvmIdentifyableElement(jvmTypeArgument);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.WILDCARD_TYPE_ARGUMENT: {
-				WildcardTypeArgument wildcardTypeArgument = (WildcardTypeArgument)theEObject;
-				T result = caseWildcardTypeArgument(wildcardTypeArgument);
-				if (result == null) result = caseTypeArgument(wildcardTypeArgument);
-				if (result == null) result = caseConstraintOwner(wildcardTypeArgument);
-				if (result == null) result = caseIdentifyableElement(wildcardTypeArgument);
+			case TypesPackage.JVM_WILDCARD_TYPE_ARGUMENT: {
+				JvmWildcardTypeArgument jvmWildcardTypeArgument = (JvmWildcardTypeArgument)theEObject;
+				T result = caseJvmWildcardTypeArgument(jvmWildcardTypeArgument);
+				if (result == null) result = caseJvmTypeArgument(jvmWildcardTypeArgument);
+				if (result == null) result = caseJvmConstraintOwner(jvmWildcardTypeArgument);
+				if (result == null) result = caseJvmIdentifyableElement(jvmWildcardTypeArgument);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.REFERENCE_TYPE_ARGUMENT: {
-				ReferenceTypeArgument referenceTypeArgument = (ReferenceTypeArgument)theEObject;
-				T result = caseReferenceTypeArgument(referenceTypeArgument);
-				if (result == null) result = caseTypeArgument(referenceTypeArgument);
-				if (result == null) result = caseIdentifyableElement(referenceTypeArgument);
+			case TypesPackage.JVM_REFERENCE_TYPE_ARGUMENT: {
+				JvmReferenceTypeArgument jvmReferenceTypeArgument = (JvmReferenceTypeArgument)theEObject;
+				T result = caseJvmReferenceTypeArgument(jvmReferenceTypeArgument);
+				if (result == null) result = caseJvmTypeArgument(jvmReferenceTypeArgument);
+				if (result == null) result = caseJvmIdentifyableElement(jvmReferenceTypeArgument);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.MEMBER: {
-				Member member = (Member)theEObject;
-				T result = caseMember(member);
-				if (result == null) result = caseAnnotationTarget(member);
-				if (result == null) result = caseIdentifyableElement(member);
+			case TypesPackage.JVM_MEMBER: {
+				JvmMember jvmMember = (JvmMember)theEObject;
+				T result = caseJvmMember(jvmMember);
+				if (result == null) result = caseJvmAnnotationTarget(jvmMember);
+				if (result == null) result = caseJvmIdentifyableElement(jvmMember);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.FIELD: {
-				Field field = (Field)theEObject;
-				T result = caseField(field);
-				if (result == null) result = caseMember(field);
-				if (result == null) result = caseAnnotationTarget(field);
-				if (result == null) result = caseIdentifyableElement(field);
+			case TypesPackage.JVM_FEATURE: {
+				JvmFeature jvmFeature = (JvmFeature)theEObject;
+				T result = caseJvmFeature(jvmFeature);
+				if (result == null) result = caseJvmIdentifyableElement(jvmFeature);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.EXECUTABLE: {
-				Executable executable = (Executable)theEObject;
-				T result = caseExecutable(executable);
-				if (result == null) result = caseMember(executable);
-				if (result == null) result = caseTypeParameterDeclarator(executable);
-				if (result == null) result = caseAnnotationTarget(executable);
-				if (result == null) result = caseIdentifyableElement(executable);
+			case TypesPackage.JVM_FIELD: {
+				JvmField jvmField = (JvmField)theEObject;
+				T result = caseJvmField(jvmField);
+				if (result == null) result = caseJvmMember(jvmField);
+				if (result == null) result = caseJvmFeature(jvmField);
+				if (result == null) result = caseJvmAnnotationTarget(jvmField);
+				if (result == null) result = caseJvmIdentifyableElement(jvmField);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.CONSTRUCTOR: {
-				Constructor constructor = (Constructor)theEObject;
-				T result = caseConstructor(constructor);
-				if (result == null) result = caseExecutable(constructor);
-				if (result == null) result = caseMember(constructor);
-				if (result == null) result = caseTypeParameterDeclarator(constructor);
-				if (result == null) result = caseAnnotationTarget(constructor);
-				if (result == null) result = caseIdentifyableElement(constructor);
+			case TypesPackage.JVM_EXECUTABLE: {
+				JvmExecutable jvmExecutable = (JvmExecutable)theEObject;
+				T result = caseJvmExecutable(jvmExecutable);
+				if (result == null) result = caseJvmMember(jvmExecutable);
+				if (result == null) result = caseJvmTypeParameterDeclarator(jvmExecutable);
+				if (result == null) result = caseJvmAnnotationTarget(jvmExecutable);
+				if (result == null) result = caseJvmIdentifyableElement(jvmExecutable);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.OPERATION: {
-				Operation operation = (Operation)theEObject;
-				T result = caseOperation(operation);
-				if (result == null) result = caseExecutable(operation);
-				if (result == null) result = caseMember(operation);
-				if (result == null) result = caseTypeParameterDeclarator(operation);
-				if (result == null) result = caseAnnotationTarget(operation);
-				if (result == null) result = caseIdentifyableElement(operation);
+			case TypesPackage.JVM_CONSTRUCTOR: {
+				JvmConstructor jvmConstructor = (JvmConstructor)theEObject;
+				T result = caseJvmConstructor(jvmConstructor);
+				if (result == null) result = caseJvmExecutable(jvmConstructor);
+				if (result == null) result = caseJvmMember(jvmConstructor);
+				if (result == null) result = caseJvmTypeParameterDeclarator(jvmConstructor);
+				if (result == null) result = caseJvmAnnotationTarget(jvmConstructor);
+				if (result == null) result = caseJvmIdentifyableElement(jvmConstructor);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.FORMAL_PARAMETER: {
-				FormalParameter formalParameter = (FormalParameter)theEObject;
-				T result = caseFormalParameter(formalParameter);
-				if (result == null) result = caseIdentifyableElement(formalParameter);
+			case TypesPackage.JVM_OPERATION: {
+				JvmOperation jvmOperation = (JvmOperation)theEObject;
+				T result = caseJvmOperation(jvmOperation);
+				if (result == null) result = caseJvmExecutable(jvmOperation);
+				if (result == null) result = caseJvmFeature(jvmOperation);
+				if (result == null) result = caseJvmMember(jvmOperation);
+				if (result == null) result = caseJvmTypeParameterDeclarator(jvmOperation);
+				if (result == null) result = caseJvmAnnotationTarget(jvmOperation);
+				if (result == null) result = caseJvmIdentifyableElement(jvmOperation);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.ANNOTATION_TARGET: {
-				AnnotationTarget annotationTarget = (AnnotationTarget)theEObject;
-				T result = caseAnnotationTarget(annotationTarget);
+			case TypesPackage.JVM_FORMAL_PARAMETER: {
+				JvmFormalParameter jvmFormalParameter = (JvmFormalParameter)theEObject;
+				T result = caseJvmFormalParameter(jvmFormalParameter);
+				if (result == null) result = caseJvmIdentifyableElement(jvmFormalParameter);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
-			case TypesPackage.ANNOTATION_REFERENCE: {
-				AnnotationReference annotationReference = (AnnotationReference)theEObject;
-				T result = caseAnnotationReference(annotationReference);
+			case TypesPackage.JVM_ANNOTATION_TARGET: {
+				JvmAnnotationTarget jvmAnnotationTarget = (JvmAnnotationTarget)theEObject;
+				T result = caseJvmAnnotationTarget(jvmAnnotationTarget);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
+			case TypesPackage.JVM_ANNOTATION_REFERENCE: {
+				JvmAnnotationReference jvmAnnotationReference = (JvmAnnotationReference)theEObject;
+				T result = caseJvmAnnotationReference(jvmAnnotationReference);
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
@@ -377,452 +387,467 @@ public class TypesSwitch<T> {
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Identifyable Element</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Identifyable Element</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Identifyable Element</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Identifyable Element</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseIdentifyableElement(IdentifyableElement object) {
+	public T caseJvmIdentifyableElement(JvmIdentifyableElement object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseType(Type object) {
+	public T caseJvmType(JvmType object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Void</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Void</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Void</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Void</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseVoid(org.eclipse.xtext.common.types.Void object) {
+	public T caseJvmVoid(JvmVoid object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Component Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Component Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Component Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Component Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseComponentType(ComponentType object) {
+	public T caseJvmComponentType(JvmComponentType object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Primitive Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Primitive Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Primitive Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Primitive Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T casePrimitiveType(PrimitiveType object) {
+	public T caseJvmPrimitiveType(JvmPrimitiveType object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Array Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Array Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Array Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Array Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseArrayType(ArrayType object) {
+	public T caseJvmArrayType(JvmArrayType object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Declared Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Declared Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Declared Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Declared Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseDeclaredType(DeclaredType object) {
+	public T caseJvmDeclaredType(JvmDeclaredType object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Parameter Declarator</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Type Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Parameter Declarator</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Type Parameter</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTypeParameterDeclarator(TypeParameterDeclarator object) {
+	public T caseJvmTypeParameter(JvmTypeParameter object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Constraint Owner</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Type Parameter Declarator</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Constraint Owner</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Type Parameter Declarator</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseConstraintOwner(ConstraintOwner object) {
+	public T caseJvmTypeParameterDeclarator(JvmTypeParameterDeclarator object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Parameter</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Constraint Owner</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Parameter</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Constraint Owner</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTypeParameter(TypeParameter object) {
+	public T caseJvmConstraintOwner(JvmConstraintOwner object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Constraint</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Type Constraint</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Constraint</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Type Constraint</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTypeConstraint(TypeConstraint object) {
+	public T caseJvmTypeConstraint(JvmTypeConstraint object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Upper Bound</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Upper Bound</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Upper Bound</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Upper Bound</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseUpperBound(UpperBound object) {
+	public T caseJvmUpperBound(JvmUpperBound object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Lower Bound</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Lower Bound</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Lower Bound</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Lower Bound</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseLowerBound(LowerBound object) {
+	public T caseJvmLowerBound(JvmLowerBound object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Annotation Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Annotation Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Annotation Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Annotation Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAnnotationType(AnnotationType object) {
+	public T caseJvmAnnotationType(JvmAnnotationType object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Enumeration Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Enumeration Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Enumeration Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Enumeration Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseEnumerationType(EnumerationType object) {
+	public T caseJvmEnumerationType(JvmEnumerationType object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Generic Type</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Generic Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Generic Type</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Generic Type</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseGenericType(GenericType object) {
+	public T caseJvmGenericType(JvmGenericType object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Reference</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Type Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Reference</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Type Reference</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTypeReference(TypeReference object) {
+	public T caseJvmTypeReference(JvmTypeReference object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Parameterized Type Reference</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Parameterized Type Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Parameterized Type Reference</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Parameterized Type Reference</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseParameterizedTypeReference(ParameterizedTypeReference object) {
+	public T caseJvmParameterizedTypeReference(JvmParameterizedTypeReference object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Generic Array Type Reference</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Generic Array Type Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Generic Array Type Reference</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Generic Array Type Reference</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseGenericArrayTypeReference(GenericArrayTypeReference object) {
+	public T caseJvmGenericArrayTypeReference(JvmGenericArrayTypeReference object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Type Argument</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Type Argument</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Type Argument</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Type Argument</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseTypeArgument(TypeArgument object) {
+	public T caseJvmTypeArgument(JvmTypeArgument object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Wildcard Type Argument</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Wildcard Type Argument</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Wildcard Type Argument</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Wildcard Type Argument</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseWildcardTypeArgument(WildcardTypeArgument object) {
+	public T caseJvmWildcardTypeArgument(JvmWildcardTypeArgument object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Reference Type Argument</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Reference Type Argument</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Reference Type Argument</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Reference Type Argument</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseReferenceTypeArgument(ReferenceTypeArgument object) {
+	public T caseJvmReferenceTypeArgument(JvmReferenceTypeArgument object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Member</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Member</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Member</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Member</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseMember(Member object) {
+	public T caseJvmMember(JvmMember object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Field</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Feature</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Field</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Feature</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseField(Field object) {
+	public T caseJvmFeature(JvmFeature object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Executable</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Field</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Executable</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Field</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseExecutable(Executable object) {
+	public T caseJvmField(JvmField object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Constructor</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Executable</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Constructor</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Executable</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseConstructor(Constructor object) {
+	public T caseJvmExecutable(JvmExecutable object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Operation</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Constructor</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Operation</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Constructor</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseOperation(Operation object) {
+	public T caseJvmConstructor(JvmConstructor object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Formal Parameter</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Formal Parameter</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Operation</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseFormalParameter(FormalParameter object) {
+	public T caseJvmOperation(JvmOperation object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Annotation Target</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Formal Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Annotation Target</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Formal Parameter</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAnnotationTarget(AnnotationTarget object) {
+	public T caseJvmFormalParameter(JvmFormalParameter object) {
 		return null;
 	}
 
 	/**
-	 * Returns the result of interpreting the object as an instance of '<em>Annotation Reference</em>'.
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Annotation Target</em>'.
 	 * <!-- begin-user-doc -->
 	 * This implementation returns null;
 	 * returning a non-null result will terminate the switch.
 	 * <!-- end-user-doc -->
 	 * @param object the target of the switch.
-	 * @return the result of interpreting the object as an instance of '<em>Annotation Reference</em>'.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Annotation Target</em>'.
 	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
 	 * @generated
 	 */
-	public T caseAnnotationReference(AnnotationReference object) {
+	public T caseJvmAnnotationTarget(JvmAnnotationTarget object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Jvm Annotation Reference</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Jvm Annotation Reference</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseJvmAnnotationReference(JvmAnnotationReference object) {
 		return null;
 	}
 

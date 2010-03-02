@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.util;
 
-import org.eclipse.xtext.common.types.TypeReference;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 /**
  * @author svenefftinge - Initial contribution and API
@@ -20,5 +20,5 @@ public interface IAssignabilityComputer {
 	 *   List<?> left = (List<? extends String>) right;
 	 * 
 	 */
-	public boolean isAssignableFrom(TypeReference left, TypeReference right);
+	public boolean isAssignableFrom(JvmTypeReference left, JvmTypeReference right);
 }

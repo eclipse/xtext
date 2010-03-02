@@ -27,166 +27,166 @@ public interface TypesFactory extends EFactory {
 	TypesFactory eINSTANCE = org.eclipse.xtext.common.types.impl.TypesFactoryImpl.init();
 
 	/**
-	 * Returns a new object of class '<em>Void</em>'.
+	 * Returns a new object of class '<em>Jvm Void</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Void</em>'.
+	 * @return a new object of class '<em>Jvm Void</em>'.
 	 * @generated
 	 */
-	Void createVoid();
+	JvmVoid createJvmVoid();
 
 	/**
-	 * Returns a new object of class '<em>Primitive Type</em>'.
+	 * Returns a new object of class '<em>Jvm Primitive Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Primitive Type</em>'.
+	 * @return a new object of class '<em>Jvm Primitive Type</em>'.
 	 * @generated
 	 */
-	PrimitiveType createPrimitiveType();
+	JvmPrimitiveType createJvmPrimitiveType();
 
 	/**
-	 * Returns a new object of class '<em>Array Type</em>'.
+	 * Returns a new object of class '<em>Jvm Array Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Array Type</em>'.
+	 * @return a new object of class '<em>Jvm Array Type</em>'.
 	 * @generated
 	 */
-	ArrayType createArrayType();
+	JvmArrayType createJvmArrayType();
 
 	/**
-	 * Returns a new object of class '<em>Type Parameter</em>'.
+	 * Returns a new object of class '<em>Jvm Type Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Type Parameter</em>'.
+	 * @return a new object of class '<em>Jvm Type Parameter</em>'.
 	 * @generated
 	 */
-	TypeParameter createTypeParameter();
+	JvmTypeParameter createJvmTypeParameter();
 
 	/**
-	 * Returns a new object of class '<em>Upper Bound</em>'.
+	 * Returns a new object of class '<em>Jvm Upper Bound</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Upper Bound</em>'.
+	 * @return a new object of class '<em>Jvm Upper Bound</em>'.
 	 * @generated
 	 */
-	UpperBound createUpperBound();
+	JvmUpperBound createJvmUpperBound();
 
 	/**
-	 * Returns a new object of class '<em>Lower Bound</em>'.
+	 * Returns a new object of class '<em>Jvm Lower Bound</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Lower Bound</em>'.
+	 * @return a new object of class '<em>Jvm Lower Bound</em>'.
 	 * @generated
 	 */
-	LowerBound createLowerBound();
+	JvmLowerBound createJvmLowerBound();
 
 	/**
-	 * Returns a new object of class '<em>Annotation Type</em>'.
+	 * Returns a new object of class '<em>Jvm Annotation Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Annotation Type</em>'.
+	 * @return a new object of class '<em>Jvm Annotation Type</em>'.
 	 * @generated
 	 */
-	AnnotationType createAnnotationType();
+	JvmAnnotationType createJvmAnnotationType();
 
 	/**
-	 * Returns a new object of class '<em>Enumeration Type</em>'.
+	 * Returns a new object of class '<em>Jvm Enumeration Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Enumeration Type</em>'.
+	 * @return a new object of class '<em>Jvm Enumeration Type</em>'.
 	 * @generated
 	 */
-	EnumerationType createEnumerationType();
+	JvmEnumerationType createJvmEnumerationType();
 
 	/**
-	 * Returns a new object of class '<em>Generic Type</em>'.
+	 * Returns a new object of class '<em>Jvm Generic Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Generic Type</em>'.
+	 * @return a new object of class '<em>Jvm Generic Type</em>'.
 	 * @generated
 	 */
-	GenericType createGenericType();
+	JvmGenericType createJvmGenericType();
 
 	/**
-	 * Returns a new object of class '<em>Parameterized Type Reference</em>'.
+	 * Returns a new object of class '<em>Jvm Parameterized Type Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Parameterized Type Reference</em>'.
+	 * @return a new object of class '<em>Jvm Parameterized Type Reference</em>'.
 	 * @generated
 	 */
-	ParameterizedTypeReference createParameterizedTypeReference();
+	JvmParameterizedTypeReference createJvmParameterizedTypeReference();
 
 	/**
-	 * Returns a new object of class '<em>Generic Array Type Reference</em>'.
+	 * Returns a new object of class '<em>Jvm Generic Array Type Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Generic Array Type Reference</em>'.
+	 * @return a new object of class '<em>Jvm Generic Array Type Reference</em>'.
 	 * @generated
 	 */
-	GenericArrayTypeReference createGenericArrayTypeReference();
+	JvmGenericArrayTypeReference createJvmGenericArrayTypeReference();
 
 	/**
-	 * Returns a new object of class '<em>Wildcard Type Argument</em>'.
+	 * Returns a new object of class '<em>Jvm Wildcard Type Argument</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Wildcard Type Argument</em>'.
+	 * @return a new object of class '<em>Jvm Wildcard Type Argument</em>'.
 	 * @generated
 	 */
-	WildcardTypeArgument createWildcardTypeArgument();
+	JvmWildcardTypeArgument createJvmWildcardTypeArgument();
 
 	/**
-	 * Returns a new object of class '<em>Reference Type Argument</em>'.
+	 * Returns a new object of class '<em>Jvm Reference Type Argument</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Reference Type Argument</em>'.
+	 * @return a new object of class '<em>Jvm Reference Type Argument</em>'.
 	 * @generated
 	 */
-	ReferenceTypeArgument createReferenceTypeArgument();
+	JvmReferenceTypeArgument createJvmReferenceTypeArgument();
 
 	/**
-	 * Returns a new object of class '<em>Field</em>'.
+	 * Returns a new object of class '<em>Jvm Field</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Field</em>'.
+	 * @return a new object of class '<em>Jvm Field</em>'.
 	 * @generated
 	 */
-	Field createField();
+	JvmField createJvmField();
 
 	/**
-	 * Returns a new object of class '<em>Constructor</em>'.
+	 * Returns a new object of class '<em>Jvm Constructor</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Constructor</em>'.
+	 * @return a new object of class '<em>Jvm Constructor</em>'.
 	 * @generated
 	 */
-	Constructor createConstructor();
+	JvmConstructor createJvmConstructor();
 
 	/**
-	 * Returns a new object of class '<em>Operation</em>'.
+	 * Returns a new object of class '<em>Jvm Operation</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Operation</em>'.
+	 * @return a new object of class '<em>Jvm Operation</em>'.
 	 * @generated
 	 */
-	Operation createOperation();
+	JvmOperation createJvmOperation();
 
 	/**
-	 * Returns a new object of class '<em>Formal Parameter</em>'.
+	 * Returns a new object of class '<em>Jvm Formal Parameter</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Formal Parameter</em>'.
+	 * @return a new object of class '<em>Jvm Formal Parameter</em>'.
 	 * @generated
 	 */
-	FormalParameter createFormalParameter();
+	JvmFormalParameter createJvmFormalParameter();
 
 	/**
-	 * Returns a new object of class '<em>Annotation Reference</em>'.
+	 * Returns a new object of class '<em>Jvm Annotation Reference</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return a new object of class '<em>Annotation Reference</em>'.
+	 * @return a new object of class '<em>Jvm Annotation Reference</em>'.
 	 * @generated
 	 */
-	AnnotationReference createAnnotationReference();
+	JvmAnnotationReference createJvmAnnotationReference();
 
 	/**
 	 * Returns the package supported by this factory.

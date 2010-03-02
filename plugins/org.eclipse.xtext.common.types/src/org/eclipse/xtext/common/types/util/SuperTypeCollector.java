@@ -10,9 +10,9 @@ package org.eclipse.xtext.common.types.util;
 import java.util.Collection;
 import java.util.Collections;
 
-import org.eclipse.xtext.common.types.DeclaredType;
-import org.eclipse.xtext.common.types.Type;
-import org.eclipse.xtext.common.types.TypeReference;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Sets;
@@ -22,25 +22,25 @@ import com.google.common.collect.Sets;
  */
 public class SuperTypeCollector {
 
-	public Collection<Type> collectSuperTypes(Type type) {
-		Function<Type, Type> function = new Function<Type, Type>() {
-			public Type apply(Type from) {
+	public Collection<JvmType> collectSuperTypes(JvmType type) {
+		Function<JvmType, JvmType> function = new Function<JvmType, JvmType>() {
+			public JvmType apply(JvmType from) {
 				return from;
 			}
 		};
 		return doCollectSupertypeData(type, function);
 	}
 	
-	public Collection<String> collectSuperTypeNames(Type type) {
-		Function<Type, String> function = new Function<Type, String>() {
-			public String apply(Type from) {
+	public Collection<String> collectSuperTypeNames(JvmType type) {
+		Function<JvmType, String> function = new Function<JvmType, String>() {
+			public String apply(JvmType from) {
 				return from.getCanonicalName();
 			}
 		};
 		return doCollectSupertypeData(type, function);
 	}
 	
-	public <Result> Collection<Result> doCollectSupertypeData(Type type, Function<Type, Result> function) {
+	public <Result> Collection<Result> doCollectSupertypeData(JvmType type, Function<JvmType, Result> function) {
 		if (type != null) {
 			Implementation<Result> implementation = new Implementation<Result>(function);
 			implementation.doSwitch(type);
@@ -54,9 +54,9 @@ public class SuperTypeCollector {
 
 		private boolean collecting = false;
 		private final Collection<Result> result;
-		private final Function<Type, Result> transformation;
+		private final Function<JvmType, Result> transformation;
 		
-		public Implementation(Function<Type, Result> transformation){
+		public Implementation(Function<JvmType, Result> transformation){
 			this.transformation = transformation;
 			result = Sets.newHashSet();
 		}
@@ -66,17 +66,17 @@ public class SuperTypeCollector {
 		}
 		
 		@Override
-		public Void caseType(Type object) {
+		public Void caseJvmType(JvmType object) {
 			// do nothing
 			return null;
 		}
 		
 		@Override
-		public Void caseDeclaredType(DeclaredType object) {
+		public Void caseJvmDeclaredType(JvmDeclaredType object) {
 			if (!object.eIsProxy()) {
 				if (!collecting || result.add(transformation.apply(object))) {
 					collecting = true;
-					for(TypeReference superType: object.getSuperTypes()) {
+					for(JvmTypeReference superType: object.getSuperTypes()) {
 						if (superType.getType() != null)
 							doSwitch(superType.getType());
 					}

@@ -7,32 +7,34 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.impl;
 
+import java.lang.Iterable;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EDataType;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.emf.ecore.impl.EFactoryImpl;
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
-import org.eclipse.xtext.common.types.AnnotationReference;
-import org.eclipse.xtext.common.types.AnnotationType;
-import org.eclipse.xtext.common.types.ArrayType;
-import org.eclipse.xtext.common.types.Constructor;
-import org.eclipse.xtext.common.types.EnumerationType;
-import org.eclipse.xtext.common.types.Field;
-import org.eclipse.xtext.common.types.FormalParameter;
-import org.eclipse.xtext.common.types.GenericArrayTypeReference;
-import org.eclipse.xtext.common.types.GenericType;
-import org.eclipse.xtext.common.types.LowerBound;
-import org.eclipse.xtext.common.types.Operation;
-import org.eclipse.xtext.common.types.ParameterizedTypeReference;
-import org.eclipse.xtext.common.types.PrimitiveType;
-import org.eclipse.xtext.common.types.ReferenceTypeArgument;
-import org.eclipse.xtext.common.types.TypeParameter;
+import org.eclipse.xtext.common.types.*;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmEnumerationType;
+import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmLowerBound;
+import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmPrimitiveType;
+import org.eclipse.xtext.common.types.JvmReferenceTypeArgument;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.TypesPackage;
-import org.eclipse.xtext.common.types.UpperBound;
-import org.eclipse.xtext.common.types.Visibility;
-import org.eclipse.xtext.common.types.WildcardTypeArgument;
+import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
 
 /**
  * <!-- begin-user-doc -->
@@ -78,24 +80,24 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	@Override
 	public EObject create(EClass eClass) {
 		switch (eClass.getClassifierID()) {
-			case TypesPackage.VOID: return createVoid();
-			case TypesPackage.PRIMITIVE_TYPE: return createPrimitiveType();
-			case TypesPackage.ARRAY_TYPE: return createArrayType();
-			case TypesPackage.TYPE_PARAMETER: return createTypeParameter();
-			case TypesPackage.UPPER_BOUND: return createUpperBound();
-			case TypesPackage.LOWER_BOUND: return createLowerBound();
-			case TypesPackage.ANNOTATION_TYPE: return createAnnotationType();
-			case TypesPackage.ENUMERATION_TYPE: return createEnumerationType();
-			case TypesPackage.GENERIC_TYPE: return createGenericType();
-			case TypesPackage.PARAMETERIZED_TYPE_REFERENCE: return createParameterizedTypeReference();
-			case TypesPackage.GENERIC_ARRAY_TYPE_REFERENCE: return createGenericArrayTypeReference();
-			case TypesPackage.WILDCARD_TYPE_ARGUMENT: return createWildcardTypeArgument();
-			case TypesPackage.REFERENCE_TYPE_ARGUMENT: return createReferenceTypeArgument();
-			case TypesPackage.FIELD: return createField();
-			case TypesPackage.CONSTRUCTOR: return createConstructor();
-			case TypesPackage.OPERATION: return createOperation();
-			case TypesPackage.FORMAL_PARAMETER: return createFormalParameter();
-			case TypesPackage.ANNOTATION_REFERENCE: return createAnnotationReference();
+			case TypesPackage.JVM_VOID: return createJvmVoid();
+			case TypesPackage.JVM_PRIMITIVE_TYPE: return createJvmPrimitiveType();
+			case TypesPackage.JVM_ARRAY_TYPE: return createJvmArrayType();
+			case TypesPackage.JVM_TYPE_PARAMETER: return createJvmTypeParameter();
+			case TypesPackage.JVM_UPPER_BOUND: return createJvmUpperBound();
+			case TypesPackage.JVM_LOWER_BOUND: return createJvmLowerBound();
+			case TypesPackage.JVM_ANNOTATION_TYPE: return createJvmAnnotationType();
+			case TypesPackage.JVM_ENUMERATION_TYPE: return createJvmEnumerationType();
+			case TypesPackage.JVM_GENERIC_TYPE: return createJvmGenericType();
+			case TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE: return createJvmParameterizedTypeReference();
+			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE: return createJvmGenericArrayTypeReference();
+			case TypesPackage.JVM_WILDCARD_TYPE_ARGUMENT: return createJvmWildcardTypeArgument();
+			case TypesPackage.JVM_REFERENCE_TYPE_ARGUMENT: return createJvmReferenceTypeArgument();
+			case TypesPackage.JVM_FIELD: return createJvmField();
+			case TypesPackage.JVM_CONSTRUCTOR: return createJvmConstructor();
+			case TypesPackage.JVM_OPERATION: return createJvmOperation();
+			case TypesPackage.JVM_FORMAL_PARAMETER: return createJvmFormalParameter();
+			case TypesPackage.JVM_ANNOTATION_REFERENCE: return createJvmAnnotationReference();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -109,8 +111,8 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	@Override
 	public Object createFromString(EDataType eDataType, String initialValue) {
 		switch (eDataType.getClassifierID()) {
-			case TypesPackage.VISIBILITY:
-				return createVisibilityFromString(eDataType, initialValue);
+			case TypesPackage.JVM_VISIBILITY:
+				return createJvmVisibilityFromString(eDataType, initialValue);
 			case TypesPackage.ITERABLE:
 				return createIterableFromString(eDataType, initialValue);
 			default:
@@ -126,8 +128,8 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	@Override
 	public String convertToString(EDataType eDataType, Object instanceValue) {
 		switch (eDataType.getClassifierID()) {
-			case TypesPackage.VISIBILITY:
-				return convertVisibilityToString(eDataType, instanceValue);
+			case TypesPackage.JVM_VISIBILITY:
+				return convertJvmVisibilityToString(eDataType, instanceValue);
 			case TypesPackage.ITERABLE:
 				return convertIterableToString(eDataType, instanceValue);
 			default:
@@ -140,9 +142,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public org.eclipse.xtext.common.types.Void createVoid() {
-		VoidImpl void_ = new VoidImpl();
-		return void_;
+	public JvmVoid createJvmVoid() {
+		JvmVoidImpl jvmVoid = new JvmVoidImpl();
+		return jvmVoid;
 	}
 
 	/**
@@ -150,9 +152,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public PrimitiveType createPrimitiveType() {
-		PrimitiveTypeImpl primitiveType = new PrimitiveTypeImpl();
-		return primitiveType;
+	public JvmPrimitiveType createJvmPrimitiveType() {
+		JvmPrimitiveTypeImpl jvmPrimitiveType = new JvmPrimitiveTypeImpl();
+		return jvmPrimitiveType;
 	}
 
 	/**
@@ -160,9 +162,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ArrayType createArrayType() {
-		ArrayTypeImpl arrayType = new ArrayTypeImpl();
-		return arrayType;
+	public JvmArrayType createJvmArrayType() {
+		JvmArrayTypeImpl jvmArrayType = new JvmArrayTypeImpl();
+		return jvmArrayType;
 	}
 
 	/**
@@ -170,9 +172,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public TypeParameter createTypeParameter() {
-		TypeParameterImpl typeParameter = new TypeParameterImpl();
-		return typeParameter;
+	public JvmTypeParameter createJvmTypeParameter() {
+		JvmTypeParameterImpl jvmTypeParameter = new JvmTypeParameterImpl();
+		return jvmTypeParameter;
 	}
 
 	/**
@@ -180,9 +182,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public UpperBound createUpperBound() {
-		UpperBoundImpl upperBound = new UpperBoundImpl();
-		return upperBound;
+	public JvmUpperBound createJvmUpperBound() {
+		JvmUpperBoundImpl jvmUpperBound = new JvmUpperBoundImpl();
+		return jvmUpperBound;
 	}
 
 	/**
@@ -190,9 +192,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public LowerBound createLowerBound() {
-		LowerBoundImpl lowerBound = new LowerBoundImpl();
-		return lowerBound;
+	public JvmLowerBound createJvmLowerBound() {
+		JvmLowerBoundImpl jvmLowerBound = new JvmLowerBoundImpl();
+		return jvmLowerBound;
 	}
 
 	/**
@@ -200,9 +202,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AnnotationType createAnnotationType() {
-		AnnotationTypeImpl annotationType = new AnnotationTypeImpl();
-		return annotationType;
+	public JvmAnnotationType createJvmAnnotationType() {
+		JvmAnnotationTypeImpl jvmAnnotationType = new JvmAnnotationTypeImpl();
+		return jvmAnnotationType;
 	}
 
 	/**
@@ -210,9 +212,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public EnumerationType createEnumerationType() {
-		EnumerationTypeImpl enumerationType = new EnumerationTypeImpl();
-		return enumerationType;
+	public JvmEnumerationType createJvmEnumerationType() {
+		JvmEnumerationTypeImpl jvmEnumerationType = new JvmEnumerationTypeImpl();
+		return jvmEnumerationType;
 	}
 
 	/**
@@ -220,9 +222,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public GenericType createGenericType() {
-		GenericTypeImpl genericType = new GenericTypeImpl();
-		return genericType;
+	public JvmGenericType createJvmGenericType() {
+		JvmGenericTypeImpl jvmGenericType = new JvmGenericTypeImpl();
+		return jvmGenericType;
 	}
 
 	/**
@@ -230,9 +232,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ParameterizedTypeReference createParameterizedTypeReference() {
-		ParameterizedTypeReferenceImpl parameterizedTypeReference = new ParameterizedTypeReferenceImpl();
-		return parameterizedTypeReference;
+	public JvmParameterizedTypeReference createJvmParameterizedTypeReference() {
+		JvmParameterizedTypeReferenceImpl jvmParameterizedTypeReference = new JvmParameterizedTypeReferenceImpl();
+		return jvmParameterizedTypeReference;
 	}
 
 	/**
@@ -240,9 +242,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public GenericArrayTypeReference createGenericArrayTypeReference() {
-		GenericArrayTypeReferenceImpl genericArrayTypeReference = new GenericArrayTypeReferenceImpl();
-		return genericArrayTypeReference;
+	public JvmGenericArrayTypeReference createJvmGenericArrayTypeReference() {
+		JvmGenericArrayTypeReferenceImpl jvmGenericArrayTypeReference = new JvmGenericArrayTypeReferenceImpl();
+		return jvmGenericArrayTypeReference;
 	}
 
 	/**
@@ -250,9 +252,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public WildcardTypeArgument createWildcardTypeArgument() {
-		WildcardTypeArgumentImpl wildcardTypeArgument = new WildcardTypeArgumentImpl();
-		return wildcardTypeArgument;
+	public JvmWildcardTypeArgument createJvmWildcardTypeArgument() {
+		JvmWildcardTypeArgumentImpl jvmWildcardTypeArgument = new JvmWildcardTypeArgumentImpl();
+		return jvmWildcardTypeArgument;
 	}
 
 	/**
@@ -260,9 +262,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public ReferenceTypeArgument createReferenceTypeArgument() {
-		ReferenceTypeArgumentImpl referenceTypeArgument = new ReferenceTypeArgumentImpl();
-		return referenceTypeArgument;
+	public JvmReferenceTypeArgument createJvmReferenceTypeArgument() {
+		JvmReferenceTypeArgumentImpl jvmReferenceTypeArgument = new JvmReferenceTypeArgumentImpl();
+		return jvmReferenceTypeArgument;
 	}
 
 	/**
@@ -270,9 +272,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Field createField() {
-		FieldImpl field = new FieldImpl();
-		return field;
+	public JvmField createJvmField() {
+		JvmFieldImpl jvmField = new JvmFieldImpl();
+		return jvmField;
 	}
 
 	/**
@@ -280,9 +282,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Constructor createConstructor() {
-		ConstructorImpl constructor = new ConstructorImpl();
-		return constructor;
+	public JvmConstructor createJvmConstructor() {
+		JvmConstructorImpl jvmConstructor = new JvmConstructorImpl();
+		return jvmConstructor;
 	}
 
 	/**
@@ -290,9 +292,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Operation createOperation() {
-		OperationImpl operation = new OperationImpl();
-		return operation;
+	public JvmOperation createJvmOperation() {
+		JvmOperationImpl jvmOperation = new JvmOperationImpl();
+		return jvmOperation;
 	}
 
 	/**
@@ -300,9 +302,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public FormalParameter createFormalParameter() {
-		FormalParameterImpl formalParameter = new FormalParameterImpl();
-		return formalParameter;
+	public JvmFormalParameter createJvmFormalParameter() {
+		JvmFormalParameterImpl jvmFormalParameter = new JvmFormalParameterImpl();
+		return jvmFormalParameter;
 	}
 
 	/**
@@ -310,9 +312,9 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public AnnotationReference createAnnotationReference() {
-		AnnotationReferenceImpl annotationReference = new AnnotationReferenceImpl();
-		return annotationReference;
+	public JvmAnnotationReference createJvmAnnotationReference() {
+		JvmAnnotationReferenceImpl jvmAnnotationReference = new JvmAnnotationReferenceImpl();
+		return jvmAnnotationReference;
 	}
 
 	/**
@@ -320,8 +322,8 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public Visibility createVisibilityFromString(EDataType eDataType, String initialValue) {
-		Visibility result = Visibility.get(initialValue);
+	public JvmVisibility createJvmVisibilityFromString(EDataType eDataType, String initialValue) {
+		JvmVisibility result = JvmVisibility.get(initialValue);
 		if (result == null) throw new IllegalArgumentException("The value '" + initialValue + "' is not a valid enumerator of '" + eDataType.getName() + "'");
 		return result;
 	}
@@ -331,7 +333,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public String convertVisibilityToString(EDataType eDataType, Object instanceValue) {
+	public String convertJvmVisibilityToString(EDataType eDataType, Object instanceValue) {
 		return instanceValue == null ? null : instanceValue.toString();
 	}
 

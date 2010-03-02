@@ -8,7 +8,7 @@
 package org.eclipse.xtext.common.types.access;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmType;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -19,7 +19,7 @@ public interface ITypeProvider {
 	 * Find a type by its fully qualified name, e.g. java.util.Map$Entry, int[], void or 
 	 * java.lang.String[][][].
 	 */
-	Type findTypeByName(String name) throws TypeNotFoundException;
+	JvmType findTypeByName(String name) throws TypeNotFoundException;
 	
 	/**
 	 * Returns the resource set that will contain dynamically created resources.

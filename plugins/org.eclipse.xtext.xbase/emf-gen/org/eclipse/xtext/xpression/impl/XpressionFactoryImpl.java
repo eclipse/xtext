@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XpressionFactoryImpl.java,v 1.4 2010/01/19 19:53:08 sefftinge Exp $
  */
 package org.eclipse.xtext.xpression.impl;
 

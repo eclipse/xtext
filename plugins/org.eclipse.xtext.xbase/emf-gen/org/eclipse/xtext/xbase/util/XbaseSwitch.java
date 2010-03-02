@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XbaseSwitch.java,v 1.3 2010/01/19 19:53:13 sefftinge Exp $
  */
 package org.eclipse.xtext.xbase.util;
 

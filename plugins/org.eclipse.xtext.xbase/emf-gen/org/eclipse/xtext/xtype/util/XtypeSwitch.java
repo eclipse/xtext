@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtypeSwitch.java,v 1.3 2010/01/19 19:53:13 sefftinge Exp $
  */
 package org.eclipse.xtext.xtype.util;
 
@@ -11,8 +10,8 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.common.types.IdentifyableElement;
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmType;
 
 import org.eclipse.xtext.xtype.*;
 
@@ -134,8 +133,8 @@ public class XtypeSwitch<T>
       {
         XAbstractTypeParamDeclaration xAbstractTypeParamDeclaration = (XAbstractTypeParamDeclaration)theEObject;
         T result = caseXAbstractTypeParamDeclaration(xAbstractTypeParamDeclaration);
-        if (result == null) result = caseType(xAbstractTypeParamDeclaration);
-        if (result == null) result = caseIdentifyableElement(xAbstractTypeParamDeclaration);
+        if (result == null) result = caseJvmType(xAbstractTypeParamDeclaration);
+        if (result == null) result = caseJvmIdentifyableElement(xAbstractTypeParamDeclaration);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -144,8 +143,8 @@ public class XtypeSwitch<T>
         XTypeParamDeclaration xTypeParamDeclaration = (XTypeParamDeclaration)theEObject;
         T result = caseXTypeParamDeclaration(xTypeParamDeclaration);
         if (result == null) result = caseXAbstractTypeParamDeclaration(xTypeParamDeclaration);
-        if (result == null) result = caseType(xTypeParamDeclaration);
-        if (result == null) result = caseIdentifyableElement(xTypeParamDeclaration);
+        if (result == null) result = caseJvmType(xTypeParamDeclaration);
+        if (result == null) result = caseJvmIdentifyableElement(xTypeParamDeclaration);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
@@ -250,33 +249,33 @@ public class XtypeSwitch<T>
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Identifyable Element</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Jvm Identifyable Element</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Identifyable Element</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Jvm Identifyable Element</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseIdentifyableElement(IdentifyableElement object)
+  public T caseJvmIdentifyableElement(JvmIdentifyableElement object)
   {
     return null;
   }
 
   /**
-   * Returns the result of interpreting the object as an instance of '<em>Type</em>'.
+   * Returns the result of interpreting the object as an instance of '<em>Jvm Type</em>'.
    * <!-- begin-user-doc -->
    * This implementation returns null;
    * returning a non-null result will terminate the switch.
    * <!-- end-user-doc -->
    * @param object the target of the switch.
-   * @return the result of interpreting the object as an instance of '<em>Type</em>'.
+   * @return the result of interpreting the object as an instance of '<em>Jvm Type</em>'.
    * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
    * @generated
    */
-  public T caseType(Type object)
+  public T caseJvmType(JvmType object)
   {
     return null;
   }

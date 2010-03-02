@@ -8,8 +8,8 @@
 package org.eclipse.xtext.common.types.xtext;
 
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.common.types.IdentifyableElement;
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.ITypeProvider;
 import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.resource.EObjectDescription;
@@ -39,7 +39,7 @@ public abstract class AbstractTypeScope extends AbstractScope {
 		if (Strings.isEmpty(name))
 			return null;
 		try {
-			Type type = typeProvider.findTypeByName(name);
+			JvmType type = typeProvider.findTypeByName(name);
 			if (type == null)
 				return null;
 			return EObjectDescription.create(name, type);
@@ -50,8 +50,8 @@ public abstract class AbstractTypeScope extends AbstractScope {
 	
 	@Override
 	public IEObjectDescription getContentByEObject(EObject object) {
-		if (object instanceof IdentifyableElement) {
-			return EObjectDescription.create(((IdentifyableElement) object).getCanonicalName(), object);
+		if (object instanceof JvmIdentifyableElement) {
+			return EObjectDescription.create(((JvmIdentifyableElement) object).getCanonicalName(), object);
 		}
 		return null;
 	}

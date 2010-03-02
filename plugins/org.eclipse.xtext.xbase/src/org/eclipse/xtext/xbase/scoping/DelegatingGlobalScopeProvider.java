@@ -23,8 +23,7 @@ public class DelegatingGlobalScopeProvider extends DefaultGlobalScopeProvider {
 
 	@Override
 	public IScope getScope(EObject context, EReference reference) {
-		if (TypesPackage.eINSTANCE.getType().isSuperTypeOf(
-				(EClass) reference.getEType())) {
+		if (TypesPackage.eINSTANCE.getJvmType().isSuperTypeOf((EClass) reference.getEType())) {
 			return typesScopeProvider.getScope(context, reference);
 		}
 		return super.getScope(context, reference);

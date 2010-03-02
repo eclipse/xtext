@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtypePackage.java,v 1.4 2010/01/19 19:53:12 sefftinge Exp $
  */
 package org.eclipse.xtext.xtype;
 
@@ -209,7 +208,7 @@ public interface XtypePackage extends EPackage
    * @generated
    * @ordered
    */
-  int XABSTRACT_TYPE_PARAM_DECLARATION__EXTENDS = TypesPackage.TYPE_FEATURE_COUNT + 0;
+  int XABSTRACT_TYPE_PARAM_DECLARATION__EXTENDS = TypesPackage.JVM_TYPE_FEATURE_COUNT + 0;
 
   /**
    * The feature id for the '<em><b>Super</b></em>' containment reference.
@@ -218,7 +217,7 @@ public interface XtypePackage extends EPackage
    * @generated
    * @ordered
    */
-  int XABSTRACT_TYPE_PARAM_DECLARATION__SUPER = TypesPackage.TYPE_FEATURE_COUNT + 1;
+  int XABSTRACT_TYPE_PARAM_DECLARATION__SUPER = TypesPackage.JVM_TYPE_FEATURE_COUNT + 1;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -227,7 +226,7 @@ public interface XtypePackage extends EPackage
    * @generated
    * @ordered
    */
-  int XABSTRACT_TYPE_PARAM_DECLARATION__NAME = TypesPackage.TYPE_FEATURE_COUNT + 2;
+  int XABSTRACT_TYPE_PARAM_DECLARATION__NAME = TypesPackage.JVM_TYPE_FEATURE_COUNT + 2;
 
   /**
    * The number of structural features of the '<em>XAbstract Type Param Declaration</em>' class.
@@ -236,7 +235,7 @@ public interface XtypePackage extends EPackage
    * @generated
    * @ordered
    */
-  int XABSTRACT_TYPE_PARAM_DECLARATION_FEATURE_COUNT = TypesPackage.TYPE_FEATURE_COUNT + 3;
+  int XABSTRACT_TYPE_PARAM_DECLARATION_FEATURE_COUNT = TypesPackage.JVM_TYPE_FEATURE_COUNT + 3;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.xtype.impl.XTypeParamDeclarationImpl <em>XType Param Declaration</em>}' class.

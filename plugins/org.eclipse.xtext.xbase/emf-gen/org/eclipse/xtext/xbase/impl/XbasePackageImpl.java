@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XbasePackageImpl.java,v 1.4 2010/01/19 19:53:12 sefftinge Exp $
  */
 package org.eclipse.xtext.xbase.impl;
 

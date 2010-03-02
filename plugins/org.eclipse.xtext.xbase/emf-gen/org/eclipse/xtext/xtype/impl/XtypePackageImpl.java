@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XtypePackageImpl.java,v 1.4 2010/01/19 19:53:07 sefftinge Exp $
  */
 package org.eclipse.xtext.xtype.impl;
 
@@ -393,7 +392,7 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
     xFunctionTypeRefEClass.getESuperTypes().add(this.getXTypeRef());
     xSimpleTypeRefEClass.getESuperTypes().add(this.getXTypeRef());
     xWildcardParamEClass.getESuperTypes().add(this.getXTypeRef());
-    xAbstractTypeParamDeclarationEClass.getESuperTypes().add(theTypesPackage.getType());
+    xAbstractTypeParamDeclarationEClass.getESuperTypes().add(theTypesPackage.getJvmType());
     xTypeParamDeclarationEClass.getESuperTypes().add(this.getXAbstractTypeParamDeclaration());
 
     // Initialize classes and features; add operations and parameters
@@ -404,7 +403,7 @@ public class XtypePackageImpl extends EPackageImpl implements XtypePackage
     initEReference(getXFunctionTypeRef_ReturnType(), this.getXTypeRef(), null, "returnType", null, 0, 1, XFunctionTypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(xSimpleTypeRefEClass, XSimpleTypeRef.class, "XSimpleTypeRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
-    initEReference(getXSimpleTypeRef_Type(), theTypesPackage.getType(), null, "type", null, 0, 1, XSimpleTypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getXSimpleTypeRef_Type(), theTypesPackage.getJvmType(), null, "type", null, 0, 1, XSimpleTypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getXSimpleTypeRef_TypeParams(), this.getXTypeRef(), null, "typeParams", null, 0, -1, XSimpleTypeRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(xWildcardParamEClass, XWildcardParam.class, "XWildcardParam", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);

@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XAbstractTypeParamDeclarationImpl.java,v 1.1 2010/01/19 19:53:08 sefftinge Exp $
  */
 package org.eclipse.xtext.xtype.impl;
 
@@ -21,7 +20,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtext.common.types.impl.TypeImpl;
+import org.eclipse.xtext.common.types.impl.JvmTypeImpl;
 
 import org.eclipse.xtext.xtype.XAbstractTypeParamDeclaration;
 import org.eclipse.xtext.xtype.XTypeRef;
@@ -42,7 +41,7 @@ import org.eclipse.xtext.xtype.XtypePackage;
  *
  * @generated
  */
-public abstract class XAbstractTypeParamDeclarationImpl extends TypeImpl implements XAbstractTypeParamDeclaration
+public abstract class XAbstractTypeParamDeclarationImpl extends JvmTypeImpl implements XAbstractTypeParamDeclaration
 {
   /**
    * The cached value of the '{@link #getExtends() <em>Extends</em>}' containment reference list.

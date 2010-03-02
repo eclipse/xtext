@@ -13,7 +13,7 @@ import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.common.types.access.TypeResource;
@@ -48,23 +48,23 @@ public class JdtTypeProvider extends AbstractTypeProvider {
 	}
 	
 	@Override
-	public Type findTypeByName(String name) throws TypeNotFoundException {
+	public JvmType findTypeByName(String name) throws TypeNotFoundException {
 		try {
 			String signature = name.startsWith("[") ? name : Signature.createTypeSignature(name, true);
 			URI resourceURI = typeUriHelper.createResourceURI(signature);
 			TypeResource resource = (TypeResource) getResourceSet().getResource(resourceURI, true);
-			Type result = findTypeBySignature(signature, resource);
+			JvmType result = findTypeBySignature(signature, resource);
 			return result;
 		} catch(JavaModelException ex) {
 			 throw new TypeNotFoundException("Type: '" + name + "' is not available.", ex);
 		}
 	}
 
-	public Type findTypeBySignature(String signature, TypeResource resource) throws TypeNotFoundException {
+	public JvmType findTypeBySignature(String signature, TypeResource resource) throws TypeNotFoundException {
 		// TODO: Maybe iterate the resource without computing a fragment
 		try {
 			String fragment = typeUriHelper.getFragment(signature);
-			Type result = (Type) resource.getEObject(fragment);
+			JvmType result = (JvmType) resource.getEObject(fragment);
 			if (result == null) {
 				throw new TypeNotFoundException("Type: '" + signature + "' is not available.");
 			}

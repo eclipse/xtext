@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XSimpleTypeRefImpl.java,v 1.2 2010/01/19 19:53:07 sefftinge Exp $
  */
 package org.eclipse.xtext.xtype.impl;
 
@@ -21,7 +20,7 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmType;
 
 import org.eclipse.xtext.xtype.XSimpleTypeRef;
 import org.eclipse.xtext.xtype.XTypeRef;
@@ -51,7 +50,7 @@ public class XSimpleTypeRefImpl extends XTypeRefImpl implements XSimpleTypeRef
    * @generated
    * @ordered
    */
-  protected Type type;
+  protected JvmType type;
 
   /**
    * The cached value of the '{@link #getTypeParams() <em>Type Params</em>}' containment reference list.
@@ -89,12 +88,12 @@ public class XSimpleTypeRefImpl extends XTypeRefImpl implements XSimpleTypeRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public Type getType()
+  public JvmType getType()
   {
     if (type != null && type.eIsProxy())
     {
       InternalEObject oldType = (InternalEObject)type;
-      type = (Type)eResolveProxy(oldType);
+      type = (JvmType)eResolveProxy(oldType);
       if (type != oldType)
       {
         if (eNotificationRequired())
@@ -109,7 +108,7 @@ public class XSimpleTypeRefImpl extends XTypeRefImpl implements XSimpleTypeRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public Type basicGetType()
+  public JvmType basicGetType()
   {
     return type;
   }
@@ -119,9 +118,9 @@ public class XSimpleTypeRefImpl extends XTypeRefImpl implements XSimpleTypeRef
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(Type newType)
+  public void setType(JvmType newType)
   {
-    Type oldType = type;
+    JvmType oldType = type;
     type = newType;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, XtypePackage.XSIMPLE_TYPE_REF__TYPE, oldType, type));
@@ -188,7 +187,7 @@ public class XSimpleTypeRefImpl extends XTypeRefImpl implements XSimpleTypeRef
     switch (featureID)
     {
       case XtypePackage.XSIMPLE_TYPE_REF__TYPE:
-        setType((Type)newValue);
+        setType((JvmType)newValue);
         return;
       case XtypePackage.XSIMPLE_TYPE_REF__TYPE_PARAMS:
         getTypeParams().clear();
@@ -209,7 +208,7 @@ public class XSimpleTypeRefImpl extends XTypeRefImpl implements XSimpleTypeRef
     switch (featureID)
     {
       case XtypePackage.XSIMPLE_TYPE_REF__TYPE:
-        setType((Type)null);
+        setType((JvmType)null);
         return;
       case XtypePackage.XSIMPLE_TYPE_REF__TYPE_PARAMS:
         getTypeParams().clear();

@@ -2,11 +2,10 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XTypeLiteral.java,v 1.2 2010/01/19 19:53:09 sefftinge Exp $
  */
 package org.eclipse.xtext.xpression;
 
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmType;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,12 +34,12 @@ public interface XTypeLiteral extends XExpression
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type</em>' reference.
-   * @see #setType(Type)
+   * @see #setType(JvmType)
    * @see org.eclipse.xtext.xpression.XpressionPackage#getXTypeLiteral_Type()
    * @model required="true"
    * @generated
    */
-  Type getType();
+  JvmType getType();
 
   /**
    * Sets the value of the '{@link org.eclipse.xtext.xpression.XTypeLiteral#getType <em>Type</em>}' reference.
@@ -50,6 +49,6 @@ public interface XTypeLiteral extends XExpression
    * @see #getType()
    * @generated
    */
-  void setType(Type value);
+  void setType(JvmType value);
 
 } // XTypeLiteral

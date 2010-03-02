@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XRichString.java,v 1.2 2010/01/19 19:53:10 sefftinge Exp $
  */
 package org.eclipse.xtext.xpression;
 

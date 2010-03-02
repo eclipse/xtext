@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
-import org.eclipse.xtext.common.types.PrimitiveType;
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmPrimitiveType;
+import org.eclipse.xtext.common.types.JvmType;
 
 import junit.framework.TestCase;
 
@@ -58,12 +58,12 @@ public class PrimitiveTypeFactoryTest extends TestCase implements ITypeFactory<C
 	}
 	
 	public void testVoid() {
-		assertTrue(provider.createType(Void.TYPE) instanceof org.eclipse.xtext.common.types.Void);
+		assertTrue(provider.createType(Void.TYPE) instanceof org.eclipse.xtext.common.types.JvmVoid);
 	}
 
-	public Type createType(Class<?> clazz) {
-		Type result = provider.createType(clazz);
-		assertTrue(result instanceof PrimitiveType);
+	public JvmType createType(Class<?> clazz) {
+		JvmType result = provider.createType(clazz);
+		assertTrue(result instanceof JvmPrimitiveType);
 		return result;
 	}
 }

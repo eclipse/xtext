@@ -1,10 +1,9 @@
-/*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *******************************************************************************/
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id: TypesEditPlugin.java,v 1.2 2010/03/02 14:52:56 szarnekow Exp $
+ */
 package org.eclipse.xtext.common.types.provider;
 
 import org.eclipse.emf.common.EMFPlugin;

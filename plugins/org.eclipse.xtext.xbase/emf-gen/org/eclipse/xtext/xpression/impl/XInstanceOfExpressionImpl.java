@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XInstanceOfExpressionImpl.java,v 1.2 2010/01/19 19:53:09 sefftinge Exp $
  */
 package org.eclipse.xtext.xpression.impl;
 
@@ -14,7 +13,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmType;
 
 import org.eclipse.xtext.xpression.XExpression;
 import org.eclipse.xtext.xpression.XInstanceOfExpression;
@@ -44,7 +43,7 @@ public class XInstanceOfExpressionImpl extends XExpressionImpl implements XInsta
    * @generated
    * @ordered
    */
-  protected Type type;
+  protected JvmType type;
 
   /**
    * The cached value of the '{@link #getExpression() <em>Expression</em>}' containment reference.
@@ -82,12 +81,12 @@ public class XInstanceOfExpressionImpl extends XExpressionImpl implements XInsta
    * <!-- end-user-doc -->
    * @generated
    */
-  public Type getType()
+  public JvmType getType()
   {
     if (type != null && type.eIsProxy())
     {
       InternalEObject oldType = (InternalEObject)type;
-      type = (Type)eResolveProxy(oldType);
+      type = (JvmType)eResolveProxy(oldType);
       if (type != oldType)
       {
         if (eNotificationRequired())
@@ -102,7 +101,7 @@ public class XInstanceOfExpressionImpl extends XExpressionImpl implements XInsta
    * <!-- end-user-doc -->
    * @generated
    */
-  public Type basicGetType()
+  public JvmType basicGetType()
   {
     return type;
   }
@@ -112,9 +111,9 @@ public class XInstanceOfExpressionImpl extends XExpressionImpl implements XInsta
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(Type newType)
+  public void setType(JvmType newType)
   {
-    Type oldType = type;
+    JvmType oldType = type;
     type = newType;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, XpressionPackage.XINSTANCE_OF_EXPRESSION__TYPE, oldType, type));
@@ -214,7 +213,7 @@ public class XInstanceOfExpressionImpl extends XExpressionImpl implements XInsta
     switch (featureID)
     {
       case XpressionPackage.XINSTANCE_OF_EXPRESSION__TYPE:
-        setType((Type)newValue);
+        setType((JvmType)newValue);
         return;
       case XpressionPackage.XINSTANCE_OF_EXPRESSION__EXPRESSION:
         setExpression((XExpression)newValue);
@@ -234,7 +233,7 @@ public class XInstanceOfExpressionImpl extends XExpressionImpl implements XInsta
     switch (featureID)
     {
       case XpressionPackage.XINSTANCE_OF_EXPRESSION__TYPE:
-        setType((Type)null);
+        setType((JvmType)null);
         return;
       case XpressionPackage.XINSTANCE_OF_EXPRESSION__EXPRESSION:
         setExpression((XExpression)null);

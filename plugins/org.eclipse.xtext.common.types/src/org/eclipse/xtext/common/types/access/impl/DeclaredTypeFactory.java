@@ -22,24 +22,24 @@ import java.lang.reflect.WildcardType;
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.xtext.common.types.AnnotationType;
-import org.eclipse.xtext.common.types.ArrayType;
-import org.eclipse.xtext.common.types.DeclaredType;
-import org.eclipse.xtext.common.types.EnumerationType;
-import org.eclipse.xtext.common.types.Executable;
-import org.eclipse.xtext.common.types.FormalParameter;
-import org.eclipse.xtext.common.types.GenericArrayTypeReference;
-import org.eclipse.xtext.common.types.GenericType;
-import org.eclipse.xtext.common.types.LowerBound;
-import org.eclipse.xtext.common.types.Operation;
-import org.eclipse.xtext.common.types.ParameterizedTypeReference;
-import org.eclipse.xtext.common.types.ReferenceTypeArgument;
-import org.eclipse.xtext.common.types.TypeArgument;
-import org.eclipse.xtext.common.types.TypeReference;
+import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmEnumerationType;
+import org.eclipse.xtext.common.types.JvmExecutable;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmLowerBound;
+import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmReferenceTypeArgument;
+import org.eclipse.xtext.common.types.JvmTypeArgument;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.UpperBound;
-import org.eclipse.xtext.common.types.Visibility;
-import org.eclipse.xtext.common.types.WildcardTypeArgument;
+import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmVisibility;
+import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -53,7 +53,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		this.uriHelper = uriHelper;
 	}
 
-	public DeclaredType createType(Class<?> clazz) {
+	public JvmDeclaredType createType(Class<?> clazz) {
 		if (clazz.isAnonymousClass() || clazz.isSynthetic())
 			throw new IllegalStateException("Cannot create type for anonymous or synthetic classes");
 		if (clazz.isAnnotation())
@@ -61,7 +61,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		if (clazz.isEnum())
 			return createEnumerationType(clazz);
 
-		GenericType result = TypesFactory.eINSTANCE.createGenericType();
+		JvmGenericType result = TypesFactory.eINSTANCE.createJvmGenericType();
 		result.setAbstract(Modifier.isAbstract(clazz.getModifiers()));
 		result.setFinal(Modifier.isFinal(clazz.getModifiers()));
 		result.setInterface(clazz.isInterface());
@@ -96,38 +96,38 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		return result;
 	}
 	
-	public AnnotationType createAnnotationType(Class<?> clazz) {
-		AnnotationType result = TypesFactory.eINSTANCE.createAnnotationType();
+	public JvmAnnotationType createAnnotationType(Class<?> clazz) {
+		JvmAnnotationType result = TypesFactory.eINSTANCE.createJvmAnnotationType();
 		result.setFullyQualifiedName(clazz.getName());
 		setVisibility(clazz, result);
 		log.error("Annotation types are not yet fully supported.");
 		return result;
 	}
 
-	public EnumerationType createEnumerationType(Class<?> clazz) {
-		EnumerationType result = TypesFactory.eINSTANCE.createEnumerationType();
+	public JvmEnumerationType createEnumerationType(Class<?> clazz) {
+		JvmEnumerationType result = TypesFactory.eINSTANCE.createJvmEnumerationType();
 		result.setFullyQualifiedName(clazz.getName());
 		setVisibility(clazz, result);
 		log.error("Enumeration types are not yet fully supported.");
 		return result;
 	}
 
-	protected void setVisibility(Class<?> clazz, org.eclipse.xtext.common.types.Member result) {
+	protected void setVisibility(Class<?> clazz, org.eclipse.xtext.common.types.JvmMember result) {
 		if (Modifier.isPrivate(clazz.getModifiers()))
-			result.setVisibility(Visibility.PRIVATE);
+			result.setVisibility(JvmVisibility.PRIVATE);
 		else if (Modifier.isProtected(clazz.getModifiers()))
-			result.setVisibility(Visibility.PROTECTED);
+			result.setVisibility(JvmVisibility.PROTECTED);
 		else if (Modifier.isPublic(clazz.getModifiers()))
-			result.setVisibility(Visibility.PUBLIC);
+			result.setVisibility(JvmVisibility.PUBLIC);
 	}
 
-	public org.eclipse.xtext.common.types.TypeParameter createTypeParameter(TypeVariable<?> variable,
-			org.eclipse.xtext.common.types.Member container) {
-		org.eclipse.xtext.common.types.TypeParameter result = TypesFactory.eINSTANCE.createTypeParameter();
+	public org.eclipse.xtext.common.types.JvmTypeParameter createTypeParameter(TypeVariable<?> variable,
+			org.eclipse.xtext.common.types.JvmMember container) {
+		org.eclipse.xtext.common.types.JvmTypeParameter result = TypesFactory.eINSTANCE.createJvmTypeParameter();
 		result.setName(variable.getName());
 		if (variable.getBounds().length != 0) {
 			for (Type bound : variable.getBounds()) {
-				UpperBound upperBound = TypesFactory.eINSTANCE.createUpperBound();
+				JvmUpperBound upperBound = TypesFactory.eINSTANCE.createJvmUpperBound();
 				upperBound.setTypeReference(createTypeReference(bound));
 				result.getConstraints().add(upperBound);
 			}
@@ -135,14 +135,14 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		return result;
 	}
 
-	public TypeReference createTypeReference(Type type) {
+	public JvmTypeReference createTypeReference(Type type) {
 		if (type instanceof GenericArrayType) {
 			GenericArrayType arrayType = (GenericArrayType) type;
 			Type componentType = arrayType.getGenericComponentType();
-			TypeReference componentTypeReference = createTypeReference(componentType);
+			JvmTypeReference componentTypeReference = createTypeReference(componentType);
 			if (componentTypeReference != null) {
-				GenericArrayTypeReference result = TypesFactory.eINSTANCE.createGenericArrayTypeReference();
-				ArrayType resultArray = TypesFactory.eINSTANCE.createArrayType();
+				JvmGenericArrayTypeReference result = TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference();
+				JvmArrayType resultArray = TypesFactory.eINSTANCE.createJvmArrayType();
 				result.setType(resultArray);
 				resultArray.setComponentType(componentTypeReference);
 				return result;
@@ -151,38 +151,38 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			}
 		} else if (type instanceof ParameterizedType) {
 			ParameterizedType parameterizedType = (ParameterizedType) type;
-			ParameterizedTypeReference result = TypesFactory.eINSTANCE.createParameterizedTypeReference();
+			JvmParameterizedTypeReference result = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
 			result.setType(createProxy(parameterizedType.getRawType()));
 			for (int i = 0; i < parameterizedType.getActualTypeArguments().length; i++) {
-				TypeArgument argument = createTypeArgument(parameterizedType.getActualTypeArguments()[i],
+				JvmTypeArgument argument = createTypeArgument(parameterizedType.getActualTypeArguments()[i],
 						parameterizedType.getRawType(), i);
 				result.getArguments().add(argument);
 			}
 			return result;
 		} else {
-			ParameterizedTypeReference result = TypesFactory.eINSTANCE.createParameterizedTypeReference();
+			JvmParameterizedTypeReference result = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
 			result.setType(createProxy(type));
 			return result;
 		}
 	}
 
-	public TypeArgument createTypeArgument(Type actualTypeArgument,
+	public JvmTypeArgument createTypeArgument(Type actualTypeArgument,
 			Type rawType, int i) {
 		if (actualTypeArgument instanceof WildcardType) {
 			WildcardType wildcardType = (WildcardType) actualTypeArgument;
-			WildcardTypeArgument result = TypesFactory.eINSTANCE.createWildcardTypeArgument();
+			JvmWildcardTypeArgument result = TypesFactory.eINSTANCE.createJvmWildcardTypeArgument();
 			if (wildcardType.getUpperBounds().length != 0) {
-				UpperBound upperBound = TypesFactory.eINSTANCE.createUpperBound();
+				JvmUpperBound upperBound = TypesFactory.eINSTANCE.createJvmUpperBound();
 				for (Type boundType : wildcardType.getUpperBounds()) {
-					TypeReference upperBoundType = createTypeReference(boundType);
+					JvmTypeReference upperBoundType = createTypeReference(boundType);
 					upperBound.setTypeReference(upperBoundType);
 				}
 				result.getConstraints().add(upperBound);
 			}
 			if (wildcardType.getLowerBounds().length != 0) {
-				LowerBound lowerBound = TypesFactory.eINSTANCE.createLowerBound();
+				JvmLowerBound lowerBound = TypesFactory.eINSTANCE.createJvmLowerBound();
 				for (Type boundType : wildcardType.getLowerBounds()) {
-					TypeReference lowerBoundType = createTypeReference(boundType);
+					JvmTypeReference lowerBoundType = createTypeReference(boundType);
 					lowerBound.setTypeReference(lowerBoundType);
 				}
 				result.getConstraints().add(lowerBound);
@@ -190,22 +190,22 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			return result;
 		}
 		else {
-			ReferenceTypeArgument result = TypesFactory.eINSTANCE.createReferenceTypeArgument();
-			TypeReference typeReference = createTypeReference(actualTypeArgument);
+			JvmReferenceTypeArgument result = TypesFactory.eINSTANCE.createJvmReferenceTypeArgument();
+			JvmTypeReference typeReference = createTypeReference(actualTypeArgument);
 			result.setTypeReference(typeReference);
 			return result;
 		}
 	}
 
-	public org.eclipse.xtext.common.types.Type createProxy(Type type) {
-		InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createVoid();
+	public org.eclipse.xtext.common.types.JvmType createProxy(Type type) {
+		InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createJvmVoid();
 		URI uri = uriHelper.getFullURI(type);
 		proxy.eSetProxyURI(uri);
-		return (org.eclipse.xtext.common.types.Type) proxy;
+		return (org.eclipse.xtext.common.types.JvmType) proxy;
 	}
 
-	public org.eclipse.xtext.common.types.Field createField(Field field) {
-		org.eclipse.xtext.common.types.Field result = TypesFactory.eINSTANCE.createField();
+	public org.eclipse.xtext.common.types.JvmField createField(Field field) {
+		org.eclipse.xtext.common.types.JvmField result = TypesFactory.eINSTANCE.createJvmField();
 		result.setFullyQualifiedName(field.getDeclaringClass().getName() + "." + field.getName());
 		result.setFinal(Modifier.isFinal(field.getModifiers()));
 		result.setStatic(Modifier.isStatic(field.getModifiers()));
@@ -214,8 +214,8 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		return result;
 	}
 
-	public <T> org.eclipse.xtext.common.types.Constructor createConstructor(Constructor<T> constructor) {
-		org.eclipse.xtext.common.types.Constructor result = TypesFactory.eINSTANCE.createConstructor();
+	public <T> org.eclipse.xtext.common.types.JvmConstructor createConstructor(Constructor<T> constructor) {
+		org.eclipse.xtext.common.types.JvmConstructor result = TypesFactory.eINSTANCE.createJvmConstructor();
 		enhanceExecutable(result, constructor, constructor.getGenericParameterTypes());
 		enhanceGenericDeclaration(result, constructor);
 		for (Type parameterType : constructor.getGenericExceptionTypes()) {
@@ -224,18 +224,18 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		return result;
 	}
 	
-	public void setVisibility(org.eclipse.xtext.common.types.Member result, int modifiers) {
+	public void setVisibility(org.eclipse.xtext.common.types.JvmMember result, int modifiers) {
 		if (Modifier.isPrivate(modifiers))
-			result.setVisibility(Visibility.PRIVATE);
+			result.setVisibility(JvmVisibility.PRIVATE);
 		else if (Modifier.isProtected(modifiers))
-			result.setVisibility(Visibility.PROTECTED);
+			result.setVisibility(JvmVisibility.PROTECTED);
 		else if (Modifier.isPublic(modifiers))
-			result.setVisibility(Visibility.PUBLIC);
+			result.setVisibility(JvmVisibility.PUBLIC);
 		else
-			result.setVisibility(Visibility.DEFAULT);
+			result.setVisibility(JvmVisibility.DEFAULT);
 	}
 
-	public void enhanceExecutable(Executable result, Member member, Type[] parameterTypes) {
+	public void enhanceExecutable(JvmExecutable result, Member member, Type[] parameterTypes) {
 		StringBuilder fqName = new StringBuilder(48);
 		fqName.append(member.getDeclaringClass().getName());
 		fqName.append('.');
@@ -256,14 +256,14 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		}
 	}
 
-	public void enhanceGenericDeclaration(Executable result, GenericDeclaration declaration) {
+	public void enhanceGenericDeclaration(JvmExecutable result, GenericDeclaration declaration) {
 		for (TypeVariable<?> variable : declaration.getTypeParameters()) {
 			result.getTypeParameters().add(createTypeParameter(variable, result));
 		}
 	}
 
-	public Operation createOperation(Method method) {
-		Operation result = TypesFactory.eINSTANCE.createOperation();
+	public JvmOperation createOperation(Method method) {
+		JvmOperation result = TypesFactory.eINSTANCE.createJvmOperation();
 		enhanceExecutable(result, method, method.getGenericParameterTypes());
 		enhanceGenericDeclaration(result, method);
 		result.setFinal(Modifier.isFinal(method.getModifiers()));
@@ -275,9 +275,9 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		return result;
 	}
 
-	public FormalParameter createFormalParameter(Type parameterType, String paramName,
-			org.eclipse.xtext.common.types.Member container) {
-		FormalParameter result = TypesFactory.eINSTANCE.createFormalParameter();
+	public JvmFormalParameter createFormalParameter(Type parameterType, String paramName,
+			org.eclipse.xtext.common.types.JvmMember container) {
+		JvmFormalParameter result = TypesFactory.eINSTANCE.createJvmFormalParameter();
 		result.setName(paramName);
 		result.setParameterType(createTypeReference(parameterType));
 		return result;

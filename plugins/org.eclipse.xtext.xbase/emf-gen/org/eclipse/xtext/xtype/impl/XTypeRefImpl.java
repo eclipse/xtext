@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XTypeRefImpl.java,v 1.2 2010/01/19 19:53:07 sefftinge Exp $
  */
 package org.eclipse.xtext.xtype.impl;
 

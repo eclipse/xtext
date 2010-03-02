@@ -94,14 +94,14 @@ public class TypeResourceTest extends TestCase implements IMirror {
 	public void testGetURIFragment_01() {
 		TypeResource resource = createResource();
 		expectedFragment = "Foobar";
-		expectedObject = TypesFactory.eINSTANCE.createVoid();
+		expectedObject = TypesFactory.eINSTANCE.createJvmVoid();
 		assertEquals(expectedFragment, resource.getURIFragment(expectedObject));
 	}
 	
 	public void testGetEObject_01() {
 		TypeResource resource = createResource();
 		expectedFragment = "Foobar";
-		expectedObject = TypesFactory.eINSTANCE.createVoid();
+		expectedObject = TypesFactory.eINSTANCE.createJvmVoid();
 		assertEquals(expectedObject, resource.getEObject(expectedFragment));
 	}
 	

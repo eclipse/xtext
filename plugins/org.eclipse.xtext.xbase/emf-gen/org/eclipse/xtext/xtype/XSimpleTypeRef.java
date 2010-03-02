@@ -2,13 +2,12 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XSimpleTypeRef.java,v 1.2 2010/01/19 19:53:12 sefftinge Exp $
  */
 package org.eclipse.xtext.xtype;
 
 import org.eclipse.emf.common.util.EList;
 
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmType;
 
 /**
  * <!-- begin-user-doc -->
@@ -38,12 +37,12 @@ public interface XSimpleTypeRef extends XTypeRef
    * </p>
    * <!-- end-user-doc -->
    * @return the value of the '<em>Type</em>' reference.
-   * @see #setType(Type)
+   * @see #setType(JvmType)
    * @see org.eclipse.xtext.xtype.XtypePackage#getXSimpleTypeRef_Type()
    * @model
    * @generated
    */
-  Type getType();
+  JvmType getType();
 
   /**
    * Sets the value of the '{@link org.eclipse.xtext.xtype.XSimpleTypeRef#getType <em>Type</em>}' reference.
@@ -53,7 +52,7 @@ public interface XSimpleTypeRef extends XTypeRef
    * @see #getType()
    * @generated
    */
-  void setType(Type value);
+  void setType(JvmType value);
 
   /**
    * Returns the value of the '<em><b>Type Params</b></em>' containment reference list.

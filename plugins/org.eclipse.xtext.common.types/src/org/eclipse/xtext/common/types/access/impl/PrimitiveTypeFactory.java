@@ -7,8 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
-import org.eclipse.xtext.common.types.PrimitiveType;
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmPrimitiveType;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesFactory;
 
 /**
@@ -16,10 +16,10 @@ import org.eclipse.xtext.common.types.TypesFactory;
  */
 public class PrimitiveTypeFactory implements ITypeFactory<Class<?>> {
 
-	public Type createType(Class<?> clazz) {
+	public JvmType createType(Class<?> clazz) {
 		if (Void.TYPE.equals(clazz))
-			return TypesFactory.eINSTANCE.createVoid();
-		PrimitiveType result = TypesFactory.eINSTANCE.createPrimitiveType();
+			return TypesFactory.eINSTANCE.createJvmVoid();
+		JvmPrimitiveType result = TypesFactory.eINSTANCE.createJvmPrimitiveType();
 		result.setName(clazz.getName());
 		return result;
 	}

@@ -13,10 +13,10 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.common.types.DeclaredType;
-import org.eclipse.xtext.common.types.ParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.Void;
+import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.ITypeProvider;
 import org.eclipse.xtext.common.types.access.TypeNotFoundException;
@@ -163,11 +163,11 @@ public class JdtTypeProviderTest extends AbstractTypeProviderTest {
 	}
 	
 	public void testBug300216() {
-		DeclaredType type = (DeclaredType) getTypeProvider().findTypeByName("java.lang.Object");
+		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName("java.lang.Object");
 		assertTrue(type.getSuperTypes().isEmpty());
 		URI unresolveableType = URI.createURI("java:/Objects/Something#Something");
-		Void proxy = TypesFactory.eINSTANCE.createVoid();
-		ParameterizedTypeReference typeReference = TypesFactory.eINSTANCE.createParameterizedTypeReference();
+		JvmVoid proxy = TypesFactory.eINSTANCE.createJvmVoid();
+		JvmParameterizedTypeReference typeReference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
 		typeReference.setType(proxy);
 		((InternalEObject) proxy).eSetProxyURI(unresolveableType);
 		type.getSuperTypes().add(typeReference);

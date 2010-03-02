@@ -63,71 +63,71 @@ public interface TypesPackage extends EPackage {
 	TypesPackage eINSTANCE = org.eclipse.xtext.common.types.impl.TypesPackageImpl.init();
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.IdentifyableElementImpl <em>Identifyable Element</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmIdentifyableElementImpl <em>Jvm Identifyable Element</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.IdentifyableElementImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getIdentifyableElement()
+	 * @see org.eclipse.xtext.common.types.impl.JvmIdentifyableElementImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmIdentifyableElement()
 	 * @generated
 	 */
-	int IDENTIFYABLE_ELEMENT = 0;
+	int JVM_IDENTIFYABLE_ELEMENT = 0;
 
 	/**
-	 * The number of structural features of the '<em>Identifyable Element</em>' class.
+	 * The number of structural features of the '<em>Jvm Identifyable Element</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int IDENTIFYABLE_ELEMENT_FEATURE_COUNT = 0;
+	int JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT = 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.TypeImpl <em>Type</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeImpl <em>Jvm Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.TypeImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getType()
+	 * @see org.eclipse.xtext.common.types.impl.JvmTypeImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmType()
 	 * @generated
 	 */
-	int TYPE = 1;
+	int JVM_TYPE = 1;
 
 	/**
-	 * The number of structural features of the '<em>Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_FEATURE_COUNT = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.VoidImpl <em>Void</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.VoidImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getVoid()
-	 * @generated
-	 */
-	int VOID = 2;
-
-	/**
-	 * The number of structural features of the '<em>Void</em>' class.
+	 * The number of structural features of the '<em>Jvm Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int VOID_FEATURE_COUNT = TYPE_FEATURE_COUNT + 0;
+	int JVM_TYPE_FEATURE_COUNT = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.ComponentTypeImpl <em>Component Type</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmVoidImpl <em>Jvm Void</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.ComponentTypeImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getComponentType()
+	 * @see org.eclipse.xtext.common.types.impl.JvmVoidImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmVoid()
 	 * @generated
 	 */
-	int COMPONENT_TYPE = 3;
+	int JVM_VOID = 2;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Void</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_VOID_FEATURE_COUNT = JVM_TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmComponentTypeImpl <em>Jvm Component Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmComponentTypeImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmComponentType()
+	 * @generated
+	 */
+	int JVM_COMPONENT_TYPE = 3;
 
 	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
@@ -136,26 +136,26 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE__ARRAY_TYPE = TYPE_FEATURE_COUNT + 0;
+	int JVM_COMPONENT_TYPE__ARRAY_TYPE = JVM_TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Component Type</em>' class.
+	 * The number of structural features of the '<em>Jvm Component Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int COMPONENT_TYPE_FEATURE_COUNT = TYPE_FEATURE_COUNT + 1;
+	int JVM_COMPONENT_TYPE_FEATURE_COUNT = JVM_TYPE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.PrimitiveTypeImpl <em>Primitive Type</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmPrimitiveTypeImpl <em>Jvm Primitive Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.PrimitiveTypeImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getPrimitiveType()
+	 * @see org.eclipse.xtext.common.types.impl.JvmPrimitiveTypeImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmPrimitiveType()
 	 * @generated
 	 */
-	int PRIMITIVE_TYPE = 4;
+	int JVM_PRIMITIVE_TYPE = 4;
 
 	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
@@ -164,7 +164,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMITIVE_TYPE__ARRAY_TYPE = COMPONENT_TYPE__ARRAY_TYPE;
+	int JVM_PRIMITIVE_TYPE__ARRAY_TYPE = JVM_COMPONENT_TYPE__ARRAY_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -173,26 +173,26 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMITIVE_TYPE__NAME = COMPONENT_TYPE_FEATURE_COUNT + 0;
+	int JVM_PRIMITIVE_TYPE__NAME = JVM_COMPONENT_TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Primitive Type</em>' class.
+	 * The number of structural features of the '<em>Jvm Primitive Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PRIMITIVE_TYPE_FEATURE_COUNT = COMPONENT_TYPE_FEATURE_COUNT + 1;
+	int JVM_PRIMITIVE_TYPE_FEATURE_COUNT = JVM_COMPONENT_TYPE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.ArrayTypeImpl <em>Array Type</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmArrayTypeImpl <em>Jvm Array Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.ArrayTypeImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getArrayType()
+	 * @see org.eclipse.xtext.common.types.impl.JvmArrayTypeImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmArrayType()
 	 * @generated
 	 */
-	int ARRAY_TYPE = 5;
+	int JVM_ARRAY_TYPE = 5;
 
 	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
@@ -201,7 +201,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARRAY_TYPE__ARRAY_TYPE = COMPONENT_TYPE__ARRAY_TYPE;
+	int JVM_ARRAY_TYPE__ARRAY_TYPE = JVM_COMPONENT_TYPE__ARRAY_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Component Type</b></em>' containment reference.
@@ -210,26 +210,26 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ARRAY_TYPE__COMPONENT_TYPE = COMPONENT_TYPE_FEATURE_COUNT + 0;
+	int JVM_ARRAY_TYPE__COMPONENT_TYPE = JVM_COMPONENT_TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Array Type</em>' class.
+	 * The number of structural features of the '<em>Jvm Array Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ARRAY_TYPE_FEATURE_COUNT = COMPONENT_TYPE_FEATURE_COUNT + 1;
+	int JVM_ARRAY_TYPE_FEATURE_COUNT = JVM_COMPONENT_TYPE_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.DeclaredTypeImpl <em>Declared Type</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl <em>Jvm Declared Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.DeclaredTypeImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getDeclaredType()
+	 * @see org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmDeclaredType()
 	 * @generated
 	 */
-	int DECLARED_TYPE = 6;
+	int JVM_DECLARED_TYPE = 6;
 
 	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
@@ -238,7 +238,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARED_TYPE__ARRAY_TYPE = COMPONENT_TYPE__ARRAY_TYPE;
+	int JVM_DECLARED_TYPE__ARRAY_TYPE = JVM_COMPONENT_TYPE__ARRAY_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -247,7 +247,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARED_TYPE__ANNOTATIONS = COMPONENT_TYPE_FEATURE_COUNT + 0;
+	int JVM_DECLARED_TYPE__ANNOTATIONS = JVM_COMPONENT_TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
@@ -256,7 +256,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARED_TYPE__DECLARING_TYPE = COMPONENT_TYPE_FEATURE_COUNT + 1;
+	int JVM_DECLARED_TYPE__DECLARING_TYPE = JVM_COMPONENT_TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -265,7 +265,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARED_TYPE__VISIBILITY = COMPONENT_TYPE_FEATURE_COUNT + 2;
+	int JVM_DECLARED_TYPE__VISIBILITY = JVM_COMPONENT_TYPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
@@ -274,7 +274,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARED_TYPE__FULLY_QUALIFIED_NAME = COMPONENT_TYPE_FEATURE_COUNT + 3;
+	int JVM_DECLARED_TYPE__FULLY_QUALIFIED_NAME = JVM_COMPONENT_TYPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
@@ -283,7 +283,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARED_TYPE__SUPER_TYPES = COMPONENT_TYPE_FEATURE_COUNT + 4;
+	int JVM_DECLARED_TYPE__SUPER_TYPES = JVM_COMPONENT_TYPE_FEATURE_COUNT + 4;
 
 	/**
 	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
@@ -292,136 +292,26 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARED_TYPE__MEMBERS = COMPONENT_TYPE_FEATURE_COUNT + 5;
+	int JVM_DECLARED_TYPE__MEMBERS = JVM_COMPONENT_TYPE_FEATURE_COUNT + 5;
 
 	/**
-	 * The number of structural features of the '<em>Declared Type</em>' class.
+	 * The number of structural features of the '<em>Jvm Declared Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int DECLARED_TYPE_FEATURE_COUNT = COMPONENT_TYPE_FEATURE_COUNT + 6;
+	int JVM_DECLARED_TYPE_FEATURE_COUNT = JVM_COMPONENT_TYPE_FEATURE_COUNT + 6;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.TypeParameterDeclaratorImpl <em>Type Parameter Declarator</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeParameterImpl <em>Jvm Type Parameter</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.TypeParameterDeclaratorImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeParameterDeclarator()
+	 * @see org.eclipse.xtext.common.types.impl.JvmTypeParameterImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmTypeParameter()
 	 * @generated
 	 */
-	int TYPE_PARAMETER_DECLARATOR = 8;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.ConstraintOwnerImpl <em>Constraint Owner</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.ConstraintOwnerImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getConstraintOwner()
-	 * @generated
-	 */
-	int CONSTRAINT_OWNER = 9;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.TypeConstraintImpl <em>Type Constraint</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.TypeConstraintImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeConstraint()
-	 * @generated
-	 */
-	int TYPE_CONSTRAINT = 10;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.UpperBoundImpl <em>Upper Bound</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.UpperBoundImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getUpperBound()
-	 * @generated
-	 */
-	int UPPER_BOUND = 11;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.LowerBoundImpl <em>Lower Bound</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.LowerBoundImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getLowerBound()
-	 * @generated
-	 */
-	int LOWER_BOUND = 12;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.AnnotationTypeImpl <em>Annotation Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.AnnotationTypeImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getAnnotationType()
-	 * @generated
-	 */
-	int ANNOTATION_TYPE = 13;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.EnumerationTypeImpl <em>Enumeration Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.EnumerationTypeImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getEnumerationType()
-	 * @generated
-	 */
-	int ENUMERATION_TYPE = 14;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.GenericTypeImpl <em>Generic Type</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.GenericTypeImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getGenericType()
-	 * @generated
-	 */
-	int GENERIC_TYPE = 15;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.TypeArgumentImpl <em>Type Argument</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.TypeArgumentImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeArgument()
-	 * @generated
-	 */
-	int TYPE_ARGUMENT = 19;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.WildcardTypeArgumentImpl <em>Wildcard Type Argument</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.WildcardTypeArgumentImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getWildcardTypeArgument()
-	 * @generated
-	 */
-	int WILDCARD_TYPE_ARGUMENT = 20;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.ReferenceTypeArgumentImpl <em>Reference Type Argument</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.ReferenceTypeArgumentImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getReferenceTypeArgument()
-	 * @generated
-	 */
-	int REFERENCE_TYPE_ARGUMENT = 21;
-
-	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.TypeParameterImpl <em>Type Parameter</em>}' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.TypeParameterImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeParameter()
-	 * @generated
-	 */
-	int TYPE_PARAMETER = 7;
+	int JVM_TYPE_PARAMETER = 7;
 
 	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
@@ -430,7 +320,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_PARAMETER__ARRAY_TYPE = COMPONENT_TYPE__ARRAY_TYPE;
+	int JVM_TYPE_PARAMETER__ARRAY_TYPE = JVM_COMPONENT_TYPE__ARRAY_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -439,7 +329,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_PARAMETER__CONSTRAINTS = COMPONENT_TYPE_FEATURE_COUNT + 0;
+	int JVM_TYPE_PARAMETER__CONSTRAINTS = JVM_COMPONENT_TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -448,7 +338,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_PARAMETER__NAME = COMPONENT_TYPE_FEATURE_COUNT + 1;
+	int JVM_TYPE_PARAMETER__NAME = JVM_COMPONENT_TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Declarator</b></em>' container reference.
@@ -457,16 +347,26 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_PARAMETER__DECLARATOR = COMPONENT_TYPE_FEATURE_COUNT + 2;
+	int JVM_TYPE_PARAMETER__DECLARATOR = JVM_COMPONENT_TYPE_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '<em>Type Parameter</em>' class.
+	 * The number of structural features of the '<em>Jvm Type Parameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_PARAMETER_FEATURE_COUNT = COMPONENT_TYPE_FEATURE_COUNT + 3;
+	int JVM_TYPE_PARAMETER_FEATURE_COUNT = JVM_COMPONENT_TYPE_FEATURE_COUNT + 3;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeParameterDeclaratorImpl <em>Jvm Type Parameter Declarator</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmTypeParameterDeclaratorImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmTypeParameterDeclarator()
+	 * @generated
+	 */
+	int JVM_TYPE_PARAMETER_DECLARATOR = 8;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
@@ -475,16 +375,26 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS = 0;
+	int JVM_TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS = 0;
 
 	/**
-	 * The number of structural features of the '<em>Type Parameter Declarator</em>' class.
+	 * The number of structural features of the '<em>Jvm Type Parameter Declarator</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_PARAMETER_DECLARATOR_FEATURE_COUNT = 1;
+	int JVM_TYPE_PARAMETER_DECLARATOR_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmConstraintOwnerImpl <em>Jvm Constraint Owner</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmConstraintOwnerImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmConstraintOwner()
+	 * @generated
+	 */
+	int JVM_CONSTRAINT_OWNER = 9;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -493,43 +403,26 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_OWNER__CONSTRAINTS = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
+	int JVM_CONSTRAINT_OWNER__CONSTRAINTS = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Constraint Owner</em>' class.
+	 * The number of structural features of the '<em>Jvm Constraint Owner</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRAINT_OWNER_FEATURE_COUNT = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 1;
+	int JVM_CONSTRAINT_OWNER_FEATURE_COUNT = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Type Reference</b></em>' containment reference.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeConstraintImpl <em>Jvm Type Constraint</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmTypeConstraintImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmTypeConstraint()
 	 * @generated
-	 * @ordered
 	 */
-	int TYPE_CONSTRAINT__TYPE_REFERENCE = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The feature id for the '<em><b>Owner</b></em>' container reference.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_CONSTRAINT__OWNER = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 1;
-
-	/**
-	 * The number of structural features of the '<em>Type Constraint</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_CONSTRAINT_FEATURE_COUNT = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 2;
+	int JVM_TYPE_CONSTRAINT = 10;
 
 	/**
 	 * The feature id for the '<em><b>Type Reference</b></em>' containment reference.
@@ -538,7 +431,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UPPER_BOUND__TYPE_REFERENCE = TYPE_CONSTRAINT__TYPE_REFERENCE;
+	int JVM_TYPE_CONSTRAINT__TYPE_REFERENCE = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' container reference.
@@ -547,16 +440,26 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int UPPER_BOUND__OWNER = TYPE_CONSTRAINT__OWNER;
+	int JVM_TYPE_CONSTRAINT__OWNER = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Upper Bound</em>' class.
+	 * The number of structural features of the '<em>Jvm Type Constraint</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int UPPER_BOUND_FEATURE_COUNT = TYPE_CONSTRAINT_FEATURE_COUNT + 0;
+	int JVM_TYPE_CONSTRAINT_FEATURE_COUNT = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmUpperBoundImpl <em>Jvm Upper Bound</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmUpperBoundImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmUpperBound()
+	 * @generated
+	 */
+	int JVM_UPPER_BOUND = 11;
 
 	/**
 	 * The feature id for the '<em><b>Type Reference</b></em>' containment reference.
@@ -565,7 +468,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOWER_BOUND__TYPE_REFERENCE = TYPE_CONSTRAINT__TYPE_REFERENCE;
+	int JVM_UPPER_BOUND__TYPE_REFERENCE = JVM_TYPE_CONSTRAINT__TYPE_REFERENCE;
 
 	/**
 	 * The feature id for the '<em><b>Owner</b></em>' container reference.
@@ -574,88 +477,63 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int LOWER_BOUND__OWNER = TYPE_CONSTRAINT__OWNER;
+	int JVM_UPPER_BOUND__OWNER = JVM_TYPE_CONSTRAINT__OWNER;
 
 	/**
-	 * The number of structural features of the '<em>Lower Bound</em>' class.
+	 * The number of structural features of the '<em>Jvm Upper Bound</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int LOWER_BOUND_FEATURE_COUNT = TYPE_CONSTRAINT_FEATURE_COUNT + 0;
+	int JVM_UPPER_BOUND_FEATURE_COUNT = JVM_TYPE_CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmLowerBoundImpl <em>Jvm Lower Bound</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmLowerBoundImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmLowerBound()
+	 * @generated
+	 */
+	int JVM_LOWER_BOUND = 12;
+
+	/**
+	 * The feature id for the '<em><b>Type Reference</b></em>' containment reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_TYPE__ARRAY_TYPE = DECLARED_TYPE__ARRAY_TYPE;
+	int JVM_LOWER_BOUND__TYPE_REFERENCE = JVM_TYPE_CONSTRAINT__TYPE_REFERENCE;
 
 	/**
-	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * The feature id for the '<em><b>Owner</b></em>' container reference.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_TYPE__ANNOTATIONS = DECLARED_TYPE__ANNOTATIONS;
+	int JVM_LOWER_BOUND__OWNER = JVM_TYPE_CONSTRAINT__OWNER;
 
 	/**
-	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
+	 * The number of structural features of the '<em>Jvm Lower Bound</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_TYPE__DECLARING_TYPE = DECLARED_TYPE__DECLARING_TYPE;
+	int JVM_LOWER_BOUND_FEATURE_COUNT = JVM_TYPE_CONSTRAINT_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl <em>Jvm Annotation Type</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnnotationType()
 	 * @generated
-	 * @ordered
 	 */
-	int ANNOTATION_TYPE__VISIBILITY = DECLARED_TYPE__VISIBILITY;
-
-	/**
-	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_TYPE__FULLY_QUALIFIED_NAME = DECLARED_TYPE__FULLY_QUALIFIED_NAME;
-
-	/**
-	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_TYPE__SUPER_TYPES = DECLARED_TYPE__SUPER_TYPES;
-
-	/**
-	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_TYPE__MEMBERS = DECLARED_TYPE__MEMBERS;
-
-	/**
-	 * The number of structural features of the '<em>Annotation Type</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int ANNOTATION_TYPE_FEATURE_COUNT = DECLARED_TYPE_FEATURE_COUNT + 0;
+	int JVM_ANNOTATION_TYPE = 13;
 
 	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
@@ -664,7 +542,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION_TYPE__ARRAY_TYPE = DECLARED_TYPE__ARRAY_TYPE;
+	int JVM_ANNOTATION_TYPE__ARRAY_TYPE = JVM_DECLARED_TYPE__ARRAY_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -673,7 +551,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION_TYPE__ANNOTATIONS = DECLARED_TYPE__ANNOTATIONS;
+	int JVM_ANNOTATION_TYPE__ANNOTATIONS = JVM_DECLARED_TYPE__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
@@ -682,7 +560,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION_TYPE__DECLARING_TYPE = DECLARED_TYPE__DECLARING_TYPE;
+	int JVM_ANNOTATION_TYPE__DECLARING_TYPE = JVM_DECLARED_TYPE__DECLARING_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -691,7 +569,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION_TYPE__VISIBILITY = DECLARED_TYPE__VISIBILITY;
+	int JVM_ANNOTATION_TYPE__VISIBILITY = JVM_DECLARED_TYPE__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
@@ -700,7 +578,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION_TYPE__FULLY_QUALIFIED_NAME = DECLARED_TYPE__FULLY_QUALIFIED_NAME;
+	int JVM_ANNOTATION_TYPE__FULLY_QUALIFIED_NAME = JVM_DECLARED_TYPE__FULLY_QUALIFIED_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
@@ -709,7 +587,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION_TYPE__SUPER_TYPES = DECLARED_TYPE__SUPER_TYPES;
+	int JVM_ANNOTATION_TYPE__SUPER_TYPES = JVM_DECLARED_TYPE__SUPER_TYPES;
 
 	/**
 	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
@@ -718,16 +596,26 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION_TYPE__MEMBERS = DECLARED_TYPE__MEMBERS;
+	int JVM_ANNOTATION_TYPE__MEMBERS = JVM_DECLARED_TYPE__MEMBERS;
 
 	/**
-	 * The number of structural features of the '<em>Enumeration Type</em>' class.
+	 * The number of structural features of the '<em>Jvm Annotation Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ENUMERATION_TYPE_FEATURE_COUNT = DECLARED_TYPE_FEATURE_COUNT + 0;
+	int JVM_ANNOTATION_TYPE_FEATURE_COUNT = JVM_DECLARED_TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmEnumerationTypeImpl <em>Jvm Enumeration Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmEnumerationTypeImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmEnumerationType()
+	 * @generated
+	 */
+	int JVM_ENUMERATION_TYPE = 14;
 
 	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
@@ -736,7 +624,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE__ARRAY_TYPE = DECLARED_TYPE__ARRAY_TYPE;
+	int JVM_ENUMERATION_TYPE__ARRAY_TYPE = JVM_DECLARED_TYPE__ARRAY_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -745,7 +633,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE__ANNOTATIONS = DECLARED_TYPE__ANNOTATIONS;
+	int JVM_ENUMERATION_TYPE__ANNOTATIONS = JVM_DECLARED_TYPE__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
@@ -754,7 +642,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE__DECLARING_TYPE = DECLARED_TYPE__DECLARING_TYPE;
+	int JVM_ENUMERATION_TYPE__DECLARING_TYPE = JVM_DECLARED_TYPE__DECLARING_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -763,7 +651,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE__VISIBILITY = DECLARED_TYPE__VISIBILITY;
+	int JVM_ENUMERATION_TYPE__VISIBILITY = JVM_DECLARED_TYPE__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
@@ -772,7 +660,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE__FULLY_QUALIFIED_NAME = DECLARED_TYPE__FULLY_QUALIFIED_NAME;
+	int JVM_ENUMERATION_TYPE__FULLY_QUALIFIED_NAME = JVM_DECLARED_TYPE__FULLY_QUALIFIED_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
@@ -781,7 +669,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE__SUPER_TYPES = DECLARED_TYPE__SUPER_TYPES;
+	int JVM_ENUMERATION_TYPE__SUPER_TYPES = JVM_DECLARED_TYPE__SUPER_TYPES;
 
 	/**
 	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
@@ -790,7 +678,89 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE__MEMBERS = DECLARED_TYPE__MEMBERS;
+	int JVM_ENUMERATION_TYPE__MEMBERS = JVM_DECLARED_TYPE__MEMBERS;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Enumeration Type</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUMERATION_TYPE_FEATURE_COUNT = JVM_DECLARED_TYPE_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl <em>Jvm Generic Type</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmGenericType()
+	 * @generated
+	 */
+	int JVM_GENERIC_TYPE = 15;
+
+	/**
+	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_GENERIC_TYPE__ARRAY_TYPE = JVM_DECLARED_TYPE__ARRAY_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_GENERIC_TYPE__ANNOTATIONS = JVM_DECLARED_TYPE__ANNOTATIONS;
+
+	/**
+	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_GENERIC_TYPE__DECLARING_TYPE = JVM_DECLARED_TYPE__DECLARING_TYPE;
+
+	/**
+	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_GENERIC_TYPE__VISIBILITY = JVM_DECLARED_TYPE__VISIBILITY;
+
+	/**
+	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_GENERIC_TYPE__FULLY_QUALIFIED_NAME = JVM_DECLARED_TYPE__FULLY_QUALIFIED_NAME;
+
+	/**
+	 * The feature id for the '<em><b>Super Types</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_GENERIC_TYPE__SUPER_TYPES = JVM_DECLARED_TYPE__SUPER_TYPES;
+
+	/**
+	 * The feature id for the '<em><b>Members</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_GENERIC_TYPE__MEMBERS = JVM_DECLARED_TYPE__MEMBERS;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
@@ -799,7 +769,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE__TYPE_PARAMETERS = DECLARED_TYPE_FEATURE_COUNT + 0;
+	int JVM_GENERIC_TYPE__TYPE_PARAMETERS = JVM_DECLARED_TYPE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -808,7 +778,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE__ABSTRACT = DECLARED_TYPE_FEATURE_COUNT + 1;
+	int JVM_GENERIC_TYPE__ABSTRACT = JVM_DECLARED_TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Interface</b></em>' attribute.
@@ -817,7 +787,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE__INTERFACE = DECLARED_TYPE_FEATURE_COUNT + 2;
+	int JVM_GENERIC_TYPE__INTERFACE = JVM_DECLARED_TYPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -826,7 +796,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE__STATIC = DECLARED_TYPE_FEATURE_COUNT + 3;
+	int JVM_GENERIC_TYPE__STATIC = JVM_DECLARED_TYPE_FEATURE_COUNT + 3;
 
 	/**
 	 * The feature id for the '<em><b>Final</b></em>' attribute.
@@ -835,45 +805,45 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE__FINAL = DECLARED_TYPE_FEATURE_COUNT + 4;
+	int JVM_GENERIC_TYPE__FINAL = JVM_DECLARED_TYPE_FEATURE_COUNT + 4;
 
 	/**
-	 * The number of structural features of the '<em>Generic Type</em>' class.
+	 * The number of structural features of the '<em>Jvm Generic Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_TYPE_FEATURE_COUNT = DECLARED_TYPE_FEATURE_COUNT + 5;
+	int JVM_GENERIC_TYPE_FEATURE_COUNT = JVM_DECLARED_TYPE_FEATURE_COUNT + 5;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.TypeReferenceImpl <em>Type Reference</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeReferenceImpl <em>Jvm Type Reference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.TypeReferenceImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeReference()
+	 * @see org.eclipse.xtext.common.types.impl.JvmTypeReferenceImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmTypeReference()
 	 * @generated
 	 */
-	int TYPE_REFERENCE = 16;
+	int JVM_TYPE_REFERENCE = 16;
 
 	/**
-	 * The number of structural features of the '<em>Type Reference</em>' class.
+	 * The number of structural features of the '<em>Jvm Type Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int TYPE_REFERENCE_FEATURE_COUNT = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
+	int JVM_TYPE_REFERENCE_FEATURE_COUNT = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.ParameterizedTypeReferenceImpl <em>Parameterized Type Reference</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmParameterizedTypeReferenceImpl <em>Jvm Parameterized Type Reference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.ParameterizedTypeReferenceImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getParameterizedTypeReference()
+	 * @see org.eclipse.xtext.common.types.impl.JvmParameterizedTypeReferenceImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmParameterizedTypeReference()
 	 * @generated
 	 */
-	int PARAMETERIZED_TYPE_REFERENCE = 17;
+	int JVM_PARAMETERIZED_TYPE_REFERENCE = 17;
 
 	/**
 	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
@@ -882,7 +852,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS = TYPE_REFERENCE_FEATURE_COUNT + 0;
+	int JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS = JVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' reference.
@@ -891,26 +861,26 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETERIZED_TYPE_REFERENCE__TYPE = TYPE_REFERENCE_FEATURE_COUNT + 1;
+	int JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE = JVM_TYPE_REFERENCE_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Parameterized Type Reference</em>' class.
+	 * The number of structural features of the '<em>Jvm Parameterized Type Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int PARAMETERIZED_TYPE_REFERENCE_FEATURE_COUNT = TYPE_REFERENCE_FEATURE_COUNT + 2;
+	int JVM_PARAMETERIZED_TYPE_REFERENCE_FEATURE_COUNT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.GenericArrayTypeReferenceImpl <em>Generic Array Type Reference</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmGenericArrayTypeReferenceImpl <em>Jvm Generic Array Type Reference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.GenericArrayTypeReferenceImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getGenericArrayTypeReference()
+	 * @see org.eclipse.xtext.common.types.impl.JvmGenericArrayTypeReferenceImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmGenericArrayTypeReference()
 	 * @generated
 	 */
-	int GENERIC_ARRAY_TYPE_REFERENCE = 18;
+	int JVM_GENERIC_ARRAY_TYPE_REFERENCE = 18;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -919,34 +889,26 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_ARRAY_TYPE_REFERENCE__TYPE = TYPE_REFERENCE_FEATURE_COUNT + 0;
+	int JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE = JVM_TYPE_REFERENCE_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Generic Array Type Reference</em>' class.
+	 * The number of structural features of the '<em>Jvm Generic Array Type Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int GENERIC_ARRAY_TYPE_REFERENCE_FEATURE_COUNT = TYPE_REFERENCE_FEATURE_COUNT + 1;
+	int JVM_GENERIC_ARRAY_TYPE_REFERENCE_FEATURE_COUNT = JVM_TYPE_REFERENCE_FEATURE_COUNT + 1;
 
 	/**
-	 * The feature id for the '<em><b>Declarator</b></em>' container reference.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeArgumentImpl <em>Jvm Type Argument</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmTypeArgumentImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmTypeArgument()
 	 * @generated
-	 * @ordered
 	 */
-	int TYPE_ARGUMENT__DECLARATOR = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
-
-	/**
-	 * The number of structural features of the '<em>Type Argument</em>' class.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int TYPE_ARGUMENT_FEATURE_COUNT = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 1;
+	int JVM_TYPE_ARGUMENT = 19;
 
 	/**
 	 * The feature id for the '<em><b>Declarator</b></em>' container reference.
@@ -955,7 +917,35 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WILDCARD_TYPE_ARGUMENT__DECLARATOR = TYPE_ARGUMENT__DECLARATOR;
+	int JVM_TYPE_ARGUMENT__DECLARATOR = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Type Argument</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_TYPE_ARGUMENT_FEATURE_COUNT = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmWildcardTypeArgumentImpl <em>Jvm Wildcard Type Argument</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmWildcardTypeArgumentImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmWildcardTypeArgument()
+	 * @generated
+	 */
+	int JVM_WILDCARD_TYPE_ARGUMENT = 20;
+
+	/**
+	 * The feature id for the '<em><b>Declarator</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_WILDCARD_TYPE_ARGUMENT__DECLARATOR = JVM_TYPE_ARGUMENT__DECLARATOR;
 
 	/**
 	 * The feature id for the '<em><b>Constraints</b></em>' containment reference list.
@@ -964,16 +954,26 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int WILDCARD_TYPE_ARGUMENT__CONSTRAINTS = TYPE_ARGUMENT_FEATURE_COUNT + 0;
+	int JVM_WILDCARD_TYPE_ARGUMENT__CONSTRAINTS = JVM_TYPE_ARGUMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Wildcard Type Argument</em>' class.
+	 * The number of structural features of the '<em>Jvm Wildcard Type Argument</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int WILDCARD_TYPE_ARGUMENT_FEATURE_COUNT = TYPE_ARGUMENT_FEATURE_COUNT + 1;
+	int JVM_WILDCARD_TYPE_ARGUMENT_FEATURE_COUNT = JVM_TYPE_ARGUMENT_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmReferenceTypeArgumentImpl <em>Jvm Reference Type Argument</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmReferenceTypeArgumentImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmReferenceTypeArgument()
+	 * @generated
+	 */
+	int JVM_REFERENCE_TYPE_ARGUMENT = 21;
 
 	/**
 	 * The feature id for the '<em><b>Declarator</b></em>' container reference.
@@ -982,7 +982,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFERENCE_TYPE_ARGUMENT__DECLARATOR = TYPE_ARGUMENT__DECLARATOR;
+	int JVM_REFERENCE_TYPE_ARGUMENT__DECLARATOR = JVM_TYPE_ARGUMENT__DECLARATOR;
 
 	/**
 	 * The feature id for the '<em><b>Type Reference</b></em>' containment reference.
@@ -991,26 +991,26 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int REFERENCE_TYPE_ARGUMENT__TYPE_REFERENCE = TYPE_ARGUMENT_FEATURE_COUNT + 0;
+	int JVM_REFERENCE_TYPE_ARGUMENT__TYPE_REFERENCE = JVM_TYPE_ARGUMENT_FEATURE_COUNT + 0;
 
 	/**
-	 * The number of structural features of the '<em>Reference Type Argument</em>' class.
+	 * The number of structural features of the '<em>Jvm Reference Type Argument</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int REFERENCE_TYPE_ARGUMENT_FEATURE_COUNT = TYPE_ARGUMENT_FEATURE_COUNT + 1;
+	int JVM_REFERENCE_TYPE_ARGUMENT_FEATURE_COUNT = JVM_TYPE_ARGUMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.AnnotationTargetImpl <em>Annotation Target</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmAnnotationTargetImpl <em>Jvm Annotation Target</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.AnnotationTargetImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getAnnotationTarget()
+	 * @see org.eclipse.xtext.common.types.impl.JvmAnnotationTargetImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnnotationTarget()
 	 * @generated
 	 */
-	int ANNOTATION_TARGET = 28;
+	int JVM_ANNOTATION_TARGET = 29;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1019,26 +1019,26 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_TARGET__ANNOTATIONS = 0;
+	int JVM_ANNOTATION_TARGET__ANNOTATIONS = 0;
 
 	/**
-	 * The number of structural features of the '<em>Annotation Target</em>' class.
+	 * The number of structural features of the '<em>Jvm Annotation Target</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_TARGET_FEATURE_COUNT = 1;
+	int JVM_ANNOTATION_TARGET_FEATURE_COUNT = 1;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.MemberImpl <em>Member</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl <em>Jvm Member</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.MemberImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getMember()
+	 * @see org.eclipse.xtext.common.types.impl.JvmMemberImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmMember()
 	 * @generated
 	 */
-	int MEMBER = 22;
+	int JVM_MEMBER = 22;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1047,7 +1047,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBER__ANNOTATIONS = ANNOTATION_TARGET__ANNOTATIONS;
+	int JVM_MEMBER__ANNOTATIONS = JVM_ANNOTATION_TARGET__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
@@ -1056,7 +1056,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBER__DECLARING_TYPE = ANNOTATION_TARGET_FEATURE_COUNT + 0;
+	int JVM_MEMBER__DECLARING_TYPE = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -1065,7 +1065,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBER__VISIBILITY = ANNOTATION_TARGET_FEATURE_COUNT + 1;
+	int JVM_MEMBER__VISIBILITY = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
@@ -1074,26 +1074,45 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBER__FULLY_QUALIFIED_NAME = ANNOTATION_TARGET_FEATURE_COUNT + 2;
+	int JVM_MEMBER__FULLY_QUALIFIED_NAME = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '<em>Member</em>' class.
+	 * The number of structural features of the '<em>Jvm Member</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int MEMBER_FEATURE_COUNT = ANNOTATION_TARGET_FEATURE_COUNT + 3;
+	int JVM_MEMBER_FEATURE_COUNT = JVM_ANNOTATION_TARGET_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.FieldImpl <em>Field</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmFeatureImpl <em>Jvm Feature</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.FieldImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getField()
+	 * @see org.eclipse.xtext.common.types.impl.JvmFeatureImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmFeature()
 	 * @generated
 	 */
-	int FIELD = 23;
+	int JVM_FEATURE = 23;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Feature</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_FEATURE_FEATURE_COUNT = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmFieldImpl <em>Jvm Field</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmFieldImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmField()
+	 * @generated
+	 */
+	int JVM_FIELD = 24;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1102,7 +1121,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD__ANNOTATIONS = MEMBER__ANNOTATIONS;
+	int JVM_FIELD__ANNOTATIONS = JVM_MEMBER__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
@@ -1111,7 +1130,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD__DECLARING_TYPE = MEMBER__DECLARING_TYPE;
+	int JVM_FIELD__DECLARING_TYPE = JVM_MEMBER__DECLARING_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -1120,7 +1139,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD__VISIBILITY = MEMBER__VISIBILITY;
+	int JVM_FIELD__VISIBILITY = JVM_MEMBER__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
@@ -1129,7 +1148,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD__FULLY_QUALIFIED_NAME = MEMBER__FULLY_QUALIFIED_NAME;
+	int JVM_FIELD__FULLY_QUALIFIED_NAME = JVM_MEMBER__FULLY_QUALIFIED_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -1138,7 +1157,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD__STATIC = MEMBER_FEATURE_COUNT + 0;
+	int JVM_FIELD__STATIC = JVM_MEMBER_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Final</b></em>' attribute.
@@ -1147,7 +1166,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD__FINAL = MEMBER_FEATURE_COUNT + 1;
+	int JVM_FIELD__FINAL = JVM_MEMBER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -1156,26 +1175,26 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD__TYPE = MEMBER_FEATURE_COUNT + 2;
+	int JVM_FIELD__TYPE = JVM_MEMBER_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '<em>Field</em>' class.
+	 * The number of structural features of the '<em>Jvm Field</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FIELD_FEATURE_COUNT = MEMBER_FEATURE_COUNT + 3;
+	int JVM_FIELD_FEATURE_COUNT = JVM_MEMBER_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.ExecutableImpl <em>Executable</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmExecutableImpl <em>Jvm Executable</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.ExecutableImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getExecutable()
+	 * @see org.eclipse.xtext.common.types.impl.JvmExecutableImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmExecutable()
 	 * @generated
 	 */
-	int EXECUTABLE = 24;
+	int JVM_EXECUTABLE = 25;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1184,7 +1203,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTABLE__ANNOTATIONS = MEMBER__ANNOTATIONS;
+	int JVM_EXECUTABLE__ANNOTATIONS = JVM_MEMBER__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
@@ -1193,7 +1212,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTABLE__DECLARING_TYPE = MEMBER__DECLARING_TYPE;
+	int JVM_EXECUTABLE__DECLARING_TYPE = JVM_MEMBER__DECLARING_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -1202,7 +1221,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTABLE__VISIBILITY = MEMBER__VISIBILITY;
+	int JVM_EXECUTABLE__VISIBILITY = JVM_MEMBER__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
@@ -1211,7 +1230,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTABLE__FULLY_QUALIFIED_NAME = MEMBER__FULLY_QUALIFIED_NAME;
+	int JVM_EXECUTABLE__FULLY_QUALIFIED_NAME = JVM_MEMBER__FULLY_QUALIFIED_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
@@ -1220,7 +1239,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTABLE__TYPE_PARAMETERS = MEMBER_FEATURE_COUNT + 0;
+	int JVM_EXECUTABLE__TYPE_PARAMETERS = JVM_MEMBER_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1229,7 +1248,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTABLE__PARAMETERS = MEMBER_FEATURE_COUNT + 1;
+	int JVM_EXECUTABLE__PARAMETERS = JVM_MEMBER_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Exceptions</b></em>' containment reference list.
@@ -1238,26 +1257,26 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTABLE__EXCEPTIONS = MEMBER_FEATURE_COUNT + 2;
+	int JVM_EXECUTABLE__EXCEPTIONS = JVM_MEMBER_FEATURE_COUNT + 2;
 
 	/**
-	 * The number of structural features of the '<em>Executable</em>' class.
+	 * The number of structural features of the '<em>Jvm Executable</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int EXECUTABLE_FEATURE_COUNT = MEMBER_FEATURE_COUNT + 3;
+	int JVM_EXECUTABLE_FEATURE_COUNT = JVM_MEMBER_FEATURE_COUNT + 3;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.ConstructorImpl <em>Constructor</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmConstructorImpl <em>Jvm Constructor</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.ConstructorImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getConstructor()
+	 * @see org.eclipse.xtext.common.types.impl.JvmConstructorImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmConstructor()
 	 * @generated
 	 */
-	int CONSTRUCTOR = 25;
+	int JVM_CONSTRUCTOR = 26;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1266,7 +1285,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR__ANNOTATIONS = EXECUTABLE__ANNOTATIONS;
+	int JVM_CONSTRUCTOR__ANNOTATIONS = JVM_EXECUTABLE__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
@@ -1275,7 +1294,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR__DECLARING_TYPE = EXECUTABLE__DECLARING_TYPE;
+	int JVM_CONSTRUCTOR__DECLARING_TYPE = JVM_EXECUTABLE__DECLARING_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -1284,7 +1303,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR__VISIBILITY = EXECUTABLE__VISIBILITY;
+	int JVM_CONSTRUCTOR__VISIBILITY = JVM_EXECUTABLE__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
@@ -1293,7 +1312,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR__FULLY_QUALIFIED_NAME = EXECUTABLE__FULLY_QUALIFIED_NAME;
+	int JVM_CONSTRUCTOR__FULLY_QUALIFIED_NAME = JVM_EXECUTABLE__FULLY_QUALIFIED_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
@@ -1302,7 +1321,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR__TYPE_PARAMETERS = EXECUTABLE__TYPE_PARAMETERS;
+	int JVM_CONSTRUCTOR__TYPE_PARAMETERS = JVM_EXECUTABLE__TYPE_PARAMETERS;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1311,7 +1330,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR__PARAMETERS = EXECUTABLE__PARAMETERS;
+	int JVM_CONSTRUCTOR__PARAMETERS = JVM_EXECUTABLE__PARAMETERS;
 
 	/**
 	 * The feature id for the '<em><b>Exceptions</b></em>' containment reference list.
@@ -1320,26 +1339,26 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR__EXCEPTIONS = EXECUTABLE__EXCEPTIONS;
+	int JVM_CONSTRUCTOR__EXCEPTIONS = JVM_EXECUTABLE__EXCEPTIONS;
 
 	/**
-	 * The number of structural features of the '<em>Constructor</em>' class.
+	 * The number of structural features of the '<em>Jvm Constructor</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int CONSTRUCTOR_FEATURE_COUNT = EXECUTABLE_FEATURE_COUNT + 0;
+	int JVM_CONSTRUCTOR_FEATURE_COUNT = JVM_EXECUTABLE_FEATURE_COUNT + 0;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.OperationImpl <em>Operation</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmOperationImpl <em>Jvm Operation</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.OperationImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getOperation()
+	 * @see org.eclipse.xtext.common.types.impl.JvmOperationImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmOperation()
 	 * @generated
 	 */
-	int OPERATION = 26;
+	int JVM_OPERATION = 27;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1348,7 +1367,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__ANNOTATIONS = EXECUTABLE__ANNOTATIONS;
+	int JVM_OPERATION__ANNOTATIONS = JVM_EXECUTABLE__ANNOTATIONS;
 
 	/**
 	 * The feature id for the '<em><b>Declaring Type</b></em>' container reference.
@@ -1357,7 +1376,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__DECLARING_TYPE = EXECUTABLE__DECLARING_TYPE;
+	int JVM_OPERATION__DECLARING_TYPE = JVM_EXECUTABLE__DECLARING_TYPE;
 
 	/**
 	 * The feature id for the '<em><b>Visibility</b></em>' attribute.
@@ -1366,7 +1385,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__VISIBILITY = EXECUTABLE__VISIBILITY;
+	int JVM_OPERATION__VISIBILITY = JVM_EXECUTABLE__VISIBILITY;
 
 	/**
 	 * The feature id for the '<em><b>Fully Qualified Name</b></em>' attribute.
@@ -1375,7 +1394,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__FULLY_QUALIFIED_NAME = EXECUTABLE__FULLY_QUALIFIED_NAME;
+	int JVM_OPERATION__FULLY_QUALIFIED_NAME = JVM_EXECUTABLE__FULLY_QUALIFIED_NAME;
 
 	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
@@ -1384,7 +1403,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__TYPE_PARAMETERS = EXECUTABLE__TYPE_PARAMETERS;
+	int JVM_OPERATION__TYPE_PARAMETERS = JVM_EXECUTABLE__TYPE_PARAMETERS;
 
 	/**
 	 * The feature id for the '<em><b>Parameters</b></em>' containment reference list.
@@ -1393,7 +1412,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__PARAMETERS = EXECUTABLE__PARAMETERS;
+	int JVM_OPERATION__PARAMETERS = JVM_EXECUTABLE__PARAMETERS;
 
 	/**
 	 * The feature id for the '<em><b>Exceptions</b></em>' containment reference list.
@@ -1402,7 +1421,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__EXCEPTIONS = EXECUTABLE__EXCEPTIONS;
+	int JVM_OPERATION__EXCEPTIONS = JVM_EXECUTABLE__EXCEPTIONS;
 
 	/**
 	 * The feature id for the '<em><b>Static</b></em>' attribute.
@@ -1411,7 +1430,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__STATIC = EXECUTABLE_FEATURE_COUNT + 0;
+	int JVM_OPERATION__STATIC = JVM_EXECUTABLE_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Final</b></em>' attribute.
@@ -1420,7 +1439,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__FINAL = EXECUTABLE_FEATURE_COUNT + 1;
+	int JVM_OPERATION__FINAL = JVM_EXECUTABLE_FEATURE_COUNT + 1;
 
 	/**
 	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
@@ -1429,7 +1448,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__ABSTRACT = EXECUTABLE_FEATURE_COUNT + 2;
+	int JVM_OPERATION__ABSTRACT = JVM_EXECUTABLE_FEATURE_COUNT + 2;
 
 	/**
 	 * The feature id for the '<em><b>Return Type</b></em>' containment reference.
@@ -1438,26 +1457,26 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION__RETURN_TYPE = EXECUTABLE_FEATURE_COUNT + 3;
+	int JVM_OPERATION__RETURN_TYPE = JVM_EXECUTABLE_FEATURE_COUNT + 3;
 
 	/**
-	 * The number of structural features of the '<em>Operation</em>' class.
+	 * The number of structural features of the '<em>Jvm Operation</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int OPERATION_FEATURE_COUNT = EXECUTABLE_FEATURE_COUNT + 4;
+	int JVM_OPERATION_FEATURE_COUNT = JVM_EXECUTABLE_FEATURE_COUNT + 4;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.FormalParameterImpl <em>Formal Parameter</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmFormalParameterImpl <em>Jvm Formal Parameter</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.FormalParameterImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getFormalParameter()
+	 * @see org.eclipse.xtext.common.types.impl.JvmFormalParameterImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmFormalParameter()
 	 * @generated
 	 */
-	int FORMAL_PARAMETER = 27;
+	int JVM_FORMAL_PARAMETER = 28;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1466,7 +1485,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORMAL_PARAMETER__NAME = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
+	int JVM_FORMAL_PARAMETER__NAME = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
 
 	/**
 	 * The feature id for the '<em><b>Parameter Type</b></em>' containment reference.
@@ -1475,27 +1494,26 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int FORMAL_PARAMETER__PARAMETER_TYPE = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 1;
+	int JVM_FORMAL_PARAMETER__PARAMETER_TYPE = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
-	 * The number of structural features of the '<em>Formal Parameter</em>' class.
+	 * The number of structural features of the '<em>Jvm Formal Parameter</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int FORMAL_PARAMETER_FEATURE_COUNT = IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 2;
-
+	int JVM_FORMAL_PARAMETER_FEATURE_COUNT = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.AnnotationReferenceImpl <em>Annotation Reference</em>}' class.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmAnnotationReferenceImpl <em>Jvm Annotation Reference</em>}' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.impl.AnnotationReferenceImpl
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getAnnotationReference()
+	 * @see org.eclipse.xtext.common.types.impl.JvmAnnotationReferenceImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnnotationReference()
 	 * @generated
 	 */
-	int ANNOTATION_REFERENCE = 29;
+	int JVM_ANNOTATION_REFERENCE = 30;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' reference.
@@ -1504,7 +1522,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_REFERENCE__ANNOTATION = 0;
+	int JVM_ANNOTATION_REFERENCE__ANNOTATION = 0;
 
 	/**
 	 * The feature id for the '<em><b>Target</b></em>' container reference.
@@ -1513,28 +1531,26 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_REFERENCE__TARGET = 1;
+	int JVM_ANNOTATION_REFERENCE__TARGET = 1;
 
 	/**
-	 * The number of structural features of the '<em>Annotation Reference</em>' class.
+	 * The number of structural features of the '<em>Jvm Annotation Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int ANNOTATION_REFERENCE_FEATURE_COUNT = 2;
-
+	int JVM_ANNOTATION_REFERENCE_FEATURE_COUNT = 2;
 
 	/**
-	 * The meta object id for the '{@link org.eclipse.xtext.common.types.Visibility <em>Visibility</em>}' enum.
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.JvmVisibility <em>Jvm Visibility</em>}' enum.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @see org.eclipse.xtext.common.types.Visibility
-	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getVisibility()
+	 * @see org.eclipse.xtext.common.types.JvmVisibility
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmVisibility()
 	 * @generated
 	 */
-	int VISIBILITY = 30;
-
+	int JVM_VISIBILITY = 31;
 
 	/**
 	 * The meta object id for the '<em>Iterable</em>' data type.
@@ -1544,725 +1560,735 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getIterable()
 	 * @generated
 	 */
-	int ITERABLE = 31;
+	int ITERABLE = 32;
 
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.IdentifyableElement <em>Identifyable Element</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmIdentifyableElement <em>Jvm Identifyable Element</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Identifyable Element</em>'.
-	 * @see org.eclipse.xtext.common.types.IdentifyableElement
+	 * @return the meta object for class '<em>Jvm Identifyable Element</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmIdentifyableElement
 	 * @generated
 	 */
-	EClass getIdentifyableElement();
+	EClass getJvmIdentifyableElement();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.Type <em>Type</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmType <em>Jvm Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Type</em>'.
-	 * @see org.eclipse.xtext.common.types.Type
+	 * @return the meta object for class '<em>Jvm Type</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmType
 	 * @generated
 	 */
-	EClass getType();
+	EClass getJvmType();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.Void <em>Void</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmVoid <em>Jvm Void</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Void</em>'.
-	 * @see org.eclipse.xtext.common.types.Void
+	 * @return the meta object for class '<em>Jvm Void</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmVoid
 	 * @generated
 	 */
-	EClass getVoid();
+	EClass getJvmVoid();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.ComponentType <em>Component Type</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmComponentType <em>Jvm Component Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Component Type</em>'.
-	 * @see org.eclipse.xtext.common.types.ComponentType
+	 * @return the meta object for class '<em>Jvm Component Type</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmComponentType
 	 * @generated
 	 */
-	EClass getComponentType();
+	EClass getJvmComponentType();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.ComponentType#getArrayType <em>Array Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.JvmComponentType#getArrayType <em>Array Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Array Type</em>'.
-	 * @see org.eclipse.xtext.common.types.ComponentType#getArrayType()
-	 * @see #getComponentType()
+	 * @see org.eclipse.xtext.common.types.JvmComponentType#getArrayType()
+	 * @see #getJvmComponentType()
 	 * @generated
 	 */
-	EReference getComponentType_ArrayType();
+	EReference getJvmComponentType_ArrayType();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.PrimitiveType <em>Primitive Type</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmPrimitiveType <em>Jvm Primitive Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Primitive Type</em>'.
-	 * @see org.eclipse.xtext.common.types.PrimitiveType
+	 * @return the meta object for class '<em>Jvm Primitive Type</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmPrimitiveType
 	 * @generated
 	 */
-	EClass getPrimitiveType();
+	EClass getJvmPrimitiveType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.PrimitiveType#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmPrimitiveType#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.xtext.common.types.PrimitiveType#getName()
-	 * @see #getPrimitiveType()
+	 * @see org.eclipse.xtext.common.types.JvmPrimitiveType#getName()
+	 * @see #getJvmPrimitiveType()
 	 * @generated
 	 */
-	EAttribute getPrimitiveType_Name();
+	EAttribute getJvmPrimitiveType_Name();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.ArrayType <em>Array Type</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmArrayType <em>Jvm Array Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Array Type</em>'.
-	 * @see org.eclipse.xtext.common.types.ArrayType
+	 * @return the meta object for class '<em>Jvm Array Type</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmArrayType
 	 * @generated
 	 */
-	EClass getArrayType();
+	EClass getJvmArrayType();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.ArrayType#getComponentType <em>Component Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.JvmArrayType#getComponentType <em>Component Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Component Type</em>'.
-	 * @see org.eclipse.xtext.common.types.ArrayType#getComponentType()
-	 * @see #getArrayType()
+	 * @see org.eclipse.xtext.common.types.JvmArrayType#getComponentType()
+	 * @see #getJvmArrayType()
 	 * @generated
 	 */
-	EReference getArrayType_ComponentType();
+	EReference getJvmArrayType_ComponentType();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.DeclaredType <em>Declared Type</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmDeclaredType <em>Jvm Declared Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Declared Type</em>'.
-	 * @see org.eclipse.xtext.common.types.DeclaredType
+	 * @return the meta object for class '<em>Jvm Declared Type</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmDeclaredType
 	 * @generated
 	 */
-	EClass getDeclaredType();
+	EClass getJvmDeclaredType();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.DeclaredType#getSuperTypes <em>Super Types</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.JvmDeclaredType#getSuperTypes <em>Super Types</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Super Types</em>'.
-	 * @see org.eclipse.xtext.common.types.DeclaredType#getSuperTypes()
-	 * @see #getDeclaredType()
+	 * @see org.eclipse.xtext.common.types.JvmDeclaredType#getSuperTypes()
+	 * @see #getJvmDeclaredType()
 	 * @generated
 	 */
-	EReference getDeclaredType_SuperTypes();
+	EReference getJvmDeclaredType_SuperTypes();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.DeclaredType#getMembers <em>Members</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.JvmDeclaredType#getMembers <em>Members</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Members</em>'.
-	 * @see org.eclipse.xtext.common.types.DeclaredType#getMembers()
-	 * @see #getDeclaredType()
+	 * @see org.eclipse.xtext.common.types.JvmDeclaredType#getMembers()
+	 * @see #getJvmDeclaredType()
 	 * @generated
 	 */
-	EReference getDeclaredType_Members();
+	EReference getJvmDeclaredType_Members();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.TypeParameterDeclarator <em>Type Parameter Declarator</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmTypeParameter <em>Jvm Type Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Type Parameter Declarator</em>'.
-	 * @see org.eclipse.xtext.common.types.TypeParameterDeclarator
+	 * @return the meta object for class '<em>Jvm Type Parameter</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmTypeParameter
 	 * @generated
 	 */
-	EClass getTypeParameterDeclarator();
+	EClass getJvmTypeParameter();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.TypeParameterDeclarator#getTypeParameters <em>Type Parameters</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmTypeParameter#getName <em>Name</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Name</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmTypeParameter#getName()
+	 * @see #getJvmTypeParameter()
+	 * @generated
+	 */
+	EAttribute getJvmTypeParameter_Name();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.common.types.JvmTypeParameter#getDeclarator <em>Declarator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Declarator</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmTypeParameter#getDeclarator()
+	 * @see #getJvmTypeParameter()
+	 * @generated
+	 */
+	EReference getJvmTypeParameter_Declarator();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmTypeParameterDeclarator <em>Jvm Type Parameter Declarator</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm Type Parameter Declarator</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmTypeParameterDeclarator
+	 * @generated
+	 */
+	EClass getJvmTypeParameterDeclarator();
+
+	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.JvmTypeParameterDeclarator#getTypeParameters <em>Type Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Type Parameters</em>'.
-	 * @see org.eclipse.xtext.common.types.TypeParameterDeclarator#getTypeParameters()
-	 * @see #getTypeParameterDeclarator()
+	 * @see org.eclipse.xtext.common.types.JvmTypeParameterDeclarator#getTypeParameters()
+	 * @see #getJvmTypeParameterDeclarator()
 	 * @generated
 	 */
-	EReference getTypeParameterDeclarator_TypeParameters();
+	EReference getJvmTypeParameterDeclarator_TypeParameters();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.ConstraintOwner <em>Constraint Owner</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmConstraintOwner <em>Jvm Constraint Owner</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Constraint Owner</em>'.
-	 * @see org.eclipse.xtext.common.types.ConstraintOwner
+	 * @return the meta object for class '<em>Jvm Constraint Owner</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmConstraintOwner
 	 * @generated
 	 */
-	EClass getConstraintOwner();
+	EClass getJvmConstraintOwner();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.ConstraintOwner#getConstraints <em>Constraints</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.JvmConstraintOwner#getConstraints <em>Constraints</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Constraints</em>'.
-	 * @see org.eclipse.xtext.common.types.ConstraintOwner#getConstraints()
-	 * @see #getConstraintOwner()
+	 * @see org.eclipse.xtext.common.types.JvmConstraintOwner#getConstraints()
+	 * @see #getJvmConstraintOwner()
 	 * @generated
 	 */
-	EReference getConstraintOwner_Constraints();
+	EReference getJvmConstraintOwner_Constraints();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.TypeConstraint <em>Type Constraint</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmTypeConstraint <em>Jvm Type Constraint</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Type Constraint</em>'.
-	 * @see org.eclipse.xtext.common.types.TypeConstraint
+	 * @return the meta object for class '<em>Jvm Type Constraint</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmTypeConstraint
 	 * @generated
 	 */
-	EClass getTypeConstraint();
+	EClass getJvmTypeConstraint();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.TypeConstraint#getTypeReference <em>Type Reference</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.JvmTypeConstraint#getTypeReference <em>Type Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Type Reference</em>'.
-	 * @see org.eclipse.xtext.common.types.TypeConstraint#getTypeReference()
-	 * @see #getTypeConstraint()
+	 * @see org.eclipse.xtext.common.types.JvmTypeConstraint#getTypeReference()
+	 * @see #getJvmTypeConstraint()
 	 * @generated
 	 */
-	EReference getTypeConstraint_TypeReference();
+	EReference getJvmTypeConstraint_TypeReference();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.common.types.TypeConstraint#getOwner <em>Owner</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.common.types.JvmTypeConstraint#getOwner <em>Owner</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the container reference '<em>Owner</em>'.
-	 * @see org.eclipse.xtext.common.types.TypeConstraint#getOwner()
-	 * @see #getTypeConstraint()
+	 * @see org.eclipse.xtext.common.types.JvmTypeConstraint#getOwner()
+	 * @see #getJvmTypeConstraint()
 	 * @generated
 	 */
-	EReference getTypeConstraint_Owner();
+	EReference getJvmTypeConstraint_Owner();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.UpperBound <em>Upper Bound</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmUpperBound <em>Jvm Upper Bound</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Upper Bound</em>'.
-	 * @see org.eclipse.xtext.common.types.UpperBound
+	 * @return the meta object for class '<em>Jvm Upper Bound</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmUpperBound
 	 * @generated
 	 */
-	EClass getUpperBound();
+	EClass getJvmUpperBound();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.LowerBound <em>Lower Bound</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmLowerBound <em>Jvm Lower Bound</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Lower Bound</em>'.
-	 * @see org.eclipse.xtext.common.types.LowerBound
+	 * @return the meta object for class '<em>Jvm Lower Bound</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmLowerBound
 	 * @generated
 	 */
-	EClass getLowerBound();
+	EClass getJvmLowerBound();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.AnnotationType <em>Annotation Type</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmAnnotationType <em>Jvm Annotation Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Annotation Type</em>'.
-	 * @see org.eclipse.xtext.common.types.AnnotationType
+	 * @return the meta object for class '<em>Jvm Annotation Type</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmAnnotationType
 	 * @generated
 	 */
-	EClass getAnnotationType();
+	EClass getJvmAnnotationType();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.EnumerationType <em>Enumeration Type</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmEnumerationType <em>Jvm Enumeration Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Enumeration Type</em>'.
-	 * @see org.eclipse.xtext.common.types.EnumerationType
+	 * @return the meta object for class '<em>Jvm Enumeration Type</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmEnumerationType
 	 * @generated
 	 */
-	EClass getEnumerationType();
+	EClass getJvmEnumerationType();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.GenericType <em>Generic Type</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmGenericType <em>Jvm Generic Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Generic Type</em>'.
-	 * @see org.eclipse.xtext.common.types.GenericType
+	 * @return the meta object for class '<em>Jvm Generic Type</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmGenericType
 	 * @generated
 	 */
-	EClass getGenericType();
+	EClass getJvmGenericType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.GenericType#isAbstract <em>Abstract</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmGenericType#isAbstract <em>Abstract</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Abstract</em>'.
-	 * @see org.eclipse.xtext.common.types.GenericType#isAbstract()
-	 * @see #getGenericType()
+	 * @see org.eclipse.xtext.common.types.JvmGenericType#isAbstract()
+	 * @see #getJvmGenericType()
 	 * @generated
 	 */
-	EAttribute getGenericType_Abstract();
+	EAttribute getJvmGenericType_Abstract();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.GenericType#isInterface <em>Interface</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmGenericType#isInterface <em>Interface</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Interface</em>'.
-	 * @see org.eclipse.xtext.common.types.GenericType#isInterface()
-	 * @see #getGenericType()
+	 * @see org.eclipse.xtext.common.types.JvmGenericType#isInterface()
+	 * @see #getJvmGenericType()
 	 * @generated
 	 */
-	EAttribute getGenericType_Interface();
+	EAttribute getJvmGenericType_Interface();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.GenericType#isStatic <em>Static</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmGenericType#isStatic <em>Static</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Static</em>'.
-	 * @see org.eclipse.xtext.common.types.GenericType#isStatic()
-	 * @see #getGenericType()
+	 * @see org.eclipse.xtext.common.types.JvmGenericType#isStatic()
+	 * @see #getJvmGenericType()
 	 * @generated
 	 */
-	EAttribute getGenericType_Static();
+	EAttribute getJvmGenericType_Static();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.GenericType#isFinal <em>Final</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmGenericType#isFinal <em>Final</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Final</em>'.
-	 * @see org.eclipse.xtext.common.types.GenericType#isFinal()
-	 * @see #getGenericType()
+	 * @see org.eclipse.xtext.common.types.JvmGenericType#isFinal()
+	 * @see #getJvmGenericType()
 	 * @generated
 	 */
-	EAttribute getGenericType_Final();
+	EAttribute getJvmGenericType_Final();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.TypeReference <em>Type Reference</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmTypeReference <em>Jvm Type Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Type Reference</em>'.
-	 * @see org.eclipse.xtext.common.types.TypeReference
+	 * @return the meta object for class '<em>Jvm Type Reference</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmTypeReference
 	 * @generated
 	 */
-	EClass getTypeReference();
+	EClass getJvmTypeReference();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.ParameterizedTypeReference <em>Parameterized Type Reference</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmParameterizedTypeReference <em>Jvm Parameterized Type Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Parameterized Type Reference</em>'.
-	 * @see org.eclipse.xtext.common.types.ParameterizedTypeReference
+	 * @return the meta object for class '<em>Jvm Parameterized Type Reference</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmParameterizedTypeReference
 	 * @generated
 	 */
-	EClass getParameterizedTypeReference();
+	EClass getJvmParameterizedTypeReference();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.ParameterizedTypeReference#getArguments <em>Arguments</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.JvmParameterizedTypeReference#getArguments <em>Arguments</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Arguments</em>'.
-	 * @see org.eclipse.xtext.common.types.ParameterizedTypeReference#getArguments()
-	 * @see #getParameterizedTypeReference()
+	 * @see org.eclipse.xtext.common.types.JvmParameterizedTypeReference#getArguments()
+	 * @see #getJvmParameterizedTypeReference()
 	 * @generated
 	 */
-	EReference getParameterizedTypeReference_Arguments();
+	EReference getJvmParameterizedTypeReference_Arguments();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.xtext.common.types.ParameterizedTypeReference#getType <em>Type</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.common.types.JvmParameterizedTypeReference#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Type</em>'.
-	 * @see org.eclipse.xtext.common.types.ParameterizedTypeReference#getType()
-	 * @see #getParameterizedTypeReference()
+	 * @see org.eclipse.xtext.common.types.JvmParameterizedTypeReference#getType()
+	 * @see #getJvmParameterizedTypeReference()
 	 * @generated
 	 */
-	EReference getParameterizedTypeReference_Type();
+	EReference getJvmParameterizedTypeReference_Type();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.GenericArrayTypeReference <em>Generic Array Type Reference</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmGenericArrayTypeReference <em>Jvm Generic Array Type Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Generic Array Type Reference</em>'.
-	 * @see org.eclipse.xtext.common.types.GenericArrayTypeReference
+	 * @return the meta object for class '<em>Jvm Generic Array Type Reference</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmGenericArrayTypeReference
 	 * @generated
 	 */
-	EClass getGenericArrayTypeReference();
+	EClass getJvmGenericArrayTypeReference();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.GenericArrayTypeReference#getType <em>Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.JvmGenericArrayTypeReference#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Type</em>'.
-	 * @see org.eclipse.xtext.common.types.GenericArrayTypeReference#getType()
-	 * @see #getGenericArrayTypeReference()
+	 * @see org.eclipse.xtext.common.types.JvmGenericArrayTypeReference#getType()
+	 * @see #getJvmGenericArrayTypeReference()
 	 * @generated
 	 */
-	EReference getGenericArrayTypeReference_Type();
+	EReference getJvmGenericArrayTypeReference_Type();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.TypeArgument <em>Type Argument</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmTypeArgument <em>Jvm Type Argument</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Type Argument</em>'.
-	 * @see org.eclipse.xtext.common.types.TypeArgument
+	 * @return the meta object for class '<em>Jvm Type Argument</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmTypeArgument
 	 * @generated
 	 */
-	EClass getTypeArgument();
+	EClass getJvmTypeArgument();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.common.types.TypeArgument#getDeclarator <em>Declarator</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.common.types.JvmTypeArgument#getDeclarator <em>Declarator</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the container reference '<em>Declarator</em>'.
-	 * @see org.eclipse.xtext.common.types.TypeArgument#getDeclarator()
-	 * @see #getTypeArgument()
+	 * @see org.eclipse.xtext.common.types.JvmTypeArgument#getDeclarator()
+	 * @see #getJvmTypeArgument()
 	 * @generated
 	 */
-	EReference getTypeArgument_Declarator();
+	EReference getJvmTypeArgument_Declarator();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.WildcardTypeArgument <em>Wildcard Type Argument</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmWildcardTypeArgument <em>Jvm Wildcard Type Argument</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Wildcard Type Argument</em>'.
-	 * @see org.eclipse.xtext.common.types.WildcardTypeArgument
+	 * @return the meta object for class '<em>Jvm Wildcard Type Argument</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmWildcardTypeArgument
 	 * @generated
 	 */
-	EClass getWildcardTypeArgument();
+	EClass getJvmWildcardTypeArgument();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.ReferenceTypeArgument <em>Reference Type Argument</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmReferenceTypeArgument <em>Jvm Reference Type Argument</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Reference Type Argument</em>'.
-	 * @see org.eclipse.xtext.common.types.ReferenceTypeArgument
+	 * @return the meta object for class '<em>Jvm Reference Type Argument</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmReferenceTypeArgument
 	 * @generated
 	 */
-	EClass getReferenceTypeArgument();
+	EClass getJvmReferenceTypeArgument();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.ReferenceTypeArgument#getTypeReference <em>Type Reference</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.JvmReferenceTypeArgument#getTypeReference <em>Type Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Type Reference</em>'.
-	 * @see org.eclipse.xtext.common.types.ReferenceTypeArgument#getTypeReference()
-	 * @see #getReferenceTypeArgument()
+	 * @see org.eclipse.xtext.common.types.JvmReferenceTypeArgument#getTypeReference()
+	 * @see #getJvmReferenceTypeArgument()
 	 * @generated
 	 */
-	EReference getReferenceTypeArgument_TypeReference();
+	EReference getJvmReferenceTypeArgument_TypeReference();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.TypeParameter <em>Type Parameter</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmMember <em>Jvm Member</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Type Parameter</em>'.
-	 * @see org.eclipse.xtext.common.types.TypeParameter
+	 * @return the meta object for class '<em>Jvm Member</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmMember
 	 * @generated
 	 */
-	EClass getTypeParameter();
+	EClass getJvmMember();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.TypeParameter#getName <em>Name</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.xtext.common.types.TypeParameter#getName()
-	 * @see #getTypeParameter()
-	 * @generated
-	 */
-	EAttribute getTypeParameter_Name();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.common.types.TypeParameter#getDeclarator <em>Declarator</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the container reference '<em>Declarator</em>'.
-	 * @see org.eclipse.xtext.common.types.TypeParameter#getDeclarator()
-	 * @see #getTypeParameter()
-	 * @generated
-	 */
-	EReference getTypeParameter_Declarator();
-
-	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.Member <em>Member</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Member</em>'.
-	 * @see org.eclipse.xtext.common.types.Member
-	 * @generated
-	 */
-	EClass getMember();
-
-	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.common.types.Member#getDeclaringType <em>Declaring Type</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.common.types.JvmMember#getDeclaringType <em>Declaring Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the container reference '<em>Declaring Type</em>'.
-	 * @see org.eclipse.xtext.common.types.Member#getDeclaringType()
-	 * @see #getMember()
+	 * @see org.eclipse.xtext.common.types.JvmMember#getDeclaringType()
+	 * @see #getJvmMember()
 	 * @generated
 	 */
-	EReference getMember_DeclaringType();
+	EReference getJvmMember_DeclaringType();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.Member#getVisibility <em>Visibility</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmMember#getVisibility <em>Visibility</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Visibility</em>'.
-	 * @see org.eclipse.xtext.common.types.Member#getVisibility()
-	 * @see #getMember()
+	 * @see org.eclipse.xtext.common.types.JvmMember#getVisibility()
+	 * @see #getJvmMember()
 	 * @generated
 	 */
-	EAttribute getMember_Visibility();
+	EAttribute getJvmMember_Visibility();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.Member#getFullyQualifiedName <em>Fully Qualified Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmMember#getFullyQualifiedName <em>Fully Qualified Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Fully Qualified Name</em>'.
-	 * @see org.eclipse.xtext.common.types.Member#getFullyQualifiedName()
-	 * @see #getMember()
+	 * @see org.eclipse.xtext.common.types.JvmMember#getFullyQualifiedName()
+	 * @see #getJvmMember()
 	 * @generated
 	 */
-	EAttribute getMember_FullyQualifiedName();
+	EAttribute getJvmMember_FullyQualifiedName();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.Field <em>Field</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmFeature <em>Jvm Feature</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Field</em>'.
-	 * @see org.eclipse.xtext.common.types.Field
+	 * @return the meta object for class '<em>Jvm Feature</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmFeature
 	 * @generated
 	 */
-	EClass getField();
+	EClass getJvmFeature();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.Field#isStatic <em>Static</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmField <em>Jvm Field</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm Field</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmField
+	 * @generated
+	 */
+	EClass getJvmField();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmField#isStatic <em>Static</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Static</em>'.
-	 * @see org.eclipse.xtext.common.types.Field#isStatic()
-	 * @see #getField()
+	 * @see org.eclipse.xtext.common.types.JvmField#isStatic()
+	 * @see #getJvmField()
 	 * @generated
 	 */
-	EAttribute getField_Static();
+	EAttribute getJvmField_Static();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.Field#isFinal <em>Final</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmField#isFinal <em>Final</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Final</em>'.
-	 * @see org.eclipse.xtext.common.types.Field#isFinal()
-	 * @see #getField()
+	 * @see org.eclipse.xtext.common.types.JvmField#isFinal()
+	 * @see #getJvmField()
 	 * @generated
 	 */
-	EAttribute getField_Final();
+	EAttribute getJvmField_Final();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.Field#getType <em>Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.JvmField#getType <em>Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Type</em>'.
-	 * @see org.eclipse.xtext.common.types.Field#getType()
-	 * @see #getField()
+	 * @see org.eclipse.xtext.common.types.JvmField#getType()
+	 * @see #getJvmField()
 	 * @generated
 	 */
-	EReference getField_Type();
+	EReference getJvmField_Type();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.Executable <em>Executable</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmExecutable <em>Jvm Executable</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Executable</em>'.
-	 * @see org.eclipse.xtext.common.types.Executable
+	 * @return the meta object for class '<em>Jvm Executable</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmExecutable
 	 * @generated
 	 */
-	EClass getExecutable();
+	EClass getJvmExecutable();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.Executable#getParameters <em>Parameters</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.JvmExecutable#getParameters <em>Parameters</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Parameters</em>'.
-	 * @see org.eclipse.xtext.common.types.Executable#getParameters()
-	 * @see #getExecutable()
+	 * @see org.eclipse.xtext.common.types.JvmExecutable#getParameters()
+	 * @see #getJvmExecutable()
 	 * @generated
 	 */
-	EReference getExecutable_Parameters();
+	EReference getJvmExecutable_Parameters();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.Executable#getExceptions <em>Exceptions</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.JvmExecutable#getExceptions <em>Exceptions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Exceptions</em>'.
-	 * @see org.eclipse.xtext.common.types.Executable#getExceptions()
-	 * @see #getExecutable()
+	 * @see org.eclipse.xtext.common.types.JvmExecutable#getExceptions()
+	 * @see #getJvmExecutable()
 	 * @generated
 	 */
-	EReference getExecutable_Exceptions();
+	EReference getJvmExecutable_Exceptions();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.Constructor <em>Constructor</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmConstructor <em>Jvm Constructor</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Constructor</em>'.
-	 * @see org.eclipse.xtext.common.types.Constructor
+	 * @return the meta object for class '<em>Jvm Constructor</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmConstructor
 	 * @generated
 	 */
-	EClass getConstructor();
+	EClass getJvmConstructor();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.Operation <em>Operation</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmOperation <em>Jvm Operation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Operation</em>'.
-	 * @see org.eclipse.xtext.common.types.Operation
+	 * @return the meta object for class '<em>Jvm Operation</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmOperation
 	 * @generated
 	 */
-	EClass getOperation();
+	EClass getJvmOperation();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.Operation#isStatic <em>Static</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmOperation#isStatic <em>Static</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Static</em>'.
-	 * @see org.eclipse.xtext.common.types.Operation#isStatic()
-	 * @see #getOperation()
+	 * @see org.eclipse.xtext.common.types.JvmOperation#isStatic()
+	 * @see #getJvmOperation()
 	 * @generated
 	 */
-	EAttribute getOperation_Static();
+	EAttribute getJvmOperation_Static();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.Operation#isFinal <em>Final</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmOperation#isFinal <em>Final</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Final</em>'.
-	 * @see org.eclipse.xtext.common.types.Operation#isFinal()
-	 * @see #getOperation()
+	 * @see org.eclipse.xtext.common.types.JvmOperation#isFinal()
+	 * @see #getJvmOperation()
 	 * @generated
 	 */
-	EAttribute getOperation_Final();
+	EAttribute getJvmOperation_Final();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.Operation#isAbstract <em>Abstract</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmOperation#isAbstract <em>Abstract</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Abstract</em>'.
-	 * @see org.eclipse.xtext.common.types.Operation#isAbstract()
-	 * @see #getOperation()
+	 * @see org.eclipse.xtext.common.types.JvmOperation#isAbstract()
+	 * @see #getJvmOperation()
 	 * @generated
 	 */
-	EAttribute getOperation_Abstract();
+	EAttribute getJvmOperation_Abstract();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.Operation#getReturnType <em>Return Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.JvmOperation#getReturnType <em>Return Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Return Type</em>'.
-	 * @see org.eclipse.xtext.common.types.Operation#getReturnType()
-	 * @see #getOperation()
+	 * @see org.eclipse.xtext.common.types.JvmOperation#getReturnType()
+	 * @see #getJvmOperation()
 	 * @generated
 	 */
-	EReference getOperation_ReturnType();
+	EReference getJvmOperation_ReturnType();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.FormalParameter <em>Formal Parameter</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmFormalParameter <em>Jvm Formal Parameter</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Formal Parameter</em>'.
-	 * @see org.eclipse.xtext.common.types.FormalParameter
+	 * @return the meta object for class '<em>Jvm Formal Parameter</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmFormalParameter
 	 * @generated
 	 */
-	EClass getFormalParameter();
+	EClass getJvmFormalParameter();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.FormalParameter#getName <em>Name</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmFormalParameter#getName <em>Name</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>Name</em>'.
-	 * @see org.eclipse.xtext.common.types.FormalParameter#getName()
-	 * @see #getFormalParameter()
+	 * @see org.eclipse.xtext.common.types.JvmFormalParameter#getName()
+	 * @see #getJvmFormalParameter()
 	 * @generated
 	 */
-	EAttribute getFormalParameter_Name();
+	EAttribute getJvmFormalParameter_Name();
 
 	/**
-	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.FormalParameter#getParameterType <em>Parameter Type</em>}'.
+	 * Returns the meta object for the containment reference '{@link org.eclipse.xtext.common.types.JvmFormalParameter#getParameterType <em>Parameter Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference '<em>Parameter Type</em>'.
-	 * @see org.eclipse.xtext.common.types.FormalParameter#getParameterType()
-	 * @see #getFormalParameter()
+	 * @see org.eclipse.xtext.common.types.JvmFormalParameter#getParameterType()
+	 * @see #getJvmFormalParameter()
 	 * @generated
 	 */
-	EReference getFormalParameter_ParameterType();
+	EReference getJvmFormalParameter_ParameterType();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.AnnotationTarget <em>Annotation Target</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmAnnotationTarget <em>Jvm Annotation Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Annotation Target</em>'.
-	 * @see org.eclipse.xtext.common.types.AnnotationTarget
+	 * @return the meta object for class '<em>Jvm Annotation Target</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmAnnotationTarget
 	 * @generated
 	 */
-	EClass getAnnotationTarget();
+	EClass getJvmAnnotationTarget();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.AnnotationTarget#getAnnotations <em>Annotations</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.JvmAnnotationTarget#getAnnotations <em>Annotations</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Annotations</em>'.
-	 * @see org.eclipse.xtext.common.types.AnnotationTarget#getAnnotations()
-	 * @see #getAnnotationTarget()
+	 * @see org.eclipse.xtext.common.types.JvmAnnotationTarget#getAnnotations()
+	 * @see #getJvmAnnotationTarget()
 	 * @generated
 	 */
-	EReference getAnnotationTarget_Annotations();
+	EReference getJvmAnnotationTarget_Annotations();
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.AnnotationReference <em>Annotation Reference</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmAnnotationReference <em>Jvm Annotation Reference</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for class '<em>Annotation Reference</em>'.
-	 * @see org.eclipse.xtext.common.types.AnnotationReference
+	 * @return the meta object for class '<em>Jvm Annotation Reference</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmAnnotationReference
 	 * @generated
 	 */
-	EClass getAnnotationReference();
+	EClass getJvmAnnotationReference();
 
 	/**
-	 * Returns the meta object for the reference '{@link org.eclipse.xtext.common.types.AnnotationReference#getAnnotation <em>Annotation</em>}'.
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.common.types.JvmAnnotationReference#getAnnotation <em>Annotation</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the reference '<em>Annotation</em>'.
-	 * @see org.eclipse.xtext.common.types.AnnotationReference#getAnnotation()
-	 * @see #getAnnotationReference()
+	 * @see org.eclipse.xtext.common.types.JvmAnnotationReference#getAnnotation()
+	 * @see #getJvmAnnotationReference()
 	 * @generated
 	 */
-	EReference getAnnotationReference_Annotation();
+	EReference getJvmAnnotationReference_Annotation();
 
 	/**
-	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.common.types.AnnotationReference#getTarget <em>Target</em>}'.
+	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.common.types.JvmAnnotationReference#getTarget <em>Target</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the container reference '<em>Target</em>'.
-	 * @see org.eclipse.xtext.common.types.AnnotationReference#getTarget()
-	 * @see #getAnnotationReference()
+	 * @see org.eclipse.xtext.common.types.JvmAnnotationReference#getTarget()
+	 * @see #getJvmAnnotationReference()
 	 * @generated
 	 */
-	EReference getAnnotationReference_Target();
+	EReference getJvmAnnotationReference_Target();
 
 	/**
-	 * Returns the meta object for enum '{@link org.eclipse.xtext.common.types.Visibility <em>Visibility</em>}'.
+	 * Returns the meta object for enum '{@link org.eclipse.xtext.common.types.JvmVisibility <em>Jvm Visibility</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
-	 * @return the meta object for enum '<em>Visibility</em>'.
-	 * @see org.eclipse.xtext.common.types.Visibility
+	 * @return the meta object for enum '<em>Jvm Visibility</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmVisibility
 	 * @generated
 	 */
-	EEnum getVisibility();
+	EEnum getJvmVisibility();
 
 	/**
 	 * Returns the meta object for data type '{@link java.lang.Iterable <em>Iterable</em>}'.
@@ -2298,44 +2324,44 @@ public interface TypesPackage extends EPackage {
 	 */
 	interface Literals {
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.IdentifyableElementImpl <em>Identifyable Element</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmIdentifyableElementImpl <em>Jvm Identifyable Element</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.IdentifyableElementImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getIdentifyableElement()
+		 * @see org.eclipse.xtext.common.types.impl.JvmIdentifyableElementImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmIdentifyableElement()
 		 * @generated
 		 */
-		EClass IDENTIFYABLE_ELEMENT = eINSTANCE.getIdentifyableElement();
+		EClass JVM_IDENTIFYABLE_ELEMENT = eINSTANCE.getJvmIdentifyableElement();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.TypeImpl <em>Type</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeImpl <em>Jvm Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.TypeImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getType()
+		 * @see org.eclipse.xtext.common.types.impl.JvmTypeImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmType()
 		 * @generated
 		 */
-		EClass TYPE = eINSTANCE.getType();
+		EClass JVM_TYPE = eINSTANCE.getJvmType();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.VoidImpl <em>Void</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmVoidImpl <em>Jvm Void</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.VoidImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getVoid()
+		 * @see org.eclipse.xtext.common.types.impl.JvmVoidImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmVoid()
 		 * @generated
 		 */
-		EClass VOID = eINSTANCE.getVoid();
+		EClass JVM_VOID = eINSTANCE.getJvmVoid();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.ComponentTypeImpl <em>Component Type</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmComponentTypeImpl <em>Jvm Component Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.ComponentTypeImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getComponentType()
+		 * @see org.eclipse.xtext.common.types.impl.JvmComponentTypeImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmComponentType()
 		 * @generated
 		 */
-		EClass COMPONENT_TYPE = eINSTANCE.getComponentType();
+		EClass JVM_COMPONENT_TYPE = eINSTANCE.getJvmComponentType();
 
 		/**
 		 * The meta object literal for the '<em><b>Array Type</b></em>' containment reference feature.
@@ -2343,17 +2369,17 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference COMPONENT_TYPE__ARRAY_TYPE = eINSTANCE.getComponentType_ArrayType();
+		EReference JVM_COMPONENT_TYPE__ARRAY_TYPE = eINSTANCE.getJvmComponentType_ArrayType();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.PrimitiveTypeImpl <em>Primitive Type</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmPrimitiveTypeImpl <em>Jvm Primitive Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.PrimitiveTypeImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getPrimitiveType()
+		 * @see org.eclipse.xtext.common.types.impl.JvmPrimitiveTypeImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmPrimitiveType()
 		 * @generated
 		 */
-		EClass PRIMITIVE_TYPE = eINSTANCE.getPrimitiveType();
+		EClass JVM_PRIMITIVE_TYPE = eINSTANCE.getJvmPrimitiveType();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -2361,17 +2387,17 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute PRIMITIVE_TYPE__NAME = eINSTANCE.getPrimitiveType_Name();
+		EAttribute JVM_PRIMITIVE_TYPE__NAME = eINSTANCE.getJvmPrimitiveType_Name();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.ArrayTypeImpl <em>Array Type</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmArrayTypeImpl <em>Jvm Array Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.ArrayTypeImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getArrayType()
+		 * @see org.eclipse.xtext.common.types.impl.JvmArrayTypeImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmArrayType()
 		 * @generated
 		 */
-		EClass ARRAY_TYPE = eINSTANCE.getArrayType();
+		EClass JVM_ARRAY_TYPE = eINSTANCE.getJvmArrayType();
 
 		/**
 		 * The meta object literal for the '<em><b>Component Type</b></em>' containment reference feature.
@@ -2379,17 +2405,17 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ARRAY_TYPE__COMPONENT_TYPE = eINSTANCE.getArrayType_ComponentType();
+		EReference JVM_ARRAY_TYPE__COMPONENT_TYPE = eINSTANCE.getJvmArrayType_ComponentType();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.DeclaredTypeImpl <em>Declared Type</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl <em>Jvm Declared Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.DeclaredTypeImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getDeclaredType()
+		 * @see org.eclipse.xtext.common.types.impl.JvmDeclaredTypeImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmDeclaredType()
 		 * @generated
 		 */
-		EClass DECLARED_TYPE = eINSTANCE.getDeclaredType();
+		EClass JVM_DECLARED_TYPE = eINSTANCE.getJvmDeclaredType();
 
 		/**
 		 * The meta object literal for the '<em><b>Super Types</b></em>' containment reference list feature.
@@ -2397,7 +2423,7 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DECLARED_TYPE__SUPER_TYPES = eINSTANCE.getDeclaredType_SuperTypes();
+		EReference JVM_DECLARED_TYPE__SUPER_TYPES = eINSTANCE.getJvmDeclaredType_SuperTypes();
 
 		/**
 		 * The meta object literal for the '<em><b>Members</b></em>' containment reference list feature.
@@ -2405,17 +2431,43 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference DECLARED_TYPE__MEMBERS = eINSTANCE.getDeclaredType_Members();
+		EReference JVM_DECLARED_TYPE__MEMBERS = eINSTANCE.getJvmDeclaredType_Members();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.TypeParameterDeclaratorImpl <em>Type Parameter Declarator</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeParameterImpl <em>Jvm Type Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.TypeParameterDeclaratorImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeParameterDeclarator()
+		 * @see org.eclipse.xtext.common.types.impl.JvmTypeParameterImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmTypeParameter()
 		 * @generated
 		 */
-		EClass TYPE_PARAMETER_DECLARATOR = eINSTANCE.getTypeParameterDeclarator();
+		EClass JVM_TYPE_PARAMETER = eINSTANCE.getJvmTypeParameter();
+
+		/**
+		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JVM_TYPE_PARAMETER__NAME = eINSTANCE.getJvmTypeParameter_Name();
+
+		/**
+		 * The meta object literal for the '<em><b>Declarator</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JVM_TYPE_PARAMETER__DECLARATOR = eINSTANCE.getJvmTypeParameter_Declarator();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeParameterDeclaratorImpl <em>Jvm Type Parameter Declarator</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmTypeParameterDeclaratorImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmTypeParameterDeclarator()
+		 * @generated
+		 */
+		EClass JVM_TYPE_PARAMETER_DECLARATOR = eINSTANCE.getJvmTypeParameterDeclarator();
 
 		/**
 		 * The meta object literal for the '<em><b>Type Parameters</b></em>' containment reference list feature.
@@ -2423,17 +2475,17 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS = eINSTANCE.getTypeParameterDeclarator_TypeParameters();
+		EReference JVM_TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS = eINSTANCE.getJvmTypeParameterDeclarator_TypeParameters();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.ConstraintOwnerImpl <em>Constraint Owner</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmConstraintOwnerImpl <em>Jvm Constraint Owner</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.ConstraintOwnerImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getConstraintOwner()
+		 * @see org.eclipse.xtext.common.types.impl.JvmConstraintOwnerImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmConstraintOwner()
 		 * @generated
 		 */
-		EClass CONSTRAINT_OWNER = eINSTANCE.getConstraintOwner();
+		EClass JVM_CONSTRAINT_OWNER = eINSTANCE.getJvmConstraintOwner();
 
 		/**
 		 * The meta object literal for the '<em><b>Constraints</b></em>' containment reference list feature.
@@ -2441,17 +2493,17 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference CONSTRAINT_OWNER__CONSTRAINTS = eINSTANCE.getConstraintOwner_Constraints();
+		EReference JVM_CONSTRAINT_OWNER__CONSTRAINTS = eINSTANCE.getJvmConstraintOwner_Constraints();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.TypeConstraintImpl <em>Type Constraint</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeConstraintImpl <em>Jvm Type Constraint</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.TypeConstraintImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeConstraint()
+		 * @see org.eclipse.xtext.common.types.impl.JvmTypeConstraintImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmTypeConstraint()
 		 * @generated
 		 */
-		EClass TYPE_CONSTRAINT = eINSTANCE.getTypeConstraint();
+		EClass JVM_TYPE_CONSTRAINT = eINSTANCE.getJvmTypeConstraint();
 
 		/**
 		 * The meta object literal for the '<em><b>Type Reference</b></em>' containment reference feature.
@@ -2459,7 +2511,7 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TYPE_CONSTRAINT__TYPE_REFERENCE = eINSTANCE.getTypeConstraint_TypeReference();
+		EReference JVM_TYPE_CONSTRAINT__TYPE_REFERENCE = eINSTANCE.getJvmTypeConstraint_TypeReference();
 
 		/**
 		 * The meta object literal for the '<em><b>Owner</b></em>' container reference feature.
@@ -2467,57 +2519,57 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TYPE_CONSTRAINT__OWNER = eINSTANCE.getTypeConstraint_Owner();
+		EReference JVM_TYPE_CONSTRAINT__OWNER = eINSTANCE.getJvmTypeConstraint_Owner();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.UpperBoundImpl <em>Upper Bound</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmUpperBoundImpl <em>Jvm Upper Bound</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.UpperBoundImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getUpperBound()
+		 * @see org.eclipse.xtext.common.types.impl.JvmUpperBoundImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmUpperBound()
 		 * @generated
 		 */
-		EClass UPPER_BOUND = eINSTANCE.getUpperBound();
+		EClass JVM_UPPER_BOUND = eINSTANCE.getJvmUpperBound();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.LowerBoundImpl <em>Lower Bound</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmLowerBoundImpl <em>Jvm Lower Bound</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.LowerBoundImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getLowerBound()
+		 * @see org.eclipse.xtext.common.types.impl.JvmLowerBoundImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmLowerBound()
 		 * @generated
 		 */
-		EClass LOWER_BOUND = eINSTANCE.getLowerBound();
+		EClass JVM_LOWER_BOUND = eINSTANCE.getJvmLowerBound();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.AnnotationTypeImpl <em>Annotation Type</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl <em>Jvm Annotation Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.AnnotationTypeImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getAnnotationType()
+		 * @see org.eclipse.xtext.common.types.impl.JvmAnnotationTypeImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnnotationType()
 		 * @generated
 		 */
-		EClass ANNOTATION_TYPE = eINSTANCE.getAnnotationType();
+		EClass JVM_ANNOTATION_TYPE = eINSTANCE.getJvmAnnotationType();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.EnumerationTypeImpl <em>Enumeration Type</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmEnumerationTypeImpl <em>Jvm Enumeration Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.EnumerationTypeImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getEnumerationType()
+		 * @see org.eclipse.xtext.common.types.impl.JvmEnumerationTypeImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmEnumerationType()
 		 * @generated
 		 */
-		EClass ENUMERATION_TYPE = eINSTANCE.getEnumerationType();
+		EClass JVM_ENUMERATION_TYPE = eINSTANCE.getJvmEnumerationType();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.GenericTypeImpl <em>Generic Type</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl <em>Jvm Generic Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.GenericTypeImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getGenericType()
+		 * @see org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmGenericType()
 		 * @generated
 		 */
-		EClass GENERIC_TYPE = eINSTANCE.getGenericType();
+		EClass JVM_GENERIC_TYPE = eINSTANCE.getJvmGenericType();
 
 		/**
 		 * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
@@ -2525,7 +2577,7 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute GENERIC_TYPE__ABSTRACT = eINSTANCE.getGenericType_Abstract();
+		EAttribute JVM_GENERIC_TYPE__ABSTRACT = eINSTANCE.getJvmGenericType_Abstract();
 
 		/**
 		 * The meta object literal for the '<em><b>Interface</b></em>' attribute feature.
@@ -2533,7 +2585,7 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute GENERIC_TYPE__INTERFACE = eINSTANCE.getGenericType_Interface();
+		EAttribute JVM_GENERIC_TYPE__INTERFACE = eINSTANCE.getJvmGenericType_Interface();
 
 		/**
 		 * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
@@ -2541,7 +2593,7 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute GENERIC_TYPE__STATIC = eINSTANCE.getGenericType_Static();
+		EAttribute JVM_GENERIC_TYPE__STATIC = eINSTANCE.getJvmGenericType_Static();
 
 		/**
 		 * The meta object literal for the '<em><b>Final</b></em>' attribute feature.
@@ -2549,27 +2601,27 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute GENERIC_TYPE__FINAL = eINSTANCE.getGenericType_Final();
+		EAttribute JVM_GENERIC_TYPE__FINAL = eINSTANCE.getJvmGenericType_Final();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.TypeReferenceImpl <em>Type Reference</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeReferenceImpl <em>Jvm Type Reference</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.TypeReferenceImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeReference()
+		 * @see org.eclipse.xtext.common.types.impl.JvmTypeReferenceImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmTypeReference()
 		 * @generated
 		 */
-		EClass TYPE_REFERENCE = eINSTANCE.getTypeReference();
+		EClass JVM_TYPE_REFERENCE = eINSTANCE.getJvmTypeReference();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.ParameterizedTypeReferenceImpl <em>Parameterized Type Reference</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmParameterizedTypeReferenceImpl <em>Jvm Parameterized Type Reference</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.ParameterizedTypeReferenceImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getParameterizedTypeReference()
+		 * @see org.eclipse.xtext.common.types.impl.JvmParameterizedTypeReferenceImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmParameterizedTypeReference()
 		 * @generated
 		 */
-		EClass PARAMETERIZED_TYPE_REFERENCE = eINSTANCE.getParameterizedTypeReference();
+		EClass JVM_PARAMETERIZED_TYPE_REFERENCE = eINSTANCE.getJvmParameterizedTypeReference();
 
 		/**
 		 * The meta object literal for the '<em><b>Arguments</b></em>' containment reference list feature.
@@ -2577,7 +2629,7 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS = eINSTANCE.getParameterizedTypeReference_Arguments();
+		EReference JVM_PARAMETERIZED_TYPE_REFERENCE__ARGUMENTS = eINSTANCE.getJvmParameterizedTypeReference_Arguments();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' reference feature.
@@ -2585,17 +2637,17 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference PARAMETERIZED_TYPE_REFERENCE__TYPE = eINSTANCE.getParameterizedTypeReference_Type();
+		EReference JVM_PARAMETERIZED_TYPE_REFERENCE__TYPE = eINSTANCE.getJvmParameterizedTypeReference_Type();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.GenericArrayTypeReferenceImpl <em>Generic Array Type Reference</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmGenericArrayTypeReferenceImpl <em>Jvm Generic Array Type Reference</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.GenericArrayTypeReferenceImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getGenericArrayTypeReference()
+		 * @see org.eclipse.xtext.common.types.impl.JvmGenericArrayTypeReferenceImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmGenericArrayTypeReference()
 		 * @generated
 		 */
-		EClass GENERIC_ARRAY_TYPE_REFERENCE = eINSTANCE.getGenericArrayTypeReference();
+		EClass JVM_GENERIC_ARRAY_TYPE_REFERENCE = eINSTANCE.getJvmGenericArrayTypeReference();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
@@ -2603,17 +2655,17 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference GENERIC_ARRAY_TYPE_REFERENCE__TYPE = eINSTANCE.getGenericArrayTypeReference_Type();
+		EReference JVM_GENERIC_ARRAY_TYPE_REFERENCE__TYPE = eINSTANCE.getJvmGenericArrayTypeReference_Type();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.TypeArgumentImpl <em>Type Argument</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeArgumentImpl <em>Jvm Type Argument</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.TypeArgumentImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeArgument()
+		 * @see org.eclipse.xtext.common.types.impl.JvmTypeArgumentImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmTypeArgument()
 		 * @generated
 		 */
-		EClass TYPE_ARGUMENT = eINSTANCE.getTypeArgument();
+		EClass JVM_TYPE_ARGUMENT = eINSTANCE.getJvmTypeArgument();
 
 		/**
 		 * The meta object literal for the '<em><b>Declarator</b></em>' container reference feature.
@@ -2621,27 +2673,27 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference TYPE_ARGUMENT__DECLARATOR = eINSTANCE.getTypeArgument_Declarator();
+		EReference JVM_TYPE_ARGUMENT__DECLARATOR = eINSTANCE.getJvmTypeArgument_Declarator();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.WildcardTypeArgumentImpl <em>Wildcard Type Argument</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmWildcardTypeArgumentImpl <em>Jvm Wildcard Type Argument</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.WildcardTypeArgumentImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getWildcardTypeArgument()
+		 * @see org.eclipse.xtext.common.types.impl.JvmWildcardTypeArgumentImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmWildcardTypeArgument()
 		 * @generated
 		 */
-		EClass WILDCARD_TYPE_ARGUMENT = eINSTANCE.getWildcardTypeArgument();
+		EClass JVM_WILDCARD_TYPE_ARGUMENT = eINSTANCE.getJvmWildcardTypeArgument();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.ReferenceTypeArgumentImpl <em>Reference Type Argument</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmReferenceTypeArgumentImpl <em>Jvm Reference Type Argument</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.ReferenceTypeArgumentImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getReferenceTypeArgument()
+		 * @see org.eclipse.xtext.common.types.impl.JvmReferenceTypeArgumentImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmReferenceTypeArgument()
 		 * @generated
 		 */
-		EClass REFERENCE_TYPE_ARGUMENT = eINSTANCE.getReferenceTypeArgument();
+		EClass JVM_REFERENCE_TYPE_ARGUMENT = eINSTANCE.getJvmReferenceTypeArgument();
 
 		/**
 		 * The meta object literal for the '<em><b>Type Reference</b></em>' containment reference feature.
@@ -2649,43 +2701,17 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference REFERENCE_TYPE_ARGUMENT__TYPE_REFERENCE = eINSTANCE.getReferenceTypeArgument_TypeReference();
+		EReference JVM_REFERENCE_TYPE_ARGUMENT__TYPE_REFERENCE = eINSTANCE.getJvmReferenceTypeArgument_TypeReference();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.TypeParameterImpl <em>Type Parameter</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmMemberImpl <em>Jvm Member</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.TypeParameterImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getTypeParameter()
+		 * @see org.eclipse.xtext.common.types.impl.JvmMemberImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmMember()
 		 * @generated
 		 */
-		EClass TYPE_PARAMETER = eINSTANCE.getTypeParameter();
-
-		/**
-		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute TYPE_PARAMETER__NAME = eINSTANCE.getTypeParameter_Name();
-
-		/**
-		 * The meta object literal for the '<em><b>Declarator</b></em>' container reference feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EReference TYPE_PARAMETER__DECLARATOR = eINSTANCE.getTypeParameter_Declarator();
-
-		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.MemberImpl <em>Member</em>}' class.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.MemberImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getMember()
-		 * @generated
-		 */
-		EClass MEMBER = eINSTANCE.getMember();
+		EClass JVM_MEMBER = eINSTANCE.getJvmMember();
 
 		/**
 		 * The meta object literal for the '<em><b>Declaring Type</b></em>' container reference feature.
@@ -2693,7 +2719,7 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference MEMBER__DECLARING_TYPE = eINSTANCE.getMember_DeclaringType();
+		EReference JVM_MEMBER__DECLARING_TYPE = eINSTANCE.getJvmMember_DeclaringType();
 
 		/**
 		 * The meta object literal for the '<em><b>Visibility</b></em>' attribute feature.
@@ -2701,7 +2727,7 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MEMBER__VISIBILITY = eINSTANCE.getMember_Visibility();
+		EAttribute JVM_MEMBER__VISIBILITY = eINSTANCE.getJvmMember_Visibility();
 
 		/**
 		 * The meta object literal for the '<em><b>Fully Qualified Name</b></em>' attribute feature.
@@ -2709,17 +2735,27 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute MEMBER__FULLY_QUALIFIED_NAME = eINSTANCE.getMember_FullyQualifiedName();
+		EAttribute JVM_MEMBER__FULLY_QUALIFIED_NAME = eINSTANCE.getJvmMember_FullyQualifiedName();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.FieldImpl <em>Field</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmFeatureImpl <em>Jvm Feature</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.FieldImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getField()
+		 * @see org.eclipse.xtext.common.types.impl.JvmFeatureImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmFeature()
 		 * @generated
 		 */
-		EClass FIELD = eINSTANCE.getField();
+		EClass JVM_FEATURE = eINSTANCE.getJvmFeature();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmFieldImpl <em>Jvm Field</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmFieldImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmField()
+		 * @generated
+		 */
+		EClass JVM_FIELD = eINSTANCE.getJvmField();
 
 		/**
 		 * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
@@ -2727,7 +2763,7 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute FIELD__STATIC = eINSTANCE.getField_Static();
+		EAttribute JVM_FIELD__STATIC = eINSTANCE.getJvmField_Static();
 
 		/**
 		 * The meta object literal for the '<em><b>Final</b></em>' attribute feature.
@@ -2735,7 +2771,7 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute FIELD__FINAL = eINSTANCE.getField_Final();
+		EAttribute JVM_FIELD__FINAL = eINSTANCE.getJvmField_Final();
 
 		/**
 		 * The meta object literal for the '<em><b>Type</b></em>' containment reference feature.
@@ -2743,17 +2779,17 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FIELD__TYPE = eINSTANCE.getField_Type();
+		EReference JVM_FIELD__TYPE = eINSTANCE.getJvmField_Type();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.ExecutableImpl <em>Executable</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmExecutableImpl <em>Jvm Executable</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.ExecutableImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getExecutable()
+		 * @see org.eclipse.xtext.common.types.impl.JvmExecutableImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmExecutable()
 		 * @generated
 		 */
-		EClass EXECUTABLE = eINSTANCE.getExecutable();
+		EClass JVM_EXECUTABLE = eINSTANCE.getJvmExecutable();
 
 		/**
 		 * The meta object literal for the '<em><b>Parameters</b></em>' containment reference list feature.
@@ -2761,7 +2797,7 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EXECUTABLE__PARAMETERS = eINSTANCE.getExecutable_Parameters();
+		EReference JVM_EXECUTABLE__PARAMETERS = eINSTANCE.getJvmExecutable_Parameters();
 
 		/**
 		 * The meta object literal for the '<em><b>Exceptions</b></em>' containment reference list feature.
@@ -2769,27 +2805,27 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference EXECUTABLE__EXCEPTIONS = eINSTANCE.getExecutable_Exceptions();
+		EReference JVM_EXECUTABLE__EXCEPTIONS = eINSTANCE.getJvmExecutable_Exceptions();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.ConstructorImpl <em>Constructor</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmConstructorImpl <em>Jvm Constructor</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.ConstructorImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getConstructor()
+		 * @see org.eclipse.xtext.common.types.impl.JvmConstructorImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmConstructor()
 		 * @generated
 		 */
-		EClass CONSTRUCTOR = eINSTANCE.getConstructor();
+		EClass JVM_CONSTRUCTOR = eINSTANCE.getJvmConstructor();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.OperationImpl <em>Operation</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmOperationImpl <em>Jvm Operation</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.OperationImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getOperation()
+		 * @see org.eclipse.xtext.common.types.impl.JvmOperationImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmOperation()
 		 * @generated
 		 */
-		EClass OPERATION = eINSTANCE.getOperation();
+		EClass JVM_OPERATION = eINSTANCE.getJvmOperation();
 
 		/**
 		 * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
@@ -2797,7 +2833,7 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute OPERATION__STATIC = eINSTANCE.getOperation_Static();
+		EAttribute JVM_OPERATION__STATIC = eINSTANCE.getJvmOperation_Static();
 
 		/**
 		 * The meta object literal for the '<em><b>Final</b></em>' attribute feature.
@@ -2805,7 +2841,7 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute OPERATION__FINAL = eINSTANCE.getOperation_Final();
+		EAttribute JVM_OPERATION__FINAL = eINSTANCE.getJvmOperation_Final();
 
 		/**
 		 * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
@@ -2813,7 +2849,7 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute OPERATION__ABSTRACT = eINSTANCE.getOperation_Abstract();
+		EAttribute JVM_OPERATION__ABSTRACT = eINSTANCE.getJvmOperation_Abstract();
 
 		/**
 		 * The meta object literal for the '<em><b>Return Type</b></em>' containment reference feature.
@@ -2821,17 +2857,17 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference OPERATION__RETURN_TYPE = eINSTANCE.getOperation_ReturnType();
+		EReference JVM_OPERATION__RETURN_TYPE = eINSTANCE.getJvmOperation_ReturnType();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.FormalParameterImpl <em>Formal Parameter</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmFormalParameterImpl <em>Jvm Formal Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.FormalParameterImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getFormalParameter()
+		 * @see org.eclipse.xtext.common.types.impl.JvmFormalParameterImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmFormalParameter()
 		 * @generated
 		 */
-		EClass FORMAL_PARAMETER = eINSTANCE.getFormalParameter();
+		EClass JVM_FORMAL_PARAMETER = eINSTANCE.getJvmFormalParameter();
 
 		/**
 		 * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
@@ -2839,7 +2875,7 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EAttribute FORMAL_PARAMETER__NAME = eINSTANCE.getFormalParameter_Name();
+		EAttribute JVM_FORMAL_PARAMETER__NAME = eINSTANCE.getJvmFormalParameter_Name();
 
 		/**
 		 * The meta object literal for the '<em><b>Parameter Type</b></em>' containment reference feature.
@@ -2847,17 +2883,17 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference FORMAL_PARAMETER__PARAMETER_TYPE = eINSTANCE.getFormalParameter_ParameterType();
+		EReference JVM_FORMAL_PARAMETER__PARAMETER_TYPE = eINSTANCE.getJvmFormalParameter_ParameterType();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.AnnotationTargetImpl <em>Annotation Target</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmAnnotationTargetImpl <em>Jvm Annotation Target</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.AnnotationTargetImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getAnnotationTarget()
+		 * @see org.eclipse.xtext.common.types.impl.JvmAnnotationTargetImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnnotationTarget()
 		 * @generated
 		 */
-		EClass ANNOTATION_TARGET = eINSTANCE.getAnnotationTarget();
+		EClass JVM_ANNOTATION_TARGET = eINSTANCE.getJvmAnnotationTarget();
 
 		/**
 		 * The meta object literal for the '<em><b>Annotations</b></em>' containment reference list feature.
@@ -2865,17 +2901,17 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ANNOTATION_TARGET__ANNOTATIONS = eINSTANCE.getAnnotationTarget_Annotations();
+		EReference JVM_ANNOTATION_TARGET__ANNOTATIONS = eINSTANCE.getJvmAnnotationTarget_Annotations();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.AnnotationReferenceImpl <em>Annotation Reference</em>}' class.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmAnnotationReferenceImpl <em>Jvm Annotation Reference</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.impl.AnnotationReferenceImpl
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getAnnotationReference()
+		 * @see org.eclipse.xtext.common.types.impl.JvmAnnotationReferenceImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnnotationReference()
 		 * @generated
 		 */
-		EClass ANNOTATION_REFERENCE = eINSTANCE.getAnnotationReference();
+		EClass JVM_ANNOTATION_REFERENCE = eINSTANCE.getJvmAnnotationReference();
 
 		/**
 		 * The meta object literal for the '<em><b>Annotation</b></em>' reference feature.
@@ -2883,7 +2919,7 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ANNOTATION_REFERENCE__ANNOTATION = eINSTANCE.getAnnotationReference_Annotation();
+		EReference JVM_ANNOTATION_REFERENCE__ANNOTATION = eINSTANCE.getJvmAnnotationReference_Annotation();
 
 		/**
 		 * The meta object literal for the '<em><b>Target</b></em>' container reference feature.
@@ -2891,17 +2927,17 @@ public interface TypesPackage extends EPackage {
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
-		EReference ANNOTATION_REFERENCE__TARGET = eINSTANCE.getAnnotationReference_Target();
+		EReference JVM_ANNOTATION_REFERENCE__TARGET = eINSTANCE.getJvmAnnotationReference_Target();
 
 		/**
-		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.Visibility <em>Visibility</em>}' enum.
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.JvmVisibility <em>Jvm Visibility</em>}' enum.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
-		 * @see org.eclipse.xtext.common.types.Visibility
-		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getVisibility()
+		 * @see org.eclipse.xtext.common.types.JvmVisibility
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmVisibility()
 		 * @generated
 		 */
-		EEnum VISIBILITY = eINSTANCE.getVisibility();
+		EEnum JVM_VISIBILITY = eINSTANCE.getJvmVisibility();
 
 		/**
 		 * The meta object literal for the '<em>Iterable</em>' data type.

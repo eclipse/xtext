@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XFunctionTypeRef.java,v 1.2 2010/01/19 19:53:12 sefftinge Exp $
  */
 package org.eclipse.xtext.xtype;
 

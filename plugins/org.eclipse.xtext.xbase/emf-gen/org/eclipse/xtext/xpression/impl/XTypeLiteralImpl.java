@@ -2,7 +2,6 @@
  * <copyright>
  * </copyright>
  *
- * $Id: XTypeLiteralImpl.java,v 1.2 2010/01/19 19:53:09 sefftinge Exp $
  */
 package org.eclipse.xtext.xpression.impl;
 
@@ -13,7 +12,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmType;
 
 import org.eclipse.xtext.xpression.XTypeLiteral;
 import org.eclipse.xtext.xpression.XpressionPackage;
@@ -41,7 +40,7 @@ public class XTypeLiteralImpl extends XExpressionImpl implements XTypeLiteral
    * @generated
    * @ordered
    */
-  protected Type type;
+  protected JvmType type;
 
   /**
    * <!-- begin-user-doc -->
@@ -69,12 +68,12 @@ public class XTypeLiteralImpl extends XExpressionImpl implements XTypeLiteral
    * <!-- end-user-doc -->
    * @generated
    */
-  public Type getType()
+  public JvmType getType()
   {
     if (type != null && type.eIsProxy())
     {
       InternalEObject oldType = (InternalEObject)type;
-      type = (Type)eResolveProxy(oldType);
+      type = (JvmType)eResolveProxy(oldType);
       if (type != oldType)
       {
         if (eNotificationRequired())
@@ -89,7 +88,7 @@ public class XTypeLiteralImpl extends XExpressionImpl implements XTypeLiteral
    * <!-- end-user-doc -->
    * @generated
    */
-  public Type basicGetType()
+  public JvmType basicGetType()
   {
     return type;
   }
@@ -99,9 +98,9 @@ public class XTypeLiteralImpl extends XExpressionImpl implements XTypeLiteral
    * <!-- end-user-doc -->
    * @generated
    */
-  public void setType(Type newType)
+  public void setType(JvmType newType)
   {
-    Type oldType = type;
+    JvmType oldType = type;
     type = newType;
     if (eNotificationRequired())
       eNotify(new ENotificationImpl(this, Notification.SET, XpressionPackage.XTYPE_LITERAL__TYPE, oldType, type));
@@ -135,7 +134,7 @@ public class XTypeLiteralImpl extends XExpressionImpl implements XTypeLiteral
     switch (featureID)
     {
       case XpressionPackage.XTYPE_LITERAL__TYPE:
-        setType((Type)newValue);
+        setType((JvmType)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -152,7 +151,7 @@ public class XTypeLiteralImpl extends XExpressionImpl implements XTypeLiteral
     switch (featureID)
     {
       case XpressionPackage.XTYPE_LITERAL__TYPE:
-        setType((Type)null);
+        setType((JvmType)null);
         return;
     }
     super.eUnset(featureID);
