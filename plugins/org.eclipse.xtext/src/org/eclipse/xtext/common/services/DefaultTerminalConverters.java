@@ -51,12 +51,16 @@ public class DefaultTerminalConverters extends AbstractDeclarativeValueConverter
 		return new AbstractNullSafeConverter<String>() {
 			@Override
 			protected String internalToValue(String string, AbstractNode node) {
-				return Strings.convertFromJavaString(string.substring(1, string.length() - 1));
+				try {
+					return Strings.convertFromJavaString(string.substring(1, string.length() - 1), false);
+				} catch(IllegalArgumentException e) {
+					throw new ValueConverterException(e.getMessage(), node, e);
+				}
 			}
 
 			@Override
 			protected String internalToString(String value) {
-				return '"' + Strings.convertToJavaString(value) + '"';
+				return '"' + Strings.convertToJavaString(value, false) + '"';
 			}
 		};
 	}

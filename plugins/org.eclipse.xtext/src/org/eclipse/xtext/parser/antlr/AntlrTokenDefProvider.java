@@ -58,7 +58,7 @@ public class AntlrTokenDefProvider implements ITokenDefProvider {
 					if (!TOKEN_COUNT.equals(antlrTokenDef)) {
 						if (antlrTokenDef.startsWith("'")) {
 							antlrTokenDef = antlrTokenDef.substring(1, antlrTokenDef.length() - 1);
-							antlrTokenDef = Strings.convertFromJavaString(antlrTokenDef);
+							antlrTokenDef = Strings.convertFromJavaString(antlrTokenDef, true);
 							antlrTokenDef = "'" + antlrTokenDef + "'";
 						}
 						tokenDefMap.put(antlrTokenType, antlrTokenDef);
