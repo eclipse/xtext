@@ -109,7 +109,7 @@ public class Strings {
 	/**
 	 * Mostly copied from {@link java.util.Properties#loadConvert}
 	 */
-	public static String convertFromJavaString(String javaString) {
+	public static String convertFromJavaString(String javaString, boolean useUnicode) {
 		char[] in = javaString.toCharArray();
 		int off = 0;
 		int len = javaString.length();
@@ -123,7 +123,7 @@ public class Strings {
 			aChar = in[off++];
 			if (aChar == '\\') {
 				aChar = in[off++];
-				if (aChar == 'u') {
+				if (useUnicode && aChar == 'u') {
 					// Read the xxxx
 					int value = 0;
 					for (int i = 0; i < 4; i++) {
@@ -176,8 +176,12 @@ public class Strings {
 						aChar = '\b';
 					else if (aChar == '"')
 						aChar = '\"';
-					else if (aChar == '\'')
+					else if (aChar == '\'') 
 						aChar = '\'';
+					else if (aChar == '\\') 
+						aChar = '\\';
+					else 
+						throw new IllegalArgumentException("Illegal escape character \\" + aChar);
 					out[outLen++] = aChar;
 				}
 			}
@@ -191,7 +195,7 @@ public class Strings {
 	/**
 	 * Mostly copied from {@link java.util.Properties#saveConvert}
 	 */
-	public static String convertToJavaString(String theString) {
+	public static String convertToJavaString(String theString, boolean useUnicode) {
 		int len = theString.length();
 		int bufLen = len * 2;
 		if (bufLen < 0) {
@@ -245,7 +249,7 @@ public class Strings {
 					outBuffer.append('"');
 					break;
 				default:
-					if ((aChar < 0x0020) || (aChar > 0x007e)) {
+					if (useUnicode && ((aChar < 0x0020) || (aChar > 0x007e))) {
 						outBuffer.append('\\');
 						outBuffer.append('u');
 						outBuffer.append(toHex((aChar >> 12) & 0xF));

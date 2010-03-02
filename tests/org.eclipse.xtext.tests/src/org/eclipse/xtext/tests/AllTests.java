@@ -198,6 +198,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.valueconverter.Bug250313AntlrTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.Bug250313PackratTest.class);
       suite.addTestSuite(org.eclipse.xtext.valueconverter.ParserComparingTest.class);
+      suite.addTestSuite(org.eclipse.xtext.valueconverter.StringConverterTest.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.Bug285605Test.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.Bug290919Test.class);
       suite.addTestSuite(org.eclipse.xtext.xtext.ExceptionTest.class);
