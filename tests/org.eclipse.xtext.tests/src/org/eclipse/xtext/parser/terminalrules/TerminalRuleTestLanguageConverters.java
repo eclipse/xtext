@@ -43,12 +43,12 @@ public class TerminalRuleTestLanguageConverters extends AbstractDeclarativeValue
 		return new AbstractNullSafeConverter<String>() {
 			@Override
 			protected String internalToValue(String string, AbstractNode node) {
-				return Strings.convertFromJavaString(string.substring(1, string.length() - 1));
+				return Strings.convertFromJavaString(string.substring(1, string.length() - 1), false);
 			}
 
 			@Override
 			protected String internalToString(String value) {
-				return '"' + Strings.convertToJavaString(value) + '"';
+				return '"' + Strings.convertToJavaString(value, false) + '"';
 			}
 		};
 	}
