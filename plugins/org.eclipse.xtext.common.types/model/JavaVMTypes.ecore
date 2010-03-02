@@ -97,7 +97,9 @@
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="visibility" eType="#//JvmVisibility"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="fullyQualifiedName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="JvmFeature" abstract="true" eSuperTypes="#//JvmIdentifyableElement"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmFeature" abstract="true" eSuperTypes="#//JvmIdentifyableElement">
+    <eOperations name="getSimpleName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EEnum" name="JvmVisibility">
     <eLiterals name="DEFAULT"/>
     <eLiterals name="PRIVATE" value="1"/>

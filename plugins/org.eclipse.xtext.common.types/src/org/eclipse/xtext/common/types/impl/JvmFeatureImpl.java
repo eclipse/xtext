@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JvmFeatureImpl.java,v 1.1 2010/03/02 14:52:37 szarnekow Exp $
+ * $Id: JvmFeatureImpl.java,v 1.2 2010/03/02 15:28:09 sefftinge Exp $
  */
 package org.eclipse.xtext.common.types.impl;
 
@@ -38,6 +38,17 @@ public abstract class JvmFeatureImpl extends JvmIdentifyableElementImpl implemen
 	@Override
 	protected EClass eStaticClass() {
 		return TypesPackage.Literals.JVM_FEATURE;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public String getSimpleName() {
+		// TODO: implement this method
+		// Ensure that you remove @generated or mark it @generated NOT
+		throw new UnsupportedOperationException();
 	}
 
 } //JvmFeatureImpl
