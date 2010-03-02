@@ -1,10 +1,9 @@
-/*******************************************************************************
- * Copyright (c) 2009 itemis AG (http://www.itemis.eu) and others.
- * All rights reserved. This program and the accompanying materials
- * are made available under the terms of the Eclipse Public License v1.0
- * which accompanies this distribution, and is available at
- * http://www.eclipse.org/legal/epl-v10.html
- *******************************************************************************/
+/**
+ * <copyright>
+ * </copyright>
+ *
+ * $Id: TypesItemProviderAdapterFactory.java,v 1.4 2010/03/02 14:52:55 szarnekow Exp $
+ */
 package org.eclipse.xtext.common.types.provider;
 
 import java.util.ArrayList;
@@ -77,417 +76,417 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.Void} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmVoid} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected VoidItemProvider voidItemProvider;
+	protected JvmVoidItemProvider jvmVoidItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.Void}.
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmVoid}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createVoidAdapter() {
-		if (voidItemProvider == null) {
-			voidItemProvider = new VoidItemProvider(this);
+	public Adapter createJvmVoidAdapter() {
+		if (jvmVoidItemProvider == null) {
+			jvmVoidItemProvider = new JvmVoidItemProvider(this);
 		}
 
-		return voidItemProvider;
+		return jvmVoidItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.PrimitiveType} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmPrimitiveType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected PrimitiveTypeItemProvider primitiveTypeItemProvider;
+	protected JvmPrimitiveTypeItemProvider jvmPrimitiveTypeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.PrimitiveType}.
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmPrimitiveType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createPrimitiveTypeAdapter() {
-		if (primitiveTypeItemProvider == null) {
-			primitiveTypeItemProvider = new PrimitiveTypeItemProvider(this);
+	public Adapter createJvmPrimitiveTypeAdapter() {
+		if (jvmPrimitiveTypeItemProvider == null) {
+			jvmPrimitiveTypeItemProvider = new JvmPrimitiveTypeItemProvider(this);
 		}
 
-		return primitiveTypeItemProvider;
+		return jvmPrimitiveTypeItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.ArrayType} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmArrayType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ArrayTypeItemProvider arrayTypeItemProvider;
+	protected JvmArrayTypeItemProvider jvmArrayTypeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.ArrayType}.
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmArrayType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createArrayTypeAdapter() {
-		if (arrayTypeItemProvider == null) {
-			arrayTypeItemProvider = new ArrayTypeItemProvider(this);
+	public Adapter createJvmArrayTypeAdapter() {
+		if (jvmArrayTypeItemProvider == null) {
+			jvmArrayTypeItemProvider = new JvmArrayTypeItemProvider(this);
 		}
 
-		return arrayTypeItemProvider;
+		return jvmArrayTypeItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.TypeParameter} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmTypeParameter} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected TypeParameterItemProvider typeParameterItemProvider;
+	protected JvmTypeParameterItemProvider jvmTypeParameterItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.TypeParameter}.
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmTypeParameter}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createTypeParameterAdapter() {
-		if (typeParameterItemProvider == null) {
-			typeParameterItemProvider = new TypeParameterItemProvider(this);
+	public Adapter createJvmTypeParameterAdapter() {
+		if (jvmTypeParameterItemProvider == null) {
+			jvmTypeParameterItemProvider = new JvmTypeParameterItemProvider(this);
 		}
 
-		return typeParameterItemProvider;
+		return jvmTypeParameterItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.UpperBound} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmUpperBound} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected UpperBoundItemProvider upperBoundItemProvider;
+	protected JvmUpperBoundItemProvider jvmUpperBoundItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.UpperBound}.
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmUpperBound}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createUpperBoundAdapter() {
-		if (upperBoundItemProvider == null) {
-			upperBoundItemProvider = new UpperBoundItemProvider(this);
+	public Adapter createJvmUpperBoundAdapter() {
+		if (jvmUpperBoundItemProvider == null) {
+			jvmUpperBoundItemProvider = new JvmUpperBoundItemProvider(this);
 		}
 
-		return upperBoundItemProvider;
+		return jvmUpperBoundItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.LowerBound} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmLowerBound} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected LowerBoundItemProvider lowerBoundItemProvider;
+	protected JvmLowerBoundItemProvider jvmLowerBoundItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.LowerBound}.
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmLowerBound}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createLowerBoundAdapter() {
-		if (lowerBoundItemProvider == null) {
-			lowerBoundItemProvider = new LowerBoundItemProvider(this);
+	public Adapter createJvmLowerBoundAdapter() {
+		if (jvmLowerBoundItemProvider == null) {
+			jvmLowerBoundItemProvider = new JvmLowerBoundItemProvider(this);
 		}
 
-		return lowerBoundItemProvider;
+		return jvmLowerBoundItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.AnnotationType} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmAnnotationType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected AnnotationTypeItemProvider annotationTypeItemProvider;
+	protected JvmAnnotationTypeItemProvider jvmAnnotationTypeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.AnnotationType}.
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmAnnotationType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createAnnotationTypeAdapter() {
-		if (annotationTypeItemProvider == null) {
-			annotationTypeItemProvider = new AnnotationTypeItemProvider(this);
+	public Adapter createJvmAnnotationTypeAdapter() {
+		if (jvmAnnotationTypeItemProvider == null) {
+			jvmAnnotationTypeItemProvider = new JvmAnnotationTypeItemProvider(this);
 		}
 
-		return annotationTypeItemProvider;
+		return jvmAnnotationTypeItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.EnumerationType} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmEnumerationType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected EnumerationTypeItemProvider enumerationTypeItemProvider;
+	protected JvmEnumerationTypeItemProvider jvmEnumerationTypeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.EnumerationType}.
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmEnumerationType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createEnumerationTypeAdapter() {
-		if (enumerationTypeItemProvider == null) {
-			enumerationTypeItemProvider = new EnumerationTypeItemProvider(this);
+	public Adapter createJvmEnumerationTypeAdapter() {
+		if (jvmEnumerationTypeItemProvider == null) {
+			jvmEnumerationTypeItemProvider = new JvmEnumerationTypeItemProvider(this);
 		}
 
-		return enumerationTypeItemProvider;
+		return jvmEnumerationTypeItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.GenericType} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmGenericType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected GenericTypeItemProvider genericTypeItemProvider;
+	protected JvmGenericTypeItemProvider jvmGenericTypeItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.GenericType}.
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmGenericType}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createGenericTypeAdapter() {
-		if (genericTypeItemProvider == null) {
-			genericTypeItemProvider = new GenericTypeItemProvider(this);
+	public Adapter createJvmGenericTypeAdapter() {
+		if (jvmGenericTypeItemProvider == null) {
+			jvmGenericTypeItemProvider = new JvmGenericTypeItemProvider(this);
 		}
 
-		return genericTypeItemProvider;
+		return jvmGenericTypeItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.ParameterizedTypeReference} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmParameterizedTypeReference} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ParameterizedTypeReferenceItemProvider parameterizedTypeReferenceItemProvider;
+	protected JvmParameterizedTypeReferenceItemProvider jvmParameterizedTypeReferenceItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.ParameterizedTypeReference}.
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmParameterizedTypeReference}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createParameterizedTypeReferenceAdapter() {
-		if (parameterizedTypeReferenceItemProvider == null) {
-			parameterizedTypeReferenceItemProvider = new ParameterizedTypeReferenceItemProvider(this);
+	public Adapter createJvmParameterizedTypeReferenceAdapter() {
+		if (jvmParameterizedTypeReferenceItemProvider == null) {
+			jvmParameterizedTypeReferenceItemProvider = new JvmParameterizedTypeReferenceItemProvider(this);
 		}
 
-		return parameterizedTypeReferenceItemProvider;
+		return jvmParameterizedTypeReferenceItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.GenericArrayTypeReference} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmGenericArrayTypeReference} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected GenericArrayTypeReferenceItemProvider genericArrayTypeReferenceItemProvider;
+	protected JvmGenericArrayTypeReferenceItemProvider jvmGenericArrayTypeReferenceItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.GenericArrayTypeReference}.
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmGenericArrayTypeReference}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createGenericArrayTypeReferenceAdapter() {
-		if (genericArrayTypeReferenceItemProvider == null) {
-			genericArrayTypeReferenceItemProvider = new GenericArrayTypeReferenceItemProvider(this);
+	public Adapter createJvmGenericArrayTypeReferenceAdapter() {
+		if (jvmGenericArrayTypeReferenceItemProvider == null) {
+			jvmGenericArrayTypeReferenceItemProvider = new JvmGenericArrayTypeReferenceItemProvider(this);
 		}
 
-		return genericArrayTypeReferenceItemProvider;
+		return jvmGenericArrayTypeReferenceItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.WildcardTypeArgument} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmWildcardTypeArgument} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected WildcardTypeArgumentItemProvider wildcardTypeArgumentItemProvider;
+	protected JvmWildcardTypeArgumentItemProvider jvmWildcardTypeArgumentItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.WildcardTypeArgument}.
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmWildcardTypeArgument}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createWildcardTypeArgumentAdapter() {
-		if (wildcardTypeArgumentItemProvider == null) {
-			wildcardTypeArgumentItemProvider = new WildcardTypeArgumentItemProvider(this);
+	public Adapter createJvmWildcardTypeArgumentAdapter() {
+		if (jvmWildcardTypeArgumentItemProvider == null) {
+			jvmWildcardTypeArgumentItemProvider = new JvmWildcardTypeArgumentItemProvider(this);
 		}
 
-		return wildcardTypeArgumentItemProvider;
+		return jvmWildcardTypeArgumentItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.ReferenceTypeArgument} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmReferenceTypeArgument} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ReferenceTypeArgumentItemProvider referenceTypeArgumentItemProvider;
+	protected JvmReferenceTypeArgumentItemProvider jvmReferenceTypeArgumentItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.ReferenceTypeArgument}.
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmReferenceTypeArgument}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createReferenceTypeArgumentAdapter() {
-		if (referenceTypeArgumentItemProvider == null) {
-			referenceTypeArgumentItemProvider = new ReferenceTypeArgumentItemProvider(this);
+	public Adapter createJvmReferenceTypeArgumentAdapter() {
+		if (jvmReferenceTypeArgumentItemProvider == null) {
+			jvmReferenceTypeArgumentItemProvider = new JvmReferenceTypeArgumentItemProvider(this);
 		}
 
-		return referenceTypeArgumentItemProvider;
+		return jvmReferenceTypeArgumentItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.Field} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmField} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected FieldItemProvider fieldItemProvider;
+	protected JvmFieldItemProvider jvmFieldItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.Field}.
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmField}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createFieldAdapter() {
-		if (fieldItemProvider == null) {
-			fieldItemProvider = new FieldItemProvider(this);
+	public Adapter createJvmFieldAdapter() {
+		if (jvmFieldItemProvider == null) {
+			jvmFieldItemProvider = new JvmFieldItemProvider(this);
 		}
 
-		return fieldItemProvider;
+		return jvmFieldItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.Constructor} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmConstructor} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected ConstructorItemProvider constructorItemProvider;
+	protected JvmConstructorItemProvider jvmConstructorItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.Constructor}.
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmConstructor}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createConstructorAdapter() {
-		if (constructorItemProvider == null) {
-			constructorItemProvider = new ConstructorItemProvider(this);
+	public Adapter createJvmConstructorAdapter() {
+		if (jvmConstructorItemProvider == null) {
+			jvmConstructorItemProvider = new JvmConstructorItemProvider(this);
 		}
 
-		return constructorItemProvider;
+		return jvmConstructorItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.Operation} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmOperation} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected OperationItemProvider operationItemProvider;
+	protected JvmOperationItemProvider jvmOperationItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.Operation}.
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmOperation}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createOperationAdapter() {
-		if (operationItemProvider == null) {
-			operationItemProvider = new OperationItemProvider(this);
+	public Adapter createJvmOperationAdapter() {
+		if (jvmOperationItemProvider == null) {
+			jvmOperationItemProvider = new JvmOperationItemProvider(this);
 		}
 
-		return operationItemProvider;
+		return jvmOperationItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.FormalParameter} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmFormalParameter} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected FormalParameterItemProvider formalParameterItemProvider;
+	protected JvmFormalParameterItemProvider jvmFormalParameterItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.FormalParameter}.
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmFormalParameter}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createFormalParameterAdapter() {
-		if (formalParameterItemProvider == null) {
-			formalParameterItemProvider = new FormalParameterItemProvider(this);
+	public Adapter createJvmFormalParameterAdapter() {
+		if (jvmFormalParameterItemProvider == null) {
+			jvmFormalParameterItemProvider = new JvmFormalParameterItemProvider(this);
 		}
 
-		return formalParameterItemProvider;
+		return jvmFormalParameterItemProvider;
 	}
 
 	/**
-	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.AnnotationReference} instances.
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmAnnotationReference} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected AnnotationReferenceItemProvider annotationReferenceItemProvider;
+	protected JvmAnnotationReferenceItemProvider jvmAnnotationReferenceItemProvider;
 
 	/**
-	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.AnnotationReference}.
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmAnnotationReference}.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
-	public Adapter createAnnotationReferenceAdapter() {
-		if (annotationReferenceItemProvider == null) {
-			annotationReferenceItemProvider = new AnnotationReferenceItemProvider(this);
+	public Adapter createJvmAnnotationReferenceAdapter() {
+		if (jvmAnnotationReferenceItemProvider == null) {
+			jvmAnnotationReferenceItemProvider = new JvmAnnotationReferenceItemProvider(this);
 		}
 
-		return annotationReferenceItemProvider;
+		return jvmAnnotationReferenceItemProvider;
 	}
 
 	/**
@@ -589,24 +588,24 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	 * @generated
 	 */
 	public void dispose() {
-		if (voidItemProvider != null) voidItemProvider.dispose();
-		if (primitiveTypeItemProvider != null) primitiveTypeItemProvider.dispose();
-		if (arrayTypeItemProvider != null) arrayTypeItemProvider.dispose();
-		if (typeParameterItemProvider != null) typeParameterItemProvider.dispose();
-		if (upperBoundItemProvider != null) upperBoundItemProvider.dispose();
-		if (lowerBoundItemProvider != null) lowerBoundItemProvider.dispose();
-		if (annotationTypeItemProvider != null) annotationTypeItemProvider.dispose();
-		if (enumerationTypeItemProvider != null) enumerationTypeItemProvider.dispose();
-		if (genericTypeItemProvider != null) genericTypeItemProvider.dispose();
-		if (parameterizedTypeReferenceItemProvider != null) parameterizedTypeReferenceItemProvider.dispose();
-		if (genericArrayTypeReferenceItemProvider != null) genericArrayTypeReferenceItemProvider.dispose();
-		if (wildcardTypeArgumentItemProvider != null) wildcardTypeArgumentItemProvider.dispose();
-		if (referenceTypeArgumentItemProvider != null) referenceTypeArgumentItemProvider.dispose();
-		if (fieldItemProvider != null) fieldItemProvider.dispose();
-		if (constructorItemProvider != null) constructorItemProvider.dispose();
-		if (operationItemProvider != null) operationItemProvider.dispose();
-		if (formalParameterItemProvider != null) formalParameterItemProvider.dispose();
-		if (annotationReferenceItemProvider != null) annotationReferenceItemProvider.dispose();
+		if (jvmVoidItemProvider != null) jvmVoidItemProvider.dispose();
+		if (jvmPrimitiveTypeItemProvider != null) jvmPrimitiveTypeItemProvider.dispose();
+		if (jvmArrayTypeItemProvider != null) jvmArrayTypeItemProvider.dispose();
+		if (jvmTypeParameterItemProvider != null) jvmTypeParameterItemProvider.dispose();
+		if (jvmUpperBoundItemProvider != null) jvmUpperBoundItemProvider.dispose();
+		if (jvmLowerBoundItemProvider != null) jvmLowerBoundItemProvider.dispose();
+		if (jvmAnnotationTypeItemProvider != null) jvmAnnotationTypeItemProvider.dispose();
+		if (jvmEnumerationTypeItemProvider != null) jvmEnumerationTypeItemProvider.dispose();
+		if (jvmGenericTypeItemProvider != null) jvmGenericTypeItemProvider.dispose();
+		if (jvmParameterizedTypeReferenceItemProvider != null) jvmParameterizedTypeReferenceItemProvider.dispose();
+		if (jvmGenericArrayTypeReferenceItemProvider != null) jvmGenericArrayTypeReferenceItemProvider.dispose();
+		if (jvmWildcardTypeArgumentItemProvider != null) jvmWildcardTypeArgumentItemProvider.dispose();
+		if (jvmReferenceTypeArgumentItemProvider != null) jvmReferenceTypeArgumentItemProvider.dispose();
+		if (jvmFieldItemProvider != null) jvmFieldItemProvider.dispose();
+		if (jvmConstructorItemProvider != null) jvmConstructorItemProvider.dispose();
+		if (jvmOperationItemProvider != null) jvmOperationItemProvider.dispose();
+		if (jvmFormalParameterItemProvider != null) jvmFormalParameterItemProvider.dispose();
+		if (jvmAnnotationReferenceItemProvider != null) jvmAnnotationReferenceItemProvider.dispose();
 	}
 
 }

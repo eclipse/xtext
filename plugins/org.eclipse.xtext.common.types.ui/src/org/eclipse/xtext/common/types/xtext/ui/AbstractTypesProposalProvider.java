@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.xtext.ui;
 
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalFactory;
@@ -22,7 +22,7 @@ public abstract class AbstractTypesProposalProvider implements ITypesProposalPro
 		createTypeProposals(proposalFactory, context, TypeMatchFilters.all(), acceptor);
 	}
 	
-	public void createSubTypeProposals(Type superType, ICompletionProposalFactory proposalFactory,
+	public void createSubTypeProposals(JvmType superType, ICompletionProposalFactory proposalFactory,
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		createSubTypeProposals(superType, proposalFactory, context, TypeMatchFilters.all(), acceptor);
 	}

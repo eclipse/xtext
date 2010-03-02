@@ -14,7 +14,7 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.ITypeProvider;
 
 import com.google.common.collect.ImmutableSet;
@@ -41,21 +41,21 @@ public abstract class AbstractSuperTypeCollectorTest extends TestCase {
 	}
 	
 	public void testObject() {
-		Type objectType = getTypeProvider().findTypeByName(Object.class.getName());
+		JvmType objectType = getTypeProvider().findTypeByName(Object.class.getName());
 		Collection<String> collected = collector.collectSuperTypeNames(objectType);
 		assertNotNull(collected);
 		assertTrue(collected.toString(), collected.isEmpty());
 	}
 	
 	public void testSerializable() {
-		Type objectType = getTypeProvider().findTypeByName(Serializable.class.getName());
+		JvmType objectType = getTypeProvider().findTypeByName(Serializable.class.getName());
 		Collection<String> collected = collector.collectSuperTypeNames(objectType);
 		assertNotNull(collected);
 		assertTrue(collected.isEmpty());
 	}
 	
 	public void testString() {
-		Type objectType = getTypeProvider().findTypeByName(String.class.getName());
+		JvmType objectType = getTypeProvider().findTypeByName(String.class.getName());
 		Collection<String> collected = collector.collectSuperTypeNames(objectType);
 		assertNotNull(collected);
 		assertEquals(collected.toString(), ImmutableSet.of(
@@ -66,7 +66,7 @@ public abstract class AbstractSuperTypeCollectorTest extends TestCase {
 	}
 	
 	public void testCollections() {
-		Type objectType = getTypeProvider().findTypeByName(Collections.class.getName());
+		JvmType objectType = getTypeProvider().findTypeByName(Collections.class.getName());
 		Collection<String> collected = collector.collectSuperTypeNames(objectType);
 		assertNotNull(collected);
 		assertEquals(collected.toString(), ImmutableSet.of(
@@ -74,7 +74,7 @@ public abstract class AbstractSuperTypeCollectorTest extends TestCase {
 	}
 	
 	public void testCollection() {
-		Type objectType = getTypeProvider().findTypeByName(Collection.class.getName());
+		JvmType objectType = getTypeProvider().findTypeByName(Collection.class.getName());
 		Collection<String> collected = collector.collectSuperTypeNames(objectType);
 		assertNotNull(collected);
 		assertEquals(collected.toString(), ImmutableSet.of(
@@ -82,7 +82,7 @@ public abstract class AbstractSuperTypeCollectorTest extends TestCase {
 	}
 	
 	public void testList() {
-		Type objectType = getTypeProvider().findTypeByName(List.class.getName());
+		JvmType objectType = getTypeProvider().findTypeByName(List.class.getName());
 		Collection<String> collected = collector.collectSuperTypeNames(objectType);
 		assertNotNull(collected);
 		assertEquals(collected.toString(), ImmutableSet.of(

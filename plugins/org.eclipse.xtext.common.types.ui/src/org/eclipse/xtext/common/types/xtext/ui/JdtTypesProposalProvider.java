@@ -21,8 +21,8 @@ import org.eclipse.jdt.core.search.SearchEngine;
 import org.eclipse.jdt.core.search.SearchPattern;
 import org.eclipse.jdt.core.search.TypeNameRequestor;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.xtext.common.types.GenericType;
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
@@ -42,12 +42,12 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 	@Inject
 	private IJavaProjectProvider projectProvider;
 	
-	public void createSubTypeProposals(Type superType, ICompletionProposalFactory proposalFactory, 
+	public void createSubTypeProposals(JvmType superType, ICompletionProposalFactory proposalFactory, 
 			ContentAssistContext context, Filter filter, ICompletionProposalAcceptor acceptor) {
 		if (superType == null || superType.eIsProxy())
 			return;
 		// final type
-		if (superType instanceof GenericType  && ((GenericType)superType).isFinal()) {
+		if (superType instanceof JvmGenericType  && ((JvmGenericType)superType).isFinal()) {
 			// ignore filter since this is the only possible proposal
 			createTypeProposal(superType.getCanonicalName(), proposalFactory, context, acceptor);
 			return;

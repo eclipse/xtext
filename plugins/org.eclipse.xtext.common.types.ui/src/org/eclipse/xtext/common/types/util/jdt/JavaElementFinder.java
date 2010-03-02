@@ -15,15 +15,15 @@ import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
-import org.eclipse.xtext.common.types.ArrayType;
-import org.eclipse.xtext.common.types.Constructor;
-import org.eclipse.xtext.common.types.DeclaredType;
-import org.eclipse.xtext.common.types.Field;
-import org.eclipse.xtext.common.types.FormalParameter;
-import org.eclipse.xtext.common.types.IdentifyableElement;
-import org.eclipse.xtext.common.types.Member;
-import org.eclipse.xtext.common.types.Operation;
-import org.eclipse.xtext.common.types.PrimitiveType;
+import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmConstructor;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmFormalParameter;
+import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.util.TypesSwitch;
 
@@ -37,7 +37,7 @@ public class JavaElementFinder implements IJavaElementFinder {
 	@Inject
 	private IJavaProjectProvider projectProvider;
 	
-	public IJavaElement findElementFor(IdentifyableElement element) {
+	public IJavaElement findElementFor(JvmIdentifyableElement element) {
 		if (element == null || element.eResource() == null)
 			return null;
 		Implementation implementation = new Implementation(projectProvider.getJavaProject(element.eResource().getResourceSet()));
@@ -61,24 +61,24 @@ public class JavaElementFinder implements IJavaElementFinder {
 		}
 
 		@Override
-		public IJavaElement casePrimitiveType(PrimitiveType object) {
+		public IJavaElement caseJvmPrimitiveType(JvmPrimitiveType object) {
 			return null;
 		}
 		
 		@Override
-		public IJavaElement caseArrayType(ArrayType object) {
+		public IJavaElement caseJvmArrayType(JvmArrayType object) {
 			return doSwitch(object.getComponentType());
 		}
 		
 		@Override
-		public IJavaElement caseMember(Member object) {
+		public IJavaElement caseJvmMember(JvmMember object) {
 			IJavaElement typeElement = doSwitch(object.getDeclaringType());
 			return typeElement;
 		}
 		
 		@Override
-		public IJavaElement caseField(Field object) {
-			IJavaElement parent = caseMember(object);
+		public IJavaElement caseJvmField(JvmField object) {
+			IJavaElement parent = caseJvmMember(object);
 			if (parent instanceof IType) {
 				IType type = (IType) parent;
 				IField result = type.getField(object.getSimpleName());
@@ -89,8 +89,8 @@ public class JavaElementFinder implements IJavaElementFinder {
 		}
 		
 		@Override
-		public IJavaElement caseOperation(Operation object) {
-			IJavaElement parent = caseMember(object);
+		public IJavaElement caseJvmOperation(JvmOperation object) {
+			IJavaElement parent = caseJvmMember(object);
 			if (parent instanceof IType) {
 				IType type = (IType) parent;
 				try {
@@ -101,7 +101,7 @@ public class JavaElementFinder implements IJavaElementFinder {
 								String[] parameterTypes = method.getParameterTypes();
 								boolean match = true;
 								for (int i = 0; i < numberOfParameters && match; i++) {
-									FormalParameter formalParameter = object.getParameters().get(i);
+									JvmFormalParameter formalParameter = object.getParameters().get(i);
 									String parameterType = parameterTypes[i];
 									String readable = Signature.toString(parameterType);
 									if (parameterType.startsWith("Q")) {
@@ -132,8 +132,8 @@ public class JavaElementFinder implements IJavaElementFinder {
 		}
 		
 		@Override
-		public IJavaElement caseConstructor(Constructor object) {
-			IJavaElement parent = caseMember(object);
+		public IJavaElement caseJvmConstructor(JvmConstructor object) {
+			IJavaElement parent = caseJvmMember(object);
 			if (parent instanceof IType) {
 				IType type = (IType) parent;
 				try {
@@ -143,7 +143,7 @@ public class JavaElementFinder implements IJavaElementFinder {
 							String[] parameterTypes = method.getParameterTypes();
 							boolean match = true;
 							for (int i = 0; i < numberOfParameters && match; i++) {
-								FormalParameter formalParameter = object.getParameters().get(i);
+								JvmFormalParameter formalParameter = object.getParameters().get(i);
 								String parameterType = parameterTypes[i];
 								String readable = Signature.toString(parameterType);
 								if (!readable.equals(formalParameter.getParameterType().getCanonicalName()))
@@ -162,7 +162,7 @@ public class JavaElementFinder implements IJavaElementFinder {
 		}
 		
 		@Override
-		public IJavaElement caseDeclaredType(DeclaredType object) {
+		public IJavaElement caseJvmDeclaredType(JvmDeclaredType object) {
 			try {
 				String fullyQualifiedName = object.getFullyQualifiedName();
 				IType result = javaProject.findType(fullyQualifiedName);

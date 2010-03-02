@@ -7,7 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.xtext.ui;
 
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalFactory;
@@ -24,9 +24,9 @@ public interface ITypesProposalProvider {
 	
 	void createTypeProposals(ICompletionProposalFactory proposalFactory, ContentAssistContext context, Filter filter, ICompletionProposalAcceptor acceptor);
 	
-	void createSubTypeProposals(Type superType, ICompletionProposalFactory proposalFactory, ContentAssistContext context, ICompletionProposalAcceptor acceptor);
+	void createSubTypeProposals(JvmType superType, ICompletionProposalFactory proposalFactory, ContentAssistContext context, ICompletionProposalAcceptor acceptor);
 	
-	void createSubTypeProposals(Type superType, ICompletionProposalFactory proposalFactory, ContentAssistContext context, Filter filter, ICompletionProposalAcceptor acceptor);
+	void createSubTypeProposals(JvmType superType, ICompletionProposalFactory proposalFactory, ContentAssistContext context, Filter filter, ICompletionProposalAcceptor acceptor);
 	
 	interface Filter {
 		boolean accept(int modifiers, char[] packageName, char[] simpleTypeName,
@@ -43,11 +43,11 @@ public interface ITypesProposalProvider {
 				Filter filter, ICompletionProposalAcceptor acceptor) {
 		}
 		
-		public void createSubTypeProposals(Type superType, ICompletionProposalFactory proposalFactory,
+		public void createSubTypeProposals(JvmType superType, ICompletionProposalFactory proposalFactory,
 				ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		}
 
-		public void createSubTypeProposals(Type superType, ICompletionProposalFactory proposalFactory,
+		public void createSubTypeProposals(JvmType superType, ICompletionProposalFactory proposalFactory,
 				ContentAssistContext context, Filter filter, ICompletionProposalAcceptor acceptor) {
 		}
 		

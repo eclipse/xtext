@@ -16,16 +16,16 @@ import junit.framework.TestCase;
 
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.common.types.ArrayType;
-import org.eclipse.xtext.common.types.GenericArrayTypeReference;
-import org.eclipse.xtext.common.types.LowerBound;
-import org.eclipse.xtext.common.types.ParameterizedTypeReference;
-import org.eclipse.xtext.common.types.ReferenceTypeArgument;
-import org.eclipse.xtext.common.types.TypeArgument;
-import org.eclipse.xtext.common.types.TypeReference;
+import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmGenericArrayTypeReference;
+import org.eclipse.xtext.common.types.JvmLowerBound;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmReferenceTypeArgument;
+import org.eclipse.xtext.common.types.JvmTypeArgument;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.UpperBound;
-import org.eclipse.xtext.common.types.WildcardTypeArgument;
+import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
 import org.eclipse.xtext.common.types.access.ITypeProvider;
 import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
 import org.eclipse.xtext.common.types.access.impl.DeclaredTypeFactory;
@@ -38,11 +38,11 @@ public abstract class AbstractAssignabilityComputerTest extends TestCase {
 	private AssignabilityComputer computer;
 	private DeclaredTypeFactory factory = new DeclaredTypeFactory(new ClassURIHelper());
 
-	protected TypeReference ref(java.lang.reflect.Type type, TypeArgument... arguments) {
-		TypeReference createTypeReference = factory.createTypeReference(type);
+	protected JvmTypeReference ref(java.lang.reflect.Type type, JvmTypeArgument... arguments) {
+		JvmTypeReference createTypeReference = factory.createTypeReference(type);
 		if (arguments.length > 0) {
-			for (TypeArgument typeArgument : arguments) {
-				((ParameterizedTypeReference) createTypeReference).getArguments().add(typeArgument);
+			for (JvmTypeArgument typeArgument : arguments) {
+				((JvmParameterizedTypeReference) createTypeReference).getArguments().add(typeArgument);
 			}
 		}
 		Resource syntheticResource = getSyntheticResource();
@@ -51,9 +51,9 @@ public abstract class AbstractAssignabilityComputerTest extends TestCase {
 		return createTypeReference;
 	}
 
-	protected GenericArrayTypeReference array(TypeReference typeRef, int i) {
-		GenericArrayTypeReference result = TypesFactory.eINSTANCE.createGenericArrayTypeReference();
-		ArrayType arrayType = TypesFactory.eINSTANCE.createArrayType();
+	protected JvmGenericArrayTypeReference array(JvmTypeReference typeRef, int i) {
+		JvmGenericArrayTypeReference result = TypesFactory.eINSTANCE.createJvmGenericArrayTypeReference();
+		JvmArrayType arrayType = TypesFactory.eINSTANCE.createJvmArrayType();
 		result.setType(arrayType);
 		if (i == 1) {
 			arrayType.setComponentType(typeRef);
@@ -63,32 +63,32 @@ public abstract class AbstractAssignabilityComputerTest extends TestCase {
 		return result;
 	}
 
-	protected ReferenceTypeArgument arg(Type type) {
+	protected JvmReferenceTypeArgument arg(Type type) {
 		return arg(ref(type));
 	}
 
-	protected ReferenceTypeArgument arg(TypeReference typeRef) {
-		ReferenceTypeArgument argument = TypesFactory.eINSTANCE.createReferenceTypeArgument();
+	protected JvmReferenceTypeArgument arg(JvmTypeReference typeRef) {
+		JvmReferenceTypeArgument argument = TypesFactory.eINSTANCE.createJvmReferenceTypeArgument();
 		argument.setTypeReference(typeRef);
 		return argument;
 	}
 
-	protected WildcardTypeArgument wc() {
-		WildcardTypeArgument result = TypesFactory.eINSTANCE.createWildcardTypeArgument();
+	protected JvmWildcardTypeArgument wc() {
+		JvmWildcardTypeArgument result = TypesFactory.eINSTANCE.createJvmWildcardTypeArgument();
 		return result;
 	}
 
-	protected WildcardTypeArgument wc_extends(TypeReference typeRef) {
-		WildcardTypeArgument result = TypesFactory.eINSTANCE.createWildcardTypeArgument();
-		UpperBound upperBound = TypesFactory.eINSTANCE.createUpperBound();
+	protected JvmWildcardTypeArgument wc_extends(JvmTypeReference typeRef) {
+		JvmWildcardTypeArgument result = TypesFactory.eINSTANCE.createJvmWildcardTypeArgument();
+		JvmUpperBound upperBound = TypesFactory.eINSTANCE.createJvmUpperBound();
 		upperBound.setTypeReference(typeRef);
 		result.getConstraints().add(upperBound);
 		return result;
 	}
 
-	protected WildcardTypeArgument wc_super(TypeReference typeRef) {
-		WildcardTypeArgument result = TypesFactory.eINSTANCE.createWildcardTypeArgument();
-		LowerBound lowerBound = TypesFactory.eINSTANCE.createLowerBound();
+	protected JvmWildcardTypeArgument wc_super(JvmTypeReference typeRef) {
+		JvmWildcardTypeArgument result = TypesFactory.eINSTANCE.createJvmWildcardTypeArgument();
+		JvmLowerBound lowerBound = TypesFactory.eINSTANCE.createJvmLowerBound();
 		lowerBound.setTypeReference(typeRef);
 		result.getConstraints().add(lowerBound);
 		return result;
@@ -114,8 +114,8 @@ public abstract class AbstractAssignabilityComputerTest extends TestCase {
 	 * List<? super String> <= List<? super CharSequence> (but not vice versa)
 	 */
 	public void testRawTypes() throws Exception {
-		TypeReference rawList = ref(List.class);
-		TypeReference List_of_super_String = ref(List.class, wc_super(ref(String.class)));
+		JvmTypeReference rawList = ref(List.class);
+		JvmTypeReference List_of_super_String = ref(List.class, wc_super(ref(String.class)));
 		assertTrue(computer.isAssignableFrom(rawList, List_of_super_String));
 		assertFalse(computer.isAssignableFrom(List_of_super_String, rawList));
 	}
@@ -123,8 +123,8 @@ public abstract class AbstractAssignabilityComputerTest extends TestCase {
 	 * List<? super String> <= List<? super CharSequence> (but not vice versa)
 	 */
 	public void testGenerics_super_1() throws Exception {
-		TypeReference List_of_super_CharSequence = ref(List.class, wc_super(ref(CharSequence.class)));
-		TypeReference List_of_super_String = ref(List.class, wc_super(ref(String.class)));
+		JvmTypeReference List_of_super_CharSequence = ref(List.class, wc_super(ref(CharSequence.class)));
+		JvmTypeReference List_of_super_String = ref(List.class, wc_super(ref(String.class)));
 		assertTrue(computer.isAssignableFrom(List_of_super_String, List_of_super_CharSequence));
 		assertFalse(computer.isAssignableFrom(List_of_super_CharSequence, List_of_super_String));
 	}
@@ -133,8 +133,8 @@ public abstract class AbstractAssignabilityComputerTest extends TestCase {
 	 * List<?> <= List<CharSequence>
 	 */
 	public void testGenerics_UnconstraintWildcard_1() throws Exception {
-		TypeReference List_CharSequence = ref(List.class, arg(CharSequence.class));
-		TypeReference List_of_wildcard = ref(List.class, wc());
+		JvmTypeReference List_CharSequence = ref(List.class, arg(CharSequence.class));
+		JvmTypeReference List_of_wildcard = ref(List.class, wc());
 		assertTrue(computer.isAssignableFrom(List_of_wildcard, List_CharSequence));
 		assertFalse(computer.isAssignableFrom(List_CharSequence, List_of_wildcard));
 	}
@@ -142,8 +142,8 @@ public abstract class AbstractAssignabilityComputerTest extends TestCase {
 	 * List<?> <= List<? super CharSequence> 
 	 */
 	public void testGenerics_UnconstraintWildcard_2() throws Exception {
-		TypeReference List_of_super_CharSequence = ref(List.class, wc_super(ref(CharSequence.class)));
-		TypeReference List_of_wildcard = ref(List.class, wc());
+		JvmTypeReference List_of_super_CharSequence = ref(List.class, wc_super(ref(CharSequence.class)));
+		JvmTypeReference List_of_wildcard = ref(List.class, wc());
 		assertTrue(computer.isAssignableFrom(List_of_wildcard, List_of_super_CharSequence));
 		assertFalse(computer.isAssignableFrom(List_of_super_CharSequence, List_of_wildcard));
 	}
@@ -151,36 +151,36 @@ public abstract class AbstractAssignabilityComputerTest extends TestCase {
 	 * List<?> <= List<? extends CharSequence> 
 	 */
 	public void testGenerics_UnconstraintWildcard_3() throws Exception {
-		TypeReference List_of_extends_CharSequence = ref(List.class, wc_extends(ref(CharSequence.class)));
-		TypeReference List_of_wildcard = ref(List.class, wc());
+		JvmTypeReference List_of_extends_CharSequence = ref(List.class, wc_extends(ref(CharSequence.class)));
+		JvmTypeReference List_of_wildcard = ref(List.class, wc());
 		assertTrue(computer.isAssignableFrom(List_of_wildcard, List_of_extends_CharSequence));
 		assertFalse(computer.isAssignableFrom(List_of_extends_CharSequence, List_of_wildcard));
 	}
 
 	public void testGenerics_1() throws Exception {
-		TypeReference List_of_String = ref(List.class, arg(String.class));
-		TypeReference List_of_extends_String = ref(List.class, wc_extends(ref(String.class)));
+		JvmTypeReference List_of_String = ref(List.class, arg(String.class));
+		JvmTypeReference List_of_extends_String = ref(List.class, wc_extends(ref(String.class)));
 		assertTrue(computer.isAssignableFrom(List_of_extends_String, List_of_String));
 		assertFalse(computer.isAssignableFrom(List_of_String, List_of_extends_String));
 	}
 
 	public void testGenerics_2() throws Exception {
-		TypeReference List_of_String = ref(List.class, arg(String.class));
-		TypeReference Collection_of_String = ref(Collection.class, arg(String.class));
+		JvmTypeReference List_of_String = ref(List.class, arg(String.class));
+		JvmTypeReference Collection_of_String = ref(Collection.class, arg(String.class));
 		assertTrue(computer.isAssignableFrom(Collection_of_String, List_of_String));
 		assertFalse(computer.isAssignableFrom(List_of_String, Collection_of_String));
 	}
 
 	public void testGenerics_3() throws Exception {
-		TypeReference Func_of_String_String = ref(Map.class, arg(String.class), arg(String.class));
-		TypeReference Func_of_extends_String_String = ref(Map.class, wc_extends(ref(String.class)), arg(String.class));
+		JvmTypeReference Func_of_String_String = ref(Map.class, arg(String.class), arg(String.class));
+		JvmTypeReference Func_of_extends_String_String = ref(Map.class, wc_extends(ref(String.class)), arg(String.class));
 		assertTrue(computer.isAssignableFrom(Func_of_extends_String_String, Func_of_String_String));
 		assertFalse(computer.isAssignableFrom(Func_of_String_String, Func_of_extends_String_String));
 	}
 
 	public void testGenerics_4() throws Exception {
-		TypeReference Func_of_String_String = ref(Map.class, arg(String.class), arg(String.class));
-		TypeReference Func_of_extends_String_String = ref(Map.class, arg(String.class), arg(String.class));
+		JvmTypeReference Func_of_String_String = ref(Map.class, arg(String.class), arg(String.class));
+		JvmTypeReference Func_of_extends_String_String = ref(Map.class, arg(String.class), arg(String.class));
 		assertTrue(computer.isAssignableFrom(Func_of_extends_String_String, Func_of_String_String));
 		assertTrue(computer.isAssignableFrom(Func_of_String_String, Func_of_extends_String_String));
 	}

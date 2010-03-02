@@ -8,7 +8,7 @@
 package org.eclipse.xtext.common.types.util.jdt;
 
 import org.eclipse.jdt.core.IJavaElement;
-import org.eclipse.xtext.common.types.IdentifyableElement;
+import org.eclipse.xtext.common.types.JvmIdentifyableElement;
 
 import com.google.inject.ImplementedBy;
 
@@ -18,6 +18,6 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(JavaElementFinder.class)
 public interface IJavaElementFinder {
 
-	IJavaElement findElementFor(IdentifyableElement element);
+	IJavaElement findElementFor(JvmIdentifyableElement element);
 	
 }
