@@ -52,6 +52,7 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 	@Override
 	public void beforeDispose(XtextEditor xtextEditor) {
 		unregisterListener();
+		editor.updatedTitleImage(defaultImage); // otherwise we'll leak the defaultImage
 		this.editor = null;
 	}
 	
