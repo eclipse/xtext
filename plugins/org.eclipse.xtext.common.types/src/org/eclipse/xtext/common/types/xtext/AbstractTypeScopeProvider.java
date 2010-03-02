@@ -14,10 +14,10 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.common.types.DeclaredType;
-import org.eclipse.xtext.common.types.Member;
-import org.eclipse.xtext.common.types.Type;
-import org.eclipse.xtext.common.types.TypeReference;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.common.types.access.ITypeProvider;
 import org.eclipse.xtext.scoping.IScope;
@@ -40,7 +40,7 @@ public abstract class AbstractTypeScopeProvider extends AbstractScopeProvider {
 		if (resourceSet == null)
 			throw new IllegalStateException("context must be contained in a resource set");
 		EClass referenceType = reference.getEReferenceType();
-		if (EcoreUtil2.isAssignableFrom(TypesPackage.Literals.TYPE, referenceType)) {
+		if (EcoreUtil2.isAssignableFrom(TypesPackage.Literals.JVM_TYPE, referenceType)) {
 			ITypeProvider typeProvider = getTypeProviderFactory().findTypeProvider(resourceSet);
 			if (typeProvider == null)
 				typeProvider = getTypeProviderFactory().createTypeProvider(resourceSet);
@@ -54,17 +54,17 @@ public abstract class AbstractTypeScopeProvider extends AbstractScopeProvider {
 
 	public abstract ITypeProvider.Factory getTypeProviderFactory();
 	
-	public IScope createMemberScope(Type containerType, Predicate<Member> filter, Function<Member, String> names, IScope outer) {
+	public IScope createMemberScope(JvmType containerType, Predicate<JvmMember> filter, Function<JvmMember, String> names, IScope outer) {
 		if (containerType == null || containerType.eIsProxy())
 			return outer;		
-		if (containerType instanceof DeclaredType) {
+		if (containerType instanceof JvmDeclaredType) {
 			IScope result = outer;
-			List<TypeReference> superTypes = ((DeclaredType) containerType).getSuperTypes();
-			for(TypeReference superType: superTypes) {
+			List<JvmTypeReference> superTypes = ((JvmDeclaredType) containerType).getSuperTypes();
+			for(JvmTypeReference superType: superTypes) {
 				if (superType.getType() != null)
 					result = createMemberScope(superType.getType(), filter, names, result);
 			}
-			List<Member> members = ((DeclaredType) containerType).getMembers();
+			List<JvmMember> members = ((JvmDeclaredType) containerType).getMembers();
 			return Scopes.scopeFor(Iterables.filter(members, filter), names, result);
 		}
 		return outer;

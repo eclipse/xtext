@@ -9,7 +9,7 @@ package org.eclipse.xtext.common.types.access.impl;
 
 import junit.framework.TestCase;
 
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmType;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -48,7 +48,7 @@ public class ClassMirrorTest extends TestCase implements ITypeFactory<Class<?>> 
 		}
 	}
 
-	public Type createType(Class<?> clazz) {
+	public JvmType createType(Class<?> clazz) {
 		fail("Unexpected call");
 		return null;
 	}

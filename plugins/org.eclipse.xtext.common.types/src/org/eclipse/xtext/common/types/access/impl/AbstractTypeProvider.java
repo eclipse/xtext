@@ -10,7 +10,7 @@ package org.eclipse.xtext.common.types.access.impl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.ITypeProvider;
 import org.eclipse.xtext.common.types.access.TypeNotFoundException;
@@ -33,7 +33,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider, Resource.Fa
 		primitiveTypeFactory = new PrimitiveTypeFactory();
 	}
 
-	public abstract Type findTypeByName(String name);
+	public abstract JvmType findTypeByName(String name);
 
 	public TypeResource createResource(URI uri) {
 		TypeResource result = doCreateResource(uri);

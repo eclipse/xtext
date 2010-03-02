@@ -10,15 +10,15 @@ package org.eclipse.xtext.common.types.access.impl;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.common.types.ArrayType;
-import org.eclipse.xtext.common.types.ComponentType;
-import org.eclipse.xtext.common.types.DeclaredType;
-import org.eclipse.xtext.common.types.IdentifyableElement;
-import org.eclipse.xtext.common.types.Member;
-import org.eclipse.xtext.common.types.ParameterizedTypeReference;
-import org.eclipse.xtext.common.types.TypeParameter;
-import org.eclipse.xtext.common.types.TypeParameterDeclarator;
-import org.eclipse.xtext.common.types.TypeReference;
+import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmComponentType;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmIdentifyableElement;
+import org.eclipse.xtext.common.types.JvmMember;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmTypeParameter;
+import org.eclipse.xtext.common.types.JvmTypeParameterDeclarator;
+import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.TypesFactory;
 
 /**
@@ -27,12 +27,12 @@ import org.eclipse.xtext.common.types.TypesFactory;
 public abstract class AbstractClassMirror implements IClassMirror {
 
 	public String getFragment(EObject obj) {
-		if (obj instanceof TypeParameter)
-			return getFragment(obj.eContainer()) + "/" + ((TypeParameter) obj).getName();
-		if (obj instanceof TypeReference)
+		if (obj instanceof JvmTypeParameter)
+			return getFragment(obj.eContainer()) + "/" + ((JvmTypeParameter) obj).getName();
+		if (obj instanceof JvmTypeReference)
 			return null; // use default implementation
-		if (obj instanceof IdentifyableElement)
-			return ((IdentifyableElement) obj).getCanonicalName();
+		if (obj instanceof JvmIdentifyableElement)
+			return ((JvmIdentifyableElement) obj).getCanonicalName();
 		return null;
 	}
 	
@@ -46,9 +46,9 @@ public abstract class AbstractClassMirror implements IClassMirror {
 			EObject container = getEObject(resource, containerFragment);
 			if (container != null) {
 				String parameterName = fragment.substring(slash + 1);
-				if (container instanceof TypeParameterDeclarator) {
-					TypeParameterDeclarator executable = (TypeParameterDeclarator) container;
-					for(TypeParameter parameter: executable.getTypeParameters()) {
+				if (container instanceof JvmTypeParameterDeclarator) {
+					JvmTypeParameterDeclarator executable = (JvmTypeParameterDeclarator) container;
+					for(JvmTypeParameter parameter: executable.getTypeParameters()) {
 						if (parameter.getName().equals(parameterName))
 							return parameter;
 					}
@@ -64,9 +64,9 @@ public abstract class AbstractClassMirror implements IClassMirror {
 			int dot = fragment.lastIndexOf('.', paren);
 			String subFragment = fragment.substring(0, Math.max(dollar, dot));
 			EObject container = getEObject(resource, subFragment);
-			if (container instanceof DeclaredType) {
-				EList<Member> members = ((DeclaredType) container).getMembers();
-				for(Member member: members) {
+			if (container instanceof JvmDeclaredType) {
+				EList<JvmMember> members = ((JvmDeclaredType) container).getMembers();
+				for(JvmMember member: members) {
 					String name = member.getCanonicalName();
 					if (name.equals(fragment))
 						return member;
@@ -77,12 +77,12 @@ public abstract class AbstractClassMirror implements IClassMirror {
 	}
 
 	protected EObject getArrayEObject(Resource resource, String fragment) {
-		ComponentType component = (ComponentType) getEObject(resource, fragment.substring(0, fragment.length() - 2));
+		JvmComponentType component = (JvmComponentType) getEObject(resource, fragment.substring(0, fragment.length() - 2));
 		if (component == null)
 			return null;
 		if (component.getArrayType() == null) {
-			ArrayType arrayType = TypesFactory.eINSTANCE.createArrayType();
-			ParameterizedTypeReference componentTypeReference = TypesFactory.eINSTANCE.createParameterizedTypeReference();
+			JvmArrayType arrayType = TypesFactory.eINSTANCE.createJvmArrayType();
+			JvmParameterizedTypeReference componentTypeReference = TypesFactory.eINSTANCE.createJvmParameterizedTypeReference();
 			componentTypeReference.setType(component);
 			arrayType.setComponentType(componentTypeReference);
 			component.setArrayType(arrayType);

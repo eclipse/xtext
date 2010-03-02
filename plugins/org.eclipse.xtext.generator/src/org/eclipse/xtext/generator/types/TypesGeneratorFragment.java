@@ -25,7 +25,7 @@ import org.eclipse.xtext.generator.DefaultGeneratorFragment;
 public class TypesGeneratorFragment extends DefaultGeneratorFragment {
 
 	static {
-		TypesPackage.eINSTANCE.getArrayType();
+		TypesPackage.eINSTANCE.getJvmArrayType();
 	}
 	
 	@Override

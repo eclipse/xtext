@@ -18,7 +18,7 @@ XFunctionTypeRef:
   ('(' paramTypes+=XTypeRef (',' paramTypes+=XTypeRef)* ')')? '=>' returnType=XTypeRef;
 
 XSimpleTypeRef:
-  type=[types::Type|QualifiedName] ('<' typeParams+=XTypeParam (',' typeParams+=XTypeParam)* '>')?;
+  type=[types::JvmType|QualifiedName] ('<' typeParams+=XTypeParam (',' typeParams+=XTypeParam)* '>')?;
 
 XTypeParam returns XTypeRef:
   XTypeRef|XWildcardParam;

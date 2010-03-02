@@ -7,13 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmType;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public interface ITypeFactory<Arg> {
 
-	Type createType(Arg arg);
+	JvmType createType(Arg arg);
 	
 }

@@ -8,18 +8,18 @@
 package org.eclipse.xtext.common.types.util;
 
 import org.eclipse.emf.common.util.EList;
-import org.eclipse.xtext.common.types.ArrayType;
-import org.eclipse.xtext.common.types.DeclaredType;
-import org.eclipse.xtext.common.types.LowerBound;
-import org.eclipse.xtext.common.types.ParameterizedTypeReference;
-import org.eclipse.xtext.common.types.PrimitiveType;
-import org.eclipse.xtext.common.types.ReferenceTypeArgument;
-import org.eclipse.xtext.common.types.Type;
-import org.eclipse.xtext.common.types.TypeArgument;
-import org.eclipse.xtext.common.types.TypeConstraint;
-import org.eclipse.xtext.common.types.TypeReference;
-import org.eclipse.xtext.common.types.UpperBound;
-import org.eclipse.xtext.common.types.WildcardTypeArgument;
+import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmLowerBound;
+import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
+import org.eclipse.xtext.common.types.JvmPrimitiveType;
+import org.eclipse.xtext.common.types.JvmReferenceTypeArgument;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeArgument;
+import org.eclipse.xtext.common.types.JvmTypeConstraint;
+import org.eclipse.xtext.common.types.JvmTypeReference;
+import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
 
 import com.google.inject.Inject;
 
@@ -39,25 +39,25 @@ public class AssignabilityComputer implements IAssignabilityComputer{
 		this.superTypeCollector = superTypeCollector;
 	}
 
-	public boolean isAssignableFrom(TypeReference left, TypeReference right) {
-		Type typeA = left.getType();
-		Type typeB = right.getType();
-		if (typeA instanceof ArrayType) {
-			if (typeB instanceof ArrayType) {
-				TypeReference componentTypeA = ((ArrayType) typeA).getComponentType();
-				TypeReference componentTypeB = ((ArrayType) typeB).getComponentType();
+	public boolean isAssignableFrom(JvmTypeReference left, JvmTypeReference right) {
+		JvmType typeA = left.getType();
+		JvmType typeB = right.getType();
+		if (typeA instanceof JvmArrayType) {
+			if (typeB instanceof JvmArrayType) {
+				JvmTypeReference componentTypeA = ((JvmArrayType) typeA).getComponentType();
+				JvmTypeReference componentTypeB = ((JvmArrayType) typeB).getComponentType();
 				return isAssignableFrom(componentTypeA, componentTypeB);
 			}
 			return false;
-		} else if (right instanceof ParameterizedTypeReference) {
-			ParameterizedTypeReference refA = (ParameterizedTypeReference) left;
-			ParameterizedTypeReference refB = (ParameterizedTypeReference) right;
+		} else if (right instanceof JvmParameterizedTypeReference) {
+			JvmParameterizedTypeReference refA = (JvmParameterizedTypeReference) left;
+			JvmParameterizedTypeReference refB = (JvmParameterizedTypeReference) right;
 			if (typeA == typeB) {
 				return areArgumentsAssignableFrom(refA, refB);
 			}
-			if (typeA instanceof PrimitiveType) {
+			if (typeA instanceof JvmPrimitiveType) {
 				return isUnBoxing(typeA, typeB);
-			} else if (typeA instanceof DeclaredType) {
+			} else if (typeA instanceof JvmDeclaredType) {
 				if (superTypeCollector.collectSuperTypes(typeB).contains(typeA)) {
 					return areArgumentsAssignableFrom(refA, refB);
 				}
@@ -67,7 +67,7 @@ public class AssignabilityComputer implements IAssignabilityComputer{
 		return false;
 	}
 
-	protected boolean areArgumentsAssignableFrom(ParameterizedTypeReference left, ParameterizedTypeReference right) {
+	protected boolean areArgumentsAssignableFrom(JvmParameterizedTypeReference left, JvmParameterizedTypeReference right) {
 		// raw type
 		if (left.getArguments().size() == 0) {
 			return true;
@@ -78,8 +78,8 @@ public class AssignabilityComputer implements IAssignabilityComputer{
 
 		if (left.getArguments().size() == right.getArguments().size()) {
 			for (int i = 0; i < left.getArguments().size(); i++) {
-				TypeArgument argumentA = left.getArguments().get(i);
-				TypeArgument argumentB = right.getArguments().get(i);
+				JvmTypeArgument argumentA = left.getArguments().get(i);
+				JvmTypeArgument argumentB = right.getArguments().get(i);
 				if (!isAssignable(argumentA, argumentB))
 					return false;
 			}
@@ -88,13 +88,13 @@ public class AssignabilityComputer implements IAssignabilityComputer{
 		return false;
 	}
 
-	protected boolean isAssignable(TypeArgument argumentA, TypeArgument argumentB) {
-		TypeReference upperA = getUpper(argumentA);
-		TypeReference upperB = getUpper(argumentB);
-		TypeReference lowerA = getLower(argumentA);
-		TypeReference lowerB = getLower(argumentB);
-		TypeReference refA = getRef(argumentA);
-		TypeReference refB = getRef(argumentB);
+	protected boolean isAssignable(JvmTypeArgument argumentA, JvmTypeArgument argumentB) {
+		JvmTypeReference upperA = getUpper(argumentA);
+		JvmTypeReference upperB = getUpper(argumentB);
+		JvmTypeReference lowerA = getLower(argumentA);
+		JvmTypeReference lowerB = getLower(argumentB);
+		JvmTypeReference refA = getRef(argumentA);
+		JvmTypeReference refB = getRef(argumentB);
 		if (isUnconstraintWildcard(argumentA)) {
 			return true;
 		}
@@ -116,23 +116,23 @@ public class AssignabilityComputer implements IAssignabilityComputer{
 		return false;
 	}
 
-	protected boolean isUnconstraintWildcard(TypeArgument argumentA) {
-		return argumentA instanceof WildcardTypeArgument
-				&& ((WildcardTypeArgument) argumentA).getConstraints().isEmpty();
+	protected boolean isUnconstraintWildcard(JvmTypeArgument argumentA) {
+		return argumentA instanceof JvmWildcardTypeArgument
+				&& ((JvmWildcardTypeArgument) argumentA).getConstraints().isEmpty();
 	}
 
-	protected TypeReference getRef(TypeArgument argumentA) {
-		if (argumentA instanceof ReferenceTypeArgument) {
-			return ((ReferenceTypeArgument) argumentA).getTypeReference();
+	protected JvmTypeReference getRef(JvmTypeArgument argumentA) {
+		if (argumentA instanceof JvmReferenceTypeArgument) {
+			return ((JvmReferenceTypeArgument) argumentA).getTypeReference();
 		}
 		return null;
 	}
 
-	protected TypeReference getLower(TypeArgument argumentA) {
-		if (argumentA instanceof WildcardTypeArgument) {
-			EList<TypeConstraint> list = ((WildcardTypeArgument) argumentA).getConstraints();
-			for (TypeConstraint constraint : list) {
-				if (constraint instanceof LowerBound) {
+	protected JvmTypeReference getLower(JvmTypeArgument argumentA) {
+		if (argumentA instanceof JvmWildcardTypeArgument) {
+			EList<JvmTypeConstraint> list = ((JvmWildcardTypeArgument) argumentA).getConstraints();
+			for (JvmTypeConstraint constraint : list) {
+				if (constraint instanceof JvmLowerBound) {
 					return constraint.getTypeReference();
 				}
 			}
@@ -140,11 +140,11 @@ public class AssignabilityComputer implements IAssignabilityComputer{
 		return null;
 	}
 
-	protected TypeReference getUpper(TypeArgument argumentA) {
-		if (argumentA instanceof WildcardTypeArgument) {
-			EList<TypeConstraint> list = ((WildcardTypeArgument) argumentA).getConstraints();
-			for (TypeConstraint constraint : list) {
-				if (constraint instanceof UpperBound) {
+	protected JvmTypeReference getUpper(JvmTypeArgument argumentA) {
+		if (argumentA instanceof JvmWildcardTypeArgument) {
+			EList<JvmTypeConstraint> list = ((JvmWildcardTypeArgument) argumentA).getConstraints();
+			for (JvmTypeConstraint constraint : list) {
+				if (constraint instanceof JvmUpperBound) {
 					return constraint.getTypeReference();
 				}
 			}
@@ -152,21 +152,21 @@ public class AssignabilityComputer implements IAssignabilityComputer{
 		return null;
 	}
 
-	protected boolean isBoxing(Type typeA, Type typeB) {
+	protected boolean isBoxing(JvmType typeA, JvmType typeB) {
 		return is(typeA, Integer.class) && is(typeB, Integer.TYPE) || is(typeA, Boolean.class)
 				&& is(typeB, Boolean.TYPE) || is(typeA, Long.class) && is(typeB, Long.TYPE) || is(typeA, Float.class)
 				&& is(typeB, Float.TYPE) || is(typeA, Double.class) && is(typeB, Double.TYPE) || is(typeA, Byte.class)
 				&& is(typeB, Byte.TYPE);
 	}
 
-	protected boolean isUnBoxing(Type typeA, Type typeB) {
+	protected boolean isUnBoxing(JvmType typeA, JvmType typeB) {
 		return is(typeB, Integer.class) && is(typeA, Integer.TYPE) || is(typeB, Boolean.class)
 				&& is(typeA, Boolean.TYPE) || is(typeB, Long.class) && is(typeA, Long.TYPE) || is(typeB, Float.class)
 				&& is(typeA, Float.TYPE) || is(typeB, Double.class) && is(typeA, Double.TYPE) || is(typeB, Byte.class)
 				&& is(typeA, Byte.TYPE);
 	}
 
-	protected boolean is(Type typeA, Class<?> class1) {
+	protected boolean is(JvmType typeA, Class<?> class1) {
 		return typeA.getCanonicalName().equals(class1.getCanonicalName());
 	}
 

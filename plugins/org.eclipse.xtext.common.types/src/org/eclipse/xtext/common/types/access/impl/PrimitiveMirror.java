@@ -9,7 +9,7 @@ package org.eclipse.xtext.common.types.access.impl;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.TypeResource;
 
 /**
@@ -43,7 +43,7 @@ public class PrimitiveMirror extends AbstractClassMirror {
 
 	public void initialize(TypeResource typeResource) {
 		for(Class<?> primitiveClass: Primitives.ALL_PRIMITIVE_TYPES) {
-			Type type = typeFactory.createType(primitiveClass);
+			JvmType type = typeFactory.createType(primitiveClass);
 			typeResource.getContents().add(type);
 		}
 	}

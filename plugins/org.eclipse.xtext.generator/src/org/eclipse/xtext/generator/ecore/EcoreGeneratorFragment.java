@@ -13,7 +13,6 @@ import static org.eclipse.xtext.XtextPackage.*;
 
 import java.io.File;
 import java.io.IOException;
-import java.io.OutputStream;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.LinkedHashSet;
@@ -24,18 +23,11 @@ import java.util.Map.Entry;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.codegen.ecore.generator.Generator;
-import org.eclipse.emf.codegen.ecore.generator.GeneratorAdapterFactory;
 import org.eclipse.emf.codegen.ecore.genmodel.GenJDKLevel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModel;
 import org.eclipse.emf.codegen.ecore.genmodel.GenModelPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.GenPackage;
 import org.eclipse.emf.codegen.ecore.genmodel.generator.GenBaseGeneratorAdapter;
-import org.eclipse.emf.codegen.ecore.genmodel.generator.GenClassGeneratorAdapter;
-import org.eclipse.emf.codegen.ecore.genmodel.generator.GenEnumGeneratorAdapter;
-import org.eclipse.emf.codegen.ecore.genmodel.generator.GenModelGeneratorAdapter;
-import org.eclipse.emf.codegen.ecore.genmodel.generator.GenModelGeneratorAdapterFactory;
-import org.eclipse.emf.codegen.ecore.genmodel.generator.GenPackageGeneratorAdapter;
-import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.util.BasicMonitor;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.EList;
@@ -61,7 +53,6 @@ import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.resource.XtextResourceSet;
-import org.eclipse.xtext.util.LineFilterOutputStream;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Lists;
@@ -125,7 +116,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	protected void doGenerate(GenModel genModel) {
 		Generator generator = new Generator();
 		generator.getAdapterFactoryDescriptorRegistry().addDescriptor(GenModelPackage.eNS_URI,
-				new GeneratorAdapterFactoryDescriptor());
+				new CvsIdFilteringGeneratorAdapterFactoryDescriptor());
 		generator.setInput(genModel);
 		Diagnostic diagnostic = generator.generate(genModel, GenBaseGeneratorAdapter.MODEL_PROJECT_TYPE,
 				new BasicMonitor());
@@ -611,83 +602,5 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	 */
 	protected String toGenModelProjectPath(String path) {
 		return null == path || "".equals(path) || path.startsWith("/") ? path : path.substring(path.indexOf("/"));
-	}
-
-	/**
-	 * @author Sven Efftinge - Initial contribution and API
-	 */
-	protected final static class GeneratorAdapterFactoryDescriptor implements GeneratorAdapterFactory.Descriptor {
-		protected OutputStream createOutputStream(OutputStream stream, String lineDelimiter) throws Exception {
-			return new LineFilterOutputStream(stream, " * $Id" + "$", lineDelimiter != null ? lineDelimiter : Strings
-					.newLine());
-		}
-
-		public GeneratorAdapterFactory createAdapterFactory() {
-			return new GenModelGeneratorAdapterFactory() {
-
-				@Override
-				public Adapter createGenClassAdapter() {
-					return new GenClassGeneratorAdapter(this) {
-						@Override
-						protected OutputStream createOutputStream(URI workspacePath) throws Exception {
-							return GeneratorAdapterFactoryDescriptor.this.createOutputStream(super
-									.createOutputStream(workspacePath), getLineDelimiter());
-						}
-					};
-				}
-
-				@Override
-				public Adapter createGenEnumAdapter() {
-					return new GenEnumGeneratorAdapter(this) {
-						@Override
-						protected OutputStream createOutputStream(URI workspacePath) throws Exception {
-							return GeneratorAdapterFactoryDescriptor.this.createOutputStream(super
-									.createOutputStream(workspacePath), getLineDelimiter());
-						}
-					};
-				}
-
-				@Override
-				public Adapter createGenModelAdapter() {
-					if (genModelGeneratorAdapter == null) {
-						genModelGeneratorAdapter = new GenModelGeneratorAdapter(this) {
-							// we handle these ones on our own
-							@Override
-							protected void generateModelBuildProperties(GenModel genModel,
-									org.eclipse.emf.common.util.Monitor monitor) {
-							}
-
-							@Override
-							protected void generateModelManifest(GenModel genModel,
-									org.eclipse.emf.common.util.Monitor monitor) {
-							}
-
-							@Override
-							protected void generateModelPluginClass(GenModel genModel,
-									org.eclipse.emf.common.util.Monitor monitor) {
-							}
-
-							@Override
-							protected void generateModelPluginProperties(GenModel genModel,
-									org.eclipse.emf.common.util.Monitor monitor) {
-							}
-						};
-					}
-					return genModelGeneratorAdapter;
-				}
-
-				@Override
-				public Adapter createGenPackageAdapter() {
-					return new GenPackageGeneratorAdapter(this) {
-						@Override
-						protected OutputStream createOutputStream(URI workspacePath) throws Exception {
-							return GeneratorAdapterFactoryDescriptor.this.createOutputStream(super
-									.createOutputStream(workspacePath), getLineDelimiter());
-						}
-
-					};
-				}
-			};
-		}
 	}
 }

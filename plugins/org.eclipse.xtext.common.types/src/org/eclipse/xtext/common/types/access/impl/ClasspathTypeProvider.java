@@ -10,7 +10,7 @@ package org.eclipse.xtext.common.types.access.impl;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.IMirror;
 import org.eclipse.xtext.common.types.access.TypeNotFoundException;
 import org.eclipse.xtext.common.types.access.TypeResource;
@@ -58,7 +58,7 @@ public class ClasspathTypeProvider extends AbstractTypeProvider {
 	}
 
 	@Override
-	public Type findTypeByName(String name) {
+	public JvmType findTypeByName(String name) {
 		try {
 			Class<?> clazz = classFinder.forName(name);
 			URI resourceURI = uriHelper.createResourceURI(clazz);
@@ -84,10 +84,10 @@ public class ClasspathTypeProvider extends AbstractTypeProvider {
 		return ClassMirror.createClassMirror(clazz, declaredTypeFactory);
 	}
 	
-	public Type findTypeByClass(Class<?> clazz, Resource resource) {
+	public JvmType findTypeByClass(Class<?> clazz, Resource resource) {
 		// TODO: Maybe iterate the resource without computing a fragment
 		String fragment = uriHelper.getFragment(clazz);
-		Type result = (Type) resource.getEObject(fragment);
+		JvmType result = (JvmType) resource.getEObject(fragment);
 		if (result == null) {
 			throw new IllegalStateException("Resource has not been loaded");
 		} 

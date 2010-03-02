@@ -9,9 +9,9 @@ package org.eclipse.xtext.common.types.access.xtext;
 
 import junit.framework.TestCase;
 
-import org.eclipse.xtext.common.types.AnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
 import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.Void;
+import org.eclipse.xtext.common.types.JvmVoid;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 
@@ -37,14 +37,14 @@ public abstract class AbstractTypeScopeTest extends TestCase {
 	}
 	
 	public void testGetElementByInstance_01() {
-		Void voidType = TypesFactory.eINSTANCE.createVoid();
+		JvmVoid voidType = TypesFactory.eINSTANCE.createJvmVoid();
 		IEObjectDescription element = getTypeScope().getContentByEObject(voidType);
 		assertNotNull(element);
 		assertEquals(voidType.getCanonicalName(), element.getName());
 	}
 	
 	public void testGetElementByInstance_02() {
-		AnnotationReference annotationReference = TypesFactory.eINSTANCE.createAnnotationReference();
+		JvmAnnotationReference annotationReference = TypesFactory.eINSTANCE.createJvmAnnotationReference();
 		IEObjectDescription element = getTypeScope().getContentByEObject(annotationReference);
 		assertNull(element);
 	}

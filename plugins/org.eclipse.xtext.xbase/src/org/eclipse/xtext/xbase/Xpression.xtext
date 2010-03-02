@@ -5,7 +5,7 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
- 
+
 grammar org.eclipse.xtext.xbase.Xpression with org.eclipse.xtext.xbase.Xtype
 
 import "platform:/resource/org.eclipse.xtext.xbase/model/Xpression.ecore"
@@ -32,7 +32,7 @@ XEqualityExpression returns XExpression :
 
 XRelationalExpression returns XExpression : 
 	XOtherOperatorExpression 
-		({XInstanceOfExpression.expression=current} 'instanceof' type=[types::Type|QualifiedName] |
+		({XInstanceOfExpression.expression=current} 'instanceof' type=[types::JvmType|QualifiedName] |
 		 {XBinaryOperation.left=current} operator=('>='|'<='|'>'|'<' ) right=XOtherOperatorExpression )*
 ;
 
@@ -146,7 +146,7 @@ XStringLiteral :
 ;
 
 XTypeLiteral :
-	type=[types::Type|QualifiedName]'.''class';
+	type=[types::JvmType|QualifiedName]'.''class';
 	
 XRichString :	
 	expressions+=XRichStringLiteral 

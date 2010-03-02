@@ -11,7 +11,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XSimpleTypeRef" eSuperTypes="#//XTypeRef">
-    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//Type"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="type" eType="ecore:EClass ../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="typeParams" upperBound="-1"
         eType="#//XTypeRef" containment="true"/>
   </eClassifiers>
@@ -22,7 +22,7 @@
         containment="true"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="XAbstractTypeParamDeclaration" abstract="true"
-      eSuperTypes="../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//Type">
+      eSuperTypes="../../org.eclipse.xtext.common.types/model/JavaVMTypes.ecore#//JvmType">
     <eStructuralFeatures xsi:type="ecore:EReference" name="extends" upperBound="-1"
         eType="#//XTypeRef" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="super" eType="#//XTypeRef"

@@ -14,7 +14,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.util.EcoreUtil;
-import org.eclipse.xtext.common.types.Type;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.TypesPackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
@@ -38,7 +38,7 @@ public class TypesService {
 	
 	{
 		syntheticReference = EcoreFactory.eINSTANCE.createEReference();
-		syntheticReference.setEType(TypesPackage.eINSTANCE.getType());
+		syntheticReference.setEType(TypesPackage.eINSTANCE.getJvmType());
 		syntheticReference.setName("synthetic_EReference");
 		EClass syntheticContainer = EcoreFactory.eINSTANCE.createEClass();
 		syntheticContainer.setName("Synthetic_EClass");
@@ -49,7 +49,7 @@ public class TypesService {
 		IScope scope = scopeProvider.getScope(context, syntheticReference);
 		IEObjectDescription contentByName = scope.getContentByName(name);
 		if (contentByName!=null) {
-			XSimpleTypeRef simpleType = createSimpleTypeRef((Type) contentByName.getEObjectOrProxy());
+			XSimpleTypeRef simpleType = createSimpleTypeRef((JvmType) contentByName.getEObjectOrProxy());
 			for (XTypeRef xTypeRef : params) {
 				simpleType.getTypeParams().add(copy(xTypeRef));
 			}
@@ -63,7 +63,7 @@ public class TypesService {
 		return (T) EcoreUtil.copy(xTypeRef);
 	}
 
-	public XSimpleTypeRef createSimpleTypeRef(Type eObjectOrProxy) {
+	public XSimpleTypeRef createSimpleTypeRef(JvmType eObjectOrProxy) {
 		XSimpleTypeRef typeRef = XtypeFactory.eINSTANCE.createXSimpleTypeRef();
 		typeRef.setType(eObjectOrProxy);
 		return typeRef;
