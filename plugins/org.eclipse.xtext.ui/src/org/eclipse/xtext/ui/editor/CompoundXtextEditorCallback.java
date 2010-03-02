@@ -87,6 +87,16 @@ public class CompoundXtextEditorCallback implements IXtextEditorCallback {
 		return true;
 	}
 
+	public void beforeSetInput(XtextEditor xtextEditor) {
+		for (int i = editorCallbacks.size() - 1; i >= 0; i--) {
+			try {
+				editorCallbacks.get(i).beforeSetInput(xtextEditor);
+			} catch (Exception e) {
+				handle(e);
+			}
+		}
+	}
+
 	public void afterSetInput(XtextEditor xtextEditor) {
 		for (IXtextEditorCallback xtextEditorCallback : editorCallbacks) {
 			try {

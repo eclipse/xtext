@@ -16,6 +16,8 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(IXtextEditorCallback.NullImpl.class)
 public interface IXtextEditorCallback {
 	
+	void beforeSetInput(XtextEditor xtextEditor);
+	
 	void afterSetInput(XtextEditor xtextEditor);
 	
 	void afterCreatePartControl(XtextEditor editor);
@@ -28,6 +30,9 @@ public interface IXtextEditorCallback {
 	
 	public static class NullImpl implements IXtextEditorCallback {
 
+		public void beforeSetInput(XtextEditor xtextEditor) {
+		}
+		
 		public void afterSetInput(XtextEditor xtextEditor) {
 		}
 		
