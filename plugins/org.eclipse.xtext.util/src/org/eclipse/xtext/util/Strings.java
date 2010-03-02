@@ -192,6 +192,10 @@ public class Strings {
 		return new String(out, 0, outLen);
 	}
 
+	public static String convertToJavaString(String theString) {
+		return convertToJavaString(theString, true);
+	}
+	
 	/**
 	 * Mostly copied from {@link java.util.Properties#saveConvert}
 	 */
