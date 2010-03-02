@@ -51,21 +51,35 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 
 	@Override
 	public void beforeDispose(XtextEditor xtextEditor) {
-		if (annotationModel != null) {
-			annotationModel.removeAnnotationModelListener(this);
-			annotationModel = null;
-		}
+		unregisterListener();
 		this.editor = null;
-		if (defaultImage!=null)
-			defaultImage.dispose();
+	}
+	
+	@Override
+	public void afterSetInput(XtextEditor xtextEditor) {
+		if (this.editor != null) {
+			unregisterListener();
+			updateImageAndRegisterListener();
+		}
 	}
 
 	@Override
 	public void afterCreatePartControl(XtextEditor xtextEditor) {
 		editor = xtextEditor;
-		defaultImage = xtextEditor.getDefaultImage();
-		updateEditorImage(xtextEditor);
-		annotationModel = xtextEditor.getInternalSourceViewer().getAnnotationModel();
+		updateImageAndRegisterListener();
+	}
+
+	protected void unregisterListener() {
+		if (annotationModel != null) {
+			annotationModel.removeAnnotationModelListener(this);
+			annotationModel = null;
+		}
+	}
+
+	protected void updateImageAndRegisterListener() {
+		defaultImage = editor.getDefaultImage();
+		updateEditorImage(editor);
+		annotationModel = editor.getInternalSourceViewer().getAnnotationModel();
 		if (annotationModel != null)
 			annotationModel.addAnnotationModelListener(this);
 	}
@@ -117,7 +131,8 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 					if (shell != null && !shell.isDisposed()) {
 						shell.getDisplay().syncExec(new Runnable() {
 							public void run() {
-								xtextEditor.updatedTitleImage(newImage);
+								if (!newImage.isDisposed())
+									xtextEditor.updatedTitleImage(newImage);
 							}
 						});
 					}

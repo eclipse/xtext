@@ -144,6 +144,7 @@ public class XtextEditor extends TextEditor {
 			log.debug("doSetInput:" + input);
 			log.debug("Editor instance is [" + this.toString() + "]");
 		}
+		callback.beforeSetInput(this);
 		super.doSetInput(input);
 		callback.afterSetInput(this);
 	}

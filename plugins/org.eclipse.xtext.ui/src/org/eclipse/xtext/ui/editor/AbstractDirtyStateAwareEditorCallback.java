@@ -51,10 +51,20 @@ public abstract class AbstractDirtyStateAwareEditorCallback implements IXtextEdi
 		return editorSupport.isEditingPossible(this);
 	}
 	
+	public void beforeSetInput(XtextEditor editor) {
+		if (this.currentEditor != null) {
+			editorSupport.removeDirtyStateSupport(this);
+		}
+	}
+	
 	public void afterSetInput(XtextEditor editor) {
-		if (this.currentEditor != null)
-			throw new IllegalStateException("afterSetInput was called twice.");
-		this.currentEditor = editor;
+		if (this.currentEditor != null) {
+			if (this.currentEditor != editor)
+				throw new IllegalStateException("different instances of editor were given.");
+			editorSupport.initializeDirtyStateSupport(this);
+		} else {
+			this.currentEditor = editor;
+		}
 	}
 	
 	public IXtextDocument getDocument() {
