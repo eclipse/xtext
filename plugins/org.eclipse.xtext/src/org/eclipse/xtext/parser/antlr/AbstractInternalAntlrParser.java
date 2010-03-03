@@ -426,7 +426,9 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 			String antlrEntryRuleName = normalizeEntryRuleName(entryRuleName);
 			try {
 				Method method = this.getClass().getMethod(antlrEntryRuleName);
-				current = (EObject) method.invoke(this);
+				Object parseResult = method.invoke(this);
+				if (parseResult instanceof EObject)
+					current = (EObject) parseResult;
 			} catch (InvocationTargetException ite) {
 				Throwable targetException = ite.getTargetException();
 				if (targetException instanceof RecognitionException) {
