@@ -41,13 +41,18 @@ public abstract class AbstractTypeScopeProvider extends AbstractScopeProvider {
 			throw new IllegalStateException("context must be contained in a resource set");
 		EClass referenceType = reference.getEReferenceType();
 		if (EcoreUtil2.isAssignableFrom(TypesPackage.Literals.JVM_TYPE, referenceType)) {
-			ITypeProvider typeProvider = getTypeProviderFactory().findTypeProvider(resourceSet);
-			if (typeProvider == null)
-				typeProvider = getTypeProviderFactory().createTypeProvider(resourceSet);
+			ITypeProvider typeProvider = getTypeProvider(resourceSet);
 			return createTypeScope(typeProvider);
 		} else {
 			return IScope.NULLSCOPE;
 		}
+	}
+
+	public ITypeProvider getTypeProvider(ResourceSet resourceSet) {
+		ITypeProvider typeProvider = getTypeProviderFactory().findTypeProvider(resourceSet);
+		if (typeProvider == null)
+			typeProvider = getTypeProviderFactory().createTypeProvider(resourceSet);
+		return typeProvider;
 	}
 
 	public abstract AbstractTypeScope createTypeScope(ITypeProvider typeProvider);

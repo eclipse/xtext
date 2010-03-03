@@ -12,6 +12,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.BasicDiagnostic;
 import org.eclipse.emf.common.util.Diagnostic;
 import org.eclipse.emf.common.util.DiagnosticChain;
@@ -33,6 +34,8 @@ public class CompositeEValidator implements EValidator {
 	public static final String USE_EOBJECT_VALIDATOR = "org.eclipse.xtext.validation.CompositeEValidator.USE_EOBJECT_VALIDATOR";
 	
 	private List<EValidatorEqualitySupport> contents;
+	
+	private static final Logger logger = Logger.getLogger(CompositeEValidator.class);
 	
 	@Inject(optional=true)
 	@Named(value=USE_EOBJECT_VALIDATOR)
@@ -101,6 +104,7 @@ public class CompositeEValidator implements EValidator {
 				result = result && val.getDelegate().validate(eObject, diagnostics, context);
 			}
 			catch (Exception e) {
+				logger.error("Error executing EValidator", e);
 				diagnostics.add(createExceptionDiagnostic("Error executing EValidator", eObject, e));
 			}
 		}
@@ -115,6 +119,7 @@ public class CompositeEValidator implements EValidator {
 				result = result && val.getDelegate().validate(eClass, eObject, diagnostics, context);
 			}
 			catch (Exception e) {
+				logger.error("Error executing EValidator", e);
 				diagnostics.add(createExceptionDiagnostic("Error executing EValidator", eClass, e));
 			}
 		}
@@ -129,6 +134,7 @@ public class CompositeEValidator implements EValidator {
 				result = result && val.getDelegate().validate(eDataType, value, diagnostics, context);
 			}
 			catch (Exception e) {
+				logger.error("Error executing EValidator", e);
 				diagnostics.add(createExceptionDiagnostic("Error executing EValidator", eDataType, e));
 			}
 		}
