@@ -48,7 +48,7 @@ public class LinkingHelper {
 		if (node instanceof LeafNode)
 			convertMe = ((LeafNode) node).getText();
 		else {
-			StringBuilder builder = new StringBuilder(node.getLength());
+			StringBuilder builder = new StringBuilder(Math.max(node.getLength(), 1));
 			boolean hiddenSeen = false;
 			for (LeafNode leaf : node.getLeafNodes()) {
 				if (!leaf.isHidden()) {
