@@ -14,15 +14,12 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.ITypeParameter;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class TypeURIHelper {
-
-	public static final String PRIMITIVES = "/Primitives";
-	public static final String OBJECTS = "/Objects/";
-	public static final String PROTOCOL = "java";
+public class TypeURIHelper implements URIHelperConstants {
 
 	public String getFragment(String signature) throws JavaModelException {
 		StringBuilder uriBuilder = new StringBuilder(32);
@@ -37,14 +34,14 @@ public class TypeURIHelper {
 	}
 
 	public URI createResourceURIFromString(String withoutProtocol) {
-		StringBuilder uriBuilder = new StringBuilder(TypeURIHelper.PROTOCOL.length() + 1 + withoutProtocol.length());
-		uriBuilder.append(TypeURIHelper.PROTOCOL).append(":").append(withoutProtocol);
+		StringBuilder uriBuilder = new StringBuilder(URIHelperConstants.PROTOCOL.length() + 1 + withoutProtocol.length());
+		uriBuilder.append(URIHelperConstants.PROTOCOL).append(":").append(withoutProtocol);
 		return createURI(uriBuilder);
 	}
 
 	public StringBuilder createURIBuilder() {
 		StringBuilder builder = new StringBuilder(48);
-		builder.append(TypeURIHelper.PROTOCOL);
+		builder.append(URIHelperConstants.PROTOCOL);
 		builder.append(':');
 		return builder;
 	}
@@ -281,7 +278,7 @@ public class TypeURIHelper {
 	}
 
 	protected void createResourceURIForPrimitive(String signature, StringBuilder uriBuilder) {
-		uriBuilder.append(TypeURIHelper.PRIMITIVES);
+		uriBuilder.append(URIHelperConstants.PRIMITIVES);
 	}
 
 	protected void createResourceURIForArray(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
@@ -352,7 +349,7 @@ public class TypeURIHelper {
 		int idx = topLevel.indexOf('$');
 		if (idx != -1)
 			topLevel = topLevel.substring(0, idx) + ';';
-		uriBuilder.append(TypeURIHelper.OBJECTS).append(Signature.toString(topLevel));
+		uriBuilder.append(URIHelperConstants.OBJECTS).append(Signature.toString(topLevel));
 	}
 
 	protected void createResourceURIForTypeVariable(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
