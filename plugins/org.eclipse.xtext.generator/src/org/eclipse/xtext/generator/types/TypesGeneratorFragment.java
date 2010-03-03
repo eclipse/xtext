@@ -31,24 +31,26 @@ public class TypesGeneratorFragment extends DefaultGeneratorFragment {
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
 		return new BindFactory()
-		 .addTypeToType(ITypeProvider.Factory.class.getName(), ClasspathTypeProviderFactory.class.getName())
-		 .addTypeToType(AbstractTypeScopeProvider.class.getName(), ClasspathBasedTypeScopeProvider.class.getName())
-		 .getBindings();
+		     .addTypeToInstance(ClassLoader.class.getName(), "getClass().getClassLoader()")
+			 .addTypeToType(ITypeProvider.Factory.class.getName(), ClasspathTypeProviderFactory.class.getName())
+			 .addTypeToType(AbstractTypeScopeProvider.class.getName(), ClasspathBasedTypeScopeProvider.class.getName())
+			 .getBindings();
 	}
 	
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
-		 .addTypeToType(ITypeProvider.Factory.class.getName(), "org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory")
-		 .addTypeToType(AbstractTypeScopeProvider.class.getName(), "org.eclipse.xtext.common.types.xtext.ui.JdtBasedSimpleTypeScopeProvider")
-		 .addTypeToType("org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider", "org.eclipse.xtext.common.types.xtext.ui.JdtTypesProposalProvider")
-		 .addTypeToType("org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider", 
-				 	"org.eclipse.xtext.common.types.xtext.ui.XtextResourceSetBasedProjectProvider")
-		 .addTypeToType("org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper", 
-				 	"org.eclipse.xtext.common.types.xtext.ui.TypeAwareHyperlinkHelper")
-		 .addTypeToType("org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher", 
-				 	"org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher")
-		 .getBindings();
+			 .addTypeToInstance(ClassLoader.class.getName(), "getClass().getClassLoader()")
+			 .addTypeToType(ITypeProvider.Factory.class.getName(), "org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactory")
+			 .addTypeToType(AbstractTypeScopeProvider.class.getName(), "org.eclipse.xtext.common.types.xtext.ui.JdtBasedSimpleTypeScopeProvider")
+			 .addTypeToType("org.eclipse.xtext.common.types.xtext.ui.ITypesProposalProvider", "org.eclipse.xtext.common.types.xtext.ui.JdtTypesProposalProvider")
+			 .addTypeToType("org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider", 
+					 	"org.eclipse.xtext.common.types.xtext.ui.XtextResourceSetBasedProjectProvider")
+			 .addTypeToType("org.eclipse.xtext.ui.editor.hyperlinking.IHyperlinkHelper", 
+					 	"org.eclipse.xtext.common.types.xtext.ui.TypeAwareHyperlinkHelper")
+			 .addTypeToType("org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher", 
+					 	"org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher")
+			 .getBindings();
 	}
 	
 	@Override
