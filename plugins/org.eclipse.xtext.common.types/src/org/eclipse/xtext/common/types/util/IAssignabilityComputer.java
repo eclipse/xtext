@@ -9,9 +9,12 @@ package org.eclipse.xtext.common.types.util;
 
 import org.eclipse.xtext.common.types.JvmTypeReference;
 
+import com.google.inject.ImplementedBy;
+
 /**
- * @author svenefftinge - Initial contribution and API
+ * @author Sven Efftinge - Initial contribution and API
  */
+@ImplementedBy(AssignabilityComputer.class)
 public interface IAssignabilityComputer {
 	/**
 	 * returns whether the type reference on the right can be assigned to the type reference on the left.
