@@ -11,6 +11,7 @@ import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.tests.EmfAssert;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -35,18 +36,26 @@ public class PartialParserTest extends AbstractGeneratorTest {
 		assertTrue(resource.getErrors().isEmpty());
 	}
 	
-	public void testInsertSlashInFirstNode() {
+	public void testInsertSlashInFirstNode() throws Exception {
 		IParseResult parseResult = resource.getParser().reparse(rootNode, model.indexOf('3'), 0, "/");
 		assertTrue(parseResult.getParseErrors().isEmpty());
 		assertEquals(0, parseResult.getRootNode().getOffset());
-		assertNotSame(resource.getParseResult().getRootNode(), parseResult.getRootNode());
+		assertSame(resource.getParseResult().getRootNode(), parseResult.getRootNode());
+		String newModel = 
+			"a.b.c.d: 12/3;\n" +
+			"e.f.g.h: 456;";
+		EmfAssert.assertEObjectsEqual(getModel(newModel), resource.getParseResult().getRootASTElement());
 	}
 	
-	public void testInsertSlashInSecondNode() {
+	public void testInsertSlashInSecondNode() throws Exception {
 		IParseResult parseResult = resource.getParser().reparse(rootNode, model.indexOf('6'), 0, "/");
 		assertTrue(parseResult.getParseErrors().isEmpty());
 		assertEquals(0, parseResult.getRootNode().getOffset());
-		assertNotSame(resource.getParseResult().getRootNode(), parseResult.getRootNode());
+		assertSame(resource.getParseResult().getRootNode(), parseResult.getRootNode());
+		String newModel = 
+			"a.b.c.d: 123;\n" +
+			"e.f.g.h: 45/6;";
+		EmfAssert.assertEObjectsEqual(getModel(newModel), resource.getParseResult().getRootASTElement());
 	}
 
 }
