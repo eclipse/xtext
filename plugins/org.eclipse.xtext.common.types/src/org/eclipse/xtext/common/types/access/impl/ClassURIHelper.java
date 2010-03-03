@@ -20,11 +20,7 @@ import org.eclipse.emf.common.util.URI;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class ClassURIHelper {
-
-	public static final String PRIMITIVES = "/Primitives";
-	public static final String OBJECTS = "/Objects/";
-	public static final String PROTOCOL = "java";
+public class ClassURIHelper implements URIHelperConstants {
 
 	public URI createResourceURI(Type type) {
 		StringBuilder uriBuilder = createURIBuilder();
@@ -33,14 +29,14 @@ public class ClassURIHelper {
 	}
 
 	public URI createResourceURI(String withoutProtocol) {
-		StringBuilder uriBuilder = new StringBuilder(ClassURIHelper.PROTOCOL.length() + 1 + withoutProtocol.length());
-		uriBuilder.append(ClassURIHelper.PROTOCOL).append(":").append(withoutProtocol);
+		StringBuilder uriBuilder = new StringBuilder(URIHelperConstants.PROTOCOL.length() + 1 + withoutProtocol.length());
+		uriBuilder.append(URIHelperConstants.PROTOCOL).append(":").append(withoutProtocol);
 		return createURI(uriBuilder);
 	}
 
 	protected StringBuilder createURIBuilder() {
 		StringBuilder builder = new StringBuilder(48);
-		builder.append(ClassURIHelper.PROTOCOL);
+		builder.append(URIHelperConstants.PROTOCOL);
 		builder.append(':');
 		return builder;
 	}
@@ -262,10 +258,10 @@ public class ClassURIHelper {
 			createResourceURIForClass(clazz.getDeclaringClass(), uriBuilder);
 		}
 		else if (clazz.isPrimitive()) {
-			uriBuilder.append(ClassURIHelper.PRIMITIVES);
+			uriBuilder.append(URIHelperConstants.PRIMITIVES);
 		}
 		else {
-			uriBuilder.append(ClassURIHelper.OBJECTS).append(clazz.getName());
+			uriBuilder.append(URIHelperConstants.OBJECTS).append(clazz.getName());
 		}
 	}
 
