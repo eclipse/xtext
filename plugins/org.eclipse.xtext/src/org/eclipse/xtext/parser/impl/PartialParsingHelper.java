@@ -243,6 +243,11 @@ public class PartialParsingHelper implements IPartialParsingHelper {
 
 	private boolean isInvalidRootNode(CompositeNode rootNode, CompositeNode candidate) {
 		int end = candidate.getTotalOffset() + candidate.getTotalLength();
+		if (candidate.getGrammarElement() instanceof RuleCall) {
+			AbstractRule rule = ((RuleCall) candidate.getGrammarElement()).getRule();
+			if (!(rule instanceof ParserRule) || GrammarUtil.isDatatypeRule((ParserRule) rule))
+				return true;
+		}
 		if (end == rootNode.getTotalOffset() + rootNode.getTotalLength()) {
 			AbstractNode lastChild = getLastLeaf(candidate);
 			if (lastChild.getSyntaxError() != null) {
