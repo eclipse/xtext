@@ -21,22 +21,36 @@ import org.eclipse.emf.ecore.impl.EValidatorRegistryImpl;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.Diagnostician;
 import org.eclipse.emf.ecore.util.EObjectValidator;
+import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmArrayType;
+import org.eclipse.xtext.common.types.JvmBooleanAnnotationValue;
+import org.eclipse.xtext.common.types.JvmByteAnnotationValue;
+import org.eclipse.xtext.common.types.JvmCharAnnotationValue;
 import org.eclipse.xtext.common.types.JvmComponentType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmDoubleAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmField;
+import org.eclipse.xtext.common.types.JvmFloatAnnotationValue;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.xtext.common.types.JvmIntAnnotationValue;
+import org.eclipse.xtext.common.types.JvmLongAnnotationValue;
 import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmReferenceTypeArgument;
+import org.eclipse.xtext.common.types.JvmShortAnnotationValue;
+import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
 import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.JvmTypeArgument;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
@@ -54,6 +68,7 @@ import org.eclipse.xtext.common.types.testSetups.NestedTypes;
 import org.eclipse.xtext.common.types.testSetups.ParameterizedMethods;
 import org.eclipse.xtext.common.types.testSetups.ParameterizedTypes;
 import org.eclipse.xtext.common.types.testSetups.StaticNestedTypes;
+import org.eclipse.xtext.common.types.testSetups.TestAnnotation;
 import org.eclipse.xtext.common.types.testSetups.TypeWithInnerAnnotation;
 import org.eclipse.xtext.common.types.testSetups.TypeWithInnerEnum;
 
@@ -446,6 +461,16 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		int fieldCount = Fields.Inner.class.getDeclaredFields().length;
 		assertEquals(1, fieldCount);
 		assertEquals(constructorCount + fieldCount, type.getMembers().size());
+	}
+	
+	public void testMemberCount_14() {
+		String typeName = TestAnnotation.class.getName();
+		JvmAnnotationType type = (JvmAnnotationType) getTypeProvider().findTypeByName(typeName);
+		int methodCount = TestAnnotation.class.getDeclaredMethods().length;
+		assertEquals(14, methodCount);
+		int innerTypesCount = TestAnnotation.class.getDeclaredClasses().length;
+		assertEquals(2, innerTypesCount);
+		assertEquals(methodCount + innerTypesCount, type.getMembers().size());
 	}
 
 	public void test_twoListParamsNoResult_01() {
@@ -1299,5 +1324,142 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		}));
 	}
 
+	public void testAnnotationType_01() throws Exception {
+		String typeName = TestAnnotation.class.getName();
+		JvmType type = getTypeProvider().findTypeByName(typeName);
+		assertNotNull(type);
+		assertTrue(type instanceof JvmAnnotationType);
+		diagnose(type);	
+	}
+	
+	public void testAnnotations_01() throws Exception {
+		String typeName = TestAnnotation.Annotated.class.getName();
+		JvmAnnotationType annotationType = (JvmAnnotationType) getTypeProvider().findTypeByName(TestAnnotation.class.getName());
+		JvmAnnotationTarget target = (JvmAnnotationTarget) getTypeProvider().findTypeByName(typeName);
+		assertEquals(1, target.getAnnotations().size());
+		JvmAnnotationReference annotationReference = target.getAnnotations().get(0);
+		assertSame(annotationType, annotationReference.getAnnotation());
+		assertEquals(14, annotationReference.getValues().size());
+	}
+	
+	public void testIntAnnotationValue_01() throws Exception {
+		JvmIntAnnotationValue value = (JvmIntAnnotationValue) getAnnotationValue("intValue");
+		assertEquals(1, value.getValues().size());
+		Integer integer = value.getValues().get(0);
+		assertEquals(34, integer.intValue());
+	}
+	
+	public void testBooleanAnnotationValue_01() throws Exception {
+		JvmBooleanAnnotationValue value = (JvmBooleanAnnotationValue) getAnnotationValue("booleanValue");
+		assertEquals(1, value.getValues().size());
+		assertFalse(value.getValues().get(0));
+	}
+	
+	public void testFloatAnnotationValue_01() throws Exception {
+		JvmFloatAnnotationValue value = (JvmFloatAnnotationValue) getAnnotationValue("floatValue");
+		assertEquals(1, value.getValues().size());
+		Float f = value.getValues().get(0);
+		assertEquals(0.8f, f.floatValue());
+	}
+	
+	public void testDoubleAnnotationValue_01() throws Exception {
+		JvmDoubleAnnotationValue value = (JvmDoubleAnnotationValue) getAnnotationValue("doubleValue");
+		assertEquals(1, value.getValues().size());
+		Double d = value.getValues().get(0);
+		assertEquals(0.5, d.doubleValue());
+	}
+	
+	public void testShortAnnotationValue_01() throws Exception {
+		JvmShortAnnotationValue value = (JvmShortAnnotationValue) getAnnotationValue("shortValue");
+		assertEquals(1, value.getValues().size());
+		Short s = value.getValues().get(0);
+		assertEquals(4, s.shortValue());
+	}
+	
+	public void testByteAnnotationValue_01() throws Exception {
+		JvmByteAnnotationValue value = (JvmByteAnnotationValue) getAnnotationValue("byteValue");
+		assertEquals(1, value.getValues().size());
+		Byte b = value.getValues().get(0);
+		assertEquals(2, b.byteValue());
+	}
+	
+	public void testLongAnnotationValue_01() throws Exception {
+		JvmLongAnnotationValue value = (JvmLongAnnotationValue) getAnnotationValue("longValue");
+		assertEquals(2, value.getValues().size());
+		Long l = value.getValues().get(0);
+		assertEquals(6, l.longValue());
+		l = value.getValues().get(1);
+		assertEquals(7, l.longValue());
+	}
+	
+	public void testCharAnnotationValue_01() throws Exception {
+		JvmCharAnnotationValue value = (JvmCharAnnotationValue) getAnnotationValue("charValue");
+		assertEquals(1, value.getValues().size());
+		Character c = value.getValues().get(0);
+		assertEquals('a', c.charValue());
+	}
+	
+	public void testStringAnnotationValue_01() throws Exception {
+		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getAnnotationValue("stringValue");
+		assertEquals(1, value.getValues().size());
+		String s = value.getValues().get(0);
+		assertEquals("stringValue", s);
+	}
+	
+	public void testStringAnnotationValue_02() throws Exception {
+		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getAnnotationValue("stringArrayValue");
+		assertEquals(2, value.getValues().size());
+		String s = value.getValues().get(0);
+		assertEquals("array", s);
+		s = value.getValues().get(1);
+		assertEquals("value", s);
+	}
+	
+	public void testClassAnnotationValue_01() throws Exception {
+		JvmTypeAnnotationValue value = (JvmTypeAnnotationValue) getAnnotationValue("charSequenceClass");
+		assertEquals(1, value.getValues().size());
+		JvmType type = value.getValues().get(0);
+		assertNotNull(type);
+		assertFalse(type.eIsProxy());
+		assertEquals(String.class.getName(), type.getCanonicalName());
+	}
+	
+	public void testClassAnnotationValue_02() throws Exception {
+		JvmTypeAnnotationValue value = (JvmTypeAnnotationValue) getAnnotationValue("classArray");
+		assertEquals(2, value.getValues().size());
+		JvmType type = value.getValues().get(0);
+		assertNotNull(type);
+		assertFalse(type.eIsProxy());
+		assertEquals(TestAnnotation.Annotated.class.getName(), type.getCanonicalName());
+		type = value.getValues().get(1);
+		assertNotNull(type);
+		assertFalse(type.eIsProxy());
+		assertEquals(TestAnnotation.Annotated.class.getName(), type.getCanonicalName());
+	}
+	
+	public void testAnnotationAnnotationValue_01() throws Exception {
+		JvmAnnotationAnnotationValue value = (JvmAnnotationAnnotationValue) getAnnotationValue("annotationValue");
+		assertEquals(1, value.getValues().size());
+		assertEquals(1, value.getAnnotations().size());
+		JvmAnnotationReference annotationReference = value.getValues().get(0);
+		assertEquals(TestAnnotation.NestedAnnotation.class.getName(), annotationReference.getAnnotation().getCanonicalName());
+		assertEquals(1, annotationReference.getValues().size());
+		JvmStringAnnotationValue nestedValue = (JvmStringAnnotationValue) annotationReference.getValues().get(0);
+		assertEquals(1, nestedValue.getValues().size());
+		assertEquals("MyString", nestedValue.getValues().get(0));
+	}
+	
+	public JvmAnnotationValue getAnnotationValue(String name) {
+		String typeName = TestAnnotation.Annotated.class.getName();
+		JvmAnnotationTarget target = (JvmAnnotationTarget) getTypeProvider().findTypeByName(typeName);
+		JvmAnnotationReference annotationReference = target.getAnnotations().get(0);
+		for(JvmAnnotationValue value: annotationReference.getValues()) {
+			if (name.equals(value.getValueName()))
+				return value;
+		}
+		fail("Cannot find annotationValue " + name);
+		return null;
+	}
+	
 	protected abstract String getCollectionParamName();
 }

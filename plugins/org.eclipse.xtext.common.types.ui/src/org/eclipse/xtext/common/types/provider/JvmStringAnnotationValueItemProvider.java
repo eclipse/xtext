@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JvmGenericTypeItemProvider.java,v 1.2 2010/03/04 10:26:33 szarnekow Exp $
+ * $Id: JvmStringAnnotationValueItemProvider.java,v 1.1 2010/03/04 10:26:33 szarnekow Exp $
  */
 package org.eclipse.xtext.common.types.provider;
 
@@ -15,28 +15,25 @@ import org.eclipse.emf.common.notify.Notification;
 
 import org.eclipse.emf.ecore.EStructuralFeature;
 
-import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
-import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.JvmStringAnnotationValue;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.xtext.common.types.JvmGenericType} object.
+ * This is the item provider adapter for a {@link org.eclipse.xtext.common.types.JvmStringAnnotationValue} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmGenericTypeItemProvider
-	extends JvmDeclaredTypeItemProvider
+public class JvmStringAnnotationValueItemProvider
+	extends JvmAnnotationValueItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -49,7 +46,7 @@ public class JvmGenericTypeItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmGenericTypeItemProvider(AdapterFactory adapterFactory) {
+	public JvmStringAnnotationValueItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -64,31 +61,8 @@ public class JvmGenericTypeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addInterfacePropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Interface feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addInterfacePropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_JvmGenericType_interface_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_JvmGenericType_interface_feature", "_UI_JvmGenericType_type"),
-				 TypesPackage.Literals.JVM_GENERIC_TYPE__INTERFACE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -103,7 +77,7 @@ public class JvmGenericTypeItemProvider
 	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
 		if (childrenFeatures == null) {
 			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypesPackage.Literals.JVM_TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS);
+			childrenFeatures.add(TypesPackage.Literals.JVM_STRING_ANNOTATION_VALUE__VALUES);
 		}
 		return childrenFeatures;
 	}
@@ -122,14 +96,14 @@ public class JvmGenericTypeItemProvider
 	}
 
 	/**
-	 * This returns JvmGenericType.gif.
+	 * This returns JvmStringAnnotationValue.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/JvmGenericType"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/JvmStringAnnotationValue"));
 	}
 
 	/**
@@ -140,10 +114,7 @@ public class JvmGenericTypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((JvmGenericType)object).getFullyQualifiedName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_JvmGenericType_type") :
-			getString("_UI_JvmGenericType_type") + " " + label;
+		return getString("_UI_JvmStringAnnotationValue_type");
 	}
 
 	/**
@@ -157,11 +128,8 @@ public class JvmGenericTypeItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(JvmGenericType.class)) {
-			case TypesPackage.JVM_GENERIC_TYPE__INTERFACE:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-			case TypesPackage.JVM_GENERIC_TYPE__TYPE_PARAMETERS:
+		switch (notification.getFeatureID(JvmStringAnnotationValue.class)) {
+			case TypesPackage.JVM_STRING_ANNOTATION_VALUE__VALUES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
@@ -181,8 +149,8 @@ public class JvmGenericTypeItemProvider
 
 		newChildDescriptors.add
 			(createChildParameter
-				(TypesPackage.Literals.JVM_TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS,
-				 TypesFactory.eINSTANCE.createJvmTypeParameter()));
+				(TypesPackage.Literals.JVM_STRING_ANNOTATION_VALUE__VALUES,
+				 ""));
 	}
 
 }

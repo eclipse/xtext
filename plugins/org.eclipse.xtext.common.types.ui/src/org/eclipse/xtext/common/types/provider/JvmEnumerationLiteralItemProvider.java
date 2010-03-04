@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JvmEnumerationTypeItemProvider.java,v 1.2 2010/03/04 10:26:33 szarnekow Exp $
+ * $Id: JvmEnumerationLiteralItemProvider.java,v 1.1 2010/03/04 10:26:33 szarnekow Exp $
  */
 package org.eclipse.xtext.common.types.provider;
 
@@ -13,7 +13,6 @@ import java.util.List;
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
 
-import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
 import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.emf.edit.provider.IItemPropertyDescriptor;
@@ -21,19 +20,14 @@ import org.eclipse.emf.edit.provider.IItemPropertySource;
 import org.eclipse.emf.edit.provider.IStructuredItemContentProvider;
 import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 
-import org.eclipse.emf.edit.provider.ViewerNotification;
-import org.eclipse.xtext.common.types.JvmEnumerationType;
-import org.eclipse.xtext.common.types.TypesFactory;
-import org.eclipse.xtext.common.types.TypesPackage;
-
 /**
- * This is the item provider adapter for a {@link org.eclipse.xtext.common.types.JvmEnumerationType} object.
+ * This is the item provider adapter for a {@link org.eclipse.xtext.common.types.JvmEnumerationLiteral} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmEnumerationTypeItemProvider
-	extends JvmDeclaredTypeItemProvider
+public class JvmEnumerationLiteralItemProvider
+	extends JvmIdentifyableElementItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -46,7 +40,7 @@ public class JvmEnumerationTypeItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmEnumerationTypeItemProvider(AdapterFactory adapterFactory) {
+	public JvmEnumerationLiteralItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -66,44 +60,14 @@ public class JvmEnumerationTypeItemProvider
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypesPackage.Literals.JVM_ENUMERATION_TYPE__LITERALS);
-		}
-		return childrenFeatures;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
-	}
-
-	/**
-	 * This returns JvmEnumerationType.gif.
+	 * This returns JvmEnumerationLiteral.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/JvmEnumerationType"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/JvmEnumerationLiteral"));
 	}
 
 	/**
@@ -114,10 +78,7 @@ public class JvmEnumerationTypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((JvmEnumerationType)object).getFullyQualifiedName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_JvmEnumerationType_type") :
-			getString("_UI_JvmEnumerationType_type") + " " + label;
+		return getString("_UI_JvmEnumerationLiteral_type");
 	}
 
 	/**
@@ -130,12 +91,6 @@ public class JvmEnumerationTypeItemProvider
 	@Override
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
-
-		switch (notification.getFeatureID(JvmEnumerationType.class)) {
-			case TypesPackage.JVM_ENUMERATION_TYPE__LITERALS:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
-				return;
-		}
 		super.notifyChanged(notification);
 	}
 
@@ -149,11 +104,6 @@ public class JvmEnumerationTypeItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.JVM_ENUMERATION_TYPE__LITERALS,
-				 TypesFactory.eINSTANCE.createJvmEnumerationLiteral()));
 	}
 
 }

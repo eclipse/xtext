@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JvmDeclaredTypeItemProvider.java,v 1.1 2010/03/02 14:52:53 szarnekow Exp $
+ * $Id: JvmDeclaredTypeItemProvider.java,v 1.2 2010/03/04 10:26:33 szarnekow Exp $
  */
 package org.eclipse.xtext.common.types.provider;
 
@@ -66,6 +66,9 @@ public class JvmDeclaredTypeItemProvider
 
 			addVisibilityPropertyDescriptor(object);
 			addFullyQualifiedNamePropertyDescriptor(object);
+			addAbstractPropertyDescriptor(object);
+			addStaticPropertyDescriptor(object);
+			addFinalPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
@@ -110,6 +113,72 @@ public class JvmDeclaredTypeItemProvider
 				 false,
 				 false,
 				 ItemPropertyDescriptor.GENERIC_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Abstract feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addAbstractPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_JvmDeclaredType_abstract_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_JvmDeclaredType_abstract_feature", "_UI_JvmDeclaredType_type"),
+				 TypesPackage.Literals.JVM_DECLARED_TYPE__ABSTRACT,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Static feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addStaticPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_JvmDeclaredType_static_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_JvmDeclaredType_static_feature", "_UI_JvmDeclaredType_type"),
+				 TypesPackage.Literals.JVM_DECLARED_TYPE__STATIC,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 null,
+				 null));
+	}
+
+	/**
+	 * This adds a property descriptor for the Final feature.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected void addFinalPropertyDescriptor(Object object) {
+		itemPropertyDescriptors.add
+			(createItemPropertyDescriptor
+				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
+				 getResourceLocator(),
+				 getString("_UI_JvmDeclaredType_final_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_JvmDeclaredType_final_feature", "_UI_JvmDeclaredType_type"),
+				 TypesPackage.Literals.JVM_DECLARED_TYPE__FINAL,
+				 true,
+				 false,
+				 false,
+				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
 				 null,
 				 null));
 	}
@@ -174,6 +243,9 @@ public class JvmDeclaredTypeItemProvider
 		switch (notification.getFeatureID(JvmDeclaredType.class)) {
 			case TypesPackage.JVM_DECLARED_TYPE__VISIBILITY:
 			case TypesPackage.JVM_DECLARED_TYPE__FULLY_QUALIFIED_NAME:
+			case TypesPackage.JVM_DECLARED_TYPE__ABSTRACT:
+			case TypesPackage.JVM_DECLARED_TYPE__STATIC:
+			case TypesPackage.JVM_DECLARED_TYPE__FINAL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TypesPackage.JVM_DECLARED_TYPE__ANNOTATIONS:

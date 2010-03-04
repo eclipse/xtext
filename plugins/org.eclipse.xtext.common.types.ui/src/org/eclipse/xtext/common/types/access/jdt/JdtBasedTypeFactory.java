@@ -7,21 +7,37 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.jdt;
 
+import java.lang.reflect.Array;
+import java.util.Collections;
+import java.util.List;
+
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.jdt.core.Flags;
+import org.eclipse.jdt.core.IAnnotatable;
 import org.eclipse.jdt.core.IField;
+import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IMember;
 import org.eclipse.jdt.core.IMethod;
 import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.ITypeParameter;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
+import org.eclipse.jdt.core.dom.ASTParser;
+import org.eclipse.jdt.core.dom.IAnnotationBinding;
+import org.eclipse.jdt.core.dom.IBinding;
+import org.eclipse.jdt.core.dom.IMemberValuePairBinding;
+import org.eclipse.jdt.core.dom.ITypeBinding;
+import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmConstructor;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
+import org.eclipse.xtext.common.types.JvmEnumAnnotationValue;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
@@ -33,14 +49,18 @@ import org.eclipse.xtext.common.types.JvmMember;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmReferenceTypeArgument;
+import org.eclipse.xtext.common.types.JvmType;
+import org.eclipse.xtext.common.types.JvmTypeAnnotationValue;
 import org.eclipse.xtext.common.types.JvmTypeArgument;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
+import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.access.impl.ITypeFactory;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -64,55 +84,211 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 				return createEnumerationType(jdtType);
 
 			JvmGenericType result = TypesFactory.eINSTANCE.createJvmGenericType();
-			result.setAbstract(Flags.isAbstract(jdtType.getFlags()));
-			result.setFinal(Flags.isFinal(jdtType.getFlags()));
 			result.setInterface(jdtType.isInterface());
-			result.setStatic(Flags.isStatic(jdtType.getFlags()));
+			setTypeModifiers(jdtType, result);
 			setVisibility(result, jdtType.getFlags());
 			result.setFullyQualifiedName(jdtType.getFullyQualifiedName());
-			for (IType declaredType : jdtType.getTypes()) {
-				if (!declaredType.isAnonymous() && !Flags.isSynthetic(declaredType.getFlags())) {
-					result.getMembers().add(createType(declaredType));
-				}
-			}
-			for (IMethod method : jdtType.getMethods()) {
-				if (!Flags.isSynthetic(method.getFlags()) && !"<clinit>".equals(method.getElementName())) {
-					if (method.isConstructor()) {
-						result.getMembers().add(createConstructor(method));
-					}
-					else {
-						result.getMembers().add(createOperation(method));
-					}
-				}
-			}
+			createNestedTypes(jdtType, result);
+			createMethods(jdtType, result);
 			for (IField field : jdtType.getFields()) {
 				if (!Flags.isSynthetic(field.getFlags()))
 					result.getMembers().add(createField(field));
 			}
-			if (!jdtType.isInterface() && jdtType.getSuperclassTypeSignature() != null)
-				result.getSuperTypes().add(createTypeReference(jdtType.getSuperclassTypeSignature(), jdtType, result));
-			for (String interfaceSignature : jdtType.getSuperInterfaceTypeSignatures()) {
-				result.getSuperTypes().add(createTypeReference(interfaceSignature, jdtType, result));
-			}
+			setSuperTypes(jdtType, result);
 			for (ITypeParameter variable : jdtType.getTypeParameters()) {
 				result.getTypeParameters().add(createTypeParameter(variable, result));
 			}
+			createAnnotationValues(jdtType, jdtType, result);
 			return result;
 		}
 		catch (JavaModelException ex) {
 			throw new RuntimeException(ex);
 		}
 	}
+
+	protected void createAnnotationValues(IAnnotatable annotated, IMember declarator, JvmAnnotationTarget result) throws JavaModelException {
+		if (annotated.getAnnotations().length == 0)
+			return;
+		ASTParser parser = ASTParser.newParser(ASTParser.K_STATEMENTS);
+		parser.setProject(declarator.getJavaProject());
+		IBinding[] bindings = parser.createBindings(new IJavaElement[] {declarator}, null);
+		if (bindings[0] != null) {
+			for(IAnnotationBinding annotation: bindings[0].getAnnotations()) {
+				createAnnotationReference(result, declarator, annotation);
+			}
+		} 
+	}
 	
-	public JvmAnnotationType createAnnotationType(IType clazz) {
+	protected JvmAnnotationReference createAnnotationReference(JvmAnnotationTarget result, IMember declarator, IAnnotationBinding annotation) throws JavaModelException {
+		JvmAnnotationReference annotationReference = TypesFactory.eINSTANCE.createJvmAnnotationReference();
+		result.getAnnotations().add(annotationReference);
+		String annotationName = annotation.getAnnotationType().getQualifiedName();
+		IType annotationType = (IType) annotation.getAnnotationType().getJavaElement();
+		if (annotationType != null)
+			annotationName = annotationType.getFullyQualifiedName();
+		String annotationSignature = Signature.createTypeSignature(annotationName, true);
+		annotationReference.setAnnotation(createAnnotationProxy(annotationSignature, declarator));
+		for(IMemberValuePairBinding memberValuePair: annotation.getAllMemberValuePairs()) {
+			ITypeBinding originalTypeBinding = memberValuePair.getMethodBinding().getReturnType();
+			ITypeBinding typeBinding = originalTypeBinding;
+			if (typeBinding.isArray()) {
+				typeBinding = typeBinding.getComponentType();
+			}
+			if (typeBinding.isParameterizedType())
+				typeBinding = typeBinding.getErasure();
+			JvmAnnotationValue annotationValue = originalTypeBinding.isArray() ?
+					createArrayAnnotationValue(memberValuePair, createAnnotationValue(typeBinding), declarator) :
+					createAnnotationValue(memberValuePair,	createAnnotationValue(typeBinding), declarator);
+			annotationReference.getValues().add(annotationValue);
+			annotationValue.setOperation(createMethodProxy(annotationSignature, memberValuePair.getName(), declarator));
+		}
+		return annotationReference;
+	}
+	
+	protected JvmAnnotationValue createArrayAnnotationValue(IMemberValuePairBinding memberValuePair, JvmAnnotationValue result, IMember declarator) throws JavaModelException {
+		Object value = memberValuePair.getValue();
+		int length = Array.getLength(value);
+		if (length > 0) {
+			List<Object> valuesAsList = Lists.newArrayListWithExpectedSize(length);
+			if (result instanceof JvmTypeAnnotationValue) {
+				for(int i = 0; i < length; i++) {
+					ITypeBinding referencedType = (ITypeBinding) Array.get(value, i);
+					JvmType proxy = createProxy(declarator, referencedType);
+					valuesAsList.add(proxy);
+				}
+			} else if (result instanceof JvmAnnotationAnnotationValue) {
+				for(int i = 0; i < length; i++) {
+					IAnnotationBinding nestedAnnotation = (IAnnotationBinding) Array.get(value, i);
+					createAnnotationReference((JvmAnnotationTarget) result, declarator, nestedAnnotation);
+				}
+			} else if (result instanceof JvmEnumAnnotationValue) {
+				log.error("Enumeration types are not yet fully supported.");
+			} else {
+				for(int i = 0; i < length; i++) {
+					valuesAsList.add(Array.get(value, i));
+				}
+			}
+			if (!(result instanceof JvmAnnotationAnnotationValue))
+				result.eSet(result.eClass().getEStructuralFeature("values"), valuesAsList);
+		}
+		return result;
+	}
+	
+	public JvmType createProxy(IMember declarator, ITypeBinding referencedType) throws JavaModelException {
+		String name = referencedType.getQualifiedName();
+		IType bindingAsType = (IType) referencedType.getJavaElement();
+		if (bindingAsType != null) {
+			name = bindingAsType.getFullyQualifiedName();
+		}
+		String signature = Signature.createTypeSignature(name, true);
+		JvmType proxy = createProxy(signature, declarator);
+		return proxy;
+	}
+	
+	protected JvmAnnotationValue createAnnotationValue(IMemberValuePairBinding memberValuePair, JvmAnnotationValue result, IMember declarator) throws JavaModelException {
+		Object value = memberValuePair.getValue();
+		if (result instanceof JvmTypeAnnotationValue) {
+			ITypeBinding referencedType = (ITypeBinding) value;
+			JvmType proxy = createProxy(declarator, referencedType);
+			result.eSet(result.eClass().getEStructuralFeature("values"), Collections.singleton(proxy));
+		} else if (result instanceof JvmAnnotationAnnotationValue) {
+			IAnnotationBinding nestedAnnotation = (IAnnotationBinding) value;
+			createAnnotationReference((JvmAnnotationTarget) result, declarator, nestedAnnotation);
+		} else if (result instanceof JvmEnumAnnotationValue) {
+			log.error("Enumeration types are not yet fully supported.");
+		} else {
+			result.eSet(result.eClass().getEStructuralFeature("values"), Collections.singleton(value));
+		}
+		return result;
+	}
+	
+	protected JvmAnnotationValue createAnnotationValue(ITypeBinding type)  {
+		if (String.class.getName().equals(type.getQualifiedName())) {
+			return TypesFactory.eINSTANCE.createJvmStringAnnotationValue();
+		} else if (Class.class.getName().equals(type.getQualifiedName())) {
+			return TypesFactory.eINSTANCE.createJvmTypeAnnotationValue();
+		} else if (type.isAnnotation()) {
+			return TypesFactory.eINSTANCE.createJvmAnnotationAnnotationValue();
+		} else if (type.isEnum()) {
+			return TypesFactory.eINSTANCE.createJvmEnumAnnotationValue();
+		} else if (int.class.getName().equals(type.getQualifiedName())) {
+			return TypesFactory.eINSTANCE.createJvmIntAnnotationValue();
+		} else if (boolean.class.getName().equals(type.getQualifiedName())) {
+			return TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue();
+		} else if (long.class.getName().equals(type.getQualifiedName())) {
+			return TypesFactory.eINSTANCE.createJvmLongAnnotationValue();
+		} else if (byte.class.getName().equals(type.getQualifiedName())) {
+			return TypesFactory.eINSTANCE.createJvmByteAnnotationValue();
+		} else if (short.class.getName().equals(type.getQualifiedName())) {
+			return TypesFactory.eINSTANCE.createJvmShortAnnotationValue();
+		} else if (float.class.getName().equals(type.getQualifiedName())) {
+			return TypesFactory.eINSTANCE.createJvmFloatAnnotationValue();
+		} else if (double.class.getName().equals(type.getQualifiedName())) {
+			return TypesFactory.eINSTANCE.createJvmDoubleAnnotationValue();
+		} else if (char.class.getName().equals(type.getQualifiedName())) {
+			return TypesFactory.eINSTANCE.createJvmCharAnnotationValue();
+		} else
+			throw new IllegalArgumentException("Unexpected type: " + type);
+	}
+	
+	protected JvmOperation createMethodProxy(String typeName, String methodName, IMember declarator) throws JavaModelException {
+		InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createJvmOperation();
+		URI uri = uriHelper.getFullURI(typeName, methodName, declarator);
+		proxy.eSetProxyURI(uri);
+		return (JvmOperation) proxy;
+	}
+	
+	protected JvmAnnotationType createAnnotationProxy(String signature, IMember declarator) throws JavaModelException {
+		InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createJvmAnnotationType();
+		URI uri = uriHelper.getFullURI(signature, declarator);
+		proxy.eSetProxyURI(uri);
+		return (JvmAnnotationType) proxy;
+	}
+	
+	protected void setSuperTypes(IType jdtType, JvmDeclaredType result) throws JavaModelException {
+		if (!jdtType.isInterface() && jdtType.getSuperclassTypeSignature() != null)
+			result.getSuperTypes().add(createTypeReference(jdtType.getSuperclassTypeSignature(), jdtType, result));
+		for (String interfaceSignature : jdtType.getSuperInterfaceTypeSignatures()) {
+			result.getSuperTypes().add(createTypeReference(interfaceSignature, jdtType, result));
+		}
+	}
+
+	protected void createMethods(IType jdtType, JvmDeclaredType result) throws JavaModelException {
+		for (IMethod method : jdtType.getMethods()) {
+			if (!Flags.isSynthetic(method.getFlags()) && !"<clinit>".equals(method.getElementName())) {
+				if (method.isConstructor()) {
+					result.getMembers().add(createConstructor(method));
+				}
+				else {
+					result.getMembers().add(createOperation(method));
+				}
+			}
+		}
+	}
+
+	protected void createNestedTypes(IType jdtType, JvmDeclaredType result) throws JavaModelException {
+		for (IType declaredType : jdtType.getTypes()) {
+			if (!declaredType.isAnonymous() && !Flags.isSynthetic(declaredType.getFlags())) {
+				result.getMembers().add(createType(declaredType));
+			}
+		}
+	}
+
+	protected void setTypeModifiers(IType jdtType, JvmDeclaredType result) throws JavaModelException {
+		result.setAbstract(Flags.isAbstract(jdtType.getFlags()));
+		result.setFinal(Flags.isFinal(jdtType.getFlags()));
+		result.setStatic(Flags.isStatic(jdtType.getFlags()));
+	}
+	
+	public JvmAnnotationType createAnnotationType(IType clazz) throws JavaModelException {
 		JvmAnnotationType result = TypesFactory.eINSTANCE.createJvmAnnotationType();
 		result.setFullyQualifiedName(clazz.getFullyQualifiedName());
-		try {
-			setVisibility(result, clazz.getFlags());
-		} catch (JavaModelException e) {
-			throw new RuntimeException(e);
-		}
-		log.error("Annotation types are not yet fully supported.");
+		setVisibility(result, clazz.getFlags());
+		setTypeModifiers(clazz, result);
+		createNestedTypes(clazz, result);
+		createMethods(clazz, result);
+		setSuperTypes(clazz, result);
+		createAnnotationValues(clazz, clazz, result);
 		return result;
 	}
 
@@ -150,7 +326,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 						for(ITypeParameter typeParameter: typeParameters) {
 							if (bound.equals(typeParameter.getElementName())) {
 								// does not work:
-								// Signature.createJvmTypeParameterSignature(typeParameter.getElementName(), typeParameter.getBounds());
+								// Signature.createTypeParameterSignature(typeParameter.getElementName(), typeParameter.getBounds());
 								// create valid signature manually
 								boundSignature = "T" + typeParameter.getElementName() + ";";
 								break;
@@ -278,6 +454,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		result.setStatic(Flags.isStatic(field.getFlags()));
 		setVisibility(result, field.getFlags());
 		result.setType(createTypeReference(field.getTypeSignature(), field, result));
+		createAnnotationValues(field, field, result);
 		return result;
 	}
 	
@@ -299,6 +476,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		for (String exceptionType : method.getExceptionTypes()) {
 			result.getExceptions().add(createTypeReference(exceptionType, method, result));
 		}
+		createAnnotationValues(method, method, result);
 		return result;
 	}
 
@@ -338,6 +516,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		for (String exceptionTypes : method.getExceptionTypes()) {
 			result.getExceptions().add(createTypeReference(exceptionTypes, method, result));
 		}
+		createAnnotationValues(method, method, result);
 		return result;
 	}
 

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JvmGenericTypeItemProvider.java,v 1.2 2010/03/04 10:26:33 szarnekow Exp $
+ * $Id: JvmByteAnnotationValueItemProvider.java,v 1.1 2010/03/04 10:26:33 szarnekow Exp $
  */
 package org.eclipse.xtext.common.types.provider;
 
@@ -12,8 +12,6 @@ import java.util.List;
 
 import org.eclipse.emf.common.notify.AdapterFactory;
 import org.eclipse.emf.common.notify.Notification;
-
-import org.eclipse.emf.ecore.EStructuralFeature;
 
 import org.eclipse.emf.edit.provider.ComposeableAdapterFactory;
 import org.eclipse.emf.edit.provider.IEditingDomainItemProvider;
@@ -25,18 +23,17 @@ import org.eclipse.emf.edit.provider.ITreeItemContentProvider;
 import org.eclipse.emf.edit.provider.ItemPropertyDescriptor;
 import org.eclipse.emf.edit.provider.ViewerNotification;
 
-import org.eclipse.xtext.common.types.JvmGenericType;
-import org.eclipse.xtext.common.types.TypesFactory;
+import org.eclipse.xtext.common.types.JvmByteAnnotationValue;
 import org.eclipse.xtext.common.types.TypesPackage;
 
 /**
- * This is the item provider adapter for a {@link org.eclipse.xtext.common.types.JvmGenericType} object.
+ * This is the item provider adapter for a {@link org.eclipse.xtext.common.types.JvmByteAnnotationValue} object.
  * <!-- begin-user-doc -->
  * <!-- end-user-doc -->
  * @generated
  */
-public class JvmGenericTypeItemProvider
-	extends JvmDeclaredTypeItemProvider
+public class JvmByteAnnotationValueItemProvider
+	extends JvmAnnotationValueItemProvider
 	implements
 		IEditingDomainItemProvider,
 		IStructuredItemContentProvider,
@@ -49,7 +46,7 @@ public class JvmGenericTypeItemProvider
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public JvmGenericTypeItemProvider(AdapterFactory adapterFactory) {
+	public JvmByteAnnotationValueItemProvider(AdapterFactory adapterFactory) {
 		super(adapterFactory);
 	}
 
@@ -64,72 +61,42 @@ public class JvmGenericTypeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addInterfacePropertyDescriptor(object);
+			addValuesPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
 	}
 
 	/**
-	 * This adds a property descriptor for the Interface feature.
+	 * This adds a property descriptor for the Values feature.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	protected void addInterfacePropertyDescriptor(Object object) {
+	protected void addValuesPropertyDescriptor(Object object) {
 		itemPropertyDescriptors.add
 			(createItemPropertyDescriptor
 				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
 				 getResourceLocator(),
-				 getString("_UI_JvmGenericType_interface_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_JvmGenericType_interface_feature", "_UI_JvmGenericType_type"),
-				 TypesPackage.Literals.JVM_GENERIC_TYPE__INTERFACE,
+				 getString("_UI_JvmByteAnnotationValue_values_feature"),
+				 getString("_UI_PropertyDescriptor_description", "_UI_JvmByteAnnotationValue_values_feature", "_UI_JvmByteAnnotationValue_type"),
+				 TypesPackage.Literals.JVM_BYTE_ANNOTATION_VALUE__VALUES,
 				 true,
 				 false,
 				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
+				 ItemPropertyDescriptor.INTEGRAL_VALUE_IMAGE,
 				 null,
 				 null));
 	}
 
 	/**
-	 * This specifies how to implement {@link #getChildren} and is used to deduce an appropriate feature for an
-	 * {@link org.eclipse.emf.edit.command.AddCommand}, {@link org.eclipse.emf.edit.command.RemoveCommand} or
-	 * {@link org.eclipse.emf.edit.command.MoveCommand} in {@link #createCommand}.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	public Collection<? extends EStructuralFeature> getChildrenFeatures(Object object) {
-		if (childrenFeatures == null) {
-			super.getChildrenFeatures(object);
-			childrenFeatures.add(TypesPackage.Literals.JVM_TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS);
-		}
-		return childrenFeatures;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	@Override
-	protected EStructuralFeature getChildFeature(Object object, Object child) {
-		// Check the type of the specified child object and return the proper feature to use for
-		// adding (see {@link AddCommand}) it as a child.
-
-		return super.getChildFeature(object, child);
-	}
-
-	/**
-	 * This returns JvmGenericType.gif.
+	 * This returns JvmByteAnnotationValue.gif.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
 	@Override
 	public Object getImage(Object object) {
-		return overlayImage(object, getResourceLocator().getImage("full/obj16/JvmGenericType"));
+		return overlayImage(object, getResourceLocator().getImage("full/obj16/JvmByteAnnotationValue"));
 	}
 
 	/**
@@ -140,10 +107,7 @@ public class JvmGenericTypeItemProvider
 	 */
 	@Override
 	public String getText(Object object) {
-		String label = ((JvmGenericType)object).getFullyQualifiedName();
-		return label == null || label.length() == 0 ?
-			getString("_UI_JvmGenericType_type") :
-			getString("_UI_JvmGenericType_type") + " " + label;
+		return getString("_UI_JvmByteAnnotationValue_type");
 	}
 
 	/**
@@ -157,12 +121,9 @@ public class JvmGenericTypeItemProvider
 	public void notifyChanged(Notification notification) {
 		updateChildren(notification);
 
-		switch (notification.getFeatureID(JvmGenericType.class)) {
-			case TypesPackage.JVM_GENERIC_TYPE__INTERFACE:
+		switch (notification.getFeatureID(JvmByteAnnotationValue.class)) {
+			case TypesPackage.JVM_BYTE_ANNOTATION_VALUE__VALUES:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
-				return;
-			case TypesPackage.JVM_GENERIC_TYPE__TYPE_PARAMETERS:
-				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), true, false));
 				return;
 		}
 		super.notifyChanged(notification);
@@ -178,11 +139,6 @@ public class JvmGenericTypeItemProvider
 	@Override
 	protected void collectNewChildDescriptors(Collection<Object> newChildDescriptors, Object object) {
 		super.collectNewChildDescriptors(newChildDescriptors, object);
-
-		newChildDescriptors.add
-			(createChildParameter
-				(TypesPackage.Literals.JVM_TYPE_PARAMETER_DECLARATOR__TYPE_PARAMETERS,
-				 TypesFactory.eINSTANCE.createJvmTypeParameter()));
 	}
 
 }
