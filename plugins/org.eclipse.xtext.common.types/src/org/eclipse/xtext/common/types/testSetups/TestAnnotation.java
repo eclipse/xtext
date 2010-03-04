@@ -9,6 +9,7 @@ package org.eclipse.xtext.common.types.testSetups;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.util.List;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -31,6 +32,7 @@ public @interface TestAnnotation  {
 	Class<? extends CharSequence> charSequenceClass();
 	Class<?>[] classArray();
 	
+	@Retention(RetentionPolicy.RUNTIME)
 	@interface NestedAnnotation {
 		String value() default "MyString";
 	}
@@ -48,9 +50,27 @@ public @interface TestAnnotation  {
 			longValue = { 6 , 5 + 2}, 
 			shortValue = 4, 
 			stringArrayValue = { "array", "value" }, 
-			stringValue = "stringValue"
-	)
+			stringValue = "stringValue")
 	public static class Annotated {
+		
+		@NestedAnnotation()
+		public Annotated field;
+		
+		@NestedAnnotation("constructor")
+		public Annotated() {
+		}
+		
+		@NestedAnnotation("secondConstructor")
+		public Annotated(String string) {
+		}
+		
+		@NestedAnnotation("parameterizedConstructor")
+		public <T extends List<String>> Annotated(String string, T t) {
+		}
+		
+		@NestedAnnotation("method")
+		public void method() {
+		}
 		
 	}
 	
