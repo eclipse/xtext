@@ -91,7 +91,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			result.setFullyQualifiedName(jdtType.getFullyQualifiedName());
 			createNestedTypes(jdtType, result);
 			boolean constructorCreated = createMethods(jdtType, result);
-			if (!constructorCreated && !jdtType.isResolved()) {
+			if (!constructorCreated && !jdtType.isResolved() && !jdtType.isInterface()) {
 				JvmConstructor defaultConstructor = TypesFactory.eINSTANCE.createJvmConstructor();
 				StringBuilder fqName = new StringBuilder(48);
 				fqName.append(jdtType.getFullyQualifiedName());

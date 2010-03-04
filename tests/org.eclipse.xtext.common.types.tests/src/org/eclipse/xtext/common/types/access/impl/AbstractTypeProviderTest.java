@@ -62,6 +62,7 @@ import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
 import org.eclipse.xtext.common.types.access.ITypeProvider;
+import org.eclipse.xtext.common.types.testSetups.EmptyAbstractClass;
 import org.eclipse.xtext.common.types.testSetups.Fields;
 import org.eclipse.xtext.common.types.testSetups.InitializerWithConstructor;
 import org.eclipse.xtext.common.types.testSetups.InitializerWithoutConstructor;
@@ -472,6 +473,14 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		int innerTypesCount = TestAnnotation.class.getDeclaredClasses().length;
 		assertEquals(2, innerTypesCount);
 		assertEquals(methodCount + innerTypesCount, type.getMembers().size());
+	}
+	
+	public void testMemberCount_15() {
+		String typeName = EmptyAbstractClass.class.getName();
+		JvmDeclaredType type = (JvmDeclaredType) getTypeProvider().findTypeByName(typeName);
+		int constructorCount = EmptyAbstractClass.class.getDeclaredConstructors().length;
+		assertEquals(1, constructorCount);
+		assertEquals(1, type.getMembers().size());
 	}
 
 	public void test_twoListParamsNoResult_01() {
