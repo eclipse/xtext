@@ -90,7 +90,18 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 			setVisibility(result, jdtType.getFlags());
 			result.setFullyQualifiedName(jdtType.getFullyQualifiedName());
 			createNestedTypes(jdtType, result);
-			createMethods(jdtType, result);
+			boolean constructorCreated = createMethods(jdtType, result);
+			if (!constructorCreated && !jdtType.isResolved()) {
+				JvmConstructor defaultConstructor = TypesFactory.eINSTANCE.createJvmConstructor();
+				StringBuilder fqName = new StringBuilder(48);
+				fqName.append(jdtType.getFullyQualifiedName());
+				fqName.append('.');
+				fqName.append(jdtType.getElementName());
+				fqName.append("()");
+				defaultConstructor.setFullyQualifiedName(fqName.toString());
+				defaultConstructor.setVisibility(JvmVisibility.PUBLIC);
+				result.getMembers().add(defaultConstructor);
+			}
 			for (IField field : jdtType.getFields()) {
 				if (!Flags.isSynthetic(field.getFlags()))
 					result.getMembers().add(createField(field));
@@ -276,17 +287,20 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		}
 	}
 
-	protected void createMethods(IType jdtType, JvmDeclaredType result) throws JavaModelException {
+	protected boolean createMethods(IType jdtType, JvmDeclaredType result) throws JavaModelException {
+		boolean constructorCreated = false;
 		for (IMethod method : jdtType.getMethods()) {
 			if (!Flags.isSynthetic(method.getFlags()) && !"<clinit>".equals(method.getElementName())) {
 				if (method.isConstructor()) {
 					result.getMembers().add(createConstructor(method));
+					constructorCreated = true;
 				}
 				else {
 					result.getMembers().add(createOperation(method));
 				}
 			}
 		}
+		return constructorCreated;
 	}
 
 	protected void createNestedTypes(IType jdtType, JvmDeclaredType result) throws JavaModelException {
