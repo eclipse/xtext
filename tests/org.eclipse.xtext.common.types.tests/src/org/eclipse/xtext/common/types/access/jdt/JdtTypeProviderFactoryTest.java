@@ -9,11 +9,11 @@ package org.eclipse.xtext.common.types.access.jdt;
 
 import java.util.Map;
 
+import junit.framework.TestCase;
+
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
-
-import junit.framework.TestCase;
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -50,7 +50,7 @@ public class JdtTypeProviderFactoryTest extends TestCase {
 		JdtTypeProvider typeProvider = factory.createTypeProvider(new ResourceSetImpl());
 		ResourceSet resourceSet = typeProvider.getResourceSet();
 		Map<String, Object> map = resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap();
-		assertEquals(typeProvider, map.get(ClassURIHelper.PROTOCOL));
+		assertEquals(typeProvider, map.get(URIHelperConstants.PROTOCOL));
 	}
 	
 	public void testFindTypeProvider_01() {

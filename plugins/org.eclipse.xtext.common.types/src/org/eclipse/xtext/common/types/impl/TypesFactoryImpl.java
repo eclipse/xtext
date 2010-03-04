@@ -88,6 +88,7 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.JVM_LOWER_BOUND: return createJvmLowerBound();
 			case TypesPackage.JVM_ANNOTATION_TYPE: return createJvmAnnotationType();
 			case TypesPackage.JVM_ENUMERATION_TYPE: return createJvmEnumerationType();
+			case TypesPackage.JVM_ENUMERATION_LITERAL: return createJvmEnumerationLiteral();
 			case TypesPackage.JVM_GENERIC_TYPE: return createJvmGenericType();
 			case TypesPackage.JVM_PARAMETERIZED_TYPE_REFERENCE: return createJvmParameterizedTypeReference();
 			case TypesPackage.JVM_GENERIC_ARRAY_TYPE_REFERENCE: return createJvmGenericArrayTypeReference();
@@ -98,6 +99,18 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 			case TypesPackage.JVM_OPERATION: return createJvmOperation();
 			case TypesPackage.JVM_FORMAL_PARAMETER: return createJvmFormalParameter();
 			case TypesPackage.JVM_ANNOTATION_REFERENCE: return createJvmAnnotationReference();
+			case TypesPackage.JVM_INT_ANNOTATION_VALUE: return createJvmIntAnnotationValue();
+			case TypesPackage.JVM_BOOLEAN_ANNOTATION_VALUE: return createJvmBooleanAnnotationValue();
+			case TypesPackage.JVM_BYTE_ANNOTATION_VALUE: return createJvmByteAnnotationValue();
+			case TypesPackage.JVM_SHORT_ANNOTATION_VALUE: return createJvmShortAnnotationValue();
+			case TypesPackage.JVM_LONG_ANNOTATION_VALUE: return createJvmLongAnnotationValue();
+			case TypesPackage.JVM_DOUBLE_ANNOTATION_VALUE: return createJvmDoubleAnnotationValue();
+			case TypesPackage.JVM_FLOAT_ANNOTATION_VALUE: return createJvmFloatAnnotationValue();
+			case TypesPackage.JVM_CHAR_ANNOTATION_VALUE: return createJvmCharAnnotationValue();
+			case TypesPackage.JVM_STRING_ANNOTATION_VALUE: return createJvmStringAnnotationValue();
+			case TypesPackage.JVM_TYPE_ANNOTATION_VALUE: return createJvmTypeAnnotationValue();
+			case TypesPackage.JVM_ANNOTATION_ANNOTATION_VALUE: return createJvmAnnotationAnnotationValue();
+			case TypesPackage.JVM_ENUM_ANNOTATION_VALUE: return createJvmEnumAnnotationValue();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -222,6 +235,16 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public JvmEnumerationLiteral createJvmEnumerationLiteral() {
+		JvmEnumerationLiteralImpl jvmEnumerationLiteral = new JvmEnumerationLiteralImpl();
+		return jvmEnumerationLiteral;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public JvmGenericType createJvmGenericType() {
 		JvmGenericTypeImpl jvmGenericType = new JvmGenericTypeImpl();
 		return jvmGenericType;
@@ -315,6 +338,126 @@ public class TypesFactoryImpl extends EFactoryImpl implements TypesFactory {
 	public JvmAnnotationReference createJvmAnnotationReference() {
 		JvmAnnotationReferenceImpl jvmAnnotationReference = new JvmAnnotationReferenceImpl();
 		return jvmAnnotationReference;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmIntAnnotationValue createJvmIntAnnotationValue() {
+		JvmIntAnnotationValueImpl jvmIntAnnotationValue = new JvmIntAnnotationValueImpl();
+		return jvmIntAnnotationValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmByteAnnotationValue createJvmByteAnnotationValue() {
+		JvmByteAnnotationValueImpl jvmByteAnnotationValue = new JvmByteAnnotationValueImpl();
+		return jvmByteAnnotationValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmBooleanAnnotationValue createJvmBooleanAnnotationValue() {
+		JvmBooleanAnnotationValueImpl jvmBooleanAnnotationValue = new JvmBooleanAnnotationValueImpl();
+		return jvmBooleanAnnotationValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmShortAnnotationValue createJvmShortAnnotationValue() {
+		JvmShortAnnotationValueImpl jvmShortAnnotationValue = new JvmShortAnnotationValueImpl();
+		return jvmShortAnnotationValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmLongAnnotationValue createJvmLongAnnotationValue() {
+		JvmLongAnnotationValueImpl jvmLongAnnotationValue = new JvmLongAnnotationValueImpl();
+		return jvmLongAnnotationValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmDoubleAnnotationValue createJvmDoubleAnnotationValue() {
+		JvmDoubleAnnotationValueImpl jvmDoubleAnnotationValue = new JvmDoubleAnnotationValueImpl();
+		return jvmDoubleAnnotationValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmFloatAnnotationValue createJvmFloatAnnotationValue() {
+		JvmFloatAnnotationValueImpl jvmFloatAnnotationValue = new JvmFloatAnnotationValueImpl();
+		return jvmFloatAnnotationValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmCharAnnotationValue createJvmCharAnnotationValue() {
+		JvmCharAnnotationValueImpl jvmCharAnnotationValue = new JvmCharAnnotationValueImpl();
+		return jvmCharAnnotationValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmStringAnnotationValue createJvmStringAnnotationValue() {
+		JvmStringAnnotationValueImpl jvmStringAnnotationValue = new JvmStringAnnotationValueImpl();
+		return jvmStringAnnotationValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmTypeAnnotationValue createJvmTypeAnnotationValue() {
+		JvmTypeAnnotationValueImpl jvmTypeAnnotationValue = new JvmTypeAnnotationValueImpl();
+		return jvmTypeAnnotationValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmAnnotationAnnotationValue createJvmAnnotationAnnotationValue() {
+		JvmAnnotationAnnotationValueImpl jvmAnnotationAnnotationValue = new JvmAnnotationAnnotationValueImpl();
+		return jvmAnnotationAnnotationValue;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public JvmEnumAnnotationValue createJvmEnumAnnotationValue() {
+		JvmEnumAnnotationValueImpl jvmEnumAnnotationValue = new JvmEnumAnnotationValueImpl();
+		return jvmEnumAnnotationValue;
 	}
 
 	/**

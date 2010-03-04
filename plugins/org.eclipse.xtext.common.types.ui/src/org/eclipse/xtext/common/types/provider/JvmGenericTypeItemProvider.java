@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: JvmGenericTypeItemProvider.java,v 1.1 2010/03/02 14:52:55 szarnekow Exp $
+ * $Id: JvmGenericTypeItemProvider.java,v 1.2 2010/03/04 10:26:33 szarnekow Exp $
  */
 package org.eclipse.xtext.common.types.provider;
 
@@ -64,34 +64,9 @@ public class JvmGenericTypeItemProvider
 		if (itemPropertyDescriptors == null) {
 			super.getPropertyDescriptors(object);
 
-			addAbstractPropertyDescriptor(object);
 			addInterfacePropertyDescriptor(object);
-			addStaticPropertyDescriptor(object);
-			addFinalPropertyDescriptor(object);
 		}
 		return itemPropertyDescriptors;
-	}
-
-	/**
-	 * This adds a property descriptor for the Abstract feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addAbstractPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_JvmGenericType_abstract_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_JvmGenericType_abstract_feature", "_UI_JvmGenericType_type"),
-				 TypesPackage.Literals.JVM_GENERIC_TYPE__ABSTRACT,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
 	}
 
 	/**
@@ -108,50 +83,6 @@ public class JvmGenericTypeItemProvider
 				 getString("_UI_JvmGenericType_interface_feature"),
 				 getString("_UI_PropertyDescriptor_description", "_UI_JvmGenericType_interface_feature", "_UI_JvmGenericType_type"),
 				 TypesPackage.Literals.JVM_GENERIC_TYPE__INTERFACE,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Static feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addStaticPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_JvmGenericType_static_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_JvmGenericType_static_feature", "_UI_JvmGenericType_type"),
-				 TypesPackage.Literals.JVM_GENERIC_TYPE__STATIC,
-				 true,
-				 false,
-				 false,
-				 ItemPropertyDescriptor.BOOLEAN_VALUE_IMAGE,
-				 null,
-				 null));
-	}
-
-	/**
-	 * This adds a property descriptor for the Final feature.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	protected void addFinalPropertyDescriptor(Object object) {
-		itemPropertyDescriptors.add
-			(createItemPropertyDescriptor
-				(((ComposeableAdapterFactory)adapterFactory).getRootAdapterFactory(),
-				 getResourceLocator(),
-				 getString("_UI_JvmGenericType_final_feature"),
-				 getString("_UI_PropertyDescriptor_description", "_UI_JvmGenericType_final_feature", "_UI_JvmGenericType_type"),
-				 TypesPackage.Literals.JVM_GENERIC_TYPE__FINAL,
 				 true,
 				 false,
 				 false,
@@ -227,10 +158,7 @@ public class JvmGenericTypeItemProvider
 		updateChildren(notification);
 
 		switch (notification.getFeatureID(JvmGenericType.class)) {
-			case TypesPackage.JVM_GENERIC_TYPE__ABSTRACT:
 			case TypesPackage.JVM_GENERIC_TYPE__INTERFACE:
-			case TypesPackage.JVM_GENERIC_TYPE__STATIC:
-			case TypesPackage.JVM_GENERIC_TYPE__FINAL:
 				fireNotifyChanged(new ViewerNotification(notification, notification.getNotifier(), false, true));
 				return;
 			case TypesPackage.JVM_GENERIC_TYPE__TYPE_PARAMETERS:

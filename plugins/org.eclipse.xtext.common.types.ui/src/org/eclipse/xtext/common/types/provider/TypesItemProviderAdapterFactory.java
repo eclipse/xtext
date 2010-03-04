@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: TypesItemProviderAdapterFactory.java,v 1.4 2010/03/02 14:52:55 szarnekow Exp $
+ * $Id: TypesItemProviderAdapterFactory.java,v 1.5 2010/03/04 10:26:33 szarnekow Exp $
  */
 package org.eclipse.xtext.common.types.provider;
 
@@ -260,6 +260,29 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmEnumerationLiteral} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected JvmEnumerationLiteralItemProvider jvmEnumerationLiteralItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmEnumerationLiteral}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createJvmEnumerationLiteralAdapter() {
+		if (jvmEnumerationLiteralItemProvider == null) {
+			jvmEnumerationLiteralItemProvider = new JvmEnumerationLiteralItemProvider(this);
+		}
+
+		return jvmEnumerationLiteralItemProvider;
+	}
+
+	/**
 	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmGenericType} instances.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -490,6 +513,282 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 	}
 
 	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmIntAnnotationValue} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected JvmIntAnnotationValueItemProvider jvmIntAnnotationValueItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmIntAnnotationValue}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createJvmIntAnnotationValueAdapter() {
+		if (jvmIntAnnotationValueItemProvider == null) {
+			jvmIntAnnotationValueItemProvider = new JvmIntAnnotationValueItemProvider(this);
+		}
+
+		return jvmIntAnnotationValueItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmByteAnnotationValue} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected JvmByteAnnotationValueItemProvider jvmByteAnnotationValueItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmByteAnnotationValue}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createJvmByteAnnotationValueAdapter() {
+		if (jvmByteAnnotationValueItemProvider == null) {
+			jvmByteAnnotationValueItemProvider = new JvmByteAnnotationValueItemProvider(this);
+		}
+
+		return jvmByteAnnotationValueItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmBooleanAnnotationValue} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected JvmBooleanAnnotationValueItemProvider jvmBooleanAnnotationValueItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmBooleanAnnotationValue}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createJvmBooleanAnnotationValueAdapter() {
+		if (jvmBooleanAnnotationValueItemProvider == null) {
+			jvmBooleanAnnotationValueItemProvider = new JvmBooleanAnnotationValueItemProvider(this);
+		}
+
+		return jvmBooleanAnnotationValueItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmShortAnnotationValue} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected JvmShortAnnotationValueItemProvider jvmShortAnnotationValueItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmShortAnnotationValue}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createJvmShortAnnotationValueAdapter() {
+		if (jvmShortAnnotationValueItemProvider == null) {
+			jvmShortAnnotationValueItemProvider = new JvmShortAnnotationValueItemProvider(this);
+		}
+
+		return jvmShortAnnotationValueItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmLongAnnotationValue} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected JvmLongAnnotationValueItemProvider jvmLongAnnotationValueItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmLongAnnotationValue}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createJvmLongAnnotationValueAdapter() {
+		if (jvmLongAnnotationValueItemProvider == null) {
+			jvmLongAnnotationValueItemProvider = new JvmLongAnnotationValueItemProvider(this);
+		}
+
+		return jvmLongAnnotationValueItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmDoubleAnnotationValue} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected JvmDoubleAnnotationValueItemProvider jvmDoubleAnnotationValueItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmDoubleAnnotationValue}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createJvmDoubleAnnotationValueAdapter() {
+		if (jvmDoubleAnnotationValueItemProvider == null) {
+			jvmDoubleAnnotationValueItemProvider = new JvmDoubleAnnotationValueItemProvider(this);
+		}
+
+		return jvmDoubleAnnotationValueItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmFloatAnnotationValue} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected JvmFloatAnnotationValueItemProvider jvmFloatAnnotationValueItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmFloatAnnotationValue}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createJvmFloatAnnotationValueAdapter() {
+		if (jvmFloatAnnotationValueItemProvider == null) {
+			jvmFloatAnnotationValueItemProvider = new JvmFloatAnnotationValueItemProvider(this);
+		}
+
+		return jvmFloatAnnotationValueItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmCharAnnotationValue} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected JvmCharAnnotationValueItemProvider jvmCharAnnotationValueItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmCharAnnotationValue}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createJvmCharAnnotationValueAdapter() {
+		if (jvmCharAnnotationValueItemProvider == null) {
+			jvmCharAnnotationValueItemProvider = new JvmCharAnnotationValueItemProvider(this);
+		}
+
+		return jvmCharAnnotationValueItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmStringAnnotationValue} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected JvmStringAnnotationValueItemProvider jvmStringAnnotationValueItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmStringAnnotationValue}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createJvmStringAnnotationValueAdapter() {
+		if (jvmStringAnnotationValueItemProvider == null) {
+			jvmStringAnnotationValueItemProvider = new JvmStringAnnotationValueItemProvider(this);
+		}
+
+		return jvmStringAnnotationValueItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmTypeAnnotationValue} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected JvmTypeAnnotationValueItemProvider jvmTypeAnnotationValueItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmTypeAnnotationValue}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createJvmTypeAnnotationValueAdapter() {
+		if (jvmTypeAnnotationValueItemProvider == null) {
+			jvmTypeAnnotationValueItemProvider = new JvmTypeAnnotationValueItemProvider(this);
+		}
+
+		return jvmTypeAnnotationValueItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected JvmAnnotationAnnotationValueItemProvider jvmAnnotationAnnotationValueItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createJvmAnnotationAnnotationValueAdapter() {
+		if (jvmAnnotationAnnotationValueItemProvider == null) {
+			jvmAnnotationAnnotationValueItemProvider = new JvmAnnotationAnnotationValueItemProvider(this);
+		}
+
+		return jvmAnnotationAnnotationValueItemProvider;
+	}
+
+	/**
+	 * This keeps track of the one adapter used for all {@link org.eclipse.xtext.common.types.JvmEnumAnnotationValue} instances.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	protected JvmEnumAnnotationValueItemProvider jvmEnumAnnotationValueItemProvider;
+
+	/**
+	 * This creates an adapter for a {@link org.eclipse.xtext.common.types.JvmEnumAnnotationValue}.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	@Override
+	public Adapter createJvmEnumAnnotationValueAdapter() {
+		if (jvmEnumAnnotationValueItemProvider == null) {
+			jvmEnumAnnotationValueItemProvider = new JvmEnumAnnotationValueItemProvider(this);
+		}
+
+		return jvmEnumAnnotationValueItemProvider;
+	}
+
+	/**
 	 * This returns the root adapter factory that contains this factory.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -596,6 +895,7 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		if (jvmLowerBoundItemProvider != null) jvmLowerBoundItemProvider.dispose();
 		if (jvmAnnotationTypeItemProvider != null) jvmAnnotationTypeItemProvider.dispose();
 		if (jvmEnumerationTypeItemProvider != null) jvmEnumerationTypeItemProvider.dispose();
+		if (jvmEnumerationLiteralItemProvider != null) jvmEnumerationLiteralItemProvider.dispose();
 		if (jvmGenericTypeItemProvider != null) jvmGenericTypeItemProvider.dispose();
 		if (jvmParameterizedTypeReferenceItemProvider != null) jvmParameterizedTypeReferenceItemProvider.dispose();
 		if (jvmGenericArrayTypeReferenceItemProvider != null) jvmGenericArrayTypeReferenceItemProvider.dispose();
@@ -606,6 +906,18 @@ public class TypesItemProviderAdapterFactory extends TypesAdapterFactory impleme
 		if (jvmOperationItemProvider != null) jvmOperationItemProvider.dispose();
 		if (jvmFormalParameterItemProvider != null) jvmFormalParameterItemProvider.dispose();
 		if (jvmAnnotationReferenceItemProvider != null) jvmAnnotationReferenceItemProvider.dispose();
+		if (jvmIntAnnotationValueItemProvider != null) jvmIntAnnotationValueItemProvider.dispose();
+		if (jvmBooleanAnnotationValueItemProvider != null) jvmBooleanAnnotationValueItemProvider.dispose();
+		if (jvmByteAnnotationValueItemProvider != null) jvmByteAnnotationValueItemProvider.dispose();
+		if (jvmShortAnnotationValueItemProvider != null) jvmShortAnnotationValueItemProvider.dispose();
+		if (jvmLongAnnotationValueItemProvider != null) jvmLongAnnotationValueItemProvider.dispose();
+		if (jvmDoubleAnnotationValueItemProvider != null) jvmDoubleAnnotationValueItemProvider.dispose();
+		if (jvmFloatAnnotationValueItemProvider != null) jvmFloatAnnotationValueItemProvider.dispose();
+		if (jvmCharAnnotationValueItemProvider != null) jvmCharAnnotationValueItemProvider.dispose();
+		if (jvmStringAnnotationValueItemProvider != null) jvmStringAnnotationValueItemProvider.dispose();
+		if (jvmTypeAnnotationValueItemProvider != null) jvmTypeAnnotationValueItemProvider.dispose();
+		if (jvmAnnotationAnnotationValueItemProvider != null) jvmAnnotationAnnotationValueItemProvider.dispose();
+		if (jvmEnumAnnotationValueItemProvider != null) jvmEnumAnnotationValueItemProvider.dispose();
 	}
 
 }

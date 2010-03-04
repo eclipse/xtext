@@ -295,13 +295,40 @@ public interface TypesPackage extends EPackage {
 	int JVM_DECLARED_TYPE__MEMBERS = JVM_COMPONENT_TYPE_FEATURE_COUNT + 5;
 
 	/**
+	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_DECLARED_TYPE__ABSTRACT = JVM_COMPONENT_TYPE_FEATURE_COUNT + 6;
+
+	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_DECLARED_TYPE__STATIC = JVM_COMPONENT_TYPE_FEATURE_COUNT + 7;
+
+	/**
+	 * The feature id for the '<em><b>Final</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_DECLARED_TYPE__FINAL = JVM_COMPONENT_TYPE_FEATURE_COUNT + 8;
+
+	/**
 	 * The number of structural features of the '<em>Jvm Declared Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_DECLARED_TYPE_FEATURE_COUNT = JVM_COMPONENT_TYPE_FEATURE_COUNT + 6;
+	int JVM_DECLARED_TYPE_FEATURE_COUNT = JVM_COMPONENT_TYPE_FEATURE_COUNT + 9;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeParameterImpl <em>Jvm Type Parameter</em>}' class.
@@ -599,6 +626,33 @@ public interface TypesPackage extends EPackage {
 	int JVM_ANNOTATION_TYPE__MEMBERS = JVM_DECLARED_TYPE__MEMBERS;
 
 	/**
+	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ANNOTATION_TYPE__ABSTRACT = JVM_DECLARED_TYPE__ABSTRACT;
+
+	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ANNOTATION_TYPE__STATIC = JVM_DECLARED_TYPE__STATIC;
+
+	/**
+	 * The feature id for the '<em><b>Final</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ANNOTATION_TYPE__FINAL = JVM_DECLARED_TYPE__FINAL;
+
+	/**
 	 * The number of structural features of the '<em>Jvm Annotation Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -681,13 +735,77 @@ public interface TypesPackage extends EPackage {
 	int JVM_ENUMERATION_TYPE__MEMBERS = JVM_DECLARED_TYPE__MEMBERS;
 
 	/**
+	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUMERATION_TYPE__ABSTRACT = JVM_DECLARED_TYPE__ABSTRACT;
+
+	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUMERATION_TYPE__STATIC = JVM_DECLARED_TYPE__STATIC;
+
+	/**
+	 * The feature id for the '<em><b>Final</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUMERATION_TYPE__FINAL = JVM_DECLARED_TYPE__FINAL;
+
+	/**
+	 * The feature id for the '<em><b>Literals</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUMERATION_TYPE__LITERALS = JVM_DECLARED_TYPE_FEATURE_COUNT + 0;
+
+	/**
 	 * The number of structural features of the '<em>Jvm Enumeration Type</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_ENUMERATION_TYPE_FEATURE_COUNT = JVM_DECLARED_TYPE_FEATURE_COUNT + 0;
+	int JVM_ENUMERATION_TYPE_FEATURE_COUNT = JVM_DECLARED_TYPE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmEnumerationLiteralImpl <em>Jvm Enumeration Literal</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmEnumerationLiteralImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmEnumerationLiteral()
+	 * @generated
+	 */
+	int JVM_ENUMERATION_LITERAL = 15;
+
+	/**
+	 * The feature id for the '<em><b>Enum Type</b></em>' container reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUMERATION_LITERAL__ENUM_TYPE = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Enumeration Literal</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUMERATION_LITERAL_FEATURE_COUNT = JVM_IDENTIFYABLE_ELEMENT_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl <em>Jvm Generic Type</em>}' class.
@@ -697,7 +815,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmGenericType()
 	 * @generated
 	 */
-	int JVM_GENERIC_TYPE = 15;
+	int JVM_GENERIC_TYPE = 16;
 
 	/**
 	 * The feature id for the '<em><b>Array Type</b></em>' containment reference.
@@ -763,6 +881,33 @@ public interface TypesPackage extends EPackage {
 	int JVM_GENERIC_TYPE__MEMBERS = JVM_DECLARED_TYPE__MEMBERS;
 
 	/**
+	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_GENERIC_TYPE__ABSTRACT = JVM_DECLARED_TYPE__ABSTRACT;
+
+	/**
+	 * The feature id for the '<em><b>Static</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_GENERIC_TYPE__STATIC = JVM_DECLARED_TYPE__STATIC;
+
+	/**
+	 * The feature id for the '<em><b>Final</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_GENERIC_TYPE__FINAL = JVM_DECLARED_TYPE__FINAL;
+
+	/**
 	 * The feature id for the '<em><b>Type Parameters</b></em>' containment reference list.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -772,40 +917,13 @@ public interface TypesPackage extends EPackage {
 	int JVM_GENERIC_TYPE__TYPE_PARAMETERS = JVM_DECLARED_TYPE_FEATURE_COUNT + 0;
 
 	/**
-	 * The feature id for the '<em><b>Abstract</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_GENERIC_TYPE__ABSTRACT = JVM_DECLARED_TYPE_FEATURE_COUNT + 1;
-
-	/**
 	 * The feature id for the '<em><b>Interface</b></em>' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_GENERIC_TYPE__INTERFACE = JVM_DECLARED_TYPE_FEATURE_COUNT + 2;
-
-	/**
-	 * The feature id for the '<em><b>Static</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_GENERIC_TYPE__STATIC = JVM_DECLARED_TYPE_FEATURE_COUNT + 3;
-
-	/**
-	 * The feature id for the '<em><b>Final</b></em>' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 * @ordered
-	 */
-	int JVM_GENERIC_TYPE__FINAL = JVM_DECLARED_TYPE_FEATURE_COUNT + 4;
+	int JVM_GENERIC_TYPE__INTERFACE = JVM_DECLARED_TYPE_FEATURE_COUNT + 1;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Generic Type</em>' class.
@@ -814,7 +932,7 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_GENERIC_TYPE_FEATURE_COUNT = JVM_DECLARED_TYPE_FEATURE_COUNT + 5;
+	int JVM_GENERIC_TYPE_FEATURE_COUNT = JVM_DECLARED_TYPE_FEATURE_COUNT + 2;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeReferenceImpl <em>Jvm Type Reference</em>}' class.
@@ -824,7 +942,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmTypeReference()
 	 * @generated
 	 */
-	int JVM_TYPE_REFERENCE = 16;
+	int JVM_TYPE_REFERENCE = 17;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Type Reference</em>' class.
@@ -843,7 +961,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmParameterizedTypeReference()
 	 * @generated
 	 */
-	int JVM_PARAMETERIZED_TYPE_REFERENCE = 17;
+	int JVM_PARAMETERIZED_TYPE_REFERENCE = 18;
 
 	/**
 	 * The feature id for the '<em><b>Arguments</b></em>' containment reference list.
@@ -880,7 +998,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmGenericArrayTypeReference()
 	 * @generated
 	 */
-	int JVM_GENERIC_ARRAY_TYPE_REFERENCE = 18;
+	int JVM_GENERIC_ARRAY_TYPE_REFERENCE = 19;
 
 	/**
 	 * The feature id for the '<em><b>Type</b></em>' containment reference.
@@ -908,7 +1026,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmTypeArgument()
 	 * @generated
 	 */
-	int JVM_TYPE_ARGUMENT = 19;
+	int JVM_TYPE_ARGUMENT = 20;
 
 	/**
 	 * The feature id for the '<em><b>Declarator</b></em>' container reference.
@@ -936,7 +1054,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmWildcardTypeArgument()
 	 * @generated
 	 */
-	int JVM_WILDCARD_TYPE_ARGUMENT = 20;
+	int JVM_WILDCARD_TYPE_ARGUMENT = 21;
 
 	/**
 	 * The feature id for the '<em><b>Declarator</b></em>' container reference.
@@ -973,7 +1091,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmReferenceTypeArgument()
 	 * @generated
 	 */
-	int JVM_REFERENCE_TYPE_ARGUMENT = 21;
+	int JVM_REFERENCE_TYPE_ARGUMENT = 22;
 
 	/**
 	 * The feature id for the '<em><b>Declarator</b></em>' container reference.
@@ -1010,7 +1128,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnnotationTarget()
 	 * @generated
 	 */
-	int JVM_ANNOTATION_TARGET = 29;
+	int JVM_ANNOTATION_TARGET = 30;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1038,7 +1156,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmMember()
 	 * @generated
 	 */
-	int JVM_MEMBER = 22;
+	int JVM_MEMBER = 23;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1093,7 +1211,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmFeature()
 	 * @generated
 	 */
-	int JVM_FEATURE = 23;
+	int JVM_FEATURE = 24;
 
 	/**
 	 * The number of structural features of the '<em>Jvm Feature</em>' class.
@@ -1112,7 +1230,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmField()
 	 * @generated
 	 */
-	int JVM_FIELD = 24;
+	int JVM_FIELD = 25;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1194,7 +1312,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmExecutable()
 	 * @generated
 	 */
-	int JVM_EXECUTABLE = 25;
+	int JVM_EXECUTABLE = 26;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1276,7 +1394,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmConstructor()
 	 * @generated
 	 */
-	int JVM_CONSTRUCTOR = 26;
+	int JVM_CONSTRUCTOR = 27;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1358,7 +1476,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmOperation()
 	 * @generated
 	 */
-	int JVM_OPERATION = 27;
+	int JVM_OPERATION = 28;
 
 	/**
 	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
@@ -1476,7 +1594,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmFormalParameter()
 	 * @generated
 	 */
-	int JVM_FORMAL_PARAMETER = 28;
+	int JVM_FORMAL_PARAMETER = 29;
 
 	/**
 	 * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -1513,7 +1631,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnnotationReference()
 	 * @generated
 	 */
-	int JVM_ANNOTATION_REFERENCE = 30;
+	int JVM_ANNOTATION_REFERENCE = 31;
 
 	/**
 	 * The feature id for the '<em><b>Annotation</b></em>' reference.
@@ -1534,13 +1652,503 @@ public interface TypesPackage extends EPackage {
 	int JVM_ANNOTATION_REFERENCE__TARGET = 1;
 
 	/**
+	 * The feature id for the '<em><b>Values</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ANNOTATION_REFERENCE__VALUES = 2;
+
+	/**
 	 * The number of structural features of the '<em>Jvm Annotation Reference</em>' class.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @generated
 	 * @ordered
 	 */
-	int JVM_ANNOTATION_REFERENCE_FEATURE_COUNT = 2;
+	int JVM_ANNOTATION_REFERENCE_FEATURE_COUNT = 3;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmAnnotationValueImpl <em>Jvm Annotation Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmAnnotationValueImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnnotationValue()
+	 * @generated
+	 */
+	int JVM_ANNOTATION_VALUE = 32;
+
+	/**
+	 * The feature id for the '<em><b>Operation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ANNOTATION_VALUE__OPERATION = 0;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Annotation Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ANNOTATION_VALUE_FEATURE_COUNT = 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmIntAnnotationValueImpl <em>Jvm Int Annotation Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmIntAnnotationValueImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmIntAnnotationValue()
+	 * @generated
+	 */
+	int JVM_INT_ANNOTATION_VALUE = 33;
+
+	/**
+	 * The feature id for the '<em><b>Operation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_INT_ANNOTATION_VALUE__OPERATION = JVM_ANNOTATION_VALUE__OPERATION;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_INT_ANNOTATION_VALUE__VALUES = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Int Annotation Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_INT_ANNOTATION_VALUE_FEATURE_COUNT = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmByteAnnotationValueImpl <em>Jvm Byte Annotation Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmByteAnnotationValueImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmByteAnnotationValue()
+	 * @generated
+	 */
+	int JVM_BYTE_ANNOTATION_VALUE = 35;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmBooleanAnnotationValueImpl <em>Jvm Boolean Annotation Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmBooleanAnnotationValueImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmBooleanAnnotationValue()
+	 * @generated
+	 */
+	int JVM_BOOLEAN_ANNOTATION_VALUE = 34;
+
+	/**
+	 * The feature id for the '<em><b>Operation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_BOOLEAN_ANNOTATION_VALUE__OPERATION = JVM_ANNOTATION_VALUE__OPERATION;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_BOOLEAN_ANNOTATION_VALUE__VALUES = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Boolean Annotation Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_BOOLEAN_ANNOTATION_VALUE_FEATURE_COUNT = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 1;
+
+	/**
+	 * The feature id for the '<em><b>Operation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_BYTE_ANNOTATION_VALUE__OPERATION = JVM_ANNOTATION_VALUE__OPERATION;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_BYTE_ANNOTATION_VALUE__VALUES = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Byte Annotation Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_BYTE_ANNOTATION_VALUE_FEATURE_COUNT = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmShortAnnotationValueImpl <em>Jvm Short Annotation Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmShortAnnotationValueImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmShortAnnotationValue()
+	 * @generated
+	 */
+	int JVM_SHORT_ANNOTATION_VALUE = 36;
+
+	/**
+	 * The feature id for the '<em><b>Operation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_SHORT_ANNOTATION_VALUE__OPERATION = JVM_ANNOTATION_VALUE__OPERATION;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_SHORT_ANNOTATION_VALUE__VALUES = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Short Annotation Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_SHORT_ANNOTATION_VALUE_FEATURE_COUNT = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmLongAnnotationValueImpl <em>Jvm Long Annotation Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmLongAnnotationValueImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmLongAnnotationValue()
+	 * @generated
+	 */
+	int JVM_LONG_ANNOTATION_VALUE = 37;
+
+	/**
+	 * The feature id for the '<em><b>Operation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_LONG_ANNOTATION_VALUE__OPERATION = JVM_ANNOTATION_VALUE__OPERATION;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_LONG_ANNOTATION_VALUE__VALUES = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Long Annotation Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_LONG_ANNOTATION_VALUE_FEATURE_COUNT = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmDoubleAnnotationValueImpl <em>Jvm Double Annotation Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmDoubleAnnotationValueImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmDoubleAnnotationValue()
+	 * @generated
+	 */
+	int JVM_DOUBLE_ANNOTATION_VALUE = 38;
+
+	/**
+	 * The feature id for the '<em><b>Operation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_DOUBLE_ANNOTATION_VALUE__OPERATION = JVM_ANNOTATION_VALUE__OPERATION;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_DOUBLE_ANNOTATION_VALUE__VALUES = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Double Annotation Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_DOUBLE_ANNOTATION_VALUE_FEATURE_COUNT = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmFloatAnnotationValueImpl <em>Jvm Float Annotation Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmFloatAnnotationValueImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmFloatAnnotationValue()
+	 * @generated
+	 */
+	int JVM_FLOAT_ANNOTATION_VALUE = 39;
+
+	/**
+	 * The feature id for the '<em><b>Operation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_FLOAT_ANNOTATION_VALUE__OPERATION = JVM_ANNOTATION_VALUE__OPERATION;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_FLOAT_ANNOTATION_VALUE__VALUES = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Float Annotation Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_FLOAT_ANNOTATION_VALUE_FEATURE_COUNT = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmCharAnnotationValueImpl <em>Jvm Char Annotation Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmCharAnnotationValueImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmCharAnnotationValue()
+	 * @generated
+	 */
+	int JVM_CHAR_ANNOTATION_VALUE = 40;
+
+	/**
+	 * The feature id for the '<em><b>Operation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_CHAR_ANNOTATION_VALUE__OPERATION = JVM_ANNOTATION_VALUE__OPERATION;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_CHAR_ANNOTATION_VALUE__VALUES = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Char Annotation Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_CHAR_ANNOTATION_VALUE_FEATURE_COUNT = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmStringAnnotationValueImpl <em>Jvm String Annotation Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmStringAnnotationValueImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmStringAnnotationValue()
+	 * @generated
+	 */
+	int JVM_STRING_ANNOTATION_VALUE = 41;
+
+	/**
+	 * The feature id for the '<em><b>Operation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_STRING_ANNOTATION_VALUE__OPERATION = JVM_ANNOTATION_VALUE__OPERATION;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' attribute list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_STRING_ANNOTATION_VALUE__VALUES = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Jvm String Annotation Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_STRING_ANNOTATION_VALUE_FEATURE_COUNT = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeAnnotationValueImpl <em>Jvm Type Annotation Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmTypeAnnotationValueImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmTypeAnnotationValue()
+	 * @generated
+	 */
+	int JVM_TYPE_ANNOTATION_VALUE = 42;
+
+	/**
+	 * The feature id for the '<em><b>Operation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_TYPE_ANNOTATION_VALUE__OPERATION = JVM_ANNOTATION_VALUE__OPERATION;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_TYPE_ANNOTATION_VALUE__VALUES = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Type Annotation Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_TYPE_ANNOTATION_VALUE_FEATURE_COUNT = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 1;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmAnnotationAnnotationValueImpl <em>Jvm Annotation Annotation Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmAnnotationAnnotationValueImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnnotationAnnotationValue()
+	 * @generated
+	 */
+	int JVM_ANNOTATION_ANNOTATION_VALUE = 43;
+
+	/**
+	 * The feature id for the '<em><b>Operation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ANNOTATION_ANNOTATION_VALUE__OPERATION = JVM_ANNOTATION_VALUE__OPERATION;
+
+	/**
+	 * The feature id for the '<em><b>Annotations</b></em>' containment reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ANNOTATION_ANNOTATION_VALUE__ANNOTATIONS = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ANNOTATION_ANNOTATION_VALUE__VALUES = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 1;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Annotation Annotation Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ANNOTATION_ANNOTATION_VALUE_FEATURE_COUNT = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 2;
+
+	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.common.types.impl.JvmEnumAnnotationValueImpl <em>Jvm Enum Annotation Value</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.common.types.impl.JvmEnumAnnotationValueImpl
+	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmEnumAnnotationValue()
+	 * @generated
+	 */
+	int JVM_ENUM_ANNOTATION_VALUE = 44;
+
+	/**
+	 * The feature id for the '<em><b>Operation</b></em>' reference.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUM_ANNOTATION_VALUE__OPERATION = JVM_ANNOTATION_VALUE__OPERATION;
+
+	/**
+	 * The feature id for the '<em><b>Values</b></em>' reference list.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUM_ANNOTATION_VALUE__VALUES = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 0;
+
+	/**
+	 * The number of structural features of the '<em>Jvm Enum Annotation Value</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int JVM_ENUM_ANNOTATION_VALUE_FEATURE_COUNT = JVM_ANNOTATION_VALUE_FEATURE_COUNT + 1;
 
 	/**
 	 * The meta object id for the '{@link org.eclipse.xtext.common.types.JvmVisibility <em>Jvm Visibility</em>}' enum.
@@ -1550,7 +2158,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmVisibility()
 	 * @generated
 	 */
-	int JVM_VISIBILITY = 31;
+	int JVM_VISIBILITY = 45;
 
 	/**
 	 * The meta object id for the '<em>Iterable</em>' data type.
@@ -1560,7 +2168,7 @@ public interface TypesPackage extends EPackage {
 	 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getIterable()
 	 * @generated
 	 */
-	int ITERABLE = 32;
+	int ITERABLE = 46;
 
 
 	/**
@@ -1687,6 +2295,39 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EReference getJvmDeclaredType_Members();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmDeclaredType#isAbstract <em>Abstract</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Abstract</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmDeclaredType#isAbstract()
+	 * @see #getJvmDeclaredType()
+	 * @generated
+	 */
+	EAttribute getJvmDeclaredType_Abstract();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmDeclaredType#isStatic <em>Static</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Static</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmDeclaredType#isStatic()
+	 * @see #getJvmDeclaredType()
+	 * @generated
+	 */
+	EAttribute getJvmDeclaredType_Static();
+
+	/**
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmDeclaredType#isFinal <em>Final</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute '<em>Final</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmDeclaredType#isFinal()
+	 * @see #getJvmDeclaredType()
+	 * @generated
+	 */
+	EAttribute getJvmDeclaredType_Final();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmTypeParameter <em>Jvm Type Parameter</em>}'.
@@ -1835,6 +2476,38 @@ public interface TypesPackage extends EPackage {
 	EClass getJvmEnumerationType();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.JvmEnumerationType#getLiterals <em>Literals</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Literals</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmEnumerationType#getLiterals()
+	 * @see #getJvmEnumerationType()
+	 * @generated
+	 */
+	EReference getJvmEnumerationType_Literals();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmEnumerationLiteral <em>Jvm Enumeration Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm Enumeration Literal</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmEnumerationLiteral
+	 * @generated
+	 */
+	EClass getJvmEnumerationLiteral();
+
+	/**
+	 * Returns the meta object for the container reference '{@link org.eclipse.xtext.common.types.JvmEnumerationLiteral#getEnumType <em>Enum Type</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the container reference '<em>Enum Type</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmEnumerationLiteral#getEnumType()
+	 * @see #getJvmEnumerationLiteral()
+	 * @generated
+	 */
+	EReference getJvmEnumerationLiteral_EnumType();
+
+	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmGenericType <em>Jvm Generic Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -1843,17 +2516,6 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EClass getJvmGenericType();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmGenericType#isAbstract <em>Abstract</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Abstract</em>'.
-	 * @see org.eclipse.xtext.common.types.JvmGenericType#isAbstract()
-	 * @see #getJvmGenericType()
-	 * @generated
-	 */
-	EAttribute getJvmGenericType_Abstract();
 
 	/**
 	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmGenericType#isInterface <em>Interface</em>}'.
@@ -1865,28 +2527,6 @@ public interface TypesPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getJvmGenericType_Interface();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmGenericType#isStatic <em>Static</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Static</em>'.
-	 * @see org.eclipse.xtext.common.types.JvmGenericType#isStatic()
-	 * @see #getJvmGenericType()
-	 * @generated
-	 */
-	EAttribute getJvmGenericType_Static();
-
-	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.common.types.JvmGenericType#isFinal <em>Final</em>}'.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @return the meta object for the attribute '<em>Final</em>'.
-	 * @see org.eclipse.xtext.common.types.JvmGenericType#isFinal()
-	 * @see #getJvmGenericType()
-	 * @generated
-	 */
-	EAttribute getJvmGenericType_Final();
 
 	/**
 	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmTypeReference <em>Jvm Type Reference</em>}'.
@@ -2281,6 +2921,290 @@ public interface TypesPackage extends EPackage {
 	EReference getJvmAnnotationReference_Target();
 
 	/**
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.common.types.JvmAnnotationReference#getValues <em>Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the containment reference list '<em>Values</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmAnnotationReference#getValues()
+	 * @see #getJvmAnnotationReference()
+	 * @generated
+	 */
+	EReference getJvmAnnotationReference_Values();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmAnnotationValue <em>Jvm Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm Annotation Value</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmAnnotationValue
+	 * @generated
+	 */
+	EClass getJvmAnnotationValue();
+
+	/**
+	 * Returns the meta object for the reference '{@link org.eclipse.xtext.common.types.JvmAnnotationValue#getOperation <em>Operation</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference '<em>Operation</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmAnnotationValue#getOperation()
+	 * @see #getJvmAnnotationValue()
+	 * @generated
+	 */
+	EReference getJvmAnnotationValue_Operation();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmIntAnnotationValue <em>Jvm Int Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm Int Annotation Value</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmIntAnnotationValue
+	 * @generated
+	 */
+	EClass getJvmIntAnnotationValue();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.xtext.common.types.JvmIntAnnotationValue#getValues <em>Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Values</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmIntAnnotationValue#getValues()
+	 * @see #getJvmIntAnnotationValue()
+	 * @generated
+	 */
+	EAttribute getJvmIntAnnotationValue_Values();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmByteAnnotationValue <em>Jvm Byte Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm Byte Annotation Value</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmByteAnnotationValue
+	 * @generated
+	 */
+	EClass getJvmByteAnnotationValue();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.xtext.common.types.JvmByteAnnotationValue#getValues <em>Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Values</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmByteAnnotationValue#getValues()
+	 * @see #getJvmByteAnnotationValue()
+	 * @generated
+	 */
+	EAttribute getJvmByteAnnotationValue_Values();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmBooleanAnnotationValue <em>Jvm Boolean Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm Boolean Annotation Value</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmBooleanAnnotationValue
+	 * @generated
+	 */
+	EClass getJvmBooleanAnnotationValue();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.xtext.common.types.JvmBooleanAnnotationValue#getValues <em>Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Values</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmBooleanAnnotationValue#getValues()
+	 * @see #getJvmBooleanAnnotationValue()
+	 * @generated
+	 */
+	EAttribute getJvmBooleanAnnotationValue_Values();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmShortAnnotationValue <em>Jvm Short Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm Short Annotation Value</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmShortAnnotationValue
+	 * @generated
+	 */
+	EClass getJvmShortAnnotationValue();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.xtext.common.types.JvmShortAnnotationValue#getValues <em>Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Values</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmShortAnnotationValue#getValues()
+	 * @see #getJvmShortAnnotationValue()
+	 * @generated
+	 */
+	EAttribute getJvmShortAnnotationValue_Values();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmLongAnnotationValue <em>Jvm Long Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm Long Annotation Value</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmLongAnnotationValue
+	 * @generated
+	 */
+	EClass getJvmLongAnnotationValue();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.xtext.common.types.JvmLongAnnotationValue#getValues <em>Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Values</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmLongAnnotationValue#getValues()
+	 * @see #getJvmLongAnnotationValue()
+	 * @generated
+	 */
+	EAttribute getJvmLongAnnotationValue_Values();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmDoubleAnnotationValue <em>Jvm Double Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm Double Annotation Value</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmDoubleAnnotationValue
+	 * @generated
+	 */
+	EClass getJvmDoubleAnnotationValue();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.xtext.common.types.JvmDoubleAnnotationValue#getValues <em>Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Values</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmDoubleAnnotationValue#getValues()
+	 * @see #getJvmDoubleAnnotationValue()
+	 * @generated
+	 */
+	EAttribute getJvmDoubleAnnotationValue_Values();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmFloatAnnotationValue <em>Jvm Float Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm Float Annotation Value</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmFloatAnnotationValue
+	 * @generated
+	 */
+	EClass getJvmFloatAnnotationValue();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.xtext.common.types.JvmFloatAnnotationValue#getValues <em>Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Values</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmFloatAnnotationValue#getValues()
+	 * @see #getJvmFloatAnnotationValue()
+	 * @generated
+	 */
+	EAttribute getJvmFloatAnnotationValue_Values();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmCharAnnotationValue <em>Jvm Char Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm Char Annotation Value</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmCharAnnotationValue
+	 * @generated
+	 */
+	EClass getJvmCharAnnotationValue();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.xtext.common.types.JvmCharAnnotationValue#getValues <em>Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Values</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmCharAnnotationValue#getValues()
+	 * @see #getJvmCharAnnotationValue()
+	 * @generated
+	 */
+	EAttribute getJvmCharAnnotationValue_Values();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmStringAnnotationValue <em>Jvm String Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm String Annotation Value</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmStringAnnotationValue
+	 * @generated
+	 */
+	EClass getJvmStringAnnotationValue();
+
+	/**
+	 * Returns the meta object for the attribute list '{@link org.eclipse.xtext.common.types.JvmStringAnnotationValue#getValues <em>Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the attribute list '<em>Values</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmStringAnnotationValue#getValues()
+	 * @see #getJvmStringAnnotationValue()
+	 * @generated
+	 */
+	EAttribute getJvmStringAnnotationValue_Values();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmTypeAnnotationValue <em>Jvm Type Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm Type Annotation Value</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmTypeAnnotationValue
+	 * @generated
+	 */
+	EClass getJvmTypeAnnotationValue();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.xtext.common.types.JvmTypeAnnotationValue#getValues <em>Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Values</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmTypeAnnotationValue#getValues()
+	 * @see #getJvmTypeAnnotationValue()
+	 * @generated
+	 */
+	EReference getJvmTypeAnnotationValue_Values();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue <em>Jvm Annotation Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm Annotation Annotation Value</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue
+	 * @generated
+	 */
+	EClass getJvmAnnotationAnnotationValue();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue#getValues <em>Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Values</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue#getValues()
+	 * @see #getJvmAnnotationAnnotationValue()
+	 * @generated
+	 */
+	EReference getJvmAnnotationAnnotationValue_Values();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.common.types.JvmEnumAnnotationValue <em>Jvm Enum Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Jvm Enum Annotation Value</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmEnumAnnotationValue
+	 * @generated
+	 */
+	EClass getJvmEnumAnnotationValue();
+
+	/**
+	 * Returns the meta object for the reference list '{@link org.eclipse.xtext.common.types.JvmEnumAnnotationValue#getValues <em>Values</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for the reference list '<em>Values</em>'.
+	 * @see org.eclipse.xtext.common.types.JvmEnumAnnotationValue#getValues()
+	 * @see #getJvmEnumAnnotationValue()
+	 * @generated
+	 */
+	EReference getJvmEnumAnnotationValue_Values();
+
+	/**
 	 * Returns the meta object for enum '{@link org.eclipse.xtext.common.types.JvmVisibility <em>Jvm Visibility</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -2434,6 +3358,30 @@ public interface TypesPackage extends EPackage {
 		EReference JVM_DECLARED_TYPE__MEMBERS = eINSTANCE.getJvmDeclaredType_Members();
 
 		/**
+		 * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JVM_DECLARED_TYPE__ABSTRACT = eINSTANCE.getJvmDeclaredType_Abstract();
+
+		/**
+		 * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JVM_DECLARED_TYPE__STATIC = eINSTANCE.getJvmDeclaredType_Static();
+
+		/**
+		 * The meta object literal for the '<em><b>Final</b></em>' attribute feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JVM_DECLARED_TYPE__FINAL = eINSTANCE.getJvmDeclaredType_Final();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeParameterImpl <em>Jvm Type Parameter</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2562,6 +3510,32 @@ public interface TypesPackage extends EPackage {
 		EClass JVM_ENUMERATION_TYPE = eINSTANCE.getJvmEnumerationType();
 
 		/**
+		 * The meta object literal for the '<em><b>Literals</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JVM_ENUMERATION_TYPE__LITERALS = eINSTANCE.getJvmEnumerationType_Literals();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmEnumerationLiteralImpl <em>Jvm Enumeration Literal</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmEnumerationLiteralImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmEnumerationLiteral()
+		 * @generated
+		 */
+		EClass JVM_ENUMERATION_LITERAL = eINSTANCE.getJvmEnumerationLiteral();
+
+		/**
+		 * The meta object literal for the '<em><b>Enum Type</b></em>' container reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JVM_ENUMERATION_LITERAL__ENUM_TYPE = eINSTANCE.getJvmEnumerationLiteral_EnumType();
+
+		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl <em>Jvm Generic Type</em>}' class.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
@@ -2572,36 +3546,12 @@ public interface TypesPackage extends EPackage {
 		EClass JVM_GENERIC_TYPE = eINSTANCE.getJvmGenericType();
 
 		/**
-		 * The meta object literal for the '<em><b>Abstract</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute JVM_GENERIC_TYPE__ABSTRACT = eINSTANCE.getJvmGenericType_Abstract();
-
-		/**
 		 * The meta object literal for the '<em><b>Interface</b></em>' attribute feature.
 		 * <!-- begin-user-doc -->
 		 * <!-- end-user-doc -->
 		 * @generated
 		 */
 		EAttribute JVM_GENERIC_TYPE__INTERFACE = eINSTANCE.getJvmGenericType_Interface();
-
-		/**
-		 * The meta object literal for the '<em><b>Static</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute JVM_GENERIC_TYPE__STATIC = eINSTANCE.getJvmGenericType_Static();
-
-		/**
-		 * The meta object literal for the '<em><b>Final</b></em>' attribute feature.
-		 * <!-- begin-user-doc -->
-		 * <!-- end-user-doc -->
-		 * @generated
-		 */
-		EAttribute JVM_GENERIC_TYPE__FINAL = eINSTANCE.getJvmGenericType_Final();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeReferenceImpl <em>Jvm Type Reference</em>}' class.
@@ -2928,6 +3878,248 @@ public interface TypesPackage extends EPackage {
 		 * @generated
 		 */
 		EReference JVM_ANNOTATION_REFERENCE__TARGET = eINSTANCE.getJvmAnnotationReference_Target();
+
+		/**
+		 * The meta object literal for the '<em><b>Values</b></em>' containment reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JVM_ANNOTATION_REFERENCE__VALUES = eINSTANCE.getJvmAnnotationReference_Values();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmAnnotationValueImpl <em>Jvm Annotation Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmAnnotationValueImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnnotationValue()
+		 * @generated
+		 */
+		EClass JVM_ANNOTATION_VALUE = eINSTANCE.getJvmAnnotationValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Operation</b></em>' reference feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JVM_ANNOTATION_VALUE__OPERATION = eINSTANCE.getJvmAnnotationValue_Operation();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmIntAnnotationValueImpl <em>Jvm Int Annotation Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmIntAnnotationValueImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmIntAnnotationValue()
+		 * @generated
+		 */
+		EClass JVM_INT_ANNOTATION_VALUE = eINSTANCE.getJvmIntAnnotationValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Values</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JVM_INT_ANNOTATION_VALUE__VALUES = eINSTANCE.getJvmIntAnnotationValue_Values();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmByteAnnotationValueImpl <em>Jvm Byte Annotation Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmByteAnnotationValueImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmByteAnnotationValue()
+		 * @generated
+		 */
+		EClass JVM_BYTE_ANNOTATION_VALUE = eINSTANCE.getJvmByteAnnotationValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Values</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JVM_BYTE_ANNOTATION_VALUE__VALUES = eINSTANCE.getJvmByteAnnotationValue_Values();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmBooleanAnnotationValueImpl <em>Jvm Boolean Annotation Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmBooleanAnnotationValueImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmBooleanAnnotationValue()
+		 * @generated
+		 */
+		EClass JVM_BOOLEAN_ANNOTATION_VALUE = eINSTANCE.getJvmBooleanAnnotationValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Values</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JVM_BOOLEAN_ANNOTATION_VALUE__VALUES = eINSTANCE.getJvmBooleanAnnotationValue_Values();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmShortAnnotationValueImpl <em>Jvm Short Annotation Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmShortAnnotationValueImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmShortAnnotationValue()
+		 * @generated
+		 */
+		EClass JVM_SHORT_ANNOTATION_VALUE = eINSTANCE.getJvmShortAnnotationValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Values</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JVM_SHORT_ANNOTATION_VALUE__VALUES = eINSTANCE.getJvmShortAnnotationValue_Values();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmLongAnnotationValueImpl <em>Jvm Long Annotation Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmLongAnnotationValueImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmLongAnnotationValue()
+		 * @generated
+		 */
+		EClass JVM_LONG_ANNOTATION_VALUE = eINSTANCE.getJvmLongAnnotationValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Values</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JVM_LONG_ANNOTATION_VALUE__VALUES = eINSTANCE.getJvmLongAnnotationValue_Values();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmDoubleAnnotationValueImpl <em>Jvm Double Annotation Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmDoubleAnnotationValueImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmDoubleAnnotationValue()
+		 * @generated
+		 */
+		EClass JVM_DOUBLE_ANNOTATION_VALUE = eINSTANCE.getJvmDoubleAnnotationValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Values</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JVM_DOUBLE_ANNOTATION_VALUE__VALUES = eINSTANCE.getJvmDoubleAnnotationValue_Values();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmFloatAnnotationValueImpl <em>Jvm Float Annotation Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmFloatAnnotationValueImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmFloatAnnotationValue()
+		 * @generated
+		 */
+		EClass JVM_FLOAT_ANNOTATION_VALUE = eINSTANCE.getJvmFloatAnnotationValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Values</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JVM_FLOAT_ANNOTATION_VALUE__VALUES = eINSTANCE.getJvmFloatAnnotationValue_Values();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmCharAnnotationValueImpl <em>Jvm Char Annotation Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmCharAnnotationValueImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmCharAnnotationValue()
+		 * @generated
+		 */
+		EClass JVM_CHAR_ANNOTATION_VALUE = eINSTANCE.getJvmCharAnnotationValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Values</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JVM_CHAR_ANNOTATION_VALUE__VALUES = eINSTANCE.getJvmCharAnnotationValue_Values();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmStringAnnotationValueImpl <em>Jvm String Annotation Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmStringAnnotationValueImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmStringAnnotationValue()
+		 * @generated
+		 */
+		EClass JVM_STRING_ANNOTATION_VALUE = eINSTANCE.getJvmStringAnnotationValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Values</b></em>' attribute list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EAttribute JVM_STRING_ANNOTATION_VALUE__VALUES = eINSTANCE.getJvmStringAnnotationValue_Values();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmTypeAnnotationValueImpl <em>Jvm Type Annotation Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmTypeAnnotationValueImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmTypeAnnotationValue()
+		 * @generated
+		 */
+		EClass JVM_TYPE_ANNOTATION_VALUE = eINSTANCE.getJvmTypeAnnotationValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Values</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JVM_TYPE_ANNOTATION_VALUE__VALUES = eINSTANCE.getJvmTypeAnnotationValue_Values();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmAnnotationAnnotationValueImpl <em>Jvm Annotation Annotation Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmAnnotationAnnotationValueImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmAnnotationAnnotationValue()
+		 * @generated
+		 */
+		EClass JVM_ANNOTATION_ANNOTATION_VALUE = eINSTANCE.getJvmAnnotationAnnotationValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Values</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JVM_ANNOTATION_ANNOTATION_VALUE__VALUES = eINSTANCE.getJvmAnnotationAnnotationValue_Values();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.impl.JvmEnumAnnotationValueImpl <em>Jvm Enum Annotation Value</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.common.types.impl.JvmEnumAnnotationValueImpl
+		 * @see org.eclipse.xtext.common.types.impl.TypesPackageImpl#getJvmEnumAnnotationValue()
+		 * @generated
+		 */
+		EClass JVM_ENUM_ANNOTATION_VALUE = eINSTANCE.getJvmEnumAnnotationValue();
+
+		/**
+		 * The meta object literal for the '<em><b>Values</b></em>' reference list feature.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @generated
+		 */
+		EReference JVM_ENUM_ANNOTATION_VALUE__VALUES = eINSTANCE.getJvmEnumAnnotationValue_Values();
 
 		/**
 		 * The meta object literal for the '{@link org.eclipse.xtext.common.types.JvmVisibility <em>Jvm Visibility</em>}' enum.

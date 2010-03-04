@@ -26,6 +26,9 @@
         eType="#//JvmTypeReference" containment="true"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="members" upperBound="-1"
         eType="#//JvmMember" containment="true" eOpposite="#//JvmMember/declaringType"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="final" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmTypeParameter" eSuperTypes="#//JvmComponentType #//JvmConstraintOwner">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
@@ -51,7 +54,14 @@
   <eClassifiers xsi:type="ecore:EClass" name="JvmUpperBound" eSuperTypes="#//JvmTypeConstraint"/>
   <eClassifiers xsi:type="ecore:EClass" name="JvmLowerBound" eSuperTypes="#//JvmTypeConstraint"/>
   <eClassifiers xsi:type="ecore:EClass" name="JvmAnnotationType" eSuperTypes="#//JvmDeclaredType"/>
-  <eClassifiers xsi:type="ecore:EClass" name="JvmEnumerationType" eSuperTypes="#//JvmDeclaredType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmEnumerationType" eSuperTypes="#//JvmDeclaredType">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="literals" upperBound="-1"
+        eType="#//JvmEnumerationLiteral" containment="true" eOpposite="#//JvmEnumerationLiteral/enumType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmEnumerationLiteral" eSuperTypes="#//JvmIdentifyableElement">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="enumType" eType="#//JvmEnumerationType"
+        eOpposite="#//JvmEnumerationType/literals"/>
+  </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmGenericType" eSuperTypes="#//JvmDeclaredType #//JvmTypeParameterDeclarator">
     <eOperations name="getExtendedInterfaces">
       <eGenericType eClassifier="#//Iterable">
@@ -64,10 +74,7 @@
       </eGenericType>
     </eOperations>
     <eOperations name="isInstantiateable" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="abstract" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="interface" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="static" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
-    <eStructuralFeatures xsi:type="ecore:EAttribute" name="final" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EClass" name="JvmTypeReference" abstract="true" eSuperTypes="#//JvmIdentifyableElement">
     <eOperations name="getType" eType="#//JvmType"/>
@@ -139,6 +146,60 @@
     <eStructuralFeatures xsi:type="ecore:EReference" name="annotation" eType="#//JvmAnnotationType"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="target" eType="#//JvmAnnotationTarget"
         eOpposite="#//JvmAnnotationTarget/annotations"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="#//JvmAnnotationValue" containment="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmAnnotationValue" abstract="true">
+    <eOperations name="getValueName" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="operation" eType="#//JvmOperation"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmIntAnnotationValue" eSuperTypes="#//JvmAnnotationValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="values" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EInt"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmBooleanAnnotationValue" eSuperTypes="#//JvmAnnotationValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="values" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBoolean"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmByteAnnotationValue" eSuperTypes="#//JvmAnnotationValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="values" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EByte"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmShortAnnotationValue" eSuperTypes="#//JvmAnnotationValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="values" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EShort"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmLongAnnotationValue" eSuperTypes="#//JvmAnnotationValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="values" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//ELong"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmDoubleAnnotationValue" eSuperTypes="#//JvmAnnotationValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="values" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EDouble"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmFloatAnnotationValue" eSuperTypes="#//JvmAnnotationValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="values" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EFloat"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmCharAnnotationValue" eSuperTypes="#//JvmAnnotationValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="values" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EChar"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmStringAnnotationValue" eSuperTypes="#//JvmAnnotationValue">
+    <eStructuralFeatures xsi:type="ecore:EAttribute" name="values" upperBound="-1"
+        eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmTypeAnnotationValue" eSuperTypes="#//JvmAnnotationValue">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="#//JvmType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmAnnotationAnnotationValue" eSuperTypes="#//JvmAnnotationValue #//JvmAnnotationTarget">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="#//JvmAnnotationReference" changeable="false" derived="true"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="JvmEnumAnnotationValue" eSuperTypes="#//JvmAnnotationValue">
+    <eStructuralFeatures xsi:type="ecore:EReference" name="values" upperBound="-1"
+        eType="#//JvmEnumerationLiteral"/>
   </eClassifiers>
   <eClassifiers xsi:type="ecore:EDataType" name="Iterable" instanceClassName="java.lang.Iterable">
     <eTypeParameters name="E"/>

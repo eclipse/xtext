@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types;
 
+import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 
 /**
@@ -19,6 +20,7 @@ import org.eclipse.emf.ecore.EObject;
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.JvmAnnotationReference#getAnnotation <em>Annotation</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.JvmAnnotationReference#getTarget <em>Target</em>}</li>
+ *   <li>{@link org.eclipse.xtext.common.types.JvmAnnotationReference#getValues <em>Values</em>}</li>
  * </ul>
  * </p>
  *
@@ -80,5 +82,21 @@ public interface JvmAnnotationReference extends EObject {
 	 * @generated
 	 */
 	void setTarget(JvmAnnotationTarget value);
+
+	/**
+	 * Returns the value of the '<em><b>Values</b></em>' containment reference list.
+	 * The list contents are of type {@link org.eclipse.xtext.common.types.JvmAnnotationValue}.
+	 * <!-- begin-user-doc -->
+	 * <p>
+	 * If the meaning of the '<em>Values</em>' containment reference list isn't clear,
+	 * there really should be more of a description here...
+	 * </p>
+	 * <!-- end-user-doc -->
+	 * @return the value of the '<em>Values</em>' containment reference list.
+	 * @see org.eclipse.xtext.common.types.TypesPackage#getJvmAnnotationReference_Values()
+	 * @model containment="true"
+	 * @generated
+	 */
+	EList<JvmAnnotationValue> getValues();
 
 } // AnnotationReference

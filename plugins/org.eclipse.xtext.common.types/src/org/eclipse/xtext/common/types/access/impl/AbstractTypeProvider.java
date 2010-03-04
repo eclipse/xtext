@@ -29,7 +29,7 @@ public abstract class AbstractTypeProvider implements ITypeProvider, Resource.Fa
 		if (resourceSet == null)
 			throw new IllegalArgumentException("resourceSet may not be null");
 		this.resourceSet = resourceSet;
-		resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap().put(ClassURIHelper.PROTOCOL, this);
+		resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap().put(URIHelperConstants.PROTOCOL, this);
 		primitiveTypeFactory = new PrimitiveTypeFactory();
 	}
 
@@ -53,11 +53,11 @@ public abstract class AbstractTypeProvider implements ITypeProvider, Resource.Fa
 		if (resourceURI.hasFragment())
 			throw new IllegalArgumentException("Cannot create mirror for uri '" + resourceURI.toString() + "'");
 		String name = resourceURI.path();
-		if (ClassURIHelper.PRIMITIVES.equals(name))
+		if (URIHelperConstants.PRIMITIVES.equals(name))
 			return new PrimitiveMirror(primitiveTypeFactory);
-		if (!name.startsWith(ClassURIHelper.OBJECTS))
+		if (!name.startsWith(URIHelperConstants.OBJECTS))
 			throw new IllegalArgumentException("Invalid resource uri '" + resourceURI.toString() + "'");
-		name = name.substring(ClassURIHelper.OBJECTS.length());
+		name = name.substring(URIHelperConstants.OBJECTS.length());
 		return createMirrorForFQN(name);
 	}
 

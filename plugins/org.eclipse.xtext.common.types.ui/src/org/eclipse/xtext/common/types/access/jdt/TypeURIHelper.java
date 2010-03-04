@@ -57,6 +57,15 @@ public class TypeURIHelper implements URIHelperConstants {
 		createFragment(signature, declarator, uriBuilder);
 		return createURI(uriBuilder);
 	}
+	
+	public URI getFullURI(String signature, String method, IMember declarator) throws JavaModelException {
+		StringBuilder uriBuilder = createURIBuilder();
+		createResourceURI(signature, declarator, uriBuilder);
+		uriBuilder.append('#');
+		createFragment(signature, declarator, uriBuilder);
+		uriBuilder.append('.').append(method).append("()");
+		return createURI(uriBuilder);
+	}
 
 	protected void createFragment(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
 		int signatureKind = Signature.getTypeSignatureKind(signature);
@@ -258,22 +267,26 @@ public class TypeURIHelper implements URIHelperConstants {
 	}
 
 	protected void createResourceURI(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
-		int signatureKind = Signature.getTypeSignatureKind(signature);
-		switch (signatureKind) {
-			case Signature.BASE_TYPE_SIGNATURE:
-				createResourceURIForPrimitive(signature, uriBuilder);
-				return;
-			case Signature.CLASS_TYPE_SIGNATURE:
-				createResourceURIForClass(signature, declarator, uriBuilder);
-				return;
-			case Signature.ARRAY_TYPE_SIGNATURE:
-				createResourceURIForArray(signature, declarator, uriBuilder);
-				return;
-			case Signature.TYPE_VARIABLE_SIGNATURE:
-				createResourceURIForTypeVariable(signature, declarator, uriBuilder);
-				return;
-			default:
-				throw new IllegalStateException("Unexpected Signature: " + signature);
+		try {
+			int signatureKind = Signature.getTypeSignatureKind(signature);
+			switch (signatureKind) {
+				case Signature.BASE_TYPE_SIGNATURE:
+					createResourceURIForPrimitive(signature, uriBuilder);
+					return;
+				case Signature.CLASS_TYPE_SIGNATURE:
+					createResourceURIForClass(signature, declarator, uriBuilder);
+					return;
+				case Signature.ARRAY_TYPE_SIGNATURE:
+					createResourceURIForArray(signature, declarator, uriBuilder);
+					return;
+				case Signature.TYPE_VARIABLE_SIGNATURE:
+					createResourceURIForTypeVariable(signature, declarator, uriBuilder);
+					return;
+				default:
+					throw new IllegalStateException("Unexpected Signature: " + signature);
+			}
+		} catch(IllegalArgumentException e) {
+			throw new IllegalArgumentException(e.getMessage() + " was: " + signature, e);
 		}
 	}
 
@@ -328,18 +341,24 @@ public class TypeURIHelper implements URIHelperConstants {
 			if (declarator instanceof IType) {
 				resolveContext = (IType) declarator;
 			}
-			String[][] resolved = resolveContext.resolveType(readable);
-			if (resolved != null && resolved.length == 1) {
-				readable = resolved[0][0];
-				if (readable != null && readable.length() >= 1) {
-					readable = readable + '.' + resolved[0][1];
-				} else {
-					readable = resolved[0][1];
-				}
-				signature = Signature.createTypeSignature(readable, true);
+			signature = resolveTypeName(readable, resolveContext);
+		}
+		return signature;
+	}
+
+	public String resolveTypeName(String readable, IType resolveContext) throws JavaModelException {
+		String signature;
+		String[][] resolved = resolveContext.resolveType(readable);
+		if (resolved != null && resolved.length == 1) {
+			readable = resolved[0][0];
+			if (readable != null && readable.length() >= 1) {
+				readable = readable + '.' + resolved[0][1];
 			} else {
-				signature = Signature.createTypeSignature(readable, true);
+				readable = resolved[0][1];
 			}
+			signature = Signature.createTypeSignature(readable, true);
+		} else {
+			signature = Signature.createTypeSignature(readable, true);
 		}
 		return signature;
 	}
