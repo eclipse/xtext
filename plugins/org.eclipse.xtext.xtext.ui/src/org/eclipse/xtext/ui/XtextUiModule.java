@@ -71,7 +71,6 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 		return XtextAutoEditStrategy.class;
 	}
 
-	@Override
 	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
 		return XtextLocationInFileProvider.class;
 	}
