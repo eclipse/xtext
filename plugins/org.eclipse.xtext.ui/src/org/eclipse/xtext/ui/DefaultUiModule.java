@@ -21,9 +21,7 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.formatting.IIndentationInformation;
-import org.eclipse.xtext.resource.DefaultLocationInFileProvider;
 import org.eclipse.xtext.resource.IExternalContentSupport;
-import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
@@ -101,10 +99,6 @@ public class DefaultUiModule extends AbstractGenericModule {
 
 	public IPreferenceStore bindIPreferenceStore() {
 		return plugin.getPreferenceStore();
-	}
-
-	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
-		return DefaultLocationInFileProvider.class;
 	}
 
 	public Class<? extends IReconciler> bindIReconciler() {

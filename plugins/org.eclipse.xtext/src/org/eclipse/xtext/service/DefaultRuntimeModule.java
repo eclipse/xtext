@@ -38,8 +38,10 @@ import org.eclipse.xtext.parsetree.reconstr.impl.DefaultHiddenTokenMerger;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultUnassignedTextSerializer;
 import org.eclipse.xtext.resource.DefaultFragmentProvider;
+import org.eclipse.xtext.resource.DefaultLocationInFileProvider;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IFragmentProvider;
+import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceFactory;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
@@ -97,6 +99,10 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 		return DefaultTransientValueService.class;
 	}
 
+	public Class<? extends ILocationInFileProvider> bindILocationInFileProvider() {
+		return DefaultLocationInFileProvider.class;
+	}
+	
 	public Class<? extends IUnassignedTextSerializer> bindIUnassignedTextSerializer() {
 		return DefaultUnassignedTextSerializer.class;
 	}
