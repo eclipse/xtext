@@ -55,7 +55,9 @@ public class DefaultContentOutlineNodeAdapterFactory implements IContentOutlineN
 	private Object getUnderlyingResource() {
 		IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 		XtextEditor activeEditor = (XtextEditor) activePage.getActiveEditor();
-		return activeEditor.getResource();
+		if (activeEditor != null)
+			return activeEditor.getResource();
+		return null;
 	}
 
 	/**
