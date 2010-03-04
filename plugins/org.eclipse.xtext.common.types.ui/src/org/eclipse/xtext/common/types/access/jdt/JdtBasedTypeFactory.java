@@ -294,8 +294,7 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 				if (method.isConstructor()) {
 					result.getMembers().add(createConstructor(method));
 					constructorCreated = true;
-				}
-				else {
+				} else {
 					result.getMembers().add(createOperation(method));
 				}
 			}
