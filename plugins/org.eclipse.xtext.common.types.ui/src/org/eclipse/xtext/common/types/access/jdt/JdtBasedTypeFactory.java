@@ -28,6 +28,7 @@ import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMemberValuePairBinding;
+import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue;
 import org.eclipse.xtext.common.types.JvmAnnotationReference;
@@ -113,8 +114,30 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		parser.setProject(declarator.getJavaProject());
 		IBinding[] bindings = parser.createBindings(new IJavaElement[] {declarator}, null);
 		if (bindings[0] != null) {
-			for(IAnnotationBinding annotation: bindings[0].getAnnotations()) {
-				createAnnotationReference(result, declarator, annotation);
+			if (declarator instanceof IMethod && ((IMethod) declarator).isConstructor()) {
+				ITypeBinding typeBinding = (ITypeBinding) bindings[0];
+				IMethod method = (IMethod) declarator;
+				String bindingKey = method.getKey();
+				{
+					int idx = bindingKey.indexOf('(');
+					bindingKey = bindingKey.substring(idx);
+				}
+				for(IMethodBinding methodBinding: typeBinding.getDeclaredMethods()) {
+					if (methodBinding.isConstructor()) {
+						String actualKey = methodBinding.getKey();
+						int idx = actualKey.indexOf('(');
+						actualKey = actualKey.substring(idx);
+						if (bindingKey.equals(actualKey)) {
+							for(IAnnotationBinding annotation: methodBinding.getAnnotations()) {
+								createAnnotationReference(result, declarator, annotation);
+							}		
+						}
+					}
+				}
+			} else {
+				for(IAnnotationBinding annotation: bindings[0].getAnnotations()) {
+					createAnnotationReference(result, declarator, annotation);
+				}
 			}
 		} 
 	}

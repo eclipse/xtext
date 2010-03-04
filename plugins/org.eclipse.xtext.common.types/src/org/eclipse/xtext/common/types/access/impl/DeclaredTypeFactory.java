@@ -369,7 +369,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 
 	public <T> org.eclipse.xtext.common.types.JvmConstructor createConstructor(Constructor<T> constructor) {
 		org.eclipse.xtext.common.types.JvmConstructor result = TypesFactory.eINSTANCE.createJvmConstructor();
-		enhanceExecutable(result, constructor, constructor.getGenericParameterTypes());
+		enhanceExecutable(result, constructor, constructor.getDeclaringClass().getSimpleName(), constructor.getGenericParameterTypes());
 		enhanceGenericDeclaration(result, constructor);
 		for (Type parameterType : constructor.getGenericExceptionTypes()) {
 			result.getExceptions().add(createTypeReference(parameterType));
@@ -389,11 +389,11 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			result.setVisibility(JvmVisibility.DEFAULT);
 	}
 
-	public void enhanceExecutable(JvmExecutable result, Member member, Type[] parameterTypes) {
+	public void enhanceExecutable(JvmExecutable result, Member member, String simpleName, Type[] parameterTypes) {
 		StringBuilder fqName = new StringBuilder(48);
 		fqName.append(member.getDeclaringClass().getName());
 		fqName.append('.');
-		fqName.append(member.getName());
+		fqName.append(simpleName);
 		fqName.append('(');
 		for (int i = 0; i < parameterTypes.length; i++) {
 			if (i != 0)
@@ -418,7 +418,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 
 	public JvmOperation createOperation(Method method) {
 		JvmOperation result = TypesFactory.eINSTANCE.createJvmOperation();
-		enhanceExecutable(result, method, method.getGenericParameterTypes());
+		enhanceExecutable(result, method, method.getName(), method.getGenericParameterTypes());
 		enhanceGenericDeclaration(result, method);
 		result.setFinal(Modifier.isFinal(method.getModifiers()));
 		result.setStatic(Modifier.isStatic(method.getModifiers()));
