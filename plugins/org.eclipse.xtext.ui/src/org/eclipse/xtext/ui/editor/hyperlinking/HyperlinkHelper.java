@@ -69,7 +69,8 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 			IHyperlinkAcceptor acceptor = new HyperlinkAcceptor(links);
 			Region region = new Region(textLocation.getOffset(), textLocation.getLength());
 			createHyperlinksTo(resource, region, crossLinkedEObject, acceptor);
-			return Iterables.newArray(links, IHyperlink.class);				
+			if (!links.isEmpty())
+				return Iterables.newArray(links, IHyperlink.class);				
 		}
 		return null;
 	}
