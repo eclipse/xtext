@@ -8,6 +8,7 @@
 package org.eclipse.xtext.common.types.access.impl;
 
 import java.io.Serializable;
+import java.lang.annotation.Annotation;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Set;
@@ -776,6 +777,14 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertNotNull(methodName, result);
 		return result;
 	}
+	
+	private JvmConstructor getConstructorFromType(EObject context, Class<?> type, String constructor) {
+		String methodName = type.getName() + "." + constructor;
+		assertNotNull(context);
+		JvmConstructor result = (JvmConstructor) context.eResource().getEObject(methodName);
+		assertNotNull(methodName, result);
+		return result;
+	}
 
 	public void test_ParameterizedTypes_01() {
 		String typeName = ParameterizedTypes.class.getName();
@@ -1329,7 +1338,14 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		JvmType type = getTypeProvider().findTypeByName(typeName);
 		assertNotNull(type);
 		assertTrue(type instanceof JvmAnnotationType);
-		diagnose(type);	
+		diagnose(type);
+	}
+	
+	public void testAnnotationType_02() throws Exception {
+		String typeName = TestAnnotation.class.getName();
+		JvmAnnotationType type = (JvmAnnotationType) getTypeProvider().findTypeByName(typeName);
+		assertEquals(1, type.getSuperTypes().size());
+		assertEquals(Annotation.class.getName(), type.getSuperTypes().get(0).getCanonicalName());
 	}
 	
 	public void testAnnotations_01() throws Exception {
@@ -1452,6 +1468,10 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 	public JvmAnnotationValue getAnnotationValue(String name) {
 		String typeName = TestAnnotation.Annotated.class.getName();
 		JvmAnnotationTarget target = (JvmAnnotationTarget) getTypeProvider().findTypeByName(typeName);
+		return getAnnotationValue(name, target);
+	}
+
+	public JvmAnnotationValue getAnnotationValue(String name, JvmAnnotationTarget target) {
 		JvmAnnotationReference annotationReference = target.getAnnotations().get(0);
 		for(JvmAnnotationValue value: annotationReference.getValues()) {
 			if (name.equals(value.getValueName()))
@@ -1459,6 +1479,61 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		}
 		fail("Cannot find annotationValue " + name);
 		return null;
+	}
+	
+	public void testAnnotatedMethod_01() throws Exception {
+		String typeName = TestAnnotation.Annotated.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmOperation operation = getMethodFromType(type, TestAnnotation.Annotated.class, "method()");
+		assertNotNull(operation);
+		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getAnnotationValue("value", operation);
+		assertEquals(1, value.getValues().size());
+		String s = value.getValues().get(0);
+		assertEquals("method", s);
+	}
+	
+	public void testAnnotatedConstructor_01() throws Exception {
+		String typeName = TestAnnotation.Annotated.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmConstructor constructor = getConstructorFromType(type, TestAnnotation.Annotated.class, "Annotated()");
+		assertNotNull(constructor);
+		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getAnnotationValue("value", constructor);
+		assertEquals(1, value.getValues().size());
+		String s = value.getValues().get(0);
+		assertEquals("constructor", s);
+	}
+	
+	public void testAnnotatedConstructor_02() throws Exception {
+		String typeName = TestAnnotation.Annotated.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmConstructor constructor = getConstructorFromType(type, TestAnnotation.Annotated.class, "Annotated(java.lang.String)");
+		assertNotNull(constructor);
+		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getAnnotationValue("value", constructor);
+		assertEquals(1, value.getValues().size());
+		String s = value.getValues().get(0);
+		assertEquals("secondConstructor", s);
+	}
+	
+	public void testAnnotatedConstructor_03() throws Exception {
+		String typeName = TestAnnotation.Annotated.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmConstructor constructor = getConstructorFromType(type, TestAnnotation.Annotated.class, "Annotated(java.lang.String,T)");
+		assertNotNull(constructor);
+		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getAnnotationValue("value", constructor);
+		assertEquals(1, value.getValues().size());
+		String s = value.getValues().get(0);
+		assertEquals("parameterizedConstructor", s);
+	}
+	
+	public void testAnnotatedField_01() throws Exception {
+		String typeName = TestAnnotation.Annotated.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmField field = getFieldFromType(type, TestAnnotation.Annotated.class, "field");
+		assertNotNull(field);
+		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getAnnotationValue("value", field);
+		assertEquals(1, value.getValues().size());
+		String s = value.getValues().get(0);
+		assertEquals("MyString", s);
 	}
 	
 	protected abstract String getCollectionParamName();
