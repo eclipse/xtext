@@ -129,7 +129,7 @@ public class EMFBasedPersister implements PersistableResourceDescriptionsImpl.Pe
 	}
 
 	protected void doFullBuild() {
-		new Job("Indexing Xtext Resources") {
+		new Job("Building workspace") {
 			{
 				setRule(workspace.getRuleFactory().buildRule());
 			}
