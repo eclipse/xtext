@@ -40,7 +40,7 @@ public class ClasspathTypeProviderTest extends AbstractTypeProviderTest {
 	
 	public void testSetup_01() {
 		Map<String, Object> map = resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap();
-		assertSame(getTypeProvider(), map.get(ClassURIHelper.PROTOCOL));
+		assertSame(getTypeProvider(), map.get(URIHelperConstants.PROTOCOL));
 	}
 	
 	public void testCreateResource_01() {

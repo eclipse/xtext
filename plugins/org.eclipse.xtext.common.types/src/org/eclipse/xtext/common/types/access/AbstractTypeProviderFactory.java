@@ -9,7 +9,7 @@ package org.eclipse.xtext.common.types.access;
 
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -19,7 +19,7 @@ public abstract class AbstractTypeProviderFactory implements ITypeProvider.Facto
 	public ITypeProvider findTypeProvider(ResourceSet resourceSet) {
 		if (resourceSet == null)
 			throw new IllegalArgumentException("resourceSet may not be null.");
-		return (ITypeProvider) resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap().get(ClassURIHelper.PROTOCOL);
+		return (ITypeProvider) resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap().get(URIHelperConstants.PROTOCOL);
 	}
 
 	public ITypeProvider createTypeProvider() {

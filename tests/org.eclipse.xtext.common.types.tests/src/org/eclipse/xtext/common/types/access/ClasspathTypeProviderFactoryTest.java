@@ -9,12 +9,12 @@ package org.eclipse.xtext.common.types.access;
 
 import java.util.Map;
 
+import junit.framework.TestCase;
+
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
-import org.eclipse.xtext.common.types.access.impl.ClassURIHelper;
 import org.eclipse.xtext.common.types.access.impl.ClasspathTypeProvider;
-
-import junit.framework.TestCase;
+import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -52,7 +52,7 @@ public class ClasspathTypeProviderFactoryTest extends TestCase {
 		ClasspathTypeProvider typeProvider = factory.createTypeProvider();
 		ResourceSet resourceSet = typeProvider.getResourceSet();
 		Map<String, Object> map = resourceSet.getResourceFactoryRegistry().getProtocolToFactoryMap();
-		assertEquals(typeProvider, map.get(ClassURIHelper.PROTOCOL));
+		assertEquals(typeProvider, map.get(URIHelperConstants.PROTOCOL));
 	}
 	
 	public void testFindTypeProvider_01() {

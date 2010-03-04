@@ -7,6 +7,9 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.AnnotatedElement;
+import java.lang.reflect.Array;
 import java.lang.reflect.Constructor;
 import java.lang.reflect.Field;
 import java.lang.reflect.GenericArrayType;
@@ -18,11 +21,16 @@ import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.lang.reflect.TypeVariable;
 import java.lang.reflect.WildcardType;
+import java.util.Collections;
+import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.xtext.common.types.JvmAnnotationReference;
+import org.eclipse.xtext.common.types.JvmAnnotationTarget;
 import org.eclipse.xtext.common.types.JvmAnnotationType;
+import org.eclipse.xtext.common.types.JvmAnnotationValue;
 import org.eclipse.xtext.common.types.JvmArrayType;
 import org.eclipse.xtext.common.types.JvmDeclaredType;
 import org.eclipse.xtext.common.types.JvmEnumerationType;
@@ -34,12 +42,15 @@ import org.eclipse.xtext.common.types.JvmLowerBound;
 import org.eclipse.xtext.common.types.JvmOperation;
 import org.eclipse.xtext.common.types.JvmParameterizedTypeReference;
 import org.eclipse.xtext.common.types.JvmReferenceTypeArgument;
+import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeArgument;
 import org.eclipse.xtext.common.types.JvmTypeReference;
-import org.eclipse.xtext.common.types.TypesFactory;
 import org.eclipse.xtext.common.types.JvmUpperBound;
 import org.eclipse.xtext.common.types.JvmVisibility;
 import org.eclipse.xtext.common.types.JvmWildcardTypeArgument;
+import org.eclipse.xtext.common.types.TypesFactory;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -62,21 +73,12 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			return createEnumerationType(clazz);
 
 		JvmGenericType result = TypesFactory.eINSTANCE.createJvmGenericType();
-		result.setAbstract(Modifier.isAbstract(clazz.getModifiers()));
-		result.setFinal(Modifier.isFinal(clazz.getModifiers()));
 		result.setInterface(clazz.isInterface());
-		result.setStatic(Modifier.isStatic(clazz.getModifiers()));
+		setTypeModifiers(clazz, result);
 		setVisibility(clazz, result);
 		result.setFullyQualifiedName(clazz.getName());
-		for (Class<?> declaredClass : clazz.getDeclaredClasses()) {
-			if (!declaredClass.isAnonymousClass() && !declaredClass.isSynthetic()) {
-				result.getMembers().add(createType(declaredClass));
-			}
-		}
-		for (Method method : clazz.getDeclaredMethods()) {
-			if (!method.isSynthetic())
-				result.getMembers().add(createOperation(method));
-		}
+		createNestedTypes(clazz, result);
+		createMethods(clazz, result);
 		for (Constructor<?> constructor : clazz.getDeclaredConstructors()) {
 			if (!constructor.isSynthetic())
 				result.getMembers().add(createConstructor(constructor));
@@ -85,23 +87,172 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 			if (!field.isSynthetic())
 				result.getMembers().add(createField(field));
 		}
-		if (clazz.getGenericSuperclass() != null)
-			result.getSuperTypes().add(createTypeReference(clazz.getGenericSuperclass()));
-		for (Type type : clazz.getGenericInterfaces()) {
-			result.getSuperTypes().add(createTypeReference(type));
-		}
+		setSuperTypes(clazz, result);
 		for (TypeVariable<?> variable : clazz.getTypeParameters()) {
 			result.getTypeParameters().add(createTypeParameter(variable, result));
 		}
+		createAnnotationValues(clazz, result);
 		return result;
+	}
+
+	private static final Object[] EMPTY_ARRAY = new Object[0];
+	
+	protected void createAnnotationValues(AnnotatedElement annotated, JvmAnnotationTarget result) {
+		for(Annotation annotation: annotated.getDeclaredAnnotations()) {
+			createAnnotationReference(result, annotation);
+		}
+	}
+
+	protected JvmAnnotationReference createAnnotationReference(JvmAnnotationTarget result, Annotation annotation) {
+		JvmAnnotationReference annotationReference = TypesFactory.eINSTANCE.createJvmAnnotationReference();
+		result.getAnnotations().add(annotationReference);
+		Class<? extends Annotation> type = annotation.annotationType();
+		annotationReference.setAnnotation(createAnnotationProxy(type));
+		for(Method method: type.getDeclaredMethods()) {
+			try {
+				Object value = method.invoke(annotation, EMPTY_ARRAY);
+				if (method.getReturnType().isArray()) {
+					JvmAnnotationValue annotationValue = createArrayAnnotationValue(value, method.getReturnType());
+					annotationReference.getValues().add(annotationValue);
+					annotationValue.setOperation(createMethodProxy(method));
+				} else {
+					JvmAnnotationValue annotationValue = createAnnotationValue(value, method.getReturnType());
+					annotationReference.getValues().add(annotationValue);
+					annotationValue.setOperation(createMethodProxy(method));
+				}
+			} catch(Exception e) {
+				log.error(e.getMessage(), e);
+			}
+		}
+		return annotationReference;
+	}
+
+	protected JvmAnnotationValue createArrayAnnotationValue(Object value, Class<?> type) {
+		if (!type.isArray())
+			throw new IllegalArgumentException("type is not an array type: " + type.getCanonicalName());
+		Class<?> componentType = type.getComponentType();
+		JvmAnnotationValue result = createAnnotationValue(componentType);
+		int length = Array.getLength(value);
+		if (length > 0) {
+			List<Object> valuesAsList = Lists.newArrayListWithExpectedSize(length);
+			if (componentType.isPrimitive() || String.class.equals(componentType)) {
+				for(int i = 0; i < length; i++) {
+					valuesAsList.add(Array.get(value, i));
+				}
+			} else if(componentType.equals(Class.class)) {
+				for(int i = 0; i < length; i++) {
+					Class<?> referencedClass = (Class<?>) Array.get(value, i);
+					valuesAsList.add(createProxy(referencedClass));
+				}
+			} else if(componentType.isAnnotation()) {
+				for(int i = 0; i < length; i++) {
+					Annotation nestedAnnotation = (Annotation) Array.get(value, i);
+					createAnnotationReference((JvmAnnotationTarget) result, nestedAnnotation);
+				}
+			}
+			if (!componentType.isAnnotation())
+				result.eSet(result.eClass().getEStructuralFeature("values"), valuesAsList);
+		}
+		return result;
+	}
+	
+	protected JvmAnnotationValue createAnnotationValue(Object value, Class<?> type) {
+		JvmAnnotationValue result = createAnnotationValue(type);
+		if (type.isPrimitive() || String.class.equals(type)) {
+			result.eSet(result.eClass().getEStructuralFeature("values"), Collections.singleton(value));
+		} else if(type.equals(Class.class)) {
+			Class<?> referencedClass = (Class<?>) value;
+			JvmType proxy = createProxy(referencedClass);
+			result.eSet(result.eClass().getEStructuralFeature("values"), Collections.singleton(proxy));
+		} else if(type.isAnnotation()) {
+			Annotation nestedAnnotation = (Annotation) value;
+			createAnnotationReference((JvmAnnotationTarget) result, nestedAnnotation);
+		}
+		return result;
+	}
+	
+	protected JvmAnnotationValue createAnnotationValue(Class<?> type) {
+		if (String.class.equals(type)) {
+			return TypesFactory.eINSTANCE.createJvmStringAnnotationValue();
+		} else if (Class.class.equals(type)) {
+			return TypesFactory.eINSTANCE.createJvmTypeAnnotationValue();
+		} else if (type.isAnnotation()) {
+			return TypesFactory.eINSTANCE.createJvmAnnotationAnnotationValue();
+		} else if (type.isEnum()) {
+			return TypesFactory.eINSTANCE.createJvmEnumAnnotationValue();
+		} else if (int.class.equals(type)) {
+			return TypesFactory.eINSTANCE.createJvmIntAnnotationValue();
+		} else if (boolean.class.equals(type)) {
+			return TypesFactory.eINSTANCE.createJvmBooleanAnnotationValue();
+		} else if (long.class.equals(type)) {
+			return TypesFactory.eINSTANCE.createJvmLongAnnotationValue();
+		} else if (byte.class.equals(type)) {
+			return TypesFactory.eINSTANCE.createJvmByteAnnotationValue();
+		} else if (short.class.equals(type)) {
+			return TypesFactory.eINSTANCE.createJvmShortAnnotationValue();
+		} else if (float.class.equals(type)) {
+			return TypesFactory.eINSTANCE.createJvmFloatAnnotationValue();
+		} else if (double.class.equals(type)) {
+			return TypesFactory.eINSTANCE.createJvmDoubleAnnotationValue();
+		} else if (char.class.equals(type)) {
+			return TypesFactory.eINSTANCE.createJvmCharAnnotationValue();
+		} else
+			throw new IllegalArgumentException("Unexpected type: " + type.getCanonicalName());
+	}
+
+	protected JvmAnnotationType createAnnotationProxy(Class<? extends Annotation> type) {
+		InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createJvmAnnotationType();
+		URI uri = uriHelper.getFullURI(type);
+		proxy.eSetProxyURI(uri);
+		return (JvmAnnotationType) proxy;
+	}
+	
+	protected JvmOperation createMethodProxy(Method method) {
+		InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createJvmOperation();
+		URI uri = uriHelper.getFullURI(method);
+		proxy.eSetProxyURI(uri);
+		return (JvmOperation) proxy;
+	}
+
+	protected void setTypeModifiers(Class<?> clazz, JvmDeclaredType result) {
+		result.setAbstract(Modifier.isAbstract(clazz.getModifiers()));
+		result.setFinal(Modifier.isFinal(clazz.getModifiers()));
+		result.setStatic(Modifier.isStatic(clazz.getModifiers()));
+	}
+
+	protected void createNestedTypes(Class<?> clazz, JvmDeclaredType result) {
+		for (Class<?> declaredClass : clazz.getDeclaredClasses()) {
+			if (!declaredClass.isAnonymousClass() && !declaredClass.isSynthetic()) {
+				result.getMembers().add(createType(declaredClass));
+			}
+		}
 	}
 	
 	public JvmAnnotationType createAnnotationType(Class<?> clazz) {
 		JvmAnnotationType result = TypesFactory.eINSTANCE.createJvmAnnotationType();
 		result.setFullyQualifiedName(clazz.getName());
 		setVisibility(clazz, result);
-		log.error("Annotation types are not yet fully supported.");
+		setTypeModifiers(clazz, result);
+		createNestedTypes(clazz, result);
+		createMethods(clazz, result);
+		setSuperTypes(clazz, result);
+		createAnnotationValues(clazz, result);
 		return result;
+	}
+
+	protected void setSuperTypes(Class<?> clazz, JvmDeclaredType result) {
+		if (clazz.getGenericSuperclass() != null)
+			result.getSuperTypes().add(createTypeReference(clazz.getGenericSuperclass()));
+		for (Type type : clazz.getGenericInterfaces()) {
+			result.getSuperTypes().add(createTypeReference(type));
+		}
+	}
+
+	protected void createMethods(Class<?> clazz, JvmDeclaredType result) {
+		for (Method method : clazz.getDeclaredMethods()) {
+			if (!method.isSynthetic())
+				result.getMembers().add(createOperation(method));
+		}
 	}
 
 	public JvmEnumerationType createEnumerationType(Class<?> clazz) {
@@ -109,6 +260,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		result.setFullyQualifiedName(clazz.getName());
 		setVisibility(clazz, result);
 		log.error("Enumeration types are not yet fully supported.");
+		createAnnotationValues(clazz, result);
 		return result;
 	}
 
@@ -211,6 +363,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		result.setStatic(Modifier.isStatic(field.getModifiers()));
 		setVisibility(result, field.getModifiers());
 		result.setType(createTypeReference(field.getGenericType()));
+		createAnnotationValues(field, result);
 		return result;
 	}
 
@@ -221,6 +374,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		for (Type parameterType : constructor.getGenericExceptionTypes()) {
 			result.getExceptions().add(createTypeReference(parameterType));
 		}
+		createAnnotationValues(constructor, result);
 		return result;
 	}
 	
@@ -272,6 +426,7 @@ public class DeclaredTypeFactory implements ITypeFactory<Class<?>> {
 		for (Type parameterType : method.getGenericExceptionTypes()) {
 			result.getExceptions().add(createTypeReference(parameterType));
 		}
+		createAnnotationValues(method, result);
 		return result;
 	}
 

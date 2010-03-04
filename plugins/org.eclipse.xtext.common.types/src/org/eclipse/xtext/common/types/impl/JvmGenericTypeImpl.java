@@ -42,10 +42,7 @@ import com.google.common.collect.Iterables;
  * The following features are implemented:
  * <ul>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl#getTypeParameters <em>Type Parameters</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl#isAbstract <em>Abstract</em>}</li>
  *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl#isInterface <em>Interface</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl#isStatic <em>Static</em>}</li>
- *   <li>{@link org.eclipse.xtext.common.types.impl.JvmGenericTypeImpl#isFinal <em>Final</em>}</li>
  * </ul>
  * </p>
  *
@@ -67,26 +64,6 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImpl implements JvmGeneri
 	protected Iterable<JvmType> extendedClasses;
 	
 	/**
-	 * The default value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isAbstract()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean ABSTRACT_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isAbstract() <em>Abstract</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isAbstract()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean abstract_ = ABSTRACT_EDEFAULT;
-
-	/**
 	 * The default value of the '{@link #isInterface() <em>Interface</em>}' attribute.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -105,46 +82,6 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImpl implements JvmGeneri
 	 * @ordered
 	 */
 	protected boolean interface_ = INTERFACE_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isStatic() <em>Static</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isStatic()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean STATIC_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isStatic() <em>Static</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isStatic()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean static_ = STATIC_EDEFAULT;
-
-	/**
-	 * The default value of the '{@link #isFinal() <em>Final</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isFinal()
-	 * @generated
-	 * @ordered
-	 */
-	protected static final boolean FINAL_EDEFAULT = false;
-
-	/**
-	 * The cached value of the '{@link #isFinal() <em>Final</em>}' attribute.
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @see #isFinal()
-	 * @generated
-	 * @ordered
-	 */
-	protected boolean final_ = FINAL_EDEFAULT;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -182,27 +119,6 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImpl implements JvmGeneri
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
-	public boolean isAbstract() {
-		return abstract_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setAbstract(boolean newAbstract) {
-		boolean oldAbstract = abstract_;
-		abstract_ = newAbstract;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_GENERIC_TYPE__ABSTRACT, oldAbstract, abstract_));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
 	public boolean isInterface() {
 		return interface_;
 	}
@@ -217,48 +133,6 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImpl implements JvmGeneri
 		interface_ = newInterface;
 		if (eNotificationRequired())
 			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_GENERIC_TYPE__INTERFACE, oldInterface, interface_));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isStatic() {
-		return static_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setStatic(boolean newStatic) {
-		boolean oldStatic = static_;
-		static_ = newStatic;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_GENERIC_TYPE__STATIC, oldStatic, static_));
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public boolean isFinal() {
-		return final_;
-	}
-
-	/**
-	 * <!-- begin-user-doc -->
-	 * <!-- end-user-doc -->
-	 * @generated
-	 */
-	public void setFinal(boolean newFinal) {
-		boolean oldFinal = final_;
-		final_ = newFinal;
-		if (eNotificationRequired())
-			eNotify(new ENotificationImpl(this, Notification.SET, TypesPackage.JVM_GENERIC_TYPE__FINAL, oldFinal, final_));
 	}
 
 	/**
@@ -357,14 +231,8 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImpl implements JvmGeneri
 		switch (featureID) {
 			case TypesPackage.JVM_GENERIC_TYPE__TYPE_PARAMETERS:
 				return getTypeParameters();
-			case TypesPackage.JVM_GENERIC_TYPE__ABSTRACT:
-				return isAbstract();
 			case TypesPackage.JVM_GENERIC_TYPE__INTERFACE:
 				return isInterface();
-			case TypesPackage.JVM_GENERIC_TYPE__STATIC:
-				return isStatic();
-			case TypesPackage.JVM_GENERIC_TYPE__FINAL:
-				return isFinal();
 		}
 		return super.eGet(featureID, resolve, coreType);
 	}
@@ -382,17 +250,8 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImpl implements JvmGeneri
 				getTypeParameters().clear();
 				getTypeParameters().addAll((Collection<? extends JvmTypeParameter>)newValue);
 				return;
-			case TypesPackage.JVM_GENERIC_TYPE__ABSTRACT:
-				setAbstract((Boolean)newValue);
-				return;
 			case TypesPackage.JVM_GENERIC_TYPE__INTERFACE:
 				setInterface((Boolean)newValue);
-				return;
-			case TypesPackage.JVM_GENERIC_TYPE__STATIC:
-				setStatic((Boolean)newValue);
-				return;
-			case TypesPackage.JVM_GENERIC_TYPE__FINAL:
-				setFinal((Boolean)newValue);
 				return;
 		}
 		super.eSet(featureID, newValue);
@@ -409,17 +268,8 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImpl implements JvmGeneri
 			case TypesPackage.JVM_GENERIC_TYPE__TYPE_PARAMETERS:
 				getTypeParameters().clear();
 				return;
-			case TypesPackage.JVM_GENERIC_TYPE__ABSTRACT:
-				setAbstract(ABSTRACT_EDEFAULT);
-				return;
 			case TypesPackage.JVM_GENERIC_TYPE__INTERFACE:
 				setInterface(INTERFACE_EDEFAULT);
-				return;
-			case TypesPackage.JVM_GENERIC_TYPE__STATIC:
-				setStatic(STATIC_EDEFAULT);
-				return;
-			case TypesPackage.JVM_GENERIC_TYPE__FINAL:
-				setFinal(FINAL_EDEFAULT);
 				return;
 		}
 		super.eUnset(featureID);
@@ -435,14 +285,8 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImpl implements JvmGeneri
 		switch (featureID) {
 			case TypesPackage.JVM_GENERIC_TYPE__TYPE_PARAMETERS:
 				return typeParameters != null && !typeParameters.isEmpty();
-			case TypesPackage.JVM_GENERIC_TYPE__ABSTRACT:
-				return abstract_ != ABSTRACT_EDEFAULT;
 			case TypesPackage.JVM_GENERIC_TYPE__INTERFACE:
 				return interface_ != INTERFACE_EDEFAULT;
-			case TypesPackage.JVM_GENERIC_TYPE__STATIC:
-				return static_ != STATIC_EDEFAULT;
-			case TypesPackage.JVM_GENERIC_TYPE__FINAL:
-				return final_ != FINAL_EDEFAULT;
 		}
 		return super.eIsSet(featureID);
 	}
@@ -489,14 +333,8 @@ public class JvmGenericTypeImpl extends JvmDeclaredTypeImpl implements JvmGeneri
 		if (eIsProxy()) return super.toString();
 
 		StringBuffer result = new StringBuffer(super.toString());
-		result.append(" (abstract: ");
-		result.append(abstract_);
-		result.append(", interface: ");
+		result.append(" (interface: ");
 		result.append(interface_);
-		result.append(", static: ");
-		result.append(static_);
-		result.append(", final: ");
-		result.append(final_);
 		result.append(')');
 		return result.toString();
 	}

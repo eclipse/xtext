@@ -99,6 +99,15 @@ public interface TypesFactory extends EFactory {
 	JvmEnumerationType createJvmEnumerationType();
 
 	/**
+	 * Returns a new object of class '<em>Jvm Enumeration Literal</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Jvm Enumeration Literal</em>'.
+	 * @generated
+	 */
+	JvmEnumerationLiteral createJvmEnumerationLiteral();
+
+	/**
 	 * Returns a new object of class '<em>Jvm Generic Type</em>'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -187,6 +196,114 @@ public interface TypesFactory extends EFactory {
 	 * @generated
 	 */
 	JvmAnnotationReference createJvmAnnotationReference();
+
+	/**
+	 * Returns a new object of class '<em>Jvm Int Annotation Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Jvm Int Annotation Value</em>'.
+	 * @generated
+	 */
+	JvmIntAnnotationValue createJvmIntAnnotationValue();
+
+	/**
+	 * Returns a new object of class '<em>Jvm Byte Annotation Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Jvm Byte Annotation Value</em>'.
+	 * @generated
+	 */
+	JvmByteAnnotationValue createJvmByteAnnotationValue();
+
+	/**
+	 * Returns a new object of class '<em>Jvm Boolean Annotation Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Jvm Boolean Annotation Value</em>'.
+	 * @generated
+	 */
+	JvmBooleanAnnotationValue createJvmBooleanAnnotationValue();
+
+	/**
+	 * Returns a new object of class '<em>Jvm Short Annotation Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Jvm Short Annotation Value</em>'.
+	 * @generated
+	 */
+	JvmShortAnnotationValue createJvmShortAnnotationValue();
+
+	/**
+	 * Returns a new object of class '<em>Jvm Long Annotation Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Jvm Long Annotation Value</em>'.
+	 * @generated
+	 */
+	JvmLongAnnotationValue createJvmLongAnnotationValue();
+
+	/**
+	 * Returns a new object of class '<em>Jvm Double Annotation Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Jvm Double Annotation Value</em>'.
+	 * @generated
+	 */
+	JvmDoubleAnnotationValue createJvmDoubleAnnotationValue();
+
+	/**
+	 * Returns a new object of class '<em>Jvm Float Annotation Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Jvm Float Annotation Value</em>'.
+	 * @generated
+	 */
+	JvmFloatAnnotationValue createJvmFloatAnnotationValue();
+
+	/**
+	 * Returns a new object of class '<em>Jvm Char Annotation Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Jvm Char Annotation Value</em>'.
+	 * @generated
+	 */
+	JvmCharAnnotationValue createJvmCharAnnotationValue();
+
+	/**
+	 * Returns a new object of class '<em>Jvm String Annotation Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Jvm String Annotation Value</em>'.
+	 * @generated
+	 */
+	JvmStringAnnotationValue createJvmStringAnnotationValue();
+
+	/**
+	 * Returns a new object of class '<em>Jvm Type Annotation Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Jvm Type Annotation Value</em>'.
+	 * @generated
+	 */
+	JvmTypeAnnotationValue createJvmTypeAnnotationValue();
+
+	/**
+	 * Returns a new object of class '<em>Jvm Annotation Annotation Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Jvm Annotation Annotation Value</em>'.
+	 * @generated
+	 */
+	JvmAnnotationAnnotationValue createJvmAnnotationAnnotationValue();
+
+	/**
+	 * Returns a new object of class '<em>Jvm Enum Annotation Value</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Jvm Enum Annotation Value</em>'.
+	 * @generated
+	 */
+	JvmEnumAnnotationValue createJvmEnumAnnotationValue();
 
 	/**
 	 * Returns the package supported by this factory.

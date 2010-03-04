@@ -33,6 +33,9 @@ abstract class JvmDeclaredType extends JvmComponentType, JvmMember {
   op String getPackageName();
   val JvmTypeReference[*] superTypes;
   val JvmMember[*]#declaringType members;
+  attr boolean ~abstract;
+  attr boolean static;
+  attr boolean final;
 }
 
 class JvmTypeParameter extends JvmComponentType, JvmConstraintOwner {
@@ -64,13 +67,15 @@ class JvmAnnotationType extends JvmDeclaredType {
 }
 
 class JvmEnumerationType extends JvmDeclaredType {
+  val JvmEnumerationLiteral[*]#enumType literals;
+}
+
+class JvmEnumerationLiteral extends JvmIdentifyableElement {
+  ref JvmEnumerationType#literals enumType;
 }
 
 class JvmGenericType extends JvmDeclaredType, JvmTypeParameterDeclarator {
-  attr boolean ~abstract;
   attr boolean ~interface;
-  attr boolean static;
-  attr boolean final;
   op Iterable<JvmType> getExtendedInterfaces();
   op Iterable<JvmType> getExtendedClasses();
   op boolean isInstantiateable(); 
@@ -151,6 +156,60 @@ abstract class JvmAnnotationTarget {
 class JvmAnnotationReference {
   ref JvmAnnotationType annotation;
   ref JvmAnnotationTarget#annotations target;
+  val JvmAnnotationValue[*] values;
+}
+
+abstract class JvmAnnotationValue {
+  op String getValueName();
+  ref JvmOperation operation;   
+}
+
+class JvmIntAnnotationValue extends JvmAnnotationValue {
+  attr int[*] values;   
+}
+
+class JvmBooleanAnnotationValue extends JvmAnnotationValue {
+  attr boolean[*] values;   
+}
+
+class JvmByteAnnotationValue extends JvmAnnotationValue {
+  attr byte[*] values;   
+}
+
+class JvmShortAnnotationValue extends JvmAnnotationValue {
+  attr short[*] values;   
+}
+
+class JvmLongAnnotationValue extends JvmAnnotationValue {
+  attr long[*] values;   
+}
+
+class JvmDoubleAnnotationValue extends JvmAnnotationValue {
+  attr double[*] values;   
+}
+
+class JvmFloatAnnotationValue extends JvmAnnotationValue {
+  attr float[*] values;   
+}
+
+class JvmCharAnnotationValue extends JvmAnnotationValue {
+  attr char[*] values;   
+}
+
+class JvmStringAnnotationValue extends JvmAnnotationValue {
+  attr String[*] values;   
+}
+
+class JvmTypeAnnotationValue extends JvmAnnotationValue {
+  ref JvmType[*] values;   
+}
+
+class JvmAnnotationAnnotationValue extends JvmAnnotationValue, JvmAnnotationTarget {
+  derived transient readonly ref JvmAnnotationReference[*] values;   
+}
+
+class JvmEnumAnnotationValue extends JvmAnnotationValue {
+  ref JvmEnumerationLiteral[*] values;   
 }
 
 // important note: unfortunatly, emfatic does not support 

@@ -160,6 +160,10 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 				return createJvmEnumerationTypeAdapter();
 			}
 			@Override
+			public Adapter caseJvmEnumerationLiteral(JvmEnumerationLiteral object) {
+				return createJvmEnumerationLiteralAdapter();
+			}
+			@Override
 			public Adapter caseJvmGenericType(JvmGenericType object) {
 				return createJvmGenericTypeAdapter();
 			}
@@ -222,6 +226,58 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 			@Override
 			public Adapter caseJvmAnnotationReference(JvmAnnotationReference object) {
 				return createJvmAnnotationReferenceAdapter();
+			}
+			@Override
+			public Adapter caseJvmAnnotationValue(JvmAnnotationValue object) {
+				return createJvmAnnotationValueAdapter();
+			}
+			@Override
+			public Adapter caseJvmIntAnnotationValue(JvmIntAnnotationValue object) {
+				return createJvmIntAnnotationValueAdapter();
+			}
+			@Override
+			public Adapter caseJvmBooleanAnnotationValue(JvmBooleanAnnotationValue object) {
+				return createJvmBooleanAnnotationValueAdapter();
+			}
+			@Override
+			public Adapter caseJvmByteAnnotationValue(JvmByteAnnotationValue object) {
+				return createJvmByteAnnotationValueAdapter();
+			}
+			@Override
+			public Adapter caseJvmShortAnnotationValue(JvmShortAnnotationValue object) {
+				return createJvmShortAnnotationValueAdapter();
+			}
+			@Override
+			public Adapter caseJvmLongAnnotationValue(JvmLongAnnotationValue object) {
+				return createJvmLongAnnotationValueAdapter();
+			}
+			@Override
+			public Adapter caseJvmDoubleAnnotationValue(JvmDoubleAnnotationValue object) {
+				return createJvmDoubleAnnotationValueAdapter();
+			}
+			@Override
+			public Adapter caseJvmFloatAnnotationValue(JvmFloatAnnotationValue object) {
+				return createJvmFloatAnnotationValueAdapter();
+			}
+			@Override
+			public Adapter caseJvmCharAnnotationValue(JvmCharAnnotationValue object) {
+				return createJvmCharAnnotationValueAdapter();
+			}
+			@Override
+			public Adapter caseJvmStringAnnotationValue(JvmStringAnnotationValue object) {
+				return createJvmStringAnnotationValueAdapter();
+			}
+			@Override
+			public Adapter caseJvmTypeAnnotationValue(JvmTypeAnnotationValue object) {
+				return createJvmTypeAnnotationValueAdapter();
+			}
+			@Override
+			public Adapter caseJvmAnnotationAnnotationValue(JvmAnnotationAnnotationValue object) {
+				return createJvmAnnotationAnnotationValueAdapter();
+			}
+			@Override
+			public Adapter caseJvmEnumAnnotationValue(JvmEnumAnnotationValue object) {
+				return createJvmEnumAnnotationValueAdapter();
 			}
 			@Override
 			public Adapter defaultCase(EObject object) {
@@ -454,6 +510,20 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	}
 
 	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmEnumerationLiteral <em>Jvm Enumeration Literal</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmEnumerationLiteral
+	 * @generated
+	 */
+	public Adapter createJvmEnumerationLiteralAdapter() {
+		return null;
+	}
+
+	/**
 	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmGenericType <em>Jvm Generic Type</em>}'.
 	 * <!-- begin-user-doc -->
 	 * This default implementation returns null so that we can easily ignore cases;
@@ -674,6 +744,188 @@ public class TypesAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createJvmAnnotationReferenceAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmAnnotationValue <em>Jvm Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmAnnotationValue
+	 * @generated
+	 */
+	public Adapter createJvmAnnotationValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmIntAnnotationValue <em>Jvm Int Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmIntAnnotationValue
+	 * @generated
+	 */
+	public Adapter createJvmIntAnnotationValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmByteAnnotationValue <em>Jvm Byte Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmByteAnnotationValue
+	 * @generated
+	 */
+	public Adapter createJvmByteAnnotationValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmBooleanAnnotationValue <em>Jvm Boolean Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmBooleanAnnotationValue
+	 * @generated
+	 */
+	public Adapter createJvmBooleanAnnotationValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmShortAnnotationValue <em>Jvm Short Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmShortAnnotationValue
+	 * @generated
+	 */
+	public Adapter createJvmShortAnnotationValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmLongAnnotationValue <em>Jvm Long Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmLongAnnotationValue
+	 * @generated
+	 */
+	public Adapter createJvmLongAnnotationValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmDoubleAnnotationValue <em>Jvm Double Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmDoubleAnnotationValue
+	 * @generated
+	 */
+	public Adapter createJvmDoubleAnnotationValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmFloatAnnotationValue <em>Jvm Float Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmFloatAnnotationValue
+	 * @generated
+	 */
+	public Adapter createJvmFloatAnnotationValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmCharAnnotationValue <em>Jvm Char Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmCharAnnotationValue
+	 * @generated
+	 */
+	public Adapter createJvmCharAnnotationValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmStringAnnotationValue <em>Jvm String Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmStringAnnotationValue
+	 * @generated
+	 */
+	public Adapter createJvmStringAnnotationValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmTypeAnnotationValue <em>Jvm Type Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmTypeAnnotationValue
+	 * @generated
+	 */
+	public Adapter createJvmTypeAnnotationValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue <em>Jvm Annotation Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmAnnotationAnnotationValue
+	 * @generated
+	 */
+	public Adapter createJvmAnnotationAnnotationValueAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.common.types.JvmEnumAnnotationValue <em>Jvm Enum Annotation Value</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.common.types.JvmEnumAnnotationValue
+	 * @generated
+	 */
+	public Adapter createJvmEnumAnnotationValueAdapter() {
 		return null;
 	}
 

@@ -52,6 +52,16 @@ public class ClassURIHelper implements URIHelperConstants {
 		createFragment(type, uriBuilder);
 		return createURI(uriBuilder);
 	}
+	
+	public URI getFullURI(Member member) {
+		if (member instanceof Type)
+			return getFullURI((Type) member);
+		StringBuilder uriBuilder = createURIBuilder();
+		createResourceURI(member.getDeclaringClass(), uriBuilder);
+		uriBuilder.append('#');
+		createFragmentForMember(member, uriBuilder);
+		return createURI(uriBuilder);
+	}
 
 	public String getFragment(Type type) {
 		StringBuilder uriBuilder = new StringBuilder(32);
