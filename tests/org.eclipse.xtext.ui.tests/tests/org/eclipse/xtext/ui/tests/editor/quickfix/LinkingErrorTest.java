@@ -9,19 +9,14 @@ package org.eclipse.xtext.ui.tests.editor.quickfix;
 
 import java.util.List;
 
-import junit.framework.TestCase;
-
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IJavaProject;
-import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
-import org.eclipse.xtext.junit.util.IResourcesSetupUtil;
 import org.eclipse.xtext.junit.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -32,6 +27,7 @@ import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.quickfix.importUriUi.Element;
 import org.eclipse.xtext.ui.tests.quickfix.importUriUi.Main;
 import org.eclipse.xtext.ui.tests.quickfix.ui.quickfix.QuickfixCrossrefTestLanguageQuickfixProvider;
+import org.eclipse.xtext.ui.tests.workbench.AbstractWorkbenchTest;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
@@ -43,15 +39,10 @@ import com.google.inject.Injector;
  * @author Heiko Behrens - Initial contribution and API
  * @author Jan Koehnlein
  */
-public class LinkingErrorTest extends TestCase {
+public class LinkingErrorTest extends AbstractWorkbenchTest {
 
 	private static final String MODEL_FILE = "test.quickfixcrossreftestlanguage";
 	private static final String PROJECT_NAME = "quickfixtest";
-
-	@Override
-	protected void tearDown() throws Exception {
-		IResourcesSetupUtil.cleanWorkspace();
-	}
 
 	public void testQuickfixTurnaround() throws Exception {
 		XtextEditor xtextEditor = openEditor();
@@ -113,10 +104,6 @@ public class LinkingErrorTest extends TestCase {
 		XtextEditor xtextEditor = (XtextEditor) IDE.openEditor(getActivePage(), file);
 		xtextEditor.getDocument().set(model);
 		return xtextEditor;
-	}
-
-	private IWorkbenchPage getActivePage() {
-		return PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 	}
 
 	private List<Issue> getIssues(IXtextDocument document) {
