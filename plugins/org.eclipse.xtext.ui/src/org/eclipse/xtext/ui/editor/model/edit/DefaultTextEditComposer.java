@@ -169,7 +169,7 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 			SerializationOptions options = new SerializationOptions();
 			options.setFormat(false);
 			String text = serializerUtil.serialize(eObject, options);
-			TextEdit edit = new ReplaceEdit(node.getTotalOffset(), node.getTotalLength(), text);
+			TextEdit edit = new ReplaceEdit(node.getOffset(), node.getLength(), text);
 			edits.add(edit);
 		}
 		return edits;
