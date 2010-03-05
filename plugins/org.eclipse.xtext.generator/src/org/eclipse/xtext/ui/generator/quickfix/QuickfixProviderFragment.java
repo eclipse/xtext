@@ -16,7 +16,6 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Naming;
-import org.eclipse.xtext.validation.IssueResolutionProvider;
 
 /**
  * {@link IGeneratorFragment} to generate a quickfix provider for a given grammar.
@@ -33,7 +32,7 @@ public class QuickfixProviderFragment extends AbstractGeneratorFragment {
 	@Override
 	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
 		return new BindFactory()
-			.addTypeToType(IssueResolutionProvider.class.getName(), getQuickfixProviderName(grammar, getNaming()))
+			.addTypeToType("org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider", getQuickfixProviderName(grammar, getNaming()))
 			.getBindings();
 	}
 
