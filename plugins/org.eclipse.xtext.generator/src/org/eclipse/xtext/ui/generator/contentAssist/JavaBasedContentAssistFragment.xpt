@@ -22,7 +22,6 @@
 */
 package «getGenProposalProvider().toJavaPackage()»;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 «IF inherit && usedGrammars.size == 1-»
