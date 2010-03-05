@@ -91,20 +91,20 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start ruleMain
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/ui/contentassist/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:69:1: ruleMain : ( ( rule__Main__ElementAssignment )* ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/ui/contentassist/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:69:1: ruleMain : ( ( rule__Main__ElementsAssignment )* ) ;
     public final void ruleMain() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/ui/contentassist/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:73:2: ( ( ( rule__Main__ElementAssignment )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/ui/contentassist/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:74:1: ( ( rule__Main__ElementAssignment )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/ui/contentassist/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:73:2: ( ( ( rule__Main__ElementsAssignment )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/ui/contentassist/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:74:1: ( ( rule__Main__ElementsAssignment )* )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/ui/contentassist/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:74:1: ( ( rule__Main__ElementAssignment )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/ui/contentassist/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:75:1: ( rule__Main__ElementAssignment )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/ui/contentassist/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:74:1: ( ( rule__Main__ElementsAssignment )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/ui/contentassist/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:75:1: ( rule__Main__ElementsAssignment )*
             {
-             before(grammarAccess.getMainAccess().getElementAssignment()); 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/ui/contentassist/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:76:1: ( rule__Main__ElementAssignment )*
+             before(grammarAccess.getMainAccess().getElementsAssignment()); 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/ui/contentassist/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:76:1: ( rule__Main__ElementsAssignment )*
             loop1:
             do {
                 int alt1=2;
@@ -117,10 +117,10 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/ui/contentassist/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:76:2: rule__Main__ElementAssignment
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/ui/contentassist/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:76:2: rule__Main__ElementsAssignment
             	    {
-            	    pushFollow(FollowSets000.FOLLOW_rule__Main__ElementAssignment_in_ruleMain94);
-            	    rule__Main__ElementAssignment();
+            	    pushFollow(FollowSets000.FOLLOW_rule__Main__ElementsAssignment_in_ruleMain94);
+            	    rule__Main__ElementsAssignment();
             	    _fsp--;
 
 
@@ -132,7 +132,7 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
                 }
             } while (true);
 
-             after(grammarAccess.getMainAccess().getElementAssignment()); 
+             after(grammarAccess.getMainAccess().getElementsAssignment()); 
 
             }
 
@@ -580,9 +580,9 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
     // $ANTLR end rule__Element__Group_3__1
 
 
-    // $ANTLR start rule__Main__ElementAssignment
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/ui/contentassist/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:263:1: rule__Main__ElementAssignment : ( ruleElement ) ;
-    public final void rule__Main__ElementAssignment() throws RecognitionException {
+    // $ANTLR start rule__Main__ElementsAssignment
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/ui/contentassist/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:263:1: rule__Main__ElementsAssignment : ( ruleElement ) ;
+    public final void rule__Main__ElementsAssignment() throws RecognitionException {
 
         		int stackSize = keepStackSize();
             
@@ -593,12 +593,12 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/ui/contentassist/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:268:1: ( ruleElement )
             // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/quickfix/ui/contentassist/antlr/internal/InternalQuickfixCrossrefTestLanguage.g:269:1: ruleElement
             {
-             before(grammarAccess.getMainAccess().getElementElementParserRuleCall_0()); 
-            pushFollow(FollowSets000.FOLLOW_ruleElement_in_rule__Main__ElementAssignment469);
+             before(grammarAccess.getMainAccess().getElementsElementParserRuleCall_0()); 
+            pushFollow(FollowSets000.FOLLOW_ruleElement_in_rule__Main__ElementsAssignment469);
             ruleElement();
             _fsp--;
 
-             after(grammarAccess.getMainAccess().getElementElementParserRuleCall_0()); 
+             after(grammarAccess.getMainAccess().getElementsElementParserRuleCall_0()); 
 
             }
 
@@ -617,7 +617,7 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
         }
         return ;
     }
-    // $ANTLR end rule__Main__ElementAssignment
+    // $ANTLR end rule__Main__ElementsAssignment
 
 
     // $ANTLR start rule__Element__NameAssignment_0
@@ -748,7 +748,7 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
     private static class FollowSets000 {
         public static final BitSet FOLLOW_ruleMain_in_entryRuleMain61 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleMain68 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_rule__Main__ElementAssignment_in_ruleMain94 = new BitSet(new long[]{0x0000000000000012L});
+        public static final BitSet FOLLOW_rule__Main__ElementsAssignment_in_ruleMain94 = new BitSet(new long[]{0x0000000000000012L});
         public static final BitSet FOLLOW_ruleElement_in_entryRuleElement122 = new BitSet(new long[]{0x0000000000000000L});
         public static final BitSet FOLLOW_EOF_in_entryRuleElement129 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Element__Group__0_in_ruleElement155 = new BitSet(new long[]{0x0000000000000002L});
@@ -764,7 +764,7 @@ public class InternalQuickfixCrossrefTestLanguageParser extends AbstractInternal
         public static final BitSet FOLLOW_13_in_rule__Element__Group_3__0392 = new BitSet(new long[]{0x0000000000000010L});
         public static final BitSet FOLLOW_rule__Element__Group_3__1_in_rule__Element__Group_3__0402 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_rule__Element__ReferencedAssignment_3_1_in_rule__Element__Group_3__1430 = new BitSet(new long[]{0x0000000000000002L});
-        public static final BitSet FOLLOW_ruleElement_in_rule__Main__ElementAssignment469 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_ruleElement_in_rule__Main__ElementsAssignment469 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_rule__Element__NameAssignment_0500 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_ruleElement_in_rule__Element__ContainedAssignment_2531 = new BitSet(new long[]{0x0000000000000002L});
         public static final BitSet FOLLOW_RULE_ID_in_rule__Element__ReferencedAssignment_3_1566 = new BitSet(new long[]{0x0000000000000002L});

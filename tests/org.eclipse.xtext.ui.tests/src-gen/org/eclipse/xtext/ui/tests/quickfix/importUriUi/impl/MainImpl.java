@@ -30,7 +30,7 @@ import org.eclipse.xtext.ui.tests.quickfix.importUriUi.Main;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl.MainImpl#getElement <em>Element</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl.MainImpl#getElements <em>Elements</em>}</li>
  * </ul>
  * </p>
  *
@@ -39,14 +39,14 @@ import org.eclipse.xtext.ui.tests.quickfix.importUriUi.Main;
 public class MainImpl extends MinimalEObjectImpl.Container implements Main
 {
   /**
-   * The cached value of the '{@link #getElement() <em>Element</em>}' containment reference list.
+   * The cached value of the '{@link #getElements() <em>Elements</em>}' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see #getElement()
+   * @see #getElements()
    * @generated
    * @ordered
    */
-  protected EList<Element> element;
+  protected EList<Element> elements;
 
   /**
    * <!-- begin-user-doc -->
@@ -74,13 +74,13 @@ public class MainImpl extends MinimalEObjectImpl.Container implements Main
    * <!-- end-user-doc -->
    * @generated
    */
-  public EList<Element> getElement()
+  public EList<Element> getElements()
   {
-    if (element == null)
+    if (elements == null)
     {
-      element = new EObjectContainmentEList<Element>(Element.class, this, ImportUriUiPackage.MAIN__ELEMENT);
+      elements = new EObjectContainmentEList<Element>(Element.class, this, ImportUriUiPackage.MAIN__ELEMENTS);
     }
-    return element;
+    return elements;
   }
 
   /**
@@ -93,8 +93,8 @@ public class MainImpl extends MinimalEObjectImpl.Container implements Main
   {
     switch (featureID)
     {
-      case ImportUriUiPackage.MAIN__ELEMENT:
-        return ((InternalEList<?>)getElement()).basicRemove(otherEnd, msgs);
+      case ImportUriUiPackage.MAIN__ELEMENTS:
+        return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -109,8 +109,8 @@ public class MainImpl extends MinimalEObjectImpl.Container implements Main
   {
     switch (featureID)
     {
-      case ImportUriUiPackage.MAIN__ELEMENT:
-        return getElement();
+      case ImportUriUiPackage.MAIN__ELEMENTS:
+        return getElements();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -126,9 +126,9 @@ public class MainImpl extends MinimalEObjectImpl.Container implements Main
   {
     switch (featureID)
     {
-      case ImportUriUiPackage.MAIN__ELEMENT:
-        getElement().clear();
-        getElement().addAll((Collection<? extends Element>)newValue);
+      case ImportUriUiPackage.MAIN__ELEMENTS:
+        getElements().clear();
+        getElements().addAll((Collection<? extends Element>)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -144,8 +144,8 @@ public class MainImpl extends MinimalEObjectImpl.Container implements Main
   {
     switch (featureID)
     {
-      case ImportUriUiPackage.MAIN__ELEMENT:
-        getElement().clear();
+      case ImportUriUiPackage.MAIN__ELEMENTS:
+        getElements().clear();
         return;
     }
     super.eUnset(featureID);
@@ -161,8 +161,8 @@ public class MainImpl extends MinimalEObjectImpl.Container implements Main
   {
     switch (featureID)
     {
-      case ImportUriUiPackage.MAIN__ELEMENT:
-        return element != null && !element.isEmpty();
+      case ImportUriUiPackage.MAIN__ELEMENTS:
+        return elements != null && !elements.isEmpty();
     }
     return super.eIsSet(featureID);
   }

@@ -35,7 +35,7 @@ protected class ThisRootNode extends RootToken {
 	@Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Main_ElementAssignment(this, this, 0, inst);
+			case 0: return new Main_ElementsAssignment(this, this, 0, inst);
 			case 1: return new Element_Group(this, this, 1, inst);
 			default: return null;
 		}	
@@ -46,20 +46,20 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Main ****************
  *
  * Main:
- *   element+=Element*;
+ *   elements+=Element*;
  *
  **/
 
-// element+=Element*
-protected class Main_ElementAssignment extends AssignmentToken  {
+// elements+=Element*
+protected class Main_ElementsAssignment extends AssignmentToken  {
 	
-	public Main_ElementAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Main_ElementsAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getMainAccess().getElementAssignment();
+		return grammarAccess.getMainAccess().getElementsAssignment();
 	}
 
     @Override
@@ -77,13 +77,13 @@ protected class Main_ElementAssignment extends AssignmentToken  {
 	}
     @Override	
 	protected IInstanceDescription tryConsumeVal() {
-		if((value = current.getConsumable("element",false)) == null) return null;
-		IInstanceDescription obj = current.cloneAndConsume("element");
+		if((value = current.getConsumable("elements",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("elements");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
 			IInstanceDescription param = getDescr((EObject)value);
 			if(param.isInstanceOf(grammarAccess.getElementRule().getType().getClassifier())) {
 				type = AssignmentType.PRC;
-				element = grammarAccess.getMainAccess().getElementElementParserRuleCall_0(); 
+				element = grammarAccess.getMainAccess().getElementsElementParserRuleCall_0(); 
 				consumed = obj;
 				return param;
 			}
@@ -95,7 +95,7 @@ protected class Main_ElementAssignment extends AssignmentToken  {
 	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
-			case 0: return new Main_ElementAssignment(parent, next, actIndex, consumed);
+			case 0: return new Main_ElementsAssignment(parent, next, actIndex, consumed);
 			default: return parent.createParentFollower(next, actIndex , index - 1, consumed);
 		}	
 	}	

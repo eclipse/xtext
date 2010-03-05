@@ -8,7 +8,7 @@
       <type metamodel="/0/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EClass" href="http://eclipse.org/xtext/quickfixCrossrefTestLanguage#//Main"/>
       </type>
-      <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="element" operator="+=">
+      <alternatives xsi:type="xtext:Assignment" cardinality="*" feature="elements" operator="+=">
         <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
       </alternatives>
     </rules>

@@ -47,7 +47,7 @@ public final class QuickfixCrossrefTestLanguageMainConsumer extends NonTerminalC
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
-			return consumeNonTerminal(elementConsumer, "element", true, false, false, getElement(), optional);
+			return consumeNonTerminal(elementConsumer, "elements", true, false, false, getElement(), optional);
 		}
 	}
 
@@ -67,8 +67,8 @@ public final class QuickfixCrossrefTestLanguageMainConsumer extends NonTerminalC
 	public void setRule(MainElements rule) {
 		this.rule = rule;
 		
-		assignment$1$Consumer = new Assignment$1$Consumer(rule.getElementAssignment());
-		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getElementElementParserRuleCall_0());
+		assignment$1$Consumer = new Assignment$1$Consumer(rule.getElementsAssignment());
+		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getElementsElementParserRuleCall_0());
 	}
 	
 	@Override

@@ -72,9 +72,9 @@ ruleMain
     }
 	:
 (
-{ before(grammarAccess.getMainAccess().getElementAssignment()); }
-(rule__Main__ElementAssignment)*
-{ after(grammarAccess.getMainAccess().getElementAssignment()); }
+{ before(grammarAccess.getMainAccess().getElementsAssignment()); }
+(rule__Main__ElementsAssignment)*
+{ after(grammarAccess.getMainAccess().getElementsAssignment()); }
 )
 
 ;
@@ -260,14 +260,14 @@ finally {
 
 
 
-rule__Main__ElementAssignment
+rule__Main__ElementsAssignment
     @init {
 		int stackSize = keepStackSize();
     }
 :
 (
-{ before(grammarAccess.getMainAccess().getElementElementParserRuleCall_0()); }
-	ruleElement{ after(grammarAccess.getMainAccess().getElementElementParserRuleCall_0()); }
+{ before(grammarAccess.getMainAccess().getElementsElementParserRuleCall_0()); }
+	ruleElement{ after(grammarAccess.getMainAccess().getElementsElementParserRuleCall_0()); }
 )
 
 ;

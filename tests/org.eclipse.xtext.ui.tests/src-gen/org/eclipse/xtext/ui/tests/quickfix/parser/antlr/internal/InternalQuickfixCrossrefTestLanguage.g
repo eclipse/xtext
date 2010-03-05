@@ -87,9 +87,9 @@ ruleMain returns [EObject current=null]
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getMainAccess().getElementElementParserRuleCall_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getMainAccess().getElementsElementParserRuleCall_0(), currentNode); 
 	    }
-		lv_element_0_0=ruleElement		{
+		lv_elements_0_0=ruleElement		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getMainRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -97,8 +97,8 @@ ruleMain returns [EObject current=null]
 	        try {
 	       		add(
 	       			$current, 
-	       			"element",
-	        		lv_element_0_0, 
+	       			"elements",
+	        		lv_elements_0_0, 
 	        		"Element", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {

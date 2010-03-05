@@ -70,13 +70,13 @@ public interface ImportUriUiPackage extends EPackage
   int MAIN = 0;
 
   /**
-   * The feature id for the '<em><b>Element</b></em>' containment reference list.
+   * The feature id for the '<em><b>Elements</b></em>' containment reference list.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MAIN__ELEMENT = 0;
+  int MAIN__ELEMENTS = 0;
 
   /**
    * The number of structural features of the '<em>Main</em>' class.
@@ -145,15 +145,15 @@ public interface ImportUriUiPackage extends EPackage
   EClass getMain();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ui.tests.quickfix.importUriUi.Main#getElement <em>Element</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ui.tests.quickfix.importUriUi.Main#getElements <em>Elements</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @return the meta object for the containment reference list '<em>Element</em>'.
-   * @see org.eclipse.xtext.ui.tests.quickfix.importUriUi.Main#getElement()
+   * @return the meta object for the containment reference list '<em>Elements</em>'.
+   * @see org.eclipse.xtext.ui.tests.quickfix.importUriUi.Main#getElements()
    * @see #getMain()
    * @generated
    */
-  EReference getMain_Element();
+  EReference getMain_Elements();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.quickfix.importUriUi.Element <em>Element</em>}'.
@@ -232,12 +232,12 @@ public interface ImportUriUiPackage extends EPackage
     EClass MAIN = eINSTANCE.getMain();
 
     /**
-     * The meta object literal for the '<em><b>Element</b></em>' containment reference list feature.
+     * The meta object literal for the '<em><b>Elements</b></em>' containment reference list feature.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
      * @generated
      */
-    EReference MAIN__ELEMENT = eINSTANCE.getMain_Element();
+    EReference MAIN__ELEMENTS = eINSTANCE.getMain_Elements();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl.ElementImpl <em>Element</em>}' class.

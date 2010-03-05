@@ -10,7 +10,7 @@
   <genPackages prefix="ImportUriUi" basePackage="org.eclipse.xtext.ui.tests.quickfix"
       disposableProviderFactory="true" ecorePackage="QuickfixCrossrefTestLanguage.ecore#/">
     <genClasses ecoreClass="QuickfixCrossrefTestLanguage.ecore#//Main">
-      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QuickfixCrossrefTestLanguage.ecore#//Main/element"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QuickfixCrossrefTestLanguage.ecore#//Main/elements"/>
     </genClasses>
     <genClasses ecoreClass="QuickfixCrossrefTestLanguage.ecore#//Element">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute QuickfixCrossrefTestLanguage.ecore#//Element/name"/>

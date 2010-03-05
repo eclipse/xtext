@@ -19,18 +19,18 @@ public class QuickfixCrossrefTestLanguageGrammarAccess extends AbstractGrammarEl
 	
 	public class MainElements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Main");
-		private final Assignment cElementAssignment = (Assignment)rule.eContents().get(1);
-		private final RuleCall cElementElementParserRuleCall_0 = (RuleCall)cElementAssignment.eContents().get(0);
+		private final Assignment cElementsAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cElementsElementParserRuleCall_0 = (RuleCall)cElementsAssignment.eContents().get(0);
 		
 		//Main:
-		//  element+=Element*;
+		//  elements+=Element*;
 		public ParserRule getRule() { return rule; }
 
-		//element+=Element*
-		public Assignment getElementAssignment() { return cElementAssignment; }
+		//elements+=Element*
+		public Assignment getElementsAssignment() { return cElementsAssignment; }
 
 		//Element
-		public RuleCall getElementElementParserRuleCall_0() { return cElementElementParserRuleCall_0; }
+		public RuleCall getElementsElementParserRuleCall_0() { return cElementsElementParserRuleCall_0; }
 	}
 
 	public class ElementElements extends AbstractParserRuleElementFinder {
@@ -115,7 +115,7 @@ public class QuickfixCrossrefTestLanguageGrammarAccess extends AbstractGrammarEl
 
 	
 	//Main:
-	//  element+=Element*;
+	//  elements+=Element*;
 	public MainElements getMainAccess() {
 		return (pMain != null) ? pMain : (pMain = new MainElements());
 	}
