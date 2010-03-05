@@ -11,7 +11,9 @@ import java.util.List;
 
 import junit.framework.TestCase;
 
+import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
+import org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext;
 import org.eclipse.xtext.ui.editor.quickfix.AbstractDeclarativeQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
@@ -45,23 +47,23 @@ public class DeclarativeQuickfixProviderTest extends TestCase {
 			@Fix(DUMMY_CODE)
 			@SuppressWarnings("unused")
 			public void fixError1(Issue i, IssueResolutionAcceptor acceptor) {
-				acceptor.accept(i, "fixError1", "", "", null);
+				acceptor.accept(i, "fixError1", "", "", IModification.NULL);
 			}
 
 			@Fix(DUMMY_CODE)
 			@SuppressWarnings("unused")
 			public void fixError2(Issue i, IssueResolutionAcceptor acceptor) {
-				acceptor.accept(i, "fixError2", "", "", null);
+				acceptor.accept(i, "fixError2", "", "", IModification.NULL);
 			}
 
 		};
 		provider.setIssueResolutionAcceptorProvider(new Provider<IssueResolutionAcceptor>() {
 			public IssueResolutionAcceptor get() {
-				return new IssueResolutionAcceptor(new IModificationContext.Factory() {
+				return new IssueResolutionAcceptor(new IssueModificationContext.Factory() {
 					public IModificationContext createModificationContext(Issue issue) {
 						return null;
 					}
-				});
+				}, null);
 			}
 		});
 		Iterable<IssueResolution> resolutionsIterable = provider.getResolutions(

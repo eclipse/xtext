@@ -14,6 +14,8 @@ import junit.framework.TestCase;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
@@ -24,14 +26,12 @@ import org.eclipse.xtext.junit.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.model.edit.AbstractSemanticModification;
-import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
-import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer;
-import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.tests.Activator;
 import org.eclipse.xtext.ui.tests.quickfix.importUriUi.Element;
 import org.eclipse.xtext.ui.tests.quickfix.importUriUi.Main;
+import org.eclipse.xtext.ui.tests.quickfix.ui.quickfix.QuickfixCrossrefTestLanguageQuickfixProvider;
 import org.eclipse.xtext.util.StringInputStream;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.CheckMode;
@@ -61,7 +61,7 @@ public class LinkingErrorTest extends TestCase {
 		assertFalse(issues.isEmpty());
 		Issue issue = issues.get(0);
 		assertNotNull(issue);
-		DefaultQuickfixProvider quickfixProvider = getInjector().getInstance(DefaultQuickfixProvider.class);
+		IssueResolutionProvider quickfixProvider = getInjector().getInstance(IssueResolutionProvider.class);
 		List<IssueResolution> resolutions = quickfixProvider.getResolutions(issue);
 
 		assertEquals(1, resolutions.size());
@@ -75,24 +75,21 @@ public class LinkingErrorTest extends TestCase {
 
 	public void testSemanticIssueResolution() throws Exception {
 		final XtextEditor editor = openEditor();
-		IModificationContext context = new IModificationContext() {
-			public IXtextDocument getXtextDocument() {
-				return editor.getDocument();
+		URI uriToProblem = editor.getDocument().readOnly(new IUnitOfWork<URI, XtextResource>() {
+			public URI exec(XtextResource state) throws Exception {
+				Main main = (Main) state.getContents().get(0);
+				Element element = main.getElements().get(1);
+				return EcoreUtil.getURI(element);
 			}
+		});
+		Issue.IssueImpl issue = new Issue.IssueImpl();
+		issue.setUriToProblem(uriToProblem);
+		issue.setCode(QuickfixCrossrefTestLanguageQuickfixProvider.SEMANTIC_FIX_ID);
 
-			public void setIssue(Issue issue) {
-			}
-		};
-		ITextEditComposer textEditComposer = getInjector().getInstance(ITextEditComposer.class);
-		IssueResolution issueResolution = new IssueResolution("Change to 'Bor'", "Change to 'Bor'", null, context,
-				new AbstractSemanticModification(textEditComposer) {
-					@Override
-					public void apply(XtextResource resource) {
-						Main main = (Main) resource.getContents().get(0);
-						Element element = main.getElements().get(1);
-						element.setName("Bor");
-					}
-				});
+		IssueResolutionProvider quickfixProvider = getInjector().getInstance(IssueResolutionProvider.class);
+		List<IssueResolution> resolutions = quickfixProvider.getResolutions(issue);
+		assertEquals(1, resolutions.size());
+		IssueResolution issueResolution = resolutions.get(0);
 		issueResolution.apply();
 		editor.doSave(null);
 		List<Issue> issues = getIssues(editor.getDocument());

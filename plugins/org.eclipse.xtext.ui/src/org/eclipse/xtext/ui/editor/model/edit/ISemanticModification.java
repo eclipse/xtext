@@ -7,13 +7,13 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.model.edit;
 
-import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.emf.ecore.EObject;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
-public interface IModificationContext {
+public interface ISemanticModification {
 
-	IXtextDocument getXtextDocument();
-
+	void apply(EObject element, IModificationContext context);
+	
 }
