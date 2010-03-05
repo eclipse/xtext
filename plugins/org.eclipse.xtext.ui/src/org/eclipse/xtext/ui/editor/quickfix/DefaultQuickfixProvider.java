@@ -25,6 +25,7 @@ import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
+import org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
 
@@ -41,7 +42,7 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 	private ISimilarityMatcher similarityMatcher;
 
 	@Inject
-	private IModificationContext.Factory modificationContextFactory;
+	private IssueModificationContext.Factory modificationContextFactory;
 
 	@Inject
 	private Provider<IssueResolutionAcceptor> issueResolutionAcceptorProvider;

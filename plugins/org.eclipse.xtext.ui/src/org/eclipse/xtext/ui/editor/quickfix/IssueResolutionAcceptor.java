@@ -10,8 +10,10 @@ package org.eclipse.xtext.ui.editor.quickfix;
 import java.util.List;
 
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
-import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
-import org.eclipse.xtext.ui.editor.model.edit.IModificationContext.Factory;
+import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
+import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer;
+import org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext;
+import org.eclipse.xtext.ui.editor.model.edit.SemanticModificationWrapper;
 import org.eclipse.xtext.validation.Issue;
 
 import com.google.common.collect.Lists;
@@ -24,16 +26,25 @@ public class IssueResolutionAcceptor {
 
 	private List<IssueResolution> issueResolutions = Lists.newArrayList();
 
-	private IModificationContext.Factory modificationContextFactory;
+	private IssueModificationContext.Factory modificationContextFactory;
+
+	private final ITextEditComposer textEditComposer;
 	
 	@Inject
-	public IssueResolutionAcceptor(Factory modificationContextFactory) {
+	public IssueResolutionAcceptor(IssueModificationContext.Factory modificationContextFactory, ITextEditComposer textEditComposer) {
 		this.modificationContextFactory = modificationContextFactory;
+		this.textEditComposer = textEditComposer;
 	}
 
 	public void accept(Issue issue, String label, String description, String image, IModification modification) {
 		issueResolutions.add(new IssueResolution(label, description, image, modificationContextFactory.createModificationContext(issue),
 				modification));
+	}
+
+	public void accept(Issue issue, String label, String description, String image, ISemanticModification semanticModification) {
+		SemanticModificationWrapper modificationWrapper = new SemanticModificationWrapper(issue, semanticModification, textEditComposer);
+		issueResolutions.add(new IssueResolution(label, description, image, modificationContextFactory.createModificationContext(issue),
+				modificationWrapper));
 	}
 
 	public List<IssueResolution> getIssueResolutions() {

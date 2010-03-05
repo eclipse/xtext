@@ -7,29 +7,39 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.model.edit;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.text.edits.TextEdit;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.validation.Issue;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
-public abstract class AbstractSemanticModification implements IModification {
+public class SemanticModificationWrapper implements IModification {
 
+	private URI uriToProblem;
+
+	private final ISemanticModification semanticModification;
+	
 	private ITextEditComposer textEditComposer;
 	
-	public AbstractSemanticModification(ITextEditComposer textEditComposer) {
+	public SemanticModificationWrapper(Issue issue, ISemanticModification semanticModification, ITextEditComposer textEditComposer) {
+		this.semanticModification = semanticModification;
+		this.uriToProblem = issue.getUriToProblem();
 		this.textEditComposer = textEditComposer;
 	}
 
-	final public void apply(final IModificationContext context) {
+	public void apply(final IModificationContext context) {
 		context.getXtextDocument().modify(new IUnitOfWork.Void<XtextResource>() {
 			@Override
 			public void process(XtextResource state) throws Exception {
 				textEditComposer.beginRecording(state);
 				IXtextDocument document = context.getXtextDocument();
-				apply(state);
+				EObject eObject = state.getEObject(uriToProblem.fragment());
+				semanticModification.apply(eObject, context);
 				final TextEdit edit = textEditComposer.endRecording();
 				if (edit != null) {
 					String original = document.get();
@@ -45,5 +55,4 @@ public abstract class AbstractSemanticModification implements IModification {
 		});
 	}
 
-	public abstract void apply(XtextResource resource);
 }

@@ -13,12 +13,14 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.validation.Issue;
 
+import com.google.inject.ImplementedBy;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Jan Koehnlein - Initial contribution and API
  */
-public class EditorModificationContext implements IModificationContext {
+public class IssueModificationContext implements IModificationContext {
 
 	@Inject
 	private IURIEditorOpener editorOpener;
@@ -27,6 +29,10 @@ public class EditorModificationContext implements IModificationContext {
 
 	public void setIssue(Issue issue) {
 		this.issue = issue;
+	}
+	
+	public Issue getIssue() {
+		return issue;
 	}
 
 	public IXtextDocument getXtextDocument() {
@@ -38,4 +44,21 @@ public class EditorModificationContext implements IModificationContext {
 		return null;
 	}
 	
+	@ImplementedBy(Factory.Default.class)
+	public static interface Factory {
+		IModificationContext createModificationContext(Issue issue);
+		
+		public static class Default implements Factory {
+			
+			@Inject
+			private Provider<IssueModificationContext> provider;
+			
+			public IModificationContext createModificationContext(Issue issue) {
+				IssueModificationContext modificationContext = provider.get();
+				modificationContext.setIssue(issue);
+				return modificationContext;
+			}
+
+		}
+	}
 }
