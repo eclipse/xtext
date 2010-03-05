@@ -27,9 +27,9 @@ import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.xtext.ui.MarkerTypes;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.editor.quickfix.XtextResourceMarkerAnnotationModel;
 import org.eclipse.xtext.validation.Issue;
-import org.eclipse.xtext.validation.IssueResolutionProvider;
 import org.eclipse.xtext.validation.Issue.Severity;
 
 import com.google.common.collect.Iterators;

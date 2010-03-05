@@ -27,7 +27,6 @@ import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 import org.eclipse.xtext.ui.editor.model.XtextDocumentUtil;
 import org.eclipse.xtext.ui.editor.model.edit.IssueUtil;
-import org.eclipse.xtext.validation.IssueResolution;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterators;
@@ -49,6 +48,9 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 	
 	@Inject
 	private MarkerUtil markerUtil;
+	
+	@Inject
+	private ILanguageResourceHelper languageResourceHelper;
 
 	public IssueUtil getIssueUtil() {
 		return issueUtil;
@@ -86,7 +88,9 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 		} catch (CoreException e) {
 			return emptyResult;
 		}
-		
+		if(!languageResourceHelper.isLanguageResource(marker.getResource())) {
+			return emptyResult;
+		}
 		XtextEditor editor = getEditor(marker.getResource());
 		if(editor == null)
 			return emptyResult;
@@ -174,7 +178,7 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 		}
 
 		public void run(IMarker marker) {
-			resolution.run();
+			resolution.apply();
 		}
 
 		public String getDescription() {

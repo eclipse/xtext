@@ -178,9 +178,9 @@ public class ReferenceSearchViewPage extends Page implements ISearchResultPage {
 					Object description = treeNode.getDescription();
 					if(description instanceof IReferenceDescription) {
 						IReferenceDescription referenceDescription = (IReferenceDescription) description;
-						uriEditorOpener.open(referenceDescription.getSourceEObjectUri(), referenceDescription.getEReference(), referenceDescription.getIndexInList());
+						uriEditorOpener.open(referenceDescription.getSourceEObjectUri(), referenceDescription.getEReference(), referenceDescription.getIndexInList(), true);
 					} else if(description instanceof IResourceDescription) {
-						uriEditorOpener.open(((IResourceDescription) description).getURI());
+						uriEditorOpener.open(((IResourceDescription) description).getURI(), true);
 					}
 				}
 			}

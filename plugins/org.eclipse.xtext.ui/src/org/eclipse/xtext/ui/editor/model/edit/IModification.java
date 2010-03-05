@@ -5,22 +5,12 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.editor;
-
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.ui.IEditorPart;
-
-import com.google.inject.ImplementedBy;
+package org.eclipse.xtext.ui.editor.model.edit;
 
 /**
  * @author koehnlein - Initial contribution and API
  */
-@ImplementedBy(DefaultURIEditorOpener.class)
-public interface IURIEditorOpener {
+public interface IModification {
 
-	IEditorPart open(URI uri, boolean select);
-
-	IEditorPart open(URI referenceOwnerURI, EReference reference, int indexInList, boolean select);
-	
+	void apply(IModificationContext context) throws Exception;
 }

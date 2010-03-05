@@ -22,12 +22,9 @@ import com.google.inject.Inject;
  */
 public class IssueUtil {
 
-	@Inject MarkerUtil markerUtil;
+	private MarkerUtil markerUtil;
 	
-	public MarkerUtil getMarkerUtil() {
-		return markerUtil;
-	}
-
+	@Inject 
 	public void setMarkerUtil(MarkerUtil markerUtil) {
 		this.markerUtil = markerUtil;
 	}

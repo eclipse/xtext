@@ -24,7 +24,7 @@ public class GenerateAllTestGrammarsWithUiConfig {
 
 	public static void main(String... args) throws Exception {
 		try {
-			new WorkflowFacade("org/eclipse/xtext/ui/common/GenerateTestLanguages.mwe").run();
+			new WorkflowFacade("org/eclipse/xtext/ui/tests/GenerateTestLanguages.mwe").run();
 		} catch (Throwable t) {
 			t.printStackTrace();
 		}

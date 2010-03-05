@@ -51,7 +51,7 @@ public class OpenXtextElementHandler extends AbstractHandler {
 					Object selection = selections[0];
 					if (selection instanceof IEObjectDescription) {
 						IEObjectDescription selectedObjectDescription = (IEObjectDescription) selection;
-						uriEditorOpener.open(selectedObjectDescription.getEObjectURI());
+						uriEditorOpener.open(selectedObjectDescription.getEObjectURI(), true);
 					}
 				}
 			} catch (Exception e) {

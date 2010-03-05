@@ -7,96 +7,79 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.quickfix;
 
-import java.util.ArrayList;
+import java.util.List;
 
 import junit.framework.TestCase;
 
-import org.eclipse.core.resources.IMarker;
-import org.eclipse.core.resources.IResource;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.emf.ecore.EPackage;
-import org.eclipse.emf.ecore.EcoreFactory;
-import org.eclipse.emf.ecore.util.EcoreUtil;
+import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
 import org.eclipse.xtext.ui.editor.quickfix.AbstractDeclarativeQuickfixProvider;
 import org.eclipse.xtext.ui.editor.quickfix.Fix;
-import org.eclipse.xtext.ui.editor.quickfix.ILanguageResourceHelper;
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionAcceptor;
 import org.eclipse.xtext.validation.Issue;
-import org.eclipse.xtext.validation.IssueContext;
-import org.eclipse.xtext.validation.IssueResolution;
+
+import com.google.common.collect.Lists;
+import com.google.inject.Provider;
 
 /**
  * @author Knut Wannheden - Initial contribution and API
  */
-public class DeclarativeQuickfixProviderTest extends TestCase implements ILanguageResourceHelper {
+public class DeclarativeQuickfixProviderTest extends TestCase {
 
 	private static final String DUMMY_CODE = "DeclarativeQuickfixProviderTest.DummyCode";
 
-	public void testHasNoResolutionsForOutdatedSignatures() throws Exception {
-		AbstractDeclarativeQuickfixProvider provider = new AbstractDeclarativeQuickfixProvider() {
-			@Fix(code = DUMMY_CODE)
-			@SuppressWarnings("unused")
-			public void outdatedSignature(EObject obj, IMarker marker) {
-			}
-		};
-		
-		provider.setLanguageResourceHelper(this);
-		assertFalse(provider.hasResolutionFor(DUMMY_CODE+1));
-		assertFalse(provider.hasResolutionFor(DUMMY_CODE));
-	}
-
 	public void testHasResolutions() throws Exception {
 		AbstractDeclarativeQuickfixProvider provider = new AbstractDeclarativeQuickfixProvider() {
-			@Fix(code = DUMMY_CODE)
+			@Fix(DUMMY_CODE)
 			@SuppressWarnings("unused")
-			public void outdatedSignature(EObject obj, IssueContext context) {
+			public void signature(Issue i, IssueResolutionAcceptor acceptor) {
 			}
 		};
 		
-		provider.setLanguageResourceHelper(this);
 		assertFalse(provider.hasResolutionFor(DUMMY_CODE+1));
 		assertTrue(provider.hasResolutionFor(DUMMY_CODE));
 	}
 
 	public void testGetResolutions() throws Exception {
-		AbstractDeclarativeQuickfixProvider generator = new AbstractDeclarativeQuickfixProvider() {
-			@Fix(code = DUMMY_CODE, label = "fixError1")
+		AbstractDeclarativeQuickfixProvider provider = new AbstractDeclarativeQuickfixProvider() {
+			@Fix(DUMMY_CODE)
 			@SuppressWarnings("unused")
-			public void fixError1(EObject obj, IssueContext context) {
+			public void fixError1(Issue i, IssueResolutionAcceptor acceptor) {
+				acceptor.accept(i, "fixError1", "", "", null);
 			}
 
-			@Fix(code = DUMMY_CODE, label = "fixError2")
+			@Fix(DUMMY_CODE)
 			@SuppressWarnings("unused")
-			public void fixError2(EPackage obj, IssueContext context) {
+			public void fixError2(Issue i, IssueResolutionAcceptor acceptor) {
+				acceptor.accept(i, "fixError2", "", "", null);
 			}
 
-			@Fix(code = DUMMY_CODE, label = "fixError3")
-			@SuppressWarnings("unused")
-			public void fixError3(EClass obj, IssueContext context) {
-			}
 		};
-		generator.setLanguageResourceHelper(this);
-		Iterable<IssueResolution> resolutionsIterable = generator.getResolutions(
-				createIssueContext(EcoreFactory.eINSTANCE.createEObject(), null));
+		provider.setIssueResolutionAcceptorProvider(new Provider<IssueResolutionAcceptor>() {
+			public IssueResolutionAcceptor get() {
+				return new IssueResolutionAcceptor(new IModificationContext.Factory() {
+					public IModificationContext createModificationContext(Issue issue) {
+						return null;
+					}
+				});
+			}
+		});
+		Iterable<IssueResolution> resolutionsIterable = provider.getResolutions(
+				createIssue(DUMMY_CODE+1));
 		assertFalse(resolutionsIterable.iterator().hasNext());
 
-		ArrayList<IssueResolution> resolutions = new ArrayList<IssueResolution>(generator.getResolutions(
-				createIssueContext(EcoreFactory.eINSTANCE.createEClass(), DUMMY_CODE)));
+		List<IssueResolution> resolutions = Lists.newArrayList(provider.getResolutions(
+				createIssue(DUMMY_CODE)));
+		assertTrue(!resolutions.isEmpty());
+
 		assertEquals(2, resolutions.size());
 		assertEquals("fixError1", resolutions.get(0).getLabel());
-		assertEquals("fixError3", resolutions.get(1).getLabel());
+		assertEquals("fixError2", resolutions.get(1).getLabel());
 	}
 
-	private IssueContext createIssueContext(EObject context, String code) {
+	protected Issue createIssue(String code) {
 		Issue.IssueImpl issue = new Issue.IssueImpl();
 		issue.setCode(code);
-		if(context != null)
-			issue.setUriToProblem(EcoreUtil.getURI(context));
-		return new IssueContext.IssueContextImpl(context, issue, "");
+		return issue;
 	}
-	
-	public boolean isLanguageResource(IResource resource) {
-		return resource == null;
-	}
-
 }

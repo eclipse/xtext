@@ -46,6 +46,8 @@ import org.eclipse.xtext.ui.editor.outline.transformer.DefaultSemanticModelTrans
 import org.eclipse.xtext.ui.editor.outline.transformer.ISemanticModelTransformer;
 import org.eclipse.xtext.ui.editor.outline.transformer.TransformingTreeProvider;
 import org.eclipse.xtext.ui.editor.preferences.IPreferenceStoreInitializer;
+import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider;
 import org.eclipse.xtext.ui.editor.reconciler.XtextReconciler;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.HighlightingHelper;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingHelper;
@@ -206,5 +208,11 @@ public class DefaultUiModule extends AbstractGenericModule {
 	public Class<? extends ILabelProvider> bindILabelProvider() {
 		return DefaultEObjectLabelProvider.class;
 	}
+	
+	public Class<? extends IssueResolutionProvider> bindIssueResolutionProvider() {
+		return DefaultQuickfixProvider.class;
+	}
+	
+
 
 }
