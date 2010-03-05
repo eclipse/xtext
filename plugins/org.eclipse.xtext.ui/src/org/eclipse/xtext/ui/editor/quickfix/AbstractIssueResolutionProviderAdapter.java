@@ -10,7 +10,6 @@ package org.eclipse.xtext.ui.editor.quickfix;
 import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.ui.IImageHelper;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.model.edit.IDocumentEditor;
 import org.eclipse.xtext.ui.internal.XtextPluginImages;
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Issue;
