@@ -9,7 +9,6 @@
  *******************************************************************************/
 «ENDREM»
 «IMPORT org::eclipse::xtext::xtext::ui::wizard::project»
-«IMPORT org::eclipse::xtext::xtext::ui::wizard::ecore2xtext»
 
 «EXTENSION org::eclipse::xtext::xtext::ui::wizard::project::Extensions»
 
