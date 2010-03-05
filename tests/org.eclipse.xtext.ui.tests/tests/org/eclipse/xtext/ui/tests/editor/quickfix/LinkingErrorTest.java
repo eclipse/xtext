@@ -89,7 +89,7 @@ public class LinkingErrorTest extends TestCase {
 					@Override
 					public void apply(XtextResource resource) {
 						Main main = (Main) resource.getContents().get(0);
-						Element element = main.getElement().get(1);
+						Element element = main.getElements().get(1);
 						element.setName("Bor");
 					}
 				});

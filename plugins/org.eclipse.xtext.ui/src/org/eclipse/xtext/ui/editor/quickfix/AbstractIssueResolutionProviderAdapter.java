@@ -33,15 +33,8 @@ public abstract class AbstractIssueResolutionProviderAdapter {
 	private IssueResolutionProvider resolutionProvider;
 
 	@Inject
-	private IDocumentEditor documentEditor;
-	
-	@Inject
 	private IImageHelper imageHelper;
 
-	protected IDocumentEditor getDocumentEditor() {
-		return documentEditor;
-	}
-	
 	protected IssueResolutionProvider getResolutionProvider() {
 		return resolutionProvider;
 	}

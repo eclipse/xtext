@@ -16,6 +16,7 @@ import com.google.inject.ImplementedBy;
 /**
  * @author Knut Wannheden - Initial contribution and API
  */
+@Deprecated
 @ImplementedBy(DefaultDocumentEditor.class)
 public interface IDocumentEditor {
 
