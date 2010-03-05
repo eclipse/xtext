@@ -4,6 +4,7 @@
 package org.eclipse.xtext.ui;
 
 import org.eclipse.jface.text.IAutoEditStrategy;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.ui.editor.bracketmatching.IBracketMatcher;
@@ -14,6 +15,7 @@ import org.eclipse.xtext.ui.editor.outline.actions.IContentOutlineNodeAdapterFac
 import org.eclipse.xtext.ui.editor.outline.transformer.ISemanticModelTransformer;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.IHighlightingConfiguration;
 import org.eclipse.xtext.ui.editor.syntaxcoloring.ISemanticHighlightingCalculator;
+import org.eclipse.xtext.ui.labeling.XtextLabelProvider;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ecoreInference.ProjectAwareXtendXtext2EcorePostProcessor;
@@ -90,5 +92,10 @@ public class XtextUiModule extends org.eclipse.xtext.ui.AbstractXtextUiModule {
 
 	public Class<? extends IXtext2EcorePostProcessor> bindIXtext2EcorePostProcessor() {
 		return ProjectAwareXtendXtext2EcorePostProcessor.class;
+	}
+	
+	@Override
+	public Class<? extends ILabelProvider> bindILabelProvider() {
+		return XtextLabelProvider.class;
 	}
 }
