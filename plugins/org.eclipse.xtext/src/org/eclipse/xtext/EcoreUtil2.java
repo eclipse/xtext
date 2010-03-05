@@ -500,4 +500,7 @@ public class EcoreUtil2 extends EcoreUtil {
 		return (EReference) clazz.getEStructuralFeature(Integer.valueOf(split[2]));
 	}
 
+	public static boolean hasSameURI(EObject o0, EObject o1) {
+		return EcoreUtil.getURI(o0).equals(EcoreUtil.getURI(o1));
+	}
 }
