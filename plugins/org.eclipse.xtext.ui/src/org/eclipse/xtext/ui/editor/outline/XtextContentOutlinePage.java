@@ -20,6 +20,7 @@ import org.eclipse.jface.action.MenuManager;
 import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.ISourceViewer;
+import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreePathViewerSorter;
@@ -143,7 +144,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 
 	protected void configureProviders() {
 		getTreeViewer().setContentProvider(contentProvider);
-		getTreeViewer().setLabelProvider(labelProvider);
+		getTreeViewer().setLabelProvider(new DelegatingStyledCellLabelProvider(labelProvider));
 	}
 
 	private void configureDocument() {
