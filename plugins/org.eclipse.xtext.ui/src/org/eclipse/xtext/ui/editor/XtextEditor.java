@@ -554,5 +554,9 @@ public class XtextEditor extends TextEditor {
 	public void setXtextEditorCallback(CompoundXtextEditorCallback callback) {
 		this.callback = callback;
 	}
+	
+	public void reveal(int offset, int length) {
+		selectAndReveal(offset, -1, offset, length);
+	}
 
 }

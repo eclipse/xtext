@@ -51,41 +51,49 @@ public class DefaultURIEditorOpener implements IURIEditorOpener {
 		return locationProvider;
 	}
 
-	public void open(URI uri) {
-		open(uri, null, -1);
+	public IEditorPart open(URI uri, boolean select) {
+		return open(uri, null, -1, select);
 	}
 
-	public void open(URI uri, EReference crossReference, int indexInList) {
+	public IEditorPart open(URI uri, EReference crossReference, int indexInList, boolean select) {
 		Iterator<IStorage> storages = mapper.getStorages(uri.trimFragment()).iterator();
 		if (storages != null && storages.hasNext()) {
 			try {
 				IStorage storage = storages.next();
+				IEditorPart editor = null;
 				if (storage instanceof IFile) {
-					selectAndReveal(openEditor((IFile) storage), uri, crossReference, indexInList);
+					editor = openEditor((IFile) storage);
 				} else {
-					selectAndReveal(openEditor(storage, uri), uri, crossReference, indexInList);
+					editor = openEditor(storage, uri);
 				}
+				selectAndReveal(editor, uri, crossReference, indexInList, select);
+				return editor;
 			} catch (WrappedException e) {
 				logger.error("Error while opening editor part for EMF URI '" + uri + "'", e.getCause());
 			} catch (PartInitException partInitException) {
 				logger.error("Error while opening editor part for EMF URI '" + uri + "'", partInitException);
 			}
 		}
+		return null;
 	}
 
-	protected void selectAndReveal(IEditorPart openEditor, final URI uri, final EReference crossReference, final int indexInList) {
+	protected void selectAndReveal(IEditorPart openEditor, final URI uri, final EReference crossReference,
+			final int indexInList, final boolean select) {
 		if (openEditor != null && openEditor instanceof XtextEditor) {
-			final XtextEditor edit = (XtextEditor) openEditor;
+			final XtextEditor xtextEditor = (XtextEditor) openEditor;
 			if (uri.fragment() != null) {
-				edit.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
+				xtextEditor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
 					@Override
 					public void process(XtextResource resource) throws Exception {
 						if (resource != null) {
 							EObject object = resource.getEObject(uri.fragment());
-							TextLocation location = (crossReference != null) 
-									? locationProvider.getLocation(object, crossReference, indexInList) 
-									: locationProvider.getLocation(object);
-							edit.selectAndReveal(location.getOffset(), location.getLength());
+							TextLocation location = (crossReference != null) ? locationProvider.getLocation(object,
+									crossReference, indexInList) : locationProvider.getLocation(object);
+							if (select) {
+								xtextEditor.selectAndReveal(location.getOffset(), location.getLength());
+							} else {
+								xtextEditor.reveal(location.getOffset(), location.getLength());								
+							}
 						}
 					}
 				});

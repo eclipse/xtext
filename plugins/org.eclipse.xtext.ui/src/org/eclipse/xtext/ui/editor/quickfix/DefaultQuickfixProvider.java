@@ -10,116 +10,111 @@ package org.eclipse.xtext.ui.editor.quickfix;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
-import java.util.regex.Pattern;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.diagnostics.Diagnostic;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.resource.IEObjectDescription;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.validation.IssueContext;
-import org.eclipse.xtext.validation.IssueResolution;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.validation.Issue;
 
-import com.google.common.base.Predicate;
-import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
+ * @author Jan Koehnlein
  */
 public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider {
-	
+
+	@Inject
+	private ISimilarityMatcher similarityMatcher;
+
+	@Inject
+	private IModificationContext.Factory modificationContextFactory;
+
+	@Inject
+	private Provider<IssueResolutionAcceptor> issueResolutionAcceptorProvider;
+
 	@Inject
 	private IScopeProvider scopeProvider;
-	
-	public void setScopeProvider(IScopeProvider scopeProvider) {
-		this.scopeProvider = scopeProvider;
-	}
 
-	public IScopeProvider getScopeProvider() {
-		return scopeProvider;
-	}
-	
 	private CrossReference findCrossReference(EObject context, AbstractNode node) {
-		if(node == null || context.equals(node.getElement()))
+		if (node == null || context.equals(node.getElement()))
 			return null;
-		
+
 		EObject grammarElement = node.getGrammarElement();
 		if (grammarElement instanceof CrossReference) {
 			return (CrossReference) grammarElement;
 		} else
-			return findCrossReference(context, (AbstractNode)node.eContainer());
+			return findCrossReference(context, (AbstractNode) node.eContainer());
 	}
 
-	public List<IssueResolution> getResolutionsForLinkingIssue(IssueContext context) {
-		EObject target = context.getModel();
-		CompositeNode rootNode = NodeUtil.getRootNode(target);
-		AbstractNode leaf = NodeUtil.findLeafNodeAtOffset(rootNode, context.getIssue().getOffset() + 1);
-		
-		CrossReference cr = findCrossReference(target, leaf);
-		if(cr==null)
-			return Collections.emptyList();
-		
-		EReference reference = GrammarUtil.getReference(cr);
-		if(reference == null)
-			return Collections.emptyList();
-		
-		IScope scope = getScopeProvider().getScope(target, reference);
-		String leafString = context.getContent().substring(context.getIssue().getOffset(), context.getIssue().getOffset() + context.getIssue().getLength());
-		return getResolutionsForLinkingIssue(target, reference, scope, leafString);
-	}
+	public List<IssueResolution> getResolutionsForLinkingIssue(final Issue issue) {
+		final IModificationContext modificationContext = modificationContextFactory.createModificationContext(issue);
+		final IXtextDocument xtextDocument = modificationContext.getXtextDocument();
+		return xtextDocument.readOnly(new IUnitOfWork<List<IssueResolution>, XtextResource>() {
+			public List<IssueResolution> exec(XtextResource state) throws Exception {
+				EObject target = state.getEObject(issue.getUriToProblem().fragment());
+				CompositeNode rootNode = NodeUtil.getRootNode(target);
+				AbstractNode leaf = NodeUtil.findLeafNodeAtOffset(rootNode, issue.getOffset() + 1);
 
-	public List<IssueResolution> getResolutionsForLinkingIssue(EObject target, EReference reference, IScope scope,
-			String leafString) {
-		List<IssueResolution> result = new ArrayList<IssueResolution>();
-		
-		for(IEObjectDescription desc : getMatchingDescriptionsForLinkingIssue(scope, target, reference, leafString)) {
-			if(EcoreUtil2.isAssignableFrom(reference.getEReferenceType(), desc.getEClass()))
-				result.add(new FeatureSettingIssueResolution(target, reference, desc.getName(), desc.getEObjectOrProxy()));
-		}
-		
-		return result;
-	}
+				CrossReference crossReference = findCrossReference(target, leaf);
+				if (crossReference == null)
+					return Collections.emptyList();
 
-	public Iterable<IEObjectDescription> getMatchingDescriptionsForLinkingIssue(final IScope scope, final EObject model,
-			final EReference reference, final String leafString) {
-		// TODO: work more explicit with true qualified name delimiter instead of word break
-		// TODO: and/or reuse code available in content assist
-		
-		final String regex = "(?i)(^|.*?\\W)" + Pattern.quote(leafString) + ".*"; 
-		
-		return Iterables.filter(scope.getAllContents(), new Predicate<IEObjectDescription>() {
+				EReference reference = GrammarUtil.getReference(crossReference);
+				if (reference == null)
+					return Collections.emptyList();
 
-			public boolean apply(IEObjectDescription input) {
-				return input.getName().matches(regex) || input.getQualifiedName().matches(regex);
+				String issueString = xtextDocument.get(issue.getOffset(), issue.getLength());
+				IScope scope = scopeProvider.getScope(target, reference);
+				final IssueResolutionAcceptor issueResolutionAcceptor = issueResolutionAcceptorProvider.get();
+				for (IEObjectDescription referableElement : scope.getAllContents()) {
+					String replacement = referableElement.getName();
+					if (similarityMatcher.isSimilar(issueString, replacement)) {
+						String replaceLabel = fixCrossReferenceLabel(issueString, replacement);
+						issueResolutionAcceptor.accept(issue, replaceLabel, replaceLabel, fixCrossReferenceImage(
+								issueString, replacement), new ReplaceModification(issue, replacement));
+					}
+				}
+				return issueResolutionAcceptor.getIssueResolutions();
 			}
-
 		});
 	}
 
+	protected String fixCrossReferenceLabel(String issueString, String replacement) {
+		return "Change to '" + replacement + "'";
+	}
+
+	protected String fixCrossReferenceImage(String issueString, String replacement) {
+		return "";
+	}
+
 	@Override
-	public List<IssueResolution> getResolutions(IssueContext context) {
-		if(Diagnostic.LINKING_DIAGNOSTIC.equals(context.getIssue().getCode())) {
+	public List<IssueResolution> getResolutions(Issue issue) {
+		if (Diagnostic.LINKING_DIAGNOSTIC.equals(issue.getCode())) {
 			List<IssueResolution> result = new ArrayList<IssueResolution>();
-			result.addAll(getResolutionsForLinkingIssue(context));
-			result.addAll(super.getResolutions(context));
+			result.addAll(getResolutionsForLinkingIssue(issue));
+			result.addAll(super.getResolutions(issue));
 			return result;
 		} else
-			return super.getResolutions(context);
+			return super.getResolutions(issue);
 	}
 
 	@Override
 	public boolean hasResolutionFor(String issueCode) {
 		return Diagnostic.LINKING_DIAGNOSTIC.equals(issueCode) || super.hasResolutionFor(issueCode);
 	}
-
-	
 
 }

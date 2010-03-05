@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.editor;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.ui.IEditorPart;
 
 import com.google.inject.ImplementedBy;
 
@@ -18,8 +19,8 @@ import com.google.inject.ImplementedBy;
 @ImplementedBy(DefaultURIEditorOpener.class)
 public interface IURIEditorOpener {
 
-	void open(URI uri);
+	IEditorPart open(URI uri, boolean select);
 
-	void open(URI referenceOwnerURI, EReference reference, int indexInList);
+	IEditorPart open(URI referenceOwnerURI, EReference reference, int indexInList, boolean select);
 	
 }

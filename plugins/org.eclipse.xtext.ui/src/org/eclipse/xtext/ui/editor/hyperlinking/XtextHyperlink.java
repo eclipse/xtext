@@ -23,7 +23,7 @@ public class XtextHyperlink extends AbstractHyperlink {
 	private IURIEditorOpener uriEditorOpener;
 	
 	public void open() {
-		uriEditorOpener.open(getURI());
+		uriEditorOpener.open(getURI(), true);
 	}
 
 	public URI getURI() {

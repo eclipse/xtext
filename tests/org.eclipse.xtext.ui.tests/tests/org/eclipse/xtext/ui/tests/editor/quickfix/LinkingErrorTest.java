@@ -7,81 +7,127 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.quickfix;
 
-import java.util.ArrayList;
 import java.util.List;
 
-import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
-import org.eclipse.xtext.EcoreUtil2;
-import org.eclipse.xtext.junit.AbstractXtextTests;
+import junit.framework.TestCase;
+
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PartInitException;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.ide.IDE;
+import org.eclipse.xtext.junit.util.IResourcesSetupUtil;
+import org.eclipse.xtext.junit.util.JavaProjectSetupUtil;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.scoping.IScopeProvider;
+import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.ui.editor.model.edit.AbstractSemanticModification;
+import org.eclipse.xtext.ui.editor.model.edit.IModificationContext;
+import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer;
 import org.eclipse.xtext.ui.editor.quickfix.DefaultQuickfixProvider;
-import org.eclipse.xtext.ui.tests.linking.ImportUriUiTestLanguageStandaloneSetup;
-import org.eclipse.xtext.ui.tests.linking.importUriUi.Main;
-import org.eclipse.xtext.ui.tests.linking.importUriUi.Type;
-import org.eclipse.xtext.util.CancelIndicator;
+import org.eclipse.xtext.ui.editor.quickfix.IssueResolution;
+import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.quickfix.importUriUi.Element;
+import org.eclipse.xtext.ui.tests.quickfix.importUriUi.Main;
 import org.eclipse.xtext.util.StringInputStream;
-import org.eclipse.xtext.validation.DiagnosticConverterImpl;
-import org.eclipse.xtext.validation.IDiagnosticConverter;
+import org.eclipse.xtext.util.concurrent.IUnitOfWork;
+import org.eclipse.xtext.validation.CheckMode;
 import org.eclipse.xtext.validation.Issue;
-import org.eclipse.xtext.validation.IssueResolution;
-import org.eclipse.xtext.validation.IDiagnosticConverter.Acceptor;
-import org.eclipse.xtext.validation.IssueContext.IssueContextImpl;
+
+import com.google.inject.Injector;
 
 /**
  * @author Heiko Behrens - Initial contribution and API
+ * @author Jan Koehnlein
  */
-public class LinkingErrorTest extends AbstractXtextTests {
+public class LinkingErrorTest extends TestCase {
+
+	private static final String MODEL_FILE = "test.quickfixcrossreftestlanguage";
+	private static final String PROJECT_NAME = "quickfixtest";
 
 	@Override
-	protected void setUp() throws Exception {
-		super.setUp();
-		with(ImportUriUiTestLanguageStandaloneSetup.class);
+	protected void tearDown() throws Exception {
+		IResourcesSetupUtil.cleanWorkspace();
 	}
-	
-	public void testQuickfixRoundtrip() throws Exception {
-		String input = "type Foo extends Ba\n" +
-			"type Bar extends Bar\n";
-		XtextResource res = getResourceAndExpect(new StringInputStream(input), 1);
-		assertEquals(1, res.getErrors().size());
-		EcoreUtil2.resolveAll(res, new CancelIndicator.NullImpl());
 
-		Main g = (Main) getModel(res);
-		Type fooType = g.getTypes().get(0);
-		assertEquals("Foo", fooType.getName());
-		Type extendsObj = fooType.getExtends();
-		assertTrue(extendsObj.eIsProxy());
-		Type barType = g.getTypes().get(1);
-		assertEquals("Bar", barType.getName());
-		
-		// ensure "ba" cannot be linked 
-		Diagnostic firstError = res.getErrors().get(0);
-		DiagnosticConverterImpl converter = new DiagnosticConverterImpl();
-		final List<Issue> l = new ArrayList<Issue>();
-		Acceptor acceptor = new IDiagnosticConverter.Acceptor() {
-			public void accept(Issue issue) {
-				l.add(issue);
-			}};
-			
-		converter.convertResourceDiagnostic(firstError, null, acceptor);
-		Issue firstIssue = l.get(0);
-		assertEquals(org.eclipse.xtext.diagnostics.Diagnostic.LINKING_DIAGNOSTIC, firstIssue.getCode());
+	public void testQuickfixTurnaround() throws Exception {
+		XtextEditor xtextEditor = openEditor();
+		IXtextDocument document = xtextEditor.getDocument();
 
-		// single quickfix is change
-		IssueContextImpl context = new IssueContextImpl(fooType, firstIssue, input);
-		DefaultQuickfixProvider resolutionProvider = new DefaultQuickfixProvider();
-		resolutionProvider.setScopeProvider(getInjector().getInstance(IScopeProvider.class));
-		List<IssueResolution> resolutions = resolutionProvider.getResolutions(context);
-		
+		List<Issue> issues = getIssues(document);
+		assertFalse(issues.isEmpty());
+		Issue issue = issues.get(0);
+		assertNotNull(issue);
+		DefaultQuickfixProvider quickfixProvider = getInjector().getInstance(DefaultQuickfixProvider.class);
+		List<IssueResolution> resolutions = quickfixProvider.getResolutions(issue);
+
 		assertEquals(1, resolutions.size());
 		IssueResolution resolution = resolutions.get(0);
 		assertEquals("Change to 'Bar'", resolution.getLabel());
-		
-		// apply quickfix
-		assertNotSame(barType, fooType.getExtends());
-		resolution.run();
-		assertSame(barType, fooType.getExtends());
-		
+		resolution.apply();
+		issues = getIssues(document);
+		assertTrue(issues.isEmpty());
+		xtextEditor.close(false);
 	}
-	
+
+	public void testSemanticIssueResolution() throws Exception {
+		final XtextEditor editor = openEditor();
+		IModificationContext context = new IModificationContext() {
+			public IXtextDocument getXtextDocument() {
+				return editor.getDocument();
+			}
+
+			public void setIssue(Issue issue) {
+			}
+		};
+		ITextEditComposer textEditComposer = getInjector().getInstance(ITextEditComposer.class);
+		IssueResolution issueResolution = new IssueResolution("Change to 'Bor'", "Change to 'Bor'", null, context,
+				new AbstractSemanticModification(textEditComposer) {
+					@Override
+					public void apply(XtextResource resource) {
+						Main main = (Main) resource.getContents().get(0);
+						Element element = main.getElement().get(1);
+						element.setName("Bor");
+					}
+				});
+		issueResolution.apply();
+		editor.doSave(null);
+		List<Issue> issues = getIssues(editor.getDocument());
+		assertTrue(issues.isEmpty());
+		editor.close(false);
+	}
+
+	private Injector getInjector() {
+		return Activator.getInstance().getInjector("org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage");
+	}
+
+	private XtextEditor openEditor() throws CoreException, PartInitException {
+		String model = "Foo { ref Bor }\n" + "Bar { }";
+		IJavaProject javaProject = JavaProjectSetupUtil.createJavaProject(PROJECT_NAME);
+		IFile file = javaProject.getProject().getFile(MODEL_FILE);
+		if (file.exists()) {
+			file.delete(true, null);
+		}
+		file.create(new StringInputStream(model), true, null);
+		file.refreshLocal(IResource.DEPTH_ONE, null);
+		XtextEditor xtextEditor = (XtextEditor) IDE.openEditor(getActivePage(), file);
+		xtextEditor.getDocument().set(model);
+		return xtextEditor;
+	}
+
+	private IWorkbenchPage getActivePage() {
+		return PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+	}
+
+	private List<Issue> getIssues(IXtextDocument document) {
+		return document.readOnly(new IUnitOfWork<List<Issue>, XtextResource>() {
+			public List<Issue> exec(XtextResource state) throws Exception {
+				return state.getResourceServiceProvider().getResourceValidator().validate(state, CheckMode.ALL,
+						null);
+			}
+		});
+	}
 }

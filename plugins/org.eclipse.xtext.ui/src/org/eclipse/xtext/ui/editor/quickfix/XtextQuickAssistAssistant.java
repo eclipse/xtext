@@ -24,21 +24,18 @@ import org.eclipse.swt.graphics.Image;
 import org.eclipse.swt.graphics.Point;
 import org.eclipse.swt.widgets.Shell;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
-import org.eclipse.xtext.ui.IImageHelper;
 import org.eclipse.xtext.ui.MarkerUtil;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
-import org.eclipse.xtext.ui.editor.model.edit.IDocumentEditor;
 import org.eclipse.xtext.ui.editor.model.edit.IssueUtil;
 import org.eclipse.xtext.ui.editor.validation.XtextAnnotation;
 import org.eclipse.xtext.validation.Issue;
-import org.eclipse.xtext.validation.IssueResolution;
-import org.eclipse.xtext.validation.IssueResolutionProvider;
 
 import com.google.inject.Inject;
 
 /**
  * @author Knut Wannheden - Initial contribution and API
  * @author Heiko Behrens
+ * @author Jan Koehnlein
  */
 public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 
@@ -55,7 +52,7 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 		}
 
 		public void apply(IDocument document) {
-			resolution.run();
+			resolution.apply();
 		}
 
 		public Point getSelection(IDocument document) {
@@ -92,16 +89,19 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 
 	}
 
-	public static class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAdapter implements IQuickAssistProcessor {
+	public static class XtextQuickAssistProcessor extends AbstractIssueResolutionProviderAdapter implements
+			IQuickAssistProcessor {
 
 		private final IssueUtil issueUtil;
+
 		private final MarkerUtil markerUtil;
-		
+
+		@Inject
 		public XtextQuickAssistProcessor(IssueUtil issueUtil, MarkerUtil markerUtil) {
 			this.issueUtil = issueUtil;
 			this.markerUtil = markerUtil;
 		}
-		
+
 		private String errorMessage;
 
 		public String getErrorMessage() {
@@ -111,22 +111,23 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 		public boolean canFix(Annotation annotation) {
 			if (annotation.isMarkedDeleted())
 				return false;
-			
+
 			// non-persisted annotation
 			if (annotation instanceof XtextAnnotation) {
 				XtextAnnotation a = (XtextAnnotation) annotation;
 				return getResolutionProvider().hasResolutionFor(a.getIssueCode());
 			}
-			
+
 			// persisted markerAnnotation
 			if (annotation instanceof MarkerAnnotation) {
 				MarkerAnnotation markerAnnotation = (MarkerAnnotation) annotation;
 				if (!markerAnnotation.isQuickFixableStateSet())
-					markerAnnotation.setQuickFixable(getResolutionProvider().hasResolutionFor(markerUtil.getCode(markerAnnotation)));
-				
+					markerAnnotation.setQuickFixable(getResolutionProvider().hasResolutionFor(
+							markerUtil.getCode(markerAnnotation)));
+
 				return markerAnnotation.isQuickFixable();
 			}
-			
+
 			return false;
 		}
 
@@ -136,45 +137,46 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 
 		public ICompletionProposal[] computeQuickAssistProposals(IQuickAssistInvocationContext invocationContext) {
 			final IDocument d = invocationContext.getSourceViewer().getDocument();
-			if(!(d instanceof IXtextDocument))
+			if (!(d instanceof IXtextDocument))
 				return new ICompletionProposal[0];
-			final IXtextDocument document = (IXtextDocument)d;
-			
+			final IXtextDocument document = (IXtextDocument) d;
+
 			final IAnnotationModel amodel = invocationContext.getSourceViewer().getAnnotationModel();
-			
+
 			List<ICompletionProposal> result = new ArrayList<ICompletionProposal>();
 			final int offset = invocationContext.getOffset();
 			for (Iterator<?> it = amodel.getAnnotationIterator(); it.hasNext();) {
 				Object key = it.next();
-				if(!(key instanceof Annotation))
+				if (!(key instanceof Annotation))
 					continue;
-				
+
 				Annotation annotation = (Annotation) key;
-				if(!canFix(annotation))
+				if (!canFix(annotation))
 					continue;
-				
+
 				final Issue issue = issueUtil.getIssueFromAnnotation(annotation);
-				if(issue == null)
+				if (issue == null)
 					continue;
-		
+
 				Iterable<IssueResolution> resolutions = getResolutions(issue, document);
-				if(!resolutions.iterator().hasNext())
+				if (!resolutions.iterator().hasNext())
 					continue;
-				
+
 				Position pos = amodel.getPosition(annotation);
-				try {
-					int line = document.getLineOfOffset(pos.getOffset());
-					int start = pos.getOffset();
-					String delim = document.getLineDelimiter(line);
-					int delimLength = delim != null ? delim.length() : 0;
-					int end = document.getLineLength(line) + start - delimLength;
-					if (offset >= start && offset <= end) {
-						for(IssueResolution resolution : resolutions)
-							result.add(new XtextCompletionProposalAdapter(pos, resolution, getImage(resolution)));
+				if (pos != null) {
+					try {
+						int line = document.getLineOfOffset(pos.getOffset());
+						int start = pos.getOffset();
+						String delim = document.getLineDelimiter(line);
+						int delimLength = delim != null ? delim.length() : 0;
+						int end = document.getLineLength(line) + start - delimLength;
+						if (offset >= start && offset <= end) {
+							for (IssueResolution resolution : resolutions)
+								result.add(new XtextCompletionProposalAdapter(pos, resolution, getImage(resolution)));
+						}
+					} catch (BadLocationException e) {
+						errorMessage = e.getMessage();
 					}
-				}
-				catch (BadLocationException e) {
-					errorMessage = e.getMessage();
 				}
 			}
 			return result.toArray(new ICompletionProposal[result.size()]);
@@ -183,14 +185,8 @@ public class XtextQuickAssistAssistant extends QuickAssistAssistant {
 	}
 
 	@Inject
-	public XtextQuickAssistAssistant(IssueResolutionProvider issueResolutionProvider, IDocumentEditor documentEditor, IImageHelper imageHelper, IssueUtil issueUtil, MarkerUtil markerUtil) {
-		// pass-through parameters issueUtil+markerUtil should be injected with provider via guice2
-		XtextQuickAssistProcessor processor = new XtextQuickAssistProcessor(issueUtil, markerUtil);
-		processor.setDocumentEditor(documentEditor);
-		processor.setImageHelper(imageHelper);
-		processor.setResolutionProvider(issueResolutionProvider);
+	public XtextQuickAssistAssistant(XtextQuickAssistProcessor processor) {
 		setQuickAssistProcessor(processor);
-		
 		setInformationControlCreator(new AbstractReusableInformationControlCreator() {
 			@Override
 			public IInformationControl doCreateInformationControl(Shell parent) {

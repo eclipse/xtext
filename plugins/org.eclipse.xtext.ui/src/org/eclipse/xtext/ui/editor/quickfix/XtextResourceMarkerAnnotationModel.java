@@ -13,7 +13,6 @@ import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.ui.texteditor.ResourceMarkerAnnotationModel;
 import org.eclipse.xtext.ui.MarkerUtil;
-import org.eclipse.xtext.validation.IssueResolutionProvider;
 
 /**
  * @author Heiko Behrens - Initial contribution and API

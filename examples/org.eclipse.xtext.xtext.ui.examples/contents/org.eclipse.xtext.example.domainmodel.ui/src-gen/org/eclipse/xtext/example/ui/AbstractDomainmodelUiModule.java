@@ -78,7 +78,7 @@ public abstract class AbstractDomainmodelUiModule extends DefaultUiModule {
 	}
 
 	// contributed by org.eclipse.xtext.ui.generator.quickfix.QuickfixProviderFragment
-	public Class<? extends org.eclipse.xtext.validation.IssueResolutionProvider> bindIssueResolutionProvider() {
+	public Class<? extends org.eclipse.xtext.ui.editor.quickfix.IssueResolutionProvider> bindIssueResolutionProvider() {
 		return org.eclipse.xtext.example.ui.quickfix.DomainmodelQuickfixProvider.class;
 	}
 

@@ -5,47 +5,26 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.validation;
+package org.eclipse.xtext.ui.editor.quickfix;
 
 import java.util.Collections;
 import java.util.List;
 
+import org.eclipse.xtext.validation.Issue;
+
 /**
  * @author Heiko Behrens - Initial contribution and API
+ * @author Jan Koehnlein
  */
 public interface IssueResolutionProvider {
 
-	public interface IssueContextProvider {
-		public IssueContext getIssueContext();
-	}
-
 	boolean hasResolutionFor(String issueCode);
 
-	public List<IssueResolution> getResolutions(IssueContext context);
-
-	public List<IssueResolution> getResolutions(String issueCode, IssueContextProvider provider);
-
-	public static class IssueContextProviderImpl implements IssueContextProvider {
-
-		private final IssueContext context;
-
-		public IssueContextProviderImpl(IssueContext context) {
-			this.context = context;
-		}
-
-		public IssueContext getIssueContext() {
-			return context;
-		}
-
-	}
+	public List<IssueResolution> getResolutions(Issue issue);
 
 	public static class NullImpl implements IssueResolutionProvider {
 
-		public List<IssueResolution> getResolutions(IssueContext context) {
-			return Collections.emptyList();
-		}
-
-		public List<IssueResolution> getResolutions(String issueCode, IssueContextProvider provider) {
+		public List<IssueResolution> getResolutions(Issue issue) {
 			return Collections.emptyList();
 		}
 
