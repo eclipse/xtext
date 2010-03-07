@@ -483,16 +483,21 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 				if (element.getGrammarElement() instanceof UnorderedGroup) {
 					boolean repeat = true;
 					List<AbstractElement> groupElements = ((UnorderedGroup) element.getGrammarElement()).getElements();
+					List<AbstractElement> handledUnorderedGroupElements = element.getHandledUnorderedGroupElements();
 					for(AbstractElement groupElement: groupElements) {
-						if (element.getHandledUnorderedGroupElements() == null || GrammarUtil.isMultipleCardinality(groupElement)) {
+						if (handledUnorderedGroupElements == null) {
 							calculator.doSwitch(groupElement);
 							if (!GrammarUtil.isOptionalCardinality(groupElement)) {
 								repeat = false;
 							}
-						} else if (!element.getHandledUnorderedGroupElements().contains(groupElement)) {
+						} else if (!handledUnorderedGroupElements.contains(groupElement)) {
 							calculator.doSwitch(groupElement);
 							if (!GrammarUtil.isOptionalCardinality(groupElement)) {
 								repeat = false;
+							}
+						} else if (handledUnorderedGroupElements.get(handledUnorderedGroupElements.size() - 1) == groupElement) {
+							if (GrammarUtil.isMultipleCardinality(groupElement)) {
+								calculator.doSwitch(groupElement);
 							}
 						}
 					}

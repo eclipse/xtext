@@ -33,7 +33,7 @@ public class UnorderedGroupsContentAssistTest extends AbstractContentAssistProce
 	}
 
 	public void testEmptyModel() throws Exception {
-		newBuilder(getSetup()).assertText("1", "2", "3", "4");
+		newBuilder(getSetup()).assertText("1", "2", "3", "4", "bug304681");
 	}
 
 	public void testEmptySimpleModel() throws Exception {
@@ -103,18 +103,24 @@ public class UnorderedGroupsContentAssistTest extends AbstractContentAssistProce
 	}
 
 	public void testLoopedAfterPrivateFinal() throws Exception {
-		newBuilder(getSetup()).appendNl("3").appendNl("private final").assertText("public", "protected", "private",
-				"synchronized", "abstract", "final", "static", "class");
+		newBuilder(getSetup()).appendNl("3").appendNl("private final").assertText(
+				"abstract", "final",
+				"static", 
+				"synchronized",
+				"class");
 	}
 
 	public void testLoopedAfterStaticSynchronizedProtected() throws Exception {
-		newBuilder(getSetup()).appendNl("3").appendNl("static synchronized public ").assertText("public", "protected",
-				"private", "synchronized", "abstract", "final", "static", "class");
+		newBuilder(getSetup()).appendNl("3").appendNl("static synchronized public ").assertText(
+				"public", "protected", "private", 
+				"abstract",	"final", 
+				"class");
 	}
 
 	public void testLoopedAfterStaticSynchronizedProtectedAbstract() throws Exception {
-		newBuilder(getSetup()).appendNl("3").appendNl("static synchronized protected abstract").assertText("public",
-				"protected", "private", "synchronized", "abstract", "final", "static", "class");
+		newBuilder(getSetup()).appendNl("3").appendNl("static synchronized protected abstract").assertText(
+				"abstract", "final", 
+				"class");
 	}
 
 	public void testEmptyGroupedLoopedModel() throws Exception {
@@ -143,5 +149,75 @@ public class UnorderedGroupsContentAssistTest extends AbstractContentAssistProce
 	public void testGroupedLoopedAfterStaticSynchronizedProtectedAbstract() throws Exception {
 		newBuilder(getSetup()).appendNl("4").appendNl("static synchronized protected abstract").assertText("public",
 				"protected", "private", "synchronized", "abstract", "final", "static", "class");
+	}
+	
+	public void testBug304681_01() throws Exception {
+		newBuilder(getSetup()).appendNl("bug304681")
+			.assertText("{");
+	}
+	
+	public void testBug304681_02() throws Exception {
+		newBuilder(getSetup()).appendNl("bug304681")
+			.appendNl("{")
+			.assertText("attr", "ref", "flag", "long", "short", "uid", "}");
+	}
+	
+	public void testBug304681_03() throws Exception {
+		newBuilder(getSetup()).appendNl("bug304681")
+			.appendNl("{")
+			.appendNl("attr name;")
+			.assertText("attr", "ref", "flag", "long", "short", "uid", "}");
+	}
+	
+	public void testBug304681_04() throws Exception {
+		newBuilder(getSetup()).appendNl("bug304681")
+			.appendNl("{")
+			.appendNl("uid 'String';")
+			.assertText("attr", "ref", "flag", "long", "short", "}");
+	}
+	
+	public void testBug304681_05() throws Exception {
+		newBuilder(getSetup()).appendNl("bug304681")
+			.appendNl("{")
+			.appendNl("uid 'String';")
+			.appendNl("attr name;")
+			.assertText("attr", "ref", "flag", "long", "short", "}");
+	}
+	
+	public void testBug304681_06() throws Exception {
+		newBuilder(getSetup()).appendNl("bug304681")
+			.appendNl("{")
+			.appendNl("attr name;")
+			.appendNl("uid 'String';")
+			.assertText("flag", "long", "short", "}");
+	}
+	
+	public void testBug304681_07() throws Exception {
+		newBuilder(getSetup()).appendNl("bug304681")
+			.appendNl("{")
+			.appendNl("attr name")
+			.assertText(";");
+	}
+	
+	public void testBug304681_08() throws Exception {
+		newBuilder(getSetup()).appendNl("bug304681")
+			.appendNl("{")
+			.appendNl("attr name;")
+			.appendNl("uid 'String';")
+			.appendNl("short 'String';")
+			.appendNl("long 'String';")
+			.appendNl("flag;")
+			.assertText("}");
+	}
+	
+	public void testBug304681_09() throws Exception {
+		newBuilder(getSetup()).appendNl("bug304681")
+			.appendNl("{")
+			.appendNl("uid 'String';")
+			.appendNl("short 'String';")
+			.appendNl("long 'String';")
+			.appendNl("flag;")
+			.appendNl("attr name;")
+			.assertText("attr", "ref", "}");
 	}
 }
