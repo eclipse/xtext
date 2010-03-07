@@ -130,6 +130,36 @@ public class UnorderedGroupsTestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case UnorderedGroupsTestPackage.BUG304681_MODEL:
+      {
+        Bug304681Model bug304681Model = (Bug304681Model)theEObject;
+        T result = caseBug304681Model(bug304681Model);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case UnorderedGroupsTestPackage.BUG304681_FEATURE:
+      {
+        Bug304681Feature bug304681Feature = (Bug304681Feature)theEObject;
+        T result = caseBug304681Feature(bug304681Feature);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case UnorderedGroupsTestPackage.BUG304681_ATTRIBUTE:
+      {
+        Bug304681Attribute bug304681Attribute = (Bug304681Attribute)theEObject;
+        T result = caseBug304681Attribute(bug304681Attribute);
+        if (result == null) result = caseBug304681Feature(bug304681Attribute);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case UnorderedGroupsTestPackage.BUG304681_REFERENCE:
+      {
+        Bug304681Reference bug304681Reference = (Bug304681Reference)theEObject;
+        T result = caseBug304681Reference(bug304681Reference);
+        if (result == null) result = caseBug304681Feature(bug304681Reference);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -210,6 +240,70 @@ public class UnorderedGroupsTestSwitch<T>
    * @generated
    */
   public T caseGroupLoopedModel(GroupLoopedModel object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Bug304681 Model</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Bug304681 Model</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBug304681Model(Bug304681Model object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Bug304681 Feature</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Bug304681 Feature</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBug304681Feature(Bug304681Feature object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Bug304681 Attribute</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Bug304681 Attribute</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBug304681Attribute(Bug304681Attribute object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Bug304681 Reference</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Bug304681 Reference</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseBug304681Reference(Bug304681Reference object)
   {
     return null;
   }

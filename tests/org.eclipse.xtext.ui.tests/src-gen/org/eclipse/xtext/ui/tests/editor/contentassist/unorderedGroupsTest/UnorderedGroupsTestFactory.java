@@ -71,6 +71,42 @@ public interface UnorderedGroupsTestFactory extends EFactory
   GroupLoopedModel createGroupLoopedModel();
 
   /**
+   * Returns a new object of class '<em>Bug304681 Model</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Bug304681 Model</em>'.
+   * @generated
+   */
+  Bug304681Model createBug304681Model();
+
+  /**
+   * Returns a new object of class '<em>Bug304681 Feature</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Bug304681 Feature</em>'.
+   * @generated
+   */
+  Bug304681Feature createBug304681Feature();
+
+  /**
+   * Returns a new object of class '<em>Bug304681 Attribute</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Bug304681 Attribute</em>'.
+   * @generated
+   */
+  Bug304681Attribute createBug304681Attribute();
+
+  /**
+   * Returns a new object of class '<em>Bug304681 Reference</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Bug304681 Reference</em>'.
+   * @generated
+   */
+  Bug304681Reference createBug304681Reference();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

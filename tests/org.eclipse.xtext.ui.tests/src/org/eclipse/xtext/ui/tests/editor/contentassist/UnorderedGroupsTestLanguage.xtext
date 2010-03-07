@@ -15,6 +15,7 @@ Model :
    | '2' second=MandatoryModel
    | '3' thrird=LoopedModel
    | '4' forth=GroupLoopedModel
+   | 'bug304681' model=Bug304681Model
 ;
 
 SimpleModel:
@@ -56,3 +57,22 @@ GroupLoopedModel:
 	)*
 	'class' name=ID '{' '}'
 ;
+
+Bug304681Model:
+	"{" (
+    	("short" shortDescription=STRING ";")? &
+     	("long"  longDescription=STRING ";")? &
+     	("uid" uid=STRING ";")? &
+     	(flag?="flag" ";")? &
+     	features+=Bug304681Feature*
+     ) "}";
+
+Bug304681Feature:
+  Bug304681Attribute | Bug304681Reference;
+  
+Bug304681Attribute:
+  'attr' name=ID ';';
+  
+Bug304681Reference:
+  'ref' name=ID ';';
+  

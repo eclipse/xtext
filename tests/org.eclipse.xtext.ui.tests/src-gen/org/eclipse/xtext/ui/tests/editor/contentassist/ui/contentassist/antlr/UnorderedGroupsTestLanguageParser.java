@@ -46,18 +46,28 @@ public class UnorderedGroupsTestLanguageParser extends AbstractContentAssistPars
 					put(grammarAccess.getLoopedModelAccess().getAlternatives_0_3(), "rule__LoopedModel__Alternatives_0_3");
 					put(grammarAccess.getGroupLoopedModelAccess().getVisibilityAlternatives_0_0_0(), "rule__GroupLoopedModel__VisibilityAlternatives_0_0_0");
 					put(grammarAccess.getGroupLoopedModelAccess().getAlternatives_0_3(), "rule__GroupLoopedModel__Alternatives_0_3");
+					put(grammarAccess.getBug304681FeatureAccess().getAlternatives(), "rule__Bug304681Feature__Alternatives");
 					put(grammarAccess.getModelAccess().getGroup_0(), "rule__Model__Group_0__0");
 					put(grammarAccess.getModelAccess().getGroup_1(), "rule__Model__Group_1__0");
 					put(grammarAccess.getModelAccess().getGroup_2(), "rule__Model__Group_2__0");
 					put(grammarAccess.getModelAccess().getGroup_3(), "rule__Model__Group_3__0");
+					put(grammarAccess.getModelAccess().getGroup_4(), "rule__Model__Group_4__0");
 					put(grammarAccess.getSimpleModelAccess().getGroup(), "rule__SimpleModel__Group__0");
 					put(grammarAccess.getMandatoryModelAccess().getGroup(), "rule__MandatoryModel__Group__0");
 					put(grammarAccess.getLoopedModelAccess().getGroup(), "rule__LoopedModel__Group__0");
 					put(grammarAccess.getGroupLoopedModelAccess().getGroup(), "rule__GroupLoopedModel__Group__0");
+					put(grammarAccess.getBug304681ModelAccess().getGroup(), "rule__Bug304681Model__Group__0");
+					put(grammarAccess.getBug304681ModelAccess().getGroup_1_0(), "rule__Bug304681Model__Group_1_0__0");
+					put(grammarAccess.getBug304681ModelAccess().getGroup_1_1(), "rule__Bug304681Model__Group_1_1__0");
+					put(grammarAccess.getBug304681ModelAccess().getGroup_1_2(), "rule__Bug304681Model__Group_1_2__0");
+					put(grammarAccess.getBug304681ModelAccess().getGroup_1_3(), "rule__Bug304681Model__Group_1_3__0");
+					put(grammarAccess.getBug304681AttributeAccess().getGroup(), "rule__Bug304681Attribute__Group__0");
+					put(grammarAccess.getBug304681ReferenceAccess().getGroup(), "rule__Bug304681Reference__Group__0");
 					put(grammarAccess.getModelAccess().getFirstAssignment_0_1(), "rule__Model__FirstAssignment_0_1");
 					put(grammarAccess.getModelAccess().getSecondAssignment_1_1(), "rule__Model__SecondAssignment_1_1");
 					put(grammarAccess.getModelAccess().getThrirdAssignment_2_1(), "rule__Model__ThrirdAssignment_2_1");
 					put(grammarAccess.getModelAccess().getForthAssignment_3_1(), "rule__Model__ForthAssignment_3_1");
+					put(grammarAccess.getModelAccess().getModelAssignment_4_1(), "rule__Model__ModelAssignment_4_1");
 					put(grammarAccess.getSimpleModelAccess().getVisibilityAssignment_0_0(), "rule__SimpleModel__VisibilityAssignment_0_0");
 					put(grammarAccess.getSimpleModelAccess().getStaticAssignment_0_1(), "rule__SimpleModel__StaticAssignment_0_1");
 					put(grammarAccess.getSimpleModelAccess().getSynchronizedAssignment_0_2(), "rule__SimpleModel__SynchronizedAssignment_0_2");
@@ -82,10 +92,18 @@ public class UnorderedGroupsTestLanguageParser extends AbstractContentAssistPars
 					put(grammarAccess.getGroupLoopedModelAccess().getAbstractAssignment_0_3_0(), "rule__GroupLoopedModel__AbstractAssignment_0_3_0");
 					put(grammarAccess.getGroupLoopedModelAccess().getFinalAssignment_0_3_1(), "rule__GroupLoopedModel__FinalAssignment_0_3_1");
 					put(grammarAccess.getGroupLoopedModelAccess().getNameAssignment_2(), "rule__GroupLoopedModel__NameAssignment_2");
+					put(grammarAccess.getBug304681ModelAccess().getShortDescriptionAssignment_1_0_1(), "rule__Bug304681Model__ShortDescriptionAssignment_1_0_1");
+					put(grammarAccess.getBug304681ModelAccess().getLongDescriptionAssignment_1_1_1(), "rule__Bug304681Model__LongDescriptionAssignment_1_1_1");
+					put(grammarAccess.getBug304681ModelAccess().getUidAssignment_1_2_1(), "rule__Bug304681Model__UidAssignment_1_2_1");
+					put(grammarAccess.getBug304681ModelAccess().getFlagAssignment_1_3_0(), "rule__Bug304681Model__FlagAssignment_1_3_0");
+					put(grammarAccess.getBug304681ModelAccess().getFeaturesAssignment_1_4(), "rule__Bug304681Model__FeaturesAssignment_1_4");
+					put(grammarAccess.getBug304681AttributeAccess().getNameAssignment_1(), "rule__Bug304681Attribute__NameAssignment_1");
+					put(grammarAccess.getBug304681ReferenceAccess().getNameAssignment_1(), "rule__Bug304681Reference__NameAssignment_1");
 					put(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), "rule__SimpleModel__UnorderedGroup_0");
 					put(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), "rule__MandatoryModel__UnorderedGroup_0");
 					put(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), "rule__LoopedModel__UnorderedGroup_0");
 					put(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), "rule__GroupLoopedModel__UnorderedGroup_0");
+					put(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), "rule__Bug304681Model__UnorderedGroup_1");
 				}
 			};
 		}

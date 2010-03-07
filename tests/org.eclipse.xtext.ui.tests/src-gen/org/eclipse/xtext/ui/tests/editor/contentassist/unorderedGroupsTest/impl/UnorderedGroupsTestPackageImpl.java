@@ -12,6 +12,10 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Attribute;
+import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Feature;
+import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Model;
+import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Reference;
 import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.GroupLoopedModel;
 import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedModel;
 import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.MandatoryModel;
@@ -62,6 +66,34 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * @generated
    */
   private EClass groupLoopedModelEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass bug304681ModelEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass bug304681FeatureEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass bug304681AttributeEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass bug304681ReferenceEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -174,6 +206,16 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
   public EReference getModel_Forth()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_Model()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(4);
   }
 
   /**
@@ -461,6 +503,106 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getBug304681Model()
+  {
+    return bug304681ModelEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getBug304681Model_ShortDescription()
+  {
+    return (EAttribute)bug304681ModelEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getBug304681Model_LongDescription()
+  {
+    return (EAttribute)bug304681ModelEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getBug304681Model_Uid()
+  {
+    return (EAttribute)bug304681ModelEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getBug304681Model_Flag()
+  {
+    return (EAttribute)bug304681ModelEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getBug304681Model_Features()
+  {
+    return (EReference)bug304681ModelEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getBug304681Feature()
+  {
+    return bug304681FeatureEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getBug304681Feature_Name()
+  {
+    return (EAttribute)bug304681FeatureEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getBug304681Attribute()
+  {
+    return bug304681AttributeEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getBug304681Reference()
+  {
+    return bug304681ReferenceEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public UnorderedGroupsTestFactory getUnorderedGroupsTestFactory()
   {
     return (UnorderedGroupsTestFactory)getEFactoryInstance();
@@ -491,6 +633,7 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
     createEReference(modelEClass, MODEL__SECOND);
     createEReference(modelEClass, MODEL__THRIRD);
     createEReference(modelEClass, MODEL__FORTH);
+    createEReference(modelEClass, MODEL__MODEL);
 
     simpleModelEClass = createEClass(SIMPLE_MODEL);
     createEAttribute(simpleModelEClass, SIMPLE_MODEL__VISIBILITY);
@@ -523,6 +666,20 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
     createEAttribute(groupLoopedModelEClass, GROUP_LOOPED_MODEL__ABSTRACT);
     createEAttribute(groupLoopedModelEClass, GROUP_LOOPED_MODEL__FINAL);
     createEAttribute(groupLoopedModelEClass, GROUP_LOOPED_MODEL__NAME);
+
+    bug304681ModelEClass = createEClass(BUG304681_MODEL);
+    createEAttribute(bug304681ModelEClass, BUG304681_MODEL__SHORT_DESCRIPTION);
+    createEAttribute(bug304681ModelEClass, BUG304681_MODEL__LONG_DESCRIPTION);
+    createEAttribute(bug304681ModelEClass, BUG304681_MODEL__UID);
+    createEAttribute(bug304681ModelEClass, BUG304681_MODEL__FLAG);
+    createEReference(bug304681ModelEClass, BUG304681_MODEL__FEATURES);
+
+    bug304681FeatureEClass = createEClass(BUG304681_FEATURE);
+    createEAttribute(bug304681FeatureEClass, BUG304681_FEATURE__NAME);
+
+    bug304681AttributeEClass = createEClass(BUG304681_ATTRIBUTE);
+
+    bug304681ReferenceEClass = createEClass(BUG304681_REFERENCE);
   }
 
   /**
@@ -554,6 +711,8 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
     // Set bounds for type parameters
 
     // Add supertypes to classes
+    bug304681AttributeEClass.getESuperTypes().add(this.getBug304681Feature());
+    bug304681ReferenceEClass.getESuperTypes().add(this.getBug304681Feature());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -561,6 +720,7 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
     initEReference(getModel_Second(), this.getMandatoryModel(), null, "second", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_Thrird(), this.getLoopedModel(), null, "thrird", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_Forth(), this.getGroupLoopedModel(), null, "forth", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_Model(), this.getBug304681Model(), null, "model", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(simpleModelEClass, SimpleModel.class, "SimpleModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getSimpleModel_Visibility(), ecorePackage.getEString(), "visibility", null, 0, 1, SimpleModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -593,6 +753,20 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
     initEAttribute(getGroupLoopedModel_Abstract(), ecorePackage.getEString(), "abstract", null, 0, -1, GroupLoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getGroupLoopedModel_Final(), ecorePackage.getEString(), "final", null, 0, -1, GroupLoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getGroupLoopedModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, GroupLoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(bug304681ModelEClass, Bug304681Model.class, "Bug304681Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getBug304681Model_ShortDescription(), ecorePackage.getEString(), "shortDescription", null, 0, 1, Bug304681Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getBug304681Model_LongDescription(), ecorePackage.getEString(), "longDescription", null, 0, 1, Bug304681Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getBug304681Model_Uid(), ecorePackage.getEString(), "uid", null, 0, 1, Bug304681Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getBug304681Model_Flag(), ecorePackage.getEBoolean(), "flag", null, 0, 1, Bug304681Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getBug304681Model_Features(), this.getBug304681Feature(), null, "features", null, 0, -1, Bug304681Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(bug304681FeatureEClass, Bug304681Feature.class, "Bug304681Feature", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getBug304681Feature_Name(), ecorePackage.getEString(), "name", null, 0, 1, Bug304681Feature.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(bug304681AttributeEClass, Bug304681Attribute.class, "Bug304681Attribute", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+
+    initEClass(bug304681ReferenceEClass, Bug304681Reference.class, "Bug304681Reference", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     // Create resource
     createResource(eNS_URI);

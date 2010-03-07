@@ -103,6 +103,26 @@ public class UnorderedGroupsTestAdapterFactory extends AdapterFactoryImpl
         return createGroupLoopedModelAdapter();
       }
       @Override
+      public Adapter caseBug304681Model(Bug304681Model object)
+      {
+        return createBug304681ModelAdapter();
+      }
+      @Override
+      public Adapter caseBug304681Feature(Bug304681Feature object)
+      {
+        return createBug304681FeatureAdapter();
+      }
+      @Override
+      public Adapter caseBug304681Attribute(Bug304681Attribute object)
+      {
+        return createBug304681AttributeAdapter();
+      }
+      @Override
+      public Adapter caseBug304681Reference(Bug304681Reference object)
+      {
+        return createBug304681ReferenceAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -195,6 +215,66 @@ public class UnorderedGroupsTestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createGroupLoopedModelAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Model <em>Bug304681 Model</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Model
+   * @generated
+   */
+  public Adapter createBug304681ModelAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Feature <em>Bug304681 Feature</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Feature
+   * @generated
+   */
+  public Adapter createBug304681FeatureAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Attribute <em>Bug304681 Attribute</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Attribute
+   * @generated
+   */
+  public Adapter createBug304681AttributeAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Reference <em>Bug304681 Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Reference
+   * @generated
+   */
+  public Adapter createBug304681ReferenceAdapter()
   {
     return null;
   }

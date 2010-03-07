@@ -70,6 +70,12 @@ public final class UnorderedGroupsTestLanguageGroupLoopedModelConsumer extends N
 
 	private IElementConsumer keyword$21$Consumer;
 
+	private ICharacterClass keyword$6$Delimiter;
+
+	private ICharacterClass keyword$7$Delimiter;
+
+	private ICharacterClass keyword$9$Delimiter;
+
 	private ICharacterClass keyword$11$Delimiter;
 
 	private ICharacterClass keyword$14$Delimiter;
@@ -83,12 +89,6 @@ public final class UnorderedGroupsTestLanguageGroupLoopedModelConsumer extends N
 	private ICharacterClass keyword$21$Delimiter;
 
 	private ICharacterClass keyword$5$Delimiter;
-
-	private ICharacterClass keyword$6$Delimiter;
-
-	private ICharacterClass keyword$7$Delimiter;
-
-	private ICharacterClass keyword$9$Delimiter;
 
 	private ISequenceMatcher ruleCall$19$Delimiter;
 
@@ -356,6 +356,9 @@ public final class UnorderedGroupsTestLanguageGroupLoopedModelConsumer extends N
 
 	public UnorderedGroupsTestLanguageGroupLoopedModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
+		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$14$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$16$Delimiter = ICharacterClass.Factory.nullClass();
@@ -363,9 +366,6 @@ public final class UnorderedGroupsTestLanguageGroupLoopedModelConsumer extends N
 		keyword$20$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$21$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$19$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
@@ -419,6 +419,30 @@ public final class UnorderedGroupsTestLanguageGroupLoopedModelConsumer extends N
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
+	}
+	
+	public ICharacterClass getKeyword$6$Delimiter() {
+		return keyword$6$Delimiter;
+	}
+	
+	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
+		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$7$Delimiter() {
+		return keyword$7$Delimiter;
+	}
+	
+	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
+		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$9$Delimiter() {
+		return keyword$9$Delimiter;
+	}
+	
+	public void setKeyword$9$Delimiter(ICharacterClass characterClass) {
+		keyword$9$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$11$Delimiter() {
@@ -475,30 +499,6 @@ public final class UnorderedGroupsTestLanguageGroupLoopedModelConsumer extends N
 	
 	public void setKeyword$5$Delimiter(ICharacterClass characterClass) {
 		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$6$Delimiter() {
-		return keyword$6$Delimiter;
-	}
-	
-	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
-		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$7$Delimiter() {
-		return keyword$7$Delimiter;
-	}
-	
-	public void setKeyword$7$Delimiter(ICharacterClass characterClass) {
-		keyword$7$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$9$Delimiter() {
-		return keyword$9$Delimiter;
-	}
-	
-	public void setKeyword$9$Delimiter(ICharacterClass characterClass) {
-		keyword$9$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ISequenceMatcher getRuleCall$19$Delimiter() {

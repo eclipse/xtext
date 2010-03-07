@@ -89,7 +89,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 			int index = grammarElements.size() - 1;
 			if (grammarElements.get(index) instanceof UnorderedGroup) {
 				if (indexToHandledElements == null) {
-					indexToHandledElements = Multimaps.newHashMultimap();
+					indexToHandledElements = Multimaps.newLinkedHashMultimap();
 				}
 				indexToHandledElements.put(index, (AbstractElement) grammarElement);
 			}

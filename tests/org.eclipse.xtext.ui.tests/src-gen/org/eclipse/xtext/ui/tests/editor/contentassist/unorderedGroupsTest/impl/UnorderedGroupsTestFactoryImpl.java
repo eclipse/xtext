@@ -72,6 +72,10 @@ public class UnorderedGroupsTestFactoryImpl extends EFactoryImpl implements Unor
       case UnorderedGroupsTestPackage.MANDATORY_MODEL: return createMandatoryModel();
       case UnorderedGroupsTestPackage.LOOPED_MODEL: return createLoopedModel();
       case UnorderedGroupsTestPackage.GROUP_LOOPED_MODEL: return createGroupLoopedModel();
+      case UnorderedGroupsTestPackage.BUG304681_MODEL: return createBug304681Model();
+      case UnorderedGroupsTestPackage.BUG304681_FEATURE: return createBug304681Feature();
+      case UnorderedGroupsTestPackage.BUG304681_ATTRIBUTE: return createBug304681Attribute();
+      case UnorderedGroupsTestPackage.BUG304681_REFERENCE: return createBug304681Reference();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -130,6 +134,50 @@ public class UnorderedGroupsTestFactoryImpl extends EFactoryImpl implements Unor
   {
     GroupLoopedModelImpl groupLoopedModel = new GroupLoopedModelImpl();
     return groupLoopedModel;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Bug304681Model createBug304681Model()
+  {
+    Bug304681ModelImpl bug304681Model = new Bug304681ModelImpl();
+    return bug304681Model;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Bug304681Feature createBug304681Feature()
+  {
+    Bug304681FeatureImpl bug304681Feature = new Bug304681FeatureImpl();
+    return bug304681Feature;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Bug304681Attribute createBug304681Attribute()
+  {
+    Bug304681AttributeImpl bug304681Attribute = new Bug304681AttributeImpl();
+    return bug304681Attribute;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Bug304681Reference createBug304681Reference()
+  {
+    Bug304681ReferenceImpl bug304681Reference = new Bug304681ReferenceImpl();
+    return bug304681Reference;
   }
 
   /**

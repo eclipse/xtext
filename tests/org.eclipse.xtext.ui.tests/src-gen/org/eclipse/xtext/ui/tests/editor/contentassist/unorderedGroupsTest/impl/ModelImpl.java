@@ -14,6 +14,7 @@ import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
+import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Model;
 import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.GroupLoopedModel;
 import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedModel;
 import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.MandatoryModel;
@@ -32,6 +33,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Unord
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.ModelImpl#getSecond <em>Second</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.ModelImpl#getThrird <em>Thrird</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.ModelImpl#getForth <em>Forth</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.ModelImpl#getModel <em>Model</em>}</li>
  * </ul>
  * </p>
  *
@@ -78,6 +80,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected GroupLoopedModel forth;
+
+  /**
+   * The cached value of the '{@link #getModel() <em>Model</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getModel()
+   * @generated
+   * @ordered
+   */
+  protected Bug304681Model model;
 
   /**
    * <!-- begin-user-doc -->
@@ -297,6 +309,54 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  public Bug304681Model getModel()
+  {
+    return model;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetModel(Bug304681Model newModel, NotificationChain msgs)
+  {
+    Bug304681Model oldModel = model;
+    model = newModel;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, UnorderedGroupsTestPackage.MODEL__MODEL, oldModel, newModel);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setModel(Bug304681Model newModel)
+  {
+    if (newModel != model)
+    {
+      NotificationChain msgs = null;
+      if (model != null)
+        msgs = ((InternalEObject)model).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - UnorderedGroupsTestPackage.MODEL__MODEL, null, msgs);
+      if (newModel != null)
+        msgs = ((InternalEObject)newModel).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - UnorderedGroupsTestPackage.MODEL__MODEL, null, msgs);
+      msgs = basicSetModel(newModel, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, UnorderedGroupsTestPackage.MODEL__MODEL, newModel, newModel));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -310,6 +370,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return basicSetThrird(null, msgs);
       case UnorderedGroupsTestPackage.MODEL__FORTH:
         return basicSetForth(null, msgs);
+      case UnorderedGroupsTestPackage.MODEL__MODEL:
+        return basicSetModel(null, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -332,6 +394,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return getThrird();
       case UnorderedGroupsTestPackage.MODEL__FORTH:
         return getForth();
+      case UnorderedGroupsTestPackage.MODEL__MODEL:
+        return getModel();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -357,6 +421,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return;
       case UnorderedGroupsTestPackage.MODEL__FORTH:
         setForth((GroupLoopedModel)newValue);
+        return;
+      case UnorderedGroupsTestPackage.MODEL__MODEL:
+        setModel((Bug304681Model)newValue);
         return;
     }
     super.eSet(featureID, newValue);
@@ -384,6 +451,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case UnorderedGroupsTestPackage.MODEL__FORTH:
         setForth((GroupLoopedModel)null);
         return;
+      case UnorderedGroupsTestPackage.MODEL__MODEL:
+        setModel((Bug304681Model)null);
+        return;
     }
     super.eUnset(featureID);
   }
@@ -406,6 +476,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return thrird != null;
       case UnorderedGroupsTestPackage.MODEL__FORTH:
         return forth != null;
+      case UnorderedGroupsTestPackage.MODEL__MODEL:
+        return model != null;
     }
     return super.eIsSet(featureID);
   }

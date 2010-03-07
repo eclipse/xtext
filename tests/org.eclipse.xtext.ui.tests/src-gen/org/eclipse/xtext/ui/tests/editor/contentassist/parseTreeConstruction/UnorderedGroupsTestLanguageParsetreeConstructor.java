@@ -40,6 +40,10 @@ protected class ThisRootNode extends RootToken {
 			case 2: return new MandatoryModel_Group(this, this, 2, inst);
 			case 3: return new LoopedModel_Group(this, this, 3, inst);
 			case 4: return new GroupLoopedModel_Group(this, this, 4, inst);
+			case 5: return new Bug304681Model_Group(this, this, 5, inst);
+			case 6: return new Bug304681Feature_Alternatives(this, this, 6, inst);
+			case 7: return new Bug304681Attribute_Group(this, this, 7, inst);
+			case 8: return new Bug304681Reference_Group(this, this, 8, inst);
 			default: return null;
 		}	
 	}	
@@ -50,12 +54,12 @@ protected class ThisRootNode extends RootToken {
  *
  * Model:
  *   "1" first=SimpleModel|"2" second=MandatoryModel|"3" thrird=LoopedModel|"4" forth=
- *   GroupLoopedModel;
+ *   GroupLoopedModel|"bug304681" model=Bug304681Model;
  *
  **/
 
 // "1" first=SimpleModel|"2" second=MandatoryModel|"3" thrird=LoopedModel|"4" forth=
-// GroupLoopedModel
+// GroupLoopedModel|"bug304681" model=Bug304681Model
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -74,6 +78,7 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 1: return new Model_Group_1(parent, this, 1, inst);
 			case 2: return new Model_Group_2(parent, this, 2, inst);
 			case 3: return new Model_Group_3(parent, this, 3, inst);
+			case 4: return new Model_Group_4(parent, this, 4, inst);
 			default: return null;
 		}	
 	}	
@@ -439,6 +444,96 @@ protected class Model_ForthAssignment_3_1 extends AssignmentToken  {
 		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
 		switch(index) {
 			case 0: return new Model_DigitFourKeyword_3_0(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+// "bug304681" model=Bug304681Model
+protected class Model_Group_4 extends GroupToken {
+	
+	public Model_Group_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getModelAccess().getGroup_4();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Model_ModelAssignment_4_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "bug304681"
+protected class Model_Bug304681Keyword_4_0 extends KeywordToken  {
+	
+	public Model_Bug304681Keyword_4_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getModelAccess().getBug304681Keyword_4_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// model=Bug304681Model
+protected class Model_ModelAssignment_4_1 extends AssignmentToken  {
+	
+	public Model_ModelAssignment_4_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getModelAssignment_4_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Model_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("model",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("model");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getBug304681ModelRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getModelAccess().getModelBug304681ModelParserRuleCall_4_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Model_Bug304681Keyword_4_0(parent, next, actIndex, consumed);
 			default: return null;
 		}	
 	}	
@@ -1938,5 +2033,894 @@ protected class GroupLoopedModel_RightCurlyBracketKeyword_4 extends KeywordToken
 
 
 /************ end Rule GroupLoopedModel ****************/
+
+
+/************ begin Rule Bug304681Model ****************
+ *
+ * Bug304681Model:
+ *   "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & (
+ *   "uid" uid=STRING ";")? & (flag?="flag" ";")? & features+=Bug304681Feature*) "}";
+ *
+ **/
+
+// "{" (("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & (
+// "uid" uid=STRING ";")? & (flag?="flag" ";")? & features+=Bug304681Feature*) "}"
+protected class Bug304681Model_Group extends GroupToken {
+	
+	public Bug304681Model_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getBug304681ModelAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Model_RightCurlyBracketKeyword_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getBug304681ModelRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "{"
+protected class Bug304681Model_LeftCurlyBracketKeyword_0 extends KeywordToken  {
+	
+	public Bug304681Model_LeftCurlyBracketKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBug304681ModelAccess().getLeftCurlyBracketKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// ("short" shortDescription=STRING ";")? & ("long" longDescription=STRING ";")? & ("uid"
+// uid=STRING ";")? & (flag?="flag" ";")? & features+=Bug304681Feature*
+protected class Bug304681Model_UnorderedGroup_1 extends UnorderedGroupToken {
+	
+	public Bug304681Model_UnorderedGroup_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public UnorderedGroup getGrammarElement() {
+		return grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Model_FeaturesAssignment_1_4(parent, this, 0, inst);
+			case 1: return new Bug304681Model_Group_1_3(parent, this, 1, inst);
+			case 2: return new Bug304681Model_Group_1_2(parent, this, 2, inst);
+			case 3: return new Bug304681Model_Group_1_1(parent, this, 3, inst);
+			case 4: return new Bug304681Model_Group_1_0(parent, this, 4, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// ("short" shortDescription=STRING ";")?
+protected class Bug304681Model_Group_1_0 extends GroupToken {
+	
+	public Bug304681Model_Group_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getBug304681ModelAccess().getGroup_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Model_SemicolonKeyword_1_0_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "short"
+protected class Bug304681Model_ShortKeyword_1_0_0 extends KeywordToken  {
+	
+	public Bug304681Model_ShortKeyword_1_0_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBug304681ModelAccess().getShortKeyword_1_0_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Model_LeftCurlyBracketKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// shortDescription=STRING
+protected class Bug304681Model_ShortDescriptionAssignment_1_0_1 extends AssignmentToken  {
+	
+	public Bug304681Model_ShortDescriptionAssignment_1_0_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getBug304681ModelAccess().getShortDescriptionAssignment_1_0_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Model_ShortKeyword_1_0_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("shortDescription",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("shortDescription");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getBug304681ModelAccess().getShortDescriptionSTRINGTerminalRuleCall_1_0_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// ";"
+protected class Bug304681Model_SemicolonKeyword_1_0_2 extends KeywordToken  {
+	
+	public Bug304681Model_SemicolonKeyword_1_0_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_1_0_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Model_ShortDescriptionAssignment_1_0_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+// ("long" longDescription=STRING ";")?
+protected class Bug304681Model_Group_1_1 extends GroupToken {
+	
+	public Bug304681Model_Group_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getBug304681ModelAccess().getGroup_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Model_SemicolonKeyword_1_1_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "long"
+protected class Bug304681Model_LongKeyword_1_1_0 extends KeywordToken  {
+	
+	public Bug304681Model_LongKeyword_1_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBug304681ModelAccess().getLongKeyword_1_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Model_Group_1_0(parent, this, 0, inst);
+			case 1: return new Bug304681Model_LeftCurlyBracketKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// longDescription=STRING
+protected class Bug304681Model_LongDescriptionAssignment_1_1_1 extends AssignmentToken  {
+	
+	public Bug304681Model_LongDescriptionAssignment_1_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getBug304681ModelAccess().getLongDescriptionAssignment_1_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Model_LongKeyword_1_1_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("longDescription",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("longDescription");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getBug304681ModelAccess().getLongDescriptionSTRINGTerminalRuleCall_1_1_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// ";"
+protected class Bug304681Model_SemicolonKeyword_1_1_2 extends KeywordToken  {
+	
+	public Bug304681Model_SemicolonKeyword_1_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_1_1_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Model_LongDescriptionAssignment_1_1_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+// ("uid" uid=STRING ";")?
+protected class Bug304681Model_Group_1_2 extends GroupToken {
+	
+	public Bug304681Model_Group_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getBug304681ModelAccess().getGroup_1_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Model_SemicolonKeyword_1_2_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "uid"
+protected class Bug304681Model_UidKeyword_1_2_0 extends KeywordToken  {
+	
+	public Bug304681Model_UidKeyword_1_2_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBug304681ModelAccess().getUidKeyword_1_2_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Model_Group_1_1(parent, this, 0, inst);
+			case 1: return new Bug304681Model_Group_1_0(parent, this, 1, inst);
+			case 2: return new Bug304681Model_LeftCurlyBracketKeyword_0(parent, this, 2, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// uid=STRING
+protected class Bug304681Model_UidAssignment_1_2_1 extends AssignmentToken  {
+	
+	public Bug304681Model_UidAssignment_1_2_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getBug304681ModelAccess().getUidAssignment_1_2_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Model_UidKeyword_1_2_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("uid",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("uid");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getBug304681ModelAccess().getUidSTRINGTerminalRuleCall_1_2_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// ";"
+protected class Bug304681Model_SemicolonKeyword_1_2_2 extends KeywordToken  {
+	
+	public Bug304681Model_SemicolonKeyword_1_2_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_1_2_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Model_UidAssignment_1_2_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+// (flag?="flag" ";")?
+protected class Bug304681Model_Group_1_3 extends GroupToken {
+	
+	public Bug304681Model_Group_1_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getBug304681ModelAccess().getGroup_1_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Model_SemicolonKeyword_1_3_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// flag?="flag"
+protected class Bug304681Model_FlagAssignment_1_3_0 extends AssignmentToken  {
+	
+	public Bug304681Model_FlagAssignment_1_3_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getBug304681ModelAccess().getFlagAssignment_1_3_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Model_Group_1_2(parent, this, 0, inst);
+			case 1: return new Bug304681Model_Group_1_1(parent, this, 1, inst);
+			case 2: return new Bug304681Model_Group_1_0(parent, this, 2, inst);
+			case 3: return new Bug304681Model_LeftCurlyBracketKeyword_0(parent, this, 3, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("flag",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("flag");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getBug304681ModelAccess().getFlagFlagKeyword_1_3_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// ";"
+protected class Bug304681Model_SemicolonKeyword_1_3_1 extends KeywordToken  {
+	
+	public Bug304681Model_SemicolonKeyword_1_3_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBug304681ModelAccess().getSemicolonKeyword_1_3_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Model_FlagAssignment_1_3_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+// features+=Bug304681Feature*
+protected class Bug304681Model_FeaturesAssignment_1_4 extends AssignmentToken  {
+	
+	public Bug304681Model_FeaturesAssignment_1_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getBug304681ModelAccess().getFeaturesAssignment_1_4();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Feature_Alternatives(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("features",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("features");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getBug304681FeatureRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getBug304681ModelAccess().getFeaturesBug304681FeatureParserRuleCall_1_4_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Bug304681Model_FeaturesAssignment_1_4(parent, next, actIndex, consumed);
+			case 1: return new Bug304681Model_Group_1_3(parent, next, actIndex, consumed);
+			case 2: return new Bug304681Model_Group_1_2(parent, next, actIndex, consumed);
+			case 3: return new Bug304681Model_Group_1_1(parent, next, actIndex, consumed);
+			case 4: return new Bug304681Model_Group_1_0(parent, next, actIndex, consumed);
+			case 5: return new Bug304681Model_LeftCurlyBracketKeyword_0(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+// "}"
+protected class Bug304681Model_RightCurlyBracketKeyword_2 extends KeywordToken  {
+	
+	public Bug304681Model_RightCurlyBracketKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBug304681ModelAccess().getRightCurlyBracketKeyword_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Model_UnorderedGroup_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+/************ end Rule Bug304681Model ****************/
+
+
+/************ begin Rule Bug304681Feature ****************
+ *
+ * Bug304681Feature:
+ *   Bug304681Attribute|Bug304681Reference;
+ *
+ **/
+
+// Bug304681Attribute|Bug304681Reference
+protected class Bug304681Feature_Alternatives extends AlternativesToken {
+
+	public Bug304681Feature_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getBug304681FeatureAccess().getAlternatives();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Feature_Bug304681AttributeParserRuleCall_0(parent, this, 0, inst);
+			case 1: return new Bug304681Feature_Bug304681ReferenceParserRuleCall_1(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getBug304681FeatureRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// Bug304681Attribute
+protected class Bug304681Feature_Bug304681AttributeParserRuleCall_0 extends RuleCallToken {
+	
+	public Bug304681Feature_Bug304681AttributeParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getBug304681FeatureAccess().getBug304681AttributeParserRuleCall_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Attribute_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Bug304681Attribute_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getBug304681AttributeRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// Bug304681Reference
+protected class Bug304681Feature_Bug304681ReferenceParserRuleCall_1 extends RuleCallToken {
+	
+	public Bug304681Feature_Bug304681ReferenceParserRuleCall_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getBug304681FeatureAccess().getBug304681ReferenceParserRuleCall_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Reference_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Bug304681Reference_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getBug304681ReferenceRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+
+/************ end Rule Bug304681Feature ****************/
+
+
+/************ begin Rule Bug304681Attribute ****************
+ *
+ * Bug304681Attribute:
+ *   "attr" name=ID ";";
+ *
+ **/
+
+// "attr" name=ID ";"
+protected class Bug304681Attribute_Group extends GroupToken {
+	
+	public Bug304681Attribute_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getBug304681AttributeAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Attribute_SemicolonKeyword_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getBug304681AttributeRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "attr"
+protected class Bug304681Attribute_AttrKeyword_0 extends KeywordToken  {
+	
+	public Bug304681Attribute_AttrKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBug304681AttributeAccess().getAttrKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// name=ID
+protected class Bug304681Attribute_NameAssignment_1 extends AssignmentToken  {
+	
+	public Bug304681Attribute_NameAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getBug304681AttributeAccess().getNameAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Attribute_AttrKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getBug304681AttributeAccess().getNameIDTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// ";"
+protected class Bug304681Attribute_SemicolonKeyword_2 extends KeywordToken  {
+	
+	public Bug304681Attribute_SemicolonKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBug304681AttributeAccess().getSemicolonKeyword_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Attribute_NameAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+/************ end Rule Bug304681Attribute ****************/
+
+
+/************ begin Rule Bug304681Reference ****************
+ *
+ * Bug304681Reference:
+ *   "ref" name=ID ";";
+ *
+ **/
+
+// "ref" name=ID ";"
+protected class Bug304681Reference_Group extends GroupToken {
+	
+	public Bug304681Reference_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getBug304681ReferenceAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Reference_SemicolonKeyword_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getBug304681ReferenceRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "ref"
+protected class Bug304681Reference_RefKeyword_0 extends KeywordToken  {
+	
+	public Bug304681Reference_RefKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBug304681ReferenceAccess().getRefKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// name=ID
+protected class Bug304681Reference_NameAssignment_1 extends AssignmentToken  {
+	
+	public Bug304681Reference_NameAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getBug304681ReferenceAccess().getNameAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Reference_RefKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getBug304681ReferenceAccess().getNameIDTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// ";"
+protected class Bug304681Reference_SemicolonKeyword_2 extends KeywordToken  {
+	
+	public Bug304681Reference_SemicolonKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getBug304681ReferenceAccess().getSemicolonKeyword_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Bug304681Reference_NameAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+/************ end Rule Bug304681Reference ****************/
 
 }

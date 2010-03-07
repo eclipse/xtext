@@ -106,13 +106,22 @@ public interface UnorderedGroupsTestPackage extends EPackage
   int MODEL__FORTH = 3;
 
   /**
+   * The feature id for the '<em><b>Model</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__MODEL = 4;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 4;
+  int MODEL_FEATURE_COUNT = 5;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.SimpleModelImpl <em>Simple Model</em>}' class.
@@ -406,6 +415,154 @@ public interface UnorderedGroupsTestPackage extends EPackage
    */
   int GROUP_LOOPED_MODEL_FEATURE_COUNT = 6;
 
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.Bug304681ModelImpl <em>Bug304681 Model</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.Bug304681ModelImpl
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.UnorderedGroupsTestPackageImpl#getBug304681Model()
+   * @generated
+   */
+  int BUG304681_MODEL = 5;
+
+  /**
+   * The feature id for the '<em><b>Short Description</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG304681_MODEL__SHORT_DESCRIPTION = 0;
+
+  /**
+   * The feature id for the '<em><b>Long Description</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG304681_MODEL__LONG_DESCRIPTION = 1;
+
+  /**
+   * The feature id for the '<em><b>Uid</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG304681_MODEL__UID = 2;
+
+  /**
+   * The feature id for the '<em><b>Flag</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG304681_MODEL__FLAG = 3;
+
+  /**
+   * The feature id for the '<em><b>Features</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG304681_MODEL__FEATURES = 4;
+
+  /**
+   * The number of structural features of the '<em>Bug304681 Model</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG304681_MODEL_FEATURE_COUNT = 5;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.Bug304681FeatureImpl <em>Bug304681 Feature</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.Bug304681FeatureImpl
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.UnorderedGroupsTestPackageImpl#getBug304681Feature()
+   * @generated
+   */
+  int BUG304681_FEATURE = 6;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG304681_FEATURE__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Bug304681 Feature</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG304681_FEATURE_FEATURE_COUNT = 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.Bug304681AttributeImpl <em>Bug304681 Attribute</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.Bug304681AttributeImpl
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.UnorderedGroupsTestPackageImpl#getBug304681Attribute()
+   * @generated
+   */
+  int BUG304681_ATTRIBUTE = 7;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG304681_ATTRIBUTE__NAME = BUG304681_FEATURE__NAME;
+
+  /**
+   * The number of structural features of the '<em>Bug304681 Attribute</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG304681_ATTRIBUTE_FEATURE_COUNT = BUG304681_FEATURE_FEATURE_COUNT + 0;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.Bug304681ReferenceImpl <em>Bug304681 Reference</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.Bug304681ReferenceImpl
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.UnorderedGroupsTestPackageImpl#getBug304681Reference()
+   * @generated
+   */
+  int BUG304681_REFERENCE = 8;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG304681_REFERENCE__NAME = BUG304681_FEATURE__NAME;
+
+  /**
+   * The number of structural features of the '<em>Bug304681 Reference</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int BUG304681_REFERENCE_FEATURE_COUNT = BUG304681_FEATURE_FEATURE_COUNT + 0;
+
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model <em>Model</em>}'.
@@ -460,6 +617,17 @@ public interface UnorderedGroupsTestPackage extends EPackage
    * @generated
    */
   EReference getModel_Forth();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getModel <em>Model</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Model</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getModel()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_Model();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.SimpleModel <em>Simple Model</em>}'.
@@ -766,6 +934,112 @@ public interface UnorderedGroupsTestPackage extends EPackage
   EAttribute getGroupLoopedModel_Name();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Model <em>Bug304681 Model</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Bug304681 Model</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Model
+   * @generated
+   */
+  EClass getBug304681Model();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Model#getShortDescription <em>Short Description</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Short Description</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Model#getShortDescription()
+   * @see #getBug304681Model()
+   * @generated
+   */
+  EAttribute getBug304681Model_ShortDescription();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Model#getLongDescription <em>Long Description</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Long Description</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Model#getLongDescription()
+   * @see #getBug304681Model()
+   * @generated
+   */
+  EAttribute getBug304681Model_LongDescription();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Model#getUid <em>Uid</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Uid</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Model#getUid()
+   * @see #getBug304681Model()
+   * @generated
+   */
+  EAttribute getBug304681Model_Uid();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Model#isFlag <em>Flag</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Flag</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Model#isFlag()
+   * @see #getBug304681Model()
+   * @generated
+   */
+  EAttribute getBug304681Model_Flag();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Model#getFeatures <em>Features</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Features</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Model#getFeatures()
+   * @see #getBug304681Model()
+   * @generated
+   */
+  EReference getBug304681Model_Features();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Feature <em>Bug304681 Feature</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Bug304681 Feature</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Feature
+   * @generated
+   */
+  EClass getBug304681Feature();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Feature#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Feature#getName()
+   * @see #getBug304681Feature()
+   * @generated
+   */
+  EAttribute getBug304681Feature_Name();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Attribute <em>Bug304681 Attribute</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Bug304681 Attribute</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Attribute
+   * @generated
+   */
+  EClass getBug304681Attribute();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Reference <em>Bug304681 Reference</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Bug304681 Reference</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Reference
+   * @generated
+   */
+  EClass getBug304681Reference();
+
+  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -829,6 +1103,14 @@ public interface UnorderedGroupsTestPackage extends EPackage
      * @generated
      */
     EReference MODEL__FORTH = eINSTANCE.getModel_Forth();
+
+    /**
+     * The meta object literal for the '<em><b>Model</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__MODEL = eINSTANCE.getModel_Model();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.SimpleModelImpl <em>Simple Model</em>}' class.
@@ -1061,6 +1343,94 @@ public interface UnorderedGroupsTestPackage extends EPackage
      * @generated
      */
     EAttribute GROUP_LOOPED_MODEL__NAME = eINSTANCE.getGroupLoopedModel_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.Bug304681ModelImpl <em>Bug304681 Model</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.Bug304681ModelImpl
+     * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.UnorderedGroupsTestPackageImpl#getBug304681Model()
+     * @generated
+     */
+    EClass BUG304681_MODEL = eINSTANCE.getBug304681Model();
+
+    /**
+     * The meta object literal for the '<em><b>Short Description</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BUG304681_MODEL__SHORT_DESCRIPTION = eINSTANCE.getBug304681Model_ShortDescription();
+
+    /**
+     * The meta object literal for the '<em><b>Long Description</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BUG304681_MODEL__LONG_DESCRIPTION = eINSTANCE.getBug304681Model_LongDescription();
+
+    /**
+     * The meta object literal for the '<em><b>Uid</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BUG304681_MODEL__UID = eINSTANCE.getBug304681Model_Uid();
+
+    /**
+     * The meta object literal for the '<em><b>Flag</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BUG304681_MODEL__FLAG = eINSTANCE.getBug304681Model_Flag();
+
+    /**
+     * The meta object literal for the '<em><b>Features</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference BUG304681_MODEL__FEATURES = eINSTANCE.getBug304681Model_Features();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.Bug304681FeatureImpl <em>Bug304681 Feature</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.Bug304681FeatureImpl
+     * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.UnorderedGroupsTestPackageImpl#getBug304681Feature()
+     * @generated
+     */
+    EClass BUG304681_FEATURE = eINSTANCE.getBug304681Feature();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute BUG304681_FEATURE__NAME = eINSTANCE.getBug304681Feature_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.Bug304681AttributeImpl <em>Bug304681 Attribute</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.Bug304681AttributeImpl
+     * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.UnorderedGroupsTestPackageImpl#getBug304681Attribute()
+     * @generated
+     */
+    EClass BUG304681_ATTRIBUTE = eINSTANCE.getBug304681Attribute();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.Bug304681ReferenceImpl <em>Bug304681 Reference</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.Bug304681ReferenceImpl
+     * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.UnorderedGroupsTestPackageImpl#getBug304681Reference()
+     * @generated
+     */
+    EClass BUG304681_REFERENCE = eINSTANCE.getBug304681Reference();
 
   }
 

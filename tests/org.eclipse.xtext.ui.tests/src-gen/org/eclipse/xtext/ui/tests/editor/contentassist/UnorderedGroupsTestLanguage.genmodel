@@ -14,6 +14,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UnorderedGroupsTestLanguage.ecore#//Model/second"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UnorderedGroupsTestLanguage.ecore#//Model/thrird"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UnorderedGroupsTestLanguage.ecore#//Model/forth"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UnorderedGroupsTestLanguage.ecore#//Model/model"/>
     </genClasses>
     <genClasses ecoreClass="UnorderedGroupsTestLanguage.ecore#//SimpleModel">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//SimpleModel/visibility"/>
@@ -47,5 +48,17 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//GroupLoopedModel/final"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//GroupLoopedModel/name"/>
     </genClasses>
+    <genClasses ecoreClass="UnorderedGroupsTestLanguage.ecore#//Bug304681Model">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//Bug304681Model/shortDescription"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//Bug304681Model/longDescription"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//Bug304681Model/uid"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//Bug304681Model/flag"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UnorderedGroupsTestLanguage.ecore#//Bug304681Model/features"/>
+    </genClasses>
+    <genClasses ecoreClass="UnorderedGroupsTestLanguage.ecore#//Bug304681Feature">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//Bug304681Feature/name"/>
+    </genClasses>
+    <genClasses ecoreClass="UnorderedGroupsTestLanguage.ecore#//Bug304681Attribute"/>
+    <genClasses ecoreClass="UnorderedGroupsTestLanguage.ecore#//Bug304681Reference"/>
   </genPackages>
 </genmodel:GenModel>
