@@ -10,6 +10,7 @@ import org.eclipse.xtext.parser.unorderedGroups.services.UnorderedGroupsTestLang
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
 import org.eclipse.xtext.parser.unorderedGroups.parser.packrat.consumers.UnorderedGroupsTestLanguageModelConsumer;
+import org.eclipse.xtext.parser.unorderedGroups.parser.packrat.consumers.UnorderedGroupsTestLanguageNestedModelConsumer;
 import org.eclipse.xtext.parser.unorderedGroups.parser.packrat.consumers.UnorderedGroupsTestLanguageUnorderedDatatypeConsumer;
 import org.eclipse.xtext.parser.unorderedGroups.parser.packrat.consumers.UnorderedGroupsTestLanguageUnorderedSerializationConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
@@ -24,6 +25,7 @@ public class UnorderedGroupsTestLanguageParserConfiguration extends AbstractPars
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
     private UnorderedGroupsTestLanguageModelConsumer modelConsumer;
+    private UnorderedGroupsTestLanguageNestedModelConsumer nestedModelConsumer;
     private UnorderedGroupsTestLanguageUnorderedDatatypeConsumer unorderedDatatypeConsumer;
     private UnorderedGroupsTestLanguageUnorderedSerializationConsumer unorderedSerializationConsumer;
 
@@ -44,6 +46,9 @@ public class UnorderedGroupsTestLanguageParserConfiguration extends AbstractPars
 		modelConsumer = new UnorderedGroupsTestLanguageModelConsumer(
     		this, null
     	);
+		nestedModelConsumer = new UnorderedGroupsTestLanguageNestedModelConsumer(
+    		this, null
+    	);
 		unorderedDatatypeConsumer = new UnorderedGroupsTestLanguageUnorderedDatatypeConsumer(
     		this, null
     	);
@@ -60,6 +65,7 @@ public class UnorderedGroupsTestLanguageParserConfiguration extends AbstractPars
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
 		getModelConsumer().setRule(grammarAccess.getModelAccess());
+		getNestedModelConsumer().setRule(grammarAccess.getNestedModelAccess());
 		getUnorderedDatatypeConsumer().setRule(grammarAccess.getUnorderedDatatypeAccess());
 		getUnorderedSerializationConsumer().setRule(grammarAccess.getUnorderedSerializationAccess());
 		getIdConsumer().setRule(grammarAccess.getIDRule());
@@ -71,6 +77,7 @@ public class UnorderedGroupsTestLanguageParserConfiguration extends AbstractPars
 		getAnyOtherConsumer().setRule(grammarAccess.getANY_OTHERRule());
 
 
+		getModelConsumer().setNestedModelConsumer(getNestedModelConsumer());
 		getModelConsumer().setUnorderedDatatypeConsumer(getUnorderedDatatypeConsumer());
 		getModelConsumer().setUnorderedSerializationConsumer(getUnorderedSerializationConsumer());
 
@@ -91,6 +98,7 @@ public class UnorderedGroupsTestLanguageParserConfiguration extends AbstractPars
 		getModelConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.parser.unorderedGroups.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$11$Delimiter);
 		getModelConsumer().setKeyword$129$Delimiter(org.eclipse.xtext.parser.unorderedGroups.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$11$Delimiter);
 		getModelConsumer().setKeyword$133$Delimiter(org.eclipse.xtext.parser.unorderedGroups.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$11$Delimiter);
+		getModelConsumer().setKeyword$137$Delimiter(org.eclipse.xtext.parser.unorderedGroups.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$11$Delimiter);
 		getModelConsumer().setKeyword$13$Delimiter(org.eclipse.xtext.parser.unorderedGroups.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$8$Delimiter);
 		getModelConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.parser.unorderedGroups.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$11$Delimiter);
 		getModelConsumer().setKeyword$18$Delimiter(org.eclipse.xtext.parser.unorderedGroups.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$11$Delimiter);
@@ -130,6 +138,9 @@ public class UnorderedGroupsTestLanguageParserConfiguration extends AbstractPars
 		getModelConsumer().setKeyword$91$Delimiter(org.eclipse.xtext.parser.unorderedGroups.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$11$Delimiter);
 		getModelConsumer().setKeyword$93$Delimiter(org.eclipse.xtext.parser.unorderedGroups.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$8$Delimiter);
 		getModelConsumer().setKeyword$96$Delimiter(org.eclipse.xtext.parser.unorderedGroups.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$11$Delimiter);
+		getNestedModelConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.unorderedGroups.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$11$Delimiter);
+		getNestedModelConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.parser.unorderedGroups.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$11$Delimiter);
+		getNestedModelConsumer().setKeyword$9$Delimiter(org.eclipse.xtext.parser.unorderedGroups.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$11$Delimiter);
 		getUnorderedDatatypeConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.parser.unorderedGroups.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$8$Delimiter);
 		getUnorderedDatatypeConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.parser.unorderedGroups.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$11$Delimiter);
 		getUnorderedDatatypeConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.parser.unorderedGroups.parser.packrat.UnorderedGroupsTestLanguageDelimiters.keyword$11$Delimiter);
@@ -203,6 +214,10 @@ public class UnorderedGroupsTestLanguageParserConfiguration extends AbstractPars
 	
     public UnorderedGroupsTestLanguageModelConsumer getModelConsumer() {
     	return modelConsumer;
+    }
+
+    public UnorderedGroupsTestLanguageNestedModelConsumer getNestedModelConsumer() {
+    	return nestedModelConsumer;
     }
 
     public UnorderedGroupsTestLanguageUnorderedDatatypeConsumer getUnorderedDatatypeConsumer() {

@@ -210,16 +210,43 @@
           <elements xsi:type="xtext:Group">
             <elements xsi:type="xtext:Keyword" value="datatypes"/>
             <elements xsi:type="xtext:Assignment" feature="value" operator="=">
-              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
             </elements>
           </elements>
           <elements xsi:type="xtext:Group">
             <elements xsi:type="xtext:Keyword" value="serialization"/>
             <elements xsi:type="xtext:Assignment" feature="serialized" operator="=">
-              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Keyword" value="bug302585"/>
+            <elements xsi:type="xtext:Assignment" cardinality="*" feature="nestedModel" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
             </elements>
           </elements>
         </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="NestedModel">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/UnorderedGroupsTestLanguage#//NestedModel"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/2010/tmf/xtext/UnorderedGroupsTestLanguage#//NestedModel"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:UnorderedGroup" cardinality="?">
+          <elements xsi:type="xtext:Assignment" feature="first" operator="?=">
+            <terminal xsi:type="xtext:Keyword" value="a"/>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="second" operator="?=">
+            <terminal xsi:type="xtext:Keyword" value="b"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="nested"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="UnorderedDatatype">

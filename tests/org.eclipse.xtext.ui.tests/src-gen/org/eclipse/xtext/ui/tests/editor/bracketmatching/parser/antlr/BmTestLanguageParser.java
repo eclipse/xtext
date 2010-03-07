@@ -26,6 +26,7 @@ public class BmTestLanguageParser extends org.eclipse.xtext.parser.antlr.Abstrac
 		org.eclipse.xtext.ui.tests.editor.bracketmatching.parser.antlr.internal.InternalBmTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

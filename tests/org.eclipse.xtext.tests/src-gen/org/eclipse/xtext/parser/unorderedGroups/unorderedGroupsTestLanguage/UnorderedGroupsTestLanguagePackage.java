@@ -160,13 +160,59 @@ public interface UnorderedGroupsTestLanguagePackage extends EPackage
   int MODEL__SERIALIZED = 9;
 
   /**
+   * The feature id for the '<em><b>Nested Model</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__NESTED_MODEL = 10;
+
+  /**
    * The number of structural features of the '<em>Model</em>' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 10;
+  int MODEL_FEATURE_COUNT = 11;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl.NestedModelImpl <em>Nested Model</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl.NestedModelImpl
+   * @see org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl.UnorderedGroupsTestLanguagePackageImpl#getNestedModel()
+   * @generated
+   */
+  int NESTED_MODEL = 1;
+
+  /**
+   * The feature id for the '<em><b>First</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NESTED_MODEL__FIRST = 0;
+
+  /**
+   * The feature id for the '<em><b>Second</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NESTED_MODEL__SECOND = 1;
+
+  /**
+   * The number of structural features of the '<em>Nested Model</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int NESTED_MODEL_FEATURE_COUNT = 2;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl.UnorderedSerializationImpl <em>Unordered Serialization</em>}' class.
@@ -176,7 +222,7 @@ public interface UnorderedGroupsTestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl.UnorderedGroupsTestLanguagePackageImpl#getUnorderedSerialization()
    * @generated
    */
-  int UNORDERED_SERIALIZATION = 1;
+  int UNORDERED_SERIALIZATION = 2;
 
   /**
    * The feature id for the '<em><b>First</b></em>' attribute.
@@ -361,6 +407,49 @@ public interface UnorderedGroupsTestLanguagePackage extends EPackage
    * @generated
    */
   EReference getModel_Serialized();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.Model#getNestedModel <em>Nested Model</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Nested Model</em>'.
+   * @see org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.Model#getNestedModel()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_NestedModel();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.NestedModel <em>Nested Model</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Nested Model</em>'.
+   * @see org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.NestedModel
+   * @generated
+   */
+  EClass getNestedModel();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.NestedModel#isFirst <em>First</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>First</em>'.
+   * @see org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.NestedModel#isFirst()
+   * @see #getNestedModel()
+   * @generated
+   */
+  EAttribute getNestedModel_First();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.NestedModel#isSecond <em>Second</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Second</em>'.
+   * @see org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.NestedModel#isSecond()
+   * @see #getNestedModel()
+   * @generated
+   */
+  EAttribute getNestedModel_Second();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedSerialization <em>Unordered Serialization</em>}'.
@@ -550,6 +639,40 @@ public interface UnorderedGroupsTestLanguagePackage extends EPackage
      * @generated
      */
     EReference MODEL__SERIALIZED = eINSTANCE.getModel_Serialized();
+
+    /**
+     * The meta object literal for the '<em><b>Nested Model</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__NESTED_MODEL = eINSTANCE.getModel_NestedModel();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl.NestedModelImpl <em>Nested Model</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl.NestedModelImpl
+     * @see org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl.UnorderedGroupsTestLanguagePackageImpl#getNestedModel()
+     * @generated
+     */
+    EClass NESTED_MODEL = eINSTANCE.getNestedModel();
+
+    /**
+     * The meta object literal for the '<em><b>First</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute NESTED_MODEL__FIRST = eINSTANCE.getNestedModel_First();
+
+    /**
+     * The meta object literal for the '<em><b>Second</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute NESTED_MODEL__SECOND = eINSTANCE.getNestedModel_Second();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl.UnorderedSerializationImpl <em>Unordered Serialization</em>}' class.

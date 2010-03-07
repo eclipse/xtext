@@ -73,13 +73,23 @@ public class ExUnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarE
 	//  secondAsList+="b")|"13" (firstAsList+="a" & secondAsList+="b")? firstAsList+="a"
 	//  secondAsList+="b"|"14" ((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" &
 	//  forthAsList+="d"))+|"datatypes" value=UnorderedDatatype|"serialization" serialized
-	//  =UnorderedSerialization);
+	//  =UnorderedSerialization|"bug302585" nestedModel+=NestedModel*);
 	public UnorderedGroupsTestLanguageGrammarAccess.ModelElements getModelAccess() {
 		return gaUnorderedGroupsTestLanguage.getModelAccess();
 	}
 	
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
+	}
+
+	//NestedModel:
+	//  {NestedModel} (first?="a" & second?="b")? "nested";
+	public UnorderedGroupsTestLanguageGrammarAccess.NestedModelElements getNestedModelAccess() {
+		return gaUnorderedGroupsTestLanguage.getNestedModelAccess();
+	}
+	
+	public ParserRule getNestedModelRule() {
+		return getNestedModelAccess().getRule();
 	}
 
 	//UnorderedDatatype returns ecore::EString:

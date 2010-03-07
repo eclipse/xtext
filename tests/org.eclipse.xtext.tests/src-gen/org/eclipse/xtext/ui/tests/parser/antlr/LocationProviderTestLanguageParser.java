@@ -26,6 +26,7 @@ public class LocationProviderTestLanguageParser extends org.eclipse.xtext.parser
 		org.eclipse.xtext.ui.tests.parser.antlr.internal.InternalLocationProviderTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

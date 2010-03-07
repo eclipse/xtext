@@ -26,6 +26,7 @@ public class Bug250313Parser extends org.eclipse.xtext.parser.antlr.AbstractAntl
 		org.eclipse.xtext.valueconverter.parser.antlr.internal.InternalBug250313Parser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

@@ -153,6 +153,10 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		private final Keyword cSerializationKeyword_1_15_0 = (Keyword)cGroup_1_15.eContents().get(0);
 		private final Assignment cSerializedAssignment_1_15_1 = (Assignment)cGroup_1_15.eContents().get(1);
 		private final RuleCall cSerializedUnorderedSerializationParserRuleCall_1_15_1_0 = (RuleCall)cSerializedAssignment_1_15_1.eContents().get(0);
+		private final Group cGroup_1_16 = (Group)cAlternatives_1.eContents().get(16);
+		private final Keyword cBug302585Keyword_1_16_0 = (Keyword)cGroup_1_16.eContents().get(0);
+		private final Assignment cNestedModelAssignment_1_16_1 = (Assignment)cGroup_1_16.eContents().get(1);
+		private final RuleCall cNestedModelNestedModelParserRuleCall_1_16_1_0 = (RuleCall)cNestedModelAssignment_1_16_1.eContents().get(0);
 		
 		//Model:
 		//  {Model} ("1" (first?="a" & second?="b")|"2" (first?="a" & second?="b" & third?="c" & forth
@@ -164,7 +168,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//  secondAsList+="b")|"13" (firstAsList+="a" & secondAsList+="b")? firstAsList+="a"
 		//  secondAsList+="b"|"14" ((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" &
 		//  forthAsList+="d"))+|"datatypes" value=UnorderedDatatype|"serialization" serialized
-		//  =UnorderedSerialization);
+		//  =UnorderedSerialization|"bug302585" nestedModel+=NestedModel*);
 		public ParserRule getRule() { return rule; }
 
 		//{Model} ("1" (first?="a" & second?="b")|"2" (first?="a" & second?="b" & third?="c" & forth
@@ -176,7 +180,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//secondAsList+="b")|"13" (firstAsList+="a" & secondAsList+="b")? firstAsList+="a"
 		//secondAsList+="b"|"14" ((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" &
 		//forthAsList+="d"))+|"datatypes" value=UnorderedDatatype|"serialization" serialized
-		//=UnorderedSerialization)
+		//=UnorderedSerialization|"bug302585" nestedModel+=NestedModel*)
 		public Group getGroup() { return cGroup; }
 
 		//{Model}
@@ -191,7 +195,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 		//secondAsList+="b")|"13" (firstAsList+="a" & secondAsList+="b")? firstAsList+="a"
 		//secondAsList+="b"|"14" ((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" &
 		//forthAsList+="d"))+|"datatypes" value=UnorderedDatatype|"serialization" serialized
-		//=UnorderedSerialization
+		//=UnorderedSerialization|"bug302585" nestedModel+=NestedModel*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
 		//"1" (first?="a" & second?="b")
@@ -586,6 +590,58 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 
 		//UnorderedSerialization
 		public RuleCall getSerializedUnorderedSerializationParserRuleCall_1_15_1_0() { return cSerializedUnorderedSerializationParserRuleCall_1_15_1_0; }
+
+		//"bug302585" nestedModel+=NestedModel*
+		public Group getGroup_1_16() { return cGroup_1_16; }
+
+		//"bug302585"
+		public Keyword getBug302585Keyword_1_16_0() { return cBug302585Keyword_1_16_0; }
+
+		//nestedModel+=NestedModel*
+		public Assignment getNestedModelAssignment_1_16_1() { return cNestedModelAssignment_1_16_1; }
+
+		//NestedModel
+		public RuleCall getNestedModelNestedModelParserRuleCall_1_16_1_0() { return cNestedModelNestedModelParserRuleCall_1_16_1_0; }
+	}
+
+	public class NestedModelElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "NestedModel");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cNestedModelAction_0 = (Action)cGroup.eContents().get(0);
+		private final UnorderedGroup cUnorderedGroup_1 = (UnorderedGroup)cGroup.eContents().get(1);
+		private final Assignment cFirstAssignment_1_0 = (Assignment)cUnorderedGroup_1.eContents().get(0);
+		private final Keyword cFirstAKeyword_1_0_0 = (Keyword)cFirstAssignment_1_0.eContents().get(0);
+		private final Assignment cSecondAssignment_1_1 = (Assignment)cUnorderedGroup_1.eContents().get(1);
+		private final Keyword cSecondBKeyword_1_1_0 = (Keyword)cSecondAssignment_1_1.eContents().get(0);
+		private final Keyword cNestedKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//NestedModel:
+		//  {NestedModel} (first?="a" & second?="b")? "nested";
+		public ParserRule getRule() { return rule; }
+
+		//{NestedModel} (first?="a" & second?="b")? "nested"
+		public Group getGroup() { return cGroup; }
+
+		//{NestedModel}
+		public Action getNestedModelAction_0() { return cNestedModelAction_0; }
+
+		//(first?="a" & second?="b")?
+		public UnorderedGroup getUnorderedGroup_1() { return cUnorderedGroup_1; }
+
+		//first?="a"
+		public Assignment getFirstAssignment_1_0() { return cFirstAssignment_1_0; }
+
+		//"a"
+		public Keyword getFirstAKeyword_1_0_0() { return cFirstAKeyword_1_0_0; }
+
+		//second?="b"
+		public Assignment getSecondAssignment_1_1() { return cSecondAssignment_1_1; }
+
+		//"b"
+		public Keyword getSecondBKeyword_1_1_0() { return cSecondBKeyword_1_1_0; }
+
+		//"nested"
+		public Keyword getNestedKeyword_2() { return cNestedKeyword_2; }
 	}
 
 	public class UnorderedDatatypeElements extends AbstractParserRuleElementFinder {
@@ -1079,6 +1135,7 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	
 	
 	private ModelElements pModel;
+	private NestedModelElements pNestedModel;
 	private UnorderedDatatypeElements pUnorderedDatatype;
 	private UnorderedSerializationElements pUnorderedSerialization;
 	
@@ -1113,13 +1170,23 @@ public class UnorderedGroupsTestLanguageGrammarAccess extends AbstractGrammarEle
 	//  secondAsList+="b")|"13" (firstAsList+="a" & secondAsList+="b")? firstAsList+="a"
 	//  secondAsList+="b"|"14" ((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" &
 	//  forthAsList+="d"))+|"datatypes" value=UnorderedDatatype|"serialization" serialized
-	//  =UnorderedSerialization);
+	//  =UnorderedSerialization|"bug302585" nestedModel+=NestedModel*);
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
 	
 	public ParserRule getModelRule() {
 		return getModelAccess().getRule();
+	}
+
+	//NestedModel:
+	//  {NestedModel} (first?="a" & second?="b")? "nested";
+	public NestedModelElements getNestedModelAccess() {
+		return (pNestedModel != null) ? pNestedModel : (pNestedModel = new NestedModelElements());
+	}
+	
+	public ParserRule getNestedModelRule() {
+		return getNestedModelAccess().getRule();
 	}
 
 	//UnorderedDatatype returns ecore::EString:

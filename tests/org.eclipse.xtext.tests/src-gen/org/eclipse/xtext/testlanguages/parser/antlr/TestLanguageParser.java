@@ -26,6 +26,7 @@ public class TestLanguageParser extends org.eclipse.xtext.parser.antlr.AbstractA
 		org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

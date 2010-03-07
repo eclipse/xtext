@@ -26,6 +26,7 @@ public class AbstractTestLanguageParser extends org.eclipse.xtext.parser.antlr.A
 		org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalAbstractTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

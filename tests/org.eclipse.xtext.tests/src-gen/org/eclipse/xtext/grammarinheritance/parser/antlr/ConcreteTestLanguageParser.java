@@ -26,6 +26,7 @@ public class ConcreteTestLanguageParser extends org.eclipse.xtext.parser.antlr.A
 		org.eclipse.xtext.grammarinheritance.parser.antlr.internal.InternalConcreteTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

@@ -26,6 +26,7 @@ public class Ecore2XtextTestParser extends org.eclipse.xtext.parser.antlr.Abstra
 		org.eclipse.xtext.xtext.ui.ecore2xtext.parser.antlr.internal.InternalEcore2XtextTestParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

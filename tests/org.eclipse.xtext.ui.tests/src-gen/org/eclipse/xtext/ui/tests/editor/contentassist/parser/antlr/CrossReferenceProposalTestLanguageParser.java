@@ -26,6 +26,7 @@ public class CrossReferenceProposalTestLanguageParser extends org.eclipse.xtext.
 		org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal.InternalCrossReferenceProposalTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

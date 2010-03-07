@@ -1074,11 +1074,11 @@ protected class Spielzeug_RightParenthesisKeyword_4 extends KeywordToken  {
 /************ begin Rule Farbe ****************
  *
  * Farbe:
- *   wert=( "ROT" | "BLAU" | "GELB" | "GR\u00DCN" );
+ *   wert=( "ROT" | "BLAU" | "GELB" | "GRÜN" );
  *
  **/
 
-// wert=( "ROT" | "BLAU" | "GELB" | "GR\u00DCN" )
+// wert=( "ROT" | "BLAU" | "GELB" | "GRÜN" )
 protected class Farbe_WertAssignment extends AssignmentToken  {
 	
 	public Farbe_WertAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {

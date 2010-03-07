@@ -83,6 +83,11 @@ public class UnorderedGroupsTestLanguageAdapterFactory extends AdapterFactoryImp
         return createModelAdapter();
       }
       @Override
+      public Adapter caseNestedModel(NestedModel object)
+      {
+        return createNestedModelAdapter();
+      }
+      @Override
       public Adapter caseUnorderedSerialization(UnorderedSerialization object)
       {
         return createUnorderedSerializationAdapter();
@@ -120,6 +125,21 @@ public class UnorderedGroupsTestLanguageAdapterFactory extends AdapterFactoryImp
    * @generated
    */
   public Adapter createModelAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.NestedModel <em>Nested Model</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.NestedModel
+   * @generated
+   */
+  public Adapter createNestedModelAdapter()
   {
     return null;
   }

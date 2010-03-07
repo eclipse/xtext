@@ -26,6 +26,7 @@ public class LazyLinkingTestLanguageParser extends org.eclipse.xtext.parser.antl
 		org.eclipse.xtext.linking.lazy.parser.antlr.internal.InternalLazyLinkingTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

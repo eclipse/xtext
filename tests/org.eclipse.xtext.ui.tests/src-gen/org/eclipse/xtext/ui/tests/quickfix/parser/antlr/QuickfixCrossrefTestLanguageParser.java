@@ -26,6 +26,7 @@ public class QuickfixCrossrefTestLanguageParser extends org.eclipse.xtext.parser
 		org.eclipse.xtext.ui.tests.quickfix.parser.antlr.internal.InternalQuickfixCrossrefTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

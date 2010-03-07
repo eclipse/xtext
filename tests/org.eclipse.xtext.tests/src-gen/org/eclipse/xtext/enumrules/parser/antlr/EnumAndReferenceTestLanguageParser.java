@@ -26,6 +26,7 @@ public class EnumAndReferenceTestLanguageParser extends org.eclipse.xtext.parser
 		org.eclipse.xtext.enumrules.parser.antlr.internal.InternalEnumAndReferenceTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

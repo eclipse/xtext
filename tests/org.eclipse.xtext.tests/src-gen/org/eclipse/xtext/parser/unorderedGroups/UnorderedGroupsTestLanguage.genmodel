@@ -20,6 +20,11 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//Model/forthAsList"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//Model/value"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UnorderedGroupsTestLanguage.ecore#//Model/serialized"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UnorderedGroupsTestLanguage.ecore#//Model/nestedModel"/>
+    </genClasses>
+    <genClasses ecoreClass="UnorderedGroupsTestLanguage.ecore#//NestedModel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//NestedModel/first"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//NestedModel/second"/>
     </genClasses>
     <genClasses ecoreClass="UnorderedGroupsTestLanguage.ecore#//UnorderedSerialization">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//UnorderedSerialization/first"/>

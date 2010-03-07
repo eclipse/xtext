@@ -26,6 +26,7 @@ public class TransientValuesTestParser extends org.eclipse.xtext.parser.antlr.Ab
 		org.eclipse.xtext.parsetree.transientvalues.parser.antlr.internal.InternalTransientValuesTestParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

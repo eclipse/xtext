@@ -26,6 +26,7 @@ public class SimpleReconstrTestLanguageParser extends org.eclipse.xtext.parser.a
 		org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSimpleReconstrTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

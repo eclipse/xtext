@@ -68,6 +68,7 @@ public class UnorderedGroupsTestLanguageFactoryImpl extends EFactoryImpl impleme
     switch (eClass.getClassifierID())
     {
       case UnorderedGroupsTestLanguagePackage.MODEL: return createModel();
+      case UnorderedGroupsTestLanguagePackage.NESTED_MODEL: return createNestedModel();
       case UnorderedGroupsTestLanguagePackage.UNORDERED_SERIALIZATION: return createUnorderedSerialization();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -83,6 +84,17 @@ public class UnorderedGroupsTestLanguageFactoryImpl extends EFactoryImpl impleme
   {
     ModelImpl model = new ModelImpl();
     return model;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NestedModel createNestedModel()
+  {
+    NestedModelImpl nestedModel = new NestedModelImpl();
+    return nestedModel;
   }
 
   /**

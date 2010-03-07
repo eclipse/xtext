@@ -26,6 +26,7 @@ public class DomainModelTestLanguageParser extends org.eclipse.xtext.parser.antl
 		org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal.InternalDomainModelTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

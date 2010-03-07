@@ -26,6 +26,7 @@ public class SimpleUnorderedGroupsTestLanguageParser extends org.eclipse.xtext.p
 		org.eclipse.xtext.parser.unorderedGroups.parser.antlr.internal.InternalSimpleUnorderedGroupsTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

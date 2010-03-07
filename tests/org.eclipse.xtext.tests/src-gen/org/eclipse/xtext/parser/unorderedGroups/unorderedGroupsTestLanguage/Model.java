@@ -27,6 +27,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.Model#getForthAsList <em>Forth As List</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.Model#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.Model#getSerialized <em>Serialized</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.Model#getNestedModel <em>Nested Model</em>}</li>
  * </ul>
  * </p>
  *
@@ -255,5 +256,21 @@ public interface Model extends EObject
    * @generated
    */
   void setSerialized(UnorderedSerialization value);
+
+  /**
+   * Returns the value of the '<em><b>Nested Model</b></em>' containment reference list.
+   * The list contents are of type {@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.NestedModel}.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Nested Model</em>' containment reference list isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Nested Model</em>' containment reference list.
+   * @see org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedGroupsTestLanguagePackage#getModel_NestedModel()
+   * @model containment="true"
+   * @generated
+   */
+  EList<NestedModel> getNestedModel();
 
 } // Model

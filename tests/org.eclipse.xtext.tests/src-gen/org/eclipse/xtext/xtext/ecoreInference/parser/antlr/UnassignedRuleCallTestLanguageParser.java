@@ -26,6 +26,7 @@ public class UnassignedRuleCallTestLanguageParser extends org.eclipse.xtext.pars
 		org.eclipse.xtext.xtext.ecoreInference.parser.antlr.internal.InternalUnassignedRuleCallTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

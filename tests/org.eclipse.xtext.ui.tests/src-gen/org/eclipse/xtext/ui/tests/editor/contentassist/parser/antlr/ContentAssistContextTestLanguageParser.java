@@ -26,6 +26,7 @@ public class ContentAssistContextTestLanguageParser extends org.eclipse.xtext.pa
 		org.eclipse.xtext.ui.tests.editor.contentassist.parser.antlr.internal.InternalContentAssistContextTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

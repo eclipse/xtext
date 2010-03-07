@@ -102,6 +102,13 @@ public class UnorderedGroupsTestLanguageSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case UnorderedGroupsTestLanguagePackage.NESTED_MODEL:
+      {
+        NestedModel nestedModel = (NestedModel)theEObject;
+        T result = caseNestedModel(nestedModel);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case UnorderedGroupsTestLanguagePackage.UNORDERED_SERIALIZATION:
       {
         UnorderedSerialization unorderedSerialization = (UnorderedSerialization)theEObject;
@@ -125,6 +132,22 @@ public class UnorderedGroupsTestLanguageSwitch<T>
    * @generated
    */
   public T caseModel(Model object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Nested Model</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Nested Model</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseNestedModel(NestedModel object)
   {
     return null;
   }

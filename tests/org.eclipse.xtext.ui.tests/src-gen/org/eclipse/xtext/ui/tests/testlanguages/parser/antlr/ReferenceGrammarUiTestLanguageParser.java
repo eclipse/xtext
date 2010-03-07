@@ -26,6 +26,7 @@ public class ReferenceGrammarUiTestLanguageParser extends org.eclipse.xtext.pars
 		org.eclipse.xtext.ui.tests.testlanguages.parser.antlr.internal.InternalReferenceGrammarUiTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

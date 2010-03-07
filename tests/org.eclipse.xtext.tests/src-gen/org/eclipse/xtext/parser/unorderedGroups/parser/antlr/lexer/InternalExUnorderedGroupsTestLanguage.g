@@ -16,9 +16,13 @@ import org.eclipse.xtext.parser.antlr.Lexer;
 
 
 
-KEYWORD_20 : 'serialization';
+KEYWORD_22 : 'serialization';
 
-KEYWORD_19 : 'datatypes';
+KEYWORD_20 : 'bug302585';
+
+KEYWORD_21 : 'datatypes';
+
+KEYWORD_19 : 'nested';
 
 KEYWORD_14 : '10';
 

@@ -26,6 +26,7 @@ public class XtextGrammarUiTestLanguageParser extends org.eclipse.xtext.parser.a
 		org.eclipse.xtext.ui.tests.parser.antlr.internal.InternalXtextGrammarUiTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

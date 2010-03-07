@@ -27,6 +27,8 @@ public final class UnorderedGroupsTestLanguageModelConsumer extends NonTerminalC
 
 	private ModelElements rule;	
 
+	private INonTerminalConsumer nestedModelConsumer;
+
 	private INonTerminalConsumer unorderedDatatypeConsumer;
 
 	private INonTerminalConsumer unorderedSerializationConsumer;
@@ -299,6 +301,14 @@ public final class UnorderedGroupsTestLanguageModelConsumer extends NonTerminalC
 
 	private IElementConsumer ruleCall$135$Consumer;
 
+	private IElementConsumer group$136$Consumer;
+
+	private IElementConsumer keyword$137$Consumer;
+
+	private IElementConsumer assignment$138$Consumer;
+
+	private IElementConsumer ruleCall$139$Consumer;
+
 	private ICharacterClass keyword$98$Delimiter;
 
 	private ICharacterClass keyword$101$Delimiter;
@@ -332,6 +342,8 @@ public final class UnorderedGroupsTestLanguageModelConsumer extends NonTerminalC
 	private ICharacterClass keyword$129$Delimiter;
 
 	private ICharacterClass keyword$133$Delimiter;
+
+	private ICharacterClass keyword$137$Delimiter;
 
 	private ICharacterClass keyword$13$Delimiter;
 
@@ -461,6 +473,7 @@ public final class UnorderedGroupsTestLanguageModelConsumer extends NonTerminalC
 			acceptor.accept(group$115$Consumer);
 			acceptor.accept(group$128$Consumer);
 			acceptor.accept(group$132$Consumer);
+			acceptor.accept(group$136$Consumer);
 		}
 	}
 
@@ -2078,6 +2091,55 @@ public final class UnorderedGroupsTestLanguageModelConsumer extends NonTerminalC
 		}
 	}
 
+	protected class Group$136$Consumer extends GroupConsumer {
+		
+		protected Group$136$Consumer(final Group group) {
+			super(group);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(keyword$137$Consumer);
+			acceptor.accept(assignment$138$Consumer);
+		}
+	}
+
+	protected class Keyword$137$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$137$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$137$Delimiter(), optional);
+		}
+	}
+
+	protected class Assignment$138$Consumer extends LoopAssignmentConsumer {
+		
+		protected Assignment$138$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$139$Consumer;
+		}
+	}
+
+	protected class RuleCall$139$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$139$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(nestedModelConsumer, "nestedModel", true, false, false, getElement(), optional);
+		}
+	}
+
 	public UnorderedGroupsTestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		keyword$98$Delimiter = ICharacterClass.Factory.nullClass();
@@ -2097,6 +2159,7 @@ public final class UnorderedGroupsTestLanguageModelConsumer extends NonTerminalC
 		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$129$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$133$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$137$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$13$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$16$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$18$Delimiter = ICharacterClass.Factory.nullClass();
@@ -2284,6 +2347,10 @@ public final class UnorderedGroupsTestLanguageModelConsumer extends NonTerminalC
 		keyword$133$Consumer = new Keyword$133$Consumer(rule.getSerializationKeyword_1_15_0());
 		assignment$134$Consumer = new Assignment$134$Consumer(rule.getSerializedAssignment_1_15_1());
 		ruleCall$135$Consumer = new RuleCall$135$Consumer(rule.getSerializedUnorderedSerializationParserRuleCall_1_15_1_0());
+		group$136$Consumer = new Group$136$Consumer(rule.getGroup_1_16());
+		keyword$137$Consumer = new Keyword$137$Consumer(rule.getBug302585Keyword_1_16_0());
+		assignment$138$Consumer = new Assignment$138$Consumer(rule.getNestedModelAssignment_1_16_1());
+		ruleCall$139$Consumer = new RuleCall$139$Consumer(rule.getNestedModelNestedModelParserRuleCall_1_16_1_0());
 	}
 	
 	@Override
@@ -2294,6 +2361,10 @@ public final class UnorderedGroupsTestLanguageModelConsumer extends NonTerminalC
 	@Override
 	protected EClassifier getDefaultType() {
 		return getGrammarElement().getType().getClassifier();
+	}
+	
+	public void setNestedModelConsumer(INonTerminalConsumer nestedModelConsumer) {
+		this.nestedModelConsumer = nestedModelConsumer;
 	}
 	
 	public void setUnorderedDatatypeConsumer(INonTerminalConsumer unorderedDatatypeConsumer) {
@@ -2438,6 +2509,14 @@ public final class UnorderedGroupsTestLanguageModelConsumer extends NonTerminalC
 	
 	public void setKeyword$133$Delimiter(ICharacterClass characterClass) {
 		keyword$133$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$137$Delimiter() {
+		return keyword$137$Delimiter;
+	}
+	
+	public void setKeyword$137$Delimiter(ICharacterClass characterClass) {
+		keyword$137$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$13$Delimiter() {

@@ -13,6 +13,7 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.Model;
+import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.NestedModel;
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedGroupsTestLanguageFactory;
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedGroupsTestLanguagePackage;
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedSerialization;
@@ -31,6 +32,13 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * @generated
    */
   private EClass modelEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass nestedModelEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -217,6 +225,46 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
    * <!-- end-user-doc -->
    * @generated
    */
+  public EReference getModel_NestedModel()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(10);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getNestedModel()
+  {
+    return nestedModelEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getNestedModel_First()
+  {
+    return (EAttribute)nestedModelEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getNestedModel_Second()
+  {
+    return (EAttribute)nestedModelEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getUnorderedSerialization()
   {
     return unorderedSerializationEClass;
@@ -323,6 +371,11 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
     createEAttribute(modelEClass, MODEL__FORTH_AS_LIST);
     createEAttribute(modelEClass, MODEL__VALUE);
     createEReference(modelEClass, MODEL__SERIALIZED);
+    createEReference(modelEClass, MODEL__NESTED_MODEL);
+
+    nestedModelEClass = createEClass(NESTED_MODEL);
+    createEAttribute(nestedModelEClass, NESTED_MODEL__FIRST);
+    createEAttribute(nestedModelEClass, NESTED_MODEL__SECOND);
 
     unorderedSerializationEClass = createEClass(UNORDERED_SERIALIZATION);
     createEAttribute(unorderedSerializationEClass, UNORDERED_SERIALIZATION__FIRST);
@@ -375,6 +428,11 @@ public class UnorderedGroupsTestLanguagePackageImpl extends EPackageImpl impleme
     initEAttribute(getModel_ForthAsList(), ecorePackage.getEString(), "forthAsList", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getModel_Value(), ecorePackage.getEString(), "value", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_Serialized(), this.getUnorderedSerialization(), null, "serialized", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_NestedModel(), this.getNestedModel(), null, "nestedModel", null, 0, -1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(nestedModelEClass, NestedModel.class, "NestedModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getNestedModel_First(), ecorePackage.getEBoolean(), "first", null, 0, 1, NestedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getNestedModel_Second(), ecorePackage.getEBoolean(), "second", null, 0, 1, NestedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(unorderedSerializationEClass, UnorderedSerialization.class, "UnorderedSerialization", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getUnorderedSerialization_First(), ecorePackage.getEBoolean(), "first", null, 0, 1, UnorderedSerialization.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

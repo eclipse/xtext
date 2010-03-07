@@ -42,6 +42,9 @@ public abstract class AbstractAntlrParser extends AbstractParser<InputStream> im
 	private ISyntaxErrorMessageProvider syntaxErrorProvider;
 	
 	@Inject
+	private Provider<IUnorderedGroupHelper> unorderedGroupHelper;
+	
+	@Inject
 	@Named(LexerBindings.RUNTIME)
 	private Provider<Lexer> lexerProvider;
 
@@ -131,6 +134,14 @@ public abstract class AbstractAntlrParser extends AbstractParser<InputStream> im
 	
 	public void setSyntaxErrorProvider(ISyntaxErrorMessageProvider syntaxErrorProvider) {
 		this.syntaxErrorProvider = syntaxErrorProvider;
+	}
+
+	public void setUnorderedGroupHelper(Provider<IUnorderedGroupHelper> unorderedGroupHelper) {
+		this.unorderedGroupHelper = unorderedGroupHelper;
+	}
+
+	public Provider<IUnorderedGroupHelper> getUnorderedGroupHelper() {
+		return unorderedGroupHelper;
 	}
 
 }

@@ -37,7 +37,8 @@ protected class ThisRootNode extends RootToken {
 		switch(index) {
 			case 0: return new DelegateModel_ModelParserRuleCall(this, this, 0, inst);
 			case 1: return new Model_Group(this, this, 1, inst);
-			case 2: return new UnorderedSerialization_Group(this, this, 2, inst);
+			case 2: return new NestedModel_Group(this, this, 2, inst);
+			case 3: return new UnorderedSerialization_Group(this, this, 3, inst);
 			default: return null;
 		}	
 	}	
@@ -106,7 +107,7 @@ protected class DelegateModel_ModelParserRuleCall extends RuleCallToken {
  *   secondAsList+="b")|"13" (firstAsList+="a" & secondAsList+="b")? firstAsList+="a"
  *   secondAsList+="b"|"14" ((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" &
  *   forthAsList+="d"))+|"datatypes" value=UnorderedDatatype|"serialization" serialized
- *   =UnorderedSerialization);
+ *   =UnorderedSerialization|"bug302585" nestedModel+=NestedModel*);
  *
  **/
 
@@ -119,7 +120,7 @@ protected class DelegateModel_ModelParserRuleCall extends RuleCallToken {
 // secondAsList+="b")|"13" (firstAsList+="a" & secondAsList+="b")? firstAsList+="a"
 // secondAsList+="b"|"14" ((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" &
 // forthAsList+="d"))+|"datatypes" value=UnorderedDatatype|"serialization" serialized
-// =UnorderedSerialization)
+// =UnorderedSerialization|"bug302585" nestedModel+=NestedModel*)
 protected class Model_Group extends GroupToken {
 	
 	public Model_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -183,7 +184,7 @@ protected class Model_ModelAction_0 extends ActionToken  {
 // secondAsList+="b")|"13" (firstAsList+="a" & secondAsList+="b")? firstAsList+="a"
 // secondAsList+="b"|"14" ((firstAsList+="a" & secondAsList+="b") & (thirdAsList+="c" &
 // forthAsList+="d"))+|"datatypes" value=UnorderedDatatype|"serialization" serialized
-// =UnorderedSerialization
+// =UnorderedSerialization|"bug302585" nestedModel+=NestedModel*
 protected class Model_Alternatives_1 extends AlternativesToken {
 
 	public Model_Alternatives_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -214,6 +215,7 @@ protected class Model_Alternatives_1 extends AlternativesToken {
 			case 13: return new Model_Group_1_13(parent, this, 13, inst);
 			case 14: return new Model_Group_1_14(parent, this, 14, inst);
 			case 15: return new Model_Group_1_15(parent, this, 15, inst);
+			case 16: return new Model_Group_1_16(parent, this, 16, inst);
 			default: return null;
 		}	
 	}	
@@ -2785,9 +2787,282 @@ protected class Model_SerializedAssignment_1_15_1 extends AssignmentToken  {
 }
 
 
+// "bug302585" nestedModel+=NestedModel*
+protected class Model_Group_1_16 extends GroupToken {
+	
+	public Model_Group_1_16(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getModelAccess().getGroup_1_16();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Model_NestedModelAssignment_1_16_1(parent, this, 0, inst);
+			case 1: return new Model_Bug302585Keyword_1_16_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "bug302585"
+protected class Model_Bug302585Keyword_1_16_0 extends KeywordToken  {
+	
+	public Model_Bug302585Keyword_1_16_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getModelAccess().getBug302585Keyword_1_16_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Model_ModelAction_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// nestedModel+=NestedModel*
+protected class Model_NestedModelAssignment_1_16_1 extends AssignmentToken  {
+	
+	public Model_NestedModelAssignment_1_16_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getModelAccess().getNestedModelAssignment_1_16_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new NestedModel_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("nestedModel",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("nestedModel");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getNestedModelRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getModelAccess().getNestedModelNestedModelParserRuleCall_1_16_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Model_NestedModelAssignment_1_16_1(parent, next, actIndex, consumed);
+			case 1: return new Model_Bug302585Keyword_1_16_0(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
 
 
 /************ end Rule Model ****************/
+
+
+/************ begin Rule NestedModel ****************
+ *
+ * NestedModel:
+ *   {NestedModel} (first?="a" & second?="b")? "nested";
+ *
+ **/
+
+// {NestedModel} (first?="a" & second?="b")? "nested"
+protected class NestedModel_Group extends GroupToken {
+	
+	public NestedModel_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getNestedModelAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new NestedModel_NestedKeyword_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getNestedModelRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// {NestedModel}
+protected class NestedModel_NestedModelAction_0 extends ActionToken  {
+
+	public NestedModel_NestedModelAction_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Action getGrammarElement() {
+		return grammarAccess.getNestedModelAccess().getNestedModelAction_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+	
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(!current.isInstanceOf(grammarAccess.getNestedModelAccess().getNestedModelAction_0().getType().getClassifier())) return null;
+		if(!current.isConsumed()) return null;
+		return current;
+	}
+}
+
+// (first?="a" & second?="b")?
+protected class NestedModel_UnorderedGroup_1 extends UnorderedGroupToken {
+	
+	public NestedModel_UnorderedGroup_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public UnorderedGroup getGrammarElement() {
+		return grammarAccess.getNestedModelAccess().getUnorderedGroup_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new NestedModel_SecondAssignment_1_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// first?="a"
+protected class NestedModel_FirstAssignment_1_0 extends AssignmentToken  {
+	
+	public NestedModel_FirstAssignment_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getNestedModelAccess().getFirstAssignment_1_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new NestedModel_NestedModelAction_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("first",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("first");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getNestedModelAccess().getFirstAKeyword_1_0_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// second?="b"
+protected class NestedModel_SecondAssignment_1_1 extends AssignmentToken  {
+	
+	public NestedModel_SecondAssignment_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getNestedModelAccess().getSecondAssignment_1_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new NestedModel_FirstAssignment_1_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("second",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("second");
+		if(Boolean.TRUE.equals(value)) { // org::eclipse::xtext::impl::KeywordImpl
+			type = AssignmentType.KW;
+			element = grammarAccess.getNestedModelAccess().getSecondBKeyword_1_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+// "nested"
+protected class NestedModel_NestedKeyword_2 extends KeywordToken  {
+	
+	public NestedModel_NestedKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getNestedModelAccess().getNestedKeyword_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new NestedModel_UnorderedGroup_1(parent, this, 0, inst);
+			case 1: return new NestedModel_NestedModelAction_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+/************ end Rule NestedModel ****************/
 
 
 

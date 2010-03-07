@@ -218,7 +218,6 @@ entryRuleSimpleModel returns [EObject current=null]
 // Rule SimpleModel
 ruleSimpleModel returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-	  boolean[] pred_0 = new boolean[4];
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -227,16 +226,15 @@ ruleSimpleModel returns [EObject current=null]
 
 (
 	{ 
-	  pred_0 = new boolean[4];
+	  getUnorderedGroupHelper().enter(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0());
 	}
 	(
 		(
 
 			( 
-				{!pred_0[0]}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 0)}?=>(
 					{ 
-	 				  pred_0[0] = true;
-	 				  
+	 				  getUnorderedGroupHelper().select(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 0);
 	 				}
 					(
 (
@@ -299,14 +297,16 @@ ruleSimpleModel returns [EObject current=null]
 
 )
 )
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  |
 
 			( 
-				{!pred_0[1]}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 1)}?=>(
 					{ 
-	 				  pred_0[1] = true;
-	 				  
+	 				  getUnorderedGroupHelper().select(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 1);
 	 				}
 					(
 (
@@ -330,14 +330,16 @@ ruleSimpleModel returns [EObject current=null]
 
 )
 )
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  |
 
 			( 
-				{!pred_0[2]}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 2)}?=>(
 					{ 
-	 				  pred_0[2] = true;
-	 				  
+	 				  getUnorderedGroupHelper().select(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 2);
 	 				}
 					(
 (
@@ -361,14 +363,16 @@ ruleSimpleModel returns [EObject current=null]
 
 )
 )
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  |
 
 			( 
-				{!pred_0[3]}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 3)}?=>(
 					{ 
-	 				  pred_0[3] = true;
-	 				  
+	 				  getUnorderedGroupHelper().select(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 3);
 	 				}
 					((
 (
@@ -414,6 +418,9 @@ ruleSimpleModel returns [EObject current=null]
 
 )
 ))
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  
 
@@ -421,7 +428,7 @@ ruleSimpleModel returns [EObject current=null]
 	)
 )
 	{ 
-	  pred_0 = new boolean[4];
+	  getUnorderedGroupHelper().leave(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0());
 	}
 
 )	'class' 
@@ -479,7 +486,6 @@ entryRuleMandatoryModel returns [EObject current=null]
 // Rule MandatoryModel
 ruleMandatoryModel returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-	  boolean[] pred_0 = new boolean[4];
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -488,17 +494,15 @@ ruleMandatoryModel returns [EObject current=null]
 
 (
 	{ 
-	  pred_0 = new boolean[4];
-	  int remaining_pred_0 = 3;
+	  getUnorderedGroupHelper().enter(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0());
 	}
 	(
 		(
 
 			( 
-				{!pred_0[0]}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 0)}?=>(
 					{ 
-	 				  pred_0[0] = true;
-	 				  remaining_pred_0--;
+	 				  getUnorderedGroupHelper().select(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 0);
 	 				}
 					(
 (
@@ -561,14 +565,16 @@ ruleMandatoryModel returns [EObject current=null]
 
 )
 )
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  |
 
 			( 
-				{!pred_0[1]}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 1)}?=>(
 					{ 
-	 				  pred_0[1] = true;
-	 				  remaining_pred_0--;
+	 				  getUnorderedGroupHelper().select(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 1);
 	 				}
 					(
 (
@@ -592,14 +598,16 @@ ruleMandatoryModel returns [EObject current=null]
 
 )
 )
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  |
 
 			( 
-				{!pred_0[2]}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 2)}?=>(
 					{ 
-	 				  pred_0[2] = true;
-	 				  remaining_pred_0--;
+	 				  getUnorderedGroupHelper().select(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 2);
 	 				}
 					(
 (
@@ -623,14 +631,16 @@ ruleMandatoryModel returns [EObject current=null]
 
 )
 )
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  |
 
 			( 
-				{!pred_0[3]}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 3)}?=>(
 					{ 
-	 				  pred_0[3] = true;
-	 				  
+	 				  getUnorderedGroupHelper().select(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 3);
 	 				}
 					((
 (
@@ -676,15 +686,18 @@ ruleMandatoryModel returns [EObject current=null]
 
 )
 ))
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  
 
 		)+
-	  	{remaining_pred_0==0}?	
+	  	{getUnorderedGroupHelper().canLeave(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0())}?	
 	)
 )
 	{ 
-	  pred_0 = new boolean[4];
+	  getUnorderedGroupHelper().leave(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0());
 	}
 
 )	'class' 
@@ -742,7 +755,6 @@ entryRuleLoopedModel returns [EObject current=null]
 // Rule LoopedModel
 ruleLoopedModel returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-	  boolean[] pred_0 = new boolean[4];
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -751,16 +763,15 @@ ruleLoopedModel returns [EObject current=null]
 
 (
 	{ 
-	  pred_0 = new boolean[4];
+	  getUnorderedGroupHelper().enter(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0());
 	}
 	(
 		(
 
 			( 
-				{!pred_0[0]}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 0)}?=>(
 					{ 
-	 				  pred_0[0] = true;
-	 				  
+	 				  getUnorderedGroupHelper().select(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 0);
 	 				}
 					(
 (
@@ -823,14 +834,16 @@ ruleLoopedModel returns [EObject current=null]
 
 )
 )+
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  |
 
 			( 
-				{!pred_0[1]}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 1)}?=>(
 					{ 
-	 				  pred_0[1] = true;
-	 				  
+	 				  getUnorderedGroupHelper().select(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 1);
 	 				}
 					(
 (
@@ -854,14 +867,16 @@ ruleLoopedModel returns [EObject current=null]
 
 )
 )+
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  |
 
 			( 
-				{!pred_0[2]}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 2)}?=>(
 					{ 
-	 				  pred_0[2] = true;
-	 				  
+	 				  getUnorderedGroupHelper().select(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 2);
 	 				}
 					(
 (
@@ -885,14 +900,16 @@ ruleLoopedModel returns [EObject current=null]
 
 )
 )+
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  |
 
 			( 
-				{!pred_0[3]}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 3)}?=>(
 					{ 
-	 				  pred_0[3] = true;
-	 				  
+	 				  getUnorderedGroupHelper().select(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 3);
 	 				}
 					((
 (
@@ -938,6 +955,9 @@ ruleLoopedModel returns [EObject current=null]
 
 )
 ))+
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  
 
@@ -945,7 +965,7 @@ ruleLoopedModel returns [EObject current=null]
 	)
 )
 	{ 
-	  pred_0 = new boolean[4];
+	  getUnorderedGroupHelper().leave(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0());
 	}
 
 )	'class' 
@@ -1003,7 +1023,6 @@ entryRuleGroupLoopedModel returns [EObject current=null]
 // Rule GroupLoopedModel
 ruleGroupLoopedModel returns [EObject current=null] 
     @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-	  boolean[] pred_0 = new boolean[4];
     }
     @after { resetLookahead(); 
     	lastConsumedNode = currentNode;
@@ -1012,17 +1031,15 @@ ruleGroupLoopedModel returns [EObject current=null]
 
 (
 	{ 
-	  pred_0 = new boolean[4];
-	  int remaining_pred_0 = 4;
+	  getUnorderedGroupHelper().enter(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0());
 	}
 	(
 		(
 
 			( 
-				{!pred_0[0]}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 0)}?=>(
 					{ 
-	 				  pred_0[0] = true;
-	 				  remaining_pred_0--;
+	 				  getUnorderedGroupHelper().select(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 0);
 	 				}
 					(
 (
@@ -1085,14 +1102,16 @@ ruleGroupLoopedModel returns [EObject current=null]
 
 )
 )
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  |
 
 			( 
-				{!pred_0[1]}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 1)}?=>(
 					{ 
-	 				  pred_0[1] = true;
-	 				  remaining_pred_0--;
+	 				  getUnorderedGroupHelper().select(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 1);
 	 				}
 					(
 (
@@ -1116,14 +1135,16 @@ ruleGroupLoopedModel returns [EObject current=null]
 
 )
 )
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  |
 
 			( 
-				{!pred_0[2]}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 2)}?=>(
 					{ 
-	 				  pred_0[2] = true;
-	 				  remaining_pred_0--;
+	 				  getUnorderedGroupHelper().select(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 2);
 	 				}
 					(
 (
@@ -1147,14 +1168,16 @@ ruleGroupLoopedModel returns [EObject current=null]
 
 )
 )
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  |
 
 			( 
-				{!pred_0[3]}?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 3)}?=>(
 					{ 
-	 				  pred_0[3] = true;
-	 				  remaining_pred_0--;
+	 				  getUnorderedGroupHelper().select(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 3);
 	 				}
 					((
 (
@@ -1200,15 +1223,18 @@ ruleGroupLoopedModel returns [EObject current=null]
 
 )
 ))
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  
 
 		)+
-	  	{remaining_pred_0==0}?	
+	  	{getUnorderedGroupHelper().canLeave(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0())}?	
 	)
 )
 	{ 
-	  pred_0 = new boolean[4];
+	  getUnorderedGroupHelper().leave(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0());
 	}
 
 )*	'class' 

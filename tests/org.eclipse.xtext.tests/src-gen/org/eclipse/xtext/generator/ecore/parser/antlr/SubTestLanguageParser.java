@@ -26,6 +26,7 @@ public class SubTestLanguageParser extends org.eclipse.xtext.parser.antlr.Abstra
 		org.eclipse.xtext.generator.ecore.parser.antlr.internal.InternalSubTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

@@ -35,6 +35,15 @@ public interface UnorderedGroupsTestLanguageFactory extends EFactory
   Model createModel();
 
   /**
+   * Returns a new object of class '<em>Nested Model</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Nested Model</em>'.
+   * @generated
+   */
+  NestedModel createNestedModel();
+
+  /**
    * Returns a new object of class '<em>Unordered Serialization</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

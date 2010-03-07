@@ -26,6 +26,7 @@ public class EcoreFragmentTestLanguageParser extends org.eclipse.xtext.parser.an
 		org.eclipse.xtext.generator.ecore.parser.antlr.internal.InternalEcoreFragmentTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

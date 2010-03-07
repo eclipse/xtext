@@ -26,6 +26,7 @@ public class DomainmodelParser extends org.eclipse.xtext.parser.antlr.AbstractAn
 		org.eclipse.xtext.example.parser.antlr.internal.InternalDomainmodelParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

@@ -3,7 +3,6 @@
 */
 package org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.ui.editor.contentassist.AbstractJavaBasedContentProposalProvider;

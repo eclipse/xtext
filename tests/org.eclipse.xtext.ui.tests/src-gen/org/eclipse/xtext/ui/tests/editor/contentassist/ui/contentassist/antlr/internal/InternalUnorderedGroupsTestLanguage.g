@@ -95,12 +95,8 @@ entryRuleSimpleModel
 
 // Rule SimpleModel
 ruleSimpleModel
-	scope {
-	  boolean[] pred_0;
-	} 
     @init {
 		int stackSize = keepStackSize();
-	  $ruleSimpleModel::pred_0 = new boolean[4];
     }
 	:
 (
@@ -127,12 +123,8 @@ entryRuleMandatoryModel
 
 // Rule MandatoryModel
 ruleMandatoryModel
-	scope {
-	  boolean[] pred_0;
-	} 
     @init {
 		int stackSize = keepStackSize();
-	  $ruleMandatoryModel::pred_0 = new boolean[4];
     }
 	:
 (
@@ -159,12 +151,8 @@ entryRuleLoopedModel
 
 // Rule LoopedModel
 ruleLoopedModel
-	scope {
-	  boolean[] pred_0;
-	} 
     @init {
 		int stackSize = keepStackSize();
-	  $ruleLoopedModel::pred_0 = new boolean[4];
     }
 	:
 (
@@ -191,12 +179,8 @@ entryRuleGroupLoopedModel
 
 // Rule GroupLoopedModel
 ruleGroupLoopedModel
-	scope {
-	  boolean[] pred_0;
-	} 
     @init {
 		int stackSize = keepStackSize();
-	  $ruleGroupLoopedModel::pred_0 = new boolean[4];
     }
 	:
 (
@@ -1061,64 +1045,73 @@ finally {
 rule__SimpleModel__UnorderedGroup_0
     @init {
 		int stackSize = keepStackSize();
+		getUnorderedGroupHelper().enter(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0());
     }
 :
 	(
 		(
 
 			( 
-				{! $ruleSimpleModel::pred_0[0] }?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 0)}?=>(
 					{ 
-	 				  $ruleSimpleModel::pred_0[0] = true;
-	 				  
+	 				  getUnorderedGroupHelper().select(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 0);
 	 				}
 					(
 						{ before(grammarAccess.getSimpleModelAccess().getVisibilityAssignment_0_0()); }
 						(rule__SimpleModel__VisibilityAssignment_0_0)
 						{ after(grammarAccess.getSimpleModelAccess().getVisibilityAssignment_0_0()); }
 					)
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  |
 
 			( 
-				{! $ruleSimpleModel::pred_0[1] }?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 1)}?=>(
 					{ 
-	 				  $ruleSimpleModel::pred_0[1] = true;
-	 				  
+	 				  getUnorderedGroupHelper().select(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 1);
 	 				}
 					(
 						{ before(grammarAccess.getSimpleModelAccess().getStaticAssignment_0_1()); }
 						(rule__SimpleModel__StaticAssignment_0_1)
 						{ after(grammarAccess.getSimpleModelAccess().getStaticAssignment_0_1()); }
 					)
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  |
 
 			( 
-				{! $ruleSimpleModel::pred_0[2] }?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 2)}?=>(
 					{ 
-	 				  $ruleSimpleModel::pred_0[2] = true;
-	 				  
+	 				  getUnorderedGroupHelper().select(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 2);
 	 				}
 					(
 						{ before(grammarAccess.getSimpleModelAccess().getSynchronizedAssignment_0_2()); }
 						(rule__SimpleModel__SynchronizedAssignment_0_2)
 						{ after(grammarAccess.getSimpleModelAccess().getSynchronizedAssignment_0_2()); }
 					)
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  |
 
 			( 
-				{! $ruleSimpleModel::pred_0[3] }?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 3)}?=>(
 					{ 
-	 				  $ruleSimpleModel::pred_0[3] = true;
-	 				  
+	 				  getUnorderedGroupHelper().select(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 3);
 	 				}
 					(
 						{ before(grammarAccess.getSimpleModelAccess().getAlternatives_0_3()); }
 						(rule__SimpleModel__Alternatives_0_3)
 						{ after(grammarAccess.getSimpleModelAccess().getAlternatives_0_3()); }
 					)
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  
 
@@ -1126,7 +1119,7 @@ rule__SimpleModel__UnorderedGroup_0
 	)
 ;
 finally {
-	$ruleSimpleModel::pred_0 = new boolean[4];
+	getUnorderedGroupHelper().leave(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0());
 	restoreStackSize(stackSize);
 }
 
@@ -1135,74 +1128,82 @@ finally {
 rule__MandatoryModel__UnorderedGroup_0
     @init {
 		int stackSize = keepStackSize();
-		int remaining_pred_0 = 3;
+		getUnorderedGroupHelper().enter(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0());
     }
 :
 	(
 		(
 
 			( 
-				{! $ruleMandatoryModel::pred_0[0] }?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 0)}?=>(
 					{ 
-	 				  $ruleMandatoryModel::pred_0[0] = true;
-	 				  remaining_pred_0--;
+	 				  getUnorderedGroupHelper().select(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 0);
 	 				}
 					(
 						{ before(grammarAccess.getMandatoryModelAccess().getVisibilityAssignment_0_0()); }
 						(rule__MandatoryModel__VisibilityAssignment_0_0)
 						{ after(grammarAccess.getMandatoryModelAccess().getVisibilityAssignment_0_0()); }
 					)
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  |
 
 			( 
-				{! $ruleMandatoryModel::pred_0[1] }?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 1)}?=>(
 					{ 
-	 				  $ruleMandatoryModel::pred_0[1] = true;
-	 				  remaining_pred_0--;
+	 				  getUnorderedGroupHelper().select(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 1);
 	 				}
 					(
 						{ before(grammarAccess.getMandatoryModelAccess().getStaticAssignment_0_1()); }
 						(rule__MandatoryModel__StaticAssignment_0_1)
 						{ after(grammarAccess.getMandatoryModelAccess().getStaticAssignment_0_1()); }
 					)
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  |
 
 			( 
-				{! $ruleMandatoryModel::pred_0[2] }?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 2)}?=>(
 					{ 
-	 				  $ruleMandatoryModel::pred_0[2] = true;
-	 				  remaining_pred_0--;
+	 				  getUnorderedGroupHelper().select(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 2);
 	 				}
 					(
 						{ before(grammarAccess.getMandatoryModelAccess().getSynchronizedAssignment_0_2()); }
 						(rule__MandatoryModel__SynchronizedAssignment_0_2)
 						{ after(grammarAccess.getMandatoryModelAccess().getSynchronizedAssignment_0_2()); }
 					)
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  |
 
 			( 
-				{! $ruleMandatoryModel::pred_0[3] }?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 3)}?=>(
 					{ 
-	 				  $ruleMandatoryModel::pred_0[3] = true;
-	 				  
+	 				  getUnorderedGroupHelper().select(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 3);
 	 				}
 					(
 						{ before(grammarAccess.getMandatoryModelAccess().getAlternatives_0_3()); }
 						(rule__MandatoryModel__Alternatives_0_3)
 						{ after(grammarAccess.getMandatoryModelAccess().getAlternatives_0_3()); }
 					)
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  
 
 		)+
-	  	{remaining_pred_0==0}?	
+	  	{getUnorderedGroupHelper().canLeave(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0())}?	
 	)
 ;
 finally {
-	$ruleMandatoryModel::pred_0 = new boolean[4];
+	getUnorderedGroupHelper().leave(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0());
 	restoreStackSize(stackSize);
 }
 
@@ -1211,16 +1212,16 @@ finally {
 rule__LoopedModel__UnorderedGroup_0
     @init {
 		int stackSize = keepStackSize();
+		getUnorderedGroupHelper().enter(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0());
     }
 :
 	(
 		(
 
 			( 
-				{! $ruleLoopedModel::pred_0[0] }?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 0)}?=>(
 					{ 
-	 				  $ruleLoopedModel::pred_0[0] = true;
-	 				  
+	 				  getUnorderedGroupHelper().select(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 0);
 	 				}
 					(					(
 						{ before(grammarAccess.getLoopedModelAccess().getVisibilityAssignment_0_0()); }
@@ -1232,14 +1233,16 @@ rule__LoopedModel__UnorderedGroup_0
 						(rule__LoopedModel__VisibilityAssignment_0_0)*
 						{ after(grammarAccess.getLoopedModelAccess().getVisibilityAssignment_0_0()); }
 					)					)
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  |
 
 			( 
-				{! $ruleLoopedModel::pred_0[1] }?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 1)}?=>(
 					{ 
-	 				  $ruleLoopedModel::pred_0[1] = true;
-	 				  
+	 				  getUnorderedGroupHelper().select(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 1);
 	 				}
 					(					(
 						{ before(grammarAccess.getLoopedModelAccess().getStaticAssignment_0_1()); }
@@ -1251,14 +1254,16 @@ rule__LoopedModel__UnorderedGroup_0
 						(rule__LoopedModel__StaticAssignment_0_1)*
 						{ after(grammarAccess.getLoopedModelAccess().getStaticAssignment_0_1()); }
 					)					)
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  |
 
 			( 
-				{! $ruleLoopedModel::pred_0[2] }?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 2)}?=>(
 					{ 
-	 				  $ruleLoopedModel::pred_0[2] = true;
-	 				  
+	 				  getUnorderedGroupHelper().select(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 2);
 	 				}
 					(					(
 						{ before(grammarAccess.getLoopedModelAccess().getSynchronizedAssignment_0_2()); }
@@ -1270,14 +1275,16 @@ rule__LoopedModel__UnorderedGroup_0
 						(rule__LoopedModel__SynchronizedAssignment_0_2)*
 						{ after(grammarAccess.getLoopedModelAccess().getSynchronizedAssignment_0_2()); }
 					)					)
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  |
 
 			( 
-				{! $ruleLoopedModel::pred_0[3] }?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 3)}?=>(
 					{ 
-	 				  $ruleLoopedModel::pred_0[3] = true;
-	 				  
+	 				  getUnorderedGroupHelper().select(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 3);
 	 				}
 					(					(
 						{ before(grammarAccess.getLoopedModelAccess().getAlternatives_0_3()); }
@@ -1289,6 +1296,9 @@ rule__LoopedModel__UnorderedGroup_0
 						(rule__LoopedModel__Alternatives_0_3)*
 						{ after(grammarAccess.getLoopedModelAccess().getAlternatives_0_3()); }
 					)					)
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  
 
@@ -1296,7 +1306,7 @@ rule__LoopedModel__UnorderedGroup_0
 	)
 ;
 finally {
-	$ruleLoopedModel::pred_0 = new boolean[4];
+	getUnorderedGroupHelper().leave(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0());
 	restoreStackSize(stackSize);
 }
 
@@ -1305,74 +1315,82 @@ finally {
 rule__GroupLoopedModel__UnorderedGroup_0
     @init {
 		int stackSize = keepStackSize();
-		int remaining_pred_0 = 4;
+		getUnorderedGroupHelper().enter(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0());
     }
 :
 	(
 		(
 
 			( 
-				{! $ruleGroupLoopedModel::pred_0[0] }?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 0)}?=>(
 					{ 
-	 				  $ruleGroupLoopedModel::pred_0[0] = true;
-	 				  remaining_pred_0--;
+	 				  getUnorderedGroupHelper().select(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 0);
 	 				}
 					(
 						{ before(grammarAccess.getGroupLoopedModelAccess().getVisibilityAssignment_0_0()); }
 						(rule__GroupLoopedModel__VisibilityAssignment_0_0)
 						{ after(grammarAccess.getGroupLoopedModelAccess().getVisibilityAssignment_0_0()); }
 					)
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  |
 
 			( 
-				{! $ruleGroupLoopedModel::pred_0[1] }?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 1)}?=>(
 					{ 
-	 				  $ruleGroupLoopedModel::pred_0[1] = true;
-	 				  remaining_pred_0--;
+	 				  getUnorderedGroupHelper().select(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 1);
 	 				}
 					(
 						{ before(grammarAccess.getGroupLoopedModelAccess().getStaticAssignment_0_1()); }
 						(rule__GroupLoopedModel__StaticAssignment_0_1)
 						{ after(grammarAccess.getGroupLoopedModelAccess().getStaticAssignment_0_1()); }
 					)
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  |
 
 			( 
-				{! $ruleGroupLoopedModel::pred_0[2] }?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 2)}?=>(
 					{ 
-	 				  $ruleGroupLoopedModel::pred_0[2] = true;
-	 				  remaining_pred_0--;
+	 				  getUnorderedGroupHelper().select(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 2);
 	 				}
 					(
 						{ before(grammarAccess.getGroupLoopedModelAccess().getSynchronizedAssignment_0_2()); }
 						(rule__GroupLoopedModel__SynchronizedAssignment_0_2)
 						{ after(grammarAccess.getGroupLoopedModelAccess().getSynchronizedAssignment_0_2()); }
 					)
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  |
 
 			( 
-				{! $ruleGroupLoopedModel::pred_0[3] }?=>(
+				{getUnorderedGroupHelper().canSelect(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 3)}?=>(
 					{ 
-	 				  $ruleGroupLoopedModel::pred_0[3] = true;
-	 				  remaining_pred_0--;
+	 				  getUnorderedGroupHelper().select(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 3);
 	 				}
 					(
 						{ before(grammarAccess.getGroupLoopedModelAccess().getAlternatives_0_3()); }
 						(rule__GroupLoopedModel__Alternatives_0_3)
 						{ after(grammarAccess.getGroupLoopedModelAccess().getAlternatives_0_3()); }
 					)
+					{ 
+	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0());
+	 				}
  				)
 			)  
 
 		)+
-	  	{remaining_pred_0==0}?	
+	  	{getUnorderedGroupHelper().canLeave(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0())}?	
 	)
 ;
 finally {
-	$ruleGroupLoopedModel::pred_0 = new boolean[4];
+	getUnorderedGroupHelper().leave(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0());
 	restoreStackSize(stackSize);
 }
 

@@ -26,6 +26,7 @@ public class ActionTestLanguageParser extends org.eclipse.xtext.parser.antlr.Abs
 		org.eclipse.xtext.testlanguages.parser.antlr.internal.InternalActionTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

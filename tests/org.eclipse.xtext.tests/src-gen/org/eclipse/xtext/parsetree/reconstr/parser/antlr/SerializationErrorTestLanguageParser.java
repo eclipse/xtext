@@ -26,6 +26,7 @@ public class SerializationErrorTestLanguageParser extends org.eclipse.xtext.pars
 		org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSerializationErrorTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

@@ -19,8 +19,11 @@ import org.eclipse.emf.ecore.impl.ENotificationImpl;
 import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.emf.ecore.util.EDataTypeEList;
+import org.eclipse.emf.ecore.util.EObjectContainmentEList;
+import org.eclipse.emf.ecore.util.InternalEList;
 
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.Model;
+import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.NestedModel;
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedGroupsTestLanguagePackage;
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.UnorderedSerialization;
 
@@ -41,6 +44,7 @@ import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.Unor
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl.ModelImpl#getForthAsList <em>Forth As List</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl.ModelImpl#getValue <em>Value</em>}</li>
  *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl.ModelImpl#getSerialized <em>Serialized</em>}</li>
+ *   <li>{@link org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.impl.ModelImpl#getNestedModel <em>Nested Model</em>}</li>
  * </ul>
  * </p>
  *
@@ -197,6 +201,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected UnorderedSerialization serialized;
+
+  /**
+   * The cached value of the '{@link #getNestedModel() <em>Nested Model</em>}' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getNestedModel()
+   * @generated
+   * @ordered
+   */
+  protected EList<NestedModel> nestedModel;
 
   /**
    * <!-- begin-user-doc -->
@@ -443,6 +457,20 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  public EList<NestedModel> getNestedModel()
+  {
+    if (nestedModel == null)
+    {
+      nestedModel = new EObjectContainmentEList<NestedModel>(NestedModel.class, this, UnorderedGroupsTestLanguagePackage.MODEL__NESTED_MODEL);
+    }
+    return nestedModel;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   @Override
   public NotificationChain eInverseRemove(InternalEObject otherEnd, int featureID, NotificationChain msgs)
   {
@@ -450,6 +478,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
     {
       case UnorderedGroupsTestLanguagePackage.MODEL__SERIALIZED:
         return basicSetSerialized(null, msgs);
+      case UnorderedGroupsTestLanguagePackage.MODEL__NESTED_MODEL:
+        return ((InternalEList<?>)getNestedModel()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
   }
@@ -484,6 +514,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return getValue();
       case UnorderedGroupsTestLanguagePackage.MODEL__SERIALIZED:
         return getSerialized();
+      case UnorderedGroupsTestLanguagePackage.MODEL__NESTED_MODEL:
+        return getNestedModel();
     }
     return super.eGet(featureID, resolve, coreType);
   }
@@ -533,6 +565,10 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case UnorderedGroupsTestLanguagePackage.MODEL__SERIALIZED:
         setSerialized((UnorderedSerialization)newValue);
         return;
+      case UnorderedGroupsTestLanguagePackage.MODEL__NESTED_MODEL:
+        getNestedModel().clear();
+        getNestedModel().addAll((Collection<? extends NestedModel>)newValue);
+        return;
     }
     super.eSet(featureID, newValue);
   }
@@ -577,6 +613,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case UnorderedGroupsTestLanguagePackage.MODEL__SERIALIZED:
         setSerialized((UnorderedSerialization)null);
         return;
+      case UnorderedGroupsTestLanguagePackage.MODEL__NESTED_MODEL:
+        getNestedModel().clear();
+        return;
     }
     super.eUnset(featureID);
   }
@@ -611,6 +650,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return VALUE_EDEFAULT == null ? value != null : !VALUE_EDEFAULT.equals(value);
       case UnorderedGroupsTestLanguagePackage.MODEL__SERIALIZED:
         return serialized != null;
+      case UnorderedGroupsTestLanguagePackage.MODEL__NESTED_MODEL:
+        return nestedModel != null && !nestedModel.isEmpty();
     }
     return super.eIsSet(featureID);
   }

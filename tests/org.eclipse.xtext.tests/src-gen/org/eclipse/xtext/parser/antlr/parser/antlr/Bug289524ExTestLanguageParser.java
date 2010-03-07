@@ -26,6 +26,7 @@ public class Bug289524ExTestLanguageParser extends org.eclipse.xtext.parser.antl
 		org.eclipse.xtext.parser.antlr.parser.antlr.internal.InternalBug289524ExTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

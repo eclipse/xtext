@@ -26,6 +26,7 @@ public class ConcreteSyntaxValidationTestLanguageParser extends org.eclipse.xtex
 		org.eclipse.xtext.validation.parser.antlr.internal.InternalConcreteSyntaxValidationTestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

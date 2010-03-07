@@ -26,6 +26,7 @@ public class SerializationBug269362TestLanguageParser extends org.eclipse.xtext.
 		org.eclipse.xtext.parsetree.reconstr.parser.antlr.internal.InternalSerializationBug269362TestLanguageParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);
