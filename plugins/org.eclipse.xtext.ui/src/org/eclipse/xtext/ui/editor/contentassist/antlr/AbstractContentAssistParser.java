@@ -25,6 +25,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.Group;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.UnorderedGroup;
+import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
 import org.eclipse.xtext.ui.LexerUIBindings;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.ObservableXtextTokenStream.StreamListener;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
@@ -43,6 +44,9 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 	@Named(LexerUIBindings.CONTENT_ASSIST)
 	private Provider<Lexer> lexerProvider;
 	
+	@Inject
+	private Provider<IUnorderedGroupHelper> unorderedGroupHelper;
+	
 	protected TokenSource createLexer(CharStream stream) {
 		Lexer lexer = lexerProvider.get();
 		lexer.setCharStream(stream);
@@ -59,6 +63,7 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 			for (String[] ruleNames: allRuleNames) {
 				for(int i = 0; i < ruleNames.length; i++) {
 					AbstractInternalContentAssistParser parser = createParser();
+					parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 					final Iterator<LookAheadTerminal> iter = element.getLookAheadTerminals().iterator();
 					ObservableXtextTokenStream tokens = new ObservableXtextTokenStream(new TokenSource(){
 						public Token nextToken() {
@@ -202,7 +207,16 @@ public abstract class AbstractContentAssistParser implements IContentAssistParse
 		ObservableXtextTokenStream tokens = new ObservableXtextTokenStream(tokenSource, parser);
 		tokens.setInitialHiddenTokens(getInitialHiddenTokens());
 		parser.setTokenStream(tokens);
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		tokens.setListener(parser);
 		return getFollowElements(parser);
+	}
+
+	public void setUnorderedGroupHelper(Provider<IUnorderedGroupHelper> unorderedGroupHelper) {
+		this.unorderedGroupHelper = unorderedGroupHelper;
+	}
+
+	public Provider<IUnorderedGroupHelper> getUnorderedGroupHelper() {
+		return unorderedGroupHelper;
 	}
 }

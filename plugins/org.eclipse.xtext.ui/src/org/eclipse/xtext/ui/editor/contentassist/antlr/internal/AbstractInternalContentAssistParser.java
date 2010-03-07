@@ -27,6 +27,7 @@ import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
+import org.eclipse.xtext.parser.antlr.IUnorderedGroupHelper;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.FollowElement;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.LookAheadTerminal;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.LookAheadTerminalRuleCall;
@@ -63,6 +64,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	private int currentMarker;
 	private int firstMarker;
 	private Multimap<Integer, AbstractElement> indexToHandledElements;
+	private IUnorderedGroupHelper unorderedGroupHelper;
 
 	public AbstractInternalContentAssistParser(TokenStream input) {
 		super(input);
@@ -389,5 +391,13 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 
 	public void setRecoveryListener(RecoveryListener recoveryListener) {
 		this.recoveryListener = recoveryListener;
+	}
+
+	public void setUnorderedGroupHelper(IUnorderedGroupHelper unorderedGroupHelper) {
+		this.unorderedGroupHelper = unorderedGroupHelper;
+	}
+
+	public IUnorderedGroupHelper getUnorderedGroupHelper() {
+		return unorderedGroupHelper;
 	}
 }

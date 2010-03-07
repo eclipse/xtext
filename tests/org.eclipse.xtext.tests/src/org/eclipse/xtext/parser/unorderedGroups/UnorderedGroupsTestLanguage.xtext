@@ -27,8 +27,15 @@ Model: {Model} (
   | '14' ((firstAsList+='a' & secondAsList+='b') & (thirdAsList+='c' & forthAsList+='d'))+
   | 'datatypes' value=UnorderedDatatype
   | 'serialization' serialized=UnorderedSerialization
+  | 'bug302585' nestedModel+=NestedModel*
   )
 ;
+
+NestedModel: 
+  {NestedModel}
+  (first?="a" & second?="b")? 
+  'nested';
+
 
 UnorderedDatatype:
 	'1' ('a'  & 'b'  )
