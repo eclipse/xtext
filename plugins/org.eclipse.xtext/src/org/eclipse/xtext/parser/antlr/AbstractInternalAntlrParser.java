@@ -121,6 +121,8 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	
 	private ISyntaxErrorMessageProvider syntaxErrorProvider;
 	
+	private IUnorderedGroupHelper unorderedGroupHelper;
+	
 	private final ListMultimap<Token, CompositeNode> deferredLookaheadMap = Multimaps.newArrayListMultimap();
 	private final Map<Token, LeafNode> token2NodeMap = new HashMap<Token, LeafNode>();
 
@@ -550,5 +552,13 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	 * @return
 	 */
 	protected abstract String getFirstRuleName();
+
+	public void setUnorderedGroupHelper(IUnorderedGroupHelper unorderedGroupHelper) {
+		this.unorderedGroupHelper = unorderedGroupHelper;
+	}
+
+	public IUnorderedGroupHelper getUnorderedGroupHelper() {
+		return unorderedGroupHelper;
+	}
 
 }
