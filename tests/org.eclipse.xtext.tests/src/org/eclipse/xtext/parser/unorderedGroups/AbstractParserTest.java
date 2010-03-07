@@ -7,8 +7,11 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.unorderedGroups;
 
+import java.util.List;
+
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.Model;
+import org.eclipse.xtext.parser.unorderedGroups.unorderedGroupsTestLanguage.NestedModel;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -1157,5 +1160,40 @@ public class AbstractParserTest extends AbstractXtextTests {
 	
 	public void testDatatype_14_A_B_C_D_D_C_B_A_B_A_C_D() throws Exception {
 		internalTestDatatypes("14 a b c d d c b a b a c d");
+	}
+	
+	public void testNested_A_B() throws Exception {
+		internalTestNested("a b nested", 1);
+	}
+	
+	public void testNested_B_A() throws Exception {
+		internalTestNested("b a nested", 1);
+	}
+	
+	public void testNested_A_B_A_B() throws Exception {
+		internalTestNested("a b nested a b nested", 2);
+	}
+	
+	public void testNested_B_A_A_B() throws Exception {
+		internalTestNested("b a nested a b nested", 2);
+	}
+	
+	public void testNested_A_B_B_A() throws Exception {
+		internalTestNested("a b nested b a nested", 2);
+	}
+	
+	public void testNested_B_A_B_A() throws Exception {
+		internalTestNested("b a nested b a nested", 2);
+	}
+
+	public void internalTestNested(String input, int expected) throws Exception {
+		Model model = (Model) getModel("bug302585 " + input);
+		assertNotNull(model);
+		List<NestedModel> nestedModels = model.getNestedModel();
+		assertEquals(expected, nestedModels.size());
+		for(NestedModel nested: nestedModels) {
+			assertTrue(nested.isFirst());
+			assertTrue(nested.isSecond());
+		}
 	}
 }
