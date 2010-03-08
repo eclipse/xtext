@@ -4,6 +4,7 @@ import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.internal.Activator;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
+import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 
@@ -50,5 +51,9 @@ public class Access {
 	
 	public static Provider<IBuilderState> getIBuilderState() {
 		return provider(IBuilderState.class);
+	}
+	
+	public static Provider<IURIEditorOpener> getIURIEditorOpener() {
+		return provider(IURIEditorOpener.class);
 	}
 }

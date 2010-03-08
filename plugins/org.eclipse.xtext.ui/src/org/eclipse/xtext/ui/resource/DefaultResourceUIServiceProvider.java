@@ -12,6 +12,8 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IContainer.Manager;
+import org.eclipse.xtext.ui.LanguageSpecific;
+import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.validation.IResourceValidator;
 
 import com.google.inject.Inject;
@@ -22,12 +24,12 @@ import com.google.inject.Inject;
 public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvider {
 
 	private IResourceServiceProvider delegate;
-	
+
 	@Inject
 	public DefaultResourceUIServiceProvider(IResourceServiceProvider delegate) {
 		this.delegate = delegate;
 	}
-	
+
 	public Manager getContainerManager() {
 		return delegate.getContainerManager();
 	}
@@ -40,19 +42,26 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 		return delegate.getResourceValidator();
 	}
 
-	@Inject@ResourceServiceDescriptionLabelProvider
+	@Inject
+	@ResourceServiceDescriptionLabelProvider
 	private ILabelProvider descriptionLabelProvider;
-	
+
 	public ILabelProvider getLabelProvider() {
 		return descriptionLabelProvider;
 	}
-	
+
 	public boolean canHandle(URI uri) {
 		return delegate.canHandle(uri);
 	}
-	
+
 	public boolean canHandle(URI uri, IStorage storage) {
 		return delegate.canHandle(uri);
 	}
 
+	@Inject@LanguageSpecific
+	private IURIEditorOpener uriEditorOpener;
+
+	public IURIEditorOpener getURIEditorOpener() {
+		return uriEditorOpener;
+	}
 }

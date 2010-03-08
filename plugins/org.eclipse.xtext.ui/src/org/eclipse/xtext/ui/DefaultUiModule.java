@@ -24,7 +24,9 @@ import org.eclipse.xtext.formatting.IIndentationInformation;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
+import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
+import org.eclipse.xtext.ui.editor.LanguageSpecificURIEditorOpener;
 import org.eclipse.xtext.ui.editor.XtextEditorErrorTickUpdater;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 import org.eclipse.xtext.ui.editor.contentassist.DefaultCompletionProposalPostProcessor;
@@ -213,6 +215,7 @@ public class DefaultUiModule extends AbstractGenericModule {
 		return DefaultQuickfixProvider.class;
 	}
 	
-
-
+	public void configureLanguageSpecificURIEditorOpener(com.google.inject.Binder binder) {
+		binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class).to(LanguageSpecificURIEditorOpener.class);
+	}
 }

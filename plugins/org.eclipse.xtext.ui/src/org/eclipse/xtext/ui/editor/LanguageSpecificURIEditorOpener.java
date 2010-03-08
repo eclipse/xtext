@@ -16,11 +16,14 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
+import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.xtext.Constants;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.utils.EditorUtils;
@@ -29,15 +32,16 @@ import org.eclipse.xtext.util.TextLocation;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
 import com.google.inject.Inject;
+import com.google.inject.name.Named;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
  * @author Sebastian Zarnekow - original coding
  * @author Peter Friese
  */
-public class DefaultURIEditorOpener implements IURIEditorOpener {
+public class LanguageSpecificURIEditorOpener implements IURIEditorOpener {
 
-	private static final Logger logger = Logger.getLogger(DefaultURIEditorOpener.class);
+	private static final Logger logger = Logger.getLogger(LanguageSpecificURIEditorOpener.class);
 
 	@Inject
 	private ILocationInFileProvider locationProvider;
@@ -45,6 +49,14 @@ public class DefaultURIEditorOpener implements IURIEditorOpener {
 	@Inject
 	private IStorage2UriMapper mapper;
 
+	@Inject
+	@Named(Constants.LANGUAGE_NAME)
+	private String editorID;
+	
+	@Inject
+	private IWorkbench workbench;
+	
+	
 	public void setLocationProvider(ILocationInFileProvider locationProvider) {
 		this.locationProvider = locationProvider;
 	}
@@ -62,12 +74,9 @@ public class DefaultURIEditorOpener implements IURIEditorOpener {
 		if (storages != null && storages.hasNext()) {
 			try {
 				IStorage storage = storages.next();
-				IEditorPart editor = null;
-				if (storage instanceof IFile) {
-					editor = openEditor((IFile) storage);
-				} else {
-					editor = openEditor(storage, uri);
-				}
+				IEditorInput editorInput = (storage instanceof IFile) ? new FileEditorInput((IFile) storage) : new XtextReadonlyEditorInput(storage);
+				IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow().getActivePage();
+				IEditorPart editor = IDE.openEditor(activePage, editorInput, editorID);
 				selectAndReveal(editor, uri, crossReference, indexInList, select);
 				return editor;
 			} catch (WrappedException e) {
@@ -102,17 +111,4 @@ public class DefaultURIEditorOpener implements IURIEditorOpener {
 			}
 		}
 	}
-
-	protected IEditorPart openEditor(IFile file) throws PartInitException {
-		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-		return IDE.openEditor(page, file);
-	}
-
-	protected IEditorPart openEditor(IStorage storage, URI uri) throws PartInitException {
-		XtextReadonlyEditorInput editorInput = new XtextReadonlyEditorInput(storage);
-		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-		return IDE.openEditor(page, editorInput, PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(
-				uri.lastSegment()).getId());
-	}
-
 }
