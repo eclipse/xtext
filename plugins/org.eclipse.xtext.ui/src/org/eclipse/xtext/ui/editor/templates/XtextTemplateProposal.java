@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.editor.templates;
 
 import org.eclipse.jface.text.IRegion;
+import org.eclipse.jface.text.contentassist.ICompletionProposalExtension4;
 import org.eclipse.jface.text.templates.Template;
 import org.eclipse.jface.text.templates.TemplateContext;
 import org.eclipse.jface.text.templates.TemplateProposal;
@@ -16,7 +17,7 @@ import org.eclipse.swt.graphics.Image;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
-public class XtextTemplateProposal extends TemplateProposal {
+public class XtextTemplateProposal extends TemplateProposal implements ICompletionProposalExtension4 {
 
 	public XtextTemplateProposal(Template template, TemplateContext context, IRegion region, Image image) {
 		super(template, context, region, image);
@@ -24,6 +25,10 @@ public class XtextTemplateProposal extends TemplateProposal {
 	
 	public XtextTemplateProposal(Template template, TemplateContext context, IRegion region, Image image, int relevance) {
 		super(template, context, region, image, relevance);
+	}
+	
+	public boolean isAutoInsertable() {
+		return getTemplate().isAutoInsertable();
 	}
 	
 	@Override
