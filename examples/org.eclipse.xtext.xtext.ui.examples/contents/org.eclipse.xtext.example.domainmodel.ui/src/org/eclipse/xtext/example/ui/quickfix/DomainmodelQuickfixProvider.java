@@ -16,7 +16,7 @@ public class DomainmodelQuickfixProvider extends DefaultQuickfixProvider {
 
 	@Fix(DomainmodelJavaValidator.INVALID_TYPE_NAME)
 	public void fixName(final Issue issue, IssueResolutionAcceptor acceptor) {
-		acceptor.accept(issue, "Capitalize name of '" + issue.getData()[0] + "'", "Capizalize name of type", "upcase.png", new IModification() {
+		acceptor.accept(issue, "Capitalize name", "Capitalize name  of '" + issue.getData()[0] + "'", "upcase.png", new IModification() {
 			public void apply(IModificationContext context) throws BadLocationException {
 				IXtextDocument xtextDocument = context.getXtextDocument();
 				String firstLetter = xtextDocument.get(issue.getOffset(), 1);
