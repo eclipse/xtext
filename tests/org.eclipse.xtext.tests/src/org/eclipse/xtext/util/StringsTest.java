@@ -8,6 +8,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.util;
 
+import java.util.Arrays;
 import java.util.List;
 
 import junit.framework.TestCase;
@@ -46,5 +47,21 @@ public class StringsTest extends TestCase {
 		assertEquals("f", split.get(0));
 		assertEquals("", split.get(1));
 		assertEquals("bar", split.get(2));
+	}
+	
+	public void testPackUnpack() throws Exception {
+		String[] strings = new String[] {
+			";" , ":", "foo","bar"
+		};
+		String packed = Strings.pack(strings);
+		String[] newStrings = Strings.unpack(packed);
+		assertTrue(Arrays.equals(strings, newStrings));
+		assertNull(Strings.pack(null));
+		
+		strings = new String[] { "" };
+		assertTrue(Arrays.equals(strings, Strings.unpack(Strings.pack(strings))));
+		assertNull(Strings.pack(null));
+		assertNull(Strings.unpack(null));
+		assertNull(Strings.unpack(""));
 	}
 }
