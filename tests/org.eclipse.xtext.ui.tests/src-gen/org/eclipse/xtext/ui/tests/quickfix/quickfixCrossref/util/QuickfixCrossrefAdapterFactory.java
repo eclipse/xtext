@@ -3,7 +3,7 @@
  * </copyright>
  *
  */
-package org.eclipse.xtext.ui.tests.quickfix.importUriUi.util;
+package org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.util;
 
 import org.eclipse.emf.common.notify.Adapter;
 import org.eclipse.emf.common.notify.Notifier;
@@ -12,17 +12,17 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.ui.tests.quickfix.importUriUi.*;
+import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.*;
 
 /**
  * <!-- begin-user-doc -->
  * The <b>Adapter Factory</b> for the model.
  * It provides an adapter <code>createXXX</code> method for each class of the model.
  * <!-- end-user-doc -->
- * @see org.eclipse.xtext.ui.tests.quickfix.importUriUi.ImportUriUiPackage
+ * @see org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefPackage
  * @generated
  */
-public class ImportUriUiAdapterFactory extends AdapterFactoryImpl
+public class QuickfixCrossrefAdapterFactory extends AdapterFactoryImpl
 {
   /**
    * The cached model package.
@@ -30,7 +30,7 @@ public class ImportUriUiAdapterFactory extends AdapterFactoryImpl
    * <!-- end-user-doc -->
    * @generated
    */
-  protected static ImportUriUiPackage modelPackage;
+  protected static QuickfixCrossrefPackage modelPackage;
 
   /**
    * Creates an instance of the adapter factory.
@@ -38,11 +38,11 @@ public class ImportUriUiAdapterFactory extends AdapterFactoryImpl
    * <!-- end-user-doc -->
    * @generated
    */
-  public ImportUriUiAdapterFactory()
+  public QuickfixCrossrefAdapterFactory()
   {
     if (modelPackage == null)
     {
-      modelPackage = ImportUriUiPackage.eINSTANCE;
+      modelPackage = QuickfixCrossrefPackage.eINSTANCE;
     }
   }
 
@@ -74,8 +74,8 @@ public class ImportUriUiAdapterFactory extends AdapterFactoryImpl
    * <!-- end-user-doc -->
    * @generated
    */
-  protected ImportUriUiSwitch<Adapter> modelSwitch =
-    new ImportUriUiSwitch<Adapter>()
+  protected QuickfixCrossrefSwitch<Adapter> modelSwitch =
+    new QuickfixCrossrefSwitch<Adapter>()
     {
       @Override
       public Adapter caseMain(Main object)
@@ -110,13 +110,13 @@ public class ImportUriUiAdapterFactory extends AdapterFactoryImpl
 
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.tests.quickfix.importUriUi.Main <em>Main</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Main <em>Main</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.xtext.ui.tests.quickfix.importUriUi.Main
+   * @see org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Main
    * @generated
    */
   public Adapter createMainAdapter()
@@ -125,13 +125,13 @@ public class ImportUriUiAdapterFactory extends AdapterFactoryImpl
   }
 
   /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.tests.quickfix.importUriUi.Element <em>Element</em>}'.
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Element <em>Element</em>}'.
    * <!-- begin-user-doc -->
    * This default implementation returns null so that we can easily ignore cases;
    * it's useful to ignore a case when inheritance will catch all the cases anyway.
    * <!-- end-user-doc -->
    * @return the new adapter.
-   * @see org.eclipse.xtext.ui.tests.quickfix.importUriUi.Element
+   * @see org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Element
    * @generated
    */
   public Adapter createElementAdapter()
@@ -152,4 +152,4 @@ public class ImportUriUiAdapterFactory extends AdapterFactoryImpl
     return null;
   }
 
-} //ImportUriUiAdapterFactory
+} //QuickfixCrossrefAdapterFactory

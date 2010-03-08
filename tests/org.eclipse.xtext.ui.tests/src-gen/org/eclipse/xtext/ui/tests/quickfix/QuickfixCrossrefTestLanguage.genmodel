@@ -7,7 +7,7 @@
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.ui.tests.edit"
     editorPluginID="org.eclipse.xtext.ui.tests.editor">
-  <genPackages prefix="ImportUriUi" basePackage="org.eclipse.xtext.ui.tests.quickfix"
+  <genPackages prefix="QuickfixCrossref" basePackage="org.eclipse.xtext.ui.tests.quickfix"
       disposableProviderFactory="true" ecorePackage="QuickfixCrossrefTestLanguage.ecore#/">
     <genClasses ecoreClass="QuickfixCrossrefTestLanguage.ecore#//Main">
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference QuickfixCrossrefTestLanguage.ecore#//Main/elements"/>

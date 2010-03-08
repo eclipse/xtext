@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.model.edit;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 
 /**
@@ -15,5 +16,7 @@ import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 public interface IModificationContext {
 
 	IXtextDocument getXtextDocument();
+	
+	IXtextDocument getXtextDocument(URI uri);
 
 }

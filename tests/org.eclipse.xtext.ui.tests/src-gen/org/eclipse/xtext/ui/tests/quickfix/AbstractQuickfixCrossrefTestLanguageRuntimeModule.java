@@ -78,4 +78,9 @@ public abstract class AbstractQuickfixCrossrefTestLanguageRuntimeModule extends 
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
 	}
 
+	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.xtext.ui.tests.quickfix.validation.QuickfixCrossrefTestLanguageJavaValidator> bindQuickfixCrossrefTestLanguageJavaValidator() {
+		return org.eclipse.xtext.ui.tests.quickfix.validation.QuickfixCrossrefTestLanguageJavaValidator.class;
+	}
+
 }

@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.editor.model.edit;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.ui.IEditorPart;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.XtextEditor;
@@ -36,13 +37,19 @@ public class IssueModificationContext implements IModificationContext {
 	}
 
 	public IXtextDocument getXtextDocument() {
-		IEditorPart editor = editorOpener.open(issue.getUriToProblem(), false);
+		return getXtextDocument(issue.getUriToProblem());
+	}
+
+	public IXtextDocument getXtextDocument(URI uri) {
+		IEditorPart editor = editorOpener.open(uri, false);
 		if (editor instanceof XtextEditor) {
 			XtextEditor xtextEditor = (XtextEditor) editor;
 			return xtextEditor.getDocument();
 		}
 		return null;
 	}
+
+	
 	
 	@ImplementedBy(Factory.Default.class)
 	public static interface Factory {

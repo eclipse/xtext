@@ -3,7 +3,7 @@
  * </copyright>
  *
  */
-package org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl;
+package org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -12,10 +12,10 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
-import org.eclipse.xtext.ui.tests.quickfix.importUriUi.Element;
-import org.eclipse.xtext.ui.tests.quickfix.importUriUi.ImportUriUiFactory;
-import org.eclipse.xtext.ui.tests.quickfix.importUriUi.ImportUriUiPackage;
-import org.eclipse.xtext.ui.tests.quickfix.importUriUi.Main;
+import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Element;
+import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Main;
+import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefFactory;
+import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -23,7 +23,7 @@ import org.eclipse.xtext.ui.tests.quickfix.importUriUi.Main;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiPackage
+public class QuickfixCrossrefPackageImpl extends EPackageImpl implements QuickfixCrossrefPackage
 {
   /**
    * <!-- begin-user-doc -->
@@ -50,13 +50,13 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @see org.eclipse.emf.ecore.EPackage.Registry
-   * @see org.eclipse.xtext.ui.tests.quickfix.importUriUi.ImportUriUiPackage#eNS_URI
+   * @see org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefPackage#eNS_URI
    * @see #init()
    * @generated
    */
-  private ImportUriUiPackageImpl()
+  private QuickfixCrossrefPackageImpl()
   {
-    super(eNS_URI, ImportUriUiFactory.eINSTANCE);
+    super(eNS_URI, QuickfixCrossrefFactory.eINSTANCE);
   }
 
   /**
@@ -69,7 +69,7 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
   /**
    * Creates, registers, and initializes the <b>Package</b> for this model, and for any others upon which it depends.
    * 
-   * <p>This method is used to initialize {@link ImportUriUiPackage#eINSTANCE} when that field is accessed.
+   * <p>This method is used to initialize {@link QuickfixCrossrefPackage#eINSTANCE} when that field is accessed.
    * Clients should not invoke it directly. Instead, they should simply access that field to obtain the package.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -78,28 +78,28 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
    * @see #initializePackageContents()
    * @generated
    */
-  public static ImportUriUiPackage init()
+  public static QuickfixCrossrefPackage init()
   {
-    if (isInited) return (ImportUriUiPackage)EPackage.Registry.INSTANCE.getEPackage(ImportUriUiPackage.eNS_URI);
+    if (isInited) return (QuickfixCrossrefPackage)EPackage.Registry.INSTANCE.getEPackage(QuickfixCrossrefPackage.eNS_URI);
 
     // Obtain or create and register package
-    ImportUriUiPackageImpl theImportUriUiPackage = (ImportUriUiPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof ImportUriUiPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new ImportUriUiPackageImpl());
+    QuickfixCrossrefPackageImpl theQuickfixCrossrefPackage = (QuickfixCrossrefPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof QuickfixCrossrefPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new QuickfixCrossrefPackageImpl());
 
     isInited = true;
 
     // Create package meta-data objects
-    theImportUriUiPackage.createPackageContents();
+    theQuickfixCrossrefPackage.createPackageContents();
 
     // Initialize created meta-data
-    theImportUriUiPackage.initializePackageContents();
+    theQuickfixCrossrefPackage.initializePackageContents();
 
     // Mark meta-data to indicate it can't be changed
-    theImportUriUiPackage.freeze();
+    theQuickfixCrossrefPackage.freeze();
 
   
     // Update the registry and return the package
-    EPackage.Registry.INSTANCE.put(ImportUriUiPackage.eNS_URI, theImportUriUiPackage);
-    return theImportUriUiPackage;
+    EPackage.Registry.INSTANCE.put(QuickfixCrossrefPackage.eNS_URI, theQuickfixCrossrefPackage);
+    return theQuickfixCrossrefPackage;
   }
 
   /**
@@ -167,9 +167,9 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
    * <!-- end-user-doc -->
    * @generated
    */
-  public ImportUriUiFactory getImportUriUiFactory()
+  public QuickfixCrossrefFactory getQuickfixCrossrefFactory()
   {
-    return (ImportUriUiFactory)getEFactoryInstance();
+    return (QuickfixCrossrefFactory)getEFactoryInstance();
   }
 
   /**
@@ -244,4 +244,4 @@ public class ImportUriUiPackageImpl extends EPackageImpl implements ImportUriUiP
     createResource(eNS_URI);
   }
 
-} //ImportUriUiPackageImpl
+} //QuickfixCrossrefPackageImpl

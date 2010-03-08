@@ -5,7 +5,8 @@ Bundle-SymbolicName: org.eclipse.xtext.ui.tests;singleton:=true
 Bundle-Version: 0.8.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtext.ui;bundle-version="0.8.0",
- org.junit;bundle-version="[3.8.0,4.0.0)",
+ org.junit;bundle-version="[3.8.0,
+ 4.0.0)",
  org.eclipse.core.filesystem;bundle-version="1.2.0",
  org.eclipse.ui.workbench.texteditor;bundle-version="3.4.0",
  org.eclipse.ui.ide;bundle-version="3.4.0",
@@ -136,9 +137,6 @@ Export-Package: org.eclipse.xtext.ui.tests,
  org.eclipse.xtext.ui.tests.parser.packrat,
  org.eclipse.xtext.ui.tests.parser.packrat.consumers,
  org.eclipse.xtext.ui.tests.quickfix,
- org.eclipse.xtext.ui.tests.quickfix.importUriUi,
- org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl,
- org.eclipse.xtext.ui.tests.quickfix.importUriUi.util,
  org.eclipse.xtext.ui.tests.quickfix.parseTreeConstruction,
  org.eclipse.xtext.ui.tests.quickfix.parser.antlr,
  org.eclipse.xtext.ui.tests.quickfix.parser.antlr.internal,
@@ -165,5 +163,9 @@ Export-Package: org.eclipse.xtext.ui.tests,
  org.eclipse.xtext.ui.tests.validation,
  org.eclipse.xtext.ui.tests.xtextUiTest,
  org.eclipse.xtext.ui.tests.xtextUiTest.impl,
- org.eclipse.xtext.ui.tests.xtextUiTest.util
+ org.eclipse.xtext.ui.tests.xtextUiTest.util,
+ org.eclipse.xtext.ui.tests.quickfix.validation,
+ org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref,
+ org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl,
+ org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.util
 

@@ -3,7 +3,7 @@
  * </copyright>
  *
  */
-package org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl;
+package org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl;
 
 import java.util.Collection;
 
@@ -22,8 +22,8 @@ import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.EObjectResolvingEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtext.ui.tests.quickfix.importUriUi.Element;
-import org.eclipse.xtext.ui.tests.quickfix.importUriUi.ImportUriUiPackage;
+import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Element;
+import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -32,9 +32,9 @@ import org.eclipse.xtext.ui.tests.quickfix.importUriUi.ImportUriUiPackage;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl.ElementImpl#getName <em>Name</em>}</li>
- *   <li>{@link org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl.ElementImpl#getContained <em>Contained</em>}</li>
- *   <li>{@link org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl.ElementImpl#getReferenced <em>Referenced</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.ElementImpl#getName <em>Name</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.ElementImpl#getContained <em>Contained</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.ElementImpl#getReferenced <em>Referenced</em>}</li>
  * </ul>
  * </p>
  *
@@ -100,7 +100,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
   @Override
   protected EClass eStaticClass()
   {
-    return ImportUriUiPackage.Literals.ELEMENT;
+    return QuickfixCrossrefPackage.Literals.ELEMENT;
   }
 
   /**
@@ -123,7 +123,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
     String oldName = name;
     name = newName;
     if (eNotificationRequired())
-      eNotify(new ENotificationImpl(this, Notification.SET, ImportUriUiPackage.ELEMENT__NAME, oldName, name));
+      eNotify(new ENotificationImpl(this, Notification.SET, QuickfixCrossrefPackage.ELEMENT__NAME, oldName, name));
   }
 
   /**
@@ -135,7 +135,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
   {
     if (contained == null)
     {
-      contained = new EObjectContainmentEList<Element>(Element.class, this, ImportUriUiPackage.ELEMENT__CONTAINED);
+      contained = new EObjectContainmentEList<Element>(Element.class, this, QuickfixCrossrefPackage.ELEMENT__CONTAINED);
     }
     return contained;
   }
@@ -149,7 +149,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
   {
     if (referenced == null)
     {
-      referenced = new EObjectResolvingEList<Element>(Element.class, this, ImportUriUiPackage.ELEMENT__REFERENCED);
+      referenced = new EObjectResolvingEList<Element>(Element.class, this, QuickfixCrossrefPackage.ELEMENT__REFERENCED);
     }
     return referenced;
   }
@@ -164,7 +164,7 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
   {
     switch (featureID)
     {
-      case ImportUriUiPackage.ELEMENT__CONTAINED:
+      case QuickfixCrossrefPackage.ELEMENT__CONTAINED:
         return ((InternalEList<?>)getContained()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -180,11 +180,11 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
   {
     switch (featureID)
     {
-      case ImportUriUiPackage.ELEMENT__NAME:
+      case QuickfixCrossrefPackage.ELEMENT__NAME:
         return getName();
-      case ImportUriUiPackage.ELEMENT__CONTAINED:
+      case QuickfixCrossrefPackage.ELEMENT__CONTAINED:
         return getContained();
-      case ImportUriUiPackage.ELEMENT__REFERENCED:
+      case QuickfixCrossrefPackage.ELEMENT__REFERENCED:
         return getReferenced();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -201,14 +201,14 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
   {
     switch (featureID)
     {
-      case ImportUriUiPackage.ELEMENT__NAME:
+      case QuickfixCrossrefPackage.ELEMENT__NAME:
         setName((String)newValue);
         return;
-      case ImportUriUiPackage.ELEMENT__CONTAINED:
+      case QuickfixCrossrefPackage.ELEMENT__CONTAINED:
         getContained().clear();
         getContained().addAll((Collection<? extends Element>)newValue);
         return;
-      case ImportUriUiPackage.ELEMENT__REFERENCED:
+      case QuickfixCrossrefPackage.ELEMENT__REFERENCED:
         getReferenced().clear();
         getReferenced().addAll((Collection<? extends Element>)newValue);
         return;
@@ -226,13 +226,13 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
   {
     switch (featureID)
     {
-      case ImportUriUiPackage.ELEMENT__NAME:
+      case QuickfixCrossrefPackage.ELEMENT__NAME:
         setName(NAME_EDEFAULT);
         return;
-      case ImportUriUiPackage.ELEMENT__CONTAINED:
+      case QuickfixCrossrefPackage.ELEMENT__CONTAINED:
         getContained().clear();
         return;
-      case ImportUriUiPackage.ELEMENT__REFERENCED:
+      case QuickfixCrossrefPackage.ELEMENT__REFERENCED:
         getReferenced().clear();
         return;
     }
@@ -249,11 +249,11 @@ public class ElementImpl extends MinimalEObjectImpl.Container implements Element
   {
     switch (featureID)
     {
-      case ImportUriUiPackage.ELEMENT__NAME:
+      case QuickfixCrossrefPackage.ELEMENT__NAME:
         return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
-      case ImportUriUiPackage.ELEMENT__CONTAINED:
+      case QuickfixCrossrefPackage.ELEMENT__CONTAINED:
         return contained != null && !contained.isEmpty();
-      case ImportUriUiPackage.ELEMENT__REFERENCED:
+      case QuickfixCrossrefPackage.ELEMENT__REFERENCED:
         return referenced != null && !referenced.isEmpty();
     }
     return super.eIsSet(featureID);

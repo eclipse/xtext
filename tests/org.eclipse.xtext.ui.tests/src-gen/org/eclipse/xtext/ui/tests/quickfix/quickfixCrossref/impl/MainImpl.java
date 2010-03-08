@@ -3,7 +3,7 @@
  * </copyright>
  *
  */
-package org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl;
+package org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl;
 
 import java.util.Collection;
 
@@ -19,9 +19,9 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 import org.eclipse.emf.ecore.util.EObjectContainmentEList;
 import org.eclipse.emf.ecore.util.InternalEList;
 
-import org.eclipse.xtext.ui.tests.quickfix.importUriUi.Element;
-import org.eclipse.xtext.ui.tests.quickfix.importUriUi.ImportUriUiPackage;
-import org.eclipse.xtext.ui.tests.quickfix.importUriUi.Main;
+import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Element;
+import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Main;
+import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefPackage;
 
 /**
  * <!-- begin-user-doc -->
@@ -30,7 +30,7 @@ import org.eclipse.xtext.ui.tests.quickfix.importUriUi.Main;
  * <p>
  * The following features are implemented:
  * <ul>
- *   <li>{@link org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl.MainImpl#getElements <em>Elements</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.MainImpl#getElements <em>Elements</em>}</li>
  * </ul>
  * </p>
  *
@@ -66,7 +66,7 @@ public class MainImpl extends MinimalEObjectImpl.Container implements Main
   @Override
   protected EClass eStaticClass()
   {
-    return ImportUriUiPackage.Literals.MAIN;
+    return QuickfixCrossrefPackage.Literals.MAIN;
   }
 
   /**
@@ -78,7 +78,7 @@ public class MainImpl extends MinimalEObjectImpl.Container implements Main
   {
     if (elements == null)
     {
-      elements = new EObjectContainmentEList<Element>(Element.class, this, ImportUriUiPackage.MAIN__ELEMENTS);
+      elements = new EObjectContainmentEList<Element>(Element.class, this, QuickfixCrossrefPackage.MAIN__ELEMENTS);
     }
     return elements;
   }
@@ -93,7 +93,7 @@ public class MainImpl extends MinimalEObjectImpl.Container implements Main
   {
     switch (featureID)
     {
-      case ImportUriUiPackage.MAIN__ELEMENTS:
+      case QuickfixCrossrefPackage.MAIN__ELEMENTS:
         return ((InternalEList<?>)getElements()).basicRemove(otherEnd, msgs);
     }
     return super.eInverseRemove(otherEnd, featureID, msgs);
@@ -109,7 +109,7 @@ public class MainImpl extends MinimalEObjectImpl.Container implements Main
   {
     switch (featureID)
     {
-      case ImportUriUiPackage.MAIN__ELEMENTS:
+      case QuickfixCrossrefPackage.MAIN__ELEMENTS:
         return getElements();
     }
     return super.eGet(featureID, resolve, coreType);
@@ -126,7 +126,7 @@ public class MainImpl extends MinimalEObjectImpl.Container implements Main
   {
     switch (featureID)
     {
-      case ImportUriUiPackage.MAIN__ELEMENTS:
+      case QuickfixCrossrefPackage.MAIN__ELEMENTS:
         getElements().clear();
         getElements().addAll((Collection<? extends Element>)newValue);
         return;
@@ -144,7 +144,7 @@ public class MainImpl extends MinimalEObjectImpl.Container implements Main
   {
     switch (featureID)
     {
-      case ImportUriUiPackage.MAIN__ELEMENTS:
+      case QuickfixCrossrefPackage.MAIN__ELEMENTS:
         getElements().clear();
         return;
     }
@@ -161,7 +161,7 @@ public class MainImpl extends MinimalEObjectImpl.Container implements Main
   {
     switch (featureID)
     {
-      case ImportUriUiPackage.MAIN__ELEMENTS:
+      case QuickfixCrossrefPackage.MAIN__ELEMENTS:
         return elements != null && !elements.isEmpty();
     }
     return super.eIsSet(featureID);

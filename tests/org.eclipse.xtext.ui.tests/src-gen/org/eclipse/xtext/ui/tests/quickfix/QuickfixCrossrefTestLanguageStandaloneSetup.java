@@ -30,7 +30,7 @@ public class QuickfixCrossrefTestLanguageStandaloneSetup implements ISetup {
 	
 	public void register(Injector injector) {
 	if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/quickfixCrossrefTestLanguage")) {
-		EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/quickfixCrossrefTestLanguage", org.eclipse.xtext.ui.tests.quickfix.importUriUi.ImportUriUiPackage.eINSTANCE);
+		EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/quickfixCrossrefTestLanguage", org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefPackage.eINSTANCE);
 	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
@@ -38,6 +38,7 @@ public class QuickfixCrossrefTestLanguageStandaloneSetup implements ISetup {
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("quickfixcrossreftestlanguage", resourceFactory);
 		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("quickfixcrossreftestlanguage", serviceProvider);
 		
+
 
 	}
 }

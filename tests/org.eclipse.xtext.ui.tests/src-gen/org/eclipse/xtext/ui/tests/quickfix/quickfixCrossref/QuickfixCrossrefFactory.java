@@ -3,7 +3,7 @@
  * </copyright>
  *
  */
-package org.eclipse.xtext.ui.tests.quickfix.importUriUi;
+package org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref;
 
 import org.eclipse.emf.ecore.EFactory;
 
@@ -12,10 +12,10 @@ import org.eclipse.emf.ecore.EFactory;
  * The <b>Factory</b> for the model.
  * It provides a create method for each non-abstract class of the model.
  * <!-- end-user-doc -->
- * @see org.eclipse.xtext.ui.tests.quickfix.importUriUi.ImportUriUiPackage
+ * @see org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefPackage
  * @generated
  */
-public interface ImportUriUiFactory extends EFactory
+public interface QuickfixCrossrefFactory extends EFactory
 {
   /**
    * The singleton instance of the factory.
@@ -23,7 +23,7 @@ public interface ImportUriUiFactory extends EFactory
    * <!-- end-user-doc -->
    * @generated
    */
-  ImportUriUiFactory eINSTANCE = org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl.ImportUriUiFactoryImpl.init();
+  QuickfixCrossrefFactory eINSTANCE = org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.QuickfixCrossrefFactoryImpl.init();
 
   /**
    * Returns a new object of class '<em>Main</em>'.
@@ -50,6 +50,6 @@ public interface ImportUriUiFactory extends EFactory
    * @return the package supported by this factory.
    * @generated
    */
-  ImportUriUiPackage getImportUriUiPackage();
+  QuickfixCrossrefPackage getQuickfixCrossrefPackage();
 
-} //ImportUriUiFactory
+} //QuickfixCrossrefFactory

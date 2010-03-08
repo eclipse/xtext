@@ -3,7 +3,7 @@
  * </copyright>
  *
  */
-package org.eclipse.xtext.ui.tests.quickfix.importUriUi;
+package org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref;
 
 import org.eclipse.emf.ecore.EAttribute;
 import org.eclipse.emf.ecore.EClass;
@@ -21,11 +21,11 @@ import org.eclipse.emf.ecore.EReference;
  *   <li>and each data type</li>
  * </ul>
  * <!-- end-user-doc -->
- * @see org.eclipse.xtext.ui.tests.quickfix.importUriUi.ImportUriUiFactory
+ * @see org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefFactory
  * @model kind="package"
  * @generated
  */
-public interface ImportUriUiPackage extends EPackage
+public interface QuickfixCrossrefPackage extends EPackage
 {
   /**
    * The package name.
@@ -33,7 +33,7 @@ public interface ImportUriUiPackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNAME = "importUriUi";
+  String eNAME = "quickfixCrossref";
 
   /**
    * The package namespace URI.
@@ -49,7 +49,7 @@ public interface ImportUriUiPackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  String eNS_PREFIX = "importUriUi";
+  String eNS_PREFIX = "quickfixCrossref";
 
   /**
    * The singleton instance of the package.
@@ -57,14 +57,14 @@ public interface ImportUriUiPackage extends EPackage
    * <!-- end-user-doc -->
    * @generated
    */
-  ImportUriUiPackage eINSTANCE = org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl.ImportUriUiPackageImpl.init();
+  QuickfixCrossrefPackage eINSTANCE = org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.QuickfixCrossrefPackageImpl.init();
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl.MainImpl <em>Main</em>}' class.
+   * The meta object id for the '{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.MainImpl <em>Main</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl.MainImpl
-   * @see org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl.ImportUriUiPackageImpl#getMain()
+   * @see org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.MainImpl
+   * @see org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.QuickfixCrossrefPackageImpl#getMain()
    * @generated
    */
   int MAIN = 0;
@@ -88,11 +88,11 @@ public interface ImportUriUiPackage extends EPackage
   int MAIN_FEATURE_COUNT = 1;
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl.ElementImpl <em>Element</em>}' class.
+   * The meta object id for the '{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.ElementImpl <em>Element</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl.ElementImpl
-   * @see org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl.ImportUriUiPackageImpl#getElement()
+   * @see org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.ElementImpl
+   * @see org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.QuickfixCrossrefPackageImpl#getElement()
    * @generated
    */
   int ELEMENT = 1;
@@ -135,64 +135,64 @@ public interface ImportUriUiPackage extends EPackage
 
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.quickfix.importUriUi.Main <em>Main</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Main <em>Main</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for class '<em>Main</em>'.
-   * @see org.eclipse.xtext.ui.tests.quickfix.importUriUi.Main
+   * @see org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Main
    * @generated
    */
   EClass getMain();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ui.tests.quickfix.importUriUi.Main#getElements <em>Elements</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Main#getElements <em>Elements</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Elements</em>'.
-   * @see org.eclipse.xtext.ui.tests.quickfix.importUriUi.Main#getElements()
+   * @see org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Main#getElements()
    * @see #getMain()
    * @generated
    */
   EReference getMain_Elements();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.quickfix.importUriUi.Element <em>Element</em>}'.
+   * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Element <em>Element</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for class '<em>Element</em>'.
-   * @see org.eclipse.xtext.ui.tests.quickfix.importUriUi.Element
+   * @see org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Element
    * @generated
    */
   EClass getElement();
 
   /**
-   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.quickfix.importUriUi.Element#getName <em>Name</em>}'.
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Element#getName <em>Name</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the attribute '<em>Name</em>'.
-   * @see org.eclipse.xtext.ui.tests.quickfix.importUriUi.Element#getName()
+   * @see org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Element#getName()
    * @see #getElement()
    * @generated
    */
   EAttribute getElement_Name();
 
   /**
-   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ui.tests.quickfix.importUriUi.Element#getContained <em>Contained</em>}'.
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Element#getContained <em>Contained</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the containment reference list '<em>Contained</em>'.
-   * @see org.eclipse.xtext.ui.tests.quickfix.importUriUi.Element#getContained()
+   * @see org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Element#getContained()
    * @see #getElement()
    * @generated
    */
   EReference getElement_Contained();
 
   /**
-   * Returns the meta object for the reference list '{@link org.eclipse.xtext.ui.tests.quickfix.importUriUi.Element#getReferenced <em>Referenced</em>}'.
+   * Returns the meta object for the reference list '{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Element#getReferenced <em>Referenced</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @return the meta object for the reference list '<em>Referenced</em>'.
-   * @see org.eclipse.xtext.ui.tests.quickfix.importUriUi.Element#getReferenced()
+   * @see org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.Element#getReferenced()
    * @see #getElement()
    * @generated
    */
@@ -205,7 +205,7 @@ public interface ImportUriUiPackage extends EPackage
    * @return the factory that creates the instances of the model.
    * @generated
    */
-  ImportUriUiFactory getImportUriUiFactory();
+  QuickfixCrossrefFactory getQuickfixCrossrefFactory();
 
   /**
    * <!-- begin-user-doc -->
@@ -222,11 +222,11 @@ public interface ImportUriUiPackage extends EPackage
   interface Literals
   {
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl.MainImpl <em>Main</em>}' class.
+     * The meta object literal for the '{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.MainImpl <em>Main</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl.MainImpl
-     * @see org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl.ImportUriUiPackageImpl#getMain()
+     * @see org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.MainImpl
+     * @see org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.QuickfixCrossrefPackageImpl#getMain()
      * @generated
      */
     EClass MAIN = eINSTANCE.getMain();
@@ -240,11 +240,11 @@ public interface ImportUriUiPackage extends EPackage
     EReference MAIN__ELEMENTS = eINSTANCE.getMain_Elements();
 
     /**
-     * The meta object literal for the '{@link org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl.ElementImpl <em>Element</em>}' class.
+     * The meta object literal for the '{@link org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.ElementImpl <em>Element</em>}' class.
      * <!-- begin-user-doc -->
      * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl.ElementImpl
-     * @see org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl.ImportUriUiPackageImpl#getElement()
+     * @see org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.ElementImpl
+     * @see org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl.QuickfixCrossrefPackageImpl#getElement()
      * @generated
      */
     EClass ELEMENT = eINSTANCE.getElement();
@@ -275,4 +275,4 @@ public interface ImportUriUiPackage extends EPackage
 
   }
 
-} //ImportUriUiPackage
+} //QuickfixCrossrefPackage

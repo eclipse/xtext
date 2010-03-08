@@ -3,14 +3,14 @@
  * </copyright>
  *
  */
-package org.eclipse.xtext.ui.tests.quickfix.importUriUi.util;
+package org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.util;
 
 import java.util.List;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
-import org.eclipse.xtext.ui.tests.quickfix.importUriUi.*;
+import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -22,10 +22,10 @@ import org.eclipse.xtext.ui.tests.quickfix.importUriUi.*;
  * until a non-null result is returned,
  * which is the result of the switch.
  * <!-- end-user-doc -->
- * @see org.eclipse.xtext.ui.tests.quickfix.importUriUi.ImportUriUiPackage
+ * @see org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefPackage
  * @generated
  */
-public class ImportUriUiSwitch<T>
+public class QuickfixCrossrefSwitch<T>
 {
   /**
    * The cached model package
@@ -33,7 +33,7 @@ public class ImportUriUiSwitch<T>
    * <!-- end-user-doc -->
    * @generated
    */
-  protected static ImportUriUiPackage modelPackage;
+  protected static QuickfixCrossrefPackage modelPackage;
 
   /**
    * Creates an instance of the switch.
@@ -41,11 +41,11 @@ public class ImportUriUiSwitch<T>
    * <!-- end-user-doc -->
    * @generated
    */
-  public ImportUriUiSwitch()
+  public QuickfixCrossrefSwitch()
   {
     if (modelPackage == null)
     {
-      modelPackage = ImportUriUiPackage.eINSTANCE;
+      modelPackage = QuickfixCrossrefPackage.eINSTANCE;
     }
   }
 
@@ -95,14 +95,14 @@ public class ImportUriUiSwitch<T>
   {
     switch (classifierID)
     {
-      case ImportUriUiPackage.MAIN:
+      case QuickfixCrossrefPackage.MAIN:
       {
         Main main = (Main)theEObject;
         T result = caseMain(main);
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
-      case ImportUriUiPackage.ELEMENT:
+      case QuickfixCrossrefPackage.ELEMENT:
       {
         Element element = (Element)theEObject;
         T result = caseElement(element);
@@ -161,4 +161,4 @@ public class ImportUriUiSwitch<T>
     return null;
   }
 
-} //ImportUriUiSwitch
+} //QuickfixCrossrefSwitch

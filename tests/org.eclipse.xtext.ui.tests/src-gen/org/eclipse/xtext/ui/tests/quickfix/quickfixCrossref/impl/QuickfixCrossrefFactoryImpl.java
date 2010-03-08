@@ -3,7 +3,7 @@
  * </copyright>
  *
  */
-package org.eclipse.xtext.ui.tests.quickfix.importUriUi.impl;
+package org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl;
 
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
@@ -13,7 +13,7 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
-import org.eclipse.xtext.ui.tests.quickfix.importUriUi.*;
+import org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.*;
 
 /**
  * <!-- begin-user-doc -->
@@ -21,7 +21,7 @@ import org.eclipse.xtext.ui.tests.quickfix.importUriUi.*;
  * <!-- end-user-doc -->
  * @generated
  */
-public class ImportUriUiFactoryImpl extends EFactoryImpl implements ImportUriUiFactory
+public class QuickfixCrossrefFactoryImpl extends EFactoryImpl implements QuickfixCrossrefFactory
 {
   /**
    * Creates the default factory implementation.
@@ -29,21 +29,21 @@ public class ImportUriUiFactoryImpl extends EFactoryImpl implements ImportUriUiF
    * <!-- end-user-doc -->
    * @generated
    */
-  public static ImportUriUiFactory init()
+  public static QuickfixCrossrefFactory init()
   {
     try
     {
-      ImportUriUiFactory theImportUriUiFactory = (ImportUriUiFactory)EPackage.Registry.INSTANCE.getEFactory("http://eclipse.org/xtext/quickfixCrossrefTestLanguage"); 
-      if (theImportUriUiFactory != null)
+      QuickfixCrossrefFactory theQuickfixCrossrefFactory = (QuickfixCrossrefFactory)EPackage.Registry.INSTANCE.getEFactory("http://eclipse.org/xtext/quickfixCrossrefTestLanguage"); 
+      if (theQuickfixCrossrefFactory != null)
       {
-        return theImportUriUiFactory;
+        return theQuickfixCrossrefFactory;
       }
     }
     catch (Exception exception)
     {
       EcorePlugin.INSTANCE.log(exception);
     }
-    return new ImportUriUiFactoryImpl();
+    return new QuickfixCrossrefFactoryImpl();
   }
 
   /**
@@ -52,7 +52,7 @@ public class ImportUriUiFactoryImpl extends EFactoryImpl implements ImportUriUiF
    * <!-- end-user-doc -->
    * @generated
    */
-  public ImportUriUiFactoryImpl()
+  public QuickfixCrossrefFactoryImpl()
   {
     super();
   }
@@ -67,8 +67,8 @@ public class ImportUriUiFactoryImpl extends EFactoryImpl implements ImportUriUiF
   {
     switch (eClass.getClassifierID())
     {
-      case ImportUriUiPackage.MAIN: return createMain();
-      case ImportUriUiPackage.ELEMENT: return createElement();
+      case QuickfixCrossrefPackage.MAIN: return createMain();
+      case QuickfixCrossrefPackage.ELEMENT: return createElement();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -101,9 +101,9 @@ public class ImportUriUiFactoryImpl extends EFactoryImpl implements ImportUriUiF
    * <!-- end-user-doc -->
    * @generated
    */
-  public ImportUriUiPackage getImportUriUiPackage()
+  public QuickfixCrossrefPackage getQuickfixCrossrefPackage()
   {
-    return (ImportUriUiPackage)getEPackage();
+    return (QuickfixCrossrefPackage)getEPackage();
   }
 
   /**
@@ -113,9 +113,9 @@ public class ImportUriUiFactoryImpl extends EFactoryImpl implements ImportUriUiF
    * @generated
    */
   @Deprecated
-  public static ImportUriUiPackage getPackage()
+  public static QuickfixCrossrefPackage getPackage()
   {
-    return ImportUriUiPackage.eINSTANCE;
+    return QuickfixCrossrefPackage.eINSTANCE;
   }
 
-} //ImportUriUiFactoryImpl
+} //QuickfixCrossrefFactoryImpl

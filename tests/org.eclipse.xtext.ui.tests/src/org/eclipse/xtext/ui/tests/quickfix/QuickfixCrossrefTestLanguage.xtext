@@ -7,7 +7,7 @@
  *******************************************************************************/
 grammar org.eclipse.xtext.ui.tests.quickfix.QuickfixCrossrefTestLanguage with org.eclipse.xtext.common.Terminals
 
-generate importUriUi "http://eclipse.org/xtext/quickfixCrossrefTestLanguage"
+generate quickfixCrossref "http://eclipse.org/xtext/quickfixCrossrefTestLanguage"
 
 Main : 
 	elements+=Element*;
