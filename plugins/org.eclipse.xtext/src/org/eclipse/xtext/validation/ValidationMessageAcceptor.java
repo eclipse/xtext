@@ -14,8 +14,8 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ValidationMessageAcceptor {
 
-	void acceptError(String message, EObject object, Integer feature, String code);
+	void acceptError(String message, EObject object, Integer feature, String code, String...issueData);
 	
-	void acceptWarning(String message, EObject object, Integer feature, String code);
+	void acceptWarning(String message, EObject object, Integer feature, String code, String... issueData);
 	
 }
