@@ -9,6 +9,7 @@
 package org.eclipse.xtext.ui.editor.utils;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.commands.ExecutionEvent;
 import org.eclipse.jface.preference.PreferenceConverter;
 import org.eclipse.jface.resource.DataFormatException;
 import org.eclipse.jface.resource.JFaceResources;
@@ -17,10 +18,15 @@ import org.eclipse.swt.graphics.Color;
 import org.eclipse.swt.graphics.Font;
 import org.eclipse.swt.graphics.FontData;
 import org.eclipse.swt.graphics.RGB;
+import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbenchPage;
+import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.handlers.HandlerUtil;
+import org.eclipse.xtext.ui.editor.XtextEditor;
 
 /**
- * @author Dennis H¸bner - Initial contribution and API
- *
+ * @author Dennis Hübner - Initial contribution and API
+ * @author Peter Friese
  */
 public class EditorUtils {
 
@@ -62,4 +68,25 @@ public class EditorUtils {
 			return null;
 		return colorFromString(StringConverter.asString(rgb));
 	}
+	
+	public static XtextEditor getActiveXtextEditor(ExecutionEvent event) {
+		IEditorPart activeEditor = HandlerUtil.getActiveEditor(event);
+		XtextEditor xtextEditor = (XtextEditor) activeEditor.getAdapter(XtextEditor.class);
+		return xtextEditor;
+	}
+
+	public static XtextEditor getActiveXtextEditor() {
+		IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+		IEditorPart activeEditor = activePage.getActiveEditor();
+		XtextEditor xtextEditor = (XtextEditor) activeEditor.getAdapter(XtextEditor.class);
+		return xtextEditor;
+	}
+
+	public static XtextEditor getXtextEditor(IEditorPart openEditor) {
+		if (openEditor != null) {
+			return (XtextEditor) openEditor.getAdapter(XtextEditor.class);
+		}
+		return null;
+	}
+	
 }

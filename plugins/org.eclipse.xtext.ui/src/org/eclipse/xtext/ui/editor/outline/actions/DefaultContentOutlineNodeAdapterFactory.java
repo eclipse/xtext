@@ -12,10 +12,9 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.emf.ecore.EClass;
-import org.eclipse.ui.IWorkbenchPage;
-import org.eclipse.ui.PlatformUI;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.outline.ContentOutlineNode;
+import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 
 /**
  * @author Peter Friese - Initial contribution and API
@@ -53,8 +52,7 @@ public class DefaultContentOutlineNodeAdapterFactory implements IContentOutlineN
 	}
 
 	private Object getUnderlyingResource() {
-		IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
-		XtextEditor activeEditor = (XtextEditor) activePage.getActiveEditor();
+		XtextEditor activeEditor = EditorUtils.getActiveXtextEditor();
 		if (activeEditor != null)
 			return activeEditor.getResource();
 		return null;

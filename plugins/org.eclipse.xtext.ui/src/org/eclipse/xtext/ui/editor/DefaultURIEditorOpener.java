@@ -23,6 +23,7 @@ import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.ide.IDE;
 import org.eclipse.xtext.resource.ILocationInFileProvider;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.TextLocation;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
@@ -30,8 +31,9 @@ import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import com.google.inject.Inject;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Köhnlein - Initial contribution and API
  * @author Sebastian Zarnekow - original coding
+ * @author Peter Friese
  */
 public class DefaultURIEditorOpener implements IURIEditorOpener {
 
@@ -79,8 +81,8 @@ public class DefaultURIEditorOpener implements IURIEditorOpener {
 
 	protected void selectAndReveal(IEditorPart openEditor, final URI uri, final EReference crossReference,
 			final int indexInList, final boolean select) {
-		if (openEditor != null && openEditor instanceof XtextEditor) {
-			final XtextEditor xtextEditor = (XtextEditor) openEditor;
+		final XtextEditor xtextEditor = EditorUtils.getXtextEditor(openEditor);
+		if (xtextEditor != null) {
 			if (uri.fragment() != null) {
 				xtextEditor.getDocument().readOnly(new IUnitOfWork.Void<XtextResource>() {
 					@Override

@@ -19,13 +19,13 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.jface.text.ITextSelection;
 import org.eclipse.search.ui.NewSearchUI;
-import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.xtext.resource.EObjectAtOffsetHelper;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 
@@ -35,7 +35,8 @@ import com.google.inject.Inject;
 import com.google.inject.Provider;
 
 /**
- * @author koehnlein - Initial contribution and API
+ * @author Jan Köhnlein - Initial contribution and API
+ * @author Peter Friese
  */
 public class FindReferencesHandler extends AbstractHandler {
 
@@ -81,21 +82,23 @@ public class FindReferencesHandler extends AbstractHandler {
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
 		try {
-			XtextEditor editor = (XtextEditor) HandlerUtil.getActiveEditor(event);
-			final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
-
-			IEObjectDescription eObjectDescription = editor.getDocument().readOnly(new EObjectResolver(selection));
-			if (eObjectDescription != null) {
-				ReferenceQuery referenceQuery = queryProvider.get();
-				String label = "Xtext References to " + eObjectDescription.getQualifiedName();
-				Iterator<IStorage> storages = storage2UriMapper.getStorages(eObjectDescription.getEObjectURI())
-						.iterator();
-				if (storages.hasNext()) {
-					label += " (" + storages.next().getFullPath().toString() + ")";
+			XtextEditor editor = EditorUtils.getActiveXtextEditor(event);
+			if (editor != null) {
+				final ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
+	
+				IEObjectDescription eObjectDescription = editor.getDocument().readOnly(new EObjectResolver(selection));
+				if (eObjectDescription != null) {
+					ReferenceQuery referenceQuery = queryProvider.get();
+					String label = "Xtext References to " + eObjectDescription.getQualifiedName();
+					Iterator<IStorage> storages = storage2UriMapper.getStorages(eObjectDescription.getEObjectURI())
+							.iterator();
+					if (storages.hasNext()) {
+						label += " (" + storages.next().getFullPath().toString() + ")";
+					}
+					referenceQuery.init(eObjectDescription.getEObjectURI(), label);
+					NewSearchUI.activateSearchResultView();
+					NewSearchUI.runQueryInBackground(referenceQuery);
 				}
-				referenceQuery.init(eObjectDescription.getEObjectURI(), label);
-				NewSearchUI.activateSearchResultView();
-				NewSearchUI.runQueryInBackground(referenceQuery);
 			}
 		} catch (Exception e) {
 			LOG.error("Error finding references", e);

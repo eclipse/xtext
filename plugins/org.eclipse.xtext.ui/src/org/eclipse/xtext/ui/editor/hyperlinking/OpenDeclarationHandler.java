@@ -17,8 +17,8 @@ import org.eclipse.jface.text.Region;
 import org.eclipse.jface.text.hyperlink.IHyperlink;
 import org.eclipse.jface.text.hyperlink.IHyperlinkDetector;
 import org.eclipse.jface.text.source.ISourceViewer;
-import org.eclipse.ui.handlers.HandlerUtil;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 
 import com.google.inject.Inject;
 
@@ -31,20 +31,20 @@ public class OpenDeclarationHandler extends AbstractHandler {
 	private IHyperlinkDetector detector;
 
 	public Object execute(ExecutionEvent event) throws ExecutionException {
-		
-		XtextEditor editor = (XtextEditor) HandlerUtil.getActiveEditor(event);
-		ITextSelection selection = (ITextSelection) editor.getSelectionProvider().getSelection();
-
-		IRegion region = new Region(selection.getOffset(), selection.getLength());
-
-		ISourceViewer internalSourceViewer = editor.getInternalSourceViewer();
-
-		IHyperlink[] hyperlinks = getDetector().detectHyperlinks(internalSourceViewer, region, false);
-		if (hyperlinks != null && hyperlinks.length > 0) {
-			IHyperlink hyperlink = hyperlinks[0];
-			hyperlink.open();
-		}
-		
+		XtextEditor xtextEditor = EditorUtils.getActiveXtextEditor(event);
+		if (xtextEditor != null) {
+			ITextSelection selection = (ITextSelection) xtextEditor.getSelectionProvider().getSelection();
+	
+			IRegion region = new Region(selection.getOffset(), selection.getLength());
+	
+			ISourceViewer internalSourceViewer = xtextEditor.getInternalSourceViewer();
+	
+			IHyperlink[] hyperlinks = getDetector().detectHyperlinks(internalSourceViewer, region, false);
+			if (hyperlinks != null && hyperlinks.length > 0) {
+				IHyperlink hyperlink = hyperlinks[0];
+				hyperlink.open();
+			}
+		}		
 		return null;
 	}
 
