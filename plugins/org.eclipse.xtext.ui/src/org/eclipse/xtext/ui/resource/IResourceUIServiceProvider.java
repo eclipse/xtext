@@ -11,6 +11,7 @@ import org.eclipse.core.resources.IStorage;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
+import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 
 import com.google.inject.ImplementedBy;
 
@@ -34,4 +35,8 @@ public interface IResourceUIServiceProvider extends IResourceServiceProvider {
 	 */
 	boolean canHandle(URI uri, IStorage storage);
 	
+	/**
+	 * The {@link IURIEditorOpener} of the language
+	 */
+	IURIEditorOpener getURIEditorOpener();
 }

@@ -5,22 +5,19 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-package org.eclipse.xtext.ui.editor;
+package org.eclipse.xtext.ui;
 
-import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EReference;
-import org.eclipse.ui.IEditorPart;
+import java.lang.annotation.Retention;
+import java.lang.annotation.RetentionPolicy;
 
-import com.google.inject.ImplementedBy;
+import com.google.inject.BindingAnnotation;
 
 /**
+ * An annotation marking a binding as language specific in contrast to a global service.
+ * 
  * @author koehnlein - Initial contribution and API
  */
-@ImplementedBy(GlobalURIEditorOpener.class)
-public interface IURIEditorOpener {
-
-	IEditorPart open(URI uri, boolean select);
-
-	IEditorPart open(URI referenceOwnerURI, EReference reference, int indexInList, boolean select);
-	
+@Retention(RetentionPolicy.RUNTIME)
+@BindingAnnotation
+public @interface LanguageSpecific {
 }

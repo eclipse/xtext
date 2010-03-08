@@ -11,6 +11,7 @@ import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.containers.ContainerStateProvider;
 import org.eclipse.xtext.ui.containers.JavaProjectsState;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
+import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.notification.IStateChangeEventBroker;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 
@@ -33,7 +34,9 @@ public class SharedStateModule extends AbstractGenericModule {
 	public Provider<IDirtyStateManager> provideIDirtyStateManager() {
 		return Access.getIDirtyStateManager();
 	}
-	
+	public Provider<IURIEditorOpener> provideIURIEditorOpener() {
+		return Access.getIURIEditorOpener();
+	}
 	public Provider<? extends IAllContainersState> provideIAllContainersState() {
 		return Access.provider(JavaProjectsState.class);
 	}
