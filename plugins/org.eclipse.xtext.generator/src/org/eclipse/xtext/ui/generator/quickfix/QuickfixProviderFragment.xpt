@@ -28,7 +28,7 @@ public class «getQuickfixProviderName().toSimpleName()» extends DefaultQuickfixP
 
 //	@Fix(MyJavaValidator.INVALID_TYPE_NAME)
 //	public void capitalizeName(final Issue issue, IssueResolutionAcceptor acceptor) {
-//		acceptor.accept(issue, "Capitalize name", "Capizalize name of type", "upcase.png", new IModification() {
+//		acceptor.accept(issue, "Capitalize name", "Capitalize name of type", "upcase.png", new IModification() {
 //			public void apply(IModificationContext context) throws BadLocationException {
 //				IXtextDocument xtextDocument = context.getXtextDocument();
 //				String firstLetter = xtextDocument.get(issue.getOffset(), 1);
