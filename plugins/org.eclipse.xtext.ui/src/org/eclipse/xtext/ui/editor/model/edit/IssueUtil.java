@@ -38,6 +38,7 @@ public class IssueUtil {
 		issue.setLength(MarkerUtilities.getCharEnd(marker)-MarkerUtilities.getCharStart(marker));
 		
 		issue.setCode(markerUtil.getCode(marker));
+		issue.setData(markerUtil.getIssueData(marker));
 		issue.setUriToProblem(markerUtil.getUriToProblem(marker));
 		issue.setSeverity(markerUtil.getSeverity(marker));
 		// Note, isSyntaxError is unset, but currently the api does not allow fixing

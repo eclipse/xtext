@@ -10,6 +10,7 @@ package org.eclipse.xtext.ui.editor.validation;
 import org.eclipse.core.resources.IMarker;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Issue;
 
 /**
@@ -33,6 +34,9 @@ public class MarkerCreator {
 		marker.setAttribute(Issue.CODE_KEY, issue.getCode());
 		if (issue.getUriToProblem()!=null) 
 			marker.setAttribute(Issue.URI_KEY, issue.getUriToProblem().toString());
+		if(issue.getData() != null && issue.getData().length > 0) {
+			marker.setAttribute(Issue.DATA_KEY, Strings.pack(issue.getData()));
+		}
 	}
 
 	private Object getSeverity(Issue issue) {

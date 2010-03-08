@@ -146,9 +146,9 @@
          point="org.eclipse.core.resources.markers">
       <super type="org.eclipse.emf.ecore.diagnostic"/>
       <persistent value="true"/>
-      <attribute
-            name="code">
-      </attribute>
+      <attribute name="CODE_KEY"/>
+      <attribute name="DATA_KEY"/>
+      <attribute name="URI_KEY"/>
    </extension>
   <extension
          id="org.eclipse.xtext.ui.check.fast"

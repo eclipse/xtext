@@ -41,6 +41,10 @@ public class XtextAnnotation extends Annotation implements IAnnotationPresentati
 		return issue.getCode();
 	}
 	
+	public String[] getIssueData() {
+		return issue.getData();
+	}
+	
 	public IXtextDocument getDocument() {
 		return document;
 	}

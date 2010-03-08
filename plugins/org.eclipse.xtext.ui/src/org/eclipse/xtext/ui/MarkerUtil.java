@@ -13,6 +13,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.ui.texteditor.MarkerAnnotation;
 import org.eclipse.xtext.ui.editor.validation.XtextAnnotation;
+import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Issue;
 import org.eclipse.xtext.validation.Issue.Severity;
 
@@ -38,6 +39,22 @@ public class MarkerUtil {
 		return marker.getAttribute(Issue.CODE_KEY, null);
 	}
 
+	public String[] getIssueData(Annotation annotation) {
+		if (annotation instanceof MarkerAnnotation) {
+			MarkerAnnotation ma = (MarkerAnnotation) annotation;
+			return getIssueData(ma.getMarker());
+		}
+		if (annotation instanceof XtextAnnotation) {
+			XtextAnnotation xa = (XtextAnnotation) annotation;
+			return xa.getIssueData();	
+		}
+		return null;
+	}
+	
+	public String[] getIssueData(IMarker marker) {
+		return Strings.unpack(marker.getAttribute(Issue.DATA_KEY, null));
+	}
+	
 	public URI getUriToProblem(IMarker marker) {
 		String uri = marker.getAttribute(Issue.URI_KEY, null);
 		return uri != null ? URI.createURI(uri) : null;
