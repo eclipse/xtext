@@ -17,6 +17,7 @@ import com.google.inject.Inject;
 /**
  * @author Knut Wannheden - Initial contribution and API
  */
+@Deprecated
 public class DefaultDocumentEditor implements IDocumentEditor {
 
 	@Inject
