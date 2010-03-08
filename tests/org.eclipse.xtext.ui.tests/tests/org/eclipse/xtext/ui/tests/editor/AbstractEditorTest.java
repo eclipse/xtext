@@ -14,6 +14,7 @@ import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
 import org.eclipse.ui.part.FileEditorInput;
 import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.ui.editor.utils.EditorUtils;
 import org.eclipse.xtext.ui.tests.workbench.AbstractWorkbenchTest;
 
 /**
@@ -36,14 +37,15 @@ public abstract class AbstractEditorTest extends AbstractWorkbenchTest {
 	@SuppressWarnings("restriction")
 	protected XtextEditor openEditor(IFile file) throws Exception {
 		IEditorPart openEditor = openEditor(file, getEditorId());
-		if (openEditor instanceof XtextEditor) {
-			return (XtextEditor) openEditor;
+		XtextEditor xtextEditor = EditorUtils.getXtextEditor(openEditor);
+		if (xtextEditor != null) {
+			return xtextEditor;
 		}
 		else if (openEditor instanceof org.eclipse.ui.internal.ErrorEditorPart) {
 			fail("Could not open XtextEditor. Editor produced errors during initialization.");
 		}
 		else {
-			fail("Opened Editor with id:" + getEditorId() + ", is not a BaseXtextEditor");
+			fail("Opened Editor with id:" + getEditorId() + ", is not an XtextEditor");
 		}
 		return null;
 	}

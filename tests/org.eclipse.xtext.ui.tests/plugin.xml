@@ -3327,6 +3327,17 @@
             class="org.eclipse.xtext.ui.tests.quickfix.ui.QuickfixCrossrefTestLanguageExecutableExtensionFactory:org.eclipse.xtext.ui.editor.quickfix.MarkerResolutionGenerator">
       </markerResolutionGenerator>
    </extension>
+   
+   <extension
+         point="org.eclipse.ui.editors">
+      <editor
+            name="Sample Multi-page Editor"
+            extensions="testlanguage"
+            icon="icons/editor.gif"
+            class="org.eclipse.xtext.ui.tests.editor.mpe.MultiPageEditor"
+            id="org.eclipse.xtext.ui.tests.mpe.MultiPageEditor">
+      </editor>
+   </extension>
 
 
 </plugin>

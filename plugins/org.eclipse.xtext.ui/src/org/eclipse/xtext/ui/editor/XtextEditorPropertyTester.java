@@ -8,22 +8,28 @@
 package org.eclipse.xtext.ui.editor;
 
 import org.eclipse.core.expressions.PropertyTester;
+import org.eclipse.core.runtime.IAdaptable;
 import org.eclipse.xtext.Constants;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Peter Friese
  */
 public class XtextEditorPropertyTester extends PropertyTester {
 
 	public XtextEditorPropertyTester() {
 		super();
 	}
-	
+
 	public boolean test(Object receiver, String property, Object[] args, Object expectedValue) {
-		if (receiver instanceof XtextEditor) {
-			XtextEditor editor = (XtextEditor) receiver;
-			if (Constants.LANGUAGE_NAME.equals(property))
-				return editor.getLanguageName().equals(expectedValue);
+		if (receiver instanceof IAdaptable) {
+			IAdaptable adaptable = (IAdaptable) receiver;
+			XtextEditor xtextEditor = (XtextEditor) adaptable.getAdapter(XtextEditor.class);
+			if (xtextEditor != null) {
+				if (Constants.LANGUAGE_NAME.equals(property)) {
+					return xtextEditor.getLanguageName().equals(expectedValue);
+				}
+			}
 		}
 		return false;
 	}

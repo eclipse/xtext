@@ -28,9 +28,9 @@
             id="isActiveEditorAnInstanceOfXtextEditor">
          <with
                variable="activeEditor">
-            <instanceof
-                  value="org.eclipse.xtext.ui.editor.XtextEditor">
-            </instanceof>
+            <adapt
+                  type="org.eclipse.xtext.ui.editor.XtextEditor">
+            </adapt>
          </with>
       </definition>
    </extension>
@@ -271,9 +271,13 @@
 	<extension
 		point="org.eclipse.ui.menus">
 		<menuContribution locationURI="popup:#TextEditorContext?after=group.open">
-			<command commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration">
-				<visibleWhen checkEnabled="false">
-					<reference definitionId="isActiveEditorAnInstanceOfXtextEditor"/>
+			<command commandId="org.eclipse.xtext.ui.editor.hyperlinking.OpenDeclaration"
+				style="push">
+				<visibleWhen 
+					checkEnabled="false">
+ 					<reference 
+ 						definitionId="isActiveEditorAnInstanceOfXtextEditor">
+ 					</reference>
 				</visibleWhen>
 			</command>
 		</menuContribution>
