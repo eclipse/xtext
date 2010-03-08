@@ -31,6 +31,7 @@ import org.eclipse.xtext.util.SimpleCache;
 import com.google.common.base.Function;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
+import com.google.inject.internal.Lists;
 
 /**
  * Allows subclasses to specify invariants in a declarative manner using
@@ -300,41 +301,41 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		warning(string, feature, null);
 	}
 
-	protected void warning(String string, Integer feature, String code) {
-		warning(string, state.get().currentObject, feature, code);
+	protected void warning(String string, Integer feature, String code, String... issueData) {
+		warning(string, state.get().currentObject, feature, code, issueData);
 	}
 
 	protected void warning(String string, EObject source, Integer feature) {
 		warning(string, source, feature, null);
 	}
 
-	protected void warning(String string, EObject source, Integer feature, String code) {
-		getMessageAcceptor().acceptWarning(string, source, feature, code);
+	protected void warning(String string, EObject source, Integer feature, String code, String... issueData) {
+		getMessageAcceptor().acceptWarning(string, source, feature, code, issueData);
 	}
 	
-	public void acceptWarning(String message, EObject object, Integer feature, String code) {
-		state.get().chain.add(new DiagnosticImpl(Diagnostic.WARNING, message, object, feature, code, state.get().currentCheckType));
+	public void acceptWarning(String message, EObject object, Integer feature, String code, String... issueData) {
+		state.get().chain.add(new DiagnosticImpl(Diagnostic.WARNING, message, object, feature, state.get().currentCheckType, code, issueData));
 	}
 
 	protected void error(String string, Integer feature) {
 		error(string, feature, null);
 	}
 
-	protected void error(String string, Integer feature, String code) {
-		error(string, state.get().currentObject, feature, code);
+	protected void error(String string, Integer feature, String code, String... issueData) {
+		error(string, state.get().currentObject, feature, code, issueData);
 	}
 
 	protected void error(String string, EObject source, Integer feature) {
 		error(string, source, feature, null);
 	}
 
-	protected void error(String string, EObject source, Integer feature, String code) {
-		getMessageAcceptor().acceptError(string, source, feature, code);
+	protected void error(String string, EObject source, Integer feature, String code, String... issueData) {
+		getMessageAcceptor().acceptError(string, source, feature, code, issueData);
 	}
 	
-	public void acceptError(String message, EObject object, Integer feature, String code) {
+	public void acceptError(String message, EObject object, Integer feature, String code, String... issueData) {
 		this.state.get().hasErrors = true;
-		state.get().chain.add(new DiagnosticImpl(Diagnostic.ERROR, message, object, feature, code, state.get().currentCheckType));
+		state.get().chain.add(new DiagnosticImpl(Diagnostic.ERROR, message, object, feature, state.get().currentCheckType, code, issueData));
 	}
 
 	protected void assertTrue(String message, Integer feature, boolean executedPredicate) {
@@ -438,7 +439,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 
 	public static class DiagnosticImpl implements Diagnostic {
 
-		private DiagnosticImpl(int severity, String message, EObject source, Integer feature, String issueCode, CheckType checkType) {
+		private DiagnosticImpl(int severity, String message, EObject source, Integer feature, CheckType checkType, String issueCode, String... issueData) {
 			super();
 			this.severity = severity;
 			this.message = message;
@@ -446,6 +447,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 			this.feature = feature;
 			this.issueCode = issueCode;
 			this.checkType = checkType;
+			this.issueData = issueData;
 		}
 
 		private final String message;
@@ -454,6 +456,7 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		private final int severity;
 		private final CheckType checkType;
 		private final String issueCode;
+		private final String[] issueData;
 
 		public List<Diagnostic> getChildren() {
 			return Collections.emptyList();
@@ -467,10 +470,13 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		}
 
 		public List<?> getData() {
-			List<Object> result = new ArrayList<Object>(2);
+			List<Object> result = Lists.newArrayList();
 			result.add(source);
 			if (feature != null)
 				result.add(feature);
+			if(issueData != null) {
+				result.add(issueData);
+			}
 			return result;
 		}
 
@@ -496,6 +502,10 @@ public abstract class AbstractDeclarativeValidator extends AbstractInjectableVal
 		
 		public String getIssueCode() {
 			return issueCode;
+		}
+		
+		public String[] getIssueData() {
+			return issueData;
 		}
 		
 		public CheckType getCheckType() {

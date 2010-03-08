@@ -13,20 +13,21 @@ import org.eclipse.emf.common.util.URI;
  * @author Sven Efftinge - Initial contribution and API
  */
 public interface Issue {
-	
+
 	enum Severity {
 		INFO, WARNING, ERROR
 	}
 
 	String CODE_KEY = "CODE_KEY";
 	String URI_KEY = "URI_KEY";
-
+	String DATA_KEY = "DATA_KEY";
+	
 	Severity getSeverity();
 
 	String getMessage();
 
 	String getCode();
-	
+
 	CheckType getType();
 
 	URI getUriToProblem();
@@ -39,6 +40,8 @@ public interface Issue {
 
 	boolean isSyntaxError();
 
+	String[] getData();
+	
 	static class IssueImpl implements Issue {
 
 		private Integer length, lineNumber, offset;
@@ -47,6 +50,7 @@ public interface Issue {
 		private URI uriToProblem;
 		private Severity severity;
 		private CheckType type;
+		private String[] data;
 
 		public Integer getLength() {
 			return length;
@@ -103,7 +107,15 @@ public interface Issue {
 		public void setCode(String code) {
 			this.code = code;
 		}
-		
+
+		public String[] getData() {
+			return data;
+		}
+
+		public void setData(String[] data) {
+			this.data = data;
+		}
+
 		public CheckType getType() {
 			return type;
 		}

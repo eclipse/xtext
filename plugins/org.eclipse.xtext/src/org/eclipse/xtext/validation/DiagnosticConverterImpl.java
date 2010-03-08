@@ -78,6 +78,7 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 			DiagnosticImpl diagnosticImpl = (DiagnosticImpl) diagnostic;
 			issue.setType(diagnosticImpl.getCheckType());
 			issue.setCode(diagnosticImpl.getIssueCode());
+			issue.setData(diagnosticImpl.getIssueData());
 		}
 		
 		//		marker.put(IXtextResourceChecker.DIAGNOSTIC_KEY, diagnostic);

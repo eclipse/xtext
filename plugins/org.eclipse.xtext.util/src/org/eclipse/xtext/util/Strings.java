@@ -14,6 +14,8 @@ import java.util.Iterator;
 import java.util.List;
 
 import com.google.common.base.Function;
+import com.google.common.collect.Iterables;
+import com.google.inject.internal.Lists;
 
 /**
  * @author Jan Köhnlein - Initial contribution and API
@@ -23,8 +25,8 @@ public class Strings {
 	public static final String[] EMPTY_ARRAY = new String[0];
 
 	public static boolean equalsIgnoreWhitespace(String left, String right) {
-		String l = left==null?"":left.replaceAll("\\s","");
-		String r = right==null?"":right.replaceAll("\\s","");
+		String l = left == null ? "" : left.replaceAll("\\s", "");
+		String r = right == null ? "" : right.replaceAll("\\s", "");
 		return l.equals(r);
 	}
 
@@ -44,8 +46,8 @@ public class Strings {
 	public static String concat(String separator, List<String> list) {
 		return concat(separator, list, 0);
 	}
-	
-	public static <T> String toString(Collection<T> list, Function<T,String> toString, String delim) {
+
+	public static <T> String toString(Collection<T> list, Function<T, String> toString, String delim) {
 		StringBuffer buffer = new StringBuffer();
 		for (Iterator<T> iterator = list.iterator(); iterator.hasNext();) {
 			T t = iterator.next();
@@ -162,8 +164,7 @@ public class Strings {
 						}
 					}
 					out[outLen++] = (char) value;
-				}
-				else {
+				} else {
 					if (aChar == 't')
 						aChar = '\t';
 					else if (aChar == 'r')
@@ -176,16 +177,15 @@ public class Strings {
 						aChar = '\b';
 					else if (aChar == '"')
 						aChar = '\"';
-					else if (aChar == '\'') 
+					else if (aChar == '\'')
 						aChar = '\'';
-					else if (aChar == '\\') 
+					else if (aChar == '\\')
 						aChar = '\\';
-					else 
+					else
 						throw new IllegalArgumentException("Illegal escape character \\" + aChar);
 					out[outLen++] = aChar;
 				}
-			}
-			else {
+			} else {
 				out[outLen++] = aChar;
 			}
 		}
@@ -195,7 +195,7 @@ public class Strings {
 	public static String convertToJavaString(String theString) {
 		return convertToJavaString(theString, true);
 	}
-	
+
 	/**
 	 * Mostly copied from {@link java.util.Properties#saveConvert}
 	 */
@@ -260,8 +260,7 @@ public class Strings {
 						outBuffer.append(toHex((aChar >> 8) & 0xF));
 						outBuffer.append(toHex((aChar >> 4) & 0xF));
 						outBuffer.append(toHex(aChar & 0xF));
-					}
-					else {
+					} else {
 						outBuffer.append(aChar);
 					}
 			}
@@ -279,8 +278,8 @@ public class Strings {
 	/**
 	 * Copied from {@link java.util.Properties}
 	 */
-	private static final char[] hexDigit = {
-		'0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F' };
+	private static final char[] hexDigit = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E',
+			'F' };
 
 	/**
 	 * @param value
@@ -291,13 +290,48 @@ public class Strings {
 		List<String> result = new ArrayList<String>();
 		int lastIndex = 0;
 		int index = value.indexOf(delimiter, lastIndex);
-		while (index!=-1) {
+		while (index != -1) {
 			result.add(value.substring(lastIndex, index));
-			lastIndex = index+delimiter.length();
+			lastIndex = index + delimiter.length();
 			index = value.indexOf(delimiter, lastIndex);
 		}
 		result.add(value.substring(lastIndex));
 		return result;
+	}
+
+	public static char SEPARATOR = ':';
+
+	public static String pack(String[] strings) {
+		if (strings != null && strings.length > 0) {
+			StringBuffer buffer = new StringBuffer();
+			for (String s : strings) {
+				buffer.append(s.length());
+				buffer.append(SEPARATOR);
+				buffer.append(s);
+			}
+			return buffer.toString();
+		}
+		return null;
+	}
+
+	public static String[] unpack(String packed) {
+		if (isEmpty(packed)) {
+			return null;
+		} else {
+			List<String> strings = Lists.newArrayList();
+			unpack(strings, packed);
+			return Iterables.newArray(strings, String.class);
+		}
+	}
+
+	private static void unpack(List<String> strings, String packed) {
+		int delimiterIndex = packed.indexOf(":");
+		int size = Integer.parseInt(packed.substring(0, delimiterIndex));
+		int endIndex = delimiterIndex + 1 + size;
+		strings.add(packed.substring(delimiterIndex + 1, endIndex));
+		if (endIndex < packed.length()) {
+			unpack(strings, packed.substring(endIndex));
+		}
 	}
 
 }
