@@ -11,11 +11,20 @@ package org.eclipse.xtext.ui.tests.workbench;
 import static org.eclipse.xtext.junit.util.IResourcesSetupUtil.*;
 import junit.framework.TestCase;
 
+import org.eclipse.core.resources.IFile;
+import org.eclipse.core.resources.IResource;
+import org.eclipse.core.runtime.CoreException;
+import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.swt.widgets.Display;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.IWorkbenchWindow;
+import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
+import org.eclipse.ui.ide.IDE;
+import org.eclipse.xtext.junit.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.ui.editor.XtextEditor;
+import org.eclipse.xtext.util.StringInputStream;
 
 /**
  * Abstract base class for test classes that need access to the workbench.
@@ -85,4 +94,6 @@ public abstract class AbstractWorkbenchTest extends TestCase {
 	protected IWorkbench getWorkbench() {
 		return PlatformUI.getWorkbench();
 	}
+	
+
 }

@@ -3324,10 +3324,11 @@
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
        uri = "http://eclipse.org/xtext/quickfixCrossrefTestLanguage" 
-       class = "org.eclipse.xtext.ui.tests.quickfix.importUriUi.ImportUriUiPackage"
+       class = "org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.QuickfixCrossrefPackage"
        genModel = "org/eclipse/xtext/ui/tests/quickfix/QuickfixCrossrefTestLanguage.genmodel" /> 
 	
   </extension>
+
 
 
     <extension
@@ -3463,6 +3464,7 @@
             uriExtension="quickfixcrossreftestlanguage">
         </resourceServiceProvider>
     </extension>
+
 
    <!-- quickfix marker resolution generator -->
    <extension
