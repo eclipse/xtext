@@ -17,6 +17,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug30
 import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Model;
 import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Reference;
 import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.GroupLoopedModel;
+import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedAlternativeModel;
 import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedModel;
 import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.MandatoryModel;
 import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model;
@@ -66,6 +67,13 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * @generated
    */
   private EClass groupLoopedModelEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass loopedAlternativeModelEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -213,9 +221,19 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
-  public EReference getModel_Model()
+  public EReference getModel_Fifth()
   {
     return (EReference)modelEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_Model()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(5);
   }
 
   /**
@@ -503,6 +521,76 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getLoopedAlternativeModel()
+  {
+    return loopedAlternativeModelEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLoopedAlternativeModel_Visibility()
+  {
+    return (EAttribute)loopedAlternativeModelEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLoopedAlternativeModel_Static()
+  {
+    return (EAttribute)loopedAlternativeModelEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLoopedAlternativeModel_Synchronized()
+  {
+    return (EAttribute)loopedAlternativeModelEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLoopedAlternativeModel_Abstract()
+  {
+    return (EAttribute)loopedAlternativeModelEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLoopedAlternativeModel_Final()
+  {
+    return (EAttribute)loopedAlternativeModelEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getLoopedAlternativeModel_Name()
+  {
+    return (EAttribute)loopedAlternativeModelEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EClass getBug304681Model()
   {
     return bug304681ModelEClass;
@@ -633,6 +721,7 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
     createEReference(modelEClass, MODEL__SECOND);
     createEReference(modelEClass, MODEL__THRIRD);
     createEReference(modelEClass, MODEL__FORTH);
+    createEReference(modelEClass, MODEL__FIFTH);
     createEReference(modelEClass, MODEL__MODEL);
 
     simpleModelEClass = createEClass(SIMPLE_MODEL);
@@ -666,6 +755,14 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
     createEAttribute(groupLoopedModelEClass, GROUP_LOOPED_MODEL__ABSTRACT);
     createEAttribute(groupLoopedModelEClass, GROUP_LOOPED_MODEL__FINAL);
     createEAttribute(groupLoopedModelEClass, GROUP_LOOPED_MODEL__NAME);
+
+    loopedAlternativeModelEClass = createEClass(LOOPED_ALTERNATIVE_MODEL);
+    createEAttribute(loopedAlternativeModelEClass, LOOPED_ALTERNATIVE_MODEL__VISIBILITY);
+    createEAttribute(loopedAlternativeModelEClass, LOOPED_ALTERNATIVE_MODEL__STATIC);
+    createEAttribute(loopedAlternativeModelEClass, LOOPED_ALTERNATIVE_MODEL__SYNCHRONIZED);
+    createEAttribute(loopedAlternativeModelEClass, LOOPED_ALTERNATIVE_MODEL__ABSTRACT);
+    createEAttribute(loopedAlternativeModelEClass, LOOPED_ALTERNATIVE_MODEL__FINAL);
+    createEAttribute(loopedAlternativeModelEClass, LOOPED_ALTERNATIVE_MODEL__NAME);
 
     bug304681ModelEClass = createEClass(BUG304681_MODEL);
     createEAttribute(bug304681ModelEClass, BUG304681_MODEL__SHORT_DESCRIPTION);
@@ -720,6 +817,7 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
     initEReference(getModel_Second(), this.getMandatoryModel(), null, "second", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_Thrird(), this.getLoopedModel(), null, "thrird", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_Forth(), this.getGroupLoopedModel(), null, "forth", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getModel_Fifth(), this.getLoopedAlternativeModel(), null, "fifth", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getModel_Model(), this.getBug304681Model(), null, "model", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(simpleModelEClass, SimpleModel.class, "SimpleModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -753,6 +851,14 @@ public class UnorderedGroupsTestPackageImpl extends EPackageImpl implements Unor
     initEAttribute(getGroupLoopedModel_Abstract(), ecorePackage.getEString(), "abstract", null, 0, -1, GroupLoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getGroupLoopedModel_Final(), ecorePackage.getEString(), "final", null, 0, -1, GroupLoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getGroupLoopedModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, GroupLoopedModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(loopedAlternativeModelEClass, LoopedAlternativeModel.class, "LoopedAlternativeModel", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getLoopedAlternativeModel_Visibility(), ecorePackage.getEString(), "visibility", null, 0, -1, LoopedAlternativeModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoopedAlternativeModel_Static(), ecorePackage.getEString(), "static", null, 0, -1, LoopedAlternativeModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoopedAlternativeModel_Synchronized(), ecorePackage.getEString(), "synchronized", null, 0, -1, LoopedAlternativeModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoopedAlternativeModel_Abstract(), ecorePackage.getEString(), "abstract", null, 0, -1, LoopedAlternativeModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoopedAlternativeModel_Final(), ecorePackage.getEString(), "final", null, 0, -1, LoopedAlternativeModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getLoopedAlternativeModel_Name(), ecorePackage.getEString(), "name", null, 0, 1, LoopedAlternativeModel.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     initEClass(bug304681ModelEClass, Bug304681Model.class, "Bug304681Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getBug304681Model_ShortDescription(), ecorePackage.getEString(), "shortDescription", null, 0, 1, Bug304681Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

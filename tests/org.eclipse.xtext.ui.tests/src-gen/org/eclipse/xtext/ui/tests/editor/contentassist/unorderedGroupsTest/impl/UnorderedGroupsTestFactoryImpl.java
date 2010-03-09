@@ -72,6 +72,7 @@ public class UnorderedGroupsTestFactoryImpl extends EFactoryImpl implements Unor
       case UnorderedGroupsTestPackage.MANDATORY_MODEL: return createMandatoryModel();
       case UnorderedGroupsTestPackage.LOOPED_MODEL: return createLoopedModel();
       case UnorderedGroupsTestPackage.GROUP_LOOPED_MODEL: return createGroupLoopedModel();
+      case UnorderedGroupsTestPackage.LOOPED_ALTERNATIVE_MODEL: return createLoopedAlternativeModel();
       case UnorderedGroupsTestPackage.BUG304681_MODEL: return createBug304681Model();
       case UnorderedGroupsTestPackage.BUG304681_FEATURE: return createBug304681Feature();
       case UnorderedGroupsTestPackage.BUG304681_ATTRIBUTE: return createBug304681Attribute();
@@ -134,6 +135,17 @@ public class UnorderedGroupsTestFactoryImpl extends EFactoryImpl implements Unor
   {
     GroupLoopedModelImpl groupLoopedModel = new GroupLoopedModelImpl();
     return groupLoopedModel;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public LoopedAlternativeModel createLoopedAlternativeModel()
+  {
+    LoopedAlternativeModelImpl loopedAlternativeModel = new LoopedAlternativeModelImpl();
+    return loopedAlternativeModel;
   }
 
   /**

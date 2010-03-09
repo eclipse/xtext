@@ -14,6 +14,7 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UnorderedGroupsTestLanguage.ecore#//Model/second"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UnorderedGroupsTestLanguage.ecore#//Model/thrird"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UnorderedGroupsTestLanguage.ecore#//Model/forth"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UnorderedGroupsTestLanguage.ecore#//Model/fifth"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference UnorderedGroupsTestLanguage.ecore#//Model/model"/>
     </genClasses>
     <genClasses ecoreClass="UnorderedGroupsTestLanguage.ecore#//SimpleModel">
@@ -47,6 +48,14 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//GroupLoopedModel/abstract"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//GroupLoopedModel/final"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//GroupLoopedModel/name"/>
+    </genClasses>
+    <genClasses ecoreClass="UnorderedGroupsTestLanguage.ecore#//LoopedAlternativeModel">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//LoopedAlternativeModel/visibility"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//LoopedAlternativeModel/static"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//LoopedAlternativeModel/synchronized"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//LoopedAlternativeModel/abstract"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//LoopedAlternativeModel/final"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//LoopedAlternativeModel/name"/>
     </genClasses>
     <genClasses ecoreClass="UnorderedGroupsTestLanguage.ecore#//Bug304681Model">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute UnorderedGroupsTestLanguage.ecore#//Bug304681Model/shortDescription"/>

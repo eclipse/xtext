@@ -19,6 +19,7 @@ import org.eclipse.emf.ecore.EObject;
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getSecond <em>Second</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getThrird <em>Thrird</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getForth <em>Forth</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getFifth <em>Fifth</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getModel <em>Model</em>}</li>
  * </ul>
  * </p>
@@ -132,6 +133,32 @@ public interface Model extends EObject
    * @generated
    */
   void setForth(GroupLoopedModel value);
+
+  /**
+   * Returns the value of the '<em><b>Fifth</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <p>
+   * If the meaning of the '<em>Fifth</em>' containment reference isn't clear,
+   * there really should be more of a description here...
+   * </p>
+   * <!-- end-user-doc -->
+   * @return the value of the '<em>Fifth</em>' containment reference.
+   * @see #setFifth(LoopedAlternativeModel)
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.UnorderedGroupsTestPackage#getModel_Fifth()
+   * @model containment="true"
+   * @generated
+   */
+  LoopedAlternativeModel getFifth();
+
+  /**
+   * Sets the value of the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getFifth <em>Fifth</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @param value the new value of the '<em>Fifth</em>' containment reference.
+   * @see #getFifth()
+   * @generated
+   */
+  void setFifth(LoopedAlternativeModel value);
 
   /**
    * Returns the value of the '<em><b>Model</b></em>' containment reference.

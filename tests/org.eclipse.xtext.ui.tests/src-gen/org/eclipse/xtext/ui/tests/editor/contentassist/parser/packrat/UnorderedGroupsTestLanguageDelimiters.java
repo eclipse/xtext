@@ -14,7 +14,7 @@ public final class UnorderedGroupsTestLanguageDelimiters {
 	}
 	
     
-	public static final ICharacterClass keyword$21$Delimiter = ICharacterClass.Factory.join(
+	public static final ICharacterClass keyword$25$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.create('_'),
@@ -23,9 +23,9 @@ public final class UnorderedGroupsTestLanguageDelimiters {
 
 	public static final ICharacterClass keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 
-	public static final ISequenceMatcher ruleCall$44$Delimiter = new SetBasedKeywordMatcher(
-		"bug304681", "public", "private", "protected", "static", "synchronized", "abstract", "final", "class", "short", "long", "uid", "flag", "attr", "ref");
+	public static final ISequenceMatcher ruleCall$48$Delimiter = new SetBasedKeywordMatcher(
+		"bug304681", "public", "private", "protected", "static", "synchronized", "abstract", "final", "class", "before", "after", "short", "long", "uid", "flag", "attr", "ref");
 
-	public static final ISequenceMatcher ruleCall$124$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static final ISequenceMatcher ruleCall$154$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 
 }

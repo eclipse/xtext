@@ -29,6 +29,8 @@ public final class UnorderedGroupsTestLanguageModelConsumer extends NonTerminalC
 
 	private INonTerminalConsumer groupLoopedModelConsumer;
 
+	private INonTerminalConsumer loopedAlternativeModelConsumer;
+
 	private INonTerminalConsumer loopedModelConsumer;
 
 	private INonTerminalConsumer mandatoryModelConsumer;
@@ -77,11 +79,21 @@ public final class UnorderedGroupsTestLanguageModelConsumer extends NonTerminalC
 
 	private IElementConsumer ruleCall$21$Consumer;
 
+	private IElementConsumer group$22$Consumer;
+
+	private IElementConsumer keyword$23$Consumer;
+
+	private IElementConsumer assignment$24$Consumer;
+
+	private IElementConsumer ruleCall$25$Consumer;
+
 	private ICharacterClass keyword$11$Delimiter;
 
 	private ICharacterClass keyword$15$Delimiter;
 
 	private ICharacterClass keyword$19$Delimiter;
+
+	private ICharacterClass keyword$23$Delimiter;
 
 	private ICharacterClass keyword$3$Delimiter;
 
@@ -100,6 +112,7 @@ public final class UnorderedGroupsTestLanguageModelConsumer extends NonTerminalC
 			acceptor.accept(group$10$Consumer);
 			acceptor.accept(group$14$Consumer);
 			acceptor.accept(group$18$Consumer);
+			acceptor.accept(group$22$Consumer);
 		}
 	}
 
@@ -344,6 +357,55 @@ public final class UnorderedGroupsTestLanguageModelConsumer extends NonTerminalC
 		
 		@Override
 		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(loopedAlternativeModelConsumer, "fifth", false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class Group$22$Consumer extends GroupConsumer {
+		
+		protected Group$22$Consumer(final Group group) {
+			super(group);
+		}
+		
+		@Override
+		protected void doGetConsumers(ConsumerAcceptor acceptor) {
+			acceptor.accept(keyword$23$Consumer);
+			acceptor.accept(assignment$24$Consumer);
+		}
+	}
+
+	protected class Keyword$23$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$23$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$23$Delimiter(), optional);
+		}
+	}
+
+	protected class Assignment$24$Consumer extends AssignmentConsumer {
+		
+		protected Assignment$24$Consumer(final Assignment assignment) {
+			super(assignment);
+		}
+		
+		@Override
+		protected IElementConsumer getConsumer() {
+			return ruleCall$25$Consumer;
+		}
+	}
+
+	protected class RuleCall$25$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$25$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
 			return consumeNonTerminal(bug304681ModelConsumer, "model", false, false, false, getElement(), optional);
 		}
 	}
@@ -353,6 +415,7 @@ public final class UnorderedGroupsTestLanguageModelConsumer extends NonTerminalC
 		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$15$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$19$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$23$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$3$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 	}
@@ -387,9 +450,13 @@ public final class UnorderedGroupsTestLanguageModelConsumer extends NonTerminalC
 		assignment$16$Consumer = new Assignment$16$Consumer(rule.getForthAssignment_3_1());
 		ruleCall$17$Consumer = new RuleCall$17$Consumer(rule.getForthGroupLoopedModelParserRuleCall_3_1_0());
 		group$18$Consumer = new Group$18$Consumer(rule.getGroup_4());
-		keyword$19$Consumer = new Keyword$19$Consumer(rule.getBug304681Keyword_4_0());
-		assignment$20$Consumer = new Assignment$20$Consumer(rule.getModelAssignment_4_1());
-		ruleCall$21$Consumer = new RuleCall$21$Consumer(rule.getModelBug304681ModelParserRuleCall_4_1_0());
+		keyword$19$Consumer = new Keyword$19$Consumer(rule.getDigitFiveKeyword_4_0());
+		assignment$20$Consumer = new Assignment$20$Consumer(rule.getFifthAssignment_4_1());
+		ruleCall$21$Consumer = new RuleCall$21$Consumer(rule.getFifthLoopedAlternativeModelParserRuleCall_4_1_0());
+		group$22$Consumer = new Group$22$Consumer(rule.getGroup_5());
+		keyword$23$Consumer = new Keyword$23$Consumer(rule.getBug304681Keyword_5_0());
+		assignment$24$Consumer = new Assignment$24$Consumer(rule.getModelAssignment_5_1());
+		ruleCall$25$Consumer = new RuleCall$25$Consumer(rule.getModelBug304681ModelParserRuleCall_5_1_0());
 	}
 	
 	@Override
@@ -408,6 +475,10 @@ public final class UnorderedGroupsTestLanguageModelConsumer extends NonTerminalC
 	
 	public void setGroupLoopedModelConsumer(INonTerminalConsumer groupLoopedModelConsumer) {
 		this.groupLoopedModelConsumer = groupLoopedModelConsumer;
+	}
+	
+	public void setLoopedAlternativeModelConsumer(INonTerminalConsumer loopedAlternativeModelConsumer) {
+		this.loopedAlternativeModelConsumer = loopedAlternativeModelConsumer;
 	}
 	
 	public void setLoopedModelConsumer(INonTerminalConsumer loopedModelConsumer) {
@@ -444,6 +515,14 @@ public final class UnorderedGroupsTestLanguageModelConsumer extends NonTerminalC
 	
 	public void setKeyword$19$Delimiter(ICharacterClass characterClass) {
 		keyword$19$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$23$Delimiter() {
+		return keyword$23$Delimiter;
+	}
+	
+	public void setKeyword$23$Delimiter(ICharacterClass characterClass) {
+		keyword$23$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$3$Delimiter() {

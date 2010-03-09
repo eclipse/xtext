@@ -33,7 +33,7 @@ public class UnorderedGroupsContentAssistTest extends AbstractContentAssistProce
 	}
 
 	public void testEmptyModel() throws Exception {
-		newBuilder(getSetup()).assertText("1", "2", "3", "4", "bug304681");
+		newBuilder(getSetup()).assertText("1", "2", "3", "4", "5", "bug304681");
 	}
 
 	public void testEmptySimpleModel() throws Exception {
@@ -151,6 +151,16 @@ public class UnorderedGroupsContentAssistTest extends AbstractContentAssistProce
 				"protected", "private", "synchronized", "abstract", "final", "static", "class");
 	}
 	
+	public void testLoopedAlternative() throws Exception {
+		newBuilder(getSetup()).appendNl("5").appendNl("before").assertText(
+				"public", "protected", "private", 
+				"synchronized", 
+				"abstract", "final", 
+				"static",
+				"before", "after",
+				"class");
+	}
+	
 	public void testBug304681_01() throws Exception {
 		newBuilder(getSetup()).appendNl("bug304681")
 			.assertText("{");
@@ -219,5 +229,13 @@ public class UnorderedGroupsContentAssistTest extends AbstractContentAssistProce
 			.appendNl("flag;")
 			.appendNl("attr name;")
 			.assertText("attr", "ref", "}");
+	}
+	
+	public void testBug304681_10() throws Exception {
+		newBuilder(getSetup()).appendNl("bug304681")
+			.appendNl("{")
+			.appendNl("uid 'String';")
+			.append("attr name;")
+			.assertText("attr", "ref", "flag", "long", "short", "}", ";");
 	}
 }

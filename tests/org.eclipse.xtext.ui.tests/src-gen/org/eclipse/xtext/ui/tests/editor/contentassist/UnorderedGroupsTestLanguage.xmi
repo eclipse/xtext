@@ -34,9 +34,15 @@
           </elements>
         </elements>
         <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Keyword" value="5"/>
+          <elements xsi:type="xtext:Assignment" feature="fifth" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Group">
           <elements xsi:type="xtext:Keyword" value="bug304681"/>
           <elements xsi:type="xtext:Assignment" feature="model" operator="=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
           </elements>
         </elements>
       </alternatives>
@@ -185,6 +191,46 @@
         <elements xsi:type="xtext:Keyword" value="}"/>
       </alternatives>
     </rules>
+    <rules xsi:type="xtext:ParserRule" name="LoopedAlternativeModel">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/tests/2010/UnorderedGroupsTest#//LoopedAlternativeModel"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Alternatives" cardinality="*">
+          <elements xsi:type="xtext:Assignment" feature="visibility" operator="+=">
+            <terminal xsi:type="xtext:Alternatives">
+              <elements xsi:type="xtext:Keyword" value="public"/>
+              <elements xsi:type="xtext:Keyword" value="private"/>
+              <elements xsi:type="xtext:Keyword" value="protected"/>
+            </terminal>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="static" operator="+=">
+            <terminal xsi:type="xtext:Keyword" value="static"/>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="synchronized" operator="+=">
+            <terminal xsi:type="xtext:Keyword" value="synchronized"/>
+          </elements>
+          <elements xsi:type="xtext:Alternatives">
+            <elements xsi:type="xtext:Assignment" feature="abstract" operator="+=">
+              <terminal xsi:type="xtext:Keyword" value="abstract"/>
+            </elements>
+            <elements xsi:type="xtext:Assignment" feature="final" operator="+=">
+              <terminal xsi:type="xtext:Keyword" value="final"/>
+            </elements>
+          </elements>
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Keyword" value="before"/>
+            <elements xsi:type="xtext:Keyword" cardinality="*" value="after"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="class"/>
+        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="{"/>
+        <elements xsi:type="xtext:Keyword" value="}"/>
+      </alternatives>
+    </rules>
     <rules xsi:type="xtext:ParserRule" name="Bug304681Model">
       <type metamodel="/0/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/tests/2010/UnorderedGroupsTest#//Bug304681Model"/>
@@ -220,7 +266,7 @@
             <elements xsi:type="xtext:Keyword" value=";"/>
           </elements>
           <elements xsi:type="xtext:Assignment" cardinality="*" feature="features" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
           </elements>
         </elements>
         <elements xsi:type="xtext:Keyword" value="}"/>
@@ -231,8 +277,8 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/tests/2010/UnorderedGroupsTest#//Bug304681Feature"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
         <elements xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Bug304681Attribute">

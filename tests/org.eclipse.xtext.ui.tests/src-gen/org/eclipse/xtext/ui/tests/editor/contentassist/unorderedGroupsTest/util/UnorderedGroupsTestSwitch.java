@@ -130,6 +130,13 @@ public class UnorderedGroupsTestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case UnorderedGroupsTestPackage.LOOPED_ALTERNATIVE_MODEL:
+      {
+        LoopedAlternativeModel loopedAlternativeModel = (LoopedAlternativeModel)theEObject;
+        T result = caseLoopedAlternativeModel(loopedAlternativeModel);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case UnorderedGroupsTestPackage.BUG304681_MODEL:
       {
         Bug304681Model bug304681Model = (Bug304681Model)theEObject;
@@ -240,6 +247,22 @@ public class UnorderedGroupsTestSwitch<T>
    * @generated
    */
   public T caseGroupLoopedModel(GroupLoopedModel object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Looped Alternative Model</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Looped Alternative Model</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseLoopedAlternativeModel(LoopedAlternativeModel object)
   {
     return null;
   }

@@ -70,6 +70,8 @@ public final class UnorderedGroupsTestLanguageGroupLoopedModelConsumer extends N
 
 	private IElementConsumer keyword$21$Consumer;
 
+	private ICharacterClass keyword$5$Delimiter;
+
 	private ICharacterClass keyword$6$Delimiter;
 
 	private ICharacterClass keyword$7$Delimiter;
@@ -87,8 +89,6 @@ public final class UnorderedGroupsTestLanguageGroupLoopedModelConsumer extends N
 	private ICharacterClass keyword$20$Delimiter;
 
 	private ICharacterClass keyword$21$Delimiter;
-
-	private ICharacterClass keyword$5$Delimiter;
 
 	private ISequenceMatcher ruleCall$19$Delimiter;
 
@@ -356,6 +356,7 @@ public final class UnorderedGroupsTestLanguageGroupLoopedModelConsumer extends N
 
 	public UnorderedGroupsTestLanguageGroupLoopedModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
+		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$7$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$9$Delimiter = ICharacterClass.Factory.nullClass();
@@ -365,7 +366,6 @@ public final class UnorderedGroupsTestLanguageGroupLoopedModelConsumer extends N
 		keyword$17$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$20$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$21$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
 		ruleCall$19$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
@@ -419,6 +419,14 @@ public final class UnorderedGroupsTestLanguageGroupLoopedModelConsumer extends N
 	
 	public void setIdConsumer(ITerminalConsumer idConsumer) {
 		this.idConsumer = idConsumer;
+	}
+	
+	public ICharacterClass getKeyword$5$Delimiter() {
+		return keyword$5$Delimiter;
+	}
+	
+	public void setKeyword$5$Delimiter(ICharacterClass characterClass) {
+		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ICharacterClass getKeyword$6$Delimiter() {
@@ -491,14 +499,6 @@ public final class UnorderedGroupsTestLanguageGroupLoopedModelConsumer extends N
 	
 	public void setKeyword$21$Delimiter(ICharacterClass characterClass) {
 		keyword$21$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$5$Delimiter() {
-		return keyword$5$Delimiter;
-	}
-	
-	public void setKeyword$5$Delimiter(ICharacterClass characterClass) {
-		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 	public ISequenceMatcher getRuleCall$19$Delimiter() {

@@ -167,5 +167,8 @@ Export-Package: org.eclipse.xtext.ui.tests,
  org.eclipse.xtext.ui.tests.quickfix.validation,
  org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref,
  org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.impl,
- org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.util
+ org.eclipse.xtext.ui.tests.quickfix.quickfixCrossref.util,
+ org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage,
+ org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl,
+ org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.util
 

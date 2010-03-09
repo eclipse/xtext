@@ -200,16 +200,45 @@ ruleModel returns [EObject current=null]
 
 )
 ))
-    |(	'bug304681' 
+    |(	'5' 
     {
-        createLeafNode(grammarAccess.getModelAccess().getBug304681Keyword_4_0(), null); 
+        createLeafNode(grammarAccess.getModelAccess().getDigitFiveKeyword_4_0(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getModelBug304681ModelParserRuleCall_4_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getFifthLoopedAlternativeModelParserRuleCall_4_1_0(), currentNode); 
 	    }
-		lv_model_9_0=ruleBug304681Model		{
+		lv_fifth_9_0=ruleLoopedAlternativeModel		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"fifth",
+	        		lv_fifth_9_0, 
+	        		"LoopedAlternativeModel", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+))
+    |(	'bug304681' 
+    {
+        createLeafNode(grammarAccess.getModelAccess().getBug304681Keyword_5_0(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getModelBug304681ModelParserRuleCall_5_1_0(), currentNode); 
+	    }
+		lv_model_11_0=ruleBug304681Model		{
 	        if ($current==null) {
 	            $current = factory.create(grammarAccess.getModelRule().getType().getClassifier());
 	            associateNodeWithAstElement(currentNode.getParent(), $current);
@@ -218,7 +247,7 @@ ruleModel returns [EObject current=null]
 	       		set(
 	       			$current, 
 	       			"model",
-	        		lv_model_9_0, 
+	        		lv_model_11_0, 
 	        		"Bug304681Model", 
 	        		currentNode);
 	        } catch (ValueConverterException vce) {
@@ -1301,6 +1330,222 @@ ruleGroupLoopedModel returns [EObject current=null]
 	'}' 
     {
         createLeafNode(grammarAccess.getGroupLoopedModelAccess().getRightCurlyBracketKeyword_4(), null); 
+    }
+)
+;
+
+
+
+
+
+// Entry rule entryRuleLoopedAlternativeModel
+entryRuleLoopedAlternativeModel returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getLoopedAlternativeModelRule(), currentNode); }
+	 iv_ruleLoopedAlternativeModel=ruleLoopedAlternativeModel 
+	 { $current=$iv_ruleLoopedAlternativeModel.current; } 
+	 EOF 
+;
+
+// Rule LoopedAlternativeModel
+ruleLoopedAlternativeModel returns [EObject current=null] 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(((
+(
+(
+		lv_visibility_0_1=	'public' 
+    {
+        createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getVisibilityPublicKeyword_0_0_0_0(), "visibility"); 
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getLoopedAlternativeModelRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		add($current, "visibility", lv_visibility_0_1, null, lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+    |		lv_visibility_0_2=	'private' 
+    {
+        createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getVisibilityPrivateKeyword_0_0_0_1(), "visibility"); 
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getLoopedAlternativeModelRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		add($current, "visibility", lv_visibility_0_2, null, lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+    |		lv_visibility_0_3=	'protected' 
+    {
+        createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getVisibilityProtectedKeyword_0_0_0_2(), "visibility"); 
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getLoopedAlternativeModelRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		add($current, "visibility", lv_visibility_0_3, null, lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+
+)
+)
+    |(
+(
+		lv_static_1_0=	'static' 
+    {
+        createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getStaticStaticKeyword_0_1_0(), "static"); 
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getLoopedAlternativeModelRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		add($current, "static", lv_static_1_0, "static", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)
+    |(
+(
+		lv_synchronized_2_0=	'synchronized' 
+    {
+        createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getSynchronizedSynchronizedKeyword_0_2_0(), "synchronized"); 
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getLoopedAlternativeModelRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		add($current, "synchronized", lv_synchronized_2_0, "synchronized", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)
+    |((
+(
+		lv_abstract_3_0=	'abstract' 
+    {
+        createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getAbstractAbstractKeyword_0_3_0_0(), "abstract"); 
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getLoopedAlternativeModelRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		add($current, "abstract", lv_abstract_3_0, "abstract", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)
+    |(
+(
+		lv_final_4_0=	'final' 
+    {
+        createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getFinalFinalKeyword_0_3_1_0(), "final"); 
+    }
+ 
+	    {
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getLoopedAlternativeModelRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        
+	        try {
+	       		add($current, "final", lv_final_4_0, "final", lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+))
+    |(	'before' 
+    {
+        createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getBeforeKeyword_0_4_0(), null); 
+    }
+(	'after' 
+    {
+        createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getAfterKeyword_0_4_1(), null); 
+    }
+)*))*	'class' 
+    {
+        createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getClassKeyword_1(), null); 
+    }
+(
+(
+		lv_name_8_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getNameIDTerminalRuleCall_2_0(), "name"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getLoopedAlternativeModelRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"name",
+	        		lv_name_8_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)	'{' 
+    {
+        createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getLeftCurlyBracketKeyword_3(), null); 
+    }
+	'}' 
+    {
+        createLeafNode(grammarAccess.getLoopedAlternativeModelAccess().getRightCurlyBracketKeyword_4(), null); 
     }
 )
 ;

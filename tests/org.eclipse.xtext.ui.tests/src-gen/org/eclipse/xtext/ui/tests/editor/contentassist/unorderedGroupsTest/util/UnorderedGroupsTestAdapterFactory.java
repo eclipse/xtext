@@ -103,6 +103,11 @@ public class UnorderedGroupsTestAdapterFactory extends AdapterFactoryImpl
         return createGroupLoopedModelAdapter();
       }
       @Override
+      public Adapter caseLoopedAlternativeModel(LoopedAlternativeModel object)
+      {
+        return createLoopedAlternativeModelAdapter();
+      }
+      @Override
       public Adapter caseBug304681Model(Bug304681Model object)
       {
         return createBug304681ModelAdapter();
@@ -215,6 +220,21 @@ public class UnorderedGroupsTestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createGroupLoopedModelAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedAlternativeModel <em>Looped Alternative Model</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedAlternativeModel
+   * @generated
+   */
+  public Adapter createLoopedAlternativeModelAdapter()
   {
     return null;
   }

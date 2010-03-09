@@ -71,6 +71,15 @@ public interface UnorderedGroupsTestFactory extends EFactory
   GroupLoopedModel createGroupLoopedModel();
 
   /**
+   * Returns a new object of class '<em>Looped Alternative Model</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Looped Alternative Model</em>'.
+   * @generated
+   */
+  LoopedAlternativeModel createLoopedAlternativeModel();
+
+  /**
    * Returns a new object of class '<em>Bug304681 Model</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

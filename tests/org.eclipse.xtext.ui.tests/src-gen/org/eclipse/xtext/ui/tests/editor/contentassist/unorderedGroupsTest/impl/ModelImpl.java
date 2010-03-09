@@ -16,6 +16,7 @@ import org.eclipse.emf.ecore.impl.MinimalEObjectImpl;
 
 import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Model;
 import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.GroupLoopedModel;
+import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedAlternativeModel;
 import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedModel;
 import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.MandatoryModel;
 import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model;
@@ -33,6 +34,7 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Unord
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.ModelImpl#getSecond <em>Second</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.ModelImpl#getThrird <em>Thrird</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.ModelImpl#getForth <em>Forth</em>}</li>
+ *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.ModelImpl#getFifth <em>Fifth</em>}</li>
  *   <li>{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.ModelImpl#getModel <em>Model</em>}</li>
  * </ul>
  * </p>
@@ -80,6 +82,16 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * @ordered
    */
   protected GroupLoopedModel forth;
+
+  /**
+   * The cached value of the '{@link #getFifth() <em>Fifth</em>}' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getFifth()
+   * @generated
+   * @ordered
+   */
+  protected LoopedAlternativeModel fifth;
 
   /**
    * The cached value of the '{@link #getModel() <em>Model</em>}' containment reference.
@@ -309,6 +321,54 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
    * <!-- end-user-doc -->
    * @generated
    */
+  public LoopedAlternativeModel getFifth()
+  {
+    return fifth;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public NotificationChain basicSetFifth(LoopedAlternativeModel newFifth, NotificationChain msgs)
+  {
+    LoopedAlternativeModel oldFifth = fifth;
+    fifth = newFifth;
+    if (eNotificationRequired())
+    {
+      ENotificationImpl notification = new ENotificationImpl(this, Notification.SET, UnorderedGroupsTestPackage.MODEL__FIFTH, oldFifth, newFifth);
+      if (msgs == null) msgs = notification; else msgs.add(notification);
+    }
+    return msgs;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setFifth(LoopedAlternativeModel newFifth)
+  {
+    if (newFifth != fifth)
+    {
+      NotificationChain msgs = null;
+      if (fifth != null)
+        msgs = ((InternalEObject)fifth).eInverseRemove(this, EOPPOSITE_FEATURE_BASE - UnorderedGroupsTestPackage.MODEL__FIFTH, null, msgs);
+      if (newFifth != null)
+        msgs = ((InternalEObject)newFifth).eInverseAdd(this, EOPPOSITE_FEATURE_BASE - UnorderedGroupsTestPackage.MODEL__FIFTH, null, msgs);
+      msgs = basicSetFifth(newFifth, msgs);
+      if (msgs != null) msgs.dispatch();
+    }
+    else if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, UnorderedGroupsTestPackage.MODEL__FIFTH, newFifth, newFifth));
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Bug304681Model getModel()
   {
     return model;
@@ -370,6 +430,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return basicSetThrird(null, msgs);
       case UnorderedGroupsTestPackage.MODEL__FORTH:
         return basicSetForth(null, msgs);
+      case UnorderedGroupsTestPackage.MODEL__FIFTH:
+        return basicSetFifth(null, msgs);
       case UnorderedGroupsTestPackage.MODEL__MODEL:
         return basicSetModel(null, msgs);
     }
@@ -394,6 +456,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return getThrird();
       case UnorderedGroupsTestPackage.MODEL__FORTH:
         return getForth();
+      case UnorderedGroupsTestPackage.MODEL__FIFTH:
+        return getFifth();
       case UnorderedGroupsTestPackage.MODEL__MODEL:
         return getModel();
     }
@@ -421,6 +485,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return;
       case UnorderedGroupsTestPackage.MODEL__FORTH:
         setForth((GroupLoopedModel)newValue);
+        return;
+      case UnorderedGroupsTestPackage.MODEL__FIFTH:
+        setFifth((LoopedAlternativeModel)newValue);
         return;
       case UnorderedGroupsTestPackage.MODEL__MODEL:
         setModel((Bug304681Model)newValue);
@@ -451,6 +518,9 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
       case UnorderedGroupsTestPackage.MODEL__FORTH:
         setForth((GroupLoopedModel)null);
         return;
+      case UnorderedGroupsTestPackage.MODEL__FIFTH:
+        setFifth((LoopedAlternativeModel)null);
+        return;
       case UnorderedGroupsTestPackage.MODEL__MODEL:
         setModel((Bug304681Model)null);
         return;
@@ -476,6 +546,8 @@ public class ModelImpl extends MinimalEObjectImpl.Container implements Model
         return thrird != null;
       case UnorderedGroupsTestPackage.MODEL__FORTH:
         return forth != null;
+      case UnorderedGroupsTestPackage.MODEL__FIFTH:
+        return fifth != null;
       case UnorderedGroupsTestPackage.MODEL__MODEL:
         return model != null;
     }

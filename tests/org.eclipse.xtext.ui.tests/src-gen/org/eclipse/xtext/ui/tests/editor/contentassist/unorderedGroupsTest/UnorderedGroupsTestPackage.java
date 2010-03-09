@@ -106,13 +106,22 @@ public interface UnorderedGroupsTestPackage extends EPackage
   int MODEL__FORTH = 3;
 
   /**
+   * The feature id for the '<em><b>Fifth</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__FIFTH = 4;
+
+  /**
    * The feature id for the '<em><b>Model</b></em>' containment reference.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
    * @generated
    * @ordered
    */
-  int MODEL__MODEL = 4;
+  int MODEL__MODEL = 5;
 
   /**
    * The number of structural features of the '<em>Model</em>' class.
@@ -121,7 +130,7 @@ public interface UnorderedGroupsTestPackage extends EPackage
    * @generated
    * @ordered
    */
-  int MODEL_FEATURE_COUNT = 5;
+  int MODEL_FEATURE_COUNT = 6;
 
   /**
    * The meta object id for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.SimpleModelImpl <em>Simple Model</em>}' class.
@@ -416,6 +425,79 @@ public interface UnorderedGroupsTestPackage extends EPackage
   int GROUP_LOOPED_MODEL_FEATURE_COUNT = 6;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.LoopedAlternativeModelImpl <em>Looped Alternative Model</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.LoopedAlternativeModelImpl
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.UnorderedGroupsTestPackageImpl#getLoopedAlternativeModel()
+   * @generated
+   */
+  int LOOPED_ALTERNATIVE_MODEL = 5;
+
+  /**
+   * The feature id for the '<em><b>Visibility</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOPED_ALTERNATIVE_MODEL__VISIBILITY = 0;
+
+  /**
+   * The feature id for the '<em><b>Static</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOPED_ALTERNATIVE_MODEL__STATIC = 1;
+
+  /**
+   * The feature id for the '<em><b>Synchronized</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOPED_ALTERNATIVE_MODEL__SYNCHRONIZED = 2;
+
+  /**
+   * The feature id for the '<em><b>Abstract</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOPED_ALTERNATIVE_MODEL__ABSTRACT = 3;
+
+  /**
+   * The feature id for the '<em><b>Final</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOPED_ALTERNATIVE_MODEL__FINAL = 4;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOPED_ALTERNATIVE_MODEL__NAME = 5;
+
+  /**
+   * The number of structural features of the '<em>Looped Alternative Model</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int LOOPED_ALTERNATIVE_MODEL_FEATURE_COUNT = 6;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.Bug304681ModelImpl <em>Bug304681 Model</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -423,7 +505,7 @@ public interface UnorderedGroupsTestPackage extends EPackage
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.UnorderedGroupsTestPackageImpl#getBug304681Model()
    * @generated
    */
-  int BUG304681_MODEL = 5;
+  int BUG304681_MODEL = 6;
 
   /**
    * The feature id for the '<em><b>Short Description</b></em>' attribute.
@@ -487,7 +569,7 @@ public interface UnorderedGroupsTestPackage extends EPackage
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.UnorderedGroupsTestPackageImpl#getBug304681Feature()
    * @generated
    */
-  int BUG304681_FEATURE = 6;
+  int BUG304681_FEATURE = 7;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -515,7 +597,7 @@ public interface UnorderedGroupsTestPackage extends EPackage
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.UnorderedGroupsTestPackageImpl#getBug304681Attribute()
    * @generated
    */
-  int BUG304681_ATTRIBUTE = 7;
+  int BUG304681_ATTRIBUTE = 8;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -543,7 +625,7 @@ public interface UnorderedGroupsTestPackage extends EPackage
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.UnorderedGroupsTestPackageImpl#getBug304681Reference()
    * @generated
    */
-  int BUG304681_REFERENCE = 8;
+  int BUG304681_REFERENCE = 9;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -617,6 +699,17 @@ public interface UnorderedGroupsTestPackage extends EPackage
    * @generated
    */
   EReference getModel_Forth();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getFifth <em>Fifth</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Fifth</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getFifth()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_Fifth();
 
   /**
    * Returns the meta object for the containment reference '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Model#getModel <em>Model</em>}'.
@@ -934,6 +1027,82 @@ public interface UnorderedGroupsTestPackage extends EPackage
   EAttribute getGroupLoopedModel_Name();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedAlternativeModel <em>Looped Alternative Model</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Looped Alternative Model</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedAlternativeModel
+   * @generated
+   */
+  EClass getLoopedAlternativeModel();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedAlternativeModel#getVisibility <em>Visibility</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Visibility</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedAlternativeModel#getVisibility()
+   * @see #getLoopedAlternativeModel()
+   * @generated
+   */
+  EAttribute getLoopedAlternativeModel_Visibility();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedAlternativeModel#getStatic <em>Static</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Static</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedAlternativeModel#getStatic()
+   * @see #getLoopedAlternativeModel()
+   * @generated
+   */
+  EAttribute getLoopedAlternativeModel_Static();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedAlternativeModel#getSynchronized <em>Synchronized</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Synchronized</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedAlternativeModel#getSynchronized()
+   * @see #getLoopedAlternativeModel()
+   * @generated
+   */
+  EAttribute getLoopedAlternativeModel_Synchronized();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedAlternativeModel#getAbstract <em>Abstract</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Abstract</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedAlternativeModel#getAbstract()
+   * @see #getLoopedAlternativeModel()
+   * @generated
+   */
+  EAttribute getLoopedAlternativeModel_Abstract();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedAlternativeModel#getFinal <em>Final</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Final</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedAlternativeModel#getFinal()
+   * @see #getLoopedAlternativeModel()
+   * @generated
+   */
+  EAttribute getLoopedAlternativeModel_Final();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedAlternativeModel#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.LoopedAlternativeModel#getName()
+   * @see #getLoopedAlternativeModel()
+   * @generated
+   */
+  EAttribute getLoopedAlternativeModel_Name();
+
+  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.Bug304681Model <em>Bug304681 Model</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1103,6 +1272,14 @@ public interface UnorderedGroupsTestPackage extends EPackage
      * @generated
      */
     EReference MODEL__FORTH = eINSTANCE.getModel_Forth();
+
+    /**
+     * The meta object literal for the '<em><b>Fifth</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__FIFTH = eINSTANCE.getModel_Fifth();
 
     /**
      * The meta object literal for the '<em><b>Model</b></em>' containment reference feature.
@@ -1343,6 +1520,64 @@ public interface UnorderedGroupsTestPackage extends EPackage
      * @generated
      */
     EAttribute GROUP_LOOPED_MODEL__NAME = eINSTANCE.getGroupLoopedModel_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.LoopedAlternativeModelImpl <em>Looped Alternative Model</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.LoopedAlternativeModelImpl
+     * @see org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.UnorderedGroupsTestPackageImpl#getLoopedAlternativeModel()
+     * @generated
+     */
+    EClass LOOPED_ALTERNATIVE_MODEL = eINSTANCE.getLoopedAlternativeModel();
+
+    /**
+     * The meta object literal for the '<em><b>Visibility</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOPED_ALTERNATIVE_MODEL__VISIBILITY = eINSTANCE.getLoopedAlternativeModel_Visibility();
+
+    /**
+     * The meta object literal for the '<em><b>Static</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOPED_ALTERNATIVE_MODEL__STATIC = eINSTANCE.getLoopedAlternativeModel_Static();
+
+    /**
+     * The meta object literal for the '<em><b>Synchronized</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOPED_ALTERNATIVE_MODEL__SYNCHRONIZED = eINSTANCE.getLoopedAlternativeModel_Synchronized();
+
+    /**
+     * The meta object literal for the '<em><b>Abstract</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOPED_ALTERNATIVE_MODEL__ABSTRACT = eINSTANCE.getLoopedAlternativeModel_Abstract();
+
+    /**
+     * The meta object literal for the '<em><b>Final</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOPED_ALTERNATIVE_MODEL__FINAL = eINSTANCE.getLoopedAlternativeModel_Final();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute LOOPED_ALTERNATIVE_MODEL__NAME = eINSTANCE.getLoopedAlternativeModel_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.unorderedGroupsTest.impl.Bug304681ModelImpl <em>Bug304681 Model</em>}' class.
