@@ -109,6 +109,8 @@ This Agreement is governed by the laws of the State of New York and the intellec
 
    <requires>
       <import feature="org.eclipse.emf.mwe2.runtime.sdk" version="0.8.0" match="greaterOrEqual"/>
+      <import plugin="com.google.collect"/>
+      <import plugin="com.google.guice"/>
    </requires>
 
    <plugin
