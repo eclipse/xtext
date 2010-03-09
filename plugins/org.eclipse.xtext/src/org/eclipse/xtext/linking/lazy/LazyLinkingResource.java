@@ -167,7 +167,7 @@ public class LazyLinkingResource extends XtextResource {
 
 	protected Diagnostic createDiagnostic(Triple<EObject, EReference, AbstractNode> triple,
 			DiagnosticMessage message) {
-		Diagnostic diagnostic = new XtextLinkingDiagnostic(triple.getThird(), message.getMessage(), message.getIssueCode());
+		Diagnostic diagnostic = new XtextLinkingDiagnostic(triple.getThird(), message.getMessage(), message.getIssueCode(), message.getIssueData());
 		return diagnostic;
 	}
 

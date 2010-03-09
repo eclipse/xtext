@@ -27,6 +27,11 @@ public class XtextSyntaxDiagnostic extends AbstractDiagnostic {
 	public String getCode() {
 		return error.getIssueCode();
 	}
+	
+	@Override
+	public String[] getData() {
+		return null;
+	}
 
 	@Override
 	protected AbstractNode getNode() {

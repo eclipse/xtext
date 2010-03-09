@@ -36,6 +36,11 @@ public class TransformationDiagnostic extends AbstractDiagnostic {
 	public String getCode() {
 		return errorCode.getFullyQualifiedCode();
 	}
+	
+	@Override
+	public String[] getData() {
+		return null;
+	}
 
 	public String getMessage() {
 		return message;
