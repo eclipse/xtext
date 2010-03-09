@@ -71,6 +71,8 @@ public class EditorUtils {
 	
 	public static XtextEditor getActiveXtextEditor(ExecutionEvent event) {
 		IEditorPart activeEditor = HandlerUtil.getActiveEditor(event);
+		if (activeEditor == null)
+			return null;
 		XtextEditor xtextEditor = (XtextEditor) activeEditor.getAdapter(XtextEditor.class);
 		return xtextEditor;
 	}
@@ -78,6 +80,8 @@ public class EditorUtils {
 	public static XtextEditor getActiveXtextEditor() {
 		IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
 		IEditorPart activeEditor = activePage.getActiveEditor();
+		if (activeEditor == null)
+			return null;
 		XtextEditor xtextEditor = (XtextEditor) activeEditor.getAdapter(XtextEditor.class);
 		return xtextEditor;
 	}
