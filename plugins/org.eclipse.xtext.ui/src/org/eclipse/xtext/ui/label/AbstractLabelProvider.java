@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.label;
 
+import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.LabelProvider;
@@ -23,7 +24,7 @@ import com.google.inject.Inject;
  * 
  * @author koehnlein - Initial contribution and API
  */
-public abstract class AbstractLabelProvider extends LabelProvider implements IStyledLabelProvider {
+public abstract class AbstractLabelProvider extends LabelProvider implements IStyledLabelProvider, IItemLabelProvider {
 
 	private ILabelProvider delegate;
 
