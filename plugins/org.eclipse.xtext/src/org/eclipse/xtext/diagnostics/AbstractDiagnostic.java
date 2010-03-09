@@ -21,6 +21,8 @@ public abstract class AbstractDiagnostic implements Diagnostic {
 	protected abstract AbstractNode getNode();
 	
 	public abstract String getCode();
+	
+	public abstract String[] getData();
 
 	public int getLength() {
 		return getNode().getLength();

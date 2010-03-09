@@ -23,7 +23,7 @@ public class LinkingDiagnosticProducer extends AbstractDiagnosticProducer {
 
 	@Override
 	protected Diagnostic createDiagnostic(DiagnosticMessage message) {
-		return new XtextLinkingDiagnostic(getNode(), message.getMessage(), message.getIssueCode());
+		return new XtextLinkingDiagnostic(getNode(), message.getMessage(), message.getIssueCode(), message.getIssueData());
 	}
 	
 }

@@ -46,6 +46,7 @@ public class DiagnosticConverterImpl implements IDiagnosticConverter {
 			AbstractDiagnostic xtextDiagnostic = (AbstractDiagnostic)diagnostic;
 			issue.setUriToProblem(xtextDiagnostic.getUriToProblem());
 			issue.setCode(xtextDiagnostic.getCode());
+			issue.setData(xtextDiagnostic.getData());
 		}
 		issue.setType(CheckType.FAST);
 		acceptor.accept(issue);

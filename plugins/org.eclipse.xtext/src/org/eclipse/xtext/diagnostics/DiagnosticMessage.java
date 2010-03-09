@@ -15,15 +15,21 @@ public class DiagnosticMessage {
 	private final String message;
 	private final DiagnosticSeverity severity;
 	private final String issueCode;
+	private final String[] issueData;
 	
-	public DiagnosticMessage(String message, DiagnosticSeverity severity, String issueCode) {
+	public DiagnosticMessage(String message, DiagnosticSeverity severity, String issueCode, String... issueData) {
 		this.message = message;
 		this.severity = severity;
 		this.issueCode = issueCode;
+		this.issueData = issueData;
 	}
 	
 	public String getIssueCode() {
 		return issueCode;
+	}
+	
+	public String[] getIssueData() {
+		return issueData;
 	}
 	
 	public String getMessage() {
