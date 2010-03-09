@@ -204,26 +204,6 @@
       </specification>
    </extension>
    
-   <!-- open Xtext element -->
-   <extension
-         point="org.eclipse.ui.commands">
-      <command
-            categoryId="org.eclipse.ui.category.window"
-            description="Open the declaration of an Xtext element"
-            id="org.eclipse.xtext.ui.search.OpenXtextElementCommand"
-            name="Open Xtext Element">
-      </command>
-   </extension>
-   <extension
-         point="org.eclipse.ui.bindings">
-      <key
-            commandId="org.eclipse.xtext.ui.search.OpenXtextElementCommand"
-            contextId="org.eclipse.ui.contexts.window"
-            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
-            sequence="M1+SHIFT+Z">
-      </key>
-   </extension>
-   
    	<!-- find references -->
 	<extension point="org.eclipse.ui.commands">
 		<command 

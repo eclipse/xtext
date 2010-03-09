@@ -86,11 +86,30 @@
          </enablement>
       </decorator>
    </extension>
+   <!-- open Xtext element -->
+   <extension
+         point="org.eclipse.ui.commands">
+      <command
+            categoryId="org.eclipse.ui.category.window"
+            description="Open the declaration of an Xtext element"
+            id="org.eclipse.xtext.ui.shared.OpenXtextElementCommand"
+            name="Open Xtext Element">
+      </command>
+   </extension>
+   <extension
+         point="org.eclipse.ui.bindings">
+      <key
+            commandId="org.eclipse.xtext.ui.shared.OpenXtextElementCommand"
+            contextId="org.eclipse.ui.contexts.window"
+            schemeId="org.eclipse.ui.defaultAcceleratorConfiguration"
+            sequence="M1+SHIFT+F3">
+      </key>
+   </extension>
    <extension
          point="org.eclipse.ui.handlers">
       <handler
             class="org.eclipse.xtext.ui.shared.internal.ExecutableExtensionFactory:org.eclipse.xtext.ui.search.OpenXtextElementHandler"
-            commandId="org.eclipse.xtext.ui.search.OpenXtextElementCommand">
+            commandId="org.eclipse.xtext.ui.shared.OpenXtextElementCommand">
       </handler>
    </extension>
  	<extension point="org.eclipse.search.searchResultViewPages">
