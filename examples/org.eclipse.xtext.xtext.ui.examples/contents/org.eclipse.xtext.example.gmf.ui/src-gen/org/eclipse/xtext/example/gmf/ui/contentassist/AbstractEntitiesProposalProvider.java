@@ -3,7 +3,6 @@
 */
 package org.eclipse.xtext.example.gmf.ui.contentassist;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.*;
 import org.eclipse.xtext.common.ui.contentassist.TerminalsProposalProvider;

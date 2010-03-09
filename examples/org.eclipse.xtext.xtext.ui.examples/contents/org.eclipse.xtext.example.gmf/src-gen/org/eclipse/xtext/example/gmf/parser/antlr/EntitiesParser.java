@@ -26,6 +26,7 @@ public class EntitiesParser extends org.eclipse.xtext.parser.antlr.AbstractAntlr
 		org.eclipse.xtext.example.gmf.parser.antlr.internal.InternalEntitiesParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);
