@@ -32,6 +32,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.Bug289187Test.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.Bug291022Test.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.Bug297909Test.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.Bug304681Test.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.CamelCasePrefixMatcherTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistGrammarContentAssistTest.class);
@@ -54,11 +55,13 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.antlr.internal.InternalParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.folding.DefaultFoldingRegionProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.model.edit.DefaultTextEditComposerTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.mpe.MultipageEditorTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.outline.DefaultContentOutlineNodeFactoryTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.outline.actions.DeclarativeActionBarContributorTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.outline.transformer.DeclarativeSemanticModelTransformerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.outline.transformer.DefaultSemanticModelTransformerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.quickfix.DeclarativeQuickfixProviderTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.quickfix.DefaultSimilarityMatcherTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.quickfix.IssueDataTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.quickfix.LinkingErrorTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.reconciler.ReplaceRegionTest.class);

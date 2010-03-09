@@ -1,0 +1,45 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+grammar org.eclipse.xtext.ui.tests.editor.contentassist.Bug304681TestLanguage with org.eclipse.xtext.common.Terminals
+
+generate bug304681TestLanguage "http://www.eclipse.org/xtext/ui/common/tests/2010/bug304681TestLanguage"
+import "http://www.eclipse.org/emf/2002/Ecore" as ecore
+
+PackageDefinition:
+	{PackageDefinition} "package" namespace=ID  ";"
+	(contents+=Object)*; 	
+ 
+Object:
+	(enabled?="enabled" | abstract?="abstract")? 
+	"object" name=ID ("extends" parent=[Object])? 
+	"{"
+	(
+		("shortDescription" shortDescription=STRING ";")? &
+		("longDescription" longDescription=STRING ";")? &
+		("serialUID" serialVersionUID=INT ";")? &
+		(cloneable?="cloneable" ";")? &
+		(features+=Feature*) &
+		("before" features+=Feature* "after")? &
+		("optionalLoop" features+=Feature*)? &
+		("mandatoryLoop" features+=Feature+)?
+	)	
+	"}";
+
+Feature: 
+	(Attribute | Reference);	
+
+Attribute:
+	"Attribute" type=ID name=ID	";";
+	
+Reference:
+	"Reference" type=[Object] (many?="*")? name=ID ("{"
+	(("shortDescription" shortDescription=STRING ";")? &
+	("longDescription" longDescription=STRING ";")?)
+	"}" | ";");
+
+

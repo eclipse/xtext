@@ -15,6 +15,7 @@ Model :
    | '2' second=MandatoryModel
    | '3' thrird=LoopedModel
    | '4' forth=GroupLoopedModel
+   | '5' fifth=LoopedAlternativeModel
    | 'bug304681' model=Bug304681Model
 ;
 
@@ -54,6 +55,17 @@ GroupLoopedModel:
 	  & static+='static'
 	  & synchronized+='synchronized'
 	  & (abstract+='abstract' | final+='final')
+	)*
+	'class' name=ID '{' '}'
+;
+
+LoopedAlternativeModel:
+	(
+	    visibility+=('public'|'private'|'protected')
+	  | static+='static'
+	  | synchronized+='synchronized'
+	  | (abstract+='abstract' | final+='final')
+	  | ('before' 'after'*)
 	)*
 	'class' name=ID '{' '}'
 ;

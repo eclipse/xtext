@@ -27,6 +27,9 @@ import org.eclipse.xtext.ui.tests.quickfix.validation.QuickfixCrossrefTestLangua
 import org.eclipse.xtext.util.Strings;
 import org.eclipse.xtext.validation.Issue;
 
+import com.google.common.collect.Iterators;
+import com.google.common.collect.Lists;
+
 /**
  * @author koehnlein - Initial contribution and API
  */
@@ -53,9 +56,10 @@ public class IssueDataTest extends AbstractQuickfixTest {
 				xtextEditor.getEditorInput());
 		new AnnotationIssueProcessor(document, annotationModel, new IssueResolutionProvider.NullImpl());
 		Iterator<?> annotationIterator = annotationModel.getAnnotationIterator();
-		assertTrue(annotationIterator.hasNext());
-		XtextAnnotation annotation = (XtextAnnotation) annotationIterator.next();
-		assertFalse(annotationIterator.hasNext());
+		// filter QuickDiffAnnotations
+		List<XtextAnnotation> annotations = Lists.newArrayList(Iterators.filter(annotationIterator, XtextAnnotation.class));
+		assertEquals(annotations.toString(), 1, annotations.size());
+		XtextAnnotation annotation = annotations.get(0);
 		assertTrue(Arrays.equals(expectedIssueData, annotation.getIssueData()));
 		IssueUtil issueUtil = new IssueUtil();
 		issueUtil.setMarkerUtil(new MarkerUtil());
