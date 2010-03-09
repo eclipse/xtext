@@ -67,14 +67,7 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 		return xtextDocument.readOnly(new IUnitOfWork<List<IssueResolution>, XtextResource>() {
 			public List<IssueResolution> exec(XtextResource state) throws Exception {
 				EObject target = state.getEObject(issue.getUriToProblem().fragment());
-				CompositeNode rootNode = NodeUtil.getRootNode(target);
-				AbstractNode leaf = NodeUtil.findLeafNodeAtOffset(rootNode, issue.getOffset() + 1);
-
-				CrossReference crossReference = findCrossReference(target, leaf);
-				if (crossReference == null)
-					return Collections.emptyList();
-
-				EReference reference = GrammarUtil.getReference(crossReference);
+				EReference reference = getUnresolvedEReference(issue, target);
 				if (reference == null)
 					return Collections.emptyList();
 
@@ -91,7 +84,18 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 				}
 				return issueResolutionAcceptor.getIssueResolutions();
 			}
+
 		});
+	}
+
+	protected EReference getUnresolvedEReference(final Issue issue, EObject target) {
+		CompositeNode rootNode = NodeUtil.getRootNode(target);
+		AbstractNode leaf = NodeUtil.findLeafNodeAtOffset(rootNode, issue.getOffset() + 1);
+		CrossReference crossReference = findCrossReference(target, leaf);
+		if (crossReference != null) {
+			return  GrammarUtil.getReference(crossReference);
+		}
+		return null;
 	}
 
 	protected String fixCrossReferenceLabel(String issueString, String replacement) {

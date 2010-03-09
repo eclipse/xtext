@@ -14,6 +14,6 @@ import org.eclipse.emf.ecore.EObject;
  */
 public interface ISemanticModification {
 
-	void apply(EObject element, IModificationContext context);
+	void apply(EObject element, IModificationContext context) throws Exception;
 	
 }

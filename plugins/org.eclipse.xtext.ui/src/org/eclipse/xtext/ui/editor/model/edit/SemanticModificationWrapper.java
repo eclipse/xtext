@@ -10,8 +10,10 @@ package org.eclipse.xtext.ui.editor.model.edit;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.text.edits.TextEdit;
+import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
+import org.eclipse.xtext.util.CancelIndicator;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
 
@@ -36,6 +38,8 @@ public class SemanticModificationWrapper implements IModification {
 		context.getXtextDocument().modify(new IUnitOfWork.Void<XtextResource>() {
 			@Override
 			public void process(XtextResource state) throws Exception {
+				// lazy linking URIs might change, so resolve everything before applying any changes
+				EcoreUtil2.resolveAll(state, new CancelIndicator.NullImpl());
 				textEditComposer.beginRecording(state);
 				IXtextDocument document = context.getXtextDocument();
 				EObject eObject = state.getEObject(uriToProblem.fragment());

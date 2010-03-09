@@ -4,6 +4,8 @@
 package org.eclipse.xtext.example.ui;
 
 import org.eclipse.ui.plugin.AbstractUIPlugin;
+import org.eclipse.xtext.example.ui.linking.DomainmodelLinkingDiagnosticMessageProvider;
+import org.eclipse.xtext.linking.ILinkingDiagnosticMessageProvider;
 
 
 /**
@@ -15,4 +17,7 @@ public class DomainmodelUiModule extends org.eclipse.xtext.example.ui.AbstractDo
 		super(plugin);
 	}
 	
+	public Class<? extends ILinkingDiagnosticMessageProvider> bindILinkingDiagnosticMessageProvider() {
+		return DomainmodelLinkingDiagnosticMessageProvider.class;
+	}
 }
