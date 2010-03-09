@@ -98,6 +98,8 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 
 	private String xmiModelDirectory = null;
 
+	private String fileExtensions;
+
 	{
 		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("genmodel"))
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("genmodel",
@@ -154,6 +156,7 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 
 				Resource ePackages = createResourceForEPackages(grammar, ctx, packs, resourceSet);
 				List<GenPackage> genPackages = loadReferencedGenModels(resourceSet);
+				updateFileExtensions(genPackages, packs);
 				if (!skipGenerate) {
 					GenModel genModel = getSaveAndReconcileGenModel(resourceSet, grammar, ctx, packs, genPackages);
 					genModel.reconcile();
@@ -167,6 +170,18 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 			}
 		} catch (Throwable e) {
 			e.printStackTrace();
+		}
+	}
+
+	protected void updateFileExtensions(List<GenPackage> genPackages, List<EPackage> packs) {
+		if (fileExtensions != null) {
+			for (EPackage ePackage : packs) {
+				for (GenPackage genPack : genPackages) {
+					if (genPack.getEcorePackage().getNsURI().equals(ePackage.getNsURI())) {
+						genPack.setFileExtensions(fileExtensions);
+					}
+				}
+			}
 		}
 	}
 
@@ -212,8 +227,9 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	}
 
 	protected void checkGenModelExists(InternalEObject key) {
-		if (getReferencedGenModels()==null && this.genModel==null)
-			throw new WorkflowInterruptedException("The generated EPackage references an external EPackage, but 'referencedGenModels' hasn't been registered.");
+		if (getReferencedGenModels() == null && this.genModel == null)
+			throw new WorkflowInterruptedException(
+					"The generated EPackage references an external EPackage, but 'referencedGenModels' hasn't been registered.");
 	}
 
 	private boolean shouldBeProxified(InternalEObject key, List<EPackage> packs) {
@@ -602,5 +618,13 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	 */
 	protected String toGenModelProjectPath(String path) {
 		return null == path || "".equals(path) || path.startsWith("/") ? path : path.substring(path.indexOf("/"));
+	}
+
+	/**
+	 * if you need to set custom file extensions for the generated EPackages.
+	 * This is usually not needed and only added here for completeness.
+	 */
+	public void setFileExtensions(String fileExtensions) {
+		this.fileExtensions = fileExtensions;
 	}
 }
