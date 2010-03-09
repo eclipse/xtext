@@ -8,6 +8,7 @@
 package org.eclipse.xtext.ui.label;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.edit.provider.IItemLabelProvider;
 import org.eclipse.jface.viewers.BaseLabelProvider;
 import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.swt.graphics.Image;
@@ -22,7 +23,7 @@ import org.eclipse.xtext.ui.resource.IResourceUIServiceProvider;
  * 
  * @author koehnlein - Initial contribution and API
  */
-public class GlobalDescriptionLabelProvider extends BaseLabelProvider implements ILabelProvider {
+public class GlobalDescriptionLabelProvider extends BaseLabelProvider implements ILabelProvider, IItemLabelProvider {
 
 	public Image getImage(Object element) {
 		ILabelProvider descriptionLabelProvider = lookupDescriptionLabelProvider(element);
