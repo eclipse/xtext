@@ -2,13 +2,13 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Junit Support Plug-in
 Bundle-SymbolicName: org.eclipse.xtext.junit
-Bundle-Version: 0.8.0.qualifier
+Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Eclipse.org
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
-Require-Bundle: org.eclipse.xtend;bundle-version="0.8.0";resolution:=optional,
+Require-Bundle: org.eclipse.xtend;bundle-version="1.0.0";resolution:=optional,
  org.eclipse.xtext;resolution:=optional,
  org.junit;bundle-version="[3.8.0,4.0.0)";resolution:=optional;visibility:=reexport,
- org.eclipse.xtend.typesystem.emf;bundle-version="0.8.0";resolution:=optional,
+ org.eclipse.xtend.typesystem.emf;bundle-version="1.0.0";resolution:=optional,
  org.eclipse.core.resources;bundle-version="3.5.0";resolution:=optional,
  org.eclipse.core.runtime;bundle-version="3.5.0";resolution:=optional,
  org.eclipse.ui.ide;bundle-version="3.5.0";resolution:=optional,

@@ -2,13 +2,13 @@ Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Xtext Builder Tests
 Bundle-SymbolicName: org.eclipse.xtext.builder.tests;singleton:=true
-Bundle-Version: 0.8.0.qualifier
+Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Eclipse Modeling
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.junit;bundle-version="[3.8.0,4.0.0)",
- org.eclipse.xtext.generator;bundle-version="0.8.0";resolution:=optional,
- org.eclipse.xtext.junit;bundle-version="0.8.0",
- org.eclipse.xtext.builder;bundle-version="0.8.0",
+ org.eclipse.xtext.generator;bundle-version="1.0.0";resolution:=optional,
+ org.eclipse.xtext.junit;bundle-version="1.0.0",
+ org.eclipse.xtext.builder;bundle-version="1.0.0",
  org.eclipse.xtext,
  org.eclipse.xtext.util,
  org.eclipse.emf.ecore,
@@ -18,8 +18,8 @@ Require-Bundle: org.junit;bundle-version="[3.8.0,4.0.0)",
  org.eclipse.ui.editors,
  org.eclipse.ui,
  org.eclipse.jdt.core,
- de.itemis.xtext.antlr;bundle-version="0.8.0";resolution:=optional,
- org.eclipse.xtext.ui.shared;bundle-version="0.8.0"
+ de.itemis.xtext.antlr;bundle-version="1.0.0";resolution:=optional,
+ org.eclipse.xtext.ui.shared;bundle-version="1.0.0"
 Import-Package: org.apache.log4j
 Bundle-Activator: org.eclipse.xtext.builder.tests.Activator
 Bundle-ActivationPolicy: lazy

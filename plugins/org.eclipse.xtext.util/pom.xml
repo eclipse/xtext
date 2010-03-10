@@ -3,7 +3,7 @@
   <modelVersion>4.0.0</modelVersion>
   <groupId>org.eclipse.xtext</groupId>
   <artifactId>xtext-util</artifactId>
-  <version>0.8.0-SNAPSHOT</version>
+  <version>1.0.0-SNAPSHOT</version>
   <name>Xtext Util</name>
   <description>Manually created POM</description>
   
