@@ -21,8 +21,10 @@ import org.eclipse.jface.action.Separator;
 import org.eclipse.jface.text.IDocument;
 import org.eclipse.jface.text.source.ISourceViewer;
 import org.eclipse.jface.viewers.DelegatingStyledCellLabelProvider;
+import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.StructuredSelection;
+import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.TreePathViewerSorter;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.ViewerFilter;
@@ -73,6 +75,18 @@ import com.google.inject.Inject;
 public class XtextContentOutlinePage extends ContentOutlinePage implements ISourceViewerAware, IXtextEditorAware {
 	static final Logger logger = Logger.getLogger(XtextContentOutlinePage.class);
 
+	protected static class DelegatorLabelProvider extends DelegatingStyledCellLabelProvider implements ILabelProvider {
+
+		public DelegatorLabelProvider(IStyledLabelProvider labelProvider) {
+			super(labelProvider);
+		}
+
+		public String getText(Object element) {
+			StyledString styledText = getStyledText(element);
+			return (styledText != null) ? styledText.getString() : null;
+		}
+	}
+	
 	@Inject
 	private IOutlineTreeProvider contentProvider;
 
@@ -144,7 +158,7 @@ public class XtextContentOutlinePage extends ContentOutlinePage implements ISour
 
 	protected void configureProviders() {
 		getTreeViewer().setContentProvider(contentProvider);
-		getTreeViewer().setLabelProvider(new DelegatingStyledCellLabelProvider(labelProvider));
+		getTreeViewer().setLabelProvider(new DelegatorLabelProvider(labelProvider));
 	}
 
 	private void configureDocument() {
