@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Xtext Generator Tests (Incubation)
+Bundle-Name: Xtext Generator Tests 
 Bundle-SymbolicName: org.eclipse.xtext.tests;singleton:=true
 Bundle-Version: 0.7.0.qualifier
 Bundle-Vendor: Eclipse.org
