@@ -20,3 +20,4 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-Activator: org.eclipse.xtext.xbase.internal.XtypeActivator
 Import-Package: org.apache.log4j
 Export-Package: org.eclipse.xtext.xbase.ui.contentassist.antlr
+Bundle-Localization: plugin

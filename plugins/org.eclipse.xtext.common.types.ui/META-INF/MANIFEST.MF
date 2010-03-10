@@ -1,7 +1,7 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: org.eclipse.xtext.common.types.ui
-Bundle-Vendor: Eclipse.org
+Bundle-Name: %pluginName
+Bundle-Vendor: %providerName
 Bundle-Version: 1.0.0.qualifier
 Bundle-SymbolicName: org.eclipse.xtext.common.types.ui;singleton:=true
 Bundle-ActivationPolicy: lazy
@@ -22,3 +22,4 @@ Export-Package: org.eclipse.xtext.common.types.access.jdt,
  org.eclipse.xtext.common.types.util.jdt,
  org.eclipse.xtext.common.types.xtext.ui
 Bundle-Activator: org.eclipse.xtext.common.types.provider.TypesEditPlugin$Implementation
+Bundle-Localization: plugin
