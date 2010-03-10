@@ -4,7 +4,7 @@ Bundle-Name: Xtext UI Shared
 Bundle-SymbolicName: org.eclipse.xtext.ui.shared;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.eclipse.xtext.ui.shared.internal.Activator
-Bundle-Vendor: Eclipse Modeling
+Bundle-Vendor: Eclipse Modeling Project
 Require-Bundle: org.eclipse.xtext.ui;bundle-version="1.0.0";resolution:=optional,
  org.eclipse.xtext.builder;bundle-version="1.0.0";resolution:=optional,
  org.eclipse.jdt.core;bundle-version="3.5.1";resolution:=optional
