@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Xtext Core UI Tests (Incubation)
+Bundle-Name: Xtext Core UI Tests 
 Bundle-SymbolicName: org.eclipse.xtext.ui.tests;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-RequiredExecutionEnvironment: J2SE-1.5

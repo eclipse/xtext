@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Xtext Xtend Extensions Plug-in (Incubation)
+Bundle-Name: Xtext Xtend Extensions Plug-in 
 Bundle-SymbolicName: org.eclipse.xtext.xtend
 Bundle-Version: 1.0.0.qualifier
 Require-Bundle: org.eclipse.ui,

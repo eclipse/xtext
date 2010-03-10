@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
       id="org.eclipse.xtext.docs"
-      label="Xtext Documentation (Incubation)"
+      label="Xtext Documentation "
       version="1.0.0.qualifier"
       provider-name="Eclipse.org"
       plugin="org.eclipse.xtext.doc">
