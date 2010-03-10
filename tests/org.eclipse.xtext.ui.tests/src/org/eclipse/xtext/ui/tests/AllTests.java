@@ -54,6 +54,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.antlr.ParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.contentassist.antlr.internal.InternalParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.folding.DefaultFoldingRegionProviderTest.class);
+      suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.model.edit.DefaultDocumentEditorTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.model.edit.DefaultTextEditComposerTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.mpe.MultipageEditorTest.class);
       suite.addTestSuite(org.eclipse.xtext.ui.tests.editor.outline.DefaultContentOutlineNodeFactoryTest.class);
