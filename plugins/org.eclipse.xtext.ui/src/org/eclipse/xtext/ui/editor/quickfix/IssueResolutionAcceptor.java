@@ -9,9 +9,9 @@ package org.eclipse.xtext.ui.editor.quickfix;
 
 import java.util.List;
 
+import org.eclipse.xtext.ui.editor.model.edit.IDocumentEditor;
 import org.eclipse.xtext.ui.editor.model.edit.IModification;
 import org.eclipse.xtext.ui.editor.model.edit.ISemanticModification;
-import org.eclipse.xtext.ui.editor.model.edit.ITextEditComposer;
 import org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext;
 import org.eclipse.xtext.ui.editor.model.edit.SemanticModificationWrapper;
 import org.eclipse.xtext.validation.Issue;
@@ -28,12 +28,12 @@ public class IssueResolutionAcceptor {
 
 	private IssueModificationContext.Factory modificationContextFactory;
 
-	private final ITextEditComposer textEditComposer;
+	private IDocumentEditor documentEditor;
 	
 	@Inject
-	public IssueResolutionAcceptor(IssueModificationContext.Factory modificationContextFactory, ITextEditComposer textEditComposer) {
+	public IssueResolutionAcceptor(IssueModificationContext.Factory modificationContextFactory, IDocumentEditor documentEditor) {
 		this.modificationContextFactory = modificationContextFactory;
-		this.textEditComposer = textEditComposer;
+		this.documentEditor = documentEditor;
 	}
 
 	public void accept(Issue issue, String label, String description, String image, IModification modification) {
@@ -42,7 +42,7 @@ public class IssueResolutionAcceptor {
 	}
 
 	public void accept(Issue issue, String label, String description, String image, ISemanticModification semanticModification) {
-		SemanticModificationWrapper modificationWrapper = new SemanticModificationWrapper(issue, semanticModification, textEditComposer);
+		SemanticModificationWrapper modificationWrapper = new SemanticModificationWrapper(issue.getUriToProblem(), semanticModification, documentEditor);
 		issueResolutions.add(new IssueResolution(label, description, image, modificationContextFactory.createModificationContext(issue),
 				modificationWrapper));
 	}
