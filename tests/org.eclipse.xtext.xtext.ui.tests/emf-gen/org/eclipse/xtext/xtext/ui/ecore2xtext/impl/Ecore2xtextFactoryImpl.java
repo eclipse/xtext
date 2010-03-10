@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Ecore2xtextFactoryImpl.java,v 1.1 2010/01/08 12:38:24 jkohnlein Exp $
+ * $Id: Ecore2xtextFactoryImpl.java,v 1.2 2010/03/10 16:34:10 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtext.ui.ecore2xtext.impl;
 
@@ -64,6 +64,7 @@ public class Ecore2xtextFactoryImpl extends EFactoryImpl implements Ecore2xtextF
 			case Ecore2xtextPackage.CONCRETE0: return createConcrete0();
 			case Ecore2xtextPackage.CONCRETE1: return createConcrete1();
 			case Ecore2xtextPackage.ROOT: return createRoot();
+			case Ecore2xtextPackage.DIAMOND_INHERITANCE: return createDiamondInheritance();
 			default:
 				throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
 		}
@@ -127,6 +128,16 @@ public class Ecore2xtextFactoryImpl extends EFactoryImpl implements Ecore2xtextF
 	public Root createRoot() {
 		RootImpl root = new RootImpl();
 		return root;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	public DiamondInheritance createDiamondInheritance() {
+		DiamondInheritanceImpl diamondInheritance = new DiamondInheritanceImpl();
+		return diamondInheritance;
 	}
 
 	/**

@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Ecore2xtextAdapterFactory.java,v 1.1 2010/01/08 12:38:24 jkohnlein Exp $
+ * $Id: Ecore2xtextAdapterFactory.java,v 1.2 2010/03/10 16:34:10 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtext.ui.ecore2xtext.util;
 
@@ -88,6 +88,10 @@ public class Ecore2xtextAdapterFactory extends AdapterFactoryImpl {
 				return createRootAdapter();
 			}
 			@Override
+			public Adapter caseDiamondInheritance(DiamondInheritance object) {
+				return createDiamondInheritanceAdapter();
+			}
+			@Override
 			public Adapter defaultCase(EObject object) {
 				return createEObjectAdapter();
 			}
@@ -160,6 +164,20 @@ public class Ecore2xtextAdapterFactory extends AdapterFactoryImpl {
 	 * @generated
 	 */
 	public Adapter createRootAdapter() {
+		return null;
+	}
+
+	/**
+	 * Creates a new adapter for an object of class '{@link org.eclipse.xtext.xtext.ui.ecore2xtext.DiamondInheritance <em>Diamond Inheritance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * This default implementation returns null so that we can easily ignore cases;
+	 * it's useful to ignore a case when inheritance will catch all the cases anyway.
+	 * <!-- end-user-doc -->
+	 * @return the new adapter.
+	 * @see org.eclipse.xtext.xtext.ui.ecore2xtext.DiamondInheritance
+	 * @generated
+	 */
+	public Adapter createDiamondInheritanceAdapter() {
 		return null;
 	}
 

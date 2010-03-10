@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Ecore2xtextPackage.java,v 1.1 2010/01/08 12:38:23 jkohnlein Exp $
+ * $Id: Ecore2xtextPackage.java,v 1.2 2010/03/10 16:34:10 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtext.ui.ecore2xtext;
 
@@ -182,6 +182,34 @@ public interface Ecore2xtextPackage extends EPackage {
 	int ROOT_FEATURE_COUNT = 2;
 
 	/**
+	 * The meta object id for the '{@link org.eclipse.xtext.xtext.ui.ecore2xtext.impl.DiamondInheritanceImpl <em>Diamond Inheritance</em>}' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @see org.eclipse.xtext.xtext.ui.ecore2xtext.impl.DiamondInheritanceImpl
+	 * @see org.eclipse.xtext.xtext.ui.ecore2xtext.impl.Ecore2xtextPackageImpl#getDiamondInheritance()
+	 * @generated
+	 */
+	int DIAMOND_INHERITANCE = 4;
+
+	/**
+	 * The feature id for the '<em><b>Name</b></em>' attribute.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIAMOND_INHERITANCE__NAME = CONCRETE0__NAME;
+
+	/**
+	 * The number of structural features of the '<em>Diamond Inheritance</em>' class.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 * @ordered
+	 */
+	int DIAMOND_INHERITANCE_FEATURE_COUNT = CONCRETE0_FEATURE_COUNT + 0;
+
+	/**
 	 * The meta object id for the '<em>INT</em>' data type.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
@@ -189,7 +217,7 @@ public interface Ecore2xtextPackage extends EPackage {
 	 * @see org.eclipse.xtext.xtext.ui.ecore2xtext.impl.Ecore2xtextPackageImpl#getINT()
 	 * @generated
 	 */
-	int INT = 4;
+	int INT = 5;
 
 
 	/**
@@ -264,6 +292,16 @@ public interface Ecore2xtextPackage extends EPackage {
 	 * @generated
 	 */
 	EAttribute getRoot_Name();
+
+	/**
+	 * Returns the meta object for class '{@link org.eclipse.xtext.xtext.ui.ecore2xtext.DiamondInheritance <em>Diamond Inheritance</em>}'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return the meta object for class '<em>Diamond Inheritance</em>'.
+	 * @see org.eclipse.xtext.xtext.ui.ecore2xtext.DiamondInheritance
+	 * @generated
+	 */
+	EClass getDiamondInheritance();
 
 	/**
 	 * Returns the meta object for data type '{@link java.lang.String <em>INT</em>}'.
@@ -361,6 +399,16 @@ public interface Ecore2xtextPackage extends EPackage {
 		 * @generated
 		 */
 		EAttribute ROOT__NAME = eINSTANCE.getRoot_Name();
+
+		/**
+		 * The meta object literal for the '{@link org.eclipse.xtext.xtext.ui.ecore2xtext.impl.DiamondInheritanceImpl <em>Diamond Inheritance</em>}' class.
+		 * <!-- begin-user-doc -->
+		 * <!-- end-user-doc -->
+		 * @see org.eclipse.xtext.xtext.ui.ecore2xtext.impl.DiamondInheritanceImpl
+		 * @see org.eclipse.xtext.xtext.ui.ecore2xtext.impl.Ecore2xtextPackageImpl#getDiamondInheritance()
+		 * @generated
+		 */
+		EClass DIAMOND_INHERITANCE = eINSTANCE.getDiamondInheritance();
 
 		/**
 		 * The meta object literal for the '<em>INT</em>' data type.

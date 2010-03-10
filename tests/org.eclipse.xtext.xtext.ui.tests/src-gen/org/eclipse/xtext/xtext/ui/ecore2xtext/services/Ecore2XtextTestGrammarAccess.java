@@ -115,62 +115,6 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		public RuleCall getConcrete1ParserRuleCall_1() { return cConcrete1ParserRuleCall_1; }
 	}
 
-	public class Concrete0Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Concrete0");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cConcrete0Action_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cConcrete0Keyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameEStringParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		
-		//Concrete0:
-		//  {Concrete0} "Concrete0" name=EString;
-		public ParserRule getRule() { return rule; }
-
-		//{Concrete0} "Concrete0" name=EString
-		public Group getGroup() { return cGroup; }
-
-		//{Concrete0}
-		public Action getConcrete0Action_0() { return cConcrete0Action_0; }
-
-		//"Concrete0"
-		public Keyword getConcrete0Keyword_1() { return cConcrete0Keyword_1; }
-
-		//name=EString
-		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
-
-		//EString
-		public RuleCall getNameEStringParserRuleCall_2_0() { return cNameEStringParserRuleCall_2_0; }
-	}
-
-	public class Concrete1Elements extends AbstractParserRuleElementFinder {
-		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Concrete1");
-		private final Group cGroup = (Group)rule.eContents().get(1);
-		private final Action cConcrete1Action_0 = (Action)cGroup.eContents().get(0);
-		private final Keyword cConcrete1Keyword_1 = (Keyword)cGroup.eContents().get(1);
-		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
-		private final RuleCall cNameEStringParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
-		
-		//Concrete1:
-		//  {Concrete1} "Concrete1" name=EString;
-		public ParserRule getRule() { return rule; }
-
-		//{Concrete1} "Concrete1" name=EString
-		public Group getGroup() { return cGroup; }
-
-		//{Concrete1}
-		public Action getConcrete1Action_0() { return cConcrete1Action_0; }
-
-		//"Concrete1"
-		public Keyword getConcrete1Keyword_1() { return cConcrete1Keyword_1; }
-
-		//name=EString
-		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
-
-		//EString
-		public RuleCall getNameEStringParserRuleCall_2_0() { return cNameEStringParserRuleCall_2_0; }
-	}
-
 	public class INT0Elements extends AbstractParserRuleElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "INT0");
 		private final Keyword cINTKeyword = (Keyword)rule.eContents().get(1);
@@ -206,14 +150,115 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		//ID
 		public RuleCall getIDTerminalRuleCall_1() { return cIDTerminalRuleCall_1; }
 	}
+
+	public class Concrete0Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Concrete0");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cDiamondInheritanceParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Action cConcrete0Action_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Keyword cConcrete0Keyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cNameAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cNameEStringParserRuleCall_1_2_0 = (RuleCall)cNameAssignment_1_2.eContents().get(0);
+		
+		//Concrete0:
+		//  DiamondInheritance|{Concrete0} "Concrete0" name=EString;
+		public ParserRule getRule() { return rule; }
+
+		//DiamondInheritance|{Concrete0} "Concrete0" name=EString
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//DiamondInheritance
+		public RuleCall getDiamondInheritanceParserRuleCall_0() { return cDiamondInheritanceParserRuleCall_0; }
+
+		//{Concrete0} "Concrete0" name=EString
+		public Group getGroup_1() { return cGroup_1; }
+
+		//{Concrete0}
+		public Action getConcrete0Action_1_0() { return cConcrete0Action_1_0; }
+
+		//"Concrete0"
+		public Keyword getConcrete0Keyword_1_1() { return cConcrete0Keyword_1_1; }
+
+		//name=EString
+		public Assignment getNameAssignment_1_2() { return cNameAssignment_1_2; }
+
+		//EString
+		public RuleCall getNameEStringParserRuleCall_1_2_0() { return cNameEStringParserRuleCall_1_2_0; }
+	}
+
+	public class Concrete1Elements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Concrete1");
+		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
+		private final RuleCall cDiamondInheritanceParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
+		private final Group cGroup_1 = (Group)cAlternatives.eContents().get(1);
+		private final Action cConcrete1Action_1_0 = (Action)cGroup_1.eContents().get(0);
+		private final Keyword cConcrete1Keyword_1_1 = (Keyword)cGroup_1.eContents().get(1);
+		private final Assignment cNameAssignment_1_2 = (Assignment)cGroup_1.eContents().get(2);
+		private final RuleCall cNameEStringParserRuleCall_1_2_0 = (RuleCall)cNameAssignment_1_2.eContents().get(0);
+		
+		//Concrete1:
+		//  DiamondInheritance|{Concrete1} "Concrete1" name=EString;
+		public ParserRule getRule() { return rule; }
+
+		//DiamondInheritance|{Concrete1} "Concrete1" name=EString
+		public Alternatives getAlternatives() { return cAlternatives; }
+
+		//DiamondInheritance
+		public RuleCall getDiamondInheritanceParserRuleCall_0() { return cDiamondInheritanceParserRuleCall_0; }
+
+		//{Concrete1} "Concrete1" name=EString
+		public Group getGroup_1() { return cGroup_1; }
+
+		//{Concrete1}
+		public Action getConcrete1Action_1_0() { return cConcrete1Action_1_0; }
+
+		//"Concrete1"
+		public Keyword getConcrete1Keyword_1_1() { return cConcrete1Keyword_1_1; }
+
+		//name=EString
+		public Assignment getNameAssignment_1_2() { return cNameAssignment_1_2; }
+
+		//EString
+		public RuleCall getNameEStringParserRuleCall_1_2_0() { return cNameEStringParserRuleCall_1_2_0; }
+	}
+
+	public class DiamondInheritanceElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "DiamondInheritance");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Action cDiamondInheritanceAction_0 = (Action)cGroup.eContents().get(0);
+		private final Keyword cDiamondInheritanceKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Assignment cNameAssignment_2 = (Assignment)cGroup.eContents().get(2);
+		private final RuleCall cNameEStringParserRuleCall_2_0 = (RuleCall)cNameAssignment_2.eContents().get(0);
+		
+		//DiamondInheritance:
+		//  {DiamondInheritance} "DiamondInheritance" name=EString;
+		public ParserRule getRule() { return rule; }
+
+		//{DiamondInheritance} "DiamondInheritance" name=EString
+		public Group getGroup() { return cGroup; }
+
+		//{DiamondInheritance}
+		public Action getDiamondInheritanceAction_0() { return cDiamondInheritanceAction_0; }
+
+		//"DiamondInheritance"
+		public Keyword getDiamondInheritanceKeyword_1() { return cDiamondInheritanceKeyword_1; }
+
+		//name=EString
+		public Assignment getNameAssignment_2() { return cNameAssignment_2; }
+
+		//EString
+		public RuleCall getNameEStringParserRuleCall_2_0() { return cNameEStringParserRuleCall_2_0; }
+	}
 	
 	
 	private RootElements pRoot;
 	private AbstractElements pAbstract;
-	private Concrete0Elements pConcrete0;
-	private Concrete1Elements pConcrete1;
 	private INT0Elements pINT0;
 	private EStringElements pEString;
+	private Concrete0Elements pConcrete0;
+	private Concrete1Elements pConcrete1;
+	private DiamondInheritanceElements pDiamondInheritance;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -257,26 +302,6 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		return getAbstractAccess().getRule();
 	}
 
-	//Concrete0:
-	//  {Concrete0} "Concrete0" name=EString;
-	public Concrete0Elements getConcrete0Access() {
-		return (pConcrete0 != null) ? pConcrete0 : (pConcrete0 = new Concrete0Elements());
-	}
-	
-	public ParserRule getConcrete0Rule() {
-		return getConcrete0Access().getRule();
-	}
-
-	//Concrete1:
-	//  {Concrete1} "Concrete1" name=EString;
-	public Concrete1Elements getConcrete1Access() {
-		return (pConcrete1 != null) ? pConcrete1 : (pConcrete1 = new Concrete1Elements());
-	}
-	
-	public ParserRule getConcrete1Rule() {
-		return getConcrete1Access().getRule();
-	}
-
 	//INT0 returns INT:
 	//  "INT"; 
 	//
@@ -298,6 +323,36 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 	
 	public ParserRule getEStringRule() {
 		return getEStringAccess().getRule();
+	}
+
+	//Concrete0:
+	//  DiamondInheritance|{Concrete0} "Concrete0" name=EString;
+	public Concrete0Elements getConcrete0Access() {
+		return (pConcrete0 != null) ? pConcrete0 : (pConcrete0 = new Concrete0Elements());
+	}
+	
+	public ParserRule getConcrete0Rule() {
+		return getConcrete0Access().getRule();
+	}
+
+	//Concrete1:
+	//  DiamondInheritance|{Concrete1} "Concrete1" name=EString;
+	public Concrete1Elements getConcrete1Access() {
+		return (pConcrete1 != null) ? pConcrete1 : (pConcrete1 = new Concrete1Elements());
+	}
+	
+	public ParserRule getConcrete1Rule() {
+		return getConcrete1Access().getRule();
+	}
+
+	//DiamondInheritance:
+	//  {DiamondInheritance} "DiamondInheritance" name=EString;
+	public DiamondInheritanceElements getDiamondInheritanceAccess() {
+		return (pDiamondInheritance != null) ? pDiamondInheritance : (pDiamondInheritance = new DiamondInheritanceElements());
+	}
+	
+	public ParserRule getDiamondInheritanceRule() {
+		return getDiamondInheritanceAccess().getRule();
 	}
 
 	//terminal ID:

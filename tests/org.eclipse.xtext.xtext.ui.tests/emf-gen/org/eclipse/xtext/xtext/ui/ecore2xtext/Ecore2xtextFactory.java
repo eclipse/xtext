@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Ecore2xtextFactory.java,v 1.1 2010/01/08 12:38:23 jkohnlein Exp $
+ * $Id: Ecore2xtextFactory.java,v 1.2 2010/03/10 16:34:10 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtext.ui.ecore2xtext;
 
@@ -51,6 +51,15 @@ public interface Ecore2xtextFactory extends EFactory {
 	 * @generated
 	 */
 	Root createRoot();
+
+	/**
+	 * Returns a new object of class '<em>Diamond Inheritance</em>'.
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @return a new object of class '<em>Diamond Inheritance</em>'.
+	 * @generated
+	 */
+	DiamondInheritance createDiamondInheritance();
 
 	/**
 	 * Returns the package supported by this factory.

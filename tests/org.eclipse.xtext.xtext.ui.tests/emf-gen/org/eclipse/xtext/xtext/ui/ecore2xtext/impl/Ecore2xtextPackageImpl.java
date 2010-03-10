@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Ecore2xtextPackageImpl.java,v 1.1 2010/01/08 12:38:24 jkohnlein Exp $
+ * $Id: Ecore2xtextPackageImpl.java,v 1.2 2010/03/10 16:34:10 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtext.ui.ecore2xtext.impl;
 
@@ -17,6 +17,7 @@ import org.eclipse.emf.ecore.impl.EPackageImpl;
 import org.eclipse.xtext.xtext.ui.ecore2xtext.Abstract;
 import org.eclipse.xtext.xtext.ui.ecore2xtext.Concrete0;
 import org.eclipse.xtext.xtext.ui.ecore2xtext.Concrete1;
+import org.eclipse.xtext.xtext.ui.ecore2xtext.DiamondInheritance;
 import org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2xtextFactory;
 import org.eclipse.xtext.xtext.ui.ecore2xtext.Ecore2xtextPackage;
 import org.eclipse.xtext.xtext.ui.ecore2xtext.Root;
@@ -55,6 +56,13 @@ public class Ecore2xtextPackageImpl extends EPackageImpl implements Ecore2xtextP
 	 * @generated
 	 */
 	private EClass rootEClass = null;
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
+	private EClass diamondInheritanceEClass = null;
 
 	/**
 	 * <!-- begin-user-doc -->
@@ -192,6 +200,15 @@ public class Ecore2xtextPackageImpl extends EPackageImpl implements Ecore2xtextP
 	 * <!-- end-user-doc -->
 	 * @generated
 	 */
+	public EClass getDiamondInheritance() {
+		return diamondInheritanceEClass;
+	}
+
+	/**
+	 * <!-- begin-user-doc -->
+	 * <!-- end-user-doc -->
+	 * @generated
+	 */
 	public EDataType getINT() {
 		return intEDataType;
 	}
@@ -235,6 +252,8 @@ public class Ecore2xtextPackageImpl extends EPackageImpl implements Ecore2xtextP
 		createEReference(rootEClass, ROOT__CLASSES);
 		createEAttribute(rootEClass, ROOT__NAME);
 
+		diamondInheritanceEClass = createEClass(DIAMOND_INHERITANCE);
+
 		// Create data types
 		intEDataType = createEDataType(INT);
 	}
@@ -269,6 +288,8 @@ public class Ecore2xtextPackageImpl extends EPackageImpl implements Ecore2xtextP
 		// Add supertypes to classes
 		concrete0EClass.getESuperTypes().add(this.getAbstract());
 		concrete1EClass.getESuperTypes().add(this.getAbstract());
+		diamondInheritanceEClass.getESuperTypes().add(this.getConcrete0());
+		diamondInheritanceEClass.getESuperTypes().add(this.getConcrete1());
 
 		// Initialize classes and features; add operations and parameters
 		initEClass(abstractEClass, Abstract.class, "Abstract", IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -281,6 +302,8 @@ public class Ecore2xtextPackageImpl extends EPackageImpl implements Ecore2xtextP
 		initEClass(rootEClass, Root.class, "Root", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 		initEReference(getRoot_Classes(), this.getAbstract(), null, "classes", null, 0, -1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 		initEAttribute(getRoot_Name(), this.getINT(), "name", null, 0, 1, Root.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+		initEClass(diamondInheritanceEClass, DiamondInheritance.class, "DiamondInheritance", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
 		// Initialize data types
 		initEDataType(intEDataType, String.class, "INT", IS_SERIALIZABLE, !IS_GENERATED_INSTANCE_CLASS);

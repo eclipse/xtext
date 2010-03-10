@@ -37,8 +37,9 @@ protected class ThisRootNode extends RootToken {
 		switch(index) {
 			case 0: return new Root_Group(this, this, 0, inst);
 			case 1: return new Abstract_Alternatives(this, this, 1, inst);
-			case 2: return new Concrete0_Group(this, this, 2, inst);
-			case 3: return new Concrete1_Group(this, this, 3, inst);
+			case 2: return new Concrete0_Alternatives(this, this, 2, inst);
+			case 3: return new Concrete1_Alternatives(this, this, 3, inst);
+			case 4: return new DiamondInheritance_Group(this, this, 4, inst);
 			default: return null;
 		}	
 	}	
@@ -492,14 +493,14 @@ protected class Abstract_Concrete0ParserRuleCall_0 extends RuleCallToken {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Concrete0_Group(this, this, 0, inst);
+			case 0: return new Concrete0_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(Concrete0_Group.class, current)) return null;
+		if(checkForRecursion(Concrete0_Alternatives.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getConcrete0Rule().getType().getClassifier())) return null;
 		return current;
 	}
@@ -527,14 +528,14 @@ protected class Abstract_Concrete1ParserRuleCall_1 extends RuleCallToken {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Concrete1_Group(this, this, 0, inst);
+			case 0: return new Concrete1_Alternatives(this, this, 0, inst);
 			default: return null;
 		}	
 	}	
 		
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(checkForRecursion(Concrete1_Group.class, current)) return null;
+		if(checkForRecursion(Concrete1_Alternatives.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getConcrete1Rule().getType().getClassifier())) return null;
 		return current;
 	}
@@ -551,29 +552,32 @@ protected class Abstract_Concrete1ParserRuleCall_1 extends RuleCallToken {
 /************ end Rule Abstract ****************/
 
 
+
+
 /************ begin Rule Concrete0 ****************
  *
  * Concrete0:
- *   {Concrete0} "Concrete0" name=EString;
+ *   DiamondInheritance|{Concrete0} "Concrete0" name=EString;
  *
  **/
 
-// {Concrete0} "Concrete0" name=EString
-protected class Concrete0_Group extends GroupToken {
-	
-	public Concrete0_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+// DiamondInheritance|{Concrete0} "Concrete0" name=EString
+protected class Concrete0_Alternatives extends AlternativesToken {
+
+	public Concrete0_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.getConcrete0Access().getGroup();
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getConcrete0Access().getAlternatives();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Concrete0_NameAssignment_2(parent, this, 0, inst);
+			case 0: return new Concrete0_DiamondInheritanceParserRuleCall_0(parent, this, 0, inst);
+			case 1: return new Concrete0_Group_1(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -585,16 +589,73 @@ protected class Concrete0_Group extends GroupToken {
 	}
 }
 
-// {Concrete0}
-protected class Concrete0_Concrete0Action_0 extends ActionToken  {
+// DiamondInheritance
+protected class Concrete0_DiamondInheritanceParserRuleCall_0 extends RuleCallToken {
+	
+	public Concrete0_DiamondInheritanceParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getConcrete0Access().getDiamondInheritanceParserRuleCall_0();
+	}
 
-	public Concrete0_Concrete0Action_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new DiamondInheritance_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(DiamondInheritance_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getDiamondInheritanceRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// {Concrete0} "Concrete0" name=EString
+protected class Concrete0_Group_1 extends GroupToken {
+	
+	public Concrete0_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getConcrete0Access().getGroup_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Concrete0_NameAssignment_1_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// {Concrete0}
+protected class Concrete0_Concrete0Action_1_0 extends ActionToken  {
+
+	public Concrete0_Concrete0Action_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getConcrete0Access().getConcrete0Action_0();
+		return grammarAccess.getConcrete0Access().getConcrete0Action_1_0();
 	}
 
     @Override
@@ -607,28 +668,28 @@ protected class Concrete0_Concrete0Action_0 extends ActionToken  {
 	
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getConcrete0Access().getConcrete0Action_0().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getConcrete0Access().getConcrete0Action_1_0().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
 }
 
 // "Concrete0"
-protected class Concrete0_Concrete0Keyword_1 extends KeywordToken  {
+protected class Concrete0_Concrete0Keyword_1_1 extends KeywordToken  {
 	
-	public Concrete0_Concrete0Keyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Concrete0_Concrete0Keyword_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getConcrete0Access().getConcrete0Keyword_1();
+		return grammarAccess.getConcrete0Access().getConcrete0Keyword_1_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Concrete0_Concrete0Action_0(parent, this, 0, inst);
+			case 0: return new Concrete0_Concrete0Action_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -636,21 +697,21 @@ protected class Concrete0_Concrete0Keyword_1 extends KeywordToken  {
 }
 
 // name=EString
-protected class Concrete0_NameAssignment_2 extends AssignmentToken  {
+protected class Concrete0_NameAssignment_1_2 extends AssignmentToken  {
 	
-	public Concrete0_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Concrete0_NameAssignment_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getConcrete0Access().getNameAssignment_2();
+		return grammarAccess.getConcrete0Access().getNameAssignment_1_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Concrete0_Concrete0Keyword_1(parent, this, 0, inst);
+			case 0: return new Concrete0_Concrete0Keyword_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -661,7 +722,7 @@ protected class Concrete0_NameAssignment_2 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.DRC;
-			element = grammarAccess.getConcrete0Access().getNameEStringParserRuleCall_2_0();
+			element = grammarAccess.getConcrete0Access().getNameEStringParserRuleCall_1_2_0();
 			return obj;
 		}
 		return null;
@@ -670,32 +731,34 @@ protected class Concrete0_NameAssignment_2 extends AssignmentToken  {
 }
 
 
+
 /************ end Rule Concrete0 ****************/
 
 
 /************ begin Rule Concrete1 ****************
  *
  * Concrete1:
- *   {Concrete1} "Concrete1" name=EString;
+ *   DiamondInheritance|{Concrete1} "Concrete1" name=EString;
  *
  **/
 
-// {Concrete1} "Concrete1" name=EString
-protected class Concrete1_Group extends GroupToken {
-	
-	public Concrete1_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+// DiamondInheritance|{Concrete1} "Concrete1" name=EString
+protected class Concrete1_Alternatives extends AlternativesToken {
+
+	public Concrete1_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
-	public Group getGrammarElement() {
-		return grammarAccess.getConcrete1Access().getGroup();
+	public Alternatives getGrammarElement() {
+		return grammarAccess.getConcrete1Access().getAlternatives();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Concrete1_NameAssignment_2(parent, this, 0, inst);
+			case 0: return new Concrete1_DiamondInheritanceParserRuleCall_0(parent, this, 0, inst);
+			case 1: return new Concrete1_Group_1(parent, this, 1, inst);
 			default: return null;
 		}	
 	}	
@@ -707,16 +770,73 @@ protected class Concrete1_Group extends GroupToken {
 	}
 }
 
-// {Concrete1}
-protected class Concrete1_Concrete1Action_0 extends ActionToken  {
+// DiamondInheritance
+protected class Concrete1_DiamondInheritanceParserRuleCall_0 extends RuleCallToken {
+	
+	public Concrete1_DiamondInheritanceParserRuleCall_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getConcrete1Access().getDiamondInheritanceParserRuleCall_0();
+	}
 
-	public Concrete1_Concrete1Action_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new DiamondInheritance_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(DiamondInheritance_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getDiamondInheritanceRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// {Concrete1} "Concrete1" name=EString
+protected class Concrete1_Group_1 extends GroupToken {
+	
+	public Concrete1_Group_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getConcrete1Access().getGroup_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Concrete1_NameAssignment_1_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// {Concrete1}
+protected class Concrete1_Concrete1Action_1_0 extends ActionToken  {
+
+	public Concrete1_Concrete1Action_1_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Action getGrammarElement() {
-		return grammarAccess.getConcrete1Access().getConcrete1Action_0();
+		return grammarAccess.getConcrete1Access().getConcrete1Action_1_0();
 	}
 
     @Override
@@ -729,28 +849,28 @@ protected class Concrete1_Concrete1Action_0 extends ActionToken  {
 	
     @Override
 	protected IInstanceDescription tryConsumeVal() {
-		if(!current.isInstanceOf(grammarAccess.getConcrete1Access().getConcrete1Action_0().getType().getClassifier())) return null;
+		if(!current.isInstanceOf(grammarAccess.getConcrete1Access().getConcrete1Action_1_0().getType().getClassifier())) return null;
 		if(!current.isConsumed()) return null;
 		return current;
 	}
 }
 
 // "Concrete1"
-protected class Concrete1_Concrete1Keyword_1 extends KeywordToken  {
+protected class Concrete1_Concrete1Keyword_1_1 extends KeywordToken  {
 	
-	public Concrete1_Concrete1Keyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Concrete1_Concrete1Keyword_1_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Keyword getGrammarElement() {
-		return grammarAccess.getConcrete1Access().getConcrete1Keyword_1();
+		return grammarAccess.getConcrete1Access().getConcrete1Keyword_1_1();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Concrete1_Concrete1Action_0(parent, this, 0, inst);
+			case 0: return new Concrete1_Concrete1Action_1_0(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -758,21 +878,21 @@ protected class Concrete1_Concrete1Keyword_1 extends KeywordToken  {
 }
 
 // name=EString
-protected class Concrete1_NameAssignment_2 extends AssignmentToken  {
+protected class Concrete1_NameAssignment_1_2 extends AssignmentToken  {
 	
-	public Concrete1_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+	public Concrete1_NameAssignment_1_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
 		super(parent, next, no, current);
 	}
 	
 	@Override
 	public Assignment getGrammarElement() {
-		return grammarAccess.getConcrete1Access().getNameAssignment_2();
+		return grammarAccess.getConcrete1Access().getNameAssignment_1_2();
 	}
 
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Concrete1_Concrete1Keyword_1(parent, this, 0, inst);
+			case 0: return new Concrete1_Concrete1Keyword_1_1(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -783,7 +903,7 @@ protected class Concrete1_NameAssignment_2 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("name");
 		if(Boolean.TRUE.booleanValue()) { 
 			type = AssignmentType.DRC;
-			element = grammarAccess.getConcrete1Access().getNameEStringParserRuleCall_2_0();
+			element = grammarAccess.getConcrete1Access().getNameEStringParserRuleCall_1_2_0();
 			return obj;
 		}
 		return null;
@@ -792,8 +912,129 @@ protected class Concrete1_NameAssignment_2 extends AssignmentToken  {
 }
 
 
+
 /************ end Rule Concrete1 ****************/
 
 
+/************ begin Rule DiamondInheritance ****************
+ *
+ * DiamondInheritance:
+ *   {DiamondInheritance} "DiamondInheritance" name=EString;
+ *
+ **/
+
+// {DiamondInheritance} "DiamondInheritance" name=EString
+protected class DiamondInheritance_Group extends GroupToken {
+	
+	public DiamondInheritance_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getDiamondInheritanceAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new DiamondInheritance_NameAssignment_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getDiamondInheritanceRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// {DiamondInheritance}
+protected class DiamondInheritance_DiamondInheritanceAction_0 extends ActionToken  {
+
+	public DiamondInheritance_DiamondInheritanceAction_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Action getGrammarElement() {
+		return grammarAccess.getDiamondInheritanceAccess().getDiamondInheritanceAction_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+	
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(!current.isInstanceOf(grammarAccess.getDiamondInheritanceAccess().getDiamondInheritanceAction_0().getType().getClassifier())) return null;
+		if(!current.isConsumed()) return null;
+		return current;
+	}
+}
+
+// "DiamondInheritance"
+protected class DiamondInheritance_DiamondInheritanceKeyword_1 extends KeywordToken  {
+	
+	public DiamondInheritance_DiamondInheritanceKeyword_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getDiamondInheritanceAccess().getDiamondInheritanceKeyword_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new DiamondInheritance_DiamondInheritanceAction_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// name=EString
+protected class DiamondInheritance_NameAssignment_2 extends AssignmentToken  {
+	
+	public DiamondInheritance_NameAssignment_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getDiamondInheritanceAccess().getNameAssignment_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new DiamondInheritance_DiamondInheritanceKeyword_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.DRC;
+			element = grammarAccess.getDiamondInheritanceAccess().getNameEStringParserRuleCall_2_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule DiamondInheritance ****************/
 
 }

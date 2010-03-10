@@ -5,6 +5,7 @@ grammar InternalEcore2XtextTest;
 
 options {
 	superClass=AbstractInternalAntlrParser;
+	backtrack=true;
 	
 }
 
@@ -37,6 +38,11 @@ import org.eclipse.xtext.xtext.ui.ecore2xtext.services.Ecore2XtextTestGrammarAcc
 
 @parser::members {
 
+/*
+  This grammar contains a lot of empty actions to work around a bug in ANTLR.
+  Otherwise the ANTLR tool will create synpreds that cannot be compiled in some rare cases.
+*/
+ 
  	private Ecore2XtextTestGrammarAccess grammarAccess;
  	
     public InternalEcore2XtextTestParser(TokenStream input, IAstFactory factory, Ecore2XtextTestGrammarAccess grammarAccess) {
@@ -85,6 +91,9 @@ ruleRoot returns [EObject current=null]
     	lastConsumedNode = currentNode;
     }:
 ((
+	{ 
+	  /* */ 
+	}
     { 
         temp=factory.create(grammarAccess.getRootAccess().getRootAction_0().getType().getClassifier());
         $current = temp; 
@@ -219,6 +228,9 @@ ruleAbstract returns [EObject current=null]
     	lastConsumedNode = currentNode;
     }:
 (
+	{ 
+	  /* */ 
+	}
     { 
         currentNode=createCompositeNode(grammarAccess.getAbstractAccess().getConcrete0ParserRuleCall_0(), currentNode); 
     }
@@ -229,6 +241,9 @@ ruleAbstract returns [EObject current=null]
     }
 
     |
+	{ 
+	  /* */ 
+	}
     { 
         currentNode=createCompositeNode(grammarAccess.getAbstractAccess().getConcrete1ParserRuleCall_1(), currentNode); 
     }
@@ -238,130 +253,6 @@ ruleAbstract returns [EObject current=null]
         currentNode = currentNode.getParent();
     }
 )
-;
-
-
-
-
-
-// Entry rule entryRuleConcrete0
-entryRuleConcrete0 returns [EObject current=null] 
-	:
-	{ currentNode = createCompositeNode(grammarAccess.getConcrete0Rule(), currentNode); }
-	 iv_ruleConcrete0=ruleConcrete0 
-	 { $current=$iv_ruleConcrete0.current; } 
-	 EOF 
-;
-
-// Rule Concrete0
-ruleConcrete0 returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-    }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
-((
-    { 
-        temp=factory.create(grammarAccess.getConcrete0Access().getConcrete0Action_0().getType().getClassifier());
-        $current = temp; 
-        temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getConcrete0Access().getConcrete0Action_0(), currentNode.getParent());
-    newNode.getChildren().add(currentNode);
-    moveLookaheadInfo(currentNode, newNode);
-    currentNode = newNode; 
-        associateNodeWithAstElement(currentNode, $current); 
-    }
-)	'Concrete0' 
-    {
-        createLeafNode(grammarAccess.getConcrete0Access().getConcrete0Keyword_1(), null); 
-    }
-(
-(
-		{ 
-	        currentNode=createCompositeNode(grammarAccess.getConcrete0Access().getNameEStringParserRuleCall_2_0(), currentNode); 
-	    }
-		lv_name_2_0=ruleEString		{
-	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getConcrete0Rule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
-	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"name",
-	        		lv_name_2_0, 
-	        		"EString", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
-	    }
-
-)
-))
-;
-
-
-
-
-
-// Entry rule entryRuleConcrete1
-entryRuleConcrete1 returns [EObject current=null] 
-	:
-	{ currentNode = createCompositeNode(grammarAccess.getConcrete1Rule(), currentNode); }
-	 iv_ruleConcrete1=ruleConcrete1 
-	 { $current=$iv_ruleConcrete1.current; } 
-	 EOF 
-;
-
-// Rule Concrete1
-ruleConcrete1 returns [EObject current=null] 
-    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
-    }
-    @after { resetLookahead(); 
-    	lastConsumedNode = currentNode;
-    }:
-((
-    { 
-        temp=factory.create(grammarAccess.getConcrete1Access().getConcrete1Action_0().getType().getClassifier());
-        $current = temp; 
-        temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getConcrete1Access().getConcrete1Action_0(), currentNode.getParent());
-    newNode.getChildren().add(currentNode);
-    moveLookaheadInfo(currentNode, newNode);
-    currentNode = newNode; 
-        associateNodeWithAstElement(currentNode, $current); 
-    }
-)	'Concrete1' 
-    {
-        createLeafNode(grammarAccess.getConcrete1Access().getConcrete1Keyword_1(), null); 
-    }
-(
-(
-		{ 
-	        currentNode=createCompositeNode(grammarAccess.getConcrete1Access().getNameEStringParserRuleCall_2_0(), currentNode); 
-	    }
-		lv_name_2_0=ruleEString		{
-	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getConcrete1Rule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
-	        }
-	        try {
-	       		set(
-	       			$current, 
-	       			"name",
-	        		lv_name_2_0, 
-	        		"EString", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
-	    }
-
-)
-))
 ;
 
 
@@ -430,6 +321,227 @@ ruleEString returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()
     }
 )
     ;
+
+
+
+
+
+// Entry rule entryRuleConcrete0
+entryRuleConcrete0 returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getConcrete0Rule(), currentNode); }
+	 iv_ruleConcrete0=ruleConcrete0 
+	 { $current=$iv_ruleConcrete0.current; } 
+	 EOF 
+;
+
+// Rule Concrete0
+ruleConcrete0 returns [EObject current=null] 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(
+	{ 
+	  /* */ 
+	}
+    { 
+        currentNode=createCompositeNode(grammarAccess.getConcrete0Access().getDiamondInheritanceParserRuleCall_0(), currentNode); 
+    }
+    this_DiamondInheritance_0=ruleDiamondInheritance
+    { 
+        $current = $this_DiamondInheritance_0.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    |((
+	{ 
+	  /* */ 
+	}
+    { 
+        temp=factory.create(grammarAccess.getConcrete0Access().getConcrete0Action_1_0().getType().getClassifier());
+        $current = temp; 
+        temp = null;
+        CompositeNode newNode = createCompositeNode(grammarAccess.getConcrete0Access().getConcrete0Action_1_0(), currentNode.getParent());
+    newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
+    currentNode = newNode; 
+        associateNodeWithAstElement(currentNode, $current); 
+    }
+)	'Concrete0' 
+    {
+        createLeafNode(grammarAccess.getConcrete0Access().getConcrete0Keyword_1_1(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getConcrete0Access().getNameEStringParserRuleCall_1_2_0(), currentNode); 
+	    }
+		lv_name_3_0=ruleEString		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getConcrete0Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"name",
+	        		lv_name_3_0, 
+	        		"EString", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+)))
+;
+
+
+
+
+
+// Entry rule entryRuleConcrete1
+entryRuleConcrete1 returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getConcrete1Rule(), currentNode); }
+	 iv_ruleConcrete1=ruleConcrete1 
+	 { $current=$iv_ruleConcrete1.current; } 
+	 EOF 
+;
+
+// Rule Concrete1
+ruleConcrete1 returns [EObject current=null] 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(
+	{ 
+	  /* */ 
+	}
+    { 
+        currentNode=createCompositeNode(grammarAccess.getConcrete1Access().getDiamondInheritanceParserRuleCall_0(), currentNode); 
+    }
+    this_DiamondInheritance_0=ruleDiamondInheritance
+    { 
+        $current = $this_DiamondInheritance_0.current; 
+        currentNode = currentNode.getParent();
+    }
+
+    |((
+	{ 
+	  /* */ 
+	}
+    { 
+        temp=factory.create(grammarAccess.getConcrete1Access().getConcrete1Action_1_0().getType().getClassifier());
+        $current = temp; 
+        temp = null;
+        CompositeNode newNode = createCompositeNode(grammarAccess.getConcrete1Access().getConcrete1Action_1_0(), currentNode.getParent());
+    newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
+    currentNode = newNode; 
+        associateNodeWithAstElement(currentNode, $current); 
+    }
+)	'Concrete1' 
+    {
+        createLeafNode(grammarAccess.getConcrete1Access().getConcrete1Keyword_1_1(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getConcrete1Access().getNameEStringParserRuleCall_1_2_0(), currentNode); 
+	    }
+		lv_name_3_0=ruleEString		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getConcrete1Rule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"name",
+	        		lv_name_3_0, 
+	        		"EString", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+)))
+;
+
+
+
+
+
+// Entry rule entryRuleDiamondInheritance
+entryRuleDiamondInheritance returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getDiamondInheritanceRule(), currentNode); }
+	 iv_ruleDiamondInheritance=ruleDiamondInheritance 
+	 { $current=$iv_ruleDiamondInheritance.current; } 
+	 EOF 
+;
+
+// Rule DiamondInheritance
+ruleDiamondInheritance returns [EObject current=null] 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+((
+	{ 
+	  /* */ 
+	}
+    { 
+        temp=factory.create(grammarAccess.getDiamondInheritanceAccess().getDiamondInheritanceAction_0().getType().getClassifier());
+        $current = temp; 
+        temp = null;
+        CompositeNode newNode = createCompositeNode(grammarAccess.getDiamondInheritanceAccess().getDiamondInheritanceAction_0(), currentNode.getParent());
+    newNode.getChildren().add(currentNode);
+    moveLookaheadInfo(currentNode, newNode);
+    currentNode = newNode; 
+        associateNodeWithAstElement(currentNode, $current); 
+    }
+)	'DiamondInheritance' 
+    {
+        createLeafNode(grammarAccess.getDiamondInheritanceAccess().getDiamondInheritanceKeyword_1(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getDiamondInheritanceAccess().getNameEStringParserRuleCall_2_0(), currentNode); 
+	    }
+		lv_name_2_0=ruleEString		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getDiamondInheritanceRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"name",
+	        		lv_name_2_0, 
+	        		"EString", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+))
+;
 
 
 

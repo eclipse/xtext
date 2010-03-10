@@ -14,14 +14,19 @@ Root returns Root:
 Abstract returns Abstract:
 	Concrete0 | Concrete1;
 
-Concrete0 returns Concrete0:
-	{Concrete0} 'Concrete0' name=EString ;
-
-Concrete1 returns Concrete1:
-	{Concrete1} 'Concrete1' name=EString ;
-
 INT0 returns INT:
 	'INT' /* TODO: implement this rule and an appropriate IValueConverter */;
 
 EString returns ecore::EString:
 	STRING | ID;
+
+Concrete0 returns Concrete0:
+	DiamondInheritance |
+    {Concrete0} 'Concrete0' name=EString ;
+
+Concrete1 returns Concrete1:
+	DiamondInheritance |
+    {Concrete1} 'Concrete1' name=EString ;
+
+DiamondInheritance returns DiamondInheritance:
+	{DiamondInheritance} 'DiamondInheritance' name=EString ;

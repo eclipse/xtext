@@ -9,6 +9,7 @@ RULE_SL_COMMENT=8
 'Root'=12
 'Concrete0'=17
 'classes'=15
+'DiamondInheritance'=19
 'Concrete1'=18
 '}'=14
 '{'=13

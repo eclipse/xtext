@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: Ecore2xtextSwitch.java,v 1.1 2010/01/08 12:38:24 jkohnlein Exp $
+ * $Id: Ecore2xtextSwitch.java,v 1.2 2010/03/10 16:34:10 jkohnlein Exp $
  */
 package org.eclipse.xtext.xtext.ui.ecore2xtext.util;
 
@@ -113,6 +113,15 @@ public class Ecore2xtextSwitch<T> {
 				if (result == null) result = defaultCase(theEObject);
 				return result;
 			}
+			case Ecore2xtextPackage.DIAMOND_INHERITANCE: {
+				DiamondInheritance diamondInheritance = (DiamondInheritance)theEObject;
+				T result = caseDiamondInheritance(diamondInheritance);
+				if (result == null) result = caseConcrete0(diamondInheritance);
+				if (result == null) result = caseConcrete1(diamondInheritance);
+				if (result == null) result = caseAbstract(diamondInheritance);
+				if (result == null) result = defaultCase(theEObject);
+				return result;
+			}
 			default: return defaultCase(theEObject);
 		}
 	}
@@ -174,6 +183,21 @@ public class Ecore2xtextSwitch<T> {
 	 * @generated
 	 */
 	public T caseRoot(Root object) {
+		return null;
+	}
+
+	/**
+	 * Returns the result of interpreting the object as an instance of '<em>Diamond Inheritance</em>'.
+	 * <!-- begin-user-doc -->
+	 * This implementation returns null;
+	 * returning a non-null result will terminate the switch.
+	 * <!-- end-user-doc -->
+	 * @param object the target of the switch.
+	 * @return the result of interpreting the object as an instance of '<em>Diamond Inheritance</em>'.
+	 * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+	 * @generated
+	 */
+	public T caseDiamondInheritance(DiamondInheritance object) {
 		return null;
 	}
 
