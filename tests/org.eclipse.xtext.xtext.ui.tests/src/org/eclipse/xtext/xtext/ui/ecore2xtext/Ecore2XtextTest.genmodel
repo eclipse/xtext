@@ -17,5 +17,6 @@
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Ecore2XtextTest.ecore#//Root/classes"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Ecore2XtextTest.ecore#//Root/name"/>
     </genClasses>
+    <genClasses ecoreClass="Ecore2XtextTest.ecore#//DiamondInheritance"/>
   </genPackages>
 </genmodel:GenModel>

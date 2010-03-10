@@ -70,4 +70,8 @@ public class UniqueNameUtil {
 	public static EClassifier eString() {
 		return EcorePackage.eINSTANCE.getEString();
 	}
+	
+	public static void debug(String s) {
+		System.out.println(s);
+	}
 }

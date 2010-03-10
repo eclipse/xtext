@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.xtext.ui.wizard.ecore2xtext;
 
+import java.util.Comparator;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -37,6 +38,7 @@ import org.eclipse.swt.widgets.Label;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 
 /**
  * @author koehnlein - Initial contribution and API
@@ -172,7 +174,11 @@ public class WizardSelectImportedEPackagePage extends WizardPage {
 								return from.getEPackage().getEClassifiers();
 							}
 						})), EClass.class);
-				return Iterables.newArray(eClasses, EClass.class);
+				return Iterables.newArray(Lists.sortedCopy(eClasses, new Comparator<EClass>() {
+					public int compare(EClass o1, EClass o2) {
+						return o1.getName().compareTo(o2.getName());
+					}
+				}), EClass.class);
 			}
 		});
 		updateUI();

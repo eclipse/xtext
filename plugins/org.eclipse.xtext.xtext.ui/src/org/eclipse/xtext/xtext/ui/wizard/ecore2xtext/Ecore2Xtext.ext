@@ -12,7 +12,9 @@ import org::eclipse::xtext::xtext::ui::wizard::ecore2xtext;
 
 
 Collection[EClassifier] allRuleClassifiers(Ecore2XtextProjectInfo this) :
-	EPackageInfos.EPackage.allReferencedClassifiers(false).flatten().toSet();
+	rootElementClass == null 
+		? EPackageInfos.EPackage.allReferencedClassifiers(false).flatten().toSet()
+	    : (let c = { rootElementClass } : rootElementClass.allAssignedClassifiers(c) -> c.toSet());
 
 Collection[EPackage] allReferencedEPackages(Collection[EPackageInfo] this) :
 	EPackage.allReferencedEPackages(true).flatten().toSet();
@@ -22,6 +24,15 @@ private Collection[EPackage] allReferencedEPackages(EPackage this, boolean inclu
 
 private Collection[EClassifier] allReferencedClassifiers(EPackage this, boolean includeCrossRefs) :
 	EClassifiers.union(EClassifiers.typeSelect(EClass).EAllStructuralFeatures.select(f|f.needsAssignment() && (includeCrossRefs || f.isContainment())).EType.flatten()).add(eString()).toSet();
+	
+private allAssignedClassifiers(EClass this, Collection acceptor) :
+	(let classifiers = (EAllStructuralFeatures.select(r|r.needsAssignment()).EType).union(subClasses()).removeAll(acceptor) :
+		classifiers.isEmpty 
+			? null
+			: (acceptor.addAll(classifiers) -> classifiers.typeSelect(EClass).collect(c|c.allAssignedClassifiers(acceptor))));
+	
+private Void debug(String this):
+	JAVA org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.debug(java.lang.String);
 	
 EClassifier eString() :
 	JAVA org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.eString();
