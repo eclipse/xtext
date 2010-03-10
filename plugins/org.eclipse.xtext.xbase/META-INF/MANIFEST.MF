@@ -34,3 +34,4 @@ Export-Package: org.eclipse.xtext.xbase,
  org.eclipse.xtext.xtype,
  org.eclipse.xtext.xtype.util
 Import-Package: org.apache.log4j
+Bundle-Localization: plugin
