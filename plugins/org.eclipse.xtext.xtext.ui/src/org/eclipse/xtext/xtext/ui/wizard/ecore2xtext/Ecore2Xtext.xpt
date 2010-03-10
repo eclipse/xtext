@@ -54,7 +54,7 @@ import "«importURI()»" «IF uniqueName() != null && uniqueName() != ""»as «unique
     	IF !prefixFeatures().isEmpty
     		» («
     	ENDIF
-    	»«EXPAND assignment FOREACH prefixFeatures() SEPARATOR " & "»«
+    	»«EXPAND assignment FOREACH prefixFeatures() SEPARATOR " "»«
     	IF !prefixFeatures().isEmpty
     		») «
     	ENDIF
