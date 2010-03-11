@@ -1,0 +1,364 @@
+module org.eclipse.xtext.GenerateAllTestLanguages
+
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.*
+import org.eclipse.xtext.generator.*
+
+var projectName = "org.eclipse.xtext.tests"
+var runtimeProject = "../${projectName}"
+
+var ametamodel.genmodel = "platform:/resource/${projectName}/src/org/eclipse/xtext/grammarinheritance/ametamodel.genmodel"
+var enums.genmodel = "platform:/resource/${projectName}/src/org/eclipse/xtext/enumrules/enums.genmodel"
+var baseinheritance.genmodel = "platform:/resource/${projectName}/src-gen/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.genmodel"
+var inheritance.genmodel = "platform:/resource/${projectName}/src-gen/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.genmodel"
+var xtext.genmodel = "platform:/resource/org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.genmodel"
+var supertest.genmodel = "platform:/resource/${projectName}/src-gen/org/eclipse/xtext/generator/ecore/SuperTestLanguage.genmodel"
+
+Workflow {
+	bean = StandaloneSetup {
+		platformUri = "${runtimeProject}/.."
+	}
+	
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}/src-gen"
+	}
+	
+	component = Generator {
+		mergeManifest = false
+		pathRtProject = runtimeProject
+		projectNameRt = projectName
+		
+		language = {
+			uri = "classpath:/org/eclipse/xtext/generator/ecore/SuperTestLanguage.xtext"
+			fragment = @TestLanguagesFragments
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/generator/ecore/SubTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
+				referencedGenModels = supertest.genmodel
+			}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/XtextGrammarTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.xtext"
+			fragment = @TestLanguagesFragmentsEx {
+				backtrack = true
+				backtrackLexer = true
+				memoize = true
+			}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/lexer/IgnoreCaseLexerTestLanguage.xtext"
+			fragment = @TestLanguagesFragmentsEx {
+				ignoreCase = true
+			}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/linking/Bug287988TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/linking/Bug289059TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/linking/ImportUriTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/linking/LangATestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/dummy/DummyTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/enumrules/EnumRulesTestLanguage.xtext"
+			fragment = @TestLanguagesFragments { 
+				referencedGenModels = enums.genmodel
+			}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/enumrules/EnumAndReferenceTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
+				referencedGenModels = "platform:/resource/${projectName}/src/org/eclipse/xtext/generator/ecore/Genmodel.genmodel"
+			}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/generator/grammarAccess/GrammarAccessTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+			fragment = grammarAccess.EmptyPackageAwareGrammarAccessFragment {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
+				referencedGenModels = ametamodel.genmodel
+			}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
+				referencedGenModels = baseinheritance.genmodel
+			}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTest2Language.xtext"
+			fragment = @TestLanguagesFragments {
+				referencedGenModels = inheritance.genmodel
+			}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/index/IndexTestLanguage.xtext"
+			fragment = @TestLanguagesFragmentsQualifiedNames {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/metamodelreferencing/tests/MetamodelRefTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
+				referencedGenModels = xtext.genmodel
+			}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/metamodelreferencing/tests/MultiGenMMTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug289515TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug289524TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
+				backtrack = true
+			}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug289524ExTestLanguage.xtext"
+			fragment = @TestLanguagesFragmentsEx {
+				referencedGenModels = inheritance.genmodel
+			}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug296889TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
+				referencedGenModels = inheritance.genmodel
+			}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug296889ExTestLanguage.xtext"
+			fragment = @TestLanguagesFragmentsEx {
+				referencedGenModels = inheritance.genmodel
+			}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug299237TestLanguage.xtext"
+			fragment = @TestLanguagesFragmentsEx {
+				ignoreCase = true
+			}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug301935TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug301935ExTestLanguage.xtext"
+			fragment = @TestLanguagesFragmentsEx {
+				ignoreCase = true
+			}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parser/assignments/Bug287184TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parser/datatyperules/DatatypeRulesTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parser/epatch/EpatchTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parser/keywords/KeywordsTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parser/terminalrules/Bug292245TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parser/terminalrules/Bug297105TestLanguage.xtext"
+			fragment = @TestLanguagesFragmentsEx {
+				backtrack = true
+			}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parser/terminalrules/HiddenTerminalsTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parser/terminalrules/TerminalRulesTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parser/terminalrules/XtextTerminalsTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/UnorderedGroupsTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/SimpleUnorderedGroupsTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parser/unorderedGroups/ExUnorderedGroupsTestLanguage.xtext"
+			fragment = @TestLanguagesFragmentsEx {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parsetree/impl/Bug305397.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/Bug299395TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/SimpleReconstrTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/SerializationBug269362TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/SerializationErrorTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/Bug302128TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parsetree/unassignedtext/UnassignedTextTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/parsetree/transientvalues/TransientValuesTest.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/testlanguages/ActionTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/testlanguages/FowlerDslTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/testlanguages/LexerTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/testlanguages/LookaheadTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/testlanguages/OptionalEmptyTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/testlanguages/PartialParserTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/testlanguages/ReferenceGrammarTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/testlanguages/SimpleExpressionsTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/testlanguages/TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/testlanguages/TreeTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/valueconverter/Bug250313.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/xtext/ecoreInference/MultiValueFeatureTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/xtext/ecoreInference/UnassignedRuleCallTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/validation/ConcreteSyntaxValidationTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/resource/EObjectAtOffsetTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = { 
+			uri = "classpath:/org/eclipse/xtext/resource/LocationProviderTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		/*
+		language = { uri = "classpath:/org/eclipse/xtext/generator/GeneratorTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		*/
+	}
+}
+
+

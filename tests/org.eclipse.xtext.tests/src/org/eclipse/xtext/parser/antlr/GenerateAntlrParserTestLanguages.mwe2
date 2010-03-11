@@ -1,0 +1,63 @@
+module org.eclipse.xtext.parser.antlr.GenerateAntlrParserTestLanguages
+
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.*
+import org.eclipse.xtext.generator.*
+
+var projectName = "org.eclipse.xtext.tests"
+var runtimeProject = "../${projectName}"
+
+Workflow {
+	bean = StandaloneSetup {
+		platformUri = "${runtimeProject}/.."
+	}
+	
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/parser/antlr"
+	}
+	
+	component = Generator {
+		pathRtProject = runtimeProject
+		projectNameRt = projectName
+		
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug289515TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug289524TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
+				backtrack = true
+			}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug289524ExTestLanguage.xtext"
+			fragment = @TestLanguagesFragmentsEx {
+				backtrack = true
+			}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug296889TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
+				backtrack = true
+			}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug296889ExTestLanguage.xtext"
+			fragment = @TestLanguagesFragmentsEx {
+				backtrack = true
+			}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug301935TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug301935ExTestLanguage.xtext"
+			fragment = @TestLanguagesFragmentsEx {
+				ignoreCase = true
+			}
+		}
+	}
+}

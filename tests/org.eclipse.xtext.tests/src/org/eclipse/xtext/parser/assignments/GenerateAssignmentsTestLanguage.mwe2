@@ -1,0 +1,38 @@
+module org.eclipse.xtext.parser.assignments.GenerateAssignmentsTestLanguage
+
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.*
+import org.eclipse.xtext.generator.*
+
+var projectName = "org.eclipse.xtext.tests"
+var runtimeProject = "../${projectName}"
+
+Workflow {
+	bean = StandaloneSetup {
+		platformUri = "${runtimeProject}/.."
+	}
+	
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/parser/assignments"
+	}
+	
+	component = Generator {
+		pathRtProject = runtimeProject
+		projectNameRt = projectName
+		
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/assignments/AssignmentsTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/assignments/Bug287184TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parser/assignments/Bug288432TestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		
+	}
+}
