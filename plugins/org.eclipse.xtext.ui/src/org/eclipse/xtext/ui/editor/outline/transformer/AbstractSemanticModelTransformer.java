@@ -24,7 +24,8 @@ public abstract class AbstractSemanticModelTransformer implements ISemanticModel
 
 	public ContentOutlineNode transformSemanticModel(EObject semanticModel) {
 		ContentOutlineNode outlineModel = new ContentOutlineNode(INVISIBLE_ROOT_NODE);
-		transformSemanticNode(semanticModel, outlineModel);
+		if (semanticModel != null)
+			transformSemanticNode(semanticModel, outlineModel);
 		return outlineModel;
 	}
 

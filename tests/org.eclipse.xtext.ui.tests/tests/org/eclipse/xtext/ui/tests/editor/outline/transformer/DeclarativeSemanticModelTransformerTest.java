@@ -71,6 +71,11 @@ public class DeclarativeSemanticModelTransformerTest extends AbstractXtextTests 
 		resource = null;
 		theRoot = null;
 	}
+	
+	public void testNullSafety() throws Exception {
+		ISemanticModelTransformer transformer = new TestTransformerHelper.TestTransformerWithNamingConvention();
+		assertNotNull(transformer.transformSemanticModel(null));
+	}
 
 	public void testWithNamingConventions() {
 		ISemanticModelTransformer transformer = new TestTransformerHelper.TestTransformerWithNamingConvention();

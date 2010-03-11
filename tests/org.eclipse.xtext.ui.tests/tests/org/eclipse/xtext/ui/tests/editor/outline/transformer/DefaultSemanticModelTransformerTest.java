@@ -26,6 +26,7 @@ public class DefaultSemanticModelTransformerTest extends AbstractContentOutlineT
 	}
 
 	public void testNullSafety() {
+		assertNotNull(defaultSemanticModelTransformer.transformSemanticModel(null));
 		assertFalse(defaultSemanticModelTransformer.consumeSemanticChildNodes(null));
 		assertFalse(defaultSemanticModelTransformer.consumeSemanticNode(null));
 	}
