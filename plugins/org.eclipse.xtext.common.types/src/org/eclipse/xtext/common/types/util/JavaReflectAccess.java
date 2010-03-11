@@ -13,15 +13,18 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.common.types.JvmExecutable;
 import org.eclipse.xtext.common.types.JvmField;
 import org.eclipse.xtext.common.types.JvmFormalParameter;
 import org.eclipse.xtext.common.types.JvmOperation;
+import org.eclipse.xtext.common.types.JvmPrimitiveType;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.JvmTypeConstraint;
 import org.eclipse.xtext.common.types.JvmTypeParameter;
 import org.eclipse.xtext.common.types.JvmTypeReference;
 import org.eclipse.xtext.common.types.JvmUpperBound;
+import org.eclipse.xtext.common.types.access.impl.Primitives;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -81,6 +84,9 @@ public class JavaReflectAccess {
 	 * @return the {@link Class} corresponding to the given {@link JvmType}
 	 */
 	public Class<?> getRawType(JvmType type) {
+		if (type.eIsProxy()) {
+			throw new IllegalStateException("Cannot resolve proxy: " + EcoreUtil.getURI(type));
+		}
 		if (type instanceof JvmTypeParameter) {
 			JvmTypeParameter tp = (JvmTypeParameter) type;
 			EList<JvmTypeConstraint> constraints = tp.getConstraints();
@@ -92,6 +98,8 @@ public class JavaReflectAccess {
 			return Object.class;
 		}
 		try {
+			if (type instanceof JvmPrimitiveType)
+				return Primitives.forName(type.getCanonicalName());
 			return classLoader.loadClass(type.getCanonicalName());
 		} catch (ClassNotFoundException e) {
 			if (log.isDebugEnabled())
