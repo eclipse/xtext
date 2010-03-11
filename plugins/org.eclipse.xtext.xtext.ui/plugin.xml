@@ -282,9 +282,6 @@
 			fragment = scoping.ImportNamespacesScopingFragment {}
 			fragment = exporting.QualifiedNamesFragment {}
 			
-			// java types 
-			fragment = types.TypesGeneratorFragment {}
-			
 			// formatter API 
 			fragment = formatting.FormatterFragment {}
 

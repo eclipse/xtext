@@ -23,10 +23,13 @@ public class EPackageInfo {
 
 	private String bundleID;
 
-	public EPackageInfo(EPackage ePackage, URI ePackageImportURI, String ePackageJavaFQN, String bundleID) {
+	private URI genmodelURI;
+
+	public EPackageInfo(EPackage ePackage, URI ePackageImportURI, URI genmodelURI, String ePackageJavaFQN, String bundleID) {
 		super();
 		this.ePackage = ePackage;
 		this.ePackageImportURI = ePackageImportURI;
+		this.genmodelURI = genmodelURI;
 		this.ePackageJavaFQN = ePackageJavaFQN;
 		this.bundleID = bundleID;
 	}
@@ -45,6 +48,10 @@ public class EPackageInfo {
 
 	public String getBundleID() {
 		return bundleID;
+	}
+	
+	public URI getGenmodelURI() {
+		return genmodelURI;
 	}
 	
 }

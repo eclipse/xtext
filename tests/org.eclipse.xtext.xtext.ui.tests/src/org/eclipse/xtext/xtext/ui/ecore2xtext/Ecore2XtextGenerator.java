@@ -114,7 +114,7 @@ public class Ecore2XtextGenerator extends AbstractWorkflowComponent2 {
 				Notifier next = i.next();
 				if (next instanceof EPackage) {
 					EPackage ePackage = (EPackage) next;
-					ePackageInfos.add(new EPackageInfo(ePackage, URI.createURI(ePackage.getNsURI()), null, null));
+					ePackageInfos.add(new EPackageInfo(ePackage, URI.createURI(ePackage.getNsURI()), null, null, null));
 					if (rootElementClass == null) {
 						EClassifier rootElementClassifier = ePackage.getEClassifier(rootElementClassName);
 						if (rootElementClassifier instanceof EClass) {

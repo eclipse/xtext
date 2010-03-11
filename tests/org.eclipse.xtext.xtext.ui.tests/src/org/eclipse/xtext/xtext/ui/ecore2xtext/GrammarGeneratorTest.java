@@ -85,7 +85,7 @@ public class GrammarGeneratorTest extends AbstractXtextTests {
 				Collection<EPackageInfo> ePackageInfos = Lists.newArrayList(Iterables.transform(ePackages,
 						new Function<EPackage, EPackageInfo>() {
 							public EPackageInfo apply(EPackage from) {
-								return new EPackageInfo(from, URI.createURI(from.getNsURI()), null, null);
+								return new EPackageInfo(from, URI.createURI(from.getNsURI()), null, null, null);
 							}
 						}));
 				xtextProjectInfo.setEPackageInfos(ePackageInfos);
