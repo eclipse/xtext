@@ -1,0 +1,26 @@
+module org.eclipse.xtext.generator.ecore.SubTestLanguage
+
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.TestLanguagesFragments
+import org.eclipse.xtext.generator.Generator
+
+var projectName = "org.eclipse.xtext.tests"
+var runtimeProject = "../${projectName}"
+
+Workflow {
+	bean = StandaloneSetup {
+		platformUri="${runtimeProject}/.."
+	}
+	
+	component = Generator {
+		pathRtProject = runtimeProject
+		projectNameRt = projectName
+		
+		language = {
+			uri = "classpath:/org/eclipse/xtext/generator/ecore/SubTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
+			}
+		}
+	}
+}

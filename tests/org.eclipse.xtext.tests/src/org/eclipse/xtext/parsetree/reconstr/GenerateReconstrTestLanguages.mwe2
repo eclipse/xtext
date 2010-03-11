@@ -1,0 +1,52 @@
+module org.eclipse.xtext.parsetree.reconstr.GenerateReconstrTestLanguages
+
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.*
+import org.eclipse.xtext.generator.*
+
+var projectName = "org.eclipse.xtext.tests"
+var runtimeProject = "../${projectName}"
+
+var generateDotDiagram = true
+//var graphvizCommand = "/opt/local/bin/dot -o %1.pdf -v -T pdf"
+
+Workflow {
+	bean = StandaloneSetup {
+		platformUri = "${runtimeProject}/.."
+	}
+	
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/parsetree/reconstr"
+	}
+	
+	component = Generator {
+		pathRtProject = runtimeProject
+		projectNameRt = projectName
+		
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/Bug299395TestLanguage.xtext"
+			fragment = @TestLanguagesFragments auto-inject {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/Bug302128TestLanguage.xtext"
+			fragment = @TestLanguagesFragments auto-inject {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/SerializationBug269362TestLanguage.xtext"
+			fragment = @TestLanguagesFragments auto-inject {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/ComplexReconstrTestLanguage.xtext"
+			fragment = @TestLanguagesFragments auto-inject {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/SerializationErrorTestLanguage.xtext"
+			fragment = @TestLanguagesFragments auto-inject {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parsetree/reconstr/HiddenTokensMergerTestLanguage.xtext"
+			fragment = @TestLanguagesFragments auto-inject {}
+		}
+	}
+}

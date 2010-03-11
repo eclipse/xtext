@@ -1,0 +1,26 @@
+module org.eclipse.xtext.TestLanguagesFragmentsQualifiedNames
+
+import org.eclipse.xtext.generator.*
+
+var referencedGenModels = ""
+var basePackage = ""
+var javaModelDirectory = ""
+var xmiModelDirectory = ""
+var file.extensions = ""
+var classSplitting = true
+var skipGenerate = false
+var backtrack = false
+
+CompositeGeneratorFragment {
+	fragment = de.itemis.xtext.antlr.XtextAntlrGeneratorFragment {
+		options = auto-inject {}
+	}
+	fragment = resourceFactory.ResourceFactoryFragment { 
+		fileExtensions = file.extensions
+	}
+	fragment = grammarAccess.GrammarAccessFragment {}
+	fragment = ecore.EcoreGeneratorFragment auto-inject {}
+	fragment = parser.PackratParserFragment {}
+	fragment = parseTreeConstructor.ParseTreeConstructorFragment auto-inject {}
+	fragment = builder.BuilderIntegrationFragment {}
+}
