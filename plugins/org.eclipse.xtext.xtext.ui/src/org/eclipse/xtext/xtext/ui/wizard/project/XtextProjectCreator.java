@@ -136,7 +136,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 				+ ";visibility:=reexport", "org.eclipse.xpand;visibility:=reexport", //$NON-NLS-1$
 				"org.eclipse.xtend;visibility:=reexport", //$NON-NLS-1$
 				"org.eclipse.xtext;visibility:=reexport", //$NON-NLS-1$
-				"org.eclipse.emf.mwe.core;visibility:=reexport", //$NON-NLS-1$
+				"org.eclipse.emf.mwe2.launch;resolution:=optional", //$NON-NLS-1$
 				"org.eclipse.emf.mwe.utils;visibility:=reexport",//$NON-NLS-1$
 				"org.eclipse.xtend.typesystem.emf;visibility:=reexport")); //$NON-NLS-1$
 

@@ -28,7 +28,6 @@ projectName=«this.projectName»
 «FILE basePackagePath+"/Generate"+languageNameAbbreviation+".mwe2" -»
 module «(basePackagePath+"/"+languageNameAbbreviation).replaceAll("/", ".")»
 
-import org.eclipse.emf.mwe2.runtime.workflow.Workflow
 import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
