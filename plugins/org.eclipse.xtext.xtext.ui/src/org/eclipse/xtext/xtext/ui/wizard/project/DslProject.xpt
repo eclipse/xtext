@@ -25,12 +25,22 @@ file.extensions=«this.firstFileExtension»
 projectName=«this.projectName»
 «ENDFILE»
 
-«FILE basePackagePath+"/Generate"+languageNameAbbreviation+".mwe" -»
-<workflow>
-    <property file="«basePackagePath»/«languageNameAbbreviation».properties"/>
+«FILE basePackagePath+"/Generate"+languageNameAbbreviation+".mwe2" -»
+module «(basePackagePath+"/"+languageNameAbbreviation).replaceAll("/", ".")»
 
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.ui.generator.*
+
+var grammarURI = "classpath:/«this.basePackagePath»/«this.languageNameAbbreviation».xtext"
+var file.extensions = "«this.firstFileExtension»"
+var projectName = "«this.projectName»"
+var runtimeProject = "../${projectName}"
+
+Workflow {
     «this.wizardContribution.mweSnippet»
-</workflow>
+}
 «ENDFILE»
 
 «ENDDEFINE»

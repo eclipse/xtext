@@ -214,91 +214,112 @@
          point="org.eclipse.xtext.xtext.ui.wizardContribution">
       <generatorConfiguration name="Standard">
          <MweSnippet>
-<![CDATA[<property name="runtimeProject" value="../${projectName}"/>
+<![CDATA[
+	bean = StandaloneSetup {
+		platformUri = "${runtimeProject}/.."
+	}
 	
-	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" platformUri="${runtimeProject}/.."/>
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}/src-gen"
+	}
 	
-	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}/src-gen"/>
-	<component class="org.eclipse.emf.mwe.utils.DirectoryCleaner" directory="${runtimeProject}.ui/src-gen"/>
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}.ui/src-gen"
+	}
 	
-	<component class="org.eclipse.xtext.generator.Generator">
-		<pathRtProject value="${runtimeProject}"/>
-		<pathUiProject value="${runtimeProject}.ui"/>
-		<projectNameRt value="${projectName}"/>
-		<projectNameUi value="${projectName}.ui"/>
+	component = Generator {
+		pathRtProject = runtimeProject
+		pathUiProject = "${runtimeProject}.ui"
+		projectNameRt = projectName
+		projectNameUi = "${projectName}.ui"
 		
-		<language uri="${grammarURI}" fileExtensions="${file.extensions}">
-			<!-- Java API to access grammar elements (required by several other fragments) -->
-			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
+		language = {
+			uri = grammarURI
+			fileExtensions = file.extensions
 			
-			<!-- generates Java API for the generated EPackages -->
-			<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/>
+			// Java API to access grammar elements (required by several other fragments)
+			fragment = grammarAccess.GrammarAccessFragment {}
 			
-			<!-- the serialization component -->
-			<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
+			// generates Java API for the generated EPackages 
+			fragment = ecore.EcoreGeneratorFragment {
+			// referencedGenModels = "uri to genmodel, uri to next genmodel"
+			}
 			
-			<!-- a custom ResourceFactory for use with EMF -->
-			<fragment class="org.eclipse.xtext.generator.resourceFactory.ResourceFactoryFragment" 
-				fileExtensions="${file.extensions}"/>
+			// the serialization component
+			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
+			
+			// a custom ResourceFactory for use with EMF 
+			fragment = resourceFactory.ResourceFactoryFragment {
+				fileExtensions = file.extensions
+			}
 				
-			<!-- the following fragment tries to use the Antlr Generator fragment which can be installed via update manager from http://download.itemis.com/updates/ -->
-			<fragment class="org.eclipse.xtext.generator.AntlrDelegatingFragment" />
+			// the following fragment tries to use the Antlr Generator fragment which can be installed via update manager from http://download.itemis.com/updates/
+			fragment = AntlrDelegatingFragment {}
 			
-			<!-- If you don't want to use the Antlr fragment for some reason, remove the antlr fragment and uncomment the packrat parser fragment below.
-			<fragment class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
-			 -->
-	
-			<!-- check-based API for validation -->
-			<!--
-			<fragment class="org.eclipse.xtext.generator.validation.CheckFragment"/>
-			 -->
+			/*
+			If you don't want to use the Antlr fragment for some reason, remove the antlr fragment and uncomment the packrat parser fragment below.
+			fragment = parser.PackratParserFragment {}
+			*/
+			
+			// check-based API for validation
+			/*
+			fragment = validation.CheckFragment {}
+			*/
 			 
-			<!-- java-based API for validation -->
-			<fragment class="org.eclipse.xtext.generator.validation.JavaValidatorFragment">
-                <composedCheck value="org.eclipse.xtext.validation.ImportUriValidator"/>
-                <composedCheck value="org.eclipse.xtext.validation.NamesAreUniqueValidator"/>
-            </fragment>
+			// java-based API for validation 
+			fragment = validation.JavaValidatorFragment {
+                composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
+                composedCheck = "org.eclipse.xtext.validation.NamesAreUniqueValidator"
+            }
             
-			<!-- scoping and exporting API -->
-			<fragment class="org.eclipse.xtext.generator.scoping.ImportNamespacesScopingFragment"/>
-			<fragment class="org.eclipse.xtext.generator.exporting.QualifiedNamesFragment"/>
+			// scoping and exporting API
+			/*
+			fragment = scoping.ImportURIScopingFragment {}
+			fragment = exporting.SimpleNamesFragment {}
+			*/
 			
-			<!-- scoping and exporting API -->
-			<!--
-			<fragment class="org.eclipse.xtext.generator.scoping.ImportURIScopingFragment"/>
-			<fragment class="org.eclipse.xtext.generator.exporting.SimpleNamesFragment"/>
-			-->
+			// scoping and exporting API 
+			fragment = scoping.ImportNamespacesScopingFragment {}
+			fragment = exporting.QualifiedNamesFragment {}
 			
-			<!-- formatter API -->
-			<fragment class="org.eclipse.xtext.generator.formatting.FormatterFragment"/>
+			// java types 
+			fragment = types.TypesGeneratorFragment {}
+			
+			// formatter API 
+			fragment = formatting.FormatterFragment {}
 
-			<!-- labeling API -->
-			<fragment class="org.eclipse.xtext.ui.generator.labeling.LabelProviderFragment"/>
+			// labeling API 
+			fragment = labeling.LabelProviderFragment {}
 
-			<!-- outline API -->
-			<fragment class="org.eclipse.xtext.ui.generator.outline.TransformerFragment"/>
-			<fragment class="org.eclipse.xtext.ui.generator.outline.OutlineNodeAdapterFactoryFragment"/>
+			// outline API 
+			fragment = outline.TransformerFragment {}
+			fragment = outline.OutlineNodeAdapterFactoryFragment {}
 
-			<!-- java-based API for content assistance -->
-			<fragment class="org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment"/>
-			<!-- the following fragment tries to use the Antlr based content assist fragment which can be downloaded from http://www.itemis.com 
-			     and will be ignored if it's not available. -->
-			<fragment class="org.eclipse.xtext.generator.DelegatingGeneratorFragment" 
-				delegate="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment"
-				message="You are generating without ANTLR. It is highly recommended to download and use the plugin 'de.itemis.xtext.antlr' \n\t using the update site http://download.itemis.com/updates/.">
-			</fragment>
-			<!-- <fragment class="de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment"/> --> 
+			// java-based API for content assistance 
+			fragment = contentAssist.JavaBasedContentAssistFragment {}
+			
+			// the following fragment tries to use the Antlr based content assist 
+			//     fragment which can be downloaded from http://www.itemis.com 
+			//     and will be ignored if it's not available. 
+			fragment = DelegatingGeneratorFragment { 
+				delegate = "de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment"
+				message="You are generating without ANTLR. It is highly recommended to download and use the plugin \'de.itemis.xtext.antlr\' \n\t using the update site http:\//download.itemis.com/updates/."
+			}
 
-			<!-- builder integration -->
-			<fragment class="org.eclipse.xtext.generator.builder.BuilderIntegrationFragment"/>
+			fragment = builder.BuilderIntegrationFragment {}
 
-			<!-- project wizard (optional) -->
-			<!--
-			<fragment class="org.eclipse.xtext.ui.generator.projectWizard.SimpleProjectWizardFragment"
-				generatorProjectName="${projectName}.generator" modelFileExtension="${file.extensions}"/>
-			-->
-		</language>
-	</component>]]>
+			// project wizard (optional) 
+			/*
+			fragment = projectWizard.SimpleProjectWizardFragment {
+				generatorProjectName = "${projectName}.generator" 
+				modelFileExtension = file.extensions
+			}
+			*/
+			
+			// quickfix API 
+			fragment = quickfix.QuickfixProviderFragment {}			
+		}
+	}]]>
          </MweSnippet>
       </generatorConfiguration>
    </extension>
