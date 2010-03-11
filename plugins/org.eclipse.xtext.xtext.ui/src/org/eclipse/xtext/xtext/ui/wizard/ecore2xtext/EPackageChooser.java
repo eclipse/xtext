@@ -64,7 +64,7 @@ public class EPackageChooser {
 				} else {
 					importURI = ePackage.eResource().getURI();
 				}
-				EPackageInfo ePackageInfo = new EPackageInfo(ePackage, importURI, genPackage
+				EPackageInfo ePackageInfo = new EPackageInfo(ePackage, importURI, genModelURI, genPackage
 						.getQualifiedPackageInterfaceName(), genPackage.getGenModel().getModelPluginID());
 				ePackageInfos.add(ePackageInfo);
 			} else if (!(next instanceof GenModel)) {
@@ -161,7 +161,7 @@ public class EPackageChooser {
 							filteredResources.add(resource);
 						}
 					}
-					return true;
+					return !resource.isDerived();
 				}
 			});
 		} catch (CoreException e) {

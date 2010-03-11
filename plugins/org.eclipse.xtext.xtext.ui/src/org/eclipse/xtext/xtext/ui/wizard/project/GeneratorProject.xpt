@@ -91,7 +91,7 @@ Workflow {
 		register = «languageName»StandaloneSetup {}
 		load = {
 			slot = "model"
-			type="Entity"
+			type = "Entity"
 		}
 	}
 
