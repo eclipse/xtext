@@ -27,4 +27,12 @@ public class QualifiedNamesFragment extends DefaultGeneratorFragment {
 			.addfinalTypeToType(IQualifiedNameProvider.class.getName(), DefaultDeclarativeQualifiedNameProvider.class.getName())
 			.getBindings();
 	}
+	
+	@Override
+	public Set<Binding> getGuiceBindingsUi(Grammar grammar) {
+		return new BindFactory()
+			.addTypeToType("org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher", 
+		 		"org.eclipse.xtext.ui.editor.contentassist.FQNPrefixMatcher")
+		 	.getBindings();
+	}
 }
