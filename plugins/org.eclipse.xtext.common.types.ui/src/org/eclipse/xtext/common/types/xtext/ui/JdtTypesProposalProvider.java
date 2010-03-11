@@ -20,8 +20,9 @@ import org.eclipse.jdt.core.search.IJavaSearchScope;
 import org.eclipse.jdt.core.search.SearchEngine;
 import org.eclipse.jdt.core.search.SearchPattern;
 import org.eclipse.jdt.core.search.TypeNameRequestor;
+import org.eclipse.jdt.internal.ui.viewsupport.JavaElementImageProvider;
 import org.eclipse.jface.text.contentassist.ICompletionProposal;
-import org.eclipse.xtext.common.types.JvmGenericType;
+import org.eclipse.swt.graphics.Image;
 import org.eclipse.xtext.common.types.JvmType;
 import org.eclipse.xtext.common.types.access.jdt.IJavaProjectProvider;
 import org.eclipse.xtext.common.types.util.SuperTypeCollector;
@@ -34,6 +35,7 @@ import com.google.inject.Inject;
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
+@SuppressWarnings("restriction")
 public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 
 	@Inject
@@ -46,12 +48,6 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 			ContentAssistContext context, Filter filter, ICompletionProposalAcceptor acceptor) {
 		if (superType == null || superType.eIsProxy())
 			return;
-		// final type
-		if (superType instanceof JvmGenericType  && ((JvmGenericType)superType).isFinal()) {
-			// ignore filter since this is the only possible proposal
-			createTypeProposal(superType.getCanonicalName(), proposalFactory, context, acceptor);
-			return;
-		}
 		if (superType.eResource() == null || superType.eResource().getResourceSet() == null)
 			return;
 		IJavaProject project = getProjectProvider().getJavaProject(superType.eResource().getResourceSet());
@@ -133,7 +129,7 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 								fqName.append('$');
 							}
 							fqName.append(simpleTypeName);
-							createTypeProposal(fqName.toString(), proposalFactory, context, acceptor);
+							createTypeProposal(fqName.toString(), modifiers,enclosingTypeNames.length>0, proposalFactory, context, acceptor);
 						}
 					}
 				}, 
@@ -166,16 +162,21 @@ public class JdtTypesProposalProvider extends AbstractTypesProposalProvider {
 		}
 	}
 
-	protected void createTypeProposal(String typeName, ICompletionProposalFactory proposalFactory, 
+	protected void createTypeProposal(String typeName, int modifiers, boolean isInnerType, ICompletionProposalFactory proposalFactory, 
 			ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		if (acceptor.canAcceptMoreProposals()) {
 			int lastDot = typeName.lastIndexOf('.');
 			String displayString = typeName;
 			if (lastDot != -1)
 				displayString = typeName.substring(lastDot + 1) + " - " + typeName.substring(0, lastDot);
-			ICompletionProposal proposal = proposalFactory.createCompletionProposal(typeName, displayString, null, context);
+			Image img = computeImage(typeName,isInnerType, modifiers);
+			ICompletionProposal proposal = proposalFactory.createCompletionProposal(typeName, displayString, img, context);
 			acceptor.accept(proposal);
 		}
+	}
+
+	protected Image computeImage(String typeName, boolean isInnerType, int modifiers) {
+		return JavaElementImageProvider.getTypeImageDescriptor(isInnerType, false, modifiers, false).createImage();
 	}
 
 	public void setSuperTypeCollector(SuperTypeCollector superTypeCollector) {
