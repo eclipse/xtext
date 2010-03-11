@@ -1,0 +1,55 @@
+module org.eclipse.xtext.grammarinheritance.GenerateInheritanceLanguages
+
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.*
+import org.eclipse.xtext.generator.*
+
+var projectName = "org.eclipse.xtext.tests"
+var runtimeProject = "../${projectName}"
+
+var ametamodel.genmodel = "platform:/resource/${projectName}/src/org/eclipse/xtext/grammarinheritance/ametamodel.genmodel"
+var baseinheritance.genmodel = "platform:/resource/${projectName}/src-gen/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.genmodel"
+var inheritance.genmodel = "platform:/resource/${projectName}/src-gen/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.genmodel"
+	
+Workflow {
+	bean = StandaloneSetup {
+		platformUri="${runtimeProject}/.."
+	}
+	
+	component = DirectoryCleaner {
+		directory="${runtimeProject}/src-gen/org/eclipse/xtext/grammarinheritance"
+	}
+	
+	component = Generator {
+		pathRtProject = runtimeProject
+		projectNameRt = projectName
+		
+		language = {
+			uri = "classpath:/org/eclipse/xtext/grammarinheritance/AbstractTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/grammarinheritance/ConcreteTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
+				referencedGenModels = ametamodel.genmodel
+			}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
+				referencedGenModels = baseinheritance.genmodel
+			}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/grammarinheritance/InheritanceTest2Language.xtext"
+			fragment = @TestLanguagesFragments {
+				referencedGenModels = "${baseinheritance.genmodel},${inheritance.genmodel}"
+			}
+		}
+	}
+}

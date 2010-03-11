@@ -1,0 +1,33 @@
+module org.eclipse.xtext.lexer.BacktrackingLexerTestLanguage
+
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.*
+import org.eclipse.xtext.generator.*
+
+var projectName = "org.eclipse.xtext.tests"
+var runtimeProject = "../${projectName}"
+
+Workflow {
+	bean = StandaloneSetup {
+		platformUri = "${runtimeProject}/.."
+	}
+	
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/lexer"
+	}
+	
+	component = Generator {
+		pathRtProject = runtimeProject
+		projectNameRt = projectName
+		
+		language = {
+			uri = "classpath:/org/eclipse/xtext/lexer/BacktrackingLexerTestLanguage.xtext"
+			fragment = @TestLanguagesFragmentsEx {
+				backtrack = true
+				memoize = true
+				backtrackLexer = true
+			}
+		}
+	}
+}

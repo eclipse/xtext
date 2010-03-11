@@ -1,0 +1,31 @@
+module org.eclipse.xtext.generator.grammarAccess.GenerateGrammarAccessTestLanguage
+
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.TestLanguagesFragments
+import org.eclipse.xtext.generator.Generator
+
+var projectName = "org.eclipse.xtext.tests"
+var runtimeProject = "../${projectName}"
+
+Workflow {
+	bean = StandaloneSetup {
+		platformUri="${runtimeProject}/.."
+	}
+	
+	component = DirectoryCleaner {
+		directory="${runtimeProject}/src-gen/org/eclipse/xtext/generator/grammarAccess"
+	}
+	
+	component = Generator {
+		pathRtProject = runtimeProject
+		projectNameRt = projectName
+		
+		language = {
+			uri = "classpath:/org/eclipse/xtext/generator/grammarAccess/GrammarAccessTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
+			}
+			fragment = org.eclipse.xtext.generator.grammarAccess.EmptyPackageAwareGrammarAccessFragment {}
+		}
+	}
+}
