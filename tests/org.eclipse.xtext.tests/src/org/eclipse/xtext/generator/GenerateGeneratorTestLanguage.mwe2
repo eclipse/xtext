@@ -1,0 +1,41 @@
+module org.eclipse.xtext.generator.GenerateGeneratorTestLanguage
+
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.*
+import org.eclipse.xtext.generator.*
+
+var projectName = "org.eclipse.xtext.tests"
+var runtimeProject = "../${projectName}"
+
+Workflow {
+	bean = StandaloneSetup {
+		platformUri="${runtimeProject}/.."
+	}
+	
+	component = DirectoryCleaner {
+		directory="${runtimeProject}/src-gen/org/eclipse/xtext/generator"
+	}
+	
+	component = Generator {
+		pathRtProject = runtimeProject
+		projectNameRt = projectName
+		
+		/*		
+		language = {
+			uri = "classpath:/org/eclipse/xtext/generator/GeneratorTestLanguage.xtext">
+			fragment = @TestLanguagesFragments {}
+		}
+		*/
+		language = {
+			uri = "classpath:/org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
+				referencedGenModels = "platform:/resource/${projectName}/src/org/eclipse/xtext/generator/ecore/Genmodel.genmodel"
+			}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/generator/grammarAccess/GrammarAccessTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+	}
+}

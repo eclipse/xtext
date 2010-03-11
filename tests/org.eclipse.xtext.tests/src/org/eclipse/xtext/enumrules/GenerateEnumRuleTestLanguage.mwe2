@@ -1,0 +1,36 @@
+module org.eclipse.xtext.enumrules.GenerateEnumRuleTestLanguage
+
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.*
+import org.eclipse.xtext.generator.*
+
+var projectName = "org.eclipse.xtext.tests"
+var runtimeProject = "../${projectName}"
+var enums.genmodel = "platform:/resource/org.eclipse.xtext.tests/src/org/eclipse/xtext/enumrules/enums.genmodel"
+
+Workflow {
+	bean = StandaloneSetup {
+		platformUri="${runtimeProject}/.."
+	}
+	
+	component = DirectoryCleaner {
+		directory="${runtimeProject}/src-gen/org/eclipse/xtext/enumrules"
+	}
+	
+	component = Generator {
+		pathRtProject = runtimeProject
+		projectNameRt = projectName
+		
+		language = {
+			uri = "classpath:/org/eclipse/xtext/enumrules/EnumRulesTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
+				referencedGenModels = enums.genmodel
+			}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/enumrules/EnumAndReferenceTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {}
+		}
+	}
+}

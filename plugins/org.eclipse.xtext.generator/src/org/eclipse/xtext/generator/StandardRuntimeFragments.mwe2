@@ -1,0 +1,21 @@
+module org.eclipse.xtext.generator.StandardRuntimeFragments
+
+import org.eclipse.xtext.generator.*
+
+var genmodels = ""
+var basePackage = ""
+var javaModelDirectory = ""
+var xmiModelDirectory = ""
+var file.extensions = ""
+var generateDotDiagram = false
+var graphvizCommand = ""
+
+CompositeGeneratorFragment {
+	fragment = de.itemis.xtext.antlr.XtextAntlrGeneratorFragment {}
+	fragment = resourceFactory.ResourceFactoryFragment { 
+		fileExtensions = file.extensions
+	}
+	fragment = grammarAccess.GrammarAccessFragment {}
+	fragment = ecore.EcoreGeneratorFragment auto-inject {}
+	fragment = parseTreeConstructor.ParseTreeConstructorFragment auto-inject {}
+}

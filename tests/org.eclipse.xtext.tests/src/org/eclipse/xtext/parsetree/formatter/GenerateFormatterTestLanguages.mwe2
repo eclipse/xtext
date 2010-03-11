@@ -1,0 +1,32 @@
+module org.eclipse.xtext.parsetree.formatter.GenerateFormatterTestLanguages
+
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.*
+import org.eclipse.xtext.generator.*
+
+var projectName = "org.eclipse.xtext.tests"
+var runtimeProject = "../${projectName}"
+
+var generateDotDiagram = true
+//var graphvizCommand = "/opt/local/bin/dot -o %1.pdf -v -T pdf"
+
+Workflow {
+	bean = StandaloneSetup {
+		platformUri = "${runtimeProject}/.."
+	}
+	
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}/src-gen/org/eclipse/xtext/parsetree/formatter"
+	}
+	
+	component = Generator {
+		pathRtProject = runtimeProject
+		projectNameRt = projectName
+		
+		language = {
+			uri = "classpath:/org/eclipse/xtext/parsetree/formatter/FormatterTestLanguage.xtext"
+			fragment = @TestLanguagesFragments auto-inject {}
+		}
+	}
+}

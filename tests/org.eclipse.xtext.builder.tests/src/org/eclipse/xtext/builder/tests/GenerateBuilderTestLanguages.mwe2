@@ -1,0 +1,45 @@
+module org.eclipse.xtext.builder.tests.GenerateBuilderTestLanguages
+
+import org.eclipse.emf.mwe2.runtime.workflow.Workflow
+import org.eclipse.emf.mwe.utils.*
+import org.eclipse.xtext.generator.*
+import org.eclipse.xtext.ui.generator.*
+
+var uri = "classpath:/org/eclipse/xtext/builder/tests/BuilderTestLanguage.xtext"
+var projectName = "org.eclipse.xtext.builder.tests"
+var runtimeProject = "../${projectName}"
+var classSplitting = true
+
+Workflow {
+	
+	bean = StandaloneSetup {
+		platformUri = "${runtimeProject}/.."
+	}
+	
+	component = DirectoryCleaner {
+		directory = "${runtimeProject}/src-gen"
+	}
+	
+	component = Generator {
+		pathRtProject = runtimeProject
+		pathUiProject = runtimeProject
+		projectNameRt = projectName
+		activator = "org.eclipse.xtext.builder.tests.Activator" 
+		
+		language = auto-inject {
+			fragment = ecore.EcoreGeneratorFragment {}
+			fragment = grammarAccess.GrammarAccessFragment {}
+			fragment = parseTreeConstructor.ParseTreeConstructorFragment {}
+			fragment = resourceFactory.ResourceFactoryFragment {}
+			fragment = de.itemis.xtext.antlr.XtextAntlrGeneratorFragment {
+				options = auto-inject {} 
+			}
+			fragment = validation.JavaValidatorFragment {}
+			fragment = contentAssist.JavaBasedContentAssistFragment {}
+			fragment = de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment { 
+				options = auto-inject {}
+			}
+			fragment = builder.BuilderIntegrationFragment {}
+		}
+	}
+}
