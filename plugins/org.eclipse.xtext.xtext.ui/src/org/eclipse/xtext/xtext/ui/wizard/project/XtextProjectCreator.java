@@ -112,7 +112,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 				"org.apache.commons.logging;resolution:=optional", //$NON-NLS-1$
 				"org.eclipse.emf.codegen.ecore;resolution:=optional", //$NON-NLS-1$
 				"org.eclipse.emf.mwe.utils;resolution:=optional", //$NON-NLS-1$
-				"org.eclipse.emf.mwe.core;resolution:=optional", //$NON-NLS-1$
+				"org.eclipse.emf.mwe2.launch;resolution:=optional", //$NON-NLS-1$
 				"com.ibm.icu;resolution:=optional", //$NON-NLS-1$
 				"org.eclipse.xtext.xtend;resolution:=optional")); //$NON-NLS-1$
 
