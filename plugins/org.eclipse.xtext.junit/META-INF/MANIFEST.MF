@@ -7,7 +7,7 @@ Bundle-Vendor: Eclipse Modeling Project
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Require-Bundle: org.eclipse.xtend;bundle-version="1.0.0";resolution:=optional,
  org.eclipse.xtext;resolution:=optional,
- org.junit;bundle-version="[3.8.0,4.0.0)";resolution:=optional;visibility:=reexport,
+ org.junit;resolution:=optional;visibility:=reexport,
  org.eclipse.xtend.typesystem.emf;bundle-version="1.0.0";resolution:=optional,
  org.eclipse.core.resources;bundle-version="3.5.0";resolution:=optional,
  org.eclipse.core.runtime;bundle-version="3.5.0";resolution:=optional,
