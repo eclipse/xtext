@@ -21,7 +21,8 @@ Require-Bundle: org.eclipse.xtext,
  org.antlr.runtime,
  org.eclipse.xtext.xtend,
  com.ibm.icu,
- org.apache.commons.logging;bundle-version="1.1.1"
+ org.apache.commons.logging;bundle-version="1.1.1",
+ org.eclipse.xtext.ecore;bundle-version="1.0.0"
 Bundle-ClassPath: lib/simple.jar,.
 Import-Package: org.apache.log4j
 Export-Package: org.eclipse.xtext.generator.ecore,
