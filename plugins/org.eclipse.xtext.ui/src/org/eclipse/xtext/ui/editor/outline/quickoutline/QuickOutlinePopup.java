@@ -12,8 +12,10 @@ import org.eclipse.jface.dialogs.IDialogSettings;
 import org.eclipse.jface.dialogs.PopupDialog;
 import org.eclipse.jface.viewers.AbstractTreeViewer;
 import org.eclipse.jface.viewers.ILabelProvider;
+import org.eclipse.jface.viewers.ISelection;
 import org.eclipse.jface.viewers.IStructuredSelection;
 import org.eclipse.jface.viewers.ITreeContentProvider;
+import org.eclipse.jface.viewers.StructuredSelection;
 import org.eclipse.jface.viewers.TreeViewer;
 import org.eclipse.jface.viewers.Viewer;
 import org.eclipse.jface.viewers.ViewerFilter;
@@ -203,6 +205,10 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 		return stringMatcher;
 	}
 
+	protected boolean hasMatcher() {
+		return stringMatcher != null;
+	}
+
 	protected void setMatcherString(String pattern, boolean update) {
 		if (pattern.length() == 0) {
 			stringMatcher = null;
@@ -220,8 +226,36 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 		treeViewer.getControl().setRedraw(false);
 		treeViewer.refresh();
 		treeViewer.expandAll();
-		//		selectFirstMatch();
+		selectFirstMatch();
 		treeViewer.getControl().setRedraw(true);
+	}
+
+	protected void selectFirstMatch() {
+		Object[] rootElements = contentProvider.getElements(treeViewer.getInput());
+		Object matchingElement = findMatchingElement(rootElements);
+
+		ISelection selection = StructuredSelection.EMPTY;
+		if (matchingElement != null) {
+			selection = new StructuredSelection(matchingElement);
+		}
+		treeViewer.setSelection(selection);
+	}
+
+	protected Object findMatchingElement(Object[] elements) {
+		if (hasMatcher()) {
+			for (Object element : elements) {
+				String text = labelProvider.getText(element);
+				if (getMatcher().match(text)) {
+					return element;
+				}
+				Object[] children = contentProvider.getChildren(element);
+				Object matchingChild = findMatchingElement(children);
+				if (matchingChild != null) {
+					return matchingChild;
+				}
+			}
+		}
+		return null;
 	}
 
 	protected Object getSelectedElement() {
