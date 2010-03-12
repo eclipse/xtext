@@ -120,5 +120,4 @@
           searchResultClass="org.eclipse.xtext.ui.editor.findrefs.ReferenceSearchResult">
     	</viewPage>
  	</extension>
-
 </plugin>

@@ -62,7 +62,6 @@ Export-Package: org.eclipse.xtext.common.ui.contentassist,
  org.eclipse.xtext.ui.label,
  org.eclipse.xtext.ui.notification,
  org.eclipse.xtext.ui.resource,
- org.eclipse.xtext.ui.resource.ecore,
  org.eclipse.xtext.ui.search,
  org.eclipse.xtext.ui.util,
  org.eclipse.xtext.ui.wizard
