@@ -261,5 +261,12 @@
 				</visibleWhen>
 			</command>
 		</menuContribution>
-	</extension>	
+	</extension>
+    <extension point="org.eclipse.ui.bindings">
+      <key 
+      	sequence="M1+O" 
+      	commandId= "org.eclipse.xtext.ui.editor.outline.QuickOutline" 
+      	schemeId="org.eclipse.ui.defaultAcceleratorConfiguration" 
+      	contextId="org.eclipse.xtext.ui.XtextEditorScope"/>
+    </extension>
 </plugin>
