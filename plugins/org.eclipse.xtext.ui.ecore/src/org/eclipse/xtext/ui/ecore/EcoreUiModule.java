@@ -12,8 +12,6 @@ import org.eclipse.xtext.ui.InjectableAdapterFactory;
 import org.eclipse.xtext.ui.LanguageSpecific;
 import org.eclipse.xtext.ui.PluginImageHelper;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
-import org.eclipse.xtext.ui.editor.LanguageSpecificURIEditorOpener;
-import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
 import org.eclipse.xtext.ui.label.DefaultEObjectLabelProvider;
 import org.eclipse.xtext.ui.label.InjectableAdapterFactoryLabelProvider;
 
@@ -56,7 +54,7 @@ public class EcoreUiModule extends AbstractGenericModule {
 	}
 	
 	public void configureResourceUIServiceLabelProvider(com.google.inject.Binder binder) {
-		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class).to(DefaultDescriptionLabelProvider.class);
+		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class).to(EcoreDescriptionLabelProvider.class);
 	}
 	
 	public Class<? extends ILabelProvider> bindILabelProvider() {
@@ -64,7 +62,7 @@ public class EcoreUiModule extends AbstractGenericModule {
 	}
 	
 	public void configureLanguageSpecificURIEditorOpener(com.google.inject.Binder binder) {
-		binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class).to(LanguageSpecificURIEditorOpener.class);
+		binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class).to(EditorOpener.class);
 	}
 	
 	public Class<? extends IImageHelper> bindIImageHelper() {
