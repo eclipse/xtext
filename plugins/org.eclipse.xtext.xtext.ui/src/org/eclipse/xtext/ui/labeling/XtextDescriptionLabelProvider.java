@@ -3,6 +3,13 @@
 */
 package org.eclipse.xtext.ui.labeling;
 
+import org.eclipse.xtext.AbstractRule;
+import org.eclipse.xtext.GeneratedMetamodel;
+import org.eclipse.xtext.Grammar;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ReferencedMetamodel;
+import org.eclipse.xtext.RuleCall;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
 
 /**
@@ -11,17 +18,33 @@ import org.eclipse.xtext.ui.label.DefaultDescriptionLabelProvider;
  * see http://www.eclipse.org/Xtext/documentation/latest/xtext.html#labelProvider
  */
 public class XtextDescriptionLabelProvider extends DefaultDescriptionLabelProvider {
-/*
 	
-	//Labels and icons can be computed like this:
-	
-	String text(IEObjectDescription ele) {
-	  return "my "+ele.getName();
+	@Override
+	public Object image(IEObjectDescription description) {
+		return doGetImage(description.getEObjectOrProxy());
 	}
-	 
-    String image(IEObjectDescription ele) {
-      return ele.getEClass().getName() + ".gif";
-    }
-	 
-*/
+	
+	public String image(Grammar grammar) {
+		return "language.gif";
+	}
+
+	public String image(GeneratedMetamodel metamodel) {
+		return "export.gif";
+	}
+
+	public String image(ReferencedMetamodel metamodel) {
+		return "import.gif";
+	}
+
+	public String image(AbstractRule rule) {
+		return "rule.gif";
+	}
+
+	public String image(RuleCall ruleCall) {
+		return "rule.gif";
+	}
+
+	public String image(Keyword keyword) {
+		return "keyword.gif";
+	}
 }
