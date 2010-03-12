@@ -59,20 +59,24 @@ public class HyperlinkHelper implements IHyperlinkHelper {
 		return labelProvider;
 	}
 	
-	// TODO: consider removing the parameter createMultipleHyperlinks 
 	public IHyperlink[] createHyperlinksByOffset(XtextResource resource, int offset, boolean createMultipleHyperlinks) {
+		List<IHyperlink> links = Lists.newArrayList();
+		IHyperlinkAcceptor acceptor = new HyperlinkAcceptor(links);
+		
+		createHyperlinksByOffset(resource, offset, acceptor);
+		if (!links.isEmpty())
+			return Iterables.newArray(links, IHyperlink.class);
+		return null;
+	}
+
+	public void createHyperlinksByOffset(XtextResource resource, int offset, IHyperlinkAcceptor acceptor) {
 		TextLocation textLocation = new TextLocation();
 		EObject crossLinkedEObject = EObjectAtOffsetHelper.resolveCrossReferencedElementAt(resource, offset,
 				textLocation);
 		if (crossLinkedEObject != null && !crossLinkedEObject.eIsProxy()) {
-			List<IHyperlink> links = Lists.newArrayList();
-			IHyperlinkAcceptor acceptor = new HyperlinkAcceptor(links);
 			Region region = new Region(textLocation.getOffset(), textLocation.getLength());
 			createHyperlinksTo(resource, region, crossLinkedEObject, acceptor);
-			if (!links.isEmpty())
-				return Iterables.newArray(links, IHyperlink.class);				
 		}
-		return null;
 	}
 	
 	public void createHyperlinksTo(XtextResource from, Region region, EObject to, IHyperlinkAcceptor acceptor) {

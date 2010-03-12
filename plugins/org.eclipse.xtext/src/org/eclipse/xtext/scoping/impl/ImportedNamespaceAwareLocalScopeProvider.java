@@ -138,6 +138,9 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 			return parent;
 		Iterable<EObject> contents = new Iterable<EObject>() {
 			public Iterator<EObject> iterator() {
+				// context can be a proxy when the iterable will be queried
+				if (context.eResource() == null)
+					return Collections.<EObject>emptyList().iterator();
 				return EcoreUtil.getAllProperContents(context.eResource(), true);
 			}
 		};
