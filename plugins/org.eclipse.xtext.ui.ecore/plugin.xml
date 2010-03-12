@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?eclipse version="3.4"?>
+<plugin>
+ 	<!-- resource service providers for ecore-->
+	<extension
+	      point="org.eclipse.xtext.extension_resourceServiceProvider">
+	    <resourceServiceProvider
+	          class="org.eclipse.xtext.ui.ecore.ExecutableExtensionFactory:org.eclipse.xtext.ui.ecore.EcoreResourceUIServiceProviderImpl"
+	          uriExtension="ecore">
+	    </resourceServiceProvider>
+	</extension>
+</plugin>
