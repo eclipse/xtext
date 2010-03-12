@@ -153,9 +153,4 @@ This Agreement is governed by the laws of the State of New York and the intellec
          id="org.eclipse.xtext.xbase.source"
          version="0.0.0"/>
 
-   <requires>
-      <import feature="de.itemis.xtext.antlr.feature" version="1.0.0"/>
-      <import feature="org.eclipse.emf.mwe2.language.sdk" version="1.0.0"/>
-   </requires>
-
 </feature>
