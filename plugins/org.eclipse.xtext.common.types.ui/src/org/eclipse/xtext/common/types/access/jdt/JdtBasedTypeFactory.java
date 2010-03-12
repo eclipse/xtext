@@ -280,8 +280,13 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 	}
 	
 	protected void setSuperTypes(IType jdtType, JvmDeclaredType result) throws JavaModelException {
-		if (!jdtType.isInterface() && jdtType.getSuperclassTypeSignature() != null)
-			result.getSuperTypes().add(createTypeReference(jdtType.getSuperclassTypeSignature(), jdtType, result));
+		if (!jdtType.isInterface()) {
+			if (jdtType.getSuperclassTypeSignature() != null) {
+				result.getSuperTypes().add(createTypeReference(jdtType.getSuperclassTypeSignature(), jdtType, result));				
+			} else if (!Object.class.getName().equals(jdtType.getFullyQualifiedName())){
+				result.getSuperTypes().add(createTypeReference(Signature.createTypeSignature(Object.class.getName(), true), jdtType, result));
+			}
+		}
 		for (String interfaceSignature : jdtType.getSuperInterfaceTypeSignatures()) {
 			result.getSuperTypes().add(createTypeReference(interfaceSignature, jdtType, result));
 		}
