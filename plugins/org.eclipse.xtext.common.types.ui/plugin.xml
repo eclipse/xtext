@@ -13,5 +13,15 @@
                org.eclipse.emf.edit.provider.IItemLabelProvider
                org.eclipse.emf.edit.provider.IItemPropertySource"/>
    </extension>
-
+   
+    	
+ 	<extension
+	       point="org.eclipse.jdt.ui.queryParticipants">
+	    <queryParticipant
+	          class="org.eclipse.xtext.common.types.ui.query.QueryParticipant"
+	          id="org.eclipse.xtext.common.types.ui.query.QueryParticipant"
+	          name="Search references in EMF models"
+	          nature="org.eclipse.jdt.core.javanature">
+	    </queryParticipant>
+	 </extension>
 </plugin>
