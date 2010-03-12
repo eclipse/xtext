@@ -16,6 +16,8 @@ import org.eclipse.emf.ecore.resource.ContentHandler;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.jdt.core.IJarEntryResource;
+import org.eclipse.jdt.core.IJavaProject;
+import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.ui.IEditorInput;
 import org.eclipse.ui.IStorageEditorInput;
 import org.eclipse.xtext.resource.IExternalContentSupport;
@@ -82,7 +84,17 @@ public class JavaClassPathResourceForIEditorInputFactory implements IResourceFor
 	}
 
 	protected ResourceSet getResourceSet(IStorage storage) {
-		return resourceSetProvider.get(storage instanceof IFile ? ((IFile) storage).getProject() : null);
+		if (storage instanceof IFile) {
+			return resourceSetProvider.get(((IFile) storage).getProject());
+		} else if (storage instanceof IJarEntryResource){
+			IPackageFragmentRoot root = ((IJarEntryResource) storage).getPackageFragmentRoot();
+			if (root != null) {
+				IJavaProject project = root.getJavaProject();
+				if (project != null)
+					return resourceSetProvider.get(project.getProject());
+			}
+		}
+		return resourceSetProvider.get(null);
 	}
 
 	private Resource createResourceFor(IFile storage) {
