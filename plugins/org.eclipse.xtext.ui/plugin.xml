@@ -221,15 +221,6 @@
 		</key>
 	</extension>
 	
-	<!-- resource service providers -->
-	<extension
-	      point="org.eclipse.xtext.extension_resourceServiceProvider">
-    <resourceServiceProvider
-          class="org.eclipse.xtext.ui.resource.ecore.EcoreResourceUIServiceProviderImpl"
-          uriExtension="ecore">
-    </resourceServiceProvider>
-	</extension>
-	
 	<!-- F3 / Hyperlinking stuff -->
 	<extension
 		point="org.eclipse.ui.bindings">

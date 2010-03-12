@@ -49,6 +49,10 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 	public ILabelProvider getLabelProvider() {
 		return descriptionLabelProvider;
 	}
+	
+	public void setDescriptionLabelProvider(ILabelProvider descriptionLabelProvider) {
+		this.descriptionLabelProvider = descriptionLabelProvider;
+	}
 
 	public boolean canHandle(URI uri) {
 		return delegate.canHandle(uri);
@@ -58,7 +62,8 @@ public class DefaultResourceUIServiceProvider implements IResourceUIServiceProvi
 		return delegate.canHandle(uri);
 	}
 
-	@Inject@LanguageSpecific
+	@Inject
+	@LanguageSpecific
 	private IURIEditorOpener uriEditorOpener;
 
 	public IURIEditorOpener getURIEditorOpener() {

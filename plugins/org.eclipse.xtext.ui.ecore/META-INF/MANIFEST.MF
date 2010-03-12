@@ -1,10 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Xtext Ecore Support
+Bundle-Name: %pluginName
 Bundle-SymbolicName: org.eclipse.xtext.ui.ecore;singleton:=true
+Bundle-Localization: plugin
 Bundle-Version: 1.0.0.qualifier
 Bundle-Activator: org.eclipse.xtext.ui.ecore.Activator
-Bundle-Vendor: Eclipse Modeling Project
+Bundle-Vendor: %providerName
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  org.eclipse.xtext;bundle-version="1.0.0",
@@ -14,3 +15,4 @@ Require-Bundle: org.eclipse.ui,
 Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Bundle-ActivationPolicy: lazy
 Import-Package: org.apache.log4j;version="1.2.15"
+Export-Package: org.eclipse.xtext.ui.ecore

@@ -41,7 +41,7 @@ public class Activator extends Plugin {
 	public Injector getInjector() {
 		return injector;
 	}
-
+	
 	protected void initializeInjector() {
 		IExtensionPoint point = Platform.getExtensionRegistry().getExtensionPoint(PLUGIN_ID+".overridingGuiceModule");
 		IExtension[] extensions = point.getExtensions();
