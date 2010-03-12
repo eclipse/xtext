@@ -289,6 +289,8 @@ public class QuickOutlinePopup extends PopupDialog implements DisposeListener {
 	}
 
 	public void widgetDisposed(DisposeEvent event) {
+		treeViewer = null;
+		filterText = null;
 	}
 
 	public void setInput(IXtextDocument document) {
