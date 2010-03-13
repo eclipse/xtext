@@ -65,9 +65,7 @@ public class UpdateProjectsJob extends Job {
 				}
 				
 			}.run(monitor);
-		} catch (InvocationTargetException e) {
-			log.error(e.getMessage(), e);
-		} catch (InterruptedException e) {
+		} catch (Exception e) {
 			log.error(e.getMessage(), e);
 		}
 		
