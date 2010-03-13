@@ -56,14 +56,13 @@
 			category="org.eclipse.ui.Examples/org.eclipse.xtext.Examples"
 			icon="icons/genproject.gif" 
 			project="true">
-			<description>This language for state machines has been inspired by Martin Fowler.
-			</description>
+			<description>An implementation of Martin Fowler's secret compartment state machine (http://martinfowler.com/dslwip/Intro.html).</description>
 		</wizard>
 	</extension>
    <extension point="org.eclipse.emf.common.ui.examples">
 	  <example wizardID="org.eclipse.xtext.examples.NewFowlerDSLExampleWizard" pageImage="icons/genproject.gif">
-		 <projectDescriptor name="org.eclipse.xtext.example.fowlerdsl" contentURI="contents/org.eclipse.xtext.example.ecoredsl/" description="Parser, Serializer, Linker, etc."/>
-		 <projectDescriptor name="org.eclipse.xtext.example.fowlerdsl.ui" contentURI="contents/org.eclipse.xtext.example.ecoredsl.ui/"  description="A smart editor for the language."/>
+		 <projectDescriptor name="org.eclipse.xtext.example.fowlerdsl" contentURI="contents/org.eclipse.xtext.example.fowlerdsl/" description="Contains the parser, serializer, linker, etc."/>
+		 <projectDescriptor name="org.eclipse.xtext.example.fowlerdsl.ui" contentURI="contents/org.eclipse.xtext.example.fowlerdsl.ui/"  description="Contains Eclipse IDE integration (i.e. editor)"/>
 	  </example>
    </extension>
 
