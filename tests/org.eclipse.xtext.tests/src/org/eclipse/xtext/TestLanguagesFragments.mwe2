@@ -3,6 +3,7 @@ module org.eclipse.xtext.TestLanguagesFragments
 import org.eclipse.xtext.generator.*
 
 var referencedGenModels = ""
+var genModel = ""
 var basePackage = ""
 var javaModelDirectory = ""
 var xmiModelDirectory = ""
