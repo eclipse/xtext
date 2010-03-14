@@ -55,7 +55,12 @@ import org.eclipse.xtext.index.services.IndexTestLanguageGrammarAccess;
     @Override
     protected String getFirstRuleName() {
     	return "File";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected IndexTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

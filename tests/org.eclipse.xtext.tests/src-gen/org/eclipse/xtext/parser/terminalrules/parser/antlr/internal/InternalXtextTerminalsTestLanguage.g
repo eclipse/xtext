@@ -55,7 +55,12 @@ import org.eclipse.xtext.parser.terminalrules.services.XtextTerminalsTestLanguag
     @Override
     protected String getFirstRuleName() {
     	return "Grammar";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected XtextTerminalsTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

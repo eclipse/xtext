@@ -28,21 +28,6 @@ public abstract class AbstractInheritanceTest2LanguageRuntimeModule extends Defa
 	}
 	
 	
-	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
-	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
-		return org.eclipse.xtext.grammarinheritance.services.InheritanceTest2LanguageGrammarAccess.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTest2LanguagePackratParser.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.grammarinheritance.parseTreeConstruction.InheritanceTest2LanguageParsetreeConstructor.class;
-	}
-
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.grammarinheritance.parser.antlr.InheritanceTest2LanguageParser.class;
@@ -76,6 +61,21 @@ public abstract class AbstractInheritanceTest2LanguageRuntimeModule extends Defa
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
+	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
+		return org.eclipse.xtext.grammarinheritance.services.InheritanceTest2LanguageGrammarAccess.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
+	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
+		return org.eclipse.xtext.grammarinheritance.parser.packrat.InheritanceTest2LanguagePackratParser.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
+		return org.eclipse.xtext.grammarinheritance.parseTreeConstruction.InheritanceTest2LanguageParsetreeConstructor.class;
 	}
 
 }

@@ -29,15 +29,15 @@ public class LangATestLanguageStandaloneSetup implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/langATestLanguage")) {
-		EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/langATestLanguage", org.eclipse.xtext.linking.langATestLanguage.LangATestLanguagePackage.eINSTANCE);
-	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("langatestlanguage", resourceFactory);
 		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("langatestlanguage", serviceProvider);
 		
+	if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/langATestLanguage")) {
+		EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/langATestLanguage", org.eclipse.xtext.linking.langATestLanguage.LangATestLanguagePackage.eINSTANCE);
+	}
 
 	}
 }

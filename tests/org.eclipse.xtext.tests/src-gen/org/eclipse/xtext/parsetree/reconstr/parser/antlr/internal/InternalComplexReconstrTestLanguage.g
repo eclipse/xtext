@@ -55,7 +55,12 @@ import org.eclipse.xtext.parsetree.reconstr.services.ComplexReconstrTestLanguage
     @Override
     protected String getFirstRuleName() {
     	return "Root";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected ComplexReconstrTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

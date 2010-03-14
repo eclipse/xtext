@@ -26,6 +26,7 @@ public class XpressionParser extends org.eclipse.xtext.parser.antlr.AbstractAntl
 		org.eclipse.xtext.xbase.parser.antlr.internal.InternalXpressionParser parser = createParser(tokenStream);
 		parser.setTokenTypeMap(getTokenDefProvider().getTokenDefMap());
 		parser.setSyntaxErrorProvider(getSyntaxErrorProvider());
+		parser.setUnorderedGroupHelper(getUnorderedGroupHelper().get());
 		try {
 			if(ruleName != null)
 				return parser.parse(ruleName);

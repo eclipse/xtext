@@ -58,6 +58,11 @@ import org.eclipse.xtext.lexer.services.BacktrackingLexerTestLanguageGrammarAcce
     protected String getFirstRuleName() {
     	return "Model";	
    	} 
+   	   	
+   	@Override
+   	protected BacktrackingLexerTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

@@ -29,15 +29,15 @@ public class Bug250313StandaloneSetup implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://org.eclipse.xtext.valueconverter.Bug250313")) {
-		EPackage.Registry.INSTANCE.put("http://org.eclipse.xtext.valueconverter.Bug250313", org.eclipse.xtext.valueconverter.bug250313.Bug250313Package.eINSTANCE);
-	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("bug250313", resourceFactory);
 		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("bug250313", serviceProvider);
 		
+	if (!EPackage.Registry.INSTANCE.containsKey("http://org.eclipse.xtext.valueconverter.Bug250313")) {
+		EPackage.Registry.INSTANCE.put("http://org.eclipse.xtext.valueconverter.Bug250313", org.eclipse.xtext.valueconverter.bug250313.Bug250313Package.eINSTANCE);
+	}
 
 	}
 }

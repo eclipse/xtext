@@ -55,7 +55,12 @@ import org.eclipse.xtext.valueconverter.services.Bug250313GrammarAccess;
     @Override
     protected String getFirstRuleName() {
     	return "Model";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected Bug250313GrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

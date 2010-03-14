@@ -55,7 +55,12 @@ import org.eclipse.xtext.parsetree.reconstr.services.SimpleReconstrTestLanguageG
     @Override
     protected String getFirstRuleName() {
     	return "Op";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected SimpleReconstrTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

@@ -29,15 +29,15 @@ public class LazyLinkingTestLanguageStandaloneSetup implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/lazyLinkingTestLanguage")) {
-		EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/lazyLinkingTestLanguage", org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingPackage.eINSTANCE);
-	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("lazylinkingtestlanguage", resourceFactory);
 		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("lazylinkingtestlanguage", serviceProvider);
 		
+	if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/lazyLinkingTestLanguage")) {
+		EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/lazyLinkingTestLanguage", org.eclipse.xtext.linking.lazy.lazyLinking.LazyLinkingPackage.eINSTANCE);
+	}
 
 	}
 }

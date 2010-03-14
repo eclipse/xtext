@@ -50,6 +50,11 @@ import org.eclipse.xtext.parser.antlr.services.Bug301935ExTestLanguageGrammarAcc
     protected String getFirstRuleName() {
     	return "DelegateModel";	
    	} 
+   	   	
+   	@Override
+   	protected Bug301935ExTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

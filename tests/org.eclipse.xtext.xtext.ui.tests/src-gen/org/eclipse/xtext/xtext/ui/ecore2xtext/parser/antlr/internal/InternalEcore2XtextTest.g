@@ -61,7 +61,12 @@ import org.eclipse.xtext.xtext.ui.ecore2xtext.services.Ecore2XtextTestGrammarAcc
     @Override
     protected String getFirstRuleName() {
     	return "Root";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected Ecore2XtextTestGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

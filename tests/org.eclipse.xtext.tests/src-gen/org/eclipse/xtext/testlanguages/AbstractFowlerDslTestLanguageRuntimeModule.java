@@ -28,21 +28,6 @@ public abstract class AbstractFowlerDslTestLanguageRuntimeModule extends Default
 	}
 	
 	
-	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
-	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
-		return org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAccess.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguagePackratParser.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.testlanguages.parseTreeConstruction.FowlerDslTestLanguageParsetreeConstructor.class;
-	}
-
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.testlanguages.parser.antlr.FowlerDslTestLanguageParser.class;
@@ -76,6 +61,21 @@ public abstract class AbstractFowlerDslTestLanguageRuntimeModule extends Default
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
+	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
+		return org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAccess.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
+	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
+		return org.eclipse.xtext.testlanguages.parser.packrat.FowlerDslTestLanguagePackratParser.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
+		return org.eclipse.xtext.testlanguages.parseTreeConstruction.FowlerDslTestLanguageParsetreeConstructor.class;
 	}
 
 }

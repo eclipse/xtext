@@ -55,7 +55,12 @@ import org.eclipse.xtext.generator.ecore.services.SuperTestLanguageGrammarAccess
     @Override
     protected String getFirstRuleName() {
     	return "SuperMain";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected SuperTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

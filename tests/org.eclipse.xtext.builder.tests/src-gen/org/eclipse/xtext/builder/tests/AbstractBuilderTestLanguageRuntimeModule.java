@@ -38,11 +38,6 @@ public abstract class AbstractBuilderTestLanguageRuntimeModule extends DefaultRu
 		return org.eclipse.xtext.builder.tests.parseTreeConstruction.BuilderTestLanguageParsetreeConstructor.class;
 	}
 
-	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment
-	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.xtext.builder.tests.validation.BuilderTestLanguageJavaValidator> bindBuilderTestLanguageJavaValidator() {
-		return org.eclipse.xtext.builder.tests.validation.BuilderTestLanguageJavaValidator.class;
-	}
-
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.builder.tests.parser.antlr.BuilderTestLanguageParser.class;
@@ -76,6 +71,11 @@ public abstract class AbstractBuilderTestLanguageRuntimeModule extends DefaultRu
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.validation.JavaValidatorFragment
+	@org.eclipse.xtext.service.SingletonBinding(eager=true)	public Class<? extends org.eclipse.xtext.builder.tests.validation.BuilderTestLanguageJavaValidator> bindBuilderTestLanguageJavaValidator() {
+		return org.eclipse.xtext.builder.tests.validation.BuilderTestLanguageJavaValidator.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.builder.BuilderIntegrationFragment

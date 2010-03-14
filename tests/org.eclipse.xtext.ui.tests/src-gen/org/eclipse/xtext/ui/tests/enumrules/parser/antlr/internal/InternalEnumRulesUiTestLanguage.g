@@ -56,7 +56,12 @@ import org.eclipse.xtext.ui.tests.enumrules.services.EnumRulesUiTestLanguageGram
     @Override
     protected String getFirstRuleName() {
     	return "Model";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected EnumRulesUiTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

@@ -55,7 +55,12 @@ import org.eclipse.xtext.parser.datatyperules.services.DatatypeRulesTestLanguage
     @Override
     protected String getFirstRuleName() {
     	return "CompositeModel";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected DatatypeRulesTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

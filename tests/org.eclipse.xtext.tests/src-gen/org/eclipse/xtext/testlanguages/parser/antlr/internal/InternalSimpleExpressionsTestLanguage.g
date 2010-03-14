@@ -55,7 +55,12 @@ import org.eclipse.xtext.testlanguages.services.SimpleExpressionsTestLanguageGra
     @Override
     protected String getFirstRuleName() {
     	return "Sequence";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected SimpleExpressionsTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

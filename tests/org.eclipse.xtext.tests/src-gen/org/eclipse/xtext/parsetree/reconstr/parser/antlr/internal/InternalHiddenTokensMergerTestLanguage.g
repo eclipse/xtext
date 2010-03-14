@@ -56,7 +56,12 @@ import org.eclipse.xtext.parsetree.reconstr.services.HiddenTokensMergerTestLangu
     @Override
     protected String getFirstRuleName() {
     	return "Model";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected HiddenTokensMergerTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

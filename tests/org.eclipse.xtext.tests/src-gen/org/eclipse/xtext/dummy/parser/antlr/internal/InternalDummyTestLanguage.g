@@ -55,7 +55,12 @@ import org.eclipse.xtext.dummy.services.DummyTestLanguageGrammarAccess;
     @Override
     protected String getFirstRuleName() {
     	return "Model";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected DummyTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

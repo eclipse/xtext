@@ -29,15 +29,15 @@ public class Bug296889TestLanguageStandaloneSetup implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/Bug296889TestLanguage")) {
-		EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/Bug296889TestLanguage", org.eclipse.xtext.parser.antlr.bug296889Test.Bug296889TestPackage.eINSTANCE);
-	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("bug296889testlanguage", resourceFactory);
 		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("bug296889testlanguage", serviceProvider);
 		
+	if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/Bug296889TestLanguage")) {
+		EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/Bug296889TestLanguage", org.eclipse.xtext.parser.antlr.bug296889Test.Bug296889TestPackage.eINSTANCE);
+	}
 
 	}
 }

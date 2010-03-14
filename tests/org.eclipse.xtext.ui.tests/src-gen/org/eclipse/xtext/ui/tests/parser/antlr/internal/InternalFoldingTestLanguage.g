@@ -55,7 +55,12 @@ import org.eclipse.xtext.ui.tests.services.FoldingTestLanguageGrammarAccess;
     @Override
     protected String getFirstRuleName() {
     	return "FoldingModel";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected FoldingTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

@@ -61,7 +61,12 @@ import org.eclipse.xtext.xbase.services.XbaseGrammarAccess;
     @Override
     protected String getFirstRuleName() {
     	return "XFile";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected XbaseGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 
@@ -1210,7 +1215,7 @@ ruleXRelationalExpression returns [EObject current=null]
 	        }
         }
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXRelationalExpressionAccess().getTypeTypeCrossReference_1_0_2_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXRelationalExpressionAccess().getTypeJvmTypeCrossReference_1_0_2_0(), currentNode); 
 	    }
 		ruleQualifiedName		{ 
 	        currentNode = currentNode.getParent();
@@ -3583,7 +3588,7 @@ ruleXTypeLiteral returns [EObject current=null]
 	        }
         }
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXTypeLiteralAccess().getTypeTypeCrossReference_0_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXTypeLiteralAccess().getTypeJvmTypeCrossReference_0_0(), currentNode); 
 	    }
 		ruleQualifiedName		{ 
 	        currentNode = currentNode.getParent();
@@ -3934,7 +3939,7 @@ ruleXSimpleTypeRef returns [EObject current=null]
 	        }
         }
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getXSimpleTypeRefAccess().getTypeTypeCrossReference_0_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getXSimpleTypeRefAccess().getTypeJvmTypeCrossReference_0_0(), currentNode); 
 	    }
 		ruleQualifiedName		{ 
 	        currentNode = currentNode.getParent();

@@ -56,7 +56,12 @@ import org.eclipse.xtext.enumrules.services.EnumAndReferenceTestLanguageGrammarA
     @Override
     protected String getFirstRuleName() {
     	return "EntityWithEnumAndReference";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected EnumAndReferenceTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

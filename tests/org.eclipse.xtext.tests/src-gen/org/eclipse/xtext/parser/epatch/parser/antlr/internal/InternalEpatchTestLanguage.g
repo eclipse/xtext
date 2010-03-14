@@ -55,7 +55,12 @@ import org.eclipse.xtext.parser.epatch.services.EpatchTestLanguageGrammarAccess;
     @Override
     protected String getFirstRuleName() {
     	return "EPatch";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected EpatchTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

@@ -55,7 +55,12 @@ import org.eclipse.xtext.resource.services.EObjectAtOffsetTestLanguageGrammarAcc
     @Override
     protected String getFirstRuleName() {
     	return "Model";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected EObjectAtOffsetTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

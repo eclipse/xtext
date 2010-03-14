@@ -55,7 +55,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.DomainModelTestL
     @Override
     protected String getFirstRuleName() {
     	return "Model";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected DomainModelTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

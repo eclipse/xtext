@@ -28,16 +28,6 @@ public abstract class AbstractGrammarAccessTestLanguageRuntimeModule extends Def
 	}
 	
 	
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.generator.grammarAccess.parser.packrat.GrammarAccessTestLanguagePackratParser.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.generator.grammarAccess.parseTreeConstruction.GrammarAccessTestLanguageParsetreeConstructor.class;
-	}
-
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.generator.grammarAccess.parser.antlr.GrammarAccessTestLanguageParser.class;
@@ -71,6 +61,16 @@ public abstract class AbstractGrammarAccessTestLanguageRuntimeModule extends Def
 	// contributed by de.itemis.xtext.antlr.XtextAntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
+	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
+		return org.eclipse.xtext.generator.grammarAccess.parser.packrat.GrammarAccessTestLanguagePackratParser.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
+		return org.eclipse.xtext.generator.grammarAccess.parseTreeConstruction.GrammarAccessTestLanguageParsetreeConstructor.class;
 	}
 
 	// contributed by org.eclipse.xtext.generator.grammarAccess.EmptyPackageAwareGrammarAccessFragment

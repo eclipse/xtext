@@ -55,7 +55,12 @@ import org.eclipse.xtext.ui.tests.quickfix.services.QuickfixCrossrefTestLanguage
     @Override
     protected String getFirstRuleName() {
     	return "Main";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected QuickfixCrossrefTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

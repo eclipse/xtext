@@ -55,7 +55,12 @@ import org.eclipse.xtext.testlanguages.services.LookaheadTestLanguageGrammarAcce
     @Override
     protected String getFirstRuleName() {
     	return "Entry";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected LookaheadTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

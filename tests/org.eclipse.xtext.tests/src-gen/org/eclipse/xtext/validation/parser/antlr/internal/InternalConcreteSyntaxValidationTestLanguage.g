@@ -56,7 +56,12 @@ import org.eclipse.xtext.validation.services.ConcreteSyntaxValidationTestLanguag
     @Override
     protected String getFirstRuleName() {
     	return "Model";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected ConcreteSyntaxValidationTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

@@ -55,7 +55,12 @@ import org.eclipse.xtext.ui.tests.parser.keywords.services.KeywordsUiTestLanguag
     @Override
     protected String getFirstRuleName() {
     	return "Model";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected KeywordsUiTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

@@ -62,12 +62,17 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
         @Override
         protected String getFirstRuleName() {
         	return "NamedElement";	
-       	} 
+       	}
+       	
+       	@Override
+       	protected BuilderTestLanguageGrammarAccess getGrammarAccess() {
+       		return grammarAccess;
+       	}
 
 
 
     // $ANTLR start entryRuleNamedElement
-    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:72:1: entryRuleNamedElement returns [EObject current=null] : iv_ruleNamedElement= ruleNamedElement EOF ;
+    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:77:1: entryRuleNamedElement returns [EObject current=null] : iv_ruleNamedElement= ruleNamedElement EOF ;
     public final EObject entryRuleNamedElement() throws RecognitionException {
         EObject current = null;
 
@@ -75,8 +80,8 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
 
 
         try {
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:73:2: (iv_ruleNamedElement= ruleNamedElement EOF )
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:74:2: iv_ruleNamedElement= ruleNamedElement EOF
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:78:2: (iv_ruleNamedElement= ruleNamedElement EOF )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:79:2: iv_ruleNamedElement= ruleNamedElement EOF
             {
              currentNode = createCompositeNode(grammarAccess.getNamedElementRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_ruleNamedElement_in_entryRuleNamedElement75);
@@ -102,7 +107,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start ruleNamedElement
-    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:81:1: ruleNamedElement returns [EObject current=null] : (this_Namespace_0= ruleNamespace | this_Element_1= ruleElement ) ;
+    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:86:1: ruleNamedElement returns [EObject current=null] : (this_Namespace_0= ruleNamespace | this_Element_1= ruleElement ) ;
     public final EObject ruleNamedElement() throws RecognitionException {
         EObject current = null;
 
@@ -114,10 +119,10 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
          @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:86:6: ( (this_Namespace_0= ruleNamespace | this_Element_1= ruleElement ) )
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:87:1: (this_Namespace_0= ruleNamespace | this_Element_1= ruleElement )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:91:6: ( (this_Namespace_0= ruleNamespace | this_Element_1= ruleElement ) )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:92:1: (this_Namespace_0= ruleNamespace | this_Element_1= ruleElement )
             {
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:87:1: (this_Namespace_0= ruleNamespace | this_Element_1= ruleElement )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:92:1: (this_Namespace_0= ruleNamespace | this_Element_1= ruleElement )
             int alt1=2;
             int LA1_0 = input.LA(1);
 
@@ -129,13 +134,13 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("87:1: (this_Namespace_0= ruleNamespace | this_Element_1= ruleElement )", 1, 0, input);
+                    new NoViableAltException("92:1: (this_Namespace_0= ruleNamespace | this_Element_1= ruleElement )", 1, 0, input);
 
                 throw nvae;
             }
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:88:5: this_Namespace_0= ruleNamespace
+                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:93:5: this_Namespace_0= ruleNamespace
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getNamedElementAccess().getNamespaceParserRuleCall_0(), currentNode); 
@@ -152,7 +157,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:98:5: this_Element_1= ruleElement
+                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:103:5: this_Element_1= ruleElement
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getNamedElementAccess().getElementParserRuleCall_1(), currentNode); 
@@ -191,7 +196,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start entryRuleNamespace
-    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:114:1: entryRuleNamespace returns [EObject current=null] : iv_ruleNamespace= ruleNamespace EOF ;
+    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:119:1: entryRuleNamespace returns [EObject current=null] : iv_ruleNamespace= ruleNamespace EOF ;
     public final EObject entryRuleNamespace() throws RecognitionException {
         EObject current = null;
 
@@ -199,8 +204,8 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
 
 
         try {
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:115:2: (iv_ruleNamespace= ruleNamespace EOF )
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:116:2: iv_ruleNamespace= ruleNamespace EOF
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:120:2: (iv_ruleNamespace= ruleNamespace EOF )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:121:2: iv_ruleNamespace= ruleNamespace EOF
             {
              currentNode = createCompositeNode(grammarAccess.getNamespaceRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_ruleNamespace_in_entryRuleNamespace194);
@@ -226,7 +231,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start ruleNamespace
-    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:123:1: ruleNamespace returns [EObject current=null] : ( 'namespace' ( (lv_name_1_0= ruleQualifiedName ) ) '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_elements_4_0= ruleNamedElement ) )* '}' ) ;
+    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:128:1: ruleNamespace returns [EObject current=null] : ( 'namespace' ( (lv_name_1_0= ruleQualifiedName ) ) '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_elements_4_0= ruleNamedElement ) )* '}' ) ;
     public final EObject ruleNamespace() throws RecognitionException {
         EObject current = null;
 
@@ -240,21 +245,21 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
          @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:128:6: ( ( 'namespace' ( (lv_name_1_0= ruleQualifiedName ) ) '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_elements_4_0= ruleNamedElement ) )* '}' ) )
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:129:1: ( 'namespace' ( (lv_name_1_0= ruleQualifiedName ) ) '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_elements_4_0= ruleNamedElement ) )* '}' )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:133:6: ( ( 'namespace' ( (lv_name_1_0= ruleQualifiedName ) ) '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_elements_4_0= ruleNamedElement ) )* '}' ) )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:134:1: ( 'namespace' ( (lv_name_1_0= ruleQualifiedName ) ) '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_elements_4_0= ruleNamedElement ) )* '}' )
             {
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:129:1: ( 'namespace' ( (lv_name_1_0= ruleQualifiedName ) ) '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_elements_4_0= ruleNamedElement ) )* '}' )
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:129:3: 'namespace' ( (lv_name_1_0= ruleQualifiedName ) ) '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_elements_4_0= ruleNamedElement ) )* '}'
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:134:1: ( 'namespace' ( (lv_name_1_0= ruleQualifiedName ) ) '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_elements_4_0= ruleNamedElement ) )* '}' )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:134:3: 'namespace' ( (lv_name_1_0= ruleQualifiedName ) ) '{' ( (lv_imports_3_0= ruleImport ) )* ( (lv_elements_4_0= ruleNamedElement ) )* '}'
             {
             match(input,11,FollowSets000.FOLLOW_11_in_ruleNamespace239); 
 
                     createLeafNode(grammarAccess.getNamespaceAccess().getNamespaceKeyword_0(), null); 
                 
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:133:1: ( (lv_name_1_0= ruleQualifiedName ) )
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:134:1: (lv_name_1_0= ruleQualifiedName )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:138:1: ( (lv_name_1_0= ruleQualifiedName ) )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:139:1: (lv_name_1_0= ruleQualifiedName )
             {
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:134:1: (lv_name_1_0= ruleQualifiedName )
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:135:3: lv_name_1_0= ruleQualifiedName
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:139:1: (lv_name_1_0= ruleQualifiedName )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:140:3: lv_name_1_0= ruleQualifiedName
             {
              
             	        currentNode=createCompositeNode(grammarAccess.getNamespaceAccess().getNameQualifiedNameParserRuleCall_1_0(), currentNode); 
@@ -290,7 +295,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
 
                     createLeafNode(grammarAccess.getNamespaceAccess().getLeftCurlyBracketKeyword_2(), null); 
                 
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:161:1: ( (lv_imports_3_0= ruleImport ) )*
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:166:1: ( (lv_imports_3_0= ruleImport ) )*
             loop2:
             do {
                 int alt2=2;
@@ -303,10 +308,10 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
 
                 switch (alt2) {
             	case 1 :
-            	    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:162:1: (lv_imports_3_0= ruleImport )
+            	    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:167:1: (lv_imports_3_0= ruleImport )
             	    {
-            	    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:162:1: (lv_imports_3_0= ruleImport )
-            	    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:163:3: lv_imports_3_0= ruleImport
+            	    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:167:1: (lv_imports_3_0= ruleImport )
+            	    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:168:3: lv_imports_3_0= ruleImport
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getNamespaceAccess().getImportsImportParserRuleCall_3_0(), currentNode); 
@@ -344,7 +349,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
                 }
             } while (true);
 
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:185:3: ( (lv_elements_4_0= ruleNamedElement ) )*
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:190:3: ( (lv_elements_4_0= ruleNamedElement ) )*
             loop3:
             do {
                 int alt3=2;
@@ -357,10 +362,10 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:186:1: (lv_elements_4_0= ruleNamedElement )
+            	    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:191:1: (lv_elements_4_0= ruleNamedElement )
             	    {
-            	    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:186:1: (lv_elements_4_0= ruleNamedElement )
-            	    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:187:3: lv_elements_4_0= ruleNamedElement
+            	    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:191:1: (lv_elements_4_0= ruleNamedElement )
+            	    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:192:3: lv_elements_4_0= ruleNamedElement
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getNamespaceAccess().getElementsNamedElementParserRuleCall_4_0(), currentNode); 
@@ -425,7 +430,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start entryRuleImport
-    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:221:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
+    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:226:1: entryRuleImport returns [EObject current=null] : iv_ruleImport= ruleImport EOF ;
     public final EObject entryRuleImport() throws RecognitionException {
         EObject current = null;
 
@@ -433,8 +438,8 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
 
 
         try {
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:222:2: (iv_ruleImport= ruleImport EOF )
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:223:2: iv_ruleImport= ruleImport EOF
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:227:2: (iv_ruleImport= ruleImport EOF )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:228:2: iv_ruleImport= ruleImport EOF
             {
              currentNode = createCompositeNode(grammarAccess.getImportRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_ruleImport_in_entryRuleImport360);
@@ -460,7 +465,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start ruleImport
-    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:230:1: ruleImport returns [EObject current=null] : ( 'import' ( (lv_importedNamespace_1_0= ruleQualifiedName ) ) ) ;
+    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:235:1: ruleImport returns [EObject current=null] : ( 'import' ( (lv_importedNamespace_1_0= ruleQualifiedName ) ) ) ;
     public final EObject ruleImport() throws RecognitionException {
         EObject current = null;
 
@@ -470,21 +475,21 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
          @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:235:6: ( ( 'import' ( (lv_importedNamespace_1_0= ruleQualifiedName ) ) ) )
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:236:1: ( 'import' ( (lv_importedNamespace_1_0= ruleQualifiedName ) ) )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:240:6: ( ( 'import' ( (lv_importedNamespace_1_0= ruleQualifiedName ) ) ) )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:241:1: ( 'import' ( (lv_importedNamespace_1_0= ruleQualifiedName ) ) )
             {
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:236:1: ( 'import' ( (lv_importedNamespace_1_0= ruleQualifiedName ) ) )
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:236:3: 'import' ( (lv_importedNamespace_1_0= ruleQualifiedName ) )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:241:1: ( 'import' ( (lv_importedNamespace_1_0= ruleQualifiedName ) ) )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:241:3: 'import' ( (lv_importedNamespace_1_0= ruleQualifiedName ) )
             {
             match(input,14,FollowSets000.FOLLOW_14_in_ruleImport405); 
 
                     createLeafNode(grammarAccess.getImportAccess().getImportKeyword_0(), null); 
                 
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:240:1: ( (lv_importedNamespace_1_0= ruleQualifiedName ) )
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:241:1: (lv_importedNamespace_1_0= ruleQualifiedName )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:245:1: ( (lv_importedNamespace_1_0= ruleQualifiedName ) )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:246:1: (lv_importedNamespace_1_0= ruleQualifiedName )
             {
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:241:1: (lv_importedNamespace_1_0= ruleQualifiedName )
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:242:3: lv_importedNamespace_1_0= ruleQualifiedName
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:246:1: (lv_importedNamespace_1_0= ruleQualifiedName )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:247:3: lv_importedNamespace_1_0= ruleQualifiedName
             {
              
             	        currentNode=createCompositeNode(grammarAccess.getImportAccess().getImportedNamespaceQualifiedNameParserRuleCall_1_0(), currentNode); 
@@ -539,7 +544,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start entryRuleElement
-    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:272:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
+    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:277:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
     public final EObject entryRuleElement() throws RecognitionException {
         EObject current = null;
 
@@ -547,8 +552,8 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
 
 
         try {
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:273:2: (iv_ruleElement= ruleElement EOF )
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:274:2: iv_ruleElement= ruleElement EOF
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:278:2: (iv_ruleElement= ruleElement EOF )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:279:2: iv_ruleElement= ruleElement EOF
             {
              currentNode = createCompositeNode(grammarAccess.getElementRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_ruleElement_in_entryRuleElement462);
@@ -574,7 +579,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start ruleElement
-    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:281:1: ruleElement returns [EObject current=null] : ( 'object' ( (lv_name_1_0= RULE_ID ) ) ( 'references' ( ( ruleQualifiedName ) ) )? ( 'otherRefs' ( ( ruleQualifiedName ) ) ( ',' ( ( ruleQualifiedName ) ) )* )? ) ;
+    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:286:1: ruleElement returns [EObject current=null] : ( 'object' ( (lv_name_1_0= RULE_ID ) ) ( 'references' ( ( ruleQualifiedName ) ) )? ( 'otherRefs' ( ( ruleQualifiedName ) ) ( ',' ( ( ruleQualifiedName ) ) )* )? ) ;
     public final EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
@@ -583,21 +588,21 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
          @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:286:6: ( ( 'object' ( (lv_name_1_0= RULE_ID ) ) ( 'references' ( ( ruleQualifiedName ) ) )? ( 'otherRefs' ( ( ruleQualifiedName ) ) ( ',' ( ( ruleQualifiedName ) ) )* )? ) )
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:287:1: ( 'object' ( (lv_name_1_0= RULE_ID ) ) ( 'references' ( ( ruleQualifiedName ) ) )? ( 'otherRefs' ( ( ruleQualifiedName ) ) ( ',' ( ( ruleQualifiedName ) ) )* )? )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:291:6: ( ( 'object' ( (lv_name_1_0= RULE_ID ) ) ( 'references' ( ( ruleQualifiedName ) ) )? ( 'otherRefs' ( ( ruleQualifiedName ) ) ( ',' ( ( ruleQualifiedName ) ) )* )? ) )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:292:1: ( 'object' ( (lv_name_1_0= RULE_ID ) ) ( 'references' ( ( ruleQualifiedName ) ) )? ( 'otherRefs' ( ( ruleQualifiedName ) ) ( ',' ( ( ruleQualifiedName ) ) )* )? )
             {
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:287:1: ( 'object' ( (lv_name_1_0= RULE_ID ) ) ( 'references' ( ( ruleQualifiedName ) ) )? ( 'otherRefs' ( ( ruleQualifiedName ) ) ( ',' ( ( ruleQualifiedName ) ) )* )? )
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:287:3: 'object' ( (lv_name_1_0= RULE_ID ) ) ( 'references' ( ( ruleQualifiedName ) ) )? ( 'otherRefs' ( ( ruleQualifiedName ) ) ( ',' ( ( ruleQualifiedName ) ) )* )?
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:292:1: ( 'object' ( (lv_name_1_0= RULE_ID ) ) ( 'references' ( ( ruleQualifiedName ) ) )? ( 'otherRefs' ( ( ruleQualifiedName ) ) ( ',' ( ( ruleQualifiedName ) ) )* )? )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:292:3: 'object' ( (lv_name_1_0= RULE_ID ) ) ( 'references' ( ( ruleQualifiedName ) ) )? ( 'otherRefs' ( ( ruleQualifiedName ) ) ( ',' ( ( ruleQualifiedName ) ) )* )?
             {
             match(input,15,FollowSets000.FOLLOW_15_in_ruleElement507); 
 
                     createLeafNode(grammarAccess.getElementAccess().getObjectKeyword_0(), null); 
                 
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:291:1: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:292:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:296:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:297:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:292:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:293:3: lv_name_1_0= RULE_ID
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:297:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:298:3: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)input.LT(1);
             match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleElement524); 
@@ -626,7 +631,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
 
             }
 
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:315:2: ( 'references' ( ( ruleQualifiedName ) ) )?
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:320:2: ( 'references' ( ( ruleQualifiedName ) ) )?
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -635,17 +640,17 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:315:4: 'references' ( ( ruleQualifiedName ) )
+                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:320:4: 'references' ( ( ruleQualifiedName ) )
                     {
                     match(input,16,FollowSets000.FOLLOW_16_in_ruleElement540); 
 
                             createLeafNode(grammarAccess.getElementAccess().getReferencesKeyword_2_0(), null); 
                         
-                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:319:1: ( ( ruleQualifiedName ) )
-                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:320:1: ( ruleQualifiedName )
+                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:324:1: ( ( ruleQualifiedName ) )
+                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:325:1: ( ruleQualifiedName )
                     {
-                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:320:1: ( ruleQualifiedName )
-                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:321:3: ruleQualifiedName
+                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:325:1: ( ruleQualifiedName )
+                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:326:3: ruleQualifiedName
                     {
 
                     			if (current==null) {
@@ -675,7 +680,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
 
             }
 
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:335:4: ( 'otherRefs' ( ( ruleQualifiedName ) ) ( ',' ( ( ruleQualifiedName ) ) )* )?
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:340:4: ( 'otherRefs' ( ( ruleQualifiedName ) ) ( ',' ( ( ruleQualifiedName ) ) )* )?
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -684,17 +689,17 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:335:6: 'otherRefs' ( ( ruleQualifiedName ) ) ( ',' ( ( ruleQualifiedName ) ) )*
+                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:340:6: 'otherRefs' ( ( ruleQualifiedName ) ) ( ',' ( ( ruleQualifiedName ) ) )*
                     {
                     match(input,17,FollowSets000.FOLLOW_17_in_ruleElement576); 
 
                             createLeafNode(grammarAccess.getElementAccess().getOtherRefsKeyword_3_0(), null); 
                         
-                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:339:1: ( ( ruleQualifiedName ) )
-                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:340:1: ( ruleQualifiedName )
+                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:344:1: ( ( ruleQualifiedName ) )
+                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:345:1: ( ruleQualifiedName )
                     {
-                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:340:1: ( ruleQualifiedName )
-                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:341:3: ruleQualifiedName
+                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:345:1: ( ruleQualifiedName )
+                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:346:3: ruleQualifiedName
                     {
 
                     			if (current==null) {
@@ -718,7 +723,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
 
                     }
 
-                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:355:2: ( ',' ( ( ruleQualifiedName ) ) )*
+                    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:360:2: ( ',' ( ( ruleQualifiedName ) ) )*
                     loop5:
                     do {
                         int alt5=2;
@@ -731,17 +736,17 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
 
                         switch (alt5) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:355:4: ',' ( ( ruleQualifiedName ) )
+                    	    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:360:4: ',' ( ( ruleQualifiedName ) )
                     	    {
                     	    match(input,18,FollowSets000.FOLLOW_18_in_ruleElement610); 
 
                     	            createLeafNode(grammarAccess.getElementAccess().getCommaKeyword_3_2_0(), null); 
                     	        
-                    	    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:359:1: ( ( ruleQualifiedName ) )
-                    	    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:360:1: ( ruleQualifiedName )
+                    	    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:364:1: ( ( ruleQualifiedName ) )
+                    	    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:365:1: ( ruleQualifiedName )
                     	    {
-                    	    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:360:1: ( ruleQualifiedName )
-                    	    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:361:3: ruleQualifiedName
+                    	    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:365:1: ( ruleQualifiedName )
+                    	    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:366:3: ruleQualifiedName
                     	    {
 
                     	    			if (current==null) {
@@ -803,7 +808,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start entryRuleQualifiedName
-    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:383:1: entryRuleQualifiedName returns [String current=null] : iv_ruleQualifiedName= ruleQualifiedName EOF ;
+    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:388:1: entryRuleQualifiedName returns [String current=null] : iv_ruleQualifiedName= ruleQualifiedName EOF ;
     public final String entryRuleQualifiedName() throws RecognitionException {
         String current = null;
 
@@ -811,8 +816,8 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
 
 
         try {
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:384:2: (iv_ruleQualifiedName= ruleQualifiedName EOF )
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:385:2: iv_ruleQualifiedName= ruleQualifiedName EOF
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:389:2: (iv_ruleQualifiedName= ruleQualifiedName EOF )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:390:2: iv_ruleQualifiedName= ruleQualifiedName EOF
             {
              currentNode = createCompositeNode(grammarAccess.getQualifiedNameRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_ruleQualifiedName_in_entryRuleQualifiedName674);
@@ -838,7 +843,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
 
 
     // $ANTLR start ruleQualifiedName
-    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:392:1: ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
+    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:397:1: ruleQualifiedName returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) ;
     public final AntlrDatatypeRuleToken ruleQualifiedName() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -849,11 +854,11 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
          setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:397:6: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:398:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:402:6: ( (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* ) )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:403:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
             {
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:398:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:398:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:403:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:403:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
             {
             this_ID_0=(Token)input.LT(1);
             match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleQualifiedName725); 
@@ -863,7 +868,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
              
                 createLeafNode(grammarAccess.getQualifiedNameAccess().getIDTerminalRuleCall_0(), null); 
                 
-            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:405:1: (kw= '.' this_ID_2= RULE_ID )*
+            // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:410:1: (kw= '.' this_ID_2= RULE_ID )*
             loop7:
             do {
                 int alt7=2;
@@ -876,7 +881,7 @@ public class InternalBuilderTestLanguageParser extends AbstractInternalAntlrPars
 
                 switch (alt7) {
             	case 1 :
-            	    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:406:2: kw= '.' this_ID_2= RULE_ID
+            	    // ../org.eclipse.xtext.builder.tests/src-gen/org/eclipse/xtext/builder/tests/parser/antlr/internal/InternalBuilderTestLanguage.g:411:2: kw= '.' this_ID_2= RULE_ID
             	    {
             	    kw=(Token)input.LT(1);
             	    match(input,19,FollowSets000.FOLLOW_19_in_ruleQualifiedName744); 

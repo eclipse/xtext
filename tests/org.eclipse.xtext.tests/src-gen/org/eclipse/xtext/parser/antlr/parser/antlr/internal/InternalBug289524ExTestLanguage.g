@@ -56,6 +56,11 @@ import org.eclipse.xtext.parser.antlr.services.Bug289524ExTestLanguageGrammarAcc
     protected String getFirstRuleName() {
     	return "Model";	
    	} 
+   	   	
+   	@Override
+   	protected Bug289524ExTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

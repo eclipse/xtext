@@ -6699,12 +6699,12 @@ rule__XRelationalExpression__TypeAssignment_1_0_2
     }
 :
 (
-{ before(grammarAccess.getXRelationalExpressionAccess().getTypeTypeCrossReference_1_0_2_0()); }
+{ before(grammarAccess.getXRelationalExpressionAccess().getTypeJvmTypeCrossReference_1_0_2_0()); }
 (
-{ before(grammarAccess.getXRelationalExpressionAccess().getTypeTypeQualifiedNameParserRuleCall_1_0_2_0_1()); }
-	ruleQualifiedName{ after(grammarAccess.getXRelationalExpressionAccess().getTypeTypeQualifiedNameParserRuleCall_1_0_2_0_1()); }
+{ before(grammarAccess.getXRelationalExpressionAccess().getTypeJvmTypeQualifiedNameParserRuleCall_1_0_2_0_1()); }
+	ruleQualifiedName{ after(grammarAccess.getXRelationalExpressionAccess().getTypeJvmTypeQualifiedNameParserRuleCall_1_0_2_0_1()); }
 )
-{ after(grammarAccess.getXRelationalExpressionAccess().getTypeTypeCrossReference_1_0_2_0()); }
+{ after(grammarAccess.getXRelationalExpressionAccess().getTypeJvmTypeCrossReference_1_0_2_0()); }
 )
 
 ;
@@ -7391,12 +7391,12 @@ rule__XTypeLiteral__TypeAssignment_0
     }
 :
 (
-{ before(grammarAccess.getXTypeLiteralAccess().getTypeTypeCrossReference_0_0()); }
+{ before(grammarAccess.getXTypeLiteralAccess().getTypeJvmTypeCrossReference_0_0()); }
 (
-{ before(grammarAccess.getXTypeLiteralAccess().getTypeTypeQualifiedNameParserRuleCall_0_0_1()); }
-	ruleQualifiedName{ after(grammarAccess.getXTypeLiteralAccess().getTypeTypeQualifiedNameParserRuleCall_0_0_1()); }
+{ before(grammarAccess.getXTypeLiteralAccess().getTypeJvmTypeQualifiedNameParserRuleCall_0_0_1()); }
+	ruleQualifiedName{ after(grammarAccess.getXTypeLiteralAccess().getTypeJvmTypeQualifiedNameParserRuleCall_0_0_1()); }
 )
-{ after(grammarAccess.getXTypeLiteralAccess().getTypeTypeCrossReference_0_0()); }
+{ after(grammarAccess.getXTypeLiteralAccess().getTypeJvmTypeCrossReference_0_0()); }
 )
 
 ;
@@ -7515,12 +7515,12 @@ rule__XSimpleTypeRef__TypeAssignment_0
     }
 :
 (
-{ before(grammarAccess.getXSimpleTypeRefAccess().getTypeTypeCrossReference_0_0()); }
+{ before(grammarAccess.getXSimpleTypeRefAccess().getTypeJvmTypeCrossReference_0_0()); }
 (
-{ before(grammarAccess.getXSimpleTypeRefAccess().getTypeTypeQualifiedNameParserRuleCall_0_0_1()); }
-	ruleQualifiedName{ after(grammarAccess.getXSimpleTypeRefAccess().getTypeTypeQualifiedNameParserRuleCall_0_0_1()); }
+{ before(grammarAccess.getXSimpleTypeRefAccess().getTypeJvmTypeQualifiedNameParserRuleCall_0_0_1()); }
+	ruleQualifiedName{ after(grammarAccess.getXSimpleTypeRefAccess().getTypeJvmTypeQualifiedNameParserRuleCall_0_0_1()); }
 )
-{ after(grammarAccess.getXSimpleTypeRefAccess().getTypeTypeCrossReference_0_0()); }
+{ after(grammarAccess.getXSimpleTypeRefAccess().getTypeJvmTypeCrossReference_0_0()); }
 )
 
 ;

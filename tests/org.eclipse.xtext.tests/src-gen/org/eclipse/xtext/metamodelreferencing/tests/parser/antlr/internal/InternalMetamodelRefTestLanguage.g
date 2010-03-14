@@ -55,7 +55,12 @@ import org.eclipse.xtext.metamodelreferencing.tests.services.MetamodelRefTestLan
     @Override
     protected String getFirstRuleName() {
     	return "Foo";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected MetamodelRefTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

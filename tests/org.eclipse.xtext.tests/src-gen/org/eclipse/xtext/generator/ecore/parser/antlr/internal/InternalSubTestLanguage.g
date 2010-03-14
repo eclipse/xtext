@@ -55,7 +55,12 @@ import org.eclipse.xtext.generator.ecore.services.SubTestLanguageGrammarAccess;
     @Override
     protected String getFirstRuleName() {
     	return "SubMain";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected SubTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

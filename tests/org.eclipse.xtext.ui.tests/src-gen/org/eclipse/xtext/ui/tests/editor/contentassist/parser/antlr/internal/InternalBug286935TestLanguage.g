@@ -56,7 +56,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug286935TestLan
     @Override
     protected String getFirstRuleName() {
     	return "State";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected Bug286935TestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

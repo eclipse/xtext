@@ -55,7 +55,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug288734TestLan
     @Override
     protected String getFirstRuleName() {
     	return "Model";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected Bug288734TestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

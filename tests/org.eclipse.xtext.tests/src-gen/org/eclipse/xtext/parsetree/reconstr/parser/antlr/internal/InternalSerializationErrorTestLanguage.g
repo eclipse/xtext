@@ -55,7 +55,12 @@ import org.eclipse.xtext.parsetree.reconstr.services.SerializationErrorTestLangu
     @Override
     protected String getFirstRuleName() {
     	return "Model";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected SerializationErrorTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

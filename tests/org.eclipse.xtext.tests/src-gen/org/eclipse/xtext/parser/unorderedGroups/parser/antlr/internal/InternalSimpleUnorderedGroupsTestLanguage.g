@@ -55,7 +55,12 @@ import org.eclipse.xtext.parser.unorderedGroups.services.SimpleUnorderedGroupsTe
     @Override
     protected String getFirstRuleName() {
     	return "DelegateModel";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected SimpleUnorderedGroupsTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

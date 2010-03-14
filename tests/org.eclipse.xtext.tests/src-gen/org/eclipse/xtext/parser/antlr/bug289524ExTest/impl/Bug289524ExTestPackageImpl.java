@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.grammarinheritance.inheritanceTest.InheritanceTestPackage;
+
 import org.eclipse.xtext.parser.antlr.bug289524ExTest.Bug289524ExTestFactory;
 import org.eclipse.xtext.parser.antlr.bug289524ExTest.Bug289524ExTestPackage;
 import org.eclipse.xtext.parser.antlr.bug289524ExTest.Contained;
@@ -94,6 +96,9 @@ public class Bug289524ExTestPackageImpl extends EPackageImpl implements Bug28952
     Bug289524ExTestPackageImpl theBug289524ExTestPackage = (Bug289524ExTestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug289524ExTestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug289524ExTestPackageImpl());
 
     isInited = true;
+
+    // Initialize simple dependencies
+    InheritanceTestPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theBug289524ExTestPackage.createPackageContents();

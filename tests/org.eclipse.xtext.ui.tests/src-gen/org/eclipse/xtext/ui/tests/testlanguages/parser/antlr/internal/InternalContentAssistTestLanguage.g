@@ -55,7 +55,12 @@ import org.eclipse.xtext.ui.tests.testlanguages.services.ContentAssistTestLangua
     @Override
     protected String getFirstRuleName() {
     	return "Start";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected ContentAssistTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

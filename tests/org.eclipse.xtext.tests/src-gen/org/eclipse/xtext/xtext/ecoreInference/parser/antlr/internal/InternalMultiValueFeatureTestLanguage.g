@@ -55,7 +55,12 @@ import org.eclipse.xtext.xtext.ecoreInference.services.MultiValueFeatureTestLang
     @Override
     protected String getFirstRuleName() {
     	return "Start";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected MultiValueFeatureTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

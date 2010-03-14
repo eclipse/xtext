@@ -55,7 +55,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.LookAheadContent
     @Override
     protected String getFirstRuleName() {
     	return "Model";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected LookAheadContentAssistTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

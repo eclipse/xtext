@@ -28,21 +28,6 @@ public abstract class AbstractBug289524ExTestLanguageRuntimeModule extends Defau
 	}
 	
 	
-	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
-	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
-		return org.eclipse.xtext.parser.antlr.services.Bug289524ExTestLanguageGrammarAccess.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
-	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
-		return org.eclipse.xtext.parser.antlr.parser.packrat.Bug289524ExTestLanguagePackratParser.class;
-	}
-
-	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
-	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
-		return org.eclipse.xtext.parser.antlr.parseTreeConstruction.Bug289524ExTestLanguageParsetreeConstructor.class;
-	}
-
 	// contributed by de.itemis.xtext.antlr.ex.rt.AntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.IAntlrParser> bindIAntlrParser() {
 		return org.eclipse.xtext.parser.antlr.parser.antlr.Bug289524ExTestLanguageParser.class;
@@ -76,6 +61,21 @@ public abstract class AbstractBug289524ExTestLanguageRuntimeModule extends Defau
 	// contributed by de.itemis.xtext.antlr.ex.rt.AntlrGeneratorFragment
 	public Class<? extends org.eclipse.xtext.parser.antlr.ITokenDefProvider> bindITokenDefProvider() {
 		return org.eclipse.xtext.parser.antlr.AntlrTokenDefProvider.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment
+	public Class<? extends org.eclipse.xtext.IGrammarAccess> bindIGrammarAccess() {
+		return org.eclipse.xtext.parser.antlr.services.Bug289524ExTestLanguageGrammarAccess.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.parser.PackratParserFragment
+	public Class<? extends org.eclipse.xtext.parser.packrat.IPackratParser> bindIPackratParser() {
+		return org.eclipse.xtext.parser.antlr.parser.packrat.Bug289524ExTestLanguagePackratParser.class;
+	}
+
+	// contributed by org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment
+	public Class<? extends org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor> bindIParseTreeConstructor() {
+		return org.eclipse.xtext.parser.antlr.parseTreeConstruction.Bug289524ExTestLanguageParsetreeConstructor.class;
 	}
 
 }

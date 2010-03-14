@@ -4,7 +4,7 @@ import org.eclipse.emf.mwe.utils.*
 import org.eclipse.xtext.generator.*
 import org.eclipse.xtext.ui.generator.*
 
-var grammarURI = "cclasspath:/org/eclipse/xtext/example/EcoreDsl.xtext"
+var grammarURI = "classpath:/org/eclipse/xtext/example/EcoreDsl.xtext"
 var file.extensions = "ecoredsl"
 var projectName = "org.eclipse.xtext.example.ecoredsl"
 var runtimeProject = "../${projectName}"

@@ -55,7 +55,12 @@ import org.eclipse.xtext.generator.ecore.services.EcoreFragmentTestLanguageGramm
     @Override
     protected String getFirstRuleName() {
     	return "Second";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected EcoreFragmentTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

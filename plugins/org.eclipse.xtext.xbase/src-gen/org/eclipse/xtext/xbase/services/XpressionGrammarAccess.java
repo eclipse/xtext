@@ -223,8 +223,8 @@ public class XpressionGrammarAccess extends AbstractGrammarElementFinder {
 		private final Action cXInstanceOfExpressionExpressionAction_1_0_0 = (Action)cGroup_1_0.eContents().get(0);
 		private final Keyword cInstanceofKeyword_1_0_1 = (Keyword)cGroup_1_0.eContents().get(1);
 		private final Assignment cTypeAssignment_1_0_2 = (Assignment)cGroup_1_0.eContents().get(2);
-		private final CrossReference cTypeTypeCrossReference_1_0_2_0 = (CrossReference)cTypeAssignment_1_0_2.eContents().get(0);
-		private final RuleCall cTypeTypeQualifiedNameParserRuleCall_1_0_2_0_1 = (RuleCall)cTypeTypeCrossReference_1_0_2_0.eContents().get(1);
+		private final CrossReference cTypeJvmTypeCrossReference_1_0_2_0 = (CrossReference)cTypeAssignment_1_0_2.eContents().get(0);
+		private final RuleCall cTypeJvmTypeQualifiedNameParserRuleCall_1_0_2_0_1 = (RuleCall)cTypeJvmTypeCrossReference_1_0_2_0.eContents().get(1);
 		private final Group cGroup_1_1 = (Group)cAlternatives_1.eContents().get(1);
 		private final Action cXBinaryOperationLeftAction_1_1_0 = (Action)cGroup_1_1.eContents().get(0);
 		private final Assignment cOperatorAssignment_1_1_1 = (Assignment)cGroup_1_1.eContents().get(1);
@@ -238,24 +238,24 @@ public class XpressionGrammarAccess extends AbstractGrammarElementFinder {
 		
 		//XRelationalExpression returns XExpression:
 		//  XOtherOperatorExpression ({XInstanceOfExpression.expression=current} "instanceof"
-		//  type=[types::Type|QualifiedName]|{XBinaryOperation.left=current} operator=( ">=" |
-		//  "<=" | ">" | "<" ) right=XOtherOperatorExpression)*;
+		//  type=[types::JvmType|QualifiedName]|{XBinaryOperation.left=current} operator=(
+		//  ">=" | "<=" | ">" | "<" ) right=XOtherOperatorExpression)*;
 		public ParserRule getRule() { return rule; }
 
 		//XOtherOperatorExpression ({XInstanceOfExpression.expression=current} "instanceof"
-		//type=[types::Type|QualifiedName]|{XBinaryOperation.left=current} operator=( ">=" |
-		//"<=" | ">" | "<" ) right=XOtherOperatorExpression)*
+		//type=[types::JvmType|QualifiedName]|{XBinaryOperation.left=current} operator=(
+		//">=" | "<=" | ">" | "<" ) right=XOtherOperatorExpression)*
 		public Group getGroup() { return cGroup; }
 
 		//XOtherOperatorExpression
 		public RuleCall getXOtherOperatorExpressionParserRuleCall_0() { return cXOtherOperatorExpressionParserRuleCall_0; }
 
-		//({XInstanceOfExpression.expression=current} "instanceof" type=[types::Type|
+		//({XInstanceOfExpression.expression=current} "instanceof" type=[types::JvmType|
 		//QualifiedName]|{XBinaryOperation.left=current} operator=( ">=" | "<=" | ">" | "<" ) right=
 		//XOtherOperatorExpression)*
 		public Alternatives getAlternatives_1() { return cAlternatives_1; }
 
-		//{XInstanceOfExpression.expression=current} "instanceof" type=[types::Type|
+		//{XInstanceOfExpression.expression=current} "instanceof" type=[types::JvmType|
 		//QualifiedName]
 		public Group getGroup_1_0() { return cGroup_1_0; }
 
@@ -265,14 +265,14 @@ public class XpressionGrammarAccess extends AbstractGrammarElementFinder {
 		//"instanceof"
 		public Keyword getInstanceofKeyword_1_0_1() { return cInstanceofKeyword_1_0_1; }
 
-		//type=[types::Type|QualifiedName]
+		//type=[types::JvmType|QualifiedName]
 		public Assignment getTypeAssignment_1_0_2() { return cTypeAssignment_1_0_2; }
 
-		//[types::Type|QualifiedName]
-		public CrossReference getTypeTypeCrossReference_1_0_2_0() { return cTypeTypeCrossReference_1_0_2_0; }
+		//[types::JvmType|QualifiedName]
+		public CrossReference getTypeJvmTypeCrossReference_1_0_2_0() { return cTypeJvmTypeCrossReference_1_0_2_0; }
 
 		//QualifiedName
-		public RuleCall getTypeTypeQualifiedNameParserRuleCall_1_0_2_0_1() { return cTypeTypeQualifiedNameParserRuleCall_1_0_2_0_1; }
+		public RuleCall getTypeJvmTypeQualifiedNameParserRuleCall_1_0_2_0_1() { return cTypeJvmTypeQualifiedNameParserRuleCall_1_0_2_0_1; }
 
 		//{XBinaryOperation.left=current} operator=( ">=" | "<=" | ">" | "<" ) right=
 		//XOtherOperatorExpression
@@ -1325,26 +1325,26 @@ public class XpressionGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "XTypeLiteral");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final CrossReference cTypeTypeCrossReference_0_0 = (CrossReference)cTypeAssignment_0.eContents().get(0);
-		private final RuleCall cTypeTypeQualifiedNameParserRuleCall_0_0_1 = (RuleCall)cTypeTypeCrossReference_0_0.eContents().get(1);
+		private final CrossReference cTypeJvmTypeCrossReference_0_0 = (CrossReference)cTypeAssignment_0.eContents().get(0);
+		private final RuleCall cTypeJvmTypeQualifiedNameParserRuleCall_0_0_1 = (RuleCall)cTypeJvmTypeCrossReference_0_0.eContents().get(1);
 		private final Keyword cFullStopKeyword_1 = (Keyword)cGroup.eContents().get(1);
 		private final Keyword cClassKeyword_2 = (Keyword)cGroup.eContents().get(2);
 		
 		//XTypeLiteral:
-		//  type=[types::Type|QualifiedName] "." "class";
+		//  type=[types::JvmType|QualifiedName] "." "class";
 		public ParserRule getRule() { return rule; }
 
-		//type=[types::Type|QualifiedName] "." "class"
+		//type=[types::JvmType|QualifiedName] "." "class"
 		public Group getGroup() { return cGroup; }
 
-		//type=[types::Type|QualifiedName]
+		//type=[types::JvmType|QualifiedName]
 		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
 
-		//[types::Type|QualifiedName]
-		public CrossReference getTypeTypeCrossReference_0_0() { return cTypeTypeCrossReference_0_0; }
+		//[types::JvmType|QualifiedName]
+		public CrossReference getTypeJvmTypeCrossReference_0_0() { return cTypeJvmTypeCrossReference_0_0; }
 
 		//QualifiedName
-		public RuleCall getTypeTypeQualifiedNameParserRuleCall_0_0_1() { return cTypeTypeQualifiedNameParserRuleCall_0_0_1; }
+		public RuleCall getTypeJvmTypeQualifiedNameParserRuleCall_0_0_1() { return cTypeJvmTypeQualifiedNameParserRuleCall_0_0_1; }
 
 		//"."
 		public Keyword getFullStopKeyword_1() { return cFullStopKeyword_1; }
@@ -1522,8 +1522,8 @@ public class XpressionGrammarAccess extends AbstractGrammarElementFinder {
 
 	//XRelationalExpression returns XExpression:
 	//  XOtherOperatorExpression ({XInstanceOfExpression.expression=current} "instanceof"
-	//  type=[types::Type|QualifiedName]|{XBinaryOperation.left=current} operator=( ">=" |
-	//  "<=" | ">" | "<" ) right=XOtherOperatorExpression)*;
+	//  type=[types::JvmType|QualifiedName]|{XBinaryOperation.left=current} operator=(
+	//  ">=" | "<=" | ">" | "<" ) right=XOtherOperatorExpression)*;
 	public XRelationalExpressionElements getXRelationalExpressionAccess() {
 		return (pXRelationalExpression != null) ? pXRelationalExpression : (pXRelationalExpression = new XRelationalExpressionElements());
 	}
@@ -1763,7 +1763,7 @@ public class XpressionGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XTypeLiteral:
-	//  type=[types::Type|QualifiedName] "." "class";
+	//  type=[types::JvmType|QualifiedName] "." "class";
 	public XTypeLiteralElements getXTypeLiteralAccess() {
 		return (pXTypeLiteral != null) ? pXTypeLiteral : (pXTypeLiteral = new XTypeLiteralElements());
 	}
@@ -1794,7 +1794,7 @@ public class XpressionGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal RICH_STRING:
-	//  "\u00BB" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\u00AB"))* "\u00AB";
+	//  "»" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "«"))* "«";
 	public TerminalRule getRICH_STRINGRule() {
 		return (tRICH_STRING != null) ? tRICH_STRING : (tRICH_STRING = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "RICH_STRING"));
 	} 
@@ -1820,7 +1820,7 @@ public class XpressionGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XSimpleTypeRef:
-	//  type=[types::Type|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=
+	//  type=[types::JvmType|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=
 	//  XTypeParam)* ">")?;
 	public XtypeGrammarAccess.XSimpleTypeRefElements getXSimpleTypeRefAccess() {
 		return gaXtype.getXSimpleTypeRefAccess();

@@ -55,7 +55,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.ContentAssistCon
     @Override
     protected String getFirstRuleName() {
     	return "FirstLevel";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected ContentAssistContextTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

@@ -55,7 +55,12 @@ import org.eclipse.xtext.grammarinheritance.services.ConcreteTestLanguageGrammar
     @Override
     protected String getFirstRuleName() {
     	return "RootRule";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected ConcreteTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

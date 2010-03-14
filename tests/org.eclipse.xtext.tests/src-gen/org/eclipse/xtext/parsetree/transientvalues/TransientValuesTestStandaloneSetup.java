@@ -29,15 +29,15 @@ public class TransientValuesTestStandaloneSetup implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://simple/transientvaluestest")) {
-		EPackage.Registry.INSTANCE.put("http://simple/transientvaluestest", org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.TransientvaluestestPackage.eINSTANCE);
-	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("transientvaluestest", resourceFactory);
 		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("transientvaluestest", serviceProvider);
 		
+	if (!EPackage.Registry.INSTANCE.containsKey("http://simple/transientvaluestest")) {
+		EPackage.Registry.INSTANCE.put("http://simple/transientvaluestest", org.eclipse.xtext.parsetree.transientvalues.transientvaluestest.TransientvaluestestPackage.eINSTANCE);
+	}
 
 	}
 }

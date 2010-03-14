@@ -6,7 +6,7 @@
     modelPluginID="org.eclipse.xtext.tests" forceOverwrite="true" modelName="Bug289524ExTestLanguage"
     updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
     complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.tests.edit"
-    editorPluginID="org.eclipse.xtext.tests.editor">
+    editorPluginID="org.eclipse.xtext.tests.editor" usedGenPackages="../../grammarinheritance/InheritanceTestLanguage.genmodel#//inheritanceTest">
   <genPackages prefix="Bug289524ExTest" basePackage="org.eclipse.xtext.parser.antlr"
       disposableProviderFactory="true" ecorePackage="Bug289524ExTestLanguage.ecore#/">
     <genClasses ecoreClass="Bug289524ExTestLanguage.ecore#//Model">

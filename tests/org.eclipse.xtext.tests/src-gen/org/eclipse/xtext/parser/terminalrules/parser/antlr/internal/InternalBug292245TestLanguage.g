@@ -55,7 +55,12 @@ import org.eclipse.xtext.parser.terminalrules.services.Bug292245TestLanguageGram
     @Override
     protected String getFirstRuleName() {
     	return "Model";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected Bug292245TestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

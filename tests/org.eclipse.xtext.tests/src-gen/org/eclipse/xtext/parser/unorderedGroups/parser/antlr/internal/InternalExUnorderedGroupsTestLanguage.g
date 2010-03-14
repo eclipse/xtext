@@ -50,6 +50,11 @@ import org.eclipse.xtext.parser.unorderedGroups.services.ExUnorderedGroupsTestLa
     protected String getFirstRuleName() {
     	return "DelegateModel";	
    	} 
+   	   	
+   	@Override
+   	protected ExUnorderedGroupsTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

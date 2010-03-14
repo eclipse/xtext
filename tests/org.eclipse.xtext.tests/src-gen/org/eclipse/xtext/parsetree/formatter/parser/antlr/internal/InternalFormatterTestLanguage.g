@@ -55,7 +55,12 @@ import org.eclipse.xtext.parsetree.formatter.services.FormatterTestLanguageGramm
     @Override
     protected String getFirstRuleName() {
     	return "Root";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected FormatterTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

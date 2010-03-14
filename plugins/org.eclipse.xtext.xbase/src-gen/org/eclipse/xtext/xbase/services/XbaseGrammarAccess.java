@@ -465,8 +465,8 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 
 	//XRelationalExpression returns XExpression:
 	//  XOtherOperatorExpression ({XInstanceOfExpression.expression=current} "instanceof"
-	//  type=[types::Type|QualifiedName]|{XBinaryOperation.left=current} operator=( ">=" |
-	//  "<=" | ">" | "<" ) right=XOtherOperatorExpression)*;
+	//  type=[types::JvmType|QualifiedName]|{XBinaryOperation.left=current} operator=(
+	//  ">=" | "<=" | ">" | "<" ) right=XOtherOperatorExpression)*;
 	public XpressionGrammarAccess.XRelationalExpressionElements getXRelationalExpressionAccess() {
 		return gaXpression.getXRelationalExpressionAccess();
 	}
@@ -706,7 +706,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XTypeLiteral:
-	//  type=[types::Type|QualifiedName] "." "class";
+	//  type=[types::JvmType|QualifiedName] "." "class";
 	public XpressionGrammarAccess.XTypeLiteralElements getXTypeLiteralAccess() {
 		return gaXpression.getXTypeLiteralAccess();
 	}
@@ -737,7 +737,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//terminal RICH_STRING:
-	//  "\u00BB" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "\u00AB"))* "\u00AB";
+	//  "»" ("\\" ("b" | "t" | "n" | "f" | "r" | "\"" | "\'" | "\\") | !("\\" | "«"))* "«";
 	public TerminalRule getRICH_STRINGRule() {
 		return gaXpression.getRICH_STRINGRule();
 	} 
@@ -763,7 +763,7 @@ public class XbaseGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XSimpleTypeRef:
-	//  type=[types::Type|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=
+	//  type=[types::JvmType|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=
 	//  XTypeParam)* ">")?;
 	public XtypeGrammarAccess.XSimpleTypeRefElements getXSimpleTypeRefAccess() {
 		return gaXpression.getXSimpleTypeRefAccess();

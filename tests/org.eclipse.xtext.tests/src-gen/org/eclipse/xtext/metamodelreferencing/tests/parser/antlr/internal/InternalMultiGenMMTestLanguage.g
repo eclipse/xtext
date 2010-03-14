@@ -55,7 +55,12 @@ import org.eclipse.xtext.metamodelreferencing.tests.services.MultiGenMMTestLangu
     @Override
     protected String getFirstRuleName() {
     	return "Foo";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected MultiGenMMTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

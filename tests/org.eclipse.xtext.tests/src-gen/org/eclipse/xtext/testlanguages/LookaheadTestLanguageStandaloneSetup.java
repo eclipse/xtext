@@ -29,15 +29,15 @@ public class LookaheadTestLanguageStandaloneSetup implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/xtext/LookaheadLang")) {
-		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/xtext/LookaheadLang", org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangPackage.eINSTANCE);
-	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("lookaheadtestlanguage", resourceFactory);
 		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("lookaheadtestlanguage", serviceProvider);
 		
+	if (!EPackage.Registry.INSTANCE.containsKey("http://www.eclipse.org/2008/xtext/LookaheadLang")) {
+		EPackage.Registry.INSTANCE.put("http://www.eclipse.org/2008/xtext/LookaheadLang", org.eclipse.xtext.testlanguages.lookaheadLang.LookaheadLangPackage.eINSTANCE);
+	}
 
 	}
 }

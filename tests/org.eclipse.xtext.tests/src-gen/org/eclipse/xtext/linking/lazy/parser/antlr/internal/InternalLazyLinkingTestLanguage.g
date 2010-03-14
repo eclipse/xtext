@@ -55,7 +55,12 @@ import org.eclipse.xtext.linking.lazy.services.LazyLinkingTestLanguageGrammarAcc
     @Override
     protected String getFirstRuleName() {
     	return "Model";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected LazyLinkingTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

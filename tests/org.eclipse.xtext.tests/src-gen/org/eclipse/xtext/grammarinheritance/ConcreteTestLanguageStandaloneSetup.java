@@ -29,15 +29,15 @@ public class ConcreteTestLanguageStandaloneSetup implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://holla")) {
-		EPackage.Registry.INSTANCE.put("http://holla", org.eclipse.xtext.grammarinheritance.foo.FooPackage.eINSTANCE);
-	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("concretetestlanguage", resourceFactory);
 		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("concretetestlanguage", serviceProvider);
 		
+	if (!EPackage.Registry.INSTANCE.containsKey("http://holla")) {
+		EPackage.Registry.INSTANCE.put("http://holla", org.eclipse.xtext.grammarinheritance.foo.FooPackage.eINSTANCE);
+	}
 
 	}
 }

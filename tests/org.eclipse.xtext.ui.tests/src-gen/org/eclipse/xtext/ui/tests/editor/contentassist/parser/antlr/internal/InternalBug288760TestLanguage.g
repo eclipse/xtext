@@ -55,7 +55,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug288760TestLan
     @Override
     protected String getFirstRuleName() {
     	return "WorkflowElement";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected Bug288760TestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

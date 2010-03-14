@@ -55,7 +55,12 @@ import org.eclipse.xtext.parser.assignments.services.Bug288432TestLanguageGramma
     @Override
     protected String getFirstRuleName() {
     	return "Body";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected Bug288432TestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

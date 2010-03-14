@@ -12,6 +12,8 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.grammarinheritance.inheritanceTest.InheritanceTestPackage;
+
 import org.eclipse.xtext.parser.antlr.bug296889Test.Bug296889TestFactory;
 import org.eclipse.xtext.parser.antlr.bug296889Test.Bug296889TestPackage;
 import org.eclipse.xtext.parser.antlr.bug296889Test.Expression;
@@ -110,6 +112,9 @@ public class Bug296889TestPackageImpl extends EPackageImpl implements Bug296889T
     Bug296889TestPackageImpl theBug296889TestPackage = (Bug296889TestPackageImpl)(EPackage.Registry.INSTANCE.get(eNS_URI) instanceof Bug296889TestPackageImpl ? EPackage.Registry.INSTANCE.get(eNS_URI) : new Bug296889TestPackageImpl());
 
     isInited = true;
+
+    // Initialize simple dependencies
+    InheritanceTestPackage.eINSTANCE.eClass();
 
     // Create package meta-data objects
     theBug296889TestPackage.createPackageContents();

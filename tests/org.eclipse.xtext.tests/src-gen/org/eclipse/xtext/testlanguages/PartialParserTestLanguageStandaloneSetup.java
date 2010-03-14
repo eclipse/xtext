@@ -29,15 +29,15 @@ public class PartialParserTestLanguageStandaloneSetup implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://example.xtext.org/PartialParserTestLanguage")) {
-		EPackage.Registry.INSTANCE.put("http://example.xtext.org/PartialParserTestLanguage", org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguagePackage.eINSTANCE);
-	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("partialparsertestlanguage", resourceFactory);
 		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("partialparsertestlanguage", serviceProvider);
 		
+	if (!EPackage.Registry.INSTANCE.containsKey("http://example.xtext.org/PartialParserTestLanguage")) {
+		EPackage.Registry.INSTANCE.put("http://example.xtext.org/PartialParserTestLanguage", org.eclipse.xtext.testlanguages.partialParserTestLanguage.PartialParserTestLanguagePackage.eINSTANCE);
+	}
 
 	}
 }

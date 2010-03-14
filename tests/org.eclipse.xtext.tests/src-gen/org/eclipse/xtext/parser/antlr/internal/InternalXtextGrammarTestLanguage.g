@@ -55,7 +55,12 @@ import org.eclipse.xtext.services.XtextGrammarTestLanguageGrammarAccess;
     @Override
     protected String getFirstRuleName() {
     	return "Grammar";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected XtextGrammarTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

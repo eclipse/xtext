@@ -74,11 +74,16 @@ public class InternalBug289515TestLanguageParser extends AbstractInternalAntlrPa
         protected String getFirstRuleName() {
         	return "Model";	
        	} 
+       	   	
+       	@Override
+       	protected Bug289515TestLanguageGrammarAccess getGrammarAccess() {
+       		return grammarAccess;
+       	}
 
 
 
     // $ANTLR start entryRuleModel
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:66:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:71:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -86,16 +91,16 @@ public class InternalBug289515TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:67:2: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:68:2: iv_ruleModel= ruleModel EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:72:2: (iv_ruleModel= ruleModel EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:73:2: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
-            pushFollow(FOLLOW_ruleModel_in_entryRuleModel67);
+            pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel67);
             iv_ruleModel=ruleModel();
             _fsp--;
 
              current =iv_ruleModel; 
-            match(input,EOF,FOLLOW_EOF_in_entryRuleModel77); 
+            match(input,EOF,FollowSets000.FOLLOW_EOF_in_entryRuleModel77); 
 
             }
 
@@ -113,7 +118,7 @@ public class InternalBug289515TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleModel
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:75:1: ruleModel returns [EObject current=null] : ( ( KEYWORD_2 ( (lv_value_1_0= KEYWORD_1 ) ) ) | ( KEYWORD_3 ( (lv_value_3_0= KEYWORD_1 ) ) ) | ( KEYWORD_4 ( (lv_value_5_0= KEYWORD_9 ) ) ) | ( KEYWORD_5 ( (lv_value_7_0= KEYWORD_9 ) ) ) | ( KEYWORD_6 ( (lv_value_9_0= KEYWORD_8 ) ) ) | ( KEYWORD_7 ( (lv_value_11_0= KEYWORD_8 ) ) ) ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:80:1: ruleModel returns [EObject current=null] : ( ( KEYWORD_2 ( (lv_value_1_0= KEYWORD_1 ) ) ) | ( KEYWORD_3 ( (lv_value_3_0= KEYWORD_1 ) ) ) | ( KEYWORD_4 ( (lv_value_5_0= KEYWORD_9 ) ) ) | ( KEYWORD_5 ( (lv_value_7_0= KEYWORD_9 ) ) ) | ( KEYWORD_6 ( (lv_value_9_0= KEYWORD_8 ) ) ) | ( KEYWORD_7 ( (lv_value_11_0= KEYWORD_8 ) ) ) ) ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -127,10 +132,10 @@ public class InternalBug289515TestLanguageParser extends AbstractInternalAntlrPa
          EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:80:6: ( ( ( KEYWORD_2 ( (lv_value_1_0= KEYWORD_1 ) ) ) | ( KEYWORD_3 ( (lv_value_3_0= KEYWORD_1 ) ) ) | ( KEYWORD_4 ( (lv_value_5_0= KEYWORD_9 ) ) ) | ( KEYWORD_5 ( (lv_value_7_0= KEYWORD_9 ) ) ) | ( KEYWORD_6 ( (lv_value_9_0= KEYWORD_8 ) ) ) | ( KEYWORD_7 ( (lv_value_11_0= KEYWORD_8 ) ) ) ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:81:1: ( ( KEYWORD_2 ( (lv_value_1_0= KEYWORD_1 ) ) ) | ( KEYWORD_3 ( (lv_value_3_0= KEYWORD_1 ) ) ) | ( KEYWORD_4 ( (lv_value_5_0= KEYWORD_9 ) ) ) | ( KEYWORD_5 ( (lv_value_7_0= KEYWORD_9 ) ) ) | ( KEYWORD_6 ( (lv_value_9_0= KEYWORD_8 ) ) ) | ( KEYWORD_7 ( (lv_value_11_0= KEYWORD_8 ) ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:85:6: ( ( ( KEYWORD_2 ( (lv_value_1_0= KEYWORD_1 ) ) ) | ( KEYWORD_3 ( (lv_value_3_0= KEYWORD_1 ) ) ) | ( KEYWORD_4 ( (lv_value_5_0= KEYWORD_9 ) ) ) | ( KEYWORD_5 ( (lv_value_7_0= KEYWORD_9 ) ) ) | ( KEYWORD_6 ( (lv_value_9_0= KEYWORD_8 ) ) ) | ( KEYWORD_7 ( (lv_value_11_0= KEYWORD_8 ) ) ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:86:1: ( ( KEYWORD_2 ( (lv_value_1_0= KEYWORD_1 ) ) ) | ( KEYWORD_3 ( (lv_value_3_0= KEYWORD_1 ) ) ) | ( KEYWORD_4 ( (lv_value_5_0= KEYWORD_9 ) ) ) | ( KEYWORD_5 ( (lv_value_7_0= KEYWORD_9 ) ) ) | ( KEYWORD_6 ( (lv_value_9_0= KEYWORD_8 ) ) ) | ( KEYWORD_7 ( (lv_value_11_0= KEYWORD_8 ) ) ) )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:81:1: ( ( KEYWORD_2 ( (lv_value_1_0= KEYWORD_1 ) ) ) | ( KEYWORD_3 ( (lv_value_3_0= KEYWORD_1 ) ) ) | ( KEYWORD_4 ( (lv_value_5_0= KEYWORD_9 ) ) ) | ( KEYWORD_5 ( (lv_value_7_0= KEYWORD_9 ) ) ) | ( KEYWORD_6 ( (lv_value_9_0= KEYWORD_8 ) ) ) | ( KEYWORD_7 ( (lv_value_11_0= KEYWORD_8 ) ) ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:86:1: ( ( KEYWORD_2 ( (lv_value_1_0= KEYWORD_1 ) ) ) | ( KEYWORD_3 ( (lv_value_3_0= KEYWORD_1 ) ) ) | ( KEYWORD_4 ( (lv_value_5_0= KEYWORD_9 ) ) ) | ( KEYWORD_5 ( (lv_value_7_0= KEYWORD_9 ) ) ) | ( KEYWORD_6 ( (lv_value_9_0= KEYWORD_8 ) ) ) | ( KEYWORD_7 ( (lv_value_11_0= KEYWORD_8 ) ) ) )
             int alt1=6;
             switch ( input.LA(1) ) {
             case KEYWORD_2:
@@ -165,30 +170,30 @@ public class InternalBug289515TestLanguageParser extends AbstractInternalAntlrPa
                 break;
             default:
                 NoViableAltException nvae =
-                    new NoViableAltException("81:1: ( ( KEYWORD_2 ( (lv_value_1_0= KEYWORD_1 ) ) ) | ( KEYWORD_3 ( (lv_value_3_0= KEYWORD_1 ) ) ) | ( KEYWORD_4 ( (lv_value_5_0= KEYWORD_9 ) ) ) | ( KEYWORD_5 ( (lv_value_7_0= KEYWORD_9 ) ) ) | ( KEYWORD_6 ( (lv_value_9_0= KEYWORD_8 ) ) ) | ( KEYWORD_7 ( (lv_value_11_0= KEYWORD_8 ) ) ) )", 1, 0, input);
+                    new NoViableAltException("86:1: ( ( KEYWORD_2 ( (lv_value_1_0= KEYWORD_1 ) ) ) | ( KEYWORD_3 ( (lv_value_3_0= KEYWORD_1 ) ) ) | ( KEYWORD_4 ( (lv_value_5_0= KEYWORD_9 ) ) ) | ( KEYWORD_5 ( (lv_value_7_0= KEYWORD_9 ) ) ) | ( KEYWORD_6 ( (lv_value_9_0= KEYWORD_8 ) ) ) | ( KEYWORD_7 ( (lv_value_11_0= KEYWORD_8 ) ) ) )", 1, 0, input);
 
                 throw nvae;
             }
 
             switch (alt1) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:81:2: ( KEYWORD_2 ( (lv_value_1_0= KEYWORD_1 ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:86:2: ( KEYWORD_2 ( (lv_value_1_0= KEYWORD_1 ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:81:2: ( KEYWORD_2 ( (lv_value_1_0= KEYWORD_1 ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:82:2: KEYWORD_2 ( (lv_value_1_0= KEYWORD_1 ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:86:2: ( KEYWORD_2 ( (lv_value_1_0= KEYWORD_1 ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:87:2: KEYWORD_2 ( (lv_value_1_0= KEYWORD_1 ) )
                     {
-                    match(input,KEYWORD_2,FOLLOW_KEYWORD_2_in_ruleModel114); 
+                    match(input,KEYWORD_2,FollowSets000.FOLLOW_KEYWORD_2_in_ruleModel114); 
 
                             createLeafNode(grammarAccess.getModelAccess().getDigitOneKeyword_0_0(), null); 
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:86:1: ( (lv_value_1_0= KEYWORD_1 ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:87:1: (lv_value_1_0= KEYWORD_1 )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:91:1: ( (lv_value_1_0= KEYWORD_1 ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:92:1: (lv_value_1_0= KEYWORD_1 )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:87:1: (lv_value_1_0= KEYWORD_1 )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:88:3: lv_value_1_0= KEYWORD_1
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:92:1: (lv_value_1_0= KEYWORD_1 )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:93:3: lv_value_1_0= KEYWORD_1
                     {
                     lv_value_1_0=(Token)input.LT(1);
-                    match(input,KEYWORD_1,FOLLOW_KEYWORD_1_in_ruleModel133); 
+                    match(input,KEYWORD_1,FollowSets000.FOLLOW_KEYWORD_1_in_ruleModel133); 
 
                             createLeafNode(grammarAccess.getModelAccess().getValuePercentSignKeyword_0_1_0(), "value"); 
                         
@@ -217,23 +222,23 @@ public class InternalBug289515TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:109:6: ( KEYWORD_3 ( (lv_value_3_0= KEYWORD_1 ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:114:6: ( KEYWORD_3 ( (lv_value_3_0= KEYWORD_1 ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:109:6: ( KEYWORD_3 ( (lv_value_3_0= KEYWORD_1 ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:110:2: KEYWORD_3 ( (lv_value_3_0= KEYWORD_1 ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:114:6: ( KEYWORD_3 ( (lv_value_3_0= KEYWORD_1 ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:115:2: KEYWORD_3 ( (lv_value_3_0= KEYWORD_1 ) )
                     {
-                    match(input,KEYWORD_3,FOLLOW_KEYWORD_3_in_ruleModel165); 
+                    match(input,KEYWORD_3,FollowSets000.FOLLOW_KEYWORD_3_in_ruleModel165); 
 
                             createLeafNode(grammarAccess.getModelAccess().getDigitTwoKeyword_1_0(), null); 
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:114:1: ( (lv_value_3_0= KEYWORD_1 ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:115:1: (lv_value_3_0= KEYWORD_1 )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:119:1: ( (lv_value_3_0= KEYWORD_1 ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:120:1: (lv_value_3_0= KEYWORD_1 )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:115:1: (lv_value_3_0= KEYWORD_1 )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:116:3: lv_value_3_0= KEYWORD_1
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:120:1: (lv_value_3_0= KEYWORD_1 )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:121:3: lv_value_3_0= KEYWORD_1
                     {
                     lv_value_3_0=(Token)input.LT(1);
-                    match(input,KEYWORD_1,FOLLOW_KEYWORD_1_in_ruleModel184); 
+                    match(input,KEYWORD_1,FollowSets000.FOLLOW_KEYWORD_1_in_ruleModel184); 
 
                             createLeafNode(grammarAccess.getModelAccess().getValuePercentSignKeyword_1_1_0(), "value"); 
                         
@@ -262,23 +267,23 @@ public class InternalBug289515TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 3 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:137:6: ( KEYWORD_4 ( (lv_value_5_0= KEYWORD_9 ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:142:6: ( KEYWORD_4 ( (lv_value_5_0= KEYWORD_9 ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:137:6: ( KEYWORD_4 ( (lv_value_5_0= KEYWORD_9 ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:138:2: KEYWORD_4 ( (lv_value_5_0= KEYWORD_9 ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:142:6: ( KEYWORD_4 ( (lv_value_5_0= KEYWORD_9 ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:143:2: KEYWORD_4 ( (lv_value_5_0= KEYWORD_9 ) )
                     {
-                    match(input,KEYWORD_4,FOLLOW_KEYWORD_4_in_ruleModel216); 
+                    match(input,KEYWORD_4,FollowSets000.FOLLOW_KEYWORD_4_in_ruleModel216); 
 
                             createLeafNode(grammarAccess.getModelAccess().getDigitThreeKeyword_2_0(), null); 
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:142:1: ( (lv_value_5_0= KEYWORD_9 ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:143:1: (lv_value_5_0= KEYWORD_9 )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:147:1: ( (lv_value_5_0= KEYWORD_9 ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:148:1: (lv_value_5_0= KEYWORD_9 )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:143:1: (lv_value_5_0= KEYWORD_9 )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:144:3: lv_value_5_0= KEYWORD_9
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:148:1: (lv_value_5_0= KEYWORD_9 )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:149:3: lv_value_5_0= KEYWORD_9
                     {
                     lv_value_5_0=(Token)input.LT(1);
-                    match(input,KEYWORD_9,FOLLOW_KEYWORD_9_in_ruleModel235); 
+                    match(input,KEYWORD_9,FollowSets000.FOLLOW_KEYWORD_9_in_ruleModel235); 
 
                             createLeafNode(grammarAccess.getModelAccess().getValueReverseSolidusPercentSignKeyword_2_1_0(), "value"); 
                         
@@ -307,23 +312,23 @@ public class InternalBug289515TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 4 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:165:6: ( KEYWORD_5 ( (lv_value_7_0= KEYWORD_9 ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:170:6: ( KEYWORD_5 ( (lv_value_7_0= KEYWORD_9 ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:165:6: ( KEYWORD_5 ( (lv_value_7_0= KEYWORD_9 ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:166:2: KEYWORD_5 ( (lv_value_7_0= KEYWORD_9 ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:170:6: ( KEYWORD_5 ( (lv_value_7_0= KEYWORD_9 ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:171:2: KEYWORD_5 ( (lv_value_7_0= KEYWORD_9 ) )
                     {
-                    match(input,KEYWORD_5,FOLLOW_KEYWORD_5_in_ruleModel267); 
+                    match(input,KEYWORD_5,FollowSets000.FOLLOW_KEYWORD_5_in_ruleModel267); 
 
                             createLeafNode(grammarAccess.getModelAccess().getDigitFourKeyword_3_0(), null); 
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:170:1: ( (lv_value_7_0= KEYWORD_9 ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:171:1: (lv_value_7_0= KEYWORD_9 )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:175:1: ( (lv_value_7_0= KEYWORD_9 ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:176:1: (lv_value_7_0= KEYWORD_9 )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:171:1: (lv_value_7_0= KEYWORD_9 )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:172:3: lv_value_7_0= KEYWORD_9
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:176:1: (lv_value_7_0= KEYWORD_9 )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:177:3: lv_value_7_0= KEYWORD_9
                     {
                     lv_value_7_0=(Token)input.LT(1);
-                    match(input,KEYWORD_9,FOLLOW_KEYWORD_9_in_ruleModel286); 
+                    match(input,KEYWORD_9,FollowSets000.FOLLOW_KEYWORD_9_in_ruleModel286); 
 
                             createLeafNode(grammarAccess.getModelAccess().getValueReverseSolidusPercentSignKeyword_3_1_0(), "value"); 
                         
@@ -352,23 +357,23 @@ public class InternalBug289515TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 5 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:193:6: ( KEYWORD_6 ( (lv_value_9_0= KEYWORD_8 ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:198:6: ( KEYWORD_6 ( (lv_value_9_0= KEYWORD_8 ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:193:6: ( KEYWORD_6 ( (lv_value_9_0= KEYWORD_8 ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:194:2: KEYWORD_6 ( (lv_value_9_0= KEYWORD_8 ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:198:6: ( KEYWORD_6 ( (lv_value_9_0= KEYWORD_8 ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:199:2: KEYWORD_6 ( (lv_value_9_0= KEYWORD_8 ) )
                     {
-                    match(input,KEYWORD_6,FOLLOW_KEYWORD_6_in_ruleModel318); 
+                    match(input,KEYWORD_6,FollowSets000.FOLLOW_KEYWORD_6_in_ruleModel318); 
 
                             createLeafNode(grammarAccess.getModelAccess().getDigitFiveKeyword_4_0(), null); 
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:198:1: ( (lv_value_9_0= KEYWORD_8 ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:199:1: (lv_value_9_0= KEYWORD_8 )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:203:1: ( (lv_value_9_0= KEYWORD_8 ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:204:1: (lv_value_9_0= KEYWORD_8 )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:199:1: (lv_value_9_0= KEYWORD_8 )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:200:3: lv_value_9_0= KEYWORD_8
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:204:1: (lv_value_9_0= KEYWORD_8 )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:205:3: lv_value_9_0= KEYWORD_8
                     {
                     lv_value_9_0=(Token)input.LT(1);
-                    match(input,KEYWORD_8,FOLLOW_KEYWORD_8_in_ruleModel337); 
+                    match(input,KEYWORD_8,FollowSets000.FOLLOW_KEYWORD_8_in_ruleModel337); 
 
                             createLeafNode(grammarAccess.getModelAccess().getValuePercentSignPercentSignKeyword_4_1_0(), "value"); 
                         
@@ -397,23 +402,23 @@ public class InternalBug289515TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 6 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:221:6: ( KEYWORD_7 ( (lv_value_11_0= KEYWORD_8 ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:226:6: ( KEYWORD_7 ( (lv_value_11_0= KEYWORD_8 ) ) )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:221:6: ( KEYWORD_7 ( (lv_value_11_0= KEYWORD_8 ) ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:222:2: KEYWORD_7 ( (lv_value_11_0= KEYWORD_8 ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:226:6: ( KEYWORD_7 ( (lv_value_11_0= KEYWORD_8 ) ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:227:2: KEYWORD_7 ( (lv_value_11_0= KEYWORD_8 ) )
                     {
-                    match(input,KEYWORD_7,FOLLOW_KEYWORD_7_in_ruleModel369); 
+                    match(input,KEYWORD_7,FollowSets000.FOLLOW_KEYWORD_7_in_ruleModel369); 
 
                             createLeafNode(grammarAccess.getModelAccess().getDigitSixKeyword_5_0(), null); 
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:226:1: ( (lv_value_11_0= KEYWORD_8 ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:227:1: (lv_value_11_0= KEYWORD_8 )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:231:1: ( (lv_value_11_0= KEYWORD_8 ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:232:1: (lv_value_11_0= KEYWORD_8 )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:227:1: (lv_value_11_0= KEYWORD_8 )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:228:3: lv_value_11_0= KEYWORD_8
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:232:1: (lv_value_11_0= KEYWORD_8 )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/parser/antlr/parser/antlr/internal/InternalBug289515TestLanguage.g:233:3: lv_value_11_0= KEYWORD_8
                     {
                     lv_value_11_0=(Token)input.LT(1);
-                    match(input,KEYWORD_8,FOLLOW_KEYWORD_8_in_ruleModel388); 
+                    match(input,KEYWORD_8,FollowSets000.FOLLOW_KEYWORD_8_in_ruleModel388); 
 
                             createLeafNode(grammarAccess.getModelAccess().getValuePercentSignPercentSignKeyword_5_1_0(), "value"); 
                         
@@ -465,19 +470,23 @@ public class InternalBug289515TestLanguageParser extends AbstractInternalAntlrPa
 
  
 
-    public static final BitSet FOLLOW_ruleModel_in_entryRuleModel67 = new BitSet(new long[]{0x0000000000000000L});
-    public static final BitSet FOLLOW_EOF_in_entryRuleModel77 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_2_in_ruleModel114 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_KEYWORD_1_in_ruleModel133 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_3_in_ruleModel165 = new BitSet(new long[]{0x0000000000000040L});
-    public static final BitSet FOLLOW_KEYWORD_1_in_ruleModel184 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_4_in_ruleModel216 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_KEYWORD_9_in_ruleModel235 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_5_in_ruleModel267 = new BitSet(new long[]{0x0000000000000020L});
-    public static final BitSet FOLLOW_KEYWORD_9_in_ruleModel286 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_6_in_ruleModel318 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_KEYWORD_8_in_ruleModel337 = new BitSet(new long[]{0x0000000000000002L});
-    public static final BitSet FOLLOW_KEYWORD_7_in_ruleModel369 = new BitSet(new long[]{0x0000000000000010L});
-    public static final BitSet FOLLOW_KEYWORD_8_in_ruleModel388 = new BitSet(new long[]{0x0000000000000002L});
+    
+    private static class FollowSets000 {
+        public static final BitSet FOLLOW_ruleModel_in_entryRuleModel67 = new BitSet(new long[]{0x0000000000000000L});
+        public static final BitSet FOLLOW_EOF_in_entryRuleModel77 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_KEYWORD_2_in_ruleModel114 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_KEYWORD_1_in_ruleModel133 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_KEYWORD_3_in_ruleModel165 = new BitSet(new long[]{0x0000000000000040L});
+        public static final BitSet FOLLOW_KEYWORD_1_in_ruleModel184 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_KEYWORD_4_in_ruleModel216 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_KEYWORD_9_in_ruleModel235 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_KEYWORD_5_in_ruleModel267 = new BitSet(new long[]{0x0000000000000020L});
+        public static final BitSet FOLLOW_KEYWORD_9_in_ruleModel286 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_KEYWORD_6_in_ruleModel318 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_KEYWORD_8_in_ruleModel337 = new BitSet(new long[]{0x0000000000000002L});
+        public static final BitSet FOLLOW_KEYWORD_7_in_ruleModel369 = new BitSet(new long[]{0x0000000000000010L});
+        public static final BitSet FOLLOW_KEYWORD_8_in_ruleModel388 = new BitSet(new long[]{0x0000000000000002L});
+    }
+
 
 }

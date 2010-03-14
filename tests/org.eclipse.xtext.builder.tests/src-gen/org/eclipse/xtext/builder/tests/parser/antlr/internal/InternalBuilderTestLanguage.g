@@ -55,7 +55,12 @@ import org.eclipse.xtext.builder.tests.services.BuilderTestLanguageGrammarAccess
     @Override
     protected String getFirstRuleName() {
     	return "NamedElement";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected BuilderTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

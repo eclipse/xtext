@@ -50,6 +50,11 @@ import org.eclipse.xtext.lexer.services.IgnoreCaseLexerTestLanguageGrammarAccess
     protected String getFirstRuleName() {
     	return "Model";	
    	} 
+   	   	
+   	@Override
+   	protected IgnoreCaseLexerTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

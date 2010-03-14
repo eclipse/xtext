@@ -55,7 +55,12 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.TwoContextsTestL
     @Override
     protected String getFirstRuleName() {
     	return "MainModel";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected TwoContextsTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

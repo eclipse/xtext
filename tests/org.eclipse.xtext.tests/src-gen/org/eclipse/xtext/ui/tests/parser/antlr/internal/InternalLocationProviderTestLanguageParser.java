@@ -62,12 +62,17 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
         @Override
         protected String getFirstRuleName() {
         	return "Model";	
-       	} 
+       	}
+       	
+       	@Override
+       	protected LocationProviderTestLanguageGrammarAccess getGrammarAccess() {
+       		return grammarAccess;
+       	}
 
 
 
     // $ANTLR start entryRuleModel
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:72:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:77:1: entryRuleModel returns [EObject current=null] : iv_ruleModel= ruleModel EOF ;
     public final EObject entryRuleModel() throws RecognitionException {
         EObject current = null;
 
@@ -75,8 +80,8 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:73:2: (iv_ruleModel= ruleModel EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:74:2: iv_ruleModel= ruleModel EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:78:2: (iv_ruleModel= ruleModel EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:79:2: iv_ruleModel= ruleModel EOF
             {
              currentNode = createCompositeNode(grammarAccess.getModelRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_ruleModel_in_entryRuleModel75);
@@ -102,7 +107,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start ruleModel
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:81:1: ruleModel returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )* ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:86:1: ruleModel returns [EObject current=null] : ( (lv_elements_0_0= ruleElement ) )* ;
     public final EObject ruleModel() throws RecognitionException {
         EObject current = null;
 
@@ -112,10 +117,10 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
          @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:86:6: ( ( (lv_elements_0_0= ruleElement ) )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:87:1: ( (lv_elements_0_0= ruleElement ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:91:6: ( ( (lv_elements_0_0= ruleElement ) )* )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:92:1: ( (lv_elements_0_0= ruleElement ) )*
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:87:1: ( (lv_elements_0_0= ruleElement ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:92:1: ( (lv_elements_0_0= ruleElement ) )*
             loop1:
             do {
                 int alt1=2;
@@ -128,10 +133,10 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:88:1: (lv_elements_0_0= ruleElement )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:93:1: (lv_elements_0_0= ruleElement )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:88:1: (lv_elements_0_0= ruleElement )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:89:3: lv_elements_0_0= ruleElement
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:93:1: (lv_elements_0_0= ruleElement )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:94:3: lv_elements_0_0= ruleElement
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getModelAccess().getElementsElementParserRuleCall_0(), currentNode); 
@@ -189,7 +194,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start entryRuleElement
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:119:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:124:1: entryRuleElement returns [EObject current=null] : iv_ruleElement= ruleElement EOF ;
     public final EObject entryRuleElement() throws RecognitionException {
         EObject current = null;
 
@@ -197,8 +202,8 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:120:2: (iv_ruleElement= ruleElement EOF )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:121:2: iv_ruleElement= ruleElement EOF
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:125:2: (iv_ruleElement= ruleElement EOF )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:126:2: iv_ruleElement= ruleElement EOF
             {
              currentNode = createCompositeNode(grammarAccess.getElementRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_ruleElement_in_entryRuleElement166);
@@ -224,7 +229,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
 
     // $ANTLR start ruleElement
-    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:128:1: ruleElement returns [EObject current=null] : ( 'element' ( (lv_name_1_0= RULE_ID ) ) ( 'singleref' ( ( RULE_ID ) ) )? ( 'multiref' ( ( RULE_ID ) ) )* ) ;
+    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:133:1: ruleElement returns [EObject current=null] : ( 'element' ( (lv_name_1_0= RULE_ID ) ) ( 'singleref' ( ( RULE_ID ) ) )? ( 'multiref' ( ( RULE_ID ) ) )* ) ;
     public final EObject ruleElement() throws RecognitionException {
         EObject current = null;
 
@@ -233,21 +238,21 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
          @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:133:6: ( ( 'element' ( (lv_name_1_0= RULE_ID ) ) ( 'singleref' ( ( RULE_ID ) ) )? ( 'multiref' ( ( RULE_ID ) ) )* ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:134:1: ( 'element' ( (lv_name_1_0= RULE_ID ) ) ( 'singleref' ( ( RULE_ID ) ) )? ( 'multiref' ( ( RULE_ID ) ) )* )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:138:6: ( ( 'element' ( (lv_name_1_0= RULE_ID ) ) ( 'singleref' ( ( RULE_ID ) ) )? ( 'multiref' ( ( RULE_ID ) ) )* ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:139:1: ( 'element' ( (lv_name_1_0= RULE_ID ) ) ( 'singleref' ( ( RULE_ID ) ) )? ( 'multiref' ( ( RULE_ID ) ) )* )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:134:1: ( 'element' ( (lv_name_1_0= RULE_ID ) ) ( 'singleref' ( ( RULE_ID ) ) )? ( 'multiref' ( ( RULE_ID ) ) )* )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:134:3: 'element' ( (lv_name_1_0= RULE_ID ) ) ( 'singleref' ( ( RULE_ID ) ) )? ( 'multiref' ( ( RULE_ID ) ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:139:1: ( 'element' ( (lv_name_1_0= RULE_ID ) ) ( 'singleref' ( ( RULE_ID ) ) )? ( 'multiref' ( ( RULE_ID ) ) )* )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:139:3: 'element' ( (lv_name_1_0= RULE_ID ) ) ( 'singleref' ( ( RULE_ID ) ) )? ( 'multiref' ( ( RULE_ID ) ) )*
             {
             match(input,11,FollowSets000.FOLLOW_11_in_ruleElement211); 
 
                     createLeafNode(grammarAccess.getElementAccess().getElementKeyword_0(), null); 
                 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:138:1: ( (lv_name_1_0= RULE_ID ) )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:139:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:143:1: ( (lv_name_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:144:1: (lv_name_1_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:139:1: (lv_name_1_0= RULE_ID )
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:140:3: lv_name_1_0= RULE_ID
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:144:1: (lv_name_1_0= RULE_ID )
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:145:3: lv_name_1_0= RULE_ID
             {
             lv_name_1_0=(Token)input.LT(1);
             match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleElement228); 
@@ -276,7 +281,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:162:2: ( 'singleref' ( ( RULE_ID ) ) )?
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:167:2: ( 'singleref' ( ( RULE_ID ) ) )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -285,17 +290,17 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:162:4: 'singleref' ( ( RULE_ID ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:167:4: 'singleref' ( ( RULE_ID ) )
                     {
                     match(input,12,FollowSets000.FOLLOW_12_in_ruleElement244); 
 
                             createLeafNode(grammarAccess.getElementAccess().getSinglerefKeyword_2_0(), null); 
                         
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:166:1: ( ( RULE_ID ) )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:167:1: ( RULE_ID )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:171:1: ( ( RULE_ID ) )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:172:1: ( RULE_ID )
                     {
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:167:1: ( RULE_ID )
-                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:168:3: RULE_ID
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:172:1: ( RULE_ID )
+                    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:173:3: RULE_ID
                     {
 
                     			if (current==null) {
@@ -319,7 +324,7 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
             }
 
-            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:180:4: ( 'multiref' ( ( RULE_ID ) ) )*
+            // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:185:4: ( 'multiref' ( ( RULE_ID ) ) )*
             loop3:
             do {
                 int alt3=2;
@@ -332,17 +337,17 @@ public class InternalLocationProviderTestLanguageParser extends AbstractInternal
 
                 switch (alt3) {
             	case 1 :
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:180:6: 'multiref' ( ( RULE_ID ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:185:6: 'multiref' ( ( RULE_ID ) )
             	    {
             	    match(input,13,FollowSets000.FOLLOW_13_in_ruleElement275); 
 
             	            createLeafNode(grammarAccess.getElementAccess().getMultirefKeyword_3_0(), null); 
             	        
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:184:1: ( ( RULE_ID ) )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:185:1: ( RULE_ID )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:189:1: ( ( RULE_ID ) )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:190:1: ( RULE_ID )
             	    {
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:185:1: ( RULE_ID )
-            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:186:3: RULE_ID
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:190:1: ( RULE_ID )
+            	    // ../org.eclipse.xtext.tests/src-gen/org/eclipse/xtext/ui/tests/parser/antlr/internal/InternalLocationProviderTestLanguage.g:191:3: RULE_ID
             	    {
 
             	    			if (current==null) {

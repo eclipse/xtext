@@ -470,12 +470,12 @@ protected class XFunctionTypeRef_ReturnTypeAssignment_2 extends AssignmentToken 
 /************ begin Rule XSimpleTypeRef ****************
  *
  * XSimpleTypeRef:
- *   type=[types::Type|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=
+ *   type=[types::JvmType|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=
  *   XTypeParam)* ">")?;
  *
  **/
 
-// type=[types::Type|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=
+// type=[types::JvmType|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=
 // XTypeParam)* ">")?
 protected class XSimpleTypeRef_Group extends GroupToken {
 	
@@ -504,7 +504,7 @@ protected class XSimpleTypeRef_Group extends GroupToken {
 	}
 }
 
-// type=[types::Type|QualifiedName]
+// type=[types::JvmType|QualifiedName]
 protected class XSimpleTypeRef_TypeAssignment_0 extends AssignmentToken  {
 	
 	public XSimpleTypeRef_TypeAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -529,9 +529,9 @@ protected class XSimpleTypeRef_TypeAssignment_0 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getXSimpleTypeRefAccess().getTypeTypeCrossReference_0_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getXSimpleTypeRefAccess().getTypeJvmTypeCrossReference_0_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.getXSimpleTypeRefAccess().getTypeTypeCrossReference_0_0(); 
+				element = grammarAccess.getXSimpleTypeRefAccess().getTypeJvmTypeCrossReference_0_0(); 
 				return obj;
 			}
 		}

@@ -55,7 +55,12 @@ import org.eclipse.xtext.testlanguages.services.PartialParserTestLanguageGrammar
     @Override
     protected String getFirstRuleName() {
     	return "SomeContainer";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected PartialParserTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

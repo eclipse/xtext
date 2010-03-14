@@ -55,7 +55,12 @@ import org.eclipse.xtext.testlanguages.services.FowlerDslTestLanguageGrammarAcce
     @Override
     protected String getFirstRuleName() {
     	return "Statemachine";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected FowlerDslTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

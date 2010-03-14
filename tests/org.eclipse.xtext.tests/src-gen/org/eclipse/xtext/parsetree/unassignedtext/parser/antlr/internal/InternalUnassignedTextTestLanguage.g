@@ -55,7 +55,12 @@ import org.eclipse.xtext.parsetree.unassignedtext.services.UnassignedTextTestLan
     @Override
     protected String getFirstRuleName() {
     	return "Model";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected UnassignedTextTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

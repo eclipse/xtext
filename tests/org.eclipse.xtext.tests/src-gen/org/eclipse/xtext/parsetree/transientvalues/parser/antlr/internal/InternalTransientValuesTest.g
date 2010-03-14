@@ -55,7 +55,12 @@ import org.eclipse.xtext.parsetree.transientvalues.services.TransientValuesTestG
     @Override
     protected String getFirstRuleName() {
     	return "Root";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected TransientValuesTestGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

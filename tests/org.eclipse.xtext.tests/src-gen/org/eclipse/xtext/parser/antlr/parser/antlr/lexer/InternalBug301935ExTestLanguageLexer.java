@@ -219,34 +219,25 @@ public class InternalBug301935ExTestLanguageLexer extends Lexer {
         int LA4_0 = input.LA(1);
 
         if ( (LA4_0=='\n') ) {
-            alt4=1;
+            alt4 = mTokensHelper001();
         }
         else if ( (LA4_0=='\r') ) {
-            alt4=2;
+            alt4 = mTokensHelper002();
         }
         else if ( (LA4_0=='^') ) {
-            int LA4_3 = input.LA(2);
-
-            if ( ((LA4_3>='A' && LA4_3<='Z')||LA4_3=='_'||(LA4_3>='a' && LA4_3<='z')) ) {
-                alt4=3;
-            }
-            else {
-                alt4=5;}
+            alt4 = mTokensHelper003();
         }
         else if ( ((LA4_0>='A' && LA4_0<='Z')||LA4_0=='_'||(LA4_0>='a' && LA4_0<='z')) ) {
-            alt4=3;
+            alt4 = mTokensHelper004();
         }
         else if ( (LA4_0=='\t'||LA4_0==' ') ) {
-            alt4=4;
+            alt4 = mTokensHelper005();
         }
         else if ( ((LA4_0>='\u0000' && LA4_0<='\b')||(LA4_0>='\u000B' && LA4_0<='\f')||(LA4_0>='\u000E' && LA4_0<='\u001F')||(LA4_0>='!' && LA4_0<='@')||(LA4_0>='[' && LA4_0<=']')||LA4_0=='`'||(LA4_0>='{' && LA4_0<='\uFFFE')) ) {
-            alt4=5;
+            alt4 = mTokensHelper006();
         }
         else {
-            NoViableAltException nvae =
-                new NoViableAltException("1:1: Tokens : ( KEYWORD_1 | KEYWORD_2 | RULE_ID | RULE_WS | RULE_ANY_OTHER );", 4, 0, input);
-
-            throw nvae;
+            alt4 = mTokensHelper007();
         }
         switch (alt4) {
             case 1 :
@@ -288,6 +279,43 @@ public class InternalBug301935ExTestLanguageLexer extends Lexer {
         }
 
     }
+    private int mTokensHelper001() throws RecognitionException {
+        return 1;
+    }
+
+    private int mTokensHelper002() throws RecognitionException {
+        return 2;
+    }
+
+    private int mTokensHelper003() throws RecognitionException {
+        int LA4_3 = input.LA(2);
+
+        if ( ((LA4_3>='A' && LA4_3<='Z')||LA4_3=='_'||(LA4_3>='a' && LA4_3<='z')) ) {
+            return 3;
+        }
+        else {
+            return 5;}
+    }
+
+    private int mTokensHelper004() throws RecognitionException {
+        return 3;
+    }
+
+    private int mTokensHelper005() throws RecognitionException {
+        return 4;
+    }
+
+    private int mTokensHelper006() throws RecognitionException {
+        return 5;
+    }
+
+    private int mTokensHelper007() throws RecognitionException {
+        NoViableAltException nvae =
+            new NoViableAltException("1:1: Tokens : ( KEYWORD_1 | KEYWORD_2 | RULE_ID | RULE_WS | RULE_ANY_OTHER );", 4, 0, input);
+
+        throw nvae;
+    }
+
 
 
  

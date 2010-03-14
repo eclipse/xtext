@@ -252,7 +252,7 @@
             <elements xsi:type="xtext:Assignment" feature="type" operator="=">
               <terminal xsi:type="xtext:CrossReference">
                 <type metamodel="/1/@metamodelDeclarations.1">
-                  <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//Type"/>
+                  <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmType"/>
                 </type>
                 <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.6"/>
               </terminal>
@@ -725,7 +725,7 @@
         <elements xsi:type="xtext:Assignment" feature="type" operator="=">
           <terminal xsi:type="xtext:CrossReference">
             <type metamodel="/1/@metamodelDeclarations.1">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//Type"/>
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmType"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.6"/>
           </terminal>
@@ -839,7 +839,7 @@
         <elements xsi:type="xtext:Assignment" feature="type" operator="=">
           <terminal xsi:type="xtext:CrossReference">
             <type metamodel="/2/@metamodelDeclarations.1">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//Type"/>
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/common/JavaVMTypes#//JvmType"/>
             </type>
             <terminal xsi:type="xtext:RuleCall" rule="/2/@rules.6"/>
           </terminal>

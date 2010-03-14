@@ -29,15 +29,15 @@ public class FowlerDslTestLanguageStandaloneSetup implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://example.xtext.org/FowlerDslTestLanguage")) {
-		EPackage.Registry.INSTANCE.put("http://example.xtext.org/FowlerDslTestLanguage", org.eclipse.xtext.testlanguages.fowlerdsl.FowlerdslPackage.eINSTANCE);
-	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("fowlerdsltestlanguage", resourceFactory);
 		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("fowlerdsltestlanguage", serviceProvider);
 		
+	if (!EPackage.Registry.INSTANCE.containsKey("http://example.xtext.org/FowlerDslTestLanguage")) {
+		EPackage.Registry.INSTANCE.put("http://example.xtext.org/FowlerDslTestLanguage", org.eclipse.xtext.testlanguages.fowlerdsl.FowlerdslPackage.eINSTANCE);
+	}
 
 	}
 }

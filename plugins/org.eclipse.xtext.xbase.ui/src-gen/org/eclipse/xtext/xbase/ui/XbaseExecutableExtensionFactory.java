@@ -17,12 +17,12 @@ public class XbaseExecutableExtensionFactory extends AbstractGuiceAwareExecutabl
 
 	@Override
 	protected Bundle getBundle() {
-		return org.eclipse.xtext.xbase.internal.XtypeActivator.getInstance().getBundle();
+		return org.eclipse.xtext.xbase.ui.internal.XtypeActivator.getInstance().getBundle();
 	}
 	
 	@Override
 	protected Injector getInjector() {
-		return org.eclipse.xtext.xbase.internal.XtypeActivator.getInstance().getInjector("org.eclipse.xtext.xbase.Xbase");
+		return org.eclipse.xtext.xbase.ui.internal.XtypeActivator.getInstance().getInjector("org.eclipse.xtext.xbase.Xbase");
 	}
 	
 }

@@ -55,7 +55,12 @@ import org.eclipse.xtext.grammarinheritance.services.AbstractTestLanguageGrammar
     @Override
     protected String getFirstRuleName() {
     	return "InheritedParserRule";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected AbstractTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

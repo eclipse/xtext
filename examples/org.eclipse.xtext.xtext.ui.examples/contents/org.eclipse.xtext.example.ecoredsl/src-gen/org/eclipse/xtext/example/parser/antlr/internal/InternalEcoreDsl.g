@@ -55,7 +55,12 @@ import org.eclipse.xtext.example.services.EcoreDslGrammarAccess;
     @Override
     protected String getFirstRuleName() {
     	return "EcoreDsl";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected EcoreDslGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

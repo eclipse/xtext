@@ -101,8 +101,8 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "XSimpleTypeRef");
 		private final Group cGroup = (Group)rule.eContents().get(1);
 		private final Assignment cTypeAssignment_0 = (Assignment)cGroup.eContents().get(0);
-		private final CrossReference cTypeTypeCrossReference_0_0 = (CrossReference)cTypeAssignment_0.eContents().get(0);
-		private final RuleCall cTypeTypeQualifiedNameParserRuleCall_0_0_1 = (RuleCall)cTypeTypeCrossReference_0_0.eContents().get(1);
+		private final CrossReference cTypeJvmTypeCrossReference_0_0 = (CrossReference)cTypeAssignment_0.eContents().get(0);
+		private final RuleCall cTypeJvmTypeQualifiedNameParserRuleCall_0_0_1 = (RuleCall)cTypeJvmTypeCrossReference_0_0.eContents().get(1);
 		private final Group cGroup_1 = (Group)cGroup.eContents().get(1);
 		private final Keyword cLessThanSignKeyword_1_0 = (Keyword)cGroup_1.eContents().get(0);
 		private final Assignment cTypeParamsAssignment_1_1 = (Assignment)cGroup_1.eContents().get(1);
@@ -114,22 +114,22 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 		private final Keyword cGreaterThanSignKeyword_1_3 = (Keyword)cGroup_1.eContents().get(3);
 		
 		//XSimpleTypeRef:
-		//  type=[types::Type|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=
+		//  type=[types::JvmType|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=
 		//  XTypeParam)* ">")?;
 		public ParserRule getRule() { return rule; }
 
-		//type=[types::Type|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=
+		//type=[types::JvmType|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=
 		//XTypeParam)* ">")?
 		public Group getGroup() { return cGroup; }
 
-		//type=[types::Type|QualifiedName]
+		//type=[types::JvmType|QualifiedName]
 		public Assignment getTypeAssignment_0() { return cTypeAssignment_0; }
 
-		//[types::Type|QualifiedName]
-		public CrossReference getTypeTypeCrossReference_0_0() { return cTypeTypeCrossReference_0_0; }
+		//[types::JvmType|QualifiedName]
+		public CrossReference getTypeJvmTypeCrossReference_0_0() { return cTypeJvmTypeCrossReference_0_0; }
 
 		//QualifiedName
-		public RuleCall getTypeTypeQualifiedNameParserRuleCall_0_0_1() { return cTypeTypeQualifiedNameParserRuleCall_0_0_1; }
+		public RuleCall getTypeJvmTypeQualifiedNameParserRuleCall_0_0_1() { return cTypeJvmTypeQualifiedNameParserRuleCall_0_0_1; }
 
 		//("<" typeParams+=XTypeParam ("," typeParams+=XTypeParam)* ">")?
 		public Group getGroup_1() { return cGroup_1; }
@@ -388,7 +388,7 @@ public class XtypeGrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//XSimpleTypeRef:
-	//  type=[types::Type|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=
+	//  type=[types::JvmType|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=
 	//  XTypeParam)* ">")?;
 	public XSimpleTypeRefElements getXSimpleTypeRefAccess() {
 		return (pXSimpleTypeRef != null) ? pXSimpleTypeRef : (pXSimpleTypeRef = new XSimpleTypeRefElements());

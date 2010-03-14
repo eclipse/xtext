@@ -55,7 +55,12 @@ import org.eclipse.xtext.example.services.FowlerDslGrammarAccess;
     @Override
     protected String getFirstRuleName() {
     	return "Statemachine";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected FowlerDslGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

@@ -39,8 +39,10 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         }
         
 
-    public String[] getTokenNames() { return tokenNames; }
-    public String getGrammarFileName() { return "../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g"; }
+    @Override
+	public String[] getTokenNames() { return tokenNames; }
+    @Override
+	public String getGrammarFileName() { return "../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g"; }
 
 
 
@@ -64,6 +66,10 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
         	return "Grammar";	
        	} 
 
+       	@Override
+       	protected XtextGrammarAccess getGrammarAccess() {
+       		return grammarAccess;
+       	}
 
 
     // $ANTLR start entryRuleGrammar
@@ -285,7 +291,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:156:1: (lv_definesHiddenTokens_6_0= 'hidden' )
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:157:3: lv_definesHiddenTokens_6_0= 'hidden'
                     {
-                    lv_definesHiddenTokens_6_0=(Token)input.LT(1);
+                    lv_definesHiddenTokens_6_0=input.LT(1);
                     match(input,14,FollowSets000.FOLLOW_14_in_ruleGrammar232); 
 
                             createLeafNode(grammarAccess.getGrammarAccess().getDefinesHiddenTokensHiddenKeyword_3_0_0(), "definesHiddenTokens"); 
@@ -599,7 +605,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:287:1: (this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )* )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:287:6: this_ID_0= RULE_ID (kw= '.' this_ID_2= RULE_ID )*
             {
-            this_ID_0=(Token)input.LT(1);
+            this_ID_0=input.LT(1);
             match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleGrammarID451); 
 
             		current.merge(this_ID_0);
@@ -622,13 +628,13 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             	case 1 :
             	    // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:295:2: kw= '.' this_ID_2= RULE_ID
             	    {
-            	    kw=(Token)input.LT(1);
+            	    kw=input.LT(1);
             	    match(input,17,FollowSets000.FOLLOW_17_in_ruleGrammarID470); 
 
             	            current.merge(kw);
             	            createLeafNode(grammarAccess.getGrammarIDAccess().getFullStopKeyword_1_0(), null); 
             	        
-            	    this_ID_2=(Token)input.LT(1);
+            	    this_ID_2=input.LT(1);
             	    match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleGrammarID485); 
 
             	    		current.merge(this_ID_2);
@@ -1005,7 +1011,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:429:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:430:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)input.LT(1);
+            lv_name_1_0=input.LT(1);
             match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleGeneratedMetamodel859); 
 
             			createLeafNode(grammarAccess.getGeneratedMetamodelAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
@@ -1075,7 +1081,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:471:1: (lv_alias_4_0= RULE_ID )
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:472:3: lv_alias_4_0= RULE_ID
                     {
-                    lv_alias_4_0=(Token)input.LT(1);
+                    lv_alias_4_0=input.LT(1);
                     match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleGeneratedMetamodel910); 
 
                     			createLeafNode(grammarAccess.getGeneratedMetamodelAccess().getAliasIDTerminalRuleCall_3_1_0(), "alias"); 
@@ -1228,7 +1234,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:540:1: (lv_alias_3_0= RULE_ID )
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:541:3: lv_alias_3_0= RULE_ID
                     {
-                    lv_alias_3_0=(Token)input.LT(1);
+                    lv_alias_3_0=input.LT(1);
                     match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleReferencedMetamodel1044); 
 
                     			createLeafNode(grammarAccess.getReferencedMetamodelAccess().getAliasIDTerminalRuleCall_2_1_0(), "alias"); 
@@ -1345,7 +1351,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:587:1: (lv_name_0_0= RULE_ID )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:588:3: lv_name_0_0= RULE_ID
             {
-            lv_name_0_0=(Token)input.LT(1);
+            lv_name_0_0=input.LT(1);
             match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleParserRule1139); 
 
             			createLeafNode(grammarAccess.getParserRuleAccess().getNameIDTerminalRuleCall_0_0(), "name"); 
@@ -1446,7 +1452,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:639:1: (lv_definesHiddenTokens_3_0= 'hidden' )
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:640:3: lv_definesHiddenTokens_3_0= 'hidden'
                     {
-                    lv_definesHiddenTokens_3_0=(Token)input.LT(1);
+                    lv_definesHiddenTokens_3_0=input.LT(1);
                     match(input,14,FollowSets000.FOLLOW_14_in_ruleParserRule1197); 
 
                             createLeafNode(grammarAccess.getParserRuleAccess().getDefinesHiddenTokensHiddenKeyword_2_0_0(), "definesHiddenTokens"); 
@@ -2641,7 +2647,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1097:3: lv_cardinality_2_1= '?'
                             {
-                            lv_cardinality_2_1=(Token)input.LT(1);
+                            lv_cardinality_2_1=input.LT(1);
                             match(input,27,FollowSets000.FOLLOW_27_in_ruleAbstractTokenWithCardinality2107); 
 
                                     createLeafNode(grammarAccess.getAbstractTokenWithCardinalityAccess().getCardinalityQuestionMarkKeyword_1_0_0(), "cardinality"); 
@@ -2664,7 +2670,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                         case 2 :
                             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1115:8: lv_cardinality_2_2= '*'
                             {
-                            lv_cardinality_2_2=(Token)input.LT(1);
+                            lv_cardinality_2_2=input.LT(1);
                             match(input,28,FollowSets000.FOLLOW_28_in_ruleAbstractTokenWithCardinality2136); 
 
                                     createLeafNode(grammarAccess.getAbstractTokenWithCardinalityAccess().getCardinalityAsteriskKeyword_1_0_1(), "cardinality"); 
@@ -2687,7 +2693,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                         case 3 :
                             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1133:8: lv_cardinality_2_3= '+'
                             {
-                            lv_cardinality_2_3=(Token)input.LT(1);
+                            lv_cardinality_2_3=input.LT(1);
                             match(input,29,FollowSets000.FOLLOW_29_in_ruleAbstractTokenWithCardinality2165); 
 
                                     createLeafNode(grammarAccess.getAbstractTokenWithCardinalityAccess().getCardinalityPlusSignKeyword_1_0_2(), "cardinality"); 
@@ -2857,7 +2863,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1210:1: (lv_feature_3_0= RULE_ID )
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1211:3: lv_feature_3_0= RULE_ID
                     {
-                    lv_feature_3_0=(Token)input.LT(1);
+                    lv_feature_3_0=input.LT(1);
                     match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleAction2312); 
 
                     			createLeafNode(grammarAccess.getActionAccess().getFeatureIDTerminalRuleCall_2_1_0(), "feature"); 
@@ -2910,7 +2916,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1236:3: lv_operator_4_1= '='
                             {
-                            lv_operator_4_1=(Token)input.LT(1);
+                            lv_operator_4_1=input.LT(1);
                             match(input,31,FollowSets000.FOLLOW_31_in_ruleAction2337); 
 
                                     createLeafNode(grammarAccess.getActionAccess().getOperatorEqualsSignKeyword_2_2_0_0(), "operator"); 
@@ -2933,7 +2939,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                         case 2 :
                             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1254:8: lv_operator_4_2= '+='
                             {
-                            lv_operator_4_2=(Token)input.LT(1);
+                            lv_operator_4_2=input.LT(1);
                             match(input,32,FollowSets000.FOLLOW_32_in_ruleAction2366); 
 
                                     createLeafNode(grammarAccess.getActionAccess().getOperatorPlusSignEqualsSignKeyword_2_2_0_1(), "operator"); 
@@ -3204,7 +3210,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1359:1: (lv_value_0_0= RULE_STRING )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1360:3: lv_value_0_0= RULE_STRING
             {
-            lv_value_0_0=(Token)input.LT(1);
+            lv_value_0_0=input.LT(1);
             match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleKeyword2637); 
 
             			createLeafNode(grammarAccess.getKeywordAccess().getValueSTRINGTerminalRuleCall_0(), "value"); 
@@ -3399,7 +3405,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1443:1: (lv_feature_0_0= RULE_ID )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1444:3: lv_feature_0_0= RULE_ID
             {
-            lv_feature_0_0=(Token)input.LT(1);
+            lv_feature_0_0=input.LT(1);
             match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleAssignment2816); 
 
             			createLeafNode(grammarAccess.getAssignmentAccess().getFeatureIDTerminalRuleCall_0_0(), "feature"); 
@@ -3461,7 +3467,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                 case 1 :
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1469:3: lv_operator_1_1= '+='
                     {
-                    lv_operator_1_1=(Token)input.LT(1);
+                    lv_operator_1_1=input.LT(1);
                     match(input,32,FollowSets000.FOLLOW_32_in_ruleAssignment2841); 
 
                             createLeafNode(grammarAccess.getAssignmentAccess().getOperatorPlusSignEqualsSignKeyword_1_0_0(), "operator"); 
@@ -3484,7 +3490,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                 case 2 :
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1487:8: lv_operator_1_2= '='
                     {
-                    lv_operator_1_2=(Token)input.LT(1);
+                    lv_operator_1_2=input.LT(1);
                     match(input,31,FollowSets000.FOLLOW_31_in_ruleAssignment2870); 
 
                             createLeafNode(grammarAccess.getAssignmentAccess().getOperatorEqualsSignKeyword_1_0_1(), "operator"); 
@@ -3507,7 +3513,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                 case 3 :
                     // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1505:8: lv_operator_1_3= '?='
                     {
-                    lv_operator_1_3=(Token)input.LT(1);
+                    lv_operator_1_3=input.LT(1);
                     match(input,35,FollowSets000.FOLLOW_35_in_ruleAssignment2899); 
 
                             createLeafNode(grammarAccess.getAssignmentAccess().getOperatorQuestionMarkEqualsSignKeyword_1_0_2(), "operator"); 
@@ -4516,7 +4522,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1921:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:1922:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)input.LT(1);
+            lv_name_1_0=input.LT(1);
             match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleTerminalRule3834); 
 
             			createLeafNode(grammarAccess.getTerminalRuleAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
@@ -5153,7 +5159,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                         case 1 :
                             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2187:3: lv_cardinality_1_1= '?'
                             {
-                            lv_cardinality_1_1=(Token)input.LT(1);
+                            lv_cardinality_1_1=input.LT(1);
                             match(input,27,FollowSets000.FOLLOW_27_in_ruleTerminalToken4290); 
 
                                     createLeafNode(grammarAccess.getTerminalTokenAccess().getCardinalityQuestionMarkKeyword_1_0_0(), "cardinality"); 
@@ -5176,7 +5182,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                         case 2 :
                             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2205:8: lv_cardinality_1_2= '*'
                             {
-                            lv_cardinality_1_2=(Token)input.LT(1);
+                            lv_cardinality_1_2=input.LT(1);
                             match(input,28,FollowSets000.FOLLOW_28_in_ruleTerminalToken4319); 
 
                                     createLeafNode(grammarAccess.getTerminalTokenAccess().getCardinalityAsteriskKeyword_1_0_1(), "cardinality"); 
@@ -5199,7 +5205,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
                         case 3 :
                             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2223:8: lv_cardinality_1_3= '+'
                             {
-                            lv_cardinality_1_3=(Token)input.LT(1);
+                            lv_cardinality_1_3=input.LT(1);
                             match(input,29,FollowSets000.FOLLOW_29_in_ruleTerminalToken4348); 
 
                                     createLeafNode(grammarAccess.getTerminalTokenAccess().getCardinalityPlusSignKeyword_1_0_2(), "cardinality"); 
@@ -6220,7 +6226,7 @@ public class InternalXtextParser extends AbstractInternalAntlrParser {
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2642:1: (lv_name_1_0= RULE_ID )
             // ../org.eclipse.xtext/src-gen/org/eclipse/xtext/parser/antlr/internal/InternalXtext.g:2643:3: lv_name_1_0= RULE_ID
             {
-            lv_name_1_0=(Token)input.LT(1);
+            lv_name_1_0=input.LT(1);
             match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEnumRule5323); 
 
             			createLeafNode(grammarAccess.getEnumRuleAccess().getNameIDTerminalRuleCall_1_0(), "name"); 

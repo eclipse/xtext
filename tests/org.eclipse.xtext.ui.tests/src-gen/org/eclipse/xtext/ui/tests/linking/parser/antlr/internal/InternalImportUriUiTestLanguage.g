@@ -55,7 +55,12 @@ import org.eclipse.xtext.ui.tests.linking.services.ImportUriUiTestLanguageGramma
     @Override
     protected String getFirstRuleName() {
     	return "Main";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected ImportUriUiTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

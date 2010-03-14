@@ -55,7 +55,12 @@ import org.eclipse.xtext.testlanguages.services.ReferenceGrammarTestLanguageGram
     @Override
     protected String getFirstRuleName() {
     	return "Spielplatz";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected ReferenceGrammarTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

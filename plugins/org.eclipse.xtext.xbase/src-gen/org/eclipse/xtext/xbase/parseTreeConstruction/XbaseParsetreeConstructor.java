@@ -2382,14 +2382,14 @@ protected class XEqualityExpression_RightAssignment_1_2 extends AssignmentToken 
  *
  * XRelationalExpression returns XExpression:
  *   XOtherOperatorExpression ({XInstanceOfExpression.expression=current} "instanceof"
- *   type=[types::Type|QualifiedName]|{XBinaryOperation.left=current} operator=( ">=" |
- *   "<=" | ">" | "<" ) right=XOtherOperatorExpression)*;
+ *   type=[types::JvmType|QualifiedName]|{XBinaryOperation.left=current} operator=(
+ *   ">=" | "<=" | ">" | "<" ) right=XOtherOperatorExpression)*;
  *
  **/
 
 // XOtherOperatorExpression ({XInstanceOfExpression.expression=current} "instanceof"
-// type=[types::Type|QualifiedName]|{XBinaryOperation.left=current} operator=( ">=" |
-// "<=" | ">" | "<" ) right=XOtherOperatorExpression)*
+// type=[types::JvmType|QualifiedName]|{XBinaryOperation.left=current} operator=(
+// ">=" | "<=" | ">" | "<" ) right=XOtherOperatorExpression)*
 protected class XRelationalExpression_Group extends GroupToken {
 	
 	public XRelationalExpression_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2452,7 +2452,7 @@ protected class XRelationalExpression_XOtherOperatorExpressionParserRuleCall_0 e
 	}	
 }
 
-// ({XInstanceOfExpression.expression=current} "instanceof" type=[types::Type|
+// ({XInstanceOfExpression.expression=current} "instanceof" type=[types::JvmType|
 // QualifiedName]|{XBinaryOperation.left=current} operator=( ">=" | "<=" | ">" | "<" ) right=
 // XOtherOperatorExpression)*
 protected class XRelationalExpression_Alternatives_1 extends AlternativesToken {
@@ -2477,7 +2477,7 @@ protected class XRelationalExpression_Alternatives_1 extends AlternativesToken {
 		
 }
 
-// {XInstanceOfExpression.expression=current} "instanceof" type=[types::Type|
+// {XInstanceOfExpression.expression=current} "instanceof" type=[types::JvmType|
 // QualifiedName]
 protected class XRelationalExpression_Group_1_0 extends GroupToken {
 	
@@ -2554,7 +2554,7 @@ protected class XRelationalExpression_InstanceofKeyword_1_0_1 extends KeywordTok
 		
 }
 
-// type=[types::Type|QualifiedName]
+// type=[types::JvmType|QualifiedName]
 protected class XRelationalExpression_TypeAssignment_1_0_2 extends AssignmentToken  {
 	
 	public XRelationalExpression_TypeAssignment_1_0_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -2580,9 +2580,9 @@ protected class XRelationalExpression_TypeAssignment_1_0_2 extends AssignmentTok
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getXRelationalExpressionAccess().getTypeTypeCrossReference_1_0_2_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getXRelationalExpressionAccess().getTypeJvmTypeCrossReference_1_0_2_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.getXRelationalExpressionAccess().getTypeTypeCrossReference_1_0_2_0(); 
+				element = grammarAccess.getXRelationalExpressionAccess().getTypeJvmTypeCrossReference_1_0_2_0(); 
 				return obj;
 			}
 		}
@@ -7763,11 +7763,11 @@ protected class XStringLiteral_ValueAssignment extends AssignmentToken  {
 /************ begin Rule XTypeLiteral ****************
  *
  * XTypeLiteral:
- *   type=[types::Type|QualifiedName] "." "class";
+ *   type=[types::JvmType|QualifiedName] "." "class";
  *
  **/
 
-// type=[types::Type|QualifiedName] "." "class"
+// type=[types::JvmType|QualifiedName] "." "class"
 protected class XTypeLiteral_Group extends GroupToken {
 	
 	public XTypeLiteral_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -7794,7 +7794,7 @@ protected class XTypeLiteral_Group extends GroupToken {
 	}
 }
 
-// type=[types::Type|QualifiedName]
+// type=[types::JvmType|QualifiedName]
 protected class XTypeLiteral_TypeAssignment_0 extends AssignmentToken  {
 	
 	public XTypeLiteral_TypeAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -7819,9 +7819,9 @@ protected class XTypeLiteral_TypeAssignment_0 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getXTypeLiteralAccess().getTypeTypeCrossReference_0_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getXTypeLiteralAccess().getTypeJvmTypeCrossReference_0_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.getXTypeLiteralAccess().getTypeTypeCrossReference_0_0(); 
+				element = grammarAccess.getXTypeLiteralAccess().getTypeJvmTypeCrossReference_0_0(); 
 				return obj;
 			}
 		}
@@ -8551,12 +8551,12 @@ protected class XFunctionTypeRef_ReturnTypeAssignment_2 extends AssignmentToken 
 /************ begin Rule XSimpleTypeRef ****************
  *
  * XSimpleTypeRef:
- *   type=[types::Type|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=
+ *   type=[types::JvmType|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=
  *   XTypeParam)* ">")?;
  *
  **/
 
-// type=[types::Type|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=
+// type=[types::JvmType|QualifiedName] ("<" typeParams+=XTypeParam ("," typeParams+=
 // XTypeParam)* ">")?
 protected class XSimpleTypeRef_Group extends GroupToken {
 	
@@ -8585,7 +8585,7 @@ protected class XSimpleTypeRef_Group extends GroupToken {
 	}
 }
 
-// type=[types::Type|QualifiedName]
+// type=[types::JvmType|QualifiedName]
 protected class XSimpleTypeRef_TypeAssignment_0 extends AssignmentToken  {
 	
 	public XSimpleTypeRef_TypeAssignment_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -8610,9 +8610,9 @@ protected class XSimpleTypeRef_TypeAssignment_0 extends AssignmentToken  {
 		IInstanceDescription obj = current.cloneAndConsume("type");
 		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
 			IInstanceDescription param = getDescr((EObject)value);
-			if(param.isInstanceOf(grammarAccess.getXSimpleTypeRefAccess().getTypeTypeCrossReference_0_0().getType().getClassifier())) {
+			if(param.isInstanceOf(grammarAccess.getXSimpleTypeRefAccess().getTypeJvmTypeCrossReference_0_0().getType().getClassifier())) {
 				type = AssignmentType.CR;
-				element = grammarAccess.getXSimpleTypeRefAccess().getTypeTypeCrossReference_0_0(); 
+				element = grammarAccess.getXSimpleTypeRefAccess().getTypeJvmTypeCrossReference_0_0(); 
 				return obj;
 			}
 		}

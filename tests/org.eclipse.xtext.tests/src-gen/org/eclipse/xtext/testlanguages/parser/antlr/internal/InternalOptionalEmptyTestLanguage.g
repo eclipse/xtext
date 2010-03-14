@@ -55,7 +55,12 @@ import org.eclipse.xtext.testlanguages.services.OptionalEmptyTestLanguageGrammar
     @Override
     protected String getFirstRuleName() {
     	return "Model";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected OptionalEmptyTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

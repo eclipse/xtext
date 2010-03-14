@@ -69,12 +69,17 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
         @Override
         protected String getFirstRuleName() {
         	return "Root";	
-       	} 
+       	}
+       	
+       	@Override
+       	protected Ecore2XtextTestGrammarAccess getGrammarAccess() {
+       		return grammarAccess;
+       	}
 
 
 
     // $ANTLR start entryRuleRoot
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:78:1: entryRuleRoot returns [EObject current=null] : iv_ruleRoot= ruleRoot EOF ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:83:1: entryRuleRoot returns [EObject current=null] : iv_ruleRoot= ruleRoot EOF ;
     public final EObject entryRuleRoot() throws RecognitionException {
         EObject current = null;
 
@@ -82,8 +87,8 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:79:2: (iv_ruleRoot= ruleRoot EOF )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:80:2: iv_ruleRoot= ruleRoot EOF
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:84:2: (iv_ruleRoot= ruleRoot EOF )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:85:2: iv_ruleRoot= ruleRoot EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getRootRule(), currentNode); 
@@ -113,7 +118,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleRoot
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:87:1: ruleRoot returns [EObject current=null] : ( () 'Root' ( (lv_name_2_0= ruleINT0 ) ) '{' ( 'classes' '{' ( (lv_classes_6_0= ruleAbstract ) ) ( ',' ( (lv_classes_8_0= ruleAbstract ) ) )* '}' )? '}' ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:92:1: ruleRoot returns [EObject current=null] : ( () 'Root' ( (lv_name_2_0= ruleINT0 ) ) '{' ( 'classes' '{' ( (lv_classes_6_0= ruleAbstract ) ) ( ',' ( (lv_classes_8_0= ruleAbstract ) ) )* '}' )? '}' ) ;
     public final EObject ruleRoot() throws RecognitionException {
         EObject current = null;
 
@@ -127,14 +132,14 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
          @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:92:6: ( ( () 'Root' ( (lv_name_2_0= ruleINT0 ) ) '{' ( 'classes' '{' ( (lv_classes_6_0= ruleAbstract ) ) ( ',' ( (lv_classes_8_0= ruleAbstract ) ) )* '}' )? '}' ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:93:1: ( () 'Root' ( (lv_name_2_0= ruleINT0 ) ) '{' ( 'classes' '{' ( (lv_classes_6_0= ruleAbstract ) ) ( ',' ( (lv_classes_8_0= ruleAbstract ) ) )* '}' )? '}' )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:97:6: ( ( () 'Root' ( (lv_name_2_0= ruleINT0 ) ) '{' ( 'classes' '{' ( (lv_classes_6_0= ruleAbstract ) ) ( ',' ( (lv_classes_8_0= ruleAbstract ) ) )* '}' )? '}' ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:98:1: ( () 'Root' ( (lv_name_2_0= ruleINT0 ) ) '{' ( 'classes' '{' ( (lv_classes_6_0= ruleAbstract ) ) ( ',' ( (lv_classes_8_0= ruleAbstract ) ) )* '}' )? '}' )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:93:1: ( () 'Root' ( (lv_name_2_0= ruleINT0 ) ) '{' ( 'classes' '{' ( (lv_classes_6_0= ruleAbstract ) ) ( ',' ( (lv_classes_8_0= ruleAbstract ) ) )* '}' )? '}' )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:93:2: () 'Root' ( (lv_name_2_0= ruleINT0 ) ) '{' ( 'classes' '{' ( (lv_classes_6_0= ruleAbstract ) ) ( ',' ( (lv_classes_8_0= ruleAbstract ) ) )* '}' )? '}'
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:98:1: ( () 'Root' ( (lv_name_2_0= ruleINT0 ) ) '{' ( 'classes' '{' ( (lv_classes_6_0= ruleAbstract ) ) ( ',' ( (lv_classes_8_0= ruleAbstract ) ) )* '}' )? '}' )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:98:2: () 'Root' ( (lv_name_2_0= ruleINT0 ) ) '{' ( 'classes' '{' ( (lv_classes_6_0= ruleAbstract ) ) ( ',' ( (lv_classes_8_0= ruleAbstract ) ) )* '}' )? '}'
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:93:2: ()
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:94:2: 
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:98:2: ()
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:99:2: 
             {
             if ( backtracking==0 ) {
                
@@ -162,11 +167,11 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                       createLeafNode(grammarAccess.getRootAccess().getRootKeyword_1(), null); 
                   
             }
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:111:1: ( (lv_name_2_0= ruleINT0 ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:112:1: (lv_name_2_0= ruleINT0 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:116:1: ( (lv_name_2_0= ruleINT0 ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:117:1: (lv_name_2_0= ruleINT0 )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:112:1: (lv_name_2_0= ruleINT0 )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:113:3: lv_name_2_0= ruleINT0
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:117:1: (lv_name_2_0= ruleINT0 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:118:3: lv_name_2_0= ruleINT0
             {
             if ( backtracking==0 ) {
                
@@ -208,7 +213,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                       createLeafNode(grammarAccess.getRootAccess().getLeftCurlyBracketKeyword_3(), null); 
                   
             }
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:139:1: ( 'classes' '{' ( (lv_classes_6_0= ruleAbstract ) ) ( ',' ( (lv_classes_8_0= ruleAbstract ) ) )* '}' )?
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:144:1: ( 'classes' '{' ( (lv_classes_6_0= ruleAbstract ) ) ( ',' ( (lv_classes_8_0= ruleAbstract ) ) )* '}' )?
             int alt2=2;
             int LA2_0 = input.LA(1);
 
@@ -217,7 +222,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:139:3: 'classes' '{' ( (lv_classes_6_0= ruleAbstract ) ) ( ',' ( (lv_classes_8_0= ruleAbstract ) ) )* '}'
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:144:3: 'classes' '{' ( (lv_classes_6_0= ruleAbstract ) ) ( ',' ( (lv_classes_8_0= ruleAbstract ) ) )* '}'
                     {
                     match(input,13,FollowSets000.FOLLOW_13_in_ruleRoot180); if (failed) return current;
                     if ( backtracking==0 ) {
@@ -231,11 +236,11 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                               createLeafNode(grammarAccess.getRootAccess().getLeftCurlyBracketKeyword_4_1(), null); 
                           
                     }
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:147:1: ( (lv_classes_6_0= ruleAbstract ) )
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:148:1: (lv_classes_6_0= ruleAbstract )
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:152:1: ( (lv_classes_6_0= ruleAbstract ) )
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:153:1: (lv_classes_6_0= ruleAbstract )
                     {
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:148:1: (lv_classes_6_0= ruleAbstract )
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:149:3: lv_classes_6_0= ruleAbstract
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:153:1: (lv_classes_6_0= ruleAbstract )
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:154:3: lv_classes_6_0= ruleAbstract
                     {
                     if ( backtracking==0 ) {
                        
@@ -271,7 +276,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
                     }
 
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:171:2: ( ',' ( (lv_classes_8_0= ruleAbstract ) ) )*
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:176:2: ( ',' ( (lv_classes_8_0= ruleAbstract ) ) )*
                     loop1:
                     do {
                         int alt1=2;
@@ -284,7 +289,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
                         switch (alt1) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:171:4: ',' ( (lv_classes_8_0= ruleAbstract ) )
+                    	    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:176:4: ',' ( (lv_classes_8_0= ruleAbstract ) )
                     	    {
                     	    match(input,14,FollowSets000.FOLLOW_14_in_ruleRoot222); if (failed) return current;
                     	    if ( backtracking==0 ) {
@@ -292,11 +297,11 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                     	              createLeafNode(grammarAccess.getRootAccess().getCommaKeyword_4_3_0(), null); 
                     	          
                     	    }
-                    	    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:175:1: ( (lv_classes_8_0= ruleAbstract ) )
-                    	    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:176:1: (lv_classes_8_0= ruleAbstract )
+                    	    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:180:1: ( (lv_classes_8_0= ruleAbstract ) )
+                    	    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:181:1: (lv_classes_8_0= ruleAbstract )
                     	    {
-                    	    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:176:1: (lv_classes_8_0= ruleAbstract )
-                    	    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:177:3: lv_classes_8_0= ruleAbstract
+                    	    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:181:1: (lv_classes_8_0= ruleAbstract )
+                    	    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:182:3: lv_classes_8_0= ruleAbstract
                     	    {
                     	    if ( backtracking==0 ) {
                     	       
@@ -384,7 +389,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleAbstract
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:215:1: entryRuleAbstract returns [EObject current=null] : iv_ruleAbstract= ruleAbstract EOF ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:220:1: entryRuleAbstract returns [EObject current=null] : iv_ruleAbstract= ruleAbstract EOF ;
     public final EObject entryRuleAbstract() throws RecognitionException {
         EObject current = null;
 
@@ -392,8 +397,8 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:216:2: (iv_ruleAbstract= ruleAbstract EOF )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:217:2: iv_ruleAbstract= ruleAbstract EOF
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:221:2: (iv_ruleAbstract= ruleAbstract EOF )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:222:2: iv_ruleAbstract= ruleAbstract EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getAbstractRule(), currentNode); 
@@ -423,7 +428,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleAbstract
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:224:1: ruleAbstract returns [EObject current=null] : (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:229:1: ruleAbstract returns [EObject current=null] : (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 ) ;
     public final EObject ruleAbstract() throws RecognitionException {
         EObject current = null;
 
@@ -435,10 +440,10 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
          @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:229:6: ( (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:230:1: (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:234:6: ( (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:235:1: (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:230:1: (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:235:1: (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 )
             int alt3=2;
             switch ( input.LA(1) ) {
             case 19:
@@ -457,7 +462,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                     else {
                         if (backtracking>0) {failed=true; return current;}
                         NoViableAltException nvae =
-                            new NoViableAltException("230:1: (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 )", 3, 4, input);
+                            new NoViableAltException("235:1: (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 )", 3, 4, input);
 
                         throw nvae;
                     }
@@ -474,7 +479,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                     else {
                         if (backtracking>0) {failed=true; return current;}
                         NoViableAltException nvae =
-                            new NoViableAltException("230:1: (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 )", 3, 5, input);
+                            new NoViableAltException("235:1: (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 )", 3, 5, input);
 
                         throw nvae;
                     }
@@ -482,7 +487,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                 else {
                     if (backtracking>0) {failed=true; return current;}
                     NoViableAltException nvae =
-                        new NoViableAltException("230:1: (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 )", 3, 1, input);
+                        new NoViableAltException("235:1: (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 )", 3, 1, input);
 
                     throw nvae;
                 }
@@ -501,14 +506,14 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
             default:
                 if (backtracking>0) {failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("230:1: (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 )", 3, 0, input);
+                    new NoViableAltException("235:1: (this_Concrete0_0= ruleConcrete0 | this_Concrete1_1= ruleConcrete1 )", 3, 0, input);
 
                 throw nvae;
             }
 
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:231:2: this_Concrete0_0= ruleConcrete0
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:236:2: this_Concrete0_0= ruleConcrete0
                     {
                     if ( backtracking==0 ) {
                        
@@ -534,7 +539,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:244:2: this_Concrete1_1= ruleConcrete1
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:249:2: this_Concrete1_1= ruleConcrete1
                     {
                     if ( backtracking==0 ) {
                        
@@ -584,7 +589,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleINT0
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:263:1: entryRuleINT0 returns [String current=null] : iv_ruleINT0= ruleINT0 EOF ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:268:1: entryRuleINT0 returns [String current=null] : iv_ruleINT0= ruleINT0 EOF ;
     public final String entryRuleINT0() throws RecognitionException {
         String current = null;
 
@@ -592,8 +597,8 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:264:2: (iv_ruleINT0= ruleINT0 EOF )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:265:2: iv_ruleINT0= ruleINT0 EOF
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:269:2: (iv_ruleINT0= ruleINT0 EOF )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:270:2: iv_ruleINT0= ruleINT0 EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getINT0Rule(), currentNode); 
@@ -623,7 +628,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleINT0
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:272:1: ruleINT0 returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= 'INT' ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:277:1: ruleINT0 returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : kw= 'INT' ;
     public final AntlrDatatypeRuleToken ruleINT0() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -632,8 +637,8 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
          setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:277:6: (kw= 'INT' )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:279:2: kw= 'INT'
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:282:6: (kw= 'INT' )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:284:2: kw= 'INT'
             {
             kw=(Token)input.LT(1);
             match(input,16,FollowSets000.FOLLOW_16_in_ruleINT0477); if (failed) return current;
@@ -665,7 +670,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleEString
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:292:1: entryRuleEString returns [String current=null] : iv_ruleEString= ruleEString EOF ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:297:1: entryRuleEString returns [String current=null] : iv_ruleEString= ruleEString EOF ;
     public final String entryRuleEString() throws RecognitionException {
         String current = null;
 
@@ -673,8 +678,8 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:293:2: (iv_ruleEString= ruleEString EOF )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:294:2: iv_ruleEString= ruleEString EOF
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:298:2: (iv_ruleEString= ruleEString EOF )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:299:2: iv_ruleEString= ruleEString EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getEStringRule(), currentNode); 
@@ -704,7 +709,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleEString
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:301:1: ruleEString returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:306:1: ruleEString returns [AntlrDatatypeRuleToken current=new AntlrDatatypeRuleToken()] : (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID ) ;
     public final AntlrDatatypeRuleToken ruleEString() throws RecognitionException {
         AntlrDatatypeRuleToken current = new AntlrDatatypeRuleToken();
 
@@ -714,10 +719,10 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
          setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:306:6: ( (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:307:1: (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:311:6: ( (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:312:1: (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:307:1: (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:312:1: (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID )
             int alt4=2;
             int LA4_0 = input.LA(1);
 
@@ -730,13 +735,13 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
             else {
                 if (backtracking>0) {failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("307:1: (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID )", 4, 0, input);
+                    new NoViableAltException("312:1: (this_STRING_0= RULE_STRING | this_ID_1= RULE_ID )", 4, 0, input);
 
                 throw nvae;
             }
             switch (alt4) {
                 case 1 :
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:307:6: this_STRING_0= RULE_STRING
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:312:6: this_STRING_0= RULE_STRING
                     {
                     this_STRING_0=(Token)input.LT(1);
                     match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleEString568); if (failed) return current;
@@ -754,7 +759,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:315:10: this_ID_1= RULE_ID
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:320:10: this_ID_1= RULE_ID
                     {
                     this_ID_1=(Token)input.LT(1);
                     match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleEString594); if (failed) return current;
@@ -796,7 +801,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleConcrete0
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:330:1: entryRuleConcrete0 returns [EObject current=null] : iv_ruleConcrete0= ruleConcrete0 EOF ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:335:1: entryRuleConcrete0 returns [EObject current=null] : iv_ruleConcrete0= ruleConcrete0 EOF ;
     public final EObject entryRuleConcrete0() throws RecognitionException {
         EObject current = null;
 
@@ -804,8 +809,8 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:331:2: (iv_ruleConcrete0= ruleConcrete0 EOF )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:332:2: iv_ruleConcrete0= ruleConcrete0 EOF
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:336:2: (iv_ruleConcrete0= ruleConcrete0 EOF )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:337:2: iv_ruleConcrete0= ruleConcrete0 EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getConcrete0Rule(), currentNode); 
@@ -835,7 +840,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleConcrete0
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:339:1: ruleConcrete0 returns [EObject current=null] : (this_DiamondInheritance_0= ruleDiamondInheritance | ( () 'Concrete0' ( (lv_name_3_0= ruleEString ) ) ) ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:344:1: ruleConcrete0 returns [EObject current=null] : (this_DiamondInheritance_0= ruleDiamondInheritance | ( () 'Concrete0' ( (lv_name_3_0= ruleEString ) ) ) ) ;
     public final EObject ruleConcrete0() throws RecognitionException {
         EObject current = null;
 
@@ -847,10 +852,10 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
          @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:344:6: ( (this_DiamondInheritance_0= ruleDiamondInheritance | ( () 'Concrete0' ( (lv_name_3_0= ruleEString ) ) ) ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:345:1: (this_DiamondInheritance_0= ruleDiamondInheritance | ( () 'Concrete0' ( (lv_name_3_0= ruleEString ) ) ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:349:6: ( (this_DiamondInheritance_0= ruleDiamondInheritance | ( () 'Concrete0' ( (lv_name_3_0= ruleEString ) ) ) ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:350:1: (this_DiamondInheritance_0= ruleDiamondInheritance | ( () 'Concrete0' ( (lv_name_3_0= ruleEString ) ) ) )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:345:1: (this_DiamondInheritance_0= ruleDiamondInheritance | ( () 'Concrete0' ( (lv_name_3_0= ruleEString ) ) ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:350:1: (this_DiamondInheritance_0= ruleDiamondInheritance | ( () 'Concrete0' ( (lv_name_3_0= ruleEString ) ) ) )
             int alt5=2;
             int LA5_0 = input.LA(1);
 
@@ -863,13 +868,13 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
             else {
                 if (backtracking>0) {failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("345:1: (this_DiamondInheritance_0= ruleDiamondInheritance | ( () 'Concrete0' ( (lv_name_3_0= ruleEString ) ) ) )", 5, 0, input);
+                    new NoViableAltException("350:1: (this_DiamondInheritance_0= ruleDiamondInheritance | ( () 'Concrete0' ( (lv_name_3_0= ruleEString ) ) ) )", 5, 0, input);
 
                 throw nvae;
             }
             switch (alt5) {
                 case 1 :
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:346:2: this_DiamondInheritance_0= ruleDiamondInheritance
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:351:2: this_DiamondInheritance_0= ruleDiamondInheritance
                     {
                     if ( backtracking==0 ) {
                        
@@ -895,13 +900,13 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:358:6: ( () 'Concrete0' ( (lv_name_3_0= ruleEString ) ) )
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:363:6: ( () 'Concrete0' ( (lv_name_3_0= ruleEString ) ) )
                     {
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:358:6: ( () 'Concrete0' ( (lv_name_3_0= ruleEString ) ) )
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:358:7: () 'Concrete0' ( (lv_name_3_0= ruleEString ) )
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:363:6: ( () 'Concrete0' ( (lv_name_3_0= ruleEString ) ) )
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:363:7: () 'Concrete0' ( (lv_name_3_0= ruleEString ) )
                     {
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:358:7: ()
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:359:2: 
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:363:7: ()
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:364:2: 
                     {
                     if ( backtracking==0 ) {
                        
@@ -929,11 +934,11 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                               createLeafNode(grammarAccess.getConcrete0Access().getConcrete0Keyword_1_1(), null); 
                           
                     }
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:376:1: ( (lv_name_3_0= ruleEString ) )
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:377:1: (lv_name_3_0= ruleEString )
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:381:1: ( (lv_name_3_0= ruleEString ) )
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:382:1: (lv_name_3_0= ruleEString )
                     {
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:377:1: (lv_name_3_0= ruleEString )
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:378:3: lv_name_3_0= ruleEString
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:382:1: (lv_name_3_0= ruleEString )
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:383:3: lv_name_3_0= ruleEString
                     {
                     if ( backtracking==0 ) {
                        
@@ -1000,7 +1005,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleConcrete1
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:408:1: entryRuleConcrete1 returns [EObject current=null] : iv_ruleConcrete1= ruleConcrete1 EOF ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:413:1: entryRuleConcrete1 returns [EObject current=null] : iv_ruleConcrete1= ruleConcrete1 EOF ;
     public final EObject entryRuleConcrete1() throws RecognitionException {
         EObject current = null;
 
@@ -1008,8 +1013,8 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:409:2: (iv_ruleConcrete1= ruleConcrete1 EOF )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:410:2: iv_ruleConcrete1= ruleConcrete1 EOF
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:414:2: (iv_ruleConcrete1= ruleConcrete1 EOF )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:415:2: iv_ruleConcrete1= ruleConcrete1 EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getConcrete1Rule(), currentNode); 
@@ -1039,7 +1044,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleConcrete1
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:417:1: ruleConcrete1 returns [EObject current=null] : (this_DiamondInheritance_0= ruleDiamondInheritance | ( () 'Concrete1' ( (lv_name_3_0= ruleEString ) ) ) ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:422:1: ruleConcrete1 returns [EObject current=null] : (this_DiamondInheritance_0= ruleDiamondInheritance | ( () 'Concrete1' ( (lv_name_3_0= ruleEString ) ) ) ) ;
     public final EObject ruleConcrete1() throws RecognitionException {
         EObject current = null;
 
@@ -1051,10 +1056,10 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
          @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:422:6: ( (this_DiamondInheritance_0= ruleDiamondInheritance | ( () 'Concrete1' ( (lv_name_3_0= ruleEString ) ) ) ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:423:1: (this_DiamondInheritance_0= ruleDiamondInheritance | ( () 'Concrete1' ( (lv_name_3_0= ruleEString ) ) ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:427:6: ( (this_DiamondInheritance_0= ruleDiamondInheritance | ( () 'Concrete1' ( (lv_name_3_0= ruleEString ) ) ) ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:428:1: (this_DiamondInheritance_0= ruleDiamondInheritance | ( () 'Concrete1' ( (lv_name_3_0= ruleEString ) ) ) )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:423:1: (this_DiamondInheritance_0= ruleDiamondInheritance | ( () 'Concrete1' ( (lv_name_3_0= ruleEString ) ) ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:428:1: (this_DiamondInheritance_0= ruleDiamondInheritance | ( () 'Concrete1' ( (lv_name_3_0= ruleEString ) ) ) )
             int alt6=2;
             int LA6_0 = input.LA(1);
 
@@ -1067,13 +1072,13 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
             else {
                 if (backtracking>0) {failed=true; return current;}
                 NoViableAltException nvae =
-                    new NoViableAltException("423:1: (this_DiamondInheritance_0= ruleDiamondInheritance | ( () 'Concrete1' ( (lv_name_3_0= ruleEString ) ) ) )", 6, 0, input);
+                    new NoViableAltException("428:1: (this_DiamondInheritance_0= ruleDiamondInheritance | ( () 'Concrete1' ( (lv_name_3_0= ruleEString ) ) ) )", 6, 0, input);
 
                 throw nvae;
             }
             switch (alt6) {
                 case 1 :
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:424:2: this_DiamondInheritance_0= ruleDiamondInheritance
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:429:2: this_DiamondInheritance_0= ruleDiamondInheritance
                     {
                     if ( backtracking==0 ) {
                        
@@ -1099,13 +1104,13 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:436:6: ( () 'Concrete1' ( (lv_name_3_0= ruleEString ) ) )
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:441:6: ( () 'Concrete1' ( (lv_name_3_0= ruleEString ) ) )
                     {
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:436:6: ( () 'Concrete1' ( (lv_name_3_0= ruleEString ) ) )
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:436:7: () 'Concrete1' ( (lv_name_3_0= ruleEString ) )
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:441:6: ( () 'Concrete1' ( (lv_name_3_0= ruleEString ) ) )
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:441:7: () 'Concrete1' ( (lv_name_3_0= ruleEString ) )
                     {
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:436:7: ()
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:437:2: 
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:441:7: ()
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:442:2: 
                     {
                     if ( backtracking==0 ) {
                        
@@ -1133,11 +1138,11 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                               createLeafNode(grammarAccess.getConcrete1Access().getConcrete1Keyword_1_1(), null); 
                           
                     }
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:454:1: ( (lv_name_3_0= ruleEString ) )
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:455:1: (lv_name_3_0= ruleEString )
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:459:1: ( (lv_name_3_0= ruleEString ) )
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:460:1: (lv_name_3_0= ruleEString )
                     {
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:455:1: (lv_name_3_0= ruleEString )
-                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:456:3: lv_name_3_0= ruleEString
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:460:1: (lv_name_3_0= ruleEString )
+                    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:461:3: lv_name_3_0= ruleEString
                     {
                     if ( backtracking==0 ) {
                        
@@ -1204,7 +1209,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start entryRuleDiamondInheritance
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:486:1: entryRuleDiamondInheritance returns [EObject current=null] : iv_ruleDiamondInheritance= ruleDiamondInheritance EOF ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:491:1: entryRuleDiamondInheritance returns [EObject current=null] : iv_ruleDiamondInheritance= ruleDiamondInheritance EOF ;
     public final EObject entryRuleDiamondInheritance() throws RecognitionException {
         EObject current = null;
 
@@ -1212,8 +1217,8 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:487:2: (iv_ruleDiamondInheritance= ruleDiamondInheritance EOF )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:488:2: iv_ruleDiamondInheritance= ruleDiamondInheritance EOF
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:492:2: (iv_ruleDiamondInheritance= ruleDiamondInheritance EOF )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:493:2: iv_ruleDiamondInheritance= ruleDiamondInheritance EOF
             {
             if ( backtracking==0 ) {
                currentNode = createCompositeNode(grammarAccess.getDiamondInheritanceRule(), currentNode); 
@@ -1243,7 +1248,7 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
 
     // $ANTLR start ruleDiamondInheritance
-    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:495:1: ruleDiamondInheritance returns [EObject current=null] : ( () 'DiamondInheritance' ( (lv_name_2_0= ruleEString ) ) ) ;
+    // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:500:1: ruleDiamondInheritance returns [EObject current=null] : ( () 'DiamondInheritance' ( (lv_name_2_0= ruleEString ) ) ) ;
     public final EObject ruleDiamondInheritance() throws RecognitionException {
         EObject current = null;
 
@@ -1253,14 +1258,14 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
          @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:500:6: ( ( () 'DiamondInheritance' ( (lv_name_2_0= ruleEString ) ) ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:501:1: ( () 'DiamondInheritance' ( (lv_name_2_0= ruleEString ) ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:505:6: ( ( () 'DiamondInheritance' ( (lv_name_2_0= ruleEString ) ) ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:506:1: ( () 'DiamondInheritance' ( (lv_name_2_0= ruleEString ) ) )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:501:1: ( () 'DiamondInheritance' ( (lv_name_2_0= ruleEString ) ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:501:2: () 'DiamondInheritance' ( (lv_name_2_0= ruleEString ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:506:1: ( () 'DiamondInheritance' ( (lv_name_2_0= ruleEString ) ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:506:2: () 'DiamondInheritance' ( (lv_name_2_0= ruleEString ) )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:501:2: ()
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:502:2: 
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:506:2: ()
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:507:2: 
             {
             if ( backtracking==0 ) {
                
@@ -1288,11 +1293,11 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
                       createLeafNode(grammarAccess.getDiamondInheritanceAccess().getDiamondInheritanceKeyword_1(), null); 
                   
             }
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:519:1: ( (lv_name_2_0= ruleEString ) )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:520:1: (lv_name_2_0= ruleEString )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:524:1: ( (lv_name_2_0= ruleEString ) )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:525:1: (lv_name_2_0= ruleEString )
             {
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:520:1: (lv_name_2_0= ruleEString )
-            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:521:3: lv_name_2_0= ruleEString
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:525:1: (lv_name_2_0= ruleEString )
+            // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:526:3: lv_name_2_0= ruleEString
             {
             if ( backtracking==0 ) {
                
@@ -1353,8 +1358,8 @@ public class InternalEcore2XtextTestParser extends AbstractInternalAntlrParser {
 
     // $ANTLR start synpred3
     public final void synpred3_fragment() throws RecognitionException {   
-        // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:231:2: ( ruleConcrete0 )
-        // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:231:2: ruleConcrete0
+        // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:236:2: ( ruleConcrete0 )
+        // ../org.eclipse.xtext.xtext.ui.tests/src-gen/org/eclipse/xtext/xtext/ui/ecore2xtext/parser/antlr/internal/InternalEcore2XtextTest.g:236:2: ruleConcrete0
         {
         if ( backtracking==0 ) {
            

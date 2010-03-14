@@ -62,12 +62,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
         @Override
         protected String getFirstRuleName() {
         	return "PackageDefinition";	
-       	} 
+       	}
+       	
+       	@Override
+       	protected Bug304681TestLanguageGrammarAccess getGrammarAccess() {
+       		return grammarAccess;
+       	}
 
 
 
     // $ANTLR start entryRulePackageDefinition
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:72:1: entryRulePackageDefinition returns [EObject current=null] : iv_rulePackageDefinition= rulePackageDefinition EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:77:1: entryRulePackageDefinition returns [EObject current=null] : iv_rulePackageDefinition= rulePackageDefinition EOF ;
     public final EObject entryRulePackageDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -75,8 +80,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:73:2: (iv_rulePackageDefinition= rulePackageDefinition EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:74:2: iv_rulePackageDefinition= rulePackageDefinition EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:78:2: (iv_rulePackageDefinition= rulePackageDefinition EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:79:2: iv_rulePackageDefinition= rulePackageDefinition EOF
             {
              currentNode = createCompositeNode(grammarAccess.getPackageDefinitionRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_rulePackageDefinition_in_entryRulePackageDefinition75);
@@ -102,7 +107,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start rulePackageDefinition
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:81:1: rulePackageDefinition returns [EObject current=null] : ( () 'package' ( (lv_namespace_2_0= RULE_ID ) ) ';' ( (lv_contents_4_0= ruleObject ) )* ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:86:1: rulePackageDefinition returns [EObject current=null] : ( () 'package' ( (lv_namespace_2_0= RULE_ID ) ) ';' ( (lv_contents_4_0= ruleObject ) )* ) ;
     public final EObject rulePackageDefinition() throws RecognitionException {
         EObject current = null;
 
@@ -113,14 +118,14 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
          @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:86:6: ( ( () 'package' ( (lv_namespace_2_0= RULE_ID ) ) ';' ( (lv_contents_4_0= ruleObject ) )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:87:1: ( () 'package' ( (lv_namespace_2_0= RULE_ID ) ) ';' ( (lv_contents_4_0= ruleObject ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:91:6: ( ( () 'package' ( (lv_namespace_2_0= RULE_ID ) ) ';' ( (lv_contents_4_0= ruleObject ) )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:92:1: ( () 'package' ( (lv_namespace_2_0= RULE_ID ) ) ';' ( (lv_contents_4_0= ruleObject ) )* )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:87:1: ( () 'package' ( (lv_namespace_2_0= RULE_ID ) ) ';' ( (lv_contents_4_0= ruleObject ) )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:87:2: () 'package' ( (lv_namespace_2_0= RULE_ID ) ) ';' ( (lv_contents_4_0= ruleObject ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:92:1: ( () 'package' ( (lv_namespace_2_0= RULE_ID ) ) ';' ( (lv_contents_4_0= ruleObject ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:92:2: () 'package' ( (lv_namespace_2_0= RULE_ID ) ) ';' ( (lv_contents_4_0= ruleObject ) )*
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:87:2: ()
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:88:5: 
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:92:2: ()
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:93:5: 
             {
              
                     temp=factory.create(grammarAccess.getPackageDefinitionAccess().getPackageDefinitionAction_0().getType().getClassifier());
@@ -139,11 +144,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
                     createLeafNode(grammarAccess.getPackageDefinitionAccess().getPackageKeyword_1(), null); 
                 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:102:1: ( (lv_namespace_2_0= RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:103:1: (lv_namespace_2_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:107:1: ( (lv_namespace_2_0= RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:108:1: (lv_namespace_2_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:103:1: (lv_namespace_2_0= RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:104:3: lv_namespace_2_0= RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:108:1: (lv_namespace_2_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:109:3: lv_namespace_2_0= RULE_ID
             {
             lv_namespace_2_0=(Token)input.LT(1);
             match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_rulePackageDefinition146); 
@@ -176,7 +181,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
                     createLeafNode(grammarAccess.getPackageDefinitionAccess().getSemicolonKeyword_3(), null); 
                 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:130:1: ( (lv_contents_4_0= ruleObject ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:135:1: ( (lv_contents_4_0= ruleObject ) )*
             loop1:
             do {
                 int alt1=2;
@@ -189,10 +194,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt1) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:131:1: (lv_contents_4_0= ruleObject )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:136:1: (lv_contents_4_0= ruleObject )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:131:1: (lv_contents_4_0= ruleObject )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:132:3: lv_contents_4_0= ruleObject
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:136:1: (lv_contents_4_0= ruleObject )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:137:3: lv_contents_4_0= ruleObject
             	    {
             	     
             	    	        currentNode=createCompositeNode(grammarAccess.getPackageDefinitionAccess().getContentsObjectParserRuleCall_4_0(), currentNode); 
@@ -253,7 +258,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleObject
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:162:1: entryRuleObject returns [EObject current=null] : iv_ruleObject= ruleObject EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:167:1: entryRuleObject returns [EObject current=null] : iv_ruleObject= ruleObject EOF ;
     public final EObject entryRuleObject() throws RecognitionException {
         EObject current = null;
 
@@ -261,8 +266,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:163:2: (iv_ruleObject= ruleObject EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:164:2: iv_ruleObject= ruleObject EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:168:2: (iv_ruleObject= ruleObject EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:169:2: iv_ruleObject= ruleObject EOF
             {
              currentNode = createCompositeNode(grammarAccess.getObjectRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_ruleObject_in_entryRuleObject219);
@@ -288,7 +293,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleObject
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:171:1: ruleObject returns [EObject current=null] : ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? 'object' ( (lv_name_3_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )* ) ) ) '}' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:176:1: ruleObject returns [EObject current=null] : ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? 'object' ( (lv_name_3_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )* ) ) ) '}' ) ;
     public final EObject ruleObject() throws RecognitionException {
         EObject current = null;
 
@@ -311,13 +316,13 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
          @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:176:6: ( ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? 'object' ( (lv_name_3_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )* ) ) ) '}' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:177:1: ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? 'object' ( (lv_name_3_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )* ) ) ) '}' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:181:6: ( ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? 'object' ( (lv_name_3_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )* ) ) ) '}' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:182:1: ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? 'object' ( (lv_name_3_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )* ) ) ) '}' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:177:1: ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? 'object' ( (lv_name_3_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )* ) ) ) '}' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:177:2: ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? 'object' ( (lv_name_3_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )* ) ) ) '}'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:182:1: ( ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? 'object' ( (lv_name_3_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )* ) ) ) '}' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:182:2: ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )? 'object' ( (lv_name_3_0= RULE_ID ) ) ( 'extends' ( ( RULE_ID ) ) )? '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )* ) ) ) '}'
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:177:2: ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:182:2: ( ( (lv_enabled_0_0= 'enabled' ) ) | ( (lv_abstract_1_0= 'abstract' ) ) )?
             int alt2=3;
             int LA2_0 = input.LA(1);
 
@@ -329,13 +334,13 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt2) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:177:3: ( (lv_enabled_0_0= 'enabled' ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:182:3: ( (lv_enabled_0_0= 'enabled' ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:177:3: ( (lv_enabled_0_0= 'enabled' ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:178:1: (lv_enabled_0_0= 'enabled' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:182:3: ( (lv_enabled_0_0= 'enabled' ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:183:1: (lv_enabled_0_0= 'enabled' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:178:1: (lv_enabled_0_0= 'enabled' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:179:3: lv_enabled_0_0= 'enabled'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:183:1: (lv_enabled_0_0= 'enabled' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:184:3: lv_enabled_0_0= 'enabled'
                     {
                     lv_enabled_0_0=(Token)input.LT(1);
                     match(input,13,FollowSets000.FOLLOW_13_in_ruleObject273); 
@@ -364,13 +369,13 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:199:6: ( (lv_abstract_1_0= 'abstract' ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:204:6: ( (lv_abstract_1_0= 'abstract' ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:199:6: ( (lv_abstract_1_0= 'abstract' ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:200:1: (lv_abstract_1_0= 'abstract' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:204:6: ( (lv_abstract_1_0= 'abstract' ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:205:1: (lv_abstract_1_0= 'abstract' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:200:1: (lv_abstract_1_0= 'abstract' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:201:3: lv_abstract_1_0= 'abstract'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:205:1: (lv_abstract_1_0= 'abstract' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:206:3: lv_abstract_1_0= 'abstract'
                     {
                     lv_abstract_1_0=(Token)input.LT(1);
                     match(input,14,FollowSets000.FOLLOW_14_in_ruleObject310); 
@@ -405,11 +410,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
                     createLeafNode(grammarAccess.getObjectAccess().getObjectKeyword_1(), null); 
                 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:224:1: ( (lv_name_3_0= RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:225:1: (lv_name_3_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:229:1: ( (lv_name_3_0= RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:230:1: (lv_name_3_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:225:1: (lv_name_3_0= RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:226:3: lv_name_3_0= RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:230:1: (lv_name_3_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:231:3: lv_name_3_0= RULE_ID
             {
             lv_name_3_0=(Token)input.LT(1);
             match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleObject352); 
@@ -438,7 +443,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:248:2: ( 'extends' ( ( RULE_ID ) ) )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:253:2: ( 'extends' ( ( RULE_ID ) ) )?
             int alt3=2;
             int LA3_0 = input.LA(1);
 
@@ -447,17 +452,17 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt3) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:248:4: 'extends' ( ( RULE_ID ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:253:4: 'extends' ( ( RULE_ID ) )
                     {
                     match(input,16,FollowSets000.FOLLOW_16_in_ruleObject368); 
 
                             createLeafNode(grammarAccess.getObjectAccess().getExtendsKeyword_3_0(), null); 
                         
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:252:1: ( ( RULE_ID ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:253:1: ( RULE_ID )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:257:1: ( ( RULE_ID ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:258:1: ( RULE_ID )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:253:1: ( RULE_ID )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:254:3: RULE_ID
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:258:1: ( RULE_ID )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:259:3: RULE_ID
                     {
 
                     			if (current==null) {
@@ -485,19 +490,19 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
                     createLeafNode(grammarAccess.getObjectAccess().getLeftCurlyBracketKeyword_4(), null); 
                 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:270:1: ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )* ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:272:1: ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:275:1: ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )* ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:277:1: ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )* ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:272:1: ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )* ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:273:2: ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:277:1: ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )* ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:278:2: ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )* )
             {
              
             	  getUnorderedGroupHelper().enter(grammarAccess.getObjectAccess().getUnorderedGroup_5());
             	
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:276:2: ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )* )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:277:3: ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:281:2: ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )* )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:282:3: ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )*
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:277:3: ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )*
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:282:3: ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) ) | ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) ) | ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) ) | ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) ) | ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) ) | ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) ) )*
             loop8:
             do {
                 int alt8=9;
@@ -531,32 +536,32 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
                 switch (alt8) {
             	case 1 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:279:4: ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:284:4: ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:279:4: ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:280:5: {...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:284:4: ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:285:5: {...}? => ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) )
             	    {
             	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0)) ) {
             	        throw new FailedPredicateException(input, "ruleObject", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0)");
             	    }
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:280:103: ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:281:6: ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:285:103: ( ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:286:6: ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' )
             	    {
             	     
             	    	 				  getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 0);
             	    	 				
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:284:6: ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:284:8: 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';'
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:289:6: ( 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:289:8: 'shortDescription' ( (lv_shortDescription_9_0= RULE_STRING ) ) ';'
             	    {
             	    match(input,18,FollowSets000.FOLLOW_18_in_ruleObject451); 
 
             	            createLeafNode(grammarAccess.getObjectAccess().getShortDescriptionKeyword_5_0_0(), null); 
             	        
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:288:1: ( (lv_shortDescription_9_0= RULE_STRING ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:289:1: (lv_shortDescription_9_0= RULE_STRING )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:293:1: ( (lv_shortDescription_9_0= RULE_STRING ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:294:1: (lv_shortDescription_9_0= RULE_STRING )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:289:1: (lv_shortDescription_9_0= RULE_STRING )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:290:3: lv_shortDescription_9_0= RULE_STRING
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:294:1: (lv_shortDescription_9_0= RULE_STRING )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:295:3: lv_shortDescription_9_0= RULE_STRING
             	    {
             	    lv_shortDescription_9_0=(Token)input.LT(1);
             	    match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleObject468); 
@@ -605,32 +610,32 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 2 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:323:4: ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:328:4: ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:323:4: ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:324:5: {...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:328:4: ({...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:329:5: {...}? => ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) )
             	    {
             	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1)) ) {
             	        throw new FailedPredicateException(input, "ruleObject", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1)");
             	    }
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:324:103: ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:325:6: ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:329:103: ( ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:330:6: ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' )
             	    {
             	     
             	    	 				  getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1);
             	    	 				
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:328:6: ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:328:8: 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';'
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:333:6: ( 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:333:8: 'longDescription' ( (lv_longDescription_12_0= RULE_STRING ) ) ';'
             	    {
             	    match(input,19,FollowSets000.FOLLOW_19_in_ruleObject545); 
 
             	            createLeafNode(grammarAccess.getObjectAccess().getLongDescriptionKeyword_5_1_0(), null); 
             	        
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:332:1: ( (lv_longDescription_12_0= RULE_STRING ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:333:1: (lv_longDescription_12_0= RULE_STRING )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:337:1: ( (lv_longDescription_12_0= RULE_STRING ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:338:1: (lv_longDescription_12_0= RULE_STRING )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:333:1: (lv_longDescription_12_0= RULE_STRING )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:334:3: lv_longDescription_12_0= RULE_STRING
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:338:1: (lv_longDescription_12_0= RULE_STRING )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:339:3: lv_longDescription_12_0= RULE_STRING
             	    {
             	    lv_longDescription_12_0=(Token)input.LT(1);
             	    match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleObject562); 
@@ -679,32 +684,32 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 3 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:367:4: ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:372:4: ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:367:4: ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:368:5: {...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:372:4: ({...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:373:5: {...}? => ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) )
             	    {
             	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2)) ) {
             	        throw new FailedPredicateException(input, "ruleObject", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2)");
             	    }
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:368:103: ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:369:6: ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:373:103: ( ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:374:6: ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' )
             	    {
             	     
             	    	 				  getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 2);
             	    	 				
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:372:6: ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:372:8: 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';'
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:377:6: ( 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:377:8: 'serialUID' ( (lv_serialVersionUID_15_0= RULE_INT ) ) ';'
             	    {
             	    match(input,20,FollowSets000.FOLLOW_20_in_ruleObject639); 
 
             	            createLeafNode(grammarAccess.getObjectAccess().getSerialUIDKeyword_5_2_0(), null); 
             	        
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:376:1: ( (lv_serialVersionUID_15_0= RULE_INT ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:377:1: (lv_serialVersionUID_15_0= RULE_INT )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:381:1: ( (lv_serialVersionUID_15_0= RULE_INT ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:382:1: (lv_serialVersionUID_15_0= RULE_INT )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:377:1: (lv_serialVersionUID_15_0= RULE_INT )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:378:3: lv_serialVersionUID_15_0= RULE_INT
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:382:1: (lv_serialVersionUID_15_0= RULE_INT )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:383:3: lv_serialVersionUID_15_0= RULE_INT
             	    {
             	    lv_serialVersionUID_15_0=(Token)input.LT(1);
             	    match(input,RULE_INT,FollowSets000.FOLLOW_RULE_INT_in_ruleObject656); 
@@ -753,28 +758,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 4 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:411:4: ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:416:4: ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:411:4: ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:412:5: {...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:416:4: ({...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:417:5: {...}? => ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) )
             	    {
             	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3)) ) {
             	        throw new FailedPredicateException(input, "ruleObject", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3)");
             	    }
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:412:103: ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:413:6: ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:417:103: ( ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:418:6: ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' )
             	    {
             	     
             	    	 				  getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 3);
             	    	 				
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:416:6: ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:416:7: ( (lv_cloneable_17_0= 'cloneable' ) ) ';'
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:421:6: ( ( (lv_cloneable_17_0= 'cloneable' ) ) ';' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:421:7: ( (lv_cloneable_17_0= 'cloneable' ) ) ';'
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:416:7: ( (lv_cloneable_17_0= 'cloneable' ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:417:1: (lv_cloneable_17_0= 'cloneable' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:421:7: ( (lv_cloneable_17_0= 'cloneable' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:422:1: (lv_cloneable_17_0= 'cloneable' )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:417:1: (lv_cloneable_17_0= 'cloneable' )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:418:3: lv_cloneable_17_0= 'cloneable'
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:422:1: (lv_cloneable_17_0= 'cloneable' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:423:3: lv_cloneable_17_0= 'cloneable'
             	    {
             	    lv_cloneable_17_0=(Token)input.LT(1);
             	    match(input,21,FollowSets000.FOLLOW_21_in_ruleObject741); 
@@ -819,21 +824,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 5 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:448:4: ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:453:4: ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:448:4: ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:449:5: {...}? => ( ( (lv_features_19_0= ruleFeature ) )+ )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:453:4: ({...}? => ( ( (lv_features_19_0= ruleFeature ) )+ ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:454:5: {...}? => ( ( (lv_features_19_0= ruleFeature ) )+ )
             	    {
             	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4)) ) {
             	        throw new FailedPredicateException(input, "ruleObject", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4)");
             	    }
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:449:103: ( ( (lv_features_19_0= ruleFeature ) )+ )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:450:6: ( (lv_features_19_0= ruleFeature ) )+
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:454:103: ( ( (lv_features_19_0= ruleFeature ) )+ )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:455:6: ( (lv_features_19_0= ruleFeature ) )+
             	    {
             	     
             	    	 				  getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4);
             	    	 				
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:453:6: ( (lv_features_19_0= ruleFeature ) )+
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:458:6: ( (lv_features_19_0= ruleFeature ) )+
             	    int cnt4=0;
             	    loop4:
             	    do {
@@ -862,10 +867,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             	        switch (alt4) {
             	    	case 1 :
-            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:454:1: (lv_features_19_0= ruleFeature )
+            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:459:1: (lv_features_19_0= ruleFeature )
             	    	    {
-            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:454:1: (lv_features_19_0= ruleFeature )
-            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:455:3: lv_features_19_0= ruleFeature
+            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:459:1: (lv_features_19_0= ruleFeature )
+            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:460:3: lv_features_19_0= ruleFeature
             	    	    {
             	    	     
             	    	    	        currentNode=createCompositeNode(grammarAccess.getObjectAccess().getFeaturesFeatureParserRuleCall_5_4_0(), currentNode); 
@@ -920,28 +925,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 6 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:484:4: ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:489:4: ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:484:4: ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:485:5: {...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:489:4: ({...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:490:5: {...}? => ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) )
             	    {
             	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5)) ) {
             	        throw new FailedPredicateException(input, "ruleObject", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5)");
             	    }
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:485:103: ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:486:6: ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:490:103: ( ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:491:6: ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' )
             	    {
             	     
             	    	 				  getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 5);
             	    	 				
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:489:6: ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:489:8: 'before' ( (lv_features_21_0= ruleFeature ) )* 'after'
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:494:6: ( 'before' ( (lv_features_21_0= ruleFeature ) )* 'after' )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:494:8: 'before' ( (lv_features_21_0= ruleFeature ) )* 'after'
             	    {
             	    match(input,22,FollowSets000.FOLLOW_22_in_ruleObject898); 
 
             	            createLeafNode(grammarAccess.getObjectAccess().getBeforeKeyword_5_5_0(), null); 
             	        
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:493:1: ( (lv_features_21_0= ruleFeature ) )*
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:498:1: ( (lv_features_21_0= ruleFeature ) )*
             	    loop5:
             	    do {
             	        int alt5=2;
@@ -954,10 +959,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             	        switch (alt5) {
             	    	case 1 :
-            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:494:1: (lv_features_21_0= ruleFeature )
+            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:499:1: (lv_features_21_0= ruleFeature )
             	    	    {
-            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:494:1: (lv_features_21_0= ruleFeature )
-            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:495:3: lv_features_21_0= ruleFeature
+            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:499:1: (lv_features_21_0= ruleFeature )
+            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:500:3: lv_features_21_0= ruleFeature
             	    	    {
             	    	     
             	    	    	        currentNode=createCompositeNode(grammarAccess.getObjectAccess().getFeaturesFeatureParserRuleCall_5_5_1_0(), currentNode); 
@@ -1015,38 +1020,38 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 7 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:528:4: ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:533:4: ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:528:4: ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:529:5: {...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:533:4: ({...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:534:5: {...}? => ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) )
             	    {
             	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6)) ) {
             	        throw new FailedPredicateException(input, "ruleObject", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6)");
             	    }
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:529:103: ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:530:6: ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:534:103: ( ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:535:6: ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* )
             	    {
             	     
             	    	 				  getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 6);
             	    	 				
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:533:6: ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:533:8: 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )*
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:538:6: ( 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )* )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:538:8: 'optionalLoop' ( (lv_features_24_0= ruleFeature ) )*
             	    {
             	    match(input,24,FollowSets000.FOLLOW_24_in_ruleObject992); 
 
             	            createLeafNode(grammarAccess.getObjectAccess().getOptionalLoopKeyword_5_6_0(), null); 
             	        
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:537:1: ( (lv_features_24_0= ruleFeature ) )*
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:542:1: ( (lv_features_24_0= ruleFeature ) )*
             	    loop6:
             	    do {
             	        int alt6=2;
             	        alt6 = dfa6.predict(input);
             	        switch (alt6) {
             	    	case 1 :
-            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:538:1: (lv_features_24_0= ruleFeature )
+            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:543:1: (lv_features_24_0= ruleFeature )
             	    	    {
-            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:538:1: (lv_features_24_0= ruleFeature )
-            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:539:3: lv_features_24_0= ruleFeature
+            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:543:1: (lv_features_24_0= ruleFeature )
+            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:544:3: lv_features_24_0= ruleFeature
             	    	    {
             	    	     
             	    	    	        currentNode=createCompositeNode(grammarAccess.getObjectAccess().getFeaturesFeatureParserRuleCall_5_6_1_0(), currentNode); 
@@ -1100,28 +1105,28 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	    }
             	    break;
             	case 8 :
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:568:4: ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:573:4: ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) )
             	    {
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:568:4: ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:569:5: {...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:573:4: ({...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:574:5: {...}? => ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) )
             	    {
             	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 7)) ) {
             	        throw new FailedPredicateException(input, "ruleObject", "getUnorderedGroupHelper().canSelect(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 7)");
             	    }
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:569:103: ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:570:6: ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:574:103: ( ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ ) )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:575:6: ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ )
             	    {
             	     
             	    	 				  getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 7);
             	    	 				
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:573:6: ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ )
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:573:8: 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:578:6: ( 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+ )
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:578:8: 'mandatoryLoop' ( (lv_features_26_0= ruleFeature ) )+
             	    {
             	    match(input,25,FollowSets000.FOLLOW_25_in_ruleObject1076); 
 
             	            createLeafNode(grammarAccess.getObjectAccess().getMandatoryLoopKeyword_5_7_0(), null); 
             	        
-            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:577:1: ( (lv_features_26_0= ruleFeature ) )+
+            	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:582:1: ( (lv_features_26_0= ruleFeature ) )+
             	    int cnt7=0;
             	    loop7:
             	    do {
@@ -1129,10 +1134,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             	        alt7 = dfa7.predict(input);
             	        switch (alt7) {
             	    	case 1 :
-            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:578:1: (lv_features_26_0= ruleFeature )
+            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:583:1: (lv_features_26_0= ruleFeature )
             	    	    {
-            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:578:1: (lv_features_26_0= ruleFeature )
-            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:579:3: lv_features_26_0= ruleFeature
+            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:583:1: (lv_features_26_0= ruleFeature )
+            	    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:584:3: lv_features_26_0= ruleFeature
             	    	    {
             	    	     
             	    	    	        currentNode=createCompositeNode(grammarAccess.getObjectAccess().getFeaturesFeatureParserRuleCall_5_7_1_0(), currentNode); 
@@ -1234,7 +1239,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleFeature
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:627:1: entryRuleFeature returns [EObject current=null] : iv_ruleFeature= ruleFeature EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:632:1: entryRuleFeature returns [EObject current=null] : iv_ruleFeature= ruleFeature EOF ;
     public final EObject entryRuleFeature() throws RecognitionException {
         EObject current = null;
 
@@ -1242,8 +1247,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:628:2: (iv_ruleFeature= ruleFeature EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:629:2: iv_ruleFeature= ruleFeature EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:633:2: (iv_ruleFeature= ruleFeature EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:634:2: iv_ruleFeature= ruleFeature EOF
             {
              currentNode = createCompositeNode(grammarAccess.getFeatureRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_ruleFeature_in_entryRuleFeature1184);
@@ -1269,7 +1274,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleFeature
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:636:1: ruleFeature returns [EObject current=null] : (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:641:1: ruleFeature returns [EObject current=null] : (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference ) ;
     public final EObject ruleFeature() throws RecognitionException {
         EObject current = null;
 
@@ -1281,10 +1286,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
          @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:641:6: ( (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:642:1: (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:646:6: ( (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:647:1: (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:642:1: (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:647:1: (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference )
             int alt9=2;
             int LA9_0 = input.LA(1);
 
@@ -1296,13 +1301,13 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("642:1: (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference )", 9, 0, input);
+                    new NoViableAltException("647:1: (this_Attribute_0= ruleAttribute | this_Reference_1= ruleReference )", 9, 0, input);
 
                 throw nvae;
             }
             switch (alt9) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:643:5: this_Attribute_0= ruleAttribute
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:648:5: this_Attribute_0= ruleAttribute
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getFeatureAccess().getAttributeParserRuleCall_0(), currentNode); 
@@ -1319,7 +1324,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:653:5: this_Reference_1= ruleReference
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:658:5: this_Reference_1= ruleReference
                     {
                      
                             currentNode=createCompositeNode(grammarAccess.getFeatureAccess().getReferenceParserRuleCall_1(), currentNode); 
@@ -1358,7 +1363,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleAttribute
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:669:1: entryRuleAttribute returns [EObject current=null] : iv_ruleAttribute= ruleAttribute EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:674:1: entryRuleAttribute returns [EObject current=null] : iv_ruleAttribute= ruleAttribute EOF ;
     public final EObject entryRuleAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -1366,8 +1371,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:670:2: (iv_ruleAttribute= ruleAttribute EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:671:2: iv_ruleAttribute= ruleAttribute EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:675:2: (iv_ruleAttribute= ruleAttribute EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:676:2: iv_ruleAttribute= ruleAttribute EOF
             {
              currentNode = createCompositeNode(grammarAccess.getAttributeRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_ruleAttribute_in_entryRuleAttribute1303);
@@ -1393,7 +1398,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleAttribute
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:678:1: ruleAttribute returns [EObject current=null] : ( 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) ';' ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:683:1: ruleAttribute returns [EObject current=null] : ( 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) ';' ) ;
     public final EObject ruleAttribute() throws RecognitionException {
         EObject current = null;
 
@@ -1403,21 +1408,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
          @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:683:6: ( ( 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) ';' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:684:1: ( 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) ';' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:688:6: ( ( 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) ';' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:689:1: ( 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) ';' )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:684:1: ( 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) ';' )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:684:3: 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) ';'
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:689:1: ( 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) ';' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:689:3: 'Attribute' ( (lv_type_1_0= RULE_ID ) ) ( (lv_name_2_0= RULE_ID ) ) ';'
             {
             match(input,27,FollowSets000.FOLLOW_27_in_ruleAttribute1348); 
 
                     createLeafNode(grammarAccess.getAttributeAccess().getAttributeKeyword_0(), null); 
                 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:688:1: ( (lv_type_1_0= RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:689:1: (lv_type_1_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:693:1: ( (lv_type_1_0= RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:694:1: (lv_type_1_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:689:1: (lv_type_1_0= RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:690:3: lv_type_1_0= RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:694:1: (lv_type_1_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:695:3: lv_type_1_0= RULE_ID
             {
             lv_type_1_0=(Token)input.LT(1);
             match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleAttribute1365); 
@@ -1446,11 +1451,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:712:2: ( (lv_name_2_0= RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:713:1: (lv_name_2_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:717:2: ( (lv_name_2_0= RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:718:1: (lv_name_2_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:713:1: (lv_name_2_0= RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:714:3: lv_name_2_0= RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:718:1: (lv_name_2_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:719:3: lv_name_2_0= RULE_ID
             {
             lv_name_2_0=(Token)input.LT(1);
             match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleAttribute1387); 
@@ -1506,7 +1511,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start entryRuleReference
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:748:1: entryRuleReference returns [EObject current=null] : iv_ruleReference= ruleReference EOF ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:753:1: entryRuleReference returns [EObject current=null] : iv_ruleReference= ruleReference EOF ;
     public final EObject entryRuleReference() throws RecognitionException {
         EObject current = null;
 
@@ -1514,8 +1519,8 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:749:2: (iv_ruleReference= ruleReference EOF )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:750:2: iv_ruleReference= ruleReference EOF
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:754:2: (iv_ruleReference= ruleReference EOF )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:755:2: iv_ruleReference= ruleReference EOF
             {
              currentNode = createCompositeNode(grammarAccess.getReferenceRule(), currentNode); 
             pushFollow(FollowSets000.FOLLOW_ruleReference_in_entryRuleReference1438);
@@ -1541,7 +1546,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
 
     // $ANTLR start ruleReference
-    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:757:1: ruleReference returns [EObject current=null] : ( 'Reference' ( ( RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( ( '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) ) ) '}' ) | ';' ) ) ;
+    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:762:1: ruleReference returns [EObject current=null] : ( 'Reference' ( ( RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( ( '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) ) ) '}' ) | ';' ) ) ;
     public final EObject ruleReference() throws RecognitionException {
         EObject current = null;
 
@@ -1553,21 +1558,21 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
          @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
             
         try {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:762:6: ( ( 'Reference' ( ( RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( ( '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) ) ) '}' ) | ';' ) ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:763:1: ( 'Reference' ( ( RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( ( '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) ) ) '}' ) | ';' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:767:6: ( ( 'Reference' ( ( RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( ( '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) ) ) '}' ) | ';' ) ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:768:1: ( 'Reference' ( ( RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( ( '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) ) ) '}' ) | ';' ) )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:763:1: ( 'Reference' ( ( RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( ( '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) ) ) '}' ) | ';' ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:763:3: 'Reference' ( ( RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( ( '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) ) ) '}' ) | ';' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:768:1: ( 'Reference' ( ( RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( ( '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) ) ) '}' ) | ';' ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:768:3: 'Reference' ( ( RULE_ID ) ) ( (lv_many_2_0= '*' ) )? ( (lv_name_3_0= RULE_ID ) ) ( ( '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) ) ) '}' ) | ';' )
             {
             match(input,28,FollowSets000.FOLLOW_28_in_ruleReference1483); 
 
                     createLeafNode(grammarAccess.getReferenceAccess().getReferenceKeyword_0(), null); 
                 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:767:1: ( ( RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:768:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:772:1: ( ( RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:773:1: ( RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:768:1: ( RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:769:3: RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:773:1: ( RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:774:3: RULE_ID
             {
 
             			if (current==null) {
@@ -1585,7 +1590,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:781:2: ( (lv_many_2_0= '*' ) )?
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:786:2: ( (lv_many_2_0= '*' ) )?
             int alt10=2;
             int LA10_0 = input.LA(1);
 
@@ -1594,10 +1599,10 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             }
             switch (alt10) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:782:1: (lv_many_2_0= '*' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:787:1: (lv_many_2_0= '*' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:782:1: (lv_many_2_0= '*' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:783:3: lv_many_2_0= '*'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:787:1: (lv_many_2_0= '*' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:788:3: lv_many_2_0= '*'
                     {
                     lv_many_2_0=(Token)input.LT(1);
                     match(input,29,FollowSets000.FOLLOW_29_in_ruleReference1519); 
@@ -1625,11 +1630,11 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:802:3: ( (lv_name_3_0= RULE_ID ) )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:803:1: (lv_name_3_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:807:3: ( (lv_name_3_0= RULE_ID ) )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:808:1: (lv_name_3_0= RULE_ID )
             {
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:803:1: (lv_name_3_0= RULE_ID )
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:804:3: lv_name_3_0= RULE_ID
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:808:1: (lv_name_3_0= RULE_ID )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:809:3: lv_name_3_0= RULE_ID
             {
             lv_name_3_0=(Token)input.LT(1);
             match(input,RULE_ID,FollowSets000.FOLLOW_RULE_ID_in_ruleReference1550); 
@@ -1658,7 +1663,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
             }
 
-            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:826:2: ( ( '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) ) ) '}' ) | ';' )
+            // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:831:2: ( ( '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) ) ) '}' ) | ';' )
             int alt12=2;
             int LA12_0 = input.LA(1);
 
@@ -1670,34 +1675,34 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             }
             else {
                 NoViableAltException nvae =
-                    new NoViableAltException("826:2: ( ( '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) ) ) '}' ) | ';' )", 12, 0, input);
+                    new NoViableAltException("831:2: ( ( '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) ) ) '}' ) | ';' )", 12, 0, input);
 
                 throw nvae;
             }
             switch (alt12) {
                 case 1 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:826:3: ( '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) ) ) '}' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:831:3: ( '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) ) ) '}' )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:826:3: ( '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) ) ) '}' )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:826:5: '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) ) ) '}'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:831:3: ( '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) ) ) '}' )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:831:5: '{' ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) ) ) '}'
                     {
                     match(input,17,FollowSets000.FOLLOW_17_in_ruleReference1567); 
 
                             createLeafNode(grammarAccess.getReferenceAccess().getLeftCurlyBracketKeyword_4_0_0(), null); 
                         
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:830:1: ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:832:1: ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:835:1: ( ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:837:1: ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) )
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:832:1: ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:833:2: ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:837:1: ( ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* ) )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:838:2: ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* )
                     {
                      
                     	  getUnorderedGroupHelper().enter(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1());
                     	
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:836:2: ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* )
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:837:3: ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:841:2: ( ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )* )
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:842:3: ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )*
                     {
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:837:3: ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )*
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:842:3: ( ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) ) | ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) ) )*
                     loop11:
                     do {
                         int alt11=3;
@@ -1713,32 +1718,32 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
 
                         switch (alt11) {
                     	case 1 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:839:4: ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:844:4: ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:839:4: ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:840:5: {...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:844:4: ({...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) ) )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:845:5: {...}? => ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) )
                     	    {
                     	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 0)) ) {
                     	        throw new FailedPredicateException(input, "ruleReference", "getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 0)");
                     	    }
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:840:110: ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:841:6: ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:845:110: ( ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' ) )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:846:6: ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 0);
                     	    	 				
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:844:6: ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:844:8: 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';'
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:849:6: ( 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';' )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:849:8: 'shortDescription' ( (lv_shortDescription_7_0= RULE_STRING ) ) ';'
                     	    {
                     	    match(input,18,FollowSets000.FOLLOW_18_in_ruleReference1620); 
 
                     	            createLeafNode(grammarAccess.getReferenceAccess().getShortDescriptionKeyword_4_0_1_0_0(), null); 
                     	        
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:848:1: ( (lv_shortDescription_7_0= RULE_STRING ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:849:1: (lv_shortDescription_7_0= RULE_STRING )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:853:1: ( (lv_shortDescription_7_0= RULE_STRING ) )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:854:1: (lv_shortDescription_7_0= RULE_STRING )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:849:1: (lv_shortDescription_7_0= RULE_STRING )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:850:3: lv_shortDescription_7_0= RULE_STRING
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:854:1: (lv_shortDescription_7_0= RULE_STRING )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:855:3: lv_shortDescription_7_0= RULE_STRING
                     	    {
                     	    lv_shortDescription_7_0=(Token)input.LT(1);
                     	    match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleReference1637); 
@@ -1787,32 +1792,32 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     	    }
                     	    break;
                     	case 2 :
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:883:4: ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:888:4: ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:883:4: ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:884:5: {...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:888:4: ({...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) ) )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:889:5: {...}? => ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) )
                     	    {
                     	    if ( !(getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 1)) ) {
                     	        throw new FailedPredicateException(input, "ruleReference", "getUnorderedGroupHelper().canSelect(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 1)");
                     	    }
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:884:110: ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:885:6: ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:889:110: ( ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' ) )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:890:6: ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' )
                     	    {
                     	     
                     	    	 				  getUnorderedGroupHelper().select(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 1);
                     	    	 				
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:888:6: ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:888:8: 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';'
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:893:6: ( 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';' )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:893:8: 'longDescription' ( (lv_longDescription_10_0= RULE_STRING ) ) ';'
                     	    {
                     	    match(input,19,FollowSets000.FOLLOW_19_in_ruleReference1714); 
 
                     	            createLeafNode(grammarAccess.getReferenceAccess().getLongDescriptionKeyword_4_0_1_1_0(), null); 
                     	        
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:892:1: ( (lv_longDescription_10_0= RULE_STRING ) )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:893:1: (lv_longDescription_10_0= RULE_STRING )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:897:1: ( (lv_longDescription_10_0= RULE_STRING ) )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:898:1: (lv_longDescription_10_0= RULE_STRING )
                     	    {
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:893:1: (lv_longDescription_10_0= RULE_STRING )
-                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:894:3: lv_longDescription_10_0= RULE_STRING
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:898:1: (lv_longDescription_10_0= RULE_STRING )
+                    	    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:899:3: lv_longDescription_10_0= RULE_STRING
                     	    {
                     	    lv_longDescription_10_0=(Token)input.LT(1);
                     	    match(input,RULE_STRING,FollowSets000.FOLLOW_RULE_STRING_in_ruleReference1731); 
@@ -1889,7 +1894,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
                     }
                     break;
                 case 2 :
-                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:939:7: ';'
+                    // ../org.eclipse.xtext.ui.tests/src-gen/org/eclipse/xtext/ui/tests/editor/contentassist/parser/antlr/internal/InternalBug304681TestLanguage.g:944:7: ';'
                     {
                     match(input,12,FollowSets000.FOLLOW_12_in_ruleReference1813); 
 
@@ -2001,7 +2006,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             this.transition = DFA6_transition;
         }
         public String getDescription() {
-            return "()* loopback of 537:1: ( (lv_features_24_0= ruleFeature ) )*";
+            return "()* loopback of 542:1: ( (lv_features_24_0= ruleFeature ) )*";
         }
         public int specialStateTransition(int s, IntStream input) throws NoViableAltException {
         	int _s = s;
@@ -2195,7 +2200,7 @@ public class InternalBug304681TestLanguageParser extends AbstractInternalAntlrPa
             this.transition = DFA7_transition;
         }
         public String getDescription() {
-            return "()+ loopback of 577:1: ( (lv_features_26_0= ruleFeature ) )+";
+            return "()+ loopback of 582:1: ( (lv_features_26_0= ruleFeature ) )+";
         }
         public int specialStateTransition(int s, IntStream input) throws NoViableAltException {
         	int _s = s;

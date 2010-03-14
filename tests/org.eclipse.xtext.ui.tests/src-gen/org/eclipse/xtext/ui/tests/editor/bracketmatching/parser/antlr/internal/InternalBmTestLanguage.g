@@ -55,7 +55,12 @@ import org.eclipse.xtext.ui.tests.editor.bracketmatching.services.BmTestLanguage
     @Override
     protected String getFirstRuleName() {
     	return "File";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected BmTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

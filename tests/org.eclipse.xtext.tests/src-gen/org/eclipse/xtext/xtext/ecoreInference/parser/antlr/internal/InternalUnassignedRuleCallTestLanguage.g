@@ -55,7 +55,12 @@ import org.eclipse.xtext.xtext.ecoreInference.services.UnassignedRuleCallTestLan
     @Override
     protected String getFirstRuleName() {
     	return "Model";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected UnassignedRuleCallTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

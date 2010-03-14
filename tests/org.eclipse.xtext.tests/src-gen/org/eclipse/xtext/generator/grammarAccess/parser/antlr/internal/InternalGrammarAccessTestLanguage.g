@@ -55,7 +55,12 @@ import org.eclipse.xtext.generator.grammarAccess.services.GrammarAccessTestLangu
     @Override
     protected String getFirstRuleName() {
     	return "Root";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected GrammarAccessTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

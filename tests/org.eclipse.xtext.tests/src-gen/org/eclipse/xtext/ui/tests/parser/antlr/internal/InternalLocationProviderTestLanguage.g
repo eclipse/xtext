@@ -55,7 +55,12 @@ import org.eclipse.xtext.ui.tests.services.LocationProviderTestLanguageGrammarAc
     @Override
     protected String getFirstRuleName() {
     	return "Model";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected LocationProviderTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

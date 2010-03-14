@@ -7,8 +7,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.parser.antlr;
 
+import java.util.List;
+
+import org.antlr.runtime.FailedPredicateException;
 import org.antlr.runtime.RecognitionException;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parsetree.AbstractNode;
 
@@ -34,10 +38,16 @@ public interface ISyntaxErrorMessageProvider {
 
 	interface IParserErrorContext extends IErrorContext {
 		RecognitionException getRecognitionException();
-
+	
 		String[] getTokenNames();
 	}
-
+	
+	interface IUnorderedGroupErrorContext extends IParserErrorContext {
+		List<AbstractElement> getMissingMandatoryElements();
+		
+		FailedPredicateException getRecognitionException();
+	}
+	
 	interface IValueConverterErrorContext extends IErrorContext {
 		String getDefaultMessage();
 

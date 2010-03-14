@@ -55,7 +55,12 @@ import org.eclipse.xtext.grammarinheritance.services.BaseInheritanceTestLanguage
     @Override
     protected String getFirstRuleName() {
     	return "Model";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected BaseInheritanceTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

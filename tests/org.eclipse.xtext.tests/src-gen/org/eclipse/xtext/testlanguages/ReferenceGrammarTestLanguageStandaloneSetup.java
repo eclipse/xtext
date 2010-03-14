@@ -29,15 +29,15 @@ public class ReferenceGrammarTestLanguageStandaloneSetup implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/reference/ReferenceGrammar")) {
-		EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/reference/ReferenceGrammar", org.eclipse.xtext.testlanguages.referenceGrammar.ReferenceGrammarPackage.eINSTANCE);
-	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("referencegrammartestlanguage", resourceFactory);
 		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("referencegrammartestlanguage", serviceProvider);
 		
+	if (!EPackage.Registry.INSTANCE.containsKey("http://eclipse.org/xtext/reference/ReferenceGrammar")) {
+		EPackage.Registry.INSTANCE.put("http://eclipse.org/xtext/reference/ReferenceGrammar", org.eclipse.xtext.testlanguages.referenceGrammar.ReferenceGrammarPackage.eINSTANCE);
+	}
 
 	}
 }

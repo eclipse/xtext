@@ -55,7 +55,12 @@ import org.eclipse.xtext.parser.unorderedGroups.services.UnorderedGroupsTestLang
     @Override
     protected String getFirstRuleName() {
     	return "Model";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected UnorderedGroupsTestLanguageGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 

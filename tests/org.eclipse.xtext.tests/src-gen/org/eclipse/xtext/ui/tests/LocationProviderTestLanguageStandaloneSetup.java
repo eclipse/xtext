@@ -29,15 +29,15 @@ public class LocationProviderTestLanguageStandaloneSetup implements ISetup {
 	}
 	
 	public void register(Injector injector) {
-	if (!EPackage.Registry.INSTANCE.containsKey("http://xtext.org/locationProviderTestLaguage")) {
-		EPackage.Registry.INSTANCE.put("http://xtext.org/locationProviderTestLaguage", org.eclipse.xtext.ui.tests.locationprovidertest.LocationprovidertestPackage.eINSTANCE);
-	}
 
 		org.eclipse.xtext.resource.IResourceFactory resourceFactory = injector.getInstance(org.eclipse.xtext.resource.IResourceFactory.class);
 		org.eclipse.xtext.resource.IResourceServiceProvider serviceProvider = injector.getInstance(org.eclipse.xtext.resource.IResourceServiceProvider.class);
 		Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("locationprovidertestlanguage", resourceFactory);
 		org.eclipse.xtext.resource.IResourceServiceProvider.Registry.INSTANCE.getExtensionToFactoryMap().put("locationprovidertestlanguage", serviceProvider);
 		
+	if (!EPackage.Registry.INSTANCE.containsKey("http://xtext.org/locationProviderTestLaguage")) {
+		EPackage.Registry.INSTANCE.put("http://xtext.org/locationProviderTestLaguage", org.eclipse.xtext.ui.tests.locationprovidertest.LocationprovidertestPackage.eINSTANCE);
+	}
 
 	}
 }
