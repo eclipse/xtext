@@ -31,7 +31,7 @@ Workflow {
 		
 		language = {
 			uri = "classpath:/org/eclipse/xtext/generator/ecore/SuperTestLanguage.xtext"
-			fragment = @TestLanguagesFragments
+			fragment = @TestLanguagesFragments {}
 		}
 		language = {
 			uri = "classpath:/org/eclipse/xtext/generator/ecore/SubTestLanguage.xtext"
@@ -95,7 +95,7 @@ Workflow {
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/generator/ecore/EcoreFragmentTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {
-				referencedGenModels = "platform:/resource/${projectName}/src/org/eclipse/xtext/generator/ecore/Genmodel.genmodel"
+				genModel = "platform:/resource/${projectName}/src/org/eclipse/xtext/generator/ecore/Genmodel.genmodel"
 			}
 		}
 		language = { 
@@ -157,18 +157,21 @@ Workflow {
 			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug289524ExTestLanguage.xtext"
 			fragment = @TestLanguagesFragmentsEx {
 				referencedGenModels = inheritance.genmodel
+				backtrack = true
 			}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug296889TestLanguage.xtext"
 			fragment = @TestLanguagesFragments {
 				referencedGenModels = inheritance.genmodel
+				backtrack = true
 			}
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parser/antlr/Bug296889ExTestLanguage.xtext"
 			fragment = @TestLanguagesFragmentsEx {
 				referencedGenModels = inheritance.genmodel
+				backtrack = true
 			}
 		}
 		language = { 
@@ -217,7 +220,7 @@ Workflow {
 		}
 		language = { 
 			uri = "classpath:/org/eclipse/xtext/parser/terminalrules/Bug297105TestLanguage.xtext"
-			fragment = @TestLanguagesFragmentsEx {
+			fragment = @TestLanguagesFragments {
 				backtrack = true
 			}
 		}
