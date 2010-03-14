@@ -18,6 +18,7 @@ import java.util.Map;
 import java.util.Map.Entry;
 
 import org.antlr.runtime.BitSet;
+import org.antlr.runtime.FailedPredicateException;
 import org.antlr.runtime.IntStream;
 import org.antlr.runtime.Parser;
 import org.antlr.runtime.RecognitionException;
@@ -27,15 +28,19 @@ import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.Grammar;
 import org.eclipse.xtext.GrammarUtil;
+import org.eclipse.xtext.IGrammarAccess;
+import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.conversion.ValueConverterException;
 import org.eclipse.xtext.parser.IAstFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parser.ParseException;
 import org.eclipse.xtext.parser.ParseResult;
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider.IParserErrorContext;
+import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider.IUnorderedGroupErrorContext;
 import org.eclipse.xtext.parser.antlr.ISyntaxErrorMessageProvider.IValueConverterErrorContext;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -47,7 +52,9 @@ import org.eclipse.xtext.parsetree.ParsetreeFactory;
 import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.util.Strings;
 
+import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ListMultimap;
+import com.google.common.collect.Lists;
 import com.google.common.collect.Multimaps;
 
 /**
@@ -86,7 +93,57 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		public String[] getTokenNames() {
 			return readableTokenNames;
 		}
-
+	}
+	
+	private static final Class<?>[] emptyClassArray = new Class[0];
+	private static final Object[] emptyObjectArray = new Object[0];
+	
+	protected class UnorderedGroupErrorContext extends ParserErrorContext implements IUnorderedGroupErrorContext {
+		
+		private List<AbstractElement> missingMandatoryElements;
+		
+		protected UnorderedGroupErrorContext(FailedPredicateException exception) {
+			super(exception);
+		}
+		
+		@Override
+		public FailedPredicateException getRecognitionException() {
+			return (FailedPredicateException) super.getRecognitionException();
+		}
+		
+		public List<AbstractElement> getMissingMandatoryElements() {
+			List<AbstractElement> result = missingMandatoryElements;
+			if (result == null) {
+				String predicate = getRecognitionException().toString();
+				int idx = predicate.indexOf("grammarAccess");
+				int lastIdx = predicate.lastIndexOf('(');
+				predicate = predicate.substring(idx + "grammarAccess.".length(), lastIdx);
+				String ruleMethodGetter = predicate.substring(0, predicate.indexOf('('));
+				String elementGetter = predicate.substring(predicate.indexOf('.') + 1);
+				IGrammarAccess grammarAccess = getGrammarAccess();
+				Object ruleAccess = invokeNoArgMethod(ruleMethodGetter, grammarAccess);
+				UnorderedGroup group = (UnorderedGroup) invokeNoArgMethod(elementGetter, ruleAccess);
+				List<AbstractElement> missingElements = Lists.newArrayList();
+				for(int i = 0; i < group.getElements().size(); i++) {
+					AbstractElement element = group.getElements().get(i);
+					if (!GrammarUtil.isOptionalCardinality(element) && unorderedGroupHelper.canSelect(group, i)) {
+						missingElements.add(element);
+					}
+				}
+				result = ImmutableList.copyOf(missingElements);
+				missingElements = result;
+			}
+			return result;
+		}
+		
+		private Object invokeNoArgMethod(String name, Object target) {
+			try {
+				Method method = target.getClass().getMethod(name, emptyClassArray);
+				return method.invoke(target, emptyObjectArray);
+			} catch (Exception e) {
+				throw new RuntimeException(e);
+			}
+		}
 	}
 	
 	protected class ValueConverterErrorContext extends ErrorContext implements IValueConverterErrorContext {
@@ -145,6 +202,8 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 		return currentNode;
 	}
 
+	protected abstract IGrammarAccess getGrammarAccess();
+	
 	protected void associateNodeWithAstElement(CompositeNode node, EObject astElement) {
 		if (astElement == null)
 			throw new NullPointerException("passed astElement was null");
@@ -414,6 +473,8 @@ public abstract class AbstractInternalAntlrParser extends Parser {
 	}
 	
 	protected IParserErrorContext createErrorContext(RecognitionException e) {
+		if (e instanceof FailedPredicateException)
+			return new UnorderedGroupErrorContext((FailedPredicateException) e);
 		return new ParserErrorContext(e);
 	}
 
