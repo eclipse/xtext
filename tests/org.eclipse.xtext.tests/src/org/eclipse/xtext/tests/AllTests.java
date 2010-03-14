@@ -114,6 +114,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.PackratParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.terminalrules.ParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.unorderedGroups.ConcreteSyntaxValidatorTest.class);
+      suite.addTestSuite(org.eclipse.xtext.parser.unorderedGroups.ErrorMessagesTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.unorderedGroups.GrammarParserTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.unorderedGroups.GrammarSerializerTest.class);
       suite.addTestSuite(org.eclipse.xtext.parser.unorderedGroups.MetamodelTransformationTest.class);
