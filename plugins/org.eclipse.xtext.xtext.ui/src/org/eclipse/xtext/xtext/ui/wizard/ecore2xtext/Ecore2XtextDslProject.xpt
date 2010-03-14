@@ -86,7 +86,6 @@ Workflow {
 			// the Antlr parser
 			fragment = de.itemis.xtext.antlr.XtextAntlrGeneratorFragment {
 				options = {
-					backtrack = true
 					classSplitting = true
 				}
 			}
@@ -125,7 +124,6 @@ Workflow {
 			//     and will be ignored if it's not available. 
 			fragment = de.itemis.xtext.antlr.XtextAntlrUiGeneratorFragment { 
 				options = {
-					backtrack = true
 					classSplitting = true
 				}
 			}

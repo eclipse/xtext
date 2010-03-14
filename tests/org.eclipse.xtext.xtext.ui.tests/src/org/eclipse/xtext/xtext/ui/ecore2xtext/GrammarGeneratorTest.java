@@ -9,7 +9,6 @@ package org.eclipse.xtext.xtext.ui.ecore2xtext;
 
 import java.io.IOException;
 import java.util.Arrays;
-import java.util.Collection;
 import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
@@ -82,7 +81,7 @@ public class GrammarGeneratorTest extends AbstractXtextTests {
 				System.out.println("...skipping");
 			} else {
 				OutputStringImpl output = new OutputStringImpl();
-				Collection<EPackageInfo> ePackageInfos = Lists.newArrayList(Iterables.transform(ePackages,
+				List<EPackageInfo> ePackageInfos = Lists.newArrayList(Iterables.transform(ePackages,
 						new Function<EPackage, EPackageInfo>() {
 							public EPackageInfo apply(EPackage from) {
 								return new EPackageInfo(from, URI.createURI(from.getNsURI()), null, null, null);

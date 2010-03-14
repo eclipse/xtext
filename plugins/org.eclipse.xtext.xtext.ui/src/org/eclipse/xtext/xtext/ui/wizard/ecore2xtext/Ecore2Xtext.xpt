@@ -17,9 +17,10 @@
 «DEFINE grammar FOR Ecore2XtextProjectInfo-»«resetUniqueNames(defaultEPackageInfo)-»
 «FILE basePackagePath+"/"+languageNameAbbreviation+".xtext" -»
 «EXPAND grammarDeclaration-»
-«EXPAND metamodelImport FOREACH allReferencedEPackages(EPackageInfos)-»
-«EXPAND rule FOR rootElementClass»
-«EXPAND rule FOREACH allRuleClassifiers().remove(rootElementClass)-»
+«EXPAND metamodelImport FOREACH allReferencedEPackages()-»
+«EXPAND rules FOR rootElementClass-»
+«EXPAND subClassDispatcherRule FOREACH allDispatcherRuleClasses().remove(rootElementClass)-»
+«EXPAND rule FOREACH allConcreteRuleClassifiers().remove(rootElementClass)-»
 «ENDFILE»
 «ENDDEFINE»
 
@@ -36,48 +37,54 @@ import "«EPackageImportURI.toString()»" «IF EPackage.uniqueName() != null && EPa
 import "«importURI()»" «IF uniqueName() != null && uniqueName() != ""»as «uniqueName()»«ENDIF»
 «ENDDEFINE» 
 
+«DEFINE rules FOR EClassifier»«
+	IF needsConcreteRule()»«
+		EXPAND rule»
+	«ENDIF-»
+«ENDDEFINE»
+
 «DEFINE rule FOR EClass»
-«uniqueName()» returns «fqn()»:
-	«EXPAND subClassAlternatives»«
-	IF abstract»«
-		IF subClasses().isEmpty
-			»'«name»' /* TODO: abstract class does not have subclasses. Consider removing this rule */ «
-		ENDIF»«
-	ELSE»«
-		IF !subClasses().isEmpty
-			» |
-    «	
-    	ENDIF»«
-    	IF onlyOptionalFeatures()
-    		»{«fqn()»} «
-    	ENDIF»«
-    	IF !prefixFeatures().isEmpty
-    		» («
-    	ENDIF
-    	»«EXPAND assignment FOREACH prefixFeatures() SEPARATOR " "»«
-    	IF !prefixFeatures().isEmpty
-    		») «
-    	ENDIF
-    	»'«name»' «
-    	EXPAND idAssignment»«
-    	IF !inlinedFeatures().isEmpty
-    		»'{'
-        «	
-        	EXPAND assignment FOREACH inlinedFeatures() SEPARATOR "\n        "
-        	»
-    '}'«
-    	ENDIF»«
+«concreteRuleName()» returns «fqn()»:
+«	IF onlyOptionalFeatures()
+    	»	{«fqn()»}
+«	ENDIF»«
+   	FOREACH prefixFeatures() AS prefixFeature
+   		»	«EXPAND assignment FOR prefixFeature»«
+   	ENDFOREACH
+   	»	'«name»'
+«	EXPAND idAssignment»«
+   	IF !inlinedFeatures().isEmpty
+   		»	'{'
+«
+   		FOREACH allAttributes() AS attribute
+   			»		«EXPAND assignment FOR attribute»«
+   		ENDFOREACH»«
+		FOREACH allCrossReferences() AS crossReference
+			»		«EXPAND assignment FOR crossReference»«
+   		ENDFOREACH»«
+		FOREACH allContainmentReferences() AS containmentReference
+			»		«EXPAND assignment FOR containmentReference»«
+		ENDFOREACH
+		»    '}'«
     ENDIF»;
 «ENDDEFINE»
 
+«DEFINE subClassDispatcherRule FOR EClass-»
+«	IF needsDispatcherRule()»
+«uniqueName()» returns «fqn()»:
+	«	EXPAND subClassAlternatives»;
+«	ENDIF-»
+«ENDDEFINE»
+
 «DEFINE subClassAlternatives FOR EClass»«
-	FOREACH subClasses() AS subClass SEPARATOR " | "»«
-		subClass.uniqueName()»«
+	FOREACH {this}.union(subClasses()).select(c|c.needsConcreteRule()) AS subClass SEPARATOR " | "»«
+		subClass.concreteRuleName()»«
 	ENDFOREACH»«
 ENDDEFINE»
 
 «DEFINE idAssignment FOR EClass-»
-«IF idAttribute() != null»«idAttribute().name»=«assignedRuleCall(idAttribute())» «ENDIF-»
+«IF idAttribute() != null»	«idAttribute().name»=«assignedRuleCall(idAttribute())»
+«ENDIF-»
 «ENDDEFINE»
 
 «DEFINE assignment FOR EStructuralFeature»«
@@ -109,8 +116,8 @@ ENDDEFINE»
 	ENDIF»«
 	IF !required 
 		»)?«
-	ENDIF»«
-ENDDEFINE»
+	ENDIF»
+«ENDDEFINE»
 
 «DEFINE assignedTerminal FOR EAttribute»«
 	assignedRuleCall()»«
