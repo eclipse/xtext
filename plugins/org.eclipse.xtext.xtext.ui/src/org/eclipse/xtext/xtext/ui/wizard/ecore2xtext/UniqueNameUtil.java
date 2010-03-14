@@ -25,7 +25,11 @@ import org.eclipse.xtext.util.Strings;
  */
 public class UniqueNameUtil {
 
+	private static final String IMPL_NAME_SUFFIX = "_Impl";
+
 	private static Map<ENamedElement, String> element2uniqueName = new HashMap<ENamedElement, String>();
+
+	private static Map<ENamedElement, String> element2uniqueImplName = new HashMap<ENamedElement, String>();
 
 	private static final List<String> RESERVED_RULES = Arrays.asList(new String[] { "ml_comment", "id", "ws", "int",
 			"string", "any_other", "sl_comment" });
@@ -34,21 +38,30 @@ public class UniqueNameUtil {
 			"terminal", "with", "hidden", "enum", "grammar", "import", "as", "current" });
 
 	public static String uniqueName(ENamedElement element) {
-		if (element2uniqueName.containsKey(element)) {
-			return element2uniqueName.get(element);
+		return uniqueName(element, element.getName(), element2uniqueName);
+	}
+
+	public static String uniqueImplName(ENamedElement element) {
+		return uniqueName(element, element.getName() + IMPL_NAME_SUFFIX, element2uniqueImplName);
+	}
+
+	private static String uniqueName(ENamedElement element, String originalName,
+			Map<ENamedElement, String> uniqueNameMap) {
+		if (uniqueNameMap.containsKey(element)) {
+			return uniqueNameMap.get(element);
 		}
-		String trueName = element.getName();
-		String uniqueName = trueName;
+		String uniqueName = originalName;
 		for (int i = 0; RESERVED_KEYWORDS.contains(uniqueName) || RESERVED_RULES.contains(uniqueName.toLowerCase())
-				|| element2uniqueName.containsValue(uniqueName); ++i) {
-			uniqueName = trueName + i;
+				|| element2uniqueName.containsValue(uniqueName) || element2uniqueImplName.containsValue(uniqueName); ++i) {
+			uniqueName = originalName + i;
 		}
-		element2uniqueName.put(element, uniqueName);
+		uniqueNameMap.put(element, uniqueName);
 		return uniqueName;
 	}
 
 	public static void clearUniqueNames(EPackageInfo defaultPackageInfo) {
 		element2uniqueName.clear();
+		element2uniqueImplName.clear();
 		if (defaultPackageInfo != null) {
 			element2uniqueName.put(defaultPackageInfo.getEPackage(), null);
 		}
@@ -70,7 +83,7 @@ public class UniqueNameUtil {
 	public static EClassifier eString() {
 		return EcorePackage.eINSTANCE.getEString();
 	}
-	
+
 	public static void debug(String s) {
 		System.out.println(s);
 	}

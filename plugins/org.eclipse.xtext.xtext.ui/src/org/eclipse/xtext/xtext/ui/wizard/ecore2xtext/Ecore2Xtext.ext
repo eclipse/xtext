@@ -11,30 +11,35 @@ import org::eclipse::xtext::xtext::ui::wizard::project;
 import org::eclipse::xtext::xtext::ui::wizard::ecore2xtext;
 
 
-Collection[EClassifier] allRuleClassifiers(Ecore2XtextProjectInfo this) :
+cached Collection[EClassifier] allConcreteRuleClassifiers(Ecore2XtextProjectInfo this) :
 	rootElementClass == null 
-		? EPackageInfos.EPackage.allReferencedClassifiers(false).flatten().toSet()
-	    : (let c = { rootElementClass } : rootElementClass.allAssignedClassifiers(c) -> c.toSet());
+		? EPackageInfos.EPackage.allReferencedClassifiers(false).flatten().toSet().select(c|c.needsConcreteRule())
+	    : (let c = { rootElementClass } : rootElementClass.allAssignedClassifiers(c) -> c.select(c|c.needsConcreteRule()).toSet());
 
-Collection[EPackage] allReferencedEPackages(Collection[EPackageInfo] this) :
-	EPackage.allReferencedEPackages(true).flatten().toSet();
+cached Collection[EClass] allDispatcherRuleClasses(Ecore2XtextProjectInfo this) :
+	rootElementClass == null
+		? EPackageInfos.EPackage.allReferencedClassifiers(false).flatten().toSet().select(c|c.needsDispatcherRule())
+		: allConcreteRuleClassifiers().typeSelect(EClass).collect(c|c.EAllReferences.select(r|r.needsAssignment()).EType).flatten().toSet();
 
-private Collection[EPackage] allReferencedEPackages(EPackage this, boolean includeCrossRefs) :	
+cached Collection[EPackage] allReferencedEPackages(Ecore2XtextProjectInfo this) :
+	EPackageInfos.EPackage.allReferencedEPackages(true).flatten().toSet();
+
+private cached Collection[EPackage] allReferencedEPackages(EPackage this, boolean includeCrossRefs) :	
 	allReferencedClassifiers(includeCrossRefs).EPackage.toSet();
 
-private Collection[EClassifier] allReferencedClassifiers(EPackage this, boolean includeCrossRefs) :
+private cached Collection[EClassifier] allReferencedClassifiers(EPackage this, boolean includeCrossRefs) :
 	EClassifiers.union(EClassifiers.typeSelect(EClass).EAllStructuralFeatures.select(f|f.needsAssignment() && (includeCrossRefs || f.isContainment())).EType.flatten()).add(eString()).toSet();
 	
-private allAssignedClassifiers(EClass this, Collection acceptor) :
-	(let classifiers = (EAllStructuralFeatures.select(r|r.needsAssignment()).EType).union(subClasses()).removeAll(acceptor) :
+private cached allAssignedClassifiers(EClass this, Collection acceptor) :
+	(let classifiers = (EAllStructuralFeatures.select(f|f.needsAssignment()).EType).union(subClasses()).removeAll(acceptor) :
 		classifiers.isEmpty 
 			? null
 			: (acceptor.addAll(classifiers) -> classifiers.typeSelect(EClass).collect(c|c.allAssignedClassifiers(acceptor))));
 	
-private Void debug(String this):
+Void debug(String this):
 	JAVA org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.debug(java.lang.String);
 	
-EClassifier eString() :
+private EClassifier eString() :
 	JAVA org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.eString();
 	
 String importURI(EPackage this) :
@@ -42,12 +47,15 @@ String importURI(EPackage this) :
 	
 fqn(EClassifier this):
 	(EPackage.uniqueName() == null)? name : EPackage.uniqueName() + "::" + name;
-	
+
 Void resetUniqueNames(EPackageInfo defaultPackageInfo):
 	 JAVA org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.clearUniqueNames(org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.EPackageInfo);
 
 String uniqueName(ENamedElement this):
 	 JAVA org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.uniqueName(org.eclipse.emf.ecore.ENamedElement);
+
+String uniqueImplName(ENamedElement this):
+	 JAVA org.eclipse.xtext.xtext.ui.wizard.ecore2xtext.UniqueNameUtil.uniqueImplName(org.eclipse.emf.ecore.ENamedElement);
 
 cached prefixFeatures(EClass this) :
 	EAllStructuralFeatures.select(f|f.needsAssignment() && f.isPrefixBooleanFeature());
@@ -60,6 +68,9 @@ cached onlyOptionalFeatures(EClass this) :
 		
 assignedRuleCall(EAttribute this):
 	(isPrefixBooleanFeature()) ? "'"+name+"'" : EType.uniqueName();
+
+concreteRuleName(EClass this):
+	needsDispatcherRule()? uniqueImplName() : uniqueName();
 	
 String dataTypeRuleBody(EDataType this) :
 	switch (name) {
@@ -131,6 +142,18 @@ isID(EStructuralFeature this) :
 boolean needsAssignment(EStructuralFeature this) :
 	!derived && !transient && !(EReference.isInstance(this) && ((EReference)this).container) && !(EDataType.isInstance(this.EType) && !((EDataType) this.EType).serializable);
 
+boolean needsConcreteRule(EClass this) :
+	!abstract && !interface;
+	
+boolean needsConcreteRule(EClassifier this) :
+	true;
+
+boolean needsDispatcherRule(EClass this) :
+	!subClasses().select(c|c.needsConcreteRule()).isEmpty;
+
+boolean needsDispatcherRule(EClassifier this) :
+	false;
+	
 isContainment(EStructuralFeature this) :
 	false;
 	
@@ -141,4 +164,13 @@ isContainment(EReference this) :
 	containment;
 
 cached subClasses(EClass this):
-	EPackage.EClassifiers.typeSelect(EClass).select(c|c.ESuperTypes.contains(this));	
+	EPackage.EClassifiers.typeSelect(EClass).select(c|c.EAllSuperTypes.contains(this));	
+	
+allAttributes(EClass this) :
+	inlinedFeatures().typeSelect(EAttribute);
+	
+allCrossReferences(EClass this) :
+	inlinedFeatures().typeSelect(EReference).select(r|!r.isContainment());
+	
+allContainmentReferences(EClass this) :
+	inlinedFeatures().typeSelect(EReference).select(r|r.isContainment());
