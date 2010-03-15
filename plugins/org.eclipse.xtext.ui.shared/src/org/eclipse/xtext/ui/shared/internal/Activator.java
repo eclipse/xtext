@@ -50,7 +50,7 @@ public class Activator extends Plugin {
 			module = Modules.override(module).with(
 					new SharedModuleWithJdt());
 		}
-		if (extensions.length==0) {
+		if (extensions.length!=0) {
 			int numberOfMixedInModules=0;
 			for (IExtension iExtension : extensions) {
 				IConfigurationElement[] elements = iExtension.getConfigurationElements();
@@ -83,6 +83,7 @@ public class Activator extends Plugin {
 		return false;
 	}
 
+	@Override
 	public void start(BundleContext context) throws Exception {
 		try {
 			super.start(context);
@@ -102,6 +103,7 @@ public class Activator extends Plugin {
 		workspace.removeResourceChangeListener(resourceChangeListener);
 	}
 
+	@Override
 	public void stop(BundleContext context) throws Exception {
 		unregisterListeners();
 		plugin = null;
