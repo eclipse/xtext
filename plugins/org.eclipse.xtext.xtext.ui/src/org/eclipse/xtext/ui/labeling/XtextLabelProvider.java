@@ -5,6 +5,7 @@ package org.eclipse.xtext.ui.labeling;
 
 import java.util.List;
 
+import org.eclipse.emf.edit.ui.provider.AdapterFactoryLabelProvider;
 import org.eclipse.jface.preference.JFacePreferences;
 import org.eclipse.jface.viewers.StyledString;
 import org.eclipse.jface.viewers.StyledString.Styler;
@@ -48,6 +49,11 @@ public class XtextLabelProvider extends DefaultEObjectLabelProvider {
 
 	@Inject 
 	private StylerFactory stylerFactory;
+	
+	@Inject
+	public XtextLabelProvider(AdapterFactoryLabelProvider delegate) {
+		super(delegate);
+	}
 	
 	StyledString text(ParserRule parserRule) {
 		if (GrammarUtil.isDatatypeRule(parserRule)) {
