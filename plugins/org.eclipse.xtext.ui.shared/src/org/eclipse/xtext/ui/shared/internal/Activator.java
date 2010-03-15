@@ -63,7 +63,7 @@ public class Activator extends Plugin {
 							log.warn("Multiple overriding guice modules. Will use them in unspecified order.");
 						}
 					} catch (CoreException e1) {
-						log.error(e);
+						log.error(e1);
 					}
 				}
 			}
