@@ -107,7 +107,7 @@ Workflow {
 			*/
 			
 			// formatter API 
-			fragment = formatting.FormatterFragment {}
+			fragment = ecore2xtext.FormatterFragment {}
 
 			// labeling API 
 			fragment = labeling.LabelProviderFragment {}
