@@ -57,6 +57,16 @@ public abstract class AbstractDomainmodelUiModule extends DefaultUiModule {
 		binder.bind(org.eclipse.jface.viewers.ILabelProvider.class).annotatedWith(org.eclipse.xtext.ui.resource.ResourceServiceDescriptionLabelProvider.class).to(org.eclipse.xtext.example.ui.labeling.DomainmodelDescriptionLabelProvider.class);
 	}
 
+	// contributed by org.eclipse.xtext.ui.generator.outline.OutlineNodeAdapterFactoryFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.outline.actions.IContentOutlineNodeAdapterFactory> bindIContentOutlineNodeAdapterFactory() {
+		return org.eclipse.xtext.example.ui.outline.DomainmodelOutlineNodeAdapterFactory.class;
+	}
+
+	// contributed by org.eclipse.xtext.ui.generator.outline.TransformerFragment
+	public Class<? extends org.eclipse.xtext.ui.editor.outline.transformer.ISemanticModelTransformer> bindISemanticModelTransformer() {
+		return org.eclipse.xtext.example.ui.outline.DomainmodelTransformer.class;
+	}
+
 	// contributed by org.eclipse.xtext.ui.generator.contentAssist.JavaBasedContentAssistFragment
 	public Class<? extends org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider> bindIContentProposalProvider() {
 		return org.eclipse.xtext.example.ui.contentassist.DomainmodelProposalProvider.class;
