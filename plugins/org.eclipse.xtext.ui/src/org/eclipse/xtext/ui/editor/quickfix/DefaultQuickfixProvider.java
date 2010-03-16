@@ -8,8 +8,8 @@
 package org.eclipse.xtext.ui.editor.quickfix;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -29,6 +29,8 @@ import org.eclipse.xtext.ui.editor.model.edit.IssueModificationContext;
 import org.eclipse.xtext.util.concurrent.IUnitOfWork;
 import org.eclipse.xtext.validation.Issue;
 
+import com.google.common.collect.Lists;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
 import com.google.inject.Provider;
 
@@ -62,27 +64,49 @@ public class DefaultQuickfixProvider extends AbstractDeclarativeQuickfixProvider
 	}
 
 	public List<IssueResolution> getResolutionsForLinkingIssue(final Issue issue) {
+		final IssueResolutionAcceptor issueResolutionAcceptor = issueResolutionAcceptorProvider.get();
+		createLinkingIssueResolutions(issue, issueResolutionAcceptor);
+		return issueResolutionAcceptor.getIssueResolutions();
+	}
+
+	public void createLinkingIssueResolutions(final Issue issue, final IssueResolutionAcceptor issueResolutionAcceptor) {
 		final IModificationContext modificationContext = modificationContextFactory.createModificationContext(issue);
 		final IXtextDocument xtextDocument = modificationContext.getXtextDocument();
-		return xtextDocument.readOnly(new IUnitOfWork<List<IssueResolution>, XtextResource>() {
-			public List<IssueResolution> exec(XtextResource state) throws Exception {
+		xtextDocument.readOnly(new IUnitOfWork.Void<XtextResource>() {
+			@Override
+			public void process(XtextResource state) throws Exception {
 				EObject target = state.getEObject(issue.getUriToProblem().fragment());
 				EReference reference = getUnresolvedEReference(issue, target);
 				if (reference == null)
-					return Collections.emptyList();
+					return;
 
 				String issueString = xtextDocument.get(issue.getOffset(), issue.getLength());
 				IScope scope = scopeProvider.getScope(target, reference);
-				final IssueResolutionAcceptor issueResolutionAcceptor = issueResolutionAcceptorProvider.get();
+				List<IEObjectDescription> discardedDescriptions = Lists.newArrayList();
+				Set<String> qualifiedNames = Sets.newHashSet();
+				int addedDescriptions = 0;
 				for (IEObjectDescription referableElement : scope.getAllContents()) {
-					String replacement = referableElement.getName();
-					if (similarityMatcher.isSimilar(issueString, replacement)) {
-						String replaceLabel = fixCrossReferenceLabel(issueString, replacement);
-						issueResolutionAcceptor.accept(issue, replaceLabel, replaceLabel, fixCrossReferenceImage(
-								issueString, replacement), new ReplaceModification(issue, replacement));
+					if (similarityMatcher.isSimilar(issueString, referableElement.getName())) {
+						addedDescriptions++;
+						createResolution(issueString, referableElement);
+						qualifiedNames.add(referableElement.getQualifiedName());
+					} else {
+						if (qualifiedNames.add(referableElement.getQualifiedName()))
+							discardedDescriptions.add(referableElement);
 					}
 				}
-				return issueResolutionAcceptor.getIssueResolutions();
+				if (discardedDescriptions.size() + addedDescriptions <= 5) {
+					for(IEObjectDescription referableElement: discardedDescriptions) {
+						createResolution(issueString, referableElement);
+					}
+				}
+			}
+			
+			public void createResolution(String issueString, IEObjectDescription solution) {
+				String replacement = solution.getName();
+				String replaceLabel = fixCrossReferenceLabel(issueString, replacement);
+				issueResolutionAcceptor.accept(issue, replaceLabel, replaceLabel, fixCrossReferenceImage(
+						issueString, replacement), new ReplaceModification(issue, replacement));
 			}
 
 		});
