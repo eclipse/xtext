@@ -39,14 +39,19 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		String model = "( ( a b ) ! c  d e  f (  x s ) ( \t ( a \n\rb/*ffo \n bar */ ) ! c ) ! ) //holla\n!";
 		assertEquals(model, parseAndSerialize(model));
 	}
+	
+	public void testComplex1() throws Exception {
+		String model = "(a b) //holla\n!";
+		assertEquals(model, parseAndSerialize(model));
+	}
 
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = getModel(model);
-		if (logger.isTraceEnabled()) {
-			logger.trace(EmfFormatter.objToStr(result));
-			logger.trace(EmfFormatter.objToStr(NodeUtil.getRootNode(result)));
-			logger.trace(EmfFormatter.objToStr(NodeUtil.getRootNode(result).getLeafNodes()));
-		}
+//		if (logger.isTraceEnabled()) {
+			System.out.println(EmfFormatter.objToStr(result));
+			System.out.println(EmfFormatter.objToStr(NodeUtil.getRootNode(result)));
+//			logger.trace(EmfFormatter.objToStr(NodeUtil.getRootNode(result).getLeafNodes()));
+//		}
 		SerializerUtil.SerializationOptions opt = new SerializerUtil.SerializationOptions();
 		opt.setFormat(false);
 		return getSerializer().serialize(result, opt);
@@ -61,6 +66,12 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 	public void testSimpleExpressions1() throws Exception {
 		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
 		String model = "a + b - c";
+		assertEquals(model, parseAndSerialize(model));
+	}
+	
+	public void testSimpleExpressions3() throws Exception {
+		with(SimpleExpressionsTestLanguageStandaloneSetup.class);
+		String model = "a + (b - c)";
 		assertEquals(model, parseAndSerialize(model));
 	}
 
@@ -209,12 +220,12 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 
 	public void testLoop1() throws Exception {
 		String model = "kw0 #8 abc kw1 ab kw30";
-		assertEquals(" #8 abc  ab kw30", parseAndSerialize(model));
+		assertEquals("#8 abc ab kw30", parseAndSerialize(model));
 	}
 
 	public void testLoop2() throws Exception {
 		String model = "#9 abc adad kw2 kw3 kw6";
-		assertEquals("#9 abc kw1 adad kw4 kw5    ", parseAndSerialize(model));
+		assertEquals("#9 abc kw1 adad kw4 kw5", parseAndSerialize(model));
 	}
 
 	public void testLoop3() throws Exception {
@@ -224,7 +235,7 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 
 	public void testLoop4() throws Exception {
 		String model = "#11 kw2 asd kw5 kw6";
-		assertEquals("#11 kw1  asd kw5 ", parseAndSerialize(model));
+		assertEquals("#11 kw1 asd kw5", parseAndSerialize(model));
 	}
 
 	public void testLoopBug285452a() throws Exception {
