@@ -93,6 +93,31 @@ public class HiddentokenmergertestAdapterFactory extends AdapterFactoryImpl
         return createEnumBugAdapter();
       }
       @Override
+      public Adapter caseCommentable(Commentable object)
+      {
+        return createCommentableAdapter();
+      }
+      @Override
+      public Adapter caseCommentableItem(CommentableItem object)
+      {
+        return createCommentableItemAdapter();
+      }
+      @Override
+      public Adapter caseValueList(ValueList object)
+      {
+        return createValueListAdapter();
+      }
+      @Override
+      public Adapter caseRefList(RefList object)
+      {
+        return createRefListAdapter();
+      }
+      @Override
+      public Adapter caseRefObj(RefObj object)
+      {
+        return createRefObjAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -155,6 +180,81 @@ public class HiddentokenmergertestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createEnumBugAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Commentable <em>Commentable</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Commentable
+   * @generated
+   */
+  public Adapter createCommentableAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.CommentableItem <em>Commentable Item</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.CommentableItem
+   * @generated
+   */
+  public Adapter createCommentableItemAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.ValueList <em>Value List</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.ValueList
+   * @generated
+   */
+  public Adapter createValueListAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.RefList <em>Ref List</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.RefList
+   * @generated
+   */
+  public Adapter createRefListAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.RefObj <em>Ref Obj</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.RefObj
+   * @generated
+   */
+  public Adapter createRefObjAdapter()
   {
     return null;
   }

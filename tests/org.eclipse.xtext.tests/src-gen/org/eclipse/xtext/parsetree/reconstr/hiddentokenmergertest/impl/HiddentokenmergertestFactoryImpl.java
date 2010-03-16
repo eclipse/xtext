@@ -71,6 +71,11 @@ public class HiddentokenmergertestFactoryImpl extends EFactoryImpl implements Hi
       case HiddentokenmergertestPackage.MODEL: return createModel();
       case HiddentokenmergertestPackage.DATATYPE_BUG286557: return createDatatypeBug286557();
       case HiddentokenmergertestPackage.ENUM_BUG: return createEnumBug();
+      case HiddentokenmergertestPackage.COMMENTABLE: return createCommentable();
+      case HiddentokenmergertestPackage.COMMENTABLE_ITEM: return createCommentableItem();
+      case HiddentokenmergertestPackage.VALUE_LIST: return createValueList();
+      case HiddentokenmergertestPackage.REF_LIST: return createRefList();
+      case HiddentokenmergertestPackage.REF_OBJ: return createRefObj();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -141,6 +146,61 @@ public class HiddentokenmergertestFactoryImpl extends EFactoryImpl implements Hi
   {
     EnumBugImpl enumBug = new EnumBugImpl();
     return enumBug;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Commentable createCommentable()
+  {
+    CommentableImpl commentable = new CommentableImpl();
+    return commentable;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public CommentableItem createCommentableItem()
+  {
+    CommentableItemImpl commentableItem = new CommentableItemImpl();
+    return commentableItem;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ValueList createValueList()
+  {
+    ValueListImpl valueList = new ValueListImpl();
+    return valueList;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RefList createRefList()
+  {
+    RefListImpl refList = new RefListImpl();
+    return refList;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public RefObj createRefObj()
+  {
+    RefObjImpl refObj = new RefObjImpl();
+    return refObj;
   }
 
   /**

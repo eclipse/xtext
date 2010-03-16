@@ -38,6 +38,11 @@ protected class ThisRootNode extends RootToken {
 			case 0: return new Model_Alternatives(this, this, 0, inst);
 			case 1: return new DatatypeBug286557_Group(this, this, 1, inst);
 			case 2: return new EnumBug_Group(this, this, 2, inst);
+			case 3: return new Commentable_Group(this, this, 3, inst);
+			case 4: return new CommentableItem_Group(this, this, 4, inst);
+			case 5: return new ValueList_Group(this, this, 5, inst);
+			case 6: return new RefList_Group(this, this, 6, inst);
+			case 7: return new RefObj_NameAssignment(this, this, 7, inst);
 			default: return null;
 		}	
 	}	
@@ -47,11 +52,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   DatatypeBug286557|EnumBug;
+ *   DatatypeBug286557|EnumBug|Commentable|ValueList|RefList;
  *
  **/
 
-// DatatypeBug286557|EnumBug
+// DatatypeBug286557|EnumBug|Commentable|ValueList|RefList
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -68,6 +73,9 @@ protected class Model_Alternatives extends AlternativesToken {
 		switch(index) {
 			case 0: return new Model_DatatypeBug286557ParserRuleCall_0(parent, this, 0, inst);
 			case 1: return new Model_EnumBugParserRuleCall_1(parent, this, 1, inst);
+			case 2: return new Model_CommentableParserRuleCall_2(parent, this, 2, inst);
+			case 3: return new Model_ValueListParserRuleCall_3(parent, this, 3, inst);
+			case 4: return new Model_RefListParserRuleCall_4(parent, this, 4, inst);
 			default: return null;
 		}	
 	}	
@@ -138,6 +146,111 @@ protected class Model_EnumBugParserRuleCall_1 extends RuleCallToken {
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(EnumBug_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getEnumBugRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// Commentable
+protected class Model_CommentableParserRuleCall_2 extends RuleCallToken {
+	
+	public Model_CommentableParserRuleCall_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getModelAccess().getCommentableParserRuleCall_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Commentable_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(Commentable_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getCommentableRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// ValueList
+protected class Model_ValueListParserRuleCall_3 extends RuleCallToken {
+	
+	public Model_ValueListParserRuleCall_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getModelAccess().getValueListParserRuleCall_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new ValueList_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(ValueList_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getValueListRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// RefList
+protected class Model_RefListParserRuleCall_4 extends RuleCallToken {
+	
+	public Model_RefListParserRuleCall_4(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getModelAccess().getRefListParserRuleCall_4();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RefList_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(RefList_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getRefListRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -499,5 +612,516 @@ protected class EnumBug_NameAssignment_3 extends AssignmentToken  {
 
 
 /************ end Rule EnumBug ****************/
+
+
+/************ begin Rule Commentable ****************
+ *
+ * Commentable:
+ *   "#3" item+=CommentableItem*;
+ *
+ **/
+
+// "#3" item+=CommentableItem*
+protected class Commentable_Group extends GroupToken {
+	
+	public Commentable_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getCommentableAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Commentable_ItemAssignment_1(parent, this, 0, inst);
+			case 1: return new Commentable_NumberSignDigitThreeKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getCommentableRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "#3"
+protected class Commentable_NumberSignDigitThreeKeyword_0 extends KeywordToken  {
+	
+	public Commentable_NumberSignDigitThreeKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getCommentableAccess().getNumberSignDigitThreeKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// item+=CommentableItem*
+protected class Commentable_ItemAssignment_1 extends AssignmentToken  {
+	
+	public Commentable_ItemAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getCommentableAccess().getItemAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new CommentableItem_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("item",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("item");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getCommentableItemRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getCommentableAccess().getItemCommentableItemParserRuleCall_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new Commentable_ItemAssignment_1(parent, next, actIndex, consumed);
+			case 1: return new Commentable_NumberSignDigitThreeKeyword_0(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+/************ end Rule Commentable ****************/
+
+
+/************ begin Rule CommentableItem ****************
+ *
+ * CommentableItem:
+ *   "item" id=ID;
+ *
+ **/
+
+// "item" id=ID
+protected class CommentableItem_Group extends GroupToken {
+	
+	public CommentableItem_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getCommentableItemAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new CommentableItem_IdAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getCommentableItemRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "item"
+protected class CommentableItem_ItemKeyword_0 extends KeywordToken  {
+	
+	public CommentableItem_ItemKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getCommentableItemAccess().getItemKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// id=ID
+protected class CommentableItem_IdAssignment_1 extends AssignmentToken  {
+	
+	public CommentableItem_IdAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getCommentableItemAccess().getIdAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new CommentableItem_ItemKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("id",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("id");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getCommentableItemAccess().getIdIDTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule CommentableItem ****************/
+
+
+/************ begin Rule ValueList ****************
+ *
+ * ValueList:
+ *   "#4" ids+=FQN*;
+ *
+ **/
+
+// "#4" ids+=FQN*
+protected class ValueList_Group extends GroupToken {
+	
+	public ValueList_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getValueListAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new ValueList_IdsAssignment_1(parent, this, 0, inst);
+			case 1: return new ValueList_NumberSignDigitFourKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getValueListRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "#4"
+protected class ValueList_NumberSignDigitFourKeyword_0 extends KeywordToken  {
+	
+	public ValueList_NumberSignDigitFourKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getValueListAccess().getNumberSignDigitFourKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// ids+=FQN*
+protected class ValueList_IdsAssignment_1 extends AssignmentToken  {
+	
+	public ValueList_IdsAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getValueListAccess().getIdsAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new ValueList_IdsAssignment_1(parent, this, 0, inst);
+			case 1: return new ValueList_NumberSignDigitFourKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("ids",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("ids");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.DRC;
+			element = grammarAccess.getValueListAccess().getIdsFQNParserRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule ValueList ****************/
+
+
+/************ begin Rule RefList ****************
+ *
+ * RefList:
+ *   "#5" objs+=RefObj* "refs" refs+=[RefObj|FQN]*;
+ *
+ **/
+
+// "#5" objs+=RefObj* "refs" refs+=[RefObj|FQN]*
+protected class RefList_Group extends GroupToken {
+	
+	public RefList_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getRefListAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RefList_RefsAssignment_3(parent, this, 0, inst);
+			case 1: return new RefList_RefsKeyword_2(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRefListRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "#5"
+protected class RefList_NumberSignDigitFiveKeyword_0 extends KeywordToken  {
+	
+	public RefList_NumberSignDigitFiveKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getRefListAccess().getNumberSignDigitFiveKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// objs+=RefObj*
+protected class RefList_ObjsAssignment_1 extends AssignmentToken  {
+	
+	public RefList_ObjsAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getRefListAccess().getObjsAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RefObj_NameAssignment(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("objs",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("objs");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getRefObjRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getRefListAccess().getObjsRefObjParserRuleCall_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new RefList_ObjsAssignment_1(parent, next, actIndex, consumed);
+			case 1: return new RefList_NumberSignDigitFiveKeyword_0(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+// "refs"
+protected class RefList_RefsKeyword_2 extends KeywordToken  {
+	
+	public RefList_RefsKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getRefListAccess().getRefsKeyword_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RefList_ObjsAssignment_1(parent, this, 0, inst);
+			case 1: return new RefList_NumberSignDigitFiveKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// refs+=[RefObj|FQN]*
+protected class RefList_RefsAssignment_3 extends AssignmentToken  {
+	
+	public RefList_RefsAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getRefListAccess().getRefsAssignment_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RefList_RefsAssignment_3(parent, this, 0, inst);
+			case 1: return new RefList_RefsKeyword_2(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("refs",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("refs");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getRefListAccess().getRefsRefObjCrossReference_3_0().getType().getClassifier())) {
+				type = AssignmentType.CR;
+				element = grammarAccess.getRefListAccess().getRefsRefObjCrossReference_3_0(); 
+				return obj;
+			}
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule RefList ****************/
+
+
+/************ begin Rule RefObj ****************
+ *
+ * RefObj:
+ *   name=FQN;
+ *
+ **/
+
+// name=FQN
+protected class RefObj_NameAssignment extends AssignmentToken  {
+	
+	public RefObj_NameAssignment(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getRefObjAccess().getNameAssignment();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getRefObjRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.DRC;
+			element = grammarAccess.getRefObjAccess().getNameFQNParserRuleCall_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+/************ end Rule RefObj ****************/
 
 }

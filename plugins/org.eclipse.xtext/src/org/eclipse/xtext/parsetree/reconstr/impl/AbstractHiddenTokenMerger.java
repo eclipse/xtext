@@ -14,10 +14,11 @@ import org.eclipse.xtext.parsetree.reconstr.ITokenStream;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Deprecated
+//merging of hidden tokens is now done by the org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor
 public class AbstractHiddenTokenMerger implements IHiddenTokenMerger {
 
-	public ITokenStream createHiddenTokenMerger(ITokenStream out,
-			CompositeNode rootNode) {
+	public ITokenStream createHiddenTokenMerger(ITokenStream out, CompositeNode rootNode) {
 		return null;
 	}
 

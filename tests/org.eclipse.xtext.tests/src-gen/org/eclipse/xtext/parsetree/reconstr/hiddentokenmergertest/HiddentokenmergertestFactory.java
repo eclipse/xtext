@@ -53,6 +53,51 @@ public interface HiddentokenmergertestFactory extends EFactory
   EnumBug createEnumBug();
 
   /**
+   * Returns a new object of class '<em>Commentable</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Commentable</em>'.
+   * @generated
+   */
+  Commentable createCommentable();
+
+  /**
+   * Returns a new object of class '<em>Commentable Item</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Commentable Item</em>'.
+   * @generated
+   */
+  CommentableItem createCommentableItem();
+
+  /**
+   * Returns a new object of class '<em>Value List</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Value List</em>'.
+   * @generated
+   */
+  ValueList createValueList();
+
+  /**
+   * Returns a new object of class '<em>Ref List</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Ref List</em>'.
+   * @generated
+   */
+  RefList createRefList();
+
+  /**
+   * Returns a new object of class '<em>Ref Obj</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Ref Obj</em>'.
+   * @generated
+   */
+  RefObj createRefObj();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

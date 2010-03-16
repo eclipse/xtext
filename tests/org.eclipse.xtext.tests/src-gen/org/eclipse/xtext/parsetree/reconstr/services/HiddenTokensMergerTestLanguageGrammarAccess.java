@@ -22,12 +22,15 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		private final Alternatives cAlternatives = (Alternatives)rule.eContents().get(1);
 		private final RuleCall cDatatypeBug286557ParserRuleCall_0 = (RuleCall)cAlternatives.eContents().get(0);
 		private final RuleCall cEnumBugParserRuleCall_1 = (RuleCall)cAlternatives.eContents().get(1);
+		private final RuleCall cCommentableParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
+		private final RuleCall cValueListParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
+		private final RuleCall cRefListParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
 		
 		//Model:
-		//  DatatypeBug286557|EnumBug;
+		//  DatatypeBug286557|EnumBug|Commentable|ValueList|RefList;
 		public ParserRule getRule() { return rule; }
 
-		//DatatypeBug286557|EnumBug
+		//DatatypeBug286557|EnumBug|Commentable|ValueList|RefList
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//DatatypeBug286557
@@ -35,6 +38,15 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 
 		//EnumBug
 		public RuleCall getEnumBugParserRuleCall_1() { return cEnumBugParserRuleCall_1; }
+
+		//Commentable
+		public RuleCall getCommentableParserRuleCall_2() { return cCommentableParserRuleCall_2; }
+
+		//ValueList
+		public RuleCall getValueListParserRuleCall_3() { return cValueListParserRuleCall_3; }
+
+		//RefList
+		public RuleCall getRefListParserRuleCall_4() { return cRefListParserRuleCall_4; }
 	}
 
 	public class DatatypeBug286557Elements extends AbstractParserRuleElementFinder {
@@ -148,6 +160,134 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		//ID
 		public RuleCall getNameIDTerminalRuleCall_3_0() { return cNameIDTerminalRuleCall_3_0; }
 	}
+
+	public class CommentableElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "Commentable");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitThreeKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cItemAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cItemCommentableItemParserRuleCall_1_0 = (RuleCall)cItemAssignment_1.eContents().get(0);
+		
+		//Commentable:
+		//  "#3" item+=CommentableItem*;
+		public ParserRule getRule() { return rule; }
+
+		//"#3" item+=CommentableItem*
+		public Group getGroup() { return cGroup; }
+
+		//"#3"
+		public Keyword getNumberSignDigitThreeKeyword_0() { return cNumberSignDigitThreeKeyword_0; }
+
+		//item+=CommentableItem*
+		public Assignment getItemAssignment_1() { return cItemAssignment_1; }
+
+		//CommentableItem
+		public RuleCall getItemCommentableItemParserRuleCall_1_0() { return cItemCommentableItemParserRuleCall_1_0; }
+	}
+
+	public class CommentableItemElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "CommentableItem");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cItemKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cIdAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cIdIDTerminalRuleCall_1_0 = (RuleCall)cIdAssignment_1.eContents().get(0);
+		
+		//CommentableItem:
+		//  "item" id=ID;
+		public ParserRule getRule() { return rule; }
+
+		//"item" id=ID
+		public Group getGroup() { return cGroup; }
+
+		//"item"
+		public Keyword getItemKeyword_0() { return cItemKeyword_0; }
+
+		//id=ID
+		public Assignment getIdAssignment_1() { return cIdAssignment_1; }
+
+		//ID
+		public RuleCall getIdIDTerminalRuleCall_1_0() { return cIdIDTerminalRuleCall_1_0; }
+	}
+
+	public class ValueListElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "ValueList");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitFourKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cIdsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cIdsFQNParserRuleCall_1_0 = (RuleCall)cIdsAssignment_1.eContents().get(0);
+		
+		//ValueList:
+		//  "#4" ids+=FQN*;
+		public ParserRule getRule() { return rule; }
+
+		//"#4" ids+=FQN*
+		public Group getGroup() { return cGroup; }
+
+		//"#4"
+		public Keyword getNumberSignDigitFourKeyword_0() { return cNumberSignDigitFourKeyword_0; }
+
+		//ids+=FQN*
+		public Assignment getIdsAssignment_1() { return cIdsAssignment_1; }
+
+		//FQN
+		public RuleCall getIdsFQNParserRuleCall_1_0() { return cIdsFQNParserRuleCall_1_0; }
+	}
+
+	public class RefListElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RefList");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitFiveKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cObjsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cObjsRefObjParserRuleCall_1_0 = (RuleCall)cObjsAssignment_1.eContents().get(0);
+		private final Keyword cRefsKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cRefsAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference cRefsRefObjCrossReference_3_0 = (CrossReference)cRefsAssignment_3.eContents().get(0);
+		private final RuleCall cRefsRefObjFQNParserRuleCall_3_0_1 = (RuleCall)cRefsRefObjCrossReference_3_0.eContents().get(1);
+		
+		//RefList:
+		//  "#5" objs+=RefObj* "refs" refs+=[RefObj|FQN]*;
+		public ParserRule getRule() { return rule; }
+
+		//"#5" objs+=RefObj* "refs" refs+=[RefObj|FQN]*
+		public Group getGroup() { return cGroup; }
+
+		//"#5"
+		public Keyword getNumberSignDigitFiveKeyword_0() { return cNumberSignDigitFiveKeyword_0; }
+
+		//objs+=RefObj*
+		public Assignment getObjsAssignment_1() { return cObjsAssignment_1; }
+
+		//RefObj
+		public RuleCall getObjsRefObjParserRuleCall_1_0() { return cObjsRefObjParserRuleCall_1_0; }
+
+		//"refs"
+		public Keyword getRefsKeyword_2() { return cRefsKeyword_2; }
+
+		//refs+=[RefObj|FQN]*
+		public Assignment getRefsAssignment_3() { return cRefsAssignment_3; }
+
+		//[RefObj|FQN]
+		public CrossReference getRefsRefObjCrossReference_3_0() { return cRefsRefObjCrossReference_3_0; }
+
+		//FQN
+		public RuleCall getRefsRefObjFQNParserRuleCall_3_0_1() { return cRefsRefObjFQNParserRuleCall_3_0_1; }
+	}
+
+	public class RefObjElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "RefObj");
+		private final Assignment cNameAssignment = (Assignment)rule.eContents().get(1);
+		private final RuleCall cNameFQNParserRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
+		
+		//RefObj:
+		//  name=FQN;
+		public ParserRule getRule() { return rule; }
+
+		//name=FQN
+		public Assignment getNameAssignment() { return cNameAssignment; }
+
+		//FQN
+		public RuleCall getNameFQNParserRuleCall_0() { return cNameFQNParserRuleCall_0; }
+	}
 	
 	
 	public class EnumBugEnumElements extends AbstractEnumRuleElementFinder {
@@ -199,6 +339,11 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	private FQNElements pFQN;
 	private EnumBugElements pEnumBug;
 	private EnumBugEnumElements unknownRuleEnumBugEnum;
+	private CommentableElements pCommentable;
+	private CommentableItemElements pCommentableItem;
+	private ValueListElements pValueList;
+	private RefListElements pRefList;
+	private RefObjElements pRefObj;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -222,7 +367,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 
 	
 	//Model:
-	//  DatatypeBug286557|EnumBug;
+	//  DatatypeBug286557|EnumBug|Commentable|ValueList|RefList;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -269,6 +414,56 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	
 	public EnumRule getEnumBugEnumRule() {
 		return getEnumBugEnumAccess().getRule();
+	}
+
+	//Commentable:
+	//  "#3" item+=CommentableItem*;
+	public CommentableElements getCommentableAccess() {
+		return (pCommentable != null) ? pCommentable : (pCommentable = new CommentableElements());
+	}
+	
+	public ParserRule getCommentableRule() {
+		return getCommentableAccess().getRule();
+	}
+
+	//CommentableItem:
+	//  "item" id=ID;
+	public CommentableItemElements getCommentableItemAccess() {
+		return (pCommentableItem != null) ? pCommentableItem : (pCommentableItem = new CommentableItemElements());
+	}
+	
+	public ParserRule getCommentableItemRule() {
+		return getCommentableItemAccess().getRule();
+	}
+
+	//ValueList:
+	//  "#4" ids+=FQN*;
+	public ValueListElements getValueListAccess() {
+		return (pValueList != null) ? pValueList : (pValueList = new ValueListElements());
+	}
+	
+	public ParserRule getValueListRule() {
+		return getValueListAccess().getRule();
+	}
+
+	//RefList:
+	//  "#5" objs+=RefObj* "refs" refs+=[RefObj|FQN]*;
+	public RefListElements getRefListAccess() {
+		return (pRefList != null) ? pRefList : (pRefList = new RefListElements());
+	}
+	
+	public ParserRule getRefListRule() {
+		return getRefListAccess().getRule();
+	}
+
+	//RefObj:
+	//  name=FQN;
+	public RefObjElements getRefObjAccess() {
+		return (pRefObj != null) ? pRefObj : (pRefObj = new RefObjElements());
+	}
+	
+	public ParserRule getRefObjRule() {
+		return getRefObjAccess().getRule();
 	}
 
 	//terminal ID:

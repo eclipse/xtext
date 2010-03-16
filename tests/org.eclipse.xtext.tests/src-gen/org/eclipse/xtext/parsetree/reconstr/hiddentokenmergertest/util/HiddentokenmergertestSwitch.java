@@ -118,6 +118,44 @@ public class HiddentokenmergertestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case HiddentokenmergertestPackage.COMMENTABLE:
+      {
+        Commentable commentable = (Commentable)theEObject;
+        T result = caseCommentable(commentable);
+        if (result == null) result = caseModel(commentable);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case HiddentokenmergertestPackage.COMMENTABLE_ITEM:
+      {
+        CommentableItem commentableItem = (CommentableItem)theEObject;
+        T result = caseCommentableItem(commentableItem);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case HiddentokenmergertestPackage.VALUE_LIST:
+      {
+        ValueList valueList = (ValueList)theEObject;
+        T result = caseValueList(valueList);
+        if (result == null) result = caseModel(valueList);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case HiddentokenmergertestPackage.REF_LIST:
+      {
+        RefList refList = (RefList)theEObject;
+        T result = caseRefList(refList);
+        if (result == null) result = caseModel(refList);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case HiddentokenmergertestPackage.REF_OBJ:
+      {
+        RefObj refObj = (RefObj)theEObject;
+        T result = caseRefObj(refObj);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -166,6 +204,86 @@ public class HiddentokenmergertestSwitch<T>
    * @generated
    */
   public T caseEnumBug(EnumBug object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Commentable</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Commentable</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCommentable(Commentable object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Commentable Item</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Commentable Item</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseCommentableItem(CommentableItem object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Value List</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Value List</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseValueList(ValueList object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Ref List</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Ref List</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRefList(RefList object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Ref Obj</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Ref Obj</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseRefObj(RefObj object)
   {
     return null;
   }

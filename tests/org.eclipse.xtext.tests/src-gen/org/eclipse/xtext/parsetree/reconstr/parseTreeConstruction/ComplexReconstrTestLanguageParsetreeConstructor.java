@@ -672,15 +672,7 @@ protected class Atom_NameAssignment extends AssignmentToken  {
 /************ begin Rule Parens ****************
  *
  * Parens returns Expression:
- *   "(" Op ")" em="!"?; 
- * 
- *      
- * 	      
- * 
- * / * TODO not working yet
- * StrangeStuff :
- * 	'->' (foo=ID)? ({OtherStuff.strangeStuff=current} ',' bla=ID)? ({OtherStuff2.stuff=current} ',' bla2=ID)?;
- * * /
+ *   "(" Op ")" em="!"?;
  *
  **/
 
@@ -831,13 +823,13 @@ protected class Parens_EmAssignment_3 extends AssignmentToken  {
 
 /************ begin Rule TrickyA ****************
  *
- * TrickyA returns TypeA1:
- *   "TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=STRING; 
- * 
  * / * TODO not working yet
  * StrangeStuff :
  * 	'->' (foo=ID)? ({OtherStuff.strangeStuff=current} ',' bla=ID)? ({OtherStuff2.stuff=current} ',' bla2=ID)?;
  * * /
+ * 
+ * TrickyA returns TypeA1:
+ *   "TA" TrickyA1 name+=ID* ({TypeB.x=current} "x"|{TypeC.x=current} "y")? name+=STRING;
  *
  **/
 
@@ -1744,11 +1736,7 @@ protected class TrickyC_ZKeyword_4_1 extends KeywordToken  {
 /************ begin Rule TrickyD ****************
  *
  * TrickyD:
- *   "TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*; 
- * 
- *                                         
- * 
- * // 34 "abc" XX 123 "de" YY x 34 DD 45 CC
+ *   "TD" (name+=INT foo=STRING type+=ID)? (name+=INT type+=ID)? type+=ID*;
  *
  **/
 
@@ -2063,13 +2051,11 @@ protected class TrickyD_TypeAssignment_3 extends AssignmentToken  {
 
 /************ begin Rule TrickyE ****************
  *
- * TrickyE:
- *   "TE" (name+=INT foo+=STRING type+=ID)* "x" (name+=INT type+=ID)*;   
- * 
  * // 34 "abc" XX 123 "de" YY x 34 DD 45 CC
- *               
  * 
- * //
+ * 
+ * TrickyE:
+ *   "TE" (name+=INT foo+=STRING type+=ID)* "x" (name+=INT type+=ID)*;
  *
  **/
 
@@ -2369,10 +2355,11 @@ protected class TrickyE_TypeAssignment_3_1 extends AssignmentToken  {
 
 /************ begin Rule TrickyF ****************
  *
- * TrickyF:
- *   "TF" (name+=ID type+=INT)* (name+=ID|type+=INT); 
+ * // 
  * 
- * //
+ * 
+ * TrickyF:
+ *   "TF" (name+=ID type+=INT)* (name+=ID|type+=INT);
  *
  **/
 
@@ -2966,31 +2953,11 @@ protected class TrickyG1_RightSquareBracketKeyword_2 extends KeywordToken  {
 /************ begin Rule TrickyG2 ****************
  *
  * TrickyG2:
- *   TrickyG1|val=INT; 
- *       
- * 
- * //TrickyH: x+='a' TrickyH?; 
- * 
- * 
- * // TrickyG: TrickyG1 | TrickyG2;
- * // TrickyG1: name=TrickyG3;
- * // TrickyG2: name=TrickyG4;
- * // TrickyG3: val=ID {T.x=current} 'x';
- * // TrickyG4: val=INT {T.x=current} 'y';
+ *   TrickyG1|val=INT;
  *
  **/
 
-// TrickyG1|val=INT 
-//       
-// 
-// //TrickyH: x+='a' TrickyH?; 
-// 
-// 
-// // TrickyG: TrickyG1 | TrickyG2;
-// // TrickyG1: name=TrickyG3;
-// // TrickyG2: name=TrickyG4;
-// // TrickyG3: val=ID {T.x=current} 'x';
-// // TrickyG4: val=INT {T.x=current} 'y';
+// TrickyG1|val=INT
 protected class TrickyG2_Alternatives extends AlternativesToken {
 
 	public TrickyG2_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {

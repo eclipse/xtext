@@ -22,6 +22,7 @@ import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Hiddentokenmer
  * <p>
  * The following features are implemented:
  * <ul>
+ *   <li>{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.DatatypeBug286557Impl#getName <em>Name</em>}</li>
  *   <li>{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.DatatypeBug286557Impl#getRef <em>Ref</em>}</li>
  * </ul>
  * </p>
@@ -30,6 +31,26 @@ import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Hiddentokenmer
  */
 public class DatatypeBug286557Impl extends ModelImpl implements DatatypeBug286557
 {
+  /**
+   * The default value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected static final String NAME_EDEFAULT = null;
+
+  /**
+   * The cached value of the '{@link #getName() <em>Name</em>}' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see #getName()
+   * @generated
+   * @ordered
+   */
+  protected String name = NAME_EDEFAULT;
+
   /**
    * The cached value of the '{@link #getRef() <em>Ref</em>}' reference.
    * <!-- begin-user-doc -->
@@ -59,6 +80,29 @@ public class DatatypeBug286557Impl extends ModelImpl implements DatatypeBug28655
   protected EClass eStaticClass()
   {
     return HiddentokenmergertestPackage.Literals.DATATYPE_BUG286557;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public String getName()
+  {
+    return name;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public void setName(String newName)
+  {
+    String oldName = name;
+    name = newName;
+    if (eNotificationRequired())
+      eNotify(new ENotificationImpl(this, Notification.SET, HiddentokenmergertestPackage.DATATYPE_BUG286557__NAME, oldName, name));
   }
 
   /**
@@ -114,6 +158,8 @@ public class DatatypeBug286557Impl extends ModelImpl implements DatatypeBug28655
   {
     switch (featureID)
     {
+      case HiddentokenmergertestPackage.DATATYPE_BUG286557__NAME:
+        return getName();
       case HiddentokenmergertestPackage.DATATYPE_BUG286557__REF:
         if (resolve) return getRef();
         return basicGetRef();
@@ -131,6 +177,9 @@ public class DatatypeBug286557Impl extends ModelImpl implements DatatypeBug28655
   {
     switch (featureID)
     {
+      case HiddentokenmergertestPackage.DATATYPE_BUG286557__NAME:
+        setName((String)newValue);
+        return;
       case HiddentokenmergertestPackage.DATATYPE_BUG286557__REF:
         setRef((DatatypeBug286557)newValue);
         return;
@@ -148,6 +197,9 @@ public class DatatypeBug286557Impl extends ModelImpl implements DatatypeBug28655
   {
     switch (featureID)
     {
+      case HiddentokenmergertestPackage.DATATYPE_BUG286557__NAME:
+        setName(NAME_EDEFAULT);
+        return;
       case HiddentokenmergertestPackage.DATATYPE_BUG286557__REF:
         setRef((DatatypeBug286557)null);
         return;
@@ -165,10 +217,29 @@ public class DatatypeBug286557Impl extends ModelImpl implements DatatypeBug28655
   {
     switch (featureID)
     {
+      case HiddentokenmergertestPackage.DATATYPE_BUG286557__NAME:
+        return NAME_EDEFAULT == null ? name != null : !NAME_EDEFAULT.equals(name);
       case HiddentokenmergertestPackage.DATATYPE_BUG286557__REF:
         return ref != null;
     }
     return super.eIsSet(featureID);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  @Override
+  public String toString()
+  {
+    if (eIsProxy()) return super.toString();
+
+    StringBuffer result = new StringBuffer(super.toString());
+    result.append(" (name: ");
+    result.append(name);
+    result.append(')');
+    return result.toString();
   }
 
 } //DatatypeBug286557Impl

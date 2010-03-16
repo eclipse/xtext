@@ -21,15 +21,27 @@ public final class HiddenTokensMergerTestLanguageModelConsumer extends NonTermin
 
 	private ModelElements rule;	
 
+	private INonTerminalConsumer commentableConsumer;
+
 	private INonTerminalConsumer datatypeBug286557Consumer;
 
 	private INonTerminalConsumer enumBugConsumer;
+
+	private INonTerminalConsumer refListConsumer;
+
+	private INonTerminalConsumer valueListConsumer;
 
 	private IElementConsumer alternatives$1$Consumer;
 
 	private IElementConsumer ruleCall$2$Consumer;
 
 	private IElementConsumer ruleCall$3$Consumer;
+
+	private IElementConsumer ruleCall$4$Consumer;
+
+	private IElementConsumer ruleCall$5$Consumer;
+
+	private IElementConsumer ruleCall$6$Consumer;
 
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
@@ -41,6 +53,9 @@ public final class HiddenTokensMergerTestLanguageModelConsumer extends NonTermin
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
 			acceptor.accept(ruleCall$2$Consumer);
 			acceptor.accept(ruleCall$3$Consumer);
+			acceptor.accept(ruleCall$4$Consumer);
+			acceptor.accept(ruleCall$5$Consumer);
+			acceptor.accept(ruleCall$6$Consumer);
 		}
 	}
 
@@ -68,6 +83,42 @@ public final class HiddenTokensMergerTestLanguageModelConsumer extends NonTermin
 		}
 	}
 
+	protected class RuleCall$4$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$4$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(commentableConsumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class RuleCall$5$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$5$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(valueListConsumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
+	protected class RuleCall$6$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$6$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(refListConsumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
 	public HiddenTokensMergerTestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
@@ -87,6 +138,9 @@ public final class HiddenTokensMergerTestLanguageModelConsumer extends NonTermin
 		alternatives$1$Consumer = new Alternatives$1$Consumer(rule.getAlternatives());
 		ruleCall$2$Consumer = new RuleCall$2$Consumer(rule.getDatatypeBug286557ParserRuleCall_0());
 		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getEnumBugParserRuleCall_1());
+		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getCommentableParserRuleCall_2());
+		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getValueListParserRuleCall_3());
+		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getRefListParserRuleCall_4());
 	}
 	
 	@Override
@@ -99,12 +153,24 @@ public final class HiddenTokensMergerTestLanguageModelConsumer extends NonTermin
 		return getGrammarElement().getType().getClassifier();
 	}
 	
+	public void setCommentableConsumer(INonTerminalConsumer commentableConsumer) {
+		this.commentableConsumer = commentableConsumer;
+	}
+	
 	public void setDatatypeBug286557Consumer(INonTerminalConsumer datatypeBug286557Consumer) {
 		this.datatypeBug286557Consumer = datatypeBug286557Consumer;
 	}
 	
 	public void setEnumBugConsumer(INonTerminalConsumer enumBugConsumer) {
 		this.enumBugConsumer = enumBugConsumer;
+	}
+	
+	public void setRefListConsumer(INonTerminalConsumer refListConsumer) {
+		this.refListConsumer = refListConsumer;
+	}
+	
+	public void setValueListConsumer(INonTerminalConsumer valueListConsumer) {
+		this.valueListConsumer = valueListConsumer;
 	}
 	
 }

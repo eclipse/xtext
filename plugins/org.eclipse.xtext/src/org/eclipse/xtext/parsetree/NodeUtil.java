@@ -37,6 +37,11 @@ public class NodeUtil {
 			return null;
 		return (NodeAdapter) EcoreUtil.getAdapter(obj.eAdapters(), AbstractNode.class);
 	}
+	
+	public static CompositeNode getNode(EObject obj) {
+		NodeAdapter nodeAdapter = getNodeAdapter(obj);
+		return nodeAdapter == null ? null : nodeAdapter.getParserNode();
+	}
 
 	protected static boolean removeNodeAdapter(EObject obj) {
 		NodeAdapter adapter = getNodeAdapter(obj);
@@ -93,6 +98,16 @@ public class NodeUtil {
 			}
 			return null;
 		}
+		return null;
+	}
+	
+	public static EObject findASTElement(AbstractNode leaf) {
+		AbstractNode n = leaf;
+		while (n != null)
+			if (n.getElement() != null)
+				return n.getElement();
+			else
+				n = n.getParent();
 		return null;
 	}
 

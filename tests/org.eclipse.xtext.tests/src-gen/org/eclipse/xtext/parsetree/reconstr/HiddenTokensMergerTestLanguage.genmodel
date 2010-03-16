@@ -15,14 +15,30 @@
       <genEnumLiterals ecoreEnumLiteral="HiddenTokensMergerTestLanguage.ecore#//EnumBugEnum/resultSet"/>
       <genEnumLiterals ecoreEnumLiteral="HiddenTokensMergerTestLanguage.ecore#//EnumBugEnum/iterator"/>
     </genEnums>
-    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//Model">
-      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTokensMergerTestLanguage.ecore#//Model/name"/>
-    </genClasses>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//Model"/>
     <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//DatatypeBug286557">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTokensMergerTestLanguage.ecore#//DatatypeBug286557/name"/>
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference HiddenTokensMergerTestLanguage.ecore#//DatatypeBug286557/ref"/>
     </genClasses>
     <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//EnumBug">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTokensMergerTestLanguage.ecore#//EnumBug/return"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTokensMergerTestLanguage.ecore#//EnumBug/name"/>
+    </genClasses>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//Commentable">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference HiddenTokensMergerTestLanguage.ecore#//Commentable/item"/>
+    </genClasses>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//CommentableItem">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTokensMergerTestLanguage.ecore#//CommentableItem/id"/>
+    </genClasses>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//ValueList">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTokensMergerTestLanguage.ecore#//ValueList/ids"/>
+    </genClasses>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//RefList">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference HiddenTokensMergerTestLanguage.ecore#//RefList/objs"/>
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference HiddenTokensMergerTestLanguage.ecore#//RefList/refs"/>
+    </genClasses>
+    <genClasses ecoreClass="HiddenTokensMergerTestLanguage.ecore#//RefObj">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute HiddenTokensMergerTestLanguage.ecore#//RefObj/name"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

@@ -9,15 +9,20 @@ package org.eclipse.xtext.parsetree.reconstr.impl;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.CrossReference;
-import org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer;
+import org.eclipse.xtext.parsetree.AbstractNode;
+import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public class AbstractCrossReferenceSerializer implements ICrossReferenceSerializer {
+public class AbstractCrossReferenceSerializer implements ITokenSerializer.ICrossReferenceSerializer {
 
-	public String serializeCrossRef(EObject context, CrossReference grammarElement, EObject target) {
+	public String serializeCrossRef(EObject context, CrossReference grammarElement, EObject target, AbstractNode node) {
 		return null;
+	}
+
+	public boolean equalsOrReplacesNode(EObject context, CrossReference crossref, EObject target, AbstractNode node) {
+		return false;
 	}
 
 }

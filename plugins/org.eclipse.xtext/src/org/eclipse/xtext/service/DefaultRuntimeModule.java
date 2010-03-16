@@ -28,15 +28,11 @@ import org.eclipse.xtext.parser.antlr.ITokenDefProvider;
 import org.eclipse.xtext.parser.antlr.NullTokenDefProvider;
 import org.eclipse.xtext.parser.impl.PartialParsingHelper;
 import org.eclipse.xtext.parser.packrat.ParseResultFactory;
-import org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer;
 import org.eclipse.xtext.parsetree.reconstr.IHiddenTokenMerger;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
-import org.eclipse.xtext.parsetree.reconstr.IUnassignedTextSerializer;
 import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
-import org.eclipse.xtext.parsetree.reconstr.impl.DefaultCrossReferenceSerializer;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultHiddenTokenMerger;
 import org.eclipse.xtext.parsetree.reconstr.impl.DefaultTransientValueService;
-import org.eclipse.xtext.parsetree.reconstr.impl.DefaultUnassignedTextSerializer;
 import org.eclipse.xtext.resource.DefaultFragmentProvider;
 import org.eclipse.xtext.resource.DefaultLocationInFileProvider;
 import org.eclipse.xtext.resource.IContainer;
@@ -102,24 +98,12 @@ public abstract class DefaultRuntimeModule extends AbstractGenericModule {
 		return DefaultLocationInFileProvider.class;
 	}
 	
-	public Class<? extends IUnassignedTextSerializer> bindIUnassignedTextSerializer() {
-		return DefaultUnassignedTextSerializer.class;
-	}
-
-	public Class<? extends ICrossReferenceSerializer> bindICrossReferenceSerializer() {
-		return DefaultCrossReferenceSerializer.class;
-	}
-
 	public Class<? extends IFormatter> bindIFormatter() {
 		return OneWhitespaceFormatter.class;
 	}
 	
 	public Class<? extends INodeModelFormatter> bindINodeModelFormatter() {
 		return DefaultNodeModelFormatter.class;
-	}
-
-	public Class<? extends IHiddenTokenMerger> bindIHiddenTokenMerger() {
-		return DefaultHiddenTokenMerger.class;
 	}
 
 	public Class<? extends SerializerUtil> bindSerializerUtil() {

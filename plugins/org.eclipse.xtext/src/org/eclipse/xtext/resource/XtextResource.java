@@ -53,7 +53,14 @@ public class XtextResource extends ResourceImpl {
 
 	public static String OPTION_RESOLVE_ALL = XtextResource.class.getName() + ".RESOLVE_ALL";
 
+	@Deprecated
+	// use OPTION_SERIALIZER_OPTIONS
 	public static String OPTION_FORMAT = XtextResource.class.getName() + ".FORMAT";
+
+	/**
+	 * Configure an instance of {@link org.eclipse.xtext.parsetree.reconstr.SerializerUtil.SerializationOptions}
+	 */
+	public static String OPTION_SERIALIZATION_OPTIONS = XtextResource.class.getName() + ".SERIALIZATION_OPTIONS";
 
 	private boolean validationDisabled;
 
@@ -221,10 +228,13 @@ public class XtextResource extends ResourceImpl {
 	public void doSave(OutputStream outputStream, Map<?, ?> options) throws IOException {
 		if (contents.size() != 1)
 			throw new IllegalStateException("The Xtext resource must contain exactly one root element");
-		CompositeNode node = parseResult != null ? parseResult.getRootNode() : null;
-		SerializerUtil.SerializationOptions serialzeOptions = new SerializationOptions();
+		SerializationOptions serialzeOptions;
+		if (options != null && options.containsKey(OPTION_SERIALIZATION_OPTIONS))
+			serialzeOptions = (SerializationOptions) options.get(OPTION_SERIALIZATION_OPTIONS);
+		else
+			serialzeOptions = new SerializationOptions();
 		serialzeOptions.setFormat(options != null && Boolean.TRUE.equals(options.get(OPTION_FORMAT)));
-		serializer.serialize(contents.get(0), outputStream, node, serialzeOptions);
+		serializer.serialize(contents.get(0), outputStream, serialzeOptions);
 	}
 
 	/**

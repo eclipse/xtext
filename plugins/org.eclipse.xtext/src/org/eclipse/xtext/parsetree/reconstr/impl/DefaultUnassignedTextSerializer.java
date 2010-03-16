@@ -5,8 +5,9 @@ import org.eclipse.xtext.AbstractRule;
 import org.eclipse.xtext.GrammarUtil;
 import org.eclipse.xtext.RuleCall;
 
-public class DefaultUnassignedTextSerializer extends
-		AbstractUnassignedTextSerializer {
+@Deprecated
+//this has been replaced by org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IValueSerializer.serializeUnassignedValue(EObject, RuleCall, AbstractNode)
+public class DefaultUnassignedTextSerializer extends AbstractUnassignedTextSerializer {
 
 	protected String serializeByRuleCall(RuleCall ruleCall, EObject current) {
 		// Sorry, but there is no generic default implementation for this yet.

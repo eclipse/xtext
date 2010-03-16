@@ -47,11 +47,11 @@ public final class HiddenTokensMergerTestLanguageDatatypeBug286557Consumer exten
 
 	private IElementConsumer keyword$11$Consumer;
 
+	private ICharacterClass keyword$2$Delimiter;
+
 	private ICharacterClass keyword$6$Delimiter;
 
 	private ICharacterClass keyword$11$Delimiter;
-
-	private ICharacterClass keyword$2$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -179,9 +179,9 @@ public final class HiddenTokensMergerTestLanguageDatatypeBug286557Consumer exten
 
 	public HiddenTokensMergerTestLanguageDatatypeBug286557Consumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
+		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$11$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
@@ -221,6 +221,14 @@ public final class HiddenTokensMergerTestLanguageDatatypeBug286557Consumer exten
 		this.fqnConsumer = fqnConsumer;
 	}
 	
+	public ICharacterClass getKeyword$2$Delimiter() {
+		return keyword$2$Delimiter;
+	}
+	
+	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
+		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
 	public ICharacterClass getKeyword$6$Delimiter() {
 		return keyword$6$Delimiter;
 	}
@@ -235,14 +243,6 @@ public final class HiddenTokensMergerTestLanguageDatatypeBug286557Consumer exten
 	
 	public void setKeyword$11$Delimiter(ICharacterClass characterClass) {
 		keyword$11$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$2$Delimiter() {
-		return keyword$2$Delimiter;
-	}
-	
-	public void setKeyword$2$Delimiter(ICharacterClass characterClass) {
-		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }
