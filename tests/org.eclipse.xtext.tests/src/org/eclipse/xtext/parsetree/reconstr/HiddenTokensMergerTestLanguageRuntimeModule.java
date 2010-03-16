@@ -3,9 +3,39 @@
  */
 package org.eclipse.xtext.parsetree.reconstr;
 
+import org.eclipse.xtext.common.services.DefaultTerminalConverters;
+import org.eclipse.xtext.conversion.IValueConverter;
+import org.eclipse.xtext.conversion.IValueConverterService;
+import org.eclipse.xtext.conversion.ValueConverter;
+import org.eclipse.xtext.conversion.impl.AbstractNullSafeConverter;
+import org.eclipse.xtext.parsetree.AbstractNode;
+
 /**
  * Use this class to register components to be used within the IDE.
  */
-public class HiddenTokensMergerTestLanguageRuntimeModule extends org.eclipse.xtext.parsetree.reconstr.AbstractHiddenTokensMergerTestLanguageRuntimeModule {
+public class HiddenTokensMergerTestLanguageRuntimeModule extends
+		org.eclipse.xtext.parsetree.reconstr.AbstractHiddenTokensMergerTestLanguageRuntimeModule {
 
+	public static class ValueConverterWithFQN extends DefaultTerminalConverters {
+		@ValueConverter(rule = "FQN")
+		public IValueConverter<String> FQN() {
+			return new AbstractNullSafeConverter<String>() {
+
+				@Override
+				protected String internalToValue(String string, AbstractNode node) {
+					return string.replaceAll("\\s*", "");
+				}
+
+				@Override
+				protected String internalToString(String value) {
+					return value;
+				}
+			};
+		}
+	}
+
+	@Override
+	public Class<? extends IValueConverterService> bindIValueConverterService() {
+		return ValueConverterWithFQN.class;
+	}
 }

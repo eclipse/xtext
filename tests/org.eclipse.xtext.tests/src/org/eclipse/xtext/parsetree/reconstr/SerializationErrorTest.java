@@ -35,7 +35,7 @@ public class SerializationErrorTest extends AbstractGeneratorTest {
 			SerializationOptions opt = new SerializationOptions();
 			opt.setFormat(true);
 			opt.setValidateConcreteSyntax(false);
-			r = getSerializer().serialize(obj, b, null, opt);
+			r = getSerializer().serialize(obj, b, opt);
 		} catch (XtextSerializationException e) {
 			r = e.getReport();
 		}
