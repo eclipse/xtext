@@ -3,7 +3,7 @@
  */
 package org.eclipse.xtext.parsetree.unassignedtext;
 
-import org.eclipse.xtext.parsetree.reconstr.IUnassignedTextSerializer;
+import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IValueSerializer;
 
 /**
  * Use this class to register components to be used within the IDE.
@@ -11,8 +11,7 @@ import org.eclipse.xtext.parsetree.reconstr.IUnassignedTextSerializer;
 public class UnassignedTextTestLanguageRuntimeModule extends
 		AbstractUnassignedTextTestLanguageRuntimeModule {
 
-	@Override
-	public Class<? extends IUnassignedTextSerializer> bindIUnassignedTextSerializer() {
+	public Class<? extends IValueSerializer> bindIValueSerializer() {
 		return UnassignedTextTestSerializer.class;
 	}
 }

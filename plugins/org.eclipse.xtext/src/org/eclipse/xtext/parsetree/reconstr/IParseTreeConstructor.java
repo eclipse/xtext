@@ -19,10 +19,10 @@ import org.eclipse.emf.ecore.EObject;
  * @author Moritz Eysholt
  */
 public interface IParseTreeConstructor {
-
-	public TreeConstructionReport serialize(EObject object, ITokenStream out)
+	
+	public TreeConstructionReport serializeRecursive(EObject object, ITokenStream out)
 			throws IOException;
-
+	
 	public interface TreeConstructionReport {
 		public boolean isSuccess();
 		public TreeConstructionDiagnostic getDiagnostic();

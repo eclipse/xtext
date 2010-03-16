@@ -7,9 +7,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr;
 
-import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.CrossReference;
-
 /**
  * In the process of serializing a model to a DSL, references to model elements need to be turned into string
  * representations which identify the targeted model element. Implementations of this interface compute this string
@@ -21,7 +18,9 @@ import org.eclipse.xtext.CrossReference;
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
-public interface ICrossReferenceSerializer {
+@Deprecated
+// this has been replaced by org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSerializer
+public interface ICrossReferenceSerializer extends ITokenSerializer.ICrossReferenceSerializer {
 
 	/**
 	 * Calculates a String which is a valid reference to the 'target' object within the DSL.
@@ -34,5 +33,5 @@ public interface ICrossReferenceSerializer {
 	 *            the referenced object
 	 * @return A string representing a reference the target object.
 	 */
-	public String serializeCrossRef(EObject context, CrossReference grammarElement, EObject target);
+	//public String serializeCrossRef(EObject context, CrossReference grammarElement, EObject target);
 }

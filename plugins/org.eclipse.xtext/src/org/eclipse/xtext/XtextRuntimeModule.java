@@ -14,8 +14,8 @@ import org.eclipse.xtext.linking.ILinker;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.naming.IQualifiedNameSupport;
 import org.eclipse.xtext.parser.antlr.IReferableElementsUnloader;
-import org.eclipse.xtext.parsetree.reconstr.ICrossReferenceSerializer;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
+import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.ICrossReferenceSerializer;
 import org.eclipse.xtext.resource.IFragmentProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
 import org.eclipse.xtext.xtext.XtextCrossReferenceSerializer;
@@ -28,8 +28,8 @@ import org.eclipse.xtext.xtext.XtextScopeProvider;
 import org.eclipse.xtext.xtext.XtextTransientValueService;
 import org.eclipse.xtext.xtext.XtextValidator;
 import org.eclipse.xtext.xtext.XtextValueConverters;
-import org.eclipse.xtext.xtext.ecoreInference.XtendXtext2EcorePostProcessor;
 import org.eclipse.xtext.xtext.ecoreInference.IXtext2EcorePostProcessor;
+import org.eclipse.xtext.xtext.ecoreInference.XtendXtext2EcorePostProcessor;
 
 import com.google.inject.Binder;
 
@@ -54,7 +54,6 @@ public class XtextRuntimeModule extends AbstractXtextRuntimeModule {
 		return XtextScopeProvider.class;
 	}
 
-	@Override
 	public Class<? extends ICrossReferenceSerializer> bindICrossReferenceSerializer() {
 		return XtextCrossReferenceSerializer.class;
 	}

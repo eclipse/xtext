@@ -33,6 +33,8 @@ import com.google.inject.Inject;
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Deprecated
+//merging of hidden tokens is now done by the org.eclipse.xtext.parsetree.reconstr.IParseTreeConstructor
 public class DefaultHiddenTokenMerger extends AbstractHiddenTokenMerger {
 
 	protected class BackwardNodeIterator implements Iterator<AbstractNode> {
@@ -57,8 +59,7 @@ public class DefaultHiddenTokenMerger extends AbstractHiddenTokenMerger {
 					return hasNext();
 				}
 				return false;
-			}
-			else if (!includeNode(parent.getChildren().get(index))) {
+			} else if (!includeNode(parent.getChildren().get(index))) {
 				parent = (CompositeNode) parent.getChildren().get(index);
 				index = parent.getChildren().size();
 				return hasNext();
@@ -97,8 +98,7 @@ public class DefaultHiddenTokenMerger extends AbstractHiddenTokenMerger {
 					return hasNext();
 				}
 				return false;
-			}
-			else if (!includeNode(parent.getChildren().get(index))) {
+			} else if (!includeNode(parent.getChildren().get(index))) {
 				parent = (CompositeNode) parent.getChildren().get(index);
 				index = -1;
 				return hasNext();
@@ -123,11 +123,11 @@ public class DefaultHiddenTokenMerger extends AbstractHiddenTokenMerger {
 		public HiddenTokenMergerStream(ITokenStream out, CompositeNode rootnode) {
 			super(out);
 			this.allLeafs = getAllLeafs(rootnode);
-//			for (AbstractNode n : allLeafs)
-//				if (n instanceof LeafNode)
-//					System.out.println("Leaf: '" + ((LeafNode) n).getText() + "'");
-//				else
-//					System.out.println("Comp: " + n.getGrammarElement().eClass().getName());
+			//			for (AbstractNode n : allLeafs)
+			//				if (n instanceof LeafNode)
+			//					System.out.println("Leaf: '" + ((LeafNode) n).getText() + "'");
+			//				else
+			//					System.out.println("Comp: " + n.getGrammarElement().eClass().getName());
 			this.lastLeaf = -1;
 		}
 
@@ -178,8 +178,7 @@ public class DefaultHiddenTokenMerger extends AbstractHiddenTokenMerger {
 						it.prune();
 					}
 				}
-			}
-			else {
+			} else {
 				BackwardNodeIterator bi = new BackwardNodeIterator(root);
 				while (bi.hasNext() && bi.next() instanceof LeafNode && ((LeafNode) bi.next()).isHidden())
 					r.add(bi.next());
@@ -224,7 +223,7 @@ public class DefaultHiddenTokenMerger extends AbstractHiddenTokenMerger {
 		@Override
 		public void writeSemantic(EObject grammarElement, String value) throws IOException {
 			beforeElement(grammarElement, value);
-//			System.out.println("Semantic" + grammarElement.eClass().getName() + " -> " + value);
+			//			System.out.println("Semantic" + grammarElement.eClass().getName() + " -> " + value);
 			out.writeSemantic(grammarElement, value);
 		}
 	}
@@ -241,7 +240,7 @@ public class DefaultHiddenTokenMerger extends AbstractHiddenTokenMerger {
 				RuleCall rc = (RuleCall) ((CompositeNode) node).getGrammarElement();
 				if (rc.getRule() instanceof ParserRule)
 					return GrammarUtil.isDatatypeRule((ParserRule) rc.getRule());
-				if(rc.getRule() instanceof EnumRule)
+				if (rc.getRule() instanceof EnumRule)
 					return true;
 			}
 			if (e instanceof CrossReference)

@@ -32,6 +32,8 @@ import org.eclipse.xtext.RuleCall;
  * 
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Deprecated
+// this has been replaced by org.eclipse.xtext.parsetree.reconstr.ITokenSerializer.IValueSerializer.serializeUnassignedValue(EObject, RuleCall, AbstractNode)
 public interface IUnassignedTextSerializer {
 
 	/**

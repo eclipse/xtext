@@ -17,7 +17,7 @@ import org.eclipse.xtext.conversion.IValueConverterService;
 import org.eclipse.xtext.linking.ILinkingService;
 import org.eclipse.xtext.linking.impl.LinkingHelper;
 import org.eclipse.xtext.parsetree.AbstractNode;
-import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.parsetree.reconstr.ITokenSerializer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.IScopeProvider;
@@ -42,26 +42,23 @@ public class DefaultCrossReferenceSerializer extends AbstractCrossReferenceSeria
 	@Inject
 	private IValueConverterService valueConverter;
 
+	@Override
+	public boolean equalsOrReplacesNode(EObject context, CrossReference crossref, EObject target, AbstractNode node) {
+		if (crossref != node.getGrammarElement())
+			return false;
+		EReference ref = GrammarUtil.getReference(crossref);
+		if (!ref.isMany())
+			return true;
+		List<EObject> objects = linkingService.getLinkedObjects(context, ref, node);
+		return objects.contains(target);
+	}
+
 	protected String getConvertedValue(String unconverted, CrossReference grammarElement) {
 		String ruleName = linkingHelper.getRuleNameFrom(grammarElement);
 		if (ruleName == null)
 			throw new IllegalStateException("Cound not determine targeted rule name for "
 					+ EmfFormatter.objPath(grammarElement));
 		return valueConverter.toString(unconverted, ruleName);
-	}
-
-	protected AbstractNode getCrossReferenceNode(EObject object, EReference reference, EObject context) {
-		List<AbstractNode> nodes = NodeUtil.findNodesForFeature(context, reference);
-		if (!nodes.isEmpty()) {
-			if (reference.isMany()) {
-				int index = ((List<?>) context.eGet(reference, false)).indexOf(object);
-				if (index >= 0 && index < nodes.size())
-					return nodes.get(index);
-			} else {
-				return nodes.get(0);
-			}
-		}
-		return null;
 	}
 
 	protected String getUnconvertedLinkText(EObject object, EReference reference, EObject context) {
@@ -75,26 +72,18 @@ public class DefaultCrossReferenceSerializer extends AbstractCrossReferenceSeria
 	}
 
 	@Override
-	public String serializeCrossRef(EObject context, CrossReference grammarElement, EObject target) {
+	public String serializeCrossRef(EObject context, CrossReference grammarElement, EObject target, AbstractNode node) {
 		final EReference ref = GrammarUtil.getReference(grammarElement, context.eClass());
 		String text = null;
-		AbstractNode node = getCrossReferenceNode(target, ref, context);
-		if (node != null)
-			text = getLinkTextFromNodeModel(context, ref, target, node);
-		if (text != null)
-			return text;
+		if (node != null) {
+			List<EObject> objects = linkingService.getLinkedObjects(context, ref, node);
+			if (objects.contains(target))
+				return ITokenSerializer.KEEP_VALUE_FROM_NODE_MODEL;
+		}
 		text = getUnconvertedLinkText(target, ref, context);
 		if (text != null)
 			return getConvertedValue(text, grammarElement);
 		if (node != null) {
-			return linkingHelper.getCrossRefNodeAsString(node, false);
-		}
-		return null;
-	}
-
-	protected String getLinkTextFromNodeModel(EObject context, final EReference ref, EObject target, AbstractNode node) {
-		List<EObject> objects = linkingService.getLinkedObjects(context, ref, node);
-		if (objects.contains(target)) {
 			return linkingHelper.getCrossRefNodeAsString(node, false);
 		}
 		return null;
