@@ -8,8 +8,6 @@ import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.CommentableIte
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.HiddentokenmergertestFactory;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.RefList;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.ValueList;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.util.EmfFormatter;
 
 public class HiddenTokensMergerTest extends AbstractXtextTests {
 
@@ -24,7 +22,7 @@ public class HiddenTokensMergerTest extends AbstractXtextTests {
 		//System.out.println(EmfFormatter.objToStr(((XtextResource) o.eResource()).getParseResult().getRootNode()));
 		SerializerUtil.SerializationOptions opt = new SerializerUtil.SerializationOptions();
 		opt.setFormat(false);
-		System.out.println(EmfFormatter.objToStr(((XtextResource) o.eResource()).getParseResult().getRootNode()));
+//		System.out.println(EmfFormatter.objToStr(((XtextResource) o.eResource()).getParseResult().getRootNode()));
 		String r = getSerializer().serialize(o, opt);
 		assertEquals(model, r);
 	}
