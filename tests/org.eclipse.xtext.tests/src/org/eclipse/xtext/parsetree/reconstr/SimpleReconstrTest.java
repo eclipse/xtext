@@ -8,17 +8,12 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree.reconstr;
 
-import org.apache.log4j.Logger;
 import org.eclipse.emf.ecore.EObject;
-import org.eclipse.xtext.parsetree.NodeUtil;
 import org.eclipse.xtext.parsetree.reconstr.simplerewritetest.EmptyObjectBug284850;
 import org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.util.EmfFormatter;
 
 public class SimpleReconstrTest extends AbstractGeneratorTest {
-
-	private static final Logger logger = Logger.getLogger(SimpleReconstrTest.class);
 
 	public void testSimple1() throws Exception {
 		String model = "a b";
@@ -48,8 +43,8 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 	private String parseAndSerialize(String model) throws Exception {
 		EObject result = getModel(model);
 //		if (logger.isTraceEnabled()) {
-			System.out.println(EmfFormatter.objToStr(result));
-			System.out.println(EmfFormatter.objToStr(NodeUtil.getRootNode(result)));
+//			System.out.println(EmfFormatter.objToStr(result));
+//			System.out.println(EmfFormatter.objToStr(NodeUtil.getRootNode(result)));
 //			logger.trace(EmfFormatter.objToStr(NodeUtil.getRootNode(result).getLeafNodes()));
 //		}
 		SerializerUtil.SerializationOptions opt = new SerializerUtil.SerializationOptions();
@@ -257,7 +252,7 @@ public class SimpleReconstrTest extends AbstractGeneratorTest {
 		String model = "#14 item test";
 		EmptyObjectBug284850 result = (EmptyObjectBug284850) getModel(model);
 		result.getItems().getList().clear();
-		System.out.println(EmfFormatter.objToStr(result));
+//		System.out.println(EmfFormatter.objToStr(result));
 		SerializerUtil.SerializationOptions opt = new SerializerUtil.SerializationOptions();
 		opt.setFormat(false);
 		String actual = getSerializer().serialize(result, opt);
