@@ -1534,6 +1534,17 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 		assertEquals("parameterizedConstructor", s);
 	}
 	
+	public void testAnnotatedConstructor_04() throws Exception {
+		String typeName = TestAnnotation.Annotated.class.getName();
+		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
+		JvmConstructor constructor = getConstructorFromType(type, TestAnnotation.Annotated.class, "Annotated(java.lang.String,java.lang.String)");
+		assertNotNull(constructor);
+		JvmStringAnnotationValue value = (JvmStringAnnotationValue) getAnnotationValue("value", constructor);
+		assertEquals(1, value.getValues().size());
+		String s = value.getValues().get(0);
+		assertEquals("thirdConstructorWithBody", s);
+	}
+	
 	public void testAnnotatedField_01() throws Exception {
 		String typeName = TestAnnotation.Annotated.class.getName();
 		JvmGenericType type = (JvmGenericType) getTypeProvider().findTypeByName(typeName);
