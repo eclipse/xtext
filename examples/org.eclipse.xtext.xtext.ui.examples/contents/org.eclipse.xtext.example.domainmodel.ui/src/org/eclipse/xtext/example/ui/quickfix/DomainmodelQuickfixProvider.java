@@ -58,6 +58,7 @@ public class DomainmodelQuickfixProvider extends DefaultQuickfixProvider {
 						createNewEntity((Entity) element, linkText);
 					}
 				});
+		createLinkingIssueResolutions(issue, acceptor);
 	}
 
 	@Fix(DomainmodelLinkingDiagnosticMessageProvider.MISSING_ATTRIBUTE_TYPE)
@@ -69,6 +70,7 @@ public class DomainmodelQuickfixProvider extends DefaultQuickfixProvider {
 						createNewDatatype((Entity) element.eContainer().eContainer(), linkText);
 					}
 				});
+		createLinkingIssueResolutions(issue, acceptor);
 	}
 
 	@Fix(DomainmodelLinkingDiagnosticMessageProvider.MISSING_REFERENCE_TYPE)
@@ -80,6 +82,7 @@ public class DomainmodelQuickfixProvider extends DefaultQuickfixProvider {
 						createNewEntity((Entity) element.eContainer().eContainer(), linkText);
 					}
 				});
+		createLinkingIssueResolutions(issue, acceptor);
 	}
 
 	protected boolean createNewEntity(Entity sibling, String name) {
