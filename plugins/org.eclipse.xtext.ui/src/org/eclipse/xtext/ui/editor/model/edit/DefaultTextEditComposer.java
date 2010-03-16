@@ -167,7 +167,6 @@ public class DefaultTextEditComposer extends EContentAdapter implements ITextEdi
 			CompositeNode node = nodeAdapter.getParserNode();
 
 			SerializationOptions options = new SerializationOptions();
-			// TODO: set to false as soon as https://bugs.eclipse.org/bugs/show_bug.cgi?id=302128 is fixed
 			options.setFormat(false);
 			String text = serializerUtil.serialize(eObject, options);
 			
