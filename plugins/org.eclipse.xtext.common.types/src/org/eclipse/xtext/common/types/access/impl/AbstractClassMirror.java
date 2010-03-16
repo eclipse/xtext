@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.impl;
 
+import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.EList;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.resource.Resource;
@@ -26,6 +27,8 @@ import org.eclipse.xtext.common.types.TypesFactory;
  */
 public abstract class AbstractClassMirror implements IClassMirror {
 
+	private static final Logger logger = Logger.getLogger(AbstractClassMirror.class);
+	
 	public String getFragment(EObject obj) {
 		if (obj instanceof JvmTypeParameter)
 			return getFragment(obj.eContainer()) + "/" + ((JvmTypeParameter) obj).getName();
@@ -55,8 +58,13 @@ public abstract class AbstractClassMirror implements IClassMirror {
 				} 
 			}
 		} else {
-			if (getTypeName().equals(fragment))
+			if (getTypeName().equals(fragment)) {
+				if (resource.getContents().isEmpty()) {
+					logger.error("resource is empty: " + resource.getURI());
+					return null;
+				}
 				return resource.getContents().get(0);
+			}
 			int paren = fragment.indexOf('(');
 			if (paren == -1)
 				paren = fragment.length();

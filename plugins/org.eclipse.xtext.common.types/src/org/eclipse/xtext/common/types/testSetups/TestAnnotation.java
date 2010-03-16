@@ -64,6 +64,27 @@ public @interface TestAnnotation  {
 		public Annotated(String string) {
 		}
 		
+		@NestedAnnotation("thirdConstructorWithBody")
+		public Annotated(String s1, String s2) {
+			this(s1 + s2);
+			method(new CharSequence() {
+				public CharSequence subSequence(int start, int end) {
+					return null;
+				}
+				@NestedAnnotation("method")
+				public int length() {
+					return 0;
+				}
+				
+				public char charAt(int index) {
+					return 0;
+				}
+			});
+		}
+		
+		private void method(CharSequence charSequence) {
+		}
+
 		@NestedAnnotation("parameterizedConstructor")
 		public <T extends List<String>> Annotated(String string, T t) {
 		}
@@ -71,6 +92,7 @@ public @interface TestAnnotation  {
 		@NestedAnnotation("method")
 		public void method() {
 		}
+		
 		
 	}
 	
