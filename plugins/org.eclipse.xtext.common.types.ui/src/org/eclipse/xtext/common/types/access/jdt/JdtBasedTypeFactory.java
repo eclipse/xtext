@@ -24,6 +24,7 @@ import org.eclipse.jdt.core.IType;
 import org.eclipse.jdt.core.ITypeParameter;
 import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
+import org.eclipse.jdt.core.dom.AST;
 import org.eclipse.jdt.core.dom.ASTParser;
 import org.eclipse.jdt.core.dom.IAnnotationBinding;
 import org.eclipse.jdt.core.dom.IBinding;
@@ -121,29 +122,14 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 	protected void createAnnotationValues(IAnnotatable annotated, IMember declarator, JvmAnnotationTarget result) throws JavaModelException {
 		if (annotated.getAnnotations().length == 0)
 			return;
-		ASTParser parser = ASTParser.newParser(ASTParser.K_STATEMENTS);
+		ASTParser parser = ASTParser.newParser(AST.JLS3);
 		parser.setProject(declarator.getJavaProject());
 		IBinding[] bindings = parser.createBindings(new IJavaElement[] {declarator}, null);
 		if (bindings[0] != null) {
 			if (declarator instanceof IMethod && ((IMethod) declarator).isConstructor()) {
-				ITypeBinding typeBinding = (ITypeBinding) bindings[0];
-				IMethod method = (IMethod) declarator;
-				String bindingKey = method.getKey();
-				{
-					int idx = bindingKey.indexOf('(');
-					bindingKey = bindingKey.substring(idx);
-				}
-				for(IMethodBinding methodBinding: typeBinding.getDeclaredMethods()) {
-					if (methodBinding.isConstructor()) {
-						String actualKey = methodBinding.getKey();
-						int idx = actualKey.indexOf('(');
-						actualKey = actualKey.substring(idx);
-						if (bindingKey.equals(actualKey)) {
-							for(IAnnotationBinding annotation: methodBinding.getAnnotations()) {
-								createAnnotationReference(result, declarator, annotation);
-							}		
-						}
-					}
+				IMethodBinding methodBinding = findConstructorMethodBinding(bindings[0], (IMethod)declarator);
+				for(IAnnotationBinding annotation: methodBinding.getAnnotations()) {
+					createAnnotationReference(result, declarator, annotation);
 				}
 			} else {
 				for(IAnnotationBinding annotation: bindings[0].getAnnotations()) {
@@ -151,6 +137,28 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 				}
 			}
 		} 
+	}
+	
+	protected IMethodBinding findConstructorMethodBinding(IBinding binding, IMethod method) {
+		if (binding instanceof IMethodBinding)
+			return (IMethodBinding) binding;
+		ITypeBinding typeBinding = (ITypeBinding) binding;
+		String bindingKey = method.getKey();
+		{
+			int idx = bindingKey.indexOf('(');
+			bindingKey = bindingKey.substring(idx);
+		}
+		for(IMethodBinding methodBinding: typeBinding.getDeclaredMethods()) {
+			if (methodBinding.isConstructor()) {
+				String actualKey = methodBinding.getKey();
+				int idx = actualKey.indexOf('(');
+				actualKey = actualKey.substring(idx);
+				if (bindingKey.equals(actualKey)) {
+					return methodBinding;
+				}
+			}
+		}
+		throw new IllegalStateException(binding.toString());
 	}
 	
 	protected JvmAnnotationReference createAnnotationReference(JvmAnnotationTarget result, IMember declarator, IAnnotationBinding annotation) throws JavaModelException {
@@ -181,25 +189,26 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 	
 	protected JvmAnnotationValue createArrayAnnotationValue(IMemberValuePairBinding memberValuePair, JvmAnnotationValue result, IMember declarator) throws JavaModelException {
 		Object value = memberValuePair.getValue();
-		int length = Array.getLength(value);
+		boolean valueIsArray = value.getClass().isArray(); 
+		int length = valueIsArray ? Array.getLength(value) : 1;
 		if (length > 0) {
 			List<Object> valuesAsList = Lists.newArrayListWithExpectedSize(length);
 			if (result instanceof JvmTypeAnnotationValue) {
 				for(int i = 0; i < length; i++) {
-					ITypeBinding referencedType = (ITypeBinding) Array.get(value, i);
+					ITypeBinding referencedType = (ITypeBinding) (valueIsArray ? Array.get(value, i) : value);
 					JvmType proxy = createProxy(declarator, referencedType);
 					valuesAsList.add(proxy);
 				}
 			} else if (result instanceof JvmAnnotationAnnotationValue) {
 				for(int i = 0; i < length; i++) {
-					IAnnotationBinding nestedAnnotation = (IAnnotationBinding) Array.get(value, i);
+					IAnnotationBinding nestedAnnotation = (IAnnotationBinding) (valueIsArray ? Array.get(value, i) : value);
 					createAnnotationReference((JvmAnnotationTarget) result, declarator, nestedAnnotation);
 				}
 			} else if (result instanceof JvmEnumAnnotationValue) {
 				log.error("Enumeration types are not yet fully supported.");
 			} else {
 				for(int i = 0; i < length; i++) {
-					valuesAsList.add(Array.get(value, i));
+					valuesAsList.add(valueIsArray ? Array.get(value, i) : value);
 				}
 			}
 			if (!(result instanceof JvmAnnotationAnnotationValue))
