@@ -33,7 +33,7 @@ public class SerializerUtil {
 	public static class SerializationOptions {
 
 		private boolean format = true;
-		private boolean validateConcreteSyntax = true;
+		private boolean validateConcreteSyntax = false;
 
 		public SerializationOptions() {
 		}
