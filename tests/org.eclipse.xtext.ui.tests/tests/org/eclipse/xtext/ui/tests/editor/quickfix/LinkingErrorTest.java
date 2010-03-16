@@ -30,7 +30,7 @@ public class LinkingErrorTest extends AbstractQuickfixTest {
 
 	private static final String PROJECT_NAME = "quickfixtest";
 	private static final String MODEL_FILE = "test.quickfixcrossreftestlanguage";
-	private static final String MODEL_WITH_LINKING_ERROR = "Foo { ref Bor }\n" + "Bar { }";
+	private static final String MODEL_WITH_LINKING_ERROR = "Foo { ref Bor }\n" + "Bar { }\n Bar1{} Bar2{} Bar3{} Bar4{} Bar5{}";
 	
 	private XtextEditor xtextEditor;
 
