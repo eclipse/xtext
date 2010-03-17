@@ -256,16 +256,6 @@
 			// the following fragment tries to use the Antlr Generator fragment which can be installed via update manager from http://download.itemis.com/updates/
 			fragment = AntlrDelegatingFragment {}
 			
-			/*
-			If you don't want to use the Antlr fragment for some reason, remove the antlr fragment and uncomment the packrat parser fragment below.
-			fragment = parser.PackratParserFragment {}
-			*/
-			
-			// check-based API for validation
-			/*
-			fragment = validation.CheckFragment {}
-			*/
-			 
 			// java-based API for validation 
 			fragment = validation.JavaValidatorFragment {
                 composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
