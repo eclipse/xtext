@@ -90,6 +90,9 @@ Workflow {
 				}
 			}
 			
+			// the Ecore2Xtext specific terminal converter
+			fragment = ecore2xtext.Ecore2XtextValueConverterServiceFragment {}
+			
 			// java-based API for validation 
 			fragment = validation.JavaValidatorFragment {
                 composedCheck = "org.eclipse.xtext.validation.ImportUriValidator"
