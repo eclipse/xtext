@@ -322,4 +322,64 @@ public class OverriddenValueInspectorTest extends AbstractXtextRuleInspectorTest
 		validateRule(rule);
 		assertEquals(warnings.toString(), 2, warnings.size());
 	}
+	
+	public void testBug306281_01() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"Model : name=ID (" +
+				"		({Binary.left=current} operator = '-' | {Binary.left=current} operator = '+')" +
+				"	right=ID)*;";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "Model");
+		validateRule(rule);
+		assertTrue(warnings.toString(), warnings.isEmpty());
+	}
+	
+	public void testBug306281_02() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"Model : name=ID (" +
+				"		({Binary.left=current} operator = '-' | {Binary.left=current} operator = '+')" +
+				"	right=ID)* name=ID;";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "Model");
+		validateRule(rule);
+		assertEquals(warnings.toString(), 2, warnings.size());
+	}
+	
+	public void testBug306281_03() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"Model : name=ID (" +
+				"		({Binary.left=current} operator = '-' | {Binary.left=current} operator = '+')" +
+				"	right=ID)+ name=ID;";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "Model");
+		validateRule(rule);
+		assertTrue(warnings.toString(), warnings.isEmpty());
+	}
+	
+	public void testBug306281_04() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"Model : name=ID (" +
+				"		({Binary.left=current} operator = '-' | {Binary.left=current} operator = '+')?" +
+				"	name=ID);";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "Model");
+		validateRule(rule);
+		assertEquals(warnings.toString(), 2, warnings.size());
+	}
+	
+	public void testBug306281_05() throws Exception {
+		String grammarAsString = "grammar org.foo with org.eclipse.xtext.common.Terminals\n" +
+				"generate metamodel 'foo.sample'\n" +
+				"Model : name=ID (" +
+				"		({Binary.left=current} operator = '-' | {Binary.left=current} operator = '+')" +
+				"	name=ID);";
+		Grammar grammar = getGrammar(grammarAsString);
+		ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(grammar, "Model");
+		validateRule(rule);
+		assertTrue(warnings.toString(), warnings.isEmpty());
+	}
 }
