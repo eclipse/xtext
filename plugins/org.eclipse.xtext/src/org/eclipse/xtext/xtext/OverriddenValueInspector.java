@@ -126,11 +126,14 @@ public class OverriddenValueInspector extends XtextRuleInspector<Boolean, Parser
 	@Override
 	public Boolean caseAlternatives(Alternatives object) {
 		Multimap<String, AbstractElement> prevAssignedFeatures = assignedFeatures;
-		Multimap<String, AbstractElement> mergedAssignedFeatures = newMultimap(prevAssignedFeatures);
+		Multimap<String, AbstractElement> mergedAssignedFeatures = Multimaps.newLinkedHashMultimap();
 		for (AbstractElement element : object.getElements()) {
 			assignedFeatures = newMultimap(prevAssignedFeatures);
 			doSwitch(element);
 			mergedAssignedFeatures.putAll(assignedFeatures);
+		}
+		if (GrammarUtil.isOptionalCardinality(object)) {
+			mergedAssignedFeatures.putAll(prevAssignedFeatures);
 		}
 		assignedFeatures = mergedAssignedFeatures;
 		if (GrammarUtil.isMultipleCardinality(object)) {
