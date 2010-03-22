@@ -556,7 +556,7 @@ public class XtextEditor extends TextEditor {
 	}
 	
 	public void reveal(int offset, int length) {
-		selectAndReveal(offset, -1, offset, length);
+		selectAndReveal(offset, 0, offset, length);
 	}
 
 }
