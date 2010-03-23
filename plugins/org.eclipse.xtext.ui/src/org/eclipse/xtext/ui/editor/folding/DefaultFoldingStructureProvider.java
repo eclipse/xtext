@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 
 import org.eclipse.core.runtime.Assert;
+import org.eclipse.emf.ecore.resource.Resource.Diagnostic;
 import org.eclipse.jface.text.Position;
 import org.eclipse.jface.text.source.Annotation;
 import org.eclipse.jface.text.source.projection.IProjectionListener;
@@ -22,10 +23,13 @@ import org.eclipse.jface.text.source.projection.ProjectionAnnotation;
 import org.eclipse.jface.text.source.projection.ProjectionAnnotationModel;
 import org.eclipse.jface.text.source.projection.ProjectionViewer;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextSyntaxDiagnostic;
 import org.eclipse.xtext.ui.editor.XtextEditor;
 import org.eclipse.xtext.ui.editor.model.IXtextModelListener;
 
+import com.google.common.base.Predicate;
 import com.google.common.collect.HashBiMap;
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
 import com.google.inject.Inject;
 
@@ -76,7 +80,15 @@ public class DefaultFoldingStructureProvider implements IFoldingStructureProvide
 	 * @see org.eclipse.xtext.ui.editor.model.IXtextModelListener#modelChanged(org.eclipse.xtext.resource.XtextResource)
 	 */
 	public void modelChanged(XtextResource resource) {
-		calculateProjectionAnnotationModel(false);
+		boolean existingSyntaxErrors = Iterables.any(resource.getErrors(), new Predicate<Diagnostic>() {
+			public boolean apply(Diagnostic diagnostic) {
+				return diagnostic instanceof XtextSyntaxDiagnostic;
+			}
+		});
+
+		if (!existingSyntaxErrors) {
+			calculateProjectionAnnotationModel(false);
+		}
 	}
 
 	protected void handleProjectionEnabled() {
