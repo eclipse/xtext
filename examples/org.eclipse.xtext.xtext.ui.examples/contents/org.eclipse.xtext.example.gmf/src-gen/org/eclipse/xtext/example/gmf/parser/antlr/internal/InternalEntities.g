@@ -5,7 +5,6 @@ grammar InternalEntities;
 
 options {
 	superClass=AbstractInternalAntlrParser;
-	backtrack=true;
 	
 }
 
@@ -38,11 +37,6 @@ import org.eclipse.xtext.example.gmf.services.EntitiesGrammarAccess;
 
 @parser::members {
 
-/*
-  This grammar contains a lot of empty actions to work around a bug in ANTLR.
-  Otherwise the ANTLR tool will create synpreds that cannot be compiled in some rare cases.
-*/
- 
  	private EntitiesGrammarAccess grammarAccess;
  	
     public InternalEntitiesParser(TokenStream input, IAstFactory factory, EntitiesGrammarAccess grammarAccess) {
@@ -61,7 +55,12 @@ import org.eclipse.xtext.example.gmf.services.EntitiesGrammarAccess;
     @Override
     protected String getFirstRuleName() {
     	return "Model";	
-   	} 
+   	}
+   	
+   	@Override
+   	protected EntitiesGrammarAccess getGrammarAccess() {
+   		return grammarAccess;
+   	}
 }
 
 @rulecatch { 
@@ -91,9 +90,6 @@ ruleModel returns [EObject current=null]
     	lastConsumedNode = currentNode;
     }:
 ((
-	{ 
-	  /* */ 
-	}
     { 
         temp=factory.create(grammarAccess.getModelAccess().getModelAction_0().getType().getClassifier());
         $current = temp; 
@@ -227,9 +223,6 @@ ruleType returns [EObject current=null]
     	lastConsumedNode = currentNode;
     }:
 (
-	{ 
-	  /* */ 
-	}
     { 
         currentNode=createCompositeNode(grammarAccess.getTypeAccess().getSimpleTypeParserRuleCall_0(), currentNode); 
     }
@@ -240,9 +233,6 @@ ruleType returns [EObject current=null]
     }
 
     |
-	{ 
-	  /* */ 
-	}
     { 
         currentNode=createCompositeNode(grammarAccess.getTypeAccess().getEntityParserRuleCall_1(), currentNode); 
     }
@@ -359,9 +349,6 @@ ruleEntity returns [EObject current=null]
     }
 (
 (
-		{ 
-		  /* */ 
-		}
 		{
 			if ($current==null) {
 	            $current = factory.create(grammarAccess.getEntityRule().getType().getClassifier());
@@ -430,9 +417,6 @@ ruleProperty returns [EObject current=null]
     	lastConsumedNode = currentNode;
     }:
 (
-	{ 
-	  /* */ 
-	}
     { 
         currentNode=createCompositeNode(grammarAccess.getPropertyAccess().getSimplePropertyParserRuleCall_0(), currentNode); 
     }
@@ -443,9 +427,6 @@ ruleProperty returns [EObject current=null]
     }
 
     |
-	{ 
-	  /* */ 
-	}
     { 
         currentNode=createCompositeNode(grammarAccess.getPropertyAccess().getReferenceParserRuleCall_1(), currentNode); 
     }
@@ -511,9 +492,6 @@ ruleSimpleProperty returns [EObject current=null]
     }
 (
 (
-		{ 
-		  /* */ 
-		}
 		{
 			if ($current==null) {
 	            $current = factory.create(grammarAccess.getSimplePropertyRule().getType().getClassifier());
@@ -604,9 +582,6 @@ ruleReference returns [EObject current=null]
     }
 (
 (
-		{ 
-		  /* */ 
-		}
 		{
 			if ($current==null) {
 	            $current = factory.create(grammarAccess.getReferenceRule().getType().getClassifier());
