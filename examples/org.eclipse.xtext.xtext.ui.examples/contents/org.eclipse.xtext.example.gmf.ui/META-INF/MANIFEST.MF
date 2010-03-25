@@ -18,4 +18,4 @@ Bundle-RequiredExecutionEnvironment: J2SE-1.5
 Export-Package: org.eclipse.xtext.example.gmf.ui.contentassist,
  org.eclipse.xtext.example.gmf.ui.internal,
  org.eclipse.xtext.example.gmf.ui.contentassist.antlr
-Bundle-Activator: org.eclipse.xtext.example.gmf.internal.EntitiesActivator
+Bundle-Activator: org.eclipse.xtext.example.gmf.ui.internal.EntitiesActivator
