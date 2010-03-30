@@ -65,6 +65,25 @@
 		 <projectDescriptor name="org.eclipse.xtext.example.fowlerdsl.ui" contentURI="contents/org.eclipse.xtext.example.fowlerdsl.ui/"  description="Contains Eclipse IDE integration (i.e. editor)"/>
 	  </example>
    </extension>
+   
+	<!-- ========= org.eclipse.xtext.example.arithmetics ========= -->
+	<extension point="org.eclipse.ui.newWizards">
+		<wizard	id="org.eclipse.xtext.examples.NewArithmeticsExampleWizard" 
+			name="Xtext Simple Arithmetics Example" 
+			class="org.eclipse.emf.common.ui.wizard.ExampleInstallerWizard" 
+			category="org.eclipse.ui.Examples/org.eclipse.xtext.Examples"
+			icon="icons/genproject.gif" 
+			project="true">
+			<description>A simple language for arithmetic calculations.</description>
+		</wizard>
+	</extension>
+   <extension point="org.eclipse.emf.common.ui.examples">
+	  <example wizardID="org.eclipse.xtext.examples.NewArithmeticsExampleWizard" pageImage="icons/genproject.gif">
+		 <projectDescriptor name="org.eclipse.xtext.example.arithmetics" contentURI="contents/org.eclipse.xtext.example.arithmetics/" description="Contains the parser, serializer, linker, etc."/>
+		 <projectDescriptor name="org.eclipse.xtext.example.arithmetics.tests" contentURI="contents/org.eclipse.xtext.example.arithmetics.tests/" description="The test bundle for the language"/>
+		 <projectDescriptor name="org.eclipse.xtext.example.arithmetics.ui" contentURI="contents/org.eclipse.xtext.example.arithmetics.ui/"  description="Contains Eclipse IDE integration (i.e. editor)"/>
+	  </example>
+   </extension>
 
 	<!-- ========= org.eclipse.xtext.gmf.example ========= -->
 	<extension point="org.eclipse.ui.newWizards">
