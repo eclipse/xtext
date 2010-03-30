@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.example.arithmetics/src-gen"
+    editDirectory="/org.eclipse.xtext.example.arithmetics.edit/src" editorDirectory="/org.eclipse.xtext.example.arithmetics.editor/src"
+    modelPluginID="org.eclipse.xtext.example.arithmetics" forceOverwrite="true" modelName="Arithmetics"
+    updateClasspath="false" rootExtendsClass="org.eclipse.emf.ecore.impl.MinimalEObjectImpl$Container"
+    complianceLevel="5.0" copyrightFields="false" editPluginID="org.eclipse.xtext.example.arithmetics.edit"
+    editorPluginID="org.eclipse.xtext.example.arithmetics.editor">
+  <genPackages prefix="Arithmetics" basePackage="org.eclipse.xtext.example.arithmetics"
+      disposableProviderFactory="true" ecorePackage="Arithmetics.ecore#/">
+    <genClasses ecoreClass="Arithmetics.ecore#//Module">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Arithmetics.ecore#//Module/name"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Arithmetics.ecore#//Module/imports"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Arithmetics.ecore#//Module/statements"/>
+    </genClasses>
+    <genClasses ecoreClass="Arithmetics.ecore#//Import">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Arithmetics.ecore#//Import/importedNamespace"/>
+    </genClasses>
+    <genClasses ecoreClass="Arithmetics.ecore#//Statement"/>
+    <genClasses ecoreClass="Arithmetics.ecore#//Definition">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Arithmetics.ecore#//Definition/args"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Arithmetics.ecore#//Definition/expr"/>
+    </genClasses>
+    <genClasses ecoreClass="Arithmetics.ecore#//DeclaredParameter"/>
+    <genClasses ecoreClass="Arithmetics.ecore#//AbstractDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Arithmetics.ecore#//AbstractDefinition/name"/>
+    </genClasses>
+    <genClasses ecoreClass="Arithmetics.ecore#//Evaluation">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Arithmetics.ecore#//Evaluation/expression"/>
+    </genClasses>
+    <genClasses ecoreClass="Arithmetics.ecore#//Expression"/>
+    <genClasses ecoreClass="Arithmetics.ecore#//Plus">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Arithmetics.ecore#//Plus/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Arithmetics.ecore#//Plus/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Arithmetics.ecore#//Minus">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Arithmetics.ecore#//Minus/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Arithmetics.ecore#//Minus/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Arithmetics.ecore#//Multi">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Arithmetics.ecore#//Multi/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Arithmetics.ecore#//Multi/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Arithmetics.ecore#//Div">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Arithmetics.ecore#//Div/left"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Arithmetics.ecore#//Div/right"/>
+    </genClasses>
+    <genClasses ecoreClass="Arithmetics.ecore#//NumberLiteral">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Arithmetics.ecore#//NumberLiteral/value"/>
+    </genClasses>
+    <genClasses ecoreClass="Arithmetics.ecore#//Pi"/>
+    <genClasses ecoreClass="Arithmetics.ecore#//FunctionCall">
+      <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Arithmetics.ecore#//FunctionCall/func"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Arithmetics.ecore#//FunctionCall/args"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>

@@ -1,0 +1,14 @@
+Manifest-Version: 1.0
+Bundle-ManifestVersion: 2
+Bundle-Name: Arithmetics Test Bundle
+Bundle-SymbolicName: org.eclipse.xtext.example.arithmetics.tests
+Bundle-Version: 1.0.0.qualifier
+Bundle-Vendor: itemis AG
+Bundle-RequiredExecutionEnvironment: J2SE-1.5
+Require-Bundle: org.eclipse.xtext.example.arithmetics;bundle-version="1.0.0",
+ org.eclipse.emf.ecore;bundle-version="2.5.0",
+ org.junit;bundle-version="3.8.2",
+ org.eclipse.xtext.junit;bundle-version="1.0.0",
+ com.google.collect;bundle-version="0.8.0",
+ com.google.guice;bundle-version="2.0.0",
+ org.eclipse.xtext;bundle-version="1.0.0"
