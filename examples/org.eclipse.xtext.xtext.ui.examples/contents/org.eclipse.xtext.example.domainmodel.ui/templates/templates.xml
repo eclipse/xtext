@@ -22,16 +22,13 @@
     <template name="Attribute" description="template for an Attribute"
         id="org.eclipse.xtext.example.Domainmodel.Attribute"
         context="org.eclipse.xtext.example.Domainmodel.Attribute"
-        enabled="true">attr ${attrName} : ${attrType:CrossReference('TypeRef.referenced')}
-    </template>
+        enabled="true">attr ${attrName} : ${attrType:CrossReference('TypeRef.referenced')}</template>
     <template name="Reference" description="template for a Reference"
         id="org.eclipse.xtext.example.Domainmodel.Reference"
         context="org.eclipse.xtext.example.Domainmodel.Reference"
-        enabled="true">ref  ${refName}  : ${refType:CrossReference('TypeRef.referenced')}
-    </template>
+        enabled="true">ref  ${refName}  : ${refType:CrossReference('TypeRef.referenced')}</template>
     <template name="Operation" description="template for an Operation"
         id="org.eclipse.xtext.example.Domainmodel.Operation"
         context="org.eclipse.xtext.example.Domainmodel.Operation"
-        enabled="true">${visibility:Enum('Visibility')} op ${name} (${paramName1} ${paramType1:CrossReference('TypeRef.referenced')}) : ${type:CrossReference('TypeRef.referenced')}
-    </template>
+        enabled="true">${visibility:Enum('Visibility')} op ${name} (${paramName1} ${paramType1:CrossReference('TypeRef.referenced')}) : ${type:CrossReference('TypeRef.referenced')}</template>
 </templates>
