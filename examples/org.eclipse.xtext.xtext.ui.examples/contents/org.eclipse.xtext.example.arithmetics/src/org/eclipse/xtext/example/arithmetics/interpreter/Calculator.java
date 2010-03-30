@@ -1,9 +1,18 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+
 package org.eclipse.xtext.example.arithmetics.interpreter;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.util.Map;
 
+import org.eclipse.xtext.example.arithmetics.arithmetics.ArithmeticsPackage;
 import org.eclipse.xtext.example.arithmetics.arithmetics.DeclaredParameter;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Definition;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Div;
@@ -19,6 +28,13 @@ import org.eclipse.xtext.util.PolymorphicDispatcher;
 import com.google.common.collect.ImmutableMap;
 import com.google.common.collect.Maps;
 
+/**
+ * an interpreter for instances of EClasses of the {@link ArithmeticsPackage}.
+ * 
+ * It internally uses a polymorphic dispatcher to dispatch between the implementations for the different EClasses.
+ * 
+ * @author Sven Efftinge - initial contribution and API
+ */
 public class Calculator {
 	
 	private PolymorphicDispatcher<BigDecimal> dispatcher = PolymorphicDispatcher.createForSingleTarget("internalEvaluate", 2, 2, this);
