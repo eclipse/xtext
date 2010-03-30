@@ -32,11 +32,13 @@ public class DomainmodelFormatter extends AbstractDeclarativeFormatter {
 		c.setLinewrap().before(f.getImportAccess().getImportKeyword_0());
 		
 		EntityElements entity = f.getEntityAccess();
-		c.setLinewrap().before(entity.getEntityKeyword_0());
+		c.setLinewrap(2).before(entity.getEntityKeyword_0());
 		c.setIndentation(entity.getLeftCurlyBracketKeyword_3(), entity.getRightCurlyBracketKeyword_5());
 		c.setLinewrap().before(entity.getRightCurlyBracketKeyword_5());
+		c.setLinewrap().after(entity.getRightCurlyBracketKeyword_5());
 		
-		c.setLinewrap().before(f.getDataTypeAccess().getDatatypeKeyword_0());
+		c.setLinewrap(2).before(f.getDataTypeAccess().getDatatypeKeyword_0());
+		c.setLinewrap().after(f.getDataTypeAccess().getNameIDTerminalRuleCall_1_0());
 		c.setLinewrap().before(f.getReferenceAccess().getRefKeyword_0());
 		c.setLinewrap().before(f.getAttributeAccess().getAttrKeyword_0());
 		c.setNoSpace().around(f.getQualifiedNameAccess().getFullStopKeyword_1_0());
