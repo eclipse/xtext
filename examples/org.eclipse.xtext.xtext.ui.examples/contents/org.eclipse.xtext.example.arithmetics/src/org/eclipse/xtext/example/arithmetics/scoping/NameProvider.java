@@ -1,3 +1,10 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
 package org.eclipse.xtext.example.arithmetics.scoping;
 
 import java.util.Iterator;
@@ -9,6 +16,11 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.Module;
 import org.eclipse.xtext.example.arithmetics.arithmetics.util.ArithmeticsSwitch;
 import org.eclipse.xtext.naming.IQualifiedNameProvider;
 
+/**
+ * changes the exported name of a function to be the signature and not just the simple name.
+ *   
+ * @author Sven Efftinge - initial contribution and API
+ */
 public class NameProvider extends IQualifiedNameProvider.AbstractImpl {
 
 	public String getQualifiedName(EObject obj) {
