@@ -19,10 +19,10 @@ import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EClassifier;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EPackage;
+import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
 import org.eclipse.emf.ecore.InternalEObject;
-import org.eclipse.emf.ecore.EPackage.Registry;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Assignment;
@@ -37,6 +37,7 @@ import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.parsetree.NodeAdapter;
 import org.eclipse.xtext.parsetree.NodeUtil;
+import org.eclipse.xtext.util.EcoreGenericsUtil;
 import org.eclipse.xtext.util.SimpleCache;
 
 import com.google.common.base.Function;
@@ -63,6 +64,9 @@ public class LazyLinker extends AbstractCleaningLinker {
 
 	@Inject
 	private Registry registry;
+	
+	@Inject
+	private EcoreGenericsUtil ecoreGenericsUtil;
 
 	@Override
 	protected void doLinkModel(EObject model, IDiagnosticConsumer consumer) {
@@ -146,11 +150,11 @@ public class LazyLinker extends AbstractCleaningLinker {
 	}
 
 	protected EObject createProxy(EObject obj, AbstractNode abstractNode, EReference eRef) {
-		if (obj.eResource()==null)
+		if (obj.eResource() == null)
 			throw new IllegalStateException("object must be contained in a resource");
 		final URI uri = obj.eResource().getURI();
 		final URI encodedLink = uri.appendFragment(encoder.encode(obj, eRef, abstractNode));
-		EClass referenceType = eRef.getEReferenceType();
+		EClass referenceType = ecoreGenericsUtil.getReferenceType(eRef, obj.eClass());
 		EClass instantiableType = instantiableSubTypes.get(referenceType);
 		final EObject proxy = EcoreUtil.create(instantiableType);
 		((InternalEObject) proxy).eSetProxyURI(encodedLink);
@@ -173,7 +177,6 @@ public class LazyLinker extends AbstractCleaningLinker {
 				if (class1 != null)
 					return class1;
 			}
-
 		}
 		return eType;
 	}
@@ -202,8 +205,7 @@ public class LazyLinker extends AbstractCleaningLinker {
 	}
 
 	private boolean isInstantiatableSubType(EClass c, EClass superType) {
-		return !c.isAbstract() && !c.isInterface()
-				&& EcoreUtil2.isAssignableFrom(superType,c);
+		return !c.isAbstract() && !c.isInterface() && EcoreUtil2.isAssignableFrom(superType, c);
 	}
 
 	public LazyURIEncoder getEncoder() {
