@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ecore:EPackage xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="genericTest"
+    nsURI="http://www.eclipse.org/Xtext/tests/genericTest" nsPrefix="genericTest">
+  <eClassifiers xsi:type="ecore:EClass" name="A">
+    <eTypeParameters name="T"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="someReference">
+      <eGenericType eTypeParameter="#//A/T"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="someReference1" eType="#//SomeType"/>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="B">
+    <eTypeParameters name="U"/>
+    <eTypeParameters name="V"/>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="otherReference">
+      <eGenericType eTypeParameter="#//B/U"/>
+    </eStructuralFeatures>
+    <eStructuralFeatures xsi:type="ecore:EReference" name="otherReference1">
+      <eGenericType eClassifier="#//A">
+        <eTypeArguments eClassifier="#//OtherType"/>
+      </eGenericType>
+    </eStructuralFeatures>
+    <eGenericSuperTypes eClassifier="#//A">
+      <eTypeArguments eTypeParameter="#//B/V"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="C">
+    <eTypeParameters name="W"/>
+    <eGenericSuperTypes eClassifier="#//B">
+      <eTypeArguments eTypeParameter="#//C/W"/>
+      <eTypeArguments eClassifier="#//SomeType"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="D">
+    <eGenericSuperTypes eClassifier="#//C">
+      <eTypeArguments eClassifier="#//OtherType"/>
+    </eGenericSuperTypes>
+  </eClassifiers>
+  <eClassifiers xsi:type="ecore:EClass" name="SomeType"/>
+  <eClassifiers xsi:type="ecore:EClass" name="OtherType"/>
+</ecore:EPackage>
