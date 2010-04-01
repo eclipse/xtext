@@ -61,7 +61,9 @@ public class EMFBasedPersister implements PersistableResourceDescriptionsImpl.Pe
 					getBuilderStateLocation().delete();
 				}
 			} else {
-				doFullBuild();
+				if(workspace != null && workspace.isAutoBuilding()) {
+					doFullBuild();
+				} 
 			}
 		} catch (Exception e) {
 			log.error("Error while loading persistable builder state.", e);
