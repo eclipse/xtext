@@ -123,14 +123,14 @@ public class Bug304681Test extends AbstractContentAssistProcessorTest {
 			.appendNl("cloneable;")
 			.appendNl("optionalLoop")
 			.assertText(
-//				"shortDescription", 
-//				"longDescription", 
-//				"serialUID",
+				"shortDescription", 
+				"longDescription", 
+				"serialUID",
 				"Attribute",
-				"Reference"
-//				"before",
-//				"mandatoryLoop",
-//				"}"
+				"Reference",
+				"before",
+				"mandatoryLoop",
+				"}"
 				);
 	}
 	
@@ -150,14 +150,14 @@ public class Bug304681Test extends AbstractContentAssistProcessorTest {
 			.appendNl("cloneable;")
 			.appendNl("mandatoryLoop Attribute type name;")
 			.assertText(
-//				"shortDescription", 
-//				"longDescription", 
-//				"serialUID",
+				"shortDescription", 
+				"longDescription", 
+				"serialUID",
 				"Attribute",
-				"Reference"
-//				"before",
-//				"optionalLoop",
-//				"}"
+				"Reference",
+				"before",
+				"optionalLoop",
+				"}"
 				);
 	}
 	

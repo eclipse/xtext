@@ -154,10 +154,24 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 			this.stackSize = stackSize;
 		}
 	}
+	
+	abstract class StreamAdapter implements ObservableXtextTokenStream.StreamListener {
+		public void announceConsume() {
+			AbstractInternalContentAssistParser.this.announceConsume();
+		}
+		
+		public void announceMark(int marker) {
+			AbstractInternalContentAssistParser.this.announceMark(marker);
+		}
+		
+		public void announceRewind(int marker) {
+			AbstractInternalContentAssistParser.this.announceRewind(marker);
+		}
+	}
 
 	protected void selectEofStrategy() {
 		if (mismatch) {
-			delegate = new ObservableXtextTokenStream.StreamListener() {
+			delegate = new StreamAdapter() {
 				
 				private boolean wasErrorRecovery = false;
 				
@@ -172,21 +186,9 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 						}
 					}
 				}
-
-				public void announceConsume() {
-					AbstractInternalContentAssistParser.this.announceConsume();
-				}
-				
-				public void announceMark(int marker) {
-					AbstractInternalContentAssistParser.this.announceMark(marker);
-				}
-				
-				public void announceRewind(int marker) {
-					AbstractInternalContentAssistParser.this.announceRewind(marker);
-				}
 			};
 		} else if (!errorRecovery) {
-			delegate = new ObservableXtextTokenStream.StreamListener() {
+			delegate = new StreamAdapter() {
 
 				public void announceEof(int lookAhead) {
 					if (!errorRecovery && !mismatch) {
@@ -198,23 +200,10 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 						}
 					}
 				}
-
-				public void announceConsume() {
-					AbstractInternalContentAssistParser.this.announceConsume();
-				}
-				
-				public void announceMark(int marker) {
-					AbstractInternalContentAssistParser.this.announceMark(marker);
-				}
-				
-				public void announceRewind(int marker) {
-					AbstractInternalContentAssistParser.this.announceRewind(marker);
-				}
-
 			};
 		}
 		else {
-			delegate = new ObservableXtextTokenStream.StreamListener() {
+			delegate = new StreamAdapter() {
 
 				private AbstractElement lastAddedElement;
 
@@ -228,18 +217,6 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 						followElements.add(createFollowElement(current, lookAhead));
 						lastAddedElement = current;
 					}
-				}
-
-				public void announceConsume() {
-					AbstractInternalContentAssistParser.this.announceConsume();
-				}
-				
-				public void announceMark(int marker) {
-					AbstractInternalContentAssistParser.this.announceMark(marker);
-				}
-				
-				public void announceRewind(int marker) {
-					AbstractInternalContentAssistParser.this.announceRewind(marker);
 				}
 
 			};

@@ -481,29 +481,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 				calculator.doSwitch(ass);
 			else {
 				if (element.getGrammarElement() instanceof UnorderedGroup) {
-					boolean repeat = true;
-					List<AbstractElement> groupElements = ((UnorderedGroup) element.getGrammarElement()).getElements();
-					List<AbstractElement> handledUnorderedGroupElements = element.getHandledUnorderedGroupElements();
-					for(AbstractElement groupElement: groupElements) {
-						if (handledUnorderedGroupElements == null) {
-							calculator.doSwitch(groupElement);
-							if (!GrammarUtil.isOptionalCardinality(groupElement)) {
-								repeat = false;
-							}
-						} else if (!handledUnorderedGroupElements.contains(groupElement)) {
-							calculator.doSwitch(groupElement);
-							if (!GrammarUtil.isOptionalCardinality(groupElement)) {
-								repeat = false;
-							}
-						} else if (handledUnorderedGroupElements.get(handledUnorderedGroupElements.size() - 1) == groupElement) {
-							if (GrammarUtil.isMultipleCardinality(groupElement)) {
-								calculator.doSwitch(groupElement);
-							}
-						}
-					}
-					if (repeat && GrammarUtil.isMultipleCardinality(element.getGrammarElement())) {
-						calculator.doSwitch(element.getGrammarElement());
-					}
+					calculator.doSwitch((UnorderedGroup) element.getGrammarElement(), element.getHandledUnorderedGroupElements());
 				} else {
 					calculator.doSwitch(element.getGrammarElement());
 				}
@@ -627,6 +605,21 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		
 		protected IFollowElementCalculator.IFollowElementAcceptor acceptor;
 		
+		private List<AbstractElement> handledAlternatives;
+
+		private UnorderedGroup group;
+		
+		public void doSwitch(UnorderedGroup group, List<AbstractElement> handledAlternatives) {
+			this.group = group;
+			this.handledAlternatives = handledAlternatives;
+			try {
+				doSwitch(group);
+			} finally {
+				this.handledAlternatives = null;
+				this.group = null;
+			}
+		}
+		
 		@Override
 		public Boolean caseAlternatives(Alternatives object) {
 			boolean more = false;
@@ -638,11 +631,28 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 		
 		@Override
 		public Boolean caseUnorderedGroup(UnorderedGroup object) {
-			boolean more = true;
-			for(AbstractElement element: object.getElements()) {
-				more = doSwitch(element) && more;
+			if (object == this.group) {
+				boolean more = true;
+				for(AbstractElement element: object.getElements()) {
+					if (handledAlternatives == null || !handledAlternatives.contains(element)) {
+						this.group = null;
+						more = doSwitch(element) && more;
+						this.group = object;
+					}
+				}
+				if (more && GrammarUtil.isMultipleCardinality(object)) {
+					handledAlternatives = null;
+					this.group = null;
+					return caseUnorderedGroup(object);
+				}
+				return more || isOptional(object);
+			} else {
+				boolean more = true;
+				for(AbstractElement element: object.getElements()) {
+					more = doSwitch(element) && more;
+				}
+				return more || isOptional(object);
 			}
-			return more || isOptional(object);
 		}
 		
 		@Override
