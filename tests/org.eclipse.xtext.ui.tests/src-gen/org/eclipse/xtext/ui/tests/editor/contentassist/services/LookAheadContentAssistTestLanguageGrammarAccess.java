@@ -171,25 +171,7 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 		private final RuleCall cValueIDTerminalRuleCall_2_0 = (RuleCall)cValueAssignment_2.eContents().get(0);
 		
 		//Pair:
-		//  name=ID "=" value=ID; 
-		//
-		//
-		//            
-		//
-		//
-		////Model : '(' (attribute+=IdAttribute* | attribute+=StringAttribute*) (attribute+=Pair)* ')';
-		////
-		////Attribute:
-		////		IdAttribute | StringAttribute;
-		////	
-		////IdAttribute:
-		////        value=ID;
-		////
-		////StringAttribute:
-		////        value=STRING;
-		////        
-		////Pair:
-		////        name=ID "=" value=ID;
+		//  name=ID "=" value=ID;
 		public ParserRule getRule() { return rule; }
 
 		//name=ID "=" value=ID
@@ -260,25 +242,7 @@ public class LookAheadContentAssistTestLanguageGrammarAccess extends AbstractGra
 	}
 
 	//Pair:
-	//  name=ID "=" value=ID; 
-	//
-	//
-	//            
-	//
-	//
-	////Model : '(' (attribute+=IdAttribute* | attribute+=StringAttribute*) (attribute+=Pair)* ')';
-	////
-	////Attribute:
-	////		IdAttribute | StringAttribute;
-	////	
-	////IdAttribute:
-	////        value=ID;
-	////
-	////StringAttribute:
-	////        value=STRING;
-	////        
-	////Pair:
-	////        name=ID "=" value=ID;
+	//  name=ID "=" value=ID;
 	public PairElements getPairAccess() {
 		return (pPair != null) ? pPair : (pPair = new PairElements());
 	}

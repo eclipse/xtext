@@ -785,25 +785,7 @@ protected class Attribute_ValueAssignment extends AssignmentToken  {
 /************ begin Rule Pair ****************
  *
  * Pair:
- *   name=ID "=" value=ID; 
- * 
- * 
- *             
- * 
- * 
- * //Model : '(' (attribute+=IdAttribute* | attribute+=StringAttribute*) (attribute+=Pair)* ')';
- * //
- * //Attribute:
- * //		IdAttribute | StringAttribute;
- * //	
- * //IdAttribute:
- * //        value=ID;
- * //
- * //StringAttribute:
- * //        value=STRING;
- * //        
- * //Pair:
- * //        name=ID "=" value=ID;
+ *   name=ID "=" value=ID;
  *
  **/
 
