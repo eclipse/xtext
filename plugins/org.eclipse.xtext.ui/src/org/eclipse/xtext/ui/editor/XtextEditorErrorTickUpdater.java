@@ -36,24 +36,21 @@ import com.google.inject.Inject;
  * @author Sven Efftinge
  */
 public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl implements IAnnotationModelListener {
-
 	@Inject
 	private IImageHelper imageHelper;
-
 	@Inject
 	private IssueUtil issueUtil;
-
 	private Image defaultImage;
-	
 	private XtextEditor editor;
-
 	private IAnnotationModel annotationModel;
 
 	@Override
 	public void beforeDispose(XtextEditor xtextEditor) {
 		unregisterListener();
-		editor.updatedTitleImage(defaultImage); // otherwise we'll leak the defaultImage
-		this.editor = null;
+		if (this.editor != null) {
+			editor.updatedTitleImage(defaultImage); // otherwise we'll leak the defaultImage
+			this.editor = null;
+		}
 	}
 	
 	@Override
