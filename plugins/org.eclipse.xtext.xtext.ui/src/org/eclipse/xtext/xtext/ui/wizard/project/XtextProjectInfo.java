@@ -30,7 +30,7 @@ public class XtextProjectInfo implements IProjectInfo {
 	private boolean createGeneratorProject = false;
 	private IWorkingSet[] workingSets;
 	private IWorkbench workbench;
-	private IPath location;
+	private IPath projectLocation;
 	private WizardContribution wizardContribution;
 
 	public void setWizardContribution(WizardContribution wizardContribution) {
@@ -145,12 +145,20 @@ public class XtextProjectInfo implements IProjectInfo {
 		return workbench;
 	}
 
-	public void setLocation(IPath location) {
-		this.location = location;
+	public void setProjectLocation(IPath projectLocation) {
+		this.projectLocation = projectLocation;
 	}
 
-	public IPath getLocation() {
-		return location;
+	public IPath getProjectLocation() {
+		return projectLocation;
+	}
+	
+	public IPath getUiProjectLocation() {
+		return projectLocation.removeLastSegments(1).append(getUiProjectName());
+	}
+
+	public IPath getGeneratorProjectLocation() {
+		return projectLocation.removeLastSegments(1).append(getGeneratorProjectName());
 	}
 	
 }

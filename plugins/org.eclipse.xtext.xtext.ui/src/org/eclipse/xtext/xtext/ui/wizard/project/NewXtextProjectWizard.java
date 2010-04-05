@@ -14,6 +14,7 @@ import java.util.Map;
 
 import org.eclipse.core.resources.ResourcesPlugin;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.Path;
 import org.eclipse.xtext.ui.wizard.IProjectCreator;
 import org.eclipse.xtext.ui.wizard.IProjectInfo;
 import org.eclipse.xtext.ui.wizard.XtextNewProjectWizard;
@@ -26,6 +27,7 @@ import com.google.inject.Inject;
  * 
  * @author KD - Initial contribution and API
  * @author Sven Efftinge
+ * @author Michael Clay
  */
 public class NewXtextProjectWizard extends XtextNewProjectWizard {
 
@@ -58,10 +60,7 @@ public class NewXtextProjectWizard extends XtextNewProjectWizard {
 		projectInfo.setWorkingSets(mainPage.getSelectedWorkingSets());
 		Map<String, WizardContribution> contributions = WizardContribution.getFromRegistry();
 		projectInfo.setWizardContribution(contributions.get(mainPage.getGeneratorConfig()));
-		if (mainPage.useDefaults())
-			projectInfo.setLocation(null);
-		else
-			projectInfo.setLocation(mainPage.getLocationPath());
+		projectInfo.setProjectLocation(new Path(mainPage.getLocationURI().getRawPath()));
 		projectInfo.setWorkbench(getWorkbench());
 		String encoding = null;
 		try {

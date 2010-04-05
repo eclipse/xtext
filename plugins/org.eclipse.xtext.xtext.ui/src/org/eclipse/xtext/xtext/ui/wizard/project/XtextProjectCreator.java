@@ -21,6 +21,7 @@ import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
+import org.eclipse.core.runtime.IPath;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.Path;
 import org.eclipse.core.runtime.SubMonitor;
@@ -99,7 +100,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 				"org.eclipse.ui.editors;bundle-version=\"3.5.0\"", //$NON-NLS-1$
 				"org.eclipse.ui.ide;bundle-version=\"3.5.0\"")); //$NON-NLS-1$
 
-		return createProject(getXtextProjectInfo(), projectName, DSL_UI_PROJECT_NATURES, requiredBundles, 
+		return createProject(getXtextProjectInfo(), getXtextProjectInfo().getUiProjectLocation(), projectName, DSL_UI_PROJECT_NATURES, requiredBundles, 
 				Collections.singletonList("org.apache.log4j"), SRC_FOLDER_LIST, getDslUiProjectTemplateName(), monitor);
 	}
 
@@ -124,7 +125,7 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 			requiredBundles.add(bundleId.trim());
 		}
 
-		return createProject(getXtextProjectInfo(), projectName, DSL_PROJECT_NATURES, requiredBundles, 
+		return createProject(getXtextProjectInfo(), getXtextProjectInfo().getProjectLocation(), projectName, DSL_PROJECT_NATURES, requiredBundles, 
 				Collections.singletonList("org.apache.log4j"), SRC_FOLDER_LIST, getDslProjectTemplateName(), monitor);
 	}
 
@@ -140,15 +141,15 @@ public class XtextProjectCreator extends DefaultProjectCreator {
 				"org.eclipse.emf.mwe.utils;visibility:=reexport",//$NON-NLS-1$
 				"org.eclipse.xtend.typesystem.emf;visibility:=reexport")); //$NON-NLS-1$
 
-		return createProject(getXtextProjectInfo(), projectName, GENERATOR_PROJECT_NATURES, requiredBundles,
+		return createProject(getXtextProjectInfo(), getXtextProjectInfo().getGeneratorProjectLocation(), projectName, GENERATOR_PROJECT_NATURES, requiredBundles,
 				Collections.singletonList("org.apache.log4j"), SRC_FOLDER_LIST, getGeneratorProjectTemplateName(), monitor);
 	}
 
-	private IProject createProject(XtextProjectInfo xtextProjectInfo, String projectName, String[] projectNatures,
+	private IProject createProject(XtextProjectInfo xtextProjectInfo, IPath projectLocation, String projectName, String[] projectNatures,
 			Set<String> requiredBundles, List<String> importPackages, List<String> srcFolderList, String templateName,
 			final IProgressMonitor monitor) throws CoreException {
 		monitor.beginTask(Messages.XtextProjectCreator_CreatingProjectsMessage + projectName, 3);
-		final IProject dslProject = EclipseResourceUtil.createProject(projectName, xtextProjectInfo.getLocation(),
+		final IProject dslProject = EclipseResourceUtil.createProject(projectName, projectLocation,
 				srcFolderList, Collections.<IProject> emptyList(), requiredBundles, null, importPackages, null,
 				monitor, null, projectNatures, xtextProjectInfo.getWorkingSets(), xtextProjectInfo.getWorkbench());
 
