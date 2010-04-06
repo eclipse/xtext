@@ -15,9 +15,11 @@ import org.eclipse.xtext.common.types.access.ClasspathTypeProviderFactory;
 import org.eclipse.xtext.common.types.access.ITypeProvider;
 import org.eclipse.xtext.common.types.xtext.AbstractTypeScopeProvider;
 import org.eclipse.xtext.common.types.xtext.ClasspathBasedTypeScopeProvider;
+import org.eclipse.xtext.common.types.xtext.TypesAwareDefaultGlobalScopeProvider;
 import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.DefaultGeneratorFragment;
+import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -34,6 +36,7 @@ public class TypesGeneratorFragment extends DefaultGeneratorFragment {
 		     .addTypeToInstance(ClassLoader.class.getName(), "getClass().getClassLoader()")
 			 .addTypeToType(ITypeProvider.Factory.class.getName(), ClasspathTypeProviderFactory.class.getName())
 			 .addTypeToType(AbstractTypeScopeProvider.class.getName(), ClasspathBasedTypeScopeProvider.class.getName())
+			 .addTypeToType(IGlobalScopeProvider.class.getName(), TypesAwareDefaultGlobalScopeProvider.class.getName())
 			 .getBindings();
 	}
 	
