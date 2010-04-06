@@ -35,7 +35,7 @@ Workflow {
 		projectNameRt = projectName
 		projectNameUi = "${projectName}.ui"
 		
-		language = {
+		language = LanguageConfig {
 			uri = grammarURI
 			fileExtensions = file.extensions
 			

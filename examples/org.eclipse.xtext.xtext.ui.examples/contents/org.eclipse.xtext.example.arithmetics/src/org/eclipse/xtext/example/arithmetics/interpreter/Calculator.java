@@ -21,7 +21,6 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.FunctionCall;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Minus;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Multi;
 import org.eclipse.xtext.example.arithmetics.arithmetics.NumberLiteral;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Pi;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Plus;
 import org.eclipse.xtext.util.PolymorphicDispatcher;
 
@@ -54,10 +53,6 @@ public class Calculator {
 	
 	protected BigDecimal internalEvaluate(NumberLiteral e, ImmutableMap<String,BigDecimal> values) { 
 		return e.getValue();
-	}
-	
-	protected BigDecimal internalEvaluate(Pi e, ImmutableMap<String,BigDecimal> values) { 
-		return BigDecimal.valueOf(Math.PI);
 	}
 	
 	protected BigDecimal internalEvaluate(FunctionCall e, ImmutableMap<String,BigDecimal> values) {
