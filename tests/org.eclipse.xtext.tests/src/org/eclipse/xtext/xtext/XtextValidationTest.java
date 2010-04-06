@@ -366,9 +366,10 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 	
 	public void testBug_280413_01() throws Exception {
 		XtextResource resource = getResourceFromStringAndExpect(
-				"grammar org.foo.Bar with org.eclipse.xtext.Xtext\n" +
-				"import 'classpath:/org/eclipse/xtext/Xtext.ecore' as xtext\n" +
-				"ParserRule returns xtext::ParserRule: name = ID;", 1);
+				"grammar org.foo.Bar with org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage\n" +
+				"import 'classpath:/org/eclipse/xtext/testlanguages/SimpleExpressionsTestLanguage.ecore' as mm\n" +
+				"Atom returns mm::Atom: name = ID;", 1);
+		System.out.println(resource.getErrors());
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
 		assertTrue(resource.getWarnings().toString(), resource.getWarnings().isEmpty());
 
@@ -392,6 +393,7 @@ public class XtextValidationTest extends AbstractGeneratorTest implements Valida
 		assertNotNull("diag", diag);
 		assertEquals(diag.getSeverity(), Diagnostic.OK);
 		assertTrue(diag.getChildren().toString(), diag.getChildren().isEmpty());
+		//TODO this one should yield a warning, because two different instances of a package might be referenced.
 	}
 	
 	public void testBug_280413_03() throws Exception {
