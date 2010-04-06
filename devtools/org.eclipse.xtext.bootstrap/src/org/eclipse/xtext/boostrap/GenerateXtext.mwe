@@ -23,7 +23,6 @@
 			<property name="basePackage" value="org.eclipse"/>
 			
 			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
-			<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment" basePackage="${basePackage}"/>
 			<fragment class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
 			<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
 			<fragment class="de.itemis.xtext.antlr.XtextAntlrGeneratorFragment">
@@ -46,7 +45,6 @@
 				
 		<language uri="platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/common/Terminals.xtext">
 			<fragment class="org.eclipse.xtext.generator.grammarAccess.GrammarAccessFragment"/>
-			<fragment class="org.eclipse.xtext.generator.ecore.EcoreGeneratorFragment"/>
 			<fragment class="org.eclipse.xtext.generator.parser.PackratParserFragment"/>
 			<fragment class="org.eclipse.xtext.generator.parseTreeConstructor.ParseTreeConstructorFragment"/>
 			

@@ -119,15 +119,13 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "INT0");
 		private final Keyword cINTKeyword = (Keyword)rule.eContents().get(1);
 		
-		//INT0 returns INT:
-		//  "INT"; 
+		/// * TODO: implement this rule and an appropriate IValueConverter * /
 		//
-		//    
-		//	  / * TODO: implement this rule and an appropriate IValueConverter * /
+		//INT0 returns INT:
+		//  "INT";
 		public ParserRule getRule() { return rule; }
 
-		//"INT" 
-		//	  / * TODO: implement this rule and an appropriate IValueConverter * /
+		//"INT"
 		public Keyword getINTKeyword() { return cINTKeyword; }
 	}
 
@@ -302,11 +300,10 @@ public class Ecore2XtextTestGrammarAccess extends AbstractGrammarElementFinder {
 		return getAbstractAccess().getRule();
 	}
 
-	//INT0 returns INT:
-	//  "INT"; 
+	/// * TODO: implement this rule and an appropriate IValueConverter * /
 	//
-	//    
-	//	  / * TODO: implement this rule and an appropriate IValueConverter * /
+	//INT0 returns INT:
+	//  "INT";
 	public INT0Elements getINT0Access() {
 		return (pINT0 != null) ? pINT0 : (pINT0 = new INT0Elements());
 	}

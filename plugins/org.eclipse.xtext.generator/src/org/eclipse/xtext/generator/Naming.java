@@ -47,6 +47,10 @@ public class Naming {
 	public String setup(Grammar g) {
 		return basePackageRuntime(g)+"."+getName(g) + "StandaloneSetup";
 	}
+	
+	public String setupImpl(Grammar g) {
+		return basePackageRuntime(g)+"."+getName(g) + "StandaloneSetupGenerated";
+	}
 
 	public String activator() {
 		return uiBasePackage+ ".Activator";

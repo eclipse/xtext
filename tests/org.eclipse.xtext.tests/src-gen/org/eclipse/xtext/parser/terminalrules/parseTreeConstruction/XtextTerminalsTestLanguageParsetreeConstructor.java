@@ -839,23 +839,11 @@ protected class AbstractRule_EnumRuleParserRuleCall_2 extends RuleCallToken {
 /************ begin Rule AbstractMetamodelDeclaration ****************
  *
  * AbstractMetamodelDeclaration:
- *   GeneratedMetamodel|ReferencedMetamodel; 
- * 
- *   
- * 	    
- * 	
- * // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
- * // generated metamodels have to have different aliases
+ *   GeneratedMetamodel|ReferencedMetamodel;
  *
  **/
 
-// GeneratedMetamodel|ReferencedMetamodel 
-// 
-//   
-// 	    
-// 	
-// // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
-// // generated metamodels have to have different aliases
+// GeneratedMetamodel|ReferencedMetamodel
 protected class AbstractMetamodelDeclaration_Alternatives extends AlternativesToken {
 
 	public AbstractMetamodelDeclaration_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -959,16 +947,12 @@ protected class AbstractMetamodelDeclaration_ReferencedMetamodelParserRuleCall_1
 
 /************ begin Rule GeneratedMetamodel ****************
  *
- * GeneratedMetamodel:
- *   "generate" name=ID ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?; 
- * 	
  * // constraint: typeSelect(GeneratedMetamodel).size() == typeSelect(GeneratedMetamodel).alias.size()
  * // generated metamodels have to have different aliases
- *   
- * 	        
  * 
- * // referenced metamodels may share aliases with other referenced metamodels
- * // and with generated metamodels
+ * 
+ * GeneratedMetamodel:
+ *   "generate" name=ID ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?;
  *
  **/
 
@@ -1177,11 +1161,12 @@ protected class GeneratedMetamodel_AliasAssignment_3_1 extends AssignmentToken  
 
 /************ begin Rule ReferencedMetamodel ****************
  *
- * ReferencedMetamodel:
- *   "import" ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?; 
- * 
  * // referenced metamodels may share aliases with other referenced metamodels
  * // and with generated metamodels
+ * 
+ * 
+ * ReferencedMetamodel:
+ *   "import" ePackage=[ecore::EPackage|STRING] ("as" alias=ID)?;
  *
  **/
 

@@ -347,12 +347,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 		private final RuleCall cNameSTRINGTerminalRuleCall_0 = (RuleCall)cNameAssignment.eContents().get(0);
 		
 		//Child2:
-		//  name=STRING; 
-		//
-		//  
-		//
-		//// TODO rename test language to ValueConverterTestLanguage
-		//// TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug
+		//  name=STRING;
 		public ParserRule getRule() { return rule; }
 
 		//name=STRING
@@ -446,12 +441,7 @@ public class Bug250313GrammarAccess extends AbstractGrammarElementFinder {
 	}
 
 	//Child2:
-	//  name=STRING; 
-	//
-	//  
-	//
-	//// TODO rename test language to ValueConverterTestLanguage
-	//// TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug
+	//  name=STRING;
 	public Child2Elements getChild2Access() {
 		return (pChild2 != null) ? pChild2 : (pChild2 = new Child2Elements());
 	}

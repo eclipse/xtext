@@ -1391,10 +1391,11 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 		private final RuleCall cEachOpExecutableParserRuleCall_2_1_1_0 = (RuleCall)cEachOpAssignment_2_1_1.eContents().get(0);
 		private final Keyword cSemicolonKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
-		//Migration:
-		//  "migrate" first=Executable? ("as" asOp=Executable|"each" eachOp=Executable)? ";"; 
-		//	
 		//// ******************* migration *****************************
+		//
+		//
+		//Migration:
+		//  "migrate" first=Executable? ("as" asOp=Executable|"each" eachOp=Executable)? ";";
 		public ParserRule getRule() { return rule; }
 
 		//"migrate" first=Executable? ("as" asOp=Executable|"each" eachOp=Executable)? ";"
@@ -1782,20 +1783,16 @@ public class EpatchTestLanguageGrammarAccess extends AbstractGrammarElementFinde
 	}
 
 	//terminal FRAGMENT:
-	//  "#" ("a".."z" | "A".."Z" | "0".."9" | "_" | "/" | "[" | "]" | "{" | "}" | "." | "@")+; 
-	//	
-	//   
-	//	  
-	//	
-	//// ******************* migration *****************************
+	//  "#" ("a".."z" | "A".."Z" | "0".."9" | "_" | "/" | "[" | "]" | "{" | "}" | "." | "@")+;
 	public TerminalRule getFRAGMENTRule() {
 		return (tFRAGMENT != null) ? tFRAGMENT : (tFRAGMENT = (TerminalRule) GrammarUtil.findRuleForName(getGrammar(), "FRAGMENT"));
 	} 
 
-	//Migration:
-	//  "migrate" first=Executable? ("as" asOp=Executable|"each" eachOp=Executable)? ";"; 
-	//	
 	//// ******************* migration *****************************
+	//
+	//
+	//Migration:
+	//  "migrate" first=Executable? ("as" asOp=Executable|"each" eachOp=Executable)? ";";
 	public MigrationElements getMigrationAccess() {
 		return (pMigration != null) ? pMigration : (pMigration = new MigrationElements());
 	}

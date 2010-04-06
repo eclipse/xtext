@@ -15,7 +15,22 @@
 
 
 «DEFINE pre FOR Grammar-»
+«FILE setup().asPath()+".java" SRC»
 package «setup().toJavaPackage()»;
+
+/**
+ * Initialization support for running Xtext languages 
+ * without equinox extension registry
+ */
+public class «setup().toSimpleName()» extends «setupImpl().toJavaPackage()==setup().toJavaPackage() ? setupImpl().toSimpleName() : setupImpl()»{
+
+	public static void doSetup() {
+		new «setup().toSimpleName()»().createInjectorAndDoEMFRegistration();
+	}
+}
+
+«ENDFILE»
+package «setupImpl().toJavaPackage()»;
 
 import org.eclipse.emf.ecore.EPackage;
 import org.eclipse.xtext.ISetup;
@@ -27,11 +42,7 @@ import com.google.inject.Injector;
 /**
  * Generated from StandaloneSetup.xpt!
  */
-public class «setup().toSimpleName()» implements ISetup {
-
-	public static void doSetup() {
-		new «setup().toSimpleName()»().createInjectorAndDoEMFRegistration();
-	}
+public class «setupImpl().toSimpleName()» implements ISetup {
 
 	public Injector createInjectorAndDoEMFRegistration() {
 		«FOREACH usedGrammars AS usedGrammar-»

@@ -1090,15 +1090,15 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	
 	public void testBug_280413_04() throws Exception {
 		final String grammar =
-			"grammar test with org.eclipse.xtext.Xtext\n" +
+			"grammar test with org.eclipse.xtext.testlanguages.SimpleExpressionsTestLanguage\n" +
 			"generate test 'http://test'\n" +
-			"import 'classpath:/org/eclipse/xtext/Xtext.ecore' as xtext\n" +
-			"ParserRule returns xtext::ParserRule: name=ID;";
+			"import 'classpath:/org/eclipse/xtext/testlanguages/SimpleExpressionsTestLanguage.ecore' as mm\n" +
+			"Atom returns mm::Atom: name=ID;";
 		XtextResource resource = getResourceFromStringAndExpect(grammar, 1);
 		assertEquals(resource.getErrors().toString(), 1, resource.getErrors().size());
 		TransformationDiagnostic diagnostic = (TransformationDiagnostic) resource.getErrors().get(0);
-		assertEquals(grammar.indexOf("xtext::ParserRule"), diagnostic.getOffset());
-		assertEquals("xtext::ParserRule".length(), diagnostic.getLength());
+		assertEquals(grammar.indexOf("mm::Atom"), diagnostic.getOffset());
+		assertEquals("mm::Atom".length(), diagnostic.getLength());
 	}
 	
 	/**

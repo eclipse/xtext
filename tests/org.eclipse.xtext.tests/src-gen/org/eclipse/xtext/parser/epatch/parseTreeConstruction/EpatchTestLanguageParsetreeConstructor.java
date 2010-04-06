@@ -6392,10 +6392,11 @@ protected class ObjectCopy_FragmentAssignment_2 extends AssignmentToken  {
 
 /************ begin Rule Migration ****************
  *
- * Migration:
- *   "migrate" first=Executable? ("as" asOp=Executable|"each" eachOp=Executable)? ";"; 
- * 	
  * // ******************* migration *****************************
+ * 
+ * 
+ * Migration:
+ *   "migrate" first=Executable? ("as" asOp=Executable|"each" eachOp=Executable)? ";";
  *
  **/
 

@@ -1117,12 +1117,7 @@ protected class Child1_NameAssignment extends AssignmentToken  {
 /************ begin Rule Child2 ****************
  *
  * Child2:
- *   name=STRING; 
- * 
- *   
- * 
- * // TODO rename test language to ValueConverterTestLanguage
- * // TODO add tests for features that are '+=' and '=' in the same type - should use add or add / exc if set - file bug
+ *   name=STRING;
  *
  **/
 

@@ -1344,7 +1344,6 @@ rule__Object__UnorderedGroup_5__Impl
 	 				}
 					(
 					
-					
 						{ before(grammarAccess.getObjectAccess().getGroup_5_0()); }
 						(rule__Object__Group_5_0__0)
 						{ after(grammarAccess.getObjectAccess().getGroup_5_0()); }
@@ -1361,7 +1360,6 @@ rule__Object__UnorderedGroup_5__Impl
 	 				  getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 1);
 	 				}
 					(
-					
 					
 						{ before(grammarAccess.getObjectAccess().getGroup_5_1()); }
 						(rule__Object__Group_5_1__0)
@@ -1380,7 +1378,6 @@ rule__Object__UnorderedGroup_5__Impl
 	 				}
 					(
 					
-					
 						{ before(grammarAccess.getObjectAccess().getGroup_5_2()); }
 						(rule__Object__Group_5_2__0)
 						{ after(grammarAccess.getObjectAccess().getGroup_5_2()); }
@@ -1398,7 +1395,6 @@ rule__Object__UnorderedGroup_5__Impl
 	 				}
 					(
 					
-					
 						{ before(grammarAccess.getObjectAccess().getGroup_5_3()); }
 						(rule__Object__Group_5_3__0)
 						{ after(grammarAccess.getObjectAccess().getGroup_5_3()); }
@@ -1415,7 +1411,6 @@ rule__Object__UnorderedGroup_5__Impl
 	 				  getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 4);
 	 				}
 					(
-					
 					(
 						{ before(grammarAccess.getObjectAccess().getFeaturesAssignment_5_4()); }
 						(rule__Object__FeaturesAssignment_5_4)
@@ -1439,7 +1434,6 @@ rule__Object__UnorderedGroup_5__Impl
 	 				}
 					(
 					
-					
 						{ before(grammarAccess.getObjectAccess().getGroup_5_5()); }
 						(rule__Object__Group_5_5__0)
 						{ after(grammarAccess.getObjectAccess().getGroup_5_5()); }
@@ -1457,7 +1451,6 @@ rule__Object__UnorderedGroup_5__Impl
 	 				}
 					(
 					
-					
 						{ before(grammarAccess.getObjectAccess().getGroup_5_6()); }
 						(rule__Object__Group_5_6__0)
 						{ after(grammarAccess.getObjectAccess().getGroup_5_6()); }
@@ -1474,7 +1467,6 @@ rule__Object__UnorderedGroup_5__Impl
 	 				  getUnorderedGroupHelper().select(grammarAccess.getObjectAccess().getUnorderedGroup_5(), 7);
 	 				}
 					(
-					
 					
 						{ before(grammarAccess.getObjectAccess().getGroup_5_7()); }
 						(rule__Object__Group_5_7__0)
@@ -1642,7 +1634,6 @@ rule__Reference__UnorderedGroup_4_0_1__Impl
 	 				}
 					(
 					
-					
 						{ before(grammarAccess.getReferenceAccess().getGroup_4_0_1_0()); }
 						(rule__Reference__Group_4_0_1_0__0)
 						{ after(grammarAccess.getReferenceAccess().getGroup_4_0_1_0()); }
@@ -1659,7 +1650,6 @@ rule__Reference__UnorderedGroup_4_0_1__Impl
 	 				  getUnorderedGroupHelper().select(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), 1);
 	 				}
 					(
-					
 					
 						{ before(grammarAccess.getReferenceAccess().getGroup_4_0_1_1()); }
 						(rule__Reference__Group_4_0_1_1__0)

@@ -12,7 +12,7 @@
 	<property name="enums.genmodel" value="platform:/resource/${projectName}/src/org/eclipse/xtext/enumrules/enums.genmodel"/>
 	<property name="baseinheritance.genmodel" value="platform:/resource/${projectName}/src-gen/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.genmodel"/>
 	<property name="inheritance.genmodel" value="platform:/resource/${projectName}/src-gen/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.genmodel"/>
-	<property name="xtext.genmodel" value="platform:/resource/org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.genmodel"/>
+	<property name="xtext.genmodel" value="platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.genmodel"/>
 	<property name="supertest.genmodel" value="platform:/resource/${projectName}/src-gen/org/eclipse/xtext/generator/ecore/SuperTestLanguage.genmodel"/>
 	
 	<bean class="org.eclipse.emf.mwe.utils.StandaloneSetup" platformUri="${runtimeProject}/.."/>
