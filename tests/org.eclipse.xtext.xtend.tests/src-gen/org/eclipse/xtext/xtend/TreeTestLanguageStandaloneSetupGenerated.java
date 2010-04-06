@@ -1,3 +1,4 @@
+
 package org.eclipse.xtext.xtend;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -10,11 +11,7 @@ import com.google.inject.Injector;
 /**
  * Generated from StandaloneSetup.xpt!
  */
-public class TreeTestLanguageStandaloneSetup implements ISetup {
-
-	public static void doSetup() {
-		new TreeTestLanguageStandaloneSetup().createInjectorAndDoEMFRegistration();
-	}
+public class TreeTestLanguageStandaloneSetupGenerated implements ISetup {
 
 	public Injector createInjectorAndDoEMFRegistration() {
 		org.eclipse.xtext.common.TerminalsStandaloneSetup.doSetup();
