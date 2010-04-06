@@ -261,7 +261,7 @@ public class Generator extends AbstractWorkflowComponent2 {
 	}
 
 	private void addToStandaloneSetup(LanguageConfig config, XpandExecutionContext ctx) {
-		ctx.getOutput().openFile(naming.asPath(naming.setup(config.getGrammar())) + ".java", SRC_GEN);
+		ctx.getOutput().openFile(naming.asPath(naming.setupImpl(config.getGrammar())) + ".java", SRC_GEN);
 		try {
 			XpandFacade facade = XpandFacade.create(ctx);
 			facade.evaluate("org::eclipse::xtext::generator::StandaloneSetup::pre", config.getGrammar());

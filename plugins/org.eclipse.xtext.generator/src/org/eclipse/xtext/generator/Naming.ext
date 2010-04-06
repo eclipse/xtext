@@ -24,6 +24,9 @@ String guiceModuleUi(Grammar g) :
 String setup(Grammar g) :
 	getNaming().setup(g);
 	
+String setupImpl(Grammar g) :
+	getNaming().setupImpl(g);
+	
 String executableExtensionFactory(Grammar g) :
 	getNaming().executableExtensionFactory(g);
 	

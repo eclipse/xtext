@@ -12,7 +12,7 @@ var ametamodel.genmodel = "platform:/resource/${projectName}/src/org/eclipse/xte
 var enums.genmodel = "platform:/resource/${projectName}/src/org/eclipse/xtext/enumrules/enums.genmodel"
 var baseinheritance.genmodel = "platform:/resource/${projectName}/src-gen/org/eclipse/xtext/grammarinheritance/BaseInheritanceTestLanguage.genmodel"
 var inheritance.genmodel = "platform:/resource/${projectName}/src-gen/org/eclipse/xtext/grammarinheritance/InheritanceTestLanguage.genmodel"
-var xtext.genmodel = "platform:/resource/org.eclipse.xtext/src-gen/org/eclipse/xtext/Xtext.genmodel"
+var xtext.genmodel = "platform:/resource/org.eclipse.xtext/src/org/eclipse/xtext/Xtext.genmodel"
 var supertest.genmodel = "platform:/resource/${projectName}/src-gen/org/eclipse/xtext/generator/ecore/SuperTestLanguage.genmodel"
 
 Workflow {
