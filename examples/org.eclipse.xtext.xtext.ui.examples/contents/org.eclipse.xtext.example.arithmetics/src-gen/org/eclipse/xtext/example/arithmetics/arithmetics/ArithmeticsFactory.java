@@ -143,15 +143,6 @@ public interface ArithmeticsFactory extends EFactory
   NumberLiteral createNumberLiteral();
 
   /**
-   * Returns a new object of class '<em>Pi</em>'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return a new object of class '<em>Pi</em>'.
-   * @generated
-   */
-  Pi createPi();
-
-  /**
    * Returns a new object of class '<em>Function Call</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

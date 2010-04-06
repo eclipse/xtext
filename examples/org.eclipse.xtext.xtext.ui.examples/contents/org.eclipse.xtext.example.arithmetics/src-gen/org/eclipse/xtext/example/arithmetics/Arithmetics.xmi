@@ -204,14 +204,6 @@
         <elements xsi:type="xtext:Group">
           <elements xsi:type="xtext:Action">
             <type metamodel="/0/@metamodelDeclarations.1">
-              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/Xtext/example/Arithmetics#//Pi"/>
-            </type>
-          </elements>
-          <elements xsi:type="xtext:Keyword" value="&#xb9;"/>
-        </elements>
-        <elements xsi:type="xtext:Group">
-          <elements xsi:type="xtext:Action">
-            <type metamodel="/0/@metamodelDeclarations.1">
               <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/Xtext/example/Arithmetics#//FunctionCall"/>
             </type>
           </elements>

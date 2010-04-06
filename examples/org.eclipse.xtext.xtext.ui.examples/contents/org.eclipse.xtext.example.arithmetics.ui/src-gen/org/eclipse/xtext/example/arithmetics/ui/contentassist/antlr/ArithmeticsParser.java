@@ -61,9 +61,8 @@ public class ArithmeticsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getPrimaryExpressionAccess().getGroup_0(), "rule__PrimaryExpression__Group_0__0");
 					put(grammarAccess.getPrimaryExpressionAccess().getGroup_1(), "rule__PrimaryExpression__Group_1__0");
 					put(grammarAccess.getPrimaryExpressionAccess().getGroup_2(), "rule__PrimaryExpression__Group_2__0");
-					put(grammarAccess.getPrimaryExpressionAccess().getGroup_3(), "rule__PrimaryExpression__Group_3__0");
-					put(grammarAccess.getPrimaryExpressionAccess().getGroup_3_2(), "rule__PrimaryExpression__Group_3_2__0");
-					put(grammarAccess.getPrimaryExpressionAccess().getGroup_3_2_2(), "rule__PrimaryExpression__Group_3_2_2__0");
+					put(grammarAccess.getPrimaryExpressionAccess().getGroup_2_2(), "rule__PrimaryExpression__Group_2_2__0");
+					put(grammarAccess.getPrimaryExpressionAccess().getGroup_2_2_2(), "rule__PrimaryExpression__Group_2_2_2__0");
 					put(grammarAccess.getModuleAccess().getNameAssignment_1(), "rule__Module__NameAssignment_1");
 					put(grammarAccess.getModuleAccess().getImportsAssignment_2(), "rule__Module__ImportsAssignment_2");
 					put(grammarAccess.getModuleAccess().getStatementsAssignment_3(), "rule__Module__StatementsAssignment_3");
@@ -77,9 +76,9 @@ public class ArithmeticsParser extends AbstractContentAssistParser {
 					put(grammarAccess.getAdditionAccess().getRightAssignment_1_1(), "rule__Addition__RightAssignment_1_1");
 					put(grammarAccess.getMultiplicationAccess().getRightAssignment_1_1(), "rule__Multiplication__RightAssignment_1_1");
 					put(grammarAccess.getPrimaryExpressionAccess().getValueAssignment_1_1(), "rule__PrimaryExpression__ValueAssignment_1_1");
-					put(grammarAccess.getPrimaryExpressionAccess().getFuncAssignment_3_1(), "rule__PrimaryExpression__FuncAssignment_3_1");
-					put(grammarAccess.getPrimaryExpressionAccess().getArgsAssignment_3_2_1(), "rule__PrimaryExpression__ArgsAssignment_3_2_1");
-					put(grammarAccess.getPrimaryExpressionAccess().getArgsAssignment_3_2_2_1(), "rule__PrimaryExpression__ArgsAssignment_3_2_2_1");
+					put(grammarAccess.getPrimaryExpressionAccess().getFuncAssignment_2_1(), "rule__PrimaryExpression__FuncAssignment_2_1");
+					put(grammarAccess.getPrimaryExpressionAccess().getArgsAssignment_2_2_1(), "rule__PrimaryExpression__ArgsAssignment_2_2_1");
+					put(grammarAccess.getPrimaryExpressionAccess().getArgsAssignment_2_2_2_1(), "rule__PrimaryExpression__ArgsAssignment_2_2_2_1");
 				}
 			};
 		}

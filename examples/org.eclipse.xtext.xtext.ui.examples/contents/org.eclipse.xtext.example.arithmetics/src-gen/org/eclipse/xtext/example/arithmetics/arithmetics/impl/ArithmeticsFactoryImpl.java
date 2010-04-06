@@ -80,7 +80,6 @@ public class ArithmeticsFactoryImpl extends EFactoryImpl implements ArithmeticsF
       case ArithmeticsPackage.MULTI: return createMulti();
       case ArithmeticsPackage.DIV: return createDiv();
       case ArithmeticsPackage.NUMBER_LITERAL: return createNumberLiteral();
-      case ArithmeticsPackage.PI: return createPi();
       case ArithmeticsPackage.FUNCTION_CALL: return createFunctionCall();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
@@ -228,17 +227,6 @@ public class ArithmeticsFactoryImpl extends EFactoryImpl implements ArithmeticsF
   {
     NumberLiteralImpl numberLiteral = new NumberLiteralImpl();
     return numberLiteral;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  public Pi createPi()
-  {
-    PiImpl pi = new PiImpl();
-    return pi;
   }
 
   /**

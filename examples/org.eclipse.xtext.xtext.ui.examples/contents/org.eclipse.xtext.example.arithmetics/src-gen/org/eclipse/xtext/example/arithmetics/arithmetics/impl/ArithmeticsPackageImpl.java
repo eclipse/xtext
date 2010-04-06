@@ -26,7 +26,6 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.Minus;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Module;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Multi;
 import org.eclipse.xtext.example.arithmetics.arithmetics.NumberLiteral;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Pi;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Plus;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Statement;
 
@@ -128,13 +127,6 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * @generated
    */
   private EClass numberLiteralEClass = null;
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
-  private EClass piEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -511,16 +503,6 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
    * <!-- end-user-doc -->
    * @generated
    */
-  public EClass getPi()
-  {
-    return piEClass;
-  }
-
-  /**
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   */
   public EClass getFunctionCall()
   {
     return functionCallEClass;
@@ -619,8 +601,6 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
     numberLiteralEClass = createEClass(NUMBER_LITERAL);
     createEAttribute(numberLiteralEClass, NUMBER_LITERAL__VALUE);
 
-    piEClass = createEClass(PI);
-
     functionCallEClass = createEClass(FUNCTION_CALL);
     createEReference(functionCallEClass, FUNCTION_CALL__FUNC);
     createEReference(functionCallEClass, FUNCTION_CALL__ARGS);
@@ -664,7 +644,6 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
     multiEClass.getESuperTypes().add(this.getExpression());
     divEClass.getESuperTypes().add(this.getExpression());
     numberLiteralEClass.getESuperTypes().add(this.getExpression());
-    piEClass.getESuperTypes().add(this.getExpression());
     functionCallEClass.getESuperTypes().add(this.getExpression());
 
     // Initialize classes and features; add operations and parameters
@@ -710,8 +689,6 @@ public class ArithmeticsPackageImpl extends EPackageImpl implements ArithmeticsP
 
     initEClass(numberLiteralEClass, NumberLiteral.class, "NumberLiteral", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getNumberLiteral_Value(), ecorePackage.getEBigDecimal(), "value", null, 0, 1, NumberLiteral.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
-
-    initEClass(piEClass, Pi.class, "Pi", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
 
     initEClass(functionCallEClass, FunctionCall.class, "FunctionCall", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEReference(getFunctionCall_Func(), this.getAbstractDefinition(), null, "func", null, 0, 1, FunctionCall.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);

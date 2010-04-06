@@ -56,7 +56,6 @@
   <eClassifiers xsi:type="ecore:EClass" name="NumberLiteral" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EAttribute" name="value" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EBigDecimal"/>
   </eClassifiers>
-  <eClassifiers xsi:type="ecore:EClass" name="Pi" eSuperTypes="#//Expression"/>
   <eClassifiers xsi:type="ecore:EClass" name="FunctionCall" eSuperTypes="#//Expression">
     <eStructuralFeatures xsi:type="ecore:EReference" name="func" eType="#//AbstractDefinition"/>
     <eStructuralFeatures xsi:type="ecore:EReference" name="args" upperBound="-1" eType="#//Expression"

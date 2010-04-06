@@ -848,26 +848,10 @@ rulePrimaryExpression returns [EObject current=null]
 ))
     |((
     { 
-        temp=factory.create(grammarAccess.getPrimaryExpressionAccess().getPiAction_2_0().getType().getClassifier());
+        temp=factory.create(grammarAccess.getPrimaryExpressionAccess().getFunctionCallAction_2_0().getType().getClassifier());
         $current = temp; 
         temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getPiAction_2_0(), currentNode.getParent());
-    newNode.getChildren().add(currentNode);
-    moveLookaheadInfo(currentNode, newNode);
-    currentNode = newNode; 
-        associateNodeWithAstElement(currentNode, $current); 
-    }
-)	'\u00B9' 
-    {
-        createLeafNode(grammarAccess.getPrimaryExpressionAccess().getSuperscriptOneKeyword_2_1(), null); 
-    }
-)
-    |((
-    { 
-        temp=factory.create(grammarAccess.getPrimaryExpressionAccess().getFunctionCallAction_3_0().getType().getClassifier());
-        $current = temp; 
-        temp = null;
-        CompositeNode newNode = createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getFunctionCallAction_3_0(), currentNode.getParent());
+        CompositeNode newNode = createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getFunctionCallAction_2_0(), currentNode.getParent());
     newNode.getChildren().add(currentNode);
     moveLookaheadInfo(currentNode, newNode);
     currentNode = newNode; 
@@ -883,18 +867,46 @@ rulePrimaryExpression returns [EObject current=null]
         }
 	RULE_ID
 	{
-		createLeafNode(grammarAccess.getPrimaryExpressionAccess().getFuncAbstractDefinitionCrossReference_3_1_0(), "func"); 
+		createLeafNode(grammarAccess.getPrimaryExpressionAccess().getFuncAbstractDefinitionCrossReference_2_1_0(), "func"); 
 	}
 
 )
 )(	'(' 
     {
-        createLeafNode(grammarAccess.getPrimaryExpressionAccess().getLeftParenthesisKeyword_3_2_0(), null); 
+        createLeafNode(grammarAccess.getPrimaryExpressionAccess().getLeftParenthesisKeyword_2_2_0(), null); 
     }
 (
 (
 		{ 
-	        currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getArgsExpressionParserRuleCall_3_2_1_0(), currentNode); 
+	        currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getArgsExpressionParserRuleCall_2_2_1_0(), currentNode); 
+	    }
+		lv_args_8_0=ruleExpression		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getPrimaryExpressionRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"args",
+	        		lv_args_8_0, 
+	        		"Expression", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+)(	',' 
+    {
+        createLeafNode(grammarAccess.getPrimaryExpressionAccess().getCommaKeyword_2_2_2_0(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getArgsExpressionParserRuleCall_2_2_2_1_0(), currentNode); 
 	    }
 		lv_args_10_0=ruleExpression		{
 	        if ($current==null) {
@@ -915,37 +927,9 @@ rulePrimaryExpression returns [EObject current=null]
 	    }
 
 )
-)(	',' 
-    {
-        createLeafNode(grammarAccess.getPrimaryExpressionAccess().getCommaKeyword_3_2_2_0(), null); 
-    }
-(
-(
-		{ 
-	        currentNode=createCompositeNode(grammarAccess.getPrimaryExpressionAccess().getArgsExpressionParserRuleCall_3_2_2_1_0(), currentNode); 
-	    }
-		lv_args_12_0=ruleExpression		{
-	        if ($current==null) {
-	            $current = factory.create(grammarAccess.getPrimaryExpressionRule().getType().getClassifier());
-	            associateNodeWithAstElement(currentNode.getParent(), $current);
-	        }
-	        try {
-	       		add(
-	       			$current, 
-	       			"args",
-	        		lv_args_12_0, 
-	        		"Expression", 
-	        		currentNode);
-	        } catch (ValueConverterException vce) {
-				handleValueConverterException(vce);
-	        }
-	        currentNode = currentNode.getParent();
-	    }
-
-)
 ))*	')' 
     {
-        createLeafNode(grammarAccess.getPrimaryExpressionAccess().getRightParenthesisKeyword_3_2_3(), null); 
+        createLeafNode(grammarAccess.getPrimaryExpressionAccess().getRightParenthesisKeyword_2_2_3(), null); 
     }
 )?))
 ;

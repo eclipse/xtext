@@ -478,25 +478,6 @@ public interface ArithmeticsPackage extends EPackage
   int NUMBER_LITERAL_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 1;
 
   /**
-   * The meta object id for the '{@link org.eclipse.xtext.example.arithmetics.arithmetics.impl.PiImpl <em>Pi</em>}' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @see org.eclipse.xtext.example.arithmetics.arithmetics.impl.PiImpl
-   * @see org.eclipse.xtext.example.arithmetics.arithmetics.impl.ArithmeticsPackageImpl#getPi()
-   * @generated
-   */
-  int PI = 13;
-
-  /**
-   * The number of structural features of the '<em>Pi</em>' class.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @generated
-   * @ordered
-   */
-  int PI_FEATURE_COUNT = EXPRESSION_FEATURE_COUNT + 0;
-
-  /**
    * The meta object id for the '{@link org.eclipse.xtext.example.arithmetics.arithmetics.impl.FunctionCallImpl <em>Function Call</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -504,7 +485,7 @@ public interface ArithmeticsPackage extends EPackage
    * @see org.eclipse.xtext.example.arithmetics.arithmetics.impl.ArithmeticsPackageImpl#getFunctionCall()
    * @generated
    */
-  int FUNCTION_CALL = 14;
+  int FUNCTION_CALL = 13;
 
   /**
    * The feature id for the '<em><b>Func</b></em>' reference.
@@ -852,16 +833,6 @@ public interface ArithmeticsPackage extends EPackage
   EAttribute getNumberLiteral_Value();
 
   /**
-   * Returns the meta object for class '{@link org.eclipse.xtext.example.arithmetics.arithmetics.Pi <em>Pi</em>}'.
-   * <!-- begin-user-doc -->
-   * <!-- end-user-doc -->
-   * @return the meta object for class '<em>Pi</em>'.
-   * @see org.eclipse.xtext.example.arithmetics.arithmetics.Pi
-   * @generated
-   */
-  EClass getPi();
-
-  /**
    * Returns the meta object for class '{@link org.eclipse.xtext.example.arithmetics.arithmetics.FunctionCall <em>Function Call</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -1181,16 +1152,6 @@ public interface ArithmeticsPackage extends EPackage
      * @generated
      */
     EAttribute NUMBER_LITERAL__VALUE = eINSTANCE.getNumberLiteral_Value();
-
-    /**
-     * The meta object literal for the '{@link org.eclipse.xtext.example.arithmetics.arithmetics.impl.PiImpl <em>Pi</em>}' class.
-     * <!-- begin-user-doc -->
-     * <!-- end-user-doc -->
-     * @see org.eclipse.xtext.example.arithmetics.arithmetics.impl.PiImpl
-     * @see org.eclipse.xtext.example.arithmetics.arithmetics.impl.ArithmeticsPackageImpl#getPi()
-     * @generated
-     */
-    EClass PI = eINSTANCE.getPi();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.example.arithmetics.arithmetics.impl.FunctionCallImpl <em>Function Call</em>}' class.

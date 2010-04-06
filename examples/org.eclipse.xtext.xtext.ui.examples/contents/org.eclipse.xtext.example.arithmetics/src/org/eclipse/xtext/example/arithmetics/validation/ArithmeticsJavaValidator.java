@@ -17,7 +17,6 @@ import org.eclipse.xtext.example.arithmetics.arithmetics.Evaluation;
 import org.eclipse.xtext.example.arithmetics.arithmetics.Expression;
 import org.eclipse.xtext.example.arithmetics.arithmetics.FunctionCall;
 import org.eclipse.xtext.example.arithmetics.arithmetics.NumberLiteral;
-import org.eclipse.xtext.example.arithmetics.arithmetics.Pi;
 import org.eclipse.xtext.example.arithmetics.interpreter.Calculator;
 import org.eclipse.xtext.validation.Check;
  
@@ -32,7 +31,6 @@ public class ArithmeticsJavaValidator extends AbstractArithmeticsJavaValidator {
 	public void checkNormalizable(Expression expr) {
 		// ignore literals
 		if ((expr instanceof NumberLiteral) 
-			|| (expr instanceof Pi)
 			|| (expr instanceof FunctionCall)
 			) 
 			return;

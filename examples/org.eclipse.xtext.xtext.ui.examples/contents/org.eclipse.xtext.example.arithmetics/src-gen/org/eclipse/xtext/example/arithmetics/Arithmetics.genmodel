@@ -49,7 +49,6 @@
     <genClasses ecoreClass="Arithmetics.ecore#//NumberLiteral">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Arithmetics.ecore#//NumberLiteral/value"/>
     </genClasses>
-    <genClasses ecoreClass="Arithmetics.ecore#//Pi"/>
     <genClasses ecoreClass="Arithmetics.ecore#//FunctionCall">
       <genFeatures notify="false" createChild="false" propertySortChoices="true" ecoreFeature="ecore:EReference Arithmetics.ecore#//FunctionCall/func"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Arithmetics.ecore#//FunctionCall/args"/>

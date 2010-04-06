@@ -47,8 +47,7 @@ Multiplication returns Expression:
 
 PrimaryExpression returns Expression:
 	'('Expression')'|
-	{NumberLiteral} value=NUMBER|
-	{Pi} '¹'|
+	{NumberLiteral} value=NUMBER |
 	{FunctionCall} func=[AbstractDefinition]('('args+=Expression (',' args+=Expression)*')')?
 ;
 

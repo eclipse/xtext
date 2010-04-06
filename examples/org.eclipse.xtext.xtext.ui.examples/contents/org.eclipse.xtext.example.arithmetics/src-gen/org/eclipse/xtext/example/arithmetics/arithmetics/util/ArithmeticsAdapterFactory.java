@@ -143,11 +143,6 @@ public class ArithmeticsAdapterFactory extends AdapterFactoryImpl
         return createNumberLiteralAdapter();
       }
       @Override
-      public Adapter casePi(Pi object)
-      {
-        return createPiAdapter();
-      }
-      @Override
       public Adapter caseFunctionCall(FunctionCall object)
       {
         return createFunctionCallAdapter();
@@ -365,21 +360,6 @@ public class ArithmeticsAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createNumberLiteralAdapter()
-  {
-    return null;
-  }
-
-  /**
-   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.example.arithmetics.arithmetics.Pi <em>Pi</em>}'.
-   * <!-- begin-user-doc -->
-   * This default implementation returns null so that we can easily ignore cases;
-   * it's useful to ignore a case when inheritance will catch all the cases anyway.
-   * <!-- end-user-doc -->
-   * @return the new adapter.
-   * @see org.eclipse.xtext.example.arithmetics.arithmetics.Pi
-   * @generated
-   */
-  public Adapter createPiAdapter()
   {
     return null;
   }
