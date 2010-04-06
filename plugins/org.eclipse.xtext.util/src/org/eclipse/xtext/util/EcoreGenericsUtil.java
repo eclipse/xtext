@@ -72,9 +72,12 @@ public class EcoreGenericsUtil {
 	}
 
 	protected static class TypeBindingAcceptor {
-		private Map<ETypeParameter, EGenericType> bindings = new HashMap<ETypeParameter, EGenericType>();
+		private Map<ETypeParameter, EGenericType> bindings;
 
 		public void accept(ETypeParameter typeParameter, EGenericType typeArgument) {
+			if(bindings==null) {
+				bindings = new HashMap<ETypeParameter, EGenericType>();
+			}
 			ETypeParameter replacedParameter = typeArgument.getETypeParameter();
 			if (replacedParameter != null) {
 				EGenericType existingBoundType = bindings.get(replacedParameter);
@@ -93,6 +96,8 @@ public class EcoreGenericsUtil {
 		}
 
 		public EGenericType getBoundGenericType(ETypeParameter typeParameter) {
+			if(bindings==null) 
+				return null;
 			return bindings.get(typeParameter);
 		}
 	}
