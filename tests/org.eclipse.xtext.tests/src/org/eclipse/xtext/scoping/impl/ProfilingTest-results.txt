@@ -1,0 +1,32 @@
+// initial
+0    INFO  StopWatch          - loading: 990ms
+20   INFO  ResourceSetBasedAllContainersStateProvider - No explicit container state set. Falling back to default.
+37   INFO  ResourceSetBasedAllContainersStateProvider - No explicit container state set. Falling back to default.
+38   INFO  ResourceSetBasedAllContainersStateProvider - No explicit container state set. Falling back to default.
+13673 INFO  StopWatch          - linking: 13674ms
+13750 INFO  StopWatch          - resourcedescriptions: 77ms
+3002
+
+// caching resource scope
+
+0    INFO  StopWatch          - loading: 1012ms
+20   INFO  ResourceSetBasedAllContainersStateProvider - No explicit container state set. Falling back to default.
+36   INFO  ResourceSetBasedAllContainersStateProvider - No explicit container state set. Falling back to default.
+38   INFO  ResourceSetBasedAllContainersStateProvider - No explicit container state set. Falling back to default.
+21101 INFO  StopWatch          - linking: 21102ms
+21275 INFO  StopWatch          - resourcedescriptions: 174ms
+3002
+
+
+// using hashmap and skipping empty scopes
+// caching import normalizers
+
+0    INFO  StopWatch          - loading: 979ms
+34160 INFO  StopWatch          - linking: 34160ms
+34383 INFO  StopWatch          - resourcedescriptions: 223ms
+3002
+
+0    INFO  StopWatch          - loading: 1006ms
+528  INFO  StopWatch          - linking: 528ms
+614  INFO  StopWatch          - resourcedescriptions: 86ms
+3002
