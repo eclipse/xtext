@@ -14,8 +14,10 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -27,13 +29,17 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
+import org.eclipse.xtext.util.OnChangeEvictingCacheAdapter;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
+import org.eclipse.xtext.util.Tuples;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Maps;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -50,15 +56,15 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		public ImportNormalizer(QualifiedName importedNamespace) {
 			this.name = importedNamespace;
 		}
-		
+
 		@Override
 		public int hashCode() {
 			return name.hashCode();
 		}
-		
+
 		@Override
 		public boolean equals(Object obj) {
-			return obj instanceof ImportNormalizer && name.equals(((ImportNormalizer)obj).name);
+			return obj instanceof ImportNormalizer && name.equals(((ImportNormalizer) obj).name);
 		}
 
 		public String shortToLongName(String shortName) {
@@ -133,50 +139,64 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		return !getImportNormalizer(context).isEmpty();
 	}
 
-	protected IScope getResourceScope(IScope parent, final EObject context, final EReference reference) {
+	protected IScope getResourceScope(final IScope parent, final EObject context, final EReference reference) {
 		if (context.eResource() == null)
 			return parent;
-		Iterable<EObject> contents = new Iterable<EObject>() {
-			public Iterator<EObject> iterator() {
-				// context can be a proxy when the iterable will be queried
-				if (context.eResource() == null)
-					return Collections.<EObject>emptyList().iterator();
-				return EcoreUtil.getAllProperContents(context.eResource(), true);
+		return getScope(reference.getEReferenceType().getName(), context.eResource(), parent, new Provider<Map<String, IEObjectDescription>>() {
+			public Map<String, IEObjectDescription> get() {
+				Iterable<EObject> contents = new Iterable<EObject>() {
+					public Iterator<EObject> iterator() {
+						// context can be a proxy when the iterable will be queried
+						if (context.eResource() == null)
+							return Collections.<EObject> emptyList().iterator();
+						return EcoreUtil.getAllProperContents(context.eResource(), true);
+					}
+				};
+				contents = Iterables.filter(contents, typeFilter(reference.getEReferenceType()));
+				return toMap(Scopes.scopedElementsFor(contents, nameProvider));
 			}
-		};
-		contents = Iterables.filter(contents, typeFilter(reference.getEReferenceType()));
-		return Scopes.scopeFor(contents, nameProvider, parent);
+		});
 	}
 
 	private IScope getLocalElements(IScope parent, final EObject context, final EReference reference) {
-		final String commonPrefix = nameProvider.getQualifiedName(context) + ".";
+		return getScope(getKey(context,reference),context,parent, new Provider<Map<String,IEObjectDescription>>(){
 
-		Iterable<EObject> contents = new Iterable<EObject>() {
-			public Iterator<EObject> iterator() {
-				return EcoreUtil.getAllProperContents(context, true);
-			}
-		};
-		// filter by type
-		contents = filter(contents, typeFilter(reference.getEReferenceType()));
-		// transform to IScopedElements
-		Function<EObject, IEObjectDescription> descriptionComputation = new Function<EObject, IEObjectDescription>() {
-			public IEObjectDescription apply(EObject from) {
-				final String fqn = nameProvider.getQualifiedName(from);
-				if (fqn == null)
-					return null;
-				String name = fqn;
-				if (fqn.startsWith(commonPrefix)) {
-					name = fqn.substring(commonPrefix.length());
-				}
-				return new EObjectDescription(name, from, Collections.<String, String>emptyMap()) {
-					@Override
-					public String getQualifiedName() {
-						return fqn;
+			public Map<String, IEObjectDescription> get() {
+				final String commonPrefix = nameProvider.getQualifiedName(context) + ".";
+
+				Iterable<EObject> contents = new Iterable<EObject>() {
+					public Iterator<EObject> iterator() {
+						return EcoreUtil.getAllProperContents(context, true);
 					}
 				};
-			}
-		};
-		return new SimpleScope(parent, Iterables.filter(Iterables.transform(contents, descriptionComputation), Predicates.notNull()));
+				// filter by type
+				contents = filter(contents, typeFilter(reference.getEReferenceType()));
+				// transform to IScopedElements
+				Function<EObject, IEObjectDescription> descriptionComputation = new Function<EObject, IEObjectDescription>() {
+					public IEObjectDescription apply(EObject from) {
+						final String fqn = nameProvider.getQualifiedName(from);
+						if (fqn == null)
+							return null;
+						String name = fqn;
+						if (fqn.startsWith(commonPrefix)) {
+							name = fqn.substring(commonPrefix.length());
+						}
+						return new EObjectDescription(name, from, Collections.<String, String> emptyMap()) {
+							@Override
+							public String getQualifiedName() {
+								return fqn;
+							}
+						};
+					}
+				};
+				Iterable<IEObjectDescription> elements = Iterables.filter(Iterables.transform(contents, descriptionComputation),
+						Predicates.notNull());
+				return toMap(elements);
+			}});
+	}
+
+	protected String getKey(EObject context, EReference reference) {
+		return reference.getEReferenceType().getName();
 	}
 
 	private Predicate<EObject> typeFilter(final EClass type) {
@@ -188,17 +208,21 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		};
 	}
 
-	protected Set<ImportNormalizer> getImportNormalizer(EObject context) {
-		Set<ImportNormalizer> namespaceImports = new HashSet<ImportNormalizer>();
-		SimpleAttributeResolver<EObject, String> importResolver = SimpleAttributeResolver.newResolver(String.class,
+	protected Set<ImportNormalizer> getImportNormalizer(final EObject context) {
+		return OnChangeEvictingCacheAdapter.get(Tuples.pair(context, "imports"), context, new Provider<Set<ImportNormalizer>>() {
+
+			public Set<ImportNormalizer> get() {
+				Set<ImportNormalizer> namespaceImports = new HashSet<ImportNormalizer>();
+				SimpleAttributeResolver<EObject, String> importResolver = SimpleAttributeResolver.newResolver(String.class,
 				"importedNamespace");
-		for (EObject child : context.eContents()) {
-			String value = importResolver.getValue(child);
-			if (value != null) {
-				namespaceImports.add(createImportNormalizer(value));
-			}
-		}
-		return namespaceImports;
+				for (EObject child : context.eContents()) {
+					String value = importResolver.getValue(child);
+					if (value != null) {
+						namespaceImports.add(createImportNormalizer(value));
+					}
+				}
+				return namespaceImports;
+			}});
 	}
 
 	protected ImportNormalizer createImportNormalizer(final String name) {
@@ -223,7 +247,7 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 				}
 				return getOuterScope().getContentByName(name);
 			}
-			
+
 			@Override
 			public IEObjectDescription getContentByEObject(EObject object) {
 				IEObjectDescription candidate = localElements.getContentByEObject(object);
@@ -260,6 +284,19 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 			}
 
 		};
+	}
+	
+	
+	protected IScope getScope(String cacheKey, Notifier cache, IScope parentScope, Provider<Map<String, IEObjectDescription>> mapProvider) {
+		Map<String, IEObjectDescription> map = OnChangeEvictingCacheAdapter.get(Tuples.pair(cache, cacheKey), cache, mapProvider);
+		return map.isEmpty()?parentScope:new MapBasedScope(parentScope,map);
+	}
+	
+	protected Map<String, IEObjectDescription> toMap(Iterable<IEObjectDescription> scopedElementsFor) {
+		return Maps.uniqueIndex(scopedElementsFor, new Function<IEObjectDescription,String>(){
+			public String apply(IEObjectDescription from) {
+				return from.getName();
+			}});
 	}
 
 }

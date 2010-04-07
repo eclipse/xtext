@@ -148,13 +148,7 @@ public class QualifiedNameScopeProviderTest extends AbstractGeneratorTest {
 
 		IScope scope = scopeProvider.getScope(datatype, propertyType);
 		List<String> names = toListOfNames(scope.getContents());
-		assertEquals(names.toString(), 0, names.size());
 
-		scope = scope.getOuterScope(); // stuff {
-		names = toListOfNames(scope.getContents());
-		assertEquals(names.toString(), 0, names.size());
-
-		scope = scope.getOuterScope(); // import stuff.*
 		names = toListOfNames(scope.getContents());
 		assertEquals(names.toString(), 1, names.size());
 		assertTrue(names.toString(), names.contains("baz.Person"));

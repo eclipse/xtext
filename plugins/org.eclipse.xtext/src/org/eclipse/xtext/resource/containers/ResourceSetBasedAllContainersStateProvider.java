@@ -45,8 +45,8 @@ public class ResourceSetBasedAllContainersStateProvider implements IAllContainer
 	}
 
 	protected IAllContainersState handleAdapterNotFound(final ResourceSet resourceSet) {
-		if (log.isInfoEnabled())
-			log.info("No explicit container state set. Falling back to default.");
+		if (log.isDebugEnabled())
+			log.debug("No explicit container state set. Falling back to default.");
 		ResourceSetBasedAllContainersState containersState = new ResourceSetBasedAllContainersState();
 		String containerName = "all";
 		HashMultimap<String, URI> newHashMultimap = Multimaps.newHashMultimap();
