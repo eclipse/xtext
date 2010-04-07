@@ -7,11 +7,15 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
+import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.index.IndexTestLanguageStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.XtextResource;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
+import org.eclipse.xtext.util.StopWatch;
 import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.collect.Sets;
@@ -23,17 +27,21 @@ public class ProfilingTest extends AbstractXtextTests {
 	
 	public void testSimple() throws Exception {
 		with(new IndexTestLanguageStandaloneSetup());
-		long now = System.currentTimeMillis();
-//		XtextResource resource = getResource(new StringInputStream(generateFile(1000)));
-		XtextResource resource = getResource(new StringInputStream(generateFile(10)));
-		long after = System.currentTimeMillis();
-		System.out.println("loading took "+(after-now));
-		now = System.currentTimeMillis();
+		XtextResourceSet rs = get(XtextResourceSet.class);
+		rs.setClasspathURIContext(getClass());
+		XtextResource resource = (XtextResource) getResourceFactory().createResource(URI.createURI("mytestmodel."+getCurrentFileExtension()));
+		rs.getResources().add(resource);
+		StopWatch watch = new StopWatch();
+		resource.load(new StringInputStream(generateFile(10)), null);
+//		resource.load(new StringInputStream(generateFile(1000)), null);
+		watch.resetAndLog("loading");
+		EcoreUtil.resolveAll(resource);
+		watch.resetAndLog("linking");
+		assertTrue(resource.getErrors().size()+" errors ", resource.getErrors().isEmpty());
 		Manager manager = get(IResourceDescription.Manager.class);
 		IResourceDescription iResourceDescription = manager.getResourceDescription(resource);
 		Sets.newHashSet(iResourceDescription.getReferenceDescriptions());
-		after = System.currentTimeMillis();
-		System.out.println("resourcedescription took "+(after-now));
+		watch.resetAndLog("resourcedescriptions");
 		System.out.println(Sets.newHashSet(resource.getAllContents()).size());
 	}
 
@@ -41,11 +49,10 @@ public class ProfilingTest extends AbstractXtextTests {
 		StringBuilder sb = new StringBuilder();
 		sb.append("foo {\n");
 		for (int i = 0;i< numberOfElements ;i++) {
-			sb.append("bar"+i+"{\n");
 			sb.append("  entity Name"+i+"{\n");
-			sb.append("    foo.bar"+i+".Name"+i+" foo\n");
+			sb.append("    Name"+i+" foo\n");
+			sb.append("    foo.Name"+i+" bar\n");
 			sb.append("  }\n");
-			sb.append("}\n");
 		}
 		sb.append("}\n");
 		return sb.toString();
