@@ -293,10 +293,12 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 	}
 	
 	protected Map<String, IEObjectDescription> toMap(Iterable<IEObjectDescription> scopedElementsFor) {
-		return Maps.uniqueIndex(scopedElementsFor, new Function<IEObjectDescription,String>(){
-			public String apply(IEObjectDescription from) {
-				return from.getName();
-			}});
+		Map<String, IEObjectDescription> result = Maps.newHashMap();
+		for (IEObjectDescription ieObjectDescription : scopedElementsFor) {
+			if (!result.containsKey(ieObjectDescription.getName()))
+				result.put(ieObjectDescription.getName(), ieObjectDescription);
+		}
+		return result;
 	}
 
 }
