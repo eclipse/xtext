@@ -1,3 +1,4 @@
+
 package org.eclipse.xtext.example.gmf;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -10,11 +11,7 @@ import com.google.inject.Injector;
 /**
  * Generated from StandaloneSetup.xpt!
  */
-public class EntitiesStandaloneSetup implements ISetup {
-
-	public static void doSetup() {
-		new EntitiesStandaloneSetup().createInjectorAndDoEMFRegistration();
-	}
+public class EntitiesStandaloneSetupGenerated implements ISetup {
 
 	public Injector createInjectorAndDoEMFRegistration() {
 		org.eclipse.xtext.common.TerminalsStandaloneSetup.doSetup();
