@@ -176,6 +176,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.service.GenericModuleTest.class);
       suite.addTestSuite(org.eclipse.xtext.util.AutoBoxingDispatcherTest.class);
       suite.addTestSuite(org.eclipse.xtext.util.ChainedIteratorTest.class);
+      suite.addTestSuite(org.eclipse.xtext.util.EcoreGenericsTest.class);
       suite.addTestSuite(org.eclipse.xtext.util.FilteringIteratorTest.class);
       suite.addTestSuite(org.eclipse.xtext.util.LineFilterOutputStreamTest.class);
       suite.addTestSuite(org.eclipse.xtext.util.MappingIteratorTest.class);
