@@ -1,0 +1,23 @@
+/*******************************************************************************
+ * Copyright (c) 2010 itemis AG (http://www.itemis.eu) and others.
+ * All rights reserved. This program and the accompanying materials
+ * are made available under the terms of the Eclipse Public License v1.0
+ * which accompanies this distribution, and is available at
+ * http://www.eclipse.org/legal/epl-v10.html
+ *******************************************************************************/
+grammar org.eclipse.xtext.ui.tests.editor.contentassist.Bug307519TestLanguage with org.eclipse.xtext.common.Terminals
+
+generate bug307519TestLanguage "http://www.eclipse.org/xtext/ui/common/tests/2010/bug307519TestLanguage"
+
+Model :
+    ((e1 += Elem1)
+    | (e2 += Elem2))+;
+
+enum EnumT :
+    T1 | T2;
+
+Elem1 :
+    value = EnumT;
+
+Elem2 :
+    value = EnumT "foo";

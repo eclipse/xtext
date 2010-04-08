@@ -282,6 +282,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	public LookAheadTerminal createLookAheadTerminal(Token token) {
 		Grammar grammar = getGrammar();
 		String tokenName = getTokenNames()[token.getType()];
+		tokenName = getValueForTokenName(tokenName);
 		if (tokenName.charAt(0) == '\'') {
 			LookaheadKeyword result = new LookaheadKeyword();
 			result.setKeyword(tokenName.substring(1, tokenName.length() - 1));
