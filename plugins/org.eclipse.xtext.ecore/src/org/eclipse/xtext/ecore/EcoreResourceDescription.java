@@ -43,9 +43,12 @@ public class EcoreResourceDescription extends AbstractResourceDescription {
 	}
 
 	private Resource resource;
+	
+	private URI uri;
 
 	public EcoreResourceDescription(Resource resource) {
 		this.resource = resource;
+		this.uri = getNormalizedURI(resource);
 	}
 
 	@Override
@@ -71,7 +74,7 @@ public class EcoreResourceDescription extends AbstractResourceDescription {
 	}
 
 	public URI getURI() {
-		return resource.getURI();
+		return uri;
 	}
 
 }
