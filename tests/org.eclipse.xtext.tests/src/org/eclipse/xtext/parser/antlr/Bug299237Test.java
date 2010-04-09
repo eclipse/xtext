@@ -44,12 +44,27 @@ public class Bug299237Test extends AbstractXtextTests implements ISyntaxErrorMes
 		syntaxErrorProvider = new SyntaxErrorMessageProvider();
 	}
 	
+	public void testValidModel_01() throws Exception {
+		Model model = (Model) getModel("model a;");
+		assertEquals("a", model.getName());
+	}
+	
+	public void testValidModel_02() throws Exception {
+		Model model = (Model) getModel("MODEL a;");
+		assertEquals("a", model.getName());
+	}
+	
 	public void testSyntaxError_01() throws Exception {
 		Model model = (Model) getModelAndExpect("model a", 1);
 		assertEquals("a", model.getName());
 	}
 	
 	public void testSyntaxError_02() throws Exception {
+		Model model = (Model) getModelAndExpect("MODEL a", 1);
+		assertEquals("a", model.getName());
+	}
+	
+	public void testSyntaxError_03() throws Exception {
 		syntaxErrorProvider = new SyntaxErrorMessageProvider() {
 			@Override
 			public SyntaxErrorMessage getSyntaxErrorMessage(IParserErrorContext context) {
