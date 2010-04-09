@@ -12,13 +12,8 @@ import java.io.IOException;
 import java.util.Collections;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IWorkspace;
-import org.eclipse.core.resources.IncrementalProjectBuilder;
-import org.eclipse.core.resources.ResourcesPlugin;
-import org.eclipse.core.runtime.IProgressMonitor;
-import org.eclipse.core.runtime.IStatus;
-import org.eclipse.core.runtime.Status;
-import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
@@ -26,14 +21,18 @@ import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.xmi.impl.XMIResourceFactoryImpl;
 import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchListener;
+import org.eclipse.xtext.builder.impl.BuildScheduler;
+import org.eclipse.xtext.builder.impl.IBuildFlag;
 import org.eclipse.xtext.builder.internal.Activator;
 import org.eclipse.xtext.resource.IResourceDescription;
 
 import com.google.common.collect.Iterables;
+import com.google.common.collect.Lists;
 import com.google.inject.Inject;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Jan Koehnlein
  */
 public class EMFBasedPersister implements PersistableResourceDescriptionsImpl.PersistedStateProvider {
 
@@ -48,6 +47,9 @@ public class EMFBasedPersister implements PersistableResourceDescriptionsImpl.Pe
 	@Inject
 	private IBuilderState builderState;
 
+	@Inject
+	private BuildScheduler buildManager;
+	
 	private Resource.Factory factory;
 
 	public Iterable<IResourceDescription> load() {
@@ -61,14 +63,14 @@ public class EMFBasedPersister implements PersistableResourceDescriptionsImpl.Pe
 					getBuilderStateLocation().delete();
 				}
 			} else {
-				if(workspace != null && workspace.isAutoBuilding()) {
-					doFullBuild();
-				} 
+				if (workspace != null && workspace.isAutoBuilding()) {
+					scheduleRecoveryBuild();
+				}
 			}
 		} catch (Exception e) {
 			log.error("Error while loading persistable builder state.", e);
 			log.error("Triggering a full build.");
-			doFullBuild();
+			scheduleRecoveryBuild();
 			throw new WrappedException(e);
 		} finally {
 			if (workbench != null) {
@@ -130,29 +132,9 @@ public class EMFBasedPersister implements PersistableResourceDescriptionsImpl.Pe
 		return factory;
 	}
 
-	protected void doFullBuild() {
-		new Job("Building workspace") {
-			{
-				setRule(workspace.getRuleFactory().buildRule());
-			}
-
-			@Override
-			public boolean belongsTo(Object family) {
-				return ResourcesPlugin.FAMILY_AUTO_BUILD == family;
-			}
-
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
-				try {
-					workspace.build(IncrementalProjectBuilder.FULL_BUILD, monitor);
-				} catch (Exception x) {
-					String message = "Full build on initialize failed: " + x.getMessage();
-					log.error(message, x);
-					return new Status(IStatus.ERROR, Activator.getDefault().getBundle().getSymbolicName(), message, x);
-				}
-				return Status.OK_STATUS;
-			}
-		}.schedule();
+	protected void scheduleRecoveryBuild() {
+		Iterable<IProject> projects = Lists.newArrayList(workspace.getRoot().getProjects());
+		buildManager.scheduleBuildIfNecessary(projects, IBuildFlag.RECOVERY_BUILD);
 	}
 
 }

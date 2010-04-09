@@ -23,8 +23,7 @@ import org.eclipse.jdt.core.IJavaModel;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.IPackageFragmentRoot;
 import org.eclipse.jdt.core.JavaCore;
-import org.eclipse.xtext.builder.impl.AbstractBuildScheduler;
-import org.eclipse.xtext.builder.nature.XtextNature;
+import org.eclipse.xtext.builder.impl.BuildScheduler;
 
 import com.google.common.base.Function;
 import com.google.common.base.Predicates;
@@ -37,12 +36,15 @@ import com.google.inject.Singleton;
  * @author Sven Efftinge - Initial contribution and API
  */
 @Singleton
-public class ElementChangeListener extends AbstractBuildScheduler implements IElementChangedListener {
+public class ElementChangeListener implements IElementChangedListener {
 
 	public final static Logger log = Logger.getLogger(ElementChangeListener.class);
 
 	@Inject
 	private IWorkspace workspace;
+	
+	@Inject 
+	private BuildScheduler buildManager;
 
 	public ElementChangeListener() {
 		JavaCore.addElementChangedListener(this);
@@ -57,13 +59,10 @@ public class ElementChangeListener extends AbstractBuildScheduler implements IEl
 						Set<IProject> projects = Sets.newHashSet(Iterables.filter(Iterables.transform(javaProjects,
 								new Function<IJavaProject, IProject>() {
 									public IProject apply(IJavaProject from) {
-										IProject project = from.getProject();
-										if (XtextNature.hasNature(project))
-											return from.getProject();
-										return null;
+										return from.getProject();
 									}
 								}), Predicates.notNull()));
-						scheduleBuildIfNecessary(projects);
+						buildManager.scheduleBuildIfNecessary(projects);
 					}
 				}
 			} catch (WrappedException e) {
