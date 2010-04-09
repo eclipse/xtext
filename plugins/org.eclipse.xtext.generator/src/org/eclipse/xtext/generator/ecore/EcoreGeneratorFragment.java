@@ -46,6 +46,7 @@ import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.emf.mwe.core.ConfigurationException;
 import org.eclipse.emf.mwe.core.WorkflowInterruptedException;
+import org.eclipse.emf.mwe.utils.Mapping;
 import org.eclipse.xpand2.XpandExecutionContext;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.GeneratedMetamodel;
@@ -55,6 +56,7 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.Strings;
 
+import com.google.common.collect.BiMap;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 
@@ -98,6 +100,8 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 
 	private String xmiModelDirectory = null;
 
+	private BiMap<URI, URI> saveMappings = Maps.newHashBiMap();
+	
 	{
 		if (!Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().containsKey("genmodel"))
 			Resource.Factory.Registry.INSTANCE.getExtensionToFactoryMap().put("genmodel",
@@ -235,14 +239,29 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 	}
 
 	protected void resolveAll(ResourceSet resourceSet) {
+		Map<Resource, URI> resourceToURI = Maps.newHashMap();
 		for (Resource res : resourceSet.getResources()) {
 			URI uri = res.getURI();
+			URI mappedFrom = saveMappings.inverse().get(uri);
+			if (mappedFrom != null) {
+				res.setURI(mappedFrom);
+			}
 			if (uri.isPlatformResource()) {
+				resourceToURI.put(res, uri);
 				URI path = EcorePlugin.resolvePlatformResourcePath(uri.toPlatformString(true));
 				res.setURI(path);
 			}
 		}
 		EcoreUtil.resolveAll(resourceSet);
+		for (Resource res : resourceSet.getResources()) {
+			URI uri = resourceToURI.get(res);
+			if (uri == null)
+				uri = res.getURI();
+			URI mappedTo = saveMappings.get(uri);
+			if (mappedTo != null) {
+				res.setURI(mappedTo);
+			}
+		}
 	}
 
 	public String getBasePackage(Grammar g) {
@@ -605,4 +624,8 @@ public class EcoreGeneratorFragment extends AbstractGeneratorFragment {
 		return null == path || "".equals(path) || path.startsWith("/") ? path : path.substring(path.indexOf("/"));
 	}
 
+	public void addSaveMapping(Mapping mapping) {
+		saveMappings.put(
+				URI.createURI(mapping.getFrom()), URI.createURI(mapping.getTo()));
+	}
 }
