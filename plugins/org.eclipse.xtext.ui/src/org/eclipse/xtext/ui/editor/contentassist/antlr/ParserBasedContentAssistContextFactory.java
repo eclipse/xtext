@@ -9,6 +9,7 @@ package org.eclipse.xtext.ui.editor.contentassist.antlr;
 
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.Collections;
 import java.util.HashSet;
 import java.util.Iterator;
 import java.util.List;
@@ -37,6 +38,7 @@ import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.TerminalRule;
 import org.eclipse.xtext.UnorderedGroup;
+import org.eclipse.xtext.XtextFactory;
 import org.eclipse.xtext.parser.IParseResult;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
@@ -53,6 +55,7 @@ import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
 import org.eclipse.xtext.ui.editor.contentassist.IFollowElementCalculator.IFollowElementAcceptor;
 import org.eclipse.xtext.util.XtextSwitch;
 
+import com.google.common.collect.Iterables;
 import com.google.common.collect.Lists;
 import com.google.common.collect.Maps;
 import com.google.common.collect.Multimap;
@@ -476,24 +479,29 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 	
 	protected void computeFollowElements(FollowElementCalculator calculator, FollowElement element) {
 		if (element.getLookAhead() <= 1) {
-			Assignment ass = EcoreUtil2.getContainerOfType(element.getGrammarElement(), Assignment.class);
-			if (ass != null)
-				calculator.doSwitch(ass);
-			else {
-				if (element.getGrammarElement() instanceof UnorderedGroup) {
-					calculator.doSwitch((UnorderedGroup) element.getGrammarElement(), element.getHandledUnorderedGroupElements());
-				} else {
-					calculator.doSwitch(element.getGrammarElement());
-				}
-				ParserRule rule = EcoreUtil2.getContainerOfType(element.getGrammarElement(), ParserRule.class);
-				if (rule != null && GrammarUtil.isDatatypeRule(rule)) {
-					for (int i = element.getLocalTrace().size() - 1; i >= 0; i--) {
-						AbstractElement grammarElement = element.getLocalTrace().get(i);
-						if (grammarElement instanceof Assignment) {
-							calculator.doSwitch(grammarElement);
-							return;
-						}
+			Iterable<AbstractElement> currentState = Iterables.concat(
+					element.getLocalTrace(), 
+					Collections.singleton(element.getGrammarElement()));
+			for(AbstractElement abstractElement: currentState) {
+				Assignment ass = EcoreUtil2.getContainerOfType(abstractElement, Assignment.class);
+				if (ass != null)
+					calculator.doSwitch(ass);
+				else {
+					if (abstractElement instanceof UnorderedGroup && abstractElement == element.getGrammarElement()) {
+						calculator.doSwitch((UnorderedGroup) abstractElement, element.getHandledUnorderedGroupElements());
+					} else {
+						calculator.doSwitch(abstractElement);
 					}
+				}
+			}
+			// special case: entry rule, first abstract element
+			// we need a synthetic rule call
+			if (element.getTrace().equals(element.getLocalTrace())) {
+				ParserRule parserRule = GrammarUtil.containingParserRule(element.getGrammarElement());
+				if (parserRule != null) {
+					RuleCall ruleCall = XtextFactory.eINSTANCE.createRuleCall();
+					ruleCall.setRule(parserRule);
+					calculator.doSwitch(ruleCall);
 				}
 			}
 			return;

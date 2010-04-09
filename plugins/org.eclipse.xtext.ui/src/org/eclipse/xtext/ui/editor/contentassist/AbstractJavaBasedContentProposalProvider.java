@@ -9,7 +9,9 @@ package org.eclipse.xtext.ui.editor.contentassist;
 
 import java.util.Collections;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -34,7 +36,9 @@ import org.eclipse.xtext.util.PolymorphicDispatcher.NullErrorHandler;
 import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.base.Predicates;
+import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.internal.Lists;
 
 /**
  * @author Michael Clay - Initial contribution and API
@@ -157,6 +161,18 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 		return new DefaultProposalCreator(contentAssistContext, ruleName);
 	}
 	
+	private Set<List<Object>> handledArguments;
+	
+	@Override
+	public void createProposals(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
+		try {
+			handledArguments = Sets.newHashSet();
+			super.createProposals(context, acceptor);
+		} finally {
+			handledArguments = null;
+		}
+	}
+	
 	protected void invokeMethod(String methodName, ICompletionProposalAcceptor acceptor, Object... params) {
 		PolymorphicDispatcher<Void> dispatcher = dispatchers.get(methodName);
 		if (dispatcher == null) {
@@ -174,7 +190,9 @@ public abstract class AbstractJavaBasedContentProposalProvider extends AbstractC
 		Object[] paramAsArray = new Object[params.length + 1];
 		System.arraycopy(params, 0, paramAsArray, 0, params.length);
 		paramAsArray[params.length] = acceptor;
-		dispatcher.invoke(paramAsArray);
+		if (handledArguments.add(Lists.newArrayList(methodName, paramAsArray))) {
+			dispatcher.invoke(paramAsArray);
+		}
 	}
 
 	public void setScopeProvider(IScopeProvider scopeProvider) {

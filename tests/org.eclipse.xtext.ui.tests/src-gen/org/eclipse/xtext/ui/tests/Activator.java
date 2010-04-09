@@ -87,6 +87,10 @@ public class Activator extends AbstractUIPlugin {
 				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage"))).with(getSharedStateModule())
 			));
 			
+			injectors.put("org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistCustomizingTestLanguage", Guice.createInjector(
+				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistCustomizingTestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistCustomizingTestLanguage"))).with(getSharedStateModule())
+			));
+			
 			injectors.put("org.eclipse.xtext.ui.tests.editor.contentassist.CrossReferenceProposalTestLanguage", Guice.createInjector(
 				Modules.override(Modules.override(getRuntimeModule("org.eclipse.xtext.ui.tests.editor.contentassist.CrossReferenceProposalTestLanguage")).with(getUiModule("org.eclipse.xtext.ui.tests.editor.contentassist.CrossReferenceProposalTestLanguage"))).with(getSharedStateModule())
 			));
@@ -203,6 +207,10 @@ public class Activator extends AbstractUIPlugin {
 		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguageRuntimeModule();
 		}
 		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistCustomizingTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistCustomizingTestLanguageRuntimeModule();
+		}
+		
 		if ("org.eclipse.xtext.ui.tests.editor.contentassist.CrossReferenceProposalTestLanguage".equals(grammar)) {
 		  return new org.eclipse.xtext.ui.tests.editor.contentassist.CrossReferenceProposalTestLanguageRuntimeModule();
 		}
@@ -309,6 +317,10 @@ public class Activator extends AbstractUIPlugin {
 		
 		if ("org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistContextTestLanguage".equals(grammar)) {
 		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ui.ContentAssistContextTestLanguageUiModule(this);
+		}
+		
+		if ("org.eclipse.xtext.ui.tests.editor.contentassist.ContentAssistCustomizingTestLanguage".equals(grammar)) {
+		  return new org.eclipse.xtext.ui.tests.editor.contentassist.ui.ContentAssistCustomizingTestLanguageUiModule(this);
 		}
 		
 		if ("org.eclipse.xtext.ui.tests.editor.contentassist.CrossReferenceProposalTestLanguage".equals(grammar)) {

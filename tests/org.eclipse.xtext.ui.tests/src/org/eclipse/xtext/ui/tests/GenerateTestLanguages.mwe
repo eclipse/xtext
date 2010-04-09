@@ -52,6 +52,9 @@
 		<language uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistContextTestLanguage.xtext">
 			<fragment file="org/eclipse/xtext/ui/tests/TestLanguageSetup.mwe"/>
 		</language>
+		<language uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/ContentAssistCustomizingTestLanguage.xtext">
+			<fragment file="org/eclipse/xtext/ui/tests/TestLanguageSetup.mwe"/>
+		</language>
 		<language uri="classpath:/org/eclipse/xtext/ui/tests/editor/contentassist/CrossReferenceProposalTestLanguage.xtext">
 			<fragment file="org/eclipse/xtext/ui/tests/TestLanguageSetup.mwe"/>
 		</language>
