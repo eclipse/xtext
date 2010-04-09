@@ -8,8 +8,6 @@
  *******************************************************************************/
 package org.eclipse.xtext.parsetree;
 
-import java.util.Set;
-
 import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.Keyword;
 import org.eclipse.xtext.RuleCall;
@@ -203,58 +201,6 @@ public class ParseTreeUtilTest extends AbstractGeneratorTest {
 		CompositeNode rootNode = getRootNodeAndExpect(text, 1);
 		AbstractNode currentNodeByOffset = ParseTreeUtil.getCurrentOrPrecedingNodeByOffset(rootNode, text.indexOf("a  1") + 2);
 		assertEquals("expect leafnode with text ' kind (a  1)'", " kind (a  1)", currentNodeByOffset.serialize());
-	}
-
-	public void testGetElementSetValidFromOffsetEmptyText() throws Exception {
-		String text = "";
-		CompositeNode rootNode = getRootNode(text);
-		Set<AbstractElement> elementSetValidFromOffset = ParseTreeUtil.getElementSetValidFromOffset(rootNode, text
-				.length());
-		assertEquals("expect only 1 item", 1, elementSetValidFromOffset.size());
-	}
-
-	public void testGetElementSetValidFromOffset() throws Exception {
-		String text = "spielplatz ";
-		CompositeNode rootNode = getRootNodeAndExpect(text, 1);
-		Set<AbstractElement> elementSetValidFromOffset = ParseTreeUtil.getElementSetValidFromOffset(rootNode, text
-				.length());
-		assertEquals("expect only 1 item", 1, elementSetValidFromOffset.size());
-
-		// Keyword Assignment [Assignment|Keyword]
-		text = "spielplatz 1 ";
-		rootNode = getRootNodeAndExpect(text, 1);
-		elementSetValidFromOffset = ParseTreeUtil.getElementSetValidFromOffset(rootNode, text.length());
-		assertEquals("expect only 2 items", 2, elementSetValidFromOffset.size());
-
-		// Keyword Assignment Assignment [Keyword]
-		text = "spielplatz 1 \"junit\" ";
-		rootNode = getRootNodeAndExpect(text, 1);
-		elementSetValidFromOffset = ParseTreeUtil.getElementSetValidFromOffset(rootNode, text.length());
-		assertEquals("expect only 1 item", 1, elementSetValidFromOffset.size());
-
-		// Keyword Assignment Assignment Keyword [Alternatives|Keyword]
-		text = "spielplatz 1 \"junit\" { ";
-		rootNode = getRootNodeAndExpect(text, 1);
-		elementSetValidFromOffset = ParseTreeUtil.getElementSetValidFromOffset(rootNode, text.length());
-		assertEquals("expect only 2 items", 2, elementSetValidFromOffset.size());
-
-		// Keyword Assignment Assignment Keyword [Keyword]
-		text = "spielplatz 1 \"junit\" { kind ";
-		rootNode = getRootNodeAndExpect(text, 1);
-		elementSetValidFromOffset = ParseTreeUtil.getElementSetValidFromOffset(rootNode, text.length());
-		assertEquals("expect only 1 item", 1, elementSetValidFromOffset.size());
-
-		// Keyword Assignment Assignment Keyword Keyword [Assignment]
-		text = "spielplatz 1 \"junit\" { kind ( ";
-		rootNode = getRootNodeAndExpect(text, 1);
-		elementSetValidFromOffset = ParseTreeUtil.getElementSetValidFromOffset(rootNode, text.length());
-		assertEquals("expect only 1 item", 1, elementSetValidFromOffset.size());
-
-		// Keyword Assignment Assignment Keyword
-		text = "spielplatz 1 \"junit\" { kind (kind1 0) kind (kind2 0) erwachsener (e1 1)  erwachsener (e2 2) familie ( asd ";
-		rootNode = getRootNodeAndExpect(text, 1);
-		elementSetValidFromOffset = ParseTreeUtil.getElementSetValidFromOffset(rootNode, text.length());
-		assertEquals("expect only 1 item", 1, elementSetValidFromOffset.size());
 	}
 
 }
