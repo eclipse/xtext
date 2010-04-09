@@ -35,7 +35,7 @@ import com.google.inject.Inject;
  */
 public abstract class AbstractContentProposalProvider implements IContentProposalProvider, ICompletionProposalFactory {
 
-	public class DefaultContentAssistProcessorSwitch extends XtextSwitch<Boolean> {
+	public class DefaultContentAssistProcessorSwitch extends XtextSwitch<Boolean> implements IFollowElementAcceptor {
 
 		private final ContentAssistContext context;
 		private final ICompletionProposalAcceptor acceptor;
@@ -66,6 +66,10 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 		public Boolean caseAssignment(Assignment object) {
 			completeAssignment(object, context, acceptor);
 			return Boolean.TRUE;
+		}
+
+		public void accept(AbstractElement element) {
+			doSwitch(element);
 		}
 	}
 	
@@ -100,9 +104,9 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 
 	public void createProposals(ContentAssistContext context, ICompletionProposalAcceptor acceptor) {
 		ICompletionProposalAcceptor nullSafe = new NullSafeCompletionProposalAcceptor(acceptor);
-		DefaultContentAssistProcessorSwitch selector = new DefaultContentAssistProcessorSwitch(context, nullSafe);
+		IFollowElementAcceptor selector = createSelector(context, nullSafe);
 		for (AbstractElement element : context.getFirstSetGrammarElements()) {
-			selector.doSwitch(element);
+			selector.accept(element);
 		}
 	}
 
@@ -115,7 +119,7 @@ public abstract class AbstractContentProposalProvider implements IContentProposa
 	public abstract void completeAssignment(Assignment object, ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor);
 
-	public DefaultContentAssistProcessorSwitch createSelector(ContentAssistContext context,
+	public IFollowElementAcceptor createSelector(ContentAssistContext context,
 			ICompletionProposalAcceptor acceptor) {
 		return new DefaultContentAssistProcessorSwitch(context, acceptor);
 	}

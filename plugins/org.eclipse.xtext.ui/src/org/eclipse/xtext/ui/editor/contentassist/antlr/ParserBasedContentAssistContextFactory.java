@@ -50,9 +50,8 @@ import org.eclipse.xtext.parsetree.util.ParsetreeSwitch;
 import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.contentassist.AbstractContentAssistContextFactory;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
-import org.eclipse.xtext.ui.editor.contentassist.IFollowElementCalculator;
+import org.eclipse.xtext.ui.editor.contentassist.IFollowElementAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.PrefixMatcher;
-import org.eclipse.xtext.ui.editor.contentassist.IFollowElementCalculator.IFollowElementAcceptor;
 import org.eclipse.xtext.util.XtextSwitch;
 
 import com.google.common.collect.Iterables;
@@ -611,7 +610,7 @@ public class ParserBasedContentAssistContextFactory extends AbstractContentAssis
 	
 	public static class FollowElementCalculator extends XtextSwitch<Boolean> {
 		
-		protected IFollowElementCalculator.IFollowElementAcceptor acceptor;
+		protected IFollowElementAcceptor acceptor;
 		
 		private List<AbstractElement> handledAlternatives;
 
