@@ -38,7 +38,7 @@ public class EMFBasedPersister implements PersistableResourceDescriptionsImpl.Pe
 
 	private final static Logger log = Logger.getLogger(EMFBasedPersister.class);
 
-	@Inject
+	@Inject(optional=true)
 	private IWorkbench workbench;
 
 	@Inject
