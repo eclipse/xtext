@@ -5,10 +5,14 @@
  * which accompanies this distribution, and is available at
  * http://www.eclipse.org/legal/epl-v10.html
  *******************************************************************************/
-grammar org.eclipse.xtext.parser.antlr.Bug299237TestLanguage with org.eclipse.xtext.common.Terminals
+grammar org.eclipse.xtext.parser.antlr.Bug289515TestLanguage with org.eclipse.xtext.common.Terminals
 
-generate bug299237Test "http://eclipse.org/xtext/Bug299237TestLanguage"
+generate bug289515Test "http://eclipse.org/xtext/Bug289515TestLanguage"
 
 Model: 
-    "model" name=ID ";"
-;
+    '1' value="%" 
+  | '2' value='%' 
+  | '3' value="\\%" 
+  | '4' value='\\%' 
+  | '5' value="%%" 
+  | '6' value='%%';
