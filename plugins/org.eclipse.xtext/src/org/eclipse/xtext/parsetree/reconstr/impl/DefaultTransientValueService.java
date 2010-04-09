@@ -8,16 +8,29 @@
 package org.eclipse.xtext.parsetree.reconstr.impl;
 
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.InternalEObject;
+import org.eclipse.emf.ecore.resource.Resource;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
+ * @author Jan Koehnlein - support for cross-resource containment
  */
 public class DefaultTransientValueService extends AbstractTransientValueService {
-	
+
 	@Override
 	public boolean isTransient(EObject owner, EStructuralFeature feature, int index) {
-		return feature.isTransient() || !owner.eIsSet(feature);
+		return feature.isTransient() || !owner.eIsSet(feature) || isContainerReferenceInSameResource(owner, feature);
 	}
 
+	protected boolean isContainerReferenceInSameResource(EObject owner, EStructuralFeature feature) {
+		if (feature instanceof EReference && ((EReference) feature).isContainer()) {
+			Resource ownerResource = ((InternalEObject) owner).eDirectResource();
+			// if eDirectResource is set, owner is a root element, so its container 
+			// must be in another resource 
+			return (ownerResource == null);
+		}
+		return false;
+	}
 }
