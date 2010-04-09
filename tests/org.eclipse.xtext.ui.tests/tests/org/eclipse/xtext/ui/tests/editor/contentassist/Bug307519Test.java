@@ -51,4 +51,16 @@ public class Bug307519Test extends AbstractContentAssistProcessorTest {
 			.assertText("T1", "T2", "foo");
 	}
 	
+	public void testAfterFoo() throws Exception {
+		newBuilder(getSetup())
+			.appendNl("T1 foo")
+			.assertText("%");
+	}
+	
+	public void testAfterPercent() throws Exception {
+		newBuilder(getSetup())
+			.appendNl("T1 foo %")
+			.assertText("$");
+	}
+	
 }

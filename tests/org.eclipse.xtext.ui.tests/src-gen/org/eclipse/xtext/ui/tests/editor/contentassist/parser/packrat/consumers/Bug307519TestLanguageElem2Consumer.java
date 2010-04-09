@@ -34,7 +34,15 @@ public final class Bug307519TestLanguageElem2Consumer extends NonTerminalConsume
 
 	private IElementConsumer keyword$4$Consumer;
 
+	private IElementConsumer keyword$5$Consumer;
+
+	private IElementConsumer keyword$6$Consumer;
+
 	private ICharacterClass keyword$4$Delimiter;
+
+	private ICharacterClass keyword$5$Delimiter;
+
+	private ICharacterClass keyword$6$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -46,6 +54,8 @@ public final class Bug307519TestLanguageElem2Consumer extends NonTerminalConsume
 		protected void doGetConsumers(ConsumerAcceptor acceptor) {
 			acceptor.accept(assignment$2$Consumer);
 			acceptor.accept(keyword$4$Consumer);
+			acceptor.accept(keyword$5$Consumer);
+			acceptor.accept(keyword$6$Consumer);
 		}
 	}
 
@@ -85,9 +95,35 @@ public final class Bug307519TestLanguageElem2Consumer extends NonTerminalConsume
 		}
 	}
 
+	protected class Keyword$5$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$5$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$5$Delimiter(), optional);
+		}
+	}
+
+	protected class Keyword$6$Consumer extends ElementConsumer<Keyword> {
+		
+		protected Keyword$6$Consumer(final Keyword keyword) {
+			super(keyword);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeKeyword(getElement(), null, false, false, getKeyword$6$Delimiter(), optional);
+		}
+	}
+
 	public Bug307519TestLanguageElem2Consumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 		keyword$4$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$5$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
 	}
 	
 	@Override
@@ -106,6 +142,8 @@ public final class Bug307519TestLanguageElem2Consumer extends NonTerminalConsume
 		assignment$2$Consumer = new Assignment$2$Consumer(rule.getValueAssignment_0());
 		ruleCall$3$Consumer = new RuleCall$3$Consumer(rule.getValueEnumTEnumRuleCall_0_0());
 		keyword$4$Consumer = new Keyword$4$Consumer(rule.getFooKeyword_1());
+		keyword$5$Consumer = new Keyword$5$Consumer(rule.getPercentSignKeyword_2());
+		keyword$6$Consumer = new Keyword$6$Consumer(rule.getDollarSignKeyword_3());
 	}
 	
 	@Override
@@ -128,6 +166,22 @@ public final class Bug307519TestLanguageElem2Consumer extends NonTerminalConsume
 	
 	public void setKeyword$4$Delimiter(ICharacterClass characterClass) {
 		keyword$4$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$5$Delimiter() {
+		return keyword$5$Delimiter;
+	}
+	
+	public void setKeyword$5$Delimiter(ICharacterClass characterClass) {
+		keyword$5$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$6$Delimiter() {
+		return keyword$6$Delimiter;
+	}
+	
+	public void setKeyword$6$Delimiter(ICharacterClass characterClass) {
+		keyword$6$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
 }

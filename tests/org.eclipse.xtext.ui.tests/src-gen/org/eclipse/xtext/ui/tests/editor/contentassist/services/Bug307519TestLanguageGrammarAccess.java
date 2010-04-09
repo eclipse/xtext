@@ -67,12 +67,14 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 		private final Assignment cValueAssignment_0 = (Assignment)cGroup.eContents().get(0);
 		private final RuleCall cValueEnumTEnumRuleCall_0_0 = (RuleCall)cValueAssignment_0.eContents().get(0);
 		private final Keyword cFooKeyword_1 = (Keyword)cGroup.eContents().get(1);
+		private final Keyword cPercentSignKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Keyword cDollarSignKeyword_3 = (Keyword)cGroup.eContents().get(3);
 		
 		//Elem2:
-		//  value=EnumT "foo";
+		//  value=EnumT "foo" "%" "$";
 		public ParserRule getRule() { return rule; }
 
-		//value=EnumT "foo"
+		//value=EnumT "foo" "%" "$"
 		public Group getGroup() { return cGroup; }
 
 		//value=EnumT
@@ -83,6 +85,12 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 
 		//"foo"
 		public Keyword getFooKeyword_1() { return cFooKeyword_1; }
+
+		//"%"
+		public Keyword getPercentSignKeyword_2() { return cPercentSignKeyword_2; }
+
+		//"$"
+		public Keyword getDollarSignKeyword_3() { return cDollarSignKeyword_3; }
 	}
 	
 	
@@ -171,7 +179,7 @@ public class Bug307519TestLanguageGrammarAccess extends AbstractGrammarElementFi
 	}
 
 	//Elem2:
-	//  value=EnumT "foo";
+	//  value=EnumT "foo" "%" "$";
 	public Elem2Elements getElem2Access() {
 		return (pElem2 != null) ? pElem2 : (pElem2 = new Elem2Elements());
 	}

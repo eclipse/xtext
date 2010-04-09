@@ -83,6 +83,8 @@ public class Bug307519TestLanguageParserConfiguration extends AbstractParserConf
 		getElem2Consumer().setEnumTConsumer(getEnumTConsumer());
 
 		getElem2Consumer().setKeyword$4$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug307519TestLanguageDelimiters.keyword$24$Delimiter);
+		getElem2Consumer().setKeyword$5$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug307519TestLanguageDelimiters.keyword$25$Delimiter);
+		getElem2Consumer().setKeyword$6$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug307519TestLanguageDelimiters.keyword$25$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {

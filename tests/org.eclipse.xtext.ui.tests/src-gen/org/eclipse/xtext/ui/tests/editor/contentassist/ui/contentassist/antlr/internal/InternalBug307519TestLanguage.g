@@ -36,9 +36,11 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug307519TestLan
  	private final Map<String, String> tokenNameToValue = new HashMap<String, String>();
  	
  	{
-		tokenNameToValue.put("KEYWORD_1", "'T1'");
-		tokenNameToValue.put("KEYWORD_2", "'T2'");
-		tokenNameToValue.put("KEYWORD_3", "'foo'");
+		tokenNameToValue.put("KEYWORD_1", "'\u0024'");
+		tokenNameToValue.put("KEYWORD_2", "'\%'");
+		tokenNameToValue.put("KEYWORD_3", "'T1'");
+		tokenNameToValue.put("KEYWORD_4", "'T2'");
+		tokenNameToValue.put("KEYWORD_5", "'foo'");
  	}
  	
     public void setGrammarAccess(Bug307519TestLanguageGrammarAccess grammarAccess) {
@@ -202,14 +204,14 @@ rule__EnumT__Alternatives
 :
 (
 { before(grammarAccess.getEnumTAccess().getT1EnumLiteralDeclaration_0()); }
-(	KEYWORD_1
+(	KEYWORD_3
 )
 { after(grammarAccess.getEnumTAccess().getT1EnumLiteralDeclaration_0()); }
 )
 
     |(
 { before(grammarAccess.getEnumTAccess().getT2EnumLiteralDeclaration_1()); }
-(	KEYWORD_2
+(	KEYWORD_4
 )
 { after(grammarAccess.getEnumTAccess().getT2EnumLiteralDeclaration_1()); }
 )
@@ -247,15 +249,59 @@ rule__Elem2__Group__1
 (
 { before(grammarAccess.getElem2Access().getFooKeyword_1()); }
 
-	KEYWORD_3 
+	KEYWORD_5 
 
 { after(grammarAccess.getElem2Access().getFooKeyword_1()); }
+)
+
+	rule__Elem2__Group__2
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__Elem2__Group__2
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getElem2Access().getPercentSignKeyword_2()); }
+
+	KEYWORD_2 
+
+{ after(grammarAccess.getElem2Access().getPercentSignKeyword_2()); }
+)
+
+	rule__Elem2__Group__3
+;
+finally {
+	restoreStackSize(stackSize);
+}
+
+
+rule__Elem2__Group__3
+    @init {
+		int stackSize = keepStackSize();
+    }
+:
+(
+{ before(grammarAccess.getElem2Access().getDollarSignKeyword_3()); }
+
+	KEYWORD_1 
+
+{ after(grammarAccess.getElem2Access().getDollarSignKeyword_3()); }
 )
 
 ;
 finally {
 	restoreStackSize(stackSize);
 }
+
+
+
+
 
 
 

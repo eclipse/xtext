@@ -19,4 +19,6 @@ public final class Bug307519TestLanguageDelimiters {
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
+	public static final ICharacterClass keyword$25$Delimiter = ICharacterClass.Factory.nullClass();
+
 }

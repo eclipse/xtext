@@ -226,11 +226,11 @@ protected class Elem1_ValueAssignment extends AssignmentToken  {
 /************ begin Rule Elem2 ****************
  *
  * Elem2:
- *   value=EnumT "foo";
+ *   value=EnumT "foo" "%" "$";
  *
  **/
 
-// value=EnumT "foo"
+// value=EnumT "foo" "%" "$"
 protected class Elem2_Group extends GroupToken {
 	
 	public Elem2_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -245,7 +245,7 @@ protected class Elem2_Group extends GroupToken {
     @Override
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
-			case 0: return new Elem2_FooKeyword_1(parent, this, 0, inst);
+			case 0: return new Elem2_DollarSignKeyword_3(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	
@@ -306,6 +306,50 @@ protected class Elem2_FooKeyword_1 extends KeywordToken  {
 	public AbstractToken createFollower(int index, IInstanceDescription inst) {
 		switch(index) {
 			case 0: return new Elem2_ValueAssignment_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "%"
+protected class Elem2_PercentSignKeyword_2 extends KeywordToken  {
+	
+	public Elem2_PercentSignKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getElem2Access().getPercentSignKeyword_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Elem2_FooKeyword_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// "$"
+protected class Elem2_DollarSignKeyword_3 extends KeywordToken  {
+	
+	public Elem2_DollarSignKeyword_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getElem2Access().getDollarSignKeyword_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new Elem2_PercentSignKeyword_2(parent, this, 0, inst);
 			default: return null;
 		}	
 	}	

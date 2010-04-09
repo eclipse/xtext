@@ -16,11 +16,15 @@ import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.Lexer;
 
 
 
-KEYWORD_3 : 'foo';
+KEYWORD_5 : 'foo';
 
-KEYWORD_1 : 'T1';
+KEYWORD_3 : 'T1';
 
-KEYWORD_2 : 'T2';
+KEYWORD_4 : 'T2';
+
+KEYWORD_1 : '$';
+
+KEYWORD_2 : '%';
 
 
 

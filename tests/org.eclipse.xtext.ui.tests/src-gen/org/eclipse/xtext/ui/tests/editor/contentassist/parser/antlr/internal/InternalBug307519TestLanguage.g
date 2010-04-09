@@ -237,6 +237,14 @@ ruleElem2 returns [EObject current=null]
     {
         createLeafNode(grammarAccess.getElem2Access().getFooKeyword_1(), null); 
     }
+	'%' 
+    {
+        createLeafNode(grammarAccess.getElem2Access().getPercentSignKeyword_2(), null); 
+    }
+	'$' 
+    {
+        createLeafNode(grammarAccess.getElem2Access().getDollarSignKeyword_3(), null); 
+    }
 )
 ;
 
