@@ -15,6 +15,7 @@ import org.eclipse.ui.IEditorPart;
 import org.eclipse.ui.IMarkerResolution;
 import org.eclipse.ui.IMarkerResolution2;
 import org.eclipse.ui.IMarkerResolutionGenerator2;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
@@ -52,6 +53,9 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 	@Inject
 	private ILanguageResourceHelper languageResourceHelper;
 
+	@Inject 
+	private IWorkbench workbench;
+	
 	public IssueUtil getIssueUtil() {
 		return issueUtil;
 	}
@@ -126,7 +130,7 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 	public IXtextDocument getXtextDocument(IResource resource) {
 		IXtextDocument result = XtextDocumentUtil.get(resource);
 		if(result == null) {
-			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+			IWorkbenchPage page = workbench.getActiveWorkbenchWindow().getActivePage();
 			try {
 				IFile file = ResourceUtil.getFile(resource);
 				IEditorInput input = new FileEditorInput(file);
@@ -141,7 +145,7 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 	public XtextEditor getEditor(IResource resource) {
 		XtextEditor result = findEditor(resource);
 		if(result == null) {
-			IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+			IWorkbenchPage page = workbench.getActiveWorkbenchWindow().getActivePage();
 			try {
 				IFile file = ResourceUtil.getFile(resource);
 				IEditorInput input = new FileEditorInput(file);
@@ -156,7 +160,7 @@ public class MarkerResolutionGenerator extends AbstractIssueResolutionProviderAd
 	
 	public XtextEditor findEditor(IResource resource) {
 		if(resource instanceof IFile) {
-			IWorkbenchPage activePage = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+			IWorkbenchPage activePage = workbench.getActiveWorkbenchWindow().getActivePage();
 			IEditorPart editor = activePage.findEditor(new FileEditorInput((IFile) resource));
 			if(editor instanceof XtextEditor)
 				return (XtextEditor)editor;

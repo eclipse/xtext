@@ -17,6 +17,7 @@ import org.eclipse.emf.common.util.WrappedException;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
 import org.eclipse.ui.IEditorPart;
+import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.IWorkbenchPage;
 import org.eclipse.ui.PartInitException;
 import org.eclipse.ui.PlatformUI;
@@ -47,6 +48,9 @@ public class GlobalURIEditorOpener implements IURIEditorOpener {
 	
 	@Inject
 	private IStorage2UriMapper mapper;
+	
+	@Inject
+	private IWorkbench workbench;
 	
 	public IEditorPart open(URI uri, boolean select) {
 		IResourceServiceProvider resourceServiceProvider = resourceServiceProviderRegistry.getResourceServiceProvider(uri.trimFragment());
@@ -111,13 +115,13 @@ public class GlobalURIEditorOpener implements IURIEditorOpener {
 	}
 
 	protected IEditorPart openDefaultEditor(IFile file) throws PartInitException {
-		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+		IWorkbenchPage page = workbench.getActiveWorkbenchWindow().getActivePage();
 		return IDE.openEditor(page, file);
 	}
 
 	protected IEditorPart openDefaultEditor(IStorage storage, URI uri) throws PartInitException {
 		XtextReadonlyEditorInput editorInput = new XtextReadonlyEditorInput(storage);
-		IWorkbenchPage page = PlatformUI.getWorkbench().getActiveWorkbenchWindow().getActivePage();
+		IWorkbenchPage page = workbench.getActiveWorkbenchWindow().getActivePage();
 		return IDE.openEditor(page, editorInput, PlatformUI.getWorkbench().getEditorRegistry().getDefaultEditor(
 				uri.lastSegment()).getId());
 	}
