@@ -173,5 +173,8 @@ Export-Package: org.eclipse.xtext.ui.tests,
  org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.util,
  org.eclipse.xtext.ui.tests.editor.contentassist.bug307519TestLanguage,
  org.eclipse.xtext.ui.tests.editor.contentassist.bug307519TestLanguage.impl,
- org.eclipse.xtext.ui.tests.editor.contentassist.bug307519TestLanguage.util
+ org.eclipse.xtext.ui.tests.editor.contentassist.bug307519TestLanguage.util,
+ org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistCustomizingTest,
+ org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistCustomizingTest.impl,
+ org.eclipse.xtext.ui.tests.editor.contentassist.contentAssistCustomizingTest.util
 
