@@ -58,10 +58,7 @@ public class DefaultResourceDescription extends AbstractResourceDescription impl
 	public DefaultResourceDescription(Resource resource, IQualifiedNameProvider nameProvider) {
 		this.resource = resource;
 		this.nameProvider = nameProvider;
-		if (resource.getResourceSet() != null)
-			this.uri = resource.getResourceSet().getURIConverter().normalize(resource.getURI());
-		else
-			this.uri = resource.getURI();
+		this.uri = getNormalizedURI(resource);
 	}
 
 	@Override

@@ -9,8 +9,10 @@ package org.eclipse.xtext.resource.impl;
 
 import java.util.List;
 
+import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 
@@ -63,6 +65,13 @@ public abstract class AbstractResourceDescription implements IResourceDescriptio
 
 	protected boolean isInvalid() {
 		return invalidated;
+	}
+
+	protected URI getNormalizedURI(Resource resource) {
+		if (resource.getResourceSet() != null)
+			return resource.getResourceSet().getURIConverter().normalize(resource.getURI());
+		else
+			return resource.getURI();
 	}
 	
 }
