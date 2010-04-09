@@ -7,6 +7,8 @@
  *******************************************************************************/
 package org.eclipse.xtext.builder.impl;
 
+import java.util.Collection;
+
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
@@ -22,11 +24,14 @@ import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.ui.resource.IStorage2UriMapper;
 import org.eclipse.xtext.ui.resource.UriValidator;
 
+import com.google.common.base.Function;
 import com.google.common.collect.Collections2;
+import com.google.common.collect.Iterables;
 import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Jan Koehnlein
  */
 public class ToBeBuiltComputer {
 
@@ -60,6 +65,19 @@ public class ToBeBuiltComputer {
 		return false;
 	}
 
+	public ToBeBuilt updateProjectNewResourcesOnly(final IProject project, final IProgressMonitor monitor) throws CoreException {
+		ToBeBuilt toBeBuilt = updateProject(project, monitor);
+		Collection<URI> existingURIs = Collections2.forIterable(Iterables.transform(builderState
+				.getAllResourceDescriptions(), new Function<IResourceDescription, URI>() {
+			public URI apply(IResourceDescription from) {
+				return from.getURI();
+			}
+		}));
+		toBeBuilt.getToBeDeleted().removeAll(existingURIs);
+		toBeBuilt.getToBeUpdated().removeAll(existingURIs);
+		return toBeBuilt;
+	}
+	
 	public ToBeBuilt updateProject(final IProject project, final IProgressMonitor monitor) throws CoreException {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, "Collecting resources", 1);
 		subMonitor.subTask("Collecting resources");

@@ -25,9 +25,10 @@ import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.core.runtime.Status;
 import org.eclipse.core.runtime.jobs.Job;
-import org.eclipse.ui.IWorkbench;
 import org.eclipse.ui.actions.WorkspaceModifyOperation;
+import org.eclipse.xtext.builder.builderState.IBuilderState;
 import org.eclipse.xtext.builder.nature.XtextNature;
+import org.eclipse.xtext.ui.resource.IResourceSetProvider;
 
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
@@ -35,9 +36,33 @@ import com.google.inject.Inject;
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
-public class ProjectOpenedOrClosedListener extends AbstractBuildScheduler implements IResourceChangeListener {
+public class ProjectOpenedOrClosedListener implements IResourceChangeListener {
 
 	private final static Logger log = Logger.getLogger(ProjectOpenedOrClosedListener.class);
+
+	@Inject
+	private ToBeBuiltComputer toBeBuiltComputer;
+
+	@Inject
+	private IBuilderState builderState;
+
+	@Inject
+	private IResourceSetProvider resourceSetProvider;
+
+	@Inject 
+	private BuildScheduler buildManager;
+	
+	public IResourceSetProvider getResourceSetProvider() {
+		return resourceSetProvider;
+	}
+
+	public ToBeBuiltComputer getToBeBuiltComputer() {
+		return toBeBuiltComputer;
+	}
+
+	public IBuilderState getBuilderState() {
+		return builderState;
+	}
 
 	@Inject
 	private IWorkspace workspace;
@@ -54,14 +79,13 @@ public class ProjectOpenedOrClosedListener extends AbstractBuildScheduler implem
 							if (delta.getResource() instanceof IProject) {
 								IProject project = (IProject) delta.getResource();
 								if ((delta.getFlags() & IResourceDelta.OPEN) != 0 && project.isOpen()) {
-									if (XtextNature.hasNature(project))
-										toUpdate.add(project);
+									toUpdate.add(project);
 								}
 							}
 							return false;
 						}
 					});
-					scheduleBuildIfNecessary(toUpdate);
+					buildManager.scheduleBuildIfNecessary(toUpdate);
 				} catch (CoreException e) {
 					log.error(e.getMessage(), e);
 				}
@@ -71,7 +95,7 @@ public class ProjectOpenedOrClosedListener extends AbstractBuildScheduler implem
 							new NullProgressMonitor());
 					new Job("removing project " + event.getResource().getName() + " from xtext index.") {
 						{
-							setRule(ResourcesPlugin.getWorkspace().getRoot());
+							setRule(workspace.getRoot());
 						}
 
 						@Override

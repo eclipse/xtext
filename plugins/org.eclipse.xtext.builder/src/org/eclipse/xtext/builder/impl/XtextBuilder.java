@@ -34,6 +34,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
+ * @author Jan Koehnlein
  */
 public class XtextBuilder extends IncrementalProjectBuilder {
 	public static Logger log = Logger.getLogger(XtextBuilder.class);
@@ -48,9 +49,9 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 
 	@Inject
 	private IResourceSetProvider resourceSetProvider;
-	
+
 	@Inject
-	private CompoundBuilderParticipant participant;
+	private RegistryBuilderParticipant participant;
 
 	public IResourceSetProvider getResourceSetProvider() {
 		return resourceSetProvider;
@@ -68,11 +69,11 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 				}
 			};
 			if (kind == FULL_BUILD) {
-				fullBuild(monitor);
+				fullBuild(monitor, IBuildFlag.RECOVERY_BUILD.isSet(args));
 			} else {
 				IResourceDelta delta = getDelta(getProject());
 				if (delta == null || isOpened(delta)) {
-					fullBuild(monitor);
+					fullBuild(monitor, IBuildFlag.RECOVERY_BUILD.isSet(args));
 				} else {
 					incrementalBuild(delta, monitor);
 				}
@@ -97,9 +98,11 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 				public boolean visit(IResourceDelta delta) throws CoreException {
 					if (delta.getResource() instanceof IStorage) {
 						if (delta.getKind() == IResourceDelta.REMOVED) {
-							return toBeBuiltComputer.removeStorage(subMonitor, toBeBuilt, (IStorage) delta.getResource());
+							return toBeBuiltComputer.removeStorage(subMonitor, toBeBuilt, (IStorage) delta
+									.getResource());
 						} else if (delta.getKind() == IResourceDelta.ADDED || delta.getKind() == IResourceDelta.CHANGED) {
-							return toBeBuiltComputer.updateStorage(subMonitor, toBeBuilt, (IStorage) delta.getResource());
+							return toBeBuiltComputer.updateStorage(subMonitor, toBeBuilt, (IStorage) delta
+									.getResource());
 						}
 					}
 					return true;
@@ -118,24 +121,27 @@ public class XtextBuilder extends IncrementalProjectBuilder {
 		try {
 			ResourceSet resourceSet = getResourceSetProvider().get(getProject());
 			if (resourceSet instanceof ResourceSetImpl) {
-				((ResourceSetImpl) resourceSet).setURIResourceMap(Maps.<URI, Resource>newHashMap());
+				((ResourceSetImpl) resourceSet).setURIResourceMap(Maps.<URI, Resource> newHashMap());
 			}
-			ImmutableList<Delta> deltas = builderState.update(resourceSet, toBeBuilt.toBeUpdated, toBeBuilt.toBeDeleted, subMonitor.newChild(1));
+			ImmutableList<Delta> deltas = builderState.update(resourceSet, toBeBuilt.toBeUpdated,
+					toBeBuilt.toBeDeleted, subMonitor.newChild(1));
 			if (participant != null)
-				participant.build(new IXtextBuilderParticipant.BuildContext(this, resourceSet, deltas), subMonitor.newChild(1));
+				participant.build(new IXtextBuilderParticipant.BuildContext(this, resourceSet, deltas), subMonitor
+						.newChild(1));
 		} finally {
 			subMonitor.done();
 		}
 	}
 
-	protected void fullBuild(final IProgressMonitor monitor) throws CoreException {
+	protected void fullBuild(final IProgressMonitor monitor, boolean isRecoveryBuild) throws CoreException {
 		SubMonitor subMonitor = SubMonitor.convert(monitor, 2);
 		try {
 			IProject project = getProject();
-			final ToBeBuilt toBeBuilt = toBeBuiltComputer.updateProject(project, subMonitor.newChild(1));
+			final ToBeBuilt toBeBuilt = (isRecoveryBuild) ? toBeBuiltComputer.updateProjectNewResourcesOnly(
+					project, subMonitor.newChild(1)) : toBeBuiltComputer.updateProject(project, subMonitor.newChild(1));
 			doBuild(toBeBuilt, subMonitor.newChild(1));
 		} finally {
-			subMonitor.done();			
+			subMonitor.done();
 		}
 	}
 

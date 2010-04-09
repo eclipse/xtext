@@ -27,9 +27,10 @@ import com.google.inject.Singleton;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
+ * @author Jan Koehnlein
  */
 @Singleton
-public class CompoundBuilderParticipant implements IXtextBuilderParticipant {
+public class RegistryBuilderParticipant implements IXtextBuilderParticipant {
 
 	private static final String PARTICIPANT = "participant";
 	
