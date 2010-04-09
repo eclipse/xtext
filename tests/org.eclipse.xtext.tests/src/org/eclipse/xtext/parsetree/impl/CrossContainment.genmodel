@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<genmodel:GenModel xmi:version="2.0"
+    xmlns:xmi="http://www.omg.org/XMI" xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore"
+    xmlns:genmodel="http://www.eclipse.org/emf/2002/GenModel" modelDirectory="/org.eclipse.xtext.tests/emf-gen"
+    modelPluginID="org.eclipse.xtext.tests" modelName="CrossContainment" importerID="org.eclipse.emf.importer.ecore"
+    containmentProxies="true" complianceLevel="5.0" copyrightFields="false">
+  <foreignModel>CrossContainment.ecore</foreignModel>
+  <genPackages prefix="CrossContainment" basePackage="org.eclipse.xtext.parsetree.impl"
+      disposableProviderFactory="true" ecorePackage="CrossContainment.ecore#/">
+    <genClasses ecoreClass="CrossContainment.ecore#//Element">
+      <genFeatures property="None" notify="false" createChild="false" ecoreFeature="ecore:EReference CrossContainment.ecore#//Element/container"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference CrossContainment.ecore#//Element/containment"/>
+    </genClasses>
+  </genPackages>
+</genmodel:GenModel>
