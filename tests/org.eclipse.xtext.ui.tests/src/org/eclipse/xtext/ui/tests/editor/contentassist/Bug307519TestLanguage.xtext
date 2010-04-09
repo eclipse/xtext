@@ -20,4 +20,4 @@ Elem1 :
     value = EnumT;
 
 Elem2 :
-    value = EnumT "foo";
+    value = EnumT "foo" "%" "$";
