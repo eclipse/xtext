@@ -7,21 +7,34 @@
  *******************************************************************************/
 package org.eclipse.xtext.ui.tests.editor.contentassist;
 
+import java.util.Collection;
+import java.util.Set;
+
 import org.eclipse.emf.ecore.EObject;
+import org.eclipse.jface.text.templates.TemplateContextType;
+import org.eclipse.jface.text.templates.persistence.TemplateStore;
 import org.eclipse.xtext.Assignment;
 import org.eclipse.xtext.ISetup;
+import org.eclipse.xtext.Keyword;
+import org.eclipse.xtext.ParserRule;
 import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.ui.editor.contentassist.ContentAssistContext;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalAcceptor;
 import org.eclipse.xtext.ui.editor.contentassist.IContentProposalProvider;
+import org.eclipse.xtext.ui.editor.contentassist.IFollowElementAcceptor;
+import org.eclipse.xtext.ui.editor.contentassist.ITemplateProposalProvider;
+import org.eclipse.xtext.ui.editor.templates.DefaultTemplateProposalProvider;
+import org.eclipse.xtext.ui.editor.templates.XtextTemplateContextTypeRegistry;
 import org.eclipse.xtext.ui.junit.editor.contentassist.AbstractContentAssistProcessorTest;
 import org.eclipse.xtext.ui.junit.editor.contentassist.ContentAssistProcessorTestBuilder;
 import org.eclipse.xtext.ui.shared.SharedStateModule;
 import org.eclipse.xtext.ui.tests.Activator;
+import org.eclipse.xtext.ui.tests.editor.contentassist.services.ContentAssistCustomizingTestLanguageGrammarAccess;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.ContentAssistCustomizingTestLanguageUiModule;
 import org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.ContentAssistCustomizingTestLanguageProposalProvider;
 import org.eclipse.xtext.util.Modules2;
 
+import com.google.common.collect.Sets;
 import com.google.inject.Guice;
 import com.google.inject.Inject;
 import com.google.inject.Injector;
@@ -79,6 +92,42 @@ public class ContentAssistCustomizingTest extends AbstractContentAssistProcessor
 		}
 	}
 	
+	public static class TestableTemplateProposalProvider extends DefaultTemplateProposalProvider {
+
+		@Inject
+		ContentAssistCustomizingTest test;
+		
+		@Inject
+		public TestableTemplateProposalProvider(TemplateStore templateStore, XtextTemplateContextTypeRegistry registry) {
+			super(templateStore, registry);
+		}
+	
+		@Override
+		protected IFollowElementAcceptor createFollowElementAcceptor(final Collection<TemplateContextType> result) {
+			return new TestableFollowElementAcceptor(result);
+		}
+		
+		public class TestableFollowElementAcceptor extends FollowElementAcceptor {
+
+			public TestableFollowElementAcceptor(Collection<TemplateContextType> result) {
+				super(result);
+			}
+			
+			@Override
+			protected void addContextType(Keyword keyword) {
+				super.addContextType(keyword);
+				test.keywords.add(keyword.getValue());
+			}
+			
+			@Override
+			protected void addContextType(ParserRule rule) {
+				super.addContextType(rule);
+				test.parserRules.add(rule);
+			}
+			
+		}
+	}
+	
 	private int completeModel_Types;
 	private int completeType_Name;
 	private int completeType_SuperType;
@@ -87,6 +136,9 @@ public class ContentAssistCustomizingTest extends AbstractContentAssistProcessor
 	private int complete_Type;
 	private int complete_TypeRef;
 	private int complete_FQN;
+	
+	private Set<ParserRule> parserRules;
+	private Set<String> keywords;
 	
 	public ISetup getSetup() {
 		return new ContentAssistCustomizingTestLanguageStandaloneSetup() {
@@ -102,6 +154,10 @@ public class ContentAssistCustomizingTest extends AbstractContentAssistProcessor
 							@SuppressWarnings("unused")
 							public ContentAssistCustomizingTest bindTestClass() {
 								return ContentAssistCustomizingTest.this;
+							}
+							@Override
+							public Class<? extends ITemplateProposalProvider> bindITemplateProposalProvider() {
+								return TestableTemplateProposalProvider.class;
 							}
 						}, new SharedStateModule()));
 			}
@@ -120,6 +176,21 @@ public class ContentAssistCustomizingTest extends AbstractContentAssistProcessor
 		completeType_Name = 0;
 		completeType_SuperType = 0;
 		completeTypeRef_Type = 0;
+		
+		parserRules = Sets.newHashSet();
+		keywords = Sets.newHashSet();
+	}
+	
+	@Override
+	protected void tearDown() throws Exception {
+		parserRules = null;
+		keywords = null;
+		super.tearDown();
+	}
+	
+	@Override
+	protected ContentAssistCustomizingTestLanguageGrammarAccess getGrammarAccess() {
+		return (ContentAssistCustomizingTestLanguageGrammarAccess) super.getGrammarAccess();
 	}
 	
 	public void testEmptyModel_01() throws Exception {
@@ -133,7 +204,14 @@ public class ContentAssistCustomizingTest extends AbstractContentAssistProcessor
 		
 		assertEquals(0, complete_TypeRef);
 		assertEquals(0, completeType_SuperType);
-		assertEquals(0, completeTypeRef_Type);		
+		assertEquals(0, completeTypeRef_Type);
+		
+		assertEquals(parserRules.toString(), 3, parserRules.size());
+		assertTrue(parserRules.contains(getGrammarAccess().getModelRule()));
+		assertTrue(parserRules.contains(getGrammarAccess().getTypeRule()));
+		assertTrue(parserRules.contains(getGrammarAccess().getFQNRule()));
+		
+		assertTrue(keywords.isEmpty());
 	}
 	
 	public void testEmptyModel_02() throws Exception {
@@ -147,7 +225,14 @@ public class ContentAssistCustomizingTest extends AbstractContentAssistProcessor
 		
 		assertEquals(0, complete_TypeRef);
 		assertEquals(0, completeType_SuperType);
-		assertEquals(0, completeTypeRef_Type);		
+		assertEquals(0, completeTypeRef_Type);
+		
+		assertEquals(parserRules.toString(), 3, parserRules.size());
+		assertTrue(parserRules.contains(getGrammarAccess().getModelRule()));
+		assertTrue(parserRules.contains(getGrammarAccess().getTypeRule()));
+		assertTrue(parserRules.contains(getGrammarAccess().getFQNRule()));
+		
+		assertTrue(keywords.isEmpty());
 	}
 	
 	public void testFirstEntityName_01() throws Exception {
@@ -161,7 +246,16 @@ public class ContentAssistCustomizingTest extends AbstractContentAssistProcessor
 		
 		assertEquals(0, complete_TypeRef);
 		assertEquals(0, completeType_SuperType);
-		assertEquals(0, completeTypeRef_Type);		
+		assertEquals(0, completeTypeRef_Type);
+		
+		assertEquals(keywords.toString(), 2, keywords.size());
+		assertTrue(keywords.contains(";"));
+		assertTrue(keywords.contains("extends"));
+		
+		assertEquals(parserRules.toString(), 3, parserRules.size());
+		assertTrue(parserRules.contains(getGrammarAccess().getModelRule()));
+		assertTrue(parserRules.contains(getGrammarAccess().getTypeRule()));
+		assertTrue(parserRules.contains(getGrammarAccess().getFQNRule()));
 	}
 	
 	public void testFirstEntityName_02() throws Exception {
@@ -175,7 +269,16 @@ public class ContentAssistCustomizingTest extends AbstractContentAssistProcessor
 		
 		assertEquals(0, complete_TypeRef);
 		assertEquals(0, completeType_SuperType);
-		assertEquals(0, completeTypeRef_Type);		
+		assertEquals(0, completeTypeRef_Type);
+		
+		assertEquals(keywords.toString(), 2, keywords.size());
+		assertTrue(keywords.contains(";"));
+		assertTrue(keywords.contains("extends"));
+		
+		assertEquals(parserRules.toString(), 3, parserRules.size());
+		assertTrue(parserRules.contains(getGrammarAccess().getModelRule()));
+		assertTrue(parserRules.contains(getGrammarAccess().getTypeRule()));
+		assertTrue(parserRules.contains(getGrammarAccess().getFQNRule()));
 	}
 	
 	public void testFirstEntityExtends_02() throws Exception {
@@ -187,7 +290,13 @@ public class ContentAssistCustomizingTest extends AbstractContentAssistProcessor
 		assertEquals(0, completeType_Name);
 		assertEquals(0, complete_TypeRef);
 		assertEquals(0, completeType_SuperType);
-		assertEquals(0, completeTypeRef_Type);		
+		assertEquals(0, completeTypeRef_Type);
+		
+		assertEquals(keywords.toString(), 2, keywords.size());
+		assertTrue(keywords.contains(";"));
+		assertTrue(keywords.contains("extends"));
+		
+		assertTrue(parserRules.isEmpty());
 	}
 	
 	public void testFirstSuperType_01() throws Exception {
@@ -201,6 +310,13 @@ public class ContentAssistCustomizingTest extends AbstractContentAssistProcessor
 		assertEquals(0, completeModel_Types);
 		assertEquals(0, completeType_Name);
 		assertEquals(0, complete_FQN);
+		
+		assertEquals(keywords.toString(), 2, keywords.size());
+		assertTrue(keywords.contains(";"));
+		assertTrue(keywords.contains("extends"));
+		
+		assertEquals(parserRules.toString(), 1, parserRules.size());
+		assertTrue(parserRules.contains(getGrammarAccess().getTypeRefRule()));
 	}
 	
 	public void testFirstSuperType_02() throws Exception {
@@ -240,7 +356,15 @@ public class ContentAssistCustomizingTest extends AbstractContentAssistProcessor
 		assertEquals(0, complete_Model);
 		assertEquals(0, complete_TypeRef);
 		assertEquals(0, completeType_SuperType);
-		assertEquals(0, completeTypeRef_Type);		
+		assertEquals(0, completeTypeRef_Type);
+		
+		assertEquals(keywords.toString(), 2, keywords.size());
+		assertTrue(keywords.contains(";"));
+		assertTrue(keywords.contains("extends"));
+		
+		assertEquals(parserRules.toString(), 2, parserRules.size());
+		assertTrue(parserRules.contains(getGrammarAccess().getTypeRule()));
+		assertTrue(parserRules.contains(getGrammarAccess().getFQNRule()));
 	}
 	
 	public void testSecondEntityName_02() throws Exception {
@@ -254,7 +378,13 @@ public class ContentAssistCustomizingTest extends AbstractContentAssistProcessor
 		assertEquals(0, complete_Model);
 		assertEquals(0, complete_TypeRef);
 		assertEquals(0, completeType_SuperType);
-		assertEquals(0, completeTypeRef_Type);		
+		assertEquals(0, completeTypeRef_Type);	
+		
+		assertTrue(keywords.toString(), keywords.isEmpty());
+		
+		assertEquals(parserRules.toString(), 2, parserRules.size());
+		assertTrue(parserRules.contains(getGrammarAccess().getTypeRule()));
+		assertTrue(parserRules.contains(getGrammarAccess().getFQNRule()));
 	}
 	
 	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {

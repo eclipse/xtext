@@ -17,7 +17,6 @@ import org.eclipse.xtext.AbstractElement;
 import org.eclipse.xtext.parsetree.AbstractNode;
 import org.eclipse.xtext.parsetree.CompositeNode;
 import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.ui.editor.contentassist.IFollowElementCalculator.IFollowElementAcceptor;
 import org.eclipse.xtext.ui.editor.model.IXtextDocument;
 
 import com.google.inject.ImplementedBy;

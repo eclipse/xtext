@@ -31,10 +31,8 @@ import org.eclipse.xtext.ui.editor.XtextEditorErrorTickUpdater;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 import org.eclipse.xtext.ui.editor.contentassist.DefaultCompletionProposalPostProcessor;
 import org.eclipse.xtext.ui.editor.contentassist.DefaultContentAssistantFactory;
-import org.eclipse.xtext.ui.editor.contentassist.DefaultFollowElementCalculator;
 import org.eclipse.xtext.ui.editor.contentassist.ICompletionProposalPostProcessor;
 import org.eclipse.xtext.ui.editor.contentassist.IContentAssistantFactory;
-import org.eclipse.xtext.ui.editor.contentassist.IFollowElementCalculator;
 import org.eclipse.xtext.ui.editor.contentassist.ITemplateProposalProvider;
 import org.eclipse.xtext.ui.editor.contentassist.XtextContentAssistProcessor;
 import org.eclipse.xtext.ui.editor.formatting.ContentFormatterFactory;
@@ -159,10 +157,6 @@ public class DefaultUiModule extends AbstractGenericModule {
 
 	public Class<? extends ICompletionProposalPostProcessor> bindICompletionProposalPostProcessor() {
 		return DefaultCompletionProposalPostProcessor.class;
-	}
-
-	public Class<? extends IFollowElementCalculator> bindIFollowElementCalculator() {
-		return DefaultFollowElementCalculator.class;
 	}
 
 	public Class<? extends ITemplateProposalProvider> bindITemplateProposalProvider() {
