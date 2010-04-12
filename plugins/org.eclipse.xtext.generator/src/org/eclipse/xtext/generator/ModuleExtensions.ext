@@ -1,5 +1,4 @@
 import org::eclipse::xtext::generator;
-extension org::eclipse::xtend::util::stdlib::io;
 
 bindMethodName(Binding this) :
 	((!value.provider && value.statements.isEmpty)?'bind':((value.statements.isEmpty)?'provide':'configure'))
