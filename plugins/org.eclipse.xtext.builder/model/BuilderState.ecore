@@ -3,7 +3,7 @@
     xmlns:xmi="http://www.omg.org/XMI" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
     xmlns:ecore="http://www.eclipse.org/emf/2002/Ecore" name="builderState"
     nsURI="http://www.eclipse.org/xtext/builderstate/1.0" nsPrefix="builderState">
-  <eClassifiers xsi:type="ecore:EClass" name="ResourceDescription" instanceClassName="org.eclipse.xtext.resource.IResourceDescription">
+  <eClassifiers xsi:type="ecore:EClass" name="ResourceDescription" instanceClassName="org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription">
     <eOperations name="getExportedObjects" upperBound="-1" eType="#//EObjectDescription">
       <eParameters name="type" eType="ecore:EClass http://www.eclipse.org/emf/2002/Ecore#//EClass"/>
       <eParameters name="name" eType="ecore:EDataType http://www.eclipse.org/emf/2002/Ecore#//EString"/>

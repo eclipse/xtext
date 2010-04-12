@@ -7,15 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.resource.Resource;
-import org.eclipse.emf.ecore.resource.impl.ExtensibleURIConverterImpl;
 import org.eclipse.emf.ecore.resource.impl.ResourceSetImpl;
 import org.eclipse.xtext.linking.ImportUriTestLanguageStandaloneSetup;
 import org.eclipse.xtext.linking.importedURI.ImportedURIPackage;
@@ -23,7 +18,6 @@ import org.eclipse.xtext.linking.importedURI.Main;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
-import org.eclipse.xtext.util.StringInputStream;
 
 import com.google.common.collect.Sets;
 
@@ -39,7 +33,7 @@ public class SimpleNameScopeProviderTest extends AbstractGeneratorTest {
 	}
 
 	public void testSimple() throws Exception {
-		TestURIConverter models = new TestURIConverter();
+		SyntheticModelAwareURIConverter models = new SyntheticModelAwareURIConverter();
 		ResourceSetImpl rs = new ResourceSetImpl();
 		rs.setURIConverter(models);
 
@@ -53,7 +47,7 @@ public class SimpleNameScopeProviderTest extends AbstractGeneratorTest {
 
 	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=266879
 	public void testRelativeScope() throws Exception {
-		TestURIConverter models = new TestURIConverter();
+		SyntheticModelAwareURIConverter models = new SyntheticModelAwareURIConverter();
 		ResourceSetImpl rs = new ResourceSetImpl();
 		rs.setURIConverter(models);
 
@@ -70,7 +64,7 @@ public class SimpleNameScopeProviderTest extends AbstractGeneratorTest {
 
 	// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=266879
 	public void testRelativeScopeWithPath() throws Exception {
-		TestURIConverter models = new TestURIConverter();
+		SyntheticModelAwareURIConverter models = new SyntheticModelAwareURIConverter();
 		ResourceSetImpl rs = new ResourceSetImpl();
 		rs.setURIConverter(models);
 		models.addModel("testfile://my/folder/foo.importuritestlanguage", "import './../folder/bar.importuritestlanguage' type foo extends bar type bar extends bar2");
@@ -86,7 +80,7 @@ public class SimpleNameScopeProviderTest extends AbstractGeneratorTest {
 	}
 
 	public void testScopeFileName() throws Exception {
-		TestURIConverter models = new TestURIConverter();
+		SyntheticModelAwareURIConverter models = new SyntheticModelAwareURIConverter();
 		ResourceSetImpl rs = new ResourceSetImpl();
 		rs.setURIConverter(models);
 
@@ -102,7 +96,7 @@ public class SimpleNameScopeProviderTest extends AbstractGeneratorTest {
 	}
 
 	public void testUnresolvableImport() throws Exception {
-		TestURIConverter models = new TestURIConverter();
+		SyntheticModelAwareURIConverter models = new SyntheticModelAwareURIConverter();
 		ResourceSetImpl rs = new ResourceSetImpl();
 		rs.setURIConverter(models);
 
@@ -114,7 +108,7 @@ public class SimpleNameScopeProviderTest extends AbstractGeneratorTest {
 	}
 
 	public void testCircularImport() throws Exception {
-		TestURIConverter models = new TestURIConverter();
+		SyntheticModelAwareURIConverter models = new SyntheticModelAwareURIConverter();
 		ResourceSetImpl rs = new ResourceSetImpl();
 		rs.setURIConverter(models);
 
@@ -132,7 +126,7 @@ public class SimpleNameScopeProviderTest extends AbstractGeneratorTest {
 	 * https://bugs.eclipse.org/bugs/show_bug.cgi?id=261630
 	 */
 	public void testBug261630_duplicateImports() throws Exception {
-		TestURIConverter models = new TestURIConverter();
+		SyntheticModelAwareURIConverter models = new SyntheticModelAwareURIConverter();
 		ResourceSetImpl rs = new ResourceSetImpl();
 		rs.setURIConverter(models);
 
@@ -148,7 +142,7 @@ public class SimpleNameScopeProviderTest extends AbstractGeneratorTest {
 	}
 	
 	public void testGetAllContents() throws Exception {
-		TestURIConverter models = new TestURIConverter();
+		SyntheticModelAwareURIConverter models = new SyntheticModelAwareURIConverter();
 		ResourceSetImpl rs = new ResourceSetImpl();
 		rs.setURIConverter(models);
 
@@ -160,32 +154,6 @@ public class SimpleNameScopeProviderTest extends AbstractGeneratorTest {
 		IScope scope = getScopeProvider().getScope(((Main)resource.getContents().get(0)).getTypes().get(0), ImportedURIPackage.Literals.TYPE__EXTENDS);
 		HashSet<IEObjectDescription> set = Sets.newHashSet(scope.getAllContents());
 		assertEquals(4,set.size());
-	}
-
-
-	class TestURIConverter extends ExtensibleURIConverterImpl {
-		private final Map<URI, InputStream> models = new HashMap<URI, InputStream>();
-
-		public void addModel(String uri, String content) {
-			models.put(URI.createURI(uri), new StringInputStream(content));
-		}
-
-		@Override
-		public boolean exists(URI uri, Map<?, ?> options) {
-		 	boolean result = models.containsKey(uri);
-		 	if (!result) {
-		 		for(URI knownUri: models.keySet()) {
-		 			if (uri.toString().endsWith(knownUri.toString()))
-		 				return true;
-		 		}
-		 	}
-		 	return result;
-		}
-
-		@Override
-		public InputStream createInputStream(URI uri, Map<?, ?> options) throws IOException {
-			return models.get(uri);
-		}
 	}
 
 }

@@ -18,11 +18,11 @@ import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.EcorePackage;
 import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.EObjectDescription;
-import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription;
 
 import com.google.common.collect.Iterables;
 
@@ -31,12 +31,12 @@ import com.google.common.collect.Iterables;
  */
 public class ResourceDescriptionsBasedContainerTest extends TestCase implements IResourceDescriptions {
 
-	private IContainer container;
+	private ResourceDescriptionsBasedContainer container;
 	private EClass eClass;
 	private URI uri;
 	private ResourceDescription resourceDescription;
 	
-	private class ResourceDescription implements IResourceDescription {
+	private class ResourceDescription implements IIgnoreCaseResourceDescription {
 
 		public Iterable<IEObjectDescription> getExportedObjects() {
 			if (eClass != null)
@@ -46,6 +46,12 @@ public class ResourceDescriptionsBasedContainerTest extends TestCase implements 
 
 		public Iterable<IEObjectDescription> getExportedObjects(EClass clazz, String name) {
 			if (eClass != null && EcoreUtil2.isAssignableFrom(clazz,eClass.eClass()) && eClass.getName().equals(name))
+				return Collections.singleton(EObjectDescription.create(eClass.getName(), eClass));
+			return Collections.emptyList();
+		}
+		
+		public Iterable<IEObjectDescription> getExportedObjectsIgnoreCase(EClass clazz, String name) {
+			if (eClass != null && EcoreUtil2.isAssignableFrom(clazz,eClass.eClass()) && eClass.getName().equalsIgnoreCase(name))
 				return Collections.singleton(EObjectDescription.create(eClass.getName(), eClass));
 			return Collections.emptyList();
 		}
@@ -107,6 +113,24 @@ public class ResourceDescriptionsBasedContainerTest extends TestCase implements 
 	public void testFindAllEObjectsByName_02() {
 		eClass = null;
 		Iterable<IEObjectDescription> iterable = container.findAllEObjects(EcorePackage.Literals.ECLASSIFIER, "SomeName");
+		assertTrue(Iterables.isEmpty(iterable));
+	}
+	
+	public void testFindAllEObjectsByNameIgnoreCase_01() {
+		Iterable<IEObjectDescription> iterable = container.findAllEObjectsIgnoreCase(EcorePackage.Literals.ECLASSIFIER, "SomeName".toUpperCase());
+		EObject eObject = Iterables.getOnlyElement(iterable).getEObjectOrProxy();
+		assertSame(eClass, eObject);
+	}
+	
+	public void testFindAllEObjectsByNameIgnoreCase_02() {
+		Iterable<IEObjectDescription> iterable = container.findAllEObjectsIgnoreCase(EcorePackage.Literals.ECLASSIFIER, "SomeName".toLowerCase());
+		EObject eObject = Iterables.getOnlyElement(iterable).getEObjectOrProxy();
+		assertSame(eClass, eObject);
+	}
+	
+	public void testFindAllEObjectsByNameIgnoreCase_03() {
+		eClass = null;
+		Iterable<IEObjectDescription> iterable = container.findAllEObjectsIgnoreCase(EcorePackage.Literals.ECLASSIFIER, "SomeName");
 		assertTrue(Iterables.isEmpty(iterable));
 	}
 

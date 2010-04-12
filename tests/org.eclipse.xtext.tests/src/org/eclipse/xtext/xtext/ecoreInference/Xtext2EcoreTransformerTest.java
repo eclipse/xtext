@@ -673,7 +673,7 @@ public class Xtext2EcoreTransformerTest extends AbstractGeneratorTest {
 	public void testImportingUnknownModel() throws Exception {
 		final String grammar = "grammar test with org.eclipse.xtext.common.Terminals " +
 				"generate test 'http://test' " +
-				"import 'http://www.unknownModel' as unknownModel " +
+				"import 'unknown-scheme://www.unknownModel' as unknownModel " +
 				"RuleA: feature=ID;";
 		getEPackageFromGrammar(grammar, 1);
 	}

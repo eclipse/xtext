@@ -38,6 +38,33 @@ Workflow {
 			fragment = @TestLanguagesFragments {}
 		}
 		language = {
+			uri = "classpath:/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.xtext"
+			fragment = @TestLanguagesFragments {
+			}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/linking/IgnoreCaseNamespacesTestLanguage.xtext"
+			fragment = CompositeGeneratorFragment {
+				fragment = @TestLanguagesFragments {
+					referencedGenModels = "classpath:/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.genmodel"
+				}
+				fragment = scoping.ImportNamespacesScopingFragment {
+					ignoreCase = true
+				}
+			}
+		}
+		language = {
+			uri = "classpath:/org/eclipse/xtext/linking/IgnoreCaseImportsTestLanguage.xtext"
+			fragment = CompositeGeneratorFragment {
+				fragment = @TestLanguagesFragments {
+					referencedGenModels = "classpath:/org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.genmodel"
+				}
+				fragment = scoping.ImportURIScopingFragment {
+					ignoreCase = true
+				}
+			}
+		}
+		language = {
 			uri = "classpath:/org/eclipse/xtext/linking/lazy/LazyLinkingTestLanguage.xtext"
 			fragment = @TestLanguagesFragments {}
 		}

@@ -119,6 +119,12 @@ public class DefaultResourceDescriptionTest extends TestCase implements IQualifi
 		assertContains(description.getExportedObjects(eClass.eClass(), "foo"));
 	}
 	
+	public void testGetExportedEObjectsIgnoreCase() throws Exception {
+		assertContains(description.getExportedObjectsIgnoreCase(pack.eClass(), pack.getName().toUpperCase()), pack);
+		assertContains(description.getExportedObjectsIgnoreCase(pack.eClass(), "foo".toUpperCase()));
+		assertContains(description.getExportedObjectsIgnoreCase(eClass.eClass(), "foo".toUpperCase()));
+	}
+	
 	public void testGetExportedEObjects_EClass() throws Exception {
 		assertContains(description.getExportedObjects(EcorePackage.Literals.EPACKAGE),pack);
 		assertContains(description.getExportedObjects(EcorePackage.Literals.ECLASSIFIER),eClass,dtype);
