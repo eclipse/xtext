@@ -7,16 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.scoping;
 
-import java.util.Set;
-
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.generator.BindFactory;
-import org.eclipse.xtext.generator.Binding;
-import org.eclipse.xtext.naming.DefaultDeclarativeQualifiedNameProvider;
-import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.ignorecase.IgnoreCaseDefaultGlobalScopeProvider;
+import org.eclipse.xtext.resource.ignorecase.IgnoreCaseImportedNamespaceAwareScopeProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 
@@ -26,18 +20,17 @@ import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 public class ImportNamespacesScopingFragment extends AbstractScopingFragment {
 
 	@Override
-	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
-		return new BindFactory()
-			.addTypeToType(IScopeProvider.class.getName(), getScopeProviderName(grammar, getNaming()))
-			.addConfiguredBinding(IScopeProvider.class.getName() + "Delegate", 
-				"binder.bind(" + 
-					IScopeProvider.class.getName() + ".class" +
-					").annotatedWith(com.google.inject.name.Names.named(" +
-					"\"" + AbstractDeclarativeScopeProvider.NAMED_DELEGATE + "\"" +
-					")).to("+ ImportedNamespaceAwareLocalScopeProvider.class.getName() + ".class)")
-			.addTypeToType(IQualifiedNameProvider.class.getName(), DefaultDeclarativeQualifiedNameProvider.class.getName())
-			.addTypeToType(IGlobalScopeProvider.class.getName(), DefaultGlobalScopeProvider.class.getName())
-			.getBindings();
+	protected Class<? extends IScopeProvider> getLocalScopeProvider() {
+		return isIgnoreCase() 
+			? IgnoreCaseImportedNamespaceAwareScopeProvider.class
+			: ImportedNamespaceAwareLocalScopeProvider.class;
+	}
+	
+	@Override
+	protected Class<? extends IGlobalScopeProvider> getGlobalScopeProvider() {
+		return isIgnoreCase() 
+			? IgnoreCaseDefaultGlobalScopeProvider.class
+			: DefaultGlobalScopeProvider.class;
 	}
 
 }

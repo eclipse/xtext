@@ -7,14 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.generator.scoping;
 
-import java.util.Set;
-
-import org.eclipse.xtext.Grammar;
-import org.eclipse.xtext.generator.BindFactory;
-import org.eclipse.xtext.generator.Binding;
+import org.eclipse.xtext.resource.ignorecase.IgnoreCaseImportUriGlobalScopeProvider;
+import org.eclipse.xtext.resource.ignorecase.IgnoreCaseSimpleLocalScopeProvider;
 import org.eclipse.xtext.scoping.IGlobalScopeProvider;
 import org.eclipse.xtext.scoping.IScopeProvider;
-import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
 import org.eclipse.xtext.scoping.impl.ImportUriGlobalScopeProvider;
 import org.eclipse.xtext.scoping.impl.SimpleLocalScopeProvider;
 
@@ -24,16 +20,16 @@ import org.eclipse.xtext.scoping.impl.SimpleLocalScopeProvider;
 public class ImportURIScopingFragment extends AbstractScopingFragment {
 
 	@Override
-	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
-		return new BindFactory()
-			.addTypeToType(IScopeProvider.class.getName(), getScopeProviderName(grammar,getNaming()))
-			.addConfiguredBinding(IScopeProvider.class.getName() + "Delegate", 
-				"binder.bind(" + 
-					IScopeProvider.class.getName() + ".class" +
-					").annotatedWith(com.google.inject.name.Names.named(" +
-					"\"" + AbstractDeclarativeScopeProvider.NAMED_DELEGATE + "\"" +
-					")).to("+ SimpleLocalScopeProvider.class.getName() + ".class)")
-			.addTypeToType(IGlobalScopeProvider.class.getName(), ImportUriGlobalScopeProvider.class.getName())
-			.getBindings();
+	protected Class<? extends IScopeProvider> getLocalScopeProvider() {
+		return isIgnoreCase() 
+			? IgnoreCaseSimpleLocalScopeProvider.class
+			: SimpleLocalScopeProvider.class;
+	}
+	
+	@Override
+	protected Class<? extends IGlobalScopeProvider> getGlobalScopeProvider() {
+		return isIgnoreCase() 
+			? IgnoreCaseImportUriGlobalScopeProvider.class
+			: ImportUriGlobalScopeProvider.class;
 	}
 }
