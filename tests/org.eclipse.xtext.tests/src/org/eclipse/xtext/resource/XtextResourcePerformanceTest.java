@@ -15,7 +15,7 @@ import org.eclipse.xtext.tests.AbstractGeneratorTest;
  */
 public class XtextResourcePerformanceTest extends AbstractGeneratorTest {
 
-	private static final int NUM_ELEMENTS = 190;
+	private static final int NUM_ELEMENTS = 10;
 	private String model;
 
 	@Override
@@ -47,10 +47,10 @@ public class XtextResourcePerformanceTest extends AbstractGeneratorTest {
 		StringBuilder modelBuilder = new StringBuilder(NUM_ELEMENTS * 64);
 		modelBuilder.append("spielplatz " + NUM_ELEMENTS + " {\n");
 		for (int i = 1; i <= NUM_ELEMENTS; i++) {
-			modelBuilder.append("  kind (Bob " + i + ")\n");
-			modelBuilder.append("  kind (Joe " + i + ")\n");
-			modelBuilder.append("  erwachsener (Mutter " + i + ")\n");
-			modelBuilder.append("  erwachsener (Vater " + i + ")\n");
+			modelBuilder.append("  kind (Bob" + i + " " + i + ")\n");
+			modelBuilder.append("  kind (Joe" + i + " " + i + ")\n");
+			modelBuilder.append("  erwachsener (Mutter" + i + " " + i + ")\n");
+			modelBuilder.append("  erwachsener (Vater" + i + " " + i + ")\n");
 			modelBuilder.append("  familie(Familie" + i + " Vater Mutter Bob, Joe)\n");
 		}
 		modelBuilder.append('}');
