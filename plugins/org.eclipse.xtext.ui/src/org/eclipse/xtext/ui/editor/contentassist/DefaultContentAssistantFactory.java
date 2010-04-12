@@ -37,7 +37,6 @@ public class DefaultContentAssistantFactory implements IContentAssistantFactory 
 	}
 
 	protected ContentAssistant createAssistant() {
-		// cannot use Provider<ContentAssistent>.get() since ContentAssistant does not know anything about guice
 		return new ContentAssistant();
 	}
 	
