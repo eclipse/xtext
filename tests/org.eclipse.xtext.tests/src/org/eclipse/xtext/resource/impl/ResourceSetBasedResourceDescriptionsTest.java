@@ -29,6 +29,7 @@ import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceServiceProvider;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
+import org.eclipse.xtext.util.IResourceScopeCache;
 
 import com.google.common.base.Function;
 import com.google.common.collect.Iterables;
@@ -61,6 +62,7 @@ public class ResourceSetBasedResourceDescriptionsTest extends TestCase implement
 			
 		};
 		resourceDescriptionManager = new DefaultResourceDescriptionManager();
+		resourceDescriptionManager.setCache(IResourceScopeCache.NullImpl.INSTANCE);
 		resourceDescriptionManager.setNameProvider(qualifiedNameProvider);
 		ResourceSetBasedResourceDescriptions resDescs = new ResourceSetBasedResourceDescriptions();
 		resDescs.setContext(resourceSet);

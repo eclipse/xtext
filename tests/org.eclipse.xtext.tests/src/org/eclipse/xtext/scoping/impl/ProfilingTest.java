@@ -8,13 +8,13 @@
 package org.eclipse.xtext.scoping.impl;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.util.EcoreUtil;
 import org.eclipse.xtext.index.IndexTestLanguageStandaloneSetup;
 import org.eclipse.xtext.junit.AbstractXtextTests;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.XtextResource;
-import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.resource.IResourceDescription.Manager;
+import org.eclipse.xtext.resource.XtextResourceSet;
 import org.eclipse.xtext.util.StopWatch;
 import org.eclipse.xtext.util.StringInputStream;
 
@@ -25,24 +25,31 @@ import com.google.common.collect.Sets;
  */
 public class ProfilingTest extends AbstractXtextTests {
 	
+	private static final int ELEMENTS = 600;
+//	private static final int ELEMENTS = 6000;
+	
 	public void testSimple() throws Exception {
 		with(new IndexTestLanguageStandaloneSetup());
 		XtextResourceSet rs = get(XtextResourceSet.class);
-		rs.setClasspathURIContext(getClass());
-		XtextResource resource = (XtextResource) getResourceFactory().createResource(URI.createURI("mytestmodel."+getCurrentFileExtension()));
-		rs.getResources().add(resource);
+		Resource outer = rs.createResource(URI.createURI("outer."+getCurrentFileExtension()));
+		outer.load(new StringInputStream(outerFile(ELEMENTS)), null);
+		Resource inner = rs.createResource(URI.createURI("inner."+getCurrentFileExtension()));
 		StopWatch watch = new StopWatch();
-		resource.load(new StringInputStream(generateFile(10)), null);
+		
+		inner.load(new StringInputStream(generateFile(ELEMENTS)), null);
 //		resource.load(new StringInputStream(generateFile(1000)), null);
 		watch.resetAndLog("loading");
-		EcoreUtil.resolveAll(resource);
+		EcoreUtil.resolveAll(inner);
 		watch.resetAndLog("linking");
-		assertTrue(resource.getErrors().size()+" errors ", resource.getErrors().isEmpty());
+		
+		assertTrue(inner.getErrors().size()+" errors ", inner.getErrors().isEmpty());
 		Manager manager = get(IResourceDescription.Manager.class);
-		IResourceDescription iResourceDescription = manager.getResourceDescription(resource);
+//		Yourkit.startTracing();
+		IResourceDescription iResourceDescription = manager.getResourceDescription(inner);
 		Sets.newHashSet(iResourceDescription.getReferenceDescriptions());
+//		Yourkit.stopCpuProfiling();
 		watch.resetAndLog("resourcedescriptions");
-		System.out.println(Sets.newHashSet(resource.getAllContents()).size());
+		System.out.println(Sets.newHashSet(inner.getAllContents()).size());
 	}
 
 	private String generateFile(int numberOfElements) {
@@ -52,7 +59,17 @@ public class ProfilingTest extends AbstractXtextTests {
 			sb.append("  entity Name"+i+"{\n");
 			sb.append("    Name"+i+" foo\n");
 			sb.append("    foo.Name"+i+" bar\n");
+			sb.append("    bar.Name"+i+" baz\n");
 			sb.append("  }\n");
+		}
+		sb.append("}\n");
+		return sb.toString();
+	}
+	private String outerFile(int numberOfElements) {
+		StringBuilder sb = new StringBuilder();
+		sb.append("bar {\n");
+		for (int i = 0;i< numberOfElements ;i++) {
+			sb.append("  entity Name"+i+"{}\n");
 		}
 		sb.append("}\n");
 		return sb.toString();
