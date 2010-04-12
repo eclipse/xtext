@@ -45,7 +45,6 @@ import org.eclipse.xtext.RuleCall;
 import org.eclipse.xtext.UnorderedGroup;
 import org.eclipse.xtext.parsetree.reconstr.ITransientValueService;
 import org.eclipse.xtext.util.EmfFormatter;
-import org.eclipse.xtext.util.OnChangeEvictingCacheAdapter;
 import org.eclipse.xtext.util.Pair;
 import org.eclipse.xtext.util.Tuples;
 
@@ -59,13 +58,24 @@ import com.google.common.collect.Multimap;
 import com.google.common.collect.Multimaps;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.Singleton;
 import com.google.inject.internal.Lists;
 
 /**
  * @author Moritz Eysholdt - Initial contribution and API
  */
+@Singleton
 public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
+	
+	private ElementCache elementCache = null;
 
+	protected ElementCache getElementCache() {
+		if (elementCache==null)
+			elementCache = new ElementCache(grammarAcc.getGrammar());
+		return elementCache;
+	}
+	
+	
 	public abstract class AbstractConcreteSyntaxDiagnostic implements IConcreteSyntaxDiagnostic {
 		protected Set<Element> involved;
 		protected Element rule;
@@ -946,16 +956,6 @@ public class ConcreteSyntaxValidator extends AbstractConcreteSyntaxValidator {
 			return transSrvc.isTransient(obj, feat, 0) ? 0 : max;
 		}
 		return transSrvc.isTransient(obj, feat, 0) ? 0 : 1;
-	}
-
-	protected ElementCache getElementCache() {
-		String key = ElementCache.class.getName();
-		Grammar grammar = grammarAcc.getGrammar();
-		OnChangeEvictingCacheAdapter a = OnChangeEvictingCacheAdapter.getOrCreate(grammar);
-		ElementCache ec = a.get(key);
-		if (ec == null)
-			a.set(key, ec = new ElementCache(grammar));
-		return ec;
 	}
 
 	protected EStructuralFeature getFeature(EClass cls, Element ele) {

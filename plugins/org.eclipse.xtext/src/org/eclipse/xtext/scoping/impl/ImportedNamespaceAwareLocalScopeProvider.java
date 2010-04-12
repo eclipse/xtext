@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
-import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -29,7 +28,7 @@ import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.impl.AliasedEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
 import org.eclipse.xtext.scoping.Scopes;
-import org.eclipse.xtext.util.OnChangeEvictingCacheAdapter;
+import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.SimpleAttributeResolver;
 import org.eclipse.xtext.util.Tuples;
 
@@ -98,9 +97,16 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 		}
 	}
 
-	private IQualifiedNameProvider nameProvider;
+	@Inject
+	private IResourceScopeCache cache = IResourceScopeCache.NullImpl.INSTANCE;
+	
+	public void setCache(IResourceScopeCache cache) {
+		this.cache = cache;
+	}
 
 	@Inject
+	private IQualifiedNameProvider nameProvider;
+
 	public void setNameProvider(IQualifiedNameProvider nameProvider) {
 		this.nameProvider = nameProvider;
 	}
@@ -142,7 +148,7 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 	protected IScope getResourceScope(final IScope parent, final EObject context, final EReference reference) {
 		if (context.eResource() == null)
 			return parent;
-		return getScope(reference.getEReferenceType().getName(), context.eResource(), parent, new Provider<Map<String, IEObjectDescription>>() {
+		return getScope(reference.getEReferenceType().getName(), context, parent, new Provider<Map<String, IEObjectDescription>>() {
 			public Map<String, IEObjectDescription> get() {
 				Iterable<EObject> contents = new Iterable<EObject>() {
 					public Iterator<EObject> iterator() {
@@ -209,7 +215,7 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 	}
 
 	protected Set<ImportNormalizer> getImportNormalizer(final EObject context) {
-		return OnChangeEvictingCacheAdapter.get(Tuples.pair(context, "imports"), context, new Provider<Set<ImportNormalizer>>() {
+		return cache.get(Tuples.pair(context, "imports"), context.eResource(), new Provider<Set<ImportNormalizer>>() {
 
 			public Set<ImportNormalizer> get() {
 				Set<ImportNormalizer> namespaceImports = new HashSet<ImportNormalizer>();
@@ -287,8 +293,8 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 	}
 	
 	
-	protected IScope getScope(String cacheKey, Notifier cache, IScope parentScope, Provider<Map<String, IEObjectDescription>> mapProvider) {
-		Map<String, IEObjectDescription> map = OnChangeEvictingCacheAdapter.get(Tuples.pair(cache, cacheKey), cache, mapProvider);
+	protected IScope getScope(String cacheKey, EObject eobject, IScope parentScope, Provider<Map<String, IEObjectDescription>> mapProvider) {
+		Map<String, IEObjectDescription> map = cache.get(Tuples.pair(eobject, cacheKey), eobject.eResource(), mapProvider);
 		return map.isEmpty()?parentScope:new MapBasedScope(parentScope,map);
 	}
 	

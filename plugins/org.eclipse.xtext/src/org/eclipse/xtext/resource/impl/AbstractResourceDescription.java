@@ -22,49 +22,29 @@ import org.eclipse.xtext.resource.IResourceDescription;
 public abstract class AbstractResourceDescription implements IResourceDescription {
 	
 	private EObjectDescriptionLookUp lookup;
-	private boolean invalidated;
 	
-	protected AbstractResourceDescription() {
-		invalidated = true;
-	}
-
 	public Iterable<IEObjectDescription> getExportedObjects(EClass clazz, String name) {
-		updateLookup();
-		return lookup.getExportedObjects(clazz, name);
+		return getLookUp().getExportedObjects(clazz, name);
 	}
 
 	public Iterable<IEObjectDescription> getExportedObjects(EClass clazz) {
-		updateLookup();
-		return lookup.getExportedObjects(clazz);
+		return getLookUp().getExportedObjects(clazz);
 	}
 
 	public Iterable<IEObjectDescription> getExportedObjectsForEObject(EObject object) {
-		updateLookup();
-		return lookup.getExportedObjectsForEObject(object);
+		return getLookUp().getExportedObjectsForEObject(object);
 	}
 	
 	public Iterable<IEObjectDescription> getExportedObjects() {
-		updateLookup();
-		return lookup.getExportedObjects();
-	}
-	
-	public void invalidateCache() {
-		invalidated = true;
+		return getLookUp().getExportedObjects();
 	}
 	
 	protected abstract List<IEObjectDescription> computeExportedObjects();
 	
-	protected void updateLookup() {
-		if (lookup == null) {
+	protected EObjectDescriptionLookUp getLookUp() {
+		if (lookup == null)
 			lookup = new EObjectDescriptionLookUp(computeExportedObjects());
-		} else if (isInvalid()) {
-			lookup.setExportedObjects(computeExportedObjects());
-		}
-		invalidated = false;
-	}
-
-	protected boolean isInvalid() {
-		return invalidated;
+		return lookup;
 	}
 
 	protected URI getNormalizedURI(Resource resource) {

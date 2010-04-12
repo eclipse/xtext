@@ -28,6 +28,7 @@ import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 import org.eclipse.xtext.scoping.impl.LoadOnDemandResourceDescriptions;
 import org.eclipse.xtext.testlanguages.ReferenceGrammarTestLanguageStandaloneSetup;
 import org.eclipse.xtext.tests.AbstractGeneratorTest;
+import org.eclipse.xtext.util.IResourceScopeCache;
 
 import com.google.inject.Provider;
 
@@ -58,6 +59,7 @@ public class PartialLinkingTest extends AbstractGeneratorTest implements IScopeP
 		SimpleNameProvider nameProvider = new SimpleNameProvider();
 		ImportUriGlobalScopeProvider globalScopeProvider = new ImportUriGlobalScopeProvider();
 		globalScopeProvider.setImportResolver(new ImportUriResolver());
+		globalScopeProvider.setCache(IResourceScopeCache.NullImpl.INSTANCE);
 		globalScopeProvider.setResourceServiceProviderRegistry(get(IResourceServiceProvider.Registry.class));
 		globalScopeProvider.setResourceDescriptions(new Provider<IResourceDescriptions>() {
 			public IResourceDescriptions get() {

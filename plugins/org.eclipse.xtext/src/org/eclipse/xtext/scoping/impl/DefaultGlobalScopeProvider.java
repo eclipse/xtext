@@ -17,10 +17,10 @@ import org.eclipse.emf.ecore.EReference;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription;
-import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.resource.IResourceDescription.Event.Source;
+import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.util.OnChangeEvictingCacheAdapter;
+import org.eclipse.xtext.util.OnChangeEvictingCache;
 
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Iterables;
@@ -54,7 +54,7 @@ public class DefaultGlobalScopeProvider extends AbstractGlobalScopeProvider {
 		IResourceDescription description = descriptionManager.getResourceDescription(context.eResource());
 		IResourceDescriptions resourceDescriptions = getResourceDescriptions(context);
 		String cacheKey = getCacheKey("VisibleContainers", context.eResource().getResourceSet());
-		OnChangeEvictingCacheAdapter cache = OnChangeEvictingCacheAdapter.getOrCreate(context);
+		OnChangeEvictingCache.CacheAdapter cache = new OnChangeEvictingCache().getOrCreate(context);
 		List<IContainer> result = null;
 		result = cache.get(cacheKey);
 		if (result == null) {

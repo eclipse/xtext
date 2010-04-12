@@ -10,13 +10,14 @@ package org.eclipse.xtext.scoping.impl;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Event;
 import org.eclipse.xtext.resource.impl.AbstractResourceDescriptionChangeEventSource;
-import org.eclipse.xtext.util.OnChangeEvictingCacheAdapter;
+import org.eclipse.xtext.util.OnChangeEvictingCache;
+import org.eclipse.xtext.util.OnChangeEvictingCache.CacheAdapter;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class DelegatingEventSource extends AbstractResourceDescriptionChangeEventSource 
-	implements IResourceDescription.Event.Listener, OnChangeEvictingCacheAdapter.Listener {
+	implements IResourceDescription.Event.Listener, OnChangeEvictingCache.Listener {
 
 	private final IResourceDescription.Event.Source source;
 
@@ -32,7 +33,7 @@ public class DelegatingEventSource extends AbstractResourceDescriptionChangeEven
 		notifyListeners(event);
 	}
 
-	public void onEvict(OnChangeEvictingCacheAdapter cache) {
+	public void onEvict(CacheAdapter cache) {
 		source.removeListener(this);
 	}
 

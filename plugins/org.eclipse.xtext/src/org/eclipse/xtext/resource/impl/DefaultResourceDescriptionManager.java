@@ -16,11 +16,12 @@ import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescription.Delta;
-import org.eclipse.xtext.util.OnChangeEvictingCacheAdapter;
+import org.eclipse.xtext.util.IResourceScopeCache;
 
 import com.google.common.collect.Collections2;
 import com.google.common.collect.Sets;
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -34,16 +35,16 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 	@Inject
 	private IContainer.Manager containerManager;
 	
+	@Inject
+	private IResourceScopeCache cache = IResourceScopeCache.NullImpl.INSTANCE;
+	
 	private static final String CACHE_KEY = DefaultResourceDescriptionManager.class.getName() + "#getResourceDescription";
 	
-	public IResourceDescription getResourceDescription(Resource resource) {
-		OnChangeEvictingCacheAdapter adapter = OnChangeEvictingCacheAdapter.getOrCreate(resource);
-		IResourceDescription result = adapter.get(CACHE_KEY);
-		if (result == null) {
-			result = new DefaultResourceDescription(resource, nameProvider);
-			adapter.set(CACHE_KEY, result);
-		}
-		return result;
+	public IResourceDescription getResourceDescription(final Resource resource) {
+		return cache.get(CACHE_KEY, resource, new Provider<IResourceDescription>(){
+			public IResourceDescription get() {
+				return new DefaultResourceDescription(resource, nameProvider);
+			}});
 	}
 	
 	public void setNameProvider(IQualifiedNameProvider nameProvider) {
@@ -60,6 +61,10 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 	
 	public void setContainerManager(IContainer.Manager containerManager) {
 		this.containerManager = containerManager;
+	}
+	
+	public void setCache(IResourceScopeCache cache) {
+		this.cache = cache;
 	}
 	
 	public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {
