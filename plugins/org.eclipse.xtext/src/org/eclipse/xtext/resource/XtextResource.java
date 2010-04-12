@@ -33,11 +33,14 @@ import org.eclipse.xtext.parsetree.SyntaxError;
 import org.eclipse.xtext.parsetree.reconstr.SerializerUtil;
 import org.eclipse.xtext.parsetree.reconstr.SerializerUtil.SerializationOptions;
 import org.eclipse.xtext.resource.impl.ListBasedDiagnosticConsumer;
+import org.eclipse.xtext.util.IResourceScopeCache;
 import org.eclipse.xtext.util.StringInputStream;
+import org.eclipse.xtext.util.Tuples;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator;
 import org.eclipse.xtext.validation.IConcreteSyntaxValidator.IDiagnosticAcceptor;
 
 import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * An EMF resource that reads and writes models of an Xtext DSL.
@@ -83,6 +86,9 @@ public class XtextResource extends ResourceImpl {
 
 	@Inject
 	private IConcreteSyntaxValidator validator;
+	
+	@Inject
+	private IResourceScopeCache cache;
 
 	public IResourceServiceProvider getResourceServiceProvider() {
 		return resourceServiceProvider;
@@ -215,13 +221,18 @@ public class XtextResource extends ResourceImpl {
 	}
 
 	@Override
-	public String getURIFragment(EObject object) {
-		String result = (fragmentProvider != null) ? fragmentProvider.getFragment(object) : null;
+	public String getURIFragment(final EObject object) {
+		return cache.get(Tuples.pair(object, "fragment"), this, new Provider<String>() {
 
-		if (result == null)
-			result = super.getURIFragment(object);
-
-		return result;
+			public String get() {
+				String result = (fragmentProvider != null) ? fragmentProvider.getFragment(object) : null;
+				
+				if (result == null)
+					result = XtextResource.super.getURIFragment(object);
+				
+				return result;
+			}
+		});
 	}
 
 	@Override

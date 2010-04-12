@@ -3,15 +3,17 @@
  */
 package org.eclipse.xtext.example.scoping;
 
-import static org.eclipse.xtext.scoping.Scopes.scopeFor;
+import static org.eclipse.xtext.scoping.Scopes.*;
 
 import org.eclipse.emf.common.util.EList;
+import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
+import org.eclipse.xtext.example.domainmodel.DomainmodelPackage;
 import org.eclipse.xtext.example.domainmodel.Entity;
 import org.eclipse.xtext.example.domainmodel.Feature;
 import org.eclipse.xtext.example.domainmodel.Reference;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.scoping.impl.AbstractDeclarativeScopeProvider;
+import org.eclipse.xtext.scoping.impl.ImportedNamespaceAwareLocalScopeProvider;
 
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
@@ -23,7 +25,15 @@ import com.google.common.collect.Iterables;
  * use it
  * 
  */
-public class DomainmodelScopeProvider extends AbstractDeclarativeScopeProvider {
+public class DomainmodelScopeProvider extends ImportedNamespaceAwareLocalScopeProvider {
+	
+	@Override
+	public IScope getScope(EObject context, EReference reference) {
+		if (reference==DomainmodelPackage.Literals.REFERENCE__OPPOSITE) {
+			return scope_Reference_opposite((Reference) context, reference);
+		}
+		return super.getScope(context, reference);
+	}
 	
 	public IScope scope_Reference_opposite(final Reference ref, EReference eRef) {
 		EList<Feature> features = ((Entity) ref.getType().getReferenced()).getFeatures();

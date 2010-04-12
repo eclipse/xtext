@@ -30,3 +30,49 @@
 528  INFO  StopWatch          - linking: 528ms
 614  INFO  StopWatch          - resourcedescriptions: 86ms
 3002
+
+
+// 6000 elements
+
+0    INFO  StopWatch          - loading: 2571ms
+3670 INFO  StopWatch          - linking: 3671ms
+7539 INFO  StopWatch          - resourcedescriptions: 3869ms
+24002
+
+
+// freitag
+0    INFO  StopWatch          - loading: 2481ms
+3204 INFO  StopWatch          - linking: 3204ms
+7020 INFO  StopWatch          - resourcedescriptions: 3816ms
+24002
+0    INFO  StopWatch          - loading: 2412ms
+2821 INFO  StopWatch          - linking: 2822ms
+6982 INFO  StopWatch          - resourcedescriptions: 4161ms
+24002
+0    INFO  StopWatch          - loading: 2457ms
+3221 INFO  StopWatch          - linking: 3221ms
+7002 INFO  StopWatch          - resourcedescriptions: 3781ms
+24002
+
+
+
+
+0    INFO  StopWatch          - loading: 2285ms
+2470 INFO  StopWatch          - linking: 2470ms
+6923 INFO  StopWatch          - resourcedescriptions: 4453ms
+24002
+
+
+0    INFO  StopWatch          - loading: 2434ms
+2791 INFO  StopWatch          - linking: 2791ms
+6916 INFO  StopWatch          - resourcedescriptions: 4125ms
+24002
+
+no name caching
+
+0    INFO  StopWatch          - loading: 2993ms
+3227 INFO  StopWatch          - linking: 3227ms
+7980 INFO  StopWatch          - resourcedescriptions: 4753ms
+24002
+
+

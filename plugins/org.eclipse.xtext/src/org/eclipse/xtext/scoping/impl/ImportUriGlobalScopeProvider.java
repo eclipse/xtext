@@ -21,7 +21,7 @@ import org.eclipse.xtext.EcoreUtil2;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 import org.eclipse.xtext.scoping.IScope;
-import org.eclipse.xtext.util.OnChangeEvictingCacheAdapter;
+import org.eclipse.xtext.util.IResourceScopeCache;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -38,12 +38,19 @@ public class ImportUriGlobalScopeProvider extends AbstractGlobalScopeProvider {
 	@Inject
 	private Provider<LoadOnDemandResourceDescriptions> loadOnDemandDescriptions;
 	
+	@Inject
+	private IResourceScopeCache cache;
+	
 	public ImportUriResolver getImportUriResolver() {
 		return importResolver;
 	}
 	
 	public void setImportResolver(ImportUriResolver importResolver) {
 		this.importResolver = importResolver;
+	}
+	
+	public void setCache(IResourceScopeCache cache) {
+		this.cache = cache;
 	}
 	
 	public IResourceDescriptions getResourceDescriptions(EObject ctx, Collection<URI> importUris) {
@@ -65,27 +72,27 @@ public class ImportUriGlobalScopeProvider extends AbstractGlobalScopeProvider {
 		return scope;
 	}
 
-	protected LinkedHashSet<URI> getImportedUris(EObject context) {
-		OnChangeEvictingCacheAdapter cache = OnChangeEvictingCacheAdapter.getOrCreate(context.eResource());
-		if (cache.get(getClass().getName()) == null) {
-			TreeIterator<EObject> iterator = context.eResource().getAllContents();
-			final LinkedHashSet<URI> uniqueImportURIs = new LinkedHashSet<URI>(10);
-			while (iterator.hasNext()) {
-				EObject object = iterator.next();
-				String uri = importResolver.apply(object);
-				if (uri != null) {
-					URI importUri = URI.createURI(uri);
-					uniqueImportURIs.add(importUri);
+	protected LinkedHashSet<URI> getImportedUris(final EObject context) {
+		return cache.get(ImportUriGlobalScopeProvider.class.getName(), context.eResource(), new Provider<LinkedHashSet<URI>>(){
+			public LinkedHashSet<URI> get() {
+				TreeIterator<EObject> iterator = context.eResource().getAllContents();
+				final LinkedHashSet<URI> uniqueImportURIs = new LinkedHashSet<URI>(10);
+				while (iterator.hasNext()) {
+					EObject object = iterator.next();
+					String uri = importResolver.apply(object);
+					if (uri != null) {
+						URI importUri = URI.createURI(uri);
+						uniqueImportURIs.add(importUri);
+					}
 				}
+				Iterator<URI> uriIter = uniqueImportURIs.iterator();
+				while(uriIter.hasNext()) {
+					if (!EcoreUtil2.isValidUri(context, uriIter.next()))
+						uriIter.remove();
+				}
+				return uniqueImportURIs;
 			}
-			Iterator<URI> uriIter = uniqueImportURIs.iterator();
-			while(uriIter.hasNext()) {
-				if (!EcoreUtil2.isValidUri(context, uriIter.next()))
-					uriIter.remove();
-			}
-			cache.set(getClass().getName(), uniqueImportURIs);
-		}
-		return cache.get(getClass().getName());
+		});
 	}
 
 	protected IScope createLazyResourceScope(IScope parent, final URI uri, final IResourceDescriptions descriptions,

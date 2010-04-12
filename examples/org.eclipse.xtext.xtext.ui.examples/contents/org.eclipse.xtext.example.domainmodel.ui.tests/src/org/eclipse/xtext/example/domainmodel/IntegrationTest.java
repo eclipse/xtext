@@ -129,65 +129,6 @@ public class IntegrationTest extends TestCase {
 		assertEquals(0, file2.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE).length);
 	}
 
-//	public void testOpenAndCloseReferencedProjects() throws Exception {
-//		IJavaProject foo = createJavaProjectWithRootSrc("foo");
-//		IJavaProject bar = createJavaProjectWithRootSrc("bar");
-//		IFile file1 = createFile("foo/src/foo.dmodel", "entity Foo {}");
-//		IFile file2 = createFile("bar/src/bar.dmodel", "entity Bar { ref stuff : Foo }");
-//		addProjectReference(bar, foo);
-//		waitForAutoBuild();
-//		assertEquals(0, file1.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE).length);
-//		assertEquals(0, file2.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE).length);
-//
-//		// close project
-//		foo.getProject().close(monitor());
-//		waitForAutoBuild();
-//		assertEquals(1, file2.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE).length);
-//		foo.getProject().open(monitor());
-//		waitForAutoBuild();
-//		assertEquals(0, file2.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE).length);
-//	}
-//
-//	public void testChangeReferencedFile() throws Exception {
-//		IJavaProject foo = createJavaProjectWithRootSrc("foo");
-//		IJavaProject bar = createJavaProjectWithRootSrc("bar");
-//		IFile file1 = createFile("foo/src/foo.dmodel", "entity Foo {}");
-//		IFile file2 = createFile("bar/src/bar.dmodel", "entity Bar { ref stuff : Foo }");
-//		addProjectReference(bar, foo);
-//		waitForAutoBuild();
-//		assertEquals(0, file1.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE).length);
-//		assertEquals(0, file2.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE).length);
-//		
-//		// change referenced file
-//		file1.setContents(new StringInputStream("entity Baz {}"),true,true,monitor());
-//		waitForAutoBuild();
-//		assertEquals(1, file2.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE).length);
-//		
-//		//change back to valid state
-//		file1.setContents(new StringInputStream("entity Foo {}"),true,true,monitor());
-//		waitForAutoBuild();
-//		assertEquals(0, file2.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE).length);
-//	}
-//
-//	public void testDeleteReferencedFile() throws Exception {
-//		IJavaProject foo = createJavaProjectWithRootSrc("foo");
-//		IJavaProject bar = createJavaProjectWithRootSrc("bar");
-//		IFile file1 = createFile("foo/src/foo.dmodel", "entity Foo {}");
-//		IFile file2 = createFile("bar/src/bar.dmodel", "entity Bar { ref stuff : Foo }");
-//		addProjectReference(bar, foo);
-//		waitForAutoBuild();
-//		assertEquals(0, file1.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE).length);
-//		assertEquals(0, file2.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE).length);
-//		// delete referenced file
-//		file1.delete(true, new NullProgressMonitor());
-//		waitForAutoBuild();
-//		assertEquals(1, file2.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE).length);
-//		
-//		// create new
-//		file1 = createFile("foo/src/foo.dmodel", "entity Foo {}");
-//		waitForAutoBuild();
-//		assertEquals(0, file1.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE).length);
-//		assertEquals(0, file2.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE).length);
-//	}
+	
 
 }
