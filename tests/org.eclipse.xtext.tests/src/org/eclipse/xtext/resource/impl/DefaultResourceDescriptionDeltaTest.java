@@ -38,7 +38,6 @@ public class DefaultResourceDescriptionDeltaTest extends TestCase {
 		public List<IEObjectDescription> exported = new ArrayList<IEObjectDescription>() {
 			@Override
 			public boolean add(IEObjectDescription o) {
-				invalidateCache();
 				return super.add(o);
 			}
 		};

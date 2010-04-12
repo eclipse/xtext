@@ -28,4 +28,7 @@ public class IndexTestLanguageRuntimeModule extends org.eclipse.xtext.index.Abst
 	public Class<? extends IGlobalScopeProvider> bindIGlobalScopeProvider() {
 		return org.eclipse.xtext.scoping.impl.DefaultGlobalScopeProvider.class;
 	}
+//	public IResourceScopeCache bindIResourceScoprCache() {
+//		return IResourceScopeCache.NullImpl.INSTANCE;
+//	}
 }
