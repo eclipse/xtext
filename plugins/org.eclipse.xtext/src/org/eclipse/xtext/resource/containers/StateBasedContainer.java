@@ -74,5 +74,12 @@ public class StateBasedContainer extends ResourceDescriptionsBasedContainer {
 			return Iterables.emptyIterable();
 		return super.findAllEObjects(type, name);
 	}
+	
+	@Override
+	public Iterable<IEObjectDescription> findAllEObjectsIgnoreCase(EClass type, String name) {
+		if (state.getContents().isEmpty())
+			return Iterables.emptyIterable();
+		return super.findAllEObjectsIgnoreCase(type, name);
+	}
 
 }

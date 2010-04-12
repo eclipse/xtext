@@ -295,7 +295,11 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 	
 	protected IScope getScope(String cacheKey, EObject eobject, IScope parentScope, Provider<Map<String, IEObjectDescription>> mapProvider) {
 		Map<String, IEObjectDescription> map = cache.get(Tuples.pair(eobject, cacheKey), eobject.eResource(), mapProvider);
-		return map.isEmpty()?parentScope:new MapBasedScope(parentScope,map);
+		return map.isEmpty()?parentScope:createMapBasedScope(parentScope, map);
+	}
+
+	protected IScope createMapBasedScope(IScope parentScope, Map<String, IEObjectDescription> map) {
+		return new MapBasedScope(parentScope,map);
 	}
 	
 	protected Map<String, IEObjectDescription> toMap(Iterable<IEObjectDescription> scopedElementsFor) {

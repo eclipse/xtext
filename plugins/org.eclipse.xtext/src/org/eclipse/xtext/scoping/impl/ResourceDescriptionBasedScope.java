@@ -61,9 +61,17 @@ public class ResourceDescriptionBasedScope extends AbstractScope {
 		return allowDuplicates;
 	}
 	
+	protected IResourceDescription getDescription() {
+		return description;
+	}
+	
+	protected EClass getElementType() {
+		return type;
+	}
+	
 	@Override
 	public IEObjectDescription getContentByName(String name) {
-		// TODO: case allowDuplicates
+		// TODO: case allowDuplicates, see also impl in subclass
 		Iterable<IEObjectDescription> objects = description.getExportedObjects(type, name);
 		Iterator<IEObjectDescription> iter = objects.iterator();
 		if (iter.hasNext()) {

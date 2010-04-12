@@ -10,13 +10,9 @@ package org.eclipse.xtext.resource.impl;
 import java.util.Map;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.emf.ecore.EClass;
-import org.eclipse.xtext.resource.IContainer;
-import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
 
-import com.google.common.base.Function;
 import com.google.common.base.Predicate;
 import com.google.common.collect.Iterables;
 import com.google.common.collect.Maps;
@@ -28,7 +24,7 @@ import com.google.common.collect.Maps;
  *  - ReentrantRWLock
  *  - Listen for description deltas
  */
-public class ResourceDescriptionsBasedContainer implements IContainer, IResourceDescription.Event.Listener {
+public class ResourceDescriptionsBasedContainer extends AbstractContainer implements IResourceDescription.Event.Listener {
 
 	private final IResourceDescriptions descriptions;
 	
@@ -78,24 +74,6 @@ public class ResourceDescriptionsBasedContainer implements IContainer, IResource
 	
 	protected IResourceDescriptions getDescriptions() {
 		return descriptions;
-	}
-
-	public Iterable<IEObjectDescription> findAllEObjects(final EClass type) {
-		return Iterables.concat(Iterables.transform(getResourceDescriptions(), new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
-			public Iterable<IEObjectDescription> apply(IResourceDescription from) {
-				return from.getExportedObjects(type);
-			}
-		}));
-	}
-
-	public Iterable<IEObjectDescription> findAllEObjects(final EClass type, final String name) {
-		return Iterables.concat(Iterables.transform(getResourceDescriptions(), new Function<IResourceDescription, Iterable<IEObjectDescription>>() {
-			public Iterable<IEObjectDescription> apply(IResourceDescription from) {
-				if (from == null)
-					throw new NullPointerException(ResourceDescriptionsBasedContainer.this.getClass().getName());
-				return from.getExportedObjects(type, name);
-			}
-		}));
 	}
 
 	public void descriptionsChanged(IResourceDescription.Event event) {

@@ -38,8 +38,23 @@ public class EObjectDescriptionLookUp {
 	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz, final String name) {
 		if (allDescriptions.isEmpty())
 			return Iterables.emptyIterable();
-		if (getNameToObjects().containsKey(name))
-			return Iterables.filter(getNameToObjects().get(name), new Predicate<IEObjectDescription>() {
+		String lowerCase = name.toLowerCase();
+		if (getNameToObjects().containsKey(lowerCase))
+			return Iterables.filter(getNameToObjects().get(lowerCase), new Predicate<IEObjectDescription>() {
+				public boolean apply(IEObjectDescription input) {
+					return name.equals(input.getName()) && EcoreUtil2.isAssignableFrom(clazz, input.getEClass());
+				}
+			});
+		else
+			return Iterables.emptyIterable();
+	}
+	
+	public Iterable<IEObjectDescription> getExportedObjectsIgnoreCase(final EClass clazz, final String name) {
+		if (allDescriptions.isEmpty())
+			return Iterables.emptyIterable();
+		String lowerCase = name.toLowerCase();
+		if (getNameToObjects().containsKey(lowerCase))
+			return Iterables.filter(getNameToObjects().get(lowerCase), new Predicate<IEObjectDescription>() {
 				public boolean apply(IEObjectDescription input) {
 					return EcoreUtil2.isAssignableFrom(clazz,input.getEClass());
 				}
@@ -86,7 +101,7 @@ public class EObjectDescriptionLookUp {
 				if (nameToObjects == null) {
 					this.nameToObjects = Multimaps.unmodifiableMultimap(Multimaps.index(allDescriptions, new Function<IEObjectDescription, String>() {
 						public String apply(IEObjectDescription from) {
-							return from.getName();
+							return from.getName().toLowerCase();
 						}
 					}));
 				}

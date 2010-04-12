@@ -14,6 +14,7 @@ import org.apache.log4j.Logger;
 import org.eclipse.xtext.resource.IContainer;
 import org.eclipse.xtext.resource.IResourceDescription;
 import org.eclipse.xtext.resource.IResourceDescriptions;
+import org.eclipse.xtext.resource.ignorecase.IIgnoreCaseContainer;
 
 import com.google.common.collect.Lists;
 import com.google.inject.Inject;
@@ -33,7 +34,7 @@ public class StateBasedContainerManager implements IContainer.Manager {
 		String root = internalGetContainerHandle(desc, resourceDescriptions);
 		if (root == null) {
 			log.warn("Cannot find IContainer for: " + desc.getURI());
-			return IContainer.Null;
+			return IIgnoreCaseContainer.Null;
 		}
 		return createContainer(root, resourceDescriptions);
 	}

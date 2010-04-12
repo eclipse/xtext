@@ -40,8 +40,7 @@ public class ContainerBasedScope extends AbstractScope {
 
 	@Override
 	public IEObjectDescription getContentByName(String name) {
-		Iterable<IEObjectDescription> allDescriptions = container.findAllEObjects(
-				reference.getEReferenceType(), name);
+		Iterable<IEObjectDescription> allDescriptions = findAllEObjectsByName(name);
 		Iterator<IEObjectDescription> iter = allDescriptions.iterator();
 		IEObjectDescription result = null;
 		while (iter.hasNext()) {
@@ -52,6 +51,10 @@ public class ContainerBasedScope extends AbstractScope {
 		if (result != null)
 			return result;
 		return getOuterScope().getContentByName(name);
+	}
+
+	protected Iterable<IEObjectDescription> findAllEObjectsByName(String name) {
+		return container.findAllEObjects(reference.getEReferenceType(), name);
 	}
 
 	@Override
@@ -75,8 +78,7 @@ public class ContainerBasedScope extends AbstractScope {
 	}
 
 	private boolean isValidForEObject(IEObjectDescription result) {
-		Iterable<IEObjectDescription> allDescriptionsByName = container.findAllEObjects(reference
-				.getEReferenceType(), result.getName());
+		Iterable<IEObjectDescription> allDescriptionsByName = findAllEObjectsByName(result.getName());
 		Iterator<IEObjectDescription> iter = allDescriptionsByName.iterator();
 		IEObjectDescription inverted = null;
 		while (iter.hasNext()) {
@@ -89,5 +91,13 @@ public class ContainerBasedScope extends AbstractScope {
 
 	public IScope getOuterScope() {
 		return outer;
+	}
+	
+	protected IContainer getContainer() {
+		return container;
+	}
+	
+	protected EReference getReference() {
+		return reference;
 	}
 }
