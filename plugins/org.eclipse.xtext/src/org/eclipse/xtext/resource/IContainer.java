@@ -13,7 +13,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.xtext.resource.impl.SimpleResourceDescriptionsBasedContainerManager;
 
-import com.google.common.collect.Iterables;
 import com.google.inject.ImplementedBy;
 
 /**
@@ -65,23 +64,4 @@ public interface IContainer {
 
 	}
 
-	/**
-	 * a reusable instance representing an empty container
-	 */
-	IContainer Null = new IContainer() {
-
-		public Iterable<IEObjectDescription> findAllEObjects(EClass type) {
-			return Iterables.emptyIterable();
-		}
-		public Iterable<IEObjectDescription> findAllEObjects(EClass type, String name) {
-			return Iterables.emptyIterable();
-		}
-		public IResourceDescription getResourceDescription(URI uri) {
-			return null;
-		}
-		public Iterable<IResourceDescription> getResourceDescriptions() {
-			return Iterables.emptyIterable();
-		}
-	};
-	
 }

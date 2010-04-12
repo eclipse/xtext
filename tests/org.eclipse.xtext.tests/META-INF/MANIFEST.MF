@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Xtext Generator Tests 
+Bundle-Name: Xtext Generator Tests
 Bundle-SymbolicName: org.eclipse.xtext.tests;singleton:=true
 Bundle-Version: 1.0.0.qualifier
 Bundle-Vendor: Eclipse.org
@@ -22,7 +22,8 @@ Require-Bundle: org.eclipse.xtext,
  org.eclipse.xtext.xtend,
  com.ibm.icu,
  org.apache.commons.logging;bundle-version="1.1.1",
- org.eclipse.xtext.ecore;bundle-version="1.0.0"
+ org.eclipse.xtext.ecore;bundle-version="1.0.0",
+ org.eclipse.emf.mwe2.launch;bundle-version="1.0.0";resolution:=optional
 Bundle-ClassPath: lib/simple.jar,.
 Import-Package: org.apache.log4j
 Export-Package: org.eclipse.xtext.generator.ecore,
@@ -426,5 +427,14 @@ Export-Package: org.eclipse.xtext.generator.ecore,
  org.eclipse.xtext.ui.tests.parser.packrat.consumers,
  org.eclipse.xtext.ui.tests.parseTreeConstruction,
  org.eclipse.xtext.ui.tests.parser.antlr,
- org.eclipse.xtext.ui.tests.parser.antlr.internal
+ org.eclipse.xtext.ui.tests.parser.antlr.internal,
+ org.eclipse.xtext.linking.ignoreCaseNamespacesTest,
+ org.eclipse.xtext.linking.ignoreCaseNamespacesTest.impl,
+ org.eclipse.xtext.linking.ignoreCaseNamespacesTest.util,
+ org.eclipse.xtext.linking.ignoreCaseImportsTest,
+ org.eclipse.xtext.linking.ignoreCaseImportsTest.impl,
+ org.eclipse.xtext.linking.ignoreCaseImportsTest.util,
+ org.eclipse.xtext.linking.ignoreCaseLinkingTest,
+ org.eclipse.xtext.linking.ignoreCaseLinkingTest.impl,
+ org.eclipse.xtext.linking.ignoreCaseLinkingTest.util
 

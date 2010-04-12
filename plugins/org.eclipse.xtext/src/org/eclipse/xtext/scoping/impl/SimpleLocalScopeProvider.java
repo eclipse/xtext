@@ -41,33 +41,46 @@ public class SimpleLocalScopeProvider extends AbstractGlobalScopeDelegatingScope
 	public void setNameProvider(IQualifiedNameProvider nameProvider) {
 		this.nameProvider = nameProvider;
 	}
+	
+	protected IQualifiedNameProvider getNameProvider() {
+		return nameProvider;
+	}
 
 	public IScope getScope(final EObject context, final EReference reference) {
 		Map<String, IEObjectDescription> map = cache.get(Tuples.pair(SimpleLocalScopeProvider.class.getName(),
 				reference), context.eResource(), new Provider<Map<String, IEObjectDescription>>() {
 
 			public Map<String, IEObjectDescription> get() {
-				TreeIterator<EObject> iterator = context.eResource().getAllContents();
-				Map<String, IEObjectDescription> result = Maps.newHashMap();
-				while (iterator.hasNext()) {
-					EObject next = iterator.next();
-					if (reference.getEReferenceType().isInstance(next)) {
-						String name = nameProvider.getQualifiedName(next);
-						if (name != null && !result.containsKey(name)) {
-							EObjectDescription description = createEObjectDescription(next, name);
-							if (description != null)
-								result.put(name, description);
-						}
-					}
-				}
-				return result;
+				return toMap(context, reference);
 			}
+
 		});
-		return new MapBasedScope(getGlobalScope(context, reference), map);
+		IScope globalScope = getGlobalScope(context, reference);
+		return createMapBasedScope(globalScope, map);
+	}
+
+	protected IScope createMapBasedScope(IScope parent,	Map<String, IEObjectDescription> map) {
+		return new MapBasedScope(parent, map);
 	}
 
 	protected EObjectDescription createEObjectDescription(EObject next, String name) {
 		return new EObjectDescription(name, next, null);
 	}
 
+	protected Map<String, IEObjectDescription> toMap(final EObject context, final EReference reference) {
+		TreeIterator<EObject> iterator = context.eResource().getAllContents();
+		Map<String, IEObjectDescription> result = Maps.newHashMap();
+		while (iterator.hasNext()) {
+			EObject next = iterator.next();
+			if (reference.getEReferenceType().isInstance(next)) {
+				String name = nameProvider.getQualifiedName(next);
+				if (name != null && !result.containsKey(name)) {
+					EObjectDescription description = createEObjectDescription(next, name);
+					if (description != null)
+						result.put(name, description);
+				}
+			}
+		}
+		return result;
+	}
 }

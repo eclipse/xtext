@@ -7,6 +7,7 @@
  *******************************************************************************/
 package org.eclipse.xtext.resource.impl;
 
+import java.util.Collection;
 import java.util.Collections;
 import java.util.Set;
 
@@ -67,16 +68,24 @@ public class DefaultResourceDescriptionManager implements IResourceDescription.M
 		this.cache = cache;
 	}
 	
+	public IResourceScopeCache getCache() {
+		return cache;
+	}
+	
 	public boolean isAffected(Delta delta, IResourceDescription candidate) throws IllegalArgumentException {
 		if (!delta.haveEObjectDescriptionsChanged())
 			return false;
 		Set<String> names = Sets.newHashSet();
 		addExportedNames(names,delta.getOld());
 		addExportedNames(names,delta.getNew());
-		return !Collections.disjoint(names, Collections2.forIterable(candidate.getImportedNames()));
+		return !Collections.disjoint(names, getImportedNames(candidate));
 	}
 
-	private void addExportedNames(Set<String> names, IResourceDescription resourceDescriptor) {
+	protected Collection<String> getImportedNames(IResourceDescription candidate) {
+		return Collections2.forIterable(candidate.getImportedNames());
+	}
+
+	protected void addExportedNames(Set<String> names, IResourceDescription resourceDescriptor) {
 		if (resourceDescriptor==null)
 			return;
 		Iterable<IEObjectDescription> iterable = resourceDescriptor.getExportedObjects();

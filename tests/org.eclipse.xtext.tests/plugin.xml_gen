@@ -95,6 +95,33 @@
 
   <extension point="org.eclipse.emf.ecore.generated_package">
     <package 
+       uri = "http://eclipse.org/xtext/ignoreCaseLinkingTestLanguage" 
+       class = "org.eclipse.xtext.linking.ignoreCaseLinkingTest.IgnoreCaseLinkingTestPackage"
+       genModel = "org/eclipse/xtext/linking/AbstractIgnoreCaseLinkingTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://eclipse.org/xtext/ignoreCaseNamespacesTestLanguage" 
+       class = "org.eclipse.xtext.linking.ignoreCaseNamespacesTest.IgnoreCaseNamespacesTestPackage"
+       genModel = "org/eclipse/xtext/linking/IgnoreCaseNamespacesTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
+       uri = "http://eclipse.org/xtext/ignoreCaseImportsTestLanguage" 
+       class = "org.eclipse.xtext.linking.ignoreCaseImportsTest.IgnoreCaseImportsTestPackage"
+       genModel = "org/eclipse/xtext/linking/IgnoreCaseImportsTestLanguage.genmodel" /> 
+	
+  </extension>
+
+
+  <extension point="org.eclipse.emf.ecore.generated_package">
+    <package 
        uri = "http://www.eclipse.org/2008/xtext/DummyLang" 
        class = "org.eclipse.xtext.dummy.dummyLang.DummyLangPackage"
        genModel = "org/eclipse/xtext/dummy/DummyTestLanguage.genmodel" /> 

@@ -2,14 +2,14 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStateFactory.java,v 1.7 2009/12/07 15:38:01 sefftinge Exp $
+ * $Id: BuilderStateFactory.java,v 1.8 2010/04/12 20:19:21 szarnekow Exp $
  */
 package org.eclipse.xtext.builder.builderState;
 
 import org.eclipse.emf.ecore.EFactory;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription;
 
 /**
  * <!-- begin-user-doc -->
@@ -35,7 +35,7 @@ public interface BuilderStateFactory extends EFactory {
 	 * @return a new object of class '<em>Resource Description</em>'.
 	 * @generated
 	 */
-	IResourceDescription createResourceDescription();
+	IIgnoreCaseResourceDescription createResourceDescription();
 
 	/**
 	 * Returns a new object of class '<em>EObject Description</em>'.

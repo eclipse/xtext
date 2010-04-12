@@ -32,8 +32,12 @@ public class MapBasedScope extends AbstractScope {
 
 	@Override
 	public IEObjectDescription getContentByName(String name) {
-		IEObjectDescription ieObjectDescription = descriptions.get(name);
+		IEObjectDescription ieObjectDescription = getContentByNameImpl(name);
 		return ieObjectDescription!=null?ieObjectDescription:parent.getContentByName(name);
+	}
+
+	protected IEObjectDescription getContentByNameImpl(String name) {
+		return descriptions.get(name);
 	}
 
 	public IScope getOuterScope() {

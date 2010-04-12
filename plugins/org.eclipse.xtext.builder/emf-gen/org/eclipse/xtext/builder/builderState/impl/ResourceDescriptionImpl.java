@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: ResourceDescriptionImpl.java,v 1.9 2010/01/05 14:16:46 szarnekow Exp $
+ * $Id: ResourceDescriptionImpl.java,v 1.10 2010/04/12 20:19:21 szarnekow Exp $
  */
 package org.eclipse.xtext.builder.builderState.impl;
 
@@ -24,7 +24,7 @@ import org.eclipse.emf.ecore.util.InternalEList;
 import org.eclipse.xtext.builder.builderState.BuilderStatePackage;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IReferenceDescription;
-import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription;
 import org.eclipse.xtext.resource.impl.EObjectDescriptionLookUp;
 
 /**
@@ -43,7 +43,7 @@ import org.eclipse.xtext.resource.impl.EObjectDescriptionLookUp;
  *
  * @generated
  */
-public class ResourceDescriptionImpl extends Container implements IResourceDescription {
+public class ResourceDescriptionImpl extends Container implements IIgnoreCaseResourceDescription {
 	/**
 	 * The default value of the '{@link #getURI() <em>URI</em>}' attribute.
 	 * <!-- begin-user-doc -->
@@ -188,6 +188,10 @@ public class ResourceDescriptionImpl extends Container implements IResourceDescr
 
 	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz, final String name) {
 		return getLookUp().getExportedObjects(clazz, name);
+	}
+	
+	public Iterable<IEObjectDescription> getExportedObjectsIgnoreCase(final EClass clazz, final String name) {
+		return getLookUp().getExportedObjectsIgnoreCase(clazz, name);
 	}
 
 	public Iterable<IEObjectDescription> getExportedObjects(final EClass clazz) {

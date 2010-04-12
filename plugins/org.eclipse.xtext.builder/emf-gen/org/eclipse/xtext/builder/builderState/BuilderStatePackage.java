@@ -2,7 +2,7 @@
  * <copyright>
  * </copyright>
  *
- * $Id: BuilderStatePackage.java,v 1.9 2010/01/26 14:27:53 jkohnlein Exp $
+ * $Id: BuilderStatePackage.java,v 1.10 2010/04/12 20:19:21 szarnekow Exp $
  */
 package org.eclipse.xtext.builder.builderState;
 
@@ -302,55 +302,55 @@ public interface BuilderStatePackage extends EPackage {
 
 
 	/**
-	 * Returns the meta object for class '{@link org.eclipse.xtext.resource.IResourceDescription <em>Resource Description</em>}'.
+	 * Returns the meta object for class '{@link org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription <em>Resource Description</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for class '<em>Resource Description</em>'.
-	 * @see org.eclipse.xtext.resource.IResourceDescription
-	 * @model instanceClass="org.eclipse.xtext.resource.IResourceDescription"
+	 * @see org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription
+	 * @model instanceClass="org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription"
 	 * @generated
 	 */
 	EClass getResourceDescription();
 
 	/**
-	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.resource.IResourceDescription#getURI <em>URI</em>}'.
+	 * Returns the meta object for the attribute '{@link org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription#getURI <em>URI</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute '<em>URI</em>'.
-	 * @see org.eclipse.xtext.resource.IResourceDescription#getURI()
+	 * @see org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription#getURI()
 	 * @see #getResourceDescription()
 	 * @generated
 	 */
 	EAttribute getResourceDescription_URI();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.resource.IResourceDescription#getExportedObjects <em>Exported Objects</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription#getExportedObjects <em>Exported Objects</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Exported Objects</em>'.
-	 * @see org.eclipse.xtext.resource.IResourceDescription#getExportedObjects()
+	 * @see org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription#getExportedObjects()
 	 * @see #getResourceDescription()
 	 * @generated
 	 */
 	EReference getResourceDescription_ExportedObjects();
 
 	/**
-	 * Returns the meta object for the attribute list '{@link org.eclipse.xtext.resource.IResourceDescription#getImportedNames <em>Imported Names</em>}'.
+	 * Returns the meta object for the attribute list '{@link org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription#getImportedNames <em>Imported Names</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the attribute list '<em>Imported Names</em>'.
-	 * @see org.eclipse.xtext.resource.IResourceDescription#getImportedNames()
+	 * @see org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription#getImportedNames()
 	 * @see #getResourceDescription()
 	 * @generated
 	 */
 	EAttribute getResourceDescription_ImportedNames();
 
 	/**
-	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.resource.IResourceDescription#getReferenceDescriptions <em>Reference Descriptions</em>}'.
+	 * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription#getReferenceDescriptions <em>Reference Descriptions</em>}'.
 	 * <!-- begin-user-doc -->
 	 * <!-- end-user-doc -->
 	 * @return the meta object for the containment reference list '<em>Reference Descriptions</em>'.
-	 * @see org.eclipse.xtext.resource.IResourceDescription#getReferenceDescriptions()
+	 * @see org.eclipse.xtext.resource.ignorecase.IIgnoreCaseResourceDescription#getReferenceDescriptions()
 	 * @see #getResourceDescription()
 	 * @generated
 	 */

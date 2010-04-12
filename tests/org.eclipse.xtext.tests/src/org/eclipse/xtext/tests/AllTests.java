@@ -47,6 +47,8 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.linking.Bug287988Test.class);
       suite.addTestSuite(org.eclipse.xtext.linking.Bug287988WithEagerLinkingTest.class);
       suite.addTestSuite(org.eclipse.xtext.linking.CrossRefTest.class);
+      suite.addTestSuite(org.eclipse.xtext.linking.IgnoreCaseLinkingWithNamespaceImportsTest.class);
+      suite.addTestSuite(org.eclipse.xtext.linking.IgnoreCaseLinkingWithURIImportsTest.class);
       suite.addTestSuite(org.eclipse.xtext.linking.LinkingErrorTest.class);
       suite.addTestSuite(org.eclipse.xtext.linking.PartialLinkingTest.class);
       suite.addTestSuite(org.eclipse.xtext.linking.SimpleAttributeResolverTest.class);
@@ -163,6 +165,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.resource.XtextResourceTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.ecore.EcoreResourceDescriptionManagerTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.ecore.EcoreResourceDescriptionTest.class);
+      suite.addTestSuite(org.eclipse.xtext.resource.ignorecase.IgnoreCaseResourceDescriptionManagerTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.impl.DefaultReferenceDescriptionTest.class);
       suite.addTestSuite(org.eclipse.xtext.resource.impl.DefaultResourceDescription2Test.class);
       suite.addTestSuite(org.eclipse.xtext.resource.impl.DefaultResourceDescriptionDeltaTest.class);
