@@ -88,7 +88,7 @@ public class XtextResource extends ResourceImpl {
 	private IConcreteSyntaxValidator validator;
 	
 	@Inject
-	private IResourceScopeCache cache;
+	private IResourceScopeCache cache = IResourceScopeCache.NullImpl.INSTANCE;
 
 	public IResourceServiceProvider getResourceServiceProvider() {
 		return resourceServiceProvider;

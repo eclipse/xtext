@@ -36,7 +36,7 @@ public abstract class AbstractBug289524Test extends AbstractXtextTests {
 	
 	public void testGetModel_05() throws Exception {
 		String model = "Model containment C containment C reference C";
-		getModelAndExpect(model, 1);
+		getModelAndExpect(model, 0);
 	}
 	
 	public void testGetModel_06() throws Exception {

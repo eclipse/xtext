@@ -7,22 +7,67 @@
  *******************************************************************************/
 package org.eclipse.xtext.scoping.impl;
 
+import java.util.Map;
+
+import org.eclipse.emf.common.util.TreeIterator;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
-import org.eclipse.xtext.resource.IResourceDescription;
+import org.eclipse.xtext.naming.IQualifiedNameProvider;
+import org.eclipse.xtext.resource.EObjectDescription;
+import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.scoping.IScope;
+import org.eclipse.xtext.util.IResourceScopeCache;
+import org.eclipse.xtext.util.Tuples;
+
+import com.google.common.collect.Maps;
+import com.google.inject.Inject;
+import com.google.inject.Provider;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
  */
 public class SimpleLocalScopeProvider extends AbstractGlobalScopeDelegatingScopeProvider {
 
-	public IScope getScope(EObject context, final EReference reference) {
-		final IResourceDescription resourceDescription = getResourceDescription(context.eResource());
-		if (resourceDescription == null) {
-			return getGlobalScope(context, reference);
-		}
-		return new ResourceDescriptionBasedScope(getGlobalScope(context, reference), resourceDescription, reference.getEReferenceType());
+	@Inject
+	private IQualifiedNameProvider nameProvider;
+
+	@Inject
+	private IResourceScopeCache cache;
+
+	public void setCache(IResourceScopeCache cache) {
+		this.cache = cache;
+	}
+
+	public void setNameProvider(IQualifiedNameProvider nameProvider) {
+		this.nameProvider = nameProvider;
+	}
+
+	public IScope getScope(final EObject context, final EReference reference) {
+		Map<String, IEObjectDescription> map = cache.get(Tuples.pair(SimpleLocalScopeProvider.class.getName(),
+				reference), context.eResource(), new Provider<Map<String, IEObjectDescription>>() {
+
+			public Map<String, IEObjectDescription> get() {
+				TreeIterator<EObject> iterator = context.eResource().getAllContents();
+				Map<String, IEObjectDescription> result = Maps.newHashMap();
+				while (iterator.hasNext()) {
+					EObject next = iterator.next();
+					if (reference.getEReferenceType().isInstance(next)) {
+						String name = nameProvider.getQualifiedName(next);
+						if (name != null && !result.containsKey(name)) {
+							EObjectDescription description = createEObjectDescription(next, name);
+							if (description != null)
+								result.put(name, description);
+						}
+					}
+				}
+				return result;
+			}
+		});
+		return new MapBasedScope(getGlobalScope(context, reference), map);
+	}
+
+	protected EObjectDescription createEObjectDescription(EObject next, String name) {
+		return new EObjectDescription(name, next, null);
 	}
 
 }
