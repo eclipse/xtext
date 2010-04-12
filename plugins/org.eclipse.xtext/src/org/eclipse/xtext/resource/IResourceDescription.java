@@ -27,7 +27,7 @@ public interface IResourceDescription {
 	/**
 	 * @return descriptions of all EObjects provided by the given Resource. The result is expected to return any
 	 *         combination of <code>name</code> and <code>eObjectOrProxy</code> only once as an
-	 *         {@link IEObjectDescription}.
+	 *         {@link IEObjectDescription}. The order of the exported objects matters.
 	 */
 	Iterable<IEObjectDescription> getExportedObjects();
 

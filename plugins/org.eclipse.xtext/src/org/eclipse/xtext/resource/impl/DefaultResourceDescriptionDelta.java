@@ -15,7 +15,7 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.xtext.resource.IEObjectDescription;
 import org.eclipse.xtext.resource.IResourceDescription;
 
-import com.google.common.collect.Collections2;
+import com.google.common.collect.Lists;
 
 /**
  * @author Sven Efftinge - Initial contribution and API
@@ -61,8 +61,8 @@ public class DefaultResourceDescriptionDelta implements IResourceDescription.Del
 		if (_new==null || old==null)
 			return true;
 		
-		Collection<IEObjectDescription> oldEObjects = Collections2.forIterable(old.getExportedObjects());
-		Collection<IEObjectDescription> newEObjects = Collections2.forIterable(_new.getExportedObjects());
+		Collection<IEObjectDescription> oldEObjects = Lists.newArrayList(old.getExportedObjects());
+		Collection<IEObjectDescription> newEObjects = Lists.newArrayList(_new.getExportedObjects());
 		if (oldEObjects.size()!=newEObjects.size())
 			return true;
 		
@@ -72,11 +72,12 @@ public class DefaultResourceDescriptionDelta implements IResourceDescription.Del
 			if (!equals(iterator1.next(),iterator2.next()))
 				return true;
 		}
-
 		return false;
 	}
 
 	protected boolean equals(IEObjectDescription next, IEObjectDescription next2) {
+		if (next == next2)
+			return true;
 		if (next.getEClass()!=next2.getEClass())
 			return false;
 		if (next.getName()!=null && !next.getName().equals(next2.getName()))
@@ -88,9 +89,12 @@ public class DefaultResourceDescriptionDelta implements IResourceDescription.Del
 		for (String key : next.getUserDataKeys()) {
 			String userData = next.getUserData(key);
 			String userData2 = next2.getUserData(key);
-			if (userData!=userData2 || 
-				(userData!=null && !userData.equals(userData2)))
+			if (userData == null) {
+				if (userData2 != null)
+					return false;
+			} else if (!userData.equals(userData2)) {
 				return false;
+			}
 		}
 		return true;
 	}
