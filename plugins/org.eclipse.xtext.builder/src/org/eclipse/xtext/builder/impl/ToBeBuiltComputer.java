@@ -49,9 +49,13 @@ public class ToBeBuiltComputer {
 		for (IResourceDescription iResourceDescription : allResourceDescriptions) {
 			ResourceDescriptionImpl descImpl = (ResourceDescriptionImpl) iResourceDescription;
 			Iterable<IStorage> storages = mapper.getStorages(descImpl.getURI());
-			for (IStorage storage : storages) {
-				if (isOnProject(storage, project))
-					result.getToBeDeleted().add(descImpl.getURI());
+			if (!storages.iterator().hasNext()) {
+				result.getToBeDeleted().add(descImpl.getURI());
+			} else {
+				for (IStorage storage : storages) {
+					if (isOnProject(storage, project))
+						result.getToBeDeleted().add(descImpl.getURI());
+				}
 			}
 			subMonitor.worked(1);
 		}
