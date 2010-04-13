@@ -40,6 +40,7 @@ public class AllTests {
       suite.addTestSuite(org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderFactoryTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.jdt.JdtTypeProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.jdt.MockJavaProjectProviderTest.class);
+      suite.addTestSuite(org.eclipse.xtext.common.types.access.jdt.SourceBasedJdtTypeProviderTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.jdt.TypeURIHelperTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.xtext.ClasspathBasedTypeScopeTest.class);
       suite.addTestSuite(org.eclipse.xtext.common.types.access.xtext.ui.JdtBasedSimpleTypeScopeProviderTest.class);

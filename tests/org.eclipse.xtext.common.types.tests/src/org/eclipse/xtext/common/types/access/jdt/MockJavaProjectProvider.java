@@ -7,8 +7,10 @@
  *******************************************************************************/
 package org.eclipse.xtext.common.types.access.jdt;
 
+import java.io.BufferedReader;
 import java.io.ByteArrayInputStream;
 import java.io.InputStream;
+import java.io.InputStreamReader;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Iterator;
@@ -34,6 +36,10 @@ import org.eclipse.jdt.core.IJavaModel;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.xtext.junit.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.util.Strings;
+
+import com.google.common.collect.Lists;
 
 /**
  * @author Sebastian Zarnekow - Initial contribution and API
@@ -42,28 +48,79 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 
 	private static IJavaProject javaProject;
 	
+	private static IJavaProject javaProjectWithSources;
+
+	private boolean useSources;
+	
 	public IJavaProject getJavaProject(ResourceSet resourceSet) {
-		if (javaProject == null)
-			throw new IllegalStateException("javaProject is null");
-		return javaProject;
+		if (javaProject == null || javaProjectWithSources == null)
+			throw new IllegalStateException("javaProject is null || javaProjectWithSources == null");
+		return useSources ? javaProjectWithSources : javaProject;
+	}
+	
+	public void setUseSource(boolean useSources) {
+		this.useSources = useSources;
 	}
 
 	public static void setUp() throws Exception {
-		javaProject = createJavaProject("myProject",
+		javaProject = createJavaProject("projectWithoutSources",
 				new String[] {
-					"org.eclipse.xtext.common.types"
+					"org.eclipse.xtext.common.types.tests"
 				},
 				new String[] {
 						JavaCore.NATURE_ID,
 						"org.eclipse.pde.PluginNature"
 				}
-					
 		);
+		javaProjectWithSources = createJavaProject("projectWithSources",
+				new String[] {
+					"org.eclipse.xtext.common.types.tests"
+				},
+				new String[] {
+						JavaCore.NATURE_ID,
+						"org.eclipse.pde.PluginNature"
+				}
+		);
+		IFolder sourceFolder = JavaProjectSetupUtil.addSourceFolder(javaProjectWithSources, "src");
+		String path = "/org/eclipse/xtext/common/types/testSetups";
+		List<String> filesToCopy = readResource(path + "/files.list");
+		
+		IFolder srcFolder = sourceFolder.getFolder(new Path(path));
+		createFolderRecursively(srcFolder);
+		for(String fileToCopy: filesToCopy) {
+			List<String> content = readResource(path + "/" + fileToCopy);
+			String contentAsString = Strings.concat("\n", content);
+			createFile(fileToCopy.substring(0, fileToCopy.length() - ".txt".length()), srcFolder, contentAsString);
+		}
+		waitForAutoBuild();
+	}
+
+	protected static void createFolderRecursively(IFolder folder) throws CoreException {
+		if (!folder.getParent().exists())
+			createFolderRecursively((IFolder) folder.getParent());
+		folder.create(true, true, null);
+	}
+	
+	public static List<String> readResource(String name) throws Exception {
+		InputStream stream = MockJavaProjectProvider.class.getResourceAsStream(name);
+		BufferedReader reader = new BufferedReader(new InputStreamReader(stream));
+		try {
+			String line = null;
+			List<String> result = Lists.newArrayList();
+			while( (line = reader.readLine()) != null) {
+				result.add(line);
+			}
+			return result;
+		} finally {
+			reader.close();
+		}
 	}
 
 	public static void tearDown() throws Exception {
 		if (javaProject != null)
 			deleteJavaProject(javaProject);
+		if (javaProject != null)
+			deleteJavaProject(javaProjectWithSources);
 	}
 	
 	public static IJavaProject createJavaProject(
