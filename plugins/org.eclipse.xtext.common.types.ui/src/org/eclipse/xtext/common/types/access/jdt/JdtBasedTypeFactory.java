@@ -13,6 +13,9 @@ import java.util.List;
 
 import org.apache.log4j.Logger;
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.emf.ecore.EDataType;
+import org.eclipse.emf.ecore.EStructuralFeature;
+import org.eclipse.emf.ecore.EcoreFactory;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.jdt.core.Flags;
 import org.eclipse.jdt.core.IAnnotatable;
@@ -78,6 +81,21 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 
 	public JvmDeclaredType createType(IType jdtType) {
 		try {
+//			if (jdtType.getDeclaringType() == null) {
+//				ASTParser parser = ASTParser.newParser(AST.JLS3);
+//				parser.setSource(jdtType.getTypeRoot());
+//				parser.setResolveBindings(true);
+//				ASTNode node = parser.createAST(new NullProgressMonitor());
+//				node.accept(new ASTVisitor() {
+//					@Override
+//					public boolean visit(MethodDeclaration node) {
+////						System.out.println(node);
+//						if (node.getReturnType2() != null)
+//							System.out.println(node.getReturnType2().resolveBinding());
+//						return super.visit(node);
+//					}
+//				});
+//			}
 			if (jdtType.isAnonymous() || Flags.isSynthetic(jdtType.getFlags()))
 				throw new IllegalStateException("Cannot create type for anonymous or synthetic classes");
 			if (jdtType.isAnnotation())
@@ -211,8 +229,19 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 					valuesAsList.add(valueIsArray ? Array.get(value, i) : value);
 				}
 			}
-			if (!(result instanceof JvmAnnotationAnnotationValue))
-				result.eSet(result.eClass().getEStructuralFeature("values"), valuesAsList);
+			if (!(result instanceof JvmAnnotationAnnotationValue)) {
+				EStructuralFeature structuralFeature = result.eClass().getEStructuralFeature("values");
+				if (structuralFeature.getEType() instanceof EDataType) {
+					List<Object> convertedValues = Lists.newArrayListWithExpectedSize(valuesAsList.size());
+					for(Object wrongType: valuesAsList) {
+						Object convertedValue = EcoreFactory.eINSTANCE.createFromString((EDataType) structuralFeature.getEType(), wrongType.toString());
+						convertedValues.add(convertedValue);
+					}
+					result.eSet(structuralFeature, convertedValues);
+				} else {
+					result.eSet(structuralFeature, valuesAsList);
+				}
+			}
 		}
 		return result;
 	}
@@ -240,7 +269,9 @@ public class JdtBasedTypeFactory implements ITypeFactory<IType> {
 		} else if (result instanceof JvmEnumAnnotationValue) {
 			log.error("Enumeration types are not yet fully supported.");
 		} else {
-			result.eSet(result.eClass().getEStructuralFeature("values"), Collections.singleton(value));
+			EStructuralFeature structuralFeature = result.eClass().getEStructuralFeature("values");
+			Object convertedValue = EcoreFactory.eINSTANCE.createFromString((EDataType) structuralFeature.getEType(), value.toString());
+			result.eSet(structuralFeature, Collections.singleton(convertedValue));
 		}
 		return result;
 	}
