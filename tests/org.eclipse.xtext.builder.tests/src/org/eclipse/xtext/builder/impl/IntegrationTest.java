@@ -16,12 +16,15 @@ import java.util.Iterator;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.IFolder;
 import org.eclipse.core.resources.IMarker;
+import org.eclipse.core.resources.IProject;
 import org.eclipse.core.resources.IResource;
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.NullProgressMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.EValidator;
+import org.eclipse.jdt.core.ElementChangedEvent;
 import org.eclipse.jdt.core.IClasspathEntry;
+import org.eclipse.jdt.core.IElementChangedListener;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.xtext.builder.nature.XtextNature;
@@ -39,13 +42,6 @@ public class IntegrationTest extends AbstractBuilderTest {
 	private IJavaProject bar_project;
 	private IFile foo_file;
 	private IFile bar_file;
-
-	@Override
-	protected void tearDown() throws Exception {
-		super.tearDown();
-		cleanWorkspace();
-		waitForAutoBuild();
-	}
 
 	public void testValidSimpleModel() throws Exception {
 		createJavaProjectWithRootSrc("foo");
@@ -294,43 +290,43 @@ public class IntegrationTest extends AbstractBuilderTest {
 		assertEquals(BuilderTestLanguagePackage.Literals.ELEMENT__REFERENCES,next.getEReference());
 	}
 	
-//	public void testCleanBuild() throws Exception {
-//		IJavaProject project = createJavaProject("foo");
-//		addNature(project.getProject(), XtextNature.NATURE_ID);
-//		IProject someProject = createProject("bar");
-//		IFile file = someProject.getFile("foo.jar");
-//		file.create(jarInputStream(new TextFile("foo/Bar"+F_EXT, "object Foo")), true, monitor());
-//		assertEquals(0, countResourcesInIndex());
-//		addJarToClasspath(project, file);
-//		waitForAutoBuild();
-//		assertEquals(1, countResourcesInIndex());
-//
-//		getBuilderState().addListener(this);
-//		fullBuild();
-//		assertEquals(1, countResourcesInIndex());
-//		System.out.println(print(getEvents().get(0).getDeltas()));
-//		assertEquals(1,getEvents().size());
-//	}
+	public void testCleanBuild() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		addNature(project.getProject(), XtextNature.NATURE_ID);
+		IProject someProject = createProject("bar");
+		IFile file = someProject.getFile("foo.jar");
+		file.create(jarInputStream(new TextFile("foo/Bar"+F_EXT, "object Foo")), true, monitor());
+		assertEquals(0, countResourcesInIndex());
+		addJarToClasspath(project, file);
+		waitForAutoBuild();
+		assertEquals(1, countResourcesInIndex());
+
+		getBuilderState().addListener(this);
+		fullBuild();
+		assertEquals(1, countResourcesInIndex());
+		System.out.println(print(getEvents().get(0).getDeltas()));
+		assertEquals(1,getEvents().size());
+	}
 
 	private int countMarkers(IFile file) throws CoreException {
 		return file.findMarkers(EValidator.MARKER, true, IResource.DEPTH_INFINITE).length;
 	}
 
 	
-//	public void testEvents() throws Exception {
-//		IJavaProject project = createJavaProject("foo");
-//		addNature(project.getProject(), XtextNature.NATURE_ID);
-//		IProject someProject = createProject("bar");
-//		IFile file = someProject.getFile("foo.jar");
-//		file.create(jarInputStream(new TextFile("foo/Bar"+F_EXT, "object Foo")), true, monitor());
-//		addJarToClasspath(project, file);
-//		waitForAutoBuild();
-//		JavaCore.addElementChangedListener(new IElementChangedListener() {
-//			
-//			public void elementChanged(ElementChangedEvent event) {
-//				System.out.println(event);
-//			}
-//		});
-//		someProject.delete(true, monitor());
-//	}
+	public void testEvents() throws Exception {
+		IJavaProject project = createJavaProject("foo");
+		addNature(project.getProject(), XtextNature.NATURE_ID);
+		IProject someProject = createProject("bar");
+		IFile file = someProject.getFile("foo.jar");
+		file.create(jarInputStream(new TextFile("foo/Bar"+F_EXT, "object Foo")), true, monitor());
+		addJarToClasspath(project, file);
+		waitForAutoBuild();
+		JavaCore.addElementChangedListener(new IElementChangedListener() {
+			
+			public void elementChanged(ElementChangedEvent event) {
+				System.out.println(event);
+			}
+		});
+		someProject.delete(true, monitor());
+	}
 }
