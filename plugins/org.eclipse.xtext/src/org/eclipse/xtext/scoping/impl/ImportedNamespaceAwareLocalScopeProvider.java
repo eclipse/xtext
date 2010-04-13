@@ -17,6 +17,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import org.eclipse.emf.common.notify.Notifier;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 import org.eclipse.emf.ecore.EReference;
@@ -148,7 +149,7 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 	protected IScope getResourceScope(final IScope parent, final EObject context, final EReference reference) {
 		if (context.eResource() == null)
 			return parent;
-		return getScope(reference.getEReferenceType().getName(), context, parent, new Provider<Map<String, IEObjectDescription>>() {
+		return getScope(getKey(context.eResource(), reference), context, parent, new Provider<Map<String, IEObjectDescription>>() {
 			public Map<String, IEObjectDescription> get() {
 				Iterable<EObject> contents = new Iterable<EObject>() {
 					public Iterator<EObject> iterator() {
@@ -201,8 +202,8 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 			}});
 	}
 
-	protected String getKey(EObject context, EReference reference) {
-		return reference.getEReferenceType().getName();
+	protected Object getKey(Notifier context, EReference reference) {
+		return Tuples.create(ImportedNamespaceAwareLocalScopeProvider.class,context, reference);
 	}
 
 	private Predicate<EObject> typeFilter(final EClass type) {
@@ -293,8 +294,8 @@ public class ImportedNamespaceAwareLocalScopeProvider extends AbstractGlobalScop
 	}
 	
 	
-	protected IScope getScope(String cacheKey, EObject eobject, IScope parentScope, Provider<Map<String, IEObjectDescription>> mapProvider) {
-		Map<String, IEObjectDescription> map = cache.get(Tuples.pair(eobject, cacheKey), eobject.eResource(), mapProvider);
+	protected IScope getScope(Object cacheKey, EObject eobject, IScope parentScope, Provider<Map<String, IEObjectDescription>> mapProvider) {
+		Map<String, IEObjectDescription> map = cache.get(cacheKey, eobject.eResource(), mapProvider);
 		return map.isEmpty()?parentScope:createMapBasedScope(parentScope, map);
 	}
 
