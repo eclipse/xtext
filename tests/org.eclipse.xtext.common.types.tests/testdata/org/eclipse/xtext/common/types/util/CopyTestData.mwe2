@@ -1,0 +1,7 @@
+module org.eclipse.xtext.common.types.util.CopyTestData
+
+var path
+Workflow {
+	component = CopyJavaToText auto-inject {
+	}	
+}
