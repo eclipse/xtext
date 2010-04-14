@@ -9,7 +9,6 @@
 package org.eclipse.xtext.generator.validation;
 
 import java.util.ArrayList;
-import java.util.Collections;
 import java.util.List;
 
 import org.eclipse.emf.ecore.EPackage;
@@ -20,44 +19,50 @@ import org.eclipse.xtext.generator.AbstractGeneratorFragment;
 import org.eclipse.xtext.generator.Naming;
 import org.eclipse.xtext.util.Strings;
 
+import com.google.inject.internal.Lists;
+
 /**
- * Common base class for {@link IGeneratorFragment fragments} generating some
- * validation support classes.
+ * Common base class for {@link IGeneratorFragment fragments} generating some validation support classes.
  * 
  * @author Michael Clay - Initial contribution and API
  */
-public abstract class AbstractValidatorFragment extends
-		AbstractGeneratorFragment {
-	
+public abstract class AbstractValidatorFragment extends AbstractGeneratorFragment {
+
+	private boolean isRegisterForImportedPackages = false;
+
 	public void setBasePackage(String basePackage) {
 		throw new UnsupportedOperationException();
+	}
+
+	public void setRegisterForImportedPackages(boolean isRegisterForImportedPackages) {
+		this.isRegisterForImportedPackages = isRegisterForImportedPackages;
 	}
 
 	public String getBasePackage(Grammar g, Naming n) {
 		return n.basePackageRuntime(g);
 	}
-	
-	public String getGeneratedEPackageName(Grammar g, Naming n , EPackage pack) {
-		return getBasePackage(g,n) + "." + pack.getName() + "."
-				+ Strings.toFirstUpper(pack.getName()) + "Package";
+
+	public String getGeneratedEPackageName(Grammar g, Naming n, EPackage pack) {
+		return getBasePackage(g, n) + "." + pack.getName() + "." + Strings.toFirstUpper(pack.getName()) + "Package";
 	}
-	
+
 	public static String getValidationPackage(Grammar grammar, Naming n) {
 		return n.basePackageRuntime(grammar) + ".validation";
 	}
-	
+
 	@Override
 	public String[] getExportedPackagesRt(Grammar grammar) {
-		return new String[]{ getValidationPackage(grammar, getNaming()) };
+		return new String[] { getValidationPackage(grammar, getNaming()) };
 	}
 
 	@Override
 	protected List<Object> getParameters(Grammar grammar) {
 		List<String> packageQNames = new ArrayList<String>();
-		List<GeneratedMetamodel> list = EcoreUtil2.typeSelect(grammar.getMetamodelDeclarations(),GeneratedMetamodel.class);
+		List<GeneratedMetamodel> list = EcoreUtil2.typeSelect(grammar.getMetamodelDeclarations(),
+				GeneratedMetamodel.class);
 		for (GeneratedMetamodel generatedMetamodel : list) {
 			packageQNames.add(getGeneratedEPackageName(grammar, getNaming(), generatedMetamodel.getEPackage()));
 		}
-		return Collections.singletonList((Object)packageQNames);
+		return Lists.newArrayList(new Object[] { packageQNames, isRegisterForImportedPackages });
 	}
 }

@@ -15,7 +15,7 @@
 «EXTENSION org::eclipse::xtext::GrammarUtil»
 «EXTENSION org::eclipse::xtext::generator::validation::CheckFragment»
 
-«DEFINE generate(List[String] packageQNames) FOR Grammar»
+«DEFINE generate(List[String] packageQNames, boolean isRegisterForImportedPackages) FOR Grammar»
 
 «FILE validationPackage().asPath() + "/" + getName() + "Extensions.ext" SRC-»
 «ENDFILE»
@@ -92,26 +92,19 @@ public class «getCheckValidatorName().toSimpleName()» extends org.eclipse.xtext.
 		addCheckFile("«(validationPackage().asPath() + "/" + getName() +"ExpensiveChecks").replaceAll("/","::")»", CheckType.EXPENSIVE);
 	}
 	
-	@Override
-	protected List<EPackage> getEPackages() {
-	    List<EPackage> result = new ArrayList<EPackage>();
-	    «FOREACH packageQNames AS e-»
-	    result.add(«e».eINSTANCE);
-	    «ENDFOREACH-»
-		return result;
-	}
+	«EXPAND Common::getEPackages(packageQNames, isRegisterForImportedPackages)-»
 	
 }
 «ENDFILE»
 
 «ENDDEFINE»
 
-«DEFINE addToPluginXmlRt(List[String] packageQNames) FOR Grammar-»«ENDDEFINE»
+«DEFINE addToPluginXmlRt(List[String] packageQNames, boolean isRegisterForImportedPackages) FOR Grammar-»«ENDDEFINE»
 
 
-«DEFINE addToPluginXmlUi(List[String] packageQNames) FOR Grammar-»«ENDDEFINE»
+«DEFINE addToPluginXmlUi(List[String] packageQNames, boolean isRegisterForImportedPackages) FOR Grammar-»«ENDDEFINE»
 
-«DEFINE addToStandaloneSetup(List[String] packageQNames) FOR Grammar-»
+«DEFINE addToStandaloneSetup(List[String] packageQNames, boolean isRegisterForImportedPackages) FOR Grammar-»
 	//TODO registration of EValidators should be added here, too
 «ENDDEFINE»
 
