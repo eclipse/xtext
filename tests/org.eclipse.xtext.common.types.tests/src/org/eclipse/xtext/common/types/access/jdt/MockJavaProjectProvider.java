@@ -12,8 +12,6 @@ import java.io.ByteArrayInputStream;
 import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 
 import org.eclipse.core.resources.ICommand;
@@ -36,7 +34,9 @@ import org.eclipse.jdt.core.IJavaModel;
 import org.eclipse.jdt.core.IJavaProject;
 import org.eclipse.jdt.core.JavaCore;
 import org.eclipse.jdt.core.JavaModelException;
+import org.eclipse.xtext.common.types.tests.Activator;
 import org.eclipse.xtext.junit.util.JavaProjectSetupUtil;
+import org.eclipse.xtext.junit.util.PluginUtil;
 import org.eclipse.xtext.util.Strings;
 
 import com.google.common.collect.Lists;
@@ -65,24 +65,24 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 	public static void setUp() throws Exception {
 		javaProject = createJavaProject("projectWithoutSources",
 				new String[] {
-					"org.eclipse.xtext.common.types.tests"
-				},
-				new String[] {
 						JavaCore.NATURE_ID,
 						"org.eclipse.pde.PluginNature"
 				}
 		);
+		String path = "/org/eclipse/xtext/common/types/testSetups";
+		String jarFileName = "/testData.jar";
+		IFile jarFile = PluginUtil.copyFileToWorkspace(Activator.INSTANCE, path + jarFileName, javaProject.getProject(), 
+				jarFileName);
+		JavaProjectSetupUtil.addJarToClasspath(javaProject, jarFile);
+		
 		javaProjectWithSources = createJavaProject("projectWithSources",
-				new String[] {
-					"org.eclipse.xtext.common.types.tests"
-				},
 				new String[] {
 						JavaCore.NATURE_ID,
 						"org.eclipse.pde.PluginNature"
 				}
 		);
 		IFolder sourceFolder = JavaProjectSetupUtil.addSourceFolder(javaProjectWithSources, "src");
-		String path = "/org/eclipse/xtext/common/types/testSetups";
+		
 		List<String> filesToCopy = readResource(path + "/files.list");
 		
 		IFolder srcFolder = sourceFolder.getFolder(new Path(path));
@@ -125,7 +125,6 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 	
 	public static IJavaProject createJavaProject(
 			final String projectName, 
-			String[] requiredBundles,
 			String[] projectNatures) {
 
 		IProject project = null;
@@ -163,7 +162,7 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 					null);
 
 			javaProject.setOutputLocation(new Path("/" + projectName + "/bin"), null);
-			createManifest(projectName, requiredBundles, project);
+			createManifest(projectName, project);
 //			project.build(IncrementalProjectBuilder.FULL_BUILD, null);
 			refreshExternalArchives(javaProject);
 			refresh(javaProject);
@@ -222,8 +221,7 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 		} while (wasInterrupted);
 	}
 	
-	private static void createManifest(final String projectName, final String[] requiredBundles,
-			final IProject project) throws CoreException {
+	private static void createManifest(final String projectName, final IProject project) throws CoreException {
 		final StringBuilder mainContent = new StringBuilder("Manifest-Version: 1.0\n");
 		mainContent.append("Bundle-ManifestVersion: 2\n");
 		mainContent.append("Bundle-Name: " + projectName + "\n");
@@ -231,18 +229,6 @@ public class MockJavaProjectProvider implements IJavaProjectProvider {
 		mainContent.append("Bundle-Version: 1.0.0\n");
 		mainContent.append("Bundle-SymbolicName: " + projectName.toLowerCase() + "; singleton:=true\n");
 		mainContent.append("Bundle-ActivationPolicy: lazy\n");
-
-		if (requiredBundles.length != 0) {
-			mainContent.append("Require-Bundle: ");
-		}
-
-		for (Iterator<String> iterator = Arrays.asList(requiredBundles).iterator(); iterator.hasNext();) {
-			mainContent.append(" " + iterator.next());
-			if (iterator.hasNext()) {
-				mainContent.append(",");
-			}
-			mainContent.append("\n");
-		}
 		mainContent.append("Bundle-RequiredExecutionEnvironment: J2SE-1.5\n");
 
 		final IFolder metaInf = project.getFolder("META-INF");

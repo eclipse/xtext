@@ -14,7 +14,6 @@ import org.eclipse.emf.common.util.URI;
 import org.eclipse.emf.ecore.InternalEObject;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.JavaModelException;
-import org.eclipse.jdt.core.Signature;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
 import org.eclipse.jdt.core.search.IJavaSearchScope;
 import org.eclipse.jdt.core.search.SearchEngine;
@@ -75,17 +74,11 @@ public class JdtBasedSimpleTypeScope extends AbstractTypeScope {
 	}
 	
 	public IEObjectDescription createScopedElement(String fullyQualifiedName) {
-		String typeSignature = Signature.createTypeSignature(fullyQualifiedName, true);
-		try {
-			URI uri = getTypeProvider().getTypeUriHelper().getFullURI(typeSignature, null);
-			InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createJvmVoid();
-			proxy.eSetProxyURI(uri);
-			IEObjectDescription eObjectDescription = EObjectDescription.create(fullyQualifiedName, proxy);
-			return eObjectDescription;
-		}
-		catch (JavaModelException e) {
-			return null;
-		}
+		URI uri = getTypeProvider().getTypeUriHelper().getFullURIForClass(fullyQualifiedName);
+		InternalEObject proxy = (InternalEObject) TypesFactory.eINSTANCE.createJvmVoid();
+		proxy.eSetProxyURI(uri);
+		IEObjectDescription eObjectDescription = EObjectDescription.create(fullyQualifiedName, proxy);
+		return eObjectDescription;
 	}
 	
 	public void collectContents(IJavaSearchScope searchScope, TypeNameRequestor nameMatchRequestor) throws JavaModelException {

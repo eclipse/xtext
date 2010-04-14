@@ -1,7 +1,17 @@
 module org.eclipse.xtext.common.types.util.CopyTestData
 
 var path
+var binPath = "${path}/bin"
+var packagePath = "org/eclipse/xtext/common/types/testSetups"
+var srcPath = "${path}/testdata/${packagePath}"
+
 Workflow {
-	component = CopyJavaToText auto-inject {
-	}	
+	component = CopyJavaToText {
+		path = srcPath
+	}
+	component = CreateJar {
+		binPath = binPath
+		packagePath = packagePath
+		targetDir = srcPath
+	}
 }

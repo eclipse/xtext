@@ -8,12 +8,9 @@
 package org.eclipse.xtext.common.types.access.jdt;
 
 import org.eclipse.emf.common.util.URI;
-import org.eclipse.jdt.core.IMember;
-import org.eclipse.jdt.core.IMethod;
-import org.eclipse.jdt.core.IType;
-import org.eclipse.jdt.core.ITypeParameter;
-import org.eclipse.jdt.core.JavaModelException;
 import org.eclipse.jdt.core.Signature;
+import org.eclipse.jdt.core.dom.IMethodBinding;
+import org.eclipse.jdt.core.dom.ITypeBinding;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 
 /**
@@ -21,15 +18,15 @@ import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
  */
 public class TypeURIHelper implements URIHelperConstants {
 
-	public String getFragment(String signature) throws JavaModelException {
+	public String getFragment(String signature) {
 		StringBuilder uriBuilder = new StringBuilder(32);
-		createFragment(signature, null, uriBuilder);
+		createFragment(signature, uriBuilder);
 		return uriBuilder.toString();
 	}
 
-	public URI createResourceURI(String signature) throws JavaModelException {
+	public URI createResourceURI(String signature) {
 		StringBuilder uriBuilder = createURIBuilder();
-		createResourceURI(signature, null, uriBuilder);
+		createResourceURI(signature, uriBuilder);
 		return createURI(uriBuilder);
 	}
 
@@ -50,98 +47,115 @@ public class TypeURIHelper implements URIHelperConstants {
 		return URI.createURI(uriBuilder.toString());
 	}
 
-	public URI getFullURI(String signature, IMember declarator) throws JavaModelException {
+	public URI getFullURI(ITypeBinding typeBinding) {
 		StringBuilder uriBuilder = createURIBuilder();
-		createResourceURI(signature, declarator, uriBuilder);
+		createResourceURI(typeBinding, uriBuilder);
 		uriBuilder.append('#');
-		createFragment(signature, declarator, uriBuilder);
+		createFragment(typeBinding, uriBuilder);
 		return createURI(uriBuilder);
 	}
 	
-	public URI getFullURI(String signature, String method, IMember declarator) throws JavaModelException {
+	public URI getFullURIForClass(String fqn) {
 		StringBuilder uriBuilder = createURIBuilder();
-		createResourceURI(signature, declarator, uriBuilder);
+		createResourceURIForClassImpl2(fqn, uriBuilder);
 		uriBuilder.append('#');
-		createFragment(signature, declarator, uriBuilder);
+		createFragmentForClass2(fqn, uriBuilder);
+		return createURI(uriBuilder);
+	}
+	
+	public URI getFullURI(ITypeBinding typeBinding, String method) {
+		StringBuilder uriBuilder = createURIBuilder();
+		createResourceURI(typeBinding, uriBuilder);
+		uriBuilder.append('#');
+		createFragment(typeBinding, uriBuilder);
 		uriBuilder.append('.').append(method).append("()");
 		return createURI(uriBuilder);
 	}
+	
+	protected void createFragment(ITypeBinding typeBinding, StringBuilder uriBuilder) {
+		if (typeBinding.isPrimitive()) {
+			createFragmentForPrimitive(typeBinding, uriBuilder);
+			return;
+		}
+		if (typeBinding.isArray()) {
+			createFragmentForArray(typeBinding, uriBuilder);
+			return;
+		}
+		if (typeBinding.isTypeVariable()) {
+			createFragmentForTypeVariable(typeBinding, uriBuilder);
+			return;
+		}
+		if (typeBinding.isAnnotation() || typeBinding.isClass() || typeBinding.isInterface() || typeBinding.isEnum()) {
+			createFragmentForClass(typeBinding, uriBuilder);
+			return;
+		}
+		throw new IllegalStateException("Unexpected type binding: " + typeBinding);
+	}
 
-	protected void createFragment(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
+	protected void createFragment(String signature, StringBuilder uriBuilder) {
 		int signatureKind = Signature.getTypeSignatureKind(signature);
 		switch (signatureKind) {
 			case Signature.BASE_TYPE_SIGNATURE:
 				createFragmentForPrimitive(signature, uriBuilder);
 				return;
 			case Signature.CLASS_TYPE_SIGNATURE:
-				createFragmentForClass(signature, declarator, uriBuilder);
+				createFragmentForClass(signature, uriBuilder);
 				return;
 			case Signature.ARRAY_TYPE_SIGNATURE:
-				createFragmentForArray(signature, declarator, uriBuilder);
+				createFragmentForArray(signature, uriBuilder);
 				return;
 			case Signature.TYPE_VARIABLE_SIGNATURE:
-				createFragmentForTypeVariable(signature, declarator, uriBuilder);
+				createFragmentForTypeVariable(signature, uriBuilder);
 				return;
 			default:
 				throw new IllegalStateException("Unexpected Signature: " + signature);
 		}
 	}
-
-	protected void createFragmentForTypeVariable(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
-		String readable = Signature.toString(signature);
-		IMember localDeclarator = declarator;
-		while(localDeclarator != null) {
-			if (localDeclarator instanceof IType) {
-				IType declaringType = (IType) localDeclarator;
-				ITypeParameter typeParameter = findTypeParameterByName(readable, declaringType.getTypeParameters());
-				if (typeParameter != null) {
-					String typeSignature = Signature.createTypeSignature(declaringType.getFullyQualifiedName(), true);
-					createFragment(typeSignature, declarator, uriBuilder);
-					break;
-				}
-			}
-			else if (localDeclarator instanceof IMethod) {
-				IMethod method = (IMethod) localDeclarator;
-				ITypeParameter typeParameter = findTypeParameterByName(readable, method.getTypeParameters());
-				if (typeParameter != null) {
-					createFragmentForMethod(method, uriBuilder);
-					break;
-				}
-			}
-			localDeclarator = localDeclarator.getDeclaringType();
+	
+	protected void createFragmentForTypeVariable(ITypeBinding typeBinding, StringBuilder uriBuilder) {
+		if (typeBinding.getDeclaringMethod() != null) {
+			createFragmentForMethod(typeBinding.getDeclaringMethod(), uriBuilder);
+		} else {
+			createFragment(typeBinding.getDeclaringClass(), uriBuilder);
 		}
+		uriBuilder.append('/');
+		uriBuilder.append(typeBinding.getName());
+	}
+
+	protected void createFragmentForTypeVariable(String signature, StringBuilder uriBuilder) {
+		String readable = Signature.toString(signature);
 		uriBuilder.append('/');
 		uriBuilder.append(readable);
 	}
 
-	protected ITypeParameter findTypeParameterByName(String readable, ITypeParameter[] typeParameters) {
-		if (typeParameters != null) {
-			for(ITypeParameter parameter: typeParameters) {
-				if (readable.equals(parameter.getElementName())) {
-					return parameter;
-				}
-			}
-		}
-		return null;
-	}
-
-	protected void createFragmentForMethod(IMethod method, StringBuilder uriBuilder) throws JavaModelException {
-		IType declaringType = method.getDeclaringType();
-		createFragmentForClass(Signature.createTypeSignature(declaringType.getFullyQualifiedName(), true), null, uriBuilder);
+	protected void createFragmentForMethod(IMethodBinding method, StringBuilder uriBuilder) {
+		ITypeBinding declaringType = method.getDeclaringClass();
+		createFragmentForClass(declaringType, uriBuilder);
 		uriBuilder.append('.');
-		uriBuilder.append(method.getElementName());
+		uriBuilder.append(method.getName());
 		uriBuilder.append('(');
-		String[] parameterTypes = null;
-		parameterTypes = method.getParameterTypes();
+		ITypeBinding[] parameterTypes = method.getParameterTypes();
 		for (int i = 0; i < parameterTypes.length; i++) {
 			if (i != 0) {
 				uriBuilder.append(',');
 			}
-			computeTypeName(parameterTypes[i], uriBuilder);
+			uriBuilder.append(getQualifiedName(parameterTypes[i]));
 		}
 		uriBuilder.append(')');
 	}
-
+	
+	public String getQualifiedName(ITypeBinding binding) {
+		if (binding.isParameterizedType()) {
+			return getQualifiedName(binding.getErasure());
+		}
+		if (binding.isArray()) {
+			return getQualifiedName(binding.getComponentType()) + "[]";
+		}
+		if (binding.isTopLevel() || binding.isTypeVariable() || binding.isPrimitive())
+			return binding.getQualifiedName();
+		return getQualifiedName(binding.getDeclaringClass()) + "$" + binding.getName();
+	}
+	
 	public String computeTypeName(String signature) {
 		StringBuilder result = new StringBuilder(64);
 		computeTypeName(signature, result);
@@ -217,44 +231,37 @@ public class TypeURIHelper implements URIHelperConstants {
 		}
 	}
 
+	protected void createFragmentForPrimitive(ITypeBinding typeBinding, StringBuilder uriBuilder) {
+		uriBuilder.append(typeBinding.getName());
+	}
+	
 	protected void createFragmentForPrimitive(String signature, StringBuilder uriBuilder) {
 		uriBuilder.append(Signature.toString(signature));
 	}
 
-	protected void createFragmentForArray(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
+	protected void createFragmentForArray(ITypeBinding typeBinding, StringBuilder uriBuilder) {
+		createFragment(typeBinding.getComponentType(), uriBuilder);
+		uriBuilder.append("[]");
+	}
+	
+	protected void createFragmentForArray(String signature, StringBuilder uriBuilder) {
 		String elementType = Signature.getElementType(signature);
-		createFragment(elementType, declarator, uriBuilder);
+		createFragment(elementType, uriBuilder);
 		int dim = Signature.getArrayCount(signature);
 		for (int i = 0; i < dim; i++) {
 			uriBuilder.append("[]");
 		}
 	}
 
-	protected void createFragmentForClass(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
-		signature = resolveSourceReference(signature, declarator);
-		if (declarator != null && signature.indexOf('.') == -1) {
-			String readable = Signature.toString(signature);
-			IMember localDeclarator = declarator;
-			while(localDeclarator != null) {
-				ITypeParameter[] typeParameters = null;
-				if (localDeclarator instanceof IMethod) {
-					IMethod method = (IMethod) localDeclarator;
-					typeParameters = method.getTypeParameters();
-				} else if (localDeclarator instanceof IType) {
-					IType type = (IType) localDeclarator;
-					typeParameters = type.getTypeParameters();
-				}
-				if (typeParameters != null && typeParameters.length != 0) {
-					for(ITypeParameter typeParameter: typeParameters) {
-						if (readable.equals(typeParameter.getElementName())) {
-							createFragment("T" + readable + ";", localDeclarator, uriBuilder);
-							return;
-						}
-					}
-				}
-				localDeclarator = localDeclarator.getDeclaringType();
-			}
-		}
+	protected void createFragmentForClass(ITypeBinding typeBinding, StringBuilder uriBuilder) {
+		createFragmentForClass2(getQualifiedName(typeBinding), uriBuilder);
+	}
+	
+	protected void createFragmentForClass2(String fqn, StringBuilder uriBuilder) {
+		uriBuilder.append(fqn);
+	}
+	
+	protected void createFragmentForClass(String signature, StringBuilder uriBuilder) {
 		String fragment = Signature.toString(signature);
 		int start = signature.length();
 		int lastDot = fragment.length();
@@ -266,21 +273,38 @@ public class TypeURIHelper implements URIHelperConstants {
 		uriBuilder.append(fragment);
 	}
 
-	protected void createResourceURI(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
+	protected void createResourceURI(ITypeBinding typeBinding, StringBuilder uriBuilder) {
+		if (typeBinding.isPrimitive()) {
+			createResourceURIForPrimitive(uriBuilder);
+			return;
+		}
+		if (typeBinding.isArray()) {
+			createResourceURIForArray(typeBinding, uriBuilder);
+			return;
+		}
+		if (typeBinding.isTypeVariable()) {
+			createResourceURIForTypeVariable(typeBinding, uriBuilder);
+			return;
+		}
+		if (typeBinding.isClass() || typeBinding.isInterface() || typeBinding.isAnnotation() || typeBinding.isEnum()) {
+			createResourceURIForClass(typeBinding, uriBuilder);
+			return;
+		}
+		throw new IllegalStateException("Unexpected type: " + typeBinding);
+	}
+	
+	protected void createResourceURI(String signature, StringBuilder uriBuilder) {
 		try {
 			int signatureKind = Signature.getTypeSignatureKind(signature);
 			switch (signatureKind) {
 				case Signature.BASE_TYPE_SIGNATURE:
-					createResourceURIForPrimitive(signature, uriBuilder);
+					createResourceURIForPrimitive(uriBuilder);
 					return;
 				case Signature.CLASS_TYPE_SIGNATURE:
-					createResourceURIForClass(signature, declarator, uriBuilder);
+					createResourceURIForClass(signature, uriBuilder);
 					return;
 				case Signature.ARRAY_TYPE_SIGNATURE:
-					createResourceURIForArray(signature, declarator, uriBuilder);
-					return;
-				case Signature.TYPE_VARIABLE_SIGNATURE:
-					createResourceURIForTypeVariable(signature, declarator, uriBuilder);
+					createResourceURIForArray(signature, uriBuilder);
 					return;
 				default:
 					throw new IllegalStateException("Unexpected Signature: " + signature);
@@ -290,79 +314,36 @@ public class TypeURIHelper implements URIHelperConstants {
 		}
 	}
 
-	protected void createResourceURIForPrimitive(String signature, StringBuilder uriBuilder) {
+	protected void createResourceURIForPrimitive(StringBuilder uriBuilder) {
 		uriBuilder.append(URIHelperConstants.PRIMITIVES);
 	}
 
-	protected void createResourceURIForArray(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
+	protected void createResourceURIForArray(ITypeBinding typeBinding, StringBuilder uriBuilder) {
+		ITypeBinding componentType = typeBinding.getComponentType();
+		createResourceURI(componentType, uriBuilder);
+	}
+	
+	protected void createResourceURIForArray(String signature, StringBuilder uriBuilder) {
 		String elementType = Signature.getElementType(signature);
-		createResourceURI(elementType, declarator, uriBuilder);
+		createResourceURI(elementType, uriBuilder);
 	}
 
-	protected void createResourceURIForClass(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
-		signature = resolveSourceReference(signature, declarator);
-		if (declarator != null && signature.indexOf('.') == -1) {
-			String readable = Signature.toString(signature);
-			IMember localDeclarator = declarator;
-			while(localDeclarator != null) {
-				ITypeParameter[] typeParameters = null;
-				if (localDeclarator instanceof IMethod) {
-					IMethod method = (IMethod) localDeclarator;
-					typeParameters = method.getTypeParameters();
-				} else if (localDeclarator instanceof IType) {
-					IType type = (IType) localDeclarator;
-					typeParameters = type.getTypeParameters();
-				}
-				if (typeParameters != null && typeParameters.length != 0) {
-					for(ITypeParameter typeParameter: typeParameters) {
-						if (readable.equals(typeParameter.getElementName())) {
-							IType type = null;
-							if (localDeclarator instanceof IType) {
-								type = (IType) localDeclarator;
-							} else {
-								type = localDeclarator.getDeclaringType();
-							}
-							String typeSignature = Signature.createTypeSignature(type.getFullyQualifiedName(), true);
-							createResourceURIForClassImpl(typeSignature, uriBuilder);
-							return;
-						}
-					}
-				}
-				localDeclarator = localDeclarator.getDeclaringType();
-			}
+	protected void createResourceURIForClass(ITypeBinding typeBinding, StringBuilder uriBuilder) { 
+		if (typeBinding.getDeclaringClass() != null) {
+			createResourceURIForClass(typeBinding.getDeclaringClass(), uriBuilder);
+		} else {
+			createResourceURIForClassImpl2(typeBinding.getQualifiedName(), uriBuilder);
 		}
+	}
+	
+	protected void createResourceURIForClass(String signature, StringBuilder uriBuilder) {
 		createResourceURIForClassImpl(signature, uriBuilder);
 	}
 
-	protected String resolveSourceReference(String signature, IMember declarator) throws JavaModelException {
-		if (signature.startsWith("Q")) {
-			String readable = Signature.toString(signature);
-			IType resolveContext = declarator.getDeclaringType();
-			if (declarator instanceof IType) {
-				resolveContext = (IType) declarator;
-			}
-			signature = resolveTypeName(readable, resolveContext);
-		}
-		return signature;
+	protected void createResourceURIForClassImpl2(String fqn, StringBuilder uriBuilder) {
+		uriBuilder.append(URIHelperConstants.OBJECTS).append(fqn);
 	}
-
-	public String resolveTypeName(String readable, IType resolveContext) throws JavaModelException {
-		String signature;
-		String[][] resolved = resolveContext.resolveType(readable);
-		if (resolved != null && resolved.length == 1) {
-			readable = resolved[0][0];
-			if (readable != null && readable.length() >= 1) {
-				readable = readable + '.' + resolved[0][1];
-			} else {
-				readable = resolved[0][1];
-			}
-			signature = Signature.createTypeSignature(readable, true);
-		} else {
-			signature = Signature.createTypeSignature(readable, true);
-		}
-		return signature;
-	}
-
+	
 	protected void createResourceURIForClassImpl(String signature, StringBuilder uriBuilder) {
 		String topLevel = signature;
 		int idx = topLevel.indexOf('$');
@@ -370,17 +351,16 @@ public class TypeURIHelper implements URIHelperConstants {
 			topLevel = topLevel.substring(0, idx) + ';';
 		uriBuilder.append(URIHelperConstants.OBJECTS).append(Signature.toString(topLevel));
 	}
-
-	protected void createResourceURIForTypeVariable(String signature, IMember declarator, StringBuilder uriBuilder) throws JavaModelException {
-		if (declarator instanceof IType) {
-			IType declaringClass = (IType) declarator;
-			createResourceURIForClass(Signature.createTypeSignature(declaringClass.getFullyQualifiedName(), true),
-					declarator, uriBuilder);
+	
+	protected void createResourceURIForTypeVariable(ITypeBinding typeBinding, StringBuilder uriBuilder) {
+		if (typeBinding.getDeclaringClass() != null) {
+			ITypeBinding declaringClass = typeBinding.getDeclaringClass();
+			createResourceURIForClass(declaringClass, uriBuilder);
 		}
 		else {
-			IType declaringClass = declarator.getDeclaringType();
-			createResourceURIForClass(Signature.createTypeSignature(declaringClass.getFullyQualifiedName(), true),
-					declarator, uriBuilder);
+			IMethodBinding declaringMethod = typeBinding.getDeclaringMethod();
+			ITypeBinding declaringClass = declaringMethod.getDeclaringClass();
+			createResourceURIForClass(declaringClass, uriBuilder);
 		}
 	}
 

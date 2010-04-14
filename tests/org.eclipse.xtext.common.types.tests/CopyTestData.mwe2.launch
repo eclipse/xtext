@@ -8,6 +8,6 @@
 <listEntry value="1"/>
 </listAttribute>
 <stringAttribute key="org.eclipse.jdt.launching.MAIN_TYPE" value="org.eclipse.emf.mwe2.launch.runtime.Mwe2Launcher"/>
-<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="testdata/org/eclipse/xtext/common/types/util/CopyTestData.mwe2 -p path=${workspace_loc:org.eclipse.xtext.common.types.tests}/testdata/org/eclipse/xtext/common/types/testSetups"/>
+<stringAttribute key="org.eclipse.jdt.launching.PROGRAM_ARGUMENTS" value="testdata/org/eclipse/xtext/common/types/util/CopyTestData.mwe2 -p path=${workspace_loc:org.eclipse.xtext.common.types.tests}"/>
 <stringAttribute key="org.eclipse.jdt.launching.PROJECT_ATTR" value="org.eclipse.xtext.common.types.tests"/>
 </launchConfiguration>
