@@ -1557,4 +1557,14 @@ public abstract class AbstractTypeProviderTest extends TestCase {
 	}
 	
 	protected abstract String getCollectionParamName();
+	
+	public void testPerformance() {
+		for(int i = 0; i < 10/*00*/; i++) {
+			getTypeProvider().getResourceSet().getResources().clear();
+			getTypeProvider().findTypeByName(TestAnnotation.class.getName());
+			getTypeProvider().findTypeByName(ParameterizedMethods.class.getName());
+			getTypeProvider().findTypeByName(ParameterizedTypes.class.getName());
+		}
+//		fail();
+	}
 }
