@@ -35,6 +35,7 @@ public class PartReactivationUtil {
 				page.activate(otherVisiblePart);
 			} else {
 				// evil reflective call of invisible method
+				// TODO: method does not exist in 3.5.2 
 				Method declaredMethod = page.getClass().getDeclaredMethod("setActivePart", IWorkbenchPart.class,
 						Boolean.TYPE);
 				declaredMethod.setAccessible(true);
@@ -53,7 +54,7 @@ public class PartReactivationUtil {
 				// hmmm, getPartState does always return IWorkbenchPage.STATE_RESTORED
 				if (page.getPartState(viewReference) == IWorkbenchPage.STATE_RESTORED) {
 					IViewPart part = viewReference.getView(false);
-					if (part != partToBeReactivated) {
+					if (part != null && part != partToBeReactivated) {
 						return part;
 					}
 				}
