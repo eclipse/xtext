@@ -49,29 +49,21 @@ public class JdtTypeProvider extends AbstractTypeProvider {
 	
 	@Override
 	public JvmType findTypeByName(String name) throws TypeNotFoundException {
-		try {
-			String signature = name.startsWith("[") ? name : Signature.createTypeSignature(name, true);
-			URI resourceURI = typeUriHelper.createResourceURI(signature);
-			TypeResource resource = (TypeResource) getResourceSet().getResource(resourceURI, true);
-			JvmType result = findTypeBySignature(signature, resource);
-			return result;
-		} catch(JavaModelException ex) {
-			 throw new TypeNotFoundException("Type: '" + name + "' is not available.", ex);
-		}
+		String signature = name.startsWith("[") ? name : Signature.createTypeSignature(name, true);
+		URI resourceURI = typeUriHelper.createResourceURI(signature);
+		TypeResource resource = (TypeResource) getResourceSet().getResource(resourceURI, true);
+		JvmType result = findTypeBySignature(signature, resource);
+		return result;
 	}
 
 	public JvmType findTypeBySignature(String signature, TypeResource resource) throws TypeNotFoundException {
 		// TODO: Maybe iterate the resource without computing a fragment
-		try {
-			String fragment = typeUriHelper.getFragment(signature);
-			JvmType result = (JvmType) resource.getEObject(fragment);
-			if (result == null) {
-				throw new TypeNotFoundException("Type: '" + signature + "' is not available.");
-			}
-			return result;
-		} catch(JavaModelException ex) {
-			throw new TypeNotFoundException("Type: '" + signature + "' is not available.", ex);
+		String fragment = typeUriHelper.getFragment(signature);
+		JvmType result = (JvmType) resource.getEObject(fragment);
+		if (result == null) {
+			throw new TypeNotFoundException("Type: '" + signature + "' is not available.");
 		}
+		return result;
 	}
 
 	@Override

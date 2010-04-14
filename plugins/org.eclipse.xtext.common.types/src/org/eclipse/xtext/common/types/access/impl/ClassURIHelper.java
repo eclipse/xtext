@@ -224,9 +224,6 @@ public class ClassURIHelper implements URIHelperConstants {
 			createFragmentForClass(clazz.getComponentType(), uriBuilder);
 			uriBuilder.append("[]");
 		}
-		else if (clazz.isMemberClass()) {
-			uriBuilder.append(clazz.getName());
-		}
 		else {
 			uriBuilder.append(clazz.getName());
 		}

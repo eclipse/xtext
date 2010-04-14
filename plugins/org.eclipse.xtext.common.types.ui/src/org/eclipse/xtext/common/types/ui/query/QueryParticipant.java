@@ -14,7 +14,6 @@ import org.eclipse.core.runtime.SubMonitor;
 import org.eclipse.emf.common.util.URI;
 import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.IType;
-import org.eclipse.jdt.core.Signature;
 import org.eclipse.jdt.core.search.IJavaSearchConstants;
 import org.eclipse.jdt.ui.search.ElementQuerySpecification;
 import org.eclipse.jdt.ui.search.IMatchPresentation;
@@ -68,8 +67,7 @@ public class QueryParticipant implements IQueryParticipant {
 				IJavaElement element = elementQuery.getElement();
 				if(element instanceof IType) {
 					IType type = (IType) element;
-					String signature = Signature.createTypeSignature(type.getFullyQualifiedName(), type.isResolved());
-					final URI uri = typeURIHelper.getFullURI(signature, type);
+					final URI uri = typeURIHelper.getFullURIForClass(type.getFullyQualifiedName());
 					int numResources = Iterables.size(resourceDescriptions.getAllResourceDescriptions());
 					SubMonitor subMonitor = SubMonitor.convert(monitor, numResources);
 					subMonitor.subTask("Find references in EMF resources");
