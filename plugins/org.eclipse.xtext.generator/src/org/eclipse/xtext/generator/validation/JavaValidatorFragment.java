@@ -21,6 +21,8 @@ import org.eclipse.xtext.generator.BindFactory;
 import org.eclipse.xtext.generator.Binding;
 import org.eclipse.xtext.generator.Naming;
 
+import com.google.inject.internal.Lists;
+
 /**
  * {@link IGeneratorFragment} to generate a java based validity checker for a given grammar.
  * 
@@ -35,7 +37,8 @@ public class JavaValidatorFragment extends AbstractValidatorFragment {
 	/**
 	 * Adds a validator that is to be executed additionally.
 	 * 
-	 * @param composedCheckValidator name of a class extending {@link org.eclipse.emf.validation.internal.service.AbstractValidator<T>}.
+	 * @param composedCheckValidator
+	 *            name of a class extending {@link org.eclipse.emf.validation.internal.service.AbstractValidator<T>}.
 	 */
 	public void addComposedCheck(String composedCheckValidator) {
 		this.composedChecks.add(composedCheckValidator);
@@ -45,17 +48,23 @@ public class JavaValidatorFragment extends AbstractValidatorFragment {
 	public void generate(Grammar grammar, XpandExecutionContext ctx) {
 		if (log.isInfoEnabled())
 			log.info("executing generate for " + getClass().getName());
-		XpandFacade.create(ctx).evaluate(getTemplate() + "::generate", grammar, getParameters(grammar),
-				this.composedChecks);
+		XpandFacade.create(ctx).evaluate2(getTemplate() + "::generate", grammar, getParameters(grammar));
 	}
 
 	@Override
 	public Set<Binding> getGuiceBindingsRt(Grammar grammar) {
-		return new BindFactory().addTypeToTypeEagerSingleton(getValidatorName(grammar, "",getNaming()),
-				getValidatorName(grammar, "",getNaming())).getBindings();
+		return new BindFactory().addTypeToTypeEagerSingleton(getValidatorName(grammar, "", getNaming()),
+				getValidatorName(grammar, "", getNaming())).getBindings();
 	}
 
 	public static String getValidatorName(Grammar g, String prefix, Naming n) {
 		return n.basePackageRuntime(g) + ".validation." + prefix + GrammarUtil.getName(g) + "JavaValidator";
+	}
+
+	@Override
+	protected List<Object> getParameters(Grammar grammar) {
+		List<Object> parameters = Lists.newArrayList(super.getParameters(grammar));
+		parameters.add(this.composedChecks);
+		return parameters;
 	}
 }
