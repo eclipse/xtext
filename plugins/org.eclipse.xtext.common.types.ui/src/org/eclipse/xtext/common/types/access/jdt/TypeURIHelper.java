@@ -8,9 +8,14 @@
 package org.eclipse.xtext.common.types.access.jdt;
 
 import org.eclipse.emf.common.util.URI;
+import org.eclipse.jdt.core.IJavaElement;
 import org.eclipse.jdt.core.Signature;
+import org.eclipse.jdt.core.dom.AST;
+import org.eclipse.jdt.core.dom.ASTParser;
+import org.eclipse.jdt.core.dom.IBinding;
 import org.eclipse.jdt.core.dom.IMethodBinding;
 import org.eclipse.jdt.core.dom.ITypeBinding;
+import org.eclipse.jdt.core.dom.IVariableBinding;
 import org.eclipse.xtext.common.types.access.impl.URIHelperConstants;
 
 /**
@@ -49,10 +54,58 @@ public class TypeURIHelper implements URIHelperConstants {
 
 	public URI getFullURI(ITypeBinding typeBinding) {
 		StringBuilder uriBuilder = createURIBuilder();
+		getFullURI(typeBinding, uriBuilder);
+		return createURI(uriBuilder);
+	}
+
+	protected void getFullURI(ITypeBinding typeBinding, StringBuilder uriBuilder) {
 		createResourceURI(typeBinding, uriBuilder);
 		uriBuilder.append('#');
 		createFragment(typeBinding, uriBuilder);
+	}
+	
+	public URI getFullURI(IVariableBinding binding) {
+		StringBuilder uriBuilder = createURIBuilder();
+		getFullURI(binding.getDeclaringClass(), uriBuilder);
+		uriBuilder.append(".");
+		uriBuilder.append(binding.getName());
 		return createURI(uriBuilder);
+	}
+	
+	public URI getFullURI(IMethodBinding binding) {
+		StringBuilder uriBuilder = createURIBuilder();
+		getFullURI(binding.getDeclaringClass(), uriBuilder);
+		uriBuilder.append(".");
+		uriBuilder.append(binding.getName());
+		uriBuilder.append("(");
+		ITypeBinding[] parameterTypes = binding.getParameterTypes();
+		for (int i = 0; i < parameterTypes.length; i++) {
+			if (i != 0)
+				uriBuilder.append(',');
+			uriBuilder.append(getQualifiedName(parameterTypes[i]));
+		}
+		uriBuilder.append(")");
+		return createURI(uriBuilder);
+	}
+	
+	public URI getFullURI(IBinding binding) {
+		if (binding instanceof ITypeBinding)
+			return getFullURI((ITypeBinding) binding);
+		if (binding instanceof IMethodBinding)
+			return getFullURI((IMethodBinding) binding);
+		if (binding instanceof IVariableBinding)
+			return getFullURI((IVariableBinding) binding);
+		return null;
+	}
+	
+	public URI getFullURI(IJavaElement javaElement) {
+		ASTParser parser = ASTParser.newParser(AST.JLS3);
+		parser.setProject(javaElement.getJavaProject());
+		IBinding[] bindings = parser.createBindings(new IJavaElement[] { javaElement }, null);
+		if (bindings[0] != null) {
+			return getFullURI(bindings[0]);
+		}
+		return null;
 	}
 	
 	public URI getFullURIForClass(String fqn) {
@@ -65,9 +118,7 @@ public class TypeURIHelper implements URIHelperConstants {
 	
 	public URI getFullURI(ITypeBinding typeBinding, String method) {
 		StringBuilder uriBuilder = createURIBuilder();
-		createResourceURI(typeBinding, uriBuilder);
-		uriBuilder.append('#');
-		createFragment(typeBinding, uriBuilder);
+		getFullURI(typeBinding, uriBuilder);
 		uriBuilder.append('.').append(method).append("()");
 		return createURI(uriBuilder);
 	}
