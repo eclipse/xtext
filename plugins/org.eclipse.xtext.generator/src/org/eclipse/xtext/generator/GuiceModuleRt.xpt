@@ -64,7 +64,7 @@ public abstract class «guiceModuleRtGenerated().toSimpleName()» extends DefaultR
 package «guiceModuleRt().toJavaPackage()»;
 
 /**
- * Use this class to register components to be used within the IDE.
+ * Use this class to register components to be used at runtime / without the Equinox extension registry.
  */
 public class «guiceModuleRt().toSimpleName()» extends «guiceModuleRtGenerated()» {
 
