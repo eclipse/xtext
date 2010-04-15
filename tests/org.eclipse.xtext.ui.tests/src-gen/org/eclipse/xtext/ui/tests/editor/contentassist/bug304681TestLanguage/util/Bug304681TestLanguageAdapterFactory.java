@@ -12,9 +12,12 @@ import org.eclipse.emf.common.notify.impl.AdapterFactoryImpl;
 
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribut;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribute;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Bug304681TestLanguagePackage;
+import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.ConstraintDefinition;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Feature;
+import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Model;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.PackageDefinition;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Reference;
 
@@ -82,6 +85,11 @@ public class Bug304681TestLanguageAdapterFactory extends AdapterFactoryImpl
     new Bug304681TestLanguageSwitch<Adapter>()
     {
       @Override
+      public Adapter caseModel(Model object)
+      {
+        return createModelAdapter();
+      }
+      @Override
       public Adapter casePackageDefinition(PackageDefinition object)
       {
         return createPackageDefinitionAdapter();
@@ -107,6 +115,16 @@ public class Bug304681TestLanguageAdapterFactory extends AdapterFactoryImpl
         return createReferenceAdapter();
       }
       @Override
+      public Adapter caseAttribut(Attribut object)
+      {
+        return createAttributAdapter();
+      }
+      @Override
+      public Adapter caseConstraintDefinition(ConstraintDefinition object)
+      {
+        return createConstraintDefinitionAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -127,6 +145,21 @@ public class Bug304681TestLanguageAdapterFactory extends AdapterFactoryImpl
     return modelSwitch.doSwitch((EObject)target);
   }
 
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Model <em>Model</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Model
+   * @generated
+   */
+  public Adapter createModelAdapter()
+  {
+    return null;
+  }
 
   /**
    * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.PackageDefinition <em>Package Definition</em>}'.
@@ -199,6 +232,36 @@ public class Bug304681TestLanguageAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createReferenceAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribut <em>Attribut</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribut
+   * @generated
+   */
+  public Adapter createAttributAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.ConstraintDefinition <em>Constraint Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.ConstraintDefinition
+   * @generated
+   */
+  public Adapter createConstraintDefinitionAdapter()
   {
     return null;
   }

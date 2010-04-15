@@ -29,6 +29,7 @@ import org.eclipse.emf.ecore.EObject;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream;
 import org.eclipse.xtext.parser.antlr.XtextTokenStream.HiddenTokens;
 import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.AbstractInternalContentAssistParser;
+import org.eclipse.xtext.ui.editor.contentassist.antlr.internal.DFA;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.UnorderedGroupsTestLanguageGrammarAccess;
 
 }
@@ -1980,6 +1981,7 @@ finally {
 rule__SimpleModel__UnorderedGroup_0__Impl
 	@init {
 		int stackSize = keepStackSize();
+		boolean selected = false;
     }
 :
 		(
@@ -1988,6 +1990,7 @@ rule__SimpleModel__UnorderedGroup_0__Impl
 				{getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 0)}?=>(
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 0);
+	 				  selected = true;
 	 				}
 					(
 					
@@ -1995,9 +1998,6 @@ rule__SimpleModel__UnorderedGroup_0__Impl
 						(rule__SimpleModel__VisibilityAssignment_0_0)
 						{ after(grammarAccess.getSimpleModelAccess().getVisibilityAssignment_0_0()); }
 					)
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0());
-	 				}
  				)
 			)  |
 
@@ -2005,6 +2005,7 @@ rule__SimpleModel__UnorderedGroup_0__Impl
 				{getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 1)}?=>(
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 1);
+	 				  selected = true;
 	 				}
 					(
 					
@@ -2012,9 +2013,6 @@ rule__SimpleModel__UnorderedGroup_0__Impl
 						(rule__SimpleModel__StaticAssignment_0_1)
 						{ after(grammarAccess.getSimpleModelAccess().getStaticAssignment_0_1()); }
 					)
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0());
-	 				}
  				)
 			)  |
 
@@ -2022,6 +2020,7 @@ rule__SimpleModel__UnorderedGroup_0__Impl
 				{getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 2)}?=>(
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 2);
+	 				  selected = true;
 	 				}
 					(
 					
@@ -2029,9 +2028,6 @@ rule__SimpleModel__UnorderedGroup_0__Impl
 						(rule__SimpleModel__SynchronizedAssignment_0_2)
 						{ after(grammarAccess.getSimpleModelAccess().getSynchronizedAssignment_0_2()); }
 					)
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0());
-	 				}
  				)
 			)  |
 
@@ -2039,6 +2035,7 @@ rule__SimpleModel__UnorderedGroup_0__Impl
 				{getUnorderedGroupHelper().canSelect(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 3)}?=>(
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0(), 3);
+	 				  selected = true;
 	 				}
 					(
 					
@@ -2046,15 +2043,14 @@ rule__SimpleModel__UnorderedGroup_0__Impl
 						(rule__SimpleModel__Alternatives_0_3)
 						{ after(grammarAccess.getSimpleModelAccess().getAlternatives_0_3()); }
 					)
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0());
-	 				}
  				)
 			)  
 
 		)
 ;
 finally {
+	if (selected)
+		getUnorderedGroupHelper().returnFromSelection(grammarAccess.getSimpleModelAccess().getUnorderedGroup_0());
 	restoreStackSize(stackSize);
 }
 
@@ -2138,6 +2134,7 @@ finally {
 rule__MandatoryModel__UnorderedGroup_0__Impl
 	@init {
 		int stackSize = keepStackSize();
+		boolean selected = false;
     }
 :
 		(
@@ -2146,6 +2143,7 @@ rule__MandatoryModel__UnorderedGroup_0__Impl
 				{getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 0)}?=>(
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 0);
+	 				  selected = true;
 	 				}
 					(
 					
@@ -2153,9 +2151,6 @@ rule__MandatoryModel__UnorderedGroup_0__Impl
 						(rule__MandatoryModel__VisibilityAssignment_0_0)
 						{ after(grammarAccess.getMandatoryModelAccess().getVisibilityAssignment_0_0()); }
 					)
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0());
-	 				}
  				)
 			)  |
 
@@ -2163,6 +2158,7 @@ rule__MandatoryModel__UnorderedGroup_0__Impl
 				{getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 1)}?=>(
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 1);
+	 				  selected = true;
 	 				}
 					(
 					
@@ -2170,9 +2166,6 @@ rule__MandatoryModel__UnorderedGroup_0__Impl
 						(rule__MandatoryModel__StaticAssignment_0_1)
 						{ after(grammarAccess.getMandatoryModelAccess().getStaticAssignment_0_1()); }
 					)
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0());
-	 				}
  				)
 			)  |
 
@@ -2180,6 +2173,7 @@ rule__MandatoryModel__UnorderedGroup_0__Impl
 				{getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 2)}?=>(
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 2);
+	 				  selected = true;
 	 				}
 					(
 					
@@ -2187,9 +2181,6 @@ rule__MandatoryModel__UnorderedGroup_0__Impl
 						(rule__MandatoryModel__SynchronizedAssignment_0_2)
 						{ after(grammarAccess.getMandatoryModelAccess().getSynchronizedAssignment_0_2()); }
 					)
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0());
-	 				}
  				)
 			)  |
 
@@ -2197,6 +2188,7 @@ rule__MandatoryModel__UnorderedGroup_0__Impl
 				{getUnorderedGroupHelper().canSelect(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 3)}?=>(
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0(), 3);
+	 				  selected = true;
 	 				}
 					(
 					
@@ -2204,15 +2196,14 @@ rule__MandatoryModel__UnorderedGroup_0__Impl
 						(rule__MandatoryModel__Alternatives_0_3)
 						{ after(grammarAccess.getMandatoryModelAccess().getAlternatives_0_3()); }
 					)
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0());
-	 				}
  				)
 			)  
 
 		)
 ;
 finally {
+	if (selected)
+		getUnorderedGroupHelper().returnFromSelection(grammarAccess.getMandatoryModelAccess().getUnorderedGroup_0());
 	restoreStackSize(stackSize);
 }
 
@@ -2295,6 +2286,7 @@ finally {
 rule__LoopedModel__UnorderedGroup_0__Impl
 	@init {
 		int stackSize = keepStackSize();
+		boolean selected = false;
     }
 :
 		(
@@ -2303,6 +2295,7 @@ rule__LoopedModel__UnorderedGroup_0__Impl
 				{getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 0)}?=>(
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 0);
+	 				  selected = true;
 	 				}
 					(
 					(
@@ -2315,9 +2308,6 @@ rule__LoopedModel__UnorderedGroup_0__Impl
 						(rule__LoopedModel__VisibilityAssignment_0_0)*
 						{ after(grammarAccess.getLoopedModelAccess().getVisibilityAssignment_0_0()); }
 					)					)
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0());
-	 				}
  				)
 			)  |
 
@@ -2325,6 +2315,7 @@ rule__LoopedModel__UnorderedGroup_0__Impl
 				{getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 1)}?=>(
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 1);
+	 				  selected = true;
 	 				}
 					(
 					(
@@ -2337,9 +2328,6 @@ rule__LoopedModel__UnorderedGroup_0__Impl
 						(rule__LoopedModel__StaticAssignment_0_1)*
 						{ after(grammarAccess.getLoopedModelAccess().getStaticAssignment_0_1()); }
 					)					)
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0());
-	 				}
  				)
 			)  |
 
@@ -2347,6 +2335,7 @@ rule__LoopedModel__UnorderedGroup_0__Impl
 				{getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 2)}?=>(
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 2);
+	 				  selected = true;
 	 				}
 					(
 					(
@@ -2359,9 +2348,6 @@ rule__LoopedModel__UnorderedGroup_0__Impl
 						(rule__LoopedModel__SynchronizedAssignment_0_2)*
 						{ after(grammarAccess.getLoopedModelAccess().getSynchronizedAssignment_0_2()); }
 					)					)
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0());
-	 				}
  				)
 			)  |
 
@@ -2369,6 +2355,7 @@ rule__LoopedModel__UnorderedGroup_0__Impl
 				{getUnorderedGroupHelper().canSelect(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 3)}?=>(
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0(), 3);
+	 				  selected = true;
 	 				}
 					(
 					(
@@ -2381,15 +2368,14 @@ rule__LoopedModel__UnorderedGroup_0__Impl
 						(rule__LoopedModel__Alternatives_0_3)*
 						{ after(grammarAccess.getLoopedModelAccess().getAlternatives_0_3()); }
 					)					)
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0());
-	 				}
  				)
 			)  
 
 		)
 ;
 finally {
+	if (selected)
+		getUnorderedGroupHelper().returnFromSelection(grammarAccess.getLoopedModelAccess().getUnorderedGroup_0());
 	restoreStackSize(stackSize);
 }
 
@@ -2473,6 +2459,7 @@ finally {
 rule__GroupLoopedModel__UnorderedGroup_0__Impl
 	@init {
 		int stackSize = keepStackSize();
+		boolean selected = false;
     }
 :
 		(
@@ -2481,6 +2468,7 @@ rule__GroupLoopedModel__UnorderedGroup_0__Impl
 				{getUnorderedGroupHelper().canSelect(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 0)}?=>(
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 0);
+	 				  selected = true;
 	 				}
 					(
 					
@@ -2488,9 +2476,6 @@ rule__GroupLoopedModel__UnorderedGroup_0__Impl
 						(rule__GroupLoopedModel__VisibilityAssignment_0_0)
 						{ after(grammarAccess.getGroupLoopedModelAccess().getVisibilityAssignment_0_0()); }
 					)
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0());
-	 				}
  				)
 			)  |
 
@@ -2498,6 +2483,7 @@ rule__GroupLoopedModel__UnorderedGroup_0__Impl
 				{getUnorderedGroupHelper().canSelect(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 1)}?=>(
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 1);
+	 				  selected = true;
 	 				}
 					(
 					
@@ -2505,9 +2491,6 @@ rule__GroupLoopedModel__UnorderedGroup_0__Impl
 						(rule__GroupLoopedModel__StaticAssignment_0_1)
 						{ after(grammarAccess.getGroupLoopedModelAccess().getStaticAssignment_0_1()); }
 					)
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0());
-	 				}
  				)
 			)  |
 
@@ -2515,6 +2498,7 @@ rule__GroupLoopedModel__UnorderedGroup_0__Impl
 				{getUnorderedGroupHelper().canSelect(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 2)}?=>(
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 2);
+	 				  selected = true;
 	 				}
 					(
 					
@@ -2522,9 +2506,6 @@ rule__GroupLoopedModel__UnorderedGroup_0__Impl
 						(rule__GroupLoopedModel__SynchronizedAssignment_0_2)
 						{ after(grammarAccess.getGroupLoopedModelAccess().getSynchronizedAssignment_0_2()); }
 					)
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0());
-	 				}
  				)
 			)  |
 
@@ -2532,6 +2513,7 @@ rule__GroupLoopedModel__UnorderedGroup_0__Impl
 				{getUnorderedGroupHelper().canSelect(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 3)}?=>(
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0(), 3);
+	 				  selected = true;
 	 				}
 					(
 					
@@ -2539,15 +2521,14 @@ rule__GroupLoopedModel__UnorderedGroup_0__Impl
 						(rule__GroupLoopedModel__Alternatives_0_3)
 						{ after(grammarAccess.getGroupLoopedModelAccess().getAlternatives_0_3()); }
 					)
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0());
-	 				}
  				)
 			)  
 
 		)
 ;
 finally {
+	if (selected)
+		getUnorderedGroupHelper().returnFromSelection(grammarAccess.getGroupLoopedModelAccess().getUnorderedGroup_0());
 	restoreStackSize(stackSize);
 }
 
@@ -2630,6 +2611,7 @@ finally {
 rule__Bug304681Model__UnorderedGroup_1__Impl
 	@init {
 		int stackSize = keepStackSize();
+		boolean selected = false;
     }
 :
 		(
@@ -2638,6 +2620,7 @@ rule__Bug304681Model__UnorderedGroup_1__Impl
 				{getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 0)}?=>(
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 0);
+	 				  selected = true;
 	 				}
 					(
 					
@@ -2645,9 +2628,6 @@ rule__Bug304681Model__UnorderedGroup_1__Impl
 						(rule__Bug304681Model__Group_1_0__0)
 						{ after(grammarAccess.getBug304681ModelAccess().getGroup_1_0()); }
 					)
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1());
-	 				}
  				)
 			)  |
 
@@ -2655,6 +2635,7 @@ rule__Bug304681Model__UnorderedGroup_1__Impl
 				{getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 1)}?=>(
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 1);
+	 				  selected = true;
 	 				}
 					(
 					
@@ -2662,9 +2643,6 @@ rule__Bug304681Model__UnorderedGroup_1__Impl
 						(rule__Bug304681Model__Group_1_1__0)
 						{ after(grammarAccess.getBug304681ModelAccess().getGroup_1_1()); }
 					)
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1());
-	 				}
  				)
 			)  |
 
@@ -2672,6 +2650,7 @@ rule__Bug304681Model__UnorderedGroup_1__Impl
 				{getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 2)}?=>(
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 2);
+	 				  selected = true;
 	 				}
 					(
 					
@@ -2679,9 +2658,6 @@ rule__Bug304681Model__UnorderedGroup_1__Impl
 						(rule__Bug304681Model__Group_1_2__0)
 						{ after(grammarAccess.getBug304681ModelAccess().getGroup_1_2()); }
 					)
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1());
-	 				}
  				)
 			)  |
 
@@ -2689,6 +2665,7 @@ rule__Bug304681Model__UnorderedGroup_1__Impl
 				{getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 3)}?=>(
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 3);
+	 				  selected = true;
 	 				}
 					(
 					
@@ -2696,9 +2673,6 @@ rule__Bug304681Model__UnorderedGroup_1__Impl
 						(rule__Bug304681Model__Group_1_3__0)
 						{ after(grammarAccess.getBug304681ModelAccess().getGroup_1_3()); }
 					)
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1());
-	 				}
  				)
 			)  |
 
@@ -2706,6 +2680,7 @@ rule__Bug304681Model__UnorderedGroup_1__Impl
 				{getUnorderedGroupHelper().canSelect(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 4)}?=>(
 					{ 
 	 				  getUnorderedGroupHelper().select(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1(), 4);
+	 				  selected = true;
 	 				}
 					(
 					(
@@ -2718,15 +2693,14 @@ rule__Bug304681Model__UnorderedGroup_1__Impl
 						(rule__Bug304681Model__FeaturesAssignment_1_4)*
 						{ after(grammarAccess.getBug304681ModelAccess().getFeaturesAssignment_1_4()); }
 					)					)
-					{ 
-	 				  getUnorderedGroupHelper().returnFromSelection(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1());
-	 				}
  				)
 			)  
 
 		)
 ;
 finally {
+	if (selected)
+		getUnorderedGroupHelper().returnFromSelection(grammarAccess.getBug304681ModelAccess().getUnorderedGroup_1());
 	restoreStackSize(stackSize);
 }
 

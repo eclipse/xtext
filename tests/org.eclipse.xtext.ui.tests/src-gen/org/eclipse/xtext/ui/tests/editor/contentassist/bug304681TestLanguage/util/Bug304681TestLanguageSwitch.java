@@ -10,9 +10,12 @@ import java.util.List;
 import org.eclipse.emf.ecore.EClass;
 import org.eclipse.emf.ecore.EObject;
 
+import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribut;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribute;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Bug304681TestLanguagePackage;
+import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.ConstraintDefinition;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Feature;
+import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Model;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.PackageDefinition;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Reference;
 
@@ -99,6 +102,13 @@ public class Bug304681TestLanguageSwitch<T>
   {
     switch (classifierID)
     {
+      case Bug304681TestLanguagePackage.MODEL:
+      {
+        Model model = (Model)theEObject;
+        T result = caseModel(model);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       case Bug304681TestLanguagePackage.PACKAGE_DEFINITION:
       {
         PackageDefinition packageDefinition = (PackageDefinition)theEObject;
@@ -136,8 +146,39 @@ public class Bug304681TestLanguageSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case Bug304681TestLanguagePackage.ATTRIBUT:
+      {
+        Attribut attribut = (Attribut)theEObject;
+        T result = caseAttribut(attribut);
+        if (result == null) result = caseFeature(attribut);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case Bug304681TestLanguagePackage.CONSTRAINT_DEFINITION:
+      {
+        ConstraintDefinition constraintDefinition = (ConstraintDefinition)theEObject;
+        T result = caseConstraintDefinition(constraintDefinition);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Model</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Model</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseModel(Model object)
+  {
+    return null;
   }
 
   /**
@@ -216,6 +257,38 @@ public class Bug304681TestLanguageSwitch<T>
    * @generated
    */
   public T caseReference(Reference object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Attribut</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Attribut</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAttribut(Attribut object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Constraint Definition</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Constraint Definition</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseConstraintDefinition(ConstraintDefinition object)
   {
     return null;
   }

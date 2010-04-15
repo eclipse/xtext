@@ -42,7 +42,7 @@ public class Bug304681TestLanguageParser extends org.eclipse.xtext.parser.antlr.
 	
 	@Override 
 	protected String getDefaultRuleName() {
-		return "PackageDefinition";
+		return "Model";
 	}
 	
 	public Bug304681TestLanguageGrammarAccess getGrammarAccess() {

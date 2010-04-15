@@ -12,10 +12,13 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribut;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribute;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Bug304681TestLanguageFactory;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Bug304681TestLanguagePackage;
+import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.ConstraintDefinition;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Feature;
+import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Model;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.PackageDefinition;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Reference;
 
@@ -27,6 +30,13 @@ import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Ref
  */
 public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bug304681TestLanguagePackage
 {
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass modelEClass = null;
+
   /**
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -61,6 +71,20 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * @generated
    */
   private EClass referenceEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass attributEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass constraintDefinitionEClass = null;
 
   /**
    * Creates an instance of the model <b>Package</b>, registered with
@@ -123,6 +147,26 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
     // Update the registry and return the package
     EPackage.Registry.INSTANCE.put(Bug304681TestLanguagePackage.eNS_URI, theBug304681TestLanguagePackage);
     return theBug304681TestLanguagePackage;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getModel()
+  {
+    return modelEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getModel_Definition()
+  {
+    return (EReference)modelEClass.getEStructuralFeatures().get(0);
   }
 
   /**
@@ -350,6 +394,116 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getAttribut()
+  {
+    return attributEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAttribut_Type()
+  {
+    return (EAttribute)attributEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAttribut_ShortDescription()
+  {
+    return (EAttribute)attributEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAttribut_LongDescription()
+  {
+    return (EAttribute)attributEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAttribut_ConstraintDefinitions()
+  {
+    return (EReference)attributEClass.getEStructuralFeatures().get(3);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAttribut_Required()
+  {
+    return (EAttribute)attributEClass.getEStructuralFeatures().get(4);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAttribut_Technical()
+  {
+    return (EAttribute)attributEClass.getEStructuralFeatures().get(5);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getConstraintDefinition()
+  {
+    return constraintDefinitionEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getConstraintDefinition_Type()
+  {
+    return (EAttribute)constraintDefinitionEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getConstraintDefinition_Parameters()
+  {
+    return (EAttribute)constraintDefinitionEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getConstraintDefinition_Message()
+  {
+    return (EAttribute)constraintDefinitionEClass.getEStructuralFeatures().get(2);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public Bug304681TestLanguageFactory getBug304681TestLanguageFactory()
   {
     return (Bug304681TestLanguageFactory)getEFactoryInstance();
@@ -375,6 +529,9 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
     isCreated = true;
 
     // Create classes and their features
+    modelEClass = createEClass(MODEL);
+    createEReference(modelEClass, MODEL__DEFINITION);
+
     packageDefinitionEClass = createEClass(PACKAGE_DEFINITION);
     createEAttribute(packageDefinitionEClass, PACKAGE_DEFINITION__NAMESPACE);
     createEReference(packageDefinitionEClass, PACKAGE_DEFINITION__CONTENTS);
@@ -401,6 +558,19 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
     createEAttribute(referenceEClass, REFERENCE__MANY);
     createEAttribute(referenceEClass, REFERENCE__SHORT_DESCRIPTION);
     createEAttribute(referenceEClass, REFERENCE__LONG_DESCRIPTION);
+
+    attributEClass = createEClass(ATTRIBUT);
+    createEAttribute(attributEClass, ATTRIBUT__TYPE);
+    createEAttribute(attributEClass, ATTRIBUT__SHORT_DESCRIPTION);
+    createEAttribute(attributEClass, ATTRIBUT__LONG_DESCRIPTION);
+    createEReference(attributEClass, ATTRIBUT__CONSTRAINT_DEFINITIONS);
+    createEAttribute(attributEClass, ATTRIBUT__REQUIRED);
+    createEAttribute(attributEClass, ATTRIBUT__TECHNICAL);
+
+    constraintDefinitionEClass = createEClass(CONSTRAINT_DEFINITION);
+    createEAttribute(constraintDefinitionEClass, CONSTRAINT_DEFINITION__TYPE);
+    createEAttribute(constraintDefinitionEClass, CONSTRAINT_DEFINITION__PARAMETERS);
+    createEAttribute(constraintDefinitionEClass, CONSTRAINT_DEFINITION__MESSAGE);
   }
 
   /**
@@ -434,8 +604,12 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
     // Add supertypes to classes
     attributeEClass.getESuperTypes().add(this.getFeature());
     referenceEClass.getESuperTypes().add(this.getFeature());
+    attributEClass.getESuperTypes().add(this.getFeature());
 
     // Initialize classes and features; add operations and parameters
+    initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getModel_Definition(), this.getPackageDefinition(), null, "definition", null, 0, 1, Model.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
     initEClass(packageDefinitionEClass, PackageDefinition.class, "PackageDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getPackageDefinition_Namespace(), ecorePackage.getEString(), "namespace", null, 0, 1, PackageDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEReference(getPackageDefinition_Contents(), this.getObject(), null, "contents", null, 0, -1, PackageDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
@@ -462,6 +636,19 @@ public class Bug304681TestLanguagePackageImpl extends EPackageImpl implements Bu
     initEAttribute(getReference_Many(), ecorePackage.getEBoolean(), "many", null, 0, 1, Reference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getReference_ShortDescription(), ecorePackage.getEString(), "shortDescription", null, 0, 1, Reference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
     initEAttribute(getReference_LongDescription(), ecorePackage.getEString(), "longDescription", null, 0, 1, Reference.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(attributEClass, Attribut.class, "Attribut", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAttribut_Type(), ecorePackage.getEString(), "type", null, 0, 1, Attribut.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAttribut_ShortDescription(), ecorePackage.getEString(), "shortDescription", null, 0, 1, Attribut.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAttribut_LongDescription(), ecorePackage.getEString(), "longDescription", null, 0, 1, Attribut.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getAttribut_ConstraintDefinitions(), this.getConstraintDefinition(), null, "constraintDefinitions", null, 0, -1, Attribut.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAttribut_Required(), ecorePackage.getEBoolean(), "required", null, 0, 1, Attribut.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getAttribut_Technical(), ecorePackage.getEBoolean(), "technical", null, 0, 1, Attribut.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(constraintDefinitionEClass, ConstraintDefinition.class, "ConstraintDefinition", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getConstraintDefinition_Type(), ecorePackage.getEString(), "type", null, 0, 1, ConstraintDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getConstraintDefinition_Parameters(), ecorePackage.getEString(), "parameters", null, 0, -1, ConstraintDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, !IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEAttribute(getConstraintDefinition_Message(), ecorePackage.getEString(), "message", null, 0, 1, ConstraintDefinition.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Create resource
     createResource(eNS_URI);

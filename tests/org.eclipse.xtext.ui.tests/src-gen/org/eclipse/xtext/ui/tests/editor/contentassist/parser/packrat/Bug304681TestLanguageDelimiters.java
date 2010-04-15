@@ -13,19 +13,22 @@ public final class Bug304681TestLanguageDelimiters {
 		throw new UnsupportedOperationException("Utility classes may not be initialized");
 	}
 	
-	public static final ICharacterClass keyword$10$Delimiter = ICharacterClass.Factory.nullClass();
+	public static final ICharacterClass keyword$6$Delimiter = ICharacterClass.Factory.nullClass();
 
     
-	public static final ICharacterClass keyword$7$Delimiter = ICharacterClass.Factory.join(
+	public static final ICharacterClass keyword$18$Delimiter = ICharacterClass.Factory.join(
 			ICharacterClass.Factory.createRange('a', 'z'),
 			ICharacterClass.Factory.createRange('A', 'Z'),
 			ICharacterClass.Factory.create('_'),
 			ICharacterClass.Factory.createRange('0', '9')
 	);
 
-	public static final ISequenceMatcher ruleCall$9$Delimiter = new SetBasedKeywordMatcher(
-		"package", "enabled", "abstract", "object", "extends", "shortDescription", "longDescription", "serialUID", "cloneable", "before", "after", "optionalLoop", "mandatoryLoop", "Attribute", "Reference");
+	public static final ISequenceMatcher ruleCall$20$Delimiter = new SetBasedKeywordMatcher(
+		"package", "enabled", "abstract", "object", "extends", "shortDescription", "longDescription", "serialUID", "cloneable", "before", "after", "optionalLoop", "mandatoryLoop", "Attribute", "Reference", "required", "technical", "constraint", "parameters", "message");
 
-	public static final ISequenceMatcher ruleCall$35$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+	public static final ISequenceMatcher ruleCall$46$Delimiter = ISequenceMatcher.Factory.nullMatcher();
+
+	public static final ISequenceMatcher ruleCall$56$Delimiter = new SetBasedKeywordMatcher(
+		"1", "2");
 
 }

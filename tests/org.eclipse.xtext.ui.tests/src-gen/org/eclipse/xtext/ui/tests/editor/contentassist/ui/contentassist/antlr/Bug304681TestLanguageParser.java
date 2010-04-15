@@ -37,9 +37,16 @@ public class Bug304681TestLanguageParser extends AbstractContentAssistParser {
 			nameMappings = new HashMap<AbstractElement, String>() {
 				private static final long serialVersionUID = 1L;
 				{
+					put(grammarAccess.getModelAccess().getAlternatives(), "rule__Model__Alternatives");
 					put(grammarAccess.getObjectAccess().getAlternatives_0(), "rule__Object__Alternatives_0");
 					put(grammarAccess.getFeatureAccess().getAlternatives(), "rule__Feature__Alternatives");
 					put(grammarAccess.getReferenceAccess().getAlternatives_4(), "rule__Reference__Alternatives_4");
+					put(grammarAccess.getObject2Access().getAlternatives_0(), "rule__Object2__Alternatives_0");
+					put(grammarAccess.getFeature2Access().getAlternatives(), "rule__Feature2__Alternatives");
+					put(grammarAccess.getAttribute2Access().getAlternatives_3(), "rule__Attribute2__Alternatives_3");
+					put(grammarAccess.getReference2Access().getAlternatives_4(), "rule__Reference2__Alternatives_4");
+					put(grammarAccess.getModelAccess().getGroup_0(), "rule__Model__Group_0__0");
+					put(grammarAccess.getModelAccess().getGroup_1(), "rule__Model__Group_1__0");
 					put(grammarAccess.getPackageDefinitionAccess().getGroup(), "rule__PackageDefinition__Group__0");
 					put(grammarAccess.getObjectAccess().getGroup(), "rule__Object__Group__0");
 					put(grammarAccess.getObjectAccess().getGroup_3(), "rule__Object__Group_3__0");
@@ -55,6 +62,28 @@ public class Bug304681TestLanguageParser extends AbstractContentAssistParser {
 					put(grammarAccess.getReferenceAccess().getGroup_4_0(), "rule__Reference__Group_4_0__0");
 					put(grammarAccess.getReferenceAccess().getGroup_4_0_1_0(), "rule__Reference__Group_4_0_1_0__0");
 					put(grammarAccess.getReferenceAccess().getGroup_4_0_1_1(), "rule__Reference__Group_4_0_1_1__0");
+					put(grammarAccess.getPackageDefinition2Access().getGroup(), "rule__PackageDefinition2__Group__0");
+					put(grammarAccess.getObject2Access().getGroup(), "rule__Object2__Group__0");
+					put(grammarAccess.getObject2Access().getGroup_3(), "rule__Object2__Group_3__0");
+					put(grammarAccess.getObject2Access().getGroup_5_0(), "rule__Object2__Group_5_0__0");
+					put(grammarAccess.getObject2Access().getGroup_5_1(), "rule__Object2__Group_5_1__0");
+					put(grammarAccess.getObject2Access().getGroup_5_2(), "rule__Object2__Group_5_2__0");
+					put(grammarAccess.getObject2Access().getGroup_5_3(), "rule__Object2__Group_5_3__0");
+					put(grammarAccess.getAttribute2Access().getGroup(), "rule__Attribute2__Group__0");
+					put(grammarAccess.getAttribute2Access().getGroup_3_0(), "rule__Attribute2__Group_3_0__0");
+					put(grammarAccess.getAttribute2Access().getGroup_3_0_1_0(), "rule__Attribute2__Group_3_0_1_0__0");
+					put(grammarAccess.getAttribute2Access().getGroup_3_0_1_1(), "rule__Attribute2__Group_3_0_1_1__0");
+					put(grammarAccess.getAttribute2Access().getGroup_3_0_1_3(), "rule__Attribute2__Group_3_0_1_3__0");
+					put(grammarAccess.getAttribute2Access().getGroup_3_0_1_4(), "rule__Attribute2__Group_3_0_1_4__0");
+					put(grammarAccess.getReference2Access().getGroup(), "rule__Reference2__Group__0");
+					put(grammarAccess.getReference2Access().getGroup_4_0(), "rule__Reference2__Group_4_0__0");
+					put(grammarAccess.getReference2Access().getGroup_4_0_1_0(), "rule__Reference2__Group_4_0_1_0__0");
+					put(grammarAccess.getReference2Access().getGroup_4_0_1_1(), "rule__Reference2__Group_4_0_1_1__0");
+					put(grammarAccess.getConstraintDefinitionAccess().getGroup(), "rule__ConstraintDefinition__Group__0");
+					put(grammarAccess.getConstraintDefinitionAccess().getGroup_3_0(), "rule__ConstraintDefinition__Group_3_0__0");
+					put(grammarAccess.getConstraintDefinitionAccess().getGroup_3_1(), "rule__ConstraintDefinition__Group_3_1__0");
+					put(grammarAccess.getModelAccess().getDefinitionAssignment_0_1(), "rule__Model__DefinitionAssignment_0_1");
+					put(grammarAccess.getModelAccess().getDefinitionAssignment_1_1(), "rule__Model__DefinitionAssignment_1_1");
 					put(grammarAccess.getPackageDefinitionAccess().getNamespaceAssignment_2(), "rule__PackageDefinition__NamespaceAssignment_2");
 					put(grammarAccess.getPackageDefinitionAccess().getContentsAssignment_4(), "rule__PackageDefinition__ContentsAssignment_4");
 					put(grammarAccess.getObjectAccess().getEnabledAssignment_0_0(), "rule__Object__EnabledAssignment_0_0");
@@ -76,8 +105,38 @@ public class Bug304681TestLanguageParser extends AbstractContentAssistParser {
 					put(grammarAccess.getReferenceAccess().getNameAssignment_3(), "rule__Reference__NameAssignment_3");
 					put(grammarAccess.getReferenceAccess().getShortDescriptionAssignment_4_0_1_0_1(), "rule__Reference__ShortDescriptionAssignment_4_0_1_0_1");
 					put(grammarAccess.getReferenceAccess().getLongDescriptionAssignment_4_0_1_1_1(), "rule__Reference__LongDescriptionAssignment_4_0_1_1_1");
+					put(grammarAccess.getPackageDefinition2Access().getNamespaceAssignment_2(), "rule__PackageDefinition2__NamespaceAssignment_2");
+					put(grammarAccess.getPackageDefinition2Access().getContentsAssignment_4(), "rule__PackageDefinition2__ContentsAssignment_4");
+					put(grammarAccess.getObject2Access().getEnabledAssignment_0_0(), "rule__Object2__EnabledAssignment_0_0");
+					put(grammarAccess.getObject2Access().getAbstractAssignment_0_1(), "rule__Object2__AbstractAssignment_0_1");
+					put(grammarAccess.getObject2Access().getNameAssignment_2(), "rule__Object2__NameAssignment_2");
+					put(grammarAccess.getObject2Access().getParentAssignment_3_1(), "rule__Object2__ParentAssignment_3_1");
+					put(grammarAccess.getObject2Access().getShortDescriptionAssignment_5_0_1(), "rule__Object2__ShortDescriptionAssignment_5_0_1");
+					put(grammarAccess.getObject2Access().getLongDescriptionAssignment_5_1_1(), "rule__Object2__LongDescriptionAssignment_5_1_1");
+					put(grammarAccess.getObject2Access().getSerialVersionUIDAssignment_5_2_1(), "rule__Object2__SerialVersionUIDAssignment_5_2_1");
+					put(grammarAccess.getObject2Access().getCloneableAssignment_5_3_0(), "rule__Object2__CloneableAssignment_5_3_0");
+					put(grammarAccess.getObject2Access().getFeaturesAssignment_5_4(), "rule__Object2__FeaturesAssignment_5_4");
+					put(grammarAccess.getAttribute2Access().getTypeAssignment_1(), "rule__Attribute2__TypeAssignment_1");
+					put(grammarAccess.getAttribute2Access().getNameAssignment_2(), "rule__Attribute2__NameAssignment_2");
+					put(grammarAccess.getAttribute2Access().getShortDescriptionAssignment_3_0_1_0_1(), "rule__Attribute2__ShortDescriptionAssignment_3_0_1_0_1");
+					put(grammarAccess.getAttribute2Access().getLongDescriptionAssignment_3_0_1_1_1(), "rule__Attribute2__LongDescriptionAssignment_3_0_1_1_1");
+					put(grammarAccess.getAttribute2Access().getConstraintDefinitionsAssignment_3_0_1_2(), "rule__Attribute2__ConstraintDefinitionsAssignment_3_0_1_2");
+					put(grammarAccess.getAttribute2Access().getRequiredAssignment_3_0_1_3_0(), "rule__Attribute2__RequiredAssignment_3_0_1_3_0");
+					put(grammarAccess.getAttribute2Access().getTechnicalAssignment_3_0_1_4_0(), "rule__Attribute2__TechnicalAssignment_3_0_1_4_0");
+					put(grammarAccess.getReference2Access().getTypeAssignment_1(), "rule__Reference2__TypeAssignment_1");
+					put(grammarAccess.getReference2Access().getManyAssignment_2(), "rule__Reference2__ManyAssignment_2");
+					put(grammarAccess.getReference2Access().getNameAssignment_3(), "rule__Reference2__NameAssignment_3");
+					put(grammarAccess.getReference2Access().getShortDescriptionAssignment_4_0_1_0_1(), "rule__Reference2__ShortDescriptionAssignment_4_0_1_0_1");
+					put(grammarAccess.getReference2Access().getLongDescriptionAssignment_4_0_1_1_1(), "rule__Reference2__LongDescriptionAssignment_4_0_1_1_1");
+					put(grammarAccess.getConstraintDefinitionAccess().getTypeAssignment_1(), "rule__ConstraintDefinition__TypeAssignment_1");
+					put(grammarAccess.getConstraintDefinitionAccess().getParametersAssignment_3_0_1(), "rule__ConstraintDefinition__ParametersAssignment_3_0_1");
+					put(grammarAccess.getConstraintDefinitionAccess().getMessageAssignment_3_1_1(), "rule__ConstraintDefinition__MessageAssignment_3_1_1");
 					put(grammarAccess.getObjectAccess().getUnorderedGroup_5(), "rule__Object__UnorderedGroup_5");
 					put(grammarAccess.getReferenceAccess().getUnorderedGroup_4_0_1(), "rule__Reference__UnorderedGroup_4_0_1");
+					put(grammarAccess.getObject2Access().getUnorderedGroup_5(), "rule__Object2__UnorderedGroup_5");
+					put(grammarAccess.getAttribute2Access().getUnorderedGroup_3_0_1(), "rule__Attribute2__UnorderedGroup_3_0_1");
+					put(grammarAccess.getReference2Access().getUnorderedGroup_4_0_1(), "rule__Reference2__UnorderedGroup_4_0_1");
+					put(grammarAccess.getConstraintDefinitionAccess().getUnorderedGroup_3(), "rule__ConstraintDefinition__UnorderedGroup_3");
 				}
 			};
 		}
@@ -88,7 +147,7 @@ public class Bug304681TestLanguageParser extends AbstractContentAssistParser {
 	protected Collection<FollowElement> getFollowElements(AbstractInternalContentAssistParser parser) {
 		try {
 			org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.internal.InternalBug304681TestLanguageParser typedParser = (org.eclipse.xtext.ui.tests.editor.contentassist.ui.contentassist.antlr.internal.InternalBug304681TestLanguageParser) parser;
-			typedParser.entryRulePackageDefinition();
+			typedParser.entryRuleModel();
 			return typedParser.getFollowElements();
 		} catch(RecognitionException ex) {
 			throw new RuntimeException(ex);

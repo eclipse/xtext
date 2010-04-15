@@ -9,11 +9,18 @@ import org.eclipse.xtext.parser.packrat.consumers.ITerminalConsumer;
 import org.eclipse.xtext.ui.tests.editor.contentassist.services.Bug304681TestLanguageGrammarAccess;
 
 import org.eclipse.xtext.common.parser.packrat.TerminalsParserConfiguration; 
+import org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.consumers.Bug304681TestLanguageModelConsumer;
 import org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.consumers.Bug304681TestLanguagePackageDefinitionConsumer;
 import org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.consumers.Bug304681TestLanguageObjectConsumer;
 import org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.consumers.Bug304681TestLanguageFeatureConsumer;
 import org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.consumers.Bug304681TestLanguageAttributeConsumer;
 import org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.consumers.Bug304681TestLanguageReferenceConsumer;
+import org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.consumers.Bug304681TestLanguagePackageDefinition2Consumer;
+import org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.consumers.Bug304681TestLanguageObject2Consumer;
+import org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.consumers.Bug304681TestLanguageFeature2Consumer;
+import org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.consumers.Bug304681TestLanguageAttribute2Consumer;
+import org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.consumers.Bug304681TestLanguageReference2Consumer;
+import org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.consumers.Bug304681TestLanguageConstraintDefinitionConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsIDConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsINTConsumer;
 import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsSTRINGConsumer;
@@ -25,11 +32,18 @@ import org.eclipse.xtext.common.parser.packrat.consumers.TerminalsANY_OTHERConsu
 public class Bug304681TestLanguageParserConfiguration extends AbstractParserConfiguration {
 
 	private final TerminalsParserConfiguration terminalsConfiguration; 
+    private Bug304681TestLanguageModelConsumer modelConsumer;
     private Bug304681TestLanguagePackageDefinitionConsumer packageDefinitionConsumer;
     private Bug304681TestLanguageObjectConsumer objectConsumer;
     private Bug304681TestLanguageFeatureConsumer featureConsumer;
     private Bug304681TestLanguageAttributeConsumer attributeConsumer;
     private Bug304681TestLanguageReferenceConsumer referenceConsumer;
+    private Bug304681TestLanguagePackageDefinition2Consumer packageDefinition2Consumer;
+    private Bug304681TestLanguageObject2Consumer object2Consumer;
+    private Bug304681TestLanguageFeature2Consumer feature2Consumer;
+    private Bug304681TestLanguageAttribute2Consumer attribute2Consumer;
+    private Bug304681TestLanguageReference2Consumer reference2Consumer;
+    private Bug304681TestLanguageConstraintDefinitionConsumer constraintDefinitionConsumer;
 
 	private Bug304681TestLanguageGrammarAccess grammarAccess;
 
@@ -39,12 +53,15 @@ public class Bug304681TestLanguageParserConfiguration extends AbstractParserConf
 		this.terminalsConfiguration = new TerminalsParserConfiguration(configuration, null);
 	}
 
-	public Bug304681TestLanguagePackageDefinitionConsumer getRootConsumer() {
-		return packageDefinitionConsumer;
+	public Bug304681TestLanguageModelConsumer getRootConsumer() {
+		return modelConsumer;
 	} 
 
 	public void createNonTerminalConsumers() {
 		getTerminalsConfiguration().createNonTerminalConsumers();
+		modelConsumer = new Bug304681TestLanguageModelConsumer(
+    		this, null
+    	);
 		packageDefinitionConsumer = new Bug304681TestLanguagePackageDefinitionConsumer(
     		this, null
     	);
@@ -60,6 +77,24 @@ public class Bug304681TestLanguageParserConfiguration extends AbstractParserConf
 		referenceConsumer = new Bug304681TestLanguageReferenceConsumer(
     		this, null
     	);
+		packageDefinition2Consumer = new Bug304681TestLanguagePackageDefinition2Consumer(
+    		this, null
+    	);
+		object2Consumer = new Bug304681TestLanguageObject2Consumer(
+    		this, null
+    	);
+		feature2Consumer = new Bug304681TestLanguageFeature2Consumer(
+    		this, null
+    	);
+		attribute2Consumer = new Bug304681TestLanguageAttribute2Consumer(
+    		this, null
+    	);
+		reference2Consumer = new Bug304681TestLanguageReference2Consumer(
+    		this, null
+    	);
+		constraintDefinitionConsumer = new Bug304681TestLanguageConstraintDefinitionConsumer(
+    		this, null
+    	);
 	}
 	
 	public void createTerminalConsumers() {
@@ -69,11 +104,18 @@ public class Bug304681TestLanguageParserConfiguration extends AbstractParserConf
 	public void configureConsumers() {
 		if (grammarAccess == null)
 			throw new NullPointerException("grammarAccess may not be null, you call configureConsumers");
+		getModelConsumer().setRule(grammarAccess.getModelAccess());
 		getPackageDefinitionConsumer().setRule(grammarAccess.getPackageDefinitionAccess());
 		getObjectConsumer().setRule(grammarAccess.getObjectAccess());
 		getFeatureConsumer().setRule(grammarAccess.getFeatureAccess());
 		getAttributeConsumer().setRule(grammarAccess.getAttributeAccess());
 		getReferenceConsumer().setRule(grammarAccess.getReferenceAccess());
+		getPackageDefinition2Consumer().setRule(grammarAccess.getPackageDefinition2Access());
+		getObject2Consumer().setRule(grammarAccess.getObject2Access());
+		getFeature2Consumer().setRule(grammarAccess.getFeature2Access());
+		getAttribute2Consumer().setRule(grammarAccess.getAttribute2Access());
+		getReference2Consumer().setRule(grammarAccess.getReference2Access());
+		getConstraintDefinitionConsumer().setRule(grammarAccess.getConstraintDefinitionAccess());
 		getIdConsumer().setRule(grammarAccess.getIDRule());
 		getIntConsumer().setRule(grammarAccess.getINTRule());
 		getStringConsumer().setRule(grammarAccess.getSTRINGRule());
@@ -82,6 +124,9 @@ public class Bug304681TestLanguageParserConfiguration extends AbstractParserConf
 		getWsConsumer().setRule(grammarAccess.getWSRule());
 		getAnyOtherConsumer().setRule(grammarAccess.getANY_OTHERRule());
 
+
+		getModelConsumer().setPackageDefinition2Consumer(getPackageDefinition2Consumer());
+		getModelConsumer().setPackageDefinitionConsumer(getPackageDefinitionConsumer());
 
 		getPackageDefinitionConsumer().setIdConsumer(getIdConsumer());
 		getPackageDefinitionConsumer().setObjectConsumer(getObjectConsumer());
@@ -99,55 +144,143 @@ public class Bug304681TestLanguageParserConfiguration extends AbstractParserConf
 		getReferenceConsumer().setIdConsumer(getIdConsumer());
 		getReferenceConsumer().setStringConsumer(getStringConsumer());
 
-		getPackageDefinitionConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$10$Delimiter);
-		getPackageDefinitionConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$7$Delimiter);
-		getPackageDefinitionConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$9$Delimiter);
-		getObjectConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$7$Delimiter);
-		getObjectConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$7$Delimiter);
-		getObjectConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$7$Delimiter);
-		getObjectConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$7$Delimiter);
-		getObjectConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$10$Delimiter);
-		getObjectConsumer().setKeyword$19$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$7$Delimiter);
-		getObjectConsumer().setKeyword$22$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$10$Delimiter);
-		getObjectConsumer().setKeyword$24$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$7$Delimiter);
-		getObjectConsumer().setKeyword$27$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$10$Delimiter);
-		getObjectConsumer().setKeyword$29$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$7$Delimiter);
-		getObjectConsumer().setKeyword$32$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$10$Delimiter);
-		getObjectConsumer().setKeyword$35$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$7$Delimiter);
-		getObjectConsumer().setKeyword$36$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$10$Delimiter);
-		getObjectConsumer().setKeyword$40$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$7$Delimiter);
-		getObjectConsumer().setKeyword$43$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$7$Delimiter);
-		getObjectConsumer().setKeyword$45$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$7$Delimiter);
-		getObjectConsumer().setKeyword$49$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$7$Delimiter);
-		getObjectConsumer().setKeyword$52$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$10$Delimiter);
-		getObjectConsumer().setRuleCall$9$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$9$Delimiter);
-		getObjectConsumer().setRuleCall$15$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$9$Delimiter);
-		getObjectConsumer().setRuleCall$21$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$35$Delimiter);
-		getObjectConsumer().setRuleCall$26$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$35$Delimiter);
-		getObjectConsumer().setRuleCall$31$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$35$Delimiter);
-		getAttributeConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$7$Delimiter);
-		getAttributeConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$10$Delimiter);
-		getAttributeConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$9$Delimiter);
-		getAttributeConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$9$Delimiter);
-		getReferenceConsumer().setKeyword$19$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$10$Delimiter);
-		getReferenceConsumer().setKeyword$21$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$7$Delimiter);
-		getReferenceConsumer().setKeyword$24$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$10$Delimiter);
-		getReferenceConsumer().setKeyword$25$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$10$Delimiter);
-		getReferenceConsumer().setKeyword$26$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$10$Delimiter);
-		getReferenceConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$7$Delimiter);
-		getReferenceConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$10$Delimiter);
-		getReferenceConsumer().setKeyword$13$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$10$Delimiter);
-		getReferenceConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$7$Delimiter);
-		getReferenceConsumer().setRuleCall$18$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$35$Delimiter);
-		getReferenceConsumer().setRuleCall$23$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$35$Delimiter);
-		getReferenceConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$9$Delimiter);
-		getReferenceConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$9$Delimiter);
+		getPackageDefinition2Consumer().setIdConsumer(getIdConsumer());
+		getPackageDefinition2Consumer().setObject2Consumer(getObject2Consumer());
+
+		getObject2Consumer().setFeature2Consumer(getFeature2Consumer());
+		getObject2Consumer().setIdConsumer(getIdConsumer());
+		getObject2Consumer().setIntConsumer(getIntConsumer());
+		getObject2Consumer().setStringConsumer(getStringConsumer());
+
+		getFeature2Consumer().setAttribute2Consumer(getAttribute2Consumer());
+		getFeature2Consumer().setReference2Consumer(getReference2Consumer());
+
+		getAttribute2Consumer().setConstraintDefinitionConsumer(getConstraintDefinitionConsumer());
+		getAttribute2Consumer().setIdConsumer(getIdConsumer());
+		getAttribute2Consumer().setStringConsumer(getStringConsumer());
+
+		getReference2Consumer().setIdConsumer(getIdConsumer());
+		getReference2Consumer().setStringConsumer(getStringConsumer());
+
+		getConstraintDefinitionConsumer().setIdConsumer(getIdConsumer());
+		getConstraintDefinitionConsumer().setStringConsumer(getStringConsumer());
+
+		getModelConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getModelConsumer().setKeyword$3$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getPackageDefinitionConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getPackageDefinitionConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getPackageDefinitionConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$20$Delimiter);
+		getObjectConsumer().setKeyword$4$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getObjectConsumer().setKeyword$6$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getObjectConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getObjectConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getObjectConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getObjectConsumer().setKeyword$19$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getObjectConsumer().setKeyword$22$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getObjectConsumer().setKeyword$24$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getObjectConsumer().setKeyword$27$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getObjectConsumer().setKeyword$29$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getObjectConsumer().setKeyword$32$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getObjectConsumer().setKeyword$35$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getObjectConsumer().setKeyword$36$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getObjectConsumer().setKeyword$40$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getObjectConsumer().setKeyword$43$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getObjectConsumer().setKeyword$45$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getObjectConsumer().setKeyword$49$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getObjectConsumer().setKeyword$52$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getObjectConsumer().setRuleCall$9$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$20$Delimiter);
+		getObjectConsumer().setRuleCall$15$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$20$Delimiter);
+		getObjectConsumer().setRuleCall$21$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$46$Delimiter);
+		getObjectConsumer().setRuleCall$26$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$46$Delimiter);
+		getObjectConsumer().setRuleCall$31$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$56$Delimiter);
+		getAttributeConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getAttributeConsumer().setKeyword$7$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getAttributeConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$20$Delimiter);
+		getAttributeConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$20$Delimiter);
+		getReferenceConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getReferenceConsumer().setKeyword$13$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getReferenceConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getReferenceConsumer().setKeyword$19$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getReferenceConsumer().setKeyword$21$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getReferenceConsumer().setKeyword$24$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getReferenceConsumer().setKeyword$25$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getReferenceConsumer().setKeyword$26$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getReferenceConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getReferenceConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$20$Delimiter);
+		getReferenceConsumer().setRuleCall$18$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$46$Delimiter);
+		getReferenceConsumer().setRuleCall$23$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$46$Delimiter);
+		getReferenceConsumer().setRuleCall$6$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$20$Delimiter);
+		getPackageDefinition2Consumer().setKeyword$4$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getPackageDefinition2Consumer().setKeyword$7$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getPackageDefinition2Consumer().setRuleCall$6$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$20$Delimiter);
+		getObject2Consumer().setKeyword$4$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getObject2Consumer().setKeyword$6$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getObject2Consumer().setKeyword$7$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getObject2Consumer().setKeyword$11$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getObject2Consumer().setKeyword$16$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getObject2Consumer().setKeyword$19$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getObject2Consumer().setKeyword$22$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getObject2Consumer().setKeyword$24$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getObject2Consumer().setKeyword$27$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getObject2Consumer().setKeyword$29$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getObject2Consumer().setKeyword$32$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getObject2Consumer().setKeyword$35$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getObject2Consumer().setKeyword$36$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getObject2Consumer().setKeyword$39$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getObject2Consumer().setRuleCall$9$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$20$Delimiter);
+		getObject2Consumer().setRuleCall$15$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$20$Delimiter);
+		getObject2Consumer().setRuleCall$21$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$46$Delimiter);
+		getObject2Consumer().setRuleCall$26$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$46$Delimiter);
+		getObject2Consumer().setRuleCall$31$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$56$Delimiter);
+		getAttribute2Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getAttribute2Consumer().setKeyword$9$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getAttribute2Consumer().setKeyword$12$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getAttribute2Consumer().setKeyword$15$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getAttribute2Consumer().setKeyword$17$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getAttribute2Consumer().setKeyword$20$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getAttribute2Consumer().setKeyword$25$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getAttribute2Consumer().setKeyword$26$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getAttribute2Consumer().setKeyword$29$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getAttribute2Consumer().setKeyword$30$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getAttribute2Consumer().setKeyword$31$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getAttribute2Consumer().setKeyword$32$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getAttribute2Consumer().setRuleCall$4$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$20$Delimiter);
+		getAttribute2Consumer().setRuleCall$6$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$20$Delimiter);
+		getAttribute2Consumer().setRuleCall$14$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$46$Delimiter);
+		getAttribute2Consumer().setRuleCall$19$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$46$Delimiter);
+		getReference2Consumer().setKeyword$2$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getReference2Consumer().setKeyword$8$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getReference2Consumer().setKeyword$13$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getReference2Consumer().setKeyword$16$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getReference2Consumer().setKeyword$19$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getReference2Consumer().setKeyword$21$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getReference2Consumer().setKeyword$24$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getReference2Consumer().setKeyword$25$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getReference2Consumer().setKeyword$26$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getReference2Consumer().setRuleCall$6$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$20$Delimiter);
+		getReference2Consumer().setRuleCall$10$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$20$Delimiter);
+		getReference2Consumer().setRuleCall$18$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$46$Delimiter);
+		getReference2Consumer().setRuleCall$23$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$46$Delimiter);
+		getConstraintDefinitionConsumer().setKeyword$2$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getConstraintDefinitionConsumer().setKeyword$5$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getConstraintDefinitionConsumer().setKeyword$8$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getConstraintDefinitionConsumer().setKeyword$11$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getConstraintDefinitionConsumer().setKeyword$13$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$18$Delimiter);
+		getConstraintDefinitionConsumer().setKeyword$16$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getConstraintDefinitionConsumer().setKeyword$17$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.keyword$6$Delimiter);
+		getConstraintDefinitionConsumer().setRuleCall$4$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$20$Delimiter);
+		getConstraintDefinitionConsumer().setRuleCall$10$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$46$Delimiter);
+		getConstraintDefinitionConsumer().setRuleCall$15$Delimiter(org.eclipse.xtext.ui.tests.editor.contentassist.parser.packrat.Bug304681TestLanguageDelimiters.ruleCall$46$Delimiter);
 	}
 	
 	public TerminalsParserConfiguration getTerminalsConfiguration() {
 		return terminalsConfiguration;
 	} 
 	
+    public Bug304681TestLanguageModelConsumer getModelConsumer() {
+    	return modelConsumer;
+    }
+
     public Bug304681TestLanguagePackageDefinitionConsumer getPackageDefinitionConsumer() {
     	return packageDefinitionConsumer;
     }
@@ -166,6 +299,30 @@ public class Bug304681TestLanguageParserConfiguration extends AbstractParserConf
 
     public Bug304681TestLanguageReferenceConsumer getReferenceConsumer() {
     	return referenceConsumer;
+    }
+
+    public Bug304681TestLanguagePackageDefinition2Consumer getPackageDefinition2Consumer() {
+    	return packageDefinition2Consumer;
+    }
+
+    public Bug304681TestLanguageObject2Consumer getObject2Consumer() {
+    	return object2Consumer;
+    }
+
+    public Bug304681TestLanguageFeature2Consumer getFeature2Consumer() {
+    	return feature2Consumer;
+    }
+
+    public Bug304681TestLanguageAttribute2Consumer getAttribute2Consumer() {
+    	return attribute2Consumer;
+    }
+
+    public Bug304681TestLanguageReference2Consumer getReference2Consumer() {
+    	return reference2Consumer;
+    }
+
+    public Bug304681TestLanguageConstraintDefinitionConsumer getConstraintDefinitionConsumer() {
+    	return constraintDefinitionConsumer;
     }
 
     public TerminalsIDConsumer getIdConsumer() {

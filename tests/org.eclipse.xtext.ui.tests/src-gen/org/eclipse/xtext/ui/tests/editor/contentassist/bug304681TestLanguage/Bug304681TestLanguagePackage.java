@@ -60,6 +60,34 @@ public interface Bug304681TestLanguagePackage extends EPackage
   Bug304681TestLanguagePackage eINSTANCE = org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.Bug304681TestLanguagePackageImpl.init();
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.ModelImpl <em>Model</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.ModelImpl
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.Bug304681TestLanguagePackageImpl#getModel()
+   * @generated
+   */
+  int MODEL = 0;
+
+  /**
+   * The feature id for the '<em><b>Definition</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL__DEFINITION = 0;
+
+  /**
+   * The number of structural features of the '<em>Model</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int MODEL_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.PackageDefinitionImpl <em>Package Definition</em>}' class.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -67,7 +95,7 @@ public interface Bug304681TestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.Bug304681TestLanguagePackageImpl#getPackageDefinition()
    * @generated
    */
-  int PACKAGE_DEFINITION = 0;
+  int PACKAGE_DEFINITION = 1;
 
   /**
    * The feature id for the '<em><b>Namespace</b></em>' attribute.
@@ -104,7 +132,7 @@ public interface Bug304681TestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.Bug304681TestLanguagePackageImpl#getObject()
    * @generated
    */
-  int OBJECT = 1;
+  int OBJECT = 2;
 
   /**
    * The feature id for the '<em><b>Enabled</b></em>' attribute.
@@ -204,7 +232,7 @@ public interface Bug304681TestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.Bug304681TestLanguagePackageImpl#getFeature()
    * @generated
    */
-  int FEATURE = 2;
+  int FEATURE = 3;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -232,7 +260,7 @@ public interface Bug304681TestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.Bug304681TestLanguagePackageImpl#getAttribute()
    * @generated
    */
-  int ATTRIBUTE = 3;
+  int ATTRIBUTE = 4;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -269,7 +297,7 @@ public interface Bug304681TestLanguagePackage extends EPackage
    * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.Bug304681TestLanguagePackageImpl#getReference()
    * @generated
    */
-  int REFERENCE = 4;
+  int REFERENCE = 5;
 
   /**
    * The feature id for the '<em><b>Name</b></em>' attribute.
@@ -325,6 +353,155 @@ public interface Bug304681TestLanguagePackage extends EPackage
    */
   int REFERENCE_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 4;
 
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.AttributImpl <em>Attribut</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.AttributImpl
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.Bug304681TestLanguagePackageImpl#getAttribut()
+   * @generated
+   */
+  int ATTRIBUT = 6;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTRIBUT__NAME = FEATURE__NAME;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTRIBUT__TYPE = FEATURE_FEATURE_COUNT + 0;
+
+  /**
+   * The feature id for the '<em><b>Short Description</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTRIBUT__SHORT_DESCRIPTION = FEATURE_FEATURE_COUNT + 1;
+
+  /**
+   * The feature id for the '<em><b>Long Description</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTRIBUT__LONG_DESCRIPTION = FEATURE_FEATURE_COUNT + 2;
+
+  /**
+   * The feature id for the '<em><b>Constraint Definitions</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTRIBUT__CONSTRAINT_DEFINITIONS = FEATURE_FEATURE_COUNT + 3;
+
+  /**
+   * The feature id for the '<em><b>Required</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTRIBUT__REQUIRED = FEATURE_FEATURE_COUNT + 4;
+
+  /**
+   * The feature id for the '<em><b>Technical</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTRIBUT__TECHNICAL = FEATURE_FEATURE_COUNT + 5;
+
+  /**
+   * The number of structural features of the '<em>Attribut</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int ATTRIBUT_FEATURE_COUNT = FEATURE_FEATURE_COUNT + 6;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.ConstraintDefinitionImpl <em>Constraint Definition</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.ConstraintDefinitionImpl
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.Bug304681TestLanguagePackageImpl#getConstraintDefinition()
+   * @generated
+   */
+  int CONSTRAINT_DEFINITION = 7;
+
+  /**
+   * The feature id for the '<em><b>Type</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONSTRAINT_DEFINITION__TYPE = 0;
+
+  /**
+   * The feature id for the '<em><b>Parameters</b></em>' attribute list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONSTRAINT_DEFINITION__PARAMETERS = 1;
+
+  /**
+   * The feature id for the '<em><b>Message</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONSTRAINT_DEFINITION__MESSAGE = 2;
+
+  /**
+   * The number of structural features of the '<em>Constraint Definition</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int CONSTRAINT_DEFINITION_FEATURE_COUNT = 3;
+
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Model <em>Model</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Model</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Model
+   * @generated
+   */
+  EClass getModel();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Model#getDefinition <em>Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Definition</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Model#getDefinition()
+   * @see #getModel()
+   * @generated
+   */
+  EReference getModel_Definition();
 
   /**
    * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.PackageDefinition <em>Package Definition</em>}'.
@@ -564,6 +741,125 @@ public interface Bug304681TestLanguagePackage extends EPackage
   EAttribute getReference_LongDescription();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribut <em>Attribut</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Attribut</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribut
+   * @generated
+   */
+  EClass getAttribut();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribut#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Type</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribut#getType()
+   * @see #getAttribut()
+   * @generated
+   */
+  EAttribute getAttribut_Type();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribut#getShortDescription <em>Short Description</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Short Description</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribut#getShortDescription()
+   * @see #getAttribut()
+   * @generated
+   */
+  EAttribute getAttribut_ShortDescription();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribut#getLongDescription <em>Long Description</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Long Description</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribut#getLongDescription()
+   * @see #getAttribut()
+   * @generated
+   */
+  EAttribute getAttribut_LongDescription();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribut#getConstraintDefinitions <em>Constraint Definitions</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Constraint Definitions</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribut#getConstraintDefinitions()
+   * @see #getAttribut()
+   * @generated
+   */
+  EReference getAttribut_ConstraintDefinitions();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribut#isRequired <em>Required</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Required</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribut#isRequired()
+   * @see #getAttribut()
+   * @generated
+   */
+  EAttribute getAttribut_Required();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribut#isTechnical <em>Technical</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Technical</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribut#isTechnical()
+   * @see #getAttribut()
+   * @generated
+   */
+  EAttribute getAttribut_Technical();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.ConstraintDefinition <em>Constraint Definition</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Constraint Definition</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.ConstraintDefinition
+   * @generated
+   */
+  EClass getConstraintDefinition();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.ConstraintDefinition#getType <em>Type</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Type</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.ConstraintDefinition#getType()
+   * @see #getConstraintDefinition()
+   * @generated
+   */
+  EAttribute getConstraintDefinition_Type();
+
+  /**
+   * Returns the meta object for the attribute list '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.ConstraintDefinition#getParameters <em>Parameters</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute list '<em>Parameters</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.ConstraintDefinition#getParameters()
+   * @see #getConstraintDefinition()
+   * @generated
+   */
+  EAttribute getConstraintDefinition_Parameters();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.ConstraintDefinition#getMessage <em>Message</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Message</em>'.
+   * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.ConstraintDefinition#getMessage()
+   * @see #getConstraintDefinition()
+   * @generated
+   */
+  EAttribute getConstraintDefinition_Message();
+
+  /**
    * Returns the factory that creates the instances of the model.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -586,6 +882,24 @@ public interface Bug304681TestLanguagePackage extends EPackage
    */
   interface Literals
   {
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.ModelImpl <em>Model</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.ModelImpl
+     * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.Bug304681TestLanguagePackageImpl#getModel()
+     * @generated
+     */
+    EClass MODEL = eINSTANCE.getModel();
+
+    /**
+     * The meta object literal for the '<em><b>Definition</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference MODEL__DEFINITION = eINSTANCE.getModel_Definition();
+
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.PackageDefinitionImpl <em>Package Definition</em>}' class.
      * <!-- begin-user-doc -->
@@ -771,6 +1085,98 @@ public interface Bug304681TestLanguagePackage extends EPackage
      * @generated
      */
     EAttribute REFERENCE__LONG_DESCRIPTION = eINSTANCE.getReference_LongDescription();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.AttributImpl <em>Attribut</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.AttributImpl
+     * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.Bug304681TestLanguagePackageImpl#getAttribut()
+     * @generated
+     */
+    EClass ATTRIBUT = eINSTANCE.getAttribut();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ATTRIBUT__TYPE = eINSTANCE.getAttribut_Type();
+
+    /**
+     * The meta object literal for the '<em><b>Short Description</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ATTRIBUT__SHORT_DESCRIPTION = eINSTANCE.getAttribut_ShortDescription();
+
+    /**
+     * The meta object literal for the '<em><b>Long Description</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ATTRIBUT__LONG_DESCRIPTION = eINSTANCE.getAttribut_LongDescription();
+
+    /**
+     * The meta object literal for the '<em><b>Constraint Definitions</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference ATTRIBUT__CONSTRAINT_DEFINITIONS = eINSTANCE.getAttribut_ConstraintDefinitions();
+
+    /**
+     * The meta object literal for the '<em><b>Required</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ATTRIBUT__REQUIRED = eINSTANCE.getAttribut_Required();
+
+    /**
+     * The meta object literal for the '<em><b>Technical</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute ATTRIBUT__TECHNICAL = eINSTANCE.getAttribut_Technical();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.ConstraintDefinitionImpl <em>Constraint Definition</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.ConstraintDefinitionImpl
+     * @see org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.Bug304681TestLanguagePackageImpl#getConstraintDefinition()
+     * @generated
+     */
+    EClass CONSTRAINT_DEFINITION = eINSTANCE.getConstraintDefinition();
+
+    /**
+     * The meta object literal for the '<em><b>Type</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute CONSTRAINT_DEFINITION__TYPE = eINSTANCE.getConstraintDefinition_Type();
+
+    /**
+     * The meta object literal for the '<em><b>Parameters</b></em>' attribute list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute CONSTRAINT_DEFINITION__PARAMETERS = eINSTANCE.getConstraintDefinition_Parameters();
+
+    /**
+     * The meta object literal for the '<em><b>Message</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute CONSTRAINT_DEFINITION__MESSAGE = eINSTANCE.getConstraintDefinition_Message();
 
   }
 

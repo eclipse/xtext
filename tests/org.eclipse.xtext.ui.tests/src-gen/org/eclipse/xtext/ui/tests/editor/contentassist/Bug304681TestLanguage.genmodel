@@ -9,6 +9,9 @@
     editorPluginID="org.eclipse.xtext.ui.tests.editor">
   <genPackages prefix="Bug304681TestLanguage" basePackage="org.eclipse.xtext.ui.tests.editor.contentassist"
       disposableProviderFactory="true" ecorePackage="Bug304681TestLanguage.ecore#/">
+    <genClasses ecoreClass="Bug304681TestLanguage.ecore#//Model">
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug304681TestLanguage.ecore#//Model/definition"/>
+    </genClasses>
     <genClasses ecoreClass="Bug304681TestLanguage.ecore#//PackageDefinition">
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug304681TestLanguage.ecore#//PackageDefinition/namespace"/>
       <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug304681TestLanguage.ecore#//PackageDefinition/contents"/>
@@ -35,6 +38,19 @@
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug304681TestLanguage.ecore#//Reference/many"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug304681TestLanguage.ecore#//Reference/shortDescription"/>
       <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug304681TestLanguage.ecore#//Reference/longDescription"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug304681TestLanguage.ecore#//Attribut">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug304681TestLanguage.ecore#//Attribut/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug304681TestLanguage.ecore#//Attribut/shortDescription"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug304681TestLanguage.ecore#//Attribut/longDescription"/>
+      <genFeatures property="None" children="true" createChild="true" ecoreFeature="ecore:EReference Bug304681TestLanguage.ecore#//Attribut/constraintDefinitions"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug304681TestLanguage.ecore#//Attribut/required"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug304681TestLanguage.ecore#//Attribut/technical"/>
+    </genClasses>
+    <genClasses ecoreClass="Bug304681TestLanguage.ecore#//ConstraintDefinition">
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug304681TestLanguage.ecore#//ConstraintDefinition/type"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug304681TestLanguage.ecore#//ConstraintDefinition/parameters"/>
+      <genFeatures createChild="false" ecoreFeature="ecore:EAttribute Bug304681TestLanguage.ecore#//ConstraintDefinition/message"/>
     </genClasses>
   </genPackages>
 </genmodel:GenModel>

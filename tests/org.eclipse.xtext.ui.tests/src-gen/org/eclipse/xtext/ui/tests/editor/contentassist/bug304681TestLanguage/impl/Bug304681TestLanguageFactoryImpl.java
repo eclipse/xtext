@@ -13,10 +13,13 @@ import org.eclipse.emf.ecore.impl.EFactoryImpl;
 
 import org.eclipse.emf.ecore.plugin.EcorePlugin;
 
+import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribut;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Attribute;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Bug304681TestLanguageFactory;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Bug304681TestLanguagePackage;
+import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.ConstraintDefinition;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Feature;
+import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Model;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.PackageDefinition;
 import org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.Reference;
 
@@ -72,14 +75,28 @@ public class Bug304681TestLanguageFactoryImpl extends EFactoryImpl implements Bu
   {
     switch (eClass.getClassifierID())
     {
+      case Bug304681TestLanguagePackage.MODEL: return createModel();
       case Bug304681TestLanguagePackage.PACKAGE_DEFINITION: return createPackageDefinition();
       case Bug304681TestLanguagePackage.OBJECT: return createObject();
       case Bug304681TestLanguagePackage.FEATURE: return createFeature();
       case Bug304681TestLanguagePackage.ATTRIBUTE: return createAttribute();
       case Bug304681TestLanguagePackage.REFERENCE: return createReference();
+      case Bug304681TestLanguagePackage.ATTRIBUT: return createAttribut();
+      case Bug304681TestLanguagePackage.CONSTRAINT_DEFINITION: return createConstraintDefinition();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Model createModel()
+  {
+    ModelImpl model = new ModelImpl();
+    return model;
   }
 
   /**
@@ -135,6 +152,28 @@ public class Bug304681TestLanguageFactoryImpl extends EFactoryImpl implements Bu
   {
     ReferenceImpl reference = new ReferenceImpl();
     return reference;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public Attribut createAttribut()
+  {
+    AttributImpl attribut = new AttributImpl();
+    return attribut;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public ConstraintDefinition createConstraintDefinition()
+  {
+    ConstraintDefinitionImpl constraintDefinition = new ConstraintDefinitionImpl();
+    return constraintDefinition;
   }
 
   /**

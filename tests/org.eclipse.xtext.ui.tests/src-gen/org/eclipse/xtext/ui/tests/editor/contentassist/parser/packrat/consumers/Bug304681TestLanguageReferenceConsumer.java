@@ -81,6 +81,12 @@ public final class Bug304681TestLanguageReferenceConsumer extends NonTerminalCon
 
 	private IElementConsumer keyword$26$Consumer;
 
+	private ICharacterClass keyword$8$Delimiter;
+
+	private ICharacterClass keyword$13$Delimiter;
+
+	private ICharacterClass keyword$16$Delimiter;
+
 	private ICharacterClass keyword$19$Delimiter;
 
 	private ICharacterClass keyword$21$Delimiter;
@@ -93,19 +99,13 @@ public final class Bug304681TestLanguageReferenceConsumer extends NonTerminalCon
 
 	private ICharacterClass keyword$2$Delimiter;
 
-	private ICharacterClass keyword$8$Delimiter;
-
-	private ICharacterClass keyword$13$Delimiter;
-
-	private ICharacterClass keyword$16$Delimiter;
+	private ISequenceMatcher ruleCall$10$Delimiter;
 
 	private ISequenceMatcher ruleCall$18$Delimiter;
 
 	private ISequenceMatcher ruleCall$23$Delimiter;
 
 	private ISequenceMatcher ruleCall$6$Delimiter;
-
-	private ISequenceMatcher ruleCall$10$Delimiter;
 
 	protected class Group$1$Consumer extends GroupConsumer {
 		
@@ -421,19 +421,19 @@ public final class Bug304681TestLanguageReferenceConsumer extends NonTerminalCon
 
 	public Bug304681TestLanguageReferenceConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
+		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$13$Delimiter = ICharacterClass.Factory.nullClass();
+		keyword$16$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$19$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$21$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$24$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$25$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$26$Delimiter = ICharacterClass.Factory.nullClass();
 		keyword$2$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$8$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$13$Delimiter = ICharacterClass.Factory.nullClass();
-		keyword$16$Delimiter = ICharacterClass.Factory.nullClass();
+		ruleCall$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$18$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$23$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 		ruleCall$6$Delimiter = ISequenceMatcher.Factory.nullMatcher();
-		ruleCall$10$Delimiter = ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	@Override
@@ -492,6 +492,30 @@ public final class Bug304681TestLanguageReferenceConsumer extends NonTerminalCon
 		this.stringConsumer = stringConsumer;
 	}
 	
+	public ICharacterClass getKeyword$8$Delimiter() {
+		return keyword$8$Delimiter;
+	}
+	
+	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
+		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$13$Delimiter() {
+		return keyword$13$Delimiter;
+	}
+	
+	public void setKeyword$13$Delimiter(ICharacterClass characterClass) {
+		keyword$13$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
+	public ICharacterClass getKeyword$16$Delimiter() {
+		return keyword$16$Delimiter;
+	}
+	
+	public void setKeyword$16$Delimiter(ICharacterClass characterClass) {
+		keyword$16$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	}
+	
 	public ICharacterClass getKeyword$19$Delimiter() {
 		return keyword$19$Delimiter;
 	}
@@ -540,28 +564,12 @@ public final class Bug304681TestLanguageReferenceConsumer extends NonTerminalCon
 		keyword$2$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
 	}
 	
-	public ICharacterClass getKeyword$8$Delimiter() {
-		return keyword$8$Delimiter;
+	public ISequenceMatcher getRuleCall$10$Delimiter() {
+		return ruleCall$10$Delimiter;
 	}
 	
-	public void setKeyword$8$Delimiter(ICharacterClass characterClass) {
-		keyword$8$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$13$Delimiter() {
-		return keyword$13$Delimiter;
-	}
-	
-	public void setKeyword$13$Delimiter(ICharacterClass characterClass) {
-		keyword$13$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
-	}
-	
-	public ICharacterClass getKeyword$16$Delimiter() {
-		return keyword$16$Delimiter;
-	}
-	
-	public void setKeyword$16$Delimiter(ICharacterClass characterClass) {
-		keyword$16$Delimiter = characterClass != null ? characterClass : ICharacterClass.Factory.nullClass();
+	public void setRuleCall$10$Delimiter(ISequenceMatcher matcher) {
+		ruleCall$10$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 	public ISequenceMatcher getRuleCall$18$Delimiter() {
@@ -586,14 +594,6 @@ public final class Bug304681TestLanguageReferenceConsumer extends NonTerminalCon
 	
 	public void setRuleCall$6$Delimiter(ISequenceMatcher matcher) {
 		ruleCall$6$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
-	}
-	
-	public ISequenceMatcher getRuleCall$10$Delimiter() {
-		return ruleCall$10$Delimiter;
-	}
-	
-	public void setRuleCall$10$Delimiter(ISequenceMatcher matcher) {
-		ruleCall$10$Delimiter = matcher != null ? matcher : ISequenceMatcher.Factory.nullMatcher();
 	}
 	
 }

@@ -61,6 +61,8 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 	private RecoveryListener recoveryListener;
 	private int lookAheadAddOn;
 	private boolean marked = false;
+	private boolean resyncing = false;
+	private int predictionLevel = 0;
 	private int currentMarker;
 	private int firstMarker;
 	private Multimap<Integer, AbstractElement> indexToHandledElements;
@@ -201,8 +203,7 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 					}
 				}
 			};
-		}
-		else {
+		} else {
 			delegate = new StreamAdapter() {
 
 				private AbstractElement lastAddedElement;
@@ -221,8 +222,46 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 
 			};
 		}
+		if (predictionLevel > 0) {
+			delegate = new StreamAdapter() {
+
+				private AbstractElement lastAddedElement;
+				private boolean wasMismatch = false;
+				private ObservableXtextTokenStream.StreamListener privateDelegate = delegate;
+
+				public void announceEof(int lookAhead) {
+					if (predictionLevel == 0) {
+						if (!wasMismatch && (!errorRecovery || !resyncing)) {
+							AbstractElement current = getCurrentGrammarElement();
+							if (current != null
+									&& (lastAddedElement == null || 
+										!EcoreUtil.isAncestor(current, lastAddedElement))) {
+								if (marked)
+									lookAhead+=lookAheadAddOn;
+								followElements.add(createFollowElement(current, lookAhead));
+								lastAddedElement = current;
+							}
+						}
+					} else {
+						privateDelegate.announceEof(lookAhead);
+					}
+					wasMismatch |= mismatch;
+				}
+
+			};
+		} 
 	}
 
+	@Override
+	public void beginResync() {
+		resyncing = true;
+	}
+
+	@Override
+	public void endResync() {
+		resyncing = false;
+	}
+	
 	@Override
 	protected void mismatch(IntStream input, int ttype, BitSet follow) throws RecognitionException {
 		try {
@@ -336,6 +375,14 @@ public abstract class AbstractInternalContentAssistParser extends Parser impleme
 		} else {
 			currentMarker = marker;
 		}
+	}
+	
+	public void beginDFAPrediction() {
+		predictionLevel++;
+	}
+	
+	public void endDFAPrediction() {
+		predictionLevel--;
 	}
 
 	public Set<FollowElement> getFollowElements() {

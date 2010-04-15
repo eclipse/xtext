@@ -7,6 +7,25 @@
     <metamodelDeclarations xsi:type="xtext:ReferencedMetamodel" alias="ecore">
       <ePackage href="http://www.eclipse.org/emf/2002/Ecore#/"/>
     </metamodelDeclarations>
+    <rules xsi:type="xtext:ParserRule" name="Model">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2010/bug304681TestLanguage#//Model"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Keyword" value="1"/>
+          <elements xsi:type="xtext:Assignment" feature="definition" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Group">
+          <elements xsi:type="xtext:Keyword" value="2"/>
+          <elements xsi:type="xtext:Assignment" feature="definition" operator="=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.6"/>
+          </elements>
+        </elements>
+      </alternatives>
+    </rules>
     <rules xsi:type="xtext:ParserRule" name="PackageDefinition">
       <type metamodel="/0/@metamodelDeclarations.0">
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2010/bug304681TestLanguage#//PackageDefinition"/>
@@ -23,7 +42,7 @@
         </elements>
         <elements xsi:type="xtext:Keyword" value=";"/>
         <elements xsi:type="xtext:Assignment" cardinality="*" feature="contents" operator="+=">
-          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.1"/>
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
         </elements>
       </alternatives>
     </rules>
@@ -85,25 +104,25 @@
             <elements xsi:type="xtext:Keyword" value=";"/>
           </elements>
           <elements xsi:type="xtext:Assignment" cardinality="*" feature="features" operator="+=">
-            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
           </elements>
           <elements xsi:type="xtext:Group" cardinality="?">
             <elements xsi:type="xtext:Keyword" value="before"/>
             <elements xsi:type="xtext:Assignment" cardinality="*" feature="features" operator="+=">
-              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
             </elements>
             <elements xsi:type="xtext:Keyword" value="after"/>
           </elements>
           <elements xsi:type="xtext:Group" cardinality="?">
             <elements xsi:type="xtext:Keyword" value="optionalLoop"/>
             <elements xsi:type="xtext:Assignment" cardinality="*" feature="features" operator="+=">
-              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
             </elements>
           </elements>
           <elements xsi:type="xtext:Group" cardinality="?">
             <elements xsi:type="xtext:Keyword" value="mandatoryLoop"/>
             <elements xsi:type="xtext:Assignment" cardinality="+" feature="features" operator="+=">
-              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.2"/>
+              <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
             </elements>
           </elements>
         </elements>
@@ -115,8 +134,8 @@
         <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2010/bug304681TestLanguage#//Feature"/>
       </type>
       <alternatives xsi:type="xtext:Alternatives">
-        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.3"/>
         <elements xsi:type="xtext:RuleCall" rule="/0/@rules.4"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.5"/>
       </alternatives>
     </rules>
     <rules xsi:type="xtext:ParserRule" name="Attribute">
@@ -177,6 +196,225 @@
           </elements>
           <elements xsi:type="xtext:Keyword" value=";"/>
         </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="PackageDefinition2">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2010/bug304681TestLanguage#//PackageDefinition"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Action">
+          <type metamodel="/0/@metamodelDeclarations.0">
+            <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2010/bug304681TestLanguage#//PackageDefinition"/>
+          </type>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="package"/>
+        <elements xsi:type="xtext:Assignment" feature="namespace" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value=";"/>
+        <elements xsi:type="xtext:Assignment" cardinality="*" feature="contents" operator="+=">
+          <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.7"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Object2">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2010/bug304681TestLanguage#//Object"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Alternatives" cardinality="?">
+          <elements xsi:type="xtext:Assignment" feature="enabled" operator="?=">
+            <terminal xsi:type="xtext:Keyword" value="enabled"/>
+          </elements>
+          <elements xsi:type="xtext:Assignment" feature="abstract" operator="?=">
+            <terminal xsi:type="xtext:Keyword" value="abstract"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="object"/>
+        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+        <elements xsi:type="xtext:Group" cardinality="?">
+          <elements xsi:type="xtext:Keyword" value="extends"/>
+          <elements xsi:type="xtext:Assignment" feature="parent" operator="=">
+            <terminal xsi:type="xtext:CrossReference">
+              <type metamodel="/0/@metamodelDeclarations.0">
+                <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2010/bug304681TestLanguage#//Object"/>
+              </type>
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+            </terminal>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="{"/>
+        <elements xsi:type="xtext:UnorderedGroup">
+          <elements xsi:type="xtext:Group" cardinality="?">
+            <elements xsi:type="xtext:Keyword" value="shortDescription"/>
+            <elements xsi:type="xtext:Assignment" feature="shortDescription" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value=";"/>
+          </elements>
+          <elements xsi:type="xtext:Group" cardinality="?">
+            <elements xsi:type="xtext:Keyword" value="longDescription"/>
+            <elements xsi:type="xtext:Assignment" feature="longDescription" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value=";"/>
+          </elements>
+          <elements xsi:type="xtext:Group" cardinality="?">
+            <elements xsi:type="xtext:Keyword" value="serialUID"/>
+            <elements xsi:type="xtext:Assignment" feature="serialVersionUID" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.1"/>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value=";"/>
+          </elements>
+          <elements xsi:type="xtext:Group" cardinality="?">
+            <elements xsi:type="xtext:Assignment" feature="cloneable" operator="?=">
+              <terminal xsi:type="xtext:Keyword" value="cloneable"/>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value=";"/>
+          </elements>
+          <elements xsi:type="xtext:Assignment" cardinality="*" feature="features" operator="+=">
+            <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.8"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="}"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Feature2">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2010/bug304681TestLanguage#//Feature"/>
+      </type>
+      <alternatives xsi:type="xtext:Alternatives">
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.9"/>
+        <elements xsi:type="xtext:RuleCall" rule="/0/@rules.10"/>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Attribute2">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2010/bug304681TestLanguage#//Attribut"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="Attribute"/>
+        <elements xsi:type="xtext:Assignment" feature="type" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Keyword" value="{"/>
+            <elements xsi:type="xtext:UnorderedGroup">
+              <elements xsi:type="xtext:Group" cardinality="?">
+                <elements xsi:type="xtext:Keyword" value="shortDescription"/>
+                <elements xsi:type="xtext:Assignment" feature="shortDescription" operator="=">
+                  <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
+                </elements>
+                <elements xsi:type="xtext:Keyword" value=";"/>
+              </elements>
+              <elements xsi:type="xtext:Group" cardinality="?">
+                <elements xsi:type="xtext:Keyword" value="longDescription"/>
+                <elements xsi:type="xtext:Assignment" feature="longDescription" operator="=">
+                  <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
+                </elements>
+                <elements xsi:type="xtext:Keyword" value=";"/>
+              </elements>
+              <elements xsi:type="xtext:Assignment" cardinality="*" feature="constraintDefinitions" operator="+=">
+                <terminal xsi:type="xtext:RuleCall" rule="/0/@rules.11"/>
+              </elements>
+              <elements xsi:type="xtext:Group" cardinality="?">
+                <elements xsi:type="xtext:Assignment" feature="required" operator="?=">
+                  <terminal xsi:type="xtext:Keyword" value="required"/>
+                </elements>
+                <elements xsi:type="xtext:Keyword" value=";"/>
+              </elements>
+              <elements xsi:type="xtext:Group" cardinality="?">
+                <elements xsi:type="xtext:Assignment" feature="technical" operator="?=">
+                  <terminal xsi:type="xtext:Keyword" value="technical"/>
+                </elements>
+                <elements xsi:type="xtext:Keyword" value=";"/>
+              </elements>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value="}"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value=";"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="Reference2">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2010/bug304681TestLanguage#//Reference"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="Reference"/>
+        <elements xsi:type="xtext:Assignment" feature="type" operator="=">
+          <terminal xsi:type="xtext:CrossReference">
+            <type metamodel="/0/@metamodelDeclarations.0">
+              <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2010/bug304681TestLanguage#//Object"/>
+            </type>
+            <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+          </terminal>
+        </elements>
+        <elements xsi:type="xtext:Assignment" cardinality="?" feature="many" operator="?=">
+          <terminal xsi:type="xtext:Keyword" value="*"/>
+        </elements>
+        <elements xsi:type="xtext:Assignment" feature="name" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+        <elements xsi:type="xtext:Alternatives">
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Keyword" value="{"/>
+            <elements xsi:type="xtext:UnorderedGroup">
+              <elements xsi:type="xtext:Group" cardinality="?">
+                <elements xsi:type="xtext:Keyword" value="shortDescription"/>
+                <elements xsi:type="xtext:Assignment" feature="shortDescription" operator="=">
+                  <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
+                </elements>
+                <elements xsi:type="xtext:Keyword" value=";"/>
+              </elements>
+              <elements xsi:type="xtext:Group" cardinality="?">
+                <elements xsi:type="xtext:Keyword" value="longDescription"/>
+                <elements xsi:type="xtext:Assignment" feature="longDescription" operator="=">
+                  <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
+                </elements>
+                <elements xsi:type="xtext:Keyword" value=";"/>
+              </elements>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value="}"/>
+          </elements>
+          <elements xsi:type="xtext:Keyword" value=";"/>
+        </elements>
+      </alternatives>
+    </rules>
+    <rules xsi:type="xtext:ParserRule" name="ConstraintDefinition">
+      <type metamodel="/0/@metamodelDeclarations.0">
+        <classifier xsi:type="ecore:EClass" href="http://www.eclipse.org/xtext/ui/common/tests/2010/bug304681TestLanguage#//ConstraintDefinition"/>
+      </type>
+      <alternatives xsi:type="xtext:Group">
+        <elements xsi:type="xtext:Keyword" value="constraint"/>
+        <elements xsi:type="xtext:Assignment" feature="type" operator="=">
+          <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.0"/>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="{"/>
+        <elements xsi:type="xtext:UnorderedGroup">
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Keyword" value="parameters"/>
+            <elements xsi:type="xtext:Assignment" cardinality="*" feature="parameters" operator="+=">
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value=";"/>
+          </elements>
+          <elements xsi:type="xtext:Group">
+            <elements xsi:type="xtext:Keyword" value="message"/>
+            <elements xsi:type="xtext:Assignment" feature="message" operator="=">
+              <terminal xsi:type="xtext:RuleCall" rule="/1/@rules.2"/>
+            </elements>
+            <elements xsi:type="xtext:Keyword" value=";"/>
+          </elements>
+        </elements>
+        <elements xsi:type="xtext:Keyword" value="}"/>
       </alternatives>
     </rules>
   </xtext:Grammar>

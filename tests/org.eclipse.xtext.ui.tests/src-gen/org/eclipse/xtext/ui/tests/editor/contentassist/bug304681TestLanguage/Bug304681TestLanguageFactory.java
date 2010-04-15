@@ -26,6 +26,15 @@ public interface Bug304681TestLanguageFactory extends EFactory
   Bug304681TestLanguageFactory eINSTANCE = org.eclipse.xtext.ui.tests.editor.contentassist.bug304681TestLanguage.impl.Bug304681TestLanguageFactoryImpl.init();
 
   /**
+   * Returns a new object of class '<em>Model</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Model</em>'.
+   * @generated
+   */
+  Model createModel();
+
+  /**
    * Returns a new object of class '<em>Package Definition</em>'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -69,6 +78,24 @@ public interface Bug304681TestLanguageFactory extends EFactory
    * @generated
    */
   Reference createReference();
+
+  /**
+   * Returns a new object of class '<em>Attribut</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Attribut</em>'.
+   * @generated
+   */
+  Attribut createAttribut();
+
+  /**
+   * Returns a new object of class '<em>Constraint Definition</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Constraint Definition</em>'.
+   * @generated
+   */
+  ConstraintDefinition createConstraintDefinition();
 
   /**
    * Returns the package supported by this factory.

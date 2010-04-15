@@ -37,7 +37,7 @@ public class Bug304681Test extends AbstractContentAssistProcessorTest {
 	}
 	
 	public void testEmptyModel() throws Exception {
-		super.newBuilder(getSetup()).assertText("package");
+		newBuilder(getSetup()).assertText("1", "2");
 	}
 	
 	public void testAfterPackageDecl() throws Exception {
@@ -161,13 +161,167 @@ public class Bug304681Test extends AbstractContentAssistProcessorTest {
 				);
 	}
 	
-	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
-		return newBuilder(getSetup());
+	public void testAfterAttribute_08() throws Exception {
+		newBuilder()
+			.appendNl("object MyObject {")
+			.appendNl("Attribute type name;")
+			.appendNl("Attribute type name;")
+			.assertText(
+				"shortDescription", 
+				"longDescription", 
+				"serialUID",
+				"cloneable",
+				"Attribute",
+				"Reference",
+				"before",
+				"optionalLoop",
+				"mandatoryLoop",
+				"}");
 	}
 	
-	@Override
-	protected ContentAssistProcessorTestBuilder newBuilder(ISetup standAloneSetup) throws Exception {
-		ContentAssistProcessorTestBuilder result = super.newBuilder(standAloneSetup);
-		return result.appendNl("package myPack;");
+	public void testAfterAttribute_09() throws Exception {
+		newBuilder()
+		.appendNl("object MyObject {")
+		.appendNl("before Attribute type name;")
+		.appendNl("Attribute type name;")
+		.assertText(
+				"Attribute",
+				"Reference",
+				"after");
 	}
+	
+	public void testAfterAttribute_10() throws Exception {
+		newBuilder()
+		.appendNl("object MyObject {")
+		.appendNl("optionalLoop Attribute type name;")
+		.appendNl("Attribute type name;")
+		.assertText(
+				"shortDescription", 
+				"longDescription", 
+				"serialUID",
+				"cloneable",
+				"Attribute",
+				"Reference",
+				"before",
+				"mandatoryLoop",
+				"}");
+	}
+	
+	public void testAfterAttribute_11() throws Exception {
+		newBuilder()
+		.appendNl("object MyObject {")
+		.appendNl("cloneable;")
+		.appendNl("optionalLoop Attribute type name;")
+		.appendNl("Attribute type name;")
+		.assertText(
+				"shortDescription", 
+				"longDescription", 
+				"serialUID",
+				"Attribute",
+				"Reference",
+				"before",
+				"mandatoryLoop",
+				"}");
+	}
+	
+	public void testAfterAttribute_12() throws Exception {
+		newBuilder()
+		.appendNl("object MyObject {")
+		.appendNl("cloneable;")
+		.appendNl("mandatoryLoop Attribute type name;")
+		.appendNl("Attribute type name;")
+		.assertText(
+				"shortDescription", 
+				"longDescription", 
+				"serialUID",
+				"Attribute",
+				"Reference",
+				"before",
+				"optionalLoop",
+				"}"
+		);
+	}
+	
+	public void testAfterPackageDecl2() throws Exception {
+		newBuilder2().assertText("object", "abstract", "enabled");
+	}
+	
+	public void testInObject2() throws Exception {
+		newBuilder2().appendNl("object MyObject {").assertText(
+				"shortDescription", 
+				"longDescription", 
+				"serialUID",
+				"cloneable",
+				"Attribute",
+				"Reference",
+				"}");
+	}
+	
+	public void testAfterAttribute2_01() throws Exception {
+		newBuilder2()
+			.appendNl("object MyObject {")
+			.appendNl("Attribute type name;")
+			.assertText(
+				"shortDescription", 
+				"longDescription", 
+				"serialUID",
+				"cloneable",
+				"Attribute",
+				"Reference",
+				"}");
+	}
+	
+	public void testAfterAttribute2_02() throws Exception {
+		newBuilder2()
+			.appendNl("object MyObject {")
+			.appendNl("Attribute type name;")
+			.appendNl("Attribute type name;")
+			.assertText(
+				"shortDescription", 
+				"longDescription", 
+				"serialUID",
+				"cloneable",
+				"Attribute",
+				"Reference",
+				"}");
+	}
+	
+	public void testAfterAttribute2_03() throws Exception {
+		newBuilder2()
+			.appendNl("object MyObject {")
+			.appendNl("shortDescription 'descr';")
+			.appendNl("Attribute type name;")
+			.appendNl("Attribute type name;")
+			.assertText(
+				"longDescription", 
+				"serialUID",
+				"cloneable",
+				"Attribute",
+				"Reference",
+				"}");
+	}
+	
+	public void testAfterAttribute2_04() throws Exception {
+		newBuilder2()
+			.appendNl("object MyObject {")
+			.appendNl("Attribute type name;")
+			.appendNl("shortDescription 'descr';")
+			.assertText(
+				"longDescription", 
+				"serialUID",
+				"cloneable",
+				"}");
+	}
+	
+	protected ContentAssistProcessorTestBuilder newBuilder() throws Exception {
+		ContentAssistProcessorTestBuilder result = newBuilder(getSetup());
+		return result.appendNl("1 package myPack;");
+	}
+	
+	protected ContentAssistProcessorTestBuilder newBuilder2() throws Exception {
+		ContentAssistProcessorTestBuilder result = newBuilder(getSetup());
+		return result.appendNl("2 package myPack;");
+	}
+	
+	
 }
