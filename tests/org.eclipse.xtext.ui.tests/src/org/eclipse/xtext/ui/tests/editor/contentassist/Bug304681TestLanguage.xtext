@@ -10,6 +10,11 @@ grammar org.eclipse.xtext.ui.tests.editor.contentassist.Bug304681TestLanguage wi
 generate bug304681TestLanguage "http://www.eclipse.org/xtext/ui/common/tests/2010/bug304681TestLanguage"
 import "http://www.eclipse.org/emf/2002/Ecore" as ecore
 
+Model:
+	'1' definition = PackageDefinition
+  | '2' definition = PackageDefinition2	
+;
+
 PackageDefinition:
 	{PackageDefinition} "package" namespace=ID  ";"
 	(contents+=Object)*; 	
@@ -42,4 +47,44 @@ Reference:
 	("longDescription" longDescription=STRING ";")?)
 	"}" | ";");
 
+PackageDefinition2 returns PackageDefinition:
+	{PackageDefinition} "package" namespace=ID  ";"
+	(contents+=Object2)*; 	
+ 
+Object2 returns Object:
+	(enabled?="enabled" | abstract?="abstract")? 
+	"object" name=ID ("extends" parent=[Object])? 
+	"{"
+	(
+		("shortDescription" shortDescription=STRING ";")? &
+		("longDescription" longDescription=STRING ";")? &
+		("serialUID" serialVersionUID=INT ";")? &
+		(cloneable?="cloneable" ";")? &
+		(features+=Feature2*) 
+	)	
+	"}";
 
+Feature2 returns Feature: 
+	(Attribute2 | Reference2);	
+
+Attribute2 returns Attribut:
+	"Attribute" type=ID name=ID ("{"
+        (("shortDescription" shortDescription=STRING ";")? &
+        ("longDescription" longDescription=STRING ";")? &
+        (constraintDefinitions+=ConstraintDefinition)* &
+        (required?="required" ";")? &
+        (technical?="technical" ";")?)    
+    "}"|";");
+
+	
+Reference2 returns Reference:
+	"Reference" type=[Object] (many?="*")? name=ID ("{"
+	(("shortDescription" shortDescription=STRING ";")? &
+	("longDescription" longDescription=STRING ";")?)
+	"}" | ";");
+	
+ConstraintDefinition  :
+    "constraint" type=ID "{"
+    ("parameters" (parameters+=STRING)* ";" &
+    "message" message=STRING ";")
+    "}";
