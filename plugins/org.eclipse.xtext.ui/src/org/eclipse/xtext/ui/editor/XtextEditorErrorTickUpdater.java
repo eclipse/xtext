@@ -13,6 +13,7 @@ import java.util.Iterator;
 import org.eclipse.core.runtime.IProgressMonitor;
 import org.eclipse.core.runtime.IStatus;
 import org.eclipse.core.runtime.Status;
+import org.eclipse.core.runtime.jobs.ISchedulingRule;
 import org.eclipse.core.runtime.jobs.Job;
 import org.eclipse.jface.resource.ImageDescriptor;
 import org.eclipse.jface.text.source.Annotation;
@@ -36,6 +37,7 @@ import com.google.inject.Inject;
  * @author Sven Efftinge
  */
 public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl implements IAnnotationModelListener {
+	private static final ISchedulingRule SEQUENCE_RULE = SchedulingRuleFactory.INSTANCE.newSequence();
 	@Inject
 	private IImageHelper imageHelper;
 	@Inject
@@ -43,6 +45,7 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 	private Image defaultImage;
 	private XtextEditor editor;
 	private IAnnotationModel annotationModel;
+	private UpdateEditorImageJob updateEditorImageJob;
 
 	@Override
 	public void beforeDispose(XtextEditor xtextEditor) {
@@ -52,7 +55,7 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 			this.editor = null;
 		}
 	}
-	
+
 	@Override
 	public void afterSetInput(XtextEditor xtextEditor) {
 		if (this.editor != null) {
@@ -91,10 +94,10 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 					IDecoration.BOTTOM_LEFT);
 			Image decoratedImage = imageHelper.getImage(decorationOverlayIcon);
 			if (xtextEditor.getTitleImage() != decoratedImage) {
-				postImageChange(xtextEditor, decoratedImage);
+				scheduleUpdateEditorJob(decoratedImage);
 			}
 		} else {
-			postImageChange(xtextEditor, defaultImage);
+			scheduleUpdateEditorJob(defaultImage);
 		}
 	}
 
@@ -114,34 +117,60 @@ public class XtextEditorErrorTickUpdater extends IXtextEditorCallback.NullImpl i
 					}
 				}
 			}
-			return hasWarnings?Severity.WARNING:null;
+			return hasWarnings ? Severity.WARNING : null;
 		}
 		return null;
 	}
 
-	private void postImageChange(final XtextEditor xtextEditor, final Image newImage) {
-		new Job("Update error tick") {
-			@Override
-			protected IStatus run(IProgressMonitor monitor) {
-				IEditorSite site = xtextEditor.getEditorSite();
-				if (site != null) {
-					Shell shell = site.getShell();
-					if (shell != null && !shell.isDisposed()) {
-						shell.getDisplay().syncExec(new Runnable() {
-							public void run() {
-								if (!newImage.isDisposed())
-									xtextEditor.updatedTitleImage(newImage);
-							}
-						});
-					}
-				}
-				return Status.OK_STATUS;
-			}
-		}.schedule();
+	public void scheduleUpdateEditorJob(final Image image) {
+		UpdateEditorImageJob job = updateEditorImageJob;
+		if (job == null) {
+			job = createUpdateEditorImageJob();
+			updateEditorImageJob = job;
+		}
+		job.scheduleFor(image);
 	}
 
+	protected UpdateEditorImageJob createUpdateEditorImageJob() {
+		// reason described here https://bugs.eclipse.org/bugs/show_bug.cgi?id=308963
+		return new UpdateEditorImageJob(SEQUENCE_RULE);
+	}
+	
 	public void modelChanged(IAnnotationModel model) {
 		updateEditorImage(editor);
 	}
 
+	protected class UpdateEditorImageJob extends Job {
+		private volatile Image titleImage;
+
+		public UpdateEditorImageJob(ISchedulingRule schedulingRule) {
+			super("Update editor image");
+			setRule(schedulingRule);
+		}
+
+		@Override
+		protected IStatus run(final IProgressMonitor monitor) {
+			IEditorSite site = null != editor ? editor.getEditorSite() : null;
+			if (site != null) {
+				Shell shell = site.getShell();
+				if (shell != null && !shell.isDisposed()) {
+					shell.getDisplay().syncExec(new Runnable() {
+						public void run() {
+							if (!monitor.isCanceled() && titleImage != null && !titleImage.isDisposed()
+									&& editor != null) {
+								editor.updatedTitleImage(titleImage);
+							}
+						}
+					});
+				}
+			}
+			return Status.OK_STATUS;
+		}
+
+		protected void scheduleFor(Image image) {
+			cancel();
+			this.titleImage = image;
+			schedule();
+		}
+	}
 }

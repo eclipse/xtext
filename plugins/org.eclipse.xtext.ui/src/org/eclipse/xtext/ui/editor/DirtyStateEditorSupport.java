@@ -51,24 +51,7 @@ import com.google.inject.internal.Maps;
  * @author Sebastian Zarnekow - Initial contribution and API
  */
 public class DirtyStateEditorSupport implements IXtextModelListener, IResourceDescription.Event.Listener, VerifyListener {
-	
-	/**
-	 * All jobs that are configured with the same instance of this rule
-	 * will run sequentially.
-	 * @author Sebastian Zarnekow - Initial contribution and API
-	 */
-	public static class Sequence implements ISchedulingRule {
-		
-		public boolean contains(ISchedulingRule rule) {
-			return rule == this;
-		}
-
-		public boolean isConflicting(ISchedulingRule rule) {
-			return rule instanceof Sequence;
-		}
-	}
-	
-	private static ISchedulingRule SCHEDULING_RULE = new Sequence();
+	private static ISchedulingRule SCHEDULING_RULE = SchedulingRuleFactory.INSTANCE.newSequence();
 	
 	/**
 	 * @author Sebastian Zarnekow - Initial contribution and API
