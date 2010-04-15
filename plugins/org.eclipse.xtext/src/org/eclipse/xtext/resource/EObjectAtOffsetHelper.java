@@ -39,6 +39,20 @@ public class EObjectAtOffsetHelper {
 	public static EObject resolveCrossReferencedElementAt(XtextResource resource, int offset, TextLocation location) {
 		return internalResolveElementAt(resource, offset, false, true, location);
 	}
+	
+	public static TextLocation getLocation(EObject sourceEObject, EReference eReference, int indexInList) {
+		List<AbstractNode> result = NodeUtil.findNodesForFeature(sourceEObject, eReference);
+		if (result.isEmpty())
+			return new TextLocation();
+		if (result.size() == 1) {
+			AbstractNode node = result.get(0);
+			return new TextLocation(node.getOffset(), node.getLength());
+		}
+		if (indexInList == -1 || indexInList > result.size())
+			return new TextLocation();
+		AbstractNode node = result.get(indexInList);
+		return new TextLocation(node.getOffset(), node.getLength());
+	}
 
 	private static EObject internalResolveElementAt(XtextResource resource, int offset, boolean isContainment,
 			boolean isCrossReference, TextLocation location) {
@@ -98,4 +112,5 @@ public class EObjectAtOffsetHelper {
 		}
 		return null;
 	}
+
 }
