@@ -21,12 +21,14 @@ import org.eclipse.jface.viewers.ILabelProvider;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
 import org.eclipse.ui.views.contentoutline.IContentOutlinePage;
 import org.eclipse.xtext.formatting.IIndentationInformation;
+import org.eclipse.xtext.parser.IDefaultEncodingProvider;
 import org.eclipse.xtext.resource.IExternalContentSupport;
 import org.eclipse.xtext.service.AbstractGenericModule;
 import org.eclipse.xtext.ui.editor.IDirtyStateManager;
 import org.eclipse.xtext.ui.editor.IURIEditorOpener;
 import org.eclipse.xtext.ui.editor.IXtextEditorCallback;
 import org.eclipse.xtext.ui.editor.LanguageSpecificURIEditorOpener;
+import org.eclipse.xtext.ui.editor.WorkspaceDefaultEncodingProvider;
 import org.eclipse.xtext.ui.editor.XtextEditorErrorTickUpdater;
 import org.eclipse.xtext.ui.editor.actions.IActionContributor;
 import org.eclipse.xtext.ui.editor.contentassist.DefaultCompletionProposalPostProcessor;
@@ -66,6 +68,7 @@ import com.google.inject.name.Names;
 /**
  * @author Sebastian Zarnekow
  * @author Sven Efftinge
+ * @author Jan Koehnlein
  */
 public class DefaultUiModule extends AbstractGenericModule {
 
@@ -211,5 +214,9 @@ public class DefaultUiModule extends AbstractGenericModule {
 	
 	public void configureLanguageSpecificURIEditorOpener(com.google.inject.Binder binder) {
 		binder.bind(IURIEditorOpener.class).annotatedWith(LanguageSpecific.class).to(LanguageSpecificURIEditorOpener.class);
+	}
+	
+	public Class<? extends IDefaultEncodingProvider> bindIDefaultEncodingProvider() {
+		return WorkspaceDefaultEncodingProvider.class;
 	}
 }

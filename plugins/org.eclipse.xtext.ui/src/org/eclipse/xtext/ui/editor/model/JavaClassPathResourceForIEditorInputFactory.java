@@ -30,6 +30,7 @@ import com.google.inject.Inject;
 
 /**
  * @author Michael Clay
+ * @author Jan Koehnlein
  */
 public class JavaClassPathResourceForIEditorInputFactory implements IResourceForEditorInputFactory {
 
@@ -67,6 +68,7 @@ public class JavaClassPathResourceForIEditorInputFactory implements IResourceFor
 		configureResourceSet(resourceSet, uri);
 		XtextResource resource = getResource(resourceSet, uri);
 		resource.setValidationDisabled(true);
+		// TODO: set some encoding ?
 		return resource;
 	}
 
@@ -97,12 +99,13 @@ public class JavaClassPathResourceForIEditorInputFactory implements IResourceFor
 		return resourceSetProvider.get(null);
 	}
 
-	private Resource createResourceFor(IFile storage) {
+	private Resource createResourceFor(IFile storage) throws CoreException {
 		ResourceSet resourceSet = getResourceSet(storage);
 		URI uri = URI.createPlatformResourceURI(storage.getFullPath().toString(), true);
 		configureResourceSet(resourceSet, uri);
 		XtextResource resource = getResource(resourceSet, uri);
 		resource.setValidationDisabled(false);
+		resource.setEncoding(storage.getCharset());
 		return resource;
 	}
 

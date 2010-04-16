@@ -19,12 +19,12 @@ import org.eclipse.emf.mwe.core.WorkflowFacade;
  * Generates all required test grammars with UI configuration for this test project.
  * 
  * @author Sven Efftinge - Initial contribution and API
+ * @author Jan Koehnlein
  */
 public class GenerateAllTestGrammarsForXtextXtextConfig {
 
 	public static void main(String... args) throws Exception {
 		try {
-			new WorkflowFacade("org/eclipse/xtext/xtext/ui/GenerateTestLanguageGrammars.mwe").run();
 			new WorkflowFacade("org/eclipse/xtext/xtext/ui/GenerateTestLanguages.mwe").run();
 		} catch (Throwable t) {
 			t.printStackTrace();

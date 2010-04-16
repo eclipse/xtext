@@ -10,10 +10,15 @@ import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
 
 import org.eclipse.core.resources.IFile;
+import org.eclipse.core.runtime.CoreException;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.ui.part.FileEditorInput;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.util.ResourceUtil;
 
+/**
+ * @author Jan Koehnlein
+ */
 public class ResourceWorkingCopyFileEditorInput extends FileEditorInput {
 
 	private Resource resource;
@@ -27,11 +32,18 @@ public class ResourceWorkingCopyFileEditorInput extends FileEditorInput {
 		return resource;
 	}
 
+	public String getEncoding() throws CoreException {
+		if(resource instanceof XtextResource) {
+			return ((XtextResource) resource).getEncoding();
+		}
+		return getFile().getCharset();
+	}
+
 	static IFile createFileProxy(final Resource resource) throws IllegalArgumentException, IOException {
 		return (IFile) Proxy.newProxyInstance(ResourceWorkingCopyFileEditorInput.class.getClassLoader(), new Class<?>[] { IFile.class },
 				new ResourceWorkingCopyFileInvocationHandler(resource));
-	}
-	
+	}	
+
 	static class ResourceWorkingCopyFileInvocationHandler implements InvocationHandler {
 
 		private byte[] buffer;

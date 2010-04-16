@@ -5,10 +5,12 @@ import java.io.InputStream;
 import org.eclipse.emf.ecore.resource.Resource;
 import org.eclipse.emf.ecore.resource.ResourceSet;
 import org.eclipse.ui.IEditorInput;
+import org.eclipse.xtext.resource.XtextResource;
 import org.eclipse.xtext.ui.editor.model.JavaClassPathResourceForIEditorInputFactory;
 
 /**
  * @author Michael Clay
+ * @author Jan Koehnlein
  */
 public class ResourceForResourceWorkingCopyEditorInputFactory extends JavaClassPathResourceForIEditorInputFactory {
 
@@ -16,7 +18,7 @@ public class ResourceForResourceWorkingCopyEditorInputFactory extends JavaClassP
 	public Resource createResource(IEditorInput editorInput) {
 		if (editorInput instanceof ResourceWorkingCopyFileEditorInput) {
 			return createWorkingCopy((ResourceWorkingCopyFileEditorInput) editorInput);
-		} else 	{
+		} else {
 			return super.createResource(editorInput);
 		}
 	}
@@ -25,14 +27,17 @@ public class ResourceForResourceWorkingCopyEditorInputFactory extends JavaClassP
 		try {
 			ResourceSet resourceSet = getResourceSet(editorInput.getFile());
 			Resource workingCopy = resourceSet.createResource(editorInput.getResource().getURI());
-			InputStream inputStream = editorInput.getFile().getContents(); 
+			InputStream inputStream = editorInput.getFile().getContents();
+			if (workingCopy instanceof XtextResource) {
+				((XtextResource) workingCopy).setEncoding(editorInput.getEncoding());
+			}
 			try {
 				workingCopy.load(inputStream, null);
 			} finally {
 				inputStream.close();
 			}
 			return workingCopy;
-		} catch(Exception exc) {
+		} catch (Exception exc) {
 			throw new IllegalStateException(exc);
 		}
 	}
