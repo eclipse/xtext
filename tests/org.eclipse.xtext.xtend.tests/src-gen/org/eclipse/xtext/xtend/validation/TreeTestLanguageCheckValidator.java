@@ -18,7 +18,7 @@ public class TreeTestLanguageCheckValidator extends org.eclipse.xtext.check.Abst
 		addCheckFile("org::eclipse::xtext::xtend::validation::TreeTestLanguageExpensiveChecks", CheckType.EXPENSIVE);
 	}
 	
-	@Override
+@Override
 	protected List<EPackage> getEPackages() {
 	    List<EPackage> result = new ArrayList<EPackage>();
 	    result.add(org.eclipse.xtext.xtend.treeXtendTestLanguage.TreeXtendTestLanguagePackage.eINSTANCE);
