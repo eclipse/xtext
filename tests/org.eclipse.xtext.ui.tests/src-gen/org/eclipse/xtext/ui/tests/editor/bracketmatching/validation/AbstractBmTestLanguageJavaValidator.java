@@ -8,11 +8,11 @@ import org.eclipse.xtext.validation.AbstractDeclarativeValidator;
 
 public class AbstractBmTestLanguageJavaValidator extends AbstractDeclarativeValidator {
 
-    @Override
-    protected List<EPackage> getEPackages() {
-        List<EPackage> result = new ArrayList<EPackage>();
-        result.add(org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.BracketmatchingPackage.eINSTANCE);
-        return result;
-    }
+@Override
+	protected List<EPackage> getEPackages() {
+	    List<EPackage> result = new ArrayList<EPackage>();
+	    result.add(org.eclipse.xtext.ui.tests.editor.bracketmatching.bracketmatching.BracketmatchingPackage.eINSTANCE);
+		return result;
+	}
 
 }
