@@ -139,6 +139,16 @@ ruleModel returns [EObject current=null]
         $current = $this_RefList_4.current; 
         currentNode = currentNode.getParent();
     }
+
+    |
+    { 
+        currentNode=createCompositeNode(grammarAccess.getModelAccess().getAppendToFileEndParserRuleCall_5(), currentNode); 
+    }
+    this_AppendToFileEnd_5=ruleAppendToFileEnd
+    { 
+        $current = $this_AppendToFileEnd_5.current; 
+        currentNode = currentNode.getParent();
+    }
 )
 ;
 
@@ -607,6 +617,114 @@ ruleRefObj returns [EObject current=null]
 	    }
 
 )
+)
+;
+
+
+
+
+
+
+
+// Entry rule entryRuleAppendToFileEnd
+entryRuleAppendToFileEnd returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getAppendToFileEndRule(), currentNode); }
+	 iv_ruleAppendToFileEnd=ruleAppendToFileEnd 
+	 { $current=$iv_ruleAppendToFileEnd.current; } 
+	 EOF 
+;
+
+// Rule AppendToFileEnd
+ruleAppendToFileEnd returns [EObject current=null] 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(	'#7' 
+    {
+        createLeafNode(grammarAccess.getAppendToFileEndAccess().getNumberSignDigitSevenKeyword_0(), null); 
+    }
+(
+(
+		{ 
+	        currentNode=createCompositeNode(grammarAccess.getAppendToFileEndAccess().getItemsAppendToFileEndItemParserRuleCall_1_0(), currentNode); 
+	    }
+		lv_items_1_0=ruleAppendToFileEndItem		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getAppendToFileEndRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode.getParent(), $current);
+	        }
+	        try {
+	       		add(
+	       			$current, 
+	       			"items",
+	        		lv_items_1_0, 
+	        		"AppendToFileEndItem", 
+	        		currentNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	        currentNode = currentNode.getParent();
+	    }
+
+)
+)*)
+;
+
+
+
+
+
+// Entry rule entryRuleAppendToFileEndItem
+entryRuleAppendToFileEndItem returns [EObject current=null] 
+	:
+	{ currentNode = createCompositeNode(grammarAccess.getAppendToFileEndItemRule(), currentNode); }
+	 iv_ruleAppendToFileEndItem=ruleAppendToFileEndItem 
+	 { $current=$iv_ruleAppendToFileEndItem.current; } 
+	 EOF 
+;
+
+// Rule AppendToFileEndItem
+ruleAppendToFileEndItem returns [EObject current=null] 
+    @init { @SuppressWarnings("unused") EObject temp=null; setCurrentLookahead(); resetLookahead(); 
+    }
+    @after { resetLookahead(); 
+    	lastConsumedNode = currentNode;
+    }:
+(	'class' 
+    {
+        createLeafNode(grammarAccess.getAppendToFileEndItemAccess().getClassKeyword_0(), null); 
+    }
+(
+(
+		lv_name_1_0=RULE_ID
+		{
+			createLeafNode(grammarAccess.getAppendToFileEndItemAccess().getNameIDTerminalRuleCall_1_0(), "name"); 
+		}
+		{
+	        if ($current==null) {
+	            $current = factory.create(grammarAccess.getAppendToFileEndItemRule().getType().getClassifier());
+	            associateNodeWithAstElement(currentNode, $current);
+	        }
+	        try {
+	       		set(
+	       			$current, 
+	       			"name",
+	        		lv_name_1_0, 
+	        		"ID", 
+	        		lastConsumedNode);
+	        } catch (ValueConverterException vce) {
+				handleValueConverterException(vce);
+	        }
+	    }
+
+)
+)	'endclass' 
+    {
+        createLeafNode(grammarAccess.getAppendToFileEndItemAccess().getEndclassKeyword_2(), null); 
+    }
 )
 ;
 

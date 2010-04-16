@@ -76,6 +76,9 @@ public class HiddentokenmergertestFactoryImpl extends EFactoryImpl implements Hi
       case HiddentokenmergertestPackage.VALUE_LIST: return createValueList();
       case HiddentokenmergertestPackage.REF_LIST: return createRefList();
       case HiddentokenmergertestPackage.REF_OBJ: return createRefObj();
+      case HiddentokenmergertestPackage.SINGLE_REF: return createSingleRef();
+      case HiddentokenmergertestPackage.APPEND_TO_FILE_END: return createAppendToFileEnd();
+      case HiddentokenmergertestPackage.APPEND_TO_FILE_END_ITEM: return createAppendToFileEndItem();
       default:
         throw new IllegalArgumentException("The class '" + eClass.getName() + "' is not a valid classifier");
     }
@@ -201,6 +204,39 @@ public class HiddentokenmergertestFactoryImpl extends EFactoryImpl implements Hi
   {
     RefObjImpl refObj = new RefObjImpl();
     return refObj;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public SingleRef createSingleRef()
+  {
+    SingleRefImpl singleRef = new SingleRefImpl();
+    return singleRef;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AppendToFileEnd createAppendToFileEnd()
+  {
+    AppendToFileEndImpl appendToFileEnd = new AppendToFileEndImpl();
+    return appendToFileEnd;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public AppendToFileEndItem createAppendToFileEndItem()
+  {
+    AppendToFileEndItemImpl appendToFileEndItem = new AppendToFileEndItemImpl();
+    return appendToFileEndItem;
   }
 
   /**

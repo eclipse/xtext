@@ -21,6 +21,8 @@ public final class HiddenTokensMergerTestLanguageModelConsumer extends NonTermin
 
 	private ModelElements rule;	
 
+	private INonTerminalConsumer appendToFileEndConsumer;
+
 	private INonTerminalConsumer commentableConsumer;
 
 	private INonTerminalConsumer datatypeBug286557Consumer;
@@ -43,6 +45,8 @@ public final class HiddenTokensMergerTestLanguageModelConsumer extends NonTermin
 
 	private IElementConsumer ruleCall$6$Consumer;
 
+	private IElementConsumer ruleCall$7$Consumer;
+
 	protected class Alternatives$1$Consumer extends AlternativesConsumer {
 		
 		protected Alternatives$1$Consumer(final Alternatives alternatives) {
@@ -56,6 +60,7 @@ public final class HiddenTokensMergerTestLanguageModelConsumer extends NonTermin
 			acceptor.accept(ruleCall$4$Consumer);
 			acceptor.accept(ruleCall$5$Consumer);
 			acceptor.accept(ruleCall$6$Consumer);
+			acceptor.accept(ruleCall$7$Consumer);
 		}
 	}
 
@@ -119,6 +124,18 @@ public final class HiddenTokensMergerTestLanguageModelConsumer extends NonTermin
 		}
 	}
 
+	protected class RuleCall$7$Consumer extends ElementConsumer<RuleCall> {
+		
+		protected RuleCall$7$Consumer(final RuleCall ruleCall) {
+			super(ruleCall);
+		}
+		
+		@Override
+		protected int doConsume(boolean optional) throws Exception {
+			return consumeNonTerminal(appendToFileEndConsumer, null, false, false, false, getElement(), optional);
+		}
+	}
+
 	public HiddenTokensMergerTestLanguageModelConsumer(INonTerminalConsumerConfiguration configuration, ITerminalConsumer[] hiddenTokens) {
 		super(configuration, hiddenTokens);
 	}
@@ -141,6 +158,7 @@ public final class HiddenTokensMergerTestLanguageModelConsumer extends NonTermin
 		ruleCall$4$Consumer = new RuleCall$4$Consumer(rule.getCommentableParserRuleCall_2());
 		ruleCall$5$Consumer = new RuleCall$5$Consumer(rule.getValueListParserRuleCall_3());
 		ruleCall$6$Consumer = new RuleCall$6$Consumer(rule.getRefListParserRuleCall_4());
+		ruleCall$7$Consumer = new RuleCall$7$Consumer(rule.getAppendToFileEndParserRuleCall_5());
 	}
 	
 	@Override
@@ -151,6 +169,10 @@ public final class HiddenTokensMergerTestLanguageModelConsumer extends NonTermin
 	@Override
 	protected EClassifier getDefaultType() {
 		return getGrammarElement().getType().getClassifier();
+	}
+	
+	public void setAppendToFileEndConsumer(INonTerminalConsumer appendToFileEndConsumer) {
+		this.appendToFileEndConsumer = appendToFileEndConsumer;
 	}
 	
 	public void setCommentableConsumer(INonTerminalConsumer commentableConsumer) {

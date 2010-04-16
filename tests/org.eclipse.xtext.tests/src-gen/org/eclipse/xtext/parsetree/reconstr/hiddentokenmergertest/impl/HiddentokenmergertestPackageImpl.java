@@ -13,6 +13,8 @@ import org.eclipse.emf.ecore.EReference;
 
 import org.eclipse.emf.ecore.impl.EPackageImpl;
 
+import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.AppendToFileEnd;
+import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.AppendToFileEndItem;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Commentable;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.CommentableItem;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.DatatypeBug286557;
@@ -23,6 +25,7 @@ import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Hiddentokenmer
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.Model;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.RefList;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.RefObj;
+import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.SingleRef;
 import org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.ValueList;
 
 /**
@@ -88,6 +91,27 @@ public class HiddentokenmergertestPackageImpl extends EPackageImpl implements Hi
    * @generated
    */
   private EClass refObjEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass singleRefEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass appendToFileEndEClass = null;
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  private EClass appendToFileEndItemEClass = null;
 
   /**
    * <!-- begin-user-doc -->
@@ -344,6 +368,76 @@ public class HiddentokenmergertestPackageImpl extends EPackageImpl implements Hi
    * <!-- end-user-doc -->
    * @generated
    */
+  public EClass getSingleRef()
+  {
+    return singleRefEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSingleRef_Obj()
+  {
+    return (EReference)singleRefEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getSingleRef_Ref()
+  {
+    return (EReference)singleRefEClass.getEStructuralFeatures().get(1);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAppendToFileEnd()
+  {
+    return appendToFileEndEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EReference getAppendToFileEnd_Items()
+  {
+    return (EReference)appendToFileEndEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EClass getAppendToFileEndItem()
+  {
+    return appendToFileEndItemEClass;
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
+  public EAttribute getAppendToFileEndItem_Name()
+  {
+    return (EAttribute)appendToFileEndItemEClass.getEStructuralFeatures().get(0);
+  }
+
+  /**
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   */
   public EEnum getEnumBugEnum()
   {
     return enumBugEnumEEnum;
@@ -405,6 +499,16 @@ public class HiddentokenmergertestPackageImpl extends EPackageImpl implements Hi
     refObjEClass = createEClass(REF_OBJ);
     createEAttribute(refObjEClass, REF_OBJ__NAME);
 
+    singleRefEClass = createEClass(SINGLE_REF);
+    createEReference(singleRefEClass, SINGLE_REF__OBJ);
+    createEReference(singleRefEClass, SINGLE_REF__REF);
+
+    appendToFileEndEClass = createEClass(APPEND_TO_FILE_END);
+    createEReference(appendToFileEndEClass, APPEND_TO_FILE_END__ITEMS);
+
+    appendToFileEndItemEClass = createEClass(APPEND_TO_FILE_END_ITEM);
+    createEAttribute(appendToFileEndItemEClass, APPEND_TO_FILE_END_ITEM__NAME);
+
     // Create enums
     enumBugEnumEEnum = createEEnum(ENUM_BUG_ENUM);
   }
@@ -443,6 +547,7 @@ public class HiddentokenmergertestPackageImpl extends EPackageImpl implements Hi
     commentableEClass.getESuperTypes().add(this.getModel());
     valueListEClass.getESuperTypes().add(this.getModel());
     refListEClass.getESuperTypes().add(this.getModel());
+    appendToFileEndEClass.getESuperTypes().add(this.getModel());
 
     // Initialize classes and features; add operations and parameters
     initEClass(modelEClass, Model.class, "Model", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
@@ -470,6 +575,16 @@ public class HiddentokenmergertestPackageImpl extends EPackageImpl implements Hi
 
     initEClass(refObjEClass, RefObj.class, "RefObj", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
     initEAttribute(getRefObj_Name(), ecorePackage.getEString(), "name", null, 0, 1, RefObj.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(singleRefEClass, SingleRef.class, "SingleRef", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getSingleRef_Obj(), this.getRefObj(), null, "obj", null, 0, 1, SingleRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+    initEReference(getSingleRef_Ref(), this.getRefObj(), null, "ref", null, 0, 1, SingleRef.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_COMPOSITE, IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(appendToFileEndEClass, AppendToFileEnd.class, "AppendToFileEnd", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEReference(getAppendToFileEnd_Items(), this.getAppendToFileEndItem(), null, "items", null, 0, -1, AppendToFileEnd.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, IS_COMPOSITE, !IS_RESOLVE_PROXIES, !IS_UNSETTABLE, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
+
+    initEClass(appendToFileEndItemEClass, AppendToFileEndItem.class, "AppendToFileEndItem", !IS_ABSTRACT, !IS_INTERFACE, IS_GENERATED_INSTANCE_CLASS);
+    initEAttribute(getAppendToFileEndItem_Name(), ecorePackage.getEString(), "name", null, 0, 1, AppendToFileEndItem.class, !IS_TRANSIENT, !IS_VOLATILE, IS_CHANGEABLE, !IS_UNSETTABLE, !IS_ID, IS_UNIQUE, !IS_DERIVED, IS_ORDERED);
 
     // Initialize enums and add enum literals
     initEEnum(enumBugEnumEEnum, EnumBugEnum.class, "EnumBugEnum");

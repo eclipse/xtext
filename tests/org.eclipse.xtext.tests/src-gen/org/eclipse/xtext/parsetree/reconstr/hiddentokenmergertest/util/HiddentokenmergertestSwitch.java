@@ -156,6 +156,28 @@ public class HiddentokenmergertestSwitch<T>
         if (result == null) result = defaultCase(theEObject);
         return result;
       }
+      case HiddentokenmergertestPackage.SINGLE_REF:
+      {
+        SingleRef singleRef = (SingleRef)theEObject;
+        T result = caseSingleRef(singleRef);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case HiddentokenmergertestPackage.APPEND_TO_FILE_END:
+      {
+        AppendToFileEnd appendToFileEnd = (AppendToFileEnd)theEObject;
+        T result = caseAppendToFileEnd(appendToFileEnd);
+        if (result == null) result = caseModel(appendToFileEnd);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
+      case HiddentokenmergertestPackage.APPEND_TO_FILE_END_ITEM:
+      {
+        AppendToFileEndItem appendToFileEndItem = (AppendToFileEndItem)theEObject;
+        T result = caseAppendToFileEndItem(appendToFileEndItem);
+        if (result == null) result = defaultCase(theEObject);
+        return result;
+      }
       default: return defaultCase(theEObject);
     }
   }
@@ -284,6 +306,54 @@ public class HiddentokenmergertestSwitch<T>
    * @generated
    */
   public T caseRefObj(RefObj object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Single Ref</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Single Ref</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseSingleRef(SingleRef object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Append To File End</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Append To File End</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAppendToFileEnd(AppendToFileEnd object)
+  {
+    return null;
+  }
+
+  /**
+   * Returns the result of interpreting the object as an instance of '<em>Append To File End Item</em>'.
+   * <!-- begin-user-doc -->
+   * This implementation returns null;
+   * returning a non-null result will terminate the switch.
+   * <!-- end-user-doc -->
+   * @param object the target of the switch.
+   * @return the result of interpreting the object as an instance of '<em>Append To File End Item</em>'.
+   * @see #doSwitch(org.eclipse.emf.ecore.EObject) doSwitch(EObject)
+   * @generated
+   */
+  public T caseAppendToFileEndItem(AppendToFileEndItem object)
   {
     return null;
   }

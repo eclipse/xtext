@@ -43,6 +43,9 @@ protected class ThisRootNode extends RootToken {
 			case 5: return new ValueList_Group(this, this, 5, inst);
 			case 6: return new RefList_Group(this, this, 6, inst);
 			case 7: return new RefObj_NameAssignment(this, this, 7, inst);
+			case 8: return new SingleRef_Group(this, this, 8, inst);
+			case 9: return new AppendToFileEnd_Group(this, this, 9, inst);
+			case 10: return new AppendToFileEndItem_Group(this, this, 10, inst);
 			default: return null;
 		}	
 	}	
@@ -52,11 +55,11 @@ protected class ThisRootNode extends RootToken {
 /************ begin Rule Model ****************
  *
  * Model:
- *   DatatypeBug286557|EnumBug|Commentable|ValueList|RefList;
+ *   DatatypeBug286557|EnumBug|Commentable|ValueList|RefList|AppendToFileEnd;
  *
  **/
 
-// DatatypeBug286557|EnumBug|Commentable|ValueList|RefList
+// DatatypeBug286557|EnumBug|Commentable|ValueList|RefList|AppendToFileEnd
 protected class Model_Alternatives extends AlternativesToken {
 
 	public Model_Alternatives(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
@@ -76,6 +79,7 @@ protected class Model_Alternatives extends AlternativesToken {
 			case 2: return new Model_CommentableParserRuleCall_2(parent, this, 2, inst);
 			case 3: return new Model_ValueListParserRuleCall_3(parent, this, 3, inst);
 			case 4: return new Model_RefListParserRuleCall_4(parent, this, 4, inst);
+			case 5: return new Model_AppendToFileEndParserRuleCall_5(parent, this, 5, inst);
 			default: return null;
 		}	
 	}	
@@ -251,6 +255,41 @@ protected class Model_RefListParserRuleCall_4 extends RuleCallToken {
 	protected IInstanceDescription tryConsumeVal() {
 		if(checkForRecursion(RefList_Group.class, current)) return null;
 		if(!current.isInstanceOf(grammarAccess.getRefListRule().getType().getClassifier())) return null;
+		return current;
+	}
+	
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(next, actIndex , index, inst);
+		}	
+	}	
+}
+
+// AppendToFileEnd
+protected class Model_AppendToFileEndParserRuleCall_5 extends RuleCallToken {
+	
+	public Model_AppendToFileEndParserRuleCall_5(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public RuleCall getGrammarElement() {
+		return grammarAccess.getModelAccess().getAppendToFileEndParserRuleCall_5();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AppendToFileEnd_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	protected IInstanceDescription tryConsumeVal() {
+		if(checkForRecursion(AppendToFileEnd_Group.class, current)) return null;
+		if(!current.isInstanceOf(grammarAccess.getAppendToFileEndRule().getType().getClassifier())) return null;
 		return current;
 	}
 	
@@ -1123,5 +1162,394 @@ protected class RefObj_NameAssignment extends AssignmentToken  {
 }
 
 /************ end Rule RefObj ****************/
+
+
+/************ begin Rule SingleRef ****************
+ *
+ * SingleRef:
+ *   "#6" obj=RefObj "ref" ref=[RefObj|FQN];
+ *
+ **/
+
+// "#6" obj=RefObj "ref" ref=[RefObj|FQN]
+protected class SingleRef_Group extends GroupToken {
+	
+	public SingleRef_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getSingleRefAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new SingleRef_RefAssignment_3(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getSingleRefRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "#6"
+protected class SingleRef_NumberSignDigitSixKeyword_0 extends KeywordToken  {
+	
+	public SingleRef_NumberSignDigitSixKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getSingleRefAccess().getNumberSignDigitSixKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// obj=RefObj
+protected class SingleRef_ObjAssignment_1 extends AssignmentToken  {
+	
+	public SingleRef_ObjAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getSingleRefAccess().getObjAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new RefObj_NameAssignment(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("obj",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("obj");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getRefObjRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getSingleRefAccess().getObjRefObjParserRuleCall_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new SingleRef_NumberSignDigitSixKeyword_0(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+// "ref"
+protected class SingleRef_RefKeyword_2 extends KeywordToken  {
+	
+	public SingleRef_RefKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getSingleRefAccess().getRefKeyword_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new SingleRef_ObjAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+// ref=[RefObj|FQN]
+protected class SingleRef_RefAssignment_3 extends AssignmentToken  {
+	
+	public SingleRef_RefAssignment_3(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getSingleRefAccess().getRefAssignment_3();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new SingleRef_RefKeyword_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("ref",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("ref");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::CrossReferenceImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getSingleRefAccess().getRefRefObjCrossReference_3_0().getType().getClassifier())) {
+				type = AssignmentType.CR;
+				element = grammarAccess.getSingleRefAccess().getRefRefObjCrossReference_3_0(); 
+				return obj;
+			}
+		}
+		return null;
+	}
+
+}
+
+
+/************ end Rule SingleRef ****************/
+
+
+/************ begin Rule AppendToFileEnd ****************
+ *
+ * // see https://bugs.eclipse.org/bugs/show_bug.cgi?id=297938
+ * 
+ * 
+ * AppendToFileEnd:
+ *   "#7" items+=AppendToFileEndItem*;
+ *
+ **/
+
+// "#7" items+=AppendToFileEndItem*
+protected class AppendToFileEnd_Group extends GroupToken {
+	
+	public AppendToFileEnd_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getAppendToFileEndAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AppendToFileEnd_ItemsAssignment_1(parent, this, 0, inst);
+			case 1: return new AppendToFileEnd_NumberSignDigitSevenKeyword_0(parent, this, 1, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getAppendToFileEndRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "#7"
+protected class AppendToFileEnd_NumberSignDigitSevenKeyword_0 extends KeywordToken  {
+	
+	public AppendToFileEnd_NumberSignDigitSevenKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getAppendToFileEndAccess().getNumberSignDigitSevenKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// items+=AppendToFileEndItem*
+protected class AppendToFileEnd_ItemsAssignment_1 extends AssignmentToken  {
+	
+	public AppendToFileEnd_ItemsAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getAppendToFileEndAccess().getItemsAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AppendToFileEndItem_Group(this, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("items",false)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("items");
+		if(value instanceof EObject) { // org::eclipse::xtext::impl::RuleCallImpl
+			IInstanceDescription param = getDescr((EObject)value);
+			if(param.isInstanceOf(grammarAccess.getAppendToFileEndItemRule().getType().getClassifier())) {
+				type = AssignmentType.PRC;
+				element = grammarAccess.getAppendToFileEndAccess().getItemsAppendToFileEndItemParserRuleCall_1_0(); 
+				consumed = obj;
+				return param;
+			}
+		}
+		return null;
+	}
+
+    @Override
+	public AbstractToken createParentFollower(AbstractToken next,	int actIndex, int index, IInstanceDescription inst) {
+		if(value == inst.getDelegate() && !inst.isConsumed()) return null;
+		switch(index) {
+			case 0: return new AppendToFileEnd_ItemsAssignment_1(parent, next, actIndex, consumed);
+			case 1: return new AppendToFileEnd_NumberSignDigitSevenKeyword_0(parent, next, actIndex, consumed);
+			default: return null;
+		}	
+	}	
+}
+
+
+/************ end Rule AppendToFileEnd ****************/
+
+
+/************ begin Rule AppendToFileEndItem ****************
+ *
+ * AppendToFileEndItem:
+ *   "class" name=ID "endclass";
+ *
+ **/
+
+// "class" name=ID "endclass"
+protected class AppendToFileEndItem_Group extends GroupToken {
+	
+	public AppendToFileEndItem_Group(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Group getGrammarElement() {
+		return grammarAccess.getAppendToFileEndItemAccess().getGroup();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AppendToFileEndItem_EndclassKeyword_2(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override
+	public IInstanceDescription tryConsume() {
+		if(!current.isInstanceOf(grammarAccess.getAppendToFileEndItemRule().getType().getClassifier())) return null;
+		return tryConsumeVal();
+	}
+}
+
+// "class"
+protected class AppendToFileEndItem_ClassKeyword_0 extends KeywordToken  {
+	
+	public AppendToFileEndItem_ClassKeyword_0(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getAppendToFileEndItemAccess().getClassKeyword_0();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			default: return parent.createParentFollower(this, index, index, inst);
+		}	
+	}	
+		
+}
+
+// name=ID
+protected class AppendToFileEndItem_NameAssignment_1 extends AssignmentToken  {
+	
+	public AppendToFileEndItem_NameAssignment_1(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Assignment getGrammarElement() {
+		return grammarAccess.getAppendToFileEndItemAccess().getNameAssignment_1();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AppendToFileEndItem_ClassKeyword_0(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+    @Override	
+	protected IInstanceDescription tryConsumeVal() {
+		if((value = current.getConsumable("name",true)) == null) return null;
+		IInstanceDescription obj = current.cloneAndConsume("name");
+		if(Boolean.TRUE.booleanValue()) { 
+			type = AssignmentType.LRC;
+			element = grammarAccess.getAppendToFileEndItemAccess().getNameIDTerminalRuleCall_1_0();
+			return obj;
+		}
+		return null;
+	}
+
+}
+
+// "endclass"
+protected class AppendToFileEndItem_EndclassKeyword_2 extends KeywordToken  {
+	
+	public AppendToFileEndItem_EndclassKeyword_2(AbstractToken parent, AbstractToken next, int no, IInstanceDescription current) {
+		super(parent, next, no, current);
+	}
+	
+	@Override
+	public Keyword getGrammarElement() {
+		return grammarAccess.getAppendToFileEndItemAccess().getEndclassKeyword_2();
+	}
+
+    @Override
+	public AbstractToken createFollower(int index, IInstanceDescription inst) {
+		switch(index) {
+			case 0: return new AppendToFileEndItem_NameAssignment_1(parent, this, 0, inst);
+			default: return null;
+		}	
+	}	
+		
+}
+
+
+/************ end Rule AppendToFileEndItem ****************/
 
 }

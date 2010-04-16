@@ -98,6 +98,33 @@ public interface HiddentokenmergertestFactory extends EFactory
   RefObj createRefObj();
 
   /**
+   * Returns a new object of class '<em>Single Ref</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Single Ref</em>'.
+   * @generated
+   */
+  SingleRef createSingleRef();
+
+  /**
+   * Returns a new object of class '<em>Append To File End</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Append To File End</em>'.
+   * @generated
+   */
+  AppendToFileEnd createAppendToFileEnd();
+
+  /**
+   * Returns a new object of class '<em>Append To File End Item</em>'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return a new object of class '<em>Append To File End Item</em>'.
+   * @generated
+   */
+  AppendToFileEndItem createAppendToFileEndItem();
+
+  /**
    * Returns the package supported by this factory.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->

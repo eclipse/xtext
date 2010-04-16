@@ -303,6 +303,99 @@ public interface HiddentokenmergertestPackage extends EPackage
   int REF_OBJ_FEATURE_COUNT = 1;
 
   /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.SingleRefImpl <em>Single Ref</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.SingleRefImpl
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.HiddentokenmergertestPackageImpl#getSingleRef()
+   * @generated
+   */
+  int SINGLE_REF = 8;
+
+  /**
+   * The feature id for the '<em><b>Obj</b></em>' containment reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SINGLE_REF__OBJ = 0;
+
+  /**
+   * The feature id for the '<em><b>Ref</b></em>' reference.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SINGLE_REF__REF = 1;
+
+  /**
+   * The number of structural features of the '<em>Single Ref</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int SINGLE_REF_FEATURE_COUNT = 2;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.AppendToFileEndImpl <em>Append To File End</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.AppendToFileEndImpl
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.HiddentokenmergertestPackageImpl#getAppendToFileEnd()
+   * @generated
+   */
+  int APPEND_TO_FILE_END = 9;
+
+  /**
+   * The feature id for the '<em><b>Items</b></em>' containment reference list.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int APPEND_TO_FILE_END__ITEMS = MODEL_FEATURE_COUNT + 0;
+
+  /**
+   * The number of structural features of the '<em>Append To File End</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int APPEND_TO_FILE_END_FEATURE_COUNT = MODEL_FEATURE_COUNT + 1;
+
+  /**
+   * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.AppendToFileEndItemImpl <em>Append To File End Item</em>}' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.AppendToFileEndItemImpl
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.HiddentokenmergertestPackageImpl#getAppendToFileEndItem()
+   * @generated
+   */
+  int APPEND_TO_FILE_END_ITEM = 10;
+
+  /**
+   * The feature id for the '<em><b>Name</b></em>' attribute.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int APPEND_TO_FILE_END_ITEM__NAME = 0;
+
+  /**
+   * The number of structural features of the '<em>Append To File End Item</em>' class.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @generated
+   * @ordered
+   */
+  int APPEND_TO_FILE_END_ITEM_FEATURE_COUNT = 1;
+
+  /**
    * The meta object id for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.EnumBugEnum <em>Enum Bug Enum</em>}' enum.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -310,7 +403,7 @@ public interface HiddentokenmergertestPackage extends EPackage
    * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.HiddentokenmergertestPackageImpl#getEnumBugEnum()
    * @generated
    */
-  int ENUM_BUG_ENUM = 8;
+  int ENUM_BUG_ENUM = 11;
 
 
   /**
@@ -504,6 +597,80 @@ public interface HiddentokenmergertestPackage extends EPackage
   EAttribute getRefObj_Name();
 
   /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.SingleRef <em>Single Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Single Ref</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.SingleRef
+   * @generated
+   */
+  EClass getSingleRef();
+
+  /**
+   * Returns the meta object for the containment reference '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.SingleRef#getObj <em>Obj</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference '<em>Obj</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.SingleRef#getObj()
+   * @see #getSingleRef()
+   * @generated
+   */
+  EReference getSingleRef_Obj();
+
+  /**
+   * Returns the meta object for the reference '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.SingleRef#getRef <em>Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the reference '<em>Ref</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.SingleRef#getRef()
+   * @see #getSingleRef()
+   * @generated
+   */
+  EReference getSingleRef_Ref();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.AppendToFileEnd <em>Append To File End</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Append To File End</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.AppendToFileEnd
+   * @generated
+   */
+  EClass getAppendToFileEnd();
+
+  /**
+   * Returns the meta object for the containment reference list '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.AppendToFileEnd#getItems <em>Items</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the containment reference list '<em>Items</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.AppendToFileEnd#getItems()
+   * @see #getAppendToFileEnd()
+   * @generated
+   */
+  EReference getAppendToFileEnd_Items();
+
+  /**
+   * Returns the meta object for class '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.AppendToFileEndItem <em>Append To File End Item</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for class '<em>Append To File End Item</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.AppendToFileEndItem
+   * @generated
+   */
+  EClass getAppendToFileEndItem();
+
+  /**
+   * Returns the meta object for the attribute '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.AppendToFileEndItem#getName <em>Name</em>}'.
+   * <!-- begin-user-doc -->
+   * <!-- end-user-doc -->
+   * @return the meta object for the attribute '<em>Name</em>'.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.AppendToFileEndItem#getName()
+   * @see #getAppendToFileEndItem()
+   * @generated
+   */
+  EAttribute getAppendToFileEndItem_Name();
+
+  /**
    * Returns the meta object for enum '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.EnumBugEnum <em>Enum Bug Enum</em>}'.
    * <!-- begin-user-doc -->
    * <!-- end-user-doc -->
@@ -695,6 +862,68 @@ public interface HiddentokenmergertestPackage extends EPackage
      * @generated
      */
     EAttribute REF_OBJ__NAME = eINSTANCE.getRefObj_Name();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.SingleRefImpl <em>Single Ref</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.SingleRefImpl
+     * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.HiddentokenmergertestPackageImpl#getSingleRef()
+     * @generated
+     */
+    EClass SINGLE_REF = eINSTANCE.getSingleRef();
+
+    /**
+     * The meta object literal for the '<em><b>Obj</b></em>' containment reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SINGLE_REF__OBJ = eINSTANCE.getSingleRef_Obj();
+
+    /**
+     * The meta object literal for the '<em><b>Ref</b></em>' reference feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference SINGLE_REF__REF = eINSTANCE.getSingleRef_Ref();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.AppendToFileEndImpl <em>Append To File End</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.AppendToFileEndImpl
+     * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.HiddentokenmergertestPackageImpl#getAppendToFileEnd()
+     * @generated
+     */
+    EClass APPEND_TO_FILE_END = eINSTANCE.getAppendToFileEnd();
+
+    /**
+     * The meta object literal for the '<em><b>Items</b></em>' containment reference list feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EReference APPEND_TO_FILE_END__ITEMS = eINSTANCE.getAppendToFileEnd_Items();
+
+    /**
+     * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.AppendToFileEndItemImpl <em>Append To File End Item</em>}' class.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.AppendToFileEndItemImpl
+     * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.impl.HiddentokenmergertestPackageImpl#getAppendToFileEndItem()
+     * @generated
+     */
+    EClass APPEND_TO_FILE_END_ITEM = eINSTANCE.getAppendToFileEndItem();
+
+    /**
+     * The meta object literal for the '<em><b>Name</b></em>' attribute feature.
+     * <!-- begin-user-doc -->
+     * <!-- end-user-doc -->
+     * @generated
+     */
+    EAttribute APPEND_TO_FILE_END_ITEM__NAME = eINSTANCE.getAppendToFileEndItem_Name();
 
     /**
      * The meta object literal for the '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.EnumBugEnum <em>Enum Bug Enum</em>}' enum.

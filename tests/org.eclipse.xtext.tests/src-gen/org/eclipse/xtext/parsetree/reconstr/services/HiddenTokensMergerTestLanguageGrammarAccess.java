@@ -25,12 +25,13 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		private final RuleCall cCommentableParserRuleCall_2 = (RuleCall)cAlternatives.eContents().get(2);
 		private final RuleCall cValueListParserRuleCall_3 = (RuleCall)cAlternatives.eContents().get(3);
 		private final RuleCall cRefListParserRuleCall_4 = (RuleCall)cAlternatives.eContents().get(4);
+		private final RuleCall cAppendToFileEndParserRuleCall_5 = (RuleCall)cAlternatives.eContents().get(5);
 		
 		//Model:
-		//  DatatypeBug286557|EnumBug|Commentable|ValueList|RefList;
+		//  DatatypeBug286557|EnumBug|Commentable|ValueList|RefList|AppendToFileEnd;
 		public ParserRule getRule() { return rule; }
 
-		//DatatypeBug286557|EnumBug|Commentable|ValueList|RefList
+		//DatatypeBug286557|EnumBug|Commentable|ValueList|RefList|AppendToFileEnd
 		public Alternatives getAlternatives() { return cAlternatives; }
 
 		//DatatypeBug286557
@@ -47,6 +48,9 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 
 		//RefList
 		public RuleCall getRefListParserRuleCall_4() { return cRefListParserRuleCall_4; }
+
+		//AppendToFileEnd
+		public RuleCall getAppendToFileEndParserRuleCall_5() { return cAppendToFileEndParserRuleCall_5; }
 	}
 
 	public class DatatypeBug286557Elements extends AbstractParserRuleElementFinder {
@@ -288,6 +292,101 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 		//FQN
 		public RuleCall getNameFQNParserRuleCall_0() { return cNameFQNParserRuleCall_0; }
 	}
+
+	public class SingleRefElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "SingleRef");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitSixKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cObjAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cObjRefObjParserRuleCall_1_0 = (RuleCall)cObjAssignment_1.eContents().get(0);
+		private final Keyword cRefKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		private final Assignment cRefAssignment_3 = (Assignment)cGroup.eContents().get(3);
+		private final CrossReference cRefRefObjCrossReference_3_0 = (CrossReference)cRefAssignment_3.eContents().get(0);
+		private final RuleCall cRefRefObjFQNParserRuleCall_3_0_1 = (RuleCall)cRefRefObjCrossReference_3_0.eContents().get(1);
+		
+		//SingleRef:
+		//  "#6" obj=RefObj "ref" ref=[RefObj|FQN];
+		public ParserRule getRule() { return rule; }
+
+		//"#6" obj=RefObj "ref" ref=[RefObj|FQN]
+		public Group getGroup() { return cGroup; }
+
+		//"#6"
+		public Keyword getNumberSignDigitSixKeyword_0() { return cNumberSignDigitSixKeyword_0; }
+
+		//obj=RefObj
+		public Assignment getObjAssignment_1() { return cObjAssignment_1; }
+
+		//RefObj
+		public RuleCall getObjRefObjParserRuleCall_1_0() { return cObjRefObjParserRuleCall_1_0; }
+
+		//"ref"
+		public Keyword getRefKeyword_2() { return cRefKeyword_2; }
+
+		//ref=[RefObj|FQN]
+		public Assignment getRefAssignment_3() { return cRefAssignment_3; }
+
+		//[RefObj|FQN]
+		public CrossReference getRefRefObjCrossReference_3_0() { return cRefRefObjCrossReference_3_0; }
+
+		//FQN
+		public RuleCall getRefRefObjFQNParserRuleCall_3_0_1() { return cRefRefObjFQNParserRuleCall_3_0_1; }
+	}
+
+	public class AppendToFileEndElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AppendToFileEnd");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cNumberSignDigitSevenKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cItemsAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cItemsAppendToFileEndItemParserRuleCall_1_0 = (RuleCall)cItemsAssignment_1.eContents().get(0);
+		
+		//// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=297938
+		//
+		//
+		//AppendToFileEnd:
+		//  "#7" items+=AppendToFileEndItem*;
+		public ParserRule getRule() { return rule; }
+
+		//"#7" items+=AppendToFileEndItem*
+		public Group getGroup() { return cGroup; }
+
+		//"#7"
+		public Keyword getNumberSignDigitSevenKeyword_0() { return cNumberSignDigitSevenKeyword_0; }
+
+		//items+=AppendToFileEndItem*
+		public Assignment getItemsAssignment_1() { return cItemsAssignment_1; }
+
+		//AppendToFileEndItem
+		public RuleCall getItemsAppendToFileEndItemParserRuleCall_1_0() { return cItemsAppendToFileEndItemParserRuleCall_1_0; }
+	}
+
+	public class AppendToFileEndItemElements extends AbstractParserRuleElementFinder {
+		private final ParserRule rule = (ParserRule) GrammarUtil.findRuleForName(getGrammar(), "AppendToFileEndItem");
+		private final Group cGroup = (Group)rule.eContents().get(1);
+		private final Keyword cClassKeyword_0 = (Keyword)cGroup.eContents().get(0);
+		private final Assignment cNameAssignment_1 = (Assignment)cGroup.eContents().get(1);
+		private final RuleCall cNameIDTerminalRuleCall_1_0 = (RuleCall)cNameAssignment_1.eContents().get(0);
+		private final Keyword cEndclassKeyword_2 = (Keyword)cGroup.eContents().get(2);
+		
+		//AppendToFileEndItem:
+		//  "class" name=ID "endclass";
+		public ParserRule getRule() { return rule; }
+
+		//"class" name=ID "endclass"
+		public Group getGroup() { return cGroup; }
+
+		//"class"
+		public Keyword getClassKeyword_0() { return cClassKeyword_0; }
+
+		//name=ID
+		public Assignment getNameAssignment_1() { return cNameAssignment_1; }
+
+		//ID
+		public RuleCall getNameIDTerminalRuleCall_1_0() { return cNameIDTerminalRuleCall_1_0; }
+
+		//"endclass"
+		public Keyword getEndclassKeyword_2() { return cEndclassKeyword_2; }
+	}
 	
 	
 	public class EnumBugEnumElements extends AbstractEnumRuleElementFinder {
@@ -344,6 +443,9 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	private ValueListElements pValueList;
 	private RefListElements pRefList;
 	private RefObjElements pRefObj;
+	private SingleRefElements pSingleRef;
+	private AppendToFileEndElements pAppendToFileEnd;
+	private AppendToFileEndItemElements pAppendToFileEndItem;
 	
 	private final GrammarProvider grammarProvider;
 
@@ -367,7 +469,7 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 
 	
 	//Model:
-	//  DatatypeBug286557|EnumBug|Commentable|ValueList|RefList;
+	//  DatatypeBug286557|EnumBug|Commentable|ValueList|RefList|AppendToFileEnd;
 	public ModelElements getModelAccess() {
 		return (pModel != null) ? pModel : (pModel = new ModelElements());
 	}
@@ -464,6 +566,39 @@ public class HiddenTokensMergerTestLanguageGrammarAccess extends AbstractGrammar
 	
 	public ParserRule getRefObjRule() {
 		return getRefObjAccess().getRule();
+	}
+
+	//SingleRef:
+	//  "#6" obj=RefObj "ref" ref=[RefObj|FQN];
+	public SingleRefElements getSingleRefAccess() {
+		return (pSingleRef != null) ? pSingleRef : (pSingleRef = new SingleRefElements());
+	}
+	
+	public ParserRule getSingleRefRule() {
+		return getSingleRefAccess().getRule();
+	}
+
+	//// see https://bugs.eclipse.org/bugs/show_bug.cgi?id=297938
+	//
+	//
+	//AppendToFileEnd:
+	//  "#7" items+=AppendToFileEndItem*;
+	public AppendToFileEndElements getAppendToFileEndAccess() {
+		return (pAppendToFileEnd != null) ? pAppendToFileEnd : (pAppendToFileEnd = new AppendToFileEndElements());
+	}
+	
+	public ParserRule getAppendToFileEndRule() {
+		return getAppendToFileEndAccess().getRule();
+	}
+
+	//AppendToFileEndItem:
+	//  "class" name=ID "endclass";
+	public AppendToFileEndItemElements getAppendToFileEndItemAccess() {
+		return (pAppendToFileEndItem != null) ? pAppendToFileEndItem : (pAppendToFileEndItem = new AppendToFileEndItemElements());
+	}
+	
+	public ParserRule getAppendToFileEndItemRule() {
+		return getAppendToFileEndItemAccess().getRule();
 	}
 
 	//terminal ID:

@@ -118,6 +118,21 @@ public class HiddentokenmergertestAdapterFactory extends AdapterFactoryImpl
         return createRefObjAdapter();
       }
       @Override
+      public Adapter caseSingleRef(SingleRef object)
+      {
+        return createSingleRefAdapter();
+      }
+      @Override
+      public Adapter caseAppendToFileEnd(AppendToFileEnd object)
+      {
+        return createAppendToFileEndAdapter();
+      }
+      @Override
+      public Adapter caseAppendToFileEndItem(AppendToFileEndItem object)
+      {
+        return createAppendToFileEndItemAdapter();
+      }
+      @Override
       public Adapter defaultCase(EObject object)
       {
         return createEObjectAdapter();
@@ -255,6 +270,51 @@ public class HiddentokenmergertestAdapterFactory extends AdapterFactoryImpl
    * @generated
    */
   public Adapter createRefObjAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.SingleRef <em>Single Ref</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.SingleRef
+   * @generated
+   */
+  public Adapter createSingleRefAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.AppendToFileEnd <em>Append To File End</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.AppendToFileEnd
+   * @generated
+   */
+  public Adapter createAppendToFileEndAdapter()
+  {
+    return null;
+  }
+
+  /**
+   * Creates a new adapter for an object of class '{@link org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.AppendToFileEndItem <em>Append To File End Item</em>}'.
+   * <!-- begin-user-doc -->
+   * This default implementation returns null so that we can easily ignore cases;
+   * it's useful to ignore a case when inheritance will catch all the cases anyway.
+   * <!-- end-user-doc -->
+   * @return the new adapter.
+   * @see org.eclipse.xtext.parsetree.reconstr.hiddentokenmergertest.AppendToFileEndItem
+   * @generated
+   */
+  public Adapter createAppendToFileEndItemAdapter()
   {
     return null;
   }
